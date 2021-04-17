@@ -21,7 +21,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,10 +37,10 @@ import org.apache.log4j.Logger;
  */
 public final class SpellQueller extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or less");
+    private static final FilterSpell filter = new FilterSpell("spell with mana value 4 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public SpellQueller(UUID ownerId, CardSetInfo setInfo) {
@@ -77,7 +77,7 @@ class SpellQuellerEntersEffect extends OneShotEffect {
 
     public SpellQuellerEntersEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile target spell with converted mana cost 4 or less";
+        this.staticText = "exile target spell with mana value 4 or less";
     }
 
     public SpellQuellerEntersEffect(final SpellQuellerEntersEffect effect) {

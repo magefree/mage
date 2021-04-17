@@ -32,7 +32,7 @@ import mage.ApprovingObject;
 public final class DreadhordeArcanist extends CardImpl {
 
     private static final FilterCard filter = new FilterInstantOrSorceryCard(
-            "instant or sorcery card with converted mana cost less than or equal to this creature's power"
+            "instant or sorcery card with mana value less than or equal to this creature's power"
     );
 
     static {
@@ -76,7 +76,7 @@ enum DreadhordeArcanistPredicate implements ObjectSourcePlayerPredicate<ObjectSo
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(input.getSourceId());
         return sourcePermanent != null
-                & input.getObject().getConvertedManaCost() <= sourcePermanent.getPower().getValue();
+                & input.getObject().getManaValue() <= sourcePermanent.getPower().getValue();
     }
 }
 
@@ -84,7 +84,7 @@ class DreadhordeArcanistEffect extends OneShotEffect {
 
     DreadhordeArcanistEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "you may cast target instant or sorcery card with converted mana cost "
+        this.staticText = "you may cast target instant or sorcery card with mana value "
                 + "less than or equal to {this}'s power from your graveyard without paying its mana cost. "
                 + "If that card would be put into your graveyard this turn, exile it instead.";
     }

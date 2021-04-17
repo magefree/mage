@@ -51,7 +51,7 @@ class TariffEffect extends OneShotEffect {
 
     public TariffEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Each player sacrifices the creature they control with the highest converted mana cost unless they pay that creature's mana cost. If two or more creatures a player controls are tied for highest cost, that player chooses one.";
+        this.staticText = "Each player sacrifices the creature they control with the highest mana value unless they pay that creature's mana cost. If two or more creatures a player controls are tied for highest cost, that player chooses one.";
     }
 
     public TariffEffect(final TariffEffect effect) {
@@ -103,13 +103,13 @@ class TariffEffect extends OneShotEffect {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, playerId, game);
         int highestCMC = -1;
         for (Permanent permanent : permanents) {
-            if (highestCMC < permanent.getConvertedManaCost()) {
-                highestCMC = permanent.getConvertedManaCost();
+            if (highestCMC < permanent.getManaValue()) {
+                highestCMC = permanent.getManaValue();
             }
         }
         List<Permanent> result = new ArrayList<>();
         for (Permanent permanent : permanents) {
-            if (permanent.getConvertedManaCost() == highestCMC) {
+            if (permanent.getManaValue() == highestCMC) {
                 result.add(permanent);
             }
         }

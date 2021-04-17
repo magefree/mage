@@ -56,7 +56,7 @@ class SanguinePraetorEffect extends OneShotEffect {
 
     public SanguinePraetorEffect() {
         super(Outcome.Damage);
-        staticText = "Destroy each creature with the same converted mana cost as the sacrificed creature";
+        staticText = "Destroy each creature with the same mana value as the sacrificed creature";
     }
 
     public SanguinePraetorEffect(final SanguinePraetorEffect effect) {
@@ -68,13 +68,13 @@ class SanguinePraetorEffect extends OneShotEffect {
         int cmc = 0;
         for (Cost cost : source.getCosts()) {
             if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {
-                cmc = ((SacrificeTargetCost) cost).getPermanents().get(0).getConvertedManaCost();
+                cmc = ((SacrificeTargetCost) cost).getPermanents().get(0).getManaValue();
                 break;
             }
         }
 
         for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
-            if (permanent.getConvertedManaCost() == cmc) {
+            if (permanent.getManaValue() == cmc) {
                 permanent.destroy(source, game, false);
             }
         }

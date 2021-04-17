@@ -68,7 +68,7 @@ class BingoEffect extends OneShotEffect {
 
     public BingoEffect() {
         super(Outcome.Neutral);
-        staticText = "put a chip counter on its converted mana cost";
+        staticText = "put a chip counter on its mana value";
     }
 
     public BingoEffect(final BingoEffect effect) {
@@ -79,7 +79,7 @@ class BingoEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(this.getTargetPointer().getFirst(game, source));
         if (spell != null) {
-            if (spell.getConvertedManaCost() > 9) {
+            if (spell.getManaValue() > 9) {
                 return true;
             }
             MageObject mageObject = game.getObject(source.getSourceId());
@@ -88,8 +88,8 @@ class BingoEffect extends OneShotEffect {
                 if (game.getState().getValue(mageObject.getId() + "_chip") != null) {
                     chipCounters.putAll((Map<Integer, Integer>) game.getState().getValue(mageObject.getId() + "_chip"));
                 }
-                chipCounters.putIfAbsent(spell.getConvertedManaCost(), 0);
-                chipCounters.put(spell.getConvertedManaCost(), chipCounters.get(spell.getConvertedManaCost()) + 1);
+                chipCounters.putIfAbsent(spell.getManaValue(), 0);
+                chipCounters.put(spell.getManaValue(), chipCounters.get(spell.getManaValue()) + 1);
                 game.getState().setValue(mageObject.getId() + "_chip", chipCounters);
                 if (mageObject instanceof Permanent) {
                     StringBuilder sb = new StringBuilder();

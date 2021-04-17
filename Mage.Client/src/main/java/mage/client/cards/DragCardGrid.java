@@ -435,7 +435,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     public enum Sort {
         NONE("No Sort", new CardViewNoneComparator()),
         CARD_TYPE("Card Type", new CardViewCardTypeComparator()),
-        CMC("Converted Mana Cost", new CardViewCostComparator()),
+        CMC("Mana Value", new CardViewCostComparator()),
         COLOR("Color", new CardViewColorComparator()),
         COLOR_IDENTITY("Color Identity", new CardViewColorIdentityComparator()),
         RARITY("Rarity", new CardViewRarityComparator()),
@@ -1475,7 +1475,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     mc = mc.replaceAll("#2\\/", "#");
                     mc = mc.replaceAll("p}", "}");
                     mc = mc.toLowerCase(Locale.ENGLISH);
-                    int cmc = card.getConvertedManaCost();
+                    int cmc = card.getManaValue();
 
                     // Do colorless mana pips
                     Pattern regex = Pattern.compile("#([0-9]+)}");

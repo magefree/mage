@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -49,8 +49,8 @@ class InSearchOfGreatnessEffect extends OneShotEffect {
 
     public InSearchOfGreatnessEffect() {
         super(Outcome.PlayForFree);
-        staticText = "you may cast a permanent spell from your hand with converted mana cost "
-                + "equal to 1 plus the highest converted mana cost among other permanents you control "
+        staticText = "you may cast a permanent spell from your hand with mana value "
+                + "equal to 1 plus the highest mana value among other permanents you control "
                 + "without paying its mana cost. If you don't, scry 1";
     }
 
@@ -73,7 +73,7 @@ class InSearchOfGreatnessEffect extends OneShotEffect {
         UUID permId = source.getSourceId();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controller.getId())) {
             if (permanent != null && !permanent.getId().equals(permId)) {
-                int permCmc = permanent.getConvertedManaCost();
+                int permCmc = permanent.getManaValue();
                 if (permCmc > cmc) {
                     cmc = permCmc;
                 }
@@ -83,7 +83,7 @@ class InSearchOfGreatnessEffect extends OneShotEffect {
                 + ++cmc + "?", source, game)) {
             FilterPermanentCard filter = new FilterPermanentCard("permanent spell from your hand");
             filter.add(Predicates.not(CardType.LAND.getPredicate()));
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, cmc));
             TargetCardInHand target = new TargetCardInHand(filter);
             if (controller.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());

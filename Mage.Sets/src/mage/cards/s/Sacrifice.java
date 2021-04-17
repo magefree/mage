@@ -25,7 +25,7 @@ public final class Sacrifice extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         // Add an amount of {B} equal to the sacrificed creature's converted mana cost.
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.BlackMana(1), new SacrificeCostConvertedMana("creature"),
-                "add an amount of {B} equal to the sacrificed creature's converted mana cost"));
+                "add an amount of {B} equal to the sacrificed creature's mana value"));
     }
 
     private Sacrifice(final Sacrifice card) {

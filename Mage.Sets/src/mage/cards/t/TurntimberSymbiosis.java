@@ -70,7 +70,7 @@ class TurntimberSymbiosisEffect extends OneShotEffect {
     TurntimberSymbiosisEffect() {
         super(Outcome.Benefit);
         staticText = "Look at the top seven cards of your library. You may put a creature card " +
-                "from among them onto the battlefield. If that card has converted mana cost 3 or less, " +
+                "from among them onto the battlefield. If that card has mana value 3 or less, " +
                 "it enters with three additional +1/+1 counters on it. " +
                 "Put the rest on the bottom of your library in a random order";
     }
@@ -102,7 +102,7 @@ class TurntimberSymbiosisEffect extends OneShotEffect {
             return true;
         }
 
-        boolean small = card.getConvertedManaCost() <= 3;
+        boolean small = card.getManaValue() <= 3;
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
         Permanent permanent = game.getPermanent(card.getId());
         if (permanent == null || !small) {

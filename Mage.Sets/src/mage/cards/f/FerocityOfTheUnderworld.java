@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetNonlandPermanent;
@@ -23,10 +23,10 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public final class FerocityOfTheUnderworld extends CardImpl {
 
-    private static final FilterNonlandPermanent filterMode1 = new FilterNonlandPermanent("nonland permanent with converted mana cost 3 or less");
+    private static final FilterNonlandPermanent filterMode1 = new FilterNonlandPermanent("nonland permanent with mana value 3 or less");
 
     static {
-        filterMode1.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filterMode1.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public FerocityOfTheUnderworld(UUID ownerId, CardSetInfo setInfo) {

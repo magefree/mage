@@ -28,7 +28,7 @@ public final class MarchFromTheTomb extends CardImpl {
 
         // Return any number of target Ally creature cards with total converted mana cost of 8 or less from your graveyard to the battlefield.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-        effect.setText("Return any number of target Ally creature cards with total converted mana cost of 8 or less from your graveyard to the battlefield");
+        effect.setText("Return any number of target Ally creature cards with total mana value of 8 or less from your graveyard to the battlefield");
         this.getSpellAbility().addEffect(effect);
         FilterCard filter = new FilterCreatureCard();
         filter.add(SubType.ALLY.getPredicate());
@@ -61,18 +61,18 @@ class MarchFromTheTombTarget extends TargetCardInYourGraveyard {
         for (UUID targetId : this.getTargets()) {
             Card card = game.getCard(targetId);
             if (card != null) {
-                cmcLeft -= card.getConvertedManaCost();
+                cmcLeft -= card.getManaValue();
             }
         }
         Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         Set<UUID> leftPossibleTargets = new HashSet<>();
         for (UUID targetId : possibleTargets) {
             Card card = game.getCard(targetId);
-            if (card != null && card.getConvertedManaCost() <= cmcLeft) {
+            if (card != null && card.getManaValue() <= cmcLeft) {
                 leftPossibleTargets.add(targetId);
             }
         }
-        setTargetName("any number of target Ally creature cards with total converted mana cost of 8 or less (" + cmcLeft + " left) from your graveyard");
+        setTargetName("any number of target Ally creature cards with total mana value of 8 or less (" + cmcLeft + " left) from your graveyard");
         return leftPossibleTargets;
     }
 
@@ -83,11 +83,11 @@ class MarchFromTheTombTarget extends TargetCardInYourGraveyard {
             for (UUID targetId : this.getTargets()) {
                 Card card = game.getCard(targetId);
                 if (card != null) {
-                    cmcLeft -= card.getConvertedManaCost();
+                    cmcLeft -= card.getManaValue();
                 }
             }
             Card card = game.getCard(objectId);
-            return card != null && card.getConvertedManaCost() <= cmcLeft;
+            return card != null && card.getManaValue() <= cmcLeft;
         }
         return false;
     }

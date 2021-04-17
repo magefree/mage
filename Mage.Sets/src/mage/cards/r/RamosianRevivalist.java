@@ -15,7 +15,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -24,11 +24,11 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class RamosianRevivalist extends CardImpl {
     
-    private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost 5 or less from your graveyard");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with mana value 5 or less from your graveyard");
 
     static {
         filter.add(SubType.REBEL.getPredicate());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 6));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 6));
     }
 
     public RamosianRevivalist(UUID ownerId, CardSetInfo setInfo) {

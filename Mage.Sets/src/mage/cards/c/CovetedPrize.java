@@ -34,7 +34,7 @@ public final class CovetedPrize extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CastWithoutPayingManaCostEffect(4),
                 FullPartyCondition.instance, "If you have a full party, " +
-                "you may cast a spell with converted mana cost 4 or less from your hand without paying its mana cost."
+                "you may cast a spell with mana value 4 or less from your hand without paying its mana cost."
         ));
     }
 

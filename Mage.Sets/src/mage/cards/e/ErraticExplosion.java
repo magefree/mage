@@ -42,7 +42,7 @@ class ErraticExplosionEffect extends OneShotEffect {
 
     public ErraticExplosionEffect() {
         super(Outcome.Damage);
-        this.staticText = "Choose any target. Reveal cards from the top of your library until you reveal a nonland card. {this} deals damage equal to that card's converted mana cost to that permanent or player. Put the revealed cards on the bottom of your library in any order";
+        this.staticText = "Choose any target. Reveal cards from the top of your library until you reveal a nonland card. {this} deals damage equal to that card's mana value to that permanent or player. Put the revealed cards on the bottom of your library in any order";
     }
 
     public ErraticExplosionEffect(ErraticExplosionEffect effect) {
@@ -72,11 +72,11 @@ class ErraticExplosionEffect extends OneShotEffect {
             if (nonLandCard != null) {
                 Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (targetCreature != null) {
-                    targetCreature.damage(nonLandCard.getConvertedManaCost(), source.getSourceId(), source, game, false, true);
+                    targetCreature.damage(nonLandCard.getManaValue(), source.getSourceId(), source, game, false, true);
                 } else {
                     Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                     if (targetPlayer != null) {
-                        targetPlayer.damage(nonLandCard.getConvertedManaCost(), source.getSourceId(), source, game);
+                        targetPlayer.damage(nonLandCard.getManaValue(), source.getSourceId(), source, game);
                     }
                 }
             }

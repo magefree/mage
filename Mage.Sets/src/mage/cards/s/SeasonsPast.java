@@ -47,7 +47,7 @@ class SeasonsPastEffect extends OneShotEffect {
 
     public SeasonsPastEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Return any number of cards with different converted mana costs from your graveyard to your hand";
+        this.staticText = "Return any number of cards with different mana values from your graveyard to your hand";
     }
 
     public SeasonsPastEffect(final SeasonsPastEffect effect) {
@@ -75,7 +75,7 @@ class SeasonsPastEffect extends OneShotEffect {
 class SeasonsPastTarget extends TargetCardInYourGraveyard {
 
     public SeasonsPastTarget() {
-        super(0, Integer.MAX_VALUE, new FilterCard("cards with different converted mana costs from your graveyard"));
+        super(0, Integer.MAX_VALUE, new FilterCard("cards with different mana values from your graveyard"));
     }
 
     public SeasonsPastTarget(SeasonsPastTarget target) {
@@ -88,14 +88,14 @@ class SeasonsPastTarget extends TargetCardInYourGraveyard {
         for (UUID targetId : this.getTargets()) {
             Card card = game.getCard(targetId);
             if (card != null) {
-                usedCMC.add(card.getConvertedManaCost());
+                usedCMC.add(card.getManaValue());
             }
         }
         Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         Set<UUID> leftPossibleTargets = new HashSet<>();
         for (UUID targetId : possibleTargets) {
             Card card = game.getCard(targetId);
-            if (card != null && !usedCMC.contains(card.getConvertedManaCost())) {
+            if (card != null && !usedCMC.contains(card.getManaValue())) {
                 leftPossibleTargets.add(targetId);
             }
         }
@@ -109,11 +109,11 @@ class SeasonsPastTarget extends TargetCardInYourGraveyard {
             for (UUID targetId : this.getTargets()) {
                 Card card = game.getCard(targetId);
                 if (card != null) {
-                    usedCMC.add(card.getConvertedManaCost());
+                    usedCMC.add(card.getManaValue());
                 }
             }
             Card card = game.getCard(objectId);
-            return card != null && !usedCMC.contains(card.getConvertedManaCost());
+            return card != null && !usedCMC.contains(card.getManaValue());
         }
         return false;
     }

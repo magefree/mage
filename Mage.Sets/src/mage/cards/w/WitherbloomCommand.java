@@ -19,7 +19,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -41,7 +41,7 @@ public final class WitherbloomCommand extends CardImpl {
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public WitherbloomCommand(UUID ownerId, CardSetInfo setInfo) {

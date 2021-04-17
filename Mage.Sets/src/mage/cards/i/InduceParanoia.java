@@ -30,7 +30,7 @@ public final class InduceParanoia extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new InduceParanoiaEffect(), 
                 new CounterTargetEffect(),
-                new ManaWasSpentCondition(ColoredManaSymbol.B), "Counter target spell. If {B} was spent to cast this spell, that spell's controller puts the top X cards of their library into their graveyard, where X is the spell's converted mana cost."));
+                new ManaWasSpentCondition(ColoredManaSymbol.B), "Counter target spell. If {B} was spent to cast this spell, that spell's controller puts the top X cards of their library into their graveyard, where X is the spell's mana value."));
                 
         // Counter target spell. 
         this.getSpellAbility().addTarget(new TargetSpell());
@@ -50,7 +50,7 @@ class InduceParanoiaEffect extends OneShotEffect {
 
     InduceParanoiaEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Counter target spell. If {B} was spent to cast this spell, that spell's controller mills X cards, where X is the spell's converted mana cost.";
+        this.staticText = "Counter target spell. If {B} was spent to cast this spell, that spell's controller mills X cards, where X is the spell's mana value.";
     }
 
     InduceParanoiaEffect(final InduceParanoiaEffect effect) {
@@ -67,7 +67,7 @@ class InduceParanoiaEffect extends OneShotEffect {
         StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
         if (spell != null) { 
             game.getStack().counter(spell.getId(), source, game);
-            int spellCMC = spell.getConvertedManaCost();
+            int spellCMC = spell.getManaValue();
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {
                 player.millCards(spellCMC, source, game);

@@ -16,7 +16,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -60,11 +60,11 @@ public final class IsochronScepter extends CardImpl {
 class IsochronScepterImprintEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("instant card with "
-            + "converted mana cost 2 or less from your hand");
+            + "mana value 2 or less from your hand");
 
     static {
         filter.add(CardType.INSTANT.getPredicate());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public IsochronScepterImprintEffect() {

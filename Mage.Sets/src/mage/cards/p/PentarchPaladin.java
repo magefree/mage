@@ -21,7 +21,7 @@ import mage.target.TargetPermanent;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.constants.ComparisonType;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.targetadjustment.TargetAdjuster;
 
@@ -76,7 +76,7 @@ enum PentarchPaladinAdjuster implements TargetAdjuster {
         if (chosenColor != null) {
             filter.add(new ColorPredicate(chosenColor));
         } else {
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, -5));// Pretty sure this is always false
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, -5));// Pretty sure this is always false
         }
         TargetPermanent oldTargetPermanent = new TargetPermanent(filter);
         ability.addTarget(oldTargetPermanent);

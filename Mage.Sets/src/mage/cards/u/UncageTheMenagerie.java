@@ -46,7 +46,7 @@ class UncageTheMenagerieEffect extends OneShotEffect {
 
     public UncageTheMenagerieEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Search your library for up to X creature cards with different names that each have converted mana cost X, reveal them, put them into your hand, then shuffle your library.";
+        this.staticText = "Search your library for up to X creature cards with different names that each have mana value X, reveal them, put them into your hand, then shuffle your library.";
     }
 
     public UncageTheMenagerieEffect(final UncageTheMenagerieEffect effect) {
@@ -94,7 +94,7 @@ class UncageTheMenagerieTarget extends TargetCardInLibrary {
     private int xValue;
 
     public UncageTheMenagerieTarget(int xValue) {
-        super(0, xValue, new FilterCreatureCard(xValue + " creature cards with different names with converted mana cost " + xValue));
+        super(0, xValue, new FilterCreatureCard(xValue + " creature cards with different names with mana value " + xValue));
         this.xValue = xValue;
     }
 
@@ -119,7 +119,7 @@ class UncageTheMenagerieTarget extends TargetCardInLibrary {
                 }
             }
 
-            if (!(card.isCreature() && card.getConvertedManaCost() == xValue)) {
+            if (!(card.isCreature() && card.getManaValue() == xValue)) {
                 return false;
             }
 

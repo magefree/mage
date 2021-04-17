@@ -37,7 +37,7 @@ public final class PadeemConsulOfInnovation extends CardImpl {
         // At the beginning of your upkeep, if you control the artifact with the highest converted mana cost or tied for the highest converted mana cost, draw a card.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.YOU, false),
                 new ControlsPermanentGreatestCMCCondition(new FilterArtifactPermanent()),
-                "At the beginning of your upkeep, if you control the artifact with the highest converted mana cost or tied for the highest converted mana cost, draw a card.");
+                "At the beginning of your upkeep, if you control the artifact with the highest mana value or tied for the highest mana value, draw a card.");
 
         this.addAbility(ability);
     }

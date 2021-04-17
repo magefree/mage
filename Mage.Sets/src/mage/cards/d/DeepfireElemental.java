@@ -22,7 +22,7 @@ import mage.target.targetadjustment.XCMCPermanentAdjuster;
  */
 public final class DeepfireElemental extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature with converted mana cost X");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or creature with mana value X");
 
     static {
         filter.add(Predicates.or(

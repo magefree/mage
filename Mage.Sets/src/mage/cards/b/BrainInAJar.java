@@ -20,7 +20,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -71,7 +71,7 @@ class BrainInAJarCastEffect extends OneShotEffect {
     public BrainInAJarCastEffect() {
         super(Outcome.PlayForFree);
         this.staticText = ", then you may cast an instant or sorcery card "
-                + "with converted mana costs equal to the number of charge "
+                + "with mana values equal to the number of charge "
                 + "counters on {this} from your hand without paying its mana cost";
     }
 
@@ -92,12 +92,12 @@ class BrainInAJarCastEffect extends OneShotEffect {
                 && sourceObject != null) {
             int counters = sourceObject.getCounters(game).getCount(CounterType.CHARGE);
             FilterCard filter = new FilterInstantOrSorceryCard();
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, counters));
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, counters));
             int cardsToCast = controller.getHand().count(filter, source.getControllerId(),
                     source.getSourceId(), game);
             if (cardsToCast > 0 
                     && controller.chooseUse(Outcome.PlayForFree,
-                    "Cast an instant or sorcery card with converted mana costs of "
+                    "Cast an instant or sorcery card with mana values of "
                     + counters + " from your hand without paying its mana cost?",
                     source, game)) {
                 TargetCardInHand target = new TargetCardInHand(filter);

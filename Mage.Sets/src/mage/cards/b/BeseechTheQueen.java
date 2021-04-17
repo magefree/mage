@@ -19,7 +19,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class BeseechTheQueen extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("card with converted mana cost less than or equal to the number of lands you control");
+    private static final FilterCard filter = new FilterCard("card with mana value less than or equal to the number of lands you control");
     static{
         filter.add(new BeseechTheQueenPredicate());
     }
@@ -48,7 +48,7 @@ class BeseechTheQueenPredicate implements Predicate<Card> {
 
     @Override
     public final boolean apply(Card input, Game game) {
-        if(input.getConvertedManaCost() <= game.getBattlefield().getAllActivePermanents(new FilterControlledLandPermanent(), input.getOwnerId(), game).size()){
+        if(input.getManaValue() <= game.getBattlefield().getAllActivePermanents(new FilterControlledLandPermanent(), input.getOwnerId(), game).size()){
             return true;
         }
         return false;
@@ -56,6 +56,6 @@ class BeseechTheQueenPredicate implements Predicate<Card> {
 
     @Override
     public String toString() {
-        return "card with converted mana cost less than or equal to the number of lands you control";
+        return "card with mana value less than or equal to the number of lands you control";
     }
 }

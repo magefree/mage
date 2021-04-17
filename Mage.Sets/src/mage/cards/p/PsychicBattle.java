@@ -88,7 +88,7 @@ class PsychicBattleEffect extends OneShotEffect {
 
     public PsychicBattleEffect() {
         super(Outcome.Benefit);
-        this.staticText = "each player reveals the top card of their library. The player who reveals the card with the highest converted mana cost may change the target or targets. If two or more cards are tied for highest cost, the target or targets remain unchanged";
+        this.staticText = "each player reveals the top card of their library. The player who reveals the card with the highest mana value may change the target or targets. If two or more cards are tied for highest cost, the target or targets remain unchanged";
     }
 
     public PsychicBattleEffect(final PsychicBattleEffect effect) {
@@ -110,7 +110,7 @@ class PsychicBattleEffect extends OneShotEffect {
                 if (player != null && player.getLibrary().hasCards()) {
                     Card card = player.getLibrary().getFromTop(game);
                     player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ')', new CardsImpl(card), game);
-                    manacostMap.put(player, card.getConvertedManaCost());
+                    manacostMap.put(player, card.getManaValue());
                 }
             }
 

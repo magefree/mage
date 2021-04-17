@@ -48,7 +48,7 @@ class JudgeUnworthyEffect extends OneShotEffect {
     
     public JudgeUnworthyEffect() {
         super(Outcome.Damage);
-        this.staticText = ", then reveal the top card of your library. {this} deals damage equal to that card's converted mana cost to that creature";
+        this.staticText = ", then reveal the top card of your library. {this} deals damage equal to that card's mana value to that creature";
     }
     
     public JudgeUnworthyEffect(final JudgeUnworthyEffect effect) {
@@ -70,7 +70,7 @@ class JudgeUnworthyEffect extends OneShotEffect {
                 controller.revealCards(sourceCard.getName(), new CardsImpl(card), game);
                 Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (targetCreature != null) {
-                    targetCreature.damage(card.getConvertedManaCost(), source.getSourceId(), source, game, false, true);
+                    targetCreature.damage(card.getManaValue(), source.getSourceId(), source, game, false, true);
                     return true;
                 }
             }

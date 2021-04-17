@@ -2118,7 +2118,7 @@ public class HumanPlayer extends PlayerImpl {
 
             // hide on alternative cost activated
             if (!getCastSourceIdWithAlternateMana().contains(ability.getSourceId())
-                    && ability.getManaCostsToPay().convertedManaCost() > 0) {
+                    && ability.getManaCostsToPay().manaValue() > 0) {
                 return true;
             }
 

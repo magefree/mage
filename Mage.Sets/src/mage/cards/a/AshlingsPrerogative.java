@@ -53,12 +53,12 @@ public final class AshlingsPrerogative extends CardImpl {
 
 class AshlingsPrerogativeIncorrectOddityEffect extends PermanentsEnterBattlefieldTappedEffect {
 
-    private static final FilterCreaturePermanent creaturefilter = new FilterCreaturePermanent("Each creature without converted mana cost of the chosen value");
+    private static final FilterCreaturePermanent creaturefilter = new FilterCreaturePermanent("Each creature without mana value of the chosen value");
     private static final ModeChoiceSourceCondition oddCondition = new ModeChoiceSourceCondition("Odd");
 
     public AshlingsPrerogativeIncorrectOddityEffect() {
         super(creaturefilter);
-        staticText = "Each creature without converted mana cost of the chosen value enters the battlefield tapped.";
+        staticText = "Each creature without mana value of the chosen value enters the battlefield tapped.";
     }
     
     public AshlingsPrerogativeIncorrectOddityEffect(final AshlingsPrerogativeIncorrectOddityEffect effect) {
@@ -77,7 +77,7 @@ class AshlingsPrerogativeIncorrectOddityEffect extends PermanentsEnterBattlefiel
 
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
 
-        return permanent != null && creaturefilter.match(permanent, game) && permanent.getConvertedManaCost() % 2 == incorrectModResult;
+        return permanent != null && creaturefilter.match(permanent, game) && permanent.getManaValue() % 2 == incorrectModResult;
     }
     
     @Override
@@ -88,12 +88,12 @@ class AshlingsPrerogativeIncorrectOddityEffect extends PermanentsEnterBattlefiel
 
 class AshlingsPrerogativeCorrectOddityEffect extends GainAbilityAllEffect {
 
-    private static final FilterCreaturePermanent creaturefilter = new FilterCreaturePermanent("Each creature with converted mana cost of the chosen value");
+    private static final FilterCreaturePermanent creaturefilter = new FilterCreaturePermanent("Each creature with mana value of the chosen value");
     private static final ModeChoiceSourceCondition oddCondition = new ModeChoiceSourceCondition("Odd");
 
     public AshlingsPrerogativeCorrectOddityEffect() {
         super(HasteAbility.getInstance(), Duration.WhileOnBattlefield, creaturefilter);
-        staticText = "Each creature with converted mana cost of the chosen value has haste.";
+        staticText = "Each creature with mana value of the chosen value has haste.";
     }
     public AshlingsPrerogativeCorrectOddityEffect(final AshlingsPrerogativeCorrectOddityEffect effect) {
         super(effect);   
@@ -107,7 +107,7 @@ class AshlingsPrerogativeCorrectOddityEffect extends GainAbilityAllEffect {
         } else {
             correctModResult = 0;
         }
-        return permanent != null && creaturefilter.match(permanent, game) && permanent.getConvertedManaCost() % 2 == correctModResult;
+        return permanent != null && creaturefilter.match(permanent, game) && permanent.getManaValue() % 2 == correctModResult;
     }
     
     @Override

@@ -16,7 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -52,7 +52,7 @@ class MatterReshaperEffect extends OneShotEffect {
     public MatterReshaperEffect() {
         super(Outcome.Benefit);
         staticText = "reveal the top card of your library. You may put that card onto the battlefield if it's a permanent card"
-                + " with converted mana cost 3 or less. Otherwise, put that card into your hand";
+                + " with mana value 3 or less. Otherwise, put that card into your hand";
     }
 
     public MatterReshaperEffect(final MatterReshaperEffect effect) {
@@ -68,8 +68,8 @@ class MatterReshaperEffect extends OneShotEffect {
                 return false;
             }
             controller.revealCards(source, new CardsImpl(card), game);
-            FilterPermanentCard filter = new FilterPermanentCard("permanent card with converted mana cost 3 or less");
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+            FilterPermanentCard filter = new FilterPermanentCard("permanent card with mana value 3 or less");
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
             if (filter.match(card, game)) {
                 if (controller.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield (otherwise put in hand)?", source, game)) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);

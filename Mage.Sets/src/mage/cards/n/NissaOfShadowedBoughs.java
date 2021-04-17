@@ -18,7 +18,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.custom.CreatureToken;
@@ -105,7 +105,7 @@ class NissaOfShadowedBoughsCreatureEffect extends OneShotEffect {
 
     NissaOfShadowedBoughsCreatureEffect() {
         super(Outcome.Benefit);
-        staticText = "You may put a creature card with converted mana cost less than or equal to " +
+        staticText = "You may put a creature card with mana value less than or equal to " +
                 "the number of lands you control onto the battlefield from your hand or graveyard " +
                 "with two +1/+1 counters on it.";
     }
@@ -129,8 +129,8 @@ class NissaOfShadowedBoughsCreatureEffect extends OneShotEffect {
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
                 source.getSourceId(), source.getControllerId(), game
         );
-        FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + lands + " or less");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, lands + 1));
+        FilterCard filter = new FilterCreatureCard("creature card with mana value " + lands + " or less");
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, lands + 1));
         int inHand = player.getHand().count(filter, game);
         int inGrave = player.getGraveyard().count(filter, game);
         if (inHand < 1 && inGrave < 1) {

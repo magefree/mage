@@ -67,7 +67,7 @@ enum PrototypePortalAdjuster implements CostAdjuster {
             if (!card.getImprinted().isEmpty()) {
                 Card imprinted = game.getCard(card.getImprinted().get(0));
                 if (imprinted != null) {
-                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getConvertedManaCost()));
+                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaValue()));
                 }
             }
         }
@@ -125,7 +125,7 @@ class PrototypePortalCreateTokenEffect extends OneShotEffect {
 
     PrototypePortalCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Create a token that's a copy of the exiled card. X is the converted mana cost of that card";
+        this.staticText = "Create a token that's a copy of the exiled card. X is the mana value of that card";
     }
 
     private PrototypePortalCreateTokenEffect(final PrototypePortalCreateTokenEffect effect) {

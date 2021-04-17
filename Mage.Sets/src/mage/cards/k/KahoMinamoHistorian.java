@@ -19,7 +19,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
@@ -109,7 +109,7 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
 
     public KahoMinamoHistorianCastEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "you may cast a card with converted mana cost X "
+        this.staticText = "you may cast a card with mana value X "
                 + "exiled with {this} without paying its mana cost";
     }
 
@@ -127,7 +127,7 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             FilterCard filter = new FilterCard();
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
             TargetCardInExile target = new TargetCardInExile(filter, CardUtil.getCardExileZoneId(game, source));
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
             if (cards != null

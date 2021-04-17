@@ -68,7 +68,7 @@ class DualStrikeAbility extends DelayedTriggeredAbility {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell == null
                 || !spell.isInstantOrSorcery()
-                || spell.getConvertedManaCost() > 4) {
+                || spell.getManaValue() > 4) {
             return false;
         }
         this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
@@ -78,7 +78,7 @@ class DualStrikeAbility extends DelayedTriggeredAbility {
     @Override
     public String getRule() {
         return "When you cast your next instant or sorcery spell " +
-                "with converted mana cost 4 or less this turn, " +
+                "with mana value 4 or less this turn, " +
                 "copy that spell. You may choose new targets for the copy.";
     }
 }

@@ -34,7 +34,7 @@ public class CardCriteria {
     private boolean red;
     private boolean white;
     private boolean colorless;
-    private Integer convertedManaCost;
+    private Integer manaValue;
     private String sortBy;
     private Long start;
     private Long count;
@@ -167,8 +167,8 @@ public class CardCriteria {
         return this;
     }
 
-    public CardCriteria convertedManaCost(Integer convertedManaCost) {
-        this.convertedManaCost = convertedManaCost;
+    public CardCriteria manaValue(Integer manaValue) {
+        this.manaValue = manaValue;
         return this;
     }
 
@@ -265,8 +265,8 @@ public class CardCriteria {
             clausesCount++;
         }
 
-        if (convertedManaCost != null) {
-            where.eq("convertedManaCost", convertedManaCost);
+        if (manaValue != null) {
+            where.eq("manaValue", manaValue);
             clausesCount++;
         }
 
@@ -433,8 +433,8 @@ public class CardCriteria {
         return colorless;
     }
 
-    public Integer getConvertedManaCost() {
-        return convertedManaCost;
+    public Integer getManaValue() {
+        return manaValue;
     }
 
     public String getSortBy() {

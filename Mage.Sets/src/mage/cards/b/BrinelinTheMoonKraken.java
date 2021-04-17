@@ -73,7 +73,7 @@ class BrinelinTheMoonKrakenTriggeredAbility extends TriggeredAbilityImpl {
                     return false;
                 }
                 Spell spell = game.getSpellOrLKIStack(event.getTargetId());
-                return spell != null && spell.getConvertedManaCost() >= 6;
+                return spell != null && spell.getManaValue() >= 6;
             case ENTERS_THE_BATTLEFIELD:
                 return event.getTargetId().equals(getSourceId());
             default:
@@ -83,7 +83,7 @@ class BrinelinTheMoonKrakenTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield or whenever you cast a spell with converted mana cost " +
+        return "When {this} enters the battlefield or whenever you cast a spell with mana value " +
                 "6 or greater, you may return target nonland permanent to its owner's hand.";
     }
 

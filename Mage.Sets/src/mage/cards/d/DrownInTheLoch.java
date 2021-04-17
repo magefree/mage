@@ -24,10 +24,10 @@ import java.util.UUID;
 public final class DrownInTheLoch extends CardImpl {
 
     private static final FilterSpell filter
-            = new FilterSpell("spell with converted mana cost less than or equal to " +
+            = new FilterSpell("spell with mana value less than or equal to " +
             "the number of cards in its controller's graveyard");
     private static final FilterPermanent filter2
-            = new FilterCreaturePermanent("creature with converted mana cost less than or equal to " +
+            = new FilterCreaturePermanent("creature with mana value less than or equal to " +
             "the number of cards in its controller's graveyard");
 
     static {
@@ -65,6 +65,6 @@ enum DrownInTheLochPredicate implements Predicate<MageObject> {
     @Override
     public boolean apply(MageObject input, Game game) {
         Player player = game.getPlayer(game.getControllerId(input.getId()));
-        return player != null && input.getConvertedManaCost() <= player.getGraveyard().size();
+        return player != null && input.getManaValue() <= player.getGraveyard().size();
     }
 }

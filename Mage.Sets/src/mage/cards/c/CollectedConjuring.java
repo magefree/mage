@@ -9,7 +9,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -45,23 +45,23 @@ public final class CollectedConjuring extends CardImpl {
 class CollectedConjuringEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard(
-            "sorcery cards with converted mana cost 3 or less");
+            "sorcery cards with mana value 3 or less");
 
     static {
         filter.add(CardType.SORCERY.getPredicate());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     private static final FilterCard filter2 = filter.copy();
 
     static {
-        filter2.setMessage("sorcery card with converted mana cost 3 or less");
+        filter2.setMessage("sorcery card with mana value 3 or less");
     }
 
     CollectedConjuringEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Exile the top six cards of your library. "
-                + "You may cast up to two sorcery cards with converted mana costs 3 or less from among them "
+                + "You may cast up to two sorcery cards with mana values 3 or less from among them "
                 + "without paying their mana cost. Put the exiled cards not cast this way "
                 + "on the bottom of your library in a random order.";
     }

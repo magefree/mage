@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class SpellstutterSprite extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("spell with converted mana cost X or less, where X is the number of Faeries you control");
+    private static final FilterSpell filter = new FilterSpell("spell with mana value X or less, where X is the number of Faeries you control");
 
     static {
         filter.add(SpellstutterSpritePredicate.instance);
@@ -72,7 +72,7 @@ enum SpellstutterSpritePredicate implements ObjectSourcePlayerPredicate<ObjectSo
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        return input.getObject().getConvertedManaCost() <=
+        return input.getObject().getManaValue() <=
                 game.getBattlefield().countAll(filter, game.getControllerId(input.getSourceId()), game);
     }
 }

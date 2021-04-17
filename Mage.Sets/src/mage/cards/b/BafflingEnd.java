@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.permanent.token.DinosaurToken;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -25,10 +25,10 @@ import mage.target.common.TargetOpponent;
  */
 public final class BafflingEnd extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 3 or less an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value 3 or less an opponent controls");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 

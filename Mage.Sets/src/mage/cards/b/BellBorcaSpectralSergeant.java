@@ -75,7 +75,7 @@ class BellBorcaSpectralSergeantAbility extends StaticAbility implements MageSing
     }
 
     private BellBorcaSpectralSergeantAbility() {
-        super(Zone.BATTLEFIELD, new InfoEffect("note the converted mana cost of each card as it's put into exile"));
+        super(Zone.BATTLEFIELD, new InfoEffect("note the mana value of each card as it's put into exile"));
     }
 
     @Override
@@ -132,7 +132,7 @@ class BellBorcaSpectralSergeantWatcher extends Watcher {
         if (card == null || card.isFaceDown(game)) {
             return;
         }
-        int cmc = card.getConvertedManaCost();
+        int cmc = card.getManaValue();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, game.getActivePlayerId(), game)) {
             if (permanent == null) {
                 continue;

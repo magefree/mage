@@ -11,7 +11,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 
 import java.util.UUID;
 
@@ -23,7 +23,7 @@ public final class SpectacleMage extends CardImpl {
     private static final FilterCard filter = new FilterInstantOrSorceryCard("instant and sorcery spells");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public SpectacleMage(UUID ownerId, CardSetInfo setInfo) {

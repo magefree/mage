@@ -42,7 +42,7 @@ public final class SeaGateStormcaller extends CardImpl {
                 new CreateDelayedTriggeredAbilityEffect(new SeaGateStormcallerDelayedTriggeredAbility(true)),
                 new CreateDelayedTriggeredAbilityEffect(new SeaGateStormcallerDelayedTriggeredAbility(false)),
                 KickedCondition.instance, "copy the next instant or sorcery spell " +
-                "with converted mana cost 2 or less you cast this turn when you cast it. " +
+                "with mana value 2 or less you cast this turn when you cast it. " +
                 "If {this} was kicked, copy that spell twice instead. You may choose new targets for the copies."
         )));
     }
@@ -90,7 +90,7 @@ class SeaGateStormcallerDelayedTriggeredAbility extends DelayedTriggeredAbility 
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell == null || !spell.isInstantOrSorcery() || spell.getConvertedManaCost() > 2) {
+        if (spell == null || !spell.isInstantOrSorcery() || spell.getManaValue() > 2) {
             return false;
         }
         for (Effect effect : this.getEffects()) {
@@ -101,7 +101,7 @@ class SeaGateStormcallerDelayedTriggeredAbility extends DelayedTriggeredAbility 
 
     @Override
     public String getRule() {
-        return "When you cast your next instant or sorcery spell this turn with converted mana cost 2 or less, " +
+        return "When you cast your next instant or sorcery spell this turn with mana value 2 or less, " +
                 "copy that spell" + (twice ? " twice" : "") +
                 ". You may choose new targets for the cop" + (twice ? "ies" : "y") + ".";
     }

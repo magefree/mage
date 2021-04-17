@@ -49,7 +49,7 @@ class InTheEyeOfChaosEffect extends OneShotEffect {
 
     InTheEyeOfChaosEffect() {
         super(Outcome.Detriment);
-        this.staticText = "counter it unless that player pays {X}, where X is its converted mana cost";
+        this.staticText = "counter it unless that player pays {X}, where X is its mana value";
     }
 
     InTheEyeOfChaosEffect(final InTheEyeOfChaosEffect effect) {
@@ -67,7 +67,7 @@ class InTheEyeOfChaosEffect extends OneShotEffect {
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {
-                Cost cost = ManaUtil.createManaCost(spell.getConvertedManaCost(), true);
+                Cost cost = ManaUtil.createManaCost(spell.getManaValue(), true);
                 if (!cost.pay(source, game, source, player.getId(), false)) {
                     game.getStack().counter(spell.getId(), source, game);
                 }

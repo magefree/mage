@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -28,10 +28,10 @@ import java.util.UUID;
 public final class RangerCaptainOfEos extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterCreatureCard("a creature card with converted mana cost 1 or less");
+            = new FilterCreatureCard("a creature card with mana value 1 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 2));
     }
 
     public RangerCaptainOfEos(UUID ownerId, CardSetInfo setInfo) {

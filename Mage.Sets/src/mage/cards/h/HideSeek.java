@@ -55,7 +55,7 @@ class SeekEffect extends OneShotEffect {
 
     public SeekEffect() {
         super(Outcome.GainLife);
-        staticText = "Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles their library";
+        staticText = "Search target opponent's library for a card and exile it. You gain life equal to its mana value. Then that player shuffles their library";
     }
 
     public SeekEffect(final SeekEffect effect) {
@@ -79,7 +79,7 @@ class SeekEffect extends OneShotEffect {
                     Card card = opponent.getLibrary().remove(targetId, game);
                     if (card != null) {
                         player.moveCardToExileWithInfo(card, null, null, source, game, Zone.LIBRARY, true);
-                        int cmc = card.getConvertedManaCost();
+                        int cmc = card.getManaValue();
                         if (cmc > 0) {
                             player.gainLife(cmc, game, source);
                         }

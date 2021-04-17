@@ -46,7 +46,7 @@ class LivingDestinyEffect extends OneShotEffect {
 
     public LivingDestinyEffect() {
         super(Outcome.GainLife);
-        staticText = "You gain life equal to its converted mana cost";
+        staticText = "You gain life equal to its mana value";
     }
 
     public LivingDestinyEffect(LivingDestinyEffect effect) {
@@ -58,7 +58,7 @@ class LivingDestinyEffect extends OneShotEffect {
         RevealTargetFromHandCost cost = (RevealTargetFromHandCost) source.getCosts().get(0);
         if (cost != null) {
             Player player = game.getPlayer(source.getControllerId());
-            int CMC = cost.convertedManaCosts;
+            int CMC = cost.manaValues;
             if (player != null) {
                 player.gainLife(CMC, game, source);
             }

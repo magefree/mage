@@ -10,20 +10,20 @@ import mage.game.Game;
 /**
  * @author North
  */
-public enum TargetConvertedManaCost implements DynamicValue {
+public enum TargetManaValue implements DynamicValue {
     instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Card card = game.getCard(sourceAbility.getFirstTarget());
         if (card != null) {
-            return card.getConvertedManaCost();
+            return card.getManaValue();
         }
         return 0;
     }
 
     @Override
-    public TargetConvertedManaCost copy() {
+    public TargetManaValue copy() {
         return instance;
     }
 
@@ -34,6 +34,6 @@ public enum TargetConvertedManaCost implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "that card's converted mana cost";
+        return "that card's mana value";
     }
 }

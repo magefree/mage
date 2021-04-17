@@ -130,7 +130,7 @@ enum KianneDeanOfSubstanceValue implements DynamicValue {
                 .filter(Objects::nonNull)
                 .filter(card -> card.isOwnedBy(sourceAbility.getControllerId()))
                 .filter(card -> card.getCounters(game).containsKey(CounterType.STUDY))
-                .map(MageObject::getConvertedManaCost)
+                .map(MageObject::getManaValue)
                 .distinct()
                 .mapToInt(x -> 1)
                 .sum();
@@ -158,7 +158,7 @@ enum KianneDeanOfSubstanceHint implements Hint {
                 .filter(Objects::nonNull)
                 .filter(card -> card.isOwnedBy(ability.getControllerId()))
                 .filter(card -> card.getCounters(game).containsKey(CounterType.STUDY))
-                .map(MageObject::getConvertedManaCost)
+                .map(MageObject::getManaValue)
                 .distinct()
                 .sorted()
                 .collect(Collectors.toList());

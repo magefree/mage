@@ -34,7 +34,7 @@ public final class SalvageTrader extends CardImpl {
         // {T}: Exchange control of target artifact you control and target artifact an opponent controls with the same converted mana cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new ExchangeControlTargetEffect(Duration.EndOfGame,
-                        "Exchange control of target artifact you control and target artifact an opponent controls with the same converted mana cost", false, true),
+                        "Exchange control of target artifact you control and target artifact an opponent controls with the same mana value", false, true),
                 new TapSourceCost());
         FilterArtifactPermanent filterYou = new FilterArtifactPermanent("artifact you control");
         filterYou.add(TargetController.YOU.getControllerPredicate());
@@ -71,7 +71,7 @@ class SameCastingCostPredicate implements ObjectSourcePlayerPredicate<ObjectSour
                     source.getStackAbility().getTargets().get(0).getTargets().get(0));
             Permanent inputPermanent = game.getPermanent(input.getObject().getId());
             if (firstTarget != null && inputPermanent != null) {
-                return firstTarget.getConvertedManaCost() == inputPermanent.getConvertedManaCost();
+                return firstTarget.getManaValue() == inputPermanent.getManaValue();
             }
         }
         return true;

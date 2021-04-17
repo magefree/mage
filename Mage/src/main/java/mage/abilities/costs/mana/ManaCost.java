@@ -13,7 +13,7 @@ import mage.players.ManaPool;
 
 public interface ManaCost extends Cost {
 
-    int convertedManaCost();
+    int manaValue();
 
     Mana getMana();
 

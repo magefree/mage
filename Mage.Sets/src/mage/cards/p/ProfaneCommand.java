@@ -19,7 +19,7 @@ import mage.constants.Duration;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -48,7 +48,7 @@ public final class ProfaneCommand extends CardImpl {
         // * Return target creature card with converted mana cost X or less from your graveyard to the battlefield.
         Mode mode = new Mode();
         mode.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
-        mode.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card with converted mana cost X or less from your graveyard")));
+        mode.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card with mana value X or less from your graveyard")));
         this.getSpellAbility().addMode(mode);
 
         // * Target creature gets -X/-X until end of turn.
@@ -90,8 +90,8 @@ enum ProfaneCommandAdjuster implements TargetAdjuster {
         for (Effect effect : mode.getEffects()) {
             if (effect instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
                 mode.getTargets().clear();
-                FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less from your graveyard");
-                filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+                FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue + " or less from your graveyard");
+                filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
                 mode.addTarget(new TargetCardInYourGraveyard(filter));
             }
             if (effect instanceof GainAbilityTargetEffect) {

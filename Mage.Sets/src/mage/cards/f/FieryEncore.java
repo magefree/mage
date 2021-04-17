@@ -70,7 +70,7 @@ class FieryEncoreEffect extends OneShotEffect {
             return true;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new DamageTargetEffect(card.getConvertedManaCost()), false, "when you discard a nonland " +
+                new DamageTargetEffect(card.getManaValue()), false, "when you discard a nonland " +
                 "card this way, {this} deals damage equal to that card's mana value to target creature or planeswalker"
         );
         ability.addTarget(new TargetCreatureOrPlaneswalker());

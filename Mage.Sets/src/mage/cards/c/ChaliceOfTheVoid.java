@@ -68,7 +68,7 @@ class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent chalice = game.getPermanent(getSourceId());
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && chalice != null && spell.getConvertedManaCost() == chalice.getCounters(game).getCount(CounterType.CHARGE)) {
+        if (spell != null && chalice != null && spell.getManaValue() == chalice.getCounters(game).getCount(CounterType.CHARGE)) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
             }
@@ -79,6 +79,6 @@ class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player casts a spell with converted mana cost equal to the number of charge counters on {this}, counter that spell.";
+        return "Whenever a player casts a spell with mana value equal to the number of charge counters on {this}, counter that spell.";
     }
 }

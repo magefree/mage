@@ -13,7 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -26,7 +26,7 @@ public final class HogaakArisenNecropolis extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, -1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, -1));
     }
 
     public HogaakArisenNecropolis(UUID ownerId, CardSetInfo setInfo) {

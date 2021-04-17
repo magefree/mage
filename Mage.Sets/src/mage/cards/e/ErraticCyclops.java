@@ -68,7 +68,7 @@ class ErraticCyclopsTriggeredAbility extends TriggeredAbilityImpl {
                 && spell.isInstantOrSorcery()) {
             this.getEffects().clear();
             this.addEffect(new BoostSourceEffect(
-                    spell.getConvertedManaCost(), 0, Duration.EndOfTurn
+                    spell.getManaValue(), 0, Duration.EndOfTurn
             ));
             return true;
         }
@@ -79,7 +79,7 @@ class ErraticCyclopsTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever you cast an instant or sorcery spell, "
                 + "{this} gets +X/+0 until end of turn, "
-                + "where X is that spell's converted mana cost";
+                + "where X is that spell's mana value";
     }
 
     @Override

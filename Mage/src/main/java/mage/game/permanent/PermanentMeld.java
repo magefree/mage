@@ -16,11 +16,11 @@ public class PermanentMeld extends PermanentCard {
     }
 
     @Override
-    public int getConvertedManaCost() {
+    public int getManaValue() {
         if (this.isCopy()) {
             return 0;
         } else {
-            return this.getCard().getConvertedManaCost();
+            return this.getCard().getManaValue();
         }
     }
 }

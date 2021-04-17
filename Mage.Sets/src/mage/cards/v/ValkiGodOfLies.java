@@ -25,7 +25,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.command.emblems.TibaltCosmicImpostorEmblem;
@@ -218,7 +218,7 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
 
     public ValkiGodOfLiesCopyExiledEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Choose a creature card exiled with Valki with converted mana cost X. Valki becomes a copy of that card.";
+        this.staticText = "Choose a creature card exiled with Valki with mana value X. Valki becomes a copy of that card.";
     }
 
     public ValkiGodOfLiesCopyExiledEffect(final ValkiGodOfLiesCopyExiledEffect effect) {
@@ -238,7 +238,7 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
                 && Valki != null) {
             UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + (Valki.getZoneChangeCounter(game)), game);
             FilterCard filter = new FilterCard();
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
             TargetCardInExile target = new TargetCardInExile(filter, exileId);
             Cards cards = game.getExile().getExileZone(exileId);
             if (cards != null

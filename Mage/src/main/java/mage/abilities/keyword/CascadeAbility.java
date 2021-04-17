@@ -49,9 +49,9 @@ public class CascadeAbility extends TriggeredAbilityImpl {
 
     private static final String REMINDERTEXT = " <i>(When you cast this spell, "
             + "exile cards from the top of your library until you exile a "
-            + "nonland card whose converted mana cost is less than this spell's converted mana cost. "
+            + "nonland card whose mana value is less than this spell's mana value. "
             + "You may cast that spell without paying its mana cost "
-            + "if its converted mana cost is less than this spell's converted mana cost. "
+            + "if its mana value is less than this spell's mana value. "
             + "Then put all cards exiled this way that weren't cast on the bottom of your library in a random order.)</i>";
     private final boolean withReminder;
 
@@ -120,11 +120,11 @@ class CascadeEffect extends OneShotEffect {
 
         // exile cards from the top of your library until you exile a nonland card whose converted mana cost is less than this spell's converted mana cost
         Cards cardsToExile = new CardsImpl();
-        int sourceCost = sourceCard.getConvertedManaCost();
+        int sourceCost = sourceCard.getManaValue();
         Card cardToCast = null;
         for (Card card : controller.getLibrary().getCards(game)) {
             cardsToExile.add(card);
-            if (!card.isLand() && card.getConvertedManaCost() < sourceCost) {
+            if (!card.isLand() && card.getManaValue() < sourceCost) {
                 cardToCast = card;
                 break;
             }
@@ -162,7 +162,7 @@ class CascadeEffect extends OneShotEffect {
                 partsToCast.add(cardToCast);
             }
             // remove too big cmc
-            partsToCast.removeIf(card -> card.getConvertedManaCost() >= sourceCost);
+            partsToCast.removeIf(card -> card.getManaValue() >= sourceCost);
             // remove non spells
             partsToCast.removeIf(card -> card.getSpellAbility() == null);
         }

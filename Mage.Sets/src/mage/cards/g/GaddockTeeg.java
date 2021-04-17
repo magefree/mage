@@ -48,7 +48,7 @@ class GaddockTeegReplacementEffect4 extends ContinuousRuleModifyingEffectImpl {
 
     public GaddockTeegReplacementEffect4() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Noncreature spells with converted mana cost 4 or greater can't be cast. Noncreature spells with {X} in their mana costs can't be cast";
+        staticText = "Noncreature spells with mana value 4 or greater can't be cast. Noncreature spells with {X} in their mana costs can't be cast";
     }
 
     public GaddockTeegReplacementEffect4(final GaddockTeegReplacementEffect4 effect) {
@@ -73,7 +73,7 @@ class GaddockTeegReplacementEffect4 extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
-        if (card != null && !card.isCreature() && card.getConvertedManaCost() >= 4) {
+        if (card != null && !card.isCreature() && card.getManaValue() >= 4) {
             return true;
         }
         return false;

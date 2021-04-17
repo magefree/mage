@@ -11,7 +11,7 @@ import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -20,11 +20,11 @@ import mage.target.TargetPlayer;
  */
 public final class InquisitionOfKozilek extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("nonland card with converted mana cost 3 or less");
+    private static final FilterCard filter = new FilterCard("nonland card with mana value 3 or less");
 
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public InquisitionOfKozilek(UUID ownerId, CardSetInfo setInfo){

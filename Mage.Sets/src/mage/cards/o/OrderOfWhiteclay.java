@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -26,10 +26,10 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class OrderOfWhiteclay extends CardImpl {
     
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 3 or less from your graveyard");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with mana value 3 or less from your graveyard");
     
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public OrderOfWhiteclay(UUID ownerId, CardSetInfo setInfo) {

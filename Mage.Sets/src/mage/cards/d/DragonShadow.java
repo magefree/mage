@@ -16,7 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,9 +29,9 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class DragonShadow extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with converted mana cost 6 or greater");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with mana value 6 or greater");
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 5));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 5));
     }
 
     public DragonShadow(UUID ownerId, CardSetInfo setInfo) {

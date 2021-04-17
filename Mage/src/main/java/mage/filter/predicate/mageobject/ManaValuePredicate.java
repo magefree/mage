@@ -9,19 +9,19 @@ import mage.filter.predicate.IntComparePredicate;
  *
  * @author North
  */
-public class ConvertedManaCostPredicate extends IntComparePredicate<MageObject> {
+public class ManaValuePredicate extends IntComparePredicate<MageObject> {
 
-    public ConvertedManaCostPredicate(ComparisonType type, int value) {
+    public ManaValuePredicate(ComparisonType type, int value) {
         super(type, value);
     }
 
     @Override
     protected int getInputValue(MageObject input) {
-        return input.getConvertedManaCost();
+        return input.getManaValue();
     }
 
     @Override
     public String toString() {
-        return "ConvertedManaCost" + super.toString();
+        return "ManaValue" + super.toString();
     }
 }

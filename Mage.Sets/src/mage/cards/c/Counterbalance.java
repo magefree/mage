@@ -47,7 +47,7 @@ class CounterbalanceEffect extends OneShotEffect {
 
     public CounterbalanceEffect() {
         super(Outcome.Neutral);
-        this.staticText = "you may reveal the top card of your library. If you do, counter that spell if it has the same converted mana cost as the revealed card";
+        this.staticText = "you may reveal the top card of your library. If you do, counter that spell if it has the same mana value as the revealed card";
     }
 
     public CounterbalanceEffect(final CounterbalanceEffect effect) {
@@ -71,7 +71,7 @@ class CounterbalanceEffect extends OneShotEffect {
                     CardsImpl cards = new CardsImpl();
                     cards.add(topcard);
                     controller.revealCards(sourcePermanent.getName(), cards, game);
-                    if (topcard.getConvertedManaCost() == spell.getConvertedManaCost()) {
+                    if (topcard.getManaValue() == spell.getManaValue()) {
                         return game.getStack().counter(spell.getId(), source, game);
                     }
                 }

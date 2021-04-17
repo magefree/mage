@@ -22,7 +22,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -32,11 +32,11 @@ import mage.players.Player;
  */
 public final class KalemneDiscipleOfIroas extends CardImpl {
 
-    private static final FilterSpell filterSpell = new FilterSpell("a creature spell with converted mana cost 5 or greater");
+    private static final FilterSpell filterSpell = new FilterSpell("a creature spell with mana value 5 or greater");
 
     static {
         filterSpell.add(CardType.CREATURE.getPredicate());
-        filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 4));
+        filterSpell.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public KalemneDiscipleOfIroas(UUID ownerId, CardSetInfo setInfo) {

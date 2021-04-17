@@ -292,7 +292,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         attack(4, playerB, "Steel Hellkite");
 
-        activateAbility(4, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X}: Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by {this} this turn. Activate this ability only once each turn.");
+        activateAbility(4, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X}: Destroy each nonland permanent with mana value X whose controller was dealt combat damage by {this} this turn. Activate this ability only once each turn.");
         setChoice(playerB, "X=0");
 
         setStopAt(4, PhaseStep.END_TURN);

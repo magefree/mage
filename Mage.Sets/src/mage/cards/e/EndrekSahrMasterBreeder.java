@@ -54,7 +54,7 @@ class EndrekSahrMasterBreederEffect extends OneShotEffect {
 
     public EndrekSahrMasterBreederEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "create X 1/1 black Thrull creature tokens, where X is that spell's converted mana cost";
+        this.staticText = "create X 1/1 black Thrull creature tokens, where X is that spell's mana value";
     }
 
     public EndrekSahrMasterBreederEffect(final EndrekSahrMasterBreederEffect effect) {
@@ -70,7 +70,7 @@ class EndrekSahrMasterBreederEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         if (spell != null) {
-            int cmc = spell.getConvertedManaCost();
+            int cmc = spell.getManaValue();
             if (cmc > 0) {
                 return new CreateTokenEffect(new ThrullToken(), cmc).apply(game, source);
             }

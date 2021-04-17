@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.common.TargetAnyTarget;
 
@@ -66,7 +65,7 @@ class RageExtractorTriggeredAbility extends TriggeredAbilityImpl {
             if (spell != null) {
                 for (ManaCost cost : spell.getCard().getManaCost()) {
                     if (cost instanceof PhyrexianManaCost) {
-                        ((DamageTargetEffect)getEffects().get(0)).setAmount(StaticValue.get(spell.getConvertedManaCost()));
+                        ((DamageTargetEffect)getEffects().get(0)).setAmount(StaticValue.get(spell.getManaValue()));
                         return true;
                     }
                 }
@@ -77,6 +76,6 @@ class RageExtractorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast a spell with p in its mana cost, {this} deals damage equal to that spell's converted mana cost to any target.";
+        return "Whenever you cast a spell with p in its mana cost, {this} deals damage equal to that spell's mana value to any target.";
     }
 }

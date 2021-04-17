@@ -69,7 +69,7 @@ class MetallurgicSummoningsTokenEffect extends OneShotEffect {
 
     public MetallurgicSummoningsTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "create an X/X colorless Construct artifact creature token, where X is that spell's converted mana cost";
+        staticText = "create an X/X colorless Construct artifact creature token, where X is that spell's mana value";
     }
 
     public MetallurgicSummoningsTokenEffect(MetallurgicSummoningsTokenEffect ability) {
@@ -80,7 +80,7 @@ class MetallurgicSummoningsTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         if (spell != null) {
-            int cmc = spell.getConvertedManaCost();
+            int cmc = spell.getManaValue();
             if (cmc > 0) {
                 return new CreateTokenEffect(new MetallurgicSummoningsConstructToken(cmc)).apply(game, source);
             }

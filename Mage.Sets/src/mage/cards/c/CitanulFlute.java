@@ -15,7 +15,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -51,7 +51,7 @@ class CitanulFluteSearchEffect extends OneShotEffect {
 
     CitanulFluteSearchEffect() {
         super(Outcome.DrawCard);
-        staticText = "Search your library for a creature card with converted mana cost X or less, " +
+        staticText = "Search your library for a creature card with mana value X or less, " +
                 "reveal it, and put it into your hand. Then shuffle your library";
     }
 
@@ -71,9 +71,9 @@ class CitanulFluteSearchEffect extends OneShotEffect {
             return false;
         }
 
-        FilterCard filter = new FilterCreatureCard("creature card with converted mana cost X or less");
+        FilterCard filter = new FilterCreatureCard("creature card with mana value X or less");
         //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
 
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         player.searchLibrary(target, source, game);

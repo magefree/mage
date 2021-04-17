@@ -43,7 +43,7 @@ class OverwhelmingIntellectEffect extends OneShotEffect {
 
     public OverwhelmingIntellectEffect() {
         super(Outcome.Detriment);
-        staticText = "Counter target creature spell. Draw cards equal to that spell's converted mana cost";
+        staticText = "Counter target creature spell. Draw cards equal to that spell's mana value";
     }
 
     public OverwhelmingIntellectEffect(final OverwhelmingIntellectEffect effect) {
@@ -61,7 +61,7 @@ class OverwhelmingIntellectEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (controller != null && spell != null) {
             game.getStack().counter(source.getFirstTarget(), source, game);
-            controller.drawCards(spell.getConvertedManaCost(), source, game);
+            controller.drawCards(spell.getManaValue(), source, game);
             return true;
         }
         return false;

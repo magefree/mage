@@ -2,7 +2,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
+import mage.abilities.dynamicvalue.common.TargetManaValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class AuraMutation extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
         // create X 1/1 green Saproling creature tokens, where X is that enchantment's converted mana cost.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetConvertedManaCost.instance));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetManaValue.instance));
     }
 
     private AuraMutation(final AuraMutation card) {

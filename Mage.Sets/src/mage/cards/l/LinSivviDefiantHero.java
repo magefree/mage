@@ -16,7 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -72,7 +72,7 @@ class LinSivviDefiantHeroEffect extends OneShotEffect {
 
     public LinSivviDefiantHeroEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Search your library for a Rebel permanent card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library";
+        this.staticText = "Search your library for a Rebel permanent card with mana value X or less and put it onto the battlefield. Then shuffle your library";
     }
 
     public LinSivviDefiantHeroEffect(final LinSivviDefiantHeroEffect effect) {
@@ -93,8 +93,8 @@ class LinSivviDefiantHeroEffect extends OneShotEffect {
 
         int xCost = source.getManaCostsToPay().getX();
 
-        FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost " + xCost + " or less");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xCost + 1));
+        FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with mana value " + xCost + " or less");
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xCost + 1));
         filter.add(SubType.REBEL.getPredicate());
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 

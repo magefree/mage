@@ -50,7 +50,7 @@ class VengefulRebirthEffect extends OneShotEffect {
         super(Outcome.DrawCard);
         staticText = "Return target card from your graveyard to your hand. " +
                 "If you return a nonland card to your hand this way, " +
-                "{this} deals damage equal to that card's converted mana cost to any target";
+                "{this} deals damage equal to that card's mana value to any target";
     }
 
     public VengefulRebirthEffect(final VengefulRebirthEffect effect) {
@@ -75,7 +75,7 @@ class VengefulRebirthEffect extends OneShotEffect {
         if (card.isLand()) {
             return true;
         }
-        int damage = card.getConvertedManaCost();
+        int damage = card.getManaValue();
         Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
             permanent.damage(damage, source.getSourceId(), source, game, false, true);

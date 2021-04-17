@@ -57,7 +57,7 @@ class DrainingWhelkEffect extends CounterTargetEffect {
     
     DrainingWhelkEffect() {
         super();
-        staticText = "counter target spell. Put X +1/+1 counters on Draining Whelk, where X is that spell's converted mana cost";
+        staticText = "counter target spell. Put X +1/+1 counters on Draining Whelk, where X is that spell's mana value";
     }
     
     DrainingWhelkEffect(final DrainingWhelkEffect effect) {
@@ -73,7 +73,7 @@ class DrainingWhelkEffect extends CounterTargetEffect {
     public boolean apply(Game game, Ability source) {
         Spell targetSpell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (targetSpell != null) {
-            int spellCMC = targetSpell.getConvertedManaCost();
+            int spellCMC = targetSpell.getManaValue();
             super.apply(game, source);
             new AddCountersSourceEffect(CounterType.P1P1.createInstance(spellCMC)).apply(game, source);
             return true;

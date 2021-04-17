@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
+import mage.abilities.dynamicvalue.common.TargetManaValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -41,8 +41,8 @@ public final class SurgeOfStrength extends CardImpl {
         Effect effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target creature gains trample");
         this.getSpellAbility().addEffect(effect);
-        effect = new BoostTargetEffect(TargetConvertedManaCost.instance, StaticValue.get(0), Duration.EndOfTurn, true);
-        effect.setText("and gets +X/+0 until end of turn, where X is that creature's converted mana cost");
+        effect = new BoostTargetEffect(TargetManaValue.instance, StaticValue.get(0), Duration.EndOfTurn, true);
+        effect.setText("and gets +X/+0 until end of turn, where X is that creature's mana value");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

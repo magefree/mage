@@ -13,19 +13,19 @@ import mage.players.Player;
  *
  * @author nigelzor
  */
-public class HighestConvertedManaCostValue implements DynamicValue {
+public class HighestManaValueCount implements DynamicValue {
 
     private final FilterPermanent filter;
 
-    public HighestConvertedManaCostValue() {
+    public HighestManaValueCount() {
         this(StaticFilters.FILTER_PERMANENTS);
     }
 
-    public HighestConvertedManaCostValue(FilterPermanent filter) {
+    public HighestManaValueCount(FilterPermanent filter) {
         this.filter = filter;
     }
 
-    public HighestConvertedManaCostValue(final HighestConvertedManaCostValue dynamicValue){
+    public HighestManaValueCount(final HighestManaValueCount dynamicValue){
         super();
         this.filter = dynamicValue.filter.copy();
     }
@@ -38,7 +38,7 @@ public class HighestConvertedManaCostValue implements DynamicValue {
         }
         int highCMC = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
-            int cmc = permanent.getConvertedManaCost();
+            int cmc = permanent.getManaValue();
             highCMC = Math.max(highCMC, cmc);
         }
         return highCMC;
@@ -46,12 +46,12 @@ public class HighestConvertedManaCostValue implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return new HighestConvertedManaCostValue(this);
+        return new HighestManaValueCount(this);
     }
 
     @Override
     public String getMessage() {
-        return "the highest converted mana cost among permanents you control";
+        return "the highest mana value among permanents you control";
     }
 
     @Override

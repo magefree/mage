@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -16,10 +15,9 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -84,7 +82,7 @@ class HibernationsEndEffect extends OneShotEffect {
 
     public HibernationsEndEffect() {
         super(Outcome.Benefit);
-        this.staticText = "search your library for a creature card with converted mana cost equal to the number of age counters on {this} and put it onto the battlefield. If you do, shuffle your library.";
+        this.staticText = "search your library for a creature card with mana value equal to the number of age counters on {this} and put it onto the battlefield. If you do, shuffle your library.";
     }
 
     public HibernationsEndEffect(final HibernationsEndEffect effect) {
@@ -102,8 +100,8 @@ class HibernationsEndEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent != null && player != null) {
             int newConvertedCost = sourcePermanent.getCounters(game).getCount("age");
-            FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, newConvertedCost));
+            FilterCard filter = new FilterCard("creature card with mana value " + newConvertedCost);
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, newConvertedCost));
             filter.add(CardType.CREATURE.getPredicate());
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             return new SearchLibraryPutInPlayEffect(target).apply(game, source);

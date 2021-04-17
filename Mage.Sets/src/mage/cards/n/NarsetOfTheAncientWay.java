@@ -116,7 +116,7 @@ class NarsetOfTheAncientWayDrawEffect extends OneShotEffect {
     NarsetOfTheAncientWayDrawEffect() {
         super(Outcome.Benefit);
         staticText = "Draw a card, then you may discard a card. When you discard a nonland card this way, " +
-                "{this} deals damage equal to that card's converted mana cost to target creature or planeswalker.";
+                "{this} deals damage equal to that card's mana value to target creature or planeswalker.";
     }
 
     private NarsetOfTheAncientWayDrawEffect(final NarsetOfTheAncientWayDrawEffect effect) {
@@ -143,8 +143,8 @@ class NarsetOfTheAncientWayDrawEffect extends OneShotEffect {
             return false;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new DamageTargetEffect(card.getConvertedManaCost()), false, "{this} deals damage " +
-                "to target creature or planeswalker equal to the discarded card's converted mana cost"
+                new DamageTargetEffect(card.getManaValue()), false, "{this} deals damage " +
+                "to target creature or planeswalker equal to the discarded card's mana value"
         );
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         game.fireReflexiveTriggeredAbility(ability, source);

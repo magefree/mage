@@ -55,7 +55,7 @@ class FeedTheSwarmEffect extends OneShotEffect {
     FeedTheSwarmEffect() {
         super(Outcome.Benefit);
         staticText = "destroy target creature or enchantment an opponent controls. " +
-                "You lose life equal to that permanent's converted mana cost";
+                "You lose life equal to that permanent's mana value";
     }
 
     private FeedTheSwarmEffect(final FeedTheSwarmEffect effect) {
@@ -74,7 +74,7 @@ class FeedTheSwarmEffect extends OneShotEffect {
         if (permanent == null || player == null) {
             return false;
         }
-        player.loseLife(permanent.getConvertedManaCost(), game, source, false);
+        player.loseLife(permanent.getManaValue(), game, source, false);
         permanent.destroy(source, game, false);
         return true;
     }

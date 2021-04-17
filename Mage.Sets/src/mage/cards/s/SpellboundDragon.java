@@ -54,7 +54,7 @@ class SpellboundDragonEffect extends OneShotEffect {
 
     public SpellboundDragonEffect() {
         super(Outcome.BoostCreature);
-        staticText = "draw a card, then discard a card. Spellbound Dragon gets +X/+0 until end of turn, where X is the discarded card's converted mana cost";
+        staticText = "draw a card, then discard a card. Spellbound Dragon gets +X/+0 until end of turn, where X is the discarded card's mana value";
     }
 
     public SpellboundDragonEffect(final SpellboundDragonEffect effect) {
@@ -76,7 +76,7 @@ class SpellboundDragonEffect extends OneShotEffect {
             you.choose(Outcome.Discard, target, source.getSourceId(), game);
             Card card = you.getHand().get(target.getFirstTarget(), game);
             if (card != null && you.discard(card, false, source, game)) {
-                int cmc = card.getConvertedManaCost();
+                int cmc = card.getManaValue();
                 if (dragon != null) {
                     game.addEffect(new BoostSourceEffect(cmc, 0, Duration.EndOfTurn), source);
                     return true;

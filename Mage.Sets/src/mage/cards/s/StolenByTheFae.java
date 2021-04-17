@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.FaerieToken;
 import mage.target.common.TargetCreaturePermanent;
@@ -27,7 +27,7 @@ public final class StolenByTheFae extends CardImpl {
 
         // Return target creature with converted mana cost X to its owner's hand. You create X 1/1 blue Faerie creature tokens with flying.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect()
-                .setText("Return target creature with converted mana cost X to its owner's hand"));
+                .setText("Return target creature with mana value X to its owner's hand"));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new FaerieToken(), ManacostVariableValue.instance)
                 .setText("You create X 1/1 blue Faerie creature tokens with flying"));
         this.getSpellAbility().setTargetAdjuster(StolenByTheFaeAdjuster.instance);
@@ -50,8 +50,8 @@ enum StolenByTheFaeAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         int xValue = ability.getManaCostsToPay().getX();
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost " + xValue);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value " + xValue);
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.addTarget(new TargetCreaturePermanent(filter));
     }
 }

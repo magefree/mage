@@ -83,7 +83,7 @@ class NayaSoulbeastCastEffect extends OneShotEffect {
                 if (player != null) {
                     if (player.getLibrary().hasCards()) {
                         Card card = player.getLibrary().getFromTop(game);
-                        cmc += card.getConvertedManaCost();
+                        cmc += card.getManaValue();
                         player.revealCards(sourceObject.getName() + " (" + player.getName() + ')', new CardsImpl(card), game);
                     }
                 }
@@ -103,7 +103,7 @@ class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl {
 
     public NayaSoulbeastReplacementEffect() {
         super(Duration.OneUse, Outcome.BoostCreature);
-        staticText = "{this} enters the battlefield with X +1/+1 counters on it, where X is the total converted mana cost of all cards revealed this way";
+        staticText = "{this} enters the battlefield with X +1/+1 counters on it, where X is the total mana value of all cards revealed this way";
     }
 
     public NayaSoulbeastReplacementEffect(final NayaSoulbeastReplacementEffect effect) {

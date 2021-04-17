@@ -46,7 +46,7 @@ class TimesifterEffect extends OneShotEffect {
 
     TimesifterEffect() {
         super(Outcome.ExtraTurn);
-        this.staticText = "each player exiles the top card of their library. The player who exiled the card with the highest converted mana cost takes an extra turn after this one. If two or more players' cards are tied for highest cost, the tied players repeat this process until the tie is broken";
+        this.staticText = "each player exiles the top card of their library. The player who exiled the card with the highest mana value takes an extra turn after this one. If two or more players' cards are tied for highest cost, the tied players repeat this process until the tie is broken";
     }
 
     TimesifterEffect(final TimesifterEffect effect) {
@@ -69,7 +69,7 @@ class TimesifterEffect extends OneShotEffect {
                 if (player != null) {
                     Card card = player.getLibrary().getFromTop(game);
                     if (card != null) {
-                        int cardCMC = card.getConvertedManaCost();
+                        int cardCMC = card.getManaValue();
                         player.moveCardsToExile(card, source, game, true, null, "");
                         if (cardCMC > highestCMC) {
                             highestCMC = cardCMC;

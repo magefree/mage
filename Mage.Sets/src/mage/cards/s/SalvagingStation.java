@@ -15,7 +15,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -24,12 +24,12 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class SalvagingStation extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("noncreature artifact card with converted mana cost 1 or less");
+    private static final FilterCard filter = new FilterCard("noncreature artifact card with mana value 1 or less");
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 2));
     }
     
     public SalvagingStation(UUID ownerId, CardSetInfo setInfo) {

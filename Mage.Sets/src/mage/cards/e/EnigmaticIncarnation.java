@@ -15,7 +15,7 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -59,8 +59,8 @@ class EnigmaticIncarnationEffect extends OneShotEffect {
     EnigmaticIncarnationEffect() {
         super(Outcome.Benefit);
         staticText = "you may sacrifice another enchantment. If you do, "
-                + "search your library for a creature card with converted mana cost "
-                + "equal to 1 plus the sacrificed enchantment's converted mana cost, "
+                + "search your library for a creature card with mana value "
+                + "equal to 1 plus the sacrificed enchantment's mana value, "
                 + "put that card onto the battlefield, then shuffle your library.";
     }
 
@@ -88,12 +88,12 @@ class EnigmaticIncarnationEffect extends OneShotEffect {
             return false;
         }
         game.getState().processAction(game);
-        int cmc = permanent.getConvertedManaCost();
+        int cmc = permanent.getManaValue();
         if (!permanent.sacrifice(source, game)) {
             return false;
         }
-        FilterCard filterCard = new FilterCreatureCard("creature card with converted mana cost " + (cmc + 1));
-        filterCard.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc + 1));
+        FilterCard filterCard = new FilterCreatureCard("creature card with mana value " + (cmc + 1));
+        filterCard.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, cmc + 1));
         return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterCard)).apply(game, source);
     }
 }

@@ -15,7 +15,7 @@ import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -24,15 +24,15 @@ import mage.target.TargetSpell;
  */
 public final class IzzetGuildmage extends CardImpl {
 
-    private static final FilterSpell filterInstant = new FilterSpell("instant spell you control with converted mana cost 2 or less");
-    private static final FilterSpell filterSorcery = new FilterSpell("sorcery spell you control with converted mana cost 2 or less");
+    private static final FilterSpell filterInstant = new FilterSpell("instant spell you control with mana value 2 or less");
+    private static final FilterSpell filterSorcery = new FilterSpell("sorcery spell you control with mana value 2 or less");
 
     static {
         filterInstant.add(CardType.INSTANT.getPredicate());
-        filterInstant.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filterInstant.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
         filterInstant.add(TargetController.YOU.getControllerPredicate());
         filterSorcery.add(CardType.SORCERY.getPredicate());
-        filterSorcery.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filterSorcery.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
         filterSorcery.add(TargetController.YOU.getControllerPredicate());
     }
 

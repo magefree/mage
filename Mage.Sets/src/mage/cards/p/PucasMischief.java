@@ -26,7 +26,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class PucasMischief extends CardImpl {
 
-    private static final String rule = "you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser converted mana cost";
+    private static final String rule = "you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser mana value";
 
     public PucasMischief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
@@ -91,7 +91,7 @@ class PucasMischiefSecondTarget extends TargetPermanent {
         this.filter = this.filter.copy();
         filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        setTargetName("permanent an opponent controls with an equal or lesser converted mana cost");
+        setTargetName("permanent an opponent controls with an equal or lesser mana value");
     }
 
     public PucasMischiefSecondTarget(final PucasMischiefSecondTarget target) {
@@ -105,7 +105,7 @@ class PucasMischiefSecondTarget extends TargetPermanent {
             Permanent target1 = game.getPermanent(source.getFirstTarget());
             Permanent opponentPermanent = game.getPermanent(id);
             if (target1 != null && opponentPermanent != null) {
-                return target1.getConvertedManaCost() >= opponentPermanent.getConvertedManaCost();
+                return target1.getManaValue() >= opponentPermanent.getManaValue();
             }
         }
         return false;
@@ -119,7 +119,7 @@ class PucasMischiefSecondTarget extends TargetPermanent {
             if (targetSource != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
                     if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                        if (firstTarget.getConvertedManaCost() >= permanent.getConvertedManaCost()) {
+                        if (firstTarget.getManaValue() >= permanent.getManaValue()) {
                             possibleTargets.add(permanent.getId());
                         }
                     }

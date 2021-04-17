@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -22,9 +22,9 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class ArtificersIntuition extends CardImpl {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card with converted mana cost 1 or less");
+    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card with mana value 1 or less");
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 2));
     }
     public ArtificersIntuition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

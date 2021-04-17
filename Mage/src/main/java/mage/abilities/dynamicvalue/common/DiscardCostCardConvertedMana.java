@@ -19,7 +19,7 @@ public enum DiscardCostCardConvertedMana implements DynamicValue {
         for (Cost cost : sourceAbility.getCosts()) {
             if (cost instanceof DiscardTargetCost) {
                 DiscardTargetCost discardCost = (DiscardTargetCost) cost;
-                return discardCost.getCards().stream().mapToInt(Card::getConvertedManaCost).sum();
+                return discardCost.getCards().stream().mapToInt(Card::getManaValue).sum();
             }
         }
         return 0;
@@ -37,6 +37,6 @@ public enum DiscardCostCardConvertedMana implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the discarded card's converted mana cost";
+        return "the discarded card's mana value";
     }
 }

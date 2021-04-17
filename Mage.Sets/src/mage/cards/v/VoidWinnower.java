@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
@@ -50,7 +49,7 @@ class VoidWinnowerCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     public VoidWinnowerCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Your opponent can't cast spells with even converted mana costs. <i>(Zero is even.)</i>";
+        staticText = "Your opponent can't cast spells with even mana values. <i>(Zero is even.)</i>";
     }
 
     public VoidWinnowerCantCastEffect(final VoidWinnowerCantCastEffect effect) {
@@ -71,7 +70,7 @@ class VoidWinnowerCantCastEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast spells with even converted mana costs (" + mageObject.getIdName() + ").";
+            return "You can't cast spells with even mana values (" + mageObject.getIdName() + ").";
         }
         return null;
     }
@@ -87,7 +86,7 @@ class VoidWinnowerCantCastEffect extends ContinuousRuleModifyingEffectImpl {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null) {
                 // the low bit will always be set on an odd number.
-                return (spell.getConvertedManaCost() & 1) == 0;
+                return (spell.getManaValue() & 1) == 0;
             }
         }
         return false;
@@ -98,7 +97,7 @@ class VoidWinnowerCantBlockEffect extends RestrictionEffect {
 
     public VoidWinnowerCantBlockEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "Your opponents can't block with creatures with even converted mana costs";
+        staticText = "Your opponents can't block with creatures with even mana values";
     }
 
     public VoidWinnowerCantBlockEffect(final VoidWinnowerCantBlockEffect effect) {
@@ -114,7 +113,7 @@ class VoidWinnowerCantBlockEffect extends RestrictionEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(permanent.getControllerId())) {
             // the low bit will always be set on an odd number.
-            return (permanent.getConvertedManaCost() & 1) == 0;
+            return (permanent.getManaValue() & 1) == 0;
         }
         return false;
     }

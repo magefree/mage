@@ -55,7 +55,7 @@ class DemonlordBelzenlokEffect extends OneShotEffect {
     public DemonlordBelzenlokEffect() {
         super(Outcome.Benefit);
         staticText = "exile cards from the top of your library until you exile a nonland card, then put that card into your hand. "
-                + "If the card's converted mana cost is 4 or greater, repeat this process. "
+                + "If the card's mana value is 4 or greater, repeat this process. "
                 + "{this} deals 1 damage to you for each card put into your hand this way";
     }
 
@@ -77,7 +77,7 @@ class DemonlordBelzenlokEffect extends OneShotEffect {
             if (card != null) {
                 controller.moveCards(card, Zone.EXILED, source, game);
                 if (!card.isLand()) {
-                    if (card.getConvertedManaCost() < 4) {
+                    if (card.getManaValue() < 4) {
                         cont = false;
                     }
                     controller.moveCards(card, Zone.HAND, source, game);

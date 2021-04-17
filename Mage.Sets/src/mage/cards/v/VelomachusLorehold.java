@@ -12,7 +12,7 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -89,7 +89,7 @@ class VelomachusLoreholdEffect extends OneShotEffect {
         FilterCard filter = new FilterInstantOrSorceryCard(
                 "instant or sorcery card with mana value " + permanent.getPower().getValue() + " or less"
         );
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, permanent.getPower().getValue() + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, permanent.getPower().getValue() + 1));
         TargetCard target = new TargetCardInLibrary(0, 1, filter);
         controller.choose(Outcome.PlayForFree, cards, target, game);
         Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);

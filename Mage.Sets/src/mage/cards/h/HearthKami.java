@@ -21,7 +21,7 @@ import mage.target.targetadjustment.XCMCPermanentAdjuster;
  */
 public final class HearthKami extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact with converted mana cost X");
+    private static final FilterPermanent filter = new FilterPermanent("artifact with mana value X");
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());

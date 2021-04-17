@@ -14,7 +14,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.Set;
@@ -25,11 +25,11 @@ import java.util.UUID;
  */
 public final class KerugaTheMacrosage extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("other permanent you control with converted mana cost 3 or greater");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("other permanent you control with mana value 3 or greater");
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 2));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public KerugaTheMacrosage(UUID ownerId, CardSetInfo setInfo) {
@@ -62,11 +62,11 @@ enum KerugaCondition implements CompanionCondition {
 
     @Override
     public String getRule() {
-        return "Your starting deck contains only cards with converted mana cost 3 or greater and land cards.";
+        return "Your starting deck contains only cards with mana value 3 or greater and land cards.";
     }
 
     @Override
     public boolean isLegal(Set<Card> deck, int startingSize) {
-        return deck.stream().allMatch(card -> card.isLand() || card.getConvertedManaCost() >= 3);
+        return deck.stream().allMatch(card -> card.isLand() || card.getManaValue() >= 3);
     }
 }

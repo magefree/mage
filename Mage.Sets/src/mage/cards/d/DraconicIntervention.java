@@ -76,7 +76,7 @@ enum DraconicInterventionValue implements DynamicValue {
                 .map(ExileFromGraveCost::getExiledCards)
                 .flatMap(Collection::stream)
                 .filter(Objects::nonNull)
-                .map(MageObject::getConvertedManaCost)
+                .map(MageObject::getManaValue)
                 .findFirst()
                 .orElse(0);
     }

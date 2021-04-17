@@ -61,11 +61,11 @@ class KentaroTheSmilingCatCastingEffect extends ContinuousEffectImpl {
 	}
 	
     private final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(
-    		SourceIsSpellCondition.instance, null, filterSamurai, true, new ColorlessConvertedManaCost());
+    		SourceIsSpellCondition.instance, null, filterSamurai, true, new ColorlessManaValue());
 	
     public KentaroTheSmilingCatCastingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's converted mana cost";
+        staticText = "You may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's mana value";
     }
     
     public KentaroTheSmilingCatCastingEffect(final KentaroTheSmilingCatCastingEffect effect) {
@@ -104,11 +104,11 @@ class KentaroTheSmilingCatCastingEffect extends ContinuousEffectImpl {
     }
 }
 
-class ColorlessConvertedManaCost implements DynamicCost {
+class ColorlessManaValue implements DynamicCost {
 
 	@Override
 	public Cost getCost(Ability ability, Game game) {
-		return new GenericManaCost(ability.getManaCosts().convertedManaCost());
+		return new GenericManaCost(ability.getManaCosts().manaValue());
 	}
 
 	@Override

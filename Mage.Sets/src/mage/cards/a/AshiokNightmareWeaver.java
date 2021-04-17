@@ -13,7 +13,7 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -96,7 +96,7 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
 
     public AshiokNightmareWeaverPutIntoPlayEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a creature card with converted mana cost X exiled with {this} onto the battlefield under your control. That creature is a Nightmare in addition to its other types";
+        this.staticText = "Put a creature card with mana value X exiled with {this} onto the battlefield under your control. That creature is a Nightmare in addition to its other types";
     }
 
     public AshiokNightmareWeaverPutIntoPlayEffect(final AshiokNightmareWeaverPutIntoPlayEffect effect) {
@@ -123,8 +123,8 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
             }
         }
 
-        FilterCard filter = new FilterCreatureCard("creature card with converted mana cost {" + cmc + "} exiled with " + sourceObject.getIdName());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
+        FilterCard filter = new FilterCreatureCard("creature card with mana value {" + cmc + "} exiled with " + sourceObject.getIdName());
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, cmc));
 
         Target target = new TargetCardInExile(filter, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
 

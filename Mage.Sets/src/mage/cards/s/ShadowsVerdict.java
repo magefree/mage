@@ -16,7 +16,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -51,7 +51,7 @@ class ShadowsVerdictEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent();
     private static final FilterCard filter2 = new FilterCard();
     private static final Predicate<MageObject> predicate
-            = new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4);
+            = new ManaValuePredicate(ComparisonType.FEWER_THAN, 4);
 
     static {
         filter.add(predicate);
@@ -64,8 +64,8 @@ class ShadowsVerdictEffect extends OneShotEffect {
 
     ShadowsVerdictEffect() {
         super(Outcome.Benefit);
-        staticText = "exile all creatures and all planeswalkers with converted mana cost 3 or less from the battlefield " +
-                "and all creature and planeswalker cards with converted mana cost 3 or less from all graveyards";
+        staticText = "exile all creatures and all planeswalkers with mana value 3 or less from the battlefield " +
+                "and all creature and planeswalker cards with mana value 3 or less from all graveyards";
     }
 
     private ShadowsVerdictEffect(final ShadowsVerdictEffect effect) {

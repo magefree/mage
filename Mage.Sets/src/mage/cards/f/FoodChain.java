@@ -68,7 +68,7 @@ class FoodChainManaEffect extends ManaEffect {
     ConditionalManaBuilder manaBuilder = new FoodChainManaBuilder();
 
     FoodChainManaEffect() {
-        this.staticText = "Add X mana of any one color, where X is 1 plus the exiled creature's converted mana cost. Spend this mana only to cast creature spells";
+        this.staticText = "Add X mana of any one color, where X is 1 plus the exiled creature's mana value. Spend this mana only to cast creature spells";
     }
 
     FoodChainManaEffect(final FoodChainManaEffect effect) {
@@ -87,7 +87,7 @@ class FoodChainManaEffect extends ManaEffect {
             int cmc = -1;
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
                 if (permanent.isCreature()) {
-                    cmc = Math.max(cmc, permanent.getManaCost().convertedManaCost());
+                    cmc = Math.max(cmc, permanent.getManaCost().manaValue());
                 }
             }
             if (cmc != -1) {
@@ -113,7 +113,7 @@ class FoodChainManaEffect extends ManaEffect {
             for (Cost cost : source.getCosts()) {
                 if (cost.isPaid() && cost instanceof ExileTargetCost) {
                     for (Card card : ((ExileTargetCost) cost).getPermanents()) {
-                        manaCostExiled += card.getConvertedManaCost();
+                        manaCostExiled += card.getManaValue();
                     }
                 }
             }

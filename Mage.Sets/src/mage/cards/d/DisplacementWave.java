@@ -42,7 +42,7 @@ class DisplacementWaveEffect extends OneShotEffect {
 
     DisplacementWaveEffect() {
         super(Outcome.ReturnToHand);
-        staticText = "Return all nonland permanents with converted mana cost X or less to their owners' hands";
+        staticText = "Return all nonland permanents with mana value X or less to their owners' hands";
     }
 
     private DisplacementWaveEffect(final DisplacementWaveEffect effect) {
@@ -62,7 +62,7 @@ class DisplacementWaveEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (!permanent.isLand() && permanent.getConvertedManaCost() <= source.getManaCostsToPay().getX()) {
+            if (!permanent.isLand() && permanent.getManaValue() <= source.getManaCostsToPay().getX()) {
                 cards.add(permanent);
             }
         }

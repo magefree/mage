@@ -46,7 +46,7 @@ class OverloadEffect extends OneShotEffect {
 
     OverloadEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target artifact if its converted mana cost is 2 or less. if this spell was kicked, destroy that artifact if its converted mana cost is 5 or less instead.";
+        this.staticText = "Destroy target artifact if its mana value is 2 or less. if this spell was kicked, destroy that artifact if its mana value is 5 or less instead.";
     }
 
     OverloadEffect(final OverloadEffect effect) {
@@ -64,7 +64,7 @@ class OverloadEffect extends OneShotEffect {
         if (controller != null) {
             Permanent targetArtifact = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (targetArtifact != null) {
-                int cmc = targetArtifact.getConvertedManaCost();
+                int cmc = targetArtifact.getManaValue();
                 if (cmc <= 2 || (KickedCondition.instance.apply(game, source) && cmc <= 5)) {
                     targetArtifact.destroy(source, game, false);
                 }

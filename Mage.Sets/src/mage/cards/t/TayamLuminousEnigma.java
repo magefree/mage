@@ -20,7 +20,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -160,15 +160,15 @@ class TayamLuminousEnigmaCost extends RemoveCounterCost {
 
 class TayamLuminousEnigmaEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterPermanentCard("permanent card in your graveyard with converted mana cost 3 or less");
+    private static final FilterCard filter = new FilterPermanentCard("permanent card in your graveyard with mana value 3 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     TayamLuminousEnigmaEffect() {
         super(Outcome.Benefit);
-        staticText = ", then return a permanent card with converted mana cost 3 or less from your graveyard to the battlefield";
+        staticText = ", then return a permanent card with mana value 3 or less from your graveyard to the battlefield";
     }
 
     private TayamLuminousEnigmaEffect(TayamLuminousEnigmaEffect effect) {

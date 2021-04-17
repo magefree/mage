@@ -11,7 +11,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.common.FilterPlaneswalkerPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -70,7 +70,7 @@ enum ConfrontThePastAdjuster implements TargetAdjuster {
             ability.getTargets().clear();
             FilterPermanentCard filter = new FilterPermanentCard("planeswalker card with mana value X or less");
             filter.add(CardType.PLANESWALKER.getPredicate());
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
             ability.addTarget(new TargetCardInYourGraveyard(filter));
         }
     }

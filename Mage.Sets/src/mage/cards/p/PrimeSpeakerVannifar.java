@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -61,8 +61,8 @@ class PrimeSpeakerVannifarEffect extends OneShotEffect {
 
     PrimeSpeakerVannifarEffect() {
         super(Outcome.Benefit);
-        staticText = "Search your library for a creature card with converted mana cost equal to 1 " +
-                "plus the sacrificed creature's converted mana cost, put that card " +
+        staticText = "Search your library for a creature card with mana value equal to 1 " +
+                "plus the sacrificed creature's mana value, put that card " +
                 "onto the battlefield, then shuffle your library";
     }
 
@@ -86,9 +86,9 @@ class PrimeSpeakerVannifarEffect extends OneShotEffect {
         if (sacrificedPermanent == null || controller == null) {
             return false;
         }
-        int newConvertedCost = sacrificedPermanent.getConvertedManaCost() + 1;
-        FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, newConvertedCost));
+        int newConvertedCost = sacrificedPermanent.getManaValue() + 1;
+        FilterCard filter = new FilterCard("creature card with mana value " + newConvertedCost);
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, newConvertedCost));
         filter.add(CardType.CREATURE.getPredicate());
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (controller.searchLibrary(target, source, game)) {

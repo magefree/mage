@@ -53,7 +53,7 @@ class PhyrexianDelverEffect extends OneShotEffect {
 
     public PhyrexianDelverEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "return target creature card from your graveyard to the battlefield. You lose life equal to that card's converted mana cost";
+        this.staticText = "return target creature card from your graveyard to the battlefield. You lose life equal to that card's mana value";
     }
 
     public PhyrexianDelverEffect(final PhyrexianDelverEffect effect) {
@@ -74,7 +74,7 @@ class PhyrexianDelverEffect extends OneShotEffect {
             if (game.getState().getZone(creatureCard.getId()) == Zone.GRAVEYARD) {
                 result = controller.moveCards(creatureCard, Zone.BATTLEFIELD, source, game);
             }
-            controller.loseLife(creatureCard.getConvertedManaCost(), game, source, false);
+            controller.loseLife(creatureCard.getManaValue(), game, source, false);
             return result;
         }
         return false;

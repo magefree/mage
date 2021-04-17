@@ -54,7 +54,7 @@ public final class SlumberingTora extends CardImpl {
         private SlumberingToraEffect() {
             super(Duration.EndOfTurn, Outcome.BecomeCreature);
             staticText = "{this} becomes an X/X Cat artifact creature until end of turn, " +
-                    "where X is the discarded card's converted mana cost";
+                    "where X is the discarded card's mana value";
         }
 
         private SlumberingToraEffect(final SlumberingToraEffect effect) {
@@ -71,7 +71,7 @@ public final class SlumberingTora extends CardImpl {
             super.init(source, game);
             for (Cost cost : source.getCosts()) {
                 if (cost instanceof DiscardTargetCost && !((DiscardTargetCost) cost).getCards().isEmpty()) {
-                    convManaCosts = ((DiscardTargetCost) cost).getCards().get(0).getConvertedManaCost();
+                    convManaCosts = ((DiscardTargetCost) cost).getCards().get(0).getManaValue();
                     return;
                 }
             }

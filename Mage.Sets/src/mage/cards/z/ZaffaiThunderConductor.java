@@ -72,11 +72,11 @@ class ZaffaiThunderConductorEffect extends OneShotEffect {
         }
         player.scry(1, source, game);
         Spell spell = (Spell) getValue(MagecraftAbility.SPELL_KEY);
-        if (spell == null || spell.getConvertedManaCost() < 5) {
+        if (spell == null || spell.getManaValue() < 5) {
             return false;
         }
         new PrismariToken().putOntoBattlefield(1, game, source, source.getControllerId());
-        if (spell.getConvertedManaCost() < 10) {
+        if (spell.getManaValue() < 10) {
             return true;
         }
         TargetOpponent target = new TargetOpponent(true);

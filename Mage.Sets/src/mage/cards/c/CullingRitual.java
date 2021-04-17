@@ -11,7 +11,7 @@ import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -45,7 +45,7 @@ class CullingRitualEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterNonlandPermanent();
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     CullingRitualEffect() {

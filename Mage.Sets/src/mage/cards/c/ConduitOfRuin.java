@@ -22,7 +22,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -35,12 +35,12 @@ import mage.watchers.Watcher;
  */
 public final class ConduitOfRuin extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a colorless creature card with converted mana cost 7 or greater");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a colorless creature card with mana value 7 or greater");
     private static final FilterCreatureCard filterCost = new FilterCreatureCard("The first creature spell");
 
     static {
         filter.add(ColorlessPredicate.instance);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 6));
         filterCost.add(new FirstCastCreatureSpellPredicate());
     }
 

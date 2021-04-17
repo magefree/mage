@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -22,11 +22,11 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class TreasureMage extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("an artifact card with converted mana cost 6 or more");
+    private static final FilterCard filter = new FilterCard("an artifact card with mana value 6 or more");
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 5));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 5));
     }
 
     public TreasureMage (UUID ownerId, CardSetInfo setInfo) {

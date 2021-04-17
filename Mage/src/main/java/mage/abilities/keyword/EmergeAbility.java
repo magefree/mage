@@ -53,7 +53,7 @@ public class EmergeAbility extends SpellAbility {
             if (controller != null) {
                 for (Permanent creature : game.getBattlefield().getActivePermanents(
                         new FilterControlledCreaturePermanent(), this.getControllerId(), this.getSourceId(), game)) {
-                    ManaCost costToPay = CardUtil.reduceCost(emergeCost.copy(), creature.getConvertedManaCost());
+                    ManaCost costToPay = CardUtil.reduceCost(emergeCost.copy(), creature.getManaValue());
                     if (costToPay.canPay(this, this, this.getControllerId(), game)) {
                         return ActivationStatus.getTrue(this, game);
                     }
@@ -67,7 +67,7 @@ public class EmergeAbility extends SpellAbility {
     public ManaOptions getMinimumCostToActivate(UUID playerId, Game game) {
         int maxCMC = 0;
         for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), playerId, this.getSourceId(), game)) {
-            int cmc = creature.getConvertedManaCost();
+            int cmc = creature.getManaValue();
             if (cmc > maxCMC) {
                 maxCMC = cmc;
             }
@@ -91,7 +91,7 @@ public class EmergeAbility extends SpellAbility {
             if (controller.choose(Outcome.Sacrifice, target, this.getSourceId(), game)) {
                 Permanent creature = game.getPermanent(target.getFirstTarget());
                 if (creature != null) {
-                    CardUtil.reduceCost(this, creature.getConvertedManaCost());
+                    CardUtil.reduceCost(this, creature.getManaValue());
                     if (super.activate(game, false)) {
                         if (creature.sacrifice(this, game)) {
                             return true;
@@ -117,6 +117,6 @@ public class EmergeAbility extends SpellAbility {
 
     @Override
     public String getRule() {
-        return "Emerge " + emergeCost.getText() + " <i>(You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's converted mana cost.)</i>";
+        return "Emerge " + emergeCost.getText() + " <i>(You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)</i>";
     }
 }

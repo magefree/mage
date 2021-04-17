@@ -14,7 +14,7 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 
 /**
  * @author TheElk801
@@ -25,7 +25,7 @@ public final class ThryxTheSuddenStorm extends CardImpl {
     private static final FilterSpell filter2 = new FilterSpell();
 
     static {
-        Predicate predicate = new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 4);
+        Predicate predicate = new ManaValuePredicate(ComparisonType.MORE_THAN, 4);
         filter.add(predicate);
         filter2.add(predicate);
     }
@@ -47,7 +47,7 @@ public final class ThryxTheSuddenStorm extends CardImpl {
 
         // Spells you cast with converted mana cost 5 or greater cost {1} less to cast and can't be countered.
         Ability ability = new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)
-                .setText("spells you cast with converted mana cost 5 or greater cost {1} less to cast"));
+                .setText("spells you cast with mana value 5 or greater cost {1} less to cast"));
         ability.addEffect(new CantBeCounteredControlledEffect(
                 filter2, null, Duration.WhileOnBattlefield
         ).setText("and can't be countered"));

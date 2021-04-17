@@ -47,9 +47,9 @@ class ProhibitEffect extends OneShotEffect {
 
     ProhibitEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Counter target spell if its converted mana cost "
+        this.staticText = "Counter target spell if its mana value "
                 + "is 2 or less. if this spell was kicked, counter that "
-                + "spell if its converted mana cost is 4 or less instead.";
+                + "spell if its mana value is 4 or less instead.";
     }
 
     ProhibitEffect(final ProhibitEffect effect) {
@@ -67,7 +67,7 @@ class ProhibitEffect extends OneShotEffect {
         if (controller != null) {
             Spell targetSpell = game.getSpell(this.getTargetPointer().getFirst(game, source));
             if (targetSpell != null) {
-                int cmc = targetSpell.getConvertedManaCost();
+                int cmc = targetSpell.getManaValue();
                 if (cmc <= 2
                         || (KickedCondition.instance.apply(game, source) && cmc <= 4)) {
                     game.getStack().counter(targetSpell.getId(), source, game);

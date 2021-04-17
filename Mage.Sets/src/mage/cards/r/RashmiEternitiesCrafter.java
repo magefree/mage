@@ -78,7 +78,7 @@ class RashmiEternitiesCrafterTriggeredAbility extends SpellCastControllerTrigger
                     Spell spell = game.getStack().getSpell(event.getTargetId());
                     if (spell != null) {
                         for (Effect effect : getEffects()) {
-                            effect.setValue("RashmiEternitiesCrafterCMC", spell.getConvertedManaCost());
+                            effect.setValue("RashmiEternitiesCrafterCMC", spell.getManaValue());
                         }
                         return true;
                     }
@@ -102,7 +102,7 @@ class RashmiEternitiesCrafterEffect extends OneShotEffect {
     RashmiEternitiesCrafterEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "reveal the top card of your library. If it's a nonland"
-                + " card with converted mana cost less than that spell's, you may "
+                + " card with mana value less than that spell's, you may "
                 + "cast it without paying its mana cost. If you don't cast the "
                 + "revealed card, put it into your hand";
     }
@@ -130,7 +130,7 @@ class RashmiEternitiesCrafterEffect extends OneShotEffect {
                 }
                 Object cmcObject = this.getValue("RashmiEternitiesCrafterCMC");
                 if (cmcObject != null
-                        && card.getConvertedManaCost() < (int) cmcObject
+                        && card.getManaValue() < (int) cmcObject
                         && controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName()
                                 + " without paying its mana cost?", source, game)) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);

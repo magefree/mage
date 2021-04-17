@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -20,11 +20,11 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class TrophyMage extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("an artifact card with converted mana cost 3");
+    private static final FilterCard filter = new FilterCard("an artifact card with mana value 3");
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, 3));
     }
 
     public TrophyMage(UUID ownerId, CardSetInfo setInfo) {

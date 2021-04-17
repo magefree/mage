@@ -18,7 +18,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -28,11 +28,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class CateranOverlord extends CardImpl {
 
-    private static final FilterPermanentCard filter = new FilterPermanentCard("Mercenary permanent card with converted mana cost 6 or less");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("Mercenary permanent card with mana value 6 or less");
 
     static {
         filter.add(SubType.MERCENARY.getPredicate());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 7));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 7));
     }
 
     public CateranOverlord(UUID ownerId, CardSetInfo setInfo) {

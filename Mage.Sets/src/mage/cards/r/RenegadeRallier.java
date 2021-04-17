@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.watchers.common.RevoltWatcher;
 
@@ -25,10 +25,10 @@ import mage.watchers.common.RevoltWatcher;
  */
 public final class RenegadeRallier extends CardImpl {
 
-    private static final FilterPermanentCard filter = new FilterPermanentCard("permanent card with converted mana cost 2 or less from your graveyard");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("permanent card with mana value 2 or less from your graveyard");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public RenegadeRallier(UUID ownerId, CardSetInfo setInfo) {
@@ -44,7 +44,7 @@ public final class RenegadeRallier extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), false), RevoltCondition.instance,
                 "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
-                + " the battlefield this turn, return target permanent card with converted mana cost 2 or less from your graveyard to your battlefield.");
+                + " the battlefield this turn, return target permanent card with mana value 2 or less from your graveyard to your battlefield.");
         ability.setAbilityWord(AbilityWord.REVOLT);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.addWatcher(new RevoltWatcher());

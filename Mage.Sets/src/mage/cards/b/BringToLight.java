@@ -14,7 +14,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -70,7 +70,7 @@ class BringToLightEffect extends OneShotEffect {
                     + "cost less than or equal to " + numberColors);
             filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
                     CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, numberColors + 1));
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, numberColors + 1));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             controller.searchLibrary(target, source, game);
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);

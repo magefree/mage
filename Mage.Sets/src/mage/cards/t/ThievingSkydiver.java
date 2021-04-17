@@ -15,7 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -51,7 +51,7 @@ public final class ThievingSkydiver extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.Custom), false),
                 KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, " +
-                "gain control of target artifact with converted mana cost X or less. " +
+                "gain control of target artifact with mana value X or less. " +
                 "If that artifact is an Equipment, attach it to {this}."
         );
         ability.addEffect(new ThievingSkydiverEffect());
@@ -76,9 +76,9 @@ enum ThievingSkydiverAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         int xValue = GetKickerXValue.instance.calculate(game, ability, null);
         FilterPermanent filter = new FilterArtifactPermanent(
-                "artifact with converted mana cost " + xValue + " or less"
+                "artifact with mana value " + xValue + " or less"
         );
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         ability.getTargets().clear();
         ability.addTarget(new TargetPermanent(filter));
     }

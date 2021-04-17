@@ -44,7 +44,7 @@ public final class PureReflection extends CardImpl {
 
         public PureReflectionEffect() {
             super(Outcome.Benefit);
-            staticText = "destroy all Reflections. Then that player creates an X/X white Reflection creature token, where X is the converted mana cost of that spell.";
+            staticText = "destroy all Reflections. Then that player creates an X/X white Reflection creature token, where X is the mana value of that spell.";
         }
 
         public PureReflectionEffect(PureReflectionEffect effect) {
@@ -74,7 +74,7 @@ public final class PureReflection extends CardImpl {
             game.getState().processAction(game);
             
             // Then that player creates an X/X white Reflection creature token, where X is the converted mana cost of that spell.
-            ReflectionPureToken token = new ReflectionPureToken(spell.getConvertedManaCost());
+            ReflectionPureToken token = new ReflectionPureToken(spell.getManaValue());
             token.putOntoBattlefield(1, game, source, spell.getControllerId());
 
             return true;

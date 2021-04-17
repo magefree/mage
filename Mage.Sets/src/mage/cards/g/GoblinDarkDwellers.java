@@ -19,7 +19,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -34,10 +34,10 @@ import mage.target.targetpointer.FixedTarget;
 public final class GoblinDarkDwellers extends CardImpl {
 
     private static final FilterInstantOrSorceryCard filter
-            = new FilterInstantOrSorceryCard("instant or sorcery card with converted mana cost 3 or less");
+            = new FilterInstantOrSorceryCard("instant or sorcery card with mana value 3 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public GoblinDarkDwellers(UUID ownerId, CardSetInfo setInfo) {
@@ -71,7 +71,7 @@ class GoblinDarkDwellersEffect extends OneShotEffect {
     GoblinDarkDwellersEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast target instant or sorcery card with "
-                + "converted mana cost 3 or less from your graveyard without paying its mana cost. "
+                + "mana value 3 or less from your graveyard without paying its mana cost. "
                 + "If that card would be put into your graveyard this turn, exile it instead";
     }
 

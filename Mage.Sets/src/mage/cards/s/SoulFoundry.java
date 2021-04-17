@@ -68,7 +68,7 @@ enum SoulFoundryAdjuster implements CostAdjuster {
                 Card imprinted = game.getCard(sourcePermanent.getImprinted().get(0));
                 if (imprinted != null) {
                     ability.getManaCostsToPay().clear();
-                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getConvertedManaCost()));
+                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaValue()));
                 }
             }
         }
@@ -134,7 +134,7 @@ class SoulFoundryEffect extends OneShotEffect {
 
     SoulFoundryEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Create a token that's a copy of the exiled card. X is the converted mana cost of that card";
+        this.staticText = "Create a token that's a copy of the exiled card. X is the mana value of that card";
     }
 
     private SoulFoundryEffect(final SoulFoundryEffect effect) {

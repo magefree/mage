@@ -16,7 +16,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -56,7 +56,7 @@ class RallyTheAncestorsEffect extends OneShotEffect {
 
     RallyTheAncestorsEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Return each creature card with converted mana cost X or less from your graveyard to the battlefield. Exile those creatures at the beginning of your next upkeep";
+        this.staticText = "Return each creature card with mana value X or less from your graveyard to the battlefield. Exile those creatures at the beginning of your next upkeep";
     }
 
     RallyTheAncestorsEffect(final RallyTheAncestorsEffect effect) {
@@ -74,7 +74,7 @@ class RallyTheAncestorsEffect extends OneShotEffect {
         if (player != null) {
             int xValue = source.getManaCostsToPay().getX();
             FilterCreatureCard filter = new FilterCreatureCard();
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
             Set<Card> cards = player.getGraveyard().getCards(filter, game);
             player.moveCards(cards, Zone.BATTLEFIELD, source, game);
             List<Permanent> toExile = new ArrayList<>(cards.size());

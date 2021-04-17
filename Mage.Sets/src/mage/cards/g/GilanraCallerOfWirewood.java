@@ -93,7 +93,7 @@ class GilanraCallerOfWirewoodTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && spell.getConvertedManaCost() >= 6;
+        return spell != null && spell.getManaValue() >= 6;
     }
 
     @Override
@@ -114,6 +114,6 @@ class GilanraCallerOfWirewoodTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When you spend this mana to cast a spell with converted mana cost 6 or greater, draw a card.";
+        return "When you spend this mana to cast a spell with mana value 6 or greater, draw a card.";
     }
 }

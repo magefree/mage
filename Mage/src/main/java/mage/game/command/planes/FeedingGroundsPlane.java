@@ -10,7 +10,7 @@ import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
+import mage.abilities.dynamicvalue.common.TargetManaValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -37,7 +37,7 @@ import mage.watchers.common.PlanarRollWatcher;
 public class FeedingGroundsPlane extends Plane {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
-    private static final String rule = "put X +1/+1 counters on target creature, where X is that creature's converted mana cost";
+    private static final String rule = "put X +1/+1 counters on target creature, where X is that creature's mana value";
 
     public FeedingGroundsPlane() {
         this.setPlaneType(Planes.PLANE_FEEDING_GROUNDS);
@@ -48,7 +48,7 @@ public class FeedingGroundsPlane extends Plane {
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, target red or green creature gets X +1/+1 counters
-        Effect chaosEffect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(), TargetConvertedManaCost.instance);
+        Effect chaosEffect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(), TargetManaValue.instance);
         Target chaosTarget = new TargetCreaturePermanent(1, 1, filter, false);
 
         List<Effect> chaosEffects = new ArrayList<>();

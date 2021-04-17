@@ -49,7 +49,7 @@ class SinProdderEffect extends OneShotEffect {
     public SinProdderEffect() {
         super(Outcome.DrawCard);
         this.staticText = "reveal the top card of your library. Any opponent may have you put that card into your graveyard. If a player does, "
-                + "{this} deals damage to that player equal to that card's converted mana cost. Otherwise, put that card into your hand";
+                + "{this} deals damage to that player equal to that card's mana value. Otherwise, put that card into your hand";
     }
 
     public SinProdderEffect(final SinProdderEffect effect) {
@@ -74,7 +74,7 @@ class SinProdderEffect extends OneShotEffect {
                     Player opponent = game.getPlayer(opponentUuid);
                     if (opponent != null && !putInGraveyard && opponent.chooseUse(Outcome.Damage, message, source, game)) {
                         putInGraveyard = true;
-                        opponent.damage(card.getConvertedManaCost(), source.getSourceId(), source, game);
+                        opponent.damage(card.getManaValue(), source.getSourceId(), source, game);
                         // 4/8/2016: Each opponent in turn order, starting with the one after you in turn order, may choose to have you put that card into your graveyard.
                         // Once a player does so, Sin Prodder deals damage equal to that card's converted mana cost to that player immediately
                         // and Sin Prodder's trigger has no further action.

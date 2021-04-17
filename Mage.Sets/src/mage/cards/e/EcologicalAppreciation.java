@@ -13,7 +13,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -75,7 +75,7 @@ class EcologicalAppreciationEffect extends OneShotEffect {
         }
         int xValue = source.getManaCostsToPay().getX();
         FilterCard filter = new FilterCreatureCard();
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         TargetCard targetCardsInLibrary = new TargetCardInLibrary(0, 4, filter) {
             @Override
             public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {

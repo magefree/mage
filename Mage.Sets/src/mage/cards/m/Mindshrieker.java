@@ -58,7 +58,7 @@ class MindshriekerEffect extends OneShotEffect {
     MindshriekerEffect() {
         super(Outcome.Detriment);
         staticText = "Target player mills a card. {this} gets +X/+X until end of turn, " +
-                "where X is the milled card's converted mana cost";
+                "where X is the milled card's mana value";
     }
 
     private MindshriekerEffect(final MindshriekerEffect effect) {
@@ -76,7 +76,7 @@ class MindshriekerEffect extends OneShotEffect {
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .mapToInt(MageObject::getConvertedManaCost)
+                .mapToInt(MageObject::getManaValue)
                 .sum();
         if (totalCMC > 0) {
             game.addEffect(new BoostSourceEffect(totalCMC, totalCMC, Duration.EndOfTurn), source);

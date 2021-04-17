@@ -17,7 +17,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -34,10 +34,10 @@ public final class GoblinEngineer extends CardImpl {
     private static final FilterControlledPermanent filter
             = new FilterControlledArtifactPermanent("an artifact");
     private static final FilterCard filter2
-            = new FilterArtifactCard("artifact card with converted mana cost 3 or less from your graveyard");
+            = new FilterArtifactCard("artifact card with mana value 3 or less from your graveyard");
 
     static {
-        filter2.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter2.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public GoblinEngineer(UUID ownerId, CardSetInfo setInfo) {

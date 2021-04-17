@@ -59,7 +59,7 @@ class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
 
     public AnimateArtifactContinuousEffect(Duration duration) {
         super(duration, Outcome.Benefit);
-        staticText = "As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost";
+        staticText = "As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its mana value";
     }
 
     public AnimateArtifactContinuousEffect(final AnimateArtifactContinuousEffect effect) {
@@ -80,8 +80,8 @@ class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
             if (permanent != null && !permanent.isCreature()) {
                 if (sublayer == SubLayer.NA) {
                     permanent.addCardType(CardType.CREATURE);
-                    permanent.getPower().setValue(permanent.getConvertedManaCost());
-                    permanent.getToughness().setValue(permanent.getConvertedManaCost());
+                    permanent.getPower().setValue(permanent.getManaValue());
+                    permanent.getToughness().setValue(permanent.getManaValue());
                 }
             }
             return true;

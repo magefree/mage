@@ -49,7 +49,7 @@ public final class RatchetBomb extends CardImpl {
 
         public RatchetBombEffect() {
             super(Outcome.DestroyPermanent);
-            staticText = "Destroy each nonland permanent with converted mana cost equal to the number of charge counters on {this}";
+            staticText = "Destroy each nonland permanent with mana value equal to the number of charge counters on {this}";
         }
 
         public RatchetBombEffect(final RatchetBombEffect effect) {
@@ -68,7 +68,7 @@ public final class RatchetBomb extends CardImpl {
 
             int count = p.getCounters(game).getCount(CounterType.CHARGE);
             for (Permanent perm: game.getBattlefield().getAllActivePermanents()) {
-                if (perm.getConvertedManaCost() == count && !(perm.isLand())) {
+                if (perm.getManaValue() == count && !(perm.isLand())) {
                     perm.destroy(source, game, false);
                 }
             }

@@ -2,7 +2,7 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
+import mage.abilities.dynamicvalue.common.HighestManaValueCount;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,8 +19,8 @@ public final class RewardTheFaithful extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // Any number of target players each gain life equal to the highest converted mana cost among permanents you control.
-        this.getSpellAbility().addEffect(new GainLifeTargetEffect(new HighestConvertedManaCostValue())
-                .setText("Any number of target players each gain life equal to the highest converted mana cost among permanents you control."));
+        this.getSpellAbility().addEffect(new GainLifeTargetEffect(new HighestManaValueCount())
+                .setText("Any number of target players each gain life equal to the highest mana value among permanents you control."));
         this.getSpellAbility().addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
     }
 

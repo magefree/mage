@@ -17,7 +17,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -55,7 +55,7 @@ class HammerMageEffect extends  OneShotEffect {
 
     public HammerMageEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Destroy all artifacts with converted mana cost X or less";
+        staticText = "Destroy all artifacts with mana value X or less";
     }
 
     public HammerMageEffect(final HammerMageEffect effect) {
@@ -70,7 +70,7 @@ class HammerMageEffect extends  OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterArtifactPermanent filter = new FilterArtifactPermanent();
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
         for(Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             permanent.destroy(source, game, false);
         }

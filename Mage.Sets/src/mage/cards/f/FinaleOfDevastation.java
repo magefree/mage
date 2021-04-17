@@ -10,7 +10,7 @@ import mage.game.Game;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.constants.CardType;
-import mage.abilities.effects.common.search.SearchLibraryGraveyardWithLessCMCPutIntoPlay;
+import mage.abilities.effects.common.search.SearchLibraryGraveyardWithLessMVPutIntoPlay;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -34,7 +34,7 @@ public final class FinaleOfDevastation extends CardImpl {
     public FinaleOfDevastation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
         // Search your library and/or graveyard for a creature card with converted mana cost X or less and put it onto the battlefield. If you search your library this way, shuffle it. 
-        this.getSpellAbility().addEffect(new SearchLibraryGraveyardWithLessCMCPutIntoPlay(filter));
+        this.getSpellAbility().addEffect(new SearchLibraryGraveyardWithLessMVPutIntoPlay(filter));
         // If X is 10 or more, creatures you control get +X/+X and gain haste until end of turn.
         this.getSpellAbility().addEffect(new FinaleOfDevastationEffect());
     }

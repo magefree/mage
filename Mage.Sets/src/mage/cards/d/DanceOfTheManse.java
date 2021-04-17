@@ -12,7 +12,7 @@ import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -55,7 +55,7 @@ enum DanceOfTheManseAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         int xValue = ability.getManaCostsToPay().getX();
         FilterCard filter = new FilterCard("artifact and/or non-Aura enchantment cards " +
-                "each with converted mana cost " + xValue + " or less from your graveyard");
+                "each with mana value " + xValue + " or less from your graveyard");
         filter.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),
                 Predicates.and(
@@ -63,7 +63,7 @@ enum DanceOfTheManseAdjuster implements TargetAdjuster {
                         Predicates.not(SubType.AURA.getPredicate())
                 )
         ));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         ability.getTargets().clear();
         ability.addTarget(new TargetCardInYourGraveyard(0, xValue, filter));
     }
@@ -74,7 +74,7 @@ class DanceOfTheManseEffect extends OneShotEffect {
     DanceOfTheManseEffect() {
         super(Outcome.Benefit);
         staticText = "Return up to X target artifact and/or non-Aura enchantment cards " +
-                "each with converted mana cost X or less from your graveyard to the battlefield. " +
+                "each with mana value X or less from your graveyard to the battlefield. " +
                 "If X is 6 or more, those permanents are 4/4 creatures in addition to their other types.";
     }
 

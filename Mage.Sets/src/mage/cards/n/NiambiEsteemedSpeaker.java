@@ -84,7 +84,7 @@ class NiambiEsteemedSpeakerEffect extends OneShotEffect {
 
     NiambiEsteemedSpeakerEffect() {
         super(Outcome.Benefit);
-        staticText = "If you do, you gain life equal to that creature's converted mana cost.";
+        staticText = "If you do, you gain life equal to that creature's mana value.";
     }
 
     private NiambiEsteemedSpeakerEffect(final NiambiEsteemedSpeakerEffect effect) {
@@ -103,7 +103,7 @@ class NiambiEsteemedSpeakerEffect extends OneShotEffect {
         if (permanent == null || player == null) {
             return false;
         }
-        return permanent.getConvertedManaCost() > 0
-                && player.gainLife(permanent.getConvertedManaCost(), game, source) > 0;
+        return permanent.getManaValue() > 0
+                && player.gainLife(permanent.getManaValue(), game, source) > 0;
     }
 }

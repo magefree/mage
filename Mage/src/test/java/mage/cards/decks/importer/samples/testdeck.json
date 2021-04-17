@@ -18,7 +18,7 @@
           "R",
           "U"
         ],
-        "convertedManaCost": 2.0,
+        "manaValue": 2.0,
         "count": 4,
         "edhrecRank": 626,
         "flavorText": "\"Result 752: Rapid mass redistribution.\n\"Result 753: Calamitous reverse synthesis.\n\"Result 754: Acute disarrayment.\"\n—Izzet research notes",
@@ -165,7 +165,7 @@
           },
           {
             "date": "2018-10-05",
-            "text": "To determine the total cost of a spell, start with the mana cost or alternative cost you’re paying, add any cost increases, then apply any cost reductions. The converted mana cost of the spell remains unchanged, no matter what the total cost to cast it was."
+            "text": "To determine the total cost of a spell, start with the mana cost or alternative cost you’re paying, add any cost increases, then apply any cost reductions. The mana value of the spell remains unchanged, no matter what the total cost to cast it was."
           },
           {
             "date": "2018-10-05",
@@ -203,7 +203,7 @@
           "R",
           "U"
         ],
-        "convertedManaCost": 4.0,
+        "manaValue": 4.0,
         "count": 4,
         "edhrecRank": 2662,
         "foreignData": [
@@ -368,7 +368,7 @@
         "colors": [
           "U"
         ],
-        "convertedManaCost": 4.0,
+        "manaValue": 4.0,
         "count": 2,
         "edhrecRank": 1050,
         "flavorText": "Rumors float through the city like crows, alighting on citizens seemingly at random.",
@@ -536,7 +536,7 @@
         "colors": [
           "R"
         ],
-        "convertedManaCost": 4.0,
+        "manaValue": 4.0,
         "count": 1,
         "edhrecRank": 10215,
         "flavorText": "Some storms never blow over.",
@@ -708,7 +708,7 @@
           "R",
           "U"
         ],
-        "convertedManaCost": 6.0,
+        "manaValue": 6.0,
         "count": 2,
         "edhrecRank": 536,
         "foreignData": [
@@ -890,7 +890,7 @@
         "colors": [
           "U"
         ],
-        "convertedManaCost": 2.0,
+        "manaValue": 2.0,
         "count": 4,
         "edhrecRank": 1976,
         "flavorText": "While other pirates prowl for treasure, Captain Parrish plunders secrets.",
@@ -1047,7 +1047,7 @@
         "colors": [
           "R"
         ],
-        "convertedManaCost": 2.0,
+        "manaValue": 2.0,
         "count": 4,
         "edhrecRank": 6242,
         "flavorText": "\"Commander, we caught the Dimir spy and took her ashes into custody.\"\n—Kramm, Wojek security officer",
@@ -1212,7 +1212,7 @@
           "R",
           "U"
         ],
-        "convertedManaCost": 3.0,
+        "manaValue": 3.0,
         "count": 1,
         "edhrecRank": 4333,
         "foreignData": [
@@ -1387,7 +1387,7 @@
         "colors": [
           "U"
         ],
-        "convertedManaCost": 1.0,
+        "manaValue": 1.0,
         "count": 4,
         "edhrecRank": 280,
         "flavorText": "The crystal pulsed with the power of Teferi's planeswalker spark. Had Jhoira given him a blessing or a curse?",
@@ -1559,7 +1559,7 @@
         "colors": [
           "U"
         ],
-        "convertedManaCost": 2.0,
+        "manaValue": 2.0,
         "count": 4,
         "edhrecRank": 3422,
         "flavorText": "Genius is finding the edge of what's possible, then jumping over it.",
@@ -1738,7 +1738,7 @@
         "colors": [
           "R"
         ],
-        "convertedManaCost": 1.0,
+        "manaValue": 1.0,
         "count": 4,
         "edhrecRank": 3135,
         "flavorText": "The tools of invention became the weapons of revolution.",
@@ -1920,7 +1920,7 @@
         "colors": [
           "U"
         ],
-        "convertedManaCost": 1.0,
+        "manaValue": 1.0,
         "count": 2,
         "edhrecRank": 5887,
         "flavorText": "\"Seeing the river is not the same as seeing the fish.\"",
@@ -2077,7 +2077,7 @@
         "colors": [
           "U"
         ],
-        "convertedManaCost": 2.0,
+        "manaValue": 2.0,
         "count": 1,
         "edhrecRank": 1693,
         "foreignData": [
@@ -2229,7 +2229,7 @@
         "colors": [
           "U"
         ],
-        "convertedManaCost": 5.0,
+        "manaValue": 5.0,
         "count": 1,
         "edhrecRank": 1853,
         "foreignData": [
@@ -2433,7 +2433,7 @@
           "U"
         ],
         "colors": [],
-        "convertedManaCost": 0.0,
+        "manaValue": 0.0,
         "count": 3,
         "edhrecRank": 119,
         "flavorText": "\"We have inherited the mysteries of the Thran, but few of the answers.\"\n—Jhoira",
@@ -2588,7 +2588,7 @@
           "U"
         ],
         "colors": [],
-        "convertedManaCost": 0.0,
+        "manaValue": 0.0,
         "count": 4,
         "edhrecRank": 312,
         "flavorText": "Every laboratory buzzes with new experiments, each a piece of Ral's ambitious project.",
@@ -2685,7 +2685,7 @@
           "U"
         ],
         "colors": [],
-        "convertedManaCost": 0.0,
+        "manaValue": 0.0,
         "count": 8,
         "foreignData": [],
         "frameVersion": "2015",
@@ -2931,7 +2931,7 @@
           "R"
         ],
         "colors": [],
-        "convertedManaCost": 0.0,
+        "manaValue": 0.0,
         "count": 7,
         "foreignData": [],
         "frameVersion": "2015",
@@ -3187,7 +3187,7 @@
         "colors": [
           "U"
         ],
-        "convertedManaCost": 5.0,
+        "manaValue": 5.0,
         "count": 1,
         "edhrecRank": 1853,
         "foreignData": [
@@ -3394,7 +3394,7 @@
           "R",
           "U"
         ],
-        "convertedManaCost": 3.0,
+        "manaValue": 3.0,
         "count": 1,
         "edhrecRank": 4333,
         "foreignData": [
@@ -3569,7 +3569,7 @@
         "colors": [
           "U"
         ],
-        "convertedManaCost": 2.0,
+        "manaValue": 2.0,
         "count": 3,
         "edhrecRank": 56,
         "flavorText": "\"As one, nature lifts its voice to tell you this: 'No.'\"",
@@ -3757,7 +3757,7 @@
         "colors": [
           "U"
         ],
-        "convertedManaCost": 2.0,
+        "manaValue": 2.0,
         "count": 3,
         "edhrecRank": 4848,
         "flavorText": "The stronger the will, the more bewitching the song.",
@@ -3876,7 +3876,7 @@
         "manaCost": "{X}{U}{U}",
         "name": "Entrancing Melody",
         "number": "55",
-        "originalText": "Gain control of target creature with converted mana cost X.",
+        "originalText": "Gain control of target creature with mana value X.",
         "originalType": "Sorcery",
         "printings": [
           "PXLN",
@@ -3906,7 +3906,7 @@
         "setCode": "XLN",
         "subtypes": [],
         "supertypes": [],
-        "text": "Gain control of target creature with converted mana cost X.",
+        "text": "Gain control of target creature with mana value X.",
         "type": "Sorcery",
         "types": [
           "Sorcery"
@@ -3927,7 +3927,7 @@
         "colors": [
           "R"
         ],
-        "convertedManaCost": 3.0,
+        "manaValue": 3.0,
         "count": 3,
         "edhrecRank": 5816,
         "flavorText": "Wary of the ferocious dinosaurs, the Legion of Dusk built up the walls of their fort—just in time for the pirates to burn them down.",
@@ -4083,7 +4083,7 @@
         "colors": [
           "R"
         ],
-        "convertedManaCost": 1.0,
+        "manaValue": 1.0,
         "count": 2,
         "edhrecRank": 8679,
         "flavorText": "Sometimes Shivan dragons toy with their food. Other times they just cook it.",
@@ -4241,7 +4241,7 @@
         "colors": [
           "U"
         ],
-        "convertedManaCost": 2.0,
+        "manaValue": 2.0,
         "count": 2,
         "edhrecRank": 893,
         "flavorText": "\"Laws apply only to those who lack the vision to see past them.\"",
@@ -4363,7 +4363,7 @@
         "manaCost": "{1}{U}",
         "name": "Disdainful Stroke",
         "number": "37",
-        "originalText": "Counter target spell with converted mana cost 4 or greater.",
+        "originalText": "Counter target spell with mana value 4 or greater.",
         "originalType": "Instant",
         "printings": [
           "C16",
@@ -4383,17 +4383,17 @@
         "rulings": [
           {
             "date": "2014-09-20",
-            "text": "A face-down spell has converted mana cost 0 and can’t be targeted by Disdainful Stroke."
+            "text": "A face-down spell has mana value 0 and can’t be targeted by Disdainful Stroke."
           },
           {
             "date": "2018-10-05",
-            "text": "If a spell has {X} in its mana cost, include the value chosen for that X when determining the converted mana cost of that spell."
+            "text": "If a spell has {X} in its mana cost, include the value chosen for that X when determining the mana value of that spell."
           }
         ],
         "setCode": "GRN",
         "subtypes": [],
         "supertypes": [],
-        "text": "Counter target spell with converted mana cost 4 or greater.",
+        "text": "Counter target spell with mana value 4 or greater.",
         "type": "Instant",
         "types": [
           "Instant"

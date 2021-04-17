@@ -39,7 +39,7 @@ class MeltdownEffect extends OneShotEffect {
     
     MeltdownEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy each artifact with converted mana cost X or less";
+        this.staticText = "Destroy each artifact with mana value X or less";
     }
     
     MeltdownEffect(final MeltdownEffect effect) {
@@ -54,7 +54,7 @@ class MeltdownEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (permanent != null && permanent.isArtifact() && permanent.getConvertedManaCost() <= source.getManaCostsToPay().getX()) {
+            if (permanent != null && permanent.isArtifact() && permanent.getManaValue() <= source.getManaCostsToPay().getX()) {
                 permanent.destroy(source, game, false);
             }
         }

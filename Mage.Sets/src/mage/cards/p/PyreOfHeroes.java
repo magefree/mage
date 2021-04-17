@@ -16,7 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.mageobject.SharesCreatureTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -60,8 +60,8 @@ class PyreOfHeroesEffect extends OneShotEffect {
 
     PyreOfHeroesEffect() {
         super(Outcome.Benefit);
-        staticText = "Search your library for a creature card that shares a creature type with the sacrificed creature and has converted mana cost equal to 1 " +
-                "plus that creature's converted mana cost. Put that card " +
+        staticText = "Search your library for a creature card that shares a creature type with the sacrificed creature and has mana value equal to 1 " +
+                "plus that creature's mana value. Put that card " +
                 "onto the battlefield, then shuffle your library";
     }
 
@@ -85,9 +85,9 @@ class PyreOfHeroesEffect extends OneShotEffect {
         if (sacrificedPermanent == null || controller == null) {
             return false;
         }
-        int newConvertedCost = sacrificedPermanent.getConvertedManaCost() + 1;
-        FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, newConvertedCost));
+        int newConvertedCost = sacrificedPermanent.getManaValue() + 1;
+        FilterCard filter = new FilterCard("creature card with mana value " + newConvertedCost);
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, newConvertedCost));
         filter.add(CardType.CREATURE.getPredicate());
         filter.add(new SharesCreatureTypePredicate(sacrificedPermanent));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);

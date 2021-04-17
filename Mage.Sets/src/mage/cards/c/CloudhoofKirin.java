@@ -54,7 +54,7 @@ class CloudhoofKirinEffect extends OneShotEffect {
 
     CloudhoofKirinEffect() {
         super(Outcome.Detriment);
-        this.staticText = "have target player mill X cards, where X is that spell's converted mana cost";
+        this.staticText = "have target player mill X cards, where X is that spell's mana value";
     }
 
     private CloudhoofKirinEffect(final CloudhoofKirinEffect effect) {
@@ -76,7 +76,7 @@ class CloudhoofKirinEffect extends OneShotEffect {
                     targetPlayer = game.getPlayer(target.getFirstTarget());
                 }
             }
-            int cmc = spell.getConvertedManaCost();
+            int cmc = spell.getManaValue();
             if (targetPlayer != null && cmc > 0) {
                 targetPlayer.millCards(cmc, source, game);
                 return true;

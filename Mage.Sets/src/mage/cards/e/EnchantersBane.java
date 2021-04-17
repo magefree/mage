@@ -46,7 +46,7 @@ class EnchantersBaneEffect extends OneShotEffect {
     public EnchantersBaneEffect() {
         super(Outcome.Benefit);
         this.staticText = "target enchantment deals damage equal to "
-                + "its converted mana cost to its controller "
+                + "its mana value to its controller "
                 + "unless that player sacrifices it";
     }
 
@@ -72,7 +72,7 @@ class EnchantersBaneEffect extends OneShotEffect {
         if (player.chooseUse(Outcome.GainLife, "Sacrifice " + permanent.getLogName() + "?", source, game)) {
             permanent.sacrifice(source, game);
         } else {
-            player.damage(permanent.getConvertedManaCost(), permanent.getId(), source, game);
+            player.damage(permanent.getManaValue(), permanent.getId(), source, game);
         }
         return true;
     }

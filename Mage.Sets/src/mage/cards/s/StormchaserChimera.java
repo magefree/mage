@@ -59,7 +59,7 @@ class StormchaserChimeraEffect extends OneShotEffect {
 
     public StormchaserChimeraEffect() {
         super(Outcome.Benefit);
-        this.staticText = ", then reveal the top card of your library. Stormchaser Chimera gets +X/+0 until end of turn, where X is that card's converted mana cost";
+        this.staticText = ", then reveal the top card of your library. Stormchaser Chimera gets +X/+0 until end of turn, where X is that card's mana value";
     }
 
     public StormchaserChimeraEffect(final StormchaserChimeraEffect effect) {
@@ -79,7 +79,7 @@ class StormchaserChimeraEffect extends OneShotEffect {
             player.revealCards(sourcePermanent.getName(), cards, game);
 
             if (card != null) {
-                game.addEffect(new BoostSourceEffect(card.getConvertedManaCost(), 0, Duration.EndOfTurn), source);
+                game.addEffect(new BoostSourceEffect(card.getManaValue(), 0, Duration.EndOfTurn), source);
                 return true;
             }
         }

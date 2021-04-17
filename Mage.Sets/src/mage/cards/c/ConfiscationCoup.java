@@ -56,7 +56,7 @@ class ConfiscationCoupEffect extends OneShotEffect {
 
     public ConfiscationCoupEffect() {
         super(Outcome.GainControl);
-        this.staticText = "Choose target creature or artifact. You get {E}{E}{E}{E}, then you may pay an amount of {E} equal to that permanent's converted mana cost. If you do, gain control of it";
+        this.staticText = "Choose target creature or artifact. You get {E}{E}{E}{E}, then you may pay an amount of {E} equal to that permanent's mana value. If you do, gain control of it";
     }
 
     public ConfiscationCoupEffect(final ConfiscationCoupEffect effect) {
@@ -75,11 +75,11 @@ class ConfiscationCoupEffect extends OneShotEffect {
             new GetEnergyCountersControllerEffect(4).apply(game, source);
             Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetPermanent != null) {
-                Cost cost = new PayEnergyCost(targetPermanent.getManaCost().convertedManaCost());
+                Cost cost = new PayEnergyCost(targetPermanent.getManaCost().manaValue());
                 if (cost.canPay(source, source, source.getControllerId(), game)) {
-                    int convertedManaCost = targetPermanent.getManaCost().convertedManaCost();
-                    StringBuilder energy = new StringBuilder(convertedManaCost);
-                    for (int i = 0; i < convertedManaCost; i++) {
+                    int manaValue = targetPermanent.getManaCost().manaValue();
+                    StringBuilder energy = new StringBuilder(manaValue);
+                    for (int i = 0; i < manaValue; i++) {
                         energy.append("{E}");
                     }
                     if (controller.chooseUse(outcome, "Pay " + energy + " to get control of " + targetPermanent.getLogName() + '?', source, game)) {

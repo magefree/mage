@@ -51,7 +51,7 @@ public final class VariableManaCost extends ManaCostImpl implements VariableCost
     }
 
     @Override
-    public int convertedManaCost() {
+    public int manaValue() {
         return 0;
     }
 

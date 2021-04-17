@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
+import mage.abilities.dynamicvalue.common.TargetManaValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class DeathMutation extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         // create X 1/1 green Saproling creature tokens, where X is that creature's converted mana cost.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetConvertedManaCost.instance));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetManaValue.instance));
     }
 
     private DeathMutation(final DeathMutation card) {

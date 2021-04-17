@@ -58,7 +58,7 @@ class LagonnaBandStorytellerEffect extends OneShotEffect {
     LagonnaBandStorytellerEffect() {
         super(Outcome.Benefit);
         staticText = "put target enchantment card from your graveyard on top of your library. "
-                + "If you do, you gain life equal to its converted mana cost.";
+                + "If you do, you gain life equal to its mana value.";
     }
 
     private LagonnaBandStorytellerEffect(final LagonnaBandStorytellerEffect effect) {
@@ -80,7 +80,7 @@ class LagonnaBandStorytellerEffect extends OneShotEffect {
                 || game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
             return false;
         }
-        int cmc = card.getConvertedManaCost();
+        int cmc = card.getManaValue();
         if (controller.putCardsOnTopOfLibrary(new CardsImpl(card), game, source, false)) {
             controller.gainLife(cmc, game, source);
             return true;

@@ -58,7 +58,7 @@ public final class RazorHippogriff extends CardImpl {
 
         public RazorHippogriffGainLifeEffect() {
             super(Outcome.GainLife);
-            staticText = "you gain life equal to that card's converted mana cost.";
+            staticText = "you gain life equal to that card's mana value.";
         }
 
         public RazorHippogriffGainLifeEffect(final RazorHippogriffGainLifeEffect effect) {
@@ -79,7 +79,7 @@ public final class RazorHippogriff extends CardImpl {
                     card = (Card)game.getLastKnownInformation(source.getFirstTarget(), Zone.GRAVEYARD);
                 }
                 if (card != null) {
-                    player.gainLife(card.getConvertedManaCost(), game, source);
+                    player.gainLife(card.getManaValue(), game, source);
                 }
             }
             return true;

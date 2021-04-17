@@ -72,7 +72,7 @@ enum InfernoProjectValue implements DynamicValue {
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(MageObject::isInstantOrSorcery)
-                .mapToInt(MageObject::getConvertedManaCost)
+                .mapToInt(MageObject::getManaValue)
                 .sum();
     }
 

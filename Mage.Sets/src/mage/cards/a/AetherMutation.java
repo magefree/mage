@@ -2,7 +2,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
+import mage.abilities.dynamicvalue.common.TargetManaValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class AetherMutation extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // create X 1/1 green Saproling creature tokens, where X is that creature's converted mana cost.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetConvertedManaCost.instance));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetManaValue.instance));
     }
 
     private AetherMutation(final AetherMutation card) {

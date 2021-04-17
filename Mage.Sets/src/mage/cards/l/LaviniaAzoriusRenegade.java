@@ -16,7 +16,7 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -62,7 +62,7 @@ class LaviniaAzoriusRenegadeReplacementEffect extends ContinuousRuleModifyingEff
 
     LaviniaAzoriusRenegadeReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Each opponent can't cast noncreature spells with converted mana cost greater than the number of lands that player controls.";
+        staticText = "Each opponent can't cast noncreature spells with mana value greater than the number of lands that player controls.";
     }
 
     LaviniaAzoriusRenegadeReplacementEffect(final LaviniaAzoriusRenegadeReplacementEffect effect) {
@@ -73,7 +73,7 @@ class LaviniaAzoriusRenegadeReplacementEffect extends ContinuousRuleModifyingEff
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast noncreature spells with converted mana cost greater than " + getLandCount(source, event, game) + " (" + mageObject.getIdName() + ").";
+            return "You can't cast noncreature spells with mana value greater than " + getLandCount(source, event, game) + " (" + mageObject.getIdName() + ").";
         }
         return null;
     }
@@ -88,7 +88,7 @@ class LaviniaAzoriusRenegadeReplacementEffect extends ContinuousRuleModifyingEff
         if (game.getPlayer(source.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
             FilterCard filter = new FilterCard();
             filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, getLandCount(source, event, game)));
+            filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, getLandCount(source, event, game)));
 
             Card card = game.getCard(event.getSourceId());
             return card != null && filter.match(card, game);

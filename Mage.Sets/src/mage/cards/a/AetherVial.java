@@ -18,7 +18,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,7 +53,7 @@ class AetherVialEffect extends OneShotEffect {
 
     public AetherVialEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "You may put a creature card with converted mana cost equal to the number of charge counters on {this} from your hand onto the battlefield";
+        this.staticText = "You may put a creature card with mana value equal to the number of charge counters on {this} from your hand onto the battlefield";
     }
 
     public AetherVialEffect(final AetherVialEffect effect) {
@@ -76,8 +76,8 @@ class AetherVialEffect extends OneShotEffect {
         }
         int count = permanent.getCounters(game).getCount(CounterType.CHARGE);
 
-        FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost equal to " + count);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, count));
+        FilterCreatureCard filter = new FilterCreatureCard("creature card with mana value equal to " + count);
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, count));
         String choiceText = "Put a " + filter.getMessage() + " from your hand onto the battlefield?";
 
         Player controller = game.getPlayer(source.getControllerId());

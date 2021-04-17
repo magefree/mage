@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -19,10 +19,10 @@ import mage.target.TargetSpell;
  */
 public final class HorriblyAwry extends CardImpl {
 
-    private static final FilterCreatureSpell filter = new FilterCreatureSpell("creature spell with converted mana cost 4 or less");
+    private static final FilterCreatureSpell filter = new FilterCreatureSpell("creature spell with mana value 4 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public HorriblyAwry(UUID ownerId, CardSetInfo setInfo) {

@@ -91,13 +91,13 @@ class BattleOfFrostAndFireTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            return spell != null && spell.getConvertedManaCost() >= 5;
+            return spell != null && spell.getManaValue() >= 5;
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever you cast a spell with converted mana cost 5 or greater this turn, " + super.getRule();
+        return "Whenever you cast a spell with mana value 5 or greater this turn, " + super.getRule();
     }
 }

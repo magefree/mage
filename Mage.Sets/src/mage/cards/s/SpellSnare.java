@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -17,10 +17,10 @@ import mage.target.TargetSpell;
  */
 public final class SpellSnare extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 2");
+    private static final FilterSpell filter = new FilterSpell("spell with mana value 2");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, 2));
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, 2));
     }
 
     public SpellSnare(UUID ownerId, CardSetInfo setInfo) {

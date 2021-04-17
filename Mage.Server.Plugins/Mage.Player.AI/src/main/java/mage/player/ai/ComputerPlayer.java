@@ -1719,7 +1719,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         //TODO: improve this
         int xMin = min * multiplier;
         int xMax = (max == Integer.MAX_VALUE ? max : max * multiplier);
-        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
+        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
         if (numAvailable < 0) {
             numAvailable = 0;
         } else {

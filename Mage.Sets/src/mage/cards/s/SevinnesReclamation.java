@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -24,10 +24,10 @@ import java.util.UUID;
 public final class SevinnesReclamation extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterPermanentCard("permanent card with converted mana cost 3 or less from your graveyard");
+            = new FilterPermanentCard("permanent card with mana value 3 or less from your graveyard");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public SevinnesReclamation(UUID ownerId, CardSetInfo setInfo) {

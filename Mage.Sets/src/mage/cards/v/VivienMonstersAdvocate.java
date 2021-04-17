@@ -18,7 +18,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -142,9 +142,9 @@ class VivienMonstersAdvocateTriggeredAbility extends DelayedTriggeredAbility {
         Spell spell = game.getSpell(event.getTargetId());
         if (spell != null
                 && spell.isCreature()) {
-            int cmc = spell.getConvertedManaCost();
-            FilterCard filter = new FilterCreatureCard("creature card with converted mana cost less than " + cmc);
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, cmc));
+            int cmc = spell.getManaValue();
+            FilterCard filter = new FilterCreatureCard("creature card with mana value less than " + cmc);
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, cmc));
             this.getEffects().clear();
             this.getEffects().add(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)));
             return true;
@@ -160,7 +160,7 @@ class VivienMonstersAdvocateTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public String getRule() {
         return "When you cast your next creature spell this turn, "
-                + "search your library for a creature card with lesser converted mana cost, "
+                + "search your library for a creature card with lesser mana value, "
                 + "put it onto the battlefield, then shuffle your library.";
     }
 }

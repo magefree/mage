@@ -7,7 +7,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -18,10 +18,10 @@ import java.util.UUID;
 public final class EpicDownfall extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature with converted mana cost 3 or greater");
+            = new FilterCreaturePermanent("creature with mana value 3 or greater");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 2));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public EpicDownfall(UUID ownerId, CardSetInfo setInfo) {

@@ -129,7 +129,7 @@ class LukkaCoppercoatOutcastPolymorphEffect extends OneShotEffect {
     LukkaCoppercoatOutcastPolymorphEffect() {
         super(Outcome.Benefit);
         staticText = "Exile target creature you control, then reveal cards from the top of your library " +
-                "until you reveal a creature card with higher converted mana cost. " +
+                "until you reveal a creature card with higher mana value. " +
                 "Put that card onto the battlefield and the rest on the bottom of your library in a random order.";
     }
 
@@ -149,13 +149,13 @@ class LukkaCoppercoatOutcastPolymorphEffect extends OneShotEffect {
         if (permanent == null || player == null) {
             return false;
         }
-        int cmc = permanent.getConvertedManaCost();
+        int cmc = permanent.getManaValue();
         player.moveCards(permanent, Zone.EXILED, source, game);
         Card toBattlefield = null;
         Cards toReveal = new CardsImpl();
         for (Card card : player.getLibrary().getCards(game)) {
             toReveal.add(card);
-            if (card.isCreature() && card.getConvertedManaCost() > cmc) {
+            if (card.isCreature() && card.getManaValue() > cmc) {
                 toBattlefield = card;
                 break;
             }

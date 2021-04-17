@@ -21,7 +21,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
@@ -74,7 +74,7 @@ class NissaStewardOfElementsEffect extends OneShotEffect {
 
     public NissaStewardOfElementsEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "look at the top card of your library. If it's a land card or a creature card with converted mana cost less than or equal "
+        this.staticText = "look at the top card of your library. If it's a land card or a creature card with mana value less than or equal "
                 + "to the number of loyalty counters on {this}, you may put that card onto the battlefield";
     }
 
@@ -97,7 +97,7 @@ class NissaStewardOfElementsEffect extends OneShotEffect {
         FilterPermanentCard filter = new FilterPermanentCard();
         filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
                 CardType.LAND.getPredicate()));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, count));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, count));
         Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
             controller.lookAtCards(source, null, new CardsImpl(card), game);

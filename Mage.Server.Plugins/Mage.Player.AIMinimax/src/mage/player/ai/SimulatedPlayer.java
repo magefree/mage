@@ -105,7 +105,7 @@ public class SimulatedPlayer extends ComputerPlayer {
 
     //add a generic mana cost for each amount possible
     protected void simulateVariableCosts(Ability ability, Game game) {
-        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
+        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
         int start = 0;
         if (!(ability instanceof SpellAbility)) {
             //only use x=0 on spell abilities

@@ -20,7 +20,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
@@ -77,7 +77,7 @@ class FiendArtisanEffect extends OneShotEffect {
 
     FiendArtisanEffect() {
         super(Outcome.Benefit);
-        staticText = "search your library for a creature card with converted mana cost X or less, " +
+        staticText = "search your library for a creature card with mana value X or less, " +
                 "put it onto the battlefield, then shuffle your library";
     }
 
@@ -93,8 +93,8 @@ class FiendArtisanEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = source.getManaCostsToPay().getX();
-        FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue + " or less");
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)).apply(game, source);
     }
 }

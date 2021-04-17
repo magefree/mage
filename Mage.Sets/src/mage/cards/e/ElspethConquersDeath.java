@@ -16,7 +16,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -30,13 +30,13 @@ import mage.util.CardUtil;
 public final class ElspethConquersDeath extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterPermanent("permanent an opponent controls with converted mana cost 3 or greater");
+            = new FilterPermanent("permanent an opponent controls with mana value 3 or greater");
     private static final FilterCard filter2
             = new FilterCard("creature or planeswalker card from your graveyard");
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 2));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 2));
         filter2.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
                 CardType.PLANESWALKER.getPredicate()

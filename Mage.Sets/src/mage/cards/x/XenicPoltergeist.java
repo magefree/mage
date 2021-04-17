@@ -68,7 +68,7 @@ class XenicPoltergeistEffect extends ContinuousEffectImpl {
 
     public XenicPoltergeistEffect() {
         super(Duration.Custom, Outcome.BecomeCreature);
-        staticText = "Until your next upkeep, target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost";
+        staticText = "Until your next upkeep, target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value";
     }
 
     public XenicPoltergeistEffect(final XenicPoltergeistEffect effect) {
@@ -113,7 +113,7 @@ class XenicPoltergeistEffect extends ContinuousEffectImpl {
                     UUID permanentId = targetPointer.getFirst(game, source);
                     Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
                     if (permanent != null) {
-                        int manaCost = permanent.getConvertedManaCost();
+                        int manaCost = permanent.getManaValue();
                         permanent.getPower().setValue(manaCost);
                         permanent.getToughness().setValue(manaCost);
                     }

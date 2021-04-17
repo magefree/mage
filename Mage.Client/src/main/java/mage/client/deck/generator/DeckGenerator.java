@@ -191,7 +191,7 @@ public final class DeckGenerator {
             while (count < spellCount) {
                 Card card = cardPool.get(RandomUtil.nextInt(retrievedCount)).getMockCard();
                 if (genPool.isValidSpellCard(card)) {
-                    int cardCMC = card.getConvertedManaCost();
+                    int cardCMC = card.getManaValue();
                     for (DeckGeneratorCMC.CMC deckCMC : deckCMCs) {
                         if (cardCMC >= deckCMC.min && cardCMC <= deckCMC.max) {
                             int currentAmount = deckCMC.getAmount();

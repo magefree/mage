@@ -104,7 +104,7 @@ class PlarggDeanOfChaosEffect extends OneShotEffect {
     public PlarggDeanOfChaosEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "reveal cards from the top of your library until you reveal a "
-                + "nonlegendary, nonland card with converted mana cost 3 or less. "
+                + "nonlegendary, nonland card with mana value 3 or less. "
                 + "You may cast that card without paying its mana cost. Put all revealed "
                 + "cards not cast this way on the bottom of your library in a random order";
     }
@@ -122,7 +122,7 @@ class PlarggDeanOfChaosEffect extends OneShotEffect {
             Card eligibleCard = null;
             for (Card card : controller.getLibrary().getCards(game)) {
                 toReveal.add(card);
-                if (!card.isLand() && !card.isLegendary() && card.getConvertedManaCost() < 4) {
+                if (!card.isLand() && !card.isLegendary() && card.getManaValue() < 4) {
                     eligibleCard = card;
                     break;
                 }

@@ -154,7 +154,7 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
     @Override
     public boolean isCostless(GameEvent event, Ability source, Game game) {
         ManaCosts currentManaCosts = getManaCostToPay(event, source, game);
-        if (currentManaCosts != null && currentManaCosts.convertedManaCost() > 0) {
+        if (currentManaCosts != null && currentManaCosts.manaValue() > 0) {
             return false;
         }
         return getOtherCostToPay(event, source, game) == null;

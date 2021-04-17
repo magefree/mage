@@ -49,7 +49,7 @@ class WandOfIthEffect extends OneShotEffect {
 
     public WandOfIthEffect() {
         super(Outcome.Discard);
-        staticText = "Target player reveals a card at random from their hand. If it's a land card, that player discards it unless they pay 1 life. If it isn't a land card, the player discards it unless they pay life equal to its converted mana cost";
+        staticText = "Target player reveals a card at random from their hand. If it's a land card, that player discards it unless they pay 1 life. If it isn't a land card, the player discards it unless they pay life equal to its mana value";
     }
 
     public WandOfIthEffect(final WandOfIthEffect effect) {
@@ -66,7 +66,7 @@ class WandOfIthEffect extends OneShotEffect {
             if (card != null) {
                 revealed.add(card);
                 player.revealCards(sourcePermanent.getName(), revealed, game);
-                int lifeToPay = card.isLand() ? 1 : card.getConvertedManaCost();
+                int lifeToPay = card.isLand() ? 1 : card.getManaValue();
                 PayLifeCost cost = new PayLifeCost(lifeToPay);
                 if (cost.canPay(source, source, player.getId(), game)
                         && player.chooseUse(outcome, "Pay " + lifeToPay + " life to prevent discarding " + card.getLogName() + "?", source, game)

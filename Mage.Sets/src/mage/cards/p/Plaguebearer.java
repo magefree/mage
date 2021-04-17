@@ -24,7 +24,7 @@ import mage.target.targetadjustment.XCMCPermanentAdjuster;
  */
 public final class Plaguebearer extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("nonblack creature with converted mana cost X");
+    private static final FilterPermanent filter = new FilterPermanent("nonblack creature with mana value X");
 
     static {
         filter.add(CardType.CREATURE.getPredicate());

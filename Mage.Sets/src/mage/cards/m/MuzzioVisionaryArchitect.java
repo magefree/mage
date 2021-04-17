@@ -56,7 +56,7 @@ class MuzzioVisionaryArchitectEffect extends OneShotEffect {
 
     public MuzzioVisionaryArchitectEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Look at the top X cards of your library, where X is the highest converted mana cost among artifacts you control. You may reveal an artifact card from among them and put it onto the battlefield. Put the rest on the bottom of your library in any order";
+        this.staticText = "Look at the top X cards of your library, where X is the highest mana value among artifacts you control. You may reveal an artifact card from among them and put it onto the battlefield. Put the rest on the bottom of your library in any order";
     }
 
     public MuzzioVisionaryArchitectEffect(final MuzzioVisionaryArchitectEffect effect) {
@@ -79,7 +79,7 @@ class MuzzioVisionaryArchitectEffect extends OneShotEffect {
         List<Permanent> controlledArtifacts = game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), controller.getId(), game);
         for (Permanent permanent : controlledArtifacts) {
             if (permanent.getSpellAbility() != null) {
-                int cmc = permanent.getSpellAbility().getManaCosts().convertedManaCost();
+                int cmc = permanent.getSpellAbility().getManaCosts().manaValue();
                 if (cmc > highCMC) {
                     highCMC = cmc;
                 }

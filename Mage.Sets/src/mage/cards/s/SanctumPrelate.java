@@ -63,7 +63,7 @@ class ChooseNumberEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int numberChoice = controller.announceXMana(0, Integer.MAX_VALUE, "Choose a number. Noncreature spells with the chosen converted mana cost can't be cast", game, source);
+            int numberChoice = controller.announceXMana(0, Integer.MAX_VALUE, "Choose a number. Noncreature spells with the chosen mana value can't be cast", game, source);
             game.getState().setValue(source.getSourceId().toString(), numberChoice);
 
             Permanent permanent = game.getPermanentEntering(source.getSourceId());
@@ -82,7 +82,7 @@ class ChooseNumberEffect extends OneShotEffect {
     }
 
     private String setText() {
-        return "Choose a number. Noncreature spells with the chosen converted mana cost can't be cast";
+        return "Choose a number. Noncreature spells with the chosen mana value can't be cast";
     }
 }
 
@@ -92,7 +92,7 @@ class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl 
 
     public SanctumPrelateReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Noncreature spells with the chosen converted mana cost can't be cast";
+        staticText = "Noncreature spells with the chosen mana value can't be cast";
     }
 
     public SanctumPrelateReplacementEffect(final SanctumPrelateReplacementEffect effect) {
@@ -113,7 +113,7 @@ class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl 
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast a noncreature card with that converted mana cost (" + mageObject.getIdName() + " in play).";
+            return "You can't cast a noncreature card with that mana value (" + mageObject.getIdName() + " in play).";
         }
         return null;
     }
@@ -129,7 +129,7 @@ class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl 
         Spell spell = game.getStack().getSpell(event.getTargetId());
 
         if (spell != null && !spell.isCreature()) {
-            return spell.getConvertedManaCost() == choiceValue;
+            return spell.getManaValue() == choiceValue;
         }
         return false;
     }

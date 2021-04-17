@@ -9,7 +9,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -21,10 +21,10 @@ import java.util.UUID;
 public final class TyrantsScorn extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature with converted mana cost 3 or less");
+            = new FilterCreaturePermanent("creature with mana value 3 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public TyrantsScorn(UUID ownerId, CardSetInfo setInfo) {

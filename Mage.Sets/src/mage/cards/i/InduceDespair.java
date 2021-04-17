@@ -51,7 +51,7 @@ class InduceDespairEffect extends OneShotEffect {
 
     public InduceDespairEffect() {
         super(Outcome.UnboostCreature);
-        staticText = "Target creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost";
+        staticText = "Target creature gets -X/-X until end of turn, where X is the revealed card's mana value";
     }
 
     public InduceDespairEffect(InduceDespairEffect effect) {
@@ -63,7 +63,7 @@ class InduceDespairEffect extends OneShotEffect {
         RevealTargetFromHandCost cost = (RevealTargetFromHandCost) source.getCosts().get(0);
         Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
         if (cost != null && creature != null) {
-            int cmcBoost = -1 * cost.convertedManaCosts;
+            int cmcBoost = -1 * cost.manaValues;
             ContinuousEffect effect = new BoostTargetEffect(cmcBoost, cmcBoost, Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game)));
             game.addEffect(effect, source);

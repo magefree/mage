@@ -155,7 +155,7 @@ class CodieVociferousCodexEffect extends OneShotEffect {
         Card toCast = null;
         for (Card card : player.getLibrary().getCards(game)) {
             toExile.add(card);
-            if (card.isInstantOrSorcery() && card.getConvertedManaCost() < spell.getConvertedManaCost()) {
+            if (card.isInstantOrSorcery() && card.getManaValue() < spell.getManaValue()) {
                 toCast = card;
                 break;
             }

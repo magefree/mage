@@ -54,7 +54,7 @@ class SifterWurmEffect extends OneShotEffect {
 
     public SifterWurmEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "scry 3, then reveal the top card of your library. You gain life equal to that card's converted mana cost.";
+        this.staticText = "scry 3, then reveal the top card of your library. You gain life equal to that card's mana value.";
     }
 
     public SifterWurmEffect(final SifterWurmEffect effect) {
@@ -79,7 +79,7 @@ class SifterWurmEffect extends OneShotEffect {
                 Cards cards = new CardsImpl();
                 cards.add(card);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
-                controller.gainLife(card.getConvertedManaCost(), game, source);
+                controller.gainLife(card.getManaValue(), game, source);
             }
             return true;
         }

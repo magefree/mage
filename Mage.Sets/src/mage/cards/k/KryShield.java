@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
+import mage.abilities.dynamicvalue.common.TargetManaValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -31,8 +31,8 @@ public final class KryShield extends CardImpl {
         Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn);
         effect.setText("Prevent all damage that would be dealt this turn by target creature you control");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
-        ability.addEffect(new BoostTargetEffect(StaticValue.get(0), TargetConvertedManaCost.instance, Duration.EndOfTurn, true)
-                .setText("That creature gets +0/+X until end of turn, where X is its converted mana cost"));
+        ability.addEffect(new BoostTargetEffect(StaticValue.get(0), TargetManaValue.instance, Duration.EndOfTurn, true)
+                .setText("That creature gets +0/+X until end of turn, where X is its mana value"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

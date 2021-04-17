@@ -74,11 +74,11 @@ class KeenDuelistEffect extends OneShotEffect {
         Card theirCard = opponent.getLibrary().getFromTop(game);
         cards.add(theirCard);
         controller.revealCards(source, cards, game);
-        if (theirCard != null && theirCard.getConvertedManaCost() < 1) {
-            controller.loseLife(theirCard.getConvertedManaCost(), game, source, false);
+        if (theirCard != null && theirCard.getManaValue() < 1) {
+            controller.loseLife(theirCard.getManaValue(), game, source, false);
         }
-        if (myCard != null && myCard.getConvertedManaCost() < 1) {
-            opponent.loseLife(myCard.getConvertedManaCost(), game, source, false);
+        if (myCard != null && myCard.getManaValue() < 1) {
+            opponent.loseLife(myCard.getManaValue(), game, source, false);
         }
         controller.moveCards(cards, Zone.HAND, source, game);
         return true;

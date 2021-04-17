@@ -63,14 +63,14 @@ enum LurrusOfTheDreamDenCompanionCondition implements CompanionCondition {
 
     @Override
     public String getRule() {
-        return "Each permanent card in your starting deck has converted mana cost 2 or less.";
+        return "Each permanent card in your starting deck has mana value 2 or less.";
     }
 
     @Override
     public boolean isLegal(Set<Card> deck, int startingSize) {
         return deck.stream()
                 .filter(MageObject::isPermanent)
-                .mapToInt(MageObject::getConvertedManaCost)
+                .mapToInt(MageObject::getManaValue)
                 .max()
                 .orElse(0) <= 2;
     }
@@ -80,7 +80,7 @@ class LurrusOfTheDreamDenCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     LurrusOfTheDreamDenCastFromGraveyardEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit, true);
-        staticText = "During each of your turns, you may cast one permanent spell with converted mana cost 2 or less from your graveyard";
+        staticText = "During each of your turns, you may cast one permanent spell with mana value 2 or less from your graveyard";
     }
 
     private LurrusOfTheDreamDenCastFromGraveyardEffect(final LurrusOfTheDreamDenCastFromGraveyardEffect effect) {
@@ -107,7 +107,7 @@ class LurrusOfTheDreamDenCastFromGraveyardEffect extends AsThoughEffectImpl {
             if (sourceObject != null && objectCard != null
                     && objectCard.isPermanent()
                     && objectCard.isOwnedBy(source.getControllerId())
-                    && objectCard.getConvertedManaCost() < 3
+                    && objectCard.getManaValue() < 3
                     && objectCard.getSpellAbility() != null
                     && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)) {
                 LurrusOfTheDreamDenWatcher watcher = game.getState().getWatcher(LurrusOfTheDreamDenWatcher.class);

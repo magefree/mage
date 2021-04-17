@@ -49,7 +49,7 @@ class RendingVinesEffect extends OneShotEffect {
 
     public RendingVinesEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target artifact or enchantment if its converted mana cost is less than or equal to the number of cards in your hand";
+        this.staticText = "Destroy target artifact or enchantment if its mana value is less than or equal to the number of cards in your hand";
     }
 
     public RendingVinesEffect(final RendingVinesEffect effect) {
@@ -66,7 +66,7 @@ class RendingVinesEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null) {
-            if (permanent.getConvertedManaCost() <= controller.getHand().size()) {
+            if (permanent.getManaValue() <= controller.getHand().size()) {
                 return permanent.destroy(source, game, false);
             }
         }

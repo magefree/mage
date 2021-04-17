@@ -21,7 +21,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -66,7 +66,7 @@ class CryptChampionEffect extends OneShotEffect {
 
     CryptChampionEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "each player puts a creature card with converted mana cost 3 or less from their graveyard onto the battlefield";
+        this.staticText = "each player puts a creature card with mana value 3 or less from their graveyard onto the battlefield";
     }
 
     CryptChampionEffect(final CryptChampionEffect effect) {
@@ -86,9 +86,9 @@ class CryptChampionEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    FilterCard filter = new FilterCreatureCard("creature card with converted mana cost 3 or less from your graveyard");
+                    FilterCard filter = new FilterCreatureCard("creature card with mana value 3 or less from your graveyard");
                     filter.add(new OwnerIdPredicate(playerId));
-                    filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+                    filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
                     Target target = new TargetCardInGraveyard(filter);
                     if (target.canChoose(source.getSourceId(), playerId, game)
                             && player.chooseTarget(outcome, target, source, game)) {

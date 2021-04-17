@@ -233,9 +233,9 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public int getConvertedManaCost() {
+    public int getManaValue() {
         if (manaCost != null) {
-            return manaCost.convertedManaCost();
+            return manaCost.manaValue();
         }
         return 0;
     }

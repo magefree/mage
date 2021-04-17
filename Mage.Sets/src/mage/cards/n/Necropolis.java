@@ -39,7 +39,7 @@ public final class Necropolis extends CardImpl {
 
         // Exile a creature card from your graveyard: Put X +0/+1 counters on Necropolis, where X is the exiled card's converted mana cost.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new AddCountersSourceEffect(CounterType.P0P1.createInstance(0), new NecropolisValue(), true).setText("Put X +0/+1 counters on {this}, where X is the exiled card's converted mana cost"),
+                new AddCountersSourceEffect(CounterType.P0P1.createInstance(0), new NecropolisValue(), true).setText("Put X +0/+1 counters on {this}, where X is the exiled card's mana value"),
                 new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card")))));
     }
 
@@ -61,7 +61,7 @@ class NecropolisValue implements DynamicValue {
             if (cost.isPaid() && cost instanceof ExileFromGraveCost) {
                 int xValue = 0;
                 for (Card card : ((ExileFromGraveCost) cost).getExiledCards()) {
-                    xValue += card.getConvertedManaCost();
+                    xValue += card.getManaValue();
                 }
                 return xValue;
             }

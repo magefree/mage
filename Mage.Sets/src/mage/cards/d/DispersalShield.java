@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
+import mage.abilities.dynamicvalue.common.HighestManaValueCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -43,7 +43,7 @@ class DispersalShieldEffect extends OneShotEffect {
 
     public DispersalShieldEffect() {
         super(Outcome.Detriment);
-        staticText = "Counter target spell if its converted mana cost is less than or equal to the highest converted mana cost among permanents you control";
+        staticText = "Counter target spell if its mana value is less than or equal to the highest mana value among permanents you control";
     }
 
     public DispersalShieldEffect(DispersalShieldEffect effect) {
@@ -57,9 +57,9 @@ class DispersalShieldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DynamicValue amount = new HighestConvertedManaCostValue();
+        DynamicValue amount = new HighestManaValueCount();
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell != null && spell.getConvertedManaCost() <= amount.calculate(game, source, this)) {
+        if (spell != null && spell.getManaValue() <= amount.calculate(game, source, this)) {
             return game.getStack().counter(source.getFirstTarget(), source, game);
         }
         return false;

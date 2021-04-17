@@ -57,7 +57,7 @@ class SorinGrimNemesisRevealEffect extends OneShotEffect {
     
     public SorinGrimNemesisRevealEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "reveal the top card of your library and put that card into your hand. Each opponent loses life equal to that card's converted mana cost";
+        this.staticText = "reveal the top card of your library and put that card into your hand. Each opponent loses life equal to that card's mana value";
     }
     
     public SorinGrimNemesisRevealEffect(final SorinGrimNemesisRevealEffect effect) {
@@ -85,10 +85,10 @@ class SorinGrimNemesisRevealEffect extends OneShotEffect {
                 
                 if (controller.moveCards(card, Zone.HAND, source, game)) {
                     for (UUID playerId : game.getOpponents(source.getControllerId())) {
-                        if (card.getConvertedManaCost() > 0) {
+                        if (card.getManaValue() > 0) {
                             Player opponent = game.getPlayer(playerId);
                             if (opponent != null) {
-                                opponent.loseLife(card.getConvertedManaCost(), game, source, false);
+                                opponent.loseLife(card.getManaValue(), game, source, false);
                             }
                         }
                     }

@@ -32,7 +32,7 @@ public class ColorlessManaCost extends ManaCostImpl {
     }
 
     @Override
-    public int convertedManaCost() {
+    public int manaValue() {
         return mana;
     }
 

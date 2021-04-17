@@ -14,7 +14,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -46,23 +46,23 @@ public final class GruesomeMenagerie extends CardImpl {
 class GruesomeMenagerieEffect extends OneShotEffect {
 
     private static final FilterCard filter1
-            = new FilterCreatureCard("creature card with converted mana cost 1");
+            = new FilterCreatureCard("creature card with mana value 1");
     private static final FilterCard filter2
-            = new FilterCreatureCard("creature card with converted mana cost 2");
+            = new FilterCreatureCard("creature card with mana value 2");
     private static final FilterCard filter3
-            = new FilterCreatureCard("creature card with converted mana cost 3");
+            = new FilterCreatureCard("creature card with mana value 3");
 
     static {
-        filter1.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, 1));
-        filter2.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, 2));
-        filter3.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, 3));
+        filter1.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, 1));
+        filter2.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, 2));
+        filter3.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, 3));
     }
 
     public GruesomeMenagerieEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Choose a creature card with converted mana cost 1 "
+        this.staticText = "Choose a creature card with mana value 1 "
                 + "in your graveyard, then do the same for creature cards "
-                + "with converted mana costs 2 and 3. "
+                + "with mana values 2 and 3. "
                 + "Return those cards to the battlefield.";
     }
 

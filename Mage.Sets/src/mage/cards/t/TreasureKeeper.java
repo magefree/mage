@@ -49,7 +49,7 @@ class TreasureKeeperEffect extends OneShotEffect {
     public TreasureKeeperEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "reveal cards from the top of your library until you reveal a "
-                + "nonland card with converted mana cost 3 or less. "
+                + "nonland card with mana value 3 or less. "
                 + "You may cast that card without paying its mana cost. Put all revealed "
                 + "cards not cast this way on the bottom of your library in a random order";
     }
@@ -67,7 +67,7 @@ class TreasureKeeperEffect extends OneShotEffect {
             Card nonLandCard = null;
             for (Card card : controller.getLibrary().getCards(game)) {
                 toReveal.add(card);
-                if (!card.isLand() && card.getConvertedManaCost() < 4) {
+                if (!card.isLand() && card.getManaValue() < 4) {
                     nonLandCard = card;
                     break;
                 }

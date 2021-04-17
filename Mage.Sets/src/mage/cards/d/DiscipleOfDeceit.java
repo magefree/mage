@@ -19,7 +19,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -58,7 +58,7 @@ class DiscipleOfDeceitEffect extends OneShotEffect {
     
     public DiscipleOfDeceitEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may discard a nonland card. If you do, search your library for a card with the same converted mana cost as that card, reveal it, put it into your hand, then shuffle your library";
+        this.staticText = "you may discard a nonland card. If you do, search your library for a card with the same mana value as that card, reveal it, put it into your hand, then shuffle your library";
     }
     
     public DiscipleOfDeceitEffect(final DiscipleOfDeceitEffect effect) {
@@ -84,9 +84,9 @@ class DiscipleOfDeceitEffect extends OneShotEffect {
                     if (card == null) {
                         return false;
                     }
-                    String targetName = "card with converted mana cost of " + card.getConvertedManaCost();
+                    String targetName = "card with mana value of " + card.getManaValue();
                     FilterCard filter = new FilterCard(targetName);
-                    filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, card.getConvertedManaCost()));
+                    filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, card.getManaValue()));
                     return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true).apply(game, source);                    
                 }
             }

@@ -45,7 +45,7 @@ public final class TwilightProphet extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(
                 new TwilightProphetEffect(), TargetController.YOU, false), CitysBlessingCondition.instance,
                 "At the beginning of your upkeep, if you have the city's blessing, reveal the top card of your library and put it into your hand."
-                        + "Each opponent loses X life and you gain X life, where X is that card's converted mana cost.")
+                        + "Each opponent loses X life and you gain X life, where X is that card's mana value.")
                 .addHint(CitysBlessingHint.instance));
 
     }
@@ -65,7 +65,7 @@ class TwilightProphetEffect extends OneShotEffect {
     public TwilightProphetEffect() {
         super(Outcome.Benefit);
         this.staticText = "if you have the city's blessing, reveal the top card of your library and put it into your hand. "
-                + "Each opponent loses X life and you gain X life, where X is that card's converted mana cost.";
+                + "Each opponent loses X life and you gain X life, where X is that card's mana value.";
     }
 
     public TwilightProphetEffect(final TwilightProphetEffect effect) {
@@ -87,7 +87,7 @@ class TwilightProphetEffect extends OneShotEffect {
                 controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
                 controller.moveCards(card, Zone.HAND, source, game);
                 game.getState().processAction(game);
-                int amount = card.getConvertedManaCost();
+                int amount = card.getManaValue();
                 if (amount > 0) {
                     new LoseLifeOpponentsEffect(amount).apply(game, source);
                     controller.gainLife(amount, game, source);

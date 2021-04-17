@@ -26,7 +26,7 @@ public enum ManaSpentToCastCount implements DynamicValue {
         }
         if (spell != null) {
             // NOT the cmc of the spell on the stack
-            return spell.getSpellAbility().getManaCostsToPay().convertedManaCost();
+            return spell.getSpellAbility().getManaCostsToPay().manaValue();
         }
         return 0;
     }

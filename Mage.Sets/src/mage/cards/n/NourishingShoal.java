@@ -30,7 +30,7 @@ public final class NourishingShoal extends CardImpl {
 
 
         // You may exile a green card with converted mana cost X from your hand rather than pay Nourishing Shoal's mana cost.
-        FilterOwnedCard filter = new FilterOwnedCard("a green card with converted mana cost X from your hand");
+        FilterOwnedCard filter = new FilterOwnedCard("a green card with mana value X from your hand");
         filter.add(new ColorPredicate(ObjectColor.GREEN));
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter), true)));

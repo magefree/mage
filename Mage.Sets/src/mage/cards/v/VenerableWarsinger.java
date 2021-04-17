@@ -13,7 +13,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
@@ -86,7 +86,7 @@ class VenerableWarsingerTriggeredAbility extends TriggeredAbilityImpl {
         FilterCard filter = new FilterCreatureCard(
                 "creature card with mana value " + event.getAmount() + " less from your graveyard"
         );
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, event.getAmount() + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, event.getAmount() + 1));
         this.getTargets().clear();
         this.addTarget(new TargetCardInYourGraveyard(filter));
         return true;

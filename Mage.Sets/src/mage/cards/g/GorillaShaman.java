@@ -22,7 +22,7 @@ import mage.target.targetadjustment.XCMCPermanentAdjuster;
  */
 public final class GorillaShaman extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("noncreature artifact with converted mana cost X");
+    private static final FilterPermanent filter = new FilterPermanent("noncreature artifact with mana value X");
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());

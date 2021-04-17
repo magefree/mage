@@ -63,7 +63,7 @@ public final class SarkhanTheMad extends CardImpl {
 
 class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect {
 
-    private static final String effectText = "Reveal the top card of your library and put it into your hand.  {this} deals damage to himself equal to that card's converted mana cost";
+    private static final String effectText = "Reveal the top card of your library and put it into your hand.  {this} deals damage to himself equal to that card's mana value";
 
     SarkhanTheMadRevealAndDrawEffect() {
         super(Outcome.DrawCard);
@@ -84,7 +84,7 @@ class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect {
             if (card != null) {
                 controller.moveCards(card, Zone.HAND, source, game);
                 if (sourcePermanent != null) {
-                    sourcePermanent.damage(card.getConvertedManaCost(), source.getSourceId(), source, game, false, false);
+                    sourcePermanent.damage(card.getManaValue(), source.getSourceId(), source, game, false, false);
                 }
                 controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
             }

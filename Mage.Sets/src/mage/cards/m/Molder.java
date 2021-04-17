@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -27,7 +27,7 @@ public final class Molder extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{G}");
 
         // Destroy target artifact or enchantment with converted mana cost X. It can't be regenerated. You gain X life.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target artifact or enchantment with converted mana cost X", true));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target artifact or enchantment with mana value X", true));
         this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.instance));
         this.getSpellAbility().setTargetAdjuster(MolderAdjuster.instance);
     }
@@ -49,8 +49,8 @@ enum MolderAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         int xValue = ability.getManaCostsToPay().getX();
-        FilterPermanent filter = new FilterArtifactOrEnchantmentPermanent("artifact or enchantment with converted mana cost " + xValue);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        FilterPermanent filter = new FilterArtifactOrEnchantmentPermanent("artifact or enchantment with mana value " + xValue);
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.addTarget(new TargetPermanent(filter));
     }
 }

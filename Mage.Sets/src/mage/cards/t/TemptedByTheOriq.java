@@ -9,7 +9,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -60,7 +60,7 @@ enum TemptedByTheOriqAdjuster implements TargetAdjuster {
                     "creature or planeswalker " + opponent.getName() + " controls with mana value 3 or less"
             );
             filter.add(new ControllerIdPredicate(opponentId));
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
             ability.addTarget(new TargetPermanent(0, 1, filter, false));
         }
     }

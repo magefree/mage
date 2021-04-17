@@ -21,7 +21,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -47,7 +47,7 @@ public final class DeathsOasis extends CardImpl {
         // {1}, Sacrifice Death's Oasis: You gain life equal to the greatest converted mana cost among creatures you control.
         Ability ability = new SimpleActivatedAbility(
                 new GainLifeEffect(DeathsOasisValue.instance)
-                        .setText("you gain life equal to the greatest converted mana cost among creatures you control"),
+                        .setText("you gain life equal to the greatest mana value among creatures you control"),
                 new GenericManaCost(1)
         );
         ability.addCost(new SacrificeSourceCost());
@@ -96,14 +96,14 @@ class DeathsOasisTriggeredAbility extends DiesCreatureTriggeredAbility {
         }
         this.getEffects().clear();
         this.addEffect(new MillCardsControllerEffect(2));
-        this.addEffect(new DeathsOasisEffect(zEvent.getTarget().getConvertedManaCost()));
+        this.addEffect(new DeathsOasisEffect(zEvent.getTarget().getManaValue()));
         return true;
     }
 
     @Override
     public String getRule() {
         return "Whenever a nontoken creature you control dies, put the top two cards of your library " +
-                "into your graveyard. Then return a creature card with lesser converted mana cost " +
+                "into your graveyard. Then return a creature card with lesser mana value " +
                 "than the creature that died from your graveyard to your hand.";
     }
 }
@@ -114,8 +114,8 @@ class DeathsOasisEffect extends OneShotEffect {
 
     DeathsOasisEffect(int cmc) {
         super(Outcome.Benefit);
-        this.filter = new FilterCreatureCard("creature card in your graveyard with converted mana cost " + (cmc - 1) + " or less");
-        this.filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, cmc));
+        this.filter = new FilterCreatureCard("creature card in your graveyard with mana value " + (cmc - 1) + " or less");
+        this.filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, cmc));
     }
 
     private DeathsOasisEffect(final DeathsOasisEffect effect) {
@@ -153,7 +153,7 @@ enum DeathsOasisValue implements DynamicValue {
                 .getAllActivePermanents(sourceAbility.getControllerId())
                 .stream()
                 .filter(Permanent::isCreature)
-                .mapToInt(Permanent::getConvertedManaCost)
+                .mapToInt(Permanent::getManaValue)
                 .max()
                 .orElse(0);
     }

@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
@@ -97,7 +96,7 @@ class InvokePrejudiceEffect extends CounterUnlessPaysEffect {
 
     public InvokePrejudiceEffect() {
         super(new GenericManaCost(1));
-        this.staticText = "counter that spell unless that player pays {X}, where X is its converted mana cost";
+        this.staticText = "counter that spell unless that player pays {X}, where X is its mana value";
     }
 
     public InvokePrejudiceEffect(final InvokePrejudiceEffect effect) {
@@ -114,7 +113,7 @@ class InvokePrejudiceEffect extends CounterUnlessPaysEffect {
         boolean result = true;
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
-            CounterUnlessPaysEffect effect = new CounterUnlessPaysEffect(new GenericManaCost(spell.getConvertedManaCost()));
+            CounterUnlessPaysEffect effect = new CounterUnlessPaysEffect(new GenericManaCost(spell.getManaValue()));
             effect.setTargetPointer(getTargetPointer());
             result = effect.apply(game, source);
         }

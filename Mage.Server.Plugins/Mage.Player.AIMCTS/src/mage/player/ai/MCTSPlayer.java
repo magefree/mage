@@ -80,7 +80,7 @@ public class MCTSPlayer extends ComputerPlayer {
     }
 
     protected void simulateVariableCosts(Ability ability, List<Ability> options, Game game) {
-        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
+        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
         int start = 0;
         if (!(ability instanceof SpellAbility)) {
             //only use x=0 on spell abilities

@@ -42,7 +42,7 @@ class RethinkEffect extends OneShotEffect {
 
     RethinkEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Counter target spell unless that player pays {X}, where X is its converted mana cost";
+        this.staticText = "Counter target spell unless that player pays {X}, where X is its mana value";
     }
 
     RethinkEffect(final RethinkEffect effect) {
@@ -60,7 +60,7 @@ class RethinkEffect extends OneShotEffect {
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {
-                Cost cost = ManaUtil.createManaCost(spell.getConvertedManaCost(), true);
+                Cost cost = ManaUtil.createManaCost(spell.getManaValue(), true);
                 if (!cost.pay(source, game, source, player.getId(), false)) {
                     game.getStack().counter(spell.getId(), source, game);
                 }

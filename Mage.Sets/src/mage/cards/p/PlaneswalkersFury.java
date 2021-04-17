@@ -42,7 +42,7 @@ class PlaneswalkersFuryEffect extends OneShotEffect {
 
     public PlaneswalkersFuryEffect() {
         super(Outcome.Damage);
-        staticText = "Target opponent reveals a card at random from their hand. Planeswalker's Fury deals damage equal to that card's converted mana cost to that player";
+        staticText = "Target opponent reveals a card at random from their hand. Planeswalker's Fury deals damage equal to that card's mana value to that player";
     }
 
     public PlaneswalkersFuryEffect(final PlaneswalkersFuryEffect effect) {
@@ -58,7 +58,7 @@ class PlaneswalkersFuryEffect extends OneShotEffect {
             if (card != null) {
                 revealed.add(card);
                 opponent.revealCards("Planeswalker's Fury", revealed, game);
-                opponent.damage(card.getConvertedManaCost(), source.getSourceId(), source, game);
+                opponent.damage(card.getManaValue(), source.getSourceId(), source, game);
             }
             return true;
         }

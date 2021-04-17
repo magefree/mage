@@ -55,7 +55,7 @@ class IlluminationEffect extends OneShotEffect {
 
     public IlluminationEffect() {
         super(Outcome.GainLife);
-        staticText = "Its controller gains life equal to its converted mana cost";
+        staticText = "Its controller gains life equal to its mana value";
     }
 
     public IlluminationEffect(final IlluminationEffect effect) {
@@ -81,7 +81,7 @@ class IlluminationEffect extends OneShotEffect {
         }
         if (controller != null) {
             Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-            int cost = spell.getConvertedManaCost();
+            int cost = spell.getManaValue();
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {
                 player.gainLife(cost, game, source);

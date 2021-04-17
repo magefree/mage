@@ -11,7 +11,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterObject;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 
 import java.util.UUID;
 
@@ -21,10 +21,10 @@ import java.util.UUID;
 public final class ImotiCelebrantOfBounty extends CardImpl {
 
     private static final FilterObject filter
-            = new FilterObject("Spells you cast with converted mana cost 6 or greater");
+            = new FilterObject("Spells you cast with mana value 6 or greater");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 5));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 5));
     }
 
     public ImotiCelebrantOfBounty(UUID ownerId, CardSetInfo setInfo) {

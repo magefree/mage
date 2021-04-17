@@ -15,7 +15,6 @@ import mage.cards.MeldCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 
 import java.util.UUID;
@@ -64,7 +63,7 @@ class BriselaVoiceOfNightmaresCantCastEffect extends ContinuousRuleModifyingEffe
 
     public BriselaVoiceOfNightmaresCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Your opponents can't cast spells with converted mana cost 3 or less";
+        staticText = "Your opponents can't cast spells with mana value 3 or less";
     }
 
     public BriselaVoiceOfNightmaresCantCastEffect(final BriselaVoiceOfNightmaresCantCastEffect effect) {
@@ -85,7 +84,7 @@ class BriselaVoiceOfNightmaresCantCastEffect extends ContinuousRuleModifyingEffe
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
-            return "You can't cast spells with converted mana cost 3 or less (" + mageObject.getIdName() + ").";
+            return "You can't cast spells with mana value 3 or less (" + mageObject.getIdName() + ").";
         }
         return null;
     }
@@ -100,7 +99,7 @@ class BriselaVoiceOfNightmaresCantCastEffect extends ContinuousRuleModifyingEffe
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null) {
-                return spell.getConvertedManaCost() < 4;
+                return spell.getManaValue() < 4;
             }
         }
         return false;

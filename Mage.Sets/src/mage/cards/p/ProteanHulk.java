@@ -45,7 +45,7 @@ public final class ProteanHulk extends CardImpl {
 class ProteanHulkTarget extends TargetCardInLibrary {
 
     private static final FilterCard filter
-            = new FilterCreatureCard("any number of creature cards with total converted mana cost 6 or less");
+            = new FilterCreatureCard("any number of creature cards with total mana value 6 or less");
 
     ProteanHulkTarget() {
         super(0, Integer.MAX_VALUE, filter);
@@ -71,6 +71,6 @@ class ProteanHulkTarget extends TargetCardInLibrary {
         }
         Cards cards = new CardsImpl(this.getTargets());
         cards.add(id);
-        return cards.getCards(game).stream().filter(Objects::nonNull).mapToInt(MageObject::getConvertedManaCost).sum() <= 6;
+        return cards.getCards(game).stream().filter(Objects::nonNull).mapToInt(MageObject::getManaValue).sum() <= 6;
     }
 }

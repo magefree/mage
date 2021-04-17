@@ -172,7 +172,7 @@ class JelevaNephaliasWatcher extends Watcher {
                         Spell spell = (Spell) stackObject;
                         manaSpendToCast.putIfAbsent(spell.getSourceId().toString() 
                                 + spell.getCard().getZoneChangeCounter(game),
-                                spell.getSpellAbility().getManaCostsToPay().convertedManaCost());
+                                spell.getSpellAbility().getManaCostsToPay().manaValue());
                     }
                 }
             }

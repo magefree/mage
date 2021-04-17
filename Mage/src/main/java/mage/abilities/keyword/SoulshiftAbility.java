@@ -9,7 +9,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -50,8 +50,8 @@ public class SoulshiftAbility extends DiesSourceTriggeredAbility {
     public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
         this.getTargets().clear();
         int intValue = amount.calculate(game, this, null);
-        FilterCard filter = new FilterCard("Spirit card with converted mana cost " + intValue + " or less from your graveyard");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN,  intValue + 1));
+        FilterCard filter = new FilterCard("Spirit card with mana value " + intValue + " or less from your graveyard");
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN,  intValue + 1));
         filter.add(SubType.SPIRIT.getPredicate());
         this.addTarget(new TargetCardInYourGraveyard(filter));
         super.trigger(game, controllerId, triggeringEvent); //To change body of generated methods, choose Tools | Templates.
@@ -65,10 +65,10 @@ public class SoulshiftAbility extends DiesSourceTriggeredAbility {
     @Override
     public String getRule() {
         if (amount instanceof StaticValue) {
-            return "Soulshift " + amount.toString() + " <i>(When this creature dies, you may return target Spirit card with converted mana cost " + amount.toString() + " or less from your graveyard to your hand.)</i>";
+            return "Soulshift " + amount.toString() + " <i>(When this creature dies, you may return target Spirit card with mana value " + amount.toString() + " or less from your graveyard to your hand.)</i>";
         } else {
             return "{this} has soulshift X, where X is the number of " + amount.getMessage() +
-            ". <i>(When this creature dies, you may return target Spirit card with converted mana cost X or less from your graveyard to your hand.)</i>";
+            ". <i>(When this creature dies, you may return target Spirit card with mana value X or less from your graveyard to your hand.)</i>";
         }
         
     }

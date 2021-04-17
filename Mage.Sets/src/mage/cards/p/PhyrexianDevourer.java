@@ -86,7 +86,7 @@ class PhyrexianDevourerEffect extends OneShotEffect {
 
     public PhyrexianDevourerEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "Put X +1/+1 counters on {this}, where X is the exiled card's converted mana cost";
+        this.staticText = "Put X +1/+1 counters on {this}, where X is the exiled card's mana value";
     }
 
     public PhyrexianDevourerEffect(final PhyrexianDevourerEffect effect) {
@@ -109,7 +109,7 @@ class PhyrexianDevourerEffect extends OneShotEffect {
                 }
             }
             if (card != null) {
-                int amount = card.getConvertedManaCost();
+                int amount = card.getManaValue();
                 if (amount > 0) {
                     return new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount)).apply(game, source);
                 }

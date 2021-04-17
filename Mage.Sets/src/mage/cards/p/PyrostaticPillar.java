@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
@@ -64,7 +63,7 @@ class PyrostaticPillarTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && spell.getConvertedManaCost() <= 3){
+        if (spell != null && spell.getManaValue() <= 3){
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
             }
@@ -75,6 +74,6 @@ class PyrostaticPillarTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player casts a spell with converted mana cost 3 or less, {this} deals 2 damage to that player.";
+        return "Whenever a player casts a spell with mana value 3 or less, {this} deals 2 damage to that player.";
     }
 }

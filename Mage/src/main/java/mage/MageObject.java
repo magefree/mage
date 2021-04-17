@@ -96,7 +96,7 @@ public interface MageObject extends MageItem, Serializable {
         return symbols;
     }
 
-    int getConvertedManaCost();
+    int getManaValue();
 
     MageInt getPower();
 

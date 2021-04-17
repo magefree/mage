@@ -117,7 +117,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
     @Override
     protected void addVariableXOptions(List<Ability> options, Ability ability, int targetNum, Game game) {
         // calculate the mana that can be used for the x part
-        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
+        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
 
         Card card = game.getCard(ability.getSourceId());
         if (card != null && numAvailable > 0) {

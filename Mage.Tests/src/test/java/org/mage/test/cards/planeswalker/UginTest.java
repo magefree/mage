@@ -41,7 +41,7 @@ public class UginTest extends CardTestPlayerBase {
         attack(3, playerA, "Silvercoat Lion");
         block(3, playerB, "Ashaya, the Awoken World", "Silvercoat Lion");
 
-        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "-X: Exile each permanent with converted mana cost X or less that's one or more colors");
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "-X: Exile each permanent with mana value X or less that's one or more colors");
         setChoice(playerA, "X=3");
 
         setStopAt(3, PhaseStep.END_TURN);

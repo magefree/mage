@@ -11,7 +11,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -22,10 +22,10 @@ import java.util.UUID;
 public final class ClaimTheFirstborn extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature with converted mana cost 3 or less");
+            = new FilterCreaturePermanent("creature with mana value 3 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public ClaimTheFirstborn(UUID ownerId, CardSetInfo setInfo) {

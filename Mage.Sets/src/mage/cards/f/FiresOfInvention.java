@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class FiresOfInvention extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterCard("spells with converted mana cost less than or equal to the number of lands you control");
+            = new FilterCard("spells with mana value less than or equal to the number of lands you control");
 
     static {
         filter.add(FiresOfInventionPredicate.instance);
@@ -57,7 +57,7 @@ enum FiresOfInventionPredicate implements ObjectSourcePlayerPredicate<ObjectSour
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        return input.getObject().getConvertedManaCost() <=
+        return input.getObject().getManaValue() <=
                 game.getBattlefield().countAll(StaticFilters.FILTER_LAND, game.getControllerId(input.getSourceId()), game);
     }
 }

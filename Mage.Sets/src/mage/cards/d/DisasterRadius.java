@@ -54,7 +54,7 @@ class DisasterRadiusEffect extends OneShotEffect {
 
     public DisasterRadiusEffect() {
         super(Outcome.GainLife);
-        staticText = "{this} deals X damage to each creature your opponents control, where X is the revealed card's converted mana cost";
+        staticText = "{this} deals X damage to each creature your opponents control, where X is the revealed card's mana value";
     }
 
     public DisasterRadiusEffect(DisasterRadiusEffect effect) {
@@ -65,7 +65,7 @@ class DisasterRadiusEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         RevealTargetFromHandCost cost = (RevealTargetFromHandCost) source.getCosts().get(0);
         if (cost != null) {
-            int damage = cost.convertedManaCosts;
+            int damage = cost.manaValues;
             for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 if (creature != null) {
                     creature.damage(damage, source.getSourceId(), source, game, false, false);

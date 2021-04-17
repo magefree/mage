@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class GethLordOfTheVault extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("artifact or creature card with converted mana cost X from an opponent's graveyard");
+    private static final FilterCard filter = new FilterCard("artifact or creature card with mana value X from an opponent's graveyard");
 
     static {
         filter.add(TargetController.OPPONENT.getOwnerPredicate());
@@ -66,7 +66,7 @@ class GethLordOfTheVaultEffect extends OneShotEffect {
 
     public GethLordOfTheVaultEffect() {
         super(Outcome.Benefit);
-        staticText = "Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped. Then that player mills X cards";
+        staticText = "Put target artifact or creature card with mana value X from an opponent's graveyard onto the battlefield under your control tapped. Then that player mills X cards";
     }
 
     public GethLordOfTheVaultEffect(final GethLordOfTheVaultEffect effect) {
@@ -86,7 +86,7 @@ class GethLordOfTheVaultEffect extends OneShotEffect {
         controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
         Player player = game.getPlayer(card.getOwnerId());
         if (player != null) {
-            player.millCards(card.getConvertedManaCost(), source, game);
+            player.millCards(card.getManaValue(), source, game);
         }
         return true;
     }

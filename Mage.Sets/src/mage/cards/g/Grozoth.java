@@ -19,7 +19,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -67,12 +67,12 @@ class GrozothEffect extends SearchEffect {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, 9));
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, 9));
     }
 
     public GrozothEffect() {
         super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Outcome.DrawCard);
-        staticText = "you may search your library for any number of cards that have converted mana cost 9, reveal them, and put them into your hand. If you do, shuffle your library";
+        staticText = "you may search your library for any number of cards that have mana value 9, reveal them, and put them into your hand. If you do, shuffle your library";
     }
 
     public GrozothEffect(final GrozothEffect effect) {

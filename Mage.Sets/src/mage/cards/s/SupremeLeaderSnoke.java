@@ -25,7 +25,7 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -55,7 +55,7 @@ public final class SupremeLeaderSnoke extends CardImpl {
 
         // -X: Gain control of target creature with converted mana cost X. Untap that creature. It gains haste. Sacrifice that creature at the beginning of the next end step.
         Ability ability3 = new LoyaltyAbility(new GainControlTargetEffect(Duration.WhileOnBattlefield)
-                .setText("Gain control of target creature with converted mana cost X"));
+                .setText("Gain control of target creature with mana value X"));
         ability3.addEffect(new UntapTargetEffect().setText("Untap that creature"));
         ability3.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield).setText("It gains haste"));
         ability3.addEffect(new GainAbilityTargetEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect()), Duration.WhileOnBattlefield)
@@ -86,7 +86,7 @@ enum SupremeLeaderSnokeAdjuster implements TargetAdjuster {
             }
         }
         FilterCreaturePermanent newFilter = StaticFilters.FILTER_PERMANENT_CREATURE.copy();
-        newFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
+        newFilter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, cmc));
         ability.getTargets().clear();
         ability.addTarget(new TargetCreaturePermanent(newFilter));
     }

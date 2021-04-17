@@ -18,7 +18,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -89,9 +89,9 @@ class SunbirdsInvocationTriggeredAbility extends SpellCastControllerTriggeredAbi
     public String getRule() {
         return "Whenever you cast a spell from your hand, "
                 + "reveal the top X cards of your library, "
-                + "where X is that spell's converted mana cost. "
+                + "where X is that spell's mana value. "
                 + "You may cast a card revealed this way with "
-                + "converted mana cost X or less without paying its mana cost."
+                + "mana value X or less without paying its mana cost."
                 + " Put the rest on the bottom of your library in a random order.";
     }
 }
@@ -101,8 +101,8 @@ class SunbirdsInvocationEffect extends OneShotEffect {
     public SunbirdsInvocationEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "reveal the top X cards of your library, where X is that "
-                + "spell's converted mana cost. You may cast a card revealed this "
-                + "way with converted mana cost X or less without paying its mana cost. "
+                + "spell's mana value. You may cast a card revealed this "
+                + "way with mana value X or less without paying its mana cost. "
                 + "Put the rest on the bottom of your library in a random order";
     }
 
@@ -122,13 +122,13 @@ class SunbirdsInvocationEffect extends OneShotEffect {
         if (spell == null) {
             return false;
         }
-        int xValue = spell.getConvertedManaCost();
+        int xValue = spell.getManaValue();
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
 
-            FilterCard filter = new FilterNonlandCard("card revealed this way with converted mana cost " + xValue + " or less");
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+            FilterCard filter = new FilterNonlandCard("card revealed this way with mana value " + xValue + " or less");
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
             TargetCard target = new TargetCard(1, Zone.LIBRARY, filter);
 
             if (controller.chooseTarget(Outcome.PlayForFree, cards, target, source, game)) {

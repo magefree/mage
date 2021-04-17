@@ -66,7 +66,7 @@ public class CardView extends SimpleCardView {
     // can combine multiple costs for MockCard from deck editor or db (left/right, card/adventure)
     protected String manaCostLeftStr;
     protected String manaCostRightStr;
-    protected int convertedManaCost;
+    protected int manaValue;
     protected Rarity rarity;
 
     protected MageObjectType mageObjectType = MageObjectType.NULL;
@@ -174,7 +174,7 @@ public class CardView extends SimpleCardView {
         this.frameStyle = cardView.frameStyle;
         this.manaCostLeftStr = cardView.manaCostLeftStr;
         this.manaCostRightStr = cardView.manaCostRightStr;
-        this.convertedManaCost = cardView.convertedManaCost;
+        this.manaValue = cardView.manaValue;
         this.rarity = cardView.rarity;
 
         this.mageObjectType = cardView.mageObjectType;
@@ -389,7 +389,7 @@ public class CardView extends SimpleCardView {
         } else {
             this.rules = card.getRules(game);
         }
-        this.convertedManaCost = card.getConvertedManaCost();
+        this.manaValue = card.getManaValue();
 
         if (card instanceof Permanent) {
             this.mageObjectType = MageObjectType.PERMANENT;
@@ -565,7 +565,7 @@ public class CardView extends SimpleCardView {
         this.color = object.getColor(game);
         this.manaCostLeftStr = String.join("", object.getManaCostSymbols());
         this.manaCostRightStr = "";
-        this.convertedManaCost = object.getManaCost().convertedManaCost();
+        this.manaValue = object.getManaCost().manaValue();
         if (object instanceof PermanentToken) {
             this.mageObjectType = MageObjectType.TOKEN;
             PermanentToken permanentToken = (PermanentToken) object;
@@ -686,7 +686,7 @@ public class CardView extends SimpleCardView {
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.manaCostLeftStr = "";
         this.manaCostRightStr = "";
-        this.convertedManaCost = 0;
+        this.manaValue = 0;
 
         // the controller can see more information (e.g. enlarged image) than other players for face down cards (e.g. Morph played face down)
         if (!controlled) {
@@ -848,8 +848,8 @@ public class CardView extends SimpleCardView {
         return CardUtil.concatManaSymbols(CardInfo.SPLIT_MANA_SEPARATOR_FULL, this.manaCostLeftStr, this.manaCostRightStr);
     }
 
-    public int getConvertedManaCost() {
-        return convertedManaCost;
+    public int getManaValue() {
+        return manaValue;
     }
 
     public Rarity getRarity() {

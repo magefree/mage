@@ -40,7 +40,7 @@ public final class HeedTheMists extends CardImpl {
 
         public HeedTheMistsEffect() {
             super(Outcome.DrawCard);
-            staticText = "Mill a card, then draw cards equal to that card's converted mana cost";
+            staticText = "Mill a card, then draw cards equal to that card's mana value";
         }
 
         public HeedTheMistsEffect(HeedTheMistsEffect effect) {
@@ -55,7 +55,7 @@ public final class HeedTheMists extends CardImpl {
                     .millCards(1, source, game)
                     .getCards(game)
                     .stream()
-                    .mapToInt(MageObject::getConvertedManaCost)
+                    .mapToInt(MageObject::getManaValue)
                     .sum();
             controller.drawCards(totalCMC, source, game);
             return true;

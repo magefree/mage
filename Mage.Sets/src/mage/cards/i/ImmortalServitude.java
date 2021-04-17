@@ -42,7 +42,7 @@ class ImmortalServitudeEffect extends OneShotEffect {
 
     ImmortalServitudeEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Return each creature card with converted mana cost X from your graveyard to the battlefield";
+        this.staticText = "Return each creature card with mana value X from your graveyard to the battlefield";
     }
 
     private ImmortalServitudeEffect(final ImmortalServitudeEffect effect) {
@@ -64,7 +64,7 @@ class ImmortalServitudeEffect extends OneShotEffect {
         Set<Card> cards = you.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game);
         cards.removeIf(Objects::isNull);
         cards.removeIf(card -> !card.isCreature());
-        cards.removeIf(card -> card.getConvertedManaCost() != count);
+        cards.removeIf(card -> card.getManaValue() != count);
         return you.moveCards(cards, Zone.BATTLEFIELD, source, game);
     }
 }

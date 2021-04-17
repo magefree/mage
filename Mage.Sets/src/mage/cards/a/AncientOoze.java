@@ -33,7 +33,7 @@ public final class AncientOoze extends CardImpl {
 
         // Ancient Ooze's power and toughness are each equal to the total converted mana cost of other creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new AncientOozePowerToughnessValue(), Duration.EndOfGame)
-                .setText("{this}'s power and toughness are each equal to the total converted mana cost of other creatures you control.")
+                .setText("{this}'s power and toughness are each equal to the total mana value of other creatures you control.")
         ));
     }
 
@@ -54,7 +54,7 @@ class AncientOozePowerToughnessValue implements DynamicValue {
         int value = 0;
         for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), sourceAbility.getControllerId(), game)) {
             if (creature != null && !sourceAbility.getSourceId().equals(creature.getId())) {
-                value += creature.getConvertedManaCost();
+                value += creature.getManaValue();
             }
         }
         return value;
@@ -72,6 +72,6 @@ class AncientOozePowerToughnessValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "total converted mana cost of other creatures you control";
+        return "total mana value of other creatures you control";
     }
 }

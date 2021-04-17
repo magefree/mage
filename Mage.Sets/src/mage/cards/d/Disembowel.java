@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -24,7 +24,7 @@ public final class Disembowel extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{B}");
 
         // Destroy target creature with converted mana cost X.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect("creature with converted mana cost X"));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect("creature with mana value X"));
         this.getSpellAbility().setTargetAdjuster(DisembowelAdjuster.instance);
     }
 
@@ -45,8 +45,8 @@ enum DisembowelAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         int xValue = ability.getManaCostsToPay().getX();
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost X");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value X");
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.addTarget(new TargetCreaturePermanent(filter));
     }
 }

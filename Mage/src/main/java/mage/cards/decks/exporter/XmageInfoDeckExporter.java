@@ -63,7 +63,7 @@ public class XmageInfoDeckExporter extends DeckExporter {
                 out.printf("%d [%s:%s] %s%n\n", amount.get("M@" + card.getCardKey()), card.getSetCode(), card.getCardNum(), card.getCardName());
             } else {
                 out.printf("%d [%s:%s] %s ;; %s ;; %s ;; %d %n", amount.get("M@" + card.getCardKey()), card.getSetCode(), card.getCardNum(), card.getCardName(),
-                        cardInfo.getColor().getDescription(), cardInfo.getTypes().toString(), cardInfo.getConvertedManaCost());
+                        cardInfo.getColor().getDescription(), cardInfo.getTypes().toString(), cardInfo.getManaValue());
             }
         }
 
@@ -73,7 +73,7 @@ public class XmageInfoDeckExporter extends DeckExporter {
                 out.printf("SB: %d [%s:%s] %s%n\n", amount.get("S@" + card.getCardKey()), card.getSetCode(), card.getCardNum(), card.getCardName());
             } else {
                 out.printf("SB: %d [%s:%s] %s ;; %s ;; %s ;; %d %n", amount.get("S@" + card.getCardKey()), card.getSetCode(), card.getCardNum(), card.getCardName(),
-                        cardInfo.getColor().getDescription(), cardInfo.getTypes().toString(), cardInfo.getConvertedManaCost());
+                        cardInfo.getColor().getDescription(), cardInfo.getTypes().toString(), cardInfo.getManaValue());
             }
         }
 

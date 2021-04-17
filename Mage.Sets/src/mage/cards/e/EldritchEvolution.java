@@ -16,7 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -55,7 +55,7 @@ class EldritchEvolutionEffect extends OneShotEffect {
 
     EldritchEvolutionEffect() {
         super(Outcome.Benefit);
-        staticText = "Search your library for a creature card with converted mana cost X or less, where X is 2 plus the sacrificed creature's converted mana cost. Put that card "
+        staticText = "Search your library for a creature card with mana value X or less, where X is 2 plus the sacrificed creature's mana value. Put that card "
                 + "onto the battlefield, then shuffle your library";
     }
 
@@ -77,9 +77,9 @@ class EldritchEvolutionEffect extends OneShotEffect {
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (sacrificedPermanent != null && controller != null) {
-            int newConvertedCost = sacrificedPermanent.getConvertedManaCost() + 2;
-            FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost + " or less");
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, newConvertedCost+1));
+            int newConvertedCost = sacrificedPermanent.getManaValue() + 2;
+            FilterCard filter = new FilterCard("creature card with mana value " + newConvertedCost + " or less");
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, newConvertedCost+1));
             filter.add(CardType.CREATURE.getPredicate());
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             if (controller.searchLibrary(target, source, game)) {

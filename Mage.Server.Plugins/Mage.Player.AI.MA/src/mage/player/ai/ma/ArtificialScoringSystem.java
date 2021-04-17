@@ -39,7 +39,7 @@ public final class ArtificialScoringSystem {
             return score;
         }
 
-        final int score = value * 100 - card.getManaCost().convertedManaCost() * 20;
+        final int score = value * 100 - card.getManaCost().manaValue() * 20;
         if (card.getCardType().contains(CardType.CREATURE)) {
             return score + (card.getPower().getValue() + card.getToughness().getValue()) * 10;
         } else {

@@ -43,7 +43,7 @@ class CerebralEruptionEffect extends OneShotEffect {
 
     CerebralEruptionEffect() {
         super(Outcome.Damage);
-        staticText = "Target opponent reveals the top card of their library. {this} deals damage equal to the revealed card's converted mana cost to that player and each creature they control. If a land card is revealed this way, return {this} to its owner's hand";
+        staticText = "Target opponent reveals the top card of their library. {this} deals damage equal to the revealed card's mana value to that player and each creature they control. If a land card is revealed this way, return {this} to its owner's hand";
     }
 
     CerebralEruptionEffect(final CerebralEruptionEffect effect) {
@@ -59,7 +59,7 @@ class CerebralEruptionEffect extends OneShotEffect {
             Cards cards = new CardsImpl(card);
             player.revealCards(sourceObject.getIdName(), cards, game);
             game.getState().setValue(source.getSourceId().toString(), card);
-            int damage = card.getConvertedManaCost();
+            int damage = card.getManaValue();
             player.damage(damage, source.getSourceId(), source, game);
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, player.getId(), game)) {
                 perm.damage(damage, source.getSourceId(), source, game, false, true);

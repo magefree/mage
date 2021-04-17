@@ -34,7 +34,7 @@ public final class RuinRaider extends CardImpl {
                 RaidCondition.instance,
                 "<i>Raid</i> &mdash; At the beginning of your end step, if you attacked this turn, "
                         + "reveal the top card of your library and put that card into your hand. "
-                        + "You lose life equal to the card's converted mana cost.");
+                        + "You lose life equal to the card's mana value.");
         ability.setAbilityWord(AbilityWord.RAID);
         ability.addHint(RaidHint.instance);
         this.addAbility(ability, new PlayerAttackedWatcher());
@@ -54,7 +54,7 @@ class RuinRaiderEffect extends OneShotEffect {
 
     RuinRaiderEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost";
+        this.staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to its mana value";
     }
 
     RuinRaiderEffect(final RuinRaiderEffect effect) {
@@ -71,7 +71,7 @@ class RuinRaiderEffect extends OneShotEffect {
                     Cards cards = new CardsImpl(card);
                     controller.revealCards(source, cards, game);
                     controller.moveCards(card, Zone.HAND, source, game);
-                    controller.loseLife(card.getConvertedManaCost(), game, source, false);
+                    controller.loseLife(card.getManaValue(), game, source, false);
                 }
                 return true;
             }

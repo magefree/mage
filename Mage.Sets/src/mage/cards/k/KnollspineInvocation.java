@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInHand;
@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class KnollspineInvocation extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a card with converted mana cost X");
+    private static final FilterCard filter = new FilterCard("a card with mana value X");
 
     public KnollspineInvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
@@ -61,8 +61,8 @@ enum KnollspineInvocationAdjuster implements CostAdjuster {
             }
             DiscardTargetCost discardCost = (DiscardTargetCost) cost;
             discardCost.getTargets().clear();
-            FilterCard adjustedFilter = new FilterCard("a card with converted mana cost X");
-            adjustedFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+            FilterCard adjustedFilter = new FilterCard("a card with mana value X");
+            adjustedFilter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
             discardCost.addTarget(new TargetCardInHand(adjustedFilter));
             return;
         }

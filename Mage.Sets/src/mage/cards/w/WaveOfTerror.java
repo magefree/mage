@@ -16,7 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -50,7 +50,7 @@ class WaveOfTerrorEffect extends OneShotEffect {
 
     WaveOfTerrorEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "destroy each creature with converted mana cost equal to the number of age counters on {this}. They can't be regenerated.";
+        this.staticText = "destroy each creature with mana value equal to the number of age counters on {this}. They can't be regenerated.";
     }
 
     WaveOfTerrorEffect(final WaveOfTerrorEffect effect) {
@@ -69,7 +69,7 @@ class WaveOfTerrorEffect extends OneShotEffect {
             return false;
         }
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new ConvertedManaCostPredicate(
+        filter.add(new ManaValuePredicate(
                 ComparisonType.EQUAL_TO,
                 permanent.getCounters(game).getCount(CounterType.AGE)
         ));

@@ -53,7 +53,7 @@ public class CardInfo {
     @DatabaseField
     protected String startingLoyalty;
     @DatabaseField
-    protected int convertedManaCost;
+    protected int manaValue;
     @DatabaseField(dataType = DataType.ENUM_STRING)
     protected Rarity rarity;
     @DatabaseField
@@ -126,7 +126,7 @@ public class CardInfo {
         this.className = card.getClass().getCanonicalName();
         this.power = card.getPower().toString();
         this.toughness = card.getToughness().toString();
-        this.convertedManaCost = card.getConvertedManaCost();
+        this.manaValue = card.getManaValue();
         this.rarity = card.getRarity();
         this.splitCard = card instanceof SplitCard;
         this.splitCardFuse = card.getSpellAbility() != null && card.getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED;
@@ -335,8 +335,8 @@ public class CardInfo {
         this.types = sb.toString();
     }
 
-    public int getConvertedManaCost() {
-        return convertedManaCost;
+    public int getManaValue() {
+        return manaValue;
     }
 
     public final List<String> getManaCosts(ManaCostSide manaCostSide) {

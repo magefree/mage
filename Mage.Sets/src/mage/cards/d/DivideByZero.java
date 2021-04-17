@@ -8,7 +8,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterSpellOrPermanent;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetSpellOrPermanent;
 
 import java.util.UUID;
@@ -21,7 +21,7 @@ public final class DivideByZero extends CardImpl {
     private static final FilterSpellOrPermanent filter
             = new FilterSpellOrPermanent("spell or permanent with mana value 1 or greater");
     private static final Predicate predicate
-            = new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 0);
+            = new ManaValuePredicate(ComparisonType.MORE_THAN, 0);
 
     static {
         filter.getPermanentFilter().add(predicate);

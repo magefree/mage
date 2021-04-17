@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -20,9 +20,9 @@ import mage.game.permanent.Permanent;
  */
 public final class GazeOfGranite extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each nonland permanent with converted mana cost X or less");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each nonland permanent with mana value X or less");
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public GazeOfGranite(UUID ownerId, CardSetInfo setInfo) {
@@ -47,7 +47,7 @@ class GazeOfGraniteEffect extends OneShotEffect {
 
     public GazeOfGraniteEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Destroy each nonland permanent with converted mana cost X or less";
+        staticText = "Destroy each nonland permanent with mana value X or less";
     }
 
     public GazeOfGraniteEffect(final GazeOfGraniteEffect effect) {
@@ -62,7 +62,7 @@ class GazeOfGraniteEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (!permanent.isLand() && permanent.getConvertedManaCost() <= source.getManaCostsToPay().getX()) {
+            if (!permanent.isLand() && permanent.getManaValue() <= source.getManaCostsToPay().getX()) {
                 permanent.destroy(source, game, false);
             }
         }

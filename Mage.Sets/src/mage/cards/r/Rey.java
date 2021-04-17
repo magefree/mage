@@ -60,7 +60,7 @@ class ReyEffect extends OneShotEffect {
 
     public ReyEffect() {
         super(Outcome.Detriment);
-        staticText = "reveal the top card of target player's library. You gain life equal to that card's converted mana cost";
+        staticText = "reveal the top card of target player's library. You gain life equal to that card's mana value";
     }
 
     public ReyEffect(final ReyEffect effect) {
@@ -86,7 +86,7 @@ class ReyEffect extends OneShotEffect {
 
                 // You gain life equal to that card's converted mana cost.
                 if (topCard != null) {
-                    controller.gainLife(topCard.getConvertedManaCost(), game, source);
+                    controller.gainLife(topCard.getManaValue(), game, source);
                 }
             }
 

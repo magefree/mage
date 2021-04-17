@@ -10,7 +10,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -50,10 +50,10 @@ public final class DawnEvangel extends CardImpl {
 class DawnEvangelAbility extends DiesCreatureTriggeredAbility {
 
     private static final FilterCard cardFilter
-            = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard");
+            = new FilterCreatureCard("creature card with mana value 2 or less from your graveyard");
 
     static {
-        cardFilter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        cardFilter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     DawnEvangelAbility() {
@@ -85,7 +85,7 @@ class DawnEvangelAbility extends DiesCreatureTriggeredAbility {
     @Override
     public String getRule() {
         return "Whenever a creature dies, if an Aura you controlled was attached to it, " +
-                "return target creature card with converted mana cost 2 or less from your graveyard to your hand.";
+                "return target creature card with mana value 2 or less from your graveyard to your hand.";
     }
 
     @Override

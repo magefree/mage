@@ -29,7 +29,7 @@ public final class Juxtapose extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // You and target player exchange control of the creature you each control with the highest converted mana cost. Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest cost, their controller chooses one of them.
-        this.getSpellAbility().addEffect(new JuxtaposeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, "You and target player exchange control of the creature you each control with the highest converted mana cost"));
+        this.getSpellAbility().addEffect(new JuxtaposeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, "You and target player exchange control of the creature you each control with the highest mana value"));
         this.getSpellAbility().addEffect(new JuxtaposeEffect(new FilterArtifactPermanent(), "Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest cost, their controller chooses one of them"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -140,13 +140,13 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, playerId, game);
         int highestCMC = -1;
         for (Permanent permanent : permanents) {
-            if (highestCMC < permanent.getConvertedManaCost()) {
-                highestCMC = permanent.getConvertedManaCost();
+            if (highestCMC < permanent.getManaValue()) {
+                highestCMC = permanent.getManaValue();
             }
         }
         List<Permanent> result = new ArrayList<>();
         for (Permanent permanent : permanents) {
-            if (permanent.getConvertedManaCost() == highestCMC) {
+            if (permanent.getManaValue() == highestCMC) {
                 result.add(permanent);
             }
         }

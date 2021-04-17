@@ -13,7 +13,7 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,7 +55,7 @@ class CallOfTheDeathDwellerEffect extends OneShotEffect {
 
     CallOfTheDeathDwellerEffect() {
         super(Outcome.Benefit);
-        staticText = "Return up to two target creature cards with total converted mana cost 3 or less " +
+        staticText = "Return up to two target creature cards with total mana value 3 or less " +
                 "from your graveyard to the battlefield. Put a deathtouch counter on either of them. " +
                 "Then put a menace counter on either of them.";
     }
@@ -117,10 +117,10 @@ class CallOfTheDeathDwellerEffect extends OneShotEffect {
 class CallOfTheDeathDwellerTarget extends TargetCardInYourGraveyard {
 
     private static final FilterCard filter
-            = new FilterCreatureCard("creature cards with total converted mana cost 3 or less from your graveyard");
+            = new FilterCreatureCard("creature cards with total mana value 3 or less from your graveyard");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     CallOfTheDeathDwellerTarget() {
@@ -146,7 +146,7 @@ class CallOfTheDeathDwellerTarget extends TargetCardInYourGraveyard {
                 this.getTargets()
                         .stream()
                         .map(game::getCard)
-                        .mapToInt(Card::getConvertedManaCost)
-                        .sum() + card.getConvertedManaCost() <= 3;
+                        .mapToInt(Card::getManaValue)
+                        .sum() + card.getManaValue() <= 3;
     }
 }

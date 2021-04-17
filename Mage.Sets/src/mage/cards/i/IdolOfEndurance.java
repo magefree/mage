@@ -13,7 +13,7 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -58,12 +58,12 @@ class IdolOfEnduranceExileEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCreatureCard();
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     IdolOfEnduranceExileEffect() {
         super(Outcome.Benefit);
-        staticText = "exile all creature cards with converted mana cost 3 or less from your graveyard until {this} leaves the battlefield";
+        staticText = "exile all creature cards with mana value 3 or less from your graveyard until {this} leaves the battlefield";
     }
 
     private IdolOfEnduranceExileEffect(final IdolOfEnduranceExileEffect effect) {

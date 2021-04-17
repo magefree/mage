@@ -16,7 +16,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -60,7 +60,7 @@ class FavorOfTheMightyEffect extends ContinuousEffectImpl {
 
     FavorOfTheMightyEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "Each creature with the highest converted mana cost has protection from all colors.";
+        this.staticText = "Each creature with the highest mana value has protection from all colors.";
     }
 
     FavorOfTheMightyEffect(final FavorOfTheMightyEffect effect) {
@@ -76,12 +76,12 @@ class FavorOfTheMightyEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         int maxCMC = Integer.MIN_VALUE;
         for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
-            if (permanent != null && permanent.getConvertedManaCost() > maxCMC) {
-                maxCMC = permanent.getConvertedManaCost();
+            if (permanent != null && permanent.getManaValue() > maxCMC) {
+                maxCMC = permanent.getManaValue();
             }
         }
         FilterPermanent filterMaxCMC = new FilterCreaturePermanent();
-        filterMaxCMC.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, maxCMC));
+        filterMaxCMC.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, maxCMC));
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filterMaxCMC, source.getControllerId(), game)) {
             if (permanent != null) {
                 permanent.addAbility(new ProtectionAbility(filter), source.getSourceId(), game);

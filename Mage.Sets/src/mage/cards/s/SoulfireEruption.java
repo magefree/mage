@@ -47,7 +47,7 @@ class SoulfireEruptionEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "choose any number of target creatures, planeswalkers, and/or players. " +
                 "For each of them, exile the top card of your library, " +
-                "then {this} deals damage equal to that card's converted mana cost to that permanent or player. " +
+                "then {this} deals damage equal to that card's mana value to that permanent or player. " +
                 "You may play the exiled cards until the end of your next turn";
     }
 
@@ -83,14 +83,14 @@ class SoulfireEruptionEffect extends OneShotEffect {
             }
             controller.moveCards(card, Zone.EXILED, source, game);
             game.addEffect(new SoulfireEruptionCastEffect().setTargetPointer(new FixedTarget(card, game)), source);
-            if (card.getConvertedManaCost() < 1) {
+            if (card.getManaValue() < 1) {
                 continue;
             }
             if (permanent != null) {
-                permanent.damage(card.getConvertedManaCost(), source.getSourceId(), source, game);
+                permanent.damage(card.getManaValue(), source.getSourceId(), source, game);
             }
             if (player != null) {
-                player.damage(card.getConvertedManaCost(), source.getSourceId(), source, game);
+                player.damage(card.getManaValue(), source.getSourceId(), source, game);
             }
         }
         return true;

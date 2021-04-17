@@ -16,7 +16,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -54,7 +54,7 @@ class KamahlsDruidicVowEffect extends OneShotEffect {
 
     public KamahlsDruidicVowEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Look at the top X cards of your library. You may put any number of land and/or legendary permanent cards with converted mana cost X or less from among them onto the battlefield. Put the rest into your graveyard";
+        this.staticText = "Look at the top X cards of your library. You may put any number of land and/or legendary permanent cards with mana value X or less from among them onto the battlefield. Put the rest into your graveyard";
     }
 
     public KamahlsDruidicVowEffect(final KamahlsDruidicVowEffect effect) {
@@ -71,8 +71,8 @@ class KamahlsDruidicVowEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         controller.lookAtCards(source, null, cards, game);
         if (!cards.isEmpty()) {
-            FilterCard filter = new FilterPermanentCard("land and/or legendary permanent cards with converted mana cost " + xValue + " or less to put onto the battlefield");
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+            FilterCard filter = new FilterPermanentCard("land and/or legendary permanent cards with mana value " + xValue + " or less to put onto the battlefield");
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
             filter.add(
                     Predicates.or(
                             CardType.LAND.getPredicate(),

@@ -35,7 +35,7 @@ public final class NahirisWrath extends CardImpl {
 
         // Nahiri's Wrath deals damage equal to the total converted mana cost of the discarded cards to each of up to X target creatures and/or planeswalkers.
         Effect effect = new DamageTargetEffect(DiscardCostCardConvertedMana.instance);
-        effect.setText("{this} deals damage equal to the total converted mana cost of the discarded cards to each of up to X target creatures and/or planeswalkers");
+        effect.setText("{this} deals damage equal to the total mana value of the discarded cards to each of up to X target creatures and/or planeswalkers");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().setTargetAdjuster(NahirisWrathAdjuster.instance);
     }

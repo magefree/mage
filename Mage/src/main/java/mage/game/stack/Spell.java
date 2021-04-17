@@ -628,7 +628,7 @@ public class Spell extends StackObjImpl implements Card {
      * @return
      */
     @Override
-    public int getConvertedManaCost() {
+    public int getManaValue() {
         int cmc = 0;
         if (faceDown) {
             return 0;
@@ -636,7 +636,7 @@ public class Spell extends StackObjImpl implements Card {
         for (SpellAbility spellAbility : spellAbilities) {
             cmc += spellAbility.getConvertedXManaCost(getCard());
         }
-        cmc += getCard().getManaCost().convertedManaCost();
+        cmc += getCard().getManaCost().manaValue();
         return cmc;
     }
 

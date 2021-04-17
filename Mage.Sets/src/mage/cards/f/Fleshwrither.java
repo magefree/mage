@@ -20,7 +20,7 @@ import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -59,7 +59,7 @@ class FleshwritherEffect extends OneShotEffect {
 
     FleshwritherEffect() {
         super(Outcome.Benefit);
-        staticText = "Transfigure: Sacrifice this creature: Search your library for a creature card with the same converted mana cost as this creature and put that card onto the battlefield";
+        staticText = "Transfigure: Sacrifice this creature: Search your library for a creature card with the same mana value as this creature and put that card onto the battlefield";
     }
 
     FleshwritherEffect(final FleshwritherEffect effect) {
@@ -71,8 +71,8 @@ class FleshwritherEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null && controller != null) {
-            FilterCreatureCard filter = new FilterCreatureCard("creature with converted mana cost " + sourceObject.getConvertedManaCost());
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, sourceObject.getConvertedManaCost()));
+            FilterCreatureCard filter = new FilterCreatureCard("creature with mana value " + sourceObject.getManaValue());
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, sourceObject.getManaValue()));
             TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
             if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {

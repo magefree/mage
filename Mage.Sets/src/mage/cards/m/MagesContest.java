@@ -73,7 +73,7 @@ class MagesContestEffect extends OneShotEffect {
                         if (currentPlayer.isComputer()) {
                             // AI hint
                             // make AI evaluate value of the spell to decide on bidding, should be reworked
-                            int maxBid = Math.min(RandomUtil.nextInt(Math.max(currentPlayer.getLife(), 1)) + RandomUtil.nextInt(Math.max(spell.getConvertedManaCost(), 1)), currentPlayer.getLife());
+                            int maxBid = Math.min(RandomUtil.nextInt(Math.max(currentPlayer.getLife(), 1)) + RandomUtil.nextInt(Math.max(spell.getManaValue(), 1)), currentPlayer.getLife());
                             if (highBid + 1 < maxBid) {
                                 newBid = highBid + 1;
                             }

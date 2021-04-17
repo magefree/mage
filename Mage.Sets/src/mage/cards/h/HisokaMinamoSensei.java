@@ -108,7 +108,7 @@ class HisokaMinamoSenseiDiscardTargetCost extends CostImpl {
 class HisokaMinamoSenseiCounterEffect extends OneShotEffect {
     HisokaMinamoSenseiCounterEffect() {
         super(Outcome.Detriment);
-        staticText = "Counter target spell if it has the same converted mana cost as the discarded card";
+        staticText = "Counter target spell if it has the same mana value as the discarded card";
     }
 
     HisokaMinamoSenseiCounterEffect(final HisokaMinamoSenseiCounterEffect effect) {
@@ -120,7 +120,7 @@ class HisokaMinamoSenseiCounterEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
             HisokaMinamoSenseiDiscardTargetCost cost = (HisokaMinamoSenseiDiscardTargetCost) source.getCosts().get(0);
-            if (cost != null && cost.getDiscardedCard().getConvertedManaCost() == spell.getConvertedManaCost()) {
+            if (cost != null && cost.getDiscardedCard().getManaValue() == spell.getManaValue()) {
                 return game.getStack().counter(targetPointer.getFirst(game, source), source, game);
             }
         }

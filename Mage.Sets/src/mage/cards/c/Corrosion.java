@@ -57,7 +57,7 @@ class CorrosionUpkeepEffect extends OneShotEffect {
     
     CorrosionUpkeepEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "put a rust counter on each artifact target opponent controls. Then destroy each artifact with converted mana cost less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated";
+        this.staticText = "put a rust counter on each artifact target opponent controls. Then destroy each artifact with mana value less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated";
     }
     
     CorrosionUpkeepEffect(final CorrosionUpkeepEffect effect) {
@@ -83,7 +83,7 @@ class CorrosionUpkeepEffect extends OneShotEffect {
             }
             // destroy each artifact with converted mana cost less than or equal to the number of rust counters on it
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if (permanent.getConvertedManaCost() <= permanent.getCounters(game).getCount(CounterType.RUST)) {
+                if (permanent.getManaValue() <= permanent.getCounters(game).getCount(CounterType.RUST)) {
                     permanent.destroy(source, game, true);
                 }
             }

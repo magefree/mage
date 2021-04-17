@@ -46,7 +46,7 @@ class StrongholdGambitEffect extends OneShotEffect {
 
     public StrongholdGambitEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Each player chooses a card in their hand. Then each player reveals their chosen card. The owner of each creature card revealed this way with the lowest converted mana cost puts it onto the battlefield";
+        this.staticText = "Each player chooses a card in their hand. Then each player reveals their chosen card. The owner of each creature card revealed this way with the lowest mana value puts it onto the battlefield";
     }
 
     public StrongholdGambitEffect(final StrongholdGambitEffect effect) {
@@ -82,8 +82,8 @@ class StrongholdGambitEffect extends OneShotEffect {
                         Cards cardsToReveal = new CardsImpl(card);
                         player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ')', cardsToReveal, game);
                         if (card.isCreature()
-                                && lowestCMC > card.getConvertedManaCost()) {
-                            lowestCMC = card.getConvertedManaCost();
+                                && lowestCMC > card.getManaValue()) {
+                            lowestCMC = card.getManaValue();
                         }
                     }
                 }
@@ -96,7 +96,7 @@ class StrongholdGambitEffect extends OneShotEffect {
                         Card card = game.getCard(choosenCard.get(playerId));
                         if (card != null) {
                             if (card.isCreature()
-                                    && lowestCMC == card.getConvertedManaCost()) {
+                                    && lowestCMC == card.getManaValue()) {
                                 creaturesToBattlefield.add(card);
                             }
                         }

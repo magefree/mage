@@ -67,7 +67,7 @@ class MerenOfClanNelTothEffect extends OneShotEffect {
 
     MerenOfClanNelTothEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "choose target creature card in your graveyard. If that card's converted mana cost " +
+        this.staticText = "choose target creature card in your graveyard. If that card's mana value " +
                 "is less than or equal to the number of experience counters you have, " +
                 "return it to the battlefield. Otherwise, put it into your hand";
     }
@@ -88,7 +88,7 @@ class MerenOfClanNelTothEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        boolean flag = card.getConvertedManaCost() <= player.getCounters().getCount(CounterType.EXPERIENCE);
+        boolean flag = card.getManaValue() <= player.getCounters().getCount(CounterType.EXPERIENCE);
         return player.moveCards(card, flag ? Zone.BATTLEFIELD : Zone.HAND, source, game);
     }
 }

@@ -70,7 +70,7 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE,
                 Duration.WhileOnBattlefield, Outcome.AIDontUseIt); // AI will need help with this
         staticText = "You may play lands and cast spells from the top of your library. If you cast a spell this way, "
-                + "pay life equal to its converted mana cost rather than pay its mana cost.";
+                + "pay life equal to its mana value rather than pay its mana cost.";
     }
 
     private BolassCitadelPlayTheTopCardEffect(final BolassCitadelPlayTheTopCardEffect effect) {
@@ -114,7 +114,7 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
 
         // allows to play/cast with alternative life cost
         if (!cardToCheck.isLand()) {
-            PayLifeCost lifeCost = new PayLifeCost(cardToCheck.getSpellAbility().getManaCosts().convertedManaCost());
+            PayLifeCost lifeCost = new PayLifeCost(cardToCheck.getSpellAbility().getManaCosts().manaValue());
             Costs newCosts = new CostsImpl();
             newCosts.add(lifeCost);
             newCosts.addAll(cardToCheck.getSpellAbility().getCosts());

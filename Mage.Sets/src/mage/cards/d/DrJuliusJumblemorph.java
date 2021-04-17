@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 
 import java.util.UUID;
 
@@ -22,7 +22,7 @@ public final class DrJuliusJumblemorph extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("a host");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, -1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, -1));
     }
 
     public DrJuliusJumblemorph(UUID ownerId, CardSetInfo setInfo) {

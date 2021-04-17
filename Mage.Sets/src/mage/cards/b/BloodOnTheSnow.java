@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -42,7 +42,7 @@ public final class BloodOnTheSnow extends CardImpl {
         mode.addEffect(new BloodOnTheSnowEffect());
         this.getSpellAbility().addMode(mode);
         this.getSpellAbility().appendToRule(
-                "Then return a creature or planeswalker card with converted mana cost X or less"
+                "Then return a creature or planeswalker card with mana value X or less"
                 + " from your graveyard to the battlefield, where X is the amount of {S} spent to cast this spell."
         );
     }
@@ -77,9 +77,9 @@ class BloodOnTheSnowEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int snow = source.getManaCostsToPay().getUsedManaToPay().getSnow();
-            FilterCard filter = new FilterCard("a creature or planeswalker card with CMC " + snow + " or less from your graveyard");
+            FilterCard filter = new FilterCard("a creature or planeswalker card with mana value " + snow + " or less from your graveyard");
             filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.PLANESWALKER.getPredicate()));
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, snow + 1));
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, snow + 1));
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(1, 1, filter, true);
             controller.chooseTarget(outcome, target, source, game);
             Card card = game.getCard(target.getFirstTarget());

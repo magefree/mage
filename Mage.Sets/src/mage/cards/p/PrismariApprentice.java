@@ -56,6 +56,6 @@ enum PrismariApprenticeCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = (Spell) source.getEffects().get(0).getValue(MagecraftAbility.SPELL_KEY);
-        return spell != null && spell.getConvertedManaCost() >= 5;
+        return spell != null && spell.getManaValue() >= 5;
     }
 }

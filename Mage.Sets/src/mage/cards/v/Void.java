@@ -10,7 +10,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -45,7 +45,7 @@ class VoidEffect extends OneShotEffect {
     
     VoidEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Choose a number. Destroy all artifacts and creatures with converted mana cost equal to that number. Then target player reveals their hand and discards all nonland cards with converted mana cost equal to the number";
+        this.staticText = "Choose a number. Destroy all artifacts and creatures with mana value equal to that number. Then target player reveals their hand and discards all nonland cards with mana value equal to the number";
     }
 
     private VoidEffect(final VoidEffect effect) {
@@ -69,12 +69,12 @@ class VoidEffect extends OneShotEffect {
      
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if ((permanent.isArtifact() || permanent.isCreature())
-                    && permanent.getConvertedManaCost() == number) {
+                    && permanent.getManaValue() == number) {
                 permanent.destroy(source, game, false);
             }
         }
         FilterCard filterCard = new FilterCard();
-        filterCard.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, number));
+        filterCard.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, number));
         filterCard.add(Predicates.not(CardType.LAND.getPredicate()));
 
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));

@@ -50,7 +50,7 @@ class EnergyTapEffect extends OneShotEffect {
 
     EnergyTapEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "Tap target untapped creature you control. If you do, add an amount of {C} equal to that creature's converted mana cost";
+        this.staticText = "Tap target untapped creature you control. If you do, add an amount of {C} equal to that creature's mana value";
     }
 
     EnergyTapEffect(final EnergyTapEffect effect) {
@@ -74,7 +74,7 @@ class EnergyTapEffect extends OneShotEffect {
         if (targetCreature != null) {
             applied = targetCreature.tap(source, game);
             if (applied) {
-                player.getManaPool().addMana(new Mana(0, 0, 0, 0, 0, 0, 0, targetCreature.getConvertedManaCost()), game, source);
+                player.getManaPool().addMana(new Mana(0, 0, 0, 0, 0, 0, 0, targetCreature.getManaValue()), game, source);
             }
         }
         return applied;

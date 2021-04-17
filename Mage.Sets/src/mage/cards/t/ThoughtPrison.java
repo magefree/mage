@@ -17,7 +17,6 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -151,8 +150,8 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
                         matches = true;
                     }
                     // Check if spell's CMC matches the imprinted card
-                    int cmc = spell.getConvertedManaCost();
-                    int imprintedCmc = imprintedCard.getConvertedManaCost();
+                    int cmc = spell.getManaValue();
+                    int imprintedCmc = imprintedCard.getManaValue();
                     if (cmc == imprintedCmc) {
                         matches = true;
                     }
@@ -172,7 +171,7 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player casts a spell that shares a color or converted mana cost with the exiled card, " + super.getRule();
+        return "Whenever a player casts a spell that shares a color or mana value with the exiled card, " + super.getRule();
     }
 }
 

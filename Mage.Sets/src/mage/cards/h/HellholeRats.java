@@ -53,7 +53,7 @@ class HellholeRatsEffect extends OneShotEffect {
 
     public HellholeRatsEffect() {
         super(Outcome.Damage);
-        this.staticText = "target player discards a card. {this} deals damage to that player equal to that card's converted mana cost";
+        this.staticText = "target player discards a card. {this} deals damage to that player equal to that card's mana value";
     }
 
     public HellholeRatsEffect(final HellholeRatsEffect effect) {
@@ -73,7 +73,7 @@ class HellholeRatsEffect extends OneShotEffect {
             Cards cards = targetPlayer.discard(1, false, false, source, game);
             if (!cards.isEmpty()) {
                 for (Card card : cards.getCards(game)) {
-                    damage = card.getConvertedManaCost();
+                    damage = card.getManaValue();
                 }
                 targetPlayer.damage(damage, source.getSourceId(), source, game);
             }

@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -22,10 +22,10 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class DevotedCropMate extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with mana value 2 or less from your graveyard");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public DevotedCropMate(UUID ownerId, CardSetInfo setInfo) {
@@ -38,7 +38,7 @@ public final class DevotedCropMate extends CardImpl {
 
         // You may exert Devoted Crop-Mate as it attacks. When you do, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-        effect.setText("return target creature card with converted mana cost 2 or less from your graveyard to the battlefield");
+        effect.setText("return target creature card with mana value 2 or less from your graveyard to the battlefield");
         BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(effect);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         addAbility(new ExertAbility(ability));

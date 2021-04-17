@@ -34,7 +34,7 @@ public final class DisruptingShoal extends CardImpl {
         this.subtype.add(SubType.ARCANE);
 
         // You may exile a blue card with converted mana cost X from your hand rather than pay Disrupting Shoal's mana cost.
-        FilterOwnedCard filter = new FilterOwnedCard("a blue card with converted mana cost X from your hand");
+        FilterOwnedCard filter = new FilterOwnedCard("a blue card with mana value X from your hand");
         filter.add(new ColorPredicate(ObjectColor.BLUE));
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter), true)));
@@ -73,17 +73,17 @@ class DisruptingShoalCounterTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell != null && isConvertedManaCostEqual(source, spell.getConvertedManaCost())) {
+        if (spell != null && isManaValueEqual(source, spell.getManaValue())) {
             return game.getStack().counter(source.getFirstTarget(), source, game);
         }
         return false;
     }
 
-    private boolean isConvertedManaCostEqual(Ability sourceAbility, int amount) {
+    private boolean isManaValueEqual(Ability sourceAbility, int amount) {
         for (Cost cost : sourceAbility.getCosts()) {
             if (cost.isPaid() && cost instanceof ExileFromHandCost) {
                 for (Card card : ((ExileFromHandCost) cost).getCards()) {
-                    return card.getConvertedManaCost() == amount;
+                    return card.getManaValue() == amount;
                 }
                 return false;
             }
@@ -94,7 +94,7 @@ class DisruptingShoalCounterTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "Counter target spell if its converted mana cost is X";
+        return "Counter target spell if its mana value is X";
     }
 
 }

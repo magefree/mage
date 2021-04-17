@@ -46,7 +46,7 @@ class TransmuteArtifactEffect extends SearchEffect {
 
     public TransmuteArtifactEffect() {
         super(new TargetCardInLibrary(new FilterArtifactCard()), Outcome.PutCardInPlay);
-        staticText = "Sacrifice an artifact. If you do, search your library for an artifact card. If that card's converted mana cost is less than or equal to the sacrificed artifact's converted mana cost, put it onto the battlefield. If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle your library";
+        staticText = "Sacrifice an artifact. If you do, search your library for an artifact card. If that card's mana value is less than or equal to the sacrificed artifact's mana value, put it onto the battlefield. If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle your library";
     }
 
     public TransmuteArtifactEffect(final TransmuteArtifactEffect effect) {
@@ -65,13 +65,13 @@ class TransmuteArtifactEffect extends SearchEffect {
             return false;
         }
         //Sacrifice an artifact.
-        int convertedManaCost = 0;
+        int manaValue = 0;
         boolean sacrifice = false;
         TargetControlledPermanent targetArtifact = new TargetControlledPermanent(new FilterControlledArtifactPermanent());
         if (controller.chooseTarget(Outcome.Sacrifice, targetArtifact, source, game)) {
             Permanent permanent = game.getPermanent(targetArtifact.getFirstTarget());
             if (permanent != null) {
-                convertedManaCost = permanent.getConvertedManaCost();
+                manaValue = permanent.getManaValue();
                 sacrifice = permanent.sacrifice(source, game);
             }
         } else {
@@ -84,11 +84,11 @@ class TransmuteArtifactEffect extends SearchEffect {
                     Card card = controller.getLibrary().getCard(cardId, game);
                     if (card != null) {
                         //If that card's converted mana cost is less than or equal to the sacrificed artifact's converted mana cost, put it onto the battlefield.
-                        if (card.getConvertedManaCost() <= convertedManaCost) {
+                        if (card.getManaValue() <= manaValue) {
                             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                         } else {
                             //If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield.
-                            Cost cost = ManaUtil.createManaCost(card.getConvertedManaCost() - convertedManaCost, true);
+                            Cost cost = ManaUtil.createManaCost(card.getManaValue() - manaValue, true);
                             boolean payed = false;
                             if (controller.chooseUse(Outcome.Benefit, "Do you want to pay " + cost.getText() + " to put it onto the battlefield?", source, game)
                                     && cost.pay(source, game, source, source.getControllerId(), false)) {

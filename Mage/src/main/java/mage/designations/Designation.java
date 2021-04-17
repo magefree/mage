@@ -196,7 +196,7 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
     }
 
     @Override
-    public int getConvertedManaCost() {
+    public int getManaValue() {
         return 0;
     }
 

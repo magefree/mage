@@ -12,7 +12,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class CullingScales extends CardImpl {
 
     private static final FilterPermanent filterNonlandPermanentWithLowestCmc = new FilterNonlandPermanent(
-            "nonland permanent with the lowest converted mana cost (<i>If two or more permanents are tied for lowest cost, target any one of them.</i>)"
+            "nonland permanent with the lowest mana value (<i>If two or more permanents are tied for lowest cost, target any one of them.</i>)"
     );
 
     static {
@@ -57,7 +57,7 @@ class HasLowestCMCAmongstNonlandPermanentsPredicate implements ObjectSourcePlaye
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         FilterPermanent filter = new FilterNonlandPermanent();
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, input.getObject().getConvertedManaCost()));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, input.getObject().getManaValue()));
         return !game.getBattlefield().contains(filter, input.getSourceId(), input.getPlayerId(), game, 1);
     }
 

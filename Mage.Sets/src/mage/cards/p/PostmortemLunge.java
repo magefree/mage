@@ -14,7 +14,7 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -55,8 +55,8 @@ enum PostmortemLungeAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         int xValue = ability.getManaCostsToPay().getX();
-        FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less from your graveyard");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue + " or less from your graveyard");
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         ability.getTargets().add(new TargetCardInYourGraveyard(filter));
     }
 }
@@ -65,7 +65,7 @@ class PostmortemLungeEffect extends OneShotEffect {
 
     public PostmortemLungeEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Return target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step";
+        this.staticText = "Return target creature card with mana value X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step";
     }
 
     public PostmortemLungeEffect(final PostmortemLungeEffect effect) {

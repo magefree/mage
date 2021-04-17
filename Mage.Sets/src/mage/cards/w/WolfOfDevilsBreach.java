@@ -41,9 +41,9 @@ public final class WolfOfDevilsBreach extends CardImpl {
         toPay.add(new ManaCostsImpl<>("{1}{R}"));
         toPay.add(new DiscardCardCost());
         Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(new WolfOfDevilsBreachDiscardCostCardConvertedMana()), toPay,
-                "Pay {1}{R} and discard a card to let {this} do damage to target creature or planeswalker equal to the discarded card's converted mana cost?", true), false,
+                "Pay {1}{R} and discard a card to let {this} do damage to target creature or planeswalker equal to the discarded card's mana value?", true), false,
                 "Whenever {this} attacks you may pay {1}{R} and discard a card. If you do, {this} deals damage to target creature or planeswalker "
-                + "equal to the discarded card's converted mana cost.");
+                + "equal to the discarded card's mana value.");
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(ability);
     }
@@ -72,7 +72,7 @@ class WolfOfDevilsBreachDiscardCostCardConvertedMana implements DynamicValue {
                             DiscardCardCost discardCost = (DiscardCardCost) cost;
                             int cmc = 0;
                             for (Card card : discardCost.getCards()) {
-                                cmc += card.getConvertedManaCost();
+                                cmc += card.getManaValue();
                             }
                             return cmc;
                         }
@@ -95,6 +95,6 @@ class WolfOfDevilsBreachDiscardCostCardConvertedMana implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the discarded card's converted mana cost";
+        return "the discarded card's mana value";
     }
 }

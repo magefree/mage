@@ -48,7 +48,7 @@ class HedronMatrixEffect extends ContinuousEffectImpl {
 
     public HedronMatrixEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "Equipped creature gets +X/+X, where X is its converted mana cost";
+        staticText = "Equipped creature gets +X/+X, where X is its mana value";
     }
 
     public HedronMatrixEffect(final HedronMatrixEffect effect) {
@@ -66,8 +66,8 @@ class HedronMatrixEffect extends ContinuousEffectImpl {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(equipment.getAttachedTo());
             if (creature != null) {
-                creature.addPower(creature.getConvertedManaCost());
-                creature.addToughness(creature.getConvertedManaCost());
+                creature.addPower(creature.getManaValue());
+                creature.addToughness(creature.getManaValue());
             }
         }
         return true;

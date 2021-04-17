@@ -54,7 +54,7 @@ class VolcanicVisionReturnToHandTargetEffect extends OneShotEffect {
 
     public VolcanicVisionReturnToHandTargetEffect() {
         super(Outcome.ReturnToHand);
-        staticText = "Return target instant or sorcery card from your graveyard to your hand. {this} deals damage equal to that card's converted mana cost to each creature your opponents control";
+        staticText = "Return target instant or sorcery card from your graveyard to your hand. {this} deals damage equal to that card's mana value to each creature your opponents control";
     }
 
     public VolcanicVisionReturnToHandTargetEffect(final VolcanicVisionReturnToHandTargetEffect effect) {
@@ -78,7 +78,7 @@ class VolcanicVisionReturnToHandTargetEffect extends OneShotEffect {
                     Card card = game.getCard(targetId);
                     if (card != null) {
                         controller.moveCards(card, Zone.HAND, source, game);
-                        int damage = card.getConvertedManaCost();
+                        int damage = card.getManaValue();
                         if (damage > 0) {
                             for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                                 creature.damage(damage, source.getSourceId(), source, game, false, true);

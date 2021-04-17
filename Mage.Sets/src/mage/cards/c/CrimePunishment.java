@@ -53,7 +53,7 @@ class PunishmentEffect extends OneShotEffect {
 
     PunishmentEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy each artifact, creature, and enchantment with converted mana cost X";
+        this.staticText = "Destroy each artifact, creature, and enchantment with mana value X";
     }
 
     PunishmentEffect(final PunishmentEffect effect) {
@@ -69,7 +69,7 @@ class PunishmentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (permanent != null
-                    && permanent.getConvertedManaCost() == source.getManaCostsToPay().getX()
+                    && permanent.getManaValue() == source.getManaCostsToPay().getX()
                     && (permanent.isArtifact()
                     || permanent.isCreature()
                     || permanent.isEnchantment())) {

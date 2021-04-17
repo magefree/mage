@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -17,12 +17,12 @@ import mage.target.TargetPermanent;
  */
 public final class SaiTok extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature or planeswalker if it has converted mana cost 4 or less");
+    private static final FilterPermanent filter = new FilterPermanent("creature or planeswalker if it has mana value 4 or less");
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
         filter.add(CardType.PLANESWALKER.getPredicate());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public SaiTok(UUID ownerId, CardSetInfo setInfo) {

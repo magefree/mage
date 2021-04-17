@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -70,13 +70,13 @@ enum FinaleOfPromiseAdjuster implements TargetAdjuster {
 
         // <= must be replaced to &#60;= for html view
         FilterCard filter1 = FinaleOfPromise.filterInstant.copy();
-        filter1.setMessage("up to one INSTANT card from your graveyard with CMC &#60;= " + xValue + " (target 1 of 2)");
-        filter1.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        filter1.setMessage("up to one INSTANT card from your graveyard with mana value &#60;= " + xValue + " (target 1 of 2)");
+        filter1.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter1));
 
         FilterCard filter2 = FinaleOfPromise.filterSorcery.copy();
-        filter2.setMessage("up to one SORCERY card from your graveyard with CMC &#60;=" + xValue + " (target 2 of 2)");
-        filter2.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        filter2.setMessage("up to one SORCERY card from your graveyard with mana value &#60;=" + xValue + " (target 2 of 2)");
+        filter2.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter2));
     }
 }
@@ -86,7 +86,7 @@ class FinaleOfPromiseEffect extends OneShotEffect {
     public FinaleOfPromiseEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "You may cast up to one target instant card and/or up to one target sorcery card from your graveyard "
-                + "each with converted mana cost X or less without paying their mana costs. If a card cast this way would "
+                + "each with mana value X or less without paying their mana costs. If a card cast this way would "
                 + "be put into your graveyard this turn, exile it instead. If X is 10 or more, copy each of those spells "
                 + "twice. You may choose new targets for the copies.";
     }

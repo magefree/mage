@@ -9,7 +9,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 
 import java.util.UUID;
 
@@ -18,10 +18,10 @@ import java.util.UUID;
  */
 public final class ThunderousSnapper extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a spell with converted mana cost 5 or greater");
+    private static final FilterSpell filter = new FilterSpell("a spell with mana value 5 or greater");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 4));
     }
 
     public ThunderousSnapper(UUID ownerId, CardSetInfo setInfo) {

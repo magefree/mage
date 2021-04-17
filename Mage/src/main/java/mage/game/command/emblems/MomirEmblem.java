@@ -52,7 +52,7 @@ class MomirEffect extends OneShotEffect {
 
     public MomirEffect(MomirEffect effect) {
         super(effect);
-        staticText = "Create a token that's a copy of a creature card with converted mana cost X chosen at random";
+        staticText = "Create a token that's a copy of a creature card with mana value X chosen at random";
     }
 
     @Override
@@ -70,10 +70,10 @@ class MomirEffect extends OneShotEffect {
             return true;
         }
         // should this be random across card names
-        CardCriteria criteria = new CardCriteria().types(CardType.CREATURE).convertedManaCost(value);
+        CardCriteria criteria = new CardCriteria().types(CardType.CREATURE).manaValue(value);
         List<CardInfo> options = CardRepository.instance.findCards(criteria);
         if (options == null || options.isEmpty()) {
-            game.informPlayers("No random creature card with converted mana cost of " + value + " was found.");
+            game.informPlayers("No random creature card with mana value of " + value + " was found.");
             return false;
         }
 

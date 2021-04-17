@@ -27,7 +27,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -75,7 +75,7 @@ class SunforgerEffect extends OneShotEffect {
     public SunforgerEffect() {
         super(Outcome.PlayForFree);
         staticText = "Search your library for a red or white instant "
-                + "card with converted mana cost 4 or less and cast that "
+                + "card with mana value 4 or less and cast that "
                 + "card without paying its mana cost. Then shuffle your library";
     }
 
@@ -99,13 +99,13 @@ class SunforgerEffect extends OneShotEffect {
                  * it). If you can't find a cast-able card (or choose not to),
                  * nothing happens and you shuffle your library.
                  */
-                FilterCard filter = new FilterCard("red or white instant card with converted mana cost 4 or less");
+                FilterCard filter = new FilterCard("red or white instant card with mana value 4 or less");
                 TargetCardInLibrary target = new TargetCardInLibrary(filter);
                 filter.add(Predicates.or(
                         new ColorPredicate(ObjectColor.RED),
                         new ColorPredicate(ObjectColor.WHITE)));
                 filter.add(CardType.INSTANT.getPredicate());
-                filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
+                filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 5));
                 filter.add(new CardCanBeCastPredicate(source.getControllerId()));
                 if (controller.searchLibrary(target, source, game, controller.getId())) {
                     UUID targetId = target.getFirstTarget();

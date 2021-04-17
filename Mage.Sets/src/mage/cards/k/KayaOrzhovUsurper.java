@@ -10,7 +10,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -26,10 +26,10 @@ import java.util.UUID;
 public final class KayaOrzhovUsurper extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterNonlandPermanent("nonland permanent with converted mana cost 1 or less");
+            = new FilterNonlandPermanent("nonland permanent with mana value 1 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 2));
     }
 
     public KayaOrzhovUsurper(UUID ownerId, CardSetInfo setInfo) {

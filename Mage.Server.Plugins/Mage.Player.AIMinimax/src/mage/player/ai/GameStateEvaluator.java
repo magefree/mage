@@ -96,7 +96,7 @@ public final class GameStateEvaluator {
         }
         value += permanent.getAbilities().getStaticAbilities(Zone.BATTLEFIELD).size();
         value += permanent.getAbilities().getTriggeredAbilities(Zone.BATTLEFIELD).size();
-        value += permanent.getManaCost().convertedManaCost();
+        value += permanent.getManaCost().manaValue();
         //TODO: add a difficulty to calculation to ManaCost - sort permanents by difficulty for casting when evaluating game states
         return value;
     }

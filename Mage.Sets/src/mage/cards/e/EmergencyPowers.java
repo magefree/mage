@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -47,16 +47,16 @@ public final class EmergencyPowers extends CardImpl {
 class EmergencyPowersEffect extends OneShotEffect {
 
     public static final FilterPermanentCard filter
-            = new FilterPermanentCard("a permanent card with converted mana cost 7 or less");
+            = new FilterPermanentCard("a permanent card with mana value 7 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 8));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 8));
     }
 
     EmergencyPowersEffect() {
         super(Outcome.Benefit);
         staticText = "Exile {this}.<br><i>Addendum</i> &mdash; If you cast this spell during your main phase, " +
-                "you may put a permanent card with converted mana cost 7 or less from your hand onto the battlefield.";
+                "you may put a permanent card with mana value 7 or less from your hand onto the battlefield.";
     }
 
     private EmergencyPowersEffect(final EmergencyPowersEffect effect) {

@@ -50,7 +50,7 @@ class GoblinMachinistEffect extends OneShotEffect {
 
     public GoblinMachinistEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Reveal cards from the top of your library until you reveal a nonland card. {this} gets +X/+0 until end of turn, where X is that card's converted mana cost. Put the revealed cards on the bottom of your library in any order";
+        this.staticText = "Reveal cards from the top of your library until you reveal a nonland card. {this} gets +X/+0 until end of turn, where X is that card's mana value. Put the revealed cards on the bottom of your library in any order";
     }
 
     public GoblinMachinistEffect(final GoblinMachinistEffect effect) {
@@ -71,8 +71,8 @@ class GoblinMachinistEffect extends OneShotEffect {
                 if (card != null) {
                     cards.add(card);
                     if (!card.isLand()) {
-                        if (card.getConvertedManaCost() > 0) {
-                            game.addEffect(new BoostSourceEffect(card.getConvertedManaCost(), 0, Duration.EndOfTurn), source);
+                        if (card.getManaValue() > 0) {
+                            game.addEffect(new BoostSourceEffect(card.getManaValue(), 0, Duration.EndOfTurn), source);
                         }
                         break;
                     }

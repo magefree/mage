@@ -249,8 +249,8 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public int getConvertedManaCost() {
-        return sourceObject.getConvertedManaCost();
+    public int getManaValue() {
+        return sourceObject.getManaValue();
     }
 
     @Override

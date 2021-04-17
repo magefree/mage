@@ -68,7 +68,7 @@ class HealingTechniqueEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        int manaValue = card.getConvertedManaCost();
+        int manaValue = card.getManaValue();
         player.moveCards(card, Zone.HAND, source, game);
         player.gainLife(manaValue, game, source);
         return true;

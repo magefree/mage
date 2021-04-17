@@ -8,7 +8,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 
 /**
  *
@@ -16,10 +16,10 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  */
 public final class RitualOfSoot extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creatures with converted mana cost 3 or less");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creatures with mana value 3 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(
+        filter.add(new ManaValuePredicate(
                 ComparisonType.FEWER_THAN, 4
         ));
     }

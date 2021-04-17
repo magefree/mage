@@ -27,7 +27,7 @@ import java.util.UUID;
 public final class RebbecArchitectOfAscension extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterCard("each converted mana cost among artifacts you control");
+            = new FilterCard("each mana value among artifacts you control");
 
     static {
         filter.add(RebbecArchitectOfAscensionPredicate.instance);
@@ -73,7 +73,7 @@ enum RebbecArchitectOfAscensionPredicate implements ObjectSourcePlayerPredicate<
                         game.getControllerId(input.getSourceId()), input.getSourceId(), game
                 ).stream()
                 .filter(Objects::nonNull)
-                .mapToInt(MageObject::getConvertedManaCost)
-                .anyMatch(n -> input.getObject().getConvertedManaCost() == n);
+                .mapToInt(MageObject::getManaValue)
+                .anyMatch(n -> input.getObject().getManaValue() == n);
     }
 }

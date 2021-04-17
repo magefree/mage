@@ -88,7 +88,7 @@ class RushedRebirthDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
         @Override
         public boolean apply(Card input, Game game) {
-            return input.getConvertedManaCost() < permanent.getConvertedManaCost();
+            return input.getManaValue() < permanent.getManaValue();
         }
     }
 

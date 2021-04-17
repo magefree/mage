@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.QuandrixToken;
 import mage.target.common.TargetCardInGraveyard;
@@ -60,7 +60,7 @@ enum SequenceEngineAdjuster implements TargetAdjuster {
         int xValue = ability.getManaCostsToPay().getX();
         ability.getTargets().clear();
         FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.addTarget(new TargetCardInGraveyard(filter));
     }
 }

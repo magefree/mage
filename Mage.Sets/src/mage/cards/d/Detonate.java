@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -28,7 +28,7 @@ public final class Detonate extends CardImpl {
 
         // Destroy target artifact with converted mana cost X. It can't be regenerated. Detonate deals X damage to that artifact's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent(new FilterArtifactPermanent("artifact with converted mana cost X")));
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent(new FilterArtifactPermanent("artifact with mana value X")));
         Effect effect = new DamageTargetControllerEffect(ManacostVariableValue.instance);
         effect.setText("{this} deals X damage to that artifact's controller");
         this.getSpellAbility().addEffect(effect);
@@ -52,8 +52,8 @@ enum DetonateAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         int xValue = ability.getManaCostsToPay().getX();
-        FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact with converted mana cost X");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact with mana value X");
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.addTarget(new TargetArtifactPermanent(filter));
     }
 }

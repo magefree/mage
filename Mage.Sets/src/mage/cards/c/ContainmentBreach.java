@@ -64,7 +64,7 @@ class ContainmentBreachEffect extends OneShotEffect {
             return false;
         }
         permanent.destroy(source, game, false);
-        if (permanent.getConvertedManaCost() <= 2) {
+        if (permanent.getManaValue() <= 2) {
             new WitherbloomToken().putOntoBattlefield(1, game, source, source.getControllerId());
         }
         return true;

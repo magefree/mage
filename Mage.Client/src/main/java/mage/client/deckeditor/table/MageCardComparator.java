@@ -44,8 +44,8 @@ public class MageCardComparator implements CardViewComparator {
                 break;
             // Cost
             case 2:
-                aCom = a.getConvertedManaCost();
-                bCom = b.getConvertedManaCost();
+                aCom = a.getManaValue();
+                bCom = b.getManaValue();
                 break;
             // Color
             case 3:

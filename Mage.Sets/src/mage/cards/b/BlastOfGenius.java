@@ -42,7 +42,7 @@ class BlastOfGeniusEffect extends OneShotEffect {
 
     public BlastOfGeniusEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Choose any target. Draw three cards and discard a card. {this} deals damage equal to the converted mana cost of the discard card to that permanent or player";
+        this.staticText = "Choose any target. Draw three cards and discard a card. {this} deals damage equal to the mana value of the discard card to that permanent or player";
     }
 
     public BlastOfGeniusEffect(final BlastOfGeniusEffect effect) {
@@ -65,7 +65,7 @@ class BlastOfGeniusEffect extends OneShotEffect {
                 Card card = player.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     player.discard(card, false, source, game);
-                    int damage = card.getConvertedManaCost();
+                    int damage = card.getManaValue();
                     Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                     if (creature != null) {
                         creature.damage(damage, source.getSourceId(), source, game, false, true);

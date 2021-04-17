@@ -54,7 +54,7 @@ class ImpsMischiefLoseLifeEffect extends OneShotEffect {
 
     public ImpsMischiefLoseLifeEffect() {
         super(Outcome.LoseLife);
-        staticText = "You lose life equal to that spell's converted mana cost";
+        staticText = "You lose life equal to that spell's mana value";
     }
 
     public ImpsMischiefLoseLifeEffect(final ImpsMischiefLoseLifeEffect effect) {
@@ -72,7 +72,7 @@ class ImpsMischiefLoseLifeEffect extends OneShotEffect {
         if (spell != null) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                player.loseLife(spell.getConvertedManaCost(), game, source, false);
+                player.loseLife(spell.getManaValue(), game, source, false);
                 return true;
             }            
         }        

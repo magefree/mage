@@ -49,7 +49,7 @@ class LammastideWeaveEffect extends OneShotEffect {
     LammastideWeaveEffect() {
         super(Outcome.DrawCard);
         this.staticText = ", then target player mills a card. If a card with the chosen name was milled this way, " +
-                "you gain life equal to its converted mana cost.";
+                "you gain life equal to its mana value.";
     }
 
     private LammastideWeaveEffect(final LammastideWeaveEffect effect) {
@@ -71,7 +71,7 @@ class LammastideWeaveEffect extends OneShotEffect {
         }
         for (Card card : targetPlayer.millCards(1, source, game).getCards(game)) {
             if (CardUtil.haveSameNames(card, cardName, game)) {
-                controller.gainLife(card.getConvertedManaCost(), game, source);
+                controller.gainLife(card.getManaValue(), game, source);
             }
         }
         return true;

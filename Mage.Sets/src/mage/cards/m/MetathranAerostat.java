@@ -16,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -54,7 +54,7 @@ class MetathranAerostatEffect extends OneShotEffect {
 
     public MetathranAerostatEffect() {
         super(Outcome.Benefit);
-        this.staticText = "You may put a creature card with converted mana cost "
+        this.staticText = "You may put a creature card with mana value "
                 + "X from your hand onto the battlefield. "
                 + "If you do, return {this} to its owner's hand";
     }
@@ -75,8 +75,8 @@ class MetathranAerostatEffect extends OneShotEffect {
             return false;
         }
         int xValue = source.getManaCostsToPay().getX();
-        FilterCreatureCard filter = new FilterCreatureCard("a creature with converted mana cost " + xValue);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        FilterCreatureCard filter = new FilterCreatureCard("a creature with mana value " + xValue);
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         if (new PutCardFromHandOntoBattlefieldEffect(filter).apply(game, source)) {
             return new ReturnToHandSourceEffect(true).apply(game, source);
         }

@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 
 /**
  *
@@ -19,10 +19,10 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  */
 public final class MistmeadowSkulk extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("converted mana cost 3 or greater");
+    private static final FilterCard filter = new FilterCard("mana value 3 or greater");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 2));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 2));
     }
 
     public MistmeadowSkulk(UUID ownerId, CardSetInfo setInfo) {

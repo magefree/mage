@@ -52,7 +52,7 @@ class RefuseEffect extends OneShotEffect {
 
     public RefuseEffect() {
         super(Outcome.Damage);
-        staticText = "Refuse deals damage to target spell's controller equal to that spell's converted mana cost";
+        staticText = "Refuse deals damage to target spell's controller equal to that spell's mana value";
     }
 
     public RefuseEffect(final RefuseEffect effect) {
@@ -72,7 +72,7 @@ class RefuseEffect extends OneShotEffect {
             if (spell != null) {
                 Player spellController = game.getPlayer(spell.getControllerId());
                 if (spellController != null) {
-                    spellController.damage(spell.getConvertedManaCost(), source.getSourceId(), source, game);
+                    spellController.damage(spell.getManaValue(), source.getSourceId(), source, game);
                     return true;
                 }
             }

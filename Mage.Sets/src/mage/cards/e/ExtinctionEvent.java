@@ -9,7 +9,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostParityPredicate;
+import mage.filter.predicate.mageobject.ManaValueParityPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -44,13 +44,13 @@ class ExtinctionEventEffect extends OneShotEffect {
     private static final FilterPermanent oddFilter = new FilterCreaturePermanent();
 
     static {
-        evenFilter.add(ConvertedManaCostParityPredicate.EVEN);
-        oddFilter.add(ConvertedManaCostParityPredicate.ODD);
+        evenFilter.add(ManaValueParityPredicate.EVEN);
+        oddFilter.add(ManaValueParityPredicate.ODD);
     }
 
     ExtinctionEventEffect() {
         super(Outcome.Benefit);
-        staticText = "Choose odd or even. Exile each creature with converted mana cost of the chosen value. <i>(Zero is even.)</i>";
+        staticText = "Choose odd or even. Exile each creature with mana value of the chosen value. <i>(Zero is even.)</i>";
     }
 
     private ExtinctionEventEffect(final ExtinctionEventEffect effect) {

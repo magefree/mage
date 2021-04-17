@@ -72,7 +72,7 @@ class SpellWithManaCostLessThanOrEqualToCondition implements Condition {
         MageObject object = game.getObject(source.getSourceId());
         return object != null
                 && !object.isLand()
-                && object.getConvertedManaCost() <= counters;
+                && object.getManaValue() <= counters;
     }
 }
 
@@ -128,7 +128,7 @@ class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
 
     public AsForetoldAddAltCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with converted mana cost X or less, where X is the number of time counters on {this}.";
+        staticText = "Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with mana value X or less, where X is the number of time counters on {this}.";
     }
 
     public AsForetoldAddAltCostEffect(final AsForetoldAddAltCostEffect effect) {

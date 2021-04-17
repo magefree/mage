@@ -94,7 +94,7 @@ class TorrentSculptorEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        int counters = card.getConvertedManaCost();
+        int counters = card.getManaValue();
         counters = Math.floorDiv(counters, 2) + counters % 2;
         player.moveCards(card, Zone.EXILED, source, game);
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
@@ -141,7 +141,7 @@ class FlamethrowerSonataEffect extends OneShotEffect {
             return true;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new DamageTargetEffect(card.getConvertedManaCost()),
+                new DamageTargetEffect(card.getManaValue()),
                 false, "{this} deals damage equal to that card's mana value " +
                 "to target creature or planeswalker you don't control"
         );

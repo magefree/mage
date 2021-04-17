@@ -48,7 +48,7 @@ class ErraticMutationEffect extends OneShotEffect {
 
     public ErraticMutationEffect() {
         super(Outcome.UnboostCreature);
-        this.staticText = "Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's converted mana cost. Put all cards revealed this way on the bottom of your library in any order";
+        this.staticText = "Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's mana value. Put all cards revealed this way on the bottom of your library in any order";
     }
 
     public ErraticMutationEffect(final ErraticMutationEffect effect) {
@@ -79,7 +79,7 @@ class ErraticMutationEffect extends OneShotEffect {
 
             // the nonland card
             if (nonLandCard != null) {
-                int boostValue = nonLandCard.getConvertedManaCost();
+                int boostValue = nonLandCard.getManaValue();
                 // unboost target
                 ContinuousEffect effect = new BoostTargetEffect(boostValue, -boostValue, Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source)));

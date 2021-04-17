@@ -71,7 +71,7 @@ class YurikoTheTigersShadowEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "reveal the top card of your library "
                 + "and put that card into your hand. Each opponent loses life "
-                + "equal to that card's converted mana cost";
+                + "equal to that card's mana value";
     }
 
     public YurikoTheTigersShadowEffect(final YurikoTheTigersShadowEffect effect) {
@@ -96,7 +96,7 @@ class YurikoTheTigersShadowEffect extends OneShotEffect {
         player.revealCards(source, new CardsImpl(card), game);
         player.moveCards(card, Zone.HAND, source, game);
         return new LoseLifeOpponentsEffect(
-                card.getConvertedManaCost()
+                card.getManaValue()
         ).apply(game, source);
     }
 }

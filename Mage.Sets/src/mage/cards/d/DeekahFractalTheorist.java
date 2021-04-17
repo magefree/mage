@@ -66,7 +66,7 @@ enum DeekahFractalTheoristValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Spell spell = (Spell) effect.getValue(MagecraftAbility.SPELL_KEY);
-        return spell != null ? spell.getConvertedManaCost() : 0;
+        return spell != null ? spell.getManaValue() : 0;
     }
 
     @Override

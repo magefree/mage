@@ -6,7 +6,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -17,10 +17,10 @@ import java.util.UUID;
 public final class Despark extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterPermanent("permanent with converted mana cost 4 or greater");
+            = new FilterPermanent("permanent with mana value 4 or greater");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public Despark(UUID ownerId, CardSetInfo setInfo) {

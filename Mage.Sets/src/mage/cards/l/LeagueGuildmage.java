@@ -16,7 +16,7 @@ import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.TargetSpell;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -27,7 +27,7 @@ import mage.target.targetadjustment.TargetAdjuster;
  */
 public final class LeagueGuildmage extends CardImpl {
 
-    private static final FilterSpell filter = new FilterInstantOrSorcerySpell("instant or sorcery you control with converted mana cost X");
+    private static final FilterSpell filter = new FilterInstantOrSorcerySpell("instant or sorcery you control with mana value X");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
@@ -76,9 +76,9 @@ enum LeagueGuildmageAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         int xValue = ability.getManaCostsToPay().getX();
-        FilterSpell spellFilter = new FilterInstantOrSorcerySpell("instant or sorcery you control with converted mana cost " + xValue);
+        FilterSpell spellFilter = new FilterInstantOrSorcerySpell("instant or sorcery you control with mana value " + xValue);
         spellFilter.add(TargetController.YOU.getControllerPredicate());
-        spellFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        spellFilter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.getTargets().clear();
         ability.addTarget(new TargetSpell(spellFilter));
     }

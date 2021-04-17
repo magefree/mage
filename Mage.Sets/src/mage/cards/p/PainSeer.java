@@ -46,7 +46,7 @@ class PainSeerEffect extends OneShotEffect {
 
     public PainSeerEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to that card's converted mana cost";
+        this.staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to that card's mana value";
     }
 
     public PainSeerEffect(final PainSeerEffect effect) {
@@ -72,7 +72,7 @@ class PainSeerEffect extends OneShotEffect {
                 Cards cards = new CardsImpl(card);
                 player.revealCards("Pain Seer", cards, game);
                 if(player.moveCards(card, Zone.HAND, source, game)) {
-                    player.loseLife(card.getConvertedManaCost(), game, source, false);
+                    player.loseLife(card.getManaValue(), game, source, false);
                     return true;
                 }
             }

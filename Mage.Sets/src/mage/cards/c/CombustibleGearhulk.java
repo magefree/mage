@@ -54,7 +54,7 @@ class CombustibleGearhulkEffect extends OneShotEffect {
 
     public CombustibleGearhulkEffect() {
         super(Outcome.AIDontUseIt);
-        staticText = "target opponent may have you draw three cards. If the player doesn't, put the top three cards of your library into your graveyard, then {this} deals damage to that player equal to the total converted mana cost of those cards";
+        staticText = "target opponent may have you draw three cards. If the player doesn't, put the top three cards of your library into your graveyard, then {this} deals damage to that player equal to the total mana value of those cards";
     }
 
     public CombustibleGearhulkEffect(final CombustibleGearhulkEffect effect) {
@@ -95,7 +95,7 @@ class CombustibleGearhulkMillAndDamageEffect extends OneShotEffect {
 
     public CombustibleGearhulkMillAndDamageEffect() {
         super(Outcome.Damage);
-        staticText = "mill three cards, then {this} deals damage to that player equal to the total converted mana cost of those cards.";
+        staticText = "mill three cards, then {this} deals damage to that player equal to the total mana value of those cards.";
     }
 
     public CombustibleGearhulkMillAndDamageEffect(final CombustibleGearhulkMillAndDamageEffect effect) {
@@ -110,7 +110,7 @@ class CombustibleGearhulkMillAndDamageEffect extends OneShotEffect {
                     .millCards(3, source, game)
                     .getCards(game)
                     .stream()
-                    .mapToInt(MageObject::getConvertedManaCost)
+                    .mapToInt(MageObject::getManaValue)
                     .sum();
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
             if (targetPlayer != null) {

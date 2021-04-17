@@ -116,7 +116,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
             cardController = controller.getLibrary().getFromTop(game);
             cards.add(cardController);
             controller.revealCards(sourceObject.getIdName() + ": Clash card of " + controller.getName(), cards, game);
-            cmcController = cardController.getConvertedManaCost();
+            cmcController = cardController.getManaValue();
             message.append(" (").append(cmcController).append(')');
         } else {
             message.append(" no card");
@@ -127,7 +127,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
             cardOpponent = opponent.getLibrary().getFromTop(game);
             cards.add(cardOpponent);
             opponent.revealCards(sourceObject.getIdName() + ": Clash card of " + opponent.getName(), cards, game);
-            cmcOpponent = cardOpponent.getConvertedManaCost();
+            cmcOpponent = cardOpponent.getManaValue();
             message.append(" (").append(cmcOpponent).append(')');
         } else {
             message.append(" no card");

@@ -15,10 +15,9 @@ import mage.constants.WatcherScope;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -44,7 +43,7 @@ public final class CustodiSoulcaller extends CardImpl {
         // Whenever Custodi Soulcaller attacks, return target creature card with converted mana cost X or less from your graveyard to the battlefield, where X is the number of players you attacked with a creature this combat.
         Ability ability = new AttacksTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), false);
         ability.addWatcher(new CustodiSoulcallerWatcher());
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card with converted mana cost X or less from your graveyard, where X is the number of players you attacked with a creature this combat")));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card with mana value X or less from your graveyard, where X is the number of players you attacked with a creature this combat")));
         ability.setTargetAdjuster(CustodiSoulcallerAdjuster.instance);
         this.addAbility(ability);
     }
@@ -69,9 +68,9 @@ enum CustodiSoulcallerAdjuster implements TargetAdjuster {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
         if (watcher != null) {
             int xValue = watcher.getNumberOfAttackedPlayers(sourcePermanent.getControllerId());
-            FilterCard filter = new FilterCard("creature card with converted mana cost " + xValue + " or less");
+            FilterCard filter = new FilterCard("creature card with mana value " + xValue + " or less");
             filter.add(CardType.CREATURE.getPredicate());
-            filter.add(Predicates.or(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue), new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue)));
+            filter.add(Predicates.or(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue), new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue)));
             ability.getTargets().add(new TargetCardInYourGraveyard(filter));
         }
     }

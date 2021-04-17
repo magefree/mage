@@ -26,7 +26,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -57,7 +57,7 @@ public final class KozilekTheGreatDistortion extends CardImpl {
 
         // Discard a card with converted mana cost X: Counter target spell with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new KozilekDiscardCost());
-        ability.addTarget(new TargetSpell(new FilterSpell("spell with converted mana cost X")));
+        ability.addTarget(new TargetSpell(new FilterSpell("spell with mana value X")));
         this.addAbility(ability);
     }
 
@@ -101,7 +101,7 @@ class KozilekDrawEffect extends OneShotEffect {
 class KozilekDiscardCost extends CostImpl {
 
     public KozilekDiscardCost() {
-        this.text = "discard a card with converted mana cost X";
+        this.text = "discard a card with mana value X";
     }
 
     public KozilekDiscardCost(final KozilekDiscardCost cost) {
@@ -118,8 +118,8 @@ class KozilekDiscardCost extends CostImpl {
         if (player == null) {
             return false;
         }
-        FilterCard filter = new FilterCard("card with converted mana cost of " + targetSpell.getConvertedManaCost());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, targetSpell.getConvertedManaCost()));
+        FilterCard filter = new FilterCard("card with mana value of " + targetSpell.getManaValue());
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, targetSpell.getManaValue()));
         TargetCardInHand target = new TargetCardInHand(filter);
         this.getTargets().clear();
         this.getTargets().add(target);
@@ -150,13 +150,13 @@ class KozilekDiscardCost extends CostImpl {
         Set<Integer> stackCMC = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
             if (stackObject instanceof Spell) {
-                stackCMC.add(stackObject.getConvertedManaCost());
+                stackCMC.add(stackObject.getManaValue());
             }
         }
         Player controller = game.getPlayer(ability.getControllerId());
         if(controller != null) {
             for (Card card : controller.getHand().getCards(game)) {
-                if (stackCMC.contains(card.getConvertedManaCost())) {
+                if (stackCMC.contains(card.getManaValue())) {
                     return true;
                 }
             }

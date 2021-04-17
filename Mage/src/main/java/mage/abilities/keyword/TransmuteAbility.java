@@ -13,7 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -57,7 +57,7 @@ public class TransmuteAbility extends SimpleActivatedAbility {
     public String getRule() {
         return new StringBuilder("Transmute ").append(this.getManaCosts().getText())
                 .append(" <i>(").append(this.getManaCosts().getText())
-                .append(", Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)</i>").toString();
+                .append(", Discard this card: Search your library for a card with the same mana value as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)</i>").toString();
     }
 }
 
@@ -77,8 +77,8 @@ class TransmuteEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null && controller != null) {
-            FilterCard filter = new FilterCard("card with converted mana cost " + sourceObject.getConvertedManaCost());
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, sourceObject.getConvertedManaCost()));
+            FilterCard filter = new FilterCard("card with mana value " + sourceObject.getManaValue());
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, sourceObject.getManaValue()));
             TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
             if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {

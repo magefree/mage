@@ -7,21 +7,21 @@ import mage.game.Game;
 /**
  * @author TheElk801
  */
-public enum ConvertedManaCostParityPredicate implements Predicate<MageObject> {
+public enum ManaValueParityPredicate implements Predicate<MageObject> {
     EVEN(0),
     ODD(1);
     private final int parity;
 
-    ConvertedManaCostParityPredicate(int parity) {
+    ManaValueParityPredicate(int parity) {
         this.parity = parity;
     }
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        return input.getConvertedManaCost() % 2 == parity;
+        return input.getManaValue() % 2 == parity;
     }
 
     @Override
     public String toString() {
-        return "ConvertedManaCostParity" + super.toString();
+        return "ManaValueParity" + super.toString();
     }}

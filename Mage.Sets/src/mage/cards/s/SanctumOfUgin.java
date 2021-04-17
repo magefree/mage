@@ -15,7 +15,7 @@ import mage.constants.ComparisonType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -24,12 +24,12 @@ import mage.target.common.TargetCardInLibrary;
 public final class SanctumOfUgin extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("colorless creature card");
-    private static final FilterSpell filterSpells = new FilterSpell("colorless spell with converted mana cost 7 or greater");
+    private static final FilterSpell filterSpells = new FilterSpell("colorless spell with mana value 7 or greater");
 
     static {
         filter.add(ColorlessPredicate.instance);
         filterSpells.add(ColorlessPredicate.instance);
-        filterSpells.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
+        filterSpells.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 6));
     }
 
     public SanctumOfUgin(UUID ownerId, CardSetInfo setInfo) {

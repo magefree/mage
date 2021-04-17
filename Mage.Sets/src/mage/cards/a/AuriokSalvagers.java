@@ -14,7 +14,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -23,9 +23,9 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class AuriokSalvagers extends CardImpl {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card with converted mana cost 1 or less from your graveyard");
+    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card with mana value 1 or less from your graveyard");
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 2));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 2));
     }
     
     public AuriokSalvagers(UUID ownerId, CardSetInfo setInfo) {

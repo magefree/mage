@@ -204,7 +204,7 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-    public int getConvertedManaCost() {
+    public int getManaValue() {
         return 0;
     }
 
