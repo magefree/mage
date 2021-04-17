@@ -297,6 +297,18 @@ public class CallbackClientImpl implements CallbackClient {
                         break;
                     }
 
+                    case GAME_GET_MULTI_AMOUNT: {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            appendJsonEvent("GAME_GET_MULTI_AMOUNT", callback.getObjectId(), message);
+
+                            panel.getMultiAmount(message.getMessages(), message.getMin(), message.getMax(), message.getOptions());
+                        }
+                        break;
+                    }
+
                     case GAME_UPDATE: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
 

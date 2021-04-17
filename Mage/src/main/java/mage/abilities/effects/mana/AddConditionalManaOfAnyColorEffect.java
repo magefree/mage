@@ -9,6 +9,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.choices.ChoiceColor;
+import mage.constants.MultiAmountType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -87,29 +88,26 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
         if (game != null) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                ConditionalMana mana = null;
                 int value = amount.calculate(game, source, this);
-                ChoiceColor choice = new ChoiceColor(true);
-                for (int i = 0; i < value; i++) {
-                    if (choice.getChoice() == null) {
+                if (value > 0) {
+                    if (oneChoice || value == 1) {
+                        ChoiceColor choice = new ChoiceColor(true);
                         controller.choose(outcome, choice, game);
-                    }
-                    if (choice.getChoice() == null) {
-                        return null;
-                    }
-                    if (oneChoice) {
-                        mana = new ConditionalMana(manaBuilder.setMana(choice.getMana(value), source, game).build());
-                        break;
-                    } else {
-                        if (mana == null) {
-                            mana = new ConditionalMana(manaBuilder.setMana(choice.getMana(1), source, game).build());
-                        } else {
-                            mana.add(choice.getMana(1));
+                        if (choice.getChoice() == null) {
+                            return null;
                         }
-                        choice.clearChoice();
+                        return new ConditionalMana(manaBuilder.setMana(choice.getMana(value), source, game).build());
                     }
+                    List<String> manaStrings = new ArrayList<>(5);
+                    manaStrings.add("W");
+                    manaStrings.add("U");
+                    manaStrings.add("B");
+                    manaStrings.add("R");
+                    manaStrings.add("G");
+                    List<Integer> choices = controller.getMultiAmount(this.outcome, manaStrings, 0, value, MultiAmountType.MANA, game);
+                    Mana mana = new Mana(choices.get(0), choices.get(1), choices.get(2), choices.get(3), choices.get(4), 0, 0, 0);
+                    return new ConditionalMana(manaBuilder.setMana(mana, source, game).build());
                 }
-                return mana;
             }
         }
         return new Mana();

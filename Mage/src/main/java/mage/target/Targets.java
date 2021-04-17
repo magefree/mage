@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.target.targetpointer.*;
 import org.apache.log4j.Logger;
 
@@ -65,6 +66,7 @@ public class Targets extends ArrayList<Target> {
             if (!canChoose(source.getSourceId(), playerId, game)) {
                 return false;
             }
+
             //int state = game.bookmarkState();
             while (!isChosen()) {
                 Target target = this.getUnchosen().get(0);

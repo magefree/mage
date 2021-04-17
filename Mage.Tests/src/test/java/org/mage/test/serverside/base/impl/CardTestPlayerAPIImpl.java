@@ -1909,6 +1909,20 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Setup amount choices.
+     *
+     * Multi amount choices uses WUBRG order (so use 1,2,3,4,5 values list)
+     *
+     * @param player
+     * @param amountList
+     */
+    public void setChoiceAmount(TestPlayer player, int... amountList) {
+        for (int amount : amountList) {
+            setChoice(player, "X=" + amount);
+        }
+    }
+
+    /**
      * Set the modes for modal spells
      *
      * @param player

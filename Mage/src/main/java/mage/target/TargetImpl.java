@@ -278,51 +278,60 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
-        Player player = game.getPlayer(playerId);
-        if (player == null) {
+        Player targetController = getTargetController(game, playerId);
+        if (targetController == null) {
             return false;
         }
 
-        while (!isChosen() && !doneChosing()) {
-            if (!player.canRespond()) {
-                return chosen = targets.size() >= getNumberOfTargets();
+        chosen = targets.size() >= getNumberOfTargets();
+        do {
+            if (!targetController.canRespond()) {
+                return chosen;
             }
-            chosen = targets.size() >= getNumberOfTargets();
-            if (!player.choose(outcome, this, sourceId, game)) {
+            if (!targetController.choose(outcome, this, sourceId, game)) {
                 return chosen;
             }
             chosen = targets.size() >= getNumberOfTargets();
-        }
-        return chosen = true;
+        } while (!isChosen() && !doneChosing());
+        return chosen;
     }
 
     @Override
     public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
-        Player player = game.getPlayer(playerId);
-        if (player == null) {
+        Player targetController = getTargetController(game, playerId);
+        if (targetController == null) {
             return false;
         }
 
         List<UUID> possibleTargets = new ArrayList<>(possibleTargets(source.getSourceId(), playerId, game));
-        while (!isChosen() && !doneChosing()) {
-            if (!player.canRespond()) {
-                return chosen = targets.size() >= getNumberOfTargets();
+
+        chosen = targets.size() >= getNumberOfTargets();
+        do {
+            if (!targetController.canRespond()) {
+                return chosen;
             }
-            chosen = targets.size() >= getNumberOfTargets();
             if (isRandom()) {
-                if (!possibleTargets.isEmpty()) {
-                    int index = RandomUtil.nextInt(possibleTargets.size());
-                    this.addTarget(possibleTargets.get(index), source, game);
-                    possibleTargets.remove(index);
-                } else {
+                if (possibleTargets.isEmpty()) {
                     return chosen;
                 }
-            } else if (!getTargetController(game, playerId).chooseTarget(outcome, this, source, game)) {
+                // find valid target
+                while (!possibleTargets.isEmpty()) {
+                    int index = RandomUtil.nextInt(possibleTargets.size());
+                    if (this.canTarget(playerId, possibleTargets.get(index), source, game)) {
+                        this.addTarget(possibleTargets.get(index), source, game);
+                        possibleTargets.remove(index);
+                        break;
+                    } else {
+                        possibleTargets.remove(index);
+                    }
+                }
+            } else if (!targetController.chooseTarget(outcome, this, source, game)) {
                 return chosen;
             }
             chosen = targets.size() >= getNumberOfTargets();
-        }
-        return chosen = true;
+        } while (!isChosen() && !doneChosing());
+
+        return chosen;
     }
 
     @Override
@@ -573,5 +582,15 @@ public abstract class TargetImpl implements Target {
     @Override
     public void setEventReporting(boolean shouldReport) {
         this.shouldReportEvents = shouldReport;
+    }
+
+    @Override
+    public int getSize() {
+        return targets.size();
+    }
+
+    @Override
+    public boolean contains(UUID targetId) {
+        return targets.containsKey(targetId);
     }
 }

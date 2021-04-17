@@ -86,6 +86,7 @@ public final class GamePanel extends javax.swing.JPanel {
     GamePane gamePane;
     private ReplayTask replayTask;
     private final PickNumberDialog pickNumber;
+    private final PickMultiNumberDialog pickMultiNumber;
     private JLayeredPane jLayeredPane;
     private String chosenHandKey = "You";
     private boolean smallMode = false;
@@ -133,6 +134,9 @@ public final class GamePanel extends javax.swing.JPanel {
 
         pickNumber = new PickNumberDialog();
         MageFrame.getDesktop().add(pickNumber, JLayeredPane.MODAL_LAYER);
+
+        pickMultiNumber = new PickMultiNumberDialog();
+        MageFrame.getDesktop().add(pickMultiNumber, JLayeredPane.MODAL_LAYER);
 
         this.feedbackPanel.setConnectedChatPanel(this.userChatPanel);
 
@@ -237,6 +241,9 @@ public final class GamePanel extends javax.swing.JPanel {
 
         if (pickNumber != null) {
             pickNumber.removeDialog();
+        }
+        if (pickMultiNumber != null) {
+            pickMultiNumber.removeDialog();
         }
         for (CardInfoWindowDialog exileDialog : exiles.values()) {
             exileDialog.cleanUp();
@@ -1615,6 +1622,11 @@ public final class GamePanel extends javax.swing.JPanel {
         } else {
             SessionHandler.sendPlayerInteger(gameId, pickNumber.getAmount());
         }
+    }
+
+    public void getMultiAmount(List<String> messages, int min, int max, Map<String, Serializable> options) {
+        pickMultiNumber.showDialog(messages, min, max, options);
+        SessionHandler.sendPlayerString(gameId, pickMultiNumber.getMultiAmount());
     }
 
     public void getChoice(Choice choice, UUID objectId) {

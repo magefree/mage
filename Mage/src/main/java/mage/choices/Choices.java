@@ -56,6 +56,9 @@ public class Choices extends ArrayList<Choice> {
     public boolean choose(Game game, Ability source) {
         if (this.size() > 0) {
             Player player = game.getPlayer(source.getControllerId());
+            if (player == null) {
+                return false;
+            }
             while (!isChosen()) {
                 Choice choice = this.getUnchosen().get(0);
                 if (!player.choose(outcome, choice, game)) {

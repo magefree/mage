@@ -219,6 +219,9 @@ public class GameController implements GameCallback {
                             case AMOUNT:
                                 amount(event.getPlayerId(), event.getMessage(), event.getMin(), event.getMax());
                                 break;
+                            case MULTI_AMOUNT:
+                                multiAmount(event.getPlayerId(), event.getMessages(), event.getMin(), event.getMax(), event.getOptions());
+                                break;
                             case PERSONAL_MESSAGE:
                                 informPersonal(event.getPlayerId(), event.getMessage());
                                 break;
@@ -842,6 +845,10 @@ public class GameController implements GameCallback {
 
     private synchronized void amount(UUID playerId, final String message, final int min, final int max) throws MageException {
         perform(playerId, playerId1 -> getGameSession(playerId1).getAmount(message, min, max));
+    }
+
+    private synchronized void multiAmount(UUID playerId, final List<String> messages, final int min, final int max, final Map<String, Serializable> options) throws MageException {
+        perform(playerId, playerId1 -> getGameSession(playerId1).getMultiAmount(messages, min, max, options));
     }
 
     private void informOthers(UUID playerId) throws MageException {

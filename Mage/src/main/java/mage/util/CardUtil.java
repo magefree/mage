@@ -1271,6 +1271,16 @@ public final class CardUtil {
         return res;
     }
 
+    public static int parseIntWithDefault(String value, int defaultValue) {
+        int res;
+        try {
+            res = Integer.parseInt(value);
+        } catch(NumberFormatException ex) {
+            res = defaultValue;
+        }
+        return res;
+    }
+
     /**
      * Find mapping from original to copied card (e.g. map original left side with copied left side)
      *

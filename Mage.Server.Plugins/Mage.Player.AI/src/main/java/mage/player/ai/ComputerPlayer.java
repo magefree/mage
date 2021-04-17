@@ -2028,6 +2028,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
+    // TODO: add AI support with outcome and replace random with min/max
     public int getAmount(int min, int max, String message, Game game) {
         log.debug("getAmount");
         if (message.startsWith("Assign damage to ")) {
@@ -2037,6 +2038,29 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return RandomUtil.nextInt(CardUtil.overflowInc(max, 1));
         }
         return min;
+    }
+
+    @Override
+    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+        log.debug("getMultiAmount");
+
+        int needCount = messages.size();
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
+        if (needCount == 0) {
+            return defaultList;
+        }
+
+        // BAD effect
+        // default list uses minimum possible values, so return it on bad effect
+        // TODO: need something for damage target and mana logic here, current version is useless but better than random
+        if (!outcome.isGood()) {
+            return defaultList;
+        }
+
+        // GOOD effect
+        // values must be stable, so AI must able to simulate it and choose correct actions
+        // fill max values as much as possible
+        return MultiAmountType.prepareMaxValues(needCount, min, max);
     }
 
     @Override

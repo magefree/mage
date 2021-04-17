@@ -5,6 +5,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.players.Player;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -59,7 +60,7 @@ public abstract class TargetAmount extends TargetImpl {
     public void clearChosen() {
         super.clearChosen();
         amountWasSet = false;
-        // remainingAmount = amount;
+        // remainingAmount = amount; // auto-calced on target remove
     }
 
     public void setAmountDefinition(DynamicValue amount) {
@@ -71,6 +72,9 @@ public abstract class TargetAmount extends TargetImpl {
         amountWasSet = true;
     }
 
+    public int getAmountTotal(Game game, Ability source) {
+        return amount.calculate(game, source, null);
+    }
 
     @Override
     public void addTarget(UUID id, int amount, Ability source, Game game, boolean skipEvent) {
@@ -92,17 +96,25 @@ public abstract class TargetAmount extends TargetImpl {
 
     @Override
     public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
+        Player player = game.getPlayer(playerId);
+        if (player == null) {
+            return false;
+        }
+
         if (!amountWasSet) {
             setAmount(source, game);
         }
         chosen = isChosen();
         while (remainingAmount > 0) {
+            if (!player.canRespond()) {
+                return chosen;
+            }
             if (!getTargetController(game, playerId).chooseTargetAmount(outcome, this, source, game)) {
                 return chosen;
             }
             chosen = isChosen();
         }
-        return chosen = true;
+        return chosen;
     }
 
     @Override
@@ -162,5 +174,13 @@ public abstract class TargetAmount extends TargetImpl {
                 }
             }
         }
+    }
+
+    public void setTargetAmount(UUID targetId, int amount, Ability source, Game game) {
+        if (!amountWasSet) {
+            setAmount(source, game);
+        }
+        remainingAmount -= (amount - this.getTargetAmount(targetId));
+        this.setTargetAmount(targetId, amount, game);
     }
 }

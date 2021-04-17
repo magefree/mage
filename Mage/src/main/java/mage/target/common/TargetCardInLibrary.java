@@ -72,21 +72,19 @@ public class TargetCardInLibrary extends TargetCard {
         }
         cards.sort(Comparator.comparing(MageObject::getName));
         Cards cardsId = new CardsImpl();
-        cards.forEach((card) -> {
-            cardsId.add(card);
-        });
+        cards.forEach(cardsId::add);
 
-        while (!isChosen() && !doneChosing()) {
+        chosen = targets.size() >= getMinNumberOfTargets();
+        do {
             if (!player.canRespond()) {
-                return chosen = targets.size() >= minNumberOfTargets;
+                return chosen;
             }
-            chosen = targets.size() >= minNumberOfTargets;
             if (!player.chooseTarget(outcome, cardsId, this, null, game)) {
                 return chosen;
             }
-            chosen = targets.size() >= minNumberOfTargets;
-        }
-        return chosen = true;
+            chosen = targets.size() >= getMinNumberOfTargets();
+        } while (!isChosen() && !doneChosing());
+        return chosen;
     }
 
     @Override
