@@ -39,7 +39,7 @@ public final class TeferisProtection extends CardImpl {
         this.getSpellAbility().addEffect(new TeferisProtectionPhaseOutEffect());
 
         // Exile Teferi's Protection.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private TeferisProtection(final TeferisProtection card) {

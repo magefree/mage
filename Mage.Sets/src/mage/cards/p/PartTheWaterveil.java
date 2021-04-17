@@ -20,7 +20,7 @@ public final class PartTheWaterveil extends CardImpl {
 
         // Take an extra turn after this one. Exile Part the Waterveil.
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
 
         // Awaken 6-{6}{U}{U}{U}
         this.addAbility(new AwakenAbility(this, 6, "{6}{U}{U}{U}"));

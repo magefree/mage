@@ -26,7 +26,7 @@ public final class MnemonicDeluge extends CardImpl {
 
         // Exile target instant or sorcery card from a graveyard. Copy that card three times. You may cast the copies without paying their mana costs. Exile Mnemonic Deluge.
         this.getSpellAbility().addEffect(new MnemonicDelugeEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY));
     }
 

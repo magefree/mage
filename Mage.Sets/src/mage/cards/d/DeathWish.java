@@ -25,7 +25,7 @@ public final class DeathWish extends CardImpl {
         this.getSpellAbility().addEffect(new LoseHalfLifeEffect());
 
         // Exile Death Wish.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private DeathWish(final DeathWish card) {

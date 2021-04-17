@@ -85,17 +85,17 @@ class OnceAndFutureEffect extends OneShotEffect {
         }
         if (card2 == null) {
             player.putInHand(card1, game);
-            return ExileSpellEffect.getInstance().apply(game, source);
+            return new ExileSpellEffect().apply(game, source);
         }
         if (AdamantCondition.GREEN.apply(game, source)) {
             Cards cards = new CardsImpl();
             cards.add(card1);
             cards.add(card2);
             player.moveCards(cards, Zone.HAND, source, game);
-            return ExileSpellEffect.getInstance().apply(game, source);
+            return new ExileSpellEffect().apply(game, source);
         }
         player.putInHand(card1, game);
         player.putCardsOnTopOfLibrary(new CardsImpl(card2), game, source, false);
-        return ExileSpellEffect.getInstance().apply(game, source);
+        return new ExileSpellEffect().apply(game, source);
     }
 }

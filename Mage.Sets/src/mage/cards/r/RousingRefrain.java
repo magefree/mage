@@ -30,7 +30,7 @@ public final class RousingRefrain extends CardImpl {
 
         // Add {R} for each card in target opponent's hand. Until end of turn, you don't lose this mana as steps and phases end. Exile Rousing Refrain with three time counters on it.
         this.getSpellAbility().addEffect(new RousingRefrainEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
         this.getSpellAbility().addEffect(new AddCountersSourceEffect(
                 CounterType.TIME.createInstance(), StaticValue.get(3), false, true
         ).setText("with 3 time counters on it"));

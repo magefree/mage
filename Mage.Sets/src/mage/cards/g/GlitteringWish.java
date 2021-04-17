@@ -29,7 +29,7 @@ public final class GlitteringWish extends CardImpl {
         this.getSpellAbility().addEffect(new WishEffect(filter));
 
         // Exile Glittering Wish.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private GlitteringWish(final GlitteringWish card) {

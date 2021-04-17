@@ -64,7 +64,7 @@ public final class RescueFromTheUnderworld extends CardImpl {
         this.getSpellAbility().addEffect(new RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect(new RescueFromTheUnderworldDelayedTriggeredAbility()));
         Target target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card in your graveyard"));
         this.getSpellAbility().addTarget(target);
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private RescueFromTheUnderworld(final RescueFromTheUnderworld card) {

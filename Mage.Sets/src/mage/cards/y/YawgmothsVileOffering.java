@@ -48,7 +48,7 @@ public final class YawgmothsVileOffering extends CardImpl {
         this.getSpellAbility().addEffect(new YawgmothsVileOfferingEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(0, 1, cardFilter));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(0, 1, new FilterCreatureOrPlaneswalkerPermanent(), false));
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private YawgmothsVileOffering(final YawgmothsVileOffering card) {

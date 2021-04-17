@@ -48,7 +48,7 @@ public final class AllSunsDawn extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, filterBlack));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, filterWhite));
         // Exile All Suns' Dawn.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private AllSunsDawn(final AllSunsDawn card) {

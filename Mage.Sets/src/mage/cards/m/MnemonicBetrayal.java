@@ -32,7 +32,7 @@ public final class MnemonicBetrayal extends CardImpl {
         this.getSpellAbility().addEffect(new MnemonicBetrayalExileEffect());
 
         // Exile Mnemonic Betrayal.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private MnemonicBetrayal(final MnemonicBetrayal card) {

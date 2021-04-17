@@ -33,7 +33,7 @@ public final class KarnsTemporalSundering extends CardImpl {
         this.getSpellAbility().addEffect(new KarnsTemporalSunderingEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addTarget(new TargetNonlandPermanent(0, 1, false));
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private KarnsTemporalSundering(final KarnsTemporalSundering card) {

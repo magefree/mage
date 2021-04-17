@@ -34,7 +34,7 @@ public final class OnceMoreWithFeeling extends CardImpl {
         effect.setText(", then draws seven cards");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new SetPlayerLifeAllEffect(10));
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
 
         // DCI ruling — A deck can have only one card named Once More with Feeling.
         // (according to rule 112.6m, this shouldn't do anything)

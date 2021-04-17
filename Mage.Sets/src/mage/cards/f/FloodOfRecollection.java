@@ -22,7 +22,7 @@ public final class FloodOfRecollection extends CardImpl {
         // Return target instant or sorcery card from your graveyard to your hand. Exile Flood of Recollection.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard")));
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private FloodOfRecollection(final FloodOfRecollection card) {

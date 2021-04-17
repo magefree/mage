@@ -30,7 +30,7 @@ public final class HealingTechnique extends CardImpl {
 
         // Return target card from your graveyard to your hand. You gain life equal to that card's mana value. Exile Healing Technique.
         this.getSpellAbility().addEffect(new HealingTechniqueEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
     }
 

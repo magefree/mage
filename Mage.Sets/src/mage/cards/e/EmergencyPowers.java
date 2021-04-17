@@ -73,7 +73,7 @@ class EmergencyPowersEffect extends OneShotEffect {
         if (AddendumCondition.instance.apply(game, source)) {
             new PutCardFromHandOntoBattlefieldEffect(filter).apply(game, source);
         }
-        return ExileSpellEffect.getInstance().apply(game, source);
+        return new ExileSpellEffect().apply(game, source);
     }
 }
 // I am the senate!

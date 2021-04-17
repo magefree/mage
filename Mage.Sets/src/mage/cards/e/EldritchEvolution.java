@@ -38,7 +38,7 @@ public final class EldritchEvolution extends CardImpl {
         // Search your library for a creature card with converted mana cost X or less, where X is 2 plus the sacrificed creature's converted mana cost.
         // Put that card onto the battlefield, then shuffle your library. Exile Eldritch Evolution.
         this.getSpellAbility().addEffect(new EldritchEvolutionEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private EldritchEvolution(final EldritchEvolution card) {

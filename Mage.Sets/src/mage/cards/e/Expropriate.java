@@ -35,7 +35,7 @@ public final class Expropriate extends CardImpl {
         // <i>Council's dilemma</i> &mdash; Starting with you, each player votes for time or money. For each time vote,
         // take an extra turn after this one. For each money vote, choose a permanent owned by the voter and gain control of it. Exile Expropriate
         this.getSpellAbility().addEffect(new ExpropriateEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private Expropriate(final Expropriate card) {

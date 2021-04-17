@@ -22,7 +22,7 @@ public final class TemporalTrespass extends CardImpl {
         this.addAbility(new DelveAbility());
         // Take an extra turn after this one. Exile Temporal Trespass.
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private TemporalTrespass(final TemporalTrespass card) {

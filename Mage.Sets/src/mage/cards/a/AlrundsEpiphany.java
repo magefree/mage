@@ -22,7 +22,7 @@ public final class AlrundsEpiphany extends CardImpl {
         // Create two 1/1 blue Bird creature tokens with flying. Take an extra turn after this one. Exile Alrund's Epiphany.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new OwlToken(), 2));
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
 
         // Foretell {4}{U}{U}
         this.addAbility(new ForetellAbility(this, "{4}{U}{U}"));

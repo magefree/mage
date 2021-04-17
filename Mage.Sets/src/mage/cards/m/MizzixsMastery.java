@@ -34,12 +34,12 @@ public final class MizzixsMastery extends CardImpl {
         this.getSpellAbility().addEffect(new MizzixsMasteryEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(
                 new FilterInstantOrSorceryCard("card that's an instant or sorcery from your graveyard")));
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
 
         // Overload {5}{R}{R}{R}
         Ability ability = new OverloadAbility(this, new MizzixsMasteryOverloadEffect(),
                 new ManaCostsImpl("{5}{R}{R}{R}"));
-        ability.addEffect(ExileSpellEffect.getInstance());
+        ability.addEffect(new ExileSpellEffect());
         this.addAbility(ability);
     }
 

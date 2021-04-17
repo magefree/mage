@@ -38,7 +38,7 @@ public final class EcologicalAppreciation extends CardImpl {
 
         // Search your library and graveyard for up to four creature cards with different names that each have mana value X or less and reveal them. An opponent chooses two of those cards. Shuffle the chosen cards into your library and put the rest onto the battlefield. Exile Ecological Appreciation.
         this.getSpellAbility().addEffect(new EcologicalAppreciationEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private EcologicalAppreciation(final EcologicalAppreciation card) {

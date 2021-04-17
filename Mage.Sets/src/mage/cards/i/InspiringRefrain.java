@@ -23,7 +23,7 @@ public final class InspiringRefrain extends CardImpl {
 
         // Draw two cards. Exile Inspiring Refrain with three time counters on it.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
         this.getSpellAbility().addEffect(new AddCountersSourceEffect(
                 CounterType.TIME.createInstance(), StaticValue.get(3), false, true
         ).setText("with 3 time counters on it"));

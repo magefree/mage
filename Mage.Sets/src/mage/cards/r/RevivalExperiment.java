@@ -27,7 +27,7 @@ public final class RevivalExperiment extends CardImpl {
 
         // For each permanent type, return up to one card of that type from your graveyard to the battlefield. You lose 3 life for each card returned this way. Exile Revival Experiment.
         this.getSpellAbility().addEffect(new RevivalExperimentEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private RevivalExperiment(final RevivalExperiment card) {

@@ -30,7 +30,7 @@ public final class WoodlandGuidance extends CardImpl {
         this.getSpellAbility().addEffect(new DoIfClashWonEffect(new UntapAllLandsControllerEffect(new FilterLandPermanent(SubType.FOREST, "Forests"))));
 
         // Remove WoodlandGuidance from the game 
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private WoodlandGuidance(final WoodlandGuidance card) {

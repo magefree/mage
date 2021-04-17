@@ -39,7 +39,7 @@ public final class RallyTheAncestors extends CardImpl {
         // Return each creature card with converted mana cost X or less from your graveyard to the battlefield.
         // Exile those creatures at the beginning of your next upkeep. Exile Rally the Ancestors.
         this.getSpellAbility().addEffect(new RallyTheAncestorsEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private RallyTheAncestors(final RallyTheAncestors card) {

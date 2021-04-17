@@ -31,7 +31,7 @@ public final class VolcanicVision extends CardImpl {
         // Return target instant or sorcery card from your graveyard to your hand. Volcanic Visions deals damage equal to that card's converted mana cost to each creature your opponents control. Exile Volcanic Vision.
         this.getSpellAbility().addEffect(new VolcanicVisionReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard")));
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private VolcanicVision(final VolcanicVision card) {

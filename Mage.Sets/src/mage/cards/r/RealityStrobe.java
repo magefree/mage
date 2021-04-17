@@ -28,7 +28,7 @@ public final class RealityStrobe extends CardImpl {
         // Return target permanent to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         // Exile Reality Strobe
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
         // with three time counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), StaticValue.get(3), false, true);
         effect.setText("with 3 time counters on it");

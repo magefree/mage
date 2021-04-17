@@ -27,7 +27,7 @@ public final class StunningReversal extends CardImpl {
         this.getSpellAbility().addEffect(new StunningReversalEffect());
 
         // Exile Stunning Reversal.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private StunningReversal(final StunningReversal card) {

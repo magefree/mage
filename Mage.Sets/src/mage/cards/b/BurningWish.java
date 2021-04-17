@@ -28,7 +28,7 @@ public final class BurningWish extends CardImpl {
         this.getSpellAbility().addEffect(new WishEffect(filter));
 
         // Exile Burning Wish.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private BurningWish(final BurningWish card) {

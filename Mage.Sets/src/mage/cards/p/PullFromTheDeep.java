@@ -40,7 +40,7 @@ public final class PullFromTheDeep extends CardImpl {
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0,1,filterSorcery));
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private PullFromTheDeep(final PullFromTheDeep card) {

@@ -29,7 +29,7 @@ public final class Recall extends CardImpl {
         // Discard X cards, then return a card from your graveyard to your hand for each card discarded this way.
         this.getSpellAbility().addEffect(new RecallEffect());
         // Exile Recall.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private Recall(final Recall card) {

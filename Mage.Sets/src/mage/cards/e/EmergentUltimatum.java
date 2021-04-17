@@ -30,7 +30,7 @@ public final class EmergentUltimatum extends CardImpl {
 
         // Search your library for up to three monocolored cards with different names and exile them. An opponent chooses one of those cards. Shuffle that card into your library. You may cast the other cards without paying their mana costs. Exile Emergent Ultimatum.
         this.getSpellAbility().addEffect(new EmergentUltimatumEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private EmergentUltimatum(final EmergentUltimatum card) {

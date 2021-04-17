@@ -39,7 +39,7 @@ public final class NecromanticSelection extends CardImpl {
 
         // Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types. Exile Necromantic Selection.
         this.getSpellAbility().addEffect(new NecromanticSelectionEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
 
     }
 

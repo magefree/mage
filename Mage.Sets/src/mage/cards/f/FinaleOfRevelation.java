@@ -27,7 +27,7 @@ public final class FinaleOfRevelation extends CardImpl {
         this.getSpellAbility().addEffect(new FinaleOfRevelationEffect());
 
         // Exile Finale of Revelation.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private FinaleOfRevelation(final FinaleOfRevelation card) {

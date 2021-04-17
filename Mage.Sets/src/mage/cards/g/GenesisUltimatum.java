@@ -29,7 +29,7 @@ public final class GenesisUltimatum extends CardImpl {
 
         // Look at the top five cards of your library. Put any number of permanent cards from among them onto the battlefield and the rest into your hand. Exile Genesis Ultimatum.
         this.getSpellAbility().addEffect(new GenesisUltimatumEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private GenesisUltimatum(final GenesisUltimatum card) {

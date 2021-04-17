@@ -83,7 +83,7 @@ public final class PestilentCauldron extends ModalDoubleFacesCard {
         // Return up to two target creature, land, and/or planeswalker cards from your graveyard to your hand. Each player gains 4 life. Exile Restorative Burst.
         this.getRightHalfCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getRightHalfCard().getSpellAbility().addEffect(new RestorativeBurstEffect());
-        this.getRightHalfCard().getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getRightHalfCard().getSpellAbility().addEffect(new ExileSpellEffect());
         this.getRightHalfCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, filter));
     }
 

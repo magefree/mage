@@ -35,7 +35,7 @@ public final class NostalgicDreams extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(NostalgicDreamsAdjuster.instance);
 
         // Exile Nostalgic Dreams.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private NostalgicDreams(final NostalgicDreams card) {

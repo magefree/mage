@@ -27,7 +27,7 @@ public final class HarnessInfinity extends CardImpl {
         this.getSpellAbility().addEffect(new HarnessInfinityEffect());
 
         // Exile Harness Infinity.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private HarnessInfinity(final HarnessInfinity card) {
