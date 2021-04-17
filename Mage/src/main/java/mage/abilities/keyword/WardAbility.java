@@ -2,24 +2,30 @@ package mage.abilities.keyword;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
  */
 public class WardAbility extends TriggeredAbilityImpl {
 
+    private final Cost cost;
+
     public WardAbility(Cost cost) {
         super(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(cost), false);
+        this.cost = cost;
     }
 
     private WardAbility(final WardAbility ability) {
         super(ability);
+        this.cost = ability.cost.copy();
     }
 
     @Override
@@ -47,8 +53,20 @@ public class WardAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Ward " + this.getCosts().getText()
-                + " <i>(Whenever {this} becomes the target of a spell or ability an opponent controls, " +
-                "counter that spell or ability unless its controller pays " + this.getCosts().getText() + ")</i>";
+        StringBuilder sb = new StringBuilder("Ward");
+        if (cost instanceof ManaCost) {
+            sb.append(' ').append(cost.getText());
+        } else {
+            sb.append("&mdash;").append(CardUtil.getTextWithFirstCharUpperCase(cost.getText())).append('.');
+        }
+        sb.append(" <i>(Whenever {this} becomes the target of a spell or ability an opponent controls, " +
+                "counter that spell or ability unless that player ");
+        if (cost instanceof ManaCost) {
+            sb.append("pays ").append(cost.getText());
+        } else {
+            sb.append(cost.getText().replace("pay ", "pays "));
+        }
+        sb.append(".)</i>");
+        return sb.toString();
     }
 }
