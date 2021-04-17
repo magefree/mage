@@ -71,7 +71,7 @@ class RushedRebirthEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        game.addDelayedTriggeredAbility(new RushedRebirthDelayedTriggeredAbility(permanent, game));
+        game.addDelayedTriggeredAbility(new RushedRebirthDelayedTriggeredAbility(permanent, game), source);
         return true;
     }
 }
