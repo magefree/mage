@@ -243,6 +243,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Semester's End", 27, Rarity.RARE, mage.cards.s.SemestersEnd.class));
         cards.add(new SetCardInfo("Serpentine Curve", 52, Rarity.COMMON, mage.cards.s.SerpentineCurve.class));
         cards.add(new SetCardInfo("Shadewing Laureate", 229, Rarity.UNCOMMON, mage.cards.s.ShadewingLaureate.class));
+        cards.add(new SetCardInfo("Shadrix Silverquill", 230, Rarity.MYTHIC, mage.cards.s.ShadrixSilverquill.class));
         cards.add(new SetCardInfo("Shaile, Dean of Radiance", 158, Rarity.RARE, mage.cards.s.ShaileDeanOfRadiance.class));
         cards.add(new SetCardInfo("Shineshadow Snarl", 272, Rarity.RARE, mage.cards.s.ShineshadowSnarl.class));
         cards.add(new SetCardInfo("Show of Confidence", 28, Rarity.UNCOMMON, mage.cards.s.ShowOfConfidence.class));

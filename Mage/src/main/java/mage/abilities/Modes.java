@@ -10,6 +10,7 @@ import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.util.*;
@@ -38,6 +39,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     private String chooseText = null;
     private boolean resetEachTurn = false;
     private Condition moreCondition;
+    private boolean mayChooseNone = false;
 
     public Modes() {
         this.currentMode = new Mode();
@@ -77,6 +79,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             this.currentMode = get(modes.getMode().getId()); // need fix?
         }
         this.moreCondition = modes.moreCondition;
+        this.mayChooseNone = modes.mayChooseNone;
     }
 
     public Modes copy() {
@@ -326,7 +329,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                     if (isEachModeOnlyOnce()) {
                         setAlreadySelectedModes(source, game);
                     }
-                    return this.selectedModes.size() >= this.getMinModes();
+                    return this.selectedModes.size() >= this.getMinModes()
+                            || (this.selectedModes.size() == 0 && mayChooseNone);
                 }
                 this.addSelectedMode(choice.getId());
                 if (currentMode == null) {
@@ -460,26 +464,23 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             return this.getMode().getEffects().getText(this.getMode());
         }
         StringBuilder sb = new StringBuilder();
+        if (mayChooseNone) {
+            sb.append("you may ");
+        }
         if (this.chooseText != null) {
             sb.append(chooseText);
-        } else if (this.getMaxModesFilter() != null) {
-            sb.append("choose one or more. Each mode must target ").append(getMaxModesFilter().getMessage());
         } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 1) {
             sb.append("choose up to one");
-        } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 3) {
+        } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) > 2) {
             sb.append("choose any number");
-        } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) > 2) {
-            sb.append("choose one or more");
         } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) == 2) {
             sb.append("choose one or both");
-        } else if (this.getMinModes() == 2 && this.getMaxModes(null, null) == 2) {
-            sb.append("choose two");
-        } else if (this.getMinModes() == 3 && this.getMaxModes(null, null) == 3) {
-            sb.append("choose three");
-        } else if (this.getMinModes() == 4 && this.getMaxModes(null, null) == 4) {
-            sb.append("choose four");
+        } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) > 2) {
+            sb.append("choose one or more");
+        } else if (this.getMinModes() == this.getMaxModes(null, null)) {
+            sb.append("choose " + CardUtil.numberToText(this.getMinModes()));
         } else {
-            sb.append("choose one");
+            throw new UnsupportedOperationException("no text available for this selection of min and max modes");
         }
 
         if (isEachModeOnlyOnce()) {
@@ -489,7 +490,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             sb.append(" this turn");
         }
 
-        if (isEachModeMoreThanOnce()) {
+        if (this.getMaxModesFilter() != null) {
+            sb.append(". Each mode must target ").append(getMaxModesFilter().getMessage()).append('.');
+        } else if (isEachModeMoreThanOnce()) {
             sb.append(". You may choose the same mode more than once.");
         } else if (chooseText == null) {
             sb.append(" &mdash;");
@@ -539,5 +542,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
     public void setChooseText(String chooseText) {
         this.chooseText = chooseText;
+    }
+
+    public void setMayChooseNone(boolean mayChooseNone) {
+        this.mayChooseNone = mayChooseNone;
     }
 }

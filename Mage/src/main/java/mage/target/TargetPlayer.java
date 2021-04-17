@@ -21,6 +21,10 @@ public class TargetPlayer extends TargetImpl {
         this(1, 1, false);
     }
 
+    public TargetPlayer(FilterPlayer filter) {
+        this(1, 1, false, filter);
+    }
+
     public TargetPlayer(int numTargets) {
         this(numTargets, numTargets, false);
     }
