@@ -262,7 +262,7 @@ class NassariDeanOfExpressionEffect extends OneShotEffect {
     NassariDeanOfExpressionEffect() {
         super(Outcome.Benefit);
         staticText = "exile the top card of each opponent's library. Until end of turn, " +
-                "you may cast spells from among those exiled cards, and you many spend mana " +
+                "you may cast spells from among those exiled cards, and you may spend mana " +
                 "as though it were mana of any color to cast those spells";
     }
 

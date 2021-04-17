@@ -89,7 +89,7 @@ class SearchForBlexEffect extends LookLibraryControllerEffect {
         super(Outcome.DrawCard, StaticValue.get(5), false, Zone.GRAVEYARD, true);
         this.staticText = "Look at the top five cards of your library. "
                 + "You may put any number of them into your hand and the rest into your graveyard. "
-                + "You lose 3 life for each card put into your hand this way";
+                + "You lose 3 life for each card you put into your hand this way";
     }
 
     private SearchForBlexEffect(final SearchForBlexEffect effect) {
