@@ -294,6 +294,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Twinscroll Shaman", 118, Rarity.COMMON, mage.cards.t.TwinscrollShaman.class));
         cards.add(new SetCardInfo("Umbral Juke", 89, Rarity.UNCOMMON, mage.cards.u.UmbralJuke.class));
         cards.add(new SetCardInfo("Unwilling Ingredient", 90, Rarity.COMMON, mage.cards.u.UnwillingIngredient.class));
+        cards.add(new SetCardInfo("Uvilda, Dean of Perfection", 160, Rarity.RARE, mage.cards.u.UvildaDeanOfPerfection.class));
         cards.add(new SetCardInfo("Valentin, Dean of the Vein", 161, Rarity.RARE, mage.cards.v.ValentinDeanOfTheVein.class));
         cards.add(new SetCardInfo("Vanishing Verse", 244, Rarity.RARE, mage.cards.v.VanishingVerse.class));
         cards.add(new SetCardInfo("Velomachus Lorehold", 245, Rarity.MYTHIC, mage.cards.v.VelomachusLorehold.class));

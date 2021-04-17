@@ -112,7 +112,7 @@ class JadziOracleOfArcaviosEffect extends OneShotEffect {
         if (card.isLand()) {
             return player.moveCards(card, Zone.BATTLEFIELD, source, game);
         }
-        if (!player.chooseUse(outcome, "Cast " + " by paying {1}?", source, game)) {
+        if (!player.chooseUse(outcome, "Cast " + card.getName() + " by paying {1}?", source, game)) {
             return false;
         }
         SpellAbility spellAbility = player.chooseAbilityForCast(card, game, true);
@@ -121,10 +121,7 @@ class JadziOracleOfArcaviosEffect extends OneShotEffect {
         }
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
         player.setCastSourceIdWithAlternateMana(card.getId(), new ManaCostsImpl<>("{1}"), null);
-        Boolean cardWasCast = player.cast(
-                player.chooseAbilityForCast(card, game, true),
-                game, false, new ApprovingObject(source, game)
-        );
+        player.cast(spellAbility, game, false, new ApprovingObject(source, game));
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
         return true;
     }

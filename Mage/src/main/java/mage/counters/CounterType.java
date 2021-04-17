@@ -75,6 +75,7 @@ public enum CounterType {
     HEXPROOF("hexproof"),
     HIT("hit"),
     HOOFPRINT("hoofprint"),
+    HONE("hone"),
     HOUR("hour", "an"),
     HOURGLASS("hourglass", "an"),
     HUNGER("hunger"),
