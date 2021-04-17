@@ -105,13 +105,16 @@ public abstract class TargetAmount extends TargetImpl {
             setAmount(source, game);
         }
         chosen = isChosen();
-        while (player.canRespond() && remainingAmount > 0) {
+        while (remainingAmount > 0) {
+            if (!player.canRespond()) {
+                return chosen;
+            }
             if (!getTargetController(game, playerId).chooseTargetAmount(outcome, this, source, game)) {
                 return chosen;
             }
             chosen = isChosen();
         }
-        return chosen = true; // TODO: wtf
+        return chosen;
     }
 
     @Override

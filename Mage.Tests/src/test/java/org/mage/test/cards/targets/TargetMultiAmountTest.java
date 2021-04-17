@@ -168,7 +168,7 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    public void test_Manamorphose_Normal() {
+    public void test_Mana_Manamorphose_Manual() {
         removeAllCardsFromHand(playerA);
 
         // Add two mana in any combination of colors.
@@ -201,7 +201,7 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    public void test_Manamorphose_AI() {
+    public void test_Mana_Manamorphose_AI() {
         removeAllCardsFromHand(playerA);
 
         // Add two mana in any combination of colors.
@@ -220,5 +220,49 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_Damage_Boulderfall_Manual() {
+        // Boulderfall deals 5 damage divided as you choose among any number of target creatures and/or players.
+        addCard(Zone.HAND, playerA, "Boulderfall", 1); // {6}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Kitesail Corsair@bear", 3); // 2/1
+
+        // distribute 4x + 1x damage (kill two creatures)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boulderfall");
+        addTargetAmount(playerA, "@bear.1", 4);
+        addTargetAmount(playerA, "@bear.2", 1);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "@bear.1", 0);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "@bear.2", 0);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "@bear.3", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_Damage_Boulderfall_AI() {
+        // AI don't use multi amount dialogs like human (it's just one target amount choose/simulation)
+
+        // Boulderfall deals 5 damage divided as you choose among any number of target creatures and/or players.
+        addCard(Zone.HAND, playerA, "Boulderfall", 1); // {6}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Kitesail Corsair", 6); // 2/1
+
+        // play card and distribute damage by game simulations for best score (kills 5x creatures)
+        aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerB, "Kitesail Corsair", 5);
     }
 }
