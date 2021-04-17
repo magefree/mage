@@ -18,6 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
+import mage.abilities.SpellAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.target.Target;
 
 public abstract class TokenImpl extends MageObjectImpl implements Token {
 
@@ -180,7 +187,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             if (event.getAmount() > tokenSlots) {
                 game.informPlayers(
                         "The token limit per player is " + MAX_TOKENS_PER_GAME + ", " + controller.getName()
-                                + " will only create " + tokenSlots + " tokens."
+                        + " will only create " + tokenSlots + " tokens."
                 );
             }
             event.setAmount(Math.min(event.getAmount(), tokenSlots));
@@ -249,6 +256,66 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 game.addSimultaneousEvent(new CreatedTokenEvent(source, (PermanentToken) permanent));
             }
 
+            // handle auras coming into the battlefield
+            // code refactored from CopyPermanentEffect
+            if (permanent.getSubtype().contains(SubType.AURA)) {
+                Outcome auraOutcome = Outcome.BoostCreature;
+                Target auraTarget = null;
+
+                // attach - search effect in spell ability (example: cast Utopia Sprawl, cast Estrid's Invocation on it)
+                for (Ability ability : permanent.getAbilities()) {
+                    if (!(ability instanceof SpellAbility)) {
+                        continue;
+                    }
+                    auraOutcome = ability.getEffects().getOutcome(ability);
+                    for (Effect effect : ability.getEffects()) {
+                        if (!(effect instanceof AttachEffect)) {
+                            continue;
+                        }
+                        if (permanent.getSpellAbility().getTargets().size() > 0) {
+                            auraTarget = permanent.getSpellAbility().getTargets().get(0);
+                        }
+                    }
+                }
+
+                // enchant - search in all abilities (example: cast Estrid's Invocation on enchanted creature by Estrid, the Masked second ability, cast Estrid's Invocation on it)
+                if (auraTarget == null) {
+                    for (Ability ability : permanent.getAbilities()) {
+                        if (!(ability instanceof EnchantAbility)) {
+                            continue;
+                        }
+                        auraOutcome = ability.getEffects().getOutcome(ability);
+                        if (ability.getTargets().size() > 0) { // Animate Dead don't have targets
+                            auraTarget = ability.getTargets().get(0);
+                        }
+                    }
+                }
+
+                // if this is a copy of a copy, the copy's target has been copied and needs to be cleared
+                if (auraTarget == null) {
+                    break;
+                }
+                // clear selected target
+                if (auraTarget.getFirstTarget() != null) {
+                    auraTarget.remove(auraTarget.getFirstTarget());
+                }
+
+                // select new target
+                auraTarget.setNotTarget(true);
+                if (!controller.choose(auraOutcome, auraTarget, source.getSourceId(), game)) {
+                    break;
+                }
+                UUID targetId = auraTarget.getFirstTarget();
+                Permanent targetPermanent = game.getPermanent(targetId);
+                Player targetPlayer = game.getPlayer(targetId);
+                if (targetPermanent != null) {
+                    targetPermanent.addAttachment(permanent.getId(), source, game);
+                } else if (targetPlayer != null) {
+                    targetPlayer.addAttachment(permanent.getId(), source, game);
+                }
+            }
+            // end of aura code : just remove this line if everything works out well
+            
             // must attack
             if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
                 game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);

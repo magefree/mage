@@ -138,6 +138,10 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void exchangeLife(Player player, Ability source, Game game) {
+    }
+
+    @Override
     public int damage(int damage, UUID attackerId, Ability source, Game game) {
         return 0;
     }
@@ -477,7 +481,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean isTestMode() {
+    public boolean isTestsMode() {
         return false;
     }
 
@@ -657,6 +661,11 @@ public class PlayerStub implements Player {
 
     @Override
     public Cards discard(int amount, boolean random, boolean payForCost, Ability source, Game game) {
+        return null;
+    }
+
+    @Override
+    public Cards discard(int minAmount, int maxAmount, boolean payForCost, Ability source, Game game) {
         return null;
     }
 
@@ -1036,6 +1045,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void updateRange(Game game) {
+
+    }
+
+    @Override
     public ManaOptions getManaAvailable(Game game) {
         return null;
     }
@@ -1166,12 +1180,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game) {
+    public boolean moveCards(Set<? extends Card> cards, Zone toZone, Ability source, Game game) {
         return false;
     }
 
     @Override
-    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects) {
+    public boolean moveCards(Set<? extends Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects) {
         return false;
     }
 
@@ -1201,7 +1215,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public Set<Card> moveCardsToGraveyardWithInfo(Set<Card> cards, Ability source, Game game, Zone fromZone) {
+    public Set<Card> moveCardsToGraveyardWithInfo(Set<? extends Card> cards, Ability source, Game game, Zone fromZone) {
         return null;
     }
 

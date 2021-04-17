@@ -17,6 +17,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
@@ -68,8 +69,7 @@ class EstridsInvocationEffect extends OneShotEffect {
 
     EstridsInvocationEffect() {
         super(Outcome.Neutral);
-        this.staticText = "you may exile this enchantment. "
-                + "If you do, return it to the battlefield under its owner's control";
+        this.staticText = "exile this enchantment. If you do, return it to the battlefield under its owner's control";
     }
 
     private EstridsInvocationEffect(final EstridsInvocationEffect effect) {
@@ -83,15 +83,14 @@ class EstridsInvocationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Estrid's Invocation", source, game)) {
-                Card card = game.getExile().getCard(source.getSourceId(), game);
-                if (card != null) {
-                    return card.moveToZone(Zone.BATTLEFIELD, source, game, false);
-                }
-            }
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null || player == null) {
+            return false;
         }
-        return false;
+        Card card = permanent.getMainCard();
+        player.moveCards(card, Zone.EXILED, source, game);
+        player.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
+        return true;
     }
 }

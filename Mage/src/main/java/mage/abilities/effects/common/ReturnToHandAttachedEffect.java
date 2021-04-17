@@ -1,15 +1,15 @@
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
- *
  * @author jeff
  */
 public class ReturnToHandAttachedEffect extends OneShotEffect {
@@ -30,17 +30,15 @@ public class ReturnToHandAttachedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Object object = getValue("attachedTo");
-        if (object instanceof Permanent) {
-            Card card = game.getCard(((Permanent) object).getId());
-            if (card != null
-                    && getValue("zcc").equals(game.getState().getZoneChangeCounter(card.getId()))) { // Necrogenesis, etc.
-                if (card.moveToZone(Zone.HAND, source, game, false)) {
-                    return true;
-                }
-            }
+        Player player = game.getPlayer(source.getSourceId());
+        Permanent permanent = (Permanent) getValue("attachedTo");
+        if (player == null || permanent == null) {
+            return false;
         }
-        return false;
+        Card card = permanent.getMainCard();
+        if (permanent.getZoneChangeCounter(game) != card.getZoneChangeCounter(game) + 1) {
+            return false;
+        }
+        return player.moveCards(card, Zone.HAND, source, game);
     }
-
 }

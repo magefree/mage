@@ -82,7 +82,7 @@ class ForceProjectionEffect extends OneShotEffect {
             Effect sacrificeEffect = new SacrificeSourceEffect();
             sacrificeEffect.setTargetPointer(new FixedTarget(effect.getAddedPermanent().get(0), game));
             TriggeredAbility ability = new BecomesTargetTriggeredAbility(sacrificeEffect, new FilterSpell());
-            game.addTriggeredAbility(ability);
+            game.addTriggeredAbility(ability, null);
 
             return true;
         }

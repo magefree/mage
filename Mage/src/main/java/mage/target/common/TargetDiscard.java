@@ -10,7 +10,7 @@ import mage.target.TargetCard;
 
 import java.util.UUID;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.other.OwnerIdPredicate;
+import mage.filter.predicate.card.OwnerIdPredicate;
 
 /**
  *

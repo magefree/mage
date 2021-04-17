@@ -120,7 +120,7 @@ class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.DISCARDED_CARD) {
             Card discardedCard = game.getCard(event.getTargetId());
             if (discardedCard != null
-                    && !(discardedCard.isInstantOrSorcery())) {
+                    && !discardedCard.isInstantOrSorcery()) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(discardedCard.getId(), game));
                 }

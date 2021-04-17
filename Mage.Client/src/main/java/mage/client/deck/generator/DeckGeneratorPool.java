@@ -178,7 +178,7 @@ public class DeckGeneratorPool
      * @return if all the mana symbols fit the chosen colors.
      */
     private boolean cardFitsChosenColors(Card card) {
-        for (String symbol : card.getManaCost().getSymbols()) {
+        for (String symbol : card.getManaCostSymbols()) {
             boolean found = false;
             symbol = symbol.replace("{", "").replace("}", "");
             if (isColoredManaSymbol(symbol)) {
@@ -218,7 +218,7 @@ public class DeckGeneratorPool
 
         List<Card> fixedSpells = getFixedSpells();
         for(Card spell: fixedSpells) {
-            for (String symbol : spell.getManaCost().getSymbols()) {
+            for (String symbol : spell.getManaCostSymbols()) {
                 symbol = symbol.replace("{", "").replace("}", "");
                 if (isColoredManaSymbol(symbol)) {
                     for (ColoredManaSymbol allowed : allowedColors) {

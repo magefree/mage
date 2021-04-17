@@ -48,7 +48,7 @@ class GiltLeafAmbushCreateTokenEffect extends OneShotEffect {
 
     public GiltLeafAmbushCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Create two 1/1 green Elf Warrior creature tokens into play. Clash with an opponent. If you win, those creatures gain deathtouch until end of turn";
+        this.staticText = "Create two 1/1 green Elf Warrior creature tokens. Clash with an opponent. If you win, those creatures gain deathtouch until end of turn";
     }
 
     public GiltLeafAmbushCreateTokenEffect(final GiltLeafAmbushCreateTokenEffect effect) {

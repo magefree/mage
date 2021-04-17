@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -33,7 +33,7 @@ public final class KingHaraldsRevenge extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains trample."));
-        this.getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn)
+        this.getSpellAbility().addEffect(new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn)
                 .setText("It must be blocked this turn if able"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

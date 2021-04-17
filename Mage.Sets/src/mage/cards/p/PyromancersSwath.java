@@ -56,9 +56,8 @@ class PyromancersSwathReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         switch (event.getType()) {
-            case DAMAGE_CREATURE:
+            case DAMAGE_PERMANENT:
             case DAMAGE_PLAYER:
-            case DAMAGE_PLANESWALKER:
                 return true;
             default:
                 return false;
@@ -69,7 +68,7 @@ class PyromancersSwathReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (source.isControlledBy(game.getControllerId(event.getSourceId()))) {
             MageObject object = game.getObject(event.getSourceId());
-            return object != null && (object.isInstant() || object.isSorcery());
+            return object != null && object.isInstantOrSorcery();
         }
         return false;
     }

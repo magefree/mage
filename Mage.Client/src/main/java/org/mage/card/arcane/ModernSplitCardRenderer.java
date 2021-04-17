@@ -1,7 +1,6 @@
 package org.mage.card.arcane;
 
 import mage.ObjectColor;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.ArtRect;
 import mage.constants.CardType;
 import mage.view.CardView;
@@ -50,11 +49,11 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     public ModernSplitCardRenderer(CardView view) {
         super(view);
 
-        rightHalf.manaCostString = ManaSymbols.getStringManaCost(cardView.getRightSplitCosts().getSymbols());
-        leftHalf.manaCostString = ManaSymbols.getStringManaCost(cardView.getLeftSplitCosts().getSymbols());
+        rightHalf.manaCostString = ManaSymbols.getClearManaCost(cardView.getRightSplitCostsStr());
+        leftHalf.manaCostString = ManaSymbols.getClearManaCost(cardView.getLeftSplitCostsStr());
 
-        rightHalf.color = getColorFromManaCostHack(cardView.getRightSplitCosts());
-        leftHalf.color = getColorFromManaCostHack(cardView.getLeftSplitCosts());
+        rightHalf.color = getColorFromManaCostHack(cardView.getRightSplitCostsStr());
+        leftHalf.color = getColorFromManaCostHack(cardView.getLeftSplitCostsStr());
 
         parseRules(view.getRightSplitRules(), rightHalf.keywords, rightHalf.rules);
         parseRules(view.getLeftSplitRules(), leftHalf.keywords, leftHalf.rules);
@@ -129,21 +128,18 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
 
     // Ugly hack used here because the card database doesn't actually store color
     // for each half of split cards separately.
-    private ObjectColor getColorFromManaCostHack(ManaCosts costs) {
+    private ObjectColor getColorFromManaCostHack(String costs) {
         ObjectColor c = new ObjectColor();
-        List<String> symbols = costs.getSymbols();
-        for (String symbol : symbols) {
-            if (symbol.contains("W")) {
-                c.setWhite(true);
-            } else if (symbol.contains("U")) {
-                c.setBlue(true);
-            } else if (symbol.contains("B")) {
-                c.setBlack(true);
-            } else if (symbol.contains("R")) {
-                c.setRed(true);
-            } else if (symbol.contains("G")) {
-                c.setGreen(true);
-            }
+        if (costs.contains("W")) {
+            c.setWhite(true);
+        } else if (costs.contains("U")) {
+            c.setBlue(true);
+        } else if (costs.contains("B")) {
+            c.setBlack(true);
+        } else if (costs.contains("R")) {
+            c.setRed(true);
+        } else if (costs.contains("G")) {
+            c.setGreen(true);
         }
         return c;
     }

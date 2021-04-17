@@ -1,6 +1,8 @@
 package mage.cards;
 
+import mage.MageItem;
 import mage.MageObject;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.util.RandomUtil;
@@ -28,10 +30,12 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         }
     }
 
-    public CardsImpl(Set<Card> cards) {
-        for (Card card : cards) {
-            this.add(card.getId());
-        }
+    public CardsImpl(List<? extends Card> cards) {
+        this.addAll(cards);
+    }
+
+    public CardsImpl(Set<? extends Card> cards) {
+        this.addAll(cards);
     }
 
     public CardsImpl(Collection<UUID> cardIds) {
@@ -172,16 +176,22 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     }
 
     @Override
-    public void addAll(List<Card> cards) {
-        for (Card card : cards) {
-            add(card.getId());
+    public void addAll(List<? extends Card> cards) {
+        if (cards != null) {
+            cards.stream()
+                    .filter(Objects::nonNull)
+                    .map(MageItem::getId)
+                    .forEach(this::add);
         }
     }
 
     @Override
-    public void addAll(Set<Card> cards) {
-        for (Card card : cards) {
-            add(card.getId());
+    public void addAll(Set<? extends Card> cards) {
+        if (cards != null) {
+            cards.stream()
+                    .filter(Objects::nonNull)
+                    .map(MageItem::getId)
+                    .forEach(this::add);
         }
     }
 
@@ -197,4 +207,8 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         return cards.values();
     }
 
+    @Override
+    public void retainZone(Zone zone, Game game) {
+        removeIf(uuid -> game.getState().getZone(uuid) != zone);
+    }
 }

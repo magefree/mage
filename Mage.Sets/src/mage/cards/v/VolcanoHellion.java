@@ -72,7 +72,7 @@ class VolcanoHellionEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (controller != null) {
             int amount;
-            if (!controller.isHuman() && !controller.isTestMode()) {
+            if (controller.isComputer()) {
                 // AI hint: have much life and can destroy target permanent
                 int safeLifeToLost = Math.min(6, controller.getLife() / 2);
                 if (permanent != null && permanent.getToughness().getValue() <= safeLifeToLost) {

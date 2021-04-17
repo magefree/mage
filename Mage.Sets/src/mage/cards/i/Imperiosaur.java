@@ -64,7 +64,7 @@ class ImperiosaurStaticAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "Spend only mana produced by basic lands to cast {this}.";
+        return "Spend only mana produced by basic lands to cast this spell.";
     }
 
 }

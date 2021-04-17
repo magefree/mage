@@ -14,9 +14,7 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.Counter;
 import mage.counters.Counters;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.CounterAnyPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -61,14 +59,8 @@ public final class TheOzolith extends CardImpl {
 
 class TheOzolithTriggeredAbility extends LeavesBattlefieldAllTriggeredAbility {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
-
-    static {
-        filter.add(CounterAnyPredicate.instance);
-    }
-
     TheOzolithTriggeredAbility() {
-        super(null, filter);
+        super(null, StaticFilters.FILTER_CONTROLLED_CREATURE);
     }
 
     private TheOzolithTriggeredAbility(final TheOzolithTriggeredAbility ability) {
@@ -85,8 +77,12 @@ class TheOzolithTriggeredAbility extends LeavesBattlefieldAllTriggeredAbility {
             return false;
         }
         Permanent permanent = ((ZoneChangeEvent) event).getTarget();
+        Counters counters = permanent.getCounters(game);
+        if (counters.values().stream().mapToInt(Counter::getCount).noneMatch(x -> x > 0)) {
+            return false;
+        }
         this.getEffects().clear();
-        this.addEffect(new TheOzolithLeaveEffect(permanent.getCounters(game)));
+        this.addEffect(new TheOzolithLeaveEffect(counters));
         return true;
     }
 

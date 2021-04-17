@@ -12,7 +12,7 @@ import mage.game.permanent.Permanent;
  */
 public class SourcePermanentPowerCount implements DynamicValue {
 
-    boolean allowNegativeValues;
+    private final boolean allowNegativeValues;
 
     public SourcePermanentPowerCount() {
         this(true);

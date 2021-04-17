@@ -1,10 +1,9 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -26,8 +25,9 @@ import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class SoulFoundry extends CardImpl {
@@ -36,13 +36,15 @@ public final class SoulFoundry extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Imprint - When Soul Foundry enters the battlefield, you may exile a creature card from your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SoulFoundryImprintEffect(), true, "<i>Imprint</i> &mdash; "));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new SoulFoundryImprintEffect(), true, "<i>Imprint</i> &mdash; "
+        ));
 
         // {X}, {T}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulFoundryEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(new SoulFoundryEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
+        ability.setCostAdjuster(SoulFoundryAdjuster.instance);
         this.addAbility(ability);
-
     }
 
     private SoulFoundry(final SoulFoundry card) {
@@ -50,31 +52,33 @@ public final class SoulFoundry extends CardImpl {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {
-            Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
-            if (sourcePermanent != null) {
-                if (!sourcePermanent.getImprinted().isEmpty()) {
-                    Card imprinted = game.getCard(sourcePermanent.getImprinted().get(0));
-                    if (imprinted != null) {
-                        ability.getManaCostsToPay().clear();
-                        ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getConvertedManaCost()));
-                    }
-                }
-            }
+    public SoulFoundry copy() {
+        return new SoulFoundry(this);
+    }
+}
 
-            // no {X} anymore as we already have imprinted the card with defined manacost
-            for (ManaCost cost : ability.getManaCostsToPay()) {
-                if (cost instanceof VariableCost) {
-                    cost.setPaid();
+enum SoulFoundryAdjuster implements CostAdjuster {
+    instance;
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
+        if (sourcePermanent != null) {
+            if (!sourcePermanent.getImprinted().isEmpty()) {
+                Card imprinted = game.getCard(sourcePermanent.getImprinted().get(0));
+                if (imprinted != null) {
+                    ability.getManaCostsToPay().clear();
+                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getConvertedManaCost()));
                 }
             }
         }
-    }
 
-    @Override
-    public SoulFoundry copy() {
-        return new SoulFoundry(this);
+        // no {X} anymore as we already have imprinted the card with defined manacost
+        for (ManaCost cost : ability.getManaCostsToPay()) {
+            if (cost instanceof VariableCost) {
+                cost.setPaid();
+            }
+        }
     }
 }
 
@@ -86,12 +90,12 @@ class SoulFoundryImprintEffect extends OneShotEffect {
         filter.add(CardType.CREATURE.getPredicate());
     }
 
-    public SoulFoundryImprintEffect() {
+    SoulFoundryImprintEffect() {
         super(Outcome.Neutral);
         staticText = "you may exile a creature card from your hand";
     }
 
-    public SoulFoundryImprintEffect(SoulFoundryImprintEffect effect) {
+    private SoulFoundryImprintEffect(SoulFoundryImprintEffect effect) {
         super(effect);
     }
 
@@ -128,12 +132,12 @@ class SoulFoundryImprintEffect extends OneShotEffect {
 
 class SoulFoundryEffect extends OneShotEffect {
 
-    public SoulFoundryEffect() {
+    SoulFoundryEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a token that's a copy of the exiled card. X is the converted mana cost of that card";
     }
 
-    public SoulFoundryEffect(final SoulFoundryEffect effect) {
+    private SoulFoundryEffect(final SoulFoundryEffect effect) {
         super(effect);
     }
 

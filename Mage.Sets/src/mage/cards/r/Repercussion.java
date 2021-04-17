@@ -55,15 +55,17 @@ class RepercussionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        for (Effect effect : getEffects()) {
-            effect.setValue(PLAYER_DAMAGE_AMOUNT_KEY, event.getAmount());
-            effect.setValue(TRIGGERING_CREATURE_KEY, new MageObjectReference(event.getTargetId(), game));
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent == null || !permanent.isCreature()) {
+            return false;
         }
+        getEffects().setValue(PLAYER_DAMAGE_AMOUNT_KEY, event.getAmount());
+        getEffects().setValue(TRIGGERING_CREATURE_KEY, new MageObjectReference(event.getTargetId(), game));
         return true;
     }
 

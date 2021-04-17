@@ -5,7 +5,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.keyword.SupportEffect;
 import mage.cards.Card;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -25,7 +25,7 @@ public class SupportAbility extends EntersBattlefieldTriggeredAbility {
      */
     public SupportAbility(Card card, int amount, boolean otherPermanent) {
         super(new SupportEffect(card, amount, otherPermanent));
-        if (!card.isInstant() && !card.isSorcery()) {
+        if (!card.isInstantOrSorcery()) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
             if (card.isCreature()) {
                 filter.add(AnotherPredicate.instance);

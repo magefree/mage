@@ -63,8 +63,7 @@ class LimDulsHexEffect extends OneShotEffect {
                 if (player != null) {
                     OrCost costToPay = new OrCost(new ManaCostsImpl("{B}"), new ManaCostsImpl("{3}"), "{B} or {3}");
                     costToPay.clearPaid();
-                    String message = "Would you like to pay " + costToPay.getText() + " to prevent 1 damage from " + sourcePermanent.getLogName() + "?";
-                    if (!(player.chooseUse(Outcome.Benefit, message, source, game) && costToPay.pay(source, game, source, player.getId(), false, null))) {
+                    if (!(player.chooseUse(Outcome.Benefit, "Pay {B} or {3}?", source, game) && costToPay.pay(source, game, source, player.getId(), false, null))) {
                         game.informPlayers(player.getLogName() + " chooses not to pay " + costToPay.getText() + " to prevent 1 damage from " + sourcePermanent.getLogName());
                         player.damage(1, sourcePermanent.getId(), source, game);
                     } else {

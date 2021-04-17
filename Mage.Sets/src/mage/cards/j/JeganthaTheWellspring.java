@@ -69,8 +69,7 @@ enum JeganthaTheWellspringCompanionCondition implements CompanionCondition {
 
     private static boolean checkCard(Card card) {
         Map<String, Integer> symbolMap = new HashMap();
-        return card.getManaCost()
-                .getSymbols()
+        return card.getManaCostSymbols()
                 .stream()
                 .anyMatch(s -> symbolMap.compute(
                         s, (str, i) -> (i == null) ? 1 : i + 1

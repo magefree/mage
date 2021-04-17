@@ -32,10 +32,10 @@ public final class BedlamReveler extends CardImpl {
         this.toughness = new MageInt(4);
 
         // This spell costs {1} less to cast for each instant and sorcery card in your graveyard.
-        DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
+        DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_INSTANT_AND_SORCERY);
         Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue));
         ability.setRuleAtTheTop(true);
-        ability.addHint(new ValueHint("Instant or sourcery card in your graveyard", xValue));
+        ability.addHint(new ValueHint("Instant and sorcery card in your graveyard", xValue));
         this.addAbility(ability);
 
         // Prowess

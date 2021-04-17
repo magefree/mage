@@ -97,7 +97,7 @@ class OmnispellAdeptEffect extends OneShotEffect {
                 }
                 realFilter.add(Predicates.not(new CardIdPredicate(cardToCast.getId()))); // remove card from choose dialog (infinite fix)
 
-                if (!cardToCast.getSpellAbility().canChooseTarget(game)) {
+                if (!cardToCast.getSpellAbility().canChooseTarget(game, controller.getId())) {
                     continue;
                 }
 

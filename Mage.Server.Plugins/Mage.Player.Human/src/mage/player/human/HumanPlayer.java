@@ -2139,7 +2139,7 @@ public class HumanPlayer extends PlayerImpl {
             return null;
         }
 
-        MageObject object = game.getObject(card.getId());
+        MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
         if (object != null) {
             String message = "Choose ability to cast" + (nonMana ? " for FREE" : "") + "<br>" + object.getLogName();
             LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
@@ -2164,6 +2164,8 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
         }
+
+        // default ability (example: on disconnect or cancel)
         return card.getSpellAbility();
     }
 

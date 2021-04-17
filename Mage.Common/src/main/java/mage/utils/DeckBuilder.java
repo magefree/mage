@@ -134,7 +134,7 @@ public final class DeckBuilder {
         final Map<String, Integer> colorCount = new HashMap<>();
         for (final Card card : deck.getCards()) {
 
-            for (String symbol : card.getManaCost().getSymbols()) {
+            for (String symbol : card.getManaCostSymbols()) {
                 int count = 0;
                 symbol = symbol.replace("{", "").replace("}", "");
                 if (isColoredMana(symbol)) {
@@ -238,12 +238,12 @@ public final class DeckBuilder {
         }
 
         private int getManaCostScore(Card card, List<ColoredManaSymbol> allowedColors) {
-            int converted = card.getManaCost().convertedManaCost();
+            int converted = card.getConvertedManaCost();
             final Map<String, Integer> singleCount = new HashMap<>();
             int maxSingleCount = 0;
             int multicolor = 0;
             Set<String> colors = new HashSet<>();
-            for (String symbol : card.getManaCost().getSymbols()) {
+            for (String symbol : card.getManaCostSymbols()) {
                 int count = 0;
                 symbol = symbol.replace("{", "").replace("}", "");
                 if (isColoredMana(symbol)) {
@@ -276,7 +276,7 @@ public final class DeckBuilder {
         }
 
         public int getConvertedCost() {
-            return this.card.getManaCost().convertedManaCost();
+            return this.card.getConvertedManaCost();
         }
 
         public Card getCard() {

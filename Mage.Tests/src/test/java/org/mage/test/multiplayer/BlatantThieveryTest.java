@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.mage.test.multiplayer;
 
 import mage.constants.MultiplayerAttackOption;
@@ -50,8 +45,10 @@ public class BlatantThieveryTest extends CardTestMultiPlayerBase {
         addTarget(playerA, "Walking Corpse");
         addTarget(playerA, "Pillarfield Ox");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Blatant Thievery", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
@@ -84,6 +81,7 @@ public class BlatantThieveryTest extends CardTestMultiPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Blatant Thievery", 1);
         assertGraveyardCount(playerB, "Act of Aggression", 1);

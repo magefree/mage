@@ -1,12 +1,13 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -14,8 +15,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AuguryAdept extends CardImpl {
@@ -44,12 +46,13 @@ public final class AuguryAdept extends CardImpl {
 
 class AuguryAdeptEffect extends OneShotEffect {
 
-    public AuguryAdeptEffect() {
+    AuguryAdeptEffect() {
         super(Outcome.GainLife);
-        this.staticText = "reveal the top card of your library and put that card into your hand. You gain life equal to its converted mana cost";
+        this.staticText = "reveal the top card of your library and put that card into your hand. " +
+                "You gain life equal to its converted mana cost";
     }
 
-    public AuguryAdeptEffect(final AuguryAdeptEffect effect) {
+    private AuguryAdeptEffect(final AuguryAdeptEffect effect) {
         super(effect);
     }
 
@@ -65,13 +68,14 @@ class AuguryAdeptEffect extends OneShotEffect {
             return false;
         }
         Card card = controller.getLibrary().getFromTop(game);
-        if (card != null) {
-            card.moveToZone(Zone.HAND, source, game, true);
-            int cmc = card.getConvertedManaCost();
-            if (cmc > 0) {
-                controller.gainLife(cmc, game, source);
-            }
-            controller.revealCards(source, new CardsImpl(card), game);
+        if (card == null) {
+            return false;
+        }
+        controller.revealCards(source, new CardsImpl(card), game);
+        controller.moveCards(card, Zone.HAND, source, game);
+        int cmc = card.getConvertedManaCost();
+        if (cmc > 0) {
+            controller.gainLife(cmc, game, source);
         }
         return true;
     }

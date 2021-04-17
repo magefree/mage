@@ -28,6 +28,6 @@ public class ActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return super.getRule() + " Activate this ability only any time you could cast a sorcery.";
+        return super.getRule() + " Activate only as a sorcery.";
     }
 }

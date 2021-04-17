@@ -8,7 +8,6 @@ import mage.abilities.keyword.*;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.BlockerDeclaredEvent;
 import mage.game.events.DeclareBlockerEvent;
@@ -167,8 +166,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 } else {
                     Player player = game.getPlayer(defenderAssignsCombatDamage(game) ? defendingPlayerId : attacker.getControllerId());
                     if ((attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId()) &&
-                            player.chooseUse(Outcome.Damage, "Do you wish to assign damage for "
-                                    + attacker.getLogName() + " as though it weren't blocked?", null, game)) ||
+                            player.chooseUse(Outcome.Damage, "Have " + attacker.getLogName() + " assign damage as though it weren't blocked?", null, game)) ||
                             game.getContinuousEffects().asThough(attacker.getId(), AsThoughEffectType.DAMAGE_NOT_BLOCKED,
                                     null, attacker.getControllerId(), game) != null) {
                         // for handling creatures like Thorn Elemental
@@ -211,6 +209,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
         for (UUID uuid : blockers) {
             Permanent permanent = game.getPermanent(uuid);
+            if (permanent != null) {
+                permanent.applyDamage(game);
+            }
+        }
+        if (defenderIsPlaneswalker) {
+            Permanent permanent = game.getPermanent(defenderId);
             if (permanent != null) {
                 permanent.applyDamage(game);
             }
@@ -887,7 +891,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             // 10/4/2004 	If it is blocked but then all of its blockers are removed before combat damage is assigned, then it won't be able to deal combat damage and you won't be able to use its ability.
             // (same principle should apply if it's blocking and its blocked attacker is removed from combat)
             if (!((blocked && blockers.isEmpty() && isAttacking) || (attackers.isEmpty() && !isAttacking)) && canDamage(creature, first)) {
-                if (player.chooseUse(Outcome.Damage, "Do you wish to assign " + creature.getLogName() + "'s combat damage divided among defending player and/or any number of defending creatures?", null, game)) {
+                if (player.chooseUse(Outcome.Damage, "Have " + creature.getLogName() + " assign its combat damage divided among defending player and/or any number of defending creatures?", null, game)) {
                     defendingPlayerAndOrDefendingCreaturesDividedDamage(creature, player, first, game, isAttacking);
                     return true;
                 }
@@ -897,27 +901,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     private static int getLethalDamage(Permanent blocker, Permanent attacker, Game game) {
-        int lethalDamage;
-        if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
-            lethalDamage = 1;
-        } else {
-            lethalDamage = getLethalDamage(blocker, game);
-        }
-        return lethalDamage;
-    }
-
-    public static int getLethalDamage(Permanent damagedPermanent, Game game) {
-        List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = game.getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters();
-        /*
-         * for handling Zilortha, Strength Incarnate:
-         * 2020-04-17
-         * Any time the game is checking whether damage is lethal or if a creature should be destroyed for having lethal damage marked on it, use the power of your creatures rather than their toughness to check the damage against. This includes being assigned trample damage, damage from Flame Spill, and so on.
-         */
-        boolean usePowerInsteadOfToughnessForDamageLethality = usePowerInsteadOfToughnessForDamageLethalityFilters.stream()
-                .anyMatch(filter -> filter.match(damagedPermanent, game));
-        int lethalDamageThreshold = usePowerInsteadOfToughnessForDamageLethality ?
-                // Zilortha, Strength Incarnate, 2020-04-17: A creature with 0 power isn’t destroyed unless it has at least 1 damage marked on it.
-                Math.max(damagedPermanent.getPower().getValue(), 1) : damagedPermanent.getToughness().getValue();
-        return Math.max(lethalDamageThreshold - damagedPermanent.getDamage(), 0);
+        return blocker.getLethalDamage(attacker.getId(), game);
     }
 }

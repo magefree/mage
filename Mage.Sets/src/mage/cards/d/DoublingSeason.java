@@ -3,13 +3,11 @@ package mage.cards.d;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.replacement.CreateTwiceThatManyTokensEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -25,11 +23,10 @@ public final class DoublingSeason extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
 
         // If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreateTwiceThatManyTokensEffect()));
+        this.addAbility(new SimpleStaticAbility(new DoublingSeasonTokenEffect()));
 
         // If an effect would put one or more counters on a permanent you control, it puts twice that many of those counters on that permanent instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DoublingSeasonCounterEffect()));
-
+        this.addAbility(new SimpleStaticAbility(new DoublingSeasonCounterEffect()));
     }
 
     private DoublingSeason(final DoublingSeason card) {
@@ -42,16 +39,52 @@ public final class DoublingSeason extends CardImpl {
     }
 }
 
+class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
+
+    DoublingSeasonTokenEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Copy);
+        staticText = "If an effect would create one or more tokens under your control, " +
+                "it creates twice that many of those tokens instead";
+    }
+
+    private DoublingSeasonTokenEffect(final DoublingSeasonTokenEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DoublingSeasonTokenEffect copy() {
+        return new DoublingSeasonTokenEffect(this);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CREATE_TOKEN;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        // TODO: this should only apply to effects
+        return event.getPlayerId().equals(source.getControllerId());
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        event.setAmount(event.getAmount() * 2);
+        return false;
+    }
+
+}
+
 class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
 
-    boolean landPlayed = false; // a played land is not an effect
+    private boolean landPlayed = false; // a played land is not an effect
 
     DoublingSeasonCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
         staticText = "If an effect would put one or more counters on a permanent you control, it puts twice that many of those counters on that permanent instead";
     }
 
-    DoublingSeasonCounterEffect(final DoublingSeasonCounterEffect effect) {
+    private DoublingSeasonCounterEffect(final DoublingSeasonCounterEffect effect) {
         super(effect);
     }
 

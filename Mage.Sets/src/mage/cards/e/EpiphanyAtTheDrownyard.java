@@ -1,10 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -20,14 +15,18 @@ import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 import mage.util.GameLog;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class EpiphanyAtTheDrownyard extends CardImpl {
 
     public EpiphanyAtTheDrownyard(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
         // Reveal the top X plus one cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.
         this.getSpellAbility().addEffect(new EpiphanyAtTheDrownyardEffect());
@@ -46,12 +45,12 @@ public final class EpiphanyAtTheDrownyard extends CardImpl {
 
 class EpiphanyAtTheDrownyardEffect extends OneShotEffect {
 
-    public EpiphanyAtTheDrownyardEffect() {
+    EpiphanyAtTheDrownyardEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal the top X plus one cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard";
     }
 
-    public EpiphanyAtTheDrownyardEffect(final EpiphanyAtTheDrownyardEffect effect) {
+    private EpiphanyAtTheDrownyardEffect(final EpiphanyAtTheDrownyardEffect effect) {
         super(effect);
     }
 
@@ -124,9 +123,9 @@ class EpiphanyAtTheDrownyardEffect extends OneShotEffect {
                     if (i < pile1CardsIds.size()) {
                         sb.append(", ");
                     }
-                    card.moveToZone(pile1Zone, source, game, false);
                 }
             }
+            controller.moveCards(new CardsImpl(pile1CardsIds), pile1Zone, source, game);
             game.informPlayers(sb.toString());
 
             sb = new StringBuilder(sourceObject.getLogName() + ": Pile 2, going to ").append(pile2Zone == Zone.HAND ? "Hand" : "Graveyard").append(':');
@@ -139,9 +138,9 @@ class EpiphanyAtTheDrownyardEffect extends OneShotEffect {
                     if (i < pile2CardsIds.size()) {
                         sb.append(", ");
                     }
-                    card.moveToZone(pile2Zone, source, game, false);
                 }
             }
+            controller.moveCards(new CardsImpl(pile2CardsIds), pile2Zone, source, game);
             game.informPlayers(sb.toString());
         }
 

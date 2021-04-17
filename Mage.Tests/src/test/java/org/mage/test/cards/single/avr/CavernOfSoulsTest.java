@@ -2,12 +2,10 @@ package org.mage.test.cards.single.avr;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author noxx
  */
 public class CavernOfSoulsTest extends CardTestPlayerBase {
@@ -195,10 +193,8 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
      * Return to the Ranks cannot be countered if mana produced by Cavern of
      * Souls was used to pay X. Can be bug also for all other spells with X in
      * their cost, not sure.
-     *
      */
     @Test
-    @Ignore
     public void testCastWithColorlessManaCanBeCountered() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.HAND, playerA, "Cavern of Souls");
@@ -214,8 +210,9 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
         setChoice(playerA, "Drake");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Return to the Ranks", "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Return to the Ranks");
         setChoice(playerA, "X=1");
+        addTarget(playerA, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Return to the Ranks");
 

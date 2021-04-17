@@ -103,24 +103,6 @@ public class PermanentToken extends PermanentImpl {
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (getToken().getCopySourceCard() != null) {
-            getToken().getCopySourceCard().adjustTargets(ability, game);
-        } else {
-            super.adjustTargets(ability, game);
-        }
-    }
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (getToken().getCopySourceCard() != null) {
-            getToken().getCopySourceCard().adjustCosts(ability, game);
-        } else {
-            super.adjustCosts(ability, game);
-        }
-    }
-
-    @Override
     public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
         // token must change zcc on enters to battlefield (like cards do with stack),
         // so it can keep abilities settings synced with copied spell/card

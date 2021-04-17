@@ -1,17 +1,19 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author JayDi85
@@ -57,19 +59,20 @@ class DinosaurHunterAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(getSourceId())) {
-            Permanent targetPermanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (targetPermanent.hasSubtype(SubType.DINOSAUR, game)) {
-                getEffects().setTargetPointer(new FixedTarget(targetPermanent, game));
-                return true;
-            }
+        if (!event.getSourceId().equals(getSourceId())) {
+            return false;
         }
-        return false;
+        Permanent targetPermanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        if (targetPermanent == null || !targetPermanent.hasSubtype(SubType.DINOSAUR, game)) {
+            return false;
+        }
+        getEffects().setTargetPointer(new FixedTarget(targetPermanent, game));
+        return true;
     }
 
     @Override

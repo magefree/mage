@@ -1,14 +1,8 @@
-
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
@@ -19,14 +13,15 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class UlrichOfTheKrallenhorde extends CardImpl {
 
     public UlrichOfTheKrallenhorde(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WEREWOLF);
@@ -42,8 +37,7 @@ public final class UlrichOfTheKrallenhorde extends CardImpl {
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Ulrich of the Krallenhorde.
         this.addAbility(new TransformAbility());
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new WerewolfFrontTriggeredAbility());
     }
 
     private UlrichOfTheKrallenhorde(final UlrichOfTheKrallenhorde card) {

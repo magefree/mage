@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.CommanderPredicate;
+import mage.filter.predicate.mageobject.CommanderPredicate;
 import mage.filter.predicate.permanent.EnteredThisTurnPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

@@ -1,20 +1,21 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class HonorTheFallen extends CardImpl {
@@ -34,48 +35,46 @@ public final class HonorTheFallen extends CardImpl {
     public HonorTheFallen copy() {
         return new HonorTheFallen(this);
     }
-
 }
 
 class HonorTheFallenEffect extends OneShotEffect {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard();
-
-    public HonorTheFallenEffect() {
+    HonorTheFallenEffect() {
         super(Outcome.Detriment);
         staticText = "Exile all creature cards from all graveyards. You gain 1 life for each card exiled this way";
     }
 
-    public HonorTheFallenEffect(final HonorTheFallenEffect effect) {
+    private HonorTheFallenEffect(final HonorTheFallenEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int exiledCards = 0;
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    for (Card card : player.getGraveyard().getCards(game)) {
-                        if (StaticFilters.FILTER_CARD_CREATURE.match(card, source.getSourceId(), controller.getId(), game)) {
-                            if (card.moveToExile(null, "", source, game)) {
-                                exiledCards++;
-                            }
-                        }
-                    }
-                }
-            }
-            controller.gainLife(exiledCards, game, source);
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Cards cards = new CardsImpl();
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
+            }
+            cards.addAll(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
+        }
+        controller.moveCards(cards, Zone.EXILED, source, game);
+        int count = cards
+                .stream()
+                .map(game.getState()::getZone)
+                .map(Zone.EXILED::equals)
+                .mapToInt(x -> x ? 1 : 0)
+                .sum();
+        controller.gainLife(count, game, source);
+        return true;
     }
 
     @Override
     public HonorTheFallenEffect copy() {
         return new HonorTheFallenEffect(this);
     }
-
 }

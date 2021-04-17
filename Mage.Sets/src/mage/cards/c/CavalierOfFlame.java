@@ -8,22 +8,18 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.discard.DiscardAndDrawThatManyEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPlaneswalkerPermanent;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCardInHand;
 
 import java.util.UUID;
 
@@ -58,7 +54,7 @@ public final class CavalierOfFlame extends CardImpl {
         this.addAbility(ability);
 
         // When Cavalier of Flame enters the battlefield, discard any number of cards, then draw that many cards.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CavalierOfFlameEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardAndDrawThatManyEffect(Integer.MAX_VALUE)));
 
         // When Cavalier of Flame dies, it deals X damage to each opponent and each planeswalker they control, where X is the number of land cards in your graveyard.
         ability = new DiesSourceTriggeredAbility(new DamagePlayersEffect(
@@ -77,36 +73,5 @@ public final class CavalierOfFlame extends CardImpl {
     @Override
     public CavalierOfFlame copy() {
         return new CavalierOfFlame(this);
-    }
-}
-
-class CavalierOfFlameEffect extends OneShotEffect {
-
-    CavalierOfFlameEffect() {
-        super(Outcome.Benefit);
-        staticText = "discard any number of cards, then draw that many cards.";
-    }
-
-    private CavalierOfFlameEffect(final CavalierOfFlameEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CavalierOfFlameEffect copy() {
-        return new CavalierOfFlameEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        TargetCardInHand target = new TargetCardInHand(0, player.getHand().size(), StaticFilters.FILTER_CARD);
-        if (player.choose(Outcome.Discard, player.getHand(), target, game)) {
-            int counter = player.discard(new CardsImpl(target.getTargets()), false, source, game).size();
-            player.drawCards(counter, source, game);
-        }
-        return true;
     }
 }

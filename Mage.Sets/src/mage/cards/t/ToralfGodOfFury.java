@@ -103,12 +103,7 @@ class ToralfGodOfFuryTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case DAMAGED_CREATURE:
-            case DAMAGED_PLANESWALKER:
-                return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override

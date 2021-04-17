@@ -22,6 +22,7 @@ import mage.target.targetadjustment.TargetAdjuster;
 import mage.watchers.Watcher;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.MageIdentifier;
@@ -47,7 +48,7 @@ public interface Ability extends Controllable, Serializable {
      *
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
      * mage.game.Game)
-     * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
+     * @see Game#addTriggeredAbility(TriggeredAbility, GameEvent)
      * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
     void newId();
@@ -57,7 +58,7 @@ public interface Ability extends Controllable, Serializable {
      *
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
      * mage.game.Game)
-     * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
+     * @see Game#addTriggeredAbility(TriggeredAbility, GameEvent)
      * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
     void newOriginalId();
@@ -86,6 +87,8 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Gets the id of the object which put this ability in motion.
+     *
+     * WARNING, MageSingleton abilities contains dirty data here, so you can't use sourceId with it
      *
      * @return The {@link java.util.UUID} of the object this ability is
      * associated with.
@@ -122,6 +125,14 @@ public interface Ability extends Controllable, Serializable {
      * @return All {@link ManaCosts} that must be paid.
      */
     ManaCosts<ManaCost> getManaCosts();
+
+    default List<String> getManaCostSymbols() {
+        List<String> symbols = new ArrayList<>();
+        for (ManaCost cost : getManaCosts()) {
+            symbols.add(cost.getText());
+        }
+        return symbols;
+    }
 
     /**
      * Gets all the {@link ManaCosts} that must be paid before activating this
@@ -311,7 +322,7 @@ public interface Ability extends Controllable, Serializable {
 
     Modes getModes();
 
-    boolean canChooseTarget(Game game);
+    boolean canChooseTarget(Game game, UUID playerId);
 
     /**
      * Gets the list of sub-abilities associated with this ability.

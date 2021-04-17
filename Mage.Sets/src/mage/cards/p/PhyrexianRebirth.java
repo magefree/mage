@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -13,8 +11,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.PhyrexianRebirthHorrorToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author ayratn
  */
 public final class PhyrexianRebirth extends CardImpl {
@@ -35,27 +34,29 @@ public final class PhyrexianRebirth extends CardImpl {
         return new PhyrexianRebirth(this);
     }
 
-    class PhyrexianRebirthEffect extends OneShotEffect {
+    private static final class PhyrexianRebirthEffect extends OneShotEffect {
 
-        public PhyrexianRebirthEffect() {
+        private PhyrexianRebirthEffect() {
             super(Outcome.DestroyPermanent);
-            staticText = "Destroy all creatures, then create an X/X colorless Horror artifact creature token, where X is the number of creatures destroyed this way";
+            staticText = "Destroy all creatures, then create an X/X colorless Horror artifact creature token, " +
+                    "where X is the number of creatures destroyed this way";
         }
 
-        public PhyrexianRebirthEffect(PhyrexianRebirthEffect ability) {
+        private PhyrexianRebirthEffect(PhyrexianRebirthEffect ability) {
             super(ability);
         }
 
         @Override
         public boolean apply(Game game, Ability source) {
             int count = 0;
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                    StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game
+            )) {
                 count += permanent.destroy(source, game, false) ? 1 : 0;
             }
-            PhyrexianRebirthHorrorToken horrorToken = new PhyrexianRebirthHorrorToken();
-            horrorToken.getPower().modifyBaseValue(count);
-            horrorToken.getToughness().modifyBaseValue(count);
-            horrorToken.putOntoBattlefield(1, game, source, source.getControllerId());
+            new PhyrexianRebirthHorrorToken(count, count).putOntoBattlefield(
+                    1, game, source, source.getControllerId()
+            );
             return true;
         }
 
@@ -63,7 +64,5 @@ public final class PhyrexianRebirth extends CardImpl {
         public PhyrexianRebirthEffect copy() {
             return new PhyrexianRebirthEffect(this);
         }
-
     }
-
 }

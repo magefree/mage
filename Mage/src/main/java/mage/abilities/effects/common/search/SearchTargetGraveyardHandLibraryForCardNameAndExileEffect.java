@@ -1,7 +1,6 @@
 
 package mage.abilities.effects.common.search;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -16,8 +15,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect extends OneShotEffect {
@@ -48,12 +48,11 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
     }
 
     /**
-     *
      * @param game
      * @param source
-     * @param cardName name of the card to exile
+     * @param cardName       name of the card to exile
      * @param targetPlayerId id of the target player to exile card name from his
-     * or her zones
+     *                       or her zones
      * @return
      */
     public boolean applySearchAndExile(Game game, Ability source, String cardName, UUID targetPlayerId) {
@@ -102,6 +101,9 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("search ").append(this.searchWhatText);
         sb.append(" graveyard, hand, and library for ");

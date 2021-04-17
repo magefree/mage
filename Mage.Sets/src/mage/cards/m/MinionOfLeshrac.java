@@ -16,7 +16,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -89,7 +89,7 @@ class MinionLeshracEffect extends OneShotEffect {
             filterCreature.add(AnotherPredicate.instance);
             TargetControlledPermanent target = new TargetControlledPermanent(filterCreature);
             SacrificeTargetCost cost = new SacrificeTargetCost(target);
-            if (controller.chooseUse(Outcome.AIDontUseIt, "Do you wish to sacrifice another creature to prevent the 5 damage to you?", source, game)
+            if (controller.chooseUse(Outcome.AIDontUseIt, "Sacrifice another creature to prevent the damage?", source, game)
                     && cost.canPay(source, source, source.getControllerId(), game)
                     && cost.pay(source, game, source, source.getControllerId(), true)) {
                 return true;

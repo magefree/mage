@@ -92,7 +92,7 @@ class JaceTheMindSculptorEffect1 extends OneShotEffect {
             if (card != null) {
                 Cards cards = new CardsImpl(card);
                 controller.lookAtCards("Jace, the Mind Sculptor", cards, game);
-                if (controller.chooseUse(outcome, "Do you wish to put card on the bottom of player's library?", source, game)) {
+                if (controller.chooseUse(outcome, "Put that card on the bottom of its owner's library?", source, game)) {
                     controller.moveCardToLibraryWithInfo(card, source, game, Zone.LIBRARY, false, false);
                 } else {
                     game.informPlayers(controller.getLogName() + " puts the card back on top of the library.");

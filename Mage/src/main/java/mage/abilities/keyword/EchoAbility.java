@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -15,7 +14,6 @@ import mage.game.events.GameEvent;
 import java.util.UUID;
 
 /**
- *
  * @author Backfir3
  */
 public class EchoAbility extends TriggeredAbilityImpl {
@@ -116,6 +114,9 @@ public class EchoAbility extends TriggeredAbilityImpl {
             }
             if (echoCosts != null) {
                 sb.append(echoCosts.getText());
+            }
+            if (!manaEcho) {
+                sb.append('.');
             }
         }
         sb.append(" <i>(At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)</i>");

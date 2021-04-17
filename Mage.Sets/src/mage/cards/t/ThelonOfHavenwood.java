@@ -47,7 +47,7 @@ public final class ThelonOfHavenwood extends CardImpl {
 
         // {B}{G}, Exile a Fungus card from a graveyard: Put a spore counter on each Fungus on the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.SPORE.createInstance(), filterPermanent), new ManaCostsImpl<>("{B}{G}"));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInASingleGraveyard(1, 1, filterCard)));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInASingleGraveyard(1, 1, filterCard), "exile a Fungus card from a graveyard"));
         this.addAbility(ability);
     }
 

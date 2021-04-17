@@ -22,7 +22,6 @@ import java.util.UUID;
 public final class OkaunEyeOfChaos extends CardImpl {
 
     private static final DynamicValue sourcePower = new SourcePermanentPowerCount();
-    private static final DynamicValue sourceToughness = new SourcePermanentToughnessValue();
 
     public OkaunEyeOfChaos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
@@ -43,7 +42,7 @@ public final class OkaunEyeOfChaos extends CardImpl {
         this.addAbility(new WinsCoinFlipTriggeredAbility(
                 new BoostSourceEffect(
                         sourcePower,
-                        sourceToughness,
+                        SourcePermanentToughnessValue.getInstance(),
                         Duration.EndOfTurn,
                         true
                 ).setText("double {this}'s power and toughness until end of turn")

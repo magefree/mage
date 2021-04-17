@@ -72,6 +72,17 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     }
 
     @Override
+    public Object getCardsStore() {
+        return this.cards;
+    }
+
+    @Override
+    public void clearCardsStoreBeforeUpdate() {
+        this.cards.clear();
+        this.view.clear();
+    }
+
+    @Override
     public void loadCards(CardsView showCards, SortSetting sortSetting, BigCard bigCard, UUID gameId) {
         this.loadCards(showCards, sortSetting, bigCard, gameId, true);
     }
@@ -215,7 +226,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                 return c.getDisplayFullName(); // show full name in deck editor table, e.g. adventure with spell name
             case 2:
                 // new svg images version
-                return ManaSymbols.getStringManaCost(c.getManaCost());
+                return ManaSymbols.getClearManaCost(c.getManaCostStr());
                 /*
                 // old html images version
                 String manaCost = "";

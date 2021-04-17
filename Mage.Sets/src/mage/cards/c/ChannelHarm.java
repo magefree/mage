@@ -70,7 +70,7 @@ class ChannelHarmEffect extends PreventionEffectImpl {
         if (preventionData.getPreventedDamage() > 0) {
             Permanent targetCreature = game.getPermanent(source.getFirstTarget());
             if (targetCreature != null) {
-                if (sourceController != null && sourceController.chooseUse(outcome, "Would you like to have " + preventionData.getPreventedDamage() + " damage dealt to " + targetCreature.getLogName() + "?", source, game)) {
+                if (sourceController != null && sourceController.chooseUse(outcome, "Have " + preventionData.getPreventedDamage() + " damage dealt to " + targetCreature.getLogName() + "?", source, game)) {
                     targetCreature.damage(preventionData.getPreventedDamage(), source.getSourceId(), source, game, false, true);
                 }
             }

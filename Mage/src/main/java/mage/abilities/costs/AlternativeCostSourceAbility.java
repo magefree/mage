@@ -1,4 +1,3 @@
-
 package mage.abilities.costs;
 
 import mage.abilities.Ability;
@@ -16,12 +15,14 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.Iterator;
-import mage.MageObject;
+import java.util.UUID;
 
 /**
  * @author LevelX2
  */
 public class AlternativeCostSourceAbility extends StaticAbility implements AlternativeSourceCosts {
+
+    private static final String ALTERNATIVE_COST_ACTIVATION_KEY = "AlternativeCostActivated";
 
     private Costs<AlternativeCost2> alternateCosts = new CostsImpl<>();
     protected Condition condition;
@@ -159,6 +160,9 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                             }
                         }
                     }
+
+                    // save activated status
+                    game.getState().setValue(getActivatedKey(ability), Boolean.TRUE);
                 } else {
                     return false;
                 }
@@ -167,6 +171,38 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
             }
         }
         return isActivated(ability, game);
+    }
+
+    private String getActivatedKey(Ability source) {
+        return getActivatedKey(this.getOriginalId(), source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+    }
+
+    private static String getActivatedKey(UUID alternativeCostOriginalId, UUID sourceId, int sourceZCC) {
+        // can't use sourceId cause copied cards are different...
+        // TODO: enable sourceId after copy card fix (it must copy cards with all related game state values)
+        return ALTERNATIVE_COST_ACTIVATION_KEY + "_" + alternativeCostOriginalId + "_" /*+ sourceId + "_"*/ + sourceZCC;
+    }
+
+    /**
+     * Search activated status of alternative cost.
+     * <p>
+     * If you need it on resolve then use current ZCC (on stack)
+     * If you need it on battlefield then use previous ZCC (-1)
+     *
+     * @param game
+     * @param source
+     * @param alternativeCostOriginalId you must save originalId on card's creation
+     * @param searchPrevZCC             true on battlefield, false on stack
+     * @return
+     */
+    public static boolean getActivatedStatus(Game game, Ability source, UUID alternativeCostOriginalId, boolean searchPrevZCC) {
+        String key = getActivatedKey(
+                alternativeCostOriginalId,
+                source.getSourceId(),
+                source.getSourceObjectZoneChangeCounter() + (searchPrevZCC ? -1 : 0)
+        );
+        Boolean status = (Boolean) game.getState().getValue(key);
+        return status != null && status;
     }
 
     @Override

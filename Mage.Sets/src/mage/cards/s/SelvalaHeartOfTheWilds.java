@@ -17,7 +17,7 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -96,7 +96,7 @@ class SelvalaHeartOfTheWildsEffect extends OneShotEffect {
             if (filter2.match(permanent, game)) {
                 Player permanentController = game.getPlayer(permanent.getControllerId());
                 if (permanentController != null
-                        && permanentController.chooseUse(Outcome.DrawCard, "Would you like to draw a card?", source, game)) {
+                        && permanentController.chooseUse(Outcome.DrawCard, "Draw a card?", source, game)) {
                     permanentController.drawCards(1, source, game);
                 }
             }

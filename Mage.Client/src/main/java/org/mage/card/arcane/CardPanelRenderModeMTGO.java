@@ -56,7 +56,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         if (!a.getSuperTypes().equals(b.getSuperTypes())) {
             return false;
         }
-        if (!a.getManaCost().equals(b.getManaCost())) {
+        if (!a.getManaCostStr().equals(b.getManaCostStr())) {
             return false;
         }
         if (!a.getRules().equals(b.getRules())) {
@@ -166,9 +166,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             for (SubType s : this.view.getSubTypes()) {
                 sb.append(s);
             }
-            for (String s : this.view.getManaCost()) {
-                sb.append(s);
-            }
+            sb.append(this.view.getManaCostStr());
             for (String s : this.view.getRules()) {
                 sb.append(s);
             }

@@ -43,9 +43,7 @@ public class SpellCostReductionForEachSourceEffect extends CostModificationEffec
 
         StringBuilder sb = new StringBuilder();
         sb.append("this spell costs ");
-        for (String manaSymbol : reduceManaCosts.getSymbols()) {
-            sb.append(manaSymbol);
-        }
+        sb.append(reduceManaCosts.getText());
         sb.append(" less to cast for each ").append(this.eachAmount.getMessage());
         this.staticText = sb.toString();
     }

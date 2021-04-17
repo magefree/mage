@@ -40,8 +40,8 @@ public final class UroTitanOfNaturesWrath extends CardImpl {
 
         // Whenever Uro enters the battlefield or attacks, you gain 3 life and draw a card, then you may put a land card from your hand onto the battlefield.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new GainLifeEffect(3));
-        ability.addEffect(new DrawCardSourceControllerEffect(1).setText("and draw a card, then"));
-        ability.addEffect(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A));
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
+        ability.addEffect(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A).concatBy(", then"));
         this.addAbility(ability);
 
         // Escape-{G}{G}{U}{U}, Exile five other cards from your graveyard.

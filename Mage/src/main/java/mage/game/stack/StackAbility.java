@@ -30,8 +30,10 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.SubTypes;
+import mage.util.functions.SpellCopyApplier;
 import mage.watchers.Watcher;
 
 import java.util.ArrayList;
@@ -220,6 +222,11 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public ManaCosts<ManaCost> getManaCost() {
         return emptyCost;
+    }
+
+    @Override
+    public List<String> getManaCostSymbols() {
+        return super.getManaCostSymbols();
     }
 
     @Override
@@ -435,8 +442,8 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public boolean canChooseTarget(Game game) {
-        return ability.canChooseTarget(game);
+    public boolean canChooseTarget(Game game, UUID playerId) {
+        return ability.canChooseTarget(game, playerId);
     }
 
     @Override
@@ -591,15 +598,20 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
-        return createCopyOnStack(game, source, newControllerId, chooseNewTargets, 1);
+    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
+        createCopyOnStack(game, source, newControllerId, chooseNewTargets, 1);
     }
 
-    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
+    @Override
+    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
+        createCopyOnStack(game, source, newControllerId, chooseNewTargets, amount, null);
+    }
+
+    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount, SpellCopyApplier applier) {
         StackAbility newStackAbility = null;
         GameEvent gameEvent = new CopyStackObjectEvent(source, this, newControllerId, amount);
         if (game.replaceEvent(gameEvent)) {
-            return null;
+            return;
         }
         for (int i = 0; i < gameEvent.getAmount(); i++) {
             Ability newAbility = this.copy();
@@ -616,7 +628,13 @@ public class StackAbility extends StackObjImpl implements Ability {
             }
             game.fireEvent(new CopiedStackObjectEvent(this, newStackAbility, newControllerId));
         }
-        return newStackAbility;
+        Player player = game.getPlayer(newControllerId);
+        if (player != null) {
+            game.informPlayers(
+                    player.getName() + " created " + CardUtil.numberToText(gameEvent.getAmount(), "a")
+                            + " cop" + (gameEvent.getAmount() == 1 ? "y" : "ies") + " of " + getIdName()
+            );
+        }
     }
 
     @Override

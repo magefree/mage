@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -6,6 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -33,8 +33,7 @@ public final class ConvictedKiller extends CardImpl {
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Convicted Killer.
         this.addAbility(new TransformAbility());
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new WerewolfFrontTriggeredAbility());
     }
 
     private ConvictedKiller(final ConvictedKiller card) {

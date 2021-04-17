@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -93,7 +93,7 @@ class HostageTakerExileEffect extends OneShotEffect {
         UUID exileId = CardUtil.getCardExileZoneId(game, source);
         controller.moveCardToExileWithInfo(card, exileId, permanent.getIdName(), source, game, Zone.BATTLEFIELD, true);
         // allow to cast the card and you may spend mana as though it were mana of any color to cast it
-        CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, card, Duration.Custom);
+        CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
         return true;
     }
 }

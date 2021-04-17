@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,13 +15,15 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class Realmwalker extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("cast creature spells of the chosen type");
+
     static {
         filter.add(ChosenSubtypePredicate.TRUE);
     }
@@ -44,7 +45,7 @@ public final class Realmwalker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast creature spells of the chosen type from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter, false)));
     }
 
     private Realmwalker(final Realmwalker card) {

@@ -1,5 +1,3 @@
-
-
 package mage.abilities.keyword;
 
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -10,20 +8,19 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 
 /**
- *
  * @author LevelX2
  */
 public class ProwessAbility extends SpellCastControllerTriggeredAbility {
 
-    private static final FilterSpell filterNonCreatureSpell = new  FilterSpell("noncreature spell");
+    private static final FilterSpell filterNonCreatureSpell = new FilterSpell("noncreature spell");
 
     static {
         filterNonCreatureSpell.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public ProwessAbility() {
-        super(new BoostSourceEffect(1,1,Duration.EndOfTurn), false);
-        this.filter = filterNonCreatureSpell; 
+        super(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false);
+        this.filter = filterNonCreatureSpell;
     }
 
     public ProwessAbility(final ProwessAbility ability) {

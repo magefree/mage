@@ -78,7 +78,9 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
                 if (currentPlayer.canRespond()
                         && currentPlayer.chooseUse(Outcome.GainControl, text, source, game)) {
                     int newBid = 0;
-                    if (!currentPlayer.isHuman()) {//AI will evaluate the creature and bid
+                    if (currentPlayer.isComputer()) {
+                        // AI hint
+                        // AI will evaluate the creature and bid
                         CreatureEvaluator eval = new CreatureEvaluator();
                         int computerLife = currentPlayer.getLife();
                         int creatureValue = eval.evaluate(targetCreature, game);

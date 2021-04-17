@@ -1,4 +1,3 @@
-
 package mage.deck;
 
 /**
@@ -24,7 +23,6 @@ public class DuelCommander extends Commander {
         banned.add("Fastbond");
         banned.add("Field of the Dead");
         banned.add("Fierce Guardianship");
-        banned.add("Fireblast");
         banned.add("Food Chain");
         banned.add("Gaea's Cradle");
         banned.add("Genesis Storm");
@@ -33,6 +31,7 @@ public class DuelCommander extends Commander {
         banned.add("High Tide");
         banned.add("Humility");
         banned.add("Imperial Seal");
+        banned.add("Jeweled Lotus");
         banned.add("Karakas");
         banned.add("Library of Alexandria");
         banned.add("Lion's Eye Diamond");
@@ -70,10 +69,13 @@ public class DuelCommander extends Commander {
         banned.add("Tinker");
         banned.add("Tolarian Academy");
         banned.add("Treasure Cruise");
+        banned.add("Uro, Titan of Nature's Wrath");
         banned.add("Vampiric Tutor");
         banned.add("Wasteland");
 
+        bannedCommander.add("Akiri, Line-Slinger");
         bannedCommander.add("Arahbo, Roar of the World");
+        bannedCommander.add("Ardenn, Intrepid Archaeologist");
         bannedCommander.add("Baral, Chief of Compliance");
         bannedCommander.add("Breya, Etherium Shaper");
         bannedCommander.add("Bruse Tarl, Boorish Herder");
@@ -81,18 +83,27 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Edgar Markov");
         bannedCommander.add("Edric, Spymaster of Trest");
         bannedCommander.add("Emry, Lurker of the Loch");
+        bannedCommander.add("Esior, Wardwing Familiar");
         bannedCommander.add("Geist of Saint Traft");
+        bannedCommander.add("Jeska, Thrice Reborn");
+        bannedCommander.add("Keleth, Sunmane Familiar");
+        bannedCommander.add("Krark, the Thumbless");
+        bannedCommander.add("Ludevic, Necro-Alchemist");
         bannedCommander.add("Marath, Will of the Wild");
         bannedCommander.add("Najeela, the Blade-Blossom");
         bannedCommander.add("Oloro, Ageless Ascetic");
+        bannedCommander.add("Omnath, Locus of Creation");
         bannedCommander.add("Prime Speaker Vannifar");
+        bannedCommander.add("Reyhan, Last of the Abzan");
         bannedCommander.add("Rofellos, Llanowar Emissary");
+        bannedCommander.add("Rograkh, Son of Rohgahh");
         bannedCommander.add("Tasigur, the Golden Fang");
         bannedCommander.add("Teferi, Temporal Archmage");
+        bannedCommander.add("Thrasios, Triton Hero");
+        bannedCommander.add("Tymna, the Weaver");
         bannedCommander.add("Urza, Lord High Artificer");
         bannedCommander.add("Vial Smasher the Fierce");
         bannedCommander.add("Yuriko, the Tiger's Shadow");
         bannedCommander.add("Zurgo Bellstriker");
     }
-
 }

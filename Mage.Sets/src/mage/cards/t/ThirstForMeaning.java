@@ -24,12 +24,10 @@ public final class ThirstForMeaning extends CardImpl {
 
         // Draw three cards. Then discard two cards unless you discard an enchantment card.
         DiscardCardCost cost = new DiscardCardCost(filter);
-        cost.setText("discard one enchantment card instead two cards");
+        cost.setText("discard an enchantment card instead of discarding two cards");
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         this.getSpellAbility().addEffect(new DoIfCostPaid(
-                null,
-                new DiscardControllerEffect(2),
-                cost
+                null, new DiscardControllerEffect(2), cost
         ).setText("Then discard two cards unless you discard an enchantment card"));
     }
 

@@ -68,7 +68,7 @@ enum EmbodimentOfAgoniesValue implements DynamicValue {
                 .getCards(game)
                 .stream()
                 .filter(card -> !card.isLand())
-                .forEach(card -> stringSet.add(getCosts(card.getManaCost())));
+                .forEach(card -> stringSet.add(getCosts(card.getManaCostSymbols())));
         stringSet.removeIf(s -> s == null || s.equals(""));
         return stringSet.size();
     }
@@ -83,11 +83,11 @@ enum EmbodimentOfAgoniesValue implements DynamicValue {
         return "";
     }
 
-    private static String getCosts(ManaCosts<ManaCost> costs) {
+    private static String getCosts(List<String> manaCostSymbols) {
         List<String> newList = new ArrayList();
         int generic = 0;
         boolean hasGeneric = false;
-        for (String s : costs.getSymbols()) {
+        for (String s : manaCostSymbols) {
             if (s.matches("\\{\\d*\\}")) {
                 generic += Integer.parseInt(s.substring(1, s.length() - 1));
                 hasGeneric = true;

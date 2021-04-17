@@ -24,8 +24,8 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
 
     protected boolean chooseLandType;
     protected List<SubType> landTypes = new ArrayList<>();
-    protected List<SubType> landTypesToAdd = new ArrayList<>();
-    protected boolean loseOther;  // loses all other abilities, card types, and creature types
+    private final List<SubType> landTypesToAdd = new ArrayList<>();
+    private final boolean loseOther;  // loses all other abilities, card types, and creature types
 
     public BecomesBasicLandTargetEffect(Duration duration) {
         this(duration, true);
@@ -40,7 +40,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     }
 
     public BecomesBasicLandTargetEffect(Duration duration, boolean chooseLandType, boolean loseOther, SubType... landNames) {
-        super(duration, Outcome.Detriment);
+        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         this.landTypes.addAll(Arrays.asList(landNames));
         if (landTypes.contains(SubType.MOUNTAIN)) {
             dependencyTypes.add(DependencyType.BecomeMountain);
@@ -72,11 +72,6 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public BecomesBasicLandTargetEffect copy() {
         return new BecomesBasicLandTargetEffect(this);
     }
@@ -101,63 +96,54 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
         for (UUID targetPermanent : targetPointer.getTargets(game, source)) {
             Permanent land = game.getPermanent(targetPermanent);
-            if (land != null) {
-                switch (layer) {
-                    case TypeChangingEffects_4:
-                        // Attention: Cards like Unstable Frontier that use this class do not give the "Basic" supertype to the target
-                        if (!land.isLand()) {
-                            land.addCardType(CardType.LAND);
-                        }
-                        if (loseOther) {
-                            // 305.7 Note that this doesn't remove any abilities 
-                            // that were granted to the land by other effects
-                            // So the ability removing has to be done before Layer 6
-                            land.removeAllAbilities(source.getSourceId(), game);
-                            // 305.7
-                            land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
-                            land.addSubType(game, landTypes);
-                        } else {
-                            landTypesToAdd.clear();
-                            for (SubType subtype : landTypes) {
-                                if (!land.hasSubtype(subtype, game)) {
-                                    land.addSubType(game, subtype);
-                                    landTypesToAdd.add(subtype);
-                                }
-                            }
-                        }
-                        // add intrinsic land abilities here not in layer 6
-                        for (SubType landType : landTypesToAdd) {
-                            switch (landType) {
-                                case SWAMP:
-                                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
-                                    break;
-                                case MOUNTAIN:
-                                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
-                                    break;
-                                case FOREST:
-                                    land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                                    break;
-                                case ISLAND:
-                                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
-                                    break;
-                                case PLAINS:
-                                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
-                                    break;
-                            }
-                        }
+            if (land == null) {
+                continue;
+            }
+            if (!land.isLand()) {
+                land.addCardType(CardType.LAND);
+            }
+            if (loseOther) {
+                // 305.7 Note that this doesn't remove any abilities
+                // that were granted to the land by other effects
+                // So the ability removing has to be done before Layer 6
+                land.removeAllAbilities(source.getSourceId(), game);
+                // 305.7
+                land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
+                land.addSubType(game, landTypes);
+            } else {
+                landTypesToAdd.clear();
+                for (SubType subtype : landTypes) {
+                    if (!land.hasSubtype(subtype, game)) {
+                        land.addSubType(game, subtype);
+                        landTypesToAdd.add(subtype);
+                    }
+                }
+            }
+            // add intrinsic land abilities here not in layer 6
+            for (SubType landType : landTypesToAdd) {
+                switch (landType) {
+                    case PLAINS:
+                        land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                        break;
+                    case ISLAND:
+                        land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
+                        break;
+                    case SWAMP:
+                        land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
+                        break;
+                    case MOUNTAIN:
+                        land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                        break;
+                    case FOREST:
+                        land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                         break;
                 }
             }
         }
         return true;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.TypeChangingEffects_4;
     }
 
     private String setText() {

@@ -45,7 +45,7 @@ public class FiendOfTheShadowsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Swamp");
 
         attack(1, playerA, "Fiend of the Shadows");
-        addTarget(playerB, "Swamp");
+        setChoice(playerB, "Swamp");
         playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Swamp");
 
         setStrictChooseMode(true);

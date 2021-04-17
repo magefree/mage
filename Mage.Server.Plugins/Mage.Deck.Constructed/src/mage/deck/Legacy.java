@@ -17,6 +17,7 @@ public class Legacy extends Constructed {
             }
         }
         banned.add("Advantageous Proclamation");
+        banned.add("Arcum's Astrolabe");
         banned.add("Amulet of Quoz");
         banned.add("Ancestral Recall");
         banned.add("Backup Plan");
@@ -35,6 +36,7 @@ public class Legacy extends Constructed {
         banned.add("Demonic Tutor");
         banned.add("Dig Through Time");
         banned.add("Double Stroke");
+        banned.add("Dreadhorde Arcanist");
         banned.add("Earthcraft");
         banned.add("Falling Star");
         banned.add("Fastbond");
@@ -67,6 +69,7 @@ public class Legacy extends Constructed {
         banned.add("Mystical Tutor");
         banned.add("Necropotence");
         banned.add("Oath of Druids");
+        banned.add("Oko, Thief of Crowns");
         banned.add("Power Play");
         banned.add("Rebirth");
         banned.add("Secret Summoning");

@@ -24,7 +24,7 @@ public class CardViewColorIdentityComparator implements CardViewComparator {
     }
 
     public static FilterMana calcIdentity(CardView cardView) {
-        return ManaUtil.getColorIdentity(cardView.getColor(), cardView.getManaCost(), cardView.getRules(), null);
+        return ManaUtil.getColorIdentity(cardView.getColor(), cardView.getManaCostStr(), cardView.getRules(), null);
     }
 
     public static int calcHash(CardView cardView) {

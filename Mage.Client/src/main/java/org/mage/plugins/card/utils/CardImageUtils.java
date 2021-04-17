@@ -308,6 +308,10 @@ public final class CardImageUtils {
         // search broken files and delete it (zero size files)
         // search temp files and delete it (.tmp files from zip library)
         Path rootPath = new File(CardImageUtils.getImagesDir()).toPath();
+        if (!Files.exists(rootPath)) {
+            return;
+        }
+
         Collection<Path> brokenFilesList = new ArrayList<>();
         Collection<Path> tempFilesList = new ArrayList<>();
         try {

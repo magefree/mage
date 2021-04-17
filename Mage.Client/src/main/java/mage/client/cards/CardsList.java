@@ -447,6 +447,17 @@
      }
 
      @Override
+     public Object getCardsStore() {
+         return this.cards;
+     }
+
+     @Override
+     public void clearCardsStoreBeforeUpdate() {
+         this.cards.clear();
+         this.mageCards.clear();
+     }
+
+     @Override
      public void loadCards(CardsView showCards, SortSetting sortSetting, BigCard bigCard, UUID gameId) {
          this.loadCards(showCards, sortSetting, bigCard, gameId, true);
      }

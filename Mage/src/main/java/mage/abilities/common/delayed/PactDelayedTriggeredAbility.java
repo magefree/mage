@@ -39,7 +39,7 @@ public class PactDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "At the beginning of your next upkeep " + modes.getText();
+        return "<br>At the beginning of your next upkeep, " + modes.getText();
     }
 }
 

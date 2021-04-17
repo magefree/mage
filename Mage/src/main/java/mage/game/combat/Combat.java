@@ -352,8 +352,8 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))
                     || (!canBand && !canBandWithOther)
                     || !player.chooseUse(Outcome.Benefit,
-                            "Do you wish to " + (isBanded ? "band " + attacker.getLogName()
-                                    + " with another " : "form a band with " + attacker.getLogName() + " and an ")
+                             (isBanded ? "Band " + attacker.getLogName()
+                                    + " with another " : "Form a band with " + attacker.getLogName() + " and an ")
                             + "attacking creature?", null, game)) {
                 break;
             }

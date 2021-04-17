@@ -97,7 +97,7 @@ public final class GuiDisplayUtil {
         j.add(cardText);
 
         TextLines textLines = GuiDisplayUtil.getTextLinesfromCardView(card);
-        cardText.setText(getRulefromCardView(card, textLines).toString());
+        cardText.setText(getRulesFromCardView(card, textLines).toString());
 
         descriptionPanel.add(j);
 
@@ -227,11 +227,8 @@ public final class GuiDisplayUtil {
         return "<img src='" + getResourcePath("hint/" + iconName + ".png") + "' alt='" + iconName + "' width=" + symbolSize + " height=" + symbolSize + ">";
     }
 
-    public static StringBuilder getRulefromCardView(CardView card, TextLines textLines) {
-        String manaCost = "";
-        for (String m : card.getManaCost()) {
-            manaCost += m;
-        }
+    public static StringBuilder getRulesFromCardView(CardView card, TextLines textLines) {
+        String manaCost = card.getManaCostStr();
         String castingCost = UI.getDisplayManaCost(manaCost);
         castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.TOOLTIP);
 
@@ -347,9 +344,9 @@ public final class GuiDisplayUtil {
             rule.append("<tr><td valign='top'><b>");
             rule.append(card.getLeftSplitName());
             rule.append("</b></td><td align='right' valign='top' style='width:");
-            rule.append(card.getLeftSplitCosts().getSymbols().size() * GUISizeHelper.symbolTooltipSize + 1);
+            rule.append(ManaSymbols.getClearManaSymbolsCount(card.getLeftSplitCostsStr()) * GUISizeHelper.symbolTooltipSize + 1);
             rule.append("px'>");
-            rule.append(card.getLeftSplitCosts().getText());
+            rule.append(card.getLeftSplitCostsStr());
             rule.append("</td></tr></table>");
             for (String ruling : card.getLeftSplitRules()) {
                 if (ruling != null && !ruling.replace(".", "").trim().isEmpty()) {
@@ -362,9 +359,9 @@ public final class GuiDisplayUtil {
             rule.append("<tr><td valign='top'><b>");
             rule.append(card.getRightSplitName());
             rule.append("</b></td><td align='right' valign='top' style='width:");
-            rule.append(card.getRightSplitCosts().getSymbols().size() * GUISizeHelper.symbolTooltipSize + 1);
+            rule.append(ManaSymbols.getClearManaSymbolsCount(card.getRightSplitCostsStr()) * GUISizeHelper.symbolTooltipSize + 1);
             rule.append("px'>");
-            rule.append(card.getRightSplitCosts().getText());
+            rule.append(card.getRightSplitCostsStr());
             rule.append("</td></tr></table>");
             for (String ruling : card.getRightSplitRules()) {
                 if (ruling != null && !ruling.replace(".", "").trim().isEmpty()) {

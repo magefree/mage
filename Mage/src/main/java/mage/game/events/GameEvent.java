@@ -65,7 +65,7 @@ public class GameEvent implements Serializable {
         //player events
         /* ZONE_CHANGE
          targetId    id of the zone changing object
-         sourceId    sourceId of the ability with the object moving effect
+         sourceId    sourceId of the ability with the object moving effect (WARNING, can be null if it move of fizzled spells)
          playerId    controller of the moved object
          amount      not used for this event
          flag        not used for this event
@@ -188,6 +188,7 @@ public class GameEvent implements Serializable {
          playerId    player that tries to use this ability
          */
         TRIGGERED_ABILITY,
+        ABILITY_TRIGGERED,
         RESOLVING_ABILITY,
         /* COPY_STACKOBJECT
          targetId    id of the spell/ability to copy
@@ -301,6 +302,7 @@ public class GameEvent implements Serializable {
         DIDNT_PAY_CUMULATIVE_UPKEEP,
         LIFE_PAID,
         CASCADE_LAND,
+        LEARN,
         //permanent events
         ENTERS_THE_BATTLEFIELD_SELF, /* 616.1a If any of the replacement and/or prevention effects are self-replacement effects (see rule 614.15),
                                         one of them must be chosen. If not, proceed to rule 616.1b. */
@@ -359,8 +361,9 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         OPTION_USED,
-        DAMAGE_CREATURE, DAMAGED_CREATURE, DAMAGED_CREATURE_BATCH,
-        DAMAGE_PLANESWALKER, DAMAGED_PLANESWALKER, DAMAGED_PLANESWALKER_BATCH,
+        DAMAGE_PERMANENT,
+        DAMAGED_PERMANENT,
+        DAMAGED_PERMANENT_BATCH,
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
          targetId    id of the permanent to destroy
@@ -436,6 +439,14 @@ public class GameEvent implements Serializable {
         //combat events
         COMBAT_DAMAGE_APPLIED,
         SELECTED_ATTACKER, SELECTED_BLOCKER,
+        /* voting
+         targetId    player who voting
+         sourceId    sourceId of the effect doing the voting
+         playerId    player who deciding about voting, can be changed by replace events
+         amount      not used for this event
+         flag        not used for this event
+         */
+        VOTE, VOTED,
         //custom events
         CUSTOM_EVENT
     }
@@ -492,8 +503,7 @@ public class GameEvent implements Serializable {
         return new GameEvent(customEventType, targetId, source, playerId);
     }
 
-    private GameEvent(EventType type, UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount, boolean flag)
-    {
+    private GameEvent(EventType type, UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount, boolean flag) {
         this(type, customEventType, targetId, source, playerId, amount, flag, null);
     }
 

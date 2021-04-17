@@ -64,8 +64,7 @@ class AngrathsMaraudersEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType().equals(EventType.DAMAGE_PLAYER)
-                || event.getType().equals(EventType.DAMAGE_CREATURE)
-                || event.getType().equals(EventType.DAMAGE_PLANESWALKER);
+                || event.getType().equals(EventType.DAMAGE_PERMANENT);
     }
 
     @Override

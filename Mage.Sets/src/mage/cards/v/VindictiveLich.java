@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterOpponent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.AnotherTargetPredicate;
+import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 

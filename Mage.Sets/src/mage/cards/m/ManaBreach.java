@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -12,25 +10,24 @@ import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LoneFox
-
  */
 public final class ManaBreach extends CardImpl {
 
     public ManaBreach(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // Whenever a player casts a spell, that player returns a land they control to its owner's hand.
-        this.addAbility(new SpellCastAllTriggeredAbility(new ManaBreachEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER));
+        this.addAbility(new SpellCastAllTriggeredAbility(
+                new ManaBreachEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.PLAYER
+        ));
     }
 
     private ManaBreach(final ManaBreach card) {
@@ -45,32 +42,32 @@ public final class ManaBreach extends CardImpl {
 
 class ManaBreachEffect extends OneShotEffect {
 
-    public ManaBreachEffect() {
-        super(Outcome.Detriment);
-        staticText="that player returns a land they control to its owner's hand.";
+    ManaBreachEffect() {
+        super(Outcome.Benefit);
+        staticText = "that player returns a land they control to its owner's hand";
     }
 
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if(player != null) {
-            FilterLandPermanent filter = new FilterLandPermanent("a land you control");
-            filter.add(new ControllerIdPredicate(player.getId()));
-            TargetLandPermanent toBounce = new TargetLandPermanent(1, 1, filter, true);
-            if(player.chooseTarget(Outcome.ReturnToHand, toBounce, source, game)) {
-                Permanent land = game.getPermanent(toBounce.getTargets().get(0));
-                land.moveToZone(Zone.HAND, source, game, false);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    public ManaBreachEffect(final ManaBreachEffect effect) {
+    private ManaBreachEffect(final ManaBreachEffect effect) {
         super(effect);
     }
 
+    @Override
     public ManaBreachEffect copy() {
         return new ManaBreachEffect(this);
     }
 
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player == null || game.getBattlefield().count(
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
+                source.getSourceId(), player.getId(), game
+        ) < 1) {
+            return false;
+        }
+        TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
+        target.setNotTarget(true);
+        player.choose(outcome, target, source.getSourceId(), game);
+        return player.moveCards(game.getPermanent(target.getFirstTarget()), Zone.HAND, source, game);
+    }
 }

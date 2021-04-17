@@ -367,30 +367,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return spellAbility;
     }
 
-    /**
-     * Dynamic cost modification for card (process only own abilities). Example:
-     * if it need stack related info (like real targets) then must check two
-     * states (game.inCheckPlayableState):
-     * <p>
-     * 1. In playable state it must check all possible use cases (e.g. allow to
-     * reduce on any available target and modes)
-     * <p>
-     * 2. In real cast state it must check current use case (e.g. real selected
-     * targets and modes)
-     *
-     * @param ability
-     * @param game
-     */
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        ability.adjustCosts(game);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.adjustTargets(game);
-    }
-
     @Override
     public void setOwnerId(UUID ownerId) {
         this.ownerId = ownerId;

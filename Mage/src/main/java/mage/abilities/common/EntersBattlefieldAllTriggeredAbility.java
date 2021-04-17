@@ -88,6 +88,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         this.getEffects().setValue("permanentEnteringBattlefield", permanent);
+        this.getEffects().setValue("permanentEnteringControllerId", permanent.getControllerId());
         if (setTargetPointer == SetTargetPointer.NONE) {
             return true;
         }

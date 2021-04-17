@@ -1,11 +1,16 @@
 package mage.game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
+import mage.counters.Counter;
 import mage.counters.Counters;
 
 /**
@@ -127,4 +132,30 @@ public class CardState implements Serializable {
         this.melded = melded;
     }
 
+    @Override
+    public String toString() {
+        List<String> info = new ArrayList<>();
+
+        if (this.faceDown) {
+            info.add("face down");
+        }
+        if (this.counters != null && !this.counters.isEmpty()) {
+            info.add("counters: " + this.counters.values().stream().mapToInt(Counter::getCount).sum());
+        }
+        if (this.abilities != null && !this.abilities.isEmpty()) {
+            info.add("abilities: " + abilities.size());
+        }
+        if (this.lostAllAbilities) {
+            info.add("lost all");
+        }
+        if (this.melded) {
+            info.add("melded");
+        }
+
+        if (info.isEmpty()) {
+            return "";
+        } else {
+            return String.join("; ", info);
+        }
+    }
 }

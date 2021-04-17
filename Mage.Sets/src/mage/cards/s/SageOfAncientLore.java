@@ -1,30 +1,24 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
+import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.condition.common.TransformedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -53,8 +47,7 @@ public final class SageOfAncientLore extends CardImpl {
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Sage of Ancient Lore.
         this.addAbility(new TransformAbility());
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new WerewolfFrontTriggeredAbility());
     }
 
     private SageOfAncientLore(final SageOfAncientLore card) {

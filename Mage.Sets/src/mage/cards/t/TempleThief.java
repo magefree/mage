@@ -9,7 +9,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.EnchantmentOrEnchantedPredicate;
+import mage.filter.predicate.permanent.EnchantmentOrEnchantedPredicate;
 
 import java.util.UUID;
 

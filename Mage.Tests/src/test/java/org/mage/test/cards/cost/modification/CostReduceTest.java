@@ -37,6 +37,8 @@ public class CostReduceTest extends CardTestPlayerBase {
         Assert.assertEquals("test mono hybrid have variant generic", "{1/R}", testCost.getText());
         testReduce("{5/R}", 0, "{5/R}"); // ensure that mono hybrid in test mode
 
+        // mana order must be same (e.g. cost {R}{2}{G} must be reduced to {R}{1}{G})
+
         // DECREASE COST
 
         // colorless is not reduce
@@ -73,16 +75,29 @@ public class CostReduceTest extends CardTestPlayerBase {
         testReduce("{R}{3}{G}", 2, "{R}{1}{G}");
         testReduce("{R}{G}{3}", 2, "{R}{G}{1}");
 
+        // multi generics, decrease cost by 2 (you can't get multigeneric in real game example)
+        testReduce("{2}{2}", 2, "{2}");
+        testReduce("{3}{3}", 2, "{1}{3}");
+        testReduce("{3}{R}{3}", 2, "{1}{R}{3}");
+        testReduce("{3}{R}{3}{G}", 2, "{1}{R}{3}{G}");
+        testReduce("{R}{3}{G}{3}", 2, "{R}{1}{G}{3}");
+        //
+        testReduce("{2}{2}", 3, "{1}");
+        testReduce("{3}{3}", 3, "{3}");
+        testReduce("{3}{R}{3}", 5, "{R}{1}");
+        testReduce("{3}{R}{3}{G}", 5, "{R}{1}{G}");
+        testReduce("{R}{3}{G}{3}", 5, "{R}{G}{1}");
+
         // INCREASE COST
 
         // colorless, increase cost by 1
-        testReduce("{C}", -1, "{C}{1}");
-        testReduce("{C}{G}", -1, "{C}{G}{1}");
+        testReduce("{C}", -1, "{1}{C}");
+        testReduce("{C}{G}", -1, "{1}{C}{G}");
 
         // 0 generic, increase cost by 1
         testReduce("", -1, "{1}");
-        testReduce("{R}", -1, "{R}{1}");
-        testReduce("{R}{G}", -1, "{R}{G}{1}");
+        testReduce("{R}", -1, "{1}{R}");
+        testReduce("{R}{G}", -1, "{1}{R}{G}");
 
         // 1 generic, increase cost by 1
         testReduce("{1}", -1, "{2}");
@@ -123,8 +138,8 @@ public class CostReduceTest extends CardTestPlayerBase {
         testReduce("{2/R}", 1, "{1/R}");
         testReduce("{2/R}{2/G}", 1, "{1/R}{2/G}"); // TODO: add or/or reduction? (see https://github.com/magefree/mage/issues/6130 )
         // mono hybrid, increase cost by 1
-        testReduce("{2/R}", -1, "{2/R}{1}");
-        testReduce("{2/R}{2/G}", -1, "{2/R}{2/G}{1}");
+        testReduce("{2/R}", -1, "{1}{2/R}");
+        testReduce("{2/R}{2/G}", -1, "{1}{2/R}{2/G}");
 
         // generic, normal amount
         // mono hybrid + 1 generic, decrease cost by 1

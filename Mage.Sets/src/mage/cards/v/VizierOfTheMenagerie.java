@@ -36,8 +36,8 @@ public final class VizierOfTheMenagerie extends CardImpl {
         // You may look at the top card of your library. (You may do this at any time.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LookAtTopCardOfLibraryAnyTimeEffect()));
 
-        // You may cast the top card of your library if it's a creature card.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect(filter)));
+        // You may cast creature spells from the top of your library.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect(filter, false)));
 
         // You may spend mana as though it were mana of any type to cast creature spells.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VizierOfTheMenagerieManaEffect()));

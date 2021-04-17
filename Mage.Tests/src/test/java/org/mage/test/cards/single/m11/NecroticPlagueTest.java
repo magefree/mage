@@ -22,8 +22,10 @@ public class NecroticPlagueTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necrotic Plague", "Sejiri Merfolk");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -38,7 +40,7 @@ public class NecroticPlagueTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
 
         /**
-         * Goblin Deathraiders English
+         * Goblin Deathraiders
          * Creature — Goblin Warrior 3/1, BR
          * Trample
          */
@@ -63,9 +65,12 @@ public class NecroticPlagueTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necrotic Plague", "Sejiri Merfolk");
+        addTarget(playerB, "Goblin Deathraiders"); // target for new necro attach
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

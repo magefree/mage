@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -13,20 +11,16 @@ import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class Guile extends CardImpl {
@@ -85,12 +79,12 @@ class GuileReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (spell != null 
+        if (spell != null
                 && controller != null) {
             controller.moveCards(spell, Zone.EXILED, source, game);
-            if (!spell.isCopy()) {
+            if (!spell.isCopy()) { // copies doesn't exists in exile zone
                 Card spellCard = spell.getCard();
-                if (spellCard != null 
+                if (spellCard != null
                         && controller.chooseUse(Outcome.PlayForFree, "Play " + spellCard.getIdName() + " for free?", source, game)) {
                     controller.playCard(spellCard, game, true, true, new ApprovingObject(source, game));
                 }

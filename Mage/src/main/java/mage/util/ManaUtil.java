@@ -18,6 +18,7 @@ import mage.cards.ModalDoubleFacesCard;
 import mage.cards.SplitCard;
 import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.ManaType;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.Player;
@@ -523,7 +524,7 @@ public final class ManaUtil {
      * @param secondSideCard  second side of double faces card
      * @return
      */
-    public static FilterMana getColorIdentity(ObjectColor cardColor, List<String> cardManaSymbols, List<String> cardRules, Card secondSideCard) {
+    public static FilterMana getColorIdentity(ObjectColor cardColor, String cardManaSymbols, List<String> cardRules, Card secondSideCard) {
         // 20210121
         // 903.4
         // The Commander variant uses color identity to determine what cards can be in a deck with a certain
@@ -576,7 +577,7 @@ public final class ManaUtil {
             res.setWhite(res.isWhite() || secondColor.isWhite());
 
             // from mana
-            List<String> secondManaSymbols = secondSideCard.getManaCost().getSymbols();
+            List<String> secondManaSymbols = secondSideCard.getManaCostSymbols();
             res.setWhite(res.isWhite() || containsManaSymbol(secondManaSymbols, "W"));
             res.setBlue(res.isBlue() || containsManaSymbol(secondManaSymbols, "U"));
             res.setBlack(res.isBlack() || containsManaSymbol(secondManaSymbols, "B"));
@@ -612,6 +613,11 @@ public final class ManaUtil {
         return cardManaSymbols.stream().anyMatch(s -> s.contains(needSymbol));
     }
 
+    private static boolean containsManaSymbol(String cardManaSymbols, String needSymbol) {
+        // search R in {R/B}
+        return cardManaSymbols.contains(needSymbol);
+    }
+
     public static FilterMana getColorIdentity(Card card) {
         Card secondSide;
         if (card instanceof SplitCard) {
@@ -623,7 +629,7 @@ public final class ManaUtil {
         } else {
             secondSide = card.getSecondCardFace();
         }
-        return getColorIdentity(card.getColor(), card.getManaCost().getSymbols(), card.getRules(), secondSide);
+        return getColorIdentity(card.getColor(), String.join("", card.getManaCostSymbols()), card.getRules(), secondSide);
     }
 
     public static int getColorIdentityHash(FilterMana colorIdentity) {
@@ -694,6 +700,23 @@ public final class ManaUtil {
         } else {
             return 0;
         }
+    }
 
+    /**
+     * Find all used mana types in mana cost (wubrg + colorless)
+     *
+     * @return
+     */
+    public static List<ManaType> getManaTypesInCost(ManaCost cost) {
+        List<ManaType> res = new ArrayList<>();
+        for (Mana mana : cost.getManaOptions()) {
+            if (mana.getWhite() > 0) res.add(ManaType.WHITE);
+            if (mana.getBlue() > 0) res.add(ManaType.BLUE);
+            if (mana.getBlack() > 0) res.add(ManaType.BLACK);
+            if (mana.getRed() > 0) res.add(ManaType.RED);
+            if (mana.getGreen() > 0) res.add(ManaType.GREEN);
+            if (mana.getColorless() > 0 || mana.getGeneric() > 0 || mana.getAny() > 0) res.add(ManaType.COLORLESS);
+        }
+        return res;
     }
 }

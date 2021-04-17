@@ -69,9 +69,8 @@ class AnthemOfRakdosHellbentEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE
-                || event.getType() == GameEvent.EventType.DAMAGE_PLAYER
-                || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER;
+        return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT
+                || event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
     @Override

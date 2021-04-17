@@ -1398,11 +1398,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         }
                         // Casting cost
                         if (!s) {
-                            String mc = "";
-                            for (String m : card.getManaCost()) {
-                                mc += m;
-                            }
-                            s |= mc.toLowerCase(Locale.ENGLISH).contains(searchStr);
+                            s |= card.getManaCostStr().toLowerCase(Locale.ENGLISH).contains(searchStr);
                         }
                         // Rules
                         if (!s) {
@@ -1473,10 +1469,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     }
 
                     // Mana Cost
-                    String mc = "";
-                    for (String m : card.getManaCost()) {
-                        mc += m;
-                    }
+                    String mc = card.getManaCostStr();
                     mc = mc.replaceAll("\\{([WUBRG]).([WUBRG])\\}", "{$1}{$2}");
                     mc = mc.replaceAll("\\{", "#");
                     mc = mc.replaceAll("#2\\/", "#");

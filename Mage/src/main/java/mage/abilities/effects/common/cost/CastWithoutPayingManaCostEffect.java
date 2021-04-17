@@ -76,7 +76,7 @@ public class CastWithoutPayingManaCostEffect extends OneShotEffect {
                                     + cardToCast.getName() + " is no land and has no spell ability!");
                             cancel = true;
                         }
-                        if (cardToCast.getSpellAbility().canChooseTarget(game)) {
+                        if (cardToCast.getSpellAbility().canChooseTarget(game, controller.getId())) {
                             cancel = true;
                         }
                     }

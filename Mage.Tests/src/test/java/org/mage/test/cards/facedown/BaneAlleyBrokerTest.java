@@ -17,7 +17,6 @@ public class BaneAlleyBrokerTest extends CardTestPlayerBase {
      * then exile a card from your hand face down. You may look at cards exiled
      * with Bane Alley Broker. {U}{B}, {T}: Return a card exiled with Bane Alley
      * Broker to its owner's hand.
-     *
      */
     // test that cards exiled using Bane Alley Broker are face down
     @Test
@@ -28,11 +27,13 @@ public class BaneAlleyBrokerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then exile a card from your hand face down.");
+        setStrictChooseMode(true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}");
         addTarget(playerA, "Goblin Roughrider");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertHandCount(playerA, 2);
         assertHandCount(playerA, "Sejiri Merfolk", 1);
@@ -45,7 +46,32 @@ public class BaneAlleyBrokerTest extends CardTestPlayerBase {
                 Assert.assertTrue("Exiled card is not face down", card.isFaceDown(currentGame));
             }
         }
+    }
 
+    @Test
+    public void testBaneAlleyBrokerReturn() {
+        addCard(Zone.BATTLEFIELD, playerA, "Bane Alley Broker");
+        addCard(Zone.HAND, playerA, "Goblin Roughrider");
+        addCard(Zone.HAND, playerA, "Sejiri Merfolk");
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+
+        setStrictChooseMode(true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}");
+        addTarget(playerA, "Goblin Roughrider");
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}{B}");
+        addTarget(playerA, "Goblin Roughrider");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertHandCount(playerA, 4);
+        assertHandCount(playerA, "Sejiri Merfolk", 1);
+        assertHandCount(playerA, "Goblin Roughrider", 1);
+
+        assertExileCount("Goblin Roughrider", 0);
     }
 
 }

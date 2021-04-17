@@ -17,7 +17,7 @@ public final class CrucibleOfWorlds extends CardImpl {
     public CrucibleOfWorlds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // You may play land cards from your graveyard.
+        // You may play lands from your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayLandsFromGraveyardControllerEffect()));
     }
 

@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -11,14 +9,15 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class SylvanEchoes extends CardImpl {
 
     public SylvanEchoes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
         // Whenever you clahs and you win, you may draw a card
         this.addAbility(new SylvanEchoesTriggeredAbility());
@@ -36,11 +35,11 @@ public final class SylvanEchoes extends CardImpl {
 
 class SylvanEchoesTriggeredAbility extends TriggeredAbilityImpl {
 
-    public SylvanEchoesTriggeredAbility() {
+    SylvanEchoesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    public SylvanEchoesTriggeredAbility(final SylvanEchoesTriggeredAbility ability) {
+    private SylvanEchoesTriggeredAbility(final SylvanEchoesTriggeredAbility ability) {
         super(ability);
     }
 
@@ -56,12 +55,11 @@ class SylvanEchoesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getData().equals("controller") && event.getPlayerId().equals(getControllerId())
-                || event.getData().equals("opponent") && event.getTargetId().equals(getControllerId());
+        return isControlledBy(event.getPlayerId()) && event.getFlag();
     }
 
     @Override
     public String getRule() {
-        return "Whenever you clash and you win, " + super.getRule();
+        return "Whenever you clash and win, you may draw a card";
     }
 }

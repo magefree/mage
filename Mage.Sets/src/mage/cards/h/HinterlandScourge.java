@@ -1,32 +1,25 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffect;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class HinterlandScourge extends CardImpl {
 
     public HinterlandScourge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add(SubType.WEREWOLF);
         this.color.setRed(true);
 
@@ -41,8 +34,7 @@ public final class HinterlandScourge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Hinterland Scourge.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private HinterlandScourge(final HinterlandScourge card) {

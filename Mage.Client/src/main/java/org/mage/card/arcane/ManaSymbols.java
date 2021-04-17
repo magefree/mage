@@ -550,17 +550,34 @@ public final class ManaSymbols {
 
     }
 
-    public static String getStringManaCost(java.util.List<String> manaCost) {
+    public static String getClearManaCost(java.util.List<String> manaCost) {
         StringBuilder sb = new StringBuilder();
         for (String s : manaCost) {
             sb.append(s);
         }
-        return sb.toString()
+        return getClearManaCost(sb.toString());
+    }
+
+    public static String getClearManaCost(String manaCost) {
+        return manaCost
                 .replace("/", "")
                 .replace("{", "")
-                .replace("}", " ")
+                .replace("}", " ") // each mana symbol splits by space
                 .trim();
     }
+
+    public static int getClearManaSymbolsCount(String manaCost) {
+        // find mana symbols amount in the cost
+        if (manaCost.isEmpty()) {
+            return 0;
+        } else {
+            String clearManaCost = getClearManaCost(manaCost);
+            String checkManaCost = clearManaCost.replace(" ", "");
+            return clearManaCost.length() - checkManaCost.length() + 1;
+        }
+    }
+
+
 
     public enum Type {
         TABLE,

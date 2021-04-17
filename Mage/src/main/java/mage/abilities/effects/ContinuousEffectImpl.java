@@ -275,11 +275,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         return sublayer;
     }
 
-    @Override
-    public void overrideRuleText(String text) {
-        this.staticText = text;
-    }
-
     protected static boolean isCanKill(DynamicValue toughness) {
         if (toughness instanceof StaticValue) {
             return toughness.calculate(null, null, null) < 0;

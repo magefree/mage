@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import mage.MageInt;
@@ -11,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -20,7 +20,8 @@ import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -34,7 +35,7 @@ public final class LuminatePrimordial extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);
 
-        //Vigilance
+        // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Luminate Primordial enters the battlefield, for each opponent, exile up to one target creature
@@ -74,12 +75,12 @@ enum LuminatePrimordialAdjuster implements TargetAdjuster {
 
 class LuminatePrimordialEffect extends OneShotEffect {
 
-    public LuminatePrimordialEffect() {
+    LuminatePrimordialEffect() {
         super(Outcome.Benefit);
         this.staticText = "for each opponent, exile up to one target creature that player controls and that player gains life equal to its power";
     }
 
-    public LuminatePrimordialEffect(final LuminatePrimordialEffect effect) {
+    private LuminatePrimordialEffect(final LuminatePrimordialEffect effect) {
         super(effect);
     }
 
@@ -90,18 +91,26 @@ class LuminatePrimordialEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Target target : source.getTargets()) {
-            if (target instanceof TargetCreaturePermanent) {
-                Permanent targetCreature = game.getPermanent(target.getFirstTarget());
-                if (targetCreature != null && !targetCreature.isControlledBy(source.getControllerId())) {
-                    int amountLife = targetCreature.getPower().getValue();
-                    Player controller = game.getPlayer(targetCreature.getControllerId());
-                    targetCreature.moveToExile(null, null, source, game);
-                    if (controller != null && amountLife != 0) {
-                        controller.gainLife(amountLife, game, source);
-                    }
-                }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        Set<Permanent> permanents = source
+                .getTargets()
+                .stream()
+                .map(Target::getFirstTarget)
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+        Map<UUID, Integer> map = new HashMap<>();
+        permanents.stream().map(p -> map.put(p.getControllerId(), p.getPower().getValue()));
+        controller.moveCards(permanents, Zone.EXILED, source, game);
+        for (Map.Entry<UUID, Integer> entry : map.entrySet()) {
+            Player player = game.getPlayer(entry.getKey());
+            if (player == null || entry.getValue() < 1) {
+                continue;
             }
+            player.gainLife(entry.getValue(), game, source);
         }
         return true;
     }

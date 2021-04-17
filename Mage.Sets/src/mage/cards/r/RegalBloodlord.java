@@ -1,23 +1,24 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.permanent.token.BatToken;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class RegalBloodlord extends CardImpl {
@@ -41,9 +42,9 @@ public final class RegalBloodlord extends CardImpl {
                 ),
                 new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0),
                 "At the beginning of each end step, "
-                + "if you gained life this turn, "
-                + "create a 1/1 black Bat creature token with flying."
-        ), new PlayerGainedLifeWatcher());
+                        + "if you gained life this turn, "
+                        + "create a 1/1 black Bat creature token with flying."
+        ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private RegalBloodlord(final RegalBloodlord card) {

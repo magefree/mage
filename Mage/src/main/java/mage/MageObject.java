@@ -88,6 +88,14 @@ public interface MageObject extends MageItem, Serializable {
 
     ManaCosts<ManaCost> getManaCost();
 
+    default List<String> getManaCostSymbols() {
+        List<String> symbols = new ArrayList<>();
+        for (ManaCost cost : getManaCost()) {
+            symbols.add(cost.getText());
+        }
+        return symbols;
+    }
+
     int getConvertedManaCost();
 
     MageInt getPower();
@@ -98,6 +106,21 @@ public interface MageObject extends MageItem, Serializable {
 
     void setStartingLoyalty(int startingLoyalty);
 
+    /**
+     * Dynamic cost modification for card (process only OWN abilities).
+     * <p>
+     * Usage example: if it need stack related info (like real targets) then must check two
+     * states (game.inCheckPlayableState):
+     * <p>
+     * 1. In playable state it must check all possible use cases (e.g. allow to
+     * reduce on any available target and modes)
+     * <p>
+     * 2. In real cast state it must check current use case (e.g. real selected
+     * targets and modes)
+     *
+     * @param ability
+     * @param game
+     */
     void adjustCosts(Ability ability, Game game);
 
     void adjustTargets(Ability ability, Game game);
@@ -270,6 +293,11 @@ public interface MageObject extends MageItem, Serializable {
     default void retainAllEnchantmentSubTypes(Game game) {
         setIsAllCreatureTypes(game, false);
         game.getState().getCreateMageObjectAttribute(this, game).getSubtype().retainAll(SubType.getEnchantmentTypes());
+    }
+
+    default void retainAllLandSubTypes(Game game) {
+        setIsAllCreatureTypes(game, false);
+        game.getState().getCreateMageObjectAttribute(this, game).getSubtype().retainAll(SubType.getLandTypes());
     }
 
     /**

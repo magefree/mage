@@ -84,6 +84,10 @@ class GorMuldrakAmphinologistEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Map<UUID, Integer> creatureMap = new HashMap<>();
+        game.getState()
+                .getPlayersInRange(source.getControllerId(), game)
+                .stream()
+                .forEach(uuid -> creatureMap.put(uuid, 0));
         game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_PERMANENT_CREATURE,

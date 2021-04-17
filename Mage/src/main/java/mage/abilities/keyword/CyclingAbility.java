@@ -9,6 +9,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -47,11 +48,11 @@ public class CyclingAbility extends ActivatedAbilityImpl {
     public String getRule() {
         StringBuilder rule = new StringBuilder(this.text);
         if (cost instanceof ManaCost) {
-            rule.append(' ');
+            rule.append(' ').append(cost.getText());
         } else {
-            rule.append("&mdash;");
+            rule.append("&mdash;").append(CardUtil.getTextWithFirstCharUpperCase(cost.getText())).append('.');
         }
-        rule.append(cost.getText()).append(" <i>(").append(super.getRule(true)).append(")</i>");
+        rule.append(" <i>(").append(super.getRule(true)).append(")</i>");
         return rule.toString();
     }
 }

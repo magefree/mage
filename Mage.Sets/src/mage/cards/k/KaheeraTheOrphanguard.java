@@ -15,7 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.Arrays;
 import java.util.List;
@@ -93,7 +93,7 @@ enum KaheeraTheOrphanguardCompanionCondition implements CompanionCondition {
     );
 
     private static boolean checkTypes(Card card) {
-        return subtypes.stream().anyMatch(subtype -> card.getSubtype().contains(subtype));
+        return subtypes.stream().anyMatch(subtype -> card.hasSubtype(subtype, null));
     }
 
     @Override

@@ -1,21 +1,21 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.CouncilsDilemmaVoteEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
+import mage.choices.TwoChoiceVote;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterPermanentCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
- * @author JRHerlehy
+ * @author JRHerlehy, TheElk801
  */
 public final class SelvalasStampede extends CardImpl {
 
@@ -23,7 +23,7 @@ public final class SelvalasStampede extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
 
         // <i>Council's dilemma</i> &mdash Starting with you, each player votes for wild or free. Reveal cards from the top of your library until you reveal a creature card for each wild vote. Put those creature cards onto the battlefield, then shuffle the rest into your library. You may put a permanent card from your hand onto the battlefield for each free vote.
-        this.getSpellAbility().addEffect(new SelvalasStampedeDilemmaEffect());
+        this.getSpellAbility().addEffect(new SelvalasStampedeEffect());
     }
 
     private SelvalasStampede(final SelvalasStampede card) {
@@ -36,63 +36,70 @@ public final class SelvalasStampede extends CardImpl {
     }
 }
 
-class SelvalasStampedeDilemmaEffect extends CouncilsDilemmaVoteEffect {
+class SelvalasStampedeEffect extends OneShotEffect {
 
-    public SelvalasStampedeDilemmaEffect() {
-        super(Outcome.PutCardInPlay);
-        this.staticText = "<i>Council's dilemma</i> &mdash; Starting with you, each player votes for wild or free. Reveal cards from the top of your library until you reveal a creature card for each wild vote. Put those creature cards onto the battlefield, then shuffle the rest into your library. "
-                + "You may put a permanent card from your hand onto the battlefield for each free vote";
+    SelvalasStampedeEffect() {
+        super(Outcome.Benefit);
+        staticText = "<i>Council's dilemma</i> &mdash; Starting with you, each player votes for wild or free. " +
+                "Reveal cards from the top of your library until you reveal a creature card for each wild vote. " +
+                "Put those creature cards onto the battlefield, then shuffle the rest into your library. " +
+                "You may put a permanent card from your hand onto the battlefield for each free vote";
     }
 
-    public SelvalasStampedeDilemmaEffect(final SelvalasStampedeDilemmaEffect effect) {
+    private SelvalasStampedeEffect(final SelvalasStampedeEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-
-        //If no controller, exit here and do not vote.
-        if (controller == null) {
-            return false;
-        }
-
-        this.vote("wild", "free", controller, game, source);
-
-        //Wild Votes
-        if (voteOneCount > 0) {
-            Cards revealedCards = new CardsImpl();
-            Cards toBattlefield = new CardsImpl();
-            for (Card card : controller.getLibrary().getCards(game)) {
-                revealedCards.add(card);
-                if (card.isCreature()) {
-                    toBattlefield.add(card);
-                    if (toBattlefield.size() == voteOneCount) {
-                        break;
-                    }
-                }
-            }
-            controller.revealCards(source, revealedCards, game);
-            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
-            revealedCards.removeAll(toBattlefield);
-            if (!revealedCards.isEmpty()) {
-                controller.shuffleLibrary(source, game);
-            }
-        }
-
-        //Free Votes
-        if (voteTwoCount > 0) {
-            TargetCardInHand target = new TargetCardInHand(0, voteTwoCount, new FilterPermanentCard("permanent cards"));
-            if (controller.choose(outcome, target, source.getSourceId(), game)) {
-                controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
-            }
-        }
-
-        return true;
+    public SelvalasStampedeEffect copy() {
+        return new SelvalasStampedeEffect(this);
     }
 
     @Override
-    public SelvalasStampedeDilemmaEffect copy() {
-        return new SelvalasStampedeDilemmaEffect(this);
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+
+        // Outcome.Detriment - AI will use library will the time (Free choice)
+        // TODO: add AI hint logic in the choice method, see Tyrant's Choice as example
+        TwoChoiceVote vote = new TwoChoiceVote("Wild (from library to battlefield)", "Free (from hand to battlefield)", Outcome.Detriment);
+        vote.doVotes(source, game);
+
+        int wildCount = vote.getVoteCount(true);
+        int freeCount = vote.getVoteCount(false);
+
+        // Reveal cards from the top of your library until you reveal a creature card for each wild vote.
+        // Put those creature cards onto the battlefield, then shuffle the rest into your library.
+        Cards toReveal = new CardsImpl();
+        Cards creatureCards = new CardsImpl();
+        for (Card card : player.getLibrary().getCards(game)) {
+            if (creatureCards.size() >= wildCount) {
+                break;
+            }
+            if (card.isCreature()) {
+                creatureCards.add(card);
+            }
+            toReveal.add(card);
+        }
+        if (toReveal.size() > 0) {
+            player.revealCards(source, toReveal, game);
+        }
+        if (creatureCards.size() > 0) {
+            player.moveCards(creatureCards, Zone.BATTLEFIELD, source, game);
+        }
+        player.shuffleLibrary(source, game);
+
+        // You may put a permanent card from your hand onto the battlefield for each free vote
+        if (freeCount > 0) {
+            TargetCardInHand target = new TargetCardInHand(0, freeCount, StaticFilters.FILTER_CARD_PERMANENT);
+            player.choose(Outcome.PutCreatureInPlay, player.getHand(), target, game);
+            creatureCards.clear();
+            creatureCards.addAll(target.getTargets());
+            player.moveCards(creatureCards, Zone.BATTLEFIELD, source, game);
+        }
+
+        return wildCount + freeCount > 0;
     }
 }

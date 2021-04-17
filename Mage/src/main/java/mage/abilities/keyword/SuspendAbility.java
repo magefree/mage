@@ -138,7 +138,7 @@ public class SuspendAbility extends SpecialAction {
         if (cost != null) {
             sb.append(suspend == Integer.MAX_VALUE ? "X" : suspend).append("&mdash;")
                     .append(cost.getText()).append(suspend
-                    == Integer.MAX_VALUE ? ". X can't be 0" : "");
+                    == Integer.MAX_VALUE ? ". X can't be 0." : "");
             if (!shortRule) {
                 sb.append(" <i>(Rather than cast this card from your hand, pay ")
                         .append(cost.getText())
@@ -180,13 +180,11 @@ public class SuspendAbility extends SpecialAction {
         ability1.setSourceId(card.getId());
         ability1.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability1);
-        game.getState().addAbility(ability1, source.getSourceId(), card);
 
         SuspendPlayCardAbility ability2 = new SuspendPlayCardAbility();
         ability2.setSourceId(card.getId());
         ability2.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability2);
-        game.getState().addAbility(ability2, source.getSourceId(), card);
     }
 
     public static UUID getSuspendExileId(UUID controllerId, Game game) {

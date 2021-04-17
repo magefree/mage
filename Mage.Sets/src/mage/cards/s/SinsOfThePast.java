@@ -4,7 +4,7 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.ExileCardEnteringGraveyardReplacementEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -12,9 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
@@ -65,10 +62,10 @@ class SinsOfThePastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (card != null) {
-            ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.GRAVEYARD, TargetController.YOU, Duration.EndOfTurn, true);;
+            ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.GRAVEYARD, TargetController.YOU, Duration.EndOfTurn, true);
             effect.setTargetPointer(new FixedTarget(card, game));
             game.addEffect(effect, source);
-            effect = new SinsOfThePastReplacementEffect(card.getId());
+            effect = new ExileCardEnteringGraveyardReplacementEffect(card.getId());
             game.addEffect(effect, source);
             return true;
         }
@@ -76,40 +73,3 @@ class SinsOfThePastEffect extends OneShotEffect {
     }
 }
 
-class SinsOfThePastReplacementEffect extends ReplacementEffectImpl {
-
-    private final UUID cardId;
-
-    SinsOfThePastReplacementEffect(UUID cardId) {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        this.cardId = cardId;
-    }
-
-    SinsOfThePastReplacementEffect(final SinsOfThePastReplacementEffect effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-    }
-
-    @Override
-    public SinsOfThePastReplacementEffect copy() {
-        return new SinsOfThePastReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getTargetId().equals(this.cardId);
-    }
-}

@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -6,29 +5,31 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.choices.VoteHandler;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
+import mage.target.common.TargetCardInGraveyard;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
- *
- * @author LevelX2
+ * @author LevelX2, TheElk801
  */
 public final class CustodiSquire extends CardImpl {
 
     public CustodiSquire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(3);
@@ -37,7 +38,9 @@ public final class CustodiSquire extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Will of the council - When Custodi Squire enters the battlefield, starting with you, each player votes for an artifact, creature, or enchantment card in your graveyard. Return each card with the most votes or tied for most votes to your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CustodiSquireVoteEffect(), false, true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new CustodiSquireVoteEffect(), false, true
+        ));
     }
 
     private CustodiSquire(final CustodiSquire card) {
@@ -52,20 +55,14 @@ public final class CustodiSquire extends CardImpl {
 
 class CustodiSquireVoteEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("artifact, creature, or enchantment card from your graveyard");
-
-    static {
-        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
-                CardType.CREATURE.getPredicate(),
-                CardType.ENCHANTMENT.getPredicate()));
-    }
-
     CustodiSquireVoteEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Will of the council</i> &mdash; When {this} enters the battlefield, starting with you, each player votes for an artifact, creature, or enchantment card in your graveyard. Return each card with the most votes or tied for most votes to your hand";
+        this.staticText = "<i>Will of the council</i> &mdash; When {this} enters the battlefield, " +
+                "starting with you, each player votes for an artifact, creature, or enchantment card in your graveyard. " +
+                "Return each card with the most votes or tied for most votes to your hand";
     }
 
-    CustodiSquireVoteEffect(final CustodiSquireVoteEffect effect) {
+    private CustodiSquireVoteEffect(final CustodiSquireVoteEffect effect) {
         super(effect);
     }
 
@@ -76,47 +73,52 @@ class CustodiSquireVoteEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Cards possibleCards = new CardsImpl();
-            possibleCards.addAll(controller.getGraveyard().getCards(filter, game));
-            if (!possibleCards.isEmpty()) {
-                Map<UUID, Integer> cardCounter = new HashMap<>();
-                TargetCard target = new TargetCard(1, 1, Zone.GRAVEYARD, filter);
-                int maxCount = 1;
-                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        target.clearChosen();
-                        player.chooseTarget(outcome, possibleCards, target, source, game);
-                        Card card = game.getCard(target.getFirstTarget());
-                        if (card != null) {
-                            game.informPlayers(player.getLogName() + " voted for " + card.getLogName());
-                            if (!cardCounter.containsKey(target.getFirstTarget())) {
-                                cardCounter.put(target.getFirstTarget(), 1);
-                            } else {
-                                int count = cardCounter.get(target.getFirstTarget()) + 1;
-                                if (count > maxCount) {
-                                    maxCount = count;
-                                }
-                                cardCounter.put(target.getFirstTarget(), count);
-                            }
-                        }
-                    }
-                }
-                Cards cardsToMove = new CardsImpl();
-                for (UUID uuid : possibleCards) {
-                    if (cardCounter.containsKey(uuid)) {
-                        if (cardCounter.get(uuid) == maxCount) {
-                            cardsToMove.add(uuid);
-                        }
-                    }
-                }
-                controller.moveCards(cardsToMove, Zone.HAND, source, game);
-            }
-            return true;
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
         }
-        return false;
+        CustodiSquireVote vote = new CustodiSquireVote();
+        vote.doVotes(source, game);
 
+        return player.moveCards(vote.getMostVoted(), Zone.HAND, source, game);
+    }
+}
+
+class CustodiSquireVote extends VoteHandler<Card> {
+
+    private static final FilterCard filter = new FilterCard("artifact, creature, or enchantment card");
+
+    static {
+        filter.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()
+        ));
+    }
+
+    @Override
+    protected Set<Card> getPossibleVotes(Ability source, Game game) {
+        // too much permanentns on battlefield, so no need to show full list here
+        return new LinkedHashSet<>();
+    }
+
+    @Override
+    public Card playerChoose(String voteInfo, Player player, Player decidingPlayer, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || controller.getGraveyard().count(
+                filter, source.getSourceId(), source.getControllerId(), game
+        ) < 1) {
+            return null;
+        }
+        TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
+        target.withChooseHint(voteInfo + " (from graveyard to hand)");
+        target.setNotTarget(true);
+        decidingPlayer.choose(Outcome.ReturnToHand, controller.getGraveyard(), target, game);
+        return controller.getGraveyard().get(target.getFirstTarget(), game);
+    }
+
+    @Override
+    protected String voteName(Card vote) {
+        return vote.getIdName();
     }
 }

@@ -335,6 +335,7 @@ public class BoosterGenerationTest extends MageTestBase {
         boolean foundVale = false;
         boolean foundMDFC = false;
         boolean foundNoMDFC = false;
+
         for (int i = 1; i <= 100; i++) {
             List<Card> booster = Kaldheim.getInstance().createBooster();
 
@@ -413,5 +414,34 @@ public class BoosterGenerationTest extends MageTestBase {
         assertTrue("No booster contained Shimmerdrift Vale", foundVale);
         assertTrue("No booster contained an MDFC", foundMDFC);
         assertTrue("Every booster contained an MDFC", foundNoMDFC);
+    }
+
+    @Test
+    public void testTimeSpiralRemastered_BonusSheet() {
+        for (int i = 1; i <= 5; i++) {
+            List<Card> booster = TimeSpiralRemastered.getInstance().createBooster();
+
+            assertFalse(
+                    "Booster should have no basic lands:" + str(booster),
+                    contains(booster, basics, null)
+            );
+
+            assertEquals(
+                    "Booster should have 10 commons", 10,
+                    booster.stream().map(Card::getRarity).filter(Rarity.COMMON::equals).count()
+            );
+            assertEquals(
+                    "Booster should have 3 uncommons", 3,
+                    booster.stream().map(Card::getRarity).filter(Rarity.UNCOMMON::equals).count()
+            );
+            assertEquals(
+                    "Booster should have 1 rare/mythic", 1,
+                    booster.stream().map(Card::getRarity).filter(r -> r == Rarity.RARE || r == Rarity.MYTHIC).count()
+            );
+            assertEquals(
+                    "Booster should have 1 bonus card", 1,
+                    booster.stream().map(Card::getRarity).filter(Rarity.SPECIAL::equals).count()
+            );
+        }
     }
 }

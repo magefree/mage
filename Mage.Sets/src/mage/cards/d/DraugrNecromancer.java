@@ -6,11 +6,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.game.CardState;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -82,7 +81,7 @@ class DraugrNecromancerReplacementEffect extends ReplacementEffectImpl {
         }
         Card card = game.getCard(permanent.getId());
         controller.moveCards(permanent, Zone.EXILED, source, game);
-        card.addCounters(CounterType.ICE.createInstance(), source.getControllerId(), source, game);
+        card.getMainCard().addCounters(CounterType.ICE.createInstance(), source.getControllerId(), source, game);
         return true;
     }
 
@@ -123,15 +122,17 @@ class DraugrNecromancerCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (!source.isControlledBy(affectedControllerId)
-                || game.getState().getZone(sourceId) != Zone.EXILED) {
+        Card card = game.getCard(sourceId);
+        if (card == null) {
             return false;
         }
-        Card card = game.getCard(sourceId);
-        return card != null
-                && !card.isLand()
+        if (!source.isControlledBy(affectedControllerId)
+                || game.getState().getZone(card.getMainCard().getId()) != Zone.EXILED) {
+            return false;
+        }
+        return !card.isLand()
                 && game.getOpponents(card.getOwnerId()).contains(source.getControllerId())
-                && card.getCounters(game).getCount(CounterType.ICE) > 0;
+                && card.getMainCard().getCounters(game).getCount(CounterType.ICE) > 0;
     }
 }
 
@@ -159,14 +160,35 @@ class DraugrNecromancerSpendAnyManaEffect extends AsThoughEffectImpl implements 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (!source.isControlledBy(affectedControllerId)
-                || game.getState().getZone(sourceId) != Zone.EXILED) {
+                || !game.getOpponents(game.getOwnerId(sourceId)).contains(source.getControllerId())) {
             return false;
         }
+
         Card card = game.getCard(sourceId);
-        return card != null
-                && !card.isLand()
-                && game.getOpponents(card.getOwnerId()).contains(source.getControllerId())
-                && card.getCounters(game).getCount(CounterType.ICE) > 0;
+        if (card == null) {
+            return false;
+        }
+        card = card.getMainCard();
+
+        // card can be in exile or stack zones
+        if (game.getState().getZone(card.getId()) == Zone.EXILED) {
+            // exile zone
+            return card.getCounters(game).getCount(CounterType.ICE) > 0;
+        } else {
+            // stack zone
+            // you must look at exile zone (use LKI to see ice counters from the past)
+            CardState cardState;
+            if (card instanceof SplitCard) {
+                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
+            } else if (card instanceof AdventureCard) {
+                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
+            } else if (card instanceof ModalDoubleFacesCard) {
+                cardState = game.getLastKnownInformationCard(((ModalDoubleFacesCard) card).getLeftHalfCard().getId(), Zone.EXILED);
+            } else {
+                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
+            }
+            return cardState != null && cardState.getCounters().getCount(CounterType.ICE) > 0;
+        }
     }
 
     @Override
@@ -174,6 +196,6 @@ class DraugrNecromancerSpendAnyManaEffect extends AsThoughEffectImpl implements 
         if (mana.getSourceObject().isSnow()) {
             return mana.getFirstAvailable();
         }
-        return manaType;
+        return null;
     }
 }

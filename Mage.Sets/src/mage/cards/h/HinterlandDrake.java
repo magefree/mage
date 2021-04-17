@@ -31,7 +31,7 @@ public final class HinterlandDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Hinterland Drake can't block artifact creatures.
-        Effect effect = new CantBlockCreaturesSourceEffect(StaticFilters.FILTER_ARTIFACT_CREATURE_PERMANENT);
+        Effect effect = new CantBlockCreaturesSourceEffect(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE);
         effect.setText("{this}  can't block artifact creatures");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

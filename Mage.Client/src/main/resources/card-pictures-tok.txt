@@ -1,3 +1,4 @@
+#TODO: some sets (TOK:code) don't have tokens but recorded here - must be fixed and removed (from that file and from tokens)
 #Generate|TOK:TPR|Goblin||
 #Generate|TOK:TPR|Pegasus||
 #Generate|TOK:TPR|Rat||
@@ -305,8 +306,7 @@
 |Generate|TOK:C14|Demon|2||ReignOfThePitToken|
 |Generate|TOK:C14|Elemental|||TitaniaProtectorOfArgothElementalToken|
 |Generate|TOK:C14|Elephant|||ElephantToken|
-|Generate|TOK:C14|Elf Druid|||FreyaliseLlanowarsFuryToken|
-|Generate|TOK:C14|Elf Druid|||LlanowarElvesToken|
+|Generate|TOK:C14|Elf Druid|||ElfDruidToken|
 |Generate|TOK:C14|Elf Warrior|||ElfWarriorToken|
 |Generate|TOK:C14|Equipment|||NahiriTheLithomancerEquipmentToken|
 |Generate|TOK:C14|Fish|||ReefWormFishToken|
@@ -444,8 +444,7 @@
 |Generate|TOK:CMA|Drake|||LeafdrakeRoostDrakeToken|
 |Generate|TOK:CMA|Elemental|||TitaniaProtectorOfArgothElementalToken|
 |Generate|TOK:CMA|Elephant|||ElephantToken|
-|Generate|TOK:C14|Elf Druid|||FreyaliseLlanowarsFuryToken|
-|Generate|TOK:C14|Elf Druid|||LlanowarElvesToken|
+|Generate|TOK:C14|Elf Druid|||ElfDruidToken|
 |Generate|TOK:CMA|Elf Warrior||
 |Generate|TOK:CMA|Gargoyle|||GargoyleToken|
 |Generate|TOK:CMA|Kithkin Soldier|||KithkinSoldierToken|
@@ -467,7 +466,6 @@
 |Generate|TOK:CMD|Saproling|||SaprolingToken|
 |Generate|TOK:CMD|Snake|||SnakeToken|
 |Generate|TOK:CMD|Soldier|||SoldierToken|
-|Generate|TOK:CMD|Spider|||PenumbraSpiderToken|
 |Generate|TOK:CMD|Spirit|||SpiritWhiteToken|
 |Generate|TOK:CMD|Squirrel|||SquirrelToken|
 |Generate|TOK:CMD|Triskelavite|||TriskelaviteToken|
@@ -680,18 +678,6 @@
 |Generate|TOK:FRF|Monk|||MonasteryMentorToken|
 |Generate|TOK:FRF|Spirit|||SpiritWhiteToken|
 |Generate|TOK:FRF|Warrior|||MarduStrikeLeaderWarriorToken|
-|Generate|TOK:FUT|Elemental|||SparkElementalToken|
-|Generate|TOK:FUT|Elf Druid|||FreyaliseLlanowarsFuryToken|
-|Generate|TOK:FUT|Elf Druid|||LlanowarElvesToken|
-|Generate|TOK:FUT|Giant|||GiantToken|
-|Generate|TOK:FUT|Kithkin Soldier|||KithkinSoldierToken|
-|Generate|TOK:FUT|Saproling|||SaprolingToken|
-|Generate|TOK:FUT|Sliver|||SliversmithToken|
-|Generate|TOK:FUT|Soldier|||SoldierToken|
-|Generate|TOK:FUT|Wurm|||WurmCallingWurmToken|
-|Generate|TOK:FUT|Zombie Goblin|||FesteringGoblinToken|
-|Generate|TOK:FUT|Zombie|||ZombieToken|
-|Generate|TOK:FUT|Faerie|||CloudSpriteToken|
 |Generate|TOK:GPT|Bat|||BatToken|
 |Generate|TOK:GPT|Pegasus|||PegasusToken|
 |Generate|TOK:GPT|Sand|||DuneBroodNephilimToken|
@@ -709,7 +695,6 @@
 |Generate|TOK:GTC|Soldier|1||SoldierToken|
 |Generate|TOK:GTC|Soldier|2||SoldierTokenWithHaste|
 |Generate|TOK:GTC|Spirit|||TeysaEnvoyOfGhostsToken|
-|Generate|TOK:H09|Sliver|||SliversmithToken|
 |Generate|TOK:H17|Dragon|||DragonTokenGold|
 |Generate|TOK:HML|Plant Wall|||KelpToken|
 |Generate|TOK:HML|Serf|||SerfToken|
@@ -792,10 +777,7 @@
 |Generate|TOK:LEG|Demon|||MinorDemonToken|
 |Generate|TOK:LEG|Sand Warrior|||HazezonTamarSandWarriorToken|
 |Generate|TOK:LEG|Snake|||SerpentGeneratorSnakeToken|
-|Generate|TOK:LGN|Bear|||BearToken|
-|Generate|TOK:LGN|Goblin|||GoblinToken|
-|Generate|TOK:LGN|Insect|||InsectToken|
-|Generate|TOK:LGN|Sliver|||SliversmithToken|
+# LGN don't have tokens, from wiki: A Sliver token for Brood Sliver and a Goblin token for Warbreak Trumpeter were featured as a Magic Player Reward.
 |Generate|TOK:LRW|Avatar|||AvatarToken|
 |Generate|TOK:LRW|Beast|||BeastToken|
 |Generate|TOK:LRW|Elemental Shaman|||ElementalShamanToken|
@@ -1037,7 +1019,7 @@
 |Generate|TOK:PCY|Squirrel|||SquirrelToken|
 |Generate|TOK:PLC|Ape|||PongifyApeToken|
 |Generate|TOK:PLC|Cat Warrior|||CatWarriorToken|
-|Generate|TOK:PLC|Insect|||DeadlyGrubToken|
+|Generate|TOK:PLC|Insect|||DeadlyGrubInsectToken|
 |Generate|TOK:PLC|Knight|||RiftmarkedKnightToken|
 |Generate|TOK:PLC|Saproling|||SaprolingToken|
 |Generate|TOK:PLC|Soldier|||SoldierToken|
@@ -1127,12 +1109,6 @@
 |Generate|TOK:SOM|Wolf|||WolfToken|
 |Generate|TOK:SOM|Wurm|1||WurmWithDeathtouchToken|
 |Generate|TOK:SOM|Wurm|2||WurmWithLifelinkToken|
-|Generate|TOK:STH|Goblin|||GoblinToken|
-|Generate|TOK:STH|Insect|||HornetToken|
-|Generate|TOK:STH|Insect|||WaspToken|
-|Generate|TOK:STH|Rat|||RatToken|
-|Generate|TOK:STH|Sliver|||SliversmithToken|
-|Generate|TOK:STH|Spike|||SpikeToken|
 |Generate|TOK:SWS|Ewok|||EwokToken|
 |Generate|TOK:SWS|B-Wing|||RebelStarshipToken|
 |Generate|TOK:SWS|Hunter|||HunterToken|
@@ -1161,16 +1137,6 @@
 |Generate|TOK:TMP|Spirit|||SpiritWhiteToken|
 |Generate|TOK:TMP|Zombie|||ZombieToken|
 |Generate|TOK:TOR|Squirrel|||SquirrelToken|
-|Generate|TOK:TPR|Goblin|||GoblinToken|
-|Generate|TOK:TPR|Pegasus|||PegasusToken|
-|Generate|TOK:TPR|Rat|||RatToken|
-|Generate|TOK:TPR|Reflection|||ReflectionToken|
-|Generate|TOK:TPR|Saproling|||SaprolingToken|
-|Generate|TOK:TPR|Sliver|||SliversmithToken|
-|Generate|TOK:TPR|Spike|||SpikeToken|
-|Generate|TOK:TPR|Spirit|||SpiritWhiteToken|
-|Generate|TOK:TPR|Thopter|||ThopterColorlessToken|
-|Generate|TOK:TPR|Zombie|||ZombieToken|
 |Generate|TOK:TSP|Assembly-Worker|||AssembleWorkerToken|
 |Generate|TOK:TSP|Bat|||SengirNosferatuBatToken|
 |Generate|TOK:TSP|Citizen|||CitizenToken|
@@ -1513,3 +1479,20 @@
 |Generate|TOK:KHC|Servo|||ServoToken|
 |Generate|TOK:KHC|Soldier|||SoldierToken|
 |Generate|TOK:KHC|Thopter|||ThopterColorlessToken|
+
+# TSR
+|Generate|TOK:TSR|Ape|||PongifyApeToken|
+|Generate|TOK:TSR|Assembly-Worker|||AssemblyWorkerToken|
+|Generate|TOK:TSR|Bat|||SengirNosferatuBatToken|
+|Generate|TOK:TSR|Cloud Sprite|||CloudSpriteToken|
+|Generate|TOK:TSR|Giant|||GiantToken|
+|Generate|TOK:TSR|Goblin|||GoblinToken|
+|Generate|TOK:TSR|Griffin|||GriffinToken|
+|Generate|TOK:TSR|Insect|||DeadlyGrubInsectToken|
+|Generate|TOK:TSR|Knight|||RiftmarkedKnightToken|
+|Generate|TOK:TSR|Kobolds of Kher Keep|||KherKeepKoboldToken|
+|Generate|TOK:TSR|Llanowar Elves|||LlanowarElvesToken|
+|Generate|TOK:TSR|Metallic Sliver|||MetallicSliverToken|
+|Generate|TOK:TSR|Saproling|||SaprolingToken|
+|Generate|TOK:TSR|Soldier|||SoldierToken|
+|Generate|TOK:TSR|Spider|||PenumbraSpiderToken|

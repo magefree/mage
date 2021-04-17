@@ -483,7 +483,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void beginTurn(Game game) {
         this.landsPlayed = 0;
-        updateRangeOfInfluence(game);
+        updateRange(game);
     }
 
     @Override
@@ -491,7 +491,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         return range;
     }
 
-    protected void updateRangeOfInfluence(Game game) {
+    @Override
+    public void updateRange(Game game) {
         // 20100423 - 801.2c
         // 801.2c The particular players within each player’s range of influence are determined as each turn begins.
         inRange.clear();
@@ -523,6 +524,13 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public Set<UUID> getInRange() {
+        if (inRange.isEmpty()) {
+            // runtime check: inRange filled on beginTurn, but unit tests adds cards by cheat engine before game starting,
+            // so inRange will be empty and some ETB effects can be broken (example: Spark Double puts direct to battlefield).
+            // Cheat engine already have a workaround, so that error must not be visible in normal situation.
+            throw new IllegalStateException("Wrong code usage (game is not started, but you call getInRange in some effects).");
+        }
+
         return inRange;
     }
 
@@ -712,20 +720,20 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public Card discardOne(boolean random, boolean payForCost, Ability source, Game game) {
-        Cards cards = discard(1, random, payForCost, source, game);
-        if (cards.isEmpty()) {
-            return null;
-        }
-        return cards.getRandom(game);
+        return discard(1, random, payForCost, source, game).getRandom(game);
     }
 
     @Override
     public Cards discard(int amount, boolean random, boolean payForCost, Ability source, Game game) {
-        Cards discardedCards = doDiscardWithoutFinalEvent(amount, random, payForCost, source, game);
-        if (!discardedCards.isEmpty()) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARDS, null, source, playerId, discardedCards.size()));
+        if (random) {
+            return discard(getRandomToDiscard(amount, source, game), payForCost, source, game);
         }
-        return discardedCards;
+        return discard(amount, amount, payForCost, source, game);
+    }
+
+    @Override
+    public Cards discard(int minAmount, int maxAmount, boolean payForCost, Ability source, Game game) {
+        return discard(getToDiscard(minAmount, maxAmount, source, game), payForCost, source, game);
     }
 
     @Override
@@ -740,46 +748,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
         if (!discardedCards.isEmpty()) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARDS, null, source, playerId, discardedCards.size()));
-        }
-        return discardedCards;
-    }
-
-    private Cards doDiscardWithoutFinalEvent(int amount, boolean random, boolean payForCost, Ability source, Game game) {
-        Cards discardedCards = new CardsImpl();
-        if (amount <= 0) {
-            return discardedCards;
-        }
-
-        // all without dialogs
-        if (this.getHand().size() == 1 || this.getHand().size() == amount) {
-            List<UUID> cardsToDiscard = new ArrayList<>(this.getHand());
-            for (UUID id : cardsToDiscard) {
-                if (doDiscard(this.getHand().get(id, game), source, game, payForCost, false)) {
-                    discardedCards.add(id);
-                }
-            }
-            return discardedCards;
-        }
-
-        if (random) {
-            for (int i = 0; i < amount; i++) {
-                Card card = this.getHand().getRandom(game);
-                if (doDiscard(card, source, game, payForCost, false)) {
-                    discardedCards.add(card);
-                }
-            }
-        } else {
-            int possibleAmount = Math.min(getHand().size(), amount);
-            TargetDiscard target = new TargetDiscard(possibleAmount, possibleAmount,
-                    new FilterCard(CardUtil.numberToText(possibleAmount, "a")
-                            + " card" + (possibleAmount > 1 ? "s" : "")), playerId);
-            choose(Outcome.Discard, target, source == null ? null : source.getSourceId(), game);
-            for (UUID cardId : target.getTargets()) {
-                if (doDiscard(this.getHand().get(cardId, game), source, game, payForCost, false)) {
-                    discardedCards.add(cardId);
-                }
-            }
+            game.fireEvent(new DiscardedCardsEvent(source, playerId, discardedCards.size(), discardedCards));
         }
         return discardedCards;
     }
@@ -787,6 +756,38 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean discard(Card card, boolean payForCost, Ability source, Game game) {
         return doDiscard(card, source, game, payForCost, true);
+    }
+
+    private Cards getToDiscard(int minAmount, int maxAmount, Ability source, Game game) {
+        Cards toDiscard = new CardsImpl();
+        if (minAmount > maxAmount) {
+            return getToDiscard(maxAmount, minAmount, source, game);
+        }
+        if (maxAmount < 1) {
+            return toDiscard;
+        }
+        if (getHand().size() <= minAmount) {
+            toDiscard.addAll(getHand());
+            return toDiscard;
+        }
+        TargetDiscard target = new TargetDiscard(minAmount, maxAmount, StaticFilters.FILTER_CARD, getId());
+        choose(Outcome.Discard, target, source != null ? source.getSourceId() : null, game);
+        toDiscard.addAll(target.getTargets());
+        return toDiscard;
+    }
+
+    private Cards getRandomToDiscard(int amount, Ability source, Game game) {
+        Cards toDiscard = new CardsImpl();
+        Cards hand = getHand().copy();
+        for (int i = 0; i < amount; i++) {
+            if (hand.isEmpty()) {
+                break;
+            }
+            Card card = hand.getRandom(game);
+            hand.remove(card);
+            toDiscard.add(card);
+        }
+        return toDiscard;
     }
 
     private boolean doDiscard(Card card, Ability source, Game game, boolean payForCost, boolean fireFinalEvent) {
@@ -825,7 +826,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source, playerId));
 
         if (fireFinalEvent) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARDS, null, source, playerId, 1));
+            game.fireEvent(new DiscardedCardsEvent(source, playerId, 1, new CardsImpl(card)));
         }
         return true;
     }
@@ -1495,7 +1496,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (sourceObject != null) {
             sourceObject.adjustTargets(ability, game);
         }
-        if (ability.canChooseTarget(game)) {
+        UUID triggerId = null;
+        if (ability.canChooseTarget(game, playerId)) {
             if (ability.isUsesStack()) {
                 game.getStack().push(new StackAbility(ability, playerId));
             }
@@ -1508,59 +1510,89 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (!ability.isUsesStack()) {
                     ability.resolve(game);
                 } else {
-                    game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY,
-                            ability.getId(), ability, ability.getControllerId()));
+                    game.fireEvent(new GameEvent(
+                            GameEvent.EventType.TRIGGERED_ABILITY,
+                            ability.getId(), ability, ability.getControllerId()
+                    ));
+                    triggerId = ability.getId();
                 }
                 game.removeBookmark(bookmark);
                 return true;
             }
         }
         restoreState(bookmark, triggeredAbility.getRule(), game); // why restore is needed here? (to remove the triggered ability from the stack because of no possible targets)
+        GameEvent event = new GameEvent(
+                GameEvent.EventType.ABILITY_TRIGGERED,
+                triggerId, ability, ability.getControllerId()
+        );
+        game.getState().setValue(event.getId().toString(), ability.getTriggerEvent());
+        game.fireEvent(event);
         return false;
     }
 
+    /**
+     * Return spells for possible cast
+     * Uses in GUI to show only playable spells for choosing from the card
+     * (example: effect allow to cast card and player must choose the spell ability)
+     *
+     * @param playerId
+     * @param object
+     * @param zone
+     * @param game
+     * @return
+     */
     public static LinkedHashMap<UUID, ActivatedAbility> getSpellAbilities(UUID playerId, MageObject object, Zone zone, Game game) {
+        // it uses simple check from spellCanBeActivatedRegularlyNow
+        // reason: no approved info here (e.g. forced to choose spell ability from cast card)
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
-        for (Ability ability : object.getAbilities()) {
+        Abilities<Ability> allAbilities;
+        if (object instanceof Card) {
+            allAbilities = ((Card) object).getAbilities(game);
+        } else {
+            allAbilities = object.getAbilities();
+        }
+
+        for (Ability ability : allAbilities) {
             if (ability instanceof SpellAbility) {
                 switch (((SpellAbility) ability).getSpellAbilityType()) {
                     case BASE_ALTERNATE:
-                        ActivationStatus as = ((SpellAbility) ability).canActivate(playerId, game);
-                        if (as.canActivate()) {
+                        if (((SpellAbility) ability).spellCanBeActivatedRegularlyNow(playerId, game)) {
                             useable.put(ability.getId(), (SpellAbility) ability);  // example: Chandra, Torch of Defiance +1 loyal ability
                         }
                         return useable;
                     case SPLIT_FUSED:
                         if (zone == Zone.HAND) {
-                            if (ability.canChooseTarget(game)) {
+                            if (ability.canChooseTarget(game, playerId)) {
                                 useable.put(ability.getId(), (SpellAbility) ability);
                             }
                         }
                     case SPLIT:
-                        if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game)) {
+                        if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
                             useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
                                     ((SplitCard) object).getLeftHalfCard().getSpellAbility());
                         }
-                        if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game)) {
+                        if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
                             useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
                                     ((SplitCard) object).getRightHalfCard().getSpellAbility());
                         }
                         return useable;
                     case SPLIT_AFTERMATH:
                         if (zone == Zone.GRAVEYARD) {
-                            if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game)) {
+                            if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
                                 useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
                                         ((SplitCard) object).getRightHalfCard().getSpellAbility());
                             }
                         } else {
-                            if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game)) {
+                            if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
                                 useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
                                         ((SplitCard) object).getLeftHalfCard().getSpellAbility());
                             }
                         }
                         return useable;
                     default:
-                        useable.put(ability.getId(), (SpellAbility) ability);
+                        if (((SpellAbility) ability).spellCanBeActivatedRegularlyNow(playerId, game)) {
+                            useable.put(ability.getId(), (SpellAbility) ability);
+                        }
                 }
             }
         }
@@ -2035,6 +2067,18 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public void exchangeLife(Player player, Ability source, Game game) {
+        int lifePlayer1 = getLife();
+        int lifePlayer2 = player.getLife();
+        if ((lifePlayer1 != lifePlayer2 && this.isLifeTotalCanChange() && player.isLifeTotalCanChange())
+                && (lifePlayer1 >= lifePlayer2 || (this.isCanGainLife() && player.isCanLoseLife()))
+                && (lifePlayer1 <= lifePlayer2 || (this.isCanLoseLife() && player.isCanGainLife()))) {
+            this.setLife(lifePlayer2, game, source);
+            player.setLife(lifePlayer1, game, source);
+        }
+    }
+
+    @Override
     public int damage(int damage, UUID attackerId, Ability source, Game game) {
         return doDamage(damage, attackerId, source, game, false, true, null);
     }
@@ -2054,75 +2098,76 @@ public abstract class PlayerImpl implements Player, Serializable {
             return 0;
         }
 
-        if (damage > 0) {
-            if (canDamage(game.getObject(attackerId), game)) {
-                GameEvent event = new DamagePlayerEvent(playerId,
-                        attackerId, playerId, damage, preventable, combatDamage);
-                event.setAppliedEffects(appliedEffects);
-                if (!game.replaceEvent(event)) {
-                    int actualDamage = event.getAmount();
-                    if (actualDamage > 0) {
-                        UUID sourceControllerId = null;
-                        Abilities sourceAbilities = null;
-                        MageObject attacker = game.getPermanentOrLKIBattlefield(attackerId);
-                        if (attacker == null) {
-                            StackObject stackObject = game.getStack().getStackObject(attackerId);
-                            if (stackObject != null) {
-                                attacker = stackObject.getStackAbility().getSourceObject(game);
-                            } else {
-                                attacker = game.getObject(attackerId);
-                            }
-                            if (attacker instanceof Spell) {
-                                sourceAbilities = ((Spell) attacker).getAbilities(game);
-                                sourceControllerId = ((Spell) attacker).getControllerId();
-                            } else if (attacker instanceof Card) {
-                                sourceAbilities = ((Card) attacker).getAbilities(game);
-                                sourceControllerId = ((Card) attacker).getOwnerId();
-                            } else if (attacker instanceof CommandObject) {
-                                sourceControllerId = ((CommandObject) attacker).getControllerId();
-                                sourceAbilities = attacker.getAbilities();
-                            }
-                        } else {
-                            sourceAbilities = ((Permanent) attacker).getAbilities(game);
-                            sourceControllerId = ((Permanent) attacker).getControllerId();
-                        }
-                        if (sourceAbilities != null && sourceAbilities.containsKey(InfectAbility.getInstance().getId())) {
-                            addCounters(CounterType.POISON.createInstance(actualDamage), sourceControllerId, source, game);
-                        } else {
-                            GameEvent damageToLifeLossEvent = new GameEvent(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS,
-                                    playerId, source, playerId, actualDamage, combatDamage);
-                            if (!game.replaceEvent(damageToLifeLossEvent)) {
-                                this.loseLife(damageToLifeLossEvent.getAmount(), game, source, combatDamage, attackerId);
-                            }
-                        }
-                        if (sourceAbilities != null && sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
-                            if (combatDamage) {
-                                game.getPermanent(attackerId).markLifelink(actualDamage);
-                            } else {
-                                Player player = game.getPlayer(sourceControllerId);
-                                player.gainLife(actualDamage, game, source);
-                            }
-                        }
-                        // Unstable ability - Earl of Squirrel
-                        if (sourceAbilities != null && sourceAbilities.containsKey(SquirrellinkAbility.getInstance().getId())) {
-                            Player player = game.getPlayer(sourceControllerId);
-                            new SquirrelToken().putOntoBattlefield(actualDamage, game, source, player.getId());
-                        }
-                        DamagedEvent damagedEvent = new DamagedPlayerEvent(playerId, attackerId, playerId, actualDamage, combatDamage);
-                        game.fireEvent(damagedEvent);
-                        game.getState().addSimultaneousDamage(damagedEvent, game);
-                        return actualDamage;
-                    }
-                }
+        if (damage < 1) {
+            return 0;
+        }
+        if (!canDamage(game.getObject(attackerId), game)) {
+            MageObject sourceObject = game.getObject(attackerId);
+            game.informPlayers(damage + " damage "
+                    + (sourceObject == null ? "" : "from " + sourceObject.getLogName())
+                    + " to " + getLogName()
+                    + (damage > 1 ? " were" : "was") + " prevented because of protection");
+            return 0;
+        }
+        DamageEvent event = new DamagePlayerEvent(playerId, attackerId, playerId, damage, preventable, combatDamage);
+        event.setAppliedEffects(appliedEffects);
+        if (game.replaceEvent(event)) {
+            return 0;
+        }
+        int actualDamage = event.getAmount();
+        if (actualDamage < 1) {
+            return 0;
+        }
+        UUID sourceControllerId = null;
+        Abilities sourceAbilities = null;
+        MageObject attacker = game.getPermanentOrLKIBattlefield(attackerId);
+        if (attacker == null) {
+            StackObject stackObject = game.getStack().getStackObject(attackerId);
+            if (stackObject != null) {
+                attacker = stackObject.getStackAbility().getSourceObject(game);
             } else {
-                MageObject sourceObject = game.getObject(attackerId);
-                game.informPlayers(damage + " damage "
-                        + (sourceObject == null ? "" : "from " + sourceObject.getLogName())
-                        + " to " + getLogName()
-                        + (damage > 1 ? " were" : "was") + " prevented because of protection");
+                attacker = game.getObject(attackerId);
+            }
+            if (attacker instanceof Spell) {
+                sourceAbilities = ((Spell) attacker).getAbilities(game);
+                sourceControllerId = ((Spell) attacker).getControllerId();
+            } else if (attacker instanceof Card) {
+                sourceAbilities = ((Card) attacker).getAbilities(game);
+                sourceControllerId = ((Card) attacker).getOwnerId();
+            } else if (attacker instanceof CommandObject) {
+                sourceControllerId = ((CommandObject) attacker).getControllerId();
+                sourceAbilities = attacker.getAbilities();
+            }
+        } else {
+            sourceAbilities = ((Permanent) attacker).getAbilities(game);
+            sourceControllerId = ((Permanent) attacker).getControllerId();
+        }
+        if (event.isAsThoughInfect() || (sourceAbilities != null && sourceAbilities.containsKey(InfectAbility.getInstance().getId()))) {
+            addCounters(CounterType.POISON.createInstance(actualDamage), sourceControllerId, source, game);
+        } else {
+            GameEvent damageToLifeLossEvent = new GameEvent(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS,
+                    playerId, source, playerId, actualDamage, combatDamage);
+            if (!game.replaceEvent(damageToLifeLossEvent)) {
+                this.loseLife(damageToLifeLossEvent.getAmount(), game, source, combatDamage, attackerId);
             }
         }
-        return 0;
+        if (sourceAbilities != null && sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
+            if (combatDamage) {
+                game.getPermanent(attackerId).markLifelink(actualDamage);
+            } else {
+                Player player = game.getPlayer(sourceControllerId);
+                player.gainLife(actualDamage, game, source);
+            }
+        }
+        // Unstable ability - Earl of Squirrel
+        if (sourceAbilities != null && sourceAbilities.containsKey(SquirrellinkAbility.getInstance().getId())) {
+            Player player = game.getPlayer(sourceControllerId);
+            new SquirrelToken().putOntoBattlefield(actualDamage, game, source, player.getId());
+        }
+        DamagedEvent damagedEvent = new DamagedPlayerEvent(playerId, attackerId, playerId, actualDamage, combatDamage);
+        game.fireEvent(damagedEvent);
+        game.getState().addSimultaneousDamage(damagedEvent, game);
+        return actualDamage;
     }
 
     @Override
@@ -2685,7 +2730,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         // only humans can use it
-        if (!targetPlayer.isHuman() && !targetPlayer.isTestMode()) {
+        if (targetPlayer.isComputer()) {
             return false;
         }
 
@@ -2713,7 +2758,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             // casting selected card
             // TODO: fix costs (why is Panglacial Wurm automatically accepting payment?)
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
             targetPlayer.cast(targetPlayer.chooseAbilityForCast(card, game, false), game, false, null);
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
             castableCards.remove(card.getId());
             casted = true;
         }
@@ -3834,7 +3881,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean isTestMode() {
+    public boolean isTestsMode() {
         return isTestMode;
     }
 
@@ -4073,14 +4120,14 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCards(Set<Card> cards, Zone toZone,
+    public boolean moveCards(Set<? extends Card> cards, Zone toZone,
                              Ability source, Game game
     ) {
         return moveCards(cards, toZone, source, game, false, false, false, null);
     }
 
     @Override
-    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects) {
+    public boolean moveCards(Set<? extends Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects) {
         if (cards.isEmpty()) {
             return true;
         }
@@ -4180,7 +4227,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
         Set<Card> cards = new HashSet<>();
-        cards.add(card);
+        if (card != null) {
+            cards.add(card);
+        }
         return moveCardsToExile(cards, source, game, withName, exileId, exileZoneName);
     }
 
@@ -4222,13 +4271,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public Set<Card> moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
+    public Set<Card> moveCardsToGraveyardWithInfo(Set<? extends Card> allCards, Ability source, Game game, Zone fromZone) {
         Set<Card> movedCards = new LinkedHashSet<>();
         while (!allCards.isEmpty()) {
             // identify cards from one owner
             Cards cards = new CardsImpl();
             UUID ownerId = null;
-            for (Iterator<Card> it = allCards.iterator(); it.hasNext(); ) {
+            for (Iterator<? extends Card> it = allCards.iterator(); it.hasNext(); ) {
                 Card card = it.next();
                 if (cards.isEmpty()) {
                     ownerId = card.getOwnerId();
@@ -4251,7 +4300,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (userData.askMoveToGraveOrder()) {
                     if (cards.size() > 1) {
                         chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral,
-                                "Would you like to choose the order the cards go to graveyard?", source, game);
+                                "Choose the order in which the cards go to the graveyard?", source, game);
                     }
                 }
                 if (chooseOrder) {
@@ -4366,7 +4415,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     sb.append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(' ');
                 }
                 if (card.isOwnedBy(getId())) {
-                    sb.append(" to his or her command zone");
+                    sb.append(" to their command zone");
                 } else {
                     Player player = game.getPlayer(card.getOwnerId());
                     if (player != null) {
@@ -4672,7 +4721,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public String toString() {
-        return getName() + " " + super.toString();
+        return getName() + " (" + super.getClass().getSimpleName() + ")";
     }
 
 }

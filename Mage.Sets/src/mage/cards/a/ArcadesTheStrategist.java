@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class ArcadesTheStrategist extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent("creature with defender");
+            = new FilterControlledCreaturePermanent("a creature with defender");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
 
     static {

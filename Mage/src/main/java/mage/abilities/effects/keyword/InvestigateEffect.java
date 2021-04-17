@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
@@ -19,7 +14,7 @@ public class InvestigateEffect extends CreateTokenEffect {
 
     public InvestigateEffect() {
         super(new ClueArtifactToken());
-        this.staticText = "Investigate. <i>(Create a colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\")</i>";
+        this.staticText = "investigate. <i>(Create a colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\")</i>";
     }
 
     public InvestigateEffect(final InvestigateEffect effect) {

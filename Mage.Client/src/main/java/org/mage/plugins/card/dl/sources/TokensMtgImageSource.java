@@ -184,7 +184,7 @@ public enum TokensMtgImageSource implements CardImageSource {
     private HashMap<String, List<TokenData>> getTokensData() throws IOException {
         synchronized (tokensDataSync) {
             if (tokensData == null) {
-                DownloadPicturesService.getInstance().updateMessage("Find tokens data...");
+                DownloadPicturesService.getInstance().updateGlobalMessage("Find tokens data...");
                 tokensData = new HashMap<>();
 
                 // get tokens data from resource file
@@ -235,11 +235,11 @@ public enum TokensMtgImageSource implements CardImageSource {
                             }
                         }
                     }
-                    DownloadPicturesService.getInstance().updateMessage("");
+                    DownloadPicturesService.getInstance().updateGlobalMessage("");
                     DownloadPicturesService.getInstance().showDownloadControls(true);
                 } catch (Exception ex) {
                     LOGGER.warn("Failed to get tokens description from tokens.mtg.onl", ex);
-                    DownloadPicturesService.getInstance().updateMessage(ex.getMessage());
+                    DownloadPicturesService.getInstance().updateGlobalMessage(ex.getMessage());
                 }
             }
         }

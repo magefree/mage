@@ -34,9 +34,7 @@ public class SpellCostReductionSourceEffect extends CostModificationEffectImpl {
 
         StringBuilder sb = new StringBuilder();
         sb.append("this spell costs ");
-        for (String manaSymbol : manaCostsToReduce.getSymbols()) {
-            sb.append(manaSymbol);
-        }
+        sb.append(manaCostsToReduce.getText());
         sb.append(" less to cast");
         if (this.condition != null) {
             sb.append(" if ").append(this.condition.toString());

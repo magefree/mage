@@ -4,6 +4,8 @@ import com.google.common.base.CharMatcher;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
+import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MultikickerAbility;
@@ -54,7 +56,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "ZNR"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "TSR"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
 
     private static final HashMap<String, Set<String>> skipCheckLists = new HashMap<>();
@@ -1281,6 +1283,14 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "card is a Saga but is missing this.addAbility(sagaAbility)");
         }
 
+        // special check: Werewolves front ability should only be on front and vice versa
+        if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && card.isNightCard()) {
+            fail(card, "abilities", "card is a back face werewolf with a front face ability");
+        }
+        if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && !card.isNightCard()) {
+            fail(card, "abilities", "card is a front face werewolf with a back face ability");
+        }
+
         // special check: missing or wrong ability/effect hints
         Map<Class, String> hints = new HashMap<>();
         hints.put(MenaceAbility.class, "can't be blocked except by two or more");
@@ -1369,7 +1379,7 @@ public class VerifyCardDataTest {
     public void test_showCardInfo() throws Exception {
         // debug only: show direct card info (takes it from class file, not from db repository)
         // can check multiple cards at once, example: name1;name2;name3
-        String cardNames = "Dire Fleet Warmonger";
+        String cardNames = "Spark Double";
         CardScanner.scan();
         Arrays.stream(cardNames.split(";")).forEach(cardName -> {
             cardName = cardName.trim();
@@ -1621,7 +1631,7 @@ public class VerifyCardDataTest {
         }
 
         String expected = ref.manaCost;
-        String cost = join(card.getManaCost().getSymbols());
+        String cost = String.join("", card.getManaCostSymbols());
         if (cost.isEmpty()) {
             cost = null;
         }
@@ -1655,7 +1665,7 @@ public class VerifyCardDataTest {
         // other cards can't have that stats
         if (isBasicLandName(card.getName())) {
             // lands
-            if (card.getRarity() != Rarity.LAND) {
+            if (card.getRarity() != Rarity.LAND && card.getRarity() != Rarity.SPECIAL) {
                 fail(card, "rarity", "basic land must be Rarity.LAND");
             }
 
@@ -1672,14 +1682,6 @@ public class VerifyCardDataTest {
                 fail(card, "supertype", "only basic land can be SuperType.BASIC");
             }
         }
-    }
-
-    private String join(Iterable<?> items) {
-        StringBuilder result = new StringBuilder();
-        for (Object item : items) {
-            result.append(item);
-        }
-        return result.toString();
     }
 
     @Test
@@ -1713,6 +1715,9 @@ public class VerifyCardDataTest {
                             setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
                     if (card == null) {
                         errorsList.add("Error: broken constructor " + setInfo.getCardClass());
+                    }
+                    if (!card.getExpansionSetCode().equals(set.getCode())) {
+                        errorsList.add("Error: card constructor have custom expansionSetCode, must be removed " + setInfo.getCardClass());
                     }
                 } catch (Throwable e) {
                     // CardImpl.createCard don't throw exceptions (only error logs), so that logs are useless here

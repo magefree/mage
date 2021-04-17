@@ -1,6 +1,7 @@
-
 package mage.cards.s;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -23,7 +24,7 @@ import mage.players.Player;
 public final class Soulquake extends CardImpl {
 
     public Soulquake(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}{B}{B}");
 
         // Return all creatures on the battlefield and all creature cards in graveyards to their owners' hands.
         this.getSpellAbility().addEffect(new SoulquakeEffect());
@@ -59,17 +60,22 @@ class SoulquakeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        Set<Card> cardsToHand = new LinkedHashSet<>();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToZone(Zone.HAND, source, game, true);
+            cardsToHand.add((Card) permanent);
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 for (Card card : player.getGraveyard().getCards(filter2, game)) {
-                    card.moveToZone(Zone.HAND, source, game, true);
+                    cardsToHand.add(card);
                 }
             }
         }
-        return true;
+        return controller.moveCards(cardsToHand, Zone.HAND, source, game);
     }
 }

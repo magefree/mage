@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterStackObject;
-import mage.filter.predicate.ability.ArtifactSourcePredicate;
+import mage.filter.predicate.other.ArtifactSourcePredicate;
 import mage.target.common.TargetActivatedAbility;
 
 /**

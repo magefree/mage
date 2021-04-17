@@ -26,7 +26,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.other.OwnerIdPredicate;
+import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.game.ExileZone;
 import mage.players.Player;
 import mage.util.CardUtil;

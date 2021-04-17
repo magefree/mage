@@ -1,23 +1,15 @@
 package mage.cards.l;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.discard.DiscardAndDrawThatManyEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetDiscard;
 
 import java.util.UUID;
 
@@ -45,7 +37,7 @@ public final class LeaveChance extends SplitCard {
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
 
         // Discard any number of cards, then draw that many cards.
-        getRightHalfCard().getSpellAbility().addEffect(new ChanceEffect());
+        getRightHalfCard().getSpellAbility().addEffect(new DiscardAndDrawThatManyEffect(Integer.MAX_VALUE));
     }
 
     private LeaveChance(final LeaveChance card) {
@@ -55,35 +47,5 @@ public final class LeaveChance extends SplitCard {
     @Override
     public LeaveChance copy() {
         return new LeaveChance(this);
-    }
-}
-
-class ChanceEffect extends OneShotEffect {
-
-    ChanceEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Discard any number of cards, then draw that many cards";
-    }
-
-    private ChanceEffect(final ChanceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ChanceEffect copy() {
-        return new ChanceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        TargetCard target = new TargetDiscard(0, controller.getHand().size(), StaticFilters.FILTER_CARD_CARDS, controller.getId());
-        controller.chooseTarget(outcome, controller.getHand(), target, source, game);
-        int amount = controller.discard(new CardsImpl(target.getTargets()), false, source, game).size();
-        controller.drawCards(amount, source, game);
-        return true;
     }
 }

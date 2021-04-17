@@ -1,26 +1,26 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class InducedAmnesia extends CardImpl {
@@ -49,12 +49,12 @@ public final class InducedAmnesia extends CardImpl {
 
 class InducedAmnesiaExileEffect extends OneShotEffect {
 
-    public InducedAmnesiaExileEffect() {
+    InducedAmnesiaExileEffect() {
         super(Outcome.Detriment);
         this.staticText = "target player exiles all the cards in their hand face down, then draws that many cards";
     }
 
-    public InducedAmnesiaExileEffect(final InducedAmnesiaExileEffect effect) {
+    private InducedAmnesiaExileEffect(final InducedAmnesiaExileEffect effect) {
         super(effect);
     }
 
@@ -66,33 +66,36 @@ class InducedAmnesiaExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (targetPlayer != null && sourcePermanent != null) {
-            int numberOfCards = targetPlayer.getHand().size();
-            if (numberOfCards > 0) {
-                UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                for (Card card : targetPlayer.getHand().getCards(game)) {
-                    card.moveToExile(exileId, sourcePermanent.getName(), source, game);
-                    card.setFaceDown(true, game);
-                }
-                game.informPlayers(sourcePermanent.getLogName() + ": " + targetPlayer.getLogName() + " exiles their hand face down (" + numberOfCards + "card" + (numberOfCards > 1 ? "s" : "") + ')');
-                game.getState().processAction(game);
-                targetPlayer.drawCards(numberOfCards, source, game);
-            }
-            return true;
+        MageObject sourceObject = source.getSourceObject(game);
+        if (targetPlayer == null || sourceObject == null) {
+            return false;
         }
-        return false;
+        int numberOfCards = targetPlayer.getHand().size();
+        if (numberOfCards < 1) {
+            return false;
+        }
+        Cards cards = new CardsImpl(targetPlayer.getHand());
+        targetPlayer.moveCardsToExile(
+                cards.getCards(game), source, game, false,
+                CardUtil.getExileZoneId(game, source), sourceObject.getIdName()
+        );
+        cards.getCards(game)
+                .stream()
+                .filter(card -> game.getState().getZone(card.getId()) == Zone.EXILED)
+                .forEach(card -> card.setFaceDown(true, game));
+        targetPlayer.drawCards(numberOfCards, source, game);
+        return true;
     }
 }
 
 class InducedAmnesiaReturnEffect extends OneShotEffect {
 
-    public InducedAmnesiaReturnEffect() {
+    InducedAmnesiaReturnEffect() {
         super(Outcome.Benefit);
         this.staticText = "return the exiled cards to their owner's hand";
     }
 
-    public InducedAmnesiaReturnEffect(final InducedAmnesiaReturnEffect effect) {
+    private InducedAmnesiaReturnEffect(final InducedAmnesiaReturnEffect effect) {
         super(effect);
     }
 
@@ -104,23 +107,10 @@ class InducedAmnesiaReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && sourcePermanent != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, source.getSourceId(), true);
-            int numberOfCards = 0;
-            ExileZone exileZone = game.getExile().getExileZone(exileId);
-            if (exileZone != null) {
-                for (Card card : exileZone.getCards(game)) {
-                    numberOfCards++;
-                    card.moveToZone(Zone.HAND, source, game, true);
-                    card.setFaceDown(false, game);
-                }
-            }
-            if (numberOfCards > 0) {
-                game.informPlayers(sourcePermanent.getLogName() + ": " + controller.getLogName() + " returns " + numberOfCards + " card" + (numberOfCards > 1 ? "s" : "") + " from exile to hand");
-            }
-            return true;
-        }
-        return false;
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        return controller != null
+                && exileZone != null
+                && !exileZone.isEmpty()
+                && controller.moveCards(exileZone, Zone.HAND, source, game);
     }
 }

@@ -1,10 +1,11 @@
-
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.ReachAbility;
+
+import java.util.Arrays;
 
 /**
  *
@@ -20,7 +21,10 @@ public final class PenumbraSpiderToken extends TokenImpl {
         subtype.add(SubType.SPIDER);
         power = new MageInt(2);
         toughness = new MageInt(4);
+
         addAbility(ReachAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("MMA", "PC2", "TSP", "TSR");
     }
 
     public PenumbraSpiderToken(final PenumbraSpiderToken token) {

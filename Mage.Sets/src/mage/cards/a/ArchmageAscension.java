@@ -1,18 +1,16 @@
-
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -32,12 +30,17 @@ public final class ArchmageAscension extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // At the beginning of each end step, if you drew two or more cards this turn, you may put a quest counter on Archmage Ascension.
-        this.addAbility(new ArchmageAscensionTriggeredAbility(), new CardsAmountDrawnThisTurnWatcher());
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+                new BeginningOfEndStepTriggeredAbility(
+                        new AddCountersSourceEffect(CounterType.QUEST.createInstance(1)),
+                        TargetController.EACH_PLAYER, true
+                ), ArchmageAscensionCondition.instance, "At the beginning of each end step, " +
+                "if you drew two or more cards this turn, you may put a quest counter on {this}"
+        ), new CardsAmountDrawnThisTurnWatcher());
 
         // As long as Archmage Ascension has six or more quest counters on it, if you would draw a card,
         // you may instead search your library for a card, put that card into your hand, then shuffle your library.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchmageAscensionReplacementEffect()));
-
+        this.addAbility(new SimpleStaticAbility(new ArchmageAscensionReplacementEffect()));
     }
 
     private ArchmageAscension(final ArchmageAscension card) {
@@ -50,49 +53,25 @@ public final class ArchmageAscension extends CardImpl {
     }
 }
 
-class ArchmageAscensionTriggeredAbility extends TriggeredAbilityImpl {
-
-    public ArchmageAscensionTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance(1)), true);
-    }
-
-    public ArchmageAscensionTriggeredAbility(final ArchmageAscensionTriggeredAbility ability) {
-        super(ability);
-    }
+enum ArchmageAscensionCondition implements Condition {
+    instance;
 
     @Override
-    public ArchmageAscensionTriggeredAbility copy() {
-        return new ArchmageAscensionTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent archmage = game.getPermanent(super.getSourceId());
-        CardsAmountDrawnThisTurnWatcher watcher
-                = game.getState().getWatcher(CardsAmountDrawnThisTurnWatcher.class);
-        return archmage != null && watcher != null && watcher.getAmountCardsDrawn(this.getControllerId()) >= 2;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of each end step, if you drew two or more cards this turn, you may put a quest counter on {this}";
+    public boolean apply(Game game, Ability source) {
+        CardsAmountDrawnThisTurnWatcher watcher = game.getState().getWatcher(CardsAmountDrawnThisTurnWatcher.class);
+        return watcher != null && watcher.getAmountCardsDrawn(source.getControllerId()) >= 2;
     }
 }
 
 class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
 
-    public ArchmageAscensionReplacementEffect() {
+    ArchmageAscensionReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "As long as {this} has six or more quest counters on it, if you would draw a card, "
                 + "you may instead search your library for a card, put that card into your hand, then shuffle your library";
     }
 
-    public ArchmageAscensionReplacementEffect(final ArchmageAscensionReplacementEffect effect) {
+    private ArchmageAscensionReplacementEffect(final ArchmageAscensionReplacementEffect effect) {
         super(effect);
     }
 
@@ -109,16 +88,16 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        if (player != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary();
-            if (player.searchLibrary(target, source, game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    card.moveToZone(Zone.HAND, source, game, false);
-                    player.shuffleLibrary(source, game);
-                }
-            }
+        if (player == null) {
+            return false;
         }
+        TargetCardInLibrary target = new TargetCardInLibrary();
+        player.searchLibrary(target, source, game);
+        Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+        if (card != null) {
+            player.moveCards(card, Zone.HAND, source, game);
+        }
+        player.shuffleLibrary(source, game);
         return true;
     }
 
@@ -135,6 +114,6 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
                 && archmage != null
                 && archmage.getCounters(game).getCount(CounterType.QUEST) >= 6
                 && you != null
-                && you.chooseUse(Outcome.Benefit, "Would you like to search your library instead of drawing a card?", source, game);
+                && you.chooseUse(Outcome.Benefit, "Search your library instead of drawing a card?", source, game);
     }
 }

@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -39,8 +38,10 @@ public final class RiftmarkedKnight extends CardImpl {
         // Protection from black; flanking
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         this.addAbility(new FlankingAbility());
+
         // Suspend 3-{1}{W}{W}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{W}{W}"), this));
+
         // When the last time counter is removed from Riftmarked Knight while it's exiled, put a 2/2 black Knight creature token with flanking, protection from white, and haste onto the battlefield.
         this.addAbility(new RiftmarkedKnightTriggeredAbility());
     }

@@ -1,18 +1,18 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.CyclingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
@@ -20,8 +20,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class DecreeOfAnnihilation extends CardImpl {
@@ -36,8 +37,7 @@ public final class DecreeOfAnnihilation extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{5}{R}{R}")));
 
         // When you cycle Decree of Annihilation, destroy all lands.
-        Ability ability = new CycleTriggeredAbility(new DestroyAllEffect(StaticFilters.FILTER_LANDS), false);
-        this.addAbility(ability);
+        this.addAbility(new CycleTriggeredAbility(new DestroyAllEffect(StaticFilters.FILTER_LANDS), false));
     }
 
     private DecreeOfAnnihilation(final DecreeOfAnnihilation card) {
@@ -52,21 +52,23 @@ public final class DecreeOfAnnihilation extends CardImpl {
 
 class DecreeOfAnnihilationEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterPermanent("");
+    private static final FilterPermanent filter = new FilterPermanent();
 
     static {
         filter.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate(),
-                CardType.LAND.getPredicate()));
+                CardType.LAND.getPredicate()
+        ));
     }
 
-    public DecreeOfAnnihilationEffect() {
+    DecreeOfAnnihilationEffect() {
         super(Outcome.Detriment);
-        staticText = "Exile all artifacts, creatures, and lands from the battlefield, all cards from all graveyards, and all cards from all hands";
+        staticText = "Exile all artifacts, creatures, and lands from the battlefield, " +
+                "all cards from all graveyards, and all cards from all hands";
     }
 
-    public DecreeOfAnnihilationEffect(final DecreeOfAnnihilationEffect effect) {
+    private DecreeOfAnnihilationEffect(final DecreeOfAnnihilationEffect effect) {
         super(effect);
     }
 
@@ -77,26 +79,24 @@ class DecreeOfAnnihilationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToExile(null, "", source, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        Cards cards = new CardsImpl();
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                filter, source.getControllerId(), source.getSourceId(), game
+        )) {
+            cards.add(permanent);
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (UUID cid : player.getHand().copy()) {
-                    Card c = game.getCard(cid);
-                    if (c != null) {
-                        c.moveToExile(null, null, source, game);
-                    }
-                }
-                for (UUID cid : player.getGraveyard().copy()) {
-                    Card c = game.getCard(cid);
-                    if (c != null) {
-                        c.moveToExile(null, null, source, game);
-                    }
-                }
+            if (player == null) {
+                continue;
             }
+            cards.addAll(player.getHand());
+            cards.addAll(player.getGraveyard());
         }
-        return true;
+        return controller.moveCards(cards, Zone.EXILED, source, game);
     }
 }

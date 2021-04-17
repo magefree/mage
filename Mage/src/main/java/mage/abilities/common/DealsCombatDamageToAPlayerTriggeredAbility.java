@@ -6,7 +6,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.players.Player;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -60,28 +60,34 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || (orPlaneswalker && event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER);
+                || event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(getSourceId())
-                && ((DamagedEvent) event).isCombatDamage()) {
-            if (onlyOpponents && event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-                Player controller = game.getPlayer(getControllerId());
-                if (controller == null || !controller.hasOpponent(event.getPlayerId(), game)) {
+        if (!event.getSourceId().equals(getSourceId())
+                || !((DamagedEvent) event).isCombatDamage()) {
+            return false;
+        }
+        switch (event.getType()) {
+            case DAMAGED_PLAYER:
+                if (onlyOpponents && !game.getOpponents(getControllerId()).contains(event.getTargetId())) {
                     return false;
                 }
-            }
-            if (setTargetPointer) {
-                for (Effect effect : this.getAllEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                    effect.setValue("damage", event.getAmount());
+                break;
+            case DAMAGED_PERMANENT:
+                Permanent permanent = game.getPermanent(event.getTargetId());
+                if (permanent == null
+                        || !permanent.isPlaneswalker()
+                        || !orPlaneswalker) {
+                    return false;
                 }
-            }
-            return true;
         }
-        return false;
+        if (setTargetPointer) {
+            getAllEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+            getAllEffects().setValue("damage", event.getAmount());
+        }
+        return true;
     }
 
     @Override

@@ -30,7 +30,6 @@ public class Vintage extends Constructed {
         banned.add("Immediate Action");
         banned.add("Iterative Analysis");
         banned.add("Jeweled Bird");
-        banned.add("Lurrus of the Dream-Den");
         banned.add("Muzzio's Preparations");
         banned.add("Power Play");
         banned.add("Rebirth");

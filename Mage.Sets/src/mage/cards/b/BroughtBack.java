@@ -1,15 +1,12 @@
 package mage.cards.b;
 
-import mage.MageObjectReference;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
+import mage.filter.predicate.card.PutIntoGraveFromBattlefieldThisTurnPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 
@@ -25,7 +22,7 @@ public final class BroughtBack extends CardImpl {
     );
 
     static {
-        filter.add(BroughtBackPredicate.instance);
+        filter.add(PutIntoGraveFromBattlefieldThisTurnPredicate.instance);
     }
 
     public BroughtBack(UUID ownerId, CardSetInfo setInfo) {
@@ -49,16 +46,5 @@ public final class BroughtBack extends CardImpl {
     @Override
     public BroughtBack copy() {
         return new BroughtBack(this);
-    }
-}
-
-enum BroughtBackPredicate implements Predicate<Card> {
-    instance;
-
-    @Override
-    public boolean apply(Card input, Game game) {
-        CardsPutIntoGraveyardWatcher watcher = game.getState().getWatcher(CardsPutIntoGraveyardWatcher.class);
-        return watcher != null
-                && watcher.getCardsPutToGraveyardFromBattlefield().contains(new MageObjectReference(input, game));
     }
 }

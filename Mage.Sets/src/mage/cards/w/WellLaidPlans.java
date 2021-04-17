@@ -55,7 +55,7 @@ class WellLaidPlansPreventionEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() != GameEvent.EventType.DAMAGE_CREATURE) {
+        if (event.getType() != GameEvent.EventType.DAMAGE_PERMANENT) {
             return false;
         }
         Permanent attacker = game.getPermanentOrLKIBattlefield(event.getSourceId());

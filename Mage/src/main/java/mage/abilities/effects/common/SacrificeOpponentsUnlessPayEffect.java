@@ -113,12 +113,11 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
                     costToPay = ManaUtil.createManaCost(genericMana, game, source, this);
                     costValueMessage = "{" + genericMana.calculate(game, source, this) + "}";
                 }
-                String message;
+                String message = "";
                 if (costToPay instanceof ManaCost) {
-                    message = "Would you like to pay " + costValueMessage + " to prevent sacrifice effect?";
-                } else {
-                    message = costValueMessage + " to prevent sacrifice effect?";
+                    message += "Pay ";
                 }
+                message += costValueMessage + '?';
 
                 costToPay.clearPaid();
                 if (!(player.chooseUse(Outcome.Benefit, message, source, game)

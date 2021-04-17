@@ -19,6 +19,7 @@ import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -84,6 +85,8 @@ class UneshCriosphinxSovereignEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        Set<Card> cardsToGraveyard = new LinkedHashSet<>();
+        Set<Card> cardsToHand = new LinkedHashSet<>();
         MageObject sourceObject = source.getSourceObject(game);
         if (controller == null || sourceObject == null) {
             return false;
@@ -134,8 +137,9 @@ class UneshCriosphinxSovereignEffect extends OneShotEffect {
                 if (i < pile1.size()) {
                     sb.append(", ");
                 }
-                card.moveToZone(pile1Zone, source, game, false);
+                cardsToGraveyard.add(card);
             }
+            controller.moveCards(cardsToGraveyard, pile1Zone, source, game);
             game.informPlayers(sb.toString());
 
             sb = new StringBuilder("Pile 2, going to ").append(pile2Zone == Zone.HAND ? "Hand" : "Graveyard").append(':');
@@ -146,8 +150,9 @@ class UneshCriosphinxSovereignEffect extends OneShotEffect {
                 if (i < pile2.size()) {
                     sb.append(", ");
                 }
-                card.moveToZone(pile2Zone, source, game, false);
+                cardsToHand.add(card);
             }
+            controller.moveCards(cardsToHand, pile2Zone, source, game);
             game.informPlayers(sb.toString());
         }
 

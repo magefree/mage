@@ -4,13 +4,13 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.CardImpl;
 import mage.cards.ModalDoubleFacesCard;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,10 +29,13 @@ public class MockCard extends CardImpl {
     private int startingLoyalty;
 
     // mana cost extra info for multiple mana drawing
-    protected ManaCosts<ManaCost> manaCostLeft;
-    protected ManaCosts<ManaCost> manaCostRight;
+    // warning, don't use ManaCost objects here due too much memory consumptions
+    protected List<String> manaCostLeftStr;
+    protected List<String> manaCostRightStr;
+    protected List<String> manaCostStr;
     protected String adventureSpellName;
     protected boolean isModalDoubleFacesCard;
+    protected int convertedManaCost;
 
     public MockCard(CardInfo card) {
         super(null, card.getName());
@@ -47,9 +50,11 @@ public class MockCard extends CardImpl {
 
         this.usesVariousArt = card.usesVariousArt();
 
-        this.manaCostLeft = new ManaCostsImpl(join(card.getManaCosts(CardInfo.ManaCostSide.LEFT)));
-        this.manaCostRight = new ManaCostsImpl(join(card.getManaCosts(CardInfo.ManaCostSide.RIGHT)));
-        this.manaCost = new ManaCostsImpl(join(card.getManaCosts(CardInfo.ManaCostSide.ALL)));
+        //this.manaCost = new ManaCostsImpl(join(card.getManaCosts(CardInfo.ManaCostSide.ALL)));
+        this.manaCostLeftStr = card.getManaCosts(CardInfo.ManaCostSide.LEFT);
+        this.manaCostRightStr = card.getManaCosts(CardInfo.ManaCostSide.RIGHT);
+        this.manaCostStr = card.getManaCosts(CardInfo.ManaCostSide.ALL);
+        this.convertedManaCost = card.getConvertedManaCost();
 
         this.color = card.getColor();
 
@@ -95,6 +100,14 @@ public class MockCard extends CardImpl {
 
     public MockCard(final MockCard card) {
         super(card);
+
+        this.startingLoyalty = card.startingLoyalty;
+        this.manaCostLeftStr = new ArrayList<>(card.manaCostLeftStr);
+        this.manaCostRightStr = new ArrayList<>(card.manaCostRightStr);
+        this.manaCostStr = new ArrayList<>(card.manaCostStr);
+        this.adventureSpellName = card.adventureSpellName;
+        this.isModalDoubleFacesCard = card.isModalDoubleFacesCard;
+        this.convertedManaCost = card.convertedManaCost;
     }
 
     @Override
@@ -109,18 +122,30 @@ public class MockCard extends CardImpl {
 
     @Override
     public ManaCosts<ManaCost> getManaCost() {
-        return manaCost;
+        // only split half cards can store mana cost in objects list instead strings (memory optimization)
+        // see https://github.com/magefree/mage/issues/7515
+        throw new IllegalArgumentException("Unsupport method call: getManaCost in " + this.getClass().getCanonicalName());
     }
 
-    public ManaCosts<ManaCost> getManaCost(CardInfo.ManaCostSide manaCostSide) {
+    @Override
+    public List<String> getManaCostSymbols() {
+        return getManaCostStr(CardInfo.ManaCostSide.ALL);
+    }
+
+    @Override
+    public int getConvertedManaCost() {
+        return this.convertedManaCost;
+    }
+
+    public List<String> getManaCostStr(CardInfo.ManaCostSide manaCostSide) {
         switch (manaCostSide) {
             case LEFT:
-                return manaCostLeft;
+                return manaCostLeftStr;
             case RIGHT:
-                return manaCostRight;
+                return manaCostRightStr;
             default:
             case ALL:
-                return manaCost;
+                return manaCostStr;
         }
     }
 
@@ -146,14 +171,6 @@ public class MockCard extends CardImpl {
         } catch (NumberFormatException e) {
             return new MageInt(0, value);
         }
-    }
-
-    private String join(List<String> strings) {
-        StringBuilder sb = new StringBuilder();
-        for (String string : strings) {
-            sb.append(string);
-        }
-        return sb.toString();
     }
 
     private Ability textAbilityFromString(final String text) {

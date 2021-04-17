@@ -16,11 +16,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 import mage.util.CardUtil;
-import mage.watchers.common.CastSpellLastTurnWatcher;
+import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -64,7 +68,7 @@ public final class InvasionOfTheGiants extends CardImpl {
         // III — The next Giant spell you cast this turns costs {2} less to cast.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new InvasionOfTheGiantsEffect());
 
-        this.addAbility(sagaAbility);
+        this.addAbility(sagaAbility, new InvasionOfTheGiantsWatcher());
     }
 
     private InvasionOfTheGiants(final InvasionOfTheGiants card) {
@@ -94,9 +98,9 @@ class InvasionOfTheGiantsEffect extends CostModificationEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
+        InvasionOfTheGiantsWatcher watcher = game.getState().getWatcher(InvasionOfTheGiantsWatcher.class);
         if (watcher != null) {
-            spellsCast = watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId());
+            spellsCast = watcher.getCount(source.getControllerId());
         }
     }
 
@@ -108,11 +112,11 @@ class InvasionOfTheGiantsEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
+        InvasionOfTheGiantsWatcher watcher = game.getState().getWatcher(InvasionOfTheGiantsWatcher.class);
         if (watcher == null) {
             return false;
         }
-        if (watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) > spellsCast) {
+        if (watcher.getCount(source.getControllerId()) > spellsCast) {
             discard(); // only one use
             return false;
         }
@@ -127,5 +131,35 @@ class InvasionOfTheGiantsEffect extends CostModificationEffectImpl {
     @Override
     public InvasionOfTheGiantsEffect copy() {
         return new InvasionOfTheGiantsEffect(this);
+    }
+}
+
+class InvasionOfTheGiantsWatcher extends Watcher {
+
+    private final Map<UUID, Integer> playerMap = new HashMap<>();
+
+    InvasionOfTheGiantsWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST) {
+            return;
+        }
+        Spell spell = game.getSpell(event.getSourceId());
+        if (spell != null && spell.hasSubtype(SubType.GIANT, game)) {
+            playerMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        playerMap.clear();
+    }
+
+    int getCount(UUID playerId) {
+        return playerMap.getOrDefault(playerId, 0);
     }
 }

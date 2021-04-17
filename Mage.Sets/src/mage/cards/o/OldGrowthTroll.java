@@ -3,6 +3,7 @@ package mage.cards.o;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -169,6 +170,10 @@ class OldGrowthTrollContinuousEffect extends ContinuousEffectImpl {
                 troll.addSubType(game, SubType.AURA);
                 break;
             case AbilityAddingRemovingEffects_6:
+                // Spell Ability can be null with clone effects (ex. Moritte)
+                if (troll.getSpellAbility() == null) {
+                    troll.addAbility(new SpellAbility(null, null), source.getSourceId(), game);
+                }
                 troll.getSpellAbility().getTargets().clear();
                 troll.getSpellAbility().getEffects().clear();
                 TargetPermanent auraTarget = new TargetPermanent(filter);

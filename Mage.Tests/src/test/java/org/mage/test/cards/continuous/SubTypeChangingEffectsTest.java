@@ -472,4 +472,21 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
             }
         }
     }
+
+    @Test
+    public void testMaskwoodNexus3() {
+        addCard(Zone.BATTLEFIELD, playerB, "Sarkhan the Masterless");
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Maskwood Nexus");
+        addCard(Zone.BATTLEFIELD, playerA, "Bonebreaker Giant");
+
+        attack(1, playerA, "Bonebreaker Giant");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertDamageReceived(playerA, "Bonebreaker Giant", 3);
+    }
 }

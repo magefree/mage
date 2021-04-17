@@ -63,9 +63,7 @@ public class SpellsCostIncreasingAllEffect extends CostModificationEffectImpl {
 
         sb.append(" cost ");
         if (this.increaseManaCosts != null) {
-            for (String manaSymbol : this.increaseManaCosts.getSymbols()) {
-                sb.append(manaSymbol);
-            }
+            sb.append(this.increaseManaCosts.getText());
         } else {
             sb.append("{").append(increaseGenericCost).append("}");
         }

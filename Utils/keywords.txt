@@ -17,6 +17,7 @@ Cumulative upkeep|cost|
 Cycling|cost|
 Dash|card, manaString|
 Deathtouch|instance|
+Demonstrate|new|
 Delve|new|
 Dethrone|new|
 Devoid|color|
@@ -104,4 +105,5 @@ Undying|new|
 Unearth|cost|
 Unleash|new|
 Vigilance|instance|
+Ward|cost|
 Wither|instance|

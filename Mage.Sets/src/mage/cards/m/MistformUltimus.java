@@ -1,14 +1,12 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.IsAllCreatureTypesSourceEffect;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -26,7 +24,7 @@ public final class MistformUltimus extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Mistform Ultimus is every creature type.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new IsAllCreatureTypesSourceEffect()));
+        this.addAbility(new ChangelingAbility(false));
     }
 
     private MistformUltimus(final MistformUltimus card) {

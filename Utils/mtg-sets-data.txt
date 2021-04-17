@@ -35,6 +35,7 @@ Commander 2017 Edition|C17|
 Commander 2018 Edition|C18|
 Commander 2019 Edition|C19|
 Commander 2020 Edition|C20|
+Commander 2021 Edition|C21|
 Commander Legends|CMR|
 Champions of Kamigawa|CHK|
 Chronicles|CHR|
@@ -181,6 +182,7 @@ Rise of the Eldrazi|ROE|
 Return to Ravnica|RTR|
 Starter 2000|S00|
 Starter 1999|S99|
+Strixhaven: School of Mages|STX|
 Scourge|SCG|
 Secret Lair|SLD|
 Shadowmoor|SHM|

@@ -489,10 +489,14 @@ public class ScryfallImageSupportCards {
             add("AKR"); // Amonkhet Remastered
             add("ZNR"); // Zendikar Rising
             add("ZNC"); // Zendikar Rising Commander
+            add("ZNE"); // Zendikar Rising Expeditions
+            add("KLR"); // Kaladesh Remastered
             add("CMR"); // Commander Legends
             add("CC1"); // Commander Collection: Green
             add("KHM"); // Kaldheim
             add("KHC"); // Kaldheim Commander
+            add("TSR"); // Time Spiral Remastered
+            add("STX"); // Strixhaven: School of Mages
         }
     };
 

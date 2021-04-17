@@ -1,11 +1,13 @@
 package mage.cards.c;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -67,15 +69,8 @@ class CryOfTheCarnariumExileEffect extends OneShotEffect {
         if (player == null || watcher == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        for (MageObjectReference mor : watcher.getCardsPutToGraveyardFromBattlefield()) {
-            if (game.getState().getZoneChangeCounter(mor.getSourceId()) == mor.getZoneChangeCounter()) {
-                Card card = mor.getCard(game);
-                if (card != null && card.isCreature()) {
-                    cards.add(card);
-                }
-            }
-        }
+        Cards cards = new CardsImpl(watcher.getCardsPutToGraveyardFromBattlefield(game));
+        cards.removeIf(uuid -> !game.getCard(uuid).isCreature());
         player.moveCards(cards, Zone.EXILED, source, game);
         return true;
     }

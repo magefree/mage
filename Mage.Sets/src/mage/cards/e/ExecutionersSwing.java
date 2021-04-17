@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.HashSet;
@@ -11,7 +10,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -23,12 +25,13 @@ import mage.watchers.common.SourceDidDamageWatcher;
  */
 public final class ExecutionersSwing extends CardImpl {
 
+    private static final FilterPermanent filter=new FilterCreaturePermanent("creature that dealt damage this turn");static {filter.add(ExecutionersSwingPredicate.instance);}
     public ExecutionersSwing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}{B}");
 
         // Target creature that dealt damage this turn gets -5/-5 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5, -5, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentThatDealtDamageThisTurn());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         this.getSpellAbility().addWatcher(new SourceDidDamageWatcher());
     }
@@ -42,71 +45,12 @@ public final class ExecutionersSwing extends CardImpl {
         return new ExecutionersSwing(this);
     }
 }
-
-class TargetCreaturePermanentThatDealtDamageThisTurn extends TargetPermanent {
-
-    public TargetCreaturePermanentThatDealtDamageThisTurn() {
-        super(1, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false);
-        targetName = "creature that dealt damage this turn";
-    }
-
-    public TargetCreaturePermanentThatDealtDamageThisTurn(final TargetCreaturePermanentThatDealtDamageThisTurn target) {
-        super(target);
-    }
+enum ExecutionersSwingPredicate implements Predicate<Permanent>{
+   instance ;
 
     @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        SourceDidDamageWatcher watcher = game.getState().getWatcher(SourceDidDamageWatcher.class);
-        if (watcher != null) {
-            if (watcher.damageSources.contains(id)) {
-                return super.canTarget(id, source, game);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        int remainingTargets = this.minNumberOfTargets - targets.size();
-        if (remainingTargets <= 0) {
-            return true;
-        }
-        int count = 0;
-        MageObject targetSource = game.getObject(sourceId);
-        SourceDidDamageWatcher watcher = game.getState().getWatcher(SourceDidDamageWatcher.class);
-        if (watcher != null && targetSource != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
-                if (!targets.containsKey(permanent.getId()) && watcher.damageSources.contains(permanent.getId())) {
-                    if (!notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                        count++;
-                        if (count >= remainingTargets) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
-        Set<UUID> possibleTargets = new HashSet<>();
-        SourceDidDamageWatcher watcher = game.getState().getWatcher(SourceDidDamageWatcher.class);
-        if (watcher != null) {
-            for (UUID targetId : availablePossibleTargets) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null && !targets.containsKey(permanent.getId()) && watcher.damageSources.contains(targetId)) {
-                    possibleTargets.add(targetId);
-                }
-            }
-        }
-        return possibleTargets;
-    }
-
-    @Override
-    public TargetCreaturePermanentThatDealtDamageThisTurn copy() {
-        return new TargetCreaturePermanentThatDealtDamageThisTurn(this);
+    public boolean apply(Permanent input, Game game) {
+        SourceDidDamageWatcher watcher=game.getState().getWatcher(SourceDidDamageWatcher.class);
+        return watcher!=null&&watcher.checkSource(input,game);
     }
 }

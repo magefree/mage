@@ -12,6 +12,7 @@ public enum SubType {
     //205.3k Instants and sorceries share their lists of subtypes; these subtypes are called spell types.
     ADVENTURE("Adventure", SubTypeSet.SpellType),
     ARCANE("Arcane", SubTypeSet.SpellType),
+    LESSON("Lesson", SubTypeSet.SpellType),
     TRAP("Trap", SubTypeSet.SpellType),
     // 205.3i: Lands have their own unique set of subtypes; these subtypes are called land types.
     // Of that list, Forest, Island, Mountain, Plains, and Swamp are the basic land types.
@@ -146,6 +147,7 @@ public enum SubType {
     FISH("Fish", SubTypeSet.CreatureType),
     FLAGBEARER("Flagbearer", SubTypeSet.CreatureType),
     FOX("Fox", SubTypeSet.CreatureType),
+    FRACTAL("Fractal", SubTypeSet.CreatureType),
     FROG("Frog", SubTypeSet.CreatureType),
     FUNGUS("Fungus", SubTypeSet.CreatureType),
     // G
@@ -184,6 +186,7 @@ public enum SubType {
     ILLUSION("Illusion", SubTypeSet.CreatureType),
     IMP("Imp", SubTypeSet.CreatureType),
     INCARNATION("Incarnation", SubTypeSet.CreatureType),
+    INKLING("Inkling", SubTypeSet.CreatureType),
     INSECT("Insect", SubTypeSet.CreatureType),
     ITHORIAN("Ithorian", SubTypeSet.CreatureType, true), // Star Wars
     // J

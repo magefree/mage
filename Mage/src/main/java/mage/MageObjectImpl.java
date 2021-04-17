@@ -9,6 +9,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.text.TextPart;
 import mage.abilities.text.TextPartSubType;
@@ -57,7 +58,7 @@ public abstract class MageObjectImpl implements MageObject {
         color = new ObjectColor();
         frameColor = new ObjectColor();
         frameStyle = FrameStyle.M15_NORMAL;
-        manaCost = new ManaCostsImpl<>("");
+        manaCost = new ManaCostsImpl<>();
         abilities = new AbilitiesImpl<>();
         textParts = new ArrayList<>();
     }
@@ -240,11 +241,13 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public final void adjustCosts(Ability ability, Game game) {
+        ability.adjustCosts(game);
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
+    public final void adjustTargets(Ability ability, Game game) {
+        ability.adjustTargets(game);
     }
 
     @Override
@@ -291,6 +294,9 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public boolean isAllCreatureTypes(Game game) {
+        if (game == null) {
+            return this.getAbilities().containsClass(ChangelingAbility.class);
+        }
         return this.getSubtype(game).isAllCreatureTypes();
     }
 
@@ -338,5 +344,10 @@ public abstract class MageObjectImpl implements MageObject {
                 }
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return getIdName() + " (" + super.getClass().getSuperclass().getSimpleName() + " -> " + this.getClass().getSimpleName() + ")";
     }
 }

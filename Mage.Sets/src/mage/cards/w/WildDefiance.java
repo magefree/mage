@@ -67,7 +67,7 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
             MageObject object = game.getObject(event.getSourceId());
             if (object instanceof Spell) {
                 Card c = (Spell) object;
-                if (c.isInstant() || c.isSorcery()) {
+                if (c.isInstantOrSorcery()) {
                     if (getTargets().isEmpty()) {
                         for (Effect effect : getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getTargetId()));

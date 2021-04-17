@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,20 +10,17 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.DamageCreatureEvent;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author stravant
  */
 public final class SoulScarMage extends CardImpl {
@@ -84,19 +80,15 @@ class SoulScarMageDamageReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        UUID sourceControllerId = game.getControllerId(event.getSourceId());
-        UUID targetControllerId = game.getControllerId(event.getTargetId());
-        UUID controllerId = source.getControllerId();
-        boolean weControlSource = controllerId.equals(sourceControllerId);
-        boolean opponentControlsTarget = game.getOpponents(sourceControllerId).contains(targetControllerId);
-        boolean isNoncombatDamage = !((DamageCreatureEvent) event).isCombatDamage();
-        return weControlSource
-                && isNoncombatDamage
-                && opponentControlsTarget;
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null
+                && permanent.isCreature()
+                && !((DamageEvent) event).isCombatDamage()
+                && game.getOpponents(permanent.getControllerId()).contains(source.getControllerId());
     }
 }

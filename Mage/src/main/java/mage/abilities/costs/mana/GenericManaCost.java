@@ -75,5 +75,4 @@ public class GenericManaCost extends ManaCostImpl {
     public boolean containsColor(ColoredManaSymbol coloredManaSymbol) {
         return false;
     }
-
 }

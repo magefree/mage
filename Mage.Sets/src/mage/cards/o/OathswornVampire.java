@@ -1,29 +1,21 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.YouGainedLifeCondition;
+import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class OathswornVampire extends CardImpl {
@@ -40,7 +32,9 @@ public final class OathswornVampire extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // You may cast Oathsworn Vampire from your graveyard if you gained life this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new OathswornVampirePlayEffect()), new PlayerGainedLifeWatcher());
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL, new OathswornVampirePlayEffect()
+        ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private OathswornVampire(final OathswornVampire card) {
@@ -55,17 +49,13 @@ public final class OathswornVampire extends CardImpl {
 
 class OathswornVampirePlayEffect extends AsThoughEffectImpl {
 
-    private Condition condition;
-
-    public OathswornVampirePlayEffect() {
+    OathswornVampirePlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard if you gained life this turn";
-        condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0);
     }
 
-    public OathswornVampirePlayEffect(final OathswornVampirePlayEffect effect) {
+    private OathswornVampirePlayEffect(final OathswornVampirePlayEffect effect) {
         super(effect);
-        this.condition = effect.condition;
     }
 
     @Override
@@ -80,13 +70,15 @@ class OathswornVampirePlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(source.getSourceId()) && source.isControlledBy(affectedControllerId)) {
-            Card card = game.getCard(source.getSourceId());
-            if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                return condition.apply(game, source);
-            }
+        PlayerGainedLifeWatcher watcher = game.getState().getWatcher(PlayerGainedLifeWatcher.class);
+        if (watcher == null
+                || watcher.getLifeGained(source.getControllerId()) < 1
+                || !sourceId.equals(source.getSourceId())
+                || !source.isControlledBy(affectedControllerId)) {
+            return false;
         }
-        return false;
+        Card card = game.getCard(source.getSourceId());
+        return card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD;
     }
 
 }

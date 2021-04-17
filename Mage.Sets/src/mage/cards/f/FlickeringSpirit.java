@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,9 +15,11 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class FlickeringSpirit extends CardImpl {
@@ -34,8 +34,7 @@ public final class FlickeringSpirit extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}{W}: Exile Flickering Spirit, then return it to the battlefield under its owner's control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FlickeringSpiritEffect(), new ManaCostsImpl("{3}{W}")));
-
+        this.addAbility(new SimpleActivatedAbility(new FlickeringSpiritEffect(), new ManaCostsImpl("{3}{W}")));
     }
 
     private FlickeringSpirit(final FlickeringSpirit card) {
@@ -50,12 +49,12 @@ public final class FlickeringSpirit extends CardImpl {
 
 class FlickeringSpiritEffect extends OneShotEffect {
 
-    public FlickeringSpiritEffect() {
+    FlickeringSpiritEffect() {
         super(Outcome.Neutral);
         this.staticText = "Exile {this}, then return it to the battlefield under its owner's control";
     }
 
-    public FlickeringSpiritEffect(final FlickeringSpiritEffect effect) {
+    private FlickeringSpiritEffect(final FlickeringSpiritEffect effect) {
         super(effect);
     }
 
@@ -66,15 +65,14 @@ class FlickeringSpiritEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Flickering Spirit", source, game)) {
-                Card card = game.getExile().getCard(source.getSourceId(), game);
-                if (card != null) {
-                    return card.moveToZone(Zone.BATTLEFIELD, source, game, false);
-                }
-            }
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null || player == null) {
+            return false;
         }
-        return false;
+        Card card = permanent.getMainCard();
+        player.moveCards(card, Zone.EXILED, source, game);
+        player.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
+        return true;
     }
 }

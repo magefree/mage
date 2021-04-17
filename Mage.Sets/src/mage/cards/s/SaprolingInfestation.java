@@ -20,7 +20,6 @@ public final class SaprolingInfestation extends CardImpl {
     public SaprolingInfestation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
-
         // Whenever a player kicks a spell, you put a 1/1 green Saproling creature token onto the battlefield.
         this.addAbility(new SaprolingInfestationTriggeredAbility());
     }
@@ -34,13 +33,13 @@ public final class SaprolingInfestation extends CardImpl {
         return new SaprolingInfestation(this);
     }
 
-    class SaprolingInfestationTriggeredAbility extends TriggeredAbilityImpl {
+    private static final class SaprolingInfestationTriggeredAbility extends TriggeredAbilityImpl {
 
-        SaprolingInfestationTriggeredAbility() {
+        private SaprolingInfestationTriggeredAbility() {
             super(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), false);
         }
 
-        SaprolingInfestationTriggeredAbility(final SaprolingInfestationTriggeredAbility ability) {
+        private SaprolingInfestationTriggeredAbility(final SaprolingInfestationTriggeredAbility ability) {
             super(ability);
         }
 
@@ -61,7 +60,7 @@ public final class SaprolingInfestation extends CardImpl {
 
         @Override
         public String getRule() {
-            return "Whenever a player kicks a spell, you put a 1/1 green Saproling creature token onto the battlefield.";
+            return "Whenever a player kicks a spell, you creat a 1/1 green Saproling creature token.";
         }
     }
 }

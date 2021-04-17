@@ -32,6 +32,7 @@ public enum AbilityWord {
     LANDFALL("Landfall"),
     LIEUTENANT("Lieutenant"),
     METALCRAFT("Metalcraft"),
+    MAGECRAFT("Magecraft"),
     MORBID("Morbid"),
     PARLEY("Parley"),
     RADIANCE("Radiance"),

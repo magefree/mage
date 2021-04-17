@@ -90,9 +90,8 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
         you.setTopCardRevealed(true);
 
         // cast copy
-
         if (topCard.isInstantOrSorcery()
-                && you.chooseUse(outcome, "Would you like to copy " + topCard.getName() + " and cast it for {2} less?", source, game)) {
+                && you.chooseUse(outcome, "Copy " + topCard.getName() + " and cast it for {2} less?", source, game)) {
             Card blueprint = topCard.copy();
             if (blueprint instanceof SplitCard) {
                 ((SplitCard) blueprint).getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
@@ -105,7 +104,9 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
             }
             Card copiedCard = game.copyCard(blueprint, source, source.getControllerId());
             you.moveCardToHandWithInfo(copiedCard, source, game, true); // The copy is created in and cast from your hand. (2019-05-03)
+            game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
             you.cast(you.chooseAbilityForCast(copiedCard, game, false), game, false, new ApprovingObject(source, game));
+            game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
         }
 
         // draw (return false for default draw)
@@ -156,7 +157,7 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
         String mes = topCard.getName() + ", " + (topCard.isInstantOrSorcery()
                 ? HintUtils.prepareText("you can copy it and cast {2} less", Color.green)
                 : HintUtils.prepareText("you can't copy it", Color.red));
-        return you.chooseUse(Outcome.Benefit, "Would you like to reveal first drawn card (" + mes + ")?", source, game);
+        return you.chooseUse(Outcome.Benefit, "Reveal first drawn card (" + mes + ")?", source, game);
     }
 
 }

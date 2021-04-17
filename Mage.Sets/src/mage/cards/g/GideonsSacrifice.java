@@ -107,9 +107,8 @@ class GideonsSacrificeEffectReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         switch (event.getType()) {
-            case DAMAGE_CREATURE:
             case DAMAGE_PLAYER:
-            case DAMAGE_PLANESWALKER:
+            case DAMAGE_PERMANENT:
                 return true;
             default:
                 return false;
@@ -122,8 +121,7 @@ class GideonsSacrificeEffectReplacementEffect extends ReplacementEffectImpl {
                 && event.getPlayerId().equals(source.getControllerId())) {
             return true;
         }
-        if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE
-                || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER) {
+        if (event.getType() == GameEvent.EventType.DAMAGE_PERMANENT) {
             Permanent targetPermanent = game.getPermanent(event.getTargetId());
             if (targetPermanent != null
                     && targetPermanent.isControlledBy(source.getControllerId())) {

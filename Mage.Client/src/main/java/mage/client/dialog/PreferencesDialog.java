@@ -739,8 +739,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         showAbilityPickerForced.setSelected(true);
-        showAbilityPickerForced.setText("Show ability picker for abilities or spells without costs");
-        showAbilityPickerForced.setToolTipText("This prevents you from accidently activating abilities without other costs than tapping or casting spells with 0 mana costs.");
+        showAbilityPickerForced.setText("Show ability picker for 1 available option (spells without costs, mdf/split side, adventure)");
+        showAbilityPickerForced.setToolTipText("This prevents you from accidently activating abilities what you don't want (example: if you haven't mana to cast main side, but clicks on mdf card and play land instead)");
         showAbilityPickerForced.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         showAbilityPickerForced.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

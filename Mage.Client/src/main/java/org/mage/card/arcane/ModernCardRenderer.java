@@ -221,7 +221,7 @@ public class ModernCardRenderer extends CardRenderer {
         super(card);
 
         // Mana cost string
-        manaCostString = ManaSymbols.getStringManaCost(cardView.getManaCost());
+        manaCostString = ManaSymbols.getClearManaCost(cardView.getManaCostStr());
     }
 
     @Override

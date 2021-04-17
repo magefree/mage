@@ -73,7 +73,11 @@ class LimDulsVaultEffect extends OneShotEffect {
                 player.shuffleLibrary(source, game);
                 player.putCardsOnTopOfLibrary(cards, game, source, true);
             }
-        } while (doAgain && player.isHuman()); // AI must stop using it as infinite
+            // AI must stop using it as infinite
+            if (player.isComputer()) {
+                break;
+            }
+        } while (doAgain);
 
         return true;
     }

@@ -21,6 +21,7 @@ import mage.filter.Filter;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -133,15 +134,22 @@ public final class CardUtil {
     }
 
     private static ManaCosts<ManaCost> adjustCost(ManaCosts<ManaCost> manaCosts, int reduceCount) {
-        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
+        ManaCosts<ManaCost> newCost = new ManaCostsImpl<>();
 
         // nothing to change
         if (reduceCount == 0) {
             for (ManaCost manaCost : manaCosts) {
-                adjustedCost.add(manaCost.copy());
+                newCost.add(manaCost.copy());
             }
-            return adjustedCost;
+            return newCost;
         }
+
+        // keep same order for costs
+        Map<ManaCost, ManaCost> changedCost = new LinkedHashMap<>(); // must be ordered
+        List<ManaCost> addedCost = new ArrayList<>();
+        manaCosts.forEach(manaCost -> {
+            changedCost.put(manaCost, manaCost);
+        });
 
         // remove or save cost
         if (reduceCount > 0) {
@@ -149,13 +157,14 @@ public final class CardUtil {
 
             // first run - priority for single option costs (generic)
             for (ManaCost manaCost : manaCosts) {
+
+                // ignore snow mana
                 if (manaCost instanceof SnowManaCost) {
-                    adjustedCost.add(manaCost);
                     continue;
                 }
 
+                // ignore unknown mana
                 if (manaCost.getOptions().size() == 0) {
-                    adjustedCost.add(manaCost);
                     continue;
                 }
 
@@ -171,15 +180,15 @@ public final class CardUtil {
                     if ((colorless - restToReduce) > 0) {
                         // partly reduce
                         int newColorless = colorless - restToReduce;
-                        adjustedCost.add(new GenericManaCost(newColorless));
+                        changedCost.put(manaCost, new GenericManaCost(newColorless));
                         restToReduce = 0;
                     } else {
                         // full reduce - ignore cost
+                        changedCost.put(manaCost, null);
                         restToReduce -= colorless;
                     }
                 } else {
                     // nothing to reduce
-                    adjustedCost.add(manaCost.copy());
                 }
             }
 
@@ -203,22 +212,21 @@ public final class CardUtil {
                         if ((colorless - restToReduce) > 0) {
                             // partly reduce
                             int newColorless = colorless - restToReduce;
-                            adjustedCost.add(new MonoHybridManaCost(mono.getManaColor(), newColorless));
+                            changedCost.put(manaCost, new MonoHybridManaCost(mono.getManaColor(), newColorless));
                             restToReduce = 0;
                         } else {
                             // full reduce
-                            adjustedCost.add(new MonoHybridManaCost(mono.getManaColor(), 0));
+                            changedCost.put(manaCost, new MonoHybridManaCost(mono.getManaColor(), 0));
                             restToReduce -= colorless;
                         }
                     } else {
                         // nothing to reduce
-                        adjustedCost.add(mono.copy());
                     }
                     continue;
                 }
 
                 // unsupported multi-option mana types for reduce (like HybridManaCost)
-                adjustedCost.add(manaCost.copy());
+                // nothing to do
             }
         }
 
@@ -226,22 +234,38 @@ public final class CardUtil {
         if (reduceCount < 0) {
             boolean added = false;
             for (ManaCost manaCost : manaCosts) {
+                // ignore already reduced cost (add new cost to the start)
+                if (changedCost.get(manaCost) == null) {
+                    continue;
+                }
+
+                // add to existing cost
                 if (reduceCount != 0 && manaCost instanceof GenericManaCost) {
-                    // add increase cost to existing generic
                     GenericManaCost gen = (GenericManaCost) manaCost;
-                    adjustedCost.add(new GenericManaCost(gen.getOptions().get(0).getGeneric() + -reduceCount));
+                    changedCost.put(manaCost, new GenericManaCost(gen.getOptions().get(0).getGeneric() + -reduceCount));
                     reduceCount = 0;
                     added = true;
                 } else {
                     // non-generic mana
-                    adjustedCost.add(manaCost.copy());
                 }
             }
+
+            // add as new cost
             if (!added) {
-                // add increase cost as new
-                adjustedCost.add(new GenericManaCost(-reduceCount));
+                addedCost.add(new GenericManaCost(-reduceCount));
             }
         }
+
+        // collect final result
+        addedCost.forEach(cost -> {
+            newCost.add(cost.copy());
+        });
+        changedCost.forEach((key, value) -> {
+            // ignore fully reduced and add changed
+            if (value != null) {
+                newCost.add(value.copy());
+            }
+        });
 
         // cost modifying effects requiring snow mana unnecessarily (fixes #6000)
         Filter filter = manaCosts.stream()
@@ -251,9 +275,10 @@ public final class CardUtil {
                 .findFirst()
                 .orElse(null);
         if (filter != null) {
-            adjustedCost.setSourceFilter(filter);
+            newCost.setSourceFilter(filter);
         }
-        return adjustedCost;
+
+        return newCost;
     }
 
     public static void reduceCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
@@ -562,6 +587,10 @@ public final class CardUtil {
         return getExileZoneId(getCardZoneString(SOURCE_EXILE_ZONE_TEXT, sourceId, game, previous), game);
     }
 
+    public static UUID getExileZoneId(Game game, Ability source) {
+        return getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+    }
+
     public static UUID getExileZoneId(Game game, UUID objectId, int zoneChangeCounter) {
         return getExileZoneId(getObjectZoneString(SOURCE_EXILE_ZONE_TEXT, objectId, game, zoneChangeCounter, false), game);
     }
@@ -788,6 +817,15 @@ public final class CardUtil {
             res.add(delimeter);
         }
         res.addAll(mana2);
+        return res;
+    }
+
+    public static String concatManaSymbols(String delimeter, String mana1, String mana2) {
+        String res = mana1;
+        if (!res.isEmpty() && !mana2.isEmpty() && delimeter != null && !delimeter.isEmpty()) {
+            res += delimeter;
+        }
+        res += mana2;
         return res;
     }
 
@@ -1065,8 +1103,8 @@ public final class CardUtil {
         }
     }
 
-    public static void makeCardPlayableAndSpendManaAsAnyColor(Game game, Ability source, Card card, Duration duration) {
-        makeCardPlayableAndSpendManaAsAnyColor(game, source, card, duration, null);
+    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor) {
+        makeCardPlayable(game, source, card, duration, anyColor, null);
     }
 
     /**
@@ -1078,9 +1116,10 @@ public final class CardUtil {
      * @param game
      * @param card
      * @param duration
+     * @param anyColor
      * @param condition can be null
      */
-    public static void makeCardPlayableAndSpendManaAsAnyColor(Game game, Ability source, Card card, Duration duration, Condition condition) {
+    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, Condition condition) {
         // Effect can be used for cards in zones and permanents on battlefield
         // PermanentCard's ZCC is static, but we need updated ZCC from the card (after moved to another zone)
         // So there is a workaround to get actual card's ZCC
@@ -1088,7 +1127,9 @@ public final class CardUtil {
         UUID objectId = card.getMainCard().getId();
         int zcc = game.getState().getZoneChangeCounter(objectId);
         game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, condition), source);
-        game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
+        if (anyColor) {
+            game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
+        }
     }
 
     /**
@@ -1188,38 +1229,44 @@ public final class CardUtil {
      * @return
      */
     public static Set<UUID> getObjectParts(MageObject object) {
-        Set<UUID> res = new HashSet<>();
+        Set<UUID> res = new LinkedHashSet<>(); // set must be ordered
+        List<MageObject> allParts = getObjectPartsAsObjects(object);
+        allParts.forEach(part -> {
+            res.add(part.getId());
+        });
+        return res;
+    }
+
+    public static List<MageObject> getObjectPartsAsObjects(MageObject object) {
+        List<MageObject> res = new ArrayList<>();
         if (object == null) {
             return res;
         }
 
         if (object instanceof SplitCard || object instanceof SplitCardHalf) {
             SplitCard mainCard = (SplitCard) ((Card) object).getMainCard();
-            res.add(object.getId());
-            res.add(mainCard.getId());
-            res.add(mainCard.getLeftHalfCard().getId());
-            res.add(mainCard.getRightHalfCard().getId());
+            res.add(mainCard);
+            res.add(mainCard.getLeftHalfCard());
+            res.add(mainCard.getRightHalfCard());
         } else if (object instanceof ModalDoubleFacesCard || object instanceof ModalDoubleFacesCardHalf) {
             ModalDoubleFacesCard mainCard = (ModalDoubleFacesCard) ((Card) object).getMainCard();
-            res.add(object.getId());
-            res.add(mainCard.getId());
-            res.add(mainCard.getLeftHalfCard().getId());
-            res.add(mainCard.getRightHalfCard().getId());
+            res.add(mainCard);
+            res.add(mainCard.getLeftHalfCard());
+            res.add(mainCard.getRightHalfCard());
         } else if (object instanceof AdventureCard || object instanceof AdventureCardSpell) {
             AdventureCard mainCard = (AdventureCard) ((Card) object).getMainCard();
-            res.add(object.getId());
-            res.add(mainCard.getId());
-            res.add(mainCard.getSpellCard().getId());
+            res.add(mainCard);
+            res.add(mainCard.getSpellCard());
         } else if (object instanceof Spell) {
             // example: activate Lightning Storm's ability from the spell on the stack
-            res.add(object.getId());
-            res.addAll(getObjectParts(((Spell) object).getCard()));
+            res.add(object);
+            res.addAll(getObjectPartsAsObjects(((Spell) object).getCard()));
         } else if (object instanceof Commander) {
             // commander can contains double sides
-            res.add(object.getId());
-            res.addAll(getObjectParts(((Commander) object).getSourceObject()));
+            res.add(object);
+            res.addAll(getObjectPartsAsObjects(((Commander) object).getSourceObject()));
         } else {
-            res.add(object.getId());
+            res.add(object);
         }
         return res;
     }
@@ -1232,5 +1279,51 @@ public final class CardUtil {
             res = defaultValue;
         }
         return res;
+    }
+
+    /**
+     * Find mapping from original to copied card (e.g. map original left side with copied left side)
+     *
+     * @param originalCard
+     * @param copiedCard
+     * @return
+     */
+    public static Map<UUID, MageObject> getOriginalToCopiedPartsMap(Card originalCard, Card copiedCard) {
+        List<UUID> oldIds = new ArrayList<>(CardUtil.getObjectParts(originalCard));
+        List<MageObject> newObjects = new ArrayList<>(CardUtil.getObjectPartsAsObjects(copiedCard));
+        if (oldIds.size() != newObjects.size()) {
+            throw new IllegalStateException("Found wrong card parts after copy: " + originalCard.getName() + " -> " + copiedCard.getName());
+        }
+
+        Map<UUID, MageObject> mapOldToNew = new HashMap<>();
+        for (int i = 0; i < oldIds.size(); i++) {
+            mapOldToNew.put(oldIds.get(i), newObjects.get(i));
+        }
+        return mapOldToNew;
+    }
+
+    /**
+     * Return turn info for game. Uses in game logs and debug.
+     *
+     * @param game
+     * @return
+     */
+    public static String getTurnInfo(Game game) {
+        return getTurnInfo(game == null ? null : game.getState());
+    }
+
+    public static String getTurnInfo(GameState gameState) {
+        // no turn info
+        if (gameState == null) {
+            return null;
+        }
+
+        // not started game
+        if (gameState.getTurn().getStep() == null) {
+            return "T0";
+        }
+
+        // normal game
+        return "T" + gameState.getTurnNum() + "." + gameState.getTurn().getStep().getType().getStepShortText();
     }
 }

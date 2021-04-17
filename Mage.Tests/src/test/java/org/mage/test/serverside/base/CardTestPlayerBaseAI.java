@@ -13,6 +13,10 @@ import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
 import java.io.FileNotFoundException;
 
 /**
+ * PlayerA is full AI player and process all actions as AI logic. You don't need aiXXX commands in that tests.
+ *
+ * If you need custom AI tests then use CardTestPlayerBaseWithAIHelps with aiXXX commands
+ *
  * @author LevelX2
  */
 public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
@@ -33,6 +37,7 @@ public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
         if (name.equals("PlayerA")) {
             TestPlayer testPlayer = new TestPlayer(new TestComputerPlayer7("PlayerA", RangeOfInfluence.ONE, skill));
             testPlayer.setAIPlayer(true);
+            testPlayer.setAIRealGameSimulation(true); // enable AI logic simulation for all turns by default
             return testPlayer;
         }
         return super.createPlayer(name, rangeOfInfluence);

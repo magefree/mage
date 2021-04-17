@@ -24,12 +24,10 @@ public final class ThirstForKnowledge extends CardImpl {
 
         // Draw three cards. Then discard two cards unless you discard an artifact card.
         DiscardCardCost cost = new DiscardCardCost(filter);
-        cost.setText("discard one artifact card instead two cards");
+        cost.setText("discard an artifact card instead of discarding two cards");
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         this.getSpellAbility().addEffect(new DoIfCostPaid(
-                null,
-                new DiscardControllerEffect(2),
-                cost
+                null, new DiscardControllerEffect(2), cost
         ).setText("Then discard two cards unless you discard an artifact card"));
     }
 

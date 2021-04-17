@@ -123,7 +123,7 @@ public class RandomPlayer extends ComputerPlayer {
 
     @Override
     public boolean triggerAbility(TriggeredAbility source, Game game) {
-        if (source != null && source.canChooseTarget(game)) {
+        if (source != null && source.canChooseTarget(game, playerId)) {
             Ability ability;
             List<Ability> options = getPlayableOptions(source, game);
             if (options.isEmpty()) {

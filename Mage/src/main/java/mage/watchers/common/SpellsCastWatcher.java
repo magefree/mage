@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.watchers.common;
 
 import mage.MageObject;
@@ -15,14 +10,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
- *
  * @author LevelX2
  */
 public class SpellsCastWatcher extends Watcher {
@@ -78,11 +68,11 @@ public class SpellsCastWatcher extends Watcher {
     }
 
     public List<Spell> getSpellsCastThisTurn(UUID playerId) {
-        return spellsCast.get(playerId);
+        return spellsCast.computeIfAbsent(playerId, x -> new ArrayList<>());
     }
 
     public List<Spell> getSpellsCastFromGraveyardThisTurn(UUID playerId) {
-        return spellsCastFromGraveyard.get(playerId);
+        return spellsCastFromGraveyard.computeIfAbsent(playerId, x -> new ArrayList<>());
     }
 
     public int getNumberOfNonCreatureSpells() {

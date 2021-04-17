@@ -57,7 +57,7 @@ class HollowOneReductionEffect extends CostModificationEffectImpl {
 
     public HollowOneReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {2} less to cast for each card you've cycled or discarded this turn";
+        staticText = "this spell costs {2} less to cast for each card you've cycled or discarded this turn";
     }
 
     protected HollowOneReductionEffect(HollowOneReductionEffect effect) {

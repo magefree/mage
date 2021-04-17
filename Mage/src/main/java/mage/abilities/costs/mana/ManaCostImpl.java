@@ -284,4 +284,8 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         }
     }
 
+    @Override
+    public String toString() {
+        return getText();
+    }
 }

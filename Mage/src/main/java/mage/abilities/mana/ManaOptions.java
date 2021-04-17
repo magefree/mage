@@ -589,7 +589,10 @@ public class ManaOptions extends ArrayList<Mana> {
                 list.add(s);
             }
         }
+
         // Remove fully included variations
+        // TODO: research too many manas and freeze (put 1 card to slow down, put 3 cards to freeze here)
+        //  battlefield:Human:Cascading Cataracts:1
         for (int i = this.size() - 1; i >= 0; i--) {
             for (int ii = 0; ii < i; ii++) {
                 Mana moreValuable = Mana.getMoreValuableMana(this.get(i), this.get(ii));

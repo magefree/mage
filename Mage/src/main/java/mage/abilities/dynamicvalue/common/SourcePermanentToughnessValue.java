@@ -1,5 +1,3 @@
-
-
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
@@ -12,22 +10,24 @@ import mage.game.permanent.Permanent;
 import java.io.ObjectStreamException;
 
 /**
- *
  * @author LevelX2
  */
 
 public class SourcePermanentToughnessValue implements DynamicValue {
-    
-    private static final SourcePermanentToughnessValue instance =  new SourcePermanentToughnessValue();
-    
+
+    private static final SourcePermanentToughnessValue instance = new SourcePermanentToughnessValue();
+
     private Object readResolve() throws ObjectStreamException {
         return instance;
-    }   
-    
+    }
+
     public static SourcePermanentToughnessValue getInstance() {
         return instance;
     }
-    
+
+    private SourcePermanentToughnessValue() {
+    }
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent sourcePermanent = game.getPermanent(sourceAbility.getSourceId());

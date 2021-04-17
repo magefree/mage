@@ -26,7 +26,7 @@ public final class CrypticAnnelid extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Cryptic Annelid enters the battlefield, scry 1, then scry 2, then scry 3.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ScryEffect(1));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ScryEffect(1).setText("scry 1"));
         Effect effect = new ScryEffect(2);
         effect.setText(", then scry 2");
         ability.addEffect(effect);

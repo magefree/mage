@@ -578,4 +578,37 @@ public class CommandersCastTest extends CardTestCommander4Players {
         execute();
         assertAllCommandsUsed();
     }
+
+    @Test
+    public void test_Escape_CantBeCastableFromCommandZone() {
+        // Player order: A -> D -> C -> B
+
+        // When Uro enters the battlefield, sacrifice it unless it escaped.
+        // Whenever Uro enters the battlefield or attacks, you gain 3 life and draw a card, then you may put a land card from your hand onto the battlefield.
+        // Escape-{G}{G}{U}{U}, Exile five other cards from your graveyard.
+        addCard(Zone.COMMAND, playerA, "Uro, Titan of Nature's Wrath", 1); // {1}{G}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        //
+        addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears", 5);
+        addCard(Zone.HAND, playerA, "Swamp", 1);
+
+        checkPlayableAbility("normal cast allowed", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Uro, Titan of Nature's Wrath", true);
+        checkPlayableAbility("escape cast not allowed", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Uro, Titan of Nature's Wrath with Escape", false);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Uro, Titan of Nature's Wrath");
+        setChoice(playerA, "Whenever {this} enters the battlefield or attacks"); // gain life trigger first, sacrifice next
+        setChoice(playerA, "No"); // keep in graveyard
+        setChoice(playerA, "Yes"); // put land to battlefield
+        setChoice(playerA, "Swamp"); // put a Swamp
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerA, 20 + 3);
+        assertPermanentCount(playerA, "Swamp", 1);
+        assertGraveyardCount(playerA, "Uro, Titan of Nature's Wrath", 1); // sacrificed
+    }
 }

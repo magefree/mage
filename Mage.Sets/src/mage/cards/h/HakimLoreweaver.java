@@ -18,7 +18,7 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
+import mage.filter.predicate.card.AuraCardCanAttachToPermanentId;
 import mage.filter.predicate.permanent.AttachedToPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

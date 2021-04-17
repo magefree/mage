@@ -44,12 +44,12 @@ public final class GolemArtisan extends CardImpl {
 
         // {2}: Target artifact creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(2));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ARTIFACT_CREATURE_PERMANENT));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE));
         this.addAbility(ability);
 
         // {2}: Target artifact creature gains your choice of flying, trample, or haste until end of turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GolemArtisanEffect(), new GenericManaCost(2));
-        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ARTIFACT_CREATURE_PERMANENT));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE));
         this.addAbility(ability);
 
     }

@@ -1,25 +1,24 @@
 
 package mage.watchers.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class DamagedByWatcher extends Watcher {
 
-    public final Set<MageObjectReference> damagedBySource = new HashSet<>();
+    private final Set<MageObjectReference> damagedBySource = new HashSet<>();
 
     private final boolean watchPlaneswalkers;
 
@@ -30,12 +29,15 @@ public class DamagedByWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        boolean eventHasAppropriateType = (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) ||
-                (watchPlaneswalkers && event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER);
-        if (eventHasAppropriateType && sourceId.equals(event.getSourceId())) {
-            MageObjectReference mor = new MageObjectReference(event.getTargetId(), game);
-            damagedBySource.add(mor);
-
+        if (event.getType() != GameEvent.EventType.DAMAGED_PERMANENT) {
+            return;
+        }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null && !watchPlaneswalkers && !permanent.isCreature()) {
+            return;
+        }
+        if (sourceId.equals(event.getSourceId())) {
+            damagedBySource.add(new MageObjectReference(event.getTargetId(), game));
         }
     }
 

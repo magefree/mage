@@ -1,8 +1,6 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
@@ -14,8 +12,9 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Doublecast extends CardImpl {
@@ -43,11 +42,11 @@ public final class Doublecast extends CardImpl {
 
 class DoublecastAbility extends DelayedTriggeredAbility {
 
-    public DoublecastAbility() {
+    DoublecastAbility() {
         super(new CopyTargetSpellEffect(true), Duration.EndOfTurn);
     }
 
-    public DoublecastAbility(final DoublecastAbility ability) {
+    private DoublecastAbility(final DoublecastAbility ability) {
         super(ability);
     }
 
@@ -63,16 +62,15 @@ class DoublecastAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && (spell.isInstant() || spell.isSorcery())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                }
-                return true;
-            }
+        if (!isControlledBy(event.getPlayerId())) {
+            return false;
         }
-        return false;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell == null || !spell.isInstantOrSorcery()) {
+            return false;
+        }
+        this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+        return true;
     }
 
     @Override

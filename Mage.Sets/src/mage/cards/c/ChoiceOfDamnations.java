@@ -66,7 +66,7 @@ class ChoiceOfDamnationsEffect extends OneShotEffect {
 
             // AI hint
             int amount;
-            if (!targetPlayer.isHuman() && !targetPlayer.isTestMode()) {
+            if (targetPlayer.isComputer()) {
                 // AI as defender
                 int safeLifeToLost = Math.max(0, targetPlayer.getLife() / 2);
                 amount = Math.min(numberPermanents, safeLifeToLost);
@@ -80,7 +80,7 @@ class ChoiceOfDamnationsEffect extends OneShotEffect {
 
                 // AI hint
                 boolean chooseLoseLife;
-                if (!targetPlayer.isHuman() && !targetPlayer.isTestMode()) {
+                if (targetPlayer.isComputer()) {
                     // AI as attacker
                     chooseLoseLife = (numberPermanents == 0 || amount <= numberPermanents || targetPlayer.getLife() < amount);
                 } else {

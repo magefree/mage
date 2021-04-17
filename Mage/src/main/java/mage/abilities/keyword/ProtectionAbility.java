@@ -99,7 +99,7 @@ public class ProtectionAbility extends StaticAbility {
             // object is still a card and not a spell yet. So return only if the source object can't be a spell
             // otherwise the following FilterObject check will be applied
             if (source instanceof StackObject
-                    || (!source.isInstant() && !source.isSorcery())) {
+                    || !source.isInstantOrSorcery()) {
                 return true;
             }
         }
@@ -107,7 +107,7 @@ public class ProtectionAbility extends StaticAbility {
         // Emrakul, the Aeons Torn
         if (filter instanceof FilterStackObject) {
             if (filter.match(source, game)) {
-                return (!source.isInstantOrSorcery());
+                return !source.isInstantOrSorcery();
             }
         }
 

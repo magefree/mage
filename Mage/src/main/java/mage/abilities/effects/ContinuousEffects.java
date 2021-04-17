@@ -532,7 +532,10 @@ public class ContinuousEffects implements Serializable {
             }
 
             UUID idToCheck;
-            if (objectToCheck instanceof SplitCardHalf) {
+            if (!type.needPlayCardAbility() && objectToCheck instanceof SplitCardHalf) {
+                // each split side uses own characteristics to check for playing, all other cases must use main card
+                // rules:
+                // 708.4. In every zone except the stack, the characteristics of a split card are those of its two halves combined.
                 idToCheck = ((SplitCardHalf) objectToCheck).getMainCard().getId();
             } else if (!type.needPlayCardAbility() && objectToCheck instanceof AdventureCardSpell) {
                 // adventure spell uses alternative characteristics for spell/stack, all other cases must use main card
@@ -609,6 +612,23 @@ public class ContinuousEffects implements Serializable {
         return null;
     }
 
+    /**
+     * Fit paying mana type with current mana pool (if asThoughMana affected)
+     * <p>
+     * Example:
+     * - you need to pay {R} as cost
+     * - asThoughMana effect allows to use {G} as any color;
+     * - asThoughMana effect must change/fit paying mana type from {R} to {G}
+     * - after that you can pay {G} as cost
+     *
+     * @param manaType        paying mana type
+     * @param mana            checking pool item
+     * @param objectId        paying ability's source object
+     * @param affectedAbility paying ability
+     * @param controllerId    controller who pay
+     * @param game
+     * @return corrected paying mana type (same if no asThough effects and different on applied asThough effect)
+     */
     public ManaType asThoughMana(ManaType manaType, ManaPoolItem mana, UUID objectId, Ability affectedAbility, UUID controllerId, Game game) {
         // First check existing only effects
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(AsThoughEffectType.SPEND_ONLY_MANA, game);
@@ -1478,4 +1498,8 @@ public class ContinuousEffects implements Serializable {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Effects: " + allEffectsLists.stream().mapToInt(ContinuousEffectsList::size).sum();
+    }
 }

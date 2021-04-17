@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -18,17 +16,18 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class GraveyardShovel extends CardImpl {
 
     public GraveyardShovel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {2}, {tap}: Target player exiles a card from their graveyard. If it's a creature card, you gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GraveyardShovelEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new GraveyardShovelEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -46,12 +45,12 @@ public final class GraveyardShovel extends CardImpl {
 
 class GraveyardShovelEffect extends OneShotEffect {
 
-    public GraveyardShovelEffect() {
+    GraveyardShovelEffect() {
         super(Outcome.Exile);
         this.staticText = "Target player exiles a card from their graveyard. If it's a creature card, you gain 2 life";
     }
 
-    public GraveyardShovelEffect(final GraveyardShovelEffect effect) {
+    private GraveyardShovelEffect(final GraveyardShovelEffect effect) {
         super(effect);
     }
 
@@ -64,19 +63,20 @@ class GraveyardShovelEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-        if (targetPlayer != null && controller != null) {
-            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
-            if (targetPlayer.chooseTarget(Outcome.Exile, target, source, game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    card.moveToExile(null, "", source, game);
-                    if (card.isCreature()) {
-                        controller.gainLife(2, game, source);
-                    }
-                }
-                return true;
-            }
+        if (targetPlayer == null || controller == null || targetPlayer.getGraveyard().isEmpty()) {
+            return false;
         }
-        return false;
+        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
+        target.setNotTarget(true);
+        targetPlayer.chooseTarget(Outcome.Exile, target, source, game);
+        Card card = game.getCard(target.getFirstTarget());
+        if (card == null) {
+            return true;
+        }
+        targetPlayer.moveCards(card, Zone.EXILED, source, game);
+        if (card.isCreature()) {
+            controller.gainLife(2, game, source);
+        }
+        return true;
     }
 }

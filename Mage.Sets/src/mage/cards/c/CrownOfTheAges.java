@@ -15,7 +15,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AttachmentAttachedToCardTypePredicate;
+import mage.filter.predicate.permanent.AttachmentAttachedToCardTypePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

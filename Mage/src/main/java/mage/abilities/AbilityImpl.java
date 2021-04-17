@@ -142,6 +142,10 @@ public abstract class AbilityImpl implements Ability {
             this.id = UUID.randomUUID();
         }
         getEffects().newId();
+
+        for (Ability sub : getSubAbilities()) {
+            sub.newId();
+        }
     }
 
     @Override
@@ -315,7 +319,7 @@ public abstract class AbilityImpl implements Ability {
         // unit tests only: it allows to add targets/choices by two ways:
         // 1. From cast/activate command params (process it here)
         // 2. From single addTarget/setChoice, it's a preffered method for tests (process it in normal choose dialogs like human player)
-        if (controller.isTestMode()) {
+        if (controller.isTestsMode()) {
             if (!controller.addTargets(this, game)) {
                 return false;
             }
@@ -901,24 +905,36 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public boolean canChooseTarget(Game game) {
+    public boolean canChooseTarget(Game game, UUID playerId) {
         if (this instanceof SpellAbility) {
             if (SpellAbilityType.SPLIT_FUSED.equals(((SpellAbility) this).getSpellAbilityType())) {
                 Card card = game.getCard(getSourceId());
                 if (card != null) {
-                    return canChooseTargetAbility(((SplitCard) card).getLeftHalfCard().getSpellAbility(), game, getControllerId())
-                            && canChooseTargetAbility(((SplitCard) card).getRightHalfCard().getSpellAbility(), game, getControllerId());
+                    return canChooseTargetAbility(((SplitCard) card).getLeftHalfCard().getSpellAbility(), game, playerId)
+                            && canChooseTargetAbility(((SplitCard) card).getRightHalfCard().getSpellAbility(), game, playerId);
                 }
                 return false;
             }
         }
-        return canChooseTargetAbility(this, game, getControllerId());
+        return canChooseTargetAbility(this, game, playerId);
     }
 
     private static boolean canChooseTargetAbility(Ability ability, Game game, UUID controllerId) {
         int found = 0;
         for (Mode mode : ability.getModes().values()) {
-            if (mode.getTargets().canChoose(ability.getSourceId(), ability.getControllerId(), game)) {
+            boolean validTargets = true;
+            for (Target target : mode.getTargets()) {
+                UUID abilityControllerId = controllerId;
+                if (target.getTargetController() != null) {
+                    abilityControllerId = target.getTargetController();
+                }
+                if (!target.canChoose(ability.getSourceId(), abilityControllerId, game)) {
+                    validTargets = false;
+                    break;
+                }
+            }
+
+            if (validTargets) {
                 found++;
                 if (ability.getModes().isEachModeMoreThanOnce()) {
                     return true;

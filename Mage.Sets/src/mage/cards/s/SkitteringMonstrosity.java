@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -11,8 +9,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author nigelzor
  */
 public final class SkitteringMonstrosity extends CardImpl {
@@ -24,7 +23,10 @@ public final class SkitteringMonstrosity extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When you cast a creature spell, sacrifice Skittering Monstrosity.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A_CREATURE,
+                false, "When you cast a creature spell, sacrifice {this}."
+        ));
     }
 
     private SkitteringMonstrosity(final SkitteringMonstrosity card) {

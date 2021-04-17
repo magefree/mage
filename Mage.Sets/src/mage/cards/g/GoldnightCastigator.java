@@ -72,7 +72,7 @@ class GoldnightCastigatorDoubleDamageEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE ||
+        return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT ||
                 event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
@@ -95,7 +95,7 @@ class GoldnightCastigatorDoubleDamageEffect extends ReplacementEffectImpl {
                     event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
                 }
                 break;
-            case DAMAGE_CREATURE:
+            case DAMAGE_PERMANENT:
                 Permanent permanent = game.getPermanent(event.getTargetId());
                 if (permanent != null) {
                     if (permanent.getId().equals(source.getSourceId())) {

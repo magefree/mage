@@ -71,7 +71,7 @@ class BoseijuWhoSheltersAllWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.MANA_PAID) {
             if (event.getData() != null && event.getData().equals(originalId.toString()) && event.getTargetId() != null) {
                 Card spell = game.getSpell(event.getTargetId());
-                if (spell != null && (spell.isInstant() || spell.isSorcery())) {
+                if (spell != null && spell.isInstantOrSorcery()) {
                     spells.add(new MageObjectReference(game.getObject(event.getTargetId()), game));
                 }
             }

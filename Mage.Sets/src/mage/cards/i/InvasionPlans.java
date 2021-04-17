@@ -70,7 +70,7 @@ class InvasionPlansEffect extends ContinuousRuleModifyingEffectImpl {
         Player blockController = game.getPlayer(game.getCombat().getAttackingPlayerId());
         if (blockController != null) {
             // temporary workaround for AI bugging out while choosing blockers
-            if (blockController.isHuman()) {
+            if (!blockController.isComputer()) {
                 game.getCombat().selectBlockers(blockController, source, game);
                 return event.getPlayerId().equals(game.getCombat().getAttackingPlayerId());
             }

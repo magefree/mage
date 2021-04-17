@@ -16,7 +16,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -88,7 +88,7 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
         if (controller != null && sourcePermanent != null) {
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
             SacrificeTargetCost cost = new SacrificeTargetCost(target);
-            if (!controller.chooseUse(Outcome.Benefit, "Do you wish to sacrifice a Forest?", source, game)
+            if (!controller.chooseUse(Outcome.Benefit, "Sacrifice a Forest?", source, game)
                     || !cost.canPay(source, source, source.getControllerId(), game)
                     || !cost.pay(source, game, source, source.getControllerId(), true)) {
                 sourcePermanent.sacrifice(source, game);

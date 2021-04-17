@@ -88,7 +88,7 @@ class CelestialDawnToPlainsEffect extends ContinuousEffectImpl {
                     land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                     break;
                 case TypeChangingEffects_4:
-                    land.removeAllSubTypes(game,SubTypeSet.NonBasicLandType);
+                    land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
                     land.addSubType(game, SubType.PLAINS);
                     break;
             }
@@ -241,7 +241,9 @@ class CelestialDawnSpendColorlessManaEffect extends AsThoughEffectImpl implement
     public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
         if (mana.getWhite() == 0) {
             return ManaType.COLORLESS;
+        } else {
+            // must return manaType cause applied all the time
+            return manaType;
         }
-        return manaType;
     }
 }

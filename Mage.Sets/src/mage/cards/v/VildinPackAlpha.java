@@ -1,17 +1,10 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -20,14 +13,15 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class VildinPackAlpha extends CardImpl {
 
     public VildinPackAlpha(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
@@ -40,9 +34,7 @@ public final class VildinPackAlpha extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new VildinPackAlphaEffect(), new FilterCreaturePermanent(SubType.WEREWOLF, "a Werewolf"), true, SetTargetPointer.PERMANENT, null));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Vildin-Pack Alpha.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
-
+        this.addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private VildinPackAlpha(final VildinPackAlpha card) {

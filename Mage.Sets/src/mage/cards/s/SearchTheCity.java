@@ -15,7 +15,6 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.turn.TurnMod;
@@ -154,11 +153,16 @@ class SearchTheCityExiledCardToHandEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         String cardName = (String) this.getValue("cardName");
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         ExileZone searchTheCityExileZone = game.getExile().getExileZone(source.getSourceId());
-        if (cardName != null && searchTheCityExileZone != null) {
+        if (cardName != null
+                && searchTheCityExileZone != null) {
             for (Card card : searchTheCityExileZone.getCards(game)) {
                 if (CardUtil.haveSameNames(card, cardName, game)) {
-                    if (card.moveToZone(Zone.HAND, source, game, true)) {
+                    if (controller.moveCards(card, Zone.HAND, source, game)) {
                         game.informPlayers("Search the City: put " + card.getName() + " into owner's hand");
                     }
                     searchTheCityExileZone.remove(card);
