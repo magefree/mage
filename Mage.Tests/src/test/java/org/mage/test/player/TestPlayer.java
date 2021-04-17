@@ -3862,7 +3862,7 @@ public class TestPlayer implements Player {
 
         Assert.assertNotEquals("chooseTargetAmount needs non zero amount remaining", 0, target.getAmountRemaining());
 
-        assertAliasSupportInTargets(false);
+        assertAliasSupportInTargets(true);
         if (!targets.isEmpty()) {
 
             // skip targets
@@ -3883,6 +3883,8 @@ public class TestPlayer implements Player {
             String targetName = choiceSettings[0];
             int targetAmount = Integer.parseInt(choiceSettings[1].substring("X=".length()));
 
+            checkTargetDefinitionMarksSupport(target, targetName, "=");
+
             // player target support
             if (targetName.startsWith("targetPlayer=")) {
                 targetName = targetName.substring(targetName.indexOf("targetPlayer=") + "targetPlayer=".length());
@@ -3894,10 +3896,21 @@ public class TestPlayer implements Player {
 
             if (target.getAmountRemaining() > 0) {
                 for (UUID possibleTarget : target.possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
+                    boolean foundTarget = false;
+
+                    // permanent
                     MageObject objectPermanent = game.getObject(possibleTarget);
+                    if (objectPermanent != null && hasObjectTargetNameOrAlias(objectPermanent, targetName)) {
+                        foundTarget = true;
+                    }
+
+                    // player
                     Player objectPlayer = game.getPlayer(possibleTarget);
-                    String objectName = objectPermanent != null ? objectPermanent.getName() : objectPlayer.getName();
-                    if (objectName.equals(targetName)) {
+                    if (!foundTarget && objectPlayer != null && objectPlayer.getName().equals(targetName)) {
+                        foundTarget = true;
+                    }
+
+                    if (foundTarget) {
                         if (!target.getTargets().contains(possibleTarget) && target.canTarget(possibleTarget, source, game)) {
                             // can select
                             target.addTarget(possibleTarget, targetAmount, source, game);
