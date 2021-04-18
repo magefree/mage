@@ -54,7 +54,7 @@ class WoodlandBellowerEffect extends OneShotEffect {
 
     WoodlandBellowerEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Search your library for a nonlegendary green creature card with mana value 3 or less, put it onto the battlefield, then shuffle your library";
+        staticText = "Search your library for a nonlegendary green creature card with mana value 3 or less, put it onto the battlefield, then shuffle";
     }
 
     WoodlandBellowerEffect(final WoodlandBellowerEffect effect) {

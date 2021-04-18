@@ -57,7 +57,7 @@ class InsidiousDreamsEffect extends OneShotEffect {
 
     public InsidiousDreamsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search your library for up to X cards. Then shuffle your library and put those cards on top of it in any order";
+        this.staticText = "Search your library for up to X cards. Then shuffle and put those cards on top of it in any order";
     }
 
     public InsidiousDreamsEffect(final InsidiousDreamsEffect effect) {

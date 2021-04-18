@@ -52,7 +52,7 @@ public final class KorlashHeirToBlackblade extends CardImpl {
         
         // Grandeur - Discard another card named Korlash, Heir to Blackblade: Search your library for up to two Swamp cards, put them onto the battlefield tapped, then shuffle your library.
         effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filterCard), true, true);
-        effect.setText("Search your library for up to two Swamp cards, put them onto the battlefield tapped, then shuffle your library.");
+        effect.setText("Search your library for up to two Swamp cards, put them onto the battlefield tapped, then shuffle.");
         this.addAbility(new GrandeurAbility(effect, "Korlash, Heir to Blackblade"));
     }
 

@@ -68,7 +68,7 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
     ArchmageAscensionReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "As long as {this} has six or more quest counters on it, if you would draw a card, "
-                + "you may instead search your library for a card, put that card into your hand, then shuffle your library";
+                + "you may instead search your library for a card, put that card into your hand, then shuffle";
     }
 
     private ArchmageAscensionReplacementEffect(final ArchmageAscensionReplacementEffect effect) {

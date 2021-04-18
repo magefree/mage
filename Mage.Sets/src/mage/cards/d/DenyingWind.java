@@ -45,7 +45,7 @@ class DenyingWindEffect extends OneShotEffect {
 
     public DenyingWindEffect() {
         super(Outcome.Neutral);
-        staticText = "search target player's library for up to seven cards and exile them. Then that player shuffles their library";
+        staticText = "search target player's library for up to seven cards and exile them. Then that player shuffles";
     }
 
     public DenyingWindEffect(final DenyingWindEffect effect) {

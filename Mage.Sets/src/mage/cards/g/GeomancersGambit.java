@@ -52,7 +52,7 @@ class GeomancersGambitEffect extends OneShotEffect {
         super(Outcome.PutLandInPlay);
         this.staticText = "Its controller may search their library "
                 + "for a basic land card, put it onto the battlefield, "
-                + "then shuffle their library";
+                + "then shuffle";
     }
 
     private GeomancersGambitEffect(final GeomancersGambitEffect effect) {
@@ -74,7 +74,7 @@ class GeomancersGambitEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        if (!controller.chooseUse(Outcome.PutLandInPlay, "Search for a basic land, put it onto the battlefield, and then shuffle your library?", source, game)) {
+        if (!controller.chooseUse(Outcome.PutLandInPlay, "Search for a basic land, put it onto the battlefield, and then shuffle?", source, game)) {
             return true;
         }
         TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);

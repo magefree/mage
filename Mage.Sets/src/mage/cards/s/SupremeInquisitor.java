@@ -68,7 +68,7 @@ class SupremeInquisitorEffect extends OneShotEffect {
 
     public SupremeInquisitorEffect() {
         super(Outcome.Exile);
-        staticText = "Search target player's library for up to five cards and exile them. Then that player shuffles their library";
+        staticText = "Search target player's library for up to five cards and exile them. Then that player shuffles";
     }
 
     public SupremeInquisitorEffect(final SupremeInquisitorEffect effect) {

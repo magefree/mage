@@ -58,7 +58,7 @@ class FiremindsForesightSearchEffect extends OneShotEffect {
         super(Outcome.DrawCard);
         staticText = "Search your library for an instant card with mana value 3, " +
                 "reveal it, and put it into your hand. Then repeat this process " +
-                "for instant cards with mana values 2 and 1. Then shuffle your library";
+                "for instant cards with mana values 2 and 1. Then shuffle";
     }
 
     private FiremindsForesightSearchEffect(final FiremindsForesightSearchEffect effect) {

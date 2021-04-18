@@ -42,7 +42,7 @@ class ManipulateFateEffect extends SearchEffect {
     ManipulateFateEffect() {
         super(new TargetCardInLibrary(3, StaticFilters.FILTER_CARD), Outcome.Benefit);
         staticText = "Search your library for three cards, exile them, "
-                + "then shuffle your library. Draw a card";
+                + "then shuffle. Draw a card";
     }
 
     private ManipulateFateEffect(final ManipulateFateEffect effect) {

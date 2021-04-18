@@ -45,7 +45,7 @@ class RitesOfSpringEffect extends OneShotEffect {
     RitesOfSpringEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Discard any number of cards. Search your library for up to that many basic land cards, " +
-                "reveal those cards, and put them into your hand. Then shuffle your library.";
+                "reveal those cards, and put them into your hand. Then shuffle.";
     }
 
     private RitesOfSpringEffect(final RitesOfSpringEffect effect) {

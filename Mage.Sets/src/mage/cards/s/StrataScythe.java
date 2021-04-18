@@ -55,7 +55,7 @@ class StrataScytheImprintEffect extends OneShotEffect {
 
     StrataScytheImprintEffect() {
         super(Outcome.Exile);
-        staticText = "search your library for a land card, exile it, then shuffle your library";
+        staticText = "search your library for a land card, exile it, then shuffle";
     }
 
     StrataScytheImprintEffect(final StrataScytheImprintEffect effect) {

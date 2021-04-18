@@ -78,7 +78,7 @@ class BoreasChargerEffect extends OneShotEffect {
                 + "Search your library for a number of Plains cards "
                 + "equal to the difference and reveal them. "
                 + "Put one of them onto the battlefield tapped "
-                + "and the rest into your hand. Then shuffle your library";
+                + "and the rest into your hand. Then shuffle";
     }
 
     public BoreasChargerEffect(final BoreasChargerEffect effect) {

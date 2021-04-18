@@ -75,6 +75,6 @@ class LostLegacyEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
 
     @Override
     public String getText(Mode mode) {
-        return "Search target player's graveyard, hand and library for any number of cards with that name and exile them. That player shuffles their library, then draws a card for each card exiled from hand this way";
+        return "Search target player's graveyard, hand and library for any number of cards with that name and exile them. That player shuffles, then draws a card for each card exiled from hand this way";
     }
 }

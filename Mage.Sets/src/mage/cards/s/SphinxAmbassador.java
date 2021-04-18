@@ -55,7 +55,7 @@ class SphinxAmbassadorEffect extends OneShotEffect {
 
     public SphinxAmbassadorEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "search that player's library for a card, then that player names a card. If you searched for a creature card that isn't the named card, you may put it onto the battlefield under your control. Then that player shuffles their library";
+        this.staticText = "search that player's library for a card, then that player names a card. If you searched for a creature card that isn't the named card, you may put it onto the battlefield under your control. Then that player shuffles";
     }
 
     public SphinxAmbassadorEffect(final SphinxAmbassadorEffect effect) {

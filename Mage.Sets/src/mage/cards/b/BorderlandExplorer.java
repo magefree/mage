@@ -54,7 +54,7 @@ class BorderlandExplorerEffect extends OneShotEffect {
     public BorderlandExplorerEffect() {
         super(Outcome.Neutral);
         this.staticText = "each player may discard a card. Each player who discarded a card this way may search their library "
-                + "for a basic land card, reveal it, put it into their hand, then shuffle their library";
+                + "for a basic land card, reveal it, put it into their hand, then shuffle";
     }
 
     public BorderlandExplorerEffect(final BorderlandExplorerEffect effect) {

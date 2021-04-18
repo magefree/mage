@@ -48,7 +48,7 @@ class MausoleumSecretsEffect extends OneShotEffect {
         this.staticText = "<i>Undergrowth</i> &mdash; Search your library "
                 + "for a black card with mana value less than "
                 + "or equal to the number of creature cards in your graveyard, "
-                + "reveal it, put it into your hand, then shuffle your library.";
+                + "reveal it, put it into your hand, then shuffle.";
     }
 
     public MausoleumSecretsEffect(final MausoleumSecretsEffect effect) {

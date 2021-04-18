@@ -53,7 +53,7 @@ class SearchLibraryPutInGraveyard extends SearchEffect {
 
     public SearchLibraryPutInGraveyard() {
         super(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), Outcome.Neutral);
-        staticText = "search your library for a card and put that card into your graveyard. Then shuffle your library";
+        staticText = "search your library for a card and put that card into your graveyard. Then shuffle";
     }
 
     public SearchLibraryPutInGraveyard(final SearchLibraryPutInGraveyard effect) {

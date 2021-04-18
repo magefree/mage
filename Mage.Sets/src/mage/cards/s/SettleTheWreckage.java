@@ -49,7 +49,7 @@ class SettleTheWreckageEffect extends OneShotEffect {
 
     SettleTheWreckageEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Exile all attacking creatures target player controls. That player may search their library for that many basic land cards, put those cards onto the battlefield tapped, then shuffle their library";
+        this.staticText = "Exile all attacking creatures target player controls. That player may search their library for that many basic land cards, put those cards onto the battlefield tapped, then shuffle";
     }
 
     SettleTheWreckageEffect(final SettleTheWreckageEffect effect) {

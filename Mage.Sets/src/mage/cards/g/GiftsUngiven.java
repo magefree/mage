@@ -42,7 +42,7 @@ class GiftsUngivenEffect extends OneShotEffect {
 
     public GiftsUngivenEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Search your library for up to four cards with different names and reveal them. Target opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle your library";
+        this.staticText = "Search your library for up to four cards with different names and reveal them. Target opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle";
     }
 
     public GiftsUngivenEffect(final GiftsUngivenEffect effect) {

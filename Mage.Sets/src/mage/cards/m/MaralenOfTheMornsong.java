@@ -86,7 +86,7 @@ class MaralenOfTheMornsongEffect2 extends OneShotEffect {
 
     public MaralenOfTheMornsongEffect2() {
         super(Outcome.LoseLife);
-        staticText = "that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles their library";
+        staticText = "that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles";
     }
 
     public MaralenOfTheMornsongEffect2(final MaralenOfTheMornsongEffect2 effect) {

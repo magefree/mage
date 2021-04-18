@@ -75,7 +75,7 @@ class GoblinEngineerEffect extends SearchEffect {
 
     GoblinEngineerEffect() {
         super(new TargetCardInLibrary(StaticFilters.FILTER_CARD_ARTIFACT_AN), Outcome.Neutral);
-        staticText = "search your library for an artifact card, put it into your graveyard, then shuffle your library";
+        staticText = "search your library for an artifact card, put it into your graveyard, then shuffle";
     }
 
     private GoblinEngineerEffect(final GoblinEngineerEffect effect) {

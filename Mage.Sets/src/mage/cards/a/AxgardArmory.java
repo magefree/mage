@@ -37,7 +37,7 @@ public final class AxgardArmory extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInHandEffect(new AxgardArmoryTarget(), true)
                         .setText("search your library for an Aura card and/or an Equipment card, reveal them, " +
-                                "put them into your hand, then shuffle your library"),
+                                "put them into your hand, then shuffle"),
                 new ManaCostsImpl("{1}{R}{R}{W}")
         );
         ability.addCost(new TapSourceCost());

@@ -49,7 +49,7 @@ class JourneyForTheElixirEffect extends OneShotEffect {
     JourneyForTheElixirEffect() {
         super(Outcome.Benefit);
         staticText = "Search your library and graveyard for a basic land card and a card named Jiang Yanggu, " +
-                "reveal them, put them into your hand, then shuffle your library.";
+                "reveal them, put them into your hand, then shuffle.";
     }
 
     private JourneyForTheElixirEffect(final JourneyForTheElixirEffect effect) {

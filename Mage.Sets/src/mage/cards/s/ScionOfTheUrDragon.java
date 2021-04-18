@@ -61,7 +61,7 @@ class ScionOfTheUrDragonEffect extends SearchEffect {
 
     public ScionOfTheUrDragonEffect() {
         super(new TargetCardInLibrary(filter), Outcome.Copy);
-        staticText = "Search your library for a Dragon permanent card and put it into your graveyard. If you do, {this} becomes a copy of that card until end of turn. Then shuffle your library.";
+        staticText = "Search your library for a Dragon permanent card and put it into your graveyard. If you do, {this} becomes a copy of that card until end of turn. Then shuffle.";
     }
 
     ScionOfTheUrDragonEffect(final ScionOfTheUrDragonEffect effect) {

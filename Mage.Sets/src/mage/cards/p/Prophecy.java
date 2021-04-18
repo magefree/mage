@@ -50,7 +50,7 @@ class ProphecyEffect extends OneShotEffect {
 
     public ProphecyEffect() {
         super(Outcome.GainLife);
-        this.staticText = "Reveal the top card of target opponent's library. If it's a land, you gain 1 life. Then that player shuffles their library";
+        this.staticText = "Reveal the top card of target opponent's library. If it's a land, you gain 1 life. Then that player shuffles";
     }
 
     public ProphecyEffect(final ProphecyEffect effect) {

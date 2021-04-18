@@ -55,7 +55,7 @@ class HarvestSeasonEffect extends OneShotEffect {
     HarvestSeasonEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search your library for up to X basic land cards, where X is the number of tapped creatures you control,"
-                + " and put those cards onto the battlefield tapped, then shuffle your library.";
+                + " and put those cards onto the battlefield tapped, then shuffle.";
     }
 
     HarvestSeasonEffect(final HarvestSeasonEffect effect) {

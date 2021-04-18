@@ -82,7 +82,7 @@ class HibernationsEndEffect extends OneShotEffect {
 
     public HibernationsEndEffect() {
         super(Outcome.Benefit);
-        this.staticText = "search your library for a creature card with mana value equal to the number of age counters on {this} and put it onto the battlefield. If you do, shuffle your library.";
+        this.staticText = "search your library for a creature card with mana value equal to the number of age counters on {this} and put it onto the battlefield. If you do, shuffle.";
     }
 
     public HibernationsEndEffect(final HibernationsEndEffect effect) {

@@ -41,7 +41,7 @@ public final class SanctumOfUgin extends CardImpl {
         // Whenever you cast a colorless spell with converted mana cost 7 or greater, you may sacrifice Sanctum of Ugin.
         // If you do, search your library for a colorless creature card, reveal it, put it into your hand, then shuffle your library.
         Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true);
-        effect.setText("search your library for a colorless creature card, reveal it, put it into your hand, then shuffle your library");
+        effect.setText("search your library for a colorless creature card, reveal it, put it into your hand, then shuffle");
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(effect, new SacrificeSourceCost()), filterSpells, false));
     }
 

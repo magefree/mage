@@ -69,7 +69,7 @@ class AlpineHoundmasterEffect extends OneShotEffect {
     AlpineHoundmasterEffect() {
         super(Outcome.Benefit);
         staticText = "search your library for a card named Alpine Watchdog and/or a card named Igneous Cur, " +
-                "reveal them, put them into your hand, then shuffle your library";
+                "reveal them, put them into your hand, then shuffle";
     }
 
     private AlpineHoundmasterEffect(final AlpineHoundmasterEffect effect) {

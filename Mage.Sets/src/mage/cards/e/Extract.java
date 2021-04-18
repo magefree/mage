@@ -48,7 +48,7 @@ class ExtractEffect extends OneShotEffect {
 
     public ExtractEffect() {
         super(Outcome.Exile);
-        staticText = "Search target player's library for a card and exile it. Then that player shuffles their library.";
+        staticText = "Search target player's library for a card and exile it. Then that player shuffles.";
     }
 
     public ExtractEffect(final ExtractEffect effect) {

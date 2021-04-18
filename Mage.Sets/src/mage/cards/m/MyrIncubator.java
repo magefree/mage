@@ -60,7 +60,7 @@ class MyrIncubatorEffect extends SearchEffect {
 
     MyrIncubatorEffect() {
         super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Outcome.Neutral);
-        staticText = "Search your library for any number of artifact cards, exile them, then create that many 1/1 colorless Myr artifact creature tokens. Then shuffle your library";
+        staticText = "Search your library for any number of artifact cards, exile them, then create that many 1/1 colorless Myr artifact creature tokens. Then shuffle";
     }
 
     MyrIncubatorEffect(final MyrIncubatorEffect effect) {

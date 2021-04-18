@@ -78,7 +78,7 @@ class FiendArtisanEffect extends OneShotEffect {
     FiendArtisanEffect() {
         super(Outcome.Benefit);
         staticText = "search your library for a creature card with mana value X or less, " +
-                "put it onto the battlefield, then shuffle your library";
+                "put it onto the battlefield, then shuffle";
     }
 
     private FiendArtisanEffect(final FiendArtisanEffect effect) {

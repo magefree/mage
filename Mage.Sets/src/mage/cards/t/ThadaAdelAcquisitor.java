@@ -56,7 +56,7 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
 
     ThadaAdelAcquisitorEffect() {
         super(Outcome.Exile);
-        staticText = "search that player's library for an artifact card and exile it. Then that player shuffles their library. Until end of turn, you may play that card";
+        staticText = "search that player's library for an artifact card and exile it. Then that player shuffles. Until end of turn, you may play that card";
     }
 
     ThadaAdelAcquisitorEffect(final ThadaAdelAcquisitorEffect effect) {

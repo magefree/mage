@@ -57,7 +57,7 @@ public class TransmuteAbility extends SimpleActivatedAbility {
     public String getRule() {
         return new StringBuilder("Transmute ").append(this.getManaCosts().getText())
                 .append(" <i>(").append(this.getManaCosts().getText())
-                .append(", Discard this card: Search your library for a card with the same mana value as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)</i>").toString();
+                .append(", Discard this card: Search your library for a card with the same mana value as this card, reveal it, and put it into your hand. Then shuffle. Transmute only as a sorcery.)</i>").toString();
     }
 }
 

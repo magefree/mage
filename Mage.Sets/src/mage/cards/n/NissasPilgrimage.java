@@ -56,7 +56,7 @@ class NissasPilgrimageEffect extends OneShotEffect {
 
     public NissasPilgrimageEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search your library for up to two basic Forest cards, reveal those cards, and put one onto the battlefield tapped and the rest into your hand.  Then shuffle your library."
+        this.staticText = "Search your library for up to two basic Forest cards, reveal those cards, and put one onto the battlefield tapped and the rest into your hand.  Then shuffle."
                 + "<br><i>Spell Mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, search your library for up to three basic Forest cards instead of two.";
     }
 

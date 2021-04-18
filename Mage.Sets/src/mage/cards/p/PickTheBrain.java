@@ -89,6 +89,6 @@ class PickTheBrainEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
         return "Target opponent reveals their hand. You choose a nonland card from it and exile that card.<br><br>"
                 + "<i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, "
                 + "search that player's graveyard, hand, and library for any number of cards "
-                + "with the same name as the exiled card, exile those cards, then that player shuffles their library";
+                + "with the same name as the exiled card, exile those cards, then that player shuffles";
     }
 }

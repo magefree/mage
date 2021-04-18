@@ -22,7 +22,7 @@ public final class RhysticTutor extends CardImpl {
 
         // Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle your library.
         Effect effect = new DoUnlessAnyPlayerPaysEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()), new ManaCostsImpl("{2}"));
-        effect.setText("Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle your library");
+        effect.setText("Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle");
         this.getSpellAbility().addEffect(effect);
     }
 

@@ -62,7 +62,7 @@ class BirthingPodEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "Search your library for a creature card with mana value equal to 1 " +
                 "plus the sacrificed creature's mana value, put that card " +
-                "onto the battlefield, then shuffle your library";
+                "onto the battlefield, then shuffle";
     }
 
     private BirthingPodEffect(final BirthingPodEffect effect) {

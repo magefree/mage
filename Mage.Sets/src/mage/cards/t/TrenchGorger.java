@@ -50,7 +50,7 @@ class TrenchGorgerEffect extends OneShotEffect {
 
     public TrenchGorgerEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "you may search your library for any number of land cards, exile them, then shuffle your library. If you do, {this}'s power and toughness each become equal to the number of cards exiled this way";
+        this.staticText = "you may search your library for any number of land cards, exile them, then shuffle. If you do, {this}'s power and toughness each become equal to the number of cards exiled this way";
     }
 
     public TrenchGorgerEffect(final TrenchGorgerEffect effect) {

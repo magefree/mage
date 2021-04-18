@@ -65,7 +65,7 @@ class NaturalSelectionEffect extends OneShotEffect {
         Cards cards = new CardsImpl(targetPlayer.getLibrary().getTopCards(game, 3));
         controller.lookAtCards(source, null, cards, game);
         controller.putCardsOnTopOfLibrary(cards, game, source, true);
-        if (controller.chooseUse(Outcome.Neutral, "You may have that player shuffle their library", source, game)) {
+        if (controller.chooseUse(Outcome.Neutral, "You may have that player shuffle", source, game)) {
             targetPlayer.shuffleLibrary(source, game);
         }
         return true;

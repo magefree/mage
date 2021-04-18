@@ -54,7 +54,7 @@ class GhostQuarterEffect extends OneShotEffect {
 
     public GhostQuarterEffect() {
         super(Outcome.PutLandInPlay);
-        this.staticText = "Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle their library";
+        this.staticText = "Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle";
     }
 
     public GhostQuarterEffect(final GhostQuarterEffect effect) {
@@ -71,7 +71,7 @@ class GhostQuarterEffect extends OneShotEffect {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             Player controller = game.getPlayer(permanent.getControllerId());
-            if (controller != null && controller.chooseUse(Outcome.PutLandInPlay, "Search for a basic land, put it onto the battlefield, and then shuffle your library?", source, game)) {
+            if (controller != null && controller.chooseUse(Outcome.PutLandInPlay, "Search for a basic land, put it onto the battlefield, and then shuffle?", source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
                 if (controller.searchLibrary(target, source, game)) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);

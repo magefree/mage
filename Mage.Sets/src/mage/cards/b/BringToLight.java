@@ -49,7 +49,7 @@ class BringToLightEffect extends OneShotEffect {
         super(Outcome.PlayForFree);
         this.staticText = "<i>Converge</i> &mdash; Search your library for a creature, instant, or sorcery card with mana "
                 + "value less than or equal to the number of colors of mana spent to cast {this}, exile that card, "
-                + "then shuffle your library. You may cast that card without paying its mana cost";
+                + "then shuffle. You may cast that card without paying its mana cost";
     }
 
     public BringToLightEffect(final BringToLightEffect effect) {

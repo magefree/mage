@@ -51,7 +51,7 @@ class LlanowarSentinelEffect extends OneShotEffect {
 
     LlanowarSentinelEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may pay {1}{G}. If you do, search your library for a card named Llanowar Sentinel and put that card onto the battlefield. Then shuffle your library";     }
+        this.staticText = "you may pay {1}{G}. If you do, search your library for a card named Llanowar Sentinel and put that card onto the battlefield. Then shuffle";     }
 
     LlanowarSentinelEffect(final LlanowarSentinelEffect effect) {
         super(effect);

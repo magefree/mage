@@ -23,7 +23,7 @@ public final class AttuneWithAether extends CardImpl {
 
         // Search you library for a basic land card, reveal it, put it into your hand, then shuffle your library. You get {E}{E}.
         Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_CARD_BASIC_LAND), true);
-        effect.setText("Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library");
+        effect.setText("Search your library for a basic land card, reveal it, put it into your hand, then shuffle");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));
     }

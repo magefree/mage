@@ -53,7 +53,7 @@ class MimeofactureEffect extends OneShotEffect {
         super(Outcome.PutCardInPlay);
         this.staticText = "Choose target permanent an opponent controls. "
                 + "Search that player's library for a card with the same name and put it onto the battlefield under your control. "
-                + "Then that player shuffles their library.";
+                + "Then that player shuffles.";
     }
 
     MimeofactureEffect(final MimeofactureEffect effect) {

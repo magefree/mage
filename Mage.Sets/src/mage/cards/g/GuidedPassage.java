@@ -56,7 +56,7 @@ class GuidedPassageEffect extends OneShotEffect {
 
     GuidedPassageEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Reveal the cards in your library. An opponent chooses from among them a creature card, a land card, and a noncreature, nonland card. You put the chosen cards into your hand. Then shuffle your library.";
+        this.staticText = "Reveal the cards in your library. An opponent chooses from among them a creature card, a land card, and a noncreature, nonland card. You put the chosen cards into your hand. Then shuffle.";
     }
 
     GuidedPassageEffect(final GuidedPassageEffect effect) {

@@ -53,7 +53,7 @@ class EndlessHorizonsEffect extends OneShotEffect {
 
     EndlessHorizonsEffect() {
         super(Outcome.Neutral);
-        this.staticText = "search your library for any number of Plains cards and exile them. Then shuffle your library";
+        this.staticText = "search your library for any number of Plains cards and exile them. Then shuffle";
     }
 
     private EndlessHorizonsEffect(final EndlessHorizonsEffect effect) {

@@ -99,7 +99,7 @@ class SisayWeatherlightCaptainEffect extends OneShotEffect {
     SisayWeatherlightCaptainEffect() {
         super(Outcome.Benefit);
         staticText = "Search your library for a legendary permanent card with mana value " +
-                "less than {this}'s power, put that card onto the battlefield, then shuffle your library.";
+                "less than {this}'s power, put that card onto the battlefield, then shuffle.";
     }
 
     private SisayWeatherlightCaptainEffect(final SisayWeatherlightCaptainEffect effect) {

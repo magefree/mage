@@ -47,7 +47,7 @@ class PathToExileEffect extends OneShotEffect {
 
     public PathToExileEffect() {
         super(Outcome.Exile);
-        staticText = "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle their library";
+        staticText = "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle";
     }
 
     public PathToExileEffect(final PathToExileEffect effect) {

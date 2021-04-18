@@ -67,7 +67,7 @@ class SkyshipWeatherlightEffect extends SearchEffect {
     public SkyshipWeatherlightEffect() {
 
         super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Outcome.Neutral);
-        this.staticText = "search your library for any number of artifact and/or creature cards and exile them. Then shuffle your library";
+        this.staticText = "search your library for any number of artifact and/or creature cards and exile them. Then shuffle";
 
     }
 

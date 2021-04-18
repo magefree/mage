@@ -64,6 +64,6 @@ class MemoricideEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
 
     @Override
     public String getText(Mode mode) {
-        return "Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles their library";
+        return "Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles";
     }
 }

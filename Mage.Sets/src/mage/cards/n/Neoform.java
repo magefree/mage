@@ -59,7 +59,7 @@ class NeoformEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "Search your library for a creature card with mana value equal to " +
                 "1 plus the sacrificed creature's mana value, " +
-                "put that card onto the battlefield with an additional +1/+1 counter on it, then shuffle your library.";
+                "put that card onto the battlefield with an additional +1/+1 counter on it, then shuffle.";
     }
 
     private NeoformEffect(final NeoformEffect effect) {

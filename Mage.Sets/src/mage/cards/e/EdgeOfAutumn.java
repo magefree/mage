@@ -32,7 +32,7 @@ public final class EdgeOfAutumn extends CardImpl {
         // If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 5),
-                "If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library."));
+                "If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle."));
 
         // Cycling-Sacrifice a land.
         this.addAbility(new CyclingAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter))));

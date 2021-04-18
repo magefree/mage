@@ -73,7 +73,7 @@ class KahoMinamoHistorianEffect extends SearchEffect {
     public KahoMinamoHistorianEffect() {
         super(new TargetCardInLibrary(0, 3, filter), Outcome.Benefit);
         this.staticText = "search your library for up to three instant cards "
-                + "and exile them. Then shuffle your library";
+                + "and exile them. Then shuffle";
     }
 
     public KahoMinamoHistorianEffect(final KahoMinamoHistorianEffect effect) {

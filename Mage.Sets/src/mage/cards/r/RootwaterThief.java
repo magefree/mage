@@ -57,7 +57,7 @@ class RootwaterThiefEffect extends OneShotEffect {
 
     RootwaterThiefEffect() {
         super(Outcome.Exile);
-        staticText = "you may pay {2}. If you do, search that player's library for a card and exile it, then the player shuffles their library.";
+        staticText = "you may pay {2}. If you do, search that player's library for a card and exile it, then the player shuffles.";
     }
 
     RootwaterThiefEffect(final RootwaterThiefEffect effect) {

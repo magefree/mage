@@ -54,7 +54,7 @@ class NecromentiaEffect extends OneShotEffect {
 
     NecromentiaEffect() {
         super(Outcome.Benefit);
-        staticText = "Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles their library, then creates a 2/2 black Zombie creature token for each card exiled from their hand this way";
+        staticText = "Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles, then creates a 2/2 black Zombie creature token for each card exiled from their hand this way";
     }
 
     private NecromentiaEffect(NecromentiaEffect effect) {

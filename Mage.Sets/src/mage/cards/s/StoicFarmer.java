@@ -48,7 +48,7 @@ public final class StoicFarmer extends CardImpl {
                         new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter)),
                         condition, "search your library for a basic Plains card and reveal it. " +
                         "If an opponent controls more lands than you, put it onto the battlefield tapped. " +
-                        "Otherwise put it into your hand. Then shuffle your library"
+                        "Otherwise put it into your hand. Then shuffle"
                 )
         ));
 

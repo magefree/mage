@@ -50,7 +50,7 @@ class DarkDecisionEffect extends OneShotEffect {
 
     public DarkDecisionEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Search the top 10 cards of your library for a nonland card, exile it, then shuffle your library. Until end of turn, you may cast that card";
+        this.staticText = "Search the top 10 cards of your library for a nonland card, exile it, then shuffle. Until end of turn, you may cast that card";
     }
 
     public DarkDecisionEffect(final DarkDecisionEffect effect) {

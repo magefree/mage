@@ -46,7 +46,7 @@ class UncageTheMenagerieEffect extends OneShotEffect {
 
     public UncageTheMenagerieEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Search your library for up to X creature cards with different names that each have mana value X, reveal them, put them into your hand, then shuffle your library.";
+        this.staticText = "Search your library for up to X creature cards with different names that each have mana value X, reveal them, put them into your hand, then shuffle.";
     }
 
     public UncageTheMenagerieEffect(final UncageTheMenagerieEffect effect) {

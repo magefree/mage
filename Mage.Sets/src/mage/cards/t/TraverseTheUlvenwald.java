@@ -33,7 +33,7 @@ public final class TraverseTheUlvenwald extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 new InvertCondition(DeliriumCondition.instance),
-                "Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library."));
+                "Search your library for a basic land card, reveal it, put it into your hand, then shuffle."));
 
         // <i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, instead search your library
         // for a creature or land card, reveal it, put it into your hand, then shuffle your library.
@@ -41,7 +41,7 @@ public final class TraverseTheUlvenwald extends CardImpl {
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, filter), true),
                 DeliriumCondition.instance,
                 "<br><i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, instead search your library for a creature or land card, "
-                        + "reveal it, put it into your hand, then shuffle your library."));
+                        + "reveal it, put it into your hand, then shuffle."));
         this.getSpellAbility().addHint(DeliriumHint.instance);
     }
 

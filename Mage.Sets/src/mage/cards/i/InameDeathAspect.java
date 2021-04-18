@@ -51,7 +51,7 @@ class InameDeathAspectEffect extends SearchEffect {
 
     public InameDeathAspectEffect() {
         super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Outcome.Neutral);
-        staticText = "search your library for any number of Spirit cards and put them into your graveyard. If you do, shuffle your library";
+        staticText = "search your library for any number of Spirit cards and put them into your graveyard. If you do, shuffle";
     }
 
     public InameDeathAspectEffect(final InameDeathAspectEffect effect) {

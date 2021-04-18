@@ -62,7 +62,7 @@ class PyreOfHeroesEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "Search your library for a creature card that shares a creature type with the sacrificed creature and has mana value equal to 1 " +
                 "plus that creature's mana value. Put that card " +
-                "onto the battlefield, then shuffle your library";
+                "onto the battlefield, then shuffle";
     }
 
     private PyreOfHeroesEffect(final PyreOfHeroesEffect effect) {

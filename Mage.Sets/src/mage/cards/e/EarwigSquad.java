@@ -44,7 +44,7 @@ public final class EarwigSquad extends CardImpl {
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new EarwigSquadEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ProwlCostWasPaidCondition.instance,
-                "When {this} enters the battlefield, if its prowl cost was paid, search target opponent's library for three cards and exile them. Then that player shuffles their library.")
+                "When {this} enters the battlefield, if its prowl cost was paid, search target opponent's library for three cards and exile them. Then that player shuffles.")
                 .addHint(ProwlCostWasPaidHint.instance));
 
     }
@@ -63,7 +63,7 @@ class EarwigSquadEffect extends OneShotEffect {
 
     public EarwigSquadEffect() {
         super(Outcome.Benefit);
-        staticText = "search target opponent's library for three cards and exile them. Then that player shuffles their library";
+        staticText = "search target opponent's library for three cards and exile them. Then that player shuffles";
     }
 
     public EarwigSquadEffect(final EarwigSquadEffect effect) {

@@ -85,7 +85,7 @@ class CartographersHawkTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "When {this} deals combat damage to a player who controls more lands than you, " +
                 "return it to its owner's hand. If you do, you may search your library for a Plains card, " +
-                "put it onto the battlefield tapped, then shuffle your library.";
+                "put it onto the battlefield tapped, then shuffle.";
     }
 }
 

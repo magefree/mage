@@ -62,7 +62,7 @@ class YisanTheWandererBardEffect extends OneShotEffect {
 
     public YisanTheWandererBardEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search your library for a creature card with mana value equal to the number of verse counters on {this}, put it onto the battlefield, then shuffle your library";
+        this.staticText = "Search your library for a creature card with mana value equal to the number of verse counters on {this}, put it onto the battlefield, then shuffle";
     }
 
     public YisanTheWandererBardEffect(final YisanTheWandererBardEffect effect) {

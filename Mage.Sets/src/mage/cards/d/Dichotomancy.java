@@ -60,7 +60,7 @@ class DichotomancyEffect extends OneShotEffect {
         super(Outcome.PutCardInPlay);
         this.staticText = "For each tapped nonland permanent target opponent controls, " +
                 "search that player's library for a card with the same name as that permanent. " +
-                "Put those cards onto the battlefield under your control, then that player shuffles their library.";
+                "Put those cards onto the battlefield under your control, then that player shuffles.";
     }
 
     private DichotomancyEffect(DichotomancyEffect effect) {

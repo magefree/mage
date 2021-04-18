@@ -286,7 +286,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 effects.add(new RevealLibraryPutIntoHandEffect(5, filter3, Zone.LIBRARY));
                                 break;
                             case 12: // (altered) LILIANA VESS 2
-                                sb.append("Search your library for a card and put that card into your hand. Then shuffle your library.");
+                                sb.append("Search your library for a card and put that card into your hand. Then shuffle.");
                                 effects.add(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard("a card")), false, true));
                                 break;
                             case 13: // (double) LILIANA OF THE VEIL 2

@@ -34,7 +34,7 @@ public class SearchLibraryGraveyardPutOntoBattlefieldEffect extends OneShotEffec
         this.filter = filter;
         this.forceToSearchBoth = forceToSearchBoth;
         staticText = (youMay ? "You may " : "") + "search your library and" + (forceToSearchBoth ? "" : "/or") + " graveyard for a " + filter.getMessage()
-                + " and put it onto the battlefield. " + (forceToSearchBoth ? "Then shuffle your library" : "If you search your library this way, shuffle it");
+                + " and put it onto the battlefield. " + (forceToSearchBoth ? "Then shuffle" : "If you search your library this way, shuffle it");
     }
 
     public SearchLibraryGraveyardPutOntoBattlefieldEffect(final SearchLibraryGraveyardPutOntoBattlefieldEffect effect) {

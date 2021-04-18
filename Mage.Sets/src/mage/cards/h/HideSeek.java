@@ -55,7 +55,7 @@ class SeekEffect extends OneShotEffect {
 
     public SeekEffect() {
         super(Outcome.GainLife);
-        staticText = "Search target opponent's library for a card and exile it. You gain life equal to its mana value. Then that player shuffles their library";
+        staticText = "Search target opponent's library for a card and exile it. You gain life equal to its mana value. Then that player shuffles";
     }
 
     public SeekEffect(final SeekEffect effect) {

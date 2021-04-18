@@ -61,7 +61,7 @@ class EnigmaticIncarnationEffect extends OneShotEffect {
         staticText = "you may sacrifice another enchantment. If you do, "
                 + "search your library for a creature card with mana value "
                 + "equal to 1 plus the sacrificed enchantment's mana value, "
-                + "put that card onto the battlefield, then shuffle your library.";
+                + "put that card onto the battlefield, then shuffle.";
     }
 
     private EnigmaticIncarnationEffect(final EnigmaticIncarnationEffect effect) {

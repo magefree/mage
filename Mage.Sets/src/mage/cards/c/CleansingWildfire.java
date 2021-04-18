@@ -51,7 +51,7 @@ class CleansingWildfireEffect extends OneShotEffect {
     CleansingWildfireEffect() {
         super(Outcome.Benefit);
         staticText = "Its controller may search their library for a basic land card, " +
-                "put it onto the battlefield tapped, then shuffle their library.";
+                "put it onto the battlefield tapped, then shuffle.";
     }
 
     private CleansingWildfireEffect(final CleansingWildfireEffect effect) {

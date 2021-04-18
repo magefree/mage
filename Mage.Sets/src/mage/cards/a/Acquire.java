@@ -49,7 +49,7 @@ class AcquireEffect extends OneShotEffect {
 
     public AcquireEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "Search target opponent's library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles their library";
+        staticText = "Search target opponent's library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles";
     }
 
     public AcquireEffect(final AcquireEffect effect) {

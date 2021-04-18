@@ -56,7 +56,7 @@ class EldritchEvolutionEffect extends OneShotEffect {
     EldritchEvolutionEffect() {
         super(Outcome.Benefit);
         staticText = "Search your library for a creature card with mana value X or less, where X is 2 plus the sacrificed creature's mana value. Put that card "
-                + "onto the battlefield, then shuffle your library";
+                + "onto the battlefield, then shuffle";
     }
 
     EldritchEvolutionEffect(final EldritchEvolutionEffect effect) {

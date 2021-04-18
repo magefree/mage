@@ -100,7 +100,7 @@ class RenownedWeaponsmithEffect extends OneShotEffect {
 
     public RenownedWeaponsmithEffect() {
         super(Outcome.DrawCard);
-        staticText = "Search your library for a card named Heart-Piercer Bow or Vial of Dragonfire, reveal it, put it into your hand, then shuffle your library";
+        staticText = "Search your library for a card named Heart-Piercer Bow or Vial of Dragonfire, reveal it, put it into your hand, then shuffle";
     }
 
     public RenownedWeaponsmithEffect(final RenownedWeaponsmithEffect effect) {

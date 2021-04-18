@@ -52,7 +52,7 @@ class CitanulFluteSearchEffect extends OneShotEffect {
     CitanulFluteSearchEffect() {
         super(Outcome.DrawCard);
         staticText = "Search your library for a creature card with mana value X or less, " +
-                "reveal it, and put it into your hand. Then shuffle your library";
+                "reveal it, and put it into your hand. Then shuffle";
     }
 
     private CitanulFluteSearchEffect(final CitanulFluteSearchEffect effect) {
