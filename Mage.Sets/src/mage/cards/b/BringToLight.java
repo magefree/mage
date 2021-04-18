@@ -47,8 +47,8 @@ class BringToLightEffect extends OneShotEffect {
 
     public BringToLightEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "<i>Converge</i> &mdash; Search your library for a creature, instant, or sorcery card with converted mana "
-                + "cost less than or equal to the number of colors of mana spent to cast {this}, exile that card, "
+        this.staticText = "<i>Converge</i> &mdash; Search your library for a creature, instant, or sorcery card with mana "
+                + "value less than or equal to the number of colors of mana spent to cast {this}, exile that card, "
                 + "then shuffle your library. You may cast that card without paying its mana cost";
     }
 
@@ -66,8 +66,8 @@ class BringToLightEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int numberColors = ColorsOfManaSpentToCastCount.getInstance().calculate(game, source, this);
-            FilterCard filter = new FilterCard("a creature, instant, or sorcery card with converted mana "
-                    + "cost less than or equal to " + numberColors);
+            FilterCard filter = new FilterCard("a creature, instant, or sorcery card with mana value "
+                    + "less than or equal to " + numberColors);
             filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
                     CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
             filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, numberColors + 1));

@@ -91,8 +91,8 @@ class RashmiEternitiesCrafterTriggeredAbility extends SpellCastControllerTrigger
     @Override
     public String getRule() {
         return "Whenever you cast your first spell each turn, reveal the top card "
-                + "of your library. If it's a nonland card with converted mana "
-                + "cost less than that spell's, you may cast it without paying "
+                + "of your library. If it's a nonland card with mana value "
+                + "less than that spell's, you may cast it without paying "
                 + "its mana cost. If you don't cast the revealed card, put it into your hand.";
     }
 }

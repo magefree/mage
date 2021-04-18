@@ -69,8 +69,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
 
     public IsochronScepterImprintEffect() {
         super(Outcome.Benefit);
-        staticText = "you may exile an instant card with converted mana "
-                + "cost 2 or less from your hand";
+        staticText = "you may exile an instant card with mana value 2 or less from your hand";
     }
 
     public IsochronScepterImprintEffect(IsochronScepterImprintEffect effect) {

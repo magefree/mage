@@ -61,8 +61,8 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
     public HazoretsUndyingFuryEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Shuffle your library, then exile the top four cards. "
-                + "You may cast any number of nonland cards with converted mana "
-                + "cost 5 or less from among them without paying their mana costs";
+                + "You may cast any number of nonland cards with mana value "
+                + "5 or less from among them without paying their mana costs";
     }
 
     public HazoretsUndyingFuryEffect(final HazoretsUndyingFuryEffect effect) {
