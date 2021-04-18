@@ -126,6 +126,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Forgotten Cave", 289, Rarity.COMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Garruk, Primal Hunter", 190, Rarity.MYTHIC, mage.cards.g.GarrukPrimalHunter.class));
         cards.add(new SetCardInfo("Gaze of Granite", 217, Rarity.RARE, mage.cards.g.GazeOfGranite.class));
+        cards.add(new SetCardInfo("Geometric Nexus", 77, Rarity.RARE, mage.cards.g.GeometricNexus.class));
         cards.add(new SetCardInfo("Ghostly Prison", 92, Rarity.UNCOMMON, mage.cards.g.GhostlyPrison.class));
         cards.add(new SetCardInfo("Gideon, Champion of Justice", 93, Rarity.MYTHIC, mage.cards.g.GideonChampionOfJustice.class));
         cards.add(new SetCardInfo("Gift of Paradise", 191, Rarity.COMMON, mage.cards.g.GiftOfParadise.class));
