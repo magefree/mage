@@ -660,6 +660,7 @@ public class NewTableDialog extends MageDialog {
                 break;
             case "Variant Magic - Brawl":
             case "Variant Magic - Duel Brawl":
+            case "Variant Magic - Freeform Brawl":
                 if (!options.getGameType().startsWith("Brawl")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Brawl needs also a Brawl game type", "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
@@ -715,7 +716,8 @@ public class NewTableDialog extends MageDialog {
             case "Brawl Two Player Duel":
             case "Brawl Free For All":
                 if (!options.getDeckType().equals("Variant Magic - Brawl")
-                        && !options.getDeckType().equals("Variant Magic - Duel Brawl")) {
+                        && !options.getDeckType().equals("Variant Magic - Duel Brawl")
+                        && !options.getDeckType().equals("Variant Magic - Freeform Brawl")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Brawl needs also a Brawl game type", "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
