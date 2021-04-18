@@ -68,7 +68,7 @@ class FieldOfRuinEffect extends OneShotEffect {
 
     FieldOfRuinEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player searches their library for a basic land card, puts it onto the battlefield, then shuffles their library";
+        this.staticText = "Each player searches their library for a basic land card, puts it onto the battlefield, then shuffles";
     }
 
     FieldOfRuinEffect(final FieldOfRuinEffect effect) {

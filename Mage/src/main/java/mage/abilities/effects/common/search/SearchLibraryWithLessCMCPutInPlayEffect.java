@@ -28,7 +28,7 @@ public class SearchLibraryWithLessCMCPutInPlayEffect extends OneShotEffect {
     public SearchLibraryWithLessCMCPutInPlayEffect(FilterCard filter) {
         super(Outcome.PutCreatureInPlay);
         this.filter = filter;
-        staticText = "Search your library for a " + filter.getMessage() + " with mana value X or less, put it onto the battlefield, then shuffle your library";
+        staticText = "Search your library for a " + filter.getMessage() + " with mana value X or less, put it onto the battlefield, then shuffle";
     }
 
     public SearchLibraryWithLessCMCPutInPlayEffect(final SearchLibraryWithLessCMCPutInPlayEffect effect) {

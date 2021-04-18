@@ -76,7 +76,7 @@ class SunforgerEffect extends OneShotEffect {
         super(Outcome.PlayForFree);
         staticText = "Search your library for a red or white instant "
                 + "card with mana value 4 or less and cast that "
-                + "card without paying its mana cost. Then shuffle your library";
+                + "card without paying its mana cost. Then shuffle";
     }
 
     public SunforgerEffect(final SunforgerEffect effect) {

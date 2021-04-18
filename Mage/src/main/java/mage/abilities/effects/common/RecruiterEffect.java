@@ -60,7 +60,7 @@ public class RecruiterEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "search your library for any number of " + filter.getMessage()
-                + " and reveal those cards. Shuffle your library, then put them on top of it in any order.";
+        return "search your library for any number of "
+                + filter.getMessage() + ", reveal them, then shuffle and put those cards on top in any order";
     }
 }

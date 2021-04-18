@@ -24,7 +24,7 @@ public final class Disembowel extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{B}");
 
         // Destroy target creature with converted mana cost X.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect("creature with mana value X"));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect("destroy target creature with mana value X"));
         this.getSpellAbility().setTargetAdjuster(DisembowelAdjuster.instance);
     }
 

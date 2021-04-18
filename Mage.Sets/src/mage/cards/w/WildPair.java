@@ -41,7 +41,7 @@ public final class WildPair extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new WildPairEffect(), filter, true, SetTargetPointer.PERMANENT, ""),
                 new CastFromHandTargetCondition(),
-                "Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness and put it onto the battlefield. If you do, shuffle your library."
+                "Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness, put it onto the battlefield, then shuffle."
         ), new CastFromHandWatcher());
     }
 

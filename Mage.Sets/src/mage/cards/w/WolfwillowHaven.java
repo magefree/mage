@@ -41,7 +41,7 @@ public final class WolfwillowHaven extends CardImpl {
         // Whenever enchanted land is tapped for mana, its controller adds an additional {G}.
         this.addAbility(new EnchantedTappedTriggeredManaAbility(new AddManaToManaPoolTargetControllerEffect(
                 new Mana(ColoredManaSymbol.G), "their"
-        )));
+        ).setText("its controller adds an additional {G}")));
 
         // {4}{G}, Sacrifice Wolfwillow Haven: Create a 2/2 green Wolf creature token. Activate this ability only during your turn.
         ability = new ActivateIfConditionActivatedAbility(

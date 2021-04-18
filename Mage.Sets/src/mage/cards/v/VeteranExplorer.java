@@ -55,7 +55,8 @@ class VeteranExplorerEffect extends OneShotEffect {
 
     public VeteranExplorerEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each player may search their library for up to two basic land cards and put them onto the battlefield. Then each player who searched their library this way shuffles it";
+        this.staticText = "each player may search their library for up to two basic land cards, " +
+                "put them onto the battlefield, then shuffle";
     }
 
     public VeteranExplorerEffect(final VeteranExplorerEffect effect) {

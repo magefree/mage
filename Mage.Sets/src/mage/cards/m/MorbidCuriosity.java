@@ -33,7 +33,9 @@ public final class MorbidCuriosity extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
 
         // Draw cards equal to the converted mana cost of the sacrificed permanent.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new SacrificeCostConvertedMana("permanent")));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(
+                new SacrificeCostConvertedMana("permanent")
+        ).setText("draw cards equal to the mana value of the sacrificed permanent"));
     }
 
     private MorbidCuriosity(final MorbidCuriosity card) {

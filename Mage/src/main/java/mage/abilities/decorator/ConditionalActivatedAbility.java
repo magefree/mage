@@ -78,6 +78,6 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
                 || conditionText.startsWith("if")) {
             additionalText = "";
         }
-        return super.getRule() + " Activate this ability only " + additionalText + condition.toString() + ".";
+        return super.getRule() + " Activate only " + additionalText + condition.toString() + ".";
     }
 }

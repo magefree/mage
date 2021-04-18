@@ -34,7 +34,7 @@ public final class ArenaRector extends CardImpl {
                         new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterPlaneswalkerCard())),
                         new ExileSourceFromGraveCost(),
                         "Exile to search for a planeswalker?"
-                ).setText("you may exile it. If you do, search your library for a planeswalker card, put it onto the battlefield, then shuffle your library"), false
+                ).setText("you may exile it. If you do, search your library for a planeswalker card, put it onto the battlefield, then shuffle"), false
         ));
     }
 

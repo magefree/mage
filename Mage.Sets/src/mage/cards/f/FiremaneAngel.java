@@ -44,11 +44,11 @@ public final class FiremaneAngel extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.ALL, new GainLifeEffect(1), TargetController.YOU, true),
                 SourceOnBattlefieldOrGraveyardCondition.instance,
-                "At the beginning of your upkeep, if {this} is in your graveyard or on the battlefield, you may gain 1 life");
+                "At the beginning of your upkeep, if {this} is in your graveyard or on the battlefield, you may gain 1 life.");
         this.addAbility(ability);
         // {6}{R}{R}{W}{W}: Return Firemane Angel from your graveyard to the battlefield. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{6}{R}{R}{W}{W}"), new IsStepCondition(PhaseStep.UPKEEP), null));
+                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false), new ManaCostsImpl("{6}{R}{R}{W}{W}"), new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
     private FiremaneAngel(final FiremaneAngel card) {

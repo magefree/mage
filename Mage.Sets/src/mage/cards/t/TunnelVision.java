@@ -48,7 +48,7 @@ class TunnelVisionEffect extends OneShotEffect {
                 + "until a card with that name is revealed. If it is, that player puts "
                 + "the rest of the revealed cards into their graveyard and "
                 + "puts the card with the chosen name on top of their library. "
-                + "Otherwise, the player shuffles their library";
+                + "Otherwise, the player shuffles";
     }
 
     public TunnelVisionEffect(final TunnelVisionEffect effect) {

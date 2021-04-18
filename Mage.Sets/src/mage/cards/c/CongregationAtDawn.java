@@ -45,7 +45,8 @@ class CongregationAtDawnEffect extends OneShotEffect {
 
     public CongregationAtDawnEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search your library for up to three creature cards and reveal them. Shuffle your library, then put those cards on top of it in any order";
+        this.staticText = "search your library for up to three creature cards, reveal them, " +
+                "then shuffle and put those cards on top in any order";
     }
 
     public CongregationAtDawnEffect(final CongregationAtDawnEffect effect) {

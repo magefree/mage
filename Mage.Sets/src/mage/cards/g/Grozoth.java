@@ -72,7 +72,7 @@ class GrozothEffect extends SearchEffect {
 
     public GrozothEffect() {
         super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Outcome.DrawCard);
-        staticText = "you may search your library for any number of cards that have mana value 9, reveal them, and put them into your hand. If you do, shuffle your library";
+        staticText = "search your library for any number of cards that have mana value 9, reveal them, put them into your hand, then shuffle";
     }
 
     public GrozothEffect(final GrozothEffect effect) {

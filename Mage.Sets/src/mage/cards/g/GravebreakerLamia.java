@@ -66,7 +66,7 @@ class GravebreakerLamiaSearchEffect extends SearchEffect {
 
     GravebreakerLamiaSearchEffect() {
         super(new TargetCardInLibrary(), Outcome.Neutral);
-        staticText = "search your library for a card, put it into your graveyard, then shuffle your library";
+        staticText = "search your library for a card, put it into your graveyard, then shuffle";
     }
 
     private GravebreakerLamiaSearchEffect(final GravebreakerLamiaSearchEffect effect) {

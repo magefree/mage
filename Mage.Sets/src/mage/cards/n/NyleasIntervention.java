@@ -62,7 +62,7 @@ class NyleasInterventionEffect extends OneShotEffect {
     NyleasInterventionEffect() {
         super(Outcome.Benefit);
         staticText = "search your library for up to X land cards, " +
-                "reveal them, put them into your hand, then shuffle your library";
+                "reveal them, put them into your hand, then shuffle";
     }
 
     private NyleasInterventionEffect(final NyleasInterventionEffect effect) {

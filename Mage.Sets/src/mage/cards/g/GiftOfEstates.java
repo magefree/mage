@@ -33,7 +33,7 @@ public final class GiftOfEstates extends CardImpl {
                         new TargetCardInLibrary(0, 3, filter), true
                 ), new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS), "if an opponent controls " +
                 "more lands than you, search your library for up to three Plains cards, " +
-                "reveal them, and put them into your hand. Then shuffle your library"
+                "reveal them, put them into your hand, then shuffle"
         ));
     }
 
