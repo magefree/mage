@@ -911,6 +911,13 @@ public final class CardUtil {
         }
     }
 
+    public static String addArticle(String text) {
+        if (text.startsWith("a ") || text.startsWith("an ")) {
+            return text;
+        }
+        return "aeiou".contains("" + text.charAt(0)) ? "an " + text : "a " + text;
+    }
+
     public static Set<UUID> getAllSelectedTargets(Ability ability, Game game) {
         return ability.getModes().getSelectedModes()
                 .stream()
@@ -1275,7 +1282,7 @@ public final class CardUtil {
         int res;
         try {
             res = Integer.parseInt(value);
-        } catch(NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             res = defaultValue;
         }
         return res;

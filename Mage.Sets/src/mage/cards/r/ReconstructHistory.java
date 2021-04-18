@@ -55,7 +55,7 @@ public final class ReconstructHistory extends CardImpl {
         ));
 
         // Exile Reconstruct History.
-        this.getSpellAbility().addEffect(new ExileSpellEffect());
+        this.getSpellAbility().addEffect(new ExileSpellEffect().concatBy("<br>"));
     }
 
     private ReconstructHistory(final ReconstructHistory card) {

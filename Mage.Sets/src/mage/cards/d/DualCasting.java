@@ -25,7 +25,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public final class DualCasting extends CardImpl {
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
+    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell you control");
 
     static {
         filter.add(Predicates.or(

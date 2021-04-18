@@ -73,7 +73,7 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
         if (reveal) {
             sb.append(", reveal it");
         }
-        sb.append(", then shuffle and put that card on top of it");
+        sb.append(", then shuffle and put that card on top");
         staticText = sb.toString();
     }
 }

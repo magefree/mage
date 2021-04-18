@@ -1372,7 +1372,7 @@ public class VerifyCardDataTest {
                 .replace("<i>", "")
                 .replace("</i>", "");
 
-        return newRule;
+        return newRule.trim();
     }
 
     @Test

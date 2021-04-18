@@ -58,7 +58,7 @@ public final class FlamescrollCelebrant extends ModalDoubleFacesCard {
         this.getRightHalfCard().getSpellAbility().addEffect(new RevelInSilenceEffect());
 
         // Exile Revel in Silence.
-        this.getRightHalfCard().getSpellAbility().addEffect(new ExileSpellEffect());
+        this.getRightHalfCard().getSpellAbility().addEffect(new ExileSpellEffect().concatBy("<br>"));
     }
 
     private FlamescrollCelebrant(final FlamescrollCelebrant card) {

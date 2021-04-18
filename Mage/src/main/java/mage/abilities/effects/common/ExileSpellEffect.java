@@ -13,7 +13,7 @@ import mage.players.Player;
  */
 public class ExileSpellEffect extends OneShotEffect {
 
-    private ExileSpellEffect() {
+    public ExileSpellEffect() {
         super(Outcome.Exile);
         staticText = "Exile {this}";
     }

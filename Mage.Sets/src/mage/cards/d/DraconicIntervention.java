@@ -50,7 +50,7 @@ public final class DraconicIntervention extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
 
         // Exile Draconic Intervention.
-        this.getSpellAbility().addEffect(new ExileSpellEffect());
+        this.getSpellAbility().addEffect(new ExileSpellEffect().concatBy("<br>"));
     }
 
     private DraconicIntervention(final DraconicIntervention card) {

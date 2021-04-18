@@ -105,10 +105,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
                 sb.append(" and put them into your hand. If you do, shuffle");
             }
         } else {
-            if (!target.getTargetName().startsWith("a ") && !target.getTargetName().startsWith("an ")) {
-                sb.append("a ");
-            }
-            sb.append(target.getTargetName());
+            sb.append(CardUtil.addArticle(target.getTargetName()));
             if (forceShuffle) {
                 sb.append(revealCards ? ", reveal it, put it" : ", put that card");
                 sb.append(" into your hand, then shuffle");

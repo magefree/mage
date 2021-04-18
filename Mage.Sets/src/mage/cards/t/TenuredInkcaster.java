@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class TenuredInkcaster extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("a creature you control with a +1/+1 counter on it");
+            = new FilterCreaturePermanent("creature you control with a +1/+1 counter on it");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());

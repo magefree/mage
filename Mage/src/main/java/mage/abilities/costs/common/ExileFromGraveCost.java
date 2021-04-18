@@ -38,9 +38,7 @@ public class ExileFromGraveCost extends CostImpl {
                     + CardUtil.numberToText(target.getMaxNumberOfTargets()))
                     + ' ' + target.getTargetName();
         } else {
-            this.text = "exile "
-                    + (target.getTargetName().startsWith("card ") ? "a " : "")
-                    + target.getTargetName();
+            this.text = "exile " + CardUtil.addArticle(target.getTargetName());
         }
         if (!this.text.endsWith(" from your graveyard")) {
             this.text = this.text + " from your graveyard";

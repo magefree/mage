@@ -39,7 +39,7 @@ public final class StrixhavenStadium extends CardImpl {
         // Whenever a creature you control deals combat damage to an opponent, put a point counter on Strixhaven Stadium. Then if it has ten or more point counters on it, remove them all and that player loses the game.
         ability = new DealsDamageToAPlayerAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.POINT.createInstance()),
-                StaticFilters.FILTER_CONTROLLED_CREATURE, false, SetTargetPointer.PLAYER,
+                StaticFilters.FILTER_CONTROLLED_A_CREATURE, false, SetTargetPointer.PLAYER,
                 true, true, TargetController.OPPONENT
         );
         ability.addEffect(new StrixhavenStadiumEffect());
