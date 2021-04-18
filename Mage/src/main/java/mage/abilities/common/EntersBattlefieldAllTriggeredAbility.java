@@ -113,7 +113,11 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
             sb.append("{this} or another ");
         }
         sb.append(filter.getMessage());
-        sb.append(" enters the battlefield");
+        if (filter.getMessage().startsWith("one or more")) {
+            sb.append(" enter the battlefield");
+        } else {
+            sb.append(" enters the battlefield");
+        }
         if (controlledText) {
             sb.append(" under your control, ");
         } else {

@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -9,19 +8,20 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class ArdentDustspeaker extends CardImpl {
@@ -37,7 +37,11 @@ public final class ArdentDustspeaker extends CardImpl {
         // Whenever Ardent Dustspeaker attacks, you may put an instant or sorcery card from your graveyard on the bottom of your library.
         // If you do, exile the top two cards of your library. You may play those cards this turn.
         this.addAbility(new AttacksTriggeredAbility(
-                new DoIfCostPaid(new ExileTopXMayPlayUntilEndOfTurnEffect(2), new ArdentDustspeakerCost()),
+                new DoIfCostPaid(
+                        new ExileTopXMayPlayUntilEndOfTurnEffect(2)
+                                .setText("exile the top two cards of your library. You may play those cards this turn"),
+                        new ArdentDustspeakerCost()
+                ),
                 false
         ));
     }

@@ -36,7 +36,7 @@ public final class DetentionVortex extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Enchanted permanent can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(new CantBlockAttackActivateAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAttackActivateAttachedEffect("permanent")));
 
         // {3}: Destroy Detention Vortex. Only your opponents may activate this ability and only as a sorcery.
         ActivatedAbility ability = new ActivateAsSorceryActivatedAbility(

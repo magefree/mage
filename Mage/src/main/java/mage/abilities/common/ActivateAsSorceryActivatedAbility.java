@@ -3,6 +3,7 @@ package mage.abilities.common;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
+import mage.constants.TargetController;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 
@@ -28,6 +29,9 @@ public class ActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
+        if (mayActivate == TargetController.OPPONENT) {
+            return super.getRule() + " Only your opponents may activate this ability and only as a sorcery.";
+        }
         return super.getRule() + " Activate only as a sorcery.";
     }
 }

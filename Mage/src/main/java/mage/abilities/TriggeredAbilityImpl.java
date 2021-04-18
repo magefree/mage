@@ -170,7 +170,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             }
             sb.append(superRule);
             if (triggersOnce) {
-                sb.append(" This abilities triggers only once each turn.");
+                sb.append(" This ability triggers only once each turn.");
             }
         }
 
