@@ -311,7 +311,7 @@ public class CommandersCastTest extends CardTestCommander4Players {
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 5);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ethereal Forager");
         setChoice(playerA, "Blue", 5); // pay normal
-        setChoice(playerA, "Exile cards"); // pay delve
+        setChoice(playerA, "Exile a card"); // pay delve
         setChoice(playerA, "Balduvian Bears");
         setChoice(playerA, "Yes"); // move to command zone
 
