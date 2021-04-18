@@ -265,6 +265,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Simic Growth Chamber", 317, Rarity.UNCOMMON, mage.cards.s.SimicGrowthChamber.class));
         cards.add(new SetCardInfo("Simic Signet", 262, Rarity.COMMON, mage.cards.s.SimicSignet.class));
         cards.add(new SetCardInfo("Slayers' Stronghold", 318, Rarity.RARE, mage.cards.s.SlayersStronghold.class));
+        cards.add(new SetCardInfo("Sly Instigator", 32, Rarity.RARE, mage.cards.s.SlyInstigator.class));
         cards.add(new SetCardInfo("Sol Ring", 263, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 264, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Soul Snare", 104, Rarity.UNCOMMON, mage.cards.s.SoulSnare.class));
