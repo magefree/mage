@@ -74,7 +74,7 @@ class ArachnusSpinnerEffect extends OneShotEffect {
         super(Outcome.PutCardInPlay);
         this.staticText = "Search your graveyard and/or library for a card named Arachnus Web "
                 + "and put it onto the battlefield attached to target creature. "
-                + "If you search your library this way, shuffle it";
+                + "If you search your library this way, shuffle";
     }
 
     public ArachnusSpinnerEffect(final ArachnusSpinnerEffect effect) {

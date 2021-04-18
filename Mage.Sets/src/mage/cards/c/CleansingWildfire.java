@@ -33,7 +33,7 @@ public final class CleansingWildfire extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private CleansingWildfire(final CleansingWildfire card) {

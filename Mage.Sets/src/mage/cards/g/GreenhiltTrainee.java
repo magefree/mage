@@ -52,7 +52,7 @@ public final class GreenhiltTrainee extends CardImpl {
 class GreenhiltTraineeCost extends CostImpl {
 
     public GreenhiltTraineeCost() {
-        this.text = "Activate this ability only if Greenhilt Trainee's power is 4 or greater";
+        this.text = "Activate only if Greenhilt Trainee's power is 4 or greater";
     }
 
     public GreenhiltTraineeCost(final GreenhiltTraineeCost cost) {

@@ -66,7 +66,7 @@ public final class Norritt extends CardImpl {
                 new TapSourceCost(), BeforeAttackersAreDeclaredCondition.instance,
                 "{T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. "
                 + "That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. "
-                + "Activate this ability only before attackers are declared.");
+                + "Activate only before attackers are declared.");
         ability2.addEffect(new NorrittDelayedDestroyEffect());
         ability2.addTarget(new TargetCreaturePermanent(filterCreature));
         this.addAbility(ability2, new AttackedThisTurnWatcher());

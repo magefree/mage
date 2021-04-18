@@ -38,7 +38,7 @@ public final class DrJuliusJumblemorph extends CardImpl {
         // TODO: Host currently isn't implemented, so this ability currently would never trigger
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new InfoEffect("you may search your library and/or graveyard for a card with augment " +
-                        "and combine it with that host. If you search your library this way, shuffle it."), filter
+                        "and combine it with that host. If you search your library this way, shuffle."), filter
         ));
     }
 

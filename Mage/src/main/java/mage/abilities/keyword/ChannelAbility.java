@@ -37,7 +37,7 @@ public class ChannelAbility extends ActivatedAbilityImpl {
         StringBuilder sb = new StringBuilder("<i>Channel</i> &mdash; ");
         sb.append(super.getRule());
         if(this.timing == TimingRule.SORCERY) {
-            sb.append(" Activate this ability only any time you could cast a sorcery.");
+            sb.append(" Activate only as a sorcery.");
         }
         return sb.toString();
     }

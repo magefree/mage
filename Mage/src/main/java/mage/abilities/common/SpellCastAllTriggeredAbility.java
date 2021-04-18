@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
@@ -78,7 +79,7 @@ public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
         if (rule != null && !rule.isEmpty()) {
             return rule;
         }
-        return "Whenever a player casts " + filter.getMessage() + ", " + super.getRule();
+        return "Whenever a player casts " + CardUtil.addArticle(filter.getMessage()) + ", " + super.getRule();
     }
 
     @Override

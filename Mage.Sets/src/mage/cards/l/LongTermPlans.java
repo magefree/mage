@@ -40,7 +40,7 @@ class LongTermPlansEffect extends OneShotEffect {
 
     LongTermPlansEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search your library for a card, shuffle your library, then put that card third from the top";
+        this.staticText = "Search your library for a card, then shuffle and put that card third from the top";
     }
 
     LongTermPlansEffect(final LongTermPlansEffect effect) {

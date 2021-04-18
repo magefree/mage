@@ -40,7 +40,7 @@ public class ActivateOncePerTurnManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public String getRule() {
-        return super.getRule() + " Activate this ability only once each turn.";
+        return super.getRule() + " Activate only once each turn.";
     }
 
     @Override

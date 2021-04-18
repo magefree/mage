@@ -102,8 +102,8 @@ class DeathsOasisTriggeredAbility extends DiesCreatureTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Whenever a nontoken creature you control dies, put the top two cards of your library " +
-                "into your graveyard. Then return a creature card with lesser mana value " +
+        return "Whenever a nontoken creature you control dies, mill two cards. " +
+                "Then return a creature card with lesser mana value " +
                 "than the creature that died from your graveyard to your hand.";
     }
 }

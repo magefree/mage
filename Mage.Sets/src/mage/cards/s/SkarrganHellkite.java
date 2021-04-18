@@ -41,7 +41,7 @@ public final class SkarrganHellkite extends CardImpl {
                 Zone.BATTLEFIELD, new DamageMultiEffect(2),
                 new ManaCostsImpl("{3}{R}"), new SourceHasCounterCondition(CounterType.P1P1),
                 "{3}{R}: {this} deals 2 damage divided as you choose among one or two targets. " +
-                        "Activate this ability only if {this} has a +1/+1 counter on it."
+                        "Activate only if {this} has a +1/+1 counter on it."
         );
         ability.addTarget(new TargetAnyTargetAmount(2));
         this.addAbility(ability);

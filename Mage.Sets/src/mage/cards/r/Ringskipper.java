@@ -1,6 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.effects.common.DoIfClashWonEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
@@ -29,7 +30,7 @@ public final class Ringskipper extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When {this} is put into graveyard from play, clash with an opponent. If you win return {this} to its owner's hand
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DoIfClashWonEffect(new ReturnToHandSourceEffect())));
+        this.addAbility(new DiesSourceTriggeredAbility(new DoIfClashWonEffect(new ReturnToHandSourceEffect(false,true))));
     }
 
     private Ringskipper(final Ringskipper card) {

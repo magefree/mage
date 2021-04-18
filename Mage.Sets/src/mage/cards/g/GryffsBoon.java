@@ -66,7 +66,7 @@ class GryffsBoonEffect extends OneShotEffect {
 
     public GryffsBoonEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "Return {this} from your graveyard to the battlefield attached to target creature. Activate this ability only any time you could cast a sorcery.";
+        staticText = "Return {this} from your graveyard to the battlefield attached to target creature. Activate only as a sorcery.";
     }
 
     public GryffsBoonEffect(final GryffsBoonEffect effect) {

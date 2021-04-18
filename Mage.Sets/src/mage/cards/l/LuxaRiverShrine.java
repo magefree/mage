@@ -23,7 +23,7 @@ import mage.counters.CounterType;
  */
 public final class LuxaRiverShrine extends CardImpl {
 
-    private static final String rule = "{T}: You gain 2 life. Activate this ability only if there are three or more brick counters on {this}.";
+    private static final String rule = "{T}: You gain 2 life. Activate only if there are three or more brick counters on {this}.";
 
     public LuxaRiverShrine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

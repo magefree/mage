@@ -31,7 +31,7 @@ public final class ImminentDoom extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // Imminent Doom enters the battlefield with a doom counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.DOOM.createInstance(1))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.DOOM.createInstance(1)), "with a doom counter on it"));
 
         // Whenever you cast a spell with converted mana cost equal to the number of doom counters on Imminent Doom, Imminent Doom deals that much damage to any target. Then put a doom counter on Imminent Doom.
         Ability ability = new ImminentDoomTriggeredAbility();

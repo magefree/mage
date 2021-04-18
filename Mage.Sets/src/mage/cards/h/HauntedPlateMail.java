@@ -40,7 +40,7 @@ public final class HauntedPlateMail extends CardImpl {
                 new BecomesCreatureSourceEffect(new HauntedPlateMailToken(), "", Duration.EndOfTurn),
                 new ManaCostsImpl("{0}"),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_PERMANENT_CREATURE, ComparisonType.EQUAL_TO, 0),
-                "{0}: Until end of turn, Haunted Plate Mail becomes a 4/4 Spirit artifact creature that's no longer an Equipment. Activate this ability only if you control no creatures.");
+                "{0}: Until end of turn, Haunted Plate Mail becomes a 4/4 Spirit artifact creature that's no longer an Equipment. Activate only if you control no creatures.");
         this.addAbility(ability);
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{4}")));

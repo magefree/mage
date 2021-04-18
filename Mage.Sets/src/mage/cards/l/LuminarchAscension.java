@@ -87,7 +87,7 @@ class SourceHasCountersCost extends CostImpl {
     public SourceHasCountersCost(int counters, CounterType counterType) {
         this.counters = counters;
         this.counterType = counterType;
-        this.text = "Activate this ability only if Luminarch Ascension has 4 or more quest counters on it";
+        this.text = "Activate only if Luminarch Ascension has 4 or more quest counters on it";
     }
 
     public SourceHasCountersCost(final SourceHasCountersCost cost) {

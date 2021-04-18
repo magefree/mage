@@ -27,7 +27,7 @@ import mage.target.targetadjustment.TargetAdjuster;
  */
 public final class LilianaDefiantNecromancer extends CardImpl {
 
-    protected static final FilterCreatureCard filter = new FilterCreatureCard("nonlegendary creature with mana value X from your graveyard");
+    protected static final FilterCreatureCard filter = new FilterCreatureCard("nonlegendary creature card with mana value X from your graveyard");
 
     static {
         filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));

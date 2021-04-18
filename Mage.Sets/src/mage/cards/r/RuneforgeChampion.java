@@ -41,7 +41,7 @@ public final class RuneforgeChampion extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryGraveyardPutInHandEffect(
                 filter, false, false
         ).setText("search your library and/or graveyard for a Rune card, reveal it, " +
-                "and put it into your hand. If you search your library this way, shuffle it"), true));
+                "and put it into your hand. If you search your library this way, shuffle"), true));
 
         // You may pay {1} rather than pay the mana cost for Rune spells you cast.
         this.addAbility(new SimpleStaticAbility(new RuneforgeChampionEffect()));

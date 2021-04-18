@@ -51,7 +51,7 @@ public final class BloodshotTrainee extends CardImpl {
 class BloodshotTraineeCost extends CostImpl {
 
     public BloodshotTraineeCost() {
-        this.text = "Activate this ability only if Bloodshot Trainee's power is 4 or greater";
+        this.text = "Activate only if Bloodshot Trainee's power is 4 or greater";
     }
 
     public BloodshotTraineeCost(final BloodshotTraineeCost cost) {

@@ -37,7 +37,7 @@ public final class TIEBomber extends CardImpl {
                 new LoseAbilitySourceEffect(SpaceflightAbility.getInstance(), Duration.EndOfTurn),
                 new GenericManaCost(1),
                 new IsPhaseCondition(TurnPhase.COMBAT),
-                "{1}: {this} loses Spaceflight until end od turn. Activate this ability only during combat."));
+                "{1}: {this} loses Spaceflight until end od turn. Activate only during combat."));
     }
 
     private TIEBomber(final TIEBomber card) {

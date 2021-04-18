@@ -50,7 +50,7 @@ public final class MetallurgicSummonings extends CardImpl {
                 new MetallurgicSummoningsReturnEffect(), new ManaCostsImpl("{3}{U}{U}"),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), ComparisonType.MORE_THAN, 5),
                 "{3}{U}{U}, Exile {this}: Return all instant and sorcery cards from your graveyard to your hand."
-                + " Activate this ability only if you control six or more artifacts.");
+                + " Activate only if you control six or more artifacts.");
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }
@@ -99,7 +99,7 @@ class MetallurgicSummoningsReturnEffect extends OneShotEffect {
 
     MetallurgicSummoningsReturnEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Return all instant and sorcery cards from your graveyard to your hand. Activate this ability only if you control six or more artifacts";
+        this.staticText = "Return all instant and sorcery cards from your graveyard to your hand. Activate only if you control six or more artifacts";
     }
 
     MetallurgicSummoningsReturnEffect(final MetallurgicSummoningsReturnEffect effect) {

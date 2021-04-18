@@ -81,7 +81,7 @@ class GateToTheAfterlifeEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "Search your graveyard, hand, and/or library for a card named "
                 + cardName
-                + " and put it onto the battlefield. If you search your library this way, shuffle it";
+                + " and put it onto the battlefield. If you search your library this way, shuffle";
     }
 
     public GateToTheAfterlifeEffect(final GateToTheAfterlifeEffect effect) {

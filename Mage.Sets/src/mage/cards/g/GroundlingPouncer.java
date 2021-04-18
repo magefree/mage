@@ -51,7 +51,7 @@ public final class GroundlingPouncer extends CardImpl {
                 new BoostSourceEffect(1, 3, Duration.EndOfTurn),
                 new ManaCostsImpl("{G/U}"),
                 new OpponentControlsPermanentCondition(filter),
-                "{G/U}: {this} gets +1/+3 and gains flying until end of turn. Activate this ability only once each turn and only if an opponent controls a creature with flying.");
+                "{G/U}: {this} gets +1/+3 and gains flying until end of turn. Activate only once each turn and only if an opponent controls a creature with flying.");
         ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);
 

@@ -57,7 +57,7 @@ public final class AyliEternalPilgrim extends CardImpl {
                 new ExileTargetEffect(),
                 new ManaCostsImpl("{1}{W}{B}"),
                 new AyliEternalPilgrimCondition(),
-                "{1}{W}{B}, Sacrifice another creature: Exile target nonland permanent. Activate this ability only if you have at least 10 life more than your starting life total");
+                "{1}{W}{B}, Sacrifice another creature: Exile target nonland permanent. Activate only if you have at least 10 life more than your starting life total");
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);

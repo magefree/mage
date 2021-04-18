@@ -21,7 +21,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class LeoninSquire extends CardImpl {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("target artifact card with mana value 1 or less from your graveyard");
+    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card with mana value 1 or less from your graveyard");
     static {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 2));
     }

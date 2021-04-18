@@ -44,7 +44,7 @@ public final class ViviensJaguar extends CardImpl {
                 new ManaCostsImpl("{2}{G}"),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "{2}{G}: Return {this} from your graveyard to your hand. "
-                + "Activate this ability only if you control a Vivien planeswalker"
+                + "Activate only if you control a Vivien planeswalker"
         ));
     }
 

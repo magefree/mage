@@ -133,7 +133,7 @@ class SearchLibraryPutInGraveyard extends SearchEffect {
 
     public SearchLibraryPutInGraveyard(FilterCard filter) {
         super(new TargetCardInLibrary(filter), Outcome.Neutral);
-        staticText = "search for a creature card with eternalize or embalm, put that card into your graveyard, then shuffle.";
+        staticText = "search your library for a creature card with eternalize or embalm, put that card into your graveyard, then shuffle.";
     }
 
     public SearchLibraryPutInGraveyard(final SearchLibraryPutInGraveyard effect) {

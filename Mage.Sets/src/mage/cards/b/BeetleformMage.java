@@ -33,8 +33,8 @@ public final class BeetleformMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}{U}: Beetleform Mage gets +2/+2 and gains flying until end of turn. Activate this ability only once each turn.
-        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,2, Duration.EndOfTurn), new ManaCostsImpl("{G}{U}"));
-        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
+        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,2, Duration.EndOfTurn).setText("{this} gets +2/+2"), new ManaCostsImpl("{G}{U}"));
+        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).setText("and gains flying until end of turn"));
         this.addAbility(ability);
 
     }

@@ -24,7 +24,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class SalvagingStation extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("noncreature artifact card with mana value 1 or less");
+    private static final FilterCard filter = new FilterCard("noncreature artifact card with mana value 1 or less from your graveyard");
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
@@ -36,7 +36,7 @@ public final class SalvagingStation extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // {tap}: Return target noncreature artifact card with converted mana cost 1 or less from your graveyard to the battlefield.
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new TapSourceCost());
+        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(false, false), new TapSourceCost());
         secondAbility.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(secondAbility);            
         // Whenever a creature dies, you may untap Salvaging Station.

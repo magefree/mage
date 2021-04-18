@@ -80,7 +80,7 @@ class CharmedPendantAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public String getRule() {
-        return super.getRule() + " Activate this ability only any time you could cast an instant.";
+        return super.getRule() + " Activate only as an instant.";
     }
 }
 

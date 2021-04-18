@@ -53,12 +53,12 @@ public final class AshlingsPrerogative extends CardImpl {
 
 class AshlingsPrerogativeIncorrectOddityEffect extends PermanentsEnterBattlefieldTappedEffect {
 
-    private static final FilterCreaturePermanent creaturefilter = new FilterCreaturePermanent("Each creature without mana value of the chosen value");
+    private static final FilterCreaturePermanent creaturefilter = new FilterCreaturePermanent("Each creature without mana value of the chosen quality");
     private static final ModeChoiceSourceCondition oddCondition = new ModeChoiceSourceCondition("Odd");
 
     public AshlingsPrerogativeIncorrectOddityEffect() {
         super(creaturefilter);
-        staticText = "Each creature without mana value of the chosen value enters the battlefield tapped.";
+        staticText = "Each creature without mana value of the chosen quality enters the battlefield tapped.";
     }
     
     public AshlingsPrerogativeIncorrectOddityEffect(final AshlingsPrerogativeIncorrectOddityEffect effect) {
@@ -88,12 +88,12 @@ class AshlingsPrerogativeIncorrectOddityEffect extends PermanentsEnterBattlefiel
 
 class AshlingsPrerogativeCorrectOddityEffect extends GainAbilityAllEffect {
 
-    private static final FilterCreaturePermanent creaturefilter = new FilterCreaturePermanent("Each creature with mana value of the chosen value");
+    private static final FilterCreaturePermanent creaturefilter = new FilterCreaturePermanent("Each creature with mana value of the chosen quality");
     private static final ModeChoiceSourceCondition oddCondition = new ModeChoiceSourceCondition("Odd");
 
     public AshlingsPrerogativeCorrectOddityEffect() {
         super(HasteAbility.getInstance(), Duration.WhileOnBattlefield, creaturefilter);
-        staticText = "Each creature with mana value of the chosen value has haste.";
+        staticText = "Each creature with mana value of the chosen quality has haste.";
     }
     public AshlingsPrerogativeCorrectOddityEffect(final AshlingsPrerogativeCorrectOddityEffect effect) {
         super(effect);   

@@ -38,7 +38,7 @@ public final class LifeMatrix extends CardImpl {
                 new GenericManaCost(4),
                 new IsStepCondition(PhaseStep.UPKEEP), "Put a matrix counter on target creature and "
                 + "that creature gains “Remove a matrix counter from this creature: "
-                + "Regenerate this creature.” Activate this ability only during your upkeep.");
+                + "Regenerate this creature.” Activate only during your upkeep.");
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new RegenerateSourceEffect(),
                 new RemoveCountersSourceCost(CounterType.MATRIX.createInstance()));

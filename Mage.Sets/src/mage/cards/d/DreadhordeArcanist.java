@@ -86,7 +86,7 @@ class DreadhordeArcanistEffect extends OneShotEffect {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast target instant or sorcery card with mana value "
                 + "less than or equal to {this}'s power from your graveyard without paying its mana cost. "
-                + "If that card would be put into your graveyard this turn, exile it instead.";
+                + "If that spell would be put into your graveyard this turn, exile it instead.";
     }
 
     private DreadhordeArcanistEffect(final DreadhordeArcanistEffect effect) {

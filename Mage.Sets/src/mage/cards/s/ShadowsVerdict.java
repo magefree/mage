@@ -64,7 +64,7 @@ class ShadowsVerdictEffect extends OneShotEffect {
 
     ShadowsVerdictEffect() {
         super(Outcome.Benefit);
-        staticText = "exile all creatures and all planeswalkers with mana value 3 or less from the battlefield " +
+        staticText = "exile all creatures and planeswalkers with mana value 3 or less from the battlefield " +
                 "and all creature and planeswalker cards with mana value 3 or less from all graveyards";
     }
 

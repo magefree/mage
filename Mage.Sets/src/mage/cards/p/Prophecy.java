@@ -33,7 +33,7 @@ public final class Prophecy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Draw a card at the beginning of the next turn's upkeep.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false).concatBy("<br>"));
     }
 
     private Prophecy(final Prophecy card) {

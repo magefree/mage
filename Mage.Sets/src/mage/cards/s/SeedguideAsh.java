@@ -19,7 +19,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class SeedguideAsh extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Forest");
+    private static final FilterCard filter = new FilterCard("Forest cards");
 
     static {
         filter.add(SubType.FOREST.getPredicate());
@@ -33,7 +33,7 @@ public final class SeedguideAsh extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         // When Seedguide Ash dies, you may search your library for up to three Forest cards and put them onto the battlefield tapped. If you do, shuffle your library.
-        this.addAbility(new DiesSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 3, filter), true, false, Outcome.PutLandInPlay), true));
+        this.addAbility(new DiesSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 3, filter), true, true, Outcome.PutLandInPlay), true));
     }
 
     private SeedguideAsh(final SeedguideAsh card) {

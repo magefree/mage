@@ -46,6 +46,6 @@ public class ForecastAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Forecast &mdash; " + super.getRule() + " <i>(Activate this ability only during your upkeep and only once each turn)</i>";
+        return "Forecast &mdash; " + super.getRule() + " <i>(Activate only during your upkeep and only once each turn)</i>";
     }
 }

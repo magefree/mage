@@ -48,7 +48,7 @@ public final class DementiaSliver extends CardImpl {
                         "All Slivers have \"{T}: Choose a card name. "
                                 + "Target opponent reveals a card at random from their hand."
                                 + " If that card has the chosen name, that player discards it."
-                                + " Activate this ability only during your turn.\""
+                                + " Activate only during your turn.\""
                 )
         ));
     }

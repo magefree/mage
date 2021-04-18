@@ -40,7 +40,7 @@ public final class Skygames extends CardImpl {
         Ability gainAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
         gainAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA,
-                Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Target creature gains flying until end of turn. Activate this ability only any time you could cast a sorcery.\"")));
+                Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Target creature gains flying until end of turn. Activate only as a sorcery.\"")));
     }
 
     private Skygames(final Skygames card) {

@@ -66,7 +66,7 @@ class LavabrinkVenturerEffect extends GainAbilitySourceEffect {
     LavabrinkVenturerEffect() {
         super(new ProtectionAbility(nullFilter));
         this.ability.setRuleVisible(false);
-        staticText = "{this} has protection from each mana value of the chosen value. <i>(Zero is even.)</i>";
+        staticText = "{this} has protection from each mana value of the chosen quality. <i>(Zero is even.)</i>";
     }
 
     private LavabrinkVenturerEffect(final LavabrinkVenturerEffect effect) {
