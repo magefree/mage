@@ -66,7 +66,7 @@ class GhaltaPrimalHungerCostReductionEffect extends CostModificationEffectImpl {
 
     GhaltaPrimalHungerCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {X} less to cast, where X is the total power of creatures you control";
+        staticText = "this spell costs {X} less to cast, where X is the total power of creatures you control";
     }
 
     GhaltaPrimalHungerCostReductionEffect(final GhaltaPrimalHungerCostReductionEffect effect) {

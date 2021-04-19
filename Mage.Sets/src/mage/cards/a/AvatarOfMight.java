@@ -33,7 +33,7 @@ public final class AvatarOfMight extends CardImpl {
 
         // If an opponent controls at least four more creatures than you, Avatar of Might costs {6} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(6, condition)
-                .setText("If an opponent controls at least four more creatures than you, {this} costs {6} less to cast"))
+                .setText("If an opponent controls at least four more creatures than you, this spell costs {6} less to cast"))
                 .addHint(new ConditionHint(condition, "Opponent controls at least four more creatures than you"))
         );
 

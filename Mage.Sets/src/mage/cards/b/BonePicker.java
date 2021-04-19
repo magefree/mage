@@ -59,7 +59,7 @@ class BonePickerAdjustingCostsEffect extends CostModificationEffectImpl {
 
     BonePickerAdjustingCostsEffect() {
         super(Duration.EndOfGame, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {3} less to cast if a creature died this turn";
+        staticText = "this spell costs {3} less to cast if a creature died this turn";
     }
 
     BonePickerAdjustingCostsEffect(BonePickerAdjustingCostsEffect effect) {

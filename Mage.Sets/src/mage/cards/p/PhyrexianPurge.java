@@ -27,8 +27,8 @@ public final class PhyrexianPurge extends CardImpl {
         // Destroy any number of target creatures.
         // Phyrexian Purge costs 3 life more to cast for each target.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
-        this.getSpellAbility().addEffect(new DestroyMultiTargetEffect());
-        this.getSpellAbility().addEffect(new InfoEffect("<br><br>{this} costs 3 life more to cast for each target"));
+        this.getSpellAbility().addEffect(new InfoEffect("this spell costs 3 life more to cast for each target"));
+        this.getSpellAbility().addEffect(new DestroyMultiTargetEffect().concatBy("<br>"));
         this.getSpellAbility().setTargetAdjuster(PhyrexianPurgeTargetAdjuster.instance);
         this.getSpellAbility().setCostAdjuster(PhyrexianPurgeCostAdjuster.instance);
     }

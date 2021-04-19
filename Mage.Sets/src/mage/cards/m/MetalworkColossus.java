@@ -64,7 +64,7 @@ class MetalworkColossusCostReductionEffect extends CostModificationEffectImpl {
 
     MetalworkColossusCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {X} less to cast, where X is the total mana value of noncreature artifacts you control";
+        staticText = "this spell costs {X} less to cast, where X is the total mana value of noncreature artifacts you control";
     }
 
     MetalworkColossusCostReductionEffect(final MetalworkColossusCostReductionEffect effect) {

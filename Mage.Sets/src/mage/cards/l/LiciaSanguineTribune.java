@@ -71,7 +71,7 @@ class LiciaSanguineTribuneCostReductionEffect extends CostModificationEffectImpl
 
     LiciaSanguineTribuneCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {1} less to cast for each 1 life you have gained this turn.";
+        staticText = "this spell costs {1} less to cast for each 1 life you have gained this turn.";
     }
 
     LiciaSanguineTribuneCostReductionEffect(LiciaSanguineTribuneCostReductionEffect effect) {
