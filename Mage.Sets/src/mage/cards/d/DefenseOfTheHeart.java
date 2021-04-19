@@ -32,7 +32,7 @@ public final class DefenseOfTheHeart extends CardImpl {
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
         ability.addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_CREATURE), false, Outcome.PutLandInPlay));
         DefenseOfTheHeartCondition contition = new DefenseOfTheHeartCondition();
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, contition, "At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice {this}, search your library for up to two creature cards, and put those cards onto the battlefield. Then shuffle"));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, contition, "At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice {this}, search your library for up to two creature cards, put those cards onto the battlefield, then shuffle"));
 
     }
 

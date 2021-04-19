@@ -125,7 +125,7 @@ public final class NightDealings extends CardImpl {
         private NightDealingsSearchEffect() {
             super(Outcome.DrawCard);
             this.staticText = "Search your library for a nonland card with mana value X, " +
-                    "reveal it, and put it into your hand. Then shuffle";
+                    "reveal it, put it into your hand, then shuffle";
         }
 
         private NightDealingsSearchEffect(final NightDealingsSearchEffect effect) {

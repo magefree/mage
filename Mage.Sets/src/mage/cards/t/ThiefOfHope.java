@@ -28,7 +28,7 @@ public final class ThiefOfHope extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SpellCastControllerTriggeredAbility(new LoseLifeTargetEffect(1), StaticFilters.SPIRIT_OR_ARCANE_CARD, false);
-        ability.addEffect(new GainLifeEffect(1));
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
         this.addAbility(new SoulshiftAbility(2));

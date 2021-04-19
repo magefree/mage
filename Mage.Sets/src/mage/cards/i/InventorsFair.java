@@ -53,7 +53,6 @@ public final class InventorsFair extends CardImpl {
                 new GenericManaCost(4), MetalcraftCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.setAbilityWord(AbilityWord.METALCRAFT);
         ability.addHint(MetalcraftHint.instance);
         this.addAbility(ability);
     }

@@ -10,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -25,7 +25,7 @@ public final class Cryptwailing extends CardImpl {
 
         // {1}, Exile two creature cards from your graveyard: Target player discards a card. Activate this ability only any time you could cast a sorcery.
         ActivateAsSorceryActivatedAbility ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new GenericManaCost(1));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2,2, new FilterCreatureCard("two creature cards from your graveyard"))));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

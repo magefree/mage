@@ -56,7 +56,7 @@ class MuzzioVisionaryArchitectEffect extends OneShotEffect {
 
     public MuzzioVisionaryArchitectEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Look at the top X cards of your library, where X is the highest mana value among artifacts you control. You may reveal an artifact card from among them and put it onto the battlefield. Put the rest on the bottom of your library in any order";
+        this.staticText = "look at the top X cards of your library, where X is the highest mana value among artifacts you control. You may put an artifact card from among them onto the battlefield. Put the rest on the bottom of your library in any order";
     }
 
     public MuzzioVisionaryArchitectEffect(final MuzzioVisionaryArchitectEffect effect) {

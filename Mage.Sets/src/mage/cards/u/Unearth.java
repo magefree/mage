@@ -31,7 +31,7 @@ public final class Unearth extends CardImpl {
 
 
         // Return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
 
         // Cycling {2}

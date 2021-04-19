@@ -37,7 +37,7 @@ public final class OrimsThunder extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new OrimsThunderEffect2(),
                 KickedCondition.instance,
-                "If Orim's Thunder was kicked, it deals damage equal to that permanent's mana value to target creature")
+                "If this spell was kicked, it deals damage equal to that permanent's mana value to target creature")
         );
         this.getSpellAbility().setTargetAdjuster(OrimsThunderAdjuster.instance);
     }

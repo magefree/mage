@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -11,7 +10,10 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
@@ -21,8 +23,9 @@ import mage.game.command.emblems.LilianaDefiantNecromancerEmblem;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class LilianaDefiantNecromancer extends CardImpl {
@@ -47,7 +50,7 @@ public final class LilianaDefiantNecromancer extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DiscardEachPlayerEffect(1, false), 2));
 
         // -X: Return target nonlegendary creature with converted mana cost X from your graveyard to the battlefield.
-        Ability ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        Ability ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.setTargetAdjuster(LilianaDefiantNecromancerAdjuster.instance);
         this.addAbility(ability);

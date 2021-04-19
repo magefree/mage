@@ -42,7 +42,7 @@ public final class WhipOfErebos extends CardImpl {
         // Creatures you control have lifelink.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 LifelinkAbility.getInstance(), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_CONTROLLED_CREATURES
+                StaticFilters.FILTER_PERMANENT_CREATURES
         )));
 
         // {2}{B}{B}, {T}: Return target creature card from your graveyard to the battlefield.

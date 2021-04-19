@@ -51,7 +51,7 @@ public final class MomirVigSimicVisionary extends CardImpl {
 
         // Whenever you cast a green creature spell, you may search your library for a creature card and reveal it. If you do, shuffle your library and put that card on top of it.
         Effect effect = new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), true, true);
-        effect.setText("you may search your library for a creature card and reveal it. If you do, shuffle and put that card on top of it");
+        effect.setText("search your library for a creature card, reveal it, then shuffle and put that card on top");
         this.addAbility(new SpellCastControllerTriggeredAbility(effect, filter, true));
 
         // Whenever you cast a blue creature spell, reveal the top card of your library. If it's a creature card, put that card into your hand.

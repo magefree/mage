@@ -47,7 +47,8 @@ class KodamasReachEffect extends OneShotEffect {
 
     public KodamasReachEffect() {
         super(Outcome.PutLandInPlay);
-        staticText = "Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle";
+        staticText = "search your library for up to two basic land cards, reveal those cards, " +
+                "put one onto the battlefield tapped and the other into your hand, then shuffle";
     }
 
     public KodamasReachEffect(final KodamasReachEffect effect) {

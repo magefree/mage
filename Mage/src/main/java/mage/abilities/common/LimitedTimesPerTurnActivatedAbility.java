@@ -44,7 +44,7 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
     public String getRule() {
         StringBuilder sb = new StringBuilder(super.getRule()).append(" Activate ");
         if (condition != null) {
-            sb.append("only if ").append(condition.toString()).append(" and ");
+            sb.append("only ").append(condition.toString()).append(" and ");
         }
         if (getTiming() == TimingRule.SORCERY) {
             sb.append("only as a sorcery and ");

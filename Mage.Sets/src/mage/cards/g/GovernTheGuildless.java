@@ -30,7 +30,7 @@ public final class GovernTheGuildless extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
 
         // Gain control of target monocolored creature.
-        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfGame));
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         // Forecast - {1}{U}, Reveal Govern the Guildless from your hand: Target creature becomes the color or colors of your choice until end of turn.

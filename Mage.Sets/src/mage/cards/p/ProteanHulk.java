@@ -45,7 +45,7 @@ public final class ProteanHulk extends CardImpl {
 class ProteanHulkTarget extends TargetCardInLibrary {
 
     private static final FilterCard filter
-            = new FilterCreatureCard("any number of creature cards with total mana value 6 or less");
+            = new FilterCreatureCard("creature cards with total mana value 6 or less");
 
     ProteanHulkTarget() {
         super(0, Integer.MAX_VALUE, filter);

@@ -7,6 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.PlainscyclingAbility;
@@ -36,7 +37,7 @@ public final class EternalDragon extends CardImpl {
 
         // {3}{W}{W}: Return Eternal Dragon from your graveyard to your hand. Activate this ability only during your upkeep.        
         Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD, 
-                new ReturnToHandSourceEffect(), 
+                new ReturnSourceFromGraveyardToHandEffect(),
                 new ManaCostsImpl("{3}{W}{W}"), 
                 new IsStepCondition(PhaseStep.UPKEEP),
                 null

@@ -30,7 +30,7 @@ public final class Repeal extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(RepealAdjuster.instance);
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Repeal(final Repeal card) {

@@ -17,6 +17,7 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.util.CardUtil;
 
 /**
  *
@@ -85,6 +86,6 @@ class CranialExtractionEffect extends SearchTargetGraveyardHandLibraryForCardNam
 
     @Override
     public String getText(Mode mode) {
-        return "Name a nonland card. " + super.getText(mode);
+        return "Choose a nonland card name. " + CardUtil.getTextWithFirstCharUpperCase(super.getText(mode));
     }
 }
