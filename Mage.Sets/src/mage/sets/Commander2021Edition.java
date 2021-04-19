@@ -36,6 +36,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 234, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archaeomancer's Map", 12, Rarity.RARE, mage.cards.a.ArchaeomancersMap.class));
         cards.add(new SetCardInfo("Audacious Reshapers", 47, Rarity.RARE, mage.cards.a.AudaciousReshapers.class));
+        cards.add(new SetCardInfo("Author of Shadows", 35, Rarity.RARE, mage.cards.a.AuthorOfShadows.class));
         cards.add(new SetCardInfo("Barren Moor", 277, Rarity.UNCOMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Battlefield Forge", 278, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
         cards.add(new SetCardInfo("Beast Within", 186, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
