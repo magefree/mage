@@ -275,6 +275,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Spawning Kraken", 33, Rarity.RARE, mage.cards.s.SpawningKraken.class));
         cards.add(new SetCardInfo("Spectral Searchlight", 265, Rarity.UNCOMMON, mage.cards.s.SpectralSearchlight.class));
         cards.add(new SetCardInfo("Spitting Image", 229, Rarity.RARE, mage.cards.s.SpittingImage.class));
+        cards.add(new SetCardInfo("Sproutback Trudge", 68, Rarity.RARE, mage.cards.s.SproutbackTrudge.class));
         cards.add(new SetCardInfo("Stalking Leonin", 105, Rarity.RARE, mage.cards.s.StalkingLeonin.class));
         cards.add(new SetCardInfo("Steel Hellkite", 266, Rarity.RARE, mage.cards.s.SteelHellkite.class));
         cards.add(new SetCardInfo("Steel Overseer", 267, Rarity.RARE, mage.cards.s.SteelOverseer.class));
