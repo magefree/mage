@@ -86,7 +86,7 @@ class HofriGhostforgeEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "exile it. If you do, create a token that's a copy of that creature, " +
                 "except it's a Spirit in addition to its other types and it has " +
-                "\"When this creature leaves the battlefield, return the exiled card to your graveyard.\"";
+                "\"When this creature leaves the battlefield, return the exiled card to its owner's graveyard.\"";
     }
 
     private HofriGhostforgeEffect(final HofriGhostforgeEffect effect) {
@@ -125,7 +125,7 @@ class HofriGhostforgeReturnEffect extends OneShotEffect {
     HofriGhostforgeReturnEffect(Card card, Game game) {
         super(Outcome.Benefit);
         this.mor = new MageObjectReference(card, game);
-        staticText = "return the exiled card to your graveyard";
+        staticText = "return the exiled card to its owner's graveyard";
     }
 
     private HofriGhostforgeReturnEffect(final HofriGhostforgeReturnEffect effect) {
