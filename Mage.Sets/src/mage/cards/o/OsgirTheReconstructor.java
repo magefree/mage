@@ -98,7 +98,7 @@ class OsgirTheReconstructorCreateArtifactTokensEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
-        Card card = game.getCard(source.getFirstTarget());
+        Card card = game.getCard(targetPointer.getFirst(game, source));
 
         if (player == null || card == null) {
             return false;
@@ -108,24 +108,22 @@ class OsgirTheReconstructorCreateArtifactTokensEffect extends OneShotEffect {
             return false;
         }
 
-        if (card.isArtifact()) {
-            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(player.getId(), null, false, 2);
-            effect.setTargetPointer(new FixedTarget(card.getId(), game));
-            effect.apply(game, source);
-            Object object = game.getState().getValue(CardUtil.getCardZoneString("_tokensCreated", source.getSourceId(), game));
-            Set<UUID> tokensCreated;
-            if (object != null) {
-                tokensCreated = (Set<UUID>) object;
-            } else {
-                tokensCreated = new HashSet<>();
-            }
-            for (Permanent perm : effect.getAddedPermanent()) {
-                if (perm != null) {
-                    tokensCreated.add(perm.getId());
-                }
-            }
-            game.getState().setValue(CardUtil.getCardZoneString("_tokensCreated", source.getSourceId(), game), tokensCreated);
+        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(player.getId(), null, false, 2);
+        effect.setTargetPointer(new FixedTarget(card.getId(), game));
+        effect.apply(game, source);
+        Object object = game.getState().getValue(CardUtil.getCardZoneString("_tokensCreated", source.getSourceId(), game));
+        Set<UUID> tokensCreated;
+        if (object != null) {
+            tokensCreated = (Set<UUID>) object;
+        } else {
+            tokensCreated = new HashSet<>();
         }
+        for (Permanent perm : effect.getAddedPermanent()) {
+            if (perm != null) {
+                tokensCreated.add(perm.getId());
+            }
+        }
+        game.getState().setValue(CardUtil.getCardZoneString("_tokensCreated", source.getSourceId(), game), tokensCreated);
 
         return  true;
     }
