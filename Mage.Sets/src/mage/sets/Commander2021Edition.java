@@ -106,6 +106,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Dualcaster Mage", 165, Rarity.RARE, mage.cards.d.DualcasterMage.class));
         cards.add(new SetCardInfo("Duelist's Heritage", 90, Rarity.RARE, mage.cards.d.DuelistsHeritage.class));
         cards.add(new SetCardInfo("Duplicant", 242, Rarity.RARE, mage.cards.d.Duplicant.class));
+        cards.add(new SetCardInfo("Elementalist's Palette", 76, Rarity.RARE, mage.cards.e.ElementalistsPalette.class));
         cards.add(new SetCardInfo("Elite Scaleguard", 91, Rarity.UNCOMMON, mage.cards.e.EliteScaleguard.class));
         cards.add(new SetCardInfo("Elixir of Immortality", 243, Rarity.UNCOMMON, mage.cards.e.ElixirOfImmortality.class));
         cards.add(new SetCardInfo("Epic Experiment", 216, Rarity.MYTHIC, mage.cards.e.EpicExperiment.class));
