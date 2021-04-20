@@ -22,13 +22,15 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
@@ -61,15 +63,11 @@ public final class OsgirTheReconstructor extends CardImpl {
         this.addAbility(ability);
 
         // {X},{T}, Exile an artifact with mana value X from your graveyard: Create two tokens that are copies of the exiled card. Activate only as
-        Ability copyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability copyAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD,
                 new OsgirTheReconstructorCreateArtifactTokensEffect(),
                 new ManaCostsImpl("{X}"));
         copyAbility.addCost(new TapSourceCost());
-
-        FilterCard filter = new FilterArtifactCard("an artifact card with mana value X from your graveyard");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, copyAbility.getManaCostsToPay().getX()));
-
-        copyAbility.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
+        copyAbility.setTargetAdjuster(OsgirTheReconstructorAdjuster.instance);
 
         this.addAbility(copyAbility);
     }
@@ -81,6 +79,19 @@ public final class OsgirTheReconstructor extends CardImpl {
     @Override
     public OsgirTheReconstructor copy() {
         return new OsgirTheReconstructor(this);
+    }
+}
+
+enum OsgirTheReconstructorAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        int xValue = ability.getManaCostsToPay().getX();
+        FilterCard filter = new FilterArtifactCard("an artifact card with mana value "+xValue+" from your graveyard");
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
+        ability.getTargets().clear();
+        ability.getTargets().add(new TargetCardInYourGraveyard(filter));
     }
 }
 
@@ -97,33 +108,18 @@ class OsgirTheReconstructorCreateArtifactTokensEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
+        Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(targetPointer.getFirst(game, source));
+
+        player.moveCards(card, Zone.EXILED, source, game);
 
         if (player == null || card == null) {
             return false;
         }
 
-        if (!player.moveCards(card, Zone.EXILED, source, game)) {
-            return false;
-        }
-
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(player.getId(), null, false, 2);
-        effect.setTargetPointer(new FixedTarget(card.getId(), game));
+        effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
         effect.apply(game, source);
-        Object object = game.getState().getValue(CardUtil.getCardZoneString("_tokensCreated", source.getSourceId(), game));
-        Set<UUID> tokensCreated;
-        if (object != null) {
-            tokensCreated = (Set<UUID>) object;
-        } else {
-            tokensCreated = new HashSet<>();
-        }
-        for (Permanent perm : effect.getAddedPermanent()) {
-            if (perm != null) {
-                tokensCreated.add(perm.getId());
-            }
-        }
-        game.getState().setValue(CardUtil.getCardZoneString("_tokensCreated", source.getSourceId(), game), tokensCreated);
 
         return  true;
     }
