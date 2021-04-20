@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
@@ -14,19 +13,21 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreatureAttackingYou;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.filter.common.FilterCreatureAttackingYou;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class StalkingLeonin extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterCreatureAttackingYou();
 
     public StalkingLeonin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -37,9 +38,10 @@ public final class StalkingLeonin extends CardImpl {
 
         // When Stalking Leonin enters the battlefield, secretly choose an opponent.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ChooseSecretOpponentEffect(), false));
+
         // Reveal the player you chose: Exile target creature that's attacking you if it's controlled by the chosen player. Activate this ability only once.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StalkingLeoninEffect(), new RevealSecretOpponentCost());
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreatureAttackingYou()));
+        Ability ability = new SimpleActivatedAbility(new StalkingLeoninEffect(), new RevealSecretOpponentCost());
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
@@ -72,16 +74,12 @@ class StalkingLeoninEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (targetCreature != null) {
-                UUID opponentId = (UUID) game.getState().getValue(source.getSourceId() + ChooseSecretOpponentEffect.SECRET_OPPONENT);
-                if (opponentId != null && opponentId.equals(targetCreature.getControllerId())) {
-                    controller.moveCards(targetCreature, Zone.EXILED, source, game);
-                }
-            }
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller == null || targetCreature == null
+                || !targetCreature.isControlledBy(ChooseSecretOpponentEffect.getChosenPlayer(source, game))) {
             return true;
         }
-        return false;
+        controller.moveCards(targetCreature, Zone.EXILED, source, game);
+        return true;
     }
 }

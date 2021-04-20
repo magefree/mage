@@ -139,6 +139,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Golgari Rot Farm", 291, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Great Furnace", 292, Rarity.COMMON, mage.cards.g.GreatFurnace.class));
         cards.add(new SetCardInfo("Greed", 145, Rarity.RARE, mage.cards.g.Greed.class));
+        cards.add(new SetCardInfo("Guardian Archon", 17, Rarity.RARE, mage.cards.g.GuardianArchon.class));
         cards.add(new SetCardInfo("Guardian Augmenter", 62, Rarity.RARE, mage.cards.g.GuardianAugmenter.class));
         cards.add(new SetCardInfo("Gyome, Master Chef", 5, Rarity.MYTHIC, mage.cards.g.GyomeMasterChef.class));
         cards.add(new SetCardInfo("Healing Technique", 63, Rarity.RARE, mage.cards.h.HealingTechnique.class));
