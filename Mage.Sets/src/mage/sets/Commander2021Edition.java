@@ -179,6 +179,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Llanowar Reborn", 296, Rarity.UNCOMMON, mage.cards.l.LlanowarReborn.class));
         cards.add(new SetCardInfo("Llanowar Wastes", 297, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
         cards.add(new SetCardInfo("Lonely Sandbar", 298, Rarity.COMMON, mage.cards.l.LonelySandbar.class));
+        cards.add(new SetCardInfo("Losheel, Clockwork Scholar", 18, Rarity.RARE, mage.cards.l.LosheelClockworkScholar.class));
         cards.add(new SetCardInfo("Loxodon Warhammer", 249, Rarity.RARE, mage.cards.l.LoxodonWarhammer.class));
         cards.add(new SetCardInfo("Lumbering Falls", 299, Rarity.RARE, mage.cards.l.LumberingFalls.class));
         cards.add(new SetCardInfo("Mage-Ring Network", 300, Rarity.UNCOMMON, mage.cards.m.MageRingNetwork.class));
