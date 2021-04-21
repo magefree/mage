@@ -230,6 +230,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Ponder", 125, Rarity.COMMON, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Primal Empathy", 227, Rarity.UNCOMMON, mage.cards.p.PrimalEmpathy.class));
         cards.add(new SetCardInfo("Pristine Talisman", 258, Rarity.COMMON, mage.cards.p.PristineTalisman.class));
+        cards.add(new SetCardInfo("Promise of Loyalty", 21, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class));
         cards.add(new SetCardInfo("Pulse of Murasa", 202, Rarity.UNCOMMON, mage.cards.p.PulseOfMurasa.class));
         cards.add(new SetCardInfo("Pyromancer's Goggles", 259, Rarity.MYTHIC, mage.cards.p.PyromancersGoggles.class));
         cards.add(new SetCardInfo("Quicksmith Genius", 178, Rarity.UNCOMMON, mage.cards.q.QuicksmithGenius.class));
