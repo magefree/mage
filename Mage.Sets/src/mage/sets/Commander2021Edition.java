@@ -289,6 +289,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Sunbird's Invocation", 180, Rarity.RARE, mage.cards.s.SunbirdsInvocation.class));
         cards.add(new SetCardInfo("Sunhome, Fortress of the Legion", 319, Rarity.UNCOMMON, mage.cards.s.SunhomeFortressOfTheLegion.class));
         cards.add(new SetCardInfo("Sunscorch Regent", 107, Rarity.RARE, mage.cards.s.SunscorchRegent.class));
+        cards.add(new SetCardInfo("Surge to Victory", 58, Rarity.RARE, mage.cards.s.SurgeToVictory.class));
         cards.add(new SetCardInfo("Swarm Intelligence", 130, Rarity.RARE, mage.cards.s.SwarmIntelligence.class));
         cards.add(new SetCardInfo("Tainted Field", 320, Rarity.UNCOMMON, mage.cards.t.TaintedField.class));
         cards.add(new SetCardInfo("Tainted Wood", 321, Rarity.UNCOMMON, mage.cards.t.TaintedWood.class));
