@@ -156,6 +156,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Ichor Wellspring", 245, Rarity.COMMON, mage.cards.i.IchorWellspring.class));
         cards.add(new SetCardInfo("Idol of Oblivion", 246, Rarity.RARE, mage.cards.i.IdolOfOblivion.class));
         cards.add(new SetCardInfo("Incarnation Technique", 41, Rarity.RARE, mage.cards.i.IncarnationTechnique.class));
+        cards.add(new SetCardInfo("Incubation // Incongruity", 219, Rarity.UNCOMMON, mage.cards.i.IncubationIncongruity.class));
         cards.add(new SetCardInfo("Incubation Druid", 195, Rarity.RARE, mage.cards.i.IncubationDruid.class));
         cards.add(new SetCardInfo("Infernal Offering", 146, Rarity.RARE, mage.cards.i.InfernalOffering.class));
         cards.add(new SetCardInfo("Inferno Project", 52, Rarity.RARE, mage.cards.i.InfernoProject.class));
