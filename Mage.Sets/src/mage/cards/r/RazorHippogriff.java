@@ -7,6 +7,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -37,7 +38,7 @@ public final class RazorHippogriff extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
 
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
         TargetCard target = new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard"));
         ability.addTarget(target);
         ability.addEffect(new RazorHippogriffGainLifeEffect());

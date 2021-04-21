@@ -42,7 +42,7 @@ class SelectiveMemoryEffect extends OneShotEffect {
 
     public SelectiveMemoryEffect() {
         super(Outcome.Exile);
-        this.staticText = "Search your library for any number of nonland cards and exile them. Then shuffle";
+        this.staticText = "Search your library for any number of nonland cards, exile them, then shuffle";
     }
 
     public SelectiveMemoryEffect(final SelectiveMemoryEffect effect) {

@@ -34,7 +34,7 @@ public final class MobileFort extends CardImpl {
         
         // {3}: Mobile Fort gets +3/-1 until end of turn and can attack this turn as though it didn't have defender. Activate this ability only once each turn.
         Effect effect = new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn);
-        effect.setText("and can attack as though it didn't have defender");
+        effect.setText("and can attack this turn as though it didn't have defender");
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, -1, Duration.EndOfTurn), new ManaCostsImpl("{3}"));
         ability.addEffect(effect);
         this.addAbility(ability);

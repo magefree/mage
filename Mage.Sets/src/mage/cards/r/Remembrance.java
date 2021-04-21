@@ -91,6 +91,6 @@ class RemembranceTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever a nontoken creature you control dies, " +
                 "you may search your library for a card with the same name as that creature, " +
-                "reveal it, and put it into your hand. If you do, shuffle.";
+                "reveal it, put it into your hand, then shuffle.";
     }
 }

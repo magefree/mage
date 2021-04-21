@@ -110,7 +110,7 @@ class DefiantVanguardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} blocks, at end of combat, destroy it and all creatures it blocked this turn";
+        return "When {this} blocks, at end of combat, destroy it and all creatures it blocked this turn.";
     }
 }
 

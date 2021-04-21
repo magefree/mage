@@ -54,7 +54,7 @@ class CloudhoofKirinEffect extends OneShotEffect {
 
     CloudhoofKirinEffect() {
         super(Outcome.Detriment);
-        this.staticText = "have target player mill X cards, where X is that spell's mana value";
+        this.staticText = "target player mill X cards, where X is that spell's mana value";
     }
 
     private CloudhoofKirinEffect(final CloudhoofKirinEffect effect) {

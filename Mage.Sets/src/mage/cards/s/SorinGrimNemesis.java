@@ -57,7 +57,7 @@ class SorinGrimNemesisRevealEffect extends OneShotEffect {
     
     public SorinGrimNemesisRevealEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "reveal the top card of your library and put that card into your hand. Each opponent loses life equal to that card's mana value";
+        this.staticText = "reveal the top card of your library and put that card into your hand. Each opponent loses life equal to its mana value";
     }
     
     public SorinGrimNemesisRevealEffect(final SorinGrimNemesisRevealEffect effect) {
