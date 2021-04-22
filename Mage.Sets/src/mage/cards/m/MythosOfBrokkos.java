@@ -55,7 +55,7 @@ class MythosOfBrokkosEffect extends OneShotEffect {
 
     MythosOfBrokkosEffect() {
         super(Outcome.Benefit);
-        staticText = "If {U}{B} was spent to cast Mythos of Brokkos, search your library for a card, " +
+        staticText = "If {U}{B} was spent to cast this spell, search your library for a card, " +
                 "put that card into your graveyard, then shuffle.<br>" +
                 "Return up to two permanent cards from your graveyard to your hand.";
     }

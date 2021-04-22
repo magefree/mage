@@ -27,8 +27,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class ShadowbornApostle extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a Demon creature");
-    private static final FilterControlledCreaturePermanent filterApostle = new FilterControlledCreaturePermanent("six creatures named Shadowborn Apostle");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a Demon creature card");
+    private static final FilterControlledCreaturePermanent filterApostle = new FilterControlledCreaturePermanent("creatures named Shadowborn Apostle");
     static {
         filter.add(SubType.DEMON.getPredicate());
         filterApostle.add(new NamePredicate("Shadowborn Apostle"));

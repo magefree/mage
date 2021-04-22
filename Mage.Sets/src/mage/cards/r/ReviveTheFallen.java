@@ -21,7 +21,7 @@ public final class ReviveTheFallen extends CardImpl {
 
         // Return target creature card from a graveyard to its owner's hand.
          this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
+         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         // Clash with an opponent. If you win, return Revive the Fallen to its owner's hand.
         this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
     }

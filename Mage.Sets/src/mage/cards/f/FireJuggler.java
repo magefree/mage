@@ -28,7 +28,7 @@ public final class FireJuggler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Fire Juggler becomes blocked, clash with an opponent. If you win, Fire Juggler deals 4 damage to each creature blocking it.
-        FilterPermanent filter = new FilterPermanent("each creature blocking it");
+        FilterPermanent filter = new FilterPermanent("creature blocking it");
         filter.add(new BlockingAttackerIdPredicate(this.getId()));
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new DoIfClashWonEffect(new DamageAllEffect(4,filter)),false));
     }

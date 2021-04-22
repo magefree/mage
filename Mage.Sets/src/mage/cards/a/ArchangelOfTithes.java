@@ -54,7 +54,7 @@ class ArchangelOfTithesPayManaToAttackAllEffect extends CantAttackYouUnlessPayMa
 
     ArchangelOfTithesPayManaToAttackAllEffect() {
         super(new ManaCostsImpl<>("{1}"), true);
-        staticText = "As long as {this} is untapped, creatures can't attack you or a planeswalker you control unless their controller pays {1} for each of those creatures.";
+        staticText = "As long as {this} is untapped, creatures can't attack you or planeswalkers you control unless their controller pays {1} for each of those creatures.";
     }
 
     ArchangelOfTithesPayManaToAttackAllEffect(ArchangelOfTithesPayManaToAttackAllEffect effect) {

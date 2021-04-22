@@ -84,7 +84,7 @@ class GigantiformAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "Enchanted creature has base power and toughness 8/8 and has trample";
+        return "Enchanted creature has base power and toughness 8/8 and has trample.";
     }
 }
 

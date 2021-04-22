@@ -47,7 +47,7 @@ public final class DeathsOasis extends CardImpl {
         // {1}, Sacrifice Death's Oasis: You gain life equal to the greatest converted mana cost among creatures you control.
         Ability ability = new SimpleActivatedAbility(
                 new GainLifeEffect(DeathsOasisValue.instance)
-                        .setText("you gain life equal to the greatest mana value among creatures you control"),
+                        .setText("you gain life equal to the highest mana value among creatures you control"),
                 new GenericManaCost(1)
         );
         ability.addCost(new SacrificeSourceCost());

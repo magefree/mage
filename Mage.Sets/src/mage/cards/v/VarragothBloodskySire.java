@@ -57,7 +57,7 @@ class VarragothBloodskySireEffect extends SearchEffect {
 
     public VarragothBloodskySireEffect() {
         super(new TargetCardInLibrary(), Outcome.DrawCard);
-        this.staticText = "Target player searches their library for a card, then shuffles and puts that card on top of it";
+        this.staticText = "Target player searches their library for a card, then shuffles and puts that card on top";
     }
 
     private VarragothBloodskySireEffect(final VarragothBloodskySireEffect effect) {

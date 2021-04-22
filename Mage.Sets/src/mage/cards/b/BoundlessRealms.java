@@ -46,7 +46,8 @@ class BoundlessRealmsEffect extends OneShotEffect {
 
     public BoundlessRealmsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search your library for up to X basic land cards, where X is the number of lands you control, and put them onto the battlefield tapped. Then shuffle.";
+        this.staticText = "search your library for up to X basic land cards, where X is the number of " +
+                "lands you control, put them onto the battlefield tapped, then shuffle";
     }
 
     public BoundlessRealmsEffect(final BoundlessRealmsEffect effect) {

@@ -61,7 +61,7 @@ class WaveOfVitriolEffect extends OneShotEffect {
 
     public WaveOfVitriolEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player sacrifices all artifacts, enchantments, and nonbasic lands they control. For each land sacrificed this way, its controller may search their library for a basic land card and put it onto the battlefield tapped. Then each player who searched their library this way shuffles it";
+        this.staticText = "Each player sacrifices all artifacts, enchantments, and nonbasic lands they control. For each land sacrificed this way, its controller may search their library for a basic land card and put it onto the battlefield tapped. Then each player who searched their library this way shuffles";
     }
 
     public WaveOfVitriolEffect(final WaveOfVitriolEffect effect) {

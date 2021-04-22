@@ -66,7 +66,7 @@ class QuestForTheHolyRelicEffect extends OneShotEffect {
 
     QuestForTheHolyRelicEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Search your library for an Equipment card, put it onto the battlefield, and attach it to a creature you control. Then shuffle";
+        this.staticText = "Search your library for an Equipment card, put it onto the battlefield, attach it to a creature you control, then shuffle";
     }
 
     private QuestForTheHolyRelicEffect(final QuestForTheHolyRelicEffect effect) {

@@ -18,7 +18,7 @@ public class AttacksIfAbleAttachedEffect extends RequirementEffect {
 
     public AttacksIfAbleAttachedEffect(Duration duration, AttachmentType attachmentType) {
         super(duration);
-        this.staticText = attachmentType.verb() + " creature attacks each turn if able";
+        this.staticText = attachmentType.verb() + " creature attacks each combat if able";
     }
 
     public AttacksIfAbleAttachedEffect(final AttacksIfAbleAttachedEffect effect) {

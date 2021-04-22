@@ -51,8 +51,8 @@ class DescendantsPathEffect extends OneShotEffect {
         super(Outcome.Discard);
         this.staticText = "reveal the top card of your library. If it's a creature "
                 + "card that shares a creature type with a creature you control, "
-                + "you may cast that card without paying its mana cost. Otherwise, "
-                + "put that card on the bottom of your library";
+                + "you may cast it without paying its mana cost. If you don't cast it, " +
+                "put it on the bottom of your library";
     }
 
     public DescendantsPathEffect(final DescendantsPathEffect effect) {

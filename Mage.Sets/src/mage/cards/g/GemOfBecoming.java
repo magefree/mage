@@ -30,7 +30,8 @@ public final class GemOfBecoming extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInHandEffect(
                         new GemOfBecomingTarget(), true
-                ), new GenericManaCost(3)
+                ).setText("search your library for an Island card, a Swamp card, and a Mountain card. " +
+                        "Reveal those cards, put them into your hand, then shuffle"), new GenericManaCost(3)
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

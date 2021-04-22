@@ -1,12 +1,9 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -18,23 +15,26 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class BloodshotTrainee extends CardImpl {
 
     public BloodshotTrainee(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new TapSourceCost());
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                Zone.BATTLEFIELD, new DamageTargetEffect(4),
+                new TapSourceCost(), BloodshotTraineeCondition.instance
+        );
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addCost(new BloodshotTraineeCost());
         this.addAbility(ability);
     }
 
@@ -48,35 +48,17 @@ public final class BloodshotTrainee extends CardImpl {
     }
 }
 
-class BloodshotTraineeCost extends CostImpl {
+enum BloodshotTraineeCondition implements Condition {
+    instance;
 
-    public BloodshotTraineeCost() {
-        this.text = "Activate only if Bloodshot Trainee's power is 4 or greater";
-    }
-
-    public BloodshotTraineeCost(final BloodshotTraineeCost cost) {
-        super(cost);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        return permanent != null && permanent.getPower().getValue() >= 4;
     }
 
     @Override
-    public BloodshotTraineeCost copy() {
-        return new BloodshotTraineeCost(this);
-    }
-
-    @Override
-    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (permanent.getPower().getValue() >= 4) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        this.paid = true;
-        return paid;
+    public String toString() {
+        return "{this}'s power is 4 or greater";
     }
 }

@@ -53,7 +53,7 @@ class RootweaverDruidEffect extends OneShotEffect {
         staticText = "each opponent may search their library for up to three basic land cards. " +
                 "They each put one of those cards onto the battlefield tapped under your control " +
                 "and the rest onto the battlefield tapped under their control. " +
-                "Then each player who searched their library this way shuffles it";
+                "Then each player who searched their library this way shuffles";
     }
 
     private RootweaverDruidEffect(final RootweaverDruidEffect effect) {

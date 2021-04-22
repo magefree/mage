@@ -1,43 +1,47 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
-import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class WoodlandBellower extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("nonlegendary green creature card with mana value 3 or less");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
+        filter.add(CardType.CREATURE.getPredicate());
+        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
+    }
+
     public WoodlandBellower(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 
         // When Woodland Bellower enters the battlefield, you may search your library for a nonlegendary green creature card with converted mana cost 3 or less, put it onto the battlefield, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new WoodlandBellowerEffect(), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), true
+        ));
     }
 
     private WoodlandBellower(final WoodlandBellower card) {
@@ -48,46 +52,4 @@ public final class WoodlandBellower extends CardImpl {
     public WoodlandBellower copy() {
         return new WoodlandBellower(this);
     }
-}
-
-class WoodlandBellowerEffect extends OneShotEffect {
-
-    WoodlandBellowerEffect() {
-        super(Outcome.PutCreatureInPlay);
-        staticText = "Search your library for a nonlegendary green creature card with mana value 3 or less, put it onto the battlefield, then shuffle";
-    }
-
-    WoodlandBellowerEffect(final WoodlandBellowerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        FilterCard filter = new FilterCard("nonlegendary green creature card with mana value 3 or less");
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(CardType.CREATURE.getPredicate());
-        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
-        TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (controller.searchLibrary(target, source, game)) {
-            if (!target.getTargets().isEmpty()) {
-                Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            }
-            controller.shuffleLibrary(source, game);
-            return true;
-        }
-        controller.shuffleLibrary(source, game);
-        return false;
-    }
-
-    @Override
-    public WoodlandBellowerEffect copy() {
-        return new WoodlandBellowerEffect(this);
-    }
-
 }

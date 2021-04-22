@@ -54,6 +54,9 @@ public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl {
         if (additionalCards == Integer.MAX_VALUE) {
             sb.append("any number of");
         } else {
+            if (additionalCards > 1 && duration == Duration.EndOfTurn) {
+                sb.append("up to ");
+            }
             sb.append(CardUtil.numberToText(additionalCards, "an"));
         }
         sb.append(" additional land").append((additionalCards == 1 ? "" : "s"))

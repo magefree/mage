@@ -23,7 +23,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class LilianasShade extends CardImpl {
 
-    private static final FilterLandCard filter = new FilterLandCard("Swamp");
+    private static final FilterLandCard filter = new FilterLandCard("Swamp card");
 
     static {
         filter.add(SubType.SWAMP.getPredicate());
@@ -37,7 +37,7 @@ public final class LilianasShade extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Liliana's Shade enters the battlefield, you may search your library for a Swamp card, reveal it, put it into your hand, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), true));
         // {B}: Liliana's Shade gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }

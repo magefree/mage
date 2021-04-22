@@ -25,7 +25,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class SadisticSacrament extends CardImpl {
 
-    private static final String ruleText = "Search target player's library for up to three cards, exile them, then that player shuffles. if this spell was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles";
+    private static final String ruleText = "Search target player's library for up to three cards, exile them, then that player shuffles. If this spell was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles";
 
     public SadisticSacrament(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}{B}");
