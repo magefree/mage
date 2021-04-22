@@ -21,7 +21,7 @@ public final class PerplexingTest extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.and(TokenPredicate.instance));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public PerplexingTest(UUID ownerId, CardSetInfo setInfo) {
