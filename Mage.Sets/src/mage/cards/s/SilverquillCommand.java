@@ -53,7 +53,7 @@ public final class SilverquillCommand extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // • Return target creature card with mana value 2 or less from your graveyard to the battlefield.
-        Mode mode = new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
+        Mode mode = new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect());
         mode.addTarget(new TargetCardInYourGraveyard(filter));
         this.getSpellAbility().addMode(mode);
 

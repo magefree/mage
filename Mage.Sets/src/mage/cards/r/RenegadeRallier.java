@@ -44,7 +44,7 @@ public final class RenegadeRallier extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), false), RevoltCondition.instance,
                 "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
-                + " the battlefield this turn, return target permanent card with mana value 2 or less from your graveyard to your battlefield.");
+                + " the battlefield this turn, return target permanent card with mana value 2 or less from your graveyard to the battlefield.");
         ability.setAbilityWord(AbilityWord.REVOLT);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.addWatcher(new RevoltWatcher());

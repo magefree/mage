@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -16,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -51,11 +51,11 @@ public final class ChampionOfStraySouls extends CardImpl {
          */
         // {3}{B}{B}, {T}, Sacrifice X other creatures: Return X target creatures from your graveyard to the battlefield.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-        effect.setText("Return X target creatures from your graveyard to the battlefield");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{B}{B}"));
+        effect.setText("Return X target creature cards from your graveyard to the battlefield");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}{B}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeXTargetCost(filter));
-        ability.addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
         ability.setTargetAdjuster(ChampionOfStraySoulsAdjuster.instance);
         this.addAbility(ability);
 

@@ -31,7 +31,7 @@ public final class JourneyForTheElixir extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Search your library and graveyard for a basic land card and a card named Jiang Yanggu, reveal them, put them into your hand, then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new JourneyForTheElixirLibraryTarget()));
+        this.getSpellAbility().addEffect(new JourneyForTheElixirEffect());
     }
 
     private JourneyForTheElixir(final JourneyForTheElixir card) {

@@ -42,8 +42,7 @@ public final class TriassicEgg extends CardImpl {
         ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_CREATURE_A),
                 new SacrificeSourceCost(),
-                new SourceHasCounterCondition(CounterType.HATCHLING, 2, Integer.MAX_VALUE),
-                "Sacrifice Triassic Egg: Choose one - You may put a creature card from your hand onto the battlefield; or return target creature card from your graveyard to the battlefield. Activate only if two or more hatchling counters are on {this}.");
+                new SourceHasCounterCondition(CounterType.HATCHLING, 2, Integer.MAX_VALUE));
 
         // or return target creature card from your graveyard to the battlefield. Activate this ability only if two or more hatchling counters are on Triassic Egg.
         Mode mode = new Mode();

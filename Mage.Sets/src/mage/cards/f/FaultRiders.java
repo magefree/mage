@@ -39,7 +39,7 @@ public final class FaultRiders extends CardImpl {
                 effect, 
                 new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
         effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains first strike");
+        effect.setText("and gains first strike until end of turn");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

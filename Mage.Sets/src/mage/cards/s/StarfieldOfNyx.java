@@ -19,6 +19,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -41,7 +42,6 @@ public final class StarfieldOfNyx extends CardImpl {
 
     static {
         filterGraveyardEnchantment.add(CardType.ENCHANTMENT.getPredicate());
-        filterGraveyardEnchantment.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public StarfieldOfNyx(UUID ownerId, CardSetInfo setInfo) {
@@ -51,7 +51,7 @@ public final class StarfieldOfNyx extends CardImpl {
         // from your graveyard to the battlefield.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), TargetController.YOU, true);
-        ability.addTarget(new TargetCardInGraveyard(filterGraveyardEnchantment));
+        ability.addTarget(new TargetCardInYourGraveyard(filterGraveyardEnchantment));
         this.addAbility(ability);
 
         // As long as you control five or more enchantments, each other non-Aura enchantment

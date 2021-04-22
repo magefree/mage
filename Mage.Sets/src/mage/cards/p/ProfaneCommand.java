@@ -47,7 +47,7 @@ public final class ProfaneCommand extends CardImpl {
 
         // * Return target creature card with converted mana cost X or less from your graveyard to the battlefield.
         Mode mode = new Mode();
-        mode.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
+        mode.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         mode.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card with mana value X or less from your graveyard")));
         this.getSpellAbility().addMode(mode);
 

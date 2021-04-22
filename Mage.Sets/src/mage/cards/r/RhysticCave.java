@@ -85,7 +85,7 @@ class RhysticCaveManaEffect extends ManaEffect {
 
     public RhysticCaveManaEffect() {
         super();
-        this.staticText = "Choose a color. Add one mana of that color ";
+        this.staticText = "Choose a color. Add one mana of that color";
     }
 
     public RhysticCaveManaEffect(final RhysticCaveManaEffect effect) {

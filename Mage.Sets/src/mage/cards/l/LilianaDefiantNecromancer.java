@@ -50,7 +50,7 @@ public final class LilianaDefiantNecromancer extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DiscardEachPlayerEffect(1, false), 2));
 
         // -X: Return target nonlegendary creature with converted mana cost X from your graveyard to the battlefield.
-        Ability ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
+        Ability ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.setTargetAdjuster(LilianaDefiantNecromancerAdjuster.instance);
         this.addAbility(ability);

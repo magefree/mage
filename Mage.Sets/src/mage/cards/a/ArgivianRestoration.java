@@ -18,7 +18,7 @@ public final class ArgivianRestoration extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
 
         // Return target artifact card from your graveyard to the battlefield.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
     }
 

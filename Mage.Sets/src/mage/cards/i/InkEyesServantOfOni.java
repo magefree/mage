@@ -99,6 +99,6 @@ class InkEyesServantOfOniTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever {this} deals combat damage to a player, "
                 + "you may put target creature card from that player's "
-                + "graveyard onto the battlefield under your control";
+                + "graveyard onto the battlefield under your control.";
     }
 }

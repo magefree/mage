@@ -25,7 +25,7 @@ public final class DefyDeath extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
 
         // Return target creature card from your graveyard to the battlefield. If it's an Angel, put two +1/+1 counters on it.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addEffect(new DefyDeathEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }

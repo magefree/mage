@@ -28,7 +28,7 @@ public final class MarchFromTheTomb extends CardImpl {
 
         // Return any number of target Ally creature cards with total converted mana cost of 8 or less from your graveyard to the battlefield.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-        effect.setText("Return any number of target Ally creature cards with total mana value of 8 or less from your graveyard to the battlefield");
+        effect.setText("Return any number of target Ally creature cards with total mana value 8 or less from your graveyard to the battlefield");
         this.getSpellAbility().addEffect(effect);
         FilterCard filter = new FilterCreatureCard();
         filter.add(SubType.ALLY.getPredicate());

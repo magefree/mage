@@ -31,7 +31,7 @@ public final class FatedReturn extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.Custom,
                 "It gains indestructible"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2), MyTurnCondition.instance,
-                "If it's your turn, scry 2 <i>(Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>"));
+                "If it's your turn, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>"));
         this.getSpellAbility().addHint(MyTurnHint.instance);
     }
 

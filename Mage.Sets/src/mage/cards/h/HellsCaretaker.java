@@ -34,7 +34,7 @@ public final class HellsCaretaker extends CardImpl {
 
         // {tap}, Sacrifice a creature: Return target creature card from your graveyard to the battlefield. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new ReturnFromGraveyardToBattlefieldTargetEffect(false, false),
+                new ReturnFromGraveyardToBattlefieldTargetEffect(),
                 new TapSourceCost(),
                 new IsStepCondition(PhaseStep.UPKEEP), null);
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));

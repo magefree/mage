@@ -31,7 +31,7 @@ public final class ProclamationOfRebirth extends CardImpl {
 
         // Return up to three target creature cards with converted mana cost 1 or less from your graveyard to the battlefield.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 3, filter3));
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
 
         // Forecast - {5}{W}, Reveal Proclamation of Rebirth from your hand: Return target creature card with converted mana cost 1 or less from your graveyard to the battlefield.
         ForecastAbility ability = new ForecastAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{5}{W}"));

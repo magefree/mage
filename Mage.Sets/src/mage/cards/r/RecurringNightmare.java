@@ -26,7 +26,7 @@ public final class RecurringNightmare extends CardImpl {
         // Sacrifice a creature, Return Recurring Nightmare to its owner's hand: Return target creature card from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD,
-                new ReturnFromGraveyardToBattlefieldTargetEffect(false, false),
+                new ReturnFromGraveyardToBattlefieldTargetEffect(),
                 new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT))
         );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));

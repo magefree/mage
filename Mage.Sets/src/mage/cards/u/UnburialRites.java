@@ -21,7 +21,7 @@ public final class UnburialRites extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
 
         // Return target creature card from your graveyard to the battlefield.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
         // Flashback {3}{W}

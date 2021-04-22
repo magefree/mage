@@ -9,6 +9,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
 import java.util.HashSet;
@@ -20,27 +21,20 @@ import java.util.UUID;
  */
 public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect {
 
-    private boolean tapped;
-    private boolean showUnderControlText = false;
+    private final boolean tapped;
 
     public ReturnFromGraveyardToBattlefieldTargetEffect() {
         this(false);
     }
 
     public ReturnFromGraveyardToBattlefieldTargetEffect(boolean tapped) {
-        this(tapped, true);
-    }
-
-    public ReturnFromGraveyardToBattlefieldTargetEffect(boolean tapped, boolean showUnderControlText) {
         super(Outcome.PutCreatureInPlay);
         this.tapped = tapped;
-        this.showUnderControlText = showUnderControlText;
     }
 
-    public ReturnFromGraveyardToBattlefieldTargetEffect(final ReturnFromGraveyardToBattlefieldTargetEffect effect) {
+    protected ReturnFromGraveyardToBattlefieldTargetEffect(final ReturnFromGraveyardToBattlefieldTargetEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
-        this.showUnderControlText = effect.showUnderControlText;
     }
 
     @Override
@@ -71,24 +65,27 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-
+        boolean yourGrave = !mode.getTargets().isEmpty()
+                && mode.getTargets().get(0) instanceof TargetCardInYourGraveyard;
+        sb.append(yourGrave ? "return " : "put ");
         if (mode.getTargets().isEmpty()) {
-            sb.append("return target creature to the battlefield");
+            sb.append("target creature");
         } else {
             Target target = mode.getTargets().get(0);
-            sb.append("return ");
             if (target.getMaxNumberOfTargets() > 1) {
                 if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
                     sb.append("up to ");
                 }
                 sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
             }
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" to the battlefield");
-            if (tapped) {
-                sb.append(" tapped");
-            }
+            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         }
-        if (showUnderControlText) {
+        sb.append(yourGrave ? " to" : " onto");
+        sb.append(" the battlefield");
+        if (tapped) {
+            sb.append(" tapped");
+        }
+        if (!yourGrave) {
             sb.append(" under your control");
         }
         return sb.toString();
