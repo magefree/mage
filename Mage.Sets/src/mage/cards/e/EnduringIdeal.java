@@ -47,7 +47,7 @@ class EnduringIdealEffect extends OneShotEffect {
 
     public EnduringIdealEffect() {
         super(Outcome.Benefit);
-        staticText = "Search your library for an enchantment card and put it onto the battlefield. Then shuffle";
+        staticText = "Search your library for an enchantment card, put it onto the battlefield, then shuffle";
     }
 
     public EnduringIdealEffect(final EnduringIdealEffect effect) {

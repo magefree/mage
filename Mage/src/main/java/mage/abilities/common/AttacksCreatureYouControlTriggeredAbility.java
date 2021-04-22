@@ -8,6 +8,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author noxx
@@ -75,17 +76,6 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public String getRule() {
-        String an;
-        String who = filter.getMessage();
-        if (who.startsWith("another") || who.startsWith("a ")) {
-            an = "";
-        } else if (who.length() > 0 && "aeiou".contains(who.charAt(0) + "")) {
-            an = "an ";
-        } else {
-            an = "a ";
-        }
-
-        return "When" + (once ? "" : "ever")
-                + " " + an + who + " attacks, " + super.getRule();
+        return "When" + (once ? "" : "ever") + " " + CardUtil.addArticle(filter.getMessage()) + " attacks, " + super.getRule();
     }
 }

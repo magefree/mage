@@ -8,9 +8,9 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.TargetEvent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.util.*;
@@ -113,19 +113,10 @@ public abstract class TargetImpl implements Target {
             sb.append(suffix);
             return sb.toString();
         }
-        if (targetName.startsWith("another")
-                || targetName.startsWith("a ")
-                || targetName.startsWith("an ")
-                || targetName.startsWith("any ")) {
-            return "Select " + targetName + suffix;
-        }
         if (getMinNumberOfTargets() == 0 && getMaxNumberOfTargets() == 1) {
             return "Select up to one " + targetName + suffix;
         }
-        if (targetName.startsWith("a") || targetName.startsWith("e") || targetName.startsWith("i") || targetName.startsWith("o") || targetName.startsWith("u")) {
-            return "Select an " + targetName + suffix;
-        }
-        return "Select a " + targetName + suffix;
+        return "Select " + CardUtil.addArticle(targetName) + suffix;
     }
 
     @Override

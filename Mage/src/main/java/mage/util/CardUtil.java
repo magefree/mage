@@ -912,7 +912,10 @@ public final class CardUtil {
     }
 
     public static String addArticle(String text) {
-        if (text.startsWith("a ") || text.startsWith("an ")) {
+        if (text.startsWith("a ")
+                || text.startsWith("an ")
+                || text.startsWith("another ")
+                || text.startsWith("any ")) {
             return text;
         }
         return "aeiou".contains("" + text.charAt(0)) ? "an " + text : "a " + text;

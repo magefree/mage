@@ -27,15 +27,7 @@ public class SacrificeTargetCost extends CostImpl {
         this.addTarget(target);
         target.setNotTarget(true); // sacrifice is never targeted
         target.setRequired(false); // can be canceled
-        this.text = "sacrifice "
-                + ((target.getNumberOfTargets() != 1
-                || (target.getTargetName().startsWith("an")
-                || target.getTargetName().startsWith("a ")))
-                ? (target.getMinNumberOfTargets() == target.getMaxNumberOfTargets()
-                && target.getMinNumberOfTargets() > 1
-                ? CardUtil.numberToText(target.getNumberOfTargets()) +  " " : "")
-                : (target.getTargetName().startsWith("artifact") ? "an " : "a "))
-                + target.getTargetName();
+        this.text = "sacrifice " + makeText(target);
         target.setTargetName(target.getTargetName() + " (to sacrifice)");
     }
 
@@ -105,5 +97,15 @@ public class SacrificeTargetCost extends CostImpl {
 
     public List<Permanent> getPermanents() {
         return permanents;
+    }
+
+    private static final String makeText(TargetControlledPermanent target) {
+        if (target.getMinNumberOfTargets() != target.getMaxNumberOfTargets()) {
+            return target.getTargetName();
+        }
+        if (target.getNumberOfTargets() == 1) {
+            return CardUtil.addArticle(target.getTargetName());
+        }
+        return CardUtil.numberToText(target.getNumberOfTargets()) + ' ' + target.getTargetName();
     }
 }
