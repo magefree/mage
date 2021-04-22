@@ -21,7 +21,7 @@ public final class FloodedStrand extends CardImpl {
         this.frameColor = new ObjectColor("UW");
 
         // {tap}, Pay 1 life, Sacrifice Flooded Strand: Search your library for a Plains or Island card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.PLAINS, SubType.ISLAND)));
+        this.addAbility(new FetchLandActivatedAbility(SubType.PLAINS, SubType.ISLAND));
     }
 
     private FloodedStrand(final FloodedStrand card) {

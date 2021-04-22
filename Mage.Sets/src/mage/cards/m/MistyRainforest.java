@@ -20,7 +20,7 @@ public final class MistyRainforest extends CardImpl {
     public MistyRainforest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.frameColor = new ObjectColor("UG");
-        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.FOREST, SubType.ISLAND)));
+        this.addAbility(new FetchLandActivatedAbility(SubType.FOREST, SubType.ISLAND));
     }
 
     private MistyRainforest(final MistyRainforest card) {

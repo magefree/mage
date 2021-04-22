@@ -21,7 +21,7 @@ public final class WindsweptHeath extends CardImpl {
         this.frameColor = new ObjectColor("GW");
 
         // {tap}, Pay 1 life, Sacrifice Windswept Heath: Search your library for a Forest or Plains card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.FOREST, SubType.PLAINS)));
+        this.addAbility(new FetchLandActivatedAbility(SubType.FOREST, SubType.PLAINS));
     }
 
     private WindsweptHeath(final WindsweptHeath card) {

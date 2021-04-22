@@ -20,7 +20,7 @@ public final class VerdantCatacombs extends CardImpl {
     public VerdantCatacombs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.frameColor = new ObjectColor("BG");
-        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.FOREST, SubType.SWAMP)));
+        this.addAbility(new FetchLandActivatedAbility(SubType.SWAMP, SubType.FOREST));
     }
 
     private VerdantCatacombs(final VerdantCatacombs card) {

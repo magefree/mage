@@ -22,7 +22,7 @@ public final class RockyTarPit extends CardImpl {
         // Rocky Tar Pit enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}, Sacrifice Rocky Tar Pit: Search your library for a Swamp or Mountain card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(false, EnumSet.of(SubType.SWAMP, SubType.MOUNTAIN)));
+        this.addAbility(new FetchLandActivatedAbility(false, SubType.SWAMP, SubType.MOUNTAIN));
     }
 
     private RockyTarPit(final RockyTarPit card) {

@@ -20,7 +20,7 @@ public final class AridMesa extends CardImpl {
     public AridMesa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.frameColor = new ObjectColor("WR");
-        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.MOUNTAIN, SubType.PLAINS)));
+        this.addAbility(new FetchLandActivatedAbility(SubType.MOUNTAIN, SubType.PLAINS));
     }
 
     private AridMesa(final AridMesa card) {

@@ -21,7 +21,7 @@ public final class WoodedFoothills extends CardImpl {
         this.frameColor = new ObjectColor("RG");
 
         // {tap}, Pay 1 life, Sacrifice Wooded Foothills: Search your library for a Mountain or Forest card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.MOUNTAIN, SubType.FOREST)));
+        this.addAbility(new FetchLandActivatedAbility(SubType.MOUNTAIN, SubType.FOREST));
     }
 
     private WoodedFoothills(final WoodedFoothills card) {

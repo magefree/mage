@@ -21,7 +21,7 @@ public final class BloodstainedMire extends CardImpl {
         this.frameColor = new ObjectColor("RB");
 
         // {tap}, Pay 1 life, Sacrifice Bloodstained Mire: Search your library for a Swamp or Mountain card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.SWAMP,SubType.MOUNTAIN)));
+        this.addAbility(new FetchLandActivatedAbility(SubType.SWAMP,SubType.MOUNTAIN));
     }
 
     private BloodstainedMire(final BloodstainedMire card) {

@@ -21,7 +21,7 @@ public final class PollutedDelta extends CardImpl {
         this.frameColor = new ObjectColor("UB");
 
         // {tap}, Pay 1 life, Sacrifice Polluted Delta: Search your library for an Island or Swamp card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.ISLAND, SubType.SWAMP)));
+        this.addAbility(new FetchLandActivatedAbility(SubType.ISLAND, SubType.SWAMP));
     }
 
     private PollutedDelta(final PollutedDelta card) {

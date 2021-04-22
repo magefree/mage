@@ -911,6 +911,8 @@ public final class CardUtil {
         }
     }
 
+    private static final String vowels = "aeiouAEIOU";
+
     public static String addArticle(String text) {
         if (text.startsWith("a ")
                 || text.startsWith("an ")
@@ -918,7 +920,7 @@ public final class CardUtil {
                 || text.startsWith("any ")) {
             return text;
         }
-        return "aeiou".contains("" + text.charAt(0)) ? "an " + text : "a " + text;
+        return vowels.contains(text.substring(0, 1)) ? "an " + text : "a " + text;
     }
 
     public static Set<UUID> getAllSelectedTargets(Ability ability, Game game) {

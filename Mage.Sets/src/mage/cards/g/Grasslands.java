@@ -21,7 +21,7 @@ public final class Grasslands extends CardImpl {
         // Grasslands enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}, Sacrifice Grasslands: Search your library for a Forest or Plains card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(false, EnumSet.of(SubType.FOREST, SubType.PLAINS)));
+        this.addAbility(new FetchLandActivatedAbility(false, SubType.FOREST, SubType.PLAINS));
     }
 
     private Grasslands(final Grasslands card) {
