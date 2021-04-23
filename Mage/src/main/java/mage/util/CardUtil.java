@@ -1338,4 +1338,27 @@ public final class CardUtil {
         // normal game
         return "T" + gameState.getTurnNum() + "." + gameState.getTurn().getStep().getType().getStepShortText();
     }
+
+    public static String concatWithAnd(List<String> strings) {
+        switch (strings.size()) {
+            case 0:
+                return "";
+            case 1:
+                return strings.get(0);
+            case 2:
+                return strings.get(0) + " and " + strings.get(1);
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < strings.size(); i++) {
+            sb.append(strings.get(i));
+            if (i == strings.size() - 1) {
+                break;
+            }
+            sb.append(", ");
+            if (i == strings.size() - 2) {
+                sb.append("and ");
+            }
+        }
+        return sb.toString();
+    }
 }

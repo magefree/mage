@@ -103,7 +103,9 @@ public class SacrificeTargetCost extends CostImpl {
         if (target.getMinNumberOfTargets() != target.getMaxNumberOfTargets()) {
             return target.getTargetName();
         }
-        if (target.getNumberOfTargets() == 1) {
+        if (target.getNumberOfTargets() == 1
+                || target.getTargetName().startsWith("a ")
+                || target.getTargetName().startsWith("an ")) {
             return CardUtil.addArticle(target.getTargetName());
         }
         return CardUtil.numberToText(target.getNumberOfTargets()) + ' ' + target.getTargetName();

@@ -47,7 +47,7 @@ class ConfluxTarget extends TargetCardInLibrary {
         filter.add(Predicates.not(ColorlessPredicate.instance));
     }
 
-    private static final ColorAssignment colorAssigner = new ColorAssignment();
+    private static final ColorAssignment colorAssigner = new ColorAssignment("W", "U", "B", "R", "G");
 
     ConfluxTarget() {
         super(0, 5, filter);
