@@ -93,7 +93,7 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         // {1}: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.
         addCard(Zone.BATTLEFIELD, playerB, "Mutavault", 1);
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}: Until end of turn {this} becomes");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}:");
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}: Gain control", "Mutavault");
 
         setChoice(playerA, "No"); // Don't untap the Shackles
