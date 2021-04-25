@@ -56,13 +56,7 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
             if (card != null) {
                 //Allow lands with morph to be played at instant speed
                 if (card.isLand()) {
-                    boolean morphAbility = false;
-                    for (Ability checkAbility : card.getAbilities()) {
-                        if (checkAbility instanceof MorphAbility) {
-                            morphAbility = true;
-                            break;
-                        }
-                    }
+                    boolean morphAbility = card.getAbilities().stream().anyMatch(ability -> ability instanceof MorphAbility);
                     if (morphAbility) {
                         Card cardCopy = card.copy();
                         cardCopy.getCardType().clear();
