@@ -4,15 +4,18 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterArtifactPermanent;
+import mage.constants.CardType;
+import mage.constants.CostModificationType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.cards.Card;
 
 /**
  * @author Pete Rossi
@@ -23,8 +26,7 @@ public final class HumOfTheRadix extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // Each artifact spell costs {1} more to cast for each artifact its controller controls.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HumOfTheRadixCostIncreaseEffect()));
-
+        this.addAbility(new SimpleStaticAbility(new HumOfTheRadixCostIncreaseEffect()));
     }
 
     private HumOfTheRadix(final HumOfTheRadix card) {
@@ -50,20 +52,20 @@ class HumOfTheRadixCostIncreaseEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int additionalCost = game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), abilityToModify.getControllerId(), game).size();
-        CardUtil.increaseCost(abilityToModify, additionalCost);
+        CardUtil.increaseCost(abilityToModify, game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT,
+                abilityToModify.getControllerId(), source.getSourceId(), game
+        ).size());
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
-            Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
-            if (spellCard != null) {
-                return !spellCard.isArtifact();
-            }
+        if (!(abilityToModify instanceof SpellAbility)) {
+            return false;
         }
-        return false;
+        Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
+        return spellCard != null && spellCard.isArtifact();
     }
 
     @Override
