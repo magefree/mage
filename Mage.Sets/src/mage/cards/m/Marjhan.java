@@ -62,8 +62,7 @@ public final class Marjhan extends CardImpl {
 
         // {U}{U}: Marjhan gets -1/-0 until end of turn and deals 1 damage to target attacking creature without flying.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 0, Duration.EndOfTurn), new ManaCostsImpl("{U}{U}"));
-        Effect effect = new DamageTargetEffect(1);
-        ability.addEffect(effect);
+        ability.addEffect(new DamageTargetEffect(1, "and"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 

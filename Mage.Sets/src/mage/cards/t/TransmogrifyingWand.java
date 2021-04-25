@@ -36,7 +36,7 @@ public final class TransmogrifyingWand extends CardImpl {
         // Transmogrifying Wand enters the battlefield with three charge counters on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)),
-                "{this} enters the battlefield with three charge counters on it"
+                "with three charge counters on it"
         ));
 
         // {1}, {T}, Remove a charge counter from Transmogrifying Wand: Destroy target creature. Its controller creates a 2/4 white Ox creature token. Activate this ability only any time you could cast a sorcery.

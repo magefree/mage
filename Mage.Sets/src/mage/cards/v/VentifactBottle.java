@@ -46,7 +46,7 @@ public final class VentifactBottle extends CardImpl {
                 new SourceHasCounterCondition(CounterType.CHARGE, 1, Integer.MAX_VALUE),
                 "At the beginning of your precombat main phase, "
                 + "if {this} has a charge counter on it, tap it and remove all charge counters from it. "
-                + "Add {C} for each charge counter removed this way"));
+                + "Add {C} for each charge counter removed this way."));
     }
 
     private VentifactBottle(final VentifactBottle card) {

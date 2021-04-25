@@ -21,7 +21,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -51,7 +51,8 @@ public final class VishKalBloodArbiter extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(), SacrificeCostCreaturesPower.instance, true
-                ), new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))
+                ).setText("put X +1/+1 counters on {this}, where X is the sacrificed creature's power"),
+                new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))
         ));
 
         // Remove all +1/+1 counters from Vish Kal: Target creature gets -1/-1 until end of turn for each +1/+1 counter removed this way.
@@ -59,7 +60,7 @@ public final class VishKalBloodArbiter extends CardImpl {
                 VishKalBloodArbiterDynamicValue.instance,
                 VishKalBloodArbiterDynamicValue.instance,
                 Duration.EndOfTurn, true
-        ), new RemoveAllCountersSourceCost(CounterType.P1P1));
+        ).setText("target creature gets -1/-1 until end of turn for each +1/+1 counter removed this way"), new RemoveAllCountersSourceCost(CounterType.P1P1));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

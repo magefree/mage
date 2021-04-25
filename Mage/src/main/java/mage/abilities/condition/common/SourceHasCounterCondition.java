@@ -7,9 +7,9 @@ import mage.cards.Card;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
- *
  * @author nantuko
  */
 public class SourceHasCounterCondition implements Condition {
@@ -68,14 +68,13 @@ public class SourceHasCounterCondition implements Condition {
 
     @Override
     public String toString() {
-        if (from != -1) { //range compare
+        if (from != -1) {
             if (to == Integer.MAX_VALUE) {
                 return "{this} has equal to or more than " + from + " " + this.counterType.toString() + " counters";
             }
             return "{this} has between " + from + " and " + to + " " + this.counterType.toString() + " counters";
-        } else // single compare (lte)
-        {
-            return "{this} has equal or more than " + amount + " " + this.counterType.toString() + " counters";
+        } else {
+            return "{this} has " + CardUtil.numberToText(amount) + " or more " + this.counterType.toString() + " counters on it";
         }
     }
 }

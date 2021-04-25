@@ -18,9 +18,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
@@ -45,10 +43,11 @@ public final class VolrathsDungeon extends CardImpl {
         this.addAbility(ability);
 
         // Discard a card: Target player puts a card from their hand on top of their library. Activate this ability only any time you could cast a sorcery.
-        FilterCard filter = new FilterCard("a card for payment");
-        Ability ability2 = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new VolrathsDungeonEffect(), new DiscardCardCost(filter));
-        ability2.addTarget(new TargetPlayer());
-        this.addAbility(ability2);
+        ability = new ActivateAsSorceryActivatedAbility(
+                Zone.BATTLEFIELD, new VolrathsDungeonEffect(), new DiscardCardCost()
+        );
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
     private VolrathsDungeon(final VolrathsDungeon card) {

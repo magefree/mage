@@ -60,7 +60,7 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
 
     BalduvianWarlordUnblockEffect() {
         super(Outcome.Benefit);
-        this.staticText = " Remove target blocking creature from combat. Creatures it was blocking that hadn't become blocked by another creature this combat become unblocked, then it blocks an attacking creature of your choice";
+        this.staticText = "Remove target blocking creature from combat. Creatures it was blocking that hadn't become blocked by another creature this combat become unblocked, then it blocks an attacking creature of your choice";
     }
 
     private BalduvianWarlordUnblockEffect(final BalduvianWarlordUnblockEffect effect) {

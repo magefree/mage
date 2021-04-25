@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class WirewoodSymbiote extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Elf");
 
     static {
         filter.add(SubType.ELF.getPredicate());

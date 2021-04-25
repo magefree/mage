@@ -13,15 +13,13 @@ import mage.abilities.hint.common.MetalcraftHint;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -30,12 +28,6 @@ import java.util.UUID;
  * @author fireshoes
  */
 public final class InventorsFair extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("artifact");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
 
     public InventorsFair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -49,7 +41,7 @@ public final class InventorsFair extends CardImpl {
 
         // {4}, {T}, Sacrifice Inventors' Fair: Search your library for an artifact card, reveal it, put it into your hand, then shuffle your library.
         // Activate this ability only if you control threeor more artifacts.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, filter), true),
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_ARTIFACT), true),
                 new GenericManaCost(4), MetalcraftCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

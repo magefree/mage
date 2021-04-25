@@ -3,6 +3,7 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -16,8 +17,6 @@ import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
-
-import java.util.Locale;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -43,7 +42,6 @@ public class ExileFromZoneTargetEffect extends OneShotEffect {
         this.filter = filter;
         this.amount = amount;
         this.withSource = withSource;
-        setText();
     }
 
     public ExileFromZoneTargetEffect(final ExileFromZoneTargetEffect effect) {
@@ -87,8 +85,10 @@ public class ExileFromZoneTargetEffect extends OneShotEffect {
         return new ExileFromZoneTargetEffect(this);
     }
 
-    private void setText() {
-        staticText = "target player exiles " + CardUtil.numberToText(amount, "a")
-                + ' ' + filter.getMessage() + " from their " + zone.toString().toLowerCase(Locale.ENGLISH);
+    @Override
+    public String getText(Mode mode) {
+        return "target " + mode.getTargets().get(0).getTargetName() + " exiles "
+                + CardUtil.numberToText(amount, "a") + ' ' + filter.getMessage()
+                + " from their " + zone.toString().toLowerCase();
     }
 }
