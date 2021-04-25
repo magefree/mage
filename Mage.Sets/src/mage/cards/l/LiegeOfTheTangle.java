@@ -156,7 +156,7 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
     public boolean hasLayer(Layer layer) {
         return layer == Layer.PTChangingEffects_7
                 || layer == Layer.ColorChangingEffects_5
-                || layer == layer.TypeChangingEffects_4;
+                || layer == Layer.TypeChangingEffects_4;
     }
 
 }
