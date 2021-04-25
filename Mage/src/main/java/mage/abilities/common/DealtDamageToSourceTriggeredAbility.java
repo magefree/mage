@@ -55,9 +55,7 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
             if (useValue) {
 //              TODO: this ability should only trigger once for multiple creatures dealing combat damage.  
 //              If the damaged creature uses the amount (e.g. Boros Reckoner), this will still trigger separately instead of all at once
-                for (Effect effect : this.getEffects()) {
-                    effect.setValue("damage", event.getAmount());
-                }
+                getEffects().setValue("damage", event.getAmount());
                 return true;
             } else {
                 if (((DamagedEvent) event).isCombatDamage()) {
