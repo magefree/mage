@@ -1355,6 +1355,25 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Assert card subtype in exile.
+     *
+     * @param cardName Name of the card.
+     * @param subType    Expected subtype.
+     */
+    public void assertExiledCardSubtype(String cardName, SubType subType) throws AssertionError {
+        boolean found = false;
+        for (ExileZone exile : currentGame.getExile().getExileZones()) {
+            for (Card card : exile.getCards(currentGame)) {
+                if(CardUtil.haveSameNames(card.getName(), cardName, true) && card.hasSubtype(subType, currentGame)){
+                    found = true;
+                }
+            }
+        }
+
+        Assert.assertTrue("There is no card named " + cardName + " found in exile, with subtype " + subType, found);
+    }
+
+    /**
      * Assert card count in exile.
      *
      * @param cardName Name of the cards that should be counted.
