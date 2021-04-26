@@ -89,9 +89,7 @@ class PurgatoryTriggeredAbility extends TriggeredAbilityImpl {
             if (controller != null) {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 Permanent permanent = zEvent.getTarget();
-                if (permanent != null
-                        && zEvent.getToZone() == Zone.GRAVEYARD
-                        && zEvent.getFromZone() == Zone.BATTLEFIELD
+                if (permanent != null && zEvent.isDiesEvent()
                         && !(permanent instanceof PermanentToken)
                         && permanent.isCreature()
                         && permanent.isOwnedBy(controller.getId())) {

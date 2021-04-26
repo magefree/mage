@@ -63,8 +63,8 @@ class DeathsPresenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+        ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
+        if (zoneChangeEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null && permanent.isControlledBy(this.getControllerId()) && permanent.isCreature()) {
                 this.getTargets().clear();

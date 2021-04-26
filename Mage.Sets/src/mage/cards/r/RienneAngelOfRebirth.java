@@ -94,9 +94,7 @@ class RienneAngelOfRebirthTriggeredAbility extends TriggeredAbilityImpl {
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTarget().getId());
 
-        if (permanent != null
-                && zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getFromZone() == Zone.BATTLEFIELD
+        if (permanent != null && zEvent.isDiesEvent()
                 && permanent.isCreature()
                 && permanent.getColor(game).isMulticolored()
                 && permanent.isControlledBy(this.controllerId)) {

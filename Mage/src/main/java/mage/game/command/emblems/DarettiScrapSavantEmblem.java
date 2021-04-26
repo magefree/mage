@@ -56,8 +56,7 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getFromZone() == Zone.BATTLEFIELD
+        if (zEvent.isDiesEvent()
                 && zEvent.getTarget().isArtifact()
                 && zEvent.getTarget().isOwnedBy(this.controllerId)) {
             this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId()));

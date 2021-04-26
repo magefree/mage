@@ -99,8 +99,8 @@ class CosmicInterventionReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
-                && (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD)) {
+        ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
+        if (zoneChangeEvent.isDiesEvent()) {
             Player controller = game.getPlayer(source.getControllerId());
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
             if (permanent == null

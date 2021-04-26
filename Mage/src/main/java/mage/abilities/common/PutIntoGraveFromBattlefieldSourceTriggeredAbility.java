@@ -46,8 +46,7 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             Permanent permanent = zEvent.getTarget();
             if (permanent != null
-                    && zEvent.getToZone() == Zone.GRAVEYARD
-                    && zEvent.getFromZone() == Zone.BATTLEFIELD) {
+                    && zEvent.isDiesEvent()) {
                 return !onlyToControllerGraveyard || this.isControlledBy(game.getOwnerId(zEvent.getTargetId()));
             }
         }

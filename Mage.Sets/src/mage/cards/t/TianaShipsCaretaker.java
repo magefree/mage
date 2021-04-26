@@ -89,9 +89,7 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTarget().getId());
 
-        if (permanent != null
-                && zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getFromZone() == Zone.BATTLEFIELD
+        if (permanent != null && zEvent.isDiesEvent()
                 && (permanent.isArtifact() && permanent.hasSubtype(SubType.EQUIPMENT, game)
                     || permanent.isEnchantment() && permanent.hasSubtype(SubType.AURA, game))
                 && permanent.isControlledBy(this.controllerId)) {

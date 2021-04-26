@@ -73,15 +73,13 @@ class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getToZone() == Zone.GRAVEYARD) {
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                if (game.getOpponents(this.getControllerId()).contains(permanent.getControllerId())) {
-                    for (Effect effect : getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId(), game.getState().getZoneChangeCounter(event.getTargetId())));
-                    }
-                    return true;
+        if (zEvent.isDiesEvent()) {
+            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (game.getOpponents(this.getControllerId()).contains(permanent.getControllerId())) {
+                for (Effect effect : getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId(), game.getState().getZoneChangeCounter(event.getTargetId())));
                 }
+                return true;
             }
         }
         return false;

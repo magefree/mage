@@ -80,8 +80,8 @@ class VerdantSuccessionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+        ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
+        if (zoneChangeEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             MageObject mageObject = game.getObject(sourceId);
             if (permanent != null && mageObject != null
