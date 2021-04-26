@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.TargetAddress;
@@ -132,7 +133,7 @@ class InkTreaderNephilimEffect extends CopySpellForEachItCouldTargetEffect {
     }
 
     @Override
-    protected List<MageObjectReferencePredicate> getPossibleTargets(Spell spell, Player player, Ability source, Game game) {
+    protected List<MageObjectReferencePredicate> getPossibleTargets(StackObject stackObject, Player player, Ability source, Game game) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         return game.getBattlefield()
                 .getActivePermanents(
@@ -141,14 +142,14 @@ class InkTreaderNephilimEffect extends CopySpellForEachItCouldTargetEffect {
                 ).stream()
                 .filter(Objects::nonNull)
                 .filter(p -> !p.equals(permanent))
-                .filter(p -> spell.canTarget(game, p.getId()))
+                .filter(p -> stackObject.canTarget(game, p.getId()))
                 .map(p -> new MageObjectReference(p, game))
                 .map(MageObjectReferencePredicate::new)
                 .collect(Collectors.toList());
     }
 
     @Override
-    protected Spell getSpell(Game game, Ability source) {
+    protected Spell getStackObject(Game game, Ability source) {
         return (Spell) getValue("triggeringSpell");
     }
 

@@ -24,10 +24,11 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.util.functions.SpellCopyApplier;
+import mage.util.functions.StackObjectCopyApplier;
 
 import java.util.*;
 
@@ -192,7 +193,7 @@ class BeamsplitterMagePredicate implements Predicate<Permanent> {
     }
 }
 
-class BeamsplitterMageApplier implements SpellCopyApplier {
+class BeamsplitterMageApplier implements StackObjectCopyApplier {
 
     private final Iterator<MageObjectReferencePredicate> predicate;
 
@@ -203,7 +204,7 @@ class BeamsplitterMageApplier implements SpellCopyApplier {
     }
 
     @Override
-    public void modifySpell(Spell spell, Game game) {
+    public void modifySpell(StackObject stackObject, Game game) {
     }
 
     @Override

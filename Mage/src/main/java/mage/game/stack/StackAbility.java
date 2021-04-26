@@ -20,9 +20,9 @@ import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.*;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.events.CopiedStackObjectEvent;
-import mage.game.events.CopyStackObjectEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
@@ -30,10 +30,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
-import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.SubTypes;
-import mage.util.functions.SpellCopyApplier;
+import mage.util.functions.StackObjectCopyApplier;
 import mage.watchers.Watcher;
 
 import java.util.ArrayList;
@@ -44,7 +43,7 @@ import java.util.UUID;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class StackAbility extends StackObjImpl implements Ability {
+public class StackAbility extends StackObjectImpl implements Ability {
 
     private static final ArrayList<CardType> emptyCardType = new ArrayList<>();
     private static final List<String> emptyString = new ArrayList<>();
@@ -598,43 +597,17 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
-        createCopyOnStack(game, source, newControllerId, chooseNewTargets, 1);
-    }
-
-    @Override
-    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
-        createCopyOnStack(game, source, newControllerId, chooseNewTargets, amount, null);
-    }
-
-    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount, SpellCopyApplier applier) {
-        StackAbility newStackAbility = null;
-        GameEvent gameEvent = new CopyStackObjectEvent(source, this, newControllerId, amount);
-        if (game.replaceEvent(gameEvent)) {
-            return;
+    public void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate predicate, Game game, Ability source, boolean chooseNewTargets) {
+        Ability newAbility = this.copy();
+        newAbility.newId();
+        StackAbility newStackAbility = new StackAbility(newAbility, newControllerId);
+        game.getStack().push(newStackAbility);
+        if (predicate != null) {
+            newStackAbility.chooseNewTargets(game, newControllerId, true, false, predicate);
+        } else if (chooseNewTargets || applier != null) { // if applier is non-null but predicate is null then it's extra
+            newStackAbility.chooseNewTargets(game, newControllerId);
         }
-        for (int i = 0; i < gameEvent.getAmount(); i++) {
-            Ability newAbility = this.copy();
-            newAbility.newId();
-            newStackAbility = new StackAbility(newAbility, newControllerId);
-            game.getStack().push(newStackAbility);
-            if (chooseNewTargets && !newAbility.getTargets().isEmpty()) {
-                Player controller = game.getPlayer(newControllerId);
-                Outcome outcome = newAbility.getEffects().getOutcome(newAbility);
-                if (controller.chooseUse(outcome, "Choose new targets?", source, game)) {
-                    newAbility.getTargets().clearChosen();
-                    newAbility.getTargets().chooseTargets(outcome, newControllerId, newAbility, false, game, false);
-                }
-            }
-            game.fireEvent(new CopiedStackObjectEvent(this, newStackAbility, newControllerId));
-        }
-        Player player = game.getPlayer(newControllerId);
-        if (player != null) {
-            game.informPlayers(
-                    player.getName() + " created " + CardUtil.numberToText(gameEvent.getAmount(), "a")
-                            + " cop" + (gameEvent.getAmount() == 1 ? "y" : "ies") + " of " + getIdName()
-            );
-        }
+        game.fireEvent(new CopiedStackObjectEvent(this, newStackAbility, newControllerId));
     }
 
     @Override

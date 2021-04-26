@@ -5,9 +5,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
-import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.util.functions.SpellCopyApplier;
+import mage.util.functions.StackObjectCopyApplier;
 
 import java.util.Iterator;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public abstract class CopySpellForEachItCouldTargetEffect extends OneShotEffect {
 
-    private static final class CopyApplier implements SpellCopyApplier {
+    private static final class CopyApplier implements StackObjectCopyApplier {
 
         private final Iterator<MageObjectReferencePredicate> iterator;
 
@@ -26,7 +26,7 @@ public abstract class CopySpellForEachItCouldTargetEffect extends OneShotEffect 
         }
 
         @Override
-        public void modifySpell(Spell spell, Game game) {
+        public void modifySpell(StackObject stackObject, Game game) {
         }
 
         @Override
@@ -46,21 +46,21 @@ public abstract class CopySpellForEachItCouldTargetEffect extends OneShotEffect 
         super(effect);
     }
 
-    protected abstract Spell getSpell(Game game, Ability source);
+    protected abstract StackObject getStackObject(Game game, Ability source);
 
     protected abstract Player getPlayer(Game game, Ability source);
 
-    protected abstract List<MageObjectReferencePredicate> getPossibleTargets(Spell spell, Player player, Ability source, Game game);
+    protected abstract List<MageObjectReferencePredicate> getPossibleTargets(StackObject stackObject, Player player, Ability source, Game game);
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player actingPlayer = getPlayer(game, source);
-        Spell spell = getSpell(game, source);
-        if (actingPlayer == null || spell == null) {
+        StackObject stackObject = getStackObject(game, source);
+        if (actingPlayer == null || stackObject == null) {
             return false;
         }
-        List<MageObjectReferencePredicate> predicates = getPossibleTargets(spell, actingPlayer, source, game);
-        spell.createCopyOnStack(
+        List<MageObjectReferencePredicate> predicates = getPossibleTargets(stackObject, actingPlayer, source, game);
+        stackObject.createCopyOnStack(
                 game, source, actingPlayer.getId(), false,
                 predicates.size(), new CopyApplier(predicates)
         );

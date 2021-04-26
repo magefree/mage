@@ -11,8 +11,9 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
-import mage.util.functions.SpellCopyApplier;
+import mage.util.functions.StackObjectCopyApplier;
 
 import java.util.UUID;
 
@@ -69,12 +70,12 @@ class DoubleMajorEffect extends OneShotEffect {
     }
 }
 
-enum DoubleMajorApplier implements SpellCopyApplier {
+enum DoubleMajorApplier implements StackObjectCopyApplier {
     instance;
 
     @Override
-    public void modifySpell(Spell spell, Game game) {
-        spell.getSuperType().remove(SuperType.LEGENDARY);
+    public void modifySpell(StackObject stackObject, Game game) {
+        stackObject.getSuperType().remove(SuperType.LEGENDARY);
     }
 
     @Override
