@@ -197,6 +197,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Moldervine Reclamation", 225, Rarity.UNCOMMON, mage.cards.m.MoldervineReclamation.class));
         cards.add(new SetCardInfo("Monologue Tax", 19, Rarity.RARE, mage.cards.m.MonologueTax.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 303, Rarity.RARE, mage.cards.m.MosswortBridge.class));
+        cards.add(new SetCardInfo("Muse Vortex", 28, Rarity.RARE, mage.cards.m.MuseVortex.class));
         cards.add(new SetCardInfo("Mycosynth Wellspring", 252, Rarity.COMMON, mage.cards.m.MycosynthWellspring.class));
         cards.add(new SetCardInfo("Myr Battlesphere", 253, Rarity.RARE, mage.cards.m.MyrBattlesphere.class));
         cards.add(new SetCardInfo("Myriad Landscape", 304, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
