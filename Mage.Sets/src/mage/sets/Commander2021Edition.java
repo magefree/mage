@@ -237,6 +237,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Pyromancer's Goggles", 259, Rarity.MYTHIC, mage.cards.p.PyromancersGoggles.class));
         cards.add(new SetCardInfo("Quicksmith Genius", 178, Rarity.UNCOMMON, mage.cards.q.QuicksmithGenius.class));
         cards.add(new SetCardInfo("Radiant Fountain", 310, Rarity.COMMON, mage.cards.r.RadiantFountain.class));
+        cards.add(new SetCardInfo("Radiant Performer", 54, Rarity.RARE, mage.cards.r.RadiantPerformer.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 203, Rarity.RARE, mage.cards.r.RampagingBaloths.class));
         cards.add(new SetCardInfo("Rampant Growth", 204, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Rapid Hybridization", 126, Rarity.UNCOMMON, mage.cards.r.RapidHybridization.class));
