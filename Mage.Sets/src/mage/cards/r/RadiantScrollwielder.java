@@ -164,7 +164,7 @@ class RadiantScrollwielderWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getAdditionalReference() == null) {
             return;
         }
         morMap.put(
