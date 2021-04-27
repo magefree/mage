@@ -186,6 +186,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Magister of Worth", 223, Rarity.RARE, mage.cards.m.MagisterOfWorth.class));
         cards.add(new SetCardInfo("Mana Geyser", 176, Rarity.COMMON, mage.cards.m.ManaGeyser.class));
         cards.add(new SetCardInfo("Managorger Hydra", 199, Rarity.RARE, mage.cards.m.ManagorgerHydra.class));
+        cards.add(new SetCardInfo("Marshland Bloodcaster", 43, Rarity.RARE, mage.cards.m.MarshlandBloodcaster.class));
         cards.add(new SetCardInfo("Martial Impetus", 96, Rarity.UNCOMMON, mage.cards.m.MartialImpetus.class));
         cards.add(new SetCardInfo("Master Biomancer", 224, Rarity.MYTHIC, mage.cards.m.MasterBiomancer.class));
         cards.add(new SetCardInfo("Memorial to Genius", 301, Rarity.UNCOMMON, mage.cards.m.MemorialToGenius.class));
