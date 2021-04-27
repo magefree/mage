@@ -1,8 +1,7 @@
 package mage.game.combat;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
@@ -23,11 +22,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.AttackingSameNotBandedPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
-import mage.game.events.AttackerDeclaredEvent;
-import mage.game.events.DeclareAttackerEvent;
-import mage.game.events.DeclareBlockerEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.game.events.*;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
@@ -37,6 +32,9 @@ import mage.util.CardUtil;
 import mage.util.Copyable;
 import mage.util.trace.TraceUtil;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -269,6 +267,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     @SuppressWarnings("deprecation")
     public void resumeSelectAttackers(Game game) {
+        Map<UUID, Set<MageObjectReference>> morSetMap = new HashMap<>();
         for (CombatGroup group : groups) {
             for (UUID attacker : group.getAttackers()) {
                 if (attackersTappedByAttack.contains(attacker)) {
@@ -282,10 +281,12 @@ public class Combat implements Serializable, Copyable<Combat> {
                 // This can only be used to modify the event, the attack can't be replaced here
                 game.replaceEvent(new AttackerDeclaredEvent(group.defenderId, attacker, attackingPlayerId));
                 game.addSimultaneousEvent(new AttackerDeclaredEvent(group.defenderId, attacker, attackingPlayerId));
+                morSetMap.computeIfAbsent(group.defenderId, x -> new HashSet<>()).add(new MageObjectReference(attacker, game));
             }
         }
         attackersTappedByAttack.clear();
 
+        DefenderAttackedEvent.makeAddEvents(morSetMap, attackingPlayerId, game);
         game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackingPlayerId, attackingPlayerId));
         if (!game.isSimulation()) {
             Player player = game.getPlayer(attackingPlayerId);
@@ -352,8 +353,8 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))
                     || (!canBand && !canBandWithOther)
                     || !player.chooseUse(Outcome.Benefit,
-                             (isBanded ? "Band " + attacker.getLogName()
-                                    + " with another " : "Form a band with " + attacker.getLogName() + " and an ")
+                    (isBanded ? "Band " + attacker.getLogName()
+                            + " with another " : "Form a band with " + attacker.getLogName() + " and an ")
                             + "attacking creature?", null, game)) {
                 break;
             }
@@ -571,7 +572,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * Handle the blocker selection process
      *
      * @param blockController player that controls how to block, if null the
-     * defender is the controller
+     *                        defender is the controller
      * @param game
      */
     public void selectBlockers(Player blockController, Ability source, Game game) {
@@ -1388,7 +1389,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @param playerId
      * @param game
      * @param solveBanding check whether also add creatures banded with
-     * attackerId
+     *                     attackerId
      */
     public void addBlockingGroup(UUID blockerId, UUID attackerId, UUID playerId, Game game, boolean solveBanding) {
         Permanent blocker = game.getPermanent(blockerId);

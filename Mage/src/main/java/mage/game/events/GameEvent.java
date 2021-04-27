@@ -275,6 +275,7 @@ public class GameEvent implements Serializable {
          amount      not used for this event
          flag        not used for this event
          */
+        DEFENDER_ATTACKED,
         DECLARING_BLOCKERS,
         DECLARED_BLOCKERS,
         DECLARE_BLOCKER,
