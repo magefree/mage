@@ -8,6 +8,7 @@ import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.CardsDrawnThisTurnDynamicValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -16,18 +17,20 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.ShardToken;
-import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.watchers.Watcher;
 import mage.watchers.common.CardsDrawnThisTurnWatcher;
+import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -54,8 +57,8 @@ public final class NikoAris extends CardImpl {
 
         // When Niko Aris enters the battlefield, create X Shard tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new CreateTokenEffect(new ShardToken(), NikoArisValue.instance)
-        ), new NikoArisWatcher());
+                new CreateTokenEffect(new ShardToken(), ManacostVariableValue.instance)
+        ), new ManaSpentToCastWatcher());
 
         // +1: Up to one target creature you control can't be blocked this turn. Whenever that creature deals damage this turn, return it to its owner's hand.
         Ability ability = new LoyaltyAbility(new CantBeBlockedTargetEffect(Duration.EndOfTurn), 1);
@@ -81,59 +84,6 @@ public final class NikoAris extends CardImpl {
     @Override
     public NikoAris copy() {
         return new NikoAris(this);
-    }
-}
-
-enum NikoArisValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        NikoArisWatcher watcher = game.getState().getWatcher(NikoArisWatcher.class, sourceAbility.getSourceId());
-        if (watcher == null) {
-            return 0;
-        }
-        if (game.getState().getValue(sourceAbility.getSourceId().toString() + "xValue") == null) {
-            return 0;
-        }
-        return (Integer) game.getState().getValue(sourceAbility.getSourceId().toString() + "xValue");
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
-    }
-}
-
-class NikoArisWatcher extends Watcher {
-
-    NikoArisWatcher() {
-        super(WatcherScope.CARD);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST) {
-            return;
-        }
-        Spell spell = game.getSpellOrLKIStack(event.getTargetId());
-        if (spell == null || spell.getSourceId() != super.getSourceId()) {
-            return;
-        }
-        game.getState().setValue(
-                spell.getSourceId().toString() + "xValue",
-                spell.getSpellAbility().getManaCostsToPay().getX()
-        );
     }
 }
 

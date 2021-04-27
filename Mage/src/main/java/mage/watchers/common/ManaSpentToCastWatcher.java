@@ -17,6 +17,7 @@ import mage.watchers.Watcher;
 public class ManaSpentToCastWatcher extends Watcher {
 
     private Mana payment = null;
+    private Integer xValue = 0;
 
     public ManaSpentToCastWatcher() {
         super(WatcherScope.CARD);
@@ -29,12 +30,14 @@ public class ManaSpentToCastWatcher extends Watcher {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell != null && this.getSourceId().equals(spell.getSourceId())) {
                 payment = spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay();
+                xValue = spell.getSpellAbility().getManaCostsToPay().getX();
             }
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && this.getSourceId().equals(event.getSourceId())) {
             if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
                 payment = null;
+                xValue = 0;
             }
         }
     }
@@ -45,13 +48,16 @@ public class ManaSpentToCastWatcher extends Watcher {
             returnPayment = payment.copy();
         }
         return returnPayment;
+    }
 
+    public int getAndResetLastXValue() {
+        return xValue;
     }
 
     @Override
     public void reset() {
         super.reset();
         payment = null;
+        xValue = 0;
     }
-
 }
