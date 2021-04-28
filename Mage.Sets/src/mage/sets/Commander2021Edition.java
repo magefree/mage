@@ -292,6 +292,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Steel Hellkite", 266, Rarity.RARE, mage.cards.s.SteelHellkite.class));
         cards.add(new SetCardInfo("Steel Overseer", 267, Rarity.RARE, mage.cards.s.SteelOverseer.class));
         cards.add(new SetCardInfo("Stinging Study", 44, Rarity.RARE, mage.cards.s.StingingStudy.class));
+        cards.add(new SetCardInfo("Study Hall", 80, Rarity.COMMON, mage.cards.s.StudyHall.class));
         cards.add(new SetCardInfo("Suffer the Past", 155, Rarity.UNCOMMON, mage.cards.s.SufferThePast.class));
         cards.add(new SetCardInfo("Sun Droplet", 268, Rarity.UNCOMMON, mage.cards.s.SunDroplet.class));
         cards.add(new SetCardInfo("Sun Titan", 106, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
