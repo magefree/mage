@@ -59,6 +59,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Bosh, Iron Golem", 237, Rarity.RARE, mage.cards.b.BoshIronGolem.class));
         cards.add(new SetCardInfo("Brainstorm", 115, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Brass's Bounty", 160, Rarity.RARE, mage.cards.b.BrasssBounty.class));
+        cards.add(new SetCardInfo("Breena, the Demagogue", 1, Rarity.MYTHIC, mage.cards.b.BreenaTheDemagogue.class));
         cards.add(new SetCardInfo("Bronze Guardian", 13, Rarity.RARE, mage.cards.b.BronzeGuardian.class));
         cards.add(new SetCardInfo("Burnished Hart", 238, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
         cards.add(new SetCardInfo("Call the Skybreaker", 211, Rarity.RARE, mage.cards.c.CallTheSkybreaker.class));
