@@ -1,19 +1,16 @@
 package mage.abilities.mana;
 
+import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import mage.ConditionalMana;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -128,7 +125,7 @@ public class ManaOptions extends ArrayList<Mana> {
      */
     private boolean checkManaReplacementAndTriggeredMana(Ability ability, Game game, Mana mana) {
         if (ability.hasTapCost()) {
-            ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, ability.getSourceId(), ability, ability.getControllerId(), mana);
+            ManaEvent event = new TappedForManaEvent(ability.getSourceId(), ability, ability.getControllerId(), mana, game);
             if (game.replaceEvent(event)) {
                 return false;
             }
@@ -415,7 +412,7 @@ public class ManaOptions extends ArrayList<Mana> {
         if (manaToAdd != null && (manaToAdd.countColored() > 0 || manaToAdd.getAny() > 0) && manaToAdd.count() > 0 && onlyManaCosts) {
             repeatable = true; // only replace to any with mana costs only will be repeated if able
         }
-        
+
         for (Mana payCombination : ManaOptions.getPossiblePayCombinations(cost, currentMana)) {
             Mana currentManaCopy = currentMana.copy(); // copy start mana because in iteration it will be updated
             while (currentManaCopy.includesMana(payCombination)) { // loop for multiple usage if possible
@@ -553,7 +550,7 @@ public class ManaOptions extends ArrayList<Mana> {
 
     public boolean removeEqualMana(Mana manaToRemove) {
         boolean result = false;
-        for (Iterator<Mana> iterator = this.iterator(); iterator.hasNext();) {
+        for (Iterator<Mana> iterator = this.iterator(); iterator.hasNext(); ) {
             Mana next = iterator.next();
             if (next.equalManaValue(manaToRemove)) {
                 iterator.remove();
@@ -630,7 +627,7 @@ public class ManaOptions extends ArrayList<Mana> {
 
         StringBuilder sb = new StringBuilder();
         sb.append('[');
-        for (;;) {
+        for (; ; ) {
             Mana mana = it.next();
             sb.append(mana.toString());
             if (mana instanceof ConditionalMana) {

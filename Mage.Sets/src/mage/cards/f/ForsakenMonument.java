@@ -18,7 +18,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ManaEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
@@ -80,12 +80,11 @@ class ForsakenMonumentTriggeredManaAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        ManaEvent mEvent = (ManaEvent) event;
-        if (permanent == null || !mEvent.getPlayerId().equals(getControllerId())) {
-            return false;
-        }
-        return mEvent.getMana().getColorless() > 0;
+        TappedForManaEvent mEvent = (TappedForManaEvent) event;
+        Permanent permanent = mEvent.getPermanent();
+        return permanent != null
+                && isControlledBy(event.getPlayerId())
+                && mEvent.getMana().getColorless() > 0;
     }
 
     @Override

@@ -6,7 +6,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.ManaType;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
@@ -23,7 +26,7 @@ public final class ManaReflection extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
 
         // If you tap a permanent for mana, it produces twice as much of that mana instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaReflectionReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ManaReflectionReplacementEffect()));
     }
 
     private ManaReflection(final ManaReflection card) {
@@ -43,7 +46,7 @@ class ManaReflectionReplacementEffect extends ReplacementEffectImpl {
         staticText = "If you tap a permanent for mana, it produces twice as much of that mana instead";
     }
 
-    ManaReflectionReplacementEffect(ManaReflectionReplacementEffect effect) {
+    private ManaReflectionReplacementEffect(ManaReflectionReplacementEffect effect) {
         super(effect);
     }
 
@@ -83,8 +86,7 @@ class ManaReflectionReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId())
-                && game.getPermanentOrLKIBattlefield(event.getSourceId()) != null;
+        return source.isControlledBy(event.getPlayerId());
     }
 
     @Override

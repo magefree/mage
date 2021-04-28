@@ -1,13 +1,11 @@
-
-
 package mage.game.events;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ManaEvent extends GameEvent {
@@ -22,5 +20,4 @@ public class ManaEvent extends GameEvent {
     public Mana getMana() {
         return mana;
     }
-
 }
