@@ -80,7 +80,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
             return filter.match(permanent, game);
         }
         Spell spell = game.getStack().getSpell(id);
-        return spell != null && filter.match(spell, game);
+        return filter.match(spell, game);
     }
 
     @Override

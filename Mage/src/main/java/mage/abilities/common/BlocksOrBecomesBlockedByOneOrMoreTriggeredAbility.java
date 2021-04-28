@@ -57,7 +57,7 @@ public class BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility extends Triggered
                 }
                 for (UUID uuid : group.getBlockers()){
                     Permanent permanent = game.getPermanentOrLKIBattlefield(uuid);
-                    if (permanent != null && filter.match(permanent, game)){
+                    if (filter.match(permanent, game)){
                         return true;
                     }
                 }
@@ -67,7 +67,7 @@ public class BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility extends Triggered
                 }
                 for (UUID uuid : group.getAttackers()){
                     Permanent permanent = game.getPermanentOrLKIBattlefield(uuid);
-                    if (permanent != null && filter.match(permanent, game)){
+                    if (filter.match(permanent, game)){
                         return true;
                     }
                 }

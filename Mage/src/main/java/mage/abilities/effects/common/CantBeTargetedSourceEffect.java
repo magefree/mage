@@ -57,7 +57,7 @@ public class CantBeTargetedSourceEffect extends ContinuousRuleModifyingEffectImp
             } else {
                 sourceObject = stackObject;
             }
-            if (sourceObject != null && filterSource.match(sourceObject, game)) {
+            if (filterSource.match(sourceObject, game)) {
                 return true;
             }
         }

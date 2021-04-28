@@ -64,7 +64,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
             return filter.match(permanent, game);
         }
         Player player = game.getPlayer(id);
-        return player != null && filter.match(player, game);
+        return filter.match(player, game);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
         if (permanent != null) {
             return filter.match(permanent, game);
         }
-        return player != null && filter.match(player, game);
+        return filter.match(player, game);
     }
 
     /**
@@ -196,7 +196,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
         Set<UUID> possibleTargets = new HashSet<>();
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null && filter.match(player, game)) {
+            if (filter.match(player, game)) {
                 possibleTargets.add(playerId);
             }
         }

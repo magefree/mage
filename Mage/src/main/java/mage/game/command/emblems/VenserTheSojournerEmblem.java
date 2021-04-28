@@ -60,7 +60,7 @@ class VenserTheSojournerSpellCastTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            return spell != null && StaticFilters.FILTER_SPELL_A.match(spell, game);
+            return StaticFilters.FILTER_SPELL_A.match(spell, game);
         }
         return false;
     }

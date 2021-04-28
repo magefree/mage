@@ -56,7 +56,7 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
             int attackerCount = 0;
             for (UUID attackerId : game.getCombat().getAttackers()) {
                 Permanent attacker = game.getPermanent(attackerId);
-                if (attacker != null && filter.match(attacker, game)) {
+                if (filter.match(attacker, game)) {
                     attackerCount++;
                 }
             }

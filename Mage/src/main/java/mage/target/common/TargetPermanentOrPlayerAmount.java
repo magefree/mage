@@ -54,7 +54,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
             return filter.match(permanent, game);
         }
         Player player = game.getPlayer(objectId);
-        return player != null && filter.match(player, game);
+        return filter.match(player, game);
     }
 
     @Override
@@ -83,7 +83,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
         if (permanent != null) {
             return filter.match(permanent, game);
         }
-        return player != null && filter.match(player, game);
+        return filter.match(player, game);
     }
 
     @Override

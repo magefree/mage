@@ -69,7 +69,7 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
             return false;
         }
         permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent == null || !filterPermanent.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (!filterPermanent.match(permanent, getSourceId(), getControllerId(), game)) {
             return false;
         }
         for (Effect effect : this.getEffects()) {

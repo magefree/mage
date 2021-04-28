@@ -43,7 +43,7 @@ public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
             if (setTargetPointer) {
                 this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
             }

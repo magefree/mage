@@ -72,7 +72,7 @@ class CryptGhastTriggeredAbility extends TriggeredManaAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return land != null && filter.match(land, this.getSourceId(), this.getControllerId(), game);
+        return filter.match(land, this.getSourceId(), this.getControllerId(), game);
     }
 
     @Override

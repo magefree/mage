@@ -62,7 +62,7 @@ public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
             UUID targetId = event.getTargetId();
             Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
-            if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
                 if (setTargetPointer != SetTargetPointer.NONE) {
                     for (Effect effect : this.getEffects()) {
                         switch (setTargetPointer) {

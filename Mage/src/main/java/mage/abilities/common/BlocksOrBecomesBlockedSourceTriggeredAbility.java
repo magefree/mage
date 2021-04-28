@@ -57,7 +57,7 @@ public class BlocksOrBecomesBlockedSourceTriggeredAbility extends TriggeredAbili
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(this.getSourceId())) {
             Permanent blocked = game.getPermanent(event.getTargetId());
-            if (blocked != null && filter.match(blocked, game)) {
+            if (filter.match(blocked, game)) {
                 if (setTargetPointer) {
                     this.getEffects().setTargetPointer(new FixedTarget(blocked, game));
                 }
@@ -66,7 +66,7 @@ public class BlocksOrBecomesBlockedSourceTriggeredAbility extends TriggeredAbili
         }
         if (event.getTargetId().equals(this.getSourceId())) {
             Permanent blocker = game.getPermanent(event.getSourceId());
-            if (blocker != null && filter.match(blocker, game)) {
+            if (filter.match(blocker, game)) {
                 if (setTargetPointer) {
                     this.getEffects().setTargetPointer(new FixedTarget(blocker, game));
                 }

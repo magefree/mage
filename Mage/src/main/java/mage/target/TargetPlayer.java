@@ -141,7 +141,7 @@ public class TargetPlayer extends TargetImpl {
     @Override
     public boolean canTarget(UUID id, Game game) {
         Player player = game.getPlayer(id);
-        return player != null && filter.match(player, game);
+        return filter.match(player, game);
     }
 
     @Override

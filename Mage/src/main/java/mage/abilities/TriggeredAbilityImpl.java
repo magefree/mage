@@ -295,7 +295,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 && !(sourceObject instanceof PermanentToken) // it's no token
                 && sourceObject.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(source.getSourceId())) { // It's in the next zone
             Zone after = game.getState().getZone(source.getSourceId());
-            if (after == null || !Zone.GRAVEYARD.match(after)) { // Zone is not the graveyard
+            if (!Zone.GRAVEYARD.match(after)) { // Zone is not the graveyard
                 return false; // Moving to graveyard was replaced so no trigger
             }
         }

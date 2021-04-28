@@ -119,7 +119,7 @@ class NimbleTrapfinderWatcher extends Watcher {
             return;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null || !filter.match(permanent, game)) {
+        if (!filter.match(permanent, game)) {
             return;
         }
         playerMap

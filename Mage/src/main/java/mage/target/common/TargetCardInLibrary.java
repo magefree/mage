@@ -90,7 +90,7 @@ public class TargetCardInLibrary extends TargetCard {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getPlayer(source.getControllerId()).getLibrary().getCard(id, game);
-        return card != null && filter.match(card, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(card, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override
