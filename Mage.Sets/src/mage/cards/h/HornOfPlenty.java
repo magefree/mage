@@ -16,6 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -30,7 +31,7 @@ public final class HornOfPlenty extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // Whenever a player casts a spell, they may pay {1}. If that player does, they draw a card at the beginning of the next end step.
-        this.addAbility(new SpellCastAllTriggeredAbility(new HornOfPlentyEffect(), new FilterSpell("a spell"), false, SetTargetPointer.PLAYER));
+        this.addAbility(new SpellCastAllTriggeredAbility(new HornOfPlentyEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.PLAYER));
     }
 
     private HornOfPlenty(final HornOfPlenty card) {

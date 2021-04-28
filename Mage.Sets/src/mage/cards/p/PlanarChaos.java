@@ -15,6 +15,7 @@ import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -33,7 +34,7 @@ public final class PlanarChaos extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PlanarChaosUpkeepEffect(), TargetController.YOU, false));
 
         // Whenever a player casts a spell, that player flips a coin. If they lose the flip, counter that spell.
-        this.addAbility(new SpellCastAllTriggeredAbility(new PlanarChaosCastAllEffect(), new FilterSpell("a spell"), false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastAllTriggeredAbility(new PlanarChaosCastAllEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));
     }
 
     private PlanarChaos(final PlanarChaos card) {

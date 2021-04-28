@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -25,7 +26,7 @@ public final class VeilstoneAmulet extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Whenever you cast a spell, creatures you control can't be the targets of spells or abilities your opponents control this turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new VeilstoneAmuletEffect(), new FilterSpell("a spell"), false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new VeilstoneAmuletEffect(), StaticFilters.FILTER_SPELL_A, false));
     }
 
     private VeilstoneAmulet(final VeilstoneAmulet card) {

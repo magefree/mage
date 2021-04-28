@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -28,7 +29,7 @@ public final class UnifyingTheory extends CardImpl {
 
 
         // Whenever a player casts a spell, that player may pay {2}. If the player does, they draw a card.
-        this.addAbility(new SpellCastAllTriggeredAbility(new UnifyingTheoryEffect() , new FilterSpell("a spell"), false, SetTargetPointer.PLAYER));
+        this.addAbility(new SpellCastAllTriggeredAbility(new UnifyingTheoryEffect() , StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.PLAYER));
     }
 
     private UnifyingTheory(final UnifyingTheory card) {

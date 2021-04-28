@@ -14,6 +14,7 @@ import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -32,7 +33,7 @@ public final class TabletOfTheGuilds extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new TabletOfTheGuildsEntersBattlefieldEffect()));
 
         // Whenever you cast a spell, if it's at least one of the chosen colors, you gain 1 life for each of the chosen colors it is.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new TabletOfTheGuildsGainLifeEffect(), new FilterSpell("a spell"), false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new TabletOfTheGuildsGainLifeEffect(), StaticFilters.FILTER_SPELL_A, false, true));
     }
 
     private TabletOfTheGuilds(final TabletOfTheGuilds card) {

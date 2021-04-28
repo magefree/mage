@@ -26,6 +26,7 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -47,7 +48,7 @@ public final class BINGO extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever a player casts a spell, put a chip counter on its converted mana cost.
-        this.addAbility(new SpellCastAllTriggeredAbility(new BingoEffect(), new FilterSpell("a spell"), false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastAllTriggeredAbility(new BingoEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));
 
         // B-I-N-G-O gets +9/+9 for each set of three numbers in a row with chip counters on them.
         BingoCount count = new BingoCount();

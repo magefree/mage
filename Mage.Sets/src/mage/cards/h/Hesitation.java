@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class Hesitation extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
         // When a player casts a spell, sacrifice Hesitation and counter that spell.
-        Ability ability = new SpellCastAllTriggeredAbility(new SacrificeSourceEffect(), new FilterSpell("a spell"), false, SetTargetPointer.SPELL);
+        Ability ability = new SpellCastAllTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL);
         Effect effect = new CounterTargetEffect();
         effect.setText("and counter that spell");
         ability.addEffect(effect);

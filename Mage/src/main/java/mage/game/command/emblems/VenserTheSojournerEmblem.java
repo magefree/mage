@@ -7,6 +7,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
@@ -36,8 +37,6 @@ public final class VenserTheSojournerEmblem extends Emblem {
 
 class VenserTheSojournerSpellCastTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterSpell spellCard = new FilterSpell("a spell");
-    protected FilterSpell filter;
 
     /**
      * If true, the source that triggered the ability will be set as target to
@@ -46,12 +45,10 @@ class VenserTheSojournerSpellCastTriggeredAbility extends TriggeredAbilityImpl {
 
     public VenserTheSojournerSpellCastTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.COMMAND, effect, optional);
-        this.filter = spellCard;
     }
 
     public VenserTheSojournerSpellCastTriggeredAbility(final VenserTheSojournerSpellCastTriggeredAbility ability) {
         super(ability);
-        filter = ability.filter;
     }
 
     @Override
@@ -63,7 +60,7 @@ class VenserTheSojournerSpellCastTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            return spell != null && filter.match(spell, game);
+            return spell != null && StaticFilters.FILTER_SPELL_A.match(spell, game);
         }
         return false;
     }
