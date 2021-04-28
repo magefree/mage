@@ -87,7 +87,10 @@ class ReflectiveGolemTriggeredAbility extends TriggeredAbilityImpl {
                 .filter(t -> !t.isNotTarget())
                 .map(Target::getTargets)
                 .flatMap(Collection::stream)
-                .anyMatch(uuid -> !getSourceId().equals(uuid) && uuid != null)) {
+                .filter(Objects::nonNull)
+                .distinct()
+                .filter(getSourceId()::equals)
+                .count() != 1) {
             return false;
         }
         this.getEffects().setTargetPointer(new FixedTarget(spell, game));
