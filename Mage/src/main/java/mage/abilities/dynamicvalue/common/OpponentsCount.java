@@ -5,6 +5,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 
+import java.util.Objects;
+
 /**
  * @author JayDi85
  */
@@ -13,7 +15,12 @@ public enum OpponentsCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game.getOpponents(sourceAbility.getControllerId()).size();
+        return game.getOpponents(sourceAbility.getControllerId())
+                .stream()
+                .map(game::getPlayer)
+                .map(Objects::nonNull)
+                .mapToInt(x -> x ? 1 : 0)
+                .sum();
     }
 
     @Override

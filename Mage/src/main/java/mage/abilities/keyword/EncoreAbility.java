@@ -6,6 +6,7 @@ import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
+import mage.abilities.dynamicvalue.common.OpponentsCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -87,7 +88,7 @@ class EncoreEffect extends OneShotEffect {
         EmptyToken token = new EmptyToken();
         CardUtil.copyTo(token).from(card, game);
         Set<MageObjectReference> addedTokens = new HashSet<>();
-        int opponentCount = game.getOpponents(source.getControllerId()).size();
+        int opponentCount = OpponentsCount.instance.calculate(game, source, this);
         if (opponentCount < 1) {
             return false;
         }
@@ -95,6 +96,9 @@ class EncoreEffect extends OneShotEffect {
         Iterator<UUID> it = token.getLastAddedTokenIds().iterator();
         while (it.hasNext()) {
             for (UUID playerId : game.getOpponents(source.getControllerId())) {
+                if (game.getPlayer(playerId) == null) {
+                    continue;
+                }
                 UUID tokenId = it.next();
                 MageObjectReference mageObjectReference = new MageObjectReference(tokenId, game);
                 game.addEffect(new EncoreRequirementEffect(
