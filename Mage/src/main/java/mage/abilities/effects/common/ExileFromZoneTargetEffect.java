@@ -87,8 +87,8 @@ public class ExileFromZoneTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "target " + mode.getTargets().get(0).getTargetName() + " exiles "
-                + CardUtil.numberToText(amount, "a") + ' ' + filter.getMessage()
+        return "target " + (mode.getTargets().isEmpty() ? "player" : mode.getTargets().get(0).getTargetName())
+                + " exiles " + CardUtil.numberToText(amount, "a") + ' ' + filter.getMessage()
                 + " from their " + zone.toString().toLowerCase();
     }
 }

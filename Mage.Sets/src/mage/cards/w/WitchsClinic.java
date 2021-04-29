@@ -2,6 +2,7 @@ package mage.cards.w;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.LifelinkAbility;
@@ -37,6 +38,7 @@ public final class WitchsClinic extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 LifelinkAbility.getInstance(), Duration.EndOfTurn
         ), new GenericManaCost(2));
+        ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

@@ -90,7 +90,7 @@ class UlamogExilePermanentsOnCastAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When you cast {this}, " + super.getRule();
+        return "When you cast this spell, " + super.getRule();
     }
 }
 

@@ -79,7 +79,7 @@ class ErraticCyclopsTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever you cast an instant or sorcery spell, "
                 + "{this} gets +X/+0 until end of turn, "
-                + "where X is that spell's mana value";
+                + "where X is that spell's mana value.";
     }
 
     @Override

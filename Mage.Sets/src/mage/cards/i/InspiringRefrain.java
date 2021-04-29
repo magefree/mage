@@ -22,11 +22,11 @@ public final class InspiringRefrain extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
 
         // Draw two cards. Exile Inspiring Refrain with three time counters on it.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addEffect(new ExileSpellEffect());
         this.getSpellAbility().addEffect(new AddCountersSourceEffect(
                 CounterType.TIME.createInstance(), StaticValue.get(3), false, true
-        ).setText("with 3 time counters on it"));
+        ).setText("with three time counters on it"));
 
         // Suspend 3—{2}{U}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{U}"), this));

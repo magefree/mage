@@ -46,7 +46,7 @@ public final class VowOfWildness extends CardImpl {
         effect.setText(", has trample");
         ability.addEffect(effect);
         effect = new CantAttackControllerAttachedEffect(AttachmentType.AURA);
-        effect.setText(", and can't attack you or a planeswalker you control");
+        effect.setText(", and can't attack you or planeswalkers you control");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

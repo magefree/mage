@@ -31,6 +31,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -57,7 +58,7 @@ public final class OsgirTheReconstructor extends CardImpl {
 
         // {1}, Sacrifice an artifact: Target creature you control gets +2/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)));
         this.addAbility(ability);
 
@@ -66,7 +67,7 @@ public final class OsgirTheReconstructor extends CardImpl {
                 new OsgirTheReconstructorCreateArtifactTokensEffect(),
                 new ManaCostsImpl("{X}"));
         copyAbility.addCost(new TapSourceCost());
-        copyAbility.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(), "Exile an artifact with mana value X from your graveyard"));
+        copyAbility.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(), "Exile an artifact card with mana value X from your graveyard"));
 
         copyAbility.setCostAdjuster(OsgirTheReconstructorCostAdjuster.instance);
 

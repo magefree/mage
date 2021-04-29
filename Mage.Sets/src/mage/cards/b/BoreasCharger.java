@@ -1,16 +1,11 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -26,8 +21,9 @@ import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class BoreasCharger extends CardImpl {
@@ -74,11 +70,10 @@ class BoreasChargerEffect extends OneShotEffect {
 
     public BoreasChargerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "choose an opponent who controls more lands than you. "
-                + "Search your library for a number of Plains cards "
-                + "equal to the difference and reveal them. "
-                + "Put one of them onto the battlefield tapped "
-                + "and the rest into your hand. Then shuffle";
+        this.staticText = "choose an opponent who controls more lands than you. " +
+                "Search your library for a number of Plains cards equal to the difference, " +
+                "reveal those cards, put one of them onto the battlefield tapped " +
+                "and the rest into your hand, then shuffle";
     }
 
     public BoreasChargerEffect(final BoreasChargerEffect effect) {

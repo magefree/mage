@@ -46,7 +46,7 @@ class IncarnationTechniqueEffect extends OneShotEffect {
 
     IncarnationTechniqueEffect() {
         super(Outcome.Benefit);
-        staticText = "mill four cards, then return a creature card from your graveyard to the battlefield";
+        staticText = "mill five cards, then return a creature card from your graveyard to the battlefield";
     }
 
     private IncarnationTechniqueEffect(final IncarnationTechniqueEffect effect) {

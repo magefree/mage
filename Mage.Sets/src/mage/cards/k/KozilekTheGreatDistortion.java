@@ -51,7 +51,7 @@ public final class KozilekTheGreatDistortion extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new CastSourceTriggeredAbility(new KozilekDrawEffect(), false),
                 new CardsInHandCondition(ComparisonType.FEWER_THAN, 7),
-                "When you cast {this}, if you have fewer than seven cards in hand, draw cards equal to the difference."));
+                "When you cast this spell, if you have fewer than seven cards in hand, draw cards equal to the difference."));
         // Menace
         this.addAbility(new MenaceAbility());
 

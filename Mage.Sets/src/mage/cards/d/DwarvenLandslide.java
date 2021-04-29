@@ -35,7 +35,7 @@ public final class DwarvenLandslide extends CardImpl {
         this.addAbility(new KickerAbility(kickerCosts));
 
         // Destroy target land. If Dwarven Landslide was kicked, destroy another target land.
-        getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target land. if this spell was kicked, destroy another target land"));
+        getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target land. If this spell was kicked, destroy another target land"));
         getSpellAbility().addTarget(new TargetLandPermanent());
         getSpellAbility().setTargetAdjuster(DwarvenLandslideAdjuster.instance);
     }

@@ -31,7 +31,7 @@ public final class ForbiddingSpirit extends CardImpl {
                 new ManaCostsImpl("{2}"), true
         );
         effect.setDuration(Duration.UntilYourNextTurn);
-        effect.setText("until your next turn, creatures can't attack you or a planeswalker you control " +
+        effect.setText("until your next turn, creatures can't attack you or planeswalkers you control " +
                 "unless their controller pays {2} for each of those creatures.");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
     }

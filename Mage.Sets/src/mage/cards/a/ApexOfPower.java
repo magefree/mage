@@ -33,7 +33,7 @@ public final class ApexOfPower extends CardImpl {
         this.getSpellAbility().addEffect(new ApexOfPowerSpellEffect());
 
         // If this spell was cast from your hand, add ten mana of any one color.
-        this.getSpellAbility().addEffect(new ApexOfPowerManaEffect());
+        this.getSpellAbility().addEffect(new ApexOfPowerManaEffect().concatBy("<br>"));
     }
 
     private ApexOfPower(final ApexOfPower card) {
@@ -50,7 +50,8 @@ class ApexOfPowerSpellEffect extends OneShotEffect {
 
     public ApexOfPowerSpellEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile the top seven cards of your library. Until end of turn, you may cast nonland cards exiled this way";
+        this.staticText = "exile the top seven cards of your library. " +
+                "Until end of turn, you may cast spells from among them";
     }
 
     public ApexOfPowerSpellEffect(final ApexOfPowerSpellEffect effect) {

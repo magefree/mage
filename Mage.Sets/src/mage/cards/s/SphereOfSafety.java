@@ -45,7 +45,7 @@ class SphereOfSafetyPayManaToAttackAllEffect extends CantAttackYouUnlessPayManaA
 
     SphereOfSafetyPayManaToAttackAllEffect() {
         super(null, true);
-        staticText = "Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.";
+        staticText = "Creatures can't attack you or planeswalkers you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.";
     }
 
     SphereOfSafetyPayManaToAttackAllEffect(SphereOfSafetyPayManaToAttackAllEffect effect) {

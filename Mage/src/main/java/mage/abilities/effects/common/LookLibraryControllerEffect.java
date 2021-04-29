@@ -195,7 +195,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
             }
         }
         if (this.mayShuffleAfter) {
-            sb.append(". You may shuffle your library");
+            sb.append(". You may shuffle");
         }
 
         return sb.toString();
