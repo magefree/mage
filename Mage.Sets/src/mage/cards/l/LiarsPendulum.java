@@ -5,12 +5,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -66,39 +64,32 @@ class LiarsPendulumEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (controller != null && opponent != null) {
-            // Name a card.
-            Choice choice = new ChoiceImpl();
-            choice.setChoices(CardRepository.instance.getNames());
-            choice.setMessage("Choose a card name");
-            if (!controller.choose(Outcome.Benefit, choice, game)) {
-                return false;
-            }
-            String cardName = choice.getChoice();
-            game.informPlayers("Card named: " + cardName);
-            boolean opponentGuess = false;
-
-            if (opponent.chooseUse(Outcome.Neutral, "Is the chosen card (" + cardName + ") in " + controller.getLogName() + "'s hand?", source, game)) {
-                opponentGuess = true;
-            }
-            boolean rightGuess = !opponentGuess;
-
-            for (Card card : controller.getHand().getCards(game)) {
-                if (CardUtil.haveSameNames(card, cardName, game)) {
-                    rightGuess = opponentGuess;
-                }
-            }
-            game.informPlayers(opponent.getLogName() + " guesses that " + cardName + " is " + (opponentGuess ? "" : "not") + " in " + controller.getLogName() + "'s hand");
-
-            if (controller.chooseUse(outcome, "Reveal your hand?", source, game)) {
-                controller.revealCards("hand of " + controller.getName(), controller.getHand(), game);
-                if (!rightGuess) {
-                    controller.drawCards(1, source, game);
-                }
-            }
-            return true;
+        if (controller == null || opponent == null) {
+            return false;
         }
-        return false;
+        // Name a card.
+        String cardName = ChooseACardNameEffect.TypeOfName.ALL.getChoice(controller, game, source, false);
+        boolean opponentGuess = false;
+
+        if (opponent.chooseUse(Outcome.Neutral, "Is the chosen card (" + cardName + ") in " + controller.getLogName() + "'s hand?", source, game)) {
+            opponentGuess = true;
+        }
+        boolean rightGuess = !opponentGuess;
+
+        for (Card card : controller.getHand().getCards(game)) {
+            if (CardUtil.haveSameNames(card, cardName, game)) {
+                rightGuess = opponentGuess;
+            }
+        }
+        game.informPlayers(opponent.getLogName() + " guesses that " + cardName + " is " + (opponentGuess ? "" : "not") + " in " + controller.getLogName() + "'s hand");
+
+        if (controller.chooseUse(outcome, "Reveal your hand?", source, game)) {
+            controller.revealCards("hand of " + controller.getName(), controller.getHand(), game);
+            if (!rightGuess) {
+                controller.drawCards(1, source, game);
+            }
+        }
+        return true;
     }
 
 }

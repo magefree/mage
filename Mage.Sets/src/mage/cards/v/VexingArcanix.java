@@ -6,10 +6,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.*;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -50,7 +48,9 @@ class VexingArcanixEffect extends OneShotEffect {
 
     public VexingArcanixEffect() {
         super(Outcome.DrawCard);
-        staticText = "Target player chooses a card name, then reveals the top card of their library. If that card has the chosen name, the player puts it into their hand. Otherwise, the player puts it into their graveyard and {this} deals 2 damage to them";
+        staticText = "Target player chooses a card name, then reveals the top card of their library. " +
+                "If that card has the chosen name, the player puts it into their hand. Otherwise, " +
+                "the player puts it into their graveyard and {this} deals 2 damage to them";
     }
 
     public VexingArcanixEffect(final VexingArcanixEffect effect) {
@@ -61,34 +61,27 @@ class VexingArcanixEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObject(game);
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (sourceObject != null && player != null) {
-            Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(CardRepository.instance.getNames());
-            cardChoice.setMessage("Name a card");
-            if (!player.choose(Outcome.DrawCard, cardChoice, game)) {
-                return false;
-            }
-            String cardName = cardChoice.getChoice();
-            game.informPlayers(sourceObject.getLogName() + ", player: " + player.getLogName() + ", named: [" + cardName + ']');
-            Card card = player.getLibrary().getFromTop(game);
-            if (card != null) {
-                Cards cards = new CardsImpl(card);
-                player.revealCards(sourceObject.getIdName(), cards, game);
-                if (CardUtil.haveSameNames(card, cardName, game)) {
-                    player.moveCards(cards, Zone.HAND, source, game);
-                } else {
-                    player.moveCards(cards, Zone.GRAVEYARD, source, game);
-                    player.damage(2, source.getSourceId(), source, game);
-                }
-            }
+        if (sourceObject == null || player == null) {
+            return false;
+        }
+        String cardName = ChooseACardNameEffect.TypeOfName.ALL.getChoice(player, game, source, false);
+        Card card = player.getLibrary().getFromTop(game);
+        if (card == null) {
             return true;
         }
-        return false;
+        Cards cards = new CardsImpl(card);
+        player.revealCards(sourceObject.getIdName(), cards, game);
+        if (CardUtil.haveSameNames(card, cardName, game)) {
+            player.moveCards(cards, Zone.HAND, source, game);
+        } else {
+            player.moveCards(cards, Zone.GRAVEYARD, source, game);
+            player.damage(2, source.getSourceId(), source, game);
+        }
+        return true;
     }
 
     @Override
     public VexingArcanixEffect copy() {
         return new VexingArcanixEffect(this);
     }
-
 }

@@ -6,11 +6,9 @@ import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.*;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -121,18 +119,12 @@ class TamiyoCollectorOfTalesEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Choice choice = new ChoiceImpl();
-        choice.setChoices(CardRepository.instance.getNonLandNames());
-        choice.setMessage("Choose a nonland card name");
-        if (!player.choose(outcome, choice, game)) {
-            return false;
-        }
-        game.informPlayers(source.getSourceObject(game).getLogName() + ", chosen name: [" + choice.getChoice() + ']');
+        String cardName = ChooseACardNameEffect.TypeOfName.NON_LAND_NAME.getChoice(player, game, source, false);
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 4));
         Cards cards2 = new CardsImpl();
         player.revealCards(source, cards, game);
         for (Card card : cards.getCards(game)) {
-            if (CardUtil.haveSameNames(card, choice.getChoice(), game)) {
+            if (CardUtil.haveSameNames(card, cardName, game)) {
                 cards2.add(card);
             }
         }
@@ -141,5 +133,4 @@ class TamiyoCollectorOfTalesEffect extends OneShotEffect {
         player.moveCards(cards2, Zone.HAND, source, game);
         return true;
     }
-
 }

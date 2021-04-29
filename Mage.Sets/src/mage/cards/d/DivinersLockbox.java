@@ -6,19 +6,18 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -73,16 +72,10 @@ class DivinersLockboxEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Choice choice = new ChoiceImpl();
-        choice.setChoices(CardRepository.instance.getNames());
-        choice.setMessage("Choose a card name");
-        if (!player.choose(outcome, choice, game)) {
-            return false;
-        }
-        game.informPlayers(source.getSourceObject(game).getLogName() + ", chosen name: [" + choice.getChoice() + ']');
+        String cardName = ChooseACardNameEffect.TypeOfName.ALL.getChoice(player, game, source, false);
         Card card = player.getLibrary().getFromTop(game);
         player.revealCards(source, new CardsImpl(card), game);
-        if (choice.getChoice().equals(card.getName())) {
+        if (CardUtil.haveSameNames(card, cardName, game)) {
             sacEffect.apply(game, source);
             player.drawCards(3, source, game);
         }

@@ -6,14 +6,13 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.repository.CardRepository;
-import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -34,7 +33,7 @@ public final class AchHansRun extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}{G}{G}");
 
         // At the beginning of your upkeep, you may say "Ach! Hans, run! It’s the …" and the name of a creature card. If you do, search your library for a card with that name, put it onto the battlefield, then shuffle your library. That creature gains haste. Exile it at the beginning of the next end step.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AchHansRunEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AchHansRunEffect(), TargetController.YOU, true));
     }
 
     private AchHansRun(final AchHansRun card) {
@@ -51,7 +50,9 @@ class AchHansRunEffect extends OneShotEffect {
 
     AchHansRunEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "you may say \"Ach! Hans, run! It's the …\" and the name of a creature card. If you do, search your library for a card with that name, put it onto the battlefield, then shuffle. That creature gains haste. Exile it at the beginning of the next end step";
+        this.staticText = "you may say \"Ach! Hans, run! It's the …\" and the name of a creature card. " +
+                "If you do, search your library for a card with that name, put it onto the battlefield, " +
+                "then shuffle. That creature gains haste. Exile it at the beginning of the next end step";
     }
 
     private AchHansRunEffect(final AchHansRunEffect effect) {
@@ -69,13 +70,7 @@ class AchHansRunEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        ChoiceImpl cardChoice = new ChoiceImpl(true);
-        cardChoice.setChoices(CardRepository.instance.getCreatureNames());
-        cardChoice.setMessage("Choose a creature card name");
-        if (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-            return false;
-        }
-        String cardName = cardChoice.getChoice();
+        String cardName = ChooseACardNameEffect.TypeOfName.CREATURE_NAME.getChoice(controller, game, source, false);
         game.informPlayers(controller.getLogName() + ": \"Ach! Hans, run! It's the " + cardName + "!\"");
         FilterCard nameFilter = new FilterCard();
         nameFilter.add(new NamePredicate(cardName));

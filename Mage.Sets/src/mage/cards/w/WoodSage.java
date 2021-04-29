@@ -1,19 +1,15 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -23,8 +19,9 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class WoodSage extends CardImpl {
@@ -37,8 +34,7 @@ public final class WoodSage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Name a creature card. Reveal the top four cards of your library and put all of them with that name into your hand. Put the rest into your graveyard.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WoodSageEffect(), new TapSourceCost()));
-
+        this.addAbility(new SimpleActivatedAbility(new WoodSageEffect(), new TapSourceCost()));
     }
 
     private WoodSage(final WoodSage card) {
@@ -55,7 +51,8 @@ class WoodSageEffect extends OneShotEffect {
 
     public WoodSageEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Name a creature card. Reveal the top four cards of your library and put all of them with that name into your hand. Put the rest into your graveyard";
+        this.staticText = "choose a creature card name. Reveal the top four cards of your library " +
+                "and put all of them with that name into your hand. Put the rest into your graveyard";
     }
 
     public WoodSageEffect(final WoodSageEffect effect) {
@@ -70,26 +67,15 @@ class WoodSageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(CardRepository.instance.getCreatureNames());
-            cardChoice.setMessage("Name a creature card");
-            if (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                return false;
-            }
-            String cardName = cardChoice.getChoice();
-            if (!game.isSimulation()) {
-                game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + ']');
-            }
-
-            FilterCreatureCard filter = new FilterCreatureCard("all of them with that name");
-            filter.add(new NamePredicate(cardName));
-            new RevealLibraryPutIntoHandEffect(4, filter, Zone.GRAVEYARD).apply(game, source);
-
-            return true;
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
+            return false;
         }
+        String cardName = ChooseACardNameEffect.TypeOfName.CREATURE_NAME.getChoice(controller, game, source, false);
+        FilterCreatureCard filter = new FilterCreatureCard("all of them with that name");
+        filter.add(new NamePredicate(cardName));
+        new RevealLibraryPutIntoHandEffect(4, filter, Zone.GRAVEYARD).apply(game, source);
+        return true;
 
-        return false;
     }
 }

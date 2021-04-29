@@ -3,11 +3,11 @@ package mage.cards.m;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
@@ -53,7 +53,9 @@ class MindblazeEffect extends OneShotEffect {
 
     MindblazeEffect() {
         super(Outcome.Damage);
-        staticText = "Choose a nonland card name and a number greater than 0. Target player reveals their library. If that library contains exactly the chosen number of cards with the chosen name, {this} deals 8 damage to that player. Then that player shuffles";
+        staticText = "Choose a nonland card name and a number greater than 0. Target player reveals their library. " +
+                "If that library contains exactly the chosen number of cards with the chosen name, " +
+                "{this} deals 8 damage to that player. Then that player shuffles";
     }
 
     MindblazeEffect(final MindblazeEffect effect) {
@@ -65,45 +67,36 @@ class MindblazeEffect extends OneShotEffect {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         Player playerControls = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (player != null && playerControls != null && sourceObject != null) {
-            Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(CardRepository.instance.getNonLandNames());
-            cardChoice.clearChoice();
-            Choice numberChoice = new ChoiceImpl();
-            numberChoice.setMessage("Choose a number greater than 0");
-            Set<String> numbers = new HashSet<>();
-            for (int i = 1; i <= 4; i++) {
-                numbers.add(Integer.toString(i));
-            }
-            numberChoice.setChoices(numbers);
-
-            if (!playerControls.choose(Outcome.Neutral, cardChoice, game)) {
-                return false;
-            }
-            if (!playerControls.choose(Outcome.Neutral, numberChoice, game)) {
-                return false;
-            }
-
-            game.informPlayers(sourceObject.getIdName() + " - Named card: [" + cardChoice.getChoice() + "] - Chosen number: [" + numberChoice.getChoice() + ']');
-
-            Cards cards = new CardsImpl();
-            cards.addAll(player.getLibrary().getCards(game));
-            playerControls.revealCards("Library", cards, game);
-            FilterCard filter = new FilterCard();
-            filter.add(new NamePredicate(cardChoice.getChoice()));
-            int count = Integer.parseInt(numberChoice.getChoice());
-            if (player.getLibrary().count(filter, game) == count) {
-                player.damage(8, source.getSourceId(), source, game);
-            }
-            player.shuffleLibrary(source, game);
-            return true;
+        if (player == null || playerControls == null || sourceObject == null) {
+            return false;
         }
-        return false;
+        Choice numberChoice = new ChoiceImpl();
+        numberChoice.setMessage("Choose a number greater than 0");
+        Set<String> numbers = new HashSet<>();
+        for (int i = 1; i <= 4; i++) {
+            numbers.add(Integer.toString(i));
+        }
+        numberChoice.setChoices(numbers);
+
+        String cardName = ChooseACardNameEffect.TypeOfName.NON_LAND_NAME.getChoice(playerControls, game, source, false);
+        playerControls.choose(Outcome.Neutral, numberChoice, game);
+        game.informPlayers(sourceObject.getIdName() + " - Chosen number: [" + numberChoice.getChoice() + ']');
+
+        Cards cards = new CardsImpl();
+        cards.addAll(player.getLibrary().getCards(game));
+        playerControls.revealCards("Library", cards, game);
+        FilterCard filter = new FilterCard();
+        filter.add(new NamePredicate(cardName));
+        int count = Integer.parseInt(numberChoice.getChoice());
+        if (player.getLibrary().count(filter, game) == count) {
+            player.damage(8, source.getSourceId(), source, game);
+        }
+        player.shuffleLibrary(source, game);
+        return true;
     }
 
     @Override
     public MindblazeEffect copy() {
         return new MindblazeEffect(this);
     }
-
 }
