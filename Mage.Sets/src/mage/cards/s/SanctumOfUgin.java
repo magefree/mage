@@ -24,7 +24,7 @@ import mage.target.common.TargetCardInLibrary;
 public final class SanctumOfUgin extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("colorless creature card");
-    private static final FilterSpell filterSpells = new FilterSpell("colorless spell with mana value 7 or greater");
+    private static final FilterSpell filterSpells = new FilterSpell("a colorless spell with mana value 7 or greater");
 
     static {
         filter.add(ColorlessPredicate.instance);

@@ -23,7 +23,7 @@ public final class BrilliantSpectrum extends CardImpl {
         // <i>Converge</i> &mdash; Draw X cards, where X is the number of colors of mana spent to cast Brilliant Spectrum. Then discard two cards.
         this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
         Effect effect = new DrawCardSourceControllerEffect(ColorsOfManaSpentToCastCount.getInstance());
-        effect.setText("Draw X cards, where X is the number of colors of mana spent to cast {this}");
+        effect.setText("Draw X cards, where X is the number of colors of mana spent to cast this spell");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new DiscardControllerEffect(2));
     }

@@ -48,7 +48,7 @@ class ExertInfluenceEffect extends OneShotEffect {
 
     public ExertInfluenceEffect() {
         super(Outcome.GainControl);
-        this.staticText = "Gain control of target creature if its power is less than or equal to the number of colors spent to cast {this}";
+        this.staticText = "Gain control of target creature if its power is less than or equal to the number of colors spent to cast this spell";
     }
 
     public ExertInfluenceEffect(final ExertInfluenceEffect effect) {

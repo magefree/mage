@@ -322,6 +322,12 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_ARTIFACT.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACTS = new FilterControlledArtifactPermanent("artifacts you control");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_ARTIFACTS.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN = new FilterControlledArtifactPermanent("an artifact");
 
     static {

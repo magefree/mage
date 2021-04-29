@@ -12,6 +12,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 /**
  *
@@ -28,7 +29,7 @@ public class SearchLibraryWithLessCMCPutInPlayEffect extends OneShotEffect {
     public SearchLibraryWithLessCMCPutInPlayEffect(FilterCard filter) {
         super(Outcome.PutCreatureInPlay);
         this.filter = filter;
-        staticText = "Search your library for a " + filter.getMessage() + " with mana value X or less, put it onto the battlefield, then shuffle";
+        staticText = "Search your library for " + CardUtil.addArticle(filter.getMessage()) + " with mana value X or less, put it onto the battlefield, then shuffle";
     }
 
     public SearchLibraryWithLessCMCPutInPlayEffect(final SearchLibraryWithLessCMCPutInPlayEffect effect) {

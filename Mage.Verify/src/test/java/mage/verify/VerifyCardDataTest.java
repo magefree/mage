@@ -241,6 +241,10 @@ public class VerifyCardDataTest {
         return skipCheckLists.get(listName).contains(set);
     }
 
+    private static boolean evergreenCheck(String s) {
+        return evergreenKeywords.contains(s) || s.startsWith("protection from") || s.startsWith("hexproof from");
+    }
+
     private static <T> boolean eqSet(Collection<T> a, Collection<T> b) {
         if (a == null || a.isEmpty()) {
             return b == null || b.isEmpty();
@@ -1493,7 +1497,7 @@ public class VerifyCardDataTest {
             if (Arrays
                     .stream(s.split(", "))
                     .map(String::toLowerCase)
-                    .allMatch(evergreenKeywords::contains)) {
+                    .allMatch(VerifyCardDataTest::evergreenCheck)) {
                 String replacement = Arrays
                         .stream(s.split(", "))
                         .map(CardUtil::getTextWithFirstCharUpperCase)

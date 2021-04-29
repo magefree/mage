@@ -49,7 +49,7 @@ class VoidWinnowerCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     public VoidWinnowerCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Your opponent can't cast spells with even mana values. <i>(Zero is even.)</i>";
+        staticText = "Your opponents can't cast spells with even mana values. <i>(Zero is even.)</i>";
     }
 
     public VoidWinnowerCantCastEffect(final VoidWinnowerCantCastEffect effect) {

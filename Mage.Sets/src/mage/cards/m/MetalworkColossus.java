@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -12,28 +10,27 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class MetalworkColossus extends CardImpl {
 
+    private static final FilterControlledPermanent filter = new FilterControlledArtifactPermanent("artifacts");
+
     public MetalworkColossus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{11}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{11}");
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
@@ -42,7 +39,7 @@ public final class MetalworkColossus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new MetalworkColossusCostReductionEffect()));
 
         // Sacrifice two artifacts: Return Metalwork Colossus from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledArtifactPermanent("two artifacts"), true))));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new SacrificeTargetCost(new TargetControlledPermanent(2, filter))));
     }
 
     private MetalworkColossus(final MetalworkColossus card) {
@@ -58,6 +55,7 @@ public final class MetalworkColossus extends CardImpl {
 class MetalworkColossusCostReductionEffect extends CostModificationEffectImpl {
 
     private static final FilterPermanent filter = new FilterControlledArtifactPermanent("noncreature artifacts you control");
+
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }

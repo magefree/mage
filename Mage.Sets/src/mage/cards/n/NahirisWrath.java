@@ -6,7 +6,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.VariableCostImpl;
 import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.dynamicvalue.common.DiscardCostCardConvertedMana;
+import mage.abilities.dynamicvalue.common.DiscardCostCardManaValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class NahirisWrath extends CardImpl {
         this.getSpellAbility().addCost(new NahirisWrathAdditionalCost());
 
         // Nahiri's Wrath deals damage equal to the total converted mana cost of the discarded cards to each of up to X target creatures and/or planeswalkers.
-        Effect effect = new DamageTargetEffect(DiscardCostCardConvertedMana.instance);
+        Effect effect = new DamageTargetEffect(DiscardCostCardManaValue.instance);
         effect.setText("{this} deals damage equal to the total mana value of the discarded cards to each of up to X target creatures and/or planeswalkers");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().setTargetAdjuster(NahirisWrathAdjuster.instance);
@@ -73,7 +73,7 @@ class NahirisWrathAdditionalCost extends VariableCostImpl {
 
     NahirisWrathAdditionalCost() {
         super("cards to discard");
-        this.text = "as an additional cost to cast this spell, discard X cards";
+        this.text = "discard X cards";
     }
 
     NahirisWrathAdditionalCost(final NahirisWrathAdditionalCost cost) {

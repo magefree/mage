@@ -42,7 +42,7 @@ class BuriedAliveEffect extends SearchEffect {
 
     public BuriedAliveEffect() {
         super(new TargetCardInLibrary(0, 3, StaticFilters.FILTER_CARD_CREATURE), Outcome.Detriment);
-        staticText = "Search your library for up to three creature cards and put them into your graveyard. Then shuffle";
+        staticText = "search your library for up to three creature cards, put them into your graveyard, then shuffle";
     }
 
     public BuriedAliveEffect(final BuriedAliveEffect effect) {

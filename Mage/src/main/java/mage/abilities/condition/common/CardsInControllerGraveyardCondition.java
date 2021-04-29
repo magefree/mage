@@ -37,9 +37,9 @@ public class CardsInControllerGraveyardCondition implements Condition {
 
     @Override
     public String toString() {
-        return "there are " + CardUtil.numberToText(value, "one") + " or more "
+        return CardUtil.numberToText(value, "one") + " or more "
                 + (filter == null ? "cards" : filter.getMessage())
-                + " in your graveyard";
+                + " are in your graveyard";
     }
 
 }

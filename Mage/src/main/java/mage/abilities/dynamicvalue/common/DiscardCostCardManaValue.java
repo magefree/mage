@@ -11,7 +11,7 @@ import mage.game.Game;
 /**
  * @author LevelX2
  */
-public enum DiscardCostCardConvertedMana implements DynamicValue {
+public enum DiscardCostCardManaValue implements DynamicValue {
     instance;
 
     @Override
@@ -26,8 +26,8 @@ public enum DiscardCostCardConvertedMana implements DynamicValue {
     }
 
     @Override
-    public DiscardCostCardConvertedMana copy() {
-        return DiscardCostCardConvertedMana.instance;
+    public DiscardCostCardManaValue copy() {
+        return DiscardCostCardManaValue.instance;
     }
 
     @Override
@@ -37,6 +37,6 @@ public enum DiscardCostCardConvertedMana implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the discarded card's mana value";
+        return "the mana value of the discarded card";
     }
 }

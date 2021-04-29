@@ -18,7 +18,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
  */
 public final class EmrakulsInfluence extends CardImpl {
 
-    private static final FilterSpell filterSpell = new FilterSpell("Eldrazi creature spell with mana value 7 or greater");
+    private static final FilterSpell filterSpell = new FilterSpell("an Eldrazi creature spell with mana value 7 or greater");
 
     static {
         filterSpell.add(SubType.ELDRAZI.getPredicate());

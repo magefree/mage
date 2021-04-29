@@ -72,7 +72,7 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
     public JelevaNephaliasScourgeEffect() {
         super(Outcome.Benefit);
         this.staticText = "each player exiles the top X cards of their library, "
-                + "where X is the amount of mana spent to cast {this}";
+                + "where X is the amount of mana spent to cast this spell";
     }
 
     public JelevaNephaliasScourgeEffect(final JelevaNephaliasScourgeEffect effect) {

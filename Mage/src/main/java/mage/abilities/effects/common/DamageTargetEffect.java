@@ -152,9 +152,9 @@ public class DamageTargetEffect extends OneShotEffect {
         String message = amount.getMessage();
         sb.append(this.sourceName).append(" deals ");
         if (message.isEmpty() || !message.equals("1")) {
-            sb.append(amount);
+            sb.append(amount).append(' ');
         }
-        sb.append(" damage to ");
+        sb.append("damage to ");
         if (!targetDescription.isEmpty()) {
             sb.append(targetDescription);
         } else {

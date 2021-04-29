@@ -70,7 +70,7 @@ public class ColorsOfManaSpentToCastCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the number of colors of mana spent to cast {this}";
+        return "the number of colors of mana spent to cast this spell";
     }
 
 }
