@@ -14,6 +14,7 @@ import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.constants.*;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Plane;
 import mage.players.Player;
@@ -29,14 +30,13 @@ import java.util.List;
  */
 public class FieldsOfSummerPlane extends Plane {
 
-    private static final FilterSpell filter = new FilterSpell("a spell");
 
     public FieldsOfSummerPlane() {
         this.setPlaneType(Planes.PLANE_FIELDS_OF_SUMMER);
         this.setExpansionSetCodeForImage("PCA");
 
         // Whenever a player casts a spell, that player may gain 2 life
-        SpellCastAllTriggeredAbility ability = new SpellCastAllTriggeredAbility(Zone.COMMAND, new FieldsOfSummerEffect(), filter, false, SetTargetPointer.PLAYER);
+        SpellCastAllTriggeredAbility ability = new SpellCastAllTriggeredAbility(Zone.COMMAND, new FieldsOfSummerEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.PLAYER);
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, you may gain 10 life

@@ -81,6 +81,6 @@ class DuelistsHeritageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever one or more creatures attack, " + super.getRule();
+        return "Whenever one or more creatures attack, you may have target attacking creature gain double strike until end of turn.";
     }
 }

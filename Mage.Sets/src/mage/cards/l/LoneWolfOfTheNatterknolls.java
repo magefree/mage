@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -32,7 +33,7 @@ public final class LoneWolfOfTheNatterknolls extends CardImpl {
 
         // Whenever an opponent cast a spell during your turn, draw two cards.
         this.addAbility(new ConditionalTriggeredAbility(
-                new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(2), new FilterSpell("a spell"), true),
+                new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(2), StaticFilters.FILTER_SPELL_A, true),
                 MyTurnCondition.instance,
                 "Whenever an opponent casts a spell during your turn, draw two cards."
         ).addHint(MyTurnHint.instance));

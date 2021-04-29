@@ -34,7 +34,7 @@ public final class SunDroplet extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DoIfCostPaid(
                         new GainLifeEffect(1), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance())
-                ), TargetController.ANY, false
+                ), TargetController.EACH_PLAYER, false
         ));
     }
 

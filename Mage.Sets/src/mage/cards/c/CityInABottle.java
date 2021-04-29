@@ -239,6 +239,6 @@ class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
-        return card != null && filter.match(card, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(card, source.getSourceId(), source.getControllerId(), game);
     }
 }

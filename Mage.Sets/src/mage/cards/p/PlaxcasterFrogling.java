@@ -25,7 +25,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class PlaxcasterFrogling extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with a +1/+1 counter on it");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a +1/+1 counter on it");
     static {
         filter.add(CounterType.P1P1.getPredicate());
     }       

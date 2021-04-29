@@ -48,7 +48,7 @@ class ProhibitEffect extends OneShotEffect {
     ProhibitEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Counter target spell if its mana value "
-                + "is 2 or less. if this spell was kicked, counter that "
+                + "is 2 or less. If this spell was kicked, counter that "
                 + "spell if its mana value is 4 or less instead.";
     }
 

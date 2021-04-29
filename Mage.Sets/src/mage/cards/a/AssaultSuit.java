@@ -41,7 +41,7 @@ public final class AssaultSuit extends CardImpl {
         effect.setText(", has haste");
         ability.addEffect(effect);
         effect = new CantAttackControllerAttachedEffect(AttachmentType.EQUIPMENT);
-        effect.setText(", can't attack you or a planeswalker you control");
+        effect.setText(", can't attack you or planeswalkers you control");
         ability.addEffect(effect);
         effect = new AssaultSuitCantBeSacrificed();
         effect.setText(", and can't be sacrificed");

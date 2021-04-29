@@ -30,7 +30,7 @@ public final class BlightMound extends CardImpl {
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent(SubType.PEST, "attacking Pests");
     private static final FilterPermanent filter2
-            = new FilterControlledCreaturePermanent("nontoken creature you control");
+            = new FilterControlledCreaturePermanent("a nontoken creature you control");
 
     static {
         filter.add(AttackingPredicate.instance);

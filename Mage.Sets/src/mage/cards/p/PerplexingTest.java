@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class PerplexingTest extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("nontoken creature");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("nontoken creatures");
 
     static {
         filter.add(Predicates.not(TokenPredicate.instance));

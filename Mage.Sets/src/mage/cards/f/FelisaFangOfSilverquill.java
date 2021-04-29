@@ -32,7 +32,7 @@ import java.util.UUID;
 public final class FelisaFangOfSilverquill extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("nontoken creature you control");
+            = new FilterControlledCreaturePermanent("a nontoken creature you control");
 
     static {
         filter.add(Predicates.not(TokenPredicate.instance));

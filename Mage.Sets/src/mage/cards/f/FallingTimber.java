@@ -33,7 +33,7 @@ public final class FallingTimber extends CardImpl {
         // Prevent all combat damage target creature would deal this turn. If Falling Timber was kicked,
         // prevent all combat damage another target creature would deal this turn.
         Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
-        effect.setText("Prevent all combat damage target creature would deal this turn. if this spell was kicked, " +
+        effect.setText("Prevent all combat damage target creature would deal this turn. If this spell was kicked, " +
                 "prevent all combat damage another target creature would deal this turn.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().setTargetAdjuster(FallingTimberAdjuster.instance);

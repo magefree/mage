@@ -32,7 +32,7 @@ public class CopyEffect extends ContinuousEffectImpl {
     }
 
     public CopyEffect(Duration duration, MageObject copyFromObject, UUID copyToObjectId) {
-        super(duration, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
+        super(duration, Layer.CopyEffects_1, SubLayer.CopyEffects_1a, Outcome.BecomeCreature);
         this.copyFromObject = copyFromObject;
         this.copyToObjectId = copyToObjectId;
     }

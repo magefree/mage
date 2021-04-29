@@ -124,7 +124,7 @@ public class SpellsCostIncreasingAllEffect extends CostModificationEffectImpl {
                 // get playable and other staff without put on stack
                 // used at least for flashback ability because Flashback ability doesn't use stack
                 Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                return sourceCard != null && this.filter.match(sourceCard, game);
+                return this.filter.match(sourceCard, game);
             }
         }
         return false;

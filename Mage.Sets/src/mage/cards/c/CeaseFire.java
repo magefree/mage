@@ -80,7 +80,7 @@ class CeaseFireEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getPlayerId().equals(getTargetPointer().getFirst(game, source))) {
             Spell spell = game.getStack().getSpell(event.getSourceId());
-            if (spell != null && filter.match(spell, game)) {
+            if (filter.match(spell, game)) {
                 return true;
             }
         }

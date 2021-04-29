@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SuperType;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class NetherVoid extends CardImpl {
         addSuperType(SuperType.WORLD);
 
         // Whenever a player casts a spell, counter it unless that player pays {3}.
-        this.addAbility(new SpellCastAllTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(3)), new FilterSpell("a spell"), false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastAllTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(3)), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));
     }
 
     private NetherVoid(final NetherVoid card) {

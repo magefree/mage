@@ -18,7 +18,7 @@ public class DiscardAndDrawThatManyEffect extends OneShotEffect {
         super(Outcome.DrawCard);
         this.amount = amount;
         staticText = "discard "
-                + (amount == Integer.MAX_VALUE ? "any number of" : "up to" + CardUtil.numberToText(amount))
+                + (amount == Integer.MAX_VALUE ? "any number of" : "up to " + CardUtil.numberToText(amount))
                 + " cards, then draw that many cards";
     }
 

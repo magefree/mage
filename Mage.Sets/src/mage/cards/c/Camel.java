@@ -80,7 +80,7 @@ class CamelEffect extends PreventionEffectImpl {
                     && sourcePermanent.isAttacking()
                     && (event.getTargetId().equals(source.getSourceId()) || sourcePermanent.getBandedCards().contains(event.getTargetId()))) {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(damageEvent.getSourceId());
-                if (permanent != null && filter.match(permanent, game)) {
+                if (filter.match(permanent, game)) {
                     return true;
                 }
             }

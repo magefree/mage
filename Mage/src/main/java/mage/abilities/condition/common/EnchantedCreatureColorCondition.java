@@ -30,10 +30,8 @@ public class EnchantedCreatureColorCondition implements Condition {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature != null) {
-                if(filter.match(creature, source.getSourceId(), enchantment.getControllerId(), game)){
-                    return true;
-                }
+            if(filter.match(creature, source.getSourceId(), enchantment.getControllerId(), game)){
+                return true;
             }
         }
         return false;

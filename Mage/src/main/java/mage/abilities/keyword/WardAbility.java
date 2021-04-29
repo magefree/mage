@@ -53,7 +53,7 @@ public class WardAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Ward");
+        StringBuilder sb = new StringBuilder("ward");
         if (cost instanceof ManaCost) {
             sb.append(' ').append(cost.getText());
         } else {

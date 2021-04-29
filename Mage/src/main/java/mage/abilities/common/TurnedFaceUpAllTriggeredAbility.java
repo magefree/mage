@@ -67,7 +67,7 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
             if (setTargetPointer) {
                 for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));

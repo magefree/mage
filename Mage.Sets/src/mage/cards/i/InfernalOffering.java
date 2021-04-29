@@ -38,7 +38,7 @@ public final class InfernalOffering extends CardImpl {
         this.getSpellAbility().addEffect(new InfernalOfferingSacrificeEffect());
 
         // Choose an opponent. Return a creature card from your graveyard to the battlefield, then that player returns a creature card from their graveyard to the battlefield.
-        this.getSpellAbility().addEffect(new InfernalOfferingReturnEffect());
+        this.getSpellAbility().addEffect(new InfernalOfferingReturnEffect().concatBy("<br>"));
     }
 
     private InfernalOffering(final InfernalOffering card) {

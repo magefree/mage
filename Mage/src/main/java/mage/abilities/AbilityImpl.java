@@ -982,7 +982,7 @@ public abstract class AbilityImpl implements Ability {
         }
         // check against current state
         Zone test = game.getState().getZone(parameterSourceId);
-        return test != null && zone.match(test);
+        return zone.match(test);
     }
 
     @Override

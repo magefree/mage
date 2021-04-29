@@ -25,9 +25,11 @@ public final class Dispatch extends CardImpl {
         this.getSpellAbility().addEffect(new TapTargetEffect());
 
         // Metalcraft — If you control three or more artifacts, exile that creature.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ExileTargetEffect(), MetalcraftCondition.instance, "<i>Metalcraft</i> &mdash; If you control three or more artifacts, exile that creature"));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new ExileTargetEffect(), MetalcraftCondition.instance,
+                "<br><i>Metalcraft</i> &mdash; If you control three or more artifacts, exile that creature"
+        ));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setAbilityWord(AbilityWord.METALCRAFT);
         this.getSpellAbility().addHint(MetalcraftHint.instance);
     }
 

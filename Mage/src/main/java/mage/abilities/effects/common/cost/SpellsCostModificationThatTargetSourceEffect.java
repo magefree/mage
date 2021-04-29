@@ -113,7 +113,7 @@ public class SpellsCostModificationThatTargetSourceEffect extends CostModificati
         }
 
         Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
-        if (spellCard == null || !this.spellFilter.match(spellCard, game)) {
+        if (!this.spellFilter.match(spellCard, game)) {
             return false;
         }
 

@@ -33,7 +33,7 @@ public final class RousingRefrain extends CardImpl {
         this.getSpellAbility().addEffect(new ExileSpellEffect());
         this.getSpellAbility().addEffect(new AddCountersSourceEffect(
                 CounterType.TIME.createInstance(), StaticValue.get(3), false, true
-        ).setText("with 3 time counters on it"));
+        ).setText("with three time counters on it"));
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Suspend 3—{1}{R}

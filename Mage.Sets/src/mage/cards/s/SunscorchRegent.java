@@ -31,7 +31,7 @@ public final class SunscorchRegent extends CardImpl {
         
         // Whenever an opponent casts a spell, put a +1/+1 counter on Sunscorch Regent and you gain 1 life.
         Ability ability = new SpellCastOpponentTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-        ability.addEffect(new GainLifeEffect(1));
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
 

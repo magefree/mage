@@ -138,7 +138,7 @@ class FeedingGroundsEffect extends CostModificationEffectImpl {
             } else {
                 // used at least for flashback ability because Flashback ability doesn't use stack
                 Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                return sourceCard != null && filter.match(sourceCard, game) && selectedByRuntimeData(sourceCard, source, game);
+                return filter.match(sourceCard, game) && selectedByRuntimeData(sourceCard, source, game);
             }
         }
         return false;

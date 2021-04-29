@@ -99,7 +99,7 @@ class EdgeOfMalacolEffect extends ContinuousRuleModifyingEffectImpl {
                 return false;
             }
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && filter.match(permanent, game) && Objects.equals(permanent.getControllerId(), game.getActivePlayerId())) {
+            if (filter.match(permanent, game) && Objects.equals(permanent.getControllerId(), game.getActivePlayerId())) {
                 UUID oldController = source.getControllerId();
                 source.setControllerId(game.getActivePlayerId());
                 Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(2));

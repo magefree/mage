@@ -79,7 +79,7 @@ public class TargetPermanent extends TargetObject {
 
     public boolean canTarget(UUID controllerId, UUID id, UUID sourceId, Game game, boolean flag) {
         Permanent permanent = game.getPermanent(id);
-        return permanent != null && filter.match(permanent, sourceId, controllerId, game);
+        return filter.match(permanent, sourceId, controllerId, game);
     }
 
     @Override

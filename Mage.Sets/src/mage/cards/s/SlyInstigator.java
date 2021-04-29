@@ -32,8 +32,8 @@ public final class SlyInstigator extends CardImpl {
         // {U}, {T}: Until your next turn, target creature an opponent controls can't be blocked. Goad that creature.
         Ability ability = new SimpleActivatedAbility(
                 new CantBeBlockedTargetEffect(Duration.UntilYourNextTurn)
-                        .setText("ntil your next turn, target creature an opponent controls can't be blocked."),
-                new ManaCostsImpl("{U}")
+                        .setText("until your next turn, target creature an opponent controls can't be blocked."),
+                new ManaCostsImpl<>("{U}")
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(new GoadTargetEffect().setText("Goad that creature"));

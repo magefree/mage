@@ -43,7 +43,7 @@ public class TapForManaAllTriggeredManaAbility extends TriggeredManaAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
             ManaEvent mEvent = (ManaEvent) event;
             for(Effect effect:getEffects()) {
                 effect.setValue("mana", mEvent.getMana());

@@ -30,7 +30,7 @@ public final class Peregrination extends CardImpl {
         // Seach your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Shuffle your library, then scry 1.
         this.getSpellAbility().addEffect(new PeregrinationEffect());
         Effect effect = new ScryEffect(1);
-        effect.setText("then scry 1  <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>");
+        effect.concatBy(", then");
         this.getSpellAbility().addEffect(effect);
     }
 
@@ -50,7 +50,7 @@ class PeregrinationEffect extends OneShotEffect {
 
     public PeregrinationEffect() {
         super(Outcome.PutLandInPlay);
-        staticText = "Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Shuffle your library";
+        staticText = "Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Shuffle";
     }
 
     public PeregrinationEffect(final PeregrinationEffect effect) {

@@ -87,7 +87,7 @@ class DiluvianPrimordialEffect extends OneShotEffect {
         super(Outcome.PlayForFree);
         this.staticText = "for each opponent, you may cast up to one target "
                 + "instant or sorcery card from that player's graveyard without "
-                + "paying its mana cost. If a card cast this way would be put "
+                + "paying its mana cost. If a spell cast this way would be put "
                 + "into a graveyard this turn, exile it instead";
     }
 

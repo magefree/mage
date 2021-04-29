@@ -72,7 +72,7 @@ public class RevealCardsFromLibraryUntilEffect extends OneShotEffect {
                 if (card != null) {
                     cards.add(card);
                 }
-            } while (library.hasCards() && card != null && !filter.match(card, game));
+            } while (library.hasCards() && !filter.match(card, game));
             // reveal cards
             if (!cards.isEmpty()) {
                 controller.revealCards(sourceObject.getIdName(), cards, game);

@@ -67,7 +67,7 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffe
                 return true;
             } else {
                 MageObject sourceObject = game.getObject(event.getSourceId());
-                if (sourceObject != null && filterSource.match(sourceObject, game)) {
+                if (filterSource.match(sourceObject, game)) {
                     return true;
                 }
             }

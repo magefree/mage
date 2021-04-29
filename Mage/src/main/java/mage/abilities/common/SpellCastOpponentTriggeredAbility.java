@@ -5,6 +5,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -15,12 +16,11 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterSpell spellCard = new FilterSpell("a spell");
     protected FilterSpell filter;
     protected SetTargetPointer setTargetPointer;
 
     public SpellCastOpponentTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, spellCard, optional);
+        this(effect, StaticFilters.FILTER_SPELL_A, optional);
     }
 
     public SpellCastOpponentTriggeredAbility(Effect effect, FilterSpell filter, boolean optional) {
@@ -61,7 +61,7 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell == null || !filter.match(spell, getSourceId(), getControllerId(), game)) {
+        if (!filter.match(spell, getSourceId(), getControllerId(), game)) {
             return false;
         }
         getEffects().setValue("spellCast", spell);

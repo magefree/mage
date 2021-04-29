@@ -48,7 +48,7 @@ public class TargetCardInHand extends TargetCard {
         Card card = game.getCard(id);
         return game.getState().getZone(id) == Zone.HAND
                 && game.getState().getPlayersInRange(getTargetController() == null ? playerId : getTargetController(), game).contains(game.getOwnerId(id))
-                && card != null && filter.match(card, game);
+                && filter.match(card, game);
     }
 
     @Override

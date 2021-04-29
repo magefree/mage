@@ -74,7 +74,7 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
             return false;
         }
         Permanent permanent = game.getPermanent(event.getSourceId());
-        if (permanent == null || !filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (!filter.match(permanent, getSourceId(), getControllerId(), game)) {
             return false;
         }
         this.getEffects().setValue("damage", event.getAmount());

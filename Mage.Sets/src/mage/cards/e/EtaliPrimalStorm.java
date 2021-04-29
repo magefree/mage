@@ -54,7 +54,7 @@ class EtaliPrimalStormEffect extends OneShotEffect {
     public EtaliPrimalStormEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "exile the top card of each player's library, then you may cast "
-                + "any number of nonland cards exiled this way without paying their mana costs";
+                + "any number of spells from among those cards without paying their mana costs";
     }
 
     public EtaliPrimalStormEffect(final EtaliPrimalStormEffect effect) {

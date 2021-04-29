@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class JorKadeenThePrevailer extends CardImpl {
 
-    private static final String effectText = "<i>Metalcraft</i> &mdash; Creatures you control get +3/+0 as long as you control three or more artifacts.";
+    private static final String effectText = "Creatures you control get +3/+0 as long as you control three or more artifacts.";
 
     public JorKadeenThePrevailer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");

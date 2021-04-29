@@ -38,7 +38,7 @@ public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl 
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Card card = player.getLibrary().getFromTop(game);
-            if (card != null && filter.match(card, game)) {
+            if (filter.match(card, game)) {
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
                     for (Ability ability : card.getAbilities(game)) {

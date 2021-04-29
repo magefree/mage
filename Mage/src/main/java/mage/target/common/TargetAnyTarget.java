@@ -62,7 +62,7 @@ public class TargetAnyTarget extends TargetImpl {
             return filter.match(permanent, game);
         }
         Player player = game.getPlayer(id);
-        return player != null && filter.match(player, game);
+        return filter.match(player, game);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class TargetAnyTarget extends TargetImpl {
         if (permanent != null) {
             return filter.match(permanent, game);
         }
-        return player != null && filter.match(player, game);
+        return filter.match(player, game);
     }
 
     /**
@@ -143,7 +143,7 @@ public class TargetAnyTarget extends TargetImpl {
 
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null && filter.match(player, game)) {
+            if (filter.match(player, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -193,7 +193,7 @@ public class TargetAnyTarget extends TargetImpl {
 
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null && filter.match(player, game)) {
+            if (filter.match(player, game)) {
                 possibleTargets.add(playerId);
             }
         }

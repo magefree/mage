@@ -29,11 +29,10 @@ public class SourceMatchesFilterCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (FILTER.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
-                return true;
-            }
+        if (FILTER.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
+            return true;
         }
+
         return false;
     }
 

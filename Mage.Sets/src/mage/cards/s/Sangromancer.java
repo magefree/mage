@@ -78,7 +78,7 @@ class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature an opponent controls is put into a graveyard from the battlefield, " + super.getRule();
+        return "Whenever a creature an opponent controls dies, " + super.getRule();
     }
 }
 
