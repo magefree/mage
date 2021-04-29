@@ -35,7 +35,7 @@ import static mage.client.constants.Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MO
 import static mage.constants.Constants.*;
 
 /**
- * @author nantuko, JayDi85
+ * @author nantuko, JayDi85, leemi
  */
 public class PreferencesDialog extends javax.swing.JDialog {
 
@@ -320,7 +320,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static int selectedAvatarId;
 
     private static ThemeType currentTheme = null;
-
+    
+    private static boolean ignoreGUISizeSliderStateChangedEvent = false;
+    
     public static ThemeType getCurrentTheme() {
         if (currentTheme == null) {
             currentTheme = ThemeType.valueByName(getCachedValue(KEY_THEME, "Default"));
@@ -3299,7 +3301,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_cbThemeActionPerformed
 
     private void sliderGUISizeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderGUISizeStateChanged
-        saveGUISize();
+        // This prevents this event from firing during the initial
+        // setting of the sliders from pref values
+        if (!ignoreGUISizeSliderStateChangedEvent)
+        {
+            saveGUISize();
+        }
     }//GEN-LAST:event_sliderGUISizeStateChanged
 
     private void showProxySettings() {
@@ -3462,6 +3469,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadGuiSize(Preferences prefs) {
+        ignoreGUISizeSliderStateChangedEvent = true;
         load(prefs, dialog.sliderFontSize, KEY_GUI_TABLE_FONT_SIZE, "14");
         load(prefs, dialog.sliderChatFontSize, KEY_GUI_CHAT_FONT_SIZE, "14");
         load(prefs, dialog.sliderCardSizeHand, KEY_GUI_CARD_HAND_SIZE, "14");
@@ -3475,6 +3483,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.sliderCardSizeOtherZones, KEY_GUI_CARD_OTHER_ZONES_SIZE, "14");
         load(prefs, dialog.sliderCardSizeMinBattlefield, KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE, "10");
         load(prefs, dialog.sliderCardSizeMaxBattlefield, KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE, "14");
+        ignoreGUISizeSliderStateChangedEvent = false;
     }
 
     private static void loadImagesSettings(Preferences prefs) {
