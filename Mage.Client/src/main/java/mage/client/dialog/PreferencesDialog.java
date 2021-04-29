@@ -919,6 +919,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderFontSize.setToolTipText("<HTML>The size of the font used to display table text.");
         sliderFontSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderFontSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderFontSize.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderGUISizeStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -948,6 +953,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderChatFontSize.setToolTipText("<HTML>The size of the font used to display the chat text");
         sliderChatFontSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderChatFontSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderChatFontSize.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderGUISizeStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -977,6 +987,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderDialogFont.setToolTipText("<HTML>The size of the font of messages and menues");
         sliderDialogFont.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderDialogFont.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderDialogFont.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderGUISizeStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -1007,6 +1022,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderEditorCardSize.setToolTipText("<HTML>The size of the card in editor and the picked zone of the draft panel");
         sliderEditorCardSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderEditorCardSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderEditorCardSize.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderGUISizeStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -1036,6 +1056,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderEditorCardOffset.setToolTipText("<HTML>The size of the card in editor and the picked zone of the draft panel");
         sliderEditorCardOffset.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderEditorCardOffset.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderEditorCardOffset.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderGUISizeStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -1065,6 +1090,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderEnlargedImageSize.setToolTipText("<HTML>The size of the image shown for the card your mouse pointer<br>is located over while you turn the mouse wheel ");
         sliderEnlargedImageSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderEnlargedImageSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderEnlargedImageSize.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderGUISizeStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -1110,6 +1140,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderCardSizeHand.setValue(14);
         sliderCardSizeHand.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderCardSizeHand.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderCardSizeHand.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderGUISizeStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -1139,6 +1174,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderCardSizeOtherZones.setToolTipText("<HTML>The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
         sliderCardSizeOtherZones.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderCardSizeOtherZones.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderCardSizeOtherZones.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderGUISizeStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -1168,6 +1208,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderCardSizeMinBattlefield.setToolTipText("<HTML>The minimum size of permanents on the battlefield");
         sliderCardSizeMinBattlefield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderCardSizeMinBattlefield.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderCardSizeMinBattlefield.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderGUISizeStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -1197,6 +1242,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderCardSizeMaxBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
         sliderCardSizeMaxBattlefield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderCardSizeMaxBattlefield.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderCardSizeMaxBattlefield.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderGUISizeStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -1227,6 +1277,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderStackWidth.setValue(30);
         sliderStackWidth.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderStackWidth.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderStackWidth.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderGUISizeStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -1258,6 +1313,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderGameFeedbackArea.setToolTipText("<HTML>The size of the game feedback area (buttons and messages above the hand area)");
         sliderGameFeedbackArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderGameFeedbackArea.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderGameFeedbackArea.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderGUISizeStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -1289,6 +1349,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderTooltipSize.setValue(14);
         sliderTooltipSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderTooltipSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderTooltipSize.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderGUISizeStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -2830,64 +2895,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         }
 
-        // GUI Size
-        boolean sizeGUIChanged = false;
-        if (getCachedValue(KEY_GUI_TABLE_FONT_SIZE, 14) != dialog.sliderFontSize.getValue()) {
-            save(prefs, dialog.sliderFontSize, KEY_GUI_TABLE_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
-            sizeGUIChanged = true;
-        }
-        if (getCachedValue(KEY_GUI_CHAT_FONT_SIZE, 14) != dialog.sliderChatFontSize.getValue()) {
-            save(prefs, dialog.sliderChatFontSize, KEY_GUI_CHAT_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
-            sizeGUIChanged = true;
-        }
-        if (getCachedValue(KEY_GUI_CARD_HAND_SIZE, 14) != dialog.sliderCardSizeHand.getValue()) {
-            save(prefs, dialog.sliderCardSizeHand, KEY_GUI_CARD_HAND_SIZE, "true", "false", UPDATE_CACHE_POLICY);
-            sizeGUIChanged = true;
-        }
-        if (getCachedValue(KEY_GUI_CARD_EDITOR_SIZE, 14) != dialog.sliderEditorCardSize.getValue()) {
-            save(prefs, dialog.sliderEditorCardSize, KEY_GUI_CARD_EDITOR_SIZE, "true", "false", UPDATE_CACHE_POLICY);
-            sizeGUIChanged = true;
-        }
-        if (getCachedValue(KEY_GUI_CARD_OFFSET_SIZE, 14) != dialog.sliderEditorCardOffset.getValue()) {
-            save(prefs, dialog.sliderEditorCardOffset, KEY_GUI_CARD_OFFSET_SIZE, "true", "false", UPDATE_CACHE_POLICY);
-            sizeGUIChanged = true;
-        }
-        if (getCachedValue(KEY_GUI_ENLARGED_IMAGE_SIZE, 20) != dialog.sliderEnlargedImageSize.getValue()) {
-            save(prefs, dialog.sliderEnlargedImageSize, KEY_GUI_ENLARGED_IMAGE_SIZE, "true", "false", UPDATE_CACHE_POLICY);
-            sizeGUIChanged = true;
-        }
-        if (getCachedValue(KEY_GUI_STACK_WIDTH, 30) != dialog.sliderStackWidth.getValue()) {
-            save(prefs, dialog.sliderStackWidth, KEY_GUI_STACK_WIDTH, "true", "false", UPDATE_CACHE_POLICY);
-            sizeGUIChanged = true;
-        }
-        if (getCachedValue(KEY_GUI_TOOLTIP_SIZE, 14) != dialog.sliderTooltipSize.getValue()) {
-            save(prefs, dialog.sliderTooltipSize, KEY_GUI_TOOLTIP_SIZE, "true", "false", UPDATE_CACHE_POLICY);
-            sizeGUIChanged = true;
-        }
-        if (getCachedValue(KEY_GUI_DIALOG_FONT_SIZE, 14) != dialog.sliderDialogFont.getValue()) {
-            save(prefs, dialog.sliderDialogFont, KEY_GUI_DIALOG_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
-            sizeGUIChanged = true;
-        }
-        if (getCachedValue(KEY_GUI_FEEDBACK_AREA_SIZE, 14) != dialog.sliderGameFeedbackArea.getValue()) {
-            save(prefs, dialog.sliderGameFeedbackArea, KEY_GUI_FEEDBACK_AREA_SIZE, "true", "false", UPDATE_CACHE_POLICY);
-            sizeGUIChanged = true;
-        }
-        if (getCachedValue(KEY_GUI_CARD_OTHER_ZONES_SIZE, 14) != dialog.sliderCardSizeOtherZones.getValue()) {
-            save(prefs, dialog.sliderCardSizeOtherZones, KEY_GUI_CARD_OTHER_ZONES_SIZE, "true", "false", UPDATE_CACHE_POLICY);
-            sizeGUIChanged = true;
-        }
-        if (getCachedValue(KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE, 10) != dialog.sliderCardSizeMaxBattlefield.getValue()) {
-            save(prefs, dialog.sliderCardSizeMinBattlefield, KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE, "true", "false", UPDATE_CACHE_POLICY);
-            sizeGUIChanged = true;
-        }
-        if (getCachedValue(KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE, 14) != dialog.sliderCardSizeMaxBattlefield.getValue()) {
-            save(prefs, dialog.sliderCardSizeMaxBattlefield, KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE, "true", "false", UPDATE_CACHE_POLICY);
-            sizeGUIChanged = true;
-        }
-        if (sizeGUIChanged) {
-            // do as worker job
-            GUISizeHelper.changeGUISize();
-        }
+        saveGUISize();
 
         // Phases & Priority
         save(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
@@ -2991,6 +2999,28 @@ public class PreferencesDialog extends javax.swing.JDialog {
         dialog.setVisible(false);
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    private void saveGUISize() {
+        Preferences prefs = MageFrame.getPreferences();
+        
+        // GUI Size
+        save(prefs, dialog.sliderFontSize, KEY_GUI_TABLE_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.sliderChatFontSize, KEY_GUI_CHAT_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.sliderCardSizeHand, KEY_GUI_CARD_HAND_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.sliderEditorCardSize, KEY_GUI_CARD_EDITOR_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.sliderEditorCardOffset, KEY_GUI_CARD_OFFSET_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.sliderEnlargedImageSize, KEY_GUI_ENLARGED_IMAGE_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.sliderStackWidth, KEY_GUI_STACK_WIDTH, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.sliderTooltipSize, KEY_GUI_TOOLTIP_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.sliderDialogFont, KEY_GUI_DIALOG_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.sliderGameFeedbackArea, KEY_GUI_FEEDBACK_AREA_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.sliderCardSizeOtherZones, KEY_GUI_CARD_OTHER_ZONES_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.sliderCardSizeMinBattlefield, KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.sliderCardSizeMaxBattlefield, KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+
+        // do as worker job
+        GUISizeHelper.changeGUISize();
+    }
+    
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         dialog.setVisible(false);
     }//GEN-LAST:event_exitButtonActionPerformed
@@ -3267,6 +3297,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void cbThemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbThemeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbThemeActionPerformed
+
+    private void sliderGUISizeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderGUISizeStateChanged
+        saveGUISize();
+    }//GEN-LAST:event_sliderGUISizeStateChanged
 
     private void showProxySettings() {
         Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
