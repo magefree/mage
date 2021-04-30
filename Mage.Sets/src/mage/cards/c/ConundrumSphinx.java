@@ -55,7 +55,7 @@ class ConundrumSphinxEffect extends OneShotEffect {
         super(Outcome.DrawCard);
         staticText = "each player chooses a card name. Then each player reveals the top card of their library. " +
                 "If the card a player revealed has the name they chose, that player puts it into their hand. " +
-                "If it doesn’t, that player puts it on the bottom of their library";
+                "If it doesn't, that player puts it on the bottom of their library";
     }
 
     public ConundrumSphinxEffect(final ConundrumSphinxEffect effect) {
