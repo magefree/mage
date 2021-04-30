@@ -88,7 +88,7 @@ class CharmedPendantManaEffect extends ManaEffect {
 
     public CharmedPendantManaEffect() {
         super();
-        staticText = "For each colored mana symbol in that card's mana cost, add one mana of that color";
+        staticText = "For each colored mana symbol in the milled card's mana cost, add one mana of that color";
     }
 
     public CharmedPendantManaEffect(final CharmedPendantManaEffect effect) {

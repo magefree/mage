@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class EdificeOfAuthority extends CardImpl {
 
-    private static final String rule = "{1}, {T}: Until your next turn, target creature can't attack or block and its activated abilities can't be activated. Activate only if there are three or more brick counter on {this}.";
+    private static final String rule = "{1}, {T}: Until your next turn, target creature can't attack or block and its activated abilities can't be activated. Activate only if there are three or more brick counters on {this}.";
 
     public EdificeOfAuthority(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

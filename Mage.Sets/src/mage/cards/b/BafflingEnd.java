@@ -25,7 +25,7 @@ import mage.target.common.TargetOpponent;
  */
 public final class BafflingEnd extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value 3 or less an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls with mana value 3 or less");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));

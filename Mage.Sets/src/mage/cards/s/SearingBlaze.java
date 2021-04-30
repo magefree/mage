@@ -53,7 +53,7 @@ class SearingBlazeEffect extends OneShotEffect {
 
     public SearingBlazeEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals 1 damage to target player or planeswalker and 1 damage to target creature that player or that planeswalker's controller controls.  \nLandfall - If you had a land enter the battlefield under your control this turn, {this} deals 3 damage to that player or planeswalker and 3 damage to that creature instead.";
+        staticText = "{this} deals 1 damage to target player or planeswalker and 1 damage to target creature that player or that planeswalker's controller controls. \nLandfall - If you had a land enter the battlefield under your control this turn, {this} deals 3 damage to that player or planeswalker and 3 damage to that creature instead.";
     }
 
     public SearingBlazeEffect(final SearingBlazeEffect effect) {

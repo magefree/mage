@@ -43,7 +43,7 @@ class ManaSeveranceEffect extends SearchEffect {
     
     public ManaSeveranceEffect() {
         super(new TargetCardInLibrary(0, Integer.MAX_VALUE, new FilterLandCard()), Outcome.Exile);
-        this.staticText = "Search your library for any number of land cards and remove them from the game. Shuffle your library afterwards.";
+        this.staticText = "search your library for any number of land cards, exile them, then shuffle";
     }
     
     public ManaSeveranceEffect(final ManaSeveranceEffect effect) {

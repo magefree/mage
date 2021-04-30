@@ -34,7 +34,7 @@ public final class KindlyStranger extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD, new TransformSourceEffect(true), new ManaCostsImpl<>("{2}{B}"),
                 DeliriumCondition.instance, "<i>Delirium</i> &mdash; {2}{B}: Transform {this}. " +
-                "Activate this ability only if there are four or more card types among cards in your graveyard."
+                "Activate only if there are four or more card types among cards in your graveyard."
         ).addHint(DeliriumHint.instance));
     }
 

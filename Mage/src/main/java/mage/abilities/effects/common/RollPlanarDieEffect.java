@@ -158,7 +158,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
                 }
             }
         }
-        sb.append(".  If you roll PW, planeswalk to a new plane");
+        sb.append(". If you roll PW, planeswalk to a new plane");
         return sb.toString();
     }
 

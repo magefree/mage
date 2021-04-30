@@ -37,7 +37,7 @@ public final class ParallaxNexus extends CardImpl {
         this.addAbility(ability);
 
         // When Parallax Nexus leaves the battlefield, each player returns to their hand all cards they own exiled with Parallax Nexus.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileEffect(Zone.HAND), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileEffect(Zone.HAND).setText("each player returns to their hand all cards they own exiled with {this}"), false));
     }
 
     private ParallaxNexus(final ParallaxNexus card) {

@@ -1211,7 +1211,7 @@ public abstract class GameImpl implements Game, Serializable {
                 return player.getId();
             }
         }
-        logger.debug("Game was not possible to pick a choosing player.  GameId:" + getId());
+        logger.debug("Game was not possible to pick a choosing player. GameId:" + getId());
         return null;
     }
 

@@ -42,7 +42,7 @@ class SchemingSymmetryEffect extends OneShotEffect {
     SchemingSymmetryEffect() {
         super(Outcome.Benefit);
         staticText = "Choose two target players. Each of them searches their library for a card, " +
-                "then shuffles and puts that card on top of it.";
+                "then shuffles and puts that card on top";
     }
 
     private SchemingSymmetryEffect(final SchemingSymmetryEffect effect) {

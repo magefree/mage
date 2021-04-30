@@ -39,7 +39,7 @@ public class CastWithoutPayingManaCostEffect extends OneShotEffect {
     public CastWithoutPayingManaCostEffect(DynamicValue maxCost) {
         super(Outcome.PlayForFree);
         this.manaCost = maxCost;
-        this.staticText = "you may cast a card with mana value "
+        this.staticText = "you may cast a spell with mana value "
                 + maxCost + " or less from your hand without paying its mana cost";
     }
 

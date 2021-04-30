@@ -27,7 +27,7 @@ public final class DisasterRadius extends CardImpl {
 
 
         // As an additional cost to cast Disaster Radius, reveal a creature card from your hand.
-        TargetCardInHand targetCard = new TargetCardInHand(new FilterCreatureCard("a creature card"));
+        TargetCardInHand targetCard = new TargetCardInHand(new FilterCreatureCard("a creature card from your hand"));
         this.getSpellAbility().addCost(new RevealTargetFromHandCost(targetCard));
         
         // Disaster Radius deals X damage to each creature your opponents control, where X is the revealed card's converted mana cost.

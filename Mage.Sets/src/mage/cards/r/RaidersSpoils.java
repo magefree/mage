@@ -78,6 +78,6 @@ class RaidersSpoilsTriggeredAbility extends TriggeredAbilityImpl {
     
     @Override
     public String getRule() {
-        return "Whenever a Warrior you control deals combat damage to a player, you may pay 1 life.  If you do, draw a card";
+        return "Whenever a Warrior you control deals combat damage to a player, you may pay 1 life. If you do, draw a card";
     }
 }

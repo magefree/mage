@@ -23,7 +23,7 @@ public final class YahennisExpertise extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-3, -3, Duration.EndOfTurn));
 
         // You may cast a card with converted mana cost 3 or less from your hand without paying its mana cost.
-        this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(3));
+        this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(3).concatBy("<br>"));
     }
 
     private YahennisExpertise(final YahennisExpertise card) {

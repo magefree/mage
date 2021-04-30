@@ -36,7 +36,7 @@ public final class KuldothaPhoenix extends CardImpl {
         // <i>Metalcraft</i> &mdash; {4}: Return Kuldotha Phoenix from your graveyard to the battlefield.
         // Activate this ability only during your upkeep and only if you control three or more artifacts.        
         Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(false, true),
+                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
                 new ManaCostsImpl("{4}"),
                 new CompoundCondition("during your upkeep and only if you control three or more artifacts",
                         new IsStepCondition(PhaseStep.UPKEEP), MetalcraftCondition.instance)

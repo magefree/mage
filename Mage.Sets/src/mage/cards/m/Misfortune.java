@@ -67,7 +67,7 @@ class MisfortuneEffect extends OneShotEffect {
         if (controller != null
                 && chosenOpponent != null) {
             if (chosenOpponent.chooseUse(Outcome.Neutral, "If you choose Yes, the controller puts a +1/+1 counter"
-                    + "on each creature they control and they gain 4 life.  If no, the controller puts a -1/-1 counter"
+                    + "on each creature they control and they gain 4 life. If no, the controller puts a -1/-1 counter"
                     + "on each creature you control and {this} deals 4 damage to you.", source, game)) {
                 Effect putP1P1CounterOnEachControlledCreature = new AddCountersAllEffect(
                         CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent());

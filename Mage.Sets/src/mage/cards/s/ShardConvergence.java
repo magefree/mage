@@ -25,7 +25,8 @@ public final class ShardConvergence extends CardImpl {
         // Search your library for a Plains card, an Island card, a Swamp card, and a Mountain card. Reveal those cards and put them into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(
                 new ShardConvergenceTarget(), true
-        ));
+        ).setText("search your library for a Plains card, an Island card, a Swamp card, and a Mountain card. " +
+                "Reveal those cards, put them into your hand, then shuffle"));
     }
 
     private ShardConvergence(final ShardConvergence card) {

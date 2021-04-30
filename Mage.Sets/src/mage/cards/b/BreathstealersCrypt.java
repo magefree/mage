@@ -76,7 +76,7 @@ class BreathstealersCryptEffect extends ReplacementEffectImpl {
         if (!cardDrawn.isCreature()) {
             return true;
         }
-        game.informPlayers("The card drawn by " + player.getName() + " is a creature card.  They discard that card unless they pay 3 life.");
+        game.informPlayers("The card drawn by " + player.getName() + " is a creature card. They discard that card unless they pay 3 life.");
         PayLifeCost cost = new PayLifeCost(3);
         if (!cost.canPay(source, source, player.getId(), game)
                 || !player.chooseUse(outcome, "Pay 3 life or discard " + cardDrawn.getIdName() + "?", null, "Pay 3 life", "Discard", source, game)

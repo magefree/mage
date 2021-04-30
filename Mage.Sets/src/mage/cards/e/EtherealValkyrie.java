@@ -123,7 +123,7 @@ class EtherealValkyrieEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.drawCards(1, source, game);
-            TargetCardInHand targetCard = new TargetCardInHand(new FilterCard("card to exile face down.  It becomes foretold."));
+            TargetCardInHand targetCard = new TargetCardInHand(new FilterCard("card to exile face down. It becomes foretold."));
             if (controller.chooseTarget(Outcome.Benefit, targetCard, source, game)) {
                 Card exileCard = game.getCard(targetCard.getFirstTarget());
                 if (exileCard == null) {

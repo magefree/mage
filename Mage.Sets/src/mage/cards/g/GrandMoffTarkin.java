@@ -108,7 +108,7 @@ class GrandMoffTarkinEffect extends OneShotEffect {
 
     public GrandMoffTarkinEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "destroy target creature that that player controls unless that player pays 2 life.  If a player pays life this way, draw a card";
+        this.staticText = "destroy target creature that that player controls unless that player pays 2 life. If a player pays life this way, draw a card";
     }
 
     public GrandMoffTarkinEffect(final GrandMoffTarkinEffect effect) {

@@ -34,7 +34,7 @@ public final class BelzenlokDemonToken extends TokenImpl {
 
     public BelzenlokDemonToken() {
         super("Demon", "6/6 black Demon creature token with flying, trample, and "
-                + "\"At the beginning of your upkeep, sacrifice another creature.  If you can't, this creature deals 6 damage to you.\"");
+                + "\"At the beginning of your upkeep, sacrifice another creature. If you can't, this creature deals 6 damage to you.\"");
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
@@ -75,7 +75,7 @@ class BelzenlokDemonTokenEffect extends OneShotEffect {
 
     BelzenlokDemonTokenEffect() {
         super(Outcome.Benefit);
-        this.staticText = "sacrifice another creature.  If you can't, this creature deals 6 damage to you.";
+        this.staticText = "sacrifice another creature. If you can't, this creature deals 6 damage to you.";
     }
 
     BelzenlokDemonTokenEffect(final BelzenlokDemonTokenEffect effect) {

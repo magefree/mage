@@ -24,7 +24,7 @@ public final class RishkarsExpertise extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // You may cast a card with converted mana cost 5 or less from your hand without paying its mana cost.
-        this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(5));
+        this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(5).concatBy("<br>"));
     }
 
     private RishkarsExpertise(final RishkarsExpertise card) {

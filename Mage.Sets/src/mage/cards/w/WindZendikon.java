@@ -40,7 +40,7 @@ public final class WindZendikon extends CardImpl {
         this.addAbility(ability);
         
         Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(
-                new WindZendikonElementalToken(), "Enchanted land is a 2/2 blue Elemental creature with flying.  It's still a land",
+                new WindZendikonElementalToken(), "Enchanted land is a 2/2 blue Elemental creature with flying. It's still a land",
                 Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR));
         this.addAbility(ability2);
         

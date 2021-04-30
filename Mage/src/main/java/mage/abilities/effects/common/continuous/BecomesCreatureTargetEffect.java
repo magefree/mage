@@ -188,7 +188,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                 sb.append(". It's still a land");
             }
         }
-        return sb.toString();
+        return sb.toString().replace(" .", ".");
     }
 
 }

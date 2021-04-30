@@ -42,7 +42,7 @@ public final class OraclesVault extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new OraclesVaultFreeEffect(), new TapSourceCost(), new SourceHasCounterCondition(CounterType.BRICK, 3, Integer.MAX_VALUE),
                 "{T}: Exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. "
-                        + "Activate only if there are three or more brick counters on {this}"));
+                        + "Activate only if there are three or more brick counters on {this}."));
     }
 
     private OraclesVault(final OraclesVault card) {

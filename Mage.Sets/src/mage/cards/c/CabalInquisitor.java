@@ -84,6 +84,6 @@ class ActivateAsSorceryConditionalActivatedAbility extends ActivatedAbilityImpl 
 
     @Override
     public String getRule() {
-        return super.getRule() + " Activate only as a sorcery, and only if seven or more cards are in your graveyard.";
+        return super.getRule() + " Activate only as a sorcery and only if seven or more cards are in your graveyard.";
     }
 }

@@ -56,7 +56,7 @@ public final class GateToTheAfterlife extends CardImpl {
         // {2}, {T}, Sacrifice Gate to the Afterlife: Search your graveyard, hand, and/or library for a card named God-Pharaoh's Gift and put it onto the battlefield. If you seearch your library this way, shuffle it. Activate this ability only if there are six or more creature cards in your graveyard.
         ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD, new GateToTheAfterlifeEffect(), new GenericManaCost(2),
-                new CardsInControllerGraveyardCondition(6, StaticFilters.FILTER_CARD_CREATURE)
+                new CardsInControllerGraveyardCondition(6, StaticFilters.FILTER_CARD_CREATURES)
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

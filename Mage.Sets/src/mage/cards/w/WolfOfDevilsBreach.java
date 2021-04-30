@@ -42,7 +42,7 @@ public final class WolfOfDevilsBreach extends CardImpl {
         toPay.add(new DiscardCardCost());
         Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(new WolfOfDevilsBreachDiscardCostCardConvertedMana()), toPay,
                 "Pay {1}{R} and discard a card to let {this} do damage to target creature or planeswalker equal to the discarded card's mana value?", true), false,
-                "Whenever {this} attacks you may pay {1}{R} and discard a card. If you do, {this} deals damage to target creature or planeswalker "
+                "Whenever {this} attacks, you may pay {1}{R} and discard a card. If you do, {this} deals damage to target creature or planeswalker "
                 + "equal to the discarded card's mana value.");
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(ability);

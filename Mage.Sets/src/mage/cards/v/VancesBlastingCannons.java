@@ -62,7 +62,7 @@ class VancesBlastingCannonsExileEffect extends OneShotEffect {
 
     public VancesBlastingCannonsExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile the top card of your library.  If it's a nonland card, you may cast that card this turn";
+        this.staticText = "exile the top card of your library. If it's a nonland card, you may cast that card this turn";
     }
 
     public VancesBlastingCannonsExileEffect(final VancesBlastingCannonsExileEffect effect) {

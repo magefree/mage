@@ -63,7 +63,7 @@ class ChooseNumberEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int numberChoice = controller.announceXMana(0, Integer.MAX_VALUE, "Choose a number. Noncreature spells with the chosen mana value can't be cast", game, source);
+            int numberChoice = controller.announceXMana(0, Integer.MAX_VALUE, "Choose a number.", game, source);
             game.getState().setValue(source.getSourceId().toString(), numberChoice);
 
             Permanent permanent = game.getPermanentEntering(source.getSourceId());
@@ -82,7 +82,7 @@ class ChooseNumberEffect extends OneShotEffect {
     }
 
     private String setText() {
-        return "Choose a number. Noncreature spells with the chosen mana value can't be cast";
+        return "Choose a number. Noncreature spells with mana value equal to the chosen number can't be cast";
     }
 }
 
@@ -92,7 +92,7 @@ class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl 
 
     public SanctumPrelateReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Noncreature spells with the chosen mana value can't be cast";
+        staticText = "Noncreature spells with mana value equal to the chosen number can't be cast";
     }
 
     public SanctumPrelateReplacementEffect(final SanctumPrelateReplacementEffect effect) {

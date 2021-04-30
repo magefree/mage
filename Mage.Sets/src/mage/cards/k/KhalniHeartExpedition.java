@@ -29,7 +29,7 @@ public final class KhalniHeartExpedition extends CardImpl {
 
         this.addAbility(new SimpleActivatedAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(
-                        0, 2, StaticFilters.FILTER_CARD_BASIC_LAND
+                        0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS
                 ), true, Outcome.PutLandInPlay),
                 new CompositeCost(
                         new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)),

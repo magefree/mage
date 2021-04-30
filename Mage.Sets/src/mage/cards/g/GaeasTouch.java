@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -13,21 +12,28 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class GaeasTouch extends CardImpl {
+
+    private static final FilterCard filter = new FilterCard("a basic Forest card");
+
+    static {
+        filter.add(SuperType.BASIC.getPredicate());
+        filter.add(SubType.FOREST.getPredicate());
+    }
 
     public GaeasTouch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
 
         // You may put a basic Forest card from your hand onto the battlefield. Activate this ability only any time you could cast a sorcery and only once each turn.
-        FilterCard filter = new FilterCard("basic Forest card");
-        filter.add(SuperType.BASIC.getPredicate());
-        filter.add(SubType.FOREST.getPredicate());
-        LimitedTimesPerTurnActivatedAbility ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD,
-                new PutCardFromHandOntoBattlefieldEffect(filter), new GenericManaCost(0), 1);
+        LimitedTimesPerTurnActivatedAbility ability = new LimitedTimesPerTurnActivatedAbility(
+                Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(filter),
+                new GenericManaCost(0), 1
+        );
         ability.setTiming(TimingRule.SORCERY);
         addAbility(ability);
 

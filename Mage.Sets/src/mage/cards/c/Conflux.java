@@ -25,7 +25,7 @@ public final class Conflux extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(
                 new ConfluxTarget(), true, true
         ).setText("search your library for a white card, a blue card, a black card, a red card, and a green card. " +
-                "Reveal those cards and put them into your hand. Then shuffle"));
+                "Reveal those cards, put them into your hand, then shuffle"));
     }
 
     private Conflux(final Conflux card) {

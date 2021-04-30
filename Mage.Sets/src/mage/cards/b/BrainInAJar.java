@@ -70,8 +70,8 @@ class BrainInAJarCastEffect extends OneShotEffect {
 
     public BrainInAJarCastEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = ", then you may cast an instant or sorcery card "
-                + "with mana values equal to the number of charge "
+        this.staticText = ", then you may cast an instant or sorcery spell "
+                + "with mana value equal to the number of charge "
                 + "counters on {this} from your hand without paying its mana cost";
     }
 
