@@ -341,7 +341,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{B}{B}, {T}: Return target creature", "Jace, Vryn's Prodigy");
 
         // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard, exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
-        activateAbility(2, PhaseStep.BEGIN_COMBAT, playerB, "{T}: Draw a card, then discard a card. If there are five or more cards in your graveyard");
+        activateAbility(2, PhaseStep.BEGIN_COMBAT, playerB, "{T}:");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "+1: Up to one target creature gets -2/-0 until your next turn");
         setStopAt(3, PhaseStep.UNTAP);

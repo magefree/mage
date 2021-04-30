@@ -131,7 +131,7 @@ public class JaceTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, ancestralVision);
         addCard(Zone.HAND, playerA, "Swamp", 1);
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. If there are five or more cards in your graveyard");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}:");
         setChoice(playerA, "Swamp");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-3:");
         addTarget(playerA, ancestralVision);
