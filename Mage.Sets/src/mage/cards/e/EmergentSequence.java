@@ -85,7 +85,7 @@ class EmergentSequenceEffect extends OneShotEffect {
             return true;
         }
         game.addEffect(new BecomesCreatureTargetEffect(
-                new QuandrixToken(), true, true, Duration.Custom
+                new QuandrixToken(), false, true, Duration.Custom
         ).setTargetPointer(new FixedTarget(permanent, game)), source);
         permanent.addCounters(CounterType.P1P1.createInstance(
                 EmergentSequenceWatcher.getAmount(source.getControllerId(), game)
