@@ -71,7 +71,7 @@ class RuinGrinderEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<Player> wheelers = new ArrayList<>();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(source.getSourceId());
+            Player player = game.getPlayer(playerId);
             if (player != null && player.chooseUse(
                     Outcome.DrawCard, "Discard your hand and draw seven?", source, game
             )) {

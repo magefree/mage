@@ -30,7 +30,7 @@ public class ReturnToHandAttachedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getSourceId());
+        Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = (Permanent) getValue("attachedTo");
         if (player == null || permanent == null) {
             return false;
