@@ -33,7 +33,7 @@ public final class ValentinDeanOfTheVein extends ModalDoubleFacesCard {
     public ValentinDeanOfTheVein(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
                 new CardType[]{CardType.CREATURE}, new SubType[]{SubType.VAMPIRE, SubType.WARLOCK}, "{B}",
-                "Lisette Dean of the Root", new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.DRUID}, "{2}{G}{G}"
+                "Lisette, Dean of the Root", new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.DRUID}, "{2}{G}{G}"
         );
 
         // 1.
