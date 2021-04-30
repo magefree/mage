@@ -75,10 +75,7 @@ class MagmaOpusTapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-            if (!source.getTargets().get(1).getTargets().contains(targetId)) {
-                continue;
-            }
+        for (UUID targetId : source.getTargets().get(1).getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
                 permanent.tap(source, game);
