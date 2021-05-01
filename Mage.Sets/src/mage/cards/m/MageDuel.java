@@ -39,7 +39,7 @@ public final class MageDuel extends CardImpl {
         // This spell costs {2} less to cast if you've cast another instant or sorcery spell this turn.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionSourceEffect(2, MageDuelCondition.instance).setCanWorksOnStackOnly(true)
-        ).setRuleAtTheTop(true));
+        ).setRuleAtTheTop(true), new SpellsCastWatcher());
 
         // Target creature you control gets +1/+2 until end of turn. Then it fights target creature you don't control.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 2));
