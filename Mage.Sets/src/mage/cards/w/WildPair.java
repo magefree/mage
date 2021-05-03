@@ -1,47 +1,48 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.IntComparePredicate;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.watchers.common.CastFromHandWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author fenhl
  */
 public final class WildPair extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
+    private static final FilterPermanent filter = new FilterCreaturePermanent();
 
     static {
+        // TODO: This should check who cast the spell, not who controls the permanent
         filter.add(TargetController.YOU.getOwnerPredicate());
+        filter.add(WildPairCastFromHandPredicate.instance);
     }
 
     public WildPair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
 
         // Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness and put it onto the battlefield. If you do, shuffle your library.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new WildPairEffect(), filter, true, SetTargetPointer.PERMANENT, ""),
-                new CastFromHandTargetCondition(),
-                "Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness, put it onto the battlefield, then shuffle."
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD, new WildPairEffect(), filter, true,
+                SetTargetPointer.PERMANENT, "Whenever a creature enters the battlefield, " +
+                "if you cast it from your hand, you may search your library for a creature card " +
+                "with the same total power and toughness, put it onto the battlefield, then shuffle."
         ), new CastFromHandWatcher());
     }
 
@@ -74,77 +75,41 @@ class WildPairEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-            if (permanent != null) {
-                int totalPT = permanent.getPower().getValue() + permanent.getToughness().getValue();
-                FilterCreatureCard filter = new FilterCreatureCard("creature card with total power and toughness " + totalPT);
-                filter.add(new TotalPowerAndToughnessPredicate(ComparisonType.EQUAL_TO, totalPT));
-                TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
-                if (controller.searchLibrary(target, source, game)) {
-                    if (!target.getTargets().isEmpty()) {
-                        controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
-                    }
-                }
-                controller.shuffleLibrary(source, game);
-                return true;
-            }
+        Permanent permanent = (Permanent) getValue("permanentEnteringBattlefield");
+        if (controller == null || permanent == null) {
+            return false;
         }
-        return false;
+        int totalPT = permanent.getPower().getValue() + permanent.getToughness().getValue();
+        FilterCreatureCard filter = new FilterCreatureCard("creature card with total power and toughness " + totalPT);
+        filter.add(new WildPairPowerToughnessPredicate(totalPT));
+        TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
+        controller.searchLibrary(target, source, game);
+        controller.moveCards(new CardsImpl(
+                controller.getLibrary().getCard(target.getFirstTarget(), game)
+        ), Zone.BATTLEFIELD, source, game);
+        controller.shuffleLibrary(source, game);
+        return true;
     }
 }
 
-/**
- *
- * @author fenhl
- */
-class TotalPowerAndToughnessPredicate extends IntComparePredicate<MageObject> {
+class WildPairPowerToughnessPredicate extends IntComparePredicate<MageObject> {
 
-    public TotalPowerAndToughnessPredicate(ComparisonType type, int value) {
-        super(type, value);
+    public WildPairPowerToughnessPredicate(int value) {
+        super(ComparisonType.EQUAL_TO, value);
     }
 
     @Override
     protected int getInputValue(MageObject input) {
         return input.getPower().getValue() + input.getToughness().getValue();
     }
-
-    @Override
-    public String toString() {
-        return "TotalPowerAndToughness" + super.toString();
-    }
 }
 
-class CastFromHandTargetCondition implements Condition {
+enum WildPairCastFromHandPredicate implements Predicate<Permanent> {
+    instance;
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        UUID targetId = source.getEffects().get(0).getTargetPointer().getFirst(game, source);
-        Permanent permanent = game.getPermanentEntering(targetId);
-        int zccDiff = 0;
-        if (permanent == null) {
-            permanent = game.getPermanentOrLKIBattlefield(targetId); // can be alredy again removed from battlefield so also check LKI
-            zccDiff = -1;
-        }
-        if (permanent != null) {
-            // check that the spell is still in the LKI
-            Spell spell = game.getStack().getSpell(targetId);
-            if (spell == null || spell.getZoneChangeCounter(game) != permanent.getZoneChangeCounter(game) + zccDiff) {
-                if (game.getLastKnownInformation(targetId, Zone.STACK, permanent.getZoneChangeCounter(game) + zccDiff) == null) {
-                    return false;
-                }
-            }
-            CastFromHandWatcher watcher = game.getState().getWatcher(CastFromHandWatcher.class);
-            if (watcher != null && watcher.spellWasCastFromHand(targetId)) {
-                return true;
-            }
-        }
-        return false;
+    public boolean apply(Permanent permanent, Game game) {
+        CastFromHandWatcher watcher = game.getState().getWatcher(CastFromHandWatcher.class);
+        return watcher != null && watcher.spellWasCastFromHand(permanent.getId());
     }
-
-    @Override
-    public String toString() {
-        return "you cast it from your hand";
-    }
-
 }
