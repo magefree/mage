@@ -21,6 +21,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -41,6 +42,7 @@ public final class HofriGhostforge extends CardImpl {
             = new FilterControlledCreaturePermanent("another nontoken creature you control");
 
     static {
+        filter3.add(AnotherPredicate.instance);
         filter3.add(Predicates.not(TokenPredicate.instance));
     }
 
