@@ -41,7 +41,7 @@ public final class DragonsApproach extends CardImpl {
         this.getSpellAbility().addEffect(new DoIfCostPaid(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)),
                 new CompositeCost(
-                        new ExileSourceCost(), new ExileFromGraveCost(new TargetCardInYourGraveyard(filter2)),
+                        new ExileSourceCost(), new ExileFromGraveCost(new TargetCardInYourGraveyard(4, filter2)),
                         "exile {this} and four cards named Dragon's Approach from your graveyard"
                 )
         ));
