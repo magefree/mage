@@ -86,16 +86,12 @@ class WanderingArchaicEffect extends OneShotEffect {
             return false;
         }
         Cost cost = new GenericManaCost(2);
-        if (cost.canPay(
-                source, source, opponent.getId(), game
-        ) && opponent.chooseUse(
-                outcome, "Pay {2} to prevent " + controller.getName()
-                        + " from copying " + spell.getName() + "?", source, game
-        ) && cost.pay(
-                source, game, source, opponent.getId(), false
-        ) && controller.chooseUse(
-                outcome, "Copy " + spell.getName() + "?", source, game
-        )) {
+        if (cost.canPay(source, source, opponent.getId(), game)
+                && opponent.chooseUse(outcome, "Pay {2}?", source, game)
+                && cost.pay(source, game, source, opponent.getId(), false)) {
+            return true;
+        }
+        if (controller.chooseUse(outcome, "Copy " + spell.getName() + "?", source, game)) {
             spell.createCopyOnStack(game, source, controller.getId(), true);
         }
         return true;
