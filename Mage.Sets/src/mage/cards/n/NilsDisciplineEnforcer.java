@@ -6,25 +6,24 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
-import mage.target.targetpointer.EachTargetPointer;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -43,10 +42,7 @@ public final class NilsDisciplineEnforcer extends CardImpl {
 
         // At the beginning of your end step, for each player, put a +1/+1 counter on up to one target creature that player controls.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
-                        .setTargetPointer(new EachTargetPointer())
-                        .setText("for each player, put a +1/+1 counter on up to one target creature that player controls"),
-                TargetController.YOU, false
+                new NilsDisciplineEnforcerEffect(), TargetController.YOU, false
         );
         ability.setTargetAdjuster(NilsDisciplineEnforcerAdjuster.instance);
         this.addAbility(ability);
@@ -77,8 +73,40 @@ enum NilsDisciplineEnforcerAdjuster implements TargetAdjuster {
                 continue;
             }
             FilterPermanent filter = new FilterCreaturePermanent("creature controlled by " + player.getName());
+            filter.add(new ControllerIdPredicate(playerId));
             ability.addTarget(new TargetPermanent(0, 1, filter));
         }
+    }
+}
+
+class NilsDisciplineEnforcerCountersEffect extends OneShotEffect {
+
+    NilsDisciplineEnforcerCountersEffect() {
+        super(Outcome.Benefit);
+        staticText = "for each player, put a +1/+1 counter on up to one target creature that player controls";
+    }
+
+    private NilsDisciplineEnforcerCountersEffect(final NilsDisciplineEnforcerCountersEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public NilsDisciplineEnforcerCountersEffect copy() {
+        return new NilsDisciplineEnforcerCountersEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        source.getTargets()
+                .stream()
+                .map(Target::getFirstTarget)
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .map(permanent -> permanent.addCounters(
+                        CounterType.P1P1.createInstance(),
+                        source.getControllerId(), source, game
+                ));
+        return true;
     }
 }
 
