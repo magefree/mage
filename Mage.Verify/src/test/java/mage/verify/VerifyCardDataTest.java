@@ -58,7 +58,9 @@ public class VerifyCardDataTest {
 
     private static final String FULL_ABILITIES_CHECK_SET_CODE = "C21"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
+    private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
+    private static final Set<String> checkedNames = new HashSet<>();
     private static final HashMap<String, Set<String>> skipCheckLists = new HashMap<>();
     private static final Set<String> subtypesToIgnore = new HashSet<>();
     private static final String SKIP_LIST_PT = "PT";
@@ -1175,7 +1177,7 @@ public class VerifyCardDataTest {
         MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
         if (ref != null) {
             checkAll(card, ref, cardIndex);
-        } else if (!skipWarning) {
+        } else if (!skipWarning && !ONLY_TEXT) {
             warn(card, "Missing card reference");
         }
     }
@@ -1184,16 +1186,29 @@ public class VerifyCardDataTest {
         return options != null && options.contains(value);
     }
 
+    private static boolean checkName(MtgJsonCard ref) {
+        if (!ONLY_TEXT || checkedNames.contains(ref.name)) {
+            return false;
+        }
+        checkedNames.add(ref.name);
+        return true;
+    }
+
     private void checkAll(Card card, MtgJsonCard ref, int cardIndex) {
-        checkCost(card, ref);
-        checkPT(card, ref);
-        checkSubtypes(card, ref);
-        checkSupertypes(card, ref);
-        checkTypes(card, ref);
-        checkColors(card, ref);
-        checkBasicLands(card, ref);
-        checkMissingAbilities(card, ref);
-        checkWrongSymbolsInRules(card);
+        if (checkName(ref)) {
+            return;
+        }
+        if (!ONLY_TEXT) {
+            checkCost(card, ref);
+            checkPT(card, ref);
+            checkSubtypes(card, ref);
+            checkSupertypes(card, ref);
+            checkTypes(card, ref);
+            checkColors(card, ref);
+            checkBasicLands(card, ref);
+            checkMissingAbilities(card, ref);
+            checkWrongSymbolsInRules(card);
+        }
         checkWrongAbilitiesText(card, ref, cardIndex);
     }
 
@@ -1561,7 +1576,9 @@ public class VerifyCardDataTest {
 
             if (!isAbilityFounded && cardRules[i].length() > 0) {
                 isFine = false;
-                warn(card, "card ability can't be found in ref [" + card.getName() + ": " + cardRules[i] + "]");
+                if (!ONLY_TEXT) {
+                    warn(card, "card ability can't be found in ref [" + card.getName() + ": " + cardRules[i] + "]");
+                }
                 cardRules[i] = "- " + cardRules[i];
             }
         }
