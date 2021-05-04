@@ -7,10 +7,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.PrismariToken;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -24,6 +26,7 @@ public final class Resculpt extends CardImpl {
 
         // Exile target artifact or creature. Its controller creates a 4/4 blue and red Elemental creature token.
         this.getSpellAbility().addEffect(new ResculptEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
     }
 
     private Resculpt(final Resculpt card) {
