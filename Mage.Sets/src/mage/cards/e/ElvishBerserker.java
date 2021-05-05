@@ -27,7 +27,7 @@ public final class ElvishBerserker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Elvish Berserker becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
-        BlockedCreatureCount value = new BlockedCreatureCount();
+        BlockedCreatureCount value = BlockedCreatureCount.ALL;
         Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn, true);
         effect.setText("it gets +1/+1 until end of turn for each creature blocking it");
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));

@@ -20,7 +20,7 @@ import java.util.UUID;
 public final class JungleWurm extends CardImpl {
 
     private static final DynamicValue xValue = new MultipliedValue(
-            new BlockedCreatureCount("", true), -1
+            BlockedCreatureCount.BEYOND_FIRST, -1
     );
 
     public JungleWurm(UUID ownerId, CardSetInfo setInfo) {

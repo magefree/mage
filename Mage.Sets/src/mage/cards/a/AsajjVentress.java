@@ -39,7 +39,7 @@ public final class AsajjVentress extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // When Asajj Ventress becomes blocked, she gets +1/+1 for each creature blocking her until end of turn.
-        BlockedCreatureCount value = new BlockedCreatureCount();
+        BlockedCreatureCount value = BlockedCreatureCount.ALL;
         Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn, true);
         effect.setText("she gets +1/+1 for each creature blocking her until end of turn");
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
