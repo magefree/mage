@@ -53,11 +53,11 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
 
     public MnemonicBetrayalExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile all cards from all opponents’ graveyards. " +
+        this.staticText = "exile all cards from all opponents' graveyards. " +
                 "You may cast spells from among those cards this turn, " +
                 "and you may spend mana as though it were mana of any type to cast those spells. " +
                 "At the beginning of the next end step, if any of those cards remain exiled, " +
-                "return them to their owners’ graveyards";
+                "return them to their owners' graveyards";
     }
 
     public MnemonicBetrayalExileEffect(final MnemonicBetrayalExileEffect effect) {
