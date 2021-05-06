@@ -20,6 +20,6 @@ public class Main {
             count+=1;
             System.out.println("netWins is "+netWins+" at timestep "+count);
         }
-        RLPlayer.savePyLearner(runner.agent, "pydefault");
+        System.out.println("Shutting down");
     }
 }

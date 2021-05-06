@@ -37,7 +37,7 @@ import mage.abilities.*;
  * @author Elchanan Haas
  */
 
-public class RLPlayer extends RandomPlayer{
+public class RLPlayer extends RandomNonTappingPlayer{
     public RLAgent learner;
     private static final Logger logger = Logger.getLogger(RLPlayer.class);
     public RLPlayer(String name , RangeOfInfluence range, int skill){
@@ -76,7 +76,7 @@ public class RLPlayer extends RandomPlayer{
     public static String getModelLoc(String fileName){
         return getPath(fileName,"-model.zip");
     }
-    public static void savePyLearner(RLAgent agent, String loc){
+    /*public static void savePyLearner(RLAgent agent, String loc){
         try {
         FileOutputStream fileClassOut =new FileOutputStream(getClassLoc(loc));
         ObjectOutputStream classOut = new ObjectOutputStream(fileClassOut);
@@ -85,14 +85,14 @@ public class RLPlayer extends RandomPlayer{
         }catch (IOException i) {
             i.printStackTrace();
          }
-    }
+    }*/
     public static RLAgent loadPyLearner(String loc){
         try {
             FileInputStream fileClassIn = new FileInputStream(getClassLoc(loc));
             ObjectInputStream classIn = new ObjectInputStream(fileClassIn);
             PyConnection conn=new PyConnection(5000);
             RLAgent agent= new RLPyAgent(conn);
-            agent.representer= (Representer) classIn.readObject();
+            //agent.representer= (Representer) classIn.readObject();
             return agent;
         }catch (IOException i) {
             logger.warn("IO exception");
@@ -100,19 +100,21 @@ public class RLPlayer extends RandomPlayer{
             i.printStackTrace();
             return null;
          }
-         catch (ClassNotFoundException c) {
+         /*catch (ClassNotFoundException c) {
             logger.warn("Class Not Found exception");
             System.out.println("RLAgent class not found");
             c.printStackTrace();
             return null;
-         }
+         }*/
     }
     private Ability chooseAbility(Game game, List<Ability> options){
         Ability ability=pass;
         if (!options.isEmpty()) {
             if (options.size() == 1) { //Don't call ML model for single element
                 ability = options.get(0);
+                //logger.info("Turn"+game.getTurnNum()+" handSize "+getHand().size());
             } else {
+                //logger.info("Calling model"+game.getTurnNum());
                 List<RLAction> toUse=new ArrayList<RLAction>();
                 for(int i=0;i<options.size();i++){
                     Ability abil=options.get(i);
@@ -126,25 +128,10 @@ public class RLPlayer extends RandomPlayer{
         return ability;
     }
 
-    protected List<ActivatedAbility> getPlayableNonLandTapAbilities(Game game){
-        List<ActivatedAbility> playables=getPlayableAbilities(game);
-        List<ActivatedAbility> filtered=new ArrayList<ActivatedAbility>();
-        for(int i=0;i<playables.size();i++){
-            MageObject source=playables.get(i).getSourceObjectIfItStillExists(game);
-            if(source!=null && source instanceof Permanent && source.isLand()){
-                //Don't allow just tapping a land to be an action
-                //System.out.println("skipped a land");
-                continue;
-            }
-            filtered.add(playables.get(i));
-        }
-        return filtered;
-    }
     @Override
     protected Ability getAction(Game game) {
         //logger.info("Getting action");
-        //List<ActivatedAbility> playables = getPlayableAbilities(game); //already contains pass
-        List<ActivatedAbility> playables =getPlayableNonLandTapAbilities(game);
+        List<ActivatedAbility> playables =getFilteredPlayableAbilities(game);//already contains pass
         List<Ability> castPlayables=playables.stream().map(element->(Ability) element).collect(Collectors.toList());
         Ability ability;
         ability=chooseAbility(game, castPlayables);

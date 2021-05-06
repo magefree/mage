@@ -70,9 +70,11 @@ public class RandomPlayer extends ComputerPlayer {
         actionCount++;
         return didSomething;
     }
-
+    protected List<ActivatedAbility> getFilteredPlayableAbilities(Game game){
+        return getPlayableAbilities(game);
+    }
     protected Ability getAction(Game game) {
-        List<ActivatedAbility> playables = getPlayableAbilities(game);
+        List<ActivatedAbility> playables = getFilteredPlayableAbilities(game);
         Ability ability;
         while (true) {
             if (playables.size() == 1) {

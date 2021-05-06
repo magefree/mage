@@ -4,9 +4,11 @@ package mage.player.ai.RLAgent;
 import java.net.*;
 import java.io.*;
 import org.apache.log4j.Logger;
+import org.json.simple.JSONObject;
 import org.nd4j.shade.wstx.sw.OutputElementBase;
 import com.google.gson.*;
 import java.lang.NumberFormatException;
+
 public class PyConnection {
     BufferedReader reader;
     InputStreamReader input;
@@ -32,8 +34,8 @@ public class PyConnection {
             //System.exit(-1);
         }
     }
-    public void write(RepresentedGame repr){
-        String message=repr.asJsonString();
+    public void write(JSONObject repr){
+        String message=repr.toString();
         send(message);
     }
     void send(String message){
@@ -68,7 +70,7 @@ public class PyConnection {
             return -2;
         }
         catch (NumberFormatException ex){
-            System.out.println("Treminating due to closed python server" + ex.getMessage());
+            System.out.println("Terminating due to closed python server" + ex.getMessage());
             return -2;
         }
     }

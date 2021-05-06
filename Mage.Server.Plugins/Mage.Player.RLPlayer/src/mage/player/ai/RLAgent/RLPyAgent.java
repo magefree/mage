@@ -24,20 +24,22 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.util.*;
 import org.apache.log4j.Logger;
+import org.json.simple.JSONObject;
+
 import mage.player.ai.RLAgent.*;
 import java.util.stream.Collectors;
 import mage.player.ai.RLAgent.*;
 import java.io.*;
 
 public class RLPyAgent extends RLAgent {
-    public Representer representer;
+    public RepresenterJSON representer;
     PyConnection conn;
     public transient boolean done=false;
     private static final Logger logger = Logger.getLogger(RLPyAgent.class);
     public RLPyAgent(PyConnection conn){
-        representer=new Representer();
+        representer=new RepresenterJSON();
         this.conn=conn;
-        conn.write_hparams();
+        //conn.write_hparams();
     }
     
     public int choose(Game game, Player player,List<RLAction> actions){
@@ -52,12 +54,13 @@ public class RLPyAgent extends RLAgent {
             return 0;
         }
         assert 0<= action && action <actions.size();
-        int chosenact=action%actions.size();
-        logger.info(actions.get(chosenact).getText());
+        //int chosenact=action%actions.size();
+        int chosenact=action;
+        //logger.info(actions.get(chosenact).getText());
         return chosenact;
     }
     public void sendGame(Game game,Player player,List<RLAction> actions){
-        RepresentedGame repr=representer.represent(game, player, actions);
+        JSONObject repr=representer.represent(game, player, actions);
         conn.write(repr);
     }
 }

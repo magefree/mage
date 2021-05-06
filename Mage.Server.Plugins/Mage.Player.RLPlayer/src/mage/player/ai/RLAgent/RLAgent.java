@@ -4,9 +4,7 @@ import mage.players.Player;
 import java.util.*;
 
 public abstract class RLAgent {
-    public Representer representer;
     public RLAgent(){
-        representer=new Representer();
     }
     public abstract int choose(Game game, Player player,List<RLAction> actions);
 

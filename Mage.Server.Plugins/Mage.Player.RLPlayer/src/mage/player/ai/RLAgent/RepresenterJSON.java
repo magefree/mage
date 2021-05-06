@@ -21,7 +21,7 @@ import org.json.simple.JSONValue;
 import org.json.simple.JSONArray;
 
 public class RepresenterJSON implements Serializable{
-    private static final Logger logger = Logger.getLogger(Representer.class);
+    private static final Logger logger = Logger.getLogger(RepresenterJSON.class);
     public RepresenterJSON(){
     }
     //Gets the name of an object

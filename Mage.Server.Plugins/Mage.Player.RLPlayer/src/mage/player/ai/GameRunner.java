@@ -69,7 +69,7 @@ public class  GameRunner{
         game.addPlayer(computerA, decka);
         game.loadCards(decka.getCards(), computerA.getId());
 
-        Player computerB = new RandomPlayer("RandomPlayer");
+        Player computerB = new RandomNonTappingPlayer("RandomPlayer");
         //Deck deck2 = generateRandomDeck();
         if (deckb.getCards().size() < DECK_SIZE) {
             throw new IllegalArgumentException("Couldn't load deck, deck size=" + deckb.getCards().size() + ", but must be " + DECK_SIZE);
@@ -79,7 +79,7 @@ public class  GameRunner{
 
         long t1 = System.nanoTime();
         GameOptions options = new GameOptions();
-        options.testMode = true;
+        options.testMode = false;
         game.setGameOptions(options);
         logger.info("starting game");
         game.start(computerA.getId());

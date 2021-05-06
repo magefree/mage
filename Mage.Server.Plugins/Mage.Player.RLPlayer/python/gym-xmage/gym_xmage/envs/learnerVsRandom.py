@@ -17,37 +17,20 @@ class learnerVsRandom(gym.Env):
         serversocket.listen(1)
         (self.clientsocket, address) = serversocket.accept()
         print("connected")
-        self.java_hparams=self.recieve_and_parse(self.clientsocket)
-        print("java hparams are",self.java_hparams)
-        max_act=self.java_hparams['max_representable_actions']
-        self.dumped=False
-        self.action_space=spaces.Discrete(self.java_hparams['max_representable_actions'])
-        self.observation_space=spaces.Box(0,self.java_hparams['max_represents'],shape=(69,),dtype=np.float32)
+        self.action_space=None
+        #spaces.Discrete(self.java_hparams['max_representable_actions'])
+        self.observation_space=None
+        #spaces.Box(0,self.java_hparams['max_represents'],shape=(69,),dtype=np.float32)
     def step(self, action):
         self.clientsocket.send(bytes(str(action),'ascii')+b"\n")
         message=self.recieve_and_parse(self.clientsocket)
-        return (self.message_to_state(message),message['reward'],message['isDone'],{})
+        return (message,message["winReward"],message['isDone'],{})
+    def sample_obs(self,observation):
+        return random.randrange(len(observation['actions']))
     def reset(self):
         message=self.recieve_and_parse(self.clientsocket)
         #done=self.recieve_msg(self.clientsocket)
-        return self.message_to_state(message)
-    def message_to_state(self,message):
-        actions=message['actionRepr']
-        state=message['gameRepr']
-        actions=np.array(actions)
-        #print('actions shape is',actions.shape)
-        gameReals=np.array(state[0])
-        #print('gameReals shape is',gameReals.shape)
-        perms=np.array(state[1])
-        #print('perms shape is',perms.shape)
-        flat_features=(actions[0,:,0],actions[0,:,1],perms,gameReals)
-        flat_lens=[len(item) for item in flat_features]
-        if(not self.dumped):
-            with open('featureShapes',"wb") as f:
-                pickle.dump(flat_lens,f)
-            self.dumped=True
-        gamerepr=np.concatenate(flat_features,axis=0)
-        return gamerepr
+        return message
     def render(self, mode='human'):
         pass
     def close(self):
