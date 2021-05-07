@@ -15,10 +15,10 @@ import mage.target.targetpointer.FixedTarget;
  * @author Loki
  */
 public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbilityImpl {
-    private boolean setFixedTargetPointer;
-    private String attachedDescription;
-    private boolean onlyCombat;
-    private TargetController targetController;
+    private final boolean setFixedTargetPointer;
+    private final String attachedDescription;
+    private final boolean onlyCombat;
+    private final TargetController targetController;
 
     public DealsDamageToAPlayerAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional) {
         this(effect, attachedDescription, optional, false);
@@ -73,17 +73,15 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
         }
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         Permanent p = game.getPermanent(event.getSourceId());
-        if ((!onlyCombat || damageEvent.isCombatDamage())
-                && p != null && p.getAttachments().contains(this.getSourceId())) {
-            if (setFixedTargetPointer) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setValue("damage", event.getAmount());
-                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                }
-            }
-            return true;
+        if ((onlyCombat && !damageEvent.isCombatDamage())
+                || p == null || !p.getAttachments().contains(this.getSourceId())) {
+            return false;
         }
-        return false;
+        if (setFixedTargetPointer) {
+            getEffects().setValue("damage", event.getAmount());
+            getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+        }
+        return true;
     }
 
     @Override
@@ -94,7 +92,7 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
             sb.append(" combat");
         }
         sb.append(" damage to ");
-        switch(targetController) {
+        switch (targetController) {
             case OPPONENT:
                 sb.append("an opponent, ");
                 break;
@@ -108,6 +106,6 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
                 throw new UnsupportedOperationException();
         }
         sb.append(super.getRule());
-        return  sb.toString();
+        return sb.toString();
     }
 }
