@@ -9,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -30,6 +31,7 @@ public final class BigPlay extends CardImpl {
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(
                 CounterType.P1P1.createInstance()
         ).setText("Put a +1/+1 counter on it"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private BigPlay(final BigPlay card) {
