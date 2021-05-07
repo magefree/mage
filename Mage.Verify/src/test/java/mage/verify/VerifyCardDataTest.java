@@ -825,6 +825,7 @@ public class VerifyCardDataTest {
                     .replaceAll("&", "And")
                     .replaceAll(" vs. ", " Vs ") // for more friendly class name generation in logs TODO: replace to CamelCase transform instead custom words
                     .replaceAll(" the ", " The ")
+                    .replaceAll(" in ", " In ")
                     .replaceAll(" and ", " And ")
                     .replaceAll(" of ", " Of ")
                     .replaceAll(" to ", " To ")
