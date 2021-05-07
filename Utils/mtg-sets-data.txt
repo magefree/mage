@@ -8,6 +8,7 @@ Classic Sixth Edition|6ED|
 Seventh Edition|7ED|
 Eighth Edition|8ED|
 Ninth Edition|9ED|
+Adventures in the Forgotten Realms|AFR|
 Aether Revolt|AER|
 Amonkhet|AKH|
 Shards of Alara|ALA|
