@@ -8,6 +8,7 @@ import mage.deck.Limited;
 import mage.deck.Modern;
 import mage.deck.Standard;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
 
@@ -111,6 +112,7 @@ public class DeckValidatorTest extends MageTestBase {
         Assert.assertFalse("only 4 of a card are allowed", testDeckValid(new Modern(), deckList));
     }
 
+    @Ignore
     @Test
     public void testModernCounterspell1() {
         ArrayList<CardNameAmount> deckList = new ArrayList<>();
