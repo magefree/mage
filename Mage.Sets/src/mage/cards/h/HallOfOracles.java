@@ -17,11 +17,9 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.SpellsCastWatcher;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -68,15 +66,10 @@ enum HallOfOraclesCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        if (watcher == null) {
-            return false;
-        }
-        List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
-        return spells != null && spells
+        return watcher != null
+                && watcher.getSpellsCastThisTurn(source.getControllerId())
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isInstantOrSorcery)
-                .map(Spell::getSourceId)
-                .anyMatch(source.getSourceId()::equals);
+                .anyMatch(MageObject::isInstantOrSorcery);
     }
 }
