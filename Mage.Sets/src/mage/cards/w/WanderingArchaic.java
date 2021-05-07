@@ -48,7 +48,7 @@ public final class WanderingArchaic extends ModalDoubleFacesCard {
         // Explore the Vastlands
         // Sorcery
         // Each player looks at the top five cards of their library, reveals a land card and/or an instant or sorcery card from among them, then puts the cards they revealed this way into their hand and the rest on the bottom of their library in a random order. Each player gains 3 life.
-        this.getSpellAbility().addEffect(new ExploreTheVastlandsEffect());
+        this.getRightHalfCard().getSpellAbility().addEffect(new ExploreTheVastlandsEffect());
     }
 
     private WanderingArchaic(final WanderingArchaic card) {
