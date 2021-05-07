@@ -16,8 +16,8 @@ public final class ModernHorizons2 extends ExpansionSet {
     }
 
     private ModernHorizons2() {
-        super("Modern Horizons", "MH2", ExpansionSet.buildDate(2021, 6, 11), SetType.SUPPLEMENTAL_MODERN_LEGAL);
-        this.blockName = "Modern Horizons";
+        super("Modern Horizons 2", "MH2", ExpansionSet.buildDate(2021, 6, 11), SetType.SUPPLEMENTAL_MODERN_LEGAL);
+        this.blockName = "Modern Horizons 2";
         this.hasBasicLands = false; // temporary
         this.hasBoosters = true;
         this.numBoosterLands = 1;
@@ -28,6 +28,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         this.maxCardNumberInBooster = 303;
 
         cards.add(new SetCardInfo("Arid Mesa", 244, Rarity.RARE, mage.cards.a.AridMesa.class));
+        cards.add(new SetCardInfo("Brainstone", 223, Rarity.UNCOMMON, mage.cards.b.Brainstone.class));
         cards.add(new SetCardInfo("Counterspell", 267, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Marsh Flats", 248, Rarity.RARE, mage.cards.m.MarshFlats.class));
         cards.add(new SetCardInfo("Misty Rainforest", 250, Rarity.RARE, mage.cards.m.MistyRainforest.class));
