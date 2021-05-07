@@ -132,7 +132,7 @@ class BreenaTheDemagogueEffect extends OneShotEffect {
         TargetPermanent target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
         player.choose(outcome, target, source.getSourceId(), game);
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.addCounters(
                 CounterType.P1P1.createInstance(2),
                 source.getControllerId(), source, game
