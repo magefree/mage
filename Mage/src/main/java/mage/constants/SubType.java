@@ -169,6 +169,7 @@ public enum SubType {
     GUNGAN("Gungan", SubTypeSet.CreatureType, true), // Star Wars
     // H
     HAG("Hag", SubTypeSet.CreatureType),
+    HALFLING("Halfling", SubTypeSet.CreatureType),
     HARPY("Harpy", SubTypeSet.CreatureType),
     HELLION("Hellion", SubTypeSet.CreatureType),
     HIPPO("Hippo", SubTypeSet.CreatureType),
