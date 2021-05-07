@@ -820,21 +820,13 @@ public class VerifyCardDataTest {
         // CHECK: wrong set class names
         for (ExpansionSet set : sets) {
             String className = extractShortClass(set.getClass());
-            String needClassName = set.getName()
-                    //.replaceAll("Duel Decks", "")
-                    .replaceAll("&", "And")
-                    .replaceAll(" vs. ", " Vs ") // for more friendly class name generation in logs TODO: replace to CamelCase transform instead custom words
-                    .replaceAll(" the ", " The ")
-                    .replaceAll(" in ", " In ")
-                    .replaceAll(" and ", " And ")
-                    .replaceAll(" of ", " Of ")
-                    .replaceAll(" to ", " To ")
-                    .replaceAll(" for ", " For ")
-                    .replaceAll(" into ", " Into ")
-                    .replaceAll(" over ", " Over ")
-                    .replaceAll("[ .+-/:\"']", "");
+            String needClassName = Arrays.stream(
+                    set.getName()
+                            .replaceAll("&", "And")
+                            .replaceAll("[.+-/:\"']", "")
+                            .split(" ")
+            ).map(CardUtil::getTextWithFirstCharUpperCase).reduce("", String::concat);
 
-            //if (!className.toLowerCase(Locale.ENGLISH).equals(needClassName.toLowerCase(Locale.ENGLISH))) {
             if (!className.equals(needClassName)) {
                 errorsList.add("Error: set's class name must be equal to set name: "
                         + className + " from " + set.getClass().getName() + ", caption: " + set.getName() + ", need name: " + needClassName);
