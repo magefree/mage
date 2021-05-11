@@ -23,7 +23,7 @@ public final class Blockbuster extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public Blockbuster(UUID ownerId, CardSetInfo setInfo) {

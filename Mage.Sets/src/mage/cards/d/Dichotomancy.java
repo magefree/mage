@@ -53,7 +53,7 @@ class DichotomancyEffect extends OneShotEffect {
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     DichotomancyEffect() {

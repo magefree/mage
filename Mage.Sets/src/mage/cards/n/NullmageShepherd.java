@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -28,7 +27,7 @@ public final class NullmageShepherd extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterCost = new FilterControlledCreaturePermanent("untapped creatures you control");
     static {
-        filterCost.add(Predicates.not(TappedPredicate.instance));
+        filterCost.add(TappedPredicate.UNTAPPED);
     }
 
     public NullmageShepherd(UUID ownerId, CardSetInfo setInfo) {

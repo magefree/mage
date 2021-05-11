@@ -26,7 +26,7 @@ public final class GlimmerdustNap extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public GlimmerdustNap(UUID ownerId, CardSetInfo setInfo) {

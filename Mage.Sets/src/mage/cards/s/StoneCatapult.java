@@ -29,7 +29,7 @@ public final class StoneCatapult extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped nonblack creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 

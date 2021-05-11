@@ -23,7 +23,7 @@ public final class ThroneOfTheGodPharaoh extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);

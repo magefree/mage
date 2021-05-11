@@ -61,7 +61,7 @@ class MagneticMountainEffect extends OneShotEffect {
 
     static {
         filter2.add(new ColorPredicate(ObjectColor.BLUE));
-        filter2.add(TappedPredicate.instance);
+        filter2.add(TappedPredicate.TAPPED);
     }
 
     MagneticMountainEffect() {

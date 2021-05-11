@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
@@ -27,7 +26,7 @@ public final class HazyHomunculus extends CardImpl {
     private static final FilterPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public HazyHomunculus(UUID ownerId, CardSetInfo setInfo) {

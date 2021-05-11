@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -63,7 +62,7 @@ class GuildSummitEffect extends OneShotEffect {
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(SubType.GATE.getPredicate());
     }
 

@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SharesCreatureTypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -102,7 +101,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
     private static final FilterControlledCreaturePermanent filterUntapped = new FilterControlledCreaturePermanent("untapped creatures you control that share a creature type");
 
     static {
-        filterUntapped.add(Predicates.not(TappedPredicate.instance));
+        filterUntapped.add(TappedPredicate.UNTAPPED);
         filterUntapped.add(WeightOfConsciencePredicate.instance);
     }
 

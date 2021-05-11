@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -38,7 +37,7 @@ public final class ArachnusSpinner extends CardImpl {
 
     static {
         filter.add(SubType.SPIDER.getPredicate());
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public ArachnusSpinner(UUID ownerId, CardSetInfo setInfo) {

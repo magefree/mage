@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
@@ -29,7 +28,7 @@ public final class PersistentPetitioners extends CardImpl {
             = new FilterControlledPermanent("untapped Advisors you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(SubType.ADVISOR.getPredicate());
     }
 

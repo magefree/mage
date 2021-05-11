@@ -17,7 +17,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -35,10 +34,10 @@ public final class KumenaTyrantOfOrazca extends CardImpl {
     static {
         filterAnotherNotTapped.add(AnotherPredicate.instance);
         filterAnotherNotTapped.add(SubType.MERFOLK.getPredicate());
-        filterAnotherNotTapped.add(Predicates.not(TappedPredicate.instance));
+        filterAnotherNotTapped.add(TappedPredicate.UNTAPPED);
 
         filterNotTapped.add(SubType.MERFOLK.getPredicate());
-        filterNotTapped.add(Predicates.not(TappedPredicate.instance));
+        filterNotTapped.add(TappedPredicate.UNTAPPED);
 
         filterAll.add(SubType.MERFOLK.getPredicate());
     }

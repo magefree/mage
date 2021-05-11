@@ -26,7 +26,7 @@ public final class EntanglingVines extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public EntanglingVines(UUID ownerId, CardSetInfo setInfo) {

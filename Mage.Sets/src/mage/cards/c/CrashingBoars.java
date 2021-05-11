@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -53,7 +52,7 @@ class CrashingBoarsEffect extends OneShotEffect {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
     
     CrashingBoarsEffect() {

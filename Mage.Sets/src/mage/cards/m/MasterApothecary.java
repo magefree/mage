@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
@@ -29,7 +28,7 @@ public final class MasterApothecary extends CardImpl {
     
     static {
         filter.add(SubType.CLERIC.getPredicate());
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public MasterApothecary(UUID ownerId, CardSetInfo setInfo) {

@@ -27,7 +27,7 @@ public class FilterCreatureForAttack extends FilterCreaturePermanent {
         super(name);
         this.add(Predicates.not(AttackingPredicate.instance));
         this.add(Predicates.not(BlockingPredicate.instance));
-        this.add(Predicates.not(TappedPredicate.instance));
+        this.add(TappedPredicate.UNTAPPED);
         this.add(Predicates.not(new AbilityPredicate(DefenderAbility.class)));
         this.add(new CanTapPredicate());
     }

@@ -47,7 +47,7 @@ public final class NaturesChosen extends CardImpl {
 
     static {
         filterWhiteUntappedCreature.add(new ColorPredicate(ObjectColor.WHITE));
-        filterWhiteUntappedCreature.add(Predicates.not(TappedPredicate.instance));
+        filterWhiteUntappedCreature.add(TappedPredicate.UNTAPPED);
     }
 
     public NaturesChosen(UUID ownerId, CardSetInfo setInfo) {

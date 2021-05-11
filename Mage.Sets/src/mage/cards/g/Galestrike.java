@@ -20,7 +20,7 @@ public final class Galestrike extends CardImpl {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public Galestrike(UUID ownerId, CardSetInfo setInfo) {

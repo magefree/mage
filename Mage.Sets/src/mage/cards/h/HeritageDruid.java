@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
@@ -36,7 +35,7 @@ public final class HeritageDruid extends CardImpl {
 
         // Tap three untapped Elves you control: Add {G}{G}{G}.
         FilterControlledPermanent filter = new FilterControlledPermanent("untapped Elves you control");
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(SubType.ELF.getPredicate());
         this.addAbility(new SimpleManaAbility(
                 Zone.BATTLEFIELD,

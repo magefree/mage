@@ -2,7 +2,6 @@
 
 package mage.filter.common;
 
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
@@ -18,7 +17,7 @@ public class FilterCreatureForCombat extends FilterCreatureForCombatBase {
 
     public FilterCreatureForCombat(String name) {
         super(name);
-        this.add(Predicates.not(TappedPredicate.instance));
+        this.add(TappedPredicate.UNTAPPED);
     }
 
     public FilterCreatureForCombat(final FilterCreatureForCombat filter) {

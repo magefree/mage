@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetAnyTarget;
@@ -30,7 +29,7 @@ public final class OrimsCure extends CardImpl {
 
     static {
         filter.add(SubType.PLAINS.getPredicate());
-        filterCreature.add(Predicates.not(TappedPredicate.instance));
+        filterCreature.add(TappedPredicate.UNTAPPED);
     }
 
     public OrimsCure(UUID ownerId, CardSetInfo setInfo) {

@@ -34,7 +34,7 @@ public final class AnafenzaTheForemost extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public AnafenzaTheForemost(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
@@ -32,7 +31,7 @@ public final class SanctuaryLockdown extends CardImpl {
             = new FilterControlledPermanent(SubType.HUMAN, "untapped Humans you control");
 
     static {
-        filter2.add(Predicates.not(TappedPredicate.instance));
+        filter2.add(TappedPredicate.UNTAPPED);
     }
 
     public SanctuaryLockdown(UUID ownerId, CardSetInfo setInfo) {

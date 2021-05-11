@@ -26,7 +26,7 @@ public final class MaraxusOfKeld extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped artifacts, creatures, and lands you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate(),

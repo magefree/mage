@@ -43,7 +43,7 @@ public final class NikoAris extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     private static final DynamicValue xValue = new MultipliedValue(CardsDrawnThisTurnDynamicValue.instance, 2);

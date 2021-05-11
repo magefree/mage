@@ -37,7 +37,7 @@ public final class GiantOyster extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public GiantOyster(UUID ownerId, CardSetInfo setInfo) {

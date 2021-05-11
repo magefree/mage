@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -26,7 +25,7 @@ public final class LodestoneMyr extends CardImpl {
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("untapped artifact you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public LodestoneMyr(UUID ownerId, CardSetInfo setInfo) {

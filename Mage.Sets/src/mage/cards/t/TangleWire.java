@@ -50,7 +50,7 @@ class TangleWireEffect extends OneShotEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped artifact, creature, or land they control");
     static{
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate(),

@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
@@ -27,7 +26,7 @@ public final class CopperhoofVorrac extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("untapped permanent your opponents control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 

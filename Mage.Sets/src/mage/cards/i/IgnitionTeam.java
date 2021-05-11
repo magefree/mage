@@ -71,7 +71,7 @@ class TappedLandsCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (sourceAbility != null) {
             FilterLandPermanent filter = new FilterLandPermanent("tapped lands on the battlefield");
-            filter.add(TappedPredicate.instance);
+            filter.add(TappedPredicate.TAPPED);
             return game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
         }
         return 0;

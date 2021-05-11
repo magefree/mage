@@ -25,7 +25,7 @@ public final class MoggJailer extends CardImpl {
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature with power 2 or less");
 
     static {
-        filter.add(Predicates.and(new PowerPredicate(ComparisonType.FEWER_THAN, 2), Predicates.not(TappedPredicate.instance)));
+        filter.add(Predicates.and(new PowerPredicate(ComparisonType.FEWER_THAN, 2), TappedPredicate.UNTAPPED));
     }
 
     public MoggJailer(UUID ownerId, CardSetInfo setInfo) {

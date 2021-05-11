@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -33,7 +32,7 @@ public final class AnaBattlemage extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public AnaBattlemage(UUID ownerId, CardSetInfo setInfo) {

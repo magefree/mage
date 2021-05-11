@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
@@ -27,7 +26,7 @@ public final class ScoriaCat extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public ScoriaCat(UUID ownerId, CardSetInfo setInfo) {

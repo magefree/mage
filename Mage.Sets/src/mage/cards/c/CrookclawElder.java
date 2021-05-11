@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -31,7 +30,7 @@ public final class CrookclawElder extends CardImpl {
             = new FilterControlledCreaturePermanent(SubType.BIRD, "untapped Birds you control");
     private static final FilterControlledCreaturePermanent filter2
             = new FilterControlledCreaturePermanent(SubType.WIZARD, "untapped Wizards you control");
-    private static final Predicate pred = Predicates.not(TappedPredicate.instance);
+    private static final Predicate pred = TappedPredicate.UNTAPPED;
 
     static {
         filter.add(pred);

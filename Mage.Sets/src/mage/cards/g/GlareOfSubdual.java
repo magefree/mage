@@ -27,7 +27,7 @@ public final class GlareOfSubdual extends CardImpl {
     private static final FilterPermanent filterTarget = new FilterPermanent("artifact or creature");
 
     static {
-        filterCost.add(Predicates.not(TappedPredicate.instance));
+        filterCost.add(TappedPredicate.UNTAPPED);
         filterTarget.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate()));

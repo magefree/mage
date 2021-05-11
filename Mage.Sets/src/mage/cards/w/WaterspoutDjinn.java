@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -27,7 +26,7 @@ public final class WaterspoutDjinn extends CardImpl {
 
     static{
         filter.add(SubType.ISLAND.getPredicate());
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public WaterspoutDjinn(UUID ownerId, CardSetInfo setInfo) {

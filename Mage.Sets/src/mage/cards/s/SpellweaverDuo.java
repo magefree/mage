@@ -24,7 +24,7 @@ public final class SpellweaverDuo extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public SpellweaverDuo(UUID ownerId, CardSetInfo setInfo) {

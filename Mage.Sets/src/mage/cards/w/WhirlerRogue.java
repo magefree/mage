@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -16,13 +15,14 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.UntappedPredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.ThopterColorlessToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class WhirlerRogue extends CardImpl {
@@ -30,12 +30,12 @@ public final class WhirlerRogue extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped artifacts you control");
 
     static {
-        filter.add(UntappedPredicate.instance);
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public WhirlerRogue(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.subtype.add(SubType.ARTIFICER);

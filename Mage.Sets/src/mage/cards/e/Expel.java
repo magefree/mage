@@ -19,7 +19,7 @@ public final class Expel extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public Expel(UUID ownerId, CardSetInfo setInfo) {

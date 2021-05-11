@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -38,7 +37,7 @@ public final class BirchloreRangers extends CardImpl {
 
         // Tap two untapped Elves you control: Add one mana of any color.
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(SubType.ELF.getPredicate());
         this.addAbility(new SimpleManaAbility(
                 Zone.BATTLEFIELD,

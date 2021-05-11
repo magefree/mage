@@ -36,7 +36,7 @@ public final class NahiriStormOfStone extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public NahiriStormOfStone(UUID ownerId, CardSetInfo setInfo) {

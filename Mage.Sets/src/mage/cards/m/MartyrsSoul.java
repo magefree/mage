@@ -27,7 +27,7 @@ public final class MartyrsSoul extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     private static final Condition condition

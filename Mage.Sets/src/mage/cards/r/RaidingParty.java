@@ -22,7 +22,6 @@ import mage.filter.FilterObject;
 import mage.filter.FilterStackObject;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -72,7 +71,7 @@ class RaidingPartyEffect extends OneShotEffect {
     private static final FilterPermanent filter2 = new FilterPermanent("Plains");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(new ColorPredicate(ObjectColor.WHITE));
         filter2.add(SubType.PLAINS.getPredicate());
     }

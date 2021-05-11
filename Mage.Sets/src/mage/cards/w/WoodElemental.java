@@ -19,7 +19,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -61,7 +60,7 @@ class WoodElementalEffect extends OneShotEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Forests you control");
     
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(SubType.FOREST.getPredicate());
     }
 

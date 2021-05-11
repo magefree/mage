@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.game.permanent.token.UktabiKongApeToken;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -30,7 +29,7 @@ public final class UktabiKong extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Apes you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(SubType.APE.getPredicate());
     }
 

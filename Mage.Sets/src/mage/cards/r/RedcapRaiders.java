@@ -29,7 +29,7 @@ public final class RedcapRaiders extends CardImpl {
             = new FilterControlledCreaturePermanent("an untapped non-Human creature you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(Predicates.not(SubType.HUMAN.getPredicate()));
     }
 

@@ -20,7 +20,7 @@ public final class IronVerdict extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public IronVerdict(UUID ownerId, CardSetInfo setInfo) {

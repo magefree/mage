@@ -24,7 +24,7 @@ public final class DovinsDismissal extends CardImpl {
 
     static {
         filter.add(new NamePredicate("Dovin, Architect of Law"));
-        filter2.add(TappedPredicate.instance);
+        filter2.add(TappedPredicate.TAPPED);
     }
 
     public DovinsDismissal(UUID ownerId, CardSetInfo setInfo) {

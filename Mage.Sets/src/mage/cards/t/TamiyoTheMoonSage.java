@@ -68,7 +68,7 @@ class TappedCreaturesControlledByTargetCount implements DynamicValue {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     @Override

@@ -67,7 +67,7 @@ class AlibouAncientWitnessEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterControlledArtifactPermanent();
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     private static final Hint hint = new ValueHint(

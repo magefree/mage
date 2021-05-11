@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -26,7 +25,7 @@ public final class HonorWornShaku extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped legendary permanent");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(SuperType.LEGENDARY.getPredicate());
     }
 

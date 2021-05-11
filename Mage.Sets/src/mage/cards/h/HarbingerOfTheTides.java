@@ -26,7 +26,7 @@ public final class HarbingerOfTheTides extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature an opponent controls");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 

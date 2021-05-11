@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -33,7 +32,7 @@ public final class CaptivatingVampire extends CardImpl {
     static {
         filter1.add(SubType.VAMPIRE.getPredicate());
         filter2.add(SubType.VAMPIRE.getPredicate());
-        filter2.add(Predicates.not(TappedPredicate.instance));
+        filter2.add(TappedPredicate.UNTAPPED);
     }
 
     public CaptivatingVampire(UUID ownerId, CardSetInfo setInfo) {

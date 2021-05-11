@@ -15,7 +15,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -37,7 +36,7 @@ public final class UnerringSling extends CardImpl {
             = new FilterAttackingOrBlockingCreature("attacking or blocking creature with flying");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter2.add(new AbilityPredicate(FlyingAbility.class));
     }
 

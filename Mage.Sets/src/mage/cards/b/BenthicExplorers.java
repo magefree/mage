@@ -36,7 +36,7 @@ public final class BenthicExplorers extends CardImpl {
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public BenthicExplorers(UUID ownerId, CardSetInfo setInfo) {

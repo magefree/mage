@@ -19,7 +19,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -37,7 +36,7 @@ public final class ImpelledGiant extends CardImpl {
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped red creature you control other than Impelled Giant");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(new ColorPredicate(ObjectColor.RED));
         filter.add(AnotherPredicate.instance);
     }

@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
@@ -31,7 +30,7 @@ public final class ZadasCommando extends CardImpl {
 
     static {
         filter.add(SubType.ALLY.getPredicate());
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public ZadasCommando(UUID ownerId, CardSetInfo setInfo) {

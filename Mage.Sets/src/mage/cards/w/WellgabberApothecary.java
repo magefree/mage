@@ -26,7 +26,7 @@ public final class WellgabberApothecary extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target tapped Merfolk or Kithkin creature this turn");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
         filter.add(Predicates.or(SubType.MERFOLK.getPredicate(), SubType.KITHKIN.getPredicate()));
     }
 

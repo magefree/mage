@@ -34,7 +34,7 @@ public final class TetsuoUmezawa extends CardImpl {
 
     static {
         creatureFilter.add(Predicates.or(
-                TappedPredicate.instance,
+                TappedPredicate.TAPPED,
                 BlockingPredicate.instance));
     }
 

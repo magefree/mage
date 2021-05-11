@@ -20,7 +20,7 @@ public final class ManaGeyser extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("tapped land your opponents control");
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
     public ManaGeyser(UUID ownerId, CardSetInfo setInfo) {

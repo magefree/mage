@@ -17,7 +17,6 @@ import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,7 +47,7 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
     private static final FilterControlledArtifactPermanent filterUntapped = new FilterControlledArtifactPermanent("untapped artifact you control");
 
     static {
-        filterUntapped.add(Predicates.not(TappedPredicate.instance));
+        filterUntapped.add(TappedPredicate.UNTAPPED);
     }
 
     private static final DynamicValue untappedCount = new PermanentsOnBattlefieldCount(filterUntapped);

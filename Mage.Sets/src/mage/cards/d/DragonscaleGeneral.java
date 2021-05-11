@@ -23,7 +23,7 @@ public final class DragonscaleGeneral extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creatures you control");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 

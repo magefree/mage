@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -29,7 +28,7 @@ public final class KoskunFalls extends CardImpl {
     private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("untapped creature you control");
     
     static {
-        filterCreature.add(Predicates.not(TappedPredicate.instance));
+        filterCreature.add(TappedPredicate.UNTAPPED);
     }
 
     public KoskunFalls(UUID ownerId, CardSetInfo setInfo) {

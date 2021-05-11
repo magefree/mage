@@ -22,7 +22,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,8 +36,8 @@ public final class SwordOfTheParuns extends CardImpl {
     private static final FilterCreaturePermanent filterTapped = new FilterCreaturePermanent();
     private static final FilterCreaturePermanent filterUntapped = new FilterCreaturePermanent();
     static {
-        filterTapped.add(TappedPredicate.instance);
-        filterUntapped.add(Predicates.not(TappedPredicate.instance));
+        filterTapped.add(TappedPredicate.TAPPED);
+        filterUntapped.add(TappedPredicate.UNTAPPED);
     }
 
     public SwordOfTheParuns(UUID ownerId, CardSetInfo setInfo) {

@@ -38,7 +38,7 @@ public final class RathiAssassin extends CardImpl {
     static {
         filter.add(SubType.MERCENARY.getPredicate());
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
-        destroyFilter.add(TappedPredicate.instance);
+        destroyFilter.add(TappedPredicate.TAPPED);
         destroyFilter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 

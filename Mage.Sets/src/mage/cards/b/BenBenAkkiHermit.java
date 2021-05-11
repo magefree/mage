@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetAttackingCreature;
 
@@ -29,7 +28,7 @@ public final class BenBenAkkiHermit extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("untapped Mountain you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(SubType.MOUNTAIN.getPredicate());
     }
 

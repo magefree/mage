@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -32,7 +31,7 @@ public final class BetrothedOfFire extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("an untapped creature");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public BetrothedOfFire(UUID ownerId, CardSetInfo setInfo) {

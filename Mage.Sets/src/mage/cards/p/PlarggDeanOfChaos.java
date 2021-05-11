@@ -22,7 +22,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.filter.predicate.permanent.UntappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -31,7 +30,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author htrajan
  */
 public final class PlarggDeanOfChaos extends ModalDoubleFacesCard {
@@ -40,10 +38,10 @@ public final class PlarggDeanOfChaos extends ModalDoubleFacesCard {
     private static final FilterCreaturePermanent untappedFilter = new FilterCreaturePermanent("untapped creatures you control");
 
     static {
-        tappedFilter.add(TappedPredicate.instance);
+        tappedFilter.add(TappedPredicate.TAPPED);
         tappedFilter.add(TargetController.YOU.getControllerPredicate());
 
-        untappedFilter.add(UntappedPredicate.instance);
+        untappedFilter.add(TappedPredicate.UNTAPPED);
         untappedFilter.add(TargetController.YOU.getControllerPredicate());
     }
 
@@ -76,15 +74,15 @@ public final class PlarggDeanOfChaos extends ModalDoubleFacesCard {
 
         // Other tapped creatures you control get +1/+0.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new BoostAllEffect(
-            StaticValue.get(1), StaticValue.get(0), Duration.WhileOnBattlefield, tappedFilter, true)));
+                StaticValue.get(1), StaticValue.get(0), Duration.WhileOnBattlefield, tappedFilter, true)));
 
         // Other untapped creatures you control get +0/+1.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new BoostAllEffect(
-            StaticValue.get(0), StaticValue.get(1), Duration.WhileOnBattlefield, untappedFilter, true)));
+                StaticValue.get(0), StaticValue.get(1), Duration.WhileOnBattlefield, untappedFilter, true)));
 
         // Whenever you attack, untap each creature you control, then tap any number of creatures you control.
         AttacksWithCreaturesTriggeredAbility augustaAbility = new AttacksWithCreaturesTriggeredAbility(
-            new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURES, "untap each creature you control"), 0);
+                new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURES, "untap each creature you control"), 0);
         augustaAbility.addEffect(new AugustaDeanOfOrderEffect().concatBy(", then"));
         this.getRightHalfCard().addAbility(augustaAbility);
     }
@@ -154,7 +152,7 @@ class AugustaDeanOfOrderEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(UntappedPredicate.instance);
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public AugustaDeanOfOrderEffect() {

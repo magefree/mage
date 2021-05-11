@@ -47,9 +47,9 @@ public final class NahiriTheHarbinger extends CardImpl {
     static {
         filter.add(Predicates.or(CardType.ENCHANTMENT.getPredicate(),
                 (Predicates.and(CardType.ARTIFACT.getPredicate(),
-                        TappedPredicate.instance)),
+                        TappedPredicate.TAPPED)),
                 (Predicates.and(CardType.CREATURE.getPredicate(),
-                        TappedPredicate.instance))));
+                        TappedPredicate.TAPPED))));
     }
 
     public NahiriTheHarbinger(UUID ownerId, CardSetInfo setInfo) {

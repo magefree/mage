@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.MerfolkToken;
 import mage.target.TargetSpell;
@@ -31,7 +30,7 @@ public final class LullmageMentor extends CardImpl {
 
     static {
         filter.add(SubType.MERFOLK.getPredicate());
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public LullmageMentor(UUID ownerId, CardSetInfo setInfo) {

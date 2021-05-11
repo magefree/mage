@@ -21,7 +21,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.KarnConstructToken;
@@ -53,7 +52,7 @@ public final class UrzaLordHighArtificer extends CardImpl {
 
         // Tap an untapped artifact you control: Add {U}.
         FilterControlledPermanent filter = new FilterControlledArtifactPermanent("untapped artifact you control");
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         this.addAbility(new SimpleManaAbility(
                 Zone.BATTLEFIELD,
                 new UrzaLordHighArtificerManaEffect(filter),
