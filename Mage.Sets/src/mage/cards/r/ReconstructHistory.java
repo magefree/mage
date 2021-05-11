@@ -37,7 +37,7 @@ public final class ReconstructHistory extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{W}");
 
         // Return up to one target artifact card, up to one target enchantment card, up to one target instant card, up to one target sorcery card, and up to one target planeswalker card from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setText(rule));
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect(true).setText(rule));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(
                 0, 1, filterArtifact
         ));
