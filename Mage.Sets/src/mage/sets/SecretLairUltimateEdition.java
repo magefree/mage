@@ -22,6 +22,7 @@ public class SecretLairUltimateEdition extends ExpansionSet {
 
         cards.add(new SetCardInfo("Arid Mesa", 4, Rarity.RARE, mage.cards.a.AridMesa.class));
         cards.add(new SetCardInfo("Barkchannel Pathway", 11, Rarity.RARE, mage.cards.b.BarkchannelPathway.class));
+        cards.add(new SetCardInfo("Blast Zone", "SQ4", Rarity.RARE, mage.cards.b.BlastZone.class));
         cards.add(new SetCardInfo("Blightstep Pathway", 12, Rarity.RARE, mage.cards.b.BlightstepPathway.class));
         cards.add(new SetCardInfo("Branchloft Pathway", 13, Rarity.RARE, mage.cards.b.BranchloftPathway.class));
         cards.add(new SetCardInfo("Brightclimb Pathway", 14, Rarity.RARE, mage.cards.b.BrightclimbPathway.class));
