@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -20,8 +19,9 @@ import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author noahg
  */
 public final class MirrorGolem extends CardImpl {
@@ -121,7 +121,7 @@ class MirrorGolemEffect extends ContinuousEffectImpl {
                             filterCard = new FilterCard(cardType.toString() + "s");
                         }
                         filterCard.add(cardType.getPredicate());
-                        sourceObject.addAbility(new ProtectionAbility(filterCard));
+                        sourceObject.addAbility(new ProtectionAbility(filterCard), source.getSourceId(), game);
                     }
                 }
             }
