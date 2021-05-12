@@ -1025,8 +1025,11 @@ public class ContinuousEffects implements Serializable {
         }
 
         applyLayer(activeLayerEffects, Layer.TextChangingEffects_3, game, "layer_3");
+        activeLayerEffects = getLayeredEffects(game, "layer_3");
         applyLayer(activeLayerEffects, Layer.TypeChangingEffects_4, game, "layer_4");
+        activeLayerEffects = getLayeredEffects(game, "layer_4");
         applyLayer(activeLayerEffects, Layer.ColorChangingEffects_5, game, "layer_5");
+        activeLayerEffects = getLayeredEffects(game, "layer_5");
 
         Map<ContinuousEffect, List<Ability>> appliedEffectAbilities = new HashMap<>();
         boolean done = false;
