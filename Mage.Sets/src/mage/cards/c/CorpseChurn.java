@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
@@ -16,8 +15,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CorpseChurn extends CardImpl {
@@ -68,9 +68,8 @@ class CorpseChurnEffect extends OneShotEffect {
                 && controller.chooseUse(outcome, "Return a creature card from your graveyard to hand?", source, game)
                 && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                controller.moveCards(card, Zone.HAND, source, game);
-            }
+            controller.moveCards(card, Zone.HAND, source, game);
+
         }
         return true;
     }

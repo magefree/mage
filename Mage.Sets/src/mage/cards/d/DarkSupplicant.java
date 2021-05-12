@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -25,8 +24,9 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class DarkSupplicant extends CardImpl {
@@ -116,9 +116,7 @@ class DarkSupplicantEffect extends OneShotEffect {
             }
 
         }
-        if (selectedCard != null) {
-            controller.moveCards(selectedCard, Zone.BATTLEFIELD, source, game);
-        }
+        controller.moveCards(selectedCard, Zone.BATTLEFIELD, source, game);
         if (librarySearched) {
             controller.shuffleLibrary(source, game);
         }

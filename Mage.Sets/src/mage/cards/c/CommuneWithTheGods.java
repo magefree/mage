@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -14,8 +13,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CommuneWithTheGods extends CardImpl {
@@ -67,10 +67,9 @@ class CommuneWithTheGodsEffect extends OneShotEffect {
                     TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, filterPutInHand);
                     if (controller.choose(Outcome.DrawCard, cards, target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
-                        if (card != null) {
-                            cards.remove(card);
-                            controller.moveCards(card, Zone.HAND, source, game);
-                        }
+                        cards.remove(card);
+                        controller.moveCards(card, Zone.HAND, source, game);
+
 
                     }
                 }

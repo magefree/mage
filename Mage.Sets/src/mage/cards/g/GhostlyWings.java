@@ -84,9 +84,7 @@ class GhostlyWingsReturnEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanent != null && permanent.getAttachedTo() != null) {
             Permanent enchantedCreature = game.getPermanent(permanent.getAttachedTo());
-            if (enchantedCreature != null) {
-                controller.moveCards(enchantedCreature, Zone.HAND, source, game);
-            }
+            controller.moveCards(enchantedCreature, Zone.HAND, source, game);
             return true;
         }
         return false;

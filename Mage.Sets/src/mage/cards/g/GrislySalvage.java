@@ -71,10 +71,8 @@ class GrislySalvageEffect extends OneShotEffect {
                 if (properCardFound && controller.chooseUse(outcome, "Put a creature or land card from the revealed cards into your hand?", source, game)
                         && controller.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        controller.moveCards(card, Zone.HAND, source, game);
-                        cards.remove(card);
-                    }
+                    controller.moveCards(card, Zone.HAND, source, game);
+                    cards.remove(card);
                 }
                 controller.moveCards(cards, Zone.GRAVEYARD, source, game);
             }

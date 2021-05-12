@@ -189,9 +189,8 @@ class FinaleOfPromiseReplacementEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
-            if (card != null) {
-                return controller.moveCards(card, Zone.EXILED, source, game);
-            }
+            return controller.moveCards(card, Zone.EXILED, source, game);
+
         }
         return false;
     }

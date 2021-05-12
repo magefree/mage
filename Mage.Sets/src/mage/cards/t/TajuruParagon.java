@@ -93,10 +93,8 @@ class TajuruParagonEffect extends OneShotEffect {
             TargetCard target = new TargetCardInLibrary(0, 1, filter);
             player.choose(outcome, cards, target, game);
             Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                player.moveCards(card, Zone.HAND, source, game);
-                cards.remove(card);
-            }
+            player.moveCards(card, Zone.HAND, source, game);
+            cards.remove(card);
         }
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;

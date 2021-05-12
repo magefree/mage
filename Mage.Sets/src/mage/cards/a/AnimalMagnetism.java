@@ -1,7 +1,5 @@
 package mage.cards.a;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -16,8 +14,10 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author fenhl
  */
 public final class AnimalMagnetism extends CardImpl {
@@ -79,10 +79,8 @@ class AnimalMagnetismEffect extends OneShotEffect {
                     opponent.chooseTarget(outcome, cards, target, source, game);
                     cardToBattlefield = game.getCard(target.getFirstTarget());
                 }
-                if (cardToBattlefield != null) {
-                    controller.moveCards(cardToBattlefield, Zone.BATTLEFIELD, source, game);
-                    cards.remove(cardToBattlefield);
-                }
+                controller.moveCards(cardToBattlefield, Zone.BATTLEFIELD, source, game);
+                cards.remove(cardToBattlefield);
                 controller.moveCards(cards, Zone.GRAVEYARD, source, game);
             }
             return true;

@@ -92,6 +92,6 @@ class DarettiSacrificeEffect extends OneShotEffect {
             return true;
         }
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        return card == null || controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }

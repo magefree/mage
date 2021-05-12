@@ -80,7 +80,7 @@ class LegionsEndEffect extends OneShotEffect {
             return false;
         }
         String name = permanent.getName();
-        if (name == null || name.equals("")) {
+        if (name == null || name.isEmpty()) {
             player.revealCards(source, player.getHand(), game);
             return player.moveCards(permanent, Zone.EXILED, source, game);
         }

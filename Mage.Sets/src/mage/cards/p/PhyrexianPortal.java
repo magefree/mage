@@ -102,9 +102,7 @@ class PhyrexianPortalEffect extends OneShotEffect {
                 TargetCard target2 = new TargetCard(Zone.HAND, new FilterCard("card to put into your hand"));
                 if (controller.choose(outcome, chosenPile, target2, game)) {
                     Card card = chosenPile.get(target2.getFirstTarget(), game);
-                    if (card != null) {
-                        controller.moveCards(card, Zone.HAND, source, game);
-                    }
+                    controller.moveCards(card, Zone.HAND, source, game);
                 }
                 controller.shuffleLibrary(source, game);
             }

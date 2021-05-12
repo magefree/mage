@@ -1,19 +1,10 @@
 
 package mage.cards.b;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseExpansionSetEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -22,8 +13,12 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj & L_J
  */
 public final class BoosterTutor extends CardImpl {
@@ -93,9 +88,8 @@ class BoosterTutorEffect extends OneShotEffect {
                     cards.addAll(boosterPack);
                     if (controller.choose(Outcome.Benefit, cards, targetCard, game)) {
                         Card card = game.getCard(targetCard.getFirstTarget());
-                        if (card != null) {
-                            controller.moveCards(card, Zone.HAND, source, game);
-                        }
+                        controller.moveCards(card, Zone.HAND, source, game);
+
                     }
                 }
             }

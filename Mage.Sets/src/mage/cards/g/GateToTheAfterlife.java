@@ -126,9 +126,8 @@ class GateToTheAfterlifeEffect extends OneShotEffect {
             }
             controller.shuffleLibrary(source, game);
         }
-        if (card != null) {
-            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-        }
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+
         if (librarySearched) {
             controller.shuffleLibrary(source, game);
         }

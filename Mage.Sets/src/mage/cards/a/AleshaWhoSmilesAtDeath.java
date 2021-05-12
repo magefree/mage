@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -19,8 +18,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AleshaWhoSmilesAtDeath extends CardImpl {
@@ -32,7 +32,7 @@ public final class AleshaWhoSmilesAtDeath extends CardImpl {
     }
 
     public AleshaWhoSmilesAtDeath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
@@ -75,10 +75,8 @@ class AleshaWhoSmilesAtDeathEffect extends OneShotEffect {
 
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
-            if (card != null) {
-                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null)) {
-                    game.getCombat().addAttackingCreature(card.getId(), game);
-                }
+            if (controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null)) {
+                game.getCombat().addAttackingCreature(card.getId(), game);
             }
             return true;
 

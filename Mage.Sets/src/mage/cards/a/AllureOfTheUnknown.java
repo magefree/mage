@@ -80,7 +80,6 @@ class AllureOfTheUnknownEffect extends OneShotEffect {
         opponent.choose(Outcome.Exile, cards, targetCard, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (player.moveCards(card, Zone.EXILED, source, game)
-                && card != null
                 && game.getState().getZone(card.getId()) == Zone.EXILED) {
             cards.remove(card);
         }

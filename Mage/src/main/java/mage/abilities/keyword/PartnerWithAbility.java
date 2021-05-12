@@ -1,7 +1,6 @@
 
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -16,8 +15,9 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public class PartnerWithAbility extends EntersBattlefieldTriggeredAbility {
@@ -119,10 +119,9 @@ class PartnersWithSearchEffect extends OneShotEffect {
                     player.searchLibrary(target, source, game);
                     for (UUID cardId : target.getTargets()) {
                         Card card = player.getLibrary().getCard(cardId, game);
-                        if (card != null) {
-                            player.revealCards(source, new CardsImpl(card), game);
-                            player.moveCards(card, Zone.HAND, source, game);
-                        }
+                        player.revealCards(source, new CardsImpl(card), game);
+                        player.moveCards(card, Zone.HAND, source, game);
+
                     }
                     player.shuffleLibrary(source, game);
                 }

@@ -82,9 +82,7 @@ class MetamorphoseEffect extends OneShotEffect {
                 target.clearChosen();
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    }
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
 

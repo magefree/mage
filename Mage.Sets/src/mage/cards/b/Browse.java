@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,8 +14,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public final class Browse extends CardImpl {
@@ -65,10 +65,8 @@ class BrowseEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put in your hand"));
                 if (controller.choose(Outcome.Benefit, cards, target, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        controller.moveCards(card, Zone.HAND, source, game);
-                        cards.remove(card);
-                    }
+                    controller.moveCards(card, Zone.HAND, source, game);
+                    cards.remove(card);
                 }
                 controller.moveCards(cards, Zone.EXILED, source, game);
             }

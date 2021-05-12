@@ -92,11 +92,9 @@ class MuzzioVisionaryArchitectEffect extends OneShotEffect {
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterArtifactCard("artifact card to put onto the battlefield"));
             if (target.canChoose(source.getSourceId(), controller.getId(), game) && controller.choose(Outcome.Benefit, cards, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    controller.revealCards(source, new CardsImpl(card), game);
-                    cards.remove(card);
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
+                controller.revealCards(source, new CardsImpl(card), game);
+                cards.remove(card);
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
         }
         controller.putCardsOnBottomOfLibrary(cards, game, source, true);

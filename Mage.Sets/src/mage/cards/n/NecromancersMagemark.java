@@ -94,10 +94,7 @@ class NecromancersMagemarkEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-            if (permanent != null) {
-                controller.moveCards(permanent, Zone.HAND, source, game);
-                return true;
-            }
+            return controller.moveCards(permanent, Zone.HAND, source, game);
         }
         return false;
     }

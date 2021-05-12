@@ -1,15 +1,10 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -19,8 +14,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class BenefactionOfRhonas extends CardImpl {
@@ -83,7 +79,7 @@ class BenefactionOfRhonasEffect extends OneShotEffect {
                 controller.revealCards(sourceObject.getName(), cards, game);
                 if ((creatureCardFound || enchantmentCardFound)
                         && controller.chooseUse(Outcome.DrawCard,
-                                "Put a creature card and/or enchantment card into your hand?", source, game)) {
+                        "Put a creature card and/or enchantment card into your hand?", source, game)) {
                     TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCreatureCard("creature card to put into your hand"));
                     if (creatureCardFound && controller.chooseTarget(Outcome.DrawCard, cards, target, source, game)) {
                         Card card = cards.get(target.getFirstTarget(), game);
@@ -96,10 +92,9 @@ class BenefactionOfRhonasEffect extends OneShotEffect {
                     target = new TargetCard(Zone.LIBRARY, new FilterEnchantmentCard("enchantment card to put into your hand"));
                     if (enchantmentCardFound && controller.chooseTarget(Outcome.DrawCard, cards, target, source, game)) {
                         Card card = cards.get(target.getFirstTarget(), game);
-                        if (card != null) {
-                            cards.remove(card);
-                            controller.moveCards(card, Zone.HAND, source, game);
-                        }
+                        cards.remove(card);
+                        controller.moveCards(card, Zone.HAND, source, game);
+
                     }
                 }
             }

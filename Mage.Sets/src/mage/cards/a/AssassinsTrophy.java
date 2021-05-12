@@ -1,7 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -19,6 +17,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -78,9 +78,7 @@ class AssassinsTrophyEffect extends OneShotEffect {
                     TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
                     if (controller.searchLibrary(target, source, game)) {
                         Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-                        if (card != null) {
-                            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                        }
+                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     }
                     controller.shuffleLibrary(source, game);
                 }

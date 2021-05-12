@@ -95,9 +95,7 @@ class AtlaPalaniNestTenderEffect extends OneShotEffect {
                 break;
             }
         }
-        if (toBattlefield != null) {
-            player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
-        }
+        player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
         player.revealCards(source, cards, game);
         cards.remove(toBattlefield);
         if (!cards.isEmpty()) {

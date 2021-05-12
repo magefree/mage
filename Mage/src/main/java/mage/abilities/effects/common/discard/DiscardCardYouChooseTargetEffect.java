@@ -121,9 +121,8 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
                     List<UUID> targets = chosenCards.getTargets();
                     for (UUID targetid : targets) {
                         Card card = game.getCard(targetid);
-                        if (card != null) {
-                            revealedCards.add(card);
-                        }
+                        revealedCards.add(card);
+
                     }
                 }
             }

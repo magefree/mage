@@ -64,8 +64,7 @@ class SurrealMemoirEffect extends OneShotEffect {
             Card[] cards = controller.getGraveyard().getCards(filter, game).toArray(new Card[0]);
             if (cards.length > 0) {
                 Card card = cards[RandomUtil.nextInt(cards.length)];
-                if (card != null
-                        && controller.moveCards(card, Zone.HAND, source, game)) {
+                if (controller.moveCards(card, Zone.HAND, source, game)) {
                     game.informPlayers(card.getName() + "returned to the hand of" + controller.getLogName());
                     return true;
                 }

@@ -81,9 +81,7 @@ class TheMendingOfDominariaFirstEffect extends OneShotEffect {
                 && controller.chooseUse(outcome, "Return a creature card from your graveyard to hand?", source, game)
                 && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                controller.moveCards(card, Zone.HAND, source, game);
-            }
+            controller.moveCards(card, Zone.HAND, source, game);
         }
         return true;
     }

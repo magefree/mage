@@ -74,9 +74,7 @@ class CreativeTechniqueEffect extends OneShotEffect {
         }
         player.revealCards(source, cards, game);
         cards.remove(toCast);
-        if (toCast != null) {
-            player.moveCards(toCast, Zone.EXILED, source, game);
-        }
+        player.moveCards(toCast, Zone.EXILED, source, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         if (toCast == null || !player.chooseUse(
                 Outcome.PlayForFree, "Cast " + toCast.getIdName()

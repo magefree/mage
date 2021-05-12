@@ -92,11 +92,10 @@ class AugurOfBolasEffect extends OneShotEffect {
                             controller.chooseTarget(outcome, topCards, target, source, game);
                             card = topCards.get(target.getFirstTarget(), game);
                         }
-                        if (card != null) {
-                            controller.moveCards(card, Zone.HAND, source, game);
-                            controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
-                            topCards.remove(card);
-                        }
+                        controller.moveCards(card, Zone.HAND, source, game);
+                        controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
+                        topCards.remove(card);
+
                     }
                 }
                 controller.putCardsOnBottomOfLibrary(topCards, game, source, true);

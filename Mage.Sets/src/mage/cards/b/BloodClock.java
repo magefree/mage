@@ -78,9 +78,6 @@ class BloodClockEffect extends OneShotEffect {
             return false;
         }
         Permanent permanent = game.getPermanent(target.getFirstTarget());
-        if (permanent == null) {
-            return false;
-        }
         return player.moveCards(permanent, Zone.HAND, source, game);
     }
 }

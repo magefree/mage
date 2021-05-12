@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class IngestAbility extends DealsCombatDamageToAPlayerTriggeredAbility {
@@ -56,10 +55,8 @@ class IngestEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             Card card = targetPlayer.getLibrary().getFromTop(game);
-            if (card != null) {
-                targetPlayer.moveCards(card, Zone.EXILED, source, game);
-            }
-            return true;
+            return targetPlayer.moveCards(card, Zone.EXILED, source, game);
+
         }
         return false;
     }

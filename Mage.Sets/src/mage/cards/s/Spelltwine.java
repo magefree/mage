@@ -81,12 +81,8 @@ class SpelltwineEffect extends OneShotEffect {
         Card cardOne = game.getCard(source.getTargets().get(0).getFirstTarget());
         Card cardTwo = game.getCard(source.getTargets().get(1).getFirstTarget());
         if (controller != null) {
-            if (cardOne != null) {
-                controller.moveCards(cardOne, Zone.EXILED, source, game);
-            }
-            if (cardTwo != null) {
-                controller.moveCards(cardTwo, Zone.EXILED, source, game);
-            }
+            controller.moveCards(cardOne, Zone.EXILED, source, game);
+            controller.moveCards(cardTwo, Zone.EXILED, source, game);
             boolean castCardOne = true;
             ApprovingObject approvingObject = new ApprovingObject(source, game);
             if (cardOne != null 

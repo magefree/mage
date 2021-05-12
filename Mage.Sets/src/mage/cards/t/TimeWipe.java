@@ -65,9 +65,7 @@ class TimeWipeEffect extends OneShotEffect {
         target.setNotTarget(true);
         if (player.choose(outcome, target, source.getSourceId(), game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null) {
-                player.moveCards(permanent, Zone.HAND, source, game);
-            }
+            player.moveCards(permanent, Zone.HAND, source, game);
         }
         return new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_A_CREATURE).apply(game, source);
     }

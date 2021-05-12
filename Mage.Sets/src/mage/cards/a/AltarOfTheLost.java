@@ -70,23 +70,19 @@ class AltarOfTheLostManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if(game == null){
+            return false;
+        }
         MageObject object = game.getObject(source.getSourceId());
-        if (game != null && game.inCheckPlayableState()) {
-            if (object instanceof Card && game.getState().getZone(source.getSourceId()).equals(Zone.GRAVEYARD)) {
-                for (Ability ability : ((Card) object).getAbilities(game)) {
-                    if (ability instanceof FlashbackAbility) {
-                        return true;
-                    }
-                }
+        if (game.inCheckPlayableState()) {
+            if (object instanceof Card && game.getState().getZone(source.getSourceId())== Zone.GRAVEYARD) {
+                return ((Card) object).getAbilities(game).stream().anyMatch(ability -> ability instanceof FlashbackAbility);
             }
 
         }
         if (object instanceof Spell && ((Spell) object).getFromZone() == Zone.GRAVEYARD) {
-            for (Ability ability : ((Spell) object).getAbilities(game)) {
-                if (ability instanceof FlashbackAbility) {
-                    return true;
-                }
-            }
+            return ((Spell)object).getAbilities(game).stream().anyMatch(ability -> ability instanceof FlashbackAbility);
+
         }
         return false;
     }

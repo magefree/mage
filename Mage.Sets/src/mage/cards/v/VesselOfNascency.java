@@ -89,11 +89,8 @@ class VesselOfNascencyEffect extends OneShotEffect {
                         && controller.chooseUse(outcome, "Put an artifact, creature, enchantment, land, or planeswalker card into your hand?", source, game)
                         && controller.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        cards.remove(card);
-                        controller.moveCards(card, Zone.HAND, source, game);
-                    }
-
+                    cards.remove(card);
+                    controller.moveCards(card, Zone.HAND, source, game);
                 }
                 controller.moveCards(cards, Zone.GRAVEYARD, source, game);
             }

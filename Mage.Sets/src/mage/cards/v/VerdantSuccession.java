@@ -130,8 +130,7 @@ class VerdantSuccessionEffect extends OneShotEffect {
                     controller.searchLibrary(target, source, game);
                     if (!target.getTargets().isEmpty()) {
                         Card card = game.getCard(target.getFirstTarget());
-                        if (card != null
-                                && controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                        if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                             controller.shuffleLibrary(source, game);
                         }
                         return true;

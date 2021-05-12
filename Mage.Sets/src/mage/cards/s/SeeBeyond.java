@@ -58,8 +58,7 @@ class SeeBeyondEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(Zone.HAND, new FilterCard("card to shuffle into your library"));
                 controller.choose(Outcome.Detriment, controller.getHand(), target, game);
                 Card card = controller.getHand().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    controller.moveCards(card, Zone.LIBRARY, source, game);
+                if(controller.moveCards(card, Zone.LIBRARY, source, game)){
                     controller.shuffleLibrary(source, game);
                 }
                 return true;

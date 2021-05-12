@@ -127,10 +127,8 @@ class PlungeIntoDarknessSearchEffect extends OneShotEffect {
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
             if (controller.choose(Outcome.DrawCard, cards, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    controller.moveCards(card, Zone.HAND, source, game);
-                }
+                cards.remove(card);
+                controller.moveCards(card, Zone.HAND, source, game);
             }
             controller.moveCards(cards, Zone.EXILED, source, game);
             return true;

@@ -101,10 +101,9 @@ class ThranTomeEffect extends OneShotEffect {
         }
 
         // put the chosen card in the graveyard
-        if (cardToGraveyard != null) {
-            controller.moveCards(cardToGraveyard, Zone.GRAVEYARD, source, game);
-            cards.remove(cardToGraveyard);
-        }
+        controller.moveCards(cardToGraveyard, Zone.GRAVEYARD, source, game);
+        cards.remove(cardToGraveyard);
+
 
         // draw 2
         controller.drawCards(2, source, game);

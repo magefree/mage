@@ -78,10 +78,8 @@ public class SearchLibraryGraveyardPutInHandEffect extends OneShotEffect {
                 }
             }
 
-            if (cardFound != null) {
-                controller.revealCards(sourceObject.getIdName(), new CardsImpl(cardFound), game);
-                controller.moveCards(cardFound, Zone.HAND, source, game);
-            }
+            controller.revealCards(sourceObject.getIdName(), new CardsImpl(cardFound), game);
+            controller.moveCards(cardFound, Zone.HAND, source, game);
 
             if (needShuffle) {
                 controller.shuffleLibrary(source, game);

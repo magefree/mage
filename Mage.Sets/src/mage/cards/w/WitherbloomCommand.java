@@ -112,6 +112,6 @@ class WitherbloomCommandEffect extends OneShotEffect {
         }
         player.choose(outcome, target, source.getSourceId(), game);
         Card card = game.getCard(target.getFirstTarget());
-        return card != null && player.moveCards(card, Zone.HAND, source, game);
+        return player.moveCards(card, Zone.HAND, source, game);
     }
 }

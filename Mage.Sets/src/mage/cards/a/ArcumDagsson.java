@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -22,8 +21,9 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class ArcumDagsson extends CardImpl {
@@ -35,7 +35,7 @@ public final class ArcumDagsson extends CardImpl {
     }
 
     public ArcumDagsson(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
@@ -91,9 +91,7 @@ class ArcumDagssonEffect extends OneShotEffect {
                     TargetCardInLibrary target = new TargetCardInLibrary(filter);
                     if (player.searchLibrary(target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());
-                        if (card != null) {
-                            player.moveCards(card, Zone.BATTLEFIELD, source, game);
-                        }
+                        player.moveCards(card, Zone.BATTLEFIELD, source, game);
                     }
                     player.shuffleLibrary(source, game);
                 }

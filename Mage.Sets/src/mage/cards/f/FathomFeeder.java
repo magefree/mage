@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,20 +15,21 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class FathomFeeder extends CardImpl {
 
     public FathomFeeder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}");
         this.subtype.add(SubType.ELDRAZI);
         this.subtype.add(SubType.DRONE);
         this.power = new MageInt(1);
@@ -78,13 +78,12 @@ class FathomFeederEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(opponentId);
             if (player != null) {
                 Card card = player.getLibrary().getFromTop(game);
-                if (card != null) {
-                    player.moveCards(card, Zone.EXILED, source, game);
-                }
+                player.moveCards(card, Zone.EXILED, source, game);
+
             }
         }
         return true;

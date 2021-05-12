@@ -97,7 +97,6 @@ class ExileReplacementEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(this.cardId);
         return controller != null
-                && card != null
                 && controller.moveCards(card, Zone.EXILED, source, game);
     }
 

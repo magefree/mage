@@ -134,9 +134,7 @@ class ParallelThoughtsReplacementEffect extends ReplacementEffectImpl {
         if (controller != null && cards != null && !cards.isEmpty()) {
             if (controller.chooseUse(outcome, "Draw a card from the pile you exiled instead drawing from your library?", source, game)) {
                 Card card = cards.iterator().next();
-                if (card != null) {
-                    controller.moveCards(card, Zone.HAND, source, game);
-                }
+                controller.moveCards(card, Zone.HAND, source, game);
                 return true;
             }
         }

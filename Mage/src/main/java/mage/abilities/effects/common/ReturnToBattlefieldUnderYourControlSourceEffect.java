@@ -42,12 +42,8 @@ public class ReturnToBattlefieldUnderYourControlSourceEffect extends OneShotEffe
         ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
         if (exileZone != null && exileZone.contains(source.getSourceId())) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null
-                    && controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                return true;
-            }
+            return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         }
         return false;
     }
-
 }

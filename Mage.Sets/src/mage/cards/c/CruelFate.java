@@ -71,10 +71,8 @@ class CruelFateEffect extends OneShotEffect {
         TargetCard targetCard = new TargetCardInLibrary();
         controller.choose(outcome, cards, targetCard, game);
         Card card = game.getCard(targetCard.getFirstTarget());
-        if (card != null) {
-            controller.moveCards(card, Zone.GRAVEYARD, source, game);
-            cards.remove(card);
-        }
+        controller.moveCards(card, Zone.GRAVEYARD, source, game);
+        cards.remove(card);
         return controller.putCardsOnTopOfLibrary(card, game, source, true);
     }
 }

@@ -80,10 +80,8 @@ class MirrorMadPhantasmEffect extends OneShotEffect {
                     }
                 }
                 owner.revealCards(source, cards, game);
-                if (phantasmCard != null) {
-                    owner.moveCards(phantasmCard, Zone.BATTLEFIELD, source, game);
-                    cards.remove(phantasmCard);
-                }
+                owner.moveCards(phantasmCard, Zone.BATTLEFIELD, source, game);
+                cards.remove(phantasmCard);
                 owner.moveCards(cards, Zone.GRAVEYARD, source, game);
             }
         }

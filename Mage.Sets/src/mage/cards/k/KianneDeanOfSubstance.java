@@ -218,9 +218,7 @@ class ImbrahamDeanOfTheoryEffect extends OneShotEffect {
         targetCard.setNotTarget(true);
         player.choose(outcome, targetCard, source.getSourceId(), game);
         Card card = game.getCard(targetCard.getFirstTarget());
-        if (card != null) {
-            player.moveCards(card, Zone.HAND, source, game);
-        }
+        player.moveCards(card, Zone.HAND, source, game);
         return true;
     }
 }

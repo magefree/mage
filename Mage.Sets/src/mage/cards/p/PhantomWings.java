@@ -78,7 +78,7 @@ public final class PhantomWings extends CardImpl {
                 return false;
             }
             Permanent enchantedCreature = game.getPermanent(permanent.getAttachedTo());
-            return enchantedCreature != null && player.moveCards(enchantedCreature, Zone.HAND, source, game);
+            return player.moveCards(enchantedCreature, Zone.HAND, source, game);
         }
     }
 }

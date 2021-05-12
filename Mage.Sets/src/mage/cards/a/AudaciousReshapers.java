@@ -76,9 +76,6 @@ class AudaciousReshapersEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         Card artifact = null;
         for (Card card : player.getLibrary().getCards(game)) {
-            if (card == null) {
-                continue;
-            }
             cards.add(card);
             if (card.isArtifact()) {
                 artifact = card;
@@ -87,9 +84,7 @@ class AudaciousReshapersEffect extends OneShotEffect {
         }
         int size = cards.size();
         player.revealCards(source, cards, game);
-        if (artifact != null) {
-            player.moveCards(artifact, Zone.BATTLEFIELD, source, game);
-        }
+        player.moveCards(artifact, Zone.BATTLEFIELD, source, game);
         cards.removeIf(uuid -> game.getState().getZone(uuid) != Zone.LIBRARY);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         player.damage(size, source.getSourceId(), source, game);

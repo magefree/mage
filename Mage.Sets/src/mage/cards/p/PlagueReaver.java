@@ -184,7 +184,6 @@ class PlagueReaverReturnEffect extends OneShotEffect {
         Player player = game.getPlayer(playerId);
         Card card = game.getCard(targetPointer.getFirst(game, source));
         return player != null
-                && card != null
                 && player.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }

@@ -69,9 +69,7 @@ class TemptWithDiscoveryEffect extends OneShotEffect {
             if (controller.searchLibrary(target, source, game)) {
                 for (UUID cardId : target.getTargets()) {
                     Card card = game.getCard(cardId);
-                    if (card != null) {
-                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    }
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
             int opponentsUsedSearch = 0;
@@ -85,9 +83,7 @@ class TemptWithDiscoveryEffect extends OneShotEffect {
                         if (opponent.searchLibrary(target, source, game)) {
                             for (UUID cardId : target.getTargets()) {
                                 Card card = game.getCard(cardId);
-                                if (card != null) {
-                                    opponent.moveCards(card, Zone.BATTLEFIELD, source, game);
-                                }
+                                opponent.moveCards(card, Zone.BATTLEFIELD, source, game);
                             }
                         }
                     }
@@ -98,9 +94,7 @@ class TemptWithDiscoveryEffect extends OneShotEffect {
                 if (controller.searchLibrary(target, source, game)) {
                     for (UUID cardId : target.getTargets()) {
                         Card card = game.getCard(cardId);
-                        if (card != null) {
-                            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                        }
+                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     }
                 }
             }

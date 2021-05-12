@@ -79,6 +79,6 @@ class CharmbreakerDevilsEffect extends OneShotEffect {
         target.setNotTarget(true);
         player.chooseTarget(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
-        return card != null && player.moveCards(card, Zone.HAND, source, game);
+        return player.moveCards(card, Zone.HAND, source, game);
     }
 }

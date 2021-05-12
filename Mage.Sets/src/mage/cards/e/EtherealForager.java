@@ -87,7 +87,7 @@ class EtherealForagerEffect extends OneShotEffect {
         ;
         player.choose(Outcome.DrawCard, delvedCards, targetCard, game);
         Card card = game.getCard(targetCard.getFirstTarget());
-        if (card == null || !player.moveCards(card, Zone.HAND, source, game)) {
+        if (!player.moveCards(card, Zone.HAND, source, game)) {
             return false;
         }
         delvedCards.remove(card);

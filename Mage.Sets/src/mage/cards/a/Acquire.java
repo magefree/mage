@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -15,13 +14,15 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
  * @author andyfries
  */
 public final class Acquire extends CardImpl {
 
     public Acquire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
 
         // Search target opponent's library for an artifact card and put that card onto the battlefield under your control.
         // Then that player shuffles their library.
@@ -64,9 +65,7 @@ class AcquireEffect extends OneShotEffect {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             controller.searchLibrary(target, source, game, opponent.getId());
             Card targetCard = game.getCard(target.getFirstTarget());
-            if (targetCard != null) {
-                controller.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
-            }
+            controller.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
             opponent.shuffleLibrary(source, game);
             return true;
         }

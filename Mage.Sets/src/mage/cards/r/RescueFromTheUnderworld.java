@@ -205,9 +205,8 @@ class RescueFromTheUnderworldReturnEffect extends OneShotEffect {
             // Target card comes only back if in graveyard
             for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Card card = game.getCard(targetId);
-                if (card != null) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+
             }
             // However, if the sacrificed creature is put into another public zone instead of the graveyard,
             // perhaps because it's your commander or because of another replacement effect, it will return

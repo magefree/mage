@@ -75,9 +75,6 @@ class ClearTheStageEffect extends OneShotEffect {
             return false;
         }
         Card card = game.getCard(source.getTargets().get(1).getFirstTarget());
-        if (card == null) {
-            return false;
-        }
         return player.moveCards(card, Zone.HAND, source, game);
     }
 }

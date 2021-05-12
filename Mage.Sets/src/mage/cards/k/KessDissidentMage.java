@@ -118,8 +118,7 @@ class KessDissidentMageReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(event.getTargetId());
-        if (controller != null
-                && card != null) {
+        if (controller != null) {
             return controller.moveCards(card, Zone.EXILED, source, game);
         }
         return false;

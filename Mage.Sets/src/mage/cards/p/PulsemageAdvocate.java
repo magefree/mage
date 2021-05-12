@@ -89,9 +89,7 @@ class PulsemageAdvocateEffect extends OneShotEffect {
             }
             controller.moveCards(cards, Zone.HAND, source, game);
             Card card = controller.getGraveyard().get(source.getTargets().get(1).getFirstTarget(), game);
-            if (card != null) {
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            }
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             return true;
         }
         return false;

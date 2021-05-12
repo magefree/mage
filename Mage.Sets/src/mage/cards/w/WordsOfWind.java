@@ -74,9 +74,7 @@ class WordsOfWindEffect extends ReplacementEffectImpl {
                         }
                     }
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
-                    if (permanent != null) {
-                        player.moveCards(permanent, Zone.HAND, source, game);
-                    }
+                    player.moveCards(permanent, Zone.HAND, source, game);
                 }
             }
         }

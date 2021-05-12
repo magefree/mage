@@ -1,17 +1,14 @@
 package mage.cards.b;
 
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.*;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.abilities.keyword.FlyingAbility;
-import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -24,8 +21,11 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class BurningRuneDemon extends CardImpl {
@@ -99,13 +99,10 @@ class BurningRuneDemonEffect extends OneShotEffect {
                         targetCard.withChooseHint("Card to go to opponent's hand (other goes to graveyard)");
                         opponent.chooseTarget(outcome, cards, targetCard, source, game);
                         Card cardToHand = game.getCard(targetCard.getFirstTarget());
-                        if (cardToHand != null) {
-                            controller.moveCards(cardToHand, Zone.HAND, source, game);
-                            cards.remove(cardToHand);
-                        }
-                        if (!cards.isEmpty()) {
-                            controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-                        }
+                        controller.moveCards(cardToHand, Zone.HAND, source, game);
+                        cards.remove(cardToHand);
+                        controller.moveCards(cards, Zone.GRAVEYARD, source, game);
+
                     }
                 }
                 controller.shuffleLibrary(source, game);

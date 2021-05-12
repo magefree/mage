@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -19,14 +18,15 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author anonymous
  */
 public final class BlizzardSpecter extends CardImpl {
 
     public BlizzardSpecter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
         addSuperType(SuperType.SNOW);
         this.subtype.add(SubType.SPECTER);
         this.power = new MageInt(2);
@@ -83,9 +83,8 @@ class ReturnToHandEffect extends OneShotEffect {
         if (target.canChoose(source.getSourceId(), targetPlayer.getId(), game)) {
             targetPlayer.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null) {
-                targetPlayer.moveCards(permanent, Zone.HAND, source, game);
-            }
+            targetPlayer.moveCards(permanent, Zone.HAND, source, game);
+
 
         }
         return true;

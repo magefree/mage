@@ -111,9 +111,7 @@ class DeadlyBrewEffect extends OneShotEffect {
         );
         controller.choose(outcome, yourGrave, target, game);
         Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
-        if (card != null) {
-            controller.moveCards(card, Zone.HAND, source, game);
-        }
+        controller.moveCards(card, Zone.HAND, source, game);
         return true;
     }
 }

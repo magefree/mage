@@ -157,10 +157,6 @@ class PutCommanderOnBattlefieldEffect extends OneShotEffect {
             return false;
         }
         Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            player.moveCards(card, Zone.BATTLEFIELD, source, game);
-            return true;
-        }
-        return false;
+        return player.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }

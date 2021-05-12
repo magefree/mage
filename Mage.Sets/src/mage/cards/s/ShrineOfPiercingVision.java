@@ -96,10 +96,8 @@ class ShrineOfPiercingVisionEffect extends OneShotEffect {
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
             if (player.choose(Outcome.DrawCard, cards, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    player.moveCards(card, Zone.HAND, source, game);
-                }
+                cards.remove(card);
+                player.moveCards(card, Zone.HAND, source, game);
             }
             player.putCardsOnBottomOfLibrary(cards, game, source, true);
         }

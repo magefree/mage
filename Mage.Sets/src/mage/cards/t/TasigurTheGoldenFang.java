@@ -91,9 +91,7 @@ class TasigurTheGoldenFangEffect extends OneShotEffect {
                     target.setNotTarget(true);
                     opponent.chooseTarget(outcome, target, source, game);
                     Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        controller.moveCards(card, Zone.HAND, source, game);
-                    }
+                    controller.moveCards(card, Zone.HAND, source, game);
                 }
             }
             return true;

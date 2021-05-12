@@ -157,10 +157,8 @@ public final class NightDealings extends CardImpl {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             player.searchLibrary(target, source, game);
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-            if (card != null) {
-                player.revealCards(source, new CardsImpl(card), game);
-                player.moveCards(card, Zone.HAND, source, game);
-            }
+            player.revealCards(source, new CardsImpl(card), game);
+            player.moveCards(card, Zone.HAND, source, game);
             player.shuffleLibrary(source, game);
             return true;
         }

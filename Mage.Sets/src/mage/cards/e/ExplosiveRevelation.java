@@ -89,11 +89,9 @@ class ExplosiveRevelationEffect extends OneShotEffect {
                         }
                     }
                 }
-                if (nonLandCard != null) {
-                    // move nonland card to hand
-                    controller.moveCards(nonLandCard, Zone.HAND, source, game);
-                    toReveal.remove(nonLandCard);
-                }
+                // move nonland card to hand
+                controller.moveCards(nonLandCard, Zone.HAND, source, game);
+                toReveal.remove(nonLandCard);
                 // put the rest of the cards on the bottom of the library in any order
                 return controller.putCardsOnBottomOfLibrary(toReveal, game, source, true);
             }

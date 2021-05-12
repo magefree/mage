@@ -64,10 +64,9 @@ class ImagesOfThePastEffect extends OneShotEffect {
             List<UUID> targets = source.getTargets().get(0).getTargets();
             for (UUID targetId : targets) {
                 Card card = game.getCard(targetId);
-                if (card != null) {
-                    player.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    player.moveCards(card, Zone.EXILED, source, game);
-                }
+                player.moveCards(card, Zone.BATTLEFIELD, source, game);
+                player.moveCards(card, Zone.EXILED, source, game);
+
             }
             return true;
         }

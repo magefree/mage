@@ -108,9 +108,7 @@ class MangarasTomeReplacementEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)).getRandom(game);
-            if (card != null) {
-                controller.moveCards(card, Zone.HAND, source, game);
-            }
+            controller.moveCards(card, Zone.HAND, source, game);
         }
         return true;
     }

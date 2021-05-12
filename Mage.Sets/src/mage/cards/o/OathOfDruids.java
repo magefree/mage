@@ -132,9 +132,7 @@ class OathOfDruidsEffect extends OneShotEffect {
         controller.revealCards(source, revealed, game);
 
         //If they do, that player puts that card onto the battlefield
-        if (selectedCard != null) {
-            controller.moveCards(selectedCard, Zone.BATTLEFIELD, source, game);
-        }
+        controller.moveCards(selectedCard, Zone.BATTLEFIELD, source, game);
         // and all other cards revealed this way into their graveyard
         controller.moveCards(notSelectedCards, Zone.GRAVEYARD, source, game);
         return true;
