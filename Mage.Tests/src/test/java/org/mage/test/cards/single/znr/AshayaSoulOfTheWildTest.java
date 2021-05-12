@@ -5,6 +5,7 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -17,6 +18,7 @@ public class AshayaSoulOfTheWildTest extends CardTestPlayerBase {
     private static final String bear = "Grizzly Bears";
     private static final String forest = "Forest";
     private static final String transformation = "Kenrith's Transformation";
+    private static final String shapeshifter = "Volrath's Shapeshifter";
 
     @Test
     public void testAshaya() {
@@ -70,5 +72,29 @@ public class AshayaSoulOfTheWildTest extends CardTestPlayerBase {
         assertType(bear, CardType.LAND, SubType.FOREST);
         assertType(bear, CardType.CREATURE, SubType.BEAR);
         assertAbility(playerA, bear, new GreenManaAbility(), true);
+    }
+
+    @Ignore
+    @Test
+    public void testAshayaVolrathsShapeshifter() {
+        // TODO: currently failing due to ashaya ability not applying despite being added on lower layer
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, bear);
+        addCard(Zone.HAND, playerA, shapeshifter);
+        addCard(Zone.GRAVEYARD, playerA, ashaya);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shapeshifter);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertType(ashaya, CardType.LAND, SubType.FOREST); // fails
+        assertType(ashaya, CardType.CREATURE, SubType.ELEMENTAL);
+        assertAbility(playerA, ashaya, new GreenManaAbility(), true); // fails
+        assertPowerToughness(playerA, ashaya, 3 + 1 + 1, 3 + 1 + 1); // fails
+
+        assertType(bear, CardType.LAND, SubType.FOREST); // fails
+        assertType(bear, CardType.CREATURE, SubType.BEAR);
+        assertAbility(playerA, bear, new GreenManaAbility(), true); // fails
     }
 }
