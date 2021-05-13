@@ -3,15 +3,13 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleTriggeredAbility;
+import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -25,7 +23,7 @@ public final class SearingMeditation extends CardImpl {
 
 
         // Whenever you gain life, you may pay {2}. If you do, Searing Meditation deals 2 damage to any target.
-        Ability ability = new SimpleTriggeredAbility(Zone.BATTLEFIELD, GameEvent.EventType.GAINED_LIFE, new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(2)), "Whenever you gain life, ", true);
+        Ability ability = new GainLifeControllerTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(2)), false, true);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
