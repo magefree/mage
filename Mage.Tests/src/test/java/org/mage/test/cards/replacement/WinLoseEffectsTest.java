@@ -34,7 +34,7 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
         execute();
 
         Assert.assertEquals("Player A library is empty", 0 , playerA.getLibrary().size());
-        Assert.assertTrue("Player A has not won but should have", playerA.hasWon());
+        assertWonTheGame(playerA);
         assertLife(playerA, 20);
         assertLife(playerB, 20);
     }
@@ -67,7 +67,7 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Platinum Angel", 0);
         assertLibraryCount(playerA, 1); // Angel returned to top of library
         assertLibraryCount(playerA, "Platinum Angel", 1);
-        Assert.assertFalse("Player A should not have lost yet", playerA.hasLost());  
+        assertHasNotLostTheGame(playerA);
     }
     
     /**
@@ -96,7 +96,7 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
         execute();
 
         Assert.assertEquals("Player A library is empty", 0 , playerA.getLibrary().size());
-        Assert.assertTrue("Player A has not won but should have", playerA.hasWon());
+        assertWonTheGame(playerA);
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
@@ -148,8 +148,8 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
 
         assertLife(playerA, -5);
         assertLife(playerB, 20);
-        
-        Assert.assertTrue("Player A has not won but should have", playerA.hasWon());
+
+        assertWonTheGame(playerA);
 
     }    
 }

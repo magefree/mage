@@ -23,7 +23,8 @@ public class VorpalSwordTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         assertAllCommandsUsed();
-        Assert.assertTrue("Player A has won.", playerA.hasWon());
+        assertWonTheGame(playerA);
+        assertLostTheGame(playerB);
     }
 
 }

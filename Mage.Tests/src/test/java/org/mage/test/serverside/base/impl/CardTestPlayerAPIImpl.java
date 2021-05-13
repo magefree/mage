@@ -2095,4 +2095,25 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
     }
 
+
+    public void assertWonTheGame(Player player){
+
+        Assert.assertTrue(player.getName() + " has not won the game.", player.hasWon());
+    }
+
+    public void assertHasNotWonTheGame(Player player){
+
+        Assert.assertFalse(player.getName() + " has won the game.", player.hasWon());
+    }
+
+    public void assertLostTheGame(Player player){
+
+        Assert.assertTrue(player.getName() + " has not lost the game.", player.hasLost());
+    }
+
+    public void assertHasNotLostTheGame(Player player){
+
+        Assert.assertFalse(player.getName() + " has lost the game.", player.hasLost());
+    }
+
 }

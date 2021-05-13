@@ -37,8 +37,8 @@ public class GameIsADrawTest extends CardTestPlayerBase {
         assertLife(playerA, 0);
         assertLife(playerB, 0);
 
-        Assert.assertFalse("Player A has not won.", playerA.hasWon());
-        Assert.assertFalse("Player B has not won.", playerB.hasWon());
+        assertHasNotWonTheGame(playerA);
+        assertHasNotWonTheGame(playerB);
 
         Assert.assertTrue("Game has ended.", currentGame.hasEnded());
 
@@ -65,8 +65,8 @@ public class GameIsADrawTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        Assert.assertFalse("Player A has not won.", playerA.hasWon());
-        Assert.assertFalse("Player B has not won.", playerB.hasWon());
+        assertHasNotWonTheGame(playerA);
+        assertHasNotWonTheGame(playerB);
 
         Assert.assertTrue("Game has ended.", currentGame.hasEnded());
 
@@ -106,8 +106,8 @@ public class GameIsADrawTest extends CardTestPlayerBase {
         Permanent shield = getPermanent("Pariah's Shield");
         Assert.assertTrue("Pariah's Shield is attached", shield.getAttachedTo() != null);
 
-        Assert.assertFalse("Player A has not won.", playerA.hasWon());
-        Assert.assertFalse("Player B has not won.", playerB.hasWon());
+        assertHasNotWonTheGame(playerA);
+        assertHasNotWonTheGame(playerB);
 
         Assert.assertTrue("Game has ended.", currentGame.hasEnded());
 
