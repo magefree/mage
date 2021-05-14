@@ -21,6 +21,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.WitherbloomToken;
 
 import java.util.UUID;
@@ -115,8 +116,10 @@ class ValentinDeanOfTheVeinEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return ((ZoneChangeEvent) event).isDiesEvent()
-                && game.getOpponents(game.getControllerId(event.getTargetId())).contains(source.getControllerId());
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        return zEvent.isDiesEvent()
+                && !(zEvent.getTarget() instanceof PermanentToken)
+                && game.getOpponents(zEvent.getTarget().getControllerId()).contains(source.getControllerId());
     }
 
 }
