@@ -229,6 +229,30 @@ public class DeckValidatorTest extends MageTestBase {
         assertCounterspellValid(deckList);
     }
 
+    private void assertPsychatogValid(ArrayList<CardNameAmount> deckList) {
+        // if that card will be valid in modern then you must replace it with another non valid card
+        // google for "Cards Wizards Should Reprint for Modern"
+        final boolean needValid = false;
+        boolean valid = testDeckValid(new Modern(), deckList);
+        if (valid != needValid) {
+            Assert.fail("Psychatog " + (needValid ? "must be" : "not") + " allowed in modern");
+        }
+    }
+
+    @Test
+    public void testModernPsychatog() {
+        // test non valid card
+        ArrayList<CardNameAmount> deckList = new ArrayList<>();
+        deckList.add(new CardNameAmount("ODY", 292, 4));
+        deckList.add(new CardNameAmount("Mountain", 56));
+        assertPsychatogValid(deckList);
+
+        deckList.clear();
+        deckList.add(new CardNameAmount("VMA", 258, 4));
+        deckList.add(new CardNameAmount("Mountain", 56));
+        assertPsychatogValid(deckList);
+    }
+
     @Test
     public void testModernBanned() {
         ArrayList<CardNameAmount> deckList = new ArrayList<>();
