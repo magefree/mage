@@ -8,7 +8,6 @@ import mage.deck.Limited;
 import mage.deck.Modern;
 import mage.deck.Standard;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
 
@@ -112,109 +111,122 @@ public class DeckValidatorTest extends MageTestBase {
         Assert.assertFalse("only 4 of a card are allowed", testDeckValid(new Modern(), deckList));
     }
 
-    @Ignore
+    private void assertCounterspellValid(ArrayList<CardNameAmount> deckList) {
+        final boolean needValid = true; // card valid after Modern Horizons 2
+        boolean valid = testDeckValid(new Modern(), deckList);
+        if (valid != needValid) {
+            Assert.fail("Counterspell " + (needValid ? "must be" : "not") + " allowed in modern");
+        }
+    }
+
     @Test
     public void testModernCounterspell1() {
+        // if card is legal in any set then it must be legal in all other sets too
+
         ArrayList<CardNameAmount> deckList = new ArrayList<>();
         deckList.add(new CardNameAmount("JVC", 24, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("6ED", 61, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("5ED", 77, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("4ED", 65, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("G00", 1, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("DD2", 24, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("ICE", 64, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("F05", 11, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("LEA", 55, 4));
+        deckList.add(new CardNameAmount("LEA", 54, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("LEB", 55, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("ME4", 45, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("ME2", 44, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("S99", 34, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("7ED", 67, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("3ED", 54, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("MMQ", 69, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("VMA", 64, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("2ED", 55, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("TPR", 43, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
         deckList.clear();
         deckList.add(new CardNameAmount("TMP", 57, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
-        Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
+        assertCounterspellValid(deckList);
 
+        deckList.clear();
+        deckList.add(new CardNameAmount("MH2", 267, 4));
+        deckList.add(new CardNameAmount("Mountain", 56));
+        assertCounterspellValid(deckList);
     }
 
     @Test
