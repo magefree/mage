@@ -7,7 +7,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.filter.StaticFilters;
+import mage.constants.TargetController;
+import mage.filter.FilterSpell;
+import mage.filter.common.FilterCreatureSpell;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -22,12 +24,18 @@ import java.util.UUID;
  */
 public final class DoubleMajor extends CardImpl {
 
+    private static final FilterSpell filter = new FilterCreatureSpell("creature spell you control");
+
+    static {
+        filter.add(TargetController.YOU.getControllerPredicate());
+    }
+
     public DoubleMajor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{U}");
 
         // Copy target creature spell you control, except it isn't legendary if the spell is legendary.
         this.getSpellAbility().addEffect(new DoubleMajorEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
     private DoubleMajor(final DoubleMajor card) {
