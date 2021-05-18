@@ -4,26 +4,24 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.mageobject.CommanderPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetAmount;
 import mage.target.common.TargetCreatureOrPlaneswalkerAmount;
-import mage.watchers.Watcher;
+import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -40,7 +38,7 @@ public final class StumpsquallHydra extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Stumpsquall Hydra enters the battlefield, distribute X +1/+1 counters among it and any number of commanders.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new StumpsquallHydraEffect()), new StumpsquallHydraWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new StumpsquallHydraEffect()), new ManaSpentToCastWatcher());
     }
 
     private StumpsquallHydra(final StumpsquallHydra card) {
@@ -93,12 +91,8 @@ class StumpsquallHydraEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StumpsquallHydraWatcher watcher = game.getState().getWatcher(StumpsquallHydraWatcher.class, source.getSourceId());
-        if (watcher == null || game.getState().getValue(source.getSourceId().toString() + "xValue") == null) {
-            return false;
-        }
         Player player = game.getPlayer(source.getControllerId());
-        int xValue = (Integer) game.getState().getValue(source.getSourceId().toString() + "xValue");
+        int xValue = ManacostVariableValue.instance.calculate(game, source, this);
         if (player == null || xValue < 1) {
             return false;
         }
@@ -110,31 +104,10 @@ class StumpsquallHydraEffect extends OneShotEffect {
             if (permanent == null) {
                 continue;
             }
-            permanent.addCounters(CounterType.P1P1.createInstance(targetAmount.getTargetAmount(targetId)), source.getControllerId(), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(
+                    targetAmount.getTargetAmount(targetId)), source.getControllerId(), source, game
+            );
         }
         return true;
-    }
-
-}
-
-class StumpsquallHydraWatcher extends Watcher {
-
-    StumpsquallHydraWatcher() {
-        super(WatcherScope.CARD);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST) {
-            return;
-        }
-        Spell spell = game.getSpellOrLKIStack(event.getTargetId());
-        if (spell == null) {
-            return;
-        }
-        if (spell.getSourceId() != super.getSourceId()) {
-            return;
-        }
-        game.getState().setValue(spell.getSourceId().toString() + "xValue", spell.getSpellAbility().getManaCostsToPay().getX());
     }
 }
