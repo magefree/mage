@@ -42,6 +42,7 @@ public class Historic extends Constructed {
         banned.add("Once Upon a Time");
         banned.add("Swords to Plowshares");
         banned.add("Teferi, Time Raveler");
+        banned.add("Thassa's Oracle");
         banned.add("Uro, Titan of Nature's Wrath");
         banned.add("Veil of Summer");
         banned.add("Wilderness Reclamation");
