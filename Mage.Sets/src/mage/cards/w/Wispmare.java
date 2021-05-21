@@ -34,7 +34,7 @@ public final class Wispmare extends CardImpl {
         ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
         // Evoke {W}
-        this.addAbility(new EvokeAbility(this, "{W}"));
+        this.addAbility(new EvokeAbility("{W}"));
     }
 
     private Wispmare(final Wispmare card) {

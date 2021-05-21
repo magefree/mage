@@ -33,7 +33,7 @@ public final class IngotChewer extends CardImpl {
         ability.addTarget(target);
         this.addAbility(ability);
         // Evoke {R}
-        this.addAbility(new EvokeAbility(this, "{R}"));
+        this.addAbility(new EvokeAbility("{R}"));
     }
 
     private IngotChewer(final IngotChewer card) {
