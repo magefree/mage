@@ -494,7 +494,7 @@ class StrixhavenSchoolOfMagesCollator implements BoosterCollator {
         private static final StrixhavenSchoolOfMagesRun rareA = new StrixhavenSchoolOfMagesRun(false, "6", "14", "17", "20", "27", "29", "33", "37", "42", "44", "48", "58", "64", "66", "80", "82", "86", "94", "96", "98", "101", "113", "119", "127", "130", "133", "146", "147", "150", "152", "154", "155", "157", "158", "159", "160", "161", "165", "172", "173", "174", "179", "180", "181", "199", "205", "214", "217", "221", "228", "232", "234", "244", "246", "248", "253", "259", "264", "265", "266", "267", "269", "272", "274", "6", "14", "17", "20", "27", "29", "33", "37", "42", "44", "48", "58", "64", "66", "80", "82", "86", "94", "96", "98", "101", "113", "119", "127", "130", "133", "146", "147", "150", "152", "154", "155", "157", "158", "159", "160", "161", "165", "172", "173", "174", "179", "180", "181", "199", "205", "214", "217", "221", "228", "232", "234", "244", "246", "248", "253", "259", "264", "265", "266", "267", "269", "272", "274", "21", "83", "95", "128", "148", "149", "151", "153", "156", "163", "167", "168", "189", "191", "192", "196", "203", "230", "240", "245");
         private static final StrixhavenSchoolOfMagesRun commonLesson = new StrixhavenSchoolOfMagesRun(false, "1", "2", "3", "4", "183", "187", "195", "211", "236");
         private static final StrixhavenSchoolOfMagesRun rareLesson = new StrixhavenSchoolOfMagesRun(false, "5", "7", "57", "67", "108", "120", "7", "57", "67", "108", "120");
-        private static final StrixhavenSchoolOfMagesRun uncommonArchive = new StrixhavenSchoolOfMagesRun(false, "3", "4", "9", "18", "19", "20", "23", "24", "29", "30", "35", "37", "41", "44", "46", "49", "51", "57");
+        private static final StrixhavenSchoolOfMagesRun uncommonArchive = new StrixhavenSchoolOfMagesRun(true, "18", "29", "19", "41", "4", "57", "46", "23", "35", "3", "20", "49", "37", "30", "41", "24", "9", "44", "4", "29", "3", "46", "35", "18", "57", "41", "9", "19", "24", "44", "51", "30", "23", "37", "18", "49", "20", "29", "4", "19", "35", "46", "51", "23", "30", "18", "57", "3", "37", "49", "41", "24", "9", "44", "20", "4", "23", "37", "30", "3", "35", "46", "57", "29", "9", "29", "49", "19", "51", "44", "4", "24", "41", "18", "46", "3", "20", "57", "19", "35", "44", "23", "24", "9", "51", "30", "49", "37", "20", "51");
         private static final StrixhavenSchoolOfMagesRun rareArchive = new StrixhavenSchoolOfMagesRun(false, "5", "6", "7", "8", "10", "13", "14", "15", "16", "21", "26", "28", "31", "32", "34", "38", "39", "42", "45", "47", "48", "52", "53", "56", "58", "59", "60", "61", "62", "63");
         private static final StrixhavenSchoolOfMagesRun mythicArchive = new StrixhavenSchoolOfMagesRun(false, "1", "2", "11", "12", "17", "22", "25", "27", "33", "36", "40", "43", "50", "54", "55");
 
@@ -609,10 +609,6 @@ class StrixhavenSchoolOfMagesCollator implements BoosterCollator {
     );
     private final RarityConfiguration archiveRuns = new RarityConfiguration(
             false,
-            StrixhavenSchoolOfMagesStructure.A1, StrixhavenSchoolOfMagesStructure.A1,
-            StrixhavenSchoolOfMagesStructure.A1, StrixhavenSchoolOfMagesStructure.A1,
-            StrixhavenSchoolOfMagesStructure.A1, StrixhavenSchoolOfMagesStructure.A1,
-            StrixhavenSchoolOfMagesStructure.A1, StrixhavenSchoolOfMagesStructure.A1,
             StrixhavenSchoolOfMagesStructure.A1, StrixhavenSchoolOfMagesStructure.A1,
 
             StrixhavenSchoolOfMagesStructure.A2, StrixhavenSchoolOfMagesStructure.A2,
