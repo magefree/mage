@@ -77,7 +77,7 @@ class WalkingSpongeEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
             ChoiceImpl chooseAbility = new ChoiceImpl();
-            chooseAbility.setMessage("What ability do you wish to remove? (default is Flying)");
+            chooseAbility.setMessage("Choose an ability to remove (default is flying)");
             Set<String> choice = new LinkedHashSet<>();
             choice.add("Flying");
             choice.add("First strike");

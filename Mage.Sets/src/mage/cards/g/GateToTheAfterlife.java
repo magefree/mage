@@ -103,14 +103,14 @@ class GateToTheAfterlifeEffect extends OneShotEffect {
         filter.add(new NamePredicate(cardName));
         Card card = null;
         // Graveyard check
-        if (controller.chooseUse(Outcome.Benefit, "Do you want to search your graveyard for " + cardName + "?", source, game)) {
+        if (controller.chooseUse(Outcome.Benefit, "Search your graveyard for " + cardName + "?", source, game)) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(1, 1, filter, true);
             if (controller.choose(outcome, controller.getGraveyard(), target, game)) {
                 card = game.getCard(target.getFirstTarget());
             }
         }
         // Hand check
-        if (card == null && controller.chooseUse(Outcome.Benefit, "Do you want to search your hand for " + cardName + "?", source, game)) {
+        if (card == null && controller.chooseUse(Outcome.Benefit, "Search your hand for " + cardName + "?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(0, 1, filter);
             if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, game)) {
                 card = game.getCard(target.getFirstTarget());
@@ -118,7 +118,7 @@ class GateToTheAfterlifeEffect extends OneShotEffect {
         }
         // Library check
         boolean librarySearched = false;
-        if (card == null && controller.chooseUse(Outcome.Benefit, "Do you want to search your library for " + cardName + "?", source, game)) {
+        if (card == null && controller.chooseUse(Outcome.Benefit, "Search your library for " + cardName + "?", source, game)) {
             librarySearched = true;
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             if (controller.searchLibrary(target, source, game)) {

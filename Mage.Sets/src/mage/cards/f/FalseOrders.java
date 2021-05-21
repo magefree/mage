@@ -115,7 +115,7 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
         }
 
         if (!permanent.isCreature()
-                || !controller.chooseUse(Outcome.Benefit, "Do you want " + permanent.getLogName() + " to block an attacking creature?", source, game)) {
+                || !controller.chooseUse(Outcome.Benefit, "Have " + permanent.getLogName() + " block an attacking creature?", source, game)) {
             return false;
         }
         // Choose new creature to block

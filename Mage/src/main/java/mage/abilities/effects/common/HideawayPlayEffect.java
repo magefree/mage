@@ -52,7 +52,7 @@ public class HideawayPlayEffect extends OneShotEffect {
         Card card = cards.iterator().next();
         Player controller = game.getPlayer(source.getControllerId());
         if (card != null && controller != null) {
-            if (controller.chooseUse(Outcome.PlayForFree, "Do you want to play " + card.getIdName() + " for free now?", source, game)) {
+            if (controller.chooseUse(Outcome.PlayForFree, "Play " + card.getIdName() + " for free?", source, game)) {
                 card.setFaceDown(false, game);
                 int zcc = card.getZoneChangeCounter(game);
 

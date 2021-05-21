@@ -82,7 +82,7 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
                 }
             }
             if (mayShuffleAfter) {
-                if (player.chooseUse(Outcome.Benefit, (player == targetPlayer ? "Shuffle your library?" : "Do you want the chosen player to shuffle?"), source, game)) {
+                if (player.chooseUse(Outcome.Benefit, (player == targetPlayer ? "Shuffle your library?" : "Have the chosen player shuffle?"), source, game)) {
                     targetPlayer.shuffleLibrary(source, game);
                 }
             }

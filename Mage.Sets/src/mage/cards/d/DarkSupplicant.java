@@ -87,7 +87,7 @@ class DarkSupplicantEffect extends OneShotEffect {
         }
         Card selectedCard = null;
         // Graveyard check
-        if (controller.chooseUse(Outcome.Benefit, "Do you want to search your graveyard for Scion of Darkness?", source, game)) {
+        if (controller.chooseUse(Outcome.Benefit, "Search your graveyard for Scion of Darkness?", source, game)) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(1, 1, filter, true);
             if (controller.choose(outcome, controller.getGraveyard(), target, game)) {
                 selectedCard = game.getCard(target.getFirstTarget());
@@ -95,7 +95,7 @@ class DarkSupplicantEffect extends OneShotEffect {
         }
         // Hand check
         if (selectedCard == null
-                && controller.chooseUse(Outcome.Benefit, "Do you want to search your hand for Scion of Darkness?", source, game)) {
+                && controller.chooseUse(Outcome.Benefit, "Search your hand for Scion of Darkness?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(0, 1, filter);
             if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, game)) {
                 if (!target.getTargets().isEmpty()) {
@@ -106,7 +106,7 @@ class DarkSupplicantEffect extends OneShotEffect {
         // Library check
         boolean librarySearched = false;
         if (selectedCard == null
-                && controller.chooseUse(Outcome.Benefit, "Do you want to search your library for Scion of Darkness?", source, game)) {
+                && controller.chooseUse(Outcome.Benefit, "Search your library for Scion of Darkness?", source, game)) {
             librarySearched = true;
             TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
             if (controller.searchLibrary(target, source, game)) {

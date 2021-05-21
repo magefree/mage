@@ -44,7 +44,7 @@ public class LoseAbilityOrAnotherAbilityTargetEffect extends LoseAbilityTargetEf
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
             ChoiceImpl chooseAbility = new ChoiceImpl();
-            chooseAbility.setMessage("What ability do you wish to remove?");
+            chooseAbility.setMessage("Choose an ability to remove");
 
             Set<String> choice = new HashSet<>();
 

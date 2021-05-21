@@ -192,7 +192,7 @@ class TergridsLaternEffect extends OneShotEffect {
         // AI hint to discard/sacrifice before die
         Outcome aiOutcome = (targetedPlayer.getLife() <= 3 * 2) ? Outcome.Benefit : Outcome.Detriment;
 
-        if (targetedPlayer.chooseUse(aiOutcome, "Question 1 of 2: do you wish to sacrifice a nonland permanent to prevent the loss of 3 life?", source, game)) {
+        if (targetedPlayer.chooseUse(aiOutcome, "Question 1 of 2: Sacrifice a nonland permanent to prevent the loss of 3 life?", source, game)) {
             TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
             target.setNotTarget(true);
             if (targetedPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
@@ -205,7 +205,7 @@ class TergridsLaternEffect extends OneShotEffect {
             }
         }
 
-        if (targetedPlayer.chooseUse(aiOutcome, "Question 2 of 2: do you wish to discard a card to prevent the loss of 3 life?", source, game)) {
+        if (targetedPlayer.chooseUse(aiOutcome, "Question 2 of 2: Discard a card to prevent the loss of 3 life?", source, game)) {
             TargetCardInHand targetCard = new TargetCardInHand();
             if (targetedPlayer.chooseTarget(Outcome.Discard, targetCard, source, game)) {
                 Card chosenCard = game.getCard(targetCard.getFirstTarget());

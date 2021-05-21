@@ -2734,7 +2734,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
 
-        if (!targetPlayer.chooseUse(Outcome.AIDontUseIt, "Library have " + castableCards.size() + " castable cards on searching. Do you want to cast it?", null, game)) {
+        if (!targetPlayer.chooseUse(Outcome.AIDontUseIt, "There are " + castableCards.size() + " cards you can cast while searching your library. Cast any of them?", null, game)) {
             return false;
         }
 
