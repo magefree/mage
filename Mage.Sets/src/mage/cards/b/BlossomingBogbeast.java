@@ -37,7 +37,8 @@ public final class BlossomingBogbeast extends CardImpl {
                 StaticFilters.FILTER_CONTROLLED_CREATURE
         ).setText("Then creatures you control gain trample"));
         ability.addEffect(new BoostControlledEffect(
-                ControllerGotLifeCount.instance, ControllerGotLifeCount.instance, Duration.EndOfTurn
+                ControllerGotLifeCount.instance, ControllerGotLifeCount.instance, Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENT_CREATURES, false, true
         ).setText("and get +X/+X until end of turn, where X is the amount of life you gained this turn"));
         this.addAbility(ability.addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
