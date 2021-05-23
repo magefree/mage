@@ -42,7 +42,7 @@ public class  GameRunner{
     PyConnection conn;
     public RLPyAgent agent;
     public GameRunner(){
-        int port=5000;
+        int port=5002;
         conn=new PyConnection(port);
         agent=new RLPyAgent(conn);
     }

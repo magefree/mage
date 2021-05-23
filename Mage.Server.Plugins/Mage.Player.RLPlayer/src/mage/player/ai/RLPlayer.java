@@ -5,6 +5,7 @@ import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.t.TrueLovesKiss;
 import mage.choices.Choice;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
@@ -110,20 +111,31 @@ public class RLPlayer extends RandomNonTappingPlayer{
     private Ability chooseAbility(Game game, List<Ability> options){
         Ability ability=pass;
         if (!options.isEmpty()) {
-            if (options.size() == 1) { //Don't call ML model for single element
-                ability = options.get(0);
+            List<RLAction> toUse=new ArrayList<RLAction>();
+            for(int i=0;i<options.size();i++){
+                Ability abil=options.get(i);
+                RLAction actAbil=(RLAction) new ActionAbility(game,abil);
+                boolean toAdd=true;
+                for(int j=0;j<toUse.size();j++){
+                    if(actAbil.getText().equals(toUse.get(j).getText())){
+                        toAdd=false;
+                    }
+                }
+                if(toAdd){
+                    toUse.add(actAbil);
+                }  
+            }
+            int choice;
+            if (toUse.size() == 1) { //Don't call ML model for single element
+                choice=0;
                 //logger.info("Turn"+game.getTurnNum()+" handSize "+getHand().size());
             } else {
                 //logger.info("Calling model"+game.getTurnNum());
-                List<RLAction> toUse=new ArrayList<RLAction>();
-                for(int i=0;i<options.size();i++){
-                    Ability abil=options.get(i);
-                    toUse.add((RLAction) new ActionAbility(game,abil));
-                }
-                int choice=learner.choose(game,this,toUse);
-                ActionAbility chosenAction=(ActionAbility) toUse.get(choice);
-                ability = chosenAction.ability;
+                choice=learner.choose(game,this,toUse);
+
             }
+            ActionAbility chosenAction=(ActionAbility) toUse.get(choice);
+            ability = chosenAction.ability;
         }
         return ability;
     }

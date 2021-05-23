@@ -5,4 +5,8 @@ hparams={
     "num_action_embeds":2,
     "dot_dim":10,
     "num_reals":5,
+    "lr":.001,
+    "entropy_weight":.01,
+    "batch_cutoff":10,
+    "decay_steps":1000,
 }
