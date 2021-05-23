@@ -7,7 +7,7 @@ import mage.constants.SetType;
 /**
  * @author TheElk801
  */
-public final class  ModernHorizons2 extends ExpansionSet {
+public final class ModernHorizons2 extends ExpansionSet {
 
     private static final ModernHorizons2 instance = new ModernHorizons2();
 
