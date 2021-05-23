@@ -37,7 +37,7 @@ public final class AnkleShanker extends CardImpl {
         Effect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("creatures you control gain first strike");
         Ability ability = new AttacksTriggeredAbility(effect, false);
-        effect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn);
+        effect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("and deathtouch until end of turn");
         ability.addEffect(effect);
         this.addAbility(ability);
