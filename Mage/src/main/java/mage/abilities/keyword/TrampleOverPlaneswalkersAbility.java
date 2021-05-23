@@ -8,7 +8,7 @@ import mage.constants.Zone;
 import java.io.ObjectStreamException;
 
 /**
- * @author Fubwubs
+ * @author Fubs
  */
 public class TrampleOverPlaneswalkersAbility extends StaticAbility implements MageSingleton {
 

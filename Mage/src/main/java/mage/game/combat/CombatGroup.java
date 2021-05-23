@@ -267,8 +267,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
     }
 
-    //
-
     private void singleBlockerDamage(Player player, boolean first, Game game) {
         Permanent blocker = game.getPermanent(blockers.get(0));
         Permanent attacker = game.getPermanent(attackers.get(0));

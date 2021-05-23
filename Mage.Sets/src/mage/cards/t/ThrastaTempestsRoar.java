@@ -1,11 +1,7 @@
-
-
 package mage.cards.t;
 
         import java.util.UUID;
         import mage.MageInt;
-
-
         import mage.abilities.Ability;
         import mage.abilities.common.SimpleStaticAbility;
         import mage.abilities.dynamicvalue.DynamicValue;
@@ -24,7 +20,7 @@ package mage.cards.t;
         import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
- * @author Fubwubs
+ * @author Fubs
  */
 public final class ThrastaTempestsRoar extends CardImpl {
 
@@ -48,12 +44,10 @@ public final class ThrastaTempestsRoar extends CardImpl {
 
 
         //"Thrasta has hexproof as long as it entered the battlefield this turn."
-        this.addAbility(new SimpleStaticAbility(
-                new GainAbilitySourceEffect(
-                        HexproofAbility.getInstance(),
-                        Duration.EndOfTurn
-                )
-        ));
+        this.addAbility(new SimpleStaticAbility(new GainAbilitySourceEffect(
+            HexproofAbility.getInstance(),
+            Duration.EndOfTurn
+        )));
     }
 
     private ThrastaTempestsRoar(final mage.cards.t.ThrastaTempestsRoar card) {
@@ -64,7 +58,6 @@ public final class ThrastaTempestsRoar extends CardImpl {
     public mage.cards.t.ThrastaTempestsRoar copy() {
         return new mage.cards.t.ThrastaTempestsRoar(this);
     }
-
 }
 
 class ThrastaDynamicValue implements DynamicValue {
