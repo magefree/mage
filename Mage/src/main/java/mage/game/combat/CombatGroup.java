@@ -7,6 +7,7 @@ import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.abilities.keyword.*;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Outcome;
+import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.BlockerDeclaredEvent;
@@ -100,6 +101,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     private boolean hasTrample(Permanent perm) {
         return perm.getAbilities().containsKey(TrampleAbility.getInstance().getId());
+    }
+
+    private boolean hasTrampleOverPlaneswalkers(Permanent perm) {
+        return perm.getAbilities().containsKey(TrampleOverPlaneswalkersAbility.getInstance().getId());
     }
 
     private boolean hasBanding(Permanent perm) {
@@ -261,6 +266,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
         }
     }
+
+    //
 
     private void singleBlockerDamage(Player player, boolean first, Game game) {
         Permanent blocker = game.getPermanent(blockers.get(0));
@@ -544,9 +551,14 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     private void defenderDamage(Permanent attacker, int amount, Game game) {
         if (this.defenderIsPlaneswalker) {
-            Permanent defender = game.getPermanent(defenderId);
-            if (defender != null) {
-                defender.markDamage(amount, attacker.getId(), null, game, true, true);
+            Permanent planeswalker = game.getPermanent(defenderId);
+            if (planeswalker != null) {
+                //apply damage to player from TrampleOverPlaneswalkersAbility (for ThrastaTempestsRoar in set MH2)
+                if (hasTrampleOverPlaneswalkers(attacker) && (amount > planeswalker.getCounters(game).getCount(CounterType.LOYALTY))) {
+                    Player defendingPlayer = game.getPlayer(defendingPlayerId);
+                    defendingPlayer.damage((amount - planeswalker.getCounters(game).getCount(CounterType.LOYALTY)), attacker.getId(), null, game, true, true);
+                }
+                planeswalker.markDamage(amount, attacker.getId(), null, game, true, true);
             }
         } else {
             Player defender = game.getPlayer(defenderId);
