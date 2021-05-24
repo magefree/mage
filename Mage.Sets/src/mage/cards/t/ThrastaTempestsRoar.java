@@ -35,6 +35,7 @@ public final class ThrastaTempestsRoar extends CardImpl {
 
         //This spell costs 3 less to cast for each other spell cast this turn
         ThrastaDynamicValue spellCastCount = new ThrastaDynamicValue();
+        //spellCastCount does not need -1 because cast count increases only after current spell cast/reduction.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionForEachSourceEffect(3, spellCastCount))
                 .addHint(new ValueHint("spell cast", spellCastCount))
         );
