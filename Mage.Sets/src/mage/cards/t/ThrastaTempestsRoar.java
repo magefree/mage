@@ -53,7 +53,7 @@ public final class ThrastaTempestsRoar extends CardImpl {
     }
 
     @Override
-    public mage.cards.t.ThrastaTempestsRoar copy() {
+    public ThrastaTempestsRoar copy() {
         return new mage.cards.t.ThrastaTempestsRoar(this);
     }
 }
