@@ -32,7 +32,9 @@ public class TrampleOverPlaneswalkersAbility extends StaticAbility implements Ma
     }
 
     @Override
-    public String getRule() { return "trample over planeswalkers"; }
+    public String getRule() {
+        return "Trample over planeswalkers <i>(This creature can deal excess combat damage to the controller of the planeswalker it's attacking.)</i>";
+    }
 
     @Override
     public TrampleOverPlaneswalkersAbility copy() {

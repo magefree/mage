@@ -551,12 +551,22 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (this.defenderIsPlaneswalker) {
             Permanent planeswalker = game.getPermanent(defenderId);
             if (planeswalker != null) {
-                //apply damage to player from TrampleOverPlaneswalkersAbility (for ThrastaTempestsRoar in set MH2)
-                if (hasTrampleOverPlaneswalkers(attacker) && (amount > planeswalker.getCounters(game).getCount(CounterType.LOYALTY))) {
-                    Player defendingPlayer = game.getPlayer(defendingPlayerId);
-                    defendingPlayer.damage((amount - planeswalker.getCounters(game).getCount(CounterType.LOYALTY)), attacker.getId(), null, game, true, true);
+                // apply excess damage from "trample over planeswaslkers" ability (example: Thrasta, Tempest's Roar)
+                if (hasTrampleOverPlaneswalkers(attacker)) {
+                    int lethalDamage = planeswalker.getLethalDamage(attacker.getId(), game);
+                    if (lethalDamage >= amount) {
+                        planeswalker.markDamage(amount, attacker.getId(), null, game, true, true);
+                    } else {
+                        planeswalker.markDamage(amount, attacker.getId(), null, game, true, true);
+                        amount -= lethalDamage;
+                        if (amount > 0) {
+                            Player defendingPlayer = game.getPlayer(defendingPlayerId);
+                            defendingPlayer.damage(amount, attacker.getId(), null, game, true, true);
+                        }
+                    }
+                } else {
+                    planeswalker.markDamage(amount, attacker.getId(), null, game, true, true);
                 }
-                planeswalker.markDamage(amount, attacker.getId(), null, game, true, true);
             }
         } else {
             Player defender = game.getPlayer(defenderId);
