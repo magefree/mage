@@ -69,19 +69,30 @@ class KillianInkDuelistEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, 2);
+        // Bug #7762: https://github.com/magefree/mage/issues/7762
+        // Check possible targets for getPlayable
+        if (game.inCheckPlayableState()) {
+            if (CardUtil.getAllPossibleTargets(abilityToModify, game)
+                    .stream()
+                    .map(game::getPermanent)
+                    .filter(Objects::nonNull)
+                    .anyMatch(MageObject::isCreature)) {
+                CardUtil.reduceCost(abilityToModify, 2);
+            }
+        // Check selected targets on actual cast
+        } else if (CardUtil.getAllSelectedTargets(abilityToModify, game)
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .anyMatch(MageObject::isCreature)) {
+            CardUtil.reduceCost(abilityToModify, 2);
+        }
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return abilityToModify instanceof SpellAbility
-                && abilityToModify.isControlledBy(source.getControllerId())
-                && CardUtil
-                .getAllSelectedTargets(abilityToModify, game)
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .anyMatch(MageObject::isCreature);
+                && abilityToModify.isControlledBy(source.getControllerId());
     }
 }
