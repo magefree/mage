@@ -95,8 +95,8 @@ public class Turn implements Serializable {
      * @param activePlayer
      * @return true if turn is skipped
      */
-    public boolean play(Game game, Player activePlayer) {    
-        // uncomment this to trace triggered abilities and/or continous effects 
+    public boolean play(Game game, Player activePlayer) {
+        // uncomment this to trace triggered abilities and/or continous effects
         // TraceUtil.traceTriggeredAbilities(game);
         // game.getState().getContinuousEffects().traceContinuousEffects(game);
         activePlayer.becomesActivePlayer();
@@ -187,7 +187,10 @@ public class Turn implements Serializable {
     private void checkTurnIsControlledByOtherPlayer(Game game, UUID activePlayerId) {
         UUID newControllerId = game.getState().getTurnMods().controlsTurn(activePlayerId);
         if (newControllerId != null && !newControllerId.equals(activePlayerId)) {
-            game.getPlayer(newControllerId).controlPlayersTurn(game, activePlayerId);
+            Player p = game.getPlayer(newControllerId);
+            if (p.isInGame()) {
+                game.getPlayer(newControllerId).controlPlayersTurn(game, activePlayerId);
+            }
         }
     }
 
