@@ -16,7 +16,6 @@ public class TrampleOverPlaneswalkersAbility extends StaticAbility implements Ma
 
     static {
         instance = new TrampleOverPlaneswalkersAbility();
-        instance.addIcon(TrampleAbilityIcon.instance);
     }
 
     private Object readResolve() throws ObjectStreamException {
