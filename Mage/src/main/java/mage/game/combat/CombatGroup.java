@@ -102,6 +102,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         return perm.getAbilities().containsKey(TrampleAbility.getInstance().getId());
     }
 
+    private boolean hasTrampleOverPlaneswalkers(Permanent perm) {
+        return perm.getAbilities().containsKey(TrampleOverPlaneswalkersAbility.getInstance().getId());
+    }
+
     private boolean hasBanding(Permanent perm) {
         return perm.getAbilities().containsKey(BandingAbility.getInstance().getId());
     }
@@ -256,7 +260,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             if (canDamage(attacker, first)) {
                 //20091005 - 510.1c, 702.17c
                 if (!blocked || hasTrample(attacker)) {
-                    defenderDamage(attacker, getDamageValueFromPermanent(attacker, game), game);
+                    defenderDamage(attacker, getDamageValueFromPermanent(attacker, game), game, false);
                 }
             }
         }
@@ -278,7 +282,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                         blocker.markDamage(damageAssigned, attacker.getId(), null, game, true, true);
                         damage -= damageAssigned;
                         if (damage > 0) {
-                            defenderDamage(attacker, damage, game);
+                            defenderDamage(attacker, damage, game, false);
                         }
                     }
                 } else {
@@ -343,7 +347,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     }
                 }
                 if (damage > 0 && hasTrample(attacker) && excessDamageToDefender) {
-                    defenderDamage(attacker, damage, game);
+                    defenderDamage(attacker, damage, game, false);
                 } else if (!blockerOrder.isEmpty()) {
                     // Assign the damage left to first blocker
                     assigned.put(blockerOrder.get(0), assigned.get(blockerOrder.get(0)) == null ? 0 : assigned.get(blockerOrder.get(0)) + damage);
@@ -541,18 +545,46 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
         }
     }
+    /**
+     * Do damage to attacked player or planeswalker
+     * @param attacker
+     * @param amount
+     * @param game
+     * @param damageToDefenderController excess damage to defender's controller (example: trample over planeswalker)
+     */
+    private void defenderDamage(Permanent attacker, int amount, Game game, boolean damageToDefenderController) {
+        UUID affectedDefenderId = this.defenderId;
+        if (damageToDefenderController) {
+            affectedDefenderId = game.getControllerId(this.defenderId);
+        }
 
-    private void defenderDamage(Permanent attacker, int amount, Game game) {
-        if (this.defenderIsPlaneswalker) {
-            Permanent defender = game.getPermanent(defenderId);
-            if (defender != null) {
-                defender.markDamage(amount, attacker.getId(), null, game, true, true);
+        // on planeswalker
+        Permanent planeswalker = game.getPermanent(affectedDefenderId);
+        if (planeswalker != null) {
+            // apply excess damage from "trample over planeswaslkers" ability (example: Thrasta, Tempest's Roar)
+            if (hasTrampleOverPlaneswalkers(attacker)) {
+                int lethalDamage = planeswalker.getLethalDamage(attacker.getId(), game);
+                if (lethalDamage >= amount) {
+                    // normal damage
+                    planeswalker.markDamage(amount, attacker.getId(), null, game, true, true);
+                } else {
+                    // damage with excess (additional damage to planeswalker's controller)
+                    planeswalker.markDamage(lethalDamage, attacker.getId(), null, game, true, true);
+                    amount -= lethalDamage;
+                    if (amount > 0) {
+                        defenderDamage(attacker, amount, game, true);
+                    }
+                }
+            } else {
+                // normal damage
+                planeswalker.markDamage(amount, attacker.getId(), null, game, true, true);
             }
-        } else {
-            Player defender = game.getPlayer(defenderId);
-            if (defender != null) {
-                defender.damage(amount, attacker.getId(), null, game, true, true);
-            }
+        }
+
+        // on player
+        Player defender = game.getPlayer(affectedDefenderId);
+        if (defender != null) {
+            defender.damage(amount, attacker.getId(), null, game, true, true);
         }
     }
 
