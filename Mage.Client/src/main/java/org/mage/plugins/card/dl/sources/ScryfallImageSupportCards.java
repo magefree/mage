@@ -497,6 +497,7 @@ public class ScryfallImageSupportCards {
             add("KHC"); // Kaldheim Commander
             add("TSR"); // Time Spiral Remastered
             add("STX"); // Strixhaven: School of Mages
+            add("STA"); // Strixhaven Mystical Archive
             add("C21"); // Commander 2021 Edition
             add("MH2"); // Modern Horizons 2
             add("AFR"); // Adventures in the Forgotten Realms
