@@ -42,11 +42,12 @@ public class  GameRunner{
     PyConnection conn;
     public RLPyAgent agent;
     public GameRunner(){
-        int port=5002;
-        conn=new PyConnection(port);
+        conn=new PyConnection();
         agent=new RLPyAgent(conn);
     }
-    
+    public void close(){
+        conn.close();
+    }
     public int playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
         String deckLoc="/home/elchanan/java/mage/Mage.Tests/RBTestAggro.dck";

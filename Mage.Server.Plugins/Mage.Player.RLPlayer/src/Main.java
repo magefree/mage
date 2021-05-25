@@ -20,6 +20,7 @@ public class Main {
             count+=1;
             System.out.println("netWins is "+netWins+" at timestep "+count);
         }
+        runner.close();
         System.out.println("Shutting down");
     }
 }

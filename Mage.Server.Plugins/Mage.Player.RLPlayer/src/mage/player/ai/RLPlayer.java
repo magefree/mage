@@ -43,10 +43,14 @@ public class RLPlayer extends RandomNonTappingPlayer{
     private static final Logger logger = Logger.getLogger(RLPlayer.class);
     public RLPlayer(String name , RangeOfInfluence range, int skill){
         super(name);
-        learner=loadPyLearner("pydefault");
+        System.out.println("Completed super!");
+        logger.warn("completed super!");
+        PyConnection conn=new PyConnection();
+        learner=new RLPyAgent(conn);
         if(Objects.isNull(learner)){
             logger.warn("learner is null in RLPlayer creation!");
         }
+        System.out.println("Created RL Player!");
     }
     public RLPlayer(String name,RLAgent inLearner) {  
         super(name);
@@ -87,27 +91,6 @@ public class RLPlayer extends RandomNonTappingPlayer{
             i.printStackTrace();
          }
     }*/
-    public static RLAgent loadPyLearner(String loc){
-        try {
-            FileInputStream fileClassIn = new FileInputStream(getClassLoc(loc));
-            ObjectInputStream classIn = new ObjectInputStream(fileClassIn);
-            PyConnection conn=new PyConnection(5000);
-            RLAgent agent= new RLPyAgent(conn);
-            //agent.representer= (Representer) classIn.readObject();
-            return agent;
-        }catch (IOException i) {
-            logger.warn("IO exception");
-            System.err.println("IO exception!");
-            i.printStackTrace();
-            return null;
-         }
-         /*catch (ClassNotFoundException c) {
-            logger.warn("Class Not Found exception");
-            System.out.println("RLAgent class not found");
-            c.printStackTrace();
-            return null;
-         }*/
-    }
     private Ability chooseAbility(Game game, List<Ability> options){
         Ability ability=pass;
         if (!options.isEmpty()) {

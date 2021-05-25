@@ -72,10 +72,11 @@ public class RepresenterJSON implements Serializable{
 
 
     //extracts relevent decimal quanitites from a player
-    protected JSONObject playerToArray(Player player){
+    protected JSONObject playerToArray(Player player,int permanents){
         JSONObject playerData=new JSONObject();
         playerData.put("life",player.getLife());
         playerData.put("cards in hand",player.getHand().size());
+        playerData.put("number of permanents",permanents);
         return playerData;
     }
     protected Player getOpponent(Game game,Player LPlayer){
@@ -86,10 +87,10 @@ public class RepresenterJSON implements Serializable{
     }
     //represents a game state by extracting relevent information
     //First value is real numbers, second is embedding IDs (ints)
-    protected JSONObject getGameReals(Game game, Player LPlayer,Player OPlayer){
+    protected JSONObject getGameReals(Game game, Player LPlayer,Player OPlayer,int agentPerms,int opponentPerms){
         JSONObject gameReals=new JSONObject();
-        gameReals.put("agent",playerToArray(LPlayer));
-        gameReals.put("opponent",playerToArray(OPlayer));
+        gameReals.put("agent",playerToArray(LPlayer,agentPerms));
+        gameReals.put("opponent",playerToArray(OPlayer,opponentPerms));
         gameReals.put("turns",game.getTurnNum());
         return gameReals;
     }
@@ -100,14 +101,18 @@ public class RepresenterJSON implements Serializable{
         UUID learnerId=LPlayer.getId(); 
         UUID opponentId=OPlayer.getId();
         Battlefield field=game.getBattlefield();
+        int agentPerms=0;
+        int opponentPerms=0;
         Iterator<Permanent> perms=field.getAllPermanents().iterator();
         while(perms.hasNext()){
             Permanent perm=perms.next();
             String controllerName;
             if(perm.getControllerId().equals(learnerId)){
                 controllerName="Agent";
+                agentPerms+=1;
             }else if(perm.getControllerId().equals(opponentId)){
                 controllerName="Opponent";
+                opponentPerms+=1;
             }else{
                 throw new IllegalStateException("Unable to determine Permenants owner");
             }
@@ -131,7 +136,7 @@ public class RepresenterJSON implements Serializable{
             namedPerms.add(repr);
         }
         gameRepr.put("permanents",namedPerms);
-        gameRepr.put("reals",getGameReals(game, LPlayer, OPlayer));
+        gameRepr.put("reals",getGameReals(game, LPlayer, OPlayer,agentPerms,opponentPerms));
         return gameRepr;
     }
     //represents a single action.

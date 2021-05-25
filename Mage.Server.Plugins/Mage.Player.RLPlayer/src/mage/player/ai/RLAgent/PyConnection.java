@@ -16,8 +16,9 @@ public class PyConnection {
     BufferedOutputStream buff;
     Socket socket;
     private static final Logger logger = Logger.getLogger(PyConnection.class);
-    public PyConnection(int port){
+    public PyConnection(){
         try {
+            int port=5009;
             socket = new Socket("localhost", port);
             OutputStream output = socket.getOutputStream();
             buff=new BufferedOutputStream(output);
@@ -26,17 +27,26 @@ public class PyConnection {
             reader=new BufferedReader(input);
         }
         catch (UnknownHostException ex) {
-            System.out.println("Server not found: " + ex.getMessage());
+            System.out.println("RLPlayer Server not found: " + ex.getMessage());
             System.exit(-1);
         } catch (IOException ex) {
 
-            System.out.println("I/O error in Init: " + ex.getMessage());
+            System.out.println("I/O error in Init PyConnection: " + ex.getMessage());
             //System.exit(-1);
+            ex.printStackTrace();
         }
     }
     public void write(JSONObject repr){
         String message=repr.toString();
         send(message);
+    }
+    public void close(){
+        try{
+            socket.close();
+        }
+        catch (IOException ex) {
+            System.out.println("Fail to close socket" + ex.getMessage());
+        }
     }
     void send(String message){
         try{
@@ -46,6 +56,7 @@ public class PyConnection {
             buff.flush();
         }catch (IOException ex) {
             System.out.println("I/O error in send: " + ex.getMessage());
+            close();
         }
     }
     public void write_hparams(){
@@ -67,10 +78,12 @@ public class PyConnection {
         }
         catch (IOException ex) {
             System.out.println("I/O error in read: " + ex.getMessage());
+            close();
             return -2;
         }
         catch (NumberFormatException ex){
             System.out.println("Terminating due to closed python server" + ex.getMessage());
+            close();
             return -2;
         }
     }

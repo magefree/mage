@@ -12,7 +12,7 @@ class learnerVsRandom(gym.Env):
     def __init__(self):
         
         serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        serversocket.bind(("localhost",5002))
+        serversocket.bind(("localhost",5009))
         print("waiting for connection")
         serversocket.listen(1)
         (self.clientsocket, address) = serversocket.accept()
