@@ -18,6 +18,8 @@ public final class ProfaneTutor extends CardImpl {
     public ProfaneTutor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "");
 
+        this.color.setBlack(true);
+
         // Suspend 2—{1}{B}
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{1}{B}"), this));
 
