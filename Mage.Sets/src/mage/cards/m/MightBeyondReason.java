@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,7 +30,7 @@ public final class MightBeyondReason extends CardImpl {
                         + "<i>Delirium</i> &mdash; Put three +1/+1 counter on that creature instead if there are four or more card types among cards in your graveyard"
         ));
         getSpellAbility().addTarget(new TargetCreaturePermanent());
-        getSpellAbility().addHint(DeliriumHint.instance);
+        getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
     }
 
     private MightBeyondReason(final MightBeyondReason card) {

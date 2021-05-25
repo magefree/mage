@@ -4,7 +4,7 @@ import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,7 +42,7 @@ public final class TraverseTheUlvenwald extends CardImpl {
                 DeliriumCondition.instance,
                 "<br><i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, instead search your library for a creature or land card, "
                         + "reveal it, put it into your hand, then shuffle."));
-        this.getSpellAbility().addHint(DeliriumHint.instance);
+        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
     }
 
     private TraverseTheUlvenwald(final TraverseTheUlvenwald card) {

@@ -11,7 +11,7 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -56,7 +56,7 @@ public final class ExtricatorOfSin extends CardImpl {
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, "
                         + " transform {this}.")
-                .addHint(DeliriumHint.instance));
+                .addHint(CardTypesInGraveyardHint.YOU));
     }
 
     private ExtricatorOfSin(final ExtricatorOfSin card) {

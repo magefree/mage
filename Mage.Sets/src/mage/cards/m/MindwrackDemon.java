@@ -11,7 +11,7 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -45,7 +45,7 @@ public final class MindwrackDemon extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(4), TargetController.YOU, false),
                 new InvertCondition(DeliriumCondition.instance),
                 "<i>Delirium</i> &mdash; At the beginning of your upkeep, you lose 4 life unless there are four or more card types among cards in your graveyard.");
-        ability.addHint(DeliriumHint.instance);
+        ability.addHint(CardTypesInGraveyardHint.YOU);
         this.addAbility(ability);
     }
 

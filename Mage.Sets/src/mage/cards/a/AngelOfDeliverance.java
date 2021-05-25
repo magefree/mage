@@ -9,7 +9,7 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +20,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,7 +50,7 @@ public final class AngelOfDeliverance extends CardImpl {
                 "<i>Delirium</i> &mdash; Whenever {this} deals damage, if there are four or more card types among cards in your graveyard, exile target creature an opponent controls"
         );
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.addHint(DeliriumHint.instance);
+        ability.addHint(CardTypesInGraveyardHint.YOU);
         this.addAbility(ability);
     }
 

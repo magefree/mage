@@ -11,7 +11,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,7 +48,7 @@ public final class GrimFlayer extends CardImpl {
                 new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; {this} gets +2/+2 as long as there are four or more card types among cards in your graveyard"))
-                .addHint(DeliriumHint.instance));
+                .addHint(CardTypesInGraveyardHint.YOU));
     }
 
     private GrimFlayer(final GrimFlayer card) {

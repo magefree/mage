@@ -9,7 +9,7 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +38,7 @@ public final class ParanoidParishBlade extends CardImpl {
         effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
                 DeliriumCondition.instance, "and has first strike as long as there are four or more card types among cards in your graveyard.");
         ability.addEffect(effect);
-        ability.addHint(DeliriumHint.instance);
+        ability.addHint(CardTypesInGraveyardHint.YOU);
         this.addAbility(ability);
     }
 

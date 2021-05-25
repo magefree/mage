@@ -9,7 +9,7 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class InquisitorsOx extends CardImpl {
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield), DeliriumCondition.instance, "<i>Delirium</i> &mdash; {this} gets +1/+0");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), DeliriumCondition.instance, "and has vigilance as long as there are four or more card types among cards in your graveyard."));
-        ability.addHint(DeliriumHint.instance);
+        ability.addHint(CardTypesInGraveyardHint.YOU);
         this.addAbility(ability);
     }
 

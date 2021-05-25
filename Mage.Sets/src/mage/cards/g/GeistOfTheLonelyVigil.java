@@ -8,7 +8,7 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -40,7 +40,7 @@ public final class GeistOfTheLonelyVigil extends CardImpl {
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                 DeliriumCondition.instance);
         effect.setText("<i>Delirium</i> &mdash; {this} can attack as though it didn't have defender as long as there are four or more card types among cards in your graveyard");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(DeliriumHint.instance));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(CardTypesInGraveyardHint.YOU));
     }
 
     private GeistOfTheLonelyVigil(final GeistOfTheLonelyVigil card) {

@@ -9,7 +9,7 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +35,7 @@ public final class AutumnalGloom extends CardImpl {
         this.addAbility(new TransformAbility());
         Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), TargetController.YOU, DeliriumCondition.instance, false);
         ability.setAbilityWord(AbilityWord.DELIRIUM);
-        ability.addHint(DeliriumHint.instance);
+        ability.addHint(CardTypesInGraveyardHint.YOU);
         this.addAbility(ability);
     }
 

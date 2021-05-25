@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
-import mage.abilities.hint.Hint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -21,7 +21,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -54,7 +53,7 @@ public final class NighthawkScavenger extends CardImpl {
                 new SetPowerSourceEffect(
                         NighthawkScavengerValue.instance, Duration.EndOfGame
                 ).setText("{this}'s power is equal to 1 plus the number of card types among cards in your opponents' graveyards.")
-        ).addHint(NighthawkScavengerHint.instance));
+        ).addHint(CardTypesInGraveyardHint.OPPONENTS));
     }
 
     private NighthawkScavenger(final NighthawkScavenger card) {
@@ -94,39 +93,5 @@ enum NighthawkScavengerValue implements DynamicValue {
     @Override
     public String getMessage() {
         return "";
-    }
-}
-
-enum NighthawkScavengerHint implements Hint {
-    instance;
-
-    @Override
-    public String getText(Game game, Ability ability) {
-        List<String> types = game
-                .getOpponents(ability.getControllerId())
-                .stream()
-                .map(game::getPlayer)
-                .filter(Objects::nonNull)
-                .map(Player::getGraveyard)
-                .map(graveyard -> graveyard.getCards(game))
-                .flatMap(Collection::stream)
-                .map(MageObject::getCardType)
-                .flatMap(Collection::stream)
-                .distinct()
-                .map(CardType::toString)
-                .sorted()
-                .collect(Collectors.toList());
-        String message = "" + types.size();
-        if (types.size() > 0) {
-            message += " (";
-            message += types.stream().reduce((a, b) -> a + ", " + b).orElse("");
-            message += ')';
-        }
-        return "Card types in opponents' graveyards: " + message;
-    }
-
-    @Override
-    public NighthawkScavengerHint copy() {
-        return instance;
     }
 }
