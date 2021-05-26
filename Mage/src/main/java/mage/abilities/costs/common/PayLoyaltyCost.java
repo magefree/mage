@@ -31,6 +31,10 @@ public class PayLoyaltyCost extends CostImpl {
         this.amount = cost.amount;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Permanent planeswalker = game.getPermanent(source.getSourceId());
