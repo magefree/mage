@@ -27,6 +27,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 303;
 
+        cards.add(new SetCardInfo("Arcbound Shikari", 184, Rarity.UNCOMMON, mage.cards.a.ArcboundShikari.class));
         cards.add(new SetCardInfo("Arid Mesa", 244, Rarity.RARE, mage.cards.a.AridMesa.class));
         cards.add(new SetCardInfo("Bottle Golems", 222, Rarity.COMMON, mage.cards.b.BottleGolems.class));
         cards.add(new SetCardInfo("Brainstone", 223, Rarity.UNCOMMON, mage.cards.b.Brainstone.class));
