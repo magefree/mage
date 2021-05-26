@@ -7,6 +7,7 @@ import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,6 +32,7 @@ public final class TrompTheDomains extends CardImpl {
         effect = new BoostControlledEffect(domain, domain, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false);
         effect.setText("and get +1/+1 for each basic land type among lands you control");
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addHint(DomainHint.instance);
 
     }
 

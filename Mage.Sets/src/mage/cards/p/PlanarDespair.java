@@ -7,6 +7,7 @@ import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,8 +26,9 @@ public final class PlanarDespair extends CardImpl {
         // Domain - All creatures get -1/-1 until end of turn for each basic land type among lands you control.
         DynamicValue dv = new SignInversionDynamicValue(new DomainValue());
         Effect effect = new BoostAllEffect(dv, dv, Duration.EndOfTurn);
-        effect.setText("Domain - All creatures get -1/-1 until end of turn for each basic land type among lands you control.");
+        effect.setText("<i>Domain</i> &mdash; All creatures get -1/-1 until end of turn for each basic land type among lands you control.");
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addHint(DomainHint.instance);
     }
 
     private PlanarDespair(final PlanarDespair card) {

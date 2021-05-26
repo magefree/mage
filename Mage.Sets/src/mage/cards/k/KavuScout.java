@@ -8,6 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -33,7 +34,7 @@ public final class KavuScout extends CardImpl {
         // Domain - Kavu Scout gets +1/+0 for each basic land type among lands you control.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new DomainValue(), StaticValue.get(0), Duration.WhileOnBattlefield));
         ability.setAbilityWord(AbilityWord.DOMAIN);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(DomainHint.instance));
     }
 
     private KavuScout(final KavuScout card) {

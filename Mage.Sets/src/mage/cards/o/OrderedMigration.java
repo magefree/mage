@@ -4,6 +4,7 @@ package mage.cards.o;
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -23,6 +24,7 @@ public final class OrderedMigration extends CardImpl {
         // Domain - Create a 1/1 blue Bird creature token with flying for each basic land type among lands you control.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new OrderedMigrationBirdToken(), new DomainValue()));
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);
+        this.getSpellAbility().addHint(DomainHint.instance);
     }
 
     private OrderedMigration(final OrderedMigration card) {

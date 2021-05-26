@@ -4,6 +4,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -24,6 +25,7 @@ public final class GaeasMight extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(new DomainValue(), new DomainValue(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);
+        this.getSpellAbility().addHint(DomainHint.instance);
     }
 
     private GaeasMight(final GaeasMight card) {

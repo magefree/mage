@@ -6,6 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +27,7 @@ public final class ManaforceMace extends CardImpl {
 
         // Domain - Equipped creature gets +1/+1 for each basic land type among lands you control.
         DomainValue value = new DomainValue();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(value, value)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(value, value)).addHint(DomainHint.instance));
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
     }

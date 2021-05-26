@@ -7,6 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.DomainValue;
+import mage.abilities.hint.common.DomainHint;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +33,7 @@ public final class PrismaticGeoscope extends CardImpl {
                 + " where X is the number of basic land types among lands you control."
         );
         ability.setAbilityWord(AbilityWord.DOMAIN);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(DomainHint.instance));
     }
 
     private PrismaticGeoscope(final PrismaticGeoscope card) {

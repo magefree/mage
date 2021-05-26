@@ -7,6 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,8 +31,8 @@ public final class WayfaringGiant extends CardImpl {
         // Domain - Wayfaring Giant gets +1/+1 for each basic land type among lands you control.
         DomainValue dv = new DomainValue();
         Effect effect = new BoostSourceEffect(dv, dv, Duration.WhileOnBattlefield);
-        effect.setText("Domain - {this} gets +1/+1 for each basic land type among lands you control.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        effect.setText("<i>Domain</i> &mdash; {this} gets +1/+1 for each basic land type among lands you control.");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(DomainHint.instance));
     }
 
     private WayfaringGiant(final WayfaringGiant card) {

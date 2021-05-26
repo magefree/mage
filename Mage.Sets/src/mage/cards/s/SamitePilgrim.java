@@ -8,6 +8,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -32,7 +33,7 @@ public final class SamitePilgrim extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SamitePilgrimPreventDamageToTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.setAbilityWord(AbilityWord.DOMAIN);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(DomainHint.instance));
     }
 
     private SamitePilgrim(final SamitePilgrim card) {

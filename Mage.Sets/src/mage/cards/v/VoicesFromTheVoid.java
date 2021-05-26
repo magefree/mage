@@ -4,6 +4,7 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -22,6 +23,7 @@ public final class VoicesFromTheVoid extends CardImpl {
         // Domain - Target player discards a card for each basic land type among lands you control.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(new DomainValue()));
         this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addHint(DomainHint.instance);
     }
 
     private VoicesFromTheVoid(final VoicesFromTheVoid card) {

@@ -4,6 +4,7 @@ package mage.cards.e;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,6 +27,7 @@ public final class ExplodingBorders extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true));
         this.getSpellAbility().addEffect(new DamageTargetEffect(new DomainValue()));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
+        this.getSpellAbility().addHint(DomainHint.instance);
     }
 
     private ExplodingBorders(final ExplodingBorders card) {

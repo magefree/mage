@@ -7,6 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.hint.common.DomainHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +33,7 @@ public final class Stratadon extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Domain - Stratadon costs {1} less to cast for each basic land type among lands you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new StratadonCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new StratadonCostReductionEffect()).addHint(DomainHint.instance));
         // Trample
         this.addAbility(TrampleAbility.getInstance());
     }
