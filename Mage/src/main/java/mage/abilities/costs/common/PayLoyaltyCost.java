@@ -34,9 +34,14 @@ public class PayLoyaltyCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Permanent planeswalker = game.getPermanent(source.getSourceId());
+        if (planeswalker == null) {
+            return false;
+        }
         int loyaltyCost = amount;
         if (ability instanceof LoyaltyAbility) {
             LoyaltyAbility copiedAbility = ((LoyaltyAbility) ability).copy();
+            planeswalker.adjustCosts(copiedAbility, game);
             game.getContinuousEffects().costModification(copiedAbility, game);
             loyaltyCost = 0;
             for (Cost cost : copiedAbility.getCosts()) {
@@ -45,8 +50,7 @@ public class PayLoyaltyCost extends CostImpl {
                 }
             }
         }
-        Permanent planeswalker = game.getPermanent(source.getSourceId());
-        return planeswalker != null && planeswalker.getCounters(game).getCount(CounterType.LOYALTY) + loyaltyCost >= 0 && planeswalker.canLoyaltyBeUsed(game);
+        return planeswalker.getCounters(game).getCount(CounterType.LOYALTY) + loyaltyCost >= 0 && planeswalker.canLoyaltyBeUsed(game);
     }
 
     /**

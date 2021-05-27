@@ -52,6 +52,7 @@ public class PayVariableLoyaltyCost extends VariableCostImpl  {
         if (permanent != null) {
             if (source instanceof LoyaltyAbility) {
                 LoyaltyAbility copiedAbility = ((LoyaltyAbility) source).copy();
+                permanent.adjustCosts(copiedAbility, game);
                 game.getContinuousEffects().costModification(copiedAbility, game);
                 for (Cost cost : copiedAbility.getCosts()) {
                     if (cost instanceof PayVariableLoyaltyCost) {
