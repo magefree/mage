@@ -71,6 +71,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Sanctum Prelate", 491, Rarity.MYTHIC, mage.cards.s.SanctumPrelate.class));
         cards.add(new SetCardInfo("Scalding Tarn", 254, Rarity.RARE, mage.cards.s.ScaldingTarn.class));
         cards.add(new SetCardInfo("Seal of Removal", 269, Rarity.UNCOMMON, mage.cards.s.SealOfRemoval.class));
+        cards.add(new SetCardInfo("Silverbluff Bridge", 255, Rarity.COMMON, mage.cards.s.SilverbluffBridge.class));
         cards.add(new SetCardInfo("Skirge Familiar", 276, Rarity.UNCOMMON, mage.cards.s.SkirgeFamiliar.class));
         cards.add(new SetCardInfo("Spreading Insurrection", 142, Rarity.UNCOMMON, mage.cards.s.SpreadingInsurrection.class));
         cards.add(new SetCardInfo("Squirrel Mob", 286, Rarity.RARE, mage.cards.s.SquirrelMob.class));
