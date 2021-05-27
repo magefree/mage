@@ -382,4 +382,45 @@ public class CostModificationTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
     }
+
+    @Test
+    public void testPlaneswalkerLoyaltyAbilityCostModification() {
+        // Carth the Lion
+        // Planeswalkers’ loyalty abilities you activate cost an additional {+1} to activate.
+        addCard(Zone.BATTLEFIELD, playerA, "Carth the Lion", 1);
+
+        // Vivien Reid
+        // 5 Loyalty
+        // +1, -3, -8 Abilities
+        addCard(Zone.BATTLEFIELD, playerA, "Vivien Reid", 1);
+
+        // Huatli, Warrior Poet
+        // 3 Loyalty
+        // Testing X Ability
+        // −X: Huatli, Warrior Poet deals X damage divided as you choose among any number of target creatures. Creatures dealt damage this way can’t block this turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Huatli, Warrior Poet", 1);
+
+        // 2 toughness creatures for Huatli to kill
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Ghitu Lavarunner", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Look at the top four");
+        setChoice(playerA, "No");
+        checkPermanentCounters("Vivien Reid counter check", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Vivien Reid", CounterType.LOYALTY, 7);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-8: You get an emblem");
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-X: {this} deals X damage divided as you choose");
+        setChoice(playerA, "X=4");
+        addTargetAmount(playerA, "Grizzly Bears", 2);
+        addTargetAmount(playerA, "Ghitu Lavarunner", 2);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+        assertGraveyardCount(playerA, "Vivien Reid", 1);
+        assertGraveyardCount(playerA, "Huatli, Warrior Poet", 1);
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+        assertGraveyardCount(playerB, "Ghitu Lavarunner", 1);
+    }
 }
