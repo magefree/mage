@@ -64,6 +64,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Mogg Salvage", 282, Rarity.UNCOMMON, mage.cards.m.MoggSalvage.class));
         cards.add(new SetCardInfo("Monoskelion", 229, Rarity.UNCOMMON, mage.cards.m.Monoskelion.class));
         cards.add(new SetCardInfo("Mountain", 487, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mystic Redaction", 53, Rarity.UNCOMMON, mage.cards.m.MysticRedaction.class));
         cards.add(new SetCardInfo("Patriarch's Bidding", 275, Rarity.RARE, mage.cards.p.PatriarchsBidding.class));
         cards.add(new SetCardInfo("Phantasmal Dreadmaw", 55, Rarity.COMMON, mage.cards.p.PhantasmalDreadmaw.class));
         cards.add(new SetCardInfo("Plains", 481, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
