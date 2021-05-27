@@ -27,6 +27,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 303;
 
+        cards.add(new SetCardInfo("Abundant Harvest", 147, Rarity.COMMON, mage.cards.a.AbundantHarvest.class));
         cards.add(new SetCardInfo("Arcbound Shikari", 184, Rarity.UNCOMMON, mage.cards.a.ArcboundShikari.class));
         cards.add(new SetCardInfo("Arid Mesa", 244, Rarity.RARE, mage.cards.a.AridMesa.class));
         cards.add(new SetCardInfo("Bottle Golems", 222, Rarity.COMMON, mage.cards.b.BottleGolems.class));
@@ -43,12 +44,14 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Flametongue Yearling", 125, Rarity.UNCOMMON, mage.cards.f.FlametongueYearling.class));
         cards.add(new SetCardInfo("Forest", 489, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fractured Sanity", 44, Rarity.RARE, mage.cards.f.FracturedSanity.class));
+        cards.add(new SetCardInfo("Goblin Bombardment", 279, Rarity.COMMON, mage.cards.g.GoblinBombardment.class));
         cards.add(new SetCardInfo("Grief", 87, Rarity.MYTHIC, mage.cards.g.Grief.class));
         cards.add(new SetCardInfo("Island", 483, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kitchen Imp", 89, Rarity.COMMON, mage.cards.k.KitchenImp.class));
         cards.add(new SetCardInfo("Late to Dinner", 19, Rarity.COMMON, mage.cards.l.LateToDinner.class));
         cards.add(new SetCardInfo("Lucid Dreams", 50, Rarity.UNCOMMON, mage.cards.l.LucidDreams.class));
         cards.add(new SetCardInfo("Marsh Flats", 248, Rarity.RARE, mage.cards.m.MarshFlats.class));
+        cards.add(new SetCardInfo("Mishra's Factory", 302, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Misty Rainforest", 250, Rarity.RARE, mage.cards.m.MistyRainforest.class));
         cards.add(new SetCardInfo("Mogg Salvage", 282, Rarity.UNCOMMON, mage.cards.m.MoggSalvage.class));
         cards.add(new SetCardInfo("Mountain", 487, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -61,6 +64,8 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Rishadan Dockhand", 59, Rarity.RARE, mage.cards.r.RishadanDockhand.class));
         cards.add(new SetCardInfo("Sanctum Prelate", 491, Rarity.MYTHIC, mage.cards.s.SanctumPrelate.class));
         cards.add(new SetCardInfo("Scalding Tarn", 254, Rarity.RARE, mage.cards.s.ScaldingTarn.class));
+        cards.add(new SetCardInfo("Seal of Removal", 269, Rarity.UNCOMMON, mage.cards.s.SealOfRemoval.class));
+        cards.add(new SetCardInfo("Skirge Familiar", 276, Rarity.UNCOMMON, mage.cards.s.SkirgeFamiliar.class));
         cards.add(new SetCardInfo("Spreading Insurrection", 142, Rarity.UNCOMMON, mage.cards.s.SpreadingInsurrection.class));
         cards.add(new SetCardInfo("Squirrel Mob", 286, Rarity.RARE, mage.cards.s.SquirrelMob.class));
         cards.add(new SetCardInfo("Squirrel Sanctuary", 174, Rarity.UNCOMMON, mage.cards.s.SquirrelSanctuary.class));
@@ -77,5 +82,6 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Void Mirror", 242, Rarity.RARE, mage.cards.v.VoidMirror.class));
         cards.add(new SetCardInfo("Wonder", 271, Rarity.RARE, mage.cards.w.Wonder.class));
         cards.add(new SetCardInfo("Yusri, Fortune's Flame", 218, Rarity.RARE, mage.cards.y.YusriFortunesFlame.class));
+        cards.add(new SetCardInfo("Zuran Orb", 300, Rarity.UNCOMMON, mage.cards.z.ZuranOrb.class));
     }
 }
