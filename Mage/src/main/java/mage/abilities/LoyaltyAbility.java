@@ -47,10 +47,12 @@ public class LoyaltyAbility extends ActivatedAbilityImpl {
     public void increaseLoyaltyCost(int amount) {
         for (Cost cost : costs) {
             if (cost instanceof PayLoyaltyCost) {
-                ((PayLoyaltyCost) cost).amount += amount;
+                PayLoyaltyCost loyaltyCost = (PayLoyaltyCost) cost;
+                loyaltyCost.setAmount(loyaltyCost.getAmount() + amount);
             }
             else if (cost instanceof PayVariableLoyaltyCost) {
-                ((PayVariableLoyaltyCost) cost).costModification += amount;
+                PayVariableLoyaltyCost varCost = (PayVariableLoyaltyCost) cost;
+                varCost.setCostModification(varCost.getCostModification() + amount);
             }
         }
     }

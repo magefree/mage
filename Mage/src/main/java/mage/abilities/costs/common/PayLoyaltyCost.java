@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public class PayLoyaltyCost extends CostImpl {
 
-    public int amount;
+    private int amount;
 
     public PayLoyaltyCost(int amount) {
         this.amount = amount;
@@ -41,7 +41,7 @@ public class PayLoyaltyCost extends CostImpl {
             loyaltyCost = 0;
             for (Cost cost : copiedAbility.getCosts()) {
                 if (cost instanceof PayLoyaltyCost) {
-                    loyaltyCost += ((PayLoyaltyCost) cost).amount;
+                    loyaltyCost += ((PayLoyaltyCost) cost).getAmount();
                 }
             }
         }
@@ -77,4 +77,11 @@ public class PayLoyaltyCost extends CostImpl {
         return new PayLoyaltyCost(this);
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 }
