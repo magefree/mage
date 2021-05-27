@@ -6,9 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.common.PayLoyaltyCost;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.constants.*;
@@ -119,16 +116,11 @@ class CarthTheLionLoyaltyCostEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Costs<Cost> costs = abilityToModify.getCosts();
-        boolean costsModified = false;
-        for (int i = 0; i < costs.size(); i++) {
-            if (costs.get(i) instanceof PayLoyaltyCost) {
-                PayLoyaltyCost loyaltyCost = (PayLoyaltyCost) costs.get(i);
-                costs.set(i, new PayLoyaltyCost(loyaltyCost.getAmount() + 1));
-                costsModified = true;
-            }
+        if (abilityToModify instanceof LoyaltyAbility) {
+            ((LoyaltyAbility) abilityToModify).increaseLoyaltyCost(1);
+            return true;
         }
-        return costsModified;
+        return false;
     }
 
     @Override

@@ -2,6 +2,7 @@
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
+import mage.abilities.LoyaltyAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.counters.CounterType;
@@ -16,7 +17,7 @@ import java.util.UUID;
  */
 public class PayLoyaltyCost extends CostImpl {
 
-    private final int amount;
+    public int amount;
 
     public PayLoyaltyCost(int amount) {
         this.amount = amount;
@@ -31,14 +32,21 @@ public class PayLoyaltyCost extends CostImpl {
         this.amount = cost.amount;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        int loyaltyCost = amount;
+        if (ability instanceof LoyaltyAbility) {
+            LoyaltyAbility copiedAbility = ((LoyaltyAbility) ability).copy();
+            game.getContinuousEffects().costModification(copiedAbility, game);
+            loyaltyCost = 0;
+            for (Cost cost : copiedAbility.getCosts()) {
+                if (cost instanceof PayLoyaltyCost) {
+                    loyaltyCost += ((PayLoyaltyCost) cost).amount;
+                }
+            }
+        }
         Permanent planeswalker = game.getPermanent(source.getSourceId());
-        return planeswalker != null && planeswalker.getCounters(game).getCount(CounterType.LOYALTY) + amount >= 0 && planeswalker.canLoyaltyBeUsed(game);
+        return planeswalker != null && planeswalker.getCounters(game).getCount(CounterType.LOYALTY) + loyaltyCost >= 0 && planeswalker.canLoyaltyBeUsed(game);
     }
 
     /**

@@ -4,6 +4,7 @@ package mage.abilities.costs.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.LoyaltyAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
 import mage.counters.CounterType;
@@ -15,6 +16,8 @@ import mage.game.permanent.Permanent;
  * @author BetaSteward_at_googlemail.com
  */
 public class PayVariableLoyaltyCost extends VariableCostImpl  {
+
+    public int costModification = 0;
 
     public PayVariableLoyaltyCost() {
         super("loyality counters to remove");
@@ -46,9 +49,17 @@ public class PayVariableLoyaltyCost extends VariableCostImpl  {
         int maxValue = 0;
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            maxValue = permanent.getCounters(game).getCount(CounterType.LOYALTY.getName());
+            if (source instanceof LoyaltyAbility) {
+                LoyaltyAbility copiedAbility = ((LoyaltyAbility) source).copy();
+                game.getContinuousEffects().costModification(copiedAbility, game);
+                for (Cost cost : copiedAbility.getCosts()) {
+                    if (cost instanceof PayVariableLoyaltyCost) {
+                        maxValue += ((PayVariableLoyaltyCost) cost).costModification;
+                    }
+                }
+            }
+            maxValue += permanent.getCounters(game).getCount(CounterType.LOYALTY.getName());
         }
         return maxValue;
     }
-
 }

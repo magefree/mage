@@ -1,6 +1,7 @@
 
 package mage.abilities;
 
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLoyaltyCost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.Effect;
@@ -43,4 +44,14 @@ public class LoyaltyAbility extends ActivatedAbilityImpl {
         return new LoyaltyAbility(this);
     }
 
+    public void increaseLoyaltyCost(int amount) {
+        for (Cost cost : costs) {
+            if (cost instanceof PayLoyaltyCost) {
+                ((PayLoyaltyCost) cost).amount += amount;
+            }
+            else if (cost instanceof PayVariableLoyaltyCost) {
+                ((PayVariableLoyaltyCost) cost).costModification += amount;
+            }
+        }
+    }
 }
