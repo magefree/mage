@@ -190,6 +190,7 @@
         <deckType name="Variant Magic - Freeform Commander" jar="mage-deck-constructed.jar" className="mage.deck.FreeformCommander"/>
         <deckType name="Variant Magic - Freeform Unlimited Commander" jar="mage-deck-constructed.jar" className="mage.deck.FreeformUnlimitedCommander"/>
         <deckType name="Variant Magic - Brawl" jar="mage-deck-constructed.jar" className="mage.deck.Brawl"/>
+        <deckType name="Variant Magic - Freeform Brawl" jar="mage-deck-constructed.jar" className="mage.deck.FreeformBrawl"/>
         <deckType name="Variant Magic - Oathbreaker" jar="mage-deck-constructed.jar" className="mage.deck.Oathbreaker"/>
         <deckType name="Block Constructed - Amonkhet" jar="mage-deck-constructed.jar" className="mage.deck.AmonkhetBlock"/>
         <deckType name="Block Constructed - Battle for Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.BattleForZendikarBlock"/>
