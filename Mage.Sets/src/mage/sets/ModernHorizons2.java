@@ -68,6 +68,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Ignoble Hierarch", 166, Rarity.RARE, mage.cards.i.IgnobleHierarch.class));
         cards.add(new SetCardInfo("Imperial Recruiter", 281, Rarity.MYTHIC, mage.cards.i.ImperialRecruiter.class));
         cards.add(new SetCardInfo("Island", 483, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Junk Winder", 48, Rarity.UNCOMMON, mage.cards.j.JunkWinder.class));
         cards.add(new SetCardInfo("Kitchen Imp", 89, Rarity.COMMON, mage.cards.k.KitchenImp.class));
         cards.add(new SetCardInfo("Landscaper Colos", 18, Rarity.COMMON, mage.cards.l.LandscaperColos.class));
         cards.add(new SetCardInfo("Late to Dinner", 19, Rarity.COMMON, mage.cards.l.LateToDinner.class));
