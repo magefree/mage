@@ -110,6 +110,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Skophos Reaver", 140, Rarity.COMMON, mage.cards.s.SkophosReaver.class));
         cards.add(new SetCardInfo("Slagwoods Bridge", 256, Rarity.COMMON, mage.cards.s.SlagwoodsBridge.class));
         cards.add(new SetCardInfo("Solitary Confinement", 265, Rarity.RARE, mage.cards.s.SolitaryConfinement.class));
+        cards.add(new SetCardInfo("Solitude", 32, Rarity.MYTHIC, mage.cards.s.Solitude.class));
         cards.add(new SetCardInfo("Soul Snare", 266, Rarity.UNCOMMON, mage.cards.s.SoulSnare.class));
         cards.add(new SetCardInfo("Spreading Insurrection", 142, Rarity.UNCOMMON, mage.cards.s.SpreadingInsurrection.class));
         cards.add(new SetCardInfo("Squirrel Mob", 286, Rarity.RARE, mage.cards.s.SquirrelMob.class));
