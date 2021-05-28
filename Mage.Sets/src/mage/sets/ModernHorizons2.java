@@ -133,6 +133,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Upheaval", 270, Rarity.RARE, mage.cards.u.Upheaval.class));
         cards.add(new SetCardInfo("Urban Daggertooth", 181, Rarity.COMMON, mage.cards.u.UrbanDaggertooth.class));
         cards.add(new SetCardInfo("Urza's Saga", 259, Rarity.RARE, mage.cards.u.UrzasSaga.class));
+        cards.add(new SetCardInfo("Vectis Gloves", 241, Rarity.UNCOMMON, mage.cards.v.VectisGloves.class));
         cards.add(new SetCardInfo("Vedalken Infiltrator", 73, Rarity.UNCOMMON, mage.cards.v.VedalkenInfiltrator.class));
         cards.add(new SetCardInfo("Verdant Catacombs", 260, Rarity.RARE, mage.cards.v.VerdantCatacombs.class));
         cards.add(new SetCardInfo("Void Mirror", 242, Rarity.RARE, mage.cards.v.VoidMirror.class));
