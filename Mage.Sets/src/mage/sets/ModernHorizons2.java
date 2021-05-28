@@ -124,6 +124,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Verdant Catacombs", 260, Rarity.RARE, mage.cards.v.VerdantCatacombs.class));
         cards.add(new SetCardInfo("Void Mirror", 242, Rarity.RARE, mage.cards.v.VoidMirror.class));
         cards.add(new SetCardInfo("Wonder", 271, Rarity.RARE, mage.cards.w.Wonder.class));
+        cards.add(new SetCardInfo("World-Weary", 109, Rarity.COMMON, mage.cards.w.WorldWeary.class));
         cards.add(new SetCardInfo("Yusri, Fortune's Flame", 218, Rarity.RARE, mage.cards.y.YusriFortunesFlame.class));
         cards.add(new SetCardInfo("Zuran Orb", 300, Rarity.UNCOMMON, mage.cards.z.ZuranOrb.class));
     }
