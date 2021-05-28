@@ -21,7 +21,7 @@ public class LoseAllAbilitiesAllEffect extends ContinuousEffectImpl {
     private final FilterPermanent filter;
 
     public LoseAllAbilitiesAllEffect(FilterPermanent filter, Duration duration) {
-        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
         this.filter = filter;
     }
 
