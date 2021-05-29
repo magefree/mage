@@ -29,6 +29,7 @@ public final class ModernHorizons2 extends ExpansionSet {
 
         cards.add(new SetCardInfo("Abiding Grace", 1, Rarity.UNCOMMON, mage.cards.a.AbidingGrace.class));
         cards.add(new SetCardInfo("Abundant Harvest", 147, Rarity.COMMON, mage.cards.a.AbundantHarvest.class));
+        cards.add(new SetCardInfo("Altar of the Goyf", 220, Rarity.UNCOMMON, mage.cards.a.AltarOfTheGoyf.class));
         cards.add(new SetCardInfo("Aeromoeba", 37, Rarity.COMMON, mage.cards.a.Aeromoeba.class));
         cards.add(new SetCardInfo("Arcbound Mouser", 3, Rarity.COMMON, mage.cards.a.ArcboundMouser.class));
         cards.add(new SetCardInfo("Arcbound Shikari", 184, Rarity.UNCOMMON, mage.cards.a.ArcboundShikari.class));
@@ -37,6 +38,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Arid Mesa", 244, Rarity.RARE, mage.cards.a.AridMesa.class));
         cards.add(new SetCardInfo("Asmoranomardicadaistinaculdacar", 186, Rarity.RARE, mage.cards.a.Asmoranomardicadaistinaculdacar.class));
         cards.add(new SetCardInfo("Battle Plan", 114, Rarity.COMMON, mage.cards.b.BattlePlan.class));
+        cards.add(new SetCardInfo("Blazing Rootwalla", 115, Rarity.UNCOMMON, mage.cards.b.BlazingRootwalla.class));
         cards.add(new SetCardInfo("Bone Shards", 76, Rarity.COMMON, mage.cards.b.BoneShards.class));
         cards.add(new SetCardInfo("Bone Shredder", 272, Rarity.UNCOMMON, mage.cards.b.BoneShredder.class));
         cards.add(new SetCardInfo("Bottle Golems", 222, Rarity.COMMON, mage.cards.b.BottleGolems.class));
@@ -48,9 +50,11 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Calibrated Blast", 118, Rarity.RARE, mage.cards.c.CalibratedBlast.class));
         cards.add(new SetCardInfo("Chance Encounter", 277, Rarity.RARE, mage.cards.c.ChanceEncounter.class));
         cards.add(new SetCardInfo("Chatterstorm", 152, Rarity.COMMON, mage.cards.c.Chatterstorm.class));
+        cards.add(new SetCardInfo("Clattering Augur", 79, Rarity.UNCOMMON, mage.cards.c.ClatteringAugur.class));
         cards.add(new SetCardInfo("Constable of the Realm", 10, Rarity.UNCOMMON, mage.cards.c.ConstableOfTheRealm.class));
         cards.add(new SetCardInfo("Counterspell", 267, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Dakkon, Shadow Slayer", 192, Rarity.MYTHIC, mage.cards.d.DakkonShadowSlayer.class));
+        cards.add(new SetCardInfo("Damn", 80, Rarity.RARE, mage.cards.d.Damn.class));
         cards.add(new SetCardInfo("Darkmoss Bridge", 245, Rarity.COMMON, mage.cards.d.DarkmossBridge.class));
         cards.add(new SetCardInfo("Diamond Lion", 225, Rarity.RARE, mage.cards.d.DiamondLion.class));
         cards.add(new SetCardInfo("Discerning Taste", 82, Rarity.COMMON, mage.cards.d.DiscerningTaste.class));
