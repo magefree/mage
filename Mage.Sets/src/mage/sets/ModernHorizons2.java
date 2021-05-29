@@ -37,7 +37,9 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Asmoranomardicadaistinaculdacar", 186, Rarity.RARE, mage.cards.a.Asmoranomardicadaistinaculdacar.class));
         cards.add(new SetCardInfo("Battle Plan", 114, Rarity.COMMON, mage.cards.b.BattlePlan.class));
         cards.add(new SetCardInfo("Bone Shards", 76, Rarity.COMMON, mage.cards.b.BoneShards.class));
+        cards.add(new SetCardInfo("Bone Shredder", 272, Rarity.UNCOMMON, mage.cards.b.BoneShredder.class));
         cards.add(new SetCardInfo("Bottle Golems", 222, Rarity.COMMON, mage.cards.b.BottleGolems.class));
+        cards.add(new SetCardInfo("Braids, Cabal Minion", 273, Rarity.RARE, mage.cards.b.BraidsCabalMinion.class));
         cards.add(new SetCardInfo("Brainstone", 223, Rarity.UNCOMMON, mage.cards.b.Brainstone.class));
         cards.add(new SetCardInfo("Break Ties", 8, Rarity.COMMON, mage.cards.b.BreakTies.class));
         cards.add(new SetCardInfo("Breya's Apprentice", 117, Rarity.RARE, mage.cards.b.BreyasApprentice.class));
@@ -55,6 +57,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Drossforge Bridge", 246, Rarity.COMMON, mage.cards.d.DrossforgeBridge.class));
         cards.add(new SetCardInfo("Enchantress's Presence", 283, Rarity.RARE, mage.cards.e.EnchantresssPresence.class));
         cards.add(new SetCardInfo("Extruder", 296, Rarity.UNCOMMON, mage.cards.e.Extruder.class));
+        cards.add(new SetCardInfo("Fire // Ice", 290, Rarity.RARE, mage.cards.f.FireIce.class));
         cards.add(new SetCardInfo("Flame Rift", 278, Rarity.UNCOMMON, mage.cards.f.FlameRift.class));
         cards.add(new SetCardInfo("Flametongue Yearling", 125, Rarity.UNCOMMON, mage.cards.f.FlametongueYearling.class));
         cards.add(new SetCardInfo("Flay Essence", 85, Rarity.UNCOMMON, mage.cards.f.FlayEssence.class));
@@ -62,6 +65,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Fractured Sanity", 44, Rarity.RARE, mage.cards.f.FracturedSanity.class));
         cards.add(new SetCardInfo("Goblin Bombardment", 279, Rarity.RARE, mage.cards.g.GoblinBombardment.class));
         cards.add(new SetCardInfo("Goldmire Bridge", 247, Rarity.COMMON, mage.cards.g.GoldmireBridge.class));
+        cards.add(new SetCardInfo("Gorilla Shaman", 280, Rarity.UNCOMMON, mage.cards.g.GorillaShaman.class));
         cards.add(new SetCardInfo("Greed", 274, Rarity.UNCOMMON, mage.cards.g.Greed.class));
         cards.add(new SetCardInfo("Grief", 87, Rarity.MYTHIC, mage.cards.g.Grief.class));
         cards.add(new SetCardInfo("Herd Baloth", 165, Rarity.UNCOMMON, mage.cards.h.HerdBaloth.class));
@@ -69,6 +73,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Imperial Recruiter", 281, Rarity.MYTHIC, mage.cards.i.ImperialRecruiter.class));
         cards.add(new SetCardInfo("Island", 483, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Junk Winder", 48, Rarity.UNCOMMON, mage.cards.j.JunkWinder.class));
+        cards.add(new SetCardInfo("Karmic Guide", 263, Rarity.RARE, mage.cards.k.KarmicGuide.class));
         cards.add(new SetCardInfo("Kitchen Imp", 89, Rarity.COMMON, mage.cards.k.KitchenImp.class));
         cards.add(new SetCardInfo("Landscaper Colos", 18, Rarity.COMMON, mage.cards.l.LandscaperColos.class));
         cards.add(new SetCardInfo("Late to Dinner", 19, Rarity.COMMON, mage.cards.l.LateToDinner.class));
@@ -76,6 +81,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Lucid Dreams", 50, Rarity.UNCOMMON, mage.cards.l.LucidDreams.class));
         cards.add(new SetCardInfo("Marsh Flats", 248, Rarity.RARE, mage.cards.m.MarshFlats.class));
         cards.add(new SetCardInfo("Mental Journey", 51, Rarity.COMMON, mage.cards.m.MentalJourney.class));
+        cards.add(new SetCardInfo("Millikin", 297, Rarity.UNCOMMON, mage.cards.m.Millikin.class));
         cards.add(new SetCardInfo("Mirari's Wake", 291, Rarity.MYTHIC, mage.cards.m.MirarisWake.class));
         cards.add(new SetCardInfo("Mishra's Factory", 302, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Mistvault Bridge", 249, Rarity.COMMON, mage.cards.m.MistvaultBridge.class));
@@ -138,6 +144,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Vectis Gloves", 241, Rarity.UNCOMMON, mage.cards.v.VectisGloves.class));
         cards.add(new SetCardInfo("Vedalken Infiltrator", 73, Rarity.UNCOMMON, mage.cards.v.VedalkenInfiltrator.class));
         cards.add(new SetCardInfo("Verdant Catacombs", 260, Rarity.RARE, mage.cards.v.VerdantCatacombs.class));
+        cards.add(new SetCardInfo("Vindicate", 294, Rarity.RARE, mage.cards.v.Vindicate.class));
         cards.add(new SetCardInfo("Void Mirror", 242, Rarity.RARE, mage.cards.v.VoidMirror.class));
         cards.add(new SetCardInfo("Wonder", 271, Rarity.RARE, mage.cards.w.Wonder.class));
         cards.add(new SetCardInfo("World-Weary", 109, Rarity.COMMON, mage.cards.w.WorldWeary.class));
