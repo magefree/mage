@@ -89,6 +89,7 @@ public class VerifyCardDataTest {
         skipListCreate(SKIP_LIST_PT);
         skipListAddName(SKIP_LIST_PT, "UST", "Garbage Elemental");
         skipListAddName(SKIP_LIST_PT, "UST", "Infinity Elemental");
+        skipListAddName(SKIP_LIST_PT, "MH2", "Archfiend of Sorrows"); // temporary
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
