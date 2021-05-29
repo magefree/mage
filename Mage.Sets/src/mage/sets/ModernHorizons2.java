@@ -27,6 +27,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 303;
 
+        cards.add(new SetCardInfo("Abiding Grace", 1, Rarity.UNCOMMON, mage.cards.a.AbidingGrace.class));
         cards.add(new SetCardInfo("Abundant Harvest", 147, Rarity.COMMON, mage.cards.a.AbundantHarvest.class));
         cards.add(new SetCardInfo("Aeromoeba", 37, Rarity.COMMON, mage.cards.a.Aeromoeba.class));
         cards.add(new SetCardInfo("Arcbound Mouser", 3, Rarity.COMMON, mage.cards.a.ArcboundMouser.class));
