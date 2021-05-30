@@ -46,10 +46,12 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Breya's Apprentice", 117, Rarity.RARE, mage.cards.b.BreyasApprentice.class));
         cards.add(new SetCardInfo("Cabal Coffers", 301, Rarity.MYTHIC, mage.cards.c.CabalCoffers.class));
         cards.add(new SetCardInfo("Calibrated Blast", 118, Rarity.RARE, mage.cards.c.CalibratedBlast.class));
+        cards.add(new SetCardInfo("Chainer, Nightmare Adept", 289, Rarity.RARE, mage.cards.c.ChainerNightmareAdept.class));
         cards.add(new SetCardInfo("Chance Encounter", 277, Rarity.RARE, mage.cards.c.ChanceEncounter.class));
         cards.add(new SetCardInfo("Chatterstorm", 152, Rarity.COMMON, mage.cards.c.Chatterstorm.class));
         cards.add(new SetCardInfo("Constable of the Realm", 10, Rarity.UNCOMMON, mage.cards.c.ConstableOfTheRealm.class));
         cards.add(new SetCardInfo("Counterspell", 267, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
+        cards.add(new SetCardInfo("Cursed Totem", 295, Rarity.RARE, mage.cards.c.CursedTotem.class));
         cards.add(new SetCardInfo("Dakkon, Shadow Slayer", 192, Rarity.MYTHIC, mage.cards.d.DakkonShadowSlayer.class));
         cards.add(new SetCardInfo("Darkmoss Bridge", 245, Rarity.COMMON, mage.cards.d.DarkmossBridge.class));
         cards.add(new SetCardInfo("Diamond Lion", 225, Rarity.RARE, mage.cards.d.DiamondLion.class));
@@ -67,8 +69,8 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Flay Essence", 85, Rarity.UNCOMMON, mage.cards.f.FlayEssence.class));
         cards.add(new SetCardInfo("Forest", 489, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fractured Sanity", 44, Rarity.RARE, mage.cards.f.FracturedSanity.class));
-        cards.add(new SetCardInfo("Glorious Enforcer", 14, Rarity.UNCOMMON, mage.cards.g.GloriousEnforcer.class));
         cards.add(new SetCardInfo("Gaea's Will", 162, Rarity.RARE, mage.cards.g.GaeasWill.class));
+        cards.add(new SetCardInfo("Glorious Enforcer", 14, Rarity.UNCOMMON, mage.cards.g.GloriousEnforcer.class));
         cards.add(new SetCardInfo("Goblin Bombardment", 279, Rarity.RARE, mage.cards.g.GoblinBombardment.class));
         cards.add(new SetCardInfo("Goldmire Bridge", 247, Rarity.COMMON, mage.cards.g.GoldmireBridge.class));
         cards.add(new SetCardInfo("Gorilla Shaman", 280, Rarity.UNCOMMON, mage.cards.g.GorillaShaman.class));
@@ -117,8 +119,10 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Scalding Tarn", 254, Rarity.RARE, mage.cards.s.ScaldingTarn.class));
         cards.add(new SetCardInfo("Scurry Oak", 172, Rarity.UNCOMMON, mage.cards.s.ScurryOak.class));
         cards.add(new SetCardInfo("Scuttletide", 61, Rarity.UNCOMMON, mage.cards.s.Scuttletide.class));
+        cards.add(new SetCardInfo("Sea Drake", 268, Rarity.RARE, mage.cards.s.SeaDrake.class));
         cards.add(new SetCardInfo("Seal of Cleansing", 264, Rarity.UNCOMMON, mage.cards.s.SealOfCleansing.class));
         cards.add(new SetCardInfo("Seal of Removal", 269, Rarity.UNCOMMON, mage.cards.s.SealOfRemoval.class));
+        cards.add(new SetCardInfo("Shardless Agent", 321, Rarity.RARE, mage.cards.s.ShardlessAgent.class));
         cards.add(new SetCardInfo("Silverbluff Bridge", 255, Rarity.COMMON, mage.cards.s.SilverbluffBridge.class));
         cards.add(new SetCardInfo("Skirge Familiar", 276, Rarity.UNCOMMON, mage.cards.s.SkirgeFamiliar.class));
         cards.add(new SetCardInfo("Skophos Reaver", 140, Rarity.COMMON, mage.cards.s.SkophosReaver.class));
@@ -143,6 +147,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Thrasta, Tempest's Roar", 178, Rarity.MYTHIC, mage.cards.t.ThrastaTempestsRoar.class));
         cards.add(new SetCardInfo("Timeless Dragon", 35, Rarity.RARE, mage.cards.t.TimelessDragon.class));
         cards.add(new SetCardInfo("Timeless Witness", 179, Rarity.UNCOMMON, mage.cards.t.TimelessWitness.class));
+        cards.add(new SetCardInfo("Titania, Protector of Argoth", 287, Rarity.MYTHIC, mage.cards.t.TitaniaProtectorOfArgoth.class));
         cards.add(new SetCardInfo("Tormod's Cryptkeeper", 239, Rarity.COMMON, mage.cards.t.TormodsCryptkeeper.class));
         cards.add(new SetCardInfo("Tourach's Canticle", 103, Rarity.COMMON, mage.cards.t.TourachsCanticle.class));
         cards.add(new SetCardInfo("Underworld Hermit", 105, Rarity.UNCOMMON, mage.cards.u.UnderworldHermit.class));
