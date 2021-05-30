@@ -107,7 +107,12 @@ class EsixFractalBloomEffect extends ReplacementEffectImpl {
         if (permanent == null) {
             return false;
         }
-        ((CreateTokenEvent) event).setToken(copyPermanentToToken(permanent, game, source));
+        if (event instanceof CreateTokenEvent) {
+            CreateTokenEvent tokenEvent = (CreateTokenEvent) event;
+            int amount = tokenEvent.getAmount();
+            tokenEvent.getTokens().clear();
+            tokenEvent.getTokens().put(copyPermanentToToken(permanent, game, source), amount);
+        }
         return false;
     }
 

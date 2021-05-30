@@ -13,6 +13,7 @@ import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -77,9 +78,15 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
                 }
             }
         }
-        if (event.getType() == GameEvent.EventType.CREATE_TOKEN && ((CreateTokenEvent) event).getToken().isCreature()) {
+        if (event.getType() == GameEvent.EventType.CREATE_TOKEN) {
             Player controller = game.getPlayer(source.getControllerId());
-            return controller != null && controller.hasOpponent(event.getPlayerId(), game);
+            if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
+                for (Token token : ((CreateTokenEvent) event).getTokens().keySet()) {
+                    if (token.isCreature()) {
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
