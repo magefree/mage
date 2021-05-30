@@ -150,6 +150,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Thrasta, Tempest's Roar", 178, Rarity.MYTHIC, mage.cards.t.ThrastaTempestsRoar.class));
         cards.add(new SetCardInfo("Timeless Dragon", 35, Rarity.RARE, mage.cards.t.TimelessDragon.class));
         cards.add(new SetCardInfo("Timeless Witness", 179, Rarity.UNCOMMON, mage.cards.t.TimelessWitness.class));
+        cards.add(new SetCardInfo("Tireless Provisioner", 180, Rarity.UNCOMMON, mage.cards.t.TirelessProvisioner.class));
         cards.add(new SetCardInfo("Titania, Protector of Argoth", 287, Rarity.MYTHIC, mage.cards.t.TitaniaProtectorOfArgoth.class));
         cards.add(new SetCardInfo("Tormod's Cryptkeeper", 239, Rarity.COMMON, mage.cards.t.TormodsCryptkeeper.class));
         cards.add(new SetCardInfo("Tourach's Canticle", 103, Rarity.COMMON, mage.cards.t.TourachsCanticle.class));
