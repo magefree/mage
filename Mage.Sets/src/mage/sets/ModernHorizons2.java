@@ -87,6 +87,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Gorilla Shaman", 280, Rarity.UNCOMMON, mage.cards.g.GorillaShaman.class));
         cards.add(new SetCardInfo("Greed", 274, Rarity.UNCOMMON, mage.cards.g.Greed.class));
         cards.add(new SetCardInfo("Grief", 87, Rarity.MYTHIC, mage.cards.g.Grief.class));
+        cards.add(new SetCardInfo("Harmonic Prodigy", 132, Rarity.RARE, mage.cards.h.HarmonicProdigy.class));
         cards.add(new SetCardInfo("Herd Baloth", 165, Rarity.UNCOMMON, mage.cards.h.HerdBaloth.class));
         cards.add(new SetCardInfo("Ignoble Hierarch", 166, Rarity.RARE, mage.cards.i.IgnobleHierarch.class));
         cards.add(new SetCardInfo("Imperial Recruiter", 281, Rarity.MYTHIC, mage.cards.i.ImperialRecruiter.class));
