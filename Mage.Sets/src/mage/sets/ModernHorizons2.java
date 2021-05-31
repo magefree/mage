@@ -138,6 +138,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Seal of Cleansing", 264, Rarity.UNCOMMON, mage.cards.s.SealOfCleansing.class));
         cards.add(new SetCardInfo("Seal of Removal", 269, Rarity.UNCOMMON, mage.cards.s.SealOfRemoval.class));
         cards.add(new SetCardInfo("Shardless Agent", 321, Rarity.RARE, mage.cards.s.ShardlessAgent.class));
+        cards.add(new SetCardInfo("Shattered Ego", 62, Rarity.COMMON, mage.cards.s.ShatteredEgo.class));
         cards.add(new SetCardInfo("Silverbluff Bridge", 255, Rarity.COMMON, mage.cards.s.SilverbluffBridge.class));
         cards.add(new SetCardInfo("Skirge Familiar", 276, Rarity.UNCOMMON, mage.cards.s.SkirgeFamiliar.class));
         cards.add(new SetCardInfo("Skophos Reaver", 140, Rarity.COMMON, mage.cards.s.SkophosReaver.class));
