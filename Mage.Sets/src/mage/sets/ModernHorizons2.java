@@ -120,6 +120,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Priest of Fell Rites", 208, Rarity.RARE, mage.cards.p.PriestOfFellRites.class));
         cards.add(new SetCardInfo("Prismatic Ending", 25, Rarity.UNCOMMON, mage.cards.p.PrismaticEnding.class));
         cards.add(new SetCardInfo("Profane Tutor", 97, Rarity.RARE, mage.cards.p.ProfaneTutor.class));
+        cards.add(new SetCardInfo("Prophetic Titan", 209, Rarity.UNCOMMON, mage.cards.p.PropheticTitan.class));
         cards.add(new SetCardInfo("Quirion Ranger", 285, Rarity.UNCOMMON, mage.cards.q.QuirionRanger.class));
         cards.add(new SetCardInfo("Ravenous Squirrel", 211, Rarity.UNCOMMON, mage.cards.r.RavenousSquirrel.class));
         cards.add(new SetCardInfo("Razortide Bridge", 252, Rarity.COMMON, mage.cards.r.RazortideBridge.class));
