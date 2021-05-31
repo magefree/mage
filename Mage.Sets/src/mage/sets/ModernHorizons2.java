@@ -154,6 +154,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorph", 177, Rarity.UNCOMMON, mage.cards.t.Terramorph.class));
         cards.add(new SetCardInfo("The Underworld Cookbook", 240, Rarity.UNCOMMON, mage.cards.t.TheUnderworldCookbook.class));
         cards.add(new SetCardInfo("Thornglint Bridge", 258, Rarity.COMMON, mage.cards.t.ThornglintBridge.class));
+        cards.add(new SetCardInfo("Thought Monitor", 71, Rarity.RARE, mage.cards.t.ThoughtMonitor.class));
         cards.add(new SetCardInfo("Thraben Watcher", 34, Rarity.UNCOMMON, mage.cards.t.ThrabenWatcher.class));
         cards.add(new SetCardInfo("Thrasta, Tempest's Roar", 178, Rarity.MYTHIC, mage.cards.t.ThrastaTempestsRoar.class));
         cards.add(new SetCardInfo("Timeless Dragon", 35, Rarity.RARE, mage.cards.t.TimelessDragon.class));
