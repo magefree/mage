@@ -78,6 +78,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 489, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fractured Sanity", 44, Rarity.RARE, mage.cards.f.FracturedSanity.class));
         cards.add(new SetCardInfo("Gaea's Will", 162, Rarity.RARE, mage.cards.g.GaeasWill.class));
+        cards.add(new SetCardInfo("Ghost-Lit Drifter", 45, Rarity.UNCOMMON, mage.cards.g.GhostLitDrifter.class));
         cards.add(new SetCardInfo("Glinting Creeper", 164, Rarity.UNCOMMON, mage.cards.g.GlintingCreeper.class));
         cards.add(new SetCardInfo("Glorious Enforcer", 14, Rarity.UNCOMMON, mage.cards.g.GloriousEnforcer.class));
         cards.add(new SetCardInfo("Goblin Bombardment", 279, Rarity.RARE, mage.cards.g.GoblinBombardment.class));
