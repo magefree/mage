@@ -12,6 +12,7 @@ import mage.game.Game;
  */
 public enum CounterType {
 
+    ACORN("acorn"),
     AEGIS("aegis"),
     AGE("age"),
     AIM("aim"),
