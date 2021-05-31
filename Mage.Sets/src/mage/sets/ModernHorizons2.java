@@ -66,6 +66,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Enchantress's Presence", 283, Rarity.RARE, mage.cards.e.EnchantresssPresence.class));
         cards.add(new SetCardInfo("Endurance", 157, Rarity.MYTHIC, mage.cards.e.Endurance.class));
         cards.add(new SetCardInfo("Extruder", 296, Rarity.UNCOMMON, mage.cards.e.Extruder.class));
+        cards.add(new SetCardInfo("Fast // Furious", 123, Rarity.UNCOMMON, mage.cards.f.FastFurious.class));
         cards.add(new SetCardInfo("Feast of Sanity", 84, Rarity.UNCOMMON, mage.cards.f.FeastOfSanity.class));
         cards.add(new SetCardInfo("Filigree Attendant", 41, Rarity.UNCOMMON, mage.cards.f.FiligreeAttendant.class));
         cards.add(new SetCardInfo("Fire // Ice", 290, Rarity.RARE, mage.cards.f.FireIce.class));
