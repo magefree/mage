@@ -14,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -25,6 +26,10 @@ import mage.game.permanent.PermanentToken;
 public final class AeveProgenitorOoze extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.OOZE);
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
 
     public AeveProgenitorOoze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{G}");
@@ -40,10 +45,10 @@ public final class AeveProgenitorOoze extends CardImpl {
         // Aeve, Progenitor Ooze isn't legendary as long as it's a token.
         this.addAbility(new SimpleStaticAbility(new AeveProgenitorOozeNonLegendaryEffect()));
 
-        // Aeve enters the battlefield with a +1/+1 counter on it for each Ooze you control.
+        // Aeve enters the battlefield with a +1/+1 counter on it for each other Ooze you control.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance(), new PermanentsOnBattlefieldCount(filter), true
-        ), "with a +1/+1 counter on it for each Ooze you control"
+        ), "with a +1/+1 counter on it for each other Ooze you control"
         ));
     }
 
@@ -76,10 +81,6 @@ class AeveProgenitorOozeNonLegendaryEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            this.discard();
-            return false;
-        }
         if (permanent instanceof PermanentToken) {
             permanent.getSuperType().remove(SuperType.LEGENDARY);
             return true;
