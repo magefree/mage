@@ -69,6 +69,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Drossforge Bridge", 246, Rarity.COMMON, mage.cards.d.DrossforgeBridge.class));
         cards.add(new SetCardInfo("Enchantress's Presence", 283, Rarity.RARE, mage.cards.e.EnchantresssPresence.class));
         cards.add(new SetCardInfo("Endurance", 157, Rarity.MYTHIC, mage.cards.e.Endurance.class));
+        cards.add(new SetCardInfo("Esper Sentinel", 12, Rarity.RARE, mage.cards.e.EsperSentinel.class));
         cards.add(new SetCardInfo("Ethersworn Sphinx", 195, Rarity.UNCOMMON, mage.cards.e.EtherswornSphinx.class));
         cards.add(new SetCardInfo("Extruder", 296, Rarity.UNCOMMON, mage.cards.e.Extruder.class));
         cards.add(new SetCardInfo("Fae Offering", 158, Rarity.UNCOMMON, mage.cards.f.FaeOffering.class));
