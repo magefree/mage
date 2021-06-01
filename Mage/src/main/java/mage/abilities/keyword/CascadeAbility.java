@@ -47,7 +47,7 @@ public class CascadeAbility extends TriggeredAbilityImpl {
     // can't use singletone due rules:
     // 702.84c If a spell has multiple instances of cascade, each triggers separately.
 
-    private static final String REMINDERTEXT = " <i>(When you cast this spell, "
+    protected static final String REMINDERTEXT = " <i>(When you cast this spell, "
             + "exile cards from the top of your library until you exile a "
             + "nonland card whose mana value is less than this spell's mana value. "
             + "You may cast that spell without paying its mana cost "
@@ -64,7 +64,7 @@ public class CascadeAbility extends TriggeredAbilityImpl {
         this.withReminder = withReminder;
     }
 
-    private CascadeAbility(final CascadeAbility ability) {
+    protected CascadeAbility(final CascadeAbility ability) {
         super(ability);
         this.withReminder = ability.withReminder;
     }
