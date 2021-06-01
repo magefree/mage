@@ -175,6 +175,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Strike It Rich", 143, Rarity.UNCOMMON, mage.cards.s.StrikeItRich.class));
         cards.add(new SetCardInfo("Subtlety", 67, Rarity.MYTHIC, mage.cards.s.Subtlety.class));
         cards.add(new SetCardInfo("Sudden Edict", 100, Rarity.UNCOMMON, mage.cards.s.SuddenEdict.class));
+        cards.add(new SetCardInfo("Svyelun of Sea and Sky", 69, Rarity.MYTHIC, mage.cards.s.SvyelunOfSeaAndSky.class));
         cards.add(new SetCardInfo("Swamp", 485, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sweep the Skies", 70, Rarity.UNCOMMON, mage.cards.s.SweepTheSkies.class));
         cards.add(new SetCardInfo("Sylvan Anthem", 176, Rarity.RARE, mage.cards.s.SylvanAnthem.class));
