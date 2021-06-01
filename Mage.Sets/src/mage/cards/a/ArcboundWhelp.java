@@ -35,7 +35,7 @@ public final class ArcboundWhelp extends CardImpl {
         ), new ManaCostsImpl<>("{R}")));
 
         // Modular 1
-        this.addAbility(new ModularAbility(this, 1));
+        this.addAbility(new ModularAbility(this, 2));
     }
 
     private ArcboundWhelp(final ArcboundWhelp card) {
