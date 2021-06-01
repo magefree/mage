@@ -31,7 +31,7 @@ Enchant|type|
 Encore|cost|
 Entwine|manaString|
 Eternalize|cost, card|
-Evoke|card, manaString|
+Evoke|manaString|
 Evolve|new|
 Exalted|new|
 Exploit|new|
