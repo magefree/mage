@@ -47,6 +47,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Battle Plan", 114, Rarity.COMMON, mage.cards.b.BattlePlan.class));
         cards.add(new SetCardInfo("Blacksmith's Skill", 6, Rarity.COMMON, mage.cards.b.BlacksmithsSkill.class));
         cards.add(new SetCardInfo("Bloodbraid Marauder", 116, Rarity.RARE, mage.cards.b.BloodbraidMarauder.class));
+        cards.add(new SetCardInfo("Blossoming Calm", 7, Rarity.UNCOMMON, mage.cards.b.BlossomingCalm.class));
         cards.add(new SetCardInfo("Bone Shards", 76, Rarity.COMMON, mage.cards.b.BoneShards.class));
         cards.add(new SetCardInfo("Bone Shredder", 272, Rarity.UNCOMMON, mage.cards.b.BoneShredder.class));
         cards.add(new SetCardInfo("Bottle Golems", 222, Rarity.COMMON, mage.cards.b.BottleGolems.class));
