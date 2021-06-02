@@ -48,6 +48,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Braids, Cabal Minion", 273, Rarity.RARE, mage.cards.b.BraidsCabalMinion.class));
         cards.add(new SetCardInfo("Brainstone", 223, Rarity.UNCOMMON, mage.cards.b.Brainstone.class));
         cards.add(new SetCardInfo("Break Ties", 8, Rarity.COMMON, mage.cards.b.BreakTies.class));
+        cards.add(new SetCardInfo("Break the Ice", 77, Rarity.UNCOMMON, mage.cards.b.BreakTheIce.class));
         cards.add(new SetCardInfo("Breya's Apprentice", 117, Rarity.RARE, mage.cards.b.BreyasApprentice.class));
         cards.add(new SetCardInfo("Cabal Coffers", 301, Rarity.MYTHIC, mage.cards.c.CabalCoffers.class));
         cards.add(new SetCardInfo("Calibrated Blast", 118, Rarity.RARE, mage.cards.c.CalibratedBlast.class));
