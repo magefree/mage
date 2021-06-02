@@ -134,6 +134,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Liquimetal Torque", 228, Rarity.UNCOMMON, mage.cards.l.LiquimetalTorque.class));
         cards.add(new SetCardInfo("Lose Focus", 49, Rarity.COMMON, mage.cards.l.LoseFocus.class));
         cards.add(new SetCardInfo("Lucid Dreams", 50, Rarity.UNCOMMON, mage.cards.l.LucidDreams.class));
+        cards.add(new SetCardInfo("Marble Gargoyle", 21, Rarity.COMMON, mage.cards.m.MarbleGargoyle.class));
         cards.add(new SetCardInfo("Marsh Flats", 248, Rarity.RARE, mage.cards.m.MarshFlats.class));
         cards.add(new SetCardInfo("Master of Death", 205, Rarity.RARE, mage.cards.m.MasterOfDeath.class));
         cards.add(new SetCardInfo("Mental Journey", 51, Rarity.COMMON, mage.cards.m.MentalJourney.class));
