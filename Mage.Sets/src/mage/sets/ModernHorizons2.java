@@ -41,6 +41,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Archon of Cruelty", 75, Rarity.MYTHIC, mage.cards.a.ArchonOfCruelty.class));
         cards.add(new SetCardInfo("Arid Mesa", 244, Rarity.RARE, mage.cards.a.AridMesa.class));
         cards.add(new SetCardInfo("Asmoranomardicadaistinaculdacar", 186, Rarity.RARE, mage.cards.a.Asmoranomardicadaistinaculdacar.class));
+        cards.add(new SetCardInfo("Barbed Spike", 5, Rarity.UNCOMMON, mage.cards.b.BarbedSpike.class));
         cards.add(new SetCardInfo("Batterbone", 221, Rarity.UNCOMMON, mage.cards.b.Batterbone.class));
         cards.add(new SetCardInfo("Battle Plan", 114, Rarity.COMMON, mage.cards.b.BattlePlan.class));
         cards.add(new SetCardInfo("Bloodbraid Marauder", 116, Rarity.RARE, mage.cards.b.BloodbraidMarauder.class));
