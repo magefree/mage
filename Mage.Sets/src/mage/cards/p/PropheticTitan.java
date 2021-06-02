@@ -60,7 +60,7 @@ class PropheticTitanTriggeredAbility extends EntersBattlefieldTriggeredAbility {
         ).setBackInRandomOrder(true).setText("look at the top four cards of your library. " +
                 "Put one of them into your hand and the rest on the bottom of your library in a random order")));
         this.getModes().setChooseText(
-                "choose one. If there are four or more card types among cards in your graveyard, choose both."
+                "choose one. If there are four or more card types among cards in your graveyard, choose both instead."
         );
         this.addHint(CardTypesInGraveyardHint.YOU);
     }

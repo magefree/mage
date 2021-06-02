@@ -100,7 +100,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Grief", 87, Rarity.MYTHIC, mage.cards.g.Grief.class));
         cards.add(new SetCardInfo("Harmonic Prodigy", 132, Rarity.RARE, mage.cards.h.HarmonicProdigy.class));
         cards.add(new SetCardInfo("Herd Baloth", 165, Rarity.UNCOMMON, mage.cards.h.HerdBaloth.class));
-        cards.add(new SetCardInfo("Hunting Pack", 284, Rarity.COMMON, mage.cards.h.HuntingPack.class));
+        cards.add(new SetCardInfo("Hunting Pack", 284, Rarity.UNCOMMON, mage.cards.h.HuntingPack.class));
         cards.add(new SetCardInfo("Ignoble Hierarch", 166, Rarity.RARE, mage.cards.i.IgnobleHierarch.class));
         cards.add(new SetCardInfo("Imperial Recruiter", 281, Rarity.MYTHIC, mage.cards.i.ImperialRecruiter.class));
         cards.add(new SetCardInfo("Island", 483, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
@@ -169,7 +169,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Skophos Reaver", 140, Rarity.COMMON, mage.cards.s.SkophosReaver.class));
         cards.add(new SetCardInfo("Slag Strider", 141, Rarity.UNCOMMON, mage.cards.s.SlagStrider.class));
         cards.add(new SetCardInfo("Slagwoods Bridge", 256, Rarity.COMMON, mage.cards.s.SlagwoodsBridge.class));
-        cards.add(new SetCardInfo("Sol Talisman", 472, Rarity.RARE, mage.cards.s.SolTalisman.class));
+        cards.add(new SetCardInfo("Sol Talisman", 236, Rarity.RARE, mage.cards.s.SolTalisman.class));
         cards.add(new SetCardInfo("Solitary Confinement", 265, Rarity.RARE, mage.cards.s.SolitaryConfinement.class));
         cards.add(new SetCardInfo("Solitude", 32, Rarity.MYTHIC, mage.cards.s.Solitude.class));
         cards.add(new SetCardInfo("Soul Snare", 266, Rarity.UNCOMMON, mage.cards.s.SoulSnare.class));
