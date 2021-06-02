@@ -174,6 +174,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Sanctum Weaver", 171, Rarity.RARE, mage.cards.s.SanctumWeaver.class));
         cards.add(new SetCardInfo("Scalding Tarn", 254, Rarity.RARE, mage.cards.s.ScaldingTarn.class));
         cards.add(new SetCardInfo("Scion of Draco", 234, Rarity.MYTHIC, mage.cards.s.ScionOfDraco.class));
+        cards.add(new SetCardInfo("Scour the Desert", 28, Rarity.UNCOMMON, mage.cards.s.ScourTheDesert.class));
         cards.add(new SetCardInfo("Scurry Oak", 172, Rarity.UNCOMMON, mage.cards.s.ScurryOak.class));
         cards.add(new SetCardInfo("Scuttletide", 61, Rarity.UNCOMMON, mage.cards.s.Scuttletide.class));
         cards.add(new SetCardInfo("Sea Drake", 268, Rarity.UNCOMMON, mage.cards.s.SeaDrake.class));
