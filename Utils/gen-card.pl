@@ -249,6 +249,9 @@ foreach my $ability (@abilities) {
                     } elsif ($keywords{$kw} eq 'number') {
                         $ability =~ m/(\b\d+?\b)/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(' . $1 . '));';
+                    } elsif ($keywords{$kw} eq 'card, number') {
+                        $ability =~ m/(\b\d+?\b)/g;
+                        $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(this, ' . $1 . '));';
                     } elsif ($keywords{$kw} eq 'cost') {
                         $ability =~ m/({.*})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(new ManaCostsImpl<>("' . fixCost($1) . '")));';
