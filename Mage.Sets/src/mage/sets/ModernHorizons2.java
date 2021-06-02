@@ -31,7 +31,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Abundant Harvest", 147, Rarity.COMMON, mage.cards.a.AbundantHarvest.class));
         cards.add(new SetCardInfo("Aeromoeba", 37, Rarity.COMMON, mage.cards.a.Aeromoeba.class));
         cards.add(new SetCardInfo("Aeve, Progenitor Ooze", 148, Rarity.RARE, mage.cards.a.AeveProgenitorOoze.class));
-        cards.add(new SetCardInfo("Angelic Curator", 262, Rarity.COMMON, mage.cards.a.AngelicCurator.class));
+        cards.add(new SetCardInfo("Angelic Curator", 262, Rarity.UNCOMMON, mage.cards.a.AngelicCurator.class));
         cards.add(new SetCardInfo("Arcbound Javelineer", 2, Rarity.UNCOMMON, mage.cards.a.ArcboundJavelineer.class));
         cards.add(new SetCardInfo("Arcbound Mouser", 3, Rarity.COMMON, mage.cards.a.ArcboundMouser.class));
         cards.add(new SetCardInfo("Arcbound Shikari", 184, Rarity.UNCOMMON, mage.cards.a.ArcboundShikari.class));
@@ -104,7 +104,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("General Ferrous Rokiric", 198, Rarity.RARE, mage.cards.g.GeneralFerrousRokiric.class));
         cards.add(new SetCardInfo("Geyadrone Dihada", 199, Rarity.MYTHIC, mage.cards.g.GeyadroneDihada.class));
         cards.add(new SetCardInfo("Ghost-Lit Drifter", 45, Rarity.UNCOMMON, mage.cards.g.GhostLitDrifter.class));
-        cards.add(new SetCardInfo("Glimmer Bairn", 413, Rarity.COMMON, mage.cards.g.GlimmerBairn.class));
+        cards.add(new SetCardInfo("Glimmer Bairn", 163, Rarity.COMMON, mage.cards.g.GlimmerBairn.class));
         cards.add(new SetCardInfo("Glinting Creeper", 164, Rarity.UNCOMMON, mage.cards.g.GlintingCreeper.class));
         cards.add(new SetCardInfo("Glorious Enforcer", 14, Rarity.UNCOMMON, mage.cards.g.GloriousEnforcer.class));
         cards.add(new SetCardInfo("Goblin Anarchomancer", 200, Rarity.COMMON, mage.cards.g.GoblinAnarchomancer.class));
@@ -241,7 +241,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Void Mirror", 242, Rarity.RARE, mage.cards.v.VoidMirror.class));
         cards.add(new SetCardInfo("Wonder", 271, Rarity.RARE, mage.cards.w.Wonder.class));
         cards.add(new SetCardInfo("World-Weary", 109, Rarity.COMMON, mage.cards.w.WorldWeary.class));
-        cards.add(new SetCardInfo("Wren's Run Hydra", 163, Rarity.UNCOMMON, mage.cards.w.WrensRunHydra.class));
+        cards.add(new SetCardInfo("Wren's Run Hydra", 183, Rarity.UNCOMMON, mage.cards.w.WrensRunHydra.class));
         cards.add(new SetCardInfo("Yavimaya Elder", 288, Rarity.UNCOMMON, mage.cards.y.YavimayaElder.class));
         cards.add(new SetCardInfo("Young Necromancer", 110, Rarity.UNCOMMON, mage.cards.y.YoungNecromancer.class));
         cards.add(new SetCardInfo("Yusri, Fortune's Flame", 218, Rarity.RARE, mage.cards.y.YusriFortunesFlame.class));
