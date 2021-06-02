@@ -31,6 +31,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Abundant Harvest", 147, Rarity.COMMON, mage.cards.a.AbundantHarvest.class));
         cards.add(new SetCardInfo("Aeromoeba", 37, Rarity.COMMON, mage.cards.a.Aeromoeba.class));
         cards.add(new SetCardInfo("Aeve, Progenitor Ooze", 148, Rarity.RARE, mage.cards.a.AeveProgenitorOoze.class));
+        cards.add(new SetCardInfo("Angelic Curator", 262, Rarity.COMMON, mage.cards.a.AngelicCurator.class));
         cards.add(new SetCardInfo("Arcbound Javelineer", 2, Rarity.UNCOMMON, mage.cards.a.ArcboundJavelineer.class));
         cards.add(new SetCardInfo("Arcbound Mouser", 3, Rarity.COMMON, mage.cards.a.ArcboundMouser.class));
         cards.add(new SetCardInfo("Arcbound Shikari", 184, Rarity.UNCOMMON, mage.cards.a.ArcboundShikari.class));
@@ -138,6 +139,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Obsidian Charmaw", 137, Rarity.RARE, mage.cards.o.ObsidianCharmaw.class));
         cards.add(new SetCardInfo("Orchard Strider", 169, Rarity.COMMON, mage.cards.o.OrchardStrider.class));
         cards.add(new SetCardInfo("Ornithopter of Paradise", 232, Rarity.COMMON, mage.cards.o.OrnithopterOfParadise.class));
+        cards.add(new SetCardInfo("Patchwork Gnomes", 299, Rarity.COMMON, mage.cards.p.PatchworkGnomes.class));
         cards.add(new SetCardInfo("Patriarch's Bidding", 275, Rarity.RARE, mage.cards.p.PatriarchsBidding.class));
         cards.add(new SetCardInfo("Phantasmal Dreadmaw", 55, Rarity.COMMON, mage.cards.p.PhantasmalDreadmaw.class));
         cards.add(new SetCardInfo("Piru, the Volatile", 207, Rarity.RARE, mage.cards.p.PiruTheVolatile.class));
