@@ -20,7 +20,7 @@ public class FlipCoinEffect extends OneShotEffect {
     protected Effects executingEffectsLost = new Effects();
 
     public FlipCoinEffect() {
-        this(null);
+        this((Effect) null);
     }
 
     public FlipCoinEffect(Effect effectWon) {
