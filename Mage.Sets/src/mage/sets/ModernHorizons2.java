@@ -98,6 +98,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Foundation Breaker", 160, Rarity.UNCOMMON, mage.cards.f.FoundationBreaker.class));
         cards.add(new SetCardInfo("Fractured Sanity", 44, Rarity.RARE, mage.cards.f.FracturedSanity.class));
         cards.add(new SetCardInfo("Funnel-Web Recluse", 161, Rarity.COMMON, mage.cards.f.FunnelWebRecluse.class));
+        cards.add(new SetCardInfo("Fury", 126, Rarity.MYTHIC, mage.cards.f.Fury.class));
         cards.add(new SetCardInfo("Gaea's Will", 162, Rarity.RARE, mage.cards.g.GaeasWill.class));
         cards.add(new SetCardInfo("General Ferrous Rokiric", 198, Rarity.RARE, mage.cards.g.GeneralFerrousRokiric.class));
         cards.add(new SetCardInfo("Geyadrone Dihada", 199, Rarity.MYTHIC, mage.cards.g.GeyadroneDihada.class));
