@@ -71,6 +71,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Combine Chrysalis", 191, Rarity.UNCOMMON, mage.cards.c.CombineChrysalis.class));
         cards.add(new SetCardInfo("Constable of the Realm", 10, Rarity.UNCOMMON, mage.cards.c.ConstableOfTheRealm.class));
         cards.add(new SetCardInfo("Counterspell", 267, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
+        cards.add(new SetCardInfo("Crack Open", 154, Rarity.COMMON, mage.cards.c.CrackOpen.class));
         cards.add(new SetCardInfo("Cursed Totem", 295, Rarity.RARE, mage.cards.c.CursedTotem.class));
         cards.add(new SetCardInfo("Dakkon, Shadow Slayer", 192, Rarity.MYTHIC, mage.cards.d.DakkonShadowSlayer.class));
         cards.add(new SetCardInfo("Darkmoss Bridge", 245, Rarity.COMMON, mage.cards.d.DarkmossBridge.class));
