@@ -99,6 +99,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Flay Essence", 85, Rarity.UNCOMMON, mage.cards.f.FlayEssence.class));
         cards.add(new SetCardInfo("Floodhound", 42, Rarity.COMMON, mage.cards.f.Floodhound.class));
         cards.add(new SetCardInfo("Flourishing Strike", 159, Rarity.COMMON, mage.cards.f.FlourishingStrike.class));
+        cards.add(new SetCardInfo("Fodder Tosser", 226, Rarity.COMMON, mage.cards.f.FodderTosser.class));
         cards.add(new SetCardInfo("Forest", 489, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Foundation Breaker", 160, Rarity.UNCOMMON, mage.cards.f.FoundationBreaker.class));
         cards.add(new SetCardInfo("Fractured Sanity", 44, Rarity.RARE, mage.cards.f.FracturedSanity.class));
