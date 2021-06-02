@@ -106,6 +106,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Glimmer Bairn", 413, Rarity.COMMON, mage.cards.g.GlimmerBairn.class));
         cards.add(new SetCardInfo("Glinting Creeper", 164, Rarity.UNCOMMON, mage.cards.g.GlintingCreeper.class));
         cards.add(new SetCardInfo("Glorious Enforcer", 14, Rarity.UNCOMMON, mage.cards.g.GloriousEnforcer.class));
+        cards.add(new SetCardInfo("Goblin Anarchomancer", 200, Rarity.COMMON, mage.cards.g.GoblinAnarchomancer.class));
         cards.add(new SetCardInfo("Goblin Bombardment", 279, Rarity.RARE, mage.cards.g.GoblinBombardment.class));
         cards.add(new SetCardInfo("Goldmire Bridge", 247, Rarity.COMMON, mage.cards.g.GoldmireBridge.class));
         cards.add(new SetCardInfo("Gorilla Shaman", 280, Rarity.UNCOMMON, mage.cards.g.GorillaShaman.class));
