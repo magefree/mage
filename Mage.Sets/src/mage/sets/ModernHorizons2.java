@@ -223,6 +223,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Sythis, Harvest's Hand", 214, Rarity.RARE, mage.cards.s.SythisHarvestsHand.class));
         cards.add(new SetCardInfo("Tanglepool Bridge", 257, Rarity.COMMON, mage.cards.t.TanglepoolBridge.class));
         cards.add(new SetCardInfo("Tavern Scoundrel", 144, Rarity.COMMON, mage.cards.t.TavernScoundrel.class));
+        cards.add(new SetCardInfo("Terminal Agony", 215, Rarity.COMMON, mage.cards.t.TerminalAgony.class));
         cards.add(new SetCardInfo("Terramorph", 177, Rarity.UNCOMMON, mage.cards.t.Terramorph.class));
         cards.add(new SetCardInfo("Territorial Kavu", 216, Rarity.RARE, mage.cards.t.TerritorialKavu.class));
         cards.add(new SetCardInfo("The Underworld Cookbook", 240, Rarity.UNCOMMON, mage.cards.t.TheUnderworldCookbook.class));
