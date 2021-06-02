@@ -214,6 +214,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Steelfin Whale", 65, Rarity.COMMON, mage.cards.s.SteelfinWhale.class));
         cards.add(new SetCardInfo("Step Through", 66, Rarity.COMMON, mage.cards.s.StepThrough.class));
         cards.add(new SetCardInfo("Sterling Grove", 293, Rarity.RARE, mage.cards.s.SterlingGrove.class));
+        cards.add(new SetCardInfo("Storm God's Oracle", 213, Rarity.COMMON, mage.cards.s.StormGodsOracle.class));
         cards.add(new SetCardInfo("Strike It Rich", 143, Rarity.UNCOMMON, mage.cards.s.StrikeItRich.class));
         cards.add(new SetCardInfo("Subtlety", 67, Rarity.MYTHIC, mage.cards.s.Subtlety.class));
         cards.add(new SetCardInfo("Sudden Edict", 100, Rarity.UNCOMMON, mage.cards.s.SuddenEdict.class));
