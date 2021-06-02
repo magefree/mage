@@ -59,6 +59,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Cabal Coffers", 301, Rarity.MYTHIC, mage.cards.c.CabalCoffers.class));
         cards.add(new SetCardInfo("Calibrated Blast", 118, Rarity.RARE, mage.cards.c.CalibratedBlast.class));
         cards.add(new SetCardInfo("Captain Ripley Vance", 119, Rarity.UNCOMMON, mage.cards.c.CaptainRipleyVance.class));
+        cards.add(new SetCardInfo("Captured by Lagacs", 188, Rarity.COMMON, mage.cards.c.CapturedByLagacs.class));
         cards.add(new SetCardInfo("Chainer, Nightmare Adept", 289, Rarity.RARE, mage.cards.c.ChainerNightmareAdept.class));
         cards.add(new SetCardInfo("Chance Encounter", 277, Rarity.RARE, mage.cards.c.ChanceEncounter.class));
         cards.add(new SetCardInfo("Chatterstorm", 152, Rarity.COMMON, mage.cards.c.Chatterstorm.class));
