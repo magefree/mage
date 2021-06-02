@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -13,13 +12,16 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class FlipCoinEffect extends OneShotEffect {
 
     protected Effects executingEffectsWon = new Effects();
     protected Effects executingEffectsLost = new Effects();
+
+    public FlipCoinEffect() {
+        this(null);
+    }
 
     public FlipCoinEffect(Effect effectWon) {
         this(effectWon, null);
@@ -58,19 +60,19 @@ public class FlipCoinEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
-        if (controller != null && mageObject != null) {
-            boolean result = true;
-            for (Effect effect : controller.flipCoin(source, game, true) ? executingEffectsWon : executingEffectsLost) {
-                effect.setTargetPointer(this.targetPointer);
-                if (effect instanceof OneShotEffect) {
-                    result &= effect.apply(game, source);
-                } else {
-                    game.addEffect((ContinuousEffect) effect, source);
-                }
-            }
-            return result;
+        if (controller == null || mageObject == null) {
+            return false;
         }
-        return false;
+        boolean result = true;
+        for (Effect effect : controller.flipCoin(source, game, true) ? executingEffectsWon : executingEffectsLost) {
+            effect.setTargetPointer(this.targetPointer);
+            if (effect instanceof OneShotEffect) {
+                result &= effect.apply(game, source);
+            } else {
+                game.addEffect((ContinuousEffect) effect, source);
+            }
+        }
+        return result;
     }
 
     @Override
@@ -78,7 +80,10 @@ public class FlipCoinEffect extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder("Flip a coin. If you win the flip, ").append(executingEffectsWon.getText(mode));
+        StringBuilder sb = new StringBuilder("flip a coin");
+        if (!executingEffectsWon.isEmpty()) {
+            sb.append(". If you win the flip, ").append(executingEffectsWon.getText(mode));
+        }
         if (!executingEffectsLost.isEmpty()) {
             sb.append(" If you lose the flip, ").append(executingEffectsLost.getText(mode));
         }

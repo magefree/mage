@@ -40,4 +40,8 @@ public class CoinFlippedEvent extends GameEvent {
     public boolean isWinnable() {
         return winnable;
     }
+
+    public boolean wasWon() {
+        return result == chosen;
+    }
 }
