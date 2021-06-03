@@ -113,6 +113,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 489, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Foul Watcher", 43, Rarity.COMMON, mage.cards.f.FoulWatcher.class));
         cards.add(new SetCardInfo("Foundation Breaker", 160, Rarity.UNCOMMON, mage.cards.f.FoundationBreaker.class));
+        cards.add(new SetCardInfo("Foundry Helix", 196, Rarity.COMMON, mage.cards.f.FoundryHelix.class));
         cards.add(new SetCardInfo("Fractured Sanity", 44, Rarity.RARE, mage.cards.f.FracturedSanity.class));
         cards.add(new SetCardInfo("Funnel-Web Recluse", 161, Rarity.COMMON, mage.cards.f.FunnelWebRecluse.class));
         cards.add(new SetCardInfo("Fury", 126, Rarity.MYTHIC, mage.cards.f.Fury.class));
