@@ -158,6 +158,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Lens Flare", 20, Rarity.COMMON, mage.cards.l.LensFlare.class));
         cards.add(new SetCardInfo("Lightning Spear", 134, Rarity.COMMON, mage.cards.l.LightningSpear.class));
         cards.add(new SetCardInfo("Liquimetal Torque", 228, Rarity.UNCOMMON, mage.cards.l.LiquimetalTorque.class));
+        cards.add(new SetCardInfo("Loathsome Curator", 91, Rarity.COMMON, mage.cards.l.LoathsomeCurator.class));
         cards.add(new SetCardInfo("Lose Focus", 49, Rarity.COMMON, mage.cards.l.LoseFocus.class));
         cards.add(new SetCardInfo("Lucid Dreams", 50, Rarity.UNCOMMON, mage.cards.l.LucidDreams.class));
         cards.add(new SetCardInfo("Marble Gargoyle", 21, Rarity.COMMON, mage.cards.m.MarbleGargoyle.class));
