@@ -142,6 +142,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Hunting Pack", 284, Rarity.UNCOMMON, mage.cards.h.HuntingPack.class));
         cards.add(new SetCardInfo("Ignoble Hierarch", 166, Rarity.RARE, mage.cards.i.IgnobleHierarch.class));
         cards.add(new SetCardInfo("Imperial Recruiter", 281, Rarity.MYTHIC, mage.cards.i.ImperialRecruiter.class));
+        cards.add(new SetCardInfo("Inevitable Betrayal", 47, Rarity.RARE, mage.cards.i.InevitableBetrayal.class));
         cards.add(new SetCardInfo("Island", 483, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jade Avenger", 167, Rarity.COMMON, mage.cards.j.JadeAvenger.class));
         cards.add(new SetCardInfo("Jewel-Eyed Cobra", 168, Rarity.COMMON, mage.cards.j.JewelEyedCobra.class));

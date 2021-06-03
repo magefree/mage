@@ -95,6 +95,7 @@ Skulk|new|
 Spectacle|card, cost|
 Storm|new|
 Sunburst|new|
+Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Totem armor|new|
