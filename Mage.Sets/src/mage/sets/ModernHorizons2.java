@@ -249,6 +249,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Tormod's Cryptkeeper", 239, Rarity.COMMON, mage.cards.t.TormodsCryptkeeper.class));
         cards.add(new SetCardInfo("Tourach's Canticle", 103, Rarity.COMMON, mage.cards.t.TourachsCanticle.class));
         cards.add(new SetCardInfo("Underworld Hermit", 105, Rarity.UNCOMMON, mage.cards.u.UnderworldHermit.class));
+        cards.add(new SetCardInfo("Unholy Heat", 145, Rarity.COMMON, mage.cards.u.UnholyHeat.class));
         cards.add(new SetCardInfo("Unmarked Grave", 106, Rarity.RARE, mage.cards.u.UnmarkedGrave.class));
         cards.add(new SetCardInfo("Upheaval", 270, Rarity.RARE, mage.cards.u.Upheaval.class));
         cards.add(new SetCardInfo("Urban Daggertooth", 181, Rarity.COMMON, mage.cards.u.UrbanDaggertooth.class));
