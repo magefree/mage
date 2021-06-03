@@ -123,6 +123,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Graceful Restoration", 201, Rarity.UNCOMMON, mage.cards.g.GracefulRestoration.class));
         cards.add(new SetCardInfo("Greed", 274, Rarity.UNCOMMON, mage.cards.g.Greed.class));
         cards.add(new SetCardInfo("Grief", 87, Rarity.MYTHIC, mage.cards.g.Grief.class));
+        cards.add(new SetCardInfo("Guardian Kirin", 15, Rarity.COMMON, mage.cards.g.GuardianKirin.class));
         cards.add(new SetCardInfo("Hard Evidence", 46, Rarity.COMMON, mage.cards.h.HardEvidence.class));
         cards.add(new SetCardInfo("Harmonic Prodigy", 132, Rarity.RARE, mage.cards.h.HarmonicProdigy.class));
         cards.add(new SetCardInfo("Hell Mongrel", 88, Rarity.COMMON, mage.cards.h.HellMongrel.class));
