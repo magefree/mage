@@ -37,6 +37,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Arcbound Prototype", 4, Rarity.COMMON, mage.cards.a.ArcboundPrototype.class));
         cards.add(new SetCardInfo("Arcbound Shikari", 184, Rarity.UNCOMMON, mage.cards.a.ArcboundShikari.class));
         cards.add(new SetCardInfo("Arcbound Slasher", 111, Rarity.COMMON, mage.cards.a.ArcboundSlasher.class));
+        cards.add(new SetCardInfo("Arcbound Tracker", 112, Rarity.COMMON, mage.cards.a.ArcboundTracker.class));
         cards.add(new SetCardInfo("Arcbound Whelp", 113, Rarity.UNCOMMON, mage.cards.a.ArcboundWhelp.class));
         cards.add(new SetCardInfo("Archfiend of Sorrows", 74, Rarity.UNCOMMON, mage.cards.a.ArchfiendOfSorrows.class));
         cards.add(new SetCardInfo("Archon of Cruelty", 75, Rarity.MYTHIC, mage.cards.a.ArchonOfCruelty.class));
