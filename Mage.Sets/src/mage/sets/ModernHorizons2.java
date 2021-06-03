@@ -261,6 +261,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Viashino Lashclaw", 146, Rarity.COMMON, mage.cards.v.ViashinoLashclaw.class));
         cards.add(new SetCardInfo("Vindicate", 294, Rarity.RARE, mage.cards.v.Vindicate.class));
         cards.add(new SetCardInfo("Void Mirror", 242, Rarity.RARE, mage.cards.v.VoidMirror.class));
+        cards.add(new SetCardInfo("Wavesifter", 217, Rarity.COMMON, mage.cards.w.Wavesifter.class));
         cards.add(new SetCardInfo("Wonder", 271, Rarity.RARE, mage.cards.w.Wonder.class));
         cards.add(new SetCardInfo("World-Weary", 109, Rarity.COMMON, mage.cards.w.WorldWeary.class));
         cards.add(new SetCardInfo("Wren's Run Hydra", 183, Rarity.UNCOMMON, mage.cards.w.WrensRunHydra.class));
