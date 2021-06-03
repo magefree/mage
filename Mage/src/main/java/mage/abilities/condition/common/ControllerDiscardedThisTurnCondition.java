@@ -15,4 +15,9 @@ public enum ControllerDiscardedThisTurnCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return DiscardedCardWatcher.checkPlayerDiscarded(source.getControllerId(), game);
     }
+
+    @Override
+    public String toString() {
+        return "you've discarded a card this turn";
+    }
 }
