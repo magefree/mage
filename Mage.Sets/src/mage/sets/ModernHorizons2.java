@@ -138,6 +138,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Kaleidoscorch", 133, Rarity.UNCOMMON, mage.cards.k.Kaleidoscorch.class));
         cards.add(new SetCardInfo("Karmic Guide", 263, Rarity.RARE, mage.cards.k.KarmicGuide.class));
         cards.add(new SetCardInfo("Kitchen Imp", 89, Rarity.COMMON, mage.cards.k.KitchenImp.class));
+        cards.add(new SetCardInfo("Knighted Myr", 17, Rarity.COMMON, mage.cards.k.KnightedMyr.class));
         cards.add(new SetCardInfo("Landscaper Colos", 18, Rarity.COMMON, mage.cards.l.LandscaperColos.class));
         cards.add(new SetCardInfo("Late to Dinner", 19, Rarity.COMMON, mage.cards.l.LateToDinner.class));
         cards.add(new SetCardInfo("Lazotep Chancellor", 203, Rarity.UNCOMMON, mage.cards.l.LazotepChancellor.class));
