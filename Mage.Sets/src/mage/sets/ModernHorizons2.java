@@ -29,6 +29,7 @@ public final class ModernHorizons2 extends ExpansionSet {
 
         cards.add(new SetCardInfo("Abiding Grace", 1, Rarity.UNCOMMON, mage.cards.a.AbidingGrace.class));
         cards.add(new SetCardInfo("Abundant Harvest", 147, Rarity.COMMON, mage.cards.a.AbundantHarvest.class));
+        cards.add(new SetCardInfo("Academy Manufactor", 219, Rarity.RARE, mage.cards.a.AcademyManufactor.class));
         cards.add(new SetCardInfo("Aeromoeba", 37, Rarity.COMMON, mage.cards.a.Aeromoeba.class));
         cards.add(new SetCardInfo("Aeve, Progenitor Ooze", 148, Rarity.RARE, mage.cards.a.AeveProgenitorOoze.class));
         cards.add(new SetCardInfo("Angelic Curator", 262, Rarity.UNCOMMON, mage.cards.a.AngelicCurator.class));
@@ -69,6 +70,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Captured by Lagacs", 188, Rarity.COMMON, mage.cards.c.CapturedByLagacs.class));
         cards.add(new SetCardInfo("Chainer, Nightmare Adept", 289, Rarity.RARE, mage.cards.c.ChainerNightmareAdept.class));
         cards.add(new SetCardInfo("Chance Encounter", 277, Rarity.RARE, mage.cards.c.ChanceEncounter.class));
+        cards.add(new SetCardInfo("Chatterfang, Squirrel General", 151, Rarity.MYTHIC, mage.cards.c.ChatterfangSquirrelGeneral.class));
         cards.add(new SetCardInfo("Chatterstorm", 152, Rarity.COMMON, mage.cards.c.Chatterstorm.class));
         cards.add(new SetCardInfo("Chitterspitter", 153, Rarity.RARE, mage.cards.c.Chitterspitter.class));
         cards.add(new SetCardInfo("Chrome Courier", 190, Rarity.COMMON, mage.cards.c.ChromeCourier.class));

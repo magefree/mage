@@ -9,6 +9,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
@@ -69,7 +70,9 @@ class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() * 2);
+        if (event instanceof CreateTokenEvent) {
+            ((CreateTokenEvent) event).doubleTokens();
+        }
         return false;
     }
 
