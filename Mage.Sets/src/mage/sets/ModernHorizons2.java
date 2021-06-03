@@ -278,6 +278,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Verdant Command", 182, Rarity.RARE, mage.cards.v.VerdantCommand.class));
         cards.add(new SetCardInfo("Vermin Gorger", 107, Rarity.COMMON, mage.cards.v.VerminGorger.class));
         cards.add(new SetCardInfo("Viashino Lashclaw", 146, Rarity.COMMON, mage.cards.v.ViashinoLashclaw.class));
+        cards.add(new SetCardInfo("Vile Entomber", 108, Rarity.UNCOMMON, mage.cards.v.VileEntomber.class));
         cards.add(new SetCardInfo("Vindicate", 294, Rarity.RARE, mage.cards.v.Vindicate.class));
         cards.add(new SetCardInfo("Void Mirror", 242, Rarity.RARE, mage.cards.v.VoidMirror.class));
         cards.add(new SetCardInfo("Wavesifter", 217, Rarity.COMMON, mage.cards.w.Wavesifter.class));
