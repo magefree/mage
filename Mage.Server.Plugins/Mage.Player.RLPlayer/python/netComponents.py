@@ -96,39 +96,24 @@ def merge_dicts(dicts):
         res[key]=L
     pad_dicts(res)
     return res
-class Preparer(nn.Module):
-    def __init__(self,hparams):
-        super().__init__()
-        self.embed=nn.Embedding(hparams['max_represent'],hparams['embed_dim'])
-        self.hparams=hparams
-    def forward(self,data):
-        data=merge_dicts(data)
-        reals=torch.tensor(data['reals'],dtype=torch.float32)
-        card_embed=self.embed(torch.tensor(data['cardIDs'],dtype=torch.long))
-        card_nums=torch.tensor(data['card_nums'],dtype=torch.float32)
-        if(card_nums.shape[1]==0):
-            card_nums=torch.reshape(card_nums,[*card_nums.shape,hparams['num_card_reals']])
-        card_all=torch.cat([card_embed,card_nums],dim=2)
-        action_embed=self.embed(torch.tensor(data['actionIDs'],dtype=torch.long))
-        shape=action_embed.shape
-        action_embed=action_embed.reshape(shape[0],shape[1],shape[2]*shape[3])
-        return (reals,card_all,action_embed,data['action_mask'])
 class InputNorm(nn.Module):
-    def __init__(self,hparams):
+    def __init__(self,hparams,shape,mean_dims):
         super().__init__()
-        self.num_reals=hparams["num_reals"]
-        self.avg=nn.Parameter(torch.zeros((1,self.num_reals)))
-        self.variance=nn.Parameter(torch.ones((1,self.num_reals)))
+        shape=[1]+list(shape)
+        self.mean_dims=mean_dims
+        self.avg=nn.Parameter(torch.zeros(shape))
+        self.variance=nn.Parameter(torch.ones(shape))
         self.avg.requires_grad=False
         self.variance.requires_grad=False
         self.iterations=nn.Parameter(torch.tensor(1.0),requires_grad=False)
         self.max_iter=hparams['decay_steps']
     def forward(self,x):
         if (self.training and x.shape[0]==1): #Only fit parameters when exploring
+            detached_x=x.detach()
+            detached_x=torch.mean(detached_x,dim=self.mean_dims,keepdim=True)
             iter=float(min(self.max_iter,self.iterations+1))
             self.iterations=nn.Parameter(torch.tensor(iter),requires_grad=False)
             mult=1/self.iterations
-            detached_x=x.detach()
             self.avg=nn.Parameter((1-mult)*self.avg+mult*detached_x)
             squared_diff=(detached_x-self.avg)**2
             mult=1/(self.iterations+1)
@@ -136,7 +121,43 @@ class InputNorm(nn.Module):
         x=x-self.avg
         x=x/torch.sqrt(self.variance)
         return x
-class LinNet(nn.Module):
+    
+class Preparer(nn.Module):
+    def __init__(self,hparams):
+        super().__init__()
+        self.embed=nn.Embedding(hparams['max_represent'],hparams['embed_dim'])
+        self.norm_reals=InputNorm(hparams,[hparams['num_reals']],0)
+        self.norm_cards=InputNorm(hparams,[1,hparams['num_card_reals']],1)
+        self.hparams=hparams
+    def forward(self,data):
+        data=merge_dicts(data)
+        reals=torch.tensor(data['reals'],dtype=torch.float32)
+        reals=self.norm_reals(reals)
+        card_embed=self.embed(torch.tensor(data['cardIDs'],dtype=torch.long))
+        card_nums=torch.tensor(data['card_nums'],dtype=torch.float32)
+        if(card_nums.shape[1]==0):
+            card_nums=torch.reshape(card_nums,[*card_nums.shape,hparams['num_card_reals']])
+        else:
+            card_nums=self.norm_cards(card_nums)
+        card_all=torch.cat([card_embed,card_nums],dim=2)
+        action_embed=self.embed(torch.tensor(data['actionIDs'],dtype=torch.long))
+        shape=action_embed.shape
+        action_embed=action_embed.reshape(shape[0],shape[1],shape[2]*shape[3])
+        return (reals,card_all,action_embed,data['action_mask'])
+
+class ResidBlock(nn.Module):
+    def __init__(self,hparams):
+        super().__init__()
+        self.hparams=hparams
+        self.linone=nn.Linear(hparams["dot_dim"],hparams["dot_dim"])
+        self.lintwo=nn.Linear(hparams["dot_dim"],hparams["dot_dim"])
+    def forward(self,x):
+        input=x
+        x=F.relu(self.linone(x))
+        x=F.relu(self.lintwo(x))
+        x=x+input
+        return x
+class Trunk(nn.Module):
     def __init__(self,hparams):
         super().__init__()
         self.hparams=hparams
@@ -144,18 +165,38 @@ class LinNet(nn.Module):
         self.act_linear=nn.Linear(act_dim,hparams["dot_dim"])
         card_dim=hparams[ "embed_dim"]+hparams["num_card_reals"]
         self.cards_linear=nn.Linear(card_dim,hparams["dot_dim"])
+        self.cards_resid=ResidBlock(hparams)
         self.reals_linear=nn.Linear(hparams["num_reals"],hparams["dot_dim"])
-        self.norm=InputNorm(hparams)
-    def forward(self,reals,card_all,action_embed,action_mask):
-        reals=self.norm(reals)
+        self.reals_block=ResidBlock(hparams)
+    def forward(self,reals,cards,action_embed):
         reals=self.reals_linear(reals)
-        if(card_all.shape[1]>0):
-            cards=torch.mean(card_all,dim=1)
+        reals=self.reals_block(reals)
+        if(cards.shape[1]>0):
+            reals=torch.unsqueeze(reals,dim=1)
             cards=self.cards_linear(cards)
-            reals=reals+cards
+            cards=cards+reals
+            cards=self.cards_resid(cards)
+            cards=torch.mean(cards,dim=1)
+            board_state=cards
+        else:
+            board_state=reals
         actions=self.act_linear(action_embed)
-        reals=torch.unsqueeze(reals,dim=2)
-        pred_values=actions@reals
+        return (board_state,actions)
+
+class LinNet(nn.Module):
+    def __init__(self,hparams):
+        super().__init__()
+        self.hparams=hparams
+        act_dim=hparams["num_card_reals"]*hparams[ "embed_dim"]
+        self.act_linear=nn.Linear(act_dim,hparams["dot_dim"])
+        card_dim=hparams["embed_dim"]+hparams["num_card_reals"]
+        self.cards_linear=nn.Linear(card_dim,hparams["dot_dim"])
+        self.reals_linear=nn.Linear(hparams["num_reals"],hparams["dot_dim"])
+    def forward(self,board_state,actions,action_mask):
+        board_state=torch.unsqueeze(board_state,dim=-1)
+        #print("boar state shape",board_state.shape)
+        #print("actions shape",actions.shape)
+        pred_values=actions@board_state
         pred_values=torch.squeeze(pred_values,dim=2)
         subtractor=1000*(1-action_mask)
         subtractor=torch.tensor(subtractor)
@@ -167,39 +208,30 @@ class ValueNet(nn.Module):
     def __init__(self,hparams):
         super().__init__()
         self.hparams=hparams
-        act_dim=hparams["num_card_reals"]*hparams[ "embed_dim"]
-        self.act_linear=nn.Linear(act_dim,hparams["dot_dim"])
-        card_dim=hparams[ "embed_dim"]+hparams["num_card_reals"]
-        self.cards_linear=nn.Linear(card_dim,hparams["dot_dim"])
-        self.reals_linear=nn.Linear(hparams["num_reals"],hparams["dot_dim"])
-        self.lin_two=nn.Linear(hparams["dot_dim"],hparams["dot_dim"])
+        self.act_lin=nn.Linear(hparams["dot_dim"],hparams["dot_dim"])
+        self.block=ResidBlock(hparams)
         self.out_lin=nn.Linear(hparams["dot_dim"],1)
-        self.norm=InputNorm(hparams)
-    def forward(self,reals,card_all,action_embed):
-        reals=self.norm(reals)
-        reals=self.reals_linear(reals)
-        if(card_all.shape[1]>0):
-            cards=torch.mean(card_all,dim=1)
-            cards=self.cards_linear(cards)
-            reals=reals+cards
-        actions=self.act_linear(action_embed)
+    def forward(self,board_state,actions):
         actions=torch.mean(actions,dim=1)
-        reals=reals+actions
-        reals=reals+F.relu(self.lin_two(reals))
-        last_one=self.out_lin(reals)
-        return torch.tanh(last_one)
+        actions=self.act_lin(actions)
+        board_state=board_state+actions
+        board_state=self.block(board_state)
+        last_one=self.out_lin(board_state)
+        return last_one
 
 class MainNet(nn.Module):
     def __init__(self,hparams):
         super().__init__()
         self.hparams=hparams  
         self.prep=Preparer(hparams)
+        self.trunk=Trunk(hparams)
         self.net=LinNet(hparams)   
         self.value_net=ValueNet(hparams)   
     def forward(self, converted):
         (reals,card_all,action_embed,action_mask)=self.prep(converted)
-        actions=self.net(reals,card_all,action_embed,action_mask) 
-        values=self.value_net(reals,card_all,action_embed) 
+        (board_state,actions_trunk)=self.trunk(reals,card_all,action_embed) 
+        actions=self.net(board_state,actions_trunk,action_mask) 
+        values=self.value_net(board_state,actions_trunk) 
         return (actions,values)
 def play_game(net,converter,env,verbose=False):
     observation = env.reset()
