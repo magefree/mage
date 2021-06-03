@@ -96,6 +96,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Ethersworn Sphinx", 195, Rarity.UNCOMMON, mage.cards.e.EtherswornSphinx.class));
         cards.add(new SetCardInfo("Extruder", 296, Rarity.UNCOMMON, mage.cards.e.Extruder.class));
         cards.add(new SetCardInfo("Fae Offering", 158, Rarity.UNCOMMON, mage.cards.f.FaeOffering.class));
+        cards.add(new SetCardInfo("Fairgrounds Patrol", 13, Rarity.COMMON, mage.cards.f.FairgroundsPatrol.class));
         cards.add(new SetCardInfo("Faithless Salvaging", 122, Rarity.COMMON, mage.cards.f.FaithlessSalvaging.class));
         cards.add(new SetCardInfo("Fast // Furious", 123, Rarity.UNCOMMON, mage.cards.f.FastFurious.class));
         cards.add(new SetCardInfo("Feast of Sanity", 84, Rarity.UNCOMMON, mage.cards.f.FeastOfSanity.class));
