@@ -15,9 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -29,7 +26,7 @@ public final class DuskshellCrawler extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(P1P1CounterPredicate.instance);
+        filter.add(CounterType.P1P1.getPredicate());
     }
 
     public DuskshellCrawler(UUID ownerId, CardSetInfo setInfo) {
@@ -58,14 +55,5 @@ public final class DuskshellCrawler extends CardImpl {
     @Override
     public DuskshellCrawler copy() {
         return new DuskshellCrawler(this);
-    }
-}
-
-enum P1P1CounterPredicate implements Predicate<Permanent> {
-    instance;
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return input.getCounters(game).getCount(CounterType.P1P1) > 0;
     }
 }
