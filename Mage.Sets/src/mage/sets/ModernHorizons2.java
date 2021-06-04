@@ -238,6 +238,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Skophos Reaver", 140, Rarity.COMMON, mage.cards.s.SkophosReaver.class));
         cards.add(new SetCardInfo("Slag Strider", 141, Rarity.UNCOMMON, mage.cards.s.SlagStrider.class));
         cards.add(new SetCardInfo("Slagwoods Bridge", 256, Rarity.COMMON, mage.cards.s.SlagwoodsBridge.class));
+        cards.add(new SetCardInfo("Smell Fear", 173, Rarity.COMMON, mage.cards.s.SmellFear.class));
         cards.add(new SetCardInfo("So Shiny", 63, Rarity.COMMON, mage.cards.s.SoShiny.class));
         cards.add(new SetCardInfo("Sojourner's Companion", 235, Rarity.COMMON, mage.cards.s.SojournersCompanion.class));
         cards.add(new SetCardInfo("Sol Talisman", 236, Rarity.RARE, mage.cards.s.SolTalisman.class));
