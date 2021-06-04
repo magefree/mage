@@ -26,6 +26,8 @@ public final class InevitableBetrayal extends CardImpl {
     public InevitableBetrayal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "");
 
+        this.color.setBlue(true);
+
         // Suspend 3—{1}{U}{U}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{1}{U}{U}"), this));
 

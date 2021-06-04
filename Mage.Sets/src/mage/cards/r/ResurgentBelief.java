@@ -24,6 +24,8 @@ public final class ResurgentBelief extends CardImpl {
     public ResurgentBelief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "");
 
+        this.color.setWhite(true);
+
         // Suspend 2—{1}{W}
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{1}{W}"), this));
 
