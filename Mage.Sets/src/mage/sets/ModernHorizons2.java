@@ -186,6 +186,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Myr Scrapling", 230, Rarity.COMMON, mage.cards.m.MyrScrapling.class));
         cards.add(new SetCardInfo("Mystic Redaction", 53, Rarity.UNCOMMON, mage.cards.m.MysticRedaction.class));
         cards.add(new SetCardInfo("Necromancer's Familiar", 94, Rarity.UNCOMMON, mage.cards.n.NecromancersFamiliar.class));
+        cards.add(new SetCardInfo("Nested Shambler", 95, Rarity.COMMON, mage.cards.n.NestedShambler.class));
         cards.add(new SetCardInfo("Nettlecyst", 231, Rarity.RARE, mage.cards.n.Nettlecyst.class));
         cards.add(new SetCardInfo("Nevinyrral's Disk", 298, Rarity.RARE, mage.cards.n.NevinyrralsDisk.class));
         cards.add(new SetCardInfo("Obsidian Charmaw", 137, Rarity.RARE, mage.cards.o.ObsidianCharmaw.class));
