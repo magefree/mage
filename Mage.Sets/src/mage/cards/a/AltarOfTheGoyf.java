@@ -39,7 +39,7 @@ public final class AltarOfTheGoyf extends CardImpl {
         this.subtype.add(SubType.LHURGOYF);
 
         // Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of card types among cards in all graveyard.
-        this.addAbility(new AltarOfTheGoyfAbility());
+        this.addAbility(new AltarOfTheGoyfAbility().addHint(CardTypesInGraveyardCount.ALL));
 
         // Lhurgoyf creatures you control have trample.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
@@ -80,8 +80,8 @@ class AltarOfTheGoyfAbility extends TriggeredAbilityImpl{
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.isActivePlayer(this.controllerId)) {
             if (game.getCombat().attacksAlone()) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
+                this.getEffects().setTargetPointer(new
+                        FixedTarget(game.getCombat().getAttackers().get(0), game)); {
                 }
                 return true;
             }
