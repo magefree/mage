@@ -187,7 +187,7 @@ public class RLPlayer extends RandomNonTappingPlayer{
                 List<UUID> groupIDs=groups.get(i).getAttackers();
                 if(groupIDs.size()>0){
                     UUID attacker=groupIDs.get(0);
-                    toblock.add((RLAction) new ActionBlock(game.getPermanent(attacker),blocker,true));
+                    toblock.add((RLAction) new ActionBlock(blocker,game.getPermanent(attacker),true));
            
                 }
             }

@@ -12,4 +12,5 @@ hparams={
     "decay_steps":2000,
     "grad_clip":10,
     "critic_weight":.1,
+    "PPOeps":.2,
 }
