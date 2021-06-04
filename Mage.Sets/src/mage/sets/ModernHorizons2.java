@@ -174,6 +174,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Master of Death", 205, Rarity.RARE, mage.cards.m.MasterOfDeath.class));
         cards.add(new SetCardInfo("Mental Journey", 51, Rarity.COMMON, mage.cards.m.MentalJourney.class));
         cards.add(new SetCardInfo("Millikin", 297, Rarity.UNCOMMON, mage.cards.m.Millikin.class));
+        cards.add(new SetCardInfo("Mine Collapse", 135, Rarity.COMMON, mage.cards.m.MineCollapse.class));
         cards.add(new SetCardInfo("Mirari's Wake", 291, Rarity.MYTHIC, mage.cards.m.MirarisWake.class));
         cards.add(new SetCardInfo("Mishra's Factory", 302, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Mistvault Bridge", 249, Rarity.COMMON, mage.cards.m.MistvaultBridge.class));
