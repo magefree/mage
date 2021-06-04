@@ -26,6 +26,8 @@ public final class GlimpseOfTomorrow extends CardImpl {
     public GlimpseOfTomorrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "");
 
+        this.color.setRed(true);
+
         // Suspend 3—{R}{R}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{R}{R}"), this));
 
