@@ -153,6 +153,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Jade Avenger", 167, Rarity.COMMON, mage.cards.j.JadeAvenger.class));
         cards.add(new SetCardInfo("Jewel-Eyed Cobra", 168, Rarity.COMMON, mage.cards.j.JewelEyedCobra.class));
         cards.add(new SetCardInfo("Junk Winder", 48, Rarity.UNCOMMON, mage.cards.j.JunkWinder.class));
+        cards.add(new SetCardInfo("Kaldra Compleat", 227, Rarity.MYTHIC, mage.cards.k.KaldraCompleat.class));
         cards.add(new SetCardInfo("Kaleidoscorch", 133, Rarity.UNCOMMON, mage.cards.k.Kaleidoscorch.class));
         cards.add(new SetCardInfo("Karmic Guide", 263, Rarity.RARE, mage.cards.k.KarmicGuide.class));
         cards.add(new SetCardInfo("Kitchen Imp", 89, Rarity.COMMON, mage.cards.k.KitchenImp.class));
