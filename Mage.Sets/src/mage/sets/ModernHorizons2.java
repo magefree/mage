@@ -289,6 +289,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Titania, Protector of Argoth", 287, Rarity.MYTHIC, mage.cards.t.TitaniaProtectorOfArgoth.class));
         cards.add(new SetCardInfo("Tormod's Cryptkeeper", 239, Rarity.COMMON, mage.cards.t.TormodsCryptkeeper.class));
         cards.add(new SetCardInfo("Tourach's Canticle", 103, Rarity.COMMON, mage.cards.t.TourachsCanticle.class));
+        cards.add(new SetCardInfo("Tourach, Dread Cantor", 102, Rarity.MYTHIC, mage.cards.t.TourachDreadCantor.class));
         cards.add(new SetCardInfo("Tragic Fall", 104, Rarity.COMMON, mage.cards.t.TragicFall.class));
         cards.add(new SetCardInfo("Unbounded Potential", 36, Rarity.COMMON, mage.cards.u.UnboundedPotential.class));
         cards.add(new SetCardInfo("Underworld Hermit", 105, Rarity.UNCOMMON, mage.cards.u.UnderworldHermit.class));
