@@ -70,7 +70,7 @@ class NykthosParagonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
+        if (abilityAvailableThisTurn(game) && event.getPlayerId().equals(this.getControllerId())) {
             for (Effect effect : this.getEffects()) {
                 effect.setValue("gainedLife", event.getAmount());
             }
@@ -81,18 +81,20 @@ class NykthosParagonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean resolve(Game game) {
+        if (abilityAvailableThisTurn(game) && super.resolve(game)) {
+            game.getState().setValue(CardUtil.getCardZoneString(
+                    "lastTurnResolved" + originalId, sourceId, game
+            ), game.getTurnNum());
+            return true;
+        }
+        return false;
+    }
+
+    private boolean abilityAvailableThisTurn(Game game) {
         Integer lastTurnResolved = (Integer) game.getState().getValue(
                 CardUtil.getCardZoneString("lastTurnResolved" + originalId, sourceId, game)
         );
-        if (lastTurnResolved == null || lastTurnResolved != game.getTurnNum()) {
-            if (super.resolve(game)) {
-                game.getState().setValue(CardUtil.getCardZoneString(
-                        "lastTurnResolved" + originalId, sourceId, game
-                ), game.getTurnNum());
-                return true;
-            }
-        }
-        return false;
+        return lastTurnResolved == null || lastTurnResolved != game.getTurnNum();
     }
 
     @Override
