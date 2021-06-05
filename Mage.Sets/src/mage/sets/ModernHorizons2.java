@@ -200,6 +200,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Parcel Myr", 54, Rarity.COMMON, mage.cards.p.ParcelMyr.class));
         cards.add(new SetCardInfo("Patchwork Gnomes", 299, Rarity.COMMON, mage.cards.p.PatchworkGnomes.class));
         cards.add(new SetCardInfo("Patriarch's Bidding", 275, Rarity.RARE, mage.cards.p.PatriarchsBidding.class));
+        cards.add(new SetCardInfo("Persist", 96, Rarity.RARE, mage.cards.p.Persist.class));
         cards.add(new SetCardInfo("Phantasmal Dreadmaw", 55, Rarity.COMMON, mage.cards.p.PhantasmalDreadmaw.class));
         cards.add(new SetCardInfo("Piercing Rays", 24, Rarity.COMMON, mage.cards.p.PiercingRays.class));
         cards.add(new SetCardInfo("Piru, the Volatile", 207, Rarity.RARE, mage.cards.p.PiruTheVolatile.class));
