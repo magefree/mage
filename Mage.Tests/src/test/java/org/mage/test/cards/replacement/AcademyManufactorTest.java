@@ -68,4 +68,28 @@ public class AcademyManufactorTest extends CardTestPlayerBase {
         // 8 permanents above + 500 token limit
         assertPermanentCount(playerA, 508);
     }
+
+    @Test
+    public void testGingerbruteToken() {
+        addCard(Zone.BATTLEFIELD, playerA, "Academy Manufactor", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Tundra", 5);
+        addCard(Zone.HAND, playerA, "Fractured Identity");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Gingerbrute");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fractured Identity", "Gingerbrute");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAllCommandsUsed();
+        assertPermanentCount(playerA, "Tundra", 5);
+        assertPermanentCount(playerA, "Academy Manufactor", 2);
+        // Gingerbrute token copy becomes a regular Food
+        assertPermanentCount(playerA, "Gingerbrute", 0);
+        assertPermanentCount(playerB, "Gingerbrute", 0);
+        assertPermanentCount(playerA, "Clue", 3);
+        assertPermanentCount(playerA, "Food", 3);
+        assertPermanentCount(playerA, "Treasure", 3);
+    }
 }

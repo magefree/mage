@@ -1,17 +1,15 @@
 package mage.cards.a;
 
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
@@ -20,8 +18,11 @@ import mage.game.permanent.token.FoodToken;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TreasureToken;
 
+import java.util.Iterator;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class AcademyManufactor extends CardImpl {
@@ -70,12 +71,14 @@ class AcademyManufactorEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event instanceof CreateTokenEvent && event.getPlayerId().equals(source.getControllerId())) {
-            CreateTokenEvent tokenEvent = (CreateTokenEvent) event;
-            for (Token token : tokenEvent.getTokens().keySet()) {
-                if (token instanceof ClueArtifactToken || token instanceof FoodToken || token instanceof TreasureToken) {
-                    return true;
-                }
+        if (!(event instanceof CreateTokenEvent) || !event.getPlayerId().equals(source.getControllerId())) {
+            return false;
+        }
+        for (Token token : ((CreateTokenEvent) event).getTokens().keySet()) {
+            if (token.hasSubtype(SubType.CLUE, game)
+                    || token.hasSubtype(SubType.FOOD, game)
+                    || token.hasSubtype(SubType.TREASURE, game)) {
+                return true;
             }
         }
         return false;
@@ -83,51 +86,22 @@ class AcademyManufactorEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (event instanceof CreateTokenEvent) {
-            CreateTokenEvent tokenEvent = (CreateTokenEvent) event;
-            int clues = 0;
-            int food = 0;
-            int treasures = 0;
-            ClueArtifactToken clueToken = null;
-            FoodToken foodToken = null;
-            TreasureToken treasureToken = null;
-            Map<Token, Integer> tokens = tokenEvent.getTokens();
-
-            for (Map.Entry<Token, Integer> entry : tokens.entrySet()) {
-                Token token = entry.getKey();
-                int amount = entry.getValue();
-                if (token instanceof ClueArtifactToken) {
-                    clueToken = (ClueArtifactToken) token;
-                    clues += amount;
-                }
-                else if (token instanceof FoodToken) {
-                    foodToken = (FoodToken) token;
-                    food += amount;
-                }
-                else if (token instanceof TreasureToken) {
-                    treasureToken = (TreasureToken) token;
-                    treasures += amount;
-                }
+        int amount = 0;
+        Map<Token, Integer> tokens = ((CreateTokenEvent) event).getTokens();
+        for (Iterator<Map.Entry<Token, Integer>> iter = tokens.entrySet().iterator(); iter.hasNext(); ) {
+            Map.Entry<Token, Integer> entry = iter.next();
+            Token token = entry.getKey();
+            if (token.hasSubtype(SubType.CLUE, game)
+                    || token.hasSubtype(SubType.FOOD, game)
+                    || token.hasSubtype(SubType.TREASURE, game)) {
+                amount += entry.getValue();
+                iter.remove();
             }
-
-            if (clueToken == null) {
-                clueToken = new ClueArtifactToken();
-            }
-            if (foodToken == null) {
-                foodToken = new FoodToken();
-            }
-            if (treasureToken == null) {
-                treasureToken = new TreasureToken();
-            }
-
-            int cluesToAdd = food + treasures;
-            int foodToAdd = clues + treasures;
-            int treasuresToAdd = clues + food;
-
-            tokens.put(clueToken, tokens.getOrDefault(clueToken, 0) + cluesToAdd);
-            tokens.put(foodToken, tokens.getOrDefault(foodToken, 0) + foodToAdd);
-            tokens.put(treasureToken, tokens.getOrDefault(treasureToken, 0) + treasuresToAdd);
         }
+
+        tokens.put(new ClueArtifactToken(), amount);
+        tokens.put(new FoodToken(), amount);
+        tokens.put(new TreasureToken(), amount);
         return false;
     }
 }
