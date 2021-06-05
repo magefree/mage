@@ -48,7 +48,7 @@ public final class SanctifierEnVec extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileGraveyardAllPlayersEffect(filter)));
 
         // If a black or red permanent, spell, or card not on the battlefield would be put into a graveyard, exile it instead.
-        this.addAbility(new SimpleStaticAbility(new SanctifierEnVecEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new SanctifierEnVecEffect()));
     }
 
     private SanctifierEnVec(final SanctifierEnVec card) {
@@ -63,17 +63,13 @@ public final class SanctifierEnVec extends CardImpl {
 
 class SanctifierEnVecEffect extends ReplacementEffectImpl {
 
-    private final FilterCard filter;
-
-    public SanctifierEnVecEffect(FilterCard filter) {
+    public SanctifierEnVecEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
-        this.filter = filter;
         this.staticText = "If a black or red permanent, spell, or card not on the battlefield would be put into a graveyard, exile it instead";
     }
 
     private SanctifierEnVecEffect(final SanctifierEnVecEffect effect) {
         super(effect);
-        this.filter = effect.filter;
     }
 
     @Override
