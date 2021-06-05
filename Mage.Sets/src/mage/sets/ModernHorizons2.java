@@ -193,6 +193,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Nested Shambler", 95, Rarity.COMMON, mage.cards.n.NestedShambler.class));
         cards.add(new SetCardInfo("Nettlecyst", 231, Rarity.RARE, mage.cards.n.Nettlecyst.class));
         cards.add(new SetCardInfo("Nevinyrral's Disk", 298, Rarity.RARE, mage.cards.n.NevinyrralsDisk.class));
+        cards.add(new SetCardInfo("Nykthos Paragon", 22, Rarity.RARE, mage.cards.n.NykthosParagon.class));
         cards.add(new SetCardInfo("Obsidian Charmaw", 137, Rarity.RARE, mage.cards.o.ObsidianCharmaw.class));
         cards.add(new SetCardInfo("Orchard Strider", 169, Rarity.COMMON, mage.cards.o.OrchardStrider.class));
         cards.add(new SetCardInfo("Ornithopter of Paradise", 232, Rarity.COMMON, mage.cards.o.OrnithopterOfParadise.class));
