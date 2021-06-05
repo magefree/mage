@@ -168,6 +168,7 @@ public enum CounterType {
     VERSE("verse"),
     VIGILANCE("vigilance"),
     VITALITY("vitality"),
+    VOID("void"),
     VORTEX("vortex"),
     VOW("vow"),
     VOYAGE("voyage"),
