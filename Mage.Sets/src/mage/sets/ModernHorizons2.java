@@ -213,6 +213,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Prophetic Titan", 209, Rarity.UNCOMMON, mage.cards.p.PropheticTitan.class));
         cards.add(new SetCardInfo("Quirion Ranger", 285, Rarity.UNCOMMON, mage.cards.q.QuirionRanger.class));
         cards.add(new SetCardInfo("Radiant Epicure", 98, Rarity.UNCOMMON, mage.cards.r.RadiantEpicure.class));
+        cards.add(new SetCardInfo("Ragavan, Nimble Pilferer", 138, Rarity.MYTHIC, mage.cards.r.RagavanNimblePilferer.class));
         cards.add(new SetCardInfo("Rakdos Headliner", 210, Rarity.UNCOMMON, mage.cards.r.RakdosHeadliner.class));
         cards.add(new SetCardInfo("Ravenous Squirrel", 211, Rarity.UNCOMMON, mage.cards.r.RavenousSquirrel.class));
         cards.add(new SetCardInfo("Raving Visionary", 56, Rarity.UNCOMMON, mage.cards.r.RavingVisionary.class));
