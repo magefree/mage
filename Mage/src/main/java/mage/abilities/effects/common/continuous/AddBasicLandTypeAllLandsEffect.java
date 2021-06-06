@@ -7,7 +7,6 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import org.junit.Assert;
 
 /**
  * @author Plopman, TheElk801
@@ -21,7 +20,6 @@ public class AddBasicLandTypeAllLandsEffect extends ContinuousEffectImpl {
         this.subType = subType;
         this.staticText = "Each land is " + subType.getIndefiniteArticle() + " "
                 + subType.getDescription() + " in addition to its other land types";
-        Assert.assertSame("Subtype should be a basic land type", subType.getSubTypeSet(), SubTypeSet.BasicLandType);
         switch (subType) {
             case PLAINS:
                 this.dependencyTypes.add(DependencyType.BecomePlains);
@@ -38,6 +36,8 @@ public class AddBasicLandTypeAllLandsEffect extends ContinuousEffectImpl {
             case FOREST:
                 this.dependencyTypes.add(DependencyType.BecomeForest);
                 break;
+            default:
+                throw new UnsupportedOperationException("Subtype should be a basic land type");
         }
     }
 
