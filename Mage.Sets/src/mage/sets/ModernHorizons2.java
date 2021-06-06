@@ -228,6 +228,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Road // Ruin", 212, Rarity.UNCOMMON, mage.cards.r.RoadRuin.class));
         cards.add(new SetCardInfo("Rustvale Bridge", 253, Rarity.COMMON, mage.cards.r.RustvaleBridge.class));
         cards.add(new SetCardInfo("Said // Done", 60, Rarity.UNCOMMON, mage.cards.s.SaidDone.class));
+        cards.add(new SetCardInfo("Sanctifier en-Vec", 27, Rarity.RARE, mage.cards.s.SanctifierEnVec.class));
         cards.add(new SetCardInfo("Sanctuary Raptor", 233, Rarity.UNCOMMON, mage.cards.s.SanctuaryRaptor.class));
         cards.add(new SetCardInfo("Sanctum Prelate", 491, Rarity.MYTHIC, mage.cards.s.SanctumPrelate.class));
         cards.add(new SetCardInfo("Sanctum Weaver", 171, Rarity.RARE, mage.cards.s.SanctumWeaver.class));
