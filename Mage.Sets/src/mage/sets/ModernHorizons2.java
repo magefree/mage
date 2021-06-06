@@ -223,6 +223,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Revolutionist", 139, Rarity.COMMON, mage.cards.r.Revolutionist.class));
         cards.add(new SetCardInfo("Rift Sower", 170, Rarity.COMMON, mage.cards.r.RiftSower.class));
         cards.add(new SetCardInfo("Riptide Laboratory", 303, Rarity.RARE, mage.cards.r.RiptideLaboratory.class));
+        cards.add(new SetCardInfo("Rise and Shine", 58, Rarity.RARE, mage.cards.r.RiseAndShine.class));
         cards.add(new SetCardInfo("Rishadan Dockhand", 59, Rarity.RARE, mage.cards.r.RishadanDockhand.class));
         cards.add(new SetCardInfo("Road // Ruin", 212, Rarity.UNCOMMON, mage.cards.r.RoadRuin.class));
         cards.add(new SetCardInfo("Rustvale Bridge", 253, Rarity.COMMON, mage.cards.r.RustvaleBridge.class));
