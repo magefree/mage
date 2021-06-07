@@ -166,10 +166,10 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     }
 
     @Override
-    public ArrayList<CardType> getCardType() {
+    public ArrayList<CardType> getCardType(Game game) {
         // CardImpl's constructor can call some code on init, so you must check left/right before
         // it's a bad workaround
-        return leftHalfCard != null ? leftHalfCard.getCardType() : cardType;
+        return leftHalfCard != null ? leftHalfCard.getCardType(game) : cardType;
     }
 
     @Override

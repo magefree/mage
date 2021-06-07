@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.PermanentCard;
@@ -44,7 +43,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
             target.setCopySourceCard(((PermanentToken) source).getToken().getCopySourceCard());
         } else if (source instanceof PermanentCard) {
             if (((PermanentCard) source).isMorphed() || ((PermanentCard) source).isManifested()) {
-                MorphAbility.setPermanentToFaceDownCreature(target);
+                MorphAbility.setPermanentToFaceDownCreature(target, game);
                 return target;
             } else {
                 if (((PermanentCard) source).isTransformed() && source.getSecondCardFace() != null) {
@@ -68,9 +67,9 @@ public class CopyTokenFunction implements Function<Token, Card> {
         target.getColor().setColor(sourceObj.getColor());
         target.getManaCost().clear();
         target.getManaCost().add(sourceObj.getManaCost());
-        target.getCardType().clear();
-        for (CardType type : sourceObj.getCardType()) {
-            target.addCardType(type);
+        target.getCardType(game).clear();
+        for (CardType type : sourceObj.getCardType(game)) {
+            target.addCardType(game, type);
         }
         target.getSubtype().copyFrom(sourceObj.getSubtype());
         target.getSuperType().clear();

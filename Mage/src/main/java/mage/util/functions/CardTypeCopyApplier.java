@@ -6,7 +6,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.CardType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -22,7 +21,7 @@ public class CardTypeCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-        blueprint.addCardType(cardType);
+        blueprint.addCardType(game, cardType);
         return true;
     }
 }

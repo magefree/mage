@@ -118,7 +118,7 @@ public final class StarfieldOfNyx extends CardImpl {
                         if (sublayer == SubLayer.NA) {
                             if (!permanent.isCreature(game)
                                     && !permanent.hasSubtype(SubType.AURA, game)) {
-                                permanent.addCardType(CardType.CREATURE);
+                                permanent.addCardType(game, CardType.CREATURE);
                             }
                         }
                         break;

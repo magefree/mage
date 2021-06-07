@@ -78,7 +78,7 @@ public class PermanentToken extends PermanentImpl {
             this.getManaCost().add(cost.copy());
         }
         this.cardType.clear();
-        this.cardType.addAll(token.getCardType());
+        this.cardType.addAll(token.getCardType(game));
         this.color = token.getColor(game).copy();
         this.frameColor = token.getFrameColor(game);
         this.frameStyle = token.getFrameStyle();

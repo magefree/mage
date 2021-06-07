@@ -151,7 +151,7 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
     }
 
     @Override
-    public ArrayList<CardType> getCardType() {
+    public ArrayList<CardType> getCardType(Game game) {
         return new ArrayList<>();
     }
 

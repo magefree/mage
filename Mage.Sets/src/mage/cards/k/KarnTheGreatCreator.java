@@ -117,7 +117,7 @@ class KarnTheGreatCreatorAnimateEffect extends ContinuousEffectImpl {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
                     if (!artifact.isCreature(game)) {
-                        artifact.addCardType(CardType.CREATURE);
+                        artifact.addCardType(game, CardType.CREATURE);
                     }
                 }
                 break;

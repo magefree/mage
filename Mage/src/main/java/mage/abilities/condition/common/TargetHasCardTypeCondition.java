@@ -23,7 +23,7 @@ public class TargetHasCardTypeCondition implements Condition {
         if (!source.getTargets().isEmpty()) {
             MageObject mageObject = game.getObject(source.getFirstTarget());
             if (mageObject != null) {
-                return mageObject.getCardType().contains(cardType);
+                return mageObject.getCardType(game).contains(cardType);
             }
         }
         return false;

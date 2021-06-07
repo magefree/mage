@@ -244,7 +244,7 @@ public class CardView extends SimpleCardView {
         for (SuperType superType : card.getSuperType()) {
             sbType.append(superType).append(' ');
         }
-        for (CardType cardType : card.getCardType()) {
+        for (CardType cardType : card.getCardType(game)) {
             sbType.append(cardType.toString()).append(' ');
         }
         if (!card.getSubtype(game).isEmpty()) {
@@ -310,7 +310,7 @@ public class CardView extends SimpleCardView {
             } else if (card instanceof Permanent) {
                 this.power = Integer.toString(card.getPower().getValue());
                 this.toughness = Integer.toString(card.getToughness().getValue());
-                this.cardTypes = card.getCardType();
+                this.cardTypes = card.getCardType(game);
                 this.faceDown = card.isFaceDown(game);
             } else {
                 // this.hideInfo = true;
@@ -432,7 +432,7 @@ public class CardView extends SimpleCardView {
         }
         this.power = Integer.toString(card.getPower().getValue());
         this.toughness = Integer.toString(card.getToughness().getValue());
-        this.cardTypes = card.getCardType();
+        this.cardTypes = card.getCardType(game);
         this.subTypes = card.getSubtype(game);
         this.superTypes = card.getSuperType();
         this.color = card.getColor(game);
@@ -559,7 +559,7 @@ public class CardView extends SimpleCardView {
             this.toughness = object.getToughness().toString();
             this.loyalty = "";
         }
-        this.cardTypes = object.getCardType();
+        this.cardTypes = object.getCardType(game);
         this.subTypes = object.getSubtype(game);
         this.superTypes = object.getSuperType();
         this.color = object.getColor(game);
@@ -727,7 +727,7 @@ public class CardView extends SimpleCardView {
         this.toughness = token.getToughness().toString();
         this.loyalty = "";
         this.startingLoyalty = "";
-        this.cardTypes = token.getCardType();
+        this.cardTypes = token.getCardType(game);
         this.subTypes = token.getSubtype(game);
         this.superTypes = token.getSuperType();
         this.color = token.getColor(game);

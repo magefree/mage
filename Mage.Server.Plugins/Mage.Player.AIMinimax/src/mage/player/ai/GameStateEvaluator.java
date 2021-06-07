@@ -80,7 +80,7 @@ public final class GameStateEvaluator {
         } else {
             value = permanent.isTapped() ? 4 : 5;
         }
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
+        if (permanent.getCardType(game).contains(CardType.CREATURE)) {
             value += evaluateCreature(permanent, game) * CREATURE_FACTOR;
         }
         value += permanent.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD).size();

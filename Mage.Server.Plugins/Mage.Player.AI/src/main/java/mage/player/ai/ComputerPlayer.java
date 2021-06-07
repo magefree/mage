@@ -1317,7 +1317,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                         SpellAbility ability = card.getSpellAbility();
                         if (ability != null && ability.canActivate(playerId, game).canActivate()
                                 && !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability, playerId), ability, game, true)) {
-                            if (card.getCardType().contains(CardType.INSTANT)
+                            if (card.getCardType(game).contains(CardType.INSTANT)
                                     || card.hasAbility(FlashAbility.getInstance(), game)) {
                                 playableInstant.add(card);
                             } else {
@@ -1687,9 +1687,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (score > 0) { // score mana producers that produce other mana types and have other uses higher
                 score += mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game).size();
                 score += mageObject.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD).size();
-                if (!mageObject.getCardType().contains(CardType.LAND)) {
+                if (!mageObject.getCardType(game).contains(CardType.LAND)) {
                     score += 2;
-                } else if (mageObject.getCardType().contains(CardType.CREATURE)) {
+                } else if (mageObject.getCardType(game).contains(CardType.CREATURE)) {
                     score += 2;
                 }
             }
@@ -1821,7 +1821,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             // choose a creature type of opponent on battlefield or graveyard
             for (Permanent permanent : game.getBattlefield().getActivePermanents(this.getId(), game)) {
                 if (game.getOpponents(this.getId()).contains(permanent.getControllerId())
-                        && permanent.getCardType().contains(CardType.CREATURE)
+                        && permanent.getCardType(game).contains(CardType.CREATURE)
                         && !permanent.getSubtype(game).isEmpty()) {
                     if (choice.getChoices().contains(permanent.getSubtype(game).get(0).toString())) {
                         choice.setChoice(permanent.getSubtype(game).get(0).toString());
@@ -1834,7 +1834,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 for (UUID opponentId : game.getOpponents(this.getId())) {
                     Player opponent = game.getPlayer(opponentId);
                     for (Card card : opponent.getGraveyard().getCards(game)) {
-                        if (card != null && card.getCardType().contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
+                        if (card != null && card.getCardType(game).contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
                             if (choice.getChoices().contains(card.getSubtype(game).get(0).toString())) {
                                 choice.setChoice(card.getSubtype(game).get(0).toString());
                                 break;
@@ -1850,7 +1850,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             // choose a creature type of hand or library
             for (UUID cardId : this.getHand()) {
                 Card card = game.getCard(cardId);
-                if (card != null && card.getCardType().contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
+                if (card != null && card.getCardType(game).contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
                     if (choice.getChoices().contains(card.getSubtype(game).get(0).toString())) {
                         choice.setChoice(card.getSubtype(game).get(0).toString());
                         break;
@@ -1860,7 +1860,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (!choice.isChosen()) {
                 for (UUID cardId : this.getLibrary().getCardList()) {
                     Card card = game.getCard(cardId);
-                    if (card != null && card.getCardType().contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
+                    if (card != null && card.getCardType(game).contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
                         if (choice.getChoices().contains(card.getSubtype(game).get(0).toString())) {
                             choice.setChoice(card.getSubtype(game).get(0).toString());
                             break;

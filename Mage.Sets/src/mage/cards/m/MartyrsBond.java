@@ -118,7 +118,7 @@ class MartyrsBondEffect extends OneShotEffect {
 
                 List<CardType.CardTypePredicate> cardTypes = new ArrayList<>();
 
-                for (CardType type : saccedPermanent.getCardType()) {
+                for (CardType type : saccedPermanent.getCardType(game)) {
                     cardTypes.add(type.getPredicate());
                     if (firstType) {
                         message += type;

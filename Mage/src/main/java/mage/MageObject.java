@@ -33,7 +33,7 @@ public interface MageObject extends MageItem, Serializable {
 
     void setName(String name);
 
-    ArrayList<CardType> getCardType();
+    ArrayList<CardType> getCardType(Game game);
 
     /**
      * Return original object's subtypes
@@ -141,34 +141,34 @@ public interface MageObject extends MageItem, Serializable {
 
     void setZoneChangeCounter(int value, Game game);
 
-    default boolean isHistoric() {
-        return getCardType().contains(CardType.ARTIFACT)
+    default boolean isHistoric(Game game) {
+        return getCardType(game).contains(CardType.ARTIFACT)
                 || getSuperType().contains(SuperType.LEGENDARY)
-                || getSubtype().contains(SubType.SAGA);
+                || hasSubtype(SubType.SAGA, game);
     }
 
     default boolean isCreature(Game game) {
-        return getCardType().contains(CardType.CREATURE);
+        return getCardType(game).contains(CardType.CREATURE);
     }
 
     default boolean isArtifact(Game game) {
-        return getCardType().contains(CardType.ARTIFACT);
+        return getCardType(game).contains(CardType.ARTIFACT);
     }
 
     default boolean isLand(Game game) {
-        return getCardType().contains(CardType.LAND);
+        return getCardType(game).contains(CardType.LAND);
     }
 
     default boolean isEnchantment(Game game) {
-        return getCardType().contains(CardType.ENCHANTMENT);
+        return getCardType(game).contains(CardType.ENCHANTMENT);
     }
 
     default boolean isInstant(Game game) {
-        return getCardType().contains(CardType.INSTANT);
+        return getCardType(game).contains(CardType.INSTANT);
     }
 
     default boolean isSorcery(Game game) {
-        return getCardType().contains(CardType.SORCERY);
+        return getCardType(game).contains(CardType.SORCERY);
     }
 
     default boolean isInstantOrSorcery(Game game) {
@@ -176,11 +176,11 @@ public interface MageObject extends MageItem, Serializable {
     }
 
     default boolean isPlaneswalker(Game game) {
-        return getCardType().contains(CardType.PLANESWALKER);
+        return getCardType(game).contains(CardType.PLANESWALKER);
     }
 
     default boolean isTribal(Game game) {
-        return getCardType().contains(CardType.TRIBAL);
+        return getCardType(game).contains(CardType.TRIBAL);
     }
 
     default boolean isPermanent(Game game) {
@@ -210,11 +210,13 @@ public interface MageObject extends MageItem, Serializable {
         return getSuperType().contains(SuperType.WORLD);
     }
 
-    default void addCardType(CardType cardType) {
-        if (getCardType().contains(cardType)) {
-            return;
+    default void addCardType(Game game, CardType... cardTypes) {
+        for (CardType cardType : cardTypes) {
+            if (getCardType(game).contains(cardType)) {
+                continue;
+            }
+            getCardType(game).add(cardType);
         }
-        getCardType().add(cardType);
     }
 
     /**
@@ -326,20 +328,21 @@ public interface MageObject extends MageItem, Serializable {
      * Checks whether two cards share card types.
      *
      * @param otherCard
+     * @param game
      * @return
      */
-    default boolean shareTypes(Card otherCard) {
-        return this.shareTypes(otherCard, false);
+    default boolean shareTypes(Card otherCard, Game game) {
+        return this.shareTypes(otherCard, game, false);
     }
 
-    default boolean shareTypes(Card otherCard, boolean permanentOnly) {
+    default boolean shareTypes(Card otherCard, Game game, boolean permanentOnly) {
 
         if (otherCard == null) {
             throw new IllegalArgumentException("Params can't be null");
         }
 
-        for (CardType type : getCardType()) {
-            if (otherCard.getCardType().contains(type)
+        for (CardType type : getCardType(game)) {
+            if (otherCard.getCardType(game).contains(type)
                     && (!permanentOnly || type.isPermanentType())) {
                 return true;
             }
@@ -391,10 +394,6 @@ public interface MageObject extends MageItem, Serializable {
      * @param value
      */
     void setIsAllCreatureTypes(Game game, boolean value);
-
-    default void addCardTypes(ArrayList<CardType> cardType) {
-        getCardType().addAll(cardType);
-    }
 
     List<TextPart> getTextParts();
 

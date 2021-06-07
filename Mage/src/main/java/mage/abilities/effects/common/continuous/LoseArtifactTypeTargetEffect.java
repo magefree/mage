@@ -49,7 +49,7 @@ public class LoseArtifactTypeTargetEffect extends ContinuousEffectImpl {
             if (permanent == null) {
                 continue;
             }
-            permanent.getCardType().remove(CardType.ARTIFACT);
+            permanent.getCardType(game).remove(CardType.ARTIFACT);
             permanent.removeAllSubTypes(game, SubTypeSet.ArtifactType);
             return true;
         }

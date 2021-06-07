@@ -114,7 +114,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public ArrayList<CardType> getCardType() {
+    public ArrayList<CardType> getCardType(Game game) {
         return cardType;
     }
 

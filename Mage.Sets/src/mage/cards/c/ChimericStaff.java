@@ -59,10 +59,10 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (!permanent.isArtifact(game)) {
-                    permanent.addCardType(CardType.ARTIFACT);
+                    permanent.addCardType(game, CardType.ARTIFACT);
                 }
                 if (!permanent.isCreature(game)) {
-                    permanent.addCardType(CardType.CREATURE);
+                    permanent.addCardType(game, CardType.CREATURE);
                 }
                 permanent.removeAllCreatureTypes(game);
                 permanent.addSubType(game, SubType.CONSTRUCT);

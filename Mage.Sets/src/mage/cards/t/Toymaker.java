@@ -87,10 +87,10 @@ class ToymakerEffect extends ContinuousEffectImpl {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
                     if (!artifact.isArtifact(game)) {
-                        artifact.addCardType(CardType.ARTIFACT);
+                        artifact.addCardType(game, CardType.ARTIFACT);
                     }
                     if (!artifact.isCreature(game)) {
-                        artifact.addCardType(CardType.CREATURE);
+                        artifact.addCardType(game, CardType.CREATURE);
                     }
                 }
                 break;

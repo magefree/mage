@@ -919,7 +919,7 @@ public class VerifyCardDataTest {
                 Assert.assertNotNull(card);
 
                 // CHECK: all planeswalkers must be legendary
-                if (card.getCardType().contains(CardType.PLANESWALKER) && !card.getSuperType().contains(SuperType.LEGENDARY)) {
+                if (card.isPlaneswalker(null) && !card.getSuperType().contains(SuperType.LEGENDARY)) {
                     errorsList.add("Error: planeswalker must have legendary type: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
@@ -1610,7 +1610,7 @@ public class VerifyCardDataTest {
 
         Collection<String> expected = ref.types;
         List<String> type = new ArrayList<>();
-        for (CardType cardType : card.getCardType()) {
+        for (CardType cardType : card.getCardType(null)) {
             type.add(cardType.toString());
         }
         if (!eqSet(type, expected)) {

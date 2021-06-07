@@ -73,7 +73,7 @@ class GauntletsOfChaosFirstTarget extends TargetControlledPermanent {
         if (super.canTarget(controllerId, id, source, game)) {
             Set<CardType> cardTypes = getOpponentPermanentCardTypes(source.getSourceId(), controllerId, game);
             Permanent permanent = game.getPermanent(id);
-            for (CardType type : permanent.getCardType()) {
+            for (CardType type : permanent.getCardType(game)) {
                 if (cardTypes.contains(type)) {
                     return true;
                 }
@@ -91,7 +91,7 @@ class GauntletsOfChaosFirstTarget extends TargetControlledPermanent {
         if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
                 if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                    for (CardType type : permanent.getCardType()) {
+                    for (CardType type : permanent.getCardType(game)) {
                         if (cardTypes.contains(type)) {
                             possibleTargets.add(permanent.getId());
                             break;
@@ -114,7 +114,7 @@ class GauntletsOfChaosFirstTarget extends TargetControlledPermanent {
         if (controller != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
                 if (controller.hasOpponent(permanent.getControllerId(), game)) {
-                    cardTypes.addAll(permanent.getCardType());
+                    cardTypes.addAll(permanent.getCardType(game));
                 }
             }
         }
@@ -146,7 +146,7 @@ class GauntletsOfChaosSecondTarget extends TargetPermanent {
             Permanent target1 = game.getPermanent(source.getFirstTarget());
             Permanent opponentPermanent = game.getPermanent(id);
             if (target1 != null && opponentPermanent != null) {
-                return target1.shareTypes(opponentPermanent);
+                return target1.shareTypes(opponentPermanent, game);
             }
         }
         return false;
@@ -160,7 +160,7 @@ class GauntletsOfChaosSecondTarget extends TargetPermanent {
             if (targetSource != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
                     if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                        if (permanent.shareTypes(firstTarget)) {
+                        if (permanent.shareTypes(firstTarget, game)) {
                             possibleTargets.add(permanent.getId());
                         }
                     }

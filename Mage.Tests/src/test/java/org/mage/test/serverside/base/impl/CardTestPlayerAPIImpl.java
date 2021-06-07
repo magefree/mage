@@ -1114,7 +1114,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
 
         Assert.assertTrue("(Battlefield) card type " + (mustHave ? "not " : "")
-                + "found (" + cardName + ':' + type + ')', (found.getCardType().contains(type) == mustHave));
+                + "found (" + cardName + ':' + type + ')', (found.getCardType(currentGame).contains(type) == mustHave));
 
     }
 
@@ -1128,7 +1128,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertType(String cardName, CardType type, SubType subType) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
         Permanent found = getPermanent(cardName);
-        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
+        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', found.getCardType(currentGame).contains(type));
         if (subType != null) {
             Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ':' + subType.getDescription() + ')', found.hasSubtype(subType, currentGame));
         }
@@ -1143,7 +1143,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertNotType(String cardName, CardType type) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
         Permanent found = getPermanent(cardName);
-        Assert.assertFalse("(Battlefield) card type found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
+        Assert.assertFalse("(Battlefield) card type found (" + cardName + ':' + type + ')', found.getCardType(currentGame).contains(type));
     }
 
     /**

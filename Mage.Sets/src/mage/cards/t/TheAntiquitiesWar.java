@@ -91,10 +91,10 @@ class TheAntiquitiesWarEffect extends ContinuousEffectImpl {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
                             if (!permanent.isArtifact(game)) {
-                                permanent.addCardType(CardType.ARTIFACT);
+                                permanent.addCardType(game, CardType.ARTIFACT);
                             }
                             if (!permanent.isCreature(game)) {
-                                permanent.addCardType(CardType.CREATURE);
+                                permanent.addCardType(game, CardType.CREATURE);
                             }
                         }
                         break;

@@ -1479,7 +1479,7 @@ public class TestPlayer implements Player {
         Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
 
         boolean found = false;
-        for (CardType ct : perm.getCardType()) {
+        for (CardType ct : perm.getCardType(game)) {
             if (ct.equals(type)) {
                 found = true;
                 break;

@@ -61,7 +61,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
         if (permanent == null) {
             return false;
         }
-        permanent.getCardType().remove(CardType.CREATURE);
+        permanent.getCardType(game).remove(CardType.CREATURE);
         if (!permanent.isTribal(game)) {
             permanent.removeAllCreatureTypes(game);
         }

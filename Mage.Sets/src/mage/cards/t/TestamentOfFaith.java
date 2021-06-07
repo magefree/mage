@@ -67,7 +67,7 @@ class TestamentOfFaithEffect extends ContinuousEffectImpl {
         if (permanent == null) {
             return false;
         }
-        permanent.addCardType(CardType.CREATURE);
+        permanent.addCardType(game, CardType.CREATURE);
         permanent.addSubType(game, SubType.WALL);
         return true;
     }

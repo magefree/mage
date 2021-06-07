@@ -221,11 +221,11 @@ public class BoosterGenerationTest extends MageTestBase {
         for (int i = 0; i < 50; i++) {
             List<Card> booster = CoreSet2019.getInstance().createBooster();
             // check that booster contains a land card
-            assertTrue(booster.stream().anyMatch(card -> card.getCardType().contains(CardType.LAND)));
+            assertTrue(booster.stream().anyMatch(card -> card.getCardType(currentGame).contains(CardType.LAND)));
             allCards.addAll(booster);
         }
         // check that some dual lands were generated
-        assertTrue(allCards.stream().anyMatch(card -> card.getCardType().contains(CardType.LAND) && Objects.equals(card.getRarity(), Rarity.COMMON)));
+        assertTrue(allCards.stream().anyMatch(card -> card.getCardType(currentGame).contains(CardType.LAND) && Objects.equals(card.getRarity(), Rarity.COMMON)));
     }
 
     @Test

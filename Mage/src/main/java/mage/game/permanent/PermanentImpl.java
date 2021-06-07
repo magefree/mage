@@ -1084,7 +1084,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         controlledFromStartOfControllerTurn = false;
         if (this.isFaceDown(game)) {
             // remove some attributes here, because first apply effects comes later otherwise abilities (e.g. color related) will unintended trigger
-            MorphAbility.setPermanentToFaceDownCreature(this);
+            MorphAbility.setPermanentToFaceDownCreature(this, game);
         }
 
         EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone, EnterEventType.SELF);

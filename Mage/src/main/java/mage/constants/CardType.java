@@ -89,7 +89,7 @@ public enum CardType {
 
         @Override
         public boolean apply(MageObject input, Game game) {
-            return input.getCardType().contains(cardType);
+            return input.getCardType(game).contains(cardType);
         }
 
         @Override

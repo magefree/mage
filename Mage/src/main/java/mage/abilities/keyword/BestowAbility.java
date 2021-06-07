@@ -128,23 +128,23 @@ public class BestowAbility extends SpellAbility {
             if (basicObject != null) {
                 basicObject.getSubtype().remove(SubType.AURA);
                 if (!basicObject.isCreature(game)) {
-                    basicObject.addCardType(CardType.CREATURE);
+                    basicObject.addCardType(game, CardType.CREATURE);
                 }
             }
             permanent.getSubtype().remove(SubType.AURA);
             if (!permanent.isCreature(game)) {
-                permanent.addCardType(CardType.CREATURE);
+                permanent.addCardType(game, CardType.CREATURE);
             }
 
         }
     }
 
-    static public void becomeAura(Card card) {
+    static public void becomeAura(Card card, Game game) {
         // permanently changes to the object
         if (card != null) {
             card.addSubType(SubType.AURA);
-            card.getCardType().remove(CardType.CREATURE);
-            card.getCardType().add(CardType.ENCHANTMENT);
+            card.getCardType(game).remove(CardType.CREATURE);
+            card.getCardType(game).add(CardType.ENCHANTMENT);
         }
     }
 }
@@ -177,7 +177,7 @@ class BestowEntersBattlefieldEffect extends ReplacementEffectImpl {
                 MageObject basicObject = bestowPermanent.getBasicMageObject(game);
                 if (basicObject != null && !basicObject.getSubtype().contains(SubType.AURA)) {
                     basicObject.getSubtype(null).add(SubType.AURA);
-                    basicObject.getCardType().remove(CardType.CREATURE);
+                    basicObject.getCardType(game).remove(CardType.CREATURE);
                 }
             }
         }

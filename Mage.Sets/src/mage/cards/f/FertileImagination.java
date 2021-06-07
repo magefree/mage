@@ -110,7 +110,7 @@ class FertileImaginationEffect extends OneShotEffect {
                     Set<Card> cards = hand.getCards(game);
                     int tokensToMake = 0;
                     for (Card card : cards) {
-                        if (card != null && card.getCardType().contains(type)) {
+                        if (card != null && card.getCardType(game).contains(type)) {
                             tokensToMake += 2;
                         }
                     }

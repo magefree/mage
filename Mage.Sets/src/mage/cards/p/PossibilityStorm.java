@@ -1,7 +1,5 @@
 package mage.cards.p;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -22,8 +20,10 @@ import mage.players.Library;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PossibilityStorm extends CardImpl {
@@ -122,9 +122,9 @@ class PossibilityStormEffect extends OneShotEffect {
                         if (card != null) {
                             spellController.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
                         }
-                    } while (library.hasCards() && card != null && !sharesType(card, spell.getCardType()));
+                    } while (library.hasCards() && card != null && !sharesType(card, spell.getCardType(game), game));
 
-                    if (card != null && sharesType(card, spell.getCardType())
+                    if (card != null && sharesType(card, spell.getCardType(game), game)
                             && !card.isLand(game)
                             && card.getSpellAbility().canChooseTarget(game, spellController.getId())) {
                         if (spellController.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
@@ -144,8 +144,8 @@ class PossibilityStormEffect extends OneShotEffect {
         return false;
     }
 
-    private boolean sharesType(Card card, ArrayList<CardType> cardTypes) {
-        for (CardType type : card.getCardType()) {
+    private boolean sharesType(Card card, ArrayList<CardType> cardTypes, Game game) {
+        for (CardType type : card.getCardType(game)) {
             if (cardTypes.contains(type)) {
                 return true;
             }

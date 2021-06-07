@@ -74,10 +74,10 @@ class HolisticWisdomEffect extends OneShotEffect {
                 if (cost instanceof ExileFromHandCost) {
                     List<CardType> cardtypes = new ArrayList<>();
                     ExileFromHandCost exileCost = (ExileFromHandCost) cost;
-                    for (CardType cardtype : exileCost.getCards().get(0).getCardType()) {
+                    for (CardType cardtype : exileCost.getCards().get(0).getCardType(game)) {
                         cardtypes.add(cardtype);
                     }
-                    for (CardType cardtype : card.getCardType()) {
+                    for (CardType cardtype : card.getCardType(game)) {
                         if (cardtypes.contains(cardtype)) {
                             Effect effect = new ReturnToHandTargetEffect();
                             effect.setTargetPointer(new FixedTarget(card.getId()));

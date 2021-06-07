@@ -99,10 +99,10 @@ class XenicPoltergeistEffect extends ContinuousEffectImpl {
                     Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
                     if (permanent != null) {
                         if (!permanent.isArtifact(game)) {
-                            permanent.addCardType(CardType.ARTIFACT);
+                            permanent.addCardType(game, CardType.ARTIFACT);
                         }
                         if (!permanent.isCreature(game)) {
-                            permanent.addCardType(CardType.CREATURE);
+                            permanent.addCardType(game, CardType.CREATURE);
                         }
                     }
                 }

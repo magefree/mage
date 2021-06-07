@@ -158,7 +158,7 @@ public class Plane implements CommandObject {
     }
 
     @Override
-    public ArrayList<CardType> getCardType() {
+    public ArrayList<CardType> getCardType(Game game) {
         return emptySet;
     }
 

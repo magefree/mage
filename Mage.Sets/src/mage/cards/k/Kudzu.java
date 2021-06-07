@@ -81,7 +81,7 @@ class KudzuEffect extends OneShotEffect {
                 if (game.getState().getZone(enchantedLand.getId()) == Zone.BATTLEFIELD) { // if 2 or more Kudzu's were on a land
                     enchantedLand.destroy(source, game, false);
                 }
-                if (!game.getBattlefield().getAllActivePermanents(CardType.LAND).isEmpty()) { //lands are available on the battlefield
+                if (!game.getBattlefield().getAllActivePermanents(CardType.LAND, game).isEmpty()) { //lands are available on the battlefield
                     Target target = new TargetLandPermanent();
                     target.setNotTarget(true); //not a target, it is chosen
                     Card kudzuCard = game.getCard(source.getSourceId());

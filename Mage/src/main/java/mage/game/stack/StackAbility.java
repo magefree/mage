@@ -158,7 +158,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public ArrayList<CardType> getCardType() {
+    public ArrayList<CardType> getCardType(Game game) {
         return emptyCardType;
     }
 

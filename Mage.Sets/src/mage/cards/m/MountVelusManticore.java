@@ -75,7 +75,7 @@ class MountVelusManticoreEffect extends OneShotEffect {
             return false;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new DamageTargetEffect(card.getCardType().size()), false, "{this} deals X damage " +
+                new DamageTargetEffect(card.getCardType(game).size()), false, "{this} deals X damage " +
                 "to any target, where X is the number of card types the discarded card has"
         );
         ability.addTarget(new TargetAnyTarget());

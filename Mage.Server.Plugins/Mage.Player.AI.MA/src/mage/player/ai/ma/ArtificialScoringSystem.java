@@ -40,7 +40,7 @@ public final class ArtificialScoringSystem {
         }
 
         final int score = value * 100 - card.getManaCost().manaValue() * 20;
-        if (card.getCardType().contains(CardType.CREATURE)) {
+        if (card.getCardType(game).contains(CardType.CREATURE)) {
             return score + (card.getPower().getValue() + card.getToughness().getValue()) * 10;
         } else {
             return score + (/*card.getRemoval()*50*/+(card.getRarity() == null ? 0 : card.getRarity().getRating() * 30));
@@ -51,7 +51,7 @@ public final class ArtificialScoringSystem {
         //TODO: cache it inside Card
         int score = getCardDefinitionScore(game, permanent);
         score += PERMANENT_SCORE;
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
+        if (permanent.getCardType(game).contains(CardType.CREATURE)) {
             // TODO: implement in the mage core
             //score + =cardDefinition.getActivations().size()*50;
             //score += cardDefinition.getManaActivations().size()*80;
@@ -71,7 +71,7 @@ public final class ArtificialScoringSystem {
         if (!canTap(permanent, game)) {
             score += getTappedScore(permanent);
         }
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
+        if (permanent.getCardType(game).contains(CardType.CREATURE)) {
             final int power = permanent.getPower().getValue();
             final int toughness = permanent.getToughness().getValue();
             int abilityScore = 0;
@@ -86,7 +86,7 @@ public final class ArtificialScoringSystem {
                 if (object instanceof Card) {
                     Card card = (Card) object;
                     int outcomeScore = card.getAbilities(game).getOutcomeTotal();
-                    if (card.getCardType().contains(CardType.ENCHANTMENT)) {
+                    if (card.getCardType(game).contains(CardType.ENCHANTMENT)) {
                         enchantments = enchantments + outcomeScore * 100;
                     } else {
                         equipments = equipments + outcomeScore * 50;
@@ -109,7 +109,7 @@ public final class ArtificialScoringSystem {
     private static boolean canTap(Permanent permanent, Game game) {
         return !permanent.isTapped()
                 && (!permanent.hasSummoningSickness()
-                || !permanent.getCardType().contains(CardType.CREATURE)
+                || !permanent.getCardType(game).contains(CardType.CREATURE)
                 || permanent.getAbilities(game).contains(HasteAbility.getInstance()));
     }
 
@@ -118,9 +118,9 @@ public final class ArtificialScoringSystem {
     }
 
     public static int getTappedScore(final Permanent permanent) {
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
+        if (permanent.isCreature(null)) {
             return -100;
-        } else if (permanent.getCardType().contains(CardType.LAND)) {
+        } else if (permanent.isLand(null)) {
             return -20; // means probably no mana available  (should be greater than passivity penalty
         } else {
             return -2;

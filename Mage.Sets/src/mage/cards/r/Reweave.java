@@ -81,8 +81,8 @@ class ReweaveEffect extends OneShotEffect {
                         for (Card card : permanentController.getLibrary().getCards(game)) {
                             cards.add(card);
                             if (card.isPermanent(game)) {
-                                for (CardType cardType : permanent.getCardType()) {
-                                    if (card.getCardType().contains(cardType)) {
+                                for (CardType cardType : permanent.getCardType(game)) {
+                                    if (card.getCardType(game).contains(cardType)) {
                                         permanentCard = card;
                                         break;
                                     }

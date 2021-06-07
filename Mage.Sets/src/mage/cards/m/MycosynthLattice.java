@@ -62,7 +62,7 @@ class PermanentsAreArtifactsEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            perm.addCardType(CardType.ARTIFACT);
+            perm.addCardType(game, CardType.ARTIFACT);
         }
         return true;
     }

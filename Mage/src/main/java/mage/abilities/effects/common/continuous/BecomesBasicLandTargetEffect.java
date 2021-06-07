@@ -103,7 +103,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                 continue;
             }
             if (!land.isLand(game)) {
-                land.addCardType(CardType.LAND);
+                land.addCardType(game, CardType.LAND);
             }
             if (loseOther) {
                 // 305.7 Note that this doesn't remove any abilities
