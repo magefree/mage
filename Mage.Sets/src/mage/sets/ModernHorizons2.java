@@ -323,6 +323,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Yavimaya, Cradle of Growth", 261, Rarity.RARE, mage.cards.y.YavimayaCradleOfGrowth.class));
         cards.add(new SetCardInfo("Young Necromancer", 110, Rarity.UNCOMMON, mage.cards.y.YoungNecromancer.class));
         cards.add(new SetCardInfo("Yusri, Fortune's Flame", 218, Rarity.RARE, mage.cards.y.YusriFortunesFlame.class));
+        cards.add(new SetCardInfo("Zabaz, the Glimmerwasp", 243, Rarity.RARE, mage.cards.z.ZabazTheGlimmerwasp.class));
         cards.add(new SetCardInfo("Zuran Orb", 300, Rarity.UNCOMMON, mage.cards.z.ZuranOrb.class));
     }
 }
