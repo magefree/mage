@@ -16,7 +16,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -75,7 +74,7 @@ class JusticeTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         MageObject sourceObject = game.getObject(event.getSourceId());
         if (sourceObject != null && sourceObject.getColor(game).isRed()) {
-            if (sourceObject instanceof Permanent && sourceObject.isCreature()
+            if (sourceObject instanceof Permanent && sourceObject.isCreature(game)
                     || sourceObject instanceof Spell) {
                 this.getEffects().get(0).setValue("damageAmount", event.getAmount());
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getControllerId(sourceObject.getId())));

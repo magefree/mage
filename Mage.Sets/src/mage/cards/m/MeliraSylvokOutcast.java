@@ -13,7 +13,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 import java.util.Set;
@@ -120,7 +119,7 @@ class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl {
             if (perm == null) {
                 perm = game.getPermanentEntering(event.getTargetId());
             }
-            return perm != null && perm.isCreature() && perm.isControlledBy(source.getControllerId());
+            return perm != null && perm.isCreature(game) && perm.isControlledBy(source.getControllerId());
         }
         return false;
     }

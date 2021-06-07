@@ -70,7 +70,7 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
 
         if (card == null
                 || permanent == null
-                || !card.isCreature()) {
+                || !card.isCreature(game)) {
             return false;
         }
 

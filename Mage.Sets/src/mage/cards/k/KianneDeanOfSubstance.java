@@ -108,7 +108,7 @@ class KianneDeanOfSubstanceExileEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.EXILED, source, game);
-        if (card.isLand()) {
+        if (card.isLand(game)) {
             return player.moveCards(card, Zone.HAND, source, game);
         }
         return card.getMainCard().addCounters(

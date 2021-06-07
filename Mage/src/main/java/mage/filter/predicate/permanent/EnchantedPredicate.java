@@ -1,7 +1,6 @@
 
 package mage.filter.predicate.permanent;
 
-import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -20,7 +19,7 @@ public enum EnchantedPredicate implements Predicate<Permanent> {
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .anyMatch(MageObject::isEnchantment);
+                .anyMatch(permanent -> permanent.isEnchantment(game));
     }
 
     @Override

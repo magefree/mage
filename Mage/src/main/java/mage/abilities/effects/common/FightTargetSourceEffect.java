@@ -31,7 +31,7 @@ public class FightTargetSourceEffect extends OneShotEffect {
             Permanent creature1 = game.getPermanent(getTargetPointer().getFirst(game, source));
             // 20110930 - 701.10
             if (creature1 != null && sourcePermanent != null) {
-                if (creature1.isCreature() && sourcePermanent.isCreature()) {
+                if (creature1.isCreature(game) && sourcePermanent.isCreature(game)) {
                     return sourcePermanent.fight(creature1, source, game);
                 }
             }

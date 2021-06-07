@@ -65,7 +65,7 @@ class BoneDancerEffect extends OneShotEffect {
         if (controller != null && defendingPlayer != null) {
             Card lastCreatureCard = null;
             for (Card card : defendingPlayer.getGraveyard().getCards(game)) {
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     lastCreatureCard = card;
                 }
             }

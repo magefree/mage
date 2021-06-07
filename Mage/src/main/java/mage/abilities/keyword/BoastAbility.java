@@ -54,7 +54,7 @@ public class BoastAbility extends ActivatedAbilityImpl {
             return 1;
         }
         Permanent permanent = game.getPermanent(getSourceId());
-        if (permanent != null && !permanent.isCreature()) {
+        if (permanent != null && !permanent.isCreature(game)) {
             return 1;
         }
         return game.getBattlefield()

@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import mage.MageObject;
+
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -88,7 +88,7 @@ class HelmOfObedienceEffect extends OneShotEffect {
                     .getCards(game)
                     .stream()
                     .filter(Objects::nonNull)
-                    .filter(MageObject::isCreature)
+                    .filter(card -> card.isCreature(game))
                     .collect(Collectors.toSet());
             if (!creatures.isEmpty()) {
                 controller.moveCards(creatures, Zone.BATTLEFIELD, source, game);

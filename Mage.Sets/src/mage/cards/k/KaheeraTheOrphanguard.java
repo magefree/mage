@@ -1,7 +1,6 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -99,7 +98,7 @@ enum KaheeraTheOrphanguardCompanionCondition implements CompanionCondition {
     @Override
     public boolean isLegal(Set<Card> deck, int startingSize) {
         return deck.stream()
-                .filter(MageObject::isCreature)
+                .filter(card -> card.isCreature(null))
                 .allMatch(KaheeraTheOrphanguardCompanionCondition::checkTypes);
     }
 }

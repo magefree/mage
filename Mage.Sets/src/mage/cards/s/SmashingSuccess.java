@@ -66,7 +66,7 @@ class SmashingSuccessEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null && permanent.isPhasedIn() && !permanent.isPhasedOutIndirectly()) {
-            if (permanent.isArtifact()) {
+            if (permanent.isArtifact(game)) {
                 if (permanent.destroy(source, game, false)) {
                     Token token = new TreasureToken();
                     token.putOntoBattlefield(1, game, source, source.getControllerId());

@@ -2062,7 +2062,7 @@ public class HumanPlayer extends PlayerImpl {
                 return;
             }
         }
-        if (userData.isUseFirstManaAbility() && object instanceof Permanent && object.isLand()) {
+        if (userData.isUseFirstManaAbility() && object instanceof Permanent && object.isLand(game)) {
             ActivatedAbility ability = abilities.values().iterator().next();
             if (ability instanceof ActivatedManaAbilityImpl) {
                 activateAbility(ability, game);

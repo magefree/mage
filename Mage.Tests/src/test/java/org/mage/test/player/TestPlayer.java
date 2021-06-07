@@ -1161,7 +1161,7 @@ public class TestPlayer implements Player {
                         + c.getIdName()
                         + (c.isCopy() ? " [copy of " + c.getCopyFrom().getId().toString().substring(0, 3) + "]" : "")
                         + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
-                        + (c.isPlaneswalker() ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
+                        + (c.isPlaneswalker(game) ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
                         + ", " + (c.isTapped() ? "Tapped" : "Untapped")
                         + getPrintableAliases(", [", c.getId(), "]")
                         + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())))

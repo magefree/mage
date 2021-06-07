@@ -42,7 +42,7 @@ public class ExileTopCreatureCardOfGraveyardCost extends CostImpl {
         if(controller != null) {
             Card topCard = null;
             for (Card card :controller.getGraveyard().getCards(game)) {
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     topCard = card;
                 }
             }

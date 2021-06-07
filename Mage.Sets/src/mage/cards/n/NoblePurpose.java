@@ -11,7 +11,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -64,7 +63,7 @@ class NoblePurposeTriggeredAbility extends TriggeredAbilityImpl {
         DamagedEvent damageEvent = (DamagedEvent) event;
         if (damageEvent.isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.isCreature()
+            if (permanent != null && permanent.isCreature(game)
                     && permanent.isControlledBy(this.getControllerId())) {
                 this.getEffects().clear();
                 this.getEffects().add(new GainLifeEffect(damageEvent.getAmount()));

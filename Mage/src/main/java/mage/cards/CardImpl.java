@@ -3,7 +3,6 @@ package mage.cards;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
-import mage.ObjectColor;
 import mage.abilities.*;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -64,13 +63,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.cardType.addAll(Arrays.asList(cardTypes));
         this.manaCost.load(costs);
         setDefaultColor();
-        if (this.isLand()) {
+        if (this.isLand(null)) {
             Ability ability = new PlayLandAbility(name);
             ability.setSourceId(this.getId());
             abilities.add(ability);
         } else {
             SpellAbility ability = new SpellAbility(manaCost, name, Zone.HAND, spellAbilityType);
-            if (!this.isInstant()) {
+            if (!this.isInstant(null)) {
                 ability.setTiming(TimingRule.SORCERY);
             }
             ability.setSourceId(this.getId());
@@ -269,7 +268,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     && mainCardState != null
                     && !mainCardState.hasLostAllAbilities()
                     && mainCardState.getAbilities().containsClass(FlashbackAbility.class)) {
-                FlashbackAbility flash = new FlashbackAbility(this.getManaCost(), this.isInstant() ? TimingRule.INSTANT : TimingRule.SORCERY);
+                FlashbackAbility flash = new FlashbackAbility(this.getManaCost(), this.isInstant(game) ? TimingRule.INSTANT : TimingRule.SORCERY);
                 flash.setSourceId(this.getId());
                 flash.setControllerId(this.getOwnerId());
                 flash.setSpellAbilityType(this.getSpellAbility().getSpellAbilityType());

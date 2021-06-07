@@ -77,7 +77,7 @@ enum OldGrowthTrollCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) source.getEffects().get(0).getValue("permanentLeftBattlefield");
-        return permanent != null && permanent.isCreature();
+        return permanent != null && permanent.isCreature(game);
     }
 }
 

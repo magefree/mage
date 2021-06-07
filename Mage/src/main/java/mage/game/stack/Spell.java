@@ -201,7 +201,7 @@ public class Spell extends StackObjectImpl implements Card {
                 turnController.controlPlayersTurn(game, controller.getId());
             }
         }
-        if (this.isInstantOrSorcery()) {
+        if (this.isInstantOrSorcery(game)) {
             int index = 0;
             result = false;
             boolean legalParts = false;
@@ -245,7 +245,7 @@ public class Spell extends StackObjectImpl implements Card {
             }
             counter(null, /*this.getSpellAbility()*/ game);
             return false;
-        } else if (this.isEnchantment() && this.hasSubtype(SubType.AURA, game)) {
+        } else if (this.isEnchantment(game) && this.hasSubtype(SubType.AURA, game)) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 boolean bestow = SpellAbilityCastMode.BESTOW.equals(ability.getSpellAbilityCastMode());
                 if (bestow) {
@@ -486,11 +486,7 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public String getLogName() {
         if (faceDown) {
-            if (this.isCreature()) {
-                return "face down creature spell";
-            } else {
-                return "face down spell";
-            }
+            return "face down spell";
         }
         return GameLog.getColoredObjectIdName(card);
     }

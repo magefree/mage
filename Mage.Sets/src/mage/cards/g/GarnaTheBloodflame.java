@@ -116,7 +116,7 @@ class GarnaTheBloodflameWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.isCreature()) {
+            if (card != null && card.isCreature(game)) {
                 cards.add(event.getTargetId());
             }
         }

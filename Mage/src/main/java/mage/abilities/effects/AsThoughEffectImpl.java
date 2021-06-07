@@ -85,7 +85,7 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
         if (card == null || player == null) {
             return false;
         }
-        if (!card.isLand()) {
+        if (!card.isLand(game)) {
             if (card instanceof SplitCard) {
                 Card leftCard = ((SplitCard) card).getLeftHalfCard();
                 player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts());

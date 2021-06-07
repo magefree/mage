@@ -28,7 +28,7 @@ public final class ArtificialScoringSystem {
 
     public static int getCardDefinitionScore(final Game game, final Card card) {
         int value = 3; //TODO: add new rating system card value
-        if (card.isLand()) {
+        if (card.isLand(game)) {
             int score = (int) ((value / 2.0f) * 50);
             //TODO: check this for "any color" lands
             //TODO: check this for dual and filter lands

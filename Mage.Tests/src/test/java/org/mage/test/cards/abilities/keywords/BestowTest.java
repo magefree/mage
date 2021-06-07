@@ -81,7 +81,7 @@ public class BestowTest extends CardTestPlayerBase {
         // because Boon Satyr is no creature on the battlefield, evolve may not trigger
         assertPermanentCount(playerA, "Boon Satyr", 1);
         Permanent boonSatyr = getPermanent("Boon Satyr", playerA);
-        Assert.assertTrue("Boon Satyr may not be a creature", !boonSatyr.isCreature());
+        Assert.assertTrue("Boon Satyr may not be a creature", !boonSatyr.isCreature(currentGame));
         assertPermanentCount(playerA, "Silent Artisan", 1);
         assertPermanentCount(playerA, "Experiment One", 1);
         assertPowerToughness(playerA, "Experiment One", 1, 1);
@@ -117,8 +117,8 @@ public class BestowTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Hopeful Eidolon", 1, 1);
 
         Permanent hopefulEidolon = getPermanent("Hopeful Eidolon", playerA);
-        Assert.assertTrue("Hopeful Eidolon has to be a creature but is not", hopefulEidolon.isCreature());
-        Assert.assertTrue("Hopeful Eidolon has to be an enchantment but is not", hopefulEidolon.isEnchantment());
+        Assert.assertTrue("Hopeful Eidolon has to be a creature but is not", hopefulEidolon.isCreature(currentGame));
+        Assert.assertTrue("Hopeful Eidolon has to be an enchantment but is not", hopefulEidolon.isEnchantment(currentGame));
 
     }
 
@@ -332,7 +332,7 @@ public class BestowTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Nighthowler", 2, 2);
         Permanent nighthowler = getPermanent("Nighthowler", playerB);
 
-        Assert.assertEquals("Nighthowler has to be a creature", true, nighthowler.isCreature());
+        Assert.assertEquals("Nighthowler has to be a creature", true, nighthowler.isCreature(currentGame));
     }
 
     @Test

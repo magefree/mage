@@ -102,7 +102,7 @@ class RangerCaptainOfEosEffect extends ContinuousRuleModifyingEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
             Card card = game.getCard(event.getSourceId());
-            if (card != null && !card.isCreature()) {
+            if (card != null && !card.isCreature(game)) {
                 return true;
             }
         }

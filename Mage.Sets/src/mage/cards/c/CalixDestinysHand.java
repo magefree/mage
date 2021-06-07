@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -194,7 +193,7 @@ class CalixDestinysHandReturnEffect extends OneShotEffect {
                 player.getGraveyard()
                         .getCards(game)
                         .stream()
-                        .filter(MageObject::isEnchantment)
+                        .filter(card -> card.isEnchantment(game))
                         .collect(Collectors.toSet()),
                 Zone.BATTLEFIELD, source, game
         );

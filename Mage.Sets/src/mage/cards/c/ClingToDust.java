@@ -65,7 +65,7 @@ class ClingToDustEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        boolean isCreature = card.isCreature();
+        boolean isCreature = card.isCreature(game);
         if (!player.moveCards(card, Zone.EXILED, source, game)) {
             return false;
         }

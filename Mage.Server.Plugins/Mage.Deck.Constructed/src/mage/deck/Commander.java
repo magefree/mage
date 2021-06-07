@@ -3,7 +3,6 @@ package mage.deck;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.PartnerAbility;
 import mage.abilities.keyword.PartnerWithAbility;
@@ -174,8 +173,8 @@ public class Commander extends Constructed {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander banned (" + commander.getName() + ')', true);
                 valid = false;
             }
-            if ((!commander.isCreature() || !commander.isLegendary())
-                    && (!commander.isPlaneswalker() || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+            if ((!commander.isCreature(null) || !commander.isLegendary())
+                    && (!commander.isPlaneswalker(null) || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander invalid (" + commander.getName() + ')', true);
                 valid = false;
             }
@@ -571,7 +570,7 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 1);
             }
 
-            if (card.isPlaneswalker()) {
+            if (card.isPlaneswalker(null)) {
                 if (card.getName().toLowerCase(Locale.ENGLISH).equals("jace, the mind sculptor")) {
                     thisMaxPower = Math.max(thisMaxPower, 6);
                 }

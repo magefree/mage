@@ -68,7 +68,7 @@ class VoidEffect extends OneShotEffect {
         game.informPlayers(controller.getLogName() + " chooses " + number + '.');
      
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if ((permanent.isArtifact() || permanent.isCreature())
+            if ((permanent.isArtifact(game) || permanent.isCreature(game))
                     && permanent.getManaValue() == number) {
                 permanent.destroy(source, game, false);
             }

@@ -68,7 +68,7 @@ class FirstDayOfClassTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent.isCreature() && permanent.isControlledBy(this.getControllerId())) {
+        if (permanent.isCreature(game) && permanent.isControlledBy(this.getControllerId())) {
             getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }

@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
@@ -13,7 +12,6 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
@@ -156,7 +154,7 @@ class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
         Card theCard = game.getCard(objectId);
-        if (theCard == null || theCard.isLand()) {
+        if (theCard == null || theCard.isLand(game)) {
             return false;
         }
         objectId = theCard.getMainCard().getId(); // for split cards

@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -120,7 +119,7 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-        return mageObject != null && mageObject.isCreature();
+        return mageObject != null && mageObject.isCreature(game);
     }
 
     @Override

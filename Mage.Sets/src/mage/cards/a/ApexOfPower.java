@@ -76,7 +76,7 @@ class ApexOfPowerSpellEffect extends OneShotEffect {
         }
         controller.moveCards(cards, Zone.EXILED, source, game);
         for (Card card : cards) {
-            if (card.isLand()) {
+            if (card.isLand(game)) {
                 continue;
             }
             ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn);

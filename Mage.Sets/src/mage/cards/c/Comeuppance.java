@@ -71,7 +71,7 @@ class ComeuppanceEffect extends PreventionEffectImpl {
             MageObject damageDealingObject = game.getObject(event.getSourceId());
             UUID objectControllerId = null;
             if (damageDealingObject instanceof Permanent) {
-                if (damageDealingObject.isCreature()) {
+                if (damageDealingObject.isCreature(game)) {
                     ((Permanent) damageDealingObject).damage(preventionData.getPreventedDamage(), source.getSourceId(), source, game);
                 } else {
                     objectControllerId = ((Permanent) damageDealingObject).getControllerId();
@@ -103,7 +103,7 @@ class ComeuppanceEffect extends PreventionEffectImpl {
             Permanent targetPermanent = game.getPermanent(event.getTargetId());
             if (targetPermanent != null &&
                     targetPermanent.isControlledBy(source.getControllerId()) &&
-                    targetPermanent.isPlaneswalker()) {
+                    targetPermanent.isPlaneswalker(game)) {
                 catched = true;
             }
         }

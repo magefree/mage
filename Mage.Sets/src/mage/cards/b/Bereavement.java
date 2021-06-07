@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -63,7 +62,7 @@ class BereavementTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent)event).isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null && permanent.isCreature() && permanent.getColor(game).isGreen()) {
+            if (permanent != null && permanent.isCreature(game) && permanent.getColor(game).isGreen()) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
                 return true;
             }

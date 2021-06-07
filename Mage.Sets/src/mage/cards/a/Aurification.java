@@ -87,7 +87,7 @@ public final class Aurification extends CardImpl {
         public boolean checkTrigger(GameEvent event, Game game) {
             if (event.getPlayerId().equals(this.getControllerId())) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
-                if (permanent != null && permanent.isCreature()) {
+                if (permanent != null && permanent.isCreature(game)) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                     }

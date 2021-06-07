@@ -27,7 +27,7 @@ public class AuraCardCanAttachToPermanentId implements Predicate<Card> {
         Filter filter;
         if (permanent != null
                 && input != null
-                && input.isEnchantment()) {
+                && input.isEnchantment(game)) {
             for (Target target : input.getSpellAbility().getTargets()) {
                 filter = target.getFilter();
                 if (filter.match(permanent, game)) {

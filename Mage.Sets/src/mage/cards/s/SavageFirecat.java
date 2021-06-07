@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -82,7 +81,7 @@ class SavageFirecatTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        return permanent != null && permanent.isLand() && event.getPlayerId().equals(this.controllerId);
+        return permanent != null && permanent.isLand(game) && event.getPlayerId().equals(this.controllerId);
     }
     
     @Override

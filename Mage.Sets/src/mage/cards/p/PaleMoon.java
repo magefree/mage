@@ -2,7 +2,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.MageObject;
+
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 
@@ -80,7 +79,7 @@ class PaleMoonReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent != null && permanent.isLand()) {
+        if (permanent != null && permanent.isLand(game)) {
             return filter.match(permanent, game);
         }
         return false;

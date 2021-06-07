@@ -113,7 +113,7 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
         }
 
         // allows to play/cast with alternative life cost
-        if (!cardToCheck.isLand()) {
+        if (!cardToCheck.isLand(game)) {
             PayLifeCost lifeCost = new PayLifeCost(cardToCheck.getSpellAbility().getManaCosts().manaValue());
             Costs newCosts = new CostsImpl();
             newCosts.add(lifeCost);

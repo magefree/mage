@@ -124,7 +124,7 @@ class CascadeEffect extends OneShotEffect {
         Card cardToCast = null;
         for (Card card : controller.getLibrary().getCards(game)) {
             cardsToExile.add(card);
-            if (!card.isLand() && card.getManaValue() < sourceCost) {
+            if (!card.isLand(game) && card.getManaValue() < sourceCost) {
                 cardToCast = card;
                 break;
             }

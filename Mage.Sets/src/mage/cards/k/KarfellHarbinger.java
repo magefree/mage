@@ -76,7 +76,7 @@ class KarfellHarbingerManaCondition extends ManaCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             MageObject object = game.getObject(source.getSourceId());
-            return object != null && object.isInstantOrSorcery();
+            return object != null && object.isInstantOrSorcery(game);
         }
         return source instanceof ForetellAbility;
     }

@@ -80,7 +80,7 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
             return permanent != null && permanent.isControlledBy(source.getControllerId())
-                    && permanent.isCreature();
+                    && permanent.isCreature(game);
         }
         return false;
     }

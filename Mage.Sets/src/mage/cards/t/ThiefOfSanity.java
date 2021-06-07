@@ -153,7 +153,7 @@ class ThiefOfSanityCastFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
         Card theCard = game.getCard(objectId);
-        if (theCard == null || theCard.isLand()) {
+        if (theCard == null || theCard.isLand(game)) {
             return false;
         }
         objectId = theCard.getMainCard().getId(); // for split cards

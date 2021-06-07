@@ -98,7 +98,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                 }
 
                 if (theyAreStillType != null && theyAreStillType.isEmpty()
-                        || theyAreStillType == null && permanent.isLand()) {
+                        || theyAreStillType == null && permanent.isLand(game)) {
                     permanent.removeAllCreatureTypes(game);
                 }
                 permanent.copySubTypesFrom(game, token);

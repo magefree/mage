@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -70,7 +69,7 @@ class WasteNotCreatureTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
             Card discarded = game.getCard(event.getTargetId());
-            if (discarded != null && discarded.isCreature()) {
+            if (discarded != null && discarded.isCreature(game)) {
                 return true;
             }
         }
@@ -107,7 +106,7 @@ class WasteNotLandTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
             Card discarded = game.getCard(event.getTargetId());
-            if (discarded != null && discarded.isLand()) {
+            if (discarded != null && discarded.isLand(game)) {
                 return true;
             }
         }
@@ -144,7 +143,7 @@ class WasteNotOtherTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
             Card discarded = game.getCard(event.getTargetId());
-            if (discarded != null && !discarded.isLand() && !discarded.isCreature()) {
+            if (discarded != null && !discarded.isLand(game) && !discarded.isCreature(game)) {
                 return true;
             }
         }

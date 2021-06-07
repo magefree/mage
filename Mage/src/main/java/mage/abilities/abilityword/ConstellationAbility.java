@@ -53,7 +53,7 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
             return false;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && ((thisOr && permanent.getId().equals(getSourceId())) || permanent.isEnchantment());
+        return permanent != null && ((thisOr && permanent.getId().equals(getSourceId())) || permanent.isEnchantment(game));
     }
 
     @Override

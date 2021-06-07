@@ -77,7 +77,7 @@ class MindGrindEffect extends OneShotEffect {
             Cards cards = new CardsImpl();
             for (Card card : player.getLibrary().getCards(game)) {
                 cards.add(card);
-                if (card.isLand() && --landsToReveal == 0) {
+                if (card.isLand(game) && --landsToReveal == 0) {
                     break;
                 }
             }

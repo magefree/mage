@@ -89,7 +89,7 @@ class ChromeCourierEffect extends OneShotEffect {
         player.moveCards(card, Zone.HAND, source, game);
         cards.remove(card);
         player.moveCards(cards, Zone.GRAVEYARD, source, game);
-        if (card != null && card.isArtifact()) {
+        if (card != null && card.isArtifact(game)) {
             player.gainLife(3, game, source);
         }
         return true;

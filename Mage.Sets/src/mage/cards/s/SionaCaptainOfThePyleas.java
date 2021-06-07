@@ -87,7 +87,7 @@ class SionaCaptainOfThePyleasAbility extends TriggeredAbilityImpl {
         return permanent != null
                 && attachment != null
                 && permanent.isControlledBy(getControllerId())
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && attachment.isControlledBy(getControllerId())
                 && attachment.hasSubtype(SubType.AURA, game);
     }

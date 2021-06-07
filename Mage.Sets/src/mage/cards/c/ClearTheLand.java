@@ -74,7 +74,7 @@ class ClearTheLandEffect extends OneShotEffect {
                         Cards cardsToPutOnBattlefield = new CardsImpl();
                         Cards cardsToExile = new CardsImpl();
                         for (Card card : cardsToReveal.getCards(game)) {
-                            if (card.isLand()) {
+                            if (card.isLand(game)) {
                                 cardsToPutOnBattlefield.add(card);
                             } else {
                                 cardsToExile.add(card);

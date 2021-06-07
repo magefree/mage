@@ -202,7 +202,7 @@ public abstract class MageObjectImpl implements MageObject {
     public ObjectColor getFrameColor(Game game) {
         // For lands, add any colors of mana the land can produce to
         // its frame colors while game is active to represent ability changes during the game.
-        if (this.isLand() && !(this instanceof MockCard)) {
+        if (this.isLand(game) && !(this instanceof MockCard)) {
             ObjectColor cl = frameColor.copy();
             Set<ManaType> manaTypes = EnumSet.noneOf(ManaType.class);
             for (Ability ab : getAbilities()) {
@@ -302,12 +302,12 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
-        this.getSubtype().setIsAllCreatureTypes(value && (this.isTribal() || this.isCreature()));
+        this.getSubtype().setIsAllCreatureTypes(value && (this.isTribal(null) || this.isCreature(null)));
     }
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
-        this.getSubtype(game).setIsAllCreatureTypes(value && (this.isTribal() || this.isCreature()));
+        this.getSubtype(game).setIsAllCreatureTypes(value && (this.isTribal(game) || this.isCreature(game)));
     }
 
     @Override

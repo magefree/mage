@@ -75,7 +75,7 @@ class AetherStormReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
-        return card != null && card.isCreature();
+        return card != null && card.isCreature(game);
     }
 
 }

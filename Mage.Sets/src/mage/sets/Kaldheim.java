@@ -467,7 +467,7 @@ public final class Kaldheim extends ExpansionSet {
             case COMMON:
                 savedCardsInfos.removeIf(cardInfo ->
                         cardInfo.getCard().isSnow()
-                                && cardInfo.getCard().isLand()
+                                && cardInfo.getCard().isLand(null)
                                 && !cardInfo.getCard().getName().equals("Shimmerdrift Vale")
                 );
                 break;

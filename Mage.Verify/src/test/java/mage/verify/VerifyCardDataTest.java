@@ -1325,7 +1325,7 @@ public class VerifyCardDataTest {
         }
 
         // spells have only 1 ability
-        if (card.isSorcery() || card.isInstant()) {
+        if (card.isInstantOrSorcery(null)) {
             return;
         }
 

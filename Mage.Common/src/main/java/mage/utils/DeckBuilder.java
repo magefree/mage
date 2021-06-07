@@ -218,13 +218,13 @@ public final class DeckBuilder {
             this.card = card;
 
             int type;
-            if (card.isCreature()) {
+            if (card.isCreature(null)) {
                 type = 10;
             } else if (card.hasSubtype(SubType.EQUIPMENT, null)) {
                 type = 8;
             } else if (card.hasSubtype(SubType.AURA, null)) {
                 type = 5;
-            } else if (card.isInstant()) {
+            } else if (card.isInstant(null)) {
                 type = 7;
             } else {
                 type = 6;

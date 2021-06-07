@@ -205,7 +205,7 @@ class BurningCinderFuryOfCrimsonChaosFireWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.TAPPED) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && !permanent.isLand()) {
+            if (permanent != null && !permanent.isLand(game)) {
                 tappedActivePlayerIds.add(permanent.getControllerId());
             }
         }

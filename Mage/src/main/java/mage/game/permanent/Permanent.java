@@ -39,7 +39,7 @@ public interface Permanent extends Card, Controllable {
      */
     void setTapped(boolean tapped);
 
-    boolean canTap();
+    boolean canTap(Game game);
 
     boolean isFlipped();
 

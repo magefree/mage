@@ -79,7 +79,7 @@ class EzzarootChannelerEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return abilityToModify instanceof SpellAbility
                 && abilityToModify.isControlledBy(source.getControllerId())
-                && ((SpellAbility) abilityToModify).getCharacteristics(game).isCreature()
+                && ((SpellAbility) abilityToModify).getCharacteristics(game).isCreature(game)
                 && game.getCard(abilityToModify.getSourceId()) != null;
     }
 

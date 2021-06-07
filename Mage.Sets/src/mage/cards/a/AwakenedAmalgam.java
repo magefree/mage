@@ -59,7 +59,7 @@ class AwakenedAmalgamLandNamesCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Set<String> landNames = new HashSet<>();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(sourceAbility.getControllerId())) {
-            if (permanent.isLand()) {
+            if (permanent.isLand(game)) {
                 landNames.add(permanent.getName());
             }
         }

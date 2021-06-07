@@ -102,7 +102,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
             if (land == null) {
                 continue;
             }
-            if (!land.isLand()) {
+            if (!land.isLand(game)) {
                 land.addCardType(CardType.LAND);
             }
             if (loseOther) {

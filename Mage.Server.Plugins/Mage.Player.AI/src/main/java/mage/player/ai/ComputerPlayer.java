@@ -1032,7 +1032,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
                 // planeswalker kill
                 for (Permanent permanent : targets) {
-                    if (permanent.isPlaneswalker() && target.canTarget(getId(), permanent.getId(), source, game)) {
+                    if (permanent.isPlaneswalker(game) && target.canTarget(getId(), permanent.getId(), source, game)) {
                         int loy = permanent.getCounters(game).getCount(CounterType.LOYALTY);
                         if (loy <= target.getAmountRemaining()) {
                             return tryAddTarget(target, permanent.getId(), loy, source, game);
@@ -1042,7 +1042,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
                 // creature kill
                 for (Permanent permanent : targets) {
-                    if (permanent.isCreature() && target.canTarget(getId(), permanent.getId(), source, game)) {
+                    if (permanent.isCreature(game) && target.canTarget(getId(), permanent.getId(), source, game)) {
                         if (permanent.getToughness().getValue() <= target.getAmountRemaining()) {
                             return tryAddTarget(target, permanent.getId(), permanent.getToughness().getValue(), source, game);
                         }
@@ -1062,7 +1062,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
             // planeswalkers
             for (Permanent permanent : targets) {
-                if (permanent.isPlaneswalker() && target.canTarget(getId(), permanent.getId(), source, game)) {
+                if (permanent.isPlaneswalker(game) && target.canTarget(getId(), permanent.getId(), source, game)) {
                     return tryAddTarget(target, permanent.getId(), target.getAmountRemaining(), source, game);
                 }
             }
@@ -1077,7 +1077,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
             // creature
             for (Permanent permanent : targets) {
-                if (permanent.isCreature() && target.canTarget(getId(), permanent.getId(), source, game)) {
+                if (permanent.isCreature(game) && target.canTarget(getId(), permanent.getId(), source, game)) {
                     return tryAddTarget(target, permanent.getId(), target.getAmountRemaining(), source, game);
                 }
             }
@@ -1098,7 +1098,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
             // creatures - non killable (TODO: add extra skill checks like undestructeable)
             for (Permanent permanent : targets) {
-                if (permanent.isCreature() && target.canTarget(getId(), permanent.getId(), source, game)) {
+                if (permanent.isCreature(game) && target.canTarget(getId(), permanent.getId(), source, game)) {
                     int safeDamage = Math.min(permanent.getToughness().getValue() - 1, target.getAmountRemaining());
                     if (safeDamage > 0) {
                         return tryAddTarget(target, permanent.getId(), safeDamage, source, game);
@@ -1108,14 +1108,14 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
             // creatures - all
             for (Permanent permanent : targets) {
-                if (permanent.isCreature() && target.canTarget(getId(), permanent.getId(), source, game)) {
+                if (permanent.isCreature(game) && target.canTarget(getId(), permanent.getId(), source, game)) {
                     return tryAddTarget(target, permanent.getId(), target.getAmountRemaining(), source, game);
                 }
             }
 
             // planeswalkers
             for (Permanent permanent : targets) {
-                if (permanent.isPlaneswalker() && target.canTarget(getId(), permanent.getId(), source, game)) {
+                if (permanent.isPlaneswalker(game) && target.canTarget(getId(), permanent.getId(), source, game)) {
                     return tryAddTarget(target, permanent.getId(), target.getAmountRemaining(), source, game);
                 }
             }

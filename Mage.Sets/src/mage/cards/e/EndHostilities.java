@@ -61,11 +61,11 @@ class EndHostilitiesEffect extends OneShotEffect {
         if (controller != null) {
             List<Permanent> toDestroy = new ArrayList<>();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(controller.getId(), game)) {
-                if (permanent.isCreature()) {
+                if (permanent.isCreature(game)) {
                     toDestroy.add(permanent);
                 } else if (permanent.getAttachedTo() != null) {
                     Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
-                    if (attachedTo != null && attachedTo.isCreature()) {
+                    if (attachedTo != null && attachedTo.isCreature(game)) {
                         toDestroy.add(permanent);                        
                     }
                 }

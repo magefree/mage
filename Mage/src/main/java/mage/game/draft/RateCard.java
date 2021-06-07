@@ -87,15 +87,15 @@ public final class RateCard {
         }
 
         int type;
-        if (card.isPlaneswalker()) {
+        if (card.isPlaneswalker(null)) {
             type = 15;
-        } else if (card.isCreature()) {
+        } else if (card.isCreature(null)) {
             type = 10;
         } else if (card.getSubtype().contains(SubType.EQUIPMENT)) {
             type = 8;
         } else if (card.getSubtype().contains(SubType.AURA)) {
             type = 5;
-        } else if (card.isInstant()) {
+        } else if (card.isInstant(null)) {
             type = 7;
         } else {
             type = 6;
@@ -110,7 +110,7 @@ public final class RateCard {
     }
 
     private static int isRemoval(Card card) {
-        if (card.isEnchantment() || card.isInstantOrSorcery()) {
+        if (card.isEnchantment(null) || card.isInstantOrSorcery(null)) {
 
             for (Ability ability : card.getAbilities()) {
                 for (Effect effect : ability.getEffects()) {

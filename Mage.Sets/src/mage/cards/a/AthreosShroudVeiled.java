@@ -103,7 +103,7 @@ class AthreosShroudVeiledTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         Permanent permanent = zEvent.getTarget();
         if (permanent == null
-                || !permanent.isCreature()
+                || !permanent.isCreature(game)
                 || !permanent.getCounters(game).containsKey(CounterType.COIN)) {
             return false;
         }

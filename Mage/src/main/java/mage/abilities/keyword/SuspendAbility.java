@@ -148,7 +148,7 @@ public class SuspendAbility extends SpecialAction {
                         .append(" on it.")
                         .append(" At the beginning of your upkeep, remove a time counter. "
                                 + "When the last is removed, cast it without paying its mana cost.")
-                        .append(card.isCreature() ? " If you play it this way and it's a creature, "
+                        .append(card.isCreature(null) ? " If you play it this way and it's a creature, "
                                 + "it gains haste until you lose control of it." : "")
                         .append(")</i>");
             }
@@ -209,7 +209,7 @@ public class SuspendAbility extends SpecialAction {
             return ActivationStatus.getFalse();
         }
         MageObject object = game.getObject(sourceId);
-        return new ActivationStatus(object.isInstant()
+        return new ActivationStatus(object.isInstant(game)
                 || object.hasAbility(FlashAbility.getInstance(), game)
                 || null != game.getContinuousEffects().asThough(sourceId,
                         AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
@@ -370,7 +370,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
                     game, true, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
             if (cardWasCast) {
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     ContinuousEffect effect = new GainHasteEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));
                     game.addEffect(effect, source);

@@ -48,7 +48,7 @@ public class TapLandForManaAllTriggeredAbility extends TriggeredAbilityImpl {
             permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         }
 
-        if (permanent != null && permanent.isLand()) {
+        if (permanent != null && permanent.isLand(game)) {
             if (setTargetPointer) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
             }

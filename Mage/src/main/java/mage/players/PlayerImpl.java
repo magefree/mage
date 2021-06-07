@@ -1130,7 +1130,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
         boolean result;
-        if (card.isLand()) {
+        if (card.isLand(game)) {
             result = playLand(card, game, ignoreTiming);
         } else {
             result = cast(card.getSpellAbility(), game, noMana, approvingObject);
@@ -3406,7 +3406,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // return play ability that can activate AlternativeSourceCosts
         if (ability instanceof AlternativeSourceCosts && object != null && !(object instanceof Permanent)) {
             ActivatedAbility playAbility = null;
-            if (object.isLand()) {
+            if (object.isLand(game)) {
                 playAbility = (PlayLandAbility) CardUtil.getAbilities(object, game).stream().filter(a -> a instanceof PlayLandAbility).findFirst().orElse(null);
             } else if (object instanceof Card) {
                 playAbility = ((Card) object).getSpellAbility();

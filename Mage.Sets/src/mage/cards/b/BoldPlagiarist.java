@@ -70,7 +70,7 @@ class BoldPlagiaristTriggeredAbility extends TriggeredAbilityImpl {
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent == null
-                || !permanent.isCreature()
+                || !permanent.isCreature(game)
                 || !permanent.isControlledBy(event.getPlayerId())) {
             return false;
         }

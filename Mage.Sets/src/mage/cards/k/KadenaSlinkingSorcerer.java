@@ -101,7 +101,7 @@ class KadenaSlinkingSorcererWatcher extends Watcher {
             return;
         }
         Spell spell = (Spell) game.getObject(event.getTargetId());
-        if (spell == null || !spell.isCreature() || !spell.isFaceDown(game)) {
+        if (spell == null || !spell.isCreature(game) || !spell.isFaceDown(game)) {
             return;
         }
         castFaceDown.add(event.getPlayerId());

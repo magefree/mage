@@ -81,7 +81,7 @@ class ConsumeEffect extends OneShotEffect {
         }
         int greatestPower = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(player.getId())) {
-            if (permanent != null && permanent.isCreature()) {
+            if (permanent != null && permanent.isCreature(game)) {
                 greatestPower = Math.max(permanent.getPower().getValue(), greatestPower);
             }
         }

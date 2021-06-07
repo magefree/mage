@@ -181,8 +181,8 @@ public class TransformTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Startled Awake", 0);
         assertPermanentCount(playerA, "Persistent Nightmare", 1); // Night-side card of Startled Awake
         Permanent nightmare = getPermanent("Persistent Nightmare", playerA);
-        Assert.assertTrue("Has to have creature card type", nightmare.isCreature());
-        Assert.assertFalse("Has not to have sorcery card type", nightmare.isSorcery());
+        Assert.assertTrue("Has to have creature card type", nightmare.isCreature(currentGame));
+        Assert.assertFalse("Has not to have sorcery card type", nightmare.isSorcery(currentGame));
     }
 
     /**

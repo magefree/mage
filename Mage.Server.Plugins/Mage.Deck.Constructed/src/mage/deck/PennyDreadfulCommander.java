@@ -127,8 +127,8 @@ public class PennyDreadfulCommander extends Constructed {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander banned (" + commander.getName() + ')', true);
                 valid = false;
             }
-            if ((!commander.isCreature() || !commander.isLegendary())
-                    && (!commander.isPlaneswalker() || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+            if ((!commander.isCreature(null) || !commander.isLegendary())
+                    && (!commander.isPlaneswalker(null) || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander invalid (" + commander.getName() + ')', true);
                 valid = false;
             }

@@ -67,7 +67,7 @@ class DeadbridgeChantEffect extends OneShotEffect {
             if (card != null) {
                 Zone targetZone = Zone.HAND;
                 String text = " put into hand of ";
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     targetZone = Zone.BATTLEFIELD;
                     text = " put onto battlefield for ";
                 }

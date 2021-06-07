@@ -15,7 +15,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -76,7 +75,7 @@ class UrabraskTheHiddenEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null && permanent.isCreature()) {
+            if (permanent != null && permanent.isCreature(game)) {
                 return true;
             }
         }

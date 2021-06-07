@@ -78,7 +78,7 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
             case DAMAGED_PERMANENT:
                 Permanent permanent = game.getPermanent(event.getTargetId());
                 if (permanent == null
-                        || !permanent.isPlaneswalker()
+                        || !permanent.isPlaneswalker(game)
                         || !orPlaneswalker) {
                     return false;
                 }

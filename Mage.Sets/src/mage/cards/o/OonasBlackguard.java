@@ -74,7 +74,7 @@ class OonasBlackguardReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null && creature.isControlledBy(source.getControllerId())
-                && creature.isCreature()
+                && creature.isCreature(game)
                 && creature.hasSubtype(SubType.ROGUE, game)
                 && !event.getTargetId().equals(source.getSourceId())) {
             return true;

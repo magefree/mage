@@ -74,7 +74,7 @@ class CastCreatureWatcher extends Watcher {
                 && game.isActivePlayer(event.getPlayerId())
                 && game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell.isCreature()) {
+            if (spell.isCreature(game)) {
                 condition = true;
             }
         }

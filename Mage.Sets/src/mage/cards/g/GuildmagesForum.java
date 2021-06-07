@@ -67,7 +67,7 @@ class GuildmagesForumWatcher extends Watcher {
             MageObject target = game.getObject(event.getTargetId());
             if (event.getSourceId() != null
                     && event.getSourceId().equals(this.getSourceId())
-                    && target != null && target.isCreature() && target.getColor(game).isMulticolored()
+                    && target != null && target.isCreature(game) && target.getColor(game).isMulticolored()
                     && event.getFlag()) {
                 if (target instanceof Spell) {
                     game.getState().addEffect(new GuildmagesForumEntersBattlefieldEffect(

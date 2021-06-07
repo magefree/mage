@@ -69,7 +69,7 @@ class GrafdiggersCageEffect extends ContinuousRuleModifyingEffectImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getToZone() == Zone.BATTLEFIELD && (zEvent.getFromZone() == Zone.GRAVEYARD || zEvent.getFromZone() == Zone.LIBRARY)) {
             Card card = game.getCard(zEvent.getTargetId());
-            if (card != null && card.isCreature()) {
+            if (card != null && card.isCreature(game)) {
                 return true;
             }
         }

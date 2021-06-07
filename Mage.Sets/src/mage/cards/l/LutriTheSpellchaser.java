@@ -84,9 +84,9 @@ enum LutriTheSpellchaserCompanionCondition implements CompanionCondition {
 
     @Override
     public boolean isLegal(Set<Card> deck, int startingSize) {
-        Map<String, Integer> cardMap = new HashMap();
+        Map<String, Integer> cardMap = new HashMap<>();
         deck.stream()
-                .filter(card -> !card.isLand())
+                .filter(card -> !card.isLand(null))
                 .map(MageObject::getName)
                 .forEach(s -> {
                     cardMap.putIfAbsent(s, 0);

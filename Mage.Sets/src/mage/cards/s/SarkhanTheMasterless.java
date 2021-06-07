@@ -107,7 +107,7 @@ class SarkhanTheMasterlessBecomeDragonEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent != null && permanent.isPlaneswalker()) {
+            if (permanent != null && permanent.isPlaneswalker(game)) {
                 affectedObjectList.add(new MageObjectReference(permanent, game));
             }
         }

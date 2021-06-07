@@ -119,6 +119,6 @@ class UnpredictableCycloneReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
         Card sourceCard = game.getCard(stackObject.getSourceId());
-        return sourceCard != null && !sourceCard.isLand();
+        return sourceCard != null && !sourceCard.isLand(game);
     }
 }

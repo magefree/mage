@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
@@ -75,7 +74,7 @@ class GladehartCavalryTriggeredAbility extends TriggeredAbilityImpl {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null
                     && permanent.isControlledBy(this.getControllerId())
-                    && permanent.isCreature()
+                    && permanent.isCreature(game)
                     && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
                 return true;
             }

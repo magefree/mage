@@ -122,10 +122,10 @@ public class Oathbreaker extends Vintage {
         } else {
             // collect data
             for (Card commander : deck.getSideboard()) {
-                if (commander.isInstantOrSorcery()) {
+                if (commander.isInstantOrSorcery(null)) {
                     signatureSpells.add(commander.getName());
                 } else {
-                    if (commander.isPlaneswalker()) {
+                    if (commander.isPlaneswalker(null)) {
                         commanderNames.add(commander.getName());
 
                         // color identity from commanders only, not spell

@@ -95,7 +95,7 @@ class EchoingEquationEffect extends OneShotEffect {
         Permanent copyFrom = game.getPermanent(source.getFirstTarget());
         if (copyFrom != null) {
             game.getBattlefield().getAllActivePermanents(source.getControllerId()).stream()
-                .filter(permanent -> permanent.isCreature() && !permanent.getId().equals(copyFrom.getId()))
+                .filter(permanent -> permanent.isCreature(game) && !permanent.getId().equals(copyFrom.getId()))
                 .forEach(copyTo -> game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), source, new CopyApplier() {
                     @Override
                     public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {

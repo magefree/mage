@@ -61,7 +61,7 @@ class EchoingCalmEffect extends OneShotEffect {
             permanent.destroy(source, game, false);
             if (!CardUtil.haveEmptyName(permanent)) { // in case of face down enchantment creature
                 for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                    if (!perm.getId().equals(permanent.getId()) && CardUtil.haveSameNames(perm, permanent) && perm.isEnchantment()) {
+                    if (!perm.getId().equals(permanent.getId()) && CardUtil.haveSameNames(perm, permanent) && perm.isEnchantment(game)) {
                         perm.destroy(source, game, false);
                     }
                 }

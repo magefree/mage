@@ -40,7 +40,7 @@ public class UntapAllThatAttackedEffect extends OneShotEffect {
             Set<MageObjectReference> attackedThisTurn = watcher.getAttackedThisTurnCreatures();
             for (MageObjectReference mor : attackedThisTurn) {
                 Permanent permanent = mor.getPermanent(game);
-                if (permanent != null && permanent.isCreature()) {
+                if (permanent != null && permanent.isCreature(game)) {
                     permanent.untap(game);
                 }
             }

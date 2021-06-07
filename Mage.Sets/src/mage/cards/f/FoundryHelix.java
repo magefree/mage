@@ -53,7 +53,7 @@ enum FoundryHelixCondition implements Condition {
         for (Cost cost : source.getCosts()) {
             if (cost instanceof SacrificeTargetCost) {
                 for (Permanent permanent : ((SacrificeTargetCost) cost).getPermanents()) {
-                    if (permanent.isArtifact()) {
+                    if (permanent.isArtifact(game)) {
                         return true;
                     }
                 }

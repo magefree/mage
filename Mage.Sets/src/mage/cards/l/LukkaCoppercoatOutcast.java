@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -84,7 +83,7 @@ class LukkaCoppercoatOutcastExileEffect extends OneShotEffect {
         Set<Card> cards = controller.getLibrary().getTopCards(game, 3);
         controller.moveCards(cards, Zone.EXILED, source, game);
 
-        cards.stream().filter(MageObject::isCreature).forEach(card -> {
+        cards.stream().filter(card1 -> card1.isCreature(game)).forEach(card -> {
             ContinuousEffect effect = new LukkaCoppercoatOutcastCastEffect();
             effect.setTargetPointer(new FixedTarget(card, game));
             game.addEffect(effect, source);
@@ -155,7 +154,7 @@ class LukkaCoppercoatOutcastPolymorphEffect extends OneShotEffect {
         Cards toReveal = new CardsImpl();
         for (Card card : player.getLibrary().getCards(game)) {
             toReveal.add(card);
-            if (card.isCreature() && card.getManaValue() > cmc) {
+            if (card.isCreature(game) && card.getManaValue() > cmc) {
                 toBattlefield = card;
                 break;
             }

@@ -100,7 +100,7 @@ class TheScorpionGodTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
             if (permanent != null
-                    && permanent.isCreature()
+                    && permanent.isCreature(game)
                     && permanent.getCounters(game).containsKey(CounterType.M1M1)) {
                 return true;
             }

@@ -65,7 +65,7 @@ class ErraticCyclopsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell != null && spell.isControlledBy(controllerId)
-                && spell.isInstantOrSorcery()) {
+                && spell.isInstantOrSorcery(game)) {
             this.getEffects().clear();
             this.addEffect(new BoostSourceEffect(
                     spell.getManaValue(), 0, Duration.EndOfTurn

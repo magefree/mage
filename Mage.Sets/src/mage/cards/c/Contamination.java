@@ -2,7 +2,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.MageObject;
+
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -16,7 +16,6 @@ import mage.constants.*;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -85,6 +84,6 @@ class ContaminationReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        return permanent != null && permanent.isLand();
+        return permanent != null && permanent.isLand(game);
     }
 }

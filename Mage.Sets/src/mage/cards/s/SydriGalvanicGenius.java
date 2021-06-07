@@ -93,10 +93,10 @@ class SydriGalvanicGeniusEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
-                    if (!artifact.isArtifact()) {
+                    if (!artifact.isArtifact(game)) {
                         artifact.addCardType(CardType.ARTIFACT);
                     }
-                    if (!artifact.isCreature()) {
+                    if (!artifact.isCreature(game)) {
                         artifact.addCardType(CardType.CREATURE);
                     }
                 }

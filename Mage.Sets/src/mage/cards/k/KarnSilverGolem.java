@@ -81,7 +81,7 @@ class KarnSilverGolemEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
-                    if (!artifact.isCreature()) {
+                    if (!artifact.isCreature(game)) {
                         artifact.addCardType(CardType.CREATURE);
                     }
                 }

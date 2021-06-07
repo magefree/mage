@@ -117,10 +117,10 @@ class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
             Card card = game.getCard(event.getTargetId());
             if (card != null && game.getOpponents(source.getControllerId()).contains(card.getOwnerId())) { // Anafenza only cares about cards
                 if (zEvent.getTarget() != null) { // if it comes from permanent, check if it was a creature on the battlefield
-                    if (zEvent.getTarget().isCreature()) {
+                    if (zEvent.getTarget().isCreature(game)) {
                         return true;
                     }
-                } else if (card.isCreature()) {
+                } else if (card.isCreature(game)) {
                     return true;
                 }
             }

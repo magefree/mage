@@ -61,7 +61,7 @@ class TheoreticalDuplicationTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         EntersTheBattlefieldEvent eEvent = (EntersTheBattlefieldEvent) event;
-        if (!eEvent.getTarget().isCreature()
+        if (!eEvent.getTarget().isCreature(game)
                 || eEvent.getTarget() instanceof PermanentToken
                 || !game.getOpponents(getControllerId()).contains(eEvent.getTarget().getControllerId())) {
             return false;

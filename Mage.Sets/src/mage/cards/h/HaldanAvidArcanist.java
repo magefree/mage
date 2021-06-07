@@ -80,7 +80,7 @@ class HaldanAvidArcanistCastFromExileEffect extends AsThoughEffectImpl {
                 || !PakoArcaneRetriever.checkWatcher(affectedControllerId, card, game)) {
             return false;
         }
-        return !card.isCreature() && card.getCounters(game).containsKey(CounterType.FETCH);
+        return !card.isCreature(game) && card.getCounters(game).containsKey(CounterType.FETCH);
     }
 }
 
@@ -117,7 +117,7 @@ class HaldanAvidArcanistSpendAnyManaEffect extends AsThoughEffectImpl implements
                 || !PakoArcaneRetriever.checkWatcher(affectedControllerId, card, game)) {
             return false;
         }
-        return !card.isCreature() && (card.getCounters(game).containsKey(CounterType.FETCH) || zone == Zone.STACK);
+        return !card.isCreature(game) && (card.getCounters(game).containsKey(CounterType.FETCH) || zone == Zone.STACK);
     }
 
     @Override

@@ -81,6 +81,6 @@ enum VerdantCommandPredicate implements Predicate<StackObject> {
             return false;
         }
         Permanent permanent = ((LoyaltyAbility) input).getSourcePermanentOrLKI(game);
-        return permanent != null && permanent.isPlaneswalker();
+        return permanent != null && permanent.isPlaneswalker(game);
     }
 }

@@ -79,7 +79,7 @@ class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEf
                 }
                 for (UUID uuid : target.getTargets()) {
                     Permanent permanent = game.getPermanent(uuid);
-                    if (permanent != null && permanent.isCreature()) {
+                    if (permanent != null && permanent.isCreature(game)) {
                         creaturesTargeted.add(permanent.getId());
                     }
                 }
@@ -102,7 +102,7 @@ class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEf
                 Set<UUID> possibleList = target.possibleTargets(ability.getSourceId(), ability.getControllerId(), game);
                 possibleList.removeIf(id -> {
                     Permanent permanent = game.getPermanent(id);
-                    return permanent == null || !permanent.isCreature();
+                    return permanent == null || !permanent.isCreature(game);
                 });
                 int possibleAmount = Math.min(possibleList.size(), target.getMaxNumberOfTargets());
                 maxAmount = Math.max(maxAmount, possibleAmount);

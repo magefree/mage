@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -64,7 +63,7 @@ class FleshAllergyWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && card.isCreature()) {
+            if (card != null && card.isCreature(game)) {
                 creaturesDiedThisTurn++;
             }
         }

@@ -78,7 +78,7 @@ class KinjallisSunwingEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null && permanent.isCreature()) {
+            if (permanent != null && permanent.isCreature(game)) {
                 return true;
             }
         }

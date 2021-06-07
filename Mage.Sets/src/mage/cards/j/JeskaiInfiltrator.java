@@ -99,7 +99,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
             //the Set will mimic the Shuffling
             exileZone.getCards(game).forEach(card -> {
                 ManaCosts manaCosts = null;
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     manaCosts = card.getSpellAbility().getManaCosts();
                     if (manaCosts == null) {
                         manaCosts = new ManaCostsImpl("{0}");

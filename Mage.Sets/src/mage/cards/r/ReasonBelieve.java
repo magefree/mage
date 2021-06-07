@@ -69,7 +69,7 @@ class BelieveEffect extends OneShotEffect {
         if (controller != null) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                if (card.isCreature() && controller.chooseUse(outcome, "Put " + card.getIdName() + " onto the battlefield?", source, game)) {
+                if (card.isCreature(game) && controller.chooseUse(outcome, "Put " + card.getIdName() + " onto the battlefield?", source, game)) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {
                     controller.moveCards(card, Zone.HAND, source, game);

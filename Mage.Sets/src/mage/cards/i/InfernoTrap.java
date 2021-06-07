@@ -80,7 +80,7 @@ class InfernoTrapWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
                 && event.getTargetId().equals(controllerId)) {
             Permanent damageBy = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (damageBy != null && damageBy.isCreature()) {
+            if (damageBy != null && damageBy.isCreature(game)) {
                 Set<MageObjectReference> damagingCreatures = playerDamagedByCreature.getOrDefault(event.getTargetId(), new HashSet<>());
 
                 MageObjectReference damagingCreature = new MageObjectReference(damageBy, game);

@@ -83,7 +83,7 @@ class CodieVociferousCodexCantCastEffect extends ContinuousRuleModifyingEffectIm
             return false;
         }
         Card card = game.getCard(event.getSourceId());
-        return card != null && card.isPermanent();
+        return card != null && card.isPermanent(game);
     }
 }
 
@@ -155,7 +155,7 @@ class CodieVociferousCodexEffect extends OneShotEffect {
         Card toCast = null;
         for (Card card : player.getLibrary().getCards(game)) {
             toExile.add(card);
-            if (card.isInstantOrSorcery() && card.getManaValue() < spell.getManaValue()) {
+            if (card.isInstantOrSorcery(game) && card.getManaValue() < spell.getManaValue()) {
                 toCast = card;
                 break;
             }

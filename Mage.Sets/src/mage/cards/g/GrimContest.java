@@ -70,7 +70,7 @@ class GrimContestEffect extends OneShotEffect {
             Permanent creature1 = game.getPermanent(getTargetPointer().getFirst(game, source));
             Permanent creature2 = game.getPermanent(source.getTargets().get(1).getFirstTarget());
             if (creature1 != null && creature2 != null) {
-                if (creature1.isCreature() && creature2.isCreature()) {
+                if (creature1.isCreature(game) && creature2.isCreature(game)) {
                     creature1.damage(creature2.getToughness().getValue(), creature2.getId(), source, game, false, true);
                     game.informPlayers(creature2.getLogName() + " deals " + creature2.getToughness().getValue() + " damage to " + creature1.getLogName());
                     creature2.damage(creature1.getToughness().getValue(), creature1.getId(), source, game, false, true);

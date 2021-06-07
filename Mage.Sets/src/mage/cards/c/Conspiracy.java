@@ -80,26 +80,26 @@ public final class Conspiracy extends CardImpl {
             // in graveyard
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
-                if (card != null && card.isCreature()) {
+                if (card != null && card.isCreature(game)) {
                     setCreatureSubtype(card, subType, game);
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
-                if (card != null && card.isCreature()) {
+                if (card != null && card.isCreature(game)) {
                     setCreatureSubtype(card, subType, game);
                 }
             }
             // in Exile
             for (Card card : game.getState().getExile().getAllCards(game)) {
-                if (card.isOwnedBy(controller.getId()) && card.isCreature()) {
+                if (card.isOwnedBy(controller.getId()) && card.isCreature(game)) {
                     setCreatureSubtype(card, subType, game);
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
-                if (card.isOwnedBy(controller.getId()) && card.isCreature()) {
+                if (card.isOwnedBy(controller.getId()) && card.isCreature(game)) {
                     setCreatureSubtype(card, subType, game);
                 }
             }
@@ -107,7 +107,7 @@ public final class Conspiracy extends CardImpl {
             for (CommandObject commandObject : game.getState().getCommand()) {
                 if (commandObject instanceof Commander) {
                     Card card = game.getCard(((Commander) commandObject).getId());
-                    if (card != null && card.isCreature() && card.isOwnedBy(controller.getId())) {
+                    if (card != null && card.isCreature(game) && card.isOwnedBy(controller.getId())) {
                         setCreatureSubtype(card, subType, game);
                     }
                 }
@@ -117,7 +117,7 @@ public final class Conspiracy extends CardImpl {
                 StackObject stackObject = iterator.next();
                 if (stackObject instanceof Spell
                         && stackObject.isControlledBy(controller.getId())
-                        && stackObject.isCreature()) {
+                        && stackObject.isCreature(game)) {
                     setCreatureSubtype(stackObject, subType, game);
                     setCreatureSubtype(((Spell) stackObject).getCard(), subType, game);
                 }
@@ -125,7 +125,7 @@ public final class Conspiracy extends CardImpl {
             // creatures you control
             List<Permanent> permanents = game.getState().getBattlefield().getAllActivePermanents(controller.getId());
             for (Permanent permanent : permanents) {
-                if (permanent.isCreature()) {
+                if (permanent.isCreature(game)) {
                     permanent.removeAllCreatureTypes(game);
                     permanent.addSubType(game, subType);
                 }

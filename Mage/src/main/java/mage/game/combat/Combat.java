@@ -157,13 +157,13 @@ public class Combat implements Serializable, Copyable<Combat> {
     public void checkForRemoveFromCombat(Game game) {
         for (UUID creatureId : getAttackers()) {
             Permanent creature = game.getPermanent(creatureId);
-            if (creature != null && !creature.isCreature()) {
+            if (creature != null && !creature.isCreature(game)) {
                 removeFromCombat(creatureId, game, true);
             }
         }
         for (UUID creatureId : getBlockers()) {
             Permanent creature = game.getPermanent(creatureId);
-            if (creature != null && !creature.isCreature()) {
+            if (creature != null && !creature.isCreature(game)) {
                 removeFromCombat(creatureId, game, true);
             }
         }

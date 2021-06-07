@@ -75,7 +75,7 @@ class ScribNibblersEffect extends OneShotEffect {
         if (targetPlayer != null && targetPlayer.getLibrary().hasCards()) {
             Card card = targetPlayer.getLibrary().getFromTop(game);
             card.moveToExile(id, "Scrib Nibblers Exile", source, game);
-            if (card.isLand() && you != null) {
+            if (card.isLand(game) && you != null) {
                 you.gainLife(1, game, source);
                 return true;
             }

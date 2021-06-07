@@ -44,7 +44,7 @@ public final class PhyrexianMetamorph extends CardImpl {
         CopyApplier phyrexianMetamorphCopyApplier = new CopyApplier() {
             @Override
             public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-                if (!blueprint.isArtifact()) {
+                if (!blueprint.isArtifact(game)) {
                     blueprint.addCardType(CardType.ARTIFACT);
                 }
                 return true;

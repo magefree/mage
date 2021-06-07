@@ -147,44 +147,44 @@ public interface MageObject extends MageItem, Serializable {
                 || getSubtype().contains(SubType.SAGA);
     }
 
-    default boolean isCreature() {
+    default boolean isCreature(Game game) {
         return getCardType().contains(CardType.CREATURE);
     }
 
-    default boolean isArtifact() {
+    default boolean isArtifact(Game game) {
         return getCardType().contains(CardType.ARTIFACT);
     }
 
-    default boolean isLand() {
+    default boolean isLand(Game game) {
         return getCardType().contains(CardType.LAND);
     }
 
-    default boolean isEnchantment() {
+    default boolean isEnchantment(Game game) {
         return getCardType().contains(CardType.ENCHANTMENT);
     }
 
-    default boolean isInstant() {
+    default boolean isInstant(Game game) {
         return getCardType().contains(CardType.INSTANT);
     }
 
-    default boolean isSorcery() {
+    default boolean isSorcery(Game game) {
         return getCardType().contains(CardType.SORCERY);
     }
 
-    default boolean isInstantOrSorcery() {
-        return this.isInstant() || this.isSorcery();
+    default boolean isInstantOrSorcery(Game game) {
+        return this.isInstant(game) || this.isSorcery(game);
     }
 
-    default boolean isPlaneswalker() {
+    default boolean isPlaneswalker(Game game) {
         return getCardType().contains(CardType.PLANESWALKER);
     }
 
-    default boolean isTribal() {
+    default boolean isTribal(Game game) {
         return getCardType().contains(CardType.TRIBAL);
     }
 
-    default boolean isPermanent() {
-        return isCreature() || isArtifact() || isPlaneswalker() || isEnchantment() || isLand();
+    default boolean isPermanent(Game game) {
+        return isCreature(game) || isArtifact(game) || isPlaneswalker(game) || isEnchantment(game) || isLand(game);
     }
 
     default boolean isLegendary() {
@@ -236,7 +236,7 @@ public interface MageObject extends MageItem, Serializable {
      */
     default void addSubType(SubType... subTypes) {
         for (SubType subType : subTypes) {
-            if (subType.canGain(this)
+            if (subType.canGain(this, null)
                     && !getSubtype().contains(subType)) {
                 getSubtype().add(subType);
             }
@@ -251,7 +251,7 @@ public interface MageObject extends MageItem, Serializable {
      */
     default void addSubType(Game game, SubType... subTypes) {
         for (SubType subType : subTypes) {
-            if (subType.canGain(this)
+            if (subType.canGain(this, game)
                     && !hasSubtype(subType, game)) {
                 game.getState().getCreateMageObjectAttribute(this, game).getSubtype().add(subType);
             }
@@ -349,10 +349,10 @@ public interface MageObject extends MageItem, Serializable {
     }
 
     default boolean shareCreatureTypes(Game game, MageObject otherCard) {
-        if (!isCreature() && !isTribal()) {
+        if (!isCreature(game) && !isTribal(game)) {
             return false;
         }
-        if (!otherCard.isCreature() && !otherCard.isTribal()) {
+        if (!otherCard.isCreature(game) && !otherCard.isTribal(game)) {
             return false;
         }
         boolean isAllA = this.isAllCreatureTypes(game);

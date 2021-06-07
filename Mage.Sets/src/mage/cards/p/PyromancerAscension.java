@@ -68,7 +68,7 @@ class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (isControlledInstantOrSorcery(spell)) {
+            if (isControlledInstantOrSorcery(spell, game)) {
                 Card sourceCard = game.getCard(spell.getSourceId());
                 if (sourceCard != null) {
                     for (UUID uuid : game.getPlayer(this.getControllerId()).getGraveyard()) {
@@ -85,10 +85,10 @@ class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    private boolean isControlledInstantOrSorcery(Spell spell) {
+    private boolean isControlledInstantOrSorcery(Spell spell, Game game) {
         return spell != null &&
                 spell.isControlledBy(this.getControllerId()) &&
-                spell.isInstantOrSorcery();
+                spell.isInstantOrSorcery(game);
     }
 
     @Override
@@ -121,7 +121,7 @@ class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (isControlledInstantOrSorcery(spell)) {
+            if (isControlledInstantOrSorcery(spell, game)) {
                 Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());
                 if (permanent != null && permanent.getCounters(game).getCount(CounterType.QUEST) >= 2) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
@@ -132,10 +132,10 @@ class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    private boolean isControlledInstantOrSorcery(Spell spell) {
+    private boolean isControlledInstantOrSorcery(Spell spell, Game game) {
         return spell != null &&
                 spell.isControlledBy(this.getControllerId()) &&
-                spell.isInstantOrSorcery();
+                spell.isInstantOrSorcery(game);
     }
 
     @Override

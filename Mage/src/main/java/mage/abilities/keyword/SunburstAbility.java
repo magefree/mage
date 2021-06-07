@@ -28,7 +28,7 @@ public class SunburstAbility extends EntersBattlefieldAbility {
 
     public SunburstAbility(Card card) {
         super(new SunburstEffect(), "");
-        isCreature = card.isCreature();
+        isCreature = card.isCreature(null);
     }
 
     public SunburstAbility(final SunburstAbility ability) {
@@ -68,7 +68,7 @@ class SunburstEffect extends OneShotEffect {
             int countersAmount = amount.calculate(game, source, this);
             if (countersAmount > 0) {
                 Counter counter;
-                if (permanent.isCreature()) {
+                if (permanent.isCreature(game)) {
                     counter = CounterType.P1P1.createInstance(countersAmount);
                 } else {
                     counter = CounterType.CHARGE.createInstance(countersAmount);

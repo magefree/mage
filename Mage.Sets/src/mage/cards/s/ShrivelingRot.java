@@ -78,7 +78,7 @@ class ShrivelingRotDestroyTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null || !permanent.isCreature()) {
+        if (permanent == null || !permanent.isCreature(game)) {
             return false;
         }
         getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
@@ -115,7 +115,7 @@ class ShrivelingRotLoseLifeTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
-            if (zEvent.getTarget().isCreature()) {
+            if (zEvent.getTarget().isCreature(game)) {
                 Effect effect = this.getEffects().get(0);
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 return true;

@@ -104,7 +104,7 @@ class IndomitableCreativityEffect extends OneShotEffect {
                         Cards cardsToReaveal = new CardsImpl();
                         for (Card card : library.getCards(game)) {
                             cardsToReaveal.add(card);
-                            if (card.isCreature() || card.isArtifact()) {
+                            if (card.isCreature(game) || card.isArtifact(game)) {
                                 controllerOfDestroyedCreature.moveCards(card, Zone.EXILED, source, game);
                                 controllerOfDestroyedCreature.moveCards(card, Zone.BATTLEFIELD, source, game);
                                 break;

@@ -71,7 +71,7 @@ class NullstoneGargoyleTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getSpell(event.getTargetId());
-        if (spell.isCreature()) {
+        if (spell.isCreature(game)) {
             return false;
         }
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);

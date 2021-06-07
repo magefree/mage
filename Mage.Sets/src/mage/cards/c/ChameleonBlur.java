@@ -57,7 +57,7 @@ class ChameleonBlurEffect extends PreventionEffectImpl {
                 && event.getType() == GameEvent.EventType.DAMAGE_PLAYER
                 && event.getAmount() > 0) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            return permanent != null && permanent.isCreature();
+            return permanent != null && permanent.isCreature(game);
         }
         return false;
     }

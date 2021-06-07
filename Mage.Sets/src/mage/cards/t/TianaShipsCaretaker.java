@@ -21,7 +21,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -90,8 +89,8 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTarget().getId());
 
         if (permanent != null && zEvent.isDiesEvent()
-                && (permanent.isArtifact() && permanent.hasSubtype(SubType.EQUIPMENT, game)
-                    || permanent.isEnchantment() && permanent.hasSubtype(SubType.AURA, game))
+                && (permanent.isArtifact(game) && permanent.hasSubtype(SubType.EQUIPMENT, game)
+                    || permanent.isEnchantment(game) && permanent.hasSubtype(SubType.AURA, game))
                 && permanent.isControlledBy(this.controllerId)) {
             this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId()));
             return true;

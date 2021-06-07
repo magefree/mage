@@ -33,7 +33,7 @@ public class DamagedByWatcher extends Watcher {
             return;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && !watchPlaneswalkers && !permanent.isCreature()) {
+        if (permanent != null && !watchPlaneswalkers && !permanent.isCreature(game)) {
             return;
         }
         if (sourceId.equals(event.getSourceId())) {

@@ -59,7 +59,7 @@ class StarfallEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             permanent.damage(3, source.getSourceId(), source, game, false, true);
-            if (permanent.isEnchantment()) {
+            if (permanent.isEnchantment(game)) {
                 Player targetController = game.getPlayer(permanent.getControllerId());
                 if (targetController != null) {
                     targetController.damage(3, source.getSourceId(), source, game);

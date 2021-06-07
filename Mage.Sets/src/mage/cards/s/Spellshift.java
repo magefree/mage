@@ -71,7 +71,7 @@ class SpellshiftEffect extends OneShotEffect {
             Card toCast = null;
             for (Card card : spellController.getLibrary().getCards(game)) {
                 cardsToReveal.add(card);
-                if (card.isSorcery() || card.isInstant()) {
+                if (card.isSorcery(game) || card.isInstant(game)) {
                     toCast = card;
                     break;
                 }

@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.players.Library;
 import mage.players.Player;
@@ -126,7 +125,7 @@ class PossibilityStormEffect extends OneShotEffect {
                     } while (library.hasCards() && card != null && !sharesType(card, spell.getCardType()));
 
                     if (card != null && sharesType(card, spell.getCardType())
-                            && !card.isLand()
+                            && !card.isLand(game)
                             && card.getSpellAbility().canChooseTarget(game, spellController.getId())) {
                         if (spellController.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
                             spellController.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));

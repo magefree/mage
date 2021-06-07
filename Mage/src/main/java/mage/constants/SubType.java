@@ -560,19 +560,19 @@ public enum SubType {
         return subTypeSet;
     }
 
-    public boolean canGain(MageObject mageObject) {
+    public boolean canGain(MageObject mageObject, Game game) {
         switch (subTypeSet) {
             case CreatureType:
-                return mageObject.isCreature() || mageObject.isTribal();
+                return mageObject.isCreature(game) || mageObject.isTribal(game);
             case BasicLandType:
             case NonBasicLandType:
-                return mageObject.isLand();
+                return mageObject.isLand(game);
             case EnchantmentType:
-                return mageObject.isEnchantment();
+                return mageObject.isEnchantment(game);
             case ArtifactType:
-                return mageObject.isArtifact();
+                return mageObject.isArtifact(game);
             case PlaneswalkerType:
-                return mageObject.isPlaneswalker();
+                return mageObject.isPlaneswalker(game);
         }
         return false;
     }

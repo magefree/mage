@@ -310,10 +310,10 @@ public abstract class ExpansionSet implements Serializable {
         }
 
         if (needsLegendCreature) {
-            return booster.stream().anyMatch(card -> card.isLegendary() && card.isCreature());
+            return booster.stream().anyMatch(card -> card.isLegendary() && card.isCreature(null));
         }
         if (needsPlaneswalker) {
-            return booster.stream().filter(card -> card.isPlaneswalker()).count() == 1;
+            return booster.stream().filter(card -> card.isPlaneswalker(null)).count() == 1;
         }
 
         // TODO: add partner check

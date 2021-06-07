@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -72,7 +71,7 @@ enum MageDuelCondition implements Condition {
         return spells != null && spells
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isInstantOrSorcery)
+                .filter(spell -> spell.isInstantOrSorcery(game))
                 .map(Spell::getSourceId)
                 .anyMatch(source.getSourceId()::equals);
     }

@@ -107,7 +107,7 @@ class WormsOfTheEarthEnterEffect extends ContinuousRuleModifyingEffectImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getToZone() == Zone.BATTLEFIELD) {
             Card card = game.getCard(zEvent.getTargetId());
-            return card != null && card.isLand();
+            return card != null && card.isLand(game);
         }
         return false;
     }

@@ -68,7 +68,7 @@ class LilianasDefeatEffect extends OneShotEffect {
         if (player != null && permanent != null) {
             permanent.destroy(source, game, true);
             game.getState().processAction(game);
-            if (permanent.isPlaneswalker() && permanent.hasSubtype(SubType.LILIANA, game)) {
+            if (permanent.isPlaneswalker(game) && permanent.hasSubtype(SubType.LILIANA, game)) {
                 Player permanentController = game.getPlayer(permanent.getControllerId());
                 if (permanentController != null) {
                     permanentController.loseLife(3, game, source, false);

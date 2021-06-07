@@ -69,7 +69,7 @@ enum AshenGhoulCondition implements Condition {
             int cardsAbove = 0;
             boolean aboveCards = false;
             for (Card card : controller.getGraveyard().getCards(game)) {
-                if (aboveCards && card.isCreature()) {
+                if (aboveCards && card.isCreature(game)) {
                     cardsAbove++;
                     if (cardsAbove > 2) {
                         return true;

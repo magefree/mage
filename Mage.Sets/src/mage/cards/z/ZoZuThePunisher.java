@@ -14,7 +14,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -69,7 +68,7 @@ class ZoZuThePunisherAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isLand()) {
+        if (permanent != null && permanent.isLand(game)) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 for (Effect effect : this.getEffects()) {

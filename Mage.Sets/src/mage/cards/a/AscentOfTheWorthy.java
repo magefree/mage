@@ -134,7 +134,7 @@ class AscentOfTheWorthyRedirectEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && permanent.isCreature() && permanent.isControlledBy(source.getControllerId());
+        return permanent != null && permanent.isCreature(game) && permanent.isControlledBy(source.getControllerId());
     }
 
     @Override

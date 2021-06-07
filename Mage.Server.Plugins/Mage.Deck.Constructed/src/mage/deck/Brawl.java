@@ -77,8 +77,8 @@ public class Brawl extends Constructed {
                 addError(DeckValidatorErrorType.PRIMARY, brawler.getName(), "Brawler banned (" + brawler.getName() + ')', true);
                 valid = false;
             }
-            if (!((brawler.isCreature() && brawler.isLegendary())
-                    || brawler.isPlaneswalker() || brawler.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+            if (!((brawler.isCreature(null) && brawler.isLegendary())
+                    || brawler.isPlaneswalker(null) || brawler.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
                 addError(DeckValidatorErrorType.PRIMARY, brawler.getName(), "Brawler Invalid (" + brawler.getName() + ')', true);
                 valid = false;
             }

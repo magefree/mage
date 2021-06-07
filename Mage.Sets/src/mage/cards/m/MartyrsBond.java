@@ -72,7 +72,7 @@ class MartyrsBondTriggeredAbility extends TriggeredAbilityImpl {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null
                     && permanent.isControlledBy(this.getControllerId())
-                    && !permanent.isLand()) {
+                    && !permanent.isLand(game)) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(permanent, game));
                 }

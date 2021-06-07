@@ -75,7 +75,7 @@ public final class Opalescence extends CardImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            if (!permanent.isCreature()) {
+                            if (!permanent.isCreature(game)) {
                                 permanent.addCardType(CardType.CREATURE);
                             }
                         }

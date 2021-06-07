@@ -12,7 +12,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ManaEvent;
 import mage.util.CardUtil;
 import mage.watchers.common.CastSpellLastTurnWatcher;
@@ -83,7 +82,7 @@ class DampingSphereReplacementEffect extends ReplacementEffectImpl {
         MageObject mageObject = game.getPermanentOrLKIBattlefield(event.getSourceId());
         ManaEvent manaEvent = (ManaEvent) event;
         Mana mana = manaEvent.getMana();
-        return mageObject != null && mageObject.isLand() && mana.count() > 1;
+        return mageObject != null && mageObject.isLand(game) && mana.count() > 1;
     }
 }
 

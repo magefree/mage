@@ -10,7 +10,6 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -73,7 +72,7 @@ class BreathstealersCryptEffect extends ReplacementEffectImpl {
             return true;
         }
         player.revealCards(source, new CardsImpl(cardDrawn), game);
-        if (!cardDrawn.isCreature()) {
+        if (!cardDrawn.isCreature(game)) {
             return true;
         }
         game.informPlayers("The card drawn by " + player.getName() + " is a creature card. They discard that card unless they pay 3 life.");

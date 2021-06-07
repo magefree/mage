@@ -19,7 +19,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
@@ -105,7 +104,7 @@ class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl {
         controller.revealCards(sourcePermanent.getIdName(), new CardsImpl(card), game);
         this.getTargets().clear();
         this.getEffects().clear();
-        if (card.isLand()) {
+        if (card.isLand(game)) {
             this.addEffect(new DrawCardSourceControllerEffect(1));
         } else {
             this.addEffect(new DamageTargetEffect(3));

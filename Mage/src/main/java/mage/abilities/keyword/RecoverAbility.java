@@ -28,7 +28,7 @@ import mage.players.Player;
 public class RecoverAbility extends TriggeredAbilityImpl {
 
     public RecoverAbility(Cost cost, Card card) {
-        super(Zone.GRAVEYARD, new RecoverEffect(cost, card.isCreature()), false);
+        super(Zone.GRAVEYARD, new RecoverEffect(cost, card.isCreature(null)), false);
     }
 
     public RecoverAbility(final RecoverAbility ability) {
@@ -50,7 +50,7 @@ public class RecoverAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
             if (zEvent.getTarget().isOwnedBy(getControllerId())
-                    && zEvent.getTarget().isCreature()
+                    && zEvent.getTarget().isCreature(game)
                     && !zEvent.getTarget().getId().equals(getSourceId())) {
                 return true;
             }

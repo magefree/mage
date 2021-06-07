@@ -96,7 +96,7 @@ class SenatorLottDodSpellsTargetingCreatureCostModificationEffect extends CostMo
     private boolean isTargetCompatible(UUID target, Ability source, Game game) {
         // target a creature you control
         Permanent targetPermanent = game.getPermanent(target);
-        if (targetPermanent != null && targetPermanent.isCreature() && targetPermanent.isControlledBy(source.getControllerId())) {
+        if (targetPermanent != null && targetPermanent.isCreature(game) && targetPermanent.isControlledBy(source.getControllerId())) {
             return true;
         }
 

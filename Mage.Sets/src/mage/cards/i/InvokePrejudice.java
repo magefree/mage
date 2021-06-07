@@ -66,7 +66,7 @@ class InvokePrejudiceTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell != null && spell.isCreature()) {
+            if (spell != null && spell.isCreature(game)) {
                 boolean creatureSharesAColor = false;
                 ObjectColor spellColor = spell.getColor(game);
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterControlledCreaturePermanent(), getControllerId(), game)) {

@@ -71,7 +71,7 @@ class ScavengingOozeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
             controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true);
-            if (card.isCreature()) {
+            if (card.isCreature(game)) {
                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());
                 if (sourcePermanent != null) {
                     sourcePermanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);

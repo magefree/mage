@@ -68,7 +68,7 @@ class AnsweredPrayersEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        if (permanent.isCreature()) {
+        if (permanent.isCreature(game)) {
             return true;
         }
         game.addEffect(new BecomesCreatureSourceEffect(

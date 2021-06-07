@@ -95,7 +95,7 @@ class VraskaSwarmsEminenceTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Permanent damaged = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (damaged != null && !damaged.isPlaneswalker()) {
+        if (damaged != null && !damaged.isPlaneswalker(game)) {
             return false;
         }
         getEffects().setValue("damage", event.getAmount());
