@@ -16,10 +16,26 @@ location="runs/current"
 import shutil
 shutil.rmtree(location)
 writer = SummaryWriter(log_dir=location)
+game_counter=0
+def collect_experience(min_actions,env,net,converter):
+    actions=[]
+    observations=[]
+    rewards=[]
+    weights=[]
+    while(len(actions)<min_actions):
+        global game_counter
+        (a,o,r)=play_game(net,converter,env,game_counter%50==0)
+        actions+=a
+        observations+=o
+        rewards+=r
+        writer.add_scalar('Reward', rewards[-1], game_counter)
+        print(rewards[-1])
+        weighting=min(1/len(actions),1/hparams['batch_cutoff'])
+        weights=len(actions)*[weighting]
+        game_counter+=1
+    return (actions,observations,rewards,weights)
 for games in range(10000):
-    (actions,observations,rewards)=play_game(net,converter,env,games%50==0)
-    writer.add_scalar('Reward', rewards[-1], games)
-    print(rewards[-1])
+    (actions,observations,rewards,weights)=collect_experience(300,env,net,converter)
     optimizer.zero_grad()
     (out,critic)=net(observations)
     max_action_len=max([len(obs['action_mask']) for obs in observations])
@@ -32,15 +48,11 @@ for games in range(10000):
         back_grad[i,actions[i]]=-(rewards[i]-critic_pred[i,0].detach()) #negate end reward to IMPROVE agent!
     critic_target=(torch.tensor(rewards).unsqueeze(dim=1)+1)/2
     critic_error=F.binary_cross_entropy_with_logits(critic,critic_target,reduction="none")
-    #F.binary_cross_entropy_with_logits(critic,critic_target,reduction="none")
-    if(games%50==0):
-        print(critic_pred)
     scalar_loss=scalar_loss+critic_error*hparams['critic_weight']
     out=torch.cat([out,scalar_loss],dim=1)
     back_grad=torch.cat([back_grad,torch.ones_like(scalar_loss)],dim=1)
-    back_grad=back_grad/back_grad.shape[0]
-    if(back_grad.shape[0]<hparams['batch_cutoff']):
-        back_grad=back_grad*back_grad.shape[0]/hparams['batch_cutoff']
+    grad_weight=torch.tensor(weights).unsqueeze(dim=-1)
+    back_grad=back_grad*grad_weight
     out.backward(back_grad)
     torch.nn.utils.clip_grad_norm_(net.parameters(), hparams['grad_clip'])
     #print(out.shape,back_grad.shape)
