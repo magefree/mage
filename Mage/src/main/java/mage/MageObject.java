@@ -33,6 +33,10 @@ public interface MageObject extends MageItem, Serializable {
 
     void setName(String name);
 
+    default ArrayList<CardType> getCardType() {
+        return getCardType(null);
+    }
+
     ArrayList<CardType> getCardType(Game game);
 
     /**
@@ -210,6 +214,10 @@ public interface MageObject extends MageItem, Serializable {
         return getSuperType().contains(SuperType.WORLD);
     }
 
+    default void addCardType(CardType... cardTypes) {
+        addCardType(null, cardTypes);
+    }
+
     default void addCardType(Game game, CardType... cardTypes) {
         if (game != null) {
             game.getState().getCreateMageObjectAttribute(this, game);
@@ -222,6 +230,10 @@ public interface MageObject extends MageItem, Serializable {
         }
     }
 
+    default void removeCardType(CardType... cardTypes) {
+        removeCardType(null, cardTypes);
+    }
+
     default void removeCardType(Game game, CardType... cardTypes) {
         if (game != null) {
             game.getState().getCreateMageObjectAttribute(this, game);
@@ -229,6 +241,10 @@ public interface MageObject extends MageItem, Serializable {
         for (CardType cardType : cardTypes) {
             getCardType(game).remove(cardType);
         }
+    }
+
+    default void removeAllCardTypes() {
+        removeAllCardTypes(null);
     }
 
     default void removeAllCardTypes(Game game) {

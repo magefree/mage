@@ -1610,7 +1610,7 @@ public class VerifyCardDataTest {
 
         Collection<String> expected = ref.types;
         List<String> type = new ArrayList<>();
-        for (CardType cardType : card.getCardType(null)) {
+        for (CardType cardType : card.getCardType()) {
             type.add(cardType.toString());
         }
         if (!eqSet(type, expected)) {

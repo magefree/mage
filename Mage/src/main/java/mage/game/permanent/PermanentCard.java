@@ -116,7 +116,7 @@ public class PermanentCard extends PermanentImpl {
         this.abilities.setControllerId(this.controllerId);
         this.abilities.setSourceId(objectId);
         this.cardType.clear();
-        this.cardType.addAll(card.getCardType(null));
+        this.cardType.addAll(card.getCardType());
         this.color = card.getColor(null).copy();
         this.frameColor = card.getFrameColor(game).copy();
         this.frameStyle = card.getFrameStyle();

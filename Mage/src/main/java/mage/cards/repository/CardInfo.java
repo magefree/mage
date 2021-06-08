@@ -161,7 +161,7 @@ public class CardInfo {
         this.red = card.getColor(null).isRed();
         this.white = card.getColor(null).isWhite();
 
-        this.setTypes(card.getCardType(null));
+        this.setTypes(card.getCardType());
         this.setSubtypes(card.getSubtype().stream().map(SubType::toString).collect(Collectors.toList()));
         this.setSuperTypes(card.getSuperType());
 

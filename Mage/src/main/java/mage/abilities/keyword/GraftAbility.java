@@ -44,7 +44,7 @@ public class GraftAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GraftDistributeCounterEffect(), true);
         this.amount = amount;
         StringBuilder sb = new StringBuilder();
-        for (CardType theCardtype : card.getCardType(null)) {
+        for (CardType theCardtype : card.getCardType()) {
             sb.append(theCardtype.toString().toLowerCase(Locale.ENGLISH)).append(' ');
         }
         this.cardtype = sb.toString().trim();
