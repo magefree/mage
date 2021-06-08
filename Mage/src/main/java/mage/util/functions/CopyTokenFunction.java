@@ -67,7 +67,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
         target.getColor().setColor(sourceObj.getColor());
         target.getManaCost().clear();
         target.getManaCost().add(sourceObj.getManaCost());
-        target.removeAllCardTypes(game);
+        target.removeAllCardTypes(null);
         for (CardType type : sourceObj.getCardType(null)) {
             target.addCardType(null, type);
         }
