@@ -252,7 +252,7 @@ public class Spell extends StackObjectImpl implements Card {
                     // before put to play:
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
-                    card.getCardType(game).remove(CardType.CREATURE);
+                    card.removeCardType(game, CardType.CREATURE);
                     if (!card.hasSubtype(SubType.AURA, game)) {
                         card.addSubType(game, SubType.AURA);
                     }

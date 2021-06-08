@@ -27,7 +27,7 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         permanent.setName(token.getName());
         permanent.getColor(game).setColor(token.getColor(game));
-        permanent.getCardType(game).clear();
+        permanent.removeAllCardTypes(game);
         for (CardType type : token.getCardType(game)) {
             permanent.addCardType(game, type);
         }

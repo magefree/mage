@@ -59,7 +59,7 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
                     boolean morphAbility = card.getAbilities().stream().anyMatch(ability -> ability instanceof MorphAbility);
                     if (morphAbility) {
                         Card cardCopy = card.copy();
-                        cardCopy.getCardType(game).clear();
+                        cardCopy.removeAllCardTypes(game);
                         cardCopy.addCardType(game, CardType.CREATURE);
                         return filter.match(cardCopy, source.getSourceId(), affectedControllerId, game);
                     }

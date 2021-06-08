@@ -92,7 +92,7 @@ class ArixmethesIsLandEffect extends ContinuousEffectImpl {
         if (permanent == null) {
             return false;
         }
-        permanent.getCardType(game).clear();
+        permanent.removeAllCardTypes(game);
         permanent.addCardType(game, CardType.LAND);
         permanent.removeAllSubTypes(game);
         return true;

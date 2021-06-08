@@ -164,7 +164,7 @@ class OldGrowthTrollContinuousEffect extends ContinuousEffectImpl {
         Permanent troll = sourceObject;
         switch (layer) {
             case TypeChangingEffects_4:
-                troll.getCardType(game).clear();
+                troll.removeAllCardTypes(game);
                 troll.addCardType(game, CardType.ENCHANTMENT);
                 troll.removeAllSubTypes(game);
                 troll.addSubType(game, SubType.AURA);

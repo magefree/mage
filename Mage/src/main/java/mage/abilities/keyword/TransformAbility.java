@@ -45,7 +45,7 @@ public class TransformAbility extends SimpleStaticAbility {
         permanent.getColor(game).setColor(sourceCard.getColor(game));
         permanent.getManaCost().clear();
         permanent.getManaCost().add(sourceCard.getManaCost());
-        permanent.getCardType(game).clear();
+        permanent.removeAllCardTypes(game);
         for (CardType type : sourceCard.getCardType(game)) {
             permanent.addCardType(game, type);
         }

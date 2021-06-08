@@ -133,7 +133,7 @@ class TezzeretCruelMachinistCardTypeEffect extends ContinuousEffectImpl {
             }
             flag = true;
             target.getSuperType().clear();
-            target.getCardType(game).clear();
+            target.removeAllCardTypes(game);
             target.removeAllSubTypes(game);
             target.addCardType(game, CardType.ARTIFACT);
             target.addCardType(game, CardType.CREATURE);

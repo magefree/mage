@@ -107,7 +107,7 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
         if (licid != null) {
             switch (layer) {
                 case TypeChangingEffects_4:
-                    licid.getCardType(game).clear();
+                    licid.removeAllCardTypes(game);
                     licid.addCardType(game, CardType.ENCHANTMENT);
                     licid.removeAllSubTypes(game);
                     licid.addSubType(game, SubType.AURA);

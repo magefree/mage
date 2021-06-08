@@ -70,7 +70,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                 switch (loseType) {
                     case ALL:
                     case ALL_BUT_COLOR:
-                        permanent.getCardType(game).clear();
+                        permanent.removeAllCardTypes(game);
                         break;
                 }
                 for (CardType t : token.getCardType(game)) {

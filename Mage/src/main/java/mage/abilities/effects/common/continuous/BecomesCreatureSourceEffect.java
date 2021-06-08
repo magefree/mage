@@ -91,7 +91,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         switch (layer) {
             case TypeChangingEffects_4:
                 if (losePreviousTypes) {
-                    permanent.getCardType(game).clear();
+                    permanent.removeAllCardTypes(game);
                 }
                 for (CardType cardType : token.getCardType(game)) {
                     permanent.addCardType(game, cardType);
