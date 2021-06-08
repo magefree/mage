@@ -217,7 +217,7 @@ class ValueNet(nn.Module):
         board_state=board_state+actions
         board_state=self.block(board_state)
         last_one=self.out_lin(board_state)
-        return last_one
+        return torch.tanh(last_one)
 
 class MainNet(nn.Module):
     def __init__(self,hparams):

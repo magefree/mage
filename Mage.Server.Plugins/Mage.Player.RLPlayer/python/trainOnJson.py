@@ -47,13 +47,14 @@ for games in range(10000):
         #Use neagive entropy becasue I want to increase it
         entropy=torch.mean(out*torch.exp(out),dim=1,keepdim=True)*hparams["entropy_weight"]
         scalar_loss=entropy
-        critic_target=(torch.tensor(rewards).unsqueeze(dim=1)+1)/2
-        critic_error=F.binary_cross_entropy_with_logits(critic,critic_target,reduction="none")
+        critic_target=torch.tensor(rewards).unsqueeze(dim=1)
+        critic_error=(critic-critic_target)**2
         scalar_loss=scalar_loss+critic_error*hparams['critic_weight']
-        critic_pred=torch.tanh(critic_base)
-        
+        unnormalized_adv=torch.tensor(rewards)-critic_base.squeeze()
+        norm_adv=unnormalized_adv-torch.mean(unnormalized_adv)
+        norm_adv=norm_adv/(torch.std(norm_adv)+1e-6)
         for i in range(len(actions)):
-            advantage[i,actions[i]]=(rewards[i]-critic_pred[i,0].detach()) #negate end reward to IMPROVE agent!
+            advantage[i,actions[i]]=norm_adv[i] #negate end reward to IMPROVE agent!
         action_ratio=torch.exp(out-base_log_prob)
         unclipped=action_ratio*advantage
         clipped=torch.clamp(action_ratio,1-hparams["PPOeps"],1+hparams["PPOeps"])*advantage
@@ -62,10 +63,10 @@ for games in range(10000):
         scalar_loss=torch.mean(scalar_loss)
         print(torch.mean(out),torch.mean(scalar_loss))
         out=out+scalar_loss
-        out=out*torch.tensor(weights).unsqueeze(dim=-1)
+        #out=out*torch.tensor(weights).unsqueeze(dim=-1)
         out=torch.mean(out)
         out.backward()
-        torch.nn.utils.clip_grad_norm_(net.parameters(), hparams['grad_clip'])
+        #torch.nn.utils.clip_grad_norm_(net.parameters(), hparams['grad_clip'])
         #print(out.shape,back_grad.shape)
         optimizer.step()
 from pathlib import Path
