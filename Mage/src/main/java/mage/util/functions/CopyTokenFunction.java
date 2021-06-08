@@ -68,8 +68,8 @@ public class CopyTokenFunction implements Function<Token, Card> {
         target.getManaCost().clear();
         target.getManaCost().add(sourceObj.getManaCost());
         target.removeAllCardTypes(game);
-        for (CardType type : sourceObj.getCardType(game)) {
-            target.addCardType(game, type);
+        for (CardType type : sourceObj.getCardType(null)) {
+            target.addCardType(null, type);
         }
         target.getSubtype().copyFrom(sourceObj.getSubtype());
         target.getSuperType().clear();

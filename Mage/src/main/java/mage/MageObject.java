@@ -211,22 +211,31 @@ public interface MageObject extends MageItem, Serializable {
     }
 
     default void addCardType(Game game, CardType... cardTypes) {
-        ArrayList<CardType> types=game.getState().getCreateMageObjectAttribute(this, game).getCardType();
+        if (game != null) {
+            game.getState().getCreateMageObjectAttribute(this, game);
+        }
         for (CardType cardType : cardTypes) {
-            if (types.contains(cardType)) {
+            if (getCardType(game).contains(cardType)) {
                 continue;
             }
-            types.add(cardType);
+            getCardType(game).add(cardType);
         }
     }
-    default void removeCardType(Game game, CardType... cardTypes){
-        ArrayList<CardType> types=game.getState().getCreateMageObjectAttribute(this, game).getCardType();
+
+    default void removeCardType(Game game, CardType... cardTypes) {
+        if (game != null) {
+            game.getState().getCreateMageObjectAttribute(this, game);
+        }
         for (CardType cardType : cardTypes) {
-            types.remove(cardType);
+            getCardType(game).remove(cardType);
         }
     }
-    default void removeAllCardTypes(Game game){
-        game.getState().getCreateMageObjectAttribute(this, game).getCardType().clear();
+
+    default void removeAllCardTypes(Game game) {
+        if (game != null) {
+            game.getState().getCreateMageObjectAttribute(this, game);
+        }
+        getCardType(game).clear();
     }
 
     /**

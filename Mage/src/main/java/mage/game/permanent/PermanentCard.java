@@ -116,7 +116,7 @@ public class PermanentCard extends PermanentImpl {
         this.abilities.setControllerId(this.controllerId);
         this.abilities.setSourceId(objectId);
         this.cardType.clear();
-        this.cardType.addAll(card.getCardType(game));
+        this.cardType.addAll(card.getCardType(null));
         this.color = card.getColor(null).copy();
         this.frameColor = card.getFrameColor(game).copy();
         this.frameStyle = card.getFrameStyle();
@@ -124,7 +124,7 @@ public class PermanentCard extends PermanentImpl {
         if (card instanceof PermanentCard) {
             this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;
         }
-        this.subtype.copyFrom(card.getSubtype(game));
+        this.subtype.copyFrom(card.getSubtype(null));
         this.supertype.clear();
         supertype.addAll(card.getSuperType());
         this.expansionSetCode = card.getExpansionSetCode();

@@ -21,7 +21,7 @@ public class CardTypeCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-        blueprint.addCardType(game, cardType);
+        blueprint.addCardType(null, cardType);
         return true;
     }
 }

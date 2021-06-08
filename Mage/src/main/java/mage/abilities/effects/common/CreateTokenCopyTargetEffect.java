@@ -174,7 +174,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         CardUtil.copyTo(token).from(copyFrom, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token, source, targetId);
         if (becomesArtifact) {
-            token.addCardType(game, CardType.ARTIFACT);
+            token.addCardType(null, CardType.ARTIFACT);
         }
         if (isntLegendary) {
             token.getSuperType().remove(SuperType.LEGENDARY);
@@ -184,7 +184,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.setStartingLoyalty(startingLoyalty);
         }
         if (additionalCardType != null) {
-            token.addCardType(game, additionalCardType);
+            token.addCardType(null, additionalCardType);
         }
         if (hasHaste) {
             token.addAbility(HasteAbility.getInstance());
