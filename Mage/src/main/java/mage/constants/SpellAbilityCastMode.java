@@ -28,7 +28,7 @@ public enum SpellAbilityCastMode {
     public Card getTypeModifiedCardObjectCopy(Card card, Game game) {
         Card cardCopy = card.copy();
         if (this.equals(BESTOW)) {
-            BestowAbility.becomeAura(cardCopy, game);
+            BestowAbility.becomeAura(cardCopy);
         }
         return cardCopy;
     }
