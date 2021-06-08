@@ -93,16 +93,10 @@ class GristTheHungerTideTypeEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        MageObject sourceObject;
-        switch (game.getState().getZone(source.getSourceId())) {
-            case BATTLEFIELD:
-                return false;
-            case STACK:
-                sourceObject = game.getSpell(source.getSourceId());
-                break;
-            default:
-                sourceObject = game.getCard(source.getSourceId());
+        if (game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
+            return false;
         }
+        MageObject sourceObject = game.getCard(source.getSourceId());
         if (sourceObject == null) {
             return false;
         }
