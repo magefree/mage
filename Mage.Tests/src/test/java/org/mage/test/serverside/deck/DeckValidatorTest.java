@@ -4,14 +4,17 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.deck.Commander;
 import mage.deck.Limited;
 import mage.deck.Modern;
 import mage.deck.Standard;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -109,6 +112,23 @@ public class DeckValidatorTest extends MageTestBase {
         deckList.add(new CardNameAmount("Mountain", 56));
 
         Assert.assertFalse("only 4 of a card are allowed", testDeckValid(new Modern(), deckList));
+    }
+
+    @Ignore
+    @Test
+    public void testGristCommander() {
+        // Grist, the Hunger Tide can be your commander as its first ability works before the game begins during deck construction.
+        // Currently fails
+        List<CardNameAmount> deck = Arrays.asList(
+                new CardNameAmount("Forest", 49),
+                new CardNameAmount("Swamp", 50)
+        );
+
+        List<CardNameAmount> sideboard = Arrays.asList(
+                new CardNameAmount("Grist, the Hunger Tide", 1)
+        );
+
+        Assert.assertTrue("Grist should be legal as a commander", testDeckValid(new Commander(), deck, sideboard));
     }
 
     private void assertCounterspellValid(ArrayList<CardNameAmount> deckList) {
