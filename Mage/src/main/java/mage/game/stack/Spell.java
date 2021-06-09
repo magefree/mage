@@ -252,10 +252,8 @@ public class Spell extends StackObjectImpl implements Card {
                     // before put to play:
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
-                    card.removeCardType(game, CardType.CREATURE);
-                    if (!card.hasSubtype(SubType.AURA, game)) {
-                        card.addSubType(game, SubType.AURA);
-                    }
+                    card.removeCardType(CardType.CREATURE);
+                    card.addSubType(game, SubType.AURA);
                 }
                 UUID permId;
                 boolean flag;
@@ -283,7 +281,7 @@ public class Spell extends StackObjectImpl implements Card {
                             // after put to play:
                             // restore removed stats (see "before put to play" above)
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
-                            card.addCardType(game, CardType.CREATURE);
+                            card.addCardType(CardType.CREATURE);
                             card.removeSubType(game, SubType.AURA);
                         }
                     }
