@@ -119,11 +119,11 @@ public class BestowAbility extends SpellAbility {
             if (basicObject != null) {
                 basicObject.getSubtype().remove(SubType.AURA);
                 if (!basicObject.isCreature(null)) {
-                    basicObject.addCardType(null, CardType.CREATURE);
+                    basicObject.addCardType(CardType.CREATURE);
                 }
             }
             permanent.getSubtype().remove(SubType.AURA);
-            permanent.getCardType(null).add(CardType.CREATURE);
+            permanent.addCardType(CardType.CREATURE);
         }
     }
 
@@ -131,8 +131,8 @@ public class BestowAbility extends SpellAbility {
         // permanently changes to the object
         if (card != null) {
             card.addSubType(SubType.AURA);
-            card.removeCardType(null, CardType.CREATURE);
-            card.addCardType(null, CardType.ENCHANTMENT);
+            card.removeCardType(CardType.CREATURE);
+            card.addCardType(CardType.ENCHANTMENT);
         }
     }
 }
