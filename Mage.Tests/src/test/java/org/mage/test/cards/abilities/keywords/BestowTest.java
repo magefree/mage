@@ -1,5 +1,6 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
@@ -57,6 +58,26 @@ public class BestowTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Silent Artisan", 3, 5);
         assertPermanentCount(playerA, "Hopeful Eidolon", 1);
         assertPowerToughness(playerA, "Hopeful Eidolon", 1, 1);
+    }
+
+    @Test
+    public void bestowStaysEnchantment() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Silent Artisan"); // 3/5
+        addCard(Zone.HAND, playerA, "Hopeful Eidolon");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Silent Artisan");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Silent Artisan", 1);
+        assertPowerToughness(playerA, "Silent Artisan", 4, 6);
+        assertAbility(playerA, "Silent Artisan", LifelinkAbility.getInstance(), true);
+        assertPermanentCount(playerA, "Hopeful Eidolon", 1);
+        assertSubtype("Hopeful Eidolon", SubType.AURA);
+        assertType("Hopeful Eidolon", CardType.ENCHANTMENT, true);
+        assertType("Hopeful Eidolon", CardType.CREATURE, false);
     }
 
     /**
