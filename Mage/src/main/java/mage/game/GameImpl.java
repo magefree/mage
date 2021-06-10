@@ -1965,11 +1965,14 @@ public abstract class GameImpl implements Game, Serializable {
             //    (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases
             //    to exist the next time state-based actions are checked.
             Zone zone = state.getZone(copiedCard.getMainCard().getId());
-            if (zone == Zone.BATTLEFIELD || zone == Zone.STACK) {
-                continue;
-            }
             // TODO: remember LKI of copied cards here after LKI rework
             switch (zone) {
+                case BATTLEFIELD:
+                    continue;
+                case STACK:
+                    if (getStack().getStackObject(copiedCard.getId()) != null) {
+                        continue;
+                    }
                 case GRAVEYARD:
                     for (Player player : getPlayers().values()) {
                         if (player.getGraveyard().contains(copiedCard.getId())) {
