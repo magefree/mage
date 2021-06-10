@@ -257,19 +257,22 @@ public class Spell extends StackObjectImpl implements Card {
                         card.addSubType(game, SubType.AURA);
                     }
                 }
-                UUID permId = null;
-                boolean flag = false;
-                if (!isCopy()) {
-                    permId = card.getId();
-                    flag = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
-                } else {
+                UUID permId;
+                boolean flag;
+                if (isCopy()) {
                     EmptyToken token = new EmptyToken();
                     CardUtil.copyTo(token).from(card, game, this);
                     // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
                     if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false)) {
                         permId = token.getLastAddedToken();
                         flag = true;
+                    } else {
+                        permId = null;
+                        flag = false;
                     }
+                } else {
+                    permId = card.getId();
+                    flag = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
                 }
                 if (flag) {
                     if (bestow) {
