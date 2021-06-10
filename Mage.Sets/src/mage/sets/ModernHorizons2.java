@@ -198,6 +198,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Obsidian Charmaw", 137, Rarity.RARE, mage.cards.o.ObsidianCharmaw.class));
         cards.add(new SetCardInfo("Orchard Strider", 169, Rarity.COMMON, mage.cards.o.OrchardStrider.class));
         cards.add(new SetCardInfo("Ornithopter of Paradise", 232, Rarity.COMMON, mage.cards.o.OrnithopterOfParadise.class));
+        cards.add(new SetCardInfo("Out of Time", 23, Rarity.RARE, mage.cards.o.OutOfTime.class));
         cards.add(new SetCardInfo("Parcel Myr", 54, Rarity.COMMON, mage.cards.p.ParcelMyr.class));
         cards.add(new SetCardInfo("Patchwork Gnomes", 299, Rarity.COMMON, mage.cards.p.PatchworkGnomes.class));
         cards.add(new SetCardInfo("Patriarch's Bidding", 275, Rarity.RARE, mage.cards.p.PatriarchsBidding.class));
