@@ -287,6 +287,7 @@ public enum SubType {
     // R
     RABBIT("Rabbit", SubTypeSet.CreatureType),
     RAIDER("Raider", SubTypeSet.CreatureType, true), // Star Wars
+    RANGER("Ranger", SubTypeSet.CreatureType),
     RAT("Rat", SubTypeSet.CreatureType),
     REBEL("Rebel", SubTypeSet.CreatureType),
     REFLECTION("Reflection", SubTypeSet.CreatureType),
