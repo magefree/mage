@@ -198,8 +198,9 @@ class LinNet(nn.Module):
         #print("actions shape",actions.shape)
         pred_values=actions@board_state
         pred_values=torch.squeeze(pred_values,dim=2)
+        action_mask=torch.tensor(action_mask)
+        pred_values=pred_values/(torch.sum(action_mask,dim=1,keepdim=True))**.5
         subtractor=1000*(1-action_mask)
-        subtractor=torch.tensor(subtractor)
         pred_values=pred_values-subtractor
         pred_values=F.log_softmax(pred_values,dim=1)
         return pred_values

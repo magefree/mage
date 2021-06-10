@@ -6,6 +6,8 @@ import numpy as np
 from torch.utils.tensorboard import SummaryWriter
 from hparams import hparams
 from netComponents import play_game,Representer,MainNet
+from pathlib import Path
+import pickle 
 
 env=gym.make('gym_xmage:learnerVsRandom-v0')
 converter=Representer() 
@@ -69,9 +71,9 @@ for games in range(10000):
         #torch.nn.utils.clip_grad_norm_(net.parameters(), hparams['grad_clip'])
         #print(out.shape,back_grad.shape)
         optimizer.step()
-from pathlib import Path
-import pickle 
-base_path=str(Path.home())+"/python/xmage/model_simple"
-torch.save(net.state_dict(), base_path+".model")
-with open(base_path+".converter", 'wb') as filehandler:
-    pickle.dump(converter, filehandler)
+    if(games%50==0):
+        base_path=str(Path.home())+"/python/xmage/model_simple"+str(games)
+        torch.save(net.state_dict(), base_path+".model")
+        with open(base_path+".converter", 'wb') as filehandler:
+            pickle.dump(converter, filehandler)
+

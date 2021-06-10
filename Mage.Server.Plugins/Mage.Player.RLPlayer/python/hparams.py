@@ -14,5 +14,5 @@ hparams={
     "critic_weight":.01,
     "PPOeps":.2,
     'steps_per_batch':5,
-    'exp_per_batch':1000,
+    'exp_per_batch':4000,
 }
