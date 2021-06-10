@@ -123,6 +123,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Gaea's Will", 162, Rarity.RARE, mage.cards.g.GaeasWill.class));
         cards.add(new SetCardInfo("Galvanic Relay", 127, Rarity.COMMON, mage.cards.g.GalvanicRelay.class));
         cards.add(new SetCardInfo("Gargadon", 128, Rarity.COMMON, mage.cards.g.Gargadon.class));
+        cards.add(new SetCardInfo("Garth One-Eye", 197, Rarity.MYTHIC, mage.cards.g.GarthOneEye.class));
         cards.add(new SetCardInfo("General Ferrous Rokiric", 198, Rarity.RARE, mage.cards.g.GeneralFerrousRokiric.class));
         cards.add(new SetCardInfo("Geyadrone Dihada", 199, Rarity.MYTHIC, mage.cards.g.GeyadroneDihada.class));
         cards.add(new SetCardInfo("Ghost-Lit Drifter", 45, Rarity.UNCOMMON, mage.cards.g.GhostLitDrifter.class));
