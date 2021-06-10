@@ -7,7 +7,11 @@ from netComponents import play_game,MainNet
 from pathlib import Path
 import pickle 
 from hparams import hparams
-base_path=str(Path.home())+"/python/xmage/model_simple"
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("name")
+args =parser.parse_args()
+base_path=str(Path.home())+"/python/xmage/"+args.name
 netDict=torch.load(base_path+".model")
 with open(base_path+".converter", 'rb') as filehandler:
     converter=pickle.load(filehandler)

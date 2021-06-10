@@ -107,8 +107,9 @@ class InputNorm(nn.Module):
         self.variance.requires_grad=False
         self.iterations=nn.Parameter(torch.tensor(1.0),requires_grad=False)
         self.max_iter=hparams['decay_steps']
+        self.updating=True
     def forward(self,x):
-        if (self.training and x.shape[0]==1): #Only fit parameters when exploring
+        if (self.updating and x.shape[0]==1): #Only fit parameters when exploring
             detached_x=x.detach()
             detached_x=torch.mean(detached_x,dim=self.mean_dims,keepdim=True)
             iter=float(min(self.max_iter,self.iterations+1))
@@ -151,6 +152,8 @@ class ResidBlock(nn.Module):
         self.hparams=hparams
         self.linone=nn.Linear(hparams["dot_dim"],hparams["dot_dim"])
         self.lintwo=nn.Linear(hparams["dot_dim"],hparams["dot_dim"])
+        self.norm1=nn.BatchNorm1d(hparams["dot_dim"],momentum=0.02)
+        self.norm2=nn.BatchNorm1d(hparams["dot_dim"],momentum=0.02)
     def forward(self,x):
         input=x
         x=F.relu(self.linone(x))

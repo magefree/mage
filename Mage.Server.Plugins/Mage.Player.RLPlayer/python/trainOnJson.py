@@ -24,6 +24,7 @@ def collect_experience(min_actions,env,net,converter):
     observations=[]
     rewards=[]
     weights=[]
+    net.eval()
     while(len(actions)<min_actions):
         global game_counter
         (a,o,r)=play_game(net,converter,env,game_counter%50==0)
@@ -41,6 +42,7 @@ for games in range(10000):
     with torch.no_grad():
         (base_log_prob,critic_base)=net(observations)
         base_log_prob=base_log_prob.detach()
+    net.train()
     max_action_len=max([len(obs['action_mask']) for obs in observations])
     for i in range(hparams['steps_per_batch']):
         optimizer.zero_grad()
@@ -68,11 +70,11 @@ for games in range(10000):
         #out=out*torch.tensor(weights).unsqueeze(dim=-1)
         out=torch.mean(out)
         out.backward()
-        #torch.nn.utils.clip_grad_norm_(net.parameters(), hparams['grad_clip'])
+        torch.nn.utils.clip_grad_norm_(net.parameters(), hparams['grad_clip'])
         #print(out.shape,back_grad.shape)
         optimizer.step()
     if(games%50==0):
-        base_path=str(Path.home())+"/python/xmage/model_simple"+str(games)
+        base_path=str(Path.home())+"/python/xmage/model_PPO"+str(games)
         torch.save(net.state_dict(), base_path+".model")
         with open(base_path+".converter", 'wb') as filehandler:
             pickle.dump(converter, filehandler)
