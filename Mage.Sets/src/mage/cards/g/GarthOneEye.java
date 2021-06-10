@@ -57,13 +57,19 @@ class GarthOneEyeEffect extends OneShotEffect {
     private static final List<String> names = Arrays.asList(
             "Disenchant", "Braingeyser", "Terror", "Shivan Dragon", "Regrowth", "Black Lotus"
     );
-    private static final Map<String, Card> cardMap
-            = CardRepository
-            .instance
-            .findCards(new CardCriteria().setCodes("LEA"))
-            .stream()
-            .filter(cardInfo -> names.contains(cardInfo.getName()))
-            .collect(Collectors.toMap(CardInfo::getName, CardInfo::getCard));
+    private static final Map<String, Card> cardMap = new HashMap<>();
+
+    private static final void initMap() {
+        if (!cardMap.isEmpty()) {
+            return;
+        }
+        cardMap.putAll(CardRepository
+                .instance
+                .findCards(new CardCriteria().setCodes("LEA"))
+                .stream()
+                .filter(cardInfo -> names.contains(cardInfo.getName()))
+                .collect(Collectors.toMap(CardInfo::getName, CardInfo::getCard)));
+    }
 
     GarthOneEyeEffect() {
         super(Outcome.Benefit);
@@ -83,6 +89,7 @@ class GarthOneEyeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        initMap();
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
