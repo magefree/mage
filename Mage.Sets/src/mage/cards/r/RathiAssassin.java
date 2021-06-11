@@ -44,6 +44,7 @@ public final class RathiAssassin extends CardImpl {
 
     public RathiAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.MERCENARY);
         this.subtype.add(SubType.ASSASSIN);

@@ -33,6 +33,7 @@ public final class PlagueEngineer extends CardImpl {
     public PlagueEngineer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CARRIER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
