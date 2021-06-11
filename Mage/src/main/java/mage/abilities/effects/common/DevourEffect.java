@@ -3,10 +3,11 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -14,7 +15,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,12 +35,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public class DevourEffect extends ReplacementEffectImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures to devour");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     private final DevourFactor devourFactor;
 
@@ -77,49 +72,54 @@ public class DevourEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
-        if (creature != null && controller != null) {
-            Target target = new TargetControlledCreaturePermanent(1, Integer.MAX_VALUE, filter, true);
-            target.setRequired(false);
-            if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                return false;
-            }
-            if (controller.chooseUse(Outcome.Detriment, "Devour creatures?", source, game)) {
-                controller.chooseTarget(Outcome.Detriment, target, source, game);
-                if (!target.getTargets().isEmpty()) {
-                    List<Permanent> creaturesDevoured = new ArrayList<>();
-                    int devouredCreatures = 0;
-                    for (UUID targetId : target.getTargets()) {
-                        Permanent targetCreature = game.getPermanent(targetId);
-                        if (targetCreature != null && targetCreature.sacrifice(source, game)) {
-                            creaturesDevoured.add(targetCreature);
-                            devouredCreatures++;
-                        }
-                    }
-                    if (!game.isSimulation()) {
-                        game.informPlayers(creature.getLogName() + " devours " + devouredCreatures + " creatures");
-                    }
-                    game.getState().processAction(game); // need for multistep effects
-
-                    int amountCounters;
-                    if (devourFactor == DevourFactor.DevourX) {
-                        amountCounters = devouredCreatures * devouredCreatures;
-                    } else {
-                        amountCounters = devouredCreatures * devourFactor.getFactor();
-                    }
-                    creature.addCounters(CounterType.P1P1.createInstance(amountCounters), source.getControllerId(), source, game);
-                    game.getState().setValue(creature.getId().toString() + "devoured", creaturesDevoured);
-                }
-
+        if (creature == null || controller == null) {
+            return false;
+        }
+        Target target = new TargetControlledPermanent(1, Integer.MAX_VALUE, devourFactor.getFilter(), true);
+        target.setRequired(false);
+        if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            return false;
+        }
+        if (!controller.chooseUse(Outcome.Detriment, "Devour " + devourFactor.getCardType().toString().toLowerCase() + "s?", source, game)) {
+            return false;
+        }
+        controller.chooseTarget(Outcome.Detriment, target, source, game);
+        if (target.getTargets().isEmpty()) {
+            return false;
+        }
+        List<Permanent> creaturesDevoured = new ArrayList<>();
+        int devouredCreatures = 0;
+        for (UUID targetId : target.getTargets()) {
+            Permanent targetCreature = game.getPermanent(targetId);
+            if (targetCreature != null && targetCreature.sacrifice(source, game)) {
+                creaturesDevoured.add(targetCreature);
+                devouredCreatures++;
             }
         }
+        if (!game.isSimulation()) {
+            game.informPlayers(creature.getLogName() + " devours " + devouredCreatures + " " + devourFactor.getCardType().toString().toLowerCase() + "s");
+        }
+        game.getState().processAction(game); // need for multistep effects
+
+        int amountCounters;
+        if (devourFactor == DevourFactor.DevourX) {
+            amountCounters = devouredCreatures * devouredCreatures;
+        } else {
+            amountCounters = devouredCreatures * devourFactor.getFactor();
+        }
+        creature.addCounters(CounterType.P1P1.createInstance(amountCounters), source.getControllerId(), source, game);
+        game.getState().setValue(creature.getId().toString() + "devoured", creaturesDevoured);
         return false;
     }
 
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder(devourFactor.toString());
-        sb.append(" <i>(As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with ");
-        sb.append(devourFactor.getRuleText()).append(")</i>");
+        sb.append(" <i>(As this enters the battlefield, you may sacrifice any number of ");
+        sb.append(devourFactor.getCardType());
+        sb.append("s. This creature enters the battlefield with ");
+        sb.append(devourFactor.getRuleText());
+        sb.append(")</i>");
         return sb.toString();
     }
 
@@ -149,16 +149,25 @@ public class DevourEffect extends ReplacementEffectImpl {
         Devour1("Devour 1", "that many +1/+1 counters on it", 1),
         Devour2("Devour 2", "twice that many +1/+1 counters on it", 2),
         Devour3("Devour 3", "three times that many +1/+1 counters on it", 3),
+        DevourArtifact1("Devour artifact 1", "that many +1/+1 counters on it", 1, CardType.ARTIFACT),
         DevourX("Devour X, where X is the number of creatures devoured this way", "X +1/+1 counters on it for each of those creatures", Integer.MAX_VALUE);
 
         private final String text;
         private final String ruleText;
         private final int factor;
+        private final CardType cardType;
+        private final FilterControlledPermanent filter;
 
         DevourFactor(String text, String ruleText, int factor) {
+            this(text, ruleText, factor, CardType.CREATURE);
+        }
+
+        DevourFactor(String text, String ruleText, int factor, CardType cardType) {
             this.text = text;
             this.ruleText = ruleText;
             this.factor = factor;
+            this.cardType = cardType;
+            this.filter = makeFilter(cardType);
         }
 
         @Override
@@ -172,6 +181,21 @@ public class DevourEffect extends ReplacementEffectImpl {
 
         public int getFactor() {
             return factor;
+        }
+
+        public CardType getCardType() {
+            return cardType;
+        }
+
+        public FilterControlledPermanent getFilter() {
+            return filter;
+        }
+
+        private static final FilterControlledPermanent makeFilter(CardType cardType) {
+            FilterControlledPermanent filter = new FilterControlledPermanent(cardType.toString().toLowerCase() + "s to devour");
+            filter.add(cardType.getPredicate());
+            filter.add(AnotherPredicate.instance);
+            return filter;
         }
     }
 }
