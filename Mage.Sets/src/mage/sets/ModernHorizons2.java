@@ -88,6 +88,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Darkmoss Bridge", 245, Rarity.COMMON, mage.cards.d.DarkmossBridge.class));
         cards.add(new SetCardInfo("Dauthi Voidwalker", 81, Rarity.RARE, mage.cards.d.DauthiVoidwalker.class));
         cards.add(new SetCardInfo("Deepwood Denizen", 155, Rarity.COMMON, mage.cards.d.DeepwoodDenizen.class));
+        cards.add(new SetCardInfo("Dermotaxi", 224, Rarity.RARE, mage.cards.d.Dermotaxi.class));
         cards.add(new SetCardInfo("Diamond Lion", 225, Rarity.RARE, mage.cards.d.DiamondLion.class));
         cards.add(new SetCardInfo("Dihada's Ploy", 193, Rarity.COMMON, mage.cards.d.DihadasPloy.class));
         cards.add(new SetCardInfo("Discerning Taste", 82, Rarity.COMMON, mage.cards.d.DiscerningTaste.class));
