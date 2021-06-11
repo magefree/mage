@@ -101,7 +101,6 @@ public class Historic extends Constructed {
         banned.add("Mausoleum Turnkey");
         banned.add("Reanimate");
         banned.add("Scourge of Nel Toth");
-        banned.add("Sheoldred, Whispering One");
         banned.add("Ball Lightning");
         banned.add("Chain Lightning");
         banned.add("Draconic Roar");
