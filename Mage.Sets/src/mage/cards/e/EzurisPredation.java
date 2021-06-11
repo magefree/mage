@@ -14,7 +14,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.BeastToken2;
+import mage.game.permanent.token.PhyrexianBeastToken;
 import mage.players.Player;
 
 import java.util.HashSet;
@@ -48,7 +48,7 @@ class EzurisPredationEffect extends OneShotEffect {
 
     public EzurisPredationEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "For each creature your opponents control, create a 4/4 green Beast creature token. Each of those Beasts fights a different one of those creatures";
+        this.staticText = "For each creature your opponents control, create a 4/4 green Phyrexian Beast creature token. Each of those Beasts fights a different one of those creatures";
     }
 
     public EzurisPredationEffect(final EzurisPredationEffect effect) {
@@ -81,7 +81,7 @@ class EzurisPredationEffect extends OneShotEffect {
             List<Permanent> creaturesOfOpponents = game.getBattlefield().getActivePermanents(filterCreature, source.getControllerId(), source.getSourceId(), game);
             Set<MageObjectReference> morSet = new HashSet<>();
             if (!creaturesOfOpponents.isEmpty()) {
-                CreateTokenEffect effect = new CreateTokenEffect(new BeastToken2(), creaturesOfOpponents.size());
+                CreateTokenEffect effect = new CreateTokenEffect(new PhyrexianBeastToken(), creaturesOfOpponents.size());
                 effect.apply(game, source);
                 for (UUID tokenId : effect.getLastAddedTokenIds()) {
                     Permanent token = game.getPermanent(tokenId);

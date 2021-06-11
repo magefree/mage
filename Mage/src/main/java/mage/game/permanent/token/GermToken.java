@@ -28,7 +28,7 @@ public final class GermToken extends TokenImpl {
     }
 
     public GermToken(String setCode, int tokenType) {
-        super("Germ", "0/0 black Phyrexian Germ creature token");
+        super("Phyrexian Germ", "0/0 black Phyrexian Germ creature token");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);

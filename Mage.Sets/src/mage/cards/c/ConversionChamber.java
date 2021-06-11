@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactCard;
-import mage.game.permanent.token.GolemToken;
+import mage.game.permanent.token.PhyrexianGolemToken;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;
@@ -33,7 +33,7 @@ public final class ConversionChamber extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // {2}, {T}, Remove a charge counter from Conversion Chamber: Create a 3/3 colorless Golem artifact creature token.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GolemToken()), new GenericManaCost(2));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PhyrexianGolemToken()), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         this.addAbility(ability);

@@ -5,7 +5,7 @@ import mage.abilities.keyword.SpliceOntoInstantOrSorceryAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.GolemToken;
+import mage.game.permanent.token.PhyrexianGolemToken;
 
 import java.util.UUID;
 
@@ -18,7 +18,7 @@ public final class SplicersSkill extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");
 
         // Create a 3/3 colorless Golem artifact creature token.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new GolemToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new PhyrexianGolemToken()));
 
         // Splice onto instant or sorcery {3}{W}
         this.addAbility(new SpliceOntoInstantOrSorceryAbility("{3}{W}"));

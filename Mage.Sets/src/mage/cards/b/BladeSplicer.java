@@ -13,7 +13,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.game.permanent.token.GolemToken;
+import mage.game.permanent.token.PhyrexianGolemToken;
 
 import java.util.UUID;
 
@@ -36,7 +36,7 @@ public final class BladeSplicer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Blade Splicer enters the battlefield, create a 3/3 colorless Golem artifact creature token.        
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PhyrexianGolemToken())));
 
         // Golem creatures you control have first strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));

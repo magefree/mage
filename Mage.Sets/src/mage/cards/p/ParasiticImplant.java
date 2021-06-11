@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -11,25 +9,25 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.MyrToken;
+import mage.game.permanent.token.PhyrexianMyrToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class ParasiticImplant extends CardImpl {
 
     public ParasiticImplant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
         this.subtype.add(SubType.AURA);
-
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -37,7 +35,7 @@ public final class ParasiticImplant extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         ability = new BeginningOfUpkeepTriggeredAbility(new ParasiticImplantEffect(), TargetController.YOU, false);
-        ability.addEffect(new CreateTokenEffect(new MyrToken("NPH")));
+        ability.addEffect(new CreateTokenEffect(new PhyrexianMyrToken()));
         this.addAbility(ability);
     }
 

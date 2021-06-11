@@ -114,7 +114,6 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
-        subtypesToIgnore.add("Phyrexian"); // large errata incoming, adding this for now
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
