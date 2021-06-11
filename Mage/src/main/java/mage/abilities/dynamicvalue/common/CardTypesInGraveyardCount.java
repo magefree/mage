@@ -1,42 +1,46 @@
 package mage.abilities.dynamicvalue.common;
 
-import java.util.HashSet;
-import java.util.Set;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
+
+import java.util.Collection;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author JayDi85
  */
 public enum CardTypesInGraveyardCount implements DynamicValue {
+    YOU("your graveyard"),
+    ALL("all graveyards"),
+    OPPONENTS("your opponents' graveyards");
+    private final String message;
 
-    instance;
+    CardTypesInGraveyardCount(String message) {
+        this.message = message;
+    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            Set<CardType> foundCardTypes = new HashSet<>();
-            for (Card card : controller.getGraveyard().getCards(game)) {
-                // 4/8/2016 In some rare cases, you can have a token or a copy of a spell in your graveyard at the moment that an object’s delirium ability counts the card types among cards in your graveyard, before that token or copy ceases to exist. Because tokens and copies of spells are not cards, even if they are copies of cards, their types will never be counted.
-                if (!card.isCopy() && !(card instanceof PermanentToken)) {
-                    foundCardTypes.addAll(card.getCardType());
-                }
-            }
-            return foundCardTypes.size();
-        }
-        return 0;
+        return getStream(game, sourceAbility)
+                .filter(card -> !card.isCopy() && !(card instanceof PermanentToken))
+                .map(MageObject::getCardType)
+                .flatMap(Collection::stream)
+                .distinct()
+                .mapToInt(x -> 1)
+                .sum();
     }
 
     @Override
     public CardTypesInGraveyardCount copy() {
-        return instance;
+        return this;
     }
 
     @Override
@@ -46,6 +50,33 @@ public enum CardTypesInGraveyardCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the number of opponents you attacked this turn";
+        return "the number of card types in " + message;
+    }
+
+    private final Stream<Card> getStream(Game game, Ability ability) {
+        Collection<UUID> playerIds;
+        switch (this) {
+            case YOU:
+                Player player = game.getPlayer(ability.getControllerId());
+                return player == null
+                        ? null : player
+                        .getGraveyard()
+                        .getCards(game)
+                        .stream();
+            case OPPONENTS:
+                playerIds = game.getOpponents(ability.getControllerId());
+                break;
+            case ALL:
+                playerIds = game.getState().getPlayersInRange(ability.getControllerId(), game);
+                break;
+            default:
+                return null;
+        }
+        return playerIds.stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .map(Player::getGraveyard)
+                .map(graveyard -> graveyard.getCards(game))
+                .flatMap(Collection::stream);
     }
 }

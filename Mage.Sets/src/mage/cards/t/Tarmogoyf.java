@@ -4,17 +4,14 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.hint.common.CardTypesInGraveyardHint;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.players.Player;
 
-import java.util.EnumSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -61,27 +58,13 @@ class TarmogoyfEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            MageObject target = game.getObject(source.getSourceId());
-            if (target != null) {
-                Set<CardType> foundCardTypes = EnumSet.noneOf(CardType.class);
-                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        for (Card card : player.getGraveyard().getCards(game)) {
-                            foundCardTypes.addAll(card.getCardType());
-                        }
-                    }
-                }
-                int number = foundCardTypes.size();
-
-                target.getPower().setValue(number);
-                target.getToughness().setValue(number + 1);
-                return true;
-            }
+        MageObject target = source.getSourceObject(game);
+        if (target == null) {
+            return false;
         }
-        return false;
+        int number = CardTypesInGraveyardCount.ALL.calculate(game, source, this);
+        target.getPower().setValue(number);
+        target.getToughness().setValue(number + 1);
+        return true;
     }
-
 }
