@@ -36,7 +36,7 @@ public final class LurkingSkirge extends CardImpl {
         // When a creature is put into an opponent's graveyard from the battlefield, if Lurking Skirge is an enchantment, Lurking Skirge becomes a 3/2 Imp creature with flying.
         TriggeredAbility ability = new PutIntoGraveFromBattlefieldAllTriggeredAbility(new BecomesCreatureSourceEffect(new LurkingSkirgeToken(), "", Duration.WhileOnBattlefield, true, false), false, filter, false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT),
-                "When a creature is put into an opponent's graveyard from the battlefield, if {this} is an enchantment, {this} becomes a 3/2 Imp creature with flying."));
+                "When a creature is put into an opponent's graveyard from the battlefield, if {this} is an enchantment, {this} becomes a 3/2 Phyrexian Imp creature with flying."));
     }
 
     private LurkingSkirge(final LurkingSkirge card) {
@@ -52,8 +52,9 @@ public final class LurkingSkirge extends CardImpl {
 class LurkingSkirgeToken extends TokenImpl {
 
     public LurkingSkirgeToken() {
-        super("Imp", "3/2 Imp with flying.");
+        super("Phyrexian Imp", "3/2 Phyrexian Imp with flying.");
         cardType.add(CardType.CREATURE);
+        subtype.add(SubType.PHYREXIAN);
         subtype.add(SubType.IMP);
         power = new MageInt(3);
         toughness = new MageInt(2);

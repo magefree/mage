@@ -33,7 +33,7 @@ public final class LurkingEvil extends CardImpl {
 
         // Pay half your life, rounded up: Lurking Evil becomes a 4/4 Horror creature with flying.
         Effect effect = new BecomesCreatureSourceEffect(new LurkingEvilToken(), null, Duration.EndOfGame, true, false);
-        effect.setText("{this} becomes a 4/4 Horror creature with flying");
+        effect.setText("{this} becomes a 4/4 Phyrexian Horror creature with flying");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new LurkingEvilCost()));
     }
 
@@ -89,9 +89,10 @@ class LurkingEvilCost extends CostImpl {
 class LurkingEvilToken extends TokenImpl {
 
     LurkingEvilToken() {
-        super("Horror", "4/4 Horror creature with flying");
+        super("Phyrexian Horror", "4/4 Phyrexian Horror creature with flying");
         power = new MageInt(4);
         toughness = new MageInt(4);
+        subtype.add(SubType.PHYREXIAN);
         subtype.add(SubType.HORROR);
         cardType.add(CardType.CREATURE);
         this.addAbility(FlyingAbility.getInstance());
