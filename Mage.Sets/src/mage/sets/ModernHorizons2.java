@@ -29,6 +29,7 @@ public final class ModernHorizons2 extends ExpansionSet {
 
         cards.add(new SetCardInfo("Abiding Grace", 1, Rarity.UNCOMMON, mage.cards.a.AbidingGrace.class));
         cards.add(new SetCardInfo("Abundant Harvest", 147, Rarity.COMMON, mage.cards.a.AbundantHarvest.class));
+        cards.add(new SetCardInfo("Altar of the Goyf", 220, Rarity.UNCOMMON, mage.cards.a.AltarOfTheGoyf.class));
         cards.add(new SetCardInfo("Academy Manufactor", 219, Rarity.RARE, mage.cards.a.AcademyManufactor.class));
         cards.add(new SetCardInfo("Aeromoeba", 37, Rarity.COMMON, mage.cards.a.Aeromoeba.class));
         cards.add(new SetCardInfo("Aeve, Progenitor Ooze", 148, Rarity.RARE, mage.cards.a.AeveProgenitorOoze.class));
@@ -49,6 +50,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Barbed Spike", 5, Rarity.UNCOMMON, mage.cards.b.BarbedSpike.class));
         cards.add(new SetCardInfo("Batterbone", 221, Rarity.UNCOMMON, mage.cards.b.Batterbone.class));
         cards.add(new SetCardInfo("Battle Plan", 114, Rarity.COMMON, mage.cards.b.BattlePlan.class));
+        cards.add(new SetCardInfo("Blazing Rootwalla", 115, Rarity.UNCOMMON, mage.cards.b.BlazingRootwalla.class));
         cards.add(new SetCardInfo("Blacksmith's Skill", 6, Rarity.COMMON, mage.cards.b.BlacksmithsSkill.class));
         cards.add(new SetCardInfo("Blessed Respite", 150, Rarity.UNCOMMON, mage.cards.b.BlessedRespite.class));
         cards.add(new SetCardInfo("Bloodbraid Marauder", 116, Rarity.RARE, mage.cards.b.BloodbraidMarauder.class));
@@ -72,6 +74,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Chance Encounter", 277, Rarity.RARE, mage.cards.c.ChanceEncounter.class));
         cards.add(new SetCardInfo("Chatterfang, Squirrel General", 151, Rarity.MYTHIC, mage.cards.c.ChatterfangSquirrelGeneral.class));
         cards.add(new SetCardInfo("Chatterstorm", 152, Rarity.COMMON, mage.cards.c.Chatterstorm.class));
+        cards.add(new SetCardInfo("Clattering Augur", 79, Rarity.UNCOMMON, mage.cards.c.ClatteringAugur.class));
         cards.add(new SetCardInfo("Chitterspitter", 153, Rarity.RARE, mage.cards.c.Chitterspitter.class));
         cards.add(new SetCardInfo("Chrome Courier", 190, Rarity.COMMON, mage.cards.c.ChromeCourier.class));
         cards.add(new SetCardInfo("Combine Chrysalis", 191, Rarity.UNCOMMON, mage.cards.c.CombineChrysalis.class));
@@ -80,6 +83,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Crack Open", 154, Rarity.COMMON, mage.cards.c.CrackOpen.class));
         cards.add(new SetCardInfo("Cursed Totem", 295, Rarity.RARE, mage.cards.c.CursedTotem.class));
         cards.add(new SetCardInfo("Dakkon, Shadow Slayer", 192, Rarity.MYTHIC, mage.cards.d.DakkonShadowSlayer.class));
+        cards.add(new SetCardInfo("Damn", 80, Rarity.RARE, mage.cards.d.Damn.class));
         cards.add(new SetCardInfo("Darkmoss Bridge", 245, Rarity.COMMON, mage.cards.d.DarkmossBridge.class));
         cards.add(new SetCardInfo("Dauthi Voidwalker", 81, Rarity.RARE, mage.cards.d.DauthiVoidwalker.class));
         cards.add(new SetCardInfo("Deepwood Denizen", 155, Rarity.COMMON, mage.cards.d.DeepwoodDenizen.class));
