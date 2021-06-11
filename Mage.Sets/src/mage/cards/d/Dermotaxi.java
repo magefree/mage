@@ -1,7 +1,6 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -22,7 +21,6 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetControlledPermanent;
-import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -105,18 +103,6 @@ class DermotaxiImprintEffect extends OneShotEffect {
 
 class DermotaxiCopyEffect extends OneShotEffect {
 
-    private static final class DermotaxiCopyApplier extends CopyApplier {
-
-        @Override
-        public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-            blueprint.addCardType(CardType.ARTIFACT);
-            blueprint.addSubType(SubType.VEHICLE);
-            return true;
-        }
-    }
-
-    private static final CopyApplier applier = new DermotaxiCopyApplier();
-
     DermotaxiCopyEffect() {
         super(Outcome.Benefit);
         staticText = "until end of turn, {this} becomes a copy of the imprinted card, " +
@@ -134,20 +120,20 @@ class DermotaxiCopyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcerPermanent = source.getSourcePermanentIfItStillExists(game);
-        if (sourcerPermanent == null) {
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        if (sourcePermanent == null) {
             return false;
         }
-        Card card = game.getPermanent(sourcerPermanent.getImprinted().get(0));
+        Card card = game.getPermanent(sourcePermanent.getImprinted().get(0));
         if (card == null) {
             return false;
         }
         Permanent newBluePrint = new PermanentCard(card, source.getControllerId(), game);
         newBluePrint.assignNewId();
-        applier.apply(game, newBluePrint, source, sourcerPermanent.getId());
-        CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, sourcerPermanent.getId());
+        newBluePrint.addCardType(CardType.ARTIFACT);
+        newBluePrint.addSubType(SubType.VEHICLE);
+        CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBluePrint, sourcePermanent.getId());
         copyEffect.newId();
-        copyEffect.setApplier(applier);
         Ability newAbility = source.copy();
         copyEffect.init(newAbility, game);
         game.addEffect(copyEffect, newAbility);
