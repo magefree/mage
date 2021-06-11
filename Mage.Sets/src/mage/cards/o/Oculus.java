@@ -19,6 +19,7 @@ public final class Oculus extends CardImpl {
 
     public Oculus (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HOMUNCULUS);
 
         this.power = new MageInt(1);

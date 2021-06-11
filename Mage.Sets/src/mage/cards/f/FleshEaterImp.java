@@ -25,6 +25,7 @@ public final class FleshEaterImp extends CardImpl {
 
     public FleshEaterImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.IMP);
 
         this.power = new MageInt(2);

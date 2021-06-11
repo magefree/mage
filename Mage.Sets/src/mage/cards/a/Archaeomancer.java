@@ -1,24 +1,22 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.target.Target;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class Archaeomancer extends CardImpl {
-
-    private static final FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard");
 
     public Archaeomancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
@@ -29,11 +27,8 @@ public final class Archaeomancer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Archaeomancer enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(
-                new ReturnToHandTargetEffect()
-                        .setText("return target instant or sorcery card from your graveyard to your hand"), false);
-        Target target = new TargetCardInYourGraveyard(filter);
-        ability.addTarget(target);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 

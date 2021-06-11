@@ -29,6 +29,7 @@ public final class PhyrexianDreadnought extends CardImpl {
 
     public PhyrexianDreadnought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.DREADNOUGHT);
 
         this.power = new MageInt(12);

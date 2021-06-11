@@ -30,6 +30,7 @@ public final class XantchaSleeperAgent extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
 
         this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.MINION);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

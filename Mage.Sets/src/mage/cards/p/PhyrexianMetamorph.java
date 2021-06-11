@@ -35,6 +35,7 @@ public final class PhyrexianMetamorph extends CardImpl {
 
     public PhyrexianMetamorph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U/P}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(0);

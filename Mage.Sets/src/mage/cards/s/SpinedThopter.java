@@ -17,6 +17,7 @@ public final class SpinedThopter extends CardImpl {
 
     public SpinedThopter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{U/P}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.THOPTER);
 
         this.power = new MageInt(2);

@@ -1,5 +1,7 @@
 package mage.cards.d;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,6 +16,7 @@ import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.AngelVigilanceToken;
+import mage.game.permanent.token.Token;
 
 /**
  *
@@ -62,13 +65,34 @@ class DivineVisitationEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId())
-                && ((CreateTokenEvent) event).getToken().isCreature();
+        if (event instanceof CreateTokenEvent && event.getPlayerId().equals(source.getControllerId())) {
+            CreateTokenEvent tokenEvent = (CreateTokenEvent) event;
+            for (Token token : tokenEvent.getTokens().keySet()) {
+                if (token.isCreature()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((CreateTokenEvent) event).setToken(new AngelVigilanceToken());
+        if (event instanceof CreateTokenEvent) {
+            int amount = 0;
+            CreateTokenEvent tokenEvent = (CreateTokenEvent) event;
+            Iterator<Map.Entry<Token, Integer>> it = tokenEvent.getTokens().entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry<Token, Integer> entry = it.next();
+                if (entry.getKey().isCreature()) {
+                    amount += entry.getValue();
+                    it.remove();
+                }
+            }
+            if (amount > 0) {
+                tokenEvent.getTokens().put(new AngelVigilanceToken(), amount);
+            }
+        }
         return false;
     }
 

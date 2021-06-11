@@ -16,6 +16,7 @@ public final class RottedHystrix extends CardImpl {
 
     public RottedHystrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(3);

@@ -27,6 +27,7 @@ public final class MaraudingKnight extends CardImpl {
 
     public MaraudingKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(2);

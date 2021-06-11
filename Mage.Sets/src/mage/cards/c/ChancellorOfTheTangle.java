@@ -27,6 +27,7 @@ public final class ChancellorOfTheTangle extends CardImpl {
 
     public ChancellorOfTheTangle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BEAST);
 
         this.color.setGreen(true);

@@ -19,6 +19,7 @@ public final class PhyrexianJuggernaut extends CardImpl {
 
     public PhyrexianJuggernaut (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.JUGGERNAUT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

@@ -36,7 +36,7 @@ public class ReturnToHandAttachedEffect extends OneShotEffect {
             return false;
         }
         Card card = permanent.getMainCard();
-        if (permanent.getZoneChangeCounter(game) != card.getZoneChangeCounter(game) + 1) {
+        if (permanent.getZoneChangeCounter(game) + 1 != card.getZoneChangeCounter(game)) {
             return false;
         }
         return player.moveCards(card, Zone.HAND, source, game);

@@ -79,7 +79,7 @@ public class FlameshadowConjuringTest extends CardTestPlayerBase {
         assertLife(playerB, 14);
         assertLife(playerA, 26);
 
-        assertPermanentCount(playerA, "Wurm", 2);
+        assertPermanentCount(playerA, "Phyrexian Wurm", 2);
 
     }
 

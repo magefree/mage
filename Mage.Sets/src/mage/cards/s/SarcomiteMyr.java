@@ -25,6 +25,7 @@ public final class SarcomiteMyr extends CardImpl {
 
     public SarcomiteMyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{U}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.MYR);
 
         this.power = new MageInt(2);

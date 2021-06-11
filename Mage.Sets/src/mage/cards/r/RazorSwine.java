@@ -18,6 +18,7 @@ public final class RazorSwine extends CardImpl {
 
     public RazorSwine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BOAR);
 
         this.power = new MageInt(2);

@@ -19,7 +19,7 @@ public final class BlackcleaveGoblin extends CardImpl {
 
     public BlackcleaveGoblin (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add(SubType.GOBLIN, SubType.ZOMBIE);
+        this.subtype.add(SubType.PHYREXIAN, SubType.GOBLIN, SubType.ZOMBIE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

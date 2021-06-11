@@ -22,6 +22,7 @@ public final class SlagFiend extends CardImpl {
 
     public SlagFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CONSTRUCT);
 
         this.power = new MageInt(0);

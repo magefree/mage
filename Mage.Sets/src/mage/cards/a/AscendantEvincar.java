@@ -31,6 +31,7 @@ public final class AscendantEvincar extends CardImpl {
     public AscendantEvincar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.NOBLE);
 

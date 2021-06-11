@@ -36,6 +36,7 @@ public final class BrutalizerExarch extends CardImpl {
 
     public BrutalizerExarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(3);

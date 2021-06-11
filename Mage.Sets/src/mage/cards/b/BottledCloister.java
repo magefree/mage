@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -103,12 +102,12 @@ class BottledCloisterReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        Cards cards = new CardsImpl(exileZone);
-        cards.removeIf(uuid -> !player.getId().equals(game.getOwnerId(uuid)));
-        if (!cards.isEmpty()) {
-            player.moveCards(cards, Zone.HAND, source, game);
+        if (player == null) {
+            return false;
         }
+        Cards cards = new CardsImpl(game.getExile().getExileZone(CardUtil.getExileZoneId(game, source)).getCards(game));
+        cards.removeIf(uuid -> !player.getId().equals(game.getOwnerId(uuid)));
+        player.moveCards(cards, Zone.HAND, source, game);
         player.drawCards(1, source, game);
         return true;
     }

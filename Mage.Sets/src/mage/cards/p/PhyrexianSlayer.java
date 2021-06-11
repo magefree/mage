@@ -28,6 +28,7 @@ public final class PhyrexianSlayer extends CardImpl {
 
     public PhyrexianSlayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.MINION);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

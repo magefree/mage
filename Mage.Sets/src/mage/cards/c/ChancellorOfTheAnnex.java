@@ -32,6 +32,7 @@ public final class ChancellorOfTheAnnex extends CardImpl {
 
     public ChancellorOfTheAnnex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}{W}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(5);

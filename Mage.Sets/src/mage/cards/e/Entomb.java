@@ -1,30 +1,22 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.SearchEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInGraveyardEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class Entomb extends CardImpl {
 
     public Entomb(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Search your library for a card and put that card into your graveyard. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInGraveyard());
+        this.getSpellAbility().addEffect(new SearchLibraryPutInGraveyardEffect());
     }
 
     private Entomb(final Entomb card) {
@@ -35,36 +27,4 @@ public final class Entomb extends CardImpl {
     public Entomb copy() {
         return new Entomb(this);
     }
-}
-
-
-class SearchLibraryPutInGraveyard extends SearchEffect {
-
-  public SearchLibraryPutInGraveyard() {
-        super(new TargetCardInLibrary(new FilterCard()), Outcome.Neutral);
-        staticText = "search your library for a card, put that card into your graveyard, then shuffle";
-    }
-
-    public SearchLibraryPutInGraveyard(final SearchLibraryPutInGraveyard effect) {
-        super(effect);
-    }
-
-    @Override
-    public SearchLibraryPutInGraveyard copy() {
-        return new SearchLibraryPutInGraveyard(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        if (controller.searchLibrary(target, source, game)) {
-            controller.moveCards(game.getCard(target.getFirstTarget()), Zone.GRAVEYARD, source, game);
-        }
-        controller.shuffleLibrary(source, game);
-        return true;
-    }
-    
 }

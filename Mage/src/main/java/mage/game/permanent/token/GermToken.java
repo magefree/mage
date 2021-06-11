@@ -1,12 +1,12 @@
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import mage.MageInt;
-import mage.constants.CardType;
-import mage.constants.SubType;
 
 /**
  * @author spjspj
@@ -28,11 +28,12 @@ public final class GermToken extends TokenImpl {
     }
 
     public GermToken(String setCode, int tokenType) {
-        super("Germ", "0/0 black Germ creature token");
+        super("Phyrexian Germ", "0/0 black Phyrexian Germ creature token");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
+        subtype.add(SubType.PHYREXIAN);
         subtype.add(SubType.GERM);
         power = new MageInt(0);
         toughness = new MageInt(0);

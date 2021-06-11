@@ -38,9 +38,9 @@ public final class SwordOfTruthAndJustice extends CardImpl {
 
         // Equipped creature gets +2/+2 and has protection from white and from blue.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
-        ability.addEffect(new GainAbilityAttachedEffect(ProtectionAbility.from(
-                ObjectColor.WHITE, ObjectColor.BLUE
-        ), AttachmentType.EQUIPMENT).setText("and has protection from white and from blue"));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                ProtectionAbility.from(ObjectColor.WHITE, ObjectColor.BLUE), AttachmentType.EQUIPMENT
+        ).setText("and has protection from white and from blue"));
         this.addAbility(ability);
 
         // Whenever equipped creature deals combat damage to a player, put a +1/+1 counter on a creature you control, then proliferate.

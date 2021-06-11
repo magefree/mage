@@ -24,6 +24,7 @@ public final class Skinrender extends CardImpl {
 
     public Skinrender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(3);

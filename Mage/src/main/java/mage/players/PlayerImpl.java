@@ -1177,6 +1177,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     logger.error("Got no spell from stack. ability: " + ability.getRule());
                     return false;
                 }
+                if (card.isCopy()) {
+                    spell.setCopy(true, null);
+                }
                 // Update the zcc to the stack
                 ability.setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(ability.getSourceId()));
 

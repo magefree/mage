@@ -13,6 +13,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.token.PhyrexianZombieToken;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -23,6 +24,7 @@ public final class NestedGhoul extends CardImpl {
 
     public NestedGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WARRIOR);
 
@@ -45,7 +47,7 @@ public final class NestedGhoul extends CardImpl {
 class NestedGhoulTriggeredAbility extends TriggeredAbilityImpl {
 
     NestedGhoulTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()));
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new PhyrexianZombieToken()));
     }
 
     NestedGhoulTriggeredAbility(final NestedGhoulTriggeredAbility ability) {
@@ -69,6 +71,6 @@ class NestedGhoulTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a source deals damage to {this}, create a 2/2 black Zombie creature token.";
+        return "Whenever a source deals damage to {this}, create a 2/2 black Phyrexian Zombie creature token.";
     }
 }

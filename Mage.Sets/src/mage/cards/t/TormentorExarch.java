@@ -22,6 +22,7 @@ public final class TormentorExarch extends CardImpl {
 
     public TormentorExarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(2);

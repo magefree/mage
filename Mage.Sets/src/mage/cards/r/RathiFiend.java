@@ -35,6 +35,7 @@ public final class RathiFiend extends CardImpl {
 
     public RathiFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
         this.subtype.add(SubType.MERCENARY);
 

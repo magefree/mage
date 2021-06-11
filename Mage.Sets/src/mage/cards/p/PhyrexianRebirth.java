@@ -38,7 +38,7 @@ public final class PhyrexianRebirth extends CardImpl {
 
         private PhyrexianRebirthEffect() {
             super(Outcome.DestroyPermanent);
-            staticText = "Destroy all creatures, then create an X/X colorless Horror artifact creature token, " +
+            staticText = "Destroy all creatures, then create an X/X colorless Phyrexian Horror artifact creature token, " +
                     "where X is the number of creatures destroyed this way";
         }
 

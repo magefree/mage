@@ -39,6 +39,7 @@ public final class RangerCaptainOfEos extends CardImpl {
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.RANGER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

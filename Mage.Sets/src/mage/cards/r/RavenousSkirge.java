@@ -20,6 +20,7 @@ public final class RavenousSkirge extends CardImpl {
 
     public RavenousSkirge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.IMP);
 
         this.power = new MageInt(1);

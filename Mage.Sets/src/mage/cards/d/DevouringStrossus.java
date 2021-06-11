@@ -29,6 +29,7 @@ public final class DevouringStrossus extends CardImpl {
 
     public DevouringStrossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);

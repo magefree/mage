@@ -21,6 +21,7 @@ public final class PhyrexianWarBeast extends CardImpl {
 
     public PhyrexianWarBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

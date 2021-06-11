@@ -89,7 +89,6 @@ public class VerifyCardDataTest {
         skipListCreate(SKIP_LIST_PT);
         skipListAddName(SKIP_LIST_PT, "UST", "Garbage Elemental");
         skipListAddName(SKIP_LIST_PT, "UST", "Infinity Elemental");
-        skipListAddName(SKIP_LIST_PT, "MH2", "Archfiend of Sorrows"); // temporary
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
@@ -115,8 +114,6 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
-        skipListAddName(SKIP_LIST_SUBTYPE, "MH2", "Squirrel Sovereign"); // temporary
-        subtypesToIgnore.add("Phyrexian"); // large errata incoming, adding this for now
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);

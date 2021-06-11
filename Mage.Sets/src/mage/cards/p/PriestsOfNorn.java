@@ -19,6 +19,7 @@ public final class PriestsOfNorn extends CardImpl {
 
     public PriestsOfNorn (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(1);

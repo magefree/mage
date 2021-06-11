@@ -27,6 +27,7 @@ public final class PhyrexianDelver extends CardImpl {
 
     public PhyrexianDelver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(3);

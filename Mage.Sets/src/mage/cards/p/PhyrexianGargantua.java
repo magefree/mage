@@ -20,6 +20,7 @@ public final class PhyrexianGargantua extends CardImpl {
 
     public PhyrexianGargantua(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(4);

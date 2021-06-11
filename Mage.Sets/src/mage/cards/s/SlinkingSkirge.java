@@ -23,6 +23,7 @@ public final class SlinkingSkirge extends CardImpl {
 
     public SlinkingSkirge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.IMP);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

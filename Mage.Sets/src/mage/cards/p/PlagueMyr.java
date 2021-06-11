@@ -19,6 +19,7 @@ public final class PlagueMyr extends CardImpl {
 
     public PlagueMyr (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.MYR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

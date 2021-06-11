@@ -28,6 +28,7 @@ public final class ChancellorOfTheDross extends CardImpl {
 
     public ChancellorOfTheDross(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.VAMPIRE);
 
         this.power = new MageInt(6);

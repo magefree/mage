@@ -17,6 +17,7 @@ public final class SlashPanther extends CardImpl {
 
     public SlashPanther(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{R/P}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CAT);
 
         this.power = new MageInt(4);

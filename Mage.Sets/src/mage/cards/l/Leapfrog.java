@@ -65,8 +65,6 @@ enum LeapfrogCondition implements Condition {
         return spells != null && spells
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isInstantOrSorcery)
-                .map(Spell::getSourceId)
-                .anyMatch(source.getSourceId()::equals);
+                .anyMatch(MageObject::isInstantOrSorcery);
     }
 }

@@ -36,6 +36,7 @@ public final class GethLordOfTheVault extends CardImpl {
     public GethLordOfTheVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(5);
