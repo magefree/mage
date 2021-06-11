@@ -42,7 +42,7 @@ class ProfaneTransfusionEffect extends OneShotEffect {
 
     ProfaneTransfusionEffect() {
         super(Outcome.Benefit);
-        staticText = "You create an X/X colorless Horror artifact creature token, " +
+        staticText = "You create an X/X colorless Phyrexian Horror artifact creature token, " +
                 "where X is the difference between those players' life totals";
     }
 
