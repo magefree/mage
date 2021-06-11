@@ -20,6 +20,7 @@ public final class DarkslickDrake extends CardImpl {
 
     public DarkslickDrake (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.DRAKE);
 
         this.power = new MageInt(2);

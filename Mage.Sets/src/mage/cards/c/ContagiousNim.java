@@ -18,6 +18,7 @@ public final class ContagiousNim extends CardImpl {
 
     public ContagiousNim (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(2);

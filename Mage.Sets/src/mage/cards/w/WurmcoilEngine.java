@@ -22,6 +22,7 @@ public final class WurmcoilEngine extends CardImpl {
 
     public WurmcoilEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.WURM);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

@@ -19,6 +19,7 @@ public final class RotWolf extends CardImpl {
 
     public RotWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.WOLF);
 
         this.power = new MageInt(2);

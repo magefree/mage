@@ -28,6 +28,7 @@ public final class SkithiryxTheBlightDragon extends CardImpl {
     public SkithiryxTheBlightDragon (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SKELETON);
 

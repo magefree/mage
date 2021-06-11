@@ -28,6 +28,7 @@ public final class PhyrexianHydra extends CardImpl {
 
     public PhyrexianHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(7);

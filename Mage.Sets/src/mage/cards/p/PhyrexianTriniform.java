@@ -21,6 +21,7 @@ public final class PhyrexianTriniform extends CardImpl {
     public PhyrexianTriniform(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{9}");
 
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);

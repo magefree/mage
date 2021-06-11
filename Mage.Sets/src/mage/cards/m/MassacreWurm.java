@@ -28,6 +28,7 @@ public final class MassacreWurm extends CardImpl {
 
     public MassacreWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.WURM);
 
         this.power = new MageInt(6);

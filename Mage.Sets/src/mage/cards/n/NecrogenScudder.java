@@ -20,6 +20,7 @@ public final class NecrogenScudder extends CardImpl {
 
     public NecrogenScudder (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(3);

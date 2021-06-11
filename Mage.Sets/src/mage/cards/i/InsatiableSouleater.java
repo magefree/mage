@@ -23,6 +23,7 @@ public final class InsatiableSouleater extends CardImpl {
 
     public InsatiableSouleater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(5);

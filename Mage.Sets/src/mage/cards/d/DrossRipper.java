@@ -22,6 +22,7 @@ public final class DrossRipper extends CardImpl {
 
     public DrossRipper (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.DOG);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

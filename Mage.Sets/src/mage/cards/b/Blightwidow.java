@@ -19,6 +19,7 @@ public final class Blightwidow extends CardImpl {
 
     public Blightwidow (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SPIDER);
 
         this.power = new MageInt(2);

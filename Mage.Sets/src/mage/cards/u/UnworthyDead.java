@@ -21,6 +21,7 @@ public final class UnworthyDead extends CardImpl {
 
     public UnworthyDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SKELETON);
 
         this.power = new MageInt(1);

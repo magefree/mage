@@ -18,6 +18,7 @@ public final class Thrummingbird extends CardImpl {
 
     public Thrummingbird(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.HORROR);
 

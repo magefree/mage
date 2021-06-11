@@ -30,6 +30,7 @@ public final class InvaderParasite extends CardImpl {
 
     public InvaderParasite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.INSECT);
 
         this.power = new MageInt(3);

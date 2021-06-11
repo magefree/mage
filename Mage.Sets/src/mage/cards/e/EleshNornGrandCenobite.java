@@ -25,6 +25,7 @@ public final class EleshNornGrandCenobite extends CardImpl {
     public EleshNornGrandCenobite (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.PRAETOR);
 
         this.power = new MageInt(4);

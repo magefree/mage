@@ -32,6 +32,7 @@ public final class Spellskite extends CardImpl {
 
     public Spellskite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);

@@ -30,7 +30,7 @@ public final class BlindZealot extends CardImpl {
 
     public BlindZealot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.subtype.add(SubType.HUMAN, SubType.CLERIC);
+        this.subtype.add(SubType.PHYREXIAN, SubType.HUMAN, SubType.CLERIC);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

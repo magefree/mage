@@ -19,6 +19,7 @@ public final class PriestOfGix extends CardImpl {
 
     public PriestOfGix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.subtype.add(SubType.MINION);

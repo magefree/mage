@@ -31,6 +31,7 @@ public final class SensorSplicer extends CardImpl {
 
     public SensorSplicer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ARTIFICER);
 
         this.power = new MageInt(1);

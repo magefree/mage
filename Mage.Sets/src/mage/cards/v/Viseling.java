@@ -22,6 +22,7 @@ public final class Viseling extends CardImpl {
 
     public Viseling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CONSTRUCT);
 
         this.power = new MageInt(2);

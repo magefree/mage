@@ -22,6 +22,7 @@ public final class BlightMamba extends CardImpl {
 
     public BlightMamba (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SNAKE);
 
         this.power = new MageInt(1);
