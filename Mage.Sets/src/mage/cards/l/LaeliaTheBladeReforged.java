@@ -6,14 +6,19 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -53,7 +58,7 @@ public final class LaeliaTheBladeReforged extends CardImpl {
 class LaeliaTheBladeReforgedAddCountersTriggeredAbility extends TriggeredAbilityImpl {
 
     LaeliaTheBladeReforgedAddCountersTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, false);
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
     }
 
     LaeliaTheBladeReforgedAddCountersTriggeredAbility(final LaeliaTheBladeReforgedAddCountersTriggeredAbility ability) {
@@ -73,42 +78,19 @@ class LaeliaTheBladeReforgedAddCountersTriggeredAbility extends TriggeredAbility
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent != null
-                && Zone.HAND == zEvent.getFromZone()
-                && Zone.EXILED == zEvent.getToZone()
-                && zEvent.getCards() != null) {
-            int cardCount = 0;
-            cardCount = zEvent.getCards().stream().filter((card)
-                    -> (card != null && card.isOwnedBy(getControllerId()))).map((_item)
-                    -> 1).reduce(cardCount, Integer::sum);
-            if (cardCount == 0) {
-                return false;
-            }
-            this.getEffects().clear();
-            this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)));
-            return true;
-        }
-
-        if (zEvent != null
-                && Zone.LIBRARY == zEvent.getFromZone()
-                && Zone.EXILED == zEvent.getToZone()
-                && zEvent.getCards() != null) {
-            int cardCount = 0;
-            cardCount = zEvent.getCards().stream().filter((card)
-                    -> (card != null && card.isOwnedBy(getControllerId()))).map((_item)
-                    -> 1).reduce(cardCount, Integer::sum);
-            if (cardCount == 0) {
-                return false;
-            }
-            this.getEffects().clear();
-            this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)));
-            return true;
-        }
-        return false;
+        return zEvent.getToZone() == Zone.EXILED
+                && (zEvent.getFromZone() == Zone.LIBRARY || zEvent.getFromZone() == Zone.GRAVEYARD)
+                && game
+                .getCards()
+                .stream()
+                .filter(Objects::nonNull)
+                .map(Card::getOwnerId)
+                .anyMatch(this::isControlledBy);
     }
 
     @Override
     public String getRule() {
-        return "Whenever a spell or ability you control exiles one or more cards from your library and/or your graveyard, put a +1/+1 counter on Laelia.";
+        return "Whenever one or more cards are put into exile from your library " +
+                "and/or your graveyard, put a +1/+1 counter on {this}.";
     }
 }
