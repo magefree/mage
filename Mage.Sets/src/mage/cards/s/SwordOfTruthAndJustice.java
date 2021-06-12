@@ -45,7 +45,7 @@ public final class SwordOfTruthAndJustice extends CardImpl {
 
         // Whenever equipped creature deals combat damage to a player, put a +1/+1 counter on a creature you control, then proliferate.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(
-                new SwordOfTruthAndJusticeEffect(), "equipped", false
+                new SwordOfTruthAndJusticeEffect(), "equipped creature", false
         ));
 
         // Equip {2}

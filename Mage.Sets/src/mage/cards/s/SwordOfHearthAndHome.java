@@ -51,7 +51,7 @@ public final class SwordOfHearthAndHome extends CardImpl {
 
         // Whenever equipped creature deals combat damage to a player, exile up to one target creature you own, then search your library for a basic land card. Put both cards onto the battlefield under your control, then shuffle.
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
-                new SwordOfHearthAndHomeEffect(), "equipped", false
+                new SwordOfHearthAndHomeEffect(), "equipped creature", false
         );
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);

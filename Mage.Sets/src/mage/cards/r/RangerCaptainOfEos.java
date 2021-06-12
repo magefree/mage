@@ -44,9 +44,9 @@ public final class RangerCaptainOfEos extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Ranger-Captain of Eos enters the battlefield, you may search your library for a creature card with converted mana cost 1 or less, reveal it, put it into your hand, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(0, 1, filter), true
-        ), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true
+        ));
 
         // Sacrifice Ranger-Captain of Eos: Your opponents can't cast noncreature spells this turn.
         this.addAbility(new SimpleActivatedAbility(new RangerCaptainOfEosEffect(), new SacrificeSourceCost()));

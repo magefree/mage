@@ -33,7 +33,7 @@ public final class GeomancersGambit extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private GeomancersGambit(final GeomancersGambit card) {

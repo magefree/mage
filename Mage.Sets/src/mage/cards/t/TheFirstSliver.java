@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class TheFirstSliver extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Sliver spells you cast");
+    private static final FilterCard filter = new FilterCard("Sliver spells");
 
     static {
         filter.add(SubType.SLIVER.getPredicate());

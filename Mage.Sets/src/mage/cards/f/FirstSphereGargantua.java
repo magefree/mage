@@ -28,7 +28,9 @@ public final class FirstSphereGargantua extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When First-Sphere Gargantua enters the battlefield, you draw a card and you lose 1 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1));
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new DrawCardSourceControllerEffect(1).setText("you draw a card")
+        );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
 

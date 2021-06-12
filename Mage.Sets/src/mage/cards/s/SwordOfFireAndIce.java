@@ -40,7 +40,7 @@ public final class SwordOfFireAndIce extends CardImpl {
         // Whenever equipped creature deals combat damage to a player, Sword of Fire 
         // and Ice deals 2 damage to any target and you draw a card.
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
-                new DamageTargetEffect(2), "equipped", false
+                new DamageTargetEffect(2), "equipped creature", false
         );
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         ability.addTarget(new TargetAnyTarget());

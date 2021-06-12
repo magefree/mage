@@ -40,7 +40,7 @@ public final class SwordOfLightAndShadow extends CardImpl {
 
         // Whenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
-                new GainLifeEffect(3), "equipped", false
+                new GainLifeEffect(3), "equipped creature", false
         );
         ability.addEffect(new SwordOfLightAndShadowEffect());
         ability.addTarget(new TargetCardInYourGraveyard(

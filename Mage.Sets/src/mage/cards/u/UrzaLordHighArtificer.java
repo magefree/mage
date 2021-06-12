@@ -76,7 +76,7 @@ class UrzaLordHighArtificerEffect extends OneShotEffect {
 
     UrzaLordHighArtificerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Shuffle your library, then exile the top card of your library. " +
+        this.staticText = "Shuffle your library, then exile the top card. " +
                 "Until end of turn, you may play that card without paying its mana cost";
     }
 

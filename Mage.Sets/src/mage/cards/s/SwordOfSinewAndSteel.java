@@ -42,7 +42,7 @@ public final class SwordOfSinewAndSteel extends CardImpl {
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
                 new DestroyTargetEffect(false, true)
                         .setText("destroy up to one target planeswalker and up to one target artifact."),
-                "equipped", false
+                "equipped creature", false
         );
         ability.addTarget(new TargetPlaneswalkerPermanent(0, 1));
         ability.addTarget(new TargetArtifactPermanent(0, 1));
