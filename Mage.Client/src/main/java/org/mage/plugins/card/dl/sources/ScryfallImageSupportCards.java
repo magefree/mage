@@ -500,7 +500,7 @@ public class ScryfallImageSupportCards {
             add("STA"); // Strixhaven Mystical Archive
             add("C21"); // Commander 2021 Edition
             add("MH2"); // Modern Horizons 2
-            add("RMH1"); // Modern Horizons 1 Timeshifts
+            add("H1R"); // Modern Horizons 1 Timeshifts
             add("AFR"); // Adventures in the Forgotten Realms
         }
     };

@@ -16,7 +16,7 @@ public final class ModernHorizons1Timeshifts extends ExpansionSet {
     }
 
     private ModernHorizons1Timeshifts() {
-        super("Modern Horizons 1 Timeshifts", "RMH1", ExpansionSet.buildDate(2021, 6, 11), SetType.SUPPLEMENTAL);
+        super("Modern Horizons 1 Timeshifts", "H1R", ExpansionSet.buildDate(2021, 6, 11), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         this.hasBoosters = false;
 
