@@ -80,7 +80,10 @@ class DauthiVoidwalkerReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(event.getTargetId());
+        Card card = ((ZoneChangeEvent) event).getTarget();
+        if (card == null) {
+            card = game.getCard(event.getTargetId());
+        }
         if (player == null || card == null) {
             return false;
         }
