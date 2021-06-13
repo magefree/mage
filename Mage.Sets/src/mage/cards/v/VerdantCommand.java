@@ -44,6 +44,7 @@ public final class VerdantCommand extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenTargetEffect(
                 new SquirrelToken(), StaticValue.get(2), true, false
         ));
+        this.getSpellAbility().addTarget(new TargetPlayer());
 
         // • Counter target loyalty ability of a planeswalker.
         Mode mode = new Mode(new CounterTargetEffect());
