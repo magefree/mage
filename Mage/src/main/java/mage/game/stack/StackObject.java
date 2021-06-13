@@ -1,5 +1,6 @@
 package mage.game.stack;
 
+import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Zone;
@@ -28,7 +29,7 @@ public interface StackObject extends MageObject, Controllable {
 
     Ability getStackAbility();
 
-    boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget, Predicate extraPredicate);
+    boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget, Predicate<MageItem> extraPredicate);
 
     boolean canTarget(Game game, UUID targetId);
 

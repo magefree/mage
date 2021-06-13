@@ -1,5 +1,6 @@
 package mage.game.stack;
 
+import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -219,7 +220,7 @@ public abstract class StackObjectImpl implements StackObject {
      * @return
      */
     @Override
-    public boolean chooseNewTargets(Game game, UUID targetControllerId, boolean forceChange, boolean onlyOneTarget, Predicate extraPredicate) {
+    public boolean chooseNewTargets(Game game, UUID targetControllerId, boolean forceChange, boolean onlyOneTarget, Predicate<MageItem> extraPredicate) {
         Player targetController = game.getPlayer(targetControllerId);
         if (targetController != null) {
             StringBuilder oldTargetDescription = new StringBuilder();

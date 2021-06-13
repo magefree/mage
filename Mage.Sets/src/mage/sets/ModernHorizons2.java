@@ -75,6 +75,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Chance Encounter", 277, Rarity.RARE, mage.cards.c.ChanceEncounter.class));
         cards.add(new SetCardInfo("Chatterfang, Squirrel General", 151, Rarity.MYTHIC, mage.cards.c.ChatterfangSquirrelGeneral.class));
         cards.add(new SetCardInfo("Chatterstorm", 152, Rarity.COMMON, mage.cards.c.Chatterstorm.class));
+        cards.add(new SetCardInfo("Chef's Kiss", 120, Rarity.RARE, mage.cards.c.ChefsKiss.class));
         cards.add(new SetCardInfo("Clattering Augur", 79, Rarity.UNCOMMON, mage.cards.c.ClatteringAugur.class));
         cards.add(new SetCardInfo("Chitterspitter", 153, Rarity.RARE, mage.cards.c.Chitterspitter.class));
         cards.add(new SetCardInfo("Chrome Courier", 190, Rarity.COMMON, mage.cards.c.ChromeCourier.class));
