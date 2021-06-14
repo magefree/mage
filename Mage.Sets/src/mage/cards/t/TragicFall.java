@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.condition.LockedInCondition;
-import mage.abilities.condition.common.MorbidCondition;
+import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -23,7 +23,7 @@ public final class TragicFall extends CardImpl {
         // Hellbent — That creature gets -13/-13 until end of turn instead if you have no cards in hand.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostTargetEffect(-13, -13), new BoostTargetEffect(-3, -3),
-                new LockedInCondition(MorbidCondition.instance), "Target creature gets -1/-1 " +
+                new LockedInCondition(HellbentCondition.instance), "Target creature gets -3/-3 " +
                 "until end of turn.<br><i>Hellbent</i> &mdash; That creature gets -13/-13 " +
                 "until end of turn instead if you have no cards in hand"
         ));
