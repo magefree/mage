@@ -1,7 +1,5 @@
 package mage.cards.c;
 
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,10 +10,10 @@ import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.constants.*;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
@@ -24,8 +22,10 @@ import mage.game.permanent.token.SquirrelToken;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class ChatterfangSquirrelGeneral extends CardImpl {
@@ -49,9 +49,8 @@ public final class ChatterfangSquirrelGeneral extends CardImpl {
 
         // {B}, Sacrifice X Squirrels: Target creature gets +X/-X until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(
-                GetXValue.instance, new SignInversionDynamicValue(GetXValue.instance), Duration.EndOfTurn),
-                new ManaCostsImpl<>("{B}")
-        );
+                GetXValue.instance, new SignInversionDynamicValue(GetXValue.instance), Duration.EndOfTurn
+        ), new ManaCostsImpl<>("{B}"));
         ability.addCost(new SacrificeXTargetCost(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -90,7 +89,7 @@ class ChatterfangSquirrelGeneralReplacementEffect extends ReplacementEffectImpl 
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return true;
+        return source.isControlledBy(event.getPlayerId());
     }
 
     @Override
