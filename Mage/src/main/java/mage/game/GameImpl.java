@@ -2186,34 +2186,34 @@ public abstract class GameImpl implements Game, Serializable {
             // 704.5s If the number of lore counters on a Saga permanent is greater than or equal to its final chapter number
             // and it isn't the source of a chapter ability that has triggered but not yet left the stack, that Saga's controller sacrifices it.
             if (perm.hasSubtype(SubType.SAGA, this)) {
-                for (Ability sagaAbility : perm.getAbilities()) {
-                    if (sagaAbility instanceof SagaAbility) {
-                        int maxChapter = ((SagaAbility) sagaAbility).getMaxChapter().getNumber();
-                        if (maxChapter <= perm.getCounters(this).getCount(CounterType.LORE)) {
-                            boolean noChapterAbilityTriggeredOrOnStack = true;
-                            // Check chapter abilities on stack
-                            for (StackObject stackObject : getStack()) {
-                                if (stackObject.getSourceId().equals(perm.getId()) && SagaAbility.isChapterAbility(stackObject)) {
-                                    noChapterAbilityTriggeredOrOnStack = false;
-                                    break;
-                                }
-                            }
-                            if (noChapterAbilityTriggeredOrOnStack) {
-                                for (TriggeredAbility trigger : state.getTriggered(perm.getControllerId())) {
-                                    if (SagaAbility.isChapterAbility(trigger) && trigger.getSourceId().equals(perm.getId())) {
-                                        noChapterAbilityTriggeredOrOnStack = false;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (noChapterAbilityTriggeredOrOnStack) {
-                                // After the last chapter ability has left the stack, you'll sacrifice the Saga
-                                perm.sacrifice(null, this);
-                                somethingHappened = true;
-                            }
-                        }
+                int maxChapter = perm
+                        .getAbilities(this)
+                        .stream()
+                        .filter(SagaAbility.class::isInstance)
+                        .map(SagaAbility.class::cast)
+                        .map(SagaAbility::getMaxChapter)
+                        .mapToInt(SagaChapter::getNumber)
+                        .max()
+                        .orElse(0);
 
-                    }
+                boolean sacSaga = maxChapter <= perm
+                        .getCounters(this)
+                        .getCount(CounterType.LORE)
+                        && this.getStack()
+                        .stream()
+                        .filter(SagaAbility::isChapterAbility)
+                        .map(StackObject::getSourceId)
+                        .noneMatch(perm.getId()::equals)
+                        && this.state
+                        .getTriggered(perm.getControllerId())
+                        .stream()
+                        .filter(SagaAbility::isChapterAbility)
+                        .map(Ability::getSourceId)
+                        .noneMatch(perm.getId()::equals);
+                if (sacSaga) {
+                    // After the last chapter ability has left the stack, you'll sacrifice the Saga
+                    perm.sacrifice(null, this);
+                    somethingHappened = true;
                 }
             }
             if (this.getState().isLegendaryRuleActive() && StaticFilters.FILTER_PERMANENT_LEGENDARY.match(perm, this)) {
