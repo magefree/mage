@@ -10,8 +10,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.mage.test.serverside.deck.DeckValidationUtil.testDeckValid;
 
@@ -22,12 +20,9 @@ public class DeckValidatorTest extends MageTestBase {
 
     @Test
     public void testStandardDeckCardsAmountValid() {
-        ArrayList<DeckValidationUtil.CardNameAmount> deck = new ArrayList<>();
-        deck.add(new DeckValidationUtil.CardNameAmount("Mountain", 60));
-
-        DeckValidator validator = new Standard();
-        boolean validationSuccessful = testDeckValid(validator, deck);
-        Assert.assertTrue(validator.getErrorsListInfo(), validationSuccessful);
+        DeckTester deckTester = new DeckTester(new Standard());
+        deckTester.addMaindeck("Mountain", 60);
+        deckTester.validate();
     }
 
     @Test
@@ -46,50 +41,43 @@ public class DeckValidatorTest extends MageTestBase {
 
     @Test
     public void testLimitedValid() {
-        ArrayList<DeckValidationUtil.CardNameAmount> deck = new ArrayList<>();
+        DeckTester deckTester = new DeckTester(new Limited());
+        deckTester.addMaindeck("Counterspell", 4);
+        deckTester.addMaindeck("Mountain", 36);
 
-        deck.add(new DeckValidationUtil.CardNameAmount("Counterspell", 4));
-        deck.add(new DeckValidationUtil.CardNameAmount("Mountain", 36));
-
-        Assert.assertTrue("Deck should be valid", testDeckValid(new Limited(), deck));
+        deckTester.validate("Deck should be valid");
     }
 
     @Test
     public void testLimitedNotValidToLessCards() {
-        ArrayList<DeckValidationUtil.CardNameAmount> deckList = new ArrayList<>();
+        DeckTester deckTester = new DeckTester(new Limited());
 
-        deckList.add(new DeckValidationUtil.CardNameAmount("Counterspell", 4));
-        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 35));
+        deckTester.addMaindeck("Counterspell", 4);
+        deckTester.addMaindeck("Mountain", 35);
 
-        Assert.assertFalse("Deck should not be valid", testDeckValid(new Limited(), deckList));
+        deckTester.validate("Deck should not be valid", false);
     }
 
     @Test
     public void testModern1() {
-        ArrayList<DeckValidationUtil.CardNameAmount> deckList = new ArrayList<>();
+        DeckTester deckTester = new DeckTester(new Modern());
 
-        deckList.add(new DeckValidationUtil.CardNameAmount("Counterspell", 5));
-        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
+        deckTester.addMaindeck("Counterspell", 5);
+        deckTester.addMaindeck("Mountain", 56);
 
-        Assert.assertFalse("only 4 of a card are allowed", testDeckValid(new Modern(), deckList));
+        deckTester.validate("only 4 of a card are allowed", false);
     }
 
     @Test
     public void testGristCommander() {
         // Grist, the Hunger Tide can be your commander as its first ability applies during deck construction.
-        List<DeckValidationUtil.CardNameAmount> deck = Arrays.asList(
-                new DeckValidationUtil.CardNameAmount("Forest", 49),
-                new DeckValidationUtil.CardNameAmount("Swamp", 50)
-        );
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Forest", 49);
+        deckTester.addMaindeck("Swamp", 50);
 
-        List<DeckValidationUtil.CardNameAmount> sideboard = Arrays.asList(
-                new DeckValidationUtil.CardNameAmount("Grist, the Hunger Tide", 1)
-        );
+        deckTester.addSideboard("Grist, the Hunger Tide", 1);
 
-        Assert.assertTrue(
-                "Grist should be legal as a commander",
-                testDeckValid(new Commander(), deck, sideboard)
-        );
+        deckTester.validate("Grist should be legal as a commander");
     }
 
     private void assertCounterspellValid(ArrayList<DeckValidationUtil.CardNameAmount> deckList) {

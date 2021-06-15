@@ -4,7 +4,9 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import org.junit.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,15 +14,11 @@ import java.util.List;
  */
 public class DeckValidationUtil {
 
-    private DeckValidationUtil() {
-    }
-
     static class CardNameAmount {
 
         String name;
         String setCode;
         String cardNumber;
-
         int number;
 
         CardNameAmount(String setCode, int cardNumber, int number) {
@@ -50,6 +48,9 @@ public class DeckValidationUtil {
         String getCardNumber() {
             return cardNumber;
         }
+    }
+
+    private DeckValidationUtil() {
     }
 
     public static boolean testDeckValid(DeckValidator validator, List<CardNameAmount> cards) {
@@ -87,5 +88,37 @@ public class DeckValidationUtil {
             }
         }
         return validator.validate(deckToTest);
+    }
+
+}
+
+class DeckTester {
+    private final DeckValidator deckValidator;
+    private final List<DeckValidationUtil.CardNameAmount> maindeck = new ArrayList<>();
+    private final List<DeckValidationUtil.CardNameAmount> sideboard = new ArrayList<>();
+
+    DeckTester(DeckValidator deckValidator) {
+        this.deckValidator = deckValidator;
+    }
+
+    void addMaindeck(String name, int amount) {
+        maindeck.add(new DeckValidationUtil.CardNameAmount(name, amount));
+    }
+
+    void addSideboard(String name, int amount) {
+        sideboard.add(new DeckValidationUtil.CardNameAmount(name, amount));
+    }
+
+    void validate() {
+        validate(null);
+    }
+
+    void validate(String message) {
+        validate(message, true);
+    }
+
+    void validate(String message, boolean expected) {
+        boolean valid = DeckValidationUtil.testDeckValid(deckValidator, maindeck, sideboard);
+        Assert.assertEquals(message != null ? message : deckValidator.getErrorsListInfo(), expected, valid);
     }
 }
