@@ -1124,4 +1124,19 @@ public class Spell extends StackObjectImpl implements Card {
     public String toString() {
         return ability.toString();
     }
+
+    @Override
+    public List<CardType> getCardTypeForDeckbuilding() {
+        return null;
+    }
+
+    @Override
+    public boolean hasCardTypeForDeckbuilding(CardType cardType) {
+        return false;
+    }
+
+    @Override
+    public boolean hasSubTypeForDeckbuilding(SubType subType) {
+        return false;
+    }
 }

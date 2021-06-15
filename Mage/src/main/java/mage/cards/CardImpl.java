@@ -829,4 +829,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
         return false;
     }
+
+    @Override
+    public List<CardType> getCardTypeForDeckbuilding() {
+        return getCardType();
+    }
+
+    @Override
+    public boolean hasCardTypeForDeckbuilding(CardType cardType) {
+        return getCardTypeForDeckbuilding().contains(cardType);
+    }
+
+    @Override
+    public boolean hasSubTypeForDeckbuilding(SubType subType) {
+        return hasSubtype(subType, null);
+    }
 }

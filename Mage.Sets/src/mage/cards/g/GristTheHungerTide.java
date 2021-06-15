@@ -28,6 +28,8 @@ import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -66,6 +68,16 @@ public final class GristTheHungerTide extends CardImpl {
     @Override
     public GristTheHungerTide copy() {
         return new GristTheHungerTide(this);
+    }
+
+    @Override
+    public List<CardType> getCardTypeForDeckbuilding() {
+        return Arrays.asList(CardType.PLANESWALKER, CardType.CREATURE);
+    }
+
+    @Override
+    public boolean hasSubTypeForDeckbuilding(SubType subType) {
+        return subType == SubType.INSECT || super.hasSubTypeForDeckbuilding(subType);
     }
 }
 

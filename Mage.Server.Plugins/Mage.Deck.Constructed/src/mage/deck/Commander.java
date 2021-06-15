@@ -12,6 +12,7 @@ import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
+import mage.constants.CardType;
 import mage.filter.FilterMana;
 import mage.util.ManaUtil;
 
@@ -173,8 +174,8 @@ public class Commander extends Constructed {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander banned (" + commander.getName() + ')', true);
                 valid = false;
             }
-            if ((!commander.isCreature(null) || !commander.isLegendary())
-                    && (!commander.isPlaneswalker(null) || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+            if ((!commander.hasCardTypeForDeckbuilding(CardType.CREATURE) || !commander.isLegendary())
+                    && !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance())) {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander invalid (" + commander.getName() + ')', true);
                 valid = false;
             }

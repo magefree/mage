@@ -6,6 +6,7 @@ import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
+import mage.constants.CardType;
 import mage.filter.FilterMana;
 import mage.util.ManaUtil;
 
@@ -125,7 +126,7 @@ public class Oathbreaker extends Vintage {
                 if (commander.isInstantOrSorcery(null)) {
                     signatureSpells.add(commander.getName());
                 } else {
-                    if (commander.isPlaneswalker(null)) {
+                    if (commander.hasCardTypeForDeckbuilding(CardType.PLANESWALKER)) {
                         commanderNames.add(commander.getName());
 
                         // color identity from commanders only, not spell

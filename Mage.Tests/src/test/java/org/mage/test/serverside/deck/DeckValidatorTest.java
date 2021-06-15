@@ -9,7 +9,6 @@ import mage.deck.Limited;
 import mage.deck.Modern;
 import mage.deck.Standard;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
 
@@ -114,11 +113,9 @@ public class DeckValidatorTest extends MageTestBase {
         Assert.assertFalse("only 4 of a card are allowed", testDeckValid(new Modern(), deckList));
     }
 
-    @Ignore
     @Test
     public void testGristCommander() {
         // Grist, the Hunger Tide can be your commander as its first ability works before the game begins during deck construction.
-        // Currently fails
         List<CardNameAmount> deck = Arrays.asList(
                 new CardNameAmount("Forest", 49),
                 new CardNameAmount("Swamp", 50)

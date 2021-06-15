@@ -92,13 +92,13 @@ enum KaheeraTheOrphanguardCompanionCondition implements CompanionCondition {
     );
 
     private static boolean checkTypes(Card card) {
-        return subtypes.stream().anyMatch(subtype -> card.hasSubtype(subtype, null));
+        return subtypes.stream().anyMatch(card::hasSubTypeForDeckbuilding);
     }
 
     @Override
     public boolean isLegal(Set<Card> deck, int startingSize) {
         return deck.stream()
-                .filter(card -> card.isCreature(null))
+                .filter(card -> card.hasCardTypeForDeckbuilding(CardType.CREATURE))
                 .allMatch(KaheeraTheOrphanguardCompanionCondition::checkTypes);
     }
 }
