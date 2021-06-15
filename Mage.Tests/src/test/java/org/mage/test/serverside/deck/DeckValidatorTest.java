@@ -4,10 +4,7 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.deck.Commander;
-import mage.deck.Limited;
-import mage.deck.Modern;
-import mage.deck.Standard;
+import mage.deck.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
@@ -115,7 +112,7 @@ public class DeckValidatorTest extends MageTestBase {
 
     @Test
     public void testGristCommander() {
-        // Grist, the Hunger Tide can be your commander as its first ability works before the game begins during deck construction.
+        // Grist, the Hunger Tide can be your commander as its first ability applies during deck construction.
         List<CardNameAmount> deck = Arrays.asList(
                 new CardNameAmount("Forest", 49),
                 new CardNameAmount("Swamp", 50)
@@ -125,7 +122,66 @@ public class DeckValidatorTest extends MageTestBase {
                 new CardNameAmount("Grist, the Hunger Tide", 1)
         );
 
-        Assert.assertTrue("Grist should be legal as a commander", testDeckValid(new Commander(), deck, sideboard));
+        Assert.assertTrue(
+                "Grist should be legal as a commander",
+                testDeckValid(new Commander(), deck, sideboard)
+        );
+    }
+
+    @Test
+    public void testGristKaheera() {
+        // Grist, the Hunger Tide can't be in a deck with Kaheera as companion as its first ability works applies during deck construction.
+        List<CardNameAmount> deck = Arrays.asList(
+                new CardNameAmount("Forest", 59),
+                new CardNameAmount("Grist, the Hunger Tide", 1)
+        );
+
+        List<CardNameAmount> sideboard = Arrays.asList(
+                new CardNameAmount("Kaheera, the Orphanguard", 1)
+        );
+
+        Assert.assertFalse(
+                "Grist is not legal with Kaheera as a companion",
+                testDeckValid(new Legacy(), deck, sideboard)
+        );
+    }
+
+    @Test
+    public void testGristUmoriCreature() {
+        // Grist, the Hunger Tide can be in a creature deck with Umori as companionn as its first ability applies during deck construction.
+        List<CardNameAmount> deck = Arrays.asList(
+                new CardNameAmount("Forest", 58),
+                new CardNameAmount("Grizzly Bears", 1),
+                new CardNameAmount("Grist, the Hunger Tide", 1)
+        );
+
+        List<CardNameAmount> sideboard = Arrays.asList(
+                new CardNameAmount("Umori, the Collector", 1)
+        );
+
+        Assert.assertTrue(
+                "Grist is legal as a creature with Umori as a companion",
+                testDeckValid(new Legacy(), deck, sideboard)
+        );
+    }
+
+    @Test
+    public void testGristUmoriPlaneswalker() {
+        // Grist, the Hunger Tide can be in a planeswalker deck with Umori as companion as it's still a planeswalker
+        List<CardNameAmount> deck = Arrays.asList(
+                new CardNameAmount("Forest", 58),
+                new CardNameAmount("Garruk Wildspeaker", 1),
+                new CardNameAmount("Grist, the Hunger Tide", 1)
+        );
+
+        List<CardNameAmount> sideboard = Arrays.asList(
+                new CardNameAmount("Umori, the Collector", 1)
+        );
+
+        Assert.assertTrue(
+                "Grist is legal as a planeswalker with Umori as a companion",
+                testDeckValid(new Legacy(), deck, sideboard)
+        );
     }
 
     private void assertCounterspellValid(ArrayList<CardNameAmount> deckList) {
