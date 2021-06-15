@@ -1,9 +1,6 @@
 package org.mage.test.serverside.deck;
 
-import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.deck.Commander;
 import mage.deck.Limited;
 import mage.deck.Modern;
@@ -16,53 +13,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mage.test.serverside.deck.DeckValidationUtil.testDeckValid;
+
 /**
  * @author LevelX2
  */
 public class DeckValidatorTest extends MageTestBase {
 
-    static class CardNameAmount {
-
-        String name;
-        String setCode;
-        String cardNumber;
-
-        int number;
-
-        CardNameAmount(String setCode, int cardNumber, int number) {
-            this.name = "";
-            this.setCode = setCode;
-            this.cardNumber = String.valueOf(cardNumber);
-            this.number = number;
-        }
-
-        CardNameAmount(String name, int number) {
-            this.name = name;
-            this.number = number;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getNumber() {
-            return number;
-        }
-
-        String getSetCode() {
-            return setCode;
-        }
-
-        String getCardNumber() {
-            return cardNumber;
-        }
-
-    }
-
     @Test
     public void testStandardDeckCardsAmountValid() {
-        ArrayList<CardNameAmount> deck = new ArrayList<>();
-        deck.add(new CardNameAmount("Mountain", 60));
+        ArrayList<DeckValidationUtil.CardNameAmount> deck = new ArrayList<>();
+        deck.add(new DeckValidationUtil.CardNameAmount("Mountain", 60));
 
         DeckValidator validator = new Standard();
         boolean validationSuccessful = testDeckValid(validator, deck);
@@ -71,11 +32,11 @@ public class DeckValidatorTest extends MageTestBase {
 
     @Test
     public void testStandardDeckCardsAmountNotValid() {
-        ArrayList<CardNameAmount> deck = new ArrayList<>();
-        deck.add(new CardNameAmount("Mountain", 59));
+        ArrayList<DeckValidationUtil.CardNameAmount> deck = new ArrayList<>();
+        deck.add(new DeckValidationUtil.CardNameAmount("Mountain", 59));
 
-        ArrayList<CardNameAmount> sideboard = new ArrayList<>();
-        sideboard.add(new CardNameAmount("Mountain", 16));
+        ArrayList<DeckValidationUtil.CardNameAmount> sideboard = new ArrayList<>();
+        sideboard.add(new DeckValidationUtil.CardNameAmount("Mountain", 16));
 
         DeckValidator validator = new Standard();
         testDeckValid(validator, deck, sideboard);
@@ -85,30 +46,30 @@ public class DeckValidatorTest extends MageTestBase {
 
     @Test
     public void testLimitedValid() {
-        ArrayList<CardNameAmount> deck = new ArrayList<>();
+        ArrayList<DeckValidationUtil.CardNameAmount> deck = new ArrayList<>();
 
-        deck.add(new CardNameAmount("Counterspell", 4));
-        deck.add(new CardNameAmount("Mountain", 36));
+        deck.add(new DeckValidationUtil.CardNameAmount("Counterspell", 4));
+        deck.add(new DeckValidationUtil.CardNameAmount("Mountain", 36));
 
         Assert.assertTrue("Deck should be valid", testDeckValid(new Limited(), deck));
     }
 
     @Test
     public void testLimitedNotValidToLessCards() {
-        ArrayList<CardNameAmount> deckList = new ArrayList<>();
+        ArrayList<DeckValidationUtil.CardNameAmount> deckList = new ArrayList<>();
 
-        deckList.add(new CardNameAmount("Counterspell", 4));
-        deckList.add(new CardNameAmount("Mountain", 35));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Counterspell", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 35));
 
         Assert.assertFalse("Deck should not be valid", testDeckValid(new Limited(), deckList));
     }
 
     @Test
     public void testModern1() {
-        ArrayList<CardNameAmount> deckList = new ArrayList<>();
+        ArrayList<DeckValidationUtil.CardNameAmount> deckList = new ArrayList<>();
 
-        deckList.add(new CardNameAmount("Counterspell", 5));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Counterspell", 5));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
 
         Assert.assertFalse("only 4 of a card are allowed", testDeckValid(new Modern(), deckList));
     }
@@ -116,13 +77,13 @@ public class DeckValidatorTest extends MageTestBase {
     @Test
     public void testGristCommander() {
         // Grist, the Hunger Tide can be your commander as its first ability applies during deck construction.
-        List<CardNameAmount> deck = Arrays.asList(
-                new CardNameAmount("Forest", 49),
-                new CardNameAmount("Swamp", 50)
+        List<DeckValidationUtil.CardNameAmount> deck = Arrays.asList(
+                new DeckValidationUtil.CardNameAmount("Forest", 49),
+                new DeckValidationUtil.CardNameAmount("Swamp", 50)
         );
 
-        List<CardNameAmount> sideboard = Arrays.asList(
-                new CardNameAmount("Grist, the Hunger Tide", 1)
+        List<DeckValidationUtil.CardNameAmount> sideboard = Arrays.asList(
+                new DeckValidationUtil.CardNameAmount("Grist, the Hunger Tide", 1)
         );
 
         Assert.assertTrue(
@@ -131,66 +92,7 @@ public class DeckValidatorTest extends MageTestBase {
         );
     }
 
-    @Test
-    public void testGristKaheera() {
-        // Grist, the Hunger Tide can't be in a deck with Kaheera as companion as its first ability applies during deck construction.
-        List<CardNameAmount> deck = Arrays.asList(
-                new CardNameAmount("Forest", 98),
-                new CardNameAmount("Grist, the Hunger Tide", 1)
-        );
-
-        List<CardNameAmount> sideboard = Arrays.asList(
-                new CardNameAmount("Doran, the Siege Tower", 1),
-                new CardNameAmount("Kaheera, the Orphanguard", 1)
-        );
-
-        Assert.assertFalse(
-                "Grist is not legal with Kaheera as a companion",
-                testDeckValid(new Commander(), deck, sideboard)
-        );
-    }
-
-    @Test
-    public void testGristUmoriCreature() {
-        // Grist, the Hunger Tide can be in a creature deck with Umori as companion as its first ability applies during deck construction.
-        List<CardNameAmount> deck = Arrays.asList(
-                new CardNameAmount("Forest", 97),
-                new CardNameAmount("Grizzly Bears", 1),
-                new CardNameAmount("Grist, the Hunger Tide", 1)
-        );
-
-        List<CardNameAmount> sideboard = Arrays.asList(
-                new CardNameAmount("Nath of the Gilt-Leaf", 1),
-                new CardNameAmount("Umori, the Collector", 1)
-        );
-
-        Assert.assertTrue(
-                "Grist is legal as a creature with Umori as a companion",
-                testDeckValid(new Commander(), deck, sideboard)
-        );
-    }
-
-    @Test
-    public void testGristUmoriPlaneswalker() {
-        // Grist, the Hunger Tide can be in a planeswalker deck with Umori as companion as it's still a planeswalker
-        List<CardNameAmount> deck = Arrays.asList(
-                new CardNameAmount("Forest", 97),
-                new CardNameAmount("Garruk Wildspeaker", 1),
-                new CardNameAmount("Grist, the Hunger Tide", 1)
-        );
-
-        List<CardNameAmount> sideboard = Arrays.asList(
-                new CardNameAmount("Lord Windgrace", 1),
-                new CardNameAmount("Umori, the Collector", 1)
-        );
-
-        Assert.assertTrue(
-                "Grist is legal as a planeswalker with Umori as a companion",
-                testDeckValid(new Commander(), deck, sideboard)
-        );
-    }
-
-    private void assertCounterspellValid(ArrayList<CardNameAmount> deckList) {
+    private void assertCounterspellValid(ArrayList<DeckValidationUtil.CardNameAmount> deckList) {
         final boolean needValid = true; // card valid after Modern Horizons 2
         boolean valid = testDeckValid(new Modern(), deckList);
         if (valid != needValid) {
@@ -202,113 +104,113 @@ public class DeckValidatorTest extends MageTestBase {
     public void testModernCounterspell1() {
         // if card is legal in any set then it must be legal in all other sets too
 
-        ArrayList<CardNameAmount> deckList = new ArrayList<>();
-        deckList.add(new CardNameAmount("JVC", 24, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        ArrayList<DeckValidationUtil.CardNameAmount> deckList = new ArrayList<>();
+        deckList.add(new DeckValidationUtil.CardNameAmount("JVC", 24, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("6ED", 61, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("6ED", 61, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("5ED", 77, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("5ED", 77, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("4ED", 65, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("4ED", 65, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("G00", 1, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("G00", 1, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("DD2", 24, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("DD2", 24, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("ICE", 64, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("ICE", 64, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("F05", 11, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("F05", 11, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("LEA", 54, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("LEA", 54, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("LEB", 55, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("LEB", 55, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("ME4", 45, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("ME4", 45, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("ME2", 44, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("ME2", 44, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("S99", 34, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("S99", 34, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("7ED", 67, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("7ED", 67, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("3ED", 54, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("3ED", 54, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("MMQ", 69, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("MMQ", 69, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("VMA", 64, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("VMA", 64, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("2ED", 55, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("2ED", 55, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("TPR", 43, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("TPR", 43, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("TMP", 57, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("TMP", 57, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("MH2", 267, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("MH2", 267, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertCounterspellValid(deckList);
     }
 
-    private void assertPsychatogValid(ArrayList<CardNameAmount> deckList) {
+    private void assertPsychatogValid(ArrayList<DeckValidationUtil.CardNameAmount> deckList) {
         // if that card will be valid in modern then you must replace it with another non valid card
         // google for "Cards Wizards Should Reprint for Modern"
         final boolean needValid = false;
@@ -321,174 +223,137 @@ public class DeckValidatorTest extends MageTestBase {
     @Test
     public void testModernPsychatog() {
         // test non valid card
-        ArrayList<CardNameAmount> deckList = new ArrayList<>();
-        deckList.add(new CardNameAmount("ODY", 292, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        ArrayList<DeckValidationUtil.CardNameAmount> deckList = new ArrayList<>();
+        deckList.add(new DeckValidationUtil.CardNameAmount("ODY", 292, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertPsychatogValid(deckList);
 
         deckList.clear();
-        deckList.add(new CardNameAmount("VMA", 258, 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("VMA", 258, 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         assertPsychatogValid(deckList);
     }
 
     @Test
     public void testModernBanned() {
-        ArrayList<CardNameAmount> deckList = new ArrayList<>();
+        ArrayList<DeckValidationUtil.CardNameAmount> deckList = new ArrayList<>();
         DeckValidator validator = new Modern();
 
-        deckList.add(new CardNameAmount("Ancestral Vision", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Ancestral Vision", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         boolean validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertTrue(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new CardNameAmount("Ancient Den", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Ancient Den", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
-        deckList.add(new CardNameAmount("Birthing Pod", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
-        validationSuccessful = testDeckValid(validator, deckList);
-        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
-        validator.getErrorsList().clear();
-
-        deckList.clear();
-        deckList.add(new CardNameAmount("Blazing Shoal", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Birthing Pod", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new CardNameAmount("Bloodbraid Elf", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Blazing Shoal", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
+        validationSuccessful = testDeckValid(validator, deckList);
+        Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
+        validator.getErrorsList().clear();
+
+        deckList.clear();
+        deckList.add(new DeckValidationUtil.CardNameAmount("Bloodbraid Elf", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertTrue(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new CardNameAmount("Chrome Mox", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Chrome Mox", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new CardNameAmount("Cloudpost", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Cloudpost", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new CardNameAmount("Dark Depths", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Dark Depths", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new CardNameAmount("Deathrite Shaman", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Deathrite Shaman", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new CardNameAmount("Dig Through Time", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Dig Through Time", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new CardNameAmount("Dread Return", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Dread Return", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new CardNameAmount("Glimpse of Nature", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Glimpse of Nature", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new CardNameAmount("Great Furnace", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Great Furnace", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new CardNameAmount("Green Sun's Zenith", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Green Sun's Zenith", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new CardNameAmount("Hypergenesis", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Hypergenesis", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new CardNameAmount("Jace, the Mind Sculptor", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Jace, the Mind Sculptor", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertTrue(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new CardNameAmount("Mental Misstep", 4));
-        deckList.add(new CardNameAmount("Mountain", 56));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mental Misstep", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);
         validator.getErrorsList().clear();
-    }
-
-    private boolean testDeckValid(DeckValidator validator, List<CardNameAmount> cards) {
-        return testDeckValid(validator, cards, null);
-    }
-
-    private boolean testDeckValid(DeckValidator validator, List<CardNameAmount> cards, List<CardNameAmount> cardsSideboard) {
-        Deck deckToTest = new Deck();
-        if (cards != null) {
-            for (CardNameAmount cardNameAmount : cards) {
-                CardInfo cardinfo;
-                if (cardNameAmount.getName().isEmpty()) {
-                    cardinfo = CardRepository.instance.findCard(cardNameAmount.getSetCode(), cardNameAmount.getCardNumber());
-                } else {
-                    cardinfo = CardRepository.instance.findCard(cardNameAmount.getName());
-                }
-                for (int i = 0; i < cardNameAmount.getNumber(); i++) {
-                    assert cardinfo != null;
-                    deckToTest.getCards().add(cardinfo.getCard());
-                }
-            }
-        }
-        if (cardsSideboard != null) {
-            for (CardNameAmount cardNameAmount : cardsSideboard) {
-                CardInfo cardinfo;
-                if (cardNameAmount.getName().isEmpty()) {
-                    cardinfo = CardRepository.instance.findCard(cardNameAmount.getSetCode(), cardNameAmount.getCardNumber());
-                } else {
-                    cardinfo = CardRepository.instance.findCard(cardNameAmount.getName());
-                }
-                for (int i = 0; i < cardNameAmount.getNumber(); i++) {
-                    assert cardinfo != null;
-                    deckToTest.getSideboard().add(cardinfo.getCard());
-                }
-            }
-        }
-        return validator.validate(deckToTest);
     }
 }

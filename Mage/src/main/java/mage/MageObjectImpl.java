@@ -300,9 +300,6 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public boolean isAllCreatureTypes(Game game) {
-        if (game == null) {
-            return this.getAbilities().containsClass(ChangelingAbility.class);
-        }
         return this.getSubtype(game).isAllCreatureTypes();
     }
 

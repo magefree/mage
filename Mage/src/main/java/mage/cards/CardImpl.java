@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.abilities.*;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
@@ -842,6 +843,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean hasSubTypeForDeckbuilding(SubType subType) {
-        return hasSubtype(subType, null);
+        if (this.hasSubtype(subType, null)) {
+            return true;
+        }
+        return subType.getSubTypeSet() == SubTypeSet.CreatureType
+                && this.getAbilities().containsClass(ChangelingAbility.class);
     }
 }
