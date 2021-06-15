@@ -33,11 +33,11 @@ public interface MageObject extends MageItem, Serializable {
 
     void setName(String name);
 
-    default ArrayList<CardType> getCardType() {
+    default List<CardType> getCardType() {
         return getCardType(null);
     }
 
-    ArrayList<CardType> getCardType(Game game);
+    List<CardType> getCardType(Game game);
 
     /**
      * Return original object's subtypes

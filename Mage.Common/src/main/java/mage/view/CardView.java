@@ -57,7 +57,7 @@ public class CardView extends SimpleCardView {
     @Expose
     protected String loyalty = "";
     protected String startingLoyalty;
-    protected ArrayList<CardType> cardTypes;
+    protected List<CardType> cardTypes;
     protected SubTypes subTypes;
     protected Set<SuperType> superTypes;
     protected ObjectColor color;
@@ -820,7 +820,7 @@ public class CardView extends SimpleCardView {
         return startingLoyalty;
     }
 
-    public ArrayList<CardType> getCardTypes() {
+    public List<CardType> getCardTypes() {
         return cardTypes;
     }
 

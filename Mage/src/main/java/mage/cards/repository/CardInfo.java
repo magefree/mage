@@ -316,8 +316,8 @@ public class CardInfo {
         return res;
     }
 
-    public final ArrayList<CardType> getTypes() {
-        ArrayList<CardType> list = new ArrayList<>();
+    public final List<CardType> getTypes() {
+        List<CardType> list = new ArrayList<>();
         for (String type : this.types.split(SEPARATOR)) {
             try {
                 list.add(CardType.valueOf(type));
@@ -327,7 +327,7 @@ public class CardInfo {
         return list;
     }
 
-    public final void setTypes(ArrayList<CardType> types) {
+    public final void setTypes(List<CardType> types) {
         StringBuilder sb = new StringBuilder();
         for (CardType item : types) {
             sb.append(item.name()).append(SEPARATOR);

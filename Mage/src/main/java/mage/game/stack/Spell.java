@@ -504,14 +504,14 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public ArrayList<CardType> getCardType(Game game) {
+    public List<CardType> getCardType(Game game) {
         if (faceDown) {
-            ArrayList<CardType> cardTypes = new ArrayList<>();
+            List<CardType> cardTypes = new ArrayList<>();
             cardTypes.add(CardType.CREATURE);
             return cardTypes;
         }
         if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
-            ArrayList<CardType> cardTypes = new ArrayList<>();
+            List<CardType> cardTypes = new ArrayList<>();
             cardTypes.addAll(card.getCardType(game));
             cardTypes.remove(CardType.CREATURE);
             return cardTypes;

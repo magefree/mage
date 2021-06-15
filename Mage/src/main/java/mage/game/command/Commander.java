@@ -169,7 +169,7 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public ArrayList<CardType> getCardType(Game game) {
+    public List<CardType> getCardType(Game game) {
         return sourceObject.getCardType(game);
     }
 

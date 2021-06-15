@@ -20,7 +20,7 @@ import mage.players.Library;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -144,7 +144,7 @@ class PossibilityStormEffect extends OneShotEffect {
         return false;
     }
 
-    private boolean sharesType(Card card, ArrayList<CardType> cardTypes, Game game) {
+    private boolean sharesType(Card card, List<CardType> cardTypes, Game game) {
         for (CardType type : card.getCardType(game)) {
             if (cardTypes.contains(type)) {
                 return true;

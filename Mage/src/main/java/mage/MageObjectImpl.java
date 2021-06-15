@@ -36,7 +36,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
-    protected ArrayList<CardType> cardType = new ArrayList<>();
+    protected List<CardType> cardType = new ArrayList<>();
     protected SubTypes subtype = new SubTypes();
     protected Set<SuperType> supertype = EnumSet.noneOf(SuperType.class);
     protected Abilities<Ability> abilities;
@@ -114,7 +114,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public ArrayList<CardType> getCardType(Game game) {
+    public List<CardType> getCardType(Game game) {
         if (game != null) {
             MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
             if (mageObjectAttribute != null) {
