@@ -63,34 +63,67 @@ public class RLPlayer extends RandomNonTappingPlayer{
         super(player);   
     }
 
+    /* 
+    JSONObject actRepr=new JSONObject();
+    if(action instanceof ActionAbility){
+        String abilityName=action.getText();
+        actRepr.put("action",abilityName);
+    }*/
+    String nameAbility(Ability ability,Game game){
+        MageObject source=ability.getSourceObjectIfItStillExists(game);
+        if(ability instanceof PassAbility){
+            return "Ability:Pass";
+        }
+        else if(source==null){
+            //logger.info("source is NULL!");
+            return "Ability:NULL";
+            //logger.info(ability.getRule());
+        }
+        else{
+            if(source instanceof Permanent){
+                return "Ability:"+"Perm:"+source.getName();
+            }
+            else if(source instanceof Card){
+                return "Ability:"+"Card:"+source.getName();
+            }
+            else{
+                return "Ability:Unrecognized";
+            }
+        }
+    }
     private Ability chooseAbility(Game game, List<Ability> options){
         Ability ability=pass;
+        List<String> names=new ArrayList<String>();
         if (!options.isEmpty()) {
-            List<RLAction> toUse=new ArrayList<RLAction>();
             for(int i=0;i<options.size();i++){
                 Ability abil=options.get(i);
-                RLAction actAbil=(RLAction) new ActionAbility(game,abil);
+                String name=nameAbility(abil, game);
                 boolean toAdd=true;
-                for(int j=0;j<toUse.size();j++){
-                    if(actAbil.getText().equals(toUse.get(j).getText())){
+                for(int j=0;j<names.size();j++){
+                    if(name.equals(names.get(j))){
                         toAdd=false;
                     }
                 }
                 if(toAdd){
-                    toUse.add(actAbil);
+                    names.add(name);
                 }  
             }
             int choice;
-            if (toUse.size() == 1) { //Don't call ML model for single element
+            if (names.size() == 1) { //Don't call ML model for single element
                 choice=0;
                 //logger.info("Turn"+game.getTurnNum()+" handSize "+getHand().size());
             } else {
                 //logger.info("Calling model"+game.getTurnNum());
-                choice=learner.choose(game,this,toUse);
+                JSONArray list = new JSONArray();
+                for(int i=0;i<names.size();i++){
+                    JSONObject actRepr=new JSONObject();
+                    actRepr.put("action",names.get(i));
+                    list.add(actRepr);
+                }
+                choice=learner.choose(game,this,list);
 
             }
-            ActionAbility chosenAction=(ActionAbility) toUse.get(choice);
-            ability = chosenAction.ability;
+            ability = options.get(choice);
         }
         return ability;
     }
@@ -123,9 +156,14 @@ public class RLPlayer extends RandomNonTappingPlayer{
         List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
         for(int i=0;i<attackersList.size();i++){
             Permanent attacker=attackersList.get(i);
-
-            List<RLAction> toattack= Arrays.asList((RLAction) new ActionAttack(attacker,false),(RLAction) new ActionAttack(attacker,true));
-            int index=learner.choose(game,this,toattack);
+            JSONObject toAttack=new JSONObject();
+            JSONObject noAttack=new JSONObject();
+            toAttack.put("attack","Attack:"+attacker.getName());
+            noAttack.put("attack","NoAttack");
+            JSONArray list = new JSONArray();
+            list.add(noAttack);
+            list.add(toAttack);
+            int index=learner.choose(game,this,list);
             if(index==1){//chose to attack
                 setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
                 if (!game.getCombat().declareAttacker(attacker.getId(), defenderId, playerId, game)) {
@@ -138,8 +176,14 @@ public class RLPlayer extends RandomNonTappingPlayer{
 
     @Override
     public boolean chooseMulligan(Game game) {
-        List<RLAction> toMull= Arrays.asList((RLAction) new ActionMulligan(false),(RLAction) new ActionMulligan(true));
-        int index=learner.choose(game,this,toMull);
+        JSONObject yesMull=new JSONObject();
+        JSONObject noMull=new JSONObject();
+        yesMull.put("action","yesMulligan");
+        noMull.put("action","noMulligan");
+        JSONArray list = new JSONArray();
+        list.add(noMull);
+        list.add(yesMull);
+        int index=learner.choose(game,this,list);
         return index==1;
     }
 
@@ -153,21 +197,25 @@ public class RLPlayer extends RandomNonTappingPlayer{
 
         List<Permanent> blockers = getAvailableBlockers(game);
         for (Permanent blocker : blockers) {
-            List<RLAction> toblock=new ArrayList<RLAction>();
+            JSONArray list = new JSONArray();
             List<CombatGroup> groups=game.getCombat().getGroups();
             for(int i=0;i<numGroups;i++){
                 List<UUID> groupIDs=groups.get(i).getAttackers();
                 if(groupIDs.size()>0){
                     UUID attacker=groupIDs.get(0);
-                    toblock.add((RLAction) new ActionBlock(blocker,game.getPermanent(attacker),true));
-           
+                    JSONObject actRepr=new JSONObject();
+                    actRepr.put("attacker","BlockAttacker:"+game.getPermanent(attacker).getName());
+                    actRepr.put("blocker","Blocker:"+blocker.getName()); 
+                    list.add(actRepr);
                 }
             }
-            toblock.add((RLAction) new ActionBlock(null,null,false)); // Don't block anything
-            int choice=learner.choose(game,this,toblock);
-            ActionBlock chosenAction=(ActionBlock) toblock.get(choice);
+            JSONObject actRepr=new JSONObject();
+            actRepr.put("attacker","NoAttackerToBlock");
+            actRepr.put("blocker","Blocker:"+blocker.getName()); 
+            list.add(actRepr);
+            int choice=learner.choose(game,this,list);
 
-            if (chosenAction.isBlock) {
+            if (choice<list.size()-1) {
                 CombatGroup group = groups.get(choice);
                 if (!group.getAttackers().isEmpty()) {
                     this.declareBlocker(this.getId(), blocker.getId(), group.getAttackers().get(0), game);
@@ -178,6 +226,11 @@ public class RLPlayer extends RandomNonTappingPlayer{
     }
 
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        Set<UUID> targetSet = target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game);
+        if (targetSet.isEmpty()) {
+            return false;
+        }
+        List<UUID> targets=new ArrayList<UUID>(targetSet);
         
     }
 }

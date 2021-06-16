@@ -30,6 +30,7 @@ import mage.player.ai.RLAgent.*;
 import java.util.stream.Collectors;
 import mage.player.ai.RLAgent.*;
 import java.io.*;
+import org.json.simple.JSONArray;
 
 public class RLPyAgent extends RLAgent {
     public RepresenterJSON representer;
@@ -42,7 +43,7 @@ public class RLPyAgent extends RLAgent {
         //conn.write_hparams();
     }
     
-    public int choose(Game game, Player player,List<RLAction> actions){
+    public int choose(Game game, Player player,JSONArray actions){
         if(done){
             return 0;
         }
@@ -59,7 +60,7 @@ public class RLPyAgent extends RLAgent {
         //logger.info(actions.get(chosenact).getText());
         return chosenact;
     }
-    public void sendGame(Game game,Player player,List<RLAction> actions){
+    public void sendGame(Game game,Player player,JSONArray actions){
         JSONObject repr=representer.represent(game, player, actions);
         conn.write(repr);
     }

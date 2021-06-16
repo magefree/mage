@@ -28,6 +28,7 @@ import java.util.Locale;
 import java.io.*;
 import mage.player.ai.RandomPlayer;
 import org.apache.log4j.Logger;
+import org.json.simple.JSONArray;
 
 /**
  * @author ayratn
@@ -89,7 +90,7 @@ public class  GameRunner{
         logger.info("Winner: " + game.getWinner());
         logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
         int reward=getReward(computerA, game.getWinner());
-        agent.sendGame(game,computerA,new ArrayList<RLAction>());
+        agent.sendGame(game,computerA,new JSONArray());
         //return learner.getCurrentGame().getValue();
         return reward;
     }

@@ -29,9 +29,8 @@ public class RepresenterJSON implements Serializable{
         return obj.getName(); 
     }
     
-    public JSONObject represent(Game game,Player player, List<RLAction> actions){
+    public JSONObject represent(Game game,Player player, JSONArray actionRepr){
         JSONObject gameRepr=representGame(game, player);
-        JSONArray actionRepr=representActions(game, actions);
         JSONObject wholeState= new JSONObject();
         boolean isDone=game.checkIfGameIsOver();
         wholeState.put("game", gameRepr);
@@ -60,15 +59,6 @@ public class RepresenterJSON implements Serializable{
         return 0;
     }
 
-        //Represents the actions in preperation of being
-    //fed into the model
-    protected JSONArray representActions(Game game,List<RLAction> actions){
-        JSONArray list = new JSONArray();
-        for(int i=0;i<actions.size();i++){
-            list.add(representAction(game, actions.get(i)));
-        }
-        return list;
-    }
 
 
     //extracts relevent decimal quanitites from a player
@@ -138,48 +128,5 @@ public class RepresenterJSON implements Serializable{
         gameRepr.put("permanents",namedPerms);
         gameRepr.put("reals",getGameReals(game, LPlayer, OPlayer,agentPerms,opponentPerms));
         return gameRepr;
-    }
-    //represents a single action.
-    protected JSONObject representAction(Game game, RLAction action){
-        JSONObject actRepr=new JSONObject();
-        if(action instanceof ActionAbility){
-            String abilityName=action.getText();
-            actRepr.put("action",abilityName);
-        }
-        else if(action instanceof ActionAttack){
-            ActionAttack attack=((ActionAttack) action);
-            if(attack.isAttack){
-                String abilityName=action.getText();
-                actRepr.put("action",abilityName);
-            }
-            else{
-                actRepr.put("action","NoAttack");
-            }
-        }
-        else if (action instanceof ActionBlock){
-            ActionBlock actBlock=(ActionBlock) action;
-            if(actBlock.isBlock){
-                Permanent attacker=actBlock.attacker;
-                Permanent blocker=actBlock.blocker;
-                String NameBlockAttacker="BlockAttacker:"+nameObject(attacker);
-                String NameBlocker="Blocker:"+nameObject(blocker);
-                actRepr.put("attacker",NameBlockAttacker);
-                actRepr.put("blocker",NameBlocker);
-            }else{
-                actRepr.put("action","NoBlock");
-            }
-        }
-        else if(action instanceof ActionMulligan){
-            ActionMulligan actMull=(ActionMulligan) action;
-            if(actMull.isMulligan){
-                actRepr.put("action","yesMulligan");
-            }else{
-                actRepr.put("action","noMulligan");
-            }
-        }
-        else{
-            throw new java.lang.UnsupportedOperationException("Unable to represent action type yet");
-        }
-        return actRepr;
     }
 }
