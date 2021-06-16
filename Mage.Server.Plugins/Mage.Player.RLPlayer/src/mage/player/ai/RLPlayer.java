@@ -31,6 +31,9 @@ import java.util.stream.Collectors;
 import mage.player.ai.RLAgent.*;
 import java.io.*;
 import mage.abilities.*;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.JSONArray;
 
 /**
  * uses a reinforcement learning based AI
@@ -59,38 +62,7 @@ public class RLPlayer extends RandomNonTappingPlayer{
     public RLPlayer(final RLPlayer player) {
         super(player);   
     }
-    private static String getPath(String fileName,String tail){
-        String home = System.getProperty("user.home");
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "xmage-models",fileName+tail);
-        try{
-            Files.createDirectories(path.getParent());
-        }
-        catch(IOException e){
-            System.err.println("Failed to create directory!" + e.getMessage());
-        }
-        
-        logger.info(path.toString());
-        return path.toString();
-    }
-    public static String getDataLoc(String fileName){
-        return getPath(fileName,"-data.ser");
-    }
-    public static String getClassLoc(String fileName){
-        return getPath(fileName,"-class.ser");
-    }
-    public static String getModelLoc(String fileName){
-        return getPath(fileName,"-model.zip");
-    }
-    /*public static void savePyLearner(RLAgent agent, String loc){
-        try {
-        FileOutputStream fileClassOut =new FileOutputStream(getClassLoc(loc));
-        ObjectOutputStream classOut = new ObjectOutputStream(fileClassOut);
-        classOut.writeObject(agent.representer);
-        classOut.close();
-        }catch (IOException i) {
-            i.printStackTrace();
-         }
-    }*/
+
     private Ability chooseAbility(Game game, List<Ability> options){
         Ability ability=pass;
         if (!options.isEmpty()) {
@@ -203,5 +175,9 @@ public class RLPlayer extends RandomNonTappingPlayer{
             }
         }
         actionCount++;
+    }
+
+    public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        
     }
 }
