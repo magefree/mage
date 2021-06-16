@@ -1,18 +1,18 @@
 package mage.cards.t;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacesCard;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -22,9 +22,10 @@ import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -42,7 +43,7 @@ public final class TergridGodOfFright extends ModalDoubleFacesCard {
         // Tergrid, God of Fright
         // Legendary Creature - God
         this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
-        this.getLeftHalfCard().setPT(new MageInt(4), new MageInt(5));
+        this.getLeftHalfCard().setPT(4, 5);
 
         // Menace
         this.getLeftHalfCard().addAbility(new MenaceAbility());
@@ -63,7 +64,7 @@ public final class TergridGodOfFright extends ModalDoubleFacesCard {
         this.getRightHalfCard().addAbility(tergridsLaternActivatedAbility);
 
         // {3}{B}: Untap Tergrid’s Lantern.
-        this.getRightHalfCard().addAbility(new SimpleActivatedAbility(new UntapSourceEffect(), new ManaCostsImpl("{3}{B}")));
+        this.getRightHalfCard().addAbility(new SimpleActivatedAbility(new UntapSourceEffect(), new ManaCostsImpl<>("{3}{B}")));
 
     }
 
@@ -85,7 +86,7 @@ class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new TergridGodOfFrightEffect(), true);
     }
 
-    public TergridGodOfFrightTriggeredAbility(final TergridGodOfFrightTriggeredAbility ability) {
+    private TergridGodOfFrightTriggeredAbility(final TergridGodOfFrightTriggeredAbility ability) {
         super(ability);
     }
 
@@ -96,38 +97,35 @@ class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT
-                    || event.getType() == GameEvent.EventType.DISCARDED_CARD;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT
+                || event.getType() == GameEvent.EventType.DISCARDED_CARD;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (permanent != null
-                    && !(permanent instanceof PermanentToken)
-                    && game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
-                }
-                return true;
-            }
+        if (!game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
             return false;
         }
-        if (event.getType() == GameEvent.EventType.DISCARDED_CARD) {
-            Card discardedCard = game.getCard(event.getTargetId());
-            if (discardedCard != null
-                    && !discardedCard.isInstantOrSorcery()) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(discardedCard.getId(), game));
+        switch (event.getType()) {
+            case SACRIFICE_PERMANENT:
+                Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+                if (permanent == null
+                        || permanent instanceof PermanentToken
+                        || game.getState().getZone(permanent.getId()) != Zone.GRAVEYARD) {
+                    return false;
                 }
-                return true;
-            }
+                break;
+            case DISCARDED_CARD:
+                Card discardedCard = game.getCard(event.getTargetId());
+                if (discardedCard == null || !discardedCard.isPermanent()) {
+                    return false;
+                }
+                break;
+            default:
+                return false;
         }
-        return false;
+        this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+        return true;
     }
 
     @Override
@@ -168,6 +166,10 @@ class TergridGodOfFrightEffect extends OneShotEffect {
 
 class TergridsLaternEffect extends OneShotEffect {
 
+    private static final String SACRIFICE_CHOICE = "Sacrifice a nonland permanent";
+    private static final String DISCARD_CHOICE = "Discard a card";
+    private static final String LIFE_LOSS_CHOICE = "Lose 3 life";
+
     public TergridsLaternEffect() {
         super(Outcome.Detriment);
         staticText = "Target player loses 3 life unless they sacrifice a nonland permanent or discard a card";
@@ -192,32 +194,35 @@ class TergridsLaternEffect extends OneShotEffect {
         // AI hint to discard/sacrifice before die
         Outcome aiOutcome = (targetedPlayer.getLife() <= 3 * 2) ? Outcome.Benefit : Outcome.Detriment;
 
-        if (targetedPlayer.chooseUse(aiOutcome, "Question 1 of 2: Sacrifice a nonland permanent to prevent the loss of 3 life?", source, game)) {
-            TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
-            target.setNotTarget(true);
-            if (targetedPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
+        Set<String> choiceSet = new HashSet<>();
+        if (game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND, source.getSourceId(), targetedPlayer.getId(), game) > 0) {
+            choiceSet.add(SACRIFICE_CHOICE);
+        }
+        if (targetedPlayer.getHand().size() > 0) {
+            choiceSet.add(DISCARD_CHOICE);
+        }
+        choiceSet.add(LIFE_LOSS_CHOICE);
+        String chosen;
+        if (choiceSet.size() > 1) {
+            Choice choice = new ChoiceImpl(true);
+            choice.setChoices(choiceSet);
+            targetedPlayer.choose(aiOutcome, choice, game);
+            chosen = choice.getChoice();
+        } else {
+            chosen = LIFE_LOSS_CHOICE;
+        }
+        switch (chosen) {
+            case SACRIFICE_CHOICE:
+                TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
+                target.setNotTarget(true);
+                targetedPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                 Permanent chosenLand = game.getPermanent(target.getFirstTarget());
-                if (chosenLand != null) {
-                    if (chosenLand.sacrifice(source, game)) {
-                        return true;
-                    }
-                }
-            }
+                return chosenLand != null && chosenLand.sacrifice(source, game);
+            case DISCARD_CHOICE:
+                return targetedPlayer.discard(1, false, false, source, game).size() > 0;
+            case LIFE_LOSS_CHOICE:
+                return targetedPlayer.loseLife(3, game, source, false) > 0;
         }
-
-        if (targetedPlayer.chooseUse(aiOutcome, "Question 2 of 2: Discard a card to prevent the loss of 3 life?", source, game)) {
-            TargetCardInHand targetCard = new TargetCardInHand();
-            if (targetedPlayer.chooseTarget(Outcome.Discard, targetCard, source, game)) {
-                Card chosenCard = game.getCard(targetCard.getFirstTarget());
-                if (chosenCard != null) {
-                    if (targetedPlayer.discard(chosenCard, false, source, game)) {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        targetedPlayer.loseLife(3, game, source, false);
-        return true;
+        return false;
     }
 }
