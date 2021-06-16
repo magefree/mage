@@ -118,7 +118,9 @@ class ValentinDeanOfTheVeinEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.isDiesEvent()
+                && zEvent.getTarget() != null
                 && !(zEvent.getTarget() instanceof PermanentToken)
+                && zEvent.getTarget().isCreature()
                 && game.getOpponents(zEvent.getTarget().getControllerId()).contains(source.getControllerId());
     }
 
