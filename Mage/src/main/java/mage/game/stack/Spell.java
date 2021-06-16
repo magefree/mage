@@ -282,7 +282,7 @@ public class Spell extends StackObjectImpl implements Card {
                             // restore removed stats (see "before put to play" above)
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
                             card.addCardType(CardType.CREATURE);
-                            card.removeSubType(game, SubType.AURA);
+                            card.getSubtype().remove(SubType.AURA);
                         }
                     }
                     if (isCopy()) {
