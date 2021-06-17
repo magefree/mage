@@ -1,8 +1,13 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardInfo;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
+
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -20,11 +25,11 @@ public final class ModernHorizons2 extends ExpansionSet {
         this.blockName = "Modern Horizons 2";
         this.hasBasicLands = true;
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
-        this.numBoosterCommon = 11;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 8;
+        this.ratioBoosterMythic = 7;
         this.maxCardNumberInBooster = 303;
 
         cards.add(new SetCardInfo("Abiding Grace", 1, Rarity.UNCOMMON, mage.cards.a.AbidingGrace.class));
@@ -334,5 +339,35 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Yusri, Fortune's Flame", 218, Rarity.RARE, mage.cards.y.YusriFortunesFlame.class));
         cards.add(new SetCardInfo("Zabaz, the Glimmerwasp", 243, Rarity.RARE, mage.cards.z.ZabazTheGlimmerwasp.class));
         cards.add(new SetCardInfo("Zuran Orb", 300, Rarity.UNCOMMON, mage.cards.z.ZuranOrb.class));
+    }
+
+    @Override
+    public List<Card> tryBooster() {
+        List<Card> booster = super.tryBooster();
+        addReprints(booster);
+        return booster;
+    }
+
+    private void addReprints(List<Card> booster) {
+        // TODO: these rarity ratios are probably wrong
+        final Rarity rarity;
+        int i = RandomUtil.nextInt(121);
+        if (i < 2) {
+            rarity = Rarity.MYTHIC;
+        } else if (i < 22) {
+            rarity = Rarity.RARE;
+        } else {
+            rarity = Rarity.UNCOMMON;
+        }
+        List<CardInfo> cards = super.getCardsByRarity(rarity);
+        cards.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() < 262);
+        addToBooster(booster, cards);
+    }
+
+    @Override
+    public List<CardInfo> getCardsByRarity(Rarity rarity) {
+        List<CardInfo> cards = super.getCardsByRarity(rarity);
+        cards.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() >= 262);
+        return cards;
     }
 }
