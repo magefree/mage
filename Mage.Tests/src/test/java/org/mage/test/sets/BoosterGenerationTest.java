@@ -506,4 +506,59 @@ public class BoosterGenerationTest extends MageTestBase {
         assertTrue("No booster contained an uncommon Lesson", foundUncommonLesson);
         assertTrue("Every booster contained an uncommon Lesson", foundNoUncommonLesson);
     }
+
+    @Test
+    public void testModernHorizons2ReprintSlot() {
+        for (int i = 0; i < 20; i++) {
+            List<Card> booster = ModernHorizons2.getInstance().createBooster();
+            List<Card> notReprint = booster
+                    .stream()
+                    .filter(card -> Integer.parseInt(card.getCardNumber()) < 262)
+                    .collect(Collectors.toList());
+            List<Card> reprint = booster
+                    .stream()
+                    .filter(card -> Integer.parseInt(card.getCardNumber()) >= 262)
+                    .collect(Collectors.toList());
+
+            assertTrue(
+                    "Booster must not contain cards with collector number over 303",
+                    booster
+                            .stream()
+                            .map(Card::getCardNumber)
+                            .mapToInt(Integer::parseInt)
+                            .max()
+                            .orElse(0) <= 303
+            );
+            assertEquals(
+                    "Booster must contain exactly one reprint (other than fetches)", 1, reprint.size()
+            );
+            assertEquals(
+                    "Booster must containt exactly 14 other cards", 14, notReprint.size()
+            );
+            assertEquals(
+                    "Booster must contain one non-reprint rare/mythic", 1,
+                    notReprint
+                            .stream()
+                            .map(Card::getRarity)
+                            .filter(rarity -> rarity == Rarity.RARE || rarity == Rarity.MYTHIC)
+                            .count()
+            );
+            assertEquals(
+                    "Booster must contain three non-reprint uncommons", 3,
+                    notReprint
+                            .stream()
+                            .map(Card::getRarity)
+                            .filter(Rarity.UNCOMMON::equals)
+                            .count()
+            );
+            assertEquals(
+                    "Booster must contain ten non-reprint uncommons", 10,
+                    notReprint
+                            .stream()
+                            .map(Card::getRarity)
+                            .filter(Rarity.COMMON::equals)
+                            .count()
+            );
+        }
+    }
 }
