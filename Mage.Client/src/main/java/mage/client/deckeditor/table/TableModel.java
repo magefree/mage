@@ -51,9 +51,10 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     private boolean displayNoCopies = false;
     private UpdateCountsCallback updateCountsCallback;
 
-    private final String[] column = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set", "Card number", "Draft Rating"};
+    private final String[] column = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set", "Card number", "Draft Rating",  "Color Identity"};
     public final int COLUMN_INDEX_COST = 2;
     public final int COLUMN_INDEX_RATING = 9;
+    public final int COLUMN_INDEX_COLOR_IDENTITY = 10;
 
     private SortSetting sortSetting;
     private int recentSortedColumn;
@@ -227,6 +228,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
             case 2:
                 // new svg images version
                 return ManaSymbols.getClearManaCost(c.getManaCostStr());
+
                 /*
                 // old html images version
                 String manaCost = "";
@@ -253,6 +255,8 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                 return c.getCardNumber();
             case 9:
                 return RateCard.rateCard(c.getOriginalCard(), null);
+            case 10:
+                return ManaSymbols.getClearManaCost(c.getColorIdentityStr());
             default:
                 return "error";
         }
