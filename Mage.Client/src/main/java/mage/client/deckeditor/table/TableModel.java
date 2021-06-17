@@ -228,7 +228,6 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
             case 2:
                 // new svg images version
                 return ManaSymbols.getClearManaCost(c.getManaCostStr());
-
                 /*
                 // old html images version
                 String manaCost = "";
