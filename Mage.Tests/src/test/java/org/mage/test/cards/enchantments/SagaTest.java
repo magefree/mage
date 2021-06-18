@@ -13,6 +13,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class SagaTest extends CardTestPlayerBase {
 
     private static final String rite = "Rite of Belzenlok";
+    private static final String vorinclex = "Vorinclex, Monstrous Raider";
+    private static final String flicker = "Flicker";
     private static final String boomerang = "Boomerang";
     private static final String saga = "Urza's Saga";
     private static final String moon = "Blood Moon";
@@ -46,6 +48,38 @@ public class SagaTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void testRiteOfBelzenlokFlicker() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.HAND, playerA, rite);
+        addCard(Zone.HAND, playerA, flicker);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, rite);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+        assertCounterCount(rite, CounterType.LORE, 1);
+        assertPermanentCount(playerA, "Cleric", 2);
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertCounterCount(rite, CounterType.LORE, 2);
+        assertPermanentCount(playerA, "Cleric", 4);
+
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, flicker, rite);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, rite, 0);
+        assertPermanentCount(playerA, rite, 1);
+        assertCounterCount(playerA, rite, CounterType.LORE, 1);
+        assertPermanentCount(playerA, "Cleric", 6);
+        assertPermanentCount(playerA, "Demon", 0);
+    }
+
+    @Test
     public void testRiteOfBelzenlokBounced() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
@@ -73,6 +107,29 @@ public class SagaTest extends CardTestPlayerBase {
         assertHandCount(playerA, rite, 1);
         assertPermanentCount(playerA, rite, 0);
         assertGraveyardCount(playerA, boomerang, 1);
+        assertPermanentCount(playerA, "Cleric", 4);
+        assertPermanentCount(playerA, "Demon", 1);
+    }
+
+    @Test
+    public void testRiteOfBelzenlokVorinclex() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, vorinclex);
+        addCard(Zone.HAND, playerA, rite);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, rite);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+        assertCounterCount(rite, CounterType.LORE, 2);
+        assertPermanentCount(playerA, "Cleric", 4);
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, rite, 1);
+        assertPermanentCount(playerA, rite, 0);
         assertPermanentCount(playerA, "Cleric", 4);
         assertPermanentCount(playerA, "Demon", 1);
     }
@@ -125,7 +182,7 @@ public class SagaTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, moon, 1);
     }
 
-    @Ignore // TODO: fix this
+    @Ignore // TODO: fix this, related to blood moon etb issues
     @Test
     public void testBloodMoonThenUrzasSagaThenBounce() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
