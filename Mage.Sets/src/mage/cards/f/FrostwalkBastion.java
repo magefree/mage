@@ -35,11 +35,11 @@ public final class FrostwalkBastion extends CardImpl {
         // {1}{S}: Until end of turn, Frostwalk Bastion becomes a 2/3 Construct artifact creature. It's still a land.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new FrostwalkBastionToken(), "land", Duration.EndOfTurn
-        ), new ManaCostsImpl("{1}{S}")));
+        ), new ManaCostsImpl<>("{1}{S}")));
 
         // Whenever Frostwalk Bastion deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
         Ability ability = new DealsDamageToACreatureTriggeredAbility(
-                new TapTargetEffect().setText("tap that creature"),
+                new TapTargetEffect().setText("that creature"),
                 true, false, true
         );
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect()

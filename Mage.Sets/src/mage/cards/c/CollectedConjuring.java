@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -15,7 +16,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author TheElk801
@@ -44,8 +44,7 @@ public final class CollectedConjuring extends CardImpl {
 
 class CollectedConjuringEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard(
-            "sorcery cards with mana value 3 or less");
+    private static final FilterCard filter = new FilterCard("sorcery cards with mana value 3 or less");
 
     static {
         filter.add(CardType.SORCERY.getPredicate());
@@ -60,10 +59,9 @@ class CollectedConjuringEffect extends OneShotEffect {
 
     CollectedConjuringEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Exile the top six cards of your library. "
-                + "You may cast up to two sorcery cards with mana values 3 or less from among them "
-                + "without paying their mana cost. Put the exiled cards not cast this way "
-                + "on the bottom of your library in a random order.";
+        this.staticText = "exile the top six cards of your library. You may cast up to two sorcery spells " +
+                "with mana value 3 or less from among them without paying their mana costs. " +
+                "Put the exiled cards not cast this way on the bottom of your library in a random order";
     }
 
     private CollectedConjuringEffect(final CollectedConjuringEffect effect) {
