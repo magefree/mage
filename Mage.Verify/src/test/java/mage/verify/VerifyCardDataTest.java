@@ -1187,7 +1187,7 @@ public class VerifyCardDataTest {
     }
 
     private void checkAll(Card card, MtgJsonCard ref, int cardIndex) {
-        if (checkName(ref)) {
+        if (!checkName(ref)) {
             return;
         }
         if (!ONLY_TEXT) {
