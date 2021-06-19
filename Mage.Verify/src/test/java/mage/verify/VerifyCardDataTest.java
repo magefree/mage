@@ -1187,9 +1187,6 @@ public class VerifyCardDataTest {
     }
 
     private void checkAll(Card card, MtgJsonCard ref, int cardIndex) {
-        if (!checkName(ref)) {
-            return;
-        }
         if (!ONLY_TEXT) {
             checkCost(card, ref);
             checkPT(card, ref);
@@ -1482,7 +1479,7 @@ public class VerifyCardDataTest {
 
     private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
         // checks missing or wrong text
-        if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE)) {
+        if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE) || !checkName(ref)) {
             return;
         }
 
