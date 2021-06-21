@@ -127,6 +127,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         // new mana render (svg support)
         mainTable.getColumnModel().getColumn(mainModel.COLUMN_INDEX_COST).setCellRenderer(new ManaSymbolsCellRenderer());
+        mainTable.getColumnModel().getColumn(mainModel.COLUMN_INDEX_COLOR_IDENTITY).setCellRenderer(new ManaSymbolsCellRenderer());
 
         // mainTable.setToolTipText(cardSelectorScrollPane.getToolTipText());
         cardSelectorScrollPane.setViewportView(mainTable);

@@ -18,6 +18,7 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.designations.Designation;
+import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
@@ -854,6 +855,14 @@ public class CardView extends SimpleCardView {
 
     public Rarity getRarity() {
         return rarity;
+    }
+
+    public String getColorIdentityStr() {
+        FilterMana filterMana = originalCard.getColorIdentity();
+        if (filterMana.getColorCount() == 0) {
+            return CardUtil.concatManaSymbols(CardInfo.SPLIT_MANA_SEPARATOR_FULL, "{C}", "");
+        }
+        return CardUtil.concatManaSymbols(CardInfo.SPLIT_MANA_SEPARATOR_FULL, filterMana.toString(), "");
     }
 
     @Override
