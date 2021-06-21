@@ -3,7 +3,7 @@ package mage.cards.d;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.RedManaAbility;
+import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,7 +26,7 @@ public final class DarkmossBridge extends CardImpl {
 
         // {T}: Add {B} or {G}.
         this.addAbility(new BlackManaAbility());
-        this.addAbility(new RedManaAbility());
+        this.addAbility(new GreenManaAbility());
     }
 
     private DarkmossBridge(final DarkmossBridge card) {
