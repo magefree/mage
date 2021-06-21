@@ -17,7 +17,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlaneswalkerAmount;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -44,7 +43,6 @@ public final class MythosOfVadrok extends CardImpl {
                 "until your next turn, those permanents can't attack or block " +
                 "and their activated abilities can't be activated."
         ));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private MythosOfVadrok(final MythosOfVadrok card) {

@@ -19,7 +19,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -36,7 +35,6 @@ public final class CankerousThirst extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (1th effect -3/-3)")));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (2nd effect +3/+3)")));
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {B}{G} was spent.)</i>"));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private CankerousThirst(final CankerousThirst card) {

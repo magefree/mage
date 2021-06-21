@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.FoodToken;
 import mage.target.common.TargetNonlandPermanent;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -33,7 +32,6 @@ public final class TurnIntoAPumpkin extends CardImpl {
                 "<br><i>Adamant</i> &mdash; If at least three blue mana " +
                         "was spent to cast this spell, create a Food token."
         ));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private TurnIntoAPumpkin(final TurnIntoAPumpkin card) {

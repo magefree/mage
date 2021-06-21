@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -33,7 +32,7 @@ public final class AzoriusHerald extends CardImpl {
         // When Azorius Herald enters the battlefield, you gain 4 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4)));
         // When Azorius Herald enters the battlefield, sacrifice it unless {U} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.U)), false), new ManaSpentToCastWatcher());        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.U)), false));        
     }
 
     private AzoriusHerald(final AzoriusHerald card) {

@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -49,7 +48,6 @@ public final class InvertTheSkies extends CardImpl {
                 "and creatures you control gain flying until end of turn if {U} was spent to cast it"));
 
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {G}{U} was spent.)</i>"));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
 
     }
 

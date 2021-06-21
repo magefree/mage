@@ -17,7 +17,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.QuandrixToken;
 import mage.game.permanent.token.Token;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -32,7 +31,7 @@ public final class FractalHarness extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // When Fractal Harness enters the battlefield, create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it and attach Fractal Harness to it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new FractalHarnessTokenEffect()), new ManaSpentToCastWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new FractalHarnessTokenEffect()));
 
         // Whenever equipped creature attacks, double the number of +1/+1 counters on it.
         this.addAbility(new AttacksAttachedTriggeredAbility(

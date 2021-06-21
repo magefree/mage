@@ -26,7 +26,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -50,7 +49,7 @@ public final class SquealingDevil extends CardImpl {
         this.addAbility(ability);
 
         // When Squealing Devil enters the battlefield, sacrifice it unless {B} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.B)), false), new ManaSpentToCastWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.B)), false));
 
     }
 

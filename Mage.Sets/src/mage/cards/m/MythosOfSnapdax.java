@@ -18,7 +18,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -33,7 +32,6 @@ public class MythosOfSnapdax extends CardImpl {
 
         // Each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest. If {B}{R} was spent to cast this spell, you choose the permanents for each player instead.
         this.getSpellAbility().addEffect(new MythosOfSnapdaxEffect());
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private MythosOfSnapdax(final MythosOfSnapdax card) {

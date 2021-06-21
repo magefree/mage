@@ -30,7 +30,6 @@ import mage.game.permanent.token.ShardToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.watchers.common.CardsDrawnThisTurnWatcher;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -58,7 +57,7 @@ public final class NikoAris extends CardImpl {
         // When Niko Aris enters the battlefield, create X Shard tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new CreateTokenEffect(new ShardToken(), ManacostVariableValue.instance)
-        ), new ManaSpentToCastWatcher());
+        ));
 
         // +1: Up to one target creature you control can't be blocked this turn. Whenever that creature deals damage this turn, return it to its owner's hand.
         Ability ability = new LoyaltyAbility(new CantBeBlockedTargetEffect(Duration.EndOfTurn), 1);

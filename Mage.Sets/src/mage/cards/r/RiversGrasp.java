@@ -21,7 +21,6 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -47,7 +46,6 @@ public final class RiversGrasp extends CardImpl {
         this.getSpellAbility().addTarget(targetPlayer);
 
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {U}{B} was spent.)</i>"));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private RiversGrasp(final RiversGrasp card) {

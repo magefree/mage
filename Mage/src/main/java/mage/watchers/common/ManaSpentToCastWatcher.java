@@ -11,6 +11,7 @@ import mage.watchers.Watcher;
 
 /**
  * Watcher saves the mana that was spent to cast a spell
+ * automatically added in each game
  *
  * @author LevelX2
  */
