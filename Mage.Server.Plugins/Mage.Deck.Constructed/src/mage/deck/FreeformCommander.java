@@ -119,7 +119,7 @@ public class FreeformCommander extends Constructed {
             commanderNames.add(commander.getName());
         }
         for (Card commander : commanders) {
-            if (!commander.isCreature() || !commander.isLegendary()) {
+            if (!(commander.isCreature() || commander.isLegendary())) {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "For Freeform Commander, the commander must be a creature or be legendary. Yours was: " + commander.getName(), true);
                 valid = false;
             }
