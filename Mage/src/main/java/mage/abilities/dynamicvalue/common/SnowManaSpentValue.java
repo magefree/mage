@@ -19,13 +19,11 @@ public enum SnowManaSpentValue implements DynamicValue {
         if (sourceAbility.getAbilityType() == AbilityType.SPELL) {
             return sourceAbility.getManaCostsToPay().getUsedManaToPay().getSnow();
         }
-        ManaSpentToCastWatcher watcher = game.getState().getWatcher(
-                ManaSpentToCastWatcher.class, sourceAbility.getSourceId()
-        );
+        ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
         if (watcher == null) {
             return 0;
         }
-        Mana payment = watcher.getAndResetLastPayment();
+        Mana payment = watcher.getAndResetLastPayment(sourceAbility.getSourceId());
         if (payment == null) {
             return 0;
         }

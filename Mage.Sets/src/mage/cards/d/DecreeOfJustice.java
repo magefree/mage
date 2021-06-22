@@ -28,7 +28,7 @@ public final class DecreeOfJustice extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{2}{W}{W}");
 
         // Create X 4/4 white Angel creature tokens with flying.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), ManacostVariableValue.REGULAR));
 
         // Cycling {2}{W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{W}")));

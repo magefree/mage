@@ -23,7 +23,7 @@ public final class StarnheimUnleashed extends CardImpl {
 
         // Create a 4/4 white Angel Warrior creature token with flying and vigilance. If this spell was foretold, create X of those tokens instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new CreateTokenEffect(new AngelWarriorVigilanceToken(), ManacostVariableValue.instance),
+                new CreateTokenEffect(new AngelWarriorVigilanceToken(), ManacostVariableValue.REGULAR),
                 new CreateTokenEffect(new AngelWarriorVigilanceToken()),
                 ForetoldCondition.instance,
                 "Create a 4/4 white Angel Warrior creature token with flying and vigilance. If this spell was foretold, create X of those tokens instead"

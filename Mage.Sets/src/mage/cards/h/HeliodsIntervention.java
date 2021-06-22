@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class HeliodsIntervention extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.instance, 2);
+    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
 
     public HeliodsIntervention(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");

@@ -20,7 +20,7 @@ public final class RollingThunder extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");
 
         // Rolling Thunder deals X damage divided as you choose among any number of target creatures and/or players.
-        DynamicValue xValue = ManacostVariableValue.instance;
+        DynamicValue xValue = ManacostVariableValue.REGULAR;
         this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));  
     }

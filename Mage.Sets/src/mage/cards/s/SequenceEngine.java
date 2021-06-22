@@ -36,7 +36,7 @@ public final class SequenceEngine extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(QuandrixToken.getEffect(
-                ManacostVariableValue.instance, "Put X +1/+1 counters on it"
+                ManacostVariableValue.REGULAR, "Put X +1/+1 counters on it"
         ));
         ability.setTargetAdjuster(SequenceEngineAdjuster.instance);
         this.addAbility(ability);

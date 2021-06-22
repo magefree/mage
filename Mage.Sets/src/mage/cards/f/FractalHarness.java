@@ -73,7 +73,7 @@ class FractalHarnessTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Token token = new QuandrixToken();
         token.putOntoBattlefield(1, game, source, source.getControllerId());
-        int xValue = ManacostVariableValue.instance.calculate(game, source, this);
+        int xValue = ManacostVariableValue.ETB.calculate(game, source, this);
         boolean flag = true;
         for (UUID tokenId : token.getLastAddedTokenIds()) {
             Permanent permanent = game.getPermanent(tokenId);

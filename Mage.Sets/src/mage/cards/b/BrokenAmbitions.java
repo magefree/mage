@@ -25,7 +25,7 @@ public final class BrokenAmbitions extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
         // Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller puts the top four cards of their library into their graveyard.
-        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addEffect(new BrokenAmbitionsEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }

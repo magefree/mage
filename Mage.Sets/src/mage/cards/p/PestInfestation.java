@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class PestInfestation extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.instance, 2);
+    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
 
     public PestInfestation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{G}");

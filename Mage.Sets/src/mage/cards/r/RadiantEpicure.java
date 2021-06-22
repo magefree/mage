@@ -67,11 +67,11 @@ class RadiantEpicureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class, source.getSourceId());
+        ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
         if (player == null || watcher == null) {
             return false;
         }
-        Mana payment = watcher.getAndResetLastPayment();
+        Mana payment = watcher.getAndResetLastPayment(source.getSourceId());
         if (payment == null) {
             return false;
         }

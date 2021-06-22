@@ -48,7 +48,7 @@ public final class GadwickTheWizened extends CardImpl {
 
         // When Gadwick, the Wizened enters the battlefield, draw X cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(ManacostVariableValue.instance)
+                new DrawCardSourceControllerEffect(ManacostVariableValue.ETB)
         ));
 
         // Whenever you cast a blue spell, tap target nonland permanent an opponent controls.

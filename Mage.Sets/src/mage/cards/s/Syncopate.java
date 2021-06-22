@@ -18,7 +18,7 @@ public final class Syncopate extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
         // Counter target spell unless its controller pays {X}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
-        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(ManacostVariableValue.instance, true));
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(ManacostVariableValue.REGULAR, true));
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 

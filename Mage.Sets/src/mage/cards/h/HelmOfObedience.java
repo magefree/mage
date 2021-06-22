@@ -69,7 +69,7 @@ class HelmOfObedienceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
-        int max = ManacostVariableValue.instance.calculate(game, source, this);
+        int max = ManacostVariableValue.REGULAR.calculate(game, source, this);
         if (targetOpponent == null || controller == null || max < 1) {
             return false;
         }

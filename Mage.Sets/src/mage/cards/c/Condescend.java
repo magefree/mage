@@ -21,7 +21,7 @@ public final class Condescend extends CardImpl {
 
 
         // Counter target spell unless its controller pays {X}.
-        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetSpell());
         // Scry 2.
         this.getSpellAbility().addEffect(new ScryEffect(2));

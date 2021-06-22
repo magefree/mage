@@ -33,7 +33,7 @@ public final class BlotOutTheSky extends CardImpl {
 
         // Create X tapped 2/1 white and black Inkling creature tokens with flying. If X is 6 or more, destroy all noncreature, nonland permanents.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new SilverquillToken(), ManacostVariableValue.instance, true, false
+                new SilverquillToken(), ManacostVariableValue.REGULAR, true, false
         ));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DestroyAllEffect(filter), BlotOutTheSkyCondition.instance,
