@@ -1179,7 +1179,10 @@ public class VerifyCardDataTest {
     }
 
     private static boolean checkName(MtgJsonCard ref) {
-        if (!ONLY_TEXT || checkedNames.contains(ref.name)) {
+        if (!ONLY_TEXT) {
+            return true;
+        }
+        if (checkedNames.contains(ref.name)) {
             return false;
         }
         checkedNames.add(ref.name);
