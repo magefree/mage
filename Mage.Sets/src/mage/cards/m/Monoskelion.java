@@ -35,7 +35,7 @@ public final class Monoskelion extends CardImpl {
         ));
 
         // {1}, Remove a +1/+1 counter from Monoskelion: Monoskelion deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1, "it"), new GenericManaCost(1));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

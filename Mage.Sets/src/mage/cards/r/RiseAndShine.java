@@ -45,7 +45,7 @@ public final class RiseAndShine extends CardImpl {
         ).setText("Target noncreature artifact you control becomes"));
         this.getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(
                 0, 0, Duration.EndOfGame
-        ).setText("a 0/0 artifact creature"));
+        ).setText(" a 0/0 artifact creature"));
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(
                 CounterType.P1P1.createInstance(4)
         ).setText("Put four +1/+1 counters on each artifact that became a creature this way"));

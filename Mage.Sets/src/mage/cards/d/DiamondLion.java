@@ -5,6 +5,7 @@ import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardHandCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -47,7 +48,8 @@ public final class DiamondLion extends CardImpl {
 class DiamondLionAbility extends ActivatedManaAbilityImpl {
 
     public DiamondLionAbility() {
-        super(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new DiscardHandCost());
+        super(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost());
+        this.addCost(new DiscardHandCost());
         this.addCost(new SacrificeSourceCost());
         this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 3, 0));
     }

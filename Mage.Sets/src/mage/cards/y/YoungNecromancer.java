@@ -36,7 +36,7 @@ public final class YoungNecromancer extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new DoWhenCostPaid(ability, new ExileFromGraveCost(
-                        new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARD)
+                        new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARD_CARDS)
                 ), "Exile two cards from your graveyard?")
         ));
     }

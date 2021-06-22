@@ -28,7 +28,7 @@ public final class PhantasmalDreadmaw extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Phantasmal Dreadmaw becomes the target of a spell or ability, sacrifice it.
-        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect().setText("sacrifice it")));
     }
 
     private PhantasmalDreadmaw(final PhantasmalDreadmaw card) {

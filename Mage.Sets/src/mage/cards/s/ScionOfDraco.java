@@ -36,6 +36,7 @@ public final class ScionOfDraco extends CardImpl {
         // Domain — This spell costs {2} less to cast for each basic land type among lands you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL,
                 new SpellCostReductionForEachSourceEffect(2, xValue)
+                        .setText("this spell costs {2} less to cast for each basic land type among lands you control")
         ).addHint(DomainHint.instance).setAbilityWord(AbilityWord.DOMAIN));
 
         // Flying

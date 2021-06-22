@@ -1,7 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -12,13 +10,15 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class FoundryHelix extends CardImpl {
@@ -27,7 +27,7 @@ public final class FoundryHelix extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}{W}");
 
         // As an additional cost to cast this spell, sacrifice a permanent.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_SHORT_TEXT)));
 
         // Foundry Helix deals 4 damage to any target. If the sacrificed permanent was an artifact, you gain 4 life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

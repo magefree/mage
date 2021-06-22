@@ -12,6 +12,7 @@ import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -44,7 +45,7 @@ public final class RavingVisionary extends CardImpl {
                 new ManaCostsImpl<>("{2}{U}"), DeliriumCondition.instance
         );
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability.addHint(CardTypesInGraveyardHint.YOU));
+        this.addAbility(ability.addHint(CardTypesInGraveyardHint.YOU).setAbilityWord(AbilityWord.DELIRIUM));
     }
 
     private RavingVisionary(final RavingVisionary card) {

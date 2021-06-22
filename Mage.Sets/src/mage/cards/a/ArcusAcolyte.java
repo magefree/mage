@@ -52,7 +52,7 @@ public final class ArcusAcolyte extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new OutlastAbility(new ManaCostsImpl<>("{G/W}")),
                 Duration.WhileOnBattlefield, filter, true
-        )));
+        ).setText("each other creature you control without a +1/+1 counter on it has outlast {G/W}")));
     }
 
     private ArcusAcolyte(final ArcusAcolyte card) {
