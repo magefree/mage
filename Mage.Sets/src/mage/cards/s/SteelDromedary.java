@@ -10,6 +10,7 @@ import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
+import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,9 +40,11 @@ public final class SteelDromedary extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Steel Dromedary enters the battlefield tapped with two +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(2)
-        ), "with two +1/+1 counters on it"));
+        Ability ability = new EntersBattlefieldAbility(
+                new TapSourceEffect(), "tapped with two +1/+1 counters on it"
+        );
+        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
+        this.addAbility(ability);
 
         // Steel Dromedary doesn't untap during your untap step if it has a +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousRuleModifyingEffect(
@@ -49,7 +52,7 @@ public final class SteelDromedary extends CardImpl {
         ).setText("{this} doesn't untap during your untap step if it has a +1/+1 counter on it")));
 
         // At the beginning of combat on your turn, you may move a +1/+1 counter from Steel Dromedary onto target creature.
-        Ability ability = new BeginningOfCombatTriggeredAbility(
+        ability = new BeginningOfCombatTriggeredAbility(
                 new SteelDromedaryEffect(), TargetController.YOU, true
         );
         ability.addTarget(new TargetCreaturePermanent());
@@ -70,7 +73,7 @@ class SteelDromedaryEffect extends OneShotEffect {
 
     SteelDromedaryEffect() {
         super(Outcome.Benefit);
-        staticText = "move a +1/+1 counter from {this} onto target creature";
+        staticText = "you may move a +1/+1 counter from {this} onto target creature";
     }
 
     private SteelDromedaryEffect(final SteelDromedaryEffect effect) {

@@ -49,7 +49,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
 
     public EntwineAbility(Cost cost, String reminderText) {
         super(Zone.STACK, null);
-        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, "-", reminderText, cost);
+        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, "&mdash;", reminderText, cost);
         setRuleAtTheTop(true);
     }
 

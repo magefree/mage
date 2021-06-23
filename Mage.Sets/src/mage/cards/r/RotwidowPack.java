@@ -42,12 +42,10 @@ public final class RotwidowPack extends CardImpl {
 
         // {3}{B}{G}, Exile a creature card from your graveyard: Create a 1/2 green Spider creature token with reach, then each opponent loses 1 life for each Spider you control.
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new SpiderToken())
-                        .setText("create a 1/2 green Spider creature token with reach, then"),
-                new ManaCostsImpl("{3}{B}{G}")
+                new CreateTokenEffect(new SpiderToken()), new ManaCostsImpl<>("{3}{B}{G}")
         );
         ability.addEffect(new LoseLifeOpponentsEffect(xValue)
-                .setText("each opponent loses 1 life for each Spider you control.")
+                .setText(", then each opponent loses 1 life for each Spider you control.")
         );
         ability.addCost(new ExileFromGraveCost(
                 new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)

@@ -55,12 +55,12 @@ public final class Asmoranomardicadaistinaculdacar extends CardImpl {
         // As long as you've discarded a card this turn, you may pay {B/R} to cast this spell.
         this.addAbility(new AlternativeCostSourceAbility(
                 new ManaCostsImpl<>("{B/R}"), ControllerDiscardedThisTurnCondition.instance,
-                "as long as you've discarded a card this turn, you may pay {B/R} to cast this spell"
+                "as long as you've discarded a card this turn, you may pay {B/R} to cast this spell."
         ).addHint(ControllerDiscardedHint.instance), new DiscardedCardWatcher());
 
         // When Asmoranomardicadaistinaculdacar enters the battlefield, you may search your library for a card named The Underworld Cookbook, reveal it, put it into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true)
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true
         ));
 
         // Sacrifice two Foods: Target creature deals 6 damage to itself.

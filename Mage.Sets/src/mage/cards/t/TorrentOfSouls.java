@@ -26,7 +26,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -51,7 +50,6 @@ public final class TorrentOfSouls extends CardImpl {
         this.getSpellAbility().addTarget(targetPlayer);
 
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {B}{R} was spent.)</i>"));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
 
     }
 

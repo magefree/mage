@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -39,7 +38,7 @@ public final class CourtHussar extends CardImpl {
                 new LookLibraryAndPickControllerEffect(StaticValue.get(3), false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, false, false),
                 false));
         // When Court Hussar enters the battlefield, sacrifice it unless {W} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.W)), false), new ManaSpentToCastWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.W)), false));
     }
 
     private CourtHussar(final CourtHussar card) {

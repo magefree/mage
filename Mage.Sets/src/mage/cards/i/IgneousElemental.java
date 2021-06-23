@@ -41,9 +41,7 @@ public final class IgneousElemental extends CardImpl {
 
         // When Igneous Elemental enters the battlefield, you may have it deal 2 damage to target creature.
         ability = new EntersBattlefieldTriggeredAbility(
-                new DamageTargetEffect(2)
-                        .setText("have it deal 2 damage to target creature"),
-                true
+                new DamageTargetEffect(2).setText("it deal 2 damage to target creature"), true
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

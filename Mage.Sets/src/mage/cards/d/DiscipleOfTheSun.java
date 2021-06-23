@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class DiscipleOfTheSun extends CardImpl {
 
-    private static final FilterCard filter = new FilterPermanentCard("permanent card with mana value 3 or less");
+    private static final FilterCard filter = new FilterPermanentCard("permanent card with mana value 3 or less from your graveyard");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));

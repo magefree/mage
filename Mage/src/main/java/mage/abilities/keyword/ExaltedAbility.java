@@ -46,7 +46,7 @@ public class ExaltedAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Exalted <i>(Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)</i>";
+        return "exalted <i>(Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)</i>";
     }
 
 }

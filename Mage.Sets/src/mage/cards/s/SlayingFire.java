@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetAnyTarget;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -28,7 +27,6 @@ public final class SlayingFire extends CardImpl {
                 "it deals 4 damage instead."
         ));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private SlayingFire(final SlayingFire card) {

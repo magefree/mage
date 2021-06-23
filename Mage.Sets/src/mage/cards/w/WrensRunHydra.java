@@ -34,7 +34,7 @@ public final class WrensRunHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // Reinforce X—{X}{G}{G}
-        this.addAbility(new ReinforceAbility(ManacostVariableValue.instance, new ManaCostsImpl<>("{X}{G}{G}")));
+        this.addAbility(new ReinforceAbility(ManacostVariableValue.REGULAR, new ManaCostsImpl<>("{X}{G}{G}")));
     }
 
     private WrensRunHydra(final WrensRunHydra card) {

@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.target.TargetPlayer;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -33,7 +32,7 @@ public final class RevenantPatriarch extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new SkipCombatStepEffect(Duration.OneUse).setText("target player skips their next combat phase."), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.W),
-                "if {W} was spent to cast it, target player skips their next combat phase."), new ManaSpentToCastWatcher());
+                "if {W} was spent to cast it, target player skips their next combat phase."));
         // Revenant Patriarch can't block.
         this.addAbility(new CantBlockAbility());
     }

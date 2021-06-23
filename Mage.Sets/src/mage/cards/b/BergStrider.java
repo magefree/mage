@@ -47,7 +47,7 @@ public final class BergStrider extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
         ability.addEffect(new BergStriderEffect());
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability, new ManaSpentToCastWatcher());
+        this.addAbility(ability);
     }
 
     private BergStrider(final BergStrider card) {
@@ -79,13 +79,11 @@ class BergStriderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ManaSpentToCastWatcher watcher = game.getState().getWatcher(
-                ManaSpentToCastWatcher.class, source.getSourceId()
-        );
+        ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
         if (watcher == null) {
             return false;
         }
-        Mana payment = watcher.getAndResetLastPayment();
+        Mana payment = watcher.getAndResetLastPayment(source.getSourceId());
         if (payment == null || payment.getSnow() < 1) {
             return false;
         }

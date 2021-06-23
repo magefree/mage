@@ -22,7 +22,8 @@ public final class Kaleidoscorch extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // Converge — Kaleidoscorch deals X damage to any target, where X is the number of colors of mana spent to cast this spell.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ColorsOfManaSpentToCastCount.getInstance()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ColorsOfManaSpentToCastCount.getInstance())
+                .setText("{this} deals X damage to any target, where X is the number of colors of mana spent to cast this spell"));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
 

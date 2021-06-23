@@ -29,7 +29,7 @@ public final class Detonate extends CardImpl {
         // Destroy target artifact with converted mana cost X. It can't be regenerated. Detonate deals X damage to that artifact's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetArtifactPermanent(new FilterArtifactPermanent("artifact with mana value X")));
-        Effect effect = new DamageTargetControllerEffect(ManacostVariableValue.instance);
+        Effect effect = new DamageTargetControllerEffect(ManacostVariableValue.REGULAR);
         effect.setText("{this} deals X damage to that artifact's controller");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().setTargetAdjuster(DetonateAdjuster.instance);

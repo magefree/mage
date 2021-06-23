@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterNonlandPermanent;
@@ -46,7 +47,7 @@ public final class JunkWinder extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Affinity for tokens
-        this.addAbility(new SimpleStaticAbility(new AffinityEffect(filter)).addHint(hint));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filter)).addHint(hint));
 
         // Whenever a token enters the battlefield under your control, tap target nonland permanent an opponent controls. It doesn't untap during its controller's next untap step.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(

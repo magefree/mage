@@ -40,7 +40,7 @@ public final class FoulWatcher extends CardImpl {
         // Delirium — Foul Watcher gets +1/+0 as long as there are four more card types among cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield), DeliriumCondition.instance,
-                "{this} gets +1/+0 as long as there are four more card types among cards in your graveyard"
+                "{this} gets +1/+0 as long as there are four or more card types among cards in your graveyard"
         )).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardHint.YOU));
     }
 

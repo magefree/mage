@@ -30,7 +30,7 @@ public final class GaeasWill extends CardImpl {
         this.color.setGreen(true);
 
         // Suspend 4—{G}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("G"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("G"), this));
 
         // Until end of turn, you may play land cards and cast spells from your graveyard.
         this.getSpellAbility().addEffect(new GaeasWillGraveyardEffect());
@@ -57,7 +57,7 @@ class GaeasWillGraveyardEffect extends ContinuousEffectImpl {
 
     public GaeasWillGraveyardEffect(Duration duration) {
         super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        this.staticText = "Until end of turn, you may play land cards and cast spells from your graveyard";
+        this.staticText = "Until end of turn, you may play lands and cast spells from your graveyard";
     }
 
     private GaeasWillGraveyardEffect(final GaeasWillGraveyardEffect effect) {
@@ -84,7 +84,7 @@ class GaeassWillReplacementEffect extends ReplacementEffectImpl {
 
     public GaeassWillReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        this.staticText = "If a card would be put into your graveyard from anywhere this turn, exile that card instead";
+        this.staticText = "<br>If a card would be put into your graveyard from anywhere this turn, exile that card instead";
     }
 
     public GaeassWillReplacementEffect(final GaeassWillReplacementEffect effect) {

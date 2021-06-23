@@ -17,18 +17,22 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.util.CardUtil;
+
+import java.util.Arrays;
 
 /**
  * @author LevelX2
  */
 public class SagaAbility extends SimpleStaticAbility {
 
-    private SagaChapter maxChapter;
+    private final SagaChapter maxChapter;
 
     public SagaAbility(Card card, SagaChapter maxChapter) {
         super(Zone.ALL, new AddCountersSourceEffect(CounterType.LORE.createInstance()));
         this.maxChapter = maxChapter;
-        this.setRuleVisible(false);
+        this.setRuleVisible(true);
+        this.setRuleAtTheTop(true);
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()));
         ability.setRuleVisible(false);
         card.addAbility(ability);
@@ -86,9 +90,6 @@ public class SagaAbility extends SimpleStaticAbility {
             }
             card.addAbility(ability);
         }
-        if (maxChapter == null || toChapter.getNumber() > maxChapter.getNumber()) {
-            maxChapter = toChapter;
-        }
     }
 
     public SagaChapter getMaxChapter() {
@@ -119,7 +120,7 @@ public class SagaAbility extends SimpleStaticAbility {
 
 class ChapterTriggeredAbility extends TriggeredAbilityImpl {
 
-    private SagaChapter chapterFrom, chapterTo;
+    private final SagaChapter chapterFrom, chapterTo;
 
     public ChapterTriggeredAbility(Effect effect, SagaChapter chapterFrom, SagaChapter chapterTo, boolean optional) {
         super(Zone.ALL, effect, optional);
@@ -140,21 +141,17 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(getSourceId()) && event.getData().equals(CounterType.LORE.getName())) {
-            int amountAdded = event.getAmount();
-            int loreCounters = amountAdded;
-            //Permanent sourceSaga = game.getPermanentOrLKIBattlefield(getSourceId());  BUG #5393
-            Permanent sourceSaga = game.getPermanent(getSourceId());
-            if (sourceSaga == null) {
-                sourceSaga = game.getPermanentEntering(getSourceId());
-            }
-            if (sourceSaga != null) {
-                loreCounters = sourceSaga.getCounters(game).getCount(CounterType.LORE);
-            }
-            return loreCounters - amountAdded < chapterFrom.getNumber()
-                    && chapterFrom.getNumber() <= loreCounters;
+        if (!event.getTargetId().equals(getSourceId())
+                || !event.getData().equals(CounterType.LORE.getName())) {
+            return false;
         }
-        return false;
+        Permanent permanent = getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            return false;
+        }
+        int loreCounters = permanent.getCounters(game).getCount(CounterType.LORE);
+        return loreCounters - event.getAmount() < chapterFrom.getNumber()
+                && chapterFrom.getNumber() <= loreCounters;
     }
 
     @Override
@@ -177,17 +174,13 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder();
-        for (SagaChapter chapter : SagaChapter.values()) {
-            if (chapter.getNumber() >= getChapterFrom().getNumber()
-                    && chapter.getNumber() < getChapterTo().getNumber()) {
-                sb.append(chapter.toString()).append(", ");
-            } else if (chapter.equals(getChapterTo())) {
-                sb.append(chapter.toString());
-            }
-        }
-        String text = super.getRule();
-        sb.append(" - ").append(Character.toUpperCase(text.charAt(0))).append(text.substring(1));
-        return sb.toString();
+        return Arrays
+                .stream(SagaChapter.values())
+                .filter(chapter -> chapterFrom.getNumber() <= chapter.getNumber())
+                .filter(chapter -> chapter.getNumber() <= chapterTo.getNumber())
+                .map(SagaChapter::toString)
+                .reduce((a, b) -> a + ", " + b)
+                .orElse("")
+                + " - " + CardUtil.getTextWithFirstCharUpperCase(super.getRule());
     }
 }

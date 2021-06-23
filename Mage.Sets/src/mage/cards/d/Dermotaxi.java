@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.OneShotEffect;
@@ -44,7 +44,10 @@ public final class Dermotaxi extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Imprint — As Dermotaxi enters the battlefield, exile a creature card from a graveyard.
-        this.addAbility(new AsEntersBattlefieldAbility(new DermotaxiImprintEffect()).setAbilityWord(AbilityWord.IMPRINT));
+        this.addAbility(new EntersBattlefieldAbility(
+                new DermotaxiImprintEffect(), null, "<i>Imprint</i> &mdash; As {this} " +
+                "enters the battlefield, exile a creature card from a graveyard.", ""
+        ));
 
         // Tap two untapped creatures you control: Until end of turn, Dermotaxi becomes a copy of the imprinted card, except it's a Vehicle artifact in addition to its other types.
         this.addAbility(new SimpleActivatedAbility(
@@ -105,7 +108,7 @@ class DermotaxiCopyEffect extends OneShotEffect {
 
     DermotaxiCopyEffect() {
         super(Outcome.Benefit);
-        staticText = "until end of turn, {this} becomes a copy of the imprinted card, " +
+        staticText = "until end of turn, {this} becomes a copy of the exiled card, " +
                 "except it's a Vehicle artifact in addition to its other types";
     }
 

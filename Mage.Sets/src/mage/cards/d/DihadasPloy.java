@@ -60,12 +60,12 @@ enum DihadasPloyValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage() {
+    public String toString() {
         return "1";
     }
 
     @Override
-    public String toString() {
+    public String getMessage() {
         return "cards you've discarded this turn";
     }
 }

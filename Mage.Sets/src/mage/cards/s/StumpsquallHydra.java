@@ -21,7 +21,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetAmount;
 import mage.target.common.TargetCreatureOrPlaneswalkerAmount;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -38,7 +37,7 @@ public final class StumpsquallHydra extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Stumpsquall Hydra enters the battlefield, distribute X +1/+1 counters among it and any number of commanders.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new StumpsquallHydraEffect()), new ManaSpentToCastWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new StumpsquallHydraEffect()));
     }
 
     private StumpsquallHydra(final StumpsquallHydra card) {
@@ -92,7 +91,7 @@ class StumpsquallHydraEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        int xValue = ManacostVariableValue.instance.calculate(game, source, this);
+        int xValue = ManacostVariableValue.ETB.calculate(game, source, this);
         if (player == null || xValue < 1) {
             return false;
         }

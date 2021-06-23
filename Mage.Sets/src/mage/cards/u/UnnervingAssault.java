@@ -13,7 +13,6 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -41,7 +40,6 @@ public final class UnnervingAssault extends CardImpl {
                 new BoostAllEffect(1, 0, Duration.EndOfTurn, filter2, false),
                 new ManaWasSpentCondition(ColoredManaSymbol.R), " and creatures you control get +1/+0 until end of turn if {R} was spent to cast it"));
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {U}{R} was spent.)</i>"));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
 
     }
 

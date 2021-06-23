@@ -18,7 +18,6 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -35,7 +34,6 @@ public final class Outmuscle extends CardImpl {
         this.getSpellAbility().addEffect(new OutmuscleEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private Outmuscle(final Outmuscle card) {

@@ -36,18 +36,8 @@ public class SpellsCastWatcher extends Watcher {
                 }
             }
             if (spell != null) {
-                List<Spell> spells;
-                List<Spell> graveyardSpells;
-                if (!spellsCast.containsKey(spell.getControllerId())) {
-                    spells = new ArrayList<>();
-                    spellsCast.put(spell.getControllerId(), spells);
-                    graveyardSpells = new ArrayList<>();
-                    spellsCastFromGraveyard.put(spell.getControllerId(), graveyardSpells);
-
-                } else {
-                    spells = spellsCast.get(spell.getControllerId());
-                    graveyardSpells = spellsCastFromGraveyard.get(spell.getControllerId());
-                }
+                List<Spell> spells = spellsCast.computeIfAbsent(spell.getControllerId(), x -> new ArrayList<>());
+                List<Spell> graveyardSpells = spellsCastFromGraveyard.computeIfAbsent(spell.getControllerId(), x -> new ArrayList<>());
                 spells.add(spell.copy()); // copy needed because attributes like color could be changed later
                 if (event.getZone() == Zone.GRAVEYARD) {
                     graveyardSpells.add(spell.copy());

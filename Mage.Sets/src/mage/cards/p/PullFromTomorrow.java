@@ -20,7 +20,7 @@ public final class PullFromTomorrow extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");
 
         // Draw X cards, then discard a card.
-        getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.instance));
+        getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
         Effect effect = new DiscardControllerEffect(1);
         effect.setText(", then discard a card");
         getSpellAbility().addEffect(effect);

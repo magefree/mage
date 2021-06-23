@@ -18,7 +18,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -33,7 +32,6 @@ public final class MythosOfIlluna extends CardImpl {
         // Create a token that's a copy of target permanent. If {R}{G} was spent to cast this spell, instead create a token that's a copy of that permanent, except the token has "When this permanent enters the battlefield, if it's a creature, it fights up to one target creature you don't control."
         this.getSpellAbility().addEffect(new MythosOfIllunaEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private MythosOfIlluna(final MythosOfIlluna card) {

@@ -40,7 +40,7 @@ public final class TizerusCharger extends CardImpl {
         // Tizerus Charger escapes with your choice of a +1/+1 counter or a flying counter on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new TizerusChargerEffect(), null, "{this} escapes " +
-                "with your choice of a +1/+1 counter or a flying counter on it", ""
+                "with your choice of a +1/+1 counter or a flying counter on it.", ""
         ));
     }
 

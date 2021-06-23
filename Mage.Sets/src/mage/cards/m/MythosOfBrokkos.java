@@ -17,7 +17,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -32,7 +31,6 @@ public final class MythosOfBrokkos extends CardImpl {
         // If {U}{B} was spent to cast Mythos of Brokkos, search your library for a card, put that card into your graveyard, then shuffle your library.
         // Return up to two permanent cards from your graveyard to your hand.
         this.getSpellAbility().addEffect(new MythosOfBrokkosEffect());
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private MythosOfBrokkos(final MythosOfBrokkos card) {

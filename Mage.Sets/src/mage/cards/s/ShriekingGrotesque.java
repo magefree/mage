@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.target.TargetPlayer;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -36,7 +35,7 @@ public final class ShriekingGrotesque extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.B),
-            "if {B} was spent to cast this spell, target player discards a card."), new ManaSpentToCastWatcher());
+            "if {B} was spent to cast this spell, target player discards a card."));
     }
 
     private ShriekingGrotesque(final ShriekingGrotesque card) {

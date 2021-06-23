@@ -26,7 +26,7 @@ public final class IcehideGolem extends CardImpl {
 
         // ({S} can be paid with one mana from a snow permanent.)
         this.addAbility(new SimpleStaticAbility(
-                new InfoEffect("<i>({S} can be paid with one mana from a snow permanent.)</i>")
+                new InfoEffect("<i>({S} can be paid with one mana from a snow source.)</i>")
         ));
     }
 

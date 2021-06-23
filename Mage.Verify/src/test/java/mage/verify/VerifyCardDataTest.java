@@ -56,7 +56,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "MH1"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "MH2"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -1179,7 +1179,10 @@ public class VerifyCardDataTest {
     }
 
     private static boolean checkName(MtgJsonCard ref) {
-        if (!ONLY_TEXT || checkedNames.contains(ref.name)) {
+        if (!ONLY_TEXT) {
+            return true;
+        }
+        if (checkedNames.contains(ref.name)) {
             return false;
         }
         checkedNames.add(ref.name);
@@ -1187,9 +1190,6 @@ public class VerifyCardDataTest {
     }
 
     private void checkAll(Card card, MtgJsonCard ref, int cardIndex) {
-        if (checkName(ref)) {
-            return;
-        }
         if (!ONLY_TEXT) {
             checkCost(card, ref);
             checkPT(card, ref);
@@ -1482,7 +1482,7 @@ public class VerifyCardDataTest {
 
     private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
         // checks missing or wrong text
-        if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE)) {
+        if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE) || !checkName(ref)) {
             return;
         }
 

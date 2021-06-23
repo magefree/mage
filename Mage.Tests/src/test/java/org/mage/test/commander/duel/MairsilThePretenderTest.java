@@ -169,7 +169,7 @@ public class MairsilThePretenderTest extends CardTestCommanderDuelBase {
         
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Shifting Shadow", "Mairsil, the Pretender");
 
-        activateAbility(5, PhaseStep.UPKEEP, playerA, "{B}: {this} gains Undying", NO_TARGET, "At the beginning of your upkeep");
+        activateAbility(5, PhaseStep.UPKEEP, playerA, "{B}: {this} gains undying", NO_TARGET, "At the beginning of your upkeep");
         setChoice(playerA, "No"); // Don't move commander to command zone because can come back by Undying
         
         setChoice(playerA, "Yes"); // Exile a card (Mairsil comes back from Undying)

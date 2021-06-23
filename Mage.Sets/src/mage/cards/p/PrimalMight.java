@@ -25,7 +25,7 @@ public final class PrimalMight extends CardImpl {
 
         // Target creature you control gets +X/+X until end of turn. Then it fights up to one target creature you don’t control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(ManacostVariableValue.instance, ManacostVariableValue.instance, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(ManacostVariableValue.REGULAR, ManacostVariableValue.REGULAR, Duration.EndOfTurn));
         //
         this.getSpellAbility().addEffect(new FightTargetsEffect()
                 .concatBy("Then")

@@ -21,8 +21,8 @@ public final class DeathGrasp extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{W}{B}");
 
 
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
-        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 

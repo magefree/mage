@@ -155,7 +155,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Target ");
+        StringBuilder sb = new StringBuilder("target ");
         switch (targetController) {
             case OPPONENT:
                 sb.append("opponent");

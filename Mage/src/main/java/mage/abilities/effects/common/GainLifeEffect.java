@@ -2,16 +2,16 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class GainLifeEffect extends OneShotEffect {
@@ -25,9 +25,8 @@ public class GainLifeEffect extends OneShotEffect {
     public GainLifeEffect(DynamicValue life) {
         super(Outcome.GainLife);
         this.life = life;
-        setText();
     }
-    
+
     public GainLifeEffect(DynamicValue life, String rule) {
         super(Outcome.GainLife);
         this.life = life;
@@ -53,24 +52,24 @@ public class GainLifeEffect extends OneShotEffect {
         return true;
     }
 
-    private void setText() {
-        if (!staticText.isEmpty()) {
-            return;
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
         }
         StringBuilder sb = new StringBuilder();
         String message = life.getMessage();
         sb.append("you gain ");
         if (message.startsWith("that")) {
             sb.append(message).append(' ');
-        } else if (message.isEmpty() || !message.equals("1")) {
+        } else if (message.isEmpty() || !life.toString().equals("1")) {
             sb.append(life).append(' ');
         }
         sb.append("life");
         if (!message.isEmpty() && !message.startsWith("that")) {
-            sb.append(message.equals("1") ? " equal to the number of " : " for each ");
+            sb.append(life.toString().equals("1") ? " equal to the number of " : " for each ");
             sb.append(message);
         }
-        staticText = sb.toString();
+        return sb.toString();
     }
-
 }

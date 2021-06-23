@@ -13,10 +13,12 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -49,7 +51,7 @@ public class ProtectionAbility extends StaticAbility {
     }
 
     public static ProtectionAbility from(ObjectColor color) {
-        FilterObject filter = new FilterObject(color.getDescription());
+        FilterObject filter = new FilterObject(getFilterText(color));
         filter.add(new ColorPredicate(color));
         colors.add(color);
         return new ProtectionAbility(filter);
@@ -70,7 +72,6 @@ public class ProtectionAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-
         return "protection from " + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove auras.");
     }
 
@@ -126,6 +127,16 @@ public class ProtectionAbility extends StaticAbility {
         }
 
         return true;
+    }
+
+    private static final String getFilterText(ObjectColor color) {
+        return CardUtil.concatWithAnd(
+                color.getColors()
+                        .stream()
+                        .map(ObjectColor::getDescription)
+                        .map(s -> "from " + s)
+                        .collect(Collectors.toList())
+        ).replaceFirst("from ", "");
     }
 
     public Filter getFilter() {

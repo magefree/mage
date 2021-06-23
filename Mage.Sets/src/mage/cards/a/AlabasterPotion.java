@@ -23,10 +23,10 @@ public final class AlabasterPotion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
 
         // Choose one - Target player gains X life; or prevent the next X damage that would be dealt to any target this turn.
-        this.getSpellAbility().addEffect(new GainLifeTargetEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new GainLifeTargetEffect(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetPlayer());
         Mode mode = new Mode();
-        mode.addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, ManacostVariableValue.instance));
+        mode.addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, ManacostVariableValue.REGULAR));
         mode.addTarget(new TargetAnyTarget());
         this.getSpellAbility().addMode(mode);
     }

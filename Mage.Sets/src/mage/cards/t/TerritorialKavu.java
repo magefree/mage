@@ -15,10 +15,7 @@ import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;
@@ -40,7 +37,7 @@ public final class TerritorialKavu extends CardImpl {
         // Domain — Territorial Kavu's power and toughness are each equal to the number of basic land types among lands you control.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)
-        ).addHint(DomainHint.instance));
+        ).addHint(DomainHint.instance).setAbilityWord(AbilityWord.DOMAIN));
 
         // Whenever Territorial Kavu attacks, choose one —
         // • Discard a card. If you do, draw a card.

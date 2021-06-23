@@ -34,7 +34,7 @@ public final class RadiantEpicure extends CardImpl {
         // Converge — When Radiant Epicure enters the battlefield, each opponent loses X life and you gain X life, where X is the number of colors of mana spent to cast this spell.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new RadiantEpicureEffect(), false, "<i>Converge</i> &mdash; "
-        ), new ManaSpentToCastWatcher());
+        ));
     }
 
     private RadiantEpicure(final RadiantEpicure card) {
@@ -67,11 +67,11 @@ class RadiantEpicureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class, source.getSourceId());
+        ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
         if (player == null || watcher == null) {
             return false;
         }
-        Mana payment = watcher.getAndResetLastPayment();
+        Mana payment = watcher.getAndResetLastPayment(source.getSourceId());
         if (payment == null) {
             return false;
         }

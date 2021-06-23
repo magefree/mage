@@ -29,7 +29,7 @@ public final class FiligreeAttendant extends CardImpl {
         // Filigree Attendant's power is equal to the number of artifacts you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(
                 ArtifactYouControlCount.instance, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a
-        )));
+        ).setText("{this}'s power is equal to the number of artifacts you control")));
     }
 
     private FiligreeAttendant(final FiligreeAttendant card) {

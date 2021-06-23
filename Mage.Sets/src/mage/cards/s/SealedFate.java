@@ -22,7 +22,7 @@ public final class SealedFate extends CardImpl {
 
         // Look at the top X cards of target opponent's library. Exile one of those cards and put the rest back on top of that player's library in any order.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(ManacostVariableValue.instance,
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(ManacostVariableValue.REGULAR,
                 false, StaticValue.get(1),
                 new FilterCard("a card to exile"), Zone.LIBRARY, true,
                 false, false, Zone.EXILED,

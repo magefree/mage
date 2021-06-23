@@ -55,7 +55,7 @@ public final class JiangYanggu extends CardImpl {
                 new CreateTokenEffect(new MowuToken()),
                 new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter)),
                 "If you don't control a creature named Mowu, "
-                + "creature a legendary 3/3 green Hound creature token named Mowu."
+                + "creature a legendary 3/3 green Dog creature token named Mowu."
         ), -1));
 
         // -5: Until end of turn, target creature gains trample and gets +X/+X, where X is the number of lands you control.

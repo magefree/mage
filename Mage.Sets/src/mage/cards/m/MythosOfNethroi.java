@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetNonlandPermanent;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -28,7 +27,6 @@ public final class MythosOfNethroi extends CardImpl {
         // Destroy target nonland permanent if it's a creature or if {G}{W} was spent to cast this spell.
         this.getSpellAbility().addEffect(new MythosOfNethroiEffect());
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private MythosOfNethroi(final MythosOfNethroi card) {
