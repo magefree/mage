@@ -29,9 +29,9 @@ import java.util.*;
  */
 public class Dungeon implements CommandObject {
 
-    private static ArrayList<CardType> emptySet = new ArrayList<>(Arrays.asList(CardType.DUNGEON));
-    private static ObjectColor emptyColor = new ObjectColor();
-    private static ManaCosts emptyCost = new ManaCostsImpl();
+    private static final ArrayList<CardType> emptySet = new ArrayList<>(Arrays.asList(CardType.DUNGEON));
+    private static final ObjectColor emptyColor = new ObjectColor();
+    private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
 
     private final String name;
     private UUID id;
@@ -42,7 +42,7 @@ public class Dungeon implements CommandObject {
     private FrameStyle frameStyle;
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
     private String expansionSetCodeForImage = "";
-    private List<DungeonRoom> dungeonRooms = new ArrayList<>();
+    private final List<DungeonRoom> dungeonRooms = new ArrayList<>();
 
     public Dungeon(String name) {
         this.id = UUID.randomUUID();
@@ -63,6 +63,7 @@ public class Dungeon implements CommandObject {
 
     public void addRoom(DungeonRoom room) {
         this.dungeonRooms.add(room);
+        this.abilites.add(room.getRoomTriggeredAbility());
     }
 
     @Override

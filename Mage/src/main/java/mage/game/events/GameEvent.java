@@ -448,6 +448,12 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         VOTE, VOTED,
+        /* dungeons
+         targetId    id of the room
+         sourceId    sourceId of the dungeon
+         playerId    player in the dungeon
+         */
+        ROOM_ENTERED,
         //custom events
         CUSTOM_EVENT
     }
