@@ -4,6 +4,8 @@ import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.abilities.*;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -843,7 +845,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean hasSubTypeForDeckbuilding(SubType subType) {
-        if (this.hasSubtype(subType, null)) {
+        if (this.hasSubtype(subType, null)
+                || this.getAbilities()
+                .stream()
+                .filter(SimpleStaticAbility.class::isInstance)
+                .map(Ability::getAllEffects)
+                .flatMap(Collection::stream)
+                .filter(HasSubtypesSourceEffect.class::isInstance)
+                .map(HasSubtypesSourceEffect.class::cast)
+                .anyMatch(effect -> effect.checkSubtype(subType))) {
             return true;
         }
         return subType.getSubTypeSet() == SubTypeSet.CreatureType

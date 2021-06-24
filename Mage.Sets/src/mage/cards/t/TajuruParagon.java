@@ -37,19 +37,20 @@ public final class TajuruParagon extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Tajuru Paragon is also a Cleric, Rogue, Warrior, and Wizard.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new HasSubtypesSourceEffect(SubType.CLERIC, SubType.ROGUE, SubType.WARRIOR, SubType.WIZARD)
-        ));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new HasSubtypesSourceEffect(
+                SubType.CLERIC, SubType.ROGUE, SubType.WARRIOR, SubType.WIZARD
+        )));
 
         // Kicker {3}
         this.addAbility(new KickerAbility("{3}"));
 
         // When Tajuru Paragon enters the battlefield, if it was kicked, reveal the top six cards of your library. You may put a card that shares a creature type with it from among them into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new TajuruParagonEffect()), KickedCondition.instance,
-                "When {this} enters the battlefield, if it was kicked, reveal the top six cards of your library. " +
-                        "You may put a card that shares a creature type with it " +
-                        "from among them into your hand. Put the rest on the bottom of your library in a random order."
+                new EntersBattlefieldTriggeredAbility(new TajuruParagonEffect()),
+                KickedCondition.instance, "When {this} enters the battlefield, " +
+                "if it was kicked, reveal the top six cards of your library. " +
+                "You may put a card that shares a creature type with it from among them into your hand. " +
+                "Put the rest on the bottom of your library in a random order."
         ));
     }
 
