@@ -4257,11 +4257,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void ventureIntoDungeon(Ability source, Game game) {
-        // TODO: implement this
-    }
-
-    @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         assertAliasSupportInChoices(false);
 

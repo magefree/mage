@@ -397,6 +397,8 @@ public interface Game extends MageItem, Serializable {
 
     void addDungeon(Dungeon dungeon, Ability source);
 
+    void ventureIntoDungeon(Ability source);
+
     /**
      * Adds a permanent to the battlefield
      *

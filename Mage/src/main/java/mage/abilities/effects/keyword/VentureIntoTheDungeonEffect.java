@@ -31,7 +31,7 @@ public class VentureIntoTheDungeonEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.ventureIntoDungeon(source, game);
+        game.ventureIntoDungeon(source);
         return true;
     }
 }

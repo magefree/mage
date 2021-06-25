@@ -1044,6 +1044,4 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     FilterMana getPhyrexianColors();
-
-    void ventureIntoDungeon(Ability source, Game game);
 }

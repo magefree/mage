@@ -39,6 +39,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.combat.Combat;
 import mage.game.command.*;
+import mage.game.command.dungeons.TombOfAnnihilation;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.mulligan.Mulligan;
@@ -448,6 +449,17 @@ public abstract class GameImpl implements Game, Serializable {
                 .map(Dungeon.class::cast)
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public void ventureIntoDungeon(Ability source) {
+        Dungeon dungeon = this.getPlayerDungeon(source.getControllerId());
+        if (dungeon == null) {
+            // TODO: add selector once other dungeons are implemented
+            dungeon = new TombOfAnnihilation();
+            this.addDungeon(dungeon, source);
+        }
+        dungeon.moveToNextRoom(source, this);
     }
 
     @Override
