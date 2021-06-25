@@ -43,6 +43,8 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.*;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
+import mage.game.command.Dungeon;
+import mage.game.command.dungeons.TombOfAnnihilation;
 import mage.game.events.*;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
@@ -4727,4 +4729,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         return getName() + " (" + super.getClass().getSimpleName() + ")";
     }
 
+    @Override
+    public void ventureIntoDungeon(Ability source, Game game) {
+        Dungeon dungeon = game.getPlayerDungeon(playerId);
+        if (dungeon == null) {
+            // TODO: add selector once other dungeons are implemented
+            dungeon = new TombOfAnnihilation();
+            game.addDungeon(dungeon, source);
+        }
+        dungeon.moveToNextRoom(source, game);
+    }
 }

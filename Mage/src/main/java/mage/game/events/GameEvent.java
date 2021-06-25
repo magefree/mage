@@ -450,7 +450,7 @@ public class GameEvent implements Serializable {
         VOTE, VOTED,
         /* dungeons
          targetId    id of the room
-         sourceId    sourceId of the dungeon
+         sourceId    sourceId of the ability causing player to venture
          playerId    player in the dungeon
          */
         ROOM_ENTERED,

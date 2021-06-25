@@ -1,10 +1,13 @@
 package mage.game.command;
 
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.ArrayList;
@@ -17,11 +20,13 @@ import java.util.UUID;
 public class DungeonRoom {
 
     private final UUID id;
+    private final String name;
     private final List<DungeonRoom> nextRooms = new ArrayList<>();
     private final RoomTriggeredAbility roomTriggeredAbility;
 
     public DungeonRoom(String name, Effect... effects) {
         this.id = UUID.randomUUID();
+        this.name = name;
         roomTriggeredAbility = new RoomTriggeredAbility(this, effects);
     }
 
@@ -40,6 +45,32 @@ public class DungeonRoom {
     @Override
     public String toString() {
         return roomTriggeredAbility.getText();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public DungeonRoom chooseNextRoom(Ability source, Game game) {
+        switch (nextRooms.size()) {
+            case 0:
+                return null;
+            case 1:
+                return nextRooms.get(0);
+            case 2:
+                DungeonRoom room1 = nextRooms.get(0);
+                DungeonRoom room2 = nextRooms.get(1);
+                Player player = game.getPlayer(source.getControllerId());
+                if (player == null) {
+                    return null;
+                }
+                return player.chooseUse(
+                        Outcome.Neutral, "Choose which room to go to",
+                        null, room1.name, room2.name, source, game
+                ) ? room1 : room2;
+            default:
+                throw new UnsupportedOperationException("there shouldn't be more than two rooms to go to");
+        }
     }
 }
 

@@ -38,10 +38,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.combat.Combat;
-import mage.game.command.CommandObject;
-import mage.game.command.Commander;
-import mage.game.command.Emblem;
-import mage.game.command.Plane;
+import mage.game.command.*;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.mulligan.Mulligan;
@@ -429,6 +426,28 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
         return null;
+    }
+
+    public Dungeon getDungeon(UUID objectId) {
+        return state
+                .getCommand()
+                .stream()
+                .filter(commandObject -> commandObject.getId().equals(objectId))
+                .filter(Dungeon.class::isInstance)
+                .map(Dungeon.class::cast)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Dungeon getPlayerDungeon(UUID playerId) {
+        return state
+                .getCommand()
+                .stream()
+                .filter(commandObject -> commandObject.isControlledBy(playerId))
+                .filter(Dungeon.class::isInstance)
+                .map(Dungeon.class::cast)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -1656,6 +1675,13 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void addCommander(Commander commander) {
         state.addCommandObject(commander);
+    }
+
+    @Override
+    public void addDungeon(Dungeon dungeon, Ability source) {
+        dungeon.setSourceObject(source.getSourceObject(this));
+        dungeon.setControllerId(source.getControllerId());
+        state.addCommandObject(dungeon);
     }
 
     @Override

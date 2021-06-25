@@ -18,6 +18,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypes;
@@ -43,6 +44,7 @@ public class Dungeon implements CommandObject {
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
     private String expansionSetCodeForImage = "";
     private final List<DungeonRoom> dungeonRooms = new ArrayList<>();
+    private DungeonRoom currentRoom = null;
 
     public Dungeon(String name) {
         this.id = UUID.randomUUID();
@@ -64,6 +66,17 @@ public class Dungeon implements CommandObject {
     public void addRoom(DungeonRoom room) {
         this.dungeonRooms.add(room);
         this.abilites.add(room.getRoomTriggeredAbility());
+    }
+
+    public void moveToNextRoom(Ability source, Game game) {
+        if (currentRoom == null) {
+            currentRoom = dungeonRooms.get(0);
+        } else {
+            currentRoom = currentRoom.chooseNextRoom(source, game);
+        }
+        game.fireEvent(GameEvent.getEvent(
+                GameEvent.EventType.ROOM_ENTERED, currentRoom.getId(), source, source.getControllerId()
+        ));
     }
 
     @Override
