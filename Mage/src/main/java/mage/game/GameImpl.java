@@ -1691,7 +1691,6 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void addDungeon(Dungeon dungeon, Ability source) {
-        dungeon.setSourceObject(source.getSourceObject(this));
         dungeon.setControllerId(source.getControllerId());
         state.addCommandObject(dungeon);
     }

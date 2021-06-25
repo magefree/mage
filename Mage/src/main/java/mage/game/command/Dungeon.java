@@ -12,7 +12,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.text.TextPart;
-import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -37,7 +36,6 @@ public class Dungeon implements CommandObject {
     private final String name;
     private UUID id;
     private UUID controllerId;
-    private MageObject sourceObject;
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private FrameStyle frameStyle;
@@ -56,7 +54,6 @@ public class Dungeon implements CommandObject {
         this.name = dungeon.name;
         this.frameStyle = dungeon.frameStyle;
         this.controllerId = dungeon.controllerId;
-        this.sourceObject = dungeon.sourceObject;
         this.copy = dungeon.copy;
         this.copyFrom = (dungeon.copyFrom != null ? dungeon.copyFrom : null);
         this.abilites = dungeon.abilites.copy();
@@ -89,25 +86,13 @@ public class Dungeon implements CommandObject {
         this.id = UUID.randomUUID();
     }
 
-    public void setSourceObject(MageObject sourceObject) {
-        this.sourceObject = sourceObject;
-        if (sourceObject instanceof Card) {
-            if (expansionSetCodeForImage.isEmpty()) {
-                expansionSetCodeForImage = ((Card) sourceObject).getExpansionSetCode();
-            }
-        }
-    }
-
     @Override
     public MageObject getSourceObject() {
-        return sourceObject;
+        return null;
     }
 
     @Override
     public UUID getSourceId() {
-        if (sourceObject != null) {
-            return sourceObject.getId();
-        }
         return null;
     }
 
