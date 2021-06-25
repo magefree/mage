@@ -1962,6 +1962,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
 
         // If a Dungeon is on its last room and is not the source of any triggered abilities, it is removed
+        Set<Dungeon> dungeonsToRemove = new HashSet<>();
         for (CommandObject commandObject : state.getCommand()) {
             if (!(commandObject instanceof Dungeon)) {
                 continue;
@@ -1980,9 +1981,12 @@ public abstract class GameImpl implements Game, Serializable {
                     .map(Ability::getSourceId)
                     .noneMatch(dungeon.getId()::equals);
             if (removeDungeon) {
-                this.removeDungeon(dungeon);
-                somethingHappened = true;
+                dungeonsToRemove.add(dungeon);
             }
+        }
+        for (Dungeon dungeon : dungeonsToRemove) {
+            this.removeDungeon(dungeon);
+            somethingHappened = true;
         }
 
         // If a commander is in a graveyard or in exile and that card was put into that zone
