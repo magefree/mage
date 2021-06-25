@@ -457,6 +457,10 @@ public abstract class GameImpl implements Game, Serializable {
         if (dungeon == null) {
             return;
         }
+        Player player = getPlayer(dungeon.getControllerId());
+        if (player != null) {
+            informPlayers(player.getLogName() + " has completed " + dungeon.getLogName());
+        }
         state.getCommand().remove(dungeon);
         fireEvent(GameEvent.getEvent(
                 GameEvent.EventType.DUNGEON_COMPLETED, dungeon.getId(), null,

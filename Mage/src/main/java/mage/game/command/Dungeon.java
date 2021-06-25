@@ -19,6 +19,7 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.SubTypes;
 
@@ -70,6 +71,10 @@ public class Dungeon implements CommandObject {
             currentRoom = dungeonRooms.get(0);
         } else {
             currentRoom = currentRoom.chooseNextRoom(source, game);
+        }
+        Player player = game.getPlayer(getControllerId());
+        if (player != null) {
+            game.informPlayers(player.getLogName() + " has entered " + currentRoom.getName());
         }
         game.fireEvent(GameEvent.getEvent(
                 GameEvent.EventType.ROOM_ENTERED, currentRoom.getId(), source, source.getControllerId()
