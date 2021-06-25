@@ -40,7 +40,7 @@ public class Dungeon implements CommandObject {
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private FrameStyle frameStyle;
-    private Abilities<Ability> abilites = new AbilitiesImpl<>();
+    private final Abilities<Ability> abilites = new AbilitiesImpl<>();
     private String expansionSetCodeForImage = "";
     private final List<DungeonRoom> dungeonRooms = new ArrayList<>();
     private DungeonRoom currentRoom = null;
@@ -57,8 +57,20 @@ public class Dungeon implements CommandObject {
         this.controllerId = dungeon.controllerId;
         this.copy = dungeon.copy;
         this.copyFrom = (dungeon.copyFrom != null ? dungeon.copyFrom : null);
-        this.abilites = dungeon.abilites.copy();
         this.expansionSetCodeForImage = dungeon.expansionSetCodeForImage;
+        this.copyRooms(dungeon);
+    }
+
+    private void copyRooms(Dungeon dungeon) {
+        Map<String, DungeonRoom> copyMap = new HashMap<>();
+        for (DungeonRoom dungeonRoom : dungeon.dungeonRooms) {
+            DungeonRoom copiedRoom = copyMap.computeIfAbsent(dungeonRoom.getName(), (s) -> dungeonRoom.copy());
+            for (DungeonRoom nextRoom : dungeonRoom.getNextRooms()) {
+                copiedRoom.addNextRoom(copyMap.computeIfAbsent(nextRoom.getName(), (s) -> nextRoom.copy()));
+            }
+            this.addRoom(copiedRoom);
+        }
+        this.currentRoom = copyMap.computeIfAbsent(dungeon.currentRoom.getName(), (s) -> dungeon.currentRoom.copy());
     }
 
     public void addRoom(DungeonRoom room) {

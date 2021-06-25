@@ -33,6 +33,16 @@ public class DungeonRoom {
         roomTriggeredAbility = new RoomTriggeredAbility(this, effects);
     }
 
+    private DungeonRoom(final DungeonRoom room) {
+        this.id = room.id;
+        this.name = room.name;
+        this.roomTriggeredAbility = new RoomTriggeredAbility(this, room.roomTriggeredAbility);
+    }
+
+    public DungeonRoom copy() {
+        return new DungeonRoom(this);
+    }
+
     public void addNextRoom(DungeonRoom room) {
         nextRooms.add(room);
     }
@@ -56,6 +66,10 @@ public class DungeonRoom {
 
     public boolean hasNextRoom() {
         return !nextRooms.isEmpty();
+    }
+
+    List<DungeonRoom> getNextRooms() {
+        return nextRooms;
     }
 
     public DungeonRoom chooseNextRoom(Ability source, Game game) {
@@ -103,9 +117,9 @@ class RoomTriggeredAbility extends TriggeredAbilityImpl {
         this.setRuleVisible(false);
     }
 
-    private RoomTriggeredAbility(final RoomTriggeredAbility ability) {
+    RoomTriggeredAbility(DungeonRoom room, final RoomTriggeredAbility ability) {
         super(ability);
-        this.room = ability.room;
+        this.room = room;
     }
 
     @Override
@@ -120,7 +134,7 @@ class RoomTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public RoomTriggeredAbility copy() {
-        return new RoomTriggeredAbility(this);
+        return new RoomTriggeredAbility(this.room, this);
     }
 
     public String getText() {
