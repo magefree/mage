@@ -429,6 +429,7 @@ public abstract class GameImpl implements Game, Serializable {
         return null;
     }
 
+    @Override
     public Dungeon getDungeon(UUID objectId) {
         return state
                 .getCommand()
@@ -440,6 +441,7 @@ public abstract class GameImpl implements Game, Serializable {
                 .orElse(null);
     }
 
+    @Override
     public Dungeon getPlayerDungeon(UUID playerId) {
         return state
                 .getCommand()
@@ -451,15 +453,34 @@ public abstract class GameImpl implements Game, Serializable {
                 .orElse(null);
     }
 
+    private void removeDungeon(Dungeon dungeon) {
+        if (dungeon == null) {
+            return;
+        }
+        state.getCommand().remove(dungeon);
+        fireEvent(GameEvent.getEvent(
+                GameEvent.EventType.DUNGEON_COMPLETED, dungeon.getId(), null,
+                dungeon.getControllerId(), dungeon.getName(), 0
+        ));
+    }
+
+    private Dungeon getOrCreateDungeon(Ability source) {
+        Dungeon dungeon = this.getPlayerDungeon(source.getControllerId());
+        if (dungeon != null && dungeon.hasNextRoom()) {
+            return dungeon;
+        }
+        removeDungeon(dungeon);
+        return this.addDungeon(selectDungeon(source), source);
+    }
+
+    private Dungeon selectDungeon(Ability source) {
+        // TODO: add selector once other dungeons are implemented
+        return new TombOfAnnihilation();
+    }
+
     @Override
     public void ventureIntoDungeon(Ability source) {
-        Dungeon dungeon = this.getPlayerDungeon(source.getControllerId());
-        if (dungeon == null) {
-            // TODO: add selector once other dungeons are implemented
-            dungeon = new TombOfAnnihilation();
-            this.addDungeon(dungeon, source);
-        }
-        dungeon.moveToNextRoom(source, this);
+        this.getOrCreateDungeon(source).moveToNextRoom(source, this);
     }
 
     @Override
@@ -1690,9 +1711,10 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void addDungeon(Dungeon dungeon, Ability source) {
+    public Dungeon addDungeon(Dungeon dungeon, Ability source) {
         dungeon.setControllerId(source.getControllerId());
         state.addCommandObject(dungeon);
+        return dungeon;
     }
 
     @Override
@@ -1936,6 +1958,30 @@ public abstract class GameImpl implements Game, Serializable {
                     || player.getLibrary().isEmptyDraw()
                     || player.getCounters().getCount(CounterType.POISON) >= 10)) {
                 player.lost(this);
+            }
+        }
+
+        // If a Dungeon is on its last room and is not the source of any triggered abilities, it is removed
+        for (CommandObject commandObject : state.getCommand()) {
+            if (!(commandObject instanceof Dungeon)) {
+                continue;
+            }
+            Dungeon dungeon = (Dungeon) commandObject;
+            boolean removeDungeon = !dungeon.hasNextRoom()
+                    && this.getStack()
+                    .stream()
+                    .filter(DungeonRoom::isRoomTrigger)
+                    .map(StackObject::getSourceId)
+                    .noneMatch(dungeon.getId()::equals)
+                    && this.state
+                    .getTriggered(dungeon.getControllerId())
+                    .stream()
+                    .filter(DungeonRoom::isRoomTrigger)
+                    .map(Ability::getSourceId)
+                    .noneMatch(dungeon.getId()::equals);
+            if (removeDungeon) {
+                this.removeDungeon(dungeon);
+                somethingHappened = true;
             }
         }
 

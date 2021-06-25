@@ -1,12 +1,15 @@
 package mage.game.command;
 
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -51,6 +54,10 @@ public class DungeonRoom {
         return name;
     }
 
+    public boolean hasNextRoom() {
+        return !nextRooms.isEmpty();
+    }
+
     public DungeonRoom chooseNextRoom(Ability source, Game game) {
         switch (nextRooms.size()) {
             case 0:
@@ -71,6 +78,15 @@ public class DungeonRoom {
             default:
                 throw new UnsupportedOperationException("there shouldn't be more than two rooms to go to");
         }
+    }
+
+    public static boolean isRoomTrigger(StackObject stackObject) {
+        return stackObject instanceof StackAbility
+                && stackObject.getStackAbility() instanceof RoomTriggeredAbility;
+    }
+
+    public static boolean isRoomTrigger(TriggeredAbility ability) {
+        return ability instanceof RoomTriggeredAbility;
     }
 }
 

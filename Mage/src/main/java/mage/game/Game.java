@@ -395,7 +395,7 @@ public interface Game extends MageItem, Serializable {
 
     void addCommander(Commander commander);
 
-    void addDungeon(Dungeon dungeon, Ability source);
+    Dungeon addDungeon(Dungeon dungeon, Ability source);
 
     void ventureIntoDungeon(Ability source);
 

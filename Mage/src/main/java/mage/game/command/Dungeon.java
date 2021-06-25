@@ -76,6 +76,14 @@ public class Dungeon implements CommandObject {
         ));
     }
 
+    public DungeonRoom getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public boolean hasNextRoom() {
+        return currentRoom != null && currentRoom.hasNextRoom();
+    }
+
     @Override
     public FrameStyle getFrameStyle() {
         return frameStyle;
