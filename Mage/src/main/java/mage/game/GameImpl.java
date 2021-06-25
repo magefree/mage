@@ -353,7 +353,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (item.getId().equals(objectId)) {
                 return item;
             }
-            if (item.getSourceId().equals(objectId) && item instanceof Spell) {
+            if (item instanceof Spell && item.getSourceId().equals(objectId)) {
                 return item;
             }
         }
