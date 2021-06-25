@@ -1425,6 +1425,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void ventureIntoDungeon(Ability source, Game game) {
+
+    }
+
+    @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         return card.getSpellAbility();
     }
