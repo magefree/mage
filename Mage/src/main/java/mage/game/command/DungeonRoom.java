@@ -94,6 +94,18 @@ public class DungeonRoom {
         }
     }
 
+    String generateDestinationText() {
+        if (nextRooms.isEmpty()) {
+            return "";
+        }
+        return " <i>(Leads to "
+                + nextRooms
+                .stream()
+                .map(DungeonRoom::getName)
+                .reduce((a, b) -> a + " and " + b)
+                + ")</i>";
+    }
+
     public static boolean isRoomTrigger(StackObject stackObject) {
         return stackObject instanceof StackAbility
                 && stackObject.getStackAbility() instanceof RoomTriggeredAbility;
@@ -138,7 +150,9 @@ class RoomTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public String getText() {
-        return CardUtil.getTextWithFirstCharUpperCase(super.getRule());
+        return room.getName() + ": "
+                + CardUtil.getTextWithFirstCharUpperCase(super.getRule())
+                + room.generateDestinationText();
     }
 
     @Override
