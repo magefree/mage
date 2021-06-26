@@ -108,6 +108,7 @@ public class DungeonRoom {
                 .stream()
                 .map(DungeonRoom::getName)
                 .reduce((a, b) -> a + " and " + b)
+                .orElse("")
                 + ")</i>";
     }
 
