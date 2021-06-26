@@ -11,6 +11,7 @@ import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.target.Target;
 import mage.util.CardUtil;
 
 import java.util.ArrayList;
@@ -41,6 +42,10 @@ public class DungeonRoom {
 
     public DungeonRoom copy() {
         return new DungeonRoom(this);
+    }
+
+    public void addTarget(Target target) {
+        roomTriggeredAbility.addTarget(target);
     }
 
     public void addNextRoom(DungeonRoom room) {
