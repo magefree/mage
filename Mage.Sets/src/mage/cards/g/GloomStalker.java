@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.watchers.common.CompletedDungeonWatcher;
 
 import java.util.UUID;
 
@@ -33,7 +34,7 @@ public final class GloomStalker extends CardImpl {
                         DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield
                 ), CompletedDungeonCondition.instance,
                 "as long as you've completed a dungeon, {this} has double strike"
-        )).addHint(CompletedDungeonCondition.getHint()));
+        )).addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
     }
 
     private GloomStalker(final GloomStalker card) {

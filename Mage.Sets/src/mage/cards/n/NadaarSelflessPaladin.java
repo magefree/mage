@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.watchers.common.CompletedDungeonWatcher;
 
 import java.util.UUID;
 
@@ -43,7 +44,7 @@ public final class NadaarSelflessPaladin extends CardImpl {
                         1, 1, Duration.WhileOnBattlefield, true
                 ), CompletedDungeonCondition.instance,
                 "other creatures you control get +1/+1 as long as you've completed a dungeon"
-        )).addHint(CompletedDungeonCondition.getHint()));
+        )).addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
     }
 
     private NadaarSelflessPaladin(final NadaarSelflessPaladin card) {
