@@ -36,4 +36,9 @@ public class CompletedDungeonWatcher extends Watcher {
         CompletedDungeonWatcher watcher = game.getState().getWatcher(CompletedDungeonWatcher.class);
         return watcher != null && !watcher.playerMap.getOrDefault(playerId, emptySet).isEmpty();
     }
+
+    public static Set<String> getCompletedNames(UUID playerId, Game game) {
+        CompletedDungeonWatcher watcher = game.getState().getWatcher(CompletedDungeonWatcher.class);
+        return watcher != null ? watcher.playerMap.getOrDefault(playerId, emptySet) : emptySet;
+    }
 }
