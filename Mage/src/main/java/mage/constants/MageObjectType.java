@@ -53,6 +53,7 @@ public enum MageObjectType {
     TOKEN("Token", true, true),
     SPELL("Spell", false, true),
     PERMANENT("Permanent", true, true),
+    DUNGEON("Dungeon", false, false),
     EMBLEM("Emblem", false, false),
     COMMANDER("Commander", false, false),
     DESIGNATION("Designation", false, false),

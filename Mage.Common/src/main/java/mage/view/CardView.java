@@ -631,6 +631,21 @@ public class CardView extends SimpleCardView {
         this.rarity = Rarity.COMMON;
     }
 
+    public CardView(DungeonView dungeon) {
+        this(true);
+        this.gameObject = true;
+        this.id = dungeon.getId();
+        this.mageObjectType = MageObjectType.DUNGEON;
+        this.name = dungeon.getName();
+        this.displayName = name;
+        this.displayFullName = name;
+        this.rules = dungeon.getRules();
+        // emblem images are always with common (black) symbol
+        this.frameStyle = FrameStyle.M15_NORMAL;
+        this.expansionSetCode = dungeon.getExpansionSetCode();
+        this.rarity = Rarity.COMMON;
+    }
+
     public CardView(PlaneView plane) {
         this(true);
         this.gameObject = true;

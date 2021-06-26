@@ -24,6 +24,7 @@ import mage.util.GameLog;
 import mage.util.SubTypes;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -41,13 +42,14 @@ public class Dungeon implements CommandObject {
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private FrameStyle frameStyle;
     private final Abilities<Ability> abilites = new AbilitiesImpl<>();
-    private String expansionSetCodeForImage = "";
+    private final String expansionSetCodeForImage;
     private final List<DungeonRoom> dungeonRooms = new ArrayList<>();
     private DungeonRoom currentRoom = null;
 
-    public Dungeon(String name) {
+    public Dungeon(String name, String expansionSetCodeForImage) {
         this.id = UUID.randomUUID();
         this.name = name;
+        this.expansionSetCodeForImage = expansionSetCodeForImage;
     }
 
     public Dungeon(final Dungeon dungeon) {
@@ -99,6 +101,10 @@ public class Dungeon implements CommandObject {
 
     public boolean hasNextRoom() {
         return currentRoom != null && currentRoom.hasNextRoom();
+    }
+
+    public List<String> getRules() {
+        return dungeonRooms.stream().map(DungeonRoom::toString).collect(Collectors.toList());
     }
 
     @Override
@@ -266,10 +272,6 @@ public class Dungeon implements CommandObject {
     @Override
     public Dungeon copy() {
         return new Dungeon(this);
-    }
-
-    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
-        this.expansionSetCodeForImage = expansionSetCodeForImage;
     }
 
     public String getExpansionSetCodeForImage() {

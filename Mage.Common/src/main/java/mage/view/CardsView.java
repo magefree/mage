@@ -6,6 +6,7 @@ import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
@@ -110,6 +111,9 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                         abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new EmblemView((Emblem) sourceObject)));
                         abilityView.setName(sourceObject.getName());
                         // abilityView.setExpansionSetCode(sourceCard.getExpansionSetCode());
+                    } else if (sourceObject instanceof Dungeon) {
+                        abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new DungeonView((Dungeon) sourceObject)));
+                        abilityView.setName(sourceObject.getName());
                     } else if (sourceObject instanceof Plane) {
                         abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new PlaneView((Plane) sourceObject)));
                         abilityView.setName(sourceObject.getName());
