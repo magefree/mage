@@ -20,6 +20,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
+import mage.game.command.dungeons.DungeonOfTheMadMage;
 import mage.game.command.dungeons.LostMineOfPhandelver;
 import mage.game.command.dungeons.TombOfAnnihilation;
 import mage.game.events.GameEvent;
@@ -41,7 +42,7 @@ public class Dungeon implements CommandObject {
     static {
         dungeonNames.add("Tomb of Annihilation");
         dungeonNames.add("Lost Mine of Phandelver");
-//        dungeonNames.add("Dungeon of the Mad Mage"); uncomment when implemented
+        dungeonNames.add("Dungeon of the Mad Mage");
     }
 
     private static final ArrayList<CardType> emptySet = new ArrayList<>(Arrays.asList(CardType.DUNGEON));
@@ -131,8 +132,8 @@ public class Dungeon implements CommandObject {
                 return new TombOfAnnihilation();
             case "Lost Mine of Phandelver":
                 return new LostMineOfPhandelver();
-//            case"Dungeon of the Mad Mage":
-//                return new DungeonOfTheMadMage();
+            case "Dungeon of the Mad Mage":
+                return new DungeonOfTheMadMage();
             default:
                 throw new UnsupportedOperationException("A dungeon should have been chosen");
         }

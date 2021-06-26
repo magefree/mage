@@ -12,7 +12,7 @@ import mage.constants.Zone;
 public final class SkeletonToken extends TokenImpl {
 
     public SkeletonToken() {
-        super("Skeleton", "1/1 black Skeleton creature with \"{B}: Regenerate this creature\"");
+        super("Skeleton", "1/1 black Skeleton creature token with \"{B}: Regenerate this creature\"");
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.SKELETON);
         color.setBlack(true);
