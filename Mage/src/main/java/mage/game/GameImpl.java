@@ -39,7 +39,6 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.combat.Combat;
 import mage.game.command.*;
-import mage.game.command.dungeons.TombOfAnnihilation;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.mulligan.Mulligan;
@@ -474,12 +473,7 @@ public abstract class GameImpl implements Game, Serializable {
             return dungeon;
         }
         removeDungeon(dungeon);
-        return this.addDungeon(selectDungeon(source), source);
-    }
-
-    private Dungeon selectDungeon(Ability source) {
-        // TODO: add selector once other dungeons are implemented
-        return new TombOfAnnihilation();
+        return this.addDungeon(Dungeon.selectDungeon(source, this), source);
     }
 
     @Override

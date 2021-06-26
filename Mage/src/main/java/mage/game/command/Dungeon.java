@@ -13,10 +13,15 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.text.TextPart;
 import mage.cards.FrameStyle;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
+import mage.game.command.dungeons.LostMineOfPhandelver;
+import mage.game.command.dungeons.TombOfAnnihilation;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
@@ -30,6 +35,14 @@ import java.util.stream.Collectors;
  * @author TheElk801
  */
 public class Dungeon implements CommandObject {
+
+    private static final Set<String> dungeonNames = new HashSet<>();
+
+    static {
+        dungeonNames.add("Tomb of Annihilation");
+        dungeonNames.add("Lost Mine of Phandelver");
+//        dungeonNames.add("Dungeon of the Mad Mage"); uncomment when implemented
+    }
 
     private static final ArrayList<CardType> emptySet = new ArrayList<>(Arrays.asList(CardType.DUNGEON));
     private static final ObjectColor emptyColor = new ObjectColor();
@@ -105,6 +118,24 @@ public class Dungeon implements CommandObject {
 
     public List<String> getRules() {
         return dungeonRooms.stream().map(DungeonRoom::toString).collect(Collectors.toList());
+    }
+
+    public static Dungeon selectDungeon(Ability source, Game game) {
+        Player player = game.getPlayer(source.getControllerId());
+        Choice choice = new ChoiceImpl(true);
+        choice.setMessage("Choose a dungeon to venture into");
+        choice.setChoices(dungeonNames);
+        player.choose(Outcome.Neutral, choice, game);
+        switch (choice.getChoice()) {
+            case "Tomb of Annihilation":
+                return new TombOfAnnihilation();
+            case "Lost Mine of Phandelver":
+                return new LostMineOfPhandelver();
+//            case"Dungeon of the Mad Mage":
+//                return new DungeonOfTheMadMage();
+            default:
+                throw new UnsupportedOperationException("A dungeon should have been chosen");
+        }
     }
 
     @Override
