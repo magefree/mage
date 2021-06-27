@@ -56,11 +56,10 @@ public final class ShadrixSilverquill extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // At the beginning of combat on your turn, you may choose two. Each mode must target a different player.
-        Ability ability = new BeginningOfCombatTriggeredAbility(null, TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(null, TargetController.YOU, true);
         ability.getModes().setMinModes(2);
         ability.getModes().setMaxModes(2);
         ability.getModes().setMaxModesFilter(filter0);
-        ability.getModes().setMayChooseNone(true);
 
         // • Target player creates a 2/1 white and black Inkling creature token with flying.
         ability.addEffect(new CreateTokenTargetEffect(new SilverquillToken()));
