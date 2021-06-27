@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
  * @author TheElk801
@@ -27,11 +26,7 @@ public class VentureIntoTheDungeonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        game.ventureIntoDungeon(source);
+        game.ventureIntoDungeon(source.getControllerId());
         return true;
     }
 }

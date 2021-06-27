@@ -1,6 +1,5 @@
 package mage.game.command;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -77,7 +76,7 @@ public class DungeonRoom {
         return nextRooms;
     }
 
-    public DungeonRoom chooseNextRoom(Ability source, Game game) {
+    public DungeonRoom chooseNextRoom(UUID playerId, Game game) {
         switch (nextRooms.size()) {
             case 0:
                 return null;
@@ -86,13 +85,13 @@ public class DungeonRoom {
             case 2:
                 DungeonRoom room1 = nextRooms.get(0);
                 DungeonRoom room2 = nextRooms.get(1);
-                Player player = game.getPlayer(source.getControllerId());
+                Player player = game.getPlayer(playerId);
                 if (player == null) {
                     return null;
                 }
                 return player.chooseUse(
                         Outcome.Neutral, "Choose which room to go to",
-                        null, room1.name, room2.name, source, game
+                        null, room1.name, room2.name, null, game
                 ) ? room1 : room2;
             default:
                 throw new UnsupportedOperationException("there shouldn't be more than two rooms to go to");

@@ -94,18 +94,18 @@ public class Dungeon implements CommandObject {
         this.abilites.add(room.getRoomTriggeredAbility());
     }
 
-    public void moveToNextRoom(Ability source, Game game) {
+    public void moveToNextRoom(UUID playerId, Game game) {
         if (currentRoom == null) {
             currentRoom = dungeonRooms.get(0);
         } else {
-            currentRoom = currentRoom.chooseNextRoom(source, game);
+            currentRoom = currentRoom.chooseNextRoom(playerId, game);
         }
         Player player = game.getPlayer(getControllerId());
         if (player != null) {
             game.informPlayers(player.getLogName() + " has entered " + currentRoom.getName());
         }
         game.fireEvent(GameEvent.getEvent(
-                GameEvent.EventType.ROOM_ENTERED, currentRoom.getId(), source, source.getControllerId()
+                GameEvent.EventType.ROOM_ENTERED, currentRoom.getId(), null, playerId
         ));
     }
 
@@ -121,8 +121,8 @@ public class Dungeon implements CommandObject {
         return dungeonRooms.stream().map(DungeonRoom::toString).collect(Collectors.toList());
     }
 
-    public static Dungeon selectDungeon(Ability source, Game game) {
-        Player player = game.getPlayer(source.getControllerId());
+    public static Dungeon selectDungeon(UUID playerId, Game game) {
+        Player player = game.getPlayer(playerId);
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Choose a dungeon to venture into");
         choice.setChoices(dungeonNames);

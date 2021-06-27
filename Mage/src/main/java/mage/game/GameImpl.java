@@ -467,18 +467,18 @@ public abstract class GameImpl implements Game, Serializable {
         ));
     }
 
-    private Dungeon getOrCreateDungeon(Ability source) {
-        Dungeon dungeon = this.getPlayerDungeon(source.getControllerId());
+    private Dungeon getOrCreateDungeon(UUID playerId) {
+        Dungeon dungeon = this.getPlayerDungeon(playerId);
         if (dungeon != null && dungeon.hasNextRoom()) {
             return dungeon;
         }
         removeDungeon(dungeon);
-        return this.addDungeon(Dungeon.selectDungeon(source, this), source);
+        return this.addDungeon(Dungeon.selectDungeon(playerId, this), playerId);
     }
 
     @Override
-    public void ventureIntoDungeon(Ability source) {
-        this.getOrCreateDungeon(source).moveToNextRoom(source, this);
+    public void ventureIntoDungeon(UUID playerId) {
+        this.getOrCreateDungeon(playerId).moveToNextRoom(playerId, this);
     }
 
     @Override
@@ -1709,8 +1709,8 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public Dungeon addDungeon(Dungeon dungeon, Ability source) {
-        dungeon.setControllerId(source.getControllerId());
+    public Dungeon addDungeon(Dungeon dungeon, UUID playerId) {
+        dungeon.setControllerId(playerId);
         state.addCommandObject(dungeon);
         return dungeon;
     }
