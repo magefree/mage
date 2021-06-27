@@ -1,22 +1,33 @@
 package mage.cards.c;
 
-import mage.ObjectColor;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.ProtectionAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+import mage.ObjectColor;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -25,10 +36,10 @@ import java.util.UUID;
  */
 public final class CrownOfAwe extends CardImpl {
 
-	public CrownOfAwe(UUID ownerId, CardSetInfo setInfo){
+	public CrownOfAwe(UUID ownerId, CardSetInfo setInfo) {
 		super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
-		this.suptype.add(subtype.AURA);
+		this.subtype.add(SubType.AURA);
 
 		// Enchant creature
 		TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -57,7 +68,7 @@ public final class CrownOfAwe extends CardImpl {
 	}
 }
 
-public final class CrownOfAweEffect extends OneShotEffect {
+class CrownOfAweEffect extends OneShotEffect {
 
 	private static class CrownOfAwePredicate implements Predicate<Card> {
 		private final Card card;
@@ -87,9 +98,9 @@ public final class CrownOfAweEffect extends OneShotEffect {
 	}
 
 	@Override
-	public boolean apply(Game game, Ability Source) {
+	public boolean apply(Game game, Ability source) {
 		// Enchanted creature
-		ContinuousEffect effect = new GainAbilityAttachedEffect(ProtectionAbility.from(Objectcolor.BLACK, Objectcolor.RED).getInstance(), AttachmentType.AURA, Duration.EndOfTurn);
+		ContinuousEffect effect = new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.RED), AttachmentType.AURA, Duration.EndOfTurn);
 		game.addEffect(effect, source);
 		
 		// and other creatures that share a creature type with it
