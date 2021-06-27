@@ -239,7 +239,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         RepositoryUtil.bootstrapLocalDb();
         // re-create database on empty (e.g. after new build cleaned db on startup)
         if (RepositoryUtil.CARD_DB_RECREATE_BY_CLIENT_SIDE && RepositoryUtil.isDatabaseEmpty()) {
-            LOGGER.info("DB: creating cards database...");
+            LOGGER.info("DB: creating cards database (it can take few minutes)...");
             CardScanner.scan();
             LOGGER.info("Done.");
         }
