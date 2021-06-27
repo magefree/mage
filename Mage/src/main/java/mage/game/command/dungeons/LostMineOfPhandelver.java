@@ -70,6 +70,7 @@ public class LostMineOfPhandelver extends Dungeon {
         this.addRoom(goblinLair);
         this.addRoom(mineTunnels);
         this.addRoom(storeroom);
+        this.addRoom(darkPool);
         this.addRoom(fungiCavern);
         this.addRoom(templeOfDumathoin);
     }
