@@ -166,4 +166,27 @@ public class DungeonTest extends CardTestPlayerBase {
         assertLife(playerB, 20 - 1);
         assertHandCount(playerA, 1);
     }
+
+    @Test
+    public void test__LostMineOfPhandelver_multipleTurns() {
+        makeTester();
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, LOST_MINE_OF_PHANDELVER);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "Yes"); // Goblin Lair
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "No"); // Dark Pool
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Goblin", 1);
+        assertDungeonRoom(null, null);
+        assertLife(playerA, 20 + 1);
+        assertLife(playerB, 20 - 1);
+        assertHandCount(playerA, 1);
+    }
 }
