@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import java.util.stream.Stream;
+
 /**
  * @author TheElk801
  */
@@ -32,19 +34,30 @@ public class DungeonTest extends CardTestPlayerBase {
         );
     }
 
-    private Dungeon getCurrentDungeon() {
+    private Stream<Dungeon> makeStream(TestPlayer player) {
         return currentGame
                 .getState()
                 .getCommand()
                 .stream()
                 .filter(Dungeon.class::isInstance)
                 .map(Dungeon.class::cast)
-                .findFirst()
-                .orElse(null);
+                .filter(dungeon -> dungeon.isControlledBy(player.getId()));
+    }
+
+    private Dungeon getCurrentDungeon(TestPlayer player) {
+        Assert.assertTrue(
+                "Players should not control more than one dungeon",
+                makeStream(player).count() < 2
+        );
+        return makeStream(player).findFirst().orElse(null);
     }
 
     private void assertDungeonRoom(String dungeonName, String roomName) {
-        Dungeon dungeon = getCurrentDungeon();
+        assertDungeonRoom(playerA, dungeonName, roomName);
+    }
+
+    private void assertDungeonRoom(TestPlayer player, String dungeonName, String roomName) {
+        Dungeon dungeon = getCurrentDungeon(player);
         if (dungeonName == null) {
             Assert.assertNull("There should be no dungeon", dungeon);
             return;
@@ -58,7 +71,7 @@ public class DungeonTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test__LostMineOfPhandelver_Room1() {
+    public void test__LostMineOfPhandelver_room1() {
         makeTester();
         addCard(Zone.BATTLEFIELD, playerA, FLAMESPEAKER_ADEPT);
 
@@ -78,7 +91,7 @@ public class DungeonTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test__LostMineOfPhandelver_Room2() {
+    public void test__LostMineOfPhandelver_room2() {
         makeTester();
         addCard(Zone.BATTLEFIELD, playerA, FLAMESPEAKER_ADEPT);
 
@@ -101,7 +114,7 @@ public class DungeonTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test__LostMineOfPhandelver_Room3() {
+    public void test__LostMineOfPhandelver_room3() {
         makeTester();
         addCard(Zone.BATTLEFIELD, playerA, FLAMESPEAKER_ADEPT);
 
@@ -127,7 +140,7 @@ public class DungeonTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test__LostMineOfPhandelver_Room4() {
+    public void test__LostMineOfPhandelver_room4() {
         makeTester();
         addCard(Zone.BATTLEFIELD, playerA, FLAMESPEAKER_ADEPT);
 
