@@ -107,7 +107,7 @@ public class DungeonRoom {
                 + nextRooms
                 .stream()
                 .map(DungeonRoom::getName)
-                .reduce((a, b) -> a + " and " + b)
+                .reduce((a, b) -> a + " or " + b)
                 .orElse("")
                 + ")</i>";
     }
@@ -156,7 +156,7 @@ class RoomTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public String getText() {
-        return room.getName() + ": "
+        return room.getName() + " &mdash; "
                 + CardUtil.getTextWithFirstCharUpperCase(super.getRule())
                 + room.generateDestinationText();
     }
