@@ -6,6 +6,7 @@ import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.command.Dungeon;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,6 +26,7 @@ public class DungeonTest extends CardTestPlayerBase {
     private static final String FLAMESPEAKER_ADEPT = "Flamespeaker Adept";
     private static final String GLOOM_STALKER = "Gloom Stalker";
     private static final String DUNGEON_CRAWLER = "Dungeon Crawler";
+    private static final String SILVERCOAT_LION = "Silvercoat Lion";
 
     private void makeTester() {
         makeTester(playerA);
@@ -65,7 +67,7 @@ public class DungeonTest extends CardTestPlayerBase {
             Assert.assertNull("There should be no dungeon", dungeon);
             return;
         }
-        Assert.assertNotNull("Dungeon is not null", dungeon);
+        Assert.assertNotNull("Dungeon should not be null", dungeon);
         Assert.assertEquals("Dungeon should be " + dungeonName, dungeonName, dungeon.getName());
         Assert.assertEquals(
                 "Current room is " + roomName,
@@ -191,6 +193,64 @@ public class DungeonTest extends CardTestPlayerBase {
         assertLife(playerA, 20 + 1);
         assertLife(playerB, 20 - 1);
         assertHandCount(playerA, 1);
+    }
+
+    @Test
+    public void test__LostMineOfPhandelver_rollback() {
+        makeTester();
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, LOST_MINE_OF_PHANDELVER);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "Yes"); // Goblin Lair
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "No"); // Dark Pool
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
+
+        rollbackTurns(2, PhaseStep.END_TURN, playerA, 0);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Goblin", 1);
+        assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Goblin Lair");
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertHandCount(playerA, 0);
+    }
+
+    @Test
+    public void test__LostMineOfPhandelver_rollbackDifferentChoice() {
+        makeTester();
+        addCard(Zone.BATTLEFIELD, playerA, SILVERCOAT_LION);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, LOST_MINE_OF_PHANDELVER);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "Yes"); // Goblin Lair
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "No"); // Dark Pool
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
+
+        rollbackTurns(2, PhaseStep.END_TURN, playerA, 0);
+
+        rollbackAfterActionsStart();
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "Yes"); // Storeroom
+        addTarget(playerA, SILVERCOAT_LION);
+        rollbackAfterActionsEnd();
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPowerToughness(playerA, SILVERCOAT_LION, 3, 3);
+        assertCounterCount(playerA, SILVERCOAT_LION, CounterType.P1P1, 1);
+        assertPermanentCount(playerA, "Goblin", 1);
+        assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Storeroom");
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertHandCount(playerA, 0);
     }
 
     @Test
