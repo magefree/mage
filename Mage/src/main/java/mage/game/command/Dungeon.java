@@ -30,7 +30,6 @@ import mage.util.GameLog;
 import mage.util.SubTypes;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -119,7 +118,14 @@ public class Dungeon implements CommandObject {
     }
 
     public List<String> getRules() {
-        return dungeonRooms.stream().map(DungeonRoom::toString).collect(Collectors.toList());
+        List<String> rules = new ArrayList<>();
+        rules.add("<i>(" + (
+                currentRoom != null ?
+                        "Currently in " + currentRoom.getName() :
+                        "Not currently in a room"
+        ) + ")</i>");
+        dungeonRooms.stream().map(DungeonRoom::toString).forEach(rules::add);
+        return rules;
     }
 
     public static Dungeon selectDungeon(UUID playerId, Game game) {

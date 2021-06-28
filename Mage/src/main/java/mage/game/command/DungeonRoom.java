@@ -162,6 +162,6 @@ class RoomTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When you enter this room, " + super.getRule();
+        return "When you enter this room, " + super.getRule() + " <i>(" + room.getName() + ")</i>";
     }
 }
