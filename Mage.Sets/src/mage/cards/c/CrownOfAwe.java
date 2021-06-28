@@ -43,15 +43,15 @@ public final class CrownOfAwe extends CardImpl {
 
 		// Enchant creature
 		TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+		this.getSpellAbility().addTarget(auraTarget);
+		this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+		Ability ability = new EnchantAbility(auraTarget.getTargetName());
+		this.addAbility(ability);
 
 		// Enchanted Creature has protection from black and from red.
 		ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.RED), 
 			AttachmentType.AURA, Duration.WhileOnBattlefield));
-        this.addAbility(ability);
+		this.addAbility(ability);
 
 		// Sacrifice Crown of Awe: Enchanted creature and other creatures that share a creature type with it gain protection from black and from red until end of turn.
 		ability = new SimpleActivatedAbility(new CrownOfAweEffect(), new SacrificeSourceCost());
@@ -85,7 +85,7 @@ class CrownOfAweEffect extends OneShotEffect {
 
 	public CrownOfAweEffect() {
 		super(Outcome.Benefit);
-		this.staticText = "Sacrifice Crown of Awe: Enchanted creature and other creatures that share a creature type with it gain protection from black and from red until end of turn.";
+		this.staticText = "Sacrifice {this}: Enchanted creature and other creatures that share a creature type with it gain protection from black and from red until end of turn.";
 	}
 
 	public CrownOfAweEffect(final CrownOfAweEffect effect) {
