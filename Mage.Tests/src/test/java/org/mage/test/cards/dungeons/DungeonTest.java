@@ -254,6 +254,48 @@ public class DungeonTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test__Dungeon_multiplePlayers() {
+        makeTester(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, FLAMESPEAKER_ADEPT);
+        makeTester(playerB);
+        addCard(Zone.BATTLEFIELD, playerB, FLAMESPEAKER_ADEPT);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, LOST_MINE_OF_PHANDELVER);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "Yes"); // Goblin Lair
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "No"); // Dark Pool
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{0}:");
+        setChoice(playerB, DUNGEON_OF_THE_MAD_MAGE);
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{0}:");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{0}:");
+        setChoice(playerB, "Yes"); // Goblin Bazaar
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{0}:");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 4, 3);
+        assertPowerToughness(playerB, FLAMESPEAKER_ADEPT, 6, 3);
+        assertPermanentCount(playerA, "Goblin", 1);
+        assertPermanentCount(playerB, "Treasure", 1);
+        assertDungeonRoom(playerA, LOST_MINE_OF_PHANDELVER, "Dark Pool");
+        assertDungeonRoom(playerB, DUNGEON_OF_THE_MAD_MAGE, "Lost Level");
+        assertLife(playerA, 20 + 1);
+        assertLife(playerB, 20 - 1 + 1);
+        assertHandCount(playerA, 0);
+        assertHandCount(playerB, 0);
+    }
+
+    @Test
     public void test__CompletedDungeonCondition_true() {
         makeTester();
         addCard(Zone.BATTLEFIELD, playerA, GLOOM_STALKER);
