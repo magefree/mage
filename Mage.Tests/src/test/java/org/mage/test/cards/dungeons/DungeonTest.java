@@ -332,6 +332,35 @@ public class DungeonTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test__CompletedDungeonCondition_falseThenTrue() {
+        makeTester();
+        addCard(Zone.BATTLEFIELD, playerA, GLOOM_STALKER);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+        assertAbility(playerA, GLOOM_STALKER, DoubleStrikeAbility.getInstance(), false);
+        assertDungeonRoom(null, null);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, LOST_MINE_OF_PHANDELVER);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "Yes"); // Goblin Lair
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "No"); // Dark Pool
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertAbility(playerA, GLOOM_STALKER, DoubleStrikeAbility.getInstance(), true);
+        assertDungeonRoom(null, null);
+    }
+
+    @Test
     public void test__CompletedDungeonTriggeredAbility() {
         makeTester();
         addCard(Zone.GRAVEYARD, playerA, DUNGEON_CRAWLER);
