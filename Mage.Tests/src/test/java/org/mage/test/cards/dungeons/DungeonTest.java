@@ -3,6 +3,7 @@ package org.mage.test.cards.dungeons;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.command.Dungeon;
@@ -22,6 +23,8 @@ public class DungeonTest extends CardTestPlayerBase {
     private static final String LOST_MINE_OF_PHANDELVER = "Lost Mine of Phandelver";
     private static final String DUNGEON_OF_THE_MAD_MAGE = "Dungeon of the Mad Mage";
     private static final String FLAMESPEAKER_ADEPT = "Flamespeaker Adept";
+    private static final String GLOOM_STALKER = "Gloom Stalker";
+    private static final String DUNGEON_CRAWLER = "Dungeon Crawler";
 
     private void makeTester() {
         makeTester(playerA);
@@ -188,5 +191,66 @@ public class DungeonTest extends CardTestPlayerBase {
         assertLife(playerA, 20 + 1);
         assertLife(playerB, 20 - 1);
         assertHandCount(playerA, 1);
+    }
+
+    @Test
+    public void test__CompletedDungeonCondition_true() {
+        makeTester();
+        addCard(Zone.BATTLEFIELD, playerA, GLOOM_STALKER);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, LOST_MINE_OF_PHANDELVER);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "Yes"); // Goblin Lair
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "No"); // Dark Pool
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertAbility(playerA, GLOOM_STALKER, DoubleStrikeAbility.getInstance(), true);
+        assertDungeonRoom(null, null);
+    }
+
+    @Test
+    public void test__CompletedDungeonCondition_false() {
+        addCard(Zone.BATTLEFIELD, playerA, GLOOM_STALKER);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertAbility(playerA, GLOOM_STALKER, DoubleStrikeAbility.getInstance(), false);
+        assertDungeonRoom(null, null);
+    }
+
+    @Test
+    public void test__CompletedDungeonTriggeredAbility() {
+        makeTester();
+        addCard(Zone.GRAVEYARD, playerA, DUNGEON_CRAWLER);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, LOST_MINE_OF_PHANDELVER);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "Yes"); // Goblin Lair
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "No"); // Dark Pool
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "Yes"); // return Dungeon Crawler
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertHandCount(playerA, DUNGEON_CRAWLER, 1);
+        assertDungeonRoom(null, null);
     }
 }
