@@ -1,9 +1,5 @@
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.costs.*;
@@ -21,6 +17,7 @@ import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.events.GameEvent;
@@ -36,6 +33,11 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -963,7 +965,7 @@ public abstract class AbilityImpl implements Ability {
             }
             MageObject object = game.getObject(this.getSourceId());
             // emblem/planes are always actual
-            if (object instanceof Emblem || object instanceof Plane) {
+            if (object instanceof Emblem || object instanceof Dungeon || object instanceof Plane) {
                 return true;
             }
         }

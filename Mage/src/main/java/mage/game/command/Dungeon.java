@@ -91,6 +91,7 @@ public class Dungeon implements CommandObject {
 
     public void addRoom(DungeonRoom room) {
         this.dungeonRooms.add(room);
+        room.getRoomTriggeredAbility().setSourceId(id);
         this.abilites.add(room.getRoomTriggeredAbility());
     }
 
