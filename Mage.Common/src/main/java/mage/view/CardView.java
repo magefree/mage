@@ -20,6 +20,7 @@ import mage.counters.CounterType;
 import mage.designations.Designation;
 import mage.filter.FilterMana;
 import mage.game.Game;
+import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
@@ -579,6 +580,11 @@ public class CardView extends SimpleCardView {
             Emblem emblem = (Emblem) object;
             this.rarity = Rarity.SPECIAL;
             this.rules = emblem.getAbilities().getRules(emblem.getName());
+        } else if (object instanceof Dungeon) {
+            this.mageObjectType = MageObjectType.DUNGEON;
+            Dungeon dungeon = (Dungeon) object;
+            this.rarity = Rarity.SPECIAL;
+            this.rules = dungeon.getRules();
         } else if (object instanceof Plane) {
             this.mageObjectType = MageObjectType.PLANE;
             Plane plane = (Plane) object;
@@ -628,6 +634,21 @@ public class CardView extends SimpleCardView {
         // emblem images are always with common (black) symbol
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = emblem.getExpansionSetCode();
+        this.rarity = Rarity.COMMON;
+    }
+
+    public CardView(DungeonView dungeon) {
+        this(true);
+        this.gameObject = true;
+        this.id = dungeon.getId();
+        this.mageObjectType = MageObjectType.DUNGEON;
+        this.name = dungeon.getName();
+        this.displayName = name;
+        this.displayFullName = name;
+        this.rules = dungeon.getRules();
+        // emblem images are always with common (black) symbol
+        this.frameStyle = FrameStyle.M15_NORMAL;
+        this.expansionSetCode = dungeon.getExpansionSetCode();
         this.rarity = Rarity.COMMON;
     }
 

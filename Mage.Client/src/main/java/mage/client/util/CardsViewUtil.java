@@ -48,19 +48,21 @@ public final class CardsViewUtil {
 
     public static CardsView convertCommandObject(List<CommandObjectView> view) {
         CardsView cards = new CardsView();
-
         for (CommandObjectView commandObject : view) {
+            CardView cardView;
             if (commandObject instanceof EmblemView) {
-                CardView cardView = new CardView((EmblemView) commandObject);
-                cards.put(commandObject.getId(), cardView);
+                cardView = new CardView((EmblemView) commandObject);
+            } else if (commandObject instanceof DungeonView) {
+                cardView = new CardView((DungeonView) commandObject);
             } else if (commandObject instanceof PlaneView) {
-                CardView cardView = new CardView((PlaneView) commandObject);
-                cards.put(commandObject.getId(), cardView);
+                cardView = new CardView((PlaneView) commandObject);
             } else if (commandObject instanceof CommanderView) {
-                cards.put(commandObject.getId(), (CommanderView) commandObject);
+                cardView = (CommanderView) commandObject;
+            } else {
+                continue;
             }
+            cards.put(commandObject.getId(), cardView);
         }
-
         return cards;
     }
 }

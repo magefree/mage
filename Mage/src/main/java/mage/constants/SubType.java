@@ -409,6 +409,7 @@ public enum SubType {
     DOMRI("Domri", SubTypeSet.PlaneswalkerType),
     DOOKU("Dooku", SubTypeSet.PlaneswalkerType, true), // Star Wars
     DOVIN("Dovin", SubTypeSet.PlaneswalkerType),
+    ELLYWICK("Ellywick", SubTypeSet.PlaneswalkerType),
     ELSPETH("Elspeth", SubTypeSet.PlaneswalkerType),
     ESTRID("Estrid", SubTypeSet.PlaneswalkerType),
     FREYALISE("Freyalise", SubTypeSet.PlaneswalkerType),

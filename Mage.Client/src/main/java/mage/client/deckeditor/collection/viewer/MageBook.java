@@ -1,7 +1,10 @@
 package mage.client.deckeditor.collection.viewer;
 
 import mage.abilities.icon.CardIconRenderSettings;
-import mage.cards.*;
+import mage.cards.CardDimensions;
+import mage.cards.ExpansionSet;
+import mage.cards.MageCard;
+import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -18,15 +21,13 @@ import mage.client.util.audio.AudioManager;
 import mage.client.util.sets.ConstructedFormats;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
+import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.draft.RateCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
-import mage.view.CardView;
-import mage.view.EmblemView;
-import mage.view.PermanentView;
-import mage.view.PlaneView;
+import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.images.CardDownloadData;
@@ -365,6 +366,8 @@ public class MageBook extends JComponent {
             addToken((Token) item, bigCard, null, position);
         } else if (item instanceof Emblem) {
             addEmblem((Emblem) item, bigCard, null, position);
+        } else if (item instanceof Dungeon) {
+            addDungeon((Dungeon) item, bigCard, null, position);
         } else if (item instanceof Plane) {
             addPlane((Plane) item, bigCard, null, position);
         } else {
@@ -427,6 +430,11 @@ public class MageBook extends JComponent {
 
     private void addEmblem(Emblem emblem, BigCard bigCard, UUID gameId, Rectangle rectangle) {
         CardView cardView = new CardView(new EmblemView(emblem));
+        addCard(cardView, bigCard, gameId, rectangle, false);
+    }
+
+    private void addDungeon(Dungeon dungeon, BigCard bigCard, UUID gameId, Rectangle rectangle) {
+        CardView cardView = new CardView(new DungeonView(dungeon));
         addCard(cardView, bigCard, gameId, rectangle, false);
     }
 

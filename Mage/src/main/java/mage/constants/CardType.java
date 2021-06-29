@@ -14,6 +14,7 @@ public enum CardType {
     ARTIFACT("Artifact", true, true),
     CONSPIRACY("Conspiracy", false, false),
     CREATURE("Creature", true, true),
+    DUNGEON("Dungeon", false, false),
     ENCHANTMENT("Enchantment", true, true),
     INSTANT("Instant", false, true),
     LAND("Land", true, true),

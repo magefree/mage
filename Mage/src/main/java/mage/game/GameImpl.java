@@ -38,10 +38,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.combat.Combat;
-import mage.game.command.CommandObject;
-import mage.game.command.Commander;
-import mage.game.command.Emblem;
-import mage.game.command.Plane;
+import mage.game.command.*;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.mulligan.Mulligan;
@@ -355,7 +352,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (item.getId().equals(objectId)) {
                 return item;
             }
-            if (item.getSourceId().equals(objectId) && item instanceof Spell) {
+            if (item instanceof Spell && item.getSourceId().equals(objectId)) {
                 return item;
             }
         }
@@ -429,6 +426,59 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
         return null;
+    }
+
+    @Override
+    public Dungeon getDungeon(UUID objectId) {
+        return state
+                .getCommand()
+                .stream()
+                .filter(commandObject -> commandObject.getId().equals(objectId))
+                .filter(Dungeon.class::isInstance)
+                .map(Dungeon.class::cast)
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public Dungeon getPlayerDungeon(UUID playerId) {
+        return state
+                .getCommand()
+                .stream()
+                .filter(commandObject -> commandObject.isControlledBy(playerId))
+                .filter(Dungeon.class::isInstance)
+                .map(Dungeon.class::cast)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private void removeDungeon(Dungeon dungeon) {
+        if (dungeon == null) {
+            return;
+        }
+        Player player = getPlayer(dungeon.getControllerId());
+        if (player != null) {
+            informPlayers(player.getLogName() + " has completed " + dungeon.getLogName());
+        }
+        state.getCommand().remove(dungeon);
+        fireEvent(GameEvent.getEvent(
+                GameEvent.EventType.DUNGEON_COMPLETED, dungeon.getId(), null,
+                dungeon.getControllerId(), dungeon.getName(), 0
+        ));
+    }
+
+    private Dungeon getOrCreateDungeon(UUID playerId) {
+        Dungeon dungeon = this.getPlayerDungeon(playerId);
+        if (dungeon != null && dungeon.hasNextRoom()) {
+            return dungeon;
+        }
+        removeDungeon(dungeon);
+        return this.addDungeon(Dungeon.selectDungeon(playerId, this), playerId);
+    }
+
+    @Override
+    public void ventureIntoDungeon(UUID playerId) {
+        this.getOrCreateDungeon(playerId).moveToNextRoom(playerId, this);
     }
 
     @Override
@@ -1659,6 +1709,13 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
+    public Dungeon addDungeon(Dungeon dungeon, UUID playerId) {
+        dungeon.setControllerId(playerId);
+        state.addCommandObject(dungeon);
+        return dungeon;
+    }
+
+    @Override
     public void addPermanent(Permanent permanent, int createOrder) {
         if (createOrder == 0) {
             createOrder = getState().getNextPermanentOrderNumber();
@@ -1900,6 +1957,34 @@ public abstract class GameImpl implements Game, Serializable {
                     || player.getCounters().getCount(CounterType.POISON) >= 10)) {
                 player.lost(this);
             }
+        }
+
+        // If a Dungeon is on its last room and is not the source of any triggered abilities, it is removed
+        Set<Dungeon> dungeonsToRemove = new HashSet<>();
+        for (CommandObject commandObject : state.getCommand()) {
+            if (!(commandObject instanceof Dungeon)) {
+                continue;
+            }
+            Dungeon dungeon = (Dungeon) commandObject;
+            boolean removeDungeon = !dungeon.hasNextRoom()
+                    && this.getStack()
+                    .stream()
+                    .filter(DungeonRoom::isRoomTrigger)
+                    .map(StackObject::getSourceId)
+                    .noneMatch(dungeon.getId()::equals)
+                    && this.state
+                    .getTriggered(dungeon.getControllerId())
+                    .stream()
+                    .filter(DungeonRoom::isRoomTrigger)
+                    .map(Ability::getSourceId)
+                    .noneMatch(dungeon.getId()::equals);
+            if (removeDungeon) {
+                dungeonsToRemove.add(dungeon);
+            }
+        }
+        for (Dungeon dungeon : dungeonsToRemove) {
+            this.removeDungeon(dungeon);
+            somethingHappened = true;
         }
 
         // If a commander is in a graveyard or in exile and that card was put into that zone

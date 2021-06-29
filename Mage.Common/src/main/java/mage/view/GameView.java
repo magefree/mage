@@ -13,6 +13,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.combat.CombatGroup;
+import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
@@ -111,6 +112,12 @@ public class GameView implements Serializable {
                         // Card sourceCard = (Card) ((Emblem) object).getSourceObject();
                         stackObject.setName(object.getName());
                         // ((StackAbility) stackObject).setExpansionSetCode(sourceCard.getExpansionSetCode());
+                        stack.put(stackObject.getId(),
+                                new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
+                        checkPaid(stackObject.getId(), ((StackAbility) stackObject));
+                    } else if (object instanceof Dungeon) {
+                        CardView cardView = new CardView(new DungeonView((Dungeon) object));
+                        stackObject.setName(object.getName());
                         stack.put(stackObject.getId(),
                                 new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
