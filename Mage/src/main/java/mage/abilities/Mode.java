@@ -70,4 +70,9 @@ public class Mode implements Serializable {
     public void addEffect(Effect effect) {
         effects.add(effect);
     }
+
+    public Mode setFlavorWord(String flavorWord) {
+        effects.setFlavorWord(flavorWord);
+        return this;
+    }
 }

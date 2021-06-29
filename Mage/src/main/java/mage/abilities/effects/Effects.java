@@ -14,11 +14,14 @@ import java.util.Arrays;
  */
 public class Effects extends ArrayList<Effect> {
 
+    private String flavorWord = null;
+
     public Effects(Effect... effects) {
         this.addAll(Arrays.asList(effects));
     }
 
     public Effects(final Effects effects) {
+        this.flavorWord = effects.flavorWord;
         for (Effect effect : effects) {
             this.add(effect.copy());
         }
@@ -110,6 +113,9 @@ public class Effects extends ArrayList<Effect> {
             sbText.append('.');
         }
 
+        if (flavorWord != null) {
+            return "<i>" + flavorWord + "</i> &mdash; " + CardUtil.getTextWithFirstCharUpperCase(sbText.toString());
+        }
         return sbText.toString();
 
     }
@@ -188,5 +194,9 @@ public class Effects extends ArrayList<Effect> {
         for (Effect effect : this) {
             effect.setValue(key, value);
         }
+    }
+
+    public void setFlavorWord(String flavorWord) {
+        this.flavorWord = flavorWord;
     }
 }
