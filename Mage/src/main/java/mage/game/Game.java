@@ -19,10 +19,7 @@ import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.Counters;
 import mage.game.combat.Combat;
-import mage.game.command.CommandObject;
-import mage.game.command.Commander;
-import mage.game.command.Emblem;
-import mage.game.command.Plane;
+import mage.game.command.*;
 import mage.game.events.GameEvent;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
@@ -79,6 +76,10 @@ public interface Game extends MageItem, Serializable {
     MageObject getBaseObject(UUID objectId);
 
     MageObject getEmblem(UUID objectId);
+
+    Dungeon getDungeon(UUID objectId);
+
+    Dungeon getPlayerDungeon(UUID objectId);
 
     UUID getControllerId(UUID objectId);
 
@@ -393,6 +394,10 @@ public interface Game extends MageItem, Serializable {
     boolean addPlane(Plane plane, MageObject sourceObject, UUID toPlayerId);
 
     void addCommander(Commander commander);
+
+    Dungeon addDungeon(Dungeon dungeon, UUID playerId);
+
+    void ventureIntoDungeon(UUID playerId);
 
     /**
      * Adds a permanent to the battlefield

@@ -60,7 +60,7 @@ public final class SvyelunOfSeaAndSky extends CardImpl {
 
         // Other Merfolk you control have ward {1}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new WardAbility(new GenericManaCost(1)), Duration.WhileOnBattlefield, filter
+                new WardAbility(new GenericManaCost(1)), Duration.WhileOnBattlefield, filter, true
         )));
     }
 

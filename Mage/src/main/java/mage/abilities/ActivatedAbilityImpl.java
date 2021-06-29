@@ -13,9 +13,7 @@ import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.command.Commander;
-import mage.game.command.Emblem;
-import mage.game.command.Plane;
+import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
@@ -212,12 +210,8 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
             return true;
         }
         MageObject mageObject = game.getObject(this.sourceId);
-        if (mageObject instanceof Emblem) {
-            return ((Emblem) mageObject).isControlledBy(playerId);
-        } else if (mageObject instanceof Plane) {
-            return ((Plane) mageObject).isControlledBy(playerId);
-        } else if (mageObject instanceof Commander) {
-            return ((Commander) mageObject).isControlledBy(playerId);
+        if (mageObject instanceof CommandObject) {
+            return ((CommandObject) mageObject).isControlledBy(playerId);
         } else if (game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD) {
             return ((Card) mageObject).isOwnedBy(playerId);
         }

@@ -1,26 +1,20 @@
-
-
 package mage.game.command;
 
 import java.util.ArrayList;
 
 /**
- *
  * @author Viserion
  */
 public class Command extends ArrayList<CommandObject> {
 
-    public Command () {}
-
-    public Command(final Command command) {
-        addAll(command);
+    public Command() {
     }
 
-    /*public void checkTriggers(GameEvent event, Game game) {
-        for (CommandObject commandObject: this) {
-            commandObject.checkTriggers(event, game);
+    private Command(final Command command) {
+        for (CommandObject commandObject : command) {
+            add(commandObject.copy());
         }
-    }*/
+    }
 
     public Command copy() {
         return new Command(this);

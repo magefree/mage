@@ -1,7 +1,7 @@
 package mage.client.cards;
 
-import mage.cards.Card;
 import mage.abilities.icon.CardIconRenderSettings;
+import mage.cards.Card;
 import mage.cards.MageCard;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
@@ -11,8 +11,10 @@ import mage.cards.repository.CardRepository;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.*;
+import mage.client.util.ClientEventType;
 import mage.client.util.Event;
+import mage.client.util.GUISizeHelper;
+import mage.client.util.Listener;
 import mage.client.util.comparators.*;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -736,7 +738,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         // ENABLE MOUSE CLICKS (cards, menu)
         this.cardListener = event -> {
-            switch(event.getEventType()) {
+            switch (event.getEventType()) {
                 case CARD_POPUP_MENU:
                     if (event.getSource() != null) {
                         // menu for card
@@ -938,7 +940,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             sortPopup.add(sortOptions, sortOptionsC);
 
             separateCreaturesCb = new JCheckBox();
-            separateCreaturesCb.setText("Creatures in separate row");
+            separateCreaturesCb.setText("Puts creatures in separate first row");
             separateCreaturesCb.setSelected(separateCreatures);
             separateCreaturesCb.addItemListener(e -> {
                 setSeparateCreatures(separateCreaturesCb.isSelected());
@@ -1288,7 +1290,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     // Resort the existing cards based on the current sort
     public void resort() {
-        // First null out the grid and trim it down
+        // clear grid
         for (List<List<CardView>> gridRow : cardGrid) {
             for (List<CardView> stack : gridRow) {
                 stack.clear();
@@ -1296,18 +1298,19 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         }
         trimGrid();
 
-        // First sort all cards by name
+        // sort
         allCards.sort(new CardViewNameComparator());
 
-        // Now re-insert all of the cards using the current sort
+        // re-insert
         for (CardView card : allCards) {
             sortIntoGrid(card);
         }
+        trimGrid();
 
         // Deselect everything
         deselectAll();
 
-        // And finally rerender
+        // render new grid
         layoutGrid();
         repaintGrid();
     }
@@ -1712,9 +1715,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 for (CardView c : pimpedCards.keySet()) {
                     sortIntoGrid(c);
                 }
+                trimGrid();
 
                 layoutGrid();
                 repaintGrid();
+
                 JOptionPane.showMessageDialog(null, "Added " + pimpedCards.size() + " cards.  You can select them and the originals by choosing 'Multiples'");
             }
         }
@@ -1783,7 +1788,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             }
         }
 
-        // Trim the grid
+        // clear grid from empty rows
         if (didModify) {
             trimGrid();
         }
@@ -1874,8 +1879,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             }
         }
 
-        // Modifications?
         if (didModify) {
+            // clear grid from empty rows
+            trimGrid();
+
             // Update layout
             layoutGrid();
             repaintGrid();
@@ -1991,6 +1998,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         if (duplicated) {
             sortIntoGrid(card);
             eventSource.fireEvent(card, ClientEventType.DECK_ADD_SPECIFIC_CARD);
+
+            // clear grid from empty rows
+            trimGrid();
+
             // Update layout
             layoutGrid();
             repaintGrid();
@@ -2053,20 +2064,27 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     /**
      * Add a card to the cardGrid, in the position that the current sort
-     * dictates
+     * dictates.
+     * <p>
+     * Warning, you must call trimGrid() after all cards inserted
      *
      * @param newCard Card to add to the cardGrid array.
      */
     private void sortIntoGrid(CardView newCard) {
-        // Ensure row 1 exists
+        // row 1 must exists
         if (cardGrid.isEmpty()) {
             cardGrid.add(0, new ArrayList<>());
             maxStackSize.add(0, 0);
         }
-        // What row to add it to?
+
+        // target row
         List<List<CardView>> targetRow;
-        if (separateCreatures && !newCard.isCreature()) {
-            // Ensure row 2 exists
+        if (separateCreatures) {
+            // separate mode (two rows mode)
+            // row 1 for creatures
+            // row 2 for other
+
+            // row 2 must exists
             if (cardGrid.size() < 2) {
                 cardGrid.add(1, new ArrayList<>());
                 maxStackSize.add(1, 0);
@@ -2075,14 +2093,44 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     cardGrid.get(1).add(new ArrayList<>());
                 }
             }
-            targetRow = cardGrid.get(1);
+
+            // workaround to fix wrong sorting on one card insert (if no creatures then trim will remove first row)
+            boolean isFirstRowWithCreatures = true;
+            for (int i = 0; i < cardGrid.get(0).size(); ++i) {
+                if (cardGrid.get(0).get(i).stream().anyMatch(card -> !card.isCreature())) {
+                    isFirstRowWithCreatures = false;
+                    break;
+                }
+            }
+
+            if (!isFirstRowWithCreatures) {
+                // move all cards to row 2 (at first position)
+                for (int i = 0; i < cardGrid.get(0).size(); ++i) {
+                    if (!cardGrid.get(0).get(i).isEmpty()) {
+                        cardGrid.get(1).add(cardGrid.get(0).get(i));
+                    }
+                }
+                cardGrid.get(0).clear();
+                while (cardGrid.get(0).size() < cardGrid.get(1).size()) {
+                    cardGrid.get(0).add(new ArrayList<>());
+                }
+            }
+
+            if (newCard.isCreature()) {
+                // creature cards goes to row 1
+                targetRow = cardGrid.get(0);
+            } else {
+                // non-creature cards goes to row 2
+                targetRow = cardGrid.get(1);
+            }
         } else {
+            // one row mode
             targetRow = cardGrid.get(0);
         }
 
         // Find the right column to insert into
         boolean didInsert = false;
-        for (int currentColumn = 0; currentColumn < cardGrid.get(0).size(); ++currentColumn) {
+        for (int currentColumn = 0; currentColumn < targetRow.size(); ++currentColumn) {
             // Find an item from this column
             CardView cardInColumn = null;
             for (List<List<CardView>> gridRow : cardGrid) {
@@ -2123,8 +2171,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             targetRow.get(targetRow.size() - 1).add(newCard);
         }
 
-        // if it's a new deck then non creature cards can be added to second row, so fix empty rows here
-        trimGrid();
+        // empty row trim (trimGrid) must be called from outside after all cards inserted
     }
 
     /**
