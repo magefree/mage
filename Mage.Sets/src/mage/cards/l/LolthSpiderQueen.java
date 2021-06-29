@@ -48,7 +48,7 @@ public final class LolthSpiderQueen extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new LolthSpiderToken(), 2), -3));
 
         // −8: You get an emblem with "Whenever an opponent is dealt combat damage by one or more creatures you control, if that player lost less than 8 life this turn, they lose life equal to the difference."
-        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new LolthSpiderQueenEmblem())));
+        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new LolthSpiderQueenEmblem()), -8));
     }
 
     private LolthSpiderQueen(final LolthSpiderQueen card) {
