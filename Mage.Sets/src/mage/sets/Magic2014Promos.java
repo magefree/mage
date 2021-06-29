@@ -20,10 +20,10 @@ public class Magic2014Promos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Colossal Whale", 48, Rarity.RARE, mage.cards.c.ColossalWhale.class));
-        cards.add(new SetCardInfo("Goblin Diplomats", 141, Rarity.RARE, mage.cards.g.GoblinDiplomats.class));
-        cards.add(new SetCardInfo("Hive Stirrings", 21, Rarity.COMMON, mage.cards.h.HiveStirrings.class));
-        cards.add(new SetCardInfo("Megantic Sliver", 185, Rarity.RARE, mage.cards.m.MeganticSliver.class));
-        cards.add(new SetCardInfo("Ratchet Bomb", 215, Rarity.RARE, mage.cards.r.RatchetBomb.class));
-     }
+        cards.add(new SetCardInfo("Colossal Whale", "48*", Rarity.RARE, mage.cards.c.ColossalWhale.class));
+        cards.add(new SetCardInfo("Goblin Diplomats", "141*", Rarity.RARE, mage.cards.g.GoblinDiplomats.class));
+        cards.add(new SetCardInfo("Hive Stirrings", "21*", Rarity.COMMON, mage.cards.h.HiveStirrings.class));
+        cards.add(new SetCardInfo("Megantic Sliver", "185*", Rarity.RARE, mage.cards.m.MeganticSliver.class));
+        cards.add(new SetCardInfo("Ratchet Bomb", "215*", Rarity.RARE, mage.cards.r.RatchetBomb.class));
+    }
 }

@@ -20,10 +20,10 @@ public class Magic2013Promos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Cathedral of War", "*221", Rarity.RARE, mage.cards.c.CathedralOfWar.class));
-        cards.add(new SetCardInfo("Magmaquake", 140, Rarity.RARE, mage.cards.m.Magmaquake.class));
-        cards.add(new SetCardInfo("Mwonvuli Beast Tracker", 177, Rarity.UNCOMMON, mage.cards.m.MwonvuliBeastTracker.class));
-        cards.add(new SetCardInfo("Staff of Nin", 217, Rarity.RARE, mage.cards.s.StaffOfNin.class));
-        cards.add(new SetCardInfo("Xathrid Gorgon", 118, Rarity.RARE, mage.cards.x.XathridGorgon.class));
-     }
+        cards.add(new SetCardInfo("Cathedral of War", "221*", Rarity.RARE, mage.cards.c.CathedralOfWar.class));
+        cards.add(new SetCardInfo("Magmaquake", "140*", Rarity.RARE, mage.cards.m.Magmaquake.class));
+        cards.add(new SetCardInfo("Mwonvuli Beast Tracker", "177*", Rarity.UNCOMMON, mage.cards.m.MwonvuliBeastTracker.class));
+        cards.add(new SetCardInfo("Staff of Nin", "217*", Rarity.RARE, mage.cards.s.StaffOfNin.class));
+        cards.add(new SetCardInfo("Xathrid Gorgon", "118*", Rarity.RARE, mage.cards.x.XathridGorgon.class));
+    }
 }

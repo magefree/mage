@@ -14,6 +14,10 @@ import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
+/**
+ * WARNING, unsupported images plugin, last updates from 2018
+ */
+
 public class GathererSets implements Iterable<DownloadJob> {
 
     private class CheckResult {
@@ -99,7 +103,7 @@ public class GathererSets implements Iterable<DownloadJob> {
 
     private static final String[] symbolsOnlyMyth = {
             "DRB", "V09", "V10", "V12", "V13", "V14", "V15", "V16", "V17", "EXP", "MED"
-            // "HTR" does not exist
+            // "HTR16" does not exist
     };
     private static final String[] symbolsOnlySpecial = {
             "MPS", "MP2"
