@@ -202,7 +202,7 @@ public class ScryfallImageSupportCards {
             add("P09"); // Magic Player Rewards 2009
             add("G09"); // Judge Gift Cards 2009
             add("F09"); // Friday Night Magic 2009
-            add("PBOK"); // Miscellaneous Book Promos
+            add("PBOOK"); // Miscellaneous Book Promos
             add("CON"); // Conflux
             add("DDC"); // Duel Decks: Divine vs. Demonic
             add("PPRE"); // Prerelease Events
@@ -307,7 +307,6 @@ public class ScryfallImageSupportCards {
             add("PJOU"); // Journey into Nyx Promos
             add("JOU"); // Journey into Nyx
             add("MD1"); // Modern Event Deck 2014
-            add("PLPA"); // Launch Parties
             add("CNS"); // Conspiracy
             add("VMA"); // Vintage Masters
             add("PS14"); // San Diego Comic-Con 2014
@@ -388,7 +387,7 @@ public class ScryfallImageSupportCards {
             add("C17"); // Commander 2017
             add("PWCQ"); // World Magic Cup Qualifiers
             add("H17"); // HasCon 2017
-            add("HTR"); // 2016 Heroes of the Realm
+            add("HTR16"); // 2016 Heroes of the Realm
             add("PXLN"); // Ixalan Promos
             add("XLN"); // Ixalan
             add("PSS2"); // XLN Standard Showdown
