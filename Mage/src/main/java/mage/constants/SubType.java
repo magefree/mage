@@ -78,6 +78,7 @@ public enum SubType {
     BEAR("Bear", SubTypeSet.CreatureType),
     BEAST("Beast", SubTypeSet.CreatureType),
     BEEBLE("Beeble", SubTypeSet.CreatureType),
+    BEHOLDER("Beholder", SubTypeSet.CreatureType),
     BERSERKER("Berserker", SubTypeSet.CreatureType),
     BIRD("Bird", SubTypeSet.CreatureType),
     BITH("Bith", SubTypeSet.CreatureType, true), // Star Wars
