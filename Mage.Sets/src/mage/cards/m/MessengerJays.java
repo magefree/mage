@@ -35,8 +35,9 @@ public final class MessengerJays extends CardImpl {
 
         // <i>Council's dilemma &mdash; When Messenger Jays enters the battlefield, starting with you, each player votes for feather or quill. Put a +1/+1 counter on Messenger Jays for each feather vote and draw a card for each quill vote. For each card drawn this way, discard a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new MessengerJaysEffect(), false, "<i>Council's dilemma</i> &mdash; "
-        ));
+                new MessengerJaysEffect(), false)
+                .withFlavorWord("Council's dilemma")
+        );
     }
 
     private MessengerJays(final MessengerJays card) {

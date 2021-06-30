@@ -42,13 +42,13 @@ public final class VigorsporeWurm extends CardImpl {
                         VigilanceAbility.getInstance(),
                         Duration.EndOfTurn
                 ).setText("target creature gains vigilance"),
-                false, "<i>Undergrowth</i> &mdash; "
-        );
+                false);
         ability.addEffect(new BoostTargetEffect(
                 xValue, xValue, Duration.EndOfTurn, true
         ).setText("and gets +X/+X until end of turn, "
                 + "where X is the number of creature cards in your graveyard."));
         ability.addTarget(new TargetCreaturePermanent());
+        ability.withFlavorWord("Undergrowth");
         this.addAbility(ability);
 
         // Vigorspore Wurm can't be blocked by more than one creature.

@@ -39,8 +39,9 @@ public final class SpellweaverHelix extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Imprint - When Spellweaver Helix enters the battlefield, you may exile two target sorcery cards from a single graveyard.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SpellweaverHelixImprintEffect(), true, "Imprint &mdash; ");
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SpellweaverHelixImprintEffect(), true);
         ability.addTarget(new TargetCardInASingleGraveyard(2, 2, filter));
+        ability.withFlavorWord("Imprint");
         this.addAbility(ability);
 
         // Whenever a player casts a card, if it has the same name as one of the cards exiled with Spellweaver Helix, you may copy the other. If you do, you may cast the copy without paying its mana cost.

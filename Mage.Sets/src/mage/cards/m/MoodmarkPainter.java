@@ -41,8 +41,7 @@ public final class MoodmarkPainter extends CardImpl {
                         new MenaceAbility(),
                         Duration.EndOfTurn
                 ).setText("target creature gains menace"),
-                false, "<i>Undergrowth</i> &mdash; "
-        );
+                false);
         ability.addEffect(new BoostTargetEffect(
                 xValue, StaticValue.get(0),
                 Duration.EndOfTurn, true
@@ -50,6 +49,7 @@ public final class MoodmarkPainter extends CardImpl {
                 + "where X is the number of creature cards in your graveyard")
         );
         ability.addTarget(new TargetCreaturePermanent());
+        ability.withFlavorWord("Undergrowth");
         this.addAbility(ability);
     }
 

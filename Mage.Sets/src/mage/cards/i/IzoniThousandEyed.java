@@ -43,8 +43,9 @@ public final class IzoniThousandEyed extends CardImpl {
                         new CardsInControllerGraveyardCount(
                                 StaticFilters.FILTER_CARD_CREATURE
                         )
-                ), false, "<i>Undergrowth</i> &mdash; "
-        ));
+                ), false)
+                .withFlavorWord("Undergrowth")
+        );
 
         // {B}{G}, Sacrifice another creature: You gain 1 life and draw a card.
         Ability ability = new SimpleActivatedAbility(

@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -11,31 +12,26 @@ import mage.game.events.GameEvent;
  */
 public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected String rulePrefix;
-    protected boolean noRule;
+    protected boolean ignoreRulesGeneration; // use it with custom rules (if you don't want ETB auto-generated text)
+    protected String etbFlavorWord = null;
 
     public EntersBattlefieldTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, null);
+        this(effect, optional, false);
     }
 
-    public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional, boolean noRule) {
-        this(effect, optional, null);
-        this.noRule = noRule;
-    }
-
-    public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional, String rulePrefix) {
+    public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional, boolean ignoreRulesGeneration) {
         super(Zone.ALL, effect, optional); // Zone.All because a creature with trigger can be put into play and be sacrificed during the resolution of an effect (discard Obstinate Baloth with Smallpox)
-        this.rulePrefix = rulePrefix;
+        this.ignoreRulesGeneration = ignoreRulesGeneration;
     }
 
     public EntersBattlefieldTriggeredAbility(final EntersBattlefieldTriggeredAbility ability) {
         super(ability);
-        this.rulePrefix = ability.rulePrefix;
-        this.noRule = ability.noRule;
+        this.ignoreRulesGeneration = ability.ignoreRulesGeneration;
+        this.etbFlavorWord = ability.etbFlavorWord;
     }
 
     @Override
@@ -53,11 +49,20 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public Ability withFlavorWord(String flavorWord) {
+        // must put flavor word before auto-generated rules, so keep it in etb place
+        super.withFlavorWord(null);
+        this.etbFlavorWord = flavorWord;
+        return this;
+    }
+
+    @Override
     public String getRule() {
-        if (noRule) {
+        if (ignoreRulesGeneration) {
             return super.getRule();
         }
-        return (rulePrefix != null ? rulePrefix : "") + "When {this} enters the battlefield, " + super.getRule();
+        return (this.etbFlavorWord == null ? "" : "<i>" + this.etbFlavorWord + "</i> &mdash; ")
+                + "When {this} enters the battlefield, " + super.getRule();
     }
 
     @Override

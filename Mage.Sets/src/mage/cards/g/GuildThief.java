@@ -1,9 +1,12 @@
 package mage.cards.g;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -12,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -37,6 +41,13 @@ public final class GuildThief extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{3}{U}")
         ).withFlavorWord("Cunning Action"));
+
+        // TODO: EXAMPLE DELETE
+        // When Fathom Fleet Cutthroat enters the battlefield, destroy target creature an opponent controls that was dealt damage this turn.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
+        ability.addTarget(new TargetCreaturePermanent());
+        ability.withFlavorWord("Tail Spikes");
+        this.addAbility(ability);
     }
 
     private GuildThief(final GuildThief card) {
