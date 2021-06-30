@@ -467,12 +467,20 @@ public interface Ability extends Controllable, Serializable {
     Ability setAbilityWord(AbilityWord abilityWord);
 
     /**
-     * Set flavor word for whole ability (if you need flavor word for choices then call it from mode)
+     * Sets flavor word for whole ability
      *
      * @param flavorWord
      * @return
      */
     Ability withFlavorWord(String flavorWord);
+
+    /**
+     * Sets flavor word for first mode
+     *
+     * @param flavorWord
+     * @return
+     */
+    Ability withFirstModeFlavorWord(String flavorWord);
 
     /**
      * Creates the message about the ability casting/triggering/activating to
