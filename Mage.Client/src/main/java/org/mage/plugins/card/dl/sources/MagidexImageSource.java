@@ -16,7 +16,6 @@ public enum MagidexImageSource implements CardImageSource {
 
     MagidexImageSource() {
         supportedSets = new LinkedHashSet<>();
-        // supportedSets.add("PPRE"); // Prerelease Events
         // supportedSets.add("JR"); // TODO: Set was split into the individual sets as listed on Scryfall
         supportedSets.add("LEA");
         supportedSets.add("LEB");

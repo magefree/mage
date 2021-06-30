@@ -5,7 +5,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- * https://scryfall.com/sets/htr
+ * https://scryfall.com/sets/htr16
  * @author TheElk801
  */
 public final class HeroesOfTheRealm2016 extends ExpansionSet {
