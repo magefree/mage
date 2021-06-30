@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -25,6 +24,7 @@ public final class Shadowmoor extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Advice from the Fae", 28, Rarity.UNCOMMON, mage.cards.a.AdviceFromTheFae.class));
         cards.add(new SetCardInfo("Aethertow", 136, Rarity.COMMON, mage.cards.a.Aethertow.class));
         cards.add(new SetCardInfo("Aphotic Wisps", 55, Rarity.COMMON, mage.cards.a.AphoticWisps.class));
@@ -230,7 +230,8 @@ public final class Shadowmoor extends ExpansionSet {
         cards.add(new SetCardInfo("Rattleblaze Scarecrow", 259, Rarity.COMMON, mage.cards.r.RattleblazeScarecrow.class));
         cards.add(new SetCardInfo("Raven's Run Dragoon", 235, Rarity.COMMON, mage.cards.r.RavensRunDragoon.class));
         cards.add(new SetCardInfo("Reaper King", 260, Rarity.RARE, mage.cards.r.ReaperKing.class));
-        cards.add(new SetCardInfo("Reflecting Pool", 278, Rarity.RARE, mage.cards.r.ReflectingPool.class));
+        cards.add(new SetCardInfo("Reflecting Pool", "278*", Rarity.RARE, mage.cards.r.ReflectingPool.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Reflecting Pool", 278, Rarity.RARE, mage.cards.r.ReflectingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reknit", 236, Rarity.UNCOMMON, mage.cards.r.Reknit.class));
         cards.add(new SetCardInfo("Repel Intruders", 147, Rarity.UNCOMMON, mage.cards.r.RepelIntruders.class));
         cards.add(new SetCardInfo("Resplendent Mentor", 19, Rarity.UNCOMMON, mage.cards.r.ResplendentMentor.class));

@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class TheDark extends ExpansionSet {
@@ -25,6 +24,7 @@ public final class TheDark extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Amnesia", 20, Rarity.UNCOMMON, mage.cards.a.Amnesia.class));
         cards.add(new SetCardInfo("Angry Mob", 1, Rarity.UNCOMMON, mage.cards.a.AngryMob.class));
         cards.add(new SetCardInfo("Apprentice Wizard", 21, Rarity.RARE, mage.cards.a.ApprenticeWizard.class));
@@ -62,12 +62,14 @@ public final class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Fasting", 7, Rarity.UNCOMMON, mage.cards.f.Fasting.class));
         cards.add(new SetCardInfo("Fellwar Stone", 102, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Festival", 8, Rarity.COMMON, mage.cards.f.Festival.class));
-        cards.add(new SetCardInfo("Fire Drake", 62, Rarity.UNCOMMON, mage.cards.f.FireDrake.class));
         cards.add(new SetCardInfo("Fire and Brimstone", 9, Rarity.UNCOMMON, mage.cards.f.FireAndBrimstone.class));
+        cards.add(new SetCardInfo("Fire Drake", 62, Rarity.UNCOMMON, mage.cards.f.FireDrake.class));
         cards.add(new SetCardInfo("Fissure", 63, Rarity.COMMON, mage.cards.f.Fissure.class));
         cards.add(new SetCardInfo("Flood", 27, Rarity.UNCOMMON, mage.cards.f.Flood.class));
-        cards.add(new SetCardInfo("Fountain of Youth", 103, Rarity.UNCOMMON, mage.cards.f.FountainOfYouth.class));
-        cards.add(new SetCardInfo("Gaea's Touch", 77, Rarity.COMMON, mage.cards.g.GaeasTouch.class));
+        cards.add(new SetCardInfo("Fountain of Youth", "103+", Rarity.UNCOMMON, mage.cards.f.FountainOfYouth.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fountain of Youth", 103, Rarity.UNCOMMON, mage.cards.f.FountainOfYouth.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gaea's Touch", "77+", Rarity.COMMON, mage.cards.g.GaeasTouch.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gaea's Touch", 77, Rarity.COMMON, mage.cards.g.GaeasTouch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghost Ship", 28, Rarity.COMMON, mage.cards.g.GhostShip.class));
         cards.add(new SetCardInfo("Giant Shark", 29, Rarity.COMMON, mage.cards.g.GiantShark.class));
         cards.add(new SetCardInfo("Goblin Caves", 64, Rarity.COMMON, mage.cards.g.GoblinCaves.class));
@@ -109,7 +111,8 @@ public final class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Psychic Allergy", 34, Rarity.RARE, mage.cards.p.PsychicAllergy.class));
         cards.add(new SetCardInfo("Rag Man", 51, Rarity.RARE, mage.cards.r.RagMan.class));
         cards.add(new SetCardInfo("Riptide", 35, Rarity.COMMON, mage.cards.r.Riptide.class));
-        cards.add(new SetCardInfo("Runesword", 107, Rarity.UNCOMMON, mage.cards.r.Runesword.class));
+        cards.add(new SetCardInfo("Runesword", "107+", Rarity.UNCOMMON, mage.cards.r.Runesword.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Runesword", 107, Rarity.UNCOMMON, mage.cards.r.Runesword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Safe Haven", 118, Rarity.RARE, mage.cards.s.SafeHaven.class));
         cards.add(new SetCardInfo("Savaen Elves", 84, Rarity.COMMON, mage.cards.s.SavaenElves.class));
         cards.add(new SetCardInfo("Scarecrow", 108, Rarity.UNCOMMON, mage.cards.s.Scarecrow.class));

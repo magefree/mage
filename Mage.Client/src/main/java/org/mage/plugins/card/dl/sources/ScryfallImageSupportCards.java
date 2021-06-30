@@ -323,6 +323,7 @@ public class ScryfallImageSupportCards {
             add("GVL"); // Duel Decks Anthology: Garruk vs. Liliana
             add("EVG"); // Duel Decks Anthology: Elves vs. Goblins
             add("DVD"); // Duel Decks Anthology: Divine vs. Demonic
+            add("PDP15"); // Duels of the Planeswalkers 2015 Promos
             add("J15"); // Judge Gift Cards 2015
             add("F15"); // Friday Night Magic 2015
             add("UGIN"); // Ugin's Fate
@@ -417,6 +418,7 @@ public class ScryfallImageSupportCards {
             add("M19"); // Core Set 2019
             add("ANA"); // Arena New Player Experience
             add("XANA"); // Arena New Player Experience Extras
+            add("OANA"); // Arena New Player Experience Cards
             add("PS18"); // San Diego Comic-Con 2018
             //add("HTR17"); // Heroes of the Realm 2017
             add("C18"); // Commander 2018
@@ -496,6 +498,8 @@ public class ScryfallImageSupportCards {
             add("TSR"); // Time Spiral Remastered
             add("STX"); // Strixhaven: School of Mages
             add("STA"); // Strixhaven Mystical Archive
+            add("HA4"); // Historic Anthology 4
+            add("HA5"); // Historic Anthology 5
             add("C21"); // Commander 2021 Edition
             add("MH2"); // Modern Horizons 2
             add("H1R"); // Modern Horizons 1 Timeshifts
@@ -680,8 +684,6 @@ public class ScryfallImageSupportCards {
             // DKM
             put("DKM/Icy Manipulator/36*", "https://api.scryfall.com/cards/dkm/36★/");
             put("DKM/Incinerate/14*", "https://api.scryfall.com/cards/dkm/14★/");
-            put("DKM/Icy Manipulator/36s", "https://api.scryfall.com/cards/dkm/36★/");
-            put("DKM/Incinerate/14s", "https://api.scryfall.com/cards/dkm/14★/");
             // DRK
             put("DRK/Fountain of Youth/103+", "https://api.scryfall.com/cards/drk/103†/");
             put("DRK/Gaea's Touch/77+", "https://api.scryfall.com/cards/drk/77†/");
@@ -706,6 +708,34 @@ public class ScryfallImageSupportCards {
             put("ODY/Seafloor Debris/325+", "https://api.scryfall.com/cards/ody/325†/");
             // PAL99
             put("PAL99/Island/3+", "https://api.scryfall.com/cards/pal99/3†/");
+            // PALA
+            put("PALA/Ajani Vengeant/154*", "https://api.scryfall.com/cards/pala/154★/");
+            // PAVR
+            put("PAVR/Moonsilver Spear/217*", "https://api.scryfall.com/cards/pavr/217★/");
+            put("PAVR/Restoration Angel/32*", "https://api.scryfall.com/cards/pavr/32★/");
+            // PBNG
+            put("PBNG/Arbiter of the Ideal/31*", "https://api.scryfall.com/cards/pbng/31★/");
+            put("PBNG/Eater of Hope/66*", "https://api.scryfall.com/cards/pbng/66★/");
+            put("PBNG/Forgestoker Dragon/98*", "https://api.scryfall.com/cards/pbng/98★/");
+            put("PBNG/Nessian Wilds Ravager/129*", "https://api.scryfall.com/cards/pbng/129★/");
+            put("PBNG/Silent Sentinel/26*", "https://api.scryfall.com/cards/pbng/26★/");
+            put("PBNG/Tromokratis/55*", "https://api.scryfall.com/cards/pbng/55★/");
+            // PDGM
+            put("PDGM/Breaking // Entering/124*", "https://api.scryfall.com/cards/pdgm/124★/");
+            put("PDGM/Maze's End/152*", "https://api.scryfall.com/cards/pdgm/152★/");
+            put("PDGM/Plains/157*", "https://api.scryfall.com/cards/pdgm/157★/");
+            // PDKA
+            put("PDKA/Archdemon of Greed/71*", "https://api.scryfall.com/cards/pdka/71★/");
+            put("PDKA/Mondronen Shaman/98*", "https://api.scryfall.com/cards/pdka/98★/");
+            put("PDKA/Ravenous Demon/71*", "https://api.scryfall.com/cards/pdka/71★/");
+            put("PDKA/Tovolar's Magehunter/98*", "https://api.scryfall.com/cards/pdka/98★/");
+            // PGTC
+            put("PGTC/Consuming Aberration/152*", "https://api.scryfall.com/cards/pgtc/152★/");
+            put("PGTC/Fathom Mage/162*", "https://api.scryfall.com/cards/pgtc/162★/");
+            put("PGTC/Foundry Champion/165*", "https://api.scryfall.com/cards/pgtc/165★/");
+            put("PGTC/Rubblehulk/191*", "https://api.scryfall.com/cards/pgtc/191★/");
+            put("PGTC/Skarrg Goliath/133*", "https://api.scryfall.com/cards/pgtc/133★/");
+            put("PGTC/Treasury Thrull/201*", "https://api.scryfall.com/cards/pgtc/201★/");
             // PLS
             put("PLS/Ertai, the Corrupted/107*", "https://api.scryfall.com/cards/pls/107★/");
             put("PLS/Skyship Weatherlight/133*", "https://api.scryfall.com/cards/pls/133★/");
@@ -718,14 +748,85 @@ public class ScryfallImageSupportCards {
             put("POR/Monstrous Growth/173+", "https://api.scryfall.com/cards/por/173†/");
             put("POR/Raging Goblin/145+", "https://api.scryfall.com/cards/por/145†/");
             put("POR/Warrior's Charge/38+", "https://api.scryfall.com/cards/por/38†/");
+            // PISD
+            put("PISD/Howlpack Alpha/193*", "https://api.scryfall.com/cards/pisd/193★/");
+            put("PISD/Ludevic's Abomination/64*", "https://api.scryfall.com/cards/pisd/64★/");
+            put("PISD/Ludevic's Test Subject/64*", "https://api.scryfall.com/cards/pisd/64★/");
+            put("PISD/Mayor of Avabruck/193*", "https://api.scryfall.com/cards/pisd/193★/");
+            // PJOU
+            put("PJOU/Dawnbringer Charioteers/6*", "https://api.scryfall.com/cards/pjou/6★/");
+            put("PJOU/Dictate of the Twin Gods/93*", "https://api.scryfall.com/cards/pjou/93★/");
+            put("PJOU/Doomwake Giant/66*", "https://api.scryfall.com/cards/pjou/66★/");
+            put("PJOU/Heroes' Bane/126*", "https://api.scryfall.com/cards/pjou/126★/");
+            put("PJOU/Scourge of Fleets/51*", "https://api.scryfall.com/cards/pjou/51★/");
+            put("PJOU/Spawn of Thraxes/112*", "https://api.scryfall.com/cards/pjou/112★/");
+            // PM10
+            put("PM10/Ant Queen/166*", "https://api.scryfall.com/cards/pm10/166★/");
+            put("PM10/Honor of the Pure/16*", "https://api.scryfall.com/cards/pm10/16★/");
+            put("PM10/Vampire Nocturnus/118*", "https://api.scryfall.com/cards/pm10/118★/");
+            // PM11
+            put("PM11/Ancient Hellkite/122*", "https://api.scryfall.com/cards/pm11/122★/");
+            put("PM11/Birds of Paradise/165*", "https://api.scryfall.com/cards/pm11/165★/");
+            put("PM11/Sun Titan/35*", "https://api.scryfall.com/cards/pm11/35★/");
+            // PM12
+            put("PM12/Bloodlord of Vaasgoth/82*", "https://api.scryfall.com/cards/pm12/82★/");
+            put("PM12/Chandra's Phoenix/126*", "https://api.scryfall.com/cards/pm12/126★/");
+            put("PM12/Garruk's Horde/176*", "https://api.scryfall.com/cards/pm12/176★/");
+            // PM13
+            put("PM13/Cathedral of War/221*", "https://api.scryfall.com/cards/pm13/221★/");
+            put("PM13/Magmaquake/140*", "https://api.scryfall.com/cards/pm13/140★/");
+            put("PM13/Mwonvuli Beast Tracker/177*", "https://api.scryfall.com/cards/pm13/177★/");
+            put("PM13/Staff of Nin/217*", "https://api.scryfall.com/cards/pm13/217★/");
+            put("PM13/Xathrid Gorgon/118*", "https://api.scryfall.com/cards/pm13/118★/");
+            // PM14
+            put("PM14/Colossal Whale/48*", "https://api.scryfall.com/cards/pm14/48★/");
+            put("PM14/Goblin Diplomats/141*", "https://api.scryfall.com/cards/pm14/141★/");
+            put("PM14/Hive Stirrings/21*", "https://api.scryfall.com/cards/pm14/21★/");
+            put("PM14/Megantic Sliver/185*", "https://api.scryfall.com/cards/pm14/185★/");
+            put("PM14/Ratchet Bomb/215*", "https://api.scryfall.com/cards/pm14/215★/");
             // PROE
-            put("PROE/Emrakul, the Aeons Torn/*4", "https://api.scryfall.com/cards/proe/★4/");
-            put("PROE/Lord of Shatterskull Pass/*156", "https://api.scryfall.com/cards/proe/★156/");
+            put("PROE/Emrakul, the Aeons Torn/4*", "https://api.scryfall.com/cards/proe/4★/");
+            put("PROE/Lord of Shatterskull Pass/156*", "https://api.scryfall.com/cards/proe/156★/");
             //
-            // PPRE
-            put("PPRE/Beast of Burden/5+", "https://api.scryfall.com/cards/ppre/5†/");
+            // PMBS
+            put("PMBS/Glissa, the Traitor/96*", "https://api.scryfall.com/cards/pmbs/96★/");
+            put("PMBS/Hero of Bladehold/8*", "https://api.scryfall.com/cards/pmbs/8★/");
+            put("PMBS/Thopter Assembly/140*", "https://api.scryfall.com/cards/pmbs/140★/");
+            // PNPH
+            put("PNPH/Phyrexian Metamorph/42*", "https://api.scryfall.com/cards/pnph/42★/");
+            put("PNPH/Sheoldred, Whispering One/73*", "https://api.scryfall.com/cards/pnph/73★/");
+            // PRES
+            put("PRES/Goblin Chieftain/141*", "https://api.scryfall.com/cards/pres/141★/");
+            put("PRES/Loam Lion/13*", "https://api.scryfall.com/cards/pres/13★/");
+            put("PRES/Oran-Rief, the Vastwood/221*", "https://api.scryfall.com/cards/pres/221★/");
+            // PROE
+            put("PROE/Emrakul, the Aeons Torn/4*", "https://api.scryfall.com/cards/proe/4★/");
+            put("PROE/Lord of Shatterskull Pass/156*", "https://api.scryfall.com/cards/proe/156★/");
+            // PRTR
+            put("PRTR/Archon of the Triumvirate/142*", "https://api.scryfall.com/cards/prtr/142★/");
+            put("PRTR/Carnival Hellsteed/147*", "https://api.scryfall.com/cards/prtr/147★/");
+            put("PRTR/Corpsejack Menace/152*", "https://api.scryfall.com/cards/prtr/152★/");
+            put("PRTR/Deadbridge Goliath/120*", "https://api.scryfall.com/cards/prtr/120★/");
+            put("PRTR/Grove of the Guardian/240*", "https://api.scryfall.com/cards/prtr/240★/");
+            put("PRTR/Hypersonic Dragon/170*", "https://api.scryfall.com/cards/prtr/170★/");
+            // PSDC
+            put("PSDC/Ajani, Caller of the Pride/1*", "https://api.scryfall.com/cards/psdc/1★/");
+            put("PSDC/Chandra, Pyromaster/132*", "https://api.scryfall.com/cards/psdc/132★/");
+            put("PSDC/Garruk, Caller of Beasts/172*", "https://api.scryfall.com/cards/psdc/172★/");
+            put("PSDC/Jace, Memory Adept/60*", "https://api.scryfall.com/cards/psdc/60★/");
+            put("PSDC/Liliana of the Dark Realms/102*", "https://api.scryfall.com/cards/psdc/102★/");
             // PSOI
             put("PSOI/Tamiyo's Journal/265s+", "https://api.scryfall.com/cards/psoi/265s†/");
+            // PSOM
+            put("PSOM/Steel Hellkite/205*", "https://api.scryfall.com/cards/psom/205★/");
+            put("PSOM/Wurmcoil Engine/223*", "https://api.scryfall.com/cards/psom/223★/");
+            // PTHS
+            put("PTHS/Abhorrent Overlord/75*", "https://api.scryfall.com/cards/pths/75★/");
+            put("PTHS/Anthousa, Setessan Hero/149*", "https://api.scryfall.com/cards/pths/149★/");
+            put("PTHS/Bident of Thassa/42*", "https://api.scryfall.com/cards/pths/42★/");
+            put("PTHS/Celestial Archon/3*", "https://api.scryfall.com/cards/pths/3★/");
+            put("PTHS/Ember Swallower/120*", "https://api.scryfall.com/cards/pths/120★/");
+            put("PTHS/Shipbreaker Kraken/63*", "https://api.scryfall.com/cards/pths/63★/");
             // PWAR
             put("PWAR/Ajani, the Greathearted/184s*", "https://api.scryfall.com/cards/pwar/184s★/");
             put("PWAR/Angrath, Captain of Chaos/227s*", "https://api.scryfall.com/cards/pwar/227s★/");
@@ -763,14 +864,21 @@ public class ScryfallImageSupportCards {
             put("PWAR/Ugin, the Ineffable/2s*", "https://api.scryfall.com/cards/pwar/2s★/");
             put("PWAR/Vivien, Champion of the Wilds/180s*", "https://api.scryfall.com/cards/pwar/180s★/");
             put("PWAR/Vraska, Swarm's Eminence/236s*", "https://api.scryfall.com/cards/pwar/236s★/");
+            // PWWK
+            put("PWWK/Comet Storm/76*", "https://api.scryfall.com/cards/pwwk/76★/");
+            put("PWWK/Joraga Warcaller/106*", "https://api.scryfall.com/cards/pwwk/106★/");
+            put("PWWK/Ruthless Cullblade/65*", "https://api.scryfall.com/cards/pwwk/65★/");
+            // PZEN
+            put("PZEN/Rampaging Baloths/178*", "https://api.scryfall.com/cards/pzen/178★/");
+            put("PZEN/Valakut, the Molten Pinnacle/228*", "https://api.scryfall.com/cards/pzen/228★/");
             // SHM
             put("SHM/Reflecting Pool/278*", "https://api.scryfall.com/cards/shm/278★/");
             // SOI
-            put("SOI/Tamiyo's Journal/265+", "https://api.scryfall.com/cards/soi/265†/");
             put("SOI/Tamiyo's Journal/265+a", "https://api.scryfall.com/cards/soi/265†a/");
             put("SOI/Tamiyo's Journal/265+b", "https://api.scryfall.com/cards/soi/265†b/");
             put("SOI/Tamiyo's Journal/265+c", "https://api.scryfall.com/cards/soi/265†c/");
             put("SOI/Tamiyo's Journal/265+d", "https://api.scryfall.com/cards/soi/265†d/");
+            put("SOI/Tamiyo's Journal/265+e", "https://api.scryfall.com/cards/soi/265†e/");
             // THB
             put("THB/Temple of Abandon/347*", "https://api.scryfall.com/cards/thb/347★/");
             // UNH

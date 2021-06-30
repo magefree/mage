@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class Odyssey extends ExpansionSet {
@@ -25,9 +24,10 @@ public final class Odyssey extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Abandoned Outpost", 312, Rarity.COMMON, mage.cards.a.AbandonedOutpost.class));
-        cards.add(new SetCardInfo("Aboshan, Cephalid Emperor", 58, Rarity.RARE, mage.cards.a.AboshanCephalidEmperor.class));
         cards.add(new SetCardInfo("Aboshan's Desire", 59, Rarity.COMMON, mage.cards.a.AboshansDesire.class));
+        cards.add(new SetCardInfo("Aboshan, Cephalid Emperor", 58, Rarity.RARE, mage.cards.a.AboshanCephalidEmperor.class));
         cards.add(new SetCardInfo("Acceptable Losses", 172, Rarity.COMMON, mage.cards.a.AcceptableLosses.class));
         cards.add(new SetCardInfo("Aegis of Honor", 1, Rarity.RARE, mage.cards.a.AegisOfHonor.class));
         cards.add(new SetCardInfo("Aether Burst", 60, Rarity.COMMON, mage.cards.a.AetherBurst.class));
@@ -82,7 +82,8 @@ public final class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Centaur Garden", 316, Rarity.UNCOMMON, mage.cards.c.CentaurGarden.class));
         cards.add(new SetCardInfo("Cephalid Broker", 71, Rarity.UNCOMMON, mage.cards.c.CephalidBroker.class));
         cards.add(new SetCardInfo("Cephalid Coliseum", 317, Rarity.UNCOMMON, mage.cards.c.CephalidColiseum.class));
-        cards.add(new SetCardInfo("Cephalid Looter", 72, Rarity.COMMON, mage.cards.c.CephalidLooter.class));
+        cards.add(new SetCardInfo("Cephalid Looter", "72+", Rarity.COMMON, mage.cards.c.CephalidLooter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cephalid Looter", 72, Rarity.COMMON, mage.cards.c.CephalidLooter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cephalid Retainer", 73, Rarity.RARE, mage.cards.c.CephalidRetainer.class));
         cards.add(new SetCardInfo("Cephalid Scout", 74, Rarity.COMMON, mage.cards.c.CephalidScout.class));
         cards.add(new SetCardInfo("Cephalid Shrine", 75, Rarity.RARE, mage.cards.c.CephalidShrine.class));
@@ -178,8 +179,8 @@ public final class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivy Elemental", 245, Rarity.RARE, mage.cards.i.IvyElemental.class));
         cards.add(new SetCardInfo("Junk Golem", 300, Rarity.RARE, mage.cards.j.JunkGolem.class));
-        cards.add(new SetCardInfo("Kamahl, Pit Fighter", 198, Rarity.RARE, mage.cards.k.KamahlPitFighter.class));
         cards.add(new SetCardInfo("Kamahl's Desire", 199, Rarity.COMMON, mage.cards.k.KamahlsDesire.class));
+        cards.add(new SetCardInfo("Kamahl, Pit Fighter", 198, Rarity.RARE, mage.cards.k.KamahlPitFighter.class));
         cards.add(new SetCardInfo("Karmic Justice", 26, Rarity.RARE, mage.cards.k.KarmicJustice.class));
         cards.add(new SetCardInfo("Kirtar's Desire", 27, Rarity.COMMON, mage.cards.k.KirtarsDesire.class));
         cards.add(new SetCardInfo("Kirtar's Wrath", 28, Rarity.RARE, mage.cards.k.KirtarsWrath.class));
@@ -254,6 +255,7 @@ public final class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Persuasion", 92, Rarity.RARE, mage.cards.p.Persuasion.class));
         cards.add(new SetCardInfo("Petrified Field", 323, Rarity.RARE, mage.cards.p.PetrifiedField.class));
         cards.add(new SetCardInfo("Phantatog", 291, Rarity.UNCOMMON, mage.cards.p.Phantatog.class));
+        cards.add(new SetCardInfo("Phantom Whelp", 93, Rarity.COMMON, mage.cards.p.PhantomWhelp.class));
         cards.add(new SetCardInfo("Pianna, Nomad Captain", 39, Rarity.RARE, mage.cards.p.PiannaNomadCaptain.class));
         cards.add(new SetCardInfo("Pilgrim of Justice", 40, Rarity.COMMON, mage.cards.p.PilgrimOfJustice.class));
         cards.add(new SetCardInfo("Pilgrim of Virtue", 41, Rarity.COMMON, mage.cards.p.PilgrimOfVirtue.class));
@@ -262,7 +264,6 @@ public final class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 332, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Phantom Whelp", 93, Rarity.COMMON, mage.cards.p.PhantomWhelp.class));
         cards.add(new SetCardInfo("Predict", 94, Rarity.UNCOMMON, mage.cards.p.Predict.class));
         cards.add(new SetCardInfo("Price of Glory", 214, Rarity.UNCOMMON, mage.cards.p.PriceOfGlory.class));
         cards.add(new SetCardInfo("Primal Frenzy", 262, Rarity.COMMON, mage.cards.p.PrimalFrenzy.class));
@@ -292,11 +293,12 @@ public final class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Scorching Missile", 219, Rarity.COMMON, mage.cards.s.ScorchingMissile.class));
         cards.add(new SetCardInfo("Screams of the Damned", 160, Rarity.UNCOMMON, mage.cards.s.ScreamsOfTheDamned.class));
         cards.add(new SetCardInfo("Scrivener", 100, Rarity.COMMON, mage.cards.s.Scrivener.class));
-        cards.add(new SetCardInfo("Seafloor Debris", 325, Rarity.COMMON, mage.cards.s.SeafloorDebris.class));
+        cards.add(new SetCardInfo("Seafloor Debris", "325+", Rarity.COMMON, mage.cards.s.SeafloorDebris.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Seafloor Debris", 325, Rarity.COMMON, mage.cards.s.SeafloorDebris.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Second Thoughts", 45, Rarity.COMMON, mage.cards.s.SecondThoughts.class));
         cards.add(new SetCardInfo("Seize the Day", 220, Rarity.RARE, mage.cards.s.SeizeTheDay.class));
-        cards.add(new SetCardInfo("Seton, Krosan Protector", 267, Rarity.RARE, mage.cards.s.SetonKrosanProtector.class));
         cards.add(new SetCardInfo("Seton's Desire", 268, Rarity.COMMON, mage.cards.s.SetonsDesire.class));
+        cards.add(new SetCardInfo("Seton, Krosan Protector", 267, Rarity.RARE, mage.cards.s.SetonKrosanProtector.class));
         cards.add(new SetCardInfo("Shadowblood Egg", 308, Rarity.UNCOMMON, mage.cards.s.ShadowbloodEgg.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 326, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Shadowmage Infiltrator", 294, Rarity.RARE, mage.cards.s.ShadowmageInfiltrator.class));
