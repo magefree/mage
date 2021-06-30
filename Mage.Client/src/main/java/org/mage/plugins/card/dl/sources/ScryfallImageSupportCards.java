@@ -174,7 +174,6 @@ public class ScryfallImageSupportCards {
             add("P10E"); // Tenth Edition Promos
             add("PSUM"); // Summer of Magic
             add("ME1"); // Masters Edition
-            add("PREL"); // Release Events
             add("LRW"); // Lorwyn
             add("DD1"); // Duel Decks: Elves vs. Goblins
             add("PSUS"); // Junior Super Series
@@ -195,6 +194,7 @@ public class ScryfallImageSupportCards {
             add("ME2"); // Masters Edition II
             add("PWPN"); // Wizards Play Network 2008
             add("ALA"); // Shards of Alara
+            add("PALA"); // Shards of Alara Promos
             add("DD2"); // Duel Decks: Jace vs. Chandra
             add("PWP09"); // Wizards Play Network 2009
             add("PDTP"); // Duels of the Planeswalkers 2009 Promos
@@ -205,7 +205,6 @@ public class ScryfallImageSupportCards {
             add("PBOOK"); // Miscellaneous Book Promos
             add("CON"); // Conflux
             add("DDC"); // Duel Decks: Divine vs. Demonic
-            add("PPRE"); // Prerelease Events
             add("ARB"); // Alara Reborn
             add("PM10"); // Magic 2010 Promos
             add("M10"); // Magic 2010

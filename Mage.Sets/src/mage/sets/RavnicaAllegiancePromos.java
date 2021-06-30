@@ -35,7 +35,6 @@ public class RavnicaAllegiancePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Breeding Pool", "246p", Rarity.RARE, mage.cards.b.BreedingPool.class));
         cards.add(new SetCardInfo("Cindervines", "161p", Rarity.RARE, mage.cards.c.Cindervines.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cindervines", "161s", Rarity.RARE, mage.cards.c.Cindervines.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Consecrate // Consume", "224p", Rarity.UNCOMMON, mage.cards.c.ConsecrateConsume.class));
         cards.add(new SetCardInfo("Deputy of Detention", "165p", Rarity.RARE, mage.cards.d.DeputyOfDetention.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deputy of Detention", "165s", Rarity.RARE, mage.cards.d.DeputyOfDetention.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Electrodominance", "99p", Rarity.RARE, mage.cards.e.Electrodominance.class));
@@ -67,8 +66,8 @@ public class RavnicaAllegiancePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Kaya's Wrath", "187p", Rarity.RARE, mage.cards.k.KayasWrath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kaya's Wrath", "187s", Rarity.RARE, mage.cards.k.KayasWrath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kaya, Orzhov Usurper", "186p", Rarity.MYTHIC, mage.cards.k.KayaOrzhovUsurper.class));
-        cards.add(new SetCardInfo("Lavinia, Azorius Renegade", 189, Rarity.RARE, mage.cards.l.LaviniaAzoriusRenegade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lavinia, Azorius Renegade", "189s", Rarity.RARE, mage.cards.l.LaviniaAzoriusRenegade.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lavinia, Azorius Renegade", 189, Rarity.RARE, mage.cards.l.LaviniaAzoriusRenegade.class));
         cards.add(new SetCardInfo("Light Up the Stage", 107, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
         cards.add(new SetCardInfo("Lumbering Battlement", "15s", Rarity.RARE, mage.cards.l.LumberingBattlement.class));
         cards.add(new SetCardInfo("Mass Manipulation", "42p", Rarity.RARE, mage.cards.m.MassManipulation.class));
@@ -86,10 +85,11 @@ public class RavnicaAllegiancePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Rix Maadi Reveler", "109s", Rarity.RARE, mage.cards.r.RixMaadiReveler.class));
         cards.add(new SetCardInfo("Seraph of the Scales", "205p", Rarity.MYTHIC, mage.cards.s.SeraphOfTheScales.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seraph of the Scales", "205s", Rarity.MYTHIC, mage.cards.s.SeraphOfTheScales.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Simic Ascendancy", 207, Rarity.RARE, mage.cards.s.SimicAscendancy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Simic Ascendancy", "207s", Rarity.RARE, mage.cards.s.SimicAscendancy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Simic Ascendancy", 207, Rarity.RARE, mage.cards.s.SimicAscendancy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skarrgan Hellkite", "114p", Rarity.MYTHIC, mage.cards.s.SkarrganHellkite.class));
         cards.add(new SetCardInfo("Smothering Tithe", "22p", Rarity.RARE, mage.cards.s.SmotheringTithe.class));
+        cards.add(new SetCardInfo("Spawn of Mayhem", "85p", Rarity.MYTHIC, mage.cards.s.SpawnOfMayhem.class));
         cards.add(new SetCardInfo("Sphinx of Foresight", "55s", Rarity.RARE, mage.cards.s.SphinxOfForesight.class));
         cards.add(new SetCardInfo("Stomping Ground", "259p", Rarity.RARE, mage.cards.s.StompingGround.class));
         cards.add(new SetCardInfo("Teysa Karlov", "212p", Rarity.RARE, mage.cards.t.TeysaKarlov.class, NON_FULL_USE_VARIOUS));
@@ -97,7 +97,8 @@ public class RavnicaAllegiancePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Theater of Horrors", "213s", Rarity.RARE, mage.cards.t.TheaterOfHorrors.class));
         cards.add(new SetCardInfo("Tithe Taker", "27p", Rarity.RARE, mage.cards.t.TitheTaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tithe Taker", "27s", Rarity.RARE, mage.cards.t.TitheTaker.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Unbreakable Formation", "29s", Rarity.RARE, mage.cards.u.UnbreakableFormation.class));
+        cards.add(new SetCardInfo("Unbreakable Formation", "29p", Rarity.RARE, mage.cards.u.UnbreakableFormation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Unbreakable Formation", "29s", Rarity.RARE, mage.cards.u.UnbreakableFormation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zegana, Utopian Speaker", "214s", Rarity.RARE, mage.cards.z.ZeganaUtopianSpeaker.class));
-     }
+    }
 }
