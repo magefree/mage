@@ -41,13 +41,6 @@ public final class GuildThief extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{3}{U}")
         ).withFlavorWord("Cunning Action"));
-
-        // TODO: EXAMPLE DELETE
-        // When Fathom Fleet Cutthroat enters the battlefield, destroy target creature an opponent controls that was dealt damage this turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetCreaturePermanent());
-        ability.withFlavorWord("Tail Spikes");
-        this.addAbility(ability);
     }
 
     private GuildThief(final GuildThief card) {
