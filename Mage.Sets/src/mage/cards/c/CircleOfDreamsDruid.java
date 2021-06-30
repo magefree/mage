@@ -10,7 +10,7 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -18,7 +18,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public final class CircleOfDreamsDruid extends CardImpl {
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent());
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE);
 
     public CircleOfDreamsDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{G}{G}");
