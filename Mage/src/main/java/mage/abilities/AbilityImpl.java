@@ -60,6 +60,7 @@ public abstract class AbilityImpl implements Ability {
     protected Zone zone;
     protected String name;
     protected AbilityWord abilityWord;
+    protected String flavorWord;
     protected boolean usesStack = true;
     protected boolean ruleAtTheTop = false;
     protected boolean ruleVisible = true;
@@ -117,6 +118,7 @@ public abstract class AbilityImpl implements Ability {
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
         this.worksFaceDown = ability.worksFaceDown;
         this.abilityWord = ability.abilityWord;
+        this.flavorWord = ability.flavorWord;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
         this.canFizzle = ability.canFizzle;
         this.targetAdjuster = ability.targetAdjuster;
@@ -800,8 +802,16 @@ public abstract class AbilityImpl implements Ability {
         } else {
             rule = ruleStart;
         }
+        String prefix;
         if (abilityWord != null) {
-            rule = "<i>" + abilityWord + "</i> &mdash; " + Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+            prefix = abilityWord.formatWord();
+        } else if (flavorWord != null) {
+            prefix = "<i>" + flavorWord + "</i> &mdash; ";
+        } else {
+            prefix = null;
+        }
+        if (prefix != null) {
+            rule = prefix + CardUtil.getTextWithFirstCharUpperCase(rule);
         }
         if (appendToRule != null) {
             rule = rule.concat(appendToRule);
@@ -1059,6 +1069,11 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public Ability setAbilityWord(AbilityWord abilityWord) {
         this.abilityWord = abilityWord;
+        return this;
+    }
+
+    public Ability setFlavorWord(String flavorWord) {
+        this.flavorWord = flavorWord;
         return this;
     }
 
