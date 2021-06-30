@@ -1,9 +1,11 @@
 package mage.abilities;
 
+import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.Costs;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
@@ -25,8 +27,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.MageIdentifier;
-import mage.abilities.costs.common.TapSourceCost;
 
 /**
  * Practically everything in the game is started from an Ability. This interface
@@ -87,7 +87,7 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Gets the id of the object which put this ability in motion.
-     *
+     * <p>
      * WARNING, MageSingleton abilities contains dirty data here, so you can't use sourceId with it
      *
      * @return The {@link java.util.UUID} of the object this ability is
@@ -363,10 +363,11 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event);
-    
+
     /**
      * Returns true if the ability has a tap itself in their costs
-     * @return 
+     *
+     * @return
      */
     default boolean hasTapCost() {
         for (Cost cost : this.getCosts()) {
@@ -465,6 +466,8 @@ public interface Ability extends Controllable, Serializable {
      */
     Ability setAbilityWord(AbilityWord abilityWord);
 
+    Ability setFlavorWord(String flavorWord);
+
     /**
      * Creates the message about the ability casting/triggering/activating to
      * post in the game log before the ability resolves.
@@ -550,8 +553,8 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     boolean isSameInstance(Ability ability);
-    
-    MageIdentifier getIdentifier(); 
+
+    MageIdentifier getIdentifier();
 
     AbilityImpl setIdentifier(MageIdentifier mageIdentifier);
 }
