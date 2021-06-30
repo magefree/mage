@@ -25,7 +25,8 @@ public final class DuelDecksJaceVsChandra extends ExpansionSet {
         cards.add(new SetCardInfo("Ancestral Vision", 21, Rarity.RARE, mage.cards.a.AncestralVision.class));
         cards.add(new SetCardInfo("Bottle Gnomes", 7, Rarity.UNCOMMON, mage.cards.b.BottleGnomes.class));
         cards.add(new SetCardInfo("Brine Elemental", 18, Rarity.UNCOMMON, mage.cards.b.BrineElemental.class));
-        cards.add(new SetCardInfo("Chandra Nalaar", 34, Rarity.MYTHIC, mage.cards.c.ChandraNalaar.class));
+        cards.add(new SetCardInfo("Chandra Nalaar", "34*", Rarity.MYTHIC, mage.cards.c.ChandraNalaar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Chandra Nalaar", 34, Rarity.MYTHIC, mage.cards.c.ChandraNalaar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chartooth Cougar", 47, Rarity.COMMON, mage.cards.c.ChartoothCougar.class));
         cards.add(new SetCardInfo("Condescend", 28, Rarity.COMMON, mage.cards.c.Condescend.class));
         cards.add(new SetCardInfo("Cone of Flame", 54, Rarity.UNCOMMON, mage.cards.c.ConeOfFlame.class));
@@ -55,7 +56,8 @@ public final class DuelDecksJaceVsChandra extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 31, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 32, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 33, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Jace Beleren", 1, Rarity.MYTHIC, mage.cards.j.JaceBeleren.class));
+        cards.add(new SetCardInfo("Jace Beleren", "1*", Rarity.MYTHIC, mage.cards.j.JaceBeleren.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jace Beleren", 1, Rarity.MYTHIC, mage.cards.j.JaceBeleren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Keldon Megaliths", 58, Rarity.UNCOMMON, mage.cards.k.KeldonMegaliths.class));
         cards.add(new SetCardInfo("Magma Jet", 52, Rarity.UNCOMMON, mage.cards.m.MagmaJet.class));
         cards.add(new SetCardInfo("Man-o'-War", 8, Rarity.COMMON, mage.cards.m.ManOWar.class));

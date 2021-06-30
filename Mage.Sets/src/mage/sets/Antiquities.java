@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class Antiquities extends ExpansionSet {
@@ -25,6 +24,7 @@ public final class Antiquities extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Amulet of Kroog", 36, Rarity.COMMON, mage.cards.a.AmuletOfKroog.class));
         cards.add(new SetCardInfo("Argivian Archaeologist", 1, Rarity.RARE, mage.cards.a.ArgivianArchaeologist.class));
         cards.add(new SetCardInfo("Argivian Blacksmith", 2, Rarity.COMMON, mage.cards.a.ArgivianBlacksmith.class));
@@ -68,9 +68,9 @@ public final class Antiquities extends ExpansionSet {
         cards.add(new SetCardInfo("Mightstone", 55, Rarity.UNCOMMON, mage.cards.m.Mightstone.class));
         cards.add(new SetCardInfo("Millstone", 56, Rarity.UNCOMMON, mage.cards.m.Millstone.class));
         cards.add(new SetCardInfo("Mishra's Factory", "80a", Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mishra's Factory", "80b", Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mishra's Factory", "80c", Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mishra's Factory", "80d", Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mishra's Factory", "80b", Rarity.RARE, mage.cards.m.MishrasFactory.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mishra's Factory", "80c", Rarity.RARE, mage.cards.m.MishrasFactory.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mishra's Factory", "80d", Rarity.RARE, mage.cards.m.MishrasFactory.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mishra's War Machine", 57, Rarity.RARE, mage.cards.m.MishrasWarMachine.class));
         cards.add(new SetCardInfo("Mishra's Workshop", 81, Rarity.RARE, mage.cards.m.MishrasWorkshop.class));
         cards.add(new SetCardInfo("Obelisk of Undoing", 58, Rarity.RARE, mage.cards.o.ObeliskOfUndoing.class));
@@ -91,14 +91,15 @@ public final class Antiquities extends ExpansionSet {
         cards.add(new SetCardInfo("Shatterstorm", 28, Rarity.RARE, mage.cards.s.Shatterstorm.class));
         cards.add(new SetCardInfo("Staff of Zegon", 65, Rarity.COMMON, mage.cards.s.StaffOfZegon.class));
         cards.add(new SetCardInfo("Strip Mine", "82a", Rarity.UNCOMMON, mage.cards.s.StripMine.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Strip Mine", "82b", Rarity.UNCOMMON, mage.cards.s.StripMine.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Strip Mine", "82c", Rarity.UNCOMMON, mage.cards.s.StripMine.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Strip Mine", "82d", Rarity.UNCOMMON, mage.cards.s.StripMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strip Mine", "82b", Rarity.RARE, mage.cards.s.StripMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strip Mine", "82c", Rarity.RARE, mage.cards.s.StripMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strip Mine", "82d", Rarity.RARE, mage.cards.s.StripMine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Su-Chi", 66, Rarity.UNCOMMON, mage.cards.s.SuChi.class));
         cards.add(new SetCardInfo("Tablet of Epityr", 67, Rarity.COMMON, mage.cards.t.TabletOfEpityr.class));
         cards.add(new SetCardInfo("Tawnos's Coffin", 68, Rarity.RARE, mage.cards.t.TawnossCoffin.class));
         cards.add(new SetCardInfo("Tawnos's Wand", 69, Rarity.UNCOMMON, mage.cards.t.TawnossWand.class));
-        cards.add(new SetCardInfo("Tawnos's Weaponry", 70, Rarity.UNCOMMON, mage.cards.t.TawnossWeaponry.class));
+        cards.add(new SetCardInfo("Tawnos's Weaponry", "70+", Rarity.UNCOMMON, mage.cards.t.TawnossWeaponry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tawnos's Weaponry", 70, Rarity.UNCOMMON, mage.cards.t.TawnossWeaponry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tetravus", 71, Rarity.RARE, mage.cards.t.Tetravus.class));
         cards.add(new SetCardInfo("The Rack", 72, Rarity.UNCOMMON, mage.cards.t.TheRack.class));
         cards.add(new SetCardInfo("Titania's Song", 35, Rarity.UNCOMMON, mage.cards.t.TitaniasSong.class));
@@ -108,14 +109,14 @@ public final class Antiquities extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Chalice", 75, Rarity.COMMON, mage.cards.u.UrzasChalice.class));
         cards.add(new SetCardInfo("Urza's Mine", "83a", Rarity.UNCOMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urza's Mine", "83b", Rarity.UNCOMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Urza's Mine", "83c", Rarity.UNCOMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Urza's Mine", "83d", Rarity.UNCOMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Mine", "83c", Rarity.COMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Mine", "83d", Rarity.COMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urza's Miter", 76, Rarity.RARE, mage.cards.u.UrzasMiter.class));
-        cards.add(new SetCardInfo("Urza's Power Plant", "84a", Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Power Plant", "84a", Rarity.COMMON, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urza's Power Plant", "84b", Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Urza's Power Plant", "84c", Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Power Plant", "84c", Rarity.COMMON, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urza's Power Plant", "84d", Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Urza's Tower", "85a", Rarity.UNCOMMON, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urza's Tower", "85a", Rarity.COMMON, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urza's Tower", "85b", Rarity.UNCOMMON, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urza's Tower", "85c", Rarity.UNCOMMON, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urza's Tower", "85d", Rarity.UNCOMMON, mage.cards.u.UrzasTower.class, NON_FULL_USE_VARIOUS));

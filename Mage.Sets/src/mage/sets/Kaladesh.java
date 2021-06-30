@@ -1,8 +1,4 @@
-
 package mage.sets;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
@@ -11,8 +7,10 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author fireshoes
  */
 public final class Kaladesh extends ExpansionSet {
@@ -38,25 +36,27 @@ public final class Kaladesh extends ExpansionSet {
         this.numBoosterSpecial = 0;
         this.maxCardNumberInBooster = 264;
         this.ratioBoosterSpecialLand = 144;
+
         cards.add(new SetCardInfo("Accomplished Automaton", 191, Rarity.COMMON, mage.cards.a.AccomplishedAutomaton.class));
         cards.add(new SetCardInfo("Acrobatic Maneuver", 1, Rarity.COMMON, mage.cards.a.AcrobaticManeuver.class));
         cards.add(new SetCardInfo("Aerial Responder", 2, Rarity.UNCOMMON, mage.cards.a.AerialResponder.class));
-        cards.add(new SetCardInfo("Aetherborn Marauder", 71, Rarity.UNCOMMON, mage.cards.a.AetherbornMarauder.class));
-        cards.add(new SetCardInfo("Aetherflux Reservoir", 192, Rarity.RARE, mage.cards.a.AetherfluxReservoir.class));
         cards.add(new SetCardInfo("Aether Hub", 242, Rarity.UNCOMMON, mage.cards.a.AetherHub.class));
         cards.add(new SetCardInfo("Aether Meltdown", 36, Rarity.UNCOMMON, mage.cards.a.AetherMeltdown.class));
+        cards.add(new SetCardInfo("Aether Theorist", 37, Rarity.COMMON, mage.cards.a.AetherTheorist.class));
+        cards.add(new SetCardInfo("Aether Tradewinds", 38, Rarity.COMMON, mage.cards.a.AetherTradewinds.class));
+        cards.add(new SetCardInfo("Aetherborn Marauder", 71, Rarity.UNCOMMON, mage.cards.a.AetherbornMarauder.class));
+        cards.add(new SetCardInfo("Aetherflux Reservoir", 192, Rarity.RARE, mage.cards.a.AetherfluxReservoir.class));
         cards.add(new SetCardInfo("Aethersquall Ancient", 39, Rarity.RARE, mage.cards.a.AethersquallAncient.class));
         cards.add(new SetCardInfo("Aetherstorm Roc", 3, Rarity.RARE, mage.cards.a.AetherstormRoc.class));
-        cards.add(new SetCardInfo("Aether Theorist", 37, Rarity.COMMON, mage.cards.a.AetherTheorist.class));
         cards.add(new SetCardInfo("Aethertorch Renegade", 106, Rarity.UNCOMMON, mage.cards.a.AethertorchRenegade.class));
-        cards.add(new SetCardInfo("Aether Tradewinds", 38, Rarity.COMMON, mage.cards.a.AetherTradewinds.class));
         cards.add(new SetCardInfo("Aetherworks Marvel", 193, Rarity.MYTHIC, mage.cards.a.AetherworksMarvel.class));
         cards.add(new SetCardInfo("Ambitious Aetherborn", 72, Rarity.COMMON, mage.cards.a.AmbitiousAetherborn.class));
         cards.add(new SetCardInfo("Angel of Invention", 4, Rarity.MYTHIC, mage.cards.a.AngelOfInvention.class));
         cards.add(new SetCardInfo("Animation Module", 194, Rarity.RARE, mage.cards.a.AnimationModule.class));
         cards.add(new SetCardInfo("Appetite for the Unnatural", 141, Rarity.COMMON, mage.cards.a.AppetiteForTheUnnatural.class));
         cards.add(new SetCardInfo("Aradara Express", 195, Rarity.COMMON, mage.cards.a.AradaraExpress.class));
-        cards.add(new SetCardInfo("Arborback Stomper", 142, Rarity.UNCOMMON, mage.cards.a.ArborbackStomper.class));
+        cards.add(new SetCardInfo("Arborback Stomper", "142+", Rarity.UNCOMMON, mage.cards.a.ArborbackStomper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Arborback Stomper", 142, Rarity.UNCOMMON, mage.cards.a.ArborbackStomper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Architect of the Untamed", 143, Rarity.RARE, mage.cards.a.ArchitectOfTheUntamed.class));
         cards.add(new SetCardInfo("Armorcraft Judge", 144, Rarity.UNCOMMON, mage.cards.a.ArmorcraftJudge.class));
         cards.add(new SetCardInfo("Attune with Aether", 145, Rarity.COMMON, mage.cards.a.AttuneWithAether.class));
@@ -69,7 +69,8 @@ public final class Kaladesh extends ExpansionSet {
         cards.add(new SetCardInfo("Bomat Bazaar Barge", 198, Rarity.UNCOMMON, mage.cards.b.BomatBazaarBarge.class));
         cards.add(new SetCardInfo("Bomat Courier", 199, Rarity.RARE, mage.cards.b.BomatCourier.class));
         cards.add(new SetCardInfo("Botanical Sanctum", 244, Rarity.RARE, mage.cards.b.BotanicalSanctum.class));
-        cards.add(new SetCardInfo("Brazen Scourge", 107, Rarity.UNCOMMON, mage.cards.b.BrazenScourge.class));
+        cards.add(new SetCardInfo("Brazen Scourge", "107+", Rarity.UNCOMMON, mage.cards.b.BrazenScourge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brazen Scourge", 107, Rarity.UNCOMMON, mage.cards.b.BrazenScourge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bristling Hydra", 147, Rarity.RARE, mage.cards.b.BristlingHydra.class));
         cards.add(new SetCardInfo("Built to Last", 7, Rarity.COMMON, mage.cards.b.BuiltToLast.class));
         cards.add(new SetCardInfo("Built to Smash", 108, Rarity.COMMON, mage.cards.b.BuiltToSmash.class));
@@ -77,8 +78,8 @@ public final class Kaladesh extends ExpansionSet {
         cards.add(new SetCardInfo("Cataclysmic Gearhulk", 9, Rarity.MYTHIC, mage.cards.c.CataclysmicGearhulk.class));
         cards.add(new SetCardInfo("Cathartic Reunion", 109, Rarity.COMMON, mage.cards.c.CatharticReunion.class));
         cards.add(new SetCardInfo("Ceremonious Rejection", 40, Rarity.UNCOMMON, mage.cards.c.CeremoniousRejection.class));
-        cards.add(new SetCardInfo("Chandra, Pyrogenius", 265, Rarity.MYTHIC, mage.cards.c.ChandraPyrogenius.class));
         cards.add(new SetCardInfo("Chandra's Pyrohelix", 111, Rarity.COMMON, mage.cards.c.ChandrasPyrohelix.class));
+        cards.add(new SetCardInfo("Chandra, Pyrogenius", 265, Rarity.MYTHIC, mage.cards.c.ChandraPyrogenius.class));
         cards.add(new SetCardInfo("Chandra, Torch of Defiance", 110, Rarity.MYTHIC, mage.cards.c.ChandraTorchOfDefiance.class));
         cards.add(new SetCardInfo("Chief of the Foundry", 200, Rarity.UNCOMMON, mage.cards.c.ChiefOfTheFoundry.class));
         cards.add(new SetCardInfo("Cloudblazer", 176, Rarity.UNCOMMON, mage.cards.c.Cloudblazer.class));
@@ -87,9 +88,9 @@ public final class Kaladesh extends ExpansionSet {
         cards.add(new SetCardInfo("Commencement of Festivities", 148, Rarity.COMMON, mage.cards.c.CommencementOfFestivities.class));
         cards.add(new SetCardInfo("Concealed Courtyard", 245, Rarity.RARE, mage.cards.c.ConcealedCourtyard.class));
         cards.add(new SetCardInfo("Confiscation Coup", 41, Rarity.RARE, mage.cards.c.ConfiscationCoup.class));
+        cards.add(new SetCardInfo("Consul's Shieldguard", 11, Rarity.UNCOMMON, mage.cards.c.ConsulsShieldguard.class));
         cards.add(new SetCardInfo("Consulate Skygate", 202, Rarity.COMMON, mage.cards.c.ConsulateSkygate.class));
         cards.add(new SetCardInfo("Consulate Surveillance", 10, Rarity.UNCOMMON, mage.cards.c.ConsulateSurveillance.class));
-        cards.add(new SetCardInfo("Consul's Shieldguard", 11, Rarity.UNCOMMON, mage.cards.c.ConsulsShieldguard.class));
         cards.add(new SetCardInfo("Contraband Kingpin", 177, Rarity.UNCOMMON, mage.cards.c.ContrabandKingpin.class));
         cards.add(new SetCardInfo("Cowl Prowler", 149, Rarity.COMMON, mage.cards.c.CowlProwler.class));
         cards.add(new SetCardInfo("Creeping Mold", 150, Rarity.UNCOMMON, mage.cards.c.CreepingMold.class));
@@ -133,9 +134,9 @@ public final class Kaladesh extends ExpansionSet {
         cards.add(new SetCardInfo("Fireforger's Puzzleknot", 213, Rarity.COMMON, mage.cards.f.FireforgersPuzzleknot.class));
         cards.add(new SetCardInfo("Flame Lash", 266, Rarity.COMMON, mage.cards.f.FlameLash.class));
         cards.add(new SetCardInfo("Fleetwheel Cruiser", 214, Rarity.RARE, mage.cards.f.FleetwheelCruiser.class));
-        cards.add(new SetCardInfo("Forest", 264, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 262, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 263, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 264, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fortuitous Find", 81, Rarity.COMMON, mage.cards.f.FortuitousFind.class));
         cards.add(new SetCardInfo("Foundry Inspector", 215, Rarity.UNCOMMON, mage.cards.f.FoundryInspector.class));
         cards.add(new SetCardInfo("Foundry Screecher", 82, Rarity.COMMON, mage.cards.f.FoundryScreecher.class));
@@ -168,8 +169,8 @@ public final class Kaladesh extends ExpansionSet {
         cards.add(new SetCardInfo("Inspired Charge", 20, Rarity.COMMON, mage.cards.i.InspiredCharge.class));
         cards.add(new SetCardInfo("Inspiring Vantage", 246, Rarity.RARE, mage.cards.i.InspiringVantage.class));
         cards.add(new SetCardInfo("Inventor's Apprentice", 120, Rarity.UNCOMMON, mage.cards.i.InventorsApprentice.class));
-        cards.add(new SetCardInfo("Inventors' Fair", 247, Rarity.RARE, mage.cards.i.InventorsFair.class));
         cards.add(new SetCardInfo("Inventor's Goggles", 218, Rarity.COMMON, mage.cards.i.InventorsGoggles.class));
+        cards.add(new SetCardInfo("Inventors' Fair", 247, Rarity.RARE, mage.cards.i.InventorsFair.class));
         cards.add(new SetCardInfo("Iron League Steed", 219, Rarity.UNCOMMON, mage.cards.i.IronLeagueSteed.class));
         cards.add(new SetCardInfo("Island", 253, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 254, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
@@ -254,8 +255,8 @@ public final class Kaladesh extends ExpansionSet {
         cards.add(new SetCardInfo("Servant of the Conduit", 169, Rarity.UNCOMMON, mage.cards.s.ServantOfTheConduit.class));
         cards.add(new SetCardInfo("Servo Exhibition", 27, Rarity.UNCOMMON, mage.cards.s.ServoExhibition.class));
         cards.add(new SetCardInfo("Shrewd Negotiation", 64, Rarity.UNCOMMON, mage.cards.s.ShrewdNegotiation.class));
-        cards.add(new SetCardInfo("Skyship Stalker", 130, Rarity.RARE, mage.cards.s.SkyshipStalker.class));
         cards.add(new SetCardInfo("Sky Skiff", 233, Rarity.COMMON, mage.cards.s.SkySkiff.class));
+        cards.add(new SetCardInfo("Skyship Stalker", 130, Rarity.RARE, mage.cards.s.SkyshipStalker.class));
         cards.add(new SetCardInfo("Skysovereign, Consul Flagship", 234, Rarity.MYTHIC, mage.cards.s.SkysovereignConsulFlagship.class));
         cards.add(new SetCardInfo("Skyswirl Harrier", 28, Rarity.COMMON, mage.cards.s.SkyswirlHarrier.class));
         cards.add(new SetCardInfo("Skywhaler's Shot", 29, Rarity.UNCOMMON, mage.cards.s.SkywhalersShot.class));
@@ -275,7 +276,8 @@ public final class Kaladesh extends ExpansionSet {
         cards.add(new SetCardInfo("Syndicate Trafficker", 101, Rarity.RARE, mage.cards.s.SyndicateTrafficker.class));
         cards.add(new SetCardInfo("Take Down", 170, Rarity.COMMON, mage.cards.t.TakeDown.class));
         cards.add(new SetCardInfo("Tasseled Dromedary", 30, Rarity.COMMON, mage.cards.t.TasseledDromedary.class));
-        cards.add(new SetCardInfo("Terrain Elemental", 272, Rarity.COMMON, mage.cards.t.TerrainElemental.class));
+        cards.add(new SetCardInfo("Terrain Elemental", "272+", Rarity.COMMON, mage.cards.t.TerrainElemental.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Terrain Elemental", 272, Rarity.COMMON, mage.cards.t.TerrainElemental.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Territorial Gorger", 136, Rarity.RARE, mage.cards.t.TerritorialGorger.class));
         cards.add(new SetCardInfo("Terror of the Fairgrounds", 137, Rarity.COMMON, mage.cards.t.TerrorOfTheFairgrounds.class));
         cards.add(new SetCardInfo("Tezzeret's Ambition", 65, Rarity.COMMON, mage.cards.t.TezzeretsAmbition.class));
@@ -302,12 +304,13 @@ public final class Kaladesh extends ExpansionSet {
         cards.add(new SetCardInfo("Weldfast Monitor", 238, Rarity.COMMON, mage.cards.w.WeldfastMonitor.class));
         cards.add(new SetCardInfo("Weldfast Wingsmith", 69, Rarity.COMMON, mage.cards.w.WeldfastWingsmith.class));
         cards.add(new SetCardInfo("Welding Sparks", 140, Rarity.COMMON, mage.cards.w.WeldingSparks.class));
-        cards.add(new SetCardInfo("Whirlermaker", 239, Rarity.UNCOMMON, mage.cards.w.Whirlermaker.class));
         cards.add(new SetCardInfo("Whirler Virtuoso", 190, Rarity.UNCOMMON, mage.cards.w.WhirlerVirtuoso.class));
-        cards.add(new SetCardInfo("Wildest Dreams", 174, Rarity.RARE, mage.cards.w.WildestDreams.class));
+        cards.add(new SetCardInfo("Whirlermaker", 239, Rarity.UNCOMMON, mage.cards.w.Whirlermaker.class));
         cards.add(new SetCardInfo("Wild Wanderer", 173, Rarity.COMMON, mage.cards.w.WildWanderer.class));
+        cards.add(new SetCardInfo("Wildest Dreams", 174, Rarity.RARE, mage.cards.w.WildestDreams.class));
         cards.add(new SetCardInfo("Wily Bandar", 175, Rarity.COMMON, mage.cards.w.WilyBandar.class));
-        cards.add(new SetCardInfo("Wind Drake", 70, Rarity.COMMON, mage.cards.w.WindDrake.class));
+        cards.add(new SetCardInfo("Wind Drake", "70+", Rarity.COMMON, mage.cards.w.WindDrake.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wind Drake", 70, Rarity.COMMON, mage.cards.w.WindDrake.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wispweaver Angel", 35, Rarity.UNCOMMON, mage.cards.w.WispweaverAngel.class));
         cards.add(new SetCardInfo("Woodland Stream", 274, Rarity.COMMON, mage.cards.w.WoodlandStream.class));
         cards.add(new SetCardInfo("Woodweaver's Puzzleknot", 240, Rarity.COMMON, mage.cards.w.WoodweaversPuzzleknot.class));
