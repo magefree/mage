@@ -32,17 +32,17 @@ public final class DawnbringerCleric extends CardImpl {
         // When Dawnbringer Cleric enters the battlefield, choose one —
         // • Cure Wounds — You gain 2 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1));
-        ability.getEffects().setFlavorWord("Cure Wounds");
+        ability.withFlavorWord("Cure Wounds");
 
         // • Dispel Magic — Destroy target enchantment.
         Mode mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetEnchantmentPermanent());
-        ability.addMode(mode.setFlavorWord("Dispel Magic"));
+        ability.addMode(mode.withFlavorWord("Dispel Magic"));
 
         // • Gentle Repose — Exile target card from a graveyard.
         mode = new Mode(new ExileTargetEffect());
         mode.addTarget(new TargetCardInGraveyard());
-        ability.addMode(mode.setFlavorWord("Gentle Repose"));
+        ability.addMode(mode.withFlavorWord("Gentle Repose"));
         this.addAbility(ability);
     }
 

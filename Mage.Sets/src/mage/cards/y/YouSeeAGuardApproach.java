@@ -25,12 +25,12 @@ public final class YouSeeAGuardApproach extends CardImpl {
         // • Distract the Guard — Tap target creature.
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().getEffects().setFlavorWord("Distract the Guard");
+        this.getSpellAbility().withFlavorWord("Distract the Guard");
 
         // • Hide — Target creature you control gains hexproof until end of turn.
         Mode mode = new Mode(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
         mode.addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addMode(mode.setFlavorWord("Hide"));
+        this.getSpellAbility().addMode(mode.withFlavorWord("Hide"));
     }
 
     private YouSeeAGuardApproach(final YouSeeAGuardApproach card) {

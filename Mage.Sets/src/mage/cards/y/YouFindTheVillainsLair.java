@@ -22,12 +22,12 @@ public final class YouFindTheVillainsLair extends CardImpl {
         // • Foil Their Scheme — Counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().getEffects().setFlavorWord("Foil Their Scheme");
+        this.getSpellAbility().withFlavorWord("Foil Their Scheme");
 
         // • Learn Their Secrets — Draw two cards, then discard two cards.
         this.getSpellAbility().addMode(new Mode(
                 new DrawDiscardControllerEffect(2, 2)
-        ).setFlavorWord("Learn Their Secrts"));
+        ).withFlavorWord("Learn Their Secrts"));
     }
 
     private YouFindTheVillainsLair(final YouFindTheVillainsLair card) {

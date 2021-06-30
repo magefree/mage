@@ -31,10 +31,12 @@ public final class InspiringBard extends CardImpl {
         // • Bardic Inspiration — Target creature gets +2/+2 until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 2));
         ability.addTarget(new TargetCreaturePermanent());
-        ability.getEffects().setFlavorWord("Bardic Inspiration");
+        ability.withFlavorWord("Bardic Inspiration");
 
         // • Song of Rest — You gain 3 life.
-        ability.addMode(new Mode(new GainLifeEffect(3)).setFlavorWord("Song of Rest"));
+        ability.addMode(new Mode(
+                new GainLifeEffect(3)
+        ).withFlavorWord("Song of Rest"));
         this.addAbility(ability);
     }
 
