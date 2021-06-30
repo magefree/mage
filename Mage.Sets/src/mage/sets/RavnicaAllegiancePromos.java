@@ -67,7 +67,7 @@ public class RavnicaAllegiancePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Kaya's Wrath", "187s", Rarity.RARE, mage.cards.k.KayasWrath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kaya, Orzhov Usurper", "186p", Rarity.MYTHIC, mage.cards.k.KayaOrzhovUsurper.class));
         cards.add(new SetCardInfo("Lavinia, Azorius Renegade", "189s", Rarity.RARE, mage.cards.l.LaviniaAzoriusRenegade.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Lavinia, Azorius Renegade", 189, Rarity.RARE, mage.cards.l.LaviniaAzoriusRenegade.class));
+        cards.add(new SetCardInfo("Lavinia, Azorius Renegade", 189, Rarity.RARE, mage.cards.l.LaviniaAzoriusRenegade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Light Up the Stage", 107, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
         cards.add(new SetCardInfo("Lumbering Battlement", "15s", Rarity.RARE, mage.cards.l.LumberingBattlement.class));
         cards.add(new SetCardInfo("Mass Manipulation", "42p", Rarity.RARE, mage.cards.m.MassManipulation.class));
