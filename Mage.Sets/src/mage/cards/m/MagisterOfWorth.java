@@ -41,7 +41,10 @@ public final class MagisterOfWorth extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Will of the council - When Magister of Worth enters the battlefield, starting with you, each player votes for grace or condemnation. If grace gets more votes, each player returns each creature card from their graveyard to the battlefield. If condemnation gets more votes or the vote is tied, destroy all creatures other than Magister of Worth.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new MagisterOfWorthEffect(), false, true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new MagisterOfWorthEffect(), false)
+                .withFlavorWord("Will of the council")
+        );
     }
 
     private MagisterOfWorth(final MagisterOfWorth card) {
@@ -64,8 +67,7 @@ class MagisterOfWorthEffect extends OneShotEffect {
 
     MagisterOfWorthEffect() {
         super(Outcome.Benefit);
-        staticText = "<i>Will of the council</i> &mdash; When {this} enters the battlefield, " +
-                "starting with you, each player votes for grace or condemnation. " +
+        staticText = "starting with you, each player votes for grace or condemnation. " +
                 "If grace gets more votes, each player returns each creature card from their graveyard to the battlefield. " +
                 "If condemnation gets more votes or the vote is tied, destroy all creatures other than {this}.";
     }

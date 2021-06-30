@@ -50,10 +50,10 @@ public final class KraulHarpooner extends CardImpl {
 
         // Undergrowth — When Kraul Harpooner enters the battlefield, choose up to one target creature with flying you don't control. Kraul Harpooner gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard, then you may have Kraul Harpooner fight that creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new KraulHarpoonerEffect(), false,
-                "<i>Undergrowth</i> &mdash; "
+                new KraulHarpoonerEffect(), false
         );
         ability.addTarget(new TargetPermanent(0, 1, filter, false));
+        ability.withFlavorWord("Undergrowth");
         this.addAbility(ability);
     }
 

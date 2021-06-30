@@ -41,8 +41,9 @@ public final class MournersShield extends CardImpl {
         
 
         // Imprint - When Mourner's Shield enters the battlefield, you may exile target card from a graveyard.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MournersShieldImprintEffect(), true, "Imprint &mdash; ");
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MournersShieldImprintEffect(), true);
         ability.addTarget(new TargetCardInGraveyard());
+        ability.withFlavorWord("Imprint");
         this.addAbility(ability);
 
         // {2}, {tap}: Prevent all damage that would be dealt this turn by a source of your choice that shares a color with the exiled card.

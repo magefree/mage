@@ -34,8 +34,9 @@ public final class MirrorGolem extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Imprint - When Mirror Golem enters the battlefield, you may exile target card from a graveyard.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MirrorGolemImprintEffect(), true, "Imprint &mdash; ");
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MirrorGolemImprintEffect(), true);
         ability.addTarget(new TargetCardInGraveyard());
+        ability.withFlavorWord("Imprint");
         this.addAbility(ability);
 
         // Mirror Golem has protection from each of the exiled card's card types.

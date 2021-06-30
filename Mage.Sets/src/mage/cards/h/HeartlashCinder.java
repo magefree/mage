@@ -41,8 +41,11 @@ public final class HeartlashCinder extends CardImpl {
 
         // Chroma - When Heartlash Cinder enters the battlefield, it gets +X/+0 until end of turn, where X is the number of red mana symbols in the mana costs of permanents you control.
         ContinuousEffect effect = new BoostSourceEffect(new ChromaHeartlashCinderCount(), StaticValue.get(0), Duration.EndOfTurn, true);
-        effect.setText("<i>Chroma</i> &mdash; When Heartlash Cinder enters the battlefield, it gets +X/+0 until end of turn, where X is the number of red mana symbols in the mana costs of permanents you control.");
-        this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false, true));
+        effect.setText("it gets +X/+0 until end of turn, where X is the number of red mana symbols in the mana costs of permanents you control");
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                effect, false)
+                .withFlavorWord("Chroma")
+        );
 
     }
 

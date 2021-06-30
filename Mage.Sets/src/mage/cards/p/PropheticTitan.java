@@ -52,8 +52,7 @@ public final class PropheticTitan extends CardImpl {
 class PropheticTitanTriggeredAbility extends EntersBattlefieldTriggeredAbility {
 
     public PropheticTitanTriggeredAbility() {
-        super(new DamageTargetEffect(4), false, "<i>Delirium</i> &mdash; ");
-        this.addTarget(new TargetAnyTarget());
+        super(new DamageTargetEffect(4), false);
         this.addMode(new Mode(new LookLibraryAndPickControllerEffect(
                 StaticValue.get(4), false, StaticValue.get(1),
                 StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false
@@ -62,7 +61,9 @@ class PropheticTitanTriggeredAbility extends EntersBattlefieldTriggeredAbility {
         this.getModes().setChooseText(
                 "choose one. If there are four or more card types among cards in your graveyard, choose both instead."
         );
+        this.addTarget(new TargetAnyTarget());
         this.addHint(CardTypesInGraveyardHint.YOU);
+        this.withFlavorWord("Delirium");
     }
 
     private PropheticTitanTriggeredAbility(final PropheticTitanTriggeredAbility ability) {

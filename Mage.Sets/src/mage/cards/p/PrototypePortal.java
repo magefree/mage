@@ -37,8 +37,9 @@ public final class PrototypePortal extends CardImpl {
 
         // Imprint - When Prototype Portal enters the battlefield, you may exile an artifact card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new PrototypePortalEffect(), true, "<i>Imprint</i> &mdash; "
-        ));
+                new PrototypePortalEffect(), true)
+                .withFlavorWord("Imprint")
+        );
 
         // {X}, {tap}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
         Ability ability = new SimpleActivatedAbility(new PrototypePortalCreateTokenEffect(), new ManaCostsImpl("{X}"));
