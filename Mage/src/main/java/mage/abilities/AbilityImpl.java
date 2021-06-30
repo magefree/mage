@@ -1079,6 +1079,12 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public Ability withFirstModeFlavorWord(String flavorWord) {
+        this.modes.getMode().withFlavorWord(flavorWord);
+        return this;
+    }
+
+    @Override
     public String getGameLogMessage(Game game) {
         if (game.isSimulation()) {
             return "";

@@ -22,7 +22,7 @@ public final class YouHearSomethingOnWatch extends CardImpl {
         // Choose one —
         // • Rouse the Party — Creatures you control get +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
-        this.getSpellAbility().getModes().getMode().withFlavorWord("Rouse the Party");
+        this.getSpellAbility().withFirstModeFlavorWord("Rouse the Party");
 
         // • Set Off Traps — This spell deals 5 damage to target attacking creature.
         Mode mode = new Mode(new DamageTargetEffect(5, "this spell"));

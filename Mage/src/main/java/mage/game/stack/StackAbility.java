@@ -502,6 +502,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public Ability withFirstModeFlavorWord(String flavorWord) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
     public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
