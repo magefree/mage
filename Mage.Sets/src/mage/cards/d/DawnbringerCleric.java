@@ -32,7 +32,7 @@ public final class DawnbringerCleric extends CardImpl {
         // When Dawnbringer Cleric enters the battlefield, choose one —
         // • Cure Wounds — You gain 2 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1));
-        ability.withFlavorWord("Cure Wounds");
+        ability.getModes().getMode().withFlavorWord("Cure Wounds");
 
         // • Dispel Magic — Destroy target enchantment.
         Mode mode = new Mode(new DestroyTargetEffect());

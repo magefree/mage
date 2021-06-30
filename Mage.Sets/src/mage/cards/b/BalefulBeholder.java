@@ -31,7 +31,7 @@ public final class BalefulBeholder extends CardImpl {
         // When Baleful Beholder enters the battlefield, choose one —
         // • Antimagic Cone — Each opponent sacrifices an enchantment.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_ENCHANTMENT_PERMANENT));
-        ability.withFlavorWord("Antimagic Cone");
+        ability.getModes().getMode().withFlavorWord("Antimagic Cone");
 
         // • Fear Ray — Creatures you control gain menace until end of turn.
         ability.addMode(new Mode(new GainAbilityControlledEffect(

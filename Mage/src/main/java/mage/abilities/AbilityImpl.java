@@ -60,6 +60,7 @@ public abstract class AbilityImpl implements Ability {
     protected Zone zone;
     protected String name;
     protected AbilityWord abilityWord;
+    protected String flavorWord;
     protected boolean usesStack = true;
     protected boolean ruleAtTheTop = false;
     protected boolean ruleVisible = true;
@@ -117,6 +118,7 @@ public abstract class AbilityImpl implements Ability {
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
         this.worksFaceDown = ability.worksFaceDown;
         this.abilityWord = ability.abilityWord;
+        this.flavorWord = ability.flavorWord;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
         this.canFizzle = ability.canFizzle;
         this.targetAdjuster = ability.targetAdjuster;
@@ -803,6 +805,8 @@ public abstract class AbilityImpl implements Ability {
         String prefix;
         if (abilityWord != null) {
             prefix = abilityWord.formatWord();
+        } else if (flavorWord != null) {
+            prefix = "<i>" + flavorWord + "</i> &mdash; ";
         } else {
             prefix = null;
         }
@@ -1070,7 +1074,7 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Ability withFlavorWord(String flavorWord) {
-        this.getModes().getMode().withFlavorWord(flavorWord);
+        this.flavorWord = flavorWord;
         return this;
     }
 

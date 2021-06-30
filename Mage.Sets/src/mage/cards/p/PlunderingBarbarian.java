@@ -32,7 +32,7 @@ public final class PlunderingBarbarian extends CardImpl {
         // • Smash the Chest — Destroy target artifact.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetArtifactPermanent());
-        ability.withFlavorWord("Smash the Chest");
+        ability.getModes().getMode().withFlavorWord("Smash the Chest");
 
         // • Pry It Open — Creature a Treasure token.
         ability.addMode(new Mode(

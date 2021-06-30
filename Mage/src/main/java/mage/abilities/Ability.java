@@ -467,7 +467,7 @@ public interface Ability extends Controllable, Serializable {
     Ability setAbilityWord(AbilityWord abilityWord);
 
     /**
-     * Set Flavor word for current mode
+     * Set flavor word for whole ability (if you need flavor word for choices then call it from mode)
      *
      * @param flavorWord
      * @return
