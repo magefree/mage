@@ -22,7 +22,7 @@ public final class YouSeeAPairOfGoblins extends CardImpl {
         // Choose one —
         // • Charge Them — Creatures you control get +2/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));
-        this.getSpellAbility().withFlavorWord("Charge Them");
+        this.getSpellAbility().getModes().getMode().withFlavorWord("Charge Them");
 
         // • Befriend Them — Create two 1/1 red Goblin creature tokens.
         this.getSpellAbility().addMode(new Mode(

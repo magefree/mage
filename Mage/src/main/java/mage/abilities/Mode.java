@@ -78,7 +78,7 @@ public class Mode implements Serializable {
     }
 
     /**
-     * Set Flavor word to the mode (same as ability/ancher words, but uses for lore/info and represents a possible choices)
+     * Set Flavor word for choice in the mode (same as ability/ancher words, but uses for lore/info and represents a possible choices)
      *
      * @param flavorWord
      * @return
