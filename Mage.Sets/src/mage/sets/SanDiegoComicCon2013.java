@@ -20,10 +20,10 @@ public class SanDiegoComicCon2013 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Ajani, Caller of the Pride", 1, Rarity.MYTHIC, mage.cards.a.AjaniCallerOfThePride.class));
-        cards.add(new SetCardInfo("Chandra, Pyromaster", 132, Rarity.MYTHIC, mage.cards.c.ChandraPyromaster.class));
-        cards.add(new SetCardInfo("Garruk, Caller of Beasts", 172, Rarity.MYTHIC, mage.cards.g.GarrukCallerOfBeasts.class));
-        cards.add(new SetCardInfo("Jace, Memory Adept", 60, Rarity.MYTHIC, mage.cards.j.JaceMemoryAdept.class));
-        cards.add(new SetCardInfo("Liliana of the Dark Realms", 102, Rarity.MYTHIC, mage.cards.l.LilianaOfTheDarkRealms.class));
-     }
+        cards.add(new SetCardInfo("Ajani, Caller of the Pride", "1*", Rarity.MYTHIC, mage.cards.a.AjaniCallerOfThePride.class));
+        cards.add(new SetCardInfo("Chandra, Pyromaster", "132*", Rarity.MYTHIC, mage.cards.c.ChandraPyromaster.class));
+        cards.add(new SetCardInfo("Garruk, Caller of Beasts", "172*", Rarity.MYTHIC, mage.cards.g.GarrukCallerOfBeasts.class));
+        cards.add(new SetCardInfo("Jace, Memory Adept", "60*", Rarity.MYTHIC, mage.cards.j.JaceMemoryAdept.class));
+        cards.add(new SetCardInfo("Liliana of the Dark Realms", "102*", Rarity.MYTHIC, mage.cards.l.LilianaOfTheDarkRealms.class));
+    }
 }
