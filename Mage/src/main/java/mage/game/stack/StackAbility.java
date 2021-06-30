@@ -497,7 +497,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public Ability setFlavorWord(String flavorWord) {
+    public Ability withFlavorWord(String flavorWord) {
         throw new UnsupportedOperationException("Not supported.");
     }
 

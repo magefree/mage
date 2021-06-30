@@ -36,7 +36,7 @@ public final class GuildThief extends CardImpl {
         // Cunning Action — {3}{U}: Guild Thief can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{3}{U}")
-        ).setFlavorWord("Cunning Action"));
+        ).withFlavorWord("Cunning Action"));
     }
 
     private GuildThief(final GuildThief card) {

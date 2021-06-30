@@ -14,14 +14,11 @@ import java.util.Arrays;
  */
 public class Effects extends ArrayList<Effect> {
 
-    private String flavorWord = null;
-
     public Effects(Effect... effects) {
         this.addAll(Arrays.asList(effects));
     }
 
     public Effects(final Effects effects) {
-        this.flavorWord = effects.flavorWord;
         for (Effect effect : effects) {
             this.add(effect.copy());
         }
@@ -64,7 +61,6 @@ public class Effects extends ArrayList<Effect> {
                 }
             }
 
-
             //check if nextRule is a new sentence or not.
             if (nextRule.startsWith("and ") || nextRule.startsWith("with ") || nextRule.startsWith("then ")) {
                 endString = " ";
@@ -100,10 +96,9 @@ public class Effects extends ArrayList<Effect> {
             sbText.append(currentRule);
 
             lastRule = nextRule;
-
         }
 
-        //add punctuation to very last rule.
+        // add punctuation to very last rule.
         if (lastRule != null && lastRule.length() > 3
                 && !lastRule.endsWith(".")
                 && !lastRule.endsWith("\"")
@@ -113,11 +108,12 @@ public class Effects extends ArrayList<Effect> {
             sbText.append('.');
         }
 
-        if (flavorWord != null) {
-            return "<i>" + flavorWord + "</i> &mdash; " + CardUtil.getTextWithFirstCharUpperCase(sbText.toString());
-        }
-        return sbText.toString();
+        // flavor word
+        if (mode.getFlavorWord() != null) {
+            return "<i>" + mode.getFlavorWord() + "</i> &mdash; " + CardUtil.getTextWithFirstCharUpperCase(sbText.toString());
+        };
 
+        return sbText.toString();
     }
 
     public boolean hasOutcome(Ability source, Outcome outcome) {
@@ -194,9 +190,5 @@ public class Effects extends ArrayList<Effect> {
         for (Effect effect : this) {
             effect.setValue(key, value);
         }
-    }
-
-    public void setFlavorWord(String flavorWord) {
-        this.flavorWord = flavorWord;
     }
 }
