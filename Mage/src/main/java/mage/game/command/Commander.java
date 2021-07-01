@@ -104,9 +104,10 @@ public class Commander implements CommandObject {
     }
 
     private Commander(final Commander commander) {
-        this.sourceObject = commander.sourceObject;
+        this.sourceObject = commander.sourceObject.copy();
         this.copy = commander.copy;
         this.copyFrom = (commander.copyFrom != null ? commander.copyFrom.copy() : null);
+        this.abilities.addAll(commander.abilities.copy());
     }
 
     @Override

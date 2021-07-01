@@ -215,7 +215,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             logger.trace("Add Action [" + depth + "] " + node.getAbilities().toString() + "  a: " + alpha + " b: " + beta);
         }
         Game game = node.getGame();
-        if (ALLOW_INTERRUPT
+        if (COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
                 && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.debug("interrupted");
@@ -435,7 +435,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         pool.execute(task);
         try {
             int maxSeconds = maxThink;
-            if (!ALLOW_INTERRUPT) {
+            if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS) {
                 maxSeconds = 3600;
             }
             logger.debug("maxThink: " + maxSeconds + " seconds ");
@@ -460,7 +460,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     }
 
     protected int simulatePriority(SimulationNode2 node, Game game, int depth, int alpha, int beta) {
-        if (ALLOW_INTERRUPT
+        if (COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
                 && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.info("interrupted");
@@ -480,7 +480,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         int bestValSubNodes = Integer.MIN_VALUE;
         for (Ability action : allActions) {
             counter++;
-            if (ALLOW_INTERRUPT
+            if (COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
                     && Thread.interrupted()) {
                 Thread.currentThread().interrupt();
                 logger.info("Sim Prio [" + depth + "] -- interrupted");
