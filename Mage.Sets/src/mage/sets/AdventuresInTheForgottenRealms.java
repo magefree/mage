@@ -91,6 +91,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("You Hear Something on Watch", 42, Rarity.COMMON, mage.cards.y.YouHearSomethingOnWatch.class));
         cards.add(new SetCardInfo("You See a Guard Approach", 85, Rarity.COMMON, mage.cards.y.YouSeeAGuardApproach.class));
         cards.add(new SetCardInfo("You See a Pair of Goblins", 170, Rarity.UNCOMMON, mage.cards.y.YouSeeAPairOfGoblins.class));
+        cards.add(new SetCardInfo("Yuan-Ti Fang-Blade", 128, Rarity.COMMON, mage.cards.y.YuanTiFangBlade.class));
         cards.add(new SetCardInfo("Zombie Ogre", 129, Rarity.COMMON, mage.cards.z.ZombieOgre.class));
     }
 }
