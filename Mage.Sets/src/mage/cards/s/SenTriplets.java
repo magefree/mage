@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -15,17 +13,19 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SenTriplets extends CardImpl {
 
     public SenTriplets(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{W}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
@@ -35,7 +35,10 @@ public final class SenTriplets extends CardImpl {
         // At the beginning of your upkeep, choose target opponent. 
         // This turn, that player can't cast spells or activate abilities and plays with their hand revealed.
         // You may play cards from that player's hand this turn.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SenTripletsRuleModifyingEffect(), TargetController.YOU, false, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                Zone.BATTLEFIELD, new SenTripletsRuleModifyingEffect(),
+                TargetController.YOU, false, false
+        );
         ability.addEffect(new SenTripletsOpponentRevealsHandEffect());
         ability.addEffect(new SenTripletsPlayFromOpponentsHandEffect());
         ability.addTarget(new TargetOpponent());
@@ -56,11 +59,11 @@ class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     public SenTripletsRuleModifyingEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "choose target opponent. This turn, that player can't cast spells or activate abilities";        
+        staticText = "choose target opponent. This turn, that player can't cast spells or activate abilities";
     }
 
-    public SenTripletsRuleModifyingEffect(final SenTripletsRuleModifyingEffect effect) {
-        super(effect);        
+    private SenTripletsRuleModifyingEffect(final SenTripletsRuleModifyingEffect effect) {
+        super(effect);
     }
 
     @Override
@@ -86,7 +89,8 @@ class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+        return event.getType() == GameEvent.EventType.CAST_SPELL
+                || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
 
     @Override
@@ -102,7 +106,7 @@ class SenTripletsOpponentRevealsHandEffect extends ContinuousEffectImpl {
         staticText = "and plays with their hand revealed";
     }
 
-    public SenTripletsOpponentRevealsHandEffect(final SenTripletsOpponentRevealsHandEffect effect) {
+    private SenTripletsOpponentRevealsHandEffect(final SenTripletsOpponentRevealsHandEffect effect) {
         super(effect);
     }
 
@@ -123,10 +127,9 @@ class SenTripletsOpponentRevealsHandEffect extends ContinuousEffectImpl {
 
 class SenTripletsPlayFromOpponentsHandEffect extends AsThoughEffectImpl {
 
-    
     public SenTripletsPlayFromOpponentsHandEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-               staticText = "You may play cards from that player's hand this turn";
+        staticText = "You may play cards from that player's hand this turn";
     }
 
     public SenTripletsPlayFromOpponentsHandEffect(final SenTripletsPlayFromOpponentsHandEffect effect) {
@@ -146,12 +149,16 @@ class SenTripletsPlayFromOpponentsHandEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card card = game.getCard(objectId);
-        return card != null &&
-                card.isOwnedBy(getTargetPointer().getFirst(game, source)) &&
-                game.getState().getZone(objectId) == Zone.HAND &&
-                affectedControllerId.equals(source.getControllerId());
+        Zone zone;
+        if (card instanceof Spell) {
+            zone = ((Spell) card).getFromZone();
+        } else if (card != null) {
+            zone = game.getState().getZone(card.getMainCard().getId());
+        } else {
+            return false;
+        }
+        return card.isOwnedBy(getTargetPointer().getFirst(game, source))
+                && zone == Zone.HAND
+                && source.isControlledBy(affectedControllerId);
     }
-
 }
-
-
