@@ -17,11 +17,12 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.FilterCard;
+import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Targets;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -62,7 +63,7 @@ public final class Froghemoth extends CardImpl {
 class FroghemothTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredAbility {
 
     public FroghemothTriggeredAbility() {
-        super(null, false);
+        super(new FroghemothEffect(), false);
     }
 
     private FroghemothTriggeredAbility(final FroghemothTriggeredAbility ability) {
@@ -80,36 +81,26 @@ class FroghemothTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredAbil
             Player controller = game.getPlayer(getControllerId());
             Player damagedPlayer = game.getPlayer(event.getPlayerId());
             if (controller != null && damagedPlayer != null) {
-                TargetCardInGraveyard target = new TargetCardInGraveyard(0, event.getAmount());
-                controller.chooseTarget(Outcome.Exile, damagedPlayer.getGraveyard(), target, this, game);
-                game.informPlayers(this.getTargetDescriptionForLog(new Targets(target), game));
-                this.getEffects().clear();
-                this.addEffect(new FroghemothEffect(target));
+                FilterCard filter = new FilterCard("cards from defender's graveyard");
+                filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
+                this.getTargets().clear();
+                this.addTarget(new TargetCardInGraveyard(0, event.getAmount(), filter));
                 return true;
             }
         }
         return false;
     }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, exile up to that many target cards from their graveyard. " +
-                "Put a +1/+1 counter on Froghemoth for each creature exiled this way. You gain 1 life for each noncreature card exiled this way.";
-    }
 }
 
 class FroghemothEffect extends OneShotEffect {
 
-    private final TargetCardInGraveyard target;
-
-    public FroghemothEffect(TargetCardInGraveyard target) {
+    public FroghemothEffect() {
         super(Outcome.Exile);
-        this.target = target;
+        this.staticText = "exile up to that many target cards from their graveyard. Put a +1/+1 counter on Froghemoth for each creature exiled this way. You gain 1 life for each noncreature card exiled this way";
     }
 
     private FroghemothEffect(final FroghemothEffect effect) {
         super(effect);
-        this.target = effect.target;
     }
 
     @Override
@@ -126,10 +117,9 @@ class FroghemothEffect extends OneShotEffect {
         Set<Card> cardsToExile = new HashSet<>();
         int numCounters = 0;
         int lifeGain = 0;
-        for (UUID cardId : target.getTargets()) {
+        for (UUID cardId : getTargetPointer().getTargets(game, source)) {
             Card card = game.getCard(cardId);
-            if (card != null && game.getState().getZone(cardId) == Zone.GRAVEYARD && !cardsToExile.contains(card)) {
-                cardsToExile.add(card);
+            if (card != null && game.getState().getZone(cardId) == Zone.GRAVEYARD && cardsToExile.add(card)) {
                 if (card.isCreature()) {
                     numCounters++;
                 } else {
