@@ -1,7 +1,6 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -15,52 +14,44 @@ import mage.game.permanent.Permanent;
  *
  * @author weirddan455
  */
-public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends ReturnFromGraveyardToBattlefieldTargetEffect {
+public class ReturnSourceFromGraveyardToBattlefieldWithCounterEffect extends ReturnSourceFromGraveyardToBattlefieldEffect {
 
     private final Counter counter;
-    private final boolean additional;
 
-    public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(Counter counter) {
-        this(counter, false);
-    }
-
-    public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(Counter counter, boolean additional) {
-        super();
+    public ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(Counter counter, boolean tapped) {
+        super(tapped);
         this.counter = counter;
-        this.additional = additional;
+        setText();
     }
 
-    private ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(final ReturnFromGraveyardToBattlefieldWithCounterTargetEffect effect) {
+    private ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(final ReturnSourceFromGraveyardToBattlefieldWithCounterEffect effect) {
         super(effect);
         this.counter = effect.counter;
-        this.additional = effect.additional;
     }
 
     @Override
-    public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect copy() {
-        return new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(this);
+    public ReturnSourceFromGraveyardToBattlefieldWithCounterEffect copy() {
+        return new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        AddCounterTargetReplacementEffect counterEffect = new AddCounterTargetReplacementEffect(counter);
+        AddCounterSourceReplacementEffect counterEffect = new AddCounterSourceReplacementEffect(counter);
         game.addEffect(counterEffect, source);
         return super.apply(game, source);
     }
 
-    @Override
-    public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder(super.getText(mode));
+    private void setText() {
+        StringBuilder sb = new StringBuilder("return it to the battlefield");
+        if (tapped) {
+            sb.append(" tapped");
+        }
+        if (ownerControl) {
+            sb.append(" under its owner's control");
+        }
         sb.append(" with ");
-        if (additional) {
-            if (counter.getCount() == 1) {
-                sb.append("an");
-            } else {
-                sb.append(counter.getCount());
-            }
-            sb.append(" additional");
-        } else if (counter.getCount() == 1) {
-            sb.append("a");
+        if (counter.getCount() == 1) {
+            sb.append('a');
         } else {
             sb.append(counter.getCount());
         }
@@ -71,27 +62,27 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
             sb.append('s');
         }
         sb.append(" on it");
-        return sb.toString();
+        staticText = sb.toString();
     }
 }
 
-class AddCounterTargetReplacementEffect extends ReplacementEffectImpl {
+class AddCounterSourceReplacementEffect extends ReplacementEffectImpl {
 
     private final Counter counter;
 
-    public AddCounterTargetReplacementEffect(Counter counter) {
+    public AddCounterSourceReplacementEffect(Counter counter) {
         super(Duration.EndOfStep, Outcome.BoostCreature);
         this.counter = counter;
     }
 
-    private AddCounterTargetReplacementEffect(final AddCounterTargetReplacementEffect effect) {
+    private AddCounterSourceReplacementEffect(final AddCounterSourceReplacementEffect effect) {
         super(effect);
         this.counter = effect.counter;
     }
 
     @Override
-    public AddCounterTargetReplacementEffect copy() {
-        return new AddCounterTargetReplacementEffect(this);
+    public AddCounterSourceReplacementEffect copy() {
+        return new AddCounterSourceReplacementEffect(this);
     }
 
     @Override
@@ -101,7 +92,7 @@ class AddCounterTargetReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
+        return event.getTargetId().equals(source.getSourceId());
     }
 
     @Override
