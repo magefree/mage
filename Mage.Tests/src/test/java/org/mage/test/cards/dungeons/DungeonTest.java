@@ -27,6 +27,7 @@ public class DungeonTest extends CardTestPlayerBase {
     private static final String GLOOM_STALKER = "Gloom Stalker";
     private static final String DUNGEON_CRAWLER = "Dungeon Crawler";
     private static final String SILVERCOAT_LION = "Silvercoat Lion";
+    private static final String HAMA_PASHAR_RUIN_SEEKER = "Hama Pashar, Ruin Seeker";
 
     private void makeTester() {
         makeTester(playerA);
@@ -87,7 +88,7 @@ public class DungeonTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 4, 3);
+        assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
         assertPermanentCount(playerA, "Goblin", 0);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Cave Entrance");
         assertLife(playerA, 20);
@@ -110,7 +111,7 @@ public class DungeonTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 4, 3);
+        assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
         assertPermanentCount(playerA, "Goblin", 1);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Goblin Lair");
         assertLife(playerA, 20);
@@ -136,7 +137,7 @@ public class DungeonTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 4, 3);
+        assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
         assertPermanentCount(playerA, "Goblin", 1);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Dark Pool");
         assertLife(playerA, 20 + 1);
@@ -164,7 +165,7 @@ public class DungeonTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 4, 3);
+        assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
         assertPermanentCount(playerA, "Goblin", 1);
         assertDungeonRoom(null, null);
         assertLife(playerA, 20 + 1);
@@ -283,8 +284,8 @@ public class DungeonTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 4, 3);
-        assertPowerToughness(playerB, FLAMESPEAKER_ADEPT, 6, 3);
+        assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
+        assertPowerToughness(playerB, FLAMESPEAKER_ADEPT, 2 + 2 + 2, 3);
         assertPermanentCount(playerA, "Goblin", 1);
         assertPermanentCount(playerB, "Treasure", 1);
         assertDungeonRoom(playerA, LOST_MINE_OF_PHANDELVER, "Dark Pool");
@@ -383,5 +384,59 @@ public class DungeonTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, DUNGEON_CRAWLER, 1);
         assertDungeonRoom(null, null);
+    }
+
+    @Test
+    public void test__HamaPasharRuinSeeker_DoubleController() {
+        makeTester();
+        addCard(Zone.BATTLEFIELD, playerA, FLAMESPEAKER_ADEPT);
+        addCard(Zone.BATTLEFIELD, playerA, HAMA_PASHAR_RUIN_SEEKER);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, LOST_MINE_OF_PHANDELVER);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "Yes"); // Goblin Lair
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "No"); // Dark Pool
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2 + 2, 3);
+        assertPermanentCount(playerA, "Goblin", 2);
+        assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Dark Pool");
+        assertLife(playerA, 20 + 1 + 1);
+        assertLife(playerB, 20 - 1 - 1);
+        assertHandCount(playerA, 0);
+    }
+
+    @Test
+    public void test__HamaPasharRuinSeeker_DontDoubleOpponent() {
+        makeTester();
+        addCard(Zone.BATTLEFIELD, playerA, FLAMESPEAKER_ADEPT);
+        addCard(Zone.BATTLEFIELD, playerB, HAMA_PASHAR_RUIN_SEEKER);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, LOST_MINE_OF_PHANDELVER);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "Yes"); // Goblin Lair
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "No"); // Dark Pool
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
+        assertPermanentCount(playerA, "Goblin", 1);
+        assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Dark Pool");
+        assertLife(playerA, 20 + 1);
+        assertLife(playerB, 20 - 1);
+        assertHandCount(playerA, 0);
     }
 }
