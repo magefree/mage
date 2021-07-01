@@ -523,6 +523,7 @@ public class ScryfallImageSupportCards {
 
             // Cards with non-ASCII collector numbers must use direct download (cause xmage uses different card number)
             // Verify checks must check and show missing data from that list
+            // WARNING, must use as API link, not image
             // 10E
             put("10E/Air Elemental/64*", "https://api.scryfall.com/cards/10e/64★/");
             put("10E/Anaba Bodyguard/187*", "https://api.scryfall.com/cards/10e/187★/");

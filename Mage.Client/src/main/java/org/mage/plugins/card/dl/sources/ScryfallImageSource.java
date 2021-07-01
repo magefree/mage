@@ -125,13 +125,30 @@ public enum ScryfallImageSource implements CardImageSource {
         final String defaultCode = CardLanguage.ENGLISH.getCode();
         final String localizedCode = languageAliases.getOrDefault(this.getCurrentLanguage(), defaultCode);
 
-        // licalized and default
         List<String> needUrls = new ArrayList<>();
-        needUrls.add("https://api.scryfall.com/cards/"
-                + formatSetName(card.getSet(), isToken) + "/" + card.getCollectorId() + "/" + localizedCode);
-        if (!localizedCode.equals(defaultCode)) {
+
+        String apiUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
+        if (apiUrl != null) {
+            // BY DIRECT URL
+            // direct links via hardcoded API path. Used for cards with non-ASCII collector numbers
+            if (localizedCode.equals(defaultCode)) {
+                // english only, so can use workaround without loc param (scryfall download first available card)
+                // workaround to use cards without english images (some promos or special cards)
+                needUrls.add(apiUrl);
+            } else {
+                // localize, must use loc params
+                needUrls.add(apiUrl + localizedCode);
+                needUrls.add(apiUrl + defaultCode);
+            }
+        } else {
+            // BY CARD NUMBER
+            // localized and default
             needUrls.add("https://api.scryfall.com/cards/"
-                    + formatSetName(card.getSet(), isToken) + "/" + card.getCollectorId() + "/" + defaultCode);
+                    + formatSetName(card.getSet(), isToken) + "/" + card.getCollectorId() + "/" + localizedCode);
+            if (!localizedCode.equals(defaultCode)) {
+                needUrls.add("https://api.scryfall.com/cards/"
+                        + formatSetName(card.getSet(), isToken) + "/" + card.getCollectorId() + "/" + defaultCode);
+            }
         }
 
         InputStream jsonStream = null;
