@@ -11,7 +11,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author weirddan455
  */
 public class ReturnSourceFromGraveyardToBattlefieldWithCounterEffect extends ReturnSourceFromGraveyardToBattlefieldEffect {
@@ -26,7 +25,7 @@ public class ReturnSourceFromGraveyardToBattlefieldWithCounterEffect extends Ret
 
     private ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(final ReturnSourceFromGraveyardToBattlefieldWithCounterEffect effect) {
         super(effect);
-        this.counter = effect.counter;
+        this.counter = effect.counter.copy();
     }
 
     @Override
@@ -77,7 +76,7 @@ class AddCounterSourceReplacementEffect extends ReplacementEffectImpl {
 
     private AddCounterSourceReplacementEffect(final AddCounterSourceReplacementEffect effect) {
         super(effect);
-        this.counter = effect.counter;
+        this.counter = effect.counter.copy();
     }
 
     @Override

@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -32,7 +31,7 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
 
     public EntersBattlefieldWithXCountersEffect(final EntersBattlefieldWithXCountersEffect effect) {
         super(effect);
-        this.counter = effect.counter;
+        this.counter = effect.counter.copy();
     }
 
     @Override

@@ -1,7 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -31,6 +29,8 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.watchers.common.PlayerLostLifeNonCombatWatcher;
+
+import java.util.UUID;
 
 /**
  * @author NinthWorld
@@ -97,7 +97,7 @@ class OpponentNoncombatLostLifeCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         PlayerLostLifeNonCombatWatcher watcher = game.getState().getWatcher(PlayerLostLifeNonCombatWatcher.class);
-        if(watcher != null) {
+        if (watcher != null) {
             return watcher.getAllOppLifeLost(sourceAbility.getControllerId(), game);
         }
         return 0;
@@ -126,7 +126,7 @@ class SupremeLeaderSnokeCounterEffect extends OneShotEffect {
 
     public SupremeLeaderSnokeCounterEffect(final SupremeLeaderSnokeCounterEffect effect) {
         super(effect);
-        this.counter = effect.counter;
+        this.counter = effect.counter.copy();
     }
 
     @Override
