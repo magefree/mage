@@ -40,8 +40,7 @@ public final class DrizztDoUrden extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // Whenever Drizzt Do'Urden enters the battlefield, create Guenhwyvar, a legendary 4/1 green Cat creature token with trample.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GuenhwyvarToken())
-                .setText("create Guenhwyvar, a legendary 4/1 green Cat creature token with trample")));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GuenhwyvarToken())));
 
         // Whenever a creature dies, if it had power greater than Drizzt's power, put a number of +1/+1 counters on Drizzt equal to the difference.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
