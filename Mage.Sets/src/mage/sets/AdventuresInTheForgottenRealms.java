@@ -64,6 +64,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Flumph", 15, Rarity.RARE, mage.cards.f.Flumph.class));
         cards.add(new SetCardInfo("Fly", 59, Rarity.UNCOMMON, mage.cards.f.Fly.class));
         cards.add(new SetCardInfo("Forest", 278, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Froghemoth", 184, Rarity.RARE, mage.cards.f.Froghemoth.class));
         cards.add(new SetCardInfo("Gloom Stalker", 16, Rarity.COMMON, mage.cards.g.GloomStalker.class));
         cards.add(new SetCardInfo("Gnoll Hunter", 185, Rarity.COMMON, mage.cards.g.GnollHunter.class));
         cards.add(new SetCardInfo("Grazilaxx, Illithid Scholar", 60, Rarity.RARE, mage.cards.g.GrazilaxxIllithidScholar.class));
