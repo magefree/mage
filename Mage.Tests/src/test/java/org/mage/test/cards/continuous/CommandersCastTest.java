@@ -6,14 +6,15 @@ import mage.cards.AdventureCard;
 import mage.constants.CommanderCardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.GameState;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestCommander4Players;
+import org.mage.test.serverside.base.CardTestCommander4PlayersWithAIHelps;
 
 /**
  * @author JayDi85
  */
-public class CommandersCastTest extends CardTestCommander4Players {
+public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
 
     @Test
     public void test_CastToBattlefieldOneTime() {
@@ -610,5 +611,33 @@ public class CommandersCastTest extends CardTestCommander4Players {
         assertLife(playerA, 20 + 3);
         assertPermanentCount(playerA, "Swamp", 1);
         assertGraveyardCount(playerA, "Uro, Titan of Nature's Wrath", 1); // sacrificed
+    }
+
+    @Test
+    public void test_AI_MustPlayCommander() {
+        // Player order: A -> D -> C -> B
+
+        addCard(Zone.COMMAND, playerA, "Balduvian Bears", 1); // {1}{G}, 2/2, commander
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        // possible bug: wrong copy of commander objects
+        runCode("test", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameState copied = game.getState().copy();
+            Assert.assertEquals("original commander must have 1 ability", 1, game.getState().getCommand().get(0).getAbilities().size());
+            Assert.assertEquals("copied commander must have 1 ability", 1, copied.getCommand().get(0).getAbilities().size());
+        });
+
+        // ai must play commander
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 2);
+        aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertCommandZoneCount(playerA, "Balduvian Bears", 0);
+        assertPermanentCount(playerA, "Balduvian Bears", 1);
+        assertTappedCount("Forest", true, 2);
     }
 }
