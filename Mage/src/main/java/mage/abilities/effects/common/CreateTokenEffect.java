@@ -112,6 +112,9 @@ public class CreateTokenEffect extends OneShotEffect {
     }
 
     private void setText() {
+        if (token.getDescription().contains(", a legendary")) {
+            staticText = "create " + token.getDescription();
+        }
         StringBuilder sb = new StringBuilder("create ");
         if (amount.toString().equals("1")) {
             sb.append("a ");
