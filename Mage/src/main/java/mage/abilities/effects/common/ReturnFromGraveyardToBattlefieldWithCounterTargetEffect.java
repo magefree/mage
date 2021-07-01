@@ -12,7 +12,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author weirddan455
  */
 public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends ReturnFromGraveyardToBattlefieldTargetEffect {
@@ -32,7 +31,7 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
 
     private ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(final ReturnFromGraveyardToBattlefieldWithCounterTargetEffect effect) {
         super(effect);
-        this.counter = effect.counter;
+        this.counter = effect.counter.copy();
         this.additional = effect.additional;
     }
 
@@ -86,7 +85,7 @@ class AddCounterTargetReplacementEffect extends ReplacementEffectImpl {
 
     private AddCounterTargetReplacementEffect(final AddCounterTargetReplacementEffect effect) {
         super(effect);
-        this.counter = effect.counter;
+        this.counter = effect.counter.copy();
     }
 
     @Override

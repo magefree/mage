@@ -68,7 +68,7 @@ class EscapesWithEffect extends OneShotEffect {
     private EscapesWithEffect(final EscapesWithEffect effect) {
         super(effect);
         this.counter = effect.counter;
-        this.delayedTriggeredAbility = effect.delayedTriggeredAbility;
+        this.delayedTriggeredAbility = effect.delayedTriggeredAbility.copy();
     }
 
     @Override
