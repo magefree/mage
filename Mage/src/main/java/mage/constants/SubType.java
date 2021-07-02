@@ -352,6 +352,7 @@ public enum SubType {
     TETRAVITE("Tetravite", SubTypeSet.CreatureType),
     THALAKOS("Thalakos", SubTypeSet.CreatureType),
     THOPTER("Thopter", SubTypeSet.CreatureType),
+    TIEFLING("Tiefling", SubTypeSet.CreatureType),
     TRANDOSHAN("Trandoshan", SubTypeSet.CreatureType, true), // Star Wars
     THRULL("Thrull", SubTypeSet.CreatureType),
     TREEFOLK("Treefolk", SubTypeSet.CreatureType),
