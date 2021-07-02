@@ -209,5 +209,4 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
 
         assertPowerToughness(playerB, "Ammit Eternal", 4, 4);
     }
-
 }
