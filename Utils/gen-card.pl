@@ -218,6 +218,7 @@ my $strong = "<strong>";
 $cardAbilities  =~ s/$strong/$empty/g;
 $strong = "</strong>";
 $cardAbilities  =~ s/$strong/$empty/g;
+$cardAbilities =~ s/\&/\|/g;
 
 my @abilities = split('\$', $cardAbilities);
 foreach my $ability (@abilities) {
