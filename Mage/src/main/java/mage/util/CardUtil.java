@@ -923,6 +923,10 @@ public final class CardUtil {
         return vowels.contains(text.substring(0, 1)) ? "an " + text : "a " + text;
     }
 
+    public static String italicizeWithEmDash(String text) {
+        return "<i>" + text + "</i> &mdash; ";
+    }
+
     public static Set<UUID> getAllSelectedTargets(Ability ability, Game game) {
         return ability.getModes().getSelectedModes()
                 .stream()
