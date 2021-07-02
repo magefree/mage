@@ -59,6 +59,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Dungeon Map", 242, Rarity.UNCOMMON, mage.cards.d.DungeonMap.class));
         cards.add(new SetCardInfo("Dwarfhold Champion", 14, Rarity.COMMON, mage.cards.d.DwarfholdChampion.class));
         cards.add(new SetCardInfo("Ebondeath, Dracolich", 100, Rarity.MYTHIC, mage.cards.e.EbondeathDracolich.class));
+        cards.add(new SetCardInfo("Eccentric Apprentice", 57, Rarity.UNCOMMON, mage.cards.e.EccentricApprentice.class));
         cards.add(new SetCardInfo("Ellywick Tumblestrum", 181, Rarity.MYTHIC, mage.cards.e.EllywickTumblestrum.class));
         cards.add(new SetCardInfo("Elturgard Ranger", 182, Rarity.COMMON, mage.cards.e.ElturgardRanger.class));
         cards.add(new SetCardInfo("Evolving Wilds", 256, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
