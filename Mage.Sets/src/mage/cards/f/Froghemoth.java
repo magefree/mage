@@ -78,15 +78,11 @@ class FroghemothTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredAbil
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
-            Player controller = game.getPlayer(getControllerId());
-            Player damagedPlayer = game.getPlayer(event.getPlayerId());
-            if (controller != null && damagedPlayer != null) {
-                FilterCard filter = new FilterCard("cards from defender's graveyard");
-                filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
-                this.getTargets().clear();
-                this.addTarget(new TargetCardInGraveyard(0, event.getAmount(), filter));
-                return true;
-            }
+            FilterCard filter = new FilterCard("cards from defender's graveyard");
+            filter.add(new OwnerIdPredicate(event.getPlayerId()));
+            this.getTargets().clear();
+            this.addTarget(new TargetCardInGraveyard(0, event.getAmount(), filter));
+            return true;
         }
         return false;
     }
