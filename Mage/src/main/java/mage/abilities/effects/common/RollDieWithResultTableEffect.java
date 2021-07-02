@@ -19,7 +19,8 @@ import java.util.List;
  */
 public class RollDieWithResultTableEffect extends OneShotEffect {
 
-    private final int sides;
+    protected final int sides;
+    private final String prefixText;
     private final List<TableEntry> resultsTable = new ArrayList<>();
 
     public RollDieWithResultTableEffect() {
@@ -27,13 +28,19 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
     }
 
     public RollDieWithResultTableEffect(int sides) {
-        super(Outcome.Benefit);
-        this.sides = sides;
+        this(sides, null);
     }
 
-    private RollDieWithResultTableEffect(final RollDieWithResultTableEffect effect) {
+    public RollDieWithResultTableEffect(int sides, String prefixText) {
+        super(Outcome.Benefit);
+        this.sides = sides;
+        this.prefixText = prefixText;
+    }
+
+    protected RollDieWithResultTableEffect(final RollDieWithResultTableEffect effect) {
         super(effect);
         this.sides = effect.sides;
+        this.prefixText = effect.prefixText;
         for (TableEntry tableEntry : effect.resultsTable) {
             this.resultsTable.add(tableEntry.copy());
         }
@@ -51,18 +58,27 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
             return false;
         }
         int result = player.rollDice(source, game, sides);
+        this.applyResult(result, game, source);
+        return true;
+    }
+
+    protected void applyResult(int result, Game game, Ability source) {
         for (TableEntry tableEntry : this.resultsTable) {
             if (tableEntry.matches(result)) {
                 tableEntry.apply(game, source);
-                return true;
+                return;
             }
         }
-        return true;
     }
 
     @Override
     public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder("roll a d").append(sides).append('.');
+        StringBuilder sb = new StringBuilder();
+        if (prefixText != null) {
+            sb.append(prefixText);
+        } else {
+            sb.append("roll a d").append(sides).append('.');
+        }
         for (TableEntry tableEntry : this.resultsTable) {
             sb.append("<br>");
             if (tableEntry.min == tableEntry.max) {
