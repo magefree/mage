@@ -92,7 +92,11 @@ class KarnLiberatedEffect extends OneShotEffect {
                 }
             }
         }
-        game.getState().clear();
+
+        // dirty hack for game restart, can cause bugs due strange clear code (some data like ZCC keeping on new game)
+        // see testCommanderRestoredToBattlefieldAfterKarnUltimate for more details
+
+        game.getState().clearOnGameRestart();
         // default watchers init, TODO: remove all restart/init code to game
         ((GameImpl) game).initGameDefaultWatchers();
 

@@ -15,6 +15,8 @@ import mage.choices.Choice;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
+import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
@@ -40,8 +42,6 @@ import java.io.File;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
-import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 
 /**
  * @author nantuko
@@ -215,7 +215,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             logger.trace("Add Action [" + depth + "] " + node.getAbilities().toString() + "  a: " + alpha + " b: " + beta);
         }
         Game game = node.getGame();
-        if (COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
+        if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
                 && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.debug("interrupted");
@@ -435,7 +435,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         pool.execute(task);
         try {
             int maxSeconds = maxThink;
-            if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS) {
+            if (COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS) {
                 maxSeconds = 3600;
             }
             logger.debug("maxThink: " + maxSeconds + " seconds ");
@@ -460,7 +460,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     }
 
     protected int simulatePriority(SimulationNode2 node, Game game, int depth, int alpha, int beta) {
-        if (COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
+        if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
                 && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.info("interrupted");
@@ -480,7 +480,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         int bestValSubNodes = Integer.MIN_VALUE;
         for (Ability action : allActions) {
             counter++;
-            if (COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
+            if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
                     && Thread.interrupted()) {
                 Thread.currentThread().interrupt();
                 logger.info("Sim Prio [" + depth + "] -- interrupted");
@@ -492,7 +492,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     && sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
                 sim.applyEffects();
                 if (checkForRepeatedAction(sim, node, action, currentPlayer.getId())) {
-                    logger.debug("Sim Prio [" + depth + "] -- repeated action: " + action.toString());
+                    logger.debug("Sim Prio [" + depth + "] -- repeated action: " + action);
                     continue;
                 }
                 if (!sim.checkIfGameIsOver()
@@ -513,7 +513,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 } else {
                     val = addActions(newNode, depth - 1, alpha, beta);
                 }
-                logger.debug("Sim Prio " + BLANKS.substring(0, 2 + (maxDepth - depth) * 3) + '[' + depth + "]#" + counter + " <" + val + "> - (" + action.toString() + ") ");
+                logger.debug("Sim Prio " + BLANKS.substring(0, 2 + (maxDepth - depth) * 3) + '[' + depth + "]#" + counter + " <" + val + "> - (" + action + ") ");
                 if (logger.isInfoEnabled()
                         && depth >= maxDepth) {
                     StringBuilder sb = new StringBuilder("Sim Prio [").append(depth).append("] #").append(counter)
@@ -979,14 +979,15 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     protected Game createSimulation(Game game) {
         Game sim = game.copy();
         sim.setSimulation(true);
-        for (Player copyPlayer : sim.getState().getPlayers().values()) {
-            Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
+        for (Player oldPlayer : sim.getState().getPlayers().values()) {
+            // replace original player by simulated player and find result (execute/resolve current action)
+            Player origPlayer = game.getState().getPlayers().get(oldPlayer.getId()).copy();
             if (!suggestedActions.isEmpty()) {
                 logger.debug(origPlayer.getName() + " suggested: " + suggestedActions);
             }
-            SimulatedPlayer2 newPlayer = new SimulatedPlayer2(copyPlayer.getId(), copyPlayer.getId().equals(playerId), suggestedActions);
-            newPlayer.restore(origPlayer);
-            sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
+            SimulatedPlayer2 simPlayer = new SimulatedPlayer2(oldPlayer, oldPlayer.getId().equals(playerId), suggestedActions);
+            simPlayer.restore(origPlayer);
+            sim.getState().getPlayers().put(oldPlayer.getId(), simPlayer);
         }
         return sim;
     }
@@ -1069,7 +1070,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
      *
      * @param game
      * @param targets
-     * @param format example: my %s in data
+     * @param format    example: my %s in data
      * @param emptyText default text for empty targets list
      * @return
      */
