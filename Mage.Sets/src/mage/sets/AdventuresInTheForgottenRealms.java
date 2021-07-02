@@ -115,6 +115,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Swarming Goblins", 162, Rarity.COMMON, mage.cards.s.SwarmingGoblins.class));
         cards.add(new SetCardInfo("Targ Nar, Demon-Fang Gnoll", 234, Rarity.UNCOMMON, mage.cards.t.TargNarDemonFangGnoll.class));
         cards.add(new SetCardInfo("Tasha's Hideous Laughter", 78, Rarity.RARE, mage.cards.t.TashasHideousLaughter.class));
+        cards.add(new SetCardInfo("The Deck of Many Things", 241, Rarity.MYTHIC, mage.cards.t.TheDeckOfManyThings.class));
         cards.add(new SetCardInfo("Tiamat", 235, Rarity.MYTHIC, mage.cards.t.Tiamat.class));
         cards.add(new SetCardInfo("Trelasarra Moon Dancer", 236, Rarity.UNCOMMON, mage.cards.t.TrelasarraMoonDancer.class));
         cards.add(new SetCardInfo("Varis, Silverymoon Ranger", 209, Rarity.RARE, mage.cards.v.VarisSilverymoonRanger.class));
