@@ -55,6 +55,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Drizzt Do'Urden", 220, Rarity.RARE, mage.cards.d.DrizztDoUrden.class));
         cards.add(new SetCardInfo("Dueling Rapier", 140, Rarity.COMMON, mage.cards.d.DuelingRapier.class));
         cards.add(new SetCardInfo("Dungeon Crawler", 99, Rarity.UNCOMMON, mage.cards.d.DungeonCrawler.class));
+        cards.add(new SetCardInfo("Dungeon Descent", 255, Rarity.RARE, mage.cards.d.DungeonDescent.class));
         cards.add(new SetCardInfo("Dungeon Map", 242, Rarity.UNCOMMON, mage.cards.d.DungeonMap.class));
         cards.add(new SetCardInfo("Dwarfhold Champion", 14, Rarity.COMMON, mage.cards.d.DwarfholdChampion.class));
         cards.add(new SetCardInfo("Ebondeath, Dracolich", 100, Rarity.MYTHIC, mage.cards.e.EbondeathDracolich.class));
