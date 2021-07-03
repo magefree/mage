@@ -13,7 +13,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.token.SilverquillToken;
+import mage.game.permanent.token.InklingToken;
 
 import java.util.UUID;
 
@@ -33,7 +33,7 @@ public final class BlotOutTheSky extends CardImpl {
 
         // Create X tapped 2/1 white and black Inkling creature tokens with flying. If X is 6 or more, destroy all noncreature, nonland permanents.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new SilverquillToken(), ManacostVariableValue.REGULAR, true, false
+                new InklingToken(), ManacostVariableValue.REGULAR, true, false
         ));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DestroyAllEffect(filter), BlotOutTheSkyCondition.instance,

@@ -17,9 +17,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class QuandrixToken extends TokenImpl {
+public final class FractalToken extends TokenImpl {
 
-    public QuandrixToken() {
+    public FractalToken() {
         super("Fractal", "0/0 green and blue Fractal creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.FRACTAL);
@@ -31,12 +31,12 @@ public final class QuandrixToken extends TokenImpl {
         availableImageSetCodes = Arrays.asList("STX");
     }
 
-    private QuandrixToken(final QuandrixToken token) {
+    private FractalToken(final FractalToken token) {
         super(token);
     }
 
-    public QuandrixToken copy() {
-        return new QuandrixToken(this);
+    public FractalToken copy() {
+        return new FractalToken(this);
     }
 
     public static QuandrixTokenEffect getEffect(DynamicValue xValue, String text) {
@@ -65,7 +65,7 @@ public final class QuandrixToken extends TokenImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Token token = new QuandrixToken();
+            Token token = new FractalToken();
             token.putOntoBattlefield(1, game, source, source.getControllerId());
             int value = xValue.calculate(game, source, this);
             if (value < 1) {

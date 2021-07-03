@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.QuandrixToken;
+import mage.game.permanent.token.FractalToken;
 import mage.game.permanent.token.Token;
 
 import java.util.UUID;
@@ -71,7 +71,7 @@ class FractalHarnessTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new QuandrixToken();
+        Token token = new FractalToken();
         token.putOntoBattlefield(1, game, source, source.getControllerId());
         int xValue = ManacostVariableValue.ETB.calculate(game, source, this);
         boolean flag = true;

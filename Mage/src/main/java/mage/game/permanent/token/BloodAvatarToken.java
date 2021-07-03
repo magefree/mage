@@ -8,6 +8,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -21,11 +23,14 @@ public final class BloodAvatarToken extends TokenImpl {
         subtype.add(SubType.AVATAR);
         power = new MageInt(3);
         toughness = new MageInt(6);
+
         addAbility(HasteAbility.getInstance());
         addAbility(new AttacksTriggeredAbility(
                 new DamagePlayersEffect(3, TargetController.OPPONENT), false,
                 "Whenever this creature attacks, it deals 3 damage to each opponent."
         ));
+
+        availableImageSetCodes = Arrays.asList("STX");
     }
 
     private BloodAvatarToken(final BloodAvatarToken token) {

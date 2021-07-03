@@ -16,7 +16,7 @@ import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.QuandrixToken;
+import mage.game.permanent.token.FractalToken;
 import mage.game.stack.Spell;
 
 import java.util.UUID;
@@ -39,7 +39,7 @@ public final class GeometricNexus extends CardImpl {
         ));
 
         // {6}, {T}, Remove all charge counters from Geometric Nexus: Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is the number of charge counters removed this way.
-        Ability ability = new SimpleActivatedAbility(QuandrixToken.getEffect(
+        Ability ability = new SimpleActivatedAbility(FractalToken.getEffect(
                 GeometricNexusRemovedCounterValue.instance, "Put X +1/+1 counters on it, " +
                         "where X is the number of charge counters removed this way"
         ), new GenericManaCost(6));

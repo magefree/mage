@@ -16,7 +16,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterOwnedCard;
 import mage.game.Game;
-import mage.game.permanent.token.QuandrixToken;
+import mage.game.permanent.token.FractalToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
@@ -48,7 +48,7 @@ public final class KianneDeanOfSubstance extends ModalDoubleFacesCard {
         ));
 
         // {4}{G}: Create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on it for each different mana value among nonland cards you own in exile with study counters on them.
-        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(QuandrixToken.getEffect(
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(FractalToken.getEffect(
                 KianneDeanOfSubstanceValue.instance, "Put a +1/+1 counter on it for each different mana value " +
                         "among nonland cards you own in exile with study counters on them"
         ), new ManaCostsImpl("{4}{G}")).addHint(KianneDeanOfSubstanceHint.instance));

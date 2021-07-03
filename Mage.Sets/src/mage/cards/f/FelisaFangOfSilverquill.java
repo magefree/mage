@@ -21,7 +21,7 @@ import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.SilverquillToken;
+import mage.game.permanent.token.InklingToken;
 
 import java.util.Map;
 import java.util.UUID;
@@ -60,7 +60,7 @@ public final class FelisaFangOfSilverquill extends CardImpl {
 
         // Whenever a nontoken creature you control dies, if it had counters on it, create X tapped 2/1 white and black Inkling creature tokens with flying, where X is the number of counters it had on it.
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(
-                new SilverquillToken(), FelisaFangOfSilverquillValue.instance, true, false
+                new InklingToken(), FelisaFangOfSilverquillValue.instance, true, false
         ).setText(rule), false, filter));
     }
 

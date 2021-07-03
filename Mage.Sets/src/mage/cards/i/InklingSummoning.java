@@ -5,7 +5,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.SilverquillToken;
+import mage.game.permanent.token.InklingToken;
 
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ public final class InklingSummoning extends CardImpl {
         this.subtype.add(SubType.LESSON);
 
         // Create a 2/1 white and black Inkling creature token with flying.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SilverquillToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new InklingToken()));
     }
 
     private InklingSummoning(final InklingSummoning card) {

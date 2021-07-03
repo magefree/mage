@@ -5,12 +5,14 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
-public final class SilverquillToken extends TokenImpl {
+public final class InklingToken extends TokenImpl {
 
-    public SilverquillToken() {
+    public InklingToken() {
         super("Inkling", "2/1 white and black Inkling creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
@@ -18,15 +20,18 @@ public final class SilverquillToken extends TokenImpl {
         subtype.add(SubType.INKLING);
         power = new MageInt(2);
         toughness = new MageInt(1);
+
         addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("STX");
     }
 
-    private SilverquillToken(final SilverquillToken token) {
+    private InklingToken(final InklingToken token) {
         super(token);
     }
 
     @Override
-    public SilverquillToken copy() {
-        return new SilverquillToken(this);
+    public InklingToken copy() {
+        return new InklingToken(this);
     }
 }

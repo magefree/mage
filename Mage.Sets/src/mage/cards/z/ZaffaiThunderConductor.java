@@ -11,7 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
-import mage.game.permanent.token.PrismariToken;
+import mage.game.permanent.token.Elemental44Token;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -75,7 +75,7 @@ class ZaffaiThunderConductorEffect extends OneShotEffect {
         if (spell == null || spell.getManaValue() < 5) {
             return false;
         }
-        new PrismariToken().putOntoBattlefield(1, game, source, source.getControllerId());
+        new Elemental44Token().putOntoBattlefield(1, game, source, source.getControllerId());
         if (spell.getManaValue() < 10) {
             return true;
         }

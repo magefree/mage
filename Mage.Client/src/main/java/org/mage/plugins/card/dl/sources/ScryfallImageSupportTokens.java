@@ -550,6 +550,17 @@ public class ScryfallImageSupportTokens {
             put("TSR/Soldier", "https://api.scryfall.com/cards/ttsr/2/en?format=image");
             put("TSR/Spider", "https://api.scryfall.com/cards/ttsr/6/en?format=image");
 
+            // STX
+            put("STX/Avatar", "https://api.scryfall.com/cards/tstx/1/en?format=image");
+            put("STX/Elemental", "https://api.scryfall.com/cards/tstx/2/en?format=image");
+            put("STX/Fractal", "https://api.scryfall.com/cards/tstx/3/en?format=image");
+            put("STX/Inkling", "https://api.scryfall.com/cards/tstx/4/en?format=image");
+            put("STX/Emblem Lukka, Wayward Bonder", "https://api.scryfall.com/cards/tstx/8/en?format=image");
+            put("STX/Pest", "https://api.scryfall.com/cards/tstx/5/en?format=image");
+            put("STX/Emblem Rowan, Scholar of Sparks", "https://api.scryfall.com/cards/tstx/9/en?format=image");
+            put("STX/Spirit", "https://api.scryfall.com/cards/tstx/6/en?format=image");
+            put("STX/Treasure", "https://api.scryfall.com/cards/tstx/7/en?format=image");
+
             // C21
             put("C21/Beast/1", "https://api.scryfall.com/cards/tc21/10/en?format=image"); // 3/3
             put("C21/Beast/2", "https://api.scryfall.com/cards/tc21/11/en?format=image"); // 4/4

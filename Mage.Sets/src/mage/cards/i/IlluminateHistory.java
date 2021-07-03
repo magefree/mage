@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.LoreholdToken;
+import mage.game.permanent.token.Spirit32Token;
 
 import java.util.UUID;
 
@@ -28,7 +28,7 @@ public final class IlluminateHistory extends CardImpl {
         // Discard any number of cards, then draw that many cards. Then if there are seven or more cards in your graveyard, create a 3/2 red and white Spirit creature token.
         this.getSpellAbility().addEffect(new DiscardAndDrawThatManyEffect(Integer.MAX_VALUE));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new CreateTokenEffect(new LoreholdToken()), condition, "Then if there are seven or more " +
+                new CreateTokenEffect(new Spirit32Token()), condition, "Then if there are seven or more " +
                 "cards in your graveyard, create a 3/2 red and white Spirit creature token"
         ));
     }

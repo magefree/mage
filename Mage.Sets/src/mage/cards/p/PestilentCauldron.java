@@ -18,7 +18,7 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.token.WitherbloomToken;
+import mage.game.permanent.token.Pest11GainLifeToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -55,7 +55,7 @@ public final class PestilentCauldron extends ModalDoubleFacesCard {
         // Artifact
         // {T}, Discard a card: Create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new WitherbloomToken()), new TapSourceCost()
+                new CreateTokenEffect(new Pest11GainLifeToken()), new TapSourceCost()
         );
         ability.addCost(new DiscardCardCost());
         this.getLeftHalfCard().addAbility(ability);

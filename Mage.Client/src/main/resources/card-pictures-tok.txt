@@ -106,6 +106,8 @@
 |Generate|EMBLEM:KHM|Kaya the Inexorable||Emblem Kaya|KayaTheInexorableEmblem|
 |Generate|EMBLEM:KHM|Tibalt Cosmic Imposter||Emblem Tibalt|TibaltCosmicImposterEmblem|
 |Generate|EMBLEM:KHM|Tyvar Kell||Emblem Tyvar|TyvarKellEmblem|
+|Generate|EMBLEM:STX|Lukka, Wayward Bonder||Emblem Lukka|LukkaWaywardBonderEmblem|
+|Generate|EMBLEM:STX|Rowan, Scholar of Sparks||Emblem Rowan|RowanScholarOfSparksEmblem|
 
 # Planes
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
@@ -1499,6 +1501,15 @@
 |Generate|TOK:TSR|Soldier|||SoldierToken|
 |Generate|TOK:TSR|Spider|||PenumbraSpiderToken|
 
+// STX
+|Generate|TOK:STX|Avatar|||BloodAvatarToken|
+|Generate|TOK:STX|Elemental|||Elemental44Token|
+|Generate|TOK:STX|Fractal|||FractalToken|
+|Generate|TOK:STX|Inkling|||InklingToken|
+|Generate|TOK:STX|Pest|||Pest11GainLifeToken|
+|Generate|TOK:STX|Spirit|||Spirit32Token|
+|Generate|TOK:STX|Treasure|||TreasureToken|
+
 # C21
 |Generate|TOK:C21|Beast|1||BeastToken|
 |Generate|TOK:C21|Beast|2||BeastToken2|
@@ -1530,6 +1541,3 @@
 |Generate|TOK:C21|Whale|||ReefWormWhaleToken|
 |Generate|TOK:C21|Wurm|||WurmToken|
 |Generate|TOK:C21|Zombie|||ZombieToken|
-
-
-#|Generate|TOK:C21|xxx|||xxxToken|
