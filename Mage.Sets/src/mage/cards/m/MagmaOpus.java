@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.PrismariToken;
+import mage.game.permanent.token.Elemental44Token;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTargetAmount;
@@ -34,7 +34,7 @@ public final class MagmaOpus extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4).withChooseHint("damage"));
         this.getSpellAbility().addEffect(new TapTargetEffect().setTargetPointer(new SecondTargetPointer()).setText("two target permanents"));
         this.getSpellAbility().addTarget(new TargetPermanent(2, StaticFilters.FILTER_PERMANENTS).withChooseHint("tap"));
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new PrismariToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new Elemental44Token()));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("Draw two cards"));
 
         // {U/R}{U/R}, Discard Magma Opus: Create a Treasure token.

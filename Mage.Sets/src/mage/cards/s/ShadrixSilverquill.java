@@ -19,7 +19,7 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.SilverquillToken;
+import mage.game.permanent.token.InklingToken;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -63,7 +63,7 @@ public final class ShadrixSilverquill extends CardImpl {
         ability.getModes().setMayChooseNone(true);
 
         // • Target player creates a 2/1 white and black Inkling creature token with flying.
-        ability.addEffect(new CreateTokenTargetEffect(new SilverquillToken()));
+        ability.addEffect(new CreateTokenTargetEffect(new InklingToken()));
         TargetPlayer target = new TargetPlayer(filter1);
         target.setTargetTag(1);
         ability.addTarget(target.withChooseHint("to create a token"));

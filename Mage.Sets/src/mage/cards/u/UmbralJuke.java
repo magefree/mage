@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.SilverquillToken;
+import mage.game.permanent.token.InklingToken;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -28,7 +28,7 @@ public final class UmbralJuke extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // • Create a 2/1 white and black Inkling creature token with flying.
-        this.getSpellAbility().addMode(new Mode(new CreateTokenEffect(new SilverquillToken())));
+        this.getSpellAbility().addMode(new Mode(new CreateTokenEffect(new InklingToken())));
     }
 
     private UmbralJuke(final UmbralJuke card) {

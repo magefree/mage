@@ -5,7 +5,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.PrismariToken;
+import mage.game.permanent.token.Elemental44Token;
 
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ public final class ElementalSummoning extends CardImpl {
         this.subtype.add(SubType.LESSON);
 
         // Create a 4/4 blue and red Elemental creature token.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new PrismariToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new Elemental44Token()));
     }
 
     private ElementalSummoning(final ElementalSummoning card) {

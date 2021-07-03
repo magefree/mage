@@ -15,7 +15,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.LoreholdToken;
+import mage.game.permanent.token.Spirit32Token;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -76,7 +76,7 @@ class MakeYourMarkDelayedTriggeredAbility extends DelayedTriggeredAbility {
     private final MageObjectReference mor;
 
     MakeYourMarkDelayedTriggeredAbility(Permanent permanent, Game game) {
-        super(new CreateTokenEffect(new LoreholdToken()), Duration.EndOfTurn, false, false);
+        super(new CreateTokenEffect(new Spirit32Token()), Duration.EndOfTurn, false, false);
         this.mor = new MageObjectReference(permanent, game);
     }
 

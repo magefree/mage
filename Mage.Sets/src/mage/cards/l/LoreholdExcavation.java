@@ -16,7 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.LoreholdToken;
+import mage.game.permanent.token.Spirit32Token;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -37,7 +37,7 @@ public final class LoreholdExcavation extends CardImpl {
 
         // {5}, Exile a creature card from your graveyard: Create a tapped 3/2 red and white Spirit creature token.
         Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(
-                new LoreholdToken(), 1, true, false
+                new Spirit32Token(), 1, true, false
         ), new GenericManaCost(5));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_A)));
         this.addAbility(ability);

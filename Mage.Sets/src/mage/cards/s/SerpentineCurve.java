@@ -9,7 +9,7 @@ import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.QuandrixToken;
+import mage.game.permanent.token.FractalToken;
 
 import java.util.UUID;
 
@@ -29,7 +29,7 @@ public final class SerpentineCurve extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is one plus the total number of instant and sorcery cards you own in exile and in your graveyard.
-        this.getSpellAbility().addEffect(QuandrixToken.getEffect(
+        this.getSpellAbility().addEffect(FractalToken.getEffect(
                 xValue, "Put X +1/+1 counters on it, where X is one plus the total number " +
                         "of instant and sorcery cards you own in exile and in your graveyard"
         ));

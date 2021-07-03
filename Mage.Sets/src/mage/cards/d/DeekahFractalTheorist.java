@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.QuandrixToken;
+import mage.game.permanent.token.FractalToken;
 import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
 
@@ -37,7 +37,7 @@ public final class DeekahFractalTheorist extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Magecraft — Whenever you cast or copy an instant or sorcery spell, create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is that spell's mana value.
-        this.addAbility(new MagecraftAbility(QuandrixToken.getEffect(
+        this.addAbility(new MagecraftAbility(FractalToken.getEffect(
                 DeekahFractalTheoristValue.instance, "Put X +1/+1 counters on it, " +
                         "where X is that spell's mana value"
         )));

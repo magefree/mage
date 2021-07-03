@@ -10,7 +10,7 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.WitherbloomToken;
+import mage.game.permanent.token.Pest11GainLifeToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -65,7 +65,7 @@ class ContainmentBreachEffect extends OneShotEffect {
         }
         permanent.destroy(source, game, false);
         if (permanent.getManaValue() <= 2) {
-            new WitherbloomToken().putOntoBattlefield(1, game, source, source.getControllerId());
+            new Pest11GainLifeToken().putOntoBattlefield(1, game, source, source.getControllerId());
         }
         return true;
     }

@@ -4,12 +4,14 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
-public final class LoreholdToken extends TokenImpl {
+public final class Spirit32Token extends TokenImpl {
 
-    public LoreholdToken() {
+    public Spirit32Token() {
         super("Spirit", "3/2 red and white Spirit creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
@@ -17,14 +19,16 @@ public final class LoreholdToken extends TokenImpl {
         subtype.add(SubType.SPIRIT);
         power = new MageInt(3);
         toughness = new MageInt(2);
+
+        availableImageSetCodes = Arrays.asList("STX");
     }
 
-    private LoreholdToken(final LoreholdToken token) {
+    private Spirit32Token(final Spirit32Token token) {
         super(token);
     }
 
     @Override
-    public LoreholdToken copy() {
-        return new LoreholdToken(this);
+    public Spirit32Token copy() {
+        return new Spirit32Token(this);
     }
 }

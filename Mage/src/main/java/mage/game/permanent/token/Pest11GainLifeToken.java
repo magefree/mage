@@ -6,12 +6,14 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
-public final class WitherbloomToken extends TokenImpl {
+public final class Pest11GainLifeToken extends TokenImpl {
 
-    public WitherbloomToken() {
+    public Pest11GainLifeToken() {
         super("Pest", "1/1 black and green Pest creature token with \"When this creature dies, you gain 1 life.\"");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
@@ -21,13 +23,15 @@ public final class WitherbloomToken extends TokenImpl {
         toughness = new MageInt(1);
 
         this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(1)));
+
+        availableImageSetCodes = Arrays.asList("STX");
     }
 
-    private WitherbloomToken(final WitherbloomToken token) {
+    private Pest11GainLifeToken(final Pest11GainLifeToken token) {
         super(token);
     }
 
-    public WitherbloomToken copy() {
-        return new WitherbloomToken(this);
+    public Pest11GainLifeToken copy() {
+        return new Pest11GainLifeToken(this);
     }
 }

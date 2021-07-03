@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.permanent.token.PrismariToken;
+import mage.game.permanent.token.Elemental44Token;
 import mage.game.permanent.token.TreasureToken;
 
 import java.util.UUID;
@@ -23,7 +23,7 @@ public final class ElementalMasterpiece extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U}{R}");
 
         // Create two 4/4 blue and red Elemental creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new PrismariToken(), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new Elemental44Token(), 2));
 
         // {U/R}{U/R}, Discard Elemental Masterpiece: Create a Treasure token.
         Ability ability = new SimpleActivatedAbility(

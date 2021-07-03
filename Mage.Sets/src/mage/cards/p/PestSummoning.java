@@ -5,7 +5,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.WitherbloomToken;
+import mage.game.permanent.token.Pest11GainLifeToken;
 
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ public final class PestSummoning extends CardImpl {
         this.subtype.add(SubType.LESSON);
 
         // Create two 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life."
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new WitherbloomToken(), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new Pest11GainLifeToken(), 2));
     }
 
     private PestSummoning(final PestSummoning card) {
