@@ -14,7 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.token.PromiseOfPowerDemonToken;
+import mage.game.permanent.token.DemonFlyingToken;
 import mage.players.Player;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -91,7 +91,7 @@ class TivashGloomSummonerEffect extends OneShotEffect {
         )) {
             return false;
         }
-        new PromiseOfPowerDemonToken(lifeGained).putOntoBattlefield(1, game, source, source.getControllerId());
+        new DemonFlyingToken(lifeGained).putOntoBattlefield(1, game, source, source.getControllerId());
         return true;
     }
 }

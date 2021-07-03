@@ -11,9 +11,9 @@ import java.util.Arrays;
 /**
  * @author spjspj
  */
-public final class HornetQueenInsectToken extends TokenImpl {
+public final class InsectDeathToken extends TokenImpl {
 
-    public HornetQueenInsectToken() {
+    public InsectDeathToken() {
         super("Insect", "1/1 green Insect creature token with flying and deathtouch");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
@@ -23,14 +23,14 @@ public final class HornetQueenInsectToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
         addAbility(DeathtouchAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("M15", "C20");
+        availableImageSetCodes = Arrays.asList("M15", "C20", "C21");
     }
 
-    public HornetQueenInsectToken(final HornetQueenInsectToken token) {
+    public InsectDeathToken(final InsectDeathToken token) {
         super(token);
     }
 
-    public HornetQueenInsectToken copy() {
-        return new HornetQueenInsectToken(this);
+    public InsectDeathToken copy() {
+        return new InsectDeathToken(this);
     }
 }

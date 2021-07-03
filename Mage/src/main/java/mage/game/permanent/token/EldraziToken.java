@@ -1,12 +1,12 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
+
+import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class EldraziToken extends TokenImpl {
@@ -17,6 +17,8 @@ public final class EldraziToken extends TokenImpl {
         subtype.add(SubType.ELDRAZI);
         power = new MageInt(10);
         toughness = new MageInt(10);
+
+        availableImageSetCodes = Arrays.asList("BFZ", "C19", "C21");
     }
 
     public EldraziToken(final EldraziToken token) {
