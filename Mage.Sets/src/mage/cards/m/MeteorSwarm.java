@@ -22,7 +22,7 @@ public final class MeteorSwarm extends CardImpl {
         // Meteor Swarm deals 8 damage divided as you choose among X target creatures and/or planeswalkers.
         this.getSpellAbility().addEffect(
                 new DamageMultiEffect(8).
-                        setText("Meteor Swarm deals 8 damage divided as you choose among X target creatures and/or planeswalkers.")
+                        setText("{this} deals 8 damage divided as you choose among X target creatures and/or planeswalkers.")
         );
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalkerAmount(8));
         this.getSpellAbility().setTargetAdjuster(MeteorSwarmAdjuster.instance);
@@ -44,8 +44,13 @@ enum MeteorSwarmAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        TargetCreatureOrPlaneswalkerAmount targetCreatureOrPlaneswalkerAmount = new TargetCreatureOrPlaneswalkerAmount(8);
-        targetCreatureOrPlaneswalkerAmount.setMaxNumberOfTargets(ability.getManaCostsToPay().getX());
-        ability.addTarget(targetCreatureOrPlaneswalkerAmount);
+        int xManaSpent = ability.getManaCostsToPay().getX();
+        if(xManaSpent != 0) {
+            TargetCreatureOrPlaneswalkerAmount targetCreatureOrPlaneswalkerAmount = new TargetCreatureOrPlaneswalkerAmount(8);
+            targetCreatureOrPlaneswalkerAmount.setMinNumberOfTargets(xManaSpent);
+            targetCreatureOrPlaneswalkerAmount.setMaxNumberOfTargets(xManaSpent);
+            ability.addTarget(targetCreatureOrPlaneswalkerAmount);
+        }
     }
 }
+
