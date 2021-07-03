@@ -48,6 +48,7 @@ public final class TreasureChest extends CardImpl {
 
         // 20 | Search your library for a card. If it's an artifact card you may put it onto the battlefield. Otherwise, put that card into your hand. Then shuffle.
         effect.addTableEntry(20, 20, new TreasureChestEffect());
+        this.addAbility(ability);
     }
 
     private TreasureChest(final TreasureChest card) {
