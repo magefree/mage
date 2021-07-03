@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
@@ -15,11 +13,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.PromiseOfPowerDemonToken;
+import mage.game.permanent.token.DemonFlyingToken;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PromiseOfPower extends CardImpl {
@@ -73,7 +72,7 @@ class PromiseOfPowerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return new CreateTokenEffect(new PromiseOfPowerDemonToken(controller.getHand().size())).apply(game, source);
+            return new CreateTokenEffect(new DemonFlyingToken(controller.getHand().size())).apply(game, source);
         }
         return false;
     }

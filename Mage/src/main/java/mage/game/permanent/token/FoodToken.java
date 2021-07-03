@@ -23,13 +23,8 @@ public final class FoodToken extends TokenImpl {
 
     static final private List<String> tokenImageSets = new ArrayList<>();
 
-    static {
-        tokenImageSets.addAll(Arrays.asList("ELD"));
-    }
-
     public FoodToken() {
         super("Food", "Food token");
-        availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.FOOD);
 
@@ -40,6 +35,8 @@ public final class FoodToken extends TokenImpl {
         cost.setText("Sacrifice this artifact");
         ability.addCost(cost);
         this.addAbility(ability);
+
+        availableImageSetCodes = Arrays.asList("ELD", "C21");
     }
 
     @Override

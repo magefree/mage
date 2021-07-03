@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -15,6 +13,8 @@ import mage.game.permanent.token.HorrorToken;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
  * @author Loki
  */
@@ -23,11 +23,12 @@ public final class HuntedLammasu extends CardImpl {
     public HuntedLammasu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.subtype.add(SubType.LAMMASU);
-
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // When Hunted Lammasu enters the battlefield, create a 4/4 black Horror creature token under target opponent's control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new HorrorToken()), false);
         Target target = new TargetOpponent();

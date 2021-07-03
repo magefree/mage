@@ -266,7 +266,7 @@
 |Generate|TOK:BNG|Centaur|||CentaurEnchantmentCreatureToken|
 |Generate|TOK:BNG|Elemental|||SatyrNyxSmithElementalToken|
 |Generate|TOK:BNG|Gold||
-|Generate|TOK:BNG|Kraken|||ReefWormKrakenToken|
+|Generate|TOK:BNG|Kraken|||Kraken99Token|
 |Generate|TOK:BNG|Soldier|||GodFavoredGeneralSoldierToken|
 |Generate|TOK:BNG|Wolf|||WolfToken|
 |Generate|TOK:BNG|Zombie|||ForlornPseudammaZombieToken|
@@ -303,7 +303,7 @@
 |Generate|TOK:C14|Beast|2||BeastToken2|
 |Generate|TOK:C14|Cat|||CatToken|
 |Generate|TOK:C14|Demon|1||DemonToken|
-|Generate|TOK:C14|Demon|2||ReignOfThePitToken|
+|Generate|TOK:C14|Demon|2||DemonFlyingToken|
 |Generate|TOK:C14|Elemental|||TitaniaProtectorOfArgothElementalToken|
 |Generate|TOK:C14|Elephant|||ElephantToken|
 |Generate|TOK:C14|Elf Druid|||ElfDruidToken|
@@ -317,7 +317,7 @@
 |Generate|TOK:C14|Goblin|||GoblinToken|
 |Generate|TOK:C14|Horror|||SpoilsOfBloodHorrorToken|
 |Generate|TOK:C14|Kor Soldier|||KorSoldierToken|
-|Generate|TOK:C14|Kraken|||ReefWormKrakenToken|
+|Generate|TOK:C14|Kraken|||Kraken99Token|
 |Generate|TOK:C14|Myr|||MyrToken|
 |Generate|TOK:C14|Pegasus|||PegasusToken|
 |Generate|TOK:C14|Pentavite|||PentaviteToken|
@@ -338,8 +338,8 @@
 |Generate|TOK:C15|Dragon|||DragonToken2|
 |Generate|TOK:C15|Drake|||DrakeToken|
 |Generate|TOK:C15|Elemental Shaman|||ElementalShamanToken|
-|Generate|TOK:C15|Elemental|||CallTheSkyBreakerElementalToken|
-|Generate|TOK:C15|Elemental|||LightningRagerToken|
+|Generate|TOK:C15|Elemental|1||CallTheSkyBreakerElementalToken|
+|Generate|TOK:C15|Elemental|2||LightningRagerToken|
 |Generate|TOK:C15|Elephant|||ElephantToken|
 |Generate|TOK:C15|Frog Lizard|||RapidHybridizationToken|
 |Generate|TOK:C15|Germ|||GermToken|
@@ -554,7 +554,7 @@
 |Generate|TOK:DDM|Assassin|||AssassinToken|
 |Generate|TOK:DDM|Illusion|||IllusionToken|
 |Generate|TOK:DDN|Goblin|||GoblinToken|
-|Generate|TOK:DDO|Kraken|||ReefWormKrakenToken|
+|Generate|TOK:DDO|Kraken|||Kraken99Token|
 |Generate|TOK:DDO|Soldier|||SoldierToken|
 |Generate|TOK:DDP|Eldrazi Spawn|1||EldraziSpawnToken|
 |Generate|TOK:DDP|Eldrazi Spawn|2||EldraziSpawnToken|
@@ -753,7 +753,9 @@
 |Generate|TOK:JUD|Wurm|||WurmToken|
 |Generate|TOK:KLD|Beast|||ArchitectOfTheUntamedBeastToken|
 |Generate|TOK:KLD|Construct|1||OviyaPashiriSageLifecrafterToken|
-|Generate|TOK:KLD|Construct|2||MetallurgicSummoningsConstructToken|
+|Generate|TOK:KLD|Construct|2||OviyaPashiriSageLifecrafterToken|
+|Generate|TOK:KLD|Construct|3||MetallurgicSummoningsConstructToken|
+|Generate|TOK:KLD|Construct|4||MetallurgicSummoningsConstructToken|
 |Generate|TOK:KLD|Servo|1||ServoToken|
 |Generate|TOK:KLD|Servo|2||ServoToken|
 |Generate|TOK:KLD|Servo|3||ServoToken|
@@ -1363,7 +1365,7 @@
 |Generate|TOK:C20|Goblin Warrior|||GoblinWarriorToken|
 |Generate|TOK:C20|Human|||HumanToken|
 |Generate|TOK:C20|Hydra|||ZaxaraTheExemplaryHydraToken|
-|Generate|TOK:C20|Insect|1||HornetQueenInsectToken|
+|Generate|TOK:C20|Insect|1||InsectDeathToken|
 |Generate|TOK:C20|Insect|2||TheLocustGodInsectToken|
 |Generate|TOK:C20|Saproling|||SaprolingToken|
 |Generate|TOK:C20|Snake|||SnakeToken|
@@ -1496,3 +1498,38 @@
 |Generate|TOK:TSR|Saproling|||SaprolingToken|
 |Generate|TOK:TSR|Soldier|||SoldierToken|
 |Generate|TOK:TSR|Spider|||PenumbraSpiderToken|
+
+# C21
+|Generate|TOK:C21|Beast|1||BeastToken|
+|Generate|TOK:C21|Beast|2||BeastToken2|
+|Generate|TOK:C21|Fungus Beast|||FungusBeastToken|
+|Generate|TOK:C21|Boar|||Boar2Token|
+# no need tokens for Eternalize ability, but scryfall have it: https://scryfall.com/card/tc21/6/champion-of-wits
+# no need tokens for Copy, but scryfall have it: https://scryfall.com/card/tc21/30/copy
+|Generate|TOK:C21|Construct|1||MetallurgicSummoningsConstructToken|
+|Generate|TOK:C21|Construct|2||KarnConstructToken|
+|Generate|TOK:C21|Demon|||DemonFlyingToken|
+|Generate|TOK:C21|Drake|||DrakeToken|
+|Generate|TOK:C21|Eldrazi|||EldraziToken|
+|Generate|TOK:C21|Elemental|||CallTheSkyBreakerElementalToken|
+|Generate|TOK:C21|Elephant|||ElephantToken|
+|Generate|TOK:C21|Fish|||ReefWormFishToken|
+|Generate|TOK:C21|Food|||FoodToken|
+|Generate|TOK:C21|Frog Lizard|||FrogLizardToken|
+|Generate|TOK:C21|Golem|1||GolemFlyingToken|
+|Generate|TOK:C21|Golem|2||GolemVigilanceToken|
+|Generate|TOK:C21|Golem|3||GolemTrampleToken|
+|Generate|TOK:C21|Horror|||HorrorToken|
+|Generate|TOK:C21|Hydra|||HydraBroodmasterToken|
+|Generate|TOK:C21|Insect|||InsectDeathToken|
+|Generate|TOK:C21|Kraken|||Kraken99Token|
+|Generate|TOK:C21|Myr|||MyrToken|
+|Generate|TOK:C21|Saproling|||SaprolingToken|
+|Generate|TOK:C21|Spirit|||WhiteBlackSpiritToken|
+|Generate|TOK:C21|Thopter|||ThopterColorlessToken|
+|Generate|TOK:C21|Whale|||ReefWormWhaleToken|
+|Generate|TOK:C21|Wurm|||WurmToken|
+|Generate|TOK:C21|Zombie|||ZombieToken|
+
+
+#|Generate|TOK:C21|xxx|||xxxToken|

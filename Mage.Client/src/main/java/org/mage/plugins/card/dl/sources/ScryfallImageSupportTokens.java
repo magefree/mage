@@ -131,8 +131,11 @@ public class ScryfallImageSupportTokens {
             //KLD
             put("KLD/Beast", "https://api.scryfall.com/cards/tkld/1/en?format=image");
             put("KLD/Emblem Chandra", "https://api.scryfall.com/cards/tkld/10/en?format=image");
+            // same construct images uses for different classes, so KLD have 4 instead 2 tokens
             put("KLD/Construct/1", "https://api.scryfall.com/cards/tkld/2/en?format=image");
             put("KLD/Construct/2", "https://api.scryfall.com/cards/tkld/3/en?format=image");
+            put("KLD/Construct/3", "https://api.scryfall.com/cards/tkld/2/en?format=image");
+            put("KLD/Construct/4", "https://api.scryfall.com/cards/tkld/3/en?format=image");
             put("KLD/Emblem Dovin", "https://api.scryfall.com/cards/tkld/12/en?format=image");
             put("KLD/Emblem Nissa", "https://api.scryfall.com/cards/tkld/11/en?format=image");
             put("KLD/Servo/1", "https://api.scryfall.com/cards/tkld/4/en?format=image");
@@ -546,6 +549,37 @@ public class ScryfallImageSupportTokens {
             put("TSR/Saproling", "https://api.scryfall.com/cards/ttsr/13/en?format=image");
             put("TSR/Soldier", "https://api.scryfall.com/cards/ttsr/2/en?format=image");
             put("TSR/Spider", "https://api.scryfall.com/cards/ttsr/6/en?format=image");
+
+            // C21
+            put("C21/Beast/1", "https://api.scryfall.com/cards/tc21/10/en?format=image"); // 3/3
+            put("C21/Beast/2", "https://api.scryfall.com/cards/tc21/11/en?format=image"); // 4/4
+            put("C21/Boar", "https://api.scryfall.com/cards/tc21/12/en?format=image");
+            put("C21/Champion of Wits", "https://api.scryfall.com/cards/tc21/6/en?format=image");
+            put("C21/Construct/1", "https://api.scryfall.com/cards/tc21/22/en?format=image"); // x/x
+            put("C21/Construct/2", "https://api.scryfall.com/cards/tc21/23/en?format=image"); // 0/0
+            put("C21/Demon", "https://api.scryfall.com/cards/tc21/7/en?format=image");
+            put("C21/Drake", "https://api.scryfall.com/cards/tc21/2/en?format=image");
+            put("C21/Eldrazi", "https://api.scryfall.com/cards/tc21/1/en?format=image");
+            put("C21/Elemental", "https://api.scryfall.com/cards/tc21/20/en?format=image");
+            put("C21/Elephant", "https://api.scryfall.com/cards/tc21/13/en?format=image");
+            put("C21/Fish", "https://api.scryfall.com/cards/tc21/3/en?format=image");
+            put("C21/Food", "https://api.scryfall.com/cards/tc21/24/en?format=image");
+            put("C21/Frog Lizard", "https://api.scryfall.com/cards/tc21/14/en?format=image");
+            put("C21/Fungus Beast", "https://api.scryfall.com/cards/tc21/15/en?format=image");
+            put("C21/Golem/1", "https://api.scryfall.com/cards/tc21/25/en?format=image"); // fly
+            put("C21/Golem/2", "https://api.scryfall.com/cards/tc21/27/en?format=image"); // vigilance
+            put("C21/Golem/3", "https://api.scryfall.com/cards/tc21/26/en?format=image"); // trample
+            put("C21/Horror", "https://api.scryfall.com/cards/tc21/8/en?format=image");
+            put("C21/Hydra", "https://api.scryfall.com/cards/tc21/16/en?format=image");
+            put("C21/Insect", "https://api.scryfall.com/cards/tc21/17/en?format=image");
+            put("C21/Kraken", "https://api.scryfall.com/cards/tc21/4/en?format=image");
+            put("C21/Myr", "https://api.scryfall.com/cards/tc21/28/en?format=image");
+            put("C21/Saproling", "https://api.scryfall.com/cards/tc21/18/en?format=image");
+            put("C21/Spirit", "https://api.scryfall.com/cards/tc21/21/en?format=image");
+            put("C21/Thopter", "https://api.scryfall.com/cards/tc21/29/en?format=image");
+            put("C21/Whale", "https://api.scryfall.com/cards/tc21/5/en?format=image");
+            put("C21/Wurm", "https://api.scryfall.com/cards/tc21/19/en?format=image");
+            put("C21/Zombie", "https://api.scryfall.com/cards/tc21/9/en?format=image");
 
             // generate supported sets
             supportedSets.clear();
