@@ -11,6 +11,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,7 +96,7 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
         return sb.toString();
     }
 
-    private static final class TableEntry {
+    private static final class TableEntry implements Serializable {
         private final int min;
         private final int max;
         private final Effects effects;
