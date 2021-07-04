@@ -87,33 +87,26 @@ public class VerifyCardDataTest {
 
         // power-toughness
         skipListCreate(SKIP_LIST_PT);
-        skipListAddName(SKIP_LIST_PT, "UST", "Garbage Elemental");
-        skipListAddName(SKIP_LIST_PT, "UST", "Infinity Elemental");
+        skipListAddName(SKIP_LIST_PT, "AFR", "Dire Wolf Prowler"); // TODO: delete after AFR release
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
 
         // cost
         skipListCreate(SKIP_LIST_COST);
-        skipListAddName(SKIP_LIST_COST, "KTK", "Erase");
-        skipListAddName(SKIP_LIST_COST, "M13", "Erase");
-        skipListAddName(SKIP_LIST_COST, "ULG", "Erase");
-        skipListAddName(SKIP_LIST_COST, "WC00", "Erase");
-        skipListAddName(SKIP_LIST_COST, "H17", "Grimlock, Dinobot Leader");
-        skipListAddName(SKIP_LIST_COST, "UST", "Everythingamajig");
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
 
         // type
         skipListCreate(SKIP_LIST_TYPE);
-        skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey");
+        skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
-        skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense");
+        skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
 
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
-        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
+        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
@@ -516,7 +509,7 @@ public class VerifyCardDataTest {
             rootPath = Paths.get("..", "Mage.Client", "release", "sample-decks");
         }
         if (!Files.exists(rootPath)) {
-            Assert.fail("Sample decks: unknown root folder " + rootPath.toAbsolutePath().toString());
+            Assert.fail("Sample decks: unknown root folder " + rootPath.toAbsolutePath());
         }
 
         // collect all files in all root's folders
@@ -533,7 +526,7 @@ public class VerifyCardDataTest {
             e.printStackTrace();
             errorsList.add("Error: sample deck - can't get folder content - " + e.getMessage());
         }
-        Assert.assertTrue("Sample decks: can't find any deck files in " + rootPath.toAbsolutePath().toString(), filesList.size() > 0);
+        Assert.assertTrue("Sample decks: can't find any deck files in " + rootPath.toAbsolutePath(), filesList.size() > 0);
 
         // try to open deck files
         int totalErrorFiles = 0;
@@ -548,7 +541,7 @@ public class VerifyCardDataTest {
 
             if (!deckErrors.toString().isEmpty()) {
                 errorsList.add("Error: sample deck contains errors " + deckName);
-                System.out.println("Errors in sample deck " + deckName + ":\n" + deckErrors.toString());
+                System.out.println("Errors in sample deck " + deckName + ":\n" + deckErrors);
                 totalErrorFiles++;
                 continue;
             }
