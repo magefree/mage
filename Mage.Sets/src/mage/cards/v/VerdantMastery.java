@@ -70,7 +70,7 @@ class VerdantMasteryEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        TargetCardInLibrary target = new TargetCardInLibrary(4, StaticFilters.FILTER_CARD_BASIC_LAND);
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 4, StaticFilters.FILTER_CARD_BASIC_LAND);
         player.searchLibrary(target, source, game);
         Cards cards = new CardsImpl(target.getTargets());
         player.revealCards(source, cards, game);
@@ -86,6 +86,7 @@ class VerdantMasteryEffect extends OneShotEffect {
             Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
             if (opponent != null) {
                 target = new TargetCardInLibrary(1, StaticFilters.FILTER_CARD_BASIC_LAND);
+                target.setRequired(true);
                 target.withChooseHint("to give to " + opponent.getName());
                 player.choose(outcome, cards, target, game);
                 Card card = game.getCard(target.getFirstTarget());
@@ -100,7 +101,8 @@ class VerdantMasteryEffect extends OneShotEffect {
             player.shuffleLibrary(source, game);
             return true;
         }
-        target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LAND);
+        target = new TargetCardInLibrary(Math.min(cards.size(), 2), StaticFilters.FILTER_CARD_BASIC_LAND);
+        target.setRequired(true);
         player.choose(outcome, cards, target, game);
         player.moveCards(
                 new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source,
