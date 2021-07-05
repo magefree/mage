@@ -38,6 +38,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Bruenor Battlehammer", 219, Rarity.UNCOMMON, mage.cards.b.BruenorBattlehammer.class));
         cards.add(new SetCardInfo("Bulette", 173, Rarity.COMMON, mage.cards.b.Bulette.class));
         cards.add(new SetCardInfo("Bull's Strength", 174, Rarity.COMMON, mage.cards.b.BullsStrength.class));
+        cards.add(new SetCardInfo("Burning Hands", 135, Rarity.UNCOMMON, mage.cards.b.BurningHands.class));
         cards.add(new SetCardInfo("Cave of the Frost Dragon", 253, Rarity.RARE, mage.cards.c.CaveOfTheFrostDragon.class));
         cards.add(new SetCardInfo("Celestial Unicorn", 5, Rarity.COMMON, mage.cards.c.CelestialUnicorn.class));
         cards.add(new SetCardInfo("Charmed Sleep", 50, Rarity.COMMON, mage.cards.c.CharmedSleep.class));
