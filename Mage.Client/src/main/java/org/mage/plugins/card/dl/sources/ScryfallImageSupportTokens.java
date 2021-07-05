@@ -592,6 +592,27 @@ public class ScryfallImageSupportTokens {
             put("C21/Wurm", "https://api.scryfall.com/cards/tc21/19/en?format=image");
             put("C21/Zombie", "https://api.scryfall.com/cards/tc21/9/en?format=image");
 
+            // MH2
+            put("MH2/Beast", "https://api.scryfall.com/cards/tmh2/9/en?format=image");
+            put("MH2/Bird", "https://api.scryfall.com/cards/tmh2/1/en?format=image");
+            put("MH2/Clue/1", "https://api.scryfall.com/cards/tmh2/14/en?format=image");
+            put("MH2/Clue/2", "https://api.scryfall.com/cards/tmh2/15/en?format=image");
+            put("MH2/Construct", "https://api.scryfall.com/cards/tmh2/16/en?format=image");
+            put("MH2/Crab", "https://api.scryfall.com/cards/tmh2/2/en?format=image");
+            put("MH2/Elemental", "https://api.scryfall.com/cards/tmh2/10/en?format=image");
+            put("MH2/Food/1", "https://api.scryfall.com/cards/tmh2/17/en?format=image");
+            put("MH2/Food/2", "https://api.scryfall.com/cards/tmh2/18/en?format=image");
+            put("MH2/Goblin", "https://api.scryfall.com/cards/tmh2/8/en?format=image");
+            put("MH2/Golem", "https://api.scryfall.com/cards/tmh2/12/en?format=image");
+            put("MH2/Insect", "https://api.scryfall.com/cards/tmh2/13/en?format=image");
+            put("MH2/Phyrexian Germ", "https://api.scryfall.com/cards/tmh2/3/en?format=image");
+            put("MH2/Squirrel", "https://api.scryfall.com/cards/tmh2/11/en?format=image");
+            put("MH2/Thopter", "https://api.scryfall.com/cards/tmh2/19/en?format=image");
+            put("MH2/Treasure/1", "https://api.scryfall.com/cards/tmh2/20/en?format=image");
+            put("MH2/Treasure/2", "https://api.scryfall.com/cards/tmh2/21/en?format=image");
+            put("MH2/Zombie Army", "https://api.scryfall.com/cards/tmh2/7/en?format=image");
+            put("MH2/Zombie", "https://api.scryfall.com/cards/tmh2/6/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

@@ -313,7 +313,7 @@
 |Generate|TOK:C14|Equipment|||NahiriTheLithomancerEquipmentToken|
 |Generate|TOK:C14|Fish|||ReefWormFishToken|
 |Generate|TOK:C14|Gargoyle|||GargoyleToken|
-|Generate|TOK:C14|Germ|||GermToken|
+|Generate|TOK:C14|Germ|||PhyrexianGermToken|
 |Generate|TOK:C14|Goat|||GoatToken|
 |Generate|TOK:C14|Goblin Golem|||TuktukTheReturnedToken|
 |Generate|TOK:C14|Goblin|||GoblinToken|
@@ -344,7 +344,7 @@
 |Generate|TOK:C15|Elemental|2||LightningRagerToken|
 |Generate|TOK:C15|Elephant|||ElephantToken|
 |Generate|TOK:C15|Frog Lizard|||RapidHybridizationToken|
-|Generate|TOK:C15|Germ|||GermToken|
+|Generate|TOK:C15|Germ|||PhyrexianGermToken|
 |Generate|TOK:C15|Gold||
 |Generate|TOK:C15|Knight|1||KnightToken|
 |Generate|TOK:C15|Knight|2||HuntedDragonKnightToken|
@@ -849,7 +849,7 @@
 |Generate|TOK:M15|Treefolk Warrior|||KalonianTwingroveTreefolkWarriorToken|
 |Generate|TOK:M15|Zombie|||ZombieToken|
 |Generate|TOK:MBS|Cat|||CatToken|
-|Generate|TOK:MBS|Germ|||GermToken|
+|Generate|TOK:MBS|Germ|||PhyrexianGermToken|
 |Generate|TOK:MBS|Golem|||TitanForgeGolemToken|
 |Generate|TOK:MBS|Horror|||PhyrexianRebirthHorrorToken|
 |Generate|TOK:MBS|Myr|||MyrToken|
@@ -886,7 +886,7 @@
 |Generate|TOK:MM2|Eldrazi Spawn|||EldraziSpawnToken|
 |Generate|TOK:MM2|Elephant|||ElephantToken|
 |Generate|TOK:MM2|Faerie Rogue|||FaerieRogueToken|
-|Generate|TOK:MM2|Germ|||GermToken|
+|Generate|TOK:MM2|Germ|||PhyrexianGermToken|
 |Generate|TOK:MM2|Golem|||GolemToken|
 |Generate|TOK:MM2|Insect|||InsectToken|
 |Generate|TOK:MM2|Myr|||MyrToken|
@@ -962,7 +962,7 @@
 |Generate|TOK:NEM|Saproling|1||SaprolingBurstToken|
 |Generate|TOK:NEM|Saproling|2||SaprolingToken|
 |Generate|TOK:NPH|Beast|||BeastToken|
-|Generate|TOK:NPH|Germ|||GermToken|
+|Generate|TOK:NPH|Germ|||PhyrexianGermToken|
 |Generate|TOK:NPH|Goblin|||GoblinTokenWithHaste|
 |Generate|TOK:NPH|Goblin|||GoblinToken|
 |Generate|TOK:NPH|Golem|||GolemToken|
@@ -1011,7 +1011,7 @@
 |Generate|TOK:PC2|Beast|||BeastToken|
 |Generate|TOK:PC2|Boar|||BoarToken|
 |Generate|TOK:PC2|Eldrazi Spawn|||EldraziSpawnToken|
-|Generate|TOK:PC2|Germ|||GermToken|
+|Generate|TOK:PC2|Germ|||PhyrexianGermToken|
 |Generate|TOK:PC2|Goblin|||GoblinToken|
 |Generate|TOK:PC2|Hellion|||HellionToken|
 |Generate|TOK:PC2|Insect|||InsectToken|
@@ -1423,7 +1423,7 @@
 # OonaQueenFaerieRogueToken is FaerieRogueToken with additional blue color, but ZNC contains only one token - so don't use normal token for it
 #|Generate|TOK:ZNC|Faerie Rogue|||OonaQueenFaerieRogueToken|
 # Germ token uses in chest and antology, but scryfall put it here
-#|Generate|TOK:ZNC|Germ|||GermToken|
+#|Generate|TOK:ZNC|Germ|||PhyrexianGermToken|
 #
 |Generate|TOK:ZNC|Goblin Rogue|||GoblinRogueToken|
 |Generate|TOK:ZNC|Kor Ally|||KorAllyToken|
@@ -1541,3 +1541,26 @@
 |Generate|TOK:C21|Whale|||ReefWormWhaleToken|
 |Generate|TOK:C21|Wurm|||WurmToken|
 |Generate|TOK:C21|Zombie|||ZombieToken|
+
+// MH2
+|Generate|TOK:MH2|Beast|||BeastToken2|
+|Generate|TOK:MH2|Bird|||BirdToken|
+|Generate|TOK:MH2|Clue|1||ClueArtifactToken|
+|Generate|TOK:MH2|Clue|2||ClueArtifactToken|
+|Generate|TOK:MH2|Construct|||KarnConstructToken|
+|Generate|TOK:MH2|Crab|||CrabToken|
+|Generate|TOK:MH2|Elemental|||TitaniaProtectorOfArgothElementalToken|
+|Generate|TOK:MH2|Food|1||FoodToken|
+|Generate|TOK:MH2|Food|2||FoodToken|
+|Generate|TOK:MH2|Goblin|||GoblinToken|
+|Generate|TOK:MH2|Golem|||RedWhiteGolemToken|
+|Generate|TOK:MH2|Insect|||IzoniInsectToken|
+|Generate|TOK:MH2|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:MH2|Squirrel|||SquirrelToken|
+|Generate|TOK:MH2|Thopter|||ThopterColorlessToken|
+# no need tokens for Eternalize ability, but scryfall have it: https://scryfall.com/card/tmh2/4/timeless-dragon
+# no need tokens for Eternalize ability, but scryfall have it: https://scryfall.com/card/tmh2/5/timeless-witness
+|Generate|TOK:MH2|Treasure|1||TreasureToken|
+|Generate|TOK:MH2|Treasure|2||TreasureToken|
+|Generate|TOK:MH2|Zombie|||ZombieToken|
+|Generate|TOK:MH2|Zombie Army|||ZombieArmyToken|

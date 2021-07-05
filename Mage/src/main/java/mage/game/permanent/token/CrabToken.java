@@ -4,6 +4,8 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -16,6 +18,8 @@ public final class CrabToken extends TokenImpl {
         subtype.add(SubType.CRAB);
         power = new MageInt(0);
         toughness = new MageInt(3);
+
+        availableImageSetCodes = Arrays.asList("MH2");
     }
 
     public CrabToken(final CrabToken token) {
