@@ -136,6 +136,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Soulknife Spy", 75, Rarity.COMMON, mage.cards.s.SoulknifeSpy.class));
         cards.add(new SetCardInfo("Swamp", 270, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swarming Goblins", 162, Rarity.COMMON, mage.cards.s.SwarmingGoblins.class));
+        cards.add(new SetCardInfo("Sylvan Shepherd", 206, Rarity.COMMON, mage.cards.s.SylvanShepherd.class));
         cards.add(new SetCardInfo("Targ Nar, Demon-Fang Gnoll", 234, Rarity.UNCOMMON, mage.cards.t.TargNarDemonFangGnoll.class));
         cards.add(new SetCardInfo("Tasha's Hideous Laughter", 78, Rarity.RARE, mage.cards.t.TashasHideousLaughter.class));
         cards.add(new SetCardInfo("The Deck of Many Things", 241, Rarity.MYTHIC, mage.cards.t.TheDeckOfManyThings.class));

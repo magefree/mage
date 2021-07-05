@@ -1,7 +1,5 @@
-
 package mage.abilities.common;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
@@ -10,14 +8,19 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
 
     protected SetTargetPointer setTargetPointer;
     protected String text;
+
+    public AttacksTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
 
     public AttacksTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, null);
@@ -75,5 +78,4 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
     public AttacksTriggeredAbility copy() {
         return new AttacksTriggeredAbility(this);
     }
-
 }
