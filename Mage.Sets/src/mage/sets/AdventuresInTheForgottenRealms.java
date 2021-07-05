@@ -155,6 +155,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Triumphant Adventurer", 237, Rarity.RARE, mage.cards.t.TriumphantAdventurer.class));
         cards.add(new SetCardInfo("Unexpected Windfall", 164, Rarity.COMMON, mage.cards.u.UnexpectedWindfall.class));
         cards.add(new SetCardInfo("Valor Singer", 165, Rarity.COMMON, mage.cards.v.ValorSinger.class));
+        cards.add(new SetCardInfo("Vampire Spawn", 123, Rarity.COMMON, mage.cards.v.VampireSpawn.class));
         cards.add(new SetCardInfo("Varis, Silverymoon Ranger", 209, Rarity.RARE, mage.cards.v.VarisSilverymoonRanger.class));
         cards.add(new SetCardInfo("Veteran Dungeoneer", 40, Rarity.COMMON, mage.cards.v.VeteranDungeoneer.class));
         cards.add(new SetCardInfo("Vorpal Sword", 124, Rarity.RARE, mage.cards.v.VorpalSword.class));
