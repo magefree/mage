@@ -139,6 +139,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("The Deck of Many Things", 241, Rarity.MYTHIC, mage.cards.t.TheDeckOfManyThings.class));
         cards.add(new SetCardInfo("Tiamat", 235, Rarity.MYTHIC, mage.cards.t.Tiamat.class));
         cards.add(new SetCardInfo("Treasure Chest", 252, Rarity.RARE, mage.cards.t.TreasureChest.class));
+        cards.add(new SetCardInfo("Treasure Vault", 261, Rarity.RARE, mage.cards.t.TreasureVault.class));
         cards.add(new SetCardInfo("Trelasarra Moon Dancer", 236, Rarity.UNCOMMON, mage.cards.t.TrelasarraMoonDancer.class));
         cards.add(new SetCardInfo("Varis, Silverymoon Ranger", 209, Rarity.RARE, mage.cards.v.VarisSilverymoonRanger.class));
         cards.add(new SetCardInfo("Veteran Dungeoneer", 40, Rarity.COMMON, mage.cards.v.VeteranDungeoneer.class));
