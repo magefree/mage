@@ -3,15 +3,15 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.hint.Hint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.players.Player;
 
 import java.util.List;
 import java.util.Objects;
@@ -27,7 +27,7 @@ public final class GoldenRatio extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}{U}");
 
         // Draw a card for each different power among creatures you control.
-        this.getSpellAbility().addEffect(new GoldenRatioEffect());
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GoldenRatioValue.instance));
         this.getSpellAbility().addHint(GoldenRatioHint.instance);
     }
 
@@ -41,33 +41,16 @@ public final class GoldenRatio extends CardImpl {
     }
 }
 
-class GoldenRatioEffect extends OneShotEffect {
-
-    GoldenRatioEffect() {
-        super(Outcome.Benefit);
-        staticText = "draw a card for each different power among creatures you control";
-    }
-
-    private GoldenRatioEffect(final GoldenRatioEffect effect) {
-        super(effect);
-    }
+enum GoldenRatioValue implements DynamicValue {
+    instance;
 
     @Override
-    public GoldenRatioEffect copy() {
-        return new GoldenRatioEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        int unique = game
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return game
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        source.getControllerId(), source.getSourceId(), game
+                        sourceAbility.getControllerId(), sourceAbility.getSourceId(), game
                 )
                 .stream()
                 .filter(Objects::nonNull)
@@ -76,7 +59,21 @@ class GoldenRatioEffect extends OneShotEffect {
                 .distinct()
                 .map(x -> 1)
                 .sum();
-        return player.drawCards(unique, source, game) > 0;
+    }
+
+    @Override
+    public GoldenRatioValue copy() {
+        return this;
+    }
+
+    @Override
+    public String getMessage() {
+        return "different power among creatures you control";
+    }
+
+    @Override
+    public String toString() {
+        return "1";
     }
 }
 
@@ -85,7 +82,7 @@ enum GoldenRatioHint implements Hint {
 
     @Override
     public String getText(Game game, Ability ability) {
-        List<Integer> values = game
+        List<String> values = game
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_CREATURE,
@@ -97,18 +94,14 @@ enum GoldenRatioHint implements Hint {
                 .map(MageInt::getValue)
                 .distinct()
                 .sorted()
+                .map(String::valueOf)
                 .collect(Collectors.toList());
-        String message = "" + values.size();
-        if (values.size() > 0) {
-            message += " (";
-            message += values.stream().map(i -> "" + i).reduce((a, b) -> a + ", " + b).orElse("");
-            message += ')';
-        }
-        return "Different powers among creatures you control: " + message;
+        return "Different powers among creatures you control: " + +values.size()
+                + (values.size() > 0 ? " (" + String.join(", ", values) + ')' : "");
     }
 
     @Override
     public GoldenRatioHint copy() {
-        return instance;
+        return this;
     }
 }
