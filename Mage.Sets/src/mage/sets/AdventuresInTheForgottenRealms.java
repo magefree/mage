@@ -135,6 +135,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Ranger's Hawk", 37, Rarity.COMMON, mage.cards.r.RangersHawk.class));
         cards.add(new SetCardInfo("Red Dragon", 160, Rarity.UNCOMMON, mage.cards.r.RedDragon.class));
         cards.add(new SetCardInfo("Rimeshield Frost Giant", 69, Rarity.COMMON, mage.cards.r.RimeshieldFrostGiant.class));
+        cards.add(new SetCardInfo("Rust Monster", 161, Rarity.UNCOMMON, mage.cards.r.RustMonster.class));
         cards.add(new SetCardInfo("Scaled Herbalist", 204, Rarity.COMMON, mage.cards.s.ScaledHerbalist.class));
         cards.add(new SetCardInfo("Scion of Stygia", 70, Rarity.COMMON, mage.cards.s.ScionOfStygia.class));
         cards.add(new SetCardInfo("Secret Door", 71, Rarity.COMMON, mage.cards.s.SecretDoor.class));
