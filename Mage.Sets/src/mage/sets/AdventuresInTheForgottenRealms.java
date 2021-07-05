@@ -159,6 +159,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("You See a Pair of Goblins", 170, Rarity.UNCOMMON, mage.cards.y.YouSeeAPairOfGoblins.class));
         cards.add(new SetCardInfo("You're Ambushed on the Road", 43, Rarity.COMMON, mage.cards.y.YoureAmbushedOnTheRoad.class));
         cards.add(new SetCardInfo("Yuan-Ti Fang-Blade", 128, Rarity.COMMON, mage.cards.y.YuanTiFangBlade.class));
+        cards.add(new SetCardInfo("Yuan-Ti Malison", 86, Rarity.RARE, mage.cards.y.YuanTiMalison.class));
         cards.add(new SetCardInfo("Zalto, Fire Giant Duke", 171, Rarity.RARE, mage.cards.z.ZaltoFireGiantDuke.class));
         cards.add(new SetCardInfo("Zombie Ogre", 129, Rarity.COMMON, mage.cards.z.ZombieOgre.class));
     }

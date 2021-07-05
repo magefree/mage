@@ -4,17 +4,13 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.SourceAttackingAloneCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.ComparisonType;
-import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
@@ -29,9 +25,11 @@ public final class DreamProwler extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Dream Prowler can't be blocked as long as it's attacking alone.
-        Effect effect = new ConditionalRestrictionEffect(new CantBeBlockedSourceEffect(), new PermanentsOnTheBattlefieldCondition(new FilterAttackingCreature(), ComparisonType.FEWER_THAN, 2));
-        effect.setText("{this} can't be blocked as long as it's attacking alone");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
+                new CantBeBlockedSourceEffect(),
+                SourceAttackingAloneCondition.instance,
+                "{this} can't be blocked as long as it's attacking alone"
+        )));
     }
 
     private DreamProwler(final DreamProwler card) {
