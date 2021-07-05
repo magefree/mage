@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -13,13 +11,14 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.GermToken;
+import mage.game.permanent.token.PhyrexianGermToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class GripOfPhyresis extends CardImpl {
@@ -56,7 +55,7 @@ public final class GripOfPhyresis extends CardImpl {
 class GripOfPhyresisEffect extends CreateTokenEffect {
 
     GripOfPhyresisEffect() {
-        super(new GermToken());
+        super(new PhyrexianGermToken());
     }
 
     GripOfPhyresisEffect(final GripOfPhyresisEffect effect) {
