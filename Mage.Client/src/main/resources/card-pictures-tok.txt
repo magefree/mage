@@ -139,7 +139,7 @@
 |Generate|TOK:10E|Goblin|||GoblinToken|
 |Generate|TOK:10E|Insect|||WaspToken|
 |Generate|TOK:10E|Saproling|||SaprolingToken|
-|Generate|TOK:10E|Skeleton|||SkeletonToken|
+|Generate|TOK:10E|Skeleton|||SkeletonRegenerateToken|
 |Generate|TOK:10E|Soldier|||SoldierToken|
 |Generate|TOK:10E|Zombie|||ZombieToken|
 |Generate|TOK:2ED|Insect|||WaspToken|
@@ -211,7 +211,7 @@
 |Generate|TOK:ALA|Homunculus|||HomunculusToken|
 |Generate|TOK:ALA|Ooze|||MysticGenesisOozeToken|
 |Generate|TOK:ALA|Saproling|||SaprolingToken|
-|Generate|TOK:ALA|Skeleton|||SkeletonToken|
+|Generate|TOK:ALA|Skeleton|||SkeletonRegenerateToken|
 |Generate|TOK:ALA|Soldier|||SoldierToken|
 |Generate|TOK:ALA|Thopter|||ThopterToken|
 |Generate|TOK:ALA|Zombie|||ZombieToken|
@@ -700,7 +700,7 @@
 |Generate|TOK:H17|Dragon|||DragonTokenGold|
 |Generate|TOK:HML|Plant Wall|||KelpToken|
 |Generate|TOK:HML|Serf|||SerfToken|
-|Generate|TOK:HML|Skeleton|||SkeletonToken|
+|Generate|TOK:HML|Skeleton|||SkeletonRegenerateToken|
 |Generate|TOK:HOP|Goblin|||GoblinToken|
 |Generate|TOK:HOP|Insect|||InsectToken|
 |Generate|TOK:HOP|Pentavite|||PentaviteToken|
@@ -1157,7 +1157,7 @@
 |Generate|TOK:TSP|Wurm|||WurmCallingWurmToken|
 |Generate|TOK:UDS|Goblin|||GoblinToken|
 |Generate|TOK:ULG|Ape|||PongifyApeToken|
-|Generate|TOK:ULG|Skeleton|||SkeletonToken|
+|Generate|TOK:ULG|Skeleton|||SkeletonRegenerateToken|
 |Generate|TOK:ULG|Squirrel|||SquirrelToken|
 |Generate|TOK:UNH|Ape|||PongifyApeToken|
 |Generate|TOK:UNH|Goblin|||GoblinToken|

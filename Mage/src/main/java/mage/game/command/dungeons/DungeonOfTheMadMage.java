@@ -17,7 +17,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Dungeon;
 import mage.game.command.DungeonRoom;
-import mage.game.permanent.token.SkeletonToken2;
+import mage.game.permanent.token.SkeletonToken;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -55,7 +55,7 @@ public class DungeonOfTheMadMage extends Dungeon {
 
         // (5b) Muiral's Graveyard — Create two 1/1 black Skeleton creature tokens. (→ 6)
         DungeonRoom muiralsGraveyard = new DungeonRoom(
-                "Muiral's Graveyard", new CreateTokenEffect(new SkeletonToken2(), 2)
+                "Muiral's Graveyard", new CreateTokenEffect(new SkeletonToken(), 2)
         );
 
         // (6) Deep Mines — Scry 3. (→ 7)
