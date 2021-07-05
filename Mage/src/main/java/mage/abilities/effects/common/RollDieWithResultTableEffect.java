@@ -9,6 +9,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
 
 import java.io.Serializable;
@@ -29,7 +30,7 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
     }
 
     public RollDieWithResultTableEffect(int sides) {
-        this(sides, null);
+        this(sides, "roll a d" + sides);
     }
 
     public RollDieWithResultTableEffect(int sides, String prefixText) {
@@ -75,11 +76,7 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        if (prefixText != null) {
-            sb.append(prefixText);
-        } else {
-            sb.append("roll a d").append(sides).append('.');
-        }
+        sb.append(prefixText).append('.');
         for (TableEntry tableEntry : this.resultsTable) {
             sb.append("<br>");
             if (tableEntry.min == tableEntry.max) {
@@ -134,6 +131,14 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
 
     public void addTableEntry(int min, int max, Effect... effects) {
         this.resultsTable.add(new TableEntry(min, max, effects));
+    }
+
+    @Override
+    public Effect setTargetPointer(TargetPointer targetPointer) {
+        for (TableEntry tableEntry : resultsTable) {
+            tableEntry.effects.setTargetPointer(targetPointer);
+        }
+        return super.setTargetPointer(targetPointer);
     }
 }
 

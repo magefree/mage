@@ -59,7 +59,7 @@ public final class TheDeckOfManyThings extends CardImpl {
 class TheDeckOfManyThingsEffect extends RollDieWithResultTableEffect {
 
     TheDeckOfManyThingsEffect() {
-        super(20, "roll a d20 and subtract the number of cards in your hand. If the result is 0 or less, discard your hand.");
+        super(20, "roll a d20 and subtract the number of cards in your hand. If the result is 0 or less, discard your hand");
         this.addTableEntry(1, 9, new TheDeckOfManyThingsRandomEffect());
         this.addTableEntry(10, 19, new DrawCardSourceControllerEffect(2));
         this.addTableEntry(20, 20, new TheDeckOfManyThingsReturnEffect());
