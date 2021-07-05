@@ -28,6 +28,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("+2 Mace", 1, Rarity.COMMON, mage.cards.p.Plus2Mace.class));
         cards.add(new SetCardInfo("Adult Gold Dragon", 216, Rarity.RARE, mage.cards.a.AdultGoldDragon.class));
         cards.add(new SetCardInfo("Air-Cult Elemental", 45, Rarity.COMMON, mage.cards.a.AirCultElemental.class));
+        cards.add(new SetCardInfo("Arcane Investigator", 46, Rarity.COMMON, mage.cards.a.ArcaneInvestigator.class));
         cards.add(new SetCardInfo("Bag of Holding", 240, Rarity.UNCOMMON, mage.cards.b.BagOfHolding.class));
         cards.add(new SetCardInfo("Baleful Beholder", 89, Rarity.COMMON, mage.cards.b.BalefulBeholder.class));
         cards.add(new SetCardInfo("Bar the Gate", 47, Rarity.COMMON, mage.cards.b.BarTheGate.class));
