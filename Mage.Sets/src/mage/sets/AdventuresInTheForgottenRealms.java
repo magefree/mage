@@ -111,6 +111,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Krydle of Baldur's Gate", 226, Rarity.UNCOMMON, mage.cards.k.KrydleOfBaldursGate.class));
         cards.add(new SetCardInfo("Lightfoot Rogue", 111, Rarity.UNCOMMON, mage.cards.l.LightfootRogue.class));
         cards.add(new SetCardInfo("Lolth, Spider Queen", 112, Rarity.MYTHIC, mage.cards.l.LolthSpiderQueen.class));
+        cards.add(new SetCardInfo("Lurking Roper", 194, Rarity.UNCOMMON, mage.cards.l.LurkingRoper.class));
         cards.add(new SetCardInfo("Manticore", 113, Rarity.COMMON, mage.cards.m.Manticore.class));
         cards.add(new SetCardInfo("Meteor Swarm", 155, Rarity.RARE, mage.cards.m.MeteorSwarm.class));
         cards.add(new SetCardInfo("Mimic", 249, Rarity.COMMON, mage.cards.m.Mimic.class));
