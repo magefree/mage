@@ -40,11 +40,11 @@ public final class ScionOfStygia extends CardImpl {
         this.addAbility(ability.withFlavorWord("Cone of Cold"));
 
         // 1-9 | Tap that creature.
-        effect.addTableEntry(1, 9, new TapTargetEffect("that creature"));
+        effect.addTableEntry(1, 9, new TapTargetEffect("tap that creature"));
 
         // 10-20 | Tap that creature. It doesn't untap during its controller's next untap step.
         effect.addTableEntry(
-                10, 20, new TapTargetEffect("that creature"),
+                10, 20, new TapTargetEffect("tap that creature"),
                 new DontUntapInControllersNextUntapStepTargetEffect("it")
         );
     }

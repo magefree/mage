@@ -29,7 +29,7 @@ public final class VertigoSpawn extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Whenever Vertigo Spawn blocks a creature, tap that creature. That creature doesn't untap during its controller's next untap step.
-        Ability ability = new BlocksSourceTriggeredAbility(new TapTargetEffect("that creature"), false, true);
+        Ability ability = new BlocksSourceTriggeredAbility(new TapTargetEffect("tap that creature"), false, true);
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("that creature"));
         this.addAbility(ability);
     }
