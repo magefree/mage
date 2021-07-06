@@ -2,6 +2,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,9 +15,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicate;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -29,8 +30,7 @@ public final class SkullportMerchant extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another creature or a Treasure");
 
     static {
-        Predicate anotherCreaturePredicate = Predicates.and(CardType.CREATURE.getPredicate(), AnotherPredicate.instance);
-        filter.add(Predicates.or(anotherCreaturePredicate, SubType.TREASURE.getPredicate()));
+        filter.add(SkullportMerchantPredicate.instance);
     }
 
     public SkullportMerchant(UUID ownerId, CardSetInfo setInfo) {
@@ -57,5 +57,20 @@ public final class SkullportMerchant extends CardImpl {
     @Override
     public SkullportMerchant copy() {
         return new SkullportMerchant(this);
+    }
+}
+
+enum SkullportMerchantPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        if (input.getObject().hasSubtype(SubType.TREASURE, game)) {
+            return true;
+        }
+        if (input.getObject().getId().equals(input.getSourceId())) {
+            return false;
+        }
+        return input.getObject().isCreature();
     }
 }
