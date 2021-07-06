@@ -95,6 +95,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Guardian of Faith", 18, Rarity.RARE, mage.cards.g.GuardianOfFaith.class));
         cards.add(new SetCardInfo("Guild Thief", 61, Rarity.UNCOMMON, mage.cards.g.GuildThief.class));
         cards.add(new SetCardInfo("Half-Elf Monk", 19, Rarity.COMMON, mage.cards.h.HalfElfMonk.class));
+        cards.add(new SetCardInfo("Hall of Storm Giants", 257, Rarity.RARE, mage.cards.h.HallOfStormGiants.class));
         cards.add(new SetCardInfo("Hama Pashar, Ruin Seeker", 224, Rarity.UNCOMMON, mage.cards.h.HamaPasharRuinSeeker.class));
         cards.add(new SetCardInfo("Herald of Hadar", 108, Rarity.COMMON, mage.cards.h.HeraldOfHadar.class));
         cards.add(new SetCardInfo("Hill Giant Herdgorger", 187, Rarity.COMMON, mage.cards.h.HillGiantHerdgorger.class));
