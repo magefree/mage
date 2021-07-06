@@ -67,7 +67,7 @@ public final class GyomeMasterChef extends CardImpl {
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         ), new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        ability.addEffect(new TapTargetEffect().setText("it"));
+        ability.addEffect(new TapTargetEffect("tap it"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
