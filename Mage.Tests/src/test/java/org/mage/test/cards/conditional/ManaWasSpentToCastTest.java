@@ -92,7 +92,7 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
     @Test
     public void testTreasureMana() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
-        addCard(Zone.BATTLEFIELD, playerA, "Jaded Sell-Sword");
+        addCard(Zone.HAND, playerA, "Jaded Sell-Sword");
         addCard(Zone.HAND, playerA, "Strike It Rich", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Strike It Rich");
@@ -109,7 +109,7 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
     @Test
     public void testTreasureMana2() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
-        addCard(Zone.BATTLEFIELD, playerA, "Jaded Sell-Sword");
+        addCard(Zone.HAND, playerA, "Jaded Sell-Sword");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jaded Sell-Sword");
 
