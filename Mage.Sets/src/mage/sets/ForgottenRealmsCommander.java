@@ -15,7 +15,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
     }
 
     private ForgottenRealmsCommander() {
-        super("Adventures in the Forgotten Realms Commander", "AFC", ExpansionSet.buildDate(2021, 7, 23), SetType.SUPPLEMENTAL);
+        super("Forgotten Realms Commander", "AFC", ExpansionSet.buildDate(2021, 7, 23), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
     }
 }

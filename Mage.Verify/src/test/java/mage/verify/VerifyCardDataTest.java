@@ -87,7 +87,6 @@ public class VerifyCardDataTest {
 
         // power-toughness
         skipListCreate(SKIP_LIST_PT);
-        skipListAddName(SKIP_LIST_PT, "AFR", "Dire Wolf Prowler"); // TODO: delete after AFR release
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
