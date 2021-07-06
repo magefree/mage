@@ -16,6 +16,12 @@ public abstract class Mulligan implements Serializable {
         this.freeMulligans = freeMulligans;
     }
 
+    Mulligan(final Mulligan mulligan) {
+        super();
+        this.freeMulligans = mulligan.freeMulligans;
+        this.usedFreeMulligans.putAll(mulligan.usedFreeMulligans);
+    }
+
     public void executeMulliganPhase(Game game, int startingHandSize) {
         /*
          * 103.4. Each player draws a number of cards equal to their starting hand size,

@@ -11,6 +11,10 @@ public class VancouverMulligan extends ParisMulligan {
         super(freeMulligans);
     }
 
+    VancouverMulligan(final VancouverMulligan mulligan) {
+        super(mulligan);
+    }
+
     @Override
     public void executeMulliganPhase(Game game, int startingHandSize) {
         super.executeMulliganPhase(game, startingHandSize);
@@ -30,7 +34,6 @@ public class VancouverMulligan extends ParisMulligan {
 
     @Override
     public VancouverMulligan copy() {
-        return new VancouverMulligan(getFreeMulligans());
+        return new VancouverMulligan(this);
     }
-
 }

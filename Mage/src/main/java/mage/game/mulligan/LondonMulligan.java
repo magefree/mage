@@ -21,6 +21,13 @@ public class LondonMulligan extends Mulligan {
         super(freeMulligans);
     }
 
+    LondonMulligan(final LondonMulligan mulligan) {
+        super(mulligan);
+
+        this.startingHandSizes.putAll(mulligan.startingHandSizes);
+        this.openingHandSizes.putAll(mulligan.openingHandSizes);
+    }
+
     @Override
     public void executeMulliganPhase(Game game, int startingHandSize) {
         /*
@@ -115,9 +122,6 @@ public class LondonMulligan extends Mulligan {
 
     @Override
     public LondonMulligan copy() {
-        LondonMulligan mulligan = new LondonMulligan(getFreeMulligans());
-        mulligan.openingHandSizes.putAll(openingHandSizes);
-        mulligan.startingHandSizes.putAll(startingHandSizes);
-        return mulligan;
+        return new LondonMulligan(this);
     }
 }
