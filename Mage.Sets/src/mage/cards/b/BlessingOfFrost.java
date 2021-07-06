@@ -18,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetAmount;
 import mage.target.common.TargetCreaturePermanentAmount;
+import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
 
@@ -33,6 +34,7 @@ public final class BlessingOfFrost extends CardImpl {
 
         // Distribute X +1/+1 counters among any number of creatures you control, where X is the amount of {S} spent to cast this spell. Then draw a card for each creature you control with power 4 or greater.
         this.getSpellAbility().addEffect(new BlessingOfFrostEffect());
+        this.getSpellAbility().addWatcher(new ManaPaidSourceWatcher());
     }
 
     private BlessingOfFrost(final BlessingOfFrost card) {
@@ -75,7 +77,7 @@ class BlessingOfFrostEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int snow = source.getManaCostsToPay().getUsedManaToPay().getSnow();
+        int snow = ManaPaidSourceWatcher.getSnowPaid(source.getId(), game);
         if (snow > 0) {
             TargetAmount target = new TargetCreaturePermanentAmount(snow, StaticFilters.FILTER_CONTROLLED_CREATURE);
             target.setNotTarget(true);

@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -14,7 +13,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.TargetPermanent;
-import mage.watchers.common.ManaSpentToCastWatcher;
+import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
 
@@ -47,7 +46,7 @@ public final class BergStrider extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
         ability.addEffect(new BergStriderEffect());
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
+        this.addAbility(ability, new ManaPaidSourceWatcher());
     }
 
     private BergStrider(final BergStrider card) {
@@ -79,15 +78,10 @@ class BergStriderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
-        if (watcher == null) {
-            return false;
+        if (ManaPaidSourceWatcher.getSnowPaid(source.getSourceId(), game) > 0) {
+            game.addEffect(new DontUntapInControllersNextUntapStepTargetEffect(), source);
+            return true;
         }
-        Mana payment = watcher.getAndResetLastPayment(source.getSourceId());
-        if (payment == null || payment.getSnow() < 1) {
-            return false;
-        }
-        game.addEffect(new DontUntapInControllersNextUntapStepTargetEffect(), source);
-        return true;
+        return false;
     }
 }

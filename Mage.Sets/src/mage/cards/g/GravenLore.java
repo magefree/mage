@@ -9,6 +9,7 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.players.Player;
+import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ public final class GravenLore extends CardImpl {
 
         // Scry X, where is the amount of {S} spent to cast this spell, then draw three cards.
         this.getSpellAbility().addEffect(new GravenLoreEffect());
+        this.getSpellAbility().addWatcher(new ManaPaidSourceWatcher());
     }
 
     private GravenLore(final GravenLore card) {
@@ -58,7 +60,7 @@ class GravenLoreEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int snow = source.getManaCostsToPay().getUsedManaToPay().getSnow();
+        int snow = ManaPaidSourceWatcher.getSnowPaid(source.getId(), game);
         if (snow > 0) {
             player.scry(snow, source, game);
         }

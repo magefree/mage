@@ -334,7 +334,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 
         for (Ability ability : abilities) {
             Assert.assertTrue("No such ability=" + ability.toString() + ", player=" + player.getName() +
-                    ", cardName" + cardName, found.getAbilities().contains(ability));
+                    ", cardName=" + cardName, found.getAbilities().contains(ability));
         }
     }
 
