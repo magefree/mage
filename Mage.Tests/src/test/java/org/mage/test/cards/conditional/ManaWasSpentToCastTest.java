@@ -93,9 +93,9 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
     public void testTreasureMana() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Jaded Sell-Sword");
-        addCard(Zone.HAND, playerA, "Strike it Rich", 1);
+        addCard(Zone.HAND, playerA, "Strike It Rich", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Strike it Rich");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Strike It Rich");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jaded Sell-Sword");
 
         setStopAt(1, PhaseStep.END_TURN);
