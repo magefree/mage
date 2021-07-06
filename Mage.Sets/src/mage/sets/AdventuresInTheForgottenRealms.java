@@ -166,6 +166,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Vorpal Sword", 124, Rarity.RARE, mage.cards.v.VorpalSword.class));
         cards.add(new SetCardInfo("Wandering Troubadour", 210, Rarity.UNCOMMON, mage.cards.w.WanderingTroubadour.class));
         cards.add(new SetCardInfo("Werewolf Pack Leader", 211, Rarity.RARE, mage.cards.w.WerewolfPackLeader.class));
+        cards.add(new SetCardInfo("Wild Shape", 212, Rarity.UNCOMMON, mage.cards.w.WildShape.class));
         cards.add(new SetCardInfo("Xorn", 167, Rarity.RARE, mage.cards.x.Xorn.class));
         cards.add(new SetCardInfo("You Come to a River", 83, Rarity.COMMON, mage.cards.y.YouComeToARiver.class));
         cards.add(new SetCardInfo("You Come to the Gnoll Camp", 168, Rarity.COMMON, mage.cards.y.YouComeToTheGnollCamp.class));
