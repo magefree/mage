@@ -1,30 +1,25 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ChromaOutrageShamanCount;
+import mage.abilities.dynamicvalue.common.ChromaCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
+import mage.constants.ManaType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class HeartlashCinder extends CardImpl {
 
@@ -40,13 +35,14 @@ public final class HeartlashCinder extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Chroma - When Heartlash Cinder enters the battlefield, it gets +X/+0 until end of turn, where X is the number of red mana symbols in the mana costs of permanents you control.
-        ContinuousEffect effect = new BoostSourceEffect(new ChromaHeartlashCinderCount(), StaticValue.get(0), Duration.EndOfTurn, true);
+        DynamicValue xValue = new ChromaCount(ManaType.RED);
+        ContinuousEffect effect = new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true);
         effect.setText("it gets +X/+0 until end of turn, where X is the number of red mana symbols in the mana costs of permanents you control");
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 effect, false)
                 .withFlavorWord("Chroma")
+                .addHint(new ValueHint("Red mana symbols in your permanents", xValue))
         );
-
     }
 
     private HeartlashCinder(final HeartlashCinder card) {
@@ -56,34 +52,5 @@ public final class HeartlashCinder extends CardImpl {
     @Override
     public HeartlashCinder copy() {
         return new HeartlashCinder(this);
-    }
-}
-
-class ChromaHeartlashCinderCount implements DynamicValue {
-
-    private int chroma;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        chroma = 0;
-        for (Card card : game.getBattlefield().getAllActivePermanents(new FilterControlledPermanent(), sourceAbility.getControllerId(), game)) {
-            chroma += card.getManaCost().getMana().getRed();
-        }
-        return chroma;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new ChromaOutrageShamanCount();
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
     }
 }
