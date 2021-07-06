@@ -11,6 +11,10 @@ public class ParisMulligan extends Mulligan {
         super(freeMulligans);
     }
 
+    ParisMulligan(final ParisMulligan mulligan) {
+        super(mulligan);
+    }
+
     @Override
     public int mulliganDownTo(Game game, UUID playerId) {
         Player player = game.getPlayer(playerId);
@@ -57,11 +61,11 @@ public class ParisMulligan extends Mulligan {
     }
 
     @Override
-    public void endMulligan(Game game, UUID playerId) {}
+    public void endMulligan(Game game, UUID playerId) {
+    }
 
     @Override
     public ParisMulligan copy() {
-        return new ParisMulligan(getFreeMulligans());
+        return new ParisMulligan(this);
     }
-
 }

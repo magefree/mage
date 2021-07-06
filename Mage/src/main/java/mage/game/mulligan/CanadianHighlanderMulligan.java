@@ -15,9 +15,10 @@ public class CanadianHighlanderMulligan extends VancouverMulligan {
         super(freeMulligans);
     }
 
-    @Override
-    public CanadianHighlanderMulligan copy() {
-        return new CanadianHighlanderMulligan(getFreeMulligans());
+    CanadianHighlanderMulligan(final CanadianHighlanderMulligan mulligan) {
+        super(mulligan);
+
+        this.usedMulligans.putAll(mulligan.usedMulligans);
     }
 
     private String getNextMulligan(String mulligan) {
@@ -116,9 +117,13 @@ public class CanadianHighlanderMulligan extends VancouverMulligan {
         }
         game.fireInformEvent(new StringBuilder(player.getLogName())
                 .append(" mulligans to ")
-                .append(Integer.toString(numToMulliganTo))
+                .append(numToMulliganTo)
                 .append(numToMulliganTo == 1 ? " card" : " cards").toString());
         player.drawCards(numToMulliganTo, null, game);
     }
 
+    @Override
+    public CanadianHighlanderMulligan copy() {
+        return new CanadianHighlanderMulligan(this);
+    }
 }

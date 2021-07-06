@@ -390,5 +390,4 @@ public class LondonMulliganTest extends MulliganTestBase {
             scenario.assertSizes(0, 40);
         });
     }
-
 }
