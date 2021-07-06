@@ -90,6 +90,22 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void testSnowMana3() {
+        addCard(Zone.BATTLEFIELD, playerA, "Snow-Covered Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+        addCard(Zone.HAND, playerA, "Berg Strider");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Berg Strider");
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertTapped("Silvercoat Lion", true);
+    }
+
+    @Test
     public void testTreasureMana() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.HAND, playerA, "Jaded Sell-Sword");

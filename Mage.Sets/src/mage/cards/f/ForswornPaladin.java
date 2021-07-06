@@ -21,6 +21,7 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetCreaturePermanent;
+import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
 
@@ -52,7 +53,7 @@ public final class ForswornPaladin extends CardImpl {
         );
         ability.addEffect(new ForswornPaladinEffect());
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(ability, new ManaPaidSourceWatcher());
     }
 
     private ForswornPaladin(final ForswornPaladin card) {
@@ -84,7 +85,7 @@ class ForswornPaladinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source.getManaCostsToPay().getUsedManaToPay().getTreasure() > 0) {
+        if (ManaPaidSourceWatcher.getTreasurePaid(source.getId(), game) > 0) {
             game.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), source);
         }
         return true;

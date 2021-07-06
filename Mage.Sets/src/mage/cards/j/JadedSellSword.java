@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
 
@@ -39,7 +40,7 @@ public final class JadedSellSword extends CardImpl {
         ability.addEffect(new GainAbilitySourceEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
         ));
-        this.addAbility(ability);
+        this.addAbility(ability, new ManaPaidSourceWatcher());
     }
 
     private JadedSellSword(final JadedSellSword card) {

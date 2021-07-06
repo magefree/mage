@@ -13,6 +13,7 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlaneswalker;
+import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
 
@@ -65,7 +66,7 @@ class TundraFumaroleEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int snow = source.getManaCostsToPay().getUsedManaToPay().getSnow();
+        int snow = ManaPaidSourceWatcher.getSnowPaid(source.getId(), game);
         if (snow > 0) {
             player.getManaPool().addMana(new Mana(ManaType.COLORLESS, snow), game, source, true);
         }

@@ -13,6 +13,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
+import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
 
@@ -41,6 +42,7 @@ public final class SearchForGlory extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(
                 SnowManaSpentValue.instance
         ).setText("You gain 1 life for each {S} spent to cast this spell"));
+        this.getSpellAbility().addWatcher(new ManaPaidSourceWatcher());
     }
 
     private SearchForGlory(final SearchForGlory card) {
