@@ -198,25 +198,25 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
     public void add(ManaType manaType, int amount) {
         switch (manaType) {
             case BLACK:
-                black.incrementAmount(amount, false);
+                black.incrementAmount(amount, false, false);
                 break;
             case BLUE:
-                blue.incrementAmount(amount, false);
+                blue.incrementAmount(amount, false, false);
                 break;
             case GREEN:
-                green.incrementAmount(amount, false);
+                green.incrementAmount(amount, false, false);
                 break;
             case RED:
-                red.incrementAmount(amount, false);
+                red.incrementAmount(amount, false, false);
                 break;
             case WHITE:
-                white.incrementAmount(amount, false);
+                white.incrementAmount(amount, false, false);
                 break;
             case COLORLESS:
-                colorless.incrementAmount(amount, false);
+                colorless.incrementAmount(amount, false, false);
                 break;
             case GENERIC:
-                generic.incrementAmount(amount, false);
+                generic.incrementAmount(amount, false, false);
                 break;
         }
     }

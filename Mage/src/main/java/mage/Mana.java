@@ -20,6 +20,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     protected static final class ManaColor implements Serializable {
         private int amount = 0;
         private int snowAmount = 0;
+        private int treasureAmount = 0;
 
         private ManaColor() {
         }
@@ -40,30 +41,40 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             return snowAmount;
         }
 
+        public int getTreasureAmount() {
+            return treasureAmount;
+        }
+
         protected void incrementAmount() {
-            incrementAmount(1, false);
+            incrementAmount(1, false, false);
         }
 
         protected void incrementAmount(ManaColor manaColor) {
             this.amount = CardUtil.overflowInc(this.amount, manaColor.amount);
             this.snowAmount = CardUtil.overflowInc(this.snowAmount, manaColor.snowAmount);
+            this.treasureAmount = CardUtil.overflowInc(this.treasureAmount, manaColor.treasureAmount);
         }
 
-        protected void incrementAmount(int amount, boolean snow) {
+        protected void incrementAmount(int amount, boolean snow, boolean treasure) {
             this.amount = CardUtil.overflowInc(this.amount, amount);
             if (snow) {
                 this.snowAmount = CardUtil.overflowInc(this.snowAmount, amount);
+            }
+            if (treasure) {
+                this.treasureAmount = CardUtil.overflowInc(this.treasureAmount, amount);
             }
         }
 
         protected void removeAmount(ManaColor manaColor) {
             this.amount = CardUtil.overflowDec(this.amount, manaColor.amount);
             this.snowAmount = CardUtil.overflowDec(this.snowAmount, manaColor.snowAmount);
+            this.treasureAmount = CardUtil.overflowDec(this.treasureAmount, manaColor.treasureAmount);
         }
 
         protected void clear() {
             amount = 0;
             snowAmount = 0;
+            treasureAmount = 0;
         }
 
         protected boolean removeOne(ManaColor manaColor) {
@@ -73,6 +84,10 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             if (manaColor.getSnowAmount() > 0) {
                 manaColor.snowAmount = CardUtil.overflowDec(manaColor.snowAmount, 1);
                 this.snowAmount = CardUtil.overflowInc(this.snowAmount, 1);
+            }
+            if (manaColor.getTreasureAmount() > 0) {
+                manaColor.treasureAmount = CardUtil.overflowDec(manaColor.treasureAmount, 1);
+                this.treasureAmount = CardUtil.overflowInc(this.treasureAmount, 1);
             }
             manaColor.amount = CardUtil.overflowDec(manaColor.amount, 1);
             this.amount = CardUtil.overflowInc(this.amount, 1);
@@ -86,6 +101,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         protected void copyFrom(final ManaColor manaColor) {
             this.amount = manaColor.amount;
             this.snowAmount = manaColor.snowAmount;
+            this.treasureAmount = manaColor.treasureAmount;
         }
 
         @Override
@@ -93,18 +109,20 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             ManaColor manaColor = (ManaColor) o;
-            return amount == manaColor.amount && snowAmount == manaColor.snowAmount;
+            return amount == manaColor.amount
+                    && snowAmount == manaColor.snowAmount
+                    && treasureAmount == manaColor.treasureAmount;
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(amount, snowAmount);
+            return Objects.hash(amount, snowAmount, treasureAmount);
         }
 
         @Override
         public String toString() {
-            if (amount != 0 || snowAmount != 0) {
-                return amount + "/" + snowAmount;
+            if (amount != 0 || snowAmount != 0 || treasureAmount != 0) {
+                return "" + amount + '/' + snowAmount + '/' + treasureAmount;
             } else {
                 return "";
             }
@@ -248,25 +266,25 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         Objects.requireNonNull(manaType, "The passed in ManaType can not be null");
         switch (manaType) {
             case WHITE:
-                white.incrementAmount(num, false);
+                white.incrementAmount(num, false, false);
                 break;
             case BLUE:
-                blue.incrementAmount(num, false);
+                blue.incrementAmount(num, false, false);
                 break;
             case BLACK:
-                black.incrementAmount(num, false);
+                black.incrementAmount(num, false, false);
                 break;
             case RED:
-                red.incrementAmount(num, false);
+                red.incrementAmount(num, false, false);
                 break;
             case GREEN:
-                green.incrementAmount(num, false);
+                green.incrementAmount(num, false, false);
                 break;
             case COLORLESS:
-                colorless.incrementAmount(num, false);
+                colorless.incrementAmount(num, false, false);
                 break;
             case GENERIC:
-                generic.incrementAmount(num, false);
+                generic.incrementAmount(num, false, false);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown manaType: " + manaType);
@@ -398,31 +416,31 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param manaType
      */
     public void increase(ManaType manaType) {
-        increase(manaType, false);
+        increase(manaType, false, false);
     }
 
-    public void increase(ManaType manaType, boolean isSnow) {
+    public void increase(ManaType manaType, boolean isSnow, boolean isTreasure) {
         switch (manaType) {
             case WHITE:
-                white.incrementAmount(1, isSnow);
+                white.incrementAmount(1, isSnow, isTreasure);
                 break;
             case BLUE:
-                blue.incrementAmount(1, isSnow);
+                blue.incrementAmount(1, isSnow, isTreasure);
                 break;
             case BLACK:
-                black.incrementAmount(1, isSnow);
+                black.incrementAmount(1, isSnow, isTreasure);
                 break;
             case RED:
-                red.incrementAmount(1, isSnow);
+                red.incrementAmount(1, isSnow, isTreasure);
                 break;
             case GREEN:
-                green.incrementAmount(1, isSnow);
+                green.incrementAmount(1, isSnow, isTreasure);
                 break;
             case COLORLESS:
-                colorless.incrementAmount(1, isSnow);
+                colorless.incrementAmount(1, isSnow, isTreasure);
                 break;
             case GENERIC:
-                generic.incrementAmount(1, isSnow);
+                generic.incrementAmount(1, isSnow, isTreasure);
                 break;
         }
     }
@@ -431,77 +449,77 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * Increases the White mana by one.
      */
     public void increaseWhite() {
-        increaseWhite(1, false);
+        increaseWhite(1, false, false);
     }
 
-    public void increaseWhite(int amount, boolean snow) {
-        white.incrementAmount(amount, snow);
+    public void increaseWhite(int amount, boolean snow, boolean treasure) {
+        white.incrementAmount(amount, snow, treasure);
     }
 
     /**
      * Increases the Blue mana by one.
      */
     public void increaseBlue() {
-        increaseBlue(1, false);
+        increaseBlue(1, false, false);
     }
 
-    public void increaseBlue(int amount, boolean snow) {
-        blue.incrementAmount(amount, snow);
+    public void increaseBlue(int amount, boolean snow, boolean treasure) {
+        blue.incrementAmount(amount, snow, treasure);
     }
 
     /**
      * Increases the Black mana by one.
      */
     public void increaseBlack() {
-        increaseBlack(1, false);
+        increaseBlack(1, false, false);
     }
 
-    public void increaseBlack(int amount, boolean snow) {
-        black.incrementAmount(amount, snow);
+    public void increaseBlack(int amount, boolean snow, boolean treasure) {
+        black.incrementAmount(amount, snow, treasure);
     }
 
     /**
      * Increases the Red mana by one.
      */
     public void increaseRed() {
-        increaseRed(1, false);
+        increaseRed(1, false, false);
     }
 
-    public void increaseRed(int amount, boolean snow) {
-        red.incrementAmount(amount, snow);
+    public void increaseRed(int amount, boolean snow, boolean treasure) {
+        red.incrementAmount(amount, snow, treasure);
     }
 
     /**
      * Increases the Green mana by one.
      */
     public void increaseGreen() {
-        increaseGreen(1, false);
+        increaseGreen(1, false, false);
     }
 
-    public void increaseGreen(int amount, boolean snow) {
-        green.incrementAmount(amount, snow);
+    public void increaseGreen(int amount, boolean snow, boolean treasure) {
+        green.incrementAmount(amount, snow, treasure);
     }
 
     /**
      * Increases the Generic mana by one.
      */
     public void increaseGeneric() {
-        increaseGeneric(1, false);
+        increaseGeneric(1, false, false);
     }
 
-    public void increaseGeneric(int amount, boolean snow) {
-        generic.incrementAmount(amount, snow);
+    public void increaseGeneric(int amount, boolean snow, boolean treasure) {
+        generic.incrementAmount(amount, snow, treasure);
     }
 
     /**
      * Increases the Colorless mana by one.
      */
     public void increaseColorless() {
-        increaseColorless(1, false);
+        increaseColorless(1, false, false);
     }
 
-    public void increaseColorless(int amount, boolean snow) {
-        colorless.incrementAmount(amount, snow);
+    public void increaseColorless(int amount, boolean snow, boolean treasure) {
+        colorless.incrementAmount(amount, snow, treasure);
     }
 
     /**
@@ -797,33 +815,33 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         compare.subtract(this);
         if (compare.white.getAmount() < 0 && compare.any.getAmount() > 0) {
             int diff = Math.min(compare.any.getAmount(), Math.abs(compare.white.getAmount()));
-            compare.any.incrementAmount(-diff, false);
-            compare.white.incrementAmount(diff, false);
+            compare.any.incrementAmount(-diff, false, false);
+            compare.white.incrementAmount(diff, false, false);
         }
         if (compare.blue.getAmount() < 0 && compare.any.getAmount() > 0) {
             int diff = Math.min(compare.any.getAmount(), Math.abs(compare.blue.getAmount()));
-            compare.any.incrementAmount(-diff, false);
-            compare.blue.incrementAmount(diff, false);
+            compare.any.incrementAmount(-diff, false, false);
+            compare.blue.incrementAmount(diff, false, false);
         }
         if (compare.black.getAmount() < 0 && compare.any.getAmount() > 0) {
             int diff = Math.min(compare.any.getAmount(), Math.abs(compare.black.getAmount()));
-            compare.any.incrementAmount(-diff, false);
-            compare.black.incrementAmount(diff, false);
+            compare.any.incrementAmount(-diff, false, false);
+            compare.black.incrementAmount(diff, false, false);
         }
         if (compare.red.getAmount() < 0 && compare.any.getAmount() > 0) {
             int diff = Math.min(compare.any.getAmount(), Math.abs(compare.red.getAmount()));
-            compare.any.incrementAmount(-diff, false);
-            compare.red.incrementAmount(diff, false);
+            compare.any.incrementAmount(-diff, false, false);
+            compare.red.incrementAmount(diff, false, false);
         }
         if (compare.green.getAmount() < 0 && compare.any.getAmount() > 0) {
             int diff = Math.min(compare.any.getAmount(), Math.abs(compare.green.getAmount()));
-            compare.any.incrementAmount(-diff, false);
-            compare.green.incrementAmount(diff, false);
+            compare.any.incrementAmount(-diff, false, false);
+            compare.green.incrementAmount(diff, false, false);
         }
         if (compare.colorless.getAmount() < 0 && compare.any.getAmount() > 0) {
             int diff = Math.min(compare.any.getAmount(), Math.abs(compare.colorless.getAmount()));
-            compare.any.incrementAmount(-diff, false);
-            compare.colorless.incrementAmount(diff, false);
+            compare.any.incrementAmount(-diff, false, false);
+            compare.colorless.incrementAmount(diff, false, false);
         }
         if (compare.generic.getAmount() < 0) {
             int remaining = 0;
@@ -836,7 +854,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.any.getAmount()));
             if (remaining > 0) {
                 int diff = Math.min(remaining, Math.abs(compare.generic.getAmount()));
-                compare.generic.incrementAmount(diff, false);
+                compare.generic.incrementAmount(diff, false, false);
             }
         }
         Mana needed = new Mana();
@@ -881,7 +899,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     public void setWhite(int white) {
         this.white.clear();
-        this.white.incrementAmount(notNegative(white, "White"), false);
+        this.white.incrementAmount(notNegative(white, "White"), false, false);
     }
 
     /**
@@ -901,7 +919,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     public void setBlue(int blue) {
         this.blue.clear();
-        this.blue.incrementAmount(notNegative(blue, "Blue"), false);
+        this.blue.incrementAmount(notNegative(blue, "Blue"), false, false);
     }
 
     /**
@@ -921,7 +939,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     public void setBlack(int black) {
         this.black.clear();
-        this.black.incrementAmount(notNegative(black, "Black"), false);
+        this.black.incrementAmount(notNegative(black, "Black"), false, false);
     }
 
     /**
@@ -941,7 +959,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     public void setRed(int red) {
         this.red.clear();
-        this.red.incrementAmount(notNegative(red, "Red"), false);
+        this.red.incrementAmount(notNegative(red, "Red"), false, false);
     }
 
     /**
@@ -961,7 +979,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     public void setGreen(int green) {
         this.green.clear();
-        this.green.incrementAmount(notNegative(green, "Green"), false);
+        this.green.incrementAmount(notNegative(green, "Green"), false, false);
     }
 
     /**
@@ -981,7 +999,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     public void setGeneric(int generic) {
         this.generic.clear();
-        this.generic.incrementAmount(notNegative(generic, "Generic"), false);
+        this.generic.incrementAmount(notNegative(generic, "Generic"), false, false);
     }
 
     /**
@@ -1001,7 +1019,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     public void setColorless(int colorless) {
         this.colorless.clear();
-        this.colorless.incrementAmount(notNegative(colorless, "Colorless"), false);
+        this.colorless.incrementAmount(notNegative(colorless, "Colorless"), false, false);
     }
 
     /**
@@ -1021,7 +1039,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     public void setAny(int any) {
         this.any.clear();
-        this.any.incrementAmount(notNegative(any, "Any"), false);
+        this.any.incrementAmount(notNegative(any, "Any"), false, false);
     }
 
     public int getSnow() {
@@ -1045,6 +1063,17 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         } else if (color.isRed() && red.getSnowAmount() > 0) {
             return true;
         } else return color.isGreen() && green.getSnowAmount() > 0;
+    }
+
+    public int getTreasure() {
+        return white.getTreasureAmount()
+                + blue.getTreasureAmount()
+                + black.getTreasureAmount()
+                + red.getTreasureAmount()
+                + green.getTreasureAmount()
+                + colorless.getTreasureAmount()
+                + generic.getTreasureAmount()
+                + any.getTreasureAmount();
     }
 
     /**

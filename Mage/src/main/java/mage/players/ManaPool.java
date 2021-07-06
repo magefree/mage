@@ -8,6 +8,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.constants.Duration;
 import mage.constants.ManaType;
+import mage.constants.SubType;
 import mage.constants.TurnPhase;
 import mage.filter.Filter;
 import mage.filter.FilterMana;
@@ -51,6 +52,7 @@ public class ManaPool implements Serializable {
     }
 
     private boolean lastPaymentWasSnow;
+    private boolean lastPaymentWasTreasure;
 
     public ManaPool(UUID playerId) {
         this.playerId = playerId;
@@ -59,6 +61,7 @@ public class ManaPool implements Serializable {
         unlockedManaType = null;
         forcedToPay = false;
         lastPaymentWasSnow = false;
+        lastPaymentWasTreasure = false;
     }
 
     public ManaPool(final ManaPool pool) {
@@ -75,6 +78,7 @@ public class ManaPool implements Serializable {
         }
         this.doNotEmptyManaTypes.addAll(pool.doNotEmptyManaTypes);
         this.lastPaymentWasSnow = pool.lastPaymentWasSnow;
+        this.lastPaymentWasTreasure = pool.lastPaymentWasTreasure;
         this.manaBecomesColorless = pool.manaBecomesColorless;
     }
 
@@ -110,6 +114,7 @@ public class ManaPool implements Serializable {
      */
     public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay, Mana usedManaToPay) {
         lastPaymentWasSnow = false;
+        lastPaymentWasTreasure = false;
         if (!isAutoPayment() && manaType != unlockedManaType) {
             // if manual payment and the needed mana type was not unlocked, nothing will be paid
             return false;
@@ -140,6 +145,7 @@ public class ManaPool implements Serializable {
             return true;
         }
         lastPaymentWasSnow = false;
+        lastPaymentWasTreasure = false;
 
         for (ManaPoolItem mana : manaItems) {
             if (filter != null) {
@@ -166,9 +172,10 @@ public class ManaPool implements Serializable {
             if (mana.get(usableManaType) > 0) {
                 GameEvent event = new ManaPaidEvent(ability, mana.getSourceId(), mana.getFlag(), mana.getOriginalId());
                 game.fireEvent(event);
-                usedManaToPay.increase(usableManaType, mana.getSourceObject().isSnow());
+                usedManaToPay.increase(usableManaType, mana.getSourceObject().isSnow(), mana.getSourceObject().hasSubtype(SubType.TREASURE, game));
                 mana.remove(usableManaType);
                 lastPaymentWasSnow |= mana.getSourceObject().isSnow();
+                lastPaymentWasTreasure |= mana.getSourceObject().hasSubtype(SubType.TREASURE, game);
                 if (mana.count() == 0) { // so no items with count 0 stay in list
                     manaItems.remove(mana);
                 }
@@ -410,7 +417,7 @@ public class ManaPool implements Serializable {
         for (ConditionalMana mana : getConditionalMana()) {
             if (mana.get(manaInfo.manaType) > 0 && mana.apply(ability, game, mana.getManaProducerId(), costToPay)) {
                 mana.set(manaInfo.manaType, CardUtil.overflowDec(mana.get(manaInfo.manaType), 1));
-                usedManaToPay.increase(manaInfo.manaType, manaInfo.sourceObject.isSnow());
+                usedManaToPay.increase(manaInfo.manaType, manaInfo.sourceObject.isSnow(), manaInfo.sourceObject.hasSubtype(SubType.TREASURE, game));
                 GameEvent event = new ManaPaidEvent(ability, mana.getManaProducerId(), mana.getFlag(), mana.getManaProducerOriginalId());
                 game.fireEvent(event);
                 break;
@@ -530,6 +537,10 @@ public class ManaPool implements Serializable {
 
     public boolean getLastPaymentWasSnow() {
         return lastPaymentWasSnow;
+    }
+
+    public boolean getLastPaymentWasTreasure() {
+        return lastPaymentWasTreasure;
     }
 
     @Override
