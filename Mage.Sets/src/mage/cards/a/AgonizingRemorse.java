@@ -81,14 +81,12 @@ class AgonizingRemorseEffect extends OneShotEffect {
             target.setNotTarget(true);
             cards = opponent.getGraveyard();
         }
-        if (!controller.choose(outcome, cards, target, game)) {
-            return true;
+        if (controller.choose(outcome, cards, target, game)) {
+            Card card = game.getCard(target.getFirstTarget());
+            if (card != null) {
+                controller.moveCards(card, Zone.EXILED, source, game);
+            }
         }
-        Card card = game.getCard(target.getFirstTarget());
-        if (card == null) {
-            return true;
-        }
-        controller.moveCards(card, Zone.EXILED, source, game);
         controller.loseLife(1, game, source, false);
         return true;
     }
