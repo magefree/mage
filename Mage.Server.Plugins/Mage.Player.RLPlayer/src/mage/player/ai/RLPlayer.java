@@ -14,6 +14,7 @@ import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
+import mage.game.stack.Spell;
 import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
 import mage.target.Target;
@@ -21,7 +22,7 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.util.RandomUtil;
 import mage.MageObject;
-
+import mage.constants.CardType;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.util.*;
@@ -48,7 +49,7 @@ public class RLPlayer extends RandomNonTappingPlayer{
         super(name);
         System.out.println("Completed super!");
         logger.warn("completed super!");
-        PyConnection conn=new PyConnection();
+        PyConnection conn=new PyConnection(5009);
         learner=new RLPyAgent(conn);
         if(Objects.isNull(learner)){
             logger.warn("learner is null in RLPlayer creation!");
@@ -224,13 +225,125 @@ public class RLPlayer extends RandomNonTappingPlayer{
         }
         actionCount++;
     }
+    private String namePlayer(UUID playerId){
+        if(playerId==getId()){
+            return "RLPlayer";
+        }
+        else{
+            return "Opponent";
+        }
+    }
 
+    String nameUUID(UUID id,Game game){
+        String IDname;
+        Permanent perm=game.getPermanent(id);
+        if(id == null){
+            IDname="NullID";
+            return IDname;
+        }
+        if(perm!=null){
+            IDname="Permanent:"+perm.getName();
+            return IDname;
+        }
+        Player targetPlayer=game.getPlayer(id);
+        if(targetPlayer!=null){
+            IDname="Player:"+namePlayer(id);
+            return IDname;
+        }
+        Spell spell=game.getSpell(id);
+        if(spell!=null){
+            UUID controller=spell.getControllerId();
+            IDname="Spell:"+namePlayer(controller)+":"+spell.getName();
+            return IDname;
+        }
+        Card card=game.getCard(id);
+        if(card!=null){
+            IDname="Card:"+card.getName();
+            return IDname;
+        }
+        MageObject object=game.getObject(id);
+        if(object!=null){
+            ArrayList<CardType> types=object.getCardType();
+            String allTypes="";
+            for(int i=0;i<types.size();i++){
+                allTypes+=types.get(i).toString();
+            }
+            IDname="Object:"+allTypes+":"+object.getName();
+            return IDname;
+        }
+        IDname="Unknown";
+        System.out.println("Unknown ID");
+        return IDname;
+    }
+    @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        //System.out.println("Chose target with ability");
         Set<UUID> targetSet = target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game);
         if (targetSet.isEmpty()) {
             return false;
         }
         List<UUID> targets=new ArrayList<UUID>(targetSet);
-        
+        if (target.isRequired(source) && targets.size() == 1) {
+            target.addTarget(targets.get(0), source, game); // todo: addtryaddtarget or return type (see computerPlayer)
+            return true;
+        }
+        JSONArray list = new JSONArray();
+        for(int i=0;i<targets.size();i++){
+            JSONObject actRepr=new JSONObject();
+            UUID thingId=targets.get(i);
+            String name="Target:"+nameUUID(thingId, game);
+            String causeName;
+            if(source!=null){
+                MageObject cause=source.getSourceObject(game);
+                causeName="TargetAbility:"+cause.getName();
+            }
+            else{
+                causeName="TargetAbility:None";
+            }
+            actRepr.put("target",name);
+            actRepr.put("ability",causeName);
+            list.add(actRepr); 
+        }
+        if (!target.isRequired(source)) {
+            JSONObject actRepr=new JSONObject();
+            actRepr.put("target","Target:None");
+            actRepr.put("ability","TargetAbility:None");
+            list.add(actRepr);
+        }
+        int choice=learner.choose(game,this,list);
+        if(choice==targets.size()){
+            return false;
+        }
+        target.addTarget(targets.get(choice), source, game);
+        return true;
+    }
+
+
+    @Override
+    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
+        //System.out.println("Chose target with source");
+        Set<UUID> targetSet = target.possibleTargets(playerId, game);
+        if (targetSet.isEmpty()) {
+            return false;
+        }
+        List<UUID> targets=new ArrayList<UUID>(targetSet);
+        if (targets.size() == 1) {
+            target.add(targets.get(0), game); // todo: addtryaddtarget or return type (see computerPlayer)
+            return true;
+        }
+        JSONArray list = new JSONArray();
+        for(int i=0;i<targets.size();i++){
+            JSONObject actRepr=new JSONObject();
+            UUID thingId=targets.get(i);
+            String name="Target:"+nameUUID(thingId, game);
+            String causeName;
+            causeName="TargetSource:"+nameUUID(sourceId, game);
+            actRepr.put("target",name);
+            actRepr.put("ability",causeName);
+            list.add(actRepr); 
+        }
+        int choice=learner.choose(game,this,list);
+        target.add(targets.get(choice), game);
+        return true;
     }
 }

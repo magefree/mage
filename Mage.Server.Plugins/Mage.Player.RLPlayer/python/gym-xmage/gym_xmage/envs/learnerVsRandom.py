@@ -10,17 +10,22 @@ class learnerVsRandom(gym.Env):
     metadata = {'render.modes': ['human']}
 
     def __init__(self):
-        
         serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         serversocket.bind(("localhost",5009))
         print("waiting for connection")
         serversocket.listen(1)
         (self.clientsocket, address) = serversocket.accept()
         print("connected")
-        self.action_space=None
-        #spaces.Discrete(self.java_hparams['max_representable_actions'])
-        self.observation_space=None
-        #spaces.Box(0,self.java_hparams['max_represents'],shape=(69,),dtype=np.float32)
+    def write_args(self):
+        args={}
+        args['deck1']="/home/elchanan/java/mage/Mage.Tests/RBTestAggro.dck"
+        args['deck2']="/home/elchanan/java/mage/Mage.Tests/RBTestAggro.dck"
+        args['player1']="player1"
+        args['player2']="player2"
+        args['player2random']="true"
+        arg_string=json.dumps(args)
+        self.clientsocket.send(bytes(arg_string,'ascii')+b"\n")
+
     def step(self, action):
         self.clientsocket.send(bytes(str(action),'ascii')+b"\n")
         message=self.recieve_and_parse(self.clientsocket)
@@ -28,6 +33,7 @@ class learnerVsRandom(gym.Env):
     def sample_obs(self,observation):
         return random.randrange(len(observation['actions']))
     def reset(self):
+        self.write_args()
         message=self.recieve_and_parse(self.clientsocket)
         #done=self.recieve_msg(self.clientsocket)
         return message

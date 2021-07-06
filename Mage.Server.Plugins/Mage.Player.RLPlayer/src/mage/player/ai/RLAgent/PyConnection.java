@@ -16,9 +16,8 @@ public class PyConnection {
     BufferedOutputStream buff;
     Socket socket;
     private static final Logger logger = Logger.getLogger(PyConnection.class);
-    public PyConnection(){
+    public PyConnection(int port){
         try {
-            int port=5009;
             socket = new Socket("localhost", port);
             OutputStream output = socket.getOutputStream();
             buff=new BufferedOutputStream(output);
@@ -67,6 +66,26 @@ public class PyConnection {
     public void write_string(String str){
         send(str);
     }
+    public String read_preamble(){
+        String message="";
+        try{
+            //logger.info("reading");
+            message = reader.readLine();
+            //logger.info("recieved message: "+message);
+            return message;
+        }
+        catch (IOException ex) {
+            System.out.println("I/O error in read preamble: " + ex.getMessage());
+            close();
+            return "";
+        }
+        catch (NumberFormatException ex){
+            System.out.println("Terminating due to closed python server in preamble" + ex.getMessage());
+            close();
+            return "";
+        }
+    }
+
     int read(){
         String message="";
         try{

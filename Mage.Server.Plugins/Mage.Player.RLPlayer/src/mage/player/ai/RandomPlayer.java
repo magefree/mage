@@ -253,7 +253,7 @@ public class RandomPlayer extends ComputerPlayer {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
-        return chooseRandom(target, game);
+        return choose(outcome,target, sourceId, game);
     }
 
     @Override

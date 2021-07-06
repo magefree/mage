@@ -21,7 +21,7 @@ public class RandomNonTappingPlayer extends RandomPlayer{
             MageObject source=playables.get(i).getSourceObjectIfItStillExists(game);
             if(source!=null && source instanceof Permanent && source.isLand()){
                 //Don't allow just tapping a land to be an action
-                //System.out.println("skipped a land");
+                //May break lands with activated abilities
                 continue;
             }
             filtered.add(playables.get(i));

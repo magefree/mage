@@ -12,7 +12,7 @@ public class Main {
         //RLPlayer player= new RLPlayer("bob", RangeOfInfluence.ALL, 0); //Test loading
         ArrayList<String> errorsList = new ArrayList<>();
         CardScanner.scan(errorsList);
-        GameRunner runner=new GameRunner();
+        GameRunner runner=new GameRunner(5009);
         int netWins=0;
         int count=0;
         while(!runner.agent.done){

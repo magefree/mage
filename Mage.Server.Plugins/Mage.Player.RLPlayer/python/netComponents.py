@@ -244,7 +244,6 @@ def play_game(net,converter,env,verbose=False):
     observations=[converted]
     rewards=[]
     while(True):    
-        # your agent here (this takes random actions)
         with torch.no_grad(): 
             log_actions=net([converted])[0]
         log_actions=torch.squeeze(log_actions).detach()

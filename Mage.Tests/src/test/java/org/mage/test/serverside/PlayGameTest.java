@@ -69,6 +69,7 @@ public class PlayGameTest extends MageTestBase {
 
         long t1 = System.nanoTime();
         GameOptions options = new GameOptions();
+        options.stopOnTurn=100;//Games shouldn't run this long, but stops some crashes
         options.testMode = true;
         game.setGameOptions(options);
         game.start(computerA.getId());

@@ -29,6 +29,9 @@ import java.io.*;
 import mage.player.ai.RandomPlayer;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.json.simple.JSONObject;
 
 /**
  * @author ayratn
@@ -42,8 +45,8 @@ public class  GameRunner{
     private static final Logger logger = Logger.getLogger(GameRunner.class);
     PyConnection conn;
     public RLPyAgent agent;
-    public GameRunner(){
-        conn=new PyConnection();
+    public GameRunner(int port){
+        conn=new PyConnection(port);
         agent=new RLPyAgent(conn);
     }
     public void close(){
@@ -51,46 +54,64 @@ public class  GameRunner{
     }
     public int playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
-        String deckLoc="/home/elchanan/java/mage/Mage.Tests/RBTestAggro.dck";
-        Player computerA = createAgentPlayer("RLPlayer",agent);
-        String mode="load";
-        Deck decka;
-        Deck deckb;
-        
-        if(mode=="random"){
-            decka= generateRandomDeck();
-            deckb= generateRandomDeck();
-        }else{
-            decka=loadDeck(deckLoc);
-            deckb=loadDeck(deckLoc);
+        String preamble=conn.read_preamble();
+        JSONParser parser = new JSONParser();
+        JSONObject arguments;
+        try{
+            Object obj = parser.parse(preamble);         
+            //System.out.println(obj);
+            arguments=(JSONObject) obj;
+         }catch(ParseException pe) {
+            System.out.println("position: " + pe.getPosition());
+            System.out.println(pe);
+            return 0;
         }
+        String deck1loc=(String) arguments.get("deck1");
+        String deck2loc=(String) arguments.get("deck2");
+        String player1name=(String) arguments.get("player1");
+        String player2name=(String) arguments.get("player2");
+        String player2random=(String) arguments.get("player2random");//Either "true" or "false"
+        //String deckLoc="/home/elchanan/java/mage/Mage.Tests/RBTestAggro.dck";
         
-        if (decka.getCards().size() < DECK_SIZE) {
-            throw new IllegalArgumentException("Couldn't load deck, deck size = " + decka.getCards().size() + ", but must be " + DECK_SIZE);
+        Deck deck1=loadDeck(deck1loc);
+        Deck deck2=loadDeck(deck2loc);
+        
+        Player player1 = createAgentPlayer(player1name,agent);
+        if (deck1.getCards().size() < DECK_SIZE) {
+            throw new IllegalArgumentException("Couldn't load deck, deck size = " + deck1.getCards().size() + ", but must be " + DECK_SIZE);
         }
-        game.addPlayer(computerA, decka);
-        game.loadCards(decka.getCards(), computerA.getId());
-
-        Player computerB = new RandomNonTappingPlayer("RandomPlayer");
+        game.addPlayer(player1, deck1);
+        game.loadCards(deck1.getCards(), player1.getId());
+        Player player2;
+        if(player2random.equals("true")){
+            player2=new RandomNonTappingPlayer(player2name);
+        }
+        else if(player2random.equals("false")){
+            player2=createAgentPlayer(player2name,agent);
+        } else{
+            System.out.println("player2random must be 'true' or 'false'");
+            return 0;
+        }
         //Deck deck2 = generateRandomDeck();
-        if (deckb.getCards().size() < DECK_SIZE) {
-            throw new IllegalArgumentException("Couldn't load deck, deck size=" + deckb.getCards().size() + ", but must be " + DECK_SIZE);
+        if (deck2.getCards().size() < DECK_SIZE) {
+            throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size() + ", but must be " + DECK_SIZE);
         }
-        game.addPlayer(computerB, deckb);
-        game.loadCards(deckb.getCards(), computerB.getId());
+        game.addPlayer(player2, deck2);
+        game.loadCards(deck2.getCards(), player2.getId());
 
         long t1 = System.nanoTime();
         GameOptions options = new GameOptions();
+        options.stopOnTurn=100;
         options.testMode = false;
         game.setGameOptions(options);
         logger.info("starting game");
-        game.start(computerA.getId());
+        game.start(player1.getId());
         long t2 = System.nanoTime();
         //learner.endGame(computerA,game.getWinner());
         logger.info("Winner: " + game.getWinner());
         logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
-        int reward=getReward(computerA, game.getWinner());
-        agent.sendGame(game,computerA,new JSONArray());
+        int reward=getReward(player1, game.getWinner());
+        agent.sendGame(game,player1,new JSONArray());
         //return learner.getCurrentGame().getValue();
         return reward;
     }
