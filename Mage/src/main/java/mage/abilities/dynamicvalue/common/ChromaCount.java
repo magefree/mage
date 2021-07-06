@@ -4,28 +4,38 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
+import mage.constants.ManaType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 
 /**
- * Created by Eric on 9/24/2016.
+ * @author JayDi85
  */
-public class ChromaOutrageShamanCount implements DynamicValue {
+public class ChromaCount implements DynamicValue {
 
-    private int chroma;
+    private final ManaType needManaType;
+
+    public ChromaCount(ManaType needManaType) {
+        this.needManaType = needManaType;
+    }
+
+    private ChromaCount(final ChromaCount dynamicValue) {
+        super();
+        this.needManaType = dynamicValue.needManaType;
+    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        chroma = 0;
+        int chroma = 0;
         for (Card card : game.getBattlefield().getAllActivePermanents(new FilterControlledPermanent(), sourceAbility.getControllerId(), game)) {
-            chroma += card.getManaCost().getMana().getRed();
+            chroma += card.getManaCost().getMana().get(this.needManaType);
         }
         return chroma;
     }
 
     @Override
-    public DynamicValue copy() {
-        return new ChromaOutrageShamanCount();
+    public ChromaCount copy() {
+        return new ChromaCount(this);
     }
 
     @Override
@@ -37,4 +47,5 @@ public class ChromaOutrageShamanCount implements DynamicValue {
     public String getMessage() {
         return "";
     }
+
 }
