@@ -50,15 +50,12 @@ public class ManaPool implements Serializable {
         }
     }
 
-    private boolean lastPaymentWasSnow;
-
     public ManaPool(UUID playerId) {
         this.playerId = playerId;
         autoPayment = true;
         autoPaymentRestricted = true;
         unlockedManaType = null;
         forcedToPay = false;
-        lastPaymentWasSnow = false;
     }
 
     public ManaPool(final ManaPool pool) {
@@ -74,7 +71,6 @@ public class ManaPool implements Serializable {
             poolBookmark.add(item.copy());
         }
         this.doNotEmptyManaTypes.addAll(pool.doNotEmptyManaTypes);
-        this.lastPaymentWasSnow = pool.lastPaymentWasSnow;
         this.manaBecomesColorless = pool.manaBecomesColorless;
     }
 
@@ -109,7 +105,6 @@ public class ManaPool implements Serializable {
      * @return
      */
     public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay, Mana usedManaToPay) {
-        lastPaymentWasSnow = false;
         if (!isAutoPayment() && manaType != unlockedManaType) {
             // if manual payment and the needed mana type was not unlocked, nothing will be paid
             return false;
@@ -139,7 +134,6 @@ public class ManaPool implements Serializable {
             lockManaType(); // pay only one mana if mana payment is set to manually
             return true;
         }
-        lastPaymentWasSnow = false;
 
         for (ManaPoolItem mana : manaItems) {
             if (filter != null) {
@@ -164,11 +158,10 @@ public class ManaPool implements Serializable {
                 continue;
             }
             if (mana.get(usableManaType) > 0) {
-                GameEvent event = new ManaPaidEvent(ability, mana.getSourceId(), mana.getFlag(), mana.getOriginalId());
+                GameEvent event = new ManaPaidEvent(ability, mana.getSourceId(), mana.getFlag(), mana.getOriginalId(), mana.getSourceObject(), usableManaType);
                 game.fireEvent(event);
-                usedManaToPay.increase(usableManaType, mana.getSourceObject().isSnow());
+                usedManaToPay.increase(usableManaType);
                 mana.remove(usableManaType);
-                lastPaymentWasSnow |= mana.getSourceObject().isSnow();
                 if (mana.count() == 0) { // so no items with count 0 stay in list
                     manaItems.remove(mana);
                 }
@@ -410,8 +403,8 @@ public class ManaPool implements Serializable {
         for (ConditionalMana mana : getConditionalMana()) {
             if (mana.get(manaInfo.manaType) > 0 && mana.apply(ability, game, mana.getManaProducerId(), costToPay)) {
                 mana.set(manaInfo.manaType, CardUtil.overflowDec(mana.get(manaInfo.manaType), 1));
-                usedManaToPay.increase(manaInfo.manaType, manaInfo.sourceObject.isSnow());
-                GameEvent event = new ManaPaidEvent(ability, mana.getManaProducerId(), mana.getFlag(), mana.getManaProducerOriginalId());
+                usedManaToPay.increase(manaInfo.manaType);
+                GameEvent event = new ManaPaidEvent(ability, mana.getManaProducerId(), mana.getFlag(), mana.getManaProducerOriginalId(), manaInfo.sourceObject, manaInfo.manaType);
                 game.fireEvent(event);
                 break;
             }
@@ -526,10 +519,6 @@ public class ManaPool implements Serializable {
             default:
                 throw new IllegalArgumentException("Wrong mana type " + manaType);
         }
-    }
-
-    public boolean getLastPaymentWasSnow() {
-        return lastPaymentWasSnow;
     }
 
     @Override

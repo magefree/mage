@@ -1,6 +1,8 @@
 
 package org.mage.test.cards.conditional;
 
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -85,5 +87,53 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Search for Glory", 1);
         assertLife(playerA, 21);
+    }
+
+    @Test
+    public void testSnowMana3() {
+        addCard(Zone.BATTLEFIELD, playerA, "Snow-Covered Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+        addCard(Zone.HAND, playerA, "Berg Strider");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Berg Strider");
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertTapped("Silvercoat Lion", true);
+    }
+
+    @Test
+    public void testTreasureMana() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, "Jaded Sell-Sword");
+        addCard(Zone.HAND, playerA, "Strike It Rich", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Strike It Rich");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jaded Sell-Sword");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertAbility(playerA, "Jaded Sell-Sword", FirstStrikeAbility.getInstance(), true);
+        assertAbility(playerA, "Jaded Sell-Sword", HasteAbility.getInstance(), true);
+    }
+
+    @Test
+    public void testTreasureMana2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, "Jaded Sell-Sword");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jaded Sell-Sword");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertAbility(playerA, "Jaded Sell-Sword", FirstStrikeAbility.getInstance(), false);
+        assertAbility(playerA, "Jaded Sell-Sword", HasteAbility.getInstance(), false);
     }
 }

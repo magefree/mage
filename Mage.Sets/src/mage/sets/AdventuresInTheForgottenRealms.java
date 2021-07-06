@@ -83,6 +83,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Flumph", 15, Rarity.RARE, mage.cards.f.Flumph.class));
         cards.add(new SetCardInfo("Fly", 59, Rarity.UNCOMMON, mage.cards.f.Fly.class));
         cards.add(new SetCardInfo("Forest", 278, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forsworn Paladin", 104, Rarity.RARE, mage.cards.f.ForswornPaladin.class));
         cards.add(new SetCardInfo("Froghemoth", 184, Rarity.RARE, mage.cards.f.Froghemoth.class));
         cards.add(new SetCardInfo("Gloom Stalker", 16, Rarity.COMMON, mage.cards.g.GloomStalker.class));
         cards.add(new SetCardInfo("Gnoll Hunter", 185, Rarity.COMMON, mage.cards.g.GnollHunter.class));
@@ -99,6 +100,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Hama Pashar, Ruin Seeker", 224, Rarity.UNCOMMON, mage.cards.h.HamaPasharRuinSeeker.class));
         cards.add(new SetCardInfo("Herald of Hadar", 108, Rarity.COMMON, mage.cards.h.HeraldOfHadar.class));
         cards.add(new SetCardInfo("Hill Giant Herdgorger", 187, Rarity.COMMON, mage.cards.h.HillGiantHerdgorger.class));
+        cards.add(new SetCardInfo("Hired Hexblade", 109, Rarity.COMMON, mage.cards.h.HiredHexblade.class));
         cards.add(new SetCardInfo("Hive of the Eye Tyrant", 258, Rarity.RARE, mage.cards.h.HiveOfTheEyeTyrant.class));
         cards.add(new SetCardInfo("Hoarding Ogre", 146, Rarity.COMMON, mage.cards.h.HoardingOgre.class));
         cards.add(new SetCardInfo("Hobgoblin Captain", 148, Rarity.COMMON, mage.cards.h.HobgoblinCaptain.class));
@@ -110,6 +112,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Intrepid Outlander", 191, Rarity.UNCOMMON, mage.cards.i.IntrepidOutlander.class));
         cards.add(new SetCardInfo("Island", 266, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iymrith, Desert Doom", 62, Rarity.MYTHIC, mage.cards.i.IymrithDesertDoom.class));
+        cards.add(new SetCardInfo("Jaded Sell-Sword", 152, Rarity.COMMON, mage.cards.j.JadedSellSword.class));
         cards.add(new SetCardInfo("Kick in the Door", 153, Rarity.COMMON, mage.cards.k.KickInTheDoor.class));
         cards.add(new SetCardInfo("Krydle of Baldur's Gate", 226, Rarity.UNCOMMON, mage.cards.k.KrydleOfBaldursGate.class));
         cards.add(new SetCardInfo("Lightfoot Rogue", 111, Rarity.UNCOMMON, mage.cards.l.LightfootRogue.class));
