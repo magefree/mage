@@ -46,6 +46,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Burning Hands", 135, Rarity.UNCOMMON, mage.cards.b.BurningHands.class));
         cards.add(new SetCardInfo("Cave of the Frost Dragon", 253, Rarity.RARE, mage.cards.c.CaveOfTheFrostDragon.class));
         cards.add(new SetCardInfo("Celestial Unicorn", 5, Rarity.COMMON, mage.cards.c.CelestialUnicorn.class));
+        cards.add(new SetCardInfo("Chaos Channeler", 136, Rarity.UNCOMMON, mage.cards.c.ChaosChanneler.class));
         cards.add(new SetCardInfo("Charmed Sleep", 50, Rarity.COMMON, mage.cards.c.CharmedSleep.class));
         cards.add(new SetCardInfo("Check for Traps", 92, Rarity.UNCOMMON, mage.cards.c.CheckForTraps.class));
         cards.add(new SetCardInfo("Choose Your Weapon", 175, Rarity.UNCOMMON, mage.cards.c.ChooseYourWeapon.class));
