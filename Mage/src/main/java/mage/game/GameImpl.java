@@ -478,7 +478,11 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void ventureIntoDungeon(UUID playerId) {
+        if (replaceEvent(GameEvent.getEvent(GameEvent.EventType.VENTURE, playerId, null, playerId))) {
+            return;
+        }
         this.getOrCreateDungeon(playerId).moveToNextRoom(playerId, this);
+        fireEvent(GameEvent.getEvent(GameEvent.EventType.VENTURED, playerId, null, playerId));
     }
 
     @Override
