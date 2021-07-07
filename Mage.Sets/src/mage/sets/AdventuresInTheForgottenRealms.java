@@ -105,7 +105,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Hill Giant Herdgorger", 187, Rarity.COMMON, mage.cards.h.HillGiantHerdgorger.class));
         cards.add(new SetCardInfo("Hired Hexblade", 109, Rarity.COMMON, mage.cards.h.HiredHexblade.class));
         cards.add(new SetCardInfo("Hive of the Eye Tyrant", 258, Rarity.RARE, mage.cards.h.HiveOfTheEyeTyrant.class));
-        cards.add(new SetCardInfo("Hoard Robber", 1103, Rarity.COMMON, mage.cards.h.HoardRobber.class));
+        cards.add(new SetCardInfo("Hoard Robber", 110, Rarity.COMMON, mage.cards.h.HoardRobber.class));
         cards.add(new SetCardInfo("Hoarding Ogre", 146, Rarity.COMMON, mage.cards.h.HoardingOgre.class));
         cards.add(new SetCardInfo("Hobgoblin Captain", 148, Rarity.COMMON, mage.cards.h.HobgoblinCaptain.class));
         cards.add(new SetCardInfo("Hulking Bugbear", 149, Rarity.UNCOMMON, mage.cards.h.HulkingBugbear.class));
@@ -136,6 +136,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Paladin's Shield", 30, Rarity.COMMON, mage.cards.p.PaladinsShield.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Ally", 31, Rarity.COMMON, mage.cards.p.PlanarAlly.class));
+        cards.add(new SetCardInfo("Plummet", 199, Rarity.COMMON, mage.cards.p.Plummet.class));
         cards.add(new SetCardInfo("Plundering Barbarian", 158, Rarity.COMMON, mage.cards.p.PlunderingBarbarian.class));
         cards.add(new SetCardInfo("Portable Hole", 33, Rarity.UNCOMMON, mage.cards.p.PortableHole.class));
         cards.add(new SetCardInfo("Potion of Healing", 34, Rarity.COMMON, mage.cards.p.PotionOfHealing.class));
