@@ -72,6 +72,7 @@ public enum CounterType {
     GLYPH("glyph"),
     GOLD("gold"),
     GROWTH("growth"),
+    HARMONY("harmony"),
     HATCHLING("hatchling"),
     HEALING("healing"),
     HEXPROOF("hexproof"),

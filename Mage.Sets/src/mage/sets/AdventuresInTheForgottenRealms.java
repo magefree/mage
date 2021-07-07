@@ -126,6 +126,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Inferno of the Star Mounts", 151, Rarity.MYTHIC, mage.cards.i.InfernoOfTheStarMounts.class));
         cards.add(new SetCardInfo("Ingenious Smith", 21, Rarity.UNCOMMON, mage.cards.i.IngeniousSmith.class));
         cards.add(new SetCardInfo("Inspiring Bard", 189, Rarity.COMMON, mage.cards.i.InspiringBard.class));
+        cards.add(new SetCardInfo("Instrument of the Bards", 190, Rarity.RARE, mage.cards.i.InstrumentOfTheBards.class));
         cards.add(new SetCardInfo("Intrepid Outlander", 191, Rarity.UNCOMMON, mage.cards.i.IntrepidOutlander.class));
         cards.add(new SetCardInfo("Iron Golem", 247, Rarity.UNCOMMON, mage.cards.i.IronGolem.class));
         cards.add(new SetCardInfo("Island", 266, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
