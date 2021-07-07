@@ -15,6 +15,10 @@ public class MageObjectReferencePredicate implements Predicate<MageItem> {
 
     private final MageObjectReference mor;
 
+    public MageObjectReferencePredicate(MageObject mageObject, Game game) {
+        this(new MageObjectReference(mageObject, game));
+    }
+
     public MageObjectReferencePredicate(MageObjectReference mor) {
         this.mor = mor;
     }
