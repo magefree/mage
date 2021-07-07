@@ -123,6 +123,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Hunter's Mark", 188, Rarity.UNCOMMON, mage.cards.h.HuntersMark.class));
         cards.add(new SetCardInfo("Icingdeath, Frost Tyrant", 20, Rarity.MYTHIC, mage.cards.i.IcingdeathFrostTyrant.class));
         cards.add(new SetCardInfo("Improvised Weaponry", 150, Rarity.COMMON, mage.cards.i.ImprovisedWeaponry.class));
+        cards.add(new SetCardInfo("Inferno of the Star Mounts", 151, Rarity.MYTHIC, mage.cards.i.InfernoOfTheStarMounts.class));
         cards.add(new SetCardInfo("Inspiring Bard", 189, Rarity.COMMON, mage.cards.i.InspiringBard.class));
         cards.add(new SetCardInfo("Intrepid Outlander", 191, Rarity.UNCOMMON, mage.cards.i.IntrepidOutlander.class));
         cards.add(new SetCardInfo("Iron Golem", 247, Rarity.UNCOMMON, mage.cards.i.IronGolem.class));
