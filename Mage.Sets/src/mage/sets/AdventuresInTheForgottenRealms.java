@@ -99,6 +99,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Gnoll Hunter", 185, Rarity.COMMON, mage.cards.g.GnollHunter.class));
         cards.add(new SetCardInfo("Goblin Javelineer", 144, Rarity.COMMON, mage.cards.g.GoblinJavelineer.class));
         cards.add(new SetCardInfo("Goblin Morningstar", 145, Rarity.UNCOMMON, mage.cards.g.GoblinMorningstar.class));
+        cards.add(new SetCardInfo("Grand Master of Flowers", 17, Rarity.MYTHIC, mage.cards.g.GrandMasterOfFlowers.class));
         cards.add(new SetCardInfo("Grazilaxx, Illithid Scholar", 60, Rarity.RARE, mage.cards.g.GrazilaxxIllithidScholar.class));
         cards.add(new SetCardInfo("Greataxe", 245, Rarity.COMMON, mage.cards.g.Greataxe.class));
         cards.add(new SetCardInfo("Green Dragon", 186, Rarity.UNCOMMON, mage.cards.g.GreenDragon.class));

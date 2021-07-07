@@ -223,7 +223,6 @@ public enum SubType {
     LICID("Licid", SubTypeSet.CreatureType),
     LIZARD("Lizard", SubTypeSet.CreatureType),
     LOBSTER("Lobster", SubTypeSet.CreatureType, true), // Unglued
-    LOLTH("Lolth", SubTypeSet.CreatureType),
     LUKE("Luke", SubTypeSet.PlaneswalkerType, true), // Star Wars
     // M
     MANTELLIAN("Mantellian", SubTypeSet.CreatureType, true), // Star Wars
@@ -402,6 +401,7 @@ public enum SubType {
     ARLINN("Arlinn", SubTypeSet.PlaneswalkerType),
     ASHIOK("Ashiok", SubTypeSet.PlaneswalkerType),
     AURRA("Aurra", SubTypeSet.PlaneswalkerType, true), // Star Wars
+    BAHAMUT("Bahamut", SubTypeSet.PlaneswalkerType),
     BASRI("Basri", SubTypeSet.PlaneswalkerType),
     BOLAS("Bolas", SubTypeSet.PlaneswalkerType),
     CALIX("Calix", SubTypeSet.PlaneswalkerType),
@@ -430,6 +430,7 @@ public enum SubType {
     KOTH("Koth", SubTypeSet.PlaneswalkerType),
     LILIANA("Liliana", SubTypeSet.PlaneswalkerType),
     LUKKA("Lukka", SubTypeSet.PlaneswalkerType),
+    LOLTH("Lolth", SubTypeSet.PlaneswalkerType),
     NAHIRI("Nahiri", SubTypeSet.PlaneswalkerType),
     NARSET("Narset", SubTypeSet.PlaneswalkerType),
     NIKO("Niko", SubTypeSet.PlaneswalkerType),
