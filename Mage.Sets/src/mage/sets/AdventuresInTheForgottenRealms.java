@@ -97,6 +97,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Greataxe", 245, Rarity.COMMON, mage.cards.g.Greataxe.class));
         cards.add(new SetCardInfo("Green Dragon", 186, Rarity.UNCOMMON, mage.cards.g.GreenDragon.class));
         cards.add(new SetCardInfo("Gretchen Titchwillow", 223, Rarity.UNCOMMON, mage.cards.g.GretchenTitchwillow.class));
+        cards.add(new SetCardInfo("Grim Bounty", 106, Rarity.COMMON, mage.cards.g.GrimBounty.class));
         cards.add(new SetCardInfo("Grim Wanderer", 107, Rarity.UNCOMMON, mage.cards.g.GrimWanderer.class));
         cards.add(new SetCardInfo("Guardian of Faith", 18, Rarity.RARE, mage.cards.g.GuardianOfFaith.class));
         cards.add(new SetCardInfo("Guild Thief", 61, Rarity.UNCOMMON, mage.cards.g.GuildThief.class));
