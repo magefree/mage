@@ -137,6 +137,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Leather Armor", 248, Rarity.COMMON, mage.cards.l.LeatherArmor.class));
         cards.add(new SetCardInfo("Lightfoot Rogue", 111, Rarity.UNCOMMON, mage.cards.l.LightfootRogue.class));
         cards.add(new SetCardInfo("Lolth, Spider Queen", 112, Rarity.MYTHIC, mage.cards.l.LolthSpiderQueen.class));
+        cards.add(new SetCardInfo("Loyal Warhound", 23, Rarity.RARE, mage.cards.l.LoyalWarhound.class));
         cards.add(new SetCardInfo("Lurking Roper", 194, Rarity.UNCOMMON, mage.cards.l.LurkingRoper.class));
         cards.add(new SetCardInfo("Magic Missile", 154, Rarity.UNCOMMON, mage.cards.m.MagicMissile.class));
         cards.add(new SetCardInfo("Manticore", 113, Rarity.COMMON, mage.cards.m.Manticore.class));
