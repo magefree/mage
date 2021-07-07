@@ -26,6 +26,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         this.maxCardNumberInBooster = 275;
 
         cards.add(new SetCardInfo("+2 Mace", 1, Rarity.COMMON, mage.cards.p.Plus2Mace.class));
+        cards.add(new SetCardInfo("Aberrant Mind Sorcerer", 44, Rarity.UNCOMMON, mage.cards.a.AberrantMindSorcerer.class));
         cards.add(new SetCardInfo("Acererak the Archlich", 87, Rarity.MYTHIC, mage.cards.a.AcererakTheArchlich.class));
         cards.add(new SetCardInfo("Adult Gold Dragon", 216, Rarity.RARE, mage.cards.a.AdultGoldDragon.class));
         cards.add(new SetCardInfo("Air-Cult Elemental", 45, Rarity.COMMON, mage.cards.a.AirCultElemental.class));
