@@ -115,6 +115,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Improvised Weaponry", 150, Rarity.COMMON, mage.cards.i.ImprovisedWeaponry.class));
         cards.add(new SetCardInfo("Inspiring Bard", 189, Rarity.COMMON, mage.cards.i.InspiringBard.class));
         cards.add(new SetCardInfo("Intrepid Outlander", 191, Rarity.UNCOMMON, mage.cards.i.IntrepidOutlander.class));
+        cards.add(new SetCardInfo("Iron Golem", 247, Rarity.UNCOMMON, mage.cards.i.IronGolem.class));
         cards.add(new SetCardInfo("Island", 266, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iymrith, Desert Doom", 62, Rarity.MYTHIC, mage.cards.i.IymrithDesertDoom.class));
         cards.add(new SetCardInfo("Jaded Sell-Sword", 152, Rarity.COMMON, mage.cards.j.JadedSellSword.class));
