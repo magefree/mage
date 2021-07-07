@@ -79,15 +79,12 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
         sb.append(prefixText).append('.');
         for (TableEntry tableEntry : this.resultsTable) {
             sb.append("<br>");
-            if (tableEntry.min == tableEntry.max) {
-                sb.append(tableEntry.max);
-                sb.append(' ');
-            } else {
+            if (tableEntry.min != tableEntry.max) {
                 sb.append(tableEntry.min);
                 sb.append('-');
-                sb.append(tableEntry.max);
-                sb.append(" | ");
             }
+            sb.append(tableEntry.max);
+            sb.append(" | ");
             sb.append(CardUtil.getTextWithFirstCharUpperCase(tableEntry.effects.getText(mode)));
         }
         return sb.toString();
