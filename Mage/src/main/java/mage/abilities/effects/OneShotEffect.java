@@ -19,5 +19,4 @@ public abstract class OneShotEffect extends EffectImpl {
     public OneShotEffect(final OneShotEffect effect) {
         super(effect);
     }
-
 }

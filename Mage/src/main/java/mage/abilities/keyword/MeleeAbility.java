@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import java.util.*;
@@ -71,8 +70,18 @@ class MeleeWatcher extends Watcher {
 
 class MeleeDynamicValue implements DynamicValue {
 
-    private boolean valueChecked = false;
+    private boolean valueChecked;
     private int lockedInValue;
+
+    public MeleeDynamicValue() {
+        super();
+    }
+
+    protected MeleeDynamicValue(final MeleeDynamicValue dynamicValue) {
+        super();
+        valueChecked = dynamicValue.valueChecked;
+        lockedInValue = dynamicValue.lockedInValue;
+    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -89,7 +98,7 @@ class MeleeDynamicValue implements DynamicValue {
 
     @Override
     public MeleeDynamicValue copy() {
-        return new MeleeDynamicValue();
+        return new MeleeDynamicValue(this);
     }
 
     @Override

@@ -72,7 +72,7 @@ class AttachedPermanentPowerCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public AttachedPermanentPowerCount copy() {
         return new AttachedPermanentPowerCount();
     }
 

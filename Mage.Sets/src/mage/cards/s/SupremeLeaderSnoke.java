@@ -104,7 +104,7 @@ class OpponentNoncombatLostLifeCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public OpponentNoncombatLostLifeCount copy() {
         return new OpponentNoncombatLostLifeCount();
     }
 

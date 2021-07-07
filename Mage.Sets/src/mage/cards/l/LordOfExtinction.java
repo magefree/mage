@@ -59,7 +59,7 @@ class LordOfExtinctionDynamicCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public LordOfExtinctionDynamicCount copy() {
         return new LordOfExtinctionDynamicCount();
     }
 

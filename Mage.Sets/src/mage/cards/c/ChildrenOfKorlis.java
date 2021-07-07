@@ -60,7 +60,7 @@ class SourceControllerLostLifeCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public SourceControllerLostLifeCount copy() {
         return new SourceControllerLostLifeCount();
     }
 

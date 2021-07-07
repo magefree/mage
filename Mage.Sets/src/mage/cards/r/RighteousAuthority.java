@@ -59,6 +59,7 @@ public final class RighteousAuthority extends CardImpl {
 
 
 class CardsInEnchantedControllerHandCount implements DynamicValue {
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (sourceAbility != null) {
@@ -77,7 +78,7 @@ class CardsInEnchantedControllerHandCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public CardsInEnchantedControllerHandCount copy() {
         return new CardsInEnchantedControllerHandCount();
     }
 

@@ -66,7 +66,7 @@ class ChromaUmbraStalkerCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public ChromaUmbraStalkerCount copy() {
         return new ChromaUmbraStalkerCount();
     }
 
