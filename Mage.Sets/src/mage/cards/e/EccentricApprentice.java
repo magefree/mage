@@ -91,7 +91,7 @@ class EccentricApprenticeEffect extends ContinuousEffectImpl {
                 permanent.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
                 return true;
             case PTChangingEffects_7:
-                if (sublayer == SubLayer.ModifyPT_7c) {
+                if (sublayer == SubLayer.SetPT_7b) {
                     permanent.getPower().setValue(1);
                     permanent.getToughness().setValue(1);
                     return true;
@@ -102,6 +102,17 @@ class EccentricApprenticeEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean hasLayer(Layer layer) {
+        switch (layer) {
+            case TypeChangingEffects_4:
+            case AbilityAddingRemovingEffects_6:
+            case PTChangingEffects_7:
+                return true;
+        }
         return false;
     }
 }

@@ -105,7 +105,7 @@ class WildShapeEffect extends ContinuousEffectImpl {
                 permanent.addAbility(ability, source.getSourceId(), game);
                 return true;
             case PTChangingEffects_7:
-                if (sublayer == SubLayer.ModifyPT_7c) {
+                if (sublayer == SubLayer.SetPT_7b) {
                     permanent.getPower().setValue(power);
                     permanent.getToughness().setValue(toughness);
                     return true;
@@ -116,6 +116,17 @@ class WildShapeEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean hasLayer(Layer layer) {
+        switch (layer) {
+            case TypeChangingEffects_4:
+            case AbilityAddingRemovingEffects_6:
+            case PTChangingEffects_7:
+                return true;
+        }
         return false;
     }
 }
