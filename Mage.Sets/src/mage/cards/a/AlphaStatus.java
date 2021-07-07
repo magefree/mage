@@ -72,7 +72,7 @@ class AlphaStatusDynamicValue implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public AlphaStatusDynamicValue copy() {
         return new AlphaStatusDynamicValue();
     }
 

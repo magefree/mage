@@ -64,9 +64,13 @@ class SaprazzanBailiffEffect extends OneShotEffect {
         staticText = "exile all artifact and enchantment cards from all graveyards";
     }
 
+    private SaprazzanBailiffEffect(final SaprazzanBailiffEffect effect) {
+        super(effect);
+    }
+
     @Override
     public SaprazzanBailiffEffect copy() {
-        return new SaprazzanBailiffEffect();
+        return new SaprazzanBailiffEffect(this);
     }
 
     @Override

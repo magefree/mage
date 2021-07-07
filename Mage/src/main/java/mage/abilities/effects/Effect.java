@@ -6,6 +6,7 @@ import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.target.targetpointer.TargetPointer;
+import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -13,7 +14,7 @@ import java.util.UUID;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public interface Effect extends Serializable {
+public interface Effect extends Serializable, Copyable<Effect> {
 
     UUID getId();
 

@@ -45,6 +45,15 @@ public final class UrborgJustice extends CardImpl {
 class UrborgJusticeDynamicValue implements DynamicValue {
 
     @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        CreaturesDiedWatcher watcher = game.getState().getWatcher(CreaturesDiedWatcher.class);
+        if (watcher != null) {
+            return watcher.getAmountOfCreaturesDiedThisTurnByOwner(sourceAbility.getControllerId());
+        }
+        return 0;
+    }
+
+    @Override
     public UrborgJusticeDynamicValue copy() {
         return new UrborgJusticeDynamicValue();
     }
@@ -57,14 +66,5 @@ class UrborgJusticeDynamicValue implements DynamicValue {
     @Override
     public String getMessage() {
         return "creature put into your graveyard from the battlefield this turn";
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        CreaturesDiedWatcher watcher = game.getState().getWatcher(CreaturesDiedWatcher.class);
-        if (watcher != null) {
-            return watcher.getAmountOfCreaturesDiedThisTurnByOwner(sourceAbility.getControllerId());
-        }
-        return 0;
     }
 }

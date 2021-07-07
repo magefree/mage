@@ -5,7 +5,7 @@ import mage.util.Copyable;
 /**
  * @author LevelX2
  */
-public interface OptionalAdditionalCost extends Cost, Copyable<OptionalAdditionalCost> {
+public interface OptionalAdditionalCost extends Cost {
 
     String getName();
 
@@ -77,4 +77,6 @@ public interface OptionalAdditionalCost extends Cost, Copyable<OptionalAdditiona
      */
     int getActivateCount();
 
+    @Override
+    OptionalAdditionalCost copy();
 }

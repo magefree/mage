@@ -59,12 +59,11 @@ class HalfForestsDownCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = game.getBattlefield().countAll(filter, sourceAbility.getControllerId(), game) / 2;
-        return amount;
+        return game.getBattlefield().countAll(filter, sourceAbility.getControllerId(), game) / 2;
     }
 
     @Override
-    public DynamicValue copy() {
+    public HalfForestsDownCount copy() {
         return new HalfForestsDownCount();
     }
 
@@ -94,7 +93,7 @@ class HalfForestsUpCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public HalfForestsUpCount copy() {
         return new HalfForestsUpCount();
     }
 

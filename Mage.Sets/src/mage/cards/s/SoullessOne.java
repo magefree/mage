@@ -67,7 +67,7 @@ class SoullessOneDynamicCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public SoullessOneDynamicCount copy() {
         return new SoullessOneDynamicCount();
     }
     

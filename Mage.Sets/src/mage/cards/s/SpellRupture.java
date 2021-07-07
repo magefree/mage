@@ -102,7 +102,7 @@ class GreatestPowerCountCreatureYouControl implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public GreatestPowerCountCreatureYouControl copy() {
         return new GreatestPowerCountCreatureYouControl();
     }
 

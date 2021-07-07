@@ -61,7 +61,7 @@ class TargetPlayerCardsInHandCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public TargetPlayerCardsInHandCount copy() {
         return new TargetPlayerCardsInHandCount();
     }
 

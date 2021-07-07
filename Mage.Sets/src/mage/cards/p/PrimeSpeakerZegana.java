@@ -68,7 +68,7 @@ class GreatestPowerCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public GreatestPowerCount copy() {
         return new GreatestPowerCount();
     }
 

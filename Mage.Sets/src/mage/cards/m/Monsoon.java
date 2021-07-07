@@ -56,8 +56,8 @@ class MonsoonEffect extends OneShotEffect {
         this.staticText = "tap all untapped Islands that player controls and {this} deals X damage to the player, where X is the number of Islands tapped this way";
     }
 
-    public MonsoonEffect(Outcome outcome) {
-        super(outcome);
+    private MonsoonEffect(final MonsoonEffect effect) {
+        super(effect);
     }
 
     @Override
@@ -76,7 +76,7 @@ class MonsoonEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
-        return new MonsoonEffect();
+    public MonsoonEffect copy() {
+        return new MonsoonEffect(this);
     }
 }

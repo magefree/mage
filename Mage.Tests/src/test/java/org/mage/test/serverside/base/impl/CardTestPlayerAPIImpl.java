@@ -687,7 +687,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 CardInfo cardInfo = CardRepository.instance.findCard(cardName);
                 Card card = cardInfo != null ? cardInfo.getCard() : null;
                 if (card == null) {
-                    throw new AssertionError("Couldn't find a card: " + cardName);
+                    throw new AssertionError("Couldn't find a card in db: " + cardName);
                 }
                 cards.add(card);
 

@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -21,9 +19,13 @@ public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect {
         staticText = "exile all cards from target player's graveyard";
     }
 
+    private ExileGraveyardAllTargetPlayerEffect(final ExileGraveyardAllTargetPlayerEffect effect) {
+        super(effect);
+    }
+
     @Override
     public ExileGraveyardAllTargetPlayerEffect copy() {
-        return new ExileGraveyardAllTargetPlayerEffect();
+        return new ExileGraveyardAllTargetPlayerEffect(this);
     }
 
     @Override
