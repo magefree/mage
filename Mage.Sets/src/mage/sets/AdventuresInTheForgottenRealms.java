@@ -164,6 +164,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Portable Hole", 33, Rarity.UNCOMMON, mage.cards.p.PortableHole.class));
         cards.add(new SetCardInfo("Potion of Healing", 34, Rarity.COMMON, mage.cards.p.PotionOfHealing.class));
         cards.add(new SetCardInfo("Power Word Kill", 114, Rarity.UNCOMMON, mage.cards.p.PowerWordKill.class));
+        cards.add(new SetCardInfo("Power of Persuasion", 67, Rarity.UNCOMMON, mage.cards.p.PowerOfPersuasion.class));
         cards.add(new SetCardInfo("Precipitous Drop", 115, Rarity.COMMON, mage.cards.p.PrecipitousDrop.class));
         cards.add(new SetCardInfo("Price of Loyalty", 159, Rarity.COMMON, mage.cards.p.PriceOfLoyalty.class));
         cards.add(new SetCardInfo("Priest of Ancient Lore", 35, Rarity.COMMON, mage.cards.p.PriestOfAncientLore.class));
