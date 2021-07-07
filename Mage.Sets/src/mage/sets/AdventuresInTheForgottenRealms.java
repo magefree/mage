@@ -134,6 +134,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Jaded Sell-Sword", 152, Rarity.COMMON, mage.cards.j.JadedSellSword.class));
         cards.add(new SetCardInfo("Kick in the Door", 153, Rarity.COMMON, mage.cards.k.KickInTheDoor.class));
         cards.add(new SetCardInfo("Krydle of Baldur's Gate", 226, Rarity.UNCOMMON, mage.cards.k.KrydleOfBaldursGate.class));
+        cards.add(new SetCardInfo("Leather Armor", 248, Rarity.COMMON, mage.cards.l.LeatherArmor.class));
         cards.add(new SetCardInfo("Lightfoot Rogue", 111, Rarity.UNCOMMON, mage.cards.l.LightfootRogue.class));
         cards.add(new SetCardInfo("Lolth, Spider Queen", 112, Rarity.MYTHIC, mage.cards.l.LolthSpiderQueen.class));
         cards.add(new SetCardInfo("Lurking Roper", 194, Rarity.UNCOMMON, mage.cards.l.LurkingRoper.class));
