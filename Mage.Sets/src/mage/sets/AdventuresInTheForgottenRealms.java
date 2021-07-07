@@ -53,6 +53,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Clattering Skeletons", 93, Rarity.COMMON, mage.cards.c.ClatteringSkeletons.class));
         cards.add(new SetCardInfo("Clever Conjurer", 51, Rarity.COMMON, mage.cards.c.CleverConjurer.class));
         cards.add(new SetCardInfo("Cloister Gargoyle", 7, Rarity.UNCOMMON, mage.cards.c.CloisterGargoyle.class));
+        cards.add(new SetCardInfo("Compelled Duel", 178, Rarity.COMMON, mage.cards.c.CompelledDuel.class));
         cards.add(new SetCardInfo("Contact Other Plane", 52, Rarity.COMMON, mage.cards.c.ContactOtherPlane.class));
         cards.add(new SetCardInfo("Dawnbringer Cleric", 9, Rarity.COMMON, mage.cards.d.DawnbringerCleric.class));
         cards.add(new SetCardInfo("Death-Priest of Myrkul", 95, Rarity.UNCOMMON, mage.cards.d.DeathPriestOfMyrkul.class));
