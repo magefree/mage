@@ -454,6 +454,7 @@ public class GameEvent implements Serializable {
          playerId    player in the dungeon
          */
         ROOM_ENTERED,
+        VENTURE, VENTURED,
         DUNGEON_COMPLETED,
         //custom events
         CUSTOM_EVENT
