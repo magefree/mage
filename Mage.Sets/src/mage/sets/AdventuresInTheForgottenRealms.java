@@ -63,6 +63,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Demogorgon's Clutches", 96, Rarity.UNCOMMON, mage.cards.d.DemogorgonsClutches.class));
         cards.add(new SetCardInfo("Den of the Bugbear", 254, Rarity.RARE, mage.cards.d.DenOfTheBugbear.class));
         cards.add(new SetCardInfo("Devoted Paladin", 11, Rarity.COMMON, mage.cards.d.DevotedPaladin.class));
+        cards.add(new SetCardInfo("Devour Intellect", 97, Rarity.COMMON, mage.cards.d.DevourIntellect.class));
         cards.add(new SetCardInfo("Dire Wolf Prowler", 179, Rarity.COMMON, mage.cards.d.DireWolfProwler.class));
         cards.add(new SetCardInfo("Displacer Beast", 54, Rarity.UNCOMMON, mage.cards.d.DisplacerBeast.class));
         cards.add(new SetCardInfo("Divine Smite", 12, Rarity.UNCOMMON, mage.cards.d.DivineSmite.class));
