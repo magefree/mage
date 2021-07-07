@@ -38,6 +38,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Battle Cry Goblin", 132, Rarity.UNCOMMON, mage.cards.b.BattleCryGoblin.class));
         cards.add(new SetCardInfo("Black Dragon", 90, Rarity.UNCOMMON, mage.cards.b.BlackDragon.class));
         cards.add(new SetCardInfo("Blink Dog", 3, Rarity.UNCOMMON, mage.cards.b.BlinkDog.class));
+        cards.add(new SetCardInfo("Boots of Speed", 133, Rarity.COMMON, mage.cards.b.BootsOfSpeed.class));
         cards.add(new SetCardInfo("Bruenor Battlehammer", 219, Rarity.UNCOMMON, mage.cards.b.BruenorBattlehammer.class));
         cards.add(new SetCardInfo("Bulette", 173, Rarity.COMMON, mage.cards.b.Bulette.class));
         cards.add(new SetCardInfo("Bull's Strength", 174, Rarity.COMMON, mage.cards.b.BullsStrength.class));
