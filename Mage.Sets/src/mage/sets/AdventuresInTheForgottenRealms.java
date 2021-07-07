@@ -113,6 +113,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Hive of the Eye Tyrant", 258, Rarity.RARE, mage.cards.h.HiveOfTheEyeTyrant.class));
         cards.add(new SetCardInfo("Hoard Robber", 110, Rarity.COMMON, mage.cards.h.HoardRobber.class));
         cards.add(new SetCardInfo("Hoarding Ogre", 146, Rarity.COMMON, mage.cards.h.HoardingOgre.class));
+        cards.add(new SetCardInfo("Hobgoblin Bandit Lord", 147, Rarity.RARE, mage.cards.h.HobgoblinBanditLord.class));
         cards.add(new SetCardInfo("Hobgoblin Captain", 148, Rarity.COMMON, mage.cards.h.HobgoblinCaptain.class));
         cards.add(new SetCardInfo("Hulking Bugbear", 149, Rarity.UNCOMMON, mage.cards.h.HulkingBugbear.class));
         cards.add(new SetCardInfo("Hunter's Mark", 188, Rarity.UNCOMMON, mage.cards.h.HuntersMark.class));
