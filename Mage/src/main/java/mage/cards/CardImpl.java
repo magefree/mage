@@ -845,17 +845,24 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean hasSubTypeForDeckbuilding(SubType subType) {
-        if (this.hasSubtype(subType, null)
-                || this.getAbilities()
+        // own subtype
+        if (this.hasSubtype(subType, null)) {
+            return true;
+        }
+
+        // gained subtypes from source ability
+        if (this.getAbilities()
                 .stream()
                 .filter(SimpleStaticAbility.class::isInstance)
                 .map(Ability::getAllEffects)
                 .flatMap(Collection::stream)
                 .filter(HasSubtypesSourceEffect.class::isInstance)
                 .map(HasSubtypesSourceEffect.class::cast)
-                .anyMatch(effect -> effect.checkSubtype(subType))) {
+                .anyMatch(effect -> effect.hasSubtype(subType))) {
             return true;
         }
+
+        // changeling (any subtype)
         return subType.getSubTypeSet() == SubTypeSet.CreatureType
                 && this.getAbilities().containsClass(ChangelingAbility.class);
     }

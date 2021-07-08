@@ -1127,7 +1127,7 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public List<CardType> getCardTypeForDeckbuilding() {
-        return null;
+        throw new UnsupportedOperationException("Must call for cards only.");
     }
 
     @Override

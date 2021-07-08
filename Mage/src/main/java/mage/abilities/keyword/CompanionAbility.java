@@ -9,7 +9,9 @@ import mage.constants.Zone;
 
 import java.util.Set;
 
-/*
+/**
+ * Allows card to be companion
+ *
  * @author emerald000
  */
 public class CompanionAbility extends SpecialAction {

@@ -204,5 +204,11 @@ public interface Card extends MageObject {
 
     boolean hasCardTypeForDeckbuilding(CardType cardType);
 
+    /**
+     * Checking subtype in cards for deck and companion validation
+     *
+     * @param subType
+     * @return
+     */
     boolean hasSubTypeForDeckbuilding(SubType subType);
 }

@@ -14,9 +14,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * Warning, do not copy it - hasSubTypeForDeckbuilding uses it to find additional subtypes in cards
+ *
  * @author TheElk801
  */
-public class HasSubtypesSourceEffect extends ContinuousEffectImpl {
+public final class HasSubtypesSourceEffect extends ContinuousEffectImpl {
 
     private final List<SubType> subtypes = new ArrayList<>();
 
@@ -56,7 +58,7 @@ public class HasSubtypesSourceEffect extends ContinuousEffectImpl {
                 + CardUtil.concatWithAnd(subtypes.stream().map(SubType::getDescription).collect(Collectors.toList()));
     }
 
-    public boolean checkSubtype(SubType subType) {
+    public boolean hasSubtype(SubType subType) {
         return subtypes.contains(subType);
     }
 }
