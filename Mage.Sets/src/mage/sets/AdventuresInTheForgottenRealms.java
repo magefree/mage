@@ -185,6 +185,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Secret Door", 71, Rarity.COMMON, mage.cards.s.SecretDoor.class));
         cards.add(new SetCardInfo("Sepulcher Ghoul", 118, Rarity.COMMON, mage.cards.s.SepulcherGhoul.class));
         cards.add(new SetCardInfo("Shambling Ghast", 119, Rarity.COMMON, mage.cards.s.ShamblingGhast.class));
+        cards.add(new SetCardInfo("Shessra, Death's Whisper", 231, Rarity.UNCOMMON, mage.cards.s.ShessraDeathsWhisper.class));
         cards.add(new SetCardInfo("Shocking Grasp", 72, Rarity.COMMON, mage.cards.s.ShockingGrasp.class));
         cards.add(new SetCardInfo("Shortcut Seeker", 73, Rarity.COMMON, mage.cards.s.ShortcutSeeker.class));
         cards.add(new SetCardInfo("Silver Raven", 74, Rarity.COMMON, mage.cards.s.SilverRaven.class));
