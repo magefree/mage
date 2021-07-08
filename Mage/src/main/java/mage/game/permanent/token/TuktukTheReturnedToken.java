@@ -15,7 +15,7 @@ public final class TuktukTheReturnedToken extends TokenImpl {
     }
 
     public TuktukTheReturnedToken(String setCode) {
-        super("Tuktuk the Returned", "legendary 5/5 colorless Goblin Golem artifact creature token");
+        super("Tuktuk the Returned", "Tuktuk the Returned, a legendary 5/5 colorless Goblin Golem artifact creature token");
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
