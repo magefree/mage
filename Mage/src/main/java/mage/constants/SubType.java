@@ -544,6 +544,10 @@ public enum SubType {
         return "AEIOUaeiou".indexOf(c) != -1;
     }
 
+    public boolean isCustomSet() {
+        return customSet;
+    }
+
     public static SubType fromString(String value) {
         for (SubType st : SubType.values()) {
             if (st.toString().equals(value)) {
@@ -581,6 +585,8 @@ public enum SubType {
                 return mageObject.isArtifact();
             case PlaneswalkerType:
                 return mageObject.isPlaneswalker();
+            case SpellType:
+                return mageObject.isInstantOrSorcery();
         }
         return false;
     }
