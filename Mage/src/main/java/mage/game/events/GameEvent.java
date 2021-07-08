@@ -340,6 +340,7 @@ public class GameEvent implements Serializable {
          */
         BECOMES_EXERTED,
         BECOMES_RENOWNED,
+        GAINS_CLASS_LEVEL,
         /* BECOMES_MONARCH
          targetId    playerId of the player that becomes the monarch
          sourceId    id of the source object that created that effect, if no effect exist it's null
