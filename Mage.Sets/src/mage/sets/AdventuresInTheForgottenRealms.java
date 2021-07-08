@@ -190,6 +190,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Skeletal Swarming", 232, Rarity.RARE, mage.cards.s.SkeletalSwarming.class));
         cards.add(new SetCardInfo("Skullport Merchant", 120, Rarity.UNCOMMON, mage.cards.s.SkullportMerchant.class));
         cards.add(new SetCardInfo("Soulknife Spy", 75, Rarity.COMMON, mage.cards.s.SoulknifeSpy.class));
+        cards.add(new SetCardInfo("Sphere of Annihilation", 121, Rarity.RARE, mage.cards.s.SphereOfAnnihilation.class));
         cards.add(new SetCardInfo("Spike Pit Trap", 251, Rarity.COMMON, mage.cards.s.SpikePitTrap.class));
         cards.add(new SetCardInfo("Split the Party", 76, Rarity.UNCOMMON, mage.cards.s.SplitTheParty.class));
         cards.add(new SetCardInfo("Steadfast Paladin", 38, Rarity.COMMON, mage.cards.s.SteadfastPaladin.class));
