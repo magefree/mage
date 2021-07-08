@@ -58,7 +58,7 @@ public class RollDiceEffect extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder("Roll a " + numSides + " sided dice");
+        StringBuilder sb = new StringBuilder("Roll a " + numSides + " sided die");
         return sb.toString();
     }
 

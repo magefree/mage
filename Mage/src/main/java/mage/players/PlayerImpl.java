@@ -2839,7 +2839,12 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public int rollDice(Ability source, Game game, int numSides) {
-        return this.rollDice(source, game, null, numSides);
+        return this.rollDice(source, game, numSides, 1);
+    }
+
+    @Override
+    public int rollDice(Ability source, Game game, int numSides, int numDice) {
+        return this.rollDice(source, game, null, numSides, numDice);
     }
 
     /**
@@ -2850,18 +2855,18 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @return the number that the player rolled
      */
     @Override
-    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides) {
+    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice) {
         int result = RandomUtil.nextInt(numSides) + 1;
         if (!game.isSimulation()) {
             game.informPlayers("[Roll a die] " + getLogName() + " rolled a "
                     + result + " on a " + numSides + " sided die" + CardUtil.getSourceLogName(game, source));
         }
-        GameEvent event = new GameEvent(GameEvent.EventType.ROLL_DICE, playerId, source, playerId, result, true);
+        GameEvent event = new GameEvent(GameEvent.EventType.ROLL_DIE, playerId, source, playerId, result, true);
         event.setAppliedEffects(appliedEffects);
         event.setAmount(result);
         event.setData(numSides + "");
         if (!game.replaceEvent(event)) {
-            GameEvent ge = new GameEvent(GameEvent.EventType.DICE_ROLLED, playerId, source, playerId, event.getAmount(), event.getFlag());
+            GameEvent ge = new GameEvent(GameEvent.EventType.DIE_ROLLED, playerId, source, playerId, event.getAmount(), event.getFlag());
             ge.setData(numSides + "");
             game.fireEvent(ge);
         }

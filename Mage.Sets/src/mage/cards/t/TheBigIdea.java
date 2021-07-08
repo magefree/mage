@@ -105,7 +105,7 @@ class TheBigIdeaReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ROLL_DICE;
+        return event.getType() == GameEvent.EventType.ROLL_DIE;
     }
 
     @Override
