@@ -52,6 +52,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Check for Traps", 92, Rarity.UNCOMMON, mage.cards.c.CheckForTraps.class));
         cards.add(new SetCardInfo("Choose Your Weapon", 175, Rarity.UNCOMMON, mage.cards.c.ChooseYourWeapon.class));
         cards.add(new SetCardInfo("Circle of Dreams Druid", 176, Rarity.RARE, mage.cards.c.CircleOfDreamsDruid.class));
+        cards.add(new SetCardInfo("Circle of the Moon Druid", 177, Rarity.COMMON, mage.cards.c.CircleOfTheMoonDruid.class));
         cards.add(new SetCardInfo("Clattering Skeletons", 93, Rarity.COMMON, mage.cards.c.ClatteringSkeletons.class));
         cards.add(new SetCardInfo("Clever Conjurer", 51, Rarity.COMMON, mage.cards.c.CleverConjurer.class));
         cards.add(new SetCardInfo("Cloister Gargoyle", 7, Rarity.UNCOMMON, mage.cards.c.CloisterGargoyle.class));
