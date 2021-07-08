@@ -6,6 +6,10 @@ import mage.server.util.config.Plugin;
 import java.util.List;
 
 public interface ConfigSettings {
+    boolean isMultiHome();
+
+    List<Integer> secondaryPorts();
+
     String getServerAddress();
 
     String getServerName();

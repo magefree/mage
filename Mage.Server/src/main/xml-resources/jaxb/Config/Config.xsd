@@ -17,6 +17,18 @@
 
     <xs:element name="server">
         <xs:complexType>
+            <xs:sequence>
+                <xs:element name="home" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:attribute name="internal" type="xs:string" use="required"/>
+                        <xs:attribute name="external" type="xs:string" use="required" />
+                        <xs:attribute name="port" type="xs:positiveInteger" use="required" />
+                        <xs:attribute name="externalport" type="xs:positiveInteger" />
+                        <xs:attribute name="secondaryport" type="xs:integer" default="-1" />
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="multihome" type="xs:boolean" default="false" />
             <xs:attribute name="serverAddress" type="xs:string" use="required"/>
             <xs:attribute name="serverName" type="xs:string" use="required"/>
             <xs:attribute name="port" type="xs:positiveInteger" use="required"/>

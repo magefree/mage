@@ -6,6 +6,7 @@ import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ConfigWrapper implements ConfigSettings {
 
@@ -13,6 +14,18 @@ public class ConfigWrapper implements ConfigSettings {
 
     public ConfigWrapper(final Config config) {
         this.config = config;
+    }
+
+    @Override
+    public boolean isMultiHome() {
+        return config.getServer().isMultihome();
+    }
+
+    @Override
+    public List<Integer> secondaryPorts() {
+        return config.getServer().getHome().stream()
+                .map(h -> h.getSecondaryport().intValue())
+                .collect(Collectors.toList());
     }
 
     public String getServerAddress() {

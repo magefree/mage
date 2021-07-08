@@ -1,148 +1,32 @@
 package mage.server.util;
 
-import mage.server.util.config.*;
-import mage.utils.FluentBuilder;
+import mage.server.util.config.GamePlugin;
+import mage.server.util.config.Plugin;
+import mage.server.util.config.Server;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 
-import java.math.BigInteger;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static mage.server.util.Comparators.gamePluginComparator;
+import static mage.server.util.Comparators.pluginComparator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConfigWrapperTest {
 
-    static class ConfigBuilder extends FluentBuilder<Config, ConfigBuilder> {
-
-        public String serverAddress;
-        public String serverName;
-        public int port;
-        public int secondaryBindPort;
-        public int leasePeriod;
-        public int socketWriteTimeout;
-        public int maxPoolSize;
-        public int numAcceptThreads;
-        public int backlogSize;
-        public int maxGameThreads;
-        public int maxSecondsIdle;
-        public int minUsernameLength;
-        public int maxUsernameLength;
-        public String invalidUsernamePattern;
-        public int minPasswordLength;
-        public int maxPasswordLength;
-        public String maxAiOpponents;
-        public boolean saveGameActivated;
-        public boolean authenticationActivated;
-        public String googleAccount;
-        public String mailgunApiKey;
-        public String mailgunDomain;
-        public String mailSmtpHost;
-        public String mailSmtpPort;
-        public String mailUser;
-        public String mailPassword;
-        public String mailFromAddress;
-        public List<Plugin> playerTypes = Collections.emptyList();
-        public List<GamePlugin> gameTypes = Collections.emptyList();
-        public List<GamePlugin> tournamentTypes = Collections.emptyList();
-        public List<Plugin> draftCubes = Collections.emptyList();
-        public List<Plugin> deckTypes = Collections.emptyList();
-
-        private ConfigBuilder() {
-            super(ConfigBuilder::new);
-        }
-
-        @Override
-        protected Config makeValue() {
-            final Config result = new Config();
-            result.setServer(makeServer());
-            result.setPlayerTypes(makePlayerTypes());
-            result.setGameTypes(makeGameTypes());
-            result.setTournamentTypes(makeTournamentTypes());
-            result.setDraftCubes(makeDraftCubes());
-            result.setDeckTypes(makeDeckTypes());
-            return result;
-        }
-
-        private Server makeServer() {
-            final Server server = new Server();
-            server.setServerAddress(serverAddress);
-            server.setServerName(serverName);
-            server.setPort(BigInteger.valueOf(port));
-            server.setSecondaryBindPort(bi(secondaryBindPort));
-            server.setLeasePeriod(bi(leasePeriod));
-            server.setSocketWriteTimeout(bi(socketWriteTimeout));
-            server.setMaxPoolSize(bi(maxPoolSize));
-            server.setNumAcceptThreads(bi(numAcceptThreads));
-            server.setBacklogSize(bi(backlogSize));
-            server.setMaxGameThreads(bi(maxGameThreads));
-            server.setMaxSecondsIdle(bi(maxSecondsIdle));
-            server.setMinUserNameLength(bi(minUsernameLength));
-            server.setMaxUserNameLength(bi(maxUsernameLength));
-            server.setInvalidUserNamePattern(invalidUsernamePattern);
-            server.setMinPasswordLength(bi(minPasswordLength));
-            server.setMaxPasswordLength(bi(maxPasswordLength));
-            server.setMaxAiOpponents(maxAiOpponents);
-            server.setSaveGameActivated(saveGameActivated);
-            server.setAuthenticationActivated(authenticationActivated);
-            server.setGoogleAccount(googleAccount);
-            server.setMailgunApiKey(mailgunApiKey);
-            server.setMailgunDomain(mailgunDomain);
-            server.setMailSmtpHost(mailSmtpHost);
-            server.setMailSmtpPort(mailSmtpPort);
-            server.setMailUser(mailUser);
-            server.setMailPassword(mailPassword);
-            server.setMailFromAddress(mailFromAddress);
-            return server;
-        }
-
-        private PlayerTypes makePlayerTypes() {
-            final PlayerTypes playerTypes = new PlayerTypes();
-            this.playerTypes.forEach(p -> playerTypes.getPlayerType().add(p));
-            return playerTypes;
-        }
-
-        private GameTypes makeGameTypes() {
-            final GameTypes gameTypes = new GameTypes();
-            this.gameTypes.forEach(g -> gameTypes.getGameType().add(g));
-            return gameTypes;
-        }
-
-        private TournamentTypes makeTournamentTypes() {
-            final TournamentTypes tournamentTypes = new TournamentTypes();
-            this.tournamentTypes.forEach(t -> tournamentTypes.getTournamentType().add(t));
-            return tournamentTypes;
-        }
-
-        private DraftCubes makeDraftCubes() {
-            final DraftCubes draftCubes = new DraftCubes();
-            this.draftCubes.forEach(d -> draftCubes.getDraftCube().add(d));
-            return draftCubes;
-        }
-
-        private DeckTypes makeDeckTypes() {
-            final DeckTypes deckTypes = new DeckTypes();
-            this.deckTypes.forEach(d -> deckTypes.getDeckType().add(d));
-            return deckTypes;
-        }
-
-        private BigInteger bi(int value) {
-            return BigInteger.valueOf(value);
-        }
-    }
-
-    private ConfigBuilder baseConfigBuilder() {
-        return new ConfigBuilder();
+    private Builders.ConfigBuilder baseConfigBuilder() {
+        return new Builders.ConfigBuilder();
     }
 
     private final String expectedString = RandomStringUtils.randomAlphanumeric(15);
@@ -172,6 +56,7 @@ public class ConfigWrapperTest {
                 testString("max AI opponents", c -> c.maxAiOpponents = expectedString, ConfigWrapper::getMaxAiOpponents),
                 testTrue("save game activated", c -> c.saveGameActivated = true, ConfigWrapper::isSaveGameActivated),
                 testTrue("authentication activated", c -> c.authenticationActivated = true, ConfigWrapper::isAuthenticationActivated),
+                testTrue("multihome", c -> c.multihome = true, ConfigWrapper::isMultiHome),
                 testString("google account", c -> c.googleAccount = expectedString, ConfigWrapper::getGoogleAccount),
                 testString("mailgun api key", c -> c.mailgunApiKey = expectedString, ConfigWrapper::getMailgunApiKey),
                 testString("mailgun domain", c -> c.mailgunDomain = expectedString, ConfigWrapper::getMailgunDomain),
@@ -183,47 +68,25 @@ public class ConfigWrapperTest {
         );
     }
 
-    private DynamicTest testString(String description, Consumer<ConfigBuilder> builderSetter, Function<ConfigWrapper, Object> valueExtractor) {
+    private DynamicTest testString(String description, Consumer<Builders.ConfigBuilder> builderSetter, Function<ConfigWrapper, Object> valueExtractor) {
         return testTemplate(description, builderSetter, valueExtractor, expectedString);
     }
 
-    private DynamicTest testTemplate(String description, Consumer<ConfigBuilder> builderSetter, Function<ConfigWrapper, Object> valueExtractor, Object expectedValue) {
+    private DynamicTest testTemplate(String description, Consumer<Builders.ConfigBuilder> builderSetter, Function<ConfigWrapper, Object> valueExtractor, Object expectedValue) {
         return DynamicTest.dynamicTest(description, () -> assertThat(valueExtractor.apply(makeTestee(baseConfigBuilder().with(builderSetter)))).isEqualTo(expectedValue));
     }
 
-    private ConfigWrapper makeTestee(ConfigBuilder builder) {
+    private ConfigWrapper makeTestee(Builders.ConfigBuilder builder) {
         return new ConfigWrapper(builder.build());
     }
 
-    private DynamicTest testInt(String description, Consumer<ConfigBuilder> builderSetter, Function<ConfigWrapper, Object> valueExtractor) {
+    private DynamicTest testInt(String description, Consumer<Builders.ConfigBuilder> builderSetter, Function<ConfigWrapper, Object> valueExtractor) {
         return testTemplate(description, builderSetter, valueExtractor, expectedPositiveInt);
     }
 
-    private DynamicTest testTrue(String description, Consumer<ConfigBuilder> builderSetter, Function<ConfigWrapper, Object> valueExtractor) {
+    private DynamicTest testTrue(String description, Consumer<Builders.ConfigBuilder> builderSetter, Function<ConfigWrapper, Object> valueExtractor) {
         return testTemplate(description, builderSetter, valueExtractor, true);
     }
-
-
-    private final Comparator<Plugin> pluginComparator = (p1, p2) -> {
-        if (Objects.equals(p1.getName(), p2.getName()) &&
-                Objects.equals(p1.getJar(), p2.getJar()) &&
-                Objects.equals(p1.getClassName(), p2.getClassName())) {
-            return 0;
-        } else {
-            return -1;
-        }
-    };
-
-    private final Comparator<GamePlugin> gamePluginComparator = (p1, p2) -> {
-        if (Objects.equals(p1.getName(), p2.getName()) &&
-                Objects.equals(p1.getJar(), p2.getJar()) &&
-                Objects.equals(p1.getClassName(), p2.getClassName()) &&
-                Objects.equals(p1.getTypeName(), p2.getTypeName())) {
-            return 0;
-        } else {
-            return -1;
-        }
-    };
 
     private final List<Plugin> randomPlugins = IntStream.range(0, RandomUtils.nextInt(1, 10))
             .mapToObj(i -> makePlugin(
@@ -240,20 +103,20 @@ public class ConfigWrapperTest {
             ).collect(Collectors.toList());
 
     private Plugin makePlugin(String name, String jar, String className) {
-        final Plugin plugin = new Plugin();
-        plugin.setName(name);
-        plugin.setJar(jar);
-        plugin.setClassName(className);
-        return plugin;
+        return new Builders.PluginBuilder().with(p -> {
+            p.name = name;
+            p.jar = jar;
+            p.className = className;
+        }).build();
     }
 
     private GamePlugin makeGamePlugin(String name, String jar, String className, String typeName) {
-        final GamePlugin plugin = new GamePlugin();
-        plugin.setName(name);
-        plugin.setJar(jar);
-        plugin.setClassName(className);
-        plugin.setTypeName(typeName);
-        return plugin;
+        return new Builders.GamePluginBuilder().with(p -> {
+            p.name = name;
+            p.jar = jar;
+            p.className = className;
+            p.typeName = typeName;
+        }).build();
     }
 
     @TestFactory
@@ -269,19 +132,19 @@ public class ConfigWrapperTest {
     }
 
     private DynamicTest pluginTest(String description,
-                                   Consumer<ConfigBuilder> builderSetter,
+                                   Consumer<Builders.ConfigBuilder> builderSetter,
                                    Function<ConfigWrapper, List<Plugin>> listExtractor) {
         return testTemplateForLists(description, builderSetter, listExtractor, randomPlugins, pluginComparator);
     }
 
     private DynamicTest gamePluginTest(String description,
-                                       Consumer<ConfigBuilder> builderSetter,
+                                       Consumer<Builders.ConfigBuilder> builderSetter,
                                        Function<ConfigWrapper, List<GamePlugin>> listExtractor) {
         return testTemplateForLists(description, builderSetter, listExtractor, randomGamePlugins, gamePluginComparator);
     }
 
     private <T> DynamicTest testTemplateForLists(String description,
-                                                 Consumer<ConfigBuilder> builderSetter,
+                                                 Consumer<Builders.ConfigBuilder> builderSetter,
                                                  Function<ConfigWrapper, List<T>> listExtractor,
                                                  List<T> expectedValue,
                                                  Comparator<T> comparator) {
@@ -290,5 +153,18 @@ public class ConfigWrapperTest {
                         .usingElementComparator(comparator)
                         .containsExactlyElementsOf(expectedValue)
         );
+    }
+
+    @Test
+    @DisplayName("should extract secondary bind ports from homes")
+    void secondaryBindPorts() {
+        final int secondary = RandomUtils.nextInt(1000, 65000);
+        assertThat(makeTestee(baseConfigBuilder().with(c ->
+                c.homes = Arrays.asList(makeHomeWithSecondaryPort(-1), makeHomeWithSecondaryPort(secondary))
+        )).secondaryPorts()).containsExactly(-1, secondary);
+    }
+
+    private Server.Home makeHomeWithSecondaryPort(int secondaryPort) {
+        return new Builders.HomeBuilder().with(h -> h.secondaryPort = secondaryPort).build();
     }
 }
