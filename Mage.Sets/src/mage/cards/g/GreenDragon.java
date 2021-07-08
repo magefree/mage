@@ -72,7 +72,7 @@ class GreenDragonDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isCreature()
+        if (permanent != null && permanent.isCreature(game)
                 && game.getOpponents(permanent.getControllerId()).contains(this.getControllerId())) {
             this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;

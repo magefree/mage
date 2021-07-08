@@ -116,7 +116,7 @@ class FroghemothEffect extends OneShotEffect {
         for (UUID cardId : getTargetPointer().getTargets(game, source)) {
             Card card = game.getCard(cardId);
             if (card != null && game.getState().getZone(cardId) == Zone.GRAVEYARD && cardsToExile.add(card)) {
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     numCounters++;
                 } else {
                     lifeGain++;
