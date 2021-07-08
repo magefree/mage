@@ -203,6 +203,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Tasha's Hideous Laughter", 78, Rarity.RARE, mage.cards.t.TashasHideousLaughter.class));
         cards.add(new SetCardInfo("The Book of Exalted Deeds", 4, Rarity.MYTHIC, mage.cards.t.TheBookOfExaltedDeeds.class));
         cards.add(new SetCardInfo("The Deck of Many Things", 241, Rarity.MYTHIC, mage.cards.t.TheDeckOfManyThings.class));
+        cards.add(new SetCardInfo("Thieves' Tools", 122, Rarity.COMMON, mage.cards.t.ThievesTools.class));
         cards.add(new SetCardInfo("Tiamat", 235, Rarity.MYTHIC, mage.cards.t.Tiamat.class));
         cards.add(new SetCardInfo("Tiger-Tribe Hunter", 163, Rarity.UNCOMMON, mage.cards.t.TigerTribeHunter.class));
         cards.add(new SetCardInfo("Treasure Chest", 252, Rarity.RARE, mage.cards.t.TreasureChest.class));
