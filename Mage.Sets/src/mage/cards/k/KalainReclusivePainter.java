@@ -38,7 +38,7 @@ public final class KalainReclusivePainter extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
 
         // Other creatures you control enter the battlefield with an additional +1/+1 counter on them for each mana from a Treasure spent to cast them.
-        this.addAbility(new SimpleStaticAbility(new KalainReclusivePainterEffect()));
+        this.addAbility(new SimpleStaticAbility(new KalainReclusivePainterEffect()), new ManaPaidSourceWatcher());
     }
 
     private KalainReclusivePainter(final KalainReclusivePainter card) {

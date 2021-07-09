@@ -582,6 +582,8 @@ public enum SubType {
                 return mageObject.isArtifact(game);
             case PlaneswalkerType:
                 return mageObject.isPlaneswalker(game);
+            case SpellType:
+                return mageObject.isInstantOrSorcery(game);
         }
         return false;
     }
