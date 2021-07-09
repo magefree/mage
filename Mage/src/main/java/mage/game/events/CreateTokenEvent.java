@@ -11,6 +11,14 @@ public class CreateTokenEvent extends GameEvent {
 
     private final Map<Token, Integer> tokens = new HashMap<>();
 
+    /**
+     * Multiple tokens per event (Double Season and other effects can change amount and tokens list with it)
+     *
+     * @param source
+     * @param controllerId
+     * @param amount
+     * @param token
+     */
     public CreateTokenEvent(Ability source, UUID controllerId, int amount, Token token) {
         super(GameEvent.EventType.CREATE_TOKEN, null, source, controllerId, amount, false);
         tokens.put(token, amount);

@@ -574,7 +574,7 @@ public enum SubType {
     }
 
     public boolean canGain(MageObject mageObject) {
-        return canGain(null);
+        return canGain(null, mageObject);
     }
 
     public boolean canGain(Game game, MageObject mageObject) {
