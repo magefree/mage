@@ -43,7 +43,7 @@ public class HauntAbility extends TriggeredAbilityImpl {
 
     public HauntAbility(Card card, Effect effect) {
         super(Zone.ALL, effect, false);
-        creatureHaunt = card.isCreature(null);
+        creatureHaunt = card.isCreature();
         addSubAbility(new HauntExileAbility(creatureHaunt));
     }
 

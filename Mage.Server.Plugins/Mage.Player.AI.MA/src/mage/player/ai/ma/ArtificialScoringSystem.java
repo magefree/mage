@@ -68,8 +68,8 @@ public final class ArtificialScoringSystem {
         int score = permanent.getCounters(game).getCount(CounterType.CHARGE) * 30;
         score += permanent.getCounters(game).getCount(CounterType.LEVEL) * 30;
         score -= permanent.getDamage() * 2;
-        if (!canTap(permanent, game)) {
-            score += getTappedScore(permanent);
+        if (!canTap(game, permanent)) {
+            score += getTappedScore(game, permanent);
         }
         if (permanent.getCardType(game).contains(CardType.CREATURE)) {
             final int power = permanent.getPower().getValue();
@@ -106,7 +106,7 @@ public final class ArtificialScoringSystem {
         return score;
     }
 
-    private static boolean canTap(Permanent permanent, Game game) {
+    private static boolean canTap(Game game, Permanent permanent) {
         return !permanent.isTapped()
                 && (!permanent.hasSummoningSickness()
                 || !permanent.getCardType(game).contains(CardType.CREATURE)
@@ -117,10 +117,10 @@ public final class ArtificialScoringSystem {
         return Math.max(0, value);
     }
 
-    public static int getTappedScore(final Permanent permanent) {
-        if (permanent.isCreature(null)) {
+    public static int getTappedScore(Game game, final Permanent permanent) {
+        if (permanent.isCreature(game)) {
             return -100;
-        } else if (permanent.isLand(null)) {
+        } else if (permanent.isLand(game)) {
             return -20; // means probably no mana available  (should be greater than passivity penalty
         } else {
             return -2;

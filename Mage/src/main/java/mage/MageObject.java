@@ -37,6 +37,12 @@ public interface MageObject extends MageItem, Serializable {
         return getCardType(null);
     }
 
+    /**
+     * Return dynamic card types (game isn't null) or static card types (game is null)
+     *
+     * @param game can be null
+     * @return
+     */
     List<CardType> getCardType(Game game);
 
     /**
@@ -151,40 +157,80 @@ public interface MageObject extends MageItem, Serializable {
                 || hasSubtype(SubType.SAGA, game);
     }
 
+    default boolean isCreature() {
+        return isCreature(null);
+    }
+
     default boolean isCreature(Game game) {
         return getCardType(game).contains(CardType.CREATURE);
+    }
+
+    default boolean isArtifact() {
+        return isArtifact(null);
     }
 
     default boolean isArtifact(Game game) {
         return getCardType(game).contains(CardType.ARTIFACT);
     }
 
+    default boolean isLand() {
+        return isLand(null);
+    }
+
     default boolean isLand(Game game) {
         return getCardType(game).contains(CardType.LAND);
+    }
+
+    default boolean isEnchantment() {
+        return isEnchantment(null);
     }
 
     default boolean isEnchantment(Game game) {
         return getCardType(game).contains(CardType.ENCHANTMENT);
     }
 
+    default boolean isInstant() {
+        return isInstant(null);
+    }
+
     default boolean isInstant(Game game) {
         return getCardType(game).contains(CardType.INSTANT);
+    }
+
+    default boolean isSorcery() {
+        return isSorcery(null);
     }
 
     default boolean isSorcery(Game game) {
         return getCardType(game).contains(CardType.SORCERY);
     }
 
+    default boolean isInstantOrSorcery() {
+        return this.isInstant() || this.isSorcery();
+    }
+
     default boolean isInstantOrSorcery(Game game) {
         return this.isInstant(game) || this.isSorcery(game);
+    }
+
+    default boolean isPlaneswalker() {
+        return isPlaneswalker(null);
     }
 
     default boolean isPlaneswalker(Game game) {
         return getCardType(game).contains(CardType.PLANESWALKER);
     }
 
+    default boolean isTribal() {
+        return isTribal(null);
+    }
+
     default boolean isTribal(Game game) {
         return getCardType(game).contains(CardType.TRIBAL);
+    }
+
+    default boolean isPermanent() {
+        return isCreature() || isArtifact() || isPlaneswalker() || isEnchantment() || isLand();
     }
 
     default boolean isPermanent(Game game) {
@@ -214,19 +260,34 @@ public interface MageObject extends MageItem, Serializable {
         return getSuperType().contains(SuperType.WORLD);
     }
 
+    /**
+     * Add card type from static effects (permanently)
+     *
+     * @param cardTypes
+     */
     default void addCardType(CardType... cardTypes) {
         addCardType(null, cardTypes);
     }
 
+    /**
+     * Add card type from dynamic effects (game isn't null) and from static effects (game is null)
+     *
+     * @param game
+     * @param cardTypes
+     */
     default void addCardType(Game game, CardType... cardTypes) {
+        List<CardType> currentCardTypes;
         if (game != null) {
-            game.getState().getCreateMageObjectAttribute(this, game);
+            // dynamic
+            currentCardTypes = game.getState().getCreateMageObjectAttribute(this, game).getCardType();
+        } else {
+            // static
+            currentCardTypes = getCardType();
         }
         for (CardType cardType : cardTypes) {
-            if (getCardType(game).contains(cardType)) {
-                continue;
+            if (!currentCardTypes.contains(cardType)) {
+                currentCardTypes.add(cardType);
             }
-            getCardType(game).add(cardType);
         }
     }
 
@@ -235,11 +296,16 @@ public interface MageObject extends MageItem, Serializable {
     }
 
     default void removeCardType(Game game, CardType... cardTypes) {
+        List<CardType> currentCardTypes;
         if (game != null) {
-            game.getState().getCreateMageObjectAttribute(this, game);
+            // dynamic
+            currentCardTypes = game.getState().getCreateMageObjectAttribute(this, game).getCardType();
+        } else {
+            // static
+            currentCardTypes = getCardType();
         }
         for (CardType cardType : cardTypes) {
-            getCardType(game).remove(cardType);
+            currentCardTypes.remove(cardType);
         }
     }
 
@@ -248,10 +314,15 @@ public interface MageObject extends MageItem, Serializable {
     }
 
     default void removeAllCardTypes(Game game) {
+        List<CardType> currentCardTypes;
         if (game != null) {
-            game.getState().getCreateMageObjectAttribute(this, game);
+            // dynamic
+            currentCardTypes = game.getState().getCreateMageObjectAttribute(this, game).getCardType();
+        } else {
+            // static
+            currentCardTypes = getCardType();
         }
-        getCardType(game).clear();
+        currentCardTypes.clear();
     }
 
     /**

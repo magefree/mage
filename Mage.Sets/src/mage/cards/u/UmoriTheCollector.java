@@ -68,7 +68,7 @@ enum UmoriCondition implements CompanionCondition {
         Set<CardType> cardTypes = new HashSet<>();
         for (Card card : deck) {
             // Lands are fine.
-            if (card.isLand(null)) {
+            if (card.isLand()) {
                 continue;
             }
             // First nonland checked.

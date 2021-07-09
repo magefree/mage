@@ -584,7 +584,7 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 1);
             }
 
-            if (card.isPlaneswalker(null)) {
+            if (card.isPlaneswalker()) {
                 if (card.getName().toLowerCase(Locale.ENGLISH).equals("jace, the mind sculptor")) {
                     thisMaxPower = Math.max(thisMaxPower, 6);
                 }

@@ -24,11 +24,11 @@ public class SunburstAbility extends EntersBattlefieldAbility {
 
     private static final String ruleCreature = "Sunburst <i>(This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)</i>";
     private static final String ruleNonCreature = "Sunburst <i>(This enters the battlefield with a charge counter on it for each color of mana spent to cast it.)</i>";
-    private boolean isCreature;
+    private final boolean isCreature;
 
     public SunburstAbility(Card card) {
         super(new SunburstEffect(), "");
-        isCreature = card.isCreature(null);
+        isCreature = card.isCreature();
     }
 
     public SunburstAbility(final SunburstAbility ability) {

@@ -911,7 +911,7 @@ public class VerifyCardDataTest {
                 Assert.assertNotNull(card);
 
                 // CHECK: all planeswalkers must be legendary
-                if (card.isPlaneswalker(null) && !card.getSuperType().contains(SuperType.LEGENDARY)) {
+                if (card.isPlaneswalker() && !card.getSuperType().contains(SuperType.LEGENDARY)) {
                     errorsList.add("Error: planeswalker must have legendary type: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
@@ -1317,7 +1317,7 @@ public class VerifyCardDataTest {
         }
 
         // spells have only 1 ability
-        if (card.isInstantOrSorcery(null)) {
+        if (card.isInstantOrSorcery()) {
             return;
         }
 

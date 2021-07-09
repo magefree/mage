@@ -148,7 +148,7 @@ public class SuspendAbility extends SpecialAction {
                         .append(" on it.")
                         .append(" At the beginning of your upkeep, remove a time counter. "
                                 + "When the last is removed, cast it without paying its mana cost.")
-                        .append(card.isCreature(null) ? " If you play it this way and it's a creature, "
+                        .append(card.isCreature() ? " If you play it this way and it's a creature, "
                                 + "it gains haste until you lose control of it." : "")
                         .append(")</i>");
             }

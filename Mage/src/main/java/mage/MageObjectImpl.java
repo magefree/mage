@@ -116,11 +116,14 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public List<CardType> getCardType(Game game) {
         if (game != null) {
+            // dynamic
             MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
             if (mageObjectAttribute != null) {
                 return mageObjectAttribute.getCardType();
             }
         }
+
+        // static
         return cardType;
     }
 
@@ -305,7 +308,7 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
-        this.getSubtype().setIsAllCreatureTypes(value && (this.isTribal(null) || this.isCreature(null)));
+        this.getSubtype().setIsAllCreatureTypes(value && (this.isTribal() || this.isCreature()));
     }
 
     @Override

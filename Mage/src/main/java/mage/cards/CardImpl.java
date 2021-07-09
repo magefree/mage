@@ -66,13 +66,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.cardType.addAll(Arrays.asList(cardTypes));
         this.manaCost.load(costs);
         setDefaultColor();
-        if (this.isLand(null)) {
+        if (this.isLand()) {
             Ability ability = new PlayLandAbility(name);
             ability.setSourceId(this.getId());
             abilities.add(ability);
         } else {
             SpellAbility ability = new SpellAbility(manaCost, name, Zone.HAND, spellAbilityType);
-            if (!this.isInstant(null)) {
+            if (!this.isInstant()) {
                 ability.setTiming(TimingRule.SORCERY);
             }
             ability.setSourceId(this.getId());

@@ -44,7 +44,7 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
     }
 
     private String getCommanderTypeName(Card commander) {
-        return commander.isInstantOrSorcery(null) ? COMMANDER_NAME_SIGNATURE_SPELL : COMMANDER_NAME_OATHBREAKER;
+        return commander.isInstantOrSorcery() ? COMMANDER_NAME_SIGNATURE_SPELL : COMMANDER_NAME_OATHBREAKER;
     }
 
     @Override
@@ -90,7 +90,7 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
         super.addCommander(card, player);
 
         // prepare signature and commanders info
-        if (card.isInstantOrSorcery(null)) {
+        if (card.isInstantOrSorcery()) {
             addInnerCommander(this.playerSignatureSpells, player.getId(), card.getId());
         } else {
             addInnerCommander(this.playerOathbreakers, player.getId(), card.getId());

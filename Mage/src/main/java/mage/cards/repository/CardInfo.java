@@ -237,7 +237,7 @@ public class CardInfo {
         }
 
         // Starting loyalty
-        if (card.isPlaneswalker(null)) {
+        if (card.isPlaneswalker()) {
             for (Ability ab : card.getAbilities()) {
                 if (ab instanceof PlaneswalkerEntersWithLoyaltyCountersAbility) {
                     this.startingLoyalty = "" + ((PlaneswalkerEntersWithLoyaltyCountersAbility) ab).getStartingLoyalty();

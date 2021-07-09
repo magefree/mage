@@ -123,7 +123,7 @@ public class Oathbreaker extends Vintage {
         } else {
             // collect data
             for (Card commander : deck.getSideboard()) {
-                if (commander.isInstantOrSorcery(null)) {
+                if (commander.isInstantOrSorcery()) {
                     signatureSpells.add(commander.getName());
                 } else {
                     if (commander.hasCardTypeForDeckbuilding(CardType.PLANESWALKER)) {

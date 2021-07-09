@@ -80,7 +80,7 @@ public class MockCard extends CardImpl {
             this.isModalDoubleFacesCard = true;
         }
 
-        if (this.isPlaneswalker(null)) {
+        if (this.isPlaneswalker()) {
             String startingLoyaltyString = card.getStartingLoyalty();
             if (startingLoyaltyString.isEmpty()) {
             } else {

@@ -217,11 +217,6 @@ public class Dungeon implements CommandObject {
     }
 
     @Override
-    public List<CardType> getCardType() {
-        return emptySet;
-    }
-
-    @Override
     public List<CardType> getCardType(Game game) {
         return emptySet;
     }

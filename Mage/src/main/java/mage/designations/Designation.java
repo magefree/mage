@@ -30,6 +30,7 @@ import java.util.UUID;
  */
 public abstract class Designation implements MageObject, Copyable<Designation> {
 
+    private static final List<CardType> emptySet = new ArrayList<>();
     private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCostsImpl emptyCost = new ManaCostsImpl();
 
@@ -152,7 +153,7 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
 
     @Override
     public List<CardType> getCardType(Game game) {
-        return new ArrayList<>();
+        return emptySet;
     }
 
     @Override

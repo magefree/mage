@@ -161,10 +161,12 @@ class BestowEntersBattlefieldEffect extends ReplacementEffectImpl {
         if (bestowPermanent == null || !bestowPermanent.hasSubtype(SubType.AURA, game)) {
             return false;
         }
+
+        // change types permanently
         MageObject basicObject = bestowPermanent.getBasicMageObject(game);
         if (basicObject != null && !basicObject.getSubtype().contains(SubType.AURA)) {
-            basicObject.getSubtype(null).add(SubType.AURA);
-            basicObject.removeCardType(game, CardType.CREATURE);
+            basicObject.addSubType(SubType.AURA);
+            basicObject.removeCardType(CardType.CREATURE);
         }
         return false;
     }
