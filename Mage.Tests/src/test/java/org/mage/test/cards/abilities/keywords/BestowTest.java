@@ -50,8 +50,10 @@ public class BestowTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Gods Willing", "Silent Artisan");
         setChoice(playerA, "White");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         // because of protection the Hopeful Eidolon should be a creature on the battlefield
         assertPermanentCount(playerA, "Silent Artisan", 1);
@@ -68,8 +70,10 @@ public class BestowTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Silent Artisan");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silent Artisan", 1);
         assertPowerToughness(playerA, "Silent Artisan", 4, 6);
@@ -96,8 +100,10 @@ public class BestowTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Experiment One");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Boon Satyr using bestow", "Silent Artisan");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         // because Boon Satyr is no creature on the battlefield, evolve may not trigger
         assertPermanentCount(playerA, "Boon Satyr", 1);
@@ -126,8 +132,10 @@ public class BestowTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Silvercoat Lion");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         // because Boon Satyr is no creature on the battlefield, evolve may not trigger
         assertLife(playerA, 20);
@@ -160,8 +168,10 @@ public class BestowTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Boon Satyr using bestow", "Silent Artisan");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         // because Boon Satyr is no creature on the battlefield, evolve may not trigger
         assertPermanentCount(playerA, "Silent Artisan", 1);
@@ -249,11 +259,16 @@ public class BestowTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
+        // B can't cast counter spell due CMC
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hypnotic Siren using bestow", "Silvercoat Lion");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disdainful Stroke", "Hypnotic Siren");
+        checkStackSize("after", 1, PhaseStep.PRECOMBAT_MAIN, playerB, 1);
+        checkPlayableAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Disdainful Stroke", false);
+        //castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disdainful Stroke", "Hypnotic Siren");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         //
         assertHandCount(playerA, "Hypnotic Siren", 0);
@@ -287,8 +302,11 @@ public class BestowTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mogis's Warhound using bestow", "Silvercoat Lion");
         castSpell(1, PhaseStep.END_TURN, playerB, "Chandra's Outrage", "Silvercoat Lion");
+
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 18); // -2 from Chandra's Outrage
         assertLife(playerB, 18); // -2 from attack of Mogis's Warhound
@@ -337,12 +355,17 @@ public class BestowTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Nighthowler using bestow", "Alesha, Who Smiles at Death");
 
+        // attacks by Alesha and return card on trigger
         attack(2, playerB, "Alesha, Who Smiles at Death");
+        setChoice(playerB, "Yes"); // use trigger
+        addTarget(playerB, "Pillarfield Ox"); // target card to return
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Chandra's Outrage", "Alesha, Who Smiles at Death");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerB, 18); // -2 from Chandra's Outrage
         assertLife(playerA, 16); // -3 from attack Alesha with bestowed Nighthowler
@@ -367,8 +390,11 @@ public class BestowTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Sightless Brawler");
 
         attack(1, playerA, "Sightless Brawler");
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerB, 20);
         assertTapped("Sightless Brawler", false);
@@ -387,8 +413,11 @@ public class BestowTest extends CardTestPlayerBase {
 
         attack(1, playerA, "Sightless Brawler");
         attack(1, playerA, "Elite Vanguard");
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerB, 15);
         assertTapped("Sightless Brawler", true);
@@ -407,8 +436,11 @@ public class BestowTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sightless Brawler using bestow", "Elite Vanguard");
         attack(1, playerA, "Elite Vanguard");
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Sightless Brawler", 0);
         assertLife(playerB, 20);
@@ -431,8 +463,11 @@ public class BestowTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sightless Brawler using bestow", "Elite Vanguard");
         attack(1, playerA, "Elite Vanguard");
         attack(1, playerA, "Memnite");
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Sightless Brawler", 0);
         assertLife(playerB, 14);
@@ -466,8 +501,11 @@ public class BestowTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nighthowler using bestow", "Silvercoat Lion");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Song of the Dryads", "Silvercoat Lion");
+
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Song of the Dryads", 1);
 
@@ -497,8 +535,10 @@ public class BestowTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nylea's Emissary using bestow", "Silvercoat Lion");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Nylea's Emissary", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 5, 5);

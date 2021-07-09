@@ -25,6 +25,7 @@ public class GristTheHungerTideTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, grist);
         addCard(Zone.LIBRARY, playerA, grist);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -49,7 +50,9 @@ public class GristTheHungerTideTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, leyline);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard");
+        setChoice(playerA, grist);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -71,6 +74,7 @@ public class GristTheHungerTideTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, grist);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
