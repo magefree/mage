@@ -157,7 +157,7 @@ class AureliasFuryCantCastEffect extends ContinuousRuleModifyingEffectImpl {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null && player.getId().equals(event.getPlayerId())) {
             Card card = game.getCard(event.getSourceId());
-            if (card != null && !card.isCreature()) {
+            if (card != null && !card.isCreature(game)) {
                 return true;
             }
         }
@@ -183,7 +183,7 @@ class AureliasFuryDamagedByWatcher extends Watcher {
         switch (event.getType()) {
             case DAMAGED_PERMANENT:
                 Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.isCreature()) {
+                if (permanent != null && permanent.isCreature(game)) {
                     damagedCreatures.add(event.getTargetId());
                 }
                 return;

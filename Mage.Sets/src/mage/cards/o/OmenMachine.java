@@ -18,7 +18,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -98,7 +97,7 @@ class OmenMachineEffect2 extends OneShotEffect {
             Card card = player.getLibrary().getFromTop(game);
             if (card != null) {
                 player.moveCards(card, Zone.EXILED, source, game);
-                if (card.isLand()) {
+                if (card.isLand(game)) {
                     player.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {
                     player.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));

@@ -87,7 +87,7 @@ class MagusOfTheBridgeTriggeredAbility extends TriggeredAbilityImpl {
             Permanent permanent = zEvent.getTarget();
             Player controller = game.getPlayer(getControllerId());
             return permanent != null && controller != null
-                    && permanent.isCreature() && controller.hasOpponent(permanent.getOwnerId(), game);
+                    && permanent.isCreature(game) && controller.hasOpponent(permanent.getOwnerId(), game);
         }
         return false;
     }

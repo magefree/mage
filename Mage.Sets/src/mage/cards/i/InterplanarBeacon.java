@@ -89,6 +89,6 @@ class InterplanarBeaconManaCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         MageObject object = source.getSourceObject(game);
         return object instanceof Spell
-                && object.isPlaneswalker();
+                && object.isPlaneswalker(game);
     }
 }

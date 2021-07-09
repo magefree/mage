@@ -63,7 +63,7 @@ class ImpulsiveWagerEffect extends OneShotEffect {
             DiscardCardCost cost = (DiscardCardCost) source.getCosts().get(0);
             if (cost != null) {
                 List<Card> cards = cost.getCards();
-                if (cards.size() == 1 && cards.get(0).isLand()) {
+                if (cards.size() == 1 && cards.get(0).isLand(game)) {
                     Effect effect = new AddCountersTargetEffect(CounterType.BOUNTY.createInstance());
                     effect.setTargetPointer(getTargetPointer());
                     effect.apply(game, source);

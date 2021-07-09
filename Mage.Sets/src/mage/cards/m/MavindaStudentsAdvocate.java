@@ -1,7 +1,6 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -126,7 +125,7 @@ class MavindaStudentsAdvocateCostEffect extends CostModificationEffectImpl {
                 .flatMap(Collection::stream)
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .filter(MageObject::isCreature)
+                .filter(permanent -> permanent.isCreature(game))
                 .map(Controllable::getControllerId)
                 .noneMatch(source::isControlledBy);
     }

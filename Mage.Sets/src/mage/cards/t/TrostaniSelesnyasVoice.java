@@ -22,7 +22,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -78,7 +77,7 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && permanent.isControlledBy(this.controllerId)
                 && !Objects.equals(event.getTargetId(), this.getSourceId())) {
             Effect effect = this.getEffects().get(0);

@@ -33,7 +33,17 @@ public interface MageObject extends MageItem, Serializable {
 
     void setName(String name);
 
-    ArrayList<CardType> getCardType();
+    default List<CardType> getCardType() {
+        return getCardType(null);
+    }
+
+    /**
+     * Return dynamic card types (game isn't null) or static card types (game is null)
+     *
+     * @param game can be null
+     * @return
+     */
+    List<CardType> getCardType(Game game);
 
     /**
      * Return original object's subtypes
@@ -141,50 +151,90 @@ public interface MageObject extends MageItem, Serializable {
 
     void setZoneChangeCounter(int value, Game game);
 
-    default boolean isHistoric() {
-        return getCardType().contains(CardType.ARTIFACT)
+    default boolean isHistoric(Game game) {
+        return getCardType(game).contains(CardType.ARTIFACT)
                 || getSuperType().contains(SuperType.LEGENDARY)
-                || getSubtype().contains(SubType.SAGA);
+                || hasSubtype(SubType.SAGA, game);
     }
 
     default boolean isCreature() {
-        return getCardType().contains(CardType.CREATURE);
+        return isCreature(null);
+    }
+
+    default boolean isCreature(Game game) {
+        return getCardType(game).contains(CardType.CREATURE);
     }
 
     default boolean isArtifact() {
-        return getCardType().contains(CardType.ARTIFACT);
+        return isArtifact(null);
+    }
+
+    default boolean isArtifact(Game game) {
+        return getCardType(game).contains(CardType.ARTIFACT);
     }
 
     default boolean isLand() {
-        return getCardType().contains(CardType.LAND);
+        return isLand(null);
+    }
+
+    default boolean isLand(Game game) {
+        return getCardType(game).contains(CardType.LAND);
     }
 
     default boolean isEnchantment() {
-        return getCardType().contains(CardType.ENCHANTMENT);
+        return isEnchantment(null);
+    }
+
+    default boolean isEnchantment(Game game) {
+        return getCardType(game).contains(CardType.ENCHANTMENT);
     }
 
     default boolean isInstant() {
-        return getCardType().contains(CardType.INSTANT);
+        return isInstant(null);
+    }
+
+    default boolean isInstant(Game game) {
+        return getCardType(game).contains(CardType.INSTANT);
     }
 
     default boolean isSorcery() {
-        return getCardType().contains(CardType.SORCERY);
+        return isSorcery(null);
+    }
+
+    default boolean isSorcery(Game game) {
+        return getCardType(game).contains(CardType.SORCERY);
     }
 
     default boolean isInstantOrSorcery() {
         return this.isInstant() || this.isSorcery();
     }
 
+    default boolean isInstantOrSorcery(Game game) {
+        return this.isInstant(game) || this.isSorcery(game);
+    }
+
     default boolean isPlaneswalker() {
-        return getCardType().contains(CardType.PLANESWALKER);
+        return isPlaneswalker(null);
+    }
+
+    default boolean isPlaneswalker(Game game) {
+        return getCardType(game).contains(CardType.PLANESWALKER);
     }
 
     default boolean isTribal() {
-        return getCardType().contains(CardType.TRIBAL);
+        return isTribal(null);
+    }
+
+    default boolean isTribal(Game game) {
+        return getCardType(game).contains(CardType.TRIBAL);
     }
 
     default boolean isPermanent() {
         return isCreature() || isArtifact() || isPlaneswalker() || isEnchantment() || isLand();
+    }
+
+    default boolean isPermanent(Game game) {
+        return isCreature(game) || isArtifact(game) || isPlaneswalker(game) || isEnchantment(game) || isLand(game);
     }
 
     default boolean isLegendary() {
@@ -210,11 +260,69 @@ public interface MageObject extends MageItem, Serializable {
         return getSuperType().contains(SuperType.WORLD);
     }
 
-    default void addCardType(CardType cardType) {
-        if (getCardType().contains(cardType)) {
-            return;
+    /**
+     * Add card type from static effects (permanently)
+     *
+     * @param cardTypes
+     */
+    default void addCardType(CardType... cardTypes) {
+        addCardType(null, cardTypes);
+    }
+
+    /**
+     * Add card type from dynamic effects (game isn't null) and from static effects (game is null)
+     *
+     * @param game
+     * @param cardTypes
+     */
+    default void addCardType(Game game, CardType... cardTypes) {
+        List<CardType> currentCardTypes;
+        if (game != null) {
+            // dynamic
+            currentCardTypes = game.getState().getCreateMageObjectAttribute(this, game).getCardType();
+        } else {
+            // static
+            currentCardTypes = getCardType();
         }
-        getCardType().add(cardType);
+        for (CardType cardType : cardTypes) {
+            if (!currentCardTypes.contains(cardType)) {
+                currentCardTypes.add(cardType);
+            }
+        }
+    }
+
+    default void removeCardType(CardType... cardTypes) {
+        removeCardType(null, cardTypes);
+    }
+
+    default void removeCardType(Game game, CardType... cardTypes) {
+        List<CardType> currentCardTypes;
+        if (game != null) {
+            // dynamic
+            currentCardTypes = game.getState().getCreateMageObjectAttribute(this, game).getCardType();
+        } else {
+            // static
+            currentCardTypes = getCardType();
+        }
+        for (CardType cardType : cardTypes) {
+            currentCardTypes.remove(cardType);
+        }
+    }
+
+    default void removeAllCardTypes() {
+        removeAllCardTypes(null);
+    }
+
+    default void removeAllCardTypes(Game game) {
+        List<CardType> currentCardTypes;
+        if (game != null) {
+            // dynamic
+            currentCardTypes = game.getState().getCreateMageObjectAttribute(this, game).getCardType();
+        } else {
+            // static
+            currentCardTypes = getCardType();
+        }
+        currentCardTypes.clear();
     }
 
     /**
@@ -251,7 +359,7 @@ public interface MageObject extends MageItem, Serializable {
      */
     default void addSubType(Game game, SubType... subTypes) {
         for (SubType subType : subTypes) {
-            if (subType.canGain(this)
+            if (subType.canGain(game, this)
                     && !hasSubtype(subType, game)) {
                 game.getState().getCreateMageObjectAttribute(this, game).getSubtype().add(subType);
             }
@@ -326,20 +434,21 @@ public interface MageObject extends MageItem, Serializable {
      * Checks whether two cards share card types.
      *
      * @param otherCard
+     * @param game
      * @return
      */
-    default boolean shareTypes(Card otherCard) {
-        return this.shareTypes(otherCard, false);
+    default boolean shareTypes(Card otherCard, Game game) {
+        return this.shareTypes(otherCard, game, false);
     }
 
-    default boolean shareTypes(Card otherCard, boolean permanentOnly) {
+    default boolean shareTypes(Card otherCard, Game game, boolean permanentOnly) {
 
         if (otherCard == null) {
             throw new IllegalArgumentException("Params can't be null");
         }
 
-        for (CardType type : getCardType()) {
-            if (otherCard.getCardType().contains(type)
+        for (CardType type : getCardType(game)) {
+            if (otherCard.getCardType(game).contains(type)
                     && (!permanentOnly || type.isPermanentType())) {
                 return true;
             }
@@ -349,10 +458,10 @@ public interface MageObject extends MageItem, Serializable {
     }
 
     default boolean shareCreatureTypes(Game game, MageObject otherCard) {
-        if (!isCreature() && !isTribal()) {
+        if (!isCreature(game) && !isTribal(game)) {
             return false;
         }
-        if (!otherCard.isCreature() && !otherCard.isTribal()) {
+        if (!otherCard.isCreature(game) && !otherCard.isTribal(game)) {
             return false;
         }
         boolean isAllA = this.isAllCreatureTypes(game);
@@ -391,10 +500,6 @@ public interface MageObject extends MageItem, Serializable {
      * @param value
      */
     void setIsAllCreatureTypes(Game game, boolean value);
-
-    default void addCardTypes(ArrayList<CardType> cardType) {
-        getCardType().addAll(cardType);
-    }
 
     List<TextPart> getTextParts();
 

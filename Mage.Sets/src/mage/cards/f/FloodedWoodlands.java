@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
-import mage.abilities.effects.PayCostToAttackBlockEffectImpl.RestrictType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -60,7 +59,7 @@ class FloodedWoodlandsCostToAttackBlockEffect extends PayCostToAttackBlockEffect
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getSourceId());
         return (permanent != null
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && permanent.getColor(game).isGreen());
     }
 

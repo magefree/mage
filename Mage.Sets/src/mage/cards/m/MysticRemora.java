@@ -75,7 +75,7 @@ class MysticRemoraTriggeredAbility extends TriggeredAbilityImpl {
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             if (event.getType() == GameEvent.EventType.SPELL_CAST) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && !spell.isCreature()) {
+                if (spell != null && !spell.isCreature(game)) {
                     Player controller = game.getPlayer(game.getControllerId(this.controllerId));
                     Player player = game.getPlayer(spell.getControllerId());
                     if (!Objects.equals(controller, player)) {

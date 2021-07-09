@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 import java.util.Objects;
@@ -61,7 +60,7 @@ class CityOfTraitorsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanent(event.getTargetId());
         return land != null
-                && land.isLand()
+                && land.isLand(game)
                 && land.isControlledBy(this.controllerId)
                 && !Objects.equals(event.getTargetId(), this.getSourceId());
     }

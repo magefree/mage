@@ -97,7 +97,7 @@ class GoblinArtisansTarget extends TargetSpell {
             Permanent permanent = ((StackAbility) stackObject).getSourcePermanentOrLKI(game);
             if (permanent != null
                     && !sourceRef.refersTo(permanent, game)
-                    && permanent.isCreature()
+                    && permanent.isCreature(game)
                     && "Goblin Artisans".equals(permanent.getName())
                     && stackObject
                     .getStackAbility()

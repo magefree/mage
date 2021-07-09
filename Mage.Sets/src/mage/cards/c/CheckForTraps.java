@@ -74,7 +74,7 @@ class CheckForTrapsEffect extends OneShotEffect {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 controller.moveCards(card, Zone.EXILED, source, game);
-                if (card.isInstant() || card.hasAbility(FlashAbility.getInstance(), game)) {
+                if (card.isInstant(game) || card.hasAbility(FlashAbility.getInstance(), game)) {
                     opponentLoseLife = true;
                 }
             }

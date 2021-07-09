@@ -83,7 +83,7 @@ class EtherealAbsolutionEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        if (card.isCreature()) {
+        if (card.isCreature(game)) {
             new CreateTokenEffect(new WhiteBlackSpiritToken()).apply(game, source);
         }
         return player.moveCards(card, Zone.EXILED, source, game);

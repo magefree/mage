@@ -60,7 +60,7 @@ class BonusRoundDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && spell.isInstantOrSorcery()) {
+        if (spell != null && spell.isInstantOrSorcery(game)) {
             this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
             return true;
         }

@@ -64,10 +64,10 @@ class InterdictPredicate implements Predicate<StackObject> {
         if (input instanceof StackAbility && ((StackAbility) input).getAbilityType() == AbilityType.ACTIVATED) {
             MageObject sourceObject = ((StackAbility) input).getSourceObject(game);
             if (sourceObject != null) {
-                return (sourceObject.isArtifact()
-                        || sourceObject.isEnchantment()
-                        || sourceObject.isCreature()
-                        || sourceObject.isLand());
+                return (sourceObject.isArtifact(game)
+                        || sourceObject.isEnchantment(game)
+                        || sourceObject.isCreature(game)
+                        || sourceObject.isLand(game));
             }
         }
         return false;

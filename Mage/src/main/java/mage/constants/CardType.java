@@ -6,6 +6,7 @@ import mage.game.Game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author North
@@ -70,7 +71,7 @@ public enum CardType {
      * @return
      */
     public static CardType[] mergeTypes(CardType[] a, CardType[] b) {
-        ArrayList<CardType> cardTypes = new ArrayList<>();
+        List<CardType> cardTypes = new ArrayList<>();
         cardTypes.addAll(Arrays.asList(a));
         cardTypes.addAll(Arrays.asList(b));
         return cardTypes.toArray(new CardType[0]);
@@ -90,7 +91,7 @@ public enum CardType {
 
         @Override
         public boolean apply(MageObject input, Game game) {
-            return input.getCardType().contains(cardType);
+            return input.getCardType(game).contains(cardType);
         }
 
         @Override

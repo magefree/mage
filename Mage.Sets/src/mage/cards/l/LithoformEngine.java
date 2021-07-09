@@ -87,7 +87,7 @@ enum LithoformEnginePredicate implements Predicate<StackObject> {
 
     @Override
     public boolean apply(StackObject input, Game game) {
-        return input.isPermanent();
+        return input.isPermanent(game);
     }
 }
 

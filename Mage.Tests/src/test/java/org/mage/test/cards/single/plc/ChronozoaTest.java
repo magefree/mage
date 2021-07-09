@@ -56,7 +56,7 @@ public class ChronozoaTest extends CardTestPlayerBase {
     // The original Chronozoa card should be in graveyard
     assertGraveyardCount(playerA, 1);
 
-    final List<Permanent> creatures = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE);
+    final List<Permanent> creatures = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE, currentGame);
     Assert.assertEquals(2, creatures.size());
 
     for (final Permanent creature : creatures) {
@@ -94,7 +94,7 @@ public class ChronozoaTest extends CardTestPlayerBase {
     assertGraveyardCount(playerB, 1);
 
     // Chronozoa shouldn't duplicate
-    final List<Permanent> creatures = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE);
+    final List<Permanent> creatures = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE, currentGame);
     Assert.assertTrue(creatures.isEmpty());
 
   }

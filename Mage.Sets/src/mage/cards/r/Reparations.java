@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -73,7 +72,7 @@ class ReparationsTriggeredAbility extends TriggeredAbilityImpl {
                 return true;
             }
             if (targetPermanent != null
-                    && targetPermanent.isCreature()
+                    && targetPermanent.isCreature(game)
                     && targetPermanent.isControlledBy(controllerId)) {
                 return true;
             }

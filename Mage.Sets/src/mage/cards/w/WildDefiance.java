@@ -63,11 +63,11 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isControlledBy(this.controllerId) && permanent.isCreature()) {
+        if (permanent != null && permanent.isControlledBy(this.controllerId) && permanent.isCreature(game)) {
             MageObject object = game.getObject(event.getSourceId());
             if (object instanceof Spell) {
                 Card c = (Spell) object;
-                if (c.isInstantOrSorcery()) {
+                if (c.isInstantOrSorcery(game)) {
                     if (getTargets().isEmpty()) {
                         for (Effect effect : getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getTargetId()));

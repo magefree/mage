@@ -109,7 +109,7 @@ class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl {
         }
         if (event.getType() == GameEvent.EventType.DAMAGED_PERMANENT && ((DamagedEvent) event).isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.isPlaneswalker() && permanent.isControlledBy(this.getControllerId())) {
+            if (permanent != null && permanent.isPlaneswalker(game) && permanent.isControlledBy(this.getControllerId())) {
                 if (!game.getPhase().getStep().equals(stepTriggeredPlansewalker) || game.getTurnNum() != turnTriggeredPlaneswalker) {
                     stepTriggeredPlansewalker = game.getPhase().getStep();
                     turnTriggeredPlaneswalker = game.getTurnNum();

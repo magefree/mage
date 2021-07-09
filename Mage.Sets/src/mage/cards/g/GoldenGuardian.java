@@ -94,7 +94,7 @@ class GoldenGuardianEffect extends OneShotEffect {
         Permanent creature2 = game.getPermanent(source.getFirstTarget());
         // 20110930 - 701.10
         if (creature1 != null && creature2 != null) {
-            if (creature1.isCreature() && creature2.isCreature()) {
+            if (creature1.isCreature(game) && creature2.isCreature(game)) {
                 return creature1.fight(creature2, source, game);
             }
         }

@@ -73,7 +73,7 @@ class MysteriousPathlighterEffect extends ReplacementEffectImpl {
         return permanent instanceof PermanentCard
                 && ((PermanentCard) permanent).getCard() instanceof AdventureCard
                 && permanent.isControlledBy(source.getControllerId())
-                && permanent.isCreature();
+                && permanent.isCreature(game);
     }
 
     @Override

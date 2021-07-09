@@ -79,7 +79,7 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
                 return false;
             }
             // play land check
-            if (card.isLand()
+            if (card.isLand(game)
                     && !card.isBasic()) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
                     if (permanent != null) {

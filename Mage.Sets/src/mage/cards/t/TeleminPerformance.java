@@ -67,7 +67,7 @@ class TeleminPerformanceEffect extends OneShotEffect {
                 CardsImpl reveal = new CardsImpl();
                 for (Card card : opponent.getLibrary().getCards(game)) {
                     reveal.add(card);
-                    if (card.isCreature()) {
+                    if (card.isCreature(game)) {
                         creature = card;
                         break;
                     } else {

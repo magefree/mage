@@ -76,7 +76,7 @@ class KarnTheGreatCreatorCantActivateEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.isArtifact() && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
+        return permanent.isArtifact(game) && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
     }
 
     @Override
@@ -116,8 +116,8 @@ class KarnTheGreatCreatorAnimateEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
-                    if (!artifact.isCreature()) {
-                        artifact.addCardType(CardType.CREATURE);
+                    if (!artifact.isCreature(game)) {
+                        artifact.addCardType(game, CardType.CREATURE);
                     }
                 }
                 break;

@@ -8,26 +8,27 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
  * FAQ 2013/01/11
- *
+ * <p>
  * 702.98. Evolve
- *
+ * <p>
  * 702.98a Evolve is a triggered ability. "Evolve" means "Whenever a creature
  * enters the battlefield under your control, if that creature's power is
  * greater than this creature's power and/or that creature's toughness is
  * greater than this creature's toughness, put a +1/+1 counter on this
  * creature."
- *
+ * <p>
  * 702.98b If a creature has multiple instances of evolve, each triggers
  * separately
- *
+ * <p>
  * Rulings
- *
+ * <p>
  * When comparing the stats of the two creatures, you always compare power to
  * power and toughness to toughness. Whenever a creature enters the battlefield
  * under your control, check its power and toughness against the power and
@@ -81,9 +82,9 @@ public class EvolveAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!event.getTargetId().equals(this.getSourceId())) {
-            Permanent triggeringCreature = game.getPermanent(event.getTargetId());
+            Permanent triggeringCreature = ((EntersTheBattlefieldEvent) event).getTarget();
             if (triggeringCreature != null
-                    && triggeringCreature.isCreature()
+                    && triggeringCreature.isCreature(game)
                     && triggeringCreature.isControlledBy(this.controllerId)) {
                 Permanent sourceCreature = game.getPermanent(sourceId);
                 if (sourceCreature != null && isPowerOrThoughnessGreater(sourceCreature, triggeringCreature)) {

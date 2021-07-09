@@ -101,7 +101,7 @@ class PrismaticBridgeEffect extends OneShotEffect {
         Card toBattlefield = null;
         for (Card card : controller.getLibrary().getCards(game)) {
             toReveal.add(card);
-            if (card.isCreature() || card.isPlaneswalker()) {
+            if (card.isCreature(game) || card.isPlaneswalker(game)) {
                 toBattlefield = card;
                 break;
             }

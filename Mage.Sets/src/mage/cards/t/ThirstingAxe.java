@@ -97,7 +97,7 @@ class CombatDamageToCreatureWatcher extends Watcher {
             return;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null || !permanent.isCreature()) {
+        if (permanent == null || !permanent.isCreature(game)) {
             return;
         }
         MageObjectReference damageSource = new MageObjectReference(event.getSourceId(), game);

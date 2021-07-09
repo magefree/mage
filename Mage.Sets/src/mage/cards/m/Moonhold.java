@@ -136,7 +136,7 @@ class MoonholdEffect2 extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getPlayerId().equals(source.getFirstTarget())) {
             Card card = game.getCard(event.getSourceId());
-            if (card != null && card.isCreature()) {
+            if (card != null && card.isCreature(game)) {
                 return true;
             }
         }

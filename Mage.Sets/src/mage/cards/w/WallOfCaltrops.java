@@ -73,7 +73,7 @@ class WallOfCaltropsAbility extends BlocksSourceTriggeredAbility {
         if (event.getSourceId().equals(this.getSourceId())) {
             Permanent targetPermanent = game.getPermanent(event.getTargetId());
             if (targetPermanent != null
-                    && targetPermanent.isCreature()) {
+                    && targetPermanent.isCreature(game)) {
                 CombatGroup group = game.getCombat().findGroup(targetPermanent.getId());
                 if (group != null) {
                     for (UUID blockerId : group.getBlockers()) {

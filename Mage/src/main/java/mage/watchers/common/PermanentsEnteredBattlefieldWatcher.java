@@ -58,7 +58,7 @@ public class PermanentsEnteredBattlefieldWatcher extends Watcher {
             for (Permanent permanent : enteringBattlefieldLastTurn.get(sourcePermanent.getControllerId())) {
                 if (!permanent.getId().equals(sourcePermanent.getId())
                         //|| permanent.getZoneChangeCounter(game) == sourcePermanent.getZoneChangeCounter(game) why is this needed?
-                        && permanent.isCreature()) {
+                        && permanent.isCreature(game)) {
                     return true;
                 }
             }

@@ -81,7 +81,7 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell == null || !spell.isInstantOrSorcery()) {
+        if (spell == null || !spell.isInstantOrSorcery(game)) {
             return false;
         }
         UUID targetGolem = null;

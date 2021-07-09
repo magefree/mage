@@ -64,7 +64,7 @@ class PresenceOfTheMasterTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && (spell.isEnchantment())){
+        if (spell != null && (spell.isEnchantment(game))){
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
             }

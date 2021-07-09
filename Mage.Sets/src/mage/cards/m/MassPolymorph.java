@@ -67,7 +67,7 @@ class MassPolymorphEffect extends OneShotEffect {
             Set<Card> creatureCards = new LinkedHashSet<>();
             for (Card card : controller.getLibrary().getCards(game)) {
                 revealed.add(card);
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     creatureCards.add(card);
                     if (creatureCards.size() == count) {
                         break;

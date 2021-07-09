@@ -22,7 +22,6 @@ import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 
@@ -116,9 +115,9 @@ class GuardianBeastConditionalEffect extends ContinuousRuleModifyingEffectImpl {
         if (event.getType() == GameEvent.EventType.GAIN_CONTROL
                 || ((event.getType() == GameEvent.EventType.ATTACH
                 || event.getType() == GameEvent.EventType.TARGET)
-                && spell != null && spell.isEnchantment() && spell.hasSubtype(SubType.AURA, game))) {
+                && spell != null && spell.isEnchantment(game) && spell.hasSubtype(SubType.AURA, game))) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_ARTIFACTS_NON_CREATURE, source.getControllerId(), game)) {
-                if (perm != null && Objects.equals(perm.getId(), targetPermanent.getId()) && !perm.isCreature()) {
+                if (perm != null && Objects.equals(perm.getId(), targetPermanent.getId()) && !perm.isCreature(game)) {
                     return true;
                 }
             }

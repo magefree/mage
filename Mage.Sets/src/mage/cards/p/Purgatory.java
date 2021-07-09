@@ -22,7 +22,6 @@ import mage.filter.FilterCard;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -91,7 +90,7 @@ class PurgatoryTriggeredAbility extends TriggeredAbilityImpl {
                 Permanent permanent = zEvent.getTarget();
                 if (permanent != null && zEvent.isDiesEvent()
                         && !(permanent instanceof PermanentToken)
-                        && permanent.isCreature()
+                        && permanent.isCreature(game)
                         && permanent.isOwnedBy(controller.getId())) {
         
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));

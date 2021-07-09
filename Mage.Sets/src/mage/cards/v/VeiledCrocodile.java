@@ -68,7 +68,7 @@ class VeiledCrocodileStateTriggeredAbility extends StateTriggeredAbility {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         if (getSourcePermanentIfItStillExists(game) != null) {
-            return getSourcePermanentIfItStillExists(game).isEnchantment();
+            return getSourcePermanentIfItStillExists(game).isEnchantment(game);
         }
         return false;
     }

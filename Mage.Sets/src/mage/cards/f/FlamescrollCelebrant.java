@@ -162,7 +162,7 @@ class RevelInSilenceEffect extends ContinuousRuleModifyingEffectImpl {
                     return false;
                 }
                 Permanent permanent = game.getPermanent(event.getSourceId());
-                return permanent != null && permanent.isPlaneswalker();
+                return permanent != null && permanent.isPlaneswalker(game);
         }
         return false;
     }

@@ -59,7 +59,7 @@ enum WhiplashTrapCondition implements Condition {
                 if (permanents != null) {
                     int count = 0;
                     for (Permanent permanent : permanents) {
-                        if (permanent.isCreature()) {
+                        if (permanent.isCreature(game)) {
                             count++;
                             if (count == 2) {
                                 return true;

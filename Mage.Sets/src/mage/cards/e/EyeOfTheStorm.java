@@ -13,7 +13,6 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -72,7 +71,7 @@ class EyeOfTheStormAbility extends TriggeredAbilityImpl {
                 && !spell.isCopy()
                 && spell.getCard() != null
                 && !spell.getCard().isCopy()
-                && spell.isInstantOrSorcery()) {
+                && spell.isInstantOrSorcery(game)) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
             }

@@ -78,7 +78,7 @@ class NeurokFamiliarEffect extends OneShotEffect {
             if (card != null) {
                 Cards cards = new CardsImpl(card);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
-                if (card.isArtifact()) {
+                if (card.isArtifact(game)) {
                     controller.moveCards(card, Zone.HAND, source, game);
                 } else {
                     controller.moveCards(card, Zone.GRAVEYARD, source, game);

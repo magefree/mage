@@ -95,7 +95,7 @@ class AllHallowsEveEffect extends OneShotEffect {
                 .map(Player::getGraveyard)
                 .map(g -> g.getCards(game))
                 .flatMap(Collection::stream)
-                .filter(MageObject::isCreature)
+                .filter(card1 -> card1.isCreature(game))
                 .forEach(cards::add);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
         return true;

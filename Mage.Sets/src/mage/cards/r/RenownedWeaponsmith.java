@@ -85,7 +85,7 @@ class RenownedWeaponsmithCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
         return (object != null
-                && object.isArtifact());
+                && object.isArtifact(game));
     }
 }
 

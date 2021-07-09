@@ -76,7 +76,7 @@ class DazzlingSphinxEffect extends OneShotEffect {
         Card toCast = null;
         for (Card card : opponent.getLibrary().getCards(game)) {
             cards.add(card);
-            if (card.isInstantOrSorcery()) {
+            if (card.isInstantOrSorcery(game)) {
                 toCast = card;
             }
         }

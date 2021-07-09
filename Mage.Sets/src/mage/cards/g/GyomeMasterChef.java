@@ -115,7 +115,7 @@ class GyomeMasterChefWatcher extends Watcher {
             return;
         }
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (permanent == null || permanent instanceof PermanentToken || !permanent.isCreature()) {
+        if (permanent == null || permanent instanceof PermanentToken || !permanent.isCreature(game)) {
             return;
         }
         playerMap.compute(event.getPlayerId(), (u, i) -> i != null ? Integer.sum(i, 1) : 1);

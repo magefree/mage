@@ -1,7 +1,6 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -110,7 +109,7 @@ class MagisterOfWorthEffect extends OneShotEffect {
                 .map(g -> g.getCards(game))
                 .flatMap(Collection::stream)
                 .filter(Objects::nonNull)
-                .filter(MageObject::isCreature)
+                .filter(card -> card.isCreature(game))
                 .forEach(cards::add);
         return controller.moveCards(
                 cards.getCards(game), Zone.BATTLEFIELD, source, game,

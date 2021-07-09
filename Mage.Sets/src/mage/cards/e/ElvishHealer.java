@@ -69,7 +69,7 @@ class ElvishHealerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int toPrevent = 1;
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null && permanent.isCreature() && permanent.getColor(game).isGreen()) {
+        if (permanent != null && permanent.isCreature(game) && permanent.getColor(game).isGreen()) {
             toPrevent = 2;
         }
         game.addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, toPrevent)

@@ -83,7 +83,7 @@ class EnduringRenewalReplacementEffect extends ReplacementEffectImpl {
         }
         Cards cards = new CardsImpl(card);
         controller.revealCards("Top card of " + controller.getName() + "'s library", cards, game);
-        if (card.isCreature()) {
+        if (card.isCreature(game)) {
             controller.moveCards(card, Zone.GRAVEYARD, source, game);
         } else {
             // This is still replacing the draw, so we still return true

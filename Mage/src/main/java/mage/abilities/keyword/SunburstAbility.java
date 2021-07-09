@@ -24,7 +24,7 @@ public class SunburstAbility extends EntersBattlefieldAbility {
 
     private static final String ruleCreature = "Sunburst <i>(This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)</i>";
     private static final String ruleNonCreature = "Sunburst <i>(This enters the battlefield with a charge counter on it for each color of mana spent to cast it.)</i>";
-    private boolean isCreature;
+    private final boolean isCreature;
 
     public SunburstAbility(Card card) {
         super(new SunburstEffect(), "");
@@ -68,7 +68,7 @@ class SunburstEffect extends OneShotEffect {
             int countersAmount = amount.calculate(game, source, this);
             if (countersAmount > 0) {
                 Counter counter;
-                if (permanent.isCreature()) {
+                if (permanent.isCreature(game)) {
                     counter = CounterType.P1P1.createInstance(countersAmount);
                 } else {
                     counter = CounterType.CHARGE.createInstance(countersAmount);

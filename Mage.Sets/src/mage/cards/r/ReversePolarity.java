@@ -77,7 +77,7 @@ class ReversePolarityWatcher extends Watcher {
             UUID playerId = event.getTargetId();
             if (playerId != null) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
-                if (permanent != null && permanent.isArtifact()) {
+                if (permanent != null && permanent.isArtifact(game)) {
                     artifactDamageReceivedThisTurn.putIfAbsent(playerId, 0);
                     artifactDamageReceivedThisTurn.compute(playerId, (k, v) -> v + event.getAmount());
                 }

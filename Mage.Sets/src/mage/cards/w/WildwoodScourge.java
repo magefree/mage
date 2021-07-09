@@ -75,7 +75,7 @@ class WildwoodScourgeTriggeredAbility extends TriggeredAbilityImpl {
             }
             return permanent != null
                     && !event.getTargetId().equals(this.getSourceId())
-                    && permanent.isCreature()
+                    && permanent.isCreature(game)
                     && !permanent.hasSubtype(SubType.HYDRA, game)
                     && permanent.isControlledBy(this.getControllerId());
         }

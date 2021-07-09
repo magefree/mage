@@ -76,7 +76,7 @@ class LagonnaBandStorytellerEffect extends OneShotEffect {
         Card card = game.getCard(source.getFirstTarget());
         if (controller == null
                 || card == null
-                || !card.isEnchantment()
+                || !card.isEnchantment(game)
                 || game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
             return false;
         }

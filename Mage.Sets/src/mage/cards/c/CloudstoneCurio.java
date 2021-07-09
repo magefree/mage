@@ -74,7 +74,7 @@ class CloudstoneCurioEffect extends OneShotEffect {
                 filter.add(TargetController.YOU.getControllerPredicate());
                 filter.add(Predicates.or(
                         triggeringCreature
-                                .getCardType()
+                                .getCardType(game)
                                 .stream()
                                 .filter(CardType::isPermanentType)
                                 .map(CardType::getPredicate)

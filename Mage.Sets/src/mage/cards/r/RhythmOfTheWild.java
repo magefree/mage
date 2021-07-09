@@ -95,7 +95,7 @@ class RhythmOfTheWildEffect extends ReplacementEffectImpl {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         return creature != null
                 && creature.isControlledBy(source.getControllerId())
-                && creature.isCreature()
+                && creature.isCreature(game)
                 && !(creature instanceof PermanentToken);
     }
 

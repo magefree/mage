@@ -84,7 +84,7 @@ class ArclightPhoenixWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell == null || !spell.isInstantOrSorcery()) {
+            if (spell == null || !spell.isInstantOrSorcery(game)) {
                 return;
             }
             this.instantSorceryCount.putIfAbsent(spell.getControllerId(), 0);

@@ -85,7 +85,7 @@ class VeyranVoiceOfDualityEffect extends ReplacementEffectImpl {
         }
         // Only for entering artifacts or creatures
         Spell spell = game.getSpell(sourceEvent.getTargetId());
-        if (spell == null || !spell.isInstantOrSorcery()) {
+        if (spell == null || !spell.isInstantOrSorcery(game)) {
             return false;
         }
         // Only for triggers of permanents

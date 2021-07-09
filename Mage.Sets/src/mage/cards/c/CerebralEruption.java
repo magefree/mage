@@ -64,7 +64,7 @@ class CerebralEruptionEffect extends OneShotEffect {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, player.getId(), game)) {
                 perm.damage(damage, source.getSourceId(), source, game, false, true);
             }
-            if (card.isLand()) {
+            if (card.isLand(game)) {
                 Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
                 if (spellCard != null) {
                     player.moveCards(spellCard, Zone.HAND, source, game);

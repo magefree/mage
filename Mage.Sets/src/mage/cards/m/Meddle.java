@@ -80,7 +80,7 @@ class MeddleEffect extends OneShotEffect {
                         return false;
                     }
                     Permanent permanent = game.getPermanent(targetId);
-                    if (permanent == null || !permanent.isCreature()) {
+                    if (permanent == null || !permanent.isCreature(game)) {
                         return false;
                     }
                 }

@@ -97,7 +97,7 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
                 }
             }
             if (applies) {
-                return !permanent.getCardType().contains(type);
+                return !permanent.getCardType(game).contains(type);
             }
         }
         return false;

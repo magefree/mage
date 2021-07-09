@@ -71,7 +71,7 @@ class RenataCalledToTheHuntReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         return creature != null
-                && creature.isCreature()
+                && creature.isCreature(game)
                 && !source.getSourceId().equals(creature.getId())
                 && creature.isControlledBy(source.getControllerId());
     }

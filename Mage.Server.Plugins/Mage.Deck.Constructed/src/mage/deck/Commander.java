@@ -3,7 +3,6 @@ package mage.deck;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.PartnerAbility;
 import mage.abilities.keyword.PartnerWithAbility;
@@ -13,6 +12,7 @@ import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
+import mage.constants.CardType;
 import mage.filter.FilterMana;
 import mage.util.ManaUtil;
 
@@ -101,48 +101,61 @@ public class Commander extends Constructed {
         errorsList.clear();
         FilterMana colorIdentity = new FilterMana();
         Set<Card> commanders = new HashSet<>();
-        Card companion = null;
+        Card companion;
 
-        if (deck.getSideboard().size() == 1) {
-            commanders.add(deck.getSideboard().iterator().next());
-        } else if (deck.getSideboard().size() == 2) {
-            Iterator<Card> iter = deck.getSideboard().iterator();
-            Card card1 = iter.next();
-            Card card2 = iter.next();
-            if (card1.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
-                companion = card1;
-                commanders.add(card2);
-            } else if (card2.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
-                companion = card2;
-                commanders.add(card1);
-            } else {
-                commanders.add(card1);
-                commanders.add(card2);
-            }
-        } else if (deck.getSideboard().size() == 3) {
-            Iterator<Card> iter = deck.getSideboard().iterator();
-            Card card1 = iter.next();
-            Card card2 = iter.next();
-            Card card3 = iter.next();
-            if (card1.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
-                companion = card1;
-                commanders.add(card2);
-                commanders.add(card3);
-            } else if (card2.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
-                companion = card2;
-                commanders.add(card1);
-                commanders.add(card3);
-            } else if (card3.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
-                companion = card3;
-                commanders.add(card1);
-                commanders.add(card2);
-            } else {
+        int sbsize = deck.getSideboard().size();
+        Card card1;
+        Card card2;
+        Card card3;
+        Iterator<Card> iter;
+        switch (deck.getSideboard().size()) {
+            case 1:
+                companion = null;
+                commanders.add(deck.getSideboard().iterator().next());
+                break;
+            case 2:
+                iter = deck.getSideboard().iterator();
+                card1 = iter.next();
+                card2 = iter.next();
+                if (card1.getAbilities().stream().anyMatch(CompanionAbility.class::isInstance)) {
+                    companion = card1;
+                    commanders.add(card2);
+                } else if (card2.getAbilities().stream().anyMatch(CompanionAbility.class::isInstance)) {
+                    companion = card2;
+                    commanders.add(card1);
+                } else {
+                    companion = null;
+                    commanders.add(card1);
+                    commanders.add(card2);
+                }
+                break;
+            case 3:
+                iter = deck.getSideboard().iterator();
+                card1 = iter.next();
+                card2 = iter.next();
+                card3 = iter.next();
+                if (card1.getAbilities().stream().anyMatch(CompanionAbility.class::isInstance)) {
+                    companion = card1;
+                    commanders.add(card2);
+                    commanders.add(card3);
+                } else if (card2.getAbilities().stream().anyMatch(CompanionAbility.class::isInstance)) {
+                    companion = card2;
+                    commanders.add(card1);
+                    commanders.add(card3);
+                } else if (card3.getAbilities().stream().anyMatch(CompanionAbility.class::isInstance)) {
+                    companion = card3;
+                    commanders.add(card1);
+                    commanders.add(card2);
+                } else {
+                    companion = null;
+                    addError(DeckValidatorErrorType.PRIMARY, "Commander", "Sideboard must contain only the commander(s) and up to 1 companion");
+                    valid = false;
+                }
+                break;
+            default:
+                companion = null;
                 addError(DeckValidatorErrorType.PRIMARY, "Commander", "Sideboard must contain only the commander(s) and up to 1 companion");
                 valid = false;
-            }
-        } else {
-            addError(DeckValidatorErrorType.PRIMARY, "Commander", "Sideboard must contain only the commander(s) and up to 1 companion");
-            valid = false;
         }
 
         if (companion != null && deck.getCards().size() + deck.getSideboard().size() != 101) {
@@ -174,8 +187,8 @@ public class Commander extends Constructed {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander banned (" + commander.getName() + ')', true);
                 valid = false;
             }
-            if ((!commander.isCreature() || !commander.isLegendary())
-                    && (!commander.isPlaneswalker() || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+            if ((!commander.hasCardTypeForDeckbuilding(CardType.CREATURE) || !commander.isLegendary())
+                    && !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance())) {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander invalid (" + commander.getName() + ')', true);
                 valid = false;
             }

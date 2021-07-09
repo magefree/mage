@@ -72,7 +72,7 @@ enum MurktideRegentValue implements DynamicValue {
         if (delvedCards != null) {
             for (UUID cardId : delvedCards) {
                 Card card = game.getCard(cardId);
-                if (card != null && card.isInstantOrSorcery()) {
+                if (card != null && card.isInstantOrSorcery(game)) {
                     amount++;
                 }
             }
@@ -121,7 +121,7 @@ class MurktideRegentTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getFromZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(zEvent.getTargetId());
-            return card != null && card.isInstantOrSorcery() && card.getOwnerId().equals(getControllerId());
+            return card != null && card.isInstantOrSorcery(game) && card.getOwnerId().equals(getControllerId());
         }
         return false;
     }

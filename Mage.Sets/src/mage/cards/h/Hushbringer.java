@@ -90,7 +90,7 @@ class HushbringerEffect extends ContinuousRuleModifyingEffectImpl {
                 return false;
         }
 
-        if (permanent == null || !permanent.isCreature()) {
+        if (permanent == null || !permanent.isCreature(game)) {
             return false;
         }
         return (((TriggeredAbility) ability).checkTrigger(event, game));

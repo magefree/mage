@@ -110,7 +110,7 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
         if (permanent == null) {
             permanent = game.getPermanentEntering(event.getTargetId());
         }
-        return permanent != null && event.getAmount() > 0 && permanent.isCreature()
+        return permanent != null && event.getAmount() > 0 && permanent.isCreature(game)
                 && event.getData() != null && event.getData().equals("+1/+1");
     }
 

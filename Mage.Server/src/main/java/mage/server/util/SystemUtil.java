@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Planes;
 import mage.constants.Zone;
-import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.GameCommanderImpl;
@@ -518,7 +517,7 @@ public final class SystemUtil {
                     }
                 } else if ("loyalty".equalsIgnoreCase(command.zone)) {
                     for (Permanent perm : game.getBattlefield().getAllActivePermanents(player.getId())) {
-                        if (perm.getName().equals(command.cardName) && perm.getCardType().contains(CardType.PLANESWALKER)) {
+                        if (perm.getName().equals(command.cardName) && perm.getCardType(game).contains(CardType.PLANESWALKER)) {
                             perm.addCounters(CounterType.LOYALTY.createInstance(command.Amount), fakeSourceAbility.getControllerId(), fakeSourceAbility, game);
                         }
                     }

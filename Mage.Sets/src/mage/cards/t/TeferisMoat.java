@@ -60,7 +60,7 @@ class TeferisMoatRestrictionEffect extends RestrictionEffect {
         return chosenColor != null &&
                 !permanent.getAbilities().contains(FlyingAbility.getInstance()) &&
                 permanent.getColor(game).shares(chosenColor) &&
-                permanent.isCreature();
+                permanent.isCreature(game);
     }
 
     @Override

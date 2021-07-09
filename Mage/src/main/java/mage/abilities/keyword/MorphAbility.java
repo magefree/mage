@@ -281,15 +281,15 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         return alternateCosts;
     }
 
-    public static void setPermanentToFaceDownCreature(MageObject mageObject) {
+    public static void setPermanentToFaceDownCreature(MageObject mageObject, Game game) {
         mageObject.getPower().modifyBaseValue(2);
         mageObject.getToughness().modifyBaseValue(2);
         mageObject.getAbilities().clear();
-        mageObject.getColor().setColor(new ObjectColor());
+        mageObject.getColor(game).setColor(new ObjectColor());
         mageObject.setName("");
-        mageObject.getCardType().clear();
-        mageObject.addCardType(CardType.CREATURE);
-        mageObject.getSubtype().clear();
+        mageObject.removeAllCardTypes(game);
+        mageObject.addCardType(game, CardType.CREATURE);
+        mageObject.removeAllSubTypes(game);
         mageObject.getSuperType().clear();
         mageObject.getManaCost().clear();
         if (mageObject instanceof Permanent) {

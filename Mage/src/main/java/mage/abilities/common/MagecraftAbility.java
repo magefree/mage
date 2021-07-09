@@ -37,7 +37,7 @@ public class MagecraftAbility extends TriggeredAbilityImpl {
         Spell spell = game.getSpell(event.getTargetId());
         if (spell == null
                 || !spell.isControlledBy(getControllerId())
-                || !spell.isInstantOrSorcery()) {
+                || !spell.isInstantOrSorcery(game)) {
             return false;
         }
         getEffects().setValue(SPELL_KEY, spell);

@@ -63,7 +63,7 @@ class CastHistoricSpellThisTurnCondition implements Condition {
             List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
             if (spells != null) {
                 for (Spell spell : spells) {
-                    if (!spell.getSourceId().equals(source.getSourceId()) && spell.isHistoric()) {
+                    if (!spell.getSourceId().equals(source.getSourceId()) && spell.isHistoric(game)) {
                         return true;
                     }
                 }

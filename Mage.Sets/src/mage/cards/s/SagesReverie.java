@@ -69,7 +69,7 @@ class SagesReveriePredicate implements Predicate<Permanent> {
     public boolean apply(Permanent input, Game game) {
         UUID attachedTo = input.getAttachedTo();
         Permanent attachedToPermanent = game.getPermanent(attachedTo);
-        return attachedToPermanent != null && attachedToPermanent.isCreature();
+        return attachedToPermanent != null && attachedToPermanent.isCreature(game);
     }
 
     @Override

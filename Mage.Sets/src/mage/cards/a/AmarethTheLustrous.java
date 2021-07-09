@@ -88,7 +88,7 @@ class AmarethTheLustrousEffect extends OneShotEffect {
             permanent = (Permanent) obj;
         }
         if (permanent == null
-                || card.getCardType().stream().noneMatch(permanent.getCardType()::contains)
+                || card.getCardType(game).stream().noneMatch(permanent.getCardType(game)::contains)
                 || !player.chooseUse(Outcome.DrawCard, "Reveal " + card.getName() + " and put it into your hand?", source, game)) {
             return false;
         }

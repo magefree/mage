@@ -87,7 +87,7 @@ class DimensionalInfiltratorEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.EXILED, source, game);
-        if (!card.isLand()) {
+        if (!card.isLand(game)) {
             return true;
         }
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);

@@ -78,7 +78,7 @@ class SelvalasStampedeEffect extends OneShotEffect {
             if (creatureCards.size() >= wildCount) {
                 break;
             }
-            if (card.isCreature()) {
+            if (card.isCreature(game)) {
                 creatureCards.add(card);
             }
             toReveal.add(card);

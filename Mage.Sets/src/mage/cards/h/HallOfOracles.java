@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -70,6 +69,6 @@ enum HallOfOraclesCondition implements Condition {
                 && watcher.getSpellsCastThisTurn(source.getControllerId())
                 .stream()
                 .filter(Objects::nonNull)
-                .anyMatch(MageObject::isInstantOrSorcery);
+                .anyMatch(spell -> spell.isInstantOrSorcery(game));
     }
 }

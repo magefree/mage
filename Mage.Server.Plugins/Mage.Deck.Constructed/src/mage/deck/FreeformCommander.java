@@ -10,6 +10,7 @@ import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
+import mage.constants.CardType;
 import mage.filter.FilterMana;
 import mage.util.ManaUtil;
 
@@ -119,7 +120,7 @@ public class FreeformCommander extends Constructed {
             commanderNames.add(commander.getName());
         }
         for (Card commander : commanders) {
-            if (!(commander.isCreature() || commander.isLegendary())) {
+            if (!commander.hasCardTypeForDeckbuilding(CardType.CREATURE) && !commander.isLegendary()) {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "For Freeform Commander, the commander must be a creature or be legendary. Yours was: " + commander.getName(), true);
                 valid = false;
             }

@@ -69,7 +69,7 @@ class RedirectArtifactDamageFromPlayerToSourceEffect extends RedirectionEffect {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getControllerId()) &&
-                game.getPermanentOrLKIBattlefield(event.getSourceId()).isArtifact()) {
+                game.getPermanentOrLKIBattlefield(event.getSourceId()).isArtifact(game)) {
 
             TargetPermanent target = new TargetPermanent();
             target.add(source.getSourceId(), game);

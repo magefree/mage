@@ -56,7 +56,7 @@ class LinvalaKeeperOfSilenceCantActivateEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.isCreature()
+        return permanent.isCreature(game)
                 && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
     }
 

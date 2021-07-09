@@ -322,7 +322,7 @@ public final class ZonesHandler {
         if (info.faceDown) {
             card.setFaceDown(true, game);
         } else if (event.getToZone().equals(Zone.BATTLEFIELD)) {
-            if (!card.isPermanent()
+            if (!card.isPermanent(game)
                     && (!card.isTransformable() || Boolean.FALSE.equals(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId())))) {
                 // Non permanents (Instants, Sorceries, ... stay in the zone they are if an abilty/effect tries to move it to the battlefield
                 return false;

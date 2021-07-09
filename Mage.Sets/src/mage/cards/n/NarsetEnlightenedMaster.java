@@ -73,8 +73,8 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
             player.moveCards(cards, Zone.EXILED, source, game);
             for (Card card : cards) {
                 if (game.getState().getZone(card.getId()) == Zone.EXILED
-                        && !card.isCreature()
-                        && !card.isLand()) {
+                        && !card.isCreature(game)
+                        && !card.isLand(game)) {
                     ContinuousEffect effect = new NarsetEnlightenedMasterCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card, game));
                     game.addEffect(effect, source);

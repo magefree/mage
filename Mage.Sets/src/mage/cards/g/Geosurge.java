@@ -52,7 +52,7 @@ class GeosurgeManaCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null && (card.isArtifact() || card.isCreature())) {
+            if (card != null && (card.isArtifact(game) || card.isCreature(game))) {
                 return true;
             }
         }

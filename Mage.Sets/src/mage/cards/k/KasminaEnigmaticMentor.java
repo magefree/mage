@@ -94,7 +94,7 @@ class KasminaEnigmaticMentorCostModificationEffect extends CostModificationEffec
             if (allTargets.stream()
                     .map(game::getPermanent)
                     .filter(Objects::nonNull)
-                    .anyMatch(permanent -> !isTargetCompatible(permanent, source))) {
+                    .anyMatch(permanent -> !isTargetCompatible(permanent, source, game))) {
                 return false;
             }
             ;
@@ -103,13 +103,13 @@ class KasminaEnigmaticMentorCostModificationEffect extends CostModificationEffec
         return allTargets.stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .anyMatch(permanent -> isTargetCompatible(permanent, source));
+                .anyMatch(permanent -> isTargetCompatible(permanent, source, game));
     }
 
-    private boolean isTargetCompatible(Permanent permanent, Ability source) {
+    private boolean isTargetCompatible(Permanent permanent, Ability source, Game game) {
         // target a creature or planeswalker you control
         return permanent.isControlledBy(source.getControllerId())
-                && (permanent.isCreature() || permanent.isPlaneswalker());
+                && (permanent.isCreature(game) || permanent.isPlaneswalker(game));
     }
 
     @Override

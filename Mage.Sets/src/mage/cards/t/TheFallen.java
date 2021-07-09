@@ -86,7 +86,7 @@ class TheFallenWatcher extends Watcher {
             return;
         }
         Permanent damaged = game.getPermanent(event.getTargetId());
-        if (damaged != null && !damaged.isPlaneswalker()) {
+        if (damaged != null && !damaged.isPlaneswalker(game)) {
             return;
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());

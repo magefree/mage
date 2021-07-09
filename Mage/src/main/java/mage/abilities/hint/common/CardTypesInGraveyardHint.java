@@ -1,6 +1,5 @@
 package mage.abilities.hint.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.hint.Hint;
 import mage.cards.Card;
@@ -35,7 +34,7 @@ public enum CardTypesInGraveyardHint implements Hint {
             return null;
         }
         List<String> types = stream
-                .map(MageObject::getCardType)
+                .map(card -> card.getCardType(game))
                 .flatMap(Collection::stream)
                 .distinct()
                 .map(CardType::toString)

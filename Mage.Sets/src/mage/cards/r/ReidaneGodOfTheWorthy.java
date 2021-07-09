@@ -108,7 +108,7 @@ class ReidaneGodOfTheWorthyTapEffect extends ReplacementEffectImpl {
             return false;
         }
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null && permanent.isLand() && permanent.isSnow();
+        return permanent != null && permanent.isLand(game) && permanent.isSnow();
     }
 
     @Override
@@ -142,7 +142,7 @@ class ReidaneGodOfTheWorthyCostEffect extends CostModificationEffectImpl {
             return false;
         }
         Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
-        return spellCard != null && !spellCard.isCreature() && spellCard.getManaValue() >= 4;
+        return spellCard != null && !spellCard.isCreature(game) && spellCard.getManaValue() >= 4;
     }
 
     @Override

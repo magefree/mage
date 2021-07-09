@@ -99,7 +99,7 @@ class HamzaGuardianOfArashinEffect extends CostModificationEffectImpl {
         Card sourceCard = game.getCard(abilityToModify.getSourceId());
         return sourceCard != null
                 && abilityToModify.isControlledBy(source.getControllerId())
-                && sourceCard.isCreature();
+                && sourceCard.isCreature(game);
     }
 
     @Override

@@ -19,7 +19,7 @@ public class ArtifactSourcePredicate implements Predicate<StackObject> {
     public boolean apply(StackObject input, Game game) {
         if (input instanceof StackAbility) {
             StackAbility ability = (StackAbility) input;
-            return ability.getSourceObject(game).isArtifact();
+            return ability.getSourceObject(game).isArtifact(game);
         }
         return false;
     }

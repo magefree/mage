@@ -124,7 +124,7 @@ public class PermanentCard extends PermanentImpl {
         if (card instanceof PermanentCard) {
             this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;
         }
-        this.subtype.copyFrom(card.getSubtype(game));
+        this.subtype.copyFrom(card.getSubtype());
         this.supertype.clear();
         supertype.addAll(card.getSuperType());
         this.expansionSetCode = card.getExpansionSetCode();

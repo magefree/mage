@@ -137,7 +137,7 @@ class DomriChaosBringerTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         MageObject mo = game.getObject(event.getTargetId());
-        if (mo == null || !mo.isCreature()) {
+        if (mo == null || !mo.isCreature(game)) {
             return false;
         }
         

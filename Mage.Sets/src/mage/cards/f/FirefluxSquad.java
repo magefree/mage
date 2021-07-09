@@ -92,7 +92,7 @@ class FirefluxSquadEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         for (Card card : player.getLibrary().getCards(game)) {
             cards.add(card);
-            if (card != null && card.isCreature()) {
+            if (card != null && card.isCreature(game)) {
                 toBattlefield = card;
                 break;
             }

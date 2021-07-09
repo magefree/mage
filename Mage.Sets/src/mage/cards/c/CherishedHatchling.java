@@ -98,7 +98,7 @@ class CherishedHatchlingTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isCreature() && spell.hasSubtype(SubType.DINOSAUR, game)) {
+            if (spell != null && spell.isCreature(game) && spell.hasSubtype(SubType.DINOSAUR, game)) {
                 getEffects().setTargetPointer(new FixedTarget(spell.getSourceId()));
                 return true;
             }

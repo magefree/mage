@@ -104,7 +104,7 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
                 }
                 game.informPlayers(attackedPlayer.getLogName() + " guessed " + (guessWrong ? "wrong" : "right"));
                 if (guessWrong) {
-                    if (cardFromHand.isLand()) {
+                    if (cardFromHand.isLand(game)) {
                         // If the revealed card is a land, you can't cast it. So nothing happens
                     } else {
                         if (controller.chooseUse(outcome, "Cast " + cardFromHand.getName()

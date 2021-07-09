@@ -100,7 +100,7 @@ class RonaDiscipleOfGixPlayNonLandEffect extends AsThoughEffectImpl {
         if (affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             MageObject sourceObject = game.getObject(source.getSourceId());
-            if (card != null && !card.isLand() && sourceObject != null) {
+            if (card != null && !card.isLand(game) && sourceObject != null) {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
                 if (exileId != null) {
                     ExileZone exileZone = game.getState().getExile().getExileZone(exileId);

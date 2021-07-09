@@ -86,7 +86,7 @@ class RealityScrambleEffect extends OneShotEffect {
             return false;
         }
         Set<CardType> types = EnumSet.noneOf(CardType.class);
-        types.addAll(permanent.getCardType());
+        types.addAll(permanent.getCardType(game));
         controller.putCardsOnBottomOfLibrary(
                 new CardsImpl(permanent), game, source, false
         );
@@ -95,7 +95,7 @@ class RealityScrambleEffect extends OneShotEffect {
         for (Card card : controller.getLibrary().getCards(game)) {
             toReveal.add(card);
             for (CardType type : types) {
-                if (card.getCardType().contains(type)) {
+                if (card.getCardType(game).contains(type)) {
                     cardToPlay = card;
                     break;
                 }

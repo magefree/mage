@@ -78,7 +78,7 @@ class ScrapTrawlerTriggeredAbility extends TriggeredAbilityImpl {
             Permanent permanent = ((ZoneChangeEvent) event).getTarget();
             if (permanent != null
                     && permanent.isControlledBy(this.getControllerId())
-                    && permanent.isArtifact()) {
+                    && permanent.isArtifact(game)) {
                 FilterCard filter = new FilterArtifactCard("artifact card in your graveyard with mana value less than " + permanent.getManaCost().manaValue());
                 filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, permanent.getManaCost().manaValue()));
                 TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);

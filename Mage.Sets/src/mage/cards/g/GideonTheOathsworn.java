@@ -94,7 +94,7 @@ class GideonTheOathswornTriggeredAbility extends TriggeredAbilityImpl {
             Set<MageObjectReference> attackers = new HashSet();
             for (UUID attackerId : game.getCombat().getAttackers()) {
                 Permanent permanent = game.getPermanent(attackerId);
-                if (permanent != null && permanent.isCreature() && !permanent.hasSubtype(SubType.GIDEON, game)) {
+                if (permanent != null && permanent.isCreature(game) && !permanent.hasSubtype(SubType.GIDEON, game)) {
                     attackerCount++;
                     attackers.add(new MageObjectReference(permanent, game));
                 }

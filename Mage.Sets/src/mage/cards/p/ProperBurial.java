@@ -63,7 +63,7 @@ class ProperBurialTriggeredAbility extends TriggeredAbilityImpl {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null
                     && permanent.isControlledBy(this.getControllerId())
-                    && permanent.isCreature()) {
+                    && permanent.isCreature(game)) {
                 this.getEffects().clear();
                 this.addEffect(new GainLifeEffect(permanent.getToughness().getValue()));
                 return true;

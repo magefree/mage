@@ -79,7 +79,7 @@ class BrutalDeceiverEffect extends OneShotEffect {
             if (card != null) {
                 cards.add(card);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
-                if (card.isLand()) {
+                if (card.isLand(game)) {
                     game.addEffect(new BoostSourceEffect(1, 0, Duration.EndOfTurn), source);
                     game.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), source);
                 }

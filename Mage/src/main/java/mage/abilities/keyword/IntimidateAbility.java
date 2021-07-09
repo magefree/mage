@@ -57,7 +57,7 @@ class IntimidateEffect extends RestrictionEffect implements MageSingleton {
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         boolean result = false;
-        if (blocker.isArtifact() && (blocker.isCreature())) {
+        if (blocker.isArtifact(game) && (blocker.isCreature(game))) {
             result = true;
         }
         if (attacker.getColor(game).shares(blocker.getColor(game))) {

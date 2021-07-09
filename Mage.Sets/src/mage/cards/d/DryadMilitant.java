@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.players.Player;
 
 /**
  *
@@ -83,7 +82,7 @@ class DryadMilitantReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && (card.isSorcery() || card.isInstant())) {
+            if (card != null && (card.isSorcery(game) || card.isInstant(game))) {
                 return true;
             }
         }

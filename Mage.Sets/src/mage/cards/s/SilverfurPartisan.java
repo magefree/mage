@@ -79,8 +79,8 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
                 && (permanent.hasSubtype(SubType.WOLF, game)
                 || permanent.hasSubtype(SubType.WEREWOLF, game))) {
             if (object instanceof StackObject) {
-                if (object.isInstant()
-                        || object.isSorcery()) {
+                if (object.isInstant(game)
+                        || object.isSorcery(game)) {
                     if (getTargets().isEmpty()) {
                         for (Effect effect : getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getTargetId()));

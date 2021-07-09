@@ -90,7 +90,7 @@ class NarsetTranscendentEffect1 extends OneShotEffect {
                 CardsImpl cards = new CardsImpl();
                 cards.add(card);
                 controller.lookAtCards(sourceObject.getIdName(), cards, game);
-                if (!card.isCreature() && !card.isLand()) {
+                if (!card.isCreature(game) && !card.isLand(game)) {
                     if (controller.chooseUse(outcome, "Reveal " + card.getLogName() + " and put it into your hand?", source, game)) {
                         controller.moveCards(card, Zone.HAND, source, game);
                         controller.revealCards(sourceObject.getIdName(), cards, game);
@@ -129,7 +129,7 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.getFromZone() == Zone.HAND) {
                 if (spell.getCard() != null
-                        && spell.getCard().isInstantOrSorcery()) {
+                        && spell.getCard().isInstantOrSorcery(game)) {
                     for (Effect effect : getEffects()) {
                         effect.setTargetPointer(new FixedTarget(spell.getId()));
                     }

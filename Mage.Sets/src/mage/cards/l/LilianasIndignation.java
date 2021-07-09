@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -70,7 +69,7 @@ class LilianasIndignationEffect extends OneShotEffect {
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(card -> game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
-                .filter(MageObject::isCreature)
+                .filter(card1 -> card1.isCreature(game))
                 .mapToInt(x -> 2)
                 .sum();
         if (creatures > 0) {

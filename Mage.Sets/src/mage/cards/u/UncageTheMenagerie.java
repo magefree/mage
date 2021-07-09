@@ -119,7 +119,7 @@ class UncageTheMenagerieTarget extends TargetCardInLibrary {
                 }
             }
 
-            if (!(card.isCreature() && card.getManaValue() == xValue)) {
+            if (!(card.isCreature(game) && card.getManaValue() == xValue)) {
                 return false;
             }
 

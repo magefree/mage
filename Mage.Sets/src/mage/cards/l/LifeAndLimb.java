@@ -69,8 +69,8 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
             for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
-                        permanent.addCardType(CardType.CREATURE);
-                        permanent.addCardType(CardType.LAND);
+                        permanent.addCardType(game, CardType.CREATURE);
+                        permanent.addCardType(game, CardType.LAND);
                         permanent.addSubType(game, SubType.SAPROLING);
                         // land abilities are intrinsic, so add them here, not in layer 6
                         permanent.addSubType(game, SubType.FOREST);

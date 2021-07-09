@@ -81,7 +81,7 @@ class ZhalfirinDecoyWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getToZone() == Zone.BATTLEFIELD
-                    && zEvent.getTarget().isCreature()) {
+                    && zEvent.getTarget().isCreature(game)) {
                 players.add(zEvent.getTarget().getControllerId());
             }
         }

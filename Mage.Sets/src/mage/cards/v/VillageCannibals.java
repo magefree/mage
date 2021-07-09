@@ -13,7 +13,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
@@ -69,7 +68,7 @@ class VillageCannibalsTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null && permanent.isCreature() && permanent.hasSubtype(SubType.HUMAN, game)
+            if (permanent != null && permanent.isCreature(game) && permanent.hasSubtype(SubType.HUMAN, game)
                     && !permanent.getId().equals(this.getSourceId())) {
                 return true;
             }

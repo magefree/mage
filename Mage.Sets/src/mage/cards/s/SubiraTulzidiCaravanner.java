@@ -103,7 +103,7 @@ class SubiraTulzidiCaravannerAbility extends DelayedTriggeredAbility {
         Permanent permanent = game.getPermanent(event.getSourceId());
         return permanent != null
                 && permanent.isControlledBy(getControllerId())
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && permanent.getPower().getValue() <= 2;
     }
 

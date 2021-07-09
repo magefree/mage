@@ -62,7 +62,7 @@ class InsurrectionEffect extends OneShotEffect {
         boolean result = false;
         ContinuousEffect gainControl = new GainControlTargetEffect(Duration.EndOfTurn);
         ContinuousEffect gainHaste = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-        for (Permanent creature : game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
+        for (Permanent creature : game.getBattlefield().getAllActivePermanents(CardType.CREATURE, game)) {
             creature.untap(game);
             gainControl.setTargetPointer(new FixedTarget(creature.getId()));
             gainHaste.setTargetPointer(new FixedTarget(creature.getId()));

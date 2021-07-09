@@ -80,7 +80,7 @@ class MowuLoyalCompanionEffect extends ReplacementEffectImpl {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
             return permanent != null && permanent.getId().equals(source.getSourceId())
-                    && permanent.isCreature();
+                    && permanent.isCreature(game);
         }
         return false;
     }

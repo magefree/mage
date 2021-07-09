@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -69,7 +68,7 @@ class WillbreakerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (isControlledBy(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.isCreature()) {
+            if (permanent != null && permanent.isCreature(game)) {
                 Player controller = game.getPlayer(getControllerId());
                 if (controller != null && controller.hasOpponent(permanent.getControllerId(), game)) {
                     getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));

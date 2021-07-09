@@ -71,7 +71,7 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).getToZone().match(Zone.BATTLEFIELD)) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.isCreature()) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
+            if (card != null && card.isCreature(game)) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
                     return true;
@@ -82,7 +82,7 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
                 for (Token token : ((CreateTokenEvent) event).getTokens().keySet()) {
-                    if (token.isCreature()) {
+                    if (token.isCreature(game)) {
                         return true;
                     }
                 }

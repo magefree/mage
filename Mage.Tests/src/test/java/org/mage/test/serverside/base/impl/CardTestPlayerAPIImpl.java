@@ -1114,7 +1114,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
 
         Assert.assertTrue("(Battlefield) card type " + (mustHave ? "not " : "")
-                + "found (" + cardName + ':' + type + ')', (found.getCardType().contains(type) == mustHave));
+                + "found (" + cardName + ':' + type + ')', (found.getCardType(currentGame).contains(type) == mustHave));
 
     }
 
@@ -1128,7 +1128,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertType(String cardName, CardType type, SubType subType) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
         Permanent found = getPermanent(cardName);
-        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
+        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', found.getCardType(currentGame).contains(type));
         if (subType != null) {
             Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ':' + subType.getDescription() + ')', found.hasSubtype(subType, currentGame));
         }
@@ -1143,7 +1143,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertNotType(String cardName, CardType type) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
         Permanent found = getPermanent(cardName);
-        Assert.assertFalse("(Battlefield) card type found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
+        Assert.assertFalse("(Battlefield) card type found (" + cardName + ':' + type + ')', found.getCardType(currentGame).contains(type));
     }
 
     /**
@@ -1201,9 +1201,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
 
         if (mustHave) {
-            Assert.assertEquals("must contain colors [" + searchColors.toString() + "] but found only [" + cardColor.toString() + "]", 0, colorsDontHave.size());
+            Assert.assertEquals("must contain colors [" + searchColors + "] but found only [" + cardColor.toString() + "]", 0, colorsDontHave.size());
         } else {
-            Assert.assertEquals("must not contain colors [" + searchColors.toString() + "] but found [" + cardColor.toString() + "]", 0, colorsHave.size());
+            Assert.assertEquals("must not contain colors [" + searchColors + "] but found [" + cardColor.toString() + "]", 0, colorsHave.size());
         }
     }
 
@@ -1358,13 +1358,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert card subtype in exile.
      *
      * @param cardName Name of the card.
-     * @param subType    Expected subtype.
+     * @param subType  Expected subtype.
      */
     public void assertExiledCardSubtype(String cardName, SubType subType) throws AssertionError {
         boolean found = false;
         for (ExileZone exile : currentGame.getExile().getExileZones()) {
             for (Card card : exile.getCards(currentGame)) {
-                if(CardUtil.haveSameNames(card.getName(), cardName, true) && card.hasSubtype(subType, currentGame)){
+                if (CardUtil.haveSameNames(card.getName(), cardName, true) && card.hasSubtype(subType, currentGame)) {
                     found = true;
                 }
             }
@@ -1929,7 +1929,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     /**
      * Setup amount choices.
-     *
+     * <p>
      * Multi amount choices uses WUBRG order (so use 1,2,3,4,5 values list)
      *
      * @param player
@@ -2096,22 +2096,22 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
 
-    public void assertWonTheGame(Player player){
+    public void assertWonTheGame(Player player) {
 
         Assert.assertTrue(player.getName() + " has not won the game.", player.hasWon());
     }
 
-    public void assertHasNotWonTheGame(Player player){
+    public void assertHasNotWonTheGame(Player player) {
 
         Assert.assertFalse(player.getName() + " has won the game.", player.hasWon());
     }
 
-    public void assertLostTheGame(Player player){
+    public void assertLostTheGame(Player player) {
 
         Assert.assertTrue(player.getName() + " has not lost the game.", player.hasLost());
     }
 
-    public void assertHasNotLostTheGame(Player player){
+    public void assertHasNotLostTheGame(Player player) {
 
         Assert.assertFalse(player.getName() + " has lost the game.", player.hasLost());
     }

@@ -484,8 +484,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean canTap() {
-        return !isCreature() || !hasSummoningSickness();
+    public boolean canTap(Game game) {
+        return !isCreature(game) || !hasSummoningSickness();
     }
 
     @Override
@@ -880,7 +880,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         int lethal = getLethalDamage(attackerId, game);
         MageObject attacker = game.getObject(attackerId);
-        if (this.isCreature()) {
+        if (this.isCreature(game)) {
             if (checkWither(event, attacker, game)) {
                 if (markDamage) {
                     // mark damage only
@@ -897,7 +897,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 this.damage = CardUtil.overflowInc(this.damage, actualDamage);
             }
         }
-        if (this.isPlaneswalker()) {
+        if (this.isPlaneswalker(game)) {
             int loyalty = getCounters(game).getCount(CounterType.LOYALTY);
             int countersToRemove = Math.min(actualDamage, loyalty);
             if (attacker != null && markDamage) {
@@ -1031,7 +1031,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public int getLethalDamage(UUID attackerId, Game game) {
         int lethal = Integer.MAX_VALUE;
-        if (this.isCreature()) {
+        if (this.isCreature(game)) {
             if (game.getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters().stream().anyMatch(f -> f.match(this, game))) {
                 lethal = Math.min(lethal, power.getValue());
             } else {
@@ -1046,7 +1046,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 lethal = Math.min(1, lethal);
             }
         }
-        if (this.isPlaneswalker()) {
+        if (this.isPlaneswalker(game)) {
             lethal = Math.min(lethal, this.getCounters(game).getCount(CounterType.LOYALTY));
         }
         return lethal;
@@ -1084,7 +1084,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         controlledFromStartOfControllerTurn = false;
         if (this.isFaceDown(game)) {
             // remove some attributes here, because first apply effects comes later otherwise abilities (e.g. color related) will unintended trigger
-            MorphAbility.setPermanentToFaceDownCreature(this);
+            MorphAbility.setPermanentToFaceDownCreature(this, game);
         }
 
         EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone, EnterEventType.SELF);
@@ -1186,7 +1186,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     } else {
                         logName = this.getLogName();
                     }
-                    if (this.isCreature()) {
+                    if (this.isCreature(game)) {
                         game.informPlayers(logName + " died" + CardUtil.getSourceLogName(game, " by ", source, "", ""));
                     } else {
                         game.informPlayers(logName + " was destroyed" + CardUtil.getSourceLogName(game, " by ", source, "", ""));
@@ -1436,7 +1436,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean removeFromCombat(Game game, boolean withInfo) {
         if (this.isAttacking() || this.blocking > 0) {
             return game.getCombat().removeFromCombat(objectId, game, withInfo);
-        } else if (this.isPlaneswalker()) {
+        } else if (this.isPlaneswalker(game)) {
             if (game.getCombat().getDefenders().contains(getId())) {
                 game.getCombat().removePlaneswalkerFromCombat(objectId, game, withInfo);
             }
@@ -1678,7 +1678,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 //make bestow cards and licids into creatures
                 //aura test to stop bludgeon brawl shenanigans from using this code
                 //consider adding code to handle that case?
-                if (attachment.hasSubtype(SubType.AURA, game) && attachmentCard.isCreature()) {
+                if (attachment.hasSubtype(SubType.AURA, game) && attachmentCard.isCreature(game)) {
                     BestowAbility.becomeCreature(attachment, game);
                 }
             }

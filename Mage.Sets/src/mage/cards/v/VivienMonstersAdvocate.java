@@ -141,7 +141,7 @@ class VivienMonstersAdvocateTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getSpell(event.getTargetId());
         if (spell != null
-                && spell.isCreature()) {
+                && spell.isCreature(game)) {
             int cmc = spell.getManaValue();
             FilterCard filter = new FilterCreatureCard("creature card with mana value less than " + cmc);
             filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, cmc));

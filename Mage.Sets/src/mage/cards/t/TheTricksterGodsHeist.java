@@ -104,7 +104,7 @@ class TheTricksterGodsHeistTarget extends TargetPermanent {
         if (targetOne == null || targetTwo == null) {
             return false;
         }
-        return targetOne.shareTypes(targetTwo);
+        return targetOne.shareTypes(targetTwo, game);
     }
 
     @Override
@@ -118,12 +118,12 @@ class TheTricksterGodsHeistTarget extends TargetPermanent {
             if (!permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                 continue;
             }
-            for (CardType cardType : permanent.getCardType()) {
+            for (CardType cardType : permanent.getCardType(game)) {
                 if (cardTypes.contains(cardType)) {
                     return true;
                 }
             }
-            cardTypes.addAll(permanent.getCardType());
+            cardTypes.addAll(permanent.getCardType(game));
         }
         return false;
     }

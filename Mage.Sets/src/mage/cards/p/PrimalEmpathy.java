@@ -70,7 +70,7 @@ class PrimalEmpathyEffect extends OneShotEffect {
                 .getBattlefield()
                 .getActivePermanents(source.getControllerId(), game)
                 .stream()
-                .filter(Permanent::isCreature)
+                .filter(permanent1 -> permanent1.isCreature(game))
                 .map(Permanent::getPower)
                 .mapToInt(MageInt::getValue)
                 .max()
@@ -78,7 +78,7 @@ class PrimalEmpathyEffect extends OneShotEffect {
         boolean flag = game.getBattlefield()
                 .getAllActivePermanents(source.getControllerId())
                 .stream()
-                .filter(Permanent::isCreature)
+                .filter(permanent1 -> permanent1.isCreature(game))
                 .map(Permanent::getPower)
                 .mapToInt(MageInt::getValue)
                 .anyMatch(i -> i >= highestPower);

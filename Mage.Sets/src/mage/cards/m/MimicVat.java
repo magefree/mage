@@ -22,7 +22,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -93,7 +92,7 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent != null
                 && zEvent.isDiesEvent()
                 && !(permanent instanceof PermanentToken)
-                && permanent.isCreature()) {
+                && permanent.isCreature(game)) {
 
             getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId(), game));
             return true;

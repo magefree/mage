@@ -158,7 +158,7 @@ class ThousandYearStormWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             MageObject object = game.getObject(event.getTargetId());
-            if (object != null && object.isInstantOrSorcery()) {
+            if (object != null && object.isInstantOrSorcery(game)) {
                 UUID playerId = event.getPlayerId();
                 List<MageObjectReference> spellsCast = spellsThisTurn.getOrDefault(playerId, new ArrayList<MageObjectReference>());
                 spellsCast.add(new MageObjectReference(object, game));

@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.AbilityImpl;
@@ -85,7 +84,7 @@ class BeamsplitterMageTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Spell spell = game.getSpellOrLKIStack(event.getTargetId());
-        if (spell == null || !spell.isInstantOrSorcery()) {
+        if (spell == null || !spell.isInstantOrSorcery(game)) {
             return false;
         }
         if (spell.getSpellAbilities()
@@ -116,7 +115,7 @@ class BeamsplitterMageTriggeredAbility extends TriggeredAbilityImpl {
                 getControllerId(), getSourceId(), game
         ).stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isCreature)
+                .filter(permanent -> permanent.isCreature(game))
                 .filter(p -> checkNotSource(p, game))
                 .anyMatch(p -> spell.canTarget(game, p.getId()));
     }

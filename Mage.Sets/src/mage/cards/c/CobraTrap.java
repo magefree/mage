@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SnakeToken;
 import mage.game.stack.StackObject;
@@ -78,7 +77,7 @@ class CobraTrapWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DESTROYED_PERMANENT) {
             Permanent perm = game.getPermanentOrLKIBattlefield(event.getTargetId()); // can regenerate or be indestructible
-            if (perm != null && !perm.isCreature()) {
+            if (perm != null && !perm.isCreature(game)) {
                 if (!game.getStack().isEmpty()) {
                     StackObject spell = game.getStack().getStackObject(event.getSourceId());
                     if (spell != null && game.getOpponents(perm.getControllerId()).contains(spell.getControllerId())) {

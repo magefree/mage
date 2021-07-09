@@ -18,7 +18,7 @@ public class CardTypeAssignment extends RoleAssignment<CardType> {
     protected Set<CardType> makeSet(Card card, Game game) {
         return attributes
                 .stream()
-                .filter(subType -> card.getCardType().contains(subType))
+                .filter(subType -> card.getCardType(game).contains(subType))
                 .collect(Collectors.toSet());
     }
 }

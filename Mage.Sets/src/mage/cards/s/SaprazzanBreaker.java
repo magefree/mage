@@ -2,7 +2,6 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -65,7 +64,7 @@ class SaprazzanBreakerEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        if (player.millCards(1, source, game).getCards(game).stream().filter(Objects::nonNull).anyMatch(MageObject::isLand)) {
+        if (player.millCards(1, source, game).getCards(game).stream().filter(Objects::nonNull).anyMatch(card -> card.isLand(game))) {
             game.addEffect(new CantBeBlockedByAllSourceEffect(StaticFilters.FILTER_PERMANENT_CREATURES, Duration.EndOfTurn), source);
         }
         return true;

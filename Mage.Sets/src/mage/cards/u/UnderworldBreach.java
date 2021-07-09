@@ -66,7 +66,7 @@ class UnderworldBreachEffect extends ContinuousEffectImpl {
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(card -> !card.getManaCost().getText().isEmpty()) // card must have a mana cost
-                .filter(card -> !card.isLand())
+                .filter(card -> !card.isLand(game))
                 .forEach(card -> {
                     Ability ability = new EscapeAbility(card, card.getManaCost().getText(), 3);
                     ability.setSourceId(card.getId());
