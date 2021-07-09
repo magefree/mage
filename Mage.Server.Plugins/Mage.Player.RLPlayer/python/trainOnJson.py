@@ -33,8 +33,8 @@ def collect_experience(min_actions,env,net,converter,opponent_net=None):
         rewards+=r
         writer.add_scalar('Reward', rewards[-1], game_counter)
         print(rewards[-1])
-        #weighting=min(1/len(actions),1/hparams['batch_cutoff'])
-        #weights=len(actions)*[weighting]
+        weighting=min(1/len(actions),1/hparams['batch_cutoff'])
+        weights=len(actions)*[weighting]
         game_counter+=1
     return (actions,observations,rewards,weights)
 
