@@ -545,6 +545,10 @@ public enum SubType {
         return "AEIOUaeiou".indexOf(c) != -1;
     }
 
+    public boolean isCustomSet() {
+        return customSet;
+    }
+
     public static SubType fromString(String value) {
         for (SubType st : SubType.values()) {
             if (st.toString().equals(value)) {
@@ -569,7 +573,11 @@ public enum SubType {
         return subTypeSet;
     }
 
-    public boolean canGain(MageObject mageObject, Game game) {
+    public boolean canGain(MageObject mageObject) {
+        return canGain(null);
+    }
+
+    public boolean canGain(Game game, MageObject mageObject) {
         switch (subTypeSet) {
             case CreatureType:
                 return mageObject.isCreature(game) || mageObject.isTribal(game);

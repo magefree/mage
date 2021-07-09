@@ -344,7 +344,7 @@ public interface MageObject extends MageItem, Serializable {
      */
     default void addSubType(SubType... subTypes) {
         for (SubType subType : subTypes) {
-            if (subType.canGain(this, null)
+            if (subType.canGain(this)
                     && !getSubtype().contains(subType)) {
                 getSubtype().add(subType);
             }
@@ -359,7 +359,7 @@ public interface MageObject extends MageItem, Serializable {
      */
     default void addSubType(Game game, SubType... subTypes) {
         for (SubType subType : subTypes) {
-            if (subType.canGain(this, game)
+            if (subType.canGain(game, this)
                     && !hasSubtype(subType, game)) {
                 game.getState().getCreateMageObjectAttribute(this, game).getSubtype().add(subType);
             }
