@@ -70,7 +70,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Dire Wolf Prowler", 179, Rarity.COMMON, mage.cards.d.DireWolfProwler.class));
         cards.add(new SetCardInfo("Displacer Beast", 54, Rarity.UNCOMMON, mage.cards.d.DisplacerBeast.class));
         cards.add(new SetCardInfo("Divine Smite", 12, Rarity.UNCOMMON, mage.cards.d.DivineSmite.class));
-        cards.add(new SetCardInfo("Djinni Windseeker", 55, Rarity.COMMON, mage.cards.d.DjinniWindseeker.class));
+        cards.add(new SetCardInfo("Djinni Windseer", 55, Rarity.COMMON, mage.cards.d.DjinniWindseer.class));
         cards.add(new SetCardInfo("Dragon Turtle", 56, Rarity.RARE, mage.cards.d.DragonTurtle.class));
         cards.add(new SetCardInfo("Dragon's Disciple", 13, Rarity.UNCOMMON, mage.cards.d.DragonsDisciple.class));
         cards.add(new SetCardInfo("Drider", 98, Rarity.UNCOMMON, mage.cards.d.Drider.class));
@@ -194,7 +194,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Skullport Merchant", 120, Rarity.UNCOMMON, mage.cards.s.SkullportMerchant.class));
         cards.add(new SetCardInfo("Soulknife Spy", 75, Rarity.COMMON, mage.cards.s.SoulknifeSpy.class));
         cards.add(new SetCardInfo("Sphere of Annihilation", 121, Rarity.RARE, mage.cards.s.SphereOfAnnihilation.class));
-        cards.add(new SetCardInfo("Spike Pit Trap", 251, Rarity.COMMON, mage.cards.s.SpikePitTrap.class));
+        cards.add(new SetCardInfo("Spiked Pit Trap", 251, Rarity.COMMON, mage.cards.s.SpikedPitTrap.class));
         cards.add(new SetCardInfo("Split the Party", 76, Rarity.UNCOMMON, mage.cards.s.SplitTheParty.class));
         cards.add(new SetCardInfo("Spoils of the Hunt", 205, Rarity.COMMON, mage.cards.s.SpoilsOfTheHunt.class));
         cards.add(new SetCardInfo("Steadfast Paladin", 38, Rarity.COMMON, mage.cards.s.SteadfastPaladin.class));
