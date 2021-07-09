@@ -8,7 +8,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -80,7 +79,7 @@ class KnightsChargeEffect extends OneShotEffect {
                 player.getGraveyard()
                         .getCards(game)
                         .stream()
-                        .filter(Card::isCreature)
+                        .filter(card1 -> card1.isCreature(game))
                         .filter(card -> card.hasSubtype(SubType.KNIGHT, game))
                         .collect(Collectors.toSet())
         ), Zone.BATTLEFIELD, source, game);

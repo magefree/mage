@@ -61,7 +61,7 @@ class PedanticLearningTriggeredAbility extends TriggeredAbilityImpl {
                 UUID cardOwnerId = card.getOwnerId();
                 if (cardOwnerId != null
                         && card.isOwnedBy(getControllerId())
-                        && card.isLand()) {
+                        && card.isLand(game)) {
                     return true;
                 }
             }

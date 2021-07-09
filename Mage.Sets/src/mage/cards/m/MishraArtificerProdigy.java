@@ -18,7 +18,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -77,7 +76,7 @@ class MishraArtificerProdigyTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isArtifact()) {
+            if (spell != null && spell.isArtifact(game)) {
                 ((MishraArtificerProdigyEffect) this.getEffects().get(0)).setName(spell.getName());
                 return true;
             }

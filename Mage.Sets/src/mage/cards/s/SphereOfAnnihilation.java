@@ -89,7 +89,7 @@ class SphereOfAnnihilationEffect extends OneShotEffect {
                 .map(Player::getGraveyard)
                 .map(g -> g.getCards(game))
                 .flatMap(Collection::stream)
-                .filter(card -> card.isCreature() || card.isPlaneswalker())
+                .filter(card -> card.isCreature(game) || card.isPlaneswalker(game))
                 .filter(card -> card.getManaValue() <= counters)
                 .forEach(cards::add);
         return player.moveCards(cards, Zone.EXILED, source, game);

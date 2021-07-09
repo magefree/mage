@@ -120,7 +120,7 @@ class RionyaFireDancerWatcher extends Watcher {
             return;
         }
         Spell spell = game.getSpell(event.getTargetId());
-        if (spell != null && spell.isInstantOrSorcery()) {
+        if (spell != null && spell.isInstantOrSorcery(game)) {
             playerMap.compute(spell.getControllerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
         }
     }

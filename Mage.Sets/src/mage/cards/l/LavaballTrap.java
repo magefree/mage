@@ -64,7 +64,7 @@ enum LavaballTrapCondition implements Condition {
                 if (permanents != null) {
                     int count = 0;
                     for (Permanent permanent : permanents) {
-                        if (permanent.isLand()) {
+                        if (permanent.isLand(game)) {
                             count++;
                             if (count == 2) {
                                 return true;

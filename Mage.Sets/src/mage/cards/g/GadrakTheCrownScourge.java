@@ -108,7 +108,7 @@ class GadrakTheCrownScourgeWatcher extends Watcher {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()
                 && zEvent.getTarget() != null
-                && zEvent.getTarget().isCreature()
+                && zEvent.getTarget().isCreature(game)
                 && !(zEvent.getTarget() instanceof PermanentToken)) {
             diedThisTurn++;
         }

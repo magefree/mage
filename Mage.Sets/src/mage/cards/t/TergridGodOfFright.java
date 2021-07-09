@@ -117,7 +117,7 @@ class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
                 break;
             case DISCARDED_CARD:
                 Card discardedCard = game.getCard(event.getTargetId());
-                if (discardedCard == null || !discardedCard.isPermanent()) {
+                if (discardedCard == null || !discardedCard.isPermanent(game)) {
                     return false;
                 }
                 break;

@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
@@ -66,7 +65,7 @@ class TreasureNabberAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.isArtifact()) {
+            if (permanent != null && permanent.isArtifact(game)) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
                 return true;
             }

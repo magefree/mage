@@ -75,7 +75,7 @@ class FireServantEffect extends ReplacementEffectImpl {
         return spell != null &&
                 spell.isControlledBy(source.getControllerId()) &&
                 spell.getColor(game).isRed() &&
-                spell.isInstantOrSorcery();
+                spell.isInstantOrSorcery(game);
     }
 
     @Override

@@ -96,7 +96,7 @@ class FeatherTheRedeemedTriggeredAbility extends TriggeredAbilityImpl {
             for (Target target : mode.getTargets()) {
                 for (UUID targetId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null && permanent.isCreature()
+                    if (permanent != null && permanent.isCreature(game)
                             && permanent.isControlledBy(getControllerId())) {
                         this.getEffects().clear();
                         this.addEffect(new FeatherTheRedeemedEffect(new MageObjectReference(spell, game)));
@@ -107,7 +107,7 @@ class FeatherTheRedeemedTriggeredAbility extends TriggeredAbilityImpl {
             for (Effect effect : mode.getEffects()) {
                 for (UUID targetId : effect.getTargetPointer().getTargets(game, sa)) {
                     Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null && permanent.isCreature()
+                    if (permanent != null && permanent.isCreature(game)
                             && permanent.isControlledBy(getControllerId())) {
                         this.getEffects().clear();
                         this.addEffect(new FeatherTheRedeemedEffect(new MageObjectReference(spell, game)));
@@ -171,7 +171,7 @@ class FeatherTheRedeemedEffect extends ReplacementEffectImpl {
                 && event.getSourceId() != null) {
             if (event.getSourceId().equals(event.getTargetId()) && mor.getZoneChangeCounter() == game.getState().getZoneChangeCounter(event.getSourceId())) {
                 Spell spell = game.getStack().getSpell(mor.getSourceId());
-                return spell != null && spell.isInstantOrSorcery();
+                return spell != null && spell.isInstantOrSorcery(game);
             }
         }
         return false;

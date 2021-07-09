@@ -11,7 +11,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -82,7 +81,7 @@ class SummoningTrapWatcher extends Watcher {
             }
             if (counteredSpell instanceof Spell
                     && !players.contains(counteredSpell.getControllerId())
-                    && counteredSpell.isCreature()) {
+                    && counteredSpell.isCreature(game)) {
                 StackObject counteringStackObject = game.getStack().getStackObject(event.getSourceId());
                 if (counteringStackObject == null) {
                     counteringStackObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);

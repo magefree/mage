@@ -82,7 +82,7 @@ class KlothysGodOfDestinyEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        boolean isLand = card.isLand();
+        boolean isLand = card.isLand(game);
         player.moveCards(card, Zone.EXILED, source, game);
         if (isLand) {
             Mana mana = new Mana();

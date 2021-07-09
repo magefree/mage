@@ -72,7 +72,7 @@ class GideonsDefeatEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             controller.moveCards(permanent, Zone.EXILED, source, game);
             game.getState().processAction(game);
-            if (permanent.isPlaneswalker() && permanent.hasSubtype(SubType.GIDEON, game)) {
+            if (permanent.isPlaneswalker(game) && permanent.hasSubtype(SubType.GIDEON, game)) {
                 controller.gainLife(5, game, source);
             }
             return true;

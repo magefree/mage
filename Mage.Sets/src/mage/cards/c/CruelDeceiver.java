@@ -79,7 +79,7 @@ class CruelDeceiverEffect extends OneShotEffect {
             if (card != null) {
                 cards.add(card);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
-                if (card.isLand()) {
+                if (card.isLand(game)) {
                     game.addEffect(new GainAbilitySourceEffect(new DealsDamageToACreatureTriggeredAbility(new DestroyTargetEffect(true), false, false, true), Duration.EndOfTurn), source);
                 }
             }

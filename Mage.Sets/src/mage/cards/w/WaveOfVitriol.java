@@ -83,7 +83,7 @@ class WaveOfVitriolEffect extends OneShotEffect {
                 if (player != null) {
                     int count = 0;
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
-                        if (permanent.sacrifice(source, game) && permanent.isLand()) {
+                        if (permanent.sacrifice(source, game) && permanent.isLand(game)) {
                             count++;
                         }
                     }

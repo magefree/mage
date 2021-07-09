@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.TargetPlayer;
 
@@ -59,7 +58,7 @@ class MagneticMineTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()
-                && zEvent.getTarget().isArtifact()
+                && zEvent.getTarget().isArtifact(game)
                 && !Objects.equals(zEvent.getTarget().getId(), this.getSourceId())) {
             this.getTargets().get(0).add(zEvent.getTarget().getControllerId(), game);
             return true;

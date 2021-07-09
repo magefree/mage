@@ -119,7 +119,7 @@ class CloneShellDiesEffect extends OneShotEffect {
                     Card imprintedCard = game.getCard(imprinted.get(0));
                     if (imprintedCard != null) {
                         imprintedCard.setFaceDown(false, game);
-                        if (imprintedCard.isCreature()) {
+                        if (imprintedCard.isCreature(game)) {
                             controller.moveCards(imprintedCard, Zone.BATTLEFIELD, source, game);
                         }
                     }

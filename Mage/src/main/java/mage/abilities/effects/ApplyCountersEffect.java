@@ -35,7 +35,7 @@ public class ApplyCountersEffect extends ContinuousEffectImpl {
             }
         }
         if (layer == Layer.PTChangingEffects_7 && sublayer == SubLayer.Counters_7d) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE, game)) {
                 for (BoostCounter counter : permanent.getCounters(game).getBoostCounters()) {
                     permanent.addPower(counter.getPower() * counter.getCount());
                     permanent.addToughness(counter.getToughness() * counter.getCount());

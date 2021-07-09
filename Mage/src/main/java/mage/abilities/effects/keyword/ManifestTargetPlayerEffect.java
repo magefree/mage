@@ -54,7 +54,7 @@ public class ManifestTargetPlayerEffect extends OneShotEffect {
             Set<Card> cards = targetPlayer.getLibrary().getTopCards(game, amount);
             for (Card card : cards) {
                 ManaCosts manaCosts = null;
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     manaCosts = card.getSpellAbility().getManaCosts();
                     if (manaCosts == null) {
                         manaCosts = new ManaCostsImpl("{0}");

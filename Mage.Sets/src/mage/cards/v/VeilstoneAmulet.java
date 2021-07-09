@@ -10,11 +10,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -72,7 +70,7 @@ class VeilstoneAmuletEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability ability, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
-            if (permanent.isCreature() &&
+            if (permanent.isCreature(game) &&
                 permanent.isControlledBy(ability.getControllerId()) &&
                 game.getPlayer(ability.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
                 return true;

@@ -61,7 +61,7 @@ class RepercussionTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null || !permanent.isCreature()) {
+        if (permanent == null || !permanent.isCreature(game)) {
             return false;
         }
         getEffects().setValue(PLAYER_DAMAGE_AMOUNT_KEY, event.getAmount());

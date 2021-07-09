@@ -72,7 +72,7 @@ class ViashinoBeyEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         TargetOpponent targetDefender = new TargetOpponent();
         if (controller != null) {
-            game.getBattlefield().getAllActivePermanents(CardType.CREATURE).stream().filter((permanent) -> (filter.match(permanent, source.getSourceId(), source.getControllerId(), game))).forEachOrdered((permanent) -> {
+            game.getBattlefield().getAllActivePermanents(CardType.CREATURE, game).stream().filter((permanent) -> (filter.match(permanent, source.getSourceId(), source.getControllerId(), game))).forEachOrdered((permanent) -> {
                 if (game.getOpponents(controller.getId()).size() > 1) {
                     controller.choose(outcome.Benefit, targetDefender, source.getSourceId(), game);
                 } else {

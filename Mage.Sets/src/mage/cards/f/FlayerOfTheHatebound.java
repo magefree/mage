@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
@@ -73,7 +72,7 @@ class FlayerTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent != null
                 && ((EntersTheBattlefieldEvent) event).getFromZone() == Zone.GRAVEYARD
                 && permanent.isOwnedBy(controllerId)
-                && (permanent.isCreature() || permanent.getId().equals(getSourceId()))) {
+                && (permanent.isCreature(game) || permanent.getId().equals(getSourceId()))) {
             Effect effect = this.getEffects().get(0);
             effect.setValue("damageSource", event.getTargetId());
             return true;

@@ -62,7 +62,7 @@ class ErraticExplosionEffect extends OneShotEffect {
             Card nonLandCard = null;
             for (Card card : controller.getLibrary().getCards(game)) {
                 toReveal.add(card);
-                if (!card.isLand()) {
+                if (!card.isLand(game)) {
                     nonLandCard = card;
                     break;
                 }

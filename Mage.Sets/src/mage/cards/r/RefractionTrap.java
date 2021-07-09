@@ -64,7 +64,7 @@ enum RefractionTrapCondition implements Condition {
                 List<Spell> spells = watcher.getSpellsCastThisTurn(opponentId);
                 if (spells != null) {
                     for (Spell spell : spells) {
-                        if ((spell.isSorcery() || spell.isInstant())
+                        if ((spell.isSorcery(game) || spell.isInstant(game))
                                 && spell.getColor(game).isRed()) {
                             return true;
                         }

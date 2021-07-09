@@ -89,7 +89,7 @@ class FightEnchantedTargetEffect extends OneShotEffect {
                     Permanent creature1 = game.getPermanent(source.getTargets().get(0).getFirstTarget());
                     // 20110930 - 701.10
                     if (creature1 != null && enchantedCreature != null) {
-                        if (creature1.isCreature() && enchantedCreature.isCreature()) {
+                        if (creature1.isCreature(game) && enchantedCreature.isCreature(game)) {
                             return enchantedCreature.fight(creature1, source, game);
                         }
                     }

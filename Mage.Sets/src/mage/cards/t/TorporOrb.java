@@ -63,7 +63,7 @@ class TorporOrbEffect extends ContinuousRuleModifyingEffectImpl {
         Ability ability = (Ability) getValue("targetAbility");
         if (ability != null && ability.getAbilityType() == AbilityType.TRIGGERED) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null && permanent.isCreature()) {
+            if (permanent != null && permanent.isCreature(game)) {
                 return (((TriggeredAbility) ability).checkTrigger(event, game));
             }
         }

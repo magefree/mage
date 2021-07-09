@@ -70,7 +70,7 @@ class EidolonOfObstructionEffect extends CostModificationEffectImpl {
         if (permanent == null) {
             return false;
         }
-        return permanent.isPlaneswalker()
+        return permanent.isPlaneswalker(game)
                 && game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId());
     }
 

@@ -137,7 +137,7 @@ class SerpentsSoulJarCastFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
         Card card = game.getCard(sourceId);
-        return card != null && card.isCreature() && !card.isLand();
+        return card != null && card.isCreature(game) && !card.isLand(game);
     }
 }
 

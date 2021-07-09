@@ -201,7 +201,7 @@ public class Spell extends StackObjectImpl implements Card {
                 turnController.controlPlayersTurn(game, controller.getId());
             }
         }
-        if (this.isInstantOrSorcery()) {
+        if (this.isInstantOrSorcery(game)) {
             int index = 0;
             result = false;
             boolean legalParts = false;
@@ -245,17 +245,15 @@ public class Spell extends StackObjectImpl implements Card {
             }
             counter(null, /*this.getSpellAbility()*/ game);
             return false;
-        } else if (this.isEnchantment() && this.hasSubtype(SubType.AURA, game)) {
+        } else if (this.isEnchantment(game) && this.hasSubtype(SubType.AURA, game)) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 boolean bestow = SpellAbilityCastMode.BESTOW.equals(ability.getSpellAbilityCastMode());
                 if (bestow) {
                     // before put to play:
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
-                    card.getCardType().remove(CardType.CREATURE);
-                    if (!card.hasSubtype(SubType.AURA, game)) {
-                        card.addSubType(game, SubType.AURA);
-                    }
+                    card.removeCardType(CardType.CREATURE);
+                    card.addSubType(game, SubType.AURA);
                 }
                 UUID permId;
                 boolean flag;
@@ -284,7 +282,7 @@ public class Spell extends StackObjectImpl implements Card {
                             // restore removed stats (see "before put to play" above)
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
                             card.addCardType(CardType.CREATURE);
-                            card.removeSubType(game, SubType.AURA);
+                            card.getSubtype().remove(SubType.AURA);
                         }
                     }
                     if (isCopy()) {
@@ -304,7 +302,7 @@ public class Spell extends StackObjectImpl implements Card {
                     return ability.resolve(game);
                 }
                 if (bestow) {
-                    card.addCardType(CardType.CREATURE);
+                    card.addCardType(game, CardType.CREATURE);
                 }
                 return false;
             }
@@ -313,7 +311,7 @@ public class Spell extends StackObjectImpl implements Card {
                 if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent instanceof PermanentCard) {
-                        ((PermanentCard) permanent).getCard().addCardType(CardType.CREATURE);
+                        ((PermanentCard) permanent).getCard().addCardType(game, CardType.CREATURE);
                         ((PermanentCard) permanent).getCard().removeSubType(game, SubType.AURA);
                         return true;
                     }
@@ -486,11 +484,7 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public String getLogName() {
         if (faceDown) {
-            if (this.isCreature()) {
-                return "face down creature spell";
-            } else {
-                return "face down spell";
-            }
+            return "face down spell";
         }
         return GameLog.getColoredObjectIdName(card);
     }
@@ -510,19 +504,19 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public ArrayList<CardType> getCardType() {
+    public List<CardType> getCardType(Game game) {
         if (faceDown) {
-            ArrayList<CardType> cardTypes = new ArrayList<>();
+            List<CardType> cardTypes = new ArrayList<>();
             cardTypes.add(CardType.CREATURE);
             return cardTypes;
         }
         if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
-            ArrayList<CardType> cardTypes = new ArrayList<>();
-            cardTypes.addAll(card.getCardType());
+            List<CardType> cardTypes = new ArrayList<>();
+            cardTypes.addAll(card.getCardType(game));
             cardTypes.remove(CardType.CREATURE);
             return cardTypes;
         }
-        return card.getCardType();
+        return card.getCardType(game);
     }
 
     @Override
@@ -1129,5 +1123,20 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public String toString() {
         return ability.toString();
+    }
+
+    @Override
+    public List<CardType> getCardTypeForDeckbuilding() {
+        throw new UnsupportedOperationException("Must call for cards only.");
+    }
+
+    @Override
+    public boolean hasCardTypeForDeckbuilding(CardType cardType) {
+        return false;
+    }
+
+    @Override
+    public boolean hasSubTypeForDeckbuilding(SubType subType) {
+        return false;
     }
 }

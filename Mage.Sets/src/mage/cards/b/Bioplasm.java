@@ -76,7 +76,7 @@ class BioplasmEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        if (player.moveCards(card, Zone.EXILED, source, game) && card.isCreature()) {
+        if (player.moveCards(card, Zone.EXILED, source, game) && card.isCreature(game)) {
             game.addEffect(new BoostSourceEffect(card.getPower().getValue(), card.getToughness().getValue(), Duration.EndOfTurn), source);
         }
         return true;

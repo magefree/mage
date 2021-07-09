@@ -79,7 +79,7 @@ class ContestedWarZoneAbility extends TriggeredAbilityImpl {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         if (damageEvent.isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (damageEvent.getPlayerId().equals(getControllerId()) && permanent != null && permanent.isCreature()) {
+            if (damageEvent.getPlayerId().equals(getControllerId()) && permanent != null && permanent.isCreature(game)) {
                 game.getState().setValue(getSourceId().toString(), permanent.getControllerId());
                 return true;
             }

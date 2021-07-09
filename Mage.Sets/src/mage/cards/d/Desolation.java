@@ -113,7 +113,7 @@ class DesolationWatcher extends Watcher {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId()); // need only info about permanent
-                if (permanent != null && permanent.isLand()) {
+                if (permanent != null && permanent.isLand(game)) {
                     tappedForManaThisTurnPlayers.add(playerId);
                 }
             }

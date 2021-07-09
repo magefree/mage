@@ -86,7 +86,7 @@ class SummonThePackEffect extends OneShotEffect {
                     StringBuilder message = new StringBuilder(controller.getLogName()).append(" opened: ");
 
                     for (Card c : boosterPack) {
-                        if (c != null && c.isCreature()) {
+                        if (c != null && c.isCreature(game)) {
                             message.append(c.getName()).append(" ");
                             message.append(" (creature card) ");
                             ContinuousEffect effect2 = new BecomesBlackZombieAdditionEffect(false);

@@ -95,8 +95,8 @@ class ImprisonedInTheMoonEffect extends ContinuousEffectImpl {
                 // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
                 // So the ability removing has to be done before Layer 6
                 permanent.removeAllAbilities(source.getSourceId(), game);
-                permanent.getCardType().clear();
-                permanent.addCardType(CardType.LAND);
+                permanent.removeAllCardTypes(game);
+                permanent.addCardType(game, CardType.LAND);
                 permanent.retainAllLandSubTypes(game);
                 break;
             case ColorChangingEffects_5:

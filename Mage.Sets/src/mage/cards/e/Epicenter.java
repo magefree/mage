@@ -69,7 +69,7 @@ class EpicenterEffect extends OneShotEffect {
         Iterator<Permanent> permanents = game.getBattlefield().getActivePermanents(source.getControllerId(), game).iterator();
         while (permanents.hasNext()) {
             Permanent p = permanents.next();
-            if (p.isLand()) {
+            if (p.isLand(game)) {
                 p.sacrifice(source, game);
             }
         }

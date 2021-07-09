@@ -82,7 +82,7 @@ class WildfireDevilsEffect extends OneShotEffect {
             return false;
         }
         game.informPlayers("The chosen random player is " + randomPlayer.getLogName());
-        if (randomPlayer.getGraveyard().getCards(game).stream().noneMatch(Card::isInstantOrSorcery)) {
+        if (randomPlayer.getGraveyard().getCards(game).stream().noneMatch(card1 -> card1.isInstantOrSorcery(game))) {
             return false;
         }
         TargetCardInGraveyard targetCard = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);

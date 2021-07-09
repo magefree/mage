@@ -75,7 +75,7 @@ class AuspiciousStarrixEffect extends OneShotEffect {
         Cards toExile = new CardsImpl();
         Cards toBattlefield = new CardsImpl();
         for (Card card : player.getLibrary().getCards(game)) {
-            if (card != null && card.isPermanent()) {
+            if (card != null && card.isPermanent(game)) {
                 toBattlefield.add(card);
                 count++;
             }

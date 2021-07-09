@@ -62,13 +62,13 @@ class DruidicSatchelEffect extends OneShotEffect {
         Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
             controller.revealCards(source, new CardsImpl(card), game);
-            if (card.isCreature()) {
+            if (card.isCreature(game)) {
                 new SaprolingToken().putOntoBattlefield(1, game, source, source.getControllerId());
             }
-            if (card.isLand()) {
+            if (card.isLand(game)) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
-            if (!card.isCreature() && !card.isLand()) {
+            if (!card.isCreature(game) && !card.isLand(game)) {
                 controller.gainLife(2, game, source);
             }
         }

@@ -80,7 +80,7 @@ class HapatraVizierOfPoisonsTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null) {
             permanent = game.getPermanentEntering(event.getTargetId());
         }
-        return permanent != null && permanent.isCreature();
+        return permanent != null && permanent.isCreature(game);
 
     }
 

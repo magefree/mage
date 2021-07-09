@@ -58,8 +58,8 @@ class PlayCreatureLandWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.PLAY_LAND) {
             Card card = game.getCard(event.getTargetId());
             if (card != null
-                    && card.isLand()
-                    && card.isCreature()
+                    && card.isLand(game)
+                    && card.isCreature(game)
                     && !playerPlayedLand.contains(event.getPlayerId())) {
                 playerPlayedLand.add(event.getPlayerId());
                 landPlayed.add(event.getTargetId());
@@ -117,7 +117,7 @@ class UphillBattleTapEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null && permanent.isCreature()) {
+            if (permanent != null && permanent.isCreature(game)) {
                 return true;
             }
         }

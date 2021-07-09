@@ -108,10 +108,10 @@ class VoidMawEffect extends ReplacementEffectImpl {
             Permanent permanent = ((ZoneChangeEvent) event).getTarget();
             if (permanent != null && !permanent.getId().equals(source.getSourceId())) {
                 if (zEvent.getTarget() != null) { // if it comes from permanent, check if it was a creature on the battlefield
-                    if (zEvent.getTarget().isCreature()) {
+                    if (zEvent.getTarget().isCreature(game)) {
                         return true;
                     }
-                } else if (permanent.isCreature()) {
+                } else if (permanent.isCreature(game)) {
                     return true;
                 }
             }

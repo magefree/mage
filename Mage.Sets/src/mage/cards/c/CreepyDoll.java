@@ -73,7 +73,7 @@ class CreepyDollTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && ((DamagedEvent) event).isCombatDamage()
                 && event.getSourceId().equals(sourceId)) {
             getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));

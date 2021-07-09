@@ -81,7 +81,7 @@ class OathOfLilianaWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getToZone() == Zone.BATTLEFIELD
-                    && zEvent.getTarget().isPlaneswalker()) {
+                    && zEvent.getTarget().isPlaneswalker(game)) {
                 players.add(zEvent.getTarget().getControllerId());
             }
         }

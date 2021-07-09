@@ -70,8 +70,8 @@ enum EliteHeadhunterPredicate implements ObjectSourcePlayerPredicate<ObjectSourc
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
         MageObject obj = input.getObject();
         if (obj.getId().equals(input.getSourceId())) {
-            return obj.isArtifact();
+            return obj.isArtifact(game);
         }
-        return obj.isCreature() || obj.isArtifact();
+        return obj.isCreature(game) || obj.isArtifact(game);
     }
 }

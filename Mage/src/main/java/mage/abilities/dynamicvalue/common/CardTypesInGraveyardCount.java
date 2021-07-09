@@ -1,6 +1,5 @@
 package mage.abilities.dynamicvalue.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -31,7 +30,7 @@ public enum CardTypesInGraveyardCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return getStream(game, sourceAbility)
                 .filter(card -> !card.isCopy() && !(card instanceof PermanentToken))
-                .map(MageObject::getCardType)
+                .map(card -> card.getCardType(game))
                 .flatMap(Collection::stream)
                 .distinct()
                 .mapToInt(x -> 1)

@@ -1,5 +1,6 @@
 package mage.cards;
 
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerWithAbility;
@@ -313,7 +314,7 @@ public abstract class ExpansionSet implements Serializable {
             return booster.stream().anyMatch(card -> card.isLegendary() && card.isCreature());
         }
         if (needsPlaneswalker) {
-            return booster.stream().filter(card -> card.isPlaneswalker()).count() == 1;
+            return booster.stream().filter(MageObject::isPlaneswalker).count() == 1;
         }
 
         // TODO: add partner check

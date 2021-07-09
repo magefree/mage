@@ -13,7 +13,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
@@ -67,7 +66,7 @@ class AetherChargeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isCreature() && permanent.hasSubtype(SubType.BEAST, game)
+        if (permanent != null && permanent.isCreature(game) && permanent.hasSubtype(SubType.BEAST, game)
                 && permanent.isControlledBy(this.controllerId)) {
             Effect effect = this.getEffects().get(0);
             effect.setValue("damageSource", event.getTargetId());

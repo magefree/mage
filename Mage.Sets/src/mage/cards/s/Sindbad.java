@@ -15,8 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -75,7 +73,7 @@ class SindbadEffect extends OneShotEffect {
             return true;
         }
         controller.revealCards(source, new CardsImpl(card), game);
-        if (!card.isLand()) {
+        if (!card.isLand(game)) {
             controller.discard(card, false, source, game);
         }
         return true;

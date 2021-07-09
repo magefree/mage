@@ -89,7 +89,7 @@ class VigorReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && permanent.isControlledBy(source.getControllerId())
                 && !event.getTargetId().equals(source.getSourceId());
     }

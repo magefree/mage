@@ -74,7 +74,7 @@ class KalainReclusivePainterEffect extends ReplacementEffectImpl {
         return creature != null
                 && !creature.getId().equals(source.getSourceId())
                 && creature.isControlledBy(source.getControllerId())
-                && creature.isCreature();
+                && creature.isCreature(game);
     }
 
     @Override

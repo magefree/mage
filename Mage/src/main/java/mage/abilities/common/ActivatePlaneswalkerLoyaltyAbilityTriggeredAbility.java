@@ -44,7 +44,7 @@ public class ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility extends Triggere
             return false;
         }
         Permanent permanent = stackAbility.getSourcePermanentOrLKI(game);
-        if (permanent == null || !permanent.isPlaneswalker()
+        if (permanent == null || !permanent.isPlaneswalker(game)
                 || !permanent.hasSubtype(planeswalkerSubType, game)) {
             return false;
         }

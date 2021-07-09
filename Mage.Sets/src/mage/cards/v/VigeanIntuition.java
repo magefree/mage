@@ -113,7 +113,7 @@ class VigeanIntuitionEffect extends OneShotEffect {
                 Cards putInHand = new CardsImpl();
                 Cards putInGraveyard = new CardsImpl();
                 for (Card card : top) {
-                    if (card != null && card.getCardType().contains(type)) {
+                    if (card != null && card.getCardType(game).contains(type)) {
                         putInHand.add(card);
                     } else {
                         putInGraveyard.add(card);

@@ -83,7 +83,7 @@ class GisaAndGeralfCastFromGraveyardEffect extends AsThoughEffectImpl {
             Permanent sourceObject = game.getPermanent(source.getSourceId());
             if (sourceObject != null && objectCard != null
                     && objectCard.isOwnedBy(source.getControllerId())
-                    && objectCard.isCreature()
+                    && objectCard.isCreature(game)
                     && objectCard.hasSubtype(SubType.ZOMBIE, game)
                     && objectCard.getSpellAbility() != null
                     && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)) {

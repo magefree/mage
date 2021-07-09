@@ -20,7 +20,7 @@ public enum InstantSorceryExileGraveyardCount implements DynamicValue {
         if (player != null) {
             int exileCount = 0;
             for (Card exiledCard : game.getExile().getAllCards(game)) {
-                if (exiledCard.getOwnerId().equals(player.getId()) && exiledCard.isInstantOrSorcery()) {
+                if (exiledCard.getOwnerId().equals(player.getId()) && exiledCard.isInstantOrSorcery(game)) {
                     exileCount++;
                 }
             }

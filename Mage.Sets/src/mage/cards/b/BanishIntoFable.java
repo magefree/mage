@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KnightToken;
 import mage.game.stack.Spell;
 import mage.target.common.TargetNonlandPermanent;
@@ -117,14 +116,14 @@ class BanishIntoFableEffect extends OneShotEffect {
         if (game.getBattlefield()
                 .getAllActivePermanents(source.getControllerId())
                 .stream()
-                .filter(Permanent::isArtifact)
+                .filter(permanent -> permanent.isArtifact(game))
                 .count() > 0) {
             spell.createCopyOnStack(game, source, source.getControllerId(), true);
         }
         if (game.getBattlefield()
                 .getAllActivePermanents(source.getControllerId())
                 .stream()
-                .filter(Permanent::isEnchantment)
+                .filter(permanent -> permanent.isEnchantment(game))
                 .count() > 0) {
             spell.createCopyOnStack(game, source, source.getControllerId(), true);
         }

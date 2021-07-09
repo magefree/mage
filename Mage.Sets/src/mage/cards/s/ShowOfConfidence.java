@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
@@ -77,7 +76,7 @@ class ShowOfConfidenceEffect extends OneShotEffect {
         int copies = watcher.getSpellsCastThisTurn(source.getControllerId())
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isInstantOrSorcery)
+                .filter(spell1 -> spell1.isInstantOrSorcery(game))
                 .filter(s -> !s.getSourceId().equals(source.getSourceId())
                         || s.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter())
                 .mapToInt(x -> 1)

@@ -41,7 +41,7 @@ public class ProgenitorMimicTest extends CardTestPlayerBase {
         int nonTokens = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
             if (permanent.getControllerId().equals(playerB.getId())) {
-                if (permanent.isCreature()) {
+                if (permanent.isCreature(currentGame)) {
                     if (permanent instanceof PermanentToken) {
                         tokens++;
                     } else {
@@ -121,7 +121,7 @@ public class ProgenitorMimicTest extends CardTestPlayerBase {
         int nonTokens = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
             if (permanent.getControllerId().equals(playerB.getId())) {
-                if (permanent.isCreature()) {
+                if (permanent.isCreature(currentGame)) {
                     if (permanent instanceof PermanentToken) {
                         tokens++;
                     } else {

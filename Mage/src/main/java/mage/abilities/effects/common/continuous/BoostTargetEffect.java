@@ -78,7 +78,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         int affectedTargets = 0;
         for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent target = game.getPermanent(permanentId);
-            if (target != null && target.isCreature()) {
+            if (target != null && target.isCreature(game)) {
                 target.addPower(power.calculate(game, source, this));
                 target.addToughness(toughness.calculate(game, source, this));
                 affectedTargets++;

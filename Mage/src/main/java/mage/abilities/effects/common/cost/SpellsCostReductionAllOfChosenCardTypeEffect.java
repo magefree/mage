@@ -32,7 +32,7 @@ public class SpellsCostReductionAllOfChosenCardTypeEffect extends SpellsCostRedu
     protected boolean selectedByRuntimeData(Card card, Ability source, Game game) {
         Object savedType = game.getState().getValue(source.getSourceId() + "_type");
         if (savedType instanceof String) {
-            return card.getCardType().contains(CardType.fromString((String) savedType));
+            return card.getCardType(game).contains(CardType.fromString((String) savedType));
         }
         return false;
     }

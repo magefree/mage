@@ -75,7 +75,7 @@ class RayamiFirstOfTheFallenEffect extends ContinuousEffectImpl {
         game.getExile()
                 .getAllCards(game)
                 .stream()
-                .filter(Card::isCreature)
+                .filter(card1 -> card1.isCreature(game))
                 .filter(card -> card.getCounters(game).getCount(CounterType.BLOOD) > 0)
                 .map(card -> card.getAbilities(game))
                 .flatMap(Collection::stream)
@@ -143,7 +143,7 @@ class RayamiFirstOfTheFallenReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zce = (ZoneChangeEvent) event;
         return zce.isDiesEvent()
-                && zce.getTarget().isCreature()
+                && zce.getTarget().isCreature(game)
                 && !(zce.getTarget() instanceof PermanentToken);
     }
 }

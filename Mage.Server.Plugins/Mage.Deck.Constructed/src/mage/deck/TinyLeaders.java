@@ -4,6 +4,7 @@ import mage.cards.*;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
+import mage.constants.CardType;
 import mage.filter.FilterMana;
 import mage.game.GameTinyLeadersImpl;
 
@@ -146,7 +147,8 @@ public class TinyLeaders extends Constructed {
                 }
                 return false;
             }
-            if ((commander.isCreature() && commander.isLegendary()) || commander.isPlaneswalker()) {
+            if ((commander.hasCardTypeForDeckbuilding(CardType.CREATURE) && commander.isLegendary())
+                    || commander.hasCardTypeForDeckbuilding(CardType.PLANESWALKER)) {
                 if (!bannedCommander.contains(commander.getName())) {
                     FilterMana color = commander.getColorIdentity();
                     for (Card card : deck.getCards()) {

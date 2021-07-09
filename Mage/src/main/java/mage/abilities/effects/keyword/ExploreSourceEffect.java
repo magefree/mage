@@ -106,7 +106,7 @@ public class ExploreSourceEffect extends OneShotEffect {
             permanentController.revealCards("Explored card", cards, game);
             cardWasRevealed = true;
             if (card != null) {
-                if (card.isLand()) {
+                if (card.isLand(game)) {
                     permanentController.moveCards(card, Zone.HAND, source, game);
                 } else {
                     if (game.getState().getZone(permanentId) == Zone.BATTLEFIELD) { // needed in case LKI object is used

@@ -77,7 +77,7 @@ class ZoologistEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
             if (card != null) {
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {
                     controller.moveCards(card, Zone.GRAVEYARD, source, game);

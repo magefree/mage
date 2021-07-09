@@ -111,7 +111,7 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
         if (permanent == null) {
             permanent = game.getPermanentEntering(event.getTargetId());
             landPlayed = (permanent != null
-                    && permanent.isLand());  // a played land is not an effect
+                    && permanent.isLand(game));  // a played land is not an effect
         }
         return permanent != null
                 && permanent.isControlledBy(source.getControllerId())

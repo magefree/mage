@@ -75,7 +75,7 @@ class ThousandYearElixirEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
         return permanent != null
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && permanent.isControlledBy(source.getControllerId());
     }
 }

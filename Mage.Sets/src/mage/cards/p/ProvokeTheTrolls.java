@@ -64,7 +64,7 @@ class ProvokeTheTrollsEffect extends OneShotEffect {
         if (permanent == null || permanent.damage(3, source.getSourceId(), source, game) < 1) {
             return false;
         }
-        if (permanent.isCreature()) {
+        if (permanent.isCreature(game)) {
             game.addEffect(new BoostTargetEffect(3, 0), source);
         }
         return true;

@@ -91,7 +91,7 @@ class MassacreGirlDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.isDiesEvent() && zEvent.getTarget().isCreature();
+        return zEvent.isDiesEvent() && zEvent.getTarget().isCreature(game);
     }
 
     @Override

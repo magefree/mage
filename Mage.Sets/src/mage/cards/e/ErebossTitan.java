@@ -93,7 +93,7 @@ class ErebossTitanTriggeredAbility extends TriggeredAbilityImpl {
             Card card = game.getCard(zEvent.getTargetId());
             Player controller = game.getPlayer(getControllerId());
             return card != null
-                    && card.isCreature()
+                    && card.isCreature(game)
                     && controller != null
                     && controller.hasOpponent(card.getOwnerId(), game);
         }

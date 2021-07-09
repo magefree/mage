@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -97,7 +96,7 @@ class TrainingGroundsEffect extends CostModificationEffectImpl {
         //Activated abilities of creatures you control
         Permanent permanent = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
         return permanent != null
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && permanent.isControlledBy(source.getControllerId());
     }
 

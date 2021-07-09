@@ -74,7 +74,7 @@ class CatacombDragonEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent == null || !permanent.isCreature()) {
+        if (permanent == null || !permanent.isCreature(game)) {
             return false;
         }
         int unBoost = -1 * Math.floorDiv(permanent.getPower().getValue(), 2);

@@ -93,7 +93,7 @@ class TheBiblioplexEffect extends OneShotEffect {
             return false;
         }
         player.lookAtCards("Top of library", card, game);
-        if (card.isInstantOrSorcery() && player.chooseUse(
+        if (card.isInstantOrSorcery(game) && player.chooseUse(
                 Outcome.DrawCard, "Reveal that card and put it into your hand?", source, game
         )) {
             player.revealCards(source, new CardsImpl(card), game);

@@ -92,7 +92,7 @@ class SparkDoubleCopyApplier extends CopyApplier {
         // counters only for original card, not copies
         if (!isCopyOfCopy(source, blueprint, copyToObjectId)) {
             // enters with an additional +1/+1 counter on it if it’s a creature
-            if (blueprint.isCreature()) {
+            if (blueprint.isCreature(game)) {
                 blueprint.getAbilities().add(new EntersBattlefieldAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false)
                                 .setText("with an additional +1/+1 counter on it")
@@ -100,7 +100,7 @@ class SparkDoubleCopyApplier extends CopyApplier {
             }
 
             // enters with an additional loyalty counter on it if it’s a planeswalker
-            if (blueprint.isPlaneswalker()) {
+            if (blueprint.isPlaneswalker(game)) {
                 blueprint.getAbilities().add(new EntersBattlefieldAbility(
                         new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(), false)
                                 .setText("with an additional loyalty counter on it")

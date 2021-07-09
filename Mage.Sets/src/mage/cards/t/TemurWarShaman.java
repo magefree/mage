@@ -88,8 +88,8 @@ class TemurWarShamanFightEffect extends OneShotEffect {
         Permanent target = game.getPermanent(source.getFirstTarget());
         if (triggeredCreature != null
                 && target != null
-                && triggeredCreature.isCreature()
-                && target.isCreature()) {
+                && triggeredCreature.isCreature(game)
+                && target.isCreature(game)) {
             triggeredCreature.fight(target, source, game);
             return true;
         }

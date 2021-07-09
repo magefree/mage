@@ -80,7 +80,7 @@ class FaadiyahSeerEffect extends OneShotEffect {
             return true;
         }
         controller.revealCards(source, new CardsImpl(card), game);
-        if (!card.isLand()) {
+        if (!card.isLand(game)) {
             controller.discard(card, false, source, game);
         }
         return true;

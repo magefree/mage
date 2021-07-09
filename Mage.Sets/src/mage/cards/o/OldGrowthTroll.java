@@ -77,7 +77,7 @@ enum OldGrowthTrollCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) source.getEffects().get(0).getValue("permanentLeftBattlefield");
-        return permanent != null && permanent.isCreature();
+        return permanent != null && permanent.isCreature(game);
     }
 }
 
@@ -164,8 +164,8 @@ class OldGrowthTrollContinuousEffect extends ContinuousEffectImpl {
         Permanent troll = sourceObject;
         switch (layer) {
             case TypeChangingEffects_4:
-                troll.getCardType().clear();
-                troll.addCardType(CardType.ENCHANTMENT);
+                troll.removeAllCardTypes(game);
+                troll.addCardType(game, CardType.ENCHANTMENT);
                 troll.removeAllSubTypes(game);
                 troll.addSubType(game, SubType.AURA);
                 break;

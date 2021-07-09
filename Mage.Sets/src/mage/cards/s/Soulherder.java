@@ -87,7 +87,7 @@ class SoulherderTriggeredAbility extends ZoneChangeTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (permanent != null && permanent.isCreature()) {
+        if (permanent != null && permanent.isCreature(game)) {
             // custom check cause ZoneChangeTriggeredAbility for source object only
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             return (fromZone == null || zEvent.getFromZone() == fromZone)

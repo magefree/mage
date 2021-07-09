@@ -112,7 +112,7 @@ class MirrorGolemEffect extends ContinuousEffectImpl {
             if (imprinted != null && exileZone.contains(imprinted)) {
                 Card card = game.getCard(imprinted);
                 if (card != null) {
-                    for (CardType cardType : card.getCardType()) {
+                    for (CardType cardType : card.getCardType(game)) {
                         FilterCard filterCard;
                         if (cardType.equals(CardType.SORCERY)) {
                             filterCard = new FilterCard("sorceries");

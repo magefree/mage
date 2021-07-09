@@ -112,7 +112,7 @@ class DamagedByEnchantedWatcher extends Watcher {
             Permanent enchantment = game.getPermanent(this.getSourceId());
             if (enchantment != null && enchantment.isAttachedTo(event.getSourceId())) {
                 Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.isCreature()) {
+                if (permanent != null && permanent.isCreature(game)) {
                     MageObjectReference mor = new MageObjectReference(event.getTargetId(), game);
                     damagedCreatures.add(mor);
                 }

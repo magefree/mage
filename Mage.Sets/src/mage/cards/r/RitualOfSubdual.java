@@ -17,7 +17,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ManaEvent;
 
 /**
@@ -84,6 +83,6 @@ class RitualOfSubdualReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject mageObject = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        return mageObject != null && mageObject.isLand();
+        return mageObject != null && mageObject.isLand(game);
     }
 }

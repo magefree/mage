@@ -73,9 +73,9 @@ enum UmoriCondition implements CompanionCondition {
             }
             // First nonland checked.
             if (cardTypes.isEmpty()) {
-                cardTypes.addAll(card.getCardType());
+                cardTypes.addAll(card.getCardTypeForDeckbuilding());
             } else {
-                cardTypes.retainAll(card.getCardType());
+                cardTypes.retainAll(card.getCardTypeForDeckbuilding());
                 if (cardTypes.isEmpty()) {
                     return false;
                 }

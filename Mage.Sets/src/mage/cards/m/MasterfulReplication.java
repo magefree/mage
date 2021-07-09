@@ -70,7 +70,7 @@ class MasterfulReplicationEffect extends OneShotEffect {
             return false;
         }
         for (Permanent copyToArtifact : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (copyToArtifact.isArtifact() && !copyToArtifact.getId().equals(copyFromArtifact.getId())) {
+            if (copyToArtifact.isArtifact(game) && !copyToArtifact.getId().equals(copyFromArtifact.getId())) {
                 game.copyPermanent(Duration.EndOfTurn, copyFromArtifact, copyToArtifact.getId(), source, new EmptyCopyApplier());
             }
         }

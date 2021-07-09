@@ -109,7 +109,7 @@ class JadziOracleOfArcaviosEffect extends OneShotEffect {
             return false;
         }
         player.revealCards(source, new CardsImpl(card), game);
-        if (card.isLand()) {
+        if (card.isLand(game)) {
             return player.moveCards(card, Zone.BATTLEFIELD, source, game);
         }
         if (!player.chooseUse(outcome, "Cast " + card.getName() + " by paying {1}?", source, game)) {

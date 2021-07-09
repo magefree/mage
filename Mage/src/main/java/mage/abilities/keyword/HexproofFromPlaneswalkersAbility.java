@@ -32,7 +32,7 @@ public class HexproofFromPlaneswalkersAbility extends HexproofBaseAbility {
 
     @Override
     public boolean checkObject(MageObject source, Game game) {
-        return source.isPlaneswalker();
+        return source.isPlaneswalker(game);
     }
 
     @Override

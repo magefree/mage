@@ -81,7 +81,7 @@ class ZadaHedronGrinderTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Spell spell = game.getSpell(event.getTargetId());
-        if (spell == null || !spell.isInstantOrSorcery()) {
+        if (spell == null || !spell.isInstantOrSorcery(game)) {
             return false;
         }
         boolean noTargets = true;

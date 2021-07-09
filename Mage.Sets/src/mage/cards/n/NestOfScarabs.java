@@ -62,7 +62,7 @@ class NestOfScarabsTriggeredAbility extends TriggeredAbilityImpl {
             if (permanent == null) {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
-            if (permanent != null && permanent.isCreature()) {
+            if (permanent != null && permanent.isCreature(game)) {
                 getEffects().setValue("countersAdded", event.getAmount());
                 return true;
             }

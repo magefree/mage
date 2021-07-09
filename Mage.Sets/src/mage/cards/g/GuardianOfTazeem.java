@@ -83,7 +83,7 @@ class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null
-                && permanent.isLand()
+                && permanent.isLand(game)
                 && permanent.isControlledBy(getControllerId())) {
             for (Effect effect : getEffects()) {
                 if (effect instanceof GuardianOfTazeemEffect) {

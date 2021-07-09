@@ -75,7 +75,7 @@ class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getSpell(event.getTargetId());
-        if (spell != null && spell.isInstantOrSorcery()) {
+        if (spell != null && spell.isInstantOrSorcery(game)) {
             getEffects().setValue("triggeringSpell", spell);
             return true;
         }

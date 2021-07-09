@@ -125,7 +125,7 @@ class NykthosParagonEffect extends OneShotEffect {
         Integer life = (Integer) this.getValue("gainedLife");
         if (controller != null && sourceObject != null && life != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-                if (permanent != null && permanent.isCreature()) {
+                if (permanent != null && permanent.isCreature(game)) {
                     permanent.addCounters(CounterType.P1P1.createInstance(life), source.getControllerId(), source, game);
                     if (!game.isSimulation()) {
                         game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts " + life

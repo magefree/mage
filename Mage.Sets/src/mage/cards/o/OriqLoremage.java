@@ -80,7 +80,7 @@ class OriqLoremageEffect extends OneShotEffect {
         player.moveCards(card, Zone.GRAVEYARD, source, game);
         player.shuffleLibrary(source, game);
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (!card.isInstantOrSorcery() || permanent == null) {
+        if (!card.isInstantOrSorcery(game) || permanent == null) {
             return true;
         }
         permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);

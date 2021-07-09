@@ -90,7 +90,7 @@ class SosukeSonOfSeshiroTriggeredAbility extends TriggeredAbilityImpl {
         if (sourceCreature == null
                 || !sourceCreature.isControlledBy(this.getControllerId())
                 || targetCreature == null
-                || !targetCreature.isCreature()
+                || !targetCreature.isCreature(game)
                 || !sourceCreature.hasSubtype(SubType.WARRIOR, game)) {
             return false;
         }

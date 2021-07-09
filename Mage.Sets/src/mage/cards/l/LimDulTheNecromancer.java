@@ -88,7 +88,7 @@ class LimDulTheNecromancerEffect extends OneShotEffect {
             Card card = game.getCard(targetPointer.getFirst(game, source));
             if (card != null) {
                 if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)
-                        && card.isCreature()) {
+                        && card.isCreature(game)) {
                     Permanent creature = game.getPermanent(card.getId());
                     ContinuousEffect effect = new AddCardSubTypeTargetEffect(SubType.ZOMBIE, Duration.WhileOnBattlefield);
                     effect.setTargetPointer(new FixedTarget(creature.getId()));

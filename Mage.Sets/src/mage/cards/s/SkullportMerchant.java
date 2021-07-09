@@ -71,6 +71,6 @@ enum SkullportMerchantPredicate implements ObjectSourcePlayerPredicate<ObjectSou
         if (input.getObject().getId().equals(input.getSourceId())) {
             return false;
         }
-        return input.getObject().isCreature();
+        return input.getObject().isCreature(game);
     }
 }

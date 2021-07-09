@@ -80,7 +80,7 @@ class CuratorsWardTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
             Permanent enchanted = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (enchanted != null && enchanted.getAttachments().contains(getSourceId()) && enchanted.isHistoric()) {
+            if (enchanted != null && enchanted.getAttachments().contains(getSourceId()) && enchanted.isHistoric(game)) {
                 return true;
             }
         }

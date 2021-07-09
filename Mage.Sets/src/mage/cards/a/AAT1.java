@@ -75,7 +75,7 @@ public final class AAT1 extends CardImpl {
             Card card = game.getCard(event.getTargetId());
             if (card != null
                     && event.getPlayerId().equals(game.getControllerId(sourceId))
-                    && card.isCreature()
+                    && card.isCreature(game)
                     && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
                     && event.getData().equals("repair")) {
                 return true;

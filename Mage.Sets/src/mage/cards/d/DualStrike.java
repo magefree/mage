@@ -67,7 +67,7 @@ class DualStrikeAbility extends DelayedTriggeredAbility {
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell == null
-                || !spell.isInstantOrSorcery()
+                || !spell.isInstantOrSorcery(game)
                 || spell.getManaValue() > 4) {
             return false;
         }

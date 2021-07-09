@@ -79,7 +79,7 @@ class UndercityInformerEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         for (Card card : player.getLibrary().getCards(game)) {
             cards.add(card);
-            if (card.isLand()) {
+            if (card.isLand(game)) {
                 break;
             }
         }

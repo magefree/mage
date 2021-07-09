@@ -71,7 +71,7 @@ class TsabosWebPreventUntapEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.isLand()) {
+            if (permanent != null && permanent.isLand(game)) {
                 for (Ability ability :permanent.getAbilities()) {
                     if (!(ability instanceof PlayLandAbility)
                             && !(ability instanceof ActivatedManaAbilityImpl)

@@ -75,7 +75,7 @@ class DeafeningSilenceEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
         if (card == null
-                || card.isCreature()) {
+                || card.isCreature(game)) {
             return false;
         }
         DeafeningSilenceWatcher watcher = game.getState().getWatcher(DeafeningSilenceWatcher.class);
@@ -99,7 +99,7 @@ class DeafeningSilenceWatcher extends Watcher {
         }
         Spell spell = game.getSpell(event.getTargetId());
         if (spell == null
-                || spell.isCreature()) {
+                || spell.isCreature(game)) {
             return;
         }
         UUID playerId = event.getPlayerId();

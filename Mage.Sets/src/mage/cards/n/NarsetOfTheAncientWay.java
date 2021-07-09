@@ -102,7 +102,7 @@ class NarsetOfTheAncientWayManaCondition extends ManaCondition implements Condit
             return false;
         }
         MageObject object = game.getObject(source.getSourceId());
-        return object != null && !object.isCreature();
+        return object != null && !object.isCreature(game);
     }
 
     @Override
@@ -139,7 +139,7 @@ class NarsetOfTheAncientWayDrawEffect extends OneShotEffect {
             return false;
         }
         Card card = player.discardOne(false, false, source, game);
-        if (card == null || card.isLand()) {
+        if (card == null || card.isLand(game)) {
             return false;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(

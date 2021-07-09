@@ -77,7 +77,7 @@ class BreathlessKnightTriggeredAbility extends TriggeredAbilityImpl {
         if (event instanceof EntersTheBattlefieldEvent) {
             EntersTheBattlefieldEvent entersEvent = (EntersTheBattlefieldEvent) event;
             Permanent permanent = entersEvent.getTarget();
-            if (permanent != null && permanent.isCreature() && permanent.isControlledBy(this.getControllerId())) {
+            if (permanent != null && permanent.isCreature(game) && permanent.isControlledBy(this.getControllerId())) {
                 if (entersEvent.getFromZone() == Zone.GRAVEYARD) {
                     return true;
                 }

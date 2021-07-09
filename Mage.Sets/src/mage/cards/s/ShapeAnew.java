@@ -65,7 +65,7 @@ public final class ShapeAnew extends CardImpl {
             Card artifactCard = null;
             for (Card card : targetController.getLibrary().getCards(game)) {
                 revealed.add(card);
-                if (card.isArtifact()) {
+                if (card.isArtifact(game)) {
                     artifactCard = card;
                     break;
                 }

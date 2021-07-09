@@ -93,7 +93,7 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
                 boolean cardWasCast = false;
                 controller.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
                 if (!card.getManaCost().isEmpty()
-                        || !card.isLand()) {
+                        || !card.isLand(game)) {
                     if (controller.chooseUse(Outcome.Benefit, "Cast " + card.getName() + "? (You still pay the costs)", source, game)
                             && (game.getState().getZone(card.getId()) == Zone.EXILED)) { // card must be in the exile zone
                         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);  // enable the card to be cast from the exile zone

@@ -1,7 +1,6 @@
 package mage.cards.o;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -84,7 +83,7 @@ enum ObsidianCharmawValue implements DynamicValue {
                         sourceAbility.getControllerId(), sourceAbility.getSourceId(), game
                 ).stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isLand)
+                .filter(permanent1 -> permanent1.isLand(game))
                 .filter(permanent -> permanent
                         .getAbilities()
                         .getActivatedManaAbilities(Zone.BATTLEFIELD)

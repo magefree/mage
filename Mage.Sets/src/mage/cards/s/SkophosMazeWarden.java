@@ -81,13 +81,13 @@ class SkophosMazeWardenTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanent(stackObject.getSourceId());
         if (permanent == null
                 || !permanent.isControlledBy(getControllerId())
-                || !permanent.isLand()
+                || !permanent.isLand(game)
                 || !permanent.getName().equals("Labyrinth of Skophos")) {
             return false;
         }
         Permanent creature = game.getPermanent(event.getTargetId());
         if (creature == null
-                || !creature.isCreature()
+                || !creature.isCreature(game)
                 || creature.getId().equals(getSourceId())) {
             return false;
         }

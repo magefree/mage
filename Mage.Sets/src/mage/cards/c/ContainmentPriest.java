@@ -95,7 +95,7 @@ class ContainmentPriestReplacementEffect extends ReplacementEffectImpl {
             if (card != null && entersTransformed instanceof Boolean && (Boolean) entersTransformed && card.getSecondCardFace() != null) {
                 card = card.getSecondCardFace();
             }
-            if (card != null && card.isCreature()) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
+            if (card != null && card.isCreature(game)) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
                 CreatureWasCastWatcher watcher = game.getState().getWatcher(CreatureWasCastWatcher.class);
                 return watcher != null && !watcher.wasCreatureCastThisTurn(event.getTargetId());
             }

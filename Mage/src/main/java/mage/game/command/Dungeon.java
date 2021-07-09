@@ -44,7 +44,7 @@ public class Dungeon implements CommandObject {
         dungeonNames.add("Dungeon of the Mad Mage");
     }
 
-    private static final ArrayList<CardType> emptySet = new ArrayList<>(Arrays.asList(CardType.DUNGEON));
+    private static final List<CardType> emptySet = Arrays.asList(CardType.DUNGEON);
     private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
 
@@ -217,7 +217,7 @@ public class Dungeon implements CommandObject {
     }
 
     @Override
-    public ArrayList<CardType> getCardType() {
+    public List<CardType> getCardType(Game game) {
         return emptySet;
     }
 

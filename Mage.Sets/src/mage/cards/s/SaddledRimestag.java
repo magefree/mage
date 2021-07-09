@@ -75,7 +75,7 @@ class SaddledRimestagWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getToZone() == Zone.BATTLEFIELD
-                    && zEvent.getTarget().isCreature()) {
+                    && zEvent.getTarget().isCreature(game)) {
                 playerMap.putIfAbsent(zEvent.getTarget().getControllerId(), new HashSet<>());
                 playerMap.get(zEvent.getTarget().getControllerId()).add(zEvent.getTargetId());
             }
