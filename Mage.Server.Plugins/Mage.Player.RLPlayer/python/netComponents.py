@@ -10,7 +10,6 @@ class Representer():
         self.count=1
     #Return list of IDs, list of action IDs 
     def convert(self,obs,verbose=False):
-        
         game=obs['game']
         reals=game['reals']
         flat_reals=self.flatten_reals(reals)
@@ -152,8 +151,6 @@ class ResidBlock(nn.Module):
         self.hparams=hparams
         self.linone=nn.Linear(hparams["dot_dim"],hparams["dot_dim"])
         self.lintwo=nn.Linear(hparams["dot_dim"],hparams["dot_dim"])
-        self.norm1=nn.BatchNorm1d(hparams["dot_dim"],momentum=0.02)
-        self.norm2=nn.BatchNorm1d(hparams["dot_dim"],momentum=0.02)
     def forward(self,x):
         input=x
         x=F.relu(self.linone(x))
@@ -197,7 +194,7 @@ class LinNet(nn.Module):
         self.reals_linear=nn.Linear(hparams["num_reals"],hparams["dot_dim"])
     def forward(self,board_state,actions,action_mask):
         board_state=torch.unsqueeze(board_state,dim=-1)
-        #print("boar state shape",board_state.shape)
+        #print("board state shape",board_state.shape)
         #print("actions shape",actions.shape)
         pred_values=actions@board_state
         pred_values=torch.squeeze(pred_values,dim=2)
@@ -237,7 +234,7 @@ class MainNet(nn.Module):
         actions=self.net(board_state,actions_trunk,action_mask) 
         values=self.value_net(board_state,actions_trunk) 
         return (actions,values)
-def play_game(net,converter,env,verbose=False):
+def play_game(net,converter,env,verbose=False,opponent_net=None):
     observation = env.reset()
     actions=[]
     converted=converter.convert(observation)

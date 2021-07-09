@@ -37,6 +37,7 @@ public class RepresenterJSON implements Serializable{
         wholeState.put("actions",actionRepr);
         wholeState.put("isDone",isDone);
         wholeState.put("winReward",getWinReward(game, player));
+        wholeState.put("name",player.getName());
         return wholeState;
     }
 

@@ -19,7 +19,7 @@ import shutil
 shutil.rmtree(location)
 writer = SummaryWriter(log_dir=location)
 game_counter=0
-def collect_experience(min_actions,env,net,converter):
+def collect_experience(min_actions,env,net,converter,opponent_net=None):
     actions=[]
     observations=[]
     rewards=[]
@@ -27,16 +27,17 @@ def collect_experience(min_actions,env,net,converter):
     net.eval()
     while(len(actions)<min_actions):
         global game_counter
-        (a,o,r)=play_game(net,converter,env,game_counter%50==0)
+        (a,o,r)=play_game(net,converter,env,game_counter%50==0,opponent_net)
         actions+=a
         observations+=o
         rewards+=r
         writer.add_scalar('Reward', rewards[-1], game_counter)
         print(rewards[-1])
-        weighting=min(1/len(actions),1/hparams['batch_cutoff'])
-        weights=len(actions)*[weighting]
+        #weighting=min(1/len(actions),1/hparams['batch_cutoff'])
+        #weights=len(actions)*[weighting]
         game_counter+=1
     return (actions,observations,rewards,weights)
+
 for games in range(10000):
     (actions,observations,rewards,weights)=collect_experience(hparams['exp_per_batch'],env,net,converter)
     with torch.no_grad():

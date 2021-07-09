@@ -6,7 +6,7 @@ hparams={
     "dot_dim":32,
     "num_reals":7,
     "lr":.005,
-    #"decay":.99, #decay of reward, set to 1 for now because it lets value be better predicted
+    "decay":.99, #decay of reward, set to 1 for now because it lets value be better predicted
     "entropy_weight":.000,
     "batch_cutoff":10,
     "decay_steps":10000,
