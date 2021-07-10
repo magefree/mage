@@ -160,6 +160,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Nadaar, Selfless Paladin", 27, Rarity.RARE, mage.cards.n.NadaarSelflessPaladin.class));
         cards.add(new SetCardInfo("Neverwinter Dryad", 195, Rarity.COMMON, mage.cards.n.NeverwinterDryad.class));
         cards.add(new SetCardInfo("Old Gnawbone", 197, Rarity.MYTHIC, mage.cards.o.OldGnawbone.class));
+        cards.add(new SetCardInfo("Oswald Fiddlebender", 28, Rarity.RARE, mage.cards.o.OswaldFiddlebender.class));
         cards.add(new SetCardInfo("Owlbear", 198, Rarity.COMMON, mage.cards.o.Owlbear.class));
         cards.add(new SetCardInfo("Paladin's Shield", 30, Rarity.COMMON, mage.cards.p.PaladinsShield.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
