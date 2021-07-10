@@ -156,6 +156,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Minsc, Beloved Ranger", 227, Rarity.MYTHIC, mage.cards.m.MinscBelovedRanger.class));
         cards.add(new SetCardInfo("Monk of the Open Hand", 25, Rarity.UNCOMMON, mage.cards.m.MonkOfTheOpenHand.class));
         cards.add(new SetCardInfo("Moon-Blessed Cleric", 26, Rarity.UNCOMMON, mage.cards.m.MoonBlessedCleric.class));
+        cards.add(new SetCardInfo("Mordenkainen", 64, Rarity.MYTHIC, mage.cards.m.Mordenkainen.class));
         cards.add(new SetCardInfo("Mordenkainen's Polymorph", 65, Rarity.COMMON, mage.cards.m.MordenkainensPolymorph.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nadaar, Selfless Paladin", 27, Rarity.RARE, mage.cards.n.NadaarSelflessPaladin.class));
