@@ -151,6 +151,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Meteor Swarm", 155, Rarity.RARE, mage.cards.m.MeteorSwarm.class));
         cards.add(new SetCardInfo("Mimic", 249, Rarity.COMMON, mage.cards.m.Mimic.class));
         cards.add(new SetCardInfo("Mind Flayer", 63, Rarity.RARE, mage.cards.m.MindFlayer.class));
+        cards.add(new SetCardInfo("Minimus Containment", 24, Rarity.COMMON, mage.cards.m.MinimusContainment.class));
         cards.add(new SetCardInfo("Minion of the Mighty", 156, Rarity.RARE, mage.cards.m.MinionOfTheMighty.class));
         cards.add(new SetCardInfo("Minsc, Beloved Ranger", 227, Rarity.MYTHIC, mage.cards.m.MinscBelovedRanger.class));
         cards.add(new SetCardInfo("Monk of the Open Hand", 25, Rarity.UNCOMMON, mage.cards.m.MonkOfTheOpenHand.class));
