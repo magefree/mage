@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -64,6 +65,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
             if (setTargetPointer) {
                 this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
             }
+            this.getEffects().setValue("attackerRef", new MageObjectReference(sourcePermanent, game));
             return true;
         }
         return false;
