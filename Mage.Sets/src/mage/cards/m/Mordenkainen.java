@@ -109,7 +109,7 @@ class MordenkainenExchangeEffect extends OneShotEffect {
         }
         Cards hand = new CardsImpl(controller.getHand());
         Cards library = new CardsImpl(controller.getLibrary().getCardList());
-        controller.moveCards(hand, Zone.LIBRARY, source, game);
+        controller.putCardsOnTopOfLibrary(hand, game, source, false);
         controller.moveCards(library, Zone.HAND, source, game);
         controller.shuffleLibrary(source, game);
         return true;
