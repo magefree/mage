@@ -74,7 +74,7 @@ class MirkoVoskMindDrinkerEffect extends OneShotEffect {
         for (Card card : player.getLibrary().getCards(game)) {
             if (card != null) {
                 cards.add(card);
-                if (card.isLand() && --landsToReveal < 1) {
+                if (card.isLand(game) && --landsToReveal < 1) {
                     break;
                 }
             }

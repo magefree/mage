@@ -104,7 +104,7 @@ class SevinneTheChronoclasmWatcher extends Watcher {
             return;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && spell.isInstantOrSorcery()) {
+        if (spell != null && spell.isInstantOrSorcery(game)) {
             firstSpellThisTurn.putIfAbsent(event.getPlayerId(), spell.getId());
         }
     }

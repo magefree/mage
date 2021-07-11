@@ -116,7 +116,7 @@ class ShiftingShadowEffect extends OneShotEffect {
                 Cards otherCards = new CardsImpl();
                 for (Card card : controller.getLibrary().getCards(game)) {
                     revealed.add(card);
-                    if (card != null && card.isCreature()) {
+                    if (card != null && card.isCreature(game)) {
                         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                         Permanent newEnchanted = game.getPermanent(card.getId());
                         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();

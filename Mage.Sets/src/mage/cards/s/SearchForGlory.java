@@ -60,7 +60,7 @@ enum SearchForGloryPredicate implements Predicate<Card> {
 
     @Override
     public boolean apply(Card input, Game game) {
-        return (input.isPermanent() && input.isSnow())
+        return (input.isPermanent(game) && input.isSnow())
                 || input.isLegendary()
                 || input.hasSubtype(SubType.SAGA, game);
     }

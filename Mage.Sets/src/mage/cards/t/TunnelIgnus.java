@@ -12,7 +12,6 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
@@ -59,7 +58,7 @@ class TunnelIgnusWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.isLand() && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
+            if (permanent != null && permanent.isLand(game) && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
                 int count = counts.getOrDefault(permanent.getControllerId(), 0);
                 counts.put(permanent.getControllerId(), count + 1);
             }
@@ -96,7 +95,7 @@ class TunnelIgnusTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isLand() && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
+        if (permanent != null && permanent.isLand(game) && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
             TunnelIgnusWatcher watcher = game.getState().getWatcher(TunnelIgnusWatcher.class, this.controllerId);
             if (watcher != null && watcher.counts.get(permanent.getControllerId()) > 1) {
                 for (Effect effect : this.getEffects()) {

@@ -61,7 +61,7 @@ class MadcapExperimentEffect extends OneShotEffect {
             for (Card card : controller.getLibrary().getCards(game)) {
                 toReveal.add(card);
                 game.fireUpdatePlayersEvent();
-                if (card.isArtifact()) {
+                if (card.isArtifact(game)) {
                     toBattlefield = card;
 
                     break;

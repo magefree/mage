@@ -77,7 +77,7 @@ class GlyphOfLifeTriggeredAbility extends DelayedTriggeredAbility {
         if (event.getTargetId().equals(this.getFirstTarget())) {
             DamagedEvent damageEvent = (DamagedEvent) event;
             Permanent attackingCreature = game.getPermanentOrLKIBattlefield(damageEvent.getSourceId());
-            if (attackingCreature != null && attackingCreature.isCreature() && attackingCreature.isAttacking()) {
+            if (attackingCreature != null && attackingCreature.isCreature(game) && attackingCreature.isAttacking()) {
                 this.getEffects().get(0).setValue("damageAmount", event.getAmount());
                 return true;
             }

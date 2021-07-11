@@ -181,7 +181,7 @@ class GrothamaAllDevouringWatcher extends Watcher {
         }
         UUID damageControllerId = game.getControllerId(event.getSourceId());
         Permanent damaged = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (damaged == null || !damaged.isCreature() || damageControllerId == null) {
+        if (damaged == null || !damaged.isCreature(game) || damageControllerId == null) {
             return;
         }
         MageObjectReference mor = new MageObjectReference(damaged, game);

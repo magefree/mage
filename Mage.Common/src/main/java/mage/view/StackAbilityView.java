@@ -40,13 +40,13 @@ public class StackAbilityView extends CardView {
         this.name = "Ability";
         this.loyalty = "";
 
-        this.cardTypes = ability.getCardType();
+        this.cardTypes = ability.getCardType(game);
         this.subTypes = ability.getSubtype(game);
         this.superTypes = ability.getSuperType();
         this.color = ability.getColor(game);
         this.manaCostLeftStr = String.join("", ability.getManaCostSymbols());
         this.manaCostRightStr = "";
-        this.cardTypes = ability.getCardType();
+        this.cardTypes = ability.getCardType(game);
         this.subTypes = ability.getSubtype(game);
         this.superTypes = ability.getSuperType();
         this.color = ability.getColor(game);

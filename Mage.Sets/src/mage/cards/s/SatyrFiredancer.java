@@ -17,7 +17,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -85,7 +84,7 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         MageObject sourceObject = game.getObject(event.getSourceId());
-        if (sourceObject == null || !sourceObject.isInstantOrSorcery()) {
+        if (sourceObject == null || !sourceObject.isInstantOrSorcery(game)) {
             return false;
         }
         for (Effect effect : this.getEffects()) {

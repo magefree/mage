@@ -83,7 +83,7 @@ class MirrorwingDragonCopyTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private boolean checkSpell(Spell spell, Game game) {
-        if (spell == null || !spell.isInstantOrSorcery()) {
+        if (spell == null || !spell.isInstantOrSorcery(game)) {
             return false;
         }
         boolean noTargets = true;

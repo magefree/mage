@@ -90,7 +90,7 @@ class ImmolationShamanTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!event.getPlayerId().equals(getControllerId())) {
             Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (source != null && (source.isArtifact() || source.isCreature() || source.isLand())) {
+            if (source != null && (source.isArtifact(game) || source.isCreature(game) || source.isLand(game))) {
                 StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
                 if (!(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
                     for (Effect effect : getEffects()) {

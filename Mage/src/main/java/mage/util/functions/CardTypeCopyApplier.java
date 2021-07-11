@@ -6,7 +6,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.CardType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *

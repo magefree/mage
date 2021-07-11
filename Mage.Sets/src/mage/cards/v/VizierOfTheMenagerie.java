@@ -80,7 +80,7 @@ class VizierOfTheMenagerieManaEffect extends AsThoughEffectImpl implements AsTho
         objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         if (source.isControlledBy(affectedControllerId)) {
             MageObject mageObject = game.getObject(objectId);
-            return mageObject != null && mageObject.isCreature();
+            return mageObject != null && mageObject.isCreature(game);
         }
         return false;
     }

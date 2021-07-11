@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 public class Emblem implements CommandObject {
 
-    private static ArrayList<CardType> emptySet = new ArrayList<>();
+    private static List<CardType> emptySet = new ArrayList<>();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts emptyCost = new ManaCostsImpl();
 
@@ -149,7 +149,7 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-    public ArrayList<CardType> getCardType() {
+    public List<CardType> getCardType(Game game) {
         return emptySet;
     }
 

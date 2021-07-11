@@ -128,11 +128,11 @@ class TezzeretTheSeekerEffect3 extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            if (!permanent.isArtifact()) {
-                                permanent.addCardType(CardType.ARTIFACT);
+                            if (!permanent.isArtifact(game)) {
+                                permanent.addCardType(game, CardType.ARTIFACT);
                             }
-                            if (!permanent.isCreature()) {
-                                permanent.addCardType(CardType.CREATURE);
+                            if (!permanent.isCreature(game)) {
+                                permanent.addCardType(game, CardType.CREATURE);
                             }
                         }
                         break;

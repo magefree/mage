@@ -118,7 +118,7 @@ class MindsDilationEffect extends OneShotEffect {
                 Card card = opponent.getLibrary().getFromTop(game);
                 if (card != null
                         && opponent.moveCards(card, Zone.EXILED, source, game)) {
-                    if (!card.isLand()) {
+                    if (!card.isLand(game)) {
                         if (controller.chooseUse(outcome, "Cast " + card.getLogName()
                                 + " without paying its mana cost from exile?", source, game)) {
                             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);

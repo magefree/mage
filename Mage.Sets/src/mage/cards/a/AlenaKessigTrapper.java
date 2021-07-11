@@ -112,7 +112,7 @@ class AlenaKessigTrapperWatcher extends Watcher {
                 .filter(Objects::nonNull)
                 .map(mor -> mor.getPermanent(game))
                 .filter(Objects::nonNull)
-                .filter(MageObject::isCreature)
+                .filter(permanent1 -> permanent1.isCreature(game))
                 .filter(permanent -> permanent.isControlledBy(playerId))
                 .map(MageObject::getPower)
                 .mapToInt(MageInt::getValue)

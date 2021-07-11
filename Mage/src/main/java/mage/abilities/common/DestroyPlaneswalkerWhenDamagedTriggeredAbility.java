@@ -45,7 +45,7 @@ public class DestroyPlaneswalkerWhenDamagedTriggeredAbility extends TriggeredAbi
             return false;
         }
         boolean applies = filter != null ?
-                permanent.isPlaneswalker() && filter.match(permanent, game) : event.getSourceId().equals(getSourceId());
+                permanent.isPlaneswalker(game) && filter.match(permanent, game) : event.getSourceId().equals(getSourceId());
         if (applies) {
             Effect effect = new DestroyTargetEffect();
             effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));

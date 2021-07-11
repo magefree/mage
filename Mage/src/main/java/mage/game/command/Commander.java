@@ -170,8 +170,8 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public ArrayList<CardType> getCardType() {
-        return sourceObject.getCardType();
+    public List<CardType> getCardType(Game game) {
+        return sourceObject.getCardType(game);
     }
 
     @Override

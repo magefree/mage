@@ -90,7 +90,7 @@ class SimicAscendancyTriggeredAbility extends TriggeredAbilityImpl {
             }
             if (permanent != null
                     && !event.getTargetId().equals(this.getSourceId())
-                    && permanent.isCreature()
+                    && permanent.isCreature(game)
                     && permanent.isControlledBy(this.getControllerId())) {
                 this.getEffects().clear();
                 if (event.getAmount() > 0) {

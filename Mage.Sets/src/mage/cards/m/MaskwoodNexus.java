@@ -82,26 +82,26 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
         // in graveyard
         for (UUID cardId : controller.getGraveyard()) {
             Card card = game.getCard(cardId);
-            if (card != null && card.isCreature()) {
+            if (card != null && card.isCreature(game)) {
                 game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
             }
         }
         // on Hand
         for (UUID cardId : controller.getHand()) {
             Card card = game.getCard(cardId);
-            if (card != null && card.isCreature()) {
+            if (card != null && card.isCreature(game)) {
                 game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
             }
         }
         // in Exile
         for (Card card : game.getState().getExile().getAllCards(game)) {
-            if (card.isCreature() && card.isOwnedBy(controller.getId())) {
+            if (card.isCreature(game) && card.isOwnedBy(controller.getId())) {
                 game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
             }
         }
         // in Library (e.g. for Mystical Teachings)
         for (Card card : controller.getLibrary().getCards(game)) {
-            if (card.isOwnedBy(controller.getId()) && card.isCreature()) {
+            if (card.isOwnedBy(controller.getId()) && card.isCreature(game)) {
                 game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
             }
         }
@@ -113,7 +113,7 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
             Card card = game.getCard(((Commander) commandObject).getId());
             if (card != null
                     && card.isOwnedBy(controller.getId())
-                    && card.isCreature()) {
+                    && card.isCreature(game)) {
                 game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
             }
         }
@@ -122,7 +122,7 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
             StackObject stackObject = iterator.next();
             if (stackObject instanceof Spell
                     && stackObject.isControlledBy(source.getControllerId())
-                    && stackObject.isCreature()) {
+                    && stackObject.isCreature(game)) {
                 Card card = ((Spell) stackObject).getCard();
                 game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
             }

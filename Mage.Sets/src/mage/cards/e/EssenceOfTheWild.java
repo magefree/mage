@@ -11,7 +11,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -59,7 +58,7 @@ class EssenceOfTheWildEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent perm = ((EntersTheBattlefieldEvent) event).getTarget();
-        return perm != null && perm.isCreature() && perm.isControlledBy(source.getControllerId());
+        return perm != null && perm.isCreature(game) && perm.isControlledBy(source.getControllerId());
     }
 
     @Override

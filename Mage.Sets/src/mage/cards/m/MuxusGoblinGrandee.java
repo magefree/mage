@@ -95,7 +95,7 @@ class MuxusGoblinGrandeeEffect extends OneShotEffect {
                 .stream()
                 .filter(Objects::nonNull)
                 .forEach(card -> {
-                    if (card.isCreature()
+                    if (card.isCreature(game)
                             && card.hasSubtype(SubType.GOBLIN, game)
                             && card.getManaValue() <= 5) {
                         toBattlfield.add(card);

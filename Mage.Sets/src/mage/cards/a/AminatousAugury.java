@@ -149,7 +149,7 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
             if (card != null
                     && game.getState().getZone(objectId) == Zone.EXILED) {
                 EnumSet<CardType> unusedCardTypes = EnumSet.noneOf(CardType.class);
-                for (CardType cardT : card.getCardType()) {
+                for (CardType cardT : card.getCardType(game)) {
                     if (!usedCardTypes.contains(cardT)) {
                         unusedCardTypes.add(cardT);
                     }

@@ -90,7 +90,7 @@ class HedronFieldPuristsEffect extends PreventionEffectImpl {
 
         if (event.getType() == GameEvent.EventType.DAMAGE_PERMANENT) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.isCreature() && permanent.isControlledBy(source.getControllerId())) {
+            if (permanent != null && permanent.isCreature(game) && permanent.isControlledBy(source.getControllerId())) {
                 return super.applies(event, source, game);
             }
         }

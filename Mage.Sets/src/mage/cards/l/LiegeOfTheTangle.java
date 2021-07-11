@@ -19,7 +19,6 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.custom.ElementalCreatureToken;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
 
@@ -88,8 +87,6 @@ class LiegeOfTheTangleTriggeredAbility extends TriggeredAbilityImpl {
 
 class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
 
-    private static ElementalCreatureToken token = new ElementalCreatureToken(8, 8, "8/8 green Elemental creature", new ObjectColor("G"));
-
     public LiegeOfTheTangleEffect() {
         super(Duration.EndOfGame, Outcome.BecomeCreature);
     }
@@ -106,25 +103,21 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
                 it.remove();
                 continue;
             }
-            if (perm.getCounters(game).getCount(CounterType.AWAKENING) <= 0) {
+            if (perm.getCounters(game).getCount(CounterType.AWAKENING) < 1) {
                 continue;
             }
             switch (layer) {
                 case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        perm.addCardTypes(token.getCardType());
-                        perm.copySubTypesFrom(game, token);
-                    }
+                    perm.addCardType(game, CardType.CREATURE);
+                    perm.addSubType(game, SubType.ELEMENTAL);
                     break;
                 case ColorChangingEffects_5:
-                    if (sublayer == SubLayer.NA) {
-                        perm.getColor(game).setColor(token.getColor(game));
-                    }
+                    perm.getColor(game).addColor(ObjectColor.GREEN);
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        perm.getPower().setValue(token.getPower().getValue());
-                        perm.getToughness().setValue(token.getToughness().getValue());
+                        perm.getPower().setValue(8);
+                        perm.getToughness().setValue(8);
                     }
                     break;
             }
@@ -158,7 +151,4 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
                 || layer == Layer.ColorChangingEffects_5
                 || layer == Layer.TypeChangingEffects_4;
     }
-
 }
-
-

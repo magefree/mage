@@ -1759,7 +1759,7 @@ public abstract class GameImpl implements Game, Serializable {
             //getState().addCard(permanent);
             if (copyFromPermanent.isMorphed() || copyFromPermanent.isManifested()
                     || copyFromPermanent.isFaceDown(this)) {
-                MorphAbility.setPermanentToFaceDownCreature(newBluePrint);
+                MorphAbility.setPermanentToFaceDownCreature(newBluePrint, this);
             }
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
@@ -2101,7 +2101,7 @@ public abstract class GameImpl implements Game, Serializable {
         List<Permanent> worldEnchantment = new ArrayList<>();
         List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters();
         for (Permanent perm : getBattlefield().getAllActivePermanents()) {
-            if (perm.isCreature()) {
+            if (perm.isCreature(this)) {
                 //20091005 - 704.5f
                 if (perm.getToughness().getValue() <= 0) {
                     if (movePermanentToGraveyardWithInfo(perm)) {
@@ -2168,7 +2168,7 @@ public abstract class GameImpl implements Game, Serializable {
                     somethingHappened = true;
                 }
             }
-            if (perm.isPlaneswalker()) {
+            if (perm.isPlaneswalker(this)) {
                 //20091005 - 704.5i
                 if (perm.getCounters(this).getCount(CounterType.LOYALTY) == 0) {
                     if (movePermanentToGraveyardWithInfo(perm)) {
@@ -2183,7 +2183,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (perm.hasSubtype(SubType.AURA, this)) {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
-                    if (!perm.isCreature() && !perm.getAbilities(this).containsClass(BestowAbility.class)) {
+                    if (!perm.isCreature(this) && !perm.getAbilities(this).containsClass(BestowAbility.class)) {
                         if (movePermanentToGraveyardWithInfo(perm)) {
                             somethingHappened = true;
                         }
@@ -2215,7 +2215,7 @@ public abstract class GameImpl implements Game, Serializable {
                             if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
                                 // handle bestow unattachment
                                 Card card = this.getCard(perm.getId());
-                                if (card != null && card.isCreature()) {
+                                if (card != null && card.isCreature(this)) {
                                     UUID wasAttachedTo = perm.getAttachedTo();
                                     perm.attachTo(null, null, this);
                                     fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
@@ -2234,7 +2234,7 @@ public abstract class GameImpl implements Game, Serializable {
                                 } else if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeAttachedBy(perm, null, this, true)) {
                                     // handle bestow unattachment
                                     Card card = this.getCard(perm.getId());
-                                    if (card != null && card.isCreature()) {
+                                    if (card != null && card.isCreature(this)) {
                                         UUID wasAttachedTo = perm.getAttachedTo();
                                         perm.attachTo(null, null, this);
                                         BestowAbility.becomeCreature(perm, this);
@@ -2327,7 +2327,7 @@ public abstract class GameImpl implements Game, Serializable {
                         UUID wasAttachedTo = perm.getAttachedTo();
                         perm.attachTo(null, null, this);
                         fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
-                    } else if (!attachedTo.isCreature() || attachedTo.hasProtectionFrom(perm, this)) {
+                    } else if (!attachedTo.isCreature(this) || attachedTo.hasProtectionFrom(perm, this)) {
                         if (attachedTo.removeAttachment(perm.getId(), null, this)) {
                             somethingHappened = true;
                         }
@@ -2339,7 +2339,7 @@ public abstract class GameImpl implements Game, Serializable {
                     Permanent land = getPermanent(perm.getAttachedTo());
                     if (land == null || !land.getAttachments().contains(perm.getId())) {
                         perm.attachTo(null, null, this);
-                    } else if (!land.isLand() || land.hasProtectionFrom(perm, this)) {
+                    } else if (!land.isLand(this) || land.hasProtectionFrom(perm, this)) {
                         if (land.removeAttachment(perm.getId(), null, this)) {
                             somethingHappened = true;
                         }
@@ -2353,7 +2353,7 @@ public abstract class GameImpl implements Game, Serializable {
                 for (UUID attachmentId : perm.getAttachments()) {
                     Permanent attachment = getPermanent(attachmentId);
                     if (attachment != null
-                            && (attachment.isCreature()
+                            && (attachment.isCreature(this)
                             || !(attachment.hasSubtype(SubType.AURA, this)
                             || attachment.hasSubtype(SubType.EQUIPMENT, this)
                             || attachment.hasSubtype(SubType.FORTIFICATION, this)))) {
@@ -2784,7 +2784,7 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
                 // check if it's a creature and must be removed from combat
-                if (perm.isCreature() && this.getCombat() != null) {
+                if (perm.isCreature(this) && this.getCombat() != null) {
                     perm.removeFromCombat(this, true);
                 }
                 toOutside.add(perm);

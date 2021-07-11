@@ -84,7 +84,7 @@ class SquealingDevilEffect extends OneShotEffect {
                 cost.add(new GenericManaCost(costX));
                 if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     Permanent permanent = game.getPermanent(source.getFirstTarget());
-                    if (permanent != null && permanent.isCreature()) {
+                    if (permanent != null && permanent.isCreature(game)) {
                         ContinuousEffect effect = new BoostTargetEffect(costX, 0, Duration.EndOfTurn);
                         effect.setTargetPointer(new FixedTarget(permanent, game));
                         game.addEffect(effect, source);

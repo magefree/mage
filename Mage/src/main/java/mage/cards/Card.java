@@ -5,7 +5,9 @@ import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
@@ -197,4 +199,16 @@ public interface Card extends MageObject {
         }
         return true;
     }
+
+    List<CardType> getCardTypeForDeckbuilding();
+
+    boolean hasCardTypeForDeckbuilding(CardType cardType);
+
+    /**
+     * Checking subtype in cards for deck and companion validation
+     *
+     * @param subType
+     * @return
+     */
+    boolean hasSubTypeForDeckbuilding(SubType subType);
 }

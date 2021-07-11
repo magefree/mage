@@ -87,7 +87,7 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
             return false;
         }
         if (event.getType() == GameEvent.EventType.CAST_SPELL
-                && object.isInstantOrSorcery()) {
+                && object.isInstantOrSorcery(game)) {
             return true;
         }
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {

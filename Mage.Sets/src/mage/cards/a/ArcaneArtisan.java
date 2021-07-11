@@ -101,7 +101,7 @@ class ArcaneArtisanCreateTokenEffect extends OneShotEffect {
             return false;
         }
 
-        if (card.isCreature()) {
+        if (card.isCreature(game)) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(player.getId());
             effect.setTargetPointer(new FixedTarget(card.getId(), game));
             effect.apply(game, source);

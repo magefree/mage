@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -67,7 +66,7 @@ enum FaeOfferingCondition implements Condition {
         return spells != null && spells
                 .stream()
                 .filter(Objects::nonNull)
-                .map(MageObject::isCreature)
+                .map(spell -> spell.isCreature(game))
                 .distinct()
                 .count() == 2;
     }
@@ -89,7 +88,7 @@ enum FaeOfferingHint implements Hint {
         List<String> messages = spells
                 .stream()
                 .filter(Objects::nonNull)
-                .map(MageObject::isCreature)
+                .map(spell -> spell.isCreature(game))
                 .distinct()
                 .map(b -> b ? "Creature spell" : "Noncreature spell")
                 .sorted()

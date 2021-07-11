@@ -18,7 +18,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -117,16 +116,16 @@ public final class StarfieldOfNyx extends CardImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            if (!permanent.isCreature()
+                            if (!permanent.isCreature(game)
                                     && !permanent.hasSubtype(SubType.AURA, game)) {
-                                permanent.addCardType(CardType.CREATURE);
+                                permanent.addCardType(game, CardType.CREATURE);
                             }
                         }
                         break;
 
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b
-                                && permanent.isCreature()
+                                && permanent.isCreature(game)
                                 && !permanent.hasSubtype(SubType.AURA, game)) {
                             int manaCost = permanent.getManaValue();
                             permanent.getPower().setValue(manaCost);

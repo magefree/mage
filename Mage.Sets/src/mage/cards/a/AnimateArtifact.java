@@ -77,9 +77,9 @@ class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null) {
             Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-            if (permanent != null && !permanent.isCreature()) {
+            if (permanent != null && !permanent.isCreature(game)) {
                 if (sublayer == SubLayer.NA) {
-                    permanent.addCardType(CardType.CREATURE);
+                    permanent.addCardType(game, CardType.CREATURE);
                     permanent.getPower().setValue(permanent.getManaValue());
                     permanent.getToughness().setValue(permanent.getManaValue());
                 }

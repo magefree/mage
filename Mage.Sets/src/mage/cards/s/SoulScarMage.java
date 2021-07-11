@@ -87,7 +87,7 @@ class SoulScarMageDamageReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && !((DamageEvent) event).isCombatDamage()
                 && game.getOpponents(permanent.getControllerId()).contains(source.getControllerId());
     }

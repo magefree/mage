@@ -151,7 +151,7 @@ class VaevictisAsmadiTheDireEffect extends OneShotEffect {
                 continue;
             }
             player.revealCards(source, new CardsImpl(card), game);
-            if (card.isPermanent()) {
+            if (card.isPermanent(game)) {
                 player.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
         }

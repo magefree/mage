@@ -109,7 +109,7 @@ class SerraBestiaryRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl
         Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
         return ability.isPresent()
                 && object != null
-                && object.isCreature()
+                && object.isCreature(game)
                 && object.getId().equals(enchantedCreature.getId())
                 && game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId())
                 && ability.get().hasTapCost();

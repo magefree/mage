@@ -20,7 +20,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -80,7 +79,7 @@ class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature()
+                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game)
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getColor(game).isBlack();
     }
 
@@ -157,7 +156,7 @@ class SavraSacrificeGreenCreatureAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature()
+                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game)
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getColor(game).isGreen();
     }
 

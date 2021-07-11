@@ -209,7 +209,7 @@ public class SuspendAbility extends SpecialAction {
             return ActivationStatus.getFalse();
         }
         MageObject object = game.getObject(sourceId);
-        return new ActivationStatus(object.isInstant()
+        return new ActivationStatus(object.isInstant(game)
                 || object.hasAbility(FlashAbility.getInstance(), game)
                 || null != game.getContinuousEffects().asThough(sourceId,
                         AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
@@ -370,7 +370,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
                     game, true, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
             if (cardWasCast) {
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     ContinuousEffect effect = new GainHasteEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));
                     game.addEffect(effect, source);

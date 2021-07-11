@@ -71,7 +71,7 @@ class PatientRebuildingEffect extends OneShotEffect {
         int numberOfLandCards = 0;
         Set<Card> movedCards = player.millCards(3, source, game).getCards(game);
         for (Card card : movedCards) {
-            if (card.isLand()) {
+            if (card.isLand(game)) {
                 numberOfLandCards++;
             }
         }

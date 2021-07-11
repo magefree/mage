@@ -63,7 +63,7 @@ class MythosOfNethroiEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null || (!permanent.isCreature() && !condition.apply(game, source))) {
+        if (permanent == null || (!permanent.isCreature(game) && !condition.apply(game, source))) {
             return false;
         }
         return permanent.destroy(source, game, false);

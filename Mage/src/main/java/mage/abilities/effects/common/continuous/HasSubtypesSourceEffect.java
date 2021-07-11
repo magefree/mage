@@ -2,25 +2,29 @@ package mage.abilities.effects.common.continuous;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
+ * Warning, do not copy it - hasSubTypeForDeckbuilding uses it to find additional subtypes in cards
+ *
  * @author TheElk801
  */
-public class HasSubtypesSourceEffect extends ContinuousEffectImpl {
+public final class HasSubtypesSourceEffect extends ContinuousEffectImpl {
 
     private final List<SubType> subtypes = new ArrayList<>();
 
     public HasSubtypesSourceEffect(SubType... subTypes) {
         super(Duration.EndOfGame, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         subtypes.addAll(Arrays.asList(subTypes));
-        this.staticText = setText();
     }
 
     public HasSubtypesSourceEffect(final HasSubtypesSourceEffect effect) {
@@ -45,30 +49,16 @@ public class HasSubtypesSourceEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    private String setText() {
-        String s = "{this} is also ";
-        switch (subtypes.size()) {
-            case 0:
-                throw new UnsupportedOperationException("Can't have zero subtypes");
-            case 1:
-                s += subtypes.get(0).getIndefiniteArticle() + " " + subtypes.get(0);
-                break;
-            case 2:
-                s += subtypes.get(0).getIndefiniteArticle() + " " + subtypes.get(0);
-                s += " and ";
-                s += subtypes.get(1).getIndefiniteArticle() + " " + subtypes.get(1);
-                break;
-            default:
-                for (int i = 0; i < subtypes.size(); i++) {
-                    if (i == 0) {
-                        s += subtypes.get(i).getIndefiniteArticle() + " " + subtypes.get(i) + ", ";
-                    } else if (i == subtypes.size() - 1) {
-                        s += "and " + subtypes.get(i);
-                    } else {
-                        s += subtypes.get(i) + ", ";
-                    }
-                }
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
         }
-        return s;
+        return "{this} is also " + subtypes.get(0).getIndefiniteArticle() + ' '
+                + CardUtil.concatWithAnd(subtypes.stream().map(SubType::getDescription).collect(Collectors.toList()));
+    }
+
+    public boolean hasSubtype(SubType subType) {
+        return subtypes.contains(subType);
     }
 }

@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -79,7 +78,7 @@ class FlayingTendrilsReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zce = (ZoneChangeEvent) event;
-        return zce.isDiesEvent() && zce.getTarget().isCreature();
+        return zce.isDiesEvent() && zce.getTarget().isCreature(game);
     }
 
 }

@@ -75,32 +75,32 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
             // in graveyard
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
-                if (card != null && card.isCreature()) {
+                if (card != null && card.isCreature(game)) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
-                if (card != null && card.isCreature()) {
+                if (card != null && card.isCreature(game)) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // in Exile
             for (Card card : game.getState().getExile().getAllCards(game)) {
-                if (card.isOwnedBy(controller.getId()) && card.isCreature()) {
+                if (card.isOwnedBy(controller.getId()) && card.isCreature(game)) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
-                if (card.isOwnedBy(controller.getId()) && card.isCreature()) {
+                if (card.isOwnedBy(controller.getId()) && card.isCreature(game)) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
             // cards in command zone
             game.getCommanderCardsFromCommandZone(controller, CommanderCardType.ANY).stream()
-                    .filter(MageObject::isCreature)
+                    .filter(card1 -> card1.isCreature(game))
                     .forEach(card -> {
                         game.getState().addOtherAbility(card, FlashAbility.getInstance());
                     });

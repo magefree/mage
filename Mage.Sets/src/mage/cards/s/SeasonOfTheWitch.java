@@ -80,7 +80,7 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
         if (activePlayer != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
                 // Noncreature cards are safe.
-                if (!permanent.isCreature()) {
+                if (!permanent.isCreature(game)) {
                     continue;
                 }
                 // Tapped cards are safe.
@@ -124,7 +124,7 @@ class CouldAttackThisTurnWatcher extends Watcher {
                 return;
             }
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(activePlayer.getId())) {
-                if (permanent.isCreature()) {
+                if (permanent.isCreature(game)) {
                     for (UUID defender : game.getCombat().getDefenders()) {
                         if (!defender.equals(activePlayer.getId())) {
                             if (permanent.canAttack(defender, game)) {

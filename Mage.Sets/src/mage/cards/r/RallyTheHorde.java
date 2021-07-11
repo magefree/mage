@@ -82,7 +82,7 @@ class RallyTheHordeEffect extends OneShotEffect {
         Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
             controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.LIBRARY, true);
-            return card.isLand() ? 0 : 1;
+            return card.isLand(game) ? 0 : 1;
         }
         return 0;
     }

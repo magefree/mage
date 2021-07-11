@@ -91,7 +91,7 @@ enum CastleGarenbrigManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        if (object != null && object.isCreature()) {
+        if (object != null && object.isCreature(game)) {
             return true;
         }
         return false;

@@ -72,7 +72,7 @@ class VengefulRebirthEffect extends OneShotEffect {
         if (!controller.moveCards(card, Zone.HAND, source, game)) {
             return false;
         }
-        if (card.isLand()) {
+        if (card.isLand(game)) {
             return true;
         }
         int damage = card.getManaValue();

@@ -78,7 +78,7 @@ class OccupationTapEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            return permanent != null && permanent.isCreature();
+            return permanent != null && permanent.isCreature(game);
         }
         return false;
     }

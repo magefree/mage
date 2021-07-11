@@ -99,7 +99,7 @@ class PatronOfTheVeinCreatureDiesTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent) event).isDiesEvent()) {
             if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
                 Card creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
-                if (creature != null && creature.isCreature()) {
+                if (creature != null && creature.isCreature(game)) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(creature.getId()));
                     }

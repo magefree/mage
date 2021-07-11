@@ -70,7 +70,7 @@ class HamletbackGoliathTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if (permanent != null && permanent.isCreature()
+        if (permanent != null && permanent.isCreature(game)
                 && !(targetId.equals(this.getSourceId()))) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(permanent, game));

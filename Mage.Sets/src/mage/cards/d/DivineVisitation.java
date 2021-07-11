@@ -68,7 +68,7 @@ class DivineVisitationEffect extends ReplacementEffectImpl {
         if (event instanceof CreateTokenEvent && event.getPlayerId().equals(source.getControllerId())) {
             CreateTokenEvent tokenEvent = (CreateTokenEvent) event;
             for (Token token : tokenEvent.getTokens().keySet()) {
-                if (token.isCreature()) {
+                if (token.isCreature(game)) {
                     return true;
                 }
             }
@@ -84,7 +84,7 @@ class DivineVisitationEffect extends ReplacementEffectImpl {
             Iterator<Map.Entry<Token, Integer>> it = tokenEvent.getTokens().entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry<Token, Integer> entry = it.next();
-                if (entry.getKey().isCreature()) {
+                if (entry.getKey().isCreature(game)) {
                     amount += entry.getValue();
                     it.remove();
                 }

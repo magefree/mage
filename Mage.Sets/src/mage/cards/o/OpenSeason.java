@@ -85,7 +85,7 @@ class OpenSeasonRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.isCreature()
+        return permanent.isCreature(game)
                 && permanent.getCounters(game).getCount(CounterType.BOUNTY) > 0
                 && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
     }

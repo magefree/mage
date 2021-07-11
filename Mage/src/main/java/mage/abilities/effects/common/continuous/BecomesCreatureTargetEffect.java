@@ -81,8 +81,8 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                     break;
 
                 case TypeChangingEffects_4:
-                    for (CardType t : token.getCardType()) {
-                        permanent.addCardType(t);
+                    for (CardType t : token.getCardType(game)) {
+                        permanent.addCardType(game, t);
                     }
                     if (loseAllAbilities || removeSubtypes) {
                         permanent.removeAllCreatureTypes(game);

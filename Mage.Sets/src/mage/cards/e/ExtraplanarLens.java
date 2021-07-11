@@ -122,7 +122,7 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
             if (imprinted != null
                     && game.getState().getZone(imprinted.getId()) == Zone.EXILED) {
                 if (landTappedForMana.getName().equals(imprinted.getName())
-                        && landTappedForMana.isLand()) {
+                        && landTappedForMana.isLand(game)) {
                     ManaEvent mEvent = (ManaEvent) event;
                     for (Effect effect : getEffects()) {
                         effect.setValue("mana", mEvent.getMana());

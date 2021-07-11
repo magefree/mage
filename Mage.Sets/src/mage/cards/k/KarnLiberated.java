@@ -86,7 +86,7 @@ class KarnLiberatedEffect extends OneShotEffect {
             if (zone.getId().equals(exileId)) {
                 for (Card card : zone.getCards(game)) {
                     if (!card.hasSubtype(SubType.AURA, game)
-                            && card.isPermanent()) {
+                            && card.isPermanent(game)) {
                         cards.add(card);
                     }
                 }

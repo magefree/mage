@@ -85,7 +85,7 @@ class StrongarmTacticsEffect extends OneShotEffect {
                         for (UUID cardId : cardsPlayer) {
                             Card card = game.getCard(cardId);
                             if (card != null) {
-                                if (!(player.discard(card, false, source, game) && card.isCreature())) {
+                                if (!(player.discard(card, false, source, game) && card.isCreature(game))) {
                                     player.loseLife(4, game, source, false);
                                 }
                             }

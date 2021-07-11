@@ -86,7 +86,7 @@ class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
         if (damageEvent.getPlayerId().equals(getControllerId())
                 && damageEvent.isCombatDamage()
                 && sourcePermanent != null
-                && sourcePermanent.isCreature()) {
+                && sourcePermanent.isCreature(game)) {
             game.getState().setValue(sourceId.toString(), sourcePermanent.getControllerId());
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
             return true;

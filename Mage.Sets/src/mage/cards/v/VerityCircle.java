@@ -82,7 +82,7 @@ class VerityCircleTriggeredAbility extends TriggeredAbilityImpl {
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
         Player player = game.getPlayer(controllerId);
-        return permanent != null && player != null && permanent.isCreature()
+        return permanent != null && player != null && permanent.isCreature(game)
                 && player.hasOpponent(permanent.getControllerId(), game);
     }
 

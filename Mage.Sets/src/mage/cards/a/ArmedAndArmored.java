@@ -62,8 +62,8 @@ class ArmedAndArmoredEffect extends ContinuousEffectImpl {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
             if (permanent != null && permanent.hasSubtype(SubType.VEHICLE, game)) {
                 if (sublayer == SubLayer.NA) {
-                    permanent.addCardType(CardType.ARTIFACT);
-                    permanent.addCardType(CardType.CREATURE);// TODO: Check if giving CREATURE Type is correct
+                    permanent.addCardType(game, CardType.ARTIFACT);
+                    permanent.addCardType(game, CardType.CREATURE);// TODO: Check if giving CREATURE Type is correct
                 }
             }
         }

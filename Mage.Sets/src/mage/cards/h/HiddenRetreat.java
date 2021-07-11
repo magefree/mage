@@ -71,6 +71,6 @@ class HiddenRetreatEffect extends PreventionEffectImpl {
                 && game.getObject(source.getFirstTarget()) != null
                 && game.getObject(event.getSourceId()) != null
                 && game.getObject(source.getFirstTarget()).equals(game.getObject(event.getSourceId()))
-                && game.getObject(source.getFirstTarget()).isInstantOrSorcery());
+                && game.getObject(source.getFirstTarget()).isInstantOrSorcery(game));
     }
 }

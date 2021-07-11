@@ -68,7 +68,7 @@ class WeatheredRunestoneEffect extends ContinuousRuleModifyingEffectImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getToZone() == Zone.BATTLEFIELD && (zEvent.getFromZone() == Zone.GRAVEYARD || zEvent.getFromZone() == Zone.LIBRARY)) {
             Card card = game.getCard(zEvent.getTargetId());
-            return card != null && !card.isLand() && card.isPermanent();
+            return card != null && !card.isLand(game) && card.isPermanent(game);
         }
         return false;
     }

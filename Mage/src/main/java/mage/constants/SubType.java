@@ -420,6 +420,7 @@ public enum SubType {
     FREYALISE("Freyalise", SubTypeSet.PlaneswalkerType),
     GARRUK("Garruk", SubTypeSet.PlaneswalkerType),
     GIDEON("Gideon", SubTypeSet.PlaneswalkerType),
+    GRIST("Grist", SubTypeSet.PlaneswalkerType),
     HUATLI("Huatli", SubTypeSet.PlaneswalkerType),
     JACE("Jace", SubTypeSet.PlaneswalkerType),
     JESKA("Jeska", SubTypeSet.PlaneswalkerType),
@@ -431,6 +432,7 @@ public enum SubType {
     LILIANA("Liliana", SubTypeSet.PlaneswalkerType),
     LUKKA("Lukka", SubTypeSet.PlaneswalkerType),
     LOLTH("Lolth", SubTypeSet.PlaneswalkerType),
+    MORDENKAINEN("Mordenkainen", SubTypeSet.PlaneswalkerType),
     NAHIRI("Nahiri", SubTypeSet.PlaneswalkerType),
     NARSET("Narset", SubTypeSet.PlaneswalkerType),
     NIKO("Niko", SubTypeSet.PlaneswalkerType),
@@ -544,6 +546,10 @@ public enum SubType {
         return "AEIOUaeiou".indexOf(c) != -1;
     }
 
+    public boolean isCustomSet() {
+        return customSet;
+    }
+
     public static SubType fromString(String value) {
         for (SubType st : SubType.values()) {
             if (st.toString().equals(value)) {
@@ -569,18 +575,24 @@ public enum SubType {
     }
 
     public boolean canGain(MageObject mageObject) {
+        return canGain(null, mageObject);
+    }
+
+    public boolean canGain(Game game, MageObject mageObject) {
         switch (subTypeSet) {
             case CreatureType:
-                return mageObject.isCreature() || mageObject.isTribal();
+                return mageObject.isCreature(game) || mageObject.isTribal(game);
             case BasicLandType:
             case NonBasicLandType:
-                return mageObject.isLand();
+                return mageObject.isLand(game);
             case EnchantmentType:
-                return mageObject.isEnchantment();
+                return mageObject.isEnchantment(game);
             case ArtifactType:
-                return mageObject.isArtifact();
+                return mageObject.isArtifact(game);
             case PlaneswalkerType:
-                return mageObject.isPlaneswalker();
+                return mageObject.isPlaneswalker(game);
+            case SpellType:
+                return mageObject.isInstantOrSorcery(game);
         }
         return false;
     }

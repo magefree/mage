@@ -70,7 +70,7 @@ class AmplifireEffect extends OneShotEffect {
         for (Card card : player.getLibrary().getCards(game)) {
             if (card != null) {
                 cards.add(card);
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     lastCard = card;
                     break;
                 }

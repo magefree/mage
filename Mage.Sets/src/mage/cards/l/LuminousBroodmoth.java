@@ -81,7 +81,7 @@ class LuminousBroodmothTriggeredAbility extends TriggeredAbilityImpl {
 
         if (permanent != null
                 && zEvent.isDiesEvent()
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && !permanent.getAbilities().containsKey(FlyingAbility.getInstance().getId())
                 && permanent.isControlledBy(this.controllerId)) {
             this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId()));

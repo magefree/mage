@@ -58,7 +58,7 @@ class FearEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return blocker.isArtifact() || blocker.getColor(game).isBlack();
+        return blocker.isArtifact(game) || blocker.getColor(game).isBlack();
     }
 
     @Override

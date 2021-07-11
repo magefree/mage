@@ -74,7 +74,7 @@ class ReflectiveGolemTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Spell spell = game.getSpellOrLKIStack(event.getTargetId());
-        if (spell == null || !spell.isInstantOrSorcery()) {
+        if (spell == null || !spell.isInstantOrSorcery(game)) {
             return false;
         }
         if (spell.getSpellAbilities()

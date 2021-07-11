@@ -124,7 +124,7 @@ class RashmiEternitiesCrafterEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 controller.revealCards("Rashmi, Eternities Crafter", new CardsImpl(card), game);
-                if (card.isLand()) {
+                if (card.isLand(game)) {
                     controller.moveCards(card, Zone.HAND, source, game);
                     return true;
                 }

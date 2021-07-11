@@ -97,7 +97,7 @@ class UnexpectedResultEffect extends OneShotEffect {
                 return false;
             }
             controller.revealCards(sourceCard.getName(), new CardsImpl(card), game);
-            if (card.isLand()) {
+            if (card.isLand(game)) {
                 String message = "Put " + card.getName() + " onto the battlefield?";
                 if (controller.chooseUse(Outcome.PutLandInPlay, message, source, game)) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);

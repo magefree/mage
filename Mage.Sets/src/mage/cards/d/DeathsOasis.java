@@ -152,7 +152,7 @@ enum DeathsOasisValue implements DynamicValue {
                 .getBattlefield()
                 .getAllActivePermanents(sourceAbility.getControllerId())
                 .stream()
-                .filter(Permanent::isCreature)
+                .filter(permanent -> permanent.isCreature(game))
                 .mapToInt(Permanent::getManaValue)
                 .max()
                 .orElse(0);

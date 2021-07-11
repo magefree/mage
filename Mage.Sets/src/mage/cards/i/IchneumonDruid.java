@@ -17,7 +17,6 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
@@ -73,7 +72,7 @@ class IchneumonDruidAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!event.getPlayerId().equals(controllerId)) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isInstant()) {
+            if (spell != null && spell.isInstant(game)) {
                 IchneumonDruidWatcher watcher = game.getState().getWatcher(IchneumonDruidWatcher.class);
                 if (watcher != null && watcher.moreThanTwoInstantsCast(event.getPlayerId(), game)) {
                     for (Effect effect : getEffects()) {
@@ -105,7 +104,7 @@ class IchneumonDruidWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             UUID playerId = event.getPlayerId();
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isInstant()) {
+            if (spell != null && spell.isInstant(game)) {
                 playerInstantCount.putIfAbsent(event.getPlayerId(), 0);
                 playerInstantCount.compute(playerId, (k, v) -> v + 1);
             }

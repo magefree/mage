@@ -105,7 +105,7 @@ class ThievingSkydiverEffect extends OneShotEffect {
         Permanent artifact = game.getPermanent(source.getFirstTarget());
         if (permanent == null
                 || artifact == null
-                || !artifact.isArtifact()
+                || !artifact.isArtifact(game)
                 || !artifact.hasSubtype(SubType.EQUIPMENT, game)) {
             return false;
         }

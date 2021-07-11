@@ -82,7 +82,7 @@ class VorinclexTriggeredAbility2 extends TriggeredAbilityImpl {
         }        
         if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.isLand()) {
+            if (permanent != null && permanent.isLand(game)) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
                 return true;
             }

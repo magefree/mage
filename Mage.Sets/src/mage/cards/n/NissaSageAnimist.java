@@ -90,7 +90,7 @@ class NissaSageAnimistPlusOneEffect extends OneShotEffect {
             }
             controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
             Zone targetZone = Zone.HAND;
-            if (card.isLand()) {
+            if (card.isLand(game)) {
                 targetZone = Zone.BATTLEFIELD;
             }
             return controller.moveCards(card, targetZone, source, game);

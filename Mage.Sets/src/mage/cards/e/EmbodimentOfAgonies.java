@@ -3,8 +3,6 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -67,7 +65,7 @@ enum EmbodimentOfAgoniesValue implements DynamicValue {
         player.getGraveyard()
                 .getCards(game)
                 .stream()
-                .filter(card -> !card.isLand())
+                .filter(card -> !card.isLand(game))
                 .forEach(card -> stringSet.add(getCosts(card.getManaCostSymbols())));
         stringSet.removeIf(s -> s == null || s.equals(""));
         return stringSet.size();

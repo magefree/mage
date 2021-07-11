@@ -82,7 +82,7 @@ class NetherTraitorTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()) {
             if (zEvent.getTarget() != null &&
                     zEvent.getTarget().isOwnedBy(this.getControllerId()) &&
-                    zEvent.getTarget().isCreature()&&
+                    zEvent.getTarget().isCreature(game)&&
                     !zEvent.getTarget().getId().equals(this.getSourceId())) {
                 return true;
             }

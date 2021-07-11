@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
@@ -64,7 +63,7 @@ class ViridianRevelTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent)event).isDiesEvent()) {
             Card card = game.getPermanentOrLKIBattlefield(event.getTargetId());
             Player controller = game.getPlayer(getControllerId());
-            if (controller != null && card != null && card.isArtifact()
+            if (controller != null && card != null && card.isArtifact(game)
                     && controller.hasOpponent(card.getOwnerId(), game)) {
                 return true;
             }

@@ -88,7 +88,7 @@ class SearchForSurvivorsEffect extends OneShotEffect {
                 cards.clear();
                 cards.add(card);
                 controller.revealCards(source, cards, game); // reveal the card randomly chosen.
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {
                     controller.moveCards(card, Zone.EXILED, source, game);

@@ -1,7 +1,6 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -69,7 +68,7 @@ class LoafingGiantEffect extends OneShotEffect {
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .anyMatch(MageObject::isLand)) {
+                .anyMatch(card -> card.isLand(game))) {
             game.addEffect(new PreventCombatDamageBySourceEffect(Duration.EndOfTurn), source);
             return true;
         }

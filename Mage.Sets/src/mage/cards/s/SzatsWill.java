@@ -102,7 +102,7 @@ class SzatsWillEffect extends OneShotEffect {
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isCreature)
+                .filter(card -> card.isCreature(game))
                 .map(MageObject::getPower)
                 .mapToInt(MageInt::getValue)
                 .max()

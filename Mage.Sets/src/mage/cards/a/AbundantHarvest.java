@@ -68,7 +68,7 @@ class AbundantHarvestEffect extends OneShotEffect {
                 continue;
             }
             toReveal.add(card);
-            if (card.isLand() == land) {
+            if (card.isLand(game) == land) {
                 toHand = card;
                 break;
             }

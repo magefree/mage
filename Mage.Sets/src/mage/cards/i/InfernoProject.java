@@ -71,7 +71,7 @@ enum InfernoProjectValue implements DynamicValue {
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isInstantOrSorcery)
+                .filter(card -> card.isInstantOrSorcery(game))
                 .mapToInt(MageObject::getManaValue)
                 .sum();
     }

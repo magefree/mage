@@ -86,7 +86,7 @@ class FoodChainManaEffect extends ManaEffect {
         if (game != null) {
             int cmc = -1;
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-                if (permanent.isCreature()) {
+                if (permanent.isCreature(game)) {
                     cmc = Math.max(cmc, permanent.getManaCost().manaValue());
                 }
             }

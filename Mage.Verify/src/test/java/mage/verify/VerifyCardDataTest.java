@@ -915,7 +915,7 @@ public class VerifyCardDataTest {
                 Assert.assertNotNull(card);
 
                 // CHECK: all planeswalkers must be legendary
-                if (card.getCardType().contains(CardType.PLANESWALKER) && !card.getSuperType().contains(SuperType.LEGENDARY)) {
+                if (card.isPlaneswalker() && !card.getSuperType().contains(SuperType.LEGENDARY)) {
                     errorsList.add("Error: planeswalker must have legendary type: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
@@ -1254,6 +1254,20 @@ public class VerifyCardDataTest {
             expected.removeIf(subtypesToIgnore::contains);
         }
 
+        for (SubType subType : card.getSubtype()) {
+            if (!subType.isCustomSet() && !subType.canGain(card)) {
+                String cardTypeString = card
+                        .getCardType()
+                        .stream()
+                        .map(CardType::toString)
+                        .reduce((a, b) -> a + " " + b)
+                        .orElse("");
+                fail(card, "subtypes", "card has subtype "
+                        + subType.getDescription() + " (" + subType.getSubTypeSet() + ')'
+                        + " that doesn't match its card type(s) (" + cardTypeString + ')');
+            }
+        }
+
         if (!eqSet(actual, expected)) {
             fail(card, "subtypes", actual + " != " + expected);
         }
@@ -1321,7 +1335,7 @@ public class VerifyCardDataTest {
         }
 
         // spells have only 1 ability
-        if (card.isSorcery() || card.isInstant()) {
+        if (card.isInstantOrSorcery()) {
             return;
         }
 

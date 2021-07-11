@@ -66,7 +66,7 @@ enum DeathSparkCondition implements Condition {
             boolean nextCard = false;
             for (Card card : controller.getGraveyard().getCards(game)) {
                 if (nextCard) {
-                    return card.isCreature();
+                    return card.isCreature(game);
                 }
                 if (card.getId().equals(source.getSourceId())) {
                     nextCard = true;

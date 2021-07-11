@@ -55,7 +55,7 @@ public class FightTargetsEffect extends OneShotEffect {
             Permanent creature2 = game.getPermanent(target2Id);
             // 20110930 - 701.10
             if (creature1 != null && creature2 != null) {
-                if (creature1.isCreature() && creature2.isCreature()) {
+                if (creature1.isCreature(game) && creature2.isCreature(game)) {
                     return creature1.fight(creature2, source, game);
                 }
             }

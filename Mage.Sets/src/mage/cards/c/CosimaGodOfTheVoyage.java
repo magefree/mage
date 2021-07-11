@@ -168,7 +168,7 @@ class CosimaGodOfTheVoyageTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && permanent.isLand() && permanent.isControlledBy(getControllerId());
+        return permanent != null && permanent.isLand(game) && permanent.isControlledBy(getControllerId());
     }
 
     @Override
@@ -266,7 +266,7 @@ class TheOmenkeelEffect extends OneShotEffect {
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, damage));
         player.moveCards(cards, Zone.EXILED, source, game);
         cards.removeIf(uuid -> game.getState().getZone(uuid) != Zone.EXILED);
-        cards.removeIf(uuid -> !game.getCard(uuid).isLand());
+        cards.removeIf(uuid -> !game.getCard(uuid).isLand(game));
         game.addEffect(new TheOmenkeelPlayFromExileEffect(cards, game), source);
         return true;
     }
@@ -304,7 +304,7 @@ class TheOmenkeelPlayFromExileEffect extends AsThoughEffectImpl {
         }
         Card card = game.getCard(sourceId);
         return card != null
-                && card.isLand()
+                && card.isLand(game)
                 && morSet.stream().anyMatch(mor -> mor.refersTo(card, game));
     }
 }

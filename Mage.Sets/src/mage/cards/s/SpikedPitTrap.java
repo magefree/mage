@@ -20,9 +20,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SpikePitTrap extends CardImpl {
+public final class SpikedPitTrap extends CardImpl {
 
-    public SpikePitTrap(UUID ownerId, CardSetInfo setInfo) {
+    public SpikedPitTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // Flash
@@ -49,12 +49,12 @@ public final class SpikePitTrap extends CardImpl {
         ), new CreateTokenEffect(new TreasureToken()));
     }
 
-    private SpikePitTrap(final SpikePitTrap card) {
+    private SpikedPitTrap(final SpikedPitTrap card) {
         super(card);
     }
 
     @Override
-    public SpikePitTrap copy() {
-        return new SpikePitTrap(this);
+    public SpikedPitTrap copy() {
+        return new SpikedPitTrap(this);
     }
 }

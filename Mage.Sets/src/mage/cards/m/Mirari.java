@@ -13,7 +13,6 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
@@ -77,7 +76,7 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (isControlledInstantOrSorcery(spell)) {
+            if (isControlledInstantOrSorcery(spell, game)) {
                 getEffects().setTargetPointer(new FixedTarget(spell.getId()));
                 return true;
             }
@@ -85,10 +84,10 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    private boolean isControlledInstantOrSorcery(Spell spell) {
+    private boolean isControlledInstantOrSorcery(Spell spell, Game game) {
         return spell != null
                 && spell.isControlledBy(this.getControllerId())
-                && spell.isInstantOrSorcery();
+                && spell.isInstantOrSorcery(game);
     }
 
     @Override

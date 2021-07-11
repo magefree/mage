@@ -76,7 +76,7 @@ class HintOfInsanityEffect extends OneShotEffect {
                         .getCards(game)
                         .stream()
                         .filter(Objects::nonNull)
-                        .filter(card -> !card.isLand())
+                        .filter(card -> !card.isLand(game))
                         .filter(card -> nameCounts.getOrDefault(card.getName(), 0) > 1)
                         .collect(Collectors.toSet())
         );

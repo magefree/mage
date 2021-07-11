@@ -111,7 +111,7 @@ class SirensCallDestroyEffect extends OneShotEffect {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(player.getId())) {
 
                 // Non Creature Cards are safe.
-                if (!permanent.isCreature()) {
+                if (!permanent.isCreature(game)) {
                     continue;
                 }
 

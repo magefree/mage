@@ -75,8 +75,8 @@ class ThaliaTapEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null && (permanent.isCreature() ||
-                    (permanent.isLand() && !permanent.isBasic()))) {
+            if (permanent != null && (permanent.isCreature(game) ||
+                    (permanent.isLand(game) && !permanent.isBasic()))) {
                 return true;
             }
         }

@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -64,7 +63,7 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
         if (this.affectedObjectsSet) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                player.getGraveyard().stream().map((cardId) -> game.getCard(cardId)).filter(MageObject::isInstantOrSorcery).forEachOrdered((card) -> {
+                player.getGraveyard().stream().map((cardId) -> game.getCard(cardId)).filter(card1 -> card1.isInstantOrSorcery(game)).forEachOrdered((card) -> {
                     affectedObjectList.add(new MageObjectReference(card, game));
                 });
             }
@@ -79,9 +78,9 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
                 Card card = game.getCard(cardId);
                 if (card != null) {
                     FlashbackAbility ability = null;
-                    if (card.isInstant()) {
+                    if (card.isInstant(game)) {
                         ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
-                    } else if (card.isSorcery()) {
+                    } else if (card.isSorcery(game)) {
                         ability = new FlashbackAbility(card.getManaCost(), TimingRule.SORCERY);
                     }
                     if (ability != null) {

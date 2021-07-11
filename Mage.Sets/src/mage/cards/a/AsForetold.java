@@ -71,7 +71,7 @@ class SpellWithManaCostLessThanOrEqualToCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
         return object != null
-                && !object.isLand()
+                && !object.isLand(game)
                 && object.getManaValue() <= counters;
     }
 }

@@ -224,7 +224,7 @@ class IdolOfEnduranceCastFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
         Card card = game.getCard(sourceId);
-        if (card == null || !card.isCreature() || card.isLand()) {
+        if (card == null || !card.isCreature(game) || card.isLand(game)) {
             return false;
         }
         return allowCardToPlayWithoutMana(sourceId, source, affectedControllerId, game);

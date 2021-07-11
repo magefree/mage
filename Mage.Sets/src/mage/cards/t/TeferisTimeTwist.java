@@ -112,7 +112,7 @@ class TeferisTimeTwistReturnEffect extends OneShotEffect {
             return true;
         }
         Permanent permanent = game.getPermanent(card.getId());
-        if (permanent != null && permanent.isCreature()) {
+        if (permanent != null && permanent.isCreature(game)) {
             // TODO: This is technically wrong as it should enter with the counters,
             // however there's currently no way to know that for sure
             // this is similar to the blood moon issue

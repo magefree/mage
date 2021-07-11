@@ -107,7 +107,7 @@ class TheBindingOfTheTitansEffect extends OneShotEffect {
         int lifeToGain = cards
                 .getCards(game)
                 .stream()
-                .filter(Card::isCreature)
+                .filter(card -> card.isCreature(game))
                 .map(Card::getId)
                 .map(game.getState()::getZone)
                 .map(Zone.EXILED::equals)

@@ -28,9 +28,9 @@ public final class VeteranAdventurer extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Veteran Adventurer is also a Cleric, Rogue, Warrior, and Wizard.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new HasSubtypesSourceEffect(SubType.CLERIC, SubType.ROGUE, SubType.WARRIOR, SubType.WIZARD)
-        ));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new HasSubtypesSourceEffect(
+                SubType.CLERIC, SubType.ROGUE, SubType.WARRIOR, SubType.WIZARD
+        )));
 
         // This spell costs {1} less to cast for each creature in your party.
         this.addAbility(new SimpleStaticAbility(

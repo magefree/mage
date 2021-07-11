@@ -65,7 +65,7 @@ class AetherRiftEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = controller.discardOne(true, false, source, game);
-            if (card != null && card.isCreature()) {
+            if (card != null && card.isCreature(game)) {
                 Effect returnEffect = new ReturnFromGraveyardToBattlefieldTargetEffect();
                 returnEffect.setTargetPointer(new FixedTarget(card.getId()));
                 Effect doEffect = new DoUnlessAnyPlayerPaysEffect(returnEffect, new PayLifeCost(5),

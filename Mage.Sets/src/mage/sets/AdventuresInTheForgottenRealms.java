@@ -70,7 +70,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Dire Wolf Prowler", 179, Rarity.COMMON, mage.cards.d.DireWolfProwler.class));
         cards.add(new SetCardInfo("Displacer Beast", 54, Rarity.UNCOMMON, mage.cards.d.DisplacerBeast.class));
         cards.add(new SetCardInfo("Divine Smite", 12, Rarity.UNCOMMON, mage.cards.d.DivineSmite.class));
-        cards.add(new SetCardInfo("Djinni Windseeker", 55, Rarity.COMMON, mage.cards.d.DjinniWindseeker.class));
+        cards.add(new SetCardInfo("Djinni Windseer", 55, Rarity.COMMON, mage.cards.d.DjinniWindseer.class));
         cards.add(new SetCardInfo("Dragon Turtle", 56, Rarity.RARE, mage.cards.d.DragonTurtle.class));
         cards.add(new SetCardInfo("Dragon's Disciple", 13, Rarity.UNCOMMON, mage.cards.d.DragonsDisciple.class));
         cards.add(new SetCardInfo("Drider", 98, Rarity.UNCOMMON, mage.cards.d.Drider.class));
@@ -151,15 +151,18 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Meteor Swarm", 155, Rarity.RARE, mage.cards.m.MeteorSwarm.class));
         cards.add(new SetCardInfo("Mimic", 249, Rarity.COMMON, mage.cards.m.Mimic.class));
         cards.add(new SetCardInfo("Mind Flayer", 63, Rarity.RARE, mage.cards.m.MindFlayer.class));
+        cards.add(new SetCardInfo("Minimus Containment", 24, Rarity.COMMON, mage.cards.m.MinimusContainment.class));
         cards.add(new SetCardInfo("Minion of the Mighty", 156, Rarity.RARE, mage.cards.m.MinionOfTheMighty.class));
         cards.add(new SetCardInfo("Minsc, Beloved Ranger", 227, Rarity.MYTHIC, mage.cards.m.MinscBelovedRanger.class));
         cards.add(new SetCardInfo("Monk of the Open Hand", 25, Rarity.UNCOMMON, mage.cards.m.MonkOfTheOpenHand.class));
         cards.add(new SetCardInfo("Moon-Blessed Cleric", 26, Rarity.UNCOMMON, mage.cards.m.MoonBlessedCleric.class));
+        cards.add(new SetCardInfo("Mordenkainen", 64, Rarity.MYTHIC, mage.cards.m.Mordenkainen.class));
         cards.add(new SetCardInfo("Mordenkainen's Polymorph", 65, Rarity.COMMON, mage.cards.m.MordenkainensPolymorph.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nadaar, Selfless Paladin", 27, Rarity.RARE, mage.cards.n.NadaarSelflessPaladin.class));
         cards.add(new SetCardInfo("Neverwinter Dryad", 195, Rarity.COMMON, mage.cards.n.NeverwinterDryad.class));
         cards.add(new SetCardInfo("Old Gnawbone", 197, Rarity.MYTHIC, mage.cards.o.OldGnawbone.class));
+        cards.add(new SetCardInfo("Oswald Fiddlebender", 28, Rarity.RARE, mage.cards.o.OswaldFiddlebender.class));
         cards.add(new SetCardInfo("Owlbear", 198, Rarity.COMMON, mage.cards.o.Owlbear.class));
         cards.add(new SetCardInfo("Paladin's Shield", 30, Rarity.COMMON, mage.cards.p.PaladinsShield.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
@@ -194,7 +197,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Skullport Merchant", 120, Rarity.UNCOMMON, mage.cards.s.SkullportMerchant.class));
         cards.add(new SetCardInfo("Soulknife Spy", 75, Rarity.COMMON, mage.cards.s.SoulknifeSpy.class));
         cards.add(new SetCardInfo("Sphere of Annihilation", 121, Rarity.RARE, mage.cards.s.SphereOfAnnihilation.class));
-        cards.add(new SetCardInfo("Spike Pit Trap", 251, Rarity.COMMON, mage.cards.s.SpikePitTrap.class));
+        cards.add(new SetCardInfo("Spiked Pit Trap", 251, Rarity.COMMON, mage.cards.s.SpikedPitTrap.class));
         cards.add(new SetCardInfo("Split the Party", 76, Rarity.UNCOMMON, mage.cards.s.SplitTheParty.class));
         cards.add(new SetCardInfo("Spoils of the Hunt", 205, Rarity.COMMON, mage.cards.s.SpoilsOfTheHunt.class));
         cards.add(new SetCardInfo("Steadfast Paladin", 38, Rarity.COMMON, mage.cards.s.SteadfastPaladin.class));
@@ -204,7 +207,9 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Sylvan Shepherd", 206, Rarity.COMMON, mage.cards.s.SylvanShepherd.class));
         cards.add(new SetCardInfo("Targ Nar, Demon-Fang Gnoll", 234, Rarity.UNCOMMON, mage.cards.t.TargNarDemonFangGnoll.class));
         cards.add(new SetCardInfo("Tasha's Hideous Laughter", 78, Rarity.RARE, mage.cards.t.TashasHideousLaughter.class));
+        cards.add(new SetCardInfo("The Blackstaff of Waterdeep", 48, Rarity.RARE, mage.cards.t.TheBlackstaffOfWaterdeep.class));
         cards.add(new SetCardInfo("The Book of Exalted Deeds", 4, Rarity.MYTHIC, mage.cards.t.TheBookOfExaltedDeeds.class));
+        cards.add(new SetCardInfo("The Book of Vile Darkness", 91, Rarity.MYTHIC, mage.cards.t.TheBookOfVileDarkness.class));
         cards.add(new SetCardInfo("The Deck of Many Things", 241, Rarity.MYTHIC, mage.cards.t.TheDeckOfManyThings.class));
         cards.add(new SetCardInfo("Thieves' Tools", 122, Rarity.COMMON, mage.cards.t.ThievesTools.class));
         cards.add(new SetCardInfo("Tiamat", 235, Rarity.MYTHIC, mage.cards.t.Tiamat.class));

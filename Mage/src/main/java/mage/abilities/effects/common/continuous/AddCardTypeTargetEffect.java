@@ -8,6 +8,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -16,7 +17,7 @@ import java.util.UUID;
  */
 public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
 
-    private final ArrayList<CardType> addedCardTypes = new ArrayList<>();
+    private final List<CardType> addedCardTypes = new ArrayList<>();
 
     public AddCardTypeTargetEffect(Duration duration, CardType... addedCardType) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
@@ -43,7 +44,7 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
             Permanent target = game.getPermanent(targetId);
             if (target != null) {
                 for (CardType cardType : addedCardTypes) {
-                    target.addCardType(cardType);
+                    target.addCardType(game, cardType);
                 }
                 result = true;
             }

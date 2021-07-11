@@ -40,7 +40,7 @@ public class FelhideSpiritbinderTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         Permanent lion = getPermanent("Silvercoat Lion", playerB);
         assertAbility(playerB, "Silvercoat Lion", HasteAbility.getInstance(), true);
-        Assert.assertEquals("token has to have card type enchantment", true, lion.getCardType().contains(CardType.ENCHANTMENT));
+        Assert.assertEquals("token has to have card type enchantment", true, lion.getCardType(currentGame).contains(CardType.ENCHANTMENT));
 
         assertLife(playerA, 17);
         assertLife(playerB, 20);
@@ -93,7 +93,7 @@ public class FelhideSpiritbinderTest extends CardTestPlayerBase {
         assertAbility(playerB, "Elephant", HasteAbility.getInstance(), true);
 
         Permanent copiedTokenElephant = getPermanent("Elephant", playerB);
-        Assert.assertEquals("Elephant has Enchantment card type", true, copiedTokenElephant.getCardType().contains(CardType.ENCHANTMENT));
+        Assert.assertEquals("Elephant has Enchantment card type", true, copiedTokenElephant.getCardType(currentGame).contains(CardType.ENCHANTMENT));
 
         assertLife(playerA, 17);
         assertLife(playerB, 20);

@@ -15,9 +15,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class DjinniWindseeker extends CardImpl {
+public final class DjinniWindseer extends CardImpl {
 
-    public DjinniWindseeker(UUID ownerId, CardSetInfo setInfo) {
+    public DjinniWindseer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
         this.subtype.add(SubType.DJINN);
@@ -41,12 +41,12 @@ public final class DjinniWindseeker extends CardImpl {
         effect.addTableEntry(20, 20, new ScryEffect(3, false));
     }
 
-    private DjinniWindseeker(final DjinniWindseeker card) {
+    private DjinniWindseer(final DjinniWindseer card) {
         super(card);
     }
 
     @Override
-    public DjinniWindseeker copy() {
-        return new DjinniWindseeker(this);
+    public DjinniWindseer copy() {
+        return new DjinniWindseer(this);
     }
 }

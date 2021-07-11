@@ -94,7 +94,7 @@ class DraugrNecromancerReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zce = (ZoneChangeEvent) event;
         return zce.isDiesEvent()
-                && zce.getTarget().isCreature()
+                && zce.getTarget().isCreature(game)
                 && !(zce.getTarget() instanceof PermanentToken);
     }
 }
@@ -130,7 +130,7 @@ class DraugrNecromancerCastFromExileEffect extends AsThoughEffectImpl {
                 || game.getState().getZone(card.getMainCard().getId()) != Zone.EXILED) {
             return false;
         }
-        return !card.isLand()
+        return !card.isLand(game)
                 && game.getOpponents(card.getOwnerId()).contains(source.getControllerId())
                 && card.getMainCard().getCounters(game).getCount(CounterType.ICE) > 0;
     }

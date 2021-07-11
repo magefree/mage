@@ -85,7 +85,7 @@ class ScrollOfFateEffect extends OneShotEffect {
                 .collect(Collectors.toSet());
         cards.stream().forEach(card -> {
             ManaCosts manaCosts = null;
-            if (card.isCreature()) {
+            if (card.isCreature(game)) {
                 manaCosts = card.getSpellAbility() != null ? card.getSpellAbility().getManaCosts() : null;
                 if (manaCosts == null) {
                     manaCosts = new ManaCostsImpl("{0}");

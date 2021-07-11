@@ -9,14 +9,12 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.hint.Hint;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.*;
@@ -106,7 +104,7 @@ enum HappilyEverAfterCondition implements Condition {
         game.getBattlefield()
                 .getAllActivePermanents(source.getControllerId())
                 .stream()
-                .map(Permanent::getCardType)
+                .map(permanent -> permanent.getCardType(game))
                 .flatMap(Collection::stream)
                 .forEach(cardTypeEnumSet::add);
         if (cardTypeEnumSet.size() >= 6) {
@@ -115,7 +113,7 @@ enum HappilyEverAfterCondition implements Condition {
         player.getGraveyard()
                 .getCards(game)
                 .stream()
-                .map(Card::getCardType)
+                .map(card -> card.getCardType(game))
                 .flatMap(Collection::stream)
                 .forEach(cardTypeEnumSet::add);
         return cardTypeEnumSet.size() >= 6;
@@ -178,13 +176,13 @@ enum HappilyEverAfterCardTypeHint implements Hint {
         game.getBattlefield()
                 .getAllActivePermanents(ability.getControllerId())
                 .stream()
-                .map(Permanent::getCardType)
+                .map(permanent -> permanent.getCardType(game))
                 .flatMap(Collection::stream)
                 .forEach(cardTypeSet::add);
         player.getGraveyard()
                 .getCards(game)
                 .stream()
-                .map(Card::getCardType)
+                .map(card -> card.getCardType(game))
                 .flatMap(Collection::stream)
                 .forEach(cardTypeSet::add);
         if (cardTypeSet.isEmpty()) {

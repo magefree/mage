@@ -57,8 +57,8 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         assertPermanentCount(playerA, "Kestia, the Cultivator", 1);
         
         Permanent kestia = getPermanent("Kestia, the Cultivator", playerA);
-        Assert.assertNotEquals("Kestia may not be an creature", true, kestia.isCreature());        
-        Assert.assertEquals("Kestia has to be an enchantment", true, kestia.isEnchantment());        
+        Assert.assertNotEquals("Kestia may not be an creature", true, kestia.isCreature(currentGame));
+        Assert.assertEquals("Kestia has to be an enchantment", true, kestia.isEnchantment(currentGame));
         
         assertPowerToughness(playerA, "Silvercoat Lion", 6, 6);
     }     

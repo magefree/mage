@@ -101,8 +101,8 @@ class GrandMasterOfFlowersEffect extends ContinuousEffectImpl {
         }
         switch (layer) {
             case TypeChangingEffects_4:
-                permanent.getCardType().clear();
-                permanent.getCardType().add(CardType.CREATURE);
+                permanent.removeAllCardTypes(game);
+                permanent.addCardType(game, CardType.CREATURE);
                 permanent.removeAllSubTypes(game);
                 permanent.addSubType(game, SubType.DRAGON);
                 permanent.addSubType(game, SubType.GOD);

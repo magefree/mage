@@ -124,7 +124,7 @@ class TuvasaTheSunlitWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isEnchantment()) {
+            if (spell != null && spell.isEnchantment(game)) {
                 firstEnchantmentThisTurn.putIfAbsent(
                         event.getPlayerId(),
                         spell.getId()

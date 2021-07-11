@@ -13,7 +13,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -66,7 +65,7 @@ class KarmicJusticeTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getPlayerId().equals(controllerId) 
                 && game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId()))) {
             MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (!mageObject.isCreature()) {
+            if (!mageObject.isCreature(game)) {
                 this.getTargets().clear();
                 FilterPermanent filter = new FilterPermanent("target permanent that opponent controls");
                 filter.add(new ControllerIdPredicate(game.getControllerId(event.getSourceId())));

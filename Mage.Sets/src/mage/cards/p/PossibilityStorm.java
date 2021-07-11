@@ -1,7 +1,5 @@
 package mage.cards.p;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -17,14 +15,15 @@ import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PossibilityStorm extends CardImpl {
@@ -123,10 +122,10 @@ class PossibilityStormEffect extends OneShotEffect {
                         if (card != null) {
                             spellController.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
                         }
-                    } while (library.hasCards() && card != null && !sharesType(card, spell.getCardType()));
+                    } while (library.hasCards() && card != null && !sharesType(card, spell.getCardType(game), game));
 
-                    if (card != null && sharesType(card, spell.getCardType())
-                            && !card.isLand()
+                    if (card != null && sharesType(card, spell.getCardType(game), game)
+                            && !card.isLand(game)
                             && card.getSpellAbility().canChooseTarget(game, spellController.getId())) {
                         if (spellController.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
                             spellController.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
@@ -145,8 +144,8 @@ class PossibilityStormEffect extends OneShotEffect {
         return false;
     }
 
-    private boolean sharesType(Card card, ArrayList<CardType> cardTypes) {
-        for (CardType type : card.getCardType()) {
+    private boolean sharesType(Card card, List<CardType> cardTypes, Game game) {
+        for (CardType type : card.getCardType(game)) {
             if (cardTypes.contains(type)) {
                 return true;
             }

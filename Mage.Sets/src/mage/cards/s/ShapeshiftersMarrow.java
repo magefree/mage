@@ -61,7 +61,7 @@ public final class ShapeshiftersMarrow extends CardImpl {
                 Card card = activePlayer.getLibrary().getFromTop(game);
                 if (card != null) {
                     activePlayer.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
-                    if (card.isCreature()) {
+                    if (card.isCreature(game)) {
                         activePlayer.moveCards(activePlayer.getLibrary().getTopCards(game, 1), Zone.GRAVEYARD, source, game);
                         CopyEffect copyEffect = new CopyEffect(Duration.Custom, card, source.getSourceId());
                         game.addEffect(copyEffect, source);

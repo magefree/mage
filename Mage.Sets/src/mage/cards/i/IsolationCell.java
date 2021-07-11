@@ -65,7 +65,7 @@ class IsolationCellTriggeredAbility extends TriggeredAbilityImpl {
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Card card = game.getCard(event.getSourceId());
             if (card != null
-                    && card.isCreature()) {
+                    && card.isCreature(game)) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
                 return true;
             }

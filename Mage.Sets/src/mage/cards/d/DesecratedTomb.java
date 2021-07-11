@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
@@ -63,7 +62,7 @@ class DesecratedTombTriggeredAbility extends TriggeredAbilityImpl {
                 && zEvent.getCards()
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isCreature)
+                .filter(card -> card.isCreature(game))
                 .map(Card::getOwnerId)
                 .anyMatch(getControllerId()::equals);
     }

@@ -62,7 +62,7 @@ class DisplacementWaveEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (!permanent.isLand() && permanent.getManaValue() <= source.getManaCostsToPay().getX()) {
+            if (!permanent.isLand(game) && permanent.getManaValue() <= source.getManaCostsToPay().getX()) {
                 cards.add(permanent);
             }
         }

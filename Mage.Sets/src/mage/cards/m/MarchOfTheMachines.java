@@ -70,7 +70,7 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
                         if (permanent != null) {
                             affectedObjectList.add(new MageObjectReference(permanent, game));
-                            permanent.addCardType(CardType.CREATURE);
+                            permanent.addCardType(game, CardType.CREATURE);
                         }
                     }
                 }

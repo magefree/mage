@@ -74,7 +74,7 @@ class DaxosBlessedByTheSunAbility extends TriggeredAbilityImpl {
         }
         Permanent creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
         return creature != null
-                && creature.isCreature()
+                && creature.isCreature(game)
                 && creature.isControlledBy(this.getControllerId());
     }
 

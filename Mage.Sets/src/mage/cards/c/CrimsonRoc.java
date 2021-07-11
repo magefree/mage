@@ -70,7 +70,7 @@ class CrimsonRocTriggeredAbility extends TriggeredAbilityImpl {
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && !permanent.hasAbility(FlyingAbility.getInstance(), game);
     }
 

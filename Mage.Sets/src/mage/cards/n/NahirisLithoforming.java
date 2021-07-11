@@ -118,7 +118,7 @@ class NahirisLithoformingTappedEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (source.getControllerId().equals(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null && permanent.isLand()) {
+            if (permanent != null && permanent.isLand(game)) {
                 return true;
             }
         }

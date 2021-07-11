@@ -74,7 +74,7 @@ enum DeepwoodDenizenValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int counters = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(sourceAbility.getControllerId())) {
-            if (permanent.isCreature()) {
+            if (permanent.isCreature(game)) {
                 counters += permanent.getCounters(game).getCount(CounterType.P1P1);
             }
         }

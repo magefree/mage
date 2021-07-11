@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -73,7 +72,7 @@ class RowenAbility extends TriggeredAbilityImpl {
                     lastTriggeredTurn = game.getTurnNum();
                     controller.revealCards(sourcePermanent.getName(), new CardsImpl(card), game);
                     this.getEffects().clear();
-                    if (card.isLand() && card.isBasic()) {
+                    if (card.isLand(game) && card.isBasic()) {
                         this.addEffect(new DrawCardSourceControllerEffect(1));
                     }
                     return true;

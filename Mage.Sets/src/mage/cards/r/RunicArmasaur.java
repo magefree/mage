@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
 
 /**
@@ -72,8 +71,8 @@ class RunicArmasaurTriggeredAbility extends TriggeredAbilityImpl {
                 && stackAbility.getSourcePermanentOrLKI(game) != null) { // must be a permanent
             MageObject abilitySourceObject = stackAbility.getSourceObject(game);
             return abilitySourceObject != null
-                    && (abilitySourceObject.isLand()
-                    || abilitySourceObject.isCreature());
+                    && (abilitySourceObject.isLand(game)
+                    || abilitySourceObject.isCreature(game));
         }
         return false;
     }

@@ -72,7 +72,7 @@ class ImposingSovereignEffect extends ReplacementEffectImpl {
             return false;
         }
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null && permanent.isCreature();
+        return permanent != null && permanent.isCreature(game);
     }
 
     @Override

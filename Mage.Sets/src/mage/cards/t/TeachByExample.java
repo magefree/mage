@@ -66,7 +66,7 @@ class TeachByExampleAbility extends DelayedTriggeredAbility {
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell == null || !spell.isInstantOrSorcery()) {
+        if (spell == null || !spell.isInstantOrSorcery(game)) {
             return false;
         }
         this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));

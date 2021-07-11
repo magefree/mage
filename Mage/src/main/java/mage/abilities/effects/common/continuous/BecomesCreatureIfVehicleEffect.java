@@ -28,7 +28,7 @@ public class BecomesCreatureIfVehicleEffect extends ContinuousEffectImpl {
         if (aura != null && aura.getAttachedTo() != null) {
             Permanent enchanted = game.getPermanent(aura.getAttachedTo());
             if (enchanted != null && enchanted.hasSubtype(SubType.VEHICLE, game)) {
-                enchanted.addCardType(addedType);
+                enchanted.addCardType(game, addedType);
             }
         }
 

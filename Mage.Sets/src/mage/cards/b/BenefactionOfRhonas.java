@@ -70,10 +70,10 @@ class BenefactionOfRhonasEffect extends OneShotEffect {
                 Card card = game.getCard(cardId);
                 if (card != null) {
                     cards.add(card);
-                    if (card.isCreature()) {
+                    if (card.isCreature(game)) {
                         creatureCardFound = true;
                     }
-                    if (card.isEnchantment()) {
+                    if (card.isEnchantment(game)) {
                         enchantmentCardFound = true;
                     }
                 }
