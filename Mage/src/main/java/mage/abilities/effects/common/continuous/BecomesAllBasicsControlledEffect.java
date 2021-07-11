@@ -36,11 +36,12 @@ public class BecomesAllBasicsControlledEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, source.getControllerId(), game)) {
-            permanent.addSubType(SubType.PLAINS);
-            permanent.addSubType(SubType.ISLAND);
-            permanent.addSubType(SubType.SWAMP);
-            permanent.addSubType(SubType.MOUNTAIN);
-            permanent.addSubType(SubType.FOREST);
+            permanent.addSubType(game, 
+                    SubType.PLAINS, 
+                    SubType.ISLAND, 
+                    SubType.SWAMP, 
+                    SubType.MOUNTAIN, 
+                    SubType.FOREST);
 
             if (!permanent.getAbilities().containsRule(new WhiteManaAbility())) {
                 permanent.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
