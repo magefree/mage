@@ -47,6 +47,7 @@ public class Commander extends Constructed {
         banned.add("Flash");
         banned.add("Gifts Ungiven");
         banned.add("Griselbrand");
+        banned.add("Hullbreacher");
         banned.add("Iona, Shield of Emeria");
         banned.add("Karakas");
         banned.add("Leovold, Emissary of Trest");
