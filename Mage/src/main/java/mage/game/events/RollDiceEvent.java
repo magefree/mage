@@ -1,6 +1,7 @@
 package mage.game.events;
 
 import mage.abilities.Ability;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -20,8 +21,12 @@ public class RollDiceEvent extends GameEvent {
         return sides;
     }
 
+    public void increaseAmount() {
+        this.amount = CardUtil.overflowInc(this.amount, 1);
+    }
+
     public void increaseToIgnore() {
-        this.toIgnore++;
+        this.toIgnore = CardUtil.overflowInc(this.toIgnore, 1);
     }
 
     public int getToIgnore() {
