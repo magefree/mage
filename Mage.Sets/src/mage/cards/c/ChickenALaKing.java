@@ -17,6 +17,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
+import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -87,15 +88,9 @@ class ChickenALaKingTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (this.isControlledBy(event.getPlayerId()) && event.getFlag()) {
-            // event.getData holds the num of sides of the die to roll
-            String data = event.getData();
-            if (data != null) {
-                int numSides = Integer.parseInt(data);
-                return event.getAmount() == 6 && numSides == 6;
-            }
-        }
-        return false;
+        return this.isControlledBy(event.getPlayerId())
+                && event.getAmount() == 6
+                && ((DieRolledEvent) event).getSides() == 6;
     }
 
     @Override
