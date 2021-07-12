@@ -73,6 +73,10 @@ public interface Permanent extends Card, Controllable {
 
     void setRenowned(boolean value);
 
+    int getClassLevel();
+
+    boolean setClassLevel(int classLevel);
+
     void setCardNumber(String cid);
 
     void setExpansionSetCode(String expansionSetCode);
