@@ -20,8 +20,8 @@ public class RollDiceEvent extends GameEvent {
         return sides;
     }
 
-    public void setToIgnore(int toIgnore) {
-        this.toIgnore = toIgnore;
+    public void increaseToIgnore() {
+        this.toIgnore++;
     }
 
     public int getToIgnore() {

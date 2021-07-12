@@ -3490,6 +3490,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public int rollDieResult(int sides, Game game) {
+        return computerPlayer.rollDieResult(sides, game);
+    }
+
+    @Override
     public List<Permanent> getAvailableAttackers(Game game) {
         return computerPlayer.getAvailableAttackers(game);
     }

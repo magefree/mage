@@ -489,6 +489,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     List<Integer> rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice, boolean ignoreLowest);
 
+    int rollDieResult(int sides, Game game);
+
     PlanarDieRoll rollPlanarDie(Ability source, Game game);
 
     PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects);

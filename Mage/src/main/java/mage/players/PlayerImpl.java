@@ -25,6 +25,8 @@ import mage.abilities.mana.ManaOptions;
 import mage.actions.MageDrawAction;
 import mage.cards.*;
 import mage.cards.decks.Deck;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -2847,6 +2849,52 @@ public abstract class PlayerImpl implements Player, Serializable {
         return this.rollDice(source, game, null, numSides, numDice, false);
     }
 
+    private static final class DieResult {
+        private final int result;
+        private final int modifier;
+
+        DieResult(int result, int modifier) {
+            this.result = result;
+            this.modifier = modifier;
+        }
+    }
+
+    @Override
+    public int rollDieResult(int sides, Game game) {
+        return RandomUtil.nextInt(sides) + 1;
+    }
+
+    private int rollDieWithReplacement(int numSides, Ability source, Game game) {
+        int result = rollDieResult(numSides, game);
+        // currently only used for Clam-I-Am
+        if (numSides != 6
+                || result != 3
+                || !game.replaceEvent(GameEvent.getEvent(
+                GameEvent.EventType.REPLACE_ROLLED_DIE, source.getControllerId(), source, source.getControllerId()
+        )) || !chooseUse(Outcome.Neutral, "Re-roll the 3?", source, game)) {
+            return result;
+        }
+        return rollDieResult(numSides, game);
+    }
+
+    private int applySingleDieReplacement(int numSides, int multiplier, Ability source, Game game) {
+        if (multiplier == 1) {
+            return rollDieWithReplacement(numSides, source, game);
+        }
+        Set<Integer> choices = new HashSet<>();
+        for (int j = 0; j < multiplier; j++) {
+            choices.add(rollDieWithReplacement(numSides, source, game));
+        }
+        if (choices.size() == 1) {
+            return choices.stream().findFirst().orElse(0);
+        }
+        Choice choice = new ChoiceImpl(true);
+        choice.setMessage("Choose which die roll to keep (the rest will be ignored)");
+        choice.setChoices(choices.stream().map(x -> "" + x).collect(Collectors.toSet()));
+        choose(Outcome.Neutral, choice, game);
+        return Integer.parseInt(choice.getChoice());
+    }
+
     /**
      * @param source
      * @param game
@@ -2856,21 +2904,54 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     @Override
     public List<Integer> rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice, boolean ignoreLowest) {
-        int result = RandomUtil.nextInt(numSides) + 1;
-        if (!game.isSimulation()) {
-            game.informPlayers("[Roll a die] " + getLogName() + " rolled a "
-                    + result + " on a " + numSides + " sided die" + CardUtil.getSourceLogName(game, source));
+        RollDiceEvent rollDiceEvent = new RollDiceEvent(numSides, numDice, source);
+        if (ignoreLowest) {
+            rollDiceEvent.increaseToIgnore();
         }
-        GameEvent event = new GameEvent(GameEvent.EventType.ROLL_DIE, playerId, source, playerId, result, true);
-        event.setAppliedEffects(appliedEffects);
-        event.setAmount(result);
-        event.setData(numSides + "");
-        if (!game.replaceEvent(event)) {
-            GameEvent ge = new GameEvent(GameEvent.EventType.DIE_ROLLED, playerId, source, playerId, event.getAmount(), event.getFlag());
-            ge.setData(numSides + "");
-            game.fireEvent(ge);
+        game.replaceEvent(rollDiceEvent);
+        List<Integer> results = new ArrayList<>();
+        List<DieResult> dieRolls = new ArrayList<>();
+        for (int i = 0; i < rollDiceEvent.getAmount(); i++) {
+            RollDieEvent rollDieEvent = new RollDieEvent(numSides, source);
+            game.replaceEvent(rollDieEvent);
+            int result;
+            if (rollDieEvent.getBigIdea() > 0) {
+                int singleResult = 0;
+                for (int j = 0; j < rollDieEvent.getBigIdea(); j++) {
+                    singleResult += applySingleDieReplacement(numSides, rollDieEvent.getMultiplier(), source, game);
+                    dieRolls.add(new DieResult(singleResult, rollDieEvent.getModifier()));
+                }
+                result = singleResult;
+            } else {
+                result = applySingleDieReplacement(numSides, rollDieEvent.getMultiplier(), source, game);
+                dieRolls.add(new DieResult(result, rollDieEvent.getModifier()));
+            }
+            results.add(result + rollDieEvent.getModifier());
         }
-        return Arrays.asList(event.getAmount());
+        if (rollDiceEvent.getToIgnore() > 0) {
+            for (int i = 0; i < rollDiceEvent.getToIgnore(); i++) {
+                int min = results.stream().mapToInt(x -> x).min().orElse(0);
+                results.remove(Integer.valueOf(min));
+            }
+        }
+        for (DieResult result : dieRolls) {
+            game.fireEvent(new DieRolledEvent(numSides, result.result, result.modifier, source));
+        }
+        game.fireEvent(new DiceRolledEvent(numSides, results, source));
+        if (results.size() > 1) {
+            game.informPlayers(
+                    "[Roll a die] " + getLogName() + " rolled " + results.size() + " " + numSides
+                            + " sided dice and got the following results: "
+                            + String.join(", ", results.stream().map(x -> "" + x).collect(Collectors.toSet()))
+                            + CardUtil.getSourceLogName(game, source)
+            );
+        } else {
+            game.informPlayers(
+                    "[Roll a die] " + getLogName() + " rolled a " + numSides + " sided die and got "
+                            + results.get(0) + CardUtil.getSourceLogName(game, source)
+            );
+        }
+        return results;
     }
 
     @Override
@@ -2920,6 +3001,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             ge.setData(roll + "");
             game.fireEvent(ge);
         }
+        game.fireEvent(new DieRolledEvent(6, -1, 0, source));
+        game.fireEvent(new DiceRolledEvent(6, Arrays.asList(-1), source));
         return roll;
     }
 

@@ -8,13 +8,19 @@ import mage.abilities.Ability;
 public class DieRolledEvent extends GameEvent {
 
     private final int sides;
+    private final int modifier;
 
-    public DieRolledEvent(int sides, Ability source) {
-        super(EventType.DIE_ROLLED, source.getControllerId(), source, source.getControllerId());
+    public DieRolledEvent(int sides, int amount, int modifier, Ability source) {
+        super(EventType.DIE_ROLLED, source.getControllerId(), source, source.getControllerId(), amount, false);
         this.sides = sides;
+        this.modifier = modifier;
     }
 
     public int getSides() {
         return sides;
+    }
+
+    public int getModifier() {
+        return modifier;
     }
 }

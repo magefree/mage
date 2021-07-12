@@ -296,6 +296,7 @@ public class GameEvent implements Serializable {
         SURVEIL, SURVEILED,
         FATESEALED,
         FLIP_COIN, COIN_FLIPPED,
+        REPLACE_ROLLED_DIE,
         ROLL_DIE, DIE_ROLLED,
         ROLL_DICE, DICE_ROLLED,
         ROLL_PLANAR_DIE, PLANAR_DIE_ROLLED,

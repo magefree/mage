@@ -654,6 +654,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public int rollDieResult(int sides, Game game) {
+        return 1;
+    }
+
+    @Override
     public Cards discard(Cards cards, boolean payForCost, Ability source, Game game) {
         return null;
     }
