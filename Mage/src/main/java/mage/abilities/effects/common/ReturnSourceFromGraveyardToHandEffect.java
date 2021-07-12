@@ -1,6 +1,6 @@
-
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect {
@@ -32,11 +31,9 @@ public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card card = controller.getGraveyard().get(source.getSourceId(), game);
-        if (card != null) {
-            return controller.moveCards(card, Zone.HAND, source, game);
-        }
-        return false;
+        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        return controller != null
+                && sourceObject instanceof Card
+                && controller.moveCards((Card) sourceObject, Zone.HAND, source, game);
     }
-
 }
