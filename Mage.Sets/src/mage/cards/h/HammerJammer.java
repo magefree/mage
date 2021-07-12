@@ -78,7 +78,7 @@ class HammerJammerEntersEffect extends EntersBattlefieldWithXCountersEffect {
     }
 
     @Override
-    public EntersBattlefieldWithXCountersEffect copy() {
+    public HammerJammerEntersEffect copy() {
         return new HammerJammerEntersEffect(this);
     }
 }
