@@ -5,7 +5,6 @@ import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.cards.Card;
 import mage.cards.Cards;
-import mage.cards.t.TrueLovesKiss;
 import mage.choices.Choice;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
@@ -32,9 +31,7 @@ import java.util.stream.Collectors;
 import mage.player.ai.RLAgent.*;
 import java.io.*;
 import mage.abilities.*;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.JSONArray;
+import mage.player.ai.RLAction;
 
 /**
  * uses a reinforcement learning based AI
@@ -95,6 +92,7 @@ public class RLPlayer extends RandomNonTappingPlayer{
     private Ability chooseAbility(Game game, List<Ability> options){
         Ability ability=pass;
         List<String> names=new ArrayList<String>();
+        List<Ability> uniqueOptions=new ArrayList<Ability>();
         if (!options.isEmpty()) {
             for(int i=0;i<options.size();i++){
                 Ability abil=options.get(i);
@@ -107,6 +105,7 @@ public class RLPlayer extends RandomNonTappingPlayer{
                 }
                 if(toAdd){
                     names.add(name);
+                    uniqueOptions.add(options.get(i));
                 }  
             }
             int choice;
@@ -114,17 +113,14 @@ public class RLPlayer extends RandomNonTappingPlayer{
                 choice=0;
                 //logger.info("Turn"+game.getTurnNum()+" handSize "+getHand().size());
             } else {
-                //logger.info("Calling model"+game.getTurnNum());
-                JSONArray list = new JSONArray();
+                List<RLAction> actions=new ArrayList<RLAction>();
                 for(int i=0;i<names.size();i++){
-                    JSONObject actRepr=new JSONObject();
-                    actRepr.put("action",names.get(i));
-                    list.add(actRepr);
+                    actions.add(new RLAction(names.get(i)));
                 }
-                choice=learner.choose(game,this,list);
+                choice=learner.choose(game,this,actions);
 
             }
-            ability = options.get(choice);
+            ability = uniqueOptions.get(choice);
         }
         return ability;
     }
@@ -157,14 +153,10 @@ public class RLPlayer extends RandomNonTappingPlayer{
         List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
         for(int i=0;i<attackersList.size();i++){
             Permanent attacker=attackersList.get(i);
-            JSONObject toAttack=new JSONObject();
-            JSONObject noAttack=new JSONObject();
-            toAttack.put("attack","Attack:"+attacker.getName());
-            noAttack.put("attack","NoAttack");
-            JSONArray list = new JSONArray();
-            list.add(noAttack);
-            list.add(toAttack);
-            int index=learner.choose(game,this,list);
+            List<RLAction> attackOptions=new ArrayList<RLAction>();
+            attackOptions.add(new RLAction("noAttack"));
+            attackOptions.add(new RLAction("Attack"+attacker.getName())); //Perhaps add power/toughness features?
+            int index=learner.choose(game,this,attackOptions);
             if(index==1){//chose to attack
                 setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
                 if (!game.getCombat().declareAttacker(attacker.getId(), defenderId, playerId, game)) {
@@ -177,46 +169,36 @@ public class RLPlayer extends RandomNonTappingPlayer{
 
     @Override
     public boolean chooseMulligan(Game game) {
-        JSONObject yesMull=new JSONObject();
-        JSONObject noMull=new JSONObject();
-        yesMull.put("action","yesMulligan");
-        noMull.put("action","noMulligan");
-        JSONArray list = new JSONArray();
-        list.add(noMull);
-        list.add(yesMull);
-        int index=learner.choose(game,this,list);
+        List<RLAction> actions=new ArrayList<RLAction>();
+        actions.add(new RLAction("noMulligan"));
+        actions.add(new RLAction("yesMulligan"));
+        int index=learner.choose(game,this,actions);
         return index==1;
     }
 
     @Override
     public void selectBlockers(Ability source,Game game, UUID defendingPlayerId) {
-        //logger.info("selcting blockers");
         int numGroups = game.getCombat().getGroups().size();
         if (numGroups == 0) {
             return;
         }
-
+        List<RLAction> actions=new ArrayList<RLAction>();
         List<Permanent> blockers = getAvailableBlockers(game);
         for (Permanent blocker : blockers) {
-            JSONArray list = new JSONArray();
             List<CombatGroup> groups=game.getCombat().getGroups();
             for(int i=0;i<numGroups;i++){
                 List<UUID> groupIDs=groups.get(i).getAttackers();
                 if(groupIDs.size()>0){
                     UUID attacker=groupIDs.get(0);
-                    JSONObject actRepr=new JSONObject();
-                    actRepr.put("attacker","BlockAttacker:"+game.getPermanent(attacker).getName());
-                    actRepr.put("blocker","Blocker:"+blocker.getName()); 
-                    list.add(actRepr);
+                    String attackerName="BlockAttacker:"+game.getPermanent(attacker).getName();
+                    String blockerName="Blocker:"+blocker.getName();
+                    actions.add(new RLAction(blockerName, attackerName));
                 }
             }
-            JSONObject actRepr=new JSONObject();
-            actRepr.put("attacker","NoAttackerToBlock");
-            actRepr.put("blocker","Blocker:"+blocker.getName()); 
-            list.add(actRepr);
-            int choice=learner.choose(game,this,list);
+            actions.add(new RLAction("Blocker:"+blocker.getName(), "NoAttackerToBlock"));
+            int choice=learner.choose(game,this,actions);
 
-            if (choice<list.size()-1) {
+            if (choice<actions.size()) { //Not the last one where no block occurs
                 CombatGroup group = groups.get(choice);
                 if (!group.getAttackers().isEmpty()) {
                     this.declareBlocker(this.getId(), blocker.getId(), group.getAttackers().get(0), game);
@@ -275,6 +257,7 @@ public class RLPlayer extends RandomNonTappingPlayer{
         System.out.println("Unknown ID");
         return IDname;
     }
+
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         //System.out.println("Chose target with ability");
@@ -287,9 +270,8 @@ public class RLPlayer extends RandomNonTappingPlayer{
             target.addTarget(targets.get(0), source, game); // todo: addtryaddtarget or return type (see computerPlayer)
             return true;
         }
-        JSONArray list = new JSONArray();
+        List<RLAction> actions=new ArrayList<RLAction>();
         for(int i=0;i<targets.size();i++){
-            JSONObject actRepr=new JSONObject();
             UUID thingId=targets.get(i);
             String name="Target:"+nameUUID(thingId, game);
             String causeName;
@@ -300,17 +282,12 @@ public class RLPlayer extends RandomNonTappingPlayer{
             else{
                 causeName="TargetAbility:None";
             }
-            actRepr.put("target",name);
-            actRepr.put("ability",causeName);
-            list.add(actRepr); 
+            actions.add(new RLAction(name,causeName));
         }
         if (!target.isRequired(source)) {
-            JSONObject actRepr=new JSONObject();
-            actRepr.put("target","Target:None");
-            actRepr.put("ability","TargetAbility:None");
-            list.add(actRepr);
+            actions.add(new RLAction("Target:None","TargetAbility:None"));
         }
-        int choice=learner.choose(game,this,list);
+        int choice=learner.choose(game,this,actions);
         if(choice==targets.size()){
             return false;
         }
@@ -331,18 +308,15 @@ public class RLPlayer extends RandomNonTappingPlayer{
             target.add(targets.get(0), game); // todo: addtryaddtarget or return type (see computerPlayer)
             return true;
         }
-        JSONArray list = new JSONArray();
+        List<RLAction> actions=new ArrayList<RLAction>();
         for(int i=0;i<targets.size();i++){
-            JSONObject actRepr=new JSONObject();
             UUID thingId=targets.get(i);
             String name="Target:"+nameUUID(thingId, game);
             String causeName;
             causeName="TargetSource:"+nameUUID(sourceId, game);
-            actRepr.put("target",name);
-            actRepr.put("ability",causeName);
-            list.add(actRepr); 
+            actions.add(new RLAction(name,causeName));
         }
-        int choice=learner.choose(game,this,list);
+        int choice=learner.choose(game,this,actions);
         target.add(targets.get(choice), game);
         return true;
     }
