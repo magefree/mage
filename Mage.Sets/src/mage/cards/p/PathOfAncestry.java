@@ -98,6 +98,10 @@ class PathOfAncestryTriggeredAbility extends DelayedTriggeredAbility {
                 return true;
             }
         }
+        // commander spell also shares creature type with itself
+        if (game.isCommanderObject(player, spell)) {
+            return true;
+        }
         return false;
     }
 
