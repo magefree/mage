@@ -15,6 +15,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class EquipAbility extends ActivatedAbilityImpl {
 
+    private String costReduceText = null;
+
     public EquipAbility(int cost) {
         this(Outcome.AddAbility, new GenericManaCost(cost));
     }
@@ -31,6 +33,11 @@ public class EquipAbility extends ActivatedAbilityImpl {
 
     public EquipAbility(final EquipAbility ability) {
         super(ability);
+        this.costReduceText = ability.costReduceText;
+    }
+
+    public void setCostReduceText(String text) {
+        this.costReduceText = text;
     }
 
     @Override
@@ -50,6 +57,10 @@ public class EquipAbility extends ActivatedAbilityImpl {
         }
         sb.append(costs.getText());
         sb.append(manaCosts.getText());
+        if (costReduceText != null && !costReduceText.isEmpty()) {
+            sb.append(' ');
+            sb.append(costReduceText);
+        }
         if (maxActivationsPerTurn == 1) {
             sb.append(" Activate only once each turn.");
         }
