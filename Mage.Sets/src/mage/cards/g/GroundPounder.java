@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -13,18 +12,15 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class GroundPounder extends CardImpl {
@@ -38,7 +34,7 @@ public final class GroundPounder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // 3G: Roll a six-sided die. Ground Pounder gets +X/+X until end of turn, where X is the result.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GroundPounderEffect(), new ManaCostsImpl("{3}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GroundPounderEffect(), new ManaCostsImpl<>("{3}{G}")));
 
         // Whenever you roll a 5 or higher on a die, Ground Pounder gains trample until end of turn.
         this.addAbility(new GroundPounderTriggeredAbility());
@@ -105,12 +101,7 @@ class GroundPounderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (this.isControlledBy(event.getPlayerId()) && event.getFlag()) {
-            if (event.getAmount() >= 5) {
-                return true;
-            }
-        }
-        return false;
+        return this.isControlledBy(event.getPlayerId()) && event.getAmount() >= 5;
     }
 
     @Override

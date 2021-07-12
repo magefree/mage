@@ -1,14 +1,10 @@
 
 package mage.cards.h;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
@@ -24,8 +20,11 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj & L_J
  */
 public final class HammerJammer extends CardImpl {
@@ -39,7 +38,7 @@ public final class HammerJammer extends CardImpl {
 
         // As Hammer Jammer enters the battlefield, roll a six-sided die. Hammer Jammer enters the battlefield with a number of +1/+1 counters on it equal to the result.
         this.addAbility(new EntersBattlefieldAbility(new HammerJammerEntersEffect(CounterType.P1P1.createInstance())));
-        
+
         // Whenever you roll a die, remove all +1/+1 counters from Hammer Jammer, then put a number of +1/+1 counters on it equal to the result.
         this.addAbility(new HammerJammerTriggeredAbility());
 
@@ -106,10 +105,8 @@ class HammerJammerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (this.getControllerId().equals(event.getPlayerId()) && event.getFlag()) {
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("rolled", event.getAmount());
-            }
+        if (this.isControlledBy(event.getPlayerId()) && event.getAmount() > 0) {
+            this.getEffects().setValue("rolled", event.getAmount());
             return true;
         }
         return false;
