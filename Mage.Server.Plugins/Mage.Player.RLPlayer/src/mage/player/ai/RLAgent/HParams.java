@@ -9,7 +9,6 @@ public class HParams implements Serializable {
     public HParams(){
 
     }
-    //These are fixed numbered actions, counter 
-    //start sould be 1 beyond these 
+    public static final int maxRepresents=512;
 
 }
