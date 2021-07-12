@@ -2929,10 +2929,22 @@ public abstract class PlayerImpl implements Player, Serializable {
             results.add(result + rollDieEvent.getModifier());
         }
         if (rollDiceEvent.getToIgnore() > 0) {
+            List<Integer> toIgnore = new ArrayList<>();
             for (int i = 0; i < rollDiceEvent.getToIgnore(); i++) {
                 int min = results.stream().mapToInt(x -> x).min().orElse(0);
                 results.remove(Integer.valueOf(min));
+                toIgnore.add(min);
             }
+            List<DieResult> newRolls = new ArrayList<>();
+            for (DieResult dieResult : dieRolls) {
+                if (toIgnore.contains(dieResult.result)) {
+                    toIgnore.remove(dieResult.result);
+                } else {
+                    newRolls.add(dieResult);
+                }
+            }
+            dieRolls.clear();
+            dieRolls.addAll(newRolls);
         }
         for (DieResult result : dieRolls) {
             game.fireEvent(new DieRolledEvent(numSides, result.result, result.modifier, source));
