@@ -2839,12 +2839,12 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public int rollDice(Ability source, Game game, int numSides) {
-        return this.rollDice(source, game, numSides, 1);
+        return this.rollDice(source, game, numSides, 1).get(0);
     }
 
     @Override
-    public int rollDice(Ability source, Game game, int numSides, int numDice) {
-        return this.rollDice(source, game, null, numSides, numDice);
+    public List<Integer> rollDice(Ability source, Game game, int numSides, int numDice) {
+        return this.rollDice(source, game, null, numSides, numDice, false);
     }
 
     /**
@@ -2855,7 +2855,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @return the number that the player rolled
      */
     @Override
-    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice) {
+    public List<Integer> rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice, boolean ignoreLowest) {
         int result = RandomUtil.nextInt(numSides) + 1;
         if (!game.isSimulation()) {
             game.informPlayers("[Roll a die] " + getLogName() + " rolled a "
@@ -2870,7 +2870,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             ge.setData(numSides + "");
             game.fireEvent(ge);
         }
-        return event.getAmount();
+        return Arrays.asList(event.getAmount());
     }
 
     @Override

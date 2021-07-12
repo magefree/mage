@@ -3480,13 +3480,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int rollDice(Ability source, Game game, int numSides, int numDice) {
+    public List<Integer> rollDice(Ability source, Game game, int numSides, int numDice) {
         return computerPlayer.rollDice(source, game, numSides, numDice);
     }
 
     @Override
-    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice) {
-        return computerPlayer.rollDice(source, game, appliedEffects, numSides, numDice);
+    public List<Integer> rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice, boolean ignoreLowest) {
+        return computerPlayer.rollDice(source, game, appliedEffects, numSides, numDice, ignoreLowest);
     }
 
     @Override

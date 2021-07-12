@@ -644,13 +644,13 @@ public class PlayerStub implements Player {
         return 1;
     }
 
-    public int rollDice(Ability source, Game game, int numSides, int numDice) {
-        return 1;
+    public List<Integer> rollDice(Ability source, Game game, int numSides, int numDice) {
+        return null;
     }
 
     @Override
-    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice) {
-        return 1;
+    public List<Integer> rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice, boolean ignoreLowest) {
+        return null;
     }
 
     @Override
