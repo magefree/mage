@@ -31,6 +31,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ashen Rider", 175, Rarity.MYTHIC, mage.cards.a.AshenRider.class));
         cards.add(new SetCardInfo("Atarka, World Render", 176, Rarity.RARE, mage.cards.a.AtarkaWorldRender.class));
         cards.add(new SetCardInfo("Azorius Chancery", 224, Rarity.UNCOMMON, mage.cards.a.AzoriusChancery.class));
+        cards.add(new SetCardInfo("Bag of Tricks", 37, Rarity.RARE, mage.cards.b.BagOfTricks.class));
         cards.add(new SetCardInfo("Baleful Strix", 177, Rarity.RARE, mage.cards.b.BalefulStrix.class));
         cards.add(new SetCardInfo("Bant Charm", 178, Rarity.UNCOMMON, mage.cards.b.BantCharm.class));
         cards.add(new SetCardInfo("Bant Panorama", 225, Rarity.COMMON, mage.cards.b.BantPanorama.class));
