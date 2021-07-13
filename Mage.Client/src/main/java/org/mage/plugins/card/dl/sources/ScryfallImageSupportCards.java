@@ -504,6 +504,7 @@ public class ScryfallImageSupportCards {
             add("MH2"); // Modern Horizons 2
             add("H1R"); // Modern Horizons 1 Timeshifts
             add("AFR"); // Adventures in the Forgotten Realms
+            add("AFC"); // Forgotten Realms Commander
         }
     };
 

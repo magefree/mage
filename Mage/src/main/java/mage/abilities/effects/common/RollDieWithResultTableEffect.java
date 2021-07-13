@@ -2,6 +2,8 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
@@ -24,6 +26,7 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
     protected final int sides;
     private final String prefixText;
     private final List<TableEntry> resultsTable = new ArrayList<>();
+    private final DynamicValue modifier;
 
     public RollDieWithResultTableEffect() {
         this(20);
@@ -34,9 +37,14 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
     }
 
     public RollDieWithResultTableEffect(int sides, String prefixText) {
+        this(sides, prefixText, StaticValue.get(0));
+    }
+
+    public RollDieWithResultTableEffect(int sides, String prefixText, DynamicValue modifier) {
         super(Outcome.Benefit);
         this.sides = sides;
         this.prefixText = prefixText;
+        this.modifier = modifier;
     }
 
     protected RollDieWithResultTableEffect(final RollDieWithResultTableEffect effect) {
@@ -46,6 +54,7 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
         for (TableEntry tableEntry : effect.resultsTable) {
             this.resultsTable.add(tableEntry.copy());
         }
+        this.modifier = effect.modifier.copy();
     }
 
     @Override
@@ -59,7 +68,7 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int result = player.rollDice(source, game, sides);
+        int result = player.rollDice(source, game, sides) + modifier.calculate(game, source, this);
         this.applyResult(result, game, source);
         return true;
     }
@@ -79,11 +88,16 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
         sb.append(prefixText).append('.');
         for (TableEntry tableEntry : this.resultsTable) {
             sb.append("<br>");
-            if (tableEntry.min != tableEntry.max) {
+            if (tableEntry.max == Integer.MAX_VALUE) {
                 sb.append(tableEntry.min);
-                sb.append('-');
+                sb.append('+');
+            } else {
+                if (tableEntry.min != tableEntry.max) {
+                    sb.append(tableEntry.min);
+                    sb.append('-');
+                }
+                sb.append(tableEntry.max);
             }
-            sb.append(tableEntry.max);
             sb.append(" | ");
             sb.append(CardUtil.getTextWithFirstCharUpperCase(tableEntry.effects.getText(mode)));
         }
