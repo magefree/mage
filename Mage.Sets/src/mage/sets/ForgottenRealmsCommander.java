@@ -76,6 +76,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dimir Aqueduct", 234, Rarity.UNCOMMON, mage.cards.d.DimirAqueduct.class));
         cards.add(new SetCardInfo("Dire Fleet Daredevil", 121, Rarity.RARE, mage.cards.d.DireFleetDaredevil.class));
         cards.add(new SetCardInfo("Disrupt Decorum", 122, Rarity.RARE, mage.cards.d.DisruptDecorum.class));
+        cards.add(new SetCardInfo("Diviner's Portent", 15, Rarity.RARE, mage.cards.d.DivinersPortent.class));
         cards.add(new SetCardInfo("Doomed Necromancer", 98, Rarity.RARE, mage.cards.d.DoomedNecromancer.class));
         cards.add(new SetCardInfo("Dragon's Hoard", 204, Rarity.RARE, mage.cards.d.DragonsHoard.class));
         cards.add(new SetCardInfo("Dragonlord's Servant", 123, Rarity.UNCOMMON, mage.cards.d.DragonlordsServant.class));
