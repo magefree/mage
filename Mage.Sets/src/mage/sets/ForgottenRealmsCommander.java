@@ -81,6 +81,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Diviner's Portent", 15, Rarity.RARE, mage.cards.d.DivinersPortent.class));
         cards.add(new SetCardInfo("Doomed Necromancer", 98, Rarity.RARE, mage.cards.d.DoomedNecromancer.class));
         cards.add(new SetCardInfo("Dragon's Hoard", 204, Rarity.RARE, mage.cards.d.DragonsHoard.class));
+        cards.add(new SetCardInfo("Dragonborn Champion", 45, Rarity.RARE, mage.cards.d.DragonbornChampion.class));
         cards.add(new SetCardInfo("Dragonlord's Servant", 123, Rarity.UNCOMMON, mage.cards.d.DragonlordsServant.class));
         cards.add(new SetCardInfo("Dragonmaster Outcast", 124, Rarity.MYTHIC, mage.cards.d.DragonmasterOutcast.class));
         cards.add(new SetCardInfo("Dragonspeaker Shaman", 330, Rarity.UNCOMMON, mage.cards.d.DragonspeakerShaman.class));
