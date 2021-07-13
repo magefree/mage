@@ -60,6 +60,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 230, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 203, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Commune with Lava", 118, Rarity.RARE, mage.cards.c.CommuneWithLava.class));
+        cards.add(new SetCardInfo("Component Pouch", 59, Rarity.UNCOMMON, mage.cards.c.ComponentPouch.class));
         cards.add(new SetCardInfo("Consuming Vapors", 96, Rarity.RARE, mage.cards.c.ConsumingVapors.class));
         cards.add(new SetCardInfo("Crucible of the Spirit Dragon", 231, Rarity.RARE, mage.cards.c.CrucibleOfTheSpiritDragon.class));
         cards.add(new SetCardInfo("Cultivate", 155, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
