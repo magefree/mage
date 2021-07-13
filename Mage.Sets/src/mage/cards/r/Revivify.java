@@ -45,6 +45,7 @@ public final class Revivify extends CardImpl {
         );
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addWatcher(new CardsPutIntoGraveyardWatcher());
+        this.getSpellAbility().addHint(hint);
 
         // 1-14 | Return all creature cards in your graveyard that were put there from the battlefield this turn to your hand.
         effect.addTableEntry(1, 14, new RevivifyEffect(true));
