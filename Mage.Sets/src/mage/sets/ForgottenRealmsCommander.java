@@ -236,6 +236,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Wayfarer's Bauble", 222, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Wild Growth", 174, Rarity.COMMON, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Winds of Rath", 78, Rarity.RARE, mage.cards.w.WindsOfRath.class));
+        cards.add(new SetCardInfo("Winged Boots", 20, Rarity.RARE, mage.cards.w.WingedBoots.class));
         cards.add(new SetCardInfo("Zhalfirin Void", 273, Rarity.UNCOMMON, mage.cards.z.ZhalfirinVoid.class));
     }
 }
