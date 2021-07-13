@@ -70,4 +70,9 @@ class CriticalHitTriggeredAbility extends TriggeredAbilityImpl {
     public CriticalHitTriggeredAbility copy() {
         return new CriticalHitTriggeredAbility(this);
     }
+
+    @Override
+    public String getRule() {
+        return "When you roll a natural 20, return {this} from your graveyard to your hand.";
+    }
 }
