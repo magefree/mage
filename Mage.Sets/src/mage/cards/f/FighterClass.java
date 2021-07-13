@@ -5,12 +5,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ClassLevelCondition;
-import mage.abilities.decorator.ConditionalCostModificationEffect;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.effects.common.cost.AbilitiesCostReductionControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.ClassLevelAbility;
@@ -57,23 +55,19 @@ public final class FighterClass extends CardImpl {
         this.addAbility(new ClassLevelAbility(2, "{1}{R}{W}"));
 
         // Equip abilities you activate cost {2} less to activate.
-        this.addAbility(new SimpleStaticAbility(new ConditionalCostModificationEffect(
-                new AbilitiesCostReductionControllerEffect(
-                        EquipAbility.class, "Equip"
-                ), ClassLevelCondition.TWO, "equip abilities you activate cost {2} less to activate"
+        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
+                new AbilitiesCostReductionControllerEffect(EquipAbility.class, "Equip")
+                        .setText("\"equip abilities you activate cost {2} less to activate\""),
+                2
         )));
 
         // {3}{R}{W}: Level 3
         this.addAbility(new ClassLevelAbility(3, "{3}{R}{W}"));
 
         // Whenever a creature you control attacks, up to one target creature blocks it this combat if able.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new AttacksCreatureYouControlTriggeredAbility(new FighterClassEffect(), false),
-                ClassLevelCondition.THREE, "Whenever a creature you control attacks, " +
-                "up to one target creature blocks it this combat if able."
-        );
+        Ability ability = new AttacksCreatureYouControlTriggeredAbility(new FighterClassEffect(), false);
         ability.addTarget(new TargetCreaturePermanent(0, 1));
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(ability, 3)));
     }
 
     private FighterClass(final FighterClass card) {
@@ -90,6 +84,7 @@ class FighterClassEffect extends OneShotEffect {
 
     FighterClassEffect() {
         super(Outcome.Benefit);
+        staticText = "up to one target creature blocks it this combat if able";
     }
 
     private FighterClassEffect(final FighterClassEffect effect) {

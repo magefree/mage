@@ -4,11 +4,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.BecomesClassLevelTriggeredAbility;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ClassLevelCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.ClassLevelAbility;
 import mage.cards.Card;
@@ -48,14 +47,11 @@ public final class ClericClass extends CardImpl {
         this.addAbility(new ClassLevelAbility(2, "{3}{W}"));
 
         // Whenever you gain life, put a +1/+1 counter on target creature you control.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new GainLifeControllerTriggeredAbility(
-                        new AddCountersTargetEffect(CounterType.P1P1.createInstance())
-                ), ClassLevelCondition.TWO, "Whenever you gain life, " +
-                "put a +1/+1 counter on target creature you control."
+        Ability ability = new GainLifeControllerTriggeredAbility(
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(ability, 2)));
 
         // {4}{W}: Level 3
         this.addAbility(new ClassLevelAbility(3, "{4}{W}"));
@@ -63,7 +59,7 @@ public final class ClericClass extends CardImpl {
         // When this Class becomes level 3, return target creature card from your graveyard to the battlefield. You gain life equal to its toughness.
         ability = new BecomesClassLevelTriggeredAbility(new ClericClassReturnEffect(), 3);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(ability, 3)));
     }
 
     private ClericClass(final ClericClass card) {

@@ -5,12 +5,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.BecomesClassLevelTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ClassLevelCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.dynamicvalue.common.LandsYouControlCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
+import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.ClassLevelAbility;
@@ -51,9 +50,8 @@ public final class DruidClass extends CardImpl {
         this.addAbility(new ClassLevelAbility(2, "{2}{G}"));
 
         // You may play an additional land on each of your turns.
-        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield),
-                ClassLevelCondition.TWO, "you may play an additional land on each of your turns"
+        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
+                new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield), 2
         )));
 
         // {4}{G}: Level 3
@@ -64,7 +62,7 @@ public final class DruidClass extends CardImpl {
                 new DruidClassToken(), false, true, Duration.Custom
         ), 3);
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(ability, 3)));
     }
 
     private DruidClass(final DruidClass card) {
