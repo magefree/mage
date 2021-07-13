@@ -141,6 +141,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Keen-Eared Sentry", 22, Rarity.UNCOMMON, mage.cards.k.KeenEaredSentry.class));
         cards.add(new SetCardInfo("Kick in the Door", 153, Rarity.COMMON, mage.cards.k.KickInTheDoor.class));
         cards.add(new SetCardInfo("Krydle of Baldur's Gate", 226, Rarity.UNCOMMON, mage.cards.k.KrydleOfBaldursGate.class));
+        cards.add(new SetCardInfo("Lair of the Hydra", 259, Rarity.RARE, mage.cards.l.LairOfTheHydra.class));
         cards.add(new SetCardInfo("Leather Armor", 248, Rarity.COMMON, mage.cards.l.LeatherArmor.class));
         cards.add(new SetCardInfo("Lightfoot Rogue", 111, Rarity.UNCOMMON, mage.cards.l.LightfootRogue.class));
         cards.add(new SetCardInfo("Loathsome Troll", 192, Rarity.UNCOMMON, mage.cards.l.LoathsomeTroll.class));
