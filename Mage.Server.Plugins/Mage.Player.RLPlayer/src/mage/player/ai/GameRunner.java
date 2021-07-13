@@ -43,54 +43,30 @@ public class  GameRunner{
     private static final List<String> colorChoices = new ArrayList<>(Arrays.asList("bu", "bg", "br", "bw", "ug", "ur", "uw", "gr", "gw", "rw", "bur", "buw", "bug", "brg", "brw", "bgw", "wur", "wug", "wrg", "rgu"));
     private static final int DECK_SIZE = 40;
     private static final Logger logger = Logger.getLogger(GameRunner.class);
-    PyConnection conn;
-    public RLPyAgent agent;
-    public GameRunner(int port){
-        conn=new PyConnection(port);
-        agent=new RLPyAgent(conn);
+    public DJLAgent agent;
+    public GameRunner(){
+        agent=new DJLAgent();
     }
-    public void close(){
-        conn.close();
-    }
-    public int playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
+    public int playOneGame(String deck1loc,String deck2loc,boolean player2random) throws GameException, FileNotFoundException, IllegalArgumentException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
-        String preamble=conn.read_preamble();
-        JSONParser parser = new JSONParser();
-        JSONObject arguments;
-        try{
-            Object obj = parser.parse(preamble);         
-            //System.out.println(obj);
-            arguments=(JSONObject) obj;
-         }catch(ParseException pe) {
-            System.out.println("position: " + pe.getPosition());
-            System.out.println(pe);
-            return 0;
-        }
-        String deck1loc=(String) arguments.get("deck1");
-        String deck2loc=(String) arguments.get("deck2");
-        String player1name=(String) arguments.get("player1");
-        String player2name=(String) arguments.get("player2");
-        String player2random=(String) arguments.get("player2random");//Either "true" or "false"
+
         //String deckLoc="/home/elchanan/java/mage/Mage.Tests/RBTestAggro.dck";
         
         Deck deck1=loadDeck(deck1loc);
         Deck deck2=loadDeck(deck2loc);
         
-        Player player1 = createAgentPlayer(player1name,agent);
+        Player player1 = createAgentPlayer("Player1",agent);
         if (deck1.getCards().size() < DECK_SIZE) {
             throw new IllegalArgumentException("Couldn't load deck, deck size = " + deck1.getCards().size() + ", but must be " + DECK_SIZE);
         }
         game.addPlayer(player1, deck1);
         game.loadCards(deck1.getCards(), player1.getId());
         Player player2;
-        if(player2random.equals("true")){
-            player2=new RandomNonTappingPlayer(player2name);
+        if(player2random){
+            player2=new RandomNonTappingPlayer("Player2");
         }
-        else if(player2random.equals("false")){
-            player2=createAgentPlayer(player2name,agent);
-        } else{
-            System.out.println("player2random must be 'true' or 'false'");
-            return 0;
+        else{
+            player2=createAgentPlayer("Player2",agent);
         }
         //Deck deck2 = generateRandomDeck();
         if (deck2.getCards().size() < DECK_SIZE) {
@@ -111,11 +87,10 @@ public class  GameRunner{
         logger.info("Winner: " + game.getWinner());
         logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
         int reward=getReward(player1, game.getWinner());
-        agent.sendGame(game,player1,new JSONArray());
         //return learner.getCurrentGame().getValue();
         return reward;
     }
-    private Player createAgentPlayer(String name, RLAgent agent){
+    private Player createAgentPlayer(String name, DJLAgent agent){
         return new RLPlayer(name,agent);
     }
     private Deck generateRandomDeck() {

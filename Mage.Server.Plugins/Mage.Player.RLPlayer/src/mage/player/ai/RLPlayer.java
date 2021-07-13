@@ -40,22 +40,23 @@ import mage.player.ai.RLAction;
  */
 
 public class RLPlayer extends RandomNonTappingPlayer{
-    public RLAgent learner;
+    public DJLAgent learner;
     private static final Logger logger = Logger.getLogger(RLPlayer.class);
+    List<RepresentedState> experience;
     public RLPlayer(String name , RangeOfInfluence range, int skill){
         super(name);
-        System.out.println("Completed super!");
-        logger.warn("completed super!");
-        PyConnection conn=new PyConnection(5009);
-        learner=new RLPyAgent(conn);
-        if(Objects.isNull(learner)){
-            logger.warn("learner is null in RLPlayer creation!");
-        }
-        System.out.println("Created RL Player!");
+        learner=new DJLAgent();
+        experience=new ArrayList<RepresentedState>();
     }
-    public RLPlayer(String name,RLAgent inLearner) {  
+    public RLPlayer(String name,DJLAgent inLearner) {  
         super(name);
         learner=inLearner;
+    }
+    public void addExperience(RepresentedState state){
+        experience.add(state);
+    }
+    public List<RepresentedState> getExperience(){
+        return experience;
     }
     public RLPlayer(final RLPlayer player) {
         super(player);   

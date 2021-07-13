@@ -43,21 +43,38 @@ public class Representer implements Serializable{
     protected String nameObject(MageObject obj){
         return obj.getName(); 
     }
-    
-    public RepresentedState represent(Game game,Player player, List<RLAction> actionRepr){
-        List<List<Integer>> actions;
-        List<List<Integer>> permanents;
-        List<Integer> gameInts=getGameInts(game, player, OPlayer, numAgentPerms, numOpponentPerms);
-        return new RepresentedState(actions, permanents, gameInts);
+
+    public RepresentedState represent(Game game,Player player, List<RLAction> actions){
+        List<List<Integer>> representedActions=representActions(actions);
+        List<List<Integer>> permanents=representPerms(game, player);
+        List<Integer> gameInts=getGameInts(game, player);
+        if(gameInts.size()!=HParams.numGameInts){
+            throw new IllegalStateException("Mismatch with game ints");
+        }
+        return new RepresentedState(representedActions, permanents, gameInts);
         //boolean isDone=game.checkIfGameIsOver();
     }
-
-    protected float getWinReward(Game game,Player LPlayer){
-        Player OPlayer=getOpponent(game, LPlayer);
+    
+    private List<List<Integer>> representActions(List<RLAction> actions){
+        List<List<Integer>> repr=new ArrayList<List<Integer>>();
+        for(int i=0;i<actions.size();i++){
+            List<String> names=actions.get(i).getNames();
+            List<Integer> actionParts=new ArrayList<Integer>();
+            for(int j=0;j<actionParts.size();j++){
+                actionParts.add(getEmbedInt(names.get(j)));
+            }
+            if(actionParts.size()!=HParams.actionParts){
+                throw new IllegalStateException("Mismatch with action size");
+            }
+            repr.add(actionParts);
+        }
+        return repr;
+    }
+    protected float getWinReward(Game game,Player player){
         boolean isOver=game.checkIfGameIsOver();
         if(isOver){
             String winner=game.getWinner();
-            String winLine="Player "+LPlayer.getName()+" is the winner";
+            String winLine="Player "+player.getName()+" is the winner";
             if(winner.equals(winLine)){
                 return 1.0f;
             }
@@ -120,7 +137,7 @@ public class Representer implements Serializable{
             }else if(perm.getControllerId().equals(opponentId)){
                 controllerName="Opponent";
             }else{
-                throw new IllegalStateException("Unable to determine Permenants owner");
+                throw new IllegalStateException("Unable to determine Permenants controller");
             }
             attributes.add(getEmbedInt(controllerName+perm.getName()));
             Combat combat=game.getCombat();
@@ -141,49 +158,5 @@ public class Representer implements Serializable{
         }
         return repr;
     }
-    protected  representGame(Game game,Player LPlayer){
-        JSONObject gameRepr=new JSONObject();
-        JSONArray namedPerms = new JSONArray();
-        Player OPlayer=getOpponent(game, LPlayer);
-        UUID learnerId=LPlayer.getId(); 
-        UUID opponentId=OPlayer.getId();
-        Battlefield field=game.getBattlefield();
-        int agentPerms=0;
-        int opponentPerms=0;
-        Iterator<Permanent> perms=field.getAllPermanents().iterator();
-        while(perms.hasNext()){
-            Permanent perm=perms.next();
-            String controllerName;
-            if(perm.getControllerId().equals(learnerId)){
-                controllerName="Agent";
-                agentPerms+=1;
-            }else if(perm.getControllerId().equals(opponentId)){
-                controllerName="Opponent";
-                opponentPerms+=1;
-            }else{
-                throw new IllegalStateException("Unable to determine Permenants owner");
-            }
-            JSONObject repr=new JSONObject();
-            repr.put("controller",controllerName);
-            repr.put("name",nameObject(perm));
-            Combat combat=game.getCombat();
-            if(Objects.nonNull(combat)){
-                if(combat.getAttackers().contains(perm.getId())){
-                    repr.put("combat","attacker");
-                }
-                else if(combat.getBlockers().contains(perm.getId())){
-                    repr.put("combat","blocker");
-                }
-                else{
-                    repr.put("combat","none");
-                }
-            }
-            repr.put("power",perm.getPower().getEmbedIntue());
-            repr.put("toughness",perm.getToughness().getEmbedIntue());
-            namedPerms.add(repr);
-        }
-        gameRepr.put("permanents",namedPerms);
-        gameRepr.put("reals",getGameReals(game, LPlayer, OPlayer,agentPerms,opponentPerms));
-        return gameRepr;
-    }
+
 }

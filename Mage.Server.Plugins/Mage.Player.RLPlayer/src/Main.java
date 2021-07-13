@@ -12,15 +12,13 @@ public class Main {
         //RLPlayer player= new RLPlayer("bob", RangeOfInfluence.ALL, 0); //Test loading
         ArrayList<String> errorsList = new ArrayList<>();
         CardScanner.scan(errorsList);
-        GameRunner runner=new GameRunner(5009);
+        GameRunner runner=new GameRunner();
         int netWins=0;
-        int count=0;
-        while(!runner.agent.done){
+        int maxGames=3000;
+        for(int count=0;count<maxGames;count++){
             netWins+=runner.playOneGame();
-            count+=1;
             System.out.println("netWins is "+netWins+" at timestep "+count);
         }
-        runner.close();
-        System.out.println("Shutting down");
+        System.out.println("Exiting");
     }
 }
