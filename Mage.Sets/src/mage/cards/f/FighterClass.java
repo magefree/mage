@@ -133,13 +133,9 @@ class FighterClassRequirementEffect extends RequirementEffect {
             discard();
             return false;
         }
-        if (!permanent.getId().equals(this.getTargetPointer().getFirst(game, source))) {
-            return false;
-        }
-        if (permanent == null || !permanent.canBlock(source.getSourceId(), game)) {
-            return false;
-        }
-        return true;
+        return permanent != null
+                && permanent.getId().equals(this.getTargetPointer().getFirst(game, source))
+                && permanent.canBlock(source.getSourceId(), game);
     }
 
     @Override
