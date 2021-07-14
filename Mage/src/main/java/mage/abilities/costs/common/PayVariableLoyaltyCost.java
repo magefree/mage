@@ -1,8 +1,5 @@
-
-
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.costs.Cost;
@@ -11,12 +8,19 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
-public class PayVariableLoyaltyCost extends VariableCostImpl  {
+public class PayVariableLoyaltyCost extends VariableCostImpl {
 
+    // dynamic x cost modification from effects like Carth the Lion
+    // GUI only (applies to -X value on X announce)
+    // Example:
+    // - counters: 3
+    // - cost modification: +1
+    // - max possible X to pay: 4
     private int costModification = 0;
 
     public PayVariableLoyaltyCost() {
@@ -33,11 +37,11 @@ public class PayVariableLoyaltyCost extends VariableCostImpl  {
     public PayVariableLoyaltyCost copy() {
         return new PayVariableLoyaltyCost(this);
     }
-    
+
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Permanent planeswalker = game.getPermanent(source.getSourceId());
-        return planeswalker!= null && planeswalker.canLoyaltyBeUsed(game);
+        return planeswalker != null && planeswalker.canLoyaltyBeUsed(game);
     }
 
     @Override
@@ -47,22 +51,26 @@ public class PayVariableLoyaltyCost extends VariableCostImpl  {
 
     @Override
     public int getMaxValue(Ability source, Game game) {
-        int maxValue = 0;
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (source instanceof LoyaltyAbility) {
-                LoyaltyAbility copiedAbility = ((LoyaltyAbility) source).copy();
-                permanent.adjustCosts(copiedAbility, game);
-                game.getContinuousEffects().costModification(copiedAbility, game);
-                for (Cost cost : copiedAbility.getCosts()) {
-                    if (cost instanceof PayVariableLoyaltyCost) {
-                        maxValue += ((PayVariableLoyaltyCost) cost).getCostModification();
-                    }
+        if (permanent == null) {
+            return 0;
+        }
+
+        int maxValue = permanent.getCounters(game).getCount(CounterType.LOYALTY.getName());
+
+        // apply cost modification
+        if (source instanceof LoyaltyAbility) {
+            LoyaltyAbility copiedAbility = ((LoyaltyAbility) source).copy();
+            permanent.adjustCosts(copiedAbility, game);
+            game.getContinuousEffects().costModification(copiedAbility, game);
+            for (Cost cost : copiedAbility.getCosts()) {
+                if (cost instanceof PayVariableLoyaltyCost) {
+                    maxValue += ((PayVariableLoyaltyCost) cost).getCostModification();
                 }
             }
-            maxValue += permanent.getCounters(game).getCount(CounterType.LOYALTY.getName());
         }
-        return maxValue;
+
+        return Math.max(0, maxValue);
     }
 
     public int getCostModification() {
