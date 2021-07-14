@@ -192,6 +192,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Ranger's Hawk", 37, Rarity.COMMON, mage.cards.r.RangersHawk.class));
         cards.add(new SetCardInfo("Ranger's Longbow", 203, Rarity.COMMON, mage.cards.r.RangersLongbow.class));
         cards.add(new SetCardInfo("Ray of Enfeeblement", 116, Rarity.UNCOMMON, mage.cards.r.RayOfEnfeeblement.class));
+        cards.add(new SetCardInfo("Ray of Frost", 68, Rarity.UNCOMMON, mage.cards.r.RayOfFrost.class));
         cards.add(new SetCardInfo("Reaper's Talisman", 117, Rarity.UNCOMMON, mage.cards.r.ReapersTalisman.class));
         cards.add(new SetCardInfo("Red Dragon", 160, Rarity.UNCOMMON, mage.cards.r.RedDragon.class));
         cards.add(new SetCardInfo("Rimeshield Frost Giant", 69, Rarity.COMMON, mage.cards.r.RimeshieldFrostGiant.class));
