@@ -217,6 +217,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 267, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Terror of Mount Velus", 145, Rarity.RARE, mage.cards.t.TerrorOfMountVelus.class));
         cards.add(new SetCardInfo("Theater of Horrors", 194, Rarity.RARE, mage.cards.t.TheaterOfHorrors.class));
+        cards.add(new SetCardInfo("Thorough Investigation", 12, Rarity.RARE, mage.cards.t.ThoroughInvestigation.class));
         cards.add(new SetCardInfo("Thriving Grove", 268, Rarity.COMMON, mage.cards.t.ThrivingGrove.class));
         cards.add(new SetCardInfo("Thriving Heath", 269, Rarity.COMMON, mage.cards.t.ThrivingHeath.class));
         cards.add(new SetCardInfo("Thriving Isle", 270, Rarity.COMMON, mage.cards.t.ThrivingIsle.class));
