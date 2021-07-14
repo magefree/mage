@@ -44,6 +44,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bogardan Hellkite", 115, Rarity.MYTHIC, mage.cards.b.BogardanHellkite.class));
         cards.add(new SetCardInfo("Bojuka Bog", 226, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Brainstorm", 79, Rarity.COMMON, mage.cards.b.Brainstorm.class));
+        cards.add(new SetCardInfo("Bucknard's Everfull Purse", 57, Rarity.UNCOMMON, mage.cards.b.BucknardsEverfullPurse.class));
         cards.add(new SetCardInfo("Burnished Hart", 200, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
         cards.add(new SetCardInfo("Canopy Vista", 227, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Cataclysmic Gearhulk", 65, Rarity.MYTHIC, mage.cards.c.CataclysmicGearhulk.class));
