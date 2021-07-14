@@ -36,7 +36,7 @@ public class DrawCardControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you draw a card, " ;
     }
 

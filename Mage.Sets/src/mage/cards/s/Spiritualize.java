@@ -81,7 +81,7 @@ class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever target creature deals damage, " ;
     }
 }

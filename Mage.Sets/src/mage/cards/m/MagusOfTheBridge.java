@@ -93,7 +93,7 @@ class MagusOfTheBridgeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When a creature is put into an opponent's graveyard from the battlefield, " ;
     }
 }

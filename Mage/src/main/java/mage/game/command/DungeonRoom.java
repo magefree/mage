@@ -166,7 +166,7 @@ class RoomTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When you enter this room, ";
     }
 }

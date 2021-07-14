@@ -83,7 +83,7 @@ public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a player casts " + CardUtil.addArticle(filter.getMessage()) + ", ";
     }
 

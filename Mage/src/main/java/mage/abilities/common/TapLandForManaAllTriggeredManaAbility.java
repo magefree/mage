@@ -51,7 +51,7 @@ public class TapLandForManaAllTriggeredManaAbility extends TriggeredManaAbility 
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a player taps a land for mana, ";
     }
 }

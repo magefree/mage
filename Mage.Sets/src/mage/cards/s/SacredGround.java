@@ -73,7 +73,7 @@ class SacredGroundTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a spell or ability an opponent controls causes a land to be put into your graveyard from the battlefield, " ;
     }
 }

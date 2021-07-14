@@ -108,7 +108,7 @@ class TaigamOjutaiMasterTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you cast an instant or sorcery spell from your hand, if {this} attacked this turn, " ;
 
     }

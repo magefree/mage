@@ -41,7 +41,7 @@ public class AtTheEndOfTurnStepPostDelayedTriggeredAbility extends DelayedTrigge
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "At end of turn " ;
     }
 }

@@ -70,7 +70,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} or another " + filter.getMessage() + " dies, " ;
     }
 }

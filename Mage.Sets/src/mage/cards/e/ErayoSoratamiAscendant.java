@@ -83,7 +83,7 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever the fourth spell of a turn is cast, " ;
     }
 
@@ -146,7 +146,7 @@ class ErayosEssenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever an opponent casts a spell for the first time each turn, " ;
     }
 

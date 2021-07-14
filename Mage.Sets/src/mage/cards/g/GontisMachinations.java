@@ -87,7 +87,7 @@ class GontisMachinationsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you lose life for the first time each turn, " ;
     }
 }

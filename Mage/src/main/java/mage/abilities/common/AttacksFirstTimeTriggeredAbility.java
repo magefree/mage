@@ -53,7 +53,7 @@ public class AttacksFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} attacks for the first time each turn, " ;
     }
 

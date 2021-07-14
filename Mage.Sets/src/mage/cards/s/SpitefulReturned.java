@@ -96,7 +96,7 @@ class SpitefulReturnedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} or enchanted creature attacks, " ;
     }
 }

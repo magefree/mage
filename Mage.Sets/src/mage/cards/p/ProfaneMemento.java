@@ -68,7 +68,7 @@ class ProfaneMementoTriggeredAbility extends TriggeredAbilityImpl {
     }
     
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a creature card is put into an opponent's graveyard from anywhere, " ;
     }
 }

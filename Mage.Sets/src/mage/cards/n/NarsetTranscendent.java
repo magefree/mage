@@ -141,7 +141,7 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When you cast your next instant or sorcery spell from your hand this turn, " ;
     }
 }

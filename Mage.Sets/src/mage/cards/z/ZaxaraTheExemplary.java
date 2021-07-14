@@ -98,7 +98,7 @@ class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you cast a spell with {X} in its mana cost" ;
     }
 }

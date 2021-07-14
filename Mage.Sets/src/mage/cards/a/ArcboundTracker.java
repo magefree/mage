@@ -79,7 +79,7 @@ class ArcboundTrackerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you cast a spell other than your first spell each turn, " ;
     }
 }

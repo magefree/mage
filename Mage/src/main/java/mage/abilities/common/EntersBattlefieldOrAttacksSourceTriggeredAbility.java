@@ -45,7 +45,7 @@ public class EntersBattlefieldOrAttacksSourceTriggeredAbility extends TriggeredA
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} enters the battlefield or attacks, " ;
     }
 

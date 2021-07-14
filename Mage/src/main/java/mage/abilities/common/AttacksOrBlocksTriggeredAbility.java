@@ -29,7 +29,7 @@ public class AttacksOrBlocksTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return startText + " {this} attacks or blocks, " ;
     }
 

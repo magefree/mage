@@ -97,7 +97,7 @@ class HarshJusticeTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "This turn, whenever an attacking creature deals combat damage to you, " ;
     }
 }

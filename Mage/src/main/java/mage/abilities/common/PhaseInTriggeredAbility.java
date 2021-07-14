@@ -36,7 +36,7 @@ public class PhaseInTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When {this} phases in, " ;
     }
 }

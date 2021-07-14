@@ -84,7 +84,7 @@ public final class AAT1 extends CardImpl {
         }
 
         @Override
-        public String getTriggerPrefix() {
+        public String getTriggerPhrase() {
             return "Whenever a repair counter is removed from a creature card in your graveyard " ;
         }
 

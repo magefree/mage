@@ -46,7 +46,7 @@ public class BeginningOfUpkeepAttachedTriggeredAbility extends TriggeredAbilityI
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "At the beginning of enchanted player's upkeep, " ;
     }
 }

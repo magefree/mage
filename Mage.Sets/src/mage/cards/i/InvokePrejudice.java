@@ -87,7 +87,7 @@ class InvokePrejudiceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever an opponent casts a creature spell that doesn't share a color with a creature you control, " ;
     }
 }

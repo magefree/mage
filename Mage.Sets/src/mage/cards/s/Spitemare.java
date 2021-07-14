@@ -78,7 +78,7 @@ class SpitemareTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} is dealt damage, ";
     }
 }

@@ -74,7 +74,7 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of combat on your turn, " + generateZoneString();

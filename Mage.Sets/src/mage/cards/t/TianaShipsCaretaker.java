@@ -99,7 +99,7 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever an Aura or Equipment you control is put into a graveyard from the battlefield, " ;
     }
 }

@@ -36,7 +36,7 @@ public class AttacksOrBlocksEnchantedTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever enchanted creature attacks or blocks, ";
     }
 }

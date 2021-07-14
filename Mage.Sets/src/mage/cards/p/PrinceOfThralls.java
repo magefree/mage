@@ -86,7 +86,7 @@ class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a permanent an opponent controls is put into a graveyard, " ;
     }
 }

@@ -64,7 +64,7 @@ public class DiscardsACardOpponentTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever an opponent discards a card, " ;
     }
 }

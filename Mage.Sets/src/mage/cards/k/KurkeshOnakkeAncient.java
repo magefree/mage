@@ -85,7 +85,7 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you activate an ability of an artifact, if it isn't a mana ability" ;
     }
 }

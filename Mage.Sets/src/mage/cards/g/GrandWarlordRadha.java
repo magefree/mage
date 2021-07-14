@@ -117,7 +117,7 @@ class GrandWarlordRadhaTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever one or more creatures you control attack, " ;
     }
 }

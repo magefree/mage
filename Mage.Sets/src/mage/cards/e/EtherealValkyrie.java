@@ -97,7 +97,7 @@ class EtherealValkyrieTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} enters the battlefield or attacks, " ;
     }
 }

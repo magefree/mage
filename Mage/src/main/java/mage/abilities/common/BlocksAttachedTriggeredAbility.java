@@ -72,7 +72,7 @@ public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever " + attachedDescription + " creature blocks" + (setFixedTargetPointerToBlocked ? " a creature, " : ", ") ;
     }
 }

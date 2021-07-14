@@ -89,7 +89,7 @@ class UlamogExilePermanentsOnCastAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When you cast this spell, " ;
     }
 }
@@ -128,7 +128,7 @@ class UlamogAttackTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} attacks, " ;
     }
 }

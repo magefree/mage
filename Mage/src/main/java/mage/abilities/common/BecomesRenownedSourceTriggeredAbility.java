@@ -47,7 +47,7 @@ public class BecomesRenownedSourceTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When {this} becomes renowned, " ;
     }
 }

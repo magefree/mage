@@ -131,7 +131,7 @@ class PorphyryNodesStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When there are no creatures on the battlefield, " ;
     }
 

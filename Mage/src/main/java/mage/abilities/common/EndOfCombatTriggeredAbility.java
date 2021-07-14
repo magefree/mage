@@ -36,7 +36,7 @@ public class EndOfCombatTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "At end of combat, " ;
     }
 }

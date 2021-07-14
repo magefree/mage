@@ -90,7 +90,7 @@ class HapatraVizierOfPoisonsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you put one or more -1/-1 counters on a creature, " ;
     }
 }

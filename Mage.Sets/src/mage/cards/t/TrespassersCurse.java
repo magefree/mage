@@ -85,7 +85,7 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a creature enters the battlefield under enchanted player's control, " ;
     }
 

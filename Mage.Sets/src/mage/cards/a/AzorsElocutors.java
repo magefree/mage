@@ -74,7 +74,7 @@ class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a source deals damage to you, " ;
     }
 

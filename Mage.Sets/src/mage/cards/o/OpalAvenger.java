@@ -95,7 +95,7 @@ class OpalAvengerStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When you have 10 or less life, if {this} is an enchantment, " ;
     }
 

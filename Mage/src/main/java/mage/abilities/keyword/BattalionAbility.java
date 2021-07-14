@@ -45,7 +45,7 @@ public class BattalionAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "<i>Battalion</i> &mdash; Whenever {this} and at least two other creatures attack, ";
     }
 }

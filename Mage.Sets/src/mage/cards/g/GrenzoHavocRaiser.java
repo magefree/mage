@@ -120,7 +120,7 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a creature you control deals combat damage to a player, " ;
     }
 }

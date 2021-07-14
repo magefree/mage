@@ -122,7 +122,7 @@ class LeovoldEmissaryOfTrestTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, " ;
     }
 }

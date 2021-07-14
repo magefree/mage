@@ -65,7 +65,7 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever an artifact is put into your graveyard from the battlefield, " ;
     }
 }

@@ -55,7 +55,7 @@ public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "At the " + eventName + ", " ;
     }
 

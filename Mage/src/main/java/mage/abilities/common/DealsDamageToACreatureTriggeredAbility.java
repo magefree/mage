@@ -71,7 +71,7 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever {this} deals ");
         if (combatOnly) {
             sb.append("combat ");

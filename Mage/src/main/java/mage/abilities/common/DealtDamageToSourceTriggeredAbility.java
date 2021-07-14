@@ -75,7 +75,7 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return (enrage ? "<i>Enrage</i> &mdash; " : "") + "Whenever {this} is dealt damage, " ;
     }
 }

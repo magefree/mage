@@ -34,7 +34,7 @@ public class AttachedToCreatureSourceTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "As {this} becomes attached to a creature, " ;
     }
 

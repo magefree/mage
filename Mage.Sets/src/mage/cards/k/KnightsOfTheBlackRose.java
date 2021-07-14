@@ -90,7 +90,7 @@ class BecomesMonarchTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever an opponent becomes the monarch, if you were the monarch as the turn began, " ;
     }
 

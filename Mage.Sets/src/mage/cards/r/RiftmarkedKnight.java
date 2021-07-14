@@ -77,7 +77,7 @@ class RiftmarkedKnightTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When the last time counter is removed from {this} while it's exiled, " ;
     }
 

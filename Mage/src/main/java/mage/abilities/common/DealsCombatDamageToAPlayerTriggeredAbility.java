@@ -99,7 +99,7 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} deals combat damage to "
                 + (onlyOpponents ? "an opponent" : "a player")
                 + (orPlaneswalker ? " or planeswalker" : "")

@@ -112,7 +112,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ");
         if (thisOrAnother) {
             sb.append("{this} or another ");

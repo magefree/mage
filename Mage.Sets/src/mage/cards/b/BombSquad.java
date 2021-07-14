@@ -102,7 +102,7 @@ class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a creature has four or more fuse counters on it, " ;
     }
 }

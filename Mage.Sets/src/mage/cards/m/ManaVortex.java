@@ -127,7 +127,7 @@ class ManaVortexStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When there are no lands on the battlefield, " ;
     }
 

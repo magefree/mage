@@ -101,7 +101,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "At the beginning of each of your main phases, if "
                 + "you haven't added mana with this ability this turn, "
                 ;

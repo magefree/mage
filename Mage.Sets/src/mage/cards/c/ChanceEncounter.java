@@ -76,7 +76,7 @@ class ChanceEncounterTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you win a coin flip, " ;
     }
 }

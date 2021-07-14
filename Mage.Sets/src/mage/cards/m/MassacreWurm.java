@@ -82,7 +82,7 @@ class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a creature an opponent controls dies, " ;
     }
 }

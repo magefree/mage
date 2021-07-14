@@ -45,7 +45,7 @@ public class MagecraftAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "<i>Magecraft</i> &mdash; Whenever you cast or copy an instant or sorcery spell, " ;
     }
 

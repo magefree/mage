@@ -74,7 +74,7 @@ class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever an opponent shuffles their library, " ;
     }
 }

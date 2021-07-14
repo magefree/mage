@@ -38,7 +38,7 @@ public class WinsCoinFlipTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a player wins a coin flip, " ;
     }
 }

@@ -64,7 +64,7 @@ public class DiesThisOrAnotherCreatureOrPlaneswalkerTriggeredAbility extends Tri
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} or another " + filter.getMessage() + " dies, " ;
     }
 }

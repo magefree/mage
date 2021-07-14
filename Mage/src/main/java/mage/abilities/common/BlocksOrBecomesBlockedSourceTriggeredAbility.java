@@ -84,7 +84,7 @@ public class BlocksOrBecomesBlockedSourceTriggeredAbility extends TriggeredAbili
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} blocks or becomes blocked" + (setTargetPointer ? " by a " + filter.getMessage() : "") + ", ";
     }
 

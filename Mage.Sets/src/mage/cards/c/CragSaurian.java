@@ -113,7 +113,7 @@ public final class CragSaurian extends CardImpl {
         }
     
         @Override
-        public String getTriggerPrefix() {
+        public String getTriggerPhrase() {
             return "Whenever a source deals damage to {this}, " ;
         }
     }

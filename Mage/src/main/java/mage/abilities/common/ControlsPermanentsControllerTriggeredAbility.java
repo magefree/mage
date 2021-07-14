@@ -51,7 +51,7 @@ public class ControlsPermanentsControllerTriggeredAbility extends StateTriggered
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When you control " + filter.getMessage() + ", " ;
     }
 }

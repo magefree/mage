@@ -104,7 +104,7 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When a creature dealt damage this way dies this turn, " ;
     }
 }

@@ -125,7 +125,7 @@ class VindictiveVampireTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever " + filter.getMessage() + " dies, " ;
     }
 }

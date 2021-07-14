@@ -39,7 +39,7 @@ public class ExertCreatureControllerTriggeredAbility extends TriggeredAbilityImp
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you exert a creature, " ;
     }
 }

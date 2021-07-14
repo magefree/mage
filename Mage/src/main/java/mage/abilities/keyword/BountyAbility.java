@@ -41,7 +41,7 @@ public class BountyAbility extends DiesCreatureTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "<i>Bounty</i> &mdash; " ;
     }
 

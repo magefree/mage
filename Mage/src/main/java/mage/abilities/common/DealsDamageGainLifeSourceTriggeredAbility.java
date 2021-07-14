@@ -49,7 +49,7 @@ public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityI
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} deals damage, " ;
     }
 }

@@ -77,7 +77,7 @@ class ShahOfNaarIsleTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When {this}'s echo cost is paid, " ;
     }
 }

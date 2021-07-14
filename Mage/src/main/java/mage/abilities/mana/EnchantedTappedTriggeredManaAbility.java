@@ -49,7 +49,7 @@ public class EnchantedTappedTriggeredManaAbility extends TriggeredManaAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever enchanted " + permName + " is tapped for mana, " ;
     }
 }

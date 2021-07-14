@@ -129,7 +129,7 @@ class SearchTheCityTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you play a card with the same name as one of the exiled cards, " ;
     }
 

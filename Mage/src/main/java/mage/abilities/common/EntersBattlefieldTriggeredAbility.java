@@ -53,7 +53,7 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When {this} enters the battlefield, ";
     }
 

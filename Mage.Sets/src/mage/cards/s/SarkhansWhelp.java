@@ -82,7 +82,7 @@ class SarkhansWhelpTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you activate an ability of a Sarkhan planeswalker, " ;
     }
 }

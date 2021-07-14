@@ -66,7 +66,7 @@ public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever enchanted creature is dealt damage, " ;
     }
 }

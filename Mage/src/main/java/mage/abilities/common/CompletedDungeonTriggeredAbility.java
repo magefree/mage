@@ -43,7 +43,7 @@ public class CompletedDungeonTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you complete a dungeon, " ;
     }
 }

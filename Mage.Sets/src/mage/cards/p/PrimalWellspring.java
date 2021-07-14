@@ -89,7 +89,7 @@ class PyrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When that mana is used to cast an instant or sorcery spell, " ;
     }
 }

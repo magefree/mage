@@ -103,7 +103,7 @@ class RegalBehemothTriggeredManaAbility extends TriggeredManaAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you tap a land for mana while you're the monarch, " ;
     }
 }

@@ -39,7 +39,7 @@ public class BecomesClassLevelTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When this Class becomes level " + level + ", " ;
     }
 }

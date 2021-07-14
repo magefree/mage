@@ -44,7 +44,7 @@ public class DrawSecondCardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you draw your second card each turn, " ;
     }
 

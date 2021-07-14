@@ -112,7 +112,7 @@ class CapturedByTheConsulateTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever an opponent casts a spell, if it has a single target, " ;
     }
 

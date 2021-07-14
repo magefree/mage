@@ -90,7 +90,7 @@ class DeadIronSledgeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever equipped creature blocks or becomes blocked by a creature, " ;
     }
 

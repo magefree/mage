@@ -72,7 +72,7 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever {this} deals ");
         if (onlyCombat) {
             sb.append("combat ");

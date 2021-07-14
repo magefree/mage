@@ -40,7 +40,7 @@ public class OpponentSacrificesPermanentTriggeredAbility extends TriggeredAbilit
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever an opponent sacrifices a nontoken permanent, " ;
     }
 

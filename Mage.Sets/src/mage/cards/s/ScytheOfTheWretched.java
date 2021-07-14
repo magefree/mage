@@ -97,7 +97,7 @@ class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a creature dealt damage by equipped creature this turn dies, " ;
     }
 

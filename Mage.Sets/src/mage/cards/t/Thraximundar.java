@@ -96,7 +96,7 @@ class ThraximundarTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} attacks, defending player sacrifices a creature.";
     }
 }

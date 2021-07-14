@@ -82,7 +82,7 @@ class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a player attacks enchanted player with one or more creatures, " ;
     }
 

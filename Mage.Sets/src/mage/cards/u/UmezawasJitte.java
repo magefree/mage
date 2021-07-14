@@ -115,7 +115,7 @@ class UmezawasJitteAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever equipped creature deals combat damage, " ;
     }
 }

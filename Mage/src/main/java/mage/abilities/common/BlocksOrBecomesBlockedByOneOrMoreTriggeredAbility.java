@@ -84,7 +84,7 @@ public class BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility extends Triggered
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} blocks or becomes blocked by one or more " + (filter != null ? filter.getMessage() : "creatures") + ", ";
     }
 

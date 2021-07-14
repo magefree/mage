@@ -74,7 +74,7 @@ class TerritorialGorgerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you get one or more {E} <i>(energy counters)</i>, " ;
     }
 }

@@ -62,7 +62,7 @@ public class SacrificeAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         String targetControllerText = "a player sacrifices ";
         switch (sacrificingPlayer) {
             case YOU:

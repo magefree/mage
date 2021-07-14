@@ -88,7 +88,7 @@ class SteelSquirrelTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you roll a 5 or higher on a die, " ;
     }
 }

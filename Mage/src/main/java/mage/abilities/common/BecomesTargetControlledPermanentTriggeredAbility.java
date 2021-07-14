@@ -71,7 +71,7 @@ public class BecomesTargetControlledPermanentTriggeredAbility extends TriggeredA
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a permanent you control becomes the target of a spell or ability an opponent controls, " ;
     }
 }

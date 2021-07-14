@@ -182,11 +182,11 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             prefix = "";
         }
 
-        return prefix + getTriggerPrefix() + sb;
+        return prefix + getTriggerPhrase() + sb;
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "";
     }
 

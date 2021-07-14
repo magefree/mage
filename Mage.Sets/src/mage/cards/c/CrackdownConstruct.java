@@ -79,7 +79,7 @@ class CrackdownConstructTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you activate an ability of an artifact or creature that isn't a mana ability, " ;
     }
 }

@@ -65,7 +65,7 @@ class FurnaceCelebrationAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you sacrifice another permanent, " ;
     }
 

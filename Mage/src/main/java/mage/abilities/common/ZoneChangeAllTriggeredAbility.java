@@ -68,7 +68,7 @@ public class ZoneChangeAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return rule ;
     }
 

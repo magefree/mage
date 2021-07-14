@@ -73,7 +73,7 @@ class EquippedBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever equipped creature becomes blocked by a creature, " ;
     }
 

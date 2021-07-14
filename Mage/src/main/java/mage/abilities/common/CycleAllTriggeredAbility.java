@@ -40,7 +40,7 @@ public class CycleAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a player cycles a card, " ;
     }
 

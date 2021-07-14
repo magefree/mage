@@ -40,7 +40,7 @@ public class AuraAttachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever an Aura becomes attached to {this}, " ;
     }
 

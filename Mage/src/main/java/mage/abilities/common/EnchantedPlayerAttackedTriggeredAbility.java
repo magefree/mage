@@ -39,7 +39,7 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever enchanted player is attacked, " ;
     }
 

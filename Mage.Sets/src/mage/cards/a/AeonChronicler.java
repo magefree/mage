@@ -81,7 +81,7 @@ class AeonChroniclerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a time counter is removed from {this} while it's exiled, " ;
     }
 

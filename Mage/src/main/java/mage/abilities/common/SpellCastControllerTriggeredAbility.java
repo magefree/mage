@@ -93,7 +93,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you cast " + filter.getMessage() + ", ";
     }
 

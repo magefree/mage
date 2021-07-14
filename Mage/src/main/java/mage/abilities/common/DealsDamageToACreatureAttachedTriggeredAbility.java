@@ -63,7 +63,7 @@ public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbi
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return new StringBuilder("Whenever ").append(attachedDescription)
                 .append(" deals ")
                 .append(combatOnly ? "combat " : "")

@@ -67,7 +67,7 @@ class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When a player casts a spell or a creature attacks, " ;
     }
 

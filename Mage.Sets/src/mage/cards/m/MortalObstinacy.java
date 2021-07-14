@@ -91,7 +91,7 @@ class MortalObstinacyAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever enchanted creature deals combat damage to a player, " ;
     }
 }

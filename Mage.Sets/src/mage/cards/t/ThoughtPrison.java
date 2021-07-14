@@ -171,7 +171,7 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a player casts a spell that shares a color or mana value with the exiled card, " ;
     }
 }

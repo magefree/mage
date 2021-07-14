@@ -136,7 +136,7 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a land with the same name as the exiled card is tapped for mana, " ;
     }
 

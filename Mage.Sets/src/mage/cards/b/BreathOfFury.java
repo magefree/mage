@@ -93,7 +93,7 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When enchanted creature deals combat damage to a player, " ;
     }
 }

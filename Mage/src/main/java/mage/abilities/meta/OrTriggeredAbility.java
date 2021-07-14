@@ -82,7 +82,7 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         if (ruleTrigger != null && !ruleTrigger.isEmpty()) {
             return ruleTrigger;
         }

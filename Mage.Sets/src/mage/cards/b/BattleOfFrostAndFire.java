@@ -97,7 +97,7 @@ class BattleOfFrostAndFireTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you cast a spell with mana value 5 or greater this turn, " ;
     }
 }

@@ -106,7 +106,7 @@ class TravelingPlagueTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When enchanted creature leaves the battlefield, " ;
     }
 }

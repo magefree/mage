@@ -56,7 +56,7 @@ public class BlocksSourceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When" + (once ? "" : "ever") + " {this} blocks" + (setTargetPointer ? " a creature, " : ", ") ;
     }
 

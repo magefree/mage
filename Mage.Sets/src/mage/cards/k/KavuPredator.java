@@ -78,7 +78,7 @@ class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever an opponent gains life, " ;
     }
 }

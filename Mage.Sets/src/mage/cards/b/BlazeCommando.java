@@ -104,7 +104,7 @@ class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever an instant or sorcery spell you control deals damage, " ;
     }
 }

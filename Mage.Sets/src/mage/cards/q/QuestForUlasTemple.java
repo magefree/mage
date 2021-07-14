@@ -120,7 +120,7 @@ class QuestForUlasTempleTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "At the beginning of each end step, if there are three or more quest counters on {this}, " ;
     }
 }

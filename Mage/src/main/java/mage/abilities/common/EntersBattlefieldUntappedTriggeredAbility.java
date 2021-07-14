@@ -34,7 +34,7 @@ public class EntersBattlefieldUntappedTriggeredAbility extends EntersBattlefield
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When {this} enters the battlefield untapped, " ;
     }
 }

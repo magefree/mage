@@ -69,7 +69,7 @@ class LastLaughStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When no creatures are on the battlefield, " ;
     }
 

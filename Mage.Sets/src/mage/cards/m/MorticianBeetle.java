@@ -68,7 +68,7 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a player sacrifices a creature, " ;
     }
 

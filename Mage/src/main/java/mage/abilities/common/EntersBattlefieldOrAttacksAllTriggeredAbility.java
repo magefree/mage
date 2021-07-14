@@ -129,7 +129,7 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ").append(filter.getMessage());
         sb.append(" enters the battlefield ");
         if (controlledText) {

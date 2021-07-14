@@ -84,7 +84,7 @@ class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you sacrifice a black creature, " ;
     }
 }
@@ -161,7 +161,7 @@ class SavraSacrificeGreenCreatureAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you sacrifice a green creature, " ;
     }
 }

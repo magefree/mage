@@ -68,7 +68,7 @@ class DragonAppeasementTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you sacrifice a creature, " ;
     }
 }

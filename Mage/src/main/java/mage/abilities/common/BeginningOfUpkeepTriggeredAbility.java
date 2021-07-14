@@ -117,7 +117,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         if (ruleTrigger != null && !ruleTrigger.isEmpty()) {
             return ruleTrigger;
         }

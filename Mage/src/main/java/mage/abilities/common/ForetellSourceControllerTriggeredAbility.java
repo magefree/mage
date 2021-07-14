@@ -43,7 +43,7 @@ public class ForetellSourceControllerTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you foretell a card, " ;
     }
 

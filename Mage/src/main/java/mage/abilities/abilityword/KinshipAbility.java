@@ -56,7 +56,7 @@ public class KinshipAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "<i>Kinship</i> &mdash; At the beginning of your upkeep, ";
     }
 

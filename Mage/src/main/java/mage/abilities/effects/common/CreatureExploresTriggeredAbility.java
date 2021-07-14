@@ -37,7 +37,7 @@ public class CreatureExploresTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a creature you control explores, " ;
     }
 }

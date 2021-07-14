@@ -84,7 +84,7 @@ public class HeroicAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return (isHeroic ? "<i>Heroic</i> &mdash; " : "") + "Whenever you cast a spell that targets {this}, " ;
     }
 }

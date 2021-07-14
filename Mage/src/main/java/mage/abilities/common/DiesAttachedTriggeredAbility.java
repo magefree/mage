@@ -114,7 +114,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder();
         if (attachedDescription.startsWith("equipped")) {
             sb.append("Whenever ");

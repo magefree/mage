@@ -39,7 +39,7 @@ public class BecomesBlockedAttachedTriggeredAbility extends TriggeredAbilityImpl
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever enchanted creature becomes blocked, " ;
     }
 

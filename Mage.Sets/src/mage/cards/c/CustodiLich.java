@@ -74,7 +74,7 @@ class BecomesMonarchSourceControllerTriggeredAbility extends TriggeredAbilityImp
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you become the monarch, " ;
     }
 

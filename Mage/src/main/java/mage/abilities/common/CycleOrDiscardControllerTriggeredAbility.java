@@ -36,7 +36,7 @@ public class CycleOrDiscardControllerTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you cycle or discard a card, " ;
     }
 

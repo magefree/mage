@@ -128,7 +128,7 @@ class GoldenGuardianDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When {this} dies this turn, " ;
     }
 }

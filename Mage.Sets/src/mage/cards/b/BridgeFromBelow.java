@@ -101,7 +101,7 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return filter.getMessage() + ", if {this} is in your graveyard, " ;
     }
 }

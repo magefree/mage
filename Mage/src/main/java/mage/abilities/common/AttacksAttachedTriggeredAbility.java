@@ -61,7 +61,7 @@ public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ");
         sb.append(attachmentType.verb().toLowerCase(Locale.ENGLISH));
         return sb.append(" creature attacks, ").toString();

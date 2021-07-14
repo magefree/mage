@@ -87,7 +87,7 @@ class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} attacks or becomes the target of a spell an opponent controls, " ;
     }
 

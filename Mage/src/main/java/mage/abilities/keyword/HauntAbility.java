@@ -105,7 +105,7 @@ public class HauntAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return (creatureHaunt ? "When {this} enters the battlefield or the creature it haunts dies, "
                 : "When the creature {this} haunts dies, ")
                 ;

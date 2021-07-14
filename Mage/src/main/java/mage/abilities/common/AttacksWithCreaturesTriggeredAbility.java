@@ -66,7 +66,7 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         if (minAttackers == 0) {
             return "Whenever you attack, ";
         }

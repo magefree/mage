@@ -90,7 +90,7 @@ class RashkaTheSlayerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} blocks a " + filter.getMessage() + ", " ;
     }
 

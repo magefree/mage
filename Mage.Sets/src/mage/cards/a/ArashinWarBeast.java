@@ -97,7 +97,7 @@ class ArashinWarBeastTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} deals combat damage to one or more blockers, " ;
     }
 }

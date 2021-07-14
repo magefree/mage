@@ -73,7 +73,7 @@ class DaringSleuthTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When you sacrifice a Clue, " ;
     }
 }

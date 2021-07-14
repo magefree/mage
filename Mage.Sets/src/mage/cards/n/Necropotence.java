@@ -87,7 +87,7 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you discard a card, " ;
     }
 }

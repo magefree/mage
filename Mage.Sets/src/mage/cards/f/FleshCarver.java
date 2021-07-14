@@ -93,7 +93,7 @@ class FleshCarverAbility extends DiesSourceTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When Flesh Carver dies, " ;
     }
 }

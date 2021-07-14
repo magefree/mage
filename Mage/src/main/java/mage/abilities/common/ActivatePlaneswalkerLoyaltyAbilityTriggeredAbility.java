@@ -53,7 +53,7 @@ public class ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility extends Triggere
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you activate a loyalty ability of a "
                 + planeswalkerSubType.getDescription()
                 + " planeswalker, " ;

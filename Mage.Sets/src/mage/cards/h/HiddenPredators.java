@@ -98,7 +98,7 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When an opponent controls a creature with 4 or greater power, if {this} is an enchantment, " ;
     }
 

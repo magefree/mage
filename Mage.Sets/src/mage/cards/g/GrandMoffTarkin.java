@@ -86,7 +86,7 @@ class GrandMoffTarkinTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "At the beginning of each opponent's upkeep, ";
     }
 

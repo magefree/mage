@@ -99,7 +99,7 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} attacks a player and isn't blocked, " ;
     }
 }

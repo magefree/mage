@@ -67,7 +67,7 @@ public class TapForManaAllTriggeredManaAbility extends TriggeredManaAbility {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever " + filter.getMessage() + " for mana, " ;
     }
 }

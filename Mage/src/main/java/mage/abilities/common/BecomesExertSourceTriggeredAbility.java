@@ -37,7 +37,7 @@ public class BecomesExertSourceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "When {this} becomes exerted, " ;
     }
 }

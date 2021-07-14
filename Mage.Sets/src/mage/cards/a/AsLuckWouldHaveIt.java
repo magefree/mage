@@ -78,7 +78,7 @@ class AsLuckWouldHaveItTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you roll a die, " ;
     }
 }

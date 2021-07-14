@@ -98,7 +98,7 @@ class CanalCourierTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} and another creature attack different players, " ;
     }
 

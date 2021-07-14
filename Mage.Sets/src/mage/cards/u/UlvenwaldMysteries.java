@@ -84,7 +84,7 @@ class UlvenwaldMysteriesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you sacrifice a Clue, " ;
     }
 }

@@ -71,7 +71,7 @@ class BloodstoneGoblinTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you cast a spell, if that spell was kicked, " ;
     }
 }

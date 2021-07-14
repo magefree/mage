@@ -96,7 +96,7 @@ class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " ;
     }
 }

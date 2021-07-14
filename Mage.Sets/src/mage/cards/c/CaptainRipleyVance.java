@@ -79,7 +79,7 @@ class CaptainRipleyVanceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever you cast your third spell each turn, " ;
     }
 }

@@ -80,7 +80,7 @@ class WillbreakerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a creature an opponent controls becomes the target of a spell or ability you control, " ;
     }
 

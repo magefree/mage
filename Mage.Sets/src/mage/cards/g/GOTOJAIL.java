@@ -121,7 +121,7 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "At the beginning of the chosen player's upkeep, " ;
     }
 }

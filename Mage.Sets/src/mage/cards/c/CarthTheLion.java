@@ -93,7 +93,7 @@ class CarthTheLionTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever {this} enters the battlefield or a planeswalker you control dies, " ;
     }
 }

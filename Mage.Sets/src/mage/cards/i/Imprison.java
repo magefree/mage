@@ -106,7 +106,7 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPrefix() {
+    public String getTriggerPhrase() {
         return "Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, " ;
     }
 }
