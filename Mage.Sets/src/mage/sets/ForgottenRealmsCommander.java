@@ -167,6 +167,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Propaganda", 91, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
         cards.add(new SetCardInfo("Psychic Impetus", 92, Rarity.UNCOMMON, mage.cards.p.PsychicImpetus.class));
         cards.add(new SetCardInfo("Puresteel Paladin", 69, Rarity.RARE, mage.cards.p.PuresteelPaladin.class));
+        cards.add(new SetCardInfo("Radiant Solar", 9, Rarity.RARE, mage.cards.r.RadiantSolar.class));
         cards.add(new SetCardInfo("Rakdos Carnarium", 257, Rarity.UNCOMMON, mage.cards.r.RakdosCarnarium.class));
         cards.add(new SetCardInfo("Rakdos Charm", 190, Rarity.UNCOMMON, mage.cards.r.RakdosCharm.class));
         cards.add(new SetCardInfo("Rakdos Signet", 214, Rarity.UNCOMMON, mage.cards.r.RakdosSignet.class));
