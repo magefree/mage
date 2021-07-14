@@ -62,7 +62,7 @@ public final class DruidClass extends CardImpl {
                 new DruidClassToken(), false, true, Duration.Custom
         ), 3);
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
-        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(ability, 3)));
+        this.addAbility(ability);
     }
 
     private DruidClass(final DruidClass card) {

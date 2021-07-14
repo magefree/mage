@@ -59,7 +59,7 @@ public final class ClericClass extends CardImpl {
         // When this Class becomes level 3, return target creature card from your graveyard to the battlefield. You gain life equal to its toughness.
         ability = new BecomesClassLevelTriggeredAbility(new ClericClassReturnEffect(), 3);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(ability, 3)));
+        this.addAbility(ability);
     }
 
     private ClericClass(final ClericClass card) {

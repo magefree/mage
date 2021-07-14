@@ -46,9 +46,7 @@ public final class WizardClass extends CardImpl {
         this.addAbility(new ClassLevelAbility(2, "{2}{U}"));
 
         // When this Class becomes level 2, draw two cards.
-        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
-                new BecomesClassLevelTriggeredAbility(new DrawCardSourceControllerEffect(2), 2), 2
-        )));
+        this.addAbility(new BecomesClassLevelTriggeredAbility(new DrawCardSourceControllerEffect(2), 2));
 
         // {4}{U}: Level 3
         this.addAbility(new ClassLevelAbility(3, "{4}{U}"));
