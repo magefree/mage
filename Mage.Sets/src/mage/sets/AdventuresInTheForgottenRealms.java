@@ -55,6 +55,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Circle of Dreams Druid", 176, Rarity.RARE, mage.cards.c.CircleOfDreamsDruid.class));
         cards.add(new SetCardInfo("Circle of the Moon Druid", 177, Rarity.COMMON, mage.cards.c.CircleOfTheMoonDruid.class));
         cards.add(new SetCardInfo("Clattering Skeletons", 93, Rarity.COMMON, mage.cards.c.ClatteringSkeletons.class));
+        cards.add(new SetCardInfo("Cleric Class", 6, Rarity.UNCOMMON, mage.cards.c.ClericClass.class));
         cards.add(new SetCardInfo("Clever Conjurer", 51, Rarity.COMMON, mage.cards.c.CleverConjurer.class));
         cards.add(new SetCardInfo("Cloister Gargoyle", 7, Rarity.UNCOMMON, mage.cards.c.CloisterGargoyle.class));
         cards.add(new SetCardInfo("Compelled Duel", 178, Rarity.COMMON, mage.cards.c.CompelledDuel.class));
@@ -77,6 +78,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Dragon's Fire", 139, Rarity.COMMON, mage.cards.d.DragonsFire.class));
         cards.add(new SetCardInfo("Drider", 98, Rarity.UNCOMMON, mage.cards.d.Drider.class));
         cards.add(new SetCardInfo("Drizzt Do'Urden", 220, Rarity.RARE, mage.cards.d.DrizztDoUrden.class));
+        cards.add(new SetCardInfo("Druid Class", 180, Rarity.UNCOMMON, mage.cards.d.DruidClass.class));
         cards.add(new SetCardInfo("Dueling Rapier", 140, Rarity.COMMON, mage.cards.d.DuelingRapier.class));
         cards.add(new SetCardInfo("Dungeon Crawler", 99, Rarity.UNCOMMON, mage.cards.d.DungeonCrawler.class));
         cards.add(new SetCardInfo("Dungeon Descent", 255, Rarity.RARE, mage.cards.d.DungeonDescent.class));
@@ -94,6 +96,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Fates' Reversal", 102, Rarity.COMMON, mage.cards.f.FatesReversal.class));
         cards.add(new SetCardInfo("Feign Death", 103, Rarity.COMMON, mage.cards.f.FeignDeath.class));
         cards.add(new SetCardInfo("Fifty Feet of Rope", 244, Rarity.UNCOMMON, mage.cards.f.FiftyFeetOfRope.class));
+        cards.add(new SetCardInfo("Fighter Class", 222, Rarity.RARE, mage.cards.f.FighterClass.class));
         cards.add(new SetCardInfo("Find the Path", 183, Rarity.COMMON, mage.cards.f.FindThePath.class));
         cards.add(new SetCardInfo("Flumph", 15, Rarity.RARE, mage.cards.f.Flumph.class));
         cards.add(new SetCardInfo("Fly", 59, Rarity.UNCOMMON, mage.cards.f.Fly.class));
@@ -241,6 +244,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("White Dragon", 41, Rarity.UNCOMMON, mage.cards.w.WhiteDragon.class));
         cards.add(new SetCardInfo("Wight", 127, Rarity.RARE, mage.cards.w.Wight.class));
         cards.add(new SetCardInfo("Wild Shape", 212, Rarity.UNCOMMON, mage.cards.w.WildShape.class));
+        cards.add(new SetCardInfo("Wizard Class", 81, Rarity.UNCOMMON, mage.cards.w.WizardClass.class));
         cards.add(new SetCardInfo("Xorn", 167, Rarity.RARE, mage.cards.x.Xorn.class));
         cards.add(new SetCardInfo("You Come to a River", 83, Rarity.COMMON, mage.cards.y.YouComeToARiver.class));
         cards.add(new SetCardInfo("You Come to the Gnoll Camp", 168, Rarity.COMMON, mage.cards.y.YouComeToTheGnollCamp.class));

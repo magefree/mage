@@ -72,6 +72,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean renowned;
     protected boolean manifested = false;
     protected boolean morphed = false;
+    protected int classLevel = 1;
     protected UUID originalControllerId;
     protected UUID controllerId;
     protected UUID beforeResetControllerId;
@@ -163,6 +164,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.transformed = permanent.transformed;
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
+        this.classLevel = permanent.classLevel;
         this.pairedPermanent = permanent.pairedPermanent;
         this.bandedCards.addAll(permanent.bandedCards);
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
@@ -1517,6 +1519,20 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setRenowned(boolean value) {
         this.renowned = value;
+    }
+
+    @Override
+    public int getClassLevel() {
+        return classLevel;
+    }
+
+    @Override
+    public boolean setClassLevel(int classLevel) {
+        if (this.classLevel == classLevel - 1) {
+            this.classLevel = classLevel;
+            return true;
+        }
+        return false;
     }
 
     @Override
