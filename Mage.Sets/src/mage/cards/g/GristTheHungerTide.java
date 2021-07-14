@@ -53,12 +53,19 @@ public final class GristTheHungerTide extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GristTheHungerTideTokenEffect(), 1));
 
         // −2: You may sacrifice a creature. When you do, destroy target creature or planeswalker.
-        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new DestroyTargetEffect(), false, "destroy target creature or planeswalker");
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                new DestroyTargetEffect(), false, "destroy target creature or planeswalker"
+        );
         ability.addTarget(new TargetCreatureOrPlaneswalker());
-        this.addAbility(new LoyaltyAbility(new DoWhenCostPaid(ability, new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)), "Sacrifice a creature?"), -2));
+        this.addAbility(new LoyaltyAbility(new DoWhenCostPaid(
+                ability,
+                new SacrificeTargetCost(new TargetControlledPermanent(
+                        StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
+                )), "Sacrifice a creature?"
+        ), -2));
 
         // −5: Each opponent loses life equal to the number of creature cards in your graveyard.
-        this.addAbility(new LoyaltyAbility(new LoseLifeOpponentsEffect(xValue), -5));
+        this.addAbility(new LoyaltyAbility(new LoseLifeOpponentsEffect(xValue).setText("each opponent loses life equal to the number of creature cards in your graveyard"), -5));
     }
 
     private GristTheHungerTide(final GristTheHungerTide card) {

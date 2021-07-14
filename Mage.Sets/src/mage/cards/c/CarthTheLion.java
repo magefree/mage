@@ -94,7 +94,7 @@ class CarthTheLionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} enters the battlefield, or a planeswalker you control dies, " + super.getRule();
+        return "Whenever {this} enters the battlefield or a planeswalker you control dies, " + super.getRule();
     }
 }
 
@@ -102,7 +102,7 @@ class CarthTheLionLoyaltyCostEffect extends CostModificationEffectImpl {
 
     public CarthTheLionLoyaltyCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        this.staticText = "Planeswalkers' loyalty abilities you activate cost an additonal +1 to activate";
+        this.staticText = "Planeswalkers' loyalty abilities you activate cost an additional +1 to activate";
     }
 
     private CarthTheLionLoyaltyCostEffect(final CarthTheLionLoyaltyCostEffect effect) {
