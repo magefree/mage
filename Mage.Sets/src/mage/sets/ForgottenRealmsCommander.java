@@ -199,6 +199,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Smoldering Marsh", 262, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 215, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 216, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
+        cards.add(new SetCardInfo("Song of Inspiration", 42, Rarity.RARE, mage.cards.s.SongOfInspiration.class));
         cards.add(new SetCardInfo("Spinerock Knoll", 263, Rarity.RARE, mage.cards.s.SpinerockKnoll.class));
         cards.add(new SetCardInfo("Spit Flame", 142, Rarity.RARE, mage.cards.s.SpitFlame.class));
         cards.add(new SetCardInfo("Sram, Senior Edificer", 72, Rarity.RARE, mage.cards.s.SramSeniorEdificer.class));
