@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.SilverquillToken;
+import mage.game.permanent.token.InklingToken;
 
 import java.util.UUID;
 
@@ -67,7 +67,7 @@ class InkshieldEffect extends PreventionEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         PreventionEffectData preventionEffectData = preventDamageAction(event, source, game);
         if (preventionEffectData.getPreventedDamage() > 0) {
-            new CreateTokenEffect(new SilverquillToken(), preventionEffectData.getPreventedDamage()).apply(game, source);
+            new CreateTokenEffect(new InklingToken(), preventionEffectData.getPreventedDamage()).apply(game, source);
         }
         return true;
     }

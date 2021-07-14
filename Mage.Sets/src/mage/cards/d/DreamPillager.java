@@ -20,7 +20,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 
@@ -117,7 +116,7 @@ class DreamPillagerEffect extends OneShotEffect {
                     controller.moveCards(cards, Zone.EXILED, source, game);
                     Cards canBeCast = new CardsImpl();
                     for (Card card : cards) {
-                        if (!card.isLand()) {
+                        if (!card.isLand(game)) {
                             canBeCast.add(card);
                         }
                     }

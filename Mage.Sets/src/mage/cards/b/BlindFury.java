@@ -70,7 +70,7 @@ class FurnaceOfRathEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getSourceId());
         return permanent != null
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && ((DamageEvent) event).isCombatDamage();
 
     }

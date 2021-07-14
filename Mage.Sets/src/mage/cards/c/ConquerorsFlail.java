@@ -56,12 +56,6 @@ public final class ConquerorsFlail extends CardImpl {
 
 class ConquerorsFlailColorCount implements DynamicValue {
 
-    public ConquerorsFlailColorCount() {
-    }
-
-    public ConquerorsFlailColorCount(final ConquerorsFlailColorCount dynamicValue) {
-    }
-
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Player controller = game.getPlayer(sourceAbility.getControllerId());
@@ -105,7 +99,7 @@ class ConquerorsFlailColorCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public ConquerorsFlailColorCount copy() {
         return new ConquerorsFlailColorCount();
     }
 }

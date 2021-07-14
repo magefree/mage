@@ -27,7 +27,7 @@ public final class Windstorm extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}");
 
 
-        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filter));
+        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, filter));
     }
 
     private Windstorm(final Windstorm card) {

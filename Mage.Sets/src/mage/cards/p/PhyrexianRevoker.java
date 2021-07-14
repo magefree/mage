@@ -24,6 +24,7 @@ public final class PhyrexianRevoker extends CardImpl {
 
     public PhyrexianRevoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

@@ -34,6 +34,7 @@ public enum AbilityWord {
     METALCRAFT("Metalcraft"),
     MAGECRAFT("Magecraft"),
     MORBID("Morbid"),
+    PACK_TACTICS("Pack tactics"),
     PARLEY("Parley"),
     RADIANCE("Radiance"),
     RAID("Raid"),
@@ -51,6 +52,10 @@ public enum AbilityWord {
 
     AbilityWord(String text) {
         this.text = text;
+    }
+
+    public String formatWord() {
+        return "<i>" + this + "</i> &mdash; ";
     }
 
     @Override

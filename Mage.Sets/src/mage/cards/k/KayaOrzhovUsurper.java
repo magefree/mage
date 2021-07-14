@@ -99,7 +99,7 @@ class KayaOrzhovUsurperExileEffect extends OneShotEffect {
         }
         player.moveCards(cards, Zone.EXILED, source, game);
         for (Card card : cards.getCards(game)) {
-            if (card != null && card.isCreature()) {
+            if (card != null && card.isCreature(game)) {
                 player.gainLife(2, game, source);
                 break;
             }

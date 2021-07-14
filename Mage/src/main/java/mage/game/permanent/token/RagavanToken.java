@@ -12,7 +12,7 @@ import mage.constants.SuperType;
 public final class RagavanToken extends TokenImpl {
 
     public RagavanToken() {
-        super("Ragavan", "legendary 2/1 red Monkey creature token named Ragavan");
+        super("Ragavan", "Ragavan, a legendary 2/1 red Monkey creature token");
         this.setOriginalExpansionSetCode("AER");
         this.supertype.add(SuperType.LEGENDARY);
         this.getPower().modifyBaseValue(2);

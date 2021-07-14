@@ -27,7 +27,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -49,7 +48,7 @@ public final class CryptChampion extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CryptChampionEffect()));
 
         // When Crypt Champion enters the battlefield, sacrifice it unless {R} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.R)), false), new ManaSpentToCastWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.R)), false));
     }
 
     private CryptChampion(final CryptChampion card) {

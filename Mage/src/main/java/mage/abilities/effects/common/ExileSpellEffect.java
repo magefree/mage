@@ -24,7 +24,7 @@ public class ExileSpellEffect extends OneShotEffect {
 
     @Override
     public ExileSpellEffect copy() {
-        return new ExileSpellEffect();
+        return new ExileSpellEffect(this);
     }
 
     @Override

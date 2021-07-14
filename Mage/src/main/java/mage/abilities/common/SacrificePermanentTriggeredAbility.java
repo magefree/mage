@@ -43,8 +43,8 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && filter.match(game.getPermanentOrLKIBattlefield(event.getTargetId()), game);
+        return isControlledBy(event.getPlayerId())
+                && filter.match(game.getPermanentOrLKIBattlefield(event.getTargetId()), getSourceId(), getControllerId(), game);
     }
 
     @Override

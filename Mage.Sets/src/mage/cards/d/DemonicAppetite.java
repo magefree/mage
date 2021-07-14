@@ -51,17 +51,3 @@ public final class DemonicAppetite extends CardImpl {
         return new DemonicAppetite(this);
     }
 }
-
-class DemonicAppetiteEffect extends SacrificeTargetEffect {
-
-    DemonicAppetiteEffect() {
-        super();
-        staticText = "sacrifice a creature";
-    }
-
-    @Override
-    public DemonicAppetiteEffect copy() {
-        return new DemonicAppetiteEffect();
-    }
-
-}

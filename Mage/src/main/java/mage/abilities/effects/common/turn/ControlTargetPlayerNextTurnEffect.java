@@ -1,12 +1,12 @@
-
 package mage.abilities.effects.common.turn;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -35,6 +35,6 @@ public class ControlTargetPlayerNextTurnEffect extends OneShotEffect {
 
     @Override
     public ControlTargetPlayerNextTurnEffect copy() {
-        return new ControlTargetPlayerNextTurnEffect();
+        return new ControlTargetPlayerNextTurnEffect(this);
     }
 }

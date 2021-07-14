@@ -126,7 +126,7 @@ class GargantuanGorillaFightEffect extends OneShotEffect {
             Permanent creature1 = game.getPermanent(getTargetPointer().getFirst(game, source));
             // 20110930 - 701.10
             if (creature1 != null && sourcePermanent != null) {
-                if (creature1.isCreature() && sourcePermanent.isCreature()) {
+                if (creature1.isCreature(game) && sourcePermanent.isCreature(game)) {
                     sourcePermanent.damage(creature1.getPower().getValue(), creature1.getId(), source, game, false, true);
                     creature1.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), source, game, false, true);
                     return true;

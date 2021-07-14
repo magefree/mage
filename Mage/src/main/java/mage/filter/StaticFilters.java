@@ -316,6 +316,12 @@ public final class StaticFilters {
         FILTER_CONTROLLED_A_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_SHORT_TEXT = new FilterControlledPermanent("permanent");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_SHORT_TEXT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT = new FilterControlledArtifactPermanent();
 
     static {

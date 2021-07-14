@@ -90,7 +90,7 @@ class SeaGateStormcallerDelayedTriggeredAbility extends DelayedTriggeredAbility 
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell == null || !spell.isInstantOrSorcery() || spell.getManaValue() > 2) {
+        if (spell == null || !spell.isInstantOrSorcery(game) || spell.getManaValue() > 2) {
             return false;
         }
         for (Effect effect : this.getEffects()) {

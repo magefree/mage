@@ -134,10 +134,10 @@ class DampingEngineEffect extends ContinuousRuleModifyingEffectImpl {
         if (player == null || dampingEngine == null || card == null) {
             return false;
         }
-        if (!card.isCreature()
-                && !card.isArtifact()
-                && !card.isEnchantment()
-                && !card.isLand()) {
+        if (!card.isCreature(game)
+                && !card.isArtifact(game)
+                && !card.isEnchantment(game)
+                && !card.isLand(game)) {
             return false;
         }
         return DampingEngine.checkPlayer(player, game)

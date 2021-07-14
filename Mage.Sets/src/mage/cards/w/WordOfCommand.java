@@ -162,7 +162,7 @@ class WordOfCommandEffect extends OneShotEffect {
     private boolean checkPlayability(Card card, Player targetPlayer, Game game, Ability source) {
         // check for card playability
         boolean canPlay = false;
-        if (card.isLand()) { // we can't use getPlayableObjects(game) in here because it disallows playing lands outside the main step // TODO: replace to getPlayable() checks with disable step condition?
+        if (card.isLand(game)) { // we can't use getPlayableObjects(game) in here because it disallows playing lands outside the main step // TODO: replace to getPlayable() checks with disable step condition?
             if (targetPlayer.canPlayLand()
                     && game.getActivePlayerId().equals(targetPlayer.getId())) {
                 for (Ability ability : card.getAbilities(game)) {
@@ -207,7 +207,7 @@ class WordOfCommandCantActivateEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return !permanent.isLand() && permanent.getControllerId().equals(this.targetPointer.getFirst(game, source));
+        return !permanent.isLand(game) && permanent.getControllerId().equals(this.targetPointer.getFirst(game, source));
     }
 
     @Override

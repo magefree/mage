@@ -64,7 +64,7 @@ class RumblingRuinEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int counter = 1;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent == null || !permanent.isCreature()) {
+            if (permanent == null || !permanent.isCreature(game)) {
                 continue;
             }
             counter += permanent.getCounters(game).getCount(CounterType.P1P1);

@@ -22,6 +22,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.FoodToken;
 import mage.target.common.TargetControlledPermanent;
@@ -66,7 +67,7 @@ public final class GyomeMasterChef extends CardImpl {
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         ), new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        ability.addEffect(new TapTargetEffect().setText("it"));
+        ability.addEffect(new TapTargetEffect("tap it"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -110,10 +111,14 @@ class GyomeMasterChefWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                && !(((EntersTheBattlefieldEvent) event).getTarget() instanceof PermanentToken)) {
-            playerMap.compute(event.getPlayerId(), (u, i) -> i != null ? Integer.sum(i, 1) : 1);
+        if (event.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+            return;
         }
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
+        if (permanent == null || permanent instanceof PermanentToken || !permanent.isCreature(game)) {
+            return;
+        }
+        playerMap.compute(event.getPlayerId(), (u, i) -> i != null ? Integer.sum(i, 1) : 1);
     }
 
     @Override

@@ -37,10 +37,12 @@ public final class CustodiSquire extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Will of the council - When Custodi Squire enters the battlefield, starting with you, each player votes for an artifact, creature, or enchantment card in your graveyard. Return each card with the most votes or tied for most votes to your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new CustodiSquireVoteEffect(), false, true
-        ));
+                new CustodiSquireVoteEffect(), false)
+                .withFlavorWord("Will of the council")
+        );
     }
 
     private CustodiSquire(final CustodiSquire card) {
@@ -57,8 +59,7 @@ class CustodiSquireVoteEffect extends OneShotEffect {
 
     CustodiSquireVoteEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Will of the council</i> &mdash; When {this} enters the battlefield, " +
-                "starting with you, each player votes for an artifact, creature, or enchantment card in your graveyard. " +
+        this.staticText = "starting with you, each player votes for an artifact, creature, or enchantment card in your graveyard. " +
                 "Return each card with the most votes or tied for most votes to your hand";
     }
 

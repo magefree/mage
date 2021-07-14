@@ -1,21 +1,23 @@
 package mage.cards.k;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.LegendarySpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetNonlandPermanent;
+
+import java.util.UUID;
 
 /**
  * @author JRHerlehy Created on 4/8/18.
@@ -69,15 +71,8 @@ class KarnsTemporalSunderingEffect extends OneShotEffect {
         Permanent returnPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
 
         if (returnPermanent != null) {
-            Card returnCard = returnPermanent.getMainCard();
-            if(returnCard != null) {
-                Player cardOwner = game.getPlayer(returnCard.getOwnerId());
-                if (cardOwner != null) {
-                    cardOwner.moveCards(returnCard, Zone.HAND, source, game);
-                }
-            }
+            controller.moveCards(returnPermanent, Zone.HAND, source, game);
         }
-
         return true;
     }
 

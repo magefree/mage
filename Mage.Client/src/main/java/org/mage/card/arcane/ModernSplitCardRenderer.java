@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class ModernSplitCardRenderer extends ModernCardRenderer {
 
-    private class HalfCardProps {
+    private static class HalfCardProps {
 
         int x, y, w, h, cw, ch;
 
@@ -28,11 +29,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         List<TextboxRule> keywords = new ArrayList<>();
     }
 
-    private static final ArrayList<CardType> ONLY_LAND_TYPE = new ArrayList<CardType>() {
-        {
-            add(CardType.LAND);
-        }
-    };
+    private static final List<CardType> ONLY_LAND_TYPE = Arrays.asList(CardType.LAND);
 
     // Right and left halves of the card content
     private HalfCardProps rightHalf = new HalfCardProps();

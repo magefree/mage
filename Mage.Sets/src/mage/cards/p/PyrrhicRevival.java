@@ -73,7 +73,7 @@ class PyrrhicRevivalEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 for (Card card : player.getGraveyard().getCards(game)) {
-                    if (card != null && card.isCreature()) {
+                    if (card != null && card.isCreature(game)) {
                         toBattlefield.add(card);
                         ContinuousEffect effect = new EntersBattlefieldEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance()));
                         effect.setDuration(Duration.OneUse);

@@ -87,7 +87,7 @@ class PulseOfLlanowarReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent != null && permanent.isLand()) {
+        if (permanent != null && permanent.isLand(game)) {
             return filter.match(permanent, game);
         }
         return false;

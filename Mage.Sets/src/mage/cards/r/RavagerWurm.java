@@ -74,7 +74,7 @@ enum RavagerWurmPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return input != null && input.isLand()
+        return input != null && input.isLand(game)
                 && input
                 .getAbilities(game)
                 .stream()

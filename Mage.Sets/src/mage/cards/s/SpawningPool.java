@@ -10,7 +10,7 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.permanent.token.SkeletonToken;
+import mage.game.permanent.token.SkeletonRegenerateToken;
 
 /**
  *
@@ -22,7 +22,7 @@ public final class SpawningPool extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new BlackManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SkeletonToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SkeletonRegenerateToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{B}")));
     }
 
     private SpawningPool(final SpawningPool card) {

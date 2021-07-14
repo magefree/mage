@@ -49,8 +49,8 @@ import org.apache.log4j.Logger;
 
 import java.awt.*;
 import java.io.Serializable;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 
@@ -2062,7 +2062,7 @@ public class HumanPlayer extends PlayerImpl {
                 return;
             }
         }
-        if (userData.isUseFirstManaAbility() && object instanceof Permanent && object.isLand()) {
+        if (userData.isUseFirstManaAbility() && object instanceof Permanent && object.isLand(game)) {
             ActivatedAbility ability = abilities.values().iterator().next();
             if (ability instanceof ActivatedManaAbilityImpl) {
                 activateAbility(ability, game);
@@ -2178,7 +2178,7 @@ public class HumanPlayer extends PlayerImpl {
 
         if (modes.size() > 1) {
             // done option for up to choices
-            boolean canEndChoice = modes.getSelectedModes().size() >= modes.getMinModes();
+            boolean canEndChoice = modes.getSelectedModes().size() >= modes.getMinModes() || modes.isMayChooseNone();
             MageObject obj = game.getObject(source.getSourceId());
             Map<UUID, String> modeMap = new LinkedHashMap<>();
             int modeIndex = 0;

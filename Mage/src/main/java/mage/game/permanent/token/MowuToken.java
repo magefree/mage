@@ -12,7 +12,7 @@ import mage.constants.SuperType;
 public final class MowuToken extends TokenImpl {
 
     public MowuToken() {
-        super("Mowu", "legendary 3/3 green Dog creature token named Mowu");
+        super("Mowu", "Mowu, a legendary 3/3 green Dog creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         this.addSuperType(SuperType.LEGENDARY);

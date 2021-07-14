@@ -93,6 +93,6 @@ enum UrzasSagaPredicate implements Predicate<Card> {
 
     @Override
     public boolean apply(Card input, Game game) {
-        return costs.contains(input.getManaCostSymbols().stream().reduce(String::join));
+        return costs.contains(String.join("", input.getManaCostSymbols()));
     }
 }

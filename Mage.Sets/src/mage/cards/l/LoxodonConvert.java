@@ -16,6 +16,7 @@ public final class LoxodonConvert extends CardImpl {
 
     public LoxodonConvert(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ELEPHANT);
         this.subtype.add(SubType.SOLDIER);
 

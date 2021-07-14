@@ -17,6 +17,7 @@ public final class QuilledSlagwurm extends CardImpl {
 
     public QuilledSlagwurm (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.WURM);
 
         this.power = new MageInt(8);

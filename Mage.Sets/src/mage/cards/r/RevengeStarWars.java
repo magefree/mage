@@ -90,7 +90,7 @@ class RevengeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
-        if (target != null && target.isCreature()) {
+        if (target != null && target.isCreature(game)) {
             ContinuousEffect effect = new BoostTargetEffect(4, 0, Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(target.getId()));
             game.addEffect(effect, source);

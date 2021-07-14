@@ -70,7 +70,7 @@ class WildEvocationEffect extends OneShotEffect {
                 Cards cards = new CardsImpl(card);
                 player.revealCards(sourceObject.getIdName() + " Turn: " 
                         + game.getTurnNum(), cards, game);
-                if (card.isLand()) {
+                if (card.isLand(game)) {
                     player.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else if (card.getSpellAbility() != null) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);

@@ -45,7 +45,7 @@ import java.util.UUID;
  */
 public class StackAbility extends StackObjectImpl implements Ability {
 
-    private static final ArrayList<CardType> emptyCardType = new ArrayList<>();
+    private static final List<CardType> emptyCardType = new ArrayList<>();
     private static final List<String> emptyString = new ArrayList<>();
     private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
@@ -158,7 +158,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public ArrayList<CardType> getCardType() {
+    public List<CardType> getCardType(Game game) {
         return emptyCardType;
     }
 
@@ -493,6 +493,16 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public Ability setAbilityWord(AbilityWord abilityWord) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public Ability withFlavorWord(String flavorWord) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public Ability withFirstModeFlavorWord(String flavorWord) {
         throw new UnsupportedOperationException("Not supported.");
     }
 

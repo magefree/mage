@@ -38,8 +38,8 @@ public final class ConsumeSpirit extends CardImpl {
 
         // Consume Spirit deals X damage to any target and you gain X life.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
-        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.instance).concatBy("and"));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR).concatBy("and"));
         VariableCost variableCost = this.getSpellAbility().getManaCostsToPay().getVariableCosts().get(0);
         if (variableCost instanceof VariableManaCost) {
             ((VariableManaCost) variableCost).setFilter(filterBlack);

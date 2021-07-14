@@ -20,7 +20,6 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.players.Player;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -42,7 +41,6 @@ public final class BatwingBrume extends CardImpl {
                 new BatwingBrumeEffect(),
                 new ManaWasSpentCondition(ColoredManaSymbol.B), "Each player loses 1 life for each attacking creature they control if {B} was spent to cast this spell"));
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {W}{B} was spent.)</i>"));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
 
     }
 

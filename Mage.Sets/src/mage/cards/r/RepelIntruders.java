@@ -12,7 +12,6 @@ import mage.constants.ColoredManaSymbol;
 import mage.filter.common.FilterCreatureSpell;
 import mage.game.permanent.token.KithkinSoldierToken;
 import mage.target.TargetSpell;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -36,7 +35,6 @@ public final class RepelIntruders extends CardImpl {
                 new ManaWasSpentCondition(ColoredManaSymbol.U), " Counter up to one target creature spell if {U} was spent to cast this spell"));
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {W}{U} was spent.)</i>"));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
 
     }
 

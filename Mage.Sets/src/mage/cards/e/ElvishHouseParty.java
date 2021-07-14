@@ -62,7 +62,7 @@ class CurrentHourCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public CurrentHourCount copy() {
         return new CurrentHourCount();
     }
 

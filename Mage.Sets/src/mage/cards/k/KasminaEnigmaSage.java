@@ -19,7 +19,7 @@ import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.SharesColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.QuandrixToken;
+import mage.game.permanent.token.FractalToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
@@ -46,7 +46,7 @@ public final class KasminaEnigmaSage extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ScryEffect(1), 2));
 
         // −X: Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it.
-        this.addAbility(new LoyaltyAbility(QuandrixToken.getEffect(
+        this.addAbility(new LoyaltyAbility(FractalToken.getEffect(
                 GetXLoyaltyValue.instance, "Put X +1/+1 counters on it"
         )));
 

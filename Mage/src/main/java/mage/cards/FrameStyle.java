@@ -39,7 +39,11 @@ public enum FrameStyle {
     /**
      * Unstable full art lands
      */
-    UST_FULL_ART_BASIC(BorderType.SPC, true);
+    UST_FULL_ART_BASIC(BorderType.SPC, true),
+    /**
+     * Arena New Player Experience full art lands
+     */
+    ANA_FULL_ART_BASIC(BorderType.M15, true);
 
 
     /**

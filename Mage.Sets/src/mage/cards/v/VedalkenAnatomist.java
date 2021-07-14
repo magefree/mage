@@ -25,6 +25,7 @@ public final class VedalkenAnatomist extends CardImpl {
 
     public VedalkenAnatomist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.VEDALKEN);
         this.subtype.add(SubType.WIZARD);
 

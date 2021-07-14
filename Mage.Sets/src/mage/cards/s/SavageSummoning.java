@@ -98,12 +98,12 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
             MageObject mageObject = game.getBaseObject(objectId);
             if (mageObject instanceof Commander) {
                 Commander commander = (Commander) mageObject;
-                if (commander.isCreature() && commander.isControlledBy(source.getControllerId())) {
+                if (commander.isCreature(game) && commander.isControlledBy(source.getControllerId())) {
                     return true;
                 }
             } else if (mageObject instanceof Card) {
                 Card card = (Card) mageObject;
-                if (card.isCreature() && card.isOwnedBy(source.getControllerId())) {
+                if (card.isCreature(game) && card.isOwnedBy(source.getControllerId())) {
                     return true;
                 }
             }
@@ -128,7 +128,7 @@ class SavageSummoningWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             if (isSavageSummoningSpellActive() && event.getPlayerId().equals(getControllerId())) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && spell.isCreature()) {
+                if (spell != null && spell.isCreature(game)) {
                     spellsCastWithSavageSummoning.put(spell.getId(), new HashSet<>(savageSummoningSpells));
                     String cardKey = spell.getCard().getId().toString() + '_' + spell.getCard().getZoneChangeCounter(game);
                     cardsCastWithSavageSummoning.put(cardKey, new HashSet<>(savageSummoningSpells));

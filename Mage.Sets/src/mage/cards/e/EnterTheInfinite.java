@@ -62,7 +62,7 @@ class CardsInControllerLibraryCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public CardsInControllerLibraryCount copy() {
         return new CardsInControllerLibraryCount();
     }
 

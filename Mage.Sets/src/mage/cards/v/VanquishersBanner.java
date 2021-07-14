@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 
 /**
@@ -84,7 +83,7 @@ class DrawCardIfCreatureTypeAbility extends TriggeredAbilityImpl {
         if (subType != null) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null
-                    && spell.isCreature()
+                    && spell.isCreature(game)
                     && spell.hasSubtype(subType, game)
                     && spell.isControlledBy(getControllerId())) {
                 return true;

@@ -23,7 +23,7 @@ public final class HydraBroodmasterToken extends TokenImpl {
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);
 
-        availableImageSetCodes = Arrays.asList("JOU");
+        availableImageSetCodes = Arrays.asList("JOU", "C21");
     }
 
     public HydraBroodmasterToken(final HydraBroodmasterToken token) {

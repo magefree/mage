@@ -8,6 +8,7 @@ import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -32,7 +33,7 @@ public final class CollapsingBorders extends CardImpl {
         effect.setText("Then {this} deals 3 damage to that player");
         ability.addEffect(effect);
         ability.setAbilityWord(AbilityWord.DOMAIN);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(DomainHint.instance));
     }
 
     private CollapsingBorders(final CollapsingBorders card) {

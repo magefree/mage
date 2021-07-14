@@ -7,14 +7,12 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.Mana;
 
 /**
  * @author pcasaretto_at_gmail.com
@@ -75,7 +73,7 @@ class HeartstoneEffect extends CostModificationEffectImpl {
                 && (abilityToModify instanceof ActivatedAbility))) {
             // Activated abilities of creatures
             Permanent permanent = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
-            return permanent != null && permanent.isCreature();
+            return permanent != null && permanent.isCreature(game);
         }
         return false;
     }

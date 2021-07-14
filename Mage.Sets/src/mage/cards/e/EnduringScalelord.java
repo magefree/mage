@@ -75,7 +75,7 @@ class EnduringScalelordTriggeredAbility extends TriggeredAbilityImpl {
             }
             return (permanent != null
                     && !event.getTargetId().equals(this.getSourceId())
-                    && permanent.isCreature()
+                    && permanent.isCreature(game)
                     && permanent.isControlledBy(this.getControllerId()));
         }
         return false;

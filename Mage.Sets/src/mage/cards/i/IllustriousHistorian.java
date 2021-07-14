@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.game.permanent.token.LoreholdToken;
+import mage.game.permanent.token.Spirit32Token;
 
 import java.util.UUID;
 
@@ -32,7 +32,7 @@ public final class IllustriousHistorian extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
                 new CreateTokenEffect(
-                        new LoreholdToken(), 1, true, false
+                        new Spirit32Token(), 1, true, false
                 ), new GenericManaCost(5)
         );
         ability.addCost(new ExileSourceFromGraveCost());

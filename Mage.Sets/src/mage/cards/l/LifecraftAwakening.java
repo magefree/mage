@@ -37,7 +37,7 @@ public final class LifecraftAwakening extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{G}");
 
         // Put X +1/+1 counters on target artifact you control. If it isn't a creature or Vehicle, it becomes a 0/0 Construct artifact creature.
-        ManacostVariableValue manaX = ManacostVariableValue.instance;
+        ManacostVariableValue manaX = ManacostVariableValue.REGULAR;
         getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(), manaX));
         getSpellAbility().addTarget(new TargetArtifactPermanent(filter));
         getSpellAbility().addEffect(new LifecraftAwakeningEffect());
@@ -72,7 +72,7 @@ class LifecraftAwakeningEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
-        if (!permanent.isCreature() && !permanent.hasSubtype(SubType.VEHICLE, game)) {
+        if (!permanent.isCreature(game) && !permanent.hasSubtype(SubType.VEHICLE, game)) {
             ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new LifecraftAwakeningToken(), false, true, Duration.Custom);
             continuousEffect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(continuousEffect, source);

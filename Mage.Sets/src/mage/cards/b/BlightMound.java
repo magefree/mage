@@ -18,7 +18,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.WitherbloomToken;
+import mage.game.permanent.token.Pest11GainLifeToken;
 
 import java.util.UUID;
 
@@ -51,7 +51,7 @@ public final class BlightMound extends CardImpl {
 
         // Whenever a nontoken creature you control dies, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new CreateTokenEffect(new WitherbloomToken()), false, filter2
+                new CreateTokenEffect(new Pest11GainLifeToken()), false, filter2
         ));
     }
 

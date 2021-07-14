@@ -261,7 +261,15 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public boolean containsKey(UUID abilityId) { // TODO: remove
-        return stream().map(T::getId).anyMatch(abilityId::equals);
+        if (abilityId == null) {
+            return false;
+        }
+        for (T ability : this) {
+            if (ability != null && abilityId.equals(ability.getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

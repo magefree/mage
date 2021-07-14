@@ -20,7 +20,7 @@ public final class UntamedMight extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}");
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(ManacostVariableValue.instance, ManacostVariableValue.instance, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(ManacostVariableValue.REGULAR, ManacostVariableValue.REGULAR, Duration.EndOfTurn));
     }
 
     private UntamedMight(final UntamedMight card) {

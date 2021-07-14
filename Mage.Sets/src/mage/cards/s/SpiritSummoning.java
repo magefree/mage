@@ -5,7 +5,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.LoreholdToken;
+import mage.game.permanent.token.Spirit32Token;
 
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ public final class SpiritSummoning extends CardImpl {
         this.subtype.add(SubType.LESSON);
 
         // Create a 3/2 red and white Spirit creature token.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new LoreholdToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new Spirit32Token()));
     }
 
     private SpiritSummoning(final SpiritSummoning card) {

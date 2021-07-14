@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.PrismariToken;
+import mage.game.permanent.token.Elemental44Token;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTargetAmount;
@@ -32,9 +32,9 @@ public final class MagmaOpus extends CardImpl {
         // Magma Opus deals 4 damage divided as you choose among any number of targets. Tap two target permanents. Create a 4/4 blue and red Elemental creature token. Draw two cards.
         this.getSpellAbility().addEffect(new DamageMultiEffect(4));
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4).withChooseHint("damage"));
-        this.getSpellAbility().addEffect(new TapTargetEffect().setTargetPointer(new SecondTargetPointer()).setText("two target permanents"));
+        this.getSpellAbility().addEffect(new TapTargetEffect("tap two target permanents").setTargetPointer(new SecondTargetPointer()));
         this.getSpellAbility().addTarget(new TargetPermanent(2, StaticFilters.FILTER_PERMANENTS).withChooseHint("tap"));
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new PrismariToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new Elemental44Token()));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("Draw two cards"));
 
         // {U/R}{U/R}, Discard Magma Opus: Create a Treasure token.

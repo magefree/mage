@@ -87,6 +87,6 @@ class DesertionReplacementEffect extends ReplacementEffectImpl {
         }
         MageObject mageObject = game.getObject(event.getTargetId());
         return mageObject != null
-                && (mageObject.isArtifact() || mageObject.isCreature());
+                && (mageObject.isArtifact(game) || mageObject.isCreature(game));
     }
 }

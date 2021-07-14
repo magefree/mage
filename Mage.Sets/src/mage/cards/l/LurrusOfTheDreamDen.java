@@ -69,7 +69,7 @@ enum LurrusOfTheDreamDenCompanionCondition implements CompanionCondition {
     @Override
     public boolean isLegal(Set<Card> deck, int startingSize) {
         return deck.stream()
-                .filter(MageObject::isPermanent)
+                .filter(card -> card.isPermanent())
                 .mapToInt(MageObject::getManaValue)
                 .max()
                 .orElse(0) <= 2;
@@ -105,7 +105,7 @@ class LurrusOfTheDreamDenCastFromGraveyardEffect extends AsThoughEffectImpl {
             Card objectCard = game.getCard(objectId);
             Permanent sourceObject = game.getPermanent(source.getSourceId());
             if (sourceObject != null && objectCard != null
-                    && objectCard.isPermanent()
+                    && objectCard.isPermanent(game)
                     && objectCard.isOwnedBy(source.getControllerId())
                     && objectCard.getManaValue() < 3
                     && objectCard.getSpellAbility() != null

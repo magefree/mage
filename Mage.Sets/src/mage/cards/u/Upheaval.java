@@ -17,7 +17,7 @@ public final class Upheaval extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
 
         // Return all permanents to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(StaticFilters.FILTER_PERMANENT));
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(StaticFilters.FILTER_PERMANENTS));
     }
 
     private Upheaval(final Upheaval card) {

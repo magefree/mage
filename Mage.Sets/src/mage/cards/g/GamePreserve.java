@@ -67,7 +67,7 @@ class DuskmarEffect extends OneShotEffect {
                     Card card = player.getLibrary().removeFromTop(game);
                     if (card != null) {
                         cards.add(card);
-                        if (!card.isCreature()) {
+                        if (!card.isCreature(game)) {
                             putToPlay = false;
                         }
                         player.revealCards(source, "- Revealed by " + player.getName(), cards, game);

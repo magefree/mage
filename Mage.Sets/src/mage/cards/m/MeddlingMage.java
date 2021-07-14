@@ -87,7 +87,6 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
         MageObject object = game.getObject(event.getSourceId());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         return object != null
-                && !object.isCopy()
                 && CardUtil.haveSameNames(object, cardName, game);
     }
 }

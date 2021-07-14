@@ -13,9 +13,10 @@ import java.util.Arrays;
 public final class WurmWithLifelinkToken extends TokenImpl {
 
     public WurmWithLifelinkToken() {
-        super("Wurm", "3/3 colorless Wurm artifact creature token with lifelink");
+        super("Phyrexian Wurm", "3/3 colorless Phyrexian Wurm artifact creature token with lifelink");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
+        subtype.add(SubType.PHYREXIAN);
         subtype.add(SubType.WURM);
         power = new MageInt(3);
         toughness = new MageInt(3);

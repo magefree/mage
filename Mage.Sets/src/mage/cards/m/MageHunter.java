@@ -62,7 +62,7 @@ class MageHunterTriggeredAbility extends TriggeredAbilityImpl {
         Spell spell = game.getSpell(event.getTargetId());
         if (spell == null
                 || !game.getOpponents(getControllerId()).contains(spell.getControllerId())
-                || !spell.isInstantOrSorcery()) {
+                || !spell.isInstantOrSorcery(game)) {
             return false;
         }
         getEffects().setTargetPointer(new FixedTarget(spell.getControllerId()));

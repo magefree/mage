@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.WitherbloomToken;
+import mage.game.permanent.token.Pest11GainLifeToken;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -27,7 +27,7 @@ public final class TendThePests extends CardImpl {
 
         // Create X 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life," where X is the sacrificed creature's power.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new WitherbloomToken(), SacrificeCostCreaturesPower.instance
+                new Pest11GainLifeToken(), SacrificeCostCreaturesPower.instance
         ).setText("create X 1/1 black and green Pest creature tokens with " +
                 "\"When this creature dies, you gain 1 life,\" where X is the sacrificed creature's power"));
     }

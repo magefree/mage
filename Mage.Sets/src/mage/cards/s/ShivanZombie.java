@@ -18,6 +18,7 @@ public final class ShivanZombie extends CardImpl {
 
     public ShivanZombie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BARBARIAN);
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(2);

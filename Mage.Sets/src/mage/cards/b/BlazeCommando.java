@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.SoldierTokenWithHaste;
 
 import java.util.ArrayList;
@@ -93,7 +92,7 @@ class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
         if (isControlledBy(game.getControllerId(event.getSourceId()))) {
             MageObject damageSource = game.getObject(event.getSourceId());
             if (damageSource != null) {
-                if (damageSource.isInstantOrSorcery()) {
+                if (damageSource.isInstantOrSorcery(game)) {
                     if (!handledStackObjects.contains(damageSource.getId())) {
                         handledStackObjects.add(damageSource.getId());
                         return true;

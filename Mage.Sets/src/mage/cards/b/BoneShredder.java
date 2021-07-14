@@ -34,6 +34,7 @@ public final class BoneShredder extends CardImpl {
 
     public BoneShredder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.MINION);
 
         this.power = new MageInt(1);

@@ -128,7 +128,7 @@ class KroxaTitanOfDeathsHungerDiscardEffect extends OneShotEffect {
                     Player player = game.getPlayer(card.getOwnerId());
                     if (player == null
                             || !player.discard(card, false, source, game)
-                            || card.isLand()) {
+                            || card.isLand(game)) {
                         return;
                     }
                     playerSet.add(player.getId());

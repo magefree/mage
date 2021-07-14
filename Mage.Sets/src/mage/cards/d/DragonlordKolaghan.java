@@ -87,7 +87,7 @@ class DragonlordKolaghanTriggeredAbility extends TriggeredAbilityImpl {
         Player controller = game.getPlayer(getControllerId());
         if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
             Spell spell = game.getStack().getSpell(event.getSourceId());
-            if (spell != null && !spell.isFaceDown(game) && (spell.isCreature() || spell.isPlaneswalker())) {
+            if (spell != null && !spell.isFaceDown(game) && (spell.isCreature(game) || spell.isPlaneswalker(game))) {
                 Player opponent = game.getPlayer(event.getPlayerId());
                 if(opponent != null) {
                     boolean sameName = false;

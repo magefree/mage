@@ -29,7 +29,7 @@ public final class TribalUnity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{2}{G}");
 
         // Creatures of the creature type of your choice get +X/+X until end of turn.
-        this.getSpellAbility().addEffect(new TribalUnityEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new TribalUnityEffect(ManacostVariableValue.REGULAR));
     }
 
     private TribalUnity(final TribalUnity card) {

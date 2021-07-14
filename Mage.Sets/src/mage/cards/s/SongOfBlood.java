@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -14,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -75,7 +73,7 @@ class SongOfBloodEffect extends OneShotEffect {
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(card -> game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
-                .filter(MageObject::isCreature)
+                .filter(card1 -> card1.isCreature(game))
                 .mapToInt(x -> 1)
                 .sum();
         // Setup a delayed trigger to give +X/+0 to any creature attacking this turn..

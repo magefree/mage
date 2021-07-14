@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 
@@ -89,9 +88,9 @@ class ChandrasPhoenixTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 if (sourceObjectDamage != null) {
                     if (sourceObjectDamage.getColor(game).isRed()
-                            && (sourceObjectDamage.isPlaneswalker()
-                            || sourceObjectDamage.isInstant()
-                            || sourceObjectDamage.isSorcery())) {
+                            && (sourceObjectDamage.isPlaneswalker(game)
+                            || sourceObjectDamage.isInstant(game)
+                            || sourceObjectDamage.isSorcery(game))) {
                         return true;
                     }
                 }

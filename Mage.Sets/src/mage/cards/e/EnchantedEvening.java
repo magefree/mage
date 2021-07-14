@@ -54,7 +54,7 @@ public final class EnchantedEvening extends CardImpl {
                     source.getSourceId(), game
             )) {
                 if (permanent != null) {
-                    permanent.addCardType(CardType.ENCHANTMENT);
+                    permanent.addCardType(game, CardType.ENCHANTMENT);
                 }
             }
             return true;

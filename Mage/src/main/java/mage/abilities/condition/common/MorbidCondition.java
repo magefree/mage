@@ -1,4 +1,3 @@
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -10,7 +9,6 @@ import mage.watchers.common.MorbidWatcher;
  * @author nantuko
  */
 public enum MorbidCondition implements Condition {
-
     instance;
 
     @Override
@@ -23,5 +21,4 @@ public enum MorbidCondition implements Condition {
     public String toString() {
         return "if a creature died this turn";
     }
-
 }

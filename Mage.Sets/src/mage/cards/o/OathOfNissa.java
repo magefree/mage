@@ -132,7 +132,7 @@ class OathOfNissaSpendAnyManaEffect extends AsThoughEffectImpl implements AsThou
         objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         if (source.isControlledBy(affectedControllerId)) {
             MageObject mageObject = game.getObject(objectId);
-            return mageObject != null && mageObject.isPlaneswalker();
+            return mageObject != null && mageObject.isPlaneswalker(game);
         }
         return false;
     }

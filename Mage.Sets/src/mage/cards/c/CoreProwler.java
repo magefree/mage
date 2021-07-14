@@ -18,6 +18,7 @@ public final class CoreProwler extends CardImpl {
 
     public CoreProwler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

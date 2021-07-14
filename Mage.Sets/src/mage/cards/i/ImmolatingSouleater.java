@@ -22,6 +22,7 @@ public final class ImmolatingSouleater extends CardImpl {
 
     public ImmolatingSouleater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.DOG);
 
         this.power = new MageInt(1);

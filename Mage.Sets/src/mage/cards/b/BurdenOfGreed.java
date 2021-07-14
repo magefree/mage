@@ -54,7 +54,7 @@ class BurdenOfGreedCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public BurdenOfGreedCount copy() {
         return new BurdenOfGreedCount();
     }
 

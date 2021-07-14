@@ -19,7 +19,6 @@ import mage.filter.FilterSpell;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -49,8 +48,8 @@ public final class GadwickTheWizened extends CardImpl {
 
         // When Gadwick, the Wizened enters the battlefield, draw X cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(ManacostVariableValue.instance)
-        ), new ManaSpentToCastWatcher());
+                new DrawCardSourceControllerEffect(ManacostVariableValue.ETB)
+        ));
 
         // Whenever you cast a blue spell, tap target nonland permanent an opponent controls.
         Ability ability = new SpellCastControllerTriggeredAbility(new TapTargetEffect(), filter, false);

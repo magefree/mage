@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -57,7 +56,7 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()
-                && zEvent.getTarget().isArtifact()
+                && zEvent.getTarget().isArtifact(game)
                 && zEvent.getTarget().isOwnedBy(this.controllerId)) {
             this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId()));
             return true;

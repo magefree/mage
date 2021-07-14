@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -30,7 +29,7 @@ public final class ClockworkServant extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 AdamantCondition.ANY, "<br><i>Adamant</i> &mdash; When {this} enters the battlefield, " +
                 "if at least three mana of the same color was spent to cast it, draw a card."
-        ), new ManaSpentToCastWatcher());
+        ));
     }
 
     private ClockworkServant(final ClockworkServant card) {

@@ -60,7 +60,7 @@ class GalvanothEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 controller.lookAtCards(source, null, new CardsImpl(card), game);
-                if (card.isInstantOrSorcery()) {
+                if (card.isInstantOrSorcery(game)) {
                     if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
                         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                         controller.cast(controller.chooseAbilityForCast(card, game, true),

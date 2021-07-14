@@ -39,7 +39,9 @@ public final class Spellbinder extends CardImpl {
         // Imprint - When Spellbinder enters the battlefield, you may exile 
         // an instant card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SpellbinderImprintEffect(), true, "<i>Imprint &mdash; </i>"));
+                new SpellbinderImprintEffect(), true)
+                .withFlavorWord("Imprint")
+        );
 
         // Whenever equipped creature deals combat damage to a player, you may 
         // copy the exiled card. If you do, you may cast the copy without paying its mana cost.

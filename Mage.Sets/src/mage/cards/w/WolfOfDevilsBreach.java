@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -40,7 +39,7 @@ public final class WolfOfDevilsBreach extends CardImpl {
         Costs toPay = new CostsImpl<>();
         toPay.add(new ManaCostsImpl<>("{1}{R}"));
         toPay.add(new DiscardCardCost());
-        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(new WolfOfDevilsBreachDiscardCostCardConvertedMana()), toPay,
+        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(new WolfOfDevilsBreachDiscardCostCardConvertedManaCount()), toPay,
                 "Pay {1}{R} and discard a card to let {this} do damage to target creature or planeswalker equal to the discarded card's mana value?", true), false,
                 "Whenever {this} attacks, you may pay {1}{R} and discard a card. If you do, {this} deals damage to target creature or planeswalker "
                 + "equal to the discarded card's mana value.");
@@ -58,7 +57,7 @@ public final class WolfOfDevilsBreach extends CardImpl {
     }
 }
 
-class WolfOfDevilsBreachDiscardCostCardConvertedMana implements DynamicValue {
+class WolfOfDevilsBreachDiscardCostCardConvertedManaCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -84,8 +83,8 @@ class WolfOfDevilsBreachDiscardCostCardConvertedMana implements DynamicValue {
     }
 
     @Override
-    public WolfOfDevilsBreachDiscardCostCardConvertedMana copy() {
-        return new WolfOfDevilsBreachDiscardCostCardConvertedMana();
+    public WolfOfDevilsBreachDiscardCostCardConvertedManaCount copy() {
+        return new WolfOfDevilsBreachDiscardCostCardConvertedManaCount();
     }
 
     @Override

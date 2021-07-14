@@ -30,6 +30,7 @@ public final class BelbeCorruptedObserver extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");
 
         this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.ELF);
         this.power = new MageInt(2);

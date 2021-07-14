@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -34,7 +34,7 @@ public final class TreetopAmbusher extends CardImpl {
         Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(
                 1, 1, Duration.EndOfTurn
         ), false);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
 

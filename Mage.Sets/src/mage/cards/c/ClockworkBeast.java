@@ -59,7 +59,7 @@ public final class ClockworkBeast extends CardImpl {
                 Zone.BATTLEFIELD,
                 new BeastAddCountersSourceEffect(
                         CounterType.P1P0.createInstance(),
-                        ManacostVariableValue.instance,
+                        ManacostVariableValue.REGULAR,
                         true, true
                 ),
                 new ManaCostsImpl("{X}"),

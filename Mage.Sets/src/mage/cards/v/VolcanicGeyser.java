@@ -20,7 +20,7 @@ public final class VolcanicGeyser extends CardImpl {
 
 
         // Volcanic Geyser deals X damage to any target.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 

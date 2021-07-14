@@ -12,6 +12,7 @@ import mage.game.Game;
  */
 public enum CounterType {
 
+    ACORN("acorn"),
     AEGIS("aegis"),
     AGE("age"),
     AIM("aim"),
@@ -29,7 +30,9 @@ public enum CounterType {
     CHARGE("charge"),
     CHIP("chip"),
     COIN("coin"),
+    COMPONENT("component"),
     CORPSE("corpse"),
+    CORRUPTION("corruption"),
     CREDIT("credit"),
     CRYSTAL("crystal"),
     CUBE("cube"),
@@ -48,6 +51,7 @@ public enum CounterType {
     EGG("egg"),
     ELIXIR("elixir"),
     ENERGY("energy"),
+    ENLIGHTENED("enlightened"),
     EON("eon"),
     EXPERIENCE("experience"),
     EYEBALL("eyeball"),
@@ -70,6 +74,7 @@ public enum CounterType {
     GLYPH("glyph"),
     GOLD("gold"),
     GROWTH("growth"),
+    HARMONY("harmony"),
     HATCHLING("hatchling"),
     HEALING("healing"),
     HEXPROOF("hexproof"),
@@ -166,6 +171,7 @@ public enum CounterType {
     VERSE("verse"),
     VIGILANCE("vigilance"),
     VITALITY("vitality"),
+    VOID("void"),
     VORTEX("vortex"),
     VOW("vow"),
     VOYAGE("voyage"),

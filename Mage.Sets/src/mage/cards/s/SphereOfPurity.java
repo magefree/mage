@@ -57,7 +57,7 @@ class SphereOfPurityEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getControllerId())) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (permanent != null && permanent.isArtifact()) {
+            if (permanent != null && permanent.isArtifact(game)) {
                 return super.applies(event, source, game);
             }
         }

@@ -83,7 +83,7 @@ class BlessedReincarnationEffect extends OneShotEffect {
                     Cards toReveal = new CardsImpl();
                     for (Card card : library.getCards(game)) {
                         toReveal.add(card);
-                        if (card.isCreature()) {
+                        if (card.isCreature(game)) {
                             permanentController.moveCards(card, Zone.BATTLEFIELD, source, game);
                             break;
                         }

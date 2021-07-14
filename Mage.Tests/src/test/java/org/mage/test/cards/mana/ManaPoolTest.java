@@ -229,7 +229,7 @@ public class ManaPoolTest extends CardTestPlayerBase {
     public void test_MultipleMana_OneXAbility() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         //
-        Ability ability = new SimpleActivatedAbility(Zone.ALL, new DamageTargetEffect(ManacostVariableValue.instance), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.ALL, new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl("{X}"));
         ability.addTarget(new TargetAnyTarget());
         addCustomCardWithAbility("damage X", playerA, ability);
 
@@ -261,7 +261,7 @@ public class ManaPoolTest extends CardTestPlayerBase {
                 new AddConditionalManaEffect(Mana.RedMana(10), new SimpleActivatedAbilityManaBuilder()),
                 new ManaCostsImpl("")));
         //
-        Ability ability = new SimpleActivatedAbility(Zone.ALL, new DamageTargetEffect(ManacostVariableValue.instance), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.ALL, new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl("{X}"));
         ability.addTarget(new TargetAnyTarget());
         addCustomCardWithAbility("damage X", playerA, ability);
 
@@ -289,12 +289,12 @@ public class ManaPoolTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt"); // {R}
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1 + 3 + 1);
         //
-        Ability ability = new SimpleActivatedAbility(Zone.ALL, new DamageTargetEffect(ManacostVariableValue.instance), new ManaCostsImpl(""));
+        Ability ability = new SimpleActivatedAbility(Zone.ALL, new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl(""));
         ability.addTarget(new TargetAnyTarget());
         addCustomCardWithAbility("damage X", playerA, ability);
         //
         // {X}: Counter target spell
-        ability = new SimpleActivatedAbility(Zone.ALL, new CounterUnlessPaysEffect(ManacostVariableValue.instance), new ManaCostsImpl("{X}"));
+        ability = new SimpleActivatedAbility(Zone.ALL, new CounterUnlessPaysEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl("{X}"));
         ability.addTarget(new TargetSpell());
         addCustomCardWithAbility("counter until pay X", playerB, ability);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
@@ -338,12 +338,12 @@ public class ManaPoolTest extends CardTestPlayerBase {
                 new AddConditionalManaEffect(Mana.RedMana(10), new SimpleActivatedAbilityManaBuilder()),
                 new ManaCostsImpl("")));
         //
-        Ability ability = new SimpleActivatedAbility(Zone.ALL, new DamageTargetEffect(ManacostVariableValue.instance), new ManaCostsImpl(""));
+        Ability ability = new SimpleActivatedAbility(Zone.ALL, new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl(""));
         ability.addTarget(new TargetAnyTarget());
         addCustomCardWithAbility("damage X", playerA, ability);
         //
         // {X}: Counter target spell
-        ability = new SimpleActivatedAbility(Zone.ALL, new CounterUnlessPaysEffect(ManacostVariableValue.instance), new ManaCostsImpl("{X}"));
+        ability = new SimpleActivatedAbility(Zone.ALL, new CounterUnlessPaysEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl("{X}"));
         ability.addTarget(new TargetSpell());
         addCustomCardWithAbility("counter until pay X", playerB, ability);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 3);

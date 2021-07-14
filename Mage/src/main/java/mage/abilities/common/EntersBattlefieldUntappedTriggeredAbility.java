@@ -12,7 +12,7 @@ public class EntersBattlefieldUntappedTriggeredAbility extends EntersBattlefield
 
     public EntersBattlefieldUntappedTriggeredAbility(Effect effect, boolean optional) {
         super(effect, optional);
-        this.noRule = true;
+        this.ignoreRulesGeneration = true;
     }
 
     private EntersBattlefieldUntappedTriggeredAbility(final EntersBattlefieldUntappedTriggeredAbility ability) {

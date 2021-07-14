@@ -23,6 +23,7 @@ public final class DeathHoodCobra extends CardImpl {
 
     public DeathHoodCobra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SNAKE);
 
         this.power = new MageInt(2);

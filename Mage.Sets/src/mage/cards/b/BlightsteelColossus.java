@@ -21,6 +21,7 @@ public final class BlightsteelColossus extends CardImpl {
 
     public BlightsteelColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{12}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(11);
         this.toughness = new MageInt(11);

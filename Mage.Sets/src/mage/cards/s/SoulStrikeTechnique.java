@@ -40,13 +40,13 @@ public final class SoulStrikeTechnique extends CardImpl {
         // Enchanted creature gets +1/+1 and has vigilance.
         ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1));
         ability.addEffect(new GainAbilityAttachedEffect(
-                VigilanceAbility.getInstance(), AttachmentType.AURA)
-        );
+                VigilanceAbility.getInstance(), AttachmentType.AURA
+        ).setText("and has vigilance"));
         this.addAbility(ability);
 
         // When enchanted creature dies, manifest the top card of your library.
         this.addAbility(new DiesAttachedTriggeredAbility(
-                new ManifestEffect(1), "enchanted"
+                new ManifestEffect(1), "enchanted creature"
         ));
     }
 

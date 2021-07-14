@@ -1,7 +1,6 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -76,7 +75,7 @@ class KillianInkDuelistEffect extends CostModificationEffectImpl {
                     .stream()
                     .map(game::getPermanent)
                     .filter(Objects::nonNull)
-                    .anyMatch(MageObject::isCreature)) {
+                    .anyMatch(permanent -> permanent.isCreature(game))) {
                 CardUtil.reduceCost(abilityToModify, 2);
             }
         // Check selected targets on actual cast
@@ -84,7 +83,7 @@ class KillianInkDuelistEffect extends CostModificationEffectImpl {
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .anyMatch(MageObject::isCreature)) {
+                .anyMatch(permanent -> permanent.isCreature(game))) {
             CardUtil.reduceCost(abilityToModify, 2);
         }
         return true;

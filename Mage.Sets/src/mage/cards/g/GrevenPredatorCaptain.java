@@ -31,6 +31,7 @@ public final class GrevenPredatorCaptain extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
 
         this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(5);

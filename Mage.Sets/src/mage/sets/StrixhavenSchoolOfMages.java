@@ -448,10 +448,10 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
     private void addLesson(List<Card> booster) {
         // Boosters have one Lesson card
         final Rarity rarity;
-        int i = RandomUtil.nextInt(121);
-        if (i < 2) {
+        int i = RandomUtil.nextInt(148);
+        if (i == 0) {
             rarity = Rarity.MYTHIC;
-        } else if (i < 22) {
+        } else if (i < 11) {
             rarity = Rarity.RARE;
         } else {
             rarity = Rarity.COMMON;
@@ -603,9 +603,11 @@ class StrixhavenSchoolOfMagesCollator implements BoosterCollator {
             StrixhavenSchoolOfMagesStructure.L1, StrixhavenSchoolOfMagesStructure.L1,
             StrixhavenSchoolOfMagesStructure.L1, StrixhavenSchoolOfMagesStructure.L1,
             StrixhavenSchoolOfMagesStructure.L1, StrixhavenSchoolOfMagesStructure.L1,
+            StrixhavenSchoolOfMagesStructure.L1, StrixhavenSchoolOfMagesStructure.L1,
+            StrixhavenSchoolOfMagesStructure.L1, StrixhavenSchoolOfMagesStructure.L1,
             StrixhavenSchoolOfMagesStructure.L1,
 
-            StrixhavenSchoolOfMagesStructure.L2, StrixhavenSchoolOfMagesStructure.L2
+            StrixhavenSchoolOfMagesStructure.L2
     );
     private final RarityConfiguration archiveRuns = new RarityConfiguration(
             false,

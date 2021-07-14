@@ -39,6 +39,7 @@ public final class ChancellorOfTheSpires extends CardImpl {
 
     public ChancellorOfTheSpires(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}{U}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SPHINX);
 
         this.power = new MageInt(5);

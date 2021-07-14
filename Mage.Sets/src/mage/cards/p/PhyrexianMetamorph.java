@@ -35,6 +35,7 @@ public final class PhyrexianMetamorph extends CardImpl {
 
     public PhyrexianMetamorph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U/P}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(0);
@@ -43,8 +44,8 @@ public final class PhyrexianMetamorph extends CardImpl {
         CopyApplier phyrexianMetamorphCopyApplier = new CopyApplier() {
             @Override
             public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-                if (!blueprint.isArtifact()) {
-                    blueprint.addCardType(CardType.ARTIFACT);
+                if (!blueprint.isArtifact(game)) {
+                    blueprint.addCardType(game, CardType.ARTIFACT);
                 }
                 return true;
             }

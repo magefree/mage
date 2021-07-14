@@ -23,6 +23,7 @@ public final class HexParasite extends CardImpl {
 
     public HexParasite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.INSECT);
 
         this.power = new MageInt(1);

@@ -193,6 +193,45 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.commandersToStay.addAll(state.commandersToStay);
     }
 
+    public void clearOnGameRestart() {
+        // special code for Karn Liberated
+        // must clear game data on restart, but also must keep some info (wtf, why?)
+        // if you catch freezes or bugs with Karn then research here
+        // test example: testCommanderRestoredToBattlefieldAfterKarnUltimate
+        // TODO: must be implemented as full data clear?
+
+        battlefield.clear();
+        effects.clear();
+        triggers.clear();
+        delayed.clear();
+        triggered.clear();
+        stack.clear();
+        exile.clear();
+        command.clear();
+        designations.clear();
+        seenPlanes.clear();
+        isPlaneChase = false;
+        revealed.clear();
+        lookedAt.clear();
+        companion.clear();
+        turnNum = 1;
+        stepNum = 0;
+        extraTurn = false;
+        legendaryRuleActive = true;
+        gameOver = false;
+        specialActions.clear();
+        cardState.clear();
+        combat.clear();
+        turnMods.clear();
+        watchers.clear();
+        values.clear();
+        zones.clear();
+        simultaneousEvents.clear();
+        copiedCards.clear();
+        usePowerInsteadOfToughnessForDamageLethalityFilters.clear();
+        permanentOrderNumber = 0;
+    }
+
     public void restoreForRollBack(GameState state) {
         restore(state);
         this.turn = state.turn;
@@ -1124,7 +1163,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         if (attachedTo instanceof PermanentCard) {
             throw new IllegalArgumentException("Error, wrong code usage. If you want to add new ability to the "
                     + "permanent then use a permanent.addAbility(a, source, game): "
-                    + ability.getClass().getCanonicalName() + " - " + ability.toString());
+                    + ability.getClass().getCanonicalName() + " - " + ability);
         }
     }
 
@@ -1151,39 +1190,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         mageObjectAttribute.clear();
         this.setManaBurn(false);
-    }
-
-    public void clear() {
-        battlefield.clear();
-        effects.clear();
-        triggers.clear();
-        delayed.clear();
-        triggered.clear();
-        stack.clear();
-        exile.clear();
-        command.clear();
-        designations.clear();
-        seenPlanes.clear();
-        isPlaneChase = false;
-        revealed.clear();
-        lookedAt.clear();
-        companion.clear();
-        turnNum = 0;
-        stepNum = 0;
-        extraTurn = false;
-        legendaryRuleActive = true;
-        gameOver = false;
-        specialActions.clear();
-        cardState.clear();
-        combat.clear();
-        turnMods.clear();
-        watchers.clear();
-        values.clear();
-        zones.clear();
-        simultaneousEvents.clear();
-        copiedCards.clear();
-        usePowerInsteadOfToughnessForDamageLethalityFilters.clear();
-        permanentOrderNumber = 0;
     }
 
     public void pause() {

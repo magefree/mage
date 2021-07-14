@@ -69,7 +69,7 @@ class CreaturesControlledByChosenPlayer implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public CreaturesControlledByChosenPlayer copy() {
         return new CreaturesControlledByChosenPlayer();
     }
 

@@ -80,7 +80,7 @@ class AudaciousReshapersEffect extends OneShotEffect {
                 continue;
             }
             cards.add(card);
-            if (card.isArtifact()) {
+            if (card.isArtifact(game)) {
                 artifact = card;
                 break;
             }

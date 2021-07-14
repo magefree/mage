@@ -65,7 +65,7 @@ class MoritteOfTheFrostCopyApplier extends CopyApplier {
         blueprint.addSuperType(SuperType.LEGENDARY);
         blueprint.addSuperType(SuperType.SNOW);
 
-        if (!isCopyOfCopy(source, blueprint, copyToObjectId) && blueprint.isCreature()) {
+        if (!isCopyOfCopy(source, blueprint, copyToObjectId) && blueprint.isCreature(game)) {
             blueprint.getAbilities().add(new ChangelingAbility());
             blueprint.getAbilities().add(new EntersBattlefieldAbility(
                     new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), false)

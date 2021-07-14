@@ -20,6 +20,7 @@ public final class SkitteringSkirge extends CardImpl {
 
     public SkitteringSkirge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.IMP);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

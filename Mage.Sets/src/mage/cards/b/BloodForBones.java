@@ -3,7 +3,6 @@ package mage.cards.b;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -73,14 +72,14 @@ class BloodForBonesEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || player.getGraveyard().getCards(game).stream().noneMatch(Card::isCreature)) {
+        if (player == null || player.getGraveyard().getCards(game).stream().noneMatch(card -> card.isCreature(game))) {
             return false;
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
         if (player.choose(outcome, player.getGraveyard(), target, game)) {
             player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         }
-        if (player.getGraveyard().getCards(game).stream().noneMatch(Card::isCreature)) {
+        if (player.getGraveyard().getCards(game).stream().noneMatch(card -> card.isCreature(game))) {
             return true;
         }
         target = new TargetCardInYourGraveyard(filter2);

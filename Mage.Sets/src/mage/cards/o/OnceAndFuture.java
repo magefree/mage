@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -36,7 +35,6 @@ public final class OnceAndFuture extends CardImpl {
         target.setTargetTag(2);
         this.getSpellAbility().addTarget(target);
 
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private OnceAndFuture(final OnceAndFuture card) {

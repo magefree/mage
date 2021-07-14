@@ -49,7 +49,7 @@ public final class Kookus extends CardImpl {
 
         // At the beginning of your upkeep, if you don't control a creature named Keeper of Kookus, Kookus deals 3 damage to you and attacks this turn if able.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(3), TargetController.YOU, false);
-        ability.addEffect(new AttacksIfAbleSourceEffect(Duration.EndOfTurn));
+        ability.addEffect(new AttacksIfAbleSourceEffect(Duration.EndOfTurn, false));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,
                 new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter)),

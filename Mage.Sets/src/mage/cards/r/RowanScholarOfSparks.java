@@ -24,7 +24,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.game.command.emblems.RowanScholarOfSparksEmblem;
-import mage.game.permanent.token.PrismariToken;
+import mage.game.permanent.token.Elemental44Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -175,7 +175,7 @@ class WillScholarOfFrostEffect extends OneShotEffect {
                 ));
         player.moveCards(cards, Zone.EXILED, source, game);
         for (Map.Entry<UUID, Integer> entry : playerMap.entrySet()) {
-            new PrismariToken().putOntoBattlefield(entry.getValue(), game, source, entry.getKey());
+            new Elemental44Token().putOntoBattlefield(entry.getValue(), game, source, entry.getKey());
         }
         return true;
     }

@@ -46,8 +46,12 @@ public final class RonaDiscipleOfGix extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Rona, Disciple of Gix enters the battlefield, you may exile target historic card from your graveyard.
-        String abilityText = "When {this} enters the battlefield, you may exile target historic card from your graveyard. <i>(Artifacts, legendaries, and Sagas are historic.)</i>";
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect().setToSourceExileZone(true), true, abilityText);
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new ExileTargetEffect()
+                        .setToSourceExileZone(true)
+                        .setText("exile target historic card from your graveyard. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
+                true
+        );
         ability.addTarget(new TargetCardInYourGraveyard(new FilterHistoricCard("historic card from your graveyard")));
         this.addAbility(ability);
 
@@ -96,7 +100,7 @@ class RonaDiscipleOfGixPlayNonLandEffect extends AsThoughEffectImpl {
         if (affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             MageObject sourceObject = game.getObject(source.getSourceId());
-            if (card != null && !card.isLand() && sourceObject != null) {
+            if (card != null && !card.isLand(game) && sourceObject != null) {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
                 if (exileId != null) {
                     ExileZone exileZone = game.getState().getExile().getExileZone(exileId);

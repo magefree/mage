@@ -20,7 +20,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPlayer;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -44,7 +43,6 @@ public final class Moonhold extends CardImpl {
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.W))));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new InfoEffect(" <i>(Do both if {R}{W} was spent.)</i>"));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private Moonhold(final Moonhold card) {
@@ -138,7 +136,7 @@ class MoonholdEffect2 extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getPlayerId().equals(source.getFirstTarget())) {
             Card card = game.getCard(event.getSourceId());
-            if (card != null && card.isCreature()) {
+            if (card != null && card.isCreature(game)) {
                 return true;
             }
         }

@@ -5,7 +5,9 @@ import mage.cards.Card;
 import java.io.Serializable;
 import java.util.Set;
 
-/*
+/**
+ * Checking deck for companion legality
+ *
  * @author emerald000
  */
 public interface CompanionCondition extends Serializable {
@@ -16,7 +18,7 @@ public interface CompanionCondition extends Serializable {
     String getRule();
 
     /**
-     * @param deck The set of cards to check.
+     * @param deck         The set of cards to check.
      * @param startingSize
      * @return Whether the companion is valid for that deck.
      */

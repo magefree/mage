@@ -8,6 +8,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,7 +31,7 @@ public final class WanderingGoblins extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Domain - {3}: Wandering Goblins gets +1/+0 until end of turn for each basic land type among lands you control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new DomainValue(), StaticValue.get(0), Duration.EndOfTurn), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new DomainValue(), StaticValue.get(0), Duration.EndOfTurn, true), new GenericManaCost(3)).addHint(DomainHint.instance));
     }
 
     private WanderingGoblins(final WanderingGoblins card) {

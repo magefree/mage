@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -31,7 +30,7 @@ public final class GruulScrapper extends CardImpl {
         this.toughness = new MageInt(2);
 
         //When Gruul Scrapper enters the battlefield, if Red was spent to cast Gruul Scrapper, it gains haste until end of turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalContinuousEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaWasSpentCondition(ColoredManaSymbol.R), " if {R} was spent to cast this spell, it gains haste until end of turn")), new ManaSpentToCastWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalContinuousEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaWasSpentCondition(ColoredManaSymbol.R), " if {R} was spent to cast this spell, it gains haste until end of turn")));
 
     }
 

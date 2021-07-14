@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -15,7 +14,6 @@ import mage.game.command.Emblem;
 import mage.game.permanent.token.ZombieToken;
 
 /**
- *
  * @author spjspj
  */
 public final class LilianaTheLastHopeEmblem extends Emblem {
@@ -44,7 +42,7 @@ class LilianaZombiesCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public LilianaZombiesCount copy() {
         return new LilianaZombiesCount();
     }
 

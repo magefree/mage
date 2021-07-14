@@ -1,8 +1,9 @@
 package mage.cards.c;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
-import mage.abilities.keyword.CantBeBlockedSourceAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,8 +28,9 @@ public final class ChangelingOutcast extends CardImpl {
         this.addAbility(new ChangelingAbility());
 
         // Changeling Outcast can't block and can't be blocked.
-        this.addAbility(new CantBlockAbility());
-        this.addAbility(new CantBeBlockedSourceAbility());
+        Ability ability = new CantBlockAbility();
+        ability.addEffect(new CantBeBlockedSourceEffect().setText("and can't be blocked"));
+        this.addAbility(ability);
     }
 
     private ChangelingOutcast(final ChangelingOutcast card) {

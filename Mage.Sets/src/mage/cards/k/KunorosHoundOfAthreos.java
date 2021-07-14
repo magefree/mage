@@ -85,7 +85,7 @@ class KunorosHoundOfAthreosEnterEffect extends ContinuousRuleModifyingEffectImpl
             return false;
         }
         Card card = game.getCard(zEvent.getTargetId());
-        return card != null && card.isCreature();
+        return card != null && card.isCreature(game);
     }
 }
 

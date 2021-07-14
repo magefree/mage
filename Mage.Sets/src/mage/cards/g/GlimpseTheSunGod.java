@@ -24,7 +24,7 @@ public final class GlimpseTheSunGod extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}");
 
         // Tap X target creatures. Scry 1.
-        this.getSpellAbility().addEffect(new TapTargetEffect("X target creatures"));
+        this.getSpellAbility().addEffect(new TapTargetEffect("tap X target creatures"));
         this.getSpellAbility().addEffect(new ScryEffect(1));
         this.getSpellAbility().setTargetAdjuster(GlimpseTheSunGodAdjuster.instance);
     }

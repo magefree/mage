@@ -2,7 +2,7 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.MageObject;
+
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 
@@ -84,7 +83,7 @@ class DeepWaterReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent != null && permanent.isLand()) {
+        if (permanent != null && permanent.isLand(game)) {
             return filter.match(permanent, game);
         }
         return false;

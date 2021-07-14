@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.watchers.Watcher;
@@ -147,7 +146,7 @@ class UntapAttackingThisTurnEffect extends OneShotEffect {
             Set<MageObjectReference> attackedThisTurn = ((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures();
             for (MageObjectReference mor : attackedThisTurn) {
                 Permanent permanent = mor.getPermanent(game);
-                if (permanent != null && permanent.isCreature()) {
+                if (permanent != null && permanent.isCreature(game)) {
                     permanent.untap(game);
                 }
             }

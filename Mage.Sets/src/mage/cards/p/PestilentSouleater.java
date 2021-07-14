@@ -23,6 +23,7 @@ public final class PestilentSouleater extends CardImpl {
 
     public PestilentSouleater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.INSECT);
 
         this.power = new MageInt(3);

@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -11,10 +9,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.HornetQueenInsectToken;
+import mage.game.permanent.token.InsectDeathToken;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class HornetQueen extends CardImpl {
@@ -31,7 +30,7 @@ public final class HornetQueen extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
         // When Hornet Queen enters the battlefield, create four 1/1 green Insect creature tokens with flying and deathtouch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HornetQueenInsectToken(), 4), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new InsectDeathToken(), 4), false));
     }
 
     private HornetQueen(final HornetQueen card) {

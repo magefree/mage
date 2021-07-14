@@ -66,7 +66,7 @@ class FieryEncoreEffect extends OneShotEffect {
         }
         Card card = player.discardOne(false, false, source, game);
         player.drawCards(1, source, game);
-        if (card == null || card.isLand()) {
+        if (card == null || card.isLand(game)) {
             return true;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(

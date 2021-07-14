@@ -42,7 +42,10 @@ public final class MunitionsExpert extends CardImpl {
 
         // When Munitions Expert enters the battlefield, you may have it deal damage to target creature or planeswalker equal to the number of Goblins you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DamageTargetEffect(xValue, "it"), true
+                new DamageTargetEffect(xValue)
+                        .setText("it deal damage to target creature or planeswalker " +
+                                "equal to the number of Goblins you control"),
+                true
         );
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(ability);

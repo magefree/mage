@@ -67,7 +67,7 @@ class GenesisStormEffect extends OneShotEffect {
         Card nonLandCard = null;
         for (Card card : controller.getLibrary().getCards(game)) {
             toReveal.add(card);
-            if (card.isPermanent() && !card.isLand()) {
+            if (card.isPermanent(game) && !card.isLand(game)) {
                 nonLandCard = card;
                 break;
             }

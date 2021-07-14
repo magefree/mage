@@ -34,7 +34,7 @@ public class AddCardTypeAttachedEffect extends ContinuousEffectImpl {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent target = game.getPermanent(equipment.getAttachedTo());
             if (target != null) {
-                target.addCardType(addedCardType);
+                target.addCardType(game, addedCardType);
             }
         }
         return true;

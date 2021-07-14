@@ -15,7 +15,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -27,6 +26,7 @@ public final class UrabraskTheHidden extends CardImpl {
     public UrabraskTheHidden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.PRAETOR);
 
         this.power = new MageInt(4);
@@ -75,7 +75,7 @@ class UrabraskTheHiddenEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null && permanent.isCreature()) {
+            if (permanent != null && permanent.isCreature(game)) {
                 return true;
             }
         }

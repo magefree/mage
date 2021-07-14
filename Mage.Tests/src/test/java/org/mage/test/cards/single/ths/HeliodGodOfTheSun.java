@@ -46,7 +46,7 @@ public class HeliodGodOfTheSun extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Hold the Gates", 1);
 
         Permanent heliodGodOfTheSun = getPermanent("Heliod, God of the Sun", playerA);
-        Assert.assertTrue(heliodGodOfTheSun.isCreature());
+        Assert.assertTrue(heliodGodOfTheSun.isCreature(currentGame));
     }
 
  

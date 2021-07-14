@@ -4,6 +4,7 @@ package mage.cards.e;
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -23,6 +24,7 @@ public final class EvasiveAction extends CardImpl {
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new DomainValue()));
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);
+        this.getSpellAbility().addHint(DomainHint.instance);
     }
 
     private EvasiveAction(final EvasiveAction card) {

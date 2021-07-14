@@ -12,7 +12,6 @@ import mage.constants.ColoredManaSymbol;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -40,7 +39,6 @@ public final class Firespout extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageAllEffect(3, filter2),
                 new ManaWasSpentCondition(ColoredManaSymbol.G), "and 3 damage to each creature with flying if {G} was spent to cast it. <i>(Do both if {R}{G} was spent.)</i>"));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private Firespout(final Firespout card) {

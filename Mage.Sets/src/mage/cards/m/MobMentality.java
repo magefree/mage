@@ -93,7 +93,7 @@ class MobMentalityTriggeredAbility extends TriggeredAbilityImpl {
             effect.setTargetPointer(new FixedTarget(creature, game));
         }
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(getControllerId())) {
-            if (permanent.isCreature()
+            if (permanent.isCreature(game)
                     && !permanent.hasSubtype(SubType.WALL, game)
                     && !permanent.isAttacking()) {
                 return false;

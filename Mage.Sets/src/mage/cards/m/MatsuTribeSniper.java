@@ -47,7 +47,7 @@ public final class MatsuTribeSniper extends CardImpl {
         this.addAbility(ability);
         
         // Whenever Matsu-Tribe Sniper deals damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
-        ability = new DealsDamageToACreatureTriggeredAbility(new TapTargetEffect("that creature"), false, false, true);
+        ability = new DealsDamageToACreatureTriggeredAbility(new TapTargetEffect("tap that creature"), false, false, true);
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("and it"));
         this.addAbility(ability);
     }

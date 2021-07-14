@@ -31,7 +31,7 @@ public final class ArtfulTakedown extends CardImpl {
 
         // • Tap target creature.
         this.getSpellAbility().addEffect(
-                new TapTargetEffect().setText("target creature")
+                new TapTargetEffect("tap target creature")
         );
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter1).withChooseHint("tap"));
 

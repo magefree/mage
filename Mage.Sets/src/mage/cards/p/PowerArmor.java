@@ -8,6 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -31,7 +32,7 @@ public final class PowerArmor extends CardImpl {
         ability.addCost(new ManaCostsImpl("{3}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.setAbilityWord(AbilityWord.DOMAIN);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(DomainHint.instance));
     }
 
     private PowerArmor(final PowerArmor card) {

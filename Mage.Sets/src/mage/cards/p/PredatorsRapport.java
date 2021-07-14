@@ -53,7 +53,7 @@ class TargetPermanentPowerPlusToughnessCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public TargetPermanentPowerPlusToughnessCount copy() {
         return new TargetPermanentPowerPlusToughnessCount();
     }
 

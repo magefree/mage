@@ -25,7 +25,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.target.TargetPermanent;
@@ -134,7 +133,7 @@ class ImprisonUnblockEffect extends OneShotEffect {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
             if (permanent != null) {
-                if (permanent.isCreature()) {
+                if (permanent.isCreature(game)) {
                     
                     // Tap the creature
                     permanent.tap(source, game);

@@ -23,6 +23,7 @@ public final class DementiaBat extends CardImpl {
 
     public DementiaBat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BAT);
 
         this.power = new MageInt(2);

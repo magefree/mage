@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -57,7 +56,7 @@ class DingusEggTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()
-                && zEvent.getTarget().isLand()) {
+                && zEvent.getTarget().isLand(game)) {
             if (getTargets().isEmpty()) {
                 UUID targetId = zEvent.getTarget().getControllerId();
                 for (Effect effect : this.getEffects()) {

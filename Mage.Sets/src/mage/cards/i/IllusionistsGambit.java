@@ -175,7 +175,7 @@ class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
         // planeswalker
         Permanent permanent = game.getPermanent(defenderId);
         return permanent == null || !permanent.isControlledBy(source.getControllerId())
-                || !permanent.isPlaneswalker();
+                || !permanent.isPlaneswalker(game);
     }
 
     @Override

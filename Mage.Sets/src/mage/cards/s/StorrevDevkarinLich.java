@@ -100,7 +100,7 @@ class StorrevDevkarinLichWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && (card.isCreature() || card.isPlaneswalker())) {
+            if (card != null && (card.isCreature(game) || card.isPlaneswalker(game))) {
                 cards.add(new MageObjectReference(card, game));
             }
         }

@@ -4,18 +4,20 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
+import java.util.Collection;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author Loki
  */
 public class DomainValue implements DynamicValue {
 
-    private int amount;
-    private boolean countTargetPlayer;
+    private final int amount;
+    private final boolean countTargetPlayer;
     private UUID playerId;
 
     public DomainValue() {
@@ -48,11 +50,6 @@ public class DomainValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int havePlains = 0;
-        int haveIslands = 0;
-        int haveMountains = 0;
-        int haveSwamps = 0;
-        int haveForests = 0;
         UUID targetPlayer;
         if (playerId != null) {
             targetPlayer = playerId;
@@ -61,26 +58,20 @@ public class DomainValue implements DynamicValue {
         } else {
             targetPlayer = sourceAbility.getControllerId();
         }
-        for (Permanent p : game.getBattlefield().getAllActivePermanents(targetPlayer)) {
-            if (p.isLand()) {
-                if (havePlains == 0 && p.hasSubtype(SubType.PLAINS, game)) {
-                    havePlains = 1;
-                }
-                if (haveIslands == 0 && p.hasSubtype(SubType.ISLAND, game)) {
-                    haveIslands = 1;
-                }
-                if (haveMountains == 0 && p.hasSubtype(SubType.MOUNTAIN, game)) {
-                    haveMountains = 1;
-                }
-                if (haveSwamps == 0 && p.hasSubtype(SubType.SWAMP, game)) {
-                    haveSwamps = 1;
-                }
-                if (haveForests == 0 && p.hasSubtype(SubType.FOREST, game)) {
-                    haveForests = 1;
-                }
-            }
-        }
-        return amount * (haveForests + haveIslands + haveMountains + havePlains + haveSwamps);
+        return game.getBattlefield()
+                .getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS,
+                        targetPlayer, sourceAbility.getSourceId(), game
+                ).stream()
+                .map(permanent -> SubType
+                        .getBasicLands()
+                        .stream()
+                        .filter(subType -> permanent.hasSubtype(subType, game))
+                        .collect(Collectors.toSet()))
+                .flatMap(Collection::stream)
+                .distinct()
+                .mapToInt(x -> amount)
+                .sum();
     }
 
     @Override

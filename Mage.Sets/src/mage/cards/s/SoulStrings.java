@@ -23,7 +23,7 @@ public final class SoulStrings extends CardImpl {
 
         // Return two target creature cards from your graveyard to your hand unless any player pays {X}.
         Effect effect = new DoUnlessAnyPlayerPaysEffect(
-                new ReturnFromGraveyardToHandTargetEffect(), ManacostVariableValue.instance);
+                new ReturnFromGraveyardToHandTargetEffect(), ManacostVariableValue.REGULAR);
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(2, new FilterCreatureCard("creature cards from your graveyard")));
     }

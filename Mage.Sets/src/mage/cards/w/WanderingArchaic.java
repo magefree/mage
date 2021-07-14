@@ -181,11 +181,11 @@ class ExploreTheVastlandsTarget extends TargetCardInLibrary {
         if (this.getTargets().isEmpty()) {
             return true;
         }
-        boolean isLand = card.isLand();
+        boolean isLand = card.isLand(game);
         return this.getTargets()
                 .stream()
                 .map(game::getCard)
                 .filter(Objects::nonNull)
-                .noneMatch(c -> card.isLand() && c.isLand() || card.isInstantOrSorcery() && c.isInstantOrSorcery());
+                .noneMatch(c -> card.isLand(game) && c.isLand(game) || card.isInstantOrSorcery(game) && c.isInstantOrSorcery(game));
     }
 }

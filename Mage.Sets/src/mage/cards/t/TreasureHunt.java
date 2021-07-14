@@ -60,7 +60,7 @@ class TreasureHuntEffect extends OneShotEffect {
             CardsImpl cards = new CardsImpl();
             for (Card card : controller.getLibrary().getCards(game)) {
                 cards.add(card);
-                if (!card.isLand()) {
+                if (!card.isLand(game)) {
                     break;
                 }
             }

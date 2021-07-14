@@ -63,11 +63,11 @@ class ChimericCoilsEffect extends ContinuousEffectImpl {
         }
         switch (layer) {
             case TypeChangingEffects_4:
-                if (!permanent.isArtifact()) {
-                    permanent.addCardType(CardType.ARTIFACT);
+                if (!permanent.isArtifact(game)) {
+                    permanent.addCardType(game, CardType.ARTIFACT);
                 }
-                if (!permanent.isCreature()) {
-                    permanent.addCardType(CardType.CREATURE);
+                if (!permanent.isCreature(game)) {
+                    permanent.addCardType(game, CardType.CREATURE);
                 }
                 permanent.removeAllCreatureTypes(game);
                 permanent.addSubType(game, SubType.CONSTRUCT);

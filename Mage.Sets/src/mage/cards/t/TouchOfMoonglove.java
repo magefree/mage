@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -105,7 +104,7 @@ class TouchOfMoongloveDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()
-                && zEvent.getTarget().isCreature()) {
+                && zEvent.getTarget().isCreature(game)) {
             boolean damageDealt = false;
             for (MageObjectReference mor : zEvent.getTarget().getDealtDamageByThisTurn()) {
                 if (mor.equals(creatureToCheck)) {

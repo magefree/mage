@@ -235,7 +235,7 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
             if (permanent.hasSubtype(SubType.SWAMP, currentGame)) {
                 swampTypes++;
             }
-            if (permanent.isCreature()) {
+            if (permanent.isCreature(currentGame)) {
                 creatures++;
             }
         }

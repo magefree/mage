@@ -87,7 +87,7 @@ public final class Aurification extends CardImpl {
         public boolean checkTrigger(GameEvent event, Game game) {
             if (event.getPlayerId().equals(this.getControllerId())) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
-                if (permanent != null && permanent.isCreature()) {
+                if (permanent != null && permanent.isCreature(game)) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                     }
@@ -121,7 +121,7 @@ public final class Aurification extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE, game)) {
                 if (permanent != null) {
                     int numToRemove = permanent.getCounters(game).getCount(CounterType.GOLD);
                     if (numToRemove > 0) {

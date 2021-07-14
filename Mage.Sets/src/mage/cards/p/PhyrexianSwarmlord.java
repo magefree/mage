@@ -22,6 +22,7 @@ public final class PhyrexianSwarmlord extends CardImpl {
 
     public PhyrexianSwarmlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.INSECT);
         this.subtype.add(SubType.HORROR);
 

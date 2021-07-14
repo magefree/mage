@@ -11,7 +11,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -64,7 +63,7 @@ class PriceOfGloryAbility extends TriggeredAbilityImpl {
         if (permanent == null) {
             return false;
         }
-        if (permanent.isLand()
+        if (permanent.isLand(game)
                 && game.getState().getPlayersInRange(controllerId, game).contains(permanent.getControllerId())
                 && !permanent.isControlledBy(game.getActivePlayerId())) { // intervening if clause
             getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));

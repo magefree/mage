@@ -38,11 +38,11 @@ public enum AdamantCondition implements Condition {
             }
             return source.getManaCostsToPay().getUsedManaToPay().getColor(coloredManaSymbol) > 2;
         }
-        ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class, source.getSourceId());
+        ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
         if (watcher == null) {
             return false;
         }
-        Mana payment = watcher.getAndResetLastPayment();
+        Mana payment = watcher.getAndResetLastPayment(source.getSourceId());
         if (payment == null) {
             return false;
         }

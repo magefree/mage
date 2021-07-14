@@ -92,7 +92,7 @@ class EmrakulThePromisedEndCostReductionEffect extends CostModificationEffectImp
         if (controller != null) {
             Set<CardType> foundCardTypes = new HashSet<>(8);
             for (Card card : controller.getGraveyard().getCards(game)) {
-                foundCardTypes.addAll(card.getCardType());
+                foundCardTypes.addAll(card.getCardType(game));
             }
             CardUtil.reduceCost(abilityToModify, foundCardTypes.size());
             return true;

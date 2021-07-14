@@ -34,8 +34,9 @@ public final class LieutenantsOfTheGuard extends CardImpl {
         // each player votes for strength or numbers. Put a +1/+1 counter on Lieutenants of the Guard for each
         // strength vote and put a 1/1 white Soldier creature token onto the battlefield for each numbers vote.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new LieutenantsOfTheGuardEffect(), false, "<i>Council's dilemma</i> &mdash; "
-        ));
+                new LieutenantsOfTheGuardEffect(), false)
+                .withFlavorWord("Council's dilemma")
+        );
     }
 
     private LieutenantsOfTheGuard(final LieutenantsOfTheGuard card) {

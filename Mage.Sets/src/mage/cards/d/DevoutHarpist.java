@@ -62,7 +62,7 @@ class DevoutHarpistPredicate implements ObjectPlayerPredicate<ObjectPlayer<Perma
         Permanent attachment = input.getObject();
         if (attachment != null) {
             Permanent permanent = game.getPermanent(attachment.getAttachedTo());
-            if (permanent != null && permanent.isCreature()) {
+            if (permanent != null && permanent.isCreature(game)) {
                 return true;
             }
         }

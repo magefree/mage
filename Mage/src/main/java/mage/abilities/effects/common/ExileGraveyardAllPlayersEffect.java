@@ -64,7 +64,7 @@ public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
             }
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                toExile.addAll(player.getGraveyard());
+                toExile.addAll(player.getGraveyard().getCards(filter, source.getSourceId(), source.getControllerId(), game));
             }
         }
         controller.moveCards(toExile, Zone.EXILED, source, game);

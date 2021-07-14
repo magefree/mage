@@ -17,124 +17,30 @@ import java.util.Objects;
  */
 public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
-    protected static final class ManaColor implements Serializable {
-        private int amount = 0;
-        private int snowAmount = 0;
-
-        private ManaColor() {
-        }
-
-        protected ManaColor(final ManaColor manaColor) {
-            this.copyFrom(manaColor);
-        }
-
-        private ManaColor(int amount) {
-            this.amount = amount;
-        }
-
-        protected int getAmount() {
-            return amount;
-        }
-
-        protected int getSnowAmount() {
-            return snowAmount;
-        }
-
-        protected void incrementAmount() {
-            incrementAmount(1, false);
-        }
-
-        protected void incrementAmount(ManaColor manaColor) {
-            this.amount = CardUtil.overflowInc(this.amount, manaColor.amount);
-            this.snowAmount = CardUtil.overflowInc(this.snowAmount, manaColor.snowAmount);
-        }
-
-        protected void incrementAmount(int amount, boolean snow) {
-            this.amount = CardUtil.overflowInc(this.amount, amount);
-            if (snow) {
-                this.snowAmount = CardUtil.overflowInc(this.snowAmount, amount);
-            }
-        }
-
-        protected void removeAmount(ManaColor manaColor) {
-            this.amount = CardUtil.overflowDec(this.amount, manaColor.amount);
-            this.snowAmount = CardUtil.overflowDec(this.snowAmount, manaColor.snowAmount);
-        }
-
-        protected void clear() {
-            amount = 0;
-            snowAmount = 0;
-        }
-
-        protected boolean removeOne(ManaColor manaColor) {
-            if (manaColor.getAmount() < 1) {
-                return false;
-            }
-            if (manaColor.getSnowAmount() > 0) {
-                manaColor.snowAmount = CardUtil.overflowDec(manaColor.snowAmount, 1);
-                this.snowAmount = CardUtil.overflowInc(this.snowAmount, 1);
-            }
-            manaColor.amount = CardUtil.overflowDec(manaColor.amount, 1);
-            this.amount = CardUtil.overflowInc(this.amount, 1);
-            return true;
-        }
-
-        protected ManaColor copy() {
-            return new ManaColor(this);
-        }
-
-        protected void copyFrom(final ManaColor manaColor) {
-            this.amount = manaColor.amount;
-            this.snowAmount = manaColor.snowAmount;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            ManaColor manaColor = (ManaColor) o;
-            return amount == manaColor.amount && snowAmount == manaColor.snowAmount;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(amount, snowAmount);
-        }
-
-        @Override
-        public String toString() {
-            if (amount != 0 || snowAmount != 0) {
-                return amount + "/" + snowAmount;
-            } else {
-                return "";
-            }
-        }
-    }
-
     private static final transient Logger logger = Logger.getLogger(Mana.class);
 
-    protected ManaColor white;
-    protected ManaColor blue;
-    protected ManaColor black;
-    protected ManaColor red;
-    protected ManaColor green;
-    protected ManaColor generic;
-    protected ManaColor colorless;
-    protected ManaColor any;
+    protected int white;
+    protected int blue;
+    protected int black;
+    protected int red;
+    protected int green;
+    protected int generic;
+    protected int colorless;
+    protected int any;
     protected boolean flag;
 
     /**
      * Default constructor. Creates a {@link Mana} object with 0 values.
      */
     public Mana() {
-        white = new ManaColor();
-        blue = new ManaColor();
-        black = new ManaColor();
-        red = new ManaColor();
-        green = new ManaColor();
-        generic = new ManaColor();
-        colorless = new ManaColor();
-        any = new ManaColor();
+        white = 0;
+        blue = 0;
+        black = 0;
+        red = 0;
+        green = 0;
+        generic = 0;
+        colorless = 0;
+        any = 0;
         flag = false;
     }
 
@@ -152,14 +58,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param colorless total Colorless mana to have.
      */
     public Mana(final int white, final int blue, final int black, final int red, final int green, final int generic, final int any, final int colorless) {
-        this.white = new ManaColor(notNegative(white, "White"));
-        this.blue = new ManaColor(notNegative(blue, "Blue"));
-        this.black = new ManaColor(notNegative(black, "Black"));
-        this.red = new ManaColor(notNegative(red, "Red"));
-        this.green = new ManaColor(notNegative(green, "Green"));
-        this.generic = new ManaColor(notNegative(generic, "Generic"));
-        this.colorless = new ManaColor(notNegative(colorless, "Colorless"));
-        this.any = new ManaColor(notNegative(any, "Any"));
+        this.white = notNegative(white, "White");
+        this.blue = notNegative(blue, "Blue");
+        this.black = notNegative(black, "Black");
+        this.red = notNegative(red, "Red");
+        this.green = notNegative(green, "Green");
+        this.generic = notNegative(generic, "Generic");
+        this.colorless = notNegative(colorless, "Colorless");
+        this.any = notNegative(any, "Any");
         this.flag = false;
     }
 
@@ -171,14 +77,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     public Mana(final Mana mana) {
         Objects.requireNonNull(mana, "The passed in mana can not be null");
-        this.white = mana.white.copy();
-        this.blue = mana.blue.copy();
-        this.black = mana.black.copy();
-        this.red = mana.red.copy();
-        this.green = mana.green.copy();
-        this.generic = mana.generic.copy();
-        this.colorless = mana.colorless.copy();
-        this.any = mana.any.copy();
+        this.white = mana.white;
+        this.blue = mana.blue;
+        this.black = mana.black;
+        this.red = mana.red;
+        this.green = mana.green;
+        this.generic = mana.generic;
+        this.colorless = mana.colorless;
+        this.any = mana.any;
         this.flag = mana.flag;
     }
 
@@ -194,19 +100,19 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         Objects.requireNonNull(color, "The passed in ColoredManaSymbol can not be null");
         switch (color) {
             case W:
-                white.incrementAmount();
+                white = CardUtil.overflowInc(white, 1);
                 break;
             case U:
-                blue.incrementAmount();
+                blue = CardUtil.overflowInc(blue, 1);
                 break;
             case B:
-                black.incrementAmount();
+                black = CardUtil.overflowInc(black, 1);
                 break;
             case R:
-                red.incrementAmount();
+                red = CardUtil.overflowInc(red, 1);
                 break;
             case G:
-                green.incrementAmount();
+                green = CardUtil.overflowInc(green, 1);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown mana color: " + color);
@@ -218,25 +124,25 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         Objects.requireNonNull(manaType, "The passed in ManaType can not be null");
         switch (manaType) {
             case WHITE:
-                white.incrementAmount();
+                white = CardUtil.overflowInc(white, 1);
                 break;
             case BLUE:
-                blue.incrementAmount();
+                blue = CardUtil.overflowInc(blue, 1);
                 break;
             case BLACK:
-                black.incrementAmount();
+                black = CardUtil.overflowInc(black, 1);
                 break;
             case RED:
-                red.incrementAmount();
+                red = CardUtil.overflowInc(red, 1);
                 break;
             case GREEN:
-                green.incrementAmount();
+                green = CardUtil.overflowInc(green, 1);
                 break;
             case COLORLESS:
-                colorless.incrementAmount();
+                colorless = CardUtil.overflowInc(colorless, 1);
                 break;
             case GENERIC:
-                generic.incrementAmount();
+                generic = CardUtil.overflowInc(generic, 1);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown manaType: " + manaType);
@@ -248,25 +154,25 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         Objects.requireNonNull(manaType, "The passed in ManaType can not be null");
         switch (manaType) {
             case WHITE:
-                white.incrementAmount(num, false);
+                white = CardUtil.overflowInc(white, num);
                 break;
             case BLUE:
-                blue.incrementAmount(num, false);
+                blue = CardUtil.overflowInc(blue, num);
                 break;
             case BLACK:
-                black.incrementAmount(num, false);
+                black = CardUtil.overflowInc(black, num);
                 break;
             case RED:
-                red.incrementAmount(num, false);
+                red = CardUtil.overflowInc(red, num);
                 break;
             case GREEN:
-                green.incrementAmount(num, false);
+                green = CardUtil.overflowInc(green, num);
                 break;
             case COLORLESS:
-                colorless.incrementAmount(num, false);
+                colorless = CardUtil.overflowInc(colorless, num);
                 break;
             case GENERIC:
-                generic.incrementAmount(num, false);
+                generic = CardUtil.overflowInc(generic, num);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown manaType: " + manaType);
@@ -382,14 +288,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param mana mana to add to this object.
      */
     public void add(final Mana mana) {
-        white.incrementAmount(mana.white);
-        blue.incrementAmount(mana.blue);
-        black.incrementAmount(mana.black);
-        red.incrementAmount(mana.red);
-        green.incrementAmount(mana.green);
-        generic.incrementAmount(mana.generic);
-        colorless.incrementAmount(mana.colorless);
-        any.incrementAmount(mana.any);
+        white = CardUtil.overflowInc(white, mana.white);
+        blue = CardUtil.overflowInc(blue, mana.blue);
+        black = CardUtil.overflowInc(black, mana.black);
+        red = CardUtil.overflowInc(red, mana.red);
+        green = CardUtil.overflowInc(green, mana.green);
+        generic = CardUtil.overflowInc(generic, mana.generic);
+        colorless = CardUtil.overflowInc(colorless, mana.colorless);
+        any = CardUtil.overflowInc(any, mana.any);
     }
 
     /**
@@ -398,31 +304,27 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param manaType
      */
     public void increase(ManaType manaType) {
-        increase(manaType, false);
-    }
-
-    public void increase(ManaType manaType, boolean isSnow) {
         switch (manaType) {
             case WHITE:
-                white.incrementAmount(1, isSnow);
+                white = CardUtil.overflowInc(white, 1);
                 break;
             case BLUE:
-                blue.incrementAmount(1, isSnow);
+                blue = CardUtil.overflowInc(blue, 1);
                 break;
             case BLACK:
-                black.incrementAmount(1, isSnow);
+                black = CardUtil.overflowInc(black, 1);
                 break;
             case RED:
-                red.incrementAmount(1, isSnow);
+                red = CardUtil.overflowInc(red, 1);
                 break;
             case GREEN:
-                green.incrementAmount(1, isSnow);
+                green = CardUtil.overflowInc(green, 1);
                 break;
             case COLORLESS:
-                colorless.incrementAmount(1, isSnow);
+                colorless = CardUtil.overflowInc(colorless, 1);
                 break;
             case GENERIC:
-                generic.incrementAmount(1, isSnow);
+                generic = CardUtil.overflowInc(generic, 1);
                 break;
         }
     }
@@ -431,77 +333,49 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * Increases the White mana by one.
      */
     public void increaseWhite() {
-        increaseWhite(1, false);
-    }
-
-    public void increaseWhite(int amount, boolean snow) {
-        white.incrementAmount(amount, snow);
+        white = CardUtil.overflowInc(white, 1);
     }
 
     /**
      * Increases the Blue mana by one.
      */
     public void increaseBlue() {
-        increaseBlue(1, false);
-    }
-
-    public void increaseBlue(int amount, boolean snow) {
-        blue.incrementAmount(amount, snow);
+        blue = CardUtil.overflowInc(blue, 1);
     }
 
     /**
      * Increases the Black mana by one.
      */
     public void increaseBlack() {
-        increaseBlack(1, false);
-    }
-
-    public void increaseBlack(int amount, boolean snow) {
-        black.incrementAmount(amount, snow);
+        black = CardUtil.overflowInc(black, 1);
     }
 
     /**
      * Increases the Red mana by one.
      */
     public void increaseRed() {
-        increaseRed(1, false);
-    }
-
-    public void increaseRed(int amount, boolean snow) {
-        red.incrementAmount(amount, snow);
+        red = CardUtil.overflowInc(red, 1);
     }
 
     /**
      * Increases the Green mana by one.
      */
     public void increaseGreen() {
-        increaseGreen(1, false);
-    }
-
-    public void increaseGreen(int amount, boolean snow) {
-        green.incrementAmount(amount, snow);
+        green = CardUtil.overflowInc(green, 1);
     }
 
     /**
      * Increases the Generic mana by one.
      */
     public void increaseGeneric() {
-        increaseGeneric(1, false);
-    }
-
-    public void increaseGeneric(int amount, boolean snow) {
-        generic.incrementAmount(amount, snow);
+        generic = CardUtil.overflowInc(generic, 1);
     }
 
     /**
      * Increases the Colorless mana by one.
      */
     public void increaseColorless() {
-        increaseColorless(1, false);
-    }
-
-    public void increaseColorless(int amount, boolean snow) {
-        colorless.incrementAmount(amount, snow);
+        colorless = CardUtil.overflowInc(colorless, 1);
     }
 
     /**
@@ -510,14 +384,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param mana mana values to subtract
      */
     public void subtract(final Mana mana) {
-        white.removeAmount(mana.white);
-        blue.removeAmount(mana.blue);
-        black.removeAmount(mana.black);
-        red.removeAmount(mana.red);
-        green.removeAmount(mana.green);
-        generic.removeAmount(mana.generic);
-        colorless.removeAmount(mana.colorless);
-        any.removeAmount(mana.any);
+        white = CardUtil.overflowDec(white, mana.white);
+        blue = CardUtil.overflowDec(blue, mana.blue);
+        black = CardUtil.overflowDec(black, mana.black);
+        red = CardUtil.overflowDec(red, mana.red);
+        green = CardUtil.overflowDec(green, mana.green);
+        generic = CardUtil.overflowDec(generic, mana.generic);
+        colorless = CardUtil.overflowDec(colorless, mana.colorless);
+        any = CardUtil.overflowDec(any, mana.any);
     }
 
     /**
@@ -530,39 +404,53 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *                             colored mana to pay the generic cost
      */
     public void subtractCost(final Mana mana) throws ArithmeticException {
-        white.removeAmount(mana.white);
-        blue.removeAmount(mana.blue);
-        black.removeAmount(mana.black);
-        red.removeAmount(mana.red);
-        green.removeAmount(mana.green);
-        generic.removeAmount(mana.generic);
-        colorless.removeAmount(mana.colorless);
-        any.removeAmount(mana.any);
+        white = CardUtil.overflowDec(white, mana.white);
+        blue = CardUtil.overflowDec(blue, mana.blue);
+        black = CardUtil.overflowDec(black, mana.black);
+        red = CardUtil.overflowDec(red, mana.red);
+        green = CardUtil.overflowDec(green, mana.green);
+        generic = CardUtil.overflowDec(generic, mana.generic);
+        colorless = CardUtil.overflowDec(colorless, mana.colorless);
+        any = CardUtil.overflowDec(any, mana.any);
 
-        while (generic.getAmount() < 0) {
-            ManaColor oldColorless = generic.copy();
-            if (generic.removeOne(white)) {
+        while (generic < 0) {
+            int oldColorless = generic;
+            if (white > 0) {
+                white = CardUtil.overflowDec(white, 1);
+                generic = CardUtil.overflowInc(generic, 1);
                 continue;
             }
-            if (generic.removeOne(blue)) {
+            if (blue > 0) {
+                blue = CardUtil.overflowDec(blue, 1);
+                generic = CardUtil.overflowInc(generic, 1);
                 continue;
             }
-            if (generic.removeOne(black)) {
+            if (black > 0) {
+                black = CardUtil.overflowDec(black, 1);
+                generic = CardUtil.overflowInc(generic, 1);
                 continue;
             }
-            if (generic.removeOne(red)) {
+            if (red > 0) {
+                red = CardUtil.overflowDec(red, 1);
+                generic = CardUtil.overflowInc(generic, 1);
                 continue;
             }
-            if (generic.removeOne(green)) {
+            if (green > 0) {
+                green = CardUtil.overflowDec(green, 1);
+                generic = CardUtil.overflowInc(generic, 1);
                 continue;
             }
-            if (generic.removeOne(colorless)) {
+            if (colorless > 0) {
+                colorless = CardUtil.overflowDec(colorless, 1);
+                generic = CardUtil.overflowInc(generic, 1);
                 continue;
             }
-            if (generic.removeOne(any)) {
+            if (any > 0) {
+                any = CardUtil.overflowDec(any, 1);
+                generic = CardUtil.overflowInc(generic, 1);
                 continue;
             }
-            if (oldColorless.getAmount() == generic.getAmount()) {
+            if (oldColorless == generic) {
                 throw new ArithmeticException("Not enough mana to pay colorless");
             }
         }
@@ -574,14 +462,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return the total count of all combined mana.
      */
     public int count() {
-        return white.getAmount()
-                + blue.getAmount()
-                + black.getAmount()
-                + red.getAmount()
-                + green.getAmount()
-                + generic.getAmount()
-                + colorless.getAmount()
-                + any.getAmount();
+        return white
+                + blue
+                + black
+                + red
+                + green
+                + generic
+                + colorless
+                + any;
     }
 
     /**
@@ -590,12 +478,12 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return the total count of all colored mana.
      */
     public int countColored() {
-        return white.getAmount()
-                + blue.getAmount()
-                + black.getAmount()
-                + red.getAmount()
-                + green.getAmount()
-                + any.getAmount();
+        return white
+                + blue
+                + black
+                + red
+                + green
+                + any;
     }
 
     /**
@@ -613,25 +501,25 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
         int count = 0;
         if (filter.isWhite()) {
-            count = CardUtil.overflowInc(count, white.getAmount());
+            count = CardUtil.overflowInc(count, white);
         }
         if (filter.isBlue()) {
-            count = CardUtil.overflowInc(count, blue.getAmount());
+            count = CardUtil.overflowInc(count, blue);
         }
         if (filter.isBlack()) {
-            count = CardUtil.overflowInc(count, black.getAmount());
+            count = CardUtil.overflowInc(count, black);
         }
         if (filter.isRed()) {
-            count = CardUtil.overflowInc(count, red.getAmount());
+            count = CardUtil.overflowInc(count, red);
         }
         if (filter.isGreen()) {
-            count = CardUtil.overflowInc(count, green.getAmount());
+            count = CardUtil.overflowInc(count, green);
         }
         if (filter.isGeneric()) {
-            count = CardUtil.overflowInc(count, generic.getAmount());
+            count = CardUtil.overflowInc(count, generic);
         }
         if (filter.isColorless()) {
-            count = CardUtil.overflowInc(count, colorless.getAmount());
+            count = CardUtil.overflowInc(count, colorless);
         }
         return count;
     }
@@ -640,14 +528,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * Sets all mana to 0.
      */
     public void clear() {
-        white.clear();
-        blue.clear();
-        black.clear();
-        red.clear();
-        green.clear();
-        generic.clear();
-        colorless.clear();
-        any.clear();
+        white = 0;
+        blue = 0;
+        black = 0;
+        red = 0;
+        green = 0;
+        generic = 0;
+        colorless = 0;
+        any = 0;
     }
 
     /**
@@ -658,53 +546,53 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     @Override
     public String toString() {
         StringBuilder sbMana = new StringBuilder();
-        if (generic.getAmount() > 0) {
-            sbMana.append('{').append(generic.getAmount()).append('}');
+        if (generic > 0) {
+            sbMana.append('{').append(generic).append('}');
         }
 
         // too many mana - replace by single icon
-        if (colorless.getAmount() >= 20) {
-            sbMana.append(colorless.getAmount()).append("{C}");
+        if (colorless >= 20) {
+            sbMana.append(colorless).append("{C}");
         }
-        if (white.getAmount() >= 20) {
-            sbMana.append(white.getAmount()).append("{W}");
+        if (white >= 20) {
+            sbMana.append(white).append("{W}");
         }
-        if (blue.getAmount() >= 20) {
-            sbMana.append(blue.getAmount()).append("{U}");
+        if (blue >= 20) {
+            sbMana.append(blue).append("{U}");
         }
-        if (black.getAmount() >= 20) {
-            sbMana.append(black.getAmount()).append("{B}");
+        if (black >= 20) {
+            sbMana.append(black).append("{B}");
         }
-        if (red.getAmount() >= 20) {
-            sbMana.append(red.getAmount()).append("{R}");
+        if (red >= 20) {
+            sbMana.append(red).append("{R}");
         }
-        if (green.getAmount() >= 20) {
-            sbMana.append(green.getAmount()).append("{G}");
+        if (green >= 20) {
+            sbMana.append(green).append("{G}");
         }
-        if (any.getAmount() >= 20) {
-            sbMana.append(any.getAmount()).append("{Any}");
+        if (any >= 20) {
+            sbMana.append(any).append("{Any}");
         }
 
         // normal mana
-        for (int i = 0; i < colorless.getAmount() && colorless.getAmount() < 20; i++) {
+        for (int i = 0; i < colorless && colorless < 20; i++) {
             sbMana.append("{C}");
         }
-        for (int i = 0; i < white.getAmount() && white.getAmount() < 20; i++) {
+        for (int i = 0; i < white && white < 20; i++) {
             sbMana.append("{W}");
         }
-        for (int i = 0; i < blue.getAmount() && blue.getAmount() < 20; i++) {
+        for (int i = 0; i < blue && blue < 20; i++) {
             sbMana.append("{U}");
         }
-        for (int i = 0; i < black.getAmount() && black.getAmount() < 20; i++) {
+        for (int i = 0; i < black && black < 20; i++) {
             sbMana.append("{B}");
         }
-        for (int i = 0; i < red.getAmount() && red.getAmount() < 20; i++) {
+        for (int i = 0; i < red && red < 20; i++) {
             sbMana.append("{R}");
         }
-        for (int i = 0; i < green.getAmount() && green.getAmount() < 20; i++) {
+        for (int i = 0; i < green && green < 20; i++) {
             sbMana.append("{G}");
         }
-        for (int i = 0; i < any.getAmount() && any.getAmount() < 20; i++) {
+        for (int i = 0; i < any && any < 20; i++) {
             sbMana.append("{Any}");
         }
 
@@ -731,57 +619,57 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public boolean enough(final Mana cost) {
         Mana compare = cost.copy();
         compare.subtract(this);
-        if (compare.white.getAmount() < 0) {
-            compare.any.incrementAmount(compare.white);
-            if (compare.any.getAmount() < 0) {
+        if (compare.white < 0) {
+            compare.any = CardUtil.overflowInc(compare.any, compare.white);
+            if (compare.any < 0) {
                 return false;
             }
-            compare.white.clear();
+            compare.white = 0;
         }
-        if (compare.blue.getAmount() < 0) {
-            compare.any.incrementAmount(compare.blue);
-            if (compare.any.getAmount() < 0) {
+        if (compare.blue < 0) {
+            compare.any = CardUtil.overflowInc(compare.any, compare.blue);
+            if (compare.any < 0) {
                 return false;
             }
-            compare.blue.clear();
+            compare.blue = 0;
         }
-        if (compare.black.getAmount() < 0) {
-            compare.any.incrementAmount(compare.black);
-            if (compare.any.getAmount() < 0) {
+        if (compare.black < 0) {
+            compare.any = CardUtil.overflowInc(compare.any, compare.black);
+            if (compare.any < 0) {
                 return false;
             }
-            compare.black.clear();
+            compare.black = 0;
         }
-        if (compare.red.getAmount() < 0) {
-            compare.any.incrementAmount(compare.red);
-            if (compare.any.getAmount() < 0) {
+        if (compare.red < 0) {
+            compare.any = CardUtil.overflowInc(compare.any, compare.red);
+            if (compare.any < 0) {
                 return false;
             }
-            compare.red.clear();
+            compare.red = 0;
         }
-        if (compare.green.getAmount() < 0) {
-            compare.any.incrementAmount(compare.green);
-            if (compare.any.getAmount() < 0) {
+        if (compare.green < 0) {
+            compare.any = CardUtil.overflowInc(compare.any, compare.green);
+            if (compare.any < 0) {
                 return false;
             }
-            compare.green.clear();
+            compare.green = 0;
         }
-        if (compare.colorless.getAmount() < 0) {
-            compare.any.incrementAmount(compare.colorless);
-            if (compare.any.getAmount() < 0) {
+        if (compare.colorless < 0) {
+            compare.any = CardUtil.overflowInc(compare.any, compare.colorless);
+            if (compare.any < 0) {
                 return false;
             }
-            compare.colorless.clear();
+            compare.colorless = 0;
         }
-        if (compare.generic.getAmount() < 0) {
-            compare.generic.incrementAmount(compare.white);
-            compare.generic.incrementAmount(compare.blue);
-            compare.generic.incrementAmount(compare.black);
-            compare.generic.incrementAmount(compare.red);
-            compare.generic.incrementAmount(compare.green);
-            compare.generic.incrementAmount(compare.colorless);
-            compare.generic.incrementAmount(compare.any);
-            return compare.generic.getAmount() >= 0;
+        if (compare.generic < 0) {
+            compare.generic = CardUtil.overflowInc(compare.generic, compare.white);
+            compare.generic = CardUtil.overflowInc(compare.generic, compare.blue);
+            compare.generic = CardUtil.overflowInc(compare.generic, compare.black);
+            compare.generic = CardUtil.overflowInc(compare.generic, compare.red);
+            compare.generic = CardUtil.overflowInc(compare.generic, compare.green);
+            compare.generic = CardUtil.overflowInc(compare.generic, compare.colorless);
+            compare.generic = CardUtil.overflowInc(compare.generic, compare.any);
+            return compare.generic >= 0;
         }
         return true;
     }
@@ -795,71 +683,71 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public Mana needed(final Mana cost) {
         Mana compare = cost.copy();
         compare.subtract(this);
-        if (compare.white.getAmount() < 0 && compare.any.getAmount() > 0) {
-            int diff = Math.min(compare.any.getAmount(), Math.abs(compare.white.getAmount()));
-            compare.any.incrementAmount(-diff, false);
-            compare.white.incrementAmount(diff, false);
+        if (compare.white < 0 && compare.any > 0) {
+            int diff = Math.min(compare.any, Math.abs(compare.white));
+            compare.any = CardUtil.overflowDec(compare.any, diff);
+            compare.white = CardUtil.overflowInc(compare.white, diff);
         }
-        if (compare.blue.getAmount() < 0 && compare.any.getAmount() > 0) {
-            int diff = Math.min(compare.any.getAmount(), Math.abs(compare.blue.getAmount()));
-            compare.any.incrementAmount(-diff, false);
-            compare.blue.incrementAmount(diff, false);
+        if (compare.blue < 0 && compare.any > 0) {
+            int diff = Math.min(compare.any, Math.abs(compare.blue));
+            compare.any = CardUtil.overflowDec(compare.any, diff);
+            compare.blue = CardUtil.overflowInc(compare.blue, diff);
         }
-        if (compare.black.getAmount() < 0 && compare.any.getAmount() > 0) {
-            int diff = Math.min(compare.any.getAmount(), Math.abs(compare.black.getAmount()));
-            compare.any.incrementAmount(-diff, false);
-            compare.black.incrementAmount(diff, false);
+        if (compare.black < 0 && compare.any > 0) {
+            int diff = Math.min(compare.any, Math.abs(compare.black));
+            compare.any = CardUtil.overflowDec(compare.any, diff);
+            compare.black = CardUtil.overflowInc(compare.black, diff);
         }
-        if (compare.red.getAmount() < 0 && compare.any.getAmount() > 0) {
-            int diff = Math.min(compare.any.getAmount(), Math.abs(compare.red.getAmount()));
-            compare.any.incrementAmount(-diff, false);
-            compare.red.incrementAmount(diff, false);
+        if (compare.red < 0 && compare.any > 0) {
+            int diff = Math.min(compare.any, Math.abs(compare.red));
+            compare.any = CardUtil.overflowDec(compare.any, diff);
+            compare.red = CardUtil.overflowInc(compare.red, diff);
         }
-        if (compare.green.getAmount() < 0 && compare.any.getAmount() > 0) {
-            int diff = Math.min(compare.any.getAmount(), Math.abs(compare.green.getAmount()));
-            compare.any.incrementAmount(-diff, false);
-            compare.green.incrementAmount(diff, false);
+        if (compare.green < 0 && compare.any > 0) {
+            int diff = Math.min(compare.any, Math.abs(compare.green));
+            compare.any = CardUtil.overflowDec(compare.any, diff);
+            compare.green = CardUtil.overflowInc(compare.green, diff);
         }
-        if (compare.colorless.getAmount() < 0 && compare.any.getAmount() > 0) {
-            int diff = Math.min(compare.any.getAmount(), Math.abs(compare.colorless.getAmount()));
-            compare.any.incrementAmount(-diff, false);
-            compare.colorless.incrementAmount(diff, false);
+        if (compare.colorless < 0 && compare.any > 0) {
+            int diff = Math.min(compare.any, Math.abs(compare.colorless));
+            compare.any = CardUtil.overflowDec(compare.any, diff);
+            compare.colorless = CardUtil.overflowInc(compare.colorless, diff);
         }
-        if (compare.generic.getAmount() < 0) {
+        if (compare.generic < 0) {
             int remaining = 0;
-            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.white.getAmount()));
-            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.blue.getAmount()));
-            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.black.getAmount()));
-            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.red.getAmount()));
-            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.green.getAmount()));
-            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.colorless.getAmount()));
-            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.any.getAmount()));
+            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.white));
+            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.blue));
+            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.black));
+            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.red));
+            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.green));
+            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.colorless));
+            remaining = CardUtil.overflowInc(remaining, Math.min(0, compare.any));
             if (remaining > 0) {
-                int diff = Math.min(remaining, Math.abs(compare.generic.getAmount()));
-                compare.generic.incrementAmount(diff, false);
+                int diff = Math.min(remaining, Math.abs(compare.generic));
+                compare.generic = CardUtil.overflowInc(compare.generic, diff);
             }
         }
         Mana needed = new Mana();
-        if (compare.white.getAmount() < 0) {
-            needed.white.removeAmount(compare.white);
+        if (compare.white < 0) {
+            needed.white = CardUtil.overflowDec(needed.white, compare.white);
         }
-        if (compare.blue.getAmount() < 0) {
-            needed.blue.removeAmount(compare.blue);
+        if (compare.blue < 0) {
+            needed.blue = CardUtil.overflowDec(needed.blue, compare.blue);
         }
-        if (compare.black.getAmount() < 0) {
-            needed.black.removeAmount(compare.black);
+        if (compare.black < 0) {
+            needed.black = CardUtil.overflowDec(needed.black, compare.black);
         }
-        if (compare.red.getAmount() < 0) {
-            needed.red.removeAmount(compare.red);
+        if (compare.red < 0) {
+            needed.red = CardUtil.overflowDec(needed.red, compare.red);
         }
-        if (compare.green.getAmount() < 0) {
-            needed.green.removeAmount(compare.green);
+        if (compare.green < 0) {
+            needed.green = CardUtil.overflowDec(needed.green, compare.green);
         }
-        if (compare.colorless.getAmount() < 0) {
-            needed.colorless.removeAmount(compare.colorless);
+        if (compare.colorless < 0) {
+            needed.colorless = CardUtil.overflowDec(needed.colorless, compare.colorless);
         }
-        if (compare.generic.getAmount() < 0) {
-            needed.generic.removeAmount(compare.generic);
+        if (compare.generic < 0) {
+            needed.generic = CardUtil.overflowDec(needed.generic, compare.generic);
         }
         return needed;
     }
@@ -870,7 +758,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return total White mana.
      */
     public int getWhite() {
-        return white.getAmount();
+        return white;
     }
 
     /**
@@ -880,8 +768,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param white total White mana.
      */
     public void setWhite(int white) {
-        this.white.clear();
-        this.white.incrementAmount(notNegative(white, "White"), false);
+        this.white = notNegative(white, "White");
     }
 
     /**
@@ -890,7 +777,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return total Blue mana.
      */
     public int getBlue() {
-        return blue.getAmount();
+        return blue;
     }
 
     /**
@@ -900,8 +787,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param blue total Blue mana.
      */
     public void setBlue(int blue) {
-        this.blue.clear();
-        this.blue.incrementAmount(notNegative(blue, "Blue"), false);
+        this.blue = notNegative(blue, "Blue");
     }
 
     /**
@@ -910,7 +796,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return total Black mana.
      */
     public int getBlack() {
-        return black.getAmount();
+        return black;
     }
 
     /**
@@ -920,8 +806,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param black total Black mana.
      */
     public void setBlack(int black) {
-        this.black.clear();
-        this.black.incrementAmount(notNegative(black, "Black"), false);
+        this.black = notNegative(black, "Black");
     }
 
     /**
@@ -930,7 +815,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return total Red mana.
      */
     public int getRed() {
-        return red.getAmount();
+        return red;
     }
 
     /**
@@ -940,8 +825,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param red total Red mana.
      */
     public void setRed(int red) {
-        this.red.clear();
-        this.red.incrementAmount(notNegative(red, "Red"), false);
+        this.red = notNegative(red, "Red");
     }
 
     /**
@@ -950,7 +834,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return total Green mana.
      */
     public int getGreen() {
-        return green.getAmount();
+        return green;
     }
 
     /**
@@ -960,8 +844,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param green total Green mana.
      */
     public void setGreen(int green) {
-        this.green.clear();
-        this.green.incrementAmount(notNegative(green, "Green"), false);
+        this.green = notNegative(green, "Green");
     }
 
     /**
@@ -970,7 +853,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return total Generic mana.
      */
     public int getGeneric() {
-        return generic.getAmount();
+        return generic;
     }
 
     /**
@@ -980,8 +863,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param generic total Generic mana.
      */
     public void setGeneric(int generic) {
-        this.generic.clear();
-        this.generic.incrementAmount(notNegative(generic, "Generic"), false);
+        this.generic = notNegative(generic, "Generic");
     }
 
     /**
@@ -990,7 +872,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return total Colorless mana.
      */
     public int getColorless() {
-        return colorless.getAmount();
+        return colorless;
     }
 
     /**
@@ -1000,8 +882,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param colorless total Colorless mana.
      */
     public void setColorless(int colorless) {
-        this.colorless.clear();
-        this.colorless.incrementAmount(notNegative(colorless, "Colorless"), false);
+        this.colorless = notNegative(colorless, "Colorless");
     }
 
     /**
@@ -1010,7 +891,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return total Any mana.
      */
     public int getAny() {
-        return any.getAmount();
+        return any;
     }
 
     /**
@@ -1020,31 +901,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param any total Any mana.
      */
     public void setAny(int any) {
-        this.any.clear();
-        this.any.incrementAmount(notNegative(any, "Any"), false);
-    }
-
-    public int getSnow() {
-        return white.getSnowAmount()
-                + blue.getSnowAmount()
-                + black.getSnowAmount()
-                + red.getSnowAmount()
-                + green.getSnowAmount()
-                + colorless.getSnowAmount()
-                + generic.getSnowAmount()
-                + any.getSnowAmount();
-    }
-
-    public boolean checkSnow(ObjectColor color) {
-        if (color.isWhite() && white.getSnowAmount() > 0) {
-            return true;
-        } else if (color.isBlue() && blue.getSnowAmount() > 0) {
-            return true;
-        } else if (color.isBlack() && black.getSnowAmount() > 0) {
-            return true;
-        } else if (color.isRed() && red.getSnowAmount() > 0) {
-            return true;
-        } else return color.isGreen() && green.getSnowAmount() > 0;
+        this.any = notNegative(any, "Any");
     }
 
     /**
@@ -1066,25 +923,25 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return true if this contains any values that mana has
      */
     public boolean contains(final Mana mana) {
-        if (mana.white.getAmount() > 0 && this.white.getAmount() > 0) {
+        if (mana.white > 0 && this.white > 0) {
             return true;
         }
-        if (mana.blue.getAmount() > 0 && this.blue.getAmount() > 0) {
+        if (mana.blue > 0 && this.blue > 0) {
             return true;
         }
-        if (mana.black.getAmount() > 0 && this.black.getAmount() > 0) {
+        if (mana.black > 0 && this.black > 0) {
             return true;
         }
-        if (mana.red.getAmount() > 0 && this.red.getAmount() > 0) {
+        if (mana.red > 0 && this.red > 0) {
             return true;
         }
-        if (mana.green.getAmount() > 0 && this.green.getAmount() > 0) {
+        if (mana.green > 0 && this.green > 0) {
             return true;
         }
-        if (mana.colorless.getAmount() > 0 && this.colorless.getAmount() > 0) {
+        if (mana.colorless > 0 && this.colorless > 0) {
             return true;
         }
-        return mana.generic.getAmount() > 0 && this.count() > 0;
+        return mana.generic > 0 && this.count() > 0;
     }
 
     public boolean containsAny(final Mana mana) {
@@ -1101,19 +958,19 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * this has
      */
     public boolean containsAny(final Mana mana, boolean includeColorless) {
-        if (mana.white.getAmount() > 0 && this.white.getAmount() > 0) {
+        if (mana.white > 0 && this.white > 0) {
             return true;
-        } else if (mana.blue.getAmount() > 0 && this.blue.getAmount() > 0) {
+        } else if (mana.blue > 0 && this.blue > 0) {
             return true;
-        } else if (mana.black.getAmount() > 0 && this.black.getAmount() > 0) {
+        } else if (mana.black > 0 && this.black > 0) {
             return true;
-        } else if (mana.red.getAmount() > 0 && this.red.getAmount() > 0) {
+        } else if (mana.red > 0 && this.red > 0) {
             return true;
-        } else if (mana.green.getAmount() > 0 && this.green.getAmount() > 0) {
+        } else if (mana.green > 0 && this.green > 0) {
             return true;
-        } else if (mana.colorless.getAmount() > 0 && this.colorless.getAmount() > 0 && includeColorless) {
+        } else if (mana.colorless > 0 && this.colorless > 0 && includeColorless) {
             return true;
-        } else return mana.any.getAmount() > 0 && this.count() > 0;
+        } else return mana.any > 0 && this.count() > 0;
     }
 
     /**
@@ -1125,20 +982,17 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * in {@link ColoredManaSymbol}.
      */
     public int getColor(final ColoredManaSymbol color) {
-        if (color == ColoredManaSymbol.W) {
-            return white.getAmount();
-        }
-        if (color == ColoredManaSymbol.U) {
-            return blue.getAmount();
-        }
-        if (color == ColoredManaSymbol.B) {
-            return black.getAmount();
-        }
-        if (color == ColoredManaSymbol.R) {
-            return red.getAmount();
-        }
-        if (color == ColoredManaSymbol.G) {
-            return green.getAmount();
+        switch (color) {
+            case W:
+                return white;
+            case U:
+                return blue;
+            case B:
+                return black;
+            case R:
+                return red;
+            case G:
+                return green;
         }
         return 0;
     }
@@ -1154,17 +1008,17 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public int get(final ManaType manaType) {
         switch (manaType) {
             case WHITE:
-                return white.getAmount();
+                return white;
             case BLUE:
-                return blue.getAmount();
+                return blue;
             case BLACK:
-                return black.getAmount();
+                return black;
             case RED:
-                return red.getAmount();
+                return red;
             case GREEN:
-                return green.getAmount();
+                return green;
             case COLORLESS:
-                return CardUtil.overflowInc(generic.getAmount(), colorless.getAmount());
+                return CardUtil.overflowInc(generic, colorless);
         }
         return 0;
     }
@@ -1218,14 +1072,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param mana the mana to set this object to.
      */
     public void setToMana(final Mana mana) {
-        this.any.copyFrom(mana.any);
-        this.white.copyFrom(mana.white);
-        this.blue.copyFrom(mana.blue.copy());
-        this.black.copyFrom(mana.black.copy());
-        this.red.copyFrom(mana.red.copy());
-        this.green.copyFrom(mana.green.copy());
-        this.colorless.copyFrom(mana.colorless.copy());
-        this.generic.copyFrom(mana.generic.copy());
+        this.any = mana.any;
+        this.white = mana.white;
+        this.blue = mana.blue;
+        this.black = mana.black;
+        this.red = mana.red;
+        this.green = mana.green;
+        this.colorless = mana.colorless;
+        this.generic = mana.generic;
         //this.flag = mana.flag;
     }
 
@@ -1236,14 +1090,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return if the passed in {@link Mana} values are equal to this object.
      */
     public boolean equalManaValue(final Mana mana) {
-        return this.any.equals(mana.any)
-                && this.white.equals(mana.white)
-                && this.blue.equals(mana.blue)
-                && this.black.equals(mana.black)
-                && this.red.equals(mana.red)
-                && this.green.equals(mana.green)
-                && this.colorless.equals(mana.colorless)
-                && this.generic.equals(mana.generic);
+        return this.any == mana.any
+                && this.white == mana.white
+                && this.blue == mana.blue
+                && this.black == mana.black
+                && this.red == mana.red
+                && this.green == mana.green
+                && this.colorless == mana.colorless
+                && this.generic == mana.generic;
     }
 
     /**
@@ -1256,14 +1110,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * {@link Mana}.
      */
     public boolean includesMana(Mana mana) {
-        return this.white.getAmount() >= mana.white.getAmount()
-                && this.blue.getAmount() >= mana.blue.getAmount()
-                && this.black.getAmount() >= mana.black.getAmount()
-                && this.red.getAmount() >= mana.red.getAmount()
-                && this.green.getAmount() >= mana.green.getAmount()
-                && this.colorless.getAmount() >= mana.colorless.getAmount()
-                && (this.generic.getAmount() >= mana.generic.getAmount()
-                || CardUtil.overflowInc(this.countColored(), this.colorless.getAmount()) >= mana.count());
+        return this.white >= mana.white
+                && this.blue >= mana.blue
+                && this.black >= mana.black
+                && this.red >= mana.red
+                && this.green >= mana.green
+                && this.colorless >= mana.colorless
+                && (this.generic >= mana.generic
+                || CardUtil.overflowInc(this.countColored(), this.colorless) >= mana.count());
 
     }
 
@@ -1346,20 +1200,20 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     public int getDifferentColors() {
         int count = 0;
-        if (white.getAmount() > 0) {
-            count++;
+        if (white > 0) {
+            count = CardUtil.overflowInc(count, 1);
         }
-        if (blue.getAmount() > 0) {
-            count++;
+        if (blue > 0) {
+            count = CardUtil.overflowInc(count, 1);
         }
-        if (black.getAmount() > 0) {
-            count++;
+        if (black > 0) {
+            count = CardUtil.overflowInc(count, 1);
         }
-        if (red.getAmount() > 0) {
-            count++;
+        if (red > 0) {
+            count = CardUtil.overflowInc(count, 1);
         }
-        if (green.getAmount() > 0) {
-            count++;
+        if (green > 0) {
+            count = CardUtil.overflowInc(count, 1);
         }
         return count;
     }
@@ -1372,14 +1226,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
         Mana mana = (Mana) o;
         return flag == mana.flag
-                && Objects.equals(white, mana.white)
-                && Objects.equals(blue, mana.blue)
-                && Objects.equals(black, mana.black)
-                && Objects.equals(red, mana.red)
-                && Objects.equals(green, mana.green)
-                && Objects.equals(generic, mana.generic)
-                && Objects.equals(colorless, mana.colorless)
-                && Objects.equals(any, mana.any);
+                && white == mana.white
+                && blue == mana.blue
+                && black == mana.black
+                && red == mana.red
+                && green == mana.green
+                && generic == mana.generic
+                && colorless == mana.colorless
+                && any == mana.any;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -71,7 +70,7 @@ class DreadSummonsEffect extends OneShotEffect {
                     .stream()
                     .filter(Objects::nonNull)
                     .filter(card -> game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
-                    .filter(MageObject::isCreature)
+                    .filter(card1 -> card1.isCreature(game))
                     .count();
         }
         if (creatureCount > 0) {

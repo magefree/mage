@@ -1,4 +1,3 @@
-
 package mage.abilities.costs;
 
 import java.util.UUID;
@@ -72,5 +71,4 @@ public abstract class CostImpl implements Cost {
     public UUID getId() {
         return this.id;
     }
-
 }

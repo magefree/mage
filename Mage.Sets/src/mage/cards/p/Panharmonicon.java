@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.NumberOfTriggersEvent;
 
 /**
@@ -74,8 +73,8 @@ class PanharmoniconEffect extends ReplacementEffectImpl {
                         && sourceEvent instanceof EntersTheBattlefieldEvent) {
                     EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
                     // Only for entering artifacts or creatures
-                    if (entersTheBattlefieldEvent.getTarget().isArtifact()
-                            || entersTheBattlefieldEvent.getTarget().isCreature()) {
+                    if (entersTheBattlefieldEvent.getTarget().isArtifact(game)
+                            || entersTheBattlefieldEvent.getTarget().isCreature(game)) {
                         // Only for triggers of permanents
                         if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
                             return true;

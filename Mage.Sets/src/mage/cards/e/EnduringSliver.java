@@ -27,13 +27,13 @@ public final class EnduringSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Outlast {2}
-        this.addAbility(new OutlastAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{2}")));
 
         // Other sliver creatures you control have outlast {2}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new OutlastAbility(new ManaCostsImpl("{2}")), Duration.WhileOnBattlefield,
+                new OutlastAbility(new ManaCostsImpl<>("{2}")), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, true
-        ).setText("Other sliver creatures you control have outlast {2}.")));
+        ).setText("Other Sliver creatures you control have outlast {2}.")));
     }
 
     private EnduringSliver(final EnduringSliver card) {

@@ -16,6 +16,7 @@ public class Mode implements Serializable {
     protected UUID id;
     protected final Targets targets;
     protected final Effects effects;
+    protected String flavorWord;
 
     public Mode() {
         this((Effect) null);
@@ -34,6 +35,7 @@ public class Mode implements Serializable {
         this.id = mode.id;
         this.targets = mode.targets.copy();
         this.effects = mode.effects.copy();
+        this.flavorWord = mode.flavorWord;
     }
 
     public UUID setRandomId() {
@@ -69,5 +71,20 @@ public class Mode implements Serializable {
 
     public void addEffect(Effect effect) {
         effects.add(effect);
+    }
+
+    public String getFlavorWord() {
+        return flavorWord;
+    }
+
+    /**
+     * Set Flavor word for choice in the mode (same as ability/ancher words, but uses for lore/info and represents a possible choices)
+     *
+     * @param flavorWord
+     * @return
+     */
+    public Mode withFlavorWord(String flavorWord) {
+        this.flavorWord = flavorWord;
+        return this;
     }
 }

@@ -1,8 +1,5 @@
-
-
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -12,18 +9,20 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class TapTargetEffect extends OneShotEffect {
 
     public TapTargetEffect() {
-        super(Outcome.Tap);
+        this((String) null);
     }
 
     public TapTargetEffect(String text) {
         super(Outcome.Tap);
-        if(text != null) {
+        if (text != null) {
             this.staticText = text;
         }
     }
@@ -50,8 +49,8 @@ public class TapTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
-            return "tap " + staticText;
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
         }
 
         if (mode.getTargets().isEmpty()) {
@@ -65,11 +64,10 @@ public class TapTargetEffect extends OneShotEffect {
             } else {
                 return "tap up to " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + " target " + target.getTargetName() + 's';
             }
-        } else if (target.getMaxNumberOfTargets() == 0){
+        } else if (target.getMaxNumberOfTargets() == 0) {
             return "tap X target " + mode.getTargets().get(0).getTargetName();
         } else {
             return "tap target " + mode.getTargets().get(0).getTargetName();
         }
     }
-
 }

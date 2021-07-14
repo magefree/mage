@@ -33,7 +33,7 @@ public final class InkmothNexus extends CardImpl {
         
         // {1}: Inkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
         Effect effect = new BecomesCreatureSourceEffect(new InkmothNexusToken(), "land", Duration.EndOfTurn);
-        effect.setText("{this} becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land. <i>(It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)</i>");
+        effect.setText("{this} becomes a 1/1 Phyrexian Blinkmoth artifact creature with flying and infect until end of turn. It's still a land. <i>(It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)</i>");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1)));
     }
 
@@ -49,9 +49,10 @@ public final class InkmothNexus extends CardImpl {
 
 class InkmothNexusToken extends TokenImpl {
     public InkmothNexusToken() {
-        super("Blinkmoth", "1/1 Blinkmoth artifact creature with flying and infect");
+        super("Phyrexian Blinkmoth", "1/1 Phyrexian Blinkmoth artifact creature with flying and infect");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BLINKMOTH);
         power = new MageInt(1);
         toughness = new MageInt(1);

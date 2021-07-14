@@ -111,7 +111,7 @@ class SphinxsDecreeCantCastEffect extends ContinuousRuleModifyingEffectImpl {
                 if (opponentId.equals(event.getPlayerId())) {
                     MageObject object = game.getObject(event.getSourceId());
                     if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-                        if (object != null && object.isInstantOrSorcery()) {
+                        if (object != null && object.isInstantOrSorcery(game)) {
                             return true;
                         }
                     }

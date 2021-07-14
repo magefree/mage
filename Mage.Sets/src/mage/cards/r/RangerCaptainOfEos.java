@@ -39,13 +39,14 @@ public final class RangerCaptainOfEos extends CardImpl {
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.RANGER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // When Ranger-Captain of Eos enters the battlefield, you may search your library for a creature card with converted mana cost 1 or less, reveal it, put it into your hand, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(0, 1, filter), true
-        ), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true
+        ));
 
         // Sacrifice Ranger-Captain of Eos: Your opponents can't cast noncreature spells this turn.
         this.addAbility(new SimpleActivatedAbility(new RangerCaptainOfEosEffect(), new SacrificeSourceCost()));
@@ -101,7 +102,7 @@ class RangerCaptainOfEosEffect extends ContinuousRuleModifyingEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
             Card card = game.getCard(event.getSourceId());
-            if (card != null && !card.isCreature()) {
+            if (card != null && !card.isCreature(game)) {
                 return true;
             }
         }

@@ -33,16 +33,16 @@ public final class SwordOfSinewAndSteel extends CardImpl {
 
         // Equipped creature gets +2/+2 and has protection from black and from red.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
-        ability.addEffect(new GainAbilityAttachedEffect(ProtectionAbility.from(
-                ObjectColor.BLACK, ObjectColor.RED
-        ), AttachmentType.EQUIPMENT).setText("and has protection from black and from red"));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.RED), AttachmentType.EQUIPMENT
+        ).setText("and has protection from black and from red"));
         this.addAbility(ability);
 
         // Whenever equipped creature deals combat damage to a player, destroy up to one target planeswalker and up to one target artifact.
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
                 new DestroyTargetEffect(false, true)
                         .setText("destroy up to one target planeswalker and up to one target artifact."),
-                "equipped", false
+                "equipped creature", false
         );
         ability.addTarget(new TargetPlaneswalkerPermanent(0, 1));
         ability.addTarget(new TargetArtifactPermanent(0, 1));

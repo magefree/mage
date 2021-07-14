@@ -63,7 +63,7 @@ public final class ClockworkAvian extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AvianAddCountersSourceEffect(
                         CounterType.P1P0.createInstance(),
-                        ManacostVariableValue.instance,
+                        ManacostVariableValue.REGULAR,
                         true, true
                 ),
                 new ManaCostsImpl("{X}"),

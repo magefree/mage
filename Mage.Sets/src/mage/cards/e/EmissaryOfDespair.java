@@ -58,7 +58,7 @@ class EmissaryOfDespairCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public EmissaryOfDespairCount copy() {
         return new EmissaryOfDespairCount();
     }
 

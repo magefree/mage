@@ -20,6 +20,7 @@ public final class IchorclawMyr extends CardImpl {
 
     public IchorclawMyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.MYR);
 
         this.power = new MageInt(1);

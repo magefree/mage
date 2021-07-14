@@ -1,7 +1,6 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -65,8 +64,6 @@ enum LeapfrogCondition implements Condition {
         return spells != null && spells
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isInstantOrSorcery)
-                .map(Spell::getSourceId)
-                .anyMatch(source.getSourceId()::equals);
+                .anyMatch(spell -> spell.isInstantOrSorcery(game));
     }
 }

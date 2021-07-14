@@ -43,6 +43,7 @@ public class Historic extends Constructed {
         banned.add("Swords to Plowshares");
         banned.add("Teferi, Time Raveler");
         banned.add("Thassa's Oracle");
+        banned.add("Time Warp");
         banned.add("Uro, Titan of Nature's Wrath");
         banned.add("Veil of Summer");
         banned.add("Wilderness Reclamation");
@@ -101,7 +102,6 @@ public class Historic extends Constructed {
         banned.add("Mausoleum Turnkey");
         banned.add("Reanimate");
         banned.add("Scourge of Nel Toth");
-        banned.add("Sheoldred, Whispering One");
         banned.add("Ball Lightning");
         banned.add("Chain Lightning");
         banned.add("Draconic Roar");

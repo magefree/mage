@@ -27,13 +27,13 @@ public class TopLibraryCardTypeCondition implements Condition {
             if (card != null) {
                 switch (this.type) {
                     case CREATURE:
-                        return card.isCreature();
+                        return card.isCreature(game);
                     case LAND:
-                        return card.isLand();
+                        return card.isLand(game);
                     case SORCERY:
-                       return card.isSorcery();
+                       return card.isSorcery(game);
                     case INSTANT:
-                        return card.isInstant();
+                        return card.isInstant(game);
                 }
             }
         }

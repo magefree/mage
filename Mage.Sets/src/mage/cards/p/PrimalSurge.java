@@ -65,7 +65,7 @@ class PrimalSurgeEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 controller.moveCards(card, Zone.EXILED, source, game);
-                if (card.isPermanent()
+                if (card.isPermanent(game)
                         && controller.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield?", source, game)) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     repeat = true;

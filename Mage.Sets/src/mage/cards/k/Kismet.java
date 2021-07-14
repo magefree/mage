@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -69,9 +68,9 @@ class KismetEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null && (permanent.isArtifact()
-                    || permanent.isCreature()
-                    || permanent.isLand())) {
+            if (permanent != null && (permanent.isArtifact(game)
+                    || permanent.isCreature(game)
+                    || permanent.isLand(game))) {
                 return true;
             }
         }

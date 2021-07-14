@@ -164,7 +164,7 @@ class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
                 continue;
             }
             opponent.moveCards(card, Zone.EXILED, source, game);
-            if (card.isLand()) {
+            if (card.isLand(game)) {
                 continue;
             }
             ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, true);

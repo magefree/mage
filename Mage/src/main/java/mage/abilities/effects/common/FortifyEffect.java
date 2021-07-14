@@ -24,8 +24,8 @@ public class FortifyEffect extends AttachEffect{
         // fortify keyword ability. Rules 301.5a–e apply to Fortifications in relation to lands just as they apply to
         // Equipment in relation to creatures, with one clarification relating to rule 301.5c: a Fortification that’s
         // also a creature (not a land) can’t fortify a land. (See rule 702.66, “Fortify.”)
-        if (sourcePermanent != null && sourcePermanent.hasSubtype(SubType.FORTIFICATION, game) && !sourcePermanent.isCreature()
-                && !sourcePermanent.isLand()) {
+        if (sourcePermanent != null && sourcePermanent.hasSubtype(SubType.FORTIFICATION, game) && !sourcePermanent.isCreature(game)
+                && !sourcePermanent.isLand(game)) {
             return super.apply(game, source);
         }
         return false;

@@ -91,7 +91,7 @@ class TheImmortalSunCantActivateEffect extends ContinuousRuleModifyingEffectImpl
             if (permanent == null) {
                 return false;
             }
-            if (permanent.isPlaneswalker()) {
+            if (permanent.isPlaneswalker(game)) {
                 Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
                 return ability.isPresent() && (ability.get() instanceof LoyaltyAbility);
             }

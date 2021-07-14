@@ -38,7 +38,7 @@ public class Deckmasters extends ExpansionSet {
         cards.add(new SetCardInfo("Foul Familiar", 5, Rarity.COMMON, mage.cards.f.FoulFamiliar.class));
         cards.add(new SetCardInfo("Fyndhorn Elves", 26, Rarity.COMMON, mage.cards.f.FyndhornElves.class));
         cards.add(new SetCardInfo("Giant Growth", 27, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
-        cards.add(new SetCardInfo("Giant Trap Door Spider", 33, Rarity.RARE, mage.cards.g.GiantTrapDoorSpider.class));
+        cards.add(new SetCardInfo("Giant Trap Door Spider", 33, Rarity.UNCOMMON, mage.cards.g.GiantTrapDoorSpider.class));
         cards.add(new SetCardInfo("Goblin Mutant", 12, Rarity.UNCOMMON, mage.cards.g.GoblinMutant.class));
         cards.add(new SetCardInfo("Guerrilla Tactics", "13a", Rarity.COMMON, mage.cards.g.GuerrillaTactics.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Guerrilla Tactics", "13b", Rarity.COMMON, mage.cards.g.GuerrillaTactics.class, NON_FULL_USE_VARIOUS));

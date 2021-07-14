@@ -30,6 +30,7 @@ public final class VorinclexVoiceOfHunger extends CardImpl {
     public VorinclexVoiceOfHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.PRAETOR);
 
         this.power = new MageInt(7);
@@ -81,7 +82,7 @@ class VorinclexTriggeredAbility2 extends TriggeredAbilityImpl {
         }        
         if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.isLand()) {
+            if (permanent != null && permanent.isLand(game)) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
                 return true;
             }

@@ -86,7 +86,7 @@ class RepeatedReverberationTriggeredAbility extends DelayedTriggeredAbility {
         // spell
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isInstantOrSorcery()) {
+            if (spell != null && spell.isInstantOrSorcery(game)) {
                 this.getEffects().clear();
                 this.addEffect(
                         new CopyTargetSpellEffect(true)

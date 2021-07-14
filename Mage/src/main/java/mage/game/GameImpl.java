@@ -38,10 +38,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.combat.Combat;
-import mage.game.command.CommandObject;
-import mage.game.command.Commander;
-import mage.game.command.Emblem;
-import mage.game.command.Plane;
+import mage.game.command.*;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.mulligan.Mulligan;
@@ -355,7 +352,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (item.getId().equals(objectId)) {
                 return item;
             }
-            if (item.getSourceId().equals(objectId) && item instanceof Spell) {
+            if (item instanceof Spell && item.getSourceId().equals(objectId)) {
                 return item;
             }
         }
@@ -429,6 +426,63 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
         return null;
+    }
+
+    @Override
+    public Dungeon getDungeon(UUID objectId) {
+        return state
+                .getCommand()
+                .stream()
+                .filter(commandObject -> commandObject.getId().equals(objectId))
+                .filter(Dungeon.class::isInstance)
+                .map(Dungeon.class::cast)
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public Dungeon getPlayerDungeon(UUID playerId) {
+        return state
+                .getCommand()
+                .stream()
+                .filter(commandObject -> commandObject.isControlledBy(playerId))
+                .filter(Dungeon.class::isInstance)
+                .map(Dungeon.class::cast)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private void removeDungeon(Dungeon dungeon) {
+        if (dungeon == null) {
+            return;
+        }
+        Player player = getPlayer(dungeon.getControllerId());
+        if (player != null) {
+            informPlayers(player.getLogName() + " has completed " + dungeon.getLogName());
+        }
+        state.getCommand().remove(dungeon);
+        fireEvent(GameEvent.getEvent(
+                GameEvent.EventType.DUNGEON_COMPLETED, dungeon.getId(), null,
+                dungeon.getControllerId(), dungeon.getName(), 0
+        ));
+    }
+
+    private Dungeon getOrCreateDungeon(UUID playerId) {
+        Dungeon dungeon = this.getPlayerDungeon(playerId);
+        if (dungeon != null && dungeon.hasNextRoom()) {
+            return dungeon;
+        }
+        removeDungeon(dungeon);
+        return this.addDungeon(Dungeon.selectDungeon(playerId, this), playerId);
+    }
+
+    @Override
+    public void ventureIntoDungeon(UUID playerId) {
+        if (replaceEvent(GameEvent.getEvent(GameEvent.EventType.VENTURE, playerId, null, playerId))) {
+            return;
+        }
+        this.getOrCreateDungeon(playerId).moveToNextRoom(playerId, this);
+        fireEvent(GameEvent.getEvent(GameEvent.EventType.VENTURED, playerId, null, playerId));
     }
 
     @Override
@@ -1142,6 +1196,7 @@ public abstract class GameImpl implements Game, Serializable {
         getState().addWatcher(new AttackedThisTurnWatcher());
         getState().addWatcher(new PlayersAttackedThisTurnWatcher());
         getState().addWatcher(new CardsDrawnThisTurnWatcher());
+        getState().addWatcher(new ManaSpentToCastWatcher());
     }
 
     public void initPlayerDefaultWatchers(UUID playerId) {
@@ -1658,6 +1713,13 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
+    public Dungeon addDungeon(Dungeon dungeon, UUID playerId) {
+        dungeon.setControllerId(playerId);
+        state.addCommandObject(dungeon);
+        return dungeon;
+    }
+
+    @Override
     public void addPermanent(Permanent permanent, int createOrder) {
         if (createOrder == 0) {
             createOrder = getState().getNextPermanentOrderNumber();
@@ -1697,7 +1759,7 @@ public abstract class GameImpl implements Game, Serializable {
             //getState().addCard(permanent);
             if (copyFromPermanent.isMorphed() || copyFromPermanent.isManifested()
                     || copyFromPermanent.isFaceDown(this)) {
-                MorphAbility.setPermanentToFaceDownCreature(newBluePrint);
+                MorphAbility.setPermanentToFaceDownCreature(newBluePrint, this);
             }
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
@@ -1901,6 +1963,34 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
+        // If a Dungeon is on its last room and is not the source of any triggered abilities, it is removed
+        Set<Dungeon> dungeonsToRemove = new HashSet<>();
+        for (CommandObject commandObject : state.getCommand()) {
+            if (!(commandObject instanceof Dungeon)) {
+                continue;
+            }
+            Dungeon dungeon = (Dungeon) commandObject;
+            boolean removeDungeon = !dungeon.hasNextRoom()
+                    && this.getStack()
+                    .stream()
+                    .filter(DungeonRoom::isRoomTrigger)
+                    .map(StackObject::getSourceId)
+                    .noneMatch(dungeon.getId()::equals)
+                    && this.state
+                    .getTriggered(dungeon.getControllerId())
+                    .stream()
+                    .filter(DungeonRoom::isRoomTrigger)
+                    .map(Ability::getSourceId)
+                    .noneMatch(dungeon.getId()::equals);
+            if (removeDungeon) {
+                dungeonsToRemove.add(dungeon);
+            }
+        }
+        for (Dungeon dungeon : dungeonsToRemove) {
+            this.removeDungeon(dungeon);
+            somethingHappened = true;
+        }
+
         // If a commander is in a graveyard or in exile and that card was put into that zone
         // since the last time state-based actions were checked, its owner may put it into the command zone.
         // signature spells goes to command zone all the time
@@ -1965,11 +2055,14 @@ public abstract class GameImpl implements Game, Serializable {
             //    (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases
             //    to exist the next time state-based actions are checked.
             Zone zone = state.getZone(copiedCard.getMainCard().getId());
-            if (zone == Zone.BATTLEFIELD || zone == Zone.STACK) {
-                continue;
-            }
             // TODO: remember LKI of copied cards here after LKI rework
             switch (zone) {
+                case BATTLEFIELD:
+                    continue;
+                case STACK:
+                    if (getStack().getStackObject(copiedCard.getId()) != null) {
+                        continue;
+                    }
                 case GRAVEYARD:
                     for (Player player : getPlayers().values()) {
                         if (player.getGraveyard().contains(copiedCard.getId())) {
@@ -2008,7 +2101,7 @@ public abstract class GameImpl implements Game, Serializable {
         List<Permanent> worldEnchantment = new ArrayList<>();
         List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters();
         for (Permanent perm : getBattlefield().getAllActivePermanents()) {
-            if (perm.isCreature()) {
+            if (perm.isCreature(this)) {
                 //20091005 - 704.5f
                 if (perm.getToughness().getValue() <= 0) {
                     if (movePermanentToGraveyardWithInfo(perm)) {
@@ -2075,7 +2168,7 @@ public abstract class GameImpl implements Game, Serializable {
                     somethingHappened = true;
                 }
             }
-            if (perm.isPlaneswalker()) {
+            if (perm.isPlaneswalker(this)) {
                 //20091005 - 704.5i
                 if (perm.getCounters(this).getCount(CounterType.LOYALTY) == 0) {
                     if (movePermanentToGraveyardWithInfo(perm)) {
@@ -2090,7 +2183,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (perm.hasSubtype(SubType.AURA, this)) {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
-                    if (!perm.isCreature() && !perm.getAbilities(this).containsClass(BestowAbility.class)) {
+                    if (!perm.isCreature(this) && !perm.getAbilities(this).containsClass(BestowAbility.class)) {
                         if (movePermanentToGraveyardWithInfo(perm)) {
                             somethingHappened = true;
                         }
@@ -2122,7 +2215,7 @@ public abstract class GameImpl implements Game, Serializable {
                             if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
                                 // handle bestow unattachment
                                 Card card = this.getCard(perm.getId());
-                                if (card != null && card.isCreature()) {
+                                if (card != null && card.isCreature(this)) {
                                     UUID wasAttachedTo = perm.getAttachedTo();
                                     perm.attachTo(null, null, this);
                                     fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
@@ -2141,7 +2234,7 @@ public abstract class GameImpl implements Game, Serializable {
                                 } else if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeAttachedBy(perm, null, this, true)) {
                                     // handle bestow unattachment
                                     Card card = this.getCard(perm.getId());
-                                    if (card != null && card.isCreature()) {
+                                    if (card != null && card.isCreature(this)) {
                                         UUID wasAttachedTo = perm.getAttachedTo();
                                         perm.attachTo(null, null, this);
                                         BestowAbility.becomeCreature(perm, this);
@@ -2183,34 +2276,34 @@ public abstract class GameImpl implements Game, Serializable {
             // 704.5s If the number of lore counters on a Saga permanent is greater than or equal to its final chapter number
             // and it isn't the source of a chapter ability that has triggered but not yet left the stack, that Saga's controller sacrifices it.
             if (perm.hasSubtype(SubType.SAGA, this)) {
-                for (Ability sagaAbility : perm.getAbilities()) {
-                    if (sagaAbility instanceof SagaAbility) {
-                        int maxChapter = ((SagaAbility) sagaAbility).getMaxChapter().getNumber();
-                        if (maxChapter <= perm.getCounters(this).getCount(CounterType.LORE)) {
-                            boolean noChapterAbilityTriggeredOrOnStack = true;
-                            // Check chapter abilities on stack
-                            for (StackObject stackObject : getStack()) {
-                                if (stackObject.getSourceId().equals(perm.getId()) && SagaAbility.isChapterAbility(stackObject)) {
-                                    noChapterAbilityTriggeredOrOnStack = false;
-                                    break;
-                                }
-                            }
-                            if (noChapterAbilityTriggeredOrOnStack) {
-                                for (TriggeredAbility trigger : state.getTriggered(perm.getControllerId())) {
-                                    if (SagaAbility.isChapterAbility(trigger) && trigger.getSourceId().equals(perm.getId())) {
-                                        noChapterAbilityTriggeredOrOnStack = false;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (noChapterAbilityTriggeredOrOnStack) {
-                                // After the last chapter ability has left the stack, you'll sacrifice the Saga
-                                perm.sacrifice(null, this);
-                                somethingHappened = true;
-                            }
-                        }
+                int maxChapter = perm
+                        .getAbilities(this)
+                        .stream()
+                        .filter(SagaAbility.class::isInstance)
+                        .map(SagaAbility.class::cast)
+                        .map(SagaAbility::getMaxChapter)
+                        .mapToInt(SagaChapter::getNumber)
+                        .max()
+                        .orElse(0);
 
-                    }
+                boolean sacSaga = maxChapter <= perm
+                        .getCounters(this)
+                        .getCount(CounterType.LORE)
+                        && this.getStack()
+                        .stream()
+                        .filter(SagaAbility::isChapterAbility)
+                        .map(StackObject::getSourceId)
+                        .noneMatch(perm.getId()::equals)
+                        && this.state
+                        .getTriggered(perm.getControllerId())
+                        .stream()
+                        .filter(SagaAbility::isChapterAbility)
+                        .map(Ability::getSourceId)
+                        .noneMatch(perm.getId()::equals);
+                if (sacSaga) {
+                    // After the last chapter ability has left the stack, you'll sacrifice the Saga
+                    perm.sacrifice(null, this);
+                    somethingHappened = true;
                 }
             }
             if (this.getState().isLegendaryRuleActive() && StaticFilters.FILTER_PERMANENT_LEGENDARY.match(perm, this)) {
@@ -2234,7 +2327,7 @@ public abstract class GameImpl implements Game, Serializable {
                         UUID wasAttachedTo = perm.getAttachedTo();
                         perm.attachTo(null, null, this);
                         fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
-                    } else if (!attachedTo.isCreature() || attachedTo.hasProtectionFrom(perm, this)) {
+                    } else if (!attachedTo.isCreature(this) || attachedTo.hasProtectionFrom(perm, this)) {
                         if (attachedTo.removeAttachment(perm.getId(), null, this)) {
                             somethingHappened = true;
                         }
@@ -2246,7 +2339,7 @@ public abstract class GameImpl implements Game, Serializable {
                     Permanent land = getPermanent(perm.getAttachedTo());
                     if (land == null || !land.getAttachments().contains(perm.getId())) {
                         perm.attachTo(null, null, this);
-                    } else if (!land.isLand() || land.hasProtectionFrom(perm, this)) {
+                    } else if (!land.isLand(this) || land.hasProtectionFrom(perm, this)) {
                         if (land.removeAttachment(perm.getId(), null, this)) {
                             somethingHappened = true;
                         }
@@ -2260,7 +2353,7 @@ public abstract class GameImpl implements Game, Serializable {
                 for (UUID attachmentId : perm.getAttachments()) {
                     Permanent attachment = getPermanent(attachmentId);
                     if (attachment != null
-                            && (attachment.isCreature()
+                            && (attachment.isCreature(this)
                             || !(attachment.hasSubtype(SubType.AURA, this)
                             || attachment.hasSubtype(SubType.EQUIPMENT, this)
                             || attachment.hasSubtype(SubType.FORTIFICATION, this)))) {
@@ -2691,7 +2784,7 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
                 // check if it's a creature and must be removed from combat
-                if (perm.isCreature() && this.getCombat() != null) {
+                if (perm.isCreature(this) && this.getCombat() != null) {
                     perm.removeFromCombat(this, true);
                 }
                 toOutside.add(perm);

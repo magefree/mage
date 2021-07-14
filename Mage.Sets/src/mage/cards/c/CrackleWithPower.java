@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class CrackleWithPower extends CardImpl {
 
-    private static final DynamicValue value = new MultipliedValue(ManacostVariableValue.instance, 5);
+    private static final DynamicValue value = new MultipliedValue(ManacostVariableValue.REGULAR, 5);
 
     public CrackleWithPower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{X}{R}{R}");

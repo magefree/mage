@@ -21,7 +21,7 @@ public final class WordOfBinding extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
         // Tap X target creatures.
-        this.getSpellAbility().addEffect(new TapTargetEffect("X target creatures"));
+        this.getSpellAbility().addEffect(new TapTargetEffect("tap X target creatures"));
         this.getSpellAbility().setTargetAdjuster(WordOfBindingAdjuster.instance);
     }
 

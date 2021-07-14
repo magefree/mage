@@ -65,9 +65,9 @@ enum MalevolentNoblePredicate implements ObjectSourcePlayerPredicate<ObjectSourc
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
         MageObject obj = input.getObject();
         if (obj.getId().equals(input.getSourceId())) {
-            return obj.isArtifact();
+            return obj.isArtifact(game);
         }
-        return obj.isArtifact()
-                || obj.isCreature();
+        return obj.isArtifact(game)
+                || obj.isCreature(game);
     }
 }

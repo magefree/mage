@@ -31,7 +31,7 @@ Enchant|type|
 Encore|cost|
 Entwine|manaString|
 Eternalize|cost, card|
-Evoke|card, manaString|
+Evoke|manaString|
 Evolve|new|
 Exalted|new|
 Exploit|new|
@@ -65,6 +65,7 @@ Melee|new|
 Menace|new|
 Mentor|new|
 Miracle|cost|
+Modular|card, number|
 Mountaincycling|cost|
 Mountainwalk|new|
 Morph|card, cost|
@@ -94,6 +95,7 @@ Skulk|new|
 Spectacle|card, cost|
 Storm|new|
 Sunburst|new|
+Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Totem armor|new|

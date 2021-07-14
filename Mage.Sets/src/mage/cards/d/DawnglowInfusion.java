@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class DawnglowInfusion extends CardImpl {
 
 
         // You gain X life if {G} was spent to cast Dawnglow Infusion and X life if {W} was spent to cast it.
-        DynamicValue xValue = ManacostVariableValue.instance;
+        DynamicValue xValue = ManacostVariableValue.REGULAR;
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GainLifeEffect(xValue),
                 new ManaWasSpentCondition(ColoredManaSymbol.G), "You gain X life if {G} was spent to cast this spell"));
@@ -33,7 +32,6 @@ public final class DawnglowInfusion extends CardImpl {
                 new GainLifeEffect(xValue),
                 new ManaWasSpentCondition(ColoredManaSymbol.W), " And X life if {W} was spent to cast it"));
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {G}{W} was spent.)</i>"));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
 
 
     }

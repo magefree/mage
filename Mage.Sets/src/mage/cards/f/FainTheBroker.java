@@ -17,7 +17,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.SilverquillToken;
+import mage.game.permanent.token.InklingToken;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -55,7 +55,7 @@ public final class FainTheBroker extends CardImpl {
         this.addAbility(ability);
 
         // {T}, Sacrifice an artifact: Create a 2/1 white and black Inkling creature token with flying.
-        ability = new SimpleActivatedAbility(new CreateTokenEffect(new SilverquillToken()), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new CreateTokenEffect(new InklingToken()), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(
                 new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)
         ));

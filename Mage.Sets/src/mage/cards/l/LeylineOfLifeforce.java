@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 
 /**
@@ -73,7 +72,7 @@ class LeylineOfLifeforceEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && spell.isCreature()) {
+        if (spell != null && spell.isCreature(game)) {
             return true;
         }
         return false;

@@ -18,7 +18,7 @@ public final class MindSpring extends CardImpl {
     public MindSpring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}");
 
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
     }
 
     private MindSpring(final MindSpring card) {

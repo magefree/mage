@@ -21,6 +21,7 @@ public final class ImpalerShrike extends CardImpl {
 
     public ImpalerShrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BIRD);
 
         this.power = new MageInt(3);

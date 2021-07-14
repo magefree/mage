@@ -30,7 +30,7 @@ public class EnchantedSourceCondition implements Condition {
         if (permanent != null) {
             for (UUID uuid : permanent.getAttachments()) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
-                if (attached != null && attached.isEnchantment()) {
+                if (attached != null && attached.isEnchantment(game)) {
                     if (++numberOfFoundEnchantments >= numberOfEnchantments) {
                         return true;
                     }

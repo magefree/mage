@@ -24,6 +24,7 @@ public final class PhyrexianSnowcrusher extends CardImpl {
     public PhyrexianSnowcrusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
        addSuperType(SuperType.SNOW);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.JUGGERNAUT);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);

@@ -5,7 +5,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.QuandrixToken;
+import mage.game.permanent.token.FractalToken;
 
 import java.util.UUID;
 
@@ -20,8 +20,8 @@ public final class FractalSummoning extends CardImpl {
         this.subtype.add(SubType.LESSON);
 
         // Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it.
-        this.getSpellAbility().addEffect(QuandrixToken.getEffect(
-                ManacostVariableValue.instance, "Put X +1/+1 counters on it"
+        this.getSpellAbility().addEffect(FractalToken.getEffect(
+                ManacostVariableValue.REGULAR, "Put X +1/+1 counters on it"
         ));
     }
 

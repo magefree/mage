@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.target.common.TargetAnyTarget;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -32,8 +31,7 @@ public final class SteamcoreWeird extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.R),
-                "if {R} was spent to cast this spell, it deals 2 damage to any target."),
-                new ManaSpentToCastWatcher());        
+                "if {R} was spent to cast this spell, it deals 2 damage to any target."));
     }
 
     private SteamcoreWeird(final SteamcoreWeird card) {

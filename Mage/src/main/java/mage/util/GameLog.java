@@ -3,6 +3,8 @@ package mage.util;
 import mage.MageObject;
 import mage.ObjectColor;
 
+import java.util.regex.Pattern;
+
 /**
  * @author LevelX2
  */
@@ -30,7 +32,7 @@ public final class GameLog {
     static final String LOG_COLOR_NEUTRAL = "#F0F8FF"; // AliceBlue
 
     public static String replaceNameByColoredName(MageObject mageObject, String text) {
-        return text.replaceAll(mageObject.getName(), getColoredObjectIdName(mageObject));
+        return replaceNameByColoredName(mageObject, text, null);
     }
 
     /**
@@ -40,7 +42,7 @@ public final class GameLog {
      * @return
      */
     public static String replaceNameByColoredName(MageObject mageObject, String text, MageObject alternativeObject) {
-        return text.replaceAll(mageObject.getName(), getColoredObjectIdName(mageObject, alternativeObject));
+        return text.replaceAll(Pattern.quote(mageObject.getName()), getColoredObjectIdName(mageObject, alternativeObject));
     }
 
     public static String getColoredObjectName(MageObject mageObject) {

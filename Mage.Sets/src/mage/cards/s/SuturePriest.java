@@ -18,7 +18,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -29,6 +28,7 @@ public final class SuturePriest extends CardImpl {
 
     public SuturePriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(1);
@@ -78,7 +78,7 @@ class SuturePriestSecondTriggeredAbility extends TriggeredAbilityImpl {
         if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             EntersTheBattlefieldEvent zEvent = (EntersTheBattlefieldEvent) event;
             Card card = zEvent.getTarget();
-            if (card != null && card.isCreature()) {
+            if (card != null && card.isCreature(game)) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }

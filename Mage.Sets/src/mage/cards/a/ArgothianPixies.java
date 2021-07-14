@@ -76,7 +76,7 @@ class ArgothianPixiesPreventDamageFromArtifactsEffect extends PreventionEffectIm
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
             MageObject sourceObject = game.getObject(event.getSourceId());
-            if (sourceObject != null && sourceObject.getCardType().contains(CardType.ARTIFACT)) {
+            if (sourceObject != null && sourceObject.getCardType(game).contains(CardType.ARTIFACT)) {
                 return (event.getTargetId().equals(source.getSourceId()));
             }
         }

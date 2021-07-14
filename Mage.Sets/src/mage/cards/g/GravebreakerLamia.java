@@ -1,23 +1,18 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.SearchEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInGraveyardEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.card.CastFromZonePredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
 
@@ -45,7 +40,7 @@ public final class GravebreakerLamia extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Gravebreaker Lamia enters the battlefield, search your library for a card, put it into your graveyard, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GravebreakerLamiaSearchEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInGraveyardEffect(), false));
 
         // Spells you cast from your graveyard cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)
@@ -59,35 +54,5 @@ public final class GravebreakerLamia extends CardImpl {
     @Override
     public GravebreakerLamia copy() {
         return new GravebreakerLamia(this);
-    }
-}
-
-class GravebreakerLamiaSearchEffect extends SearchEffect {
-
-    GravebreakerLamiaSearchEffect() {
-        super(new TargetCardInLibrary(), Outcome.Neutral);
-        staticText = "search your library for a card, put it into your graveyard, then shuffle";
-    }
-
-    private GravebreakerLamiaSearchEffect(final GravebreakerLamiaSearchEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GravebreakerLamiaSearchEffect copy() {
-        return new GravebreakerLamiaSearchEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        if (controller.searchLibrary(target, source, game)) {
-            controller.moveCards(game.getCard(target.getFirstTarget()), Zone.GRAVEYARD, source, game);
-        }
-        controller.shuffleLibrary(source, game);
-        return true;
     }
 }

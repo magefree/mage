@@ -18,7 +18,7 @@ public class AttacksIfAbleSourceEffect extends RequirementEffect {
     boolean eachCombat;
 
     public AttacksIfAbleSourceEffect(Duration duration) {
-        this(duration, false);
+        this(duration, true);
     }
 
     public AttacksIfAbleSourceEffect(Duration duration, boolean eachCombat) {

@@ -73,7 +73,7 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (source == null || !source.isArtifact()) {
+        if (source == null || !source.isArtifact(game)) {
             return false;
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());

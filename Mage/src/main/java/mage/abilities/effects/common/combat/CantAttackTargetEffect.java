@@ -42,7 +42,9 @@ public class CantAttackTargetEffect extends RestrictionEffect {
         }
         String text = "target " + mode.getTargets().get(0).getTargetName() + " can't attack";
         if (this.duration == Duration.EndOfTurn) {
-            text += " this turn";
+            return text + " this turn";
+        } else if (this.duration == Duration.UntilYourNextTurn) {
+            return text + " until your next turn";
         }
         return text;
     }

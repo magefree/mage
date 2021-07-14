@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -55,7 +54,7 @@ class CowardiceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isCreature()) {
+        if (permanent != null && permanent.isCreature(game)) {
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
             return true;
         }

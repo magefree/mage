@@ -7,7 +7,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.FoodToken;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
@@ -22,7 +22,7 @@ public final class LateToDinner extends CardImpl {
         // Return target creature card from your graveyard to the battlefield. Create a Food token.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new FoodToken()));
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
     private LateToDinner(final LateToDinner card) {

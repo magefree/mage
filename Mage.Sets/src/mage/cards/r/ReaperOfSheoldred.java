@@ -27,6 +27,7 @@ public final class ReaperOfSheoldred extends CardImpl {
 
     public ReaperOfSheoldred(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(2);

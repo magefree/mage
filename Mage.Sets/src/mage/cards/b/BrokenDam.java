@@ -28,7 +28,7 @@ public final class BrokenDam extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
         // Tap one or two target creatures without horsemanship.
-        this.getSpellAbility().addEffect(new TapTargetEffect("one or two target creatures without horsemanship"));
+        this.getSpellAbility().addEffect(new TapTargetEffect("tap one or two target creatures without horsemanship"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, 2, filter, false));
     }
 

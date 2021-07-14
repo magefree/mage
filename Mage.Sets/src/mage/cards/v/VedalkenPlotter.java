@@ -42,7 +42,7 @@ public final class VedalkenPlotter extends CardImpl {
         // When Vedalken Plotter enters the battlefield, exchange control of target land you control and target land an opponent controls.
         Effect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, rule, false, true);
         effect.setText("exchange control of target land you control and target land an opponent controls");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false, true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

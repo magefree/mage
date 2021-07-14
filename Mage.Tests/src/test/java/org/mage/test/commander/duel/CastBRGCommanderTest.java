@@ -1,6 +1,5 @@
 package org.mage.test.commander.duel;
 
-import java.io.FileNotFoundException;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -10,8 +9,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
+import java.io.FileNotFoundException;
+
 /**
- *
  * @author LevelX2
  */
 public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
@@ -97,22 +97,36 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
 
+        // exile from hand 1
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+4: Target player", playerA);
         addTarget(playerA, "Silvercoat Lion");
 
+        // prepare commander
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Daxos of Meletis");
 
+        // exile from hand 2
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+4: Target player", playerA);
         addTarget(playerA, "Silvercoat Lion");
 
+        // attack and get commander damage
         attack(4, playerB, "Daxos of Meletis");
 
+        // exile commander
         activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "-3: Exile target permanent", "Daxos of Meletis");
         setChoice(playerB, "No"); // Move commander NOT to command zone
 
+        // exile from hand 3
         activateAbility(7, PhaseStep.PRECOMBAT_MAIN, playerA, "+4: Target player", playerA);
         addTarget(playerA, "Silvercoat Lion");
+
+        // restart game and return to battlefield 1x commander and 3x lions
         activateAbility(9, PhaseStep.PRECOMBAT_MAIN, playerA, "-14: Restart");
+        // warning:
+        // - karn restart code can clear some game data
+        // - current version ignores a card's ZCC
+        // - so ZCC are same after game restart and SBA can't react on commander new move
+        // - logic can be changed in the future, so game can ask commander move again here
+        //setChoice(playerB, "No"); // Move commander NOT to command zone
 
         setStopAt(9, PhaseStep.BEGIN_COMBAT);
 
@@ -127,8 +141,7 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
         assertPermanentCount(playerA, "Daxos of Meletis", 1); // Karn brings back the cards under the control of Karn's controller
 
         CommanderInfoWatcher watcher = currentGame.getState().getWatcher(CommanderInfoWatcher.class, playerB.getCommandersIds().iterator().next());
-        Assert.assertEquals("Watcher is reset to 0 commander damage", 0, (int) watcher.getDamageToPlayer().size());
-
+        Assert.assertEquals("Watcher is reset to 0 commander damage", 0, watcher.getDamageToPlayer().size());
     }
 
     /**

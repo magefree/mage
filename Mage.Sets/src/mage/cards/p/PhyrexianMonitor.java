@@ -20,6 +20,7 @@ public final class PhyrexianMonitor extends CardImpl {
 
     public PhyrexianMonitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SKELETON);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -66,7 +66,7 @@ enum FinaleOfPromiseAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
 
-        int xValue = ManacostVariableValue.instance.calculate(game, ability, null);
+        int xValue = ManacostVariableValue.REGULAR.calculate(game, ability, null);
 
         // <= must be replaced to &#60;= for html view
         FilterCard filter1 = FinaleOfPromise.filterInstant.copy();
@@ -146,7 +146,7 @@ class FinaleOfPromiseEffect extends OneShotEffect {
         }
 
         // If X is 10 or more, copy each of those spells twice. You may choose new targets for the copies
-        int xValue = ManacostVariableValue.instance.calculate(game, source, null);
+        int xValue = ManacostVariableValue.REGULAR.calculate(game, source, null);
         if (xValue >= 10) {
             for (UUID id : cardsToCast) {
                 Card card = game.getCard(id);

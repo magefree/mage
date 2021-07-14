@@ -102,8 +102,8 @@ class WhispersteelDaggerCastFromExileEffect extends AsThoughEffectImpl {
         Card card = game.getCard(sourceId);
         return card != null
                 && card.getOwnerId().equals(targetId)
-                && card.isCreature()
-                && !card.isLand();
+                && card.isCreature(game)
+                && !card.isLand(game);
     }
 }
 

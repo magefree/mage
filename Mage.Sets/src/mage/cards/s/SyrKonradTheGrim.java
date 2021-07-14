@@ -76,12 +76,12 @@ class SyrKonradTheGrimTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()
                 && zEvent.getTarget() != null
                 && !zEvent.getTargetId().equals(this.getSourceId())
-                && zEvent.getTarget().isCreature()) {
+                && zEvent.getTarget().isCreature(game)) {
             return true;
         }
         Card card = game.getCard(zEvent.getTargetId());
         // Or a creature card is put into a graveyard from anywhere other than the battlefield
-        if (card == null || !card.isCreature()) {
+        if (card == null || !card.isCreature(game)) {
             return false;
         }
         if (zEvent.getToZone() == Zone.GRAVEYARD

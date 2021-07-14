@@ -112,7 +112,7 @@ public final class GoblinWelder extends CardImpl {
             }
             Card card = game.getCard(id);
             return card != null
-                    && card.isArtifact()
+                    && card.isArtifact(game)
                     && card.isOwnedBy(permanent.getControllerId());
         }
 

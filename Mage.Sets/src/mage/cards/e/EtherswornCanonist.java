@@ -64,7 +64,7 @@ class EtherswornCanonistWatcher extends Watcher {
                     spell = (Spell) mageObject;
                 }
             }
-            if (spell != null && !spell.isArtifact()) {
+            if (spell != null && !spell.isArtifact(game)) {
                 castNonartifactSpell.add(event.getPlayerId());
             }
         }
@@ -104,7 +104,7 @@ class EtherswornCanonistReplacementEffect extends ContinuousRuleModifyingEffectI
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
-        if (card != null && !card.isArtifact()) {
+        if (card != null && !card.isArtifact(game)) {
             EtherswornCanonistWatcher watcher = game.getState().getWatcher(EtherswornCanonistWatcher.class);
             return watcher != null && watcher.castNonArtifactSpell(event.getPlayerId());
         }

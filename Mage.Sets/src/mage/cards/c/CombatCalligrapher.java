@@ -17,7 +17,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.SilverquillToken;
+import mage.game.permanent.token.InklingToken;
 
 import java.util.UUID;
 
@@ -58,7 +58,7 @@ class CombatCalligrapherTriggeredAbility extends TriggeredAbilityImpl {
 
     CombatCalligrapherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenTargetEffect(
-                new SilverquillToken(), StaticValue.get(1), true, true
+                new InklingToken(), StaticValue.get(1), true, true
         ), false);
     }
 

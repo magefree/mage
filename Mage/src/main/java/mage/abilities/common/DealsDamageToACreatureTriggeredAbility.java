@@ -81,6 +81,7 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
             sb.append("a creature, ");
         } else {
             sb.append(filter.getMessage());
+            sb.append(", ");
         }
         sb.append(super.getRule());
         return sb.toString();

@@ -21,7 +21,6 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -90,7 +89,7 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
             Permanent permanent = ((ZoneChangeEvent) event).getTarget();
             if (permanent != null
                     && permanent.isControlledBy(this.getControllerId())
-                    && permanent.isCreature()
+                    && permanent.isCreature(game)
                     && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game) + 1));

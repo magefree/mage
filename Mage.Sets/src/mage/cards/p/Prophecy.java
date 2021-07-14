@@ -78,7 +78,7 @@ class ProphecyEffect extends OneShotEffect {
             }
             cards.add(card);
             targetPlayer.revealCards(sourceObject.getIdName(), cards, game);
-            if (card.isLand()) {
+            if (card.isLand(game)) {
                 controller.gainLife(1, game, source);
             }
             targetPlayer.shuffleLibrary(source, game);

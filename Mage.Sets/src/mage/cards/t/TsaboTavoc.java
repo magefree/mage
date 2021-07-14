@@ -36,6 +36,7 @@ public final class TsaboTavoc extends CardImpl {
     public TsaboTavoc(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(7);

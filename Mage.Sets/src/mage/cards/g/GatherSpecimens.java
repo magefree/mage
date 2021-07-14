@@ -13,6 +13,7 @@ import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -70,16 +71,22 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).getToZone().match(Zone.BATTLEFIELD)) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.isCreature()) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
+            if (card != null && card.isCreature(game)) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
                     return true;
                 }
             }
         }
-        if (event.getType() == GameEvent.EventType.CREATE_TOKEN && ((CreateTokenEvent) event).getToken().isCreature()) {
+        if (event.getType() == GameEvent.EventType.CREATE_TOKEN) {
             Player controller = game.getPlayer(source.getControllerId());
-            return controller != null && controller.hasOpponent(event.getPlayerId(), game);
+            if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
+                for (Token token : ((CreateTokenEvent) event).getTokens().keySet()) {
+                    if (token.isCreature(game)) {
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }

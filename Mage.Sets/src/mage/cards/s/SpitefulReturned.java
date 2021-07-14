@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -78,7 +77,7 @@ class SpitefulReturnedTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent sourcePermanent = game.getPermanent(this.getSourceId());
         if (sourcePermanent != null) {
-            if (sourcePermanent.isCreature()) {
+            if (sourcePermanent.isCreature(game)) {
                 if (event.getSourceId() != null
                         && event.getSourceId().equals(this.getSourceId())) {
                     UUID defender = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);

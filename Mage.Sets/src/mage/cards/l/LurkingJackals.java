@@ -67,7 +67,7 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         if (getSourcePermanentIfItStillExists(game) != null) {
-            return getSourcePermanentIfItStillExists(game).isEnchantment();
+            return getSourcePermanentIfItStillExists(game).isEnchantment(game);
         }
         return false;
     }
@@ -108,7 +108,7 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
 class LurkingJackalsToken extends TokenImpl {
 
     public LurkingJackalsToken() {
-        super("Hound", "3/2 Hound creature");
+        super("Dog", "3/2 Dog creature");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.DOG);
         power = new MageInt(3);

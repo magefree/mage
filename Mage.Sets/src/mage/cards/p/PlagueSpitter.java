@@ -21,6 +21,7 @@ public final class PlagueSpitter extends CardImpl {
 
     public PlagueSpitter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

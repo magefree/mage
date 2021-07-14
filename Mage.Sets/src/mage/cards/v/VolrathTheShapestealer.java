@@ -42,6 +42,7 @@ public final class VolrathTheShapestealer extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);

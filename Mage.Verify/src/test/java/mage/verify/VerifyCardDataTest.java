@@ -56,7 +56,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "C21"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "MH2"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -87,35 +87,29 @@ public class VerifyCardDataTest {
 
         // power-toughness
         skipListCreate(SKIP_LIST_PT);
-        skipListAddName(SKIP_LIST_PT, "UST", "Garbage Elemental");
-        skipListAddName(SKIP_LIST_PT, "UST", "Infinity Elemental");
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
 
         // cost
         skipListCreate(SKIP_LIST_COST);
-        skipListAddName(SKIP_LIST_COST, "KTK", "Erase");
-        skipListAddName(SKIP_LIST_COST, "M13", "Erase");
-        skipListAddName(SKIP_LIST_COST, "ULG", "Erase");
-        skipListAddName(SKIP_LIST_COST, "WC00", "Erase");
-        skipListAddName(SKIP_LIST_COST, "H17", "Grimlock, Dinobot Leader");
-        skipListAddName(SKIP_LIST_COST, "UST", "Everythingamajig");
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
 
         // type
         skipListCreate(SKIP_LIST_TYPE);
-        skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey");
+        skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
-        skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense");
+        skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
+        skipListAddName(SKIP_LIST_TYPE, "AFR", "Iron Golem"); // temporary
+        skipListAddName(SKIP_LIST_TYPE, "AFR", "Silver Raven"); // temporary
 
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
-        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
-        skipListAddName(SKIP_LIST_SUBTYPE, "MH2", "Squirrel Sovereign"); // temporary
-        subtypesToIgnore.add("Phyrexian"); // large errata incoming, adding this for now
+        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
+        skipListAddName(SKIP_LIST_SUBTYPE, "AFR", "Iron Golem"); // temporary
+        skipListAddName(SKIP_LIST_SUBTYPE, "AFR", "Silver Raven"); // temporary
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
@@ -518,7 +512,7 @@ public class VerifyCardDataTest {
             rootPath = Paths.get("..", "Mage.Client", "release", "sample-decks");
         }
         if (!Files.exists(rootPath)) {
-            Assert.fail("Sample decks: unknown root folder " + rootPath.toAbsolutePath().toString());
+            Assert.fail("Sample decks: unknown root folder " + rootPath.toAbsolutePath());
         }
 
         // collect all files in all root's folders
@@ -535,7 +529,7 @@ public class VerifyCardDataTest {
             e.printStackTrace();
             errorsList.add("Error: sample deck - can't get folder content - " + e.getMessage());
         }
-        Assert.assertTrue("Sample decks: can't find any deck files in " + rootPath.toAbsolutePath().toString(), filesList.size() > 0);
+        Assert.assertTrue("Sample decks: can't find any deck files in " + rootPath.toAbsolutePath(), filesList.size() > 0);
 
         // try to open deck files
         int totalErrorFiles = 0;
@@ -550,7 +544,7 @@ public class VerifyCardDataTest {
 
             if (!deckErrors.toString().isEmpty()) {
                 errorsList.add("Error: sample deck contains errors " + deckName);
-                System.out.println("Errors in sample deck " + deckName + ":\n" + deckErrors.toString());
+                System.out.println("Errors in sample deck " + deckName + ":\n" + deckErrors);
                 totalErrorFiles++;
                 continue;
             }
@@ -921,7 +915,7 @@ public class VerifyCardDataTest {
                 Assert.assertNotNull(card);
 
                 // CHECK: all planeswalkers must be legendary
-                if (card.getCardType().contains(CardType.PLANESWALKER) && !card.getSuperType().contains(SuperType.LEGENDARY)) {
+                if (card.isPlaneswalker() && !card.getSuperType().contains(SuperType.LEGENDARY)) {
                     errorsList.add("Error: planeswalker must have legendary type: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
@@ -1181,7 +1175,10 @@ public class VerifyCardDataTest {
     }
 
     private static boolean checkName(MtgJsonCard ref) {
-        if (!ONLY_TEXT || checkedNames.contains(ref.name)) {
+        if (!ONLY_TEXT) {
+            return true;
+        }
+        if (checkedNames.contains(ref.name)) {
             return false;
         }
         checkedNames.add(ref.name);
@@ -1189,9 +1186,6 @@ public class VerifyCardDataTest {
     }
 
     private void checkAll(Card card, MtgJsonCard ref, int cardIndex) {
-        if (checkName(ref)) {
-            return;
-        }
         if (!ONLY_TEXT) {
             checkCost(card, ref);
             checkPT(card, ref);
@@ -1258,6 +1252,20 @@ public class VerifyCardDataTest {
 
         if (expected != null) {
             expected.removeIf(subtypesToIgnore::contains);
+        }
+
+        for (SubType subType : card.getSubtype()) {
+            if (!subType.isCustomSet() && !subType.canGain(card)) {
+                String cardTypeString = card
+                        .getCardType()
+                        .stream()
+                        .map(CardType::toString)
+                        .reduce((a, b) -> a + " " + b)
+                        .orElse("");
+                fail(card, "subtypes", "card has subtype "
+                        + subType.getDescription() + " (" + subType.getSubTypeSet() + ')'
+                        + " that doesn't match its card type(s) (" + cardTypeString + ')');
+            }
         }
 
         if (!eqSet(actual, expected)) {
@@ -1327,7 +1335,7 @@ public class VerifyCardDataTest {
         }
 
         // spells have only 1 ability
-        if (card.isSorcery() || card.isInstant()) {
+        if (card.isInstantOrSorcery()) {
             return;
         }
 
@@ -1484,7 +1492,7 @@ public class VerifyCardDataTest {
 
     private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
         // checks missing or wrong text
-        if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE)) {
+        if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE) || !checkName(ref)) {
             return;
         }
 

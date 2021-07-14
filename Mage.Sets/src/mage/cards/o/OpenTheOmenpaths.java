@@ -88,7 +88,7 @@ class OpenTheOmenpathsCondition extends ManaCondition implements Condition {
             return false;
         }
         MageObject object = game.getObject(source.getSourceId());
-        return object != null && (object.isCreature() || object.isEnchantment());
+        return object != null && (object.isCreature(game) || object.isEnchantment(game));
     }
 
     @Override

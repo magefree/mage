@@ -82,7 +82,7 @@ class FeralDeceiverEffect extends OneShotEffect {
             if (card != null) {
                 Cards cards = new CardsImpl(card);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
-                if (card.isLand()) {
+                if (card.isLand(game)) {
                     game.addEffect(new BoostSourceEffect(2, 2, Duration.EndOfTurn), source);
                     game.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), source);
                 }

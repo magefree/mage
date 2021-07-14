@@ -48,7 +48,7 @@ public final class WillowduskEssenceSeer extends CardImpl {
 
         // {1}, {T}: Choose another target creature. Put a number of +1/+1 counters on it equal to the amount of life you gained this turn or the amount of life you lost this turn, whichever is greater. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new AddCountersTargetEffect(
-                CounterType.P1P1.createInstance(), WillowduskEssenceSeerValue.instance
+                CounterType.P1P1.createInstance(0), WillowduskEssenceSeerValue.instance
         ).setText("choose another target creature. Put a number of +1/+1 counters on it " +
                 "equal to the amount of life you gained this turn or the amount of " +
                 "life you lost this turn, whichever is greater"), new GenericManaCost(1));

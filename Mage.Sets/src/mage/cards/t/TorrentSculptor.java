@@ -137,7 +137,7 @@ class FlamethrowerSonataEffect extends OneShotEffect {
         }
         Card card = player.discardOne(false, false, source, game);
         player.drawCards(1, source, game);
-        if (card == null || !card.isInstantOrSorcery()) {
+        if (card == null || !card.isInstantOrSorcery(game)) {
             return true;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(

@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -33,8 +32,7 @@ public final class OgreSavant extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(),false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.U),
-                "if {U} was spent to cast this spell, return target creature to its owner's hand."),
-                new ManaSpentToCastWatcher());
+                "if {U} was spent to cast this spell, return target creature to its owner's hand."));
     }
 
     private OgreSavant(final OgreSavant card) {

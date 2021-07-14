@@ -96,7 +96,7 @@ class TaigamOjutaiMasterTriggeredAbility extends DelayedTriggeredAbility {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.getFromZone() == Zone.HAND) {
                 if (spell.getCard() != null
-                        && spell.getCard().isInstantOrSorcery()) {
+                        && spell.getCard().isInstantOrSorcery(game)) {
                     for (Effect effect : getEffects()) {
                         effect.setTargetPointer(new FixedTarget(spell.getId()));
                     }

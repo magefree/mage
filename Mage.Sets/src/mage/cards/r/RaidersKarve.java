@@ -77,7 +77,7 @@ class RaidersKarveEffect extends OneShotEffect {
             return true;
         }
         controller.lookAtCards(sourceObject.getIdName(), new CardsImpl(card), game);
-        if (!card.isLand()) {
+        if (!card.isLand(game)) {
             return true;
         }
         String message = "Put " + card.getLogName() + " onto the battlefield tapped?";

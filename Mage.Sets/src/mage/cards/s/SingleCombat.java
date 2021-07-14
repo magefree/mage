@@ -122,6 +122,6 @@ class SingleCombatRestrictionEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
-        return card != null && (card.isCreature() || card.isPlaneswalker());
+        return card != null && (card.isCreature(game) || card.isPlaneswalker(game));
     }
 }

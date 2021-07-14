@@ -21,10 +21,10 @@ public class PermanentEvaluator {
         // more score -- more valueable/powerfull permanent
         if (!values.containsKey(permanent.getId())) {
             int value = 0;
-            if (permanent.isCreature()) {
+            if (permanent.isCreature(game)) {
                 value += combat.evaluate(permanent, game);
             }
-            if (permanent.isPlaneswalker()) {
+            if (permanent.isPlaneswalker(game)) {
                 value += 2 * permanent.getCounters(game).getCount(CounterType.LOYALTY); // planeswalker is more valuable
             }
             value += permanent.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD).size();

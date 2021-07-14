@@ -128,9 +128,9 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
         for (SuperType t : copied.getSuperType()) {
             permanent.addSuperType(t);
         }
-        permanent.getCardType().clear();
-        for (CardType cardType : copied.getCardType()) {
-            permanent.addCardType(cardType);
+        permanent.removeAllCardTypes(game);
+        for (CardType cardType : copied.getCardType(game)) {
+            permanent.addCardType(game, cardType);
         }
         permanent.removeAllSubTypes(game);
         permanent.copySubTypesFrom(game, copied);

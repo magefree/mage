@@ -35,7 +35,7 @@ public final class YWing extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // Whenever Y-Wing can't deals combat damage to a player, tap target creature an opponent controls. It doesn't untap during its controller's next untap step.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new TapTargetEffect("target creature an opponent controls."), false);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new TapTargetEffect("tap target creature an opponent controls."), false);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect(" It"));
         this.addAbility(ability);

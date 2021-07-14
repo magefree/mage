@@ -547,4 +547,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     public void setMayChooseNone(boolean mayChooseNone) {
         this.mayChooseNone = mayChooseNone;
     }
+
+    public boolean isMayChooseNone() {
+        return mayChooseNone;
+    }
 }

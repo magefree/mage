@@ -113,25 +113,25 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
             return;
         }
         if (filter.isBlack()) {
-            black.clear();
+            black = 0;
         }
         if (filter.isBlue()) {
-            blue.clear();
+            blue = 0;
         }
         if (filter.isWhite()) {
-            white.clear();
+            white = 0;
         }
         if (filter.isGreen()) {
-            green.clear();
+            green = 0;
         }
         if (filter.isRed()) {
-            red.clear();
+            red = 0;
         }
         if (filter.isColorless()) {
-            colorless.clear();
+            colorless = 0;
         }
         if (filter.isGeneric()) {
-            generic.clear();
+            generic = 0;
         }
     }
 
@@ -154,25 +154,25 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
     public void clear(ManaType manaType) {
         switch (manaType) {
             case BLACK:
-                black.clear();
+                black = 0;
                 break;
             case BLUE:
-                blue.clear();
+                blue = 0;
                 break;
             case GREEN:
-                green.clear();
+                green = 0;
                 break;
             case RED:
-                red.clear();
+                red = 0;
                 break;
             case WHITE:
-                white.clear();
+                white = 0;
                 break;
             case GENERIC:
-                generic.clear();
+                generic = 0;
                 break;
             case COLORLESS:
-                colorless.clear();
+                colorless = 0;
                 break;
         }
     }
@@ -198,25 +198,25 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
     public void add(ManaType manaType, int amount) {
         switch (manaType) {
             case BLACK:
-                black.incrementAmount(amount, false);
+                black += amount;
                 break;
             case BLUE:
-                blue.incrementAmount(amount, false);
+                blue += amount;
                 break;
             case GREEN:
-                green.incrementAmount(amount, false);
+                green += amount;
                 break;
             case RED:
-                red.incrementAmount(amount, false);
+                red += amount;
                 break;
             case WHITE:
-                white.incrementAmount(amount, false);
+                white += amount;
                 break;
             case COLORLESS:
-                colorless.incrementAmount(amount, false);
+                colorless += amount;
                 break;
             case GENERIC:
-                generic.incrementAmount(amount, false);
+                generic += amount;
                 break;
         }
     }

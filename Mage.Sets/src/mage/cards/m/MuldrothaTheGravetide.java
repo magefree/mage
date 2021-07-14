@@ -94,7 +94,7 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
             MuldrothaTheGravetideWatcher watcher = game.getState().getWatcher(MuldrothaTheGravetideWatcher.class);
             MageObject mageObject = game.getObject(objectId);
             if (mageObject != null && watcher != null) {
-                for (CardType cardType : mageObject.getCardType()) {
+                for (CardType cardType : mageObject.getCardType(game)) {
                     if (cardType.isPermanentType()) {
                         MageObjectReference mor = new MageObjectReference(source.getSourceObject(game), game);
                         if (!watcher.permanentTypePlayedFromGraveyard(mor, cardType)) {
@@ -161,7 +161,7 @@ class MuldrothaTheGravetideWatcher extends Watcher {
                     sourcePlayedPermanentTypes.put(event.getAdditionalReference().getApprovingMageObjectReference(), permanentTypes);
                 }
                 Set<CardType> typesNotCast = EnumSet.noneOf(CardType.class);
-                for (CardType cardType : mageObject.getCardType()) {
+                for (CardType cardType : mageObject.getCardType(game)) {
                     if (cardType.isPermanentType()) {
                         if (!permanentTypes.contains(cardType)) {
                             typesNotCast.add(cardType);

@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
@@ -11,14 +9,15 @@ import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.token.HydraBroodmasterToken;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HydraBroodmaster extends CardImpl {
@@ -32,6 +31,7 @@ public final class HydraBroodmaster extends CardImpl {
 
         // {X}{X}{G}: Monstrosity X
         this.addAbility(new MonstrosityAbility("{X}{X}{G}", Integer.MAX_VALUE));
+
         // When Hydra Broodmaster becomes monstrous, create X X/X green Hydra creature tokens.
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new HydraBroodmasterEffect()));
     }
