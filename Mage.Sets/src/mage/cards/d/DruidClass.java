@@ -16,10 +16,7 @@ import mage.abilities.keyword.ClassLevelAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetPermanent;
@@ -84,8 +81,8 @@ class DruidClassToken extends TokenImpl {
         this.toughness = new MageInt(0);
 
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(
-                LandsYouControlCount.instance, Duration.EndOfGame
+        this.addAbility(new SimpleStaticAbility(new SetPowerToughnessSourceEffect(
+                LandsYouControlCount.instance, Duration.EndOfGame, SubLayer.SetPT_7b
         ).setText("this creature's power and toughness are each equal to the number of lands you control")));
     }
 
