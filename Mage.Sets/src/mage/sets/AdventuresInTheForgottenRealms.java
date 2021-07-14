@@ -188,6 +188,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Priest of Ancient Lore", 35, Rarity.COMMON, mage.cards.p.PriestOfAncientLore.class));
         cards.add(new SetCardInfo("Prosperous Innkeeper", 200, Rarity.UNCOMMON, mage.cards.p.ProsperousInnkeeper.class));
         cards.add(new SetCardInfo("Purple Worm", 201, Rarity.UNCOMMON, mage.cards.p.PurpleWorm.class));
+        cards.add(new SetCardInfo("Rally Maneuver", 36, Rarity.UNCOMMON, mage.cards.r.RallyManeuver.class));
         cards.add(new SetCardInfo("Ranger's Hawk", 37, Rarity.COMMON, mage.cards.r.RangersHawk.class));
         cards.add(new SetCardInfo("Ranger's Longbow", 203, Rarity.COMMON, mage.cards.r.RangersLongbow.class));
         cards.add(new SetCardInfo("Ray of Enfeeblement", 116, Rarity.UNCOMMON, mage.cards.r.RayOfEnfeeblement.class));
