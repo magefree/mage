@@ -1528,7 +1528,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean setClassLevel(int classLevel) {
-        if (this.classLevel == classLevel + 1) {
+        if (this.classLevel == classLevel - 1) {
             this.classLevel = classLevel;
             return true;
         }
