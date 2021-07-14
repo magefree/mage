@@ -72,6 +72,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Burdened Aerialist", 38, Rarity.COMMON, mage.cards.b.BurdenedAerialist.class));
         cards.add(new SetCardInfo("Cabal Coffers", 301, Rarity.MYTHIC, mage.cards.c.CabalCoffers.class));
         cards.add(new SetCardInfo("Cabal Initiate", 78, Rarity.COMMON, mage.cards.c.CabalInitiate.class));
+        cards.add(new SetCardInfo("Carth the Lion", 189, Rarity.RARE, mage.cards.c.CarthTheLion.class));
         cards.add(new SetCardInfo("Calibrated Blast", 118, Rarity.RARE, mage.cards.c.CalibratedBlast.class));
         cards.add(new SetCardInfo("Caprichrome", 9, Rarity.UNCOMMON, mage.cards.c.Caprichrome.class));
         cards.add(new SetCardInfo("Captain Ripley Vance", 119, Rarity.UNCOMMON, mage.cards.c.CaptainRipleyVance.class));

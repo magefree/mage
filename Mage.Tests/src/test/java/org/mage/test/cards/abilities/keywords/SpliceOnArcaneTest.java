@@ -154,7 +154,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
     @Test
     @Ignore
     public void testCounteredBecauseOfNoLegalTarget() {
-        // TODO: rewrite test, it's wrong and misleading-- user report about Griselbrand was destroyed by Terminate after splice anounce, but tests don't use it at all (Griselbrand legal target all the time)
+        // TODO: rewrite test, it's wrong and misleading-- user report about Griselbrand was destroyed by Terminate after splice announce, but tests don't use it at all (Griselbrand legal target all the time)
 
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 8);
