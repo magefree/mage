@@ -885,7 +885,6 @@ public class GameState implements Serializable, Copyable<GameState> {
             }
             ZoneChangeData eventData = entry.getKey();
             if (!movedCards.isEmpty() || !movedTokens.isEmpty()) {
-                System.out.println("The movedCards and movedTokens : " + movedCards + " " + movedTokens);
                 ZoneChangeGroupEvent event = new ZoneChangeGroupEvent(
                         movedCards,
                         movedTokens,
