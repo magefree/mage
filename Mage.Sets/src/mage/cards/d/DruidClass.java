@@ -39,7 +39,7 @@ public final class DruidClass extends CardImpl {
         // (Gain the next level as a sorcery to add its ability.)
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new InfoEffect("<i>(Gain the next level as a sorcery to add its ability.)</i>")
-        ));
+        ).addHint(mage.abilities.hint.common.ClassLevelHint.instance));
 
         // Whenever a land enters the battlefield under your control, you gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(

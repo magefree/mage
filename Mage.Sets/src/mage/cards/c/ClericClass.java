@@ -38,7 +38,7 @@ public final class ClericClass extends CardImpl {
         // (Gain the next level as a sorcery to add its ability.)
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new InfoEffect("<i>(Gain the next level as a sorcery to add its ability.)</i>")
-        ));
+        ).addHint(mage.abilities.hint.common.ClassLevelHint.instance));
 
         // If you would gain life, you gain that much life plus 1 instead.
         this.addAbility(new SimpleStaticAbility(new ClericClassLifeEffect()));

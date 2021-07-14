@@ -34,7 +34,7 @@ public final class WizardClass extends CardImpl {
         // (Gain the next level as a sorcery to add its ability.)
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new InfoEffect("<i>(Gain the next level as a sorcery to add its ability.)</i>")
-        ));
+        ).addHint(mage.abilities.hint.common.ClassLevelHint.instance));
 
         // You have no maximum hand size.
         this.addAbility(new SimpleStaticAbility(new MaximumHandSizeControllerEffect(

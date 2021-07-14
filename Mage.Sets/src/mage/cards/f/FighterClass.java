@@ -44,7 +44,7 @@ public final class FighterClass extends CardImpl {
         // (Gain the next level as a sorcery to add its ability.)
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new InfoEffect("<i>(Gain the next level as a sorcery to add its ability.)</i>")
-        ));
+        ).addHint(mage.abilities.hint.common.ClassLevelHint.instance));
 
         // When Fighter Class enters the battlefield, search your library for an Equipment card, reveal it, put it into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
