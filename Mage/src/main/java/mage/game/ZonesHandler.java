@@ -36,7 +36,14 @@ public final class ZonesHandler {
             } else {
                 cards.add(targetCard);
             }
-            game.fireEvent(new ZoneChangeGroupEvent(cards, tokens, info.event.getSourceId(), info.event.getPlayerId(), info.event.getFromZone(), info.event.getToZone()));
+            game.fireEvent(new ZoneChangeGroupEvent(
+                    cards, 
+                    tokens, 
+                    info.event.getSourceId(), 
+                    info.event.getSource(), 
+                    info.event.getPlayerId(), 
+                    info.event.getFromZone(), 
+                    info.event.getToZone()));
             // normal movement
             game.fireEvent(info.event);
             return true;

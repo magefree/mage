@@ -816,12 +816,14 @@ public class GameState implements Serializable, Copyable<GameState> {
             private final Zone toZone;
             private final UUID sourceId;
             private final UUID playerId;
+            Ability source;
 
-            public ZoneChangeData(UUID sourceId, UUID playerId, Zone fromZone, Zone toZone) {
+            public ZoneChangeData(Ability source, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone) {
                 this.sourceId = sourceId;
                 this.playerId = playerId;
                 this.fromZone = fromZone;
                 this.toZone = toZone;
+                this.source = source;
             }
 
             @Override
@@ -829,7 +831,7 @@ public class GameState implements Serializable, Copyable<GameState> {
                 return (this.fromZone.ordinal() + 1) * 1
                         + (this.toZone.ordinal() + 1) * 10
                         + (this.sourceId != null ? this.sourceId.hashCode() : 0)
-                        + (this.playerId != null ? this.playerId.hashCode() : 0);
+                        + (this.source != null ? this.source.hashCode() : 0);
             }
 
             @Override
@@ -839,7 +841,7 @@ public class GameState implements Serializable, Copyable<GameState> {
                     return this.fromZone == data.fromZone
                             && this.toZone == data.toZone
                             && Objects.equals(this.sourceId, data.sourceId)
-                            && Objects.equals(this.playerId, data.playerId);
+                            && Objects.equals(this.source, data.source);
                 }
                 return false;
             }
@@ -850,7 +852,12 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (GameEvent event : events) {
             if (event instanceof ZoneChangeEvent) {
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
-                ZoneChangeData key = new ZoneChangeData(castEvent.getSourceId(), castEvent.getPlayerId(), castEvent.getFromZone(), castEvent.getToZone());
+                ZoneChangeData key = new ZoneChangeData(
+                        castEvent.getSource(),
+                        castEvent.getSourceId(),
+                        castEvent.getPlayerId(),
+                        castEvent.getFromZone(),
+                        castEvent.getToZone());
                 if (eventsByKey.containsKey(key)) {
                     eventsByKey.get(key).add(event);
                 } else {
@@ -863,20 +870,30 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
             Set<Card> movedCards = new LinkedHashSet<>();
             Set<PermanentToken> movedTokens = new LinkedHashSet<>();
-            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext(); ) {
+            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext();) {
                 GameEvent event = it.next();
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
                 UUID targetId = castEvent.getTargetId();
                 Card card = ZonesHandler.getTargetCard(game, targetId);
                 if (card instanceof PermanentToken) {
                     movedTokens.add((PermanentToken) card);
+                } else if (game.getObject(targetId) instanceof PermanentToken) {
+                    movedTokens.add((PermanentToken) game.getObject(targetId));
                 } else if (card != null) {
                     movedCards.add(card);
                 }
             }
             ZoneChangeData eventData = entry.getKey();
             if (!movedCards.isEmpty() || !movedTokens.isEmpty()) {
-                ZoneChangeGroupEvent event = new ZoneChangeGroupEvent(movedCards, movedTokens, eventData.sourceId, eventData.playerId, eventData.fromZone, eventData.toZone);
+                System.out.println("The movedCards and movedTokens : " + movedCards + " " + movedTokens);
+                ZoneChangeGroupEvent event = new ZoneChangeGroupEvent(
+                        movedCards,
+                        movedTokens,
+                        eventData.sourceId,
+                        eventData.source,
+                        eventData.playerId,
+                        eventData.fromZone,
+                        eventData.toZone);
                 groupEvents.add(event);
             }
         }
@@ -928,7 +945,8 @@ public class GameState implements Serializable, Copyable<GameState> {
      * span
      *
      * @param ability
-     * @param sourceId   - if source object can be moved between zones then you must set it here (each game cycle clear all source related triggers)
+     * @param sourceId - if source object can be moved between zones then you
+     * must set it here (each game cycle clear all source related triggers)
      * @param attachedTo
      */
     public void addAbility(Ability ability, UUID sourceId, MageObject attachedTo) {
@@ -1046,7 +1064,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     /**
      * Return values list starting with searching key.
      * <p>
-     * Usage example: if you want to find all saved values from related ability/effect
+     * Usage example: if you want to find all saved values from related
+     * ability/effect
      *
      * @param startWithValue
      * @return
@@ -1133,8 +1152,8 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param attachedTo
      * @param ability
      * @param copyAbility copies non MageSingleton abilities before adding to
-     *                    state (allows to have multiple instances in one object,
-     *                    e.g. false param will simulate keyword/singletone)
+     * state (allows to have multiple instances in one object, e.g. false param
+     * will simulate keyword/singleton)
      */
     public void addOtherAbility(Card attachedTo, Ability ability, boolean copyAbility) {
         checkWrongDynamicAbilityUsage(attachedTo, ability);
@@ -1271,7 +1290,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
-     * Make full copy of the card and all of the card's parts and put to the game.
+     * Make full copy of the card and all of the card's parts and put to the
+     * game.
      *
      * @param mainCardToCopy
      * @param newController
