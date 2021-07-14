@@ -47,7 +47,7 @@ public class BecomesRenownedSourceTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
-    public String getRule() {
-        return "When {this} becomes renowned, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "When {this} becomes renowned, " ;
     }
 }

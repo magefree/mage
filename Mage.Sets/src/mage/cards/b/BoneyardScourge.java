@@ -103,8 +103,8 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever " + filter.getMessage() + " dies while {this} is in your graveyard, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever " + filter.getMessage() + " dies while {this} is in your graveyard, " ;
     }
 
 }

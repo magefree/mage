@@ -49,9 +49,9 @@ public class PackTacticsAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPrefix() {
         return AbilityWord.PACK_TACTICS.formatWord() +
                 "Whenever {this} attacks, if you attacked with creatures " +
-                "with total power 6 or greater this combat, " + super.getRule();
+                "with total power 6 or greater this combat, " ;
     }
 }

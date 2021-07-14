@@ -129,7 +129,7 @@ class AdarkarValkyrieDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When target creature other than {this} dies this turn, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "When target creature other than {this} dies this turn, " ;
     }
 }

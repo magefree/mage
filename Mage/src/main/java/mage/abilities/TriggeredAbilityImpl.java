@@ -178,6 +178,11 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
+    public String getTriggerPrefix() {
+        return "";
+    }
+
+    @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
 
         /**

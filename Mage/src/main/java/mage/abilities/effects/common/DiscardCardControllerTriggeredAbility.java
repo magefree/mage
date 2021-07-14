@@ -47,7 +47,7 @@ public class DiscardCardControllerTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you discard " + filter.getMessage() + ", " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever you discard " + filter.getMessage() + ", " ;
     }
 }

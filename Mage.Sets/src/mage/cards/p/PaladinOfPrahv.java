@@ -95,8 +95,8 @@ class PaladinOfPrahvTriggeredAbility extends DelayedTriggeredAbility {
     }
     
     @Override
-    public String getRule() {
-        return "Whenever target creature deals damage this turn, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever target creature deals damage this turn, " ;
     }
 }
 

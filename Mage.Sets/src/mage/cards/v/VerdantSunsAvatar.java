@@ -76,8 +76,8 @@ class VerdantSunsAvatarTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} or another creature enters the battlefield under your control, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever {this} or another creature enters the battlefield under your control, " ;
     }
 
     @Override

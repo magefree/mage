@@ -63,12 +63,11 @@ public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbi
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPrefix() {
         return new StringBuilder("Whenever ").append(attachedDescription)
                 .append(" deals ")
                 .append(combatOnly ? "combat " : "")
-                .append("damage to a creature, ")
-                .append(super.getRule()).toString();
+                .append("damage to a creature, ").toString();
     }
 
 }

@@ -76,7 +76,7 @@ class RuthlessDeathfangTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you sacrifice a creature, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever you sacrifice a creature, " ;
     }
 }

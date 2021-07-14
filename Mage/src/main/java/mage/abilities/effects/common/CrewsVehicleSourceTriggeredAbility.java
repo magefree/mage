@@ -42,7 +42,7 @@ public class CrewsVehicleSourceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When {this} crews a Vehicle, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "When {this} crews a Vehicle, " ;
     }
 }

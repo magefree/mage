@@ -127,7 +127,7 @@ class MurktideRegentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an instant or sorcery card leaves your graveyard, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever an instant or sorcery card leaves your graveyard, " ;
     }
 }

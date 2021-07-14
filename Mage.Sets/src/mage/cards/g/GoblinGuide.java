@@ -91,10 +91,7 @@ class GoblinGuideTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        if (text == null || text.isEmpty()) {
-            return "When {this} attacks, " + super.getRule();
-        }
-        return text;
+            return "Whenever {this} attacks, defending player reveals the top card of their library. If it's a land card, that player puts it into their hand.";
     }
 
     @Override
@@ -108,7 +105,6 @@ class GoblinGuideEffect extends OneShotEffect {
 
     public GoblinGuideEffect() {
         super(Outcome.DrawCard);
-        staticText = "defending player reveals the top card of their library. If it's a land card, that player puts it into their hand";
     }
 
     public GoblinGuideEffect(final GoblinGuideEffect effect) {

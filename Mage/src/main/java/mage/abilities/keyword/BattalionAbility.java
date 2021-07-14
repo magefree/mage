@@ -2,15 +2,15 @@
 
 package mage.abilities.keyword;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
  * FAQ 2013/01/11
- *
+ * <p>
  * Battalion is an ability word that appears in italics at the beginning of abilities
  * that trigger whenever you attack with that creature and at least two other
  * creatures. (An ability word has no rules meaning.)
@@ -45,8 +45,8 @@ public class BattalionAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return new StringBuilder("<i>Battalion</i> &mdash; Whenever {this} and at least two other creatures attack, ").append(super.getRule()).toString() ;
+    public String getTriggerPrefix() {
+        return "<i>Battalion</i> &mdash; Whenever {this} and at least two other creatures attack, ";
     }
 }
 

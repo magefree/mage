@@ -119,8 +119,8 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        StringBuilder sb = new StringBuilder(super.getRule());
+    public String getTriggerPrefix() {
+        StringBuilder sb = new StringBuilder("");
         if (ruleTrigger != null && !ruleTrigger.isEmpty()) {
             return sb.insert(0, ruleTrigger).toString();
         }

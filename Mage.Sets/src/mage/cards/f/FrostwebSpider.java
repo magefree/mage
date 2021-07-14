@@ -92,8 +92,8 @@ class FrostwebSpiderTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} blocks a " + filter.getMessage() + ", " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever {this} blocks a " + filter.getMessage() + ", " ;
     }
 
     @Override

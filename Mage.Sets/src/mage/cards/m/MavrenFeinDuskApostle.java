@@ -89,7 +89,7 @@ class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever one or more nontoken Vampires you control attack, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever one or more nontoken Vampires you control attack, " ;
     }
 }

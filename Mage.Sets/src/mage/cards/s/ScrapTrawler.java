@@ -91,8 +91,8 @@ class ScrapTrawlerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} or another artifact you control is put into a graveyard from the battlefield, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever {this} or another artifact you control is put into a graveyard from the battlefield, " ;
     }
 
 }

@@ -41,8 +41,8 @@ public class BountyAbility extends DiesCreatureTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "<i>Bounty</i> &mdash; " + super.getRule();
+    public String getTriggerPrefix() {
+        return "<i>Bounty</i> &mdash; " ;
     }
 
 }

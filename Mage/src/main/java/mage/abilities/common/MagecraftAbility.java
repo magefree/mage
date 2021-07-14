@@ -45,8 +45,8 @@ public class MagecraftAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "<i>Magecraft</i> &mdash; Whenever you cast or copy an instant or sorcery spell, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "<i>Magecraft</i> &mdash; Whenever you cast or copy an instant or sorcery spell, " ;
     }
 
     @Override

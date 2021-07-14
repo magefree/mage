@@ -83,7 +83,7 @@ class GladehartCavalryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature you control with a +1/+1 counter on it dies, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever a creature you control with a +1/+1 counter on it dies, " ;
     }
 }

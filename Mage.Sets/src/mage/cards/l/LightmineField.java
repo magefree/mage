@@ -80,8 +80,8 @@ class LightmineFieldTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever one or more creatures attack, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever one or more creatures attack, " ;
     }
 }
 

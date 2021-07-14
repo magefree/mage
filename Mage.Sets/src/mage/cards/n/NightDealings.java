@@ -85,8 +85,8 @@ public final class NightDealings extends CardImpl {
         }
 
         @Override
-        public String getRule() {
-            return "Whenever a source you control deals damage to another player, " + super.getRule();
+        public String getTriggerPrefix() {
+            return "Whenever a source you control deals damage to another player, " ;
         }
     }
 

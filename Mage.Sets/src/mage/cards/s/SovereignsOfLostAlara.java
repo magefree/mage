@@ -85,8 +85,8 @@ class CreatureControlledAttacksAloneTriggeredAbility extends TriggeredAbilityImp
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature you control attacks alone, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever a creature you control attacks alone, " ;
     }
 }
 

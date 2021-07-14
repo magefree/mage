@@ -90,8 +90,8 @@ class DeadIronSledgeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever equipped creature blocks or becomes blocked by a creature, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever equipped creature blocks or becomes blocked by a creature, " ;
     }
 
     @Override

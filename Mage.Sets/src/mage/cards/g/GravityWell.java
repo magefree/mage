@@ -67,8 +67,8 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature with flying attacks, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever a creature with flying attacks, " ;
     }
 
     @Override

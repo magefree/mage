@@ -90,8 +90,8 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever another creature enters the battlefield under your control, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever another creature enters the battlefield under your control, " ;
     }
 
     @Override

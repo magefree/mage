@@ -61,8 +61,8 @@ public class DealsCombatDamageToACreatureTriggeredAbility extends TriggeredAbili
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a creature, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever {this} deals combat damage to a creature, " ;
     }
 
 }

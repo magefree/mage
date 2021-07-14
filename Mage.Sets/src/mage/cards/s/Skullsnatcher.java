@@ -97,7 +97,7 @@ class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever {this} deals combat damage to a player, " ;
    }
 }

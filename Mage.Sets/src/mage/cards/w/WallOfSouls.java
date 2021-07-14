@@ -79,8 +79,8 @@ class WallOfSoulsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} is dealt combat damage, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever {this} is dealt combat damage, " ;
     }
 }
 

@@ -86,8 +86,8 @@ class ThassasEmissaryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} or enchanted creature deals combat damage to a player, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever {this} or enchanted creature deals combat damage to a player, " ;
     }
 
 }

@@ -77,7 +77,7 @@ public class InspiredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return (isInspired ? "<i>Inspired</i> &mdash; " : "") + "Whenever {this} becomes untapped, " + super.getRule();
+    public String getTriggerPrefix() {
+        return (isInspired ? "<i>Inspired</i> &mdash; " : "") + "Whenever {this} becomes untapped, " ;
     }
 }

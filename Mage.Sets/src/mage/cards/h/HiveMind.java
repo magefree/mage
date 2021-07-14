@@ -77,8 +77,8 @@ class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player casts an instant or sorcery spell, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever a player casts an instant or sorcery spell, " ;
     }
 }
 

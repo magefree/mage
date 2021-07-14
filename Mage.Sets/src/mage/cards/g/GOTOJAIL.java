@@ -121,8 +121,8 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "At the beginning of the chosen player's upkeep, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "At the beginning of the chosen player's upkeep, " ;
     }
 }
 

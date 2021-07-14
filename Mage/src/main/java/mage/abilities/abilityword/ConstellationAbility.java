@@ -57,9 +57,9 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPrefix() {
         return "<i>Constellation</i> &mdash; Whenever "
                 + (thisOr ? "{this} or another" : "an")
-                + " enchantment enters the battlefield under your control, " + super.getRule();
+                + " enchantment enters the battlefield under your control, " ;
     }
 }

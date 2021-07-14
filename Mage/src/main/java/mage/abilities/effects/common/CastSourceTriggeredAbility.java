@@ -63,7 +63,7 @@ public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return rulePrefix + "When you cast this spell, " + super.getRule();
+    public String getTriggerPrefix() {
+        return rulePrefix + "When you cast this spell, " ;
     }
 }

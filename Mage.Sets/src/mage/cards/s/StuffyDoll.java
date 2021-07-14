@@ -84,8 +84,8 @@ class StuffyDollTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} is dealt damage, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever {this} is dealt damage, " ;
     }
 }
 

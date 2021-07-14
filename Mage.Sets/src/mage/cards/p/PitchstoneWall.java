@@ -78,7 +78,7 @@ class PitchstoneWallTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you discard a card, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever you discard a card, " ;
     }
 }

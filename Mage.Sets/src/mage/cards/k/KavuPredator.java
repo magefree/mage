@@ -78,8 +78,8 @@ class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an opponent gains life, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever an opponent gains life, " ;
     }
 }
 

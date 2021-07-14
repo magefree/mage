@@ -82,7 +82,7 @@ class TamanoaDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a noncreature source you control deals damage, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever a noncreature source you control deals damage, " ;
     }
 }

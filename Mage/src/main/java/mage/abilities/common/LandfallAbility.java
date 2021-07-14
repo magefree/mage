@@ -63,8 +63,8 @@ public class LandfallAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " ;
     }
 
     @Override

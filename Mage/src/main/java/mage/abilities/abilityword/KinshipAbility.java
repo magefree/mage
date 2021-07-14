@@ -56,8 +56,8 @@ public class KinshipAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return new StringBuilder("<i>Kinship</i> &mdash; At the beginning of your upkeep, ").append(super.getRule()).toString();
+    public String getTriggerPrefix() {
+        return "<i>Kinship</i> &mdash; At the beginning of your upkeep, ";
     }
 
 }

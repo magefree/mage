@@ -43,7 +43,7 @@ public class BecomesTargetControllerSpellTriggeredAbility extends TriggeredAbili
     }
 
     @Override
-    public String getRule() {
-        return "When you become the target of a spell, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "When you become the target of a spell, " ;
     }
 }

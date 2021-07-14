@@ -45,8 +45,8 @@ public class EntersBattlefieldOrAttacksSourceTriggeredAbility extends TriggeredA
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} enters the battlefield or attacks, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever {this} enters the battlefield or attacks, " ;
     }
 
 }

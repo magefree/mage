@@ -80,7 +80,7 @@ class FleetingMemoriesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you sacrifice a Clue, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever you sacrifice a Clue, " ;
     }
 }

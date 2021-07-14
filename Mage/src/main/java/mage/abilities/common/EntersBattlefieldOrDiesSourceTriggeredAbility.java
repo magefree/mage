@@ -52,7 +52,7 @@ public class EntersBattlefieldOrDiesSourceTriggeredAbility extends TriggeredAbil
     }
 
     @Override
-    public String getRule() {
-        return "When {this} enters the battlefield or dies, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "When {this} enters the battlefield or dies, " ;
     }
 }

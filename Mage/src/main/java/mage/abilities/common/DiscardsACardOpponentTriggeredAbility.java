@@ -64,7 +64,7 @@ public class DiscardsACardOpponentTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an opponent discards a card, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever an opponent discards a card, " ;
     }
 }

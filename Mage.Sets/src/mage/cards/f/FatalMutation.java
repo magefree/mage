@@ -81,8 +81,8 @@ class FatalMutationAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever enchanted creature is turned face up, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever enchanted creature is turned face up, " ;
     }
 
 }

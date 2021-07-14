@@ -306,7 +306,7 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "When the last time counter is removed from this card ({this}), "
-                + "if it's removed from the game, " + super.getRule();
+                + "if it's removed from the game, " ;
     }
 
     @Override

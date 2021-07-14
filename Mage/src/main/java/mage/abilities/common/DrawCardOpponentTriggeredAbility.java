@@ -52,7 +52,7 @@ public class DrawCardOpponentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return new StringBuilder("Whenever an opponent draws a card, ").append(super.getRule()).toString();
+    public String getTriggerPrefix() {
+        return "Whenever an opponent draws a card, ";
     }
 }

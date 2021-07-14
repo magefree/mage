@@ -37,8 +37,8 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
-    public String getRule() {
-        return "<i>Rally</i> &mdash; Whenever {this} or another Ally enters the battlefield under your control, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "<i>Rally</i> &mdash; Whenever {this} or another Ally enters the battlefield under your control, " ;
     }
 
     @Override

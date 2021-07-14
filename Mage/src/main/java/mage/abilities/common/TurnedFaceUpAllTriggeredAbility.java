@@ -79,8 +79,8 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever " + filter.getMessage() + " is turned face up, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever " + filter.getMessage() + " is turned face up, " ;
     }
 }
 

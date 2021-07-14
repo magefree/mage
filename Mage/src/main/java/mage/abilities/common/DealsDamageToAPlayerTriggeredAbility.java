@@ -69,8 +69,8 @@ public class DealsDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} deals damage to a player" + (orPlaneswalker ? " or planeswalker" : "") + ", " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever {this} deals damage to a player" + (orPlaneswalker ? " or planeswalker" : "") + ", " ;
     }
 
 }

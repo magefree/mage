@@ -78,7 +78,7 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When {this} becomes the target of " + filter.getMessage() + ", " + super.getRule();
+    public String getTriggerPrefix() {
+        return "When {this} becomes the target of " + filter.getMessage() + ", " ;
     }
 }

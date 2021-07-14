@@ -51,7 +51,7 @@ public class SpellCounteredControllerTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a spell or ability you control counters a spell, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever a spell or ability you control counters a spell, " ;
     }
 }

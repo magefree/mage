@@ -82,8 +82,8 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you cast a kicked spell, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever you cast a kicked spell, " ;
     }
 }
 

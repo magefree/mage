@@ -41,7 +41,7 @@ public class AtTheEndOfTurnStepPostDelayedTriggeredAbility extends DelayedTrigge
     }
 
     @Override
-    public String getRule() {
-        return "At end of turn " + super.getRule();
+    public String getTriggerPrefix() {
+        return "At end of turn " ;
     }
 }

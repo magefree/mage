@@ -41,7 +41,7 @@ public class BecomesTappedSourceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} becomes tapped, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever {this} becomes tapped, " ;
     }
 }

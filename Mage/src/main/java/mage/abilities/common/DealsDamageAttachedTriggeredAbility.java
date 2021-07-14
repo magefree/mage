@@ -49,7 +49,7 @@ public class DealsDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever enchanted creature deals damage, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever enchanted creature deals damage, " ;
     }
 }

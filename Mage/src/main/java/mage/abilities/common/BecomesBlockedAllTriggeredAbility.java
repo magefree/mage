@@ -52,8 +52,8 @@ public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever " + filter.getMessage() + " becomes blocked, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever " + filter.getMessage() + " becomes blocked, " ;
     }
 
     @Override

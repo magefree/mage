@@ -131,8 +131,8 @@ class PorphyryNodesStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When there are no creatures on the battlefield, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "When there are no creatures on the battlefield, " ;
     }
 
 }

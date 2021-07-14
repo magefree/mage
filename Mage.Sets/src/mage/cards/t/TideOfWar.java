@@ -70,8 +70,8 @@ class BlocksTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever one or more creatures block, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever one or more creatures block, " ;
     }
 
     @Override

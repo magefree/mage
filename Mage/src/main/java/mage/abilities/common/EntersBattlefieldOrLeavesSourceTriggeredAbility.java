@@ -49,7 +49,7 @@ public class EntersBattlefieldOrLeavesSourceTriggeredAbility extends TriggeredAb
     }
 
     @Override
-    public String getRule() {
-        return "When {this} enters or leaves the battlefield, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "When {this} enters or leaves the battlefield, " ;
     }
 }

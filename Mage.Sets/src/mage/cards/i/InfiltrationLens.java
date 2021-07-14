@@ -73,8 +73,8 @@ class EquippedBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever equipped creature becomes blocked by a creature, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever equipped creature becomes blocked by a creature, " ;
     }
 
     @Override

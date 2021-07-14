@@ -95,8 +95,8 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPrefix() {
         return "Whenever " + filter.getMessage() + " deals " + (onlyCombat ? "combat " : "") + "damage to "
-                + (targetController == TargetController.OPPONENT ? "an opponent" : "a player") + ", " + super.getRule();
+                + (targetController == TargetController.OPPONENT ? "an opponent" : "a player") + ", " ;
     }
 }

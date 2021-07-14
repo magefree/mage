@@ -48,7 +48,7 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you sacrifice " + filter.getMessage() + ", " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever you sacrifice " + filter.getMessage() + ", " ;
     }
 }

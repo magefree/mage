@@ -68,8 +68,8 @@ class LeylinePhantomTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "Whenever {this} deals combat damage, " ;
     }
 
 }

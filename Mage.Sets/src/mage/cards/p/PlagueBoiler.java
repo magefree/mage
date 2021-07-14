@@ -116,8 +116,8 @@ class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When {this} has three or more plague counters on it, " + super.getRule();
+    public String getTriggerPrefix() {
+        return "When {this} has three or more plague counters on it, " ;
     }
 }
 
