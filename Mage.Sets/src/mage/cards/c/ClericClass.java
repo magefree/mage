@@ -6,10 +6,10 @@ import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.ClassLevelAbility;
+import mage.abilities.keyword.ClassReminderAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,9 +36,7 @@ public final class ClericClass extends CardImpl {
         this.subtype.add(SubType.CLASS);
 
         // (Gain the next level as a sorcery to add its ability.)
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new InfoEffect("<i>(Gain the next level as a sorcery to add its ability.)</i>")
-        ).addHint(mage.abilities.hint.common.ClassLevelHint.instance));
+        this.addAbility(new ClassReminderAbility());
 
         // If you would gain life, you gain that much life plus 1 instead.
         this.addAbility(new SimpleStaticAbility(new ClericClassLifeEffect()));

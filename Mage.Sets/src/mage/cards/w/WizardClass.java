@@ -5,17 +5,16 @@ import mage.abilities.common.BecomesClassLevelTriggeredAbility;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.ClassLevelAbility;
+import mage.abilities.keyword.ClassReminderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -32,9 +31,7 @@ public final class WizardClass extends CardImpl {
         this.subtype.add(SubType.CLASS);
 
         // (Gain the next level as a sorcery to add its ability.)
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new InfoEffect("<i>(Gain the next level as a sorcery to add its ability.)</i>")
-        ).addHint(mage.abilities.hint.common.ClassLevelHint.instance));
+        this.addAbility(new ClassReminderAbility());
 
         // You have no maximum hand size.
         this.addAbility(new SimpleStaticAbility(new MaximumHandSizeControllerEffect(

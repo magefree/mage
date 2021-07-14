@@ -7,15 +7,18 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.effects.common.cost.AbilitiesCostReductionControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.ClassLevelAbility;
+import mage.abilities.keyword.ClassReminderAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -42,9 +45,7 @@ public final class FighterClass extends CardImpl {
         this.subtype.add(SubType.CLASS);
 
         // (Gain the next level as a sorcery to add its ability.)
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new InfoEffect("<i>(Gain the next level as a sorcery to add its ability.)</i>")
-        ).addHint(mage.abilities.hint.common.ClassLevelHint.instance));
+        this.addAbility(new ClassReminderAbility());
 
         // When Fighter Class enters the battlefield, search your library for an Equipment card, reveal it, put it into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(

@@ -7,16 +7,19 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.LandsYouControlCount;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.ClassLevelAbility;
+import mage.abilities.keyword.ClassReminderAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetPermanent;
@@ -34,9 +37,7 @@ public final class DruidClass extends CardImpl {
         this.subtype.add(SubType.CLASS);
 
         // (Gain the next level as a sorcery to add its ability.)
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new InfoEffect("<i>(Gain the next level as a sorcery to add its ability.)</i>")
-        ).addHint(mage.abilities.hint.common.ClassLevelHint.instance));
+        this.addAbility(new ClassReminderAbility());
 
         // Whenever a land enters the battlefield under your control, you gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
