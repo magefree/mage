@@ -60,7 +60,7 @@ public class Representer implements Serializable{
         for(int i=0;i<actions.size();i++){
             List<String> names=actions.get(i).getNames();
             List<Integer> actionParts=new ArrayList<Integer>();
-            for(int j=0;j<actionParts.size();j++){
+            for(int j=0;j<names.size();j++){
                 actionParts.add(getEmbedInt(names.get(j)));
             }
             if(actionParts.size()!=HParams.actionParts){
@@ -154,6 +154,9 @@ public class Representer implements Serializable{
             }
             attributes.add(getEmbedInt("Power:"+perm.getPower().getValue()));
             attributes.add(getEmbedInt("Toughness:"+perm.getToughness().getValue()));
+            if(attributes.size()!=HParams.numPermParts){
+                throw new IllegalStateException("Mismatch with permanents size");
+            }
             repr.add(attributes);
         }
         return repr;

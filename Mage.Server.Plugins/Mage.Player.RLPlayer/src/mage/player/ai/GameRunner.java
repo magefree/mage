@@ -47,11 +47,16 @@ public class  GameRunner{
     public GameRunner(){
         agent=new DJLAgent();
     }
+    public void playGames(int number) throws GameException, FileNotFoundException, IllegalArgumentException{
+        int netWins=0;
+        String deckLoc="/home/elchanan/java/mage/Mage.Tests/RBTestAggro.dck";
+        for(int count=0;count<number;count++){
+            netWins+=playOneGame(deckLoc,deckLoc,true);
+            System.out.println("netWins is "+netWins+" at timestep "+count);
+        }
+    }
     public int playOneGame(String deck1loc,String deck2loc,boolean player2random) throws GameException, FileNotFoundException, IllegalArgumentException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
-
-        //String deckLoc="/home/elchanan/java/mage/Mage.Tests/RBTestAggro.dck";
-        
         Deck deck1=loadDeck(deck1loc);
         Deck deck2=loadDeck(deck2loc);
         

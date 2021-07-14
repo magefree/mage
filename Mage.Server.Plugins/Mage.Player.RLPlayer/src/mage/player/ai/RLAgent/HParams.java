@@ -12,5 +12,6 @@ public class HParams implements Serializable {
     public static final int maxRepresents=512;
     public static final int actionParts=2;
     public static final int numGameInts=6;
+    public static final int numPermParts=4;
 
 }
