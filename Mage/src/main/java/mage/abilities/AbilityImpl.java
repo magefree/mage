@@ -808,7 +808,7 @@ public abstract class AbilityImpl implements Ability {
         } else if (abilityWord != null) {
             prefix = abilityWord.formatWord();
         } else if (flavorWord != null) {
-            prefix = "<i>" + flavorWord + "</i> &mdash; ";
+            prefix = CardUtil.italicizeWithEmDash(flavorWord);
         } else {
             prefix = null;
         }

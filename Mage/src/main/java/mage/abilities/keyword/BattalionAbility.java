@@ -4,6 +4,7 @@ package mage.abilities.keyword;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.AbilityWord;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -23,6 +24,7 @@ public class BattalionAbility extends TriggeredAbilityImpl {
 
     public BattalionAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        this.setAbilityWord(AbilityWord.BATTALION);
     }
 
     public BattalionAbility(final BattalionAbility ability) {
@@ -46,7 +48,7 @@ public class BattalionAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "<i>Battalion</i> &mdash; Whenever {this} and at least two other creatures attack, ";
+        return "Whenever {this} and at least two other creatures attack, ";
     }
 }
 

@@ -177,7 +177,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         if (abilityWord != null) {
             prefix = abilityWord.formatWord();
         } else if (flavorWord != null) {
-            prefix = "<i>" + flavorWord + "</i> &mdash; ";
+            prefix = CardUtil.italicizeWithEmDash(flavorWord);
         } else {
             prefix = "";
         }
