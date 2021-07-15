@@ -73,8 +73,8 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature you control dies, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature you control dies, " ;
     }
 }
 

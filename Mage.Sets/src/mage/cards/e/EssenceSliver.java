@@ -82,8 +82,8 @@ class DealsDamageAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a Sliver deals damage, its controller" + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a Sliver deals damage, its controller" ;
     }
 }
 

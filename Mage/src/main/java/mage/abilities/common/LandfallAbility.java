@@ -2,6 +2,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.AbilityWord;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -32,6 +33,7 @@ public class LandfallAbility extends TriggeredAbilityImpl {
     public LandfallAbility(Zone zone, Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        this.setAbilityWord(AbilityWord.LANDFALL);
     }
 
     public LandfallAbility(final LandfallAbility ability) {
@@ -63,8 +65,8 @@ public class LandfallAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a land enters the battlefield under your control, ";
     }
 
     @Override

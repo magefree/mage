@@ -17,7 +17,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
@@ -96,11 +95,8 @@ class JangoFettTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        if (text == null || text.isEmpty()) {
-            return "Whenever {this} attacks, " + super.getRule();
-        }
-        return text;
+    public String getTriggerPhrase() {
+        return "Whenever {this} attacks, ";
     }
 
     @Override

@@ -76,8 +76,8 @@ class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature an opponent controls dies, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature an opponent controls dies, " ;
     }
 }
 
@@ -106,7 +106,7 @@ class SangromancerSecondTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an opponent discards a card, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever an opponent discards a card, " ;
     }
 }

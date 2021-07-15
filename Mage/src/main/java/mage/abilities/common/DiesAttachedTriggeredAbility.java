@@ -114,7 +114,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder();
         if (attachedDescription.startsWith("equipped")) {
             sb.append("Whenever ");
@@ -127,7 +127,6 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
         } else {
             sb.append(" is put into graveyard, ");
         }
-        sb.append(super.getRule());
         return sb.toString();
     }
 }

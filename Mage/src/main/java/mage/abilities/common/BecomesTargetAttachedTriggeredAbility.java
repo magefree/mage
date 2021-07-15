@@ -53,7 +53,7 @@ public class BecomesTargetAttachedTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
-    public String getRule() {
-        return "When enchanted " + enchantType + " becomes the target of a spell or ability, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When enchanted " + enchantType + " becomes the target of a spell or ability, " ;
     }
 }

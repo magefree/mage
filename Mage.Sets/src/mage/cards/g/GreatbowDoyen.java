@@ -91,8 +91,8 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an Archer you control deals damage to a creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever an Archer you control deals damage to a creature, " ;
     }
 }
 

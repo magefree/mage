@@ -86,8 +86,8 @@ class GlyphOfLifeTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever that creature is dealt damage by an attacking creature this turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever that creature is dealt damage by an attacking creature this turn, " ;
     }
 }
 

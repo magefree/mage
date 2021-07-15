@@ -4,6 +4,7 @@ package mage.abilities.abilityword;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.AbilityWord;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -21,6 +22,7 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
 
     public ConstellationAbility(Effect effect) {
         this(effect, false);
+        setAbilityWord(AbilityWord.CONSTELLATION);
     }
 
     public ConstellationAbility(Effect effect, boolean optional) {
@@ -57,9 +59,8 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "<i>Constellation</i> &mdash; Whenever "
-                + (thisOr ? "{this} or another" : "an")
-                + " enchantment enters the battlefield under your control, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever " + (thisOr ? "{this} or another" : "an")
+                + " enchantment enters the battlefield under your control, ";
     }
 }

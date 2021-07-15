@@ -104,7 +104,7 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When a creature dealt damage this way dies this turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When a creature dealt damage this way dies this turn, " ;
     }
 }

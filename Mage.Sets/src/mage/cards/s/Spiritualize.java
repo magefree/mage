@@ -81,8 +81,8 @@ class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever target creature deals damage, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever target creature deals damage, " ;
     }
 }
 

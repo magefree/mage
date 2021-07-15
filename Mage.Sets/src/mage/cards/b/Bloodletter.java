@@ -78,8 +78,8 @@ class BloodletterStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When the names of three or more nonland permanents begin with the same letter, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When the names of three or more nonland permanents begin with the same letter, " ;
     }
 }
 

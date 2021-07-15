@@ -54,7 +54,7 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
     }
 
     @Override
-    public String getRule() {
-        return "When {this} is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When {this} is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, " ;
     }
 }

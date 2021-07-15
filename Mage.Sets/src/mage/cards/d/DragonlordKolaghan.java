@@ -108,7 +108,7 @@ class DragonlordKolaghanTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an opponent casts a creature or planeswalker spell with the same name as a card in their graveyard, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever an opponent casts a creature or planeswalker spell with the same name as a card in their graveyard, " ;
     }
 }

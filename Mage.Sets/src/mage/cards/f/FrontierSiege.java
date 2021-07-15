@@ -100,8 +100,8 @@ class FrontierSiegeKhansTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "At the beginning of each of your main phases, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "At the beginning of each of your main phases, " ;
     }
 
 }

@@ -1,6 +1,5 @@
 package mage.abilities.common;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -49,20 +48,13 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public Ability withFlavorWord(String flavorWord) {
-        // must put flavor word before auto-generated rules, so keep it in etb place
-        super.withFlavorWord(null);
-        this.etbFlavorWord = flavorWord;
-        return this;
+    public String getRule() {
+        return super.getRule();
     }
 
     @Override
-    public String getRule() {
-        if (ignoreRulesGeneration) {
-            return super.getRule();
-        }
-        return (this.etbFlavorWord == null ? "" : "<i>" + this.etbFlavorWord + "</i> &mdash; ")
-                + "When {this} enters the battlefield, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When {this} enters the battlefield, ";
     }
 
     @Override

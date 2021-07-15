@@ -79,7 +79,12 @@ public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
         if (rule != null && !rule.isEmpty()) {
             return rule;
         }
-        return "Whenever a player casts " + CardUtil.addArticle(filter.getMessage()) + ", " + super.getRule();
+        return super.getRule();
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever a player casts " + CardUtil.addArticle(filter.getMessage()) + ", ";
     }
 
     @Override

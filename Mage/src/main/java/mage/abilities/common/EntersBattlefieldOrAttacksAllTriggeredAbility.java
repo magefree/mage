@@ -1,7 +1,6 @@
 
 package mage.abilities.common;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
@@ -12,8 +11,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Saga
  */
 public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbilityImpl {
@@ -78,7 +78,7 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD 
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
                 && filter.match(permanent, getSourceId(), getControllerId(), game)) {
             if (setTargetPointer != SetTargetPointer.NONE) {
                 for (Effect effect : this.getEffects()) {
@@ -97,7 +97,7 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
         }
 
         Permanent attacker = game.getPermanent(event.getSourceId());
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED 
+        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED
                 && filter.match(attacker, getSourceId(), getControllerId(), game)) {
             if (setTargetPointer != SetTargetPointer.NONE) {
                 for (Effect effect : this.getEffects()) {
@@ -125,6 +125,11 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
         if (rule != null && !rule.isEmpty()) {
             return rule;
         }
+        return super.getRule();
+    }
+
+    @Override
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ").append(filter.getMessage());
         sb.append(" enters the battlefield ");
         if (controlledText) {
@@ -132,7 +137,6 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
         } else {
             sb.append("or attacks, ");
         }
-        sb.append(super.getRule());
         return sb.toString();
     }
 

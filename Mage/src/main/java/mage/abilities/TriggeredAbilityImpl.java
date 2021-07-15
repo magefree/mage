@@ -173,8 +173,21 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 sb.append(" This ability triggers only once each turn.");
             }
         }
+        String prefix;
+        if (abilityWord != null) {
+            prefix = abilityWord.formatWord();
+        } else if (flavorWord != null) {
+            prefix = CardUtil.italicizeWithEmDash(flavorWord);
+        } else {
+            prefix = "";
+        }
 
-        return sb.toString();
+        return prefix + getTriggerPhrase() + sb;
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "";
     }
 
     @Override

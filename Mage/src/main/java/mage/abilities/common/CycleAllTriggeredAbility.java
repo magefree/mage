@@ -40,8 +40,8 @@ public class CycleAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player cycles a card, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a player cycles a card, " ;
     }
 
     @Override

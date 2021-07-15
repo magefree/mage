@@ -74,8 +74,8 @@ class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an opponent shuffles their library, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever an opponent shuffles their library, " ;
     }
 }
 

@@ -77,7 +77,7 @@ class RiteOfPassageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature you control is dealt damage, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature you control is dealt damage, " ;
     }
 }

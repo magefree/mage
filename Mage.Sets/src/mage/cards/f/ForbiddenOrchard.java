@@ -93,8 +93,8 @@ class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you tap {this} for mana, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you tap {this} for mana, " ;
     }
 
     @Override

@@ -100,8 +100,8 @@ public final class TalonOfPain extends CardImpl {
         }
 
         @Override
-        public String getRule() {
-            return "Whenever a source you control other than {this} deals damage to an opponent, " + super.getRule();
+        public String getTriggerPhrase() {
+            return "Whenever a source you control other than {this} deals damage to an opponent, " ;
         }
     }
 }

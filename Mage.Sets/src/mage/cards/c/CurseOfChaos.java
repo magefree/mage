@@ -82,8 +82,8 @@ class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player attacks enchanted player with one or more creatures, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a player attacks enchanted player with one or more creatures, " ;
     }
 
     @Override

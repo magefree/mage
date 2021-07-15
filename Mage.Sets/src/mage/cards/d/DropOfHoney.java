@@ -127,7 +127,7 @@ class DropOfHoneyStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When there are no creatures on the battlefield, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When there are no creatures on the battlefield, " ;
     }
 }

@@ -99,7 +99,7 @@ class KothophedSoulHoarderTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature leaves an opponent's graveyard, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature leaves an opponent's graveyard, " ;
     }
 }

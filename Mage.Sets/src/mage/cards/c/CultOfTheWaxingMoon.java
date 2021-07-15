@@ -77,7 +77,7 @@ class CultOfTheWaxingMoonAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a permanent you control transforms into a non-Human creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a permanent you control transforms into a non-Human creature, " ;
     }
 }

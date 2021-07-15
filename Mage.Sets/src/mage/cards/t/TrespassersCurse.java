@@ -85,8 +85,8 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature enters the battlefield under enchanted player's control, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature enters the battlefield under enchanted player's control, " ;
     }
 
     @Override

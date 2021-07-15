@@ -85,8 +85,8 @@ class BurningCinderFuryOfCrimsonChaosFireAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever any player taps a permanent, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever any player taps a permanent, " ;
     }
 }
 

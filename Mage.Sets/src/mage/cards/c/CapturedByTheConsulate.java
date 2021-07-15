@@ -112,8 +112,8 @@ class CapturedByTheConsulateTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an opponent casts a spell, if it has a single target, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever an opponent casts a spell, if it has a single target, " ;
     }
 
     @Override

@@ -67,8 +67,8 @@ class TotalWarTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player attacks with one or more creatures, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a player attacks with one or more creatures, " ;
     }
 }
 

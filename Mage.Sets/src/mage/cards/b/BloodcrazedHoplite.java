@@ -84,7 +84,7 @@ class BloodcrazedHopliteTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a +1/+1 counter is put on {this}, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a +1/+1 counter is put on {this}, " ;
     }
 }

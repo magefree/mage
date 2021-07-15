@@ -73,8 +73,8 @@ class HibernationsEndAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you pay {this}'s cumulative upkeep, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you pay {this}'s cumulative upkeep, " ;
     }
 }
 

@@ -76,8 +76,8 @@ class TreacherousPitDwellerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return ruleText + super.getRule();
+    public String getTriggerPhrase() {
+        return ruleText ;
     }
 
 }

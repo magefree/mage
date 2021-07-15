@@ -77,7 +77,7 @@ class VillageCannibalsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever another Human creature dies, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever another Human creature dies, " ;
     }
 }

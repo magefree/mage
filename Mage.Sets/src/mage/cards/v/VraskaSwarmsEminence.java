@@ -105,8 +105,8 @@ class VraskaSwarmsEminenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature you control with deathtouch deals damage to a player or planeswalker," + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature you control with deathtouch deals damage to a player or planeswalker, ";
     }
 
 }

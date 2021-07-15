@@ -77,7 +77,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
     }
 
     @Override
-    public String getRule() {
-        return "When" + (once ? "" : "ever") + " " + CardUtil.addArticle(filter.getMessage()) + " attacks, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When" + (once ? "" : "ever") + " " + CardUtil.addArticle(filter.getMessage()) + " attacks, " ;
     }
 }

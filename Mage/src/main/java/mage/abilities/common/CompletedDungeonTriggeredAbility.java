@@ -43,7 +43,7 @@ public class CompletedDungeonTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you complete a dungeon, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you complete a dungeon, " ;
     }
 }

@@ -122,8 +122,8 @@ class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an opponent casts a spell, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever an opponent casts a spell, " ;
     }
 
     @Override

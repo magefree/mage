@@ -69,9 +69,14 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         if (text == null || text.isEmpty()) {
-            return "Whenever {this} attacks, " + super.getRule();
+            return super.getRule();
         }
         return text;
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever {this} attacks, ";
     }
 
     @Override

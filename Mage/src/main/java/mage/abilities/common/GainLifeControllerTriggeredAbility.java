@@ -57,7 +57,7 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you gain life, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you gain life, " ;
     }
 }

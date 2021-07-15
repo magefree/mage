@@ -102,7 +102,7 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
     }
 
     @Override
-    public String getRule() {
-        return ruleText + super.getRule();
+    public String getTriggerPhrase() {
+        return ruleText ;
     }
 }

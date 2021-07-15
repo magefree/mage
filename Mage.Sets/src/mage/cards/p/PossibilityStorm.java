@@ -83,8 +83,8 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player casts a spell from their hand, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a player casts a spell from their hand, " ;
     }
 }
 

@@ -55,8 +55,8 @@ public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "At the " + eventName + ", " + super.getRule();
+    public String getTriggerPhrase() {
+        return "At the " + eventName + ", " ;
     }
 
     @Override

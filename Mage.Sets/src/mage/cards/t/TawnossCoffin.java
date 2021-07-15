@@ -92,8 +92,8 @@ class TawnossCoffinTriggeredAbility extends LeavesBattlefieldTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When {this} leaves the battlefield or becomes untapped, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When {this} leaves the battlefield or becomes untapped, " ;
     }
 }
 

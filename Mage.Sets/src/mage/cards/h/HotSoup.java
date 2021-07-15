@@ -85,7 +85,7 @@ class HotSoupTriggeredAbility extends TriggeredAbilityImpl {
     }
     
     @Override
-    public String getRule() {
-        return "Whenever equipped creature is dealt damage, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever equipped creature is dealt damage, " ;
     }
 }

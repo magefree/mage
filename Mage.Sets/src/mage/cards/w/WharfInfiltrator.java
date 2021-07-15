@@ -89,7 +89,7 @@ class WharfInfiltratorDiscardAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you discard a creature card, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you discard a creature card, " ;
     }
 }

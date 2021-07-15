@@ -3,6 +3,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.AbilityWord;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -13,7 +14,6 @@ import mage.game.events.GameEvent;
  */
 public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final boolean enrage;
     private final boolean useValue;
     private boolean usedForCombatDamageStep;
 
@@ -27,14 +27,15 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public DealtDamageToSourceTriggeredAbility(Effect effect, boolean optional, boolean enrage, boolean useValue) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.enrage = enrage;
         this.useValue = useValue;
         this.usedForCombatDamageStep = false;
+        if (enrage) {
+            this.setAbilityWord(AbilityWord.ENRAGE);
+        }
     }
 
     public DealtDamageToSourceTriggeredAbility(final DealtDamageToSourceTriggeredAbility ability) {
         super(ability);
-        this.enrage = ability.enrage;
         this.useValue = ability.useValue;
         this.usedForCombatDamageStep = ability.usedForCombatDamageStep;
     }
@@ -75,7 +76,7 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return (enrage ? "<i>Enrage</i> &mdash; " : "") + "Whenever {this} is dealt damage, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} is dealt damage, ";
     }
 }

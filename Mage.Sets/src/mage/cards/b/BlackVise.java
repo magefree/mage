@@ -67,8 +67,8 @@ class BlackViseTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "At the beginning of the chosen player's upkeep, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "At the beginning of the chosen player's upkeep, " ;
     }
 }
 

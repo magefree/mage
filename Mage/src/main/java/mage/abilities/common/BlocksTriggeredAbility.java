@@ -56,8 +56,8 @@ public class BlocksTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When" + (once ? "" : "ever") + " {this} blocks" + (setTargetPointer ? " a creature, " : ", ") + super.getRule();
+    public String getTriggerPhrase() {
+        return "When" + (once ? "" : "ever") + " {this} blocks" + (setTargetPointer ? " a creature, " : ", ") ;
     }
 
     @Override

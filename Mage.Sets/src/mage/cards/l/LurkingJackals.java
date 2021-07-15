@@ -99,8 +99,8 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When an opponent has 10 or less life, if {this} is an enchantment, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When an opponent has 10 or less life, if {this} is an enchantment, " ;
     }
 
 }

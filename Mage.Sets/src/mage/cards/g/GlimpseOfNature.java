@@ -69,6 +69,6 @@ class GlimpseOfNatureTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Whenever you cast a creature spell this turn, " + modes.getText();
+        return "Whenever you cast a creature spell this turn, draw a card.";
     }
 }

@@ -803,10 +803,12 @@ public abstract class AbilityImpl implements Ability {
             rule = ruleStart;
         }
         String prefix;
-        if (abilityWord != null) {
+        if (this instanceof TriggeredAbility) {
+            prefix = null;
+        } else if (abilityWord != null) {
             prefix = abilityWord.formatWord();
         } else if (flavorWord != null) {
-            prefix = "<i>" + flavorWord + "</i> &mdash; ";
+            prefix = CardUtil.italicizeWithEmDash(flavorWord);
         } else {
             prefix = null;
         }

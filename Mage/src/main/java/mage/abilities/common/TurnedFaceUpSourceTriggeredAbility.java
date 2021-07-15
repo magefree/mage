@@ -61,7 +61,7 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When {this} is turned face up, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When {this} is turned face up, " ;
     }
 }

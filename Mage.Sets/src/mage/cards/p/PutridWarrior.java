@@ -81,8 +81,8 @@ class PutridWarriorDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} deals damage, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} deals damage, " ;
     }
 }
 

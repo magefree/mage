@@ -10,8 +10,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.Locale;
-
 public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
 
     private final TargetController targetController;
@@ -101,34 +99,20 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        StringBuilder sb = new StringBuilder(getEffects().getText(modes.getMode()));
-
-        if (this.optional) {
-            if (sb.substring(0, 6).toLowerCase(Locale.ENGLISH).equals("target")) {
-                sb.insert(0, "you may have ");
-            } else if (!sb.substring(0, 4).toLowerCase(Locale.ENGLISH).equals("you ")) {
-                sb.insert(0, "you may ");
-            }
-        }
-        String abilityWordRule = "";
-        if (abilityWord != null) {
-            abilityWordRule = "<i>" + abilityWord.toString() + "</i> &mdash; ";
-        }
-
+    public String getTriggerPhrase() {
         switch (targetController) {
             case YOU:
-                return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of your end step, ").toString();
+                return "At the beginning of your end step, " + generateConditionString();
             case NEXT:
-                return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of the end step, ").toString();
+                return "At the beginning of the end step, " + generateConditionString();
             case OPPONENT:
-                return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each opponent's end step, ").toString();
+                return "At the beginning of each opponent's end step, " + generateConditionString();
             case ANY:
-                return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each end step, ").toString();
+                return "At the beginning of each end step, " + generateConditionString();
             case EACH_PLAYER:
-                return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each player's end step, ").toString();
+                return "At the beginning of each player's end step, " + generateConditionString();
             case CONTROLLER_ATTACHED_TO:
-                return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of the end step of enchanted permanent's controller, ").toString();
+                return "At the beginning of the end step of enchanted permanent's controller, " + generateConditionString();
         }
         return "";
     }

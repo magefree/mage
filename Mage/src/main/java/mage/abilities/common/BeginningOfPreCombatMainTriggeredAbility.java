@@ -13,7 +13,6 @@ import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -70,7 +69,7 @@ public class BeginningOfPreCombatMainTriggeredAbility extends TriggeredAbilityIm
                     }
                     return true;
                 }
-        break;
+                break;
             case ANY:
                 if (setTargetPointer) {
                     for (Effect effect : this.getEffects()) {
@@ -83,14 +82,14 @@ public class BeginningOfPreCombatMainTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         switch (targetController) {
             case YOU:
-                return "At the beginning of your precombat main phase, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of your precombat main phase, " + generateZoneString();
             case OPPONENT:
-                return "At the beginning of each opponent's precombat main phase, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of each opponent's precombat main phase, " + generateZoneString();
             case ANY:
-                return "At the beginning of each player's precombat main phase, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of each player's precombat main phase, " + generateZoneString();
         }
         return "";
     }

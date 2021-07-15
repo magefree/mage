@@ -95,8 +95,8 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         return "Whenever " + filterPermanent.getMessage() + " deals "
-                + (combatDamageOnly ? "combat " : "") + "damage to a creature, " + super.getRule();
+                + (combatDamageOnly ? "combat " : "") + "damage to a creature, " ;
     }
 }

@@ -90,7 +90,7 @@ class BreathlessKnightTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} or another creature enters the battlefield under your control, if that creature entered from a graveyard or you cast it from a graveyard, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} or another creature enters the battlefield under your control, if that creature entered from a graveyard or you cast it from a graveyard, " ;
     }
 }

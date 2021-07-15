@@ -36,8 +36,8 @@ public class CycleOrDiscardControllerTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you cycle or discard a card, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you cycle or discard a card, " ;
     }
 
     @Override

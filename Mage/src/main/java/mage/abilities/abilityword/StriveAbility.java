@@ -5,10 +5,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.target.Target;
 import mage.util.ManaUtil;
@@ -25,6 +22,7 @@ public class StriveAbility extends SimpleStaticAbility {
         super(Zone.STACK, new StriveCostIncreasingEffect(new ManaCostsImpl(manaString)));
         setRuleAtTheTop(true);
         this.striveCost = manaString;
+        setAbilityWord(AbilityWord.STRIVE);
     }
 
     public StriveAbility(final StriveAbility ability) {
@@ -39,7 +37,7 @@ public class StriveAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return new StringBuilder("<i>Strive</i> &mdash; this spell costs ").append(striveCost).append(" more to cast for each target beyond the first.").toString();
+        return new StringBuilder("this spell costs ").append(striveCost).append(" more to cast for each target beyond the first.").toString();
     }
 }
 

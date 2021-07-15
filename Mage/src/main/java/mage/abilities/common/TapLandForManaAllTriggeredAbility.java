@@ -63,7 +63,7 @@ public class TapLandForManaAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return new StringBuilder("Whenever a land is tapped for mana, ").append(super.getRule()).toString();
+    public String getTriggerPhrase() {
+        return "Whenever a land is tapped for mana, ";
     }
 }

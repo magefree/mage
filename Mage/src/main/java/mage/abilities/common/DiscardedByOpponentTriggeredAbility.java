@@ -48,7 +48,7 @@ public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When a spell or ability an opponent controls causes you to discard this card, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When a spell or ability an opponent controls causes you to discard this card, " ;
     }
 }

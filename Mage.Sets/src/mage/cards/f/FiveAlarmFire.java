@@ -103,8 +103,8 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-            return "Whenever a creature you control deals combat damage, " + super.getRule();
+    public String getTriggerPhrase() {
+            return "Whenever a creature you control deals combat damage, " ;
     }
 
 }

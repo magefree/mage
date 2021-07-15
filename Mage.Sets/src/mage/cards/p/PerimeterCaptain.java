@@ -75,8 +75,8 @@ class PerimeterCaptainTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature you control with defender blocks, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature you control with defender blocks, " ;
     }
 
     @Override

@@ -129,7 +129,7 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a nontoken artifact is put into your graveyard from the battlefield, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a nontoken artifact is put into your graveyard from the battlefield, " ;
     }
 }
