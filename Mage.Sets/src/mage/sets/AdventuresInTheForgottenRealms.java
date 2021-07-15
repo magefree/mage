@@ -244,6 +244,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Volo, Guide to Monsters", 238, Rarity.RARE, mage.cards.v.VoloGuideToMonsters.class));
         cards.add(new SetCardInfo("Vorpal Sword", 124, Rarity.RARE, mage.cards.v.VorpalSword.class));
         cards.add(new SetCardInfo("Wandering Troubadour", 210, Rarity.UNCOMMON, mage.cards.w.WanderingTroubadour.class));
+        cards.add(new SetCardInfo("Warlock Class", 125, Rarity.UNCOMMON, mage.cards.w.WarlockClass.class));
         cards.add(new SetCardInfo("Werewolf Pack Leader", 211, Rarity.RARE, mage.cards.w.WerewolfPackLeader.class));
         cards.add(new SetCardInfo("Westgate Regent", 126, Rarity.RARE, mage.cards.w.WestgateRegent.class));
         cards.add(new SetCardInfo("White Dragon", 41, Rarity.UNCOMMON, mage.cards.w.WhiteDragon.class));
