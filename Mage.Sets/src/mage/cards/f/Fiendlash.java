@@ -88,7 +88,6 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         this.getEffects().setValue("equipped", game.getPermanent(equipment.getAttachedTo()));
-        this.getEffects().setValue("damage", event.getAmount());
         return true;
     }
 
@@ -116,8 +115,8 @@ class FiendlashEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = (Permanent) getValue("equipped");
-        Integer damage = (Integer) creature.getPower().getValue();
-        if (creature == null || damage == null || damage < 1) {
+        int damage = (int) creature.getPower().getValue();
+        if (creature == null || damage < 1) {
             return false;
         }
         Permanent permanent = game.getPermanent(source.getFirstTarget());
