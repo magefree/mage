@@ -93,7 +93,7 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     @Override
     public String getRule() {
         if (text == null || text.isEmpty()) {
-            super.getRule();
+            return super.getRule();
         }
         return text;
     }
