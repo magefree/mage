@@ -61,6 +61,7 @@ class SetClassLevelEffect extends OneShotEffect {
     SetClassLevelEffect(int level) {
         super(Outcome.Benefit);
         this.level = level;
+        staticText = "level up to " + level;
     }
 
     private SetClassLevelEffect(final SetClassLevelEffect effect) {
@@ -76,9 +77,17 @@ class SetClassLevelEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null || !permanent.setClassLevel(level)) {
+        if (permanent == null) {
             return false;
         }
+
+        int oldLevel = permanent.getClassLevel();
+        if (!permanent.setClassLevel(level)) {
+            return false;
+        }
+
+        game.informPlayers(permanent.getLogName() + " levelled up from " + oldLevel + " to " + permanent.getClassLevel());
+
         game.fireEvent(GameEvent.getEvent(
                 GameEvent.EventType.GAINS_CLASS_LEVEL, source.getSourceId(),
                 source, source.getControllerId(), level
