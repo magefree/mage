@@ -97,6 +97,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fellwar Stone", 206, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Fertile Ground", 158, Rarity.COMMON, mage.cards.f.FertileGround.class));
         cards.add(new SetCardInfo("Fiend of the Shadows", 99, Rarity.RARE, mage.cards.f.FiendOfTheShadows.class));
+        cards.add(new SetCardInfo("Fiendlash", 31, Rarity.RARE, mage.cards.f.Fiendlash.class));
         cards.add(new SetCardInfo("Fleecemane Lion", 185, Rarity.RARE, mage.cards.f.FleecemaneLion.class));
         cards.add(new SetCardInfo("Flood Plain", 237, Rarity.UNCOMMON, mage.cards.f.FloodPlain.class));
         cards.add(new SetCardInfo("Forbidden Alchemy", 84, Rarity.UNCOMMON, mage.cards.f.ForbiddenAlchemy.class));
