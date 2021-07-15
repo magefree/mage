@@ -3653,6 +3653,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                         getPlayableFromObjectAll(game, Zone.OUTSIDE, card, availableMana, playable);
                     }
                 }
+                // Check sideboard. Ex: Wish lets player play cards directly from sideboard.
+                for (UUID sideboardCardId : getSideboard()) {
+                    Card sideboardCard = game.getCard(sideboardCardId);
+                    if (sideboardCard != null) {
+                        getPlayableFromObjectAll(game, Zone.OUTSIDE, sideboardCard, availableMana, playable);
+                    }
+                }
             }
 
             // check if it's possible to play the top card of a library
