@@ -65,6 +65,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Dawnbringer Cleric", 9, Rarity.COMMON, mage.cards.d.DawnbringerCleric.class));
         cards.add(new SetCardInfo("Deadly Dispute", 94, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
         cards.add(new SetCardInfo("Death-Priest of Myrkul", 95, Rarity.UNCOMMON, mage.cards.d.DeathPriestOfMyrkul.class));
+        cards.add(new SetCardInfo("Delina, Wild Mage", 138, Rarity.RARE, mage.cards.d.DelinaWildMage.class));
         cards.add(new SetCardInfo("Delver's Torch", 10, Rarity.COMMON, mage.cards.d.DelversTorch.class));
         cards.add(new SetCardInfo("Demogorgon's Clutches", 96, Rarity.UNCOMMON, mage.cards.d.DemogorgonsClutches.class));
         cards.add(new SetCardInfo("Den of the Bugbear", 254, Rarity.RARE, mage.cards.d.DenOfTheBugbear.class));
