@@ -173,6 +173,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Orcus, Prince of Undeath", 229, Rarity.RARE, mage.cards.o.OrcusPrinceOfUndeath.class));
         cards.add(new SetCardInfo("Oswald Fiddlebender", 28, Rarity.RARE, mage.cards.o.OswaldFiddlebender.class));
         cards.add(new SetCardInfo("Owlbear", 198, Rarity.COMMON, mage.cards.o.Owlbear.class));
+        cards.add(new SetCardInfo("Paladin Class", 29, Rarity.RARE, mage.cards.p.PaladinClass.class));
         cards.add(new SetCardInfo("Paladin's Shield", 30, Rarity.COMMON, mage.cards.p.PaladinsShield.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Ally", 31, Rarity.COMMON, mage.cards.p.PlanarAlly.class));
