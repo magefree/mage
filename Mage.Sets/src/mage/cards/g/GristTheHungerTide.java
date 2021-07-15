@@ -166,7 +166,7 @@ class GristTheHungerTideTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getSourceId());
+        Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
         }
