@@ -552,7 +552,20 @@ public interface Ability extends Controllable, Serializable {
 
     Ability addHint(Hint hint);
 
+    /**
+     * For abilities with static icons
+     *
+     * @return
+     */
     List<CardIcon> getIcons();
+
+    /**
+     * For abilities with dynamic icons
+     *
+     * @param game can be null for static calls like copies
+     * @return
+     */
+    List<CardIcon> getIcons(Game game);
 
     Ability addIcon(CardIcon cardIcon);
 

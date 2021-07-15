@@ -693,6 +693,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public List<CardIcon> getIcons(Game game) {
+        return this.ability.getIcons(game);
+    }
+
+    @Override
     public Ability addIcon(CardIcon cardIcon) {
         throw new IllegalArgumentException("Stack ability is not supports icon adding");
     }

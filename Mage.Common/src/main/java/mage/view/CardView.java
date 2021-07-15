@@ -416,7 +416,7 @@ public class CardView extends SimpleCardView {
 
             // card icons for permanents on battlefield
             permanent.getAbilities(game).forEach(ability -> {
-                this.cardIcons.addAll(ability.getIcons());
+                this.cardIcons.addAll(ability.getIcons(game));
             });
         } else {
             if (card.isCopy()) {
