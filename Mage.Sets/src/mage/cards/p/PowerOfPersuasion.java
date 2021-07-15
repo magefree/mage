@@ -58,7 +58,7 @@ class PowerOfPersuasionEffect extends OneShotEffect {
 
     PowerOfPersuasionEffect() {
         super(Outcome.Benefit);
-        staticText = "its owner puts it on the top of bottom of their library";
+        staticText = "its owner puts it on the top or bottom of their library";
     }
 
     private PowerOfPersuasionEffect(final PowerOfPersuasionEffect effect) {

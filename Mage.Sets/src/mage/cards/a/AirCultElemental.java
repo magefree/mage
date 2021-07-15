@@ -20,7 +20,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class AirCultElemental extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other target creature");
 
     static {
         filter.add(AnotherPredicate.instance);

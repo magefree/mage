@@ -25,7 +25,7 @@ public final class WildShape extends CardImpl {
 
         // Choose one. Until end of turn, target creature you control has that base power and toughness, becomes that creature type, and gains that ability.
         this.getSpellAbility().getModes().setChooseText(
-                ". Until end of turn, target creature you control has that base power and toughness, " +
+                "Choose one. Until end of turn, target creature you control has that base power and toughness, " +
                         "becomes that creature type, and gains that ability."
         );
 

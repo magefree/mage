@@ -31,7 +31,7 @@ public final class PurpleWorm extends CardImpl {
 
         // This spell costs {2} less to cast if a creature died this turn.
         Ability ability = new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(1, MorbidCondition.instance)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, MorbidCondition.instance)
         );
         ability.setRuleAtTheTop(true);
         this.addAbility(ability.addHint(MorbidHint.instance), new MorbidWatcher());

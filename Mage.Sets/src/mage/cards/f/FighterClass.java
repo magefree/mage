@@ -49,7 +49,7 @@ public final class FighterClass extends CardImpl {
 
         // When Fighter Class enters the battlefield, search your library for an Equipment card, reveal it, put it into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter))
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true)
         ));
 
         // {1}{R}{W}: Level 2
@@ -58,7 +58,7 @@ public final class FighterClass extends CardImpl {
         // Equip abilities you activate cost {2} less to activate.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
                 new AbilitiesCostReductionControllerEffect(EquipAbility.class, "Equip")
-                        .setText("\"equip abilities you activate cost {2} less to activate\""),
+                        .setText("equip abilities you activate cost {2} less to activate"),
                 2
         )));
 

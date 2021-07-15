@@ -33,7 +33,7 @@ public final class ContactOtherPlane extends CardImpl {
         // 20 | Scry 3, then draw three cards.
         effect.addTableEntry(
                 20, 20, new ScryEffect(3, false),
-                new DrawCardSourceControllerEffect(2).concatBy(", then")
+                new DrawCardSourceControllerEffect(3).concatBy(", then")
         );
     }
 

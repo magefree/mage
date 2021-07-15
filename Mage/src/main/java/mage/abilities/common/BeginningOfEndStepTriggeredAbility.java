@@ -118,24 +118,25 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private String generateConditionString() {
-        if (interveningIfClauseCondition != null) {
-            if (interveningIfClauseCondition.toString().startsWith("if")) {
-
-                //Fixes punctuation on multiple sentence if-then construction
-                // see -- Colfenor's Urn
-                if (interveningIfClauseCondition.toString().endsWith(".")) {
-                    return interveningIfClauseCondition.toString() + " ";
-                }
-
-                return interveningIfClauseCondition.toString() + ", ";
-            } else {
-                return "if {this} is " + interveningIfClauseCondition.toString() + ", ";
+        if (interveningIfClauseCondition == null) {
+            switch (getZone()) {
+                case GRAVEYARD:
+                    return "if {this} is in your graveyard, ";
             }
+            return "";
         }
-        switch (getZone()) {
-            case GRAVEYARD:
-                return "if {this} is in your graveyard, ";
+        String clauseText = interveningIfClauseCondition.toString();
+        if (clauseText.startsWith("if")) {
+            //Fixes punctuation on multiple sentence if-then construction
+            // see -- Colfenor's Urn
+            if (clauseText.endsWith(".")) {
+                return clauseText + " ";
+            }
+            return clauseText + ", ";
         }
-        return "";
+        System.out.println("==================");
+        System.out.println(clauseText);
+        System.out.println("==================");
+        return "if " + clauseText + ", ";
     }
 }

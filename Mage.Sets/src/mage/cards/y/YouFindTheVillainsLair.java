@@ -27,7 +27,7 @@ public final class YouFindTheVillainsLair extends CardImpl {
         // • Learn Their Secrets — Draw two cards, then discard two cards.
         this.getSpellAbility().addMode(new Mode(
                 new DrawDiscardControllerEffect(2, 2)
-        ).withFlavorWord("Learn Their Secrts"));
+        ).withFlavorWord("Learn Their Secrets"));
     }
 
     private YouFindTheVillainsLair(final YouFindTheVillainsLair card) {

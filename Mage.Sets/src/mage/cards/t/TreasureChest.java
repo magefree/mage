@@ -65,7 +65,7 @@ class TreasureChestEffect extends OneShotEffect {
 
     TreasureChestEffect() {
         super(Outcome.Benefit);
-        staticText = "search your library for a card. If it's an artifact card you may " +
+        staticText = "search your library for a card. If it's an artifact card, you may " +
                 "put it onto the battlefield. Otherwise, put that card into your hand. Then shuffle";
     }
 
