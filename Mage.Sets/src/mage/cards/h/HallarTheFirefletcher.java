@@ -80,6 +80,6 @@ class HallarTheFirefletcherTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever you cast a spell, if that spell was kicked," ;
+        return "Whenever you cast a spell, if that spell was kicked, ";
     }
 }
