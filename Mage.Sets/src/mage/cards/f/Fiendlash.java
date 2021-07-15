@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -19,6 +20,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -61,6 +63,8 @@ public final class Fiendlash extends CardImpl {
 
 class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
 
+    private boolean usedForCombatDamageStep = false;
+
     FiendlashTriggeredAbility() {
         super(Zone.BATTLEFIELD, new FiendlashEffect(), false);
         this.addTarget(new TargetPlayerOrPlaneswalker());
@@ -77,18 +81,33 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT
+                || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent equipment = game.getPermanent(this.getSourceId());
-        if (equipment == null || equipment.getAttachedTo() == null
-                || !event.getTargetId().equals(equipment.getAttachedTo())) {
+        if (equipment == null || equipment.getAttachedTo() == null) {
             return false;
         }
-        this.getEffects().setValue("equipped", game.getPermanent(equipment.getAttachedTo()));
-        return true;
+        if (event.getType() == GameEvent.EventType.DAMAGED_PERMANENT
+                && event.getTargetId().equals(equipment.getAttachedTo())) {
+            this.getEffects().setValue("equipped", game.getPermanent(equipment.getAttachedTo()));
+
+            if (((DamagedEvent) event).isCombatDamage()) {
+                if (!usedForCombatDamageStep) {
+                    usedForCombatDamageStep = true;
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
+            usedForCombatDamageStep = false;
+        }
+        return false;
     }
 
     @Override
