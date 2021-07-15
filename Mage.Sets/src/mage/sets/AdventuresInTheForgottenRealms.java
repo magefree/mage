@@ -224,6 +224,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Sylvan Shepherd", 206, Rarity.COMMON, mage.cards.s.SylvanShepherd.class));
         cards.add(new SetCardInfo("Targ Nar, Demon-Fang Gnoll", 234, Rarity.UNCOMMON, mage.cards.t.TargNarDemonFangGnoll.class));
         cards.add(new SetCardInfo("Tasha's Hideous Laughter", 78, Rarity.RARE, mage.cards.t.TashasHideousLaughter.class));
+        cards.add(new SetCardInfo("Teleportation Circle", 39, Rarity.RARE, mage.cards.t.TeleportationCircle.class));
         cards.add(new SetCardInfo("Temple of the Dragon Queen", 260, Rarity.UNCOMMON, mage.cards.t.TempleOfTheDragonQueen.class));
         cards.add(new SetCardInfo("The Blackstaff of Waterdeep", 48, Rarity.RARE, mage.cards.t.TheBlackstaffOfWaterdeep.class));
         cards.add(new SetCardInfo("The Book of Exalted Deeds", 4, Rarity.MYTHIC, mage.cards.t.TheBookOfExaltedDeeds.class));
