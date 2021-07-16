@@ -19,7 +19,7 @@ import mage.target.Target;
 import mage.target.Targets;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.Objects;
+import java.util.Collections;
 
 /**
  * @author TheElk801
@@ -39,14 +39,8 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = rule;
         this.effects.addAll(effects);
-        this.effects.removeIf(Objects::isNull);
         this.targets.addAll(targets);
-        this.targets.removeIf(Objects::isNull);
-        for (Cost cost : costs) {
-            if (cost != null) {
-                this.costs.add(cost);
-            }
-        }
+        Collections.addAll(this.costs, costs);
         this.useAttachedCost = attachedCost;
         this.generateGainAbilityDependencies(makeAbility(null, null), null);
     }
