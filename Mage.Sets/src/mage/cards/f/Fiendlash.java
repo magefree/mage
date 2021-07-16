@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -64,8 +63,6 @@ public final class Fiendlash extends CardImpl {
 
 class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean usedForCombatDamageStep = false;
-
     FiendlashTriggeredAbility() {
         super(Zone.BATTLEFIELD, new FiendlashEffect(), false);
         this.addTarget(new TargetPlayerOrPlaneswalker());
@@ -73,7 +70,6 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
 
     private FiendlashTriggeredAbility(final FiendlashTriggeredAbility ability) {
         super(ability);
-        this.usedForCombatDamageStep = ability.usedForCombatDamageStep;
     }
 
     @Override
@@ -95,10 +91,7 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
 
         UUID attachedCreature = equipment.getAttachedTo();
         if (attachedCreature == null) {
-            attachedCreature = (UUID) game.getState().getValue("Fiendlash" + equipment.getId());
-            if (attachedCreature == null) {
                 return false;
-            }
         }
 
         game.getState().setValue("Fiendlash" + equipment.getId(), attachedCreature);
