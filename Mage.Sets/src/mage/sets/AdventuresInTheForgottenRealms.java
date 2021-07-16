@@ -170,6 +170,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nadaar, Selfless Paladin", 27, Rarity.RARE, mage.cards.n.NadaarSelflessPaladin.class));
         cards.add(new SetCardInfo("Neverwinter Dryad", 195, Rarity.COMMON, mage.cards.n.NeverwinterDryad.class));
+        cards.add(new SetCardInfo("Ochre Jelly", 196, Rarity.RARE, mage.cards.o.OchreJelly.class));
         cards.add(new SetCardInfo("Old Gnawbone", 197, Rarity.MYTHIC, mage.cards.o.OldGnawbone.class));
         cards.add(new SetCardInfo("Orb of Dragonkind", 157, Rarity.RARE, mage.cards.o.OrbOfDragonkind.class));
         cards.add(new SetCardInfo("Orcus, Prince of Undeath", 229, Rarity.RARE, mage.cards.o.OrcusPrinceOfUndeath.class));

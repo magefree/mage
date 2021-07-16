@@ -77,4 +77,9 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         }
     }
 
+    @Override
+    public void setValue(String key, Object value) {
+        ability.getEffects().setValue(key, value);
+        super.setValue(key, value);
+    }
 }
