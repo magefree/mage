@@ -70,14 +70,14 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    private FiendlashTriggeredAbility(final FiendlashTriggeredAbility ability, boolean usedForCombatDamageStep ) {
+    private FiendlashTriggeredAbility(final FiendlashTriggeredAbility ability) {
         super(ability);
-        this.usedForCombatDamageStep = usedForCombatDamageStep;
+        this.usedForCombatDamageStep = ability.usedForCombatDamageStep;
     }
 
     @Override
     public FiendlashTriggeredAbility copy() {
-        return new FiendlashTriggeredAbility(this, false);
+        return new FiendlashTriggeredAbility(this);
     }
 
     @Override
