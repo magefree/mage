@@ -51,7 +51,7 @@ class TrickstersTalismanEffect extends GainAbilityWithAttachmentEffect {
     TrickstersTalismanEffect() {
         super("and has \"Whenever this creature deals combat damage to a player, " +
                         "you may sacrifice {this}. If you do, create a token that's a copy of this creature.\"",
-                (Effect) null, null, new SacrificeAttachmentCost(), null);
+                (Effect) null, null, new SacrificeAttachmentCost());
     }
 
     private TrickstersTalismanEffect(final TrickstersTalismanEffect effect) {

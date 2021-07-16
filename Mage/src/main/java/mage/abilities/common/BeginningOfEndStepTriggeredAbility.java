@@ -134,9 +134,6 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
             }
             return clauseText + ", ";
         }
-        System.out.println("==================");
-        System.out.println(clauseText);
-        System.out.println("==================");
         return "if " + clauseText + ", ";
     }
 }

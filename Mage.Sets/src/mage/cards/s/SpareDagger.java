@@ -53,7 +53,7 @@ class SpareDaggerEffect extends GainAbilityWithAttachmentEffect {
     SpareDaggerEffect() {
         super("and has \"Whenever this creature attacks, you may sacrifice {this}. " +
                         "When you do, this creature deals 1 damage to any target.\"",
-                (Effect) null, null, new SacrificeAttachmentCost(), null);
+                (Effect) null, null, new SacrificeAttachmentCost());
     }
 
     private SpareDaggerEffect(final SpareDaggerEffect effect) {
