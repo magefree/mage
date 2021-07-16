@@ -70,13 +70,14 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    private FiendlashTriggeredAbility(final FiendlashTriggeredAbility ability) {
+    private FiendlashTriggeredAbility(final FiendlashTriggeredAbility ability, boolean usedForCombatDamageStep ) {
         super(ability);
+        this.usedForCombatDamageStep = usedForCombatDamageStep;
     }
 
     @Override
     public FiendlashTriggeredAbility copy() {
-        return new FiendlashTriggeredAbility(this);
+        return new FiendlashTriggeredAbility(this, false);
     }
 
     @Override
@@ -93,7 +94,7 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
         }
         if (event.getType() == GameEvent.EventType.DAMAGED_PERMANENT
                 && event.getTargetId().equals(equipment.getAttachedTo())) {
-            this.getEffects().setValue("equipped", game.getPermanent(equipment.getAttachedTo()));
+            this.getEffects().setValue("equipped", equipment.getAttachedTo());
 
             if (((DamagedEvent) event).isCombatDamage()) {
                 if (!usedForCombatDamageStep) {
@@ -133,11 +134,16 @@ class FiendlashEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = (Permanent) getValue("equipped");
-        int damage = (int) creature.getPower().getValue();
-        if (creature == null || damage < 1) {
+        Permanent creature = game.getPermanentOrLKIBattlefield((UUID)getValue("equipped"));
+        if (creature == null) {
             return false;
         }
+
+        int damage = creature.getPower().getValue();
+        if (damage < 1) {
+            return false;
+        }        
+
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
             if (permanent.isPlaneswalker()) {
