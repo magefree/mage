@@ -18,7 +18,6 @@ import mage.game.events.GameEvent;
 public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     private final boolean useValue;
-    private boolean usedForCombatDamageStep;
 
     public DealtDamageToSourceTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
@@ -31,7 +30,6 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
     public DealtDamageToSourceTriggeredAbility(Effect effect, boolean optional, boolean enrage, boolean useValue) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.useValue = useValue;
-        this.usedForCombatDamageStep = false;
         if (enrage) {
             this.setAbilityWord(AbilityWord.ENRAGE);
         }
@@ -40,7 +38,6 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
     public DealtDamageToSourceTriggeredAbility(final DealtDamageToSourceTriggeredAbility ability) {
         super(ability);
         this.useValue = ability.useValue;
-        this.usedForCombatDamageStep = ability.usedForCombatDamageStep;
     }
 
     @Override
