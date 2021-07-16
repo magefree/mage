@@ -21,6 +21,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedPermanentBatchEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -82,32 +83,38 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT
-                || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent equipment = game.getPermanent(this.getSourceId());
-        if (equipment == null || equipment.getAttachedTo() == null) {
+        if (equipment == null) {
             return false;
         }
-        if (event.getType() == GameEvent.EventType.DAMAGED_PERMANENT
-                && event.getTargetId().equals(equipment.getAttachedTo())) {
-            this.getEffects().setValue("equipped", equipment.getAttachedTo());
 
-            if (((DamagedEvent) event).isCombatDamage()) {
-                if (!usedForCombatDamageStep) {
-                    usedForCombatDamageStep = true;
-                    return true;
-                }
-            } else {
+        UUID attachedCreature = equipment.getAttachedTo();
+        if (attachedCreature == null) {
+            attachedCreature = (UUID) game.getState().getValue("Fiendlash" + equipment.getId());
+            if (attachedCreature == null) {
+                return false;
+            }
+        }
+
+        game.getState().setValue("Fiendlash" + equipment.getId(), attachedCreature);
+
+        DamagedPermanentBatchEvent dEvent = (DamagedPermanentBatchEvent) event;
+        for (DamagedEvent damagedEvent : dEvent.getEvents()) {
+            UUID targetID = damagedEvent.getTargetId();
+            if (targetID == null) {
+                continue;
+            }
+
+            if (targetID == attachedCreature) {
                 return true;
             }
         }
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
-            usedForCombatDamageStep = false;
-        }
+
         return false;
     }
 
@@ -134,7 +141,8 @@ class FiendlashEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanentOrLKIBattlefield((UUID)getValue("equipped"));
+        Permanent creature = game
+                .getPermanentOrLKIBattlefield((UUID) game.getState().getValue("Fiendlash" + source.getSourceId()));
         if (creature == null) {
             return false;
         }
@@ -142,7 +150,7 @@ class FiendlashEffect extends OneShotEffect {
         int damage = creature.getPower().getValue();
         if (damage < 1) {
             return false;
-        }        
+        }
 
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
