@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedPermanentBatchEvent;
 import mage.game.events.GameEvent;
@@ -135,9 +134,9 @@ class BlazingSunsteelEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanentOrLKIBattlefield((UUID) getValue("equipped"));
-        int damage = (int)getValue("damage");
+        Integer damage = (Integer)getValue("damage");
 
-        if (creature == null || damage < 1) {
+        if (creature == null || damage == null  || damage < 1) {
             return false;
         }
         
