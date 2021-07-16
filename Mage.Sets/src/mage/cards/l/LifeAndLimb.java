@@ -49,8 +49,9 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
     LifeAndLimbEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "All Forests and all Saprolings are 1/1 green Saproling creatures and Forest lands in addition to their other types";
-        this.dependencyTypes.add(DependencyType.BecomeForest);
-        this.dependencyTypes.add(DependencyType.BecomeCreature);
+
+        this.dependendToTypes.add(DependencyType.BecomeForest);
+        this.dependendToTypes.add(DependencyType.BecomeCreature);
     }
 
     LifeAndLimbEffect(final LifeAndLimbEffect effect) {
