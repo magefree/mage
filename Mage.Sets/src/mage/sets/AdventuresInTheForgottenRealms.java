@@ -239,6 +239,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Treasure Chest", 252, Rarity.RARE, mage.cards.t.TreasureChest.class));
         cards.add(new SetCardInfo("Treasure Vault", 261, Rarity.RARE, mage.cards.t.TreasureVault.class));
         cards.add(new SetCardInfo("Trelasarra, Moon Dancer", 236, Rarity.UNCOMMON, mage.cards.t.TrelasarraMoonDancer.class));
+        cards.add(new SetCardInfo("Trickster's Talisman", 79, Rarity.UNCOMMON, mage.cards.t.TrickstersTalisman.class));
         cards.add(new SetCardInfo("Triumphant Adventurer", 237, Rarity.RARE, mage.cards.t.TriumphantAdventurer.class));
         cards.add(new SetCardInfo("True Polymorph", 80, Rarity.RARE, mage.cards.t.TruePolymorph.class));
         cards.add(new SetCardInfo("Underdark Basilisk", 208, Rarity.COMMON, mage.cards.u.UnderdarkBasilisk.class));
