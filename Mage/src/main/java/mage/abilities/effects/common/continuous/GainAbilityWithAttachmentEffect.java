@@ -28,8 +28,8 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
 
     private final Effects effects = new Effects();
     private final Targets targets = new Targets();
-    private final Costs costs = new CostsImpl();
-    private final UseAttachedCost useAttachedCost;
+    private final Costs<Cost> costs = new CostsImpl<>();
+    protected final UseAttachedCost useAttachedCost;
 
     public GainAbilityWithAttachmentEffect(String rule, Effect effect, Target target, UseAttachedCost attachedCost, Cost... costs) {
         this(rule, new Effects(effect), new Targets(target), attachedCost, costs);
@@ -42,10 +42,10 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
         this.targets.addAll(targets);
         this.costs.addAll(Arrays.asList(costs));
         this.useAttachedCost = attachedCost;
-        this.generateGainAbilityDependencies(makeAbility(this.effects, this.targets, this.costs), null);
+        this.generateGainAbilityDependencies(makeAbility(null, null), null);
     }
 
-    public GainAbilityWithAttachmentEffect(final GainAbilityWithAttachmentEffect effect) {
+    protected GainAbilityWithAttachmentEffect(final GainAbilityWithAttachmentEffect effect) {
         super(effect);
         this.effects.addAll(effect.effects);
         this.targets.addAll(effect.targets);
@@ -87,14 +87,13 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
         if (permanent == null) {
             return true;
         }
-        Ability ability = makeAbility(this.effects, this.targets, this.costs);
+        Ability ability = makeAbility(game, source);
         ability.getEffects().setValue("attachedPermanent", game.getPermanent(source.getSourceId()));
-        ability.addCost(useAttachedCost.copy().setMageObjectReference(source, game));
         permanent.addAbility(ability, source.getSourceId(), game);
         return true;
     }
 
-    private static Ability makeAbility(Effects effects, Targets targets, Cost... costs) {
+    protected Ability makeAbility(Game game, Ability source) {
         Ability ability = new SimpleActivatedAbility(null, null);
         for (Effect effect : effects) {
             if (effect == null) {
@@ -108,11 +107,14 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
             }
             ability.addTarget(target);
         }
-        for (Cost cost : costs) {
+        for (Cost cost : this.costs) {
             if (cost == null) {
                 continue;
             }
             ability.addCost(cost.copy());
+        }
+        if (source != null && game != null) {
+            ability.addCost(useAttachedCost.copy().setMageObjectReference(source, game));
         }
         return ability;
     }
