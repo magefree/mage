@@ -258,6 +258,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Wight", 127, Rarity.RARE, mage.cards.w.Wight.class));
         cards.add(new SetCardInfo("Wild Shape", 212, Rarity.UNCOMMON, mage.cards.w.WildShape.class));
         cards.add(new SetCardInfo("Wizard Class", 81, Rarity.UNCOMMON, mage.cards.w.WizardClass.class));
+        cards.add(new SetCardInfo("Wizard's Spellbook", 82, Rarity.RARE, mage.cards.w.WizardsSpellbook.class));
         cards.add(new SetCardInfo("Xorn", 167, Rarity.RARE, mage.cards.x.Xorn.class));
         cards.add(new SetCardInfo("You Come to a River", 83, Rarity.COMMON, mage.cards.y.YouComeToARiver.class));
         cards.add(new SetCardInfo("You Come to the Gnoll Camp", 168, Rarity.COMMON, mage.cards.y.YouComeToTheGnollCamp.class));
