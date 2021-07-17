@@ -10,6 +10,7 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.ClassLevelAbility;
 import mage.abilities.keyword.ClassReminderAbility;
@@ -57,9 +58,11 @@ public final class MonkClass extends CardImpl {
         this.addAbility(new ClassLevelAbility(3, "{1}{W}{U}"));
 
         // At the beginning of your upkeep, exile the top card of your library. For as long as it remains exiled, it has "You may cast this card from exile as long as you've cast another spell this turn."
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new MonkClassEffect(), TargetController.YOU, false
-        ));
+        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
+                new BeginningOfUpkeepTriggeredAbility(
+                        new MonkClassEffect(), TargetController.YOU, false
+                ), 3
+        )));
     }
 
     private MonkClass(final MonkClass card) {

@@ -217,6 +217,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Silver Raven", 74, Rarity.COMMON, mage.cards.s.SilverRaven.class));
         cards.add(new SetCardInfo("Skeletal Swarming", 232, Rarity.RARE, mage.cards.s.SkeletalSwarming.class));
         cards.add(new SetCardInfo("Skullport Merchant", 120, Rarity.UNCOMMON, mage.cards.s.SkullportMerchant.class));
+        cards.add(new SetCardInfo("Sorcerer Class", 233, Rarity.RARE, mage.cards.s.SorcererClass.class));
         cards.add(new SetCardInfo("Soulknife Spy", 75, Rarity.COMMON, mage.cards.s.SoulknifeSpy.class));
         cards.add(new SetCardInfo("Spare Dagger", 250, Rarity.COMMON, mage.cards.s.SpareDagger.class));
         cards.add(new SetCardInfo("Sphere of Annihilation", 121, Rarity.RARE, mage.cards.s.SphereOfAnnihilation.class));
