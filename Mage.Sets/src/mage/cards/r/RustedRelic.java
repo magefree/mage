@@ -26,7 +26,7 @@ public final class RustedRelic extends CardImpl {
                 new ConditionalContinuousEffect(
                         new BecomesCreatureSourceEffect(new RustedRelicToken(), "artifact", Duration.WhileOnBattlefield),
                         MetalcraftCondition.instance,
-                        "<i>Metalcraft</i> &mdash; {this} is a 5/5 Golem artifact creature as long as you control three or more artifacts"))
+                        "{this} is a 5/5 Golem artifact creature as long as you control three or more artifacts"))
                 .setAbilityWord(AbilityWord.METALCRAFT)
                 .addHint(MetalcraftHint.instance)
         );

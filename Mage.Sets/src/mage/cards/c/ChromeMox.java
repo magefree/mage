@@ -14,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -39,7 +40,7 @@ public final class ChromeMox extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
         // Imprint - When Chrome Mox enters the battlefield, you may exile a nonartifact, nonland card from your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ChromeMoxEffect(), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ChromeMoxEffect(), true).setAbilityWord(AbilityWord.IMPRINT));
         // {T}: Add one mana of any of the exiled card's colors.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ChromeMoxManaEffect(), new TapSourceCost()));
     }

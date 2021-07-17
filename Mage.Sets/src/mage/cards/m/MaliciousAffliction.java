@@ -36,7 +36,7 @@ public final class MaliciousAffliction extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new CastSourceTriggeredAbility(new CopySourceSpellEffect(), true),
                 MorbidCondition.instance, "<i>Morbid</i> &mdash; When you cast this spell, " +
-                "if a creature died this turn, you may copy {this} and may choose a new target for the copy"
+                "if a creature died this turn, you may copy {this} and may choose a new target for the copy."
         );
         ability.setRuleAtTheTop(true);
         this.addAbility(ability.addHint(MorbidHint.instance));

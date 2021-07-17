@@ -28,7 +28,6 @@ public final class DispenseJustice extends CardImpl {
         // Metalcraft — That player sacrifices two attacking creatures instead if you control three or more artifacts.
         this.getSpellAbility().addEffect(new DispenseJusticeEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().setAbilityWord(AbilityWord.METALCRAFT);
         this.getSpellAbility().addHint(MetalcraftHint.instance);
     }
 

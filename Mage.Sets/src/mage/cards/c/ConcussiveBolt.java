@@ -34,7 +34,6 @@ public final class ConcussiveBolt extends CardImpl {
         // <i>Metalcraft</i> &mdash; If you control three or more artifacts, creatures that player controls can't block this turn.
         this.getSpellAbility().addEffect(new ConcussiveBoltEffect());
         this.getSpellAbility().addEffect(new ConcussiveBoltRestrictionEffect());
-        this.getSpellAbility().setAbilityWord(AbilityWord.METALCRAFT);
         this.getSpellAbility().addHint(MetalcraftHint.instance);
     }
 
@@ -52,7 +51,7 @@ class ConcussiveBoltEffect extends OneShotEffect {
 
     public ConcussiveBoltEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Metalcraft</i> &mdash; If you control three or more artifacts, creatures controlled by that player or by that planeswalker's controller can't block this turn.";
+        this.staticText = "<br><i>Metalcraft</i> &mdash; If you control three or more artifacts, creatures controlled by that player or by that planeswalker's controller can't block this turn.";
     }
 
     public ConcussiveBoltEffect(final ConcussiveBoltEffect effect) {

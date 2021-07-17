@@ -32,7 +32,7 @@ public final class PanopticMirror extends CardImpl {
         // Imprint - {X}, {tap}: You may exile an instant or sorcery card with converted mana cost X from your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PanopticMirrorExileEffect(), new VariableManaCost());
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(AbilityWord.IMPRINT));
         // At the beginning of your upkeep, you may copy a card exiled with Panoptic Mirror. If you do, you may cast the copy without paying its mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PanopticMirrorCastEffect(), TargetController.YOU, true));
     }

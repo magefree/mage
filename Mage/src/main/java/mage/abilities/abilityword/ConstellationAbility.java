@@ -22,7 +22,6 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
 
     public ConstellationAbility(Effect effect) {
         this(effect, false);
-        setAbilityWord(AbilityWord.CONSTELLATION);
     }
 
     public ConstellationAbility(Effect effect, boolean optional) {
@@ -32,6 +31,7 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
     public ConstellationAbility(Effect effect, boolean optional, boolean thisOr) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.thisOr = thisOr;
+        setAbilityWord(AbilityWord.CONSTELLATION);
     }
 
     public ConstellationAbility(final ConstellationAbility ability) {
