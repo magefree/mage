@@ -10,6 +10,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.icon.CardIcon;
+import mage.abilities.icon.other.FaceDownStatusIcon;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.*;
 import mage.cards.mock.MockCard;
@@ -415,9 +416,15 @@ public class CardView extends SimpleCardView {
             }
 
             // card icons for permanents on battlefield
+            // abilities
             permanent.getAbilities(game).forEach(ability -> {
                 this.cardIcons.addAll(ability.getIcons(game));
             });
+            // other
+            if (permanent.isFaceDown(game)) {
+                this.cardIcons.add(FaceDownStatusIcon.instance);
+            }
+
         } else {
             if (card.isCopy()) {
                 this.mageObjectType = MageObjectType.COPY_CARD;
