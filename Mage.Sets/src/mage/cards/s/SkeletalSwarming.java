@@ -25,7 +25,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.SkeletonToken;
-import mage.watchers.common.MorbidWatcher;
 
 import java.util.UUID;
 
@@ -59,7 +58,7 @@ public final class SkeletalSwarming extends CardImpl {
                         MorbidCondition.instance, "create a tapped 1/1 black Skeleton creature token. " +
                         "If a creature died this turn, create two of those tokens instead"
                 ), TargetController.YOU, false
-        ).addHint(MorbidHint.instance), new MorbidWatcher());
+        ).addHint(MorbidHint.instance));
     }
 
     private SkeletalSwarming(final SkeletalSwarming card) {

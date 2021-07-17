@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.MorbidWatcher;
 
 import java.util.UUID;
 
@@ -42,7 +41,7 @@ public final class ShessraDeathsWhisper extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1),
                 new PayLifeCost(2)), TargetController.YOU, MorbidCondition.instance, false
-        ).addHint(MorbidHint.instance).withFlavorWord("Whispers of the Grave"), new MorbidWatcher());
+        ).addHint(MorbidHint.instance).withFlavorWord("Whispers of the Grave"));
     }
 
     private ShessraDeathsWhisper(final ShessraDeathsWhisper card) {

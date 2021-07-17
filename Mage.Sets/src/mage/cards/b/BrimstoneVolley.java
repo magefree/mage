@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetAnyTarget;
-import mage.watchers.common.MorbidWatcher;
 import java.util.UUID;
 
 /**
@@ -28,7 +27,6 @@ public final class BrimstoneVolley extends CardImpl {
         ));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addHint(MorbidHint.instance);
-        this.getSpellAbility().addWatcher(new MorbidWatcher());
     }
 
     private BrimstoneVolley(final BrimstoneVolley card) {

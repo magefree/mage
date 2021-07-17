@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.watchers.common.MorbidWatcher;
 
 import java.util.UUID;
 
@@ -28,7 +27,6 @@ public final class FungalRebirth extends CardImpl {
         getSpellAbility().addEffect(
                 new ReturnFromGraveyardToHandTargetEffect().setText("Return target permanent card from your graveyard to your hand")
         );
-        getSpellAbility().addWatcher(new MorbidWatcher());
         getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CreateTokenEffect(new SaprolingToken(), 2),
                 MorbidCondition.instance,

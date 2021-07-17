@@ -20,7 +20,6 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.watchers.common.MorbidWatcher;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
 import java.util.UUID;
@@ -44,7 +43,7 @@ public final class WarlockClass extends CardImpl {
                         new LoseLifeOpponentsEffect(1), TargetController.YOU, false
                 ), MorbidCondition.instance, "At the beginning of your end step, " +
                 "if a creature died this turn, each opponent loses 1 life."
-        ).addHint(MorbidHint.instance), new MorbidWatcher());
+        ).addHint(MorbidHint.instance));
 
         // {1}{B}: Level 2
         this.addAbility(new ClassLevelAbility(2, "{1}{B}"));

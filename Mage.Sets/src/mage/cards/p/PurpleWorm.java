@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.watchers.common.MorbidWatcher;
 
 import java.util.UUID;
 
@@ -34,7 +33,7 @@ public final class PurpleWorm extends CardImpl {
                 Zone.ALL, new SpellCostReductionSourceEffect(2, MorbidCondition.instance)
         );
         ability.setRuleAtTheTop(true);
-        this.addAbility(ability.addHint(MorbidHint.instance), new MorbidWatcher());
+        this.addAbility(ability.addHint(MorbidHint.instance));
 
         // Ward {2}
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));

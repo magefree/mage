@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.ZombieToken;
-import mage.watchers.common.MorbidWatcher;
 
 import java.util.UUID;
 
@@ -49,7 +48,7 @@ public final class LilianasDevotee extends CardImpl {
                 ), TargetController.YOU, false), MorbidCondition.instance,
                 "At the beginning of your end step, if a creature died this turn, " +
                         "you may pay {1}{B}. If you do, create a 2/2 black Zombie creature token."
-        ).addHint(MorbidHint.instance), new MorbidWatcher());
+        ).addHint(MorbidHint.instance));
     }
 
     private LilianasDevotee(final LilianasDevotee card) {

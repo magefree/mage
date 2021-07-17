@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.SkeletonToken;
-import mage.watchers.common.MorbidWatcher;
 
 import java.util.UUID;
 
@@ -53,7 +52,7 @@ public final class DeathPriestOfMyrkul extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DoIfCostPaid(new CreateTokenEffect(new SkeletonToken()), new GenericManaCost(1)),
                 TargetController.YOU, MorbidCondition.instance, false
-        ).addHint(MorbidHint.instance), new MorbidWatcher());
+        ).addHint(MorbidHint.instance));
     }
 
     private DeathPriestOfMyrkul(final DeathPriestOfMyrkul card) {
