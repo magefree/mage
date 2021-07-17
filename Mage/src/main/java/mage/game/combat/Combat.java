@@ -178,6 +178,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         numberCreaturesDefenderAttackedBy.clear();
         creaturesForcedToAttack.clear();
         maxAttackers = Integer.MIN_VALUE;
+        attackersTappedByAttack.clear();
     }
 
     public String getValue() {
