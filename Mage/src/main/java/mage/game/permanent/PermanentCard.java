@@ -220,4 +220,9 @@ public class PermanentCard extends PermanentImpl {
     public Card getMainCard() {
         return card.getMainCard();
     }
+
+    @Override
+    public String toString() {
+        return card.toString();
+    }
 }

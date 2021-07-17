@@ -221,8 +221,10 @@ public class LayerTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         // all lands are forests in addition to other types
         assertType("Plains", CardType.CREATURE, SubType.FOREST);
