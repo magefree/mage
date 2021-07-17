@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -22,7 +23,7 @@ public final class DeathreapRitual extends CardImpl {
 
         // <i>Morbid</i> &mdash; At the beginning of each end step, if a creature died this turn, you may draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                TargetController.ANY, MorbidCondition.instance, true));
+                TargetController.ANY, MorbidCondition.instance, true).addHint(MorbidHint.instance));
     }
 
     private DeathreapRitual(final DeathreapRitual card) {

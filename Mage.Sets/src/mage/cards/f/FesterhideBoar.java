@@ -7,6 +7,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +31,7 @@ public final class FesterhideBoar extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // <i>Morbid</i> &mdash; Festerhide Boar enters the battlefield with two +1/+1 counters on it if a creature died this turn.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-                MorbidCondition.instance, ""), "with two +1/+1 counters on it if a creature died this turn"));
+                MorbidCondition.instance, ""), "with two +1/+1 counters on it if a creature died this turn").addHint(MorbidHint.instance));
     }
 
     private FesterhideBoar(final FesterhideBoar card) {

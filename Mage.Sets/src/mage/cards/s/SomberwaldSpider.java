@@ -7,6 +7,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +32,7 @@ public final class SomberwaldSpider extends CardImpl {
         // <i>Morbid</i> &mdash; Somberwald Spider enters the battlefield with two +1/+1 counters on it if a creature died this turn.
         this.addAbility(new EntersBattlefieldAbility(
                 new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), MorbidCondition.instance, ""),
-                "with two +1/+1 counters on it if a creature died this turn"));
+                "with two +1/+1 counters on it if a creature died this turn").addHint(MorbidHint.instance));
     }
 
     private SomberwaldSpider(final SomberwaldSpider card) {

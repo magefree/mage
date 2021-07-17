@@ -7,6 +7,7 @@ import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,7 +35,7 @@ public final class CagedZombie extends CardImpl {
                 new ManaCostsImpl("{1}{B}"), MorbidCondition.instance
         );
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability, new MorbidWatcher());
+        this.addAbility(ability.addHint(MorbidHint.instance), new MorbidWatcher());
     }
 
     private CagedZombie(final CagedZombie card) {

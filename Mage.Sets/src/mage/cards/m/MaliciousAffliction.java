@@ -7,6 +7,7 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.CopySourceSpellEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,7 +39,7 @@ public final class MaliciousAffliction extends CardImpl {
                 "if a creature died this turn, you may copy {this} and may choose a new target for the copy"
         );
         ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MorbidHint.instance));
 
         // Destroy target nonblack creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

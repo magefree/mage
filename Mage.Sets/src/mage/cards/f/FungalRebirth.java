@@ -4,6 +4,7 @@ import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,6 +34,7 @@ public final class FungalRebirth extends CardImpl {
                 MorbidCondition.instance,
                 "If a creature died this turn, create two 1/1 green Saproling creature tokens"));
         getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_PERMANENT));
+        getSpellAbility().addHint(MorbidHint.instance);
     }
 
     private FungalRebirth(final FungalRebirth card) {
