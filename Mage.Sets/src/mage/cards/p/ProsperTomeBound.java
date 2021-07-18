@@ -1,0 +1,87 @@
+package mage.cards.p;
+
+import mage.MageInt;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.*;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.token.TreasureToken;
+
+import java.util.UUID;
+
+/**
+ * @author TheElk801
+ */
+public final class ProsperTomeBound extends CardImpl {
+
+    public ProsperTomeBound(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
+
+        this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.TIEFLING);
+        this.subtype.add(SubType.WARLOCK);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(4);
+
+        // Deathtouch
+        this.addAbility(DeathtouchAbility.getInstance());
+
+        // Mystic Arcanum — At the beginning of your end step, exile the top card of your library. Until the end of your next turn, you may play that card.
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new ExileTopXMayPlayUntilEndOfTurnEffect(
+                        1, false, Duration.UntilEndOfYourNextTurn
+                ), TargetController.YOU, false
+        ).withFlavorWord("Mystic Arcanum"));
+
+        // Pact Boon — Whenever you play a card from exile, create a Treasure token.
+        this.addAbility(new ProsperTomeBoundTriggeredAbility());
+    }
+
+    private ProsperTomeBound(final ProsperTomeBound card) {
+        super(card);
+    }
+
+    @Override
+    public ProsperTomeBound copy() {
+        return new ProsperTomeBound(this);
+    }
+}
+
+class ProsperTomeBoundTriggeredAbility extends TriggeredAbilityImpl {
+
+    ProsperTomeBoundTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()));
+        this.flavorWord = "Pact Boon";
+    }
+
+    private ProsperTomeBoundTriggeredAbility(final ProsperTomeBoundTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST
+                || event.getType() == GameEvent.EventType.LAND_PLAYED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return isControlledBy(event.getPlayerId()) && event.getZone() == Zone.EXILED;
+    }
+
+    @Override
+    public ProsperTomeBoundTriggeredAbility copy() {
+        return new ProsperTomeBoundTriggeredAbility(this);
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever you play a card from exile, ";
+    }
+}

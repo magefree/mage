@@ -168,6 +168,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Prairie Stream", 256, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Prognostic Sphinx", 90, Rarity.RARE, mage.cards.p.PrognosticSphinx.class));
         cards.add(new SetCardInfo("Propaganda", 91, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
+        cards.add(new SetCardInfo("Prosper, Tome-Bound", 2, Rarity.MYTHIC, mage.cards.p.ProsperTomeBound.class));
         cards.add(new SetCardInfo("Psychic Impetus", 92, Rarity.UNCOMMON, mage.cards.p.PsychicImpetus.class));
         cards.add(new SetCardInfo("Puresteel Paladin", 69, Rarity.RARE, mage.cards.p.PuresteelPaladin.class));
         cards.add(new SetCardInfo("Radiant Solar", 9, Rarity.RARE, mage.cards.r.RadiantSolar.class));
