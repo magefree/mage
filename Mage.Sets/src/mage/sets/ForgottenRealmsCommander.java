@@ -232,6 +232,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Throes of Chaos", 146, Rarity.UNCOMMON, mage.cards.t.ThroesOfChaos.class));
         cards.add(new SetCardInfo("Thunderbreak Regent", 147, Rarity.RARE, mage.cards.t.ThunderbreakRegent.class));
         cards.add(new SetCardInfo("Unburial Rites", 111, Rarity.UNCOMMON, mage.cards.u.UnburialRites.class));
+        cards.add(new SetCardInfo("Underdark Rift", 62, Rarity.UNCOMMON, mage.cards.u.UnderdarkRift.class));
         cards.add(new SetCardInfo("Unstable Obelisk", 220, Rarity.UNCOMMON, mage.cards.u.UnstableObelisk.class));
         cards.add(new SetCardInfo("Utopia Sprawl", 172, Rarity.UNCOMMON, mage.cards.u.UtopiaSprawl.class));
         cards.add(new SetCardInfo("Utter End", 195, Rarity.RARE, mage.cards.u.UtterEnd.class));
