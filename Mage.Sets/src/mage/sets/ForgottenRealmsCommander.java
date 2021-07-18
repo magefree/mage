@@ -208,6 +208,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Spinerock Knoll", 263, Rarity.RARE, mage.cards.s.SpinerockKnoll.class));
         cards.add(new SetCardInfo("Spit Flame", 142, Rarity.RARE, mage.cards.s.SpitFlame.class));
         cards.add(new SetCardInfo("Sram, Senior Edificer", 72, Rarity.RARE, mage.cards.s.SramSeniorEdificer.class));
+        cards.add(new SetCardInfo("Storvald, Frost Giant Jarl", 55, Rarity.MYTHIC, mage.cards.s.StorvaldFrostGiantJarl.class));
         cards.add(new SetCardInfo("Sun Titan", 73, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
         cards.add(new SetCardInfo("Sunblast Angel", 74, Rarity.RARE, mage.cards.s.SunblastAngel.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 264, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
