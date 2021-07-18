@@ -111,6 +111,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Grasslands", 242, Rarity.UNCOMMON, mage.cards.g.Grasslands.class));
         cards.add(new SetCardInfo("Gratuitous Violence", 127, Rarity.RARE, mage.cards.g.GratuitousViolence.class));
         cards.add(new SetCardInfo("Greater Good", 160, Rarity.RARE, mage.cards.g.GreaterGood.class));
+        cards.add(new SetCardInfo("Grim Hireling", 25, Rarity.RARE, mage.cards.g.GrimHireling.class));
         cards.add(new SetCardInfo("Gruul Signet", 207, Rarity.UNCOMMON, mage.cards.g.GruulSignet.class));
         cards.add(new SetCardInfo("Gruul Turf", 243, Rarity.UNCOMMON, mage.cards.g.GruulTurf.class));
         cards.add(new SetCardInfo("Gryff's Boon", 67, Rarity.UNCOMMON, mage.cards.g.GryffsBoon.class));
