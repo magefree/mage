@@ -99,11 +99,11 @@ public class GameSessionWatcher {
 
     public GameView getGameView() {
         GameView gameView = new GameView(game.getState(), game, null, userId);
-        processWatchedHands(userId, gameView);
+        processWatchedHands(game, userId, gameView);
         return gameView;
     }
 
-    protected void processWatchedHands(UUID userId, GameView gameView) {
+    protected static void processWatchedHands(Game game, UUID userId, GameView gameView) {
         Map<String, SimpleCardsView> handCards = new HashMap<>();
         for (Player player : game.getPlayers().values()) {
             if (player.hasUserPermissionToSeeHand(userId)) {

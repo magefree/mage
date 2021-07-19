@@ -11,8 +11,8 @@ import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.Player;
 import mage.server.User;
-import mage.server.managers.UserManager;
 import mage.server.managers.ManagerFactory;
+import mage.server.managers.UserManager;
 import mage.view.*;
 import org.apache.log4j.Logger;
 
@@ -195,6 +195,18 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     @Override
     public GameView getGameView() {
+        return prepareGameView(game, playerId, userId);
+    }
+
+    /**
+     * Prepare client-server data. Can be used in real games or in unit tests
+     *
+     * @param game
+     * @param playerId
+     * @param userId   can be null for tests
+     * @return
+     */
+    public static GameView prepareGameView(Game game, UUID playerId, UUID userId) {
         Player player = game.getPlayer(playerId);
         GameView gameView = new GameView(game.getState(), game, playerId, null);
         gameView.setHand(new CardsView(game, player.getHand().getCards(game)));
@@ -202,8 +214,8 @@ public class GameSessionPlayer extends GameSessionWatcher {
             gameView.setCanPlayObjects(player.getPlayableObjects(game, Zone.ALL));
         }
 
-        processControlledPlayers(player, gameView);
-        processWatchedHands(userId, gameView);
+        processControlledPlayers(game, player, gameView);
+        processWatchedHands(game, userId, gameView);
         //TODO: should player who controls another player's turn be able to look at all these cards?
 
         List<LookedAtView> list = new ArrayList<>();
@@ -215,7 +227,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
         return gameView;
     }
 
-    private void processControlledPlayers(Player player, GameView gameView) {
+    private static void processControlledPlayers(Game game, Player player, GameView gameView) {
         if (!player.getPlayersUnderYourControl().isEmpty()) {
             Map<String, SimpleCardsView> handCards = new HashMap<>();
             for (UUID controlledPlayerId : player.getPlayersUnderYourControl()) {
@@ -258,7 +270,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
                                     if (ex.getCause() != null) {
                                         logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null" : ex.getCause().getMessage()), ex);
                                     } else {
-                                        logger.debug("- ex: " + ex.toString(), ex);
+                                        logger.debug("- ex: " + ex, ex);
                                     }
                                 } else {
                                     logger.fatal("Game session game quit exception - null  gameId:" + game.getId() + "  playerId: " + playerId);
