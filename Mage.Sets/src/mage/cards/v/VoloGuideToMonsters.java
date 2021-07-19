@@ -15,7 +15,6 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -71,13 +70,13 @@ enum VoloGuideToMonstersPredicate implements Predicate<StackObject> {
                 .getGraveyard()
                 .getCards(StaticFilters.FILTER_CARD_CREATURE, game)
                 .stream()
-                .anyMatch(card -> CardUtil.haveSameNames(card, input))) {
+                .anyMatch(card -> input.shareCreatureTypes(game, card))) {
             return false;
         }
         return game
                 .getBattlefield()
                 .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, input.getControllerId(), game)
                 .stream()
-                .noneMatch(permanent -> CardUtil.haveSameNames(permanent, input));
+                .noneMatch(permanent -> input.shareCreatureTypes(game, permanent));
     }
 }
