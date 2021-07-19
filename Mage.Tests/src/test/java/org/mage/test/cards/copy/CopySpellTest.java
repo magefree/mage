@@ -9,6 +9,7 @@ import mage.cards.SplitCard;
 import mage.cards.repository.CardRepository;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.util.CardUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -523,6 +524,138 @@ public class CopySpellTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_CopiedSpellsAndX_1() {
+        // testing:
+        // 1. x in copied instant spell (copy X)
+        // 2. x in copied creature (X=0)
+
+        // test use case with rules:
+        // https://tappedout.net/mtg-questions/copying-a-creature-with-x-in-its-mana-cost/#c3561513
+        // 107.3f If a card in any zone other than the stack has an {X} in its mana cost, the value of {X} is
+        // treated as 0, even if the value of X is defined somewhere within its text.
+
+        // Whenever you cast an instant or sorcery spell, you may pay {U}{R}. If you do, copy that spell. You may choose new targets for the copy.
+        // Whenever another nontoken creature enters the battlefield under your control, you may pay {G}{U}. If you do, create a token that’s a copy of that creature.
+        addCard(Zone.BATTLEFIELD, playerA, "Riku of Two Reflections", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        // Banefire deals X damage to any target.
+        addCard(Zone.HAND, playerA, "Banefire", 1); // {X}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        //
+        // 0/0
+        // Capricopian enters the battlefield with X +1/+1 counters on it.
+        addCard(Zone.HAND, playerA, "Capricopian", 1); // {X}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        // 1
+        // cast banefire and make copy
+        // announced X=2 must be copied
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 3);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banefire", playerB);
+        setChoice(playerA, "X=2");
+        setChoice(playerA, "Yes"); // make copy
+        setChoice(playerA, "No"); // keep target same
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkLife("after spell copy", 1, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 2 * 2);
+
+        // 2
+        // cast creature and copy it as token
+        // token must have x=0 (dies)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Capricopian");
+        setChoice(playerA, "X=1");
+        setChoice(playerA, "Yes"); // make copy
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after creature copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Capricopian", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_CopiedSpellsHasntETB() {
+        // testing:
+        // - x in copied creature spell (copy x)
+        // - copied spells enters as tokens and it hasn't ETB, see rules below
+
+        // 0/0
+        // Capricopian enters the battlefield with X +1/+1 counters on it.
+        addCard(Zone.HAND, playerA, "Capricopian", 1); // {X}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        //
+        // Grenzo, Dungeon Warden enters the battlefield with X +1/+1 counters on it.
+        addCard(Zone.HAND, playerA, "Grenzo, Dungeon Warden", 1);// {X}{B}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        // Copy target creature spell you control, except it isn't legendary if the spell is legendary.
+        // (A copy of a creature spell becomes a token.)
+        addCard(Zone.HAND, playerA, "Double Major", 2); // {G}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        // 1. Capricopian
+        // cast and put on stack
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 3);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Capricopian");
+        setChoice(playerA, "X=2");
+        // copy of spell
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 1);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Capricopian", "Capricopian");
+
+        // 2. Grenzo, Dungeon Warden
+        // cast and put on stack
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 2);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 1);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grenzo, Dungeon Warden");
+        setChoice(playerA, "X=2");
+        // copy of spell
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 1);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Grenzo, Dungeon Warden", "Grenzo, Dungeon Warden");
+
+        // ETB triggers will not trigger here due not normal cast. From rules:
+        // - The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2021-04-16)
+        // - A nontoken permanent “enters the battlefield” when it’s moved onto the battlefield from another zone.
+        //   A token “enters the battlefield” when it’s created. See rules 403.3, 603.6a, 603.6d, and 614.12.
+        //
+        // So both copies enters without counters:
+        // - Capricopian copy must die
+        // - Grenzo, Dungeon Warden must have default PT
+
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Capricopian", 1); // copy dies
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grenzo, Dungeon Warden", 2);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        // counters checks
+        int originalCounters = currentGame.getBattlefield().getAllActivePermanents().stream()
+                .filter(p -> p.getName().equals("Grenzo, Dungeon Warden"))
+                .filter(p -> !p.isCopy())
+                .mapToInt(p -> p.getCounters(currentGame).getCount(CounterType.P1P1))
+                .sum();
+        int copyCounters = currentGame.getBattlefield().getAllActivePermanents().stream()
+                .filter(p -> p.getName().equals("Grenzo, Dungeon Warden"))
+                .filter(p -> p.isCopy())
+                .mapToInt(p -> p.getCounters(currentGame).getCount(CounterType.P1P1))
+                .sum();
+        Assert.assertEquals("original grenzo must have 2x counters", 2, originalCounters);
+        Assert.assertEquals("copied grenzo must have 0x counters", 0, copyCounters);
+    }
+
+    @Test
     public void test_SimpleCopy_Card() {
         Card sourceCard = CardRepository.instance.findCard("Grizzly Bears").getCard();
         Card originalCard = CardRepository.instance.findCard("Grizzly Bears").getCard();
@@ -628,7 +761,7 @@ public class CopySpellTest extends CardTestPlayerBase {
                     return;
                 }
 
-                Assert.fail(infoPrefix + " - " + "ability source must be same: " + ability.toString());
+                Assert.fail(infoPrefix + " - " + "ability source must be same: " + ability);
             }
         });
     }

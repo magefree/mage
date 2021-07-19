@@ -6,7 +6,7 @@ import mage.abilities.icon.CardIconType;
 /**
  * @author JayDi85
  */
-public enum FaceDownStatusIcon implements CardIcon {
+public enum FaceDownCardIcon implements CardIcon {
     instance;
 
     @Override
