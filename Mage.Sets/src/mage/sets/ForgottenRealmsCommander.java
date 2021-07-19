@@ -191,6 +191,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Savage Ventmaw", 191, Rarity.UNCOMMON, mage.cards.s.SavageVentmaw.class));
         cards.add(new SetCardInfo("Scourge of Valkas", 137, Rarity.RARE, mage.cards.s.ScourgeOfValkas.class));
         cards.add(new SetCardInfo("Seaside Citadel", 258, Rarity.UNCOMMON, mage.cards.s.SeasideCitadel.class));
+        cards.add(new SetCardInfo("Sefris of the Hidden Ways", 3, Rarity.MYTHIC, mage.cards.s.SefrisOfTheHiddenWays.class));
         cards.add(new SetCardInfo("Serum Visions", 94, Rarity.UNCOMMON, mage.cards.s.SerumVisions.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 259, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 171, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
