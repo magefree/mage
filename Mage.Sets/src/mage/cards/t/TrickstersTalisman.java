@@ -31,6 +31,7 @@ public final class TrickstersTalisman extends CardImpl {
         // Equipped creature gets +1/+1 and has "Whenever this creature deals combat damage to a player, you may sacrifice Trickster's Talisman. If you do, create a token that's a copy of this creature."
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 1));
         ability.addEffect(new TrickstersTalismanEffect());
+        this.addAbility(ability);
 
         // Equip {2}
         this.addAbility(new EquipAbility(2));
