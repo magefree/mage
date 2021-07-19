@@ -56,6 +56,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Chittering Witch", 95, Rarity.RARE, mage.cards.c.ChitteringWitch.class));
         cards.add(new SetCardInfo("Choked Estuary", 228, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
         cards.add(new SetCardInfo("Cinder Glade", 229, Rarity.RARE, mage.cards.c.CinderGlade.class));
+        cards.add(new SetCardInfo("Clay Golem", 58, Rarity.UNCOMMON, mage.cards.c.ClayGolem.class));
         cards.add(new SetCardInfo("Cloudblazer", 182, Rarity.UNCOMMON, mage.cards.c.Cloudblazer.class));
         cards.add(new SetCardInfo("Cold-Eyed Selkie", 183, Rarity.RARE, mage.cards.c.ColdEyedSelkie.class));
         cards.add(new SetCardInfo("Colossal Majesty", 154, Rarity.UNCOMMON, mage.cards.c.ColossalMajesty.class));
