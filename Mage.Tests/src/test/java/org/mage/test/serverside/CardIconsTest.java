@@ -152,4 +152,73 @@ public class CardIconsTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
     }
+
+    @Test
+    public void test_CostX_Abilities() {
+        // X icon must be visible only for activated ability, not spell cast
+
+        // {X}{R}, {tap}, Sacrifice Cinder Elemental: Cinder Elemental deals X damage to any target.
+        addCard(Zone.HAND, playerA, "Cinder Elemental", 1); // {3}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+
+        // hand (not visible)
+        runCode("card icons in hand", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            Assert.assertEquals("must have 1 card in hand", 1, gameView.getHand().values().size());
+            CardView cardView = gameView.getHand().values().stream().findFirst().get();
+            Assert.assertEquals("must have non x cost card icons in hand", 0, cardView.getCardIcons().size());
+        });
+
+        // spell cast
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cinder Elemental");
+
+        // stack (spell cast - not visible)
+        runCode("card icons on stack (spell cast - not visible)", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            Assert.assertEquals("must have 1 card in stack", 1, gameView.getStack().values().size());
+            CardView cardView = gameView.getStack().values().stream().findFirst().get();
+            Assert.assertEquals("must have not x cost card icons in stack", 0, cardView.getCardIcons().size());
+        });
+
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cinder Elemental", 1);
+
+        // battlefield (card, not visible)
+        runCode("card icons in battlefield (card)", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            PlayerView playerView = gameView.getPlayers().get(0);
+            Assert.assertEquals("player", player.getName(), playerView.getName());
+            CardView cardView = playerView.getBattlefield().values().stream().filter(p -> p.getName().equals("Cinder Elemental")).findFirst().orElse(null);
+            Assert.assertNotNull("must have Cinder Elemental in battlefield", cardView);
+            Assert.assertEquals("must have not x cost card icons in battlefield (card)", 0, cardView.getCardIcons().size());
+        });
+
+        // ACTIVATE ABILITY (x must be visible in stack, but not visible after resolve)
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}{R}");
+        setChoice(playerA, "X=2");
+        addTarget(playerA, playerB);
+
+        // stack (ability activated - visible)
+        runCode("card icons on stack (ability activated - visible)", 3, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            Assert.assertEquals("ability activated - must have 1 card in stack", 1, gameView.getStack().values().size());
+            CardView cardView = gameView.getStack().values().stream().findFirst().get();
+            Assert.assertEquals("ability activated - must have x cost card icons in stack", 1, cardView.getCardIcons().size());
+        });
+
+        // battlefield (ability activated, not visible)
+        runCode("card icons in battlefield (ability activated)", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            PlayerView playerView = gameView.getPlayers().get(0);
+            Assert.assertEquals("player", player.getName(), playerView.getName());
+            CardView cardView = playerView.getBattlefield().values().stream().filter(p -> p.getName().equals("Cinder Elemental")).findFirst().orElse(null);
+            Assert.assertNotNull("ability activated - must have Cinder Elemental in battlefield", cardView);
+            Assert.assertEquals("ability activated - must have not x cost card icons in battlefield", 0, cardView.getCardIcons().size());
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
 }
