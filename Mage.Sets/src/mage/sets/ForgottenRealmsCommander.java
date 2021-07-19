@@ -88,6 +88,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dragonmaster Outcast", 124, Rarity.MYTHIC, mage.cards.d.DragonmasterOutcast.class));
         cards.add(new SetCardInfo("Dragonspeaker Shaman", 330, Rarity.UNCOMMON, mage.cards.d.DragonspeakerShaman.class));
         cards.add(new SetCardInfo("Dream Pillager", 125, Rarity.RARE, mage.cards.d.DreamPillager.class));
+        cards.add(new SetCardInfo("Ebony Fly", 60, Rarity.UNCOMMON, mage.cards.e.EbonyFly.class));
         cards.add(new SetCardInfo("Eel Umbra", 83, Rarity.COMMON, mage.cards.e.EelUmbra.class));
         cards.add(new SetCardInfo("Esper Panorama", 235, Rarity.COMMON, mage.cards.e.EsperPanorama.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 126, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
