@@ -51,7 +51,7 @@ public final class WildEndeavor extends CardImpl {
 class WildEndeavorEffect extends OneShotEffect {
 
     WildEndeavorEffect() {
-        super(Outcome.DrawCard);
+        super(Outcome.PutCardInPlay);
         this.staticText = "Roll two d4 and choose one result. Create a number of 3/3 green Beast creature tokens equal to that result"
                 + "Then search your library for a number of basic land cards equal to the other result, put them onto the battlefield tapped, then shuffle.";
     }
@@ -97,11 +97,6 @@ class WildEndeavorEffect extends OneShotEffect {
                     if (!target.getTargets().isEmpty()) {
                         controller.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
                         controller.shuffleLibrary(source, game);
-                        // for (UUID cardId : target.getTargets()) {
-                        //     Card card = controller.getLibrary().getCard(cardId, game);
-                        //     if (card != null) {
-                        //     }
-                        // }
                         return true;
                     }
                 }
