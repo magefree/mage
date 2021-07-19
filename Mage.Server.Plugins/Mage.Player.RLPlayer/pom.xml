@@ -14,6 +14,18 @@
     <packaging>jar</packaging>
     <name>Mage Player AI Reinforcement Learning</name>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>ai.djl</groupId>
+                <artifactId>bom</artifactId>
+                <version>0.12.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
     <dependencies>
         <dependency>
             <groupId>log4j</groupId>
@@ -53,13 +65,17 @@
         <dependency>
             <groupId>ai.djl</groupId>
             <artifactId>api</artifactId>
-            <version>0.12.0</version>
-        </dependency>
-        <dependency>
+          </dependency>
+          <dependency>
+              <groupId>ai.djl.mxnet</groupId>
+              <artifactId>mxnet-engine</artifactId>
+          </dependency>   
+          <dependency>
             <groupId>ai.djl.mxnet</groupId>
-            <artifactId>mxnet-engine</artifactId>
-            <version>0.12.0</version>
-        </dependency>    
+            <artifactId>mxnet-native-mkl</artifactId>
+            <classifier>linux-x86_64</classifier>
+            <scope>runtime</scope>
+        </dependency>   
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

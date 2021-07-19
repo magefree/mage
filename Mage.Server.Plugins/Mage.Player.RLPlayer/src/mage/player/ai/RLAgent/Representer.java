@@ -36,6 +36,9 @@ public class Representer implements Serializable{
             nameToEmbedding.put(name, nextVal);
             EmbeddingToName.put(nextVal,name);
             nextVal+=1;
+            if(nextVal==HParams.maxRepresents){
+                throw new IllegalStateException("Ran out of embeddings");
+            }
             return nextVal;
         }
     }

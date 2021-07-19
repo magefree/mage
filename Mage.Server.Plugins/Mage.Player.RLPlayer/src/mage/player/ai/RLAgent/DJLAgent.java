@@ -19,16 +19,20 @@ public class DJLAgent{
     private static final Logger logger = Logger.getLogger(DJLAgent.class);
     List<RepresentedState> experience;
     NDManager nd;
+    Model net;
     public DJLAgent(){
         representer=new Representer();
         experience=new ArrayList<RepresentedState>();
         nd=NDManager.newBaseManager();
+        net=Model.newInstance("Main net");
+
     }
+
     public int choose(Game game, RLPlayer player, List<RLAction> actions){
         RepresentedState state=representer.represent(game, player, actions);
         List<RepresentedState> stateSingle=new ArrayList<RepresentedState>();
         stateSingle.add(state);
-        List<NDArray> netInput=prepare(stateSingle);//Pack into a list
+        NDList netInput=prepare(stateSingle);//Pack into a list
         int choice=run(net,netInput);
         state.chosenAction=choice;
         player.addExperience(state);
@@ -46,20 +50,23 @@ public class DJLAgent{
         }
         return arr;
     }
-    //Requires all input arrays the same shape
+    //Requires all input arrays the same shape in second dimention
+    //Returns the arrays stacked and a mask where the stacked 
+    //values are 
     List<NDArray> paddedStack(List<NDArray> inputs,int nestedSize){
         long maxSize=0;
         for(int i=0;i<inputs.size();i++){
             long arrSize=inputs.get(i).getShape().get(0);
             if(arrSize>maxSize) maxSize=arrSize;
         }
-        Shape arrShape=new Shape(inputs.size(),maxSize,nestedSize);
-        NDArray data=nd.zeros(arrShape,DataType.INT32);
-        NDArray mask=nd.zeros(arrShape);
+        NDArray data=nd.zeros(new Shape(inputs.size(),maxSize,nestedSize),DataType.INT32);
+        NDArray mask=nd.zeros(new Shape(inputs.size(),maxSize));
         for(int i=0;i<inputs.size();i++){
             NDIndex setLoc=new NDIndex(i+",0:"+inputs.get(i).getShape().get(0));
             data.set(setLoc, inputs.get(i));
-            mask.set(setLoc,nd.ones(inputs.get(i).getShape()));
+            for(int j=0;j<inputs.get(i).getShape().get(0);j++){
+                mask.set(new NDIndex(i,j),1);
+            }
         }
         List<NDArray> result=new ArrayList<NDArray>();
         result.add(data);
