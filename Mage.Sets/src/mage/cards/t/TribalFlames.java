@@ -7,6 +7,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.target.common.TargetAnyTarget;
 
@@ -24,6 +25,7 @@ public final class TribalFlames extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(new DomainValue()));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addHint(DomainHint.instance);
+        this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);
     }
 
     private TribalFlames(final TribalFlames card) {

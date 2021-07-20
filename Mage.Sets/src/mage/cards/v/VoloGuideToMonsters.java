@@ -1,7 +1,6 @@
 package mage.cards.v;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.cards.CardImpl;
@@ -12,11 +11,10 @@ import mage.constants.SuperType;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureSpell;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
+import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -29,6 +27,10 @@ public final class VoloGuideToMonsters extends CardImpl {
             "a creature spell that doesn't share a creature type " +
                     "with a creature you control or a creature card in your graveyard"
     );
+
+    static {
+        filter.add(VoloGuideToMonstersPredicate.instance);
+    }
 
     public VoloGuideToMonsters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
@@ -57,24 +59,24 @@ public final class VoloGuideToMonsters extends CardImpl {
     }
 }
 
-enum VoloGuideToMonstersPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum VoloGuideToMonstersPredicate implements Predicate<StackObject> {
     instance;
 
     @Override
-    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        Player player = game.getPlayer(input.getPlayerId());
+    public boolean apply(StackObject input, Game game) {
+        Player player = game.getPlayer(input.getControllerId());
         if (player != null
                 && player
                 .getGraveyard()
                 .getCards(StaticFilters.FILTER_CARD_CREATURE, game)
                 .stream()
-                .anyMatch(card -> CardUtil.haveSameNames(card, input.getObject()))) {
+                .anyMatch(card -> input.shareCreatureTypes(game, card))) {
             return false;
         }
         return game
                 .getBattlefield()
-                .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, input.getPlayerId(), game)
+                .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, input.getControllerId(), game)
                 .stream()
-                .noneMatch(permanent -> CardUtil.haveSameNames(permanent, input.getObject()));
+                .noneMatch(permanent -> input.shareCreatureTypes(game, permanent));
     }
 }

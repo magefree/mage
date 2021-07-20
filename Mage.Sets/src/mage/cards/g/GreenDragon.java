@@ -36,7 +36,7 @@ public final class GreenDragon extends CardImpl {
         // Poison Breath — When Green Dragon enters the battlefield, until end of turn, whenever a creature an opponent controls is dealt damage, destroy it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
                 new GreenDragonDelayedTriggeredAbility(), false
-        )));
+        )).withFlavorWord("Poison Breath"));
     }
 
     private GreenDragon(final GreenDragon card) {

@@ -1,6 +1,7 @@
 package mage.watchers.common;
 
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,8 +52,14 @@ public class ManaSpentToCastWatcher extends Watcher {
         return manaMap.getOrDefault(sourceId, null);
     }
 
-    public int getAndResetLastXValue(UUID sourceId) {
-        return xValueMap.getOrDefault(sourceId, 0);
+    public int getAndResetLastXValue(Ability source) {
+        if (xValueMap.containsKey(source.getSourceId())) {
+            // cast normal way
+            return xValueMap.get(source.getSourceId());
+        } else {
+            // put to battlefield without cast (example: copied spell must keep announced X)
+            return source.getManaCostsToPay().getX();
+        }
     }
 
     @Override

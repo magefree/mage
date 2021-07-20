@@ -23,6 +23,7 @@ import mage.game.GameCommanderImpl;
 import mage.game.command.CommandObject;
 import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
@@ -267,8 +268,8 @@ public final class SystemUtil {
     public static void addCardsForTesting(Game game, String fileSource, Player feedbackPlayer) {
 
         // fake test ability for triggers and events
-        Ability fakeSourceAbility = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
-        fakeSourceAbility.setControllerId(feedbackPlayer.getId());
+        Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
+        fakeSourceAbilityTemplate.setControllerId(feedbackPlayer.getId());
 
         try {
             String fileName = fileSource;
@@ -496,9 +497,12 @@ public final class SystemUtil {
                     // eg: token:Human:HippoToken:1
                     Class<?> c = Class.forName("mage.game.permanent.token." + command.cardName);
                     Constructor<?> cons = c.getConstructor();
-                    Object token = cons.newInstance();
-                    if (token instanceof mage.game.permanent.token.Token) {
-                        ((mage.game.permanent.token.Token) token).putOntoBattlefield(command.Amount, game, fakeSourceAbility, player.getId(), false, false);
+                    Object obj = cons.newInstance();
+                    if (obj instanceof Token) {
+                        Token token = (Token) obj;
+                        Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
+                        fakeSourceAbility.setSourceId(token.getId());
+                        token.putOntoBattlefield(command.Amount, game, fakeSourceAbility, player.getId(), false, false);
                         continue;
                     }
                 } else if ("emblem".equalsIgnoreCase(command.zone)) {
@@ -518,6 +522,8 @@ public final class SystemUtil {
                 } else if ("loyalty".equalsIgnoreCase(command.zone)) {
                     for (Permanent perm : game.getBattlefield().getAllActivePermanents(player.getId())) {
                         if (perm.getName().equals(command.cardName) && perm.getCardType(game).contains(CardType.PLANESWALKER)) {
+                            Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
+                            fakeSourceAbility.setSourceId(perm.getId());
                             perm.addCounters(CounterType.LOYALTY.createInstance(command.Amount), fakeSourceAbility.getControllerId(), fakeSourceAbility, game);
                         }
                     }
@@ -541,6 +547,8 @@ public final class SystemUtil {
 
                     // move card from exile to stack
                     for (Card card : cardsToLoad) {
+                        Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
+                        fakeSourceAbility.setSourceId(card.getId());
                         putCardToZone(fakeSourceAbility, game, player, card, Zone.STACK);
                     }
 
@@ -616,6 +624,8 @@ public final class SystemUtil {
                 } else {
                     // as other card
                     for (Card card : cardsToLoad) {
+                        Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
+                        fakeSourceAbility.setSourceId(card.getId());
                         putCardToZone(fakeSourceAbility, game, player, card, gameZone);
                     }
                 }

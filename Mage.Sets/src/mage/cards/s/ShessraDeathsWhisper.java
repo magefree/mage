@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.MorbidWatcher;
 
 import java.util.UUID;
 
@@ -40,9 +39,9 @@ public final class ShessraDeathsWhisper extends CardImpl {
 
         // Whispers of the Grave — At the beginning of your end step, if a creature died this turn, you may pay 2 life. If you do, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(2),
+                Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1),
                 new PayLifeCost(2)), TargetController.YOU, MorbidCondition.instance, false
-        ).addHint(MorbidHint.instance), new MorbidWatcher());
+        ).addHint(MorbidHint.instance).withFlavorWord("Whispers of the Grave"));
     }
 
     private ShessraDeathsWhisper(final ShessraDeathsWhisper card) {

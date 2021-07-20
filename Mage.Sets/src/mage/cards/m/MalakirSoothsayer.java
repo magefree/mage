@@ -42,7 +42,7 @@ public final class MalakirSoothsayer extends CardImpl {
 
         // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: You draw a card and you lose a life.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new DrawCardSourceControllerEffect(1),
+                new DrawCardSourceControllerEffect(1).setText("you draw a card"),
                 new TapSourceCost());
         ability.setAbilityWord(AbilityWord.COHORT);
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));

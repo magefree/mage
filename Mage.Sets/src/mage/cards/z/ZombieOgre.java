@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.watchers.common.MorbidWatcher;
 
 import java.util.UUID;
 
@@ -32,7 +31,7 @@ public final class ZombieOgre extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new VentureIntoTheDungeonEffect(),
                 TargetController.YOU, MorbidCondition.instance, false
-        ).addHint(MorbidHint.instance), new MorbidWatcher());
+        ).addHint(MorbidHint.instance));
     }
 
     private ZombieOgre(final ZombieOgre card) {

@@ -31,7 +31,7 @@ public class IntimidateAbility extends EvasionAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Intimidate";
+        return "intimidate";
     }
 
     @Override

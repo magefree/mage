@@ -467,7 +467,8 @@ public enum SubType {
     XENAGOS("Xenagos", SubTypeSet.PlaneswalkerType),
     YANGGU("Yanggu", SubTypeSet.PlaneswalkerType),
     YANLING("Yanling", SubTypeSet.PlaneswalkerType),
-    YODA("Yoda", SubTypeSet.PlaneswalkerType, true);  // Star Wars
+    YODA("Yoda", SubTypeSet.PlaneswalkerType, true),  // Star Wars,
+    ZARIEL("Zariel", SubTypeSet.PlaneswalkerType);
 
     public static class SubTypePredicate implements Predicate<MageObject> {
 

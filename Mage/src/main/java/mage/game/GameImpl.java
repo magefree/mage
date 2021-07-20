@@ -3185,8 +3185,8 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command) {
         // fake test ability for triggers and events
-        Ability fakeSourceAbility = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
-        fakeSourceAbility.setControllerId(ownerId);
+        Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
+        fakeSourceAbilityTemplate.setControllerId(ownerId);
 
         Player player = getPlayer(ownerId);
         if (player != null) {
@@ -3221,6 +3221,8 @@ public abstract class GameImpl implements Game, Serializable {
             }
 
             for (PermanentCard permanentCard : battlefield) {
+                Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
+                fakeSourceAbility.setSourceId(permanentCard.getId());
                 CardUtil.putCardOntoBattlefieldWithEffects(fakeSourceAbility, this, permanentCard, player);
             }
 

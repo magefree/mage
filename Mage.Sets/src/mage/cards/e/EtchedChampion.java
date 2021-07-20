@@ -22,7 +22,7 @@ import java.util.UUID;
  * @author North
  */
 public final class EtchedChampion extends CardImpl {
-    private static final String ruleText = "<i>Metalcraft</i> &mdash; Etched Champion has protection from all colors as long as you control three or more artifacts";
+    private static final String ruleText = "{this} has protection from all colors as long as you control three or more artifacts";
 
     private static final FilterCard filter = new FilterCard("all colors");
 

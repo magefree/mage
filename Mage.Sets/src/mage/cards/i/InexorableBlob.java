@@ -29,8 +29,8 @@ public final class InexorableBlob extends CardImpl {
         // in your graveyard, create a 3/3 green Ooze creature token that’s tapped and attacking.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new InexorableBlobOozeToken(), 1, true, true), false),
                 DeliriumCondition.instance,
-                "<i>Delirium</i> &mdash; Whenever {this} attacks and there are at least four card types among cards in your graveyard, "
-                        + "create a 3/3 green Ooze creature token tapped and attacking.")
+                "<i>Delirium</i> &mdash; Whenever {this} attacks, if there are four or more card types among cards in your graveyard, " +
+                        "create a 3/3 green Ooze creature token that's tapped and attacking.")
                 .addHint(CardTypesInGraveyardHint.YOU));
     }
 

@@ -183,6 +183,7 @@
              if (card instanceof StackAbilityView) {
                  // replace ability by original card
                  CardView tmp = ((StackAbilityView) card).getSourceCard();
+                 // sync settings
                  tmp.overrideRules(card.getRules());
                  tmp.setChoosable(card.isChoosable());
                  tmp.setPlayableStats(card.getPlayableStats().copy());
@@ -191,6 +192,9 @@
                  tmp.overrideTargets(card.getTargets());
                  tmp.overrideId(card.getId());
                  tmp.setAbilityType(card.getAbilityType());
+                 // sync card icons
+                 tmp.getCardIcons().clear();
+                 tmp.getCardIcons().addAll(card.getCardIcons());
                  card = tmp;
              } else {
                  card.setAbilityType(null);

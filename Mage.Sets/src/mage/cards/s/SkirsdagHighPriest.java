@@ -9,6 +9,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -45,7 +46,7 @@ public final class SkirsdagHighPriest extends CardImpl {
             new TapSourceCost(), MorbidCondition.instance);
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false)));
         ability.setAbilityWord(AbilityWord.MORBID);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MorbidHint.instance));
     }
 
     private SkirsdagHighPriest(final SkirsdagHighPriest card) {

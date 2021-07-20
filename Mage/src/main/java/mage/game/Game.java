@@ -542,15 +542,71 @@ public interface Game extends MageItem, Serializable {
      * @param commanderCardType commander or signature spell
      * @return
      */
-    default Set<Card> getCommanderCardsFromAnyZones(Player player, CommanderCardType commanderCardType) {
-        // from command zone
-        Set<Card> res = getCommanderCardsFromCommandZone(player, commanderCardType);
-
-        // from battlefield
-        this.getCommandersIds(player, commanderCardType, true).stream()
-                .map(this::getPermanent)
+    default Set<Card> getCommanderCardsFromAnyZones(Player player, CommanderCardType commanderCardType, Zone... searchZones) {
+        Set<Zone> needZones = Arrays.stream(searchZones).collect(Collectors.toSet());
+        if (needZones.isEmpty()) {
+            throw new IllegalArgumentException("Empty zones list in searching commanders");
+        }
+        Set<UUID> needCommandersIds = this.getCommandersIds(player, commanderCardType, true);
+        Set<Card> needCommandersCards = needCommandersIds.stream()
+                .map(this::getCard)
                 .filter(Objects::nonNull)
-                .forEach(res::add);
+                .collect(Collectors.toSet());
+        Set<Card> res = new HashSet<>();
+
+        // hand
+        if (needZones.contains(Zone.ALL) || needZones.contains(Zone.HAND)) {
+            needCommandersCards.stream()
+                    .filter(card -> Zone.HAND.equals(this.getState().getZone(card.getId())))
+                    .forEach(res::add);
+        }
+
+        // graveyard
+        if (needZones.contains(Zone.ALL) || needZones.contains(Zone.GRAVEYARD)) {
+            needCommandersCards.stream()
+                    .filter(card -> Zone.GRAVEYARD.equals(this.getState().getZone(card.getId())))
+                    .forEach(res::add);
+        }
+
+        // library
+        if (needZones.contains(Zone.ALL) || needZones.contains(Zone.LIBRARY)) {
+            needCommandersCards.stream()
+                    .filter(card -> Zone.LIBRARY.equals(this.getState().getZone(card.getId())))
+                    .forEach(res::add);
+        }
+
+        // battlefield (need permanent card)
+        if (needZones.contains(Zone.ALL) || needZones.contains(Zone.BATTLEFIELD)) {
+            needCommandersIds.stream()
+                    .map(this::getPermanent)
+                    .filter(Objects::nonNull)
+                    .forEach(res::add);
+        }
+
+        // stack
+        if (needZones.contains(Zone.ALL) || needZones.contains(Zone.STACK)) {
+            needCommandersCards.stream()
+                    .filter(card -> Zone.STACK.equals(this.getState().getZone(card.getId())))
+                    .forEach(res::add);
+        }
+
+        // exiled
+        if (needZones.contains(Zone.ALL) || needZones.contains(Zone.EXILED)) {
+            needCommandersCards.stream()
+                    .filter(card -> Zone.EXILED.equals(this.getState().getZone(card.getId())))
+                    .forEach(res::add);
+        }
+
+        // command
+        if (needZones.contains(Zone.ALL) || needZones.contains(Zone.COMMAND)) {
+            res.addAll(getCommanderCardsFromCommandZone(player, commanderCardType));
+        }
+
+        // outside must be ignored (example: second side of MDFC commander after cast)
+        if (needZones.contains(Zone.OUTSIDE)) {
+            throw new IllegalArgumentException("Outside zone doesn't supported in searching commanders");
+        }
+
         return res;
     }
 

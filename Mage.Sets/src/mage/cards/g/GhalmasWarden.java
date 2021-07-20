@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class GhalmasWarden extends CardImpl {
 
-    private static final String rule = "<i>Metalcraft</i> &mdash; Ghalma's Warden gets +2/+2 as long as you control three or more artifacts";
+    private static final String rule = "{this} gets +2/+2 as long as you control three or more artifacts";
 
     public GhalmasWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

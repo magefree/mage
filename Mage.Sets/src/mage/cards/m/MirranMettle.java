@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class MirranMettle extends CardImpl {
 
-    private static final String effectText = "<i>Metalcraft</i> &mdash; That creature gets +4/+4 until end of turn instead if you control three or more artifacts.";
+    private static final String effectText = "<br><i>Metalcraft</i> &mdash; That creature gets +4/+4 until end of turn instead if you control three or more artifacts.";
 
     public MirranMettle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
@@ -31,7 +31,6 @@ public final class MirranMettle extends CardImpl {
         // Metalcraft — That creature gets +4/+4 until end of turn instead if you control three or more artifacts.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn),
                 new LockedInCondition(MetalcraftCondition.instance), effectText));
-        this.getSpellAbility().setAbilityWord(AbilityWord.METALCRAFT);
         this.getSpellAbility().addHint(MetalcraftHint.instance);
     }
 

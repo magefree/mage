@@ -3,18 +3,18 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CompletedDungeonCondition;
+import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.SkeletonToken;
-import mage.watchers.common.CompletedDungeonWatcher;
 
 import java.util.UUID;
 
@@ -51,8 +51,8 @@ public final class DeathPriestOfMyrkul extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DoIfCostPaid(new CreateTokenEffect(new SkeletonToken()), new GenericManaCost(1)),
-                TargetController.YOU, CompletedDungeonCondition.instance, false
-        ).addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
+                TargetController.YOU, MorbidCondition.instance, false
+        ).addHint(MorbidHint.instance));
     }
 
     private DeathPriestOfMyrkul(final DeathPriestOfMyrkul card) {

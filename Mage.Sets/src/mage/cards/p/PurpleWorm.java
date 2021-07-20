@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.watchers.common.MorbidWatcher;
 
 import java.util.UUID;
 
@@ -31,10 +30,10 @@ public final class PurpleWorm extends CardImpl {
 
         // This spell costs {2} less to cast if a creature died this turn.
         Ability ability = new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(1, MorbidCondition.instance)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, MorbidCondition.instance)
         );
         ability.setRuleAtTheTop(true);
-        this.addAbility(ability.addHint(MorbidHint.instance), new MorbidWatcher());
+        this.addAbility(ability.addHint(MorbidHint.instance));
 
         // Ward {2}
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));

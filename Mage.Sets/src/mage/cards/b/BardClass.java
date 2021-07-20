@@ -52,7 +52,7 @@ public final class BardClass extends CardImpl {
 
         // Legendary spells you cast cost {R}{G} less to cast. This effect reduces only the amount of colored mana you pay.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
-                new SpellsCostReductionControllerEffect(filter, new ManaCostsImpl<>("{W}{B}")), 2
+                new SpellsCostReductionControllerEffect(filter, new ManaCostsImpl<>("{R}{G}")), 2
         )));
 
         // {3}{R}{G}: Level 3

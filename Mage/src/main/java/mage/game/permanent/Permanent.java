@@ -75,6 +75,12 @@ public interface Permanent extends Card, Controllable {
 
     int getClassLevel();
 
+    /**
+     * Level up to next level.
+     *
+     * @param classLevel
+     * @return false on wrong settings (e.g. level up to multiple levels)
+     */
     boolean setClassLevel(int classLevel);
 
     void setCardNumber(String cid);

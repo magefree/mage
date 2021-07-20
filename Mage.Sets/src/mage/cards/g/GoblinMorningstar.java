@@ -33,7 +33,9 @@ public final class GoblinMorningstar extends CardImpl {
 
         // Equipped creature gets +1/+0 and has trample.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 0));
-        ability.addEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                TrampleAbility.getInstance(), AttachmentType.EQUIPMENT
+        ).setText("and has trample"));
         this.addAbility(ability);
 
         // Equip {1}{R}

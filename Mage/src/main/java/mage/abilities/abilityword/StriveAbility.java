@@ -37,7 +37,8 @@ public class StriveAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return new StringBuilder("this spell costs ").append(striveCost).append(" more to cast for each target beyond the first.").toString();
+        return abilityWord.formatWord() + "This spell costs "
+                + striveCost + " more to cast for each target beyond the first.";
     }
 }
 

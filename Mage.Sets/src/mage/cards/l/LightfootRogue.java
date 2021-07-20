@@ -56,7 +56,7 @@ public final class LightfootRogue extends CardImpl {
                 20, 20,
                 new BoostSourceEffect(
                         3, 0, Duration.EndOfTurn
-                ).setText("it gets +1/+0"),
+                ).setText("it gets +3/+0"),
                 new GainAbilitySourceEffect(
                         FirstStrikeAbility.getInstance(), Duration.EndOfTurn
                 ).setText("and gains first strike"),

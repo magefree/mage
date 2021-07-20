@@ -49,6 +49,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private boolean isntLegendary = false;
     private int startingLoyalty = -1;
     private final List<Ability> additionalAbilities = new ArrayList();
+    private Permanent savedPermanent = null;
 
     public CreateTokenCopyTargetEffect(boolean useLKI) {
         this();
@@ -133,7 +134,9 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             targetId = getTargetPointer().getFirst(game, source);
         }
         Permanent permanent;
-        if (useLKI) {
+        if (savedPermanent != null) {
+            permanent = savedPermanent;
+        } else if (useLKI) {
             permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         } else {
             permanent = game.getPermanentOrLKIBattlefield(targetId);
@@ -318,5 +321,9 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     public void addAdditionalAbilities(Ability... abilities) {
         Arrays.stream(abilities).forEach(this.additionalAbilities::add);
+    }
+
+    public void setSavedPermanent(Permanent savedPermanent) {
+        this.savedPermanent = savedPermanent;
     }
 }

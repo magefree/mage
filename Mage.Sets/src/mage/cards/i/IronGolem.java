@@ -31,7 +31,7 @@ public final class IronGolem extends CardImpl {
 
         // Iron Golem attacks or blocks each combat if able.
         Ability ability = new SimpleStaticAbility(new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield).setText("{this} attacks"));
-        ability.addEffect(new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield).setText("or blocks each combat if able"));
+        ability.addEffect(new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield).setText("blocks each combat if able").concatBy("or"));
         this.addAbility(ability);
     }
 

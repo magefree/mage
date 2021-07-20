@@ -6,10 +6,7 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -33,7 +30,7 @@ public final class CloneShell extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Imprint - When Clone Shell enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CloneShellEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CloneShellEffect(), false).setAbilityWord(AbilityWord.IMPRINT));
 
         // When Clone Shell dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.
         this.addAbility(new DiesSourceTriggeredAbility(new CloneShellDiesEffect()));

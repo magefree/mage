@@ -6,6 +6,7 @@ import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,6 +29,7 @@ public final class PredatorsHowl extends CardImpl {
                 MorbidCondition.instance,
                 "Create a 2/2 green Wolf creature token. <br/><br/><i>Morbid</i> &mdash; Create three 2/2 green Wolf creature tokens instead if a creature died this turn.");
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addHint(MorbidHint.instance);
     }
 
     private PredatorsHowl(final PredatorsHowl card) {

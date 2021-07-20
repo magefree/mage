@@ -39,7 +39,7 @@ public final class LoathsomeTroll extends CardImpl {
         ));
 
         // 10-19 | Return Loathsome Troll to your hand.
-        effect.addTableEntry(10, 19, new ReturnToHandSourceEffect().setText("retun {this} to your hand"));
+        effect.addTableEntry(10, 19, new ReturnToHandSourceEffect().setText("return {this} to your hand"));
 
         // 20 | Return Loathsome Troll to the battlefield tapped.
         effect.addTableEntry(20, 20, new ReturnSourceFromGraveyardToBattlefieldEffect(true)

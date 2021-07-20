@@ -56,6 +56,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Chittering Witch", 95, Rarity.RARE, mage.cards.c.ChitteringWitch.class));
         cards.add(new SetCardInfo("Choked Estuary", 228, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
         cards.add(new SetCardInfo("Cinder Glade", 229, Rarity.RARE, mage.cards.c.CinderGlade.class));
+        cards.add(new SetCardInfo("Clay Golem", 58, Rarity.UNCOMMON, mage.cards.c.ClayGolem.class));
         cards.add(new SetCardInfo("Cloudblazer", 182, Rarity.UNCOMMON, mage.cards.c.Cloudblazer.class));
         cards.add(new SetCardInfo("Cold-Eyed Selkie", 183, Rarity.RARE, mage.cards.c.ColdEyedSelkie.class));
         cards.add(new SetCardInfo("Colossal Majesty", 154, Rarity.UNCOMMON, mage.cards.c.ColossalMajesty.class));
@@ -87,6 +88,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dragonmaster Outcast", 124, Rarity.MYTHIC, mage.cards.d.DragonmasterOutcast.class));
         cards.add(new SetCardInfo("Dragonspeaker Shaman", 330, Rarity.UNCOMMON, mage.cards.d.DragonspeakerShaman.class));
         cards.add(new SetCardInfo("Dream Pillager", 125, Rarity.RARE, mage.cards.d.DreamPillager.class));
+        cards.add(new SetCardInfo("Ebony Fly", 60, Rarity.UNCOMMON, mage.cards.e.EbonyFly.class));
         cards.add(new SetCardInfo("Eel Umbra", 83, Rarity.COMMON, mage.cards.e.EelUmbra.class));
         cards.add(new SetCardInfo("Esper Panorama", 235, Rarity.COMMON, mage.cards.e.EsperPanorama.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 126, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
@@ -96,7 +98,9 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Explorer's Scope", 205, Rarity.COMMON, mage.cards.e.ExplorersScope.class));
         cards.add(new SetCardInfo("Fellwar Stone", 206, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Fertile Ground", 158, Rarity.COMMON, mage.cards.f.FertileGround.class));
+        cards.add(new SetCardInfo("Fey Steed", 5, Rarity.RARE, mage.cards.f.FeySteed.class));
         cards.add(new SetCardInfo("Fiend of the Shadows", 99, Rarity.RARE, mage.cards.f.FiendOfTheShadows.class));
+        cards.add(new SetCardInfo("Fiendlash", 31, Rarity.RARE, mage.cards.f.Fiendlash.class));
         cards.add(new SetCardInfo("Fleecemane Lion", 185, Rarity.RARE, mage.cards.f.FleecemaneLion.class));
         cards.add(new SetCardInfo("Flood Plain", 237, Rarity.UNCOMMON, mage.cards.f.FloodPlain.class));
         cards.add(new SetCardInfo("Forbidden Alchemy", 84, Rarity.UNCOMMON, mage.cards.f.ForbiddenAlchemy.class));
@@ -109,6 +113,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Grasslands", 242, Rarity.UNCOMMON, mage.cards.g.Grasslands.class));
         cards.add(new SetCardInfo("Gratuitous Violence", 127, Rarity.RARE, mage.cards.g.GratuitousViolence.class));
         cards.add(new SetCardInfo("Greater Good", 160, Rarity.RARE, mage.cards.g.GreaterGood.class));
+        cards.add(new SetCardInfo("Grim Hireling", 25, Rarity.RARE, mage.cards.g.GrimHireling.class));
         cards.add(new SetCardInfo("Gruul Signet", 207, Rarity.UNCOMMON, mage.cards.g.GruulSignet.class));
         cards.add(new SetCardInfo("Gruul Turf", 243, Rarity.UNCOMMON, mage.cards.g.GruulTurf.class));
         cards.add(new SetCardInfo("Gryff's Boon", 67, Rarity.UNCOMMON, mage.cards.g.GryffsBoon.class));
@@ -136,6 +141,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Masterwork of Ingenuity", 209, Rarity.RARE, mage.cards.m.MasterworkOfIngenuity.class));
         cards.add(new SetCardInfo("Merfolk Looter", 86, Rarity.UNCOMMON, mage.cards.m.MerfolkLooter.class));
         cards.add(new SetCardInfo("Meteor Golem", 210, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
+        cards.add(new SetCardInfo("Midnight Pathlighter", 52, Rarity.RARE, mage.cards.m.MidnightPathlighter.class));
         cards.add(new SetCardInfo("Mind Stone", 211, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Mishra's Factory", 248, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Moonsilver Spear", 212, Rarity.RARE, mage.cards.m.MoonsilverSpear.class));
@@ -165,6 +171,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Prairie Stream", 256, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Prognostic Sphinx", 90, Rarity.RARE, mage.cards.p.PrognosticSphinx.class));
         cards.add(new SetCardInfo("Propaganda", 91, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
+        cards.add(new SetCardInfo("Prosper, Tome-Bound", 2, Rarity.MYTHIC, mage.cards.p.ProsperTomeBound.class));
         cards.add(new SetCardInfo("Psychic Impetus", 92, Rarity.UNCOMMON, mage.cards.p.PsychicImpetus.class));
         cards.add(new SetCardInfo("Puresteel Paladin", 69, Rarity.RARE, mage.cards.p.PuresteelPaladin.class));
         cards.add(new SetCardInfo("Radiant Solar", 9, Rarity.RARE, mage.cards.r.RadiantSolar.class));
@@ -186,6 +193,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Savage Ventmaw", 191, Rarity.UNCOMMON, mage.cards.s.SavageVentmaw.class));
         cards.add(new SetCardInfo("Scourge of Valkas", 137, Rarity.RARE, mage.cards.s.ScourgeOfValkas.class));
         cards.add(new SetCardInfo("Seaside Citadel", 258, Rarity.UNCOMMON, mage.cards.s.SeasideCitadel.class));
+        cards.add(new SetCardInfo("Sefris of the Hidden Ways", 3, Rarity.MYTHIC, mage.cards.s.SefrisOfTheHiddenWays.class));
         cards.add(new SetCardInfo("Serum Visions", 94, Rarity.UNCOMMON, mage.cards.s.SerumVisions.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 259, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 171, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
@@ -204,6 +212,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Spinerock Knoll", 263, Rarity.RARE, mage.cards.s.SpinerockKnoll.class));
         cards.add(new SetCardInfo("Spit Flame", 142, Rarity.RARE, mage.cards.s.SpitFlame.class));
         cards.add(new SetCardInfo("Sram, Senior Edificer", 72, Rarity.RARE, mage.cards.s.SramSeniorEdificer.class));
+        cards.add(new SetCardInfo("Storvald, Frost Giant Jarl", 55, Rarity.MYTHIC, mage.cards.s.StorvaldFrostGiantJarl.class));
         cards.add(new SetCardInfo("Sun Titan", 73, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
         cards.add(new SetCardInfo("Sunblast Angel", 74, Rarity.RARE, mage.cards.s.SunblastAngel.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 264, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
@@ -227,6 +236,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Throes of Chaos", 146, Rarity.UNCOMMON, mage.cards.t.ThroesOfChaos.class));
         cards.add(new SetCardInfo("Thunderbreak Regent", 147, Rarity.RARE, mage.cards.t.ThunderbreakRegent.class));
         cards.add(new SetCardInfo("Unburial Rites", 111, Rarity.UNCOMMON, mage.cards.u.UnburialRites.class));
+        cards.add(new SetCardInfo("Underdark Rift", 62, Rarity.UNCOMMON, mage.cards.u.UnderdarkRift.class));
         cards.add(new SetCardInfo("Unstable Obelisk", 220, Rarity.UNCOMMON, mage.cards.u.UnstableObelisk.class));
         cards.add(new SetCardInfo("Utopia Sprawl", 172, Rarity.UNCOMMON, mage.cards.u.UtopiaSprawl.class));
         cards.add(new SetCardInfo("Utter End", 195, Rarity.RARE, mage.cards.u.UtterEnd.class));

@@ -8,6 +8,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,7 +34,7 @@ public final class Wakedancer extends CardImpl {
 
         // <i>Morbid</i> &mdash; When Wakedancer enters the battlefield, if a creature died this turn, create a 2/2 black Zombie creature token.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken()));
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MorbidCondition.instance, staticText));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MorbidCondition.instance, staticText).addHint(MorbidHint.instance));
     }
 
     private Wakedancer(final Wakedancer card) {

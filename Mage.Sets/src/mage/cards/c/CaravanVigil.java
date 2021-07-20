@@ -6,6 +6,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -27,6 +28,7 @@ public final class CaravanVigil extends CardImpl {
         // Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
         // <i>Morbid</i> &mdash; You may put that card onto the battlefield instead of putting it into your hand if a creature died this turn.
         this.getSpellAbility().addEffect(new CaravanVigilEffect());
+        this.getSpellAbility().addHint(MorbidHint.instance);
     }
 
     private CaravanVigil(final CaravanVigil card) {

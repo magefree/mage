@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class SpireSerpent extends CardImpl {
 
-    private static final String abilityText1 = "<i>Metalcraft</i> &mdash; As long as you control three or more artifacts, {this} gets +2/+2";
+    private static final String abilityText1 = "As long as you control three or more artifacts, {this} gets +2/+2";
 
     public SpireSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

@@ -43,7 +43,7 @@ public final class FindThePath extends CardImpl {
                 new SimpleManaAbility(
                         Zone.BATTLEFIELD, new Mana(ManaType.GREEN, 2), new TapSourceCost()
                 ), AttachmentType.AURA
-        )));
+        ).setText("enchanted land has \"{T}: Add {G}{G}.\"")));
     }
 
     private FindThePath(final FindThePath card) {

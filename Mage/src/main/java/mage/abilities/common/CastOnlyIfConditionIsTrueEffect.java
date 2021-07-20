@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class CastOnlyIfConditionIsTrueEffect extends ContinuousRuleModifyingEffectImpl {
@@ -52,7 +51,7 @@ public class CastOnlyIfConditionIsTrueEffect extends ContinuousRuleModifyingEffe
     private String setText() {
         StringBuilder sb = new StringBuilder("cast this spell only ");
         if (condition != null) {
-            sb.append(' ').append(condition.toString());
+            sb.append(condition);
         }
         return sb.toString();
     }

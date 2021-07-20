@@ -7,6 +7,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.hint.common.MorbidHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -19,7 +20,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.CardUtil;
-import mage.watchers.common.MorbidWatcher;
 
 /**
  *
@@ -35,7 +35,7 @@ public final class BonePicker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Bone Picker costs {3} less to cast if a creature died this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BonePickerAdjustingCostsEffect()), new MorbidWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BonePickerAdjustingCostsEffect()).addHint(MorbidHint.instance));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

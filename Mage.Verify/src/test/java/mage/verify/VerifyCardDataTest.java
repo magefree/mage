@@ -56,7 +56,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "MH2"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "AFR"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -102,14 +102,12 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-        skipListAddName(SKIP_LIST_TYPE, "AFR", "Iron Golem"); // temporary
-        skipListAddName(SKIP_LIST_TYPE, "AFR", "Silver Raven"); // temporary
 
         // subtype
+        subtypesToIgnore.add("Bard"); // until errata is implemented and on mtgjson
+        subtypesToIgnore.add("Ranger"); // until errata is implemented and on mtgjson
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
-        skipListAddName(SKIP_LIST_SUBTYPE, "AFR", "Iron Golem"); // temporary
-        skipListAddName(SKIP_LIST_SUBTYPE, "AFR", "Silver Raven"); // temporary
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);

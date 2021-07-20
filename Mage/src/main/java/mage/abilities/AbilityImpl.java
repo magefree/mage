@@ -1342,7 +1342,12 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public List<CardIcon> getIcons() {
+    final public List<CardIcon> getIcons() {
+        return getIcons(null);
+    }
+
+    @Override
+    public List<CardIcon> getIcons(Game game) {
         return this.icons;
     }
 
