@@ -23,7 +23,7 @@ import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author anonymous
+ * @author zeffirojoe
  */
 public final class WildEndeavor extends CardImpl {
 

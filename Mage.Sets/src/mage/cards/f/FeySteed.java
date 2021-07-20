@@ -26,7 +26,7 @@ import mage.constants.Duration;
 
 /**
  *
- * @author anonymous
+ * @author zeffirojoe
  */
 public final class FeySteed extends CardImpl {
 
