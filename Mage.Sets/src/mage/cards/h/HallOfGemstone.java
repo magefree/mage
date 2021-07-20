@@ -1,11 +1,9 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUntapTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,8 +16,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HallOfGemstone extends CardImpl {
@@ -30,7 +29,7 @@ public final class HallOfGemstone extends CardImpl {
         addSuperType(SuperType.WORLD);
 
         // At the beginning of each player's upkeep, that player chooses a color. Until end of turn, lands tapped for mana produce mana of the chosen color instead of any other color.
-        this.addAbility(new BeginningOfUntapTriggeredAbility(new HallOfGemstoneEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HallOfGemstoneEffect(), TargetController.ACTIVE, false));
 
     }
 

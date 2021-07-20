@@ -48,11 +48,6 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return super.getRule();
-    }
-
-    @Override
     public String getTriggerPhrase() {
         return "When {this} enters the battlefield, ";
     }
