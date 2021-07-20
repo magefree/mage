@@ -88,7 +88,7 @@ class KiraGreatGlassSpinnerAbility extends TriggeredAbilityImpl {
                 if (watcher != null && watcher.notMoreThanOnceTargetedThisTurn(permanent, game)) {
                     for (StackObject stackObject : game.getStack()) {
                         Ability stackAbility = stackObject.getStackAbility();
-                        if (stackAbility != null) {
+                        if (stackAbility != null && stackAbility.getSourceId().equals(event.getSourceId())) {
                             for (Target target : stackAbility.getTargets()) {
                                 for (UUID targetId : target.getTargets()) {
                                     if (this.getSourceId().equals(targetId)) {
