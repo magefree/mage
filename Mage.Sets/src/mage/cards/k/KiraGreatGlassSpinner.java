@@ -3,6 +3,7 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -16,6 +17,8 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
+import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.NumberOfTimesPermanentTargetedATurnWatcher;
 
@@ -83,10 +86,21 @@ class KiraGreatGlassSpinnerAbility extends TriggeredAbilityImpl {
             if (permanent != null && permanent.isCreature(game)) {
                 NumberOfTimesPermanentTargetedATurnWatcher watcher = game.getState().getWatcher(NumberOfTimesPermanentTargetedATurnWatcher.class);
                 if (watcher != null && watcher.notMoreThanOnceTargetedThisTurn(permanent, game)) {
-                    for (Effect effect : getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                    for (StackObject stackObject : game.getStack()) {
+                        Ability stackAbility = stackObject.getStackAbility();
+                        if (stackAbility != null) {
+                            for (Target target : stackAbility.getTargets()) {
+                                for (UUID targetId : target.getTargets()) {
+                                    if (this.getSourceId().equals(targetId)) {
+                                        for (Effect effect : getEffects()) {
+                                            effect.setTargetPointer(new FixedTarget(stackObject.getId()));
+                                        }
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
                     }
-                    return true;
                 }
             }
         }
