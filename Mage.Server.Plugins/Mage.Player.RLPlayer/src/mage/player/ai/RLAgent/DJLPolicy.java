@@ -28,7 +28,9 @@ import ai.djl.training.listener.TrainingListener;
 import ai.djl.training.loss.Loss;
 import ai.djl.training.optimizer.Optimizer;
 import ai.djl.training.tracker.Tracker;
+import ai.djl.translate.Batchifier;
 import ai.djl.translate.NoopTranslator;
+import ai.djl.translate.StackBatchifier;
 import ai.djl.translate.TranslateException;
 import ai.djl.translate.Translator;
 
@@ -39,13 +41,49 @@ public class DJLPolicy {
     Model net;
     Trainer train;
     Predictor<NDList,NDList> pred;
+    boolean synced=false;
     DJLPolicy(){
         net=makeModel();
+        train=makeTrainer(net);
+        syncPredictor();
     }
+    void train(NDManager nd,NDList inputs,NDList labels){
+        synced=false;
+        Batchifier batchmaker=new StackBatchifier();
+        Batch batch=new Batch(nd, inputs, labels, 1, batchmaker, batchmaker, 0, 0);
+        EasyTrain.trainBatch(train, batch);
+        train.step();
+        batch.close();
+    }
+    void syncPredictor(){
+        pred=net.newPredictor(new NoopTranslator());
+        synced=true;
+    }
+    NDArray logProbs(NDList input){
+        if(!synced){
+            syncPredictor();
+        }
+        NDArray res=null;
+        try{
+            res=pred.predict(input).singletonOrThrow();
+        }
+        catch(TranslateException e){
+            System.out.println("Translate exception");
+        }
+        return res; 
+    } 
     Trainer makeTrainer(Model model){
         Tracker lrt = Tracker.fixed(0.003f);
         Optimizer adam=Optimizer.adam().optLearningRateTracker(lrt).setRescaleGrad(1).build();
-        Loss loss=new 
+        Loss loss=new PPOLoss();
+        DefaultTrainingConfig config = new DefaultTrainingConfig(loss)
+        .optOptimizer(adam)
+        .addTrainingListeners(TrainingListener.Defaults.logging());
+        Trainer trainer = model.newTrainer(config);
+        trainer.initialize(new Shape(HParams.batchSize, 0));
+        Metrics metrics = new Metrics();
+        trainer.setMetrics(metrics);
+        return trainer;
     }
     Model makeModel(){
         Model model = Model.newInstance("policy-net");

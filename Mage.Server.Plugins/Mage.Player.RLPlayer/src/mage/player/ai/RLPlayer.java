@@ -42,21 +42,21 @@ import mage.player.ai.RLAction;
 public class RLPlayer extends RandomNonTappingPlayer{
     public DJLAgent learner;
     private static final Logger logger = Logger.getLogger(RLPlayer.class);
-    List<RepresentedState> experience;
+    List<RepresentedState> experiences;
     public RLPlayer(String name , RangeOfInfluence range, int skill){
         super(name);
         learner=new DJLAgent();
-        experience=new ArrayList<RepresentedState>();
+        experiences=new ArrayList<RepresentedState>();
     }
     public RLPlayer(String name,DJLAgent inLearner) {  
         super(name);
         learner=inLearner;
     }
     public void addExperience(RepresentedState state){
-        experience.add(state);
+        experiences.add(state);
     }
-    public List<RepresentedState> getExperience(){
-        return experience;
+    public void sendExperiences(){
+        learner.addExperiences(experiences);
     }
     public RLPlayer(final RLPlayer player) {
         super(player);   

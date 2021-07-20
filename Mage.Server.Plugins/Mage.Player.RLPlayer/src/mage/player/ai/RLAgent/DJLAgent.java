@@ -19,23 +19,55 @@ public class DJLAgent{
     private static final Logger logger = Logger.getLogger(DJLAgent.class);
     List<RepresentedState> experience;
     NDManager nd;
-    Model net;
+    DJLPolicy policy;
     public DJLAgent(){
         representer=new Representer();
         experience=new ArrayList<RepresentedState>();
         nd=NDManager.newBaseManager();
-        net=Model.newInstance("Main net");
-
+        policy=new DJLPolicy();
     }
-
+    public void trainIfReady(){
+        if(experience.size()>HParams.expForTrain){
+            train();
+        }
+    } 
+    void train(){
+        NDList netInput=prepare(experience);
+        NDArray baseLogProbs=policy.logProbs(netInput);
+        int numExp=experience.size();
+        float[] arrRewards=new float[numExp];
+        int[] arrChosenActs=new int[numExp];
+        for(int i=0;i<experience.size();i++){
+            arrRewards[i]=experience.get(i).reward;
+            arrChosenActs[i]=experience.get(i).chosenAction;
+        }
+        NDArray rewards=nd.create(arrRewards, new Shape(numExp,1));
+        int actionSize=(int) netInput.get(0).getShape().get(1);
+        NDArray actsTaken=nd.create(arrChosenActs, new Shape(numExp)).oneHot(actionSize);
+        NDArray predReward=nd.zeros(rewards.getShape());
+        NDList label=new NDList(actsTaken,predReward,rewards,baseLogProbs);
+        policy.train(nd.newSubManager(),netInput,label);
+    }
     public int choose(Game game, RLPlayer player, List<RLAction> actions){
         RepresentedState state=representer.represent(game, player, actions);
         List<RepresentedState> stateSingle=new ArrayList<RepresentedState>();
         stateSingle.add(state);
-        NDList netInput=prepare(stateSingle);//Pack into a list
-        int choice=run(net,netInput);
+        NDList netInput=prepare(stateSingle);
+        NDArray logProbs=policy.logProbs(netInput);
+        int choice=sample(logProbs);
         state.chosenAction=choice;
         player.addExperience(state);
+        return choice;
+    }
+    public void addExperiences(List<RepresentedState> exp){
+        //TODO add rewards
+        experience.addAll(exp);
+    }
+    int sample(NDArray logProbs){
+        NDArray probs=logProbs.exp();
+        probs=probs.reshape(-1);
+        NDArray chosen=nd.randomMultinomial(1, probs);
+        int choice=chosen.getInt(0);
         return choice;
     }
     NDArray listToNDArray2D(List<List<Integer>> data,int nestedSize){

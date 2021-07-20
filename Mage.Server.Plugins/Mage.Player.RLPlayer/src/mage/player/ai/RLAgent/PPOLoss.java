@@ -48,8 +48,9 @@ public class PPOLoss extends Loss{
         NDArray baseLogProb=labels.get(3);
         NDArray logProbs=predictions.singletonOrThrow();
         NDArray advantage1D=reward.sub(predReward);
-        advantage1D=advantage1D.sub(advantage1D.mean()); //Normalize advantage1D to 0
+        advantage1D=advantage1D.sub(advantage1D.mean()); //Normalize mean of advantage1D to 0
         advantage1D=advantage1D.div(std(advantage1D).add(1e-5)); //and standard deviation 1
+        //1e-5 is added to prevent division by 0
         NDArray advantage=actTaken.mul(advantage1D);
         NDArray action_ratio=logProbs.sub(baseLogProb).exp();
         NDArray unclipped=advantage.mul(action_ratio);

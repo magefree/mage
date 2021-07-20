@@ -14,5 +14,7 @@ public class HParams implements Serializable {
     public static final int numGameInts=6;
     public static final int numPermParts=4;
     public static final int embedDim=32;
+    public static final int batchSize=32;
+    public static final int expForTrain=1;
 
 }

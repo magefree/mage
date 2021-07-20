@@ -9,6 +9,9 @@ import ai.djl.ndarray.index.*;
 import ai.djl.training.ParameterStore;
 import ai.djl.util.PairList;
 
+
+//TODO turn this into a proper network, and take in all available inputs
+//For now, this is just a linear layer on top of actions
 public class DJLBlock extends AbstractBlock{
     IdEmbedding actionEmbed;
     Linear lin1;
@@ -30,7 +33,8 @@ public class DJLBlock extends AbstractBlock{
         pastLin=pastLin.reshape(resultShape);
         long sub_mult=1000000;
         pastLin=pastLin.sub(actionMask.mul(-1).add(1).mul(sub_mult));
-        return new NDList(pastLin);
+        NDArray probs=pastLin.logSoftmax(1);
+        return new NDList(probs);
     }
     public Shape[] getOutputShapes(Shape[] inputs) {
         Shape[] res=new Shape[1];

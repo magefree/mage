@@ -60,7 +60,7 @@ public class  GameRunner{
         Deck deck1=loadDeck(deck1loc);
         Deck deck2=loadDeck(deck2loc);
         
-        Player player1 = createAgentPlayer("Player1",agent);
+        RLPlayer player1 = createAgentPlayer("Player1",agent);
         if (deck1.getCards().size() < DECK_SIZE) {
             throw new IllegalArgumentException("Couldn't load deck, deck size = " + deck1.getCards().size() + ", but must be " + DECK_SIZE);
         }
@@ -92,10 +92,11 @@ public class  GameRunner{
         logger.info("Winner: " + game.getWinner());
         logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
         int reward=getReward(player1, game.getWinner());
+        player1.sendExperiences();
         //return learner.getCurrentGame().getValue();
         return reward;
     }
-    private Player createAgentPlayer(String name, DJLAgent agent){
+    private RLPlayer createAgentPlayer(String name, DJLAgent agent){
         return new RLPlayer(name,agent);
     }
     private Deck generateRandomDeck() {
