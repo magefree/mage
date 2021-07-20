@@ -4,15 +4,13 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
-import java.util.EnumSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
+import mage.cards.MageCard;
 import mage.client.cards.BigCard;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
@@ -158,6 +156,16 @@ public class CardInfoWindowDialog extends MageDialog {
             this.setTitelBarToolTip(titel);
         }
         showAndPositionWindow();
+    }
+
+    /**
+     * For GUI: get mage card components for update (example: change playable status)
+     * Warning, do not change the list
+     *
+     * @return
+     */
+    public Map<UUID, MageCard> getMageCardsForUpdate() {
+        return this.cards.getMageCardsForUpdate();
     }
 
     @Override

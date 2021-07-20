@@ -26,6 +26,7 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.MageDialogState;
 import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
+import mage.players.PlayableObjectStats;
 import mage.players.PlayableObjectsList;
 import mage.view.*;
 import org.apache.log4j.Logger;
@@ -1435,21 +1436,6 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
 
-        // revealed
-        for (RevealedView rev : lastGameData.game.getRevealed()) {
-            for (Map.Entry<UUID, CardView> card : rev.getCards().entrySet()) {
-                if (needSelectable.contains(card.getKey())) {
-                    card.getValue().setChoosable(true);
-                }
-                if (needChoosen.contains(card.getKey())) {
-                    card.getValue().setSelected(true);
-                }
-                if (needPlayable.containsObject(card.getKey())) {
-                    card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
-                }
-            }
-        }
-
         // companion
         for (RevealedView rev : lastGameData.game.getCompanion()) {
             for (Map.Entry<UUID, CardView> card : rev.getCards().entrySet()) {
@@ -1465,12 +1451,55 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
 
-        // looked at
+        // revealed (current cards)
+        for (RevealedView rev : lastGameData.game.getRevealed()) {
+            for (Map.Entry<UUID, CardView> card : rev.getCards().entrySet()) {
+                if (needSelectable.contains(card.getKey())) {
+                    card.getValue().setChoosable(true);
+                }
+                if (needChoosen.contains(card.getKey())) {
+                    card.getValue().setSelected(true);
+                }
+                if (needPlayable.containsObject(card.getKey())) {
+                    card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
+                }
+            }
+        }
+        // revealed (old windows)
+        prepareSelectableWindows(revealed.values(), needSelectable, needChoosen, needPlayable);
+
+        // looked at (current cards)
         for (LookedAtView look : lastGameData.game.getLookedAt()) {
             for (Map.Entry<UUID, SimpleCardView> card : look.getCards().entrySet()) {
                 if (needPlayable.containsObject(card.getKey())) {
                     card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                 }
+            }
+        }
+        // looked at (old windows)
+        prepareSelectableWindows(lookedAt.values(), needSelectable, needChoosen, needPlayable);
+    }
+
+    private void prepareSelectableWindows(
+            Collection<CardInfoWindowDialog> windows,
+            Set<UUID> needSelectable,
+            List<UUID> needChoosen,
+            PlayableObjectsList needPlayable
+    ) {
+        // lookAt or reveals windows clean up on next priority, so users can see dialogs, but xmage can't restore it
+        // so it must be updated manually (it's ok to keep outdated cards in dialog, but not ok to show wrong selections)
+        for (CardInfoWindowDialog window : windows) {
+            for (MageCard mageCard : window.getMageCardsForUpdate().values()) {
+                CardView cardView = mageCard.getOriginal();
+                cardView.setChoosable(needSelectable.contains(cardView.getId()));
+                cardView.setSelected(needChoosen.contains(cardView.getId()));
+                if (needPlayable.containsObject(cardView.getId())) {
+                    cardView.setPlayableStats(needPlayable.getStats(cardView.getId()));
+                } else {
+                    cardView.setPlayableStats(new PlayableObjectStats());
+                }
+                // TODO: little bug with toggled night card after update/clicks, but that's ok (can't click on second side)
+                mageCard.update(cardView);
             }
         }
     }
