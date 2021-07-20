@@ -8,8 +8,9 @@ package mage;
  */
 public enum MageIdentifier {
     GisaAndGeralfWatcher,
-    KaradorGhostChieftainWatcher,    
+    KaradorGhostChieftainWatcher,
     KessDissidentMageWatcher,
     LurrusOfTheDreamDenWatcher,
-    MuldrothaTheGravetideWatcher    
+    MuldrothaTheGravetideWatcher,
+    WishWatcher
 }

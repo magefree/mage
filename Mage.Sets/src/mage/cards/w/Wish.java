@@ -1,19 +1,23 @@
 package mage.cards.w;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
+import mage.MageIdentifier;
+import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.util.CardUtil;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -26,6 +30,8 @@ public final class Wish extends CardImpl {
 
         // You may play a card you own from outside the game this turn.
         this.getSpellAbility().addEffect(new WishEffect());
+        this.getSpellAbility().setIdentifier(MageIdentifier.WishWatcher);
+        this.getSpellAbility().addWatcher(new WishWatcher());
     }
 
     private Wish(final Wish card) {
@@ -69,7 +75,7 @@ class WishEffect extends OneShotEffect {
 class WishPlayFromSideboardEffect extends AsThoughEffectImpl {
 
     public WishPlayFromSideboardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit, true);
     }
 
     private WishPlayFromSideboardEffect(final WishPlayFromSideboardEffect effect) {
@@ -90,15 +96,40 @@ class WishPlayFromSideboardEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (source.getControllerId().equals(affectedControllerId)) {
             Player controller = game.getPlayer(source.getControllerId());
+            MageObject sourceObject = source.getSourceObject(game);
             UUID mainCardId = CardUtil.getMainCardId(game, objectId);
-            if (controller != null && controller.getSideboard().contains(mainCardId)) {
-                // Only allow one card to be played
-                if (!game.inCheckPlayableState()) {
-                    discard();
-                }
-                return true;
+            if (controller != null && sourceObject != null && controller.getSideboard().contains(mainCardId)) {
+                WishWatcher watcher = game.getState().getWatcher(WishWatcher.class);
+                return watcher != null && !watcher.isAbilityUsed(new MageObjectReference(sourceObject, game));
             }
         }
         return false;
+    }
+}
+
+class WishWatcher extends Watcher {
+
+    private final Set<MageObjectReference> usedFrom = new HashSet<>();
+
+    WishWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if ((GameEvent.EventType.SPELL_CAST.equals(event.getType()) || GameEvent.EventType.LAND_PLAYED.equals(event.getType()))
+                && event.hasApprovingIdentifier(MageIdentifier.WishWatcher)) {
+            usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        usedFrom.clear();
+    }
+
+    boolean isAbilityUsed(MageObjectReference mor) {
+        return usedFrom.contains(mor);
     }
 }
