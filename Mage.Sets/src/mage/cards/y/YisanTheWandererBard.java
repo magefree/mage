@@ -37,6 +37,7 @@ public final class YisanTheWandererBard extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
+        this.subtype.add(SubType.BARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

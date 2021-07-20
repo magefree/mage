@@ -34,6 +34,7 @@ public final class DaybreakRanger extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARCHER);
+        this.subtype.add(SubType.RANGER);
         this.subtype.add(SubType.WEREWOLF);
 
         this.transformable = true;
