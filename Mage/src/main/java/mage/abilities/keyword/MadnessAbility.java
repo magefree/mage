@@ -181,7 +181,7 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         return "When this card is exiled this way, " ;
     }
 }
