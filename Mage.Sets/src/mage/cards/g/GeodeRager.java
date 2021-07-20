@@ -74,7 +74,7 @@ class GeodeRagerEffect extends OneShotEffect {
             if (permanent == null) {
                 continue;
             }
-            new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)).apply(game, source);
+            game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)), source);
         }
         return true;
     }

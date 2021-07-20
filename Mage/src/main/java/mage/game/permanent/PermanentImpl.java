@@ -73,6 +73,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean manifested = false;
     protected boolean morphed = false;
     protected int classLevel = 1;
+    protected boolean goaded = false;
     protected UUID originalControllerId;
     protected UUID controllerId;
     protected UUID beforeResetControllerId;
@@ -165,6 +166,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
         this.classLevel = permanent.classLevel;
+        this.goaded = permanent.goaded;
         this.pairedPermanent = permanent.pairedPermanent;
         this.bandedCards.addAll(permanent.bandedCards);
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
@@ -208,6 +210,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.minBlockedBy = 1;
         this.maxBlockedBy = 0;
         this.copy = false;
+        this.goaded = false;
         for (TextPart textPart : textParts) {
             textPart.reset();
         }
@@ -1534,6 +1537,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean isGoaded() {
+        return goaded;
+    }
+
+    @Override
+    public void setGoaded(boolean value) {
+        this.goaded = value;
     }
 
     @Override
