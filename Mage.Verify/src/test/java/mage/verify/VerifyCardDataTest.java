@@ -104,8 +104,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
 
         // subtype
-        subtypesToIgnore.add("Bard"); // until errata is implemented and on mtgjson
-        subtypesToIgnore.add("Ranger"); // until errata is implemented and on mtgjson
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
 
