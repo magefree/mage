@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import java.util.Set;

@@ -3646,11 +3646,20 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
 
-            // check to play companion cards
+            // outside cards
             if (fromAll || fromZone == Zone.OUTSIDE) {
+                // companion cards
                 for (Cards companionCards : game.getState().getCompanion().values()) {
                     for (Card card : companionCards.getCards(game)) {
                         getPlayableFromObjectAll(game, Zone.OUTSIDE, card, availableMana, playable);
+                    }
+                }
+
+                // sideboard cards (example: Wish)
+                for (UUID sideboardCardId : this.getSideboard()) {
+                    Card sideboardCard = game.getCard(sideboardCardId);
+                    if (sideboardCard != null) {
+                        getPlayableFromObjectAll(game, Zone.OUTSIDE, sideboardCard, availableMana, playable);
                     }
                 }
             }

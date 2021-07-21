@@ -2,6 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.effects.common.LearnEffect;
 import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,6 +24,7 @@ public final class StudyBreak extends CardImpl {
 
         // Learn.
         this.getSpellAbility().addEffect(new LearnEffect().concatBy("<br>"));
+        this.getSpellAbility().addHint(OpenSideboardHint.instance);
     }
 
     private StudyBreak(final StudyBreak card) {

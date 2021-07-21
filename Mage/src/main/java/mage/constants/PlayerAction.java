@@ -59,5 +59,6 @@ public enum PlayerAction {
     HOLD_PRIORITY,
     UNHOLD_PRIORITY,
     VIEW_LIMITED_DECK,
+    VIEW_SIDEBOARD,
     TOGGLE_RECORD_MACRO
 }

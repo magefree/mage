@@ -1977,7 +1977,14 @@ public class TestPlayer implements Player {
             //Assert.fail("Wrong choice");
         }
 
-        this.chooseStrictModeFailed("choice", game, choice.getMessage());
+        String choicesInfo;
+        if (choice.isKeyChoice()) {
+            choicesInfo = String.join("\n", choice.getKeyChoices().values());
+        } else {
+            choicesInfo = String.join("\n", choice.getChoices());
+        }
+        this.chooseStrictModeFailed("choice", game,
+                "Message: " + choice.getMessage() + "\nPossible choices:\n" + choicesInfo);
         return computerPlayer.choose(outcome, choice, game);
     }
 

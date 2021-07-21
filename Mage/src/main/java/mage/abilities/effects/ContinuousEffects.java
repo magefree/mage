@@ -592,9 +592,14 @@ public class ContinuousEffects implements Serializable {
                 Map<String, String> keyChoices = new HashMap<>();
                 for (ApprovingObject approvingObject : possibleApprovingObjects) {
                     MageObject mageObject = game.getObject(approvingObject.getApprovingAbility().getSourceId());
-                    keyChoices.put(approvingObject.getApprovingAbility().getId().toString(),
-                            (approvingObject.getApprovingAbility().getRule(mageObject == null ? "" : mageObject.getName()))
-                                    + (mageObject == null ? "" : " (" + mageObject.getIdName() + ")"));
+                    String choiceKey = approvingObject.getApprovingAbility().getId().toString();
+                    String choiceValue;
+                    if (mageObject == null) {
+                        choiceValue = approvingObject.getApprovingAbility().getRule();
+                    } else {
+                        choiceValue = mageObject.getIdName() + ": " + approvingObject.getApprovingAbility().getRule(mageObject.getName());
+                    }
+                    keyChoices.put(choiceKey, choiceValue);
                 }
                 Choice choicePermitting = new ChoiceImpl(true);
                 choicePermitting.setMessage("Choose the permitting object");

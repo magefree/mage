@@ -7,6 +7,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LearnEffect;
 import mage.abilities.effects.common.combat.BlocksIfAbleTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,6 +35,7 @@ public final class AcademicDispute extends CardImpl {
 
         // Learn.
         this.getSpellAbility().addEffect(new LearnEffect().concatBy("<br>"));
+        this.getSpellAbility().addHint(OpenSideboardHint.instance);
     }
 
     private AcademicDispute(final AcademicDispute card) {
