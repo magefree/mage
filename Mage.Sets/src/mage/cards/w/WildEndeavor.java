@@ -1,5 +1,6 @@
 package mage.cards.w;
 
+import java.util.List;
 import java.util.UUID;
 
 import mage.abilities.Ability;
@@ -69,39 +70,36 @@ class WildEndeavorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            // Roll two four-sided dice
-            int dice1 = controller.rollDice(source, game, 4);
-            int dice2 = controller.rollDice(source, game, 4);
+            List<Integer> results = controller.rollDice(source, game, 4, 2);
+            int firstResult = results.get(0);
+            int secondResult = results.get(1);
+            int first, second;
+            if (firstResult != secondResult && controller.chooseUse(outcome,
+                    "Choose the amount of 3/3 green Beast creature tokens.",
+                    "The other number is the amount of basic lands you search from your library and put on the battlefield tapped.",
+                    "" + firstResult, "" + secondResult, source, game)) {
+                first = firstResult;
+                second = secondResult;
+            } else {
+                first = secondResult;
+                second = firstResult;
+            }
 
-            Choice choice = new ChoiceImpl(true);
-            choice.setMessage("Choose from the D4 rolls");
-            choice.getChoices()
-                    .add(String.format(("Create %s 3/3 Beast token(s) and search for %s basic land(s)"), dice1, dice2));
-            choice.getChoices()
-                    .add(String.format(("Create %s 3/3 Beast token(s) and search for %s basic land(s)"), dice2, dice1));
-            if (controller.choose(outcome, choice, game)) {
-                final String chosen = choice.getChoice();
-                if (!chosen.equals(choice.getChoices().iterator().next())) { // Just re-use the dice rolls for choices,
-                                                                             // swap them if the second choice is picked
-                    int tmp = dice1;
-                    dice1 = dice2;
-                    dice2 = tmp;
-                }
+            Effect effect = new CreateTokenTargetEffect(new BeastToken(), first);
+            effect.setTargetPointer(new FixedTarget(controller.getId()));
+            effect.apply(game, source);
 
-                Effect effect = new CreateTokenTargetEffect(new BeastToken(), dice1);
-                effect.setTargetPointer(new FixedTarget(controller.getId()));
-                effect.apply(game, source);
-
-                TargetCardInLibrary target = new TargetCardInLibrary(0, dice2, StaticFilters.FILTER_CARD_BASIC_LAND);
-                if (controller.searchLibrary(target, source, game)) {
-                    if (!target.getTargets().isEmpty()) {
-                        controller.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
-                        controller.shuffleLibrary(source, game);
-                        return true;
-                    }
+            TargetCardInLibrary target = new TargetCardInLibrary(0, second, StaticFilters.FILTER_CARD_BASIC_LAND);
+            if (controller.searchLibrary(target, source, game)) {
+                if (!target.getTargets().isEmpty()) {
+                    controller.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source,
+                            game, true, false, false, null);
+                    controller.shuffleLibrary(source, game);
+                    return true;
                 }
             }
         }
+
         return false;
     }
 
