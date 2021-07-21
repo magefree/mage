@@ -77,9 +77,11 @@ public final class GamePanel extends javax.swing.JPanel {
     private final Map<UUID, CardInfoWindowDialog> exiles = new HashMap<>();
     private final Map<String, CardInfoWindowDialog> revealed = new HashMap<>();
     private final Map<String, CardInfoWindowDialog> lookedAt = new HashMap<>();
+    private final Map<String, CardsView> graveyards = new HashMap<>(); // need to sync selection
     private final Map<String, CardInfoWindowDialog> graveyardWindows = new HashMap<>();
     private final Map<String, CardInfoWindowDialog> companion = new HashMap<>();
-    private final Map<String, CardsView> graveyards = new HashMap<>();
+    private final Map<String, CardsView> sideboards = new HashMap<>(); // need to sync selection
+    private final Map<String, CardInfoWindowDialog> sideboardWindows = new HashMap<>();
     private final ArrayList<ShowCardsDialog> pickTarget = new ArrayList<>();
     private final ArrayList<PickPileDialog> pickPile = new ArrayList<>();
     private UUID gameId;
@@ -246,25 +248,29 @@ public final class GamePanel extends javax.swing.JPanel {
         if (pickMultiNumber != null) {
             pickMultiNumber.removeDialog();
         }
-        for (CardInfoWindowDialog exileDialog : exiles.values()) {
-            exileDialog.cleanUp();
-            exileDialog.removeDialog();
+        for (CardInfoWindowDialog windowDialog : exiles.values()) {
+            windowDialog.cleanUp();
+            windowDialog.removeDialog();
         }
-        for (CardInfoWindowDialog graveyardDialog : graveyardWindows.values()) {
-            graveyardDialog.cleanUp();
-            graveyardDialog.removeDialog();
+        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
+            windowDialog.cleanUp();
+            windowDialog.removeDialog();
         }
-        for (CardInfoWindowDialog revealDialog : revealed.values()) {
-            revealDialog.cleanUp();
-            revealDialog.removeDialog();
+        for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
+            windowDialog.cleanUp();
+            windowDialog.removeDialog();
         }
-        for (CardInfoWindowDialog lookedAtDialog : lookedAt.values()) {
-            lookedAtDialog.cleanUp();
-            lookedAtDialog.removeDialog();
+        for (CardInfoWindowDialog windowDialog : revealed.values()) {
+            windowDialog.cleanUp();
+            windowDialog.removeDialog();
         }
-        for (CardInfoWindowDialog companionDialog : companion.values()) {
-            companionDialog.cleanUp();
-            companionDialog.removeDialog();
+        for (CardInfoWindowDialog windowDialog : lookedAt.values()) {
+            windowDialog.cleanUp();
+            windowDialog.removeDialog();
+        }
+        for (CardInfoWindowDialog windowDialog : companion.values()) {
+            windowDialog.cleanUp();
+            windowDialog.removeDialog();
         }
 
         clearPickTargetDialogs();
@@ -308,26 +314,29 @@ public final class GamePanel extends javax.swing.JPanel {
             playAreaPanel.changeGUISize();
         }
 
-        for (CardInfoWindowDialog cardInfoWindowDialog : exiles.values()) {
-            cardInfoWindowDialog.changeGUISize();
+        for (CardInfoWindowDialog windowDialog : exiles.values()) {
+            windowDialog.changeGUISize();
         }
-        for (CardInfoWindowDialog cardInfoWindowDialog : revealed.values()) {
-            cardInfoWindowDialog.changeGUISize();
+        for (CardInfoWindowDialog windowDialog : revealed.values()) {
+            windowDialog.changeGUISize();
         }
-        for (CardInfoWindowDialog cardInfoWindowDialog : lookedAt.values()) {
-            cardInfoWindowDialog.changeGUISize();
+        for (CardInfoWindowDialog windowDialog : lookedAt.values()) {
+            windowDialog.changeGUISize();
         }
-        for (CardInfoWindowDialog cardInfoWindowDialog : companion.values()) {
-            cardInfoWindowDialog.changeGUISize();
+        for (CardInfoWindowDialog windowDialog : companion.values()) {
+            windowDialog.changeGUISize();
         }
-        for (CardInfoWindowDialog cardInfoWindowDialog : graveyardWindows.values()) {
-            cardInfoWindowDialog.changeGUISize();
+        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
+            windowDialog.changeGUISize();
         }
-        for (ShowCardsDialog showCardsDialog : pickTarget) {
-            showCardsDialog.changeGUISize();
+        for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
+            windowDialog.changeGUISize();
         }
-        for (PickPileDialog pickPileDialog : pickPile) {
-            pickPileDialog.changeGUISize();
+        for (ShowCardsDialog windowDialog : pickTarget) {
+            windowDialog.changeGUISize();
+        }
+        for (PickPileDialog windowDialog : pickPile) {
+            windowDialog.changeGUISize();
         }
 
         this.revalidate();
@@ -575,7 +584,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         PlayerView player = game.getPlayers().get(playerSeat);
         PlayAreaPanel playAreaPanel = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
-                new PlayAreaPanelOptions(game.isPlayer(), game.isPlayer(), game.isRollbackTurnsAllowed(), row == 0));
+                new PlayAreaPanelOptions(game.isPlayer(), player.isHuman(), game.isPlayer(), game.isRollbackTurnsAllowed(), row == 0));
         players.put(player.getPlayerId(), playAreaPanel);
         playersWhoLeft.put(player.getPlayerId(), false);
         GridBagConstraints c = new GridBagConstraints();
@@ -619,7 +628,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
             player = game.getPlayers().get(playerNum);
             PlayAreaPanel playerPanel = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
-                    new PlayAreaPanelOptions(game.isPlayer(), false, game.isRollbackTurnsAllowed(), row == 0));
+                    new PlayAreaPanelOptions(game.isPlayer(), player.isHuman(), false, game.isRollbackTurnsAllowed(), row == 0));
             players.put(player.getPlayerId(), playerPanel);
             playersWhoLeft.put(player.getPlayerId(), false);
             c = new GridBagConstraints();
@@ -790,16 +799,29 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (player.getPlayerId().equals(playerId)) {
                     skipButtons.updateFromPlayer(player);
                 }
+
                 // update open or remove closed graveyard windows
                 graveyards.put(player.getName(), player.getGraveyard());
                 if (graveyardWindows.containsKey(player.getName())) {
-                    CardInfoWindowDialog cardInfoWindowDialog = graveyardWindows.get(player.getName());
-                    if (cardInfoWindowDialog.isClosed()) {
+                    CardInfoWindowDialog windowDialog = graveyardWindows.get(player.getName());
+                    if (windowDialog.isClosed()) {
                         graveyardWindows.remove(player.getName());
                     } else {
-                        cardInfoWindowDialog.loadCards(player.getGraveyard(), bigCard, gameId, false);
+                        windowDialog.loadCards(player.getGraveyard(), bigCard, gameId, false);
                     }
                 }
+
+                // update open or remove closed sideboard windows
+                sideboards.put(player.getName(), player.getSideboard());
+                if (sideboardWindows.containsKey(player.getName())) {
+                    CardInfoWindowDialog windowDialog = sideboardWindows.get(player.getName());
+                    if (windowDialog.isClosed()) {
+                        sideboardWindows.remove(player.getName());
+                    } else {
+                        windowDialog.loadCards(player.getSideboard(), bigCard, gameId, false);
+                    }
+                }
+
                 // show top card window
                 if (player.getTopCard() != null) {
                     CardsView cardsView = new CardsView();
@@ -852,8 +874,12 @@ public final class GamePanel extends javax.swing.JPanel {
             exiles.get(exile.getId()).loadCards(exile, bigCard, gameId);
         }
 
+        // reveal and look at dialogs can unattached, so windows opened by game doesn't have it
         showRevealed(lastGameData.game);
         showLookedAt(lastGameData.game);
+
+        // sideboard dialogs is unattached all the time -- user opens it by command
+
         showCompanion(lastGameData.game);
         if (!lastGameData.game.getCombat().isEmpty()) {
             CombatManager.instance.showCombat(lastGameData.game.getCombat(), gameId);
@@ -1147,40 +1173,46 @@ public final class GamePanel extends javax.swing.JPanel {
     // Called if the game frame is deactivated because the tabled the deck editor or other frames go to foreground
     public void deactivated() {
         // hide the non modal windows (because otherwise they are shown on top of the new active pane)
-        for (CardInfoWindowDialog exileDialog : exiles.values()) {
-            exileDialog.hideDialog();
+        for (CardInfoWindowDialog windowDialog : exiles.values()) {
+            windowDialog.hideDialog();
         }
-        for (CardInfoWindowDialog graveyardDialog : graveyardWindows.values()) {
-            graveyardDialog.hideDialog();
+        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
+            windowDialog.hideDialog();
         }
-        for (CardInfoWindowDialog revealDialog : revealed.values()) {
-            revealDialog.hideDialog();
+        for (CardInfoWindowDialog windowDialog : revealed.values()) {
+            windowDialog.hideDialog();
         }
-        for (CardInfoWindowDialog lookedAtDialog : lookedAt.values()) {
-            lookedAtDialog.hideDialog();
+        for (CardInfoWindowDialog windowDialog : lookedAt.values()) {
+            windowDialog.hideDialog();
         }
-        for (CardInfoWindowDialog companionDialog : companion.values()) {
-            companionDialog.hideDialog();
+        for (CardInfoWindowDialog windowDialog : companion.values()) {
+            windowDialog.hideDialog();
+        }
+        for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
+            windowDialog.hideDialog();
         }
     }
 
     // Called if the game frame comes to front again
     public void activated() {
         // hide the non modal windows (because otherwise they are shown on top of the new active pane)
-        for (CardInfoWindowDialog exileDialog : exiles.values()) {
-            exileDialog.show();
+        for (CardInfoWindowDialog windowDialog : exiles.values()) {
+            windowDialog.show();
         }
-        for (CardInfoWindowDialog graveyardDialog : graveyardWindows.values()) {
-            graveyardDialog.show();
+        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
+            windowDialog.show();
         }
-        for (CardInfoWindowDialog revealDialog : revealed.values()) {
-            revealDialog.show();
+        for (CardInfoWindowDialog windowDialog : revealed.values()) {
+            windowDialog.show();
         }
-        for (CardInfoWindowDialog lookedAtDialog : lookedAt.values()) {
-            lookedAtDialog.show();
+        for (CardInfoWindowDialog windowDialog : lookedAt.values()) {
+            windowDialog.show();
         }
-        for (CardInfoWindowDialog companionDialog : companion.values()) {
-            companionDialog.show();
+        for (CardInfoWindowDialog windowDialog : companion.values()) {
+            windowDialog.show();
+        }
+        for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
+            windowDialog.show();
         }
     }
 
@@ -1197,7 +1229,38 @@ public final class GamePanel extends javax.swing.JPanel {
         CardInfoWindowDialog newGraveyard = new CardInfoWindowDialog(ShowType.GRAVEYARD, playerName);
         graveyardWindows.put(playerName, newGraveyard);
         MageFrame.getDesktop().add(newGraveyard, JLayeredPane.PALETTE_LAYER);
+        // use graveyards to sync selection (don't use player data here)
         newGraveyard.loadCards(graveyards.get(playerName), bigCard, gameId, false);
+    }
+
+    public void openSideboardWindow(UUID playerId) {
+        if (lastGameData == null) {
+            return;
+        }
+
+        PlayerView playerView = lastGameData.game.getPlayers().stream()
+                .filter(p -> p.getPlayerId().equals(playerId))
+                .findFirst()
+                .orElse(null);
+        if (playerView == null) {
+            return;
+        }
+
+        if (sideboardWindows.containsKey(playerView.getName())) {
+            CardInfoWindowDialog windowDialog = sideboardWindows.get(playerView.getName());
+            if (windowDialog.isVisible()) {
+                windowDialog.hideDialog();
+            } else {
+                windowDialog.show();
+            }
+            return;
+        }
+
+        CardInfoWindowDialog windowDialog = new CardInfoWindowDialog(ShowType.SIDEBOARD, playerView.getName());
+        sideboardWindows.put(playerView.getName(), windowDialog);
+        MageFrame.getDesktop().add(windowDialog, JLayeredPane.PALETTE_LAYER);
+        // use sideboards to sync selection (don't use player data here)
+        windowDialog.loadCards(sideboards.get(playerView.getName()), bigCard, gameId, false);
     }
 
     public void openTopLibraryWindow(String playerName) {
@@ -1387,6 +1450,25 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
 
+        // sideboard
+        if (needZone == Zone.OUTSIDE || needZone == Zone.ALL) {
+            for (PlayerView player : lastGameData.game.getPlayers()) {
+                for (Map.Entry<UUID, CardView> card : player.getSideboard().entrySet()) {
+                    if (needSelectable.contains(card.getKey())) {
+                        card.getValue().setChoosable(true);
+                    }
+                    if (needChoosen.contains(card.getKey())) {
+                        card.getValue().setSelected(true);
+                    }
+                    if (needPlayable.containsObject(card.getKey())) {
+                        card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
+                    }
+                }
+            }
+        }
+        // sideboards (old windows all the time, e.g. unattached from game data)
+        prepareSelectableWindows(sideboardWindows.values(), needSelectable, needChoosen, needPlayable);
+
         // exile
         if (needZone == Zone.EXILED || needZone == Zone.ALL) {
             // exile from player panel
@@ -1403,6 +1485,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     }
                 }
             }
+
             // exile from windows
             for (ExileView exile : lastGameData.game.getExile()) {
                 for (Map.Entry<UUID, CardView> card : exile.entrySet()) {

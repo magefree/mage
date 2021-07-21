@@ -391,6 +391,12 @@ public class CallbackClientImpl implements CallbackClient {
                         break;
                     }
 
+                    case VIEW_SIDEBOARD: {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        viewSideboard(message.getGameId(), message.getPlayerId());
+                        break;
+                    }
+
                     case CONSTRUCT: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         DeckView deckView = message.getDeck();
@@ -614,6 +620,15 @@ public class CallbackClientImpl implements CallbackClient {
 
     protected void viewLimitedDeck(Deck deck, UUID tableId, int time) {
         frame.showDeckEditor(DeckEditorMode.VIEW_LIMITED_DECK, deck, tableId, time);
+    }
+
+    protected void viewSideboard(UUID gameId, UUID playerId) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.openSideboardWindow(playerId);
+            }
+        });
     }
 
     private void handleException(Exception ex) {

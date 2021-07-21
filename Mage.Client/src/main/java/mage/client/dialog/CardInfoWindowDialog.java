@@ -34,7 +34,7 @@ public class CardInfoWindowDialog extends MageDialog {
     private static final Logger LOGGER = Logger.getLogger(CardInfoWindowDialog.class);
 
     public enum ShowType {
-        REVEAL, REVEAL_TOP_LIBRARY, LOOKED_AT, EXILE, GRAVEYARD, COMPANION, OTHER
+        REVEAL, REVEAL_TOP_LIBRARY, LOOKED_AT, EXILE, GRAVEYARD, COMPANION, SIDEBOARD, OTHER
     }
 
     private final ShowType showType;
@@ -89,6 +89,17 @@ public class CardInfoWindowDialog extends MageDialog {
                     }
                 });
                 break;
+            case SIDEBOARD:
+                this.setFrameIcon(new ImageIcon(ImageHelper.getImageFromResources("/info/library.png")));
+                this.setClosable(true);
+                this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+                this.addInternalFrameListener(new InternalFrameAdapter() {
+                    @Override
+                    public void internalFrameClosing(InternalFrameEvent e) {
+                        CardInfoWindowDialog.this.hideDialog();
+                    }
+                });
+                break;
             case EXILE:
                 this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getExileImage()));
                 break;
@@ -96,6 +107,7 @@ public class CardInfoWindowDialog extends MageDialog {
                 this.setFrameIcon(new ImageIcon(ImageManagerImpl.instance.getTokenIconImage()));
                 this.setClosable(false);
                 break;
+            case OTHER:
             default:
             // no icon yet
         }
@@ -149,12 +161,22 @@ public class CardInfoWindowDialog extends MageDialog {
 
     public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId, boolean revertOrder) {
         cards.loadCards(showCards, bigCard, gameId, revertOrder);
+
+        // additional info for grave windows
         if (showType == ShowType.GRAVEYARD) {
             int qty = qtyCardTypes(showCards);
-            String titel = name + "'s Graveyard (" + showCards.size() + ")  -  " + qty + ((qty == 1) ? " Card Type" : " Card Types");
-            setTitle(titel);
-            this.setTitelBarToolTip(titel);
+            String newTitle = name + "'s graveyard (" + showCards.size() + ")  -  " + qty + ((qty == 1) ? " card type" : " card types");
+            setTitle(newTitle);
+            this.setTitelBarToolTip(newTitle);
         }
+
+        // additional info for sideboard window
+        if (showType == ShowType.SIDEBOARD) {
+            String newTitle = name + "'s sideboard";
+            setTitle(newTitle);
+            this.setTitelBarToolTip(newTitle);
+        }
+
         showAndPositionWindow();
     }
 

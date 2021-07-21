@@ -8,8 +8,9 @@ package mage.client.game;
  */
 public class PlayAreaPanelOptions {
 
-    public PlayAreaPanelOptions(boolean isPlayer, boolean playerItself, boolean rollbackTurnsAllowed, boolean topRow) {
+    public PlayAreaPanelOptions(boolean isPlayer, boolean isHuman, boolean playerItself, boolean rollbackTurnsAllowed, boolean topRow) {
         this.isPlayer = isPlayer;
+        this.isHuman = isHuman;
         this.playerItself = playerItself;
         this.rollbackTurnsAllowed = rollbackTurnsAllowed;
         this.topRow = topRow;
@@ -18,22 +19,27 @@ public class PlayAreaPanelOptions {
     /**
      * true if the client is a player / false if the client is a watcher
      */
-    public boolean isPlayer = false;
+    public boolean isPlayer;
+
+    /**
+     * true if the player is the human, not computer
+     */
+    public boolean isHuman;
 
     /**
      * true if the player is the client player itself, false if the player is
-     * another player playing with the clinet player
+     * another player playing with the client player
      */
-    public boolean playerItself = false;
+    public boolean playerItself;
 
     /**
      * true if the player can rollback turns if all players agree
      */
-    public boolean rollbackTurnsAllowed = false;
+    public boolean rollbackTurnsAllowed;
 
     /**
      * true if the battlefield is on the top row of player areas
      */
-    public boolean topRow = false;
+    public boolean topRow;
 
 }
