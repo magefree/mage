@@ -63,7 +63,7 @@ public final class CattiBrieOfMithralHall extends CardImpl {
         // {1}, Remove all +1/+1 counters from Catti-brie: It deals X damage to target
         // attacking or blocking creature an opponent controls, where X is the number of
         // counters removed this way.
-        Ability damageAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AnthroplasmEffect(),
+        Ability damageAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CattiBrieOfMithralHallEffect(),
                 new ManaCostsImpl("{1}"));
         damageAbility.addTarget(new TargetCreaturePermanent(filter));
 
@@ -80,20 +80,20 @@ public final class CattiBrieOfMithralHall extends CardImpl {
     }
 }
 
-class AnthroplasmEffect extends OneShotEffect {
+class CattiBrieOfMithralHallEffect extends OneShotEffect {
 
-    AnthroplasmEffect() {
+    CattiBrieOfMithralHallEffect() {
         super(Outcome.Damage);
         staticText = "Remove all +1/+1 counters from {this}, deal X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way.";
     }
 
-    AnthroplasmEffect(AnthroplasmEffect effect) {
+    CattiBrieOfMithralHallEffect(CattiBrieOfMithralHallEffect effect) {
         super(effect);
     }
 
     @Override
-    public AnthroplasmEffect copy() {
-        return new AnthroplasmEffect(this);
+    public CattiBrieOfMithralHallEffect copy() {
+        return new CattiBrieOfMithralHallEffect(this);
     }
 
     @Override
