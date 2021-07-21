@@ -22,7 +22,7 @@ public final class GuidingVoice extends CardImpl {
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        // Learn (You may reveal a Lesson card you own from outside the game and p
+        // Learn (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
         this.getSpellAbility().addEffect(new LearnEffect().concatBy("<br>"));
     }
 
