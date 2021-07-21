@@ -1,5 +1,6 @@
 package mage.cards.v;
 
+import java.util.List;
 import java.util.UUID;
 
 import mage.abilities.Ability;
@@ -67,40 +68,34 @@ class ValiantEndeavorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            // Roll two siz-sided dice
-            int dice1 = controller.rollDice(source, game, 6);
-            int dice2 = controller.rollDice(source, game, 6);
-
-            Choice choice = new ChoiceImpl(true);
-            choice.setMessage("Choose from the D6 rolls");
-            choice.getChoices().add(String.format(
-                    ("Destroy each creature with %s or more power, then create %s 2/2 white Knight token(s) with vigilance"),
-                    dice1, dice2));
-            choice.getChoices().add(String.format(
-                    ("Destroy each creature with %s or more power, then create %s 2/2 white Knight token(s) with vigilance"),
-                    dice2, dice1));
-            if (controller.choose(outcome, choice, game)) {
-                final String chosen = choice.getChoice();
-                if (!chosen.equals(choice.getChoices().iterator().next())) { // Just re-use the dice rolls for choices,
-                                                                             // swap them if the second choice is picked
-                    int tmp = dice1;
-                    dice1 = dice2;
-                    dice2 = tmp;
-                }
-
-                final FilterCreaturePermanent filter = new FilterCreaturePermanent(
-                        String.format("creatures with power greater than or equal to %s", dice1));
-                filter.add(new PowerPredicate(ComparisonType.MORE_THAN, dice1 - 1));
-
-                Effect wrathEffect = new DestroyAllEffect(filter);
-                wrathEffect.apply(game, source);
-
-                Effect tokenEffect = new CreateTokenTargetEffect(new KnightToken(), dice2);
-                tokenEffect.setTargetPointer(new FixedTarget(controller.getId()));
-                tokenEffect.apply(game, source);
-
-                return true;
+            List<Integer> results = controller.rollDice(source, game, 6, 2);
+            int firstResult = results.get(0);
+            int secondResult = results.get(1);
+            int first, second;
+            if (firstResult != secondResult
+                    && controller.chooseUse(outcome, "Destroy each creature with power greater than or equal to your choice",
+                            "The other number will be the amount of 2/2 white Knight tokens with vigilance.",
+                            "" + firstResult, "" + secondResult, source, game)) {
+                first = firstResult;
+                second = secondResult;
+            } else {
+                first = secondResult;
+                second = firstResult;
             }
+
+            final FilterCreaturePermanent filter = new FilterCreaturePermanent(
+                    String.format("creatures with power greater than or equal to %s", first));
+            filter.add(new PowerPredicate(ComparisonType.MORE_THAN, first - 1));
+
+            Effect wrathEffect = new DestroyAllEffect(filter);
+            wrathEffect.apply(game, source);
+
+            Effect tokenEffect = new CreateTokenTargetEffect(new KnightToken(), second);
+            tokenEffect.setTargetPointer(new FixedTarget(controller.getId()));
+            tokenEffect.apply(game, source);
+
+            return true;
+
         }
         return false;
     }
