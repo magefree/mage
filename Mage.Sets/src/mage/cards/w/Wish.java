@@ -10,6 +10,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -32,6 +33,7 @@ public final class Wish extends CardImpl {
         this.getSpellAbility().addEffect(new WishEffect());
         this.getSpellAbility().setIdentifier(MageIdentifier.WishWatcher);
         this.getSpellAbility().addWatcher(new WishWatcher());
+        this.getSpellAbility().addHint(OpenSideboardHint.instance);
     }
 
     private Wish(final Wish card) {

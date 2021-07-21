@@ -9,6 +9,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.WishEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,6 +34,7 @@ public final class RingOfMaruf extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RingOfMarufEffect(), new ManaCostsImpl("{5}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileSourceCost());
+        ability.addHint(OpenSideboardHint.instance);
         this.addAbility(ability);
     }
 

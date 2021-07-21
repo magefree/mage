@@ -3,6 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.WishEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,6 +27,7 @@ public final class CoaxFromTheBlindEternities extends CardImpl {
 
         // You may choose an Eldrazi card you own from outside the game or in exile, reveal that card, and put it into your hand.
         this.getSpellAbility().addEffect(new WishEffect(filter, true, true));
+        this.getSpellAbility().addHint(OpenSideboardHint.instance);
     }
 
     private CoaxFromTheBlindEternities(final CoaxFromTheBlindEternities card) {
