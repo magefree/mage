@@ -19,6 +19,7 @@ public final class Flensermite extends CardImpl {
 
     public Flensermite (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.GREMLIN);
 
         this.power = new MageInt(1);

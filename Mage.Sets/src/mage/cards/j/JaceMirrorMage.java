@@ -98,7 +98,7 @@ class JaceMirrorMageDrawEffect extends OneShotEffect {
 
     JaceMirrorMageDrawEffect() {
         super(Outcome.Benefit);
-        staticText = "draw a card and reveal it. Remove a number of loyalty counters equal to that card's converted mana cost from {this}";
+        staticText = "draw a card and reveal it. Remove a number of loyalty counters equal to that card's mana value from {this}";
     }
 
     private JaceMirrorMageDrawEffect(final JaceMirrorMageDrawEffect effect) {
@@ -124,14 +124,14 @@ class JaceMirrorMageDrawEffect extends OneShotEffect {
             return true;
         }
         controller.revealCards(source, new CardsImpl(card), game);
-        if (card == null || card.getConvertedManaCost() == 0) {
+        if (card == null || card.getManaValue() == 0) {
             return true;
         }
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return true;
         }
-        permanent.removeCounters(CounterType.LOYALTY.createInstance(card.getConvertedManaCost()), source, game);
+        permanent.removeCounters(CounterType.LOYALTY.createInstance(card.getManaValue()), source, game);
         return true;
     }
 }

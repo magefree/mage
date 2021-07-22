@@ -119,9 +119,9 @@ public class SearchLibraryPutInHandOrOnBattlefieldEffect extends SearchEffect {
             sb.append("this way, you may put it onto the battlefield instead");
         }
         if (forceShuffle) {
-            sb.append(". Then shuffle your library");
+            sb.append(". Then shuffle");
         } else {
-            sb.append(". If you do, shuffle your library");
+            sb.append(". If you do, shuffle");
         }
         staticText = sb.toString();
     }

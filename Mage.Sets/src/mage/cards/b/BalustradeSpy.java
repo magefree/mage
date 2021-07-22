@@ -77,7 +77,7 @@ class BalustradeSpyEffect extends OneShotEffect {
         for (Card card : controller.getLibrary().getCards(game)) {
             if (card != null) {
                 toGraveyard.add(card);
-                if (card.isLand()) {
+                if (card.isLand(game)) {
                     break;
                 }
             }

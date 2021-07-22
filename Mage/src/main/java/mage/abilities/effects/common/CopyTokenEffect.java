@@ -12,7 +12,7 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
     protected Token token;
 
     public CopyTokenEffect(Token token) {
-        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
+        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.CopyEffects_1a, Outcome.BecomeCreature);
         this.token = token.copy();
         staticText = "You may have {this} enter the battlefield as a copy of " + token.getDescription() + " on the battlefield";
     }
@@ -27,9 +27,9 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         permanent.setName(token.getName());
         permanent.getColor(game).setColor(token.getColor(game));
-        permanent.getCardType().clear();
-        for (CardType type : token.getCardType()) {
-            permanent.addCardType(type);
+        permanent.removeAllCardTypes(game);
+        for (CardType type : token.getCardType(game)) {
+            permanent.addCardType(game, type);
         }
         permanent.removeAllSubTypes(game);
         permanent.copySubTypesFrom(game, token);

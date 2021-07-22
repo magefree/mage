@@ -24,6 +24,7 @@ public final class DrossHopper extends CardImpl {
 
     public DrossHopper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.INSECT);
         this.subtype.add(SubType.HORROR);
 

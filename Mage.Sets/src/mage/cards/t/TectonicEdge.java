@@ -64,7 +64,7 @@ class TectonicEdgeCost extends CostImpl {
 
 
     public TectonicEdgeCost() {
-        this.text = "Activate this ability only if an opponent controls four or more lands";
+        this.text = "Activate only if an opponent controls four or more lands";
     }
 
     public TectonicEdgeCost(final TectonicEdgeCost cost) {

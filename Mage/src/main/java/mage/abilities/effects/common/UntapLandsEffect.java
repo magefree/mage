@@ -20,7 +20,7 @@ public class UntapLandsEffect extends OneShotEffect {
     private static final FilterLandPermanent filter = new FilterLandPermanent("land(s) to untap");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
     private final int amount;
     private final boolean upTo;

@@ -18,7 +18,7 @@ public class CantAttackControllerAttachedEffect extends RestrictionEffect {
 
     public CantAttackControllerAttachedEffect(AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield);
-        this.staticText = attachmentType.verb() + " creature can't attack you or a planeswalker you control";
+        this.staticText = attachmentType.verb() + " creature can't attack you or planeswalkers you control";
     }
 
     public CantAttackControllerAttachedEffect(final CantAttackControllerAttachedEffect effect) {

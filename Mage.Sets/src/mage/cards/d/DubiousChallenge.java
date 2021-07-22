@@ -44,7 +44,7 @@ class DubiousChallengeEffect extends OneShotEffect {
 
     public DubiousChallengeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle your library. Target opponent may choose one of the exiled cards and put it onto the battlefield under their control. Put the rest onto the battlefield under your control.";
+        this.staticText = "Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle. Target opponent may choose one of the exiled cards and put it onto the battlefield under their control. Put the rest onto the battlefield under your control.";
     }
 
     public DubiousChallengeEffect(final DubiousChallengeEffect effect) {

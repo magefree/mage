@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 
@@ -78,7 +77,7 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isLand() && permanent.isControlledBy(this.getControllerId())) {
+        if (permanent != null && permanent.isLand(game) && permanent.isControlledBy(this.getControllerId())) {
             if (permanent.hasSubtype(SubType.MOUNTAIN, game)) {
                 return true;
             }

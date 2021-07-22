@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,16 +14,17 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.VariableManaCostPredicate;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class FrontlineMedic extends CardImpl {
@@ -32,11 +32,11 @@ public final class FrontlineMedic extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("spell with {X} in its mana cost");
 
     static {
-        filter.add(new VariableManaCostPredicate());
+        filter.add(VariableManaCostPredicate.instance);
     }
 
     public FrontlineMedic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
 

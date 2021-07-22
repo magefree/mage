@@ -51,7 +51,7 @@ class NightmareIncursionEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "Search target player's library for up to X cards, " +
                 "where X is the number of Swamps you control, and exile them. " +
-                "Then that player shuffles their library";
+                "Then that player shuffles";
     }
 
     public NightmareIncursionEffect(final NightmareIncursionEffect effect) {

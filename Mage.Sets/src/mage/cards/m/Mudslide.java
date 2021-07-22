@@ -61,7 +61,7 @@ class MudslideEffect extends OneShotEffect {
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     MudslideEffect() {

@@ -23,6 +23,7 @@ public final class FallenFerromancer extends CardImpl {
 
     public FallenFerromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
 

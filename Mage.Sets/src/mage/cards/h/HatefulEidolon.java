@@ -81,7 +81,7 @@ class HatefulEidolonTriggeredAbility extends TriggeredAbilityImpl {
         for (UUID auraId : deadCreature.getAttachments()) {
             Permanent attachment = game.getPermanentOrLKIBattlefield(auraId);
             if (attachment.getControllerId().equals(controllerId)
-                    && attachment.isEnchantment()) {  // Shadowspear or any other equipment does not count
+                    && attachment.isEnchantment(game)) {  // Shadowspear or any other equipment does not count
                 auraCount += 1;
             }
         }

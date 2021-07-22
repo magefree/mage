@@ -47,7 +47,7 @@ public final class TerashisGrasp extends CardImpl {
 
         public TerashisGraspEffect() {
             super(Outcome.DestroyPermanent);
-            staticText = "You gain life equal to its converted mana cost";
+            staticText = "You gain life equal to its mana value";
         }
 
         public TerashisGraspEffect(TerashisGraspEffect effect) {
@@ -58,7 +58,7 @@ public final class TerashisGrasp extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Permanent targetPermanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             if (targetPermanent != null) {
-                int cost = targetPermanent.getConvertedManaCost();
+                int cost = targetPermanent.getManaValue();
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null) {
                     player.gainLife(cost, game, source);

@@ -59,7 +59,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
             + "the chosen name revealed this way. "
             + "Search that player's graveyard, hand, and library for "
             + "all cards with that name and exile them. "
-            + "Then that player shuffles their library";
+            + "Then that player shuffles";
 
     public ThoughtHemorrhageEffect() {
         super(Outcome.Exile);

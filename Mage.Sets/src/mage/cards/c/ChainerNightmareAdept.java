@@ -102,8 +102,8 @@ class ChainerNightmareAdeptContinuousEffect extends AsThoughEffectImpl {
         Card card = game.getCard(sourceId);
         return card != null
                 && card.getOwnerId().equals(affectedControllerId)
-                && card.isCreature()
-                && !card.isLand();
+                && card.isCreature(game)
+                && !card.isLand(game);
     }
 }
 

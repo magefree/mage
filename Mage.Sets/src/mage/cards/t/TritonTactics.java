@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -19,15 +18,15 @@ import mage.constants.WatcherScope;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
+import java.util.*;
+
 /**
- *
  * @author LevelX2
  */
 public final class TritonTactics extends CardImpl {
@@ -130,8 +129,8 @@ class TritonTacticsTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "At this turn's next end of combat, " + modes.getText();
+    public String getTriggerPhrase() {
+        return "At this turn's next end of combat, ";
     }
 }
 

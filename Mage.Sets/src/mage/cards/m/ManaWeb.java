@@ -67,7 +67,7 @@ class ManaWebTriggeredAbility extends TriggeredAbilityImpl {
         }
         Permanent permanent = ((TappedForManaEvent) event).getPermanent();
         if (permanent == null
-                || !permanent.isLand()
+                || !permanent.isLand(game)
                 || !game.getOpponents(permanent.getControllerId()).contains(getControllerId())) {
             return false;
         }

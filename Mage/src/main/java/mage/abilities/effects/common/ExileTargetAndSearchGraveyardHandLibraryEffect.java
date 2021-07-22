@@ -9,6 +9,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -60,7 +61,7 @@ public class ExileTargetAndSearchGraveyardHandLibraryEffect extends SearchTarget
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         sb.append("Exile target ").append(mode.getTargets().get(0).getTargetName()).append(". ");
-        sb.append(super.getText(mode));
+        sb.append(CardUtil.getTextWithFirstCharUpperCase(super.getText(mode)));
         return sb.toString();
     }
 }

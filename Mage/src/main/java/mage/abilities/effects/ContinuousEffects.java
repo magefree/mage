@@ -592,9 +592,14 @@ public class ContinuousEffects implements Serializable {
                 Map<String, String> keyChoices = new HashMap<>();
                 for (ApprovingObject approvingObject : possibleApprovingObjects) {
                     MageObject mageObject = game.getObject(approvingObject.getApprovingAbility().getSourceId());
-                    keyChoices.put(approvingObject.getApprovingAbility().getId().toString(),
-                            (approvingObject.getApprovingAbility().getRule(mageObject == null ? "" : mageObject.getName()))
-                                    + (mageObject == null ? "" : " (" + mageObject.getIdName() + ")"));
+                    String choiceKey = approvingObject.getApprovingAbility().getId().toString();
+                    String choiceValue;
+                    if (mageObject == null) {
+                        choiceValue = approvingObject.getApprovingAbility().getRule();
+                    } else {
+                        choiceValue = mageObject.getIdName() + ": " + approvingObject.getApprovingAbility().getRule(mageObject.getName());
+                    }
+                    keyChoices.put(choiceKey, choiceValue);
                 }
                 Choice choicePermitting = new ChoiceImpl(true);
                 choicePermitting.setMessage("Choose the permitting object");
@@ -991,7 +996,13 @@ public class ContinuousEffects implements Serializable {
         for (ContinuousEffect effect : layer) {
             Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
-                effect.apply(Layer.CopyEffects_1, SubLayer.NA, ability, game);
+                effect.apply(Layer.CopyEffects_1, SubLayer.CopyEffects_1a, ability, game);
+            }
+        }
+        for (ContinuousEffect effect : layer) {
+            Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
+            for (Ability ability : abilities) {
+                effect.apply(Layer.CopyEffects_1, SubLayer.FaceDownEffects_1b, ability, game);
             }
         }
         //Reload layerEffect if copy effects were applied
@@ -1019,8 +1030,11 @@ public class ContinuousEffects implements Serializable {
         }
 
         applyLayer(activeLayerEffects, Layer.TextChangingEffects_3, game, "layer_3");
+        activeLayerEffects = getLayeredEffects(game, "layer_3");
         applyLayer(activeLayerEffects, Layer.TypeChangingEffects_4, game, "layer_4");
+        activeLayerEffects = getLayeredEffects(game, "layer_4");
         applyLayer(activeLayerEffects, Layer.ColorChangingEffects_5, game, "layer_5");
+        activeLayerEffects = getLayeredEffects(game, "layer_5");
 
         Map<ContinuousEffect, List<Ability>> appliedEffectAbilities = new HashMap<>();
         boolean done = false;

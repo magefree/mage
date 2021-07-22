@@ -56,7 +56,7 @@ enum BalothCageTrapCondition implements Condition {
                 List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);
                 if (permanents != null) {
                     for (Permanent permanent : permanents) {
-                        if (permanent.isArtifact()) {
+                        if (permanent.isArtifact(game)) {
                             return true;
                         }
                     }

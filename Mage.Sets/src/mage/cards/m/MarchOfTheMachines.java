@@ -48,7 +48,7 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
 
     public MarchOfTheMachinesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
-        staticText = "Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost";
+        staticText = "Each noncreature artifact is an artifact creature with power and toughness each equal to its mana value";
         dependendToTypes.add(DependencyType.ArtifactAddingRemoving);
     }
 
@@ -70,7 +70,7 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
                         if (permanent != null) {
                             affectedObjectList.add(new MageObjectReference(permanent, game));
-                            permanent.addCardType(CardType.CREATURE);
+                            permanent.addCardType(game, CardType.CREATURE);
                         }
                     }
                 }
@@ -81,7 +81,7 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
                     for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
                         Permanent permanent = it.next().getPermanent(game);
                         if (permanent != null) {
-                            int manaCost = permanent.getConvertedManaCost();
+                            int manaCost = permanent.getManaValue();
                             permanent.getPower().setValue(manaCost);
                             permanent.getToughness().setValue(manaCost);
                         }

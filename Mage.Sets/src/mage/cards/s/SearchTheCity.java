@@ -129,8 +129,8 @@ class SearchTheCityTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you play a card with the same name as one of the exiled cards, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you play a card with the same name as one of the exiled cards, " ;
     }
 
     @Override

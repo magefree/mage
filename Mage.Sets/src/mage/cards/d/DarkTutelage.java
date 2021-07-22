@@ -43,7 +43,7 @@ class DarkTutelageEffect extends OneShotEffect {
 
     DarkTutelageEffect() {
         super(Outcome.DrawCard);
-        staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost";
+        staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to its mana value";
     }
 
     private DarkTutelageEffect(final DarkTutelageEffect effect) {
@@ -62,8 +62,8 @@ class DarkTutelageEffect extends OneShotEffect {
         }
         player.revealCards(source, new CardsImpl(card), game);
         player.moveCards(card, Zone.HAND, source, game);
-        if (card.getConvertedManaCost() > 0) {
-            player.loseLife(card.getConvertedManaCost(), game, source, false);
+        if (card.getManaValue() > 0) {
+            player.loseLife(card.getManaValue(), game, source, false);
         }
         return true;
     }

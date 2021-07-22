@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -31,7 +30,7 @@ public final class RadiantSerraArchangel extends CardImpl {
             = new FilterControlledCreaturePermanent("another untapped creature you control with flying");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(AnotherPredicate.instance);
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }

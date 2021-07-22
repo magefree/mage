@@ -86,12 +86,12 @@ class SharesEnchantedCardTypePredicate implements ObjectSourcePlayerPredicate<Ob
             if (newPermanentToAttachAuraTo == auraIsAttachedToThisPermanent) {
                 return false;  // must be another permanent
             }
-            if (auraIsAttachedToThisPermanent.isCreature()
-                    && newPermanentToAttachAuraTo.isCreature()) {
+            if (auraIsAttachedToThisPermanent.isCreature(game)
+                    && newPermanentToAttachAuraTo.isCreature(game)) {
                 return true;
             }
-            if (auraIsAttachedToThisPermanent.isLand()
-                    && newPermanentToAttachAuraTo.isLand()) {
+            if (auraIsAttachedToThisPermanent.isLand(game)
+                    && newPermanentToAttachAuraTo.isLand(game)) {
                 return true;
             }
             return false;

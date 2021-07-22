@@ -47,7 +47,7 @@ class InfernalGenesisEffect extends OneShotEffect {
     InfernalGenesisEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "that player mills a card. Then they create X 1/1 black Minion creature tokens, " +
-                "where X is the milled card's converted mana cost.";
+                "where X is the milled card's mana value.";
     }
 
     private InfernalGenesisEffect(final InfernalGenesisEffect effect) {
@@ -62,7 +62,7 @@ class InfernalGenesisEffect extends OneShotEffect {
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .mapToInt(MageObject::getConvertedManaCost)
+                .mapToInt(MageObject::getManaValue)
                 .sum();
         if (totalCMC > 0) {
             token.putOntoBattlefield(totalCMC, game, source, player.getId());

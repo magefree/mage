@@ -37,7 +37,7 @@ public class OpponentPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         return "Whenever an opponent plays a land, ";
     }
 }

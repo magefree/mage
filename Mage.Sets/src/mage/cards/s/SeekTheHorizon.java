@@ -20,7 +20,7 @@ public final class SeekTheHorizon extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
         // Search your library for up to three basic land cards, reveal them, and put them into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 3, StaticFilters.FILTER_CARD_BASIC_LAND), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 3, StaticFilters.FILTER_CARD_BASIC_LANDS), true));
     }
 
     private SeekTheHorizon(final SeekTheHorizon card) {

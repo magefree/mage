@@ -38,8 +38,8 @@ public class UnattachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} becomes unattached from a permanent, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} becomes unattached from a permanent, " ;
     }
 
     @Override

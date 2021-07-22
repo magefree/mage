@@ -57,7 +57,7 @@ class HollowWarriorCostToAttackBlockEffect extends PayCostToAttackBlockEffectImp
     static {
         filter.add(Predicates.not(AttackingPredicate.instance));
         filter.add(Predicates.not(BlockingPredicate.instance));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     HollowWarriorCostToAttackBlockEffect() {

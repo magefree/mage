@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -35,7 +34,7 @@ public final class SupremeInquisitor extends CardImpl {
 
     static {
         filter.add(SubType.WIZARD.getPredicate());
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public SupremeInquisitor(UUID ownerId, CardSetInfo setInfo) {
@@ -68,7 +67,7 @@ class SupremeInquisitorEffect extends OneShotEffect {
 
     public SupremeInquisitorEffect() {
         super(Outcome.Exile);
-        staticText = "Search target player's library for up to five cards and exile them. Then that player shuffles their library";
+        staticText = "Search target player's library for up to five cards and exile them. Then that player shuffles";
     }
 
     public SupremeInquisitorEffect(final SupremeInquisitorEffect effect) {

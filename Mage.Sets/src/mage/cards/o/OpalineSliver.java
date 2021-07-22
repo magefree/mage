@@ -15,6 +15,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -56,8 +57,6 @@ public final class OpalineSliver extends CardImpl {
 
 class OpalineSliverTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterSpell spellCard = new FilterSpell("a spell");
-
     public OpalineSliverTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
@@ -85,7 +84,7 @@ class OpalineSliverTriggeredAbility extends TriggeredAbilityImpl {
         } else {
             return event.getTargetId().equals(this.getSourceId())
                     && game.getOpponents(this.controllerId).contains(event.getPlayerId())
-                    && spellCard.match(spell, getSourceId(), getControllerId(), game);
+                    && StaticFilters.FILTER_SPELL_A.match(spell, getSourceId(), getControllerId(), game);
         }
     }
 

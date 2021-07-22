@@ -82,7 +82,7 @@ class SarkhansWhelpTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you activate an ability of a Sarkhan planeswalker, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you activate an ability of a Sarkhan planeswalker, " ;
     }
 }

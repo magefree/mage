@@ -41,7 +41,7 @@ class ParallectricFeedbackEffect extends OneShotEffect {
 
     public ParallectricFeedbackEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals damage to target spell's controller equal to that spell's converted mana cost";
+        staticText = "{this} deals damage to target spell's controller equal to that spell's mana value";
     }
 
     public ParallectricFeedbackEffect(final ParallectricFeedbackEffect effect) {
@@ -61,7 +61,7 @@ class ParallectricFeedbackEffect extends OneShotEffect {
             if (spell != null) {
                 Player spellController = game.getPlayer(spell.getControllerId());
                 if (spellController != null) {
-                    spellController.damage(spell.getConvertedManaCost(), source.getSourceId(), source, game);
+                    spellController.damage(spell.getManaValue(), source.getSourceId(), source, game);
                     return true;
                 }
             }

@@ -106,7 +106,7 @@ class BrilliantUltimatumEffect extends OneShotEffect {
                 selectedPile = pile2;
             }
             game.informPlayers(controller.getLogName() + " chose " + selectedPileName + '.');
-            while (!selectedPileCards.isEmpty() && controller.chooseUse(Outcome.PlayForFree, "Do you want to play a card for free from " + selectedPileName + '?', source, game)) {
+            while (!selectedPileCards.isEmpty() && controller.chooseUse(Outcome.PlayForFree, "Play a card for free from " + selectedPileName + '?', source, game)) {
                 TargetCard targetExiledCard = new TargetCard(Zone.EXILED, new FilterCard());
                 if (controller.chooseTarget(Outcome.PlayForFree, selectedPile, targetExiledCard, source, game)) {
                     Card card = selectedPile.get(targetExiledCard.getFirstTarget(), game);

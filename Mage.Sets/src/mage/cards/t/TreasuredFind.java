@@ -23,7 +23,7 @@ public final class TreasuredFind extends CardImpl {
         // Return target card from your graveyard to your hand. Exile Treasured Find.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private TreasuredFind(final TreasuredFind card) {

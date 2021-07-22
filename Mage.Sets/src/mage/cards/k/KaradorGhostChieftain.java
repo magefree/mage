@@ -125,7 +125,7 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
             if (objectCard != null
                     && sourceObject != null
                     && objectCard.isOwnedBy(source.getControllerId())
-                    && objectCard.isCreature()
+                    && objectCard.isCreature(game)
                     && objectCard.getSpellAbility() != null
                     && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)) {
                 KaradorGhostChieftainWatcher watcher

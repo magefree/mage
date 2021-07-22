@@ -81,6 +81,6 @@ class GreaterGargadonAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return super.getRule() + " Activate this ability only if Greater Gargadon is suspended.";
+        return super.getRule() + " Activate only if Greater Gargadon is suspended.";
     }
 }

@@ -51,7 +51,7 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
 
         Permanent purphorosGodOfTheForge = getPermanent("Purphoros, God of the Forge", playerA);
-        Assert.assertFalse("Purphoros may not be a creature but it is", purphorosGodOfTheForge.getCardType().contains(CardType.CREATURE));
+        Assert.assertFalse("Purphoros may not be a creature but it is", purphorosGodOfTheForge.isCreature(currentGame));
     }
 
     @Test
@@ -86,7 +86,7 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
         assertLife(playerB, 18); // 2 damage from Purphoros for the morphed Phoenix
 
         Permanent purphorosGodOfTheForge = getPermanent("Purphoros, God of the Forge", playerA);
-        Assert.assertFalse("Purphoros may not be a creature but it is", purphorosGodOfTheForge.getCardType().contains(CardType.CREATURE));
+        Assert.assertFalse("Purphoros may not be a creature but it is", purphorosGodOfTheForge.isCreature(currentGame));
     }
 
     @Test
@@ -107,6 +107,6 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
 
         assertLife(playerB, 18);
         Permanent purphorosGodOfTheForge = getPermanent("Purphoros, God of the Forge", playerA);
-        Assert.assertTrue("Purphoros should be a creature now but is not", purphorosGodOfTheForge.getCardType().contains(CardType.CREATURE));
+        Assert.assertTrue("Purphoros should be a creature now but is not", purphorosGodOfTheForge.isCreature(currentGame));
     }
 }

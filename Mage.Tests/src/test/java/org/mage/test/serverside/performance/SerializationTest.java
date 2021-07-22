@@ -7,13 +7,13 @@ import mage.cards.repository.CardRepository;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
 import mage.game.mulligan.LondonMulligan;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentImpl;
 import mage.remote.traffic.ZippedObjectImpl;
 import mage.util.CardUtil;
 import mage.utils.CompressUtil;
+import mage.view.GameView;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -76,9 +76,10 @@ public class SerializationTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        Object compressed = CompressUtil.compress(currentGame);
+        GameView gameView = getGameView(playerA);
+        Object compressed = CompressUtil.compress(gameView);
         Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
-        Game uncompressed = (Game) CompressUtil.decompress(compressed);
-        Assert.assertEquals("Must be same", 1, uncompressed.getBattlefield().getAllActivePermanents().size());
+        GameView uncompressed = (GameView) CompressUtil.decompress(compressed);
+        Assert.assertEquals("Must be same", 1, uncompressed.getPlayers().get(0).getBattlefield().size());
     }
 }

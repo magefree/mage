@@ -3,11 +3,11 @@ package mage.cards.b;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetAnyTarget;
-import mage.watchers.common.MorbidWatcher;
 import java.util.UUID;
 
 /**
@@ -26,7 +26,7 @@ public final class BrimstoneVolley extends CardImpl {
                         "<br><i>Morbid</i> &mdash; {this} deals 5 damage instead if a creature died this turn."
         ));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addWatcher(new MorbidWatcher());
+        this.getSpellAbility().addHint(MorbidHint.instance);
     }
 
     private BrimstoneVolley(final BrimstoneVolley card) {

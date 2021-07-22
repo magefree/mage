@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -25,7 +24,7 @@ public final class EnergyTap extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public EnergyTap(UUID ownerId, CardSetInfo setInfo) {
@@ -50,7 +49,7 @@ class EnergyTapEffect extends OneShotEffect {
 
     EnergyTapEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "Tap target untapped creature you control. If you do, add an amount of {C} equal to that creature's converted mana cost";
+        this.staticText = "Tap target untapped creature you control. If you do, add an amount of {C} equal to that creature's mana value";
     }
 
     EnergyTapEffect(final EnergyTapEffect effect) {
@@ -74,7 +73,7 @@ class EnergyTapEffect extends OneShotEffect {
         if (targetCreature != null) {
             applied = targetCreature.tap(source, game);
             if (applied) {
-                player.getManaPool().addMana(new Mana(0, 0, 0, 0, 0, 0, 0, targetCreature.getConvertedManaCost()), game, source);
+                player.getManaPool().addMana(new Mana(0, 0, 0, 0, 0, 0, 0, targetCreature.getManaValue()), game, source);
             }
         }
         return applied;

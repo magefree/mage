@@ -48,7 +48,7 @@ class ClarionUltimatumEffect extends OneShotEffect {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Choose five permanents you control. For each of those permanents, " +
                 "you may search your library for a card with the same name as that permanent. " +
-                "Put those cards onto the battlefield tapped, then shuffle your library";
+                "Put those cards onto the battlefield tapped, then shuffle";
     }
 
     public ClarionUltimatumEffect(final ClarionUltimatumEffect effect) {

@@ -18,7 +18,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -60,7 +60,7 @@ class NecroplasmEffect extends OneShotEffect {
     
     NecroplasmEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "destroy each creature with converted mana cost equal to the number of +1/+1 counters on {this}.";
+        this.staticText = "destroy each creature with mana value equal to the number of +1/+1 counters on {this}.";
     }
     
     NecroplasmEffect(final NecroplasmEffect effect) {
@@ -79,7 +79,7 @@ class NecroplasmEffect extends OneShotEffect {
         if (player != null && sourcePermanent != null) {
             int numCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, numCounters));
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, numCounters));
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if(permanent != null) {
                     permanent.destroy(source, game, false);

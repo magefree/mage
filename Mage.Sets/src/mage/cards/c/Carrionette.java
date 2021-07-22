@@ -31,7 +31,7 @@ public final class Carrionette extends CardImpl {
         // {2}{B}{B}: Exile Carrionette and target creature unless that creature's controller pays {2}. Activate this ability only if Carrionette is in your graveyard.
         DoUnlessTargetPlayerOrTargetsControllerPaysEffect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new ExileTargetEffect(), new ManaCostsImpl("{2}"));
         effect.addEffect(new ExileSourceEffect());
-        effect.setText("Exile {this} and target creature unless that creature's controller pays {2}. Activate this ability only if {this} is in your graveyard");
+        effect.setText("Exile {this} and target creature unless that creature's controller pays {2}. Activate only if {this} is in your graveyard");
         Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, effect, new ManaCostsImpl("{2}{B}{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

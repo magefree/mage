@@ -43,7 +43,7 @@ class MysticGenesisEffect extends OneShotEffect {
 
     public MysticGenesisEffect() {
         super(Outcome.Detriment);
-        staticText = "Counter target spell. Create an X/X green Ooze creature token, where X is that spell's converted mana cost";
+        staticText = "Counter target spell. Create an X/X green Ooze creature token, where X is that spell's mana value";
     }
 
     public MysticGenesisEffect(final MysticGenesisEffect effect) {
@@ -60,7 +60,7 @@ class MysticGenesisEffect extends OneShotEffect {
         StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
         if (stackObject != null) {
             game.getStack().counter(source.getFirstTarget(), source, game);
-            return new CreateTokenEffect(new MysticGenesisOozeToken(stackObject.getConvertedManaCost())).apply(game, source);
+            return new CreateTokenEffect(new MysticGenesisOozeToken(stackObject.getManaValue())).apply(game, source);
         }
         return false;
     }

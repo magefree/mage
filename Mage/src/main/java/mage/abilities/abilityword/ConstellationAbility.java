@@ -4,6 +4,7 @@ package mage.abilities.abilityword;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.AbilityWord;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -30,6 +31,7 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
     public ConstellationAbility(Effect effect, boolean optional, boolean thisOr) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.thisOr = thisOr;
+        setAbilityWord(AbilityWord.CONSTELLATION);
     }
 
     public ConstellationAbility(final ConstellationAbility ability) {
@@ -53,13 +55,12 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
             return false;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && ((thisOr && permanent.getId().equals(getSourceId())) || permanent.isEnchantment());
+        return permanent != null && ((thisOr && permanent.getId().equals(getSourceId())) || permanent.isEnchantment(game));
     }
 
     @Override
-    public String getRule() {
-        return "<i>Constellation</i> &mdash; Whenever "
-                + (thisOr ? "{this} or another" : "an")
-                + " enchantment enters the battlefield under your control, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever " + (thisOr ? "{this} or another" : "an")
+                + " enchantment enters the battlefield under your control, ";
     }
 }

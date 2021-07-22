@@ -27,7 +27,7 @@ public final class MartyrsSoul extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     private static final Condition condition
@@ -49,7 +49,7 @@ public final class MartyrsSoul extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(2)
                 )), condition, "When {this} enters the battlefield, " +
-                "if you control no tapped lands, put two +1/+1 counters on it"
+                "if you control no tapped lands, put two +1/+1 counters on it."
         ));
     }
 

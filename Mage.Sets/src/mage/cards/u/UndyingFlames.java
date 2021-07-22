@@ -47,7 +47,7 @@ class UndyingFlamesEffect extends OneShotEffect {
 
     public UndyingFlamesEffect() {
         super(Outcome.Benefit);
-        staticText = "Exile cards from the top of your library until you exile a nonland card. {this} deals damage to any target equal to that card's converted mana cost";
+        staticText = "Exile cards from the top of your library until you exile a nonland card. {this} deals damage to any target equal to that card's mana value";
     }
 
     public UndyingFlamesEffect(final UndyingFlamesEffect effect) {
@@ -63,8 +63,8 @@ class UndyingFlamesEffect extends OneShotEffect {
                 Card card = controller.getLibrary().getFromTop(game);
                 if (card != null) {
                     controller.moveCards(card, Zone.EXILED, source, game);
-                    if (!card.isLand()) {
-                        new DamageTargetEffect(card.getConvertedManaCost()).apply(game, source);
+                    if (!card.isLand(game)) {
+                        new DamageTargetEffect(card.getManaValue()).apply(game, source);
                         break;
                     }
                 }

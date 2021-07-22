@@ -73,8 +73,8 @@ class ZhurTaaDruidAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you tap {this} for mana, it deals 1 damage to each opponent.";
+    public String getTriggerPhrase() {
+        return "Whenever you tap {this} for mana, " ;
     }
 
     @Override

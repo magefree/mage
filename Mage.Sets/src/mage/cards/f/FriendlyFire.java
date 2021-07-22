@@ -41,7 +41,7 @@ class FriendlyFireEffect extends OneShotEffect {
 
     public FriendlyFireEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target creature's controller reveals a card at random from their hand. {this} deals damage to that creature and that player equal to the revealed card's converted mana cost";
+        this.staticText = "Target creature's controller reveals a card at random from their hand. {this} deals damage to that creature and that player equal to the revealed card's mana value";
     }
 
     public FriendlyFireEffect(final FriendlyFireEffect effect) {
@@ -67,7 +67,7 @@ class FriendlyFireEffect extends OneShotEffect {
                         if (card != null) {
                             Cards cards = new CardsImpl(card);
                             controllerOfTargetCreature.revealCards(sourceObject.getName(), cards, game);
-                            int damage = card.getConvertedManaCost();
+                            int damage = card.getManaValue();
                             targetCreature.damage(damage, source.getSourceId(), source, game, false, true);
                             controllerOfTargetCreature.damage(damage, source.getSourceId(), source, game);
                             return true;

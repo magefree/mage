@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
@@ -31,7 +31,7 @@ public final class BloodchiefsThirst extends CardImpl {
 
         // Destroy target creature or planeswalker with converted mana cost 2 or less. If this spell was kicked, instead destroy target creature or planeswalker.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(
-                "Destroy target creature or planeswalker with converted mana cost 2 or less. " +
+                "Destroy target creature or planeswalker with mana value 2 or less. " +
                         "If this spell was kicked, instead destroy target creature or planeswalker."
         ));
         this.getSpellAbility().setTargetAdjuster(BloodchiefsThirstAdjuster.instance);
@@ -51,11 +51,11 @@ enum BloodchiefsThirstAdjuster implements TargetAdjuster {
     instance;
 
     private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent(
-            "creature or planeswalker with converted mana cost 2 or less"
+            "creature or planeswalker with mana value 2 or less"
     );
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     @Override

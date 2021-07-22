@@ -56,7 +56,7 @@ class PlaneswalkersFavorEffect extends OneShotEffect {
 
     public PlaneswalkersFavorEffect() {
         super(Outcome.Damage);
-        staticText = "Target opponent reveals a card at random from their hand. Target creature gets +X/+X until end of turn, where X is the revealed card's converted mana cost";
+        staticText = "Target opponent reveals a card at random from their hand. Target creature gets +X/+X until end of turn, where X is the revealed card's mana value";
     }
 
     public PlaneswalkersFavorEffect(final PlaneswalkersFavorEffect effect) {
@@ -71,7 +71,7 @@ class PlaneswalkersFavorEffect extends OneShotEffect {
             Card card = opponent.getHand().getRandom(game);
             if (card != null) {
                 revealed.add(card);
-                int boostValue = card.getConvertedManaCost();
+                int boostValue = card.getManaValue();
                 opponent.revealCards("Planeswalker's Favor", revealed, game);
                 ContinuousEffect effect = new BoostTargetEffect(boostValue, boostValue, Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(source.getTargets().get(1).getFirstTarget()));

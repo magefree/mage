@@ -7,6 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.WishEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -50,7 +51,7 @@ public final class KarnTheGreatCreator extends CardImpl {
         // -2: You may choose an artifact card you own from outside the game or in exile, reveal that card, and put it into your hand.
         this.addAbility(new LoyaltyAbility(new WishEffect(
                 StaticFilters.FILTER_CARD_ARTIFACT_AN, true, true
-        ), -2));
+        ), -2).addHint(OpenSideboardHint.instance));
     }
 
     private KarnTheGreatCreator(final KarnTheGreatCreator card) {
@@ -76,7 +77,7 @@ class KarnTheGreatCreatorCantActivateEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.isArtifact() && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
+        return permanent.isArtifact(game) && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
     }
 
     @Override
@@ -95,7 +96,7 @@ class KarnTheGreatCreatorAnimateEffect extends ContinuousEffectImpl {
     KarnTheGreatCreatorAnimateEffect() {
         super(Duration.UntilYourNextTurn, Outcome.BecomeCreature);
         staticText = "Until your next turn, up to one target noncreature artifact becomes " +
-                "an artifact creature with power and toughness each equal to its converted mana cost.";
+                "an artifact creature with power and toughness each equal to its mana value.";
     }
 
     private KarnTheGreatCreatorAnimateEffect(final KarnTheGreatCreatorAnimateEffect effect) {
@@ -116,15 +117,15 @@ class KarnTheGreatCreatorAnimateEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
-                    if (!artifact.isCreature()) {
-                        artifact.addCardType(CardType.CREATURE);
+                    if (!artifact.isCreature(game)) {
+                        artifact.addCardType(game, CardType.CREATURE);
                     }
                 }
                 break;
 
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    int cmc = artifact.getConvertedManaCost();
+                    int cmc = artifact.getManaValue();
                     artifact.getPower().setValue(cmc);
                     artifact.getToughness().setValue(cmc);
                 }

@@ -553,7 +553,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     new LoseControlOnOtherPlayersControllerEffect(this.getLogName(), player.getLogName()));
             ability.setSourceId(getId());
             ability.setControllerId(getId());
-            game.addDelayedTriggeredAbility(ability);
+            game.addDelayedTriggeredAbility(ability, null);
         }
     }
 
@@ -720,20 +720,20 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public Card discardOne(boolean random, boolean payForCost, Ability source, Game game) {
-        Cards cards = discard(1, random, payForCost, source, game);
-        if (cards.isEmpty()) {
-            return null;
-        }
-        return cards.getRandom(game);
+        return discard(1, random, payForCost, source, game).getRandom(game);
     }
 
     @Override
     public Cards discard(int amount, boolean random, boolean payForCost, Ability source, Game game) {
-        Cards discardedCards = doDiscardWithoutFinalEvent(amount, random, payForCost, source, game);
-        if (!discardedCards.isEmpty()) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARDS, null, source, playerId, discardedCards.size()));
+        if (random) {
+            return discard(getRandomToDiscard(amount, source, game), payForCost, source, game);
         }
-        return discardedCards;
+        return discard(amount, amount, payForCost, source, game);
+    }
+
+    @Override
+    public Cards discard(int minAmount, int maxAmount, boolean payForCost, Ability source, Game game) {
+        return discard(getToDiscard(minAmount, maxAmount, source, game), payForCost, source, game);
     }
 
     @Override
@@ -748,46 +748,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
         if (!discardedCards.isEmpty()) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARDS, null, source, playerId, discardedCards.size()));
-        }
-        return discardedCards;
-    }
-
-    private Cards doDiscardWithoutFinalEvent(int amount, boolean random, boolean payForCost, Ability source, Game game) {
-        Cards discardedCards = new CardsImpl();
-        if (amount <= 0) {
-            return discardedCards;
-        }
-
-        // all without dialogs
-        if (this.getHand().size() == 1 || this.getHand().size() == amount) {
-            List<UUID> cardsToDiscard = new ArrayList<>(this.getHand());
-            for (UUID id : cardsToDiscard) {
-                if (doDiscard(this.getHand().get(id, game), source, game, payForCost, false)) {
-                    discardedCards.add(id);
-                }
-            }
-            return discardedCards;
-        }
-
-        if (random) {
-            for (int i = 0; i < amount; i++) {
-                Card card = this.getHand().getRandom(game);
-                if (doDiscard(card, source, game, payForCost, false)) {
-                    discardedCards.add(card);
-                }
-            }
-        } else {
-            int possibleAmount = Math.min(getHand().size(), amount);
-            TargetDiscard target = new TargetDiscard(possibleAmount, possibleAmount,
-                    new FilterCard(CardUtil.numberToText(possibleAmount, "a")
-                            + " card" + (possibleAmount > 1 ? "s" : "")), playerId);
-            choose(Outcome.Discard, target, source == null ? null : source.getSourceId(), game);
-            for (UUID cardId : target.getTargets()) {
-                if (doDiscard(this.getHand().get(cardId, game), source, game, payForCost, false)) {
-                    discardedCards.add(cardId);
-                }
-            }
+            game.fireEvent(new DiscardedCardsEvent(source, playerId, discardedCards.size(), discardedCards));
         }
         return discardedCards;
     }
@@ -795,6 +756,38 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean discard(Card card, boolean payForCost, Ability source, Game game) {
         return doDiscard(card, source, game, payForCost, true);
+    }
+
+    private Cards getToDiscard(int minAmount, int maxAmount, Ability source, Game game) {
+        Cards toDiscard = new CardsImpl();
+        if (minAmount > maxAmount) {
+            return getToDiscard(maxAmount, minAmount, source, game);
+        }
+        if (maxAmount < 1) {
+            return toDiscard;
+        }
+        if (getHand().size() <= minAmount) {
+            toDiscard.addAll(getHand());
+            return toDiscard;
+        }
+        TargetDiscard target = new TargetDiscard(minAmount, maxAmount, StaticFilters.FILTER_CARD, getId());
+        choose(Outcome.Discard, target, source != null ? source.getSourceId() : null, game);
+        toDiscard.addAll(target.getTargets());
+        return toDiscard;
+    }
+
+    private Cards getRandomToDiscard(int amount, Ability source, Game game) {
+        Cards toDiscard = new CardsImpl();
+        Cards hand = getHand().copy();
+        for (int i = 0; i < amount; i++) {
+            if (hand.isEmpty()) {
+                break;
+            }
+            Card card = hand.getRandom(game);
+            hand.remove(card);
+            toDiscard.add(card);
+        }
+        return toDiscard;
     }
 
     private boolean doDiscard(Card card, Ability source, Game game, boolean payForCost, boolean fireFinalEvent) {
@@ -833,7 +826,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source, playerId));
 
         if (fireFinalEvent) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARDS, null, source, playerId, 1));
+            game.fireEvent(new DiscardedCardsEvent(source, playerId, 1, new CardsImpl(card)));
         }
         return true;
     }
@@ -1137,7 +1130,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
         boolean result;
-        if (card.isLand()) {
+        if (card.isLand(game)) {
             result = playLand(card, game, ignoreTiming);
         } else {
             result = cast(card.getSpellAbility(), game, noMana, approvingObject);
@@ -1183,6 +1176,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (spell == null) {
                     logger.error("Got no spell from stack. ability: " + ability.getRule());
                     return false;
+                }
+                if (card.isCopy()) {
+                    spell.setCopy(true, null);
                 }
                 // Update the zcc to the stack
                 ability.setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(ability.getSourceId()));
@@ -1503,6 +1499,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (sourceObject != null) {
             sourceObject.adjustTargets(ability, game);
         }
+        UUID triggerId = null;
         if (ability.canChooseTarget(game, playerId)) {
             if (ability.isUsesStack()) {
                 game.getStack().push(new StackAbility(ability, playerId));
@@ -1516,14 +1513,23 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (!ability.isUsesStack()) {
                     ability.resolve(game);
                 } else {
-                    game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY,
-                            ability.getId(), ability, ability.getControllerId()));
+                    game.fireEvent(new GameEvent(
+                            GameEvent.EventType.TRIGGERED_ABILITY,
+                            ability.getId(), ability, ability.getControllerId()
+                    ));
+                    triggerId = ability.getId();
                 }
                 game.removeBookmark(bookmark);
                 return true;
             }
         }
         restoreState(bookmark, triggeredAbility.getRule(), game); // why restore is needed here? (to remove the triggered ability from the stack because of no possible targets)
+        GameEvent event = new GameEvent(
+                GameEvent.EventType.ABILITY_TRIGGERED,
+                triggerId, ability, ability.getControllerId()
+        );
+        game.getState().setValue(event.getId().toString(), ability.getTriggerEvent());
+        game.fireEvent(event);
         return false;
     }
 
@@ -2731,7 +2737,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
 
-        if (!targetPlayer.chooseUse(Outcome.AIDontUseIt, "Library have " + castableCards.size() + " castable cards on searching. Do you want to cast it?", null, game)) {
+        if (!targetPlayer.chooseUse(Outcome.AIDontUseIt, "There are " + castableCards.size() + " cards you can cast while searching your library. Cast any of them?", null, game)) {
             return false;
         }
 
@@ -3400,7 +3406,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // return play ability that can activate AlternativeSourceCosts
         if (ability instanceof AlternativeSourceCosts && object != null && !(object instanceof Permanent)) {
             ActivatedAbility playAbility = null;
-            if (object.isLand()) {
+            if (object.isLand(game)) {
                 playAbility = (PlayLandAbility) CardUtil.getAbilities(object, game).stream().filter(a -> a instanceof PlayLandAbility).findFirst().orElse(null);
             } else if (object instanceof Card) {
                 playAbility = ((Card) object).getSpellAbility();
@@ -3640,11 +3646,20 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
 
-            // check to play companion cards
+            // outside cards
             if (fromAll || fromZone == Zone.OUTSIDE) {
+                // companion cards
                 for (Cards companionCards : game.getState().getCompanion().values()) {
                     for (Card card : companionCards.getCards(game)) {
                         getPlayableFromObjectAll(game, Zone.OUTSIDE, card, availableMana, playable);
+                    }
+                }
+
+                // sideboard cards (example: Wish)
+                for (UUID sideboardCardId : this.getSideboard()) {
+                    Card sideboardCard = game.getCard(sideboardCardId);
+                    if (sideboardCard != null) {
+                        getPlayableFromObjectAll(game, Zone.OUTSIDE, sideboardCard, availableMana, playable);
                     }
                 }
             }
@@ -4297,7 +4312,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (userData.askMoveToGraveOrder()) {
                     if (cards.size() > 1) {
                         chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral,
-                                "Would you like to choose the order the cards go to graveyard?", source, game);
+                                "Choose the order in which the cards go to the graveyard?", source, game);
                     }
                 }
                 if (chooseOrder) {
@@ -4720,5 +4735,4 @@ public abstract class PlayerImpl implements Player, Serializable {
     public String toString() {
         return getName() + " (" + super.getClass().getSimpleName() + ")";
     }
-
 }

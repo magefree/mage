@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -73,11 +73,11 @@ class OrahSkyclaveHierophantTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         FilterCard filterCard = new FilterCard(
-                "Cleric card with converted mana cost less than " + (zEvent.getTarget().getConvertedManaCost())
+                "Cleric card with mana value less than " + (zEvent.getTarget().getManaValue())
         );
         filterCard.add(SubType.CLERIC.getPredicate());
-        filterCard.add(new ConvertedManaCostPredicate(
-                ComparisonType.FEWER_THAN, zEvent.getTarget().getConvertedManaCost()
+        filterCard.add(new ManaValuePredicate(
+                ComparisonType.FEWER_THAN, zEvent.getTarget().getManaValue()
         ));
         this.getTargets().clear();
         this.addTarget(new TargetCardInYourGraveyard(filterCard));
@@ -92,6 +92,6 @@ class OrahSkyclaveHierophantTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever {this} or another Cleric you control dies, return target Cleric card " +
-                "with lesser converted mana cost from your graveyard to the battlefield.";
+                "with lesser mana value from your graveyard to the battlefield.";
     }
 }

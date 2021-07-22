@@ -1,11 +1,8 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.constants.SubType;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MorphAbility;
@@ -13,11 +10,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ThrashingMudspawn extends CardImpl {
@@ -30,11 +29,13 @@ public final class ThrashingMudspawn extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Thrashing Mudspawn is dealt damage, you lose that much life.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(new ThrashingMudspawnEffect(), false);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(
+                new ThrashingMudspawnEffect(), false, false, true
+        );
         this.addAbility(ability);
 
         // Morph {1}{B}{B}
-        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{B}{B}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{1}{B}{B}")));
 
     }
 
@@ -66,14 +67,12 @@ class ThrashingMudspawnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = (Integer) getValue("damage");
-        if (amount > 0) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                player.loseLife(amount, game, source, false);
-                return true;
-            }
+        Integer amount = (Integer) getValue("damage");
+        Player player = game.getPlayer(source.getControllerId());
+        if (amount == null || amount < 1 || player == null) {
+            return false;
         }
-        return false;
+        player.loseLife(amount, game, source, false);
+        return true;
     }
 }

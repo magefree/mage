@@ -23,6 +23,7 @@ public final class PhyrexianColossus extends CardImpl {
 
     public PhyrexianColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

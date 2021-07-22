@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CommanderCardType;
 import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -93,7 +94,7 @@ class PathOfAncestryTriggeredAbility extends DelayedTriggeredAbility {
         }
 
         // share creature type with commander
-        for (Card commander : game.getCommanderCardsFromAnyZones(player, CommanderCardType.COMMANDER_OR_OATHBREAKER)) {
+        for (Card commander : game.getCommanderCardsFromAnyZones(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, Zone.ALL)) {
             if (spell.getCard().shareCreatureTypes(game, commander)) {
                 return true;
             }

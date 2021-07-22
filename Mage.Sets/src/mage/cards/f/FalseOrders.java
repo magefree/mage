@@ -114,8 +114,8 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
             }
         }
 
-        if (!permanent.isCreature()
-                || !controller.chooseUse(Outcome.Benefit, "Do you want " + permanent.getLogName() + " to block an attacking creature?", source, game)) {
+        if (!permanent.isCreature(game)
+                || !controller.chooseUse(Outcome.Benefit, "Have " + permanent.getLogName() + " block an attacking creature?", source, game)) {
             return false;
         }
         // Choose new creature to block
@@ -147,7 +147,7 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
             return true;
         }
         Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());
-        if (chosenPermanent == null || !chosenPermanent.isCreature()) {
+        if (chosenPermanent == null || !chosenPermanent.isCreature(game)) {
             return false;
         }
         CombatGroup chosenGroup = game.getCombat().findGroup(chosenPermanent.getId());

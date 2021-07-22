@@ -29,7 +29,7 @@ public final class AetherTide extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}");
 
         // As an additional cost to cast Aether Tide, discard X creature cards.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new InfoEffect("As an additional cost to cast {this}, discard X creature cards"));
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new InfoEffect("As an additional cost to cast this spell, discard X creature cards"));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

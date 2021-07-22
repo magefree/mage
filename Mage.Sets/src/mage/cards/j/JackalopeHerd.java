@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class JackalopeHerd extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When you cast a spell, return Jackalope Herd to its owner's hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), new FilterSpell("a spell"), false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), StaticFilters.FILTER_SPELL_A, false));
     }
 
     private JackalopeHerd(final JackalopeHerd card) {

@@ -30,7 +30,7 @@ public class GenericManaCost extends ManaCostImpl {
     }
 
     @Override
-    public int convertedManaCost() {
+    public int manaValue() {
         return mana;
     }
 

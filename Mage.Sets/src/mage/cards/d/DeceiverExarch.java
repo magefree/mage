@@ -32,6 +32,7 @@ public final class DeceiverExarch extends CardImpl {
 
     public DeceiverExarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(1);

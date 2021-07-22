@@ -149,6 +149,6 @@ class HakimLoreweaverCondition implements Condition {
 
     @Override
     public String toString() {
-        return "only during your upkeep and only if {this} isn't enchanted";
+        return "during your upkeep and only if {this} isn't enchanted";
     }
 }

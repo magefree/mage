@@ -65,7 +65,7 @@ class PhyrexianUnlifeEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ((DamageEvent) event).setAsThoughInfect(true);
-        return true;
+        return false;
     }
 
     @Override

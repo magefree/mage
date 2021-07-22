@@ -131,7 +131,7 @@ class TezzeretMasterOfTheBridgeEffect2 extends OneShotEffect {
         player.moveCards(cards, Zone.EXILED, source, game);
         Cards cards2 = new CardsImpl();
         for (Card card : cards.getCards(game)) {
-            if (card.isArtifact()) {
+            if (card.isArtifact(game)) {
                 cards2.add(card);
             }
         }

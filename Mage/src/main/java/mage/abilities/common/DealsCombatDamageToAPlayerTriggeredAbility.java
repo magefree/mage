@@ -78,7 +78,7 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
             case DAMAGED_PERMANENT:
                 Permanent permanent = game.getPermanent(event.getTargetId());
                 if (permanent == null
-                        || !permanent.isPlaneswalker()
+                        || !permanent.isPlaneswalker(game)
                         || !orPlaneswalker) {
                     return false;
                 }
@@ -93,12 +93,16 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     @Override
     public String getRule() {
         if (text == null || text.isEmpty()) {
-            return "Whenever {this} deals combat damage to "
-                    + (onlyOpponents ? "an opponent" : "a player")
-                    + (orPlaneswalker ? " or planeswalker" : "")
-                    + ", " + super.getRule();
+            return super.getRule();
         }
         return text;
     }
 
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever {this} deals combat damage to "
+                + (onlyOpponents ? "an opponent" : "a player")
+                + (orPlaneswalker ? " or planeswalker" : "")
+                + ", ";
+    }
 }

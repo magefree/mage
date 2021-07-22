@@ -21,7 +21,7 @@ public final class StrokeOfGenius extends CardImpl {
 
 
         // Target player draws X cards.
-        this.getSpellAbility().addEffect(new DrawCardTargetEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new DrawCardTargetEffect(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

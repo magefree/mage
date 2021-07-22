@@ -75,7 +75,7 @@ class AetherplasmEffect extends OneShotEffect {
                             && game.getCombat() != null && blockedCreature != null) {
                         CombatGroup attacker = game.getCombat().findGroup(blockedCreature.getId());
                         Permanent putIntoPlay = game.getPermanent(target.getFirstTarget());
-                        if (putIntoPlay != null && putIntoPlay.isCreature() && attacker != null) {
+                        if (putIntoPlay != null && putIntoPlay.isCreature(game) && attacker != null) {
                             game.getCombat().findGroup(blockedCreature.getId()).addBlocker(putIntoPlay.getId(), source.getControllerId(), game);
 
                         }

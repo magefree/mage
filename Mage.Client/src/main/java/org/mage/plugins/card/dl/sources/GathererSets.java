@@ -14,6 +14,10 @@ import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
+/**
+ * WARNING, unsupported images plugin, last updates from 2018
+ */
+
 public class GathererSets implements Iterable<DownloadJob> {
 
     private class CheckResult {
@@ -63,7 +67,7 @@ public class GathererSets implements Iterable<DownloadJob> {
             "W16", "W17",
             // "PALP" -- Gatherer does not have the set Asia Pacific Land Program
             // "ATH" -- has cards from many sets, symbol does not exist on gatherer
-            // "CP", "DPA", "PELP", "PGPX", "PGRU", "H17", "JR", "PPRE", "SWS", // need to fix
+            // "CP", "DPA", "PELP", "PGPX", "PGRU", "H17", "JR", "SWS", // need to fix
             "H09", "PD2", "PD3", "UNH", "CM1", "V11", "A25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "8EB", "9EB", "CHR", "G18", "GVL", "S00", "S99", "UGL" // ok
             // current testing
     };
@@ -99,7 +103,7 @@ public class GathererSets implements Iterable<DownloadJob> {
 
     private static final String[] symbolsOnlyMyth = {
             "DRB", "V09", "V10", "V12", "V13", "V14", "V15", "V16", "V17", "EXP", "MED"
-            // "HTR" does not exist
+            // "HTR16" does not exist
     };
     private static final String[] symbolsOnlySpecial = {
             "MPS", "MP2"

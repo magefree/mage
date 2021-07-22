@@ -45,7 +45,7 @@ public final class BoundByMoonsilver extends CardImpl {
 
         // Enchanted permanent can't attack, block, or transform.
         Effect effect = new CantAttackBlockTransformAttachedEffect();
-        effect.setText("Enchanted permanent can't attack, block, or transform.");
+        effect.setText("Enchanted creature can't attack, block, or transform.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // Sacrifice another permanent: Attach Bound by Moonsilver to target creature. Activate this ability only any time you could cast a sorcery and only once each turn.

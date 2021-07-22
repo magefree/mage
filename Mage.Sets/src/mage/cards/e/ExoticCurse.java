@@ -7,6 +7,7 @@ import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +36,7 @@ public final class ExoticCurse extends CardImpl {
         DynamicValue unboost = new SignInversionDynamicValue(new DomainValue());
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(unboost, unboost, Duration.WhileOnBattlefield));
         ability.setAbilityWord(AbilityWord.DOMAIN);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(DomainHint.instance));
     }
 
     private ExoticCurse(final ExoticCurse card) {

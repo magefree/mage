@@ -83,7 +83,7 @@ class AuntiesSnitchTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
         Permanent p = game.getPermanent(event.getSourceId());
-        return damageEvent.isCombatDamage() && p != null && filter.match(p, getSourceId(), getControllerId(), game);
+        return damageEvent.isCombatDamage() && filter.match(p, getSourceId(), getControllerId(), game);
     }
 
     @Override

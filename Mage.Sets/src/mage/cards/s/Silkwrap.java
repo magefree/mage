@@ -15,7 +15,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -27,10 +27,10 @@ import mage.util.CardUtil;
  */
 public final class Silkwrap extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 3 or less an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value 3 or less an opponent controls");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
@@ -59,7 +59,7 @@ class SilkwrapEffect extends OneShotEffect {
 
     public SilkwrapEffect() {
         super(Outcome.Neutral);
-        this.staticText = "exile target creature with converted mana cost 3 or less an opponent controls until {this} leaves the battlefield. <i>(That creature returns under its owner's control.)</i>";
+        this.staticText = "exile target creature with mana value 3 or less an opponent controls until {this} leaves the battlefield. <i>(That creature returns under its owner's control.)</i>";
     }
 
     public SilkwrapEffect(final SilkwrapEffect effect) {

@@ -42,7 +42,7 @@ public final class TalonOfPain extends CardImpl {
         this.addAbility(new TalonOfPainTriggeredAbility());
 
         // {X}, {T}, Remove X charge counters from Talon of Pain: Talon of Pain deals X damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.instance), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TalonOfPainRemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance()));
         ability.addTarget(new TargetAnyTarget());
@@ -100,8 +100,8 @@ public final class TalonOfPain extends CardImpl {
         }
 
         @Override
-        public String getRule() {
-            return "Whenever a source you control other than {this} deals damage to an opponent, " + super.getRule();
+        public String getTriggerPhrase() {
+            return "Whenever a source you control other than {this} deals damage to an opponent, " ;
         }
     }
 }

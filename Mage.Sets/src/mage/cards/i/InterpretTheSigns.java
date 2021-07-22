@@ -39,7 +39,7 @@ class InterpretTheSignsEffect extends OneShotEffect {
 
     public InterpretTheSignsEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "scry 3, then reveal the top card of your library. Draw cards equal to that card's converted mana cost";
+        this.staticText = "scry 3, then reveal the top card of your library. Draw cards equal to that card's mana value";
     }
 
     public InterpretTheSignsEffect(final InterpretTheSignsEffect effect) {
@@ -63,7 +63,7 @@ class InterpretTheSignsEffect extends OneShotEffect {
             return true;
         }
         controller.revealCards(source, new CardsImpl(card), game);
-        controller.drawCards(card.getConvertedManaCost(), source, game);
+        controller.drawCards(card.getManaValue(), source, game);
         return true;
     }
 }

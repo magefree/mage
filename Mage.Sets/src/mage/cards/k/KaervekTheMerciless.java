@@ -51,7 +51,7 @@ class KaervekTheMercilessEffect extends OneShotEffect {
 
     public KaervekTheMercilessEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} deals damage to any target equal to that spell's converted mana cost";
+        this.staticText = "{this} deals damage to any target equal to that spell's mana value";
     }
 
     public KaervekTheMercilessEffect(final KaervekTheMercilessEffect effect) {
@@ -67,7 +67,7 @@ class KaervekTheMercilessEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         if (spell != null) {
-            int cost = spell.getConvertedManaCost();
+            int cost = spell.getManaValue();
             Player target = game.getPlayer(source.getFirstTarget());
             if (target != null) {
                 target.damage(cost, source.getSourceId(), source, game);

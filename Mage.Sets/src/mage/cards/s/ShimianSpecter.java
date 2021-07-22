@@ -70,7 +70,7 @@ class ShimianSpecterEffect extends OneShotEffect {
         staticText = "that player reveals their hand. You choose a nonland card from it. "
                 + "Search that player's graveyard, hand, and library for all cards "
                 + "with the same name as that card and exile them. Then that "
-                + "player shuffles their library";
+                + "player shuffles";
     }
 
     public ShimianSpecterEffect(final ShimianSpecterEffect effect) {

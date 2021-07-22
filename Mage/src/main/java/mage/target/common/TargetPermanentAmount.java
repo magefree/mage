@@ -51,7 +51,7 @@ public abstract class TargetPermanentAmount extends TargetAmount {
     @Override
     public boolean canTarget(UUID objectId, Game game) {
         Permanent permanent = game.getPermanent(objectId);
-        return permanent != null && filter.match(permanent, game);
+        return filter.match(permanent, game);
     }
 
     @Override

@@ -18,6 +18,7 @@ public final class NorwoodRanger extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SCOUT);
+        this.subtype.add(SubType.RANGER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

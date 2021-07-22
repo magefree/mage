@@ -18,7 +18,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -77,7 +76,7 @@ class MishraArtificerProdigyTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isArtifact()) {
+            if (spell != null && spell.isArtifact(game)) {
                 ((MishraArtificerProdigyEffect) this.getEffects().get(0)).setName(spell.getName());
                 return true;
             }
@@ -87,7 +86,7 @@ class MishraArtificerProdigyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast an artifact spell, you may search your graveyard, hand, and/or library for a card with the same name as that spell and put it onto the battlefield. If you search your library this way, shuffle it.";
+        return "Whenever you cast an artifact spell, you may search your graveyard, hand, and/or library for a card with the same name as that spell and put it onto the battlefield. If you search your library this way, shuffle.";
     }
 }
 
@@ -97,7 +96,7 @@ class MishraArtificerProdigyEffect extends OneShotEffect {
 
     MishraArtificerProdigyEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Search your graveyard, hand, and/or library for a card named <i>" + cardName + "</i> and put it onto the battlefield. If you search your library this way, shuffle it.";
+        this.staticText = "Search your graveyard, hand, and/or library for a card named <i>" + cardName + "</i> and put it onto the battlefield. If you search your library this way, shuffle.";
     }
 
     MishraArtificerProdigyEffect(final MishraArtificerProdigyEffect effect) {

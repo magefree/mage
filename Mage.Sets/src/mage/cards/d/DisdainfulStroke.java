@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -17,9 +17,9 @@ import mage.target.TargetSpell;
  */
 public final class DisdainfulStroke extends CardImpl {
     
-    private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or greater");
+    private static final FilterSpell filter = new FilterSpell("spell with mana value 4 or greater");
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public DisdainfulStroke(UUID ownerId, CardSetInfo setInfo) {

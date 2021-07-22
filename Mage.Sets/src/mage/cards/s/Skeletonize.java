@@ -16,7 +16,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.token.SkeletonToken;
+import mage.game.permanent.token.SkeletonRegenerateToken;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.DamagedByWatcher;
 
@@ -74,7 +74,7 @@ class SkeletonizeEffect extends OneShotEffect {
 class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public SkeletonizeDelayedTriggeredAbility() {
-        super(new CreateTokenEffect(new SkeletonToken()), Duration.EndOfTurn);
+        super(new CreateTokenEffect(new SkeletonRegenerateToken()), Duration.EndOfTurn);
     }
 
     public SkeletonizeDelayedTriggeredAbility(final SkeletonizeDelayedTriggeredAbility ability) {
@@ -104,7 +104,7 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When a creature dealt damage this way dies this turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When a creature dealt damage this way dies this turn, " ;
     }
 }

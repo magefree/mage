@@ -50,7 +50,7 @@ class DovescapeEffect extends OneShotEffect {
 
     DovescapeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "counter that spell. That player creates X 1/1 white and blue Bird creature tokens with flying, where X is the spell's converted mana cost";
+        this.staticText = "counter that spell. That player creates X 1/1 white and blue Bird creature tokens with flying, where X is the spell's mana value";
     }
 
     DovescapeEffect(final DovescapeEffect effect) {
@@ -68,7 +68,7 @@ class DovescapeEffect extends OneShotEffect {
         int spellCMC = 0;
         UUID spellControllerID = null;
         if (spell != null) {
-            spellCMC = spell.getConvertedManaCost();
+            spellCMC = spell.getManaValue();
             spellControllerID = spell.getControllerId();
             game.getStack().counter(spell.getId(), source, game);
         }

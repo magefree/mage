@@ -13,7 +13,7 @@ import mage.constants.SuperType;
 public final class KaldraToken extends TokenImpl {
 
     public KaldraToken() {
-        super("Kaldra", "legendary 4/4 colorless Avatar creature token named Kaldra");
+        super("Kaldra", "Kaldra, a legendary 4/4 colorless Avatar creature token");
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.AVATAR);

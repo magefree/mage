@@ -33,7 +33,7 @@ public final class NyleasIntervention extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.instance, 2);
+    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
 
     public NyleasIntervention(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
@@ -62,7 +62,7 @@ class NyleasInterventionEffect extends OneShotEffect {
     NyleasInterventionEffect() {
         super(Outcome.Benefit);
         staticText = "search your library for up to X land cards, " +
-                "reveal them, put them into your hand, then shuffle your library";
+                "reveal them, put them into your hand, then shuffle";
     }
 
     private NyleasInterventionEffect(final NyleasInterventionEffect effect) {

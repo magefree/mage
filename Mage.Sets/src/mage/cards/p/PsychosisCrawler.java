@@ -23,6 +23,7 @@ public final class PsychosisCrawler extends CardImpl {
 
     public PsychosisCrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(0);

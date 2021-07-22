@@ -65,7 +65,7 @@ class SavaenElvesPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permane
         Permanent attachment = input.getObject();
         if (attachment != null) {
             Permanent permanent = game.getPermanent(attachment.getAttachedTo());
-            if (permanent != null && permanent.isLand()) {
+            if (permanent != null && permanent.isLand(game)) {
                 return true;
             }
         }

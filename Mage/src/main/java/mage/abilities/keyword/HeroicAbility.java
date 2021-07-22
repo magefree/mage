@@ -5,6 +5,7 @@ import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.AbilityWord;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -20,7 +21,6 @@ import java.util.UUID;
  */
 public class HeroicAbility extends TriggeredAbilityImpl {
 
-    private final boolean isHeroic;
 
     public HeroicAbility(Effect effect) {
         this(effect, false);
@@ -32,12 +32,13 @@ public class HeroicAbility extends TriggeredAbilityImpl {
 
     public HeroicAbility(Effect effect, boolean optional, boolean isHeroic) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.isHeroic = isHeroic;
+        if (isHeroic) {
+            this.setAbilityWord(AbilityWord.HEROIC);
+        }
     }
 
     public HeroicAbility(final HeroicAbility ability) {
         super(ability);
-        this.isHeroic = ability.isHeroic;
     }
 
     @Override
@@ -84,7 +85,7 @@ public class HeroicAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return (isHeroic ? "<i>Heroic</i> &mdash; " : "") + "Whenever you cast a spell that targets {this}, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you cast a spell that targets {this}, ";
     }
 }

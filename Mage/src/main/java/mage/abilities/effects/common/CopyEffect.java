@@ -32,7 +32,7 @@ public class CopyEffect extends ContinuousEffectImpl {
     }
 
     public CopyEffect(Duration duration, MageObject copyFromObject, UUID copyToObjectId) {
-        super(duration, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
+        super(duration, Layer.CopyEffects_1, SubLayer.CopyEffects_1a, Outcome.BecomeCreature);
         this.copyFromObject = copyFromObject;
         this.copyToObjectId = copyToObjectId;
     }
@@ -78,7 +78,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         Permanent permanent = affectedObjectList.get(0).getPermanent(game);
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, source.getSourceObjectZoneChangeCounter());
-            // As long as the permanent is still in the LKI continue to copy to get triggered abilities to TriggeredAbilites for dies events.
+            // As long as the permanent is still in the LKI continue to copy to get triggered abilities to TriggeredAbilities for dies events.
             if (permanent == null) {
                 discard();
                 return false;
@@ -99,9 +99,9 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.getColor(game).setColor(copyFromObject.getColor(game));
         permanent.getManaCost().clear();
         permanent.getManaCost().add(copyFromObject.getManaCost());
-        permanent.getCardType().clear();
-        for (CardType type : copyFromObject.getCardType()) {
-            permanent.addCardType(type);
+        permanent.removeAllCardTypes(game);
+        for (CardType type : copyFromObject.getCardType(game)) {
+            permanent.addCardType(game, type);
         }
 
         permanent.removeAllSubTypes(game);

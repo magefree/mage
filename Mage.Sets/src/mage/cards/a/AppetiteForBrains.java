@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -17,10 +17,10 @@ import mage.target.common.TargetOpponent;
  */
 public final class AppetiteForBrains extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a card from it with converted mana cost 4 or greater");
+    private static final FilterCard filter = new FilterCard("a card from it with mana value 4 or greater");
     
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public AppetiteForBrains(UUID ownerId, CardSetInfo setInfo) {

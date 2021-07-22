@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -65,7 +64,7 @@ class VerdantSunsAvatarTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isCreature()
+        if (permanent != null && permanent.isCreature(game)
                 && permanent.isControlledBy(this.controllerId)) {
             Effect effect = this.getEffects().get(0);
             // Life is determined during resolution so it has to be retrieved there (e.g. Giant Growth before resolution)
@@ -77,8 +76,8 @@ class VerdantSunsAvatarTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} or another creature enters the battlefield under your control, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} or another creature enters the battlefield under your control, " ;
     }
 
     @Override

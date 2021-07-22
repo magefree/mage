@@ -13,7 +13,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -27,10 +27,10 @@ import java.util.UUID;
 public final class LegionsEnd extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterOpponentsCreaturePermanent("creature an opponent controls with converted mana cost 2 or less");
+            = new FilterOpponentsCreaturePermanent("creature an opponent controls with mana value 2 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public LegionsEnd(UUID ownerId, CardSetInfo setInfo) {
@@ -55,7 +55,7 @@ class LegionsEndEffect extends OneShotEffect {
 
     LegionsEndEffect() {
         super(Outcome.Benefit);
-        staticText = "Exile target creature an opponent controls with converted mana cost 2 or less " +
+        staticText = "Exile target creature an opponent controls with mana value 2 or less " +
                 "and all other creatures that player controls with the same name as that creature. " +
                 "Then that player reveals their hand and exiles all cards with that name from their hand and graveyard.";
     }

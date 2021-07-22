@@ -63,7 +63,7 @@ class HauntingWindTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (permanent == null || !permanent.isArtifact()) {
+            if (permanent == null || !permanent.isArtifact(game)) {
                 return false;
             }
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
@@ -81,7 +81,7 @@ class HauntingWindTriggeredAbility extends TriggeredAbilityImpl {
         }
         if (event.getType() == GameEvent.EventType.TAPPED) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (permanent == null || !permanent.isArtifact()) {
+            if (permanent == null || !permanent.isArtifact(game)) {
                 return false;
             }
             for (Effect effect : this.getEffects()) {

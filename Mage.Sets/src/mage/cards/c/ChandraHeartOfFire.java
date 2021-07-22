@@ -81,7 +81,7 @@ class ChandraHeartOfFireUltimateEffect extends OneShotEffect {
 
     ChandraHeartOfFireUltimateEffect() {
         super(Outcome.Benefit);
-        staticText = "Search your graveyard and library for any number of red instant and/or sorcery cards, exile them, then shuffle your library. You may cast them this turn";
+        staticText = "Search your graveyard and library for any number of red instant and/or sorcery cards, exile them, then shuffle. You may cast them this turn";
     }
 
     private ChandraHeartOfFireUltimateEffect(ChandraHeartOfFireUltimateEffect effect) {

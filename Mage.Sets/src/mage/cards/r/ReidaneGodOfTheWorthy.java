@@ -108,7 +108,7 @@ class ReidaneGodOfTheWorthyTapEffect extends ReplacementEffectImpl {
             return false;
         }
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null && permanent.isLand() && permanent.isSnow();
+        return permanent != null && permanent.isLand(game) && permanent.isSnow();
     }
 
     @Override
@@ -121,7 +121,7 @@ class ReidaneGodOfTheWorthyCostEffect extends CostModificationEffectImpl {
 
     ReidaneGodOfTheWorthyCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = "Noncreature spells your opponents cast with converted mana cost 4 or greater cost {2} more to cast";
+        staticText = "Noncreature spells your opponents cast with mana value 4 or greater cost {2} more to cast";
     }
 
     private ReidaneGodOfTheWorthyCostEffect(ReidaneGodOfTheWorthyCostEffect effect) {
@@ -142,7 +142,7 @@ class ReidaneGodOfTheWorthyCostEffect extends CostModificationEffectImpl {
             return false;
         }
         Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
-        return spellCard != null && !spellCard.isCreature() && spellCard.getConvertedManaCost() >= 4;
+        return spellCard != null && !spellCard.isCreature(game) && spellCard.getManaValue() >= 4;
     }
 
     @Override

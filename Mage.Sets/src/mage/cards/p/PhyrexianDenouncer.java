@@ -24,6 +24,7 @@ public final class PhyrexianDenouncer extends CardImpl {
 
     public PhyrexianDenouncer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CARRIER);
 
         this.power = new MageInt(1);

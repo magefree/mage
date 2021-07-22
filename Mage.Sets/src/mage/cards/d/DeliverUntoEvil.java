@@ -36,7 +36,7 @@ public final class DeliverUntoEvil extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 4));
 
         // Exile Deliver Unto Evil.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private DeliverUntoEvil(final DeliverUntoEvil card) {

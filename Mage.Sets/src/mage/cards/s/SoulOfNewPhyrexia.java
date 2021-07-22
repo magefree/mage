@@ -25,6 +25,7 @@ public final class SoulOfNewPhyrexia extends CardImpl {
 
     public SoulOfNewPhyrexia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(6);

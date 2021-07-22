@@ -84,7 +84,7 @@ class VialSmasherTheFierceTriggeredAbility extends SpellCastControllerTriggeredA
                     Spell spell = game.getStack().getSpell(event.getTargetId());
                     if (spell != null) {
                         for (Effect effect : getEffects()) {
-                            effect.setValue("VialSmasherTheFierceCMC", spell.getConvertedManaCost());
+                            effect.setValue("VialSmasherTheFierceCMC", spell.getManaValue());
                         }
                         return true;
                     }
@@ -97,7 +97,7 @@ class VialSmasherTheFierceTriggeredAbility extends SpellCastControllerTriggeredA
     @Override
     public String getRule() {
         return "Whenever you cast your first spell each turn, choose an opponent at random. "
-                + "{this} deals damage equal to that spell's converted mana cost to that player or a planeswalker that player controls.";
+                + "{this} deals damage equal to that spell's mana value to that player or a planeswalker that player controls.";
     }
 }
 
@@ -105,7 +105,7 @@ class VialSmasherTheFierceEffect extends OneShotEffect {
 
     public VialSmasherTheFierceEffect() {
         super(Outcome.Damage);
-        this.staticText = "{this} choose an opponent at random. {this} deals damage equal to that spell's converted mana cost to that player or a planeswalker that player controls";
+        this.staticText = "{this} choose an opponent at random. {this} deals damage equal to that spell's mana value to that player or a planeswalker that player controls";
     }
 
     public VialSmasherTheFierceEffect(final VialSmasherTheFierceEffect effect) {

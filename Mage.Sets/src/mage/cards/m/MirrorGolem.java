@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -20,8 +19,9 @@ import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author noahg
  */
 public final class MirrorGolem extends CardImpl {
@@ -34,8 +34,9 @@ public final class MirrorGolem extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Imprint - When Mirror Golem enters the battlefield, you may exile target card from a graveyard.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MirrorGolemImprintEffect(), true, "Imprint &mdash; ");
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MirrorGolemImprintEffect(), true);
         ability.addTarget(new TargetCardInGraveyard());
+        ability.withFlavorWord("Imprint");
         this.addAbility(ability);
 
         // Mirror Golem has protection from each of the exiled card's card types.
@@ -111,7 +112,7 @@ class MirrorGolemEffect extends ContinuousEffectImpl {
             if (imprinted != null && exileZone.contains(imprinted)) {
                 Card card = game.getCard(imprinted);
                 if (card != null) {
-                    for (CardType cardType : card.getCardType()) {
+                    for (CardType cardType : card.getCardType(game)) {
                         FilterCard filterCard;
                         if (cardType.equals(CardType.SORCERY)) {
                             filterCard = new FilterCard("sorceries");
@@ -121,7 +122,7 @@ class MirrorGolemEffect extends ContinuousEffectImpl {
                             filterCard = new FilterCard(cardType.toString() + "s");
                         }
                         filterCard.add(cardType.getPredicate());
-                        sourceObject.addAbility(new ProtectionAbility(filterCard));
+                        sourceObject.addAbility(new ProtectionAbility(filterCard), source.getSourceId(), game);
                     }
                 }
             }

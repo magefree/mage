@@ -41,7 +41,7 @@ class ForceMasteryEffect extends OneShotEffect {
 
     ForceMasteryEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "reveal the top card of your library and put that card into your hand. You gain life equal to its converted mana cost";
+        this.staticText = "reveal the top card of your library and put that card into your hand. You gain life equal to its mana value";
     }
 
     ForceMasteryEffect(final ForceMasteryEffect effect) {
@@ -56,7 +56,7 @@ class ForceMasteryEffect extends OneShotEffect {
             if (card != null) {
                 controller.revealCards(source, new CardsImpl(card), game);
                 controller.moveCards(card, Zone.HAND, source, game);
-                controller.gainLife(card.getConvertedManaCost(), game, source);
+                controller.gainLife(card.getManaValue(), game, source);
             }
             return true;
         }

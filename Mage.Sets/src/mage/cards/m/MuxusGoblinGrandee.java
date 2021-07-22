@@ -68,7 +68,7 @@ class MuxusGoblinGrandeeEffect extends OneShotEffect {
     MuxusGoblinGrandeeEffect() {
         super(Outcome.Benefit);
         staticText = "reveal the top six cards of your library. " +
-                "Put all Goblin creature cards with converted mana cost 5 or less " +
+                "Put all Goblin creature cards with mana value 5 or less " +
                 "from among them onto the battlefield and the rest on the bottom of your library in a random order.";
     }
 
@@ -95,9 +95,9 @@ class MuxusGoblinGrandeeEffect extends OneShotEffect {
                 .stream()
                 .filter(Objects::nonNull)
                 .forEach(card -> {
-                    if (card.isCreature()
+                    if (card.isCreature(game)
                             && card.hasSubtype(SubType.GOBLIN, game)
-                            && card.getConvertedManaCost() <= 5) {
+                            && card.getManaValue() <= 5) {
                         toBattlfield.add(card);
                     } else {
                         toBottom.add(card);

@@ -7,7 +7,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -16,10 +16,10 @@ import mage.target.TargetPermanent;
  */
 public final class Isolate extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("permanent with converted mana cost 1");
+    private static final FilterPermanent filter = new FilterPermanent("permanent with mana value 1");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, 1));
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, 1));
     }
 
     public Isolate(UUID ownerId, CardSetInfo setInfo) {

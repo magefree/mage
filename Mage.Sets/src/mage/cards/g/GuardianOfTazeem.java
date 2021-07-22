@@ -83,7 +83,7 @@ class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null
-                && permanent.isLand()
+                && permanent.isLand(game)
                 && permanent.isControlledBy(getControllerId())) {
             for (Effect effect : getEffects()) {
                 if (effect instanceof GuardianOfTazeemEffect) {
@@ -96,8 +96,8 @@ class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " ;
     }
 }
 

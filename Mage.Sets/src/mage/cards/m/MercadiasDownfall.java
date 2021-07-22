@@ -44,12 +44,11 @@ public final class MercadiasDownfall extends CardImpl {
         return new MercadiasDownfall(this);
     }
 
-    class DefendersNonBasicLandCount implements DynamicValue {
-
-        UUID defenderId;
+    static class DefendersNonBasicLandCount implements DynamicValue {
         
         @Override
         public int calculate(Game game, Ability sourceAbility, Effect effect) {
+            UUID defenderId;
             for (CombatGroup group : game.getCombat().getGroups()) {
                 defenderId = group.getDefenderId();
                 if (group.isDefenderIsPlaneswalker()) {
@@ -67,7 +66,7 @@ public final class MercadiasDownfall extends CardImpl {
         }
 
         @Override
-        public DynamicValue copy() {
+        public DefendersNonBasicLandCount copy() {
             return new DefendersNonBasicLandCount();
         }
 

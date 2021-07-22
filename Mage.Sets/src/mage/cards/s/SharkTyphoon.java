@@ -55,7 +55,7 @@ class SharkTyphoonCastEffect extends OneShotEffect {
 
     SharkTyphoonCastEffect() {
         super(Outcome.Benefit);
-        staticText = "create an X/X blue Shark creature token with flying, where X is that spell's converted mana cost";
+        staticText = "create an X/X blue Shark creature token with flying, where X is that spell's mana value";
     }
 
     private SharkTyphoonCastEffect(final SharkTyphoonCastEffect effect) {
@@ -72,7 +72,7 @@ class SharkTyphoonCastEffect extends OneShotEffect {
         Spell spell = game.getSpellOrLKIStack(getTargetPointer().getFirst(game, source));
         int xValue = 0;
         if (spell != null) {
-            xValue = spell.getConvertedManaCost();
+            xValue = spell.getManaValue();
         }
         return new SharkToken(xValue).putOntoBattlefield(1, game, source, source.getControllerId());
     }

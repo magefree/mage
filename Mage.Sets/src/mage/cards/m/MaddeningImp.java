@@ -54,7 +54,7 @@ public final class MaddeningImp extends CardImpl {
                 new TapSourceCost(), new MaddeningImpTurnCondition(),
                 "{T}: Non-Wall creatures the active player controls attack this turn if able. "
                 + "At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. "
-                + "Activate this ability only during an opponent's turn and only before combat.");
+                + "Activate only during an opponent's turn and only before combat.");
         ability.addEffect(new MaddeningImpCreateDelayedTriggeredAbilityEffect());
         this.addAbility(ability, new AttackedThisTurnWatcher());
 

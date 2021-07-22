@@ -55,7 +55,7 @@ public class GravestormAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Gravestorm <i>(When you cast this spell, copy it for each permanent put into a graveyard this turn. You may choose new targets for the copies.</i>)";
+        return "Gravestorm <i>(When you cast this spell, copy it for each permanent put into a graveyard this turn. You may choose new targets for the copies.)</i>";
     }
 }
 

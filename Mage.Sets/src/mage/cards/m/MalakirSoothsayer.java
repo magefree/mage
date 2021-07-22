@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -30,7 +29,7 @@ public final class MalakirSoothsayer extends CardImpl {
 
     static {
         filter.add(SubType.ALLY.getPredicate());
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public MalakirSoothsayer(UUID ownerId, CardSetInfo setInfo) {
@@ -43,7 +42,7 @@ public final class MalakirSoothsayer extends CardImpl {
 
         // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: You draw a card and you lose a life.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new DrawCardSourceControllerEffect(1),
+                new DrawCardSourceControllerEffect(1).setText("you draw a card"),
                 new TapSourceCost());
         ability.setAbilityWord(AbilityWord.COHORT);
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));

@@ -78,7 +78,7 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
         Permanent enteringCreature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (enteringCreature != null && sourcePermanent != null
                 && enteringCreature.isControlledBy(source.getControllerId())
-                && enteringCreature.isCreature()
+                && enteringCreature.isCreature(game)
                 && !event.getTargetId().equals(source.getSourceId())) {
             SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
             return subType != null && enteringCreature.hasSubtype(subType, game);

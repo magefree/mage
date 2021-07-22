@@ -21,7 +21,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -74,8 +74,8 @@ enum LazavTheMultifariousAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         int xValue = ability.getManaCostsToPay().getX();
-        FilterCard filterCard = new FilterCreatureCard("creature card with converted mana cost " + xValue + " in your graveyard");
-        filterCard.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        FilterCard filterCard = new FilterCreatureCard("creature card with mana value " + xValue + " in your graveyard");
+        filterCard.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.getTargets().clear();
         ability.getTargets().add(new TargetCardInYourGraveyard(filterCard));
     }
@@ -86,7 +86,7 @@ class LazavTheMultifariousEffect extends OneShotEffect {
     LazavTheMultifariousEffect() {
         super(Outcome.Copy);
         staticText = "{this} becomes a copy of target creature card "
-                + "in your graveyard with converted mana cost X, "
+                + "in your graveyard with mana value X, "
                 + "except its name is Lazav, the Multifarious, "
                 + "it's legendary in addition to its other types, "
                 + "and it has this ability";

@@ -14,7 +14,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -67,10 +67,10 @@ enum SkyfireKirinAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         Spell spell = game.getStack().getSpell(ability.getEffects().get(0).getTargetPointer().getFirst(game, ability));
         if (spell != null) {
-            int cmc = spell.getConvertedManaCost();
+            int cmc = spell.getManaValue();
             ability.getTargets().clear();
-            FilterPermanent filter = new FilterCreaturePermanent("creature with converted mana cost " + cmc);
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
+            FilterPermanent filter = new FilterCreaturePermanent("creature with mana value " + cmc);
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, cmc));
             ability.addTarget(new TargetPermanent(filter));
         }
     }
@@ -80,7 +80,7 @@ class SkyfireKirinEffect extends OneShotEffect {
 
     public SkyfireKirinEffect() {
         super(Outcome.Detriment);
-        this.staticText = "you may gain control of target creature with that spell's converted mana cost until end of turn";
+        this.staticText = "you may gain control of target creature with that spell's mana value until end of turn";
     }
 
     public SkyfireKirinEffect(final SkyfireKirinEffect effect) {

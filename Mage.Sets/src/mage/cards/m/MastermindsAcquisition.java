@@ -3,6 +3,7 @@ package mage.cards.m;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.WishEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,6 +28,7 @@ public final class MastermindsAcquisition extends CardImpl {
         Mode mode = new Mode(new WishEffect(StaticFilters.FILTER_CARD_A, false)
                 .setText("Put a card you own from outside the game into your hand"));
         this.getSpellAbility().addMode(mode);
+        this.getSpellAbility().addHint(OpenSideboardHint.instance);
     }
 
     private MastermindsAcquisition(final MastermindsAcquisition card) {

@@ -33,7 +33,7 @@ public final class CleansingWildfire extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private CleansingWildfire(final CleansingWildfire card) {
@@ -51,7 +51,7 @@ class CleansingWildfireEffect extends OneShotEffect {
     CleansingWildfireEffect() {
         super(Outcome.Benefit);
         staticText = "Its controller may search their library for a basic land card, " +
-                "put it onto the battlefield tapped, then shuffle their library.";
+                "put it onto the battlefield tapped, then shuffle.";
     }
 
     private CleansingWildfireEffect(final CleansingWildfireEffect effect) {

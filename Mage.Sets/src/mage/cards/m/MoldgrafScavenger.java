@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,7 +31,7 @@ public final class MoldgrafScavenger extends CardImpl {
                 new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; {this} gets +3/+0 as long as there are four or more card types among cards in your graveyard"))
-                .addHint(DeliriumHint.instance));
+                .addHint(CardTypesInGraveyardHint.YOU));
     }
 
     private MoldgrafScavenger(final MoldgrafScavenger card) {

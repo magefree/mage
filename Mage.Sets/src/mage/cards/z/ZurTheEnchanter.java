@@ -13,7 +13,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -22,11 +22,11 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class ZurTheEnchanter extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("enchantment card with converted mana cost 3 or less");
+    private static final FilterCard filter = new FilterCard("enchantment card with mana value 3 or less");
 
     static {
         filter.add(CardType.ENCHANTMENT.getPredicate());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public ZurTheEnchanter(UUID ownerId, CardSetInfo setInfo) {

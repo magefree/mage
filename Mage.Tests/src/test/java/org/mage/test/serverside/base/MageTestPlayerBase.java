@@ -11,8 +11,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,6 +25,7 @@ import mage.cards.repository.CardRepository;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.match.Match;
 import mage.game.match.MatchType;
 import mage.game.permanent.PermanentCard;
 import mage.game.tournament.TournamentType;
@@ -35,6 +39,9 @@ import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCardInExile;
+import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInLibrary;
 import mage.util.CardUtil;
 import mage.util.Copier;
 import org.apache.log4j.Level;
@@ -85,6 +92,8 @@ public abstract class MageTestPlayerBase {
      * Game instance initialized in load method.
      */
     protected static Game currentGame = null;
+
+    protected static Match currentMatch = null;
 
     /**
      * Player thats starts the game first. By default, it is ComputerA.
@@ -480,6 +489,39 @@ public abstract class MageTestPlayerBase {
         ability.addTarget(new TargetPermanent());
         addCustomCardWithAbility(
                 "target destroy for " + controller.getName(),
+                controller,
+                ability
+        );
+    }
+
+    /**
+     * Return target card to hand that can be called by text "return from ..."
+     *
+     * @param controller
+     */
+    protected void addCustomEffect_ReturnFromAnyToHand(TestPlayer controller) {
+        // graveyard
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToHandTargetEffect().setText("return from graveyard"), new ManaCostsImpl(""));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD));
+        addCustomCardWithAbility(
+                "return from graveyard for " + controller.getName(),
+                controller,
+                ability
+        );
+
+        // exile
+        ability = new SimpleActivatedAbility(new ReturnFromExileEffect(Zone.HAND).setText("return from exile"), new ManaCostsImpl(""));
+        ability.addTarget(new TargetCardInExile(StaticFilters.FILTER_CARD));
+        addCustomCardWithAbility(
+                "return from exile for " + controller.getName(),
+                controller,
+                ability
+        );
+
+        // library
+        ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD)).setText("return from library"), new ManaCostsImpl(""));
+        addCustomCardWithAbility(
+                "return from library for " + controller.getName(),
                 controller,
                 ability
         );

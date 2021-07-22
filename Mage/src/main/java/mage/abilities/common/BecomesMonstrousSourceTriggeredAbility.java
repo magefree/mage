@@ -52,7 +52,7 @@ public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl
     }
 
     @Override
-    public String getRule() {
-        return "When {this} becomes monstrous, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When {this} becomes monstrous, " ;
     }
 }

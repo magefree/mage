@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -15,16 +13,12 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class CraterElemental extends CardImpl {
@@ -36,7 +30,9 @@ public final class CraterElemental extends CardImpl {
         this.toughness = new MageInt(6);
 
         // {R}, {T}, Sacrifice Crater Elemental: Crater Elemental deals 4 damage to target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(
+                new DamageTargetEffect(4, "it"), new ManaCostsImpl<>("{R}")
+        );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
@@ -45,9 +41,11 @@ public final class CraterElemental extends CardImpl {
         // <i>Formidable</i> &mdash; {2}{R}: Crater Elemental has base power 8 until end of turn. Activate this ability only if creatures you control have total power 8 or greater.
         ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
-                new SetPowerSourceEffect(StaticValue.get(8), Duration.EndOfTurn, SubLayer.SetPT_7b),
-                new ManaCostsImpl("{2}{R}"),
-                FormidableCondition.instance);
+                new SetPowerSourceEffect(StaticValue.get(8), Duration.EndOfTurn, SubLayer.SetPT_7b)
+                        .setText("{this} has base power 8 until end of turn"),
+                new ManaCostsImpl<>("{2}{R}"),
+                FormidableCondition.instance
+        );
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         this.addAbility(ability);
     }

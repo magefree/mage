@@ -32,7 +32,7 @@ public final class VraskasScorn extends CardImpl {
 
         // You may search your library and/or graveyard for a card named Vraska, Scheming Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle it.
         this.getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter)
-                .setText("You may search your library and/or graveyard for a card named Vraska, Scheming Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle it"));
+                .setText("You may search your library and/or graveyard for a card named Vraska, Scheming Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle"));
     }
 
     private VraskasScorn(final VraskasScorn card) {

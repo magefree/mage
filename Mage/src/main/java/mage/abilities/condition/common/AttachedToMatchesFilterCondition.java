@@ -29,12 +29,10 @@ public class AttachedToMatchesFilterCondition implements Condition {
             if (attachedTo == null) {
                 attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
             }
-            if (attachedTo != null) {
-                if (filter.match(attachedTo, attachedTo.getId(), attachedTo.getControllerId(), game)) {
-                    return true;
-                }
-
+            if (filter.match(attachedTo, attachedTo.getId(), attachedTo.getControllerId(), game)) {
+                return true;
             }
+
         }
         return false;
     }

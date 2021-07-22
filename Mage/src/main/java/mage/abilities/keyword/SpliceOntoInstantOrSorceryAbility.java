@@ -161,7 +161,7 @@ class SpliceOntoInstantOrSorceryEffect extends SpliceCardEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         MageObject object = game.getObject(abilityToModify.getSourceId());
-        if (object != null && object.isInstantOrSorcery()) {
+        if (object != null && object.isInstantOrSorcery(game)) {
             return spliceSpellCanBeActivated(source, game);
         }
         return false;

@@ -53,7 +53,7 @@ public final class HaktosTheUnscarred extends CardImpl {
         ability.setRuleVisible(false);
         this.addAbility(new SimpleStaticAbility(
                 new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield)
-                        .setText("{this} has protection from each converted mana cost other than the chosen number")
+                        .setText("{this} has protection from each mana value other than the chosen number")
         ));
     }
 
@@ -111,6 +111,6 @@ enum HaktosTheUnscarredPredicate implements ObjectSourcePlayerPredicate<ObjectSo
             return false;
         }
         int num = (int) obj;
-        return input.getObject().getConvertedManaCost() != num;
+        return input.getObject().getManaValue() != num;
     }
 }

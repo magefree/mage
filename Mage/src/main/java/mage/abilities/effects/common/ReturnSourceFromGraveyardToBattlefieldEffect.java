@@ -21,9 +21,9 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect {
 
-    private boolean tapped;
-    private boolean ownerControl;
-    private boolean haste;
+    protected final boolean tapped;
+    protected final boolean ownerControl;
+    private final boolean haste;
 
     public ReturnSourceFromGraveyardToBattlefieldEffect() {
         this(false);

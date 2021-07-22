@@ -25,6 +25,7 @@ public final class PriestOfYawgmoth extends CardImpl {
 
     public PriestOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
@@ -33,7 +34,7 @@ public final class PriestOfYawgmoth extends CardImpl {
         // {T}, Sacrifice an artifact: Add an amount of {B} equal to the sacrificed artifact's converted mana cost.     
         Ability ability = new DynamicManaAbility(Mana.BlackMana(1), new SacrificeCostConvertedMana("artifact"),
                 new TapSourceCost(),
-                "add an amount of {B} equal to the sacrificed artifact's converted mana cost",
+                "add an amount of {B} equal to the sacrificed artifact's mana value",
                 false,
                 new HighestCMCOfPermanentValue(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, true)
         );

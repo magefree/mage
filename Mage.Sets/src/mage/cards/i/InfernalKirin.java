@@ -55,7 +55,7 @@ class InfernalKirinEffect extends OneShotEffect {
 
     InfernalKirinEffect() {
         super(Outcome.Detriment);
-        this.staticText = "target player reveals their hand and discards all cards with that spell's converted mana cost";
+        this.staticText = "target player reveals their hand and discards all cards with that spell's mana value";
     }
 
     private InfernalKirinEffect(final InfernalKirinEffect effect) {
@@ -73,7 +73,7 @@ class InfernalKirinEffect extends OneShotEffect {
         if (spell == null) {
             return false;
         }
-        int cmc = spell.getConvertedManaCost();
+        int cmc = spell.getManaValue();
         Player targetPlayer = null;
         for (Target target : source.getTargets()) {
             if (target instanceof TargetPlayer) {
@@ -88,7 +88,7 @@ class InfernalKirinEffect extends OneShotEffect {
         }
         targetPlayer.revealCards(source, targetPlayer.getHand(), game);
         Cards cards = targetPlayer.getHand().copy();
-        cards.removeIf(uuid -> game.getCard(uuid).getConvertedManaCost() != cmc);
+        cards.removeIf(uuid -> game.getCard(uuid).getManaValue() != cmc);
         targetPlayer.discard(cards, false, source, game);
         return true;
     }

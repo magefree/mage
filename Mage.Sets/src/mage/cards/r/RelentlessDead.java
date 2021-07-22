@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AnotherCardPredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -37,7 +37,7 @@ public final class RelentlessDead extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // When Relentless Dead dies, you may pay {B}. If you do, return it to its owner's hand.
-        this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl("{B}"))));
+        this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new ReturnToHandSourceEffect().setText("return it to its owner's hand"), new ManaCostsImpl("{B}"))));
 
         // When Relentless Dead dies, you may pay {X}. If you do, return another target Zombie creature card with converted mana cost X from your graveyard to the battlefield.
         this.addAbility(new DiesSourceTriggeredAbility(new RelentlessDeadEffect()));
@@ -57,7 +57,7 @@ class RelentlessDeadEffect extends OneShotEffect {
 
     public RelentlessDeadEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "you may pay {X}. If you do, return another target Zombie creature card with converted mana cost X from your graveyard to the battlefield";
+        this.staticText = "you may pay {X}. If you do, return another target Zombie creature card with mana value X from your graveyard to the battlefield";
     }
 
     public RelentlessDeadEffect(final RelentlessDeadEffect effect) {
@@ -76,9 +76,9 @@ class RelentlessDeadEffect extends OneShotEffect {
             if (controller.chooseUse(Outcome.Benefit, "Do you want to pay {X} to return zombie?", source, game)) {
                 int payCount = ManaUtil.playerPaysXGenericMana(true, "Relentless Dead", controller, source, game);
                 // can be 0
-                FilterCard filter = new FilterCard("Another target Zombie card with converted mana cost {" + payCount + "}");
+                FilterCard filter = new FilterCard("Another target Zombie card with mana value {" + payCount + "}");
                 filter.add(SubType.ZOMBIE.getPredicate());
-                filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, payCount));
+                filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, payCount));
                 filter.add(new AnotherCardPredicate());
                 TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
                 if (controller.chooseTarget(outcome, target, source, game)) {

@@ -73,8 +73,8 @@ class PlayerSacrificesPermanentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player sacrifices another permanent, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a player sacrifices another permanent, " ;
     }
 
     @Override

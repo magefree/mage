@@ -9,6 +9,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -16,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.DemonToken;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -30,7 +30,7 @@ public final class SkirsdagHighPriest extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public SkirsdagHighPriest(UUID ownerId, CardSetInfo setInfo) {
@@ -46,7 +46,7 @@ public final class SkirsdagHighPriest extends CardImpl {
             new TapSourceCost(), MorbidCondition.instance);
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false)));
         ability.setAbilityWord(AbilityWord.MORBID);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MorbidHint.instance));
     }
 
     private SkirsdagHighPriest(final SkirsdagHighPriest card) {

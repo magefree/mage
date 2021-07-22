@@ -74,7 +74,7 @@ class DeepWoodEffect extends PreventionEffectImpl {
             DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
             if (event.getTargetId().equals(source.getControllerId())) {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(damageEvent.getSourceId());
-                if (permanent != null && filter.match(permanent, game)) {
+                if (filter.match(permanent, game)) {
                     return true;
                 }
             }

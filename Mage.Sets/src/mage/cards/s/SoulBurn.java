@@ -137,9 +137,9 @@ class SoulBurnEffect extends OneShotEffect {
         }
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            if (permanent.isCreature()) {
+            if (permanent.isCreature(game)) {
                 lifetogain = Math.min(permanent.getToughness().getValue(), lifetogain);
-            } else if (permanent.isPlaneswalker()) {
+            } else if (permanent.isPlaneswalker(game)) {
                 lifetogain = Math.min(permanent.getCounters(game).getCount(CounterType.LOYALTY), lifetogain);
             } else {
                 return false;

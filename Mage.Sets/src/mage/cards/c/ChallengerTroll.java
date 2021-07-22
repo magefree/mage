@@ -61,7 +61,7 @@ class ChallengerTrollEffect extends ContinuousEffectImpl {
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (permanent != null && permanent.isControlledBy(source.getControllerId())
-                    && permanent.isCreature() && permanent.getPower().getValue() >= 4) {
+                    && permanent.isCreature(game) && permanent.getPower().getValue() >= 4) {
                 permanent.setMaxBlockedBy(1);
             }
         }

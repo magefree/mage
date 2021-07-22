@@ -58,11 +58,11 @@ public class SacrificeAllTriggeredAbility extends TriggeredAbilityImpl {
                 break;
         }
         Permanent sacrificedPermanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return sacrificed && sacrificedPermanent != null && filter.match(sacrificedPermanent, getSourceId(), getControllerId(), game);
+        return sacrificed && filter.match(sacrificedPermanent, getSourceId(), getControllerId(), game);
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         String targetControllerText = "a player sacrifices ";
         switch (sacrificingPlayer) {
             case YOU:
@@ -72,6 +72,6 @@ public class SacrificeAllTriggeredAbility extends TriggeredAbilityImpl {
                 targetControllerText = "an opponent sacrifices ";
                 break;
         }
-        return "Whenever " + targetControllerText + filter.getMessage() + ", " + super.getRule();
+        return "Whenever " + targetControllerText + filter.getMessage() + ", ";
     }
 }

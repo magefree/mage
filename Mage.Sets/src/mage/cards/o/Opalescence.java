@@ -51,7 +51,7 @@ public final class Opalescence extends CardImpl {
         public OpalescenceEffect() {
             super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
             staticText = "Each other non-Aura enchantment is a creature in addition to its other "
-                    + "types and has base power and base toughness each equal to its converted mana cost";
+                    + "types and has base power and base toughness each equal to its mana value";
             
             this.dependendToTypes.add(DependencyType.EnchantmentAddingRemoving); // Enchanted Evening
             this.dependendToTypes.add(DependencyType.AuraAddingRemoving); // Cloudform
@@ -75,15 +75,15 @@ public final class Opalescence extends CardImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            if (!permanent.isCreature()) {
-                                permanent.addCardType(CardType.CREATURE);
+                            if (!permanent.isCreature(game)) {
+                                permanent.addCardType(game, CardType.CREATURE);
                             }
                         }
                         break;
 
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
-                            int manaCost = permanent.getConvertedManaCost();
+                            int manaCost = permanent.getManaValue();
                             permanent.getPower().setValue(manaCost);
                             permanent.getToughness().setValue(manaCost);
                         }

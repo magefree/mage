@@ -1,20 +1,11 @@
-
 package mage.abilities.keyword;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.EvokedCondition;
-import mage.abilities.costs.AlternativeCost2;
-import mage.abilities.costs.AlternativeCost2Impl;
-import mage.abilities.costs.AlternativeSourceCosts;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -24,8 +15,11 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
- *
  * @author LevelX2
  */
 public class EvokeAbility extends StaticAbility implements AlternativeSourceCosts {
@@ -38,17 +32,20 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
     // needed to check activation status, if card changes zone after casting it
     private int zoneChangeCounter = 0;
 
-    public EvokeAbility(Card card, String manaString) {
+    public EvokeAbility(String manaString) {
+        this(new ManaCostsImpl<>(manaString));
+    }
+
+    public EvokeAbility(Cost cost) {
         super(Zone.ALL, null);
         name = EVOKE_KEYWORD;
-        this.addEvokeCost(manaString);
+        this.addEvokeCost(cost);
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceEffect()), EvokedCondition.instance, "Sacrifice {this} when it enters the battlefield and was evoked.");
         ability.setRuleVisible(false);
         addSubAbility(ability);
-
     }
 
-    public EvokeAbility(final EvokeAbility ability) {
+    private EvokeAbility(final EvokeAbility ability) {
         super(ability);
         this.evokeCosts.addAll(ability.evokeCosts);
         this.zoneChangeCounter = ability.zoneChangeCounter;
@@ -59,8 +56,8 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
         return new EvokeAbility(this);
     }
 
-    public final AlternativeCost2 addEvokeCost(String manaString) {
-        AlternativeCost2 evokeCost = new AlternativeCost2Impl(EVOKE_KEYWORD, REMINDER_TEXT, new ManaCostsImpl(manaString));
+    public final AlternativeCost2 addEvokeCost(Cost cost) {
+        AlternativeCost2 evokeCost = new AlternativeCost2Impl<>(EVOKE_KEYWORD, REMINDER_TEXT, cost);
         evokeCosts.add(evokeCost);
         return evokeCost;
     }
@@ -102,7 +99,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
                         activateEvoke(evokeCost, game);
                         ability.getManaCostsToPay().clear();
                         ability.getCosts().clear();
-                        for (Iterator it = ((Costs) evokeCost).iterator(); it.hasNext();) {
+                        for (Iterator it = ((Costs) evokeCost).iterator(); it.hasNext(); ) {
                             Cost cost = (Cost) it.next();
                             if (cost instanceof ManaCostsImpl) {
                                 ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());

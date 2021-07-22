@@ -81,7 +81,7 @@ class ThrasiosTritonHeroEffect extends OneShotEffect {
         }
         cards.add(card);
         controller.revealCards(source, cards, game);
-        if (card.isLand()) {
+        if (card.isLand(game)) {
             return controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
         }
         controller.drawCards(1, source, game);

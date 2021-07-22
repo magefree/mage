@@ -69,10 +69,10 @@ class SharesTypePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePla
                     source.getStackAbility().getTargets().get(0).getTargets().get(0));
             Permanent secondPermanent = game.getPermanent(input.getObject().getId());
             if (firstPermanent != null && secondPermanent != null) {
-                if (firstPermanent.isCreature() && secondPermanent.isCreature()) {
+                if (firstPermanent.isCreature(game) && secondPermanent.isCreature(game)) {
                     return true;
                 }
-                if (firstPermanent.isArtifact() && secondPermanent.isArtifact()) {
+                if (firstPermanent.isArtifact(game) && secondPermanent.isArtifact(game)) {
                     return true;
                 }
             }

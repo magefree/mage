@@ -59,7 +59,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
         super(Outcome.Detriment);
         this.staticText = "Choose target card in a graveyard other than a basic land card. "
                 + "Search its owner's graveyard, hand, and library for any number of cards "
-                + "with the same name as that card and exile them. Then that player shuffles their library";
+                + "with the same name as that card and exile them. Then that player shuffles";
     }
 
     public SurgicalExtractionEffect(final SurgicalExtractionEffect effect) {

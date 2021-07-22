@@ -21,7 +21,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -74,8 +74,8 @@ enum QuillmaneBakuAdjuster implements TargetAdjuster {
             }
         }
         ability.getTargets().clear();
-        FilterCreaturePermanent newFilter = new FilterCreaturePermanent("creature with converted mana cost " + maxConvManaCost + " or less");
-        newFilter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, maxConvManaCost + 1));
+        FilterCreaturePermanent newFilter = new FilterCreaturePermanent("creature with mana value " + maxConvManaCost + " or less");
+        newFilter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, maxConvManaCost + 1));
         TargetCreaturePermanent target = new TargetCreaturePermanent(newFilter);
         ability.getTargets().add(target);
     }
@@ -85,7 +85,7 @@ class QuillmaneBakuReturnEffect extends OneShotEffect {
 
     public QuillmaneBakuReturnEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Return target creature with converted mana cost X or less to its owner's hand";
+        this.staticText = "Return target creature with mana value X or less to its owner's hand";
     }
 
     public QuillmaneBakuReturnEffect(final QuillmaneBakuReturnEffect effect) {

@@ -23,7 +23,7 @@ public final class SramsExpertise extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ServoToken(), 3));
 
         // You may cast a card with converted mana cost 3 or less from your hand without paying its mana cost.
-        this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(3));
+        this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(3).concatBy("<br>"));
     }
 
     private SramsExpertise(final SramsExpertise card) {

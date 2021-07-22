@@ -50,7 +50,7 @@ class IntuitionEffect extends SearchEffect {
 
     public IntuitionEffect() {
         super(new TargetCardInLibrary(3, new FilterCard()), Outcome.Benefit);
-        staticText = "Search your library for three cards and reveal them. Target opponent chooses one. Put that card into your hand and the rest into your graveyard. Then shuffle your library";
+        staticText = "Search your library for three cards and reveal them. Target opponent chooses one. Put that card into your hand and the rest into your graveyard. Then shuffle";
     }
 
 

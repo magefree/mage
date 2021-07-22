@@ -20,7 +20,6 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -38,7 +37,7 @@ public final class ShimmerDragon extends CardImpl {
             = new FilterControlledArtifactPermanent("untapped artifacts you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public ShimmerDragon(UUID ownerId, CardSetInfo setInfo) {

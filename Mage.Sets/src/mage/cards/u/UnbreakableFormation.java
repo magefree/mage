@@ -51,7 +51,7 @@ class UnbreakableFormationEffect extends OneShotEffect {
     UnbreakableFormationEffect() {
         super(Outcome.Benefit);
         staticText = "<br><i>Addendum</i> &mdash; If you cast this spell during your main phase, " +
-                "put a +1/+1 counter on each of those creatures, and they also gain vigilance until end of turn.";
+                "put a +1/+1 counter on each of those creatures and they gain vigilance until end of turn.";
     }
 
     private UnbreakableFormationEffect(final UnbreakableFormationEffect effect) {

@@ -12,7 +12,7 @@ public class EntersBattlefieldUntappedTriggeredAbility extends EntersBattlefield
 
     public EntersBattlefieldUntappedTriggeredAbility(Effect effect, boolean optional) {
         super(effect, optional);
-        this.noRule = true;
+        this.ignoreRulesGeneration = true;
     }
 
     private EntersBattlefieldUntappedTriggeredAbility(final EntersBattlefieldUntappedTriggeredAbility ability) {
@@ -34,7 +34,7 @@ public class EntersBattlefieldUntappedTriggeredAbility extends EntersBattlefield
     }
 
     @Override
-    public String getRule() {
-        return "When {this} enters the battlefield untapped, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When {this} enters the battlefield untapped, " ;
     }
 }

@@ -72,7 +72,7 @@ public class PlayLandsFromGraveyardControllerEffect extends AsThoughEffectImpl {
         }
 
         // can't cast without mana cost
-        if (!cardToCheck.isLand() && cardToCheck.getManaCost().isEmpty()) {
+        if (!cardToCheck.isLand(game) && cardToCheck.getManaCost().isEmpty()) {
             return false;
         }
 

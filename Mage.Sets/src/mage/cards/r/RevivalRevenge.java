@@ -11,7 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -25,10 +25,10 @@ import java.util.UUID;
 public final class RevivalRevenge extends SplitCard {
 
     private static final FilterCard filter
-            = new FilterCreatureCard("creature card with converted mana cost 3 or less from your graveyard");
+            = new FilterCreatureCard("creature card with mana value 3 or less from your graveyard");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public RevivalRevenge(UUID ownerId, CardSetInfo setInfo) {

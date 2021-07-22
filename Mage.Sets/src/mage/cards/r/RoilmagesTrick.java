@@ -34,7 +34,7 @@ public final class RoilmagesTrick extends CardImpl {
         this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
         this.getSpellAbility().addEffect(new BoostAllEffect(
                 new SignInversionDynamicValue(ColorsOfManaSpentToCastCount.getInstance()), StaticValue.get(-0), Duration.EndOfTurn, filter, false,
-                "Creatures your opponents control get -X/-0 until end of turn, where X is the number of colors of mana spent to cast {this}.<br>", true));
+                "Creatures your opponents control get -X/-0 until end of turn, where X is the number of colors of mana spent to cast this spell.<br>", true));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

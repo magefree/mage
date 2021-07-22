@@ -36,7 +36,7 @@ public final class BenthicExplorers extends CardImpl {
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public BenthicExplorers(UUID ownerId, CardSetInfo setInfo) {
@@ -142,7 +142,7 @@ class BenthicExplorersManaEffect extends ManaEffect {
         Set<ManaType> manaTypes = EnumSet.noneOf(ManaType.class);
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(opponentId)) {
-                if (permanent.isLand() && permanent.isTapped()) {
+                if (permanent.isLand(game) && permanent.isTapped()) {
                     for (ActivatedManaAbilityImpl ability : permanent.getAbilities(game).getActivatedManaAbilities(Zone.BATTLEFIELD)) {
                         manaTypes.addAll(ability.getProducableManaTypes(game));
                     }

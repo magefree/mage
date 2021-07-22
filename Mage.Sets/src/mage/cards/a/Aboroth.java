@@ -48,6 +48,10 @@ class AborothCost extends CostImpl {
         this.text = "Put a -1/-1 counter on Aboroth";
     }
 
+    private AborothCost(final AborothCost cost) {
+        super(cost);
+    }
+
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(source.getSourceId());
@@ -66,6 +70,6 @@ class AborothCost extends CostImpl {
 
     @Override
     public AborothCost copy() {
-        return new AborothCost();
+        return new AborothCost(this);
     }
 }

@@ -34,7 +34,7 @@ public final class Necrosavant extends CardImpl {
 
         // {3}{B}{B}, Sacrifice a creature: Return Necrosavant from your graveyard to the battlefield. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                new ReturnSourceFromGraveyardToBattlefieldEffect(false,false),
                 new ManaCostsImpl("{3}{B}{B}"),
                 new IsStepCondition(PhaseStep.UPKEEP),
                 null

@@ -10,9 +10,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
@@ -59,23 +59,19 @@ public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
-            if (setTargetPointer != SetTargetPointer.NONE) {
-                for (Effect effect : this.getEffects()) {
-                    switch (setTargetPointer) {
-                        case SPELL:
-                            effect.setTargetPointer(new FixedTarget(spell.getId()));
-                            break;
-                        case PLAYER:
-                            effect.setTargetPointer(new FixedTarget(spell.getControllerId()));
-                            break;
-                    }
-
-                }
-            }
-            return true;
+        if (!filter.match(spell, getSourceId(), getControllerId(), game)) {
+            return false;
         }
-        return false;
+        getEffects().setValue("spellCast", spell);
+        switch (setTargetPointer) {
+            case SPELL:
+                getEffects().setTargetPointer(new FixedTarget(spell.getId()));
+                break;
+            case PLAYER:
+                getEffects().setTargetPointer(new FixedTarget(spell.getControllerId()));
+                break;
+        }
+        return true;
     }
 
     @Override
@@ -83,7 +79,12 @@ public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
         if (rule != null && !rule.isEmpty()) {
             return rule;
         }
-        return "Whenever a player casts " + filter.getMessage() + ", " + super.getRule();
+        return super.getRule();
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever a player casts " + CardUtil.addArticle(filter.getMessage()) + ", ";
     }
 
     @Override

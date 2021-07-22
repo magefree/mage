@@ -20,7 +20,7 @@
  import java.util.*;
 
  /**
-  * Panel for stack and hand zones
+  * Panel for stack and hand zones, component for lookAt and reveal windows (CardInfoWindowDialog)
   *
   * @author BetaSteward_at_googlemail.com, JayDi85
   */
@@ -183,6 +183,7 @@
              if (card instanceof StackAbilityView) {
                  // replace ability by original card
                  CardView tmp = ((StackAbilityView) card).getSourceCard();
+                 // sync settings
                  tmp.overrideRules(card.getRules());
                  tmp.setChoosable(card.isChoosable());
                  tmp.setPlayableStats(card.getPlayableStats().copy());
@@ -191,6 +192,9 @@
                  tmp.overrideTargets(card.getTargets());
                  tmp.overrideId(card.getId());
                  tmp.setAbilityType(card.getAbilityType());
+                 // sync card icons
+                 tmp.getCardIcons().clear();
+                 tmp.getCardIcons().addAll(card.getCardIcons());
                  card = tmp;
              } else {
                  card.setAbilityType(null);
@@ -381,5 +385,15 @@
 
      public void setZone(Zone zone) {
          this.zone = zone;
+     }
+
+     /**
+      * For GUI: get mage card components for update (example: change playable status)
+      * Warning, do not change the list
+      *
+      * @return
+      */
+     public Map<UUID, MageCard> getMageCardsForUpdate() {
+         return this.cards;
      }
  }

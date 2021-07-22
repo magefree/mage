@@ -56,7 +56,7 @@ class ScytheSpecterEffect extends OneShotEffect {
 
     public ScytheSpecterEffect() {
         super(Outcome.Discard);
-        this.staticText = "each opponent discards a card. Each player who discarded a card with the highest converted mana cost among cards discarded this way loses life equal to that converted mana cost";
+        this.staticText = "each opponent discards a card. Each player who discarded a card with the highest mana value among cards discarded this way loses life equal to that mana value";
     }
 
     public ScytheSpecterEffect(final ScytheSpecterEffect effect) {
@@ -78,7 +78,7 @@ class ScytheSpecterEffect extends OneShotEffect {
                     opponent.chooseTarget(Outcome.Discard, target, source, game);
                     Card targetCard = game.getCard(target.getFirstTarget());
                     if (targetCard != null) {
-                        currentCMC = targetCard.getConvertedManaCost();
+                        currentCMC = targetCard.getManaValue();
                         if (highestCMC <= currentCMC) {
                             highestCMC = currentCMC;
                         }
@@ -96,7 +96,7 @@ class ScytheSpecterEffect extends OneShotEffect {
 
             for (UUID playerId : game.getOpponents(controller.getId())) {//lose life equal to CMC
                 Card card = cardDiscarded.get(playerId);
-                if ((card != null) && (card.getConvertedManaCost() == highestCMC)) {
+                if ((card != null) && (card.getManaValue() == highestCMC)) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null
                             && discardedCheck.get(playerId) == 1) {//check that card was discarded

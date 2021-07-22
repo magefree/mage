@@ -10,7 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 import java.util.Set;
@@ -64,7 +63,7 @@ public final class BanefulOmen extends CardImpl {
 
         @Override
         public String getRule() {
-            return "At the beginning of your end step, you may reveal the top card of your library. If you do, each opponent loses life equal to that card's converted mana cost.";
+            return "At the beginning of your end step, you may reveal the top card of your library. If you do, each opponent loses life equal to that card's mana value.";
         }
     }
 
@@ -95,7 +94,7 @@ public final class BanefulOmen extends CardImpl {
             player.revealCards("Baneful Omen", cards, game);
 
 
-            int loseLife = card.getConvertedManaCost();
+            int loseLife = card.getManaValue();
             Set<UUID> opponents = game.getOpponents(source.getControllerId());
             for (UUID opponentUuid : opponents) {
                 Player opponent = game.getPlayer(opponentUuid);

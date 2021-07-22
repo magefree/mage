@@ -34,10 +34,9 @@ public final class SelvalasEnforcer extends CardImpl {
 
         // Parley - When Selvala's Enforcer enters the battlefield, each player reveals the top card of their library.
         // For each nonland card revealed this way, put a +1/+1 counter on Selvala's Enforcer. Then each player draws a card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SelvalasEnforcerEffect(), false, "<i>Parley &mdash; </i>");
-        Effect effect = new DrawCardAllEffect(1);
-        effect.setText("Then each player draws a card");
-        ability.addEffect(effect);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SelvalasEnforcerEffect(), false);
+        ability.addEffect(new DrawCardAllEffect(1).setText("Then each player draws a card"));
+        ability.withFlavorWord("Parley");
         this.addAbility(ability);
     }
 

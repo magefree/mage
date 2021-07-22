@@ -24,7 +24,7 @@ public class ColoredManaCost extends ManaCostImpl {
     }
 
     @Override
-    public int convertedManaCost() {
+    public int manaValue() {
         return 1;
     }
 

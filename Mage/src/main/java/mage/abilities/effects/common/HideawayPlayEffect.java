@@ -52,7 +52,7 @@ public class HideawayPlayEffect extends OneShotEffect {
         Card card = cards.iterator().next();
         Player controller = game.getPlayer(source.getControllerId());
         if (card != null && controller != null) {
-            if (controller.chooseUse(Outcome.PlayForFree, "Do you want to play " + card.getIdName() + " for free now?", source, game)) {
+            if (controller.chooseUse(Outcome.PlayForFree, "Play " + card.getIdName() + " for free?", source, game)) {
                 card.setFaceDown(false, game);
                 int zcc = card.getZoneChangeCounter(game);
 
@@ -60,7 +60,7 @@ public class HideawayPlayEffect extends OneShotEffect {
                  * If the removed card is a land, you may play it as a result of the last ability only if it's your turn
                  * and you haven't already played a land that turn. This counts as your land play for the turn.
                  */
-                if (card.isLand()) {
+                if (card.isLand(game)) {
                     UUID playerId = controller.getId();
                     if (!game.isActivePlayer(playerId) || !game.getPlayer(playerId).canPlayLand()) {
                         return false;

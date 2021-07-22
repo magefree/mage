@@ -88,7 +88,7 @@ class LilianasStandardBearerWatcher extends Watcher {
             return;
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent() && zEvent.getTarget().isCreature()) {
+        if (zEvent.isDiesEvent() && zEvent.getTarget().isCreature(game)) {
             playerMap.compute(zEvent.getTarget().getControllerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
         }
     }

@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 
 /**
  *
@@ -16,17 +16,17 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  */
 public final class Granulate extends CardImpl {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland artifact with converted mana cost 4 or less");
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 5));
     }
     public Granulate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
 
         // Destroy each nonland artifact with converted mana cost 4 or less.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(filter).setText("destroy each nonland artifact with mana value 4 or less"));
     }
 
     private Granulate(final Granulate card) {

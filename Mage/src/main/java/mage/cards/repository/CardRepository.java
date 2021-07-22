@@ -141,21 +141,6 @@ public enum CardRepository {
         return false;
     }
 
-    public Set<String> getNames() {
-        Set<String> names = new TreeSet<>();
-        try {
-            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
-            List<CardInfo> results = cardDao.query(qb.prepare());
-            for (CardInfo card : results) {
-                addNewNames(card, names);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting names from DB : " + ex);
-        }
-        return names;
-    }
-
     private void addNewNames(CardInfo card, Set<String> namesList) {
         // require before call: qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName"...);
 
@@ -180,6 +165,25 @@ public enum CardRepository {
         }
     }
 
+    public static Boolean haveSnowLands(String setCode) {
+        return snowLandSetCodes.contains(setCode);
+    }
+
+    public Set<String> getNames() {
+        Set<String> names = new TreeSet<>();
+        try {
+            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            List<CardInfo> results = cardDao.query(qb.prepare());
+            for (CardInfo card : results) {
+                addNewNames(card, names);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error getting names from DB : " + ex);
+        }
+        return names;
+    }
+
     public Set<String> getNonLandNames() {
         Set<String> names = new TreeSet<>();
         try {
@@ -195,10 +199,6 @@ public enum CardRepository {
 
         }
         return names;
-    }
-
-    public static Boolean haveSnowLands(String setCode) {
-        return snowLandSetCodes.contains(setCode);
     }
 
     public Set<String> getNonbasicLandNames() {

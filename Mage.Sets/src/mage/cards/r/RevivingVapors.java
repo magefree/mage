@@ -40,7 +40,7 @@ class RevivingVaporsEffect extends OneShotEffect {
 
     public RevivingVaporsEffect() {
         super(Outcome.Benefit);
-        staticText = "Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's converted mana cost. Put all other cards revealed this way into your graveyard";
+        staticText = "Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's mana value. Put all other cards revealed this way into your graveyard";
     }
 
     public RevivingVaporsEffect(final RevivingVaporsEffect effect) {
@@ -75,7 +75,7 @@ class RevivingVaporsEffect extends OneShotEffect {
                 controller.moveCards(card, Zone.HAND, source, game);
 
                 // You gain life equal to that card's converted mana cost
-                controller.gainLife(card.getConvertedManaCost(), game, source);
+                controller.gainLife(card.getManaValue(), game, source);
             }
 
             // Put all other cards revealed this way into your graveyard

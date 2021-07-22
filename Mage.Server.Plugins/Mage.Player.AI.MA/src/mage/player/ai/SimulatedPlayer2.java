@@ -31,14 +31,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class SimulatedPlayer2 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(SimulatedPlayer2.class);
-    private static PassAbility pass = new PassAbility();
+    private static final PassAbility pass = new PassAbility();
     private final boolean isSimulatedPlayer;
     private final List<String> suggested;
     private transient ConcurrentLinkedQueue<Ability> allActions;
     private boolean forced;
 
-    public SimulatedPlayer2(UUID id, boolean isSimulatedPlayer, List<String> suggested) {
-        super(id);
+    public SimulatedPlayer2(Player originalPlayer, boolean isSimulatedPlayer, List<String> suggested) {
+        super(originalPlayer.getId());
         pass.setControllerId(playerId);
         this.isSimulatedPlayer = isSimulatedPlayer;
         this.suggested = suggested;
@@ -117,7 +117,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
     @Override
     protected void addVariableXOptions(List<Ability> options, Ability ability, int targetNum, Game game) {
         // calculate the mana that can be used for the x part
-        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
+        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
 
         Card card = game.getCard(ability.getSourceId());
         if (card != null && numAvailable > 0) {
@@ -435,8 +435,15 @@ public class SimulatedPlayer2 extends ComputerPlayer {
 
     @Override
     public boolean priority(Game game) {
-        //should never get here
+        // simulated player do nothing - it must pass until stack resolve to see final game score after action apply
+
+        // it's a workaround for Karn Liberated restart ability (see CommandersGameRestartTest)
+        // reason: restarted game is broken (miss clear code of some game/player data?) and ai can't simulate it
+        // so game is freezes on non empty stack (last part of karn's restart ability)
+        if (game.getStack().isEmpty()) {
+            game.pause();
+        }
+        pass(game);
         return false;
     }
-
 }

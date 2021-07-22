@@ -69,7 +69,7 @@ class AnathemancerCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public AnathemancerCount copy() {
         return new AnathemancerCount();
     }
 

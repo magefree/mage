@@ -3,7 +3,6 @@ package mage.cards.j;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -31,7 +30,7 @@ public final class JourneyForTheElixir extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Search your library and graveyard for a basic land card and a card named Jiang Yanggu, reveal them, put them into your hand, then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new JourneyForTheElixirLibraryTarget()));
+        this.getSpellAbility().addEffect(new JourneyForTheElixirEffect());
     }
 
     private JourneyForTheElixir(final JourneyForTheElixir card) {
@@ -49,7 +48,7 @@ class JourneyForTheElixirEffect extends OneShotEffect {
     JourneyForTheElixirEffect() {
         super(Outcome.Benefit);
         staticText = "Search your library and graveyard for a basic land card and a card named Jiang Yanggu, " +
-                "reveal them, put them into your hand, then shuffle your library.";
+                "reveal them, put them into your hand, then shuffle.";
     }
 
     private JourneyForTheElixirEffect(final JourneyForTheElixirEffect effect) {
@@ -123,13 +122,13 @@ class JourneyForTheElixirLibraryTarget extends TargetCardInLibrary {
         }
         Cards cards = new CardsImpl(this.getTargets());
         if (card.isBasic()
-                && card.isLand()
+                && card.isLand(game)
                 && cards
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(MageObject::isBasic)
-                .anyMatch(MageObject::isLand)) {
+                .anyMatch(card1 -> card1.isLand(game))) {
             return false;
         }
         if (name.equals(card.getName())
@@ -186,13 +185,13 @@ class JourneyForTheElixirGraveyardTarget extends TargetCardInYourGraveyard {
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isLand)
+                .filter(card1 -> card1.isLand(game))
                 .anyMatch(MageObject::isBasic);
         possibleTargets.removeIf(uuid -> {
             Card card = game.getCard(uuid);
             return card != null
                     && hasBasic
-                    && card.isLand()
+                    && card.isLand(game)
                     && card.isBasic();
         });
         boolean hasYanggu = alreadyTargeted

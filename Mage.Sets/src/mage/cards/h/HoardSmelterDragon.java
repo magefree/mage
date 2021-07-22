@@ -58,7 +58,7 @@ class HoardSmelterEffect extends ContinuousEffectImpl {
 
     HoardSmelterEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "{this} gets +X/+0 until end of turn, where X is that artifact's converted mana cost";
+        staticText = "{this} gets +X/+0 until end of turn, where X is that artifact's mana value";
     }
 
     HoardSmelterEffect(final HoardSmelterEffect effect) {
@@ -80,7 +80,7 @@ class HoardSmelterEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         Card targeted = game.getCard(source.getFirstTarget());
         if (targeted != null) {
-            costValue = targeted.getConvertedManaCost();
+            costValue = targeted.getManaValue();
         }
     }
 

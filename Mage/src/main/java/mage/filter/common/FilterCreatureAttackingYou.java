@@ -19,7 +19,7 @@ public class FilterCreatureAttackingYou extends FilterAttackingCreature {
     }
 
     public FilterCreatureAttackingYou(boolean orWalker) {
-        this("creature that's attacking you" + (orWalker ? "or a planeswalker you control" : ""), orWalker);
+        this("creature that's attacking you" + (orWalker ? " or a planeswalker you control" : ""), orWalker);
     }
 
     public FilterCreatureAttackingYou(String name) {

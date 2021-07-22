@@ -94,7 +94,6 @@ public class LandfallTest extends CardTestPlayerBase {
      * Fang. It only dealt 1 damage to me, where it should've dealt 3, because
      * my opponent had played a land.
      */
-    @Ignore
     @Test
     public void testSearingBlaze() {
         // Searing Blaze deals 1 damage to target player and 1 damage to target creature that player controls.

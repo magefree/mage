@@ -29,7 +29,7 @@ public final class WildestDreams extends CardImpl {
         effect.setText("Return X target cards from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().setTargetAdjuster(WildestDreamsAdjuster.instance);
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private WildestDreams(final WildestDreams card) {

@@ -124,7 +124,7 @@ public class PermanentCard extends PermanentImpl {
         if (card instanceof PermanentCard) {
             this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;
         }
-        this.subtype.copyFrom(card.getSubtype(game));
+        this.subtype.copyFrom(card.getSubtype());
         this.supertype.clear();
         supertype.addAll(card.getSuperType());
         this.expansionSetCode = card.getExpansionSetCode();
@@ -175,30 +175,6 @@ public class PermanentCard extends PermanentImpl {
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (this.isTransformed() && card.getSecondCardFace() != null) {
-            card.getSecondCardFace().adjustTargets(ability, game);
-        } else {
-            if (this.isCopy()) {
-                // if COPIED card have adjuster then it's must be called instead own -- see OathOfLieges tests
-                // raise null error on wrong copy
-                this.getCopyFrom().adjustTargets(ability, game);
-            } else {
-                card.adjustTargets(ability, game);
-            }
-        }
-    }
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (this.isTransformed() && card.getSecondCardFace() != null) {
-            card.getSecondCardFace().adjustCosts(ability, game);
-        } else {
-            card.adjustCosts(ability, game);
-        }
-    }
-
-    @Override
     public ManaCosts<ManaCost> getManaCost() {
         if (faceDown) { // face down permanent has always {0} mana costs
             manaCost.clear();
@@ -208,18 +184,18 @@ public class PermanentCard extends PermanentImpl {
     }
 
     @Override
-    public int getConvertedManaCost() {
+    public int getManaValue() {
         if (isTransformed()) {
             // 711.4b While a double-faced permanent's back face is up, it has only the characteristics of its back face.
             // However, its converted mana cost is calculated using the mana cost of its front face. This is a change from previous rules.
             // If a permanent is copying the back face of a double-faced card (even if the card representing that copy
             // is itself a double-faced card), the converted mana cost of that permanent is 0.
-            return getCard().getConvertedManaCost();
+            return getCard().getManaValue();
         }
         if (faceDown) { // game not neccessary
-            return getManaCost().convertedManaCost();
+            return getManaCost().manaValue();
         }
-        return super.getConvertedManaCost();
+        return super.getManaValue();
 
     }
 
@@ -243,5 +219,10 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public Card getMainCard() {
         return card.getMainCard();
+    }
+
+    @Override
+    public String toString() {
+        return card.toString();
     }
 }

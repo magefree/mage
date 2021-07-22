@@ -93,7 +93,7 @@ class CavalierOfThornsEffect extends OneShotEffect {
         }
         controller.revealCards(source, cards, game);
         TargetCard target = new TargetCard(1, 1, Zone.LIBRARY, filter);
-        if (cards.getCards(game).stream().anyMatch(Card::isLand)
+        if (cards.getCards(game).stream().anyMatch(card1 -> card1.isLand(game))
                 && controller.choose(Outcome.PutCardInPlay, cards, target, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {

@@ -63,7 +63,7 @@ public final class NecroticOoze extends CardImpl {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         for (Card card : player.getGraveyard().getCards(game)) {
-                            if (card.isCreature()) {
+                            if (card.isCreature(game)) {
                                 for (Ability ability : card.getAbilities(game)) {
                                     if (ability instanceof ActivatedAbility
                                             && !perm.getAbilities().contains(ability)) {

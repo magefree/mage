@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.DiscardCostCardConvertedMana;
+import mage.abilities.dynamicvalue.common.DiscardCostCardManaValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -27,14 +27,15 @@ public final class VolrathTheFallen extends CardImpl {
     public VolrathTheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 
         // {1}{B}, Discard a creature card:
         // Volrath the Fallen gets +X/+X until end of turn, where X is the discarded card's converted mana cost.
-        Effect effect = new BoostSourceEffect(DiscardCostCardConvertedMana.instance, DiscardCostCardConvertedMana.instance, Duration.EndOfTurn);
-        effect.setText("{this} gets +X/+X until end of turn, where X is the discarded card's converted mana cost");
+        Effect effect = new BoostSourceEffect(DiscardCostCardManaValue.instance, DiscardCostCardManaValue.instance, Duration.EndOfTurn);
+        effect.setText("{this} gets +X/+X until end of turn, where X is the discarded card's mana value");
 
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,

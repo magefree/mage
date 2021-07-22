@@ -1,7 +1,6 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -75,9 +74,9 @@ class KalamaxTheStormsireSpellCastAbility extends SpellCastControllerTriggeredAb
             SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
             if (watcher != null) {
                 List<Spell> spells = watcher.getSpellsCastThisTurn(event.getPlayerId());
-                if (spells != null && spells.stream().filter(MageObject::isInstant).count() == 1) {
+                if (spells != null && spells.stream().filter(spell1 -> spell1.isInstant(game)).count() == 1) {
                     Spell spell = game.getStack().getSpell(event.getTargetId());
-                    if (spell != null && spell.isInstant()) {
+                    if (spell != null && spell.isInstant(game)) {
                         for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                         }
@@ -121,7 +120,7 @@ class KalamaxTheStormsireCopyTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getSpell(event.getTargetId());
-        return spell != null && spell.isControlledBy(getControllerId()) && spell.isInstant();
+        return spell != null && spell.isControlledBy(getControllerId()) && spell.isInstant(game);
     }
 
     @Override

@@ -28,7 +28,7 @@ public class LandfallWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
             if (permanent != null
-                    && permanent.isLand()
+                    && permanent.isLand(game)
                     && !playerPlayedLand.contains(event.getPlayerId())) {
                 playerPlayedLand.add(event.getPlayerId());
                 landEnteredBattlefield.add(event.getTargetId());

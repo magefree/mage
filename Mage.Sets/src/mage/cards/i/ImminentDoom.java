@@ -31,7 +31,7 @@ public final class ImminentDoom extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // Imminent Doom enters the battlefield with a doom counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.DOOM.createInstance(1))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.DOOM.createInstance(1)), "with a doom counter on it"));
 
         // Whenever you cast a spell with converted mana cost equal to the number of doom counters on Imminent Doom, Imminent Doom deals that much damage to any target. Then put a doom counter on Imminent Doom.
         Ability ability = new ImminentDoomTriggeredAbility();
@@ -52,7 +52,7 @@ public final class ImminentDoom extends CardImpl {
 
 class ImminentDoomTriggeredAbility extends TriggeredAbilityImpl {
 
-    private String rule = "Whenever you cast a spell with converted mana cost equal to the number of doom counters on {this}, {this} deals that much damage to any target. Then put a doom counter on {this}.";
+    private String rule = "Whenever you cast a spell with mana value equal to the number of doom counters on {this}, {this} deals that much damage to any target. Then put a doom counter on {this}.";
 
     public ImminentDoomTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ImminentDoomEffect());
@@ -79,7 +79,7 @@ class ImminentDoomTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null
                     && imminentDoom != null
-                    && spell.getConvertedManaCost() == imminentDoom.getCounters(game).getCount(CounterType.DOOM)) {
+                    && spell.getManaValue() == imminentDoom.getCounters(game).getCount(CounterType.DOOM)) {
                 game.getState().setValue("ImminentDoomCount" + getSourceId().toString(), imminentDoom.getCounters(game).getCount(CounterType.DOOM)); // store its current value
                 return true;
             }

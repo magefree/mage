@@ -39,7 +39,7 @@ public final class DreadWanderer extends CardImpl {
                 new ManaCostsImpl("{2}{B}"),
                 HeckbentCondition.instance,
                 "{2}{B}: Return {this} from your graveyard to the battlefield. "
-                + "Activate this ability only any time you could cast a sorcery "
+                + "Activate only as a sorcery "
                 + "and only if you have one or fewer cards in hand."
         );
         ability.setTiming(TimingRule.SORCERY);

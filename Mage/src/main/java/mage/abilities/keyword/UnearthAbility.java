@@ -52,7 +52,7 @@ public class UnearthAbility extends ActivatedAbilityImpl {
     public String getRule() {
         StringBuilder sb = new StringBuilder("Unearth ").append(this.getManaCosts().getText());
         sb.append(" <i>(").append(this.getManaCosts().getText());
-        sb.append(": Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)");
+        sb.append(": Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)</i>");
         return sb.toString();
     }
 

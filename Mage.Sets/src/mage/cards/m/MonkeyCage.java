@@ -48,7 +48,7 @@ class MonkeyCageEffect extends OneShotEffect {
 
     public MonkeyCageEffect() {
         super(Outcome.Benefit);
-        staticText = "and create X 2/2 green Ape creature tokens, where X is that creature's converted mana cost";
+        staticText = "and create X 2/2 green Ape creature tokens, where X is that creature's mana value";
     }
 
     public MonkeyCageEffect(final MonkeyCageEffect effect) {
@@ -63,7 +63,7 @@ class MonkeyCageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (creature != null) {
-            int cmc = creature.getConvertedManaCost();
+            int cmc = creature.getManaValue();
             return new CreateTokenEffect(new ApeToken(), cmc).apply(game, source);
         }
         return false;

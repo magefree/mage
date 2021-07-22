@@ -14,6 +14,7 @@ public enum ClientCallbackMethod {
     START_TOURNAMENT("startTournament"),
     SIDEBOARD("sideboard"),
     VIEW_LIMITED_DECK("viewLimitedDeck"),
+    VIEW_SIDEBOARD("viewSideboard"),
     CONSTRUCT("construct"),
     SHOW_USERMESSAGE("showUserMessage"),
     WATCHGAME("watchGame"),
@@ -44,6 +45,7 @@ public enum ClientCallbackMethod {
     GAME_PLAY_MANA("gamePlayMana"),
     GAME_PLAY_XMANA("gamePlayXMana"),
     GAME_GET_AMOUNT("gameSelectAmount"),
+    GAME_GET_MULTI_AMOUNT("gameSelectMultiAmount"),
     DRAFT_INIT("draftInit"),
     DRAFT_PICK("draftPick"),
     DRAFT_UPDATE("draftUpdate");

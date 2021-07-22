@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class LunarForce extends CardImpl {
 
         // Whenever an opponent casts a spell, sacrifice Lunar Force and counter that spell.
         Ability ability = new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(),
-                new FilterSpell("a spell"), false, SetTargetPointer.SPELL);
+                StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL);
         Effect effect = new CounterTargetEffect();
         effect.setText("and counter that spell");
         ability.addEffect(effect);

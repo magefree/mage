@@ -39,7 +39,7 @@ public interface Permanent extends Card, Controllable {
      */
     void setTapped(boolean tapped);
 
-    boolean canTap();
+    boolean canTap(Game game);
 
     boolean isFlipped();
 
@@ -72,6 +72,16 @@ public interface Permanent extends Card, Controllable {
     boolean isRenowned();
 
     void setRenowned(boolean value);
+
+    int getClassLevel();
+
+    /**
+     * Level up to next level.
+     *
+     * @param classLevel
+     * @return false on wrong settings (e.g. level up to multiple levels)
+     */
+    boolean setClassLevel(int classLevel);
 
     void setCardNumber(String cid);
 

@@ -89,7 +89,7 @@ class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getData().equals(CounterType.FUSE.getName())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && filter.match(permanent, game)) {
+            if (filter.match(permanent, game)) {
                 if (4 <= permanent.getCounters(game).getCount(CounterType.FUSE)) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(permanent, game));
@@ -102,8 +102,8 @@ class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature has four or more fuse counters on it, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature has four or more fuse counters on it, " ;
     }
 }
 

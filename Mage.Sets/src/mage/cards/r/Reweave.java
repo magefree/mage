@@ -54,7 +54,7 @@ class ReweaveEffect extends OneShotEffect {
 
     public ReweaveEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Target permanent's controller sacrifices it. If they do, that player reveals cards from the top of their library until they reveal a permanent card that shares a card type with the sacrificed permanent, puts that card onto the battlefield, then shuffles their library";
+        this.staticText = "Target permanent's controller sacrifices it. If the player does, they reveal cards from the top of their library until they reveal a permanent card that shares a card type with the sacrificed permanent, put that card onto the battlefield, then shuffle";
     }
 
     public ReweaveEffect(final ReweaveEffect effect) {
@@ -80,9 +80,9 @@ class ReweaveEffect extends OneShotEffect {
                         Card permanentCard = null;
                         for (Card card : permanentController.getLibrary().getCards(game)) {
                             cards.add(card);
-                            if (card.isPermanent()) {
-                                for (CardType cardType : permanent.getCardType()) {
-                                    if (card.getCardType().contains(cardType)) {
+                            if (card.isPermanent(game)) {
+                                for (CardType cardType : permanent.getCardType(game)) {
+                                    if (card.getCardType(game).contains(cardType)) {
                                         permanentCard = card;
                                         break;
                                     }

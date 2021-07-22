@@ -13,7 +13,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -33,13 +33,13 @@ import java.util.UUID;
 public final class SkyclaveApparition extends CardImpl {
 
     private static final FilterPermanent filter = new FilterNonlandPermanent(
-            "nonland, nontoken permanent you don't control with converted mana cost 4 or less"
+            "nonland, nontoken permanent you don't control with mana value 4 or less"
     );
 
     static {
         filter.add(Predicates.not(TokenPredicate.instance));
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public SkyclaveApparition(UUID ownerId, CardSetInfo setInfo) {
@@ -74,7 +74,7 @@ class SkyclaveApparitionEffect extends OneShotEffect {
     SkyclaveApparitionEffect() {
         super(Outcome.Benefit);
         staticText = "the exiled card's owner creates an X/X blue Illusion creature token, " +
-                "where X is the converted mana cost of the exiled card";
+                "where X is the mana value of the exiled card";
     }
 
     private SkyclaveApparitionEffect(final SkyclaveApparitionEffect effect) {
@@ -107,7 +107,7 @@ class SkyclaveApparitionEffect extends OneShotEffect {
                 .stream()
                 .filter(Objects::nonNull)
                 .map(card -> owners.add(card.getOwnerId()) ? card : card)
-                .mapToInt(MageObject::getConvertedManaCost)
+                .mapToInt(MageObject::getManaValue)
                 .sum();
         for (UUID playerId : owners) {
             new CustomIllusionToken(totalCMC).putOntoBattlefield(1, game, source, playerId);

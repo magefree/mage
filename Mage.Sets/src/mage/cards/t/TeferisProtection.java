@@ -39,7 +39,7 @@ public final class TeferisProtection extends CardImpl {
         this.getSpellAbility().addEffect(new TeferisProtectionPhaseOutEffect());
 
         // Exile Teferi's Protection.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private TeferisProtection(final TeferisProtection card) {
@@ -78,7 +78,7 @@ class TeferisProtectionEffect extends OneShotEffect {
      */
     public TeferisProtectionEffect() {
         super(Outcome.Protect);
-        staticText = ", and you gain protection from everything";
+        staticText = " and you gain protection from everything";
     }
 
     public TeferisProtectionEffect(final TeferisProtectionEffect effect) {
@@ -126,7 +126,7 @@ class TeferisProtectionPhaseOutEffect extends OneShotEffect {
 
     public TeferisProtectionPhaseOutEffect() {
         super(Outcome.Benefit);
-        this.staticText = "All permanents you control phase out. (While they're phased out, they're treated as though they don't exist. They phase in before you untap during your untap step.)";
+        this.staticText = "All permanents you control phase out. <i>(While they're phased out, they're treated as though they don't exist. They phase in before you untap during your untap step.)</i><br>";
     }
 
     public TeferisProtectionPhaseOutEffect(final TeferisProtectionPhaseOutEffect effect) {

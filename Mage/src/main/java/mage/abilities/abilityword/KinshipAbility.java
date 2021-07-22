@@ -10,6 +10,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.AbilityWord;
 import mage.constants.EffectType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -25,6 +26,7 @@ public class KinshipAbility extends TriggeredAbilityImpl {
 
     public KinshipAbility(Effect kinshipEffect) {
         super(Zone.BATTLEFIELD, new KinshipBaseEffect(kinshipEffect), true);
+        this.setAbilityWord(AbilityWord.KINSHIP);
     }
 
     public KinshipAbility(final KinshipAbility ability) {
@@ -56,8 +58,8 @@ public class KinshipAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return new StringBuilder("<i>Kinship</i> &mdash; At the beginning of your upkeep, ").append(super.getRule()).toString();
+    public String getTriggerPhrase() {
+        return "At the beginning of your upkeep, ";
     }
 
 }

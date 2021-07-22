@@ -22,6 +22,7 @@ public final class OgreMenial extends CardImpl {
 
     public OgreMenial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.OGRE);
 
         this.power = new MageInt(0);

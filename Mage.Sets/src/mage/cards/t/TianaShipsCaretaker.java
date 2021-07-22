@@ -21,7 +21,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -89,11 +88,9 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTarget().getId());
 
-        if (permanent != null
-                && zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getFromZone() == Zone.BATTLEFIELD
-                && (permanent.isArtifact() && permanent.hasSubtype(SubType.EQUIPMENT, game)
-                    || permanent.isEnchantment() && permanent.hasSubtype(SubType.AURA, game))
+        if (permanent != null && zEvent.isDiesEvent()
+                && (permanent.isArtifact(game) && permanent.hasSubtype(SubType.EQUIPMENT, game)
+                    || permanent.isEnchantment(game) && permanent.hasSubtype(SubType.AURA, game))
                 && permanent.isControlledBy(this.controllerId)) {
             this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId()));
             return true;
@@ -102,8 +99,8 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an Aura or Equipment you control is put into a graveyard from the battlefield, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever an Aura or Equipment you control is put into a graveyard from the battlefield, " ;
     }
 }
 

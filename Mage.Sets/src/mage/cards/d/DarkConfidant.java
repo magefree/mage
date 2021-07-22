@@ -48,7 +48,7 @@ class DarkConfidantEffect extends OneShotEffect {
 
     DarkConfidantEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost";
+        this.staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to its mana value";
     }
 
     DarkConfidantEffect(final DarkConfidantEffect effect) {
@@ -66,7 +66,7 @@ class DarkConfidantEffect extends OneShotEffect {
                     Cards cards = new CardsImpl(card);
                     controller.revealCards(sourcePermanent.getIdName(), cards, game);
                     controller.moveCards(card, Zone.HAND, source, game);
-                    controller.loseLife(card.getConvertedManaCost(), game, source, false);
+                    controller.loseLife(card.getManaValue(), game, source, false);
 
                 }
                 return true;

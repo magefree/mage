@@ -20,6 +20,7 @@ public final class TelJiladFallen extends CardImpl {
 
     public TelJiladFallen (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
 

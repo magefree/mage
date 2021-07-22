@@ -125,7 +125,7 @@ class DargoTheShipwreckerWatcher extends Watcher {
             return;
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (permanent != null && (permanent.isCreature() || permanent.isArtifact())) {
+        if (permanent != null && (permanent.isCreature(game) || permanent.isArtifact(game))) {
             sacMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
         }
     }

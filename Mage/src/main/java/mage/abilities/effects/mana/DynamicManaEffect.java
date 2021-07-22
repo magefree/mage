@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.choices.ChoiceColor;
-import mage.constants.Outcome;
+import mage.constants.MultiAmountType;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -143,18 +143,23 @@ public class DynamicManaEffect extends ManaEffect {
             computedMana.setColorless(count);
         } else if (baseMana.getAny() > 0) {
             Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                ChoiceColor choiceColor = new ChoiceColor(true);
-                for (int i = 0; i < count; i++) {
-                    if (!choiceColor.isChosen()) {
-                        if (!controller.choose(Outcome.Benefit, choiceColor, game)) {
-                            return computedMana;
-                        }
+            if (controller != null && count > 0) {
+                if (oneChoice || count == 1) {
+                    ChoiceColor choice = new ChoiceColor(true);
+                    controller.choose(outcome, choice, game);
+                    if (choice.getChoice() == null) {
+                        return computedMana;
                     }
-                    choiceColor.increaseMana(computedMana);
-                    if (!oneChoice) {
-                        choiceColor.clearChoice();
-                    }
+                    computedMana.add(choice.getMana(count));
+                } else {
+                    List<String> manaStrings = new ArrayList<>(5);
+                    manaStrings.add("W");
+                    manaStrings.add("U");
+                    manaStrings.add("B");
+                    manaStrings.add("R");
+                    manaStrings.add("G");
+                    List<Integer> choices = controller.getMultiAmount(this.outcome, manaStrings, 0, count, MultiAmountType.MANA, game);
+                    computedMana.add(new Mana(choices.get(0), choices.get(1), choices.get(2), choices.get(3), choices.get(4), 0, 0, 0));
                 }
             }
         } else {

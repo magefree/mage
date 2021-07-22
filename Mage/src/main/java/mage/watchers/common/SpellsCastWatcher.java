@@ -10,14 +10,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
- *
  * @author LevelX2
  */
 public class SpellsCastWatcher extends Watcher {
@@ -41,18 +36,8 @@ public class SpellsCastWatcher extends Watcher {
                 }
             }
             if (spell != null) {
-                List<Spell> spells;
-                List<Spell> graveyardSpells;
-                if (!spellsCast.containsKey(spell.getControllerId())) {
-                    spells = new ArrayList<>();
-                    spellsCast.put(spell.getControllerId(), spells);
-                    graveyardSpells = new ArrayList<>();
-                    spellsCastFromGraveyard.put(spell.getControllerId(), graveyardSpells);
-
-                } else {
-                    spells = spellsCast.get(spell.getControllerId());
-                    graveyardSpells = spellsCastFromGraveyard.get(spell.getControllerId());
-                }
+                List<Spell> spells = spellsCast.computeIfAbsent(spell.getControllerId(), x -> new ArrayList<>());
+                List<Spell> graveyardSpells = spellsCastFromGraveyard.computeIfAbsent(spell.getControllerId(), x -> new ArrayList<>());
                 spells.add(spell.copy()); // copy needed because attributes like color could be changed later
                 if (event.getZone() == Zone.GRAVEYARD) {
                     graveyardSpells.add(spell.copy());
@@ -73,11 +58,11 @@ public class SpellsCastWatcher extends Watcher {
     }
 
     public List<Spell> getSpellsCastThisTurn(UUID playerId) {
-        return spellsCast.get(playerId);
+        return spellsCast.computeIfAbsent(playerId, x -> new ArrayList<>());
     }
 
     public List<Spell> getSpellsCastFromGraveyardThisTurn(UUID playerId) {
-        return spellsCastFromGraveyard.get(playerId);
+        return spellsCastFromGraveyard.computeIfAbsent(playerId, x -> new ArrayList<>());
     }
 
     public int getNumberOfNonCreatureSpells() {

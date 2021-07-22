@@ -29,7 +29,7 @@ public final class CoffinPuppets extends CardImpl {
     private static final FilterControlledPermanent filter
             = new FilterControlledPermanent("you control a Swamp");
     private static final FilterControlledPermanent filter2
-            = new FilterControlledLandPermanent("two lands");
+            = new FilterControlledLandPermanent("lands");
 
     static {
         filter.add(SubType.SWAMP.getPredicate());

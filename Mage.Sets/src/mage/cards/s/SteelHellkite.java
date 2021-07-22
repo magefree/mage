@@ -18,7 +18,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -70,7 +70,7 @@ class SteelHellkiteDestroyEffect extends OneShotEffect {
 
     public SteelHellkiteDestroyEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by {this} this turn";
+        staticText = "Destroy each nonland permanent with mana value X whose controller was dealt combat damage by {this} this turn";
     }
 
     public SteelHellkiteDestroyEffect(final SteelHellkiteDestroyEffect effect) {
@@ -93,7 +93,7 @@ class SteelHellkiteDestroyEffect extends OneShotEffect {
             predicateSet.add(new ControllerIdPredicate(playerId));
         }
         FilterPermanent filter = new FilterNonlandPermanent();
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
         filter.add(Predicates.or(predicateSet));
         return new DestroyAllEffect(filter).apply(game, source);
     }

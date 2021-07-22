@@ -11,8 +11,9 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
-import mage.util.functions.SpellCopyApplier;
+import mage.util.functions.StackObjectCopyApplier;
 
 import java.util.UUID;
 
@@ -70,12 +71,12 @@ class ForkEffect extends OneShotEffect {
     }
 }
 
-enum ForkApplier implements SpellCopyApplier {
+enum ForkApplier implements StackObjectCopyApplier {
     instance;
 
     @Override
-    public void modifySpell(Spell spell, Game game) {
-        spell.getColor(game).setColor(ObjectColor.RED);
+    public void modifySpell(StackObject stackObject, Game game) {
+        stackObject.getColor(game).setColor(ObjectColor.RED);
     }
 
     @Override

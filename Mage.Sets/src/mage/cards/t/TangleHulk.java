@@ -21,6 +21,7 @@ public final class TangleHulk extends CardImpl {
 
     public TangleHulk (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);

@@ -28,7 +28,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -50,7 +49,7 @@ public final class TourachsGate extends CardImpl {
 
     private static final FilterPermanent filterUntapped = new FilterPermanent("enchanted land is untapped");
     static {
-        filterUntapped.add(Predicates.not(TappedPredicate.instance));
+        filterUntapped.add(TappedPredicate.UNTAPPED);
     }
 
     private static final FilterCreaturePermanent filterAttackingCreatures = new FilterCreaturePermanent("attacking creatures you control");

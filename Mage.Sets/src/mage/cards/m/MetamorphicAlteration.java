@@ -100,7 +100,7 @@ class ChooseACreature extends OneShotEffect {
 class MetamorphicAlterationEffect extends ContinuousEffectImpl {
 
     public MetamorphicAlterationEffect() {
-        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.Copy);
+        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.CopyEffects_1a, Outcome.Copy);
         this.staticText = "Enchanted creature is a copy of the chosen creature.";
     }
 
@@ -128,9 +128,9 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
         for (SuperType t : copied.getSuperType()) {
             permanent.addSuperType(t);
         }
-        permanent.getCardType().clear();
-        for (CardType cardType : copied.getCardType()) {
-            permanent.addCardType(cardType);
+        permanent.removeAllCardTypes(game);
+        for (CardType cardType : copied.getCardType(game)) {
+            permanent.addCardType(game, cardType);
         }
         permanent.removeAllSubTypes(game);
         permanent.copySubTypesFrom(game, copied);

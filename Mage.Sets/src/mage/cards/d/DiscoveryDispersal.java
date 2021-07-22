@@ -13,7 +13,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
@@ -68,7 +68,7 @@ class DispersalEffect extends OneShotEffect {
     DispersalEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each opponent returns a nonland permanent "
-                + "they control with the highest converted mana cost "
+                + "they control with the highest mana value "
                 + "among permanents they control to its owner's hand, "
                 + "then discards a card.";
     }
@@ -97,11 +97,11 @@ class DispersalEffect extends OneShotEffect {
             int highestCMC = 0;
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(opponentId)) {
                 if (permanent != null) {
-                    highestCMC = Math.max(highestCMC, permanent.getConvertedManaCost());
+                    highestCMC = Math.max(highestCMC, permanent.getManaValue());
                 }
             }
-            FilterPermanent filter = new FilterNonlandPermanent("permanent you control with converted mana cost " + highestCMC);
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, highestCMC));
+            FilterPermanent filter = new FilterNonlandPermanent("permanent you control with mana value " + highestCMC);
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, highestCMC));
             filter.add(new ControllerIdPredicate(opponentId));
             Target target = new TargetPermanent(1, 1, filter, true);
             if (opponent.choose(outcome, target, source.getSourceId(), game)) {

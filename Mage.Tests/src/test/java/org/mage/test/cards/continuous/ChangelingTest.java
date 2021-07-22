@@ -33,7 +33,7 @@ public class ChangelingTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, copter);
         addCard(Zone.BATTLEFIELD, playerA, woodlandChangeling, 2);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: Until end of turn {this} becomes");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}:");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew");
         setChoice(playerA, ultimus);
 

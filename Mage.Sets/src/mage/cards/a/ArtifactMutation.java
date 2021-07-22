@@ -1,6 +1,6 @@
 package mage.cards.a;
 
-import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
+import mage.abilities.dynamicvalue.common.TargetManaValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -24,7 +24,7 @@ public final class ArtifactMutation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
 
         // create X 1/1 green Saproling creature tokens, where X is that artifact's converted mana cost.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetConvertedManaCost.instance).setText("create X 1/1 green Saproling creature tokens, where X is that artifact's converted mana cost"));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetManaValue.instance).setText("create X 1/1 green Saproling creature tokens, where X is that artifact's mana value"));
     }
 
     private ArtifactMutation(final ArtifactMutation card) {

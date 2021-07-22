@@ -61,7 +61,7 @@ class AnathemancerCount implements DynamicValue {
             Player chosenPlayer = game.getPlayer(playerId);
             if (chosenPlayer != null) {
                 FilterLandPermanent filter = new FilterLandPermanent("tapped lands the chosen player controls");
-                filter.add(TappedPredicate.instance);
+                filter.add(TappedPredicate.TAPPED);
                 filter.add(new ControllerIdPredicate(playerId));
                 return game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
             }
@@ -70,7 +70,7 @@ class AnathemancerCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public AnathemancerCount copy() {
         return new AnathemancerCount();
     }
 

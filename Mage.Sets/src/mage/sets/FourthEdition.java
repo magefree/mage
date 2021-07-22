@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class FourthEdition extends ExpansionSet {
@@ -125,7 +124,8 @@ public final class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Earth Elemental", 188, Rarity.UNCOMMON, mage.cards.e.EarthElemental.class));
         cards.add(new SetCardInfo("Earthquake", 189, Rarity.RARE, mage.cards.e.Earthquake.class));
         cards.add(new SetCardInfo("Ebony Horse", 318, Rarity.RARE, mage.cards.e.EbonyHorse.class));
-        cards.add(new SetCardInfo("El-Hajjaj", 134, Rarity.RARE, mage.cards.e.ElHajjaj.class));
+        cards.add(new SetCardInfo("El-Hajjaj", "134+", Rarity.RARE, mage.cards.e.ElHajjaj.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("El-Hajjaj", 134, Rarity.RARE, mage.cards.e.ElHajjaj.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elder Land Wurm", 24, Rarity.RARE, mage.cards.e.ElderLandWurm.class));
         cards.add(new SetCardInfo("Elven Riders", 242, Rarity.UNCOMMON, mage.cards.e.ElvenRiders.class));
         cards.add(new SetCardInfo("Elvish Archers", 243, Rarity.RARE, mage.cards.e.ElvishArchers.class));

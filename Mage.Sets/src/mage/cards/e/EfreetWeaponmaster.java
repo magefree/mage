@@ -98,8 +98,8 @@ class EfreetWeaponmasterAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When {this} enters the battlefield or is turned face up, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When {this} enters the battlefield or is turned face up, " ;
     }
 
 }

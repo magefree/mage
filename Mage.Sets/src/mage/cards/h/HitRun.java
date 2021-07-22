@@ -55,7 +55,7 @@ class HitEffect extends OneShotEffect {
 
     public HitEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Target player sacrifices an artifact or creature. Hit deals damage to that player equal to that permanent's converted mana cost";
+        this.staticText = "Target player sacrifices an artifact or creature. Hit deals damage to that player equal to that permanent's mana value";
     }
 
     public HitEffect(final HitEffect effect) {
@@ -82,7 +82,7 @@ class HitEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     permanent.sacrifice(source, game);
-                    int damage = permanent.getConvertedManaCost();
+                    int damage = permanent.getManaValue();
                     if (damage > 0) {
                         targetPlayer.damage(damage, source.getSourceId(), source, game);
                     }

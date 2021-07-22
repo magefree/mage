@@ -16,7 +16,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public final class GreenSunsZenith extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("green creature");
+    private static final FilterCard filter = new FilterCard("green creature card");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));

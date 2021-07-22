@@ -8,7 +8,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -64,8 +63,7 @@ public class ExileSourceCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        return permanent != null;
+        return source.getSourceObjectIfItStillExists(game) instanceof Card;
     }
 
     @Override

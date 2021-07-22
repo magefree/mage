@@ -134,6 +134,10 @@ class KarplusanMinotaurCost extends CostImpl {
         this.text = "Flip a coin";
     }
 
+    private KarplusanMinotaurCost(final KarplusanMinotaurCost cost) {
+        super(cost);
+    }
+
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
@@ -158,7 +162,7 @@ class KarplusanMinotaurCost extends CostImpl {
 
     @Override
     public KarplusanMinotaurCost copy() {
-        return new KarplusanMinotaurCost();
+        return new KarplusanMinotaurCost(this);
     }
 }
 

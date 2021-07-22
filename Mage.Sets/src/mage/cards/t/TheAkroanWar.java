@@ -76,7 +76,7 @@ class TheAkroanWarEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     TheAkroanWarEffect() {

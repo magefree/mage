@@ -1,7 +1,7 @@
 
 package mage.cards.h;
 
-import mage.abilities.common.DiesSourceTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -35,7 +35,7 @@ public final class HorizonSpellbomb extends CardImpl {
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
         // When Horizon Spellbomb is put into a graveyard from the battlefield, you may pay {G}. If you do, draw a card.
-        this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{G}"))));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{G}"))));
     }
 
     private HorizonSpellbomb(final HorizonSpellbomb card) {

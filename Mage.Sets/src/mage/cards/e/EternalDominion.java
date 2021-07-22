@@ -62,7 +62,7 @@ class EternalDominionEffect extends OneShotEffect {
 
     public EternalDominionEffect() {
         super(Outcome.Benefit);
-        staticText = "Search target opponent's library for an artifact, creature, enchantment, or land card. Put that card onto the battlefield under your control. Then that player shuffles their library";
+        staticText = "Search target opponent's library for an artifact, creature, enchantment, or land card. Put that card onto the battlefield under your control. Then that player shuffles";
     }
 
     public EternalDominionEffect(final EternalDominionEffect effect) {

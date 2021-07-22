@@ -10,7 +10,6 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -109,14 +108,14 @@ class TurnaboutEffect extends OneShotEffect {
             filter.add(type.getPredicate());
 
             if (choiceImpl.getChoice().equals("Untap")) {
-                filter.add(TappedPredicate.instance);
+                filter.add(TappedPredicate.TAPPED);
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                     if (permanent.isControlledBy(target)) {
                         permanent.untap(game);
                     }
                 }
             } else {
-                filter.add(Predicates.not(TappedPredicate.instance));
+                filter.add(TappedPredicate.UNTAPPED);
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                     if (permanent.isControlledBy(target)) {
                         permanent.tap(source, game);

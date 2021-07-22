@@ -27,7 +27,7 @@ public final class Soothsaying extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShuffleLibrarySourceEffect(), new ManaCostsImpl<>("{3}{U}{U}")));
         
         // {X}: Look at the top X cards of your library, then put them back in any order.
-        Effect effect = new LookLibraryControllerEffect(ManacostVariableValue.instance);
+        Effect effect = new LookLibraryControllerEffect(ManacostVariableValue.REGULAR);
         effect.setText("Look at the top X cards of your library, then put them back in any order");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("X")));
     }

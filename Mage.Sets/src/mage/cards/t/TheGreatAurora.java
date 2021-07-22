@@ -30,7 +30,7 @@ public final class TheGreatAurora extends CardImpl {
 
         // Each player shuffles all cards from their hand and all permanents they own into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield. Exile The Great Aurora.
         this.getSpellAbility().addEffect(new TheGreatAuroraEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private TheGreatAurora(final TheGreatAurora card) {

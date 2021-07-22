@@ -77,7 +77,7 @@ class RhysticCaveManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public String getRule() {
-        return super.getRule() + " Activate this ability only any time you could cast an instant.";
+        return super.getRule() + " Activate only as an instant.";
     }
 }
 
@@ -85,7 +85,7 @@ class RhysticCaveManaEffect extends ManaEffect {
 
     public RhysticCaveManaEffect() {
         super();
-        this.staticText = "Choose a color. Add one mana of that color ";
+        this.staticText = "Choose a color. Add one mana of that color";
     }
 
     public RhysticCaveManaEffect(final RhysticCaveManaEffect effect) {

@@ -45,9 +45,9 @@ public class TransformAbility extends SimpleStaticAbility {
         permanent.getColor(game).setColor(sourceCard.getColor(game));
         permanent.getManaCost().clear();
         permanent.getManaCost().add(sourceCard.getManaCost());
-        permanent.getCardType().clear();
-        for (CardType type : sourceCard.getCardType()) {
-            permanent.addCardType(type);
+        permanent.removeAllCardTypes(game);
+        for (CardType type : sourceCard.getCardType(game)) {
+            permanent.addCardType(game, type);
         }
         permanent.removeAllSubTypes(game);
         permanent.copySubTypesFrom(game, sourceCard);
@@ -71,7 +71,7 @@ public class TransformAbility extends SimpleStaticAbility {
 class TransformEffect extends ContinuousEffectImpl {
 
     TransformEffect() {
-        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
+        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.CopyEffects_1a, Outcome.BecomeCreature);
         staticText = "";
     }
 

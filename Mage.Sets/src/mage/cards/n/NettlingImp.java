@@ -52,7 +52,7 @@ public final class NettlingImp extends CardImpl {
                 new TapSourceCost(), new NettlingImpTurnCondition(),
                 "{T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. "
                 + "That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. "
-                + "Activate this ability only during an opponent's turn, before attackers are declared.");
+                + "Activate only during an opponent's turn, before attackers are declared.");
         ability.addEffect(new NettlingImpDelayedDestroyEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability, new AttackedThisTurnWatcher());

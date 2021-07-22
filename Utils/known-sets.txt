@@ -1,3 +1,5 @@
+Adventures in the Forgotten Realms|AdventuresInTheForgottenRealms|
+Forgotten Realms Commander|ForgottenRealmsCommander|
 Aether Revolt|AetherRevolt|
 Alara Reborn|AlaraReborn|
 Alliances|Alliances|
@@ -28,6 +30,7 @@ Commander 2017 Edition|Commander2017Edition|
 Commander 2018|Commander2018Edition|
 Commander 2019|Commander2019Edition|
 Commander 2020|Commander2020Edition|
+Commander 2021|Commander2021Edition|
 Commander Legends|CommanderLegends|
 Commander Anthology|CommanderAnthology|
 Commander Anthology 2018|CommanderAnthology2018|
@@ -149,6 +152,7 @@ Mirage|Mirage|
 Mirrodin|Mirrodin|
 Mirrodin Besieged|MirrodinBesieged|
 Modern Horizons|ModernHorizons|
+Modern Horizons 2|ModernHorizons2|
 Modern Masters|ModernMasters|
 Modern Masters 2015|ModernMasters2015|
 Modern Masters 2017|ModernMasters2017|

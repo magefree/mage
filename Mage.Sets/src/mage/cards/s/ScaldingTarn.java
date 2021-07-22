@@ -20,7 +20,7 @@ public final class ScaldingTarn extends CardImpl {
     public ScaldingTarn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.frameColor = new ObjectColor("UR");
-        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.ISLAND, SubType.MOUNTAIN)));
+        this.addAbility(new FetchLandActivatedAbility(SubType.ISLAND, SubType.MOUNTAIN));
     }
 
     private ScaldingTarn(final ScaldingTarn card) {

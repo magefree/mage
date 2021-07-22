@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.TargetSpell;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -24,7 +24,7 @@ public final class SpellBlast extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
         // Counter target spell with converted mana cost X.
-        this.getSpellAbility().addEffect(new CounterTargetEffect().setText("counter target spell with converted mana cost X"));
+        this.getSpellAbility().addEffect(new CounterTargetEffect().setText("counter target spell with mana value X"));
         this.getSpellAbility().setTargetAdjuster(SpellBlastAdjuster.instance);
     }
 
@@ -45,8 +45,8 @@ enum SpellBlastAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         int xValue = ability.getManaCostsToPay().getX();
         ability.getTargets().clear();
-        FilterSpell filter = new FilterSpell("spell with converted mana cost " + xValue);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        FilterSpell filter = new FilterSpell("spell with mana value " + xValue);
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.addTarget(new TargetSpell(filter));
     }
 }

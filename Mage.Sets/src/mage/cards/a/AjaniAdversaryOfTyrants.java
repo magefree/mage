@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.command.emblems.AjaniAdversaryOfTyrantsEmblem;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -27,10 +27,10 @@ import mage.target.common.TargetCreaturePermanent;
 public final class AjaniAdversaryOfTyrants extends CardImpl {
 
     private static final FilterCreatureCard filter
-            = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard");
+            = new FilterCreatureCard("creature card with mana value 2 or less from your graveyard");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public AjaniAdversaryOfTyrants(UUID ownerId, CardSetInfo setInfo) {

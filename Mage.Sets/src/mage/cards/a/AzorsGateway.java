@@ -60,7 +60,7 @@ class AzorsGatewayEffect extends OneShotEffect {
 
     public AzorsGatewayEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Draw a card, then exile a card from your hand. If cards with five or more different converted mana costs are exiled with {this}, you gain 5 life, untap Azor's Gateway, and transform it";
+        this.staticText = "Draw a card, then exile a card from your hand. If cards with five or more different mana values are exiled with {this}, you gain 5 life, untap Azor's Gateway, and transform it";
     }
 
     public AzorsGatewayEffect(final AzorsGatewayEffect effect) {
@@ -89,7 +89,7 @@ class AzorsGatewayEffect extends OneShotEffect {
             ExileZone exileZone = game.getExile().getExileZone(exileId);
             if (exileZone != null) {
                 for (Card card : exileZone.getCards(game)) {
-                    usedCMC.add(card.getConvertedManaCost());
+                    usedCMC.add(card.getManaValue());
                 }
                 if (usedCMC.size() > 4) {
                     controller.gainLife(4, game, source);

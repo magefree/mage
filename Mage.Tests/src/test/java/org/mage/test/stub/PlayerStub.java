@@ -665,6 +665,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public Cards discard(int minAmount, int maxAmount, boolean payForCost, Ability source, Game game) {
+        return null;
+    }
+
+    @Override
     public void discardToMax(Game game) {
 
     }
@@ -967,6 +972,11 @@ public class PlayerStub implements Player {
     @Override
     public int getAmount(int min, int max, String message, Game game) {
         return 0;
+    }
+
+    @Override
+    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+        return null;
     }
 
     @Override

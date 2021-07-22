@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
@@ -68,8 +67,8 @@ class TotalWarTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player attacks with one or more creatures, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a player attacks with one or more creatures, " ;
     }
 }
 
@@ -95,7 +94,7 @@ class TotalWarDestroyEffect extends OneShotEffect {
         if (activePlayer != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(activePlayer.getId())) {
                 // Noncreature cards are safe.
-                if (!permanent.isCreature()) {
+                if (!permanent.isCreature(game)) {
                     continue;
                 }
                 // Tapped cards are safe.

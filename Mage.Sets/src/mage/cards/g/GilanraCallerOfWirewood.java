@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.players.ManaPoolItem;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -81,19 +82,18 @@ class GilanraCallerOfWirewoodTriggeredAbility extends DelayedTriggeredAbility {
         if (!getSourceId().equals(event.getSourceId())) {
             return false;
         }
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
+        Permanent sourcePermanent = getSourcePermanentOrLKI(game);
         if (sourcePermanent == null
                 || sourcePermanent
                 .getAbilities(game)
                 .stream()
-                .filter(GreenManaAbility.class::isInstance)
                 .map(Ability::getOriginalId)
                 .map(UUID::toString)
                 .noneMatch(event.getData()::equals)) {
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && spell.getConvertedManaCost() >= 6;
+        return spell != null && spell.getManaValue() >= 6;
     }
 
     @Override
@@ -101,19 +101,20 @@ class GilanraCallerOfWirewoodTriggeredAbility extends DelayedTriggeredAbility {
         if (super.isInactive(game)) {
             return true;
         }
-
         // must remove effect on empty mana pool to fix accumulate bug
-        Player player = game.getPlayer(this.getControllerId());
-        if (player == null) {
-            return true;
-        }
-
         // if no mana in pool then it can be discarded
-        return player.getManaPool().getManaItems().stream().noneMatch(m -> m.getSourceId().equals(getSourceId()));
+        Player player = game.getPlayer(this.getControllerId());
+        return player == null
+                || player
+                .getManaPool()
+                .getManaItems()
+                .stream()
+                .map(ManaPoolItem::getSourceId)
+                .noneMatch(getSourceId()::equals);
     }
 
     @Override
     public String getRule() {
-        return "When you spend this mana to cast a spell with converted mana cost 6 or greater, draw a card.";
+        return "When you spend this mana to cast a spell with mana value 6 or greater, draw a card.";
     }
 }

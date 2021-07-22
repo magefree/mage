@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
@@ -23,7 +22,7 @@ public final class StoneshakerShaman extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("untapped land");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public StoneshakerShaman(UUID ownerId, CardSetInfo setInfo) {

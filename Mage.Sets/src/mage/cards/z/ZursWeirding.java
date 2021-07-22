@@ -1,7 +1,5 @@
 package mage.cards.z;
 
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,14 +10,12 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author Quercitron
@@ -30,10 +26,10 @@ public final class ZursWeirding extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // Players play with their hands revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.ANY)));
+        this.addAbility(new SimpleStaticAbility(new PlayWithHandRevealedEffect(TargetController.ANY)));
 
         // If a player would draw a card, they reveal it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ZursWeirdingReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ZursWeirdingReplacementEffect()));
     }
 
     private ZursWeirding(final ZursWeirding card) {
@@ -50,7 +46,9 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
 
     ZursWeirdingReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        this.staticText = "If a player would draw a card, they reveal it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.";
+        this.staticText = "If a player would draw a card, they reveal it instead." +
+                "Then any other player may pay 2 life. If a player does, " +
+                "put that card into its owner's graveyard. Otherwise, that player draws a card.";
     }
 
     private ZursWeirdingReplacementEffect(final ZursWeirdingReplacementEffect effect) {
@@ -63,27 +61,11 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DRAW_CARD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
         boolean paid = false;
         Player player = game.getPlayer(event.getTargetId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (player == null
-                || sourceObject == null) {
+        if (player == null || sourceObject == null) {
             return false;
         }
         Card card = player.getLibrary().getFromTop(game);
@@ -101,22 +83,28 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
                 continue;
             }
             Player otherPlayer = game.getPlayer(playerId);
-            if (otherPlayer.canPayLifeCost(source)
-                    && otherPlayer.getLife() >= 2) {
-                PayLifeCost lifeCost = new PayLifeCost(2);
-                while (otherPlayer.canRespond()
-                        && !paid
-                        && otherPlayer.chooseUse(Outcome.Benefit, message, source, game)) {
-                    paid = lifeCost.pay(source, game, source, otherPlayer.getId(), false, null);
-                }
-                if (paid) {
-                    player.moveCards(card, Zone.GRAVEYARD, source, game);
-                    return true;
-                }
+            if (otherPlayer == null || !otherPlayer.canPayLifeCost(source) || otherPlayer.getLife() < 2) {
+                continue;
+            }
+            PayLifeCost lifeCost = new PayLifeCost(2);
+            if (otherPlayer.chooseUse(Outcome.Benefit, message, source, game)
+                    && lifeCost.pay(source, game, source, otherPlayer.getId(), true)) {
+                player.moveCards(card, Zone.GRAVEYARD, source, game);
+                return true;
             }
         }
         // This is still replacing the draw, so we still return true
         player.drawCards(1, source, game, event);
+        return true;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
         return true;
     }
 }

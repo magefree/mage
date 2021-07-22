@@ -19,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -94,10 +93,9 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = zEvent.getTarget();
         if (permanent != null
                 && permanent.isOwnedBy(this.controllerId)
-                && zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getFromZone() == Zone.BATTLEFIELD
+                && zEvent.isDiesEvent()
                 && !(permanent instanceof PermanentToken)
-                && permanent.isCreature()) {
+                && permanent.isCreature(game)) {
 
             getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game) + 1));
             return true;

@@ -129,7 +129,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
                 filter.add(SubType.AURA.getPredicate());
                 for (UUID attachmentId : new HashSet<>(permanent.getAttachments())) {
                     Permanent attachment = game.getPermanent(attachmentId);
-                    if (attachment != null && filter.match(attachment, game)) {
+                    if (filter.match(attachment, game)) {
                         attachment.destroy(source, game, false);
                     }
                 }

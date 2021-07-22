@@ -15,7 +15,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -49,7 +49,7 @@ public final class LullmagesDomination extends CardImpl {
 
         // Gain control of target creature with converted mana cost X.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom)
-                .setText("gain control of target creature with converted mana cost X"));
+                .setText("gain control of target creature with mana value X"));
         this.getSpellAbility().setTargetAdjuster(LullmagesDominationAdjuster.instance);
     }
 
@@ -80,8 +80,8 @@ enum LullmagesDominationAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         int xValue = ability.getManaCostsToPay().getX();
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost " + xValue);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value " + xValue);
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.addTarget(new TargetCreaturePermanent(filter));
     }
 }

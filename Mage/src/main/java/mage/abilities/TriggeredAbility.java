@@ -1,17 +1,17 @@
 
 package mage.abilities;
 
-import java.util.UUID;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public interface TriggeredAbility extends Ability {
 
-    void trigger(Game game, UUID controllerId);
+    void trigger(Game game, UUID controllerId, GameEvent event);
 
     /**
      * This check for the relevant event types is called at first to prevent
@@ -37,6 +37,10 @@ public interface TriggeredAbility extends Ability {
      */
     boolean checkTrigger(GameEvent event, Game game);
 
+    boolean checkTriggeredAlready(Game game);
+
+    TriggeredAbility setTriggersOnce(boolean triggersOnce);
+
     boolean checkInterveningIfClause(Game game);
 
     boolean isOptional();
@@ -48,4 +52,9 @@ public interface TriggeredAbility extends Ability {
     @Override
     TriggeredAbility copy();
 
+    void setTriggerEvent(GameEvent event);
+
+    GameEvent getTriggerEvent();
+
+    String getTriggerPhrase();
 }

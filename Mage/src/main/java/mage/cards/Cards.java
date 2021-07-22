@@ -1,5 +1,6 @@
 package mage.cards;
 
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 
@@ -42,4 +43,6 @@ public interface Cards extends Set<UUID>, Serializable {
     int count(FilterCard filter, UUID sourceId, UUID playerId, Game game);
 
     Cards copy();
+
+    void retainZone(Zone zone, Game game);
 }

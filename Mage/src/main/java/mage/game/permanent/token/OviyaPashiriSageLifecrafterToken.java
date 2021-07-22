@@ -1,14 +1,13 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.util.RandomUtil;
+
+import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class OviyaPashiriSageLifecrafterToken extends TokenImpl {
@@ -24,10 +23,10 @@ public final class OviyaPashiriSageLifecrafterToken extends TokenImpl {
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.CONSTRUCT);
-        setOriginalExpansionSetCode("KLD");
-        setTokenType(RandomUtil.nextInt(2) + 1);
         power = new MageInt(number);
         toughness = new MageInt(number);
+
+        availableImageSetCodes = Arrays.asList("KLD");
     }
 
     public OviyaPashiriSageLifecrafterToken(final OviyaPashiriSageLifecrafterToken token) {
@@ -36,5 +35,14 @@ public final class OviyaPashiriSageLifecrafterToken extends TokenImpl {
 
     public OviyaPashiriSageLifecrafterToken copy() {
         return new OviyaPashiriSageLifecrafterToken(this);
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C21")) {
+            setTokenType(2);
+        }
     }
 }

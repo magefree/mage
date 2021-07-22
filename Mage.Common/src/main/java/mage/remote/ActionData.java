@@ -67,7 +67,7 @@ public class ActionData {
                             "paid",
                             "hand",
                             "stack",
-                            "convertedManaCost",
+                            "manaValue",
                             "gameId",
                             "canPlayInHand",
                             "gameView",

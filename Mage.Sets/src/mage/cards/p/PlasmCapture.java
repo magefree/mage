@@ -44,7 +44,7 @@ class PlasmCaptureCounterEffect extends OneShotEffect {
 
     public PlasmCaptureCounterEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors, where X is that spell's converted mana cost";
+        this.staticText = "Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors, where X is that spell's mana value";
     }
 
     public PlasmCaptureCounterEffect(final PlasmCaptureCounterEffect effect) {
@@ -62,7 +62,7 @@ class PlasmCaptureCounterEffect extends OneShotEffect {
         if (spell != null) {
             game.getStack().counter(getTargetPointer().getFirst(game, source), source, game);
             // mana gets added also if counter is not successful
-            int mana = spell.getConvertedManaCost();
+            int mana = spell.getManaValue();
             AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility
                      = new AtTheBeginOfMainPhaseDelayedTriggeredAbility(new AddManaInAnyCombinationEffect(mana), false, TargetController.YOU, PhaseSelection.NEXT_PRECOMBAT_MAIN);
             game.addDelayedTriggeredAbility(delayedAbility, source);

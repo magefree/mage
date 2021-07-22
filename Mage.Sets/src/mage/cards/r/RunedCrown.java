@@ -64,7 +64,7 @@ class RunedCrownEffect extends OneShotEffect {
     RunedCrownEffect() {
         super(Outcome.Benefit);
         staticText = "you may search your library, hand, and/or graveyard for a Rune card " +
-                "and put it onto the battlefield attached to {this}. If you search your library this way, shuffle it";
+                "and put it onto the battlefield attached to {this}. If you search your library this way, shuffle";
     }
 
     private RunedCrownEffect(final RunedCrownEffect effect) {

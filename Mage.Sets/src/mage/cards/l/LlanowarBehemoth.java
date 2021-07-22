@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -25,7 +24,7 @@ public final class LlanowarBehemoth extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter =  new FilterControlledCreaturePermanent("untapped creature you control");
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
     
     public LlanowarBehemoth(UUID ownerId, CardSetInfo setInfo) {

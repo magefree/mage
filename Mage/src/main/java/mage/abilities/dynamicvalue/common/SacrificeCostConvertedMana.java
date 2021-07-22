@@ -31,7 +31,7 @@ public class SacrificeCostConvertedMana implements DynamicValue {
                 SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
                 int totalCMC = 0;
                 for(Permanent permanent : sacrificeCost.getPermanents()) {
-                    totalCMC += permanent.getConvertedManaCost();
+                    totalCMC += permanent.getManaValue();
                 }
                 return totalCMC;
             }
@@ -51,6 +51,6 @@ public class SacrificeCostConvertedMana implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the sacrificed " + type + "'s converted mana cost";
+        return "the sacrificed " + type + "'s mana value";
     }
 }

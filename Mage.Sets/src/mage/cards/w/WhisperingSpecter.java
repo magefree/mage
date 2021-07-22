@@ -26,6 +26,7 @@ public final class WhisperingSpecter extends CardImpl {
 
     public WhisperingSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SPECTER);
 
         this.power = new MageInt(1);

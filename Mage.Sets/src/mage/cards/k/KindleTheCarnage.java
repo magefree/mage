@@ -42,7 +42,7 @@ class KindleTheCarnageEffect extends OneShotEffect {
 
     public KindleTheCarnageEffect() {
         super(Outcome.AIDontUseIt);
-        this.staticText = "Discard a card at random. If you do, {this} deals damage equal to that card's converted mana cost to each creature. You may repeat this process any number of times";
+        this.staticText = "Discard a card at random. If you do, {this} deals damage equal to that card's mana value to each creature. You may repeat this process any number of times";
     }
 
     public KindleTheCarnageEffect(final KindleTheCarnageEffect effect) {
@@ -64,7 +64,7 @@ class KindleTheCarnageEffect extends OneShotEffect {
                     && controller.chooseUse(Outcome.AIDontUseIt, "Discard a card randomly from your hand?", source, game)) {
                 Card discardedCard = controller.discardOne(true, false, source, game);
                 if (discardedCard != null) {
-                    new DamageAllEffect(discardedCard.getConvertedManaCost(), new FilterCreaturePermanent()).apply(game, source);
+                    new DamageAllEffect(discardedCard.getManaValue(), new FilterCreaturePermanent()).apply(game, source);
                 }
             }
             return true;

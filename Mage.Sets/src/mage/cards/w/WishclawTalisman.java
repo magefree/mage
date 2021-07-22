@@ -70,7 +70,7 @@ class WishclawTalismanEffect extends OneShotEffect {
 
     WishclawTalismanEffect() {
         super(Outcome.Benefit);
-        staticText = "Search your library for a card, put it into your hand, then shuffle your library. " +
+        staticText = "Search your library for a card, put it into your hand, then shuffle. " +
                 "An opponent gains control of {this}";
     }
 

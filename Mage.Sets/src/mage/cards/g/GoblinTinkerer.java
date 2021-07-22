@@ -56,7 +56,7 @@ class GoblinTinkererDamageEffect extends OneShotEffect {
     
     public GoblinTinkererDamageEffect() {
         super(Outcome.Detriment);
-        this.staticText = "That artifact deals damage equal to its converted mana cost to {this}";
+        this.staticText = "That artifact deals damage equal to its mana value to {this}";
     }
     
     public GoblinTinkererDamageEffect(final GoblinTinkererDamageEffect effect) {
@@ -74,7 +74,7 @@ class GoblinTinkererDamageEffect extends OneShotEffect {
         Permanent targetArtifact = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);        
         if (controller != null && targetArtifact != null) {
             Permanent sourceObject = game.getPermanent(source.getSourceId());
-            int damage = targetArtifact.getConvertedManaCost();
+            int damage = targetArtifact.getManaValue();
             if (sourceObject != null && damage > 0) {
                 sourceObject.damage(damage, targetArtifact.getId(), source, game, false, true);
             }

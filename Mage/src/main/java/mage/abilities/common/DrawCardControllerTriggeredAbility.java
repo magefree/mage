@@ -36,8 +36,8 @@ public class DrawCardControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you draw a card, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you draw a card, " ;
     }
 
     @Override

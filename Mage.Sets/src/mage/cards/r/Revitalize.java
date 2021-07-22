@@ -20,7 +20,7 @@ public final class Revitalize extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Revitalize(final Revitalize card) {

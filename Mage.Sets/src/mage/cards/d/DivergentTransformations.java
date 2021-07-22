@@ -82,7 +82,7 @@ class DivergentTransformationsEffect extends OneShotEffect {
                         Cards toReveal = new CardsImpl();
                         for (Card card : player.getLibrary().getCards(game)) {
                             toReveal.add(card);
-                            if (card.isCreature()) {
+                            if (card.isCreature(game)) {
                                 player.revealCards(source, toReveal, game);
                                 player.moveCards(card, Zone.BATTLEFIELD, source, game);
                                 toReveal.remove(card);

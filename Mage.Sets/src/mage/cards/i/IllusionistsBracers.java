@@ -1,10 +1,8 @@
 package mage.cards.i;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CopyStackAbilityEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
@@ -15,10 +13,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -51,10 +47,10 @@ public final class IllusionistsBracers extends CardImpl {
 class IllusionistsBracersTriggeredAbility extends TriggeredAbilityImpl {
 
     IllusionistsBracersTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CopyActivatedAbilityEffect());
+        super(Zone.BATTLEFIELD, new CopyStackAbilityEffect());
     }
 
-    IllusionistsBracersTriggeredAbility(final IllusionistsBracersTriggeredAbility ability) {
+    private IllusionistsBracersTriggeredAbility(final IllusionistsBracersTriggeredAbility ability) {
         super(ability);
     }
 
@@ -71,48 +67,20 @@ class IllusionistsBracersTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent equipment = game.getPermanent(this.getSourceId());
-        if (equipment != null && equipment.isAttachedTo(event.getSourceId())) {
-            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (!(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
-                Effect effect = this.getEffects().get(0);
-                effect.setValue("stackAbility", stackAbility);
-                return true;
-            }
+        if (equipment == null || !equipment.isAttachedTo(event.getSourceId())) {
+            return false;
         }
-        return false;
+        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+        if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
+            return false;
+        }
+        this.getEffects().setValue("stackAbility", stackAbility);
+        return true;
     }
 
     @Override
     public String getRule() {
-        return "Whenever an ability of equipped creature is activated, if it isn't a mana ability, copy that ability. You may choose new targets for the copy.";
-    }
-}
-
-class CopyActivatedAbilityEffect extends OneShotEffect {
-
-    public CopyActivatedAbilityEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "copy that ability. You may choose new targets for the copy";
-    }
-
-    public CopyActivatedAbilityEffect(final CopyActivatedAbilityEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CopyActivatedAbilityEffect copy() {
-        return new CopyActivatedAbilityEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        StackAbility ability = (StackAbility) getValue("stackAbility");
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (ability != null && controller != null && sourcePermanent != null) {
-            ability.createCopyOnStack(game, source, source.getControllerId(), true);
-            return true;
-        }
-        return false;
+        return "Whenever an ability of equipped creature is activated, if it isn't a mana ability, " +
+                "copy that ability. You may choose new targets for the copy.";
     }
 }

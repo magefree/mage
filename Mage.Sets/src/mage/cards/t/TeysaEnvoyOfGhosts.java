@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.MageInt;
@@ -40,8 +39,10 @@ public final class TeysaEnvoyOfGhosts extends CardImpl {
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
+
         // protection from creatures
         this.addAbility(new ProtectionAbility(FILTER_PERMANENT_CREATURES));
+
         // Whenever a creature deals combat damage to you, destroy that creature. Create a 1/1 white and black Spirit creature token with flying.
         this.addAbility(new TeysaEnvoyOfGhostsTriggeredAbility());
 
@@ -62,7 +63,6 @@ class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
     public TeysaEnvoyOfGhostsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());
         this.addEffect(new CreateTokenEffect(new WhiteBlackSpiritToken(), 1));
-
     }
 
     public TeysaEnvoyOfGhostsTriggeredAbility(final TeysaEnvoyOfGhostsTriggeredAbility ability) {
@@ -86,7 +86,7 @@ class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
         if (damageEvent.getPlayerId().equals(getControllerId())
                 && damageEvent.isCombatDamage()
                 && sourcePermanent != null
-                && sourcePermanent.isCreature()) {
+                && sourcePermanent.isCreature(game)) {
             game.getState().setValue(sourceId.toString(), sourcePermanent.getControllerId());
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
             return true;

@@ -147,4 +147,8 @@ public interface Target extends Serializable {
     String getChooseHint();
 
     void setEventReporting(boolean shouldReport);
+
+    int getSize();
+
+    boolean contains(UUID targetId);
 }

@@ -3,7 +3,7 @@ package mage.target.targetadjustment;
 import mage.abilities.Ability;
 import mage.constants.ComparisonType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 
@@ -21,7 +21,7 @@ public enum XCMCPermanentAdjuster implements TargetAdjuster {
         int minTargets = oldTargetPermanent.getMinNumberOfTargets();
         int maxTargets = oldTargetPermanent.getMaxNumberOfTargets();
         FilterPermanent permanentFilter = oldTargetPermanent.getFilter().copy();
-        permanentFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        permanentFilter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.getTargets().clear();
         ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, permanentFilter, false));
     }

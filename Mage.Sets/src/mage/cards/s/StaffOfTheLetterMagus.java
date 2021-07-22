@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -35,7 +36,7 @@ public final class StaffOfTheLetterMagus extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new StaffOfTheLetterMagusChooseLetterEffect()));
 
         // Whenever a player casts a spell, you gain 1 life for each time the chosen letter appears in that spell’s name.
-        this.addAbility(new SpellCastAllTriggeredAbility(new StaffOfTheLetterMagusEffect(), new FilterSpell("a spell"), false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastAllTriggeredAbility(new StaffOfTheLetterMagusEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));
     }
 
     private StaffOfTheLetterMagus(final StaffOfTheLetterMagus card) {

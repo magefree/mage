@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -17,10 +17,10 @@ import mage.target.TargetSpell;
  */
 public final class MentalMisstep extends CardImpl {
 
-    private static final FilterSpell FILTER = new FilterSpell("spell with converted mana cost 1");
+    private static final FilterSpell FILTER = new FilterSpell("spell with mana value 1");
 
     static {
-        FILTER.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, 1));
+        FILTER.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, 1));
     }
 
     public MentalMisstep(UUID ownerId, CardSetInfo setInfo) {

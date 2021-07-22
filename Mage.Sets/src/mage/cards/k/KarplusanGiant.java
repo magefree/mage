@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -26,7 +25,7 @@ public final class KarplusanGiant extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("untapped snow land you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(SuperType.SNOW.getPredicate());
     }
 

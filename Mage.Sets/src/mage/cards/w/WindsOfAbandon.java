@@ -57,7 +57,7 @@ class WindsOfAbandonEffect extends OneShotEffect {
         super(Outcome.Exile);
         staticText = "Exile target creature you don't control. For each creature exiled this way, " +
                 "its controller searches their library for a basic land card. " +
-                "Those players put those cards onto the battlefield tapped, then shuffle their libraries.";
+                "Those players put those cards onto the battlefield tapped, then shuffle.";
     }
 
     private WindsOfAbandonEffect(final WindsOfAbandonEffect effect) {
@@ -103,7 +103,7 @@ class WindsOfAbandonOverloadEffect extends OneShotEffect {
         super(Outcome.Exile);
         staticText = "Exile each creature you don't control. For each creature exiled this way, " +
                 "its controller searches their library for a basic land card. " +
-                "Those players put those cards onto the battlefield tapped, then shuffle their libraries.";
+                "Those players put those cards onto the battlefield tapped, then shuffle.";
     }
 
     private WindsOfAbandonOverloadEffect(final WindsOfAbandonOverloadEffect effect) {

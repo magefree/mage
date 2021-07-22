@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.card.PutIntoGraveFromBattlefieldThisTurnPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
@@ -55,6 +56,7 @@ class GerrardWeatherlightHeroEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard();
 
     static {
+        filter.add(PutIntoGraveFromBattlefieldThisTurnPredicate.instance);
         filter.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate()

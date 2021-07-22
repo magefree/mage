@@ -32,7 +32,7 @@ public final class BaralsExpertise extends CardImpl {
         getSpellAbility().addTarget(new TargetPermanent(0, 3, filter, false));
 
         // You may cast a card with converted mana cost 4 or less from your hand without paying its mana cost.
-        getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(4));
+        getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(4).concatBy("<br>"));
     }
 
     private BaralsExpertise(final BaralsExpertise card) {

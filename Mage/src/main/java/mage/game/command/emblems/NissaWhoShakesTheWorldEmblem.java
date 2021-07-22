@@ -20,7 +20,7 @@ public final class NissaWhoShakesTheWorldEmblem extends Emblem {
                 Zone.COMMAND,
                 new GainAbilityAllEffect(
                         IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield,
-                        StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, false
+                        StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS, false
                 )
         ));
         this.setExpansionSetCodeForImage("WAR");

@@ -75,7 +75,7 @@ class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl {
         if (sourceObject != null
                 && permanent != null
                 && permanent.isControlledBy(this.getControllerId())
-                && permanent.isCreature()) {
+                && permanent.isCreature(game)) {
             for (Effect effect : this.getEffects()) {
                 if (effect instanceof GruulRagebeastEffect) {
                     effect.setTargetPointer(
@@ -117,8 +117,8 @@ class GruulRagebeastEffect extends OneShotEffect {
         Permanent target = game.getPermanent(source.getFirstTarget());
         if (triggeredCreature != null
                 && target != null
-                && triggeredCreature.isCreature()
-                && target.isCreature()) {
+                && triggeredCreature.isCreature(game)
+                && target.isCreature(game)) {
             return triggeredCreature.fight(target, source, game);
         }
         return false;

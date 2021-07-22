@@ -29,7 +29,7 @@ public final class CodeOfConstraint extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
 
         // Addendum — If you cast this spell during your main phase, tap that creature and it doesn't untap during its controller's next untap step.
         this.getSpellAbility().addEffect(new CodeOfConstraintEffect());

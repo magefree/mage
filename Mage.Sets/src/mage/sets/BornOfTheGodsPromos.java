@@ -20,14 +20,14 @@ public class BornOfTheGodsPromos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Arbiter of the Ideal", 31, Rarity.RARE, mage.cards.a.ArbiterOfTheIdeal.class));
-        cards.add(new SetCardInfo("Eater of Hope", 66, Rarity.RARE, mage.cards.e.EaterOfHope.class));
+        cards.add(new SetCardInfo("Arbiter of the Ideal", "31*", Rarity.RARE, mage.cards.a.ArbiterOfTheIdeal.class));
+        cards.add(new SetCardInfo("Eater of Hope", "66*", Rarity.RARE, mage.cards.e.EaterOfHope.class));
         cards.add(new SetCardInfo("Fated Conflagration", "*94", Rarity.RARE, mage.cards.f.FatedConflagration.class));
-        cards.add(new SetCardInfo("Forgestoker Dragon", 98, Rarity.RARE, mage.cards.f.ForgestokerDragon.class));
+        cards.add(new SetCardInfo("Forgestoker Dragon", "98*", Rarity.RARE, mage.cards.f.ForgestokerDragon.class));
         cards.add(new SetCardInfo("Kiora's Follower", 150, Rarity.UNCOMMON, mage.cards.k.KiorasFollower.class));
-        cards.add(new SetCardInfo("Nessian Wilds Ravager", 129, Rarity.RARE, mage.cards.n.NessianWildsRavager.class));
+        cards.add(new SetCardInfo("Nessian Wilds Ravager", "129*", Rarity.RARE, mage.cards.n.NessianWildsRavager.class));
         cards.add(new SetCardInfo("Pain Seer", 80, Rarity.RARE, mage.cards.p.PainSeer.class));
-        cards.add(new SetCardInfo("Silent Sentinel", 26, Rarity.RARE, mage.cards.s.SilentSentinel.class));
-        cards.add(new SetCardInfo("Tromokratis", 55, Rarity.RARE, mage.cards.t.Tromokratis.class));
-     }
+        cards.add(new SetCardInfo("Silent Sentinel", "26*", Rarity.RARE, mage.cards.s.SilentSentinel.class));
+        cards.add(new SetCardInfo("Tromokratis", "55*", Rarity.RARE, mage.cards.t.Tromokratis.class));
+    }
 }

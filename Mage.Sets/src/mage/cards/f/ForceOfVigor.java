@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -45,10 +44,7 @@ public final class ForceOfVigor extends CardImpl {
 
         // Destroy up to two target artifacts and/or enchantments.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(
-                0, 2,
-                StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT, false
-        ));
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 2, filter2, false));
     }
 
     private ForceOfVigor(final ForceOfVigor card) {

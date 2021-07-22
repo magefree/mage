@@ -47,6 +47,11 @@ public final class SoldeviSentry extends CardImpl {
 
 class SoldeviSentryEffect extends RegenerateSourceEffect {
 
+    public SoldeviSentryEffect() {
+        super();
+        this.staticText = "Choose target opponent. Regenerate {this}. When it regenerates this way, that player may draw a card";
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
         //20110204 - 701.11

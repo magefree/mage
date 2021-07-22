@@ -29,7 +29,7 @@ public final class AudaciousInfiltrator extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Audacious Infiltrator can't be blocked by artifact creatures.
-        Effect effect = new CantBeBlockedByCreaturesSourceEffect(StaticFilters.FILTER_ARTIFACT_CREATURE_PERMANENT, Duration.WhileOnBattlefield);
+        Effect effect = new CantBeBlockedByCreaturesSourceEffect(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE, Duration.WhileOnBattlefield);
         effect.setText("{this} can't be blocked by artifact creatures");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

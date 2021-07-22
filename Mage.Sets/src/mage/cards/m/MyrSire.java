@@ -1,8 +1,5 @@
-
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -10,23 +7,25 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.MyrToken;
+import mage.game.permanent.token.PhyrexianMyrToken;
+
+import java.util.UUID;
 
 /**
- *
  * @author Loki
  */
 public final class MyrSire extends CardImpl {
 
-    public MyrSire (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
+    public MyrSire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.MYR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new MyrToken())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new PhyrexianMyrToken())));
     }
 
-    public MyrSire (final MyrSire card) {
+    public MyrSire(final MyrSire card) {
         super(card);
     }
 
@@ -34,5 +33,4 @@ public final class MyrSire extends CardImpl {
     public MyrSire copy() {
         return new MyrSire(this);
     }
-
 }

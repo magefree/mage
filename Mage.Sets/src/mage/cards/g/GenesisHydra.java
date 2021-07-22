@@ -19,7 +19,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -59,7 +59,7 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
 
     public GenesisHydraPutOntoBattlefieldEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "reveal the top X cards of your library. You may put a nonland permanent card with converted mana cost X or less from among them onto the battlefield. Then shuffle the rest into your library";
+        staticText = "reveal the top X cards of your library. You may put a nonland permanent card with mana value X or less from among them onto the battlefield. Then shuffle the rest into your library";
     }
 
     public GenesisHydraPutOntoBattlefieldEffect(final GenesisHydraPutOntoBattlefieldEffect effect) {
@@ -75,9 +75,9 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
             if (count > 0) {
                 Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, count));
                 controller.revealCards(source, cards, game);
-                FilterCard filter = new FilterPermanentCard("a nonland permanent card with converted mana cost " + count + " or less to put onto the battlefield");
+                FilterCard filter = new FilterPermanentCard("a nonland permanent card with mana value " + count + " or less to put onto the battlefield");
                 filter.add(Predicates.not(CardType.LAND.getPredicate()));
-                filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, count + 1));
+                filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, count + 1));
                 TargetCard target1 = new TargetCard(Zone.LIBRARY, filter);
                 target1.setRequired(false);
                 if (cards.count(filter, controller.getId(), source.getSourceId(), game) > 0) {
@@ -92,7 +92,7 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
                         game.informPlayers(controller.getLogName() + " didn't choose anything");
                     }
                 } else {
-                    game.informPlayers("No nonland permanent card with converted mana cost " + count + " or less to choose.");
+                    game.informPlayers("No nonland permanent card with mana value " + count + " or less to choose.");
                 }
                 if (!cards.isEmpty()) {
                     controller.moveCards(cards, Zone.LIBRARY, source, game);

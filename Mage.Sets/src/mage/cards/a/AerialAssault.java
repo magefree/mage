@@ -28,7 +28,7 @@ public final class AerialAssault extends CardImpl {
             = new FilterControlledCreaturePermanent("creature you control with flying");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
         filter2.add(new AbilityPredicate(FlyingAbility.class));
     }
 

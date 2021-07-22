@@ -18,7 +18,7 @@ public final class GuanYus1000LiMarch extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creatures");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public GuanYus1000LiMarch(UUID ownerId, CardSetInfo setInfo) {

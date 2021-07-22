@@ -34,7 +34,7 @@ public final class GuiseOfFire extends CardImpl {
         // Enchanted creature gets +1/-1 and attacks each turn if able.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, -1, Duration.WhileOnBattlefield));
         Effect effect = new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA);
-        effect.setText("and attacks each turn if able");
+        effect.setText("and attacks each combat if able");
         ability.addEffect(effect);
         this.addAbility(ability);
 

@@ -67,7 +67,7 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         if (getSourcePermanentIfItStillExists(game) != null) {
-            return getSourcePermanentIfItStillExists(game).isEnchantment();
+            return getSourcePermanentIfItStillExists(game).isEnchantment(game);
         }
         return false;
     }
@@ -79,10 +79,10 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public void trigger(Game game, UUID controllerId) {
+    public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
         //20100716 - 603.8
         game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.TRUE);
-        super.trigger(game, controllerId);
+        super.trigger(game, controllerId, triggeringEvent);
     }
 
     @Override
@@ -99,8 +99,8 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When an opponent has 10 or less life, if {this} is an enchantment, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When an opponent has 10 or less life, if {this} is an enchantment, " ;
     }
 
 }
@@ -108,7 +108,7 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
 class LurkingJackalsToken extends TokenImpl {
 
     public LurkingJackalsToken() {
-        super("Hound", "3/2 Hound creature");
+        super("Dog", "3/2 Dog creature");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.DOG);
         power = new MageInt(3);

@@ -33,6 +33,7 @@ public final class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Altar's Reap", 127, Rarity.COMMON, mage.cards.a.AltarsReap.class));
         cards.add(new SetCardInfo("Ascended Lawmage", 198, Rarity.UNCOMMON, mage.cards.a.AscendedLawmage.class));
         cards.add(new SetCardInfo("Avatar of Woe", 128, Rarity.MYTHIC, mage.cards.a.AvatarOfWoe.class));
+        cards.add(new SetCardInfo("Ballot Broker", 13, Rarity.COMMON, mage.cards.b.BallotBroker.class));
         cards.add(new SetCardInfo("Beast Within", 174, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Berserk", 175, Rarity.MYTHIC, mage.cards.b.Berserk.class));
         cards.add(new SetCardInfo("Besmirch", 49, Rarity.UNCOMMON, mage.cards.b.Besmirch.class));
@@ -121,6 +122,7 @@ public final class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Hundred-Handed One", 93, Rarity.RARE, mage.cards.h.HundredHandedOne.class));
         cards.add(new SetCardInfo("Hurly-Burly", 165, Rarity.COMMON, mage.cards.h.HurlyBurly.class));
         cards.add(new SetCardInfo("Ill-Tempered Cyclops", 166, Rarity.COMMON, mage.cards.i.IllTemperedCyclops.class));
+        cards.add(new SetCardInfo("Illusion of Choice", 31, Rarity.UNCOMMON, mage.cards.i.IllusionOfChoice.class));
         cards.add(new SetCardInfo("Infest", 139, Rarity.UNCOMMON, mage.cards.i.Infest.class));
         cards.add(new SetCardInfo("Inquisition of Kozilek", 140, Rarity.RARE, mage.cards.i.InquisitionOfKozilek.class));
         cards.add(new SetCardInfo("Into the Void", 112, Rarity.UNCOMMON, mage.cards.i.IntoTheVoid.class));

@@ -37,7 +37,7 @@ public final class Scaretiller extends CardImpl {
         ));
 
         // • Return target land card from your graveyard to the battlefield tapped.
-        Mode mode = new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect(true, false));
+        Mode mode = new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect(true));
         mode.addTarget(new TargetCardInYourGraveyard(filter));
         ability.addMode(mode);
         this.addAbility(ability);

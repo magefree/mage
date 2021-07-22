@@ -78,7 +78,7 @@ class ProteusStaffEffect extends OneShotEffect {
                 Cards cards = new CardsImpl();
                 for (Card card : controller.getLibrary().getCards(game)) {
                     if (card != null) {
-                        if (card.isCreature()) {
+                        if (card.isCreature(game)) {
                             // The player puts that card onto the battlefield
                             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                             break;

@@ -49,7 +49,7 @@ public class PhageTheUntouchableTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Phage the Untouchable", 1);
 
         Assert.assertTrue("Game has ended.", currentGame.hasEnded());
-        Assert.assertTrue("Player A has won.", playerA.hasWon());
+        assertWonTheGame(playerA);
         Assert.assertTrue("Game ist At end phase", currentGame.getPhase().getType() == TurnPhase.END);
 
     }

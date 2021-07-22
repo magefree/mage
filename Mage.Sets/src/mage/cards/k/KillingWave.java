@@ -61,7 +61,7 @@ class KillingWaveEffect extends OneShotEffect {
             return false;
         }
 
-        int amount = (ManacostVariableValue.instance).calculate(game, source, this);
+        int amount = (ManacostVariableValue.REGULAR).calculate(game, source, this);
         if (amount > 0) {
             List<Permanent> sacrifices = new LinkedList<>();
             Map<UUID, Integer> lifePaidAmounts = new HashMap<>();

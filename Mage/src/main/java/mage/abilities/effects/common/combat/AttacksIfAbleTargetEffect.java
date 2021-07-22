@@ -50,7 +50,7 @@ public class AttacksIfAbleTargetEffect extends RequirementEffect {
         if (this.duration == Duration.EndOfTurn) {
             return "target " + mode.getTargets().get(0).getTargetName() + " attacks this turn if able";
         } else {
-            return "target " + mode.getTargets().get(0).getTargetName() + " attacks each turn if able";
+            return "target " + mode.getTargets().get(0).getTargetName() + " attacks each combat if able";
         }
     }
 

@@ -45,7 +45,7 @@ public final class Cloudthresher extends CardImpl {
         ability.addEffect(new DamagePlayersEffect(2));
         this.addAbility(ability);
         // Evoke {2}{G}{G}
-        this.addAbility(new EvokeAbility(this, "{2}{G}{G}"));
+        this.addAbility(new EvokeAbility("{2}{G}{G}"));
     }
 
     private Cloudthresher(final Cloudthresher card) {

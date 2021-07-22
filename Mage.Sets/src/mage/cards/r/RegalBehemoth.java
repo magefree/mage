@@ -71,7 +71,7 @@ class RegalBehemothTriggeredManaAbility extends TriggeredManaAbility {
             return false;
         }
         Permanent permanent = ((TappedForManaEvent) event).getPermanent();
-        return permanent != null && permanent.isLand();
+        return permanent != null && permanent.isLand(game);
     }
 
     @Override

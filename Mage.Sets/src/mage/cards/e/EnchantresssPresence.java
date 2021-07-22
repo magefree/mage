@@ -15,7 +15,7 @@ import mage.filter.FilterSpell;
  */
 public final class EnchantresssPresence extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("an Enchantment spell");
+    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
 
     static {
         filter.add(CardType.ENCHANTMENT.getPredicate());

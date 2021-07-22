@@ -75,7 +75,7 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
         if (enchantment != null
                 && enchantment.getAttachedTo() != null
                 && game.getControllerId(event.getTargetId()).equals(enchantment.getAttachedTo())
-                && game.getPermanent(event.getTargetId()).isCreature()) {
+                && game.getPermanent(event.getTargetId()).isCreature(game)) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
             }
@@ -85,8 +85,8 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature enters the battlefield under enchanted player's control, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature enters the battlefield under enchanted player's control, " ;
     }
 
     @Override

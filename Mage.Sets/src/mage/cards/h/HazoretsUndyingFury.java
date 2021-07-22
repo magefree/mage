@@ -9,7 +9,7 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,18 +51,18 @@ public final class HazoretsUndyingFury extends CardImpl {
 class HazoretsUndyingFuryEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard(
-            "nonland cards with converted mana cost 5 or less");
+            "nonland cards with mana value 5 or less");
 
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 6));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 6));
     }
 
     public HazoretsUndyingFuryEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Shuffle your library, then exile the top four cards. "
-                + "You may cast any number of nonland cards with converted mana "
-                + "cost 5 or less from among them without paying their mana costs";
+                + "You may cast any number of nonland cards with mana value "
+                + "5 or less from among them without paying their mana costs";
     }
 
     public HazoretsUndyingFuryEffect(final HazoretsUndyingFuryEffect effect) {

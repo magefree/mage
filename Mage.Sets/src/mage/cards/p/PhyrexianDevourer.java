@@ -32,6 +32,7 @@ public final class PhyrexianDevourer extends CardImpl {
 
     public PhyrexianDevourer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -86,7 +87,7 @@ class PhyrexianDevourerEffect extends OneShotEffect {
 
     public PhyrexianDevourerEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "Put X +1/+1 counters on {this}, where X is the exiled card's converted mana cost";
+        this.staticText = "Put X +1/+1 counters on {this}, where X is the exiled card's mana value";
     }
 
     public PhyrexianDevourerEffect(final PhyrexianDevourerEffect effect) {
@@ -109,7 +110,7 @@ class PhyrexianDevourerEffect extends OneShotEffect {
                 }
             }
             if (card != null) {
-                int amount = card.getConvertedManaCost();
+                int amount = card.getManaValue();
                 if (amount > 0) {
                     return new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount)).apply(game, source);
                 }

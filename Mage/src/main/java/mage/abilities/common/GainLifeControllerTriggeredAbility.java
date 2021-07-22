@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -14,6 +13,10 @@ import mage.target.targetpointer.FixedTarget;
 public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     private final boolean setTargetPointer;
+
+    public GainLifeControllerTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
 
     public GainLifeControllerTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
@@ -54,7 +57,7 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you gain life, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you gain life, " ;
     }
 }

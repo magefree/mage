@@ -215,7 +215,7 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
     public JaceArchitectOfThoughtEffect3() {
         super(Outcome.PlayForFree);
         this.staticText = "For each player, search that player's library for a nonland card and exile it, "
-                + "then that player shuffles their library. You may cast those cards without paying their mana costs";
+                + "then that player shuffles. You may cast those cards without paying their mana costs";
     }
 
     public JaceArchitectOfThoughtEffect3(final JaceArchitectOfThoughtEffect3 effect) {

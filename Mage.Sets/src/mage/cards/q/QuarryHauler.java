@@ -74,7 +74,7 @@ class QuarryHaulerEffect extends OneShotEffect {
                 Counters counters = permanent.getCounters(game).copy();
                 CounterType counterType;
                 for (Counter counter : counters.values()) {
-                    if (controller.chooseUse(Outcome.BoostCreature, "Do you want to add or remove a " + counter.getName() + " counter?", null, "add", "remove", source, game)) {
+                    if (controller.chooseUse(Outcome.BoostCreature, "Choose whether to add or remove a " + counter.getName() + " counter", null, "Add", "Remove", source, game)) {
                         counterType = CounterType.findByName(counter.getName());
                         Counter counterToAdd;
                         if (counterType != null) {

@@ -154,7 +154,7 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever " + filter.getMessage() + " dies, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever " + filter.getMessage() + " dies, " ;
     }
 }

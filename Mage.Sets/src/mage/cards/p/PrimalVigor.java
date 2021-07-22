@@ -10,6 +10,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
@@ -73,7 +74,9 @@ class PrimalVigorTokenEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() * 2);
+        if (event instanceof CreateTokenEvent) {
+            ((CreateTokenEvent) event).doubleTokens();
+        }
         return false;
     }
 
@@ -107,7 +110,7 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
         if (permanent == null) {
             permanent = game.getPermanentEntering(event.getTargetId());
         }
-        return permanent != null && event.getAmount() > 0 && permanent.isCreature()
+        return permanent != null && event.getAmount() > 0 && permanent.isCreature(game)
                 && event.getData() != null && event.getData().equals("+1/+1");
     }
 

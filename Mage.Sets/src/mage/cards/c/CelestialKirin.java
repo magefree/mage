@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
@@ -52,7 +52,7 @@ class CelestialKirinEffect extends OneShotEffect {
 
     public CelestialKirinEffect() {
         super(Outcome.GainLife);
-        this.staticText = "destroy all permanents with that spell's converted mana cost";
+        this.staticText = "destroy all permanents with that spell's mana value";
     }
 
     public CelestialKirinEffect(final CelestialKirinEffect effect) {
@@ -68,9 +68,9 @@ class CelestialKirinEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
         if (spell != null) {
-            int cmc = spell.getConvertedManaCost();
+            int cmc = spell.getManaValue();
             FilterPermanent filter = new FilterPermanent();
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, cmc));
             return new DestroyAllEffect(filter).apply(game, source);
         }
         return false;

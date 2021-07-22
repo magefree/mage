@@ -52,7 +52,7 @@ class FallenShinobiEffect extends OneShotEffect {
     FallenShinobiEffect() {
         super(Outcome.Benefit);
         staticText = "that player exiles the top two cards of their library. "
-                + "Until end of turn, you may play those cards without paying their mana cost.";
+                + "Until end of turn, you may play those cards without paying their mana costs.";
     }
 
     private FallenShinobiEffect(final FallenShinobiEffect effect) {

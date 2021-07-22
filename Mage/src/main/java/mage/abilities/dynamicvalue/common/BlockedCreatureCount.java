@@ -10,47 +10,36 @@ import mage.game.combat.CombatGroup;
 /**
  * @author Markedagain
  */
-public class BlockedCreatureCount implements DynamicValue {
+public enum BlockedCreatureCount implements DynamicValue {
+    ALL("each creature blocking it", false),
+    BEYOND_FIRST("each creature blocking it beyond the first", true);
 
     private final String message;
     private final boolean beyondTheFirst;
 
-    public BlockedCreatureCount() {
-        this("each creature blocking it");
-    }
-
-    public BlockedCreatureCount(String message) {
-        this(message, false);
-    }
-
-    public BlockedCreatureCount(String message, boolean beyondTheFirst) {
+    BlockedCreatureCount(String message, boolean beyondTheFirst) {
         this.message = message;
         this.beyondTheFirst = beyondTheFirst;
-    }
-
-    public BlockedCreatureCount(final BlockedCreatureCount dynamicValue) {
-        super();
-        this.message = dynamicValue.message;
-        this.beyondTheFirst = dynamicValue.beyondTheFirst;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         for (CombatGroup combatGroup : game.getCombat().getGroups()) {
-            if (combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
-                int blockers = combatGroup.getBlockers().size();
-                if (beyondTheFirst) {
-                    blockers = blockers > 0 ? blockers - 1 : 0;
-                }
-                return blockers;
+            if (!combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
+                continue;
             }
+            int blockers = combatGroup.getBlockers().size();
+            if (beyondTheFirst) {
+                blockers = blockers > 0 ? blockers - 1 : 0;
+            }
+            return blockers;
         }
         return 0;
     }
 
     @Override
     public BlockedCreatureCount copy() {
-        return new BlockedCreatureCount(this);
+        return this;
     }
 
     @Override

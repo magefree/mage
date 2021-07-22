@@ -55,7 +55,7 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
                 && (!combatOnly || ((DamagedEvent) event).isCombatDamage())) {
             if (filter != null) {
                 Permanent creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
-                if (creature == null || !filter.match(creature, getSourceId(), getControllerId(), game)) {
+                if (!filter.match(creature, getSourceId(), getControllerId(), game)) {
                     return false;
                 }
             }
@@ -71,7 +71,7 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever {this} deals ");
         if (combatOnly) {
             sb.append("combat ");
@@ -81,8 +81,8 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
             sb.append("a creature, ");
         } else {
             sb.append(filter.getMessage());
+            sb.append(", ");
         }
-        sb.append(super.getRule());
         return sb.toString();
     }
 

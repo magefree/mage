@@ -24,6 +24,7 @@ public final class PhyrexianGremlins extends CardImpl {
 
     public PhyrexianGremlins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.GREMLIN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

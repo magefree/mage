@@ -21,7 +21,7 @@ import mage.target.common.TargetCardInHand;
  */
 public class RevealTargetFromHandCost extends CostImpl {
 
-    public int convertedManaCosts = 0;
+    public int manaValues = 0;
     protected int numberCardsRevealed = 0;
     protected List<Card> revealedCards;
 
@@ -33,7 +33,7 @@ public class RevealTargetFromHandCost extends CostImpl {
 
     public RevealTargetFromHandCost(final RevealTargetFromHandCost cost) {
         super(cost);
-        this.convertedManaCosts = cost.convertedManaCosts;
+        this.manaValues = cost.manaValues;
         this.numberCardsRevealed = cost.numberCardsRevealed;
         this.revealedCards = new ArrayList<>(cost.revealedCards);
     }
@@ -41,14 +41,14 @@ public class RevealTargetFromHandCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         if (targets.choose(Outcome.Benefit, controllerId, source.getSourceId(), game)) {
-            convertedManaCosts = 0;
+            manaValues = 0;
             numberCardsRevealed = 0;
             Player player = game.getPlayer(controllerId);
             Cards cards = new CardsImpl();
             for (UUID targetId : targets.get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);
                 if (card != null) {
-                    convertedManaCosts += card.getConvertedManaCost();
+                    manaValues += card.getManaValue();
                     numberCardsRevealed++;
                     cards.add(card);
                     revealedCards.add(card);
@@ -68,7 +68,7 @@ public class RevealTargetFromHandCost extends CostImpl {
     }
 
     public int getConvertedCosts() {
-        return convertedManaCosts;
+        return manaValues;
     }
 
     public int getNumberRevealedCards() {

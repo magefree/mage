@@ -73,7 +73,7 @@ public class TeferiMageOfZhalfirTest extends CardTestCommanderDuelBase {
         assertPermanentCount(playerA, "Daxos of Meletis", 1);
         assertPowerToughness(playerA, "Daxos of Meletis", 6, 6); // no effects removes after game over -- users and tests can get last game state with all affected effects
 
-        Assert.assertEquals("Player A has won because of commander damage", true, playerA.hasWon());
-        Assert.assertEquals("Player B has lost because of commander damage", true, playerB.hasLost());
+        assertWonTheGame(playerA);
+        assertLostTheGame(playerB);
     }
 }

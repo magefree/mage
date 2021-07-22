@@ -38,6 +38,7 @@ public final class BrudicladTelchorEngineer extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}{R}");
 
         addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -69,7 +70,7 @@ class BrudicladTelchorEngineerEffect extends OneShotEffect {
 
     public BrudicladTelchorEngineerEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = " create a 2/1 blue Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token";
+        this.staticText = " create a 2/1 blue Phyrexian Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token";
     }
 
     public BrudicladTelchorEngineerEffect(final BrudicladTelchorEngineerEffect effect) {

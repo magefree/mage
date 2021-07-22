@@ -93,7 +93,7 @@ class ParoxysmEffect extends OneShotEffect {
                     if (revealCardFromTop != null) {
                         Cards cards = new CardsImpl(revealCardFromTop);
                         controllerOfCreature.revealCards(source, cards, game);
-                        if (revealCardFromTop.isLand()) {
+                        if (revealCardFromTop.isLand(game)) {
                             creatureAttachedTo.destroy(source, game, false);
                         } else {
                             ContinuousEffect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);

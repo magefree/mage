@@ -8,10 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -40,7 +37,7 @@ public final class ExclusionRitual extends CardImpl {
         // Imprint - When Exclusion Ritual enters the battlefield, exile target nonland permanent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExclusionRitualImprintEffect(), false);
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(AbilityWord.IMPRINT));
         // Players can't cast spells with the same name as the exiled card.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ExclusionRitualReplacementEffect()));
     }

@@ -57,7 +57,7 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
     public MasterOfPredicamentsEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "choose a card in your hand. That player guesses whether "
-                + "the card's converted mana cost is greater than 4. If the player "
+                + "the card's mana value is greater than 4. If the player "
                 + "guessed wrong, you may cast the card without paying its mana cost";
     }
 
@@ -92,19 +92,19 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
                     return false;
                 }
                 boolean guessWrong;
-                if (attackedPlayer.chooseUse(Outcome.Detriment, "Is the chosen card's converted "
-                        + "mana cost greater than 4?", source, game)) {
+                if (attackedPlayer.chooseUse(Outcome.Detriment, "Is the chosen card's "
+                        + "mana value greater than 4?", source, game)) {
                     game.informPlayers(attackedPlayer.getLogName() + " guessed that the chosen "
-                            + "card's converted mana cost is greater than 4");
-                    guessWrong = cardFromHand.getConvertedManaCost() <= 4;
+                            + "card's mana value is greater than 4");
+                    guessWrong = cardFromHand.getManaValue() <= 4;
                 } else {
                     game.informPlayers(attackedPlayer.getLogName() + " guessed that the chosen "
-                            + "card's converted mana cost is not greater than 4");
-                    guessWrong = cardFromHand.getConvertedManaCost() > 4;
+                            + "card's mana value is not greater than 4");
+                    guessWrong = cardFromHand.getManaValue() > 4;
                 }
                 game.informPlayers(attackedPlayer.getLogName() + " guessed " + (guessWrong ? "wrong" : "right"));
                 if (guessWrong) {
-                    if (cardFromHand.isLand()) {
+                    if (cardFromHand.isLand(game)) {
                         // If the revealed card is a land, you can't cast it. So nothing happens
                     } else {
                         if (controller.chooseUse(outcome, "Cast " + cardFromHand.getName()

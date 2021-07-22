@@ -121,8 +121,8 @@ class RiskyMoveTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When you gain control of {this} from another player, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When you gain control of {this} from another player, " ;
     }
 }
 

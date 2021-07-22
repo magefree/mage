@@ -17,6 +17,7 @@ public final class PorcelainLegionnaire extends CardImpl {
 
     public PorcelainLegionnaire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{W/P}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(3);

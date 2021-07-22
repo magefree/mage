@@ -21,7 +21,6 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -42,7 +41,7 @@ public final class VeteranWarleader extends CardImpl {
     static {
         filter.add(AnotherPredicate.instance);
         filter.add(SubType.ALLY.getPredicate());
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public VeteranWarleader(UUID ownerId, CardSetInfo setInfo) {

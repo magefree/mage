@@ -47,7 +47,7 @@ class MetamorphosisEffect extends OneShotEffect {
 
     public MetamorphosisEffect() {
         super(Outcome.PutManaInPool);
-        staticText = "Add X mana of any one color, where X is 1 plus the sacrificed creature's converted mana cost. Spend this mana only to cast creature spells.";
+        staticText = "Add X mana of any one color, where X is 1 plus the sacrificed creature's mana value. Spend this mana only to cast creature spells.";
     }
 
     public MetamorphosisEffect(final MetamorphosisEffect effect) {
@@ -59,7 +59,7 @@ class MetamorphosisEffect extends OneShotEffect {
         int amount = 0;
         for (Cost cost : source.getCosts()) {
             if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {
-                amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getConvertedManaCost() + 1;
+                amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getManaValue() + 1;
                 break;
             }
         }

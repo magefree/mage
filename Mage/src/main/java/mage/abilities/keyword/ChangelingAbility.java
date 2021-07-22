@@ -4,7 +4,6 @@ import mage.abilities.StaticAbility;
 import mage.abilities.effects.common.continuous.IsAllCreatureTypesSourceEffect;
 import mage.constants.Zone;
 
-
 /**
  * October 1, 2012
  * 702.71. Changeling
@@ -16,17 +15,25 @@ import mage.constants.Zone;
  */
 public class ChangelingAbility extends StaticAbility {
 
+    private final boolean changelingText;
+
     public ChangelingAbility() {
+        this(true);
+    }
+
+    public ChangelingAbility(boolean changelingText) {
         super(Zone.ALL, new IsAllCreatureTypesSourceEffect());
+        this.changelingText = changelingText;
     }
 
     private ChangelingAbility(final ChangelingAbility ability) {
         super(ability);
+        this.changelingText = ability.changelingText;
     }
 
     @Override
     public String getRule() {
-        return "Changeling <i>(This card is every creature type.)</i>";
+        return changelingText ? "Changeling <i>(This card is every creature type.)</i>" : super.getRule();
     }
 
     @Override

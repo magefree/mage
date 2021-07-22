@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.HumanToken;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -35,7 +34,6 @@ public final class RallyForTheThrone extends CardImpl {
                 "If at least three white mana was spent to cast this spell, " +
                 "you gain 1 life for each creature you control."
         ));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private RallyForTheThrone(final RallyForTheThrone card) {

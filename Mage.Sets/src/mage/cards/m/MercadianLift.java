@@ -18,7 +18,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -58,7 +58,7 @@ class MercadianLiftEffect extends OneShotEffect {
 
     public MercadianLiftEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "You may put a creature card with converted mana cost X from your hand onto the battlefield";
+        staticText = "You may put a creature card with mana value X from your hand onto the battlefield";
     }
 
     public MercadianLiftEffect(final MercadianLiftEffect effect) {
@@ -82,8 +82,8 @@ class MercadianLiftEffect extends OneShotEffect {
             }
             System.out.println("The number is " + numberOfCounters);
             FilterCreatureCard filter = new FilterCreatureCard();
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, numberOfCounters));
-            filter.setMessage("creature card with converted mana cost " + numberOfCounters);
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, numberOfCounters));
+            filter.setMessage("creature card with mana value " + numberOfCounters);
             TargetCardInHand target = new TargetCardInHand(filter);
             if (target.canChoose(source.getSourceId(), controller.getId(), game)
                     && controller.chooseUse(Outcome.PutCardInPlay, "Put " + filter.getMessage() + " from your hand onto the battlefield?", source, game)

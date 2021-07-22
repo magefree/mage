@@ -13,7 +13,7 @@ import mage.constants.SuperType;
 public final class VojaToken extends TokenImpl {
 
     public VojaToken() {
-        super("Voja", "legendary 2/2 green and white Wolf creature token named Voja");
+        super("Voja", "Voja, a legendary 2/2 green and white Wolf creature token");
         this.cardType.add(CardType.CREATURE);
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.WOLF);

@@ -71,7 +71,7 @@ class IndomitableCreativityEffect extends OneShotEffect {
                 "For each permanent destroyed this way, " +
                 "its controller reveals cards from the top of their library" +
                 " until an artifact or creature card is revealed and exiles that card. " +
-                "Those players put the exiled card onto the battlefield, then shuffle their libraries";
+                "Those players put the exiled card onto the battlefield, then shuffle";
     }
 
     public IndomitableCreativityEffect(final IndomitableCreativityEffect effect) {
@@ -104,7 +104,7 @@ class IndomitableCreativityEffect extends OneShotEffect {
                         Cards cardsToReaveal = new CardsImpl();
                         for (Card card : library.getCards(game)) {
                             cardsToReaveal.add(card);
-                            if (card.isCreature() || card.isArtifact()) {
+                            if (card.isCreature(game) || card.isArtifact(game)) {
                                 controllerOfDestroyedCreature.moveCards(card, Zone.EXILED, source, game);
                                 controllerOfDestroyedCreature.moveCards(card, Zone.BATTLEFIELD, source, game);
                                 break;

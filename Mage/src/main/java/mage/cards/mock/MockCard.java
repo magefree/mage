@@ -35,7 +35,7 @@ public class MockCard extends CardImpl {
     protected List<String> manaCostStr;
     protected String adventureSpellName;
     protected boolean isModalDoubleFacesCard;
-    protected int convertedManaCost;
+    protected int manaValue;
 
     public MockCard(CardInfo card) {
         super(null, card.getName());
@@ -54,7 +54,7 @@ public class MockCard extends CardImpl {
         this.manaCostLeftStr = card.getManaCosts(CardInfo.ManaCostSide.LEFT);
         this.manaCostRightStr = card.getManaCosts(CardInfo.ManaCostSide.RIGHT);
         this.manaCostStr = card.getManaCosts(CardInfo.ManaCostSide.ALL);
-        this.convertedManaCost = card.getConvertedManaCost();
+        this.manaValue = card.getManaValue();
 
         this.color = card.getColor();
 
@@ -107,7 +107,7 @@ public class MockCard extends CardImpl {
         this.manaCostStr = new ArrayList<>(card.manaCostStr);
         this.adventureSpellName = card.adventureSpellName;
         this.isModalDoubleFacesCard = card.isModalDoubleFacesCard;
-        this.convertedManaCost = card.convertedManaCost;
+        this.manaValue = card.manaValue;
     }
 
     @Override
@@ -133,8 +133,8 @@ public class MockCard extends CardImpl {
     }
 
     @Override
-    public int getConvertedManaCost() {
-        return this.convertedManaCost;
+    public int getManaValue() {
+        return this.manaValue;
     }
 
     public List<String> getManaCostStr(CardInfo.ManaCostSide manaCostSide) {

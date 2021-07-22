@@ -46,7 +46,7 @@ public final class BeastmastersMagemark extends CardImpl {
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false));
         this.addAbility(ability);
         // Whenever a creature you control that's enchanted becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
-        BlockedCreatureCount value = new BlockedCreatureCount();
+        BlockedCreatureCount value = BlockedCreatureCount.ALL;
         Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn, true);
         effect.setText("it gets +1/+1 until end of turn for each creature blocking it");
         this.addAbility(new BecomesBlockedAllTriggeredAbility(effect, false, filter, false));

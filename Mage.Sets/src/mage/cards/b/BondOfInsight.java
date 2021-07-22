@@ -27,7 +27,7 @@ public final class BondOfInsight extends CardImpl {
 
         // Each player puts the top four cards of their library into their graveyard. Return up to two instant and/or sorcery cards from your graveyard to your hand. Exile Bond of Insight.
         this.getSpellAbility().addEffect(new BondOfInsightEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private BondOfInsight(final BondOfInsight card) {

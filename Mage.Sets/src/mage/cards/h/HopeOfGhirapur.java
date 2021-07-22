@@ -21,7 +21,6 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -107,7 +106,7 @@ class HopeOfGhirapurCantCastEffect extends ContinuousRuleModifyingEffectImpl {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null && player.getId().equals(event.getPlayerId())) {
             Card card = game.getCard(event.getSourceId());
-            if (card != null && !card.isCreature()) {
+            if (card != null && !card.isCreature(game)) {
                 return true;
             }
         }

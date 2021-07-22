@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -72,7 +71,7 @@ class GorgingVultureEffect extends OneShotEffect {
                 .millCards(4, source, game)
                 .getCards(game)
                 .stream()
-                .filter(Card::isCreature)
+                .filter(card1 -> card1.isCreature(game))
                 .mapToInt(card -> game.getState().getZone(card.getId()) == Zone.GRAVEYARD ? 1 : 0)
                 .sum();
         return player.gainLife(lifeToGain, game, source) > 0;

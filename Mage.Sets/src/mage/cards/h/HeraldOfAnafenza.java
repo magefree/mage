@@ -81,7 +81,7 @@ class HeraldOfAnafenzaTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you activate {this}'s outlast ability, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you activate {this}'s outlast ability, " ;
     }
 }

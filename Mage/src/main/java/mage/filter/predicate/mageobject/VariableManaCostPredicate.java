@@ -1,4 +1,3 @@
-
 package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
@@ -11,12 +10,12 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class VariableManaCostPredicate implements Predicate<MageObject> {
+public enum VariableManaCostPredicate implements Predicate<MageObject> {
+    instance;
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        return input.getManaCost().stream().anyMatch(manaCost -> manaCost instanceof VariableManaCost);
-
+        return input.getManaCost().stream().anyMatch(VariableManaCost.class::isInstance);
     }
 
     @Override

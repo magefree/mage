@@ -25,7 +25,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public final class EverbarkShaman extends CardImpl {
 
     private static final FilterCard filterForest = new FilterCard("Forest");
-    private static final FilterCard filterTreefolk = new FilterCard("Treefolk from your graveyard");
+    private static final FilterCard filterTreefolk = new FilterCard("Treefolk card from your graveyard");
 
     static {
         filterForest.add(SubType.FOREST.getPredicate());

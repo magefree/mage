@@ -112,7 +112,7 @@ class InsistWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && ready) {
             if (uncounterableSpell == null && event.getPlayerId().equals(this.getControllerId())) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && (spell.isCreature())) {
+                if (spell != null && (spell.isCreature(game))) {
                     uncounterableSpell = spell.getId();
                     ready = false;
                 }

@@ -37,7 +37,7 @@ public final class Meadowboon extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // Evoke {3}{W}
-        this.addAbility(new EvokeAbility(this, "{3}{W}"));
+        this.addAbility(new EvokeAbility("{3}{W}"));
     }
 
     private Meadowboon(final Meadowboon card) {

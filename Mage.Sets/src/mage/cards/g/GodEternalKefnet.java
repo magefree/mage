@@ -90,8 +90,8 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
         you.setTopCardRevealed(true);
 
         // cast copy
-        if (topCard.isInstantOrSorcery()
-                && you.chooseUse(outcome, "Would you like to copy " + topCard.getName() + " and cast it for {2} less?", source, game)) {
+        if (topCard.isInstantOrSorcery(game)
+                && you.chooseUse(outcome, "Copy " + topCard.getName() + " and cast it for {2} less?", source, game)) {
             Card blueprint = topCard.copy();
             if (blueprint instanceof SplitCard) {
                 ((SplitCard) blueprint).getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
@@ -154,10 +154,10 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
         game.getState().setValue(mark, true);
 
         // ask player to reveal top cards
-        String mes = topCard.getName() + ", " + (topCard.isInstantOrSorcery()
+        String mes = topCard.getName() + ", " + (topCard.isInstantOrSorcery(game)
                 ? HintUtils.prepareText("you can copy it and cast {2} less", Color.green)
                 : HintUtils.prepareText("you can't copy it", Color.red));
-        return you.chooseUse(Outcome.Benefit, "Would you like to reveal first drawn card (" + mes + ")?", source, game);
+        return you.chooseUse(Outcome.Benefit, "Reveal first drawn card (" + mes + ")?", source, game);
     }
 
 }

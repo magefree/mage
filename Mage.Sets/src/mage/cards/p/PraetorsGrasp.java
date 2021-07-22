@@ -46,7 +46,7 @@ class PraetorsGraspEffect extends OneShotEffect {
     public PraetorsGraspEffect() {
         super(Outcome.PlayForFree);
         staticText = "Search target opponent's library for a card and exile it "
-                + "face down. Then that player shuffles their library. You may "
+                + "face down. Then that player shuffles. You may "
                 + "look at and play that card for as long as it remains exiled";
     }
 

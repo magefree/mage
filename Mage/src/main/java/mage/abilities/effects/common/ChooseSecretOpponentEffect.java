@@ -4,16 +4,19 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  * @author credman0
+ * @author TheElk801
  */
 public class ChooseSecretOpponentEffect extends OneShotEffect {
 
@@ -36,33 +39,53 @@ public class ChooseSecretOpponentEffect extends OneShotEffect {
         if (mageObject == null) {
             mageObject = game.getObject(source.getSourceId());
         }
-        if (controller != null && mageObject != null) {
-            TargetOpponent targetOpponent = new TargetOpponent(true);
-            targetOpponent.setTargetName("opponent (secretly)");
-            while (!controller.choose(outcome, targetOpponent, source.getSourceId(), game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
-            if (targetOpponent.getTargets().isEmpty()) {
-                return false;
-            }
-            if (!game.isSimulation()) {
-                game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has secretly chosen an opponent.");
-            }
-            game.getState().setValue(mageObject.getId() + SECRET_OPPONENT, targetOpponent.getTargets().get(0));
-            game.getState().setValue(mageObject.getId() + SECRET_OWNER, controller.getId());
-            if (mageObject instanceof Permanent) {
-                ((Permanent) mageObject).addInfo(SECRET_OPPONENT,
-                        CardUtil.addToolTipMarkTags(controller.getLogName() + " has secretly chosen an opponent."), game);
-            }
+        if (controller == null || mageObject == null) {
+            return false;
         }
-        return false;
+        TargetOpponent targetOpponent = new TargetOpponent(true);
+        targetOpponent.setTargetName("opponent (secretly)");
+        controller.choose(outcome, targetOpponent, source.getSourceId(), game);
+        if (targetOpponent.getFirstTarget() == null) {
+            return false;
+        }
+        game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has secretly chosen an opponent.");
+        setChosenPlayer(targetOpponent.getFirstTarget(), source, game);
+        setSecretOwner(controller.getId(), source, game);
+        if (!(mageObject instanceof Permanent)) {
+            return true;
+        }
+        ((Permanent) mageObject).addInfo(
+                SECRET_OPPONENT, CardUtil.addToolTipMarkTags(
+                        controller.getLogName() + " has secretly chosen an opponent."
+                ), game);
+        return true;
+    }
+
+    public static void setChosenPlayer(UUID value, Ability source, Game game) {
+        game.getState().setValue(getthing(source, game) + ChooseSecretOpponentEffect.SECRET_OPPONENT, value);
+    }
+
+    public static UUID getChosenPlayer(Ability source, Game game) {
+        return (UUID) game.getState().getValue(getthing(source, game) + ChooseSecretOpponentEffect.SECRET_OPPONENT);
+    }
+
+    public static void setSecretOwner(UUID value, Ability source, Game game) {
+        game.getState().setValue(getthing(source, game) + ChooseSecretOpponentEffect.SECRET_OWNER, value);
+    }
+
+    public static UUID getSecretOwner(Ability source, Game game) {
+        return (UUID) game.getState().getValue(getthing(source, game) + ChooseSecretOpponentEffect.SECRET_OWNER);
+    }
+
+    private static String getthing(Ability source, Game game) {
+        if (game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
+            return "" + source.getSourceId() + '_' + source.getSourceObjectZoneChangeCounter();
+        }
+        return "" + source.getSourceId() + '_' + (source.getSourceObjectZoneChangeCounter() + 1);
     }
 
     @Override
     public ChooseSecretOpponentEffect copy() {
         return new ChooseSecretOpponentEffect(this);
     }
-
 }

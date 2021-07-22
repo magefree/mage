@@ -27,7 +27,7 @@ public final class CorrosiveGale extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G/P}");
 
 
-        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filter));
+        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, filter));
     }
 
     private CorrosiveGale(final CorrosiveGale card) {

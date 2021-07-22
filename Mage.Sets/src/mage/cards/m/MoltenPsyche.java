@@ -29,7 +29,6 @@ public final class MoltenPsyche extends CardImpl {
         // <i>Metalcraft</i> &mdash; If you control three or more artifacts, Molten Psyche deals damage to each opponent equal to the number of cards that player has drawn this turn.
         this.getSpellAbility().addEffect(new MoltenPsycheEffect());
         this.getSpellAbility().addWatcher(new MoltenPsycheWatcher());
-        this.getSpellAbility().setAbilityWord(AbilityWord.METALCRAFT);
         this.getSpellAbility().addHint(MetalcraftHint.instance);
     }
 

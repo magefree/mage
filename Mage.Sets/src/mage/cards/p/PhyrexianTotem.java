@@ -53,10 +53,11 @@ public final class PhyrexianTotem extends CardImpl {
     
     private static class PhyrexianTotemToken extends TokenImpl {
         PhyrexianTotemToken() {
-            super("Horror", "5/5 black Horror artifact creature with trample");
+            super("Phyrexian Horror", "5/5 black Phyrexian Horror artifact creature with trample");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setBlack(true);
+            this.subtype.add(SubType.PHYREXIAN);
             this.subtype.add(SubType.HORROR);
             power = new MageInt(5);
             toughness = new MageInt(5);
@@ -91,7 +92,7 @@ class PhyrexianTotemTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkInterveningIfClause(Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(getSourceId());
         if (permanent != null) {
-            return permanent.isCreature();
+            return permanent.isCreature(game);
         }
         return false;
     }

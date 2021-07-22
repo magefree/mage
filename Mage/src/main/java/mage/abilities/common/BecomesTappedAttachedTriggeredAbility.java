@@ -51,7 +51,7 @@ public class BecomesTappedAttachedTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
-    public String getRule() {
-        return "Whenever " + description + " becomes tapped, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever " + description + " becomes tapped, " ;
     }
 }

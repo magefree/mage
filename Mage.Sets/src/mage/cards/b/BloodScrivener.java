@@ -49,7 +49,7 @@ class BloodScrivenerReplacementEffect extends ReplacementEffectImpl {
 
     public BloodScrivenerReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If you would draw a card while you have no cards in hand, instead draw two cards and lose 1 life";
+        staticText = "If you would draw a card while you have no cards in hand, instead you draw two cards and you lose 1 life";
     }
 
     public BloodScrivenerReplacementEffect(final BloodScrivenerReplacementEffect effect) {

@@ -3,8 +3,10 @@ package mage.cards;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
-import mage.ObjectColor;
 import mage.abilities.*;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
@@ -269,7 +271,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     && mainCardState != null
                     && !mainCardState.hasLostAllAbilities()
                     && mainCardState.getAbilities().containsClass(FlashbackAbility.class)) {
-                FlashbackAbility flash = new FlashbackAbility(this.getManaCost(), this.isInstant() ? TimingRule.INSTANT : TimingRule.SORCERY);
+                FlashbackAbility flash = new FlashbackAbility(this.getManaCost(), this.isInstant(game) ? TimingRule.INSTANT : TimingRule.SORCERY);
                 flash.setSourceId(this.getId());
                 flash.setControllerId(this.getOwnerId());
                 flash.setSpellAbilityType(this.getSpellAbility().getSpellAbilityType());
@@ -365,30 +367,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
         }
         return spellAbility;
-    }
-
-    /**
-     * Dynamic cost modification for card (process only own abilities). Example:
-     * if it need stack related info (like real targets) then must check two
-     * states (game.inCheckPlayableState):
-     * <p>
-     * 1. In playable state it must check all possible use cases (e.g. allow to
-     * reduce on any available target and modes)
-     * <p>
-     * 2. In real cast state it must check current use case (e.g. real selected
-     * targets and modes)
-     *
-     * @param ability
-     * @param game
-     */
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        ability.adjustCosts(game);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.adjustTargets(game);
     }
 
     @Override
@@ -853,5 +831,39 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<CardType> getCardTypeForDeckbuilding() {
+        return getCardType();
+    }
+
+    @Override
+    public boolean hasCardTypeForDeckbuilding(CardType cardType) {
+        return getCardTypeForDeckbuilding().contains(cardType);
+    }
+
+    @Override
+    public boolean hasSubTypeForDeckbuilding(SubType subType) {
+        // own subtype
+        if (this.hasSubtype(subType, null)) {
+            return true;
+        }
+
+        // gained subtypes from source ability
+        if (this.getAbilities()
+                .stream()
+                .filter(SimpleStaticAbility.class::isInstance)
+                .map(Ability::getAllEffects)
+                .flatMap(Collection::stream)
+                .filter(HasSubtypesSourceEffect.class::isInstance)
+                .map(HasSubtypesSourceEffect.class::cast)
+                .anyMatch(effect -> effect.hasSubtype(subType))) {
+            return true;
+        }
+
+        // changeling (any subtype)
+        return subType.getSubTypeSet() == SubTypeSet.CreatureType
+                && this.getAbilities().containsClass(ChangelingAbility.class);
     }
 }

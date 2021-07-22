@@ -1,8 +1,12 @@
 package org.mage.test.cards.cost.modification;
 
+import mage.abilities.LoyaltyAbility;
+import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -379,6 +383,102 @@ public class CostModificationTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         setStopAt(6, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_PlaneswalkerLoyalty_CostModification_Single() {
+        // Carth the Lion
+        // Planeswalkers' loyalty abilities you activate cost an additional {+1} to activate.
+        addCard(Zone.BATTLEFIELD, playerA, "Carth the Lion", 1);
+        //
+        // Vivien Reid
+        // 5 Loyalty
+        // +1, -3, -8 Abilities
+        addCard(Zone.BATTLEFIELD, playerA, "Vivien Reid", 1);
+        //
+        // Huatli, Warrior Poet
+        // 3 Loyalty
+        // Testing X Ability
+        // −X: Huatli, Warrior Poet deals X damage divided as you choose among any number of target creatures. Creatures dealt damage this way can’t block this turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Huatli, Warrior Poet", 1);
+        //
+        // 2 toughness creatures for Huatli to kill
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Ghitu Lavarunner", 1);
+
+        // Vivien: make cost +2 instead +1 (total 7 counters)
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Look at the top four");
+        setChoice(playerA, "No");
+        checkPermanentCounters("Vivien Reid counter check", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Vivien Reid", CounterType.LOYALTY, 7);
+
+        // loyalty cost modification doesn't affect card rule's text, so it still shown an old cost value for a user
+
+        // Vivien: make cost -7 instead -8
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-8: You get an emblem");
+
+        // Huatli: check x cost changes
+        runCode("check x cost", 3, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Permanent huatli = game.getBattlefield().getAllActivePermanents().stream().filter(p -> p.getName().equals("Huatli, Warrior Poet")).findFirst().orElse(null);
+            Assert.assertNotNull("must have huatli on battlefield", huatli);
+            LoyaltyAbility ability = (LoyaltyAbility) huatli.getAbilities(game).stream().filter(a -> a.getRule().startsWith("-X: ")).findFirst().orElse(null);
+            Assert.assertNotNull("must have loyalty ability", ability);
+            // counters: 3
+            // cost modification: +1
+            // max possible X to pay: 3 + 1 = 4
+            PayVariableLoyaltyCost cost = (PayVariableLoyaltyCost) ability.getCosts().get(0);
+            Assert.assertEquals("must have max possible X as 4", 4, cost.getMaxValue(ability, game));
+        });
+
+        // Huatli: make x cost -3 instead -4
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-X: {this} deals X damage divided as you choose");
+        setChoice(playerA, "X=4");
+        addTargetAmount(playerA, "Grizzly Bears", 2);
+        addTargetAmount(playerA, "Ghitu Lavarunner", 2);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Vivien Reid", 1);
+        assertGraveyardCount(playerA, "Huatli, Warrior Poet", 1);
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+        assertGraveyardCount(playerB, "Ghitu Lavarunner", 1);
+    }
+
+    @Test
+    public void test_PlaneswalkerLoyalty_CostModification_Multiple() {
+        // Carth the Lion
+        // Planeswalkers' loyalty abilities you activate cost an additional {+1} to activate.
+        addCard(Zone.BATTLEFIELD, playerA, "Carth the Lion", 1);
+        //
+        // Vivien Reid
+        // 5 Loyalty
+        // +1, -3, -8 Abilities
+        addCard(Zone.BATTLEFIELD, playerA, "Vivien Reid", 1);
+        //
+        // You may have Spark Double enter the battlefield as a copy of a creature or planeswalker you control...
+        addCard(Zone.HAND, playerA, "Spark Double", 2); // {3}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2 * 4);
+
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "-8:", false);
+
+        // prepare duplicates
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
+        setChoice(playerA, "Yes"); // copy
+        setChoice(playerA, "Carth the Lion"); // copy target
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
+        setChoice(playerA, "Yes"); // copy
+        setChoice(playerA, "Carth the Lion"); // copy target
+
+        // x3 lions gives +3 in cost reduction (-8 -> -5)
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkPlayableAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "-8:", true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
     }

@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -21,7 +22,7 @@ public final class RedeemTheLost extends CardImpl {
 
         // Target creature you control gains protection from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         // Clash with an opponent. If you win, return Redeem the Lost to its owner's hand.
         this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
     }

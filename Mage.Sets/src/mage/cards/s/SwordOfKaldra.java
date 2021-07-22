@@ -78,8 +78,8 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever equipped creature deals damage to a creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever equipped creature deals damage to a creature, " ;
     }
 
 }

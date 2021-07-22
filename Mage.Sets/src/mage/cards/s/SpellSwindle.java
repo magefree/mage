@@ -42,7 +42,7 @@ class SpellSwindleEffect extends OneShotEffect {
 
     public SpellSwindleEffect() {
         super(Outcome.Detriment);
-        staticText = "Counter target spell. Create X colorless Treasure artifact tokens, where X is that spell's converted mana cost. "
+        staticText = "Counter target spell. Create X colorless Treasure artifact tokens, where X is that spell's mana value. "
                 + "They have \"{T}, Sacrifice this artifact: Add one mana of any color.\"";
     }
 
@@ -60,7 +60,7 @@ class SpellSwindleEffect extends OneShotEffect {
         StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
         if (stackObject != null) {
             game.getStack().counter(source.getFirstTarget(), source, game);
-            return new CreateTokenEffect(new TreasureToken(), stackObject.getConvertedManaCost()).apply(game, source);
+            return new CreateTokenEffect(new TreasureToken(), stackObject.getManaValue()).apply(game, source);
         }
         return false;
     }

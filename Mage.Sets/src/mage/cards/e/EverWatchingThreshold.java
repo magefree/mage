@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -9,11 +8,10 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class EverWatchingThreshold extends CardImpl {
@@ -57,25 +55,16 @@ class EverWatchingThresholdTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Player player = game.getPlayer(this.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        for (UUID attacker : game.getCombat().getAttackers()) {
-            Permanent creature = game.getPermanent(attacker);
-            if (creature != null
-                    && player.hasOpponent(creature.getControllerId(), game)
-                    && player.getId().equals(game.getCombat().getDefendingPlayerId(attacker, game))) {
-                return true;
-            }
-        }
-        return false;
+        return game.getCombat()
+                .getAttackers()
+                .stream()
+                .filter(attacker -> isControlledBy(game.getCombat().getDefendingPlayerId(attacker, game)))
+                .map(game::getControllerId)
+                .anyMatch(game.getOpponents(getControllerId())::contains);
     }
 
     @Override
     public String getRule() {
-        return "Whenever an opponent attacks you "
-                + "and/or a planeswalker you control "
-                + "with one or more creatures, draw a card.";
+        return "Whenever an opponent attacks, if they attacked you and/or a planeswalker you control, draw a card.";
     }
 }

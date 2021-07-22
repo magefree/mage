@@ -19,7 +19,7 @@ public final class Boar2Token extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
 
-        availableImageSetCodes = Arrays.asList("THS", "KHC");
+        availableImageSetCodes = Arrays.asList("THS", "KHC", "C21");
     }
 
     public Boar2Token(final Boar2Token token) {

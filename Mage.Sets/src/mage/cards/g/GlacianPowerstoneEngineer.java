@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -111,7 +110,7 @@ class GlacianPowerstoneEngineerCost extends VariableCostImpl {
             = new FilterControlledArtifactPermanent("untapped artifacts you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     GlacianPowerstoneEngineerCost() {

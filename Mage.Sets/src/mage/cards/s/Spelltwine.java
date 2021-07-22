@@ -48,7 +48,7 @@ public final class Spelltwine extends CardImpl {
         this.getSpellAbility().addEffect(new SpelltwineEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
         this.getSpellAbility().addTarget(new TargetCardInOpponentsGraveyard(filter2));
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
 
     }
 

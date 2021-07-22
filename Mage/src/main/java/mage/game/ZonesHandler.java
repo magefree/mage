@@ -36,7 +36,14 @@ public final class ZonesHandler {
             } else {
                 cards.add(targetCard);
             }
-            game.fireEvent(new ZoneChangeGroupEvent(cards, tokens, info.event.getSourceId(), info.event.getPlayerId(), info.event.getFromZone(), info.event.getToZone()));
+            game.fireEvent(new ZoneChangeGroupEvent(
+                    cards, 
+                    tokens, 
+                    info.event.getSourceId(), 
+                    info.event.getSource(), 
+                    info.event.getPlayerId(), 
+                    info.event.getFromZone(), 
+                    info.event.getToZone()));
             // normal movement
             game.fireEvent(info.event);
             return true;
@@ -322,7 +329,7 @@ public final class ZonesHandler {
         if (info.faceDown) {
             card.setFaceDown(true, game);
         } else if (event.getToZone().equals(Zone.BATTLEFIELD)) {
-            if (!card.isPermanent()
+            if (!card.isPermanent(game)
                     && (!card.isTransformable() || Boolean.FALSE.equals(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId())))) {
                 // Non permanents (Instants, Sorceries, ... stay in the zone they are if an abilty/effect tries to move it to the battlefield
                 return false;

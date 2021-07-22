@@ -27,7 +27,7 @@ public final class RiteOfReplication extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenCopyTargetEffect(null, null, false, 5),
                 new CreateTokenCopyTargetEffect(), KickedCondition.instance,
-                "Create a token that's a copy of target creature. if this spell was kicked, create five of those tokens instead"));
+                "Create a token that's a copy of target creature. If this spell was kicked, create five of those tokens instead"));
     }
 
     private RiteOfReplication(final RiteOfReplication card) {

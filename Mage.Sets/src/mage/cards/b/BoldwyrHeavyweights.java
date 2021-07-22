@@ -53,7 +53,7 @@ class BoldwyrHeavyweightsEffect extends OneShotEffect {
 
     BoldwyrHeavyweightsEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each opponent may search their library for a creature card and put it onto the battlefield. Then each player who searched their library this way shuffles it";
+        this.staticText = "each opponent may search their library for a creature card and put it onto the battlefield. Then each player who searched their library this way shuffles";
     }
 
     BoldwyrHeavyweightsEffect(final BoldwyrHeavyweightsEffect effect) {

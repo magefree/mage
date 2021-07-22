@@ -33,7 +33,7 @@ public final class EmberwildeAugur extends CardImpl {
         // Sacrifice Emberwilde Augur: Emberwilde Augur deals 3 damage to target player. Activate this ability only during your upkeep.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
-                new DamageTargetEffect(3),
+                new DamageTargetEffect(3, "it"),
                 new SacrificeSourceCost(),
                 new IsStepCondition(PhaseStep.UPKEEP));
         ability.addTarget(new TargetPlayerOrPlaneswalker());

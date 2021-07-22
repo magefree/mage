@@ -1,9 +1,9 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -11,16 +11,15 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
 
-    private FilterCreaturePermanent filter;
-    private boolean setTargetPointer;
+    private final FilterCreaturePermanent filter;
+    private final boolean setTargetPointer;
 
     public BecomesBlockedAllTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, new FilterCreaturePermanent("a creature"), false);
+        this(effect, optional, StaticFilters.FILTER_PERMANENT_CREATURE_A, false);
     }
 
     public BecomesBlockedAllTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter, boolean setTargetPointer) {
@@ -43,9 +42,9 @@ public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
             if (setTargetPointer) {
-                this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+                this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             }
             return true;
         }
@@ -53,8 +52,8 @@ public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever " + filter.getMessage() + " becomes blocked, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever " + filter.getMessage() + " becomes blocked, " ;
     }
 
     @Override

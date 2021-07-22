@@ -15,6 +15,7 @@ import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetSpell;
@@ -119,9 +120,9 @@ class RadiateEffect extends CopySpellForEachItCouldTargetEffect {
     }
 
     @Override
-    protected List<MageObjectReferencePredicate> getPossibleTargets(Spell spell, Player player, Ability source, Game game) {
+    protected List<MageObjectReferencePredicate> getPossibleTargets(StackObject stackObject, Player player, Ability source, Game game) {
         List<MageObjectReferencePredicate> predicates = new ArrayList<>();
-        UUID targeted = spell
+        UUID targeted = ((Spell) stackObject)
                 .getSpellAbilities()
                 .stream()
                 .map(AbilityImpl::getTargets)
@@ -137,7 +138,7 @@ class RadiateEffect extends CopySpellForEachItCouldTargetEffect {
                 ).stream()
                 .filter(Objects::nonNull)
                 .filter(p -> !p.equals(game.getPermanent(targeted)))
-                .filter(p -> spell.canTarget(game, p.getId()))
+                .filter(p -> stackObject.canTarget(game, p.getId()))
                 .map(p -> new MageObjectReference(p, game))
                 .map(MageObjectReferencePredicate::new)
                 .forEach(predicates::add);
@@ -145,7 +146,7 @@ class RadiateEffect extends CopySpellForEachItCouldTargetEffect {
                 .getPlayersInRange(source.getControllerId(), game)
                 .stream()
                 .filter(uuid -> !uuid.equals(targeted))
-                .filter(uuid -> spell.canTarget(game, uuid))
+                .filter(uuid -> stackObject.canTarget(game, uuid))
                 .map(MageObjectReference::new)
                 .map(MageObjectReferencePredicate::new)
                 .forEach(predicates::add);
@@ -153,7 +154,7 @@ class RadiateEffect extends CopySpellForEachItCouldTargetEffect {
     }
 
     @Override
-    protected Spell getSpell(Game game, Ability source) {
+    protected Spell getStackObject(Game game, Ability source) {
         return game.getSpell(source.getFirstTarget());
     }
 

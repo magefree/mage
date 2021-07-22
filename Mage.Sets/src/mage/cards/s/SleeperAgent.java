@@ -29,6 +29,7 @@ public final class SleeperAgent extends CardImpl {
 
     public SleeperAgent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.MINION);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

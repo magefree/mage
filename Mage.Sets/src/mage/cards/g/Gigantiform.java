@@ -52,7 +52,7 @@ public final class Gigantiform extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GigantiformEffect(), true),
                 KickedCondition.instance,
-                "When {this} enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle your library."));
+                "When {this} enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle."));
     }
 
     private Gigantiform(final Gigantiform card) {
@@ -84,7 +84,7 @@ class GigantiformAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "Enchanted creature has base power and toughness 8/8 and has trample";
+        return "Enchanted creature has base power and toughness 8/8 and has trample.";
     }
 }
 

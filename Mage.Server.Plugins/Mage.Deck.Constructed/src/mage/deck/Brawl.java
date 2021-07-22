@@ -7,6 +7,7 @@ import mage.cards.Card;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
+import mage.constants.CardType;
 import mage.filter.FilterMana;
 import mage.util.ManaUtil;
 
@@ -77,8 +78,9 @@ public class Brawl extends Constructed {
                 addError(DeckValidatorErrorType.PRIMARY, brawler.getName(), "Brawler banned (" + brawler.getName() + ')', true);
                 valid = false;
             }
-            if (!((brawler.isCreature() && brawler.isLegendary())
-                    || brawler.isPlaneswalker() || brawler.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+            if (!((brawler.hasCardTypeForDeckbuilding(CardType.CREATURE) && brawler.isLegendary())
+                    || brawler.hasCardTypeForDeckbuilding(CardType.PLANESWALKER)
+                    || brawler.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
                 addError(DeckValidatorErrorType.PRIMARY, brawler.getName(), "Brawler Invalid (" + brawler.getName() + ')', true);
                 valid = false;
             }

@@ -16,7 +16,7 @@ import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterHistoricSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -25,10 +25,10 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class TesharAncestorsApostle extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("creature card with converted mana cost 3 or less from your graveyard");
+    private static final FilterCard filter = new FilterCreatureCard("creature card with mana value 3 or less from your graveyard");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
         filter.add(CardType.CREATURE.getPredicate());
     }
 
@@ -45,7 +45,7 @@ public final class TesharAncestorsApostle extends CardImpl {
 
         // Whenever you cast a historic spell, return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.
         Ability ability = new SpellCastControllerTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
-                .setText("return target creature card with converted mana cost 3 or less from your graveyard to the battlefield. "
+                .setText("return target creature card with mana value 3 or less from your graveyard to the battlefield. "
                         + "<i>(Artifacts, legendaries, and Sagas are historic.)</i>"), new FilterHistoricSpell("a historic spell"), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

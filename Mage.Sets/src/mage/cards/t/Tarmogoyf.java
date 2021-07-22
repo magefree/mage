@@ -4,17 +4,15 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.hint.Hint;
-import mage.cards.Card;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.players.Player;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 /**
  * @author Plopman
@@ -29,7 +27,7 @@ public final class Tarmogoyf extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TarmogoyfEffect()).addHint(TarmogoyfHint.instance));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TarmogoyfEffect()).addHint(CardTypesInGraveyardHint.ALL));
     }
 
     private Tarmogoyf(final Tarmogoyf card) {
@@ -60,61 +58,13 @@ class TarmogoyfEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            MageObject target = game.getObject(source.getSourceId());
-            if (target != null) {
-                Set<CardType> foundCardTypes = EnumSet.noneOf(CardType.class);
-                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        for (Card card : player.getGraveyard().getCards(game)) {
-                            foundCardTypes.addAll(card.getCardType());
-                        }
-                    }
-                }
-                int number = foundCardTypes.size();
-
-                target.getPower().setValue(number);
-                target.getToughness().setValue(number + 1);
-                return true;
-            }
+        MageObject target = source.getSourceObject(game);
+        if (target == null) {
+            return false;
         }
-        return false;
-    }
-
-}
-
-enum TarmogoyfHint implements Hint {
-    instance;
-
-    @Override
-    public String getText(Game game, Ability ability) {
-        List<String> types = game.getState()
-                .getPlayersInRange(ability.getControllerId(), game)
-                .stream()
-                .map(game::getPlayer)
-                .filter(Objects::nonNull)
-                .map(Player::getGraveyard)
-                .map(graveyard -> graveyard.getCards(game))
-                .flatMap(Collection::stream)
-                .map(MageObject::getCardType)
-                .flatMap(Collection::stream)
-                .distinct()
-                .map(CardType::toString)
-                .sorted()
-                .collect(Collectors.toList());
-        String message = "" + types.size();
-        if (types.size() > 0) {
-            message += " (";
-            message += types.stream().reduce((a, b) -> a + ", " + b).orElse("");
-            message += ')';
-        }
-        return "Card types in graveyards: " + message;
-    }
-
-    @Override
-    public TarmogoyfHint copy() {
-        return instance;
+        int number = CardTypesInGraveyardCount.ALL.calculate(game, source, this);
+        target.getPower().setValue(number);
+        target.getToughness().setValue(number + 1);
+        return true;
     }
 }

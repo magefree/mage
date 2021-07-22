@@ -57,7 +57,7 @@ class GlissaSunseekerEffect extends OneShotEffect {
 
     public GlissaSunseekerEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target artifact if its converted mana cost is equal to the amount of unspent mana you have";
+        this.staticText = "Destroy target artifact if its mana value is equal to the amount of unspent mana you have";
     }
 
     public GlissaSunseekerEffect(final GlissaSunseekerEffect effect) {
@@ -84,7 +84,7 @@ class GlissaSunseekerEffect extends OneShotEffect {
         int redMana = pool.getRed();
         int colorlessMana = pool.getColorless();
         int manaPoolTotal = blackMana + whiteMana + blueMana + greenMana + redMana + colorlessMana;
-        if (permanent.getConvertedManaCost() == manaPoolTotal) {
+        if (permanent.getManaValue() == manaPoolTotal) {
             return permanent.destroy(source, game, false);
         }
         return false;

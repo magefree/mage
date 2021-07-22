@@ -116,7 +116,7 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
                 SimpleActivatedAbility simpleActivatedAbility = (SimpleActivatedAbility) ability;
                 return simpleActivatedAbility.getZone() == Zone.BATTLEFIELD && simpleActivatedAbility.getEffects().size() == 1
                         && simpleActivatedAbility.getEffects().get(0) instanceof DiscardControllerEffect && simpleActivatedAbility.getManaCosts().size() == 1
-                        && simpleActivatedAbility.getManaCosts().get(0) instanceof GenericManaCost && simpleActivatedAbility.getManaCosts().get(0).convertedManaCost() == 2;
+                        && simpleActivatedAbility.getManaCosts().get(0) instanceof GenericManaCost && simpleActivatedAbility.getManaCosts().get(0).manaValue() == 2;
             }
         }
 

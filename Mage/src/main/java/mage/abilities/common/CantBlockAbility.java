@@ -1,12 +1,10 @@
-
 package mage.abilities.common;
 
+import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 
 /**
- *
  * @author maurer.it_at_gmail.com
  */
 public class CantBlockAbility extends SimpleStaticAbility {
@@ -17,11 +15,6 @@ public class CantBlockAbility extends SimpleStaticAbility {
 
     private CantBlockAbility(CantBlockAbility ability) {
         super(ability);
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} can't block.";
     }
 
     @Override

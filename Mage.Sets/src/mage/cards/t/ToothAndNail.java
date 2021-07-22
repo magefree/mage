@@ -30,7 +30,7 @@ public final class ToothAndNail extends CardImpl {
 
         // Choose one -
         // Search your library for up to two creature cards, reveal them, put them into your hand, then shuffle your library;
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_CREATURE), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_CREATURES), true));
         // or put up to two creature cards from your hand onto the battlefield.
         Mode mode = new Mode();
         mode.addEffect(new ToothAndNailPutCreatureOnBattlefieldEffect());

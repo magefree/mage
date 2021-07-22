@@ -82,7 +82,7 @@ class SavageFirecatTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         Permanent permanent = ((TappedForManaEvent) event).getPermanent();
-        return permanent != null && permanent.isLand() && isControlledBy(event.getPlayerId());
+        return permanent != null && permanent.isLand(game) && isControlledBy(event.getPlayerId());
     }
 
     @Override

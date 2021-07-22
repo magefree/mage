@@ -1,21 +1,17 @@
 package mage.cards.r;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.CopyStackAbilityEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -44,10 +40,10 @@ public final class RingsOfBrighthearth extends CardImpl {
 class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
 
     RingsOfBrighthearthTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new RingsOfBrighthearthEffect(), false);
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackAbilityEffect(), new GenericManaCost(2)));
     }
 
-    RingsOfBrighthearthTriggeredAbility(final RingsOfBrighthearthTriggeredAbility ability) {
+    private RingsOfBrighthearthTriggeredAbility(final RingsOfBrighthearthTriggeredAbility ability) {
         super(ability);
     }
 
@@ -63,59 +59,20 @@ class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(getControllerId())) {
-            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
-                Effect effect = this.getEffects().get(0);
-                effect.setValue("stackAbility", stackAbility);
-                return true;
-            }
+        if (!event.getPlayerId().equals(getControllerId())) {
+            return false;
         }
-        return false;
+        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+        if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
+            return false;
+        }
+        this.getEffects().setValue("stackAbility", stackAbility);
+        return true;
     }
 
     @Override
     public String getRule() {
-        return "Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. If you do, copy that ability. You may choose new targets for the copy.";
-    }
-}
-
-class RingsOfBrighthearthEffect extends OneShotEffect {
-
-    RingsOfBrighthearthEffect() {
-        super(Outcome.Benefit);
-        this.staticText = ", you may pay {2}. If you do, copy that ability. You may choose new targets for the copy.";
-    }
-
-    RingsOfBrighthearthEffect(final RingsOfBrighthearthEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RingsOfBrighthearthEffect copy() {
-        return new RingsOfBrighthearthEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        ManaCostsImpl cost = new ManaCostsImpl("{2}");
-        if (player != null) {
-            if (cost.canPay(source, source, player.getId(), game)
-                    && player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + "? If you do, copy that ability. You may choose new targets for the copy.", source, game)) {
-                if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
-                    StackAbility ability = (StackAbility) getValue("stackAbility");
-                    Player controller = game.getPlayer(source.getControllerId());
-                    Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-                    if (ability != null && controller != null && sourcePermanent != null) {
-                        ability.createCopyOnStack(game, source, source.getControllerId(), true);
-                        return true;
-                    }
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
+        return "Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. " +
+                "If you do, copy that ability. You may choose new targets for the copy.";
     }
 }

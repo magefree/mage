@@ -89,7 +89,7 @@ enum GideonsTriumphPredicate implements Predicate<Permanent> {
     @Override
     public boolean apply(Permanent input, Game game) {
         GideonsTriumphWatcher watcher = game.getState().getWatcher(GideonsTriumphWatcher.class);
-        return input.isCreature() && watcher.attackedOrBlockedThisTurn(input, game);
+        return input.isCreature(game) && watcher.attackedOrBlockedThisTurn(input, game);
     }
 }
 

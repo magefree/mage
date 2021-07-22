@@ -22,7 +22,7 @@ public final class FloodPlain extends CardImpl {
         // Flood Plain enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}, Sacrifice Flood Plain: Search your library for a Plains or Island card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(false, EnumSet.of(SubType.PLAINS, SubType.ISLAND)));
+        this.addAbility(new FetchLandActivatedAbility(false, SubType.PLAINS, SubType.ISLAND));
     }
 
     private FloodPlain(final FloodPlain card) {

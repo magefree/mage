@@ -14,7 +14,6 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.SpoilsOfBloodHorrorToken;
 import mage.players.Player;
@@ -91,7 +90,7 @@ class CreaturesDiedThisTurnWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (mageObject != null && mageObject.isCreature()) {
+            if (mageObject != null && mageObject.isCreature(game)) {
                 creaturesDiedThisTurn++;
             }
         }

@@ -34,7 +34,7 @@ public class ControlsPermanentGreatestCMCCondition implements Condition {
 
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         for (Permanent permanent : permanents) {
-            int cmc = permanent.getManaCost().convertedManaCost();
+            int cmc = permanent.getManaCost().manaValue();
             if (maxCMC == null || cmc > maxCMC) {
                 maxCMC = cmc;
                 controllers.clear();
@@ -48,7 +48,7 @@ public class ControlsPermanentGreatestCMCCondition implements Condition {
 
     @Override
     public String toString() {
-        return "you control the " + filter.getMessage() + " with the highest converted mana cost or tied for the highest converted mana cost";
+        return "you control the " + filter.getMessage() + " with the highest mana value or tied for the highest mana value";
     }
 
 }

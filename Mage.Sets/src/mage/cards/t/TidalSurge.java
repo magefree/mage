@@ -29,7 +29,7 @@ public final class TidalSurge extends CardImpl {
 
 
         // Tap up to three target creatures without flying.
-        this.getSpellAbility().addEffect(new TapTargetEffect("up to three target creatures without flying"));
+        this.getSpellAbility().addEffect(new TapTargetEffect("tap up to three target creatures without flying"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3, filter, false));
     }
 

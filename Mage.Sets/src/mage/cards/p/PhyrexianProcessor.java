@@ -92,7 +92,7 @@ class PhyrexianProcessorCreateTokenEffect extends OneShotEffect {
 
     PhyrexianProcessorCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Create an X/X black Minion creature token, " +
+        staticText = "Create an X/X black Phyrexian Minion creature token, " +
                 "where X is the life paid as {this} entered the battlefield.";
     }
 

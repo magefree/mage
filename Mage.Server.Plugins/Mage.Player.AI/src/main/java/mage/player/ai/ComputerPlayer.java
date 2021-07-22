@@ -70,7 +70,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     private long lastThinkTime = 0; // msecs for last AI actions calc
 
     protected int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are available
-    protected boolean ALLOW_INTERRUPT = true;     // change this for test to false / debugging purposes to false to switch off interrupts while debugging
+
+    // debug only: set TRUE to debug simulation's code/games (on false sim thread will be stopped after few secs by timeout)
+    protected boolean COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS = false;
 
     private transient Map<Mana, Card> unplayable = new TreeMap<>();
     private transient List<Card> playableNonInstant = new ArrayList<>();
@@ -1032,7 +1034,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
                 // planeswalker kill
                 for (Permanent permanent : targets) {
-                    if (permanent.isPlaneswalker() && target.canTarget(getId(), permanent.getId(), source, game)) {
+                    if (permanent.isPlaneswalker(game) && target.canTarget(getId(), permanent.getId(), source, game)) {
                         int loy = permanent.getCounters(game).getCount(CounterType.LOYALTY);
                         if (loy <= target.getAmountRemaining()) {
                             return tryAddTarget(target, permanent.getId(), loy, source, game);
@@ -1042,7 +1044,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
                 // creature kill
                 for (Permanent permanent : targets) {
-                    if (permanent.isCreature() && target.canTarget(getId(), permanent.getId(), source, game)) {
+                    if (permanent.isCreature(game) && target.canTarget(getId(), permanent.getId(), source, game)) {
                         if (permanent.getToughness().getValue() <= target.getAmountRemaining()) {
                             return tryAddTarget(target, permanent.getId(), permanent.getToughness().getValue(), source, game);
                         }
@@ -1062,7 +1064,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
             // planeswalkers
             for (Permanent permanent : targets) {
-                if (permanent.isPlaneswalker() && target.canTarget(getId(), permanent.getId(), source, game)) {
+                if (permanent.isPlaneswalker(game) && target.canTarget(getId(), permanent.getId(), source, game)) {
                     return tryAddTarget(target, permanent.getId(), target.getAmountRemaining(), source, game);
                 }
             }
@@ -1077,7 +1079,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
             // creature
             for (Permanent permanent : targets) {
-                if (permanent.isCreature() && target.canTarget(getId(), permanent.getId(), source, game)) {
+                if (permanent.isCreature(game) && target.canTarget(getId(), permanent.getId(), source, game)) {
                     return tryAddTarget(target, permanent.getId(), target.getAmountRemaining(), source, game);
                 }
             }
@@ -1098,7 +1100,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
             // creatures - non killable (TODO: add extra skill checks like undestructeable)
             for (Permanent permanent : targets) {
-                if (permanent.isCreature() && target.canTarget(getId(), permanent.getId(), source, game)) {
+                if (permanent.isCreature(game) && target.canTarget(getId(), permanent.getId(), source, game)) {
                     int safeDamage = Math.min(permanent.getToughness().getValue() - 1, target.getAmountRemaining());
                     if (safeDamage > 0) {
                         return tryAddTarget(target, permanent.getId(), safeDamage, source, game);
@@ -1108,14 +1110,14 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
             // creatures - all
             for (Permanent permanent : targets) {
-                if (permanent.isCreature() && target.canTarget(getId(), permanent.getId(), source, game)) {
+                if (permanent.isCreature(game) && target.canTarget(getId(), permanent.getId(), source, game)) {
                     return tryAddTarget(target, permanent.getId(), target.getAmountRemaining(), source, game);
                 }
             }
 
             // planeswalkers
             for (Permanent permanent : targets) {
-                if (permanent.isPlaneswalker() && target.canTarget(getId(), permanent.getId(), source, game)) {
+                if (permanent.isPlaneswalker(game) && target.canTarget(getId(), permanent.getId(), source, game)) {
                     return tryAddTarget(target, permanent.getId(), target.getAmountRemaining(), source, game);
                 }
             }
@@ -1317,7 +1319,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                         SpellAbility ability = card.getSpellAbility();
                         if (ability != null && ability.canActivate(playerId, game).canActivate()
                                 && !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability, playerId), ability, game, true)) {
-                            if (card.getCardType().contains(CardType.INSTANT)
+                            if (card.getCardType(game).contains(CardType.INSTANT)
                                     || card.hasAbility(FlashAbility.getInstance(), game)) {
                                 playableInstant.add(card);
                             } else {
@@ -1687,9 +1689,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (score > 0) { // score mana producers that produce other mana types and have other uses higher
                 score += mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game).size();
                 score += mageObject.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD).size();
-                if (!mageObject.getCardType().contains(CardType.LAND)) {
+                if (!mageObject.getCardType(game).contains(CardType.LAND)) {
                     score += 2;
-                } else if (mageObject.getCardType().contains(CardType.CREATURE)) {
+                } else if (mageObject.getCardType(game).contains(CardType.CREATURE)) {
                     score += 2;
                 }
             }
@@ -1719,7 +1721,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         //TODO: improve this
         int xMin = min * multiplier;
         int xMax = (max == Integer.MAX_VALUE ? max : max * multiplier);
-        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
+        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
         if (numAvailable < 0) {
             numAvailable = 0;
         } else {
@@ -1821,7 +1823,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             // choose a creature type of opponent on battlefield or graveyard
             for (Permanent permanent : game.getBattlefield().getActivePermanents(this.getId(), game)) {
                 if (game.getOpponents(this.getId()).contains(permanent.getControllerId())
-                        && permanent.getCardType().contains(CardType.CREATURE)
+                        && permanent.getCardType(game).contains(CardType.CREATURE)
                         && !permanent.getSubtype(game).isEmpty()) {
                     if (choice.getChoices().contains(permanent.getSubtype(game).get(0).toString())) {
                         choice.setChoice(permanent.getSubtype(game).get(0).toString());
@@ -1834,7 +1836,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 for (UUID opponentId : game.getOpponents(this.getId())) {
                     Player opponent = game.getPlayer(opponentId);
                     for (Card card : opponent.getGraveyard().getCards(game)) {
-                        if (card != null && card.getCardType().contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
+                        if (card != null && card.getCardType(game).contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
                             if (choice.getChoices().contains(card.getSubtype(game).get(0).toString())) {
                                 choice.setChoice(card.getSubtype(game).get(0).toString());
                                 break;
@@ -1850,7 +1852,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             // choose a creature type of hand or library
             for (UUID cardId : this.getHand()) {
                 Card card = game.getCard(cardId);
-                if (card != null && card.getCardType().contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
+                if (card != null && card.getCardType(game).contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
                     if (choice.getChoices().contains(card.getSubtype(game).get(0).toString())) {
                         choice.setChoice(card.getSubtype(game).get(0).toString());
                         break;
@@ -1860,7 +1862,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (!choice.isChosen()) {
                 for (UUID cardId : this.getLibrary().getCardList()) {
                     Card card = game.getCard(cardId);
-                    if (card != null && card.getCardType().contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
+                    if (card != null && card.getCardType(game).contains(CardType.CREATURE) && !card.getSubtype(game).isEmpty()) {
                         if (choice.getChoices().contains(card.getSubtype(game).get(0).toString())) {
                             choice.setChoice(card.getSubtype(game).get(0).toString());
                             break;
@@ -2028,6 +2030,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
+    // TODO: add AI support with outcome and replace random with min/max
     public int getAmount(int min, int max, String message, Game game) {
         log.debug("getAmount");
         if (message.startsWith("Assign damage to ")) {
@@ -2037,6 +2040,29 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return RandomUtil.nextInt(CardUtil.overflowInc(max, 1));
         }
         return min;
+    }
+
+    @Override
+    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+        log.debug("getMultiAmount");
+
+        int needCount = messages.size();
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
+        if (needCount == 0) {
+            return defaultList;
+        }
+
+        // BAD effect
+        // default list uses minimum possible values, so return it on bad effect
+        // TODO: need something for damage target and mana logic here, current version is useless but better than random
+        if (!outcome.isGood()) {
+            return defaultList;
+        }
+
+        // GOOD effect
+        // values must be stable, so AI must able to simulate it and choose correct actions
+        // fill max values as much as possible
+        return MultiAmountType.prepareMaxValues(needCount, min, max);
     }
 
     @Override

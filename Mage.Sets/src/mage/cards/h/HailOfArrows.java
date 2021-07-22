@@ -20,8 +20,8 @@ public final class HailOfArrows extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}");
 
         // Hail of Arrows deals X damage divided as you choose among any number of target attacking creatures.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(ManacostVariableValue.instance));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(ManacostVariableValue.instance, new FilterAttackingCreature()));
+        this.getSpellAbility().addEffect(new DamageMultiEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(ManacostVariableValue.REGULAR, new FilterAttackingCreature()));
     }
 
     private HailOfArrows(final HailOfArrows card) {

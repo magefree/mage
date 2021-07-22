@@ -40,8 +40,8 @@ public class OpponentSacrificesPermanentTriggeredAbility extends TriggeredAbilit
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an opponent sacrifices a nontoken permanent, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever an opponent sacrifices a nontoken permanent, " ;
     }
 
     @Override

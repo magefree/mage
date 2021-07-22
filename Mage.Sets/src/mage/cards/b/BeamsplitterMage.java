@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.AbilityImpl;
@@ -24,10 +23,11 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.util.functions.SpellCopyApplier;
+import mage.util.functions.StackObjectCopyApplier;
 
 import java.util.*;
 
@@ -84,10 +84,9 @@ class BeamsplitterMageTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Spell spell = game.getSpellOrLKIStack(event.getTargetId());
-        if (spell == null || !spell.isInstantOrSorcery()) {
+        if (spell == null || !spell.isInstantOrSorcery(game)) {
             return false;
         }
-        boolean targetsSource = false;
         if (spell.getSpellAbilities()
                 .stream()
                 .map(AbilityImpl::getModes)
@@ -116,7 +115,7 @@ class BeamsplitterMageTriggeredAbility extends TriggeredAbilityImpl {
                 getControllerId(), getSourceId(), game
         ).stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isCreature)
+                .filter(permanent -> permanent.isCreature(game))
                 .filter(p -> checkNotSource(p, game))
                 .anyMatch(p -> spell.canTarget(game, p.getId()));
     }
@@ -193,7 +192,7 @@ class BeamsplitterMagePredicate implements Predicate<Permanent> {
     }
 }
 
-class BeamsplitterMageApplier implements SpellCopyApplier {
+class BeamsplitterMageApplier implements StackObjectCopyApplier {
 
     private final Iterator<MageObjectReferencePredicate> predicate;
 
@@ -204,7 +203,7 @@ class BeamsplitterMageApplier implements SpellCopyApplier {
     }
 
     @Override
-    public void modifySpell(Spell spell, Game game) {
+    public void modifySpell(StackObject stackObject, Game game) {
     }
 
     @Override

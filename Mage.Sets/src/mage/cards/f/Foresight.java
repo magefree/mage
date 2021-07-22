@@ -28,7 +28,7 @@ public final class Foresight extends CardImpl {
         this.getSpellAbility().addEffect(new ForesightEffect());
 
         // Draw a card at the beginning of the next turn's upkeep.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false).concatBy("<br>"));
     }
 
     private Foresight(final Foresight card) {
@@ -45,7 +45,7 @@ class ForesightEffect extends SearchEffect {
 
     ForesightEffect() {
         super(new TargetCardInLibrary(3, StaticFilters.FILTER_CARD), Outcome.Benefit);
-        staticText = "Search your library for three cards, exile them, then shuffle your library";
+        staticText = "Search your library for three cards, exile them, then shuffle";
     }
 
     private ForesightEffect(final ForesightEffect effect) {

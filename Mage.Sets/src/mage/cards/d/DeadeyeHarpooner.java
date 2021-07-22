@@ -27,7 +27,7 @@ public final class DeadeyeHarpooner extends CardImpl {
     private static final FilterOpponentsCreaturePermanent filter = new FilterOpponentsCreaturePermanent("tapped creature an opponent controls");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public DeadeyeHarpooner(UUID ownerId, CardSetInfo setInfo) {

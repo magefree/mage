@@ -8,6 +8,7 @@ import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,8 +39,8 @@ public final class StrengthOfUnity extends CardImpl {
         // Domain - Enchanted creature gets +1/+1 for each basic land type among lands you control.
         DomainValue dv = new DomainValue();
         Effect effect = new BoostEnchantedEffect(dv, dv);
-        effect.setText("Domain - Enchanted creature gets +1/+1 for each basic land type among lands you control.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        effect.setText("<i>Domain</i> &mdash; Enchanted creature gets +1/+1 for each basic land type among lands you control.");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(DomainHint.instance));
     }
 
     private StrengthOfUnity(final StrengthOfUnity card) {

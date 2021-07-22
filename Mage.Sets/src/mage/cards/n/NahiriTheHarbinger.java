@@ -47,9 +47,9 @@ public final class NahiriTheHarbinger extends CardImpl {
     static {
         filter.add(Predicates.or(CardType.ENCHANTMENT.getPredicate(),
                 (Predicates.and(CardType.ARTIFACT.getPredicate(),
-                        TappedPredicate.instance)),
+                        TappedPredicate.TAPPED)),
                 (Predicates.and(CardType.CREATURE.getPredicate(),
-                        TappedPredicate.instance))));
+                        TappedPredicate.TAPPED))));
     }
 
     public NahiriTheHarbinger(UUID ownerId, CardSetInfo setInfo) {
@@ -93,7 +93,7 @@ class NahiriTheHarbingerEffect extends SearchEffect {
 
     NahiriTheHarbingerEffect() {
         super(new TargetCardInLibrary(0, 1, filterCard), Outcome.PutCardInPlay);
-        this.staticText = "Search your library for an artifact or creature card, put it onto the battlefield, then shuffle your library. It gains haste. Return it to your hand at the beginning of the next end step";
+        this.staticText = "Search your library for an artifact or creature card, put it onto the battlefield, then shuffle. It gains haste. Return it to your hand at the beginning of the next end step";
     }
 
     NahiriTheHarbingerEffect(final NahiriTheHarbingerEffect effect) {

@@ -116,8 +116,8 @@ class HammerJammerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you roll a die, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you roll a die, " ;
     }
 }
 

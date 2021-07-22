@@ -911,6 +911,22 @@ public final class CardUtil {
         }
     }
 
+    private static final String vowels = "aeiouAEIOU";
+
+    public static String addArticle(String text) {
+        if (text.startsWith("a ")
+                || text.startsWith("an ")
+                || text.startsWith("another ")
+                || text.startsWith("any ")) {
+            return text;
+        }
+        return vowels.contains(text.substring(0, 1)) ? "an " + text : "a " + text;
+    }
+
+    public static String italicizeWithEmDash(String text) {
+        return "<i>" + text + "</i> &mdash; ";
+    }
+
     public static Set<UUID> getAllSelectedTargets(Ability ability, Game game) {
         return ability.getModes().getSelectedModes()
                 .stream()
@@ -1271,6 +1287,16 @@ public final class CardUtil {
         return res;
     }
 
+    public static int parseIntWithDefault(String value, int defaultValue) {
+        int res;
+        try {
+            res = Integer.parseInt(value);
+        } catch (NumberFormatException ex) {
+            res = defaultValue;
+        }
+        return res;
+    }
+
     /**
      * Find mapping from original to copied card (e.g. map original left side with copied left side)
      *
@@ -1315,5 +1341,28 @@ public final class CardUtil {
 
         // normal game
         return "T" + gameState.getTurnNum() + "." + gameState.getTurn().getStep().getType().getStepShortText();
+    }
+
+    public static String concatWithAnd(List<String> strings) {
+        switch (strings.size()) {
+            case 0:
+                return "";
+            case 1:
+                return strings.get(0);
+            case 2:
+                return strings.get(0) + " and " + strings.get(1);
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < strings.size(); i++) {
+            sb.append(strings.get(i));
+            if (i == strings.size() - 1) {
+                break;
+            }
+            sb.append(", ");
+            if (i == strings.size() - 2) {
+                sb.append("and ");
+            }
+        }
+        return sb.toString();
     }
 }

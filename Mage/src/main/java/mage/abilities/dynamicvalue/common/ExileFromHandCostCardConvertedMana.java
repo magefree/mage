@@ -25,7 +25,7 @@ public enum ExileFromHandCostCardConvertedMana implements DynamicValue {
             if (cost.isPaid() && cost instanceof ExileFromHandCost) {
                 int xValue = 0;
                 for (Card card : ((ExileFromHandCost) cost).getCards()) {
-                    xValue += card.getConvertedManaCost();
+                    xValue += card.getManaValue();
                 }
                 return xValue;
             }

@@ -85,7 +85,7 @@ class HeartlessActEffect extends OneShotEffect {
             int removed = 0;
             String[] counterNames = permanent.getCounters(game).keySet().toArray(new String[0]);
             for (String counterName : counterNames) {
-                if (controller.chooseUse(Outcome.Neutral, "Do you want to remove " + counterName + " counters?", source, game)) {
+                if (controller.chooseUse(Outcome.Neutral, "Remove " + counterName + " counters?", source, game)) {
                     if (permanent.getCounters(game).get(counterName).getCount() == 1 || (toRemove - removed == 1)) {
                         permanent.removeCounters(counterName, 1, source, game);
                         removed++;

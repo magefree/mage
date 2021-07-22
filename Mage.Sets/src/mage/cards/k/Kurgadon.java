@@ -12,7 +12,7 @@ import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 
 /**
  *
@@ -20,11 +20,11 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  */
 public final class Kurgadon extends CardImpl {
 
-    private static final FilterSpell filterSpell = new FilterSpell("a creature spell with converted mana cost 6 or greater");
+    private static final FilterSpell filterSpell = new FilterSpell("a creature spell with mana value 6 or greater");
 
     static {
         filterSpell.add(CardType.CREATURE.getPredicate());
-		filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 5));
+		filterSpell.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 5));
     }
 
     public Kurgadon(UUID ownerId, CardSetInfo setInfo) {

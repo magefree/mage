@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.target.common.TargetArtifactPermanent;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -36,7 +35,7 @@ public final class TinStreetHooligan extends CardImpl {
                 new ManaWasSpentCondition(ColoredManaSymbol.G),
                 "When {this} enters the battlefield, if {G} was spent to cast Tin Street Hooligan, destroy target artifact.");
         ability.addTarget(new TargetArtifactPermanent());
-        this.addAbility(ability, new ManaSpentToCastWatcher());
+        this.addAbility(ability);
     }
 
     private TinStreetHooligan(final TinStreetHooligan card) {

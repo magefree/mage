@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -28,7 +27,7 @@ public final class DwarvenBloodboiler extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Dwarf you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(SubType.DWARF.getPredicate());
     }
 

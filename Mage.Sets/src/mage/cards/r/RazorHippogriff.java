@@ -7,6 +7,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -37,7 +38,7 @@ public final class RazorHippogriff extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
 
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
         TargetCard target = new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard"));
         ability.addTarget(target);
         ability.addEffect(new RazorHippogriffGainLifeEffect());
@@ -58,7 +59,7 @@ public final class RazorHippogriff extends CardImpl {
 
         public RazorHippogriffGainLifeEffect() {
             super(Outcome.GainLife);
-            staticText = "you gain life equal to that card's converted mana cost.";
+            staticText = "you gain life equal to that card's mana value.";
         }
 
         public RazorHippogriffGainLifeEffect(final RazorHippogriffGainLifeEffect effect) {
@@ -79,7 +80,7 @@ public final class RazorHippogriff extends CardImpl {
                     card = (Card)game.getLastKnownInformation(source.getFirstTarget(), Zone.GRAVEYARD);
                 }
                 if (card != null) {
-                    player.gainLife(card.getConvertedManaCost(), game, source);
+                    player.gainLife(card.getManaValue(), game, source);
                 }
             }
             return true;

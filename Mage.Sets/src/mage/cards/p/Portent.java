@@ -47,7 +47,7 @@ class PortentEffect extends OneShotEffect {
 
     public PortentEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle their library";
+        this.staticText = "look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle";
     }
 
     public PortentEffect(final PortentEffect effect) {
@@ -69,7 +69,7 @@ class PortentEffect extends OneShotEffect {
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
         controller.lookAtCards(source, null, cards, game);
         controller.putCardsOnTopOfLibrary(cards, game, source, true);
-        if (controller.chooseUse(Outcome.Neutral, "You may have that player shuffle their library", source, game)) {
+        if (controller.chooseUse(Outcome.Neutral, "You may have that player shuffle", source, game)) {
             player.shuffleLibrary(source, game);
         }
         return true;

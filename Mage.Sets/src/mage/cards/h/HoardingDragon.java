@@ -60,7 +60,7 @@ class HoardingDragonEffect extends OneShotEffect {
 
     HoardingDragonEffect() {
         super(Outcome.Exile);
-        this.staticText = "search your library for an artifact card, exile it, then shuffle your library";
+        this.staticText = "search your library for an artifact card, exile it, then shuffle";
     }
 
     private HoardingDragonEffect(final HoardingDragonEffect effect) {

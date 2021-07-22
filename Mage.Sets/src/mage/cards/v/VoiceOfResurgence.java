@@ -15,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.VoiceOfResurgenceToken;
 
 import java.util.UUID;
@@ -34,7 +35,7 @@ public final class VoiceOfResurgence extends CardImpl {
         // Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies, create a green and white Elemental creature token with "This creature's power and toughness are each equal to the number of creatures you control."
         OrTriggeredAbility ability = new OrTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VoiceOfResurgenceToken()),
                 new ConditionalTriggeredAbility(
-                        new SpellCastOpponentTriggeredAbility(null, new FilterSpell("a spell"), false),
+                        new SpellCastOpponentTriggeredAbility(null, StaticFilters.FILTER_SPELL_A, false),
                         MyTurnCondition.instance,
                         "Whenever an opponent casts a spell during your turn, "),
                 new DiesSourceTriggeredAbility(null, false));

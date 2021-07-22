@@ -21,7 +21,7 @@ public final class TemporalMastery extends CardImpl {
 
         // Take an extra turn after this one. Exile Temporal Mastery.
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
 
         // Miracle {1}{U}
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{U}")));

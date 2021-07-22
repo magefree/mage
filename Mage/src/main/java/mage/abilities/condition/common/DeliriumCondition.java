@@ -14,7 +14,7 @@ public enum DeliriumCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return CardTypesInGraveyardCount.instance.calculate(game, source, null) >= 4;
+        return CardTypesInGraveyardCount.YOU.calculate(game, source, null) >= 4;
     }
 
     @Override

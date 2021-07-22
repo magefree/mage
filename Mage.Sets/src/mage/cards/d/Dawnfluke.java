@@ -37,7 +37,7 @@ public final class Dawnfluke extends CardImpl {
         ability.addTarget(target);
         this.addAbility(ability);
         // Evoke {W}
-        this.addAbility(new EvokeAbility(this, "{W}"));
+        this.addAbility(new EvokeAbility("{W}"));
     }
 
     private Dawnfluke(final Dawnfluke card) {

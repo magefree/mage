@@ -66,7 +66,7 @@ class YennettCrypticSovereignEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "reveal the top card of your library. " +
                 "You may cast it without paying its mana cost " +
-                "if its converted mana cost is odd. " +
+                "if its mana value is odd. " +
                 "If you don't cast it, draw a card.";
     }
 
@@ -90,7 +90,7 @@ class YennettCrypticSovereignEffect extends OneShotEffect {
             return false;
         }
         player.revealCards(source, new CardsImpl(card), game);
-        if (card.getConvertedManaCost() % 2 == 1) {
+        if (card.getManaValue() % 2 == 1) {
             if (player.chooseUse(outcome, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
                 player.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
             } else {

@@ -27,7 +27,7 @@ public final class MyrSuperion extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Spend only mana produced by creatures to cast Myr Superion.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Spend only mana produced by creatures to cast {this}")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Spend only mana produced by creatures to cast this spell")));
         this.getSpellAbility().getManaCostsToPay().setSourceFilter(StaticFilters.FILTER_PERMANENT_CREATURES);
         this.getSpellAbility().getManaCosts().setSourceFilter(StaticFilters.FILTER_PERMANENT_CREATURES);
     }

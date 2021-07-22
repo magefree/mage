@@ -27,7 +27,7 @@ public final class ExperimentalOverload extends CardImpl {
 
         // Create an X/X blue and red Weird creature token, where X is the number of instant and sorcery cards in your graveyard. Then you may return an instant or sorcery card from your graveyard to your hand. Exile Experimental Overload.
         this.getSpellAbility().addEffect(new ExperimentalOverloadEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private ExperimentalOverload(final ExperimentalOverload card) {

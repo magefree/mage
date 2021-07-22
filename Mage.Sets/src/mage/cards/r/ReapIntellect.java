@@ -63,7 +63,7 @@ class ReapIntellectEffect extends OneShotEffect {
                 + "nonland cards from it and exile them. For each card exiled "
                 + "this way, search that player's graveyard, hand, and library "
                 + "for any number of cards with the same name as that card and "
-                + "exile them. Then that player shuffles their library";
+                + "exile them. Then that player shuffles";
     }
 
     public ReapIntellectEffect(final ReapIntellectEffect effect) {

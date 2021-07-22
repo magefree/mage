@@ -66,7 +66,7 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         if (getSourcePermanentIfItStillExists(game) != null) {
-            return getSourcePermanentIfItStillExists(game).isEnchantment();
+            return getSourcePermanentIfItStillExists(game).isEnchantment(game);
         }
         return false;
     }
@@ -78,10 +78,10 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public void trigger(Game game, UUID controllerId) {
+    public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
         //20100716 - 603.8
         game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.TRUE);
-        super.trigger(game, controllerId);
+        super.trigger(game, controllerId, triggeringEvent);
     }
 
     @Override
@@ -98,8 +98,8 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When an opponent controls a creature with 4 or greater power, if {this} is an enchantment, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When an opponent controls a creature with 4 or greater power, if {this} is an enchantment, " ;
     }
 
 }

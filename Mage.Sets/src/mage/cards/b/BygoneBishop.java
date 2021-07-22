@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 
 /**
  *
@@ -20,11 +20,11 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  */
 public final class BygoneBishop extends CardImpl {
 
-    private static final FilterSpell filterSpell = new FilterSpell("a creature spell with converted mana cost 3 or less");
+    private static final FilterSpell filterSpell = new FilterSpell("a creature spell with mana value 3 or less");
 
     static {
         filterSpell.add(CardType.CREATURE.getPredicate());
-        filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filterSpell.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public BygoneBishop(UUID ownerId, CardSetInfo setInfo) {

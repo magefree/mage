@@ -49,7 +49,7 @@ class TitheEffect extends OneShotEffect {
 
     TitheEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search your library for a Plains card. If target opponent controls more lands than you, you may search your library for an additional Plains card. Reveal those cards and put them into your hand. Then shuffle your library";
+        this.staticText = "Search your library for a Plains card. If target opponent controls more lands than you, you may search your library for an additional Plains card. Reveal those cards, put them into your hand, then shuffle";
     }
 
     TitheEffect(final TitheEffect effect) {

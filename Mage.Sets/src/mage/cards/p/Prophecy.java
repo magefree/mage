@@ -33,7 +33,7 @@ public final class Prophecy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Draw a card at the beginning of the next turn's upkeep.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false).concatBy("<br>"));
     }
 
     private Prophecy(final Prophecy card) {
@@ -50,7 +50,7 @@ class ProphecyEffect extends OneShotEffect {
 
     public ProphecyEffect() {
         super(Outcome.GainLife);
-        this.staticText = "Reveal the top card of target opponent's library. If it's a land, you gain 1 life. Then that player shuffles their library";
+        this.staticText = "Reveal the top card of target opponent's library. If it's a land, you gain 1 life. Then that player shuffles";
     }
 
     public ProphecyEffect(final ProphecyEffect effect) {
@@ -78,7 +78,7 @@ class ProphecyEffect extends OneShotEffect {
             }
             cards.add(card);
             targetPlayer.revealCards(sourceObject.getIdName(), cards, game);
-            if (card.isLand()) {
+            if (card.isLand(game)) {
                 controller.gainLife(1, game, source);
             }
             targetPlayer.shuffleLibrary(source, game);

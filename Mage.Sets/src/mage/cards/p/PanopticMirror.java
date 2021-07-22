@@ -11,7 +11,7 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -32,7 +32,7 @@ public final class PanopticMirror extends CardImpl {
         // Imprint - {X}, {tap}: You may exile an instant or sorcery card with converted mana cost X from your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PanopticMirrorExileEffect(), new VariableManaCost());
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(AbilityWord.IMPRINT));
         // At the beginning of your upkeep, you may copy a card exiled with Panoptic Mirror. If you do, you may cast the copy without paying its mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PanopticMirrorCastEffect(), TargetController.YOU, true));
     }
@@ -51,7 +51,7 @@ class PanopticMirrorExileEffect extends OneShotEffect {
 
     public PanopticMirrorExileEffect() {
         super(Outcome.Exile);
-        this.staticText = "You may exile an instant or sorcery card with converted mana cost X from your hand";
+        this.staticText = "You may exile an instant or sorcery card with mana value X from your hand";
     }
 
     public PanopticMirrorExileEffect(final PanopticMirrorExileEffect effect) {
@@ -68,8 +68,8 @@ class PanopticMirrorExileEffect extends OneShotEffect {
         source.getManaCostsToPay().getX();
         int count = source.getManaCostsToPay().getX();
 
-        FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("instant or sorcery card with converted mana cost equal to " + count);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, count));
+        FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("instant or sorcery card with mana value equal to " + count);
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, count));
         String choiceText = "Exile a " + filter.getMessage() + " from your hand?";
 
         Player player = game.getPlayer(source.getControllerId());

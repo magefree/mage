@@ -70,7 +70,7 @@ class TransmogrifyEffect extends OneShotEffect {
                     Card toBattlefield = null;
                     for (Card card : library.getCards(game)) {
                         cards.add(card);
-                        if (card.isCreature()) {
+                        if (card.isCreature(game)) {
                             toBattlefield = card;
                             break;
                         }

@@ -32,7 +32,7 @@ public final class HiddenStockpile extends CardImpl {
 
         // <i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, create a 1/1 colorless Servo artifact creature token.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new ServoToken()), false), RevoltCondition.instance,
-                "<i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, create a 1/1 colorless Servo artifact creature token");
+                "<i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, create a 1/1 colorless Servo artifact creature token.");
         ability.setAbilityWord(AbilityWord.REVOLT);
         ability.addWatcher(new RevoltWatcher());
         this.addAbility(ability);

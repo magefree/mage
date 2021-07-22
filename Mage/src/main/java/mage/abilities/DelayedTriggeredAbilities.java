@@ -37,7 +37,7 @@ public class DelayedTriggeredAbilities extends AbilitiesImpl<DelayedTriggeredAbi
                     continue;
                 }
                 if (ability.checkTrigger(event, game)) {
-                    ability.trigger(game, ability.controllerId);
+                    ability.trigger(game, ability.controllerId, event);
                     if (ability.getTriggerOnlyOnce()) {
                         it.remove();
                     }

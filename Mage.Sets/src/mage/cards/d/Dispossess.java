@@ -38,7 +38,7 @@ public final class Dispossess extends CardImpl {
 class DispossessEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
     public DispossessEffect() {
-        super(true, "target opponent's", "any number of cards with that name");
+        super(true, "target opponent's", "any number of cards with the chosen name");
     }
 
     public DispossessEffect(final DispossessEffect effect) {

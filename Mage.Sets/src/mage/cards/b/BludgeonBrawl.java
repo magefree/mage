@@ -61,7 +61,7 @@ class BludgeonBrawlAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "Each noncreature, non-Equipment artifact is an Equipment with equip {X} and \"Equipped creature gets +X/+0,\" where X is that artifact's converted mana cost.";
+        return "Each noncreature, non-Equipment artifact is an Equipment with equip {X} and \"Equipped creature gets +X/+0,\" where X is that artifact's mana value.";
     }
 }
 
@@ -121,9 +121,9 @@ class BludgeonBrawlGainAbilityEffect extends ContinuousEffectImpl {
             for (UUID permanentId : permanents) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
-                    int convertedManaCost = permanent.getConvertedManaCost();
-                    permanent.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(convertedManaCost)), source.getSourceId(), game);
-                    permanent.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(convertedManaCost, 0)), source.getSourceId(), game);
+                    int manaValue = permanent.getManaValue();
+                    permanent.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(manaValue)), source.getSourceId(), game);
+                    permanent.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(manaValue, 0)), source.getSourceId(), game);
                 }
             }
             return true;

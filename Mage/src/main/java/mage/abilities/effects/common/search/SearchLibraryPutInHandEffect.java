@@ -99,22 +99,19 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
             sb.append(target.getTargetName());
             if (forceShuffle) {
                 sb.append(revealCards ? ", reveal them" : "");
-                sb.append(", put them into your hand, then shuffle your library");
+                sb.append(", put them into your hand, then shuffle");
             } else {
                 sb.append(revealCards ? ", reveal them," : "");
-                sb.append(" and put them into your hand. If you do, shuffle your library");
+                sb.append(" and put them into your hand. If you do, shuffle");
             }
         } else {
-            if (!target.getTargetName().startsWith("a ") && !target.getTargetName().startsWith("an ")) {
-                sb.append("a ");
-            }
-            sb.append(target.getTargetName());
+            sb.append(CardUtil.addArticle(target.getTargetName()));
             if (forceShuffle) {
-                sb.append(revealCards ? ", reveal it" : "");
-                sb.append(", put it into your hand, then shuffle your library");
+                sb.append(revealCards ? ", reveal it, put it" : ", put that card");
+                sb.append(" into your hand, then shuffle");
             } else {
                 sb.append(revealCards ? ", reveal it," : "");
-                sb.append(" and put that card into your hand. If you do, shuffle your library");
+                sb.append(" and put that card into your hand. If you do, shuffle");
             }
         }
         staticText = sb.toString();

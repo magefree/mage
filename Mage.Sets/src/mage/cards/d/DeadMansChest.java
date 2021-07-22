@@ -94,7 +94,7 @@ class DeadMansChestEffect extends OneShotEffect {
                 if (!cards.isEmpty()) {
                     controller.moveCardsToExile(cards, source, game, true, source.getSourceId(), sourceObject.getName());
                     for (Card card : cards) {
-                        if (!card.isLand()) {
+                        if (!card.isLand(game)) {
                             ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.Custom);
                             effect.setTargetPointer(new FixedTarget(card, game));
                             game.addEffect(effect, source);

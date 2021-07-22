@@ -118,7 +118,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 boolean doThis = true;
                 if (root.abilities.size() == 1) {
                     for (Ability ability : root.abilities) {
-                        if (ability.getManaCosts().convertedManaCost() == 0
+                        if (ability.getManaCosts().manaValue() == 0
                                 && ability.getCosts().isEmpty()) {
                             if (actionCache.contains(ability.getRule() + '_' + ability.getSourceId())) {
                                 doThis = false; // don't do it again

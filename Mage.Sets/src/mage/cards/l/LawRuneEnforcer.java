@@ -13,7 +13,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -24,10 +24,10 @@ import java.util.UUID;
 public final class LawRuneEnforcer extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature with converted mana cost 2 or greater");
+            = new FilterCreaturePermanent("creature with mana value 2 or greater");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 1));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 1));
     }
 
     public LawRuneEnforcer(UUID ownerId, CardSetInfo setInfo) {

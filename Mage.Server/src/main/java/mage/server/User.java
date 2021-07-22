@@ -259,6 +259,10 @@ public class User {
         fireCallback(new ClientCallback(ClientCallbackMethod.VIEW_LIMITED_DECK, tableId, new TableClientMessage(deck, tableId, time, limited)));
     }
 
+    public void ccViewSideboard(final UUID tableId, final UUID gameId, final UUID targetPlayerId) {
+        fireCallback(new ClientCallback(ClientCallbackMethod.VIEW_SIDEBOARD, tableId, new TableClientMessage(gameId, targetPlayerId)));
+    }
+
     public void ccConstruct(final Deck deck, final UUID tableId, final int time) {
         fireCallback(new ClientCallback(ClientCallbackMethod.CONSTRUCT, tableId, new TableClientMessage(deck, tableId, time)));
     }

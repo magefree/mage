@@ -51,7 +51,7 @@ public class TargetStackObject extends TargetObject {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         StackObject stackObject = game.getStack().getStackObject(id);
-        return stackObject != null && filter.match(stackObject, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(stackObject, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override

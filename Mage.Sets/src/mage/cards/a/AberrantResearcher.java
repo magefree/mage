@@ -2,7 +2,6 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -69,7 +68,7 @@ class AberrantResearcherEffect extends OneShotEffect {
                 .millCards(1, source, game)
                 .getCards(game)
                 .stream()
-                .noneMatch(MageObject::isInstantOrSorcery)) {
+                .noneMatch(card -> card.isInstantOrSorcery(game))) {
             return false;
         }
         new TransformSourceEffect(true).apply(game, source);

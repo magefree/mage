@@ -497,6 +497,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     Cards discard(int amount, boolean random, boolean payForCost, Ability source, Game game);
 
+    Cards discard(int minAmount, int maxAmount, boolean payForCost, Ability source, Game game);
+
     Cards discard(Cards cards, boolean payForCost, Ability source, Game game);
 
     void discardToMax(Game game);
@@ -705,6 +707,19 @@ public interface Player extends MageItem, Copyable<Player> {
     void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game);
 
     int getAmount(int min, int max, String message, Game game);
+
+    /**
+     * Player distributes amount among multiple options
+     *
+     * @param outcome  AI hint
+     * @param messages List of options to distribute amount among
+     * @param min      Minimum value per option
+     * @param max      Total amount to be distributed
+     * @param type     MultiAmountType enum to set dialog options such as title and header
+     * @param game     Game
+     * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
+     */
+    List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game);
 
     void sideboard(Match match, Deck deck);
 
@@ -1029,5 +1044,4 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     FilterMana getPhyrexianColors();
-
 }

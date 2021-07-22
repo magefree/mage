@@ -82,7 +82,7 @@ class UnpredictableCycloneReplacementEffect extends ReplacementEffectImpl {
         Card toCast = null;
         for (Card card : player.getLibrary().getCards(game)) {
             cards.add(card);
-            if (card.getCardType().stream().anyMatch(sourceCard.getCardType()::contains)) {
+            if (card.getCardType(game).stream().anyMatch(sourceCard.getCardType(game)::contains)) {
                 toCast = card;
                 break;
             }
@@ -119,6 +119,6 @@ class UnpredictableCycloneReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
         Card sourceCard = game.getCard(stackObject.getSourceId());
-        return sourceCard != null && !sourceCard.isLand();
+        return sourceCard != null && !sourceCard.isLand(game);
     }
 }

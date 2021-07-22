@@ -46,7 +46,7 @@ public final class LivingArmor extends CardImpl {
 
         public LivingArmorEffect() {
             super(Outcome.BoostCreature);
-            this.staticText = "Put X +0/+1 counters on target creature, where X is that creature's converted mana cost";
+            this.staticText = "Put X +0/+1 counters on target creature, where X is that creature's mana value";
         }
 
         public LivingArmorEffect(final LivingArmorEffect effect) {
@@ -62,7 +62,7 @@ public final class LivingArmor extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Permanent creature = game.getPermanent(source.getTargets().getFirstTarget());
             if (creature != null) {
-                int amount = creature.getConvertedManaCost();
+                int amount = creature.getManaValue();
                 creature.addCounters(new BoostCounter(0, 1, amount), source.getControllerId(), source, game);
                 return true;
             }

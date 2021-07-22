@@ -22,7 +22,7 @@ public final class WorstFears extends CardImpl {
         // You control target player during that player's next turn. Exile Worst Fears. (You see all cards that player could see and make all decisions for that player.)
         this.getSpellAbility().addEffect(new ControlTargetPlayerNextTurnEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private WorstFears(final WorstFears card) {

@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -20,10 +20,10 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class Spellseeker extends CardImpl {
 
-    private static final FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("an instant or sorcery card with converted mana cost 2 or less");
+    private static final FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("an instant or sorcery card with mana value 2 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public Spellseeker(UUID ownerId, CardSetInfo setInfo) {

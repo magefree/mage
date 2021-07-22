@@ -8,10 +8,11 @@ import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 /**
  *
@@ -28,7 +29,7 @@ public class SearchLibraryWithLessCMCPutInPlayEffect extends OneShotEffect {
     public SearchLibraryWithLessCMCPutInPlayEffect(FilterCard filter) {
         super(Outcome.PutCreatureInPlay);
         this.filter = filter;
-        staticText = "Search your library for a " + filter.getMessage() + " with converted mana cost X or less, put it onto the battlefield, then shuffle your library";
+        staticText = "Search your library for " + CardUtil.addArticle(filter.getMessage()) + " with mana value X or less, put it onto the battlefield, then shuffle";
     }
 
     public SearchLibraryWithLessCMCPutInPlayEffect(final SearchLibraryWithLessCMCPutInPlayEffect effect) {
@@ -41,7 +42,7 @@ public class SearchLibraryWithLessCMCPutInPlayEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             FilterCard advancedFilter = filter.copy(); // never change static objects so copy the object here before
-            advancedFilter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+            advancedFilter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
             TargetCardInLibrary target = new TargetCardInLibrary(advancedFilter);
             if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {

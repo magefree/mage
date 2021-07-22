@@ -42,7 +42,7 @@ class IgniteMemoriesEffect extends OneShotEffect {
 
     public IgniteMemoriesEffect() {
         super(Outcome.Damage);
-        staticText = "Target player reveals a card at random from their hand. {this} deals damage to that player equal to that card's converted mana cost";
+        staticText = "Target player reveals a card at random from their hand. {this} deals damage to that player equal to that card's mana value";
     }
 
     public IgniteMemoriesEffect(final IgniteMemoriesEffect effect) {
@@ -60,7 +60,7 @@ class IgniteMemoriesEffect extends OneShotEffect {
                 if (card != null) {
                     revealed.add(card);
                     controller.revealCards(sourceObject.getIdName(), revealed, game);
-                    controller.damage(card.getConvertedManaCost(), source.getSourceId(), source, game);
+                    controller.damage(card.getManaValue(), source.getSourceId(), source, game);
                     return true;
                 }
                 return false;

@@ -33,7 +33,7 @@ public final class VigorMortis extends CardImpl {
         this.getSpellAbility().addEffect(new VigorMortisReplacementEffect()); // has to be added before the moving effect
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addEffect(new InfoEffect("If {G} was spent to cast this spell, that creature enters the battlefield with an additional +1/+1 counter on it"));
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
     }
 

@@ -84,11 +84,11 @@ class KelsFightFixerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature();
+                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game);
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you sacrifice a creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you sacrifice a creature, " ;
     }
 }

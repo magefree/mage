@@ -21,7 +21,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.KarnConstructToken;
@@ -53,7 +52,7 @@ public final class UrzaLordHighArtificer extends CardImpl {
 
         // Tap an untapped artifact you control: Add {U}.
         FilterControlledPermanent filter = new FilterControlledArtifactPermanent("untapped artifact you control");
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         this.addAbility(new SimpleManaAbility(
                 Zone.BATTLEFIELD,
                 new UrzaLordHighArtificerManaEffect(filter),
@@ -77,7 +76,7 @@ class UrzaLordHighArtificerEffect extends OneShotEffect {
 
     UrzaLordHighArtificerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Shuffle your library, then exile the top card of your library. " +
+        this.staticText = "Shuffle your library, then exile the top card. " +
                 "Until end of turn, you may play that card without paying its mana cost";
     }
 

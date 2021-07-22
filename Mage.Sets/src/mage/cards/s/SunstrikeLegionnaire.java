@@ -18,7 +18,7 @@ import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -29,11 +29,11 @@ import mage.target.common.TargetCreaturePermanent;
 public final class SunstrikeLegionnaire extends CardImpl {
 
     private static final FilterCreaturePermanent untapFilter = new FilterCreaturePermanent("another creature");
-    private static final FilterCreaturePermanent tapFilter = new FilterCreaturePermanent("creature with converted mana cost 3 or less");
+    private static final FilterCreaturePermanent tapFilter = new FilterCreaturePermanent("creature with mana value 3 or less");
 
     static {
         untapFilter.add(AnotherPredicate.instance);
-        tapFilter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        tapFilter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public SunstrikeLegionnaire(UUID ownerId, CardSetInfo setInfo) {

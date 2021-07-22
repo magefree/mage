@@ -10,9 +10,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
@@ -70,14 +70,11 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("search your library for a ").append(target.getTargetName());
+        sb.append("search your library for ").append(CardUtil.addArticle(target.getTargetName()));
         if (reveal) {
-            sb.append(" and reveal that card. Shuffle");
-        } else {
-            sb.append(", then shuffle");
+            sb.append(", reveal it");
         }
-        sb.append(" your library and put that card on top of it");
+        sb.append(", then shuffle and put that card on top");
         staticText = sb.toString();
     }
-
 }

@@ -27,7 +27,7 @@ public final class PraetorsCounsel extends CardImpl {
 
         // Return all cards from your graveyard to your hand. Exile Praetor's Counsel. You have no maximum hand size for the rest of the game.
         this.getSpellAbility().addEffect(new PraetorsCounselEffect());
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
         this.getSpellAbility().addEffect(new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, HandSizeModification.SET));
     }
 

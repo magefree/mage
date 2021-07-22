@@ -82,7 +82,7 @@ class HallowedMoonlightEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) event;
-        if (entersTheBattlefieldEvent.getTarget().isCreature()) {
+        if (entersTheBattlefieldEvent.getTarget().isCreature(game)) {
             CreatureWasCastWatcher watcher = game.getState().getWatcher(CreatureWasCastWatcher.class);
             if (watcher != null && !watcher.wasCreatureCastThisTurn(event.getTargetId())) {
                 return true;

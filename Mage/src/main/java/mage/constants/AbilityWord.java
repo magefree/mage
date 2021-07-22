@@ -1,5 +1,7 @@
 package mage.constants;
 
+import mage.util.CardUtil;
+
 /**
  * @author LevelX2
  */
@@ -32,7 +34,9 @@ public enum AbilityWord {
     LANDFALL("Landfall"),
     LIEUTENANT("Lieutenant"),
     METALCRAFT("Metalcraft"),
+    MAGECRAFT("Magecraft"),
     MORBID("Morbid"),
+    PACK_TACTICS("Pack tactics"),
     PARLEY("Parley"),
     RADIANCE("Radiance"),
     RAID("Raid"),
@@ -50,6 +54,10 @@ public enum AbilityWord {
 
     AbilityWord(String text) {
         this.text = text;
+    }
+
+    public String formatWord() {
+        return CardUtil.italicizeWithEmDash(this.toString());
     }
 
     @Override

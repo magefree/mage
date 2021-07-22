@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -78,9 +77,9 @@ class LoxodonGatekeeperTapEffect extends ReplacementEffectImpl {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
             if (permanent != null
-                    && (permanent.isCreature()
-                    || permanent.isLand()
-                    || permanent.isArtifact())) {
+                    && (permanent.isCreature(game)
+                    || permanent.isLand(game)
+                    || permanent.isArtifact(game))) {
                 return true;
             }
         }

@@ -15,7 +15,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.util.CardUtil;
 import mage.util.SubTypes;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -166,10 +165,10 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     }
 
     @Override
-    public ArrayList<CardType> getCardType() {
+    public List<CardType> getCardType(Game game) {
         // CardImpl's constructor can call some code on init, so you must check left/right before
         // it's a bad workaround
-        return leftHalfCard != null ? leftHalfCard.getCardType() : cardType;
+        return leftHalfCard != null ? leftHalfCard.getCardType(game) : cardType;
     }
 
     @Override
@@ -327,7 +326,7 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     }
 
     @Override
-    public int getConvertedManaCost() {
+    public int getManaValue() {
         // Rules:
         // The converted mana cost of a modal double-faced card is based on the characteristics of the
         // face that’s being considered. On the stack and battlefield, consider whichever face is up.
@@ -335,7 +334,7 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
         // mana cost of a transforming double-faced card is determined.
 
         // on stack or battlefield it must be half card with own cost
-        return leftHalfCard.getConvertedManaCost();
+        return leftHalfCard.getManaValue();
     }
 
     @Override

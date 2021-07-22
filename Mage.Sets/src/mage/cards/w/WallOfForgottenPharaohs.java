@@ -50,7 +50,7 @@ public final class WallOfForgottenPharaohs extends CardImpl {
                 new DamageTargetEffect(1),
                 new TapSourceCost(),
                 new OrCondition(
-                        "only if you control a Desert or there is a Desert card in your graveyard",
+                        "you control a Desert or there is a Desert card in your graveyard",
                         new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(filterDesertPermanent)),
                         new CardsInControllerGraveyardCondition(1, filterDesertCard)
                 )

@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -6,6 +5,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -16,12 +16,11 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterSpell spellCard = new FilterSpell("a spell");
     protected FilterSpell filter;
     protected SetTargetPointer setTargetPointer;
 
     public SpellCastOpponentTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, spellCard, optional);
+        this(effect, StaticFilters.FILTER_SPELL_A, optional);
     }
 
     public SpellCastOpponentTriggeredAbility(Effect effect, FilterSpell filter, boolean optional) {
@@ -58,33 +57,32 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, game)) {
-                if (setTargetPointer != SetTargetPointer.NONE) {
-                    for (Effect effect : this.getEffects()) {
-                        switch (setTargetPointer) {
-                            case SPELL:
-                                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                                break;
-                            case PLAYER:
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                                break;
-                            default:
-                                throw new UnsupportedOperationException("Value of SetTargetPointer not supported!");
-                        }
-
-                    }
-                }
-                return true;
-            }
+        if (!game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
+            return false;
         }
-        return false;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (!filter.match(spell, getSourceId(), getControllerId(), game)) {
+            return false;
+        }
+        getEffects().setValue("spellCast", spell);
+        switch (setTargetPointer) {
+            case NONE:
+                break;
+            case SPELL:
+                getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+                break;
+            case PLAYER:
+                getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                break;
+            default:
+                throw new UnsupportedOperationException("Value of SetTargetPointer not supported!");
+        }
+        return true;
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an opponent casts " + filter.getMessage() + ", " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever an opponent casts " + filter.getMessage() + ", " ;
     }
 
     @Override

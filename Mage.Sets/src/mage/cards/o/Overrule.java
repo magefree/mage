@@ -20,11 +20,11 @@ public final class Overrule extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}{U}");
 
         // Counter target spell unless its controller pays {X}.
-        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetSpell());
 
         // You gain X life.
-        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
     }
 
     private Overrule(final Overrule card) {

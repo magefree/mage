@@ -30,13 +30,13 @@ public class ReturnToHandAttachedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getSourceId());
+        Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = (Permanent) getValue("attachedTo");
         if (player == null || permanent == null) {
             return false;
         }
         Card card = permanent.getMainCard();
-        if (permanent.getZoneChangeCounter(game) != card.getZoneChangeCounter(game) + 1) {
+        if (permanent.getZoneChangeCounter(game) + 1 != card.getZoneChangeCounter(game)) {
             return false;
         }
         return player.moveCards(card, Zone.HAND, source, game);

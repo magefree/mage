@@ -67,7 +67,7 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
             if (setTargetPointer) {
                 for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
@@ -79,8 +79,8 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever " + filter.getMessage() + " is turned face up, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever " + filter.getMessage() + " is turned face up, " ;
     }
 }
 

@@ -5,10 +5,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.*;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -64,35 +62,26 @@ class PetraSphinxEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (controller != null && player != null) {
-            if (player.getLibrary().hasCards()) {
-                Choice cardChoice = new ChoiceImpl();
-                cardChoice.setChoices(CardRepository.instance.getNames());
-                cardChoice.setMessage("Name a card");
-                if (!player.choose(Outcome.DrawCard, cardChoice, game)) {
-                    return false;
-                }
-                String cardName = cardChoice.getChoice();
-                game.informPlayers(CardUtil.createObjectRealtedWindowTitle(source, game, null) + ", player: " + player.getLogName() + ", named: [" + cardName + ']');
-                Card card = player.getLibrary().getFromTop(game);
-                if (card != null) {
-                    Cards cards = new CardsImpl(card);
-                    player.revealCards(source, cards, game);
-                    if (CardUtil.haveSameNames(card, cardName, game)) {
-                        player.moveCards(cards, Zone.HAND, source, game);
-                    } else {
-                        player.moveCards(cards, Zone.GRAVEYARD, source, game);
-                    }
-                }
-            }
+        if (controller == null || player == null || !player.getLibrary().hasCards()) {
             return true;
         }
-        return false;
+        String cardName = ChooseACardNameEffect.TypeOfName.ALL.getChoice(player, game, source, false);
+        Card card = player.getLibrary().getFromTop(game);
+        if (card == null) {
+            return true;
+        }
+        Cards cards = new CardsImpl(card);
+        player.revealCards(source, cards, game);
+        if (CardUtil.haveSameNames(card, cardName, game)) {
+            player.moveCards(cards, Zone.HAND, source, game);
+        } else {
+            player.moveCards(cards, Zone.GRAVEYARD, source, game);
+        }
+        return true;
     }
 
     @Override
     public PetraSphinxEffect copy() {
         return new PetraSphinxEffect(this);
     }
-
 }

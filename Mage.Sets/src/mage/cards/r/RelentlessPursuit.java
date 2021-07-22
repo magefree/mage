@@ -76,8 +76,8 @@ class RelentlessPursuitEffect extends OneShotEffect {
 
         controller.revealCards(sourceObject.getName(), cards, game);
 
-        boolean creatureCardFound = cards.getCards(game).stream().anyMatch(Card::isCreature);
-        boolean landCardFound = cards.getCards(game).stream().anyMatch(Card::isLand);
+        boolean creatureCardFound = cards.getCards(game).stream().anyMatch(card -> card.isCreature(game));
+        boolean landCardFound = cards.getCards(game).stream().anyMatch(card -> card.isLand(game));
 
         if (!creatureCardFound && !landCardFound) {
             controller.moveCards(cards, Zone.GRAVEYARD, source, game);

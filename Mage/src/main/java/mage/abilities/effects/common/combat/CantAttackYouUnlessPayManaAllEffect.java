@@ -62,7 +62,7 @@ public class CantAttackYouUnlessPayManaAllEffect extends PayCostToAttackBlockEff
         if (payAlsoForAttackingPlaneswalker) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null
-                    && permanent.isPlaneswalker()
+                    && permanent.isPlaneswalker(game)
                     && permanent.isControlledBy(source.getControllerId())) {
                 return true;
             }

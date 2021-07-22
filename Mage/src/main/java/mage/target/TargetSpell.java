@@ -61,7 +61,7 @@ public class TargetSpell extends TargetObject {
             return false;
         }
         Spell spell = game.getStack().getSpell(id);
-        return spell != null && filter.match(spell, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(spell, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override

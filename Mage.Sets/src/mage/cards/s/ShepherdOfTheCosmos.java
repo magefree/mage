@@ -13,7 +13,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -24,11 +24,11 @@ import java.util.UUID;
 public final class ShepherdOfTheCosmos extends CardImpl {
 
     private static final FilterCard filter = new FilterPermanentCard(
-            "permanent card with converted mana cost 2 or less from your graveyard"
+            "permanent card with mana value 2 or less from your graveyard"
     );
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public ShepherdOfTheCosmos(UUID ownerId, CardSetInfo setInfo) {
@@ -43,7 +43,7 @@ public final class ShepherdOfTheCosmos extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Shepherd of the Cosmos enters the battlefield, return target permanent card with converted mana cost 2 or less from your graveyard to the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 

@@ -1,7 +1,6 @@
 
 package mage.abilities.common;
 
-import java.util.Locale;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.AttachmentType;
@@ -9,6 +8,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.Locale;
 
 /**
  * "When enchanted/equipped creature attacks " triggered ability
@@ -52,18 +53,17 @@ public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
         Permanent equipment = game.getPermanent(this.sourceId);
         if (equipment != null && equipment.getAttachedTo() != null
                 && event.getSourceId().equals(equipment.getAttachedTo())) {
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("sourceId", event.getSourceId());
-            }
+            getEffects().setValue("sourceId", event.getSourceId());
+            getEffects().setValue("attachedPermanent", game.getPermanent(event.getSourceId()));
             return true;
         }
         return false;
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ");
         sb.append(attachmentType.verb().toLowerCase(Locale.ENGLISH));
-        return sb.append(" creature attacks, ").append(super.getRule()).toString();
+        return sb.append(" creature attacks, ").toString();
     }
 }

@@ -27,7 +27,7 @@ public final class FesteringMarch extends CardImpl {
         // Creatures your opponents control get -1/-1 until end of turn.
         this.getSpellAbility().addEffect(new BoostOpponentsEffect(-1, -1, Duration.EndOfTurn));
         // Exile Festering March
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
         // with three time counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), StaticValue.get(3), false, true);
         effect.setText("with 3 time counters on it");

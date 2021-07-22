@@ -16,7 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,11 +51,11 @@ public final class LegacyOfTheBeloved extends CardImpl {
 
 class LegacyOfTheBelovedEffect extends OneShotEffect {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("up to two creatures cards that each have a lower converted mana cost that sacrificied creature's converted mana cost");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("up to two creatures cards that each have a lower mana value that sacrificied creature's mana value");
 
     public LegacyOfTheBelovedEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Search you library for up to two creatures cards that each have a lower converted mana cost that sacrificied creature's converted mana cost, reveal them and put them onto the battlefield, then shuffle you library";
+        this.staticText = "Search you library for up to two creatures cards that each have a lower mana value that sacrificied creature's mana value, reveal them and put them onto the battlefield, then shuffle you library";
     }
 
     public LegacyOfTheBelovedEffect(final LegacyOfTheBelovedEffect effect) {
@@ -75,7 +75,7 @@ class LegacyOfTheBelovedEffect extends OneShotEffect {
                 if (cost instanceof SacrificeTargetCost) {
                     Permanent p = (Permanent) game.getLastKnownInformation(((SacrificeTargetCost) cost).getPermanents().get(0).getId(), Zone.BATTLEFIELD);
                     if (p != null) {
-                        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, p.getConvertedManaCost()));
+                        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, p.getManaValue()));
                         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, filter);
                         Player player = game.getPlayer(source.getControllerId());
                         if (player != null && player.searchLibrary(target, source, game)) {

@@ -1161,7 +1161,7 @@ public class TestPlayer implements Player {
                         + c.getIdName()
                         + (c.isCopy() ? " [copy of " + c.getCopyFrom().getId().toString().substring(0, 3) + "]" : "")
                         + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
-                        + (c.isPlaneswalker() ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
+                        + (c.isPlaneswalker(game) ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
                         + ", " + (c.isTapped() ? "Tapped" : "Untapped")
                         + getPrintableAliases(", [", c.getId(), "]")
                         + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())))
@@ -1479,7 +1479,7 @@ public class TestPlayer implements Player {
         Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
 
         boolean found = false;
-        for (CardType ct : perm.getCardType()) {
+        for (CardType ct : perm.getCardType(game)) {
             if (ct.equals(type)) {
                 found = true;
                 break;
@@ -1977,7 +1977,14 @@ public class TestPlayer implements Player {
             //Assert.fail("Wrong choice");
         }
 
-        this.chooseStrictModeFailed("choice", game, choice.getMessage());
+        String choicesInfo;
+        if (choice.isKeyChoice()) {
+            choicesInfo = String.join("\n", choice.getKeyChoices().values());
+        } else {
+            choicesInfo = String.join("\n", choice.getChoices());
+        }
+        this.chooseStrictModeFailed("choice", game,
+                "Message: " + choice.getMessage() + "\nPossible choices:\n" + choicesInfo);
         return computerPlayer.choose(outcome, choice, game);
     }
 
@@ -2668,6 +2675,51 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+        assertAliasSupportInChoices(false);
+
+        int needCount = messages.size();
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
+        if (needCount == 0) {
+            return defaultList;
+        }
+
+        List<Integer> answer = new ArrayList<>(defaultList);
+        if (!choices.isEmpty()) {
+            // must fill all possible choices or skip it
+            for (int i = 0; i < messages.size(); i++) {
+                if (!choices.isEmpty()) {
+                    // normal choice
+                    if (choices.get(0).startsWith("X=")) {
+                        answer.set(i, Integer.parseInt(choices.get(0).substring(2)));
+                        choices.remove(0);
+                        continue;
+                    }
+                    // skip
+                    if (choices.get(0).equals(CHOICE_SKIP)) {
+                        choices.remove(0);
+                        break;
+                    }
+                }
+                Assert.fail(String.format("Missing choice in multi amount: %s (pos %d - %s)", type.getHeader(), i + 1, messages.get(i)));
+            }
+
+            // extra check
+            if (!MultiAmountType.isGoodValues(answer, needCount, min, max)) {
+                Assert.fail("Wrong choices in multi amount: " + answer
+                        .stream()
+                        .map(String::valueOf)
+                        .collect(Collectors.joining(",")));
+            }
+
+            return answer;
+        }
+
+        this.chooseStrictModeFailed("choice", game, "Multi amount: " + type.getHeader());
+        return computerPlayer.getMultiAmount(outcome, messages, min, max, type, game);
+    }
+
+    @Override
     public void addAbility(Ability ability) {
         computerPlayer.addAbility(ability);
     }
@@ -2839,6 +2891,11 @@ public class TestPlayer implements Player {
     @Override
     public Cards discard(int amount, boolean random, boolean payForCost, Ability source, Game game) {
         return computerPlayer.discard(amount, random, payForCost, source, game);
+    }
+
+    @Override
+    public Cards discard(int minAmount, int maxAmount, boolean payForCost, Ability source, Game game) {
+        return computerPlayer.discard(minAmount, maxAmount, payForCost, source, game);
     }
 
     @Override
@@ -3868,7 +3925,7 @@ public class TestPlayer implements Player {
 
         Assert.assertNotEquals("chooseTargetAmount needs non zero amount remaining", 0, target.getAmountRemaining());
 
-        assertAliasSupportInTargets(false);
+        assertAliasSupportInTargets(true);
         if (!targets.isEmpty()) {
 
             // skip targets
@@ -3889,6 +3946,8 @@ public class TestPlayer implements Player {
             String targetName = choiceSettings[0];
             int targetAmount = Integer.parseInt(choiceSettings[1].substring("X=".length()));
 
+            checkTargetDefinitionMarksSupport(target, targetName, "=");
+
             // player target support
             if (targetName.startsWith("targetPlayer=")) {
                 targetName = targetName.substring(targetName.indexOf("targetPlayer=") + "targetPlayer=".length());
@@ -3900,10 +3959,21 @@ public class TestPlayer implements Player {
 
             if (target.getAmountRemaining() > 0) {
                 for (UUID possibleTarget : target.possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
+                    boolean foundTarget = false;
+
+                    // permanent
                     MageObject objectPermanent = game.getObject(possibleTarget);
+                    if (objectPermanent != null && hasObjectTargetNameOrAlias(objectPermanent, targetName)) {
+                        foundTarget = true;
+                    }
+
+                    // player
                     Player objectPlayer = game.getPlayer(possibleTarget);
-                    String objectName = objectPermanent != null ? objectPermanent.getName() : objectPlayer.getName();
-                    if (objectName.equals(targetName)) {
+                    if (!foundTarget && objectPlayer != null && objectPlayer.getName().equals(targetName)) {
+                        foundTarget = true;
+                    }
+
+                    if (foundTarget) {
                         if (!target.getTargets().contains(possibleTarget) && target.canTarget(possibleTarget, source, game)) {
                             // can select
                             target.addTarget(possibleTarget, targetAmount, source, game);

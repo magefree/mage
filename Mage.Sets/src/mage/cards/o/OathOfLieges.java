@@ -72,7 +72,7 @@ class OathOfLiegesEffect extends OneShotEffect {
     public OathOfLiegesEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player chooses target player who controls more lands than they do and is their opponent. "
-                + "The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library";
+                + "The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle";
     }
 
     public OathOfLiegesEffect(final OathOfLiegesEffect effect) {
@@ -88,7 +88,7 @@ class OathOfLiegesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
         if (activePlayer != null) {
-            if (activePlayer.chooseUse(outcome, "Search your library for a basic land card, put that card onto the battlefield, then shuffle your library?", source, game)) {
+            if (activePlayer.chooseUse(outcome, "Search your library for a basic land card, put that card onto the battlefield, then shuffle?", source, game)) {
                 Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), false, false, Outcome.PutLandInPlay, true);
                 effect.setTargetPointer(new FixedTarget(game.getActivePlayerId()));
                 return effect.apply(game, source);

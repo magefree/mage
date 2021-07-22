@@ -22,13 +22,14 @@ public final class OrochiRanger extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.RANGER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
         // Whenever Orochi Ranger deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
                 Ability ability;
-        ability = new DealsDamageToACreatureTriggeredAbility(new TapTargetEffect("that creature"), true, false, true);
+        ability = new DealsDamageToACreatureTriggeredAbility(new TapTargetEffect("tap that creature"), true, false, true);
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("and it"));
         this.addAbility(ability);
     }

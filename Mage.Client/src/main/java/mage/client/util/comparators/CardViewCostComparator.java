@@ -9,11 +9,11 @@ public class CardViewCostComparator implements CardViewComparator {
 
     @Override
     public int compare(CardView o1, CardView o2) {
-        return Integer.compare(o1.getConvertedManaCost(), o2.getConvertedManaCost());
+        return Integer.compare(o1.getManaValue(), o2.getManaValue());
     }
 
     @Override
     public String getCategoryName(CardView sample) {
-        return "CMC: " + sample.getConvertedManaCost();
+        return "CMC: " + sample.getManaValue();
     }
 }

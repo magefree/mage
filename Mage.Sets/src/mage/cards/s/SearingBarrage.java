@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -30,7 +29,6 @@ public final class SearingBarrage extends CardImpl {
                 "<br><i>Adamant</i> &mdash; If at least three red mana was spent to cast this spell, " +
                         "{this} deals 3 damage to that creature's controller."
         ));
-        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private SearingBarrage(final SearingBarrage card) {

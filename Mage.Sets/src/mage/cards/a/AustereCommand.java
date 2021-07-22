@@ -11,7 +11,7 @@ import mage.constants.ComparisonType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 
 /**
  *
@@ -19,11 +19,11 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  */
 public final class AustereCommand extends CardImpl {
 
-    private static final FilterCreaturePermanent filter3orLess = new FilterCreaturePermanent("creatures with converted mana cost 3 or less");
-    private static final FilterCreaturePermanent filter4orMore = new FilterCreaturePermanent("creatures with converted mana cost 4 or greater");
+    private static final FilterCreaturePermanent filter3orLess = new FilterCreaturePermanent("creatures with mana value 3 or less");
+    private static final FilterCreaturePermanent filter4orMore = new FilterCreaturePermanent("creatures with mana value 4 or greater");
     static {
-        filter3orLess.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
-        filter4orMore.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 3));
+        filter3orLess.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
+        filter4orMore.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public AustereCommand(UUID ownerId, CardSetInfo setInfo) {

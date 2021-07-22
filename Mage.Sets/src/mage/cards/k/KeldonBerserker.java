@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
@@ -26,7 +25,7 @@ public final class KeldonBerserker extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("untapped lands");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public KeldonBerserker(UUID ownerId, CardSetInfo setInfo) {

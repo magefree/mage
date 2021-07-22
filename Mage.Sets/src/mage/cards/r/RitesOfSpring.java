@@ -1,20 +1,21 @@
 package mage.cards.r;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetDiscard;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -43,8 +44,8 @@ class RitesOfSpringEffect extends OneShotEffect {
 
     RitesOfSpringEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Discard any number of cards. Search your library for up to that many basic land cards, " +
-                "reveal those cards, and put them into your hand. Then shuffle your library.";
+        this.staticText = "discard any number of cards. Search your library for up to that many basic land cards, "
+                + "reveal them, put them into your hand, then shuffle";
     }
 
     private RitesOfSpringEffect(final RitesOfSpringEffect effect) {
@@ -62,12 +63,29 @@ class RitesOfSpringEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetCard target = new TargetDiscard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD, controller.getId());
-        controller.choose(Outcome.AIDontUseIt, controller.getHand(), target, game);
-        int numDiscarded = controller.discard(new CardsImpl(target.getTargets()), false, source, game).size();
-        new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
-                0, numDiscarded, StaticFilters.FILTER_CARD_BASIC_LAND
-        ), true, true).apply(game, source);
+
+        int numDiscarded = controller.discard(0, Integer.MAX_VALUE, false, source, game).size();
+
+        if (numDiscarded == 0) {
+            return true;
+        }
+
+        TargetCardInLibrary target = new TargetCardInLibrary(
+                numDiscarded, StaticFilters.FILTER_CARD_BASIC_LAND
+        );
+        controller.searchLibrary(target, source, game);
+        Cards cards = new CardsImpl();
+        controller
+                .getLibrary()
+                .getCards(game)
+                .stream()
+                .filter(Objects::nonNull)
+                .map(MageItem::getId)
+                .filter(target.getTargets()::contains)
+                .forEach(cards::add);
+        controller.revealCards(source, cards, game);
+        controller.moveCards(cards, Zone.HAND, source, game);
+        controller.shuffleLibrary(source, game);
         return true;
     }
 }

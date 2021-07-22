@@ -1,5 +1,6 @@
 package mage.abilities;
 
+import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -12,14 +13,11 @@ import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.command.Commander;
-import mage.game.command.Emblem;
-import mage.game.command.Plane;
+import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -212,12 +210,8 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
             return true;
         }
         MageObject mageObject = game.getObject(this.sourceId);
-        if (mageObject instanceof Emblem) {
-            return ((Emblem) mageObject).isControlledBy(playerId);
-        } else if (mageObject instanceof Plane) {
-            return ((Plane) mageObject).isControlledBy(playerId);
-        } else if (mageObject instanceof Commander) {
-            return ((Commander) mageObject).isControlledBy(playerId);
+        if (mageObject instanceof CommandObject) {
+            return ((CommandObject) mageObject).isControlledBy(playerId);
         } else if (game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD) {
             return ((Card) mageObject).isOwnedBy(playerId);
         }
@@ -237,6 +231,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         return timing;
     }
 
+    @Override
     public void setTiming(TimingRule timing) {
         this.timing = timing;
     }

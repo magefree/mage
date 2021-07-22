@@ -36,7 +36,7 @@ public final class KayasGuile extends CardImpl {
         // • Exile all cards from each opponent's graveyard.
         this.getSpellAbility().addMode(new Mode(new ExileGraveyardAllPlayersEffect(
                 StaticFilters.FILTER_CARD_CARDS, TargetController.OPPONENT
-        )));
+        ).setText("exile all cards from each opponent's graveyard")));
 
         // • Create a 1/1 white and black Spirit creature token with flying.
         this.getSpellAbility().addMode(new Mode(new CreateTokenEffect(new WhiteBlackSpiritToken())));
@@ -45,7 +45,7 @@ public final class KayasGuile extends CardImpl {
         this.getSpellAbility().addMode(new Mode(new GainLifeEffect(4)));
 
         // Entwine {3}
-        this.addAbility(new EntwineAbility(new ManaCostsImpl("{3}"), "Choose all if you pay the entwine cost."));
+        this.addAbility(new EntwineAbility(new ManaCostsImpl<>("{3}"), "Choose all if you pay the entwine cost."));
     }
 
     private KayasGuile(final KayasGuile card) {

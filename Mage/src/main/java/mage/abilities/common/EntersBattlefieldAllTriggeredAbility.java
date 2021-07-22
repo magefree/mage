@@ -84,10 +84,11 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if (permanent == null || !filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (!filter.match(permanent, getSourceId(), getControllerId(), game)) {
             return false;
         }
         this.getEffects().setValue("permanentEnteringBattlefield", permanent);
+        this.getEffects().setValue("permanentEnteringControllerId", permanent.getControllerId());
         if (setTargetPointer == SetTargetPointer.NONE) {
             return true;
         }
@@ -107,18 +108,26 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         if (rule != null && !rule.isEmpty()) {
             return rule;
         }
+        return super.getRule();
+    }
+
+    @Override
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ");
         if (thisOrAnother) {
             sb.append("{this} or another ");
         }
         sb.append(filter.getMessage());
-        sb.append(" enters the battlefield");
+        if (filter.getMessage().startsWith("one or more")) {
+            sb.append(" enter the battlefield");
+        } else {
+            sb.append(" enters the battlefield");
+        }
         if (controlledText) {
             sb.append(" under your control, ");
         } else {
             sb.append(", ");
         }
-        sb.append(super.getRule());
         return sb.toString();
     }
 

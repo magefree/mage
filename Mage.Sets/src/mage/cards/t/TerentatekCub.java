@@ -43,7 +43,7 @@ public final class TerentatekCub extends CardImpl {
                 new OpponentControlsPermanentCondition(filter),
                 "As long as an opponent controls a Jedi or Sith, {this} gets +1/+1"));
         Effect effect = new ConditionalRequirementEffect(new AttacksIfAbleSourceEffect(Duration.Custom), new OpponentControlsPermanentCondition(filter));
-        effect.setText("and attacks each turn if able");
+        effect.setText("and attacks each combat if able");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

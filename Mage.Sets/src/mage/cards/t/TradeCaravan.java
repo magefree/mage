@@ -48,7 +48,7 @@ public final class TradeCaravan extends CardImpl {
         // Remove two currency counters from Trade Caravan: Untap target basic land. Activate this ability only during an opponent's upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new RemoveCountersSourceCost(CounterType.CURRENCY.createInstance(2)), 
                 new CompoundCondition(OnOpponentsTurnCondition.instance, new IsStepCondition(PhaseStep.UPKEEP, false)), 
-                "Remove two currency counters from {this}: Untap target basic land. Activate this ability only during an opponent's upkeep.");
+                "Remove two currency counters from {this}: Untap target basic land. Activate only during an opponent's upkeep.");
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

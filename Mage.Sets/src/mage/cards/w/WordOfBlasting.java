@@ -2,7 +2,7 @@
 package mage.cards.w;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
+import mage.abilities.dynamicvalue.common.TargetManaValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -30,8 +30,8 @@ public final class WordOfBlasting extends CardImpl {
 
         // Destroy target Wall. It can't be regenerated. Word of Blasting deals damage equal to that Wall's converted mana cost to the Wall's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        Effect effect = new DamageTargetControllerEffect(TargetConvertedManaCost.instance);
-        effect.setText("{this} deals damage equal to that Wall's converted mana cost to the Wall's controller");
+        Effect effect = new DamageTargetControllerEffect(TargetManaValue.instance);
+        effect.setText("{this} deals damage equal to that Wall's mana value to the Wall's controller");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

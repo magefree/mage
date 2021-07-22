@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -31,7 +32,7 @@ public final class ChecksAndBalances extends CardImpl {
         this.addAbility(new CastOnlyIfConditionIsTrueAbility(ChecksAndBalancesCondition.instance, "Cast this spell only if there are three or more players in the game"));
 
         // Whenever a player casts a spell, each of that player’s opponents may discard a card. If they do, counter that spell.
-        this.addAbility(new SpellCastAllTriggeredAbility(new ChecksAndBalancesEffect(), new FilterSpell("a spell"), false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastAllTriggeredAbility(new ChecksAndBalancesEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));
     }
 
     private ChecksAndBalances(final ChecksAndBalances card) {

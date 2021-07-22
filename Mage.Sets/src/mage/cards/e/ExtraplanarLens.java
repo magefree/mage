@@ -123,7 +123,7 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
             if (imprinted != null
                     && game.getState().getZone(imprinted.getId()) == Zone.EXILED) {
                 if (landTappedForMana.getName().equals(imprinted.getName())
-                        && landTappedForMana.isLand()) {
+                        && landTappedForMana.isLand(game)) {
                     ManaEvent mEvent = (ManaEvent) event;
                     for (Effect effect : getEffects()) {
                         effect.setValue("mana", mEvent.getMana());
@@ -137,8 +137,8 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a land with the same name as the exiled card is tapped for mana, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a land with the same name as the exiled card is tapped for mana, " ;
     }
 
     @Override

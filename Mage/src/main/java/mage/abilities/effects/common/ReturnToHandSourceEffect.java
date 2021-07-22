@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -9,6 +8,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -56,31 +56,35 @@ public class ReturnToHandSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            MageObject mageObject;
-            if (returnFromNextZone
-                    && game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter() + 1) {
-                mageObject = game.getObject(source.getSourceId());
-            } else {
-                mageObject = source.getSourceObjectIfItStillExists(game);
-            }
-            if (mageObject != null) {
-                switch (game.getState().getZone(mageObject.getId())) {
-                    case BATTLEFIELD:
-                        Permanent permanent = game.getPermanent(source.getSourceId());
-                        if (permanent != null) {
-                            return controller.moveCards(permanent, Zone.HAND, source, game);
-                        }
-                        break;
-                    case GRAVEYARD:
-                        Card card = (Card) mageObject;
-                        if (!fromBattlefieldOnly) {
-                            return controller.moveCards(card, Zone.HAND, source, game);
-                        }
-                }
-            }
+        if (controller == null) {
+            return false;
+        }
+        MageObject mageObject;
+        if (returnFromNextZone
+                && game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter() + 1) {
+            mageObject = game.getObject(source.getSourceId());
+        } else {
+            mageObject = source.getSourceObjectIfItStillExists(game);
+        }
+        if (mageObject == null) {
             return true;
         }
-        return false;
+        switch (game.getState().getZone(mageObject.getId())) {
+            case BATTLEFIELD:
+                Permanent permanent = game.getPermanent(source.getSourceId());
+                if (permanent != null) {
+                    return controller.moveCards(permanent, Zone.HAND, source, game);
+                }
+                break;
+            case GRAVEYARD:
+                Card card = (Card) mageObject;
+                return !fromBattlefieldOnly && controller.moveCards(card, Zone.HAND, source, game);
+            case STACK:
+                Spell spell = game.getSpell(source.getSourceId());
+                return !fromBattlefieldOnly
+                        && spell != null
+                        && controller.moveCards(spell.getMainCard(), Zone.HAND, source, game);
+        }
+        return true;
     }
 }

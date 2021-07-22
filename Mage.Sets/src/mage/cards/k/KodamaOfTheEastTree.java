@@ -18,7 +18,7 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -56,7 +56,7 @@ public final class KodamaOfTheEastTree extends CardImpl {
                 new EntersBattlefieldAllTriggeredAbility(new KodamaOfTheEastTreeEffect(), filter),
                 KodamaOfTheEastTreeCondition.instance, "Whenever another permanent enters the battlefield " +
                 "under your control, if it wasn't put onto the battlefield with this ability, you may put " +
-                "a permanent card with equal or lesser converted mana cost from your hand onto the battlefield."
+                "a permanent card with equal or lesser mana value from your hand onto the battlefield."
         ), new KodamaOfTheEastTreeWatcher());
 
         // Partner
@@ -118,10 +118,10 @@ class KodamaOfTheEastTreeEffect extends OneShotEffect {
             return false;
         }
         FilterCard filter = new FilterPermanentCard(
-                "a permanent card with converted mana cost " + permanent.getConvertedManaCost() + " or less"
+                "a permanent card with mana value " + permanent.getManaValue() + " or less"
         );
-        filter.add(new ConvertedManaCostPredicate(
-                ComparisonType.FEWER_THAN, permanent.getConvertedManaCost() + 1
+        filter.add(new ManaValuePredicate(
+                ComparisonType.FEWER_THAN, permanent.getManaValue() + 1
         ));
         TargetCardInHand target = new TargetCardInHand(filter);
         if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)

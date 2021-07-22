@@ -72,7 +72,7 @@ class SydriGalvanicGeniusEffect extends ContinuousEffectImpl {
 
     public SydriGalvanicGeniusEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
-        staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost until end of turn";
+        staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn";
     }
 
     public SydriGalvanicGeniusEffect(final SydriGalvanicGeniusEffect effect) {
@@ -93,18 +93,18 @@ class SydriGalvanicGeniusEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
-                    if (!artifact.isArtifact()) {
-                        artifact.addCardType(CardType.ARTIFACT);
+                    if (!artifact.isArtifact(game)) {
+                        artifact.addCardType(game, CardType.ARTIFACT);
                     }
-                    if (!artifact.isCreature()) {
-                        artifact.addCardType(CardType.CREATURE);
+                    if (!artifact.isCreature(game)) {
+                        artifact.addCardType(game, CardType.CREATURE);
                     }
                 }
                 break;
 
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    int cmc = artifact.getConvertedManaCost();
+                    int cmc = artifact.getManaValue();
                     artifact.getPower().setValue(cmc);
                     artifact.getToughness().setValue(cmc);
                 }

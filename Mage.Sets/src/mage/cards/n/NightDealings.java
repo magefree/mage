@@ -18,7 +18,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -85,8 +85,8 @@ public final class NightDealings extends CardImpl {
         }
 
         @Override
-        public String getRule() {
-            return "Whenever a source you control deals damage to another player, " + super.getRule();
+        public String getTriggerPhrase() {
+            return "Whenever a source you control deals damage to another player, " ;
         }
     }
 
@@ -124,8 +124,8 @@ public final class NightDealings extends CardImpl {
 
         private NightDealingsSearchEffect() {
             super(Outcome.DrawCard);
-            this.staticText = "Search your library for a nonland card with converted mana cost X, " +
-                    "reveal it, and put it into your hand. Then shuffle your library";
+            this.staticText = "Search your library for a nonland card with mana value X, " +
+                    "reveal it, put it into your hand, then shuffle";
         }
 
         private NightDealingsSearchEffect(final NightDealingsSearchEffect effect) {
@@ -152,8 +152,8 @@ public final class NightDealings extends CardImpl {
                 }
             }
 
-            FilterCard filter = new FilterNonlandCard("nonland card with converted mana cost " + cmc);
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
+            FilterCard filter = new FilterNonlandCard("nonland card with mana value " + cmc);
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, cmc));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             player.searchLibrary(target, source, game);
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);

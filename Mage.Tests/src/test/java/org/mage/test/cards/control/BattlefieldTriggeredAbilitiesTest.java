@@ -46,7 +46,7 @@ public class BattlefieldTriggeredAbilitiesTest extends CardTestPlayerBase {
         int playerACount = 0;
         int playerBCount = 0;
         for (Permanent p : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (p.isLand()) {
+            if (p.isLand(currentGame)) {
                 if (p.getControllerId().equals(playerB.getId())) {
                     playerBCount++;
                 }

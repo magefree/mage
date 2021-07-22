@@ -22,7 +22,7 @@ public final class BadRiver extends CardImpl {
         // Bad River enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}, Sacrifice Bad River: Search your library for an Island or Swamp card and put it onto the battlefield. Then shuffle your library.
-        this.addAbility(new FetchLandActivatedAbility(false, EnumSet.of(SubType.ISLAND, SubType.SWAMP)));
+        this.addAbility(new FetchLandActivatedAbility(false, SubType.ISLAND, SubType.SWAMP));
 
     }
 

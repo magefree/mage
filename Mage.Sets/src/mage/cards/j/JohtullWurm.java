@@ -1,37 +1,37 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class JohtullWurm extends CardImpl {
 
+    private static final DynamicValue xValue1 = new MultipliedValue(BlockedCreatureCount.BEYOND_FIRST, -2);
+    private static final DynamicValue xValue2 = new MultipliedValue(BlockedCreatureCount.BEYOND_FIRST, -1);
+
     public JohtullWurm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");
         this.subtype.add(SubType.WURM);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
         // Whenever Johtull Wurm becomes blocked, it gets -2/-1 until end of turn for each creature blocking it beyond the first.
-        DynamicValue blockedCreatureCount = new BlockedCreatureCount("each creature blocking it beyond the first", true);
-        Effect effect = new BoostSourceEffect(new MultipliedValue(blockedCreatureCount, -2), new MultipliedValue(blockedCreatureCount, -1), Duration.EndOfTurn, true);
-        effect.setText("it gets -2/-1 until end of turn for each creature blocking it beyond the first");
-        this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(
+                xValue2, xValue1, Duration.EndOfTurn, true
+        ).setText("it gets -2/-1 until end of turn for each creature blocking it beyond the first"), false));
     }
 
     private JohtullWurm(final JohtullWurm card) {

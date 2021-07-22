@@ -25,7 +25,7 @@ public class KindlyStrangerTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Bitterblossom", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Hill Giant", 1);
         
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{B}");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "<i>Delirium");
         addTarget(playerA, "Hill Giant");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

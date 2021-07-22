@@ -12,7 +12,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author North, Loki
  */
 public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
@@ -57,7 +56,7 @@ public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(this.getSourceId())) {
             Permanent blocked = game.getPermanent(event.getTargetId());
-            if (blocked != null && filter.match(blocked, game)) {
+            if (filter.match(blocked, game)) {
                 if (setTargetPointer) {
                     this.getEffects().setTargetPointer(new FixedTarget(blocked, game));
                 }
@@ -66,7 +65,7 @@ public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl
         }
         if (event.getTargetId().equals(this.getSourceId())) {
             Permanent blocker = game.getPermanent(event.getSourceId());
-            if (blocker != null && filter.match(blocker, game)) {
+            if (filter.match(blocker, game)) {
                 if (setTargetPointer) {
                     this.getEffects().setTargetPointer(new FixedTarget(blocker, game));
                 }
@@ -81,7 +80,12 @@ public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl
         if (rule != null) {
             return rule;
         }
-        return "Whenever {this} blocks or becomes blocked" + (setTargetPointer ? " by a " + filter.getMessage() : "") + ", " + super.getRule();
+        return super.getRule();
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever {this} blocks or becomes blocked" + (setTargetPointer ? " by a " + filter.getMessage() : "") + ", ";
     }
 
     @Override

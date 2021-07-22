@@ -110,7 +110,7 @@ public final class RateCard {
     }
 
     private static int isRemoval(Card card) {
-        if (card.isEnchantment() || card.isInstant() || card.isSorcery()) {
+        if (card.isEnchantment() || card.isInstantOrSorcery()) {
 
             for (Ability ability : card.getAbilities()) {
                 for (Effect effect : ability.getEffects()) {
@@ -317,7 +317,7 @@ public final class RateCard {
      * @return
      */
     private static int getManaCostScore(Card card, List<ColoredManaSymbol> allowedColors) {
-        int converted = card.getConvertedManaCost();
+        int converted = card.getManaValue();
         if (allowedColors == null) {
             int colorPenalty = 0;
             for (String symbol : card.getManaCostSymbols()) {

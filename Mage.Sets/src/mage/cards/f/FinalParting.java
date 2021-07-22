@@ -43,7 +43,7 @@ class FinalPartingEffect extends OneShotEffect {
 
     public FinalPartingEffect() {
         super(Outcome.PutLandInPlay);
-        staticText = "Search your library for two cards. Put one into your hand and the other into your graveyard. Then shuffle your library";
+        staticText = "Search your library for two cards. Put one into your hand and the other into your graveyard. Then shuffle";
     }
 
     public FinalPartingEffect(final FinalPartingEffect effect) {

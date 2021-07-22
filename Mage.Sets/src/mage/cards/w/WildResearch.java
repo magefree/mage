@@ -61,7 +61,7 @@ class WildResearchEffect extends OneShotEffect {
 
     WildResearchEffect(FilterCard filter) {
         super(Outcome.DrawCard);
-        this.staticText = "Search your library for an " + filter.getMessage() + " and reveal that card. Put it into your hand, then discard a card at random. Then shuffle your library.";
+        this.staticText = "Search your library for an " + filter.getMessage() + " and reveal that card. Put it into your hand, then discard a card at random. Then shuffle.";
         this.filter = filter;
     }
 

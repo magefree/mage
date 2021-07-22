@@ -7,9 +7,12 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.icon.CardIcon;
+import mage.abilities.icon.other.FaceDownCardIcon;
+import mage.abilities.icon.other.VariableCostCardIcon;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.*;
 import mage.cards.mock.MockCard;
@@ -18,7 +21,9 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.designations.Designation;
+import mage.filter.FilterMana;
 import mage.game.Game;
+import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
@@ -57,7 +62,7 @@ public class CardView extends SimpleCardView {
     @Expose
     protected String loyalty = "";
     protected String startingLoyalty;
-    protected ArrayList<CardType> cardTypes;
+    protected List<CardType> cardTypes;
     protected SubTypes subTypes;
     protected Set<SuperType> superTypes;
     protected ObjectColor color;
@@ -66,7 +71,7 @@ public class CardView extends SimpleCardView {
     // can combine multiple costs for MockCard from deck editor or db (left/right, card/adventure)
     protected String manaCostLeftStr;
     protected String manaCostRightStr;
-    protected int convertedManaCost;
+    protected int manaValue;
     protected Rarity rarity;
 
     protected MageObjectType mageObjectType = MageObjectType.NULL;
@@ -174,7 +179,7 @@ public class CardView extends SimpleCardView {
         this.frameStyle = cardView.frameStyle;
         this.manaCostLeftStr = cardView.manaCostLeftStr;
         this.manaCostRightStr = cardView.manaCostRightStr;
-        this.convertedManaCost = cardView.convertedManaCost;
+        this.manaValue = cardView.manaValue;
         this.rarity = cardView.rarity;
 
         this.mageObjectType = cardView.mageObjectType;
@@ -244,7 +249,7 @@ public class CardView extends SimpleCardView {
         for (SuperType superType : card.getSuperType()) {
             sbType.append(superType).append(' ');
         }
-        for (CardType cardType : card.getCardType()) {
+        for (CardType cardType : card.getCardType(game)) {
             sbType.append(cardType.toString()).append(' ');
         }
         if (!card.getSubtype(game).isEmpty()) {
@@ -310,7 +315,7 @@ public class CardView extends SimpleCardView {
             } else if (card instanceof Permanent) {
                 this.power = Integer.toString(card.getPower().getValue());
                 this.toughness = Integer.toString(card.getToughness().getValue());
-                this.cardTypes = card.getCardType();
+                this.cardTypes = card.getCardType(game);
                 this.faceDown = card.isFaceDown(game);
             } else {
                 // this.hideInfo = true;
@@ -366,7 +371,7 @@ public class CardView extends SimpleCardView {
             this.manaCostRightStr = String.join("", mainCard.getRightHalfCard().getManaCostSymbols());
         } else if (card instanceof AdventureCard) {
             AdventureCard adventureCard = ((AdventureCard) card);
-            AdventureCardSpell adventureCardSpell = ((AdventureCardSpell) adventureCard.getSpellCard());
+            AdventureCardSpell adventureCardSpell = adventureCard.getSpellCard();
             fullCardName = adventureCard.getName() + MockCard.ADVENTURE_NAME_SEPARATOR + adventureCardSpell.getName();
             this.manaCostLeftStr = String.join("", adventureCardSpell.getManaCostSymbols());
             this.manaCostRightStr = String.join("", adventureCard.getManaCostSymbols());
@@ -389,7 +394,7 @@ public class CardView extends SimpleCardView {
         } else {
             this.rules = card.getRules(game);
         }
-        this.convertedManaCost = card.getConvertedManaCost();
+        this.manaValue = card.getManaValue();
 
         if (card instanceof Permanent) {
             this.mageObjectType = MageObjectType.PERMANENT;
@@ -413,9 +418,14 @@ public class CardView extends SimpleCardView {
             }
 
             // card icons for permanents on battlefield
+            // abilities
             permanent.getAbilities(game).forEach(ability -> {
-                this.cardIcons.addAll(ability.getIcons());
+                this.cardIcons.addAll(ability.getIcons(game));
             });
+            // face down
+            if (permanent.isFaceDown(game)) {
+                this.cardIcons.add(FaceDownCardIcon.instance);
+            }
         } else {
             if (card.isCopy()) {
                 this.mageObjectType = MageObjectType.COPY_CARD;
@@ -430,9 +440,28 @@ public class CardView extends SimpleCardView {
                 }
             }
         }
+
+        // card icons for any permanents and cards
+        if (game != null) {
+            // x cost
+            Zone cardZone = game.getState().getZone(card.getId());
+            if (card.getManaCost().containsX()
+                    && (cardZone.match(Zone.BATTLEFIELD) || cardZone.match(Zone.STACK))) {
+                int costX;
+                if (card instanceof Permanent) {
+                    // permanent on battlefield
+                    costX = ManacostVariableValue.ETB.calculate(game, card.getSpellAbility(), null);
+                } else {
+                    // other like Stack
+                    costX = ManacostVariableValue.REGULAR.calculate(game, card.getSpellAbility(), null);
+                }
+                this.cardIcons.add(new VariableCostCardIcon(costX));
+            }
+        }
+
         this.power = Integer.toString(card.getPower().getValue());
         this.toughness = Integer.toString(card.getToughness().getValue());
-        this.cardTypes = card.getCardType();
+        this.cardTypes = card.getCardType(game);
         this.subTypes = card.getSubtype(game);
         this.superTypes = card.getSuperType();
         this.color = card.getColor(game);
@@ -559,13 +588,13 @@ public class CardView extends SimpleCardView {
             this.toughness = object.getToughness().toString();
             this.loyalty = "";
         }
-        this.cardTypes = object.getCardType();
+        this.cardTypes = object.getCardType(game);
         this.subTypes = object.getSubtype(game);
         this.superTypes = object.getSuperType();
         this.color = object.getColor(game);
         this.manaCostLeftStr = String.join("", object.getManaCostSymbols());
         this.manaCostRightStr = "";
-        this.convertedManaCost = object.getManaCost().convertedManaCost();
+        this.manaValue = object.getManaCost().manaValue();
         if (object instanceof PermanentToken) {
             this.mageObjectType = MageObjectType.TOKEN;
             PermanentToken permanentToken = (PermanentToken) object;
@@ -578,6 +607,11 @@ public class CardView extends SimpleCardView {
             Emblem emblem = (Emblem) object;
             this.rarity = Rarity.SPECIAL;
             this.rules = emblem.getAbilities().getRules(emblem.getName());
+        } else if (object instanceof Dungeon) {
+            this.mageObjectType = MageObjectType.DUNGEON;
+            Dungeon dungeon = (Dungeon) object;
+            this.rarity = Rarity.SPECIAL;
+            this.rules = dungeon.getRules();
         } else if (object instanceof Plane) {
             this.mageObjectType = MageObjectType.PLANE;
             Plane plane = (Plane) object;
@@ -627,6 +661,21 @@ public class CardView extends SimpleCardView {
         // emblem images are always with common (black) symbol
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = emblem.getExpansionSetCode();
+        this.rarity = Rarity.COMMON;
+    }
+
+    public CardView(DungeonView dungeon) {
+        this(true);
+        this.gameObject = true;
+        this.id = dungeon.getId();
+        this.mageObjectType = MageObjectType.DUNGEON;
+        this.name = dungeon.getName();
+        this.displayName = name;
+        this.displayFullName = name;
+        this.rules = dungeon.getRules();
+        // emblem images are always with common (black) symbol
+        this.frameStyle = FrameStyle.M15_NORMAL;
+        this.expansionSetCode = dungeon.getExpansionSetCode();
         this.rarity = Rarity.COMMON;
     }
 
@@ -686,7 +735,7 @@ public class CardView extends SimpleCardView {
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.manaCostLeftStr = "";
         this.manaCostRightStr = "";
-        this.convertedManaCost = 0;
+        this.manaValue = 0;
 
         // the controller can see more information (e.g. enlarged image) than other players for face down cards (e.g. Morph played face down)
         if (!controlled) {
@@ -727,7 +776,7 @@ public class CardView extends SimpleCardView {
         this.toughness = token.getToughness().toString();
         this.loyalty = "";
         this.startingLoyalty = "";
-        this.cardTypes = token.getCardType();
+        this.cardTypes = token.getCardType(game);
         this.subTypes = token.getSubtype(game);
         this.superTypes = token.getSuperType();
         this.color = token.getColor(game);
@@ -820,7 +869,7 @@ public class CardView extends SimpleCardView {
         return startingLoyalty;
     }
 
-    public ArrayList<CardType> getCardTypes() {
+    public List<CardType> getCardTypes() {
         return cardTypes;
     }
 
@@ -848,12 +897,20 @@ public class CardView extends SimpleCardView {
         return CardUtil.concatManaSymbols(CardInfo.SPLIT_MANA_SEPARATOR_FULL, this.manaCostLeftStr, this.manaCostRightStr);
     }
 
-    public int getConvertedManaCost() {
-        return convertedManaCost;
+    public int getManaValue() {
+        return manaValue;
     }
 
     public Rarity getRarity() {
         return rarity;
+    }
+
+    public String getColorIdentityStr() {
+        FilterMana filterMana = originalCard.getColorIdentity();
+        if (filterMana.getColorCount() == 0) {
+            return CardUtil.concatManaSymbols(CardInfo.SPLIT_MANA_SEPARATOR_FULL, "{C}", "");
+        }
+        return CardUtil.concatManaSymbols(CardInfo.SPLIT_MANA_SEPARATOR_FULL, filterMana.toString(), "");
     }
 
     @Override

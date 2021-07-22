@@ -53,7 +53,7 @@ class TrinisphereEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int manaCost = abilityToModify.getManaCostsToPay().convertedManaCost();
+        int manaCost = abilityToModify.getManaCostsToPay().manaValue();
         if (manaCost < 3) {
             CardUtil.increaseCost(abilityToModify, 3 - manaCost);
         }

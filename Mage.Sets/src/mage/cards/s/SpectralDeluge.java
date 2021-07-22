@@ -8,6 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -51,7 +52,7 @@ public final class SpectralDeluge extends CardImpl {
 
 enum SpectralDelugePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
     instance;
-    private static final FilterPermanent filter = new FilterPermanent(SubType.ISLAND, "");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ISLAND);
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

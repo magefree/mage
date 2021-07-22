@@ -115,7 +115,7 @@ class SaffiEriksdotterDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When target creature is put into your graveyard from the battlefield this turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When target creature is put into your graveyard from the battlefield this turn, " ;
     }
 }

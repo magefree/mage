@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -76,9 +75,8 @@ class ShireiShizosCaretakerTriggeredAbility extends TriggeredAbilityImpl {
         if (card != null
                 && LKIpermanent != null
                 && card.isOwnedBy(this.controllerId)
-                && zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getFromZone() == Zone.BATTLEFIELD
-                && card.isCreature()
+                && zEvent.isDiesEvent()
+                && card.isCreature(game)
                 && LKIpermanent.getPower().getValue() <= 1) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(zEvent.getTargetId()));

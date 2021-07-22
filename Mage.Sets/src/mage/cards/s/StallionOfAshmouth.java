@@ -1,19 +1,16 @@
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -32,9 +29,8 @@ public final class StallionOfAshmouth extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn),
-                new ManaCostsImpl("{1}{B}"),
-                DeliriumCondition.instance)
-                .addHint(DeliriumHint.instance));
+                new ManaCostsImpl<>("{1}{B}"), DeliriumCondition.instance
+        ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardHint.YOU));
     }
 
     private StallionOfAshmouth(final StallionOfAshmouth card) {

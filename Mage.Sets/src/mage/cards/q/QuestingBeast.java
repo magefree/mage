@@ -96,7 +96,7 @@ class QuestingBeastPreventionEffect extends ContinuousRuleModifyingEffectImpl {
         }
         Permanent permanent = game.getPermanent(event.getSourceId());
         return permanent != null
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && permanent.isControlledBy(source.getControllerId());
     }
 }

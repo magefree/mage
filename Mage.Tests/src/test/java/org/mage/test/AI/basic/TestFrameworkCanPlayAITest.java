@@ -104,8 +104,8 @@ public class TestFrameworkCanPlayAITest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        Assert.assertEquals(1, currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE).size());
-        Permanent permanent = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE).get(0);
+        Assert.assertEquals(1, currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE, currentGame).size());
+        Permanent permanent = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE, currentGame).get(0);
         Assert.assertEquals(1, permanent.getAttachments().size());
     }
 }

@@ -31,6 +31,7 @@ public final class HalanaKessigRanger extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARCHER);
+        this.subtype.add(SubType.RANGER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
@@ -111,7 +112,7 @@ class HalanaKessigRangerDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent1 = mor.getPermanentOrLKIBattlefield(game);
         Permanent permanent2 = game.getPermanent(source.getFirstTarget());
-        if (permanent1 == null || !permanent1.isCreature() || permanent2 == null) {
+        if (permanent1 == null || !permanent1.isCreature(game) || permanent2 == null) {
             return false;
         }
         permanent2.damage(permanent1.getPower().getValue(), permanent1.getId(), source, game);

@@ -76,7 +76,7 @@ class DismantleEffect extends OneShotEffect {
                         controller.chooseTarget(Outcome.Benefit, target, source, game);
                         Permanent artifact = game.getPermanent(target.getFirstTarget());
                         Counter counter;
-                        if (controller.chooseUse(Outcome.BoostCreature, "What kind of counters do you want to add?", null, "+1/+1 counters", "Charge counters", source, game)) {
+                        if (controller.chooseUse(Outcome.BoostCreature, "Choose which kind of counters to add", null, "+1/+1 counters", "Charge counters", source, game)) {
                             counter = CounterType.P1P1.createInstance(counterCount);
                         } else {
                             counter = CounterType.CHARGE.createInstance(counterCount);

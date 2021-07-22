@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -22,10 +22,10 @@ import java.util.UUID;
 public final class GlassCasket extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterOpponentsCreaturePermanent("creature an opponent controls with converted mana cost 3 or less");
+            = new FilterOpponentsCreaturePermanent("creature an opponent controls with mana value 3 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public GlassCasket(UUID ownerId, CardSetInfo setInfo) {
@@ -34,7 +34,7 @@ public final class GlassCasket extends CardImpl {
         // When Glass Casket enters the battlefield, exile target creature an opponent controls with converted mana cost 3 or less until Glass Casket leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new ExileUntilSourceLeavesEffect("")
-                        .setText("exile target creature an opponent controls with converted mana cost 3 " +
+                        .setText("exile target creature an opponent controls with mana value 3 " +
                                 "or less until {this} leaves the battlefield")
         );
         ability.addTarget(new TargetPermanent(filter));

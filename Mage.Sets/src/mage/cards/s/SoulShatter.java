@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class SoulShatter extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent(
-            "creature or planeswalker with the highest converted mana cost " +
+            "creature or planeswalker with the highest mana value " +
                     "among creatures and planeswalkers they control"
     );
 
@@ -62,9 +62,9 @@ enum SoulShatterPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanen
                 .getActivePermanents(filter, input.getPlayerId(), game)
                 .stream()
                 .filter(Objects::nonNull)
-                .mapToInt(MageObject::getConvertedManaCost)
+                .mapToInt(MageObject::getManaValue)
                 .max()
                 .orElse(0);
-        return input.getObject().getConvertedManaCost() >= cmc;
+        return input.getObject().getManaValue() >= cmc;
     }
 }

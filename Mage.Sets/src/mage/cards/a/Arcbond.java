@@ -107,7 +107,7 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Choose target creature. Whenever that creature is dealt damage this turn, " + modes.getText();
+        return "Choose target creature. Whenever that creature is dealt damage this turn, it deals that much damage to each other creature and each player.";
     }
 }
 
@@ -115,7 +115,6 @@ class ArcbondEffect extends OneShotEffect {
 
     public ArcbondEffect() {
         super(Outcome.Benefit);
-        this.staticText = "it deals that much damage to each other creature and each player";
     }
 
     public ArcbondEffect(final ArcbondEffect effect) {

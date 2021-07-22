@@ -10,7 +10,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -43,11 +43,11 @@ public final class CropSigil extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(true), new ManaCostsImpl<>("{2}{G}"),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; {2}{G}, Sacrifice {this}: Return up to one target creature card and up to one target land card from your graveyard to your hand. "
-                        + "Activate this ability only if there are four or more card types among cards in your graveyard");
+                        + "Activate only if there are four or more card types among cards in your graveyard.");
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, filterCreature));
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, filterLand));
-        ability.addHint(DeliriumHint.instance);
+        ability.addHint(CardTypesInGraveyardHint.YOU);
         this.addAbility(ability);
     }
 

@@ -46,7 +46,7 @@ public class BeginningOfUpkeepAttachedTriggeredAbility extends TriggeredAbilityI
     }
 
     @Override
-    public String getRule() {
-        return "At the beginning of enchanted player's upkeep, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "At the beginning of enchanted player's upkeep, " ;
     }
 }

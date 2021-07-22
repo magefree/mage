@@ -44,8 +44,8 @@ public class DrawSecondCardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you draw your second card each turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you draw your second card each turn, " ;
     }
 
     @Override

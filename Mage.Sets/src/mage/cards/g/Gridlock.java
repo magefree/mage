@@ -22,7 +22,7 @@ public final class Gridlock extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
         // Tap X target nonland permanents.
-        this.getSpellAbility().addEffect(new TapTargetEffect("X target nonland permanents"));
+        this.getSpellAbility().addEffect(new TapTargetEffect("tap X target nonland permanents"));
         this.getSpellAbility().setTargetAdjuster(GridlockAdjuster.instance);
     }
 

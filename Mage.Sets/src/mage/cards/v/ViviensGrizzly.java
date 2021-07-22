@@ -73,7 +73,7 @@ class ViviensGrizzlyEffect extends OneShotEffect {
         Card card = player.getLibrary().getFromTop(game);
         Cards cards = new CardsImpl(card);
         player.lookAtCards(source, null, cards, game);
-        if ((!card.isPlaneswalker() && !card.isCreature())
+        if ((!card.isPlaneswalker(game) && !card.isCreature(game))
                 || !player.chooseUse(outcome, "Put this card in your hand?", source, game)) {
             player.putCardsOnBottomOfLibrary(cards, game, source, false);
         } else {

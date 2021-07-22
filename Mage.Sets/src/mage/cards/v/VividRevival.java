@@ -28,7 +28,7 @@ public final class VividRevival extends CardImpl {
         // Return up to three target multicolor cards from your graveyard to your hand. Exile Vivid Revival.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 3, filter));
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private VividRevival(final VividRevival card) {

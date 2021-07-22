@@ -17,7 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -61,7 +61,7 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect {
 
     public TezzeretTheSeekerEffect2() {
         super(Outcome.DrawCard);
-        this.staticText = "Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library";
+        this.staticText = "Search your library for an artifact card with mana value X or less, put it onto the battlefield, then shuffle";
     }
 
     public TezzeretTheSeekerEffect2(final TezzeretTheSeekerEffect2 effect) {
@@ -87,8 +87,8 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect {
             }
         }
 
-        FilterArtifactCard filter = new FilterArtifactCard("artifact card with converted mana cost " + cmc + " or less");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, cmc + 1));
+        FilterArtifactCard filter = new FilterArtifactCard("artifact card with mana value " + cmc + " or less");
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, cmc + 1));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
         if (controller.searchLibrary(target, source, game)) {
@@ -128,11 +128,11 @@ class TezzeretTheSeekerEffect3 extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            if (!permanent.isArtifact()) {
-                                permanent.addCardType(CardType.ARTIFACT);
+                            if (!permanent.isArtifact(game)) {
+                                permanent.addCardType(game, CardType.ARTIFACT);
                             }
-                            if (!permanent.isCreature()) {
-                                permanent.addCardType(CardType.CREATURE);
+                            if (!permanent.isCreature(game)) {
+                                permanent.addCardType(game, CardType.CREATURE);
                             }
                         }
                         break;

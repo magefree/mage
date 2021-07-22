@@ -24,7 +24,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -65,16 +65,16 @@ public final class SwiftWarkite extends CardImpl {
 
 class SwiftWarkiteEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("creature card with converted mana cost 3 or less from your hand or graveyard");
+    private static final FilterCard filter = new FilterCard("creature card with mana value 3 or less from your hand or graveyard");
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     SwiftWarkiteEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "you may put a creature card with converted mana cost 3 or less from your hand or graveyard onto the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step";
+        this.staticText = "you may put a creature card with mana value 3 or less from your hand or graveyard onto the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step";
     }
 
     SwiftWarkiteEffect(final SwiftWarkiteEffect effect) {

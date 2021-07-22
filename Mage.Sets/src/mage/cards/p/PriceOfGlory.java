@@ -61,7 +61,7 @@ class PriceOfGloryAbility extends TriggeredAbilityImpl {
         }
         Permanent permanent = ((TappedForManaEvent) event).getPermanent();
         if (permanent == null
-                || !permanent.isLand()
+                || !permanent.isLand(game)
                 || game.isActivePlayer(event.getPlayerId())) {
             return false;
         }

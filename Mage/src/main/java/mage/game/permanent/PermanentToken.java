@@ -78,7 +78,7 @@ public class PermanentToken extends PermanentImpl {
             this.getManaCost().add(cost.copy());
         }
         this.cardType.clear();
-        this.cardType.addAll(token.getCardType());
+        this.cardType.addAll(token.getCardType(game));
         this.color = token.getColor(game).copy();
         this.frameColor = token.getFrameColor(game);
         this.frameStyle = token.getFrameStyle();
@@ -100,24 +100,6 @@ public class PermanentToken extends PermanentImpl {
     @Override
     public PermanentToken copy() {
         return new PermanentToken(this);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (getToken().getCopySourceCard() != null) {
-            getToken().getCopySourceCard().adjustTargets(ability, game);
-        } else {
-            super.adjustTargets(ability, game);
-        }
-    }
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (getToken().getCopySourceCard() != null) {
-            getToken().getCopySourceCard().adjustCosts(ability, game);
-        } else {
-            super.adjustCosts(ability, game);
-        }
     }
 
     @Override

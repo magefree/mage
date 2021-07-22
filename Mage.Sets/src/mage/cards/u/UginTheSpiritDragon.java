@@ -25,7 +25,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -72,7 +72,7 @@ class UginTheSpiritDragonEffect2 extends OneShotEffect {
 
     public UginTheSpiritDragonEffect2() {
         super(Outcome.Exile);
-        this.staticText = "exile each permanent with converted mana cost X or less that's one or more colors";
+        this.staticText = "exile each permanent with mana value X or less that's one or more colors";
     }
 
     public UginTheSpiritDragonEffect2(final UginTheSpiritDragonEffect2 effect) {
@@ -98,8 +98,8 @@ class UginTheSpiritDragonEffect2 extends OneShotEffect {
             }
         }
 
-        FilterPermanent filter = new FilterPermanent("permanent with converted mana cost X or less that's one or more colors");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, cmc + 1));
+        FilterPermanent filter = new FilterPermanent("permanent with mana value X or less that's one or more colors");
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, cmc + 1));
         filter.add(Predicates.not(ColorlessPredicate.instance));
         Set<Card> permanentsToExile = new HashSet<>();
         permanentsToExile.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game));

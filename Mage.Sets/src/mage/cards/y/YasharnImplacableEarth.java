@@ -40,7 +40,7 @@ public final class YasharnImplacableEarth extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new SearchLibraryPutInHandEffect(new YasharnImplacableEarthTarget(), true)
                         .setText("search your library for a basic Forest card and a basic Plains card, " +
-                                "reveal those cards, put them into your hand, then shuffle your library")
+                                "reveal those cards, put them into your hand, then shuffle")
         ));
 
         // Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities.

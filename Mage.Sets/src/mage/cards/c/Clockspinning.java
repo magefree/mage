@@ -134,7 +134,7 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
 
         if (player != null && permanent != null) {
-            if (player.chooseUse(Outcome.Neutral, "Do you want to to remove a counter?", source, game)) {
+            if (player.chooseUse(Outcome.Neutral, "Remove a counter?", source, game)) {
                 RemoveCounterTargetEffect effect = new RemoveCounterTargetEffect();
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
                 effect.apply(game, source);
@@ -152,7 +152,7 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
 
         Card card = game.getCard(source.getFirstTarget());
         if (player != null && card != null) {
-            if (player.chooseUse(Outcome.Neutral, "Do you want to to remove a counter?", source, game)) {
+            if (player.chooseUse(Outcome.Neutral, "Remove a counter?", source, game)) {
                 Counter counter = selectCounterType(game, source, card);
                 RemoveCounterTargetEffect effect = new RemoveCounterTargetEffect(counter);
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));

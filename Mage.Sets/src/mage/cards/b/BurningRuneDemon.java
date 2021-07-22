@@ -65,7 +65,7 @@ class BurningRuneDemonEffect extends OneShotEffect {
         staticText = "search your library for exactly two cards "
                 + "not named Burning-Rune Demon that have different names. If you do, reveal those cards. "
                 + "An opponent chooses one of them. "
-                + "Put the chosen card into your hand and the other into your graveyard, then shuffle your library";
+                + "Put the chosen card into your hand and the other into your graveyard, then shuffle";
     }
 
     private BurningRuneDemonEffect(final BurningRuneDemonEffect effect) {

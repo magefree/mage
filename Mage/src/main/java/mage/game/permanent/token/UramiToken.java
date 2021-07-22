@@ -14,7 +14,7 @@ import mage.constants.SuperType;
 public final class UramiToken extends TokenImpl {
 
     public UramiToken() {
-        super("Urami", "legendary 5/5 black Demon Spirit creature token with flying named Urami");
+        super("Urami", "Urami, a legendary 5/5 black Demon Spirit creature token with flying");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.DEMON);
         subtype.add(SubType.SPIRIT);

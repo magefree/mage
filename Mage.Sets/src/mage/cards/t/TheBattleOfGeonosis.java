@@ -27,15 +27,15 @@ public final class TheBattleOfGeonosis extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}{R}");
 
         // The Battle of Geonosis deals X + 1 damage to each opponent and each creature your opponents control.
-        Effect effect = new DamagePlayersEffect(Outcome.Damage, new IntPlusDynamicValue(1, ManacostVariableValue.instance), TargetController.OPPONENT);
+        Effect effect = new DamagePlayersEffect(Outcome.Damage, new IntPlusDynamicValue(1, ManacostVariableValue.REGULAR), TargetController.OPPONENT);
         effect.setText("The Battle of Geonosis deals X plus 1 damage to each opponent");
         this.getSpellAbility().addEffect(effect);
-        effect = new DamageAllEffect(new IntPlusDynamicValue(1, ManacostVariableValue.instance), new FilterOpponentsCreaturePermanent());
+        effect = new DamageAllEffect(new IntPlusDynamicValue(1, ManacostVariableValue.REGULAR), new FilterOpponentsCreaturePermanent());
         effect.setText("and each creature your opponents control");
         this.getSpellAbility().addEffect(effect);
 
         // Creatures you control get +X/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(ManacostVariableValue.instance, StaticValue.get(0), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(ManacostVariableValue.REGULAR, StaticValue.get(0), Duration.EndOfTurn));
 
     }
 

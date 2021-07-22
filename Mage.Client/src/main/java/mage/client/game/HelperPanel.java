@@ -310,6 +310,14 @@ public class HelperPanel extends JPanel {
     public void setGameNeedFeedback(boolean need, TurnPhase gameTurnPhase) {
         this.gameNeedFeedback = need;
         this.gameTurnPhase = gameTurnPhase;
+        
+        if (this.gameNeedFeedback) {
+            // start notification sound timer
+            this.needFeedbackTimer.restart();
+        } else {
+            // stop notification sound timer
+            this.needFeedbackTimer.stop();
+        }
     }
 
     public void autoSizeButtonsAndFeedbackState() {
@@ -342,9 +350,6 @@ public class HelperPanel extends JPanel {
 
         // color panel on player's feedback waiting
         if (this.gameNeedFeedback) {
-
-            // start notification sound timer
-            this.needFeedbackTimer.restart();
 
             // wait player's action
             switch (FEEDBACK_COLORIZING_MODE) {
@@ -383,9 +388,6 @@ public class HelperPanel extends JPanel {
                     break;
             }
         } else {
-            // stop notification sound timer
-            this.needFeedbackTimer.stop();
-
             // inform about other players
             this.mainPanel.setOpaque(false);
         }

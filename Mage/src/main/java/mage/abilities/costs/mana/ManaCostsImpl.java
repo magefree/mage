@@ -63,10 +63,10 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
-    public int convertedManaCost() {
+    public int manaValue() {
         int total = 0;
         for (ManaCost cost : this) {
-            total += cost.convertedManaCost();
+            total += cost.manaValue();
         }
         return total;
     }

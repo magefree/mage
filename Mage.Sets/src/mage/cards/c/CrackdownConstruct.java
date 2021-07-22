@@ -68,7 +68,7 @@ class CrackdownConstructTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(getControllerId())) {
             Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (source != null && (source.isArtifact() || source.isCreature())) {
+            if (source != null && (source.isArtifact(game) || source.isCreature(game))) {
                 StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
                 if (!(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
                     return true;
@@ -79,7 +79,7 @@ class CrackdownConstructTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you activate an ability of an artifact or creature that isn't a mana ability, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you activate an ability of an artifact or creature that isn't a mana ability, " ;
     }
 }

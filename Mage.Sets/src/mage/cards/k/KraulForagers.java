@@ -27,9 +27,9 @@ public final class KraulForagers extends CardImpl {
 
         // Undergrowth — When Kraul Foragers enters the battlefield, you gain 1 life for each creature card in your graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new GainLifeEffect(new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE)),
-                false, "<i>Undergrowth</i> &mdash; "
-        ));
+                new GainLifeEffect(new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE)), false)
+                .withFlavorWord("Undergrowth")
+        );
     }
 
     private KraulForagers(final KraulForagers card) {

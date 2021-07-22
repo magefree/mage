@@ -24,6 +24,7 @@ public final class PhyrexianDefiler extends CardImpl {
 
     public PhyrexianDefiler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CARRIER);
 
         this.power = new MageInt(3);

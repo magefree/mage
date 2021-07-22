@@ -37,7 +37,7 @@ class ForcedMarchEffect extends OneShotEffect {
 
     public ForcedMarchEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Destroy all creatures with converted mana cost X or less";
+        staticText = "Destroy all creatures with mana value X or less";
     }
 
     public ForcedMarchEffect(final ForcedMarchEffect effect) {
@@ -57,7 +57,7 @@ class ForcedMarchEffect extends OneShotEffect {
                 source.getControllerId(),
                 source.getSourceId(),
                 game)) {
-            if (permanent.getConvertedManaCost() <= source.getManaCostsToPay().getX()) {
+            if (permanent.getManaValue() <= source.getManaCostsToPay().getX()) {
                 permanent.destroy(source, game, false);
             }
         }

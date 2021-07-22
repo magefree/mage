@@ -23,7 +23,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -115,7 +114,7 @@ class TapXTargetCost extends VariableCostImpl {
     static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("untapped artifacts you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public TapXTargetCost() {

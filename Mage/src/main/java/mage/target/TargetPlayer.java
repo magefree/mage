@@ -21,6 +21,10 @@ public class TargetPlayer extends TargetImpl {
         this(1, 1, false);
     }
 
+    public TargetPlayer(FilterPlayer filter) {
+        this(1, 1, false, filter);
+    }
+
     public TargetPlayer(int numTargets) {
         this(numTargets, numTargets, false);
     }
@@ -137,7 +141,7 @@ public class TargetPlayer extends TargetImpl {
     @Override
     public boolean canTarget(UUID id, Game game) {
         Player player = game.getPlayer(id);
-        return player != null && filter.match(player, game);
+        return filter.match(player, game);
     }
 
     @Override

@@ -82,7 +82,7 @@ class ObeliskSpiderTriggeredAbility extends TriggeredAbilityImpl {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
             return (permanent != null
-                    && permanent.isCreature());
+                    && permanent.isCreature(game));
         }
         return false;
 
@@ -94,7 +94,7 @@ class ObeliskSpiderTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you put one or more -1/-1 counters on a creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you put one or more -1/-1 counters on a creature, " ;
     }
 }

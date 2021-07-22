@@ -31,9 +31,9 @@ public class BiovisionaryTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         
         assertPermanentCount(playerA, "Biovisionary", 4);
-        
-        Assert.assertTrue("Player B loses",playerB.hasLost());
-        Assert.assertTrue("Player A wins with four Biovisionary",playerA.hasWon());
+
+        assertLostTheGame(playerB);
+        assertWonTheGame(playerA);
 
     }
 
@@ -61,8 +61,8 @@ public class BiovisionaryTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
         assertPermanentCount(playerA, "Biovisionary", 4);
-        Assert.assertTrue("Player B loses",playerB.hasLost());
-        Assert.assertTrue("Player A wins with four Biovisionary",playerA.hasWon());
+        assertLostTheGame(playerB);
+        assertWonTheGame(playerA);
 
     }
 }

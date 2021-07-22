@@ -94,12 +94,12 @@ public abstract class MeldCard extends CardImpl {
     }
 
     @Override
-    public int getConvertedManaCost() {
+    public int getManaValue() {
         if (this.isCopy()) {
             return 0;
         } else {
-            return (this.topHalfCard != null ? this.topHalfCard.getConvertedManaCost() : 0)
-                    + (this.bottomHalfCard != null ? this.bottomHalfCard.getConvertedManaCost() : 0);
+            return (this.topHalfCard != null ? this.topHalfCard.getManaValue() : 0)
+                    + (this.bottomHalfCard != null ? this.bottomHalfCard.getManaValue() : 0);
         }
     }
 

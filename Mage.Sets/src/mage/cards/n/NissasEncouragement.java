@@ -52,7 +52,7 @@ class NissasEncouragementEffect extends OneShotEffect {
 
     public NissasEncouragementEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Search your library and graveyard for a card named Forest, a card named Brambleweft Behemoth, and a card named Nissa, Genesis Mage. Reveal those cards, put them into your hand, then shuffle your library.";
+        this.staticText = "Search your library and graveyard for a card named Forest, a card named Brambleweft Behemoth, and a card named Nissa, Genesis Mage. Reveal those cards, put them into your hand, then shuffle.";
     }
 
     public NissasEncouragementEffect(final NissasEncouragementEffect effect) {

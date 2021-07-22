@@ -17,7 +17,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -106,7 +105,7 @@ class BaneFireEffect extends OneShotEffect {
 
 class BanefireCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
-    Condition condition = new testCondition(ManacostVariableValue.instance, 5);
+    Condition condition = new testCondition(ManacostVariableValue.REGULAR, 5);
 
     public BanefireCantCounterEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit);

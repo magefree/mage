@@ -54,7 +54,7 @@ public class AttacksAndIsNotBlockedTriggeredAbility extends TriggeredAbilityImpl
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} attacks and isn't blocked, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} attacks and isn't blocked, " ;
     }
 }

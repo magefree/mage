@@ -76,7 +76,7 @@ class NascentMetamorphEffect extends OneShotEffect {
         Card toCopy = null;
         for (Card card : player.getLibrary().getCards(game)) {
             toReveal.add(card);
-            if (card == null || !card.isCreature()) {
+            if (card == null || !card.isCreature(game)) {
                 continue;
             }
             toCopy = card;

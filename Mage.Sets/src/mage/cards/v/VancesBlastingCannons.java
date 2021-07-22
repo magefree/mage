@@ -62,7 +62,7 @@ class VancesBlastingCannonsExileEffect extends OneShotEffect {
 
     public VancesBlastingCannonsExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile the top card of your library.  If it's a nonland card, you may cast that card this turn";
+        this.staticText = "exile the top card of your library. If it's a nonland card, you may cast that card this turn";
     }
 
     public VancesBlastingCannonsExileEffect(final VancesBlastingCannonsExileEffect effect) {
@@ -81,9 +81,9 @@ class VancesBlastingCannonsExileEffect extends OneShotEffect {
         if (controller != null && sourcePermanent != null) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                String exileName = sourcePermanent.getIdName() + (card.isLand() ? "" : " <this card may be cast the turn it was exiled");
+                String exileName = sourcePermanent.getIdName() + (card.isLand(game) ? "" : " <this card may be cast the turn it was exiled");
                 controller.moveCardsToExile(card, source, game, true, source.getSourceId(), exileName);
-                if (game.getState().getZone(card.getId()) == Zone.EXILED && !card.isLand()) {
+                if (game.getState().getZone(card.getId()) == Zone.EXILED && !card.isLand(game)) {
                     ContinuousEffect effect = new CastFromNonHandZoneTargetEffect(Duration.EndOfTurn);
                     effect.setTargetPointer(new FixedTarget(card, game));
                     game.addEffect(effect, source);

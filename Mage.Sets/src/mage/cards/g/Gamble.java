@@ -25,7 +25,7 @@ public final class Gamble extends CardImpl {
         effect.setText("Search your library for a card, put that card into your hand");        
         this.getSpellAbility().addEffect(effect);
         effect = new DiscardControllerEffect(1, true);
-        effect.setText(", discard a card at random, then shuffle your library");
+        effect.setText(", discard a card at random, then shuffle");
         this.getSpellAbility().addEffect(effect);
 
     }

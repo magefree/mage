@@ -40,7 +40,7 @@ public final class AgadeemsAwakening extends ModalDoubleFacesCard {
         // Return from your graveyard to the battlefield any number of target creature cards that each have a different converted mana cost X or less.
         this.getLeftHalfCard().getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect().setText(
                 "return from your graveyard to the battlefield any number of target creature cards " +
-                        "that each have a different converted mana cost X or less"
+                        "that each have a different mana value X or less"
         ));
         this.getLeftHalfCard().getSpellAbility().setTargetAdjuster(AgadeemsAwakeningAdjuster.instance);
 
@@ -81,7 +81,7 @@ enum AgadeemsAwakeningAdjuster implements TargetAdjuster {
 class AgadeemsAwakeningTarget extends TargetCardInYourGraveyard {
 
     private static final FilterCard filter
-            = new FilterCreatureCard("creature cards that each have a different converted mana cost X or less");
+            = new FilterCreatureCard("creature cards that each have a different mana value X or less");
     private final int xValue;
 
     AgadeemsAwakeningTarget(int xValue) {
@@ -105,11 +105,11 @@ class AgadeemsAwakeningTarget extends TargetCardInYourGraveyard {
         Set<Integer> cmcs = this.getTargets()
                 .stream()
                 .map(game::getCard)
-                .map(MageObject::getConvertedManaCost)
+                .map(MageObject::getManaValue)
                 .collect(Collectors.toSet());
         possibleTargets.removeIf(uuid -> {
             Card card = game.getCard(uuid);
-            return card != null && (cmcs.contains(card.getConvertedManaCost()) || card.getConvertedManaCost() > xValue);
+            return card != null && (cmcs.contains(card.getManaValue()) || card.getManaValue() > xValue);
         });
         return possibleTargets;
     }

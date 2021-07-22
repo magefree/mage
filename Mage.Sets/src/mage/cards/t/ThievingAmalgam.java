@@ -92,7 +92,7 @@ class ThievingAmalgamManifestEffect extends OneShotEffect {
         Set<Card> cards = active.getLibrary().getTopCards(game, 1);
         cards.stream().forEach(card -> {
             ManaCosts manaCosts = null;
-            if (card.isCreature()) {
+            if (card.isCreature(game)) {
                 manaCosts = card.getSpellAbility() != null ? card.getSpellAbility().getManaCosts() : null;
                 if (manaCosts == null) {
                     manaCosts = new ManaCostsImpl("{0}");

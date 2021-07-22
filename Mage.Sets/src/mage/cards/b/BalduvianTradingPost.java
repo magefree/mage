@@ -18,7 +18,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetControlledPermanent;
@@ -33,7 +32,7 @@ public final class BalduvianTradingPost extends CardImpl {
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public BalduvianTradingPost(UUID ownerId, CardSetInfo setInfo) {

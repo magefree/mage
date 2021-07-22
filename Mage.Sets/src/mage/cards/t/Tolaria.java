@@ -35,7 +35,7 @@ public final class Tolaria extends CardImpl {
         // {T}: Target creature loses banding and all "bands with other" abilities until end of turn. Activate this ability only during any upkeep step.
         ActivatedAbilityImpl ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new LoseAbilityTargetEffect(BandingAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost(), new IsStepCondition(PhaseStep.UPKEEP, false),
-                "{T}: Target creature loses banding and all \"bands with other\" abilities until end of turn. Activate this ability only during any upkeep step.");
+                "{T}: Target creature loses banding and all \"bands with other\" abilities until end of turn. Activate only during any upkeep step.");
         ability.addEffect(new LoseAbilityTargetEffect(new BandsWithOtherAbility(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

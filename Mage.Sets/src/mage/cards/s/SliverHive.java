@@ -50,7 +50,7 @@ public final class SliverHive extends CardImpl {
         // {5}, {T}: Create a 1/1 colorless Sliver creature token. Activate this ability only if you control a Sliver.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SliverToken()), new TapSourceCost(),
                 new PermanentsOnTheBattlefieldCondition(filter),
-                "{5}, {T}: Create a 1/1 colorless Sliver creature token. Activate this ability only if you control a Sliver.");
+                "{5}, {T}: Create a 1/1 colorless Sliver creature token. Activate only if you control a Sliver.");
         ability.addCost(new GenericManaCost(5));
         this.addAbility(ability);
     }

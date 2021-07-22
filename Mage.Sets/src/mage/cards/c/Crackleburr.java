@@ -19,7 +19,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -38,10 +37,10 @@ public final class Crackleburr extends CardImpl {
     
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         
         filter2.add(new ColorPredicate(ObjectColor.BLUE));
-        filter2.add(TappedPredicate.instance);
+        filter2.add(TappedPredicate.TAPPED);
     }
 
     public Crackleburr(UUID ownerId, CardSetInfo setInfo) {

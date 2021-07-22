@@ -38,7 +38,9 @@ public final class EnergyVortex extends CardImpl {
 
         // At the beginning of your upkeep, remove all vortex counters from Energy Vortex.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new RemoveAllCountersSourceEffect(CounterType.VORTEX), TargetController.YOU, false
+                new RemoveAllCountersSourceEffect(CounterType.VORTEX)
+                        .setText("remove all vortex counters from {this}"),
+                TargetController.YOU, false
         ));
 
         // At the beginning of the chosen player's upkeep, Energy Vortex deals 3 damage to that player unless they pay {1} for each vortex counter on Energy Vortex.
@@ -54,7 +56,7 @@ public final class EnergyVortex extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(
                         CounterType.VORTEX.createInstance(),
-                        ManacostVariableValue.instance, true
+                        ManacostVariableValue.REGULAR, true
                 ), new ManaCostsImpl("{X}"),
                 new IsStepCondition(PhaseStep.UPKEEP)
         ));

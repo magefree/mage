@@ -68,7 +68,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
+            if (filter.match(spell, getSourceId(), getControllerId(), game)) {
                 if (rememberSource) {
                     this.getEffects().setValue("spellCast", spell);
                     if (rememberSourceAsCard) {
@@ -89,7 +89,12 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
         if (rule != null && !rule.isEmpty()) {
             return rule;
         }
-        return "Whenever you cast " + filter.getMessage() + ", " + super.getRule();
+        return super.getRule();
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever you cast " + filter.getMessage() + ", ";
     }
 
     @Override

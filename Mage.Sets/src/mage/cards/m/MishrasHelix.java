@@ -25,7 +25,7 @@ public final class MishrasHelix extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // {X}, {tap}: Tap X target lands.
-        Effect effect = new TapTargetEffect("X target lands");
+        Effect effect = new TapTargetEffect("tap X target lands");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));

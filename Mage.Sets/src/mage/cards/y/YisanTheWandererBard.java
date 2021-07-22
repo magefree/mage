@@ -20,7 +20,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -37,6 +37,7 @@ public final class YisanTheWandererBard extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
+        this.subtype.add(SubType.BARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -62,7 +63,7 @@ class YisanTheWandererBardEffect extends OneShotEffect {
 
     public YisanTheWandererBardEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search your library for a creature card with converted mana cost equal to the number of verse counters on {this}, put it onto the battlefield, then shuffle your library";
+        this.staticText = "Search your library for a creature card with mana value equal to the number of verse counters on {this}, put it onto the battlefield, then shuffle";
     }
 
     public YisanTheWandererBardEffect(final YisanTheWandererBardEffect effect) {
@@ -80,8 +81,8 @@ class YisanTheWandererBardEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent != null && controller != null) {
             int newConvertedCost = sourcePermanent.getCounters(game).getCount(CounterType.VERSE);
-            FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, newConvertedCost));
+            FilterCard filter = new FilterCard("creature card with mana value " + newConvertedCost);
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, newConvertedCost));
             filter.add(CardType.CREATURE.getPredicate());
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             if (controller.searchLibrary(target, source, game)) {

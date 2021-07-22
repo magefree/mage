@@ -4,21 +4,20 @@ import mage.abilities.dynamicvalue.RoleAssignment;
 import mage.cards.Card;
 import mage.game.Game;
 
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ColorAssignment extends RoleAssignment<String> {
 
-    public ColorAssignment() {
-        super("W", "U", "B", "R", "G");
+    public ColorAssignment(String... colors) {
+        super(colors);
     }
 
     @Override
     protected Set<String> makeSet(Card card, Game game) {
-        Set<String> strings = new HashSet<>();
-        for (char c : card.getColor(game).toString().toCharArray()) {
-            strings.add("" + c);
-        }
-        return strings;
+        return Arrays.stream(card.getColor(game).toString().split(""))
+                .filter(attributes::contains)
+                .collect(Collectors.toSet());
     }
 }

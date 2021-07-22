@@ -10,7 +10,7 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -52,7 +52,7 @@ class ViviensArkbowEffect extends OneShotEffect {
     ViviensArkbowEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "Look at the top X cards of your library. " +
-                "You may put a creature card with converted mana cost X or less " +
+                "You may put a creature card with mana value X or less " +
                 "from among them onto the battlefield. Put the rest on the bottom of your library in a random order.";
     }
 
@@ -75,8 +75,8 @@ class ViviensArkbowEffect extends OneShotEffect {
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, xValue));
         player.lookAtCards(source, null, cards, game);
 
-        FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue + " or less");
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         TargetCard target = new TargetCardInLibrary(0, 1, filter);
 
         if (player.choose(outcome, cards, target, game)) {

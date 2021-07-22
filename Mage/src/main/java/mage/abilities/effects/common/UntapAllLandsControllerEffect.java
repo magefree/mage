@@ -30,7 +30,7 @@ public class UntapAllLandsControllerEffect extends OneShotEffect {
 
     public UntapAllLandsControllerEffect(FilterLandPermanent filter) {
         super(Outcome.Untap);
-        staticText = "Untap all " + filter.getMessage() + " you control";
+        staticText = "untap all " + filter.getMessage() + " you control";
         this.filter = filter;
     }
 

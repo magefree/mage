@@ -24,7 +24,7 @@ public final class SunblastAngel extends CardImpl {
     private static final FilterPermanent tappedFilter = new FilterCreaturePermanent("tapped creatures");
 
     static {
-        tappedFilter.add(TappedPredicate.instance);
+        tappedFilter.add(TappedPredicate.TAPPED);
     }
 
     public SunblastAngel (UUID ownerId, CardSetInfo setInfo) {

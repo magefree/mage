@@ -39,7 +39,7 @@ public final class KariZevsExpertise extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn"));
 
         // You may cast a card with converted mana cost 2 or less from your hand without paying its mana cost.
-        this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(2));
+        this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(2).concatBy("<br>"));
     }
 
     private KariZevsExpertise(final KariZevsExpertise card) {

@@ -7,6 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CastCardFromOutsideTheGameEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,7 +44,9 @@ public final class SpawnsireOfUlamog extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new EldraziSpawnToken(), 2), new GenericManaCost(4)));
 
         // {20}: Cast any number of Eldrazi cards you own from outside the game without paying their mana costs.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CastCardFromOutsideTheGameEffect(filter, ruleText), new GenericManaCost(20)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new CastCardFromOutsideTheGameEffect(filter, ruleText), new GenericManaCost(20)
+        ).addHint(OpenSideboardHint.instance));
     }
 
     private SpawnsireOfUlamog(final SpawnsireOfUlamog card) {

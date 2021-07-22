@@ -62,7 +62,7 @@ class OtherSpellsCastThisTurnCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public OtherSpellsCastThisTurnCount copy() {
         return new OtherSpellsCastThisTurnCount();
     }
 

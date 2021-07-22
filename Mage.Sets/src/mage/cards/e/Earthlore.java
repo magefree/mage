@@ -20,7 +20,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -41,7 +40,7 @@ public final class Earthlore extends CardImpl {
     private static final FilterPermanent filterUntapped = new FilterPermanent("enchanted land is untapped");
     
     static {
-        filterUntapped.add(Predicates.not(TappedPredicate.instance));
+        filterUntapped.add(TappedPredicate.UNTAPPED);
     }
 
     public Earthlore(UUID ownerId, CardSetInfo setInfo) {

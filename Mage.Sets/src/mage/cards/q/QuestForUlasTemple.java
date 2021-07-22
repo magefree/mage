@@ -78,7 +78,7 @@ class QuestForUlasTempleEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl(card);
             controller.lookAtCards(sourcePermanent.getName(), cards, game);
-            if (card.isCreature()) {
+            if (card.isCreature(game)) {
                 if (controller.chooseUse(Outcome.DrawCard, "Reveal the top card of your library?", source, game)) {
                     controller.revealCards(sourcePermanent.getName(), cards, game);
                     Permanent questForUlasTemple = game.getPermanent(source.getSourceId());
@@ -120,7 +120,7 @@ class QuestForUlasTempleTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "At the beginning of each end step, if there are three or more quest counters on {this}, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "At the beginning of each end step, if there are three or more quest counters on {this}, " ;
     }
 }

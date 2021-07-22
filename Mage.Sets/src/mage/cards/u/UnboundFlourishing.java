@@ -75,7 +75,7 @@ class UnboundFlourishingDoubleXEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Spell spell = game.getSpell(event.getTargetId());
-        return spell != null && spell.isPermanent() && spell.isControlledBy(source.getControllerId());
+        return spell != null && spell.isPermanent(game) && spell.isControlledBy(source.getControllerId());
     }
 
     @Override
@@ -128,7 +128,7 @@ class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
             // spell
             if (event.getType() == GameEvent.EventType.SPELL_CAST) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && spell.isInstantOrSorcery()) {
+                if (spell != null && spell.isInstantOrSorcery(game)) {
                     if (spell.getSpellAbility().getManaCostsToPay().containsX()) {
                         game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, spell);
                         return true;
@@ -141,8 +141,8 @@ class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you cast an instant or sorcery spell or activate an ability, if that spell's mana cost or that ability's activation cost contains {X}" + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you cast an instant or sorcery spell or activate an ability, if that spell's mana cost or that ability's activation cost contains {X}" ;
     }
 }
 

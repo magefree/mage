@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.replacement;
 
 import mage.abilities.Ability;
@@ -6,20 +5,21 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class CreateTwiceThatManyTokensEffect extends ReplacementEffectImpl {
 
     public CreateTwiceThatManyTokensEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Copy);
-        staticText = "If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead";
+        staticText = "if one or more tokens would be created under your control, " +
+                "twice that many of those tokens are created instead";
     }
 
-    public CreateTwiceThatManyTokensEffect(final CreateTwiceThatManyTokensEffect effect) {
+    private CreateTwiceThatManyTokensEffect(final CreateTwiceThatManyTokensEffect effect) {
         super(effect);
     }
 
@@ -40,7 +40,9 @@ public class CreateTwiceThatManyTokensEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() * 2);
+        if (event instanceof CreateTokenEvent) {
+            ((CreateTokenEvent) event).doubleTokens();
+        }
         return false;
     }
 

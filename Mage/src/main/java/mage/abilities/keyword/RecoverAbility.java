@@ -50,7 +50,7 @@ public class RecoverAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
             if (zEvent.getTarget().isOwnedBy(getControllerId())
-                    && zEvent.getTarget().isCreature()
+                    && zEvent.getTarget().isCreature(game)
                     && !zEvent.getTarget().getId().equals(getSourceId())) {
                 return true;
             }

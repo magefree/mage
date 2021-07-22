@@ -16,7 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -59,19 +59,19 @@ public final class DistendedMindbender extends CardImpl {
 
 class DistendedMindbenderEffect extends OneShotEffect {
 
-    private static final FilterCard filterFourOrGreater = new FilterCard("a card from it with converted mana cost 4 or greater");
-    private static final FilterCard filterThreeOrLess = new FilterCard("a nonland card from it with converted mana cost 3 or less");
+    private static final FilterCard filterFourOrGreater = new FilterCard("a card from it with mana value 4 or greater");
+    private static final FilterCard filterThreeOrLess = new FilterCard("a nonland card from it with mana value 3 or less");
 
     static {
-        filterFourOrGreater.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 3));
-        filterThreeOrLess.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filterFourOrGreater.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 3));
+        filterThreeOrLess.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
         filterThreeOrLess.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public DistendedMindbenderEffect() {
         super(Outcome.Discard);
-        this.staticText = "target opponent reveals their hand. You choose from it a nonland card with converted mana cost 3 or less and a card with "
-                + "converted mana cost 4 or greater. That player discards those cards.";
+        this.staticText = "target opponent reveals their hand. You choose from it a nonland card with mana value 3 or less and a card with "
+                + "mana value 4 or greater. That player discards those cards.";
     }
 
     public DistendedMindbenderEffect(final DistendedMindbenderEffect effect) {

@@ -127,7 +127,7 @@ class ConfoundingConundrumWatcher extends Watcher {
             return;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isLand()) {
+        if (permanent != null && permanent.isLand(game)) {
             playerMap.compute(permanent.getControllerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
         }
     }

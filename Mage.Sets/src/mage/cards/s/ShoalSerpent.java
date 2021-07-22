@@ -48,7 +48,7 @@ class ShoalSerpentEffect extends ContinuousEffectImpl {
 
     public ShoalSerpentEffect() {
         super(Duration.EndOfTurn, Outcome.AddAbility);
-        staticText = "Until end of turn, {this} loses defender";
+        staticText = "{this} loses defender until end of turn";
     }
 
     public ShoalSerpentEffect(final ShoalSerpentEffect effect) {

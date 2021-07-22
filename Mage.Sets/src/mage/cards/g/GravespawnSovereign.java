@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -29,7 +28,7 @@ public final class GravespawnSovereign extends CardImpl {
 
     static {
         filter.add(SubType.ZOMBIE.getPredicate());
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public GravespawnSovereign(UUID ownerId, CardSetInfo setInfo) {

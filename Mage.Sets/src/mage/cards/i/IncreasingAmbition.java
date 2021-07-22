@@ -33,7 +33,7 @@ public final class IncreasingAmbition extends CardImpl {
                 IncreasingAmbitionCondition.instance, "Search your library for a card " +
                 "and put that card into your hand. If this spell was cast from a graveyard, " +
                 "instead search your library for two cards and put those cards into your hand. " +
-                "Then shuffle your library."
+                "Then shuffle."
         ));
 
         // Flashback {7}{B}

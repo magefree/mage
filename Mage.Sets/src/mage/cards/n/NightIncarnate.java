@@ -34,7 +34,7 @@ public final class NightIncarnate extends CardImpl {
         ));
 
         // Evoke {3}{B}
-        this.addAbility(new EvokeAbility(this, "{3}{B}"));
+        this.addAbility(new EvokeAbility("{3}{B}"));
 
     }
 

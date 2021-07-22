@@ -34,9 +34,8 @@ public final class SlaughterhouseBouncer extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new DiesSourceTriggeredAbility(new BoostTargetEffect(-3, -3, Duration.EndOfTurn)),
                 HellbentCondition.instance,
-                "When {this} dies, if you have no cards in hand, target creature gets -3/-3 until end of turn."
+                AbilityWord.HELLBENT.formatWord() + "When {this} dies, if you have no cards in hand, target creature gets -3/-3 until end of turn."
         );
-        ability.setAbilityWord(AbilityWord.HELLBENT);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

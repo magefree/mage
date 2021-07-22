@@ -79,13 +79,13 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
             if (cost instanceof ManaCostsImpl) {
                 for (Object c : (ManaCostsImpl) cost) {
                     if (c instanceof GenericManaCost) {
-                        int newCostCMC = ((GenericManaCost) c).convertedManaCost() - amountToReduceBy - genericManaToReduce;
+                        int newCostCMC = ((GenericManaCost) c).manaValue() - amountToReduceBy - genericManaToReduce;
                         foundCostToReduce = true;
                         if (newCostCMC > 0) {
                             amountToReduceBy += genericManaToReduce;
                         } else {
-                            amountToReduce = ((GenericManaCost) c).convertedManaCost() - amountToReduceBy;
-                            amountToReduceBy = ((GenericManaCost) c).convertedManaCost();
+                            amountToReduce = ((GenericManaCost) c).manaValue() - amountToReduceBy;
+                            amountToReduceBy = ((GenericManaCost) c).manaValue();
                         }
                     }
                 }

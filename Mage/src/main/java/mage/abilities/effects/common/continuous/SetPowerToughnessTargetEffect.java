@@ -12,6 +12,7 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -68,6 +69,11 @@ public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
+        if (mode.getTargets().get(0).getMinNumberOfTargets() == 0) {
+            sb.append("up to ");
+            sb.append(CardUtil.numberToText(mode.getTargets().get(0).getMaxNumberOfTargets()));
+            sb.append(' ');
+        }
         if (!mode.getTargets().get(0).getTargetName().contains("target")) {
             sb.append("target ");
         }

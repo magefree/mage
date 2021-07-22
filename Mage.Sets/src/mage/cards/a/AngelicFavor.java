@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.TurnPhase;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.AngelToken;
@@ -37,7 +36,7 @@ public final class AngelicFavor extends CardImpl {
     private static final FilterControlledCreaturePermanent untappedCreatureYouControl = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        untappedCreatureYouControl.add(Predicates.not(TappedPredicate.instance));
+        untappedCreatureYouControl.add(TappedPredicate.UNTAPPED);
     }
 
     public AngelicFavor(UUID ownerId, CardSetInfo setInfo) {

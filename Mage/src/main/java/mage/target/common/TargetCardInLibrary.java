@@ -72,27 +72,25 @@ public class TargetCardInLibrary extends TargetCard {
         }
         cards.sort(Comparator.comparing(MageObject::getName));
         Cards cardsId = new CardsImpl();
-        cards.forEach((card) -> {
-            cardsId.add(card);
-        });
+        cards.forEach(cardsId::add);
 
-        while (!isChosen() && !doneChosing()) {
+        chosen = targets.size() >= getMinNumberOfTargets();
+        do {
             if (!player.canRespond()) {
-                return chosen = targets.size() >= minNumberOfTargets;
+                return chosen;
             }
-            chosen = targets.size() >= minNumberOfTargets;
             if (!player.chooseTarget(outcome, cardsId, this, null, game)) {
                 return chosen;
             }
-            chosen = targets.size() >= minNumberOfTargets;
-        }
-        return chosen = true;
+            chosen = targets.size() >= getMinNumberOfTargets();
+        } while (!isChosen() && !doneChosing());
+        return chosen;
     }
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getPlayer(source.getControllerId()).getLibrary().getCard(id, game);
-        return card != null && filter.match(card, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(card, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override

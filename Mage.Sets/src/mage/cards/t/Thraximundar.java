@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -97,7 +96,7 @@ class ThraximundarTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         return "Whenever {this} attacks, defending player sacrifices a creature.";
     }
 }
@@ -120,12 +119,12 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-        return mageObject != null && mageObject.isCreature();
+        return mageObject != null && mageObject.isCreature(game);
     }
 
     @Override
     public String getRule() {
-        return "Whenever a player sacrifices a creature, " + super.getRule();
+        return "Whenever a player sacrifices a creature, " ;
     }
 
     @Override

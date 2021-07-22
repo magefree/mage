@@ -22,6 +22,7 @@ public final class InquisitorExarch extends CardImpl {
 
     public InquisitorExarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(2);

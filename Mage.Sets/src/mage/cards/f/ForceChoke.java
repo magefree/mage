@@ -50,7 +50,7 @@ class ForceChokeEffect extends OneShotEffect {
     public ForceChokeEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Counter target spell. Its controller may pay life "
-                + "equal to that spell's converted mana cost to return it to its owner's hand";
+                + "equal to that spell's mana value to return it to its owner's hand";
     }
 
     public ForceChokeEffect(final ForceChokeEffect effect) {
@@ -68,10 +68,10 @@ class ForceChokeEffect extends OneShotEffect {
         StackObject stackObject = (StackObject) game.getObject(getTargetPointer().getFirst(game, source));
         Player objectController = game.getPlayer(stackObject.getControllerId());
         if (player != null) {
-            Cost cost = new PayLifeCost(stackObject.getConvertedManaCost());
+            Cost cost = new PayLifeCost(stackObject.getManaValue());
             if (cost.canPay(source, source, objectController.getId(), game)
                     && objectController.chooseUse(Outcome.LoseLife, "Pay "
-                            + stackObject.getConvertedManaCost() + " life?", source, game)
+                            + stackObject.getManaValue() + " life?", source, game)
                     && cost.pay(source, game, source, objectController.getId(), false, null)) {
                 objectController.moveCards((Card) stackObject, Zone.HAND, source, game);
             } else {

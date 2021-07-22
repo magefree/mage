@@ -26,7 +26,7 @@ public final class TimeSpiral extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
 
         // Exile Time Spiral. Each player shuffles their graveyard and hand into their library, then draws seven cards. You untap up to six lands.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
         this.getSpellAbility().addEffect(new TimeSpiralEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");

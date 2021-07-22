@@ -292,7 +292,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         attack(4, playerB, "Steel Hellkite");
 
-        activateAbility(4, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X}: Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by {this} this turn. Activate this ability only once each turn.");
+        activateAbility(4, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X}:");
         setChoice(playerB, "X=0");
 
         setStopAt(4, PhaseStep.END_TURN);
@@ -382,7 +382,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Wurmcoil Engine", 1);
 
         assertGraveyardCount(playerB, "Phantasmal Image", 1);
-        assertPermanentCount(playerB, "Wurm", 2); // if triggered ability did not work, the Titan would be in the graveyard instaed
+        assertPermanentCount(playerB, "Phyrexian Wurm", 2); // if triggered ability did not work, the Titan would be in the graveyard instaed
 
     }
 
@@ -574,8 +574,8 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Phantasmal Image", 1);
         assertGraveyardCount(playerB, "Wurmcoil Engine", 1);
 
-        assertPermanentCount(playerA, "Wurm", 2);
-        assertPermanentCount(playerB, "Wurm", 2);
+        assertPermanentCount(playerA, "Phyrexian Wurm", 2);
+        assertPermanentCount(playerB, "Phyrexian Wurm", 2);
 
     }
 
@@ -629,15 +629,15 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         Permanent staffA = getPermanent("Chimeric Staff", playerA);
-        assertTrue("Phantasmal Image should be an artifact", staffA.isArtifact());
-        assertTrue("Phantasmal Image should not be a creature", !staffA.isCreature());
+        assertTrue("Phantasmal Image should be an artifact", staffA.isArtifact(currentGame));
+        assertTrue("Phantasmal Image should not be a creature", !staffA.isCreature(currentGame));
         assertTrue("Phantasmal Image should not be an Illusion", !staffA.hasSubtype(SubType.ILLUSION, currentGame));
         assertTrue("Phantasmal Image should not be a Construct", !staffA.hasSubtype(SubType.CONSTRUCT, currentGame));
         assertTrue("Phantasmal Image should have the sacrifice trigger", staffA.getAbilities(currentGame).containsClass(BecomesTargetTriggeredAbility.class));
 
         Permanent staffB = getPermanent("Chimeric Staff", playerB);
-        assertTrue("Chimeric Staff should be an artifact", staffB.isArtifact());
-        assertTrue("Chimeric Staff should be a creature", staffB.isCreature());
+        assertTrue("Chimeric Staff should be an artifact", staffB.isArtifact(currentGame));
+        assertTrue("Chimeric Staff should be a creature", staffB.isCreature(currentGame));
         assertTrue("Chimeric Staff should be a Construct", staffB.hasSubtype(SubType.CONSTRUCT, currentGame));
     }
 
@@ -659,18 +659,18 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         Permanent cloakA = getPermanent("Cloak and Dagger", playerA);
-        assertTrue("Phantasmal Image should be an artifact", cloakA.isArtifact());
-        assertTrue("Phantasmal Image should be tribal", cloakA.isTribal());
-        assertTrue("Phantasmal Image should not be a creature", !cloakA.isCreature());
+        assertTrue("Phantasmal Image should be an artifact", cloakA.isArtifact(currentGame));
+        assertTrue("Phantasmal Image should be tribal", cloakA.isTribal(currentGame));
+        assertTrue("Phantasmal Image should not be a creature", !cloakA.isCreature(currentGame));
         assertTrue("Phantasmal Image should be a Rogue", cloakA.hasSubtype(SubType.ROGUE, currentGame));
         assertTrue("Phantasmal Image should be an Illusion", cloakA.hasSubtype(SubType.ILLUSION, currentGame));
         assertTrue("Phantasmal Image should be an Equipment", cloakA.hasSubtype(SubType.EQUIPMENT, currentGame));
         assertTrue("Phantasmal Image should have the sacrifice trigger", cloakA.getAbilities(currentGame).containsClass(BecomesTargetTriggeredAbility.class));
 
         Permanent cloakB = getPermanent("Cloak and Dagger", playerB);
-        assertTrue("Cloak and Dagger should be an artifact", cloakB.isArtifact());
-        assertTrue("Cloak and Dagger should be a creature", cloakB.isCreature());
-        assertTrue("Cloak and Dagger should be tribal", cloakB.isTribal());
+        assertTrue("Cloak and Dagger should be an artifact", cloakB.isArtifact(currentGame));
+        assertTrue("Cloak and Dagger should be a creature", cloakB.isCreature(currentGame));
+        assertTrue("Cloak and Dagger should be tribal", cloakB.isTribal(currentGame));
         assertTrue("Cloak and Dagger should be a Rogue", cloakB.hasSubtype(SubType.ROGUE, currentGame));
         assertTrue("Cloak and Dagger should be an Equipment", cloakB.hasSubtype(SubType.EQUIPMENT, currentGame));
     }

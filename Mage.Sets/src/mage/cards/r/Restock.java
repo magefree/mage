@@ -25,7 +25,7 @@ public final class Restock extends CardImpl {
         effect.setText("Return two target cards from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD));
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private Restock(final Restock card) {

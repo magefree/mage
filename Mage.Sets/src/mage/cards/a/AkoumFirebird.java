@@ -44,7 +44,7 @@ public final class AkoumFirebird extends CardImpl {
         // <i>Landfall</i>-Whenever a land enters the battlefield under your control, you may pay {4}{R}{R}.
         // If you do, return Akoum Firebird from your graveyard to the battlefield.
         this.addAbility(new AkoumFirebirdLandfallAbility(new DoIfCostPaid(
-                new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{4}{R}{R}")), false));
+                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false), new ManaCostsImpl("{4}{R}{R}")), false));
     }
 
     private AkoumFirebird(final AkoumFirebird card) {
@@ -79,12 +79,12 @@ class AkoumFirebirdLandfallAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && permanent.isLand() && permanent.isControlledBy(this.controllerId);
+        return permanent != null && permanent.isLand(game) && permanent.isControlledBy(this.controllerId);
     }
 
     @Override
-    public String getRule() {
-        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " ;
     }
 
     @Override

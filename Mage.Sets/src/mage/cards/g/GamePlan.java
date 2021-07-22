@@ -28,7 +28,7 @@ public final class GamePlan extends CardImpl {
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private GamePlan(final GamePlan card) {

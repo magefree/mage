@@ -68,7 +68,7 @@ class TerraRavagerLandCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public TerraRavagerLandCount copy() {
         return new TerraRavagerLandCount();
     }
 

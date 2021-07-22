@@ -48,7 +48,7 @@ class DoublingChantEffect extends OneShotEffect {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "For each creature you control, " +
                 "you may search your library for a creature card with the same name as that creature. " +
-                "Put those cards onto the battlefield, then shuffle your library";
+                "Put those cards onto the battlefield, then shuffle";
     }
 
     public DoublingChantEffect(final DoublingChantEffect effect) {

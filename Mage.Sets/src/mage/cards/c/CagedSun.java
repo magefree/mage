@@ -18,7 +18,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -107,7 +106,7 @@ class CagedSunTriggeredAbility extends TriggeredManaAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(controllerId)) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (permanent != null && permanent.isLand()) {
+            if (permanent != null && permanent.isLand(game)) {
                 ObjectColor color = (ObjectColor) game.getState().getValue(this.sourceId + "_color");
                 return color != null && event.getData().contains(color.toString());
             }

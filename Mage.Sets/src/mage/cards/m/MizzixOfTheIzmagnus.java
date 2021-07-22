@@ -28,7 +28,7 @@ import mage.util.CardUtil;
  */
 public final class MizzixOfTheIzmagnus extends CardImpl {
 
-    private static final FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell("an instant or sorcery spell with converted mana cost greater than the number of experience counters you have");
+    private static final FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell("an instant or sorcery spell with mana value greater than the number of experience counters you have");
 
     static {
         filter.add(new MizzixOfTheIzmagnusPredicate());
@@ -68,7 +68,7 @@ class MizzixOfTheIzmagnusPredicate implements Predicate<MageObject> {
         if (spell != null) {
             Player controller = game.getPlayer(spell.getControllerId());
             if (controller != null) {
-                if (spell.getConvertedManaCost() > controller.getCounters().getCount(CounterType.EXPERIENCE)) {
+                if (spell.getManaValue() > controller.getCounters().getCount(CounterType.EXPERIENCE)) {
                     return true;
                 }
             }

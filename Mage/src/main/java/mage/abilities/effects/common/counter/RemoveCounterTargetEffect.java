@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.counter;
 
 import mage.abilities.Ability;
@@ -37,7 +36,7 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
 
     public RemoveCounterTargetEffect(RemoveCounterTargetEffect effect) {
         super(effect);
-        this.counter = effect.counter == null ? null : effect.counter.copy();
+        this.counter = (effect.counter == null ? null : effect.counter.copy());
     }
 
     @Override

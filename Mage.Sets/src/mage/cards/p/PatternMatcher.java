@@ -55,7 +55,7 @@ class RegularExpression extends OneShotEffect {
     RegularExpression() {
         super(Outcome.Benefit);
         staticText = "search your library for a card with the same name as another creature you control, " +
-                "reveal it, put it into your hand, then shuffle your library.";
+                "reveal it, put it into your hand, then shuffle.";
     }
 
     private RegularExpression(final RegularExpression effect) {

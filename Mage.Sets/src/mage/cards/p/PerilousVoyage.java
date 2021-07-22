@@ -51,7 +51,7 @@ class PerilousVoyageEffect extends OneShotEffect {
     PerilousVoyageEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return target nonland permanent you don't control to its owner's hand. " +
-                "If its converted mana cost was 2 or less, scry 2";
+                "If its mana value was 2 or less, scry 2";
     }
 
     private PerilousVoyageEffect(final PerilousVoyageEffect effect) {
@@ -70,7 +70,7 @@ class PerilousVoyageEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
-        boolean flag = permanent.getConvertedManaCost() <= 2;
+        boolean flag = permanent.getManaValue() <= 2;
         player.moveCards(permanent, Zone.HAND, source, game);
         if (flag) {
             player.scry(2, source, game);

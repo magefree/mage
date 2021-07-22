@@ -17,7 +17,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 
 /**
@@ -54,7 +54,7 @@ class DroningBureaucratsEffect extends OneShotEffect {
 
     DroningBureaucratsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each creature with converted mana cost X can't attack or block this turn";
+        this.staticText = "Each creature with mana value X can't attack or block this turn";
     }
 
     DroningBureaucratsEffect(final DroningBureaucratsEffect effect) {
@@ -69,8 +69,8 @@ class DroningBureaucratsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = source.getManaCostsToPay().getX();
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost X");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value X");
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         game.addEffect(new CantAttackBlockAllEffect(Duration.EndOfTurn, filter), source);
         return true;
     }

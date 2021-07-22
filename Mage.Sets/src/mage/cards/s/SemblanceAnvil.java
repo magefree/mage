@@ -29,7 +29,7 @@ public final class SemblanceAnvil extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Imprint - When Semblance Anvil enters the battlefield, you may exile a nonland card from your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SemblanceAnvilEffect(), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SemblanceAnvilEffect(), true).setAbilityWord(AbilityWord.IMPRINT));
 
         // Spells you cast that share a card type with the exiled card cost {2} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SemblanceAnvilCostReductionEffect()));
@@ -115,7 +115,7 @@ class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl {
                     List<UUID> imprinted = permanent.getImprinted();
                     if (imprinted != null && !imprinted.isEmpty()) {
                         Card imprintedCard = game.getCard(imprinted.get(0));
-                        return imprintedCard != null && imprintedCard.shareTypes(spellCard);
+                        return imprintedCard != null && imprintedCard.shareTypes(spellCard, game);
                     }
                 }
             }

@@ -100,7 +100,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
             sb.append("target ");
         }
         sb.append(target.getTargetName());
-        if (target.getMaxNumberOfTargets() > 1 && !target.getTargetName().endsWith("s")) {
+        if (target.getMaxNumberOfTargets() > 1 && !target.getTargetName().endsWith("s") && !target.getTargetName().endsWith("control")) {
             sb.append('s');
         }
         if (target.getMaxNumberOfTargets() > 1) {

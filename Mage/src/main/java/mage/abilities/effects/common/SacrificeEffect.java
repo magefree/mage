@@ -98,7 +98,9 @@ public class SacrificeEffect extends OneShotEffect {
                 sb.append(" sacrifice ");
             }
         }
-        if (!filter.getMessage().startsWith("another")) {
+        if (!filter.getMessage().startsWith("another")
+                && !filter.getMessage().startsWith("a ")
+                && !filter.getMessage().startsWith("an ")) {
             sb.append(CardUtil.numberToText(count.toString(), "a")).append(' ');
         }
         sb.append(filter.getMessage());

@@ -118,7 +118,7 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
             return filter.match(permanent, game);
         }
         Card card = game.getExile().getCard(id, game);
-        return card != null && filter.match(card, game);
+        return filter.match(card, game);
     }
 
     @Override
@@ -134,7 +134,7 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
             }
         }
         Card card = game.getExile().getCard(id, game);
-        return card != null && filter.match(card, game);
+        return filter.match(card, game);
     }
 
     @Override

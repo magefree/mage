@@ -24,6 +24,7 @@ public final class PhyrexianIronfoot extends CardImpl {
     public PhyrexianIronfoot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
         this.addSuperType(SuperType.SNOW);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

@@ -297,6 +297,18 @@ public class CallbackClientImpl implements CallbackClient {
                         break;
                     }
 
+                    case GAME_GET_MULTI_AMOUNT: {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            appendJsonEvent("GAME_GET_MULTI_AMOUNT", callback.getObjectId(), message);
+
+                            panel.getMultiAmount(message.getMessages(), message.getMin(), message.getMax(), message.getOptions());
+                        }
+                        break;
+                    }
+
                     case GAME_UPDATE: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
 
@@ -376,6 +388,12 @@ public class CallbackClientImpl implements CallbackClient {
                         DeckView deckView = message.getDeck();
                         Deck deck = DeckUtil.construct(deckView);
                         viewLimitedDeck(deck, message.getTableId(), message.getTime());
+                        break;
+                    }
+
+                    case VIEW_SIDEBOARD: {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        viewSideboard(message.getGameId(), message.getPlayerId());
                         break;
                     }
 
@@ -602,6 +620,15 @@ public class CallbackClientImpl implements CallbackClient {
 
     protected void viewLimitedDeck(Deck deck, UUID tableId, int time) {
         frame.showDeckEditor(DeckEditorMode.VIEW_LIMITED_DECK, deck, tableId, time);
+    }
+
+    protected void viewSideboard(UUID gameId, UUID playerId) {
+        SwingUtilities.invokeLater(() -> {
+            GamePanel panel = MageFrame.getGame(gameId);
+            if (panel != null) {
+                panel.openSideboardWindow(playerId);
+            }
+        });
     }
 
     private void handleException(Exception ex) {

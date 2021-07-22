@@ -9,7 +9,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 
 /**
  *
@@ -17,11 +17,11 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  */
 public final class CollectedCompany extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("up to two creature cards with converted mana cost 3 or less");
+    private static final FilterCard filter = new FilterCard("up to two creature cards with mana value 3 or less");
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public CollectedCompany(UUID ownerId, CardSetInfo setInfo) {

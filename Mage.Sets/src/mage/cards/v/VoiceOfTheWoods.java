@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.VoiceOfTheWoodsElementalToken;
 import mage.target.common.TargetControlledPermanent;
@@ -27,7 +26,7 @@ public final class VoiceOfTheWoods extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Elves you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         filter.add(SubType.ELF.getPredicate());
     }
 

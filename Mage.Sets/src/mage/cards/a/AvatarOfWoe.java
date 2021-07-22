@@ -39,7 +39,7 @@ public final class AvatarOfWoe extends CardImpl {
 
         // If there are ten or more creature cards total in all graveyards, Avatar of Woe costs {6} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(6, condition)
-                .setText("If there are ten or more creature cards total in all graveyards, {this} costs {6} less to cast"))
+                .setText("If there are ten or more creature cards total in all graveyards, this spell costs {6} less to cast"))
                 .addHint(new ValueHint("Creature cards in all graveyards", graveyardCount))
         );
 

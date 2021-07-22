@@ -14,5 +14,7 @@ public interface ModalDoubleFacesCardHalf extends Card {
 
     ModalDoubleFacesCard getParentCard();
 
-    void setPT(MageInt power, MageInt toughtness);
+    void setPT(int power, int toughness);
+
+    void setPT(MageInt power, MageInt toughness);
 }

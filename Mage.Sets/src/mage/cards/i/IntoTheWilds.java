@@ -66,7 +66,7 @@ class IntoTheWildsEffect extends OneShotEffect {
         Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
             controller.lookAtCards(source, "", new CardsImpl(card), game);
-            if (card.isLand()) {
+            if (card.isLand(game)) {
                 String message = "Put " + card.getName() + " onto the battlefield?";
                 if (controller.chooseUse(outcome, message, source, game)) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);

@@ -29,7 +29,7 @@ public class ExertCreatureControllerTriggeredAbility extends TriggeredAbilityImp
     public boolean checkTrigger(GameEvent event, Game game) {
         boolean weAreExerting = isControlledBy(event.getPlayerId());
         Permanent exerted = game.getPermanent(event.getTargetId());
-        boolean exertedIsCreature = (exerted != null) && exerted.isCreature();
+        boolean exertedIsCreature = (exerted != null) && exerted.isCreature(game);
         return weAreExerting && exertedIsCreature;
     }
 
@@ -39,7 +39,7 @@ public class ExertCreatureControllerTriggeredAbility extends TriggeredAbilityImp
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you exert a creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you exert a creature, " ;
     }
 }

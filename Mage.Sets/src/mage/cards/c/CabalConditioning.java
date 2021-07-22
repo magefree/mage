@@ -2,7 +2,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
+import mage.abilities.dynamicvalue.common.HighestManaValueCount;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,8 +19,8 @@ public final class CabalConditioning extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{B}");
 
         // Any number of target players each discard a number of cards equal to the highest converted mana cost among permanents you control.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(new HighestConvertedManaCostValue())
-                .setText("Any number of target players each discard a number of cards equal to the highest converted mana cost among permanents you control.")
+        this.getSpellAbility().addEffect(new DiscardTargetEffect(new HighestManaValueCount())
+                .setText("Any number of target players each discard a number of cards equal to the highest mana value among permanents you control.")
         );
         this.getSpellAbility().addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
     }

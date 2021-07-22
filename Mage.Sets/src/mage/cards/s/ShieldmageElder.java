@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledPermanent;
@@ -29,13 +28,13 @@ public final class ShieldmageElder extends CardImpl {
     private static final FilterControlledPermanent filter1 = new FilterControlledPermanent("untapped Clerics you control");
 
     static {
-        filter1.add(Predicates.not(TappedPredicate.instance));
+        filter1.add(TappedPredicate.UNTAPPED);
         filter1.add(SubType.CLERIC.getPredicate());
     }
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("untapped Wizards you control");
 
     static {
-        filter2.add(Predicates.not(TappedPredicate.instance));
+        filter2.add(TappedPredicate.UNTAPPED);
         filter2.add(SubType.WIZARD.getPredicate());
     }
 

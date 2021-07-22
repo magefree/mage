@@ -87,7 +87,7 @@ class SteamVinesEffect extends OneShotEffect {
                         landsController.damage(1, source.getSourceId(), source, game);
                     }
                 }
-                if (!game.getBattlefield().getAllActivePermanents(CardType.LAND).isEmpty()) { //lands are available on the battlefield
+                if (!game.getBattlefield().getAllActivePermanents(CardType.LAND, game).isEmpty()) { //lands are available on the battlefield
                     Target target = new TargetLandPermanent();
                     target.setNotTarget(true); //not a target, it is chosen
                     Card steamVinesCard = game.getCard(source.getSourceId());

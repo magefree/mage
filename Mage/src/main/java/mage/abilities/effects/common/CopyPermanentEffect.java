@@ -58,7 +58,7 @@ public class CopyPermanentEffect extends OneShotEffect {
         if (filter.getMessage().startsWith("a ") || filter.getMessage().startsWith("an ")) {
             text += " " + filter.getMessage();
         } else {
-            text += " any " + filter.getMessage() + " on battlefield";
+            text += " any " + filter.getMessage() + " on the battlefield";
         }
         text += applier == null ? "" : applier.getText();
         this.staticText = text;

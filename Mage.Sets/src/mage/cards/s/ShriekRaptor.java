@@ -18,6 +18,7 @@ public final class ShriekRaptor extends CardImpl {
 
     public ShriekRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BIRD);
 
         this.power = new MageInt(2);

@@ -18,7 +18,7 @@ import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -61,7 +61,7 @@ public final class IsarethTheAwakener extends CardImpl {
 class IsarethTheAwakenerCreateReflexiveTriggerEffect extends OneShotEffect {
 
     private static final String rule = "return target creature card "
-            + "with converted mana cost X from your graveyard to the battlefield "
+            + "with mana value X from your graveyard to the battlefield "
             + "with a corpse counter on it. If that creature would leave the battlefield, "
             + "exile it instead of putting it anywhere else.";
 
@@ -103,10 +103,10 @@ class IsarethTheAwakenerCreateReflexiveTriggerEffect extends OneShotEffect {
 
     private static FilterCard makeFilter(int xValue) {
         FilterCard filter = new FilterCreatureCard(
-                "creature card with converted mana cost " +
+                "creature card with mana value " +
                         xValue + " or less from your graveyard"
         );
-        filter.add(new ConvertedManaCostPredicate(
+        filter.add(new ManaValuePredicate(
                 ComparisonType.EQUAL_TO, xValue
         ));
         return filter;

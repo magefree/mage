@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
@@ -50,7 +49,7 @@ public final class Manaplasm extends CardImpl {
 class ManaplasmAbility extends TriggeredAbilityImpl {
 
     public ManaplasmAbility() {
-        super(Zone.BATTLEFIELD, new InfoEffect("{this} gets +X/+X until end of turn, where X is that spell's converted mana cost"), false);
+        super(Zone.BATTLEFIELD, new InfoEffect("{this} gets +X/+X until end of turn, where X is that spell's mana value"), false);
     }
 
 
@@ -69,7 +68,7 @@ class ManaplasmAbility extends TriggeredAbilityImpl {
         Spell spell = game.getStack().getSpell(event.getTargetId());   
         if (spell != null && spell.isControlledBy(controllerId)) {
             this.getEffects().remove(0);
-            int x = spell.getConvertedManaCost();
+            int x = spell.getManaValue();
             this.addEffect(new BoostSourceEffect(x,x, Duration.EndOfTurn));
             this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
             return true;
@@ -79,7 +78,7 @@ class ManaplasmAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast a spell, {this} gets +X/+X until end of turn, where X is that spell's converted mana cost";
+        return "Whenever you cast a spell, {this} gets +X/+X until end of turn, where X is that spell's mana value";
     }
 
     @Override

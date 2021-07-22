@@ -51,7 +51,7 @@ public class AshiokNightmareWaeverTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Exile the top three cards of target opponent's library.", playerB);
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-X: Put a creature card with converted mana cost X exiled with {this} onto the battlefield under your control. That creature is a Nightmare in addition to its other types.");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-X: Put a creature card with mana value X exiled with {this} onto the battlefield under your control. That creature is a Nightmare in addition to its other types.");
 
         setChoice(playerA, "X=5");
         addTarget(playerA, "Prophet of Kruphix");

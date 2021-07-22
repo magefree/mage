@@ -24,7 +24,7 @@ import mage.target.TargetPermanent;
  */
 public final class AetherMeltdown extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature or vehicle");
+    private static final FilterPermanent filter = new FilterPermanent("creature or Vehicle");
 
     static {
         filter.add(Predicates.or(CardType.CREATURE.getPredicate(), SubType.VEHICLE.getPredicate()));
@@ -47,7 +47,6 @@ public final class AetherMeltdown extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(2)));
         // Enchanted permanent gets -4/-0.
         Effect effect = new BoostEnchantedEffect(-4, 0, Duration.WhileOnBattlefield);
-        effect.setText("Enchanted permanent gets -4/-0");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

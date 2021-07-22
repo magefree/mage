@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -17,10 +17,10 @@ import mage.target.TargetSpell;
  */
 public final class Thoughtbind extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or less");
+    private static final FilterSpell filter = new FilterSpell("spell with mana value 4 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public Thoughtbind(UUID ownerId, CardSetInfo setInfo) {

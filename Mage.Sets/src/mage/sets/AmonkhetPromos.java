@@ -21,11 +21,10 @@ public class AmonkhetPromos extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Angel of Sanctions", "1s", Rarity.MYTHIC, mage.cards.a.AngelOfSanctions.class));
-        cards.add(new SetCardInfo("Anointed Procession", "2p", Rarity.RARE, mage.cards.a.AnointedProcession.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Anointed Procession", "2s", Rarity.RARE, mage.cards.a.AnointedProcession.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Anointed Procession", "2s", Rarity.RARE, mage.cards.a.AnointedProcession.class));
         cards.add(new SetCardInfo("Approach of the Second Sun", "4s", Rarity.RARE, mage.cards.a.ApproachOfTheSecondSun.class));
-        cards.add(new SetCardInfo("Archfiend of Ifnir", 78, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archfiend of Ifnir", "78s", Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Archfiend of Ifnir", 78, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("As Foretold", "42s", Rarity.MYTHIC, mage.cards.a.AsForetold.class));
         cards.add(new SetCardInfo("Aven Mindcensor", "5p", Rarity.RARE, mage.cards.a.AvenMindcensor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aven Mindcensor", "5s", Rarity.RARE, mage.cards.a.AvenMindcensor.class, NON_FULL_USE_VARIOUS));
@@ -36,7 +35,8 @@ public class AmonkhetPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Champion of Rhonas", "159s", Rarity.RARE, mage.cards.c.ChampionOfRhonas.class));
         cards.add(new SetCardInfo("Channeler Initiate", "160s", Rarity.RARE, mage.cards.c.ChannelerInitiate.class));
         cards.add(new SetCardInfo("Combat Celebrant", "125s", Rarity.MYTHIC, mage.cards.c.CombatCelebrant.class));
-        cards.add(new SetCardInfo("Commit // Memory", "211s", Rarity.RARE, mage.cards.c.CommitMemory.class));
+        cards.add(new SetCardInfo("Commit // Memory", "211p", Rarity.RARE, mage.cards.c.CommitMemory.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Commit // Memory", "211s", Rarity.RARE, mage.cards.c.CommitMemory.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cruel Reality", "84s", Rarity.MYTHIC, mage.cards.c.CruelReality.class));
         cards.add(new SetCardInfo("Curator of Mysteries", "49s", Rarity.RARE, mage.cards.c.CuratorOfMysteries.class));
         cards.add(new SetCardInfo("Cut // Ribbons", "223s", Rarity.RARE, mage.cards.c.CutRibbons.class));
@@ -50,12 +50,13 @@ public class AmonkhetPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Gideon's Intervention", "15s", Rarity.RARE, mage.cards.g.GideonsIntervention.class));
         cards.add(new SetCardInfo("Glorious End", "133s", Rarity.MYTHIC, mage.cards.g.GloriousEnd.class));
         cards.add(new SetCardInfo("Glory-Bound Initiate", "16s", Rarity.RARE, mage.cards.g.GloryBoundInitiate.class));
-        cards.add(new SetCardInfo("Glorybringer", 134, Rarity.RARE, mage.cards.g.Glorybringer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glorybringer", "134s", Rarity.RARE, mage.cards.g.Glorybringer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Glorybringer", 134, Rarity.RARE, mage.cards.g.Glorybringer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glyph Keeper", "55s", Rarity.RARE, mage.cards.g.GlyphKeeper.class));
         cards.add(new SetCardInfo("Hapatra, Vizier of Poisons", "199s", Rarity.RARE, mage.cards.h.HapatraVizierOfPoisons.class));
         cards.add(new SetCardInfo("Harsh Mentor", "135s", Rarity.RARE, mage.cards.h.HarshMentor.class));
-        cards.add(new SetCardInfo("Harvest Season", "170s", Rarity.RARE, mage.cards.h.HarvestSeason.class));
+        cards.add(new SetCardInfo("Harvest Season", "170p", Rarity.RARE, mage.cards.h.HarvestSeason.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Harvest Season", "170s", Rarity.RARE, mage.cards.h.HarvestSeason.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hazoret the Fervent", "136s", Rarity.MYTHIC, mage.cards.h.HazoretTheFervent.class));
         cards.add(new SetCardInfo("Hazoret's Favor", "137s", Rarity.RARE, mage.cards.h.HazoretsFavor.class));
         cards.add(new SetCardInfo("Heart-Piercer Manticore", "138s", Rarity.RARE, mage.cards.h.HeartPiercerManticore.class));
@@ -72,8 +73,8 @@ public class AmonkhetPromos extends ExpansionSet {
         cards.add(new SetCardInfo("New Perspectives", "63s", Rarity.RARE, mage.cards.n.NewPerspectives.class));
         cards.add(new SetCardInfo("Nissa, Steward of Elements", "204s", Rarity.MYTHIC, mage.cards.n.NissaStewardOfElements.class));
         cards.add(new SetCardInfo("Oketra the True", "21s", Rarity.MYTHIC, mage.cards.o.OketraTheTrue.class));
-        cards.add(new SetCardInfo("Oracle's Vault", 234, Rarity.RARE, mage.cards.o.OraclesVault.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Oracle's Vault", "234s", Rarity.RARE, mage.cards.o.OraclesVault.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oracle's Vault", 234, Rarity.RARE, mage.cards.o.OraclesVault.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plague Belcher", "104s", Rarity.RARE, mage.cards.p.PlagueBelcher.class));
         cards.add(new SetCardInfo("Prepare // Fight", "220s", Rarity.RARE, mage.cards.p.PrepareFight.class));
         cards.add(new SetCardInfo("Prowling Serpopard", "180s", Rarity.RARE, mage.cards.p.ProwlingSerpopard.class));
@@ -95,5 +96,5 @@ public class AmonkhetPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Trueheart Duelist", 35, Rarity.UNCOMMON, mage.cards.t.TrueheartDuelist.class));
         cards.add(new SetCardInfo("Vizier of Many Faces", "74s", Rarity.RARE, mage.cards.v.VizierOfManyFaces.class));
         cards.add(new SetCardInfo("Vizier of the Menagerie", "192s", Rarity.MYTHIC, mage.cards.v.VizierOfTheMenagerie.class));
-     }
+    }
 }

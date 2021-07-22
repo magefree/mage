@@ -3,7 +3,7 @@ package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
+import mage.abilities.dynamicvalue.common.HighestManaValueCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +39,7 @@ class UginsInsightEffect extends OneShotEffect {
 
     public UginsInsightEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Scry X, where X is the highest converted mana cost among permanents you control, then draw three cards";
+        this.staticText = "Scry X, where X is the highest mana value among permanents you control, then draw three cards";
     }
 
     public UginsInsightEffect(final UginsInsightEffect effect) {
@@ -55,7 +55,7 @@ class UginsInsightEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int highCMC = new HighestConvertedManaCostValue().calculate(game, source, this);
+            int highCMC = new HighestManaValueCount().calculate(game, source, this);
             if (highCMC > 0) {
                 controller.scry(highCMC, source, game);
             }

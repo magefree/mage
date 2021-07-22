@@ -44,7 +44,7 @@ public final class ChamberSentry extends CardImpl {
                 "with a +1/+1 counter on it for each color of mana spent to cast it"));
 
         // {X}, {T}, Remove X +1/+1 counters from Chamber Sentry: It deals X damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.instance)
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR)
                 .setText("It deals X damage to any target"),
                 new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());

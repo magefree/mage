@@ -33,9 +33,8 @@ public final class MtgJsonService {
         return json.prepareIndex();
     }
 
-    private static Map<String, MtgJsonSet> loadAllSets() throws IOException {
-        AllPrintingsModel json = readFromZip("AllPrintings.json.zip", AllPrintingsModel.class);
-        return json.data;
+    private static AllPrintingsModel loadAllSets() throws IOException {
+        return readFromZip("AllPrintings.json.zip", AllPrintingsModel.class);
     }
 
     private static <T> T readFromZip(String filename, Class<T> clazz) throws IOException {
@@ -64,6 +63,10 @@ public final class MtgJsonService {
 
     public static Map<String, MtgJsonSet> sets() {
         return SetHolder.sets;
+    }
+
+    public static MtgJsonMetadata meta() {
+        return SetHolder.meta;
     }
 
     public static MtgJsonCard card(String name) {
@@ -178,6 +181,7 @@ public final class MtgJsonService {
 
     private static final class AllPrintingsModel {
         public HashMap<String, MtgJsonSet> data;
+        public MtgJsonMetadata meta;
     }
 
     private static final class CardHolder {
@@ -218,10 +222,14 @@ public final class MtgJsonService {
 
     private static final class SetHolder {
         private static final Map<String, MtgJsonSet> sets;
+        private static final MtgJsonMetadata meta;
 
         static {
             try {
-                sets = loadAllSets();
+                AllPrintingsModel model = loadAllSets();
+                sets = model.data;
+                meta = model.meta;
+                System.out.println("MTGJSON version " + meta.version + ", release date " + meta.date);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -22,6 +22,7 @@ public final class PhyrexianSoulgorger extends CardImpl {
     public PhyrexianSoulgorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         addSuperType(SuperType.SNOW);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

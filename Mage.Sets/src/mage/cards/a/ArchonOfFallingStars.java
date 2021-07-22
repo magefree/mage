@@ -33,7 +33,7 @@ public final class ArchonOfFallingStars extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Archon of Falling Stars dies, you may return target enchantment card from your graveyard to the battlefield.
-        Ability ability = new DiesSourceTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false), true);
+        Ability ability = new DiesSourceTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

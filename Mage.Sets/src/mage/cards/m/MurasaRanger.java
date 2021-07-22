@@ -23,6 +23,7 @@ public final class MurasaRanger extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.RANGER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

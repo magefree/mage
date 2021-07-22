@@ -129,7 +129,7 @@ class QuicksilverFountainEffect2 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent land : game.getBattlefield().getAllActivePermanents(CardType.LAND)) {
+        for (Permanent land : game.getBattlefield().getAllActivePermanents(CardType.LAND, game)) {
             land.removeCounters(CounterType.FLOOD.createInstance(land.getCounters(game).getCount(CounterType.FLOOD)), source, game);
         }
         return true;
@@ -153,7 +153,7 @@ class AllLandsAreSubtypeCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         FilterLandPermanent filterLand = new FilterLandPermanent();
         filterLand.add(subtype.getPredicate());
-        int landCount = game.getBattlefield().getAllActivePermanents(CardType.LAND).size();
+        int landCount = game.getBattlefield().getAllActivePermanents(CardType.LAND, game).size();
         return game.getBattlefield().getAllActivePermanents(filterLand, game).size() == landCount;
     }
 

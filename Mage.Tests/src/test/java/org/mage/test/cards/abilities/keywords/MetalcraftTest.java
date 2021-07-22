@@ -31,7 +31,7 @@ public class MetalcraftTest extends CardTestPlayerBase {
         // {1}, {T}: Target Blinkmoth creature gets +1/+1 until end of turn.        
         addCard(Zone.BATTLEFIELD, playerA, "Blinkmoth Nexus", 1); 
         
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: Until end of turn {this} becomes ");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}:");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

@@ -160,7 +160,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                         if (combatGroup.getDefendingPlayerId().equals(playerId)) {
                             for (UUID attackerId : combatGroup.getAttackers()) {
                                 Permanent permanent = game.getPermanent(attackerId);
-                                if (permanent != null && permanent.isCreature()) {
+                                if (permanent != null && permanent.isCreature(game)) {
                                     available.add(permanent);
                                 }
                             }

@@ -13,20 +13,15 @@ import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.text.TextPart;
 import mage.cards.*;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.filter.FilterMana;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.MageObjectAttribute;
 import mage.game.events.CopiedStackObjectEvent;
-import mage.game.events.CopyStackObjectEvent;
-import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -36,16 +31,15 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.SubTypes;
-import mage.util.functions.SpellCopyApplier;
+import mage.util.functions.StackObjectCopyApplier;
 import org.apache.log4j.Logger;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class Spell extends StackObjImpl implements Card {
+public class Spell extends StackObjectImpl implements Card {
 
     private static final Logger logger = Logger.getLogger(Spell.class);
 
@@ -207,7 +201,7 @@ public class Spell extends StackObjImpl implements Card {
                 turnController.controlPlayersTurn(game, controller.getId());
             }
         }
-        if (this.isInstant() || this.isSorcery()) {
+        if (this.isInstantOrSorcery(game)) {
             int index = 0;
             result = false;
             boolean legalParts = false;
@@ -251,31 +245,32 @@ public class Spell extends StackObjImpl implements Card {
             }
             counter(null, /*this.getSpellAbility()*/ game);
             return false;
-        } else if (this.isEnchantment() && this.hasSubtype(SubType.AURA, game)) {
+        } else if (this.isEnchantment(game) && this.hasSubtype(SubType.AURA, game)) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 boolean bestow = SpellAbilityCastMode.BESTOW.equals(ability.getSpellAbilityCastMode());
                 if (bestow) {
                     // before put to play:
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
-                    card.getCardType().remove(CardType.CREATURE);
-                    if (!card.hasSubtype(SubType.AURA, game)) {
-                        card.addSubType(game, SubType.AURA);
-                    }
+                    card.removeCardType(CardType.CREATURE);
+                    card.addSubType(game, SubType.AURA);
                 }
-                UUID permId = null;
-                boolean flag = false;
-                if (!isCopy()) {
-                    permId = card.getId();
-                    flag = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
-                } else {
+                UUID permId;
+                boolean flag;
+                if (isCopy()) {
                     EmptyToken token = new EmptyToken();
                     CardUtil.copyTo(token).from(card, game, this);
                     // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
                     if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false)) {
                         permId = token.getLastAddedToken();
                         flag = true;
+                    } else {
+                        permId = null;
+                        flag = false;
                     }
+                } else {
+                    permId = card.getId();
+                    flag = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
                 }
                 if (flag) {
                     if (bestow) {
@@ -287,7 +282,7 @@ public class Spell extends StackObjImpl implements Card {
                             // restore removed stats (see "before put to play" above)
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
                             card.addCardType(CardType.CREATURE);
-                            card.removeSubType(game, SubType.AURA);
+                            card.getSubtype().remove(SubType.AURA);
                         }
                     }
                     if (isCopy()) {
@@ -307,7 +302,7 @@ public class Spell extends StackObjImpl implements Card {
                     return ability.resolve(game);
                 }
                 if (bestow) {
-                    card.addCardType(CardType.CREATURE);
+                    card.addCardType(game, CardType.CREATURE);
                 }
                 return false;
             }
@@ -316,7 +311,7 @@ public class Spell extends StackObjImpl implements Card {
                 if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent instanceof PermanentCard) {
-                        ((PermanentCard) permanent).getCard().addCardType(CardType.CREATURE);
+                        ((PermanentCard) permanent).getCard().addCardType(game, CardType.CREATURE);
                         ((PermanentCard) permanent).getCard().removeSubType(game, SubType.AURA);
                         return true;
                     }
@@ -489,11 +484,7 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public String getLogName() {
         if (faceDown) {
-            if (this.isCreature()) {
-                return "face down creature spell";
-            } else {
-                return "face down spell";
-            }
+            return "face down spell";
         }
         return GameLog.getColoredObjectIdName(card);
     }
@@ -513,19 +504,19 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public ArrayList<CardType> getCardType() {
+    public List<CardType> getCardType(Game game) {
         if (faceDown) {
-            ArrayList<CardType> cardTypes = new ArrayList<>();
+            List<CardType> cardTypes = new ArrayList<>();
             cardTypes.add(CardType.CREATURE);
             return cardTypes;
         }
         if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
-            ArrayList<CardType> cardTypes = new ArrayList<>();
-            cardTypes.addAll(card.getCardType());
+            List<CardType> cardTypes = new ArrayList<>();
+            cardTypes.addAll(card.getCardType(game));
             cardTypes.remove(CardType.CREATURE);
             return cardTypes;
         }
-        return card.getCardType();
+        return card.getCardType(game);
     }
 
     @Override
@@ -628,7 +619,7 @@ public class Spell extends StackObjImpl implements Card {
      * @return
      */
     @Override
-    public int getConvertedManaCost() {
+    public int getManaValue() {
         int cmc = 0;
         if (faceDown) {
             return 0;
@@ -636,7 +627,7 @@ public class Spell extends StackObjImpl implements Card {
         for (SpellAbility spellAbility : spellAbilities) {
             cmc += spellAbility.getConvertedXManaCost(getCard());
         }
-        cmc += getCard().getManaCost().convertedManaCost();
+        cmc += getCard().getManaCost().manaValue();
         return cmc;
     }
 
@@ -1063,128 +1054,19 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
-        createCopyOnStack(game, source, newControllerId, chooseNewTargets, 1);
-    }
-
-    @Override
-    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
-        createCopyOnStack(game, source, newControllerId, chooseNewTargets, amount, null);
-    }
-
-    private static final class PredicateIterator implements Iterator<MageObjectReferencePredicate> {
-        private final SpellCopyApplier applier;
-        private final Player player;
-        private final int amount;
-        private final Game game;
-        private Map<String, MageObjectReferencePredicate> predicateMap = null;
-        private int anyCount = 0;
-        private int setCount = 0;
-        private Iterator<MageObjectReferencePredicate> iterator = null;
-        private Choice choice = null;
-
-        private PredicateIterator(Game game, UUID newControllerId, int amount, SpellCopyApplier applier) {
-            this.applier = applier;
-            this.player = game.getPlayer(newControllerId);
-            this.amount = amount;
-            this.game = game;
+    public void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate predicate, Game game, Ability source, boolean chooseNewTargets) {
+        Spell spellCopy = this.copySpell(game, source, newControllerId);
+        if (applier != null) {
+            applier.modifySpell(spellCopy, game);
         }
-
-        @Override
-        public boolean hasNext() {
-            return true;
+        spellCopy.setZone(Zone.STACK, game);  // required for targeting ex: Nivmagus Elemental
+        game.getStack().push(spellCopy);
+        if (predicate != null) {
+            spellCopy.chooseNewTargets(game, newControllerId, true, false, predicate);
+        } else if (chooseNewTargets || applier != null) { // if applier is non-null but predicate is null then it's extra
+            spellCopy.chooseNewTargets(game, newControllerId);
         }
-
-        private void makeMap() {
-            if (predicateMap != null) {
-                return;
-            }
-            predicateMap = new HashMap<>();
-
-            for (int i = 0; i < amount; i++) {
-                MageObjectReferencePredicate predicate = applier.getNextPredicate();
-                if (predicate == null) {
-                    anyCount++;
-                    String message = "Any target";
-                    if (anyCount > 1) {
-                        message += " (" + anyCount + ")";
-                    }
-                    predicateMap.put(message, predicate);
-                    continue;
-                }
-                setCount++;
-                predicateMap.put(predicate.getName(game), predicate);
-            }
-            if ((setCount == 1 && anyCount == 0) || setCount == 0) {
-                iterator = predicateMap.values().stream().collect(Collectors.toList()).iterator();
-            }
-        }
-
-        private void makeChoice() {
-            if (choice != null) {
-                return;
-            }
-            choice = new ChoiceImpl(false);
-            choice.setMessage("Choose the order of copies to go on the stack");
-            choice.setSubMessage("Press cancel to put the rest in any order");
-            choice.setChoices(new HashSet<>(predicateMap.keySet()));
-        }
-
-        @Override
-        public MageObjectReferencePredicate next() {
-            if (player == null || applier == null) {
-                return null;
-            }
-            makeMap();
-            if (iterator != null) {
-                return iterator.hasNext() ? iterator.next() : null;
-            }
-            makeChoice();
-            if (choice.getChoices().size() < 2) {
-                iterator = choice.getChoices().stream().map(predicateMap::get).iterator();
-                return next();
-            }
-            choice.clearChoice();
-            player.choose(Outcome.AIDontUseIt, choice, game);
-            String chosen = choice.getChoice();
-            if (chosen == null) {
-                iterator = choice.getChoices().stream().map(predicateMap::get).iterator();
-                return next();
-            }
-            choice.getChoices().remove(chosen);
-            return predicateMap.get(chosen);
-        }
-    }
-
-    @Override
-    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount, SpellCopyApplier applier) {
-        GameEvent gameEvent = new CopyStackObjectEvent(source, this, newControllerId, amount);
-        if (game.replaceEvent(gameEvent)) {
-            return;
-        }
-        Iterator<MageObjectReferencePredicate> predicates = new PredicateIterator(game, newControllerId, gameEvent.getAmount(), applier);
-        for (int i = 0; i < gameEvent.getAmount(); i++) {
-            Spell spellCopy = this.copySpell(game, source, newControllerId);
-            if (applier != null) {
-                applier.modifySpell(spellCopy, game);
-            }
-            spellCopy.setZone(Zone.STACK, game);  // required for targeting ex: Nivmagus Elemental
-            game.getStack().push(spellCopy);
-            Predicate predicate = predicates.next();
-            if (predicate != null) {
-                spellCopy.chooseNewTargets(game, newControllerId, true, false, predicate);
-            } else if (chooseNewTargets || applier != null) { // if applier is non-null but predicate is null then it's extra
-                spellCopy.chooseNewTargets(game, newControllerId);
-            }
-            game.fireEvent(new CopiedStackObjectEvent(this, spellCopy, newControllerId));
-        }
-        Player player = game.getPlayer(newControllerId);
-        if (player != null) {
-            game.informPlayers(
-                    player.getName() + " created " + CardUtil.numberToText(gameEvent.getAmount(), "a")
-                            + " cop" + (gameEvent.getAmount() == 1 ? "y" : "ies") + " of " + getIdName()
-            );
-        }
+        game.fireEvent(new CopiedStackObjectEvent(this, spellCopy, newControllerId));
     }
 
     @Override
@@ -1241,5 +1123,20 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public String toString() {
         return ability.toString();
+    }
+
+    @Override
+    public List<CardType> getCardTypeForDeckbuilding() {
+        throw new UnsupportedOperationException("Must call for cards only.");
+    }
+
+    @Override
+    public boolean hasCardTypeForDeckbuilding(CardType cardType) {
+        return false;
+    }
+
+    @Override
+    public boolean hasSubTypeForDeckbuilding(SubType subType) {
+        return false;
     }
 }

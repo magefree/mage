@@ -65,8 +65,8 @@ class MultanisPresenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a spell you've cast is countered, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a spell you've cast is countered, " ;
     }
 }
 

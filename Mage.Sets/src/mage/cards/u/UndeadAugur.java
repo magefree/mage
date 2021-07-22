@@ -36,7 +36,7 @@ public final class UndeadAugur extends CardImpl {
 
         // Whenever Undead Augur or another Zombie you control dies, you draw a card and you lose 1 life.
         Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(
-                new DrawCardSourceControllerEffect(1).concatBy("you"), false, filter
+                new DrawCardSourceControllerEffect(1).setText("you draw a card"), false, filter
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);

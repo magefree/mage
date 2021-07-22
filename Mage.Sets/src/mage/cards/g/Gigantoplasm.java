@@ -22,7 +22,6 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.util.functions.CopyApplier;
 
 /**
@@ -57,7 +56,7 @@ class GigantoplasmCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-        DynamicValue variableMana = ManacostVariableValue.instance;
+        DynamicValue variableMana = ManacostVariableValue.REGULAR;
         Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield, SubLayer.SetPT_7b);
         effect.setText("This creature has base power and toughness X/X");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));

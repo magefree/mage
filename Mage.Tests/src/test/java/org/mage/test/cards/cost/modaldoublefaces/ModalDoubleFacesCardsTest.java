@@ -256,8 +256,8 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
 
         // stats in hand - normal
         Card card = getHandCards(playerA).stream().filter(c -> CardUtil.haveSameNames(c, "Akoum Warrior", currentGame)).findFirst().get();
-        Assert.assertFalse("must be non land", card.isLand());
-        Assert.assertTrue("must be creature", card.isCreature());
+        Assert.assertFalse("must be non land", card.isLand(currentGame));
+        Assert.assertTrue("must be creature", card.isCreature(currentGame));
         Assert.assertTrue("must be minotaur", card.hasSubtype(SubType.MINOTAUR, currentGame));
         Assert.assertEquals("power", 4, card.getPower().getValue());
         Assert.assertEquals("toughness", 5, card.getToughness().getValue());
@@ -265,7 +265,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         // stats in hand - mdf
         card = getHandCards(playerA).stream().filter(c -> CardUtil.haveSameNames(c, "Halvar, God of Battle", currentGame)).findFirst().get();
         Assert.assertTrue("must be legendary", card.isLegendary());
-        Assert.assertTrue("must be creature", card.isCreature());
+        Assert.assertTrue("must be creature", card.isCreature(currentGame));
         Assert.assertTrue("must be god", card.hasSubtype(SubType.GOD, currentGame));
 
         // stats in hand - mdf - color identity must be from both sides

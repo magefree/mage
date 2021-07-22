@@ -98,12 +98,12 @@ class ZagrasThiefOfHeartbeatsTriggeredAbility extends TriggeredAbilityImpl {
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (permanent == null
-                || !permanent.isCreature()
+                || !permanent.isCreature(game)
                 || !permanent.isControlledBy(getControllerId())) {
             return false;
         }
         Permanent damaged = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (damaged == null || !permanent.isPlaneswalker()) {
+        if (damaged == null || !permanent.isPlaneswalker(game)) {
             return false;
         }
         this.getEffects().clear();

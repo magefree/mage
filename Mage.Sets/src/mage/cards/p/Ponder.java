@@ -20,7 +20,7 @@ public final class Ponder extends CardImpl {
         // Look at the top three cards of your library, then put them back in any order. You may shuffle your library.
         this.getSpellAbility().addEffect(new LookLibraryControllerEffect(3, true, true));
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Ponder(final Ponder card) {

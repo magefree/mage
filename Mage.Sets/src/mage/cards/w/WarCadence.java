@@ -44,7 +44,7 @@ public final class WarCadence extends CardImpl {
 
 class WarCadenceReplacementEffect extends ReplacementEffectImpl {
 
-    DynamicValue xCosts = ManacostVariableValue.instance;
+    DynamicValue xCosts = ManacostVariableValue.REGULAR;
 
     WarCadenceReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);

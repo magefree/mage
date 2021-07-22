@@ -51,7 +51,7 @@ class CommandTheDreadhordeEffect extends OneShotEffect {
     CommandTheDreadhordeEffect() {
         super(Outcome.Benefit);
         staticText = "Choose any number of target creature and/or planeswalker cards in graveyards. " +
-                "{this} deals damage to you equal to the total converted mana cost of those cards. " +
+                "{this} deals damage to you equal to the total mana value of those cards. " +
                 "Put them onto the battlefield under your control.";
     }
 
@@ -71,7 +71,7 @@ class CommandTheDreadhordeEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(source.getTargets().get(0).getTargets());
-        int damage = cards.getCards(game).stream().mapToInt(Card::getConvertedManaCost).sum();
+        int damage = cards.getCards(game).stream().mapToInt(Card::getManaValue).sum();
         player.damage(damage, source.getSourceId(), source, game);
         return player.moveCards(cards, Zone.BATTLEFIELD, source, game);
     }

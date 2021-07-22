@@ -50,7 +50,7 @@ class UrzasHotTubEffect extends OneShotEffect {
 
     public UrzasHotTubEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Search your library for a card that shares a complete word in its name with the discarded card, reveal it, put it into your hand, then shuffle your library";
+        this.staticText = "Search your library for a card that shares a complete word in its name with the discarded card, reveal it, put it into your hand, then shuffle";
     }
 
     public UrzasHotTubEffect(final UrzasHotTubEffect effect) {

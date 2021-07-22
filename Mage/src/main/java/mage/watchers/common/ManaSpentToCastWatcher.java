@@ -1,6 +1,7 @@
 package mage.watchers.common;
 
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -9,49 +10,62 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
  * Watcher saves the mana that was spent to cast a spell
+ * automatically added in each game
  *
  * @author LevelX2
  */
 public class ManaSpentToCastWatcher extends Watcher {
 
-    private Mana payment = null;
+    private final Map<UUID, Mana> manaMap = new HashMap<>();
+    private final Map<UUID, Integer> xValueMap = new HashMap<>();
 
     public ManaSpentToCastWatcher() {
-        super(WatcherScope.CARD);
+        super(WatcherScope.GAME);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
         // There was a check for the from zone being the hand, but that should not matter
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell != null && this.getSourceId().equals(spell.getSourceId())) {
-                payment = spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay();
-            }
-        }
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && this.getSourceId().equals(event.getSourceId())) {
-            if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
-                payment = null;
-            }
+        switch (event.getType()) {
+            case SPELL_CAST:
+                Spell spell = (Spell) game.getObject(event.getTargetId());
+                if (spell != null) {
+                    manaMap.put(spell.getSourceId(), spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay());
+                    xValueMap.put(spell.getSourceId(), spell.getSpellAbility().getManaCostsToPay().getX());
+                }
+                return;
+            case ZONE_CHANGE:
+                if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+                    manaMap.remove(event.getSourceId());
+                    xValueMap.remove(event.getSourceId());
+                }
         }
     }
 
-    public Mana getAndResetLastPayment() {
-        Mana returnPayment = null;
-        if (payment != null) {
-            returnPayment = payment.copy();
-        }
-        return returnPayment;
+    public Mana getAndResetLastPayment(UUID sourceId) {
+        return manaMap.getOrDefault(sourceId, null);
+    }
 
+    public int getAndResetLastXValue(Ability source) {
+        if (xValueMap.containsKey(source.getSourceId())) {
+            // cast normal way
+            return xValueMap.get(source.getSourceId());
+        } else {
+            // put to battlefield without cast (example: copied spell must keep announced X)
+            return source.getManaCostsToPay().getX();
+        }
     }
 
     @Override
     public void reset() {
         super.reset();
-        payment = null;
+        manaMap.clear();
+        xValueMap.clear();
     }
-
 }

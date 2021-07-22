@@ -71,7 +71,7 @@ class DoubleVisionCopyTriggeredAbility extends SpellCastControllerTriggeredAbili
             if (watcher != null) {
                 List<Spell> eligibleSpells = watcher.getSpellsCastThisTurn(this.getControllerId())
                         .stream()
-                        .filter(s -> s.isInstant() || s.isSorcery())
+                        .filter(spell1 -> spell1.isInstantOrSorcery(game))
                         .collect(Collectors.toList());
                 return eligibleSpells.size() == 1 && eligibleSpells.get(0).getId().equals(spell.getId());
             }

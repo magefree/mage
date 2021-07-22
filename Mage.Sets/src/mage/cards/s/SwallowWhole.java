@@ -13,7 +13,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,8 +33,8 @@ public final class SwallowWhole extends CardImpl {
             = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
-        filter2.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.UNTAPPED);
+        filter2.add(TappedPredicate.TAPPED);
     }
 
     public SwallowWhole(UUID ownerId, CardSetInfo setInfo) {

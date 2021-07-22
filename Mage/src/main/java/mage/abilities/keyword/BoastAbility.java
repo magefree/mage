@@ -54,7 +54,7 @@ public class BoastAbility extends ActivatedAbilityImpl {
             return 1;
         }
         Permanent permanent = game.getPermanent(getSourceId());
-        if (permanent != null && !permanent.isCreature()) {
+        if (permanent != null && !permanent.isCreature(game)) {
             return 1;
         }
         return game.getBattlefield()
@@ -69,7 +69,7 @@ public class BoastAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Boast &mdash; " + super.getRule() + " <i>(Activate this ability only if this creature attacked this turn and only once each turn.)</i>";
+        return "Boast &mdash; " + super.getRule() + " <i>(Activate only if this creature attacked this turn and only once each turn.)</i>";
     }
 
     private static final class BoastTwiceAbility extends SimpleStaticAbility {

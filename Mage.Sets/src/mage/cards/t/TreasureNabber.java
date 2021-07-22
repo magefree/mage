@@ -68,7 +68,7 @@ class TreasureNabberAbility extends TriggeredAbilityImpl {
             return false;
         }
         Permanent permanent = ((TappedForManaEvent) event).getPermanent();
-        if (permanent == null || !permanent.isArtifact()) {
+        if (permanent == null || !permanent.isArtifact(game)) {
             return false;
         }
         getEffects().setTargetPointer(new FixedTarget(permanent, game));

@@ -56,7 +56,7 @@ public class DealsDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.DAMAGED_PERMANENT) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent == null
-                    || !permanent.isPlaneswalker()
+                    || !permanent.isPlaneswalker(game)
                     || !orPlaneswalker) {
                 return false;
             }
@@ -69,8 +69,8 @@ public class DealsDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} deals damage to a player" + (orPlaneswalker ? " or planeswalker" : "") + ", " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} deals damage to a player" + (orPlaneswalker ? " or planeswalker" : "") + ", " ;
     }
 
 }

@@ -10,7 +10,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,7 +48,7 @@ class EpicExperimentEffect extends OneShotEffect {
     public EpicExperimentEffect() {
         super(Outcome.PlayForFree);
         staticText = "Exile the top X cards of your library. For each instant and "
-                + "sorcery card with converted mana cost X or less among them, "
+                + "sorcery card with mana value X or less among them, "
                 + "you may cast that card without paying its mana cost. Then put all "
                 + "cards exiled this way that weren't cast into your graveyard";
     }
@@ -69,9 +69,9 @@ class EpicExperimentEffect extends OneShotEffect {
             // cast the possible cards without paying the mana
             ExileZone epicExperimentExileZone = game.getExile().getExileZone(source.getSourceId());
             FilterCard filter = new FilterInstantOrSorceryCard();
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN,
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN,
                     source.getManaCostsToPay().getX() + 1));
-            filter.setMessage("instant and sorcery cards with converted mana cost "
+            filter.setMessage("instant and sorcery cards with mana value "
                     + source.getManaCostsToPay().getX() + " or less");
             Cards cardsToCast = new CardsImpl();
             if (epicExperimentExileZone == null) {

@@ -60,7 +60,7 @@ class RighteousFuryEffect extends OneShotEffect {
         if (controller != null) {
             int destroyedCreature = 0;
             FilterCreaturePermanent filter = new FilterCreaturePermanent("all tapped creatures");
-            filter.add(TappedPredicate.instance);
+            filter.add(TappedPredicate.TAPPED);
             for(Permanent creature: game.getState().getBattlefield().getActivePermanents(filter, controller.getId(), game)) {
                 if (creature.destroy(source, game, false)) {
                     destroyedCreature++;

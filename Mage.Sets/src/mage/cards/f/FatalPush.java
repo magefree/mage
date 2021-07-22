@@ -45,7 +45,7 @@ class FatalPushEffect extends OneShotEffect {
 
     FatalPushEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target creature if it has converted mana cost 2 or less.<br><i>Revolt</i> &mdash; Destroy that creature if it has converted mana cost 4 or less instead if a permanent you controlled left the battlefield this turn";
+        this.staticText = "Destroy target creature if it has mana value 2 or less.<br><i>Revolt</i> &mdash; Destroy that creature if it has mana value 4 or less instead if a permanent you controlled left the battlefield this turn";
     }
 
     FatalPushEffect(final FatalPushEffect effect) {
@@ -63,7 +63,7 @@ class FatalPushEffect extends OneShotEffect {
         if (controller != null) {
             Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (targetCreature != null) {
-                int cmc = targetCreature.getConvertedManaCost();
+                int cmc = targetCreature.getManaValue();
                 if (cmc <= 2
                         || (RevoltCondition.instance.apply(game, source) && cmc <= 4)) {
                     targetCreature.destroy(source, game, false);

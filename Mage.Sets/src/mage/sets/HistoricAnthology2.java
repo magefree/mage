@@ -6,6 +6,7 @@ import mage.constants.SetType;
 
 /**
  * https://scryfall.com/sets/ha2
+ *
  * @author mikalinn777
  */
 public final class HistoricAnthology2 extends ExpansionSet {
@@ -20,6 +21,7 @@ public final class HistoricAnthology2 extends ExpansionSet {
         super("Historic Anthology 2", "HA2", ExpansionSet.buildDate(2020, 3, 12), SetType.MAGIC_ARENA);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+
         cards.add(new SetCardInfo("Ancestral Mask", 13, Rarity.COMMON, mage.cards.a.AncestralMask.class));
         cards.add(new SetCardInfo("Barren Moor", 19, Rarity.COMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Bojuka Bog", 20, Rarity.COMMON, mage.cards.b.BojukaBog.class));
@@ -45,5 +47,5 @@ public final class HistoricAnthology2 extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Thicket", 25, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Virulent Plague", 9, Rarity.UNCOMMON, mage.cards.v.VirulentPlague.class));
         cards.add(new SetCardInfo("Waste Not", 10, Rarity.RARE, mage.cards.w.WasteNot.class));
-     }
+    }
 }

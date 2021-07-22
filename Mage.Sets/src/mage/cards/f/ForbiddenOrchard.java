@@ -69,8 +69,8 @@ class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you tap {this} for mana, create a 1/1 colorless Spirit creature token under target opponent's control.";
+    public String getTriggerPhrase() {
+        return "Whenever you tap {this} for mana, " ;
     }
 
     @Override

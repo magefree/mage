@@ -62,6 +62,10 @@ class ShelteringAncientCost extends CostImpl {
         this.text = "Put a +1/+1 counter on a creature an opponent controls";
     }
 
+    private ShelteringAncientCost(final ShelteringAncientCost cost) {
+        super(cost);
+    }
+
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
@@ -86,6 +90,6 @@ class ShelteringAncientCost extends CostImpl {
 
     @Override
     public ShelteringAncientCost copy() {
-        return new ShelteringAncientCost();
+        return new ShelteringAncientCost(this);
     }
 }

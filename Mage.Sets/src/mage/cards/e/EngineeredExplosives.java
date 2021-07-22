@@ -54,7 +54,7 @@ class EngineeredExplosivesEffect extends OneShotEffect {
 
     public EngineeredExplosivesEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Destroy each nonland permanent with converted mana cost equal to the number of charge counters on Engineered Explosives";
+        staticText = "Destroy each nonland permanent with mana value equal to the number of charge counters on Engineered Explosives";
     }
 
 
@@ -73,7 +73,7 @@ class EngineeredExplosivesEffect extends OneShotEffect {
         if(engineeredExplosives instanceof Permanent){
             int count = ((Permanent)engineeredExplosives).getCounters(game).getCount(CounterType.CHARGE);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if(permanent.getConvertedManaCost() == count){
+                if(permanent.getManaValue() == count){
                     permanent.destroy(source, game, false);
                 }
             }

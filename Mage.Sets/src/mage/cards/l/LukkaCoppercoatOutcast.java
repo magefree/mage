@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -84,7 +83,7 @@ class LukkaCoppercoatOutcastExileEffect extends OneShotEffect {
         Set<Card> cards = controller.getLibrary().getTopCards(game, 3);
         controller.moveCards(cards, Zone.EXILED, source, game);
 
-        cards.stream().filter(MageObject::isCreature).forEach(card -> {
+        cards.stream().filter(card1 -> card1.isCreature(game)).forEach(card -> {
             ContinuousEffect effect = new LukkaCoppercoatOutcastCastEffect();
             effect.setTargetPointer(new FixedTarget(card, game));
             game.addEffect(effect, source);
@@ -129,7 +128,7 @@ class LukkaCoppercoatOutcastPolymorphEffect extends OneShotEffect {
     LukkaCoppercoatOutcastPolymorphEffect() {
         super(Outcome.Benefit);
         staticText = "Exile target creature you control, then reveal cards from the top of your library " +
-                "until you reveal a creature card with higher converted mana cost. " +
+                "until you reveal a creature card with higher mana value. " +
                 "Put that card onto the battlefield and the rest on the bottom of your library in a random order.";
     }
 
@@ -149,13 +148,13 @@ class LukkaCoppercoatOutcastPolymorphEffect extends OneShotEffect {
         if (permanent == null || player == null) {
             return false;
         }
-        int cmc = permanent.getConvertedManaCost();
+        int cmc = permanent.getManaValue();
         player.moveCards(permanent, Zone.EXILED, source, game);
         Card toBattlefield = null;
         Cards toReveal = new CardsImpl();
         for (Card card : player.getLibrary().getCards(game)) {
             toReveal.add(card);
-            if (card.isCreature() && card.getConvertedManaCost() > cmc) {
+            if (card.isCreature(game) && card.getManaValue() > cmc) {
                 toBattlefield = card;
                 break;
             }

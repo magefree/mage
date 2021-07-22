@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -62,7 +61,7 @@ class AetherStingTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Card card = game.getCard(event.getSourceId());
-            if (card != null && card.isCreature()) {
+            if (card != null && card.isCreature(game)) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
                 return true;
             }

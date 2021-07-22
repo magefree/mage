@@ -50,9 +50,8 @@ class LevelerExileLibraryEffect extends OneShotEffect {
         staticText = "exile all cards from your library";
     }
 
-    @Override
-    public LevelerExileLibraryEffect copy() {
-        return new LevelerExileLibraryEffect();
+    private LevelerExileLibraryEffect(final LevelerExileLibraryEffect effect) {
+        super(effect);
     }
 
     @Override
@@ -65,5 +64,10 @@ class LevelerExileLibraryEffect extends OneShotEffect {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public LevelerExileLibraryEffect copy() {
+        return new LevelerExileLibraryEffect(this);
     }
 }

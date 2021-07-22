@@ -32,7 +32,7 @@ public final class BreakOfDay extends CardImpl {
                         StaticFilters.FILTER_PERMANENT_CREATURES, false
                 ), new LockedInCondition(FatefulHourCondition.instance),
                 "<br><i>Fateful hour</i> &mdash; If you have 5 or less life, " +
-                        "those creatures also are indestructible this turn"
+                        "those creatures gain indestructible until end of turn"
         ));
     }
 

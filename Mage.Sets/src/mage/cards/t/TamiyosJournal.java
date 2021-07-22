@@ -22,7 +22,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class TamiyosJournal extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Clues");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Clues");
 
     static {
         filter.add(SubType.CLUE.getPredicate());

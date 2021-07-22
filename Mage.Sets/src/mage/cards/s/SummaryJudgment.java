@@ -24,7 +24,7 @@ public final class SummaryJudgment extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public SummaryJudgment(UUID ownerId, CardSetInfo setInfo) {
@@ -52,7 +52,7 @@ class SummaryJudgementEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "{this} deals 3 damage to target tapped creature." +
                 "<br><i>Addendum</i> &mdash; If you cast this spell during your main phase, " +
-                "it deals 5 damage to that creature instead.";
+                "it deals 5 damage.";
     }
 
     private SummaryJudgementEffect(final SummaryJudgementEffect effect) {

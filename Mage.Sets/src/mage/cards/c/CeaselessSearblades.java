@@ -83,7 +83,7 @@ class CeaselessSearbladesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you activate an ability of an Elemental, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you activate an ability of an Elemental, " ;
     }
 }

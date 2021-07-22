@@ -55,7 +55,7 @@ class SphinxAmbassadorEffect extends OneShotEffect {
 
     public SphinxAmbassadorEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "search that player's library for a card, then that player names a card. If you searched for a creature card that isn't the named card, you may put it onto the battlefield under your control. Then that player shuffles their library";
+        this.staticText = "search that player's library for a card, then that player chooses a card name. If you searched for a creature card that doesn't have that name, you may put it onto the battlefield under your control. Then that player shuffles";
     }
 
     public SphinxAmbassadorEffect(final SphinxAmbassadorEffect effect) {
@@ -95,7 +95,7 @@ class SphinxAmbassadorEffect extends OneShotEffect {
                 String cardName = cardChoice.getChoice();
 
                 game.informPlayers(sourcePermanent.getName() + ", named card: [" + cardName + ']');
-                if (!card.getName().equals(cardName) && card.isCreature()) {
+                if (!card.getName().equals(cardName) && card.isCreature(game)) {
                     if (controller.chooseUse(outcome, "Put " + card.getName() + " onto the battlefield?", source, game)) {
                         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     }

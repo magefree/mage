@@ -204,13 +204,13 @@ public abstract class SplitCard extends CardImpl {
     }
 
     @Override
-    public int getConvertedManaCost() {
+    public int getManaValue() {
         // 202.3d The converted mana cost of a split card not on the stack or of a fused split spell on the
         // stack is determined from the combined mana costs of its halves. Otherwise, while a split card is
         // on the stack, the converted mana cost of the spell is determined by the mana cost of the half
         // that was chosen to be cast. See rule 708, “Split Cards.”
 
         // split card and it's halfes contains own mana costs, so no need to rewrite logic
-        return super.getConvertedManaCost();
+        return super.getManaValue();
     }
 }

@@ -35,7 +35,7 @@ public final class HivisOfTheScale extends CardImpl {
     private static final String rule = "Gain control of target Dragon for as long as you control Hivis and Hivis remains tapped.";
     
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
         filter.add(TargetController.YOU.getControllerPredicate());
         filterDragon.add(SubType.DRAGON.getPredicate());
     }

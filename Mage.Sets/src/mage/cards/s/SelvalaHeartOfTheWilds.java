@@ -35,7 +35,6 @@ public final class SelvalaHeartOfTheWilds extends CardImpl {
     }
 
     private static final String rule = "Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.";
-    private static final String rule2 = "Add X mana in any combination of colors, where X is the greatest power among creatures you control.";
 
     public SelvalaHeartOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
@@ -50,8 +49,8 @@ public final class SelvalaHeartOfTheWilds extends CardImpl {
 
         // {G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.
         ManaEffect manaEffect = new AddManaInAnyCombinationEffect(
-                GreatestPowerAmongControlledCreaturesValue.instance, GreatestPowerAmongControlledCreaturesValue.instance, rule2,
-                ColoredManaSymbol.B, ColoredManaSymbol.U, ColoredManaSymbol.R, ColoredManaSymbol.W, ColoredManaSymbol.G);
+                GreatestPowerAmongControlledCreaturesValue.instance, GreatestPowerAmongControlledCreaturesValue.instance,
+                ColoredManaSymbol.W, ColoredManaSymbol.U, ColoredManaSymbol.B, ColoredManaSymbol.R, ColoredManaSymbol.G);
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, manaEffect, new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -97,7 +96,7 @@ class SelvalaHeartOfTheWildsEffect extends OneShotEffect {
             if (filter2.match(permanent, game)) {
                 Player permanentController = game.getPlayer(permanent.getControllerId());
                 if (permanentController != null
-                        && permanentController.chooseUse(Outcome.DrawCard, "Would you like to draw a card?", source, game)) {
+                        && permanentController.chooseUse(Outcome.DrawCard, "Draw a card?", source, game)) {
                     permanentController.drawCards(1, source, game);
                 }
             }

@@ -363,7 +363,7 @@
 
      @Override
      public int compare(MageCard o1, MageCard o2) {
-         int val = Integer.compare(o1.getOriginal().getConvertedManaCost(), o2.getOriginal().getConvertedManaCost());
+         int val = Integer.compare(o1.getOriginal().getManaValue(), o2.getOriginal().getManaValue());
          if (val == 0) {
              return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
          } else {

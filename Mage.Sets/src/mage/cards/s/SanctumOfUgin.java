@@ -15,7 +15,7 @@ import mage.constants.ComparisonType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -24,12 +24,12 @@ import mage.target.common.TargetCardInLibrary;
 public final class SanctumOfUgin extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("colorless creature card");
-    private static final FilterSpell filterSpells = new FilterSpell("colorless spell with converted mana cost 7 or greater");
+    private static final FilterSpell filterSpells = new FilterSpell("a colorless spell with mana value 7 or greater");
 
     static {
         filter.add(ColorlessPredicate.instance);
         filterSpells.add(ColorlessPredicate.instance);
-        filterSpells.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
+        filterSpells.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 6));
     }
 
     public SanctumOfUgin(UUID ownerId, CardSetInfo setInfo) {
@@ -41,7 +41,7 @@ public final class SanctumOfUgin extends CardImpl {
         // Whenever you cast a colorless spell with converted mana cost 7 or greater, you may sacrifice Sanctum of Ugin.
         // If you do, search your library for a colorless creature card, reveal it, put it into your hand, then shuffle your library.
         Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true);
-        effect.setText("search your library for a colorless creature card, reveal it, put it into your hand, then shuffle your library");
+        effect.setText("search your library for a colorless creature card, reveal it, put it into your hand, then shuffle");
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(effect, new SacrificeSourceCost()), filterSpells, false));
     }
 

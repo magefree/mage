@@ -26,7 +26,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -50,7 +49,7 @@ public final class SquealingDevil extends CardImpl {
         this.addAbility(ability);
 
         // When Squealing Devil enters the battlefield, sacrifice it unless {B} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.B)), false), new ManaSpentToCastWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.B)), false));
 
     }
 
@@ -85,7 +84,7 @@ class SquealingDevilEffect extends OneShotEffect {
                 cost.add(new GenericManaCost(costX));
                 if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     Permanent permanent = game.getPermanent(source.getFirstTarget());
-                    if (permanent != null && permanent.isCreature()) {
+                    if (permanent != null && permanent.isCreature(game)) {
                         ContinuousEffect effect = new BoostTargetEffect(costX, 0, Duration.EndOfTurn);
                         effect.setTargetPointer(new FixedTarget(permanent, game));
                         game.addEffect(effect, source);

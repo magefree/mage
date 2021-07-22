@@ -25,8 +25,8 @@ public final class BelbesArmor extends CardImpl {
 
         // {X}, {tap}: Target creature gets -X/+X until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(
-                new MultipliedValue(ManacostVariableValue.instance, -1),
-                ManacostVariableValue.instance, Duration.EndOfTurn
+                new MultipliedValue(ManacostVariableValue.REGULAR, -1),
+                ManacostVariableValue.REGULAR, Duration.EndOfTurn
         ).setText("Target creature gets -X/+X until end of turn"), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

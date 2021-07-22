@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
@@ -67,7 +66,7 @@ class MasterOfTheWildHuntEffect extends OneShotEffect {
 
     static {
         filter.add(SubType.WOLF.getPredicate());
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public MasterOfTheWildHuntEffect() {

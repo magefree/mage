@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -8,6 +9,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author noxx
@@ -59,10 +61,11 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent sourcePermanent = game.getPermanent(event.getSourceId());
-        if (sourcePermanent != null && filter.match(sourcePermanent, sourceId, controllerId, game)) {
+        if (filter.match(sourcePermanent, sourceId, controllerId, game)) {
             if (setTargetPointer) {
                 this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
             }
+            this.getEffects().setValue("attackerRef", new MageObjectReference(sourcePermanent, game));
             return true;
         }
         return false;
@@ -74,18 +77,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
     }
 
     @Override
-    public String getRule() {
-        String an;
-        String who = filter.getMessage();
-        if (who.startsWith("another") || who.startsWith("a ")) {
-            an = "";
-        } else if (who.length() > 0 && "aeiou".contains(who.charAt(0) + "")) {
-            an = "an ";
-        } else {
-            an = "a ";
-        }
-
-        return "When" + (once ? "" : "ever")
-                + " " + an + who + " attacks, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When" + (once ? "" : "ever") + " " + CardUtil.addArticle(filter.getMessage()) + " attacks, " ;
     }
 }

@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class ForerunnerOfTheEmpire extends CardImpl {
 
-    private static final FilterCreaturePermanent filterAnyDinosaur = new FilterCreaturePermanent(SubType.DINOSAUR, SubType.DINOSAUR.toString());
+    private static final FilterCreaturePermanent filterAnyDinosaur = new FilterCreaturePermanent(SubType.DINOSAUR, "a " + SubType.DINOSAUR.toString());
 
     static {
         filterAnyDinosaur.add(TargetController.YOU.getControllerPredicate());

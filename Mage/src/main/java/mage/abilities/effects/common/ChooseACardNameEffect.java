@@ -12,6 +12,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Set;
+import java.util.function.Supplier;
+
 /**
  * @author LevelX2
  */
@@ -20,14 +23,65 @@ public class ChooseACardNameEffect extends OneShotEffect {
     public static final String INFO_KEY = "NAMED_CARD";
 
     public enum TypeOfName {
-        ALL,
-        NOT_BASIC_LAND_NAME,
-        NONBASIC_LAND_NAME,
-        NON_ARTIFACT_AND_NON_LAND_NAME,
-        NON_LAND_NAME,
-        NON_LAND_AND_NON_CREATURE_NAME,
-        CREATURE_NAME,
-        ARTIFACT_NAME
+        ALL("card name", CardRepository.instance::getNames),
+        NOT_BASIC_LAND_NAME("card name other than a basic land card", CardRepository.instance::getNotBasicLandNames),
+        NONBASIC_LAND_NAME("nonbasic land card name", CardRepository.instance::getNonbasicLandNames),
+        NON_ARTIFACT_AND_NON_LAND_NAME("nonartifact, nonland card name", CardRepository.instance::getNonArtifactAndNonLandNames),
+        NON_LAND_AND_NON_CREATURE_NAME("nonland and non creature name", CardRepository.instance::getNonLandAndNonCreatureNames),
+        NON_LAND_NAME("nonland card name", CardRepository.instance::getNonLandNames),
+        CREATURE_NAME("creature card name", CardRepository.instance::getCreatureNames),
+        ARTIFACT_NAME("artifact card name", CardRepository.instance::getArtifactNames);
+
+        private final String description;
+        private final Supplier<Set<String>> nameSupplier;
+
+        TypeOfName(String description, Supplier<Set<String>> nameSupplier) {
+            this.description = description;
+            this.nameSupplier = nameSupplier;
+        }
+
+        private final String getMessage() {
+            return "choose " + CardUtil.addArticle(description);
+        }
+
+        private final Set<String> getNames() {
+            return nameSupplier.get();
+        }
+
+        public String getChoice(Game game, Ability source) {
+            return getChoice(game.getPlayer(source.getControllerId()), game, source, true);
+        }
+
+        public String getChoice(Player player, Game game, Ability source, boolean setValue) {
+            if (player == null) {
+                return null;
+            }
+            Choice cardChoice = new ChoiceImpl(true);
+            cardChoice.setChoices(this.getNames());
+            cardChoice.setMessage(CardUtil.getTextWithFirstCharUpperCase(this.getMessage()));
+            cardChoice.clearChoice();
+            player.choose(Outcome.Detriment, cardChoice, game);
+            String cardName = cardChoice.getChoice();
+            if (cardName == null) {
+                return null;
+            }
+            MageObject sourceObject = game.getPermanentEntering(source.getSourceId());
+            if (sourceObject == null) {
+                sourceObject = source.getSourceObject(game);
+            }
+            if (sourceObject == null) {
+                return cardName;
+            }
+            game.informPlayers(sourceObject.getLogName() + ": " + player.getName() + ", chosen name: [" + cardName + ']');
+            if (!setValue) {
+                return cardName;
+            }
+            game.getState().setValue(source.getSourceId().toString() + INFO_KEY, cardName);
+            if (sourceObject instanceof Permanent) {
+                ((Permanent) sourceObject).addInfo(INFO_KEY, CardUtil.addToolTipMarkTags("Chosen name: " + cardName), game);
+            }
+            return cardName;
+        }
     }
 
     private final TypeOfName typeOfName;
@@ -35,7 +89,7 @@ public class ChooseACardNameEffect extends OneShotEffect {
     public ChooseACardNameEffect(TypeOfName typeOfName) {
         super(Outcome.Detriment);
         this.typeOfName = typeOfName;
-        staticText = setText();
+        staticText = "choose " + CardUtil.addArticle(typeOfName.description);
     }
 
     public ChooseACardNameEffect(final ChooseACardNameEffect effect) {
@@ -45,97 +99,11 @@ public class ChooseACardNameEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getPermanentEntering(source.getSourceId());
-        if (sourceObject == null) {
-            sourceObject = game.getObject(source.getSourceId());
-        }
-        if (controller != null && sourceObject != null) {
-            Choice cardChoice = new ChoiceImpl(true);
-            switch (typeOfName) {
-                case ALL:
-                    cardChoice.setChoices(CardRepository.instance.getNames());
-                    cardChoice.setMessage("Choose a card name");
-                    break;
-                case NOT_BASIC_LAND_NAME:
-                    cardChoice.setChoices(CardRepository.instance.getNotBasicLandNames());
-                    cardChoice.setMessage("Choose a card name other than a basic land card name");
-                    break;
-                case NONBASIC_LAND_NAME:
-                    cardChoice.setChoices(CardRepository.instance.getNonbasicLandNames());
-                    cardChoice.setMessage("Choose a nonbasic land card name");
-                    break;
-                case NON_ARTIFACT_AND_NON_LAND_NAME:
-                    cardChoice.setChoices(CardRepository.instance.getNonArtifactAndNonLandNames());
-                    cardChoice.setMessage("Choose a nonartifact, nonland card name");
-                    break;
-                case NON_LAND_AND_NON_CREATURE_NAME:
-                    cardChoice.setChoices(CardRepository.instance.getNonLandAndNonCreatureNames());
-                    cardChoice.setMessage("Choose a nonland and non creature card");
-                    break;
-                case NON_LAND_NAME:
-                    cardChoice.setChoices(CardRepository.instance.getNonLandNames());
-                    cardChoice.setMessage("Choose a nonland card name");
-                    break;
-                case CREATURE_NAME:
-                    cardChoice.setChoices(CardRepository.instance.getCreatureNames());
-                    cardChoice.setMessage("Choose a creature card name");
-                    break;
-                case ARTIFACT_NAME:
-                    cardChoice.setChoices(CardRepository.instance.getArtifactNames());
-                    cardChoice.setMessage("Choose an artifact card name");
-                    break;
-            }
-            cardChoice.clearChoice();
-            if (controller.choose(Outcome.Detriment, cardChoice, game)) {
-                String cardName = cardChoice.getChoice();
-                if (!game.isSimulation()) {
-                    game.informPlayers(sourceObject.getLogName() + ", chosen name: [" + cardName + ']');
-                }
-                game.getState().setValue(source.getSourceId().toString() + INFO_KEY, cardName);
-                if (sourceObject instanceof Permanent) {
-                    ((Permanent) sourceObject).addInfo(INFO_KEY, CardUtil.addToolTipMarkTags("Chosen name: " + cardName), game);
-                }
-                return true;
-            }
-        }
-        return false;
+        return typeOfName.getChoice(game, source) != null;
     }
 
     @Override
     public ChooseACardNameEffect copy() {
         return new ChooseACardNameEffect(this);
-    }
-
-    private String setText() {
-        StringBuilder sb = new StringBuilder("choose a ");
-        switch (typeOfName) {
-            case ALL:
-                sb.append("card");
-                break;
-            case NOT_BASIC_LAND_NAME:
-                sb.append("card name other than a basic land card");
-                break;
-            case NONBASIC_LAND_NAME:
-                sb.append("nonbasic land card name");
-                break;
-            case NON_ARTIFACT_AND_NON_LAND_NAME:
-                sb.append("nonartifact, nonland card");
-                break;
-            case NON_LAND_AND_NON_CREATURE_NAME:
-                sb.append("noncreature, nonland card");
-                break;
-            case NON_LAND_NAME:
-                sb.append("nonland card");
-                break;
-            case CREATURE_NAME:
-                sb.append("creature card");
-                break;
-            case ARTIFACT_NAME:
-                sb.append("artifact card");
-                break;
-        }
-        sb.append(" name");
-        return sb.toString();
     }
 }

@@ -28,7 +28,7 @@ public final class SeedsOfRenewal extends CardImpl {
         effect.setText("Return up to two target cards from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD));
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
 
     }
 

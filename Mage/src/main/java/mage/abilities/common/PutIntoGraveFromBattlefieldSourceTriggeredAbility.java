@@ -46,8 +46,7 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             Permanent permanent = zEvent.getTarget();
             if (permanent != null
-                    && zEvent.getToZone() == Zone.GRAVEYARD
-                    && zEvent.getFromZone() == Zone.BATTLEFIELD) {
+                    && zEvent.isDiesEvent()) {
                 return !onlyToControllerGraveyard || this.isControlledBy(game.getOwnerId(zEvent.getTargetId()));
             }
         }
@@ -55,7 +54,7 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
     }
 
     @Override
-    public String getRule() {
-        return "When {this} is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When {this} is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, " ;
     }
 }

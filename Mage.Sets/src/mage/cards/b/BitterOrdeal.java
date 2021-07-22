@@ -48,7 +48,7 @@ class BitterOrdealEffect extends OneShotEffect {
 
     BitterOrdealEffect() {
         super(Outcome.Exile);
-        staticText = "Search target player's library for a card and exile it. Then that player shuffles their library.";
+        staticText = "Search target player's library for a card and exile it. Then that player shuffles.";
     }
 
     BitterOrdealEffect(final BitterOrdealEffect effect) {

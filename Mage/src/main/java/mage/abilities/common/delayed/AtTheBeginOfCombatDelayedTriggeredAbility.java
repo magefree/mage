@@ -30,7 +30,7 @@ public class AtTheBeginOfCombatDelayedTriggeredAbility extends DelayedTriggeredA
     }
 
     @Override
-    public String getRule() {
-        return " At the beginning of the next combat, " + modes.getText();
+    public String getTriggerPhrase() {
+        return " At the beginning of the next combat, ";
     }
 }

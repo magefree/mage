@@ -43,7 +43,7 @@ class CrumbleEffect extends OneShotEffect {
 
     public CrumbleEffect() {
         super(Outcome.GainLife);
-        staticText = "That artifact's controller gains life equal to its converted mana cost";
+        staticText = "That artifact's controller gains life equal to its mana value";
     }
 
     public CrumbleEffect(final CrumbleEffect effect) {
@@ -59,7 +59,7 @@ class CrumbleEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source); // must use LKI
         if (permanent != null) {
-            int cost = permanent.getConvertedManaCost();
+            int cost = permanent.getManaValue();
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 player.gainLife(cost, game, source);

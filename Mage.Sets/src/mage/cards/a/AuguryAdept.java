@@ -49,7 +49,7 @@ class AuguryAdeptEffect extends OneShotEffect {
     AuguryAdeptEffect() {
         super(Outcome.GainLife);
         this.staticText = "reveal the top card of your library and put that card into your hand. " +
-                "You gain life equal to its converted mana cost";
+                "You gain life equal to its mana value";
     }
 
     private AuguryAdeptEffect(final AuguryAdeptEffect effect) {
@@ -73,7 +73,7 @@ class AuguryAdeptEffect extends OneShotEffect {
         }
         controller.revealCards(source, new CardsImpl(card), game);
         controller.moveCards(card, Zone.HAND, source, game);
-        int cmc = card.getConvertedManaCost();
+        int cmc = card.getManaValue();
         if (cmc > 0) {
             controller.gainLife(cmc, game, source);
         }

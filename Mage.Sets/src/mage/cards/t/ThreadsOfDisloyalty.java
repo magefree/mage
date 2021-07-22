@@ -16,7 +16,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -26,10 +26,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class ThreadsOfDisloyalty extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 2 or less");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value 2 or less");
 
     static {
-          filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+          filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public ThreadsOfDisloyalty(UUID ownerId, CardSetInfo setInfo) {

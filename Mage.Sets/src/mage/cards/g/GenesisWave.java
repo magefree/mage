@@ -12,7 +12,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -46,7 +46,7 @@ class GenesisWaveEffect extends OneShotEffect {
 
     public GenesisWaveEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "Reveal the top X cards of your library. You may put any number of permanent cards with converted mana cost X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard";
+        staticText = "Reveal the top X cards of your library. You may put any number of permanent cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard";
     }
 
     public GenesisWaveEffect(final GenesisWaveEffect effect) {
@@ -63,8 +63,8 @@ class GenesisWaveEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(source, cards, game);
-            FilterCard filter = new FilterPermanentCard("cards with converted mana cost " + xValue + " or less to put onto the battlefield");
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+            FilterCard filter = new FilterPermanentCard("cards with mana value " + xValue + " or less to put onto the battlefield");
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
             target1.setNotTarget(true);
             controller.choose(Outcome.PutCardInPlay, cards, target1, game);

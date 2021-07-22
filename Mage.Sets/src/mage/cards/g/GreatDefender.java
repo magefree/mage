@@ -3,7 +3,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
+import mage.abilities.dynamicvalue.common.TargetManaValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,8 +22,8 @@ public final class GreatDefender extends CardImpl {
 
         // Target creature gets +0/+X until end of turn, where X is its converted mana cost.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(StaticValue.get(0), TargetConvertedManaCost.instance, Duration.EndOfTurn, true)
-                .setText("Target creature gets +0/+X until end of turn, where X is its converted mana cost.")
+        this.getSpellAbility().addEffect(new BoostTargetEffect(StaticValue.get(0), TargetManaValue.instance, Duration.EndOfTurn, true)
+                .setText("Target creature gets +0/+X until end of turn, where X is its mana value.")
         );
     }
 

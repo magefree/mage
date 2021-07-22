@@ -39,7 +39,7 @@ public final class ThaliasLancers extends CardImpl {
 
         // When Thalia's Lancers enters the battlefield, you may search your library for a legendary card, reveal it, put it into your hand, then shuffle your library.
         Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, filter), true, true);
-        effect.setText("you may search your library for a legendary card, reveal it, put it into your hand, then shuffle your library");
+        effect.setText("you may search your library for a legendary card, reveal it, put it into your hand, then shuffle");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
     }
 

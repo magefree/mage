@@ -1,25 +1,25 @@
 package mage.cards.b;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.watchers.common.ManaPaidSourceWatcher;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class BloodOnTheSnow extends CardImpl {
@@ -42,9 +42,10 @@ public final class BloodOnTheSnow extends CardImpl {
         mode.addEffect(new BloodOnTheSnowEffect());
         this.getSpellAbility().addMode(mode);
         this.getSpellAbility().appendToRule(
-                "Then return a creature or planeswalker card with converted mana cost X or less"
-                + " from your graveyard to the battlefield, where X is the amount of {S} spent to cast this spell."
+                "Then return a creature or planeswalker card with mana value X or less"
+                        + " from your graveyard to the battlefield, where X is the amount of {S} spent to cast this spell."
         );
+        this.getSpellAbility().addWatcher(new ManaPaidSourceWatcher());
     }
 
     private BloodOnTheSnow(final BloodOnTheSnow card) {
@@ -76,10 +77,10 @@ class BloodOnTheSnowEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int snow = source.getManaCostsToPay().getUsedManaToPay().getSnow();
-            FilterCard filter = new FilterCard("a creature or planeswalker card with CMC " + snow + " or less from your graveyard");
+            int snow = ManaPaidSourceWatcher.getSnowPaid(source.getId(), game);
+            FilterCard filter = new FilterCard("a creature or planeswalker card with mana value " + snow + " or less from your graveyard");
             filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.PLANESWALKER.getPredicate()));
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, snow + 1));
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, snow + 1));
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(1, 1, filter, true);
             controller.chooseTarget(outcome, target, source, game);
             Card card = game.getCard(target.getFirstTarget());

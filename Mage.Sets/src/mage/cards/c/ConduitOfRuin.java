@@ -22,7 +22,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -35,12 +35,12 @@ import mage.watchers.Watcher;
  */
 public final class ConduitOfRuin extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a colorless creature card with converted mana cost 7 or greater");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a colorless creature card with mana value 7 or greater");
     private static final FilterCreatureCard filterCost = new FilterCreatureCard("The first creature spell");
 
     static {
         filter.add(ColorlessPredicate.instance);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
+        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 6));
         filterCost.add(new FirstCastCreatureSpellPredicate());
     }
 
@@ -83,7 +83,7 @@ class ConduitOfRuinWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell != null && spell.isCreature()) {
+            if (spell != null && spell.isCreature(game)) {
                 playerCreatureSpells.put(event.getPlayerId(), creatureSpellsCastThisTurn(event.getPlayerId()) + 1);
             }
         }
@@ -105,7 +105,7 @@ class FirstCastCreatureSpellPredicate implements ObjectPlayerPredicate<ObjectPla
     @Override
     public boolean apply(ObjectPlayer<Controllable> input, Game game) {
         if (input.getObject() instanceof Card
-                && ((Card) input.getObject()).isCreature()) {
+                && ((Card) input.getObject()).isCreature(game)) {
             ConduitOfRuinWatcher watcher = game.getState().getWatcher(ConduitOfRuinWatcher.class);
             return watcher != null && watcher.creatureSpellsCastThisTurn(input.getPlayerId()) == 0;
         }

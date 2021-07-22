@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -30,6 +29,7 @@ public final class GlissaTheTraitor extends CardImpl {
     public GlissaTheTraitor (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.ELF);
 
@@ -85,7 +85,7 @@ class GlissaTheTraitorTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent)event).isDiesEvent()) {
             Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (p != null && p.isCreature() && game.getOpponents(this.getControllerId()).contains(p.getControllerId())) {
+            if (p != null && p.isCreature(game) && game.getOpponents(this.getControllerId()).contains(p.getControllerId())) {
                 return true;
             }
         }
@@ -93,7 +93,7 @@ class GlissaTheTraitorTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature an opponent controls is put into a graveyard from the battlefield, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature an opponent controls is put into a graveyard from the battlefield, " ;
     }
 }

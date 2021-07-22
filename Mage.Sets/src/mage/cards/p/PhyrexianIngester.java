@@ -12,13 +12,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -41,6 +35,7 @@ public final class PhyrexianIngester extends CardImpl {
 
     public PhyrexianIngester(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(3);
@@ -49,7 +44,7 @@ public final class PhyrexianIngester extends CardImpl {
         // Imprint - When Phyrexian Ingester enters the battlefield, you may exile target nontoken creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PhyrexianIngesterImprintEffect(), true);
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(AbilityWord.IMPRINT));
         // Phyrexian Ingester gets +X/+Y, where X is the exiled creature card's power and Y is its toughness.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianIngesterBoostEffect()));
     }

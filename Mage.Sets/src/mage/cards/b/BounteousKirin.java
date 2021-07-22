@@ -49,7 +49,7 @@ class BounteousKirinEffect extends OneShotEffect {
 
     public BounteousKirinEffect() {
         super(Outcome.GainLife);
-        this.staticText = "you may gain life equal to that spell's converted mana cost";
+        this.staticText = "you may gain life equal to that spell's mana value";
     }
 
     public BounteousKirinEffect(final BounteousKirinEffect effect) {
@@ -67,7 +67,7 @@ class BounteousKirinEffect extends OneShotEffect {
         if (spell != null) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                int life = spell.getConvertedManaCost();
+                int life = spell.getManaValue();
                 controller.gainLife(life, game, source);
                 return true;
             }

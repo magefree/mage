@@ -25,6 +25,7 @@ public final class FleshReaver extends CardImpl {
     public FleshReaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -70,7 +71,7 @@ class FleshReaverTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if ((permanent != null && permanent.isCreature())
+        if ((permanent != null && permanent.isCreature(game))
                 || game.getOpponents(event.getTargetId()).contains(getControllerId())) {
             this.getEffects().setValue("damage", event.getAmount());
             return true;

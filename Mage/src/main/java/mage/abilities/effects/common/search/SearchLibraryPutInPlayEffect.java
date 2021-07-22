@@ -88,8 +88,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
             sb.append(forceShuffle ? ", " : " and ");
             sb.append("put them onto the battlefield");
         } else {
-            sb.append(target.getTargetName().startsWith("a ") || target.getTargetName().startsWith("an ") ? "" : "a ")
-                    .append(target.getTargetName());
+            sb.append(CardUtil.addArticle(target.getTargetName()));
             sb.append(forceShuffle ? ", " : " and ");
             sb.append("put it onto the battlefield");
         }
@@ -97,9 +96,9 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
             sb.append(" tapped");
         }
         if (forceShuffle) {
-            sb.append(", then shuffle your library");
+            sb.append(", then shuffle");
         } else {
-            sb.append(". If you do, shuffle your library");
+            sb.append(". If you do, shuffle");
         }
         staticText = sb.toString();
     }

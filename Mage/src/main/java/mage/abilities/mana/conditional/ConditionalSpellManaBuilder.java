@@ -73,7 +73,7 @@ class SpellCastManaCondition extends ManaCondition implements Condition {
                 } else if (object instanceof Commander) {
                     spell = new Spell(((Commander) object).getSourceObject(), (SpellAbility) source, source.getControllerId(), game.getState().getZone(source.getSourceId()), game);
                 }
-                return spell != null && filter.match(spell, source.getSourceId(), source.getControllerId(), game);
+                return filter.match(spell, source.getSourceId(), source.getControllerId(), game);
             }
         }
         return false;

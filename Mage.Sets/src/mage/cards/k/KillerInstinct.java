@@ -82,7 +82,7 @@ class KillerInstinctEffect extends OneShotEffect {
             return false;
         }
         player.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
-        if (card.isCreature() && player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+        if (card.isCreature(game) && player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             Permanent permanent = game.getPermanent(card.getId());
             if (permanent != null) {
                 FixedTarget ft = new FixedTarget(permanent, game);

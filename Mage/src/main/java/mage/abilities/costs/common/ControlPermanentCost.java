@@ -13,7 +13,7 @@ public class ControlPermanentCost extends CostImpl {
 
     public ControlPermanentCost(FilterControlledPermanent filter) {
         this.filter = filter.copy();
-        this.text = "Activate this ability only if you control " + filter.getMessage();
+        this.text = "Activate only if you control " + filter.getMessage();
     }
 
     public ControlPermanentCost(final ControlPermanentCost cost) {

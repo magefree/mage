@@ -29,6 +29,7 @@ public final class ShatteredAngel extends CardImpl {
 
     public ShatteredAngel (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(3);

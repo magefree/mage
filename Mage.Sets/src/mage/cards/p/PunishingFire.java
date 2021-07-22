@@ -69,7 +69,7 @@ class PunishingFireTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an opponent gains life, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever an opponent gains life, " ;
     }
 }

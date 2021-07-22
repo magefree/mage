@@ -43,6 +43,7 @@ public final class AdamaroFirstToDesire extends CardImpl {
 }
 
 class MostCardsInOpponentsHandCount implements DynamicValue {
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int maxCards = 0;
@@ -59,7 +60,7 @@ class MostCardsInOpponentsHandCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public MostCardsInOpponentsHandCount copy() {
         return new MostCardsInOpponentsHandCount();
     }
 

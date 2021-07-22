@@ -28,6 +28,7 @@ public final class BodySnatcher extends CardImpl {
 
     public BodySnatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.MINION);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

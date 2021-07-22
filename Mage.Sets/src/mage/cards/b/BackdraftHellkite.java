@@ -75,7 +75,7 @@ class BackdraftHellkiteEffect extends ContinuousEffectImpl {
         player.getGraveyard()
                 .stream()
                 .map((cardId) -> game.getCard(cardId))
-                .filter(card -> card.isInstant() || card.isSorcery())
+                .filter(card1 -> card1.isInstantOrSorcery(game))
                 .forEachOrdered(card -> affectedObjectList.add(new MageObjectReference(card, game)));
     }
 
@@ -94,9 +94,9 @@ class BackdraftHellkiteEffect extends ContinuousEffectImpl {
                         return;
                     }
                     FlashbackAbility ability = null;
-                    if (card.isInstant()) {
+                    if (card.isInstant(game)) {
                         ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
-                    } else if (card.isSorcery()) {
+                    } else if (card.isSorcery(game)) {
                         ability = new FlashbackAbility(card.getManaCost(), TimingRule.SORCERY);
                     }
                     if (ability == null) {

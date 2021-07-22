@@ -80,8 +80,8 @@ class VerdantSuccessionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+        ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
+        if (zoneChangeEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             MageObject mageObject = game.getObject(sourceId);
             if (permanent != null && mageObject != null
@@ -95,7 +95,7 @@ class VerdantSuccessionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a green nontoken creature dies, that creature's controller may search their library for a card with the same name as that creature and put it onto the battlefield. If that player does, they shuffle their library.";
+        return "Whenever a green nontoken creature dies, that creature's controller may search their library for a card with the same name as that creature, put it onto the battlefield, then shuffle.";
     }
 }
 

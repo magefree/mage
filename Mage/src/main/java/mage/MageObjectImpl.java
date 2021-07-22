@@ -9,6 +9,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.text.TextPart;
 import mage.abilities.text.TextPartSubType;
@@ -35,7 +36,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
-    protected ArrayList<CardType> cardType = new ArrayList<>();
+    protected List<CardType> cardType = new ArrayList<>();
     protected SubTypes subtype = new SubTypes();
     protected Set<SuperType> supertype = EnumSet.noneOf(SuperType.class);
     protected Abilities<Ability> abilities;
@@ -113,7 +114,16 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public ArrayList<CardType> getCardType() {
+    public List<CardType> getCardType(Game game) {
+        if (game != null) {
+            // dynamic
+            MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
+            if (mageObjectAttribute != null) {
+                return mageObjectAttribute.getCardType();
+            }
+        }
+
+        // static
         return cardType;
     }
 
@@ -201,7 +211,7 @@ public abstract class MageObjectImpl implements MageObject {
     public ObjectColor getFrameColor(Game game) {
         // For lands, add any colors of mana the land can produce to
         // its frame colors while game is active to represent ability changes during the game.
-        if (this.isLand() && !(this instanceof MockCard)) {
+        if (this.isLand(game) && !(this instanceof MockCard)) {
             ObjectColor cl = frameColor.copy();
             Set<ManaType> manaTypes = EnumSet.noneOf(ManaType.class);
             for (Ability ab : getAbilities()) {
@@ -232,19 +242,21 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public int getConvertedManaCost() {
+    public int getManaValue() {
         if (manaCost != null) {
-            return manaCost.convertedManaCost();
+            return manaCost.manaValue();
         }
         return 0;
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public final void adjustCosts(Ability ability, Game game) {
+        ability.adjustCosts(game);
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
+    public final void adjustTargets(Ability ability, Game game) {
+        ability.adjustTargets(game);
     }
 
     @Override
@@ -301,7 +313,7 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
-        this.getSubtype(game).setIsAllCreatureTypes(value && (this.isTribal() || this.isCreature()));
+        this.getSubtype(game).setIsAllCreatureTypes(value && (this.isTribal(game) || this.isCreature(game)));
     }
 
     @Override

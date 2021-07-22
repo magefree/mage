@@ -35,7 +35,7 @@ public final class Briarhorn extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Evoke {1}{G}
-        this.addAbility(new EvokeAbility(this, "{1}{G}"));
+        this.addAbility(new EvokeAbility("{1}{G}"));
     }
 
     private Briarhorn(final Briarhorn card) {

@@ -22,6 +22,7 @@ public final class PhyrexianBattleflies extends CardImpl {
 
     public PhyrexianBattleflies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.INSECT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

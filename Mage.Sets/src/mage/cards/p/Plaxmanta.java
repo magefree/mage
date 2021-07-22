@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
-import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
  *
@@ -38,7 +37,7 @@ public final class Plaxmanta extends CardImpl {
                 new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES)));
 
         // When Plaxmanta enters the battlefield, sacrifice it unless {G} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.G)), false), new ManaSpentToCastWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.G)), false));
     }
 
     private Plaxmanta(final Plaxmanta card) {

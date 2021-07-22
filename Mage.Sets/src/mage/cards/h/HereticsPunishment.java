@@ -45,7 +45,7 @@ class HereticsPunishmentEffect extends OneShotEffect {
 
     public HereticsPunishmentEffect() {
         super(Outcome.Damage);
-        staticText = "Choose any target, then mill three cards. {this} deals damage to that permanent or player equal to the highest converted mana cost among the milled cards";
+        staticText = "Choose any target, then mill three cards. {this} deals damage to that permanent or player equal to the highest mana value among the milled cards";
     }
 
     public HereticsPunishmentEffect(final HereticsPunishmentEffect effect) {
@@ -63,7 +63,7 @@ class HereticsPunishmentEffect extends OneShotEffect {
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .mapToInt(MageObject::getConvertedManaCost)
+                .mapToInt(MageObject::getManaValue)
                 .max()
                 .orElse(0);
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));

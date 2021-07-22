@@ -20,6 +20,7 @@ public final class PithDriller extends CardImpl {
 
     public PithDriller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{B/P}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(2);

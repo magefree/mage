@@ -1,23 +1,24 @@
 package mage.abilities.dynamicvalue.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public class CardsInAllGraveyardsCount implements DynamicValue {
 
-    private FilterCard filter;
+    private final FilterCard filter;
 
     public CardsInAllGraveyardsCount() {
-        this(new FilterCard());
+        this(StaticFilters.FILTER_CARD);
     }
 
     public CardsInAllGraveyardsCount(FilterCard filter) {

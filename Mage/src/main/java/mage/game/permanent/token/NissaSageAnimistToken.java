@@ -12,7 +12,7 @@ import mage.constants.SuperType;
 public final class NissaSageAnimistToken extends TokenImpl {
 
     public NissaSageAnimistToken() {
-        super("Ashaya, the Awoken World", "legendary 4/4 green Elemental creature token named Ashaya, the Awoken World");
+        super("Ashaya, the Awoken World", "Ashaya, the Awoken World, a legendary 4/4 green Elemental creature token");
         this.setOriginalExpansionSetCode("ORI");
         this.supertype.add(SuperType.LEGENDARY);
         this.getPower().modifyBaseValue(4);

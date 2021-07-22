@@ -53,7 +53,7 @@ class SingeMindOgreEffect extends OneShotEffect {
 
     public SingeMindOgreEffect() {
         super(Outcome.LoseLife);
-        this.staticText = "target player reveals a card at random from their hand, then loses life equal to that card's converted mana cost";
+        this.staticText = "target player reveals a card at random from their hand, then loses life equal to that card's mana value";
     }
 
     public SingeMindOgreEffect(final SingeMindOgreEffect effect) {
@@ -74,7 +74,7 @@ class SingeMindOgreEffect extends OneShotEffect {
             if (card != null) {
                 revealed.add(card);
                 targetPlayer.revealCards("Singe-Mind Ogre", revealed, game);
-                targetPlayer.loseLife(card.getConvertedManaCost(), game, source, false);
+                targetPlayer.loseLife(card.getManaValue(), game, source, false);
                 return true;
             }
         }

@@ -13,16 +13,21 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-
-import java.util.UUID;
 import mage.game.events.ZoneChangeGroupEvent;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * @author jeffwadsworth
@@ -105,43 +110,39 @@ class HeroOfBretagardTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent != null
-                && Zone.HAND == zEvent.getFromZone()
-                && Zone.EXILED == zEvent.getToZone()
-                && zEvent.getCards() != null) {
-            int cardCount = 0;
-            cardCount = zEvent.getCards().stream().filter((card)
-                    -> (card != null && card.isOwnedBy(getControllerId()))).map((_item)
-                    -> 1).reduce(cardCount, Integer::sum);
-            if (cardCount == 0) {
-                return false;
-            }
-            this.getEffects().clear();
-            this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(cardCount)));
-            return true;
+        final int numberExiled = zEvent.getCards().size() + zEvent.getTokens().size();
+        if (zEvent.getToZone() != Zone.EXILED
+                || numberExiled == 0) {
+            return false;
         }
-        // the permanent exiled does not have to be controlled/owned by anyone in particular
-        if (zEvent != null
-                && Zone.BATTLEFIELD == zEvent.getFromZone()
-                && Zone.EXILED == zEvent.getToZone()
-                && zEvent.getCards() != null) {
-            int cardCount = 0;
-            cardCount = zEvent.getCards().stream().filter((card)
-                    -> (card != null)).map((_item)
-                    -> 1).reduce(cardCount, Integer::sum);
-            if (cardCount == 0) {
-                return false;
-            }
-            this.getEffects().clear();
-            this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(cardCount)));
-            return true;
+        switch (zEvent.getFromZone()) {
+            case BATTLEFIELD:
+                if (controllerId.equals(zEvent.getSource().getControllerId())
+                        && numberExiled > 0) {  // must include both card permanents and tokens on the battlefield
+                    this.getEffects().clear();
+                    this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(numberExiled)));
+                    return true;
+                }
+            case HAND:
+                if (zEvent
+                        .getCards()
+                        .stream()
+                        .filter(Objects::nonNull)
+                        .map(Card::getOwnerId)
+                        .anyMatch(this::isControlledBy)
+                        && numberExiled > 0) {
+                    this.getEffects().clear();
+                    this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(numberExiled)));
+                    return true;
+                }
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever you exile one or more cards from your hand and/or permanents from the battlefield, put that many +1/+1 counters on {this}.";
-
+        return "Whenever one or more cards are put into exile from your hand "
+                + "or a spell or ability you control exiles one or more permanents from the battlefield, "
+                + "put that many +1/+1 counters on {this}.";
     }
 }

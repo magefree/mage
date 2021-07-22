@@ -18,7 +18,7 @@ public final class BlightedAgent extends CardImpl {
 
     public BlightedAgent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add(SubType.HUMAN, SubType.ROGUE);
+        this.subtype.add(SubType.PHYREXIAN, SubType.HUMAN, SubType.ROGUE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -17,12 +17,12 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -91,10 +91,9 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = zEvent.getTarget();
 
         if (permanent != null
-                && zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getFromZone() == Zone.BATTLEFIELD
+                && zEvent.isDiesEvent()
                 && !(permanent instanceof PermanentToken)
-                && permanent.isCreature()) {
+                && permanent.isCreature(game)) {
 
             getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId(), game));
             return true;
@@ -104,7 +103,7 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with {this} to its owner's graveyard.";
+        return AbilityWord.IMPRINT.formatWord() + "Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with {this} to its owner's graveyard.";
     }
 }
 

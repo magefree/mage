@@ -52,7 +52,7 @@ class DuskmantleSeerEffect extends OneShotEffect {
 
     public DuskmantleSeerEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each player reveals the top card of their library, loses life equal to that card's converted mana cost, then puts it into their hand";
+        this.staticText = "each player reveals the top card of their library, loses life equal to that card's mana value, then puts it into their hand";
     }
 
     public DuskmantleSeerEffect(final DuskmantleSeerEffect effect) {
@@ -75,7 +75,7 @@ class DuskmantleSeerEffect extends OneShotEffect {
                 Card card = player.getLibrary().getFromTop(game);
                 if (card != null) {
                     player.revealCards(source, ": Revealed by " + player.getName(), new CardsImpl(card), game);
-                    player.loseLife(card.getConvertedManaCost(), game, source, false);
+                    player.loseLife(card.getManaValue(), game, source, false);
                     player.moveCards(card, Zone.HAND, source, game);
                 }
             }

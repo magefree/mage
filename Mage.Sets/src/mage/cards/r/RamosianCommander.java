@@ -16,7 +16,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -25,11 +25,11 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class RamosianCommander extends CardImpl {
 
-    private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost 5 or less");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with mana value 5 or less");
 
     static {
         filter.add(SubType.REBEL.getPredicate());
-	filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 6));
+	filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 6));
     }
 
     public RamosianCommander(UUID ownerId, CardSetInfo setInfo) {

@@ -88,7 +88,7 @@ class CombineGuildmageReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null && permanent.isControlledBy(source.getControllerId()) && permanent.isCreature();
+        return permanent != null && permanent.isControlledBy(source.getControllerId()) && permanent.isCreature(game);
     }
 
     @Override

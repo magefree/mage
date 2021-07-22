@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.BirdToken;
@@ -27,7 +26,7 @@ public final class BattleScreech extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public BattleScreech(UUID ownerId, CardSetInfo setInfo) {

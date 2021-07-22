@@ -29,7 +29,7 @@ public final class LivingTwister extends CardImpl {
             = new FilterControlledLandPermanent("tapped land you control");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     public LivingTwister(UUID ownerId, CardSetInfo setInfo) {

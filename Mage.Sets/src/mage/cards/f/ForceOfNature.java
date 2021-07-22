@@ -68,8 +68,7 @@ class ForceOfNatureEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cost cost = new ManaCostsImpl("{G}{G}{G}{G}");
-            String message = "Would you like to pay {G}{G}{G}{G} to prevent taking 8 damage from {this}?";
-            if (!(controller.chooseUse(Outcome.Benefit, message, source, game)
+            if (!(controller.chooseUse(Outcome.Benefit, "Pay {G}{G}{G}{G}?", source, game)
                     && cost.pay(source, game, source, controller.getId(), false, null))) {
                 controller.damage(8, source.getSourceId(), source, game);
             }

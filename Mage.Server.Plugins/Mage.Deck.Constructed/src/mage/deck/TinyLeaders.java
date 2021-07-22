@@ -4,6 +4,7 @@ import mage.cards.*;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
+import mage.constants.CardType;
 import mage.filter.FilterMana;
 import mage.game.GameTinyLeadersImpl;
 
@@ -130,7 +131,7 @@ public class TinyLeaders extends Constructed {
              * would be legal independently.
              */
 
-            if (commander == null || commander.getConvertedManaCost() > 3) {
+            if (commander == null || commander.getManaValue() > 3) {
                 if (commander == null) {
                     if (deck.getName() == null) {
                         addError(DeckValidatorErrorType.PRIMARY, "Leader", "You have to save your deck with the leader card name entered to the DECK NAME field of the DECK EDITOR (top left) so that XMage knows your leader."
@@ -141,12 +142,13 @@ public class TinyLeaders extends Constructed {
 
                     }
                 }
-                if (commander != null && commander.getConvertedManaCost() > 3) {
-                    addError(DeckValidatorErrorType.PRIMARY, "Leader", "Commanders converted mana cost is greater than 3");
+                if (commander != null && commander.getManaValue() > 3) {
+                    addError(DeckValidatorErrorType.PRIMARY, "Leader", "Commanders mana value is greater than 3");
                 }
                 return false;
             }
-            if ((commander.isCreature() && commander.isLegendary()) || commander.isPlaneswalker()) {
+            if ((commander.hasCardTypeForDeckbuilding(CardType.CREATURE) && commander.isLegendary())
+                    || commander.hasCardTypeForDeckbuilding(CardType.PLANESWALKER)) {
                 if (!bannedCommander.contains(commander.getName())) {
                     FilterMana color = commander.getColorIdentity();
                     for (Card card : deck.getCards()) {
@@ -201,13 +203,13 @@ public class TinyLeaders extends Constructed {
         // as zero for this purpose. Split cards are legal only if both of their halves would be legal independently.
         List<Integer> costs = new ArrayList<>();
         if (card instanceof SplitCard) {
-            costs.add(((SplitCard) card).getLeftHalfCard().getConvertedManaCost());
-            costs.add(((SplitCard) card).getRightHalfCard().getConvertedManaCost());
+            costs.add(((SplitCard) card).getLeftHalfCard().getManaValue());
+            costs.add(((SplitCard) card).getRightHalfCard().getManaValue());
         } else if (card instanceof ModalDoubleFacesCard) {
-            costs.add(((ModalDoubleFacesCard) card).getLeftHalfCard().getConvertedManaCost());
-            costs.add(((ModalDoubleFacesCard) card).getRightHalfCard().getConvertedManaCost());
+            costs.add(((ModalDoubleFacesCard) card).getLeftHalfCard().getManaValue());
+            costs.add(((ModalDoubleFacesCard) card).getRightHalfCard().getManaValue());
         } else {
-            costs.add(card.getConvertedManaCost());
+            costs.add(card.getManaValue());
         }
 
         return costs.stream().allMatch(cost -> {

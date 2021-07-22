@@ -20,7 +20,7 @@ public final class MarshFlats extends CardImpl {
     public MarshFlats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.frameColor = new ObjectColor("WB");
-        this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.SWAMP, SubType.PLAINS)));
+        this.addAbility(new FetchLandActivatedAbility(SubType.PLAINS, SubType.SWAMP));
     }
 
     private MarshFlats(final MarshFlats card) {

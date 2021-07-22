@@ -24,6 +24,7 @@ public final class ChainedThroatseeker extends CardImpl {
 
     public ChainedThroatseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(5);

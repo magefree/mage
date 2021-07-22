@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -39,7 +38,7 @@ public final class CoralReef extends CardImpl {
     
     static {
         islandFilter.add(SubType.ISLAND.getPredicate());
-        untappedBlueCreatureFilter.add(Predicates.not(TappedPredicate.instance));
+        untappedBlueCreatureFilter.add(TappedPredicate.UNTAPPED);
         untappedBlueCreatureFilter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 

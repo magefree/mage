@@ -53,8 +53,8 @@ public class AttacksFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} attacks for the first time each turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} attacks for the first time each turn, " ;
     }
 
     @Override

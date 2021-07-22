@@ -23,11 +23,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
 
 /**
@@ -101,7 +99,7 @@ class RasputinDreamweaverStartedUntappedWatcher extends Watcher {
     private static final FilterPermanent filter = new FilterPermanent("Untapped permanents");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     private final Set<UUID> startedUntapped = new HashSet<>(0);

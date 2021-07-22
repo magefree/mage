@@ -64,7 +64,7 @@ class WidespreadBrutalityEffect extends OneShotEffect {
         game.getState().processAction(game);
         int power = amassedArmy.getPower().getValue();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (permanent != null && permanent.isCreature() && !permanent.hasSubtype(SubType.ARMY, game)) {
+            if (permanent != null && permanent.isCreature(game) && !permanent.hasSubtype(SubType.ARMY, game)) {
                 permanent.damage(power, amassedArmy.getId(), source, game);
             }
         }

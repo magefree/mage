@@ -114,6 +114,12 @@ public final class StaticFilters {
         FILTER_CARD_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
     }
 
+    public static final FilterCard FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD = new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard");
+
+    static {
+        FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
+    }
+
     public static final FilterNoncreatureCard FILTER_CARD_NON_CREATURE = new FilterNoncreatureCard();
 
     static {
@@ -246,10 +252,16 @@ public final class StaticFilters {
         FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT.setLockedFilter(true);
     }
 
-    public static final FilterCreaturePermanent FILTER_ARTIFACT_CREATURE_PERMANENT = new FilterArtifactCreaturePermanent();
+    public static final FilterCreaturePermanent FILTER_PERMANENT_ARTIFACT_CREATURE = new FilterArtifactCreaturePermanent();
 
     static {
-        FILTER_ARTIFACT_CREATURE_PERMANENT.setLockedFilter(true);
+        FILTER_PERMANENT_ARTIFACT_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_PERMANENTS_ARTIFACT_CREATURE = new FilterArtifactCreaturePermanent("artifact creatures");
+
+    static {
+        FILTER_PERMANENTS_ARTIFACT_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterControlledArtifactPermanent FILTER_ARTIFACTS_NON_CREATURE = new FilterControlledArtifactPermanent("Noncreature artifacts");
@@ -304,10 +316,22 @@ public final class StaticFilters {
         FILTER_CONTROLLED_A_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_SHORT_TEXT = new FilterControlledPermanent("permanent");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_SHORT_TEXT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT = new FilterControlledArtifactPermanent();
 
     static {
         FILTER_CONTROLLED_PERMANENT_ARTIFACT.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACTS = new FilterControlledArtifactPermanent("artifacts you control");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_ARTIFACTS.setLockedFilter(true);
     }
 
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN = new FilterControlledArtifactPermanent("an artifact");
@@ -660,6 +684,13 @@ public final class StaticFilters {
     static {
         FILTER_SPELL_KICKED_A.add(KickedSpellPredicate.instance);
         FILTER_SPELL_KICKED_A.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_CREATURE_TOKEN = new FilterCreaturePermanent("creature token");
+
+    static {
+        FILTER_CREATURE_TOKEN.add(TokenPredicate.instance);
+        FILTER_CREATURE_TOKEN.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");

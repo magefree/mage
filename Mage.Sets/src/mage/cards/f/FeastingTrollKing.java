@@ -55,7 +55,7 @@ public final class FeastingTrollKing extends CardImpl {
         // Sacrifice three Foods: Return Feasting Troll King from your graveyard to the battlefield. Activate this ability only during your turn.
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
                 new SacrificeTargetCost(new TargetControlledPermanent(3, filter)),
                 MyTurnCondition.instance
         ).addHint(MyTurnHint.instance));

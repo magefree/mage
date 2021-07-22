@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -24,7 +23,7 @@ public final class ScorchedRuins extends CardImpl {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("two untapped lands");
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
     
     public ScorchedRuins(UUID ownerId, CardSetInfo setInfo) {

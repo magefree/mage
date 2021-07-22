@@ -45,7 +45,7 @@ class HauntingEchoesEffect extends OneShotEffect {
         super(Outcome.Detriment);
         staticText = "Exile all cards from target player's graveyard other than basic land cards. " +
                 "For each card exiled this way, search that player's library for all cards " +
-                "with the same name as that card and exile them. Then that player shuffles their library";
+                "with the same name as that card and exile them. Then that player shuffles";
     }
 
     private HauntingEchoesEffect(final HauntingEchoesEffect effect) {
@@ -64,7 +64,7 @@ class HauntingEchoesEffect extends OneShotEffect {
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(card -> !card.isBasic() || !card.isLand())
+                .filter(card -> !card.isBasic() || !card.isLand(game))
                 .forEach(cards::add);
         controller.moveCards(cards, Zone.EXILED, source, game);
         cards.removeIf(uuid -> game.getState().getZone(uuid) != Zone.EXILED);

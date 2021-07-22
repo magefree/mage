@@ -36,7 +36,7 @@ public class AttacksOrBlocksEnchantedTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public String getRule() {
-        return "Whenever enchanted creature attacks or blocks, "+ super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever enchanted creature attacks or blocks, ";
     }
 }

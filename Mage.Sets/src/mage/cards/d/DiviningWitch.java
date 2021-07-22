@@ -8,10 +8,8 @@ import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.*;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -56,7 +54,9 @@ public final class DiviningWitch extends CardImpl {
 
         DiviningWitchEffect() {
             super(Outcome.Benefit);
-            this.staticText = "Name a card. Exile the top six cards of your library. Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way";
+            this.staticText = "choose a card name. Exile the top six cards of your library, " +
+                    "then reveal cards from the top of your library until you reveal a card with the chosen name. " +
+                    "Put that card into your hand and exile all other cards revealed this way";
         }
 
         DiviningWitchEffect(final DiviningWitchEffect effect) {
@@ -72,39 +72,30 @@ public final class DiviningWitch extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Player controller = game.getPlayer(source.getControllerId());
             MageObject sourceObject = game.getObject(source.getSourceId());
-            if (controller != null && sourceObject != null) {
-                // Name a card.
-                Choice choice = new ChoiceImpl();
-                choice.setChoices(CardRepository.instance.getNames());
-                if (!controller.choose(Outcome.Benefit, choice, game)) {
-                    return false;
-                }
-                String name = choice.getChoice();
-                game.informPlayers("Card named: " + name);
-
-                // Exile the top six cards of your library,
-                controller.moveCards(controller.getLibrary().getTopCards(game, 6), Zone.EXILED, source, game);
-
-                // then reveal cards from the top of your library until you reveal the named card.
-                Cards cardsToReaveal = new CardsImpl();
-                Card cardToHand = null;
-                for (Card card : controller.getLibrary().getCards(game)) {
-                    if (card != null) {
-                        cardsToReaveal.add(card);
-                        // Put that card into your hand
-                        if (CardUtil.haveSameNames(card, name, game)) {
-                            cardToHand = card;
-                            break;
-                        }
-                    }
-                }
-                controller.moveCards(cardToHand, Zone.HAND, source, game);
-                controller.revealCards(sourceObject.getIdName(), cardsToReaveal, game);
-                cardsToReaveal.remove(cardToHand);
-                controller.moveCards(cardsToReaveal, Zone.EXILED, source, game);
-                return true;
+            if (controller == null || sourceObject == null) {
+                return false;
             }
-            return false;
+            // Name a card.
+            String cardName = ChooseACardNameEffect.TypeOfName.ALL.getChoice(controller, game, source, false);
+            // Exile the top six cards of your library,
+            controller.moveCards(controller.getLibrary().getTopCards(game, 6), Zone.EXILED, source, game);
+
+            // then reveal cards from the top of your library until you reveal the named card.
+            Cards cardsToReveal = new CardsImpl();
+            Card cardToHand = null;
+            for (Card card : controller.getLibrary().getCards(game)) {
+                cardsToReveal.add(card);
+                // Put that card into your hand
+                if (CardUtil.haveSameNames(card, cardName, game)) {
+                    cardToHand = card;
+                    break;
+                }
+            }
+            controller.moveCards(cardToHand, Zone.HAND, source, game);
+            controller.revealCards(sourceObject.getIdName(), cardsToReveal, game);
+            cardsToReveal.remove(cardToHand);
+            controller.moveCards(cardsToReveal, Zone.EXILED, source, game);
+            return true;
         }
     }
 }

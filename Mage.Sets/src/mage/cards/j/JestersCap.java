@@ -51,7 +51,7 @@ class JestersCapEffect extends OneShotEffect {
 
     public JestersCapEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search target player's library for three cards and exile them. Then that player shuffles their library";
+        this.staticText = "Search target player's library for three cards and exile them. Then that player shuffles";
     }
 
     public JestersCapEffect(final JestersCapEffect effect) {

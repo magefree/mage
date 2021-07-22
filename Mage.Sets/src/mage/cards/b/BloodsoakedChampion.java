@@ -39,7 +39,7 @@ public final class BloodsoakedChampion extends CardImpl {
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),
                 new ManaCostsImpl<>("{1}{B}"),
                 RaidCondition.instance,
-                "<i>Raid</i> &mdash; {1}{B}: Return {this} from your graveyard to the battlefield. Activate this ability only if you attacked this turn");
+                "<i>Raid</i> &mdash; {1}{B}: Return {this} from your graveyard to the battlefield. Activate only if you attacked this turn.");
         ability.setAbilityWord(AbilityWord.RAID);
         ability.addHint(RaidHint.instance);
         this.addAbility(ability, new PlayerAttackedWatcher());

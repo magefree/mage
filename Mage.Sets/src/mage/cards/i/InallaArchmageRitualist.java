@@ -51,7 +51,7 @@ public final class InallaArchmageRitualist extends CardImpl {
         filter.add(Predicates.not(TokenPredicate.instance));
         filter.add(AnotherPredicate.instance);
         filter2.add(SubType.WIZARD.getPredicate());
-        filter2.add(Predicates.not(TappedPredicate.instance));
+        filter2.add(TappedPredicate.UNTAPPED);
     }
 
     public InallaArchmageRitualist(UUID ownerId, CardSetInfo setInfo) {

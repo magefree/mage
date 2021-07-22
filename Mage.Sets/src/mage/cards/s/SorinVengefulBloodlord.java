@@ -20,7 +20,7 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -57,7 +57,7 @@ public final class SorinVengefulBloodlord extends CardImpl {
 
         // -X: Return target creature card with converted mana cost X from your graveyard to the battlefield. That creature is a vampire in addition to its other types.
         ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect().setText(
-                "Return target creature card with converted mana cost X from your graveyard to the battlefield"
+                "Return target creature card with mana value X from your graveyard to the battlefield"
         ));
         ability.addEffect(new SorinVengefulBloodlordEffect());
         ability.setTargetAdjuster(SorinVengefulBloodlordAdjuster.instance);
@@ -85,8 +85,8 @@ enum SorinVengefulBloodlordAdjuster implements TargetAdjuster {
                 xValue = ((PayVariableLoyaltyCost) cost).getAmount();
             }
         }
-        FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue + " or less");
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         ability.getTargets().clear();
         ability.addTarget(new TargetCardInYourGraveyard(filter));
     }

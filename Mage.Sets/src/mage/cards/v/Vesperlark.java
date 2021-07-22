@@ -48,7 +48,7 @@ public final class Vesperlark extends CardImpl {
         this.addAbility(ability);
 
         // Evoke {1}{W}
-        this.addAbility(new EvokeAbility(this, "{1}{W}"));
+        this.addAbility(new EvokeAbility("{1}{W}"));
     }
 
     private Vesperlark(final Vesperlark card) {

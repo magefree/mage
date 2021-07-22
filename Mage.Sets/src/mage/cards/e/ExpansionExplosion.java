@@ -14,7 +14,7 @@ import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -30,10 +30,10 @@ import java.util.UUID;
 public final class ExpansionExplosion extends SplitCard {
 
     private static final FilterSpell filter
-            = new FilterInstantOrSorcerySpell("instant or sorcery spell with converted mana cost 4 or less");
+            = new FilterInstantOrSorcerySpell("instant or sorcery spell with mana value 4 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 5));
     }
 
     public ExpansionExplosion(UUID ownerId, CardSetInfo setInfo) {

@@ -64,17 +64,17 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+        ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
+        if (zoneChangeEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            return permanent != null && permanent.isControlledBy(this.getControllerId()) && permanent.isCreature();
+            return permanent != null && permanent.isControlledBy(this.getControllerId()) && permanent.isCreature(game);
         }
         return false;
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature you control dies, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature you control dies, " ;
     }
 }
 

@@ -75,7 +75,7 @@ public class SoulbondAbility extends EntersBattlefieldTriggeredAbility {
         boolean self = false;
         boolean other = false;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(getControllerId())) {
-            if (permanent.isCreature()) {
+            if (permanent.isCreature(game)) {
                 if (permanent.getId().equals(getSourceId())) {
                     if (permanent.isControlledBy(getControllerId())) {
                         self = true;
@@ -131,7 +131,7 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.isCreature()) {
+        if (permanent != null && permanent.isCreature(game)) {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller != null) {
                 TargetControlledPermanent target = new TargetControlledPermanent(filter);
@@ -234,11 +234,11 @@ class SoulboundEntersOtherEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && permanent.getPairedCard() == null
-                && permanent.isCreature()) {
+                && permanent.isCreature(game)) {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller != null) {
                 Permanent enteringPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-                if (enteringPermanent != null && enteringPermanent.isCreature() && enteringPermanent.getPairedCard() == null) {
+                if (enteringPermanent != null && enteringPermanent.isCreature(game) && enteringPermanent.getPairedCard() == null) {
                     enteringPermanent.setPairedCard(new MageObjectReference(permanent, game));
                     permanent.setPairedCard(new MageObjectReference(enteringPermanent, game));
                     if (!game.isSimulation()) {

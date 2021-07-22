@@ -141,6 +141,7 @@
 
          // new mana render (svg support)
          mainTable.getColumnModel().getColumn(mainModel.COLUMN_INDEX_COST).setCellRenderer(new ManaSymbolsCellRenderer());
+         mainTable.getColumnModel().getColumn(mainModel.COLUMN_INDEX_COLOR_IDENTITY).setCellRenderer(new ManaSymbolsCellRenderer());
 
          if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DRAFT_VIEW, "cardView").equals("listView")) {
              jToggleListView.setSelected(true);

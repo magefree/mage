@@ -8,6 +8,8 @@ Classic Sixth Edition|6ED|
 Seventh Edition|7ED|
 Eighth Edition|8ED|
 Ninth Edition|9ED|
+Adventures in the Forgotten Realms|AFR|
+Forgotten Realms Commander|AFC|
 Aether Revolt|AER|
 Amonkhet|AKH|
 Shards of Alara|ALA|
@@ -35,6 +37,7 @@ Commander 2017 Edition|C17|
 Commander 2018 Edition|C18|
 Commander 2019 Edition|C19|
 Commander 2020 Edition|C20|
+Commander 2021 Edition|C21|
 Commander Legends|CMR|
 Champions of Kamigawa|CHK|
 Chronicles|CHR|
@@ -149,6 +152,7 @@ Game Night 2019|GN2|
 Mirage|MIR|
 Launch Party|MLP|
 Modern Horizons|MH1|
+Modern Horizons 2|MH2|
 Modern Masters 2015|MM2|
 Modern Masters 2017|MM3|
 Modern Masters|MMA|

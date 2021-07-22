@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -58,6 +57,10 @@ class PsychicVortexCost extends CostImpl {
         this.text = "Draw a card";
     }
 
+    private PsychicVortexCost(final PsychicVortexCost cost) {
+        super(cost);
+    }
+
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
@@ -77,6 +80,6 @@ class PsychicVortexCost extends CostImpl {
     
     @Override
     public PsychicVortexCost copy() {
-        return new PsychicVortexCost();
+        return new PsychicVortexCost(this);
     }
 }

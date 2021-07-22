@@ -30,7 +30,7 @@ public final class Mulldrifter extends CardImpl {
         // When Mulldrifter enters the battlefield, draw two cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2)));
         // Evoke {2}{U}
-        this.addAbility(new EvokeAbility(this, "{2}{U}"));
+        this.addAbility(new EvokeAbility("{2}{U}"));
     }
 
     private Mulldrifter(final Mulldrifter card) {

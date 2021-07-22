@@ -16,16 +16,16 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEquipmentPermanent;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.filter.predicate.permanent.EquippedPredicate;
 import mage.game.Game;
+import mage.game.events.DefenderAttackedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -63,14 +63,6 @@ public final class AkiriFearlessVoyager extends CardImpl {
 
 class AkiriFearlessVoyagerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(EquippedPredicate.instance);
-    }
-
-    private final Set<UUID> attackedPlayerIds = new HashSet<>();
-
     AkiriFearlessVoyagerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
@@ -86,28 +78,21 @@ class AkiriFearlessVoyagerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED
-                || event.getType() == GameEvent.EventType.DECLARE_ATTACKERS_STEP_POST;
+        return event.getType() == GameEvent.EventType.DEFENDER_ATTACKED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKERS_STEP_POST) {
-            attackedPlayerIds.clear();
-            return false;
-        }
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            Permanent creature = game.getPermanent(event.getSourceId());
-            if (creature != null
-                    && creature.isControlledBy(controllerId)
-                    && filter.match(creature, game)
-                    && game.getPlayer(event.getTargetId()) != null
-                    && !attackedPlayerIds.contains(event.getTargetId())) {
-                attackedPlayerIds.add(event.getTargetId());
-                return true;
-            }
-        }
-        return false;
+        return isControlledBy(event.getPlayerId())
+                && game.getPlayer(event.getTargetId()) != null
+                && ((DefenderAttackedEvent) event)
+                .getAttackers(game)
+                .stream()
+                .map(Permanent::getAttachments)
+                .flatMap(Collection::stream)
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .anyMatch(permanent -> permanent.hasSubtype(SubType.EQUIPMENT, game));
     }
 
     @Override

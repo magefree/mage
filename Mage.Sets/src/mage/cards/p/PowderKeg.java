@@ -19,7 +19,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -55,7 +55,7 @@ class PowderKegEffect extends OneShotEffect {
 
     public PowderKegEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Destroy each artifact and creature with converted mana cost equal to the number of fuse counters on {this}";
+        staticText = "Destroy each artifact and creature with mana value equal to the number of fuse counters on {this}";
     }
 
     public PowderKegEffect(final PowderKegEffect effect) {
@@ -71,7 +71,7 @@ class PowderKegEffect extends OneShotEffect {
         int count = sourcePermanent.getCounters(game).getCount(CounterType.FUSE);
         FilterPermanent filter = new FilterPermanent();
         filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, count));
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, count));
         for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             perm.destroy(source, game, false);
         }

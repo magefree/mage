@@ -46,7 +46,7 @@ class ForkInTheRoadEffect extends OneShotEffect {
 
     public ForkInTheRoadEffect() {
         super(Outcome.PutLandInPlay);
-        staticText = "Search your library for up to two basic land cards and reveal them. Put one into your hand and the other into your graveyard. Then shuffle your library";
+        staticText = "Search your library for up to two basic land cards and reveal them. Put one into your hand and the other into your graveyard. Then shuffle";
     }
 
     public ForkInTheRoadEffect(final ForkInTheRoadEffect effect) {

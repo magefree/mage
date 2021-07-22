@@ -25,6 +25,7 @@ public final class FirebrandRanger extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.RANGER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

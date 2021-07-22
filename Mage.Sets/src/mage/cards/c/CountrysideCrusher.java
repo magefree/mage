@@ -79,7 +79,7 @@ class CountrysideCrusherEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         for (Card card : controller.getLibrary().getCards(game)) {
             cards.add(card);
-            if (card.isLand()) {
+            if (card.isLand(game)) {
                 controller.moveCards(card, Zone.GRAVEYARD, source, game);
             } else {
                 break;

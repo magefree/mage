@@ -70,7 +70,7 @@ class IronscaleHydraEffect extends PreventionEffectImpl {
             return false;
         }
         Permanent damageSource = game.getPermanent(event.getSourceId());
-        return damageSource != null && damageSource.isCreature();
+        return damageSource != null && damageSource.isCreature(game);
     }
 
     @Override

@@ -19,7 +19,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -43,7 +42,7 @@ public final class CollectiveEffort extends CardImpl {
     private static final FilterPlayer filterPlayer = new FilterPlayer("player whose creatures get +1/+1 counters");
 
     static {
-        filterUntapped.add(Predicates.not(TappedPredicate.instance));
+        filterUntapped.add(TappedPredicate.UNTAPPED);
         filterDestroyCreature.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 

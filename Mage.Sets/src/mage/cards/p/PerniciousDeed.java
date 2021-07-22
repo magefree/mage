@@ -15,7 +15,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 
 /**
@@ -46,7 +46,7 @@ class PerniciousDeedEffect extends OneShotEffect {
 
     public PerniciousDeedEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Destroy each artifact, creature, and enchantment with converted mana cost X or less";
+        staticText = "Destroy each artifact, creature, and enchantment with mana value X or less";
     }
 
     public PerniciousDeedEffect(final PerniciousDeedEffect effect) {
@@ -67,7 +67,7 @@ class PerniciousDeedEffect extends OneShotEffect {
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate(),
                 CardType.ENCHANTMENT.getPredicate()));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
 
         return new DestroyAllEffect(filter).apply(game, source);
     }

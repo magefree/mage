@@ -10,7 +10,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
@@ -50,7 +50,7 @@ class VillainousWealthEffect extends OneShotEffect {
     public VillainousWealthEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Target opponent exiles the top X cards of their library. "
-                + "You may cast any number of spells with converted mana cost X "
+                + "You may cast any number of spells with mana value X "
                 + "or less from among them without paying their mana costs";
     }
 
@@ -70,7 +70,7 @@ class VillainousWealthEffect extends OneShotEffect {
         if (controller != null && mageObject != null) {
             Player player = game.getPlayer(targetPointer.getFirst(game, source));
             FilterCard filter = new FilterNonlandCard();
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             if (player != null) {
                 Cards cardsToExile = new CardsImpl();

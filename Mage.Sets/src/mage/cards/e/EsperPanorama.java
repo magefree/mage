@@ -22,7 +22,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class EsperPanorama extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a basic Plains, Island, or Swamp");
+    private static final FilterCard filter = new FilterCard("a basic Plains, Island, or Swamp card");
 
     static {
         filter.add(CardType.LAND.getPredicate());

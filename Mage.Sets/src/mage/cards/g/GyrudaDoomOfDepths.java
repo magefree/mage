@@ -11,7 +11,7 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostParityPredicate;
+import mage.filter.predicate.mageobject.ManaValueParityPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -56,14 +56,14 @@ enum GyrudaDoomOfDepthsCompanionCondition implements CompanionCondition {
 
     @Override
     public String getRule() {
-        return "Your starting deck contains only cards with even converted mana costs.";
+        return "Your starting deck contains only cards with even mana values.";
     }
 
     @Override
     public boolean isLegal(Set<Card> deck, int startingSize) {
         return deck
                 .stream()
-                .mapToInt(MageObject::getConvertedManaCost)
+                .mapToInt(MageObject::getManaValue)
                 .map(i -> i % 2)
                 .allMatch(i -> i == 0);
     }
@@ -72,15 +72,15 @@ enum GyrudaDoomOfDepthsCompanionCondition implements CompanionCondition {
 class GyrudaDoomOfDepthsEffect extends OneShotEffect {
 
     private static final FilterCard filter
-            = new FilterCreatureCard("creature card with an even converted mana cost");
+            = new FilterCreatureCard("creature card with an even mana value");
 
     static {
-        filter.add(ConvertedManaCostParityPredicate.EVEN);
+        filter.add(ManaValueParityPredicate.EVEN);
     }
 
     GyrudaDoomOfDepthsEffect() {
         super(Outcome.Benefit);
-        staticText = "each player mills four cards. Put a creature card with an even converted mana cost " +
+        staticText = "each player mills four cards. Put a creature card with an even mana value " +
                 "from among the milled cards onto the battlefield under your control";
     }
 

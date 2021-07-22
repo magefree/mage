@@ -115,6 +115,7 @@ class MemoryJarDelayedEffect extends OneShotEffect {
 
     private MemoryJarDelayedEffect(final MemoryJarDelayedEffect effect) {
         super(effect);
+        this.cards.addAll(effect.cards);
     }
 
     @Override

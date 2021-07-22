@@ -17,7 +17,6 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -39,8 +38,9 @@ public final class ThoughtPrison extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // Imprint - When Thought Prison enters the battlefield, you may have target player reveal their hand. If you do, choose a nonland card from it and exile that card.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ThoughtPrisonImprintEffect(), true, "<i>Imprint</i> &mdash; ");
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ThoughtPrisonImprintEffect(), true);
         ability.addTarget(new TargetPlayer());
+        ability.withFlavorWord("Imprint");
         this.addAbility(ability);
 
         // Whenever a player casts a spell that shares a color or converted mana cost with the exiled card, Thought Prison deals 2 damage to that player.
@@ -151,8 +151,8 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
                         matches = true;
                     }
                     // Check if spell's CMC matches the imprinted card
-                    int cmc = spell.getConvertedManaCost();
-                    int imprintedCmc = imprintedCard.getConvertedManaCost();
+                    int cmc = spell.getManaValue();
+                    int imprintedCmc = imprintedCard.getManaValue();
                     if (cmc == imprintedCmc) {
                         matches = true;
                     }
@@ -171,8 +171,8 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player casts a spell that shares a color or converted mana cost with the exiled card, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a player casts a spell that shares a color or mana value with the exiled card, " ;
     }
 }
 

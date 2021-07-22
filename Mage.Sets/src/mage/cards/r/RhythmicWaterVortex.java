@@ -30,7 +30,7 @@ public final class RhythmicWaterVortex extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
         // Search your library and/or graveyard for a card named Mu Yanling, reveal it, and put it into your hand. If you searched your library this way, shuffle it.
-        this.getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter));
+        this.getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter).concatBy("<br>"));
     }
 
     private RhythmicWaterVortex(final RhythmicWaterVortex card) {

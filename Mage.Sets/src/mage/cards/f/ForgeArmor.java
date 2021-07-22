@@ -9,7 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -23,7 +24,7 @@ public final class ForgeArmor extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
 
         // As an additional cost to cast Forge Armor, sacrifice an artifact.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent())));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN))));
         // Put X +1/+1 counters on target creature, where X is the sacrificed artifact's converted mana cost.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(new AddCountersTargetEffect(
             CounterType.P1P1.createInstance(), new SacrificeCostConvertedMana("artifact"))));

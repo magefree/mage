@@ -80,7 +80,7 @@ public final class GameStateEvaluator {
         } else {
             value = permanent.isTapped() ? 4 : 5;
         }
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
+        if (permanent.getCardType(game).contains(CardType.CREATURE)) {
             value += evaluateCreature(permanent, game) * CREATURE_FACTOR;
         }
         value += permanent.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD).size();
@@ -96,7 +96,7 @@ public final class GameStateEvaluator {
         }
         value += permanent.getAbilities().getStaticAbilities(Zone.BATTLEFIELD).size();
         value += permanent.getAbilities().getTriggeredAbilities(Zone.BATTLEFIELD).size();
-        value += permanent.getManaCost().convertedManaCost();
+        value += permanent.getManaCost().manaValue();
         //TODO: add a difficulty to calculation to ManaCost - sort permanents by difficulty for casting when evaluating game states
         return value;
     }

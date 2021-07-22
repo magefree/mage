@@ -26,7 +26,8 @@ public final class Desolation extends CardImpl {
     public Desolation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
 
-        // At the beginning of each end step, each player who tapped a land for mana this turn sacrifices a land. Desolation deals 2 damage to each player who sacrificed a Plains this way.
+        // At the beginning of each end step, each player who tapped a land for mana this
+        // turn sacrifices a land. Desolation deals 2 damage to each player who sacrificed a Plains this way.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new DesolationEffect(), TargetController.ANY, false
         ), new DesolationWatcher());

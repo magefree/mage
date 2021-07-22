@@ -40,8 +40,8 @@ public class AuraAttachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an Aura becomes attached to {this}, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever an Aura becomes attached to {this}, " ;
     }
 
     @Override

@@ -54,9 +54,12 @@ public class Effects extends ArrayList<Effect> {
             String concatPrefix = effect.getConcatPrefix();
 
             if (effectNum > 1 && !concatPrefix.isEmpty() && !concatPrefix.equals(".")) {
-                nextRule = concatPrefix + " " + nextRule;
+                if (concatPrefix.contains("<br>")) {
+                    nextRule = concatPrefix + CardUtil.getTextWithFirstCharUpperCase(nextRule);
+                } else {
+                    nextRule = concatPrefix + " " + nextRule;
+                }
             }
-
 
             //check if nextRule is a new sentence or not.
             if (nextRule.startsWith("and ") || nextRule.startsWith("with ") || nextRule.startsWith("then ")) {
@@ -93,10 +96,9 @@ public class Effects extends ArrayList<Effect> {
             sbText.append(currentRule);
 
             lastRule = nextRule;
-
         }
 
-        //add punctuation to very last rule.
+        // add punctuation to very last rule.
         if (lastRule != null && lastRule.length() > 3
                 && !lastRule.endsWith(".")
                 && !lastRule.endsWith("\"")
@@ -106,8 +108,13 @@ public class Effects extends ArrayList<Effect> {
             sbText.append('.');
         }
 
-        return sbText.toString();
+        // flavor word
+        if (mode.getFlavorWord() != null) {
+            return CardUtil.italicizeWithEmDash(mode.getFlavorWord())
+                    + CardUtil.getTextWithFirstCharUpperCase(sbText.toString());
+        }
 
+        return sbText.toString();
     }
 
     public boolean hasOutcome(Ability source, Outcome outcome) {
@@ -181,6 +188,8 @@ public class Effects extends ArrayList<Effect> {
     }
 
     public void setValue(String key, Object value) {
-        this.stream().forEach(effect -> effect.setValue(key, value));
+        for (Effect effect : this) {
+            effect.setValue(key, value);
+        }
     }
 }

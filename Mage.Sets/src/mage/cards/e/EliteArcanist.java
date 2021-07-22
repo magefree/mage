@@ -73,7 +73,7 @@ enum EliteArcanistAdjuster implements CostAdjuster {
         if (imprintedInstant == null) {
             return;
         }
-        int cmc = imprintedInstant.getConvertedManaCost();
+        int cmc = imprintedInstant.getManaValue();
         if (cmc > 0) {
             ability.getManaCostsToPay().clear();
             ability.getManaCostsToPay().add(new GenericManaCost(cmc));
@@ -132,7 +132,7 @@ class EliteArcanistCopyEffect extends OneShotEffect {
     public EliteArcanistCopyEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Copy the exiled card. You may cast the copy "
-                + "without paying its mana cost. X is the converted mana cost of the exiled card";
+                + "without paying its mana cost. X is the mana value of the exiled card";
     }
 
     public EliteArcanistCopyEffect(final EliteArcanistCopyEffect effect) {

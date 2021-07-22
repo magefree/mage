@@ -47,7 +47,7 @@ class ManaDrainCounterEffect extends OneShotEffect {
 
     public ManaDrainCounterEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Counter target spell. At the beginning of your next main phase, add an amount of {C} equal to that spell's converted mana cost";
+        this.staticText = "Counter target spell. At the beginning of your next main phase, add an amount of {C} equal to that spell's mana value";
     }
 
     public ManaDrainCounterEffect(final ManaDrainCounterEffect effect) {
@@ -65,7 +65,7 @@ class ManaDrainCounterEffect extends OneShotEffect {
         if (spell != null) {
             game.getStack().counter(getTargetPointer().getFirst(game, source), source, game);
             // mana gets added also if counter is not successful
-            int cmc = spell.getConvertedManaCost();
+            int cmc = spell.getManaValue();
             Effect effect = new AddManaToManaPoolTargetControllerEffect(Mana.ColorlessMana(cmc), "your");
             effect.setTargetPointer(new FixedTarget(source.getControllerId()));
             AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility

@@ -66,7 +66,7 @@ class GhaltaPrimalHungerCostReductionEffect extends CostModificationEffectImpl {
 
     GhaltaPrimalHungerCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {X} less to cast, where X is the total power of creatures you control";
+        staticText = "this spell costs {X} less to cast, where X is the total power of creatures you control";
     }
 
     GhaltaPrimalHungerCostReductionEffect(final GhaltaPrimalHungerCostReductionEffect effect) {
@@ -77,7 +77,7 @@ class GhaltaPrimalHungerCostReductionEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int totalPower = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent.isCreature()) {
+            if (permanent.isCreature(game)) {
                 totalPower += permanent.getPower().getValue();
             }
 

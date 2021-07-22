@@ -2,7 +2,6 @@
 
 package mage.filter.common;
 
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
@@ -17,7 +16,7 @@ public class FilterUntappedCreature extends FilterCreaturePermanent {
 
     public FilterUntappedCreature(String name) {
         super(name);
-        this.add(Predicates.not(TappedPredicate.instance));
+        this.add(TappedPredicate.UNTAPPED);
     }
 
     public FilterUntappedCreature(final FilterUntappedCreature filter) {

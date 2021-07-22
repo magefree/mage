@@ -59,7 +59,7 @@ class UrzasChaliceAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && spell.isArtifact();
+        return spell != null && spell.isArtifact(game);
     }
 
     @Override

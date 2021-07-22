@@ -47,7 +47,7 @@ class PirsWhimEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "For each player, choose friend or foe. "
                 + "Each friend searches their library for a land card, "
-                + "puts it onto the battlefield tapped, then shuffles their library. "
+                + "puts it onto the battlefield tapped, then shuffles. "
                 + "Each foe sacrifices an artifact or enchantment they control.";
     }
 

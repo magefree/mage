@@ -31,7 +31,7 @@ public final class AllHallowsEve extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
         // Exile All Hallow's Eve with two scream counters on it.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
         this.getSpellAbility().addEffect(new AddCountersSourceEffect(
                 CounterType.SCREAM.createInstance(), StaticValue.get(2), true, true
         ).setText("with 2 scream counters on it"));
@@ -95,7 +95,7 @@ class AllHallowsEveEffect extends OneShotEffect {
                 .map(Player::getGraveyard)
                 .map(g -> g.getCards(game))
                 .flatMap(Collection::stream)
-                .filter(MageObject::isCreature)
+                .filter(card1 -> card1.isCreature(game))
                 .forEach(cards::add);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
         return true;

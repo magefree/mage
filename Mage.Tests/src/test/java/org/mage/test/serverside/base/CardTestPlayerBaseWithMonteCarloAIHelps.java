@@ -5,9 +5,7 @@ import org.mage.test.player.TestComputerPlayerMonteCarlo;
 import org.mage.test.player.TestPlayer;
 
 /**
- * Base class but with Monte Carlo computer player to test single AI commands (it's different from full AI simulation from CardTestPlayerBaseAI):
- * 1. AI don't play normal priorities (you must use ai*** commands to play it);
- * 2. AI will choose in non strict mode (it's simulated ComputerPlayerMCTS, not simple ComputerPlayer from basic tests)
+ * See more details in CardTestPlayerBaseWithAIHelps
  *
  * @author JayDi85
  */

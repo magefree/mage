@@ -43,7 +43,7 @@ class NaturalSelectionEffect extends OneShotEffect {
 
     public NaturalSelectionEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle their library.";
+        this.staticText = "look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle";
     }
 
     public NaturalSelectionEffect(final NaturalSelectionEffect effect) {
@@ -65,7 +65,7 @@ class NaturalSelectionEffect extends OneShotEffect {
         Cards cards = new CardsImpl(targetPlayer.getLibrary().getTopCards(game, 3));
         controller.lookAtCards(source, null, cards, game);
         controller.putCardsOnTopOfLibrary(cards, game, source, true);
-        if (controller.chooseUse(Outcome.Neutral, "You may have that player shuffle their library", source, game)) {
+        if (controller.chooseUse(Outcome.Neutral, "You may have that player shuffle", source, game)) {
             targetPlayer.shuffleLibrary(source, game);
         }
         return true;

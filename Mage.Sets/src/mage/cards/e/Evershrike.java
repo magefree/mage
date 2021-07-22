@@ -16,7 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.card.AuraCardCanAttachToPermanentId;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -64,7 +64,7 @@ class EvershrikeEffect extends OneShotEffect {
     EvershrikeEffect() {
         super(Outcome.Benefit);
         staticText = "Return {this} from your graveyard to the battlefield. " +
-                "You may put an Aura card with converted mana cost X or less from your hand " +
+                "You may put an Aura card with mana value X or less from your hand " +
                 "onto the battlefield attached to it. If you don't, exile {this}";
     }
 
@@ -89,11 +89,11 @@ class EvershrikeEffect extends OneShotEffect {
             return false;
         }
         boolean exileSource = true;
-        FilterCard filterAuraCard = new FilterCard("Aura card with converted mana cost X or less from your hand");
+        FilterCard filterAuraCard = new FilterCard("Aura card with mana value X or less from your hand");
         filterAuraCard.add(CardType.ENCHANTMENT.getPredicate());
         filterAuraCard.add(SubType.AURA.getPredicate());
         filterAuraCard.add(new AuraCardCanAttachToPermanentId(evershrikePermanent.getId()));
-        filterAuraCard.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xAmount + 1));
+        filterAuraCard.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xAmount + 1));
         int count = controller.getHand().count(filterAuraCard, game);
         if (count > 0 && controller.chooseUse(Outcome.Benefit, "Put an Aura card from your hand onto the battlefield attached to " + evershrikeCard.getIdName() + "?", source, game)) {
             TargetCard targetAura = new TargetCard(Zone.HAND, filterAuraCard);

@@ -20,7 +20,7 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -37,16 +37,16 @@ public final class BlastZone extends CardImpl {
 
         // Blast Zone enters the battlefield with a charge counter on it.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1))
-                ,"with a charge counter")
-        );
+                new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)),
+                "with a charge counter on it"
+        ));
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {X}{X}, {T}: Put X charge counters on Blast Zone.
         Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(
-                CounterType.CHARGE.createInstance(), ManacostVariableValue.instance, true
+                CounterType.CHARGE.createInstance(), ManacostVariableValue.REGULAR, true
         ), new ManaCostsImpl("{X}{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -72,7 +72,7 @@ class BlastZoneEffect extends OneShotEffect {
 
     BlastZoneEffect() {
         super(Outcome.Benefit);
-        staticText = "Destroy each nonland permanent with converted mana cost " +
+        staticText = "Destroy each nonland permanent with mana value " +
                 "equal to the number of charge counters on {this}";
     }
 
@@ -90,7 +90,7 @@ class BlastZoneEffect extends OneShotEffect {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         int xValue = permanent.getCounters(game).getCount(CounterType.CHARGE);
         FilterPermanent filter = new FilterNonlandPermanent();
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         return new DestroyAllEffect(filter).apply(game, source);
     }
 }

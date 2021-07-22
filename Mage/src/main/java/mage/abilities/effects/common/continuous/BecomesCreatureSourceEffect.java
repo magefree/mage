@@ -91,14 +91,14 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         switch (layer) {
             case TypeChangingEffects_4:
                 if (losePreviousTypes) {
-                    permanent.getCardType().clear();
+                    permanent.removeAllCardTypes(game);
                 }
-                for (CardType cardType : token.getCardType()) {
-                    permanent.addCardType(cardType);
+                for (CardType cardType : token.getCardType(game)) {
+                    permanent.addCardType(game, cardType);
                 }
 
                 if (theyAreStillType != null && theyAreStillType.isEmpty()
-                        || theyAreStillType == null && permanent.isLand()) {
+                        || theyAreStillType == null && permanent.isLand(game)) {
                     permanent.removeAllCreatureTypes(game);
                 }
                 permanent.copySubTypesFrom(game, token);
@@ -146,9 +146,9 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
 
     private void setText() {
         if (theyAreStillType != null && !theyAreStillType.isEmpty()) {
-            staticText = duration.toString() + " {this} becomes a " + token.getDescription() + " that's still a " + this.theyAreStillType;
+            staticText = duration.toString() + ", {this} becomes a " + token.getDescription() + " that's still a " + this.theyAreStillType;
         } else {
-            staticText = duration.toString() + " {this} becomes a " + token.getDescription();
+            staticText = duration.toString() + ", {this} becomes a " + token.getDescription();
         }
     }
 

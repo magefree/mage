@@ -62,14 +62,14 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null || !permanent.isCreature()) {
+        if (permanent == null || !permanent.isCreature(game)) {
             return false;
         }
         if (combatDamageOnly && !((DamagedEvent) event).isCombatDamage()) {
             return false;
         }
         permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent == null || !filterPermanent.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (!filterPermanent.match(permanent, getSourceId(), getControllerId(), game)) {
             return false;
         }
         for (Effect effect : this.getEffects()) {
@@ -95,8 +95,8 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         return "Whenever " + filterPermanent.getMessage() + " deals "
-                + (combatDamageOnly ? "combat " : "") + "damage to a creature, " + super.getRule();
+                + (combatDamageOnly ? "combat " : "") + "damage to a creature, " ;
     }
 }

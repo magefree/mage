@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -63,10 +62,10 @@ class VigilForTheLostTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD &&
-                ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+        ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
+        if (zoneChangeEvent.isDiesEvent()) {
             Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (p.isControlledBy(this.getControllerId()) && p.isCreature()) {
+            if (p.isControlledBy(this.getControllerId()) && p.isCreature(game)) {
                 return true;
             }
         }

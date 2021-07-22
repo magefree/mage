@@ -69,7 +69,7 @@ class ObstinateFamiliarReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player you = game.getPlayer(source.getControllerId());
-        if (you != null && you.chooseUse(Outcome.AIDontUseIt, "Would you like to skip drawing a card?", source, game)){
+        if (you != null && you.chooseUse(Outcome.AIDontUseIt, "Skip this draw?", source, game)){
             return true;
         }
         return false;

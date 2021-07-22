@@ -85,8 +85,8 @@ class BurningCinderFuryOfCrimsonChaosFireAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever any player taps a permanent, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever any player taps a permanent, " ;
     }
 }
 
@@ -205,7 +205,7 @@ class BurningCinderFuryOfCrimsonChaosFireWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.TAPPED) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && !permanent.isLand()) {
+            if (permanent != null && !permanent.isLand(game)) {
                 tappedActivePlayerIds.add(permanent.getControllerId());
             }
         }

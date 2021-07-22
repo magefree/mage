@@ -55,7 +55,7 @@ class CosmicHorrorEffect extends OneShotEffect {
     public CosmicHorrorEffect(Cost cost) {
         super(Outcome.DestroyPermanent);
         this.cost = cost;
-        staticText = "destroy {this} unless you pay {3}{B}{B}{B}.  If {this} is destroyed this way it deals 7 damage to you";
+        staticText = "destroy {this} unless you pay {3}{B}{B}{B}. If {this} is destroyed this way it deals 7 damage to you";
     }
 
     public CosmicHorrorEffect(final CosmicHorrorEffect effect) {

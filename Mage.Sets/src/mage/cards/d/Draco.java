@@ -8,6 +8,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.hint.common.DomainHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +36,7 @@ public final class Draco extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Domain - Draco costs {2} less to cast for each basic land type among lands you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new DracoCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new DracoCostReductionEffect()).addHint(DomainHint.instance));
 
         // Domain - At the beginning of your upkeep, sacrifice Draco unless you pay {10}. This cost is reduced by {2} for each basic land type among lands you control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DracoSacrificeUnlessPaysEffect(), TargetController.YOU, false));
@@ -55,7 +56,7 @@ class DracoCostReductionEffect extends CostModificationEffectImpl {
 
     public DracoCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "<i>Domain</i> &mdash; {this} costs {2} less to cast for each basic land type among lands you control.";
+        staticText = "<i>Domain</i> &mdash; This spell costs {2} less to cast for each basic land type among lands you control.";
     }
 
     protected DracoCostReductionEffect(final DracoCostReductionEffect effect) {

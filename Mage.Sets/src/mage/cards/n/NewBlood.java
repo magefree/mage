@@ -17,7 +17,6 @@ import mage.choices.Choice;
 import mage.choices.ChoiceCreatureType;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.TextPartSubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -39,7 +38,7 @@ public final class NewBlood extends CardImpl {
         TextPartSubType textPartVampire = (TextPartSubType) addTextPart(new TextPartSubType(SubType.VAMPIRE));
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped Vampire you control");
         filter.add(new TextPartSubtypePredicate(textPartVampire));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         // As an additional cost to cast New Blood, tap an untapped Vampire you control.
         this.getSpellAbility().addCost(new TapTargetCost(
                 new TargetControlledCreaturePermanent(1, 1, filter, true)));

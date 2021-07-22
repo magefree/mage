@@ -49,13 +49,13 @@ class HarvestSeasonEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("tapped creature you control");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     HarvestSeasonEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search your library for up to X basic land cards, where X is the number of tapped creatures you control,"
-                + " and put those cards onto the battlefield tapped, then shuffle your library.";
+                + " put those cards onto the battlefield tapped, then shuffle.";
     }
 
     HarvestSeasonEffect(final HarvestSeasonEffect effect) {

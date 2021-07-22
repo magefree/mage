@@ -65,6 +65,6 @@ class ReapThePastEffect extends OneShotEffect {
             cards.remove(cards.getRandom(game));
         }
         player.moveCards(cards, Zone.HAND, source, game);
-        return ExileSpellEffect.getInstance().apply(game, source);
+        return new ExileSpellEffect().apply(game, source);
     }
 }

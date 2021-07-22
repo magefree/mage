@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.common.DomainHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,6 +30,7 @@ public final class WorldlyCounsel extends CardImpl {
 
         // Domain - Look at the top X cards of your library, where X is the number of basic land types among lands you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new WorldlyCounselEffect());
+        this.getSpellAbility().addHint(DomainHint.instance);
     }
 
     private WorldlyCounsel(final WorldlyCounsel card) {

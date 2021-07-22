@@ -22,12 +22,15 @@ public final class FirstSphereGargantua extends CardImpl {
     public FirstSphereGargantua(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
         // When First-Sphere Gargantua enters the battlefield, you draw a card and you lose 1 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1));
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new DrawCardSourceControllerEffect(1).setText("you draw a card")
+        );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
 

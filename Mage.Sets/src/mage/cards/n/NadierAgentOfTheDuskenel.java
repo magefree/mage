@@ -88,7 +88,7 @@ class NadierAgentOfTheDuskenelEffect extends OneShotEffect {
             return false;
         }
         Permanent permanent = (Permanent) obj;
-        if (!permanent.isCreature() || permanent.getPower().getValue() < 1) {
+        if (!permanent.isCreature(game) || permanent.getPower().getValue() < 1) {
             return false;
         }
         return new ElfWarriorToken().putOntoBattlefield(permanent.getPower().getValue(), game, source, source.getControllerId()

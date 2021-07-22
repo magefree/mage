@@ -73,7 +73,7 @@ class AllCountersCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public AllCountersCount copy() {
         return new AllCountersCount();
     }
 

@@ -16,6 +16,7 @@ public final class FlamebornViron extends CardImpl {
 
     public FlamebornViron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.INSECT);
 
         this.power = new MageInt(6);

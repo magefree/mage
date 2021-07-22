@@ -37,34 +37,22 @@ public final class Endling extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {B}: Endling gains menace until end of turn.
-        this.addAbility(new SimpleActivatedAbility(
-                new GainAbilitySourceEffect(
-                        new MenaceAbility(),
-                        Duration.EndOfTurn
-                ), new ManaCostsImpl("{B}")
-        ));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
+                new MenaceAbility(), Duration.EndOfTurn
+        ), new ManaCostsImpl<>("{B}")));
 
         // {B}: Endling gains deathtouch until end of turn.
-        this.addAbility(new SimpleActivatedAbility(
-                new GainAbilitySourceEffect(
-                        DeathtouchAbility.getInstance(),
-                        Duration.EndOfTurn
-                ), new ManaCostsImpl("{B}")
-        ));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
+                DeathtouchAbility.getInstance(), Duration.EndOfTurn
+        ), new ManaCostsImpl<>("{B}")));
 
         // {B}: Endling gains undying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(
-                new GainAbilitySourceEffect(
-                        new UndyingAbility(),
-                        Duration.EndOfTurn
-                ), new ManaCostsImpl("{B}")
-        ));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
+                new UndyingAbility(), Duration.EndOfTurn
+        ), new ManaCostsImpl<>("{B}")));
 
         // {1}: Endling gets +1/-1 or -1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(
-                new EndlingEffect(),
-                new GenericManaCost(1)
-        ));
+        this.addAbility(new SimpleActivatedAbility(new EndlingEffect(), new GenericManaCost(1)));
     }
 
     private Endling(final Endling card) {

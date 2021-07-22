@@ -238,7 +238,7 @@ public final class DeckBuilder {
         }
 
         private int getManaCostScore(Card card, List<ColoredManaSymbol> allowedColors) {
-            int converted = card.getConvertedManaCost();
+            int converted = card.getManaValue();
             final Map<String, Integer> singleCount = new HashMap<>();
             int maxSingleCount = 0;
             int multicolor = 0;
@@ -276,7 +276,7 @@ public final class DeckBuilder {
         }
 
         public int getConvertedCost() {
-            return this.card.getConvertedManaCost();
+            return this.card.getManaValue();
         }
 
         public Card getCard() {

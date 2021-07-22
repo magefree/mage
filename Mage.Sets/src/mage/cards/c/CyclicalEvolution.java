@@ -28,7 +28,7 @@ public final class CyclicalEvolution extends CardImpl {
         // Target creature gets +3/+3 until end of turn. Exile Cyclical Evolution with three time counters on it.
         getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         getSpellAbility().addTarget(new TargetCreaturePermanent());
-        getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        getSpellAbility().addEffect(new ExileSpellEffect());
         Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), StaticValue.get(3), true, true);
         effect.setText("with 3 time counters on it");
         getSpellAbility().addEffect(effect);

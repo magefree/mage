@@ -1,5 +1,6 @@
 package mage.cards;
 
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerWithAbility;
@@ -284,13 +285,7 @@ public abstract class ExpansionSet implements Serializable {
 
     private List<Card> createBoosterUsingCollator() {
         if (inBoosterMap.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes(code);
-            CardRepository
-                    .instance
-                    .findCards(criteria)
-                    .stream()
-                    .forEach(cardInfo -> inBoosterMap.put(cardInfo.getCardNumber(), cardInfo));
+            generateBoosterMap();
         }
         return boosterCollator
                 .makeBooster()
@@ -298,6 +293,14 @@ public abstract class ExpansionSet implements Serializable {
                 .map(inBoosterMap::get)
                 .map(CardInfo::getCard)
                 .collect(Collectors.toList());
+    }
+
+    protected void generateBoosterMap() {
+        CardRepository
+                .instance
+                .findCards(new CardCriteria().setCodes(code))
+                .stream()
+                .forEach(cardInfo -> inBoosterMap.put(cardInfo.getCardNumber(), cardInfo));
     }
 
     protected boolean boosterIsValid(List<Card> booster) {
@@ -311,7 +314,7 @@ public abstract class ExpansionSet implements Serializable {
             return booster.stream().anyMatch(card -> card.isLegendary() && card.isCreature());
         }
         if (needsPlaneswalker) {
-            return booster.stream().filter(card -> card.isPlaneswalker()).count() == 1;
+            return booster.stream().filter(MageObject::isPlaneswalker).count() == 1;
         }
 
         // TODO: add partner check

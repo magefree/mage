@@ -3,17 +3,12 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.TargetController;
-import static mage.constants.TargetController.ANY;
-import static mage.constants.TargetController.OPPONENT;
-import static mage.constants.TargetController.YOU;
 import mage.constants.Zone;
-import static mage.constants.Zone.GRAVEYARD;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class BeginningOfPostCombatMainTriggeredAbility extends TriggeredAbilityImpl {
@@ -82,14 +77,14 @@ public class BeginningOfPostCombatMainTriggeredAbility extends TriggeredAbilityI
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         switch (targetController) {
             case YOU:
-                return "At the beginning of your postcombat main phase, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of your postcombat main phase, " + generateZoneString();
             case OPPONENT:
-                return "At the beginning of each opponent's postcombat main phase, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of each opponent's postcombat main phase, " + generateZoneString();
             case ANY:
-                return "At the beginning of each player's postcombat main phase, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of each player's postcombat main phase, " + generateZoneString();
         }
         return "";
     }

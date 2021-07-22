@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -30,7 +30,7 @@ public final class ReturnToTheRanks extends CardImpl {
 
         // Return X target creature cards with converted mana cost 2 or less from your graveyard to the battlefield.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-        effect.setText("Return X target creature cards with converted mana cost 2 or less from your graveyard to the battlefield");
+        effect.setText("Return X target creature cards with mana value 2 or less from your graveyard to the battlefield");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().setTargetAdjuster(ReturnToTheRanksAdjuster.instance);
     }
@@ -47,10 +47,10 @@ public final class ReturnToTheRanks extends CardImpl {
 
 enum ReturnToTheRanksAdjuster implements TargetAdjuster {
     instance;
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with converted mana cost 2 or less from your graveyard");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with mana value 2 or less from your graveyard");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     @Override

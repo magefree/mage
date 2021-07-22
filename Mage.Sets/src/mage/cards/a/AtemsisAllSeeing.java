@@ -63,7 +63,7 @@ class AtemsisAllSeeingEffect extends OneShotEffect {
 
     AtemsisAllSeeingEffect() {
         super(Outcome.Benefit);
-        staticText = "reveal your hand. If cards with at least six different converted mana costs " +
+        staticText = "reveal your hand. If cards with at least six different mana values " +
                 "are revealed this way, that player loses the game.";
     }
 
@@ -88,7 +88,7 @@ class AtemsisAllSeeingEffect extends OneShotEffect {
                 .getHand()
                 .getCards(game)
                 .stream()
-                .map(card -> card.getConvertedManaCost())
+                .map(card -> card.getManaValue())
                 .distinct()
                 .count() > 5) {
             opponent.lost(game);

@@ -22,6 +22,7 @@ public final class SanguineGuard extends CardImpl {
 
     public SanguineGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.KNIGHT);
 

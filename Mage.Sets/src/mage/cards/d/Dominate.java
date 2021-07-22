@@ -9,7 +9,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -26,7 +26,7 @@ public final class Dominate extends CardImpl {
 
         // Gain control of target creature with converted mana cost X or less.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom, true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature with converted mana cost X or less")));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature with mana value X or less")));
         this.getSpellAbility().setTargetAdjuster(DominateAdjuster.instance);
     }
 
@@ -47,8 +47,8 @@ enum DominateAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         int xValue = ability.getManaCostsToPay().getX();
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost X or less");
-        filter.add(Predicates.not(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, xValue)));
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value X or less");
+        filter.add(Predicates.not(new ManaValuePredicate(ComparisonType.MORE_THAN, xValue)));
         ability.addTarget(new TargetCreaturePermanent(filter));
     }
 }

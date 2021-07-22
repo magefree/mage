@@ -66,7 +66,7 @@ class CallOfTheWildEffect extends OneShotEffect {
             if (card != null) {
                 Cards cards = new CardsImpl(card);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {
                     controller.moveCards(card, Zone.GRAVEYARD, source, game);

@@ -91,7 +91,7 @@ class WookieeMysticWatcher extends Watcher {
             MageObject target = game.getObject(event.getTargetId());
             if (event.getSourceId() != null
                     && event.getSourceId().equals(this.getSourceId())
-                    && target != null && target.isCreature()
+                    && target != null && target.isCreature(game)
                     && event.getFlag()) {
                 if (target instanceof Spell) {
                     this.creatures.add(((Spell) target).getCard().getId());

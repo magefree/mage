@@ -38,7 +38,7 @@ public final class ShiningShoal extends CardImpl {
         this.subtype.add(SubType.ARCANE);
 
         // You may exile a white card with converted mana cost X from your hand rather than pay Shining Shoal's mana cost
-        FilterOwnedCard filter = new FilterOwnedCard("a white card with converted mana cost X from your hand");
+        FilterOwnedCard filter = new FilterOwnedCard("a white card with mana value X from your hand");
         filter.add(new ColorPredicate(ObjectColor.WHITE));
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter), true)));
@@ -110,7 +110,7 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
             // check target
             //   check creature first
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.isCreature()) {
+            if (permanent != null && permanent.isCreature(game)) {
                 if (permanent.isControlledBy(source.getControllerId())) {
                     // it's your creature
                     redirectTarget = source.getTargets().get(1);

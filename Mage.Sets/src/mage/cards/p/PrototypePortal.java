@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -35,11 +36,15 @@ public final class PrototypePortal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Imprint - When Prototype Portal enters the battlefield, you may exile an artifact card from your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PrototypePortalEffect(), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new PrototypePortalEffect(), true)
+                .withFlavorWord("Imprint")
+        );
 
         // {X}, {tap}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PrototypePortalCreateTokenEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(new PrototypePortalCreateTokenEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
+        ability.setCostAdjuster(PrototypePortalAdjuster.instance);
         this.addAbility(ability);
     }
 
@@ -48,13 +53,22 @@ public final class PrototypePortal extends CardImpl {
     }
 
     @Override
+    public PrototypePortal copy() {
+        return new PrototypePortal(this);
+    }
+}
+
+enum PrototypePortalAdjuster implements CostAdjuster {
+    instance;
+
+    @Override
     public void adjustCosts(Ability ability, Game game) {
         Permanent card = game.getPermanent(ability.getSourceId());
         if (card != null) {
             if (!card.getImprinted().isEmpty()) {
                 Card imprinted = game.getCard(card.getImprinted().get(0));
                 if (imprinted != null) {
-                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getConvertedManaCost()));
+                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaValue()));
                 }
             }
         }
@@ -66,21 +80,16 @@ public final class PrototypePortal extends CardImpl {
             }
         }
     }
-
-    @Override
-    public PrototypePortal copy() {
-        return new PrototypePortal(this);
-    }
 }
 
 class PrototypePortalEffect extends OneShotEffect {
 
-    public PrototypePortalEffect() {
+    PrototypePortalEffect() {
         super(Outcome.Benefit);
         staticText = "exile an artifact card from your hand";
     }
 
-    public PrototypePortalEffect(PrototypePortalEffect effect) {
+    private PrototypePortalEffect(PrototypePortalEffect effect) {
         super(effect);
     }
 
@@ -115,12 +124,12 @@ class PrototypePortalEffect extends OneShotEffect {
 
 class PrototypePortalCreateTokenEffect extends OneShotEffect {
 
-    public PrototypePortalCreateTokenEffect() {
+    PrototypePortalCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Create a token that's a copy of the exiled card. X is the converted mana cost of that card";
+        this.staticText = "Create a token that's a copy of the exiled card. X is the mana value of that card";
     }
 
-    public PrototypePortalCreateTokenEffect(final PrototypePortalCreateTokenEffect effect) {
+    private PrototypePortalCreateTokenEffect(final PrototypePortalCreateTokenEffect effect) {
         super(effect);
     }
 

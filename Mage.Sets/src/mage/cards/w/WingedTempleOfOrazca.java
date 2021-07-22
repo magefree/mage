@@ -80,7 +80,7 @@ class WingedTempleOfOrazcaEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
-        if (creature != null && creature.isCreature()) {
+        if (creature != null && creature.isCreature(game)) {
             int pow = creature.getPower().getValue();
             ContinuousEffect effect = new BoostTargetEffect(pow, pow, Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(creature, game));

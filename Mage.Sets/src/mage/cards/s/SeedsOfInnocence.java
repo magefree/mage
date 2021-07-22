@@ -41,7 +41,7 @@ class SeedsOfInnocenceEffect extends OneShotEffect {
 
     public SeedsOfInnocenceEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy all artifacts. They can't be regenerated. The controller of each of those artifacts gains life equal to its converted mana cost";
+        this.staticText = "Destroy all artifacts. They can't be regenerated. The controller of each of those artifacts gains life equal to its mana value";
     }
 
     public SeedsOfInnocenceEffect(final SeedsOfInnocenceEffect effect) {
@@ -59,7 +59,7 @@ class SeedsOfInnocenceEffect extends OneShotEffect {
         if (controller != null) {
             for (Permanent artifact : game.getState().getBattlefield().getActivePermanents(new FilterArtifactPermanent(), controller.getId(), game)) {
                 Player artifactController = game.getPlayer(artifact.getControllerId());
-                int cmc = artifact.getConvertedManaCost();
+                int cmc = artifact.getManaValue();
                 if (artifact.destroy(source, game, true)) {
                     if(artifactController != null) {
                         artifactController.gainLife(cmc, game, source);

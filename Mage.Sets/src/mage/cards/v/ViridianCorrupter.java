@@ -21,6 +21,7 @@ public final class ViridianCorrupter extends CardImpl {
 
     public ViridianCorrupter (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
 

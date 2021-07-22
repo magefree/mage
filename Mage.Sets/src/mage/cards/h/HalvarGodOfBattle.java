@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -15,9 +14,9 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
+import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacesCard;
 import mage.constants.*;
-import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -33,14 +32,17 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class HalvarGodOfBattle extends ModalDoubleFacesCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final FilterPermanent filter2 = new FilterPermanent("aura or equipment attached to a creature you control");
+
     static {
         filter.add(Predicates.or(EnchantedPredicate.instance, EquippedPredicate.instance));
         filter2.add(Predicates.or(SubType.AURA.getPredicate(), SubType.EQUIPMENT.getPredicate()));
@@ -157,7 +159,7 @@ class SwordOfTheRealmsEffect extends OneShotEffect {
     }
 
     private SwordOfTheRealmsEffect(final SwordOfTheRealmsEffect effect) {
-        super (effect);
+        super(effect);
     }
 
     @Override
@@ -168,13 +170,14 @@ class SwordOfTheRealmsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card creature = (Card) getValue("attachedTo");
-            if (creature != null) {
-                return controller.moveCards(creature, Zone.HAND, source, game);
-            }
+        Card creature = (Card) getValue("attachedTo");
+        if (controller == null || creature == null) {
+            return false;
         }
-        return false;
+        creature = game.getCard(creature.getId());
+        return creature != null
+                && Objects.equals(creature.getZoneChangeCounter(game), getValue("zcc"))
+                && controller.moveCards(creature, Zone.HAND, source, game);
     }
 }
 
@@ -183,7 +186,7 @@ class HalvarGodOfBattlePredicate implements ObjectSourcePlayerPredicate<ObjectSo
     private final FilterPermanent filter;
 
     public HalvarGodOfBattlePredicate(FilterPermanent filter) {
-        this.filter=filter;
+        this.filter = filter;
     }
 
     @Override

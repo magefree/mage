@@ -29,7 +29,7 @@ public final class FleetingAven extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a player cycles a card, return Fleeting Aven to its owner's hand.
-        this.addAbility(new CycleAllTriggeredAbility(new ReturnToHandSourceEffect(true), true));
+        this.addAbility(new CycleAllTriggeredAbility(new ReturnToHandSourceEffect(true), false));
     }
 
     private FleetingAven(final FleetingAven card) {

@@ -22,7 +22,7 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -67,7 +67,7 @@ class HatcherySpiderEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "reveal the top X cards of your library, "
                 + "where X is the number of creature cards in your graveyard. "
-                + "You may put a green permanent card with converted mana cost "
+                + "You may put a green permanent card with mana value "
                 + "X or less from among them onto the battlefield. "
                 + "Put the rest on the bottom of your library "
                 + "in a random order.";
@@ -92,11 +92,11 @@ class HatcherySpiderEffect extends OneShotEffect {
                 StaticFilters.FILTER_CARD_CREATURE
         ).calculate(game, source, this);
         FilterCard filter = new FilterPermanentCard(
-                "green permanent card with converted mana cost "
+                "green permanent card with mana value "
                 + xValue + " or less"
         );
         filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(new ConvertedManaCostPredicate(
+        filter.add(new ManaValuePredicate(
                 ComparisonType.FEWER_THAN, xValue + 1
         ));
         TargetCard target = new TargetCardInLibrary(filter);

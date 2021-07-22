@@ -70,7 +70,7 @@ class ViashinoHereticEffect extends OneShotEffect {
 
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            int couvertedManaCost = permanent.getConvertedManaCost();
+            int couvertedManaCost = permanent.getManaValue();
             Player player = game.getPlayer(permanent.getControllerId());
             permanent.destroy(source, game, false);
             if (player != null) {
@@ -83,6 +83,6 @@ class ViashinoHereticEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's converted mana cost";
+        return "Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's mana value";
     }
 }

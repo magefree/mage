@@ -74,7 +74,7 @@ class PrimevalProtectorCostReductionEffect extends CostModificationEffectImpl {
 
     PrimevalProtectorCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {1} less to cast for each creature your opponents control";
+        staticText = "this spell costs {1} less to cast for each creature your opponents control";
     }
 
     PrimevalProtectorCostReductionEffect(PrimevalProtectorCostReductionEffect effect) {

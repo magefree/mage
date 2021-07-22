@@ -68,7 +68,7 @@ class ArcumDagssonEffect extends OneShotEffect {
 
     ArcumDagssonEffect() {
         super(Outcome.Removal);
-        this.staticText = "Target artifact creature's controller sacrifices it. That player may search their library for a noncreature artifact card, put it onto the battlefield, then shuffle their library";
+        this.staticText = "Target artifact creature's controller sacrifices it. That player may search their library for a noncreature artifact card, put it onto the battlefield, then shuffle";
     }
 
     ArcumDagssonEffect(final ArcumDagssonEffect effect) {

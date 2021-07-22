@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -29,7 +28,7 @@ public final class AkoumFlameseeker extends CardImpl {
 
     static {
         filter.add(SubType.ALLY.getPredicate());
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public AkoumFlameseeker(UUID ownerId, CardSetInfo setInfo) {

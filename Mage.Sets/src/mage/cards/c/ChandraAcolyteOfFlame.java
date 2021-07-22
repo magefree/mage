@@ -21,14 +21,13 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPlaneswalkerPermanent;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.RedElementalToken;
 import mage.game.permanent.token.Token;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
@@ -44,11 +43,11 @@ public final class ChandraAcolyteOfFlame extends CardImpl {
     private static final FilterPermanent filter
             = new FilterControlledPlaneswalkerPermanent("red planeswalker you control");
     private static final FilterCard filter2
-            = new FilterInstantOrSorceryCard("instant or sorcery card with converted mana cost 3 or less");
+            = new FilterInstantOrSorceryCard("instant or sorcery card with mana value 3 or less");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filter2.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter2.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public ChandraAcolyteOfFlame(UUID ownerId, CardSetInfo setInfo) {
@@ -129,7 +128,7 @@ class ChandraAcolyteOfFlameGraveyardEffect extends OneShotEffect {
     ChandraAcolyteOfFlameGraveyardEffect() {
         super(Benefit);
         this.staticText = "You may cast target instant or sorcery card " +
-                "with converted mana cost 3 or less from your graveyard this turn. " +
+                "with mana value 3 or less from your graveyard this turn. " +
                 "If that card would be put into your graveyard this turn, exile it instead";
     }
 

@@ -1,9 +1,5 @@
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.costs.*;
@@ -21,6 +17,7 @@ import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.events.GameEvent;
@@ -36,6 +33,11 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -58,6 +60,7 @@ public abstract class AbilityImpl implements Ability {
     protected Zone zone;
     protected String name;
     protected AbilityWord abilityWord;
+    protected String flavorWord;
     protected boolean usesStack = true;
     protected boolean ruleAtTheTop = false;
     protected boolean ruleVisible = true;
@@ -115,6 +118,7 @@ public abstract class AbilityImpl implements Ability {
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
         this.worksFaceDown = ability.worksFaceDown;
         this.abilityWord = ability.abilityWord;
+        this.flavorWord = ability.flavorWord;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
         this.canFizzle = ability.canFizzle;
         this.targetAdjuster = ability.targetAdjuster;
@@ -798,8 +802,18 @@ public abstract class AbilityImpl implements Ability {
         } else {
             rule = ruleStart;
         }
-        if (abilityWord != null) {
-            rule = "<i>" + abilityWord + "</i> &mdash; " + Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+        String prefix;
+        if (this instanceof TriggeredAbility) {
+            prefix = null;
+        } else if (abilityWord != null) {
+            prefix = abilityWord.formatWord();
+        } else if (flavorWord != null) {
+            prefix = CardUtil.italicizeWithEmDash(flavorWord);
+        } else {
+            prefix = null;
+        }
+        if (prefix != null) {
+            rule = prefix + CardUtil.getTextWithFirstCharUpperCase(rule);
         }
         if (appendToRule != null) {
             rule = rule.concat(appendToRule);
@@ -963,7 +977,7 @@ public abstract class AbilityImpl implements Ability {
             }
             MageObject object = game.getObject(this.getSourceId());
             // emblem/planes are always actual
-            if (object instanceof Emblem || object instanceof Plane) {
+            if (object instanceof Emblem || object instanceof Dungeon || object instanceof Plane) {
                 return true;
             }
         }
@@ -982,7 +996,7 @@ public abstract class AbilityImpl implements Ability {
         }
         // check against current state
         Zone test = game.getState().getZone(parameterSourceId);
-        return test != null && zone.match(test);
+        return zone.match(test);
     }
 
     @Override
@@ -1057,6 +1071,18 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public Ability setAbilityWord(AbilityWord abilityWord) {
         this.abilityWord = abilityWord;
+        return this;
+    }
+
+    @Override
+    public Ability withFlavorWord(String flavorWord) {
+        this.flavorWord = flavorWord;
+        return this;
+    }
+
+    @Override
+    public Ability withFirstModeFlavorWord(String flavorWord) {
+        this.modes.getMode().withFlavorWord(flavorWord);
         return this;
     }
 
@@ -1316,7 +1342,12 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public List<CardIcon> getIcons() {
+    final public List<CardIcon> getIcons() {
+        return getIcons(null);
+    }
+
+    @Override
+    public List<CardIcon> getIcons(Game game) {
         return this.icons;
     }
 

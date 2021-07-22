@@ -53,14 +53,14 @@ class DichotomancyEffect extends OneShotEffect {
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(TappedPredicate.TAPPED);
     }
 
     DichotomancyEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "For each tapped nonland permanent target opponent controls, " +
                 "search that player's library for a card with the same name as that permanent. " +
-                "Put those cards onto the battlefield under your control, then that player shuffles their library.";
+                "Put those cards onto the battlefield under your control, then that player shuffles.";
     }
 
     private DichotomancyEffect(DichotomancyEffect effect) {

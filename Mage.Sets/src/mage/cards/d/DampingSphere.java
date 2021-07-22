@@ -86,7 +86,7 @@ class DampingSphereReplacementEffect extends ReplacementEffectImpl {
         TappedForManaEvent manaEvent = (TappedForManaEvent) event;
         Permanent land = manaEvent.getPermanent();
         Mana mana = manaEvent.getMana();
-        return land != null && land.isLand() && mana.count() > 1;
+        return land != null && land.isLand(game) && mana.count() > 1;
     }
 }
 

@@ -14,7 +14,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -51,7 +51,7 @@ class SaheelisDirectiveEffect extends OneShotEffect {
         super(Outcome.PutCardInPlay);
         staticText = "Reveal the top X cards of your library. "
                 + "You may put any number of artifact cards with "
-                + "converted mana cost X or less from among them onto the battlefield. "
+                + "mana value X or less from among them onto the battlefield. "
                 + "Then put all cards revealed this way that weren't "
                 + "put onto the battlefield into your graveyard.";
     }
@@ -70,8 +70,8 @@ class SaheelisDirectiveEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(source, cards, game);
-            FilterCard filter = new FilterArtifactCard("artifact cards with converted mana cost " + xValue + " or less to put onto the battlefield");
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+            FilterCard filter = new FilterArtifactCard("artifact cards with mana value " + xValue + " or less to put onto the battlefield");
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
             target1.setNotTarget(true);
             controller.choose(Outcome.PutCardInPlay, cards, target1, game);

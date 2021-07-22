@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -35,7 +34,7 @@ public final class ZahidDjinnOfTheLamp extends CardImpl {
         AlternativeCostSourceAbility alternativeCostSourceAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{3}{U}"), null,
                 "You may pay {3}{U} and tap an untapped artifact you control rather than pay this spell's mana cost.");
         FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("untapped artifact you control");
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         alternativeCostSourceAbility.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(alternativeCostSourceAbility);
 

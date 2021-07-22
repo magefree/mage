@@ -56,7 +56,7 @@ public final class KardursViciousReturn extends CardImpl {
         // III — Return target creature card from your graveyard to the battlefield.
         // Put a +1/+1 counter on it. It gains haste until your next turn.
         Effects effects = new Effects(
-                new ReturnFromGraveyardToBattlefieldTargetEffect(false, false),
+                new ReturnFromGraveyardToBattlefieldTargetEffect(),
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                         .setText("Put a +1/+1 counter on it"),
                 new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.UntilYourNextTurn)

@@ -10,6 +10,8 @@ import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  * @author Loki
  */
@@ -57,7 +59,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int value = amount.calculate(game, source, this);
         if (value > 0) {
-            return token.putOntoBattlefield(value, game, source, targetPointer.getFirst(game, source), tapped, attacking);
+            return token.putOntoBattlefield(value, game, source, targetPointer.getFirst(game, source), tapped, attacking, (UUID) getValue("playerToAttack"));
         }
         return true;
     }

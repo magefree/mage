@@ -49,7 +49,7 @@ public final class ThoughtDissector extends CardImpl {
 
 class ThoughtDissectorEffect extends OneShotEffect {
 
-    private static final ManacostVariableValue amount = ManacostVariableValue.instance;
+    private static final ManacostVariableValue amount = ManacostVariableValue.REGULAR;
 
     public ThoughtDissectorEffect() {
         super(Outcome.Detriment);
@@ -77,7 +77,7 @@ class ThoughtDissectorEffect extends OneShotEffect {
             CardsImpl reveal = new CardsImpl();
             for (Card card : targetOpponent.getLibrary().getCards(game)) {
                 reveal.add(card);
-                if (card.isArtifact()) {
+                if (card.isArtifact(game)) {
                     artifact = card;
                     break;
                 } else {

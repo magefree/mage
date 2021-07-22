@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -24,10 +24,10 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class WisdomOfTheJedi extends CardImpl {
 
-    private static final FilterSpell filterSpell = new FilterSpell("spell with converted mana cost of 3 or less");
+    private static final FilterSpell filterSpell = new FilterSpell("spell with mana value of 3 or less");
 
     static {
-        filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filterSpell.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public WisdomOfTheJedi(UUID ownerId, CardSetInfo setInfo) {

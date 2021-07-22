@@ -31,7 +31,7 @@ public class HybridManaCost extends ManaCostImpl {
     }
 
     @Override
-    public int convertedManaCost() {
+    public int manaValue() {
         return 1;
     }
 

@@ -19,7 +19,6 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -39,7 +38,7 @@ public final class SepharaSkysBlade extends CardImpl {
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
         filter2.add(new AbilityPredicate(FlyingAbility.class));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
     }
 
     public SepharaSkysBlade(UUID ownerId, CardSetInfo setInfo) {

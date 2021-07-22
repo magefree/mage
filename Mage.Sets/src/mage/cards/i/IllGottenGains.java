@@ -28,7 +28,7 @@ public final class IllGottenGains extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
         // Exile Ill-Gotten Gains.
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
 
         // Each player discards their hand,
         this.getSpellAbility().addEffect(new DiscardHandAllEffect());

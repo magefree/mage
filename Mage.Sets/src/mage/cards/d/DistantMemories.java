@@ -40,8 +40,8 @@ class DistantMemoriesEffect extends OneShotEffect {
 
     public DistantMemoriesEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Search your library for a card, exile it, then shuffle "
-                + "your library. Any opponent may have you put that card into "
+        this.staticText = "Search your library for a card, exile it, then shuffle. "
+                + "Any opponent may have you put that card into "
                 + "your hand. If no player does, you draw three cards";
     }
 

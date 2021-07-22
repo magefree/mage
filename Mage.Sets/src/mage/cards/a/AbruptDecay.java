@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -22,10 +22,10 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public final class AbruptDecay extends CardImpl {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent with converted mana cost 3 or less");
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent with mana value 3 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public AbruptDecay(UUID ownerId, CardSetInfo setInfo) {

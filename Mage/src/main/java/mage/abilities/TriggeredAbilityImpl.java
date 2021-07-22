@@ -8,13 +8,13 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.Locale;
 import java.util.UUID;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -23,6 +23,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     protected boolean optional;
     protected boolean leavesTheBattlefieldTrigger;
+    private boolean triggersOnce = false;
+    private GameEvent triggerEvent = null;
 
     public TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
@@ -48,14 +50,51 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         super(ability);
         this.optional = ability.optional;
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
+        this.triggersOnce = ability.triggersOnce;
     }
 
     @Override
-    public void trigger(Game game, UUID controllerId) {
+    public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
         //20091005 - 603.4
         if (checkInterveningIfClause(game)) {
-            game.addTriggeredAbility(this);
+            setLastTrigger(game);
+            game.addTriggeredAbility(this, triggeringEvent);
         }
+    }
+
+    private final void setLastTrigger(Game game) {
+        if (!triggersOnce) {
+            return;
+        }
+        game.getState().setValue(CardUtil.getCardZoneString(
+                "lastTurnTriggered" + originalId, sourceId, game
+        ), game.getTurnNum());
+    }
+
+    @Override
+    public void setTriggerEvent(GameEvent triggerEvent) {
+        this.triggerEvent = triggerEvent;
+    }
+
+    @Override
+    public GameEvent getTriggerEvent() {
+        return triggerEvent;
+    }
+
+    @Override
+    public boolean checkTriggeredAlready(Game game) {
+        if (!triggersOnce) {
+            return true;
+        }
+        Integer lastTurnTriggered = (Integer) game.getState().getValue(
+                CardUtil.getCardZoneString("lastTurnTriggered" + originalId, sourceId, game)
+        );
+        return lastTurnTriggered == null || lastTurnTriggered != game.getTurnNum();
+    }
+
+    public TriggeredAbility setTriggersOnce(boolean triggersOnce) {
+        this.triggersOnce = triggersOnce;
+        return this;
     }
 
     @Override
@@ -130,9 +169,25 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
             }
             sb.append(superRule);
+            if (triggersOnce) {
+                sb.append(" This ability triggers only once each turn.");
+            }
+        }
+        String prefix;
+        if (abilityWord != null) {
+            prefix = abilityWord.formatWord();
+        } else if (flavorWord != null) {
+            prefix = CardUtil.italicizeWithEmDash(flavorWord);
+        } else {
+            prefix = "";
         }
 
-        return sb.toString();
+        return prefix + getTriggerPhrase() + sb;
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "";
     }
 
     @Override
@@ -239,7 +294,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         }
         if (sourceObject == null) { // source is no permanent
             sourceObject = game.getObject(source.getSourceId());
-            if (sourceObject == null || sourceObject.isPermanent()) {
+            if (sourceObject == null || sourceObject.isPermanent(game)) {
                 return false; // No source object found => ability is not valid
             }
         }
@@ -247,13 +302,13 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         if (!source.hasSourceObjectAbility(game, sourceObject, event)) {
             return false; // the permanent does currently not have or before it dies the ability so no trigger
         }
-        
+
         // check now it is in graveyard (only if it is no token and was the target itself)
         if (source.getSourceId().equals(event.getTargetId()) // source is also the target
                 && !(sourceObject instanceof PermanentToken) // it's no token
                 && sourceObject.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(source.getSourceId())) { // It's in the next zone
             Zone after = game.getState().getZone(source.getSourceId());
-            if (after == null || !Zone.GRAVEYARD.match(after)) { // Zone is not the graveyard
+            if (!Zone.GRAVEYARD.match(after)) { // Zone is not the graveyard
                 return false; // Moving to graveyard was replaced so no trigger
             }
         }

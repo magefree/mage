@@ -77,6 +77,6 @@ class DeepWaterReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((TappedForManaEvent) event).getPermanent();
-        return permanent != null && permanent.isLand() && permanent.isControlledBy(source.getControllerId());
+        return permanent != null && permanent.(isLand(game) && permanent.isControlledBy(source.getControllerId());
     }
 }

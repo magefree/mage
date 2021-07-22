@@ -80,7 +80,7 @@ class CharmedPendantAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public String getRule() {
-        return super.getRule() + " Activate this ability only any time you could cast an instant.";
+        return super.getRule() + " Activate only as an instant.";
     }
 }
 
@@ -88,7 +88,7 @@ class CharmedPendantManaEffect extends ManaEffect {
 
     public CharmedPendantManaEffect() {
         super();
-        staticText = "For each colored mana symbol in that card's mana cost, add one mana of that color";
+        staticText = "For each colored mana symbol in the milled card's mana cost, add one mana of that color";
     }
 
     public CharmedPendantManaEffect(final CharmedPendantManaEffect effect) {

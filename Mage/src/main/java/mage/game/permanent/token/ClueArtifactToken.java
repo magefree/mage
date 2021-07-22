@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.abilities.Ability;
@@ -11,24 +10,15 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.util.RandomUtil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  *
  */
 public final class ClueArtifactToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("SOI", "EDM"));
-    }
-
     public ClueArtifactToken() {
         super("Clue", "colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\"");
-        availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.CLUE);
 
@@ -38,16 +28,20 @@ public final class ClueArtifactToken extends TokenImpl {
         cost.setText("Sacrifice this artifact");
         ability.addCost(cost);
         this.addAbility(ability);
+
+        availableImageSetCodes = Arrays.asList("C18", "SOI", "MH2");
     }
 
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
+
         if (getOriginalExpansionSetCode().equals("SOI")) {
             this.setTokenType(RandomUtil.nextInt(6) + 1); // 6 different images
         }
-        if (getOriginalExpansionSetCode().equals("EDM")) {
-            this.setTokenType(RandomUtil.nextInt(6) + 1); // 6 different images
+
+        if (getOriginalExpansionSetCode().equals("MH2")) {
+            this.setTokenType(RandomUtil.nextInt(2) + 1); // 2 different images
         }
     }
 

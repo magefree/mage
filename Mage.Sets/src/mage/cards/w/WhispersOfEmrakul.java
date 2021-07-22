@@ -6,7 +6,7 @@ import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,7 +32,7 @@ public final class WhispersOfEmrakul extends CardImpl {
                 DeliriumCondition.instance,
                 "<br><i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, that player discards two cards at random instead"));
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addHint(DeliriumHint.instance);
+        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
     }
 
     private WhispersOfEmrakul(final WhispersOfEmrakul card) {

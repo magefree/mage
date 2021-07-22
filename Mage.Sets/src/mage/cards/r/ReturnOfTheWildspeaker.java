@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
@@ -63,7 +62,7 @@ enum ReturnOfTheWildspeakerValue implements DynamicValue {
         return game.getBattlefield()
                 .getAllActivePermanents(sourceAbility.getControllerId())
                 .stream()
-                .filter(Permanent::isCreature)
+                .filter(permanent1 -> permanent1.isCreature(game))
                 .filter(permanent -> !permanent.hasSubtype(SubType.HUMAN, game))
                 .map(MageObject::getPower)
                 .mapToInt(MageInt::getValue)

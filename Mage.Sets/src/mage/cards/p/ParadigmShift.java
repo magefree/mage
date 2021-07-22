@@ -25,7 +25,7 @@ public final class ParadigmShift extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
         // Exile all cards from your library. Then shuffle your graveyard into your library.
-        this.getSpellAbility().addEffect(new ExileLibraryEffect());
+        this.getSpellAbility().addEffect(new ParadigmShiftExileLibraryEffect());
     }
 
     private ParadigmShift(final ParadigmShift card) {
@@ -38,16 +38,20 @@ public final class ParadigmShift extends CardImpl {
     }
 }
 
-class ExileLibraryEffect extends OneShotEffect {
+class ParadigmShiftExileLibraryEffect extends OneShotEffect {
 
-    public ExileLibraryEffect() {
+    public ParadigmShiftExileLibraryEffect() {
         super(Outcome.Exile);
         staticText = "Exile all cards from your library. Then shuffle your graveyard into your library";
     }
 
+    private ParadigmShiftExileLibraryEffect(final ParadigmShiftExileLibraryEffect effect) {
+        super(effect);
+    }
+
     @Override
-    public ExileLibraryEffect copy() {
-        return new ExileLibraryEffect();
+    public ParadigmShiftExileLibraryEffect copy() {
+        return new ParadigmShiftExileLibraryEffect(this);
     }
 
     @Override

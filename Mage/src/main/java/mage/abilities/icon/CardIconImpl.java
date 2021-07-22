@@ -1,9 +1,11 @@
 package mage.abilities.icon;
 
+import java.io.Serializable;
+
 /**
  * @author JayDi85
  */
-public class CardIconImpl implements CardIcon {
+public class CardIconImpl implements CardIcon, Serializable {
 
     private final CardIconType cardIconType;
     private final String text;

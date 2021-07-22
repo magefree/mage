@@ -16,7 +16,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class GaeasBounty extends CardImpl {
     
-    private static final FilterLandCard filter = new FilterLandCard("Forest");
+    private static final FilterLandCard filter = new FilterLandCard("Forest cards");
     
     static {
         filter.add(SubType.FOREST.getPredicate());

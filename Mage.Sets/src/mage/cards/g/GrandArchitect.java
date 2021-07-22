@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -59,7 +58,7 @@ public final class GrandArchitect extends CardImpl {
         // Tap an untapped blue creature you control: Add {C}{C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped blue creature");
         filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(TappedPredicate.UNTAPPED);
         this.addAbility(new GrandArchitectManaAbility(filter));
     }
 
@@ -142,6 +141,6 @@ class GrandArchitectManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        return object != null && object.isArtifact();
+        return object != null && object.isArtifact(game);
     }
 }

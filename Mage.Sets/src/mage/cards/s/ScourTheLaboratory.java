@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
-import mage.abilities.hint.common.DeliriumHint;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -25,7 +25,7 @@ public final class ScourTheLaboratory extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2, DeliriumCondition.instance));
         ability.setRuleAtTheTop(true);
         ability.setAbilityWord(AbilityWord.DELIRIUM);
-        ability.addHint(DeliriumHint.instance);
+        ability.addHint(CardTypesInGraveyardHint.YOU);
         this.addAbility(ability);
 
         // Draw three cards.

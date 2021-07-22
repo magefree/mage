@@ -57,7 +57,7 @@ public final class KeeperOfTheAccord extends CardImpl {
                 ), TargetController.OPPONENT, true),
                 KeeperOfTheAccordCondition.LANDS, "At the beginning of each opponent's end step, " +
                 "if that player controls more lands than you, you may search your library for a basic Plains card, " +
-                "put it onto the battlefield tapped, then shuffle your library."
+                "put it onto the battlefield tapped, then shuffle."
         ));
     }
 

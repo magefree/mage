@@ -18,7 +18,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -59,7 +59,7 @@ public final class SarulfRealmEater extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(
                         new SarulfRealmEaterEffect(), TargetController.YOU, true
                 ), condition, "At the beginning of your upkeep, if {this} has one or more +1/+1 counters on it, " +
-                "you may remove all of them. If you do, exile each other nonland permanent with converted mana cost " +
+                "you may remove all of them. If you do, exile each other nonland permanent with mana value " +
                 "less than or equal to the number of counters removed this way."
         ));
     }
@@ -99,7 +99,7 @@ class SarulfRealmEaterEffect extends OneShotEffect {
         int counterCount = permanent.getCounters(game).getCount(CounterType.P1P1);
         permanent.removeCounters(CounterType.P1P1.createInstance(counterCount), source, game);
         FilterPermanent filter = new FilterNonlandPermanent();
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, counterCount + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, counterCount + 1));
         filter.add(AnotherPredicate.instance);
         Cards cards = new CardsImpl();
         game.getBattlefield()

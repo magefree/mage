@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -32,10 +32,10 @@ import java.util.UUID;
  */
 public final class Aluren extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with converted mana cost 3 or less");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with mana value 3 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public Aluren(UUID ownerId, CardSetInfo setInfo) {
@@ -64,17 +64,17 @@ public final class Aluren extends CardImpl {
 
 class AlurenRuleEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with converted mana cost 3 or less");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with mana value 3 or less");
 
     static {
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     private final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(null, SourceIsSpellCondition.instance, null, filter, true);
 
     public AlurenRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Any player may cast creature cards with converted mana cost 3 or less without paying their mana cost";
+        staticText = "Any player may cast creature cards with mana value 3 or less without paying their mana cost";
     }
 
     public AlurenRuleEffect(final AlurenRuleEffect effect) {

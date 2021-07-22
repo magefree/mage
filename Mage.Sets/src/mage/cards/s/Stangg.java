@@ -65,7 +65,7 @@ class StanggCreateTokenEffect extends OneShotEffect {
 
     public StanggCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "create a legendary 3/4 red and green Human Warrior creature token named Stangg Twin";
+        staticText = "create Stangg Twin, a legendary 3/4 red and green Human Warrior creature token";
     }
 
     public StanggCreateTokenEffect(final StanggCreateTokenEffect effect) {

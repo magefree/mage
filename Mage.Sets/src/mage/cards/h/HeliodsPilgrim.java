@@ -18,7 +18,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class HeliodsPilgrim extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Aura card");
+    private static final FilterCard filter = new FilterCard("an Aura card");
 
     static {
         filter.add(CardType.ENCHANTMENT.getPredicate());
@@ -34,7 +34,7 @@ public final class HeliodsPilgrim extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Heliod's Pilgrim enters the battlefield, you may search your library for an Aura card, reveal it, put it into your hand, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, false), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), true));
 
     }
 

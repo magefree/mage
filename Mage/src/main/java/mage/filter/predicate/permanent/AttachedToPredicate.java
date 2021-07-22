@@ -23,7 +23,7 @@ public class AttachedToPredicate implements Predicate<Permanent> {
     public boolean apply(Permanent input, Game game) {
         UUID attachedTo = input.getAttachedTo();
         Permanent permanent = game.getPermanent(attachedTo);
-        return permanent != null && filter.match(permanent, game);
+        return filter.match(permanent, game);
     }
 
     @Override

@@ -17,6 +17,7 @@ public final class GlistenerElf extends CardImpl {
 
     public GlistenerElf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
 

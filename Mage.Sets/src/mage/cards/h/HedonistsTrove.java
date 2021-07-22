@@ -107,7 +107,7 @@ class HedonistsTrovePlayLandEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card cardToCheck = game.getCard(objectId);
-        if (cardToCheck == null || !cardToCheck.isLand() || !source.isControlledBy(affectedControllerId)) {
+        if (cardToCheck == null || !cardToCheck.isLand(game) || !source.isControlledBy(affectedControllerId)) {
             return false;
         }
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
@@ -146,7 +146,7 @@ class HedonistsTroveCastNonlandCardsEffect extends AsThoughEffectImpl {
         Card cardToCheck = game.getCard(objectId);
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
         return cardToCheck != null
-                && !cardToCheck.isLand()
+                && !cardToCheck.isLand(game)
                 && source.isControlledBy(affectedControllerId)
                 && exileZone != null
                 && exileZone.contains(cardToCheck.getMainCard());

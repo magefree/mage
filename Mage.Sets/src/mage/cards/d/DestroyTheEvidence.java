@@ -69,7 +69,7 @@ class DestroyTheEvidenceEffect extends OneShotEffect {
             for (Card card : player.getLibrary().getCards(game)) {
                 if (card != null) {
                     cards.add(card);
-                    if (card.isLand()) {
+                    if (card.isLand(game)) {
                         break;
                     }
                 }

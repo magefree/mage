@@ -48,7 +48,7 @@ class FabledPassageEffect extends OneShotEffect {
     FabledPassageEffect() {
         super(Outcome.Benefit);
         staticText = "Search your library for a basic land card, put it onto the battlefield tapped, " +
-                "then shuffle your library. Then if you control four or more lands, untap that land.";
+                "then shuffle. Then if you control four or more lands, untap that land.";
     }
 
     private FabledPassageEffect(final FabledPassageEffect effect) {

@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.EldraziHorrorToken;
 
 /**
@@ -83,14 +82,14 @@ class WharfInfiltratorDiscardAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Card card = game.getCard(event.getTargetId());
-        if (isControlledBy(event.getPlayerId()) && card != null && card.isCreature()) {
+        if (isControlledBy(event.getPlayerId()) && card != null && card.isCreature(game)) {
             return true;
         }
         return false;
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you discard a creature card, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you discard a creature card, " ;
     }
 }
