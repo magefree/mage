@@ -13,6 +13,8 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
+ * Non mana triggered ability (use case: you must apply non mana effects on mana taps like gain life)
+ *
  * @author LevelX2
  */
 
@@ -40,7 +42,8 @@ public class TapForManaAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
+        // it's non mana triggered ability, so ignore it on checking, see TAPPED_FOR_MANA
+        if (game.inCheckPlayableState()) {
             return false;
         }
         TappedForManaEvent manaEvent = ((TappedForManaEvent) event);

@@ -12,6 +12,8 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
+ * Mana triggered ability (use case: you must produce new mana on mana taps)
+ *
  * @author LevelX2
  */
 public class TapForManaAllTriggeredManaAbility extends TriggeredManaAbility {

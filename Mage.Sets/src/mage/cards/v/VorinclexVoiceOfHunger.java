@@ -74,7 +74,8 @@ class VorinclexTriggeredAbility2 extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
+        // it's non mana triggered ability, so ignore it on checking, see TAPPED_FOR_MANA
+        if (game.inCheckPlayableState()) {
             return false;
         }
         if (!game.getOpponents(getControllerId()).contains(event.getPlayerId())) {

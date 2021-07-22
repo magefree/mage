@@ -62,6 +62,7 @@ class ManaWebTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        // it's non mana triggered ability, so ignore it on checking, see TAPPED_FOR_MANA
         if (game.inCheckPlayableState()) {
             return false;
         }

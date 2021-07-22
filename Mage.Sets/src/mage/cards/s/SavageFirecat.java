@@ -77,10 +77,10 @@ class SavageFirecatTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
+        // it's non mana triggered ability, so ignore it on checking, see TAPPED_FOR_MANA
+        if (game.inCheckPlayableState()) {
             return false;
         }
-
         Permanent permanent = ((TappedForManaEvent) event).getPermanent();
         return permanent != null && permanent.isLand(game) && isControlledBy(event.getPlayerId());
     }
