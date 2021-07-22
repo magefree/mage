@@ -66,9 +66,12 @@ public class DJLAgent{
     int sample(NDArray logProbs){
         NDArray probs=logProbs.exp();
         probs=probs.reshape(-1);
+        probs=probs.div(probs.sum()); //This extra normalization is needed to ensure that 
+        //The true sum is less than 1+1e-12, or it will crash. Rounding error ensures that 
+        //happens without the extra normalization
         NDArray chosen=nd.randomMultinomial(1, probs);
-        int choice=chosen.getInt(0);
-        return choice;
+        long choice=chosen.getLong(0);
+        return (int) choice;
     }
     NDArray listToNDArray2D(List<List<Integer>> data,int nestedSize){
         NDArray arr=nd.zeros(new Shape(data.size(),nestedSize),DataType.INT32);

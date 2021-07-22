@@ -69,6 +69,10 @@ public class DJLPolicy {
         }
         catch(TranslateException e){
             System.out.println("Translate exception");
+            System.out.println(e.getMessage());
+            for (StackTraceElement s : e.getStackTrace()) {
+                System.out.println(s);
+              }
         }
         return res; 
     } 

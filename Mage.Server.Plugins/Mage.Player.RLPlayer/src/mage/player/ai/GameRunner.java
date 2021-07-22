@@ -92,7 +92,8 @@ public class  GameRunner{
         logger.info("Winner: " + game.getWinner());
         logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
         int reward=getReward(player1, game.getWinner());
-        player1.sendExperiences();
+        player1.sendExperiences(game);
+        agent.trainIfReady();
         //return learner.getCurrentGame().getValue();
         return reward;
     }

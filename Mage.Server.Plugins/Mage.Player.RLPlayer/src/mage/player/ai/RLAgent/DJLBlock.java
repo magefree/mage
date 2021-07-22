@@ -7,6 +7,7 @@ import ai.djl.ndarray.*;
 import ai.djl.ndarray.types.*;
 import ai.djl.ndarray.index.*;
 import ai.djl.training.ParameterStore;
+import ai.djl.training.hyperparameter.param.HpBool;
 import ai.djl.util.PairList;
 
 
@@ -17,8 +18,8 @@ public class DJLBlock extends AbstractBlock{
     Linear lin1;
     public DJLBlock(){
         super((byte) 2);
-        actionEmbed=new IdEmbedding.Builder().setDictionarySize(HParams.maxRepresents).setEmbeddingSize(HParams.embedDim).build();
-        lin1=Linear.builder().optBias(true).setUnits(1).build(); //Just a linear network for now :(
+        actionEmbed=addChildBlock("actionEmbedding",new IdEmbedding.Builder().setDictionarySize(HParams.maxRepresents).setEmbeddingSize(HParams.embedDim).build());
+        lin1=addChildBlock("linear1",Linear.builder().optBias(true).setUnits(1).build()); //Just a linear network for now :(
     }
 
     public NDList forwardInternal(ParameterStore parameterStore, NDList inputs, boolean training, PairList<String, Object> pairList) {
@@ -40,5 +41,11 @@ public class DJLBlock extends AbstractBlock{
         Shape[] res=new Shape[1];
         res[0]=new Shape(inputs[0].get(0),inputs[0].get(1));
         return res;
+    }
+
+    @Override
+    protected void initializeChildBlocks(NDManager manager,DataType dataType, Shape... inputShapes){
+        actionEmbed.initialize(manager, dataType, inputShapes);
+        lin1.initialize(manager, dataType, new Shape(0,HParams.embedDim*HParams.actionParts));
     }
 }

@@ -55,7 +55,20 @@ public class RLPlayer extends RandomNonTappingPlayer{
     public void addExperience(RepresentedState state){
         experiences.add(state);
     }
-    public void sendExperiences(){
+    public void sendExperiences(Game game){
+        int reward;
+        if(game.isADraw()){
+            reward=0;
+        }
+        else if(hasWon()){
+            reward=1;
+        }
+        else{
+            reward=-1;
+        }
+        for(int i=0;i<experiences.size();i++){
+            experiences.get(i).reward=((float) reward)/experiences.size();
+        }
         learner.addExperiences(experiences);
     }
     public RLPlayer(final RLPlayer player) {
