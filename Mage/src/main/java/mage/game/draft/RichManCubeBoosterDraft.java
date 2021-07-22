@@ -1,4 +1,3 @@
-
 package mage.game.draft;
 
 import java.util.*;
@@ -13,8 +12,9 @@ import mage.game.draft.DraftCube.CardIdentity;
  */
 public class RichManCubeBoosterDraft extends DraftImpl {
 
-    //protected int[] richManTimes = {75, 70, 65, 60, 55, 50, 45, 40, 35, 35, 35, 35, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25};
-    protected int[] richManTimes = {70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40};
+    // custom timeouts per pick on profi timing
+    protected int[] customProfiTimes = {70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40};
+
     protected final Map<String, CardIdentity> cardsInCube = new LinkedHashMap<>();
 
     public RichManCubeBoosterDraft(DraftOptions options, List<ExpansionSet> sets) {
@@ -102,7 +102,9 @@ public class RichManCubeBoosterDraft extends DraftImpl {
         if (cardNum <= 0) {
             cardNum = 1;
         }
-        int time = richManTimes[cardNum - 1] * timing.getFactor();
+
+        // richman uses custom times
+        int time = (int) Math.ceil(customProfiTimes[cardNum - 1] * timing.getCustomTimeoutFactor());
         playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
     }
 }

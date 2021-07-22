@@ -16,8 +16,8 @@ public class RichManBoosterDraft extends DraftImpl {
 
     private static final Logger logger = Logger.getLogger(RichManBoosterDraft.class);
 
-    //protected int[] richManTimes = {75, 70, 65, 60, 55, 50, 45, 40, 35, 35, 35, 35, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25};
-    protected int[] richManTimes = {70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40};
+    // custom timeouts per pick on profi timing
+    protected int[] customProfiTimes = {70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40};
 
     public RichManBoosterDraft(DraftOptions options, List<ExpansionSet> sets) {
         super(options, sets);
@@ -87,7 +87,9 @@ public class RichManBoosterDraft extends DraftImpl {
         if (cardNum <= 0) {
             cardNum = 1;
         }
-        int time = richManTimes[cardNum - 1] * timing.getFactor();
+
+        // richman uses custom times
+        int time = (int) Math.ceil(customProfiTimes[cardNum - 1] * timing.getCustomTimeoutFactor());
         playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
     }
 } 

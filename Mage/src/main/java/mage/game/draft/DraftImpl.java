@@ -1,4 +1,3 @@
-
 package mage.game.draft;
 
 import java.util.*;
@@ -24,9 +23,8 @@ public abstract class DraftImpl implements Draft {
     protected List<ExpansionSet> sets;
     protected List<String> setCodes;
     protected int boosterNum = 0;
-    protected int cardNum = 0;
+    protected int cardNum = 0; // increases +1 on first picking (so draft get 1 as first card number)
     protected TimingOption timing;
-    protected int[] times = {75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5};
 
     protected boolean abort = false;
     protected boolean started = false;
@@ -204,7 +202,6 @@ public abstract class DraftImpl implements Draft {
             }
         }
         boosterNum++;
-        cardNum = 1;
         fireUpdatePlayersEvent();
     }
 
@@ -270,7 +267,7 @@ public abstract class DraftImpl implements Draft {
         if (cardNum > 15) {
             cardNum = 15;
         }
-        int time = times[cardNum - 1] * timing.getFactor();
+        int time = timing.getPickTimeout(cardNum);
         playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
     }
 

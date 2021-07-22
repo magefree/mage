@@ -32,7 +32,6 @@ public class RandomBoosterDraft extends BoosterDraft {
             }
         }
         boosterNum++;
-        cardNum = 1;
         fireUpdatePlayersEvent();
     }
 

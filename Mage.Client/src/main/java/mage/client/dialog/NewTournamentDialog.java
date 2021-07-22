@@ -344,7 +344,7 @@ public class NewTournamentDialog extends MageDialog {
                         .addGroup(pnlDraftOptionsLayout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbDraftTiming, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbDraftTiming, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(19, Short.MAX_VALUE))
         );
         pnlDraftOptionsLayout.setVerticalGroup(
@@ -1224,7 +1224,6 @@ public class NewTournamentDialog extends MageDialog {
         }
         if (tournamentType.isDraft()) {
             DraftOptions options = new DraftOptions();
-            options.setDraftType("");
             options.setTiming((TimingOption) this.cbDraftTiming.getSelectedItem());
             tOptions.setLimitedOptions(options);
         }

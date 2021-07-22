@@ -17,8 +17,10 @@ public class BoosterDraft extends DraftImpl {
 
     @Override
     public void start() {
+        cardNum = 0;
         while (!isAbort() && boosterNum < numberBoosters) {
             openBooster();
+            cardNum = 0;
             while (!isAbort() && pickCards()) {
                 if (boosterNum % 2 == 1) {
                     passLeft();
