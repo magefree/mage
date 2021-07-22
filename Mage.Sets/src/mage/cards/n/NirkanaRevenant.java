@@ -1,13 +1,11 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -15,20 +13,20 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class NirkanaRevenant extends CardImpl {
 
     public NirkanaRevenant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.SHADE);
 
@@ -39,7 +37,9 @@ public final class NirkanaRevenant extends CardImpl {
         this.addAbility(new NirkanaRevenantTriggeredAbility());
 
         // {B}: Nirkana Revenant gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(
+                new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")
+        ));
     }
 
     private NirkanaRevenant(final NirkanaRevenant card) {
@@ -53,18 +53,12 @@ public final class NirkanaRevenant extends CardImpl {
 }
 
 class NirkanaRevenantTriggeredAbility extends TriggeredManaAbility {
-    
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Swamp");
-    static {
-            filter.add(SubType.SWAMP.getPredicate());
-    }
 
-    public NirkanaRevenantTriggeredAbility() {
+    NirkanaRevenantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana(1)), false);
-        this.usesStack = false;
     }
 
-    public NirkanaRevenantTriggeredAbility(NirkanaRevenantTriggeredAbility ability) {
+    private NirkanaRevenantTriggeredAbility(final NirkanaRevenantTriggeredAbility ability) {
         super(ability);
     }
 
@@ -75,8 +69,11 @@ class NirkanaRevenantTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent land = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return land != null && filter.match(land, this.getSourceId(), this.getControllerId(), game);
+        if (!isControlledBy(event.getPlayerId())) {
+            return false;
+        }
+        Permanent permanent = ((TappedForManaEvent) event).getPermanent();
+        return permanent != null && permanent.hasSubtype(SubType.SWAMP, game);
     }
 
     @Override
@@ -86,6 +83,6 @@ class NirkanaRevenantTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever you tap a Swamp for mana, add {B}.";
+        return "Whenever you tap a Swamp for mana, add an additional {B}.";
     }
 }

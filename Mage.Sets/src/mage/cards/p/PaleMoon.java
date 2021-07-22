@@ -1,7 +1,4 @@
-
 package mage.cards.p;
-
-import java.util.UUID;
 
 import mage.Mana;
 import mage.abilities.Ability;
@@ -11,20 +8,21 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class PaleMoon extends CardImpl {
 
     public PaleMoon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Until end of turn, if a player taps a nonbasic land for mana, it produces colorless mana instead of any other type.
         this.getSpellAbility().addEffect(new PaleMoonReplacementEffect());
@@ -42,14 +40,12 @@ public final class PaleMoon extends CardImpl {
 
 class PaleMoonReplacementEffect extends ReplacementEffectImpl {
 
-    private static final FilterLandPermanent filter = FilterLandPermanent.nonbasicLands();
-
     PaleMoonReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);
         staticText = "Until end of turn, if a player taps a nonbasic land for mana, it produces colorless mana instead of any other type";
     }
 
-    PaleMoonReplacementEffect(final PaleMoonReplacementEffect effect) {
+    private PaleMoonReplacementEffect(final PaleMoonReplacementEffect effect) {
         super(effect);
     }
 
@@ -78,10 +74,7 @@ class PaleMoonReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent != null && permanent.isLand(game)) {
-            return filter.match(permanent, game);
-        }
-        return false;
+        Permanent permanent = ((TappedForManaEvent) event).getPermanent();
+        return permanent != null && permanent.isLand(game) && !permanent.isBasic();
     }
 }

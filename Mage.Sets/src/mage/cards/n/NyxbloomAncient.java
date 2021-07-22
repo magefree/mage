@@ -92,8 +92,7 @@ class NyxbloomAncientReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId())
-                && game.getPermanentOrLKIBattlefield(event.getSourceId()) != null;
+        return source.isControlledBy(event.getPlayerId());
     }
 
     @Override

@@ -1,28 +1,25 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.mana.AddManaOfAnyTypeProducedEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class VorinclexVoiceOfHunger extends CardImpl {
@@ -62,11 +59,11 @@ public final class VorinclexVoiceOfHunger extends CardImpl {
 
 class VorinclexTriggeredAbility2 extends TriggeredAbilityImpl {
 
-    public VorinclexTriggeredAbility2() {
+    VorinclexTriggeredAbility2() {
         super(Zone.BATTLEFIELD, new DontUntapInControllersNextUntapStepTargetEffect());
     }
 
-    public VorinclexTriggeredAbility2(VorinclexTriggeredAbility2 ability) {
+    private VorinclexTriggeredAbility2(final VorinclexTriggeredAbility2 ability) {
         super(ability);
     }
 
@@ -77,17 +74,19 @@ class VorinclexTriggeredAbility2 extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
+        // it's non mana triggered ability, so ignore it on checking, see TAPPED_FOR_MANA
+        if (game.inCheckPlayableState()) {
             return false;
-        }        
-        if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.isLand(game)) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
-                return true;
-            }
         }
-        return false;
+        if (!game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
+            return false;
+        }
+        Permanent permanent = ((TappedForManaEvent) event).getPermanent();
+        if (permanent == null || !permanent.isLand(game)) {
+            return false;
+        }
+        getEffects().setTargetPointer(new FixedTarget(permanent, game));
+        return true;
     }
 
     @Override

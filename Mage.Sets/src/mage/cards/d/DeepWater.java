@@ -1,7 +1,4 @@
-
 package mage.cards.d;
-
-import java.util.UUID;
 
 import mage.Mana;
 import mage.abilities.Ability;
@@ -13,15 +10,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class DeepWater extends CardImpl {
@@ -30,8 +27,7 @@ public final class DeepWater extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
 
         // {U}: Until end of turn, if you tap a land you control for mana, it produces {U} instead of any other type.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DeepWaterReplacementEffect(), new ManaCostsImpl("{U}"));
-        this.addAbility(ability);
+        this.addAbility(new SimpleActivatedAbility(new DeepWaterReplacementEffect(), new ManaCostsImpl("{U}")));
     }
 
     private DeepWater(final DeepWater card) {
@@ -46,14 +42,12 @@ public final class DeepWater extends CardImpl {
 
 class DeepWaterReplacementEffect extends ReplacementEffectImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
-
     DeepWaterReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);
         staticText = "Until end of turn, if you tap a land you control for mana, it produces {U} instead of any other type";
     }
 
-    DeepWaterReplacementEffect(final DeepWaterReplacementEffect effect) {
+    private DeepWaterReplacementEffect(final DeepWaterReplacementEffect effect) {
         super(effect);
     }
 
@@ -82,10 +76,7 @@ class DeepWaterReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent != null && permanent.isLand(game)) {
-            return filter.match(permanent, game);
-        }
-        return false;
+        Permanent permanent = ((TappedForManaEvent) event).getPermanent();
+        return permanent != null && permanent.isLand(game) && permanent.isControlledBy(source.getControllerId());
     }
 }

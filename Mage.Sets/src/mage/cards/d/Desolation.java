@@ -6,19 +6,17 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.watchers.Watcher;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author L_J
@@ -28,9 +26,11 @@ public final class Desolation extends CardImpl {
     public Desolation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
 
-        // At the beginning of each end step, each player who tapped a land for mana this turn sacrifices a land. Desolation deals 2 damage to each player who sacrificed a Plains this way.
-        BeginningOfEndStepTriggeredAbility ability = new BeginningOfEndStepTriggeredAbility(new DesolationEffect(), TargetController.ANY, false);
-        this.addAbility(ability, new DesolationWatcher());
+        // At the beginning of each end step, each player who tapped a land for mana this
+        // turn sacrifices a land. Desolation deals 2 damage to each player who sacrificed a Plains this way.
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new DesolationEffect(), TargetController.ANY, false
+        ), new DesolationWatcher());
     }
 
     private Desolation(final Desolation card) {
@@ -45,47 +45,49 @@ public final class Desolation extends CardImpl {
 
 class DesolationEffect extends OneShotEffect {
 
-    private static final FilterPermanent filterPlains = new FilterPermanent();
-
-    static {
-        filterPlains.add(SubType.PLAINS.getPredicate());
-    }
-
-    public DesolationEffect() {
+    DesolationEffect() {
         super(Outcome.Damage);
-        this.staticText = "each player who tapped a land for mana this turn sacrifices a land. {this} deals 2 damage to each player who sacrificed a Plains this way";
+        this.staticText = "each player who tapped a land for mana this turn sacrifices a land. " +
+                "{this} deals 2 damage to each player who sacrificed a Plains this way";
     }
 
-    public DesolationEffect(DesolationEffect copy) {
+    private DesolationEffect(DesolationEffect copy) {
         super(copy);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         DesolationWatcher watcher = game.getState().getWatcher(DesolationWatcher.class);
-        if (watcher != null) {
-            for (UUID playerId : watcher.getPlayersTappedForMana()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    FilterControlledPermanent filter = new FilterControlledPermanent("land");
-                    filter.add(CardType.LAND.getPredicate());
-                    filter.add(new ControllerIdPredicate(playerId));
-                    TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-                        Permanent permanent = game.getPermanent(target.getFirstTarget());
-                        if (permanent != null) {
-                            permanent.sacrifice(source, game);
-                            if (filterPlains.match(permanent, game)) {
-                                player.damage(2, source.getSourceId(), source, game);
-                            }
-                        }
-                    }
-                }
-            }
-            return true;
+        if (watcher == null) {
+            return false;
         }
-        return false;
+        List<Permanent> permanents = new ArrayList<>();
+        for (UUID playerId : watcher.getPlayersTappedForMana()) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
+            }
+            TargetPermanent target = new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
+            target.setNotTarget(true);
+            if (!target.canChoose(source.getSourceId(), player.getId(), game)) {
+                continue;
+            }
+            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+            Permanent permanent = game.getPermanent(target.getFirstTarget());
+            if (permanent != null) {
+                permanents.add(permanent);
+            }
+        }
+        for (Permanent permanent : permanents) {
+            Player player = game.getPlayer(permanent.getControllerId());
+            if (permanent != null
+                    && permanent.sacrifice(source, game)
+                    && permanent.hasSubtype(SubType.PLAINS, game)
+                    && player != null) {
+                player.damage(2, source.getSourceId(), source, game);
+            }
+        }
+        return true;
     }
 
     @Override
@@ -98,25 +100,19 @@ class DesolationWatcher extends Watcher {
 
     private final Set<UUID> tappedForManaThisTurnPlayers = new HashSet<>();
 
-    public DesolationWatcher() {
+    DesolationWatcher() {
         super(WatcherScope.GAME);
     }
 
-
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
-            reset();
+        if (event.getType() != GameEvent.EventType.TAPPED_FOR_MANA
+                && !game.inCheckPlayableState()) {
+            return;
         }
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA 
-                && !game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
-            UUID playerId = event.getPlayerId();
-            if (playerId != null) {
-                Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId()); // need only info about permanent
-                if (permanent != null && permanent.isLand(game)) {
-                    tappedForManaThisTurnPlayers.add(playerId);
-                }
-            }
+        Permanent permanent = ((TappedForManaEvent) event).getPermanent();
+        if (permanent != null) {
+            tappedForManaThisTurnPlayers.add(permanent.getControllerId());
         }
     }
 
@@ -129,5 +125,4 @@ class DesolationWatcher extends Watcher {
         super.reset();
         tappedForManaThisTurnPlayers.clear();
     }
-
 }

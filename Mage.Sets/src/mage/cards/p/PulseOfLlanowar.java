@@ -1,7 +1,4 @@
-
 package mage.cards.p;
-
-import java.util.UUID;
 
 import mage.Mana;
 import mage.abilities.Ability;
@@ -11,18 +8,17 @@ import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SuperType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class PulseOfLlanowar extends CardImpl {
@@ -31,7 +27,7 @@ public final class PulseOfLlanowar extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // If a basic land you control is tapped for mana, it produces mana of a color of your choice instead of any other type.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PulseOfLlanowarReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new PulseOfLlanowarReplacementEffect()));
     }
 
     private PulseOfLlanowar(final PulseOfLlanowar card) {
@@ -46,17 +42,12 @@ public final class PulseOfLlanowar extends CardImpl {
 
 class PulseOfLlanowarReplacementEffect extends ReplacementEffectImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
-    static {
-        filter.add(SuperType.BASIC.getPredicate());
-    }
-
     PulseOfLlanowarReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "If a basic land you control is tapped for mana, it produces mana of a color of your choice instead of any other type";
     }
 
-    PulseOfLlanowarReplacementEffect(final PulseOfLlanowarReplacementEffect effect) {
+    private PulseOfLlanowarReplacementEffect(final PulseOfLlanowarReplacementEffect effect) {
         super(effect);
     }
 
@@ -74,8 +65,8 @@ class PulseOfLlanowarReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ManaEvent manaEvent = (ManaEvent) event;
         Mana mana = manaEvent.getMana();
-        new AddManaOfAnyColorEffect(mana.count()).apply(game,source);
-        mana.setToMana(new Mana(0, 0, 0, 0,0, 0,0,0));
+        new AddManaOfAnyColorEffect(mana.count()).apply(game, source);
+        mana.setToMana(new Mana(0, 0, 0, 0, 0, 0, 0, 0));
         return true;
     }
 
@@ -86,10 +77,7 @@ class PulseOfLlanowarReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent != null && permanent.isLand(game)) {
-            return filter.match(permanent, game);
-        }
-        return false;
+        Permanent permanent = ((TappedForManaEvent) event).getPermanent();
+        return permanent != null && permanent.isLand(game) && permanent.isControlledBy(source.getControllerId());
     }
 }
