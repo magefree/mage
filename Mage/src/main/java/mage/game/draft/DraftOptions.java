@@ -22,7 +22,7 @@ public class DraftOptions extends LimitedOptions implements Serializable {
         REGULAR("x1.5", "Regular (x1.5)", 1.5,
                 Arrays.asList(113, 105, 98, 90, 83, 75, 68, 60, 35, 30, 25, 20, 15, 10, 8)
         ),
-        PROFI("x1.0", "Profi (x1.0)", 1.0,
+        PROFI("x1.0", "Professional (x1.0)", 1.0,
                 Arrays.asList(75, 70, 65, 60, 55, 50, 45, 40, 30, 25, 20, 15, 12, 10, 7)
         ),
         NONE("ERROR", "", 0,

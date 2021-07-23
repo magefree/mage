@@ -177,7 +177,7 @@ public class TableView implements Serializable {
                 case DRAFTING:
                     Draft draft = table.getTournament().getDraft();
                     if (draft != null) {
-                        stateText.append(' ').append(draft.getBoosterNum()).append('/').append(draft.getCardNum() - 1);
+                        stateText.append(' ').append(draft.getBoosterNum()).append('/').append(draft.getCardNum());
                     }
                     break;
                 default:

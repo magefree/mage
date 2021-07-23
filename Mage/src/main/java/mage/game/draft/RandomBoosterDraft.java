@@ -26,13 +26,11 @@ public class RandomBoosterDraft extends BoosterDraft {
 
     @Override
     protected void openBooster() {
-        if (boosterNum < numberBoosters) {
+        if (boosterNum <= numberBoosters) {
             for (DraftPlayer player: players.values()) {
                 player.setBooster(getNextBooster().create15CardBooster());
             }
         }
-        boosterNum++;
-        fireUpdatePlayersEvent();
     }
 
     private ExpansionSet getNextBooster() {

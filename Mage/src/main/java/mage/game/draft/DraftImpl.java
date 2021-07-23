@@ -22,8 +22,8 @@ public abstract class DraftImpl implements Draft {
     protected DraftCube draftCube;
     protected List<ExpansionSet> sets;
     protected List<String> setCodes;
-    protected int boosterNum = 0;
-    protected int cardNum = 0; // increases +1 on first picking (so draft get 1 as first card number)
+    protected int boosterNum = 1; // starts with booster 1
+    protected int cardNum = 1; // starts with card number 1, increases by +1 after each picking
     protected TimingOption timing;
 
     protected boolean abort = false;
@@ -192,21 +192,18 @@ public abstract class DraftImpl implements Draft {
     }
 
     protected void openBooster() {
-        if (boosterNum < numberBoosters) {
+        if (boosterNum <= numberBoosters) {
             for (DraftPlayer player : players.values()) {
                 if (draftCube != null) {
                     player.setBooster(draftCube.createBooster());
                 } else {
-                    player.setBooster(sets.get(boosterNum).createBooster());
+                    player.setBooster(sets.get(boosterNum - 1).createBooster());
                 }
             }
         }
-        boosterNum++;
-        fireUpdatePlayersEvent();
     }
 
     protected boolean pickCards() {
-        cardNum++;
         for (DraftPlayer player : players.values()) {
             if (player.getBooster().isEmpty()) {
                 return false;
@@ -214,6 +211,7 @@ public abstract class DraftImpl implements Draft {
             player.setPicking();
             player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
         }
+        cardNum++;
         synchronized (this) {
             while (!donePicking()) {
                 try {
@@ -264,9 +262,7 @@ public abstract class DraftImpl implements Draft {
     @Override
     public void firePickCardEvent(UUID playerId) {
         DraftPlayer player = players.get(playerId);
-        if (cardNum > 15) {
-            cardNum = 15;
-        }
+        int cardNum = Math.min(15, this.cardNum);
         int time = timing.getPickTimeout(cardNum);
         playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
     }
