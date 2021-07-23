@@ -33,7 +33,7 @@ public class GoadAttachedEffect extends ContinuousEffectImpl {
         if (attached == null) {
             return false;
         }
-        attached.setGoaded(true);
+        attached.addGoadingPlayer(source.getControllerId());
         return true;
     }
 

@@ -85,7 +85,9 @@ public interface Permanent extends Card, Controllable {
 
     boolean isGoaded();
 
-    void setGoaded(boolean value);
+    void addGoadingPlayer(UUID playerId);
+
+    Set<UUID> getGoadingPlayers();
 
     void setCardNumber(String cid);
 

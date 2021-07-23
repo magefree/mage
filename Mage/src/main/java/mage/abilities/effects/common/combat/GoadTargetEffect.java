@@ -52,7 +52,7 @@ public class GoadTargetEffect extends ContinuousEffectImpl {
         if (targetCreature == null) {
             return false;
         }
-        targetCreature.setGoaded(true);
+        targetCreature.addGoadingPlayer(source.getControllerId());
         return true;
     }
 
