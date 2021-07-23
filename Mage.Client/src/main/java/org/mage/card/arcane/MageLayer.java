@@ -61,6 +61,7 @@ public class MageLayer extends MageCard {
     CardIconsPanel iconsDebugPanel;
     CardIconsPanel iconsAbilitiesPanel;
     CardIconsPanel iconsPlayablePanel;
+    CardIconsPanel iconsCommanderPanel;
 
     public MageLayer(MageCard mainPanel, CardIconRenderSettings iconsRender) {
         this.mainPanel = mainPanel;
@@ -140,6 +141,7 @@ public class MageLayer extends MageCard {
         this.iconsDebugPanel = null;
         this.iconsAbilitiesPanel = null;
         this.iconsPlayablePanel = null;
+        this.iconsCommanderPanel = null;
 
         if (this.iconsRender.isDebugMode()) {
             // DEBUG MODE -- only one debug panel
@@ -148,9 +150,15 @@ public class MageLayer extends MageCard {
         } else {
             // NORMAL mode -- multiple panels
             if (PreferencesDialog.getRenderIconsForAbilities()) {
+                // abilities
                 this.iconsAbilitiesPanel = CardIconsPanelFactory.createAbilitiesPanel();
                 this.iconsPanels.add(this.iconsAbilitiesPanel);
+
+                // commander
+                this.iconsCommanderPanel = CardIconsPanelFactory.createCommanderPanel();
+                this.iconsPanels.add(this.iconsCommanderPanel);
             }
+            // playable amount
             if (PreferencesDialog.getRenderIconsForPlayable()) {
                 this.iconsPlayablePanel = CardIconsPanelFactory.createPlayablePanel();
                 this.iconsPanels.add(this.iconsPlayablePanel);
@@ -311,15 +319,24 @@ public class MageLayer extends MageCard {
         // create panels
         allIcons.forEach(cardIcon -> {
             CardIconCategory category = cardIcon.getIconType().getCategory();
-            // debug must take all icons
+            // debug panel must take all icons (position depens on render settings)
             if (iconsDebugPanel != null) {
                 newIcons.get(iconsDebugPanel).add(cardIcon);
             }
+
+            // playable panel (bottom left corner)
             if (iconsPlayablePanel != null && category == CardIconCategory.PLAYABLE_COUNT) {
                 newIcons.get(iconsPlayablePanel).add(cardIcon);
             }
+
+            // abilities panel (left side)
             if (iconsAbilitiesPanel != null && category == CardIconCategory.ABILITY) {
                 newIcons.get(iconsAbilitiesPanel).add(cardIcon);
+            }
+
+            // commander panel (top center)
+            if (iconsCommanderPanel != null && category == CardIconCategory.COMMANDER) {
+                newIcons.get(iconsCommanderPanel).add(cardIcon);
             }
         });
         this.iconsPanels.forEach(panel -> panel.updateIcons(newIcons.get(panel)));

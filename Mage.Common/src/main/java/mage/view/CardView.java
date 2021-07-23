@@ -11,6 +11,7 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.icon.CardIcon;
+import mage.abilities.icon.other.CommanderCardIcon;
 import mage.abilities.icon.other.FaceDownCardIcon;
 import mage.abilities.icon.other.VariableCostCardIcon;
 import mage.abilities.keyword.AftermathAbility;
@@ -31,6 +32,7 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.util.CardUtil;
@@ -425,6 +427,11 @@ public class CardView extends SimpleCardView {
             // face down
             if (permanent.isFaceDown(game)) {
                 this.cardIcons.add(FaceDownCardIcon.instance);
+            }
+            // commander
+            Player owner = game.getPlayer(game.getOwnerId(permanent));
+            if (owner != null && game.isCommanderObject(owner, permanent)) {
+                this.cardIcons.add(CommanderCardIcon.instance);
             }
         } else {
             if (card.isCopy()) {

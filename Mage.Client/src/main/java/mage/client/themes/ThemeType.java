@@ -1,6 +1,7 @@
 package mage.client.themes;
 
 import mage.abilities.hint.HintUtils;
+import mage.abilities.icon.CardIconColor;
 import org.mage.card.arcane.SvgUtils;
 
 import java.awt.*;
@@ -304,29 +305,29 @@ public enum ThemeType {
         }
     }
 
-    public Color getCardIconsFillColor() {
-        return this.cardIconsFillColor;
+    public Color getCardIconsFillColor(CardIconColor cardIconColor) {
+        return cardIconColor.getFillColor() != null ? cardIconColor.getFillColor() : this.cardIconsFillColor;
     }
 
-    public Color getCardIconsStrokeColor() {
-        return cardIconsStrokeColor;
+    public Color getCardIconsStrokeColor(CardIconColor cardIconColor) {
+        return cardIconColor.getStrokeColor() != null ? cardIconColor.getStrokeColor() : this.cardIconsStrokeColor;
     }
 
-    public Color getCardIconsTextColor() {
-        return cardIconsTextColor;
+    public Color getCardIconsTextColor(CardIconColor cardIconColor) {
+        return cardIconColor.getTextColor() != null ? cardIconColor.getTextColor() : this.cardIconsTextColor;
     }
 
     public String getCardIconsResourcePath(String resourceName) {
         return "/card/icons/" + resourceName;
     }
 
-    public String getCardIconsCssFile() {
-        return "card-icons-svg-settings.css";
+    public String getCardIconsCssFile(CardIconColor cardIconColor) {
+        return String.format("card-icons-svg-settings-%s.css", cardIconColor.toString());
     }
 
-    public String getCardIconsCssSettings() {
-        String fillColorVal = HintUtils.colorToHtml(this.getCardIconsFillColor());
-        String strokeColorVal = HintUtils.colorToHtml(this.getCardIconsStrokeColor());
+    public String getCardIconsCssSettings(CardIconColor cardIconColor) {
+        String fillColorVal = HintUtils.colorToHtml(this.getCardIconsFillColor(cardIconColor));
+        String strokeColorVal = HintUtils.colorToHtml(this.getCardIconsStrokeColor(cardIconColor));
 
         return String.format(""
                         + "fill: %s;"
@@ -343,6 +344,8 @@ public enum ThemeType {
      */
     public void reload() {
         // reload card icons css file (run it all the time, even on svg unsupport mode)
-        SvgUtils.prepareCss(this.getCardIconsCssFile(), this.getCardIconsCssSettings(), true);
+        for (CardIconColor cardIconColor : CardIconColor.values()) {
+            SvgUtils.prepareCss(this.getCardIconsCssFile(cardIconColor), this.getCardIconsCssSettings(cardIconColor), true);
+        }
     }
 }

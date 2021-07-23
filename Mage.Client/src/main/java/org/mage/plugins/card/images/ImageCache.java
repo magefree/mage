@@ -2,6 +2,7 @@ package org.mage.plugins.card.images;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ComputationException;
+import mage.abilities.icon.CardIconColor;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.SoftValuesLoadingCache;
@@ -52,7 +53,7 @@ public final class ImageCache {
      * Common pattern for keys. See ImageCache.getKey for structure info
      */
     private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)#(.*)#(.*)");
-    private static final Pattern CARD_ICON_KEY_PATTERN = Pattern.compile("(.*)#(.*)");
+    private static final Pattern CARD_ICON_KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)");
 
     static {
         // softValues() = Specifies that each value (not key) stored in the map should be wrapped in a SoftReference
@@ -232,7 +233,8 @@ public final class ImageCache {
                 if (m.matches()) {
                     int cardSize = Integer.parseInt(m.group(1));
                     String resourceName = m.group(2);
-                    BufferedImage image = ImageManagerImpl.instance.getCardIcon(resourceName, cardSize);
+                    CardIconColor cardIconColor = CardIconColor.valueOf(m.group(3));
+                    BufferedImage image = ImageManagerImpl.instance.getCardIcon(resourceName, cardSize, cardIconColor);
                     return image;
                 } else {
                     throw new RuntimeException("Wrong card icons image key format: " + key);
@@ -426,8 +428,8 @@ public final class ImageCache {
         return getImage(getKey(card, card.getAlternateName(), ""));
     }
 
-    public static BufferedImage getCardIconImage(String resourceName, int iconSize) {
-        return getCardIconImage(getCardIconKey(resourceName, iconSize));
+    public static BufferedImage getCardIconImage(String resourceName, int iconSize, String cardColorName) {
+        return getCardIconImage(getCardIconKey(resourceName, iconSize, cardColorName));
     }
 
     /**
@@ -502,8 +504,8 @@ public final class ImageCache {
         return name + '#' + set + "####";
     }
 
-    private static String getCardIconKey(String resourceName, int size) {
-        return size + "#" + resourceName;
+    private static String getCardIconKey(String resourceName, int size, String cardColorName) {
+        return size + "#" + resourceName + "#" + cardColorName;
     }
 
     /**
