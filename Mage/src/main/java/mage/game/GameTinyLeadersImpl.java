@@ -75,7 +75,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                         watcher.addCardInfoToCommander(this);
                         this.getState().addAbility(ability, null);
                     } else {
-                        // TODO: can't see that error in game logs at all, wtf? See GameWorker.call
+                        // GameWorker.call processing errors and write it in magediag.log by defalt
                         // Test use case: create tiny game with random generated deck - game freezes with empty battlefield
                         throw new IllegalStateException("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() + ']');
                     }
