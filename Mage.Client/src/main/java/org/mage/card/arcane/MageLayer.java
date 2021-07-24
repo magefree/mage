@@ -319,7 +319,7 @@ public class MageLayer extends MageCard {
         // create panels
         allIcons.forEach(cardIcon -> {
             CardIconCategory category = cardIcon.getIconType().getCategory();
-            // debug panel must take all icons (position depens on render settings)
+            // debug panel must take all icons (position depends on render settings)
             if (iconsDebugPanel != null) {
                 newIcons.get(iconsDebugPanel).add(cardIcon);
             }
