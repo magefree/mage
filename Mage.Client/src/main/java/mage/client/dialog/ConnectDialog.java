@@ -809,7 +809,7 @@ public class ConnectDialog extends MageDialog {
     private void btnCheckStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckStatusActionPerformed
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
             try {
-                Desktop.getDesktop().browse(new URI("http://xmageservers.online/"));
+                Desktop.getDesktop().browse(new URI("http://xmage.today/servers/"));
             } catch (Exception e) {
                 //
             }
