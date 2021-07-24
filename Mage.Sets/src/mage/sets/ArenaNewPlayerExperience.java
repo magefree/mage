@@ -25,10 +25,10 @@ public final class ArenaNewPlayerExperience extends ExpansionSet {
         final CardGraphicInfo FULL_ART = new CardGraphicInfo(FrameStyle.ANA_FULL_ART_BASIC, true);
 
         cards.add(new SetCardInfo("Forest", "10a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "20a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", "9a", Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART));
         cards.add(new SetCardInfo("Forest", 18, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 19, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 20, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 33, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 34, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 35, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
@@ -56,6 +56,7 @@ public final class ArenaNewPlayerExperience extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 6, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 7, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 8, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shorecomber Crab", 20, Rarity.COMMON, mage.cards.s.ShorecomberCrab.class));
         cards.add(new SetCardInfo("Swamp", "5a", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART));
         cards.add(new SetCardInfo("Swamp", "6a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 12, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
