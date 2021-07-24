@@ -104,8 +104,9 @@ class EmergentSequenceWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                && ((EntersTheBattlefieldEvent) event).getTarget().isLand(game)) {
+        if (event.getType() == GameEvent.EventType.PLAY_LAND ||
+                (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
+                && ((EntersTheBattlefieldEvent) event).getTarget().isLand(game))) {
             playerMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
         }
     }
