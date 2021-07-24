@@ -64,6 +64,8 @@ import mage.util.GameLog;
 import mage.util.MessageToClient;
 import mage.util.RandomUtil;
 import mage.util.functions.CopyApplier;
+import mage.watchers.Watcher;
+import mage.watchers.Watchers;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
 
@@ -1185,18 +1187,29 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     public void initGameDefaultWatchers() {
-        getState().addWatcher(new MorbidWatcher());
-        getState().addWatcher(new CastSpellLastTurnWatcher());
-        getState().addWatcher(new CastSpellYourLastTurnWatcher());
-        getState().addWatcher(new PlayerLostLifeWatcher());
-        getState().addWatcher(new PlayerLostLifeNonCombatWatcher());
-        getState().addWatcher(new BlockedAttackerWatcher());
-        getState().addWatcher(new DamageDoneWatcher());
-        getState().addWatcher(new PlanarRollWatcher());
-        getState().addWatcher(new AttackedThisTurnWatcher());
-        getState().addWatcher(new PlayersAttackedThisTurnWatcher());
-        getState().addWatcher(new CardsDrawnThisTurnWatcher());
-        getState().addWatcher(new ManaSpentToCastWatcher());
+        List<Watcher> newWatchers = new ArrayList<>();
+        newWatchers.add(new MorbidWatcher());
+        newWatchers.add(new CastSpellLastTurnWatcher());
+        newWatchers.add(new CastSpellYourLastTurnWatcher());
+        newWatchers.add(new PlayerLostLifeWatcher());
+        newWatchers.add(new PlayerLostLifeNonCombatWatcher());
+        newWatchers.add(new BlockedAttackerWatcher());
+        newWatchers.add(new DamageDoneWatcher());
+        newWatchers.add(new PlanarRollWatcher());
+        newWatchers.add(new AttackedThisTurnWatcher());
+        newWatchers.add(new PlayersAttackedThisTurnWatcher());
+        newWatchers.add(new CardsDrawnThisTurnWatcher());
+        newWatchers.add(new ManaSpentToCastWatcher());
+        newWatchers.add(new ManaPaidSourceWatcher());
+
+        // runtime check - allows only GAME scope (one watcher per game)
+        newWatchers.forEach(watcher -> {
+            if (watcher.getScope().equals(WatcherScope.GAME)) {
+                throw new IllegalStateException("Game default watchers must have GAME scope: " + watcher.getClass().getCanonicalName());
+            }
+        });
+
+        newWatchers.forEach(getState()::addWatcher);
     }
 
     public void initPlayerDefaultWatchers(UUID playerId) {

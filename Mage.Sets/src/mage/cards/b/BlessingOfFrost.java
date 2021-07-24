@@ -34,7 +34,6 @@ public final class BlessingOfFrost extends CardImpl {
 
         // Distribute X +1/+1 counters among any number of creatures you control, where X is the amount of {S} spent to cast this spell. Then draw a card for each creature you control with power 4 or greater.
         this.getSpellAbility().addEffect(new BlessingOfFrostEffect());
-        this.getSpellAbility().addWatcher(new ManaPaidSourceWatcher());
     }
 
     private BlessingOfFrost(final BlessingOfFrost card) {

@@ -19,6 +19,8 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
+ * Default watcher, no needs to add it to ability
+ *
  * @author TheElk801
  */
 public class ManaPaidSourceWatcher extends Watcher {

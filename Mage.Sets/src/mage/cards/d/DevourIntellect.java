@@ -30,7 +30,6 @@ public final class DevourIntellect extends CardImpl {
                 TreasureSpentToCastCondition.instance,
                 "Target opponent discards a card. If mana from a Treasure was spent to cast this spell, instead that player reveals their hand, you choose a nonland card from it, then that player discards a card"
         ));
-        this.getSpellAbility().addWatcher(new ManaPaidSourceWatcher());
     }
 
     private DevourIntellect(final DevourIntellect card) {

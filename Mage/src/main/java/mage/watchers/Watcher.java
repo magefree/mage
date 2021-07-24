@@ -169,4 +169,7 @@ public abstract class Watcher implements Serializable {
         return null;
     }
 
+    public WatcherScope getScope() {
+        return scope;
+    }
 }
