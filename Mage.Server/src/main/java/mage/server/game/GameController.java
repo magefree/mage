@@ -313,6 +313,11 @@ public class GameController implements GameCallback {
 
     private synchronized void startGame() {
         if (gameFuture == null) {
+            // workaround to fill range info (cause real range fills after game start, but users must get start event with game data already)
+            for (Player player : game.getPlayers().values()) {
+                player.updateRange(game);
+            }
+
             for (GameSessionPlayer gameSessionPlayer : getGameSessions()) {
                 gameSessionPlayer.init();
             }

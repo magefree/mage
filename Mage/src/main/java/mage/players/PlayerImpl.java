@@ -495,6 +495,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void updateRange(Game game) {
         // 20100423 - 801.2c
         // 801.2c The particular players within each player’s range of influence are determined as each turn begins.
+        // BUT it also uses before game start to fill game and card data in starting game events
         inRange.clear();
         inRange.add(this.playerId);
         inRange.addAll(getAllNearPlayers(game, true));
