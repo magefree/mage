@@ -49,7 +49,7 @@ public class EpicEffect extends OneShotEffect {
         if (spell == null) {
             return false;
         }
-        spell = spell.copy();
+        spell = spell.copy(); // it's a fake spell (template), real copy with events in EpicPushEffect
         spell.getSpellAbility().getEffects().removeIf(EpicEffect.class::isInstance);
         game.addDelayedTriggeredAbility(new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(
                 new EpicPushEffect(spell, rule), Duration.EndOfGame, false
