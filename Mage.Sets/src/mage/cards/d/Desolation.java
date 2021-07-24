@@ -106,8 +106,7 @@ class DesolationWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.TAPPED_FOR_MANA
-                && !game.inCheckPlayableState()) {
+        if (game.inCheckPlayableState() || event.getType() != GameEvent.EventType.TAPPED_FOR_MANA) {
             return;
         }
         Permanent permanent = ((TappedForManaEvent) event).getPermanent();
