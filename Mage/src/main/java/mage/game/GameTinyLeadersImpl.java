@@ -15,6 +15,7 @@ import mage.constants.*;
 import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.common.CommanderInfoWatcher;
 import mage.watchers.common.CommanderPlaysCountWatcher;
 
@@ -50,32 +51,49 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null) {
-                Card commander = getCommanderCard(player.getMatchPlayer().getDeck().getName(), player.getId());
+                String commanderName = player.getMatchPlayer().getDeck().getName();
+                Card commander = findCommander(this, player, commanderName);
                 if (commander != null) {
-                    Set<Card> cards = new HashSet<>();
-                    cards.add(commander);
-                    this.loadCards(cards, playerId);
-                    player.addCommanderId(commander.getId());
+                    // already exists - just move to zone (example: game restart by Karn Liberated)
                     commander.moveToZone(Zone.COMMAND, null, this, true);
-                    Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
-                    ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary, false, "Commander"));
-                    ability.addEffect(new CommanderCostModification(commander));
-                    // Commander rule #4 was removed Jan. 18, 2016
-                    // ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
-                    CommanderInfoWatcher watcher = new CommanderInfoWatcher("Commander", commander.getId(), false);
-                    getState().addWatcher(watcher);
-                    watcher.addCardInfoToCommander(this);
-                    this.getState().addAbility(ability, null);
                 } else {
-                    throw new UnknownError("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() + ']');
+                    // create new commander
+                    commander = getCommanderCard(commanderName, player.getId());
+                    if (commander != null) {
+                        Set<Card> cards = new HashSet<>();
+                        cards.add(commander);
+                        this.loadCards(cards, playerId);
+                        player.addCommanderId(commander.getId());
+                        commander.moveToZone(Zone.COMMAND, null, this, true);
+                        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
+                        ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary, false, "Commander"));
+                        ability.addEffect(new CommanderCostModification(commander));
+                        // Commander rule #4 was removed Jan. 18, 2016
+                        // ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
+                        CommanderInfoWatcher watcher = new CommanderInfoWatcher("Commander", commander.getId(), false);
+                        getState().addWatcher(watcher);
+                        watcher.addCardInfoToCommander(this);
+                        this.getState().addAbility(ability, null);
+                    } else {
+                        // TODO: can't see that error in game logs at all, wtf? See GameWorker.call
+                        // Test use case: create tiny game with random generated deck - game freezes with empty battlefield
+                        throw new IllegalStateException("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() + ']');
+                    }
                 }
             }
-
         }
         super.init(choosingPlayerId);
         if (startingPlayerSkipsDraw) {
             state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
         }
+    }
+
+    private Card findCommander(Game game, Player player, String commanderName) {
+        return game.getCommanderCardsFromAnyZones(player, CommanderCardType.ANY, Zone.ALL)
+                .stream()
+                .filter(c -> CardUtil.haveSameNames(c, commanderName, game))
+                .findFirst()
+                .orElse(null);
     }
 
     /**

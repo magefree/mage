@@ -304,11 +304,11 @@ public class MCTSNode {
     protected Game createSimulation(Game game, UUID playerId) {
         Game sim = game.copy();
 
-        for (Player copyPlayer: sim.getState().getPlayers().values()) {
-            Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
-            SimulatedPlayerMCTS newPlayer = new SimulatedPlayerMCTS(copyPlayer.getId(), true);
+        for (Player oldPlayer: sim.getState().getPlayers().values()) {
+            Player origPlayer = game.getState().getPlayers().get(oldPlayer.getId()).copy();
+            SimulatedPlayerMCTS newPlayer = new SimulatedPlayerMCTS(oldPlayer, true);
             newPlayer.restore(origPlayer);
-            sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
+            sim.getState().getPlayers().put(oldPlayer.getId(), newPlayer);
         }
         randomizePlayers(sim, playerId);
         sim.setSimulation(true);

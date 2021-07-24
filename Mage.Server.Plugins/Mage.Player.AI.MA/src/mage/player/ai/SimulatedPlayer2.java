@@ -15,6 +15,7 @@ import mage.constants.AbilityType;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
+import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
@@ -43,6 +44,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         this.isSimulatedPlayer = isSimulatedPlayer;
         this.suggested = suggested;
         this.userData = UserData.getDefaultUserDataView();
+        this.matchPlayer = new MatchPlayer(originalPlayer.getMatchPlayer(), this);
     }
 
     public SimulatedPlayer2(final SimulatedPlayer2 player) {

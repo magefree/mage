@@ -670,11 +670,11 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
     protected Game createSimulation(Game game) {
         Game sim = game.copy();
 
-        for (Player copyPlayer: sim.getState().getPlayers().values()) {
-            Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
-            SimulatedPlayer newPlayer = new SimulatedPlayer(copyPlayer.getId(), copyPlayer.getId().equals(playerId), maxDepth);
+        for (Player oldPlayer: sim.getState().getPlayers().values()) {
+            Player origPlayer = game.getState().getPlayers().get(oldPlayer.getId()).copy();
+            SimulatedPlayer newPlayer = new SimulatedPlayer(oldPlayer, oldPlayer.getId().equals(playerId), maxDepth);
             newPlayer.restore(origPlayer);
-            sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
+            sim.getState().getPlayers().put(oldPlayer.getId(), newPlayer);
         }
         sim.setSimulation(true);
         return sim;

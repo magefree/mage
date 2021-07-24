@@ -245,6 +245,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         this.inRange.addAll(player.inRange);
         this.userData = player.userData;
+        this.matchPlayer = player.matchPlayer;
+
         this.canPayLifeCost = player.canPayLifeCost;
         this.sacrificeCostFilter = player.sacrificeCostFilter;
         this.alternativeSourceCosts.addAll(player.alternativeSourceCosts);
