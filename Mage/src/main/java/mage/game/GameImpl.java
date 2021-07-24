@@ -1204,7 +1204,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {
-            if (watcher.getScope().equals(WatcherScope.GAME)) {
+            if (!watcher.getScope().equals(WatcherScope.GAME)) {
                 throw new IllegalStateException("Game default watchers must have GAME scope: " + watcher.getClass().getCanonicalName());
             }
         });
