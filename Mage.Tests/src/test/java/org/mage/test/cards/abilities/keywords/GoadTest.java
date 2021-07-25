@@ -19,6 +19,7 @@ import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -51,8 +52,24 @@ public class GoadTest extends CardTestMultiPlayerBase {
         UUID defenderId = currentGame.getCombat().getDefenderId(permanent.getId());
         Assert.assertTrue(
                 "Creature should be attacking one the following players: "
-                        + Arrays.stream(players).map(Player::getName).reduce((a, b) -> a + ", " + b),
+                        + Arrays.stream(players).map(Player::getName).reduce((a, b) -> a + ", " + b).orElse(""),
                 Arrays.stream(players).map(TestPlayer::getId).anyMatch(defenderId::equals)
+        );
+    }
+
+    private void assertGoaded(String attacker, TestPlayer... players) {
+        Assert.assertTrue("At least one player should be provided", players.length > 0);
+        Permanent permanent = getPermanent(attacker);
+        Assert.assertEquals(
+                "Creature should be goaded by "
+                        + Arrays
+                        .stream(players)
+                        .map(Player::getName)
+                        .reduce((a, b) -> a + ", " + b).orElse(""),
+                permanent.getGoadingPlayers(),
+                Arrays.stream(players)
+                        .map(TestPlayer::getId)
+                        .collect(Collectors.toSet())
         );
     }
 
@@ -153,6 +170,7 @@ public class GoadTest extends CardTestMultiPlayerBase {
         execute();
         assertAllCommandsUsed();
 
+        assertGoaded(lion, playerA);
         assertAttacking(lion, playerB, playerC);
     }
 
@@ -171,6 +189,7 @@ public class GoadTest extends CardTestMultiPlayerBase {
         execute();
         assertAllCommandsUsed();
 
+        assertGoaded(lion, playerA);
         assertAttacking(lion, playerC);
     }
 
@@ -190,6 +209,7 @@ public class GoadTest extends CardTestMultiPlayerBase {
         execute();
         assertAllCommandsUsed();
 
+        assertGoaded(lion, playerA);
         assertAttacking(lion, playerA);
     }
 
@@ -214,6 +234,7 @@ public class GoadTest extends CardTestMultiPlayerBase {
         execute();
         assertAllCommandsUsed();
 
+        assertGoaded(lion, playerA, playerD);
         assertAttacking(lion, playerB);
     }
 
@@ -239,6 +260,7 @@ public class GoadTest extends CardTestMultiPlayerBase {
         execute();
         assertAllCommandsUsed();
 
+        assertGoaded(lion, playerA, playerD);
         assertAttacking(lion, playerA, playerD);
     }
 }
