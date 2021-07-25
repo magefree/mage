@@ -12,14 +12,13 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
@@ -27,7 +26,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -68,7 +66,7 @@ public final class CattiBrieOfMithralHall extends CardImpl {
         // attacking or blocking creature an opponent controls, where X is the number of
         // counters removed this way.
         Ability damageAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new CattiBrieOfMithralHallEffect(CattiBrieRemovedCounterValue.instance), new ManaCostsImpl("{1}"));
+                new DamageTargetEffect(CattiBrieRemovedCounterValue.instance), new ManaCostsImpl("{1}"));
         damageAbility.addTarget(new TargetCreaturePermanent(filter));
         damageAbility.addCost(new RemoveAllCountersSourceCost(CounterType.P1P1));
 
@@ -83,45 +81,6 @@ public final class CattiBrieOfMithralHall extends CardImpl {
     public CattiBrieOfMithralHall copy() {
         return new CattiBrieOfMithralHall(this);
     }
-}
-
-class CattiBrieOfMithralHallEffect extends OneShotEffect {
-
-    protected DynamicValue amount;
-
-    CattiBrieOfMithralHallEffect(DynamicValue amount) {
-        super(Outcome.Damage);
-        this.amount = amount;
-        staticText = "Remove all +1/+1 counters from {this}, deal X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way.";
-    }
-
-    CattiBrieOfMithralHallEffect(final CattiBrieOfMithralHallEffect effect) {
-        super(effect);
-        this.amount = effect.amount;
-    }
-
-    @Override
-    public CattiBrieOfMithralHallEffect copy() {
-        return new CattiBrieOfMithralHallEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        Permanent target = game.getPermanent(source.getFirstTarget());
-        if (permanent != null && target != null && this.amount != null) { // Can't activate this without a valid target
-            Integer numberOfCounters = this.amount.calculate(game, source, this);
-            if (numberOfCounters == null || numberOfCounters < 1) {
-                return false;
-            }
-
-            // Deal X damage to target attacking or blocking creature an opponent controls
-            target.damage(numberOfCounters, source.getSourceId(), source, game, false, true);
-            return true;
-        }
-        return false;
-    }
-
 }
 
 enum CattiBrieRemovedCounterValue implements DynamicValue {
