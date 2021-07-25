@@ -6,8 +6,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.RemoveAllCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -63,9 +67,10 @@ public final class CattiBrieOfMithralHall extends CardImpl {
         // {1}, Remove all +1/+1 counters from Catti-brie: It deals X damage to target
         // attacking or blocking creature an opponent controls, where X is the number of
         // counters removed this way.
-        Ability damageAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CattiBrieOfMithralHallEffect(),
-                new ManaCostsImpl("{1}"));
+        Ability damageAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new CattiBrieOfMithralHallEffect(CattiBrieRemovedCounterValue.instance), new ManaCostsImpl("{1}"));
         damageAbility.addTarget(new TargetCreaturePermanent(filter));
+        damageAbility.addCost(new RemoveAllCountersSourceCost(CounterType.P1P1));
 
         this.addAbility(damageAbility);
     }
@@ -82,13 +87,17 @@ public final class CattiBrieOfMithralHall extends CardImpl {
 
 class CattiBrieOfMithralHallEffect extends OneShotEffect {
 
-    CattiBrieOfMithralHallEffect() {
+    protected DynamicValue amount;
+
+    CattiBrieOfMithralHallEffect(DynamicValue amount) {
         super(Outcome.Damage);
+        this.amount = amount;
         staticText = "Remove all +1/+1 counters from {this}, deal X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way.";
     }
 
-    CattiBrieOfMithralHallEffect(CattiBrieOfMithralHallEffect effect) {
+    CattiBrieOfMithralHallEffect(final CattiBrieOfMithralHallEffect effect) {
         super(effect);
+        this.amount = effect.amount;
     }
 
     @Override
@@ -100,19 +109,42 @@ class CattiBrieOfMithralHallEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Permanent target = game.getPermanent(source.getFirstTarget());
-        if (permanent != null && target != null) { // Can't activate this without a valid target
-            Integer numberOfCounters = permanent.getCounters(game).getCount(CounterType.P1P1);
+        if (permanent != null && target != null && this.amount != null) { // Can't activate this without a valid target
+            Integer numberOfCounters = this.amount.calculate(game, source, this);
             if (numberOfCounters == null || numberOfCounters < 1) {
                 return false;
             }
 
-            // Remove all +1/+1 counters
-            permanent.removeCounters(permanent.getCounters(game).get(CounterType.P1P1.getName()), source, game);
-            // Deal X damage
+            // Deal X damage to target attacking or blocking creature an opponent controls
             target.damage(numberOfCounters, source.getSourceId(), source, game, false, true);
             return true;
         }
         return false;
     }
 
+}
+
+enum CattiBrieRemovedCounterValue implements DynamicValue {
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        int countersRemoved = 0;
+        for (Cost cost : sourceAbility.getCosts()) {
+            if (cost instanceof RemoveAllCountersSourceCost) {
+                countersRemoved = ((RemoveAllCountersSourceCost) cost).getRemovedCounters();
+            }
+        }
+        return countersRemoved;
+    }
+
+    @Override
+    public CattiBrieRemovedCounterValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
+    }
 }
