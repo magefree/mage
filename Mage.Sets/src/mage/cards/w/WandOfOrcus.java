@@ -3,8 +3,8 @@ package mage.cards.w;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
+import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -23,9 +23,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -57,7 +54,8 @@ public final class WandOfOrcus extends CardImpl {
 
         // Whenever equipped creature deals combat damage to a player, create that many
         // 2/2 black Zombie creature tokens.
-        this.addAbility(new WandOfOrcusZombieAbility());
+        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new WandOfOrcusZombieEffect(), "equipped",
+                false, true));
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{3}")));
@@ -70,44 +68,6 @@ public final class WandOfOrcus extends CardImpl {
     @Override
     public WandOfOrcus copy() {
         return new WandOfOrcus(this);
-    }
-}
-
-class WandOfOrcusZombieAbility extends TriggeredAbilityImpl {
-
-    public WandOfOrcusZombieAbility() {
-        super(Zone.BATTLEFIELD, new WandOfOrcusZombieEffect());
-    }
-
-    public WandOfOrcusZombieAbility(final WandOfOrcusZombieAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public WandOfOrcusZombieAbility copy() {
-        return new WandOfOrcusZombieAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-        Permanent damageSource = game.getPermanent(event.getSourceId());
-        if (damageEvent.isCombatDamage() && damageSource != null
-                && damageSource.getAttachments().contains(this.getSourceId())) {
-            game.getState().setValue("Damage_" + getSourceId(), damageEvent.getAmount());
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever equipped creature deals combat damage to a player, create that many 2/2 black Zombie creature tokens.";
     }
 }
 
@@ -129,7 +89,7 @@ class WandOfOrcusZombieEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Integer damage = (Integer) game.getState().getValue("Damage_" + source.getSourceId());
+        Integer damage = (Integer) this.getValue("damage");
         if (damage != null) {
             return (new CreateTokenEffect(new ZombieToken(), damage).apply(game, source));
         }
