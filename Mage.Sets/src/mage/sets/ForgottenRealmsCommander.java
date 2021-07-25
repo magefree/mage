@@ -48,6 +48,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Burnished Hart", 200, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
         cards.add(new SetCardInfo("Canopy Vista", 227, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Cataclysmic Gearhulk", 65, Rarity.MYTHIC, mage.cards.c.CataclysmicGearhulk.class));
+        cards.add(new SetCardInfo("Catti-brie of Mithral Hall", 44, Rarity.RARE, mage.cards.c.CattiBrieOfMithralHall.class));
         cards.add(new SetCardInfo("Chain Reaction", 116, Rarity.RARE, mage.cards.c.ChainReaction.class));
         cards.add(new SetCardInfo("Chameleon Colossus", 153, Rarity.RARE, mage.cards.c.ChameleonColossus.class));
         cards.add(new SetCardInfo("Champion of Wits", 80, Rarity.RARE, mage.cards.c.ChampionOfWits.class));
