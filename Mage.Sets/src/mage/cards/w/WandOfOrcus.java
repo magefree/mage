@@ -7,7 +7,6 @@ import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -91,7 +90,7 @@ class WandOfOrcusZombieEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Integer damage = (Integer) this.getValue("damage");
         if (damage != null) {
-            return (new CreateTokenEffect(new ZombieToken(), damage).apply(game, source));
+            return new ZombieToken().putOntoBattlefield(damage, game, source, source.getControllerId());
         }
         return false;
     }
