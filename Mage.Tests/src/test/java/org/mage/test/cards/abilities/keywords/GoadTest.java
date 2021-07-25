@@ -9,12 +9,18 @@ import mage.game.Game;
 import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -36,6 +42,22 @@ public class GoadTest extends CardTestMultiPlayerBase {
         playerC = createPlayer(game, playerC, "PlayerC");
         playerD = createPlayer(game, playerD, "PlayerD");
         return game;
+    }
+
+    private void assertAttacking(String attacker, TestPlayer... players) {
+        Assert.assertTrue("At least one player should be provided", players.length > 0);
+        Permanent permanent = getPermanent(attacker);
+        List<String> attacked = new ArrayList<>();
+        Assert.assertTrue("Creature should be tapped", permanent.isTapped());
+        Assert.assertTrue("Creature should be attacking", permanent.isAttacking());
+        UUID defenderId = currentGame.getCombat().getDefenderId(permanent.getId());
+        for (TestPlayer player : players) {
+            if (player.getId().equals(defenderId)) {
+                return;
+            }
+        }
+        Assert.fail("Creature should be attacking one the following players: "
+                + Arrays.stream(players).map(Player::getName).reduce((a, b) -> a + ", " + b));
     }
 
     @Ignore // currently fails due to how test works
@@ -121,7 +143,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
     }
 
-    @Ignore // currently not working
     @Test
     public void testCantAttackGoadingPlayer() {
         addCard(Zone.HAND, playerA, homunculus);
@@ -132,12 +153,10 @@ public class GoadTest extends CardTestMultiPlayerBase {
         setChoice(playerA, "Yes");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, homunculus);
 
-        attack(2, playerD, lion, playerA);
-
-        setStopAt(2, PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_COMBAT);
         execute();
         assertAllCommandsUsed();
 
-        assertLife(playerA, 40);
+        assertAttacking(lion, playerB, playerC);
     }
 }
