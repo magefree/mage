@@ -436,7 +436,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     protected void checkAttackRequirements(Player player, Game game) {
         //20101001 - 508.1d
         for (Permanent creature : player.getAvailableAttackers(game)) {
-            boolean mustAttack = false;
+            boolean mustAttack = creature.isGoaded();
             Set<UUID> defendersForcedToAttack = new HashSet<>();
 
             // check if a creature has to attack
@@ -456,8 +456,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                 }
             }
-            if (mustAttack) {
-                // check which defenders the forced to attack creature can attack without paying a cost
+            if (mustAttack) {// check which defenders the forced to attack creature can attack without paying a cost
                 Set<UUID> defendersCostlessAttackable = new HashSet<>(defenders);
                 for (UUID defenderId : defenders) {
                     if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
@@ -465,6 +464,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                         defendersCostlessAttackable.remove(defenderId);
                         defendersForcedToAttack.remove(defenderId);
                     }
+                }
+                if (!defendersCostlessAttackable.stream().allMatch(creature.getGoadingPlayers()::contains)) {
+                    defendersCostlessAttackable.removeAll(creature.getGoadingPlayers());
                 }
                 // force attack only if a defender can be attacked without paying a cost
                 if (!defendersCostlessAttackable.isEmpty()) {
