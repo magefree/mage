@@ -436,6 +436,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     protected void checkAttackRequirements(Player player, Game game) {
         //20101001 - 508.1d
         for (Permanent creature : player.getAvailableAttackers(game)) {
+            boolean mustAttack = false;
             Set<UUID> defendersForcedToAttack = new HashSet<>();
             if (creature.getGoadingPlayers().isEmpty()) {
                 // check if a creature has to attack
@@ -446,6 +447,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                         // needed for Goad Effect
                         continue;
                     }
+                    mustAttack = true;
                     for (Ability ability : entry.getValue()) {
                         UUID defenderId = effect.mustAttackDefender(ability, game);
                         if (defenderId != null && defenders.contains(defenderId)) {
@@ -456,9 +458,10 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
             } else {
                 // if creature is goaded then we start with assumption that it needs to attack any player
+                mustAttack = true;
                 defendersForcedToAttack.addAll(defenders);
             }
-            if (defendersForcedToAttack.isEmpty()) {
+            if (!mustAttack) {
                 continue;
             }
             // check which defenders the forced to attack creature can attack without paying a cost
