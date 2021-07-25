@@ -1,23 +1,19 @@
-
 package mage.cards.x;
 
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.*;
-import mage.abilities.effects.common.continuous.PlayTheTopCardOfTargetPlayerLibraryEffect;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -28,23 +24,21 @@ import java.util.UUID;
 public final class XanatharGuildKingpin extends CardImpl {
 
     public XanatharGuildKingpin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.BEHOLDER);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 
+        // At the beginning of your upkeep, choose target opponent. Until end of turn, that player can’t cast spells, you may look at the top card of their library any time, you may play the top card of their library, and you may spend mana as though it were mana of any color to cast spells this way.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD, new XanatharGuildKingpinRuleModifyingEffect(),
                 TargetController.YOU, false
         );
-        ability.addEffect(new XanatharGuildKingpinLookAtTopCardOfTargetPlayerLibraryAnyTimeEffect());
-        ability.addEffect(new PlayTheTopCardOfTargetPlayerLibraryEffect(new FilterCard("play cards"), true));
+        ability.addEffect(new XanatharGuildKingpinTopOfOpponentLibraryTargetEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
-
-
     }
 
     private XanatharGuildKingpin(final XanatharGuildKingpin card) {
@@ -61,16 +55,16 @@ class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEff
 
     public XanatharGuildKingpinRuleModifyingEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "choose target opponent. This turn, that player can't cast spells";
+        staticText = "choose target opponent";
     }
 
-    private XanatharGuildKingpinRuleModifyingEffect(final mage.cards.x.XanatharGuildKingpinRuleModifyingEffect effect) {
+    private XanatharGuildKingpinRuleModifyingEffect(final XanatharGuildKingpinRuleModifyingEffect effect) {
         super(effect);
     }
 
     @Override
-    public mage.cards.x.XanatharGuildKingpinRuleModifyingEffect copy() {
-        return new mage.cards.x.XanatharGuildKingpinRuleModifyingEffect(this);
+    public XanatharGuildKingpinRuleModifyingEffect copy() {
+        return new XanatharGuildKingpinRuleModifyingEffect(this);
     }
 
     @Override
@@ -100,14 +94,15 @@ class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEff
     }
 }
 
-class XanatharGuildKingpinLookAtTopCardOfTargetPlayerLibraryAnyTimeEffect extends ContinuousEffectImpl {
+class XanatharGuildKingpinTopOfOpponentLibraryTargetEffect extends ContinuousEffectImpl {
 
-    public XanatharGuildKingpinLookAtTopCardOfTargetPlayerLibraryAnyTimeEffect() {
+    public XanatharGuildKingpinTopOfOpponentLibraryTargetEffect() {
         super(Duration.EndOfTurn, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "Until end of turn, you may look at the top card of target player's library any time.";
+        staticText = "Until end of turn, that player can’t cast spells, you may look at the top card of their library any time, you may play the top card of their library," +
+                " and you may spend mana as though it were mana of any color to cast spells this way.";
     }
 
-    private XanatharGuildKingpinLookAtTopCardOfTargetPlayerLibraryAnyTimeEffect(final mage.cards.x.XanatharGuildKingpinLookAtTopCardOfTargetPlayerLibraryAnyTimeEffect effect) {
+    private XanatharGuildKingpinTopOfOpponentLibraryTargetEffect(final XanatharGuildKingpinTopOfOpponentLibraryTargetEffect effect) {
         super(effect);
     }
 
@@ -135,62 +130,14 @@ class XanatharGuildKingpinLookAtTopCardOfTargetPlayerLibraryAnyTimeEffect extend
             return false;
         }
         controller.lookAtCards("Top card of " + targetPlayer.getName() + "'s library", topCard, game);
-
-        ContinuousEffect effect = new XanatharGuildKingpinSpendManaAsThoughEffect(controller.getId());
-        effect.setTargetPointer(new FixedTarget(topCard.getId(), game));
-        game.addEffect(effect, source);
+        CardUtil.makeCardPlayable(game, source, topCard, Duration.EndOfTurn, true);
         return true;
     }
 
     @Override
-    public mage.cards.x.XanatharGuildKingpinLookAtTopCardOfTargetPlayerLibraryAnyTimeEffect copy() {
-        return new mage.cards.x.XanatharGuildKingpinLookAtTopCardOfTargetPlayerLibraryAnyTimeEffect(this);
+    public XanatharGuildKingpinTopOfOpponentLibraryTargetEffect copy() {
+        return new XanatharGuildKingpinTopOfOpponentLibraryTargetEffect(this);
     }
 }
 
-class XanatharGuildKingpinSpendManaAsThoughEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
-    private final UUID authorizedPlayerId;
-
-    XanatharGuildKingpinSpendManaAsThoughEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
-        this.authorizedPlayerId = authorizedPlayerId;
-        staticText = "You may spend mana as though it were mana of any color";
-    }
-
-    private XanatharGuildKingpinSpendManaAsThoughEffect(mage.cards.x.XanatharGuildKingpinSpendManaAsThoughEffect effect) {
-        super(effect);
-        this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public mage.cards.x.XanatharGuildKingpinSpendManaAsThoughEffect copy() {
-        return new mage.cards.x.XanatharGuildKingpinSpendManaAsThoughEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-
-        //Same as for ThiefOfSanity
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-        if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
-                && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
-            // if the card moved from top of library to spell the zone change counter is increased by 1 (effect must apply before and on stack, use isCheckPlayableMode?)
-            return affectedControllerId.equals(authorizedPlayerId);
-        } else if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
-            // object has moved zone so effect can be discarded
-            this.discard();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        return mana.getFirstAvailable();
-    }
-}
