@@ -1622,8 +1622,6 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             // workaround to find all abilities first and filter it for one object
             List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false);
-            System.out.println("PlayerImpl : (getPlayableActivatedAbilities) " + allPlayable);
-            System.out.println("PlayerImpl : (getPlayableActivatedAbilities) If last line is empty, then nothing returned.  If not, useable should have something in it! ");
             for (ActivatedAbility ability : allPlayable) {
                 if (needIds.contains(ability.getSourceId())) {
                     useable.putIfAbsent(ability.getId(), ability);
