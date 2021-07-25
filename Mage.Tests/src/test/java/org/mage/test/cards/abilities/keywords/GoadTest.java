@@ -17,9 +17,7 @@ import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -32,6 +30,7 @@ public class GoadTest extends CardTestMultiPlayerBase {
     private static final String ray = "Ray of Command";
     private static final String homunculus = "Jeering Homunculus";
     private static final String lion = "Silvercoat Lion";
+    private static final String archon = "Blazing Archon";
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
@@ -47,17 +46,14 @@ public class GoadTest extends CardTestMultiPlayerBase {
     private void assertAttacking(String attacker, TestPlayer... players) {
         Assert.assertTrue("At least one player should be provided", players.length > 0);
         Permanent permanent = getPermanent(attacker);
-        List<String> attacked = new ArrayList<>();
         Assert.assertTrue("Creature should be tapped", permanent.isTapped());
         Assert.assertTrue("Creature should be attacking", permanent.isAttacking());
         UUID defenderId = currentGame.getCombat().getDefenderId(permanent.getId());
-        for (TestPlayer player : players) {
-            if (player.getId().equals(defenderId)) {
-                return;
-            }
-        }
-        Assert.fail("Creature should be attacking one the following players: "
-                + Arrays.stream(players).map(Player::getName).reduce((a, b) -> a + ", " + b));
+        Assert.assertTrue(
+                "Creature should be attacking one the following players: "
+                        + Arrays.stream(players).map(Player::getName).reduce((a, b) -> a + ", " + b),
+                Arrays.stream(players).map(TestPlayer::getId).anyMatch(defenderId::equals)
+        );
     }
 
     @Ignore // currently fails due to how test works
@@ -158,5 +154,42 @@ public class GoadTest extends CardTestMultiPlayerBase {
         assertAllCommandsUsed();
 
         assertAttacking(lion, playerB, playerC);
+    }
+
+    @Test
+    public void testCanOnlyAttackOnePlayer() {
+        addCard(Zone.HAND, playerA, homunculus);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerD, lion);
+        addCard(Zone.BATTLEFIELD, playerB, archon);
+
+        addTarget(playerA, lion);
+        setChoice(playerA, "Yes");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, homunculus);
+
+        setStopAt(2, PhaseStep.END_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertAttacking(lion, playerC);
+    }
+
+    @Test
+    public void testMustAttackGoader() {
+        addCard(Zone.HAND, playerA, homunculus);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerD, lion);
+        addCard(Zone.BATTLEFIELD, playerB, archon);
+        addCard(Zone.BATTLEFIELD, playerC, archon);
+
+        addTarget(playerA, lion);
+        setChoice(playerA, "Yes");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, homunculus);
+
+        setStopAt(2, PhaseStep.END_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertAttacking(lion, playerA);
     }
 }
