@@ -2,6 +2,9 @@ package mage.player.ai.RLAgent;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.players.Player;
+
+import static org.junit.Assert.assertTrue;
+
 import java.util.*;
 import org.apache.log4j.Logger;
 import mage.player.ai.RLAction;
@@ -46,6 +49,9 @@ public class DJLAgent{
         NDArray actsTaken=nd.create(arrChosenActs, new Shape(numExp)).oneHot(actionSize);
         NDArray predReward=nd.zeros(rewards.getShape());
         NDList label=new NDList(actsTaken,predReward,rewards,baseLogProbs);
+        for(int i=0;i<label.size();i++){
+            label.get(i).setRequiresGradient(true);
+        }
         policy.train(nd.newSubManager(),netInput,label);
     }
     public int choose(Game game, RLPlayer player, List<RLAction> actions){
@@ -55,6 +61,8 @@ public class DJLAgent{
         NDList netInput=prepare(stateSingle);
         NDArray logProbs=policy.logProbs(netInput);
         int choice=sample(logProbs);
+        assertTrue(choice < actions.size());
+        System.out.println("choice is "+choice+" with size "+actions.size());
         state.chosenAction=choice;
         player.addExperience(state);
         return choice;
@@ -65,13 +73,20 @@ public class DJLAgent{
     }
     int sample(NDArray logProbs){
         NDArray probs=logProbs.exp();
+        System.out.println("probs are "+probs);
         probs=probs.reshape(-1);
         probs=probs.div(probs.sum()); //This extra normalization is needed to ensure that 
         //The true sum is less than 1+1e-12, or it will crash. Rounding error ensures that 
         //happens without the extra normalization
-        NDArray chosen=nd.randomMultinomial(1, probs);
-        long choice=chosen.getLong(0);
-        return (int) choice;
+
+        //the builtin randomMultinomial is broken, so I am writing my own implementation of it
+        float target=(float) Math.random();
+        int i=0;
+        while(target>probs.getFloat(i)){
+            target-=probs.getFloat(i);
+            i++;
+        }
+        return i;
     }
     NDArray listToNDArray2D(List<List<Integer>> data,int nestedSize){
         NDArray arr=nd.zeros(new Shape(data.size(),nestedSize),DataType.INT32);

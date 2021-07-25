@@ -23,6 +23,7 @@ public class DJLBlock extends AbstractBlock{
     }
 
     public NDList forwardInternal(ParameterStore parameterStore, NDList inputs, boolean training, PairList<String, Object> pairList) {
+        
         NDArray actions=inputs.get(0);
         NDArray actionMask=inputs.get(1);
         NDArray embeddedActions=actionEmbed.forward(parameterStore, new NDList(actions), training, pairList).singletonOrThrow();
@@ -35,6 +36,7 @@ public class DJLBlock extends AbstractBlock{
         long sub_mult=1000000;
         pastLin=pastLin.sub(actionMask.mul(-1).add(1).mul(sub_mult));
         NDArray probs=pastLin.logSoftmax(1);
+        System.out.println(probs.getShape());
         return new NDList(probs);
     }
     public Shape[] getOutputShapes(Shape[] inputs) {

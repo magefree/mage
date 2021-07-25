@@ -29,6 +29,9 @@ import org.apache.log4j.Logger;
 import mage.player.ai.RLAgent.*;
 import java.util.stream.Collectors;
 import mage.player.ai.RLAgent.*;
+
+import static org.junit.Assert.assertTrue;
+
 import java.io.*;
 import mage.abilities.*;
 import mage.player.ai.RLAction;
@@ -42,11 +45,10 @@ import mage.player.ai.RLAction;
 public class RLPlayer extends RandomNonTappingPlayer{
     public DJLAgent learner;
     private static final Logger logger = Logger.getLogger(RLPlayer.class);
-    List<RepresentedState> experiences;
+    List<RepresentedState> experiences=new ArrayList<RepresentedState>();
     public RLPlayer(String name , RangeOfInfluence range, int skill){
         super(name);
         learner=new DJLAgent();
-        experiences=new ArrayList<RepresentedState>();
     }
     public RLPlayer(String name,DJLAgent inLearner) {  
         super(name);
@@ -196,10 +198,11 @@ public class RLPlayer extends RandomNonTappingPlayer{
         if (numGroups == 0) {
             return;
         }
-        List<RLAction> actions=new ArrayList<RLAction>();
         List<Permanent> blockers = getAvailableBlockers(game);
         for (Permanent blocker : blockers) {
+            List<RLAction> actions=new ArrayList<RLAction>();
             List<CombatGroup> groups=game.getCombat().getGroups();
+            List<CombatGroup> nonZeroGroups=new ArrayList<CombatGroup>();
             for(int i=0;i<numGroups;i++){
                 List<UUID> groupIDs=groups.get(i).getAttackers();
                 if(groupIDs.size()>0){
@@ -207,13 +210,14 @@ public class RLPlayer extends RandomNonTappingPlayer{
                     String attackerName="BlockAttacker:"+game.getPermanent(attacker).getName();
                     String blockerName="Blocker:"+blocker.getName();
                     actions.add(new RLAction(blockerName, attackerName));
+                    nonZeroGroups.add(groups.get(i));
                 }
-            }
+            } 
             actions.add(new RLAction("Blocker:"+blocker.getName(), "NoAttackerToBlock"));
             int choice=learner.choose(game,this,actions);
-
-            if (choice<actions.size()) { //Not the last one where no block occurs
-                CombatGroup group = groups.get(choice);
+            assertTrue(actions.size()==nonZeroGroups.size()+1);
+            if (choice<groups.size()) { //Not the last one where no block occurs
+                CombatGroup group = nonZeroGroups.get(choice);
                 if (!group.getAttackers().isEmpty()) {
                     this.declareBlocker(this.getId(), blocker.getId(), group.getAttackers().get(0), game);
                 }
