@@ -1540,11 +1540,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean isGoaded() {
-        return !goadingPlayers.isEmpty();
-    }
-
-    @Override
     public void addGoadingPlayer(UUID playerId) {
         this.goadingPlayers.add(playerId);
     }

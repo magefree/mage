@@ -71,7 +71,7 @@ enum VengefulAncestorPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return input.isGoaded();
+        return !input.getGoadingPlayers().isEmpty();
     }
 }
 
