@@ -192,4 +192,53 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
         assertAttacking(lion, playerA);
     }
+
+    @Test
+    public void testMultipleGoad() {
+        addCard(Zone.HAND, playerA, homunculus);
+        addCard(Zone.HAND, playerD, homunculus);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerD, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerC, lion);
+
+        addTarget(playerA, lion);
+        setChoice(playerA, "Yes");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, homunculus);
+        addCard(Zone.BATTLEFIELD, playerC, lion);
+
+        addTarget(playerD, lion);
+        setChoice(playerD, "Yes");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, homunculus);
+
+        setStopAt(3, PhaseStep.END_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertAttacking(lion, playerB);
+    }
+
+    @Test
+    public void testMultipleGoadRestriction() {
+        addCard(Zone.HAND, playerA, homunculus);
+        addCard(Zone.HAND, playerD, homunculus);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerD, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, archon);
+        addCard(Zone.BATTLEFIELD, playerC, lion);
+
+        addTarget(playerA, lion);
+        setChoice(playerA, "Yes");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, homunculus);
+        addCard(Zone.BATTLEFIELD, playerC, lion);
+
+        addTarget(playerD, lion);
+        setChoice(playerD, "Yes");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, homunculus);
+
+        setStopAt(3, PhaseStep.END_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertAttacking(lion, playerA, playerD);
+    }
 }
