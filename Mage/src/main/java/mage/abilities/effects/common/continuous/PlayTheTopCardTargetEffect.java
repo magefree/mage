@@ -16,7 +16,7 @@ import java.util.UUID;
 /**
  * @author raphael-schulz
  */
-public class PlayTheTopCardOfTargetPlayerLibraryEffect extends AsThoughEffectImpl  {
+public class PlayTheTopCardTargetEffect extends AsThoughEffectImpl  {
 
     private final FilterCard filter;
 
@@ -24,12 +24,12 @@ public class PlayTheTopCardOfTargetPlayerLibraryEffect extends AsThoughEffectImp
     private final boolean canPlayCardOnly;
 
 
-    public PlayTheTopCardOfTargetPlayerLibraryEffect() {
+    public PlayTheTopCardTargetEffect() {
         this(new FilterCard("play lands and cast spells"), false);
     }
 
 
-    public PlayTheTopCardOfTargetPlayerLibraryEffect(FilterCard filter, boolean canPlayCardOnly) {
+    public PlayTheTopCardTargetEffect(FilterCard filter, boolean canPlayCardOnly) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         this.filter = filter;
         this.canPlayCardOnly = canPlayCardOnly;
@@ -42,7 +42,7 @@ public class PlayTheTopCardOfTargetPlayerLibraryEffect extends AsThoughEffectImp
         }
     }
 
-    public PlayTheTopCardOfTargetPlayerLibraryEffect(final PlayTheTopCardOfTargetPlayerLibraryEffect effect) {
+    public PlayTheTopCardTargetEffect(final PlayTheTopCardTargetEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.canPlayCardOnly = effect.canPlayCardOnly;
@@ -54,8 +54,8 @@ public class PlayTheTopCardOfTargetPlayerLibraryEffect extends AsThoughEffectImp
     }
 
     @Override
-    public PlayTheTopCardOfTargetPlayerLibraryEffect copy() {
-        return new PlayTheTopCardOfTargetPlayerLibraryEffect(this);
+    public PlayTheTopCardTargetEffect copy() {
+        return new PlayTheTopCardTargetEffect(this);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class PlayTheTopCardOfTargetPlayerLibraryEffect extends AsThoughEffectImp
         }
 
         if (this.canPlayCardOnly) {
-            // check whole card intead part
+            // check whole card instead part
             cardToCheck = cardToCheck.getMainCard();
         }
 

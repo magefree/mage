@@ -4,18 +4,25 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeTargetEffect;
+import mage.abilities.effects.common.continuous.PlayTheTopCardTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -36,7 +43,9 @@ public final class XanatharGuildKingpin extends CardImpl {
                 Zone.BATTLEFIELD, new XanatharGuildKingpinRuleModifyingEffect(),
                 TargetController.YOU, false
         );
-        ability.addEffect(new XanatharGuildKingpinTopOfOpponentLibraryTargetEffect());
+        ability.addEffect(new LookAtTopCardOfLibraryAnyTimeTargetEffect());
+        ability.addEffect(new PlayTheTopCardTargetEffect());
+        ability.addEffect(new XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -94,50 +103,77 @@ class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEff
     }
 }
 
-class XanatharGuildKingpinTopOfOpponentLibraryTargetEffect extends ContinuousEffectImpl {
+class XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect extends OneShotEffect {
 
-    public XanatharGuildKingpinTopOfOpponentLibraryTargetEffect() {
-        super(Duration.EndOfTurn, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "Until end of turn, that player can’t cast spells, you may look at the top card of their library any time, you may play the top card of their library," +
-                " and you may spend mana as though it were mana of any color to cast spells this way.";
+    public XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect() {
+        super(Outcome.Benefit);
     }
 
-    private XanatharGuildKingpinTopOfOpponentLibraryTargetEffect(final XanatharGuildKingpinTopOfOpponentLibraryTargetEffect effect) {
+    private XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect(final XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.inCheckPlayableState()) { // Ignored - see https://github.com/magefree/mage/issues/6994
-            return false;
-        }
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
+        Card topCard = game.getPlayer(source.getFirstTarget()).getLibrary().getFromTop(game);
 
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer == null) {
-            return false;
-        }
-
-        Card topCard = targetPlayer.getLibrary().getFromTop(game);
-        if (topCard == null) {
-            return false;
-        }
-
-        if (!canLookAtNextTopLibraryCard(game)) {
-            return false;
-        }
-        controller.lookAtCards("Top card of " + targetPlayer.getName() + "'s library", topCard, game);
-        CardUtil.makeCardPlayable(game, source, topCard, Duration.EndOfTurn, true);
+        int zcc = game.getState().getZoneChangeCounter(topCard.getId());
+        game.addEffect(new SpendManaAsAnyColorToCastTopOfLibraryTargetEffect().setTargetPointer(new FixedTarget(topCard.getId(), zcc)), source);
         return true;
     }
 
     @Override
-    public XanatharGuildKingpinTopOfOpponentLibraryTargetEffect copy() {
-        return new XanatharGuildKingpinTopOfOpponentLibraryTargetEffect(this);
+    public XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect copy() {
+        return new XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect(this);
     }
+
 }
 
+class SpendManaAsAnyColorToCastTopOfLibraryTargetEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
+    public SpendManaAsAnyColorToCastTopOfLibraryTargetEffect() {
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfTurn, Outcome.Benefit);
+    }
+
+    public SpendManaAsAnyColorToCastTopOfLibraryTargetEffect(final SpendManaAsAnyColorToCastTopOfLibraryTargetEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public SpendManaAsAnyColorToCastTopOfLibraryTargetEffect copy() {
+        return new SpendManaAsAnyColorToCastTopOfLibraryTargetEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
+        UUID targetId = CardUtil.getMainCardId(game, fixedTarget.getTarget());
+
+        Card topCard = game.getPlayer(source.getFirstTarget()).getLibrary().getFromTop(game);
+        // If top card of target opponent library changed discard the current ContinuousEffect and create a new one
+        if (!topCard.getId().equals(targetId)) {
+            // Keep the current ContinuousEffect alive while the spell is still on the stack
+            if (game.getState().getZone(targetId) != Zone.STACK) {
+                if (!this.isDiscarded()) {
+                    int zcc = game.getState().getZoneChangeCounter(topCard.getId());
+                    game.addEffect(new SpendManaAsAnyColorToCastTopOfLibraryTargetEffect().setTargetPointer(new FixedTarget(topCard.getId(), zcc)), source);
+                }
+                this.discard();
+            }
+        }
+        return source.isControlledBy(affectedControllerId)
+                && Objects.equals(objectId, targetId)
+                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
+                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.LIBRARY);
+    }
+
+    @Override
+    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+        return mana.getFirstAvailable();
+    }
+}
