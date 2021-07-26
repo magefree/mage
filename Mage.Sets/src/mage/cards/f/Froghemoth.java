@@ -92,7 +92,7 @@ class FroghemothEffect extends OneShotEffect {
 
     public FroghemothEffect() {
         super(Outcome.Exile);
-        this.staticText = "exile up to that many target cards from their graveyard. Put a +1/+1 counter on {this} for each creature exiled this way. You gain 1 life for each noncreature card exiled this way";
+        this.staticText = "exile up to that many target cards from their graveyard. Put a +1/+1 counter on {this} for each creature card exiled this way. You gain 1 life for each noncreature card exiled this way";
     }
 
     private FroghemothEffect(final FroghemothEffect effect) {

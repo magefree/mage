@@ -47,7 +47,7 @@ class CheckForTrapsEffect extends OneShotEffect {
     public CheckForTrapsEffect() {
         super(Outcome.Discard);
         this.staticText = "Target opponent reveals their hand. You choose a nonland card from it. Exile that card. " +
-                "If an instant or a card with flash is exiled this way, they lose 1 life. Otherwise, you lose 1 life";
+                "If an instant card or a card with flash is exiled this way, they lose 1 life. Otherwise, you lose 1 life";
     }
 
     private CheckForTrapsEffect(final CheckForTrapsEffect effect) {
