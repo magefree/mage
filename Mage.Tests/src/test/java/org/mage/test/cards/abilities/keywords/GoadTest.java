@@ -224,7 +224,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
         addTarget(playerA, lion);
         setChoice(playerA, "Yes");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, homunculus);
-        addCard(Zone.BATTLEFIELD, playerC, lion);
 
         addTarget(playerD, lion);
         setChoice(playerD, "Yes");
@@ -250,7 +249,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
         addTarget(playerA, lion);
         setChoice(playerA, "Yes");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, homunculus);
-        addCard(Zone.BATTLEFIELD, playerC, lion);
 
         addTarget(playerD, lion);
         setChoice(playerD, "Yes");
