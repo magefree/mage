@@ -61,7 +61,7 @@ public final class TombOfAnnihilation extends Dungeon {
         trappedEntry.addNextRoom(veilsOfFear);
         trappedEntry.addNextRoom(oubliette);
         veilsOfFear.addNextRoom(sandfallCell);
-        oubliette.addNextRoom(sandfallCell);
+        oubliette.addNextRoom(cradleOfTheDeathGod);
         sandfallCell.addNextRoom(cradleOfTheDeathGod);
 
         this.addRoom(trappedEntry);
