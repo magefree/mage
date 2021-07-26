@@ -52,8 +52,14 @@ public class GoadTest extends CardTestMultiPlayerBase {
         UUID defenderId = currentGame.getCombat().getDefenderId(permanent.getId());
         Assert.assertTrue(
                 "Creature should be attacking one the following players: "
-                        + Arrays.stream(players).map(Player::getName).reduce((a, b) -> a + ", " + b).orElse(""),
-                Arrays.stream(players).map(TestPlayer::getId).anyMatch(defenderId::equals)
+                        + Arrays
+                        .stream(players)
+                        .map(Player::getName)
+                        .reduce((a, b) -> a + ", " + b)
+                        .orElse(""),
+                Arrays.stream(players)
+                        .map(TestPlayer::getId)
+                        .anyMatch(defenderId::equals)
         );
     }
 
@@ -166,7 +172,7 @@ public class GoadTest extends CardTestMultiPlayerBase {
         setChoice(playerA, "Yes");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, homunculus);
 
-        setStopAt(2, PhaseStep.END_COMBAT);
+        setStopAt(2, PhaseStep.DECLARE_BLOCKERS);
         execute();
         assertAllCommandsUsed();
 
@@ -185,7 +191,7 @@ public class GoadTest extends CardTestMultiPlayerBase {
         setChoice(playerA, "Yes");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, homunculus);
 
-        setStopAt(2, PhaseStep.END_COMBAT);
+        setStopAt(2, PhaseStep.DECLARE_BLOCKERS);
         execute();
         assertAllCommandsUsed();
 
@@ -205,7 +211,7 @@ public class GoadTest extends CardTestMultiPlayerBase {
         setChoice(playerA, "Yes");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, homunculus);
 
-        setStopAt(2, PhaseStep.END_COMBAT);
+        setStopAt(2, PhaseStep.DECLARE_BLOCKERS);
         execute();
         assertAllCommandsUsed();
 
@@ -229,7 +235,7 @@ public class GoadTest extends CardTestMultiPlayerBase {
         setChoice(playerD, "Yes");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, homunculus);
 
-        setStopAt(3, PhaseStep.END_COMBAT);
+        setStopAt(3, PhaseStep.DECLARE_BLOCKERS);
         execute();
         assertAllCommandsUsed();
 
@@ -254,7 +260,7 @@ public class GoadTest extends CardTestMultiPlayerBase {
         setChoice(playerD, "Yes");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, homunculus);
 
-        setStopAt(3, PhaseStep.END_COMBAT);
+        setStopAt(3, PhaseStep.DECLARE_BLOCKERS);
         execute();
         assertAllCommandsUsed();
 

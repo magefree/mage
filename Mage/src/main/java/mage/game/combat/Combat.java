@@ -442,9 +442,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 // check if a creature has to attack
                 for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, false, game).entrySet()) {
                     RequirementEffect effect = entry.getKey();
-                    if (!effect.mustAttack(game)
-                            || !checkAttackRestrictions(player, game)) {
-                        // needed for Goad Effect
+                    if (!effect.mustAttack(game)) {
                         continue;
                     }
                     mustAttack = true;
@@ -468,15 +466,29 @@ public class Combat implements Serializable, Copyable<Combat> {
             Set<UUID> defendersCostlessAttackable = new HashSet<>(defenders);
             for (UUID defenderId : defenders) {
                 if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
-                        new DeclareAttackerEvent(defenderId, creature.getId(), creature.getControllerId()), game)) {
+                        new DeclareAttackerEvent(defenderId, creature.getId(), creature.getControllerId()), game
+                )) {
                     defendersCostlessAttackable.remove(defenderId);
                     defendersForcedToAttack.remove(defenderId);
+                    continue;
+                }
+                for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(creature, game).entrySet()) {
+                    if (entry
+                            .getValue()
+                            .stream()
+                            .anyMatch(ability -> entry.getKey().canAttack(
+                                    creature, defenderId, ability, game, false
+                            ))) {
+                        continue;
+                    }
+                    defendersCostlessAttackable.remove(defenderId);
+                    defendersForcedToAttack.remove(defenderId);
+                    break;
                 }
             }
             // if creature can attack someone other than a player that goaded them
             // then they attack one of those players, otherwise they attack any player
             if (!defendersForcedToAttack.stream().allMatch(creature.getGoadingPlayers()::contains)) {
-                defendersCostlessAttackable.removeAll(creature.getGoadingPlayers());
                 defendersForcedToAttack.removeAll(creature.getGoadingPlayers());
             }
             // force attack only if a defender can be attacked without paying a cost
@@ -485,24 +497,12 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
             creaturesForcedToAttack.put(creature.getId(), defendersForcedToAttack);
             // No need to attack a special defender
-            if (defendersForcedToAttack.isEmpty()) {
-                if (defendersCostlessAttackable.size() == 1) {
-                    player.declareAttacker(creature.getId(), defendersCostlessAttackable.iterator().next(), game, false);
-                } else {
-                    TargetDefender target = new TargetDefender(defendersCostlessAttackable, creature.getId());
-                    target.setRequired(true);
-                    target.setTargetName("planeswalker or player for " + creature.getLogName() + " to attack (must attack effect)");
-                    if (player.chooseTarget(Outcome.Damage, target, null, game)) {
-                        player.declareAttacker(creature.getId(), target.getFirstTarget(), game, false);
-                    }
-                }
+            Set<UUID> defendersToChooseFrom = defendersForcedToAttack.isEmpty() ? defendersCostlessAttackable : defendersForcedToAttack;
+            if (defendersToChooseFrom.size() == 1) {
+                player.declareAttacker(creature.getId(), defendersToChooseFrom.iterator().next(), game, false);
                 continue;
             }
-            if (defendersForcedToAttack.size() == 1) {
-                player.declareAttacker(creature.getId(), defendersForcedToAttack.iterator().next(), game, false);
-                continue;
-            }
-            TargetDefender target = new TargetDefender(defendersForcedToAttack, creature.getId());
+            TargetDefender target = new TargetDefender(defendersToChooseFrom, creature.getId());
             target.setRequired(true);
             target.setTargetName("planeswalker or player for " + creature.getLogName() + " to attack (must attack effect)");
             if (player.chooseTarget(Outcome.Damage, target, null, game)) {
@@ -1311,21 +1311,20 @@ public class Combat implements Serializable, Copyable<Combat> {
     @SuppressWarnings("deprecation")
     public boolean declareAttacker(UUID creatureId, UUID defenderId, UUID playerId, Game game) {
         Permanent attacker = game.getPermanent(creatureId);
-        if (attacker != null) {
-            if (!game.replaceEvent(new DeclareAttackerEvent(defenderId, creatureId, playerId))) {
-                if (addAttackerToCombat(creatureId, defenderId, game)) {
-                    if (!attacker.hasAbility(VigilanceAbility.getInstance(), game)
-                            && !attacker.hasAbility(JohanVigilanceAbility.getInstance(), game)) {
-                        if (!attacker.isTapped()) {
-                            attacker.setTapped(true);
-                            attackersTappedByAttack.add(attacker.getId());
-                        }
-                    }
-                    return true;
-                }
-            }
+        if (attacker == null
+                || game.replaceEvent(new DeclareAttackerEvent(defenderId, creatureId, playerId))
+                || !addAttackerToCombat(creatureId, defenderId, game)) {
+            return false;
         }
-        return false;
+        if (attacker.hasAbility(VigilanceAbility.getInstance(), game)
+                || attacker.hasAbility(JohanVigilanceAbility.getInstance(), game)) {
+            return true;
+        }
+        if (!attacker.isTapped()) {
+            attacker.setTapped(true);
+            attackersTappedByAttack.add(attacker.getId());
+        }
+        return true;
     }
 
     public boolean addAttackerToCombat(UUID attackerId, UUID defenderId, Game game) {

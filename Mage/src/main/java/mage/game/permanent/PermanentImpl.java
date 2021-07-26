@@ -1287,14 +1287,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         //20101001 - 508.1c
         if (defenderId == null) {
-            boolean oneCanBeAttacked = false;
-            for (UUID defenderToCheckId : game.getCombat().getDefenders()) {
-                if (canAttackCheckRestrictionEffects(defenderToCheckId, game)) {
-                    oneCanBeAttacked = true;
-                    break;
-                }
-            }
-            if (!oneCanBeAttacked) {
+            if (game.getCombat()
+                    .getDefenders()
+                    .stream()
+                    .noneMatch(defenderToCheckId -> canAttackCheckRestrictionEffects(defenderToCheckId, game))) {
                 return false;
             }
         } else if (!canAttackCheckRestrictionEffects(defenderId, game)) {
