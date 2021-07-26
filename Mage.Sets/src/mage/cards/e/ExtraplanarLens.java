@@ -127,6 +127,7 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
                     ManaEvent mEvent = (ManaEvent) event;
                     for (Effect effect : getEffects()) {
                         effect.setValue("mana", mEvent.getMana());
+                        effect.setValue("tappedPermanent", landTappedForMana);
                     }
                     getEffects().get(0).setTargetPointer(new FixedTarget(landTappedForMana.getId()));
                     return true;
