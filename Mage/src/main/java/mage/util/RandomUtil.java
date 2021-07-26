@@ -2,6 +2,8 @@ package mage.util;
 
 import java.awt.*;
 import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * Created by IGOUDT on 5-9-2016.
@@ -39,5 +41,20 @@ public final class RandomUtil {
 
     public static void setSeed(long newSeed) {
         random.setSeed(newSeed);
+    }
+
+    public static UUID randomFromSet(Set<UUID> uuids) {
+        if (uuids.size() < 2) {
+            return uuids.stream().findFirst().orElse(null);
+        }
+        int rand = nextInt(uuids.size());
+        int count = 0;
+        for (UUID currentId : uuids) {
+            if (count == rand) {
+                return currentId;
+            }
+            count++;
+        }
+        return null;
     }
 }
