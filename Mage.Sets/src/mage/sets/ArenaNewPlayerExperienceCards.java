@@ -30,6 +30,7 @@ public final class ArenaNewPlayerExperienceCards extends ExpansionSet {
         cards.add(new SetCardInfo("Sanctuary Cat", 8, Rarity.COMMON, mage.cards.s.SanctuaryCat.class));
         cards.add(new SetCardInfo("Serra Angel", 9, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Shrine Keeper", 10, Rarity.COMMON, mage.cards.s.ShrineKeeper.class));
+        cards.add(new SetCardInfo("Shorecomber Crab", 20, Rarity.COMMON, mage.cards.s.ShorecomberCrab.class));
         cards.add(new SetCardInfo("Spiritual Guardian", 11, Rarity.COMMON, mage.cards.s.SpiritualGuardian.class));
         cards.add(new SetCardInfo("Tactical Advantage", 12, Rarity.COMMON, mage.cards.t.TacticalAdvantage.class));
         cards.add(new SetCardInfo("Treetop Warden", 48, Rarity.COMMON, mage.cards.t.TreetopWarden.class));

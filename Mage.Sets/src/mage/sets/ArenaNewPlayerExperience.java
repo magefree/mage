@@ -56,7 +56,6 @@ public final class ArenaNewPlayerExperience extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 6, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 7, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 8, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Shorecomber Crab", 20, Rarity.COMMON, mage.cards.s.ShorecomberCrab.class));
         cards.add(new SetCardInfo("Swamp", "5a", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART));
         cards.add(new SetCardInfo("Swamp", "6a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 12, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
