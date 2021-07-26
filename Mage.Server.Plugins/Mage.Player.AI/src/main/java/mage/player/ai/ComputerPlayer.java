@@ -2873,6 +2873,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     randomOpponentId = currentId;
                     break;
                 }
+                count++;
             }
         } else if (opponents.size() == 1) {
             randomOpponentId = game.getOpponents(abilityControllerId).iterator().next();
