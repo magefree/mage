@@ -261,4 +261,15 @@ public class GoadTest extends CardTestMultiPlayerBase {
         assertGoaded(lion, playerA, playerD);
         assertAttacking(lion, playerA, playerD);
     }
+
+    @Test
+    public void testRegularCombatRequirement() {
+        addCard(Zone.BATTLEFIELD, playerA, "Berserkers of Blood Ridge");
+
+        setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
+        execute();
+        assertAllCommandsUsed();
+
+        assertAttacking("Berserkers of Blood Ridge", playerB, playerC, playerD);
+    }
 }
