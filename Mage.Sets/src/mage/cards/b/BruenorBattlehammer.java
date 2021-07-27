@@ -107,15 +107,27 @@ class BruenorBattlehammerCostEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Player controller = game.getPlayer(abilityToModify.getControllerId());
-        if (controller == null || !controller.chooseUse(
-                Outcome.PlayForFree, "Pay {0} to equip?", source, game
-        )) {
-            return false;
+        boolean applyReduce = false;
+        if (game.inCheckPlayableState()) {
+            // getPlayable use - apply all the time
+            applyReduce = true;
+        } else {
+            // real use - ask the player
+            Player controller = game.getPlayer(abilityToModify.getControllerId());
+            if (controller != null
+                    && controller.chooseUse(Outcome.PlayForFree,
+                    String.format("Pay {0} to equip instead %s?", abilityToModify.getManaCostsToPay().getText()), source, game)) {
+                applyReduce = true;
+            }
         }
-        abilityToModify.getCosts().clear();
-        abilityToModify.getManaCostsToPay().clear();
-        return true;
+
+        if (applyReduce) {
+            abilityToModify.getCosts().clear();
+            abilityToModify.getManaCostsToPay().clear();
+            return true;
+        }
+
+        return false;
     }
 
     @Override

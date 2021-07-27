@@ -24,10 +24,13 @@ public class BruenorBattlehammerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, bonesplitter);
         addCard(Zone.BATTLEFIELD, playerA, morningstar);
 
-        setChoice(playerA, true);
+        // activate {2} for free
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}", lion);
+        setChoice(playerA, true); // use for free
+        // activate {1} for mana
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {1}", lion);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -49,6 +52,7 @@ public class BruenorBattlehammerTest extends CardTestPlayerBase {
         setChoice(playerA, true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", lion);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
