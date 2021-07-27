@@ -78,19 +78,43 @@ class LaeliaTheBladeReforgedAddCountersTriggeredAbility extends TriggeredAbility
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        return zEvent.getToZone() == Zone.EXILED
-                && (zEvent.getFromZone() == Zone.LIBRARY || zEvent.getFromZone() == Zone.GRAVEYARD)
-                && game
-                .getCards()
-                .stream()
-                .filter(Objects::nonNull)
-                .map(Card::getOwnerId)
-                .anyMatch(this::isControlledBy);
+        final int numberExiled = zEvent.getCards().size();
+        if (zEvent.getToZone() != Zone.EXILED
+                || numberExiled == 0) {
+            return false;
+        }
+        switch (zEvent.getFromZone()) {
+            case LIBRARY:
+                if (zEvent
+                        .getCards()
+                        .stream()
+                        .filter(Objects::nonNull)
+                        .map(Card::getOwnerId)
+                        .anyMatch(this::isControlledBy)
+                        && numberExiled > 0) {
+                    this.getEffects().clear();
+                    this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+                    return true;
+                }
+            case GRAVEYARD:
+                if (zEvent
+                        .getCards()
+                        .stream()
+                        .filter(Objects::nonNull)
+                        .map(Card::getOwnerId)
+                        .anyMatch(this::isControlledBy)
+                        && numberExiled > 0) {
+                    this.getEffects().clear();
+                    this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+                    return true;
+                }
+        }
+        return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever one or more cards are put into exile from your library " +
-                "and/or your graveyard, put a +1/+1 counter on {this}.";
+        return "Whenever one or more cards are put into exile from your library "
+                + "and/or your graveyard, put a +1/+1 counter on {this}.";
     }
 }
