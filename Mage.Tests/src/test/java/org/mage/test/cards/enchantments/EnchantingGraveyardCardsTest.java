@@ -74,7 +74,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, SPELLWEAVER_VOLUTE, LIGHTNING_BOLT);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloak of Feathers", "Silvercoat Lion");
-        setChoice(playerA, "Yes"); // play the L. Bold
+        setChoice(playerA, true); // play the L. Bold
         addTarget(playerA, playerB); // Add Target for the L. Bold
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -120,7 +120,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, SPELLWEAVER_VOLUTE, LIGHTNING_BOLT);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloak of Feathers", "Silvercoat Lion");
-        setChoice(playerA, "Yes"); // play the L. Bold
+        setChoice(playerA, true); // play the L. Bold
         addTarget(playerA, playerB); // Add Target for the L. Bold
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

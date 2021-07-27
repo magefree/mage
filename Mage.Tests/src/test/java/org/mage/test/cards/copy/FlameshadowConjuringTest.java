@@ -33,7 +33,7 @@ public class FlameshadowConjuringTest extends CardTestPlayerBase {
         // When Priest of the Blood Rite enters the battlefield, put a 5/5 black Demon creature token with flying onto the battlefield.
         // At the beginning of your upkeep, you lose 2 life.
         addCard(Zone.HAND, playerA, "Priest of the Blood Rite", 1); // {3}{B}{B}
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Priest of the Blood Rite");
         setStopAt(3, PhaseStep.UPKEEP);
@@ -65,7 +65,7 @@ public class FlameshadowConjuringTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Kill Shot", 1); // {2}{U}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wurmcoil Engine");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         attack(1, playerA, "Wurmcoil Engine");
 

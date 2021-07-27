@@ -16,7 +16,7 @@ public class DoubleVisionTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Shock");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, playerB);
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);

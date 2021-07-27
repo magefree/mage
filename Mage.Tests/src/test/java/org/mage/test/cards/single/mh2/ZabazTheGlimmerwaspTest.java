@@ -42,7 +42,7 @@ public class ZabazTheGlimmerwaspTest extends CardTestPlayerBase {
 
         setChoice(playerA, worker);
         addTarget(playerA, zabaz);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice");
 
         setStrictChooseMode(true);

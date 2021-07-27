@@ -207,7 +207,7 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
 
         // add shield for 3 damage
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pollen Remedy");
-        setChoice(playerA, "No"); // no kicker
+        setChoice(playerA, false); // no kicker
         addTargetAmount(playerA, "Balduvian Bears", 3);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkGraveyardCount("shield", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pollen Remedy", 1);
@@ -242,7 +242,7 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
 
         // add shield for 6 damage
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pollen Remedy");
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
         setChoice(playerA, "Swamp"); // kicker cost
         addTargetAmount(playerA, "Balduvian Bears", 6);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);

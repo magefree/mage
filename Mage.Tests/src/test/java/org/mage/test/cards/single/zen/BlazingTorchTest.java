@@ -46,7 +46,7 @@ public class BlazingTorchTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, torch);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, masterwork);
-        setChoice(playerA, "Yes"); // use copy
+        setChoice(playerA, true); // use copy
         setChoice(playerA, torch);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", lion);

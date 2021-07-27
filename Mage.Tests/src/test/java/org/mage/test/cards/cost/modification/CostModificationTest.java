@@ -204,7 +204,7 @@ public class CostModificationTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
 
         playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zoetic Cavern");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -410,7 +410,7 @@ public class CostModificationTest extends CardTestPlayerBase {
 
         // Vivien: make cost +2 instead +1 (total 7 counters)
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Look at the top four");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
         checkPermanentCounters("Vivien Reid counter check", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Vivien Reid", CounterType.LOYALTY, 7);
 
         // loyalty cost modification doesn't affect card rule's text, so it still shown an old cost value for a user
@@ -467,10 +467,10 @@ public class CostModificationTest extends CardTestPlayerBase {
 
         // prepare duplicates
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
-        setChoice(playerA, "Yes"); // copy
+        setChoice(playerA, true); // copy
         setChoice(playerA, "Carth the Lion"); // copy target
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
-        setChoice(playerA, "Yes"); // copy
+        setChoice(playerA, true); // copy
         setChoice(playerA, "Carth the Lion"); // copy target
 
         // x3 lions gives +3 in cost reduction (-8 -> -5)

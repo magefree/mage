@@ -52,29 +52,29 @@ public class SharuumTheHegemonTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Blood Artist", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Sharuum the Hegemon"); // what creature to clone
 
         addTarget(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
         setChoice(playerA, "Whenever {this} or another creature dies"); // blood first
         addTarget(playerA, playerB); // damage by blood
-        setChoice(playerA, "Yes"); // return
+        setChoice(playerA, true); // return
         addTarget(playerA, "Sharuum the Hegemon"); // return real sharuum
 
         addTarget(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
         setChoice(playerA, "Whenever {this} or another creature dies"); // blood first
         addTarget(playerA, playerB); // damage by blood
-        setChoice(playerA, "Yes"); // return
+        setChoice(playerA, true); // return
         addTarget(playerA, "Sharuum the Hegemon"); // return real sharuum
 
         addTarget(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
         setChoice(playerA, "Whenever {this} or another creature dies"); // blood first
         addTarget(playerA, playerB); // damage by blood
-        setChoice(playerA, "Yes"); // return
+        setChoice(playerA, true); // return
         addTarget(playerA, "Sharuum the Hegemon"); // return real sharuum
 
         addTarget(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
-        setChoice(playerA, "No"); // Don't use it anymore
+        setChoice(playerA, false); // Don't use it anymore
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

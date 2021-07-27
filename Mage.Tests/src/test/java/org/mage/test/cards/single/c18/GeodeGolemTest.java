@@ -27,7 +27,7 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
 
         // attack and cast first time (free)
         attack(1, playerA, "Geode Golem");
-        setChoice(playerA, "Yes"); // cast commander
+        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Grizzly Bears"); // commander choice
         waitStackResolved(1, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 1", 1, PhaseStep.COMBAT_DAMAGE, playerA, "Grizzly Bears", 1);
@@ -35,12 +35,12 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         //
         // remove to command zone (0x tax)
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "target damage 2", "Grizzly Bears");
-        setChoice(playerA, "Yes"); // move to command zone
+        setChoice(playerA, true); // move to command zone
 
         // turn 3 - second cast (1x tax)
 
         attack(3, playerA, "Geode Golem");
-        setChoice(playerA, "Yes"); // cast commander
+        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Grizzly Bears"); // commander choice
         waitStackResolved(3, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 2", 3, PhaseStep.COMBAT_DAMAGE, playerA, "Grizzly Bears", 1);
@@ -48,12 +48,12 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         //
         // remove to command zone
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "target damage 2", "Grizzly Bears");
-        setChoice(playerA, "Yes"); // move to command zone
+        setChoice(playerA, true); // move to command zone
 
         // turn 5 - third cast (2x tax)
 
         attack(5, playerA, "Geode Golem");
-        setChoice(playerA, "Yes"); // cast commander
+        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Grizzly Bears"); // commander choice
         waitStackResolved(5, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 3", 5, PhaseStep.COMBAT_DAMAGE, playerA, "Grizzly Bears", 1);
@@ -86,7 +86,7 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
 
         // attack and cast first time (free)
         attack(1, playerA, "Geode Golem");
-        setChoice(playerA, "Yes"); // cast commander
+        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Akoum Warrior"); // commander choice
         waitStackResolved(1, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 1", 1, PhaseStep.COMBAT_DAMAGE, playerA, "Akoum Warrior", 1);
@@ -94,12 +94,12 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         //
         // remove to command zone (0x tax)
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "target damage 5", "Akoum Warrior");
-        setChoice(playerA, "Yes"); // move to command zone
+        setChoice(playerA, true); // move to command zone
 
         // turn 3 - second cast (1x tax)
 
         attack(3, playerA, "Geode Golem");
-        setChoice(playerA, "Yes"); // cast commander
+        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Akoum Warrior"); // commander choice
         waitStackResolved(3, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 2", 3, PhaseStep.COMBAT_DAMAGE, playerA, "Akoum Warrior", 1);
@@ -107,12 +107,12 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         //
         // remove to command zone
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "target damage 5", "Akoum Warrior");
-        setChoice(playerA, "Yes"); // move to command zone
+        setChoice(playerA, true); // move to command zone
 
         // turn 5 - third cast (2x tax)
 
         attack(5, playerA, "Geode Golem");
-        setChoice(playerA, "Yes"); // cast commander
+        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Akoum Warrior"); // commander choice
         waitStackResolved(5, PhaseStep.COMBAT_DAMAGE);
         checkPermanentCount("after 3", 5, PhaseStep.COMBAT_DAMAGE, playerA, "Akoum Warrior", 1);
@@ -146,7 +146,7 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
 
         // attack and cast first time (free)
         attack(1, playerA, "Geode Golem");
-        setChoice(playerA, "Yes"); // cast commander
+        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Birgi, God of Storytelling"); // commander choice
         setChoice(playerA, "Cast Birgi, God of Storytelling"); // spell choice
         waitStackResolved(1, PhaseStep.COMBAT_DAMAGE);
@@ -155,12 +155,12 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         //
         // remove to command zone (0x tax)
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "target damage 3", "Birgi, God of Storytelling");
-        setChoice(playerA, "Yes"); // move to command zone
+        setChoice(playerA, true); // move to command zone
 
         // turn 3 - second cast, LEFT side (1x tax)
 
         attack(3, playerA, "Geode Golem");
-        setChoice(playerA, "Yes"); // cast commander
+        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Birgi, God of Storytelling"); // commander choice
         setChoice(playerA, "Cast Birgi, God of Storytelling"); // spell choice
         waitStackResolved(3, PhaseStep.COMBAT_DAMAGE);
@@ -169,12 +169,12 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         //
         // remove to command zone
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "target damage 3", "Birgi, God of Storytelling");
-        setChoice(playerA, "Yes"); // move to command zone
+        setChoice(playerA, true); // move to command zone
 
         // turn 5 - third cast, RIGHT side (2x tax)
 
         attack(5, playerA, "Geode Golem");
-        setChoice(playerA, "Yes"); // cast commander
+        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Birgi, God of Storytelling"); // commander choice
         setChoice(playerA, "Cast Harnfel, Horn of Bounty"); // spell choice
         waitStackResolved(5, PhaseStep.COMBAT_DAMAGE);
@@ -183,12 +183,12 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         //
         // remove to command zone
         activateAbility(5, PhaseStep.POSTCOMBAT_MAIN, playerA, "target destroy", "Harnfel, Horn of Bounty");
-        setChoice(playerA, "Yes"); // move to command zone
+        setChoice(playerA, true); // move to command zone
 
         // turn 7 - fourth cast, RIGHT side (3x tax)
 
         attack(7, playerA, "Geode Golem");
-        setChoice(playerA, "Yes"); // cast commander
+        setChoice(playerA, true); // cast commander
         setChoice(playerA, "Birgi, God of Storytelling"); // commander choice
         setChoice(playerA, "Cast Harnfel, Horn of Bounty"); // spell choice
         waitStackResolved(7, PhaseStep.COMBAT_DAMAGE);

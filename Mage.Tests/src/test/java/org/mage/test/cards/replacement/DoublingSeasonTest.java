@@ -123,7 +123,7 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Venerable Monk", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rite of Replication", "Venerable Monk");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

@@ -35,7 +35,7 @@ public class AetherGustTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, barkhide);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aetherGust, barkhide);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -59,7 +59,7 @@ public class AetherGustTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, barkhide);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, aetherGust, barkhide);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);

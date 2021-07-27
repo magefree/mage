@@ -29,7 +29,7 @@ public class TwinningStaffTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, growth);
 
         setChoice(playerA, TestPlayer.CHOICE_SKIP); // skip stack order
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, bear);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, growth, zada);
 

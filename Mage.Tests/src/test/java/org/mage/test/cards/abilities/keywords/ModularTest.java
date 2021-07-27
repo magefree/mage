@@ -65,7 +65,7 @@ public class ModularTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Arcbound Hybrid");
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Arcbound Bruiser");
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         execute();
 
         assertPermanentCount(playerA, "Arcbound Bruiser", 0);
@@ -115,7 +115,7 @@ public class ModularTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Puncture Blast");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Puncture Blast", "Arcbound Bruiser");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

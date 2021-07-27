@@ -20,7 +20,7 @@ public class UndercityReachesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1);
 
         attack(1, playerA, "Balduvian Bears");
-        setChoice(playerA, "Yes"); // draw
+        setChoice(playerA, true); // draw
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -40,7 +40,7 @@ public class UndercityReachesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1);
 
         attack(2, playerB, "Balduvian Bears");
-        setChoice(playerB, "Yes"); // draw
+        setChoice(playerB, true); // draw
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);

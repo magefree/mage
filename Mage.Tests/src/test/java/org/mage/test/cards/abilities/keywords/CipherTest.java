@@ -39,7 +39,7 @@ public class CipherTest extends CardTestPlayerBase {
 
         // cast spell, create copy token, exile spell card and encode it to that token of Roil Elemental
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stolen Identity", "Roil Elemental");
-        setChoice(playerA, "Yes"); // Cipher activate
+        setChoice(playerA, true); // Cipher activate
         addTarget(playerA, "Roil Elemental"); // Cipher target for encode
         checkPermanentCount("playerA must have Roil Elemental", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Roil Elemental", 1);
         checkPermanentCount("playerB must have Roil Elemental", 2, PhaseStep.PRECOMBAT_MAIN, playerB, "Roil Elemental", 1);
@@ -47,14 +47,14 @@ public class CipherTest extends CardTestPlayerBase {
 
         // Roil Elemental must activated on new land
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");
-        setChoice(playerA, "Yes"); // activate landfall to control opponent creature
+        setChoice(playerA, true); // activate landfall to control opponent creature
         addTarget(playerA, "Silvercoat Lion"); // Triggered ability of copied Roil Elemental to gain control
         checkPermanentCount("must gain control of Lion", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion", 1);
         checkPermanentCount("must lose control of Lion", 3, PhaseStep.POSTCOMBAT_MAIN, playerB, "Silvercoat Lion", 0);
 
         // on attack must activated ability to free cast
         attack(5, playerA, "Roil Elemental");
-        setChoice(playerA, "Yes"); // activate free cast of encoded card
+        setChoice(playerA, true); // activate free cast of encoded card
         checkPermanentCount("playerA must have 2 Roil Elemental", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Roil Elemental", 2);
         checkPermanentCount("playerB must have Roil Elemental", 5, PhaseStep.POSTCOMBAT_MAIN, playerB, "Roil Elemental", 1);
 

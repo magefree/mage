@@ -31,7 +31,7 @@ public class MirrorworksTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mirrorworks", 1); // Artifact {5}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Diamond");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -56,7 +56,7 @@ public class MirrorworksTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mirrorworks", 1); // Artifact {5}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Diamond");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

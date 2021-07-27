@@ -20,7 +20,7 @@ public class BasrisAegisTest extends CardTestPlayerBase {
         // You may search your library and/or graveyard for a card named Basri, Devoted Paladin, reveal it, and put it into your hand. If you search your library this way, shuffle it.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Basri's Aegis");
         addTarget(playerA, "Grizzly Bears^Savannah Lions");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Basri, Devoted Paladin");
         setStrictChooseMode(true);
         execute();

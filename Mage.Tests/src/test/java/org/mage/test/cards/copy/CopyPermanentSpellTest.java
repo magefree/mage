@@ -48,7 +48,7 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
         addCard(Zone.HAND, playerA, "Holy Strength");
 
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Holy Strength", "Grizzly Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -67,7 +67,7 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Hill Giant");
         addCard(Zone.HAND, playerA, "Dead Weight");
 
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dead Weight", "Centaur Courser");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -89,7 +89,7 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
         addCard(Zone.HAND, playerA, "Goblin Bushwhacker");
 
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Bushwhacker");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -107,7 +107,7 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.HAND, playerA, "Aether Figment");
 
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -144,7 +144,7 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
         addCard(Zone.HAND, playerA, "Nimbus Naiad");
 
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nimbus Naiad using bestow", "Grizzly Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -164,7 +164,7 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         addCard(Zone.HAND, playerA, "Nimbus Naiad");
 
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nimbus Naiad using bestow", "Grizzly Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -191,10 +191,10 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Murder", 1);
         addCard(Zone.HAND, playerA, "Nimbus Naiad");
 
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nimbus Naiad using bestow", "Grizzly Bears");
 
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Murder", "Grizzly Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -217,10 +217,10 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Murder", 1);
         addCard(Zone.HAND, playerA, "Nimbus Naiad");
 
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nimbus Naiad using bestow", "Grizzly Bears");
 
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Murder", "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -244,11 +244,11 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Murder", 1);
         addCard(Zone.HAND, playerA, "Nimbus Naiad");
 
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nimbus Naiad using bestow", "Grizzly Bears");
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder", "Grizzly Bears");
 
         setStopAt(1, PhaseStep.END_TURN);

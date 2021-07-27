@@ -29,7 +29,7 @@ public class HapatraVizierOfPoisonsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, gBears);
 
         attack(3, playerA, hapatra);
-        setChoice(playerA, "Yes"); // opt to place -1/-1 counter on creature
+        setChoice(playerA, true); // opt to place -1/-1 counter on creature
         addTarget(playerA, gBears);
 
         setStopAt(3, PhaseStep.END_COMBAT);

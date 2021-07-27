@@ -70,7 +70,7 @@ public class AnnihilatorTest extends CardTestPlayerBase {
         setChoice(playerA, "Academy Rector"); // Annihilator
         setChoice(playerA, "Plains"); // Annihilator
         castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerA, "Cauldron Haze", "Academy Rector", "Annihilator");
-        setChoice(playerA, "No"); // Academy Rector No Exile
+        setChoice(playerA, false); // Academy Rector No Exile
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();

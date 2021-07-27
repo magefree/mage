@@ -59,7 +59,7 @@ public class SplitCardCmcTest extends CardTestPlayerBase {
         skipInitShuffling(); // so the set to top card stays at top
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Typhoid Rats");
-        setChoice(playerB, "Yes"); // Reveal to Counterbalance to attempt to counter Typhoid Rats
+        setChoice(playerB, true); // Reveal to Counterbalance to attempt to counter Typhoid Rats
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

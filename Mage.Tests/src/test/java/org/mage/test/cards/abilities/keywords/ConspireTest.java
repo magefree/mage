@@ -43,7 +43,7 @@ public class ConspireTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Burn Trail");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burn Trail", playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -63,7 +63,7 @@ public class ConspireTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Burn Trail");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burn Trail", playerB);
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -89,10 +89,10 @@ public class ConspireTest extends CardTestPlayerBase {
 
         // cast with conspire
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "Yes"); // use conspire
+        setChoice(playerA, true); // use conspire
         setChoice(playerA, "Goblin Warrior");
         setChoice(playerA, "Goblin Warrior");
-        setChoice(playerA, "No"); // keep targets
+        setChoice(playerA, false); // keep targets
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -118,8 +118,8 @@ public class ConspireTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother"); // {4}{R/G}{R/G}
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Burn Trail", playerB);
-        setChoice(playerA, "Yes"); // use Conspire from Burn Trail itself
-        setChoice(playerA, "Yes"); // use Conspire gained from Wort, the Raidmother
+        setChoice(playerA, true); // use Conspire from Burn Trail itself
+        setChoice(playerA, true); // use Conspire gained from Wort, the Raidmother
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -141,9 +141,9 @@ public class ConspireTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burn Trail");
         addTarget(playerA, playerB);
-        setChoice(playerA, "Yes"); // use conspire
+        setChoice(playerA, true); // use conspire
         setChoice(playerA, "Goblin Assailant^Goblin Assailant");
-        setChoice(playerA, "No"); // don't change target 1
+        setChoice(playerA, false); // don't change target 1
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -166,9 +166,9 @@ public class ConspireTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burn Trail");
         addTarget(playerA, playerB);
-        //setChoice(playerA, "Yes"); // use conspire - AI must choose
+        //setChoice(playerA, true); // use conspire - AI must choose
         //setChoice(playerA, "Goblin Assailant^Goblin Assailant"); - AI must choose
-        //setChoice(playerA, "No"); // don't change target 1 - AI must choose
+        //setChoice(playerA, false); // don't change target 1 - AI must choose
 
         //setStrictChooseMode(true); - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -191,9 +191,9 @@ public class ConspireTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burn Trail");
         addTarget(playerA, playerB);
-        //setChoice(playerA, "Yes"); // use conspire - AI must choose
+        //setChoice(playerA, true); // use conspire - AI must choose
         //setChoice(playerA, "Goblin Assailant^Goblin Assailant"); - AI must choose
-        //setChoice(playerA, "No"); // don't change target 1 - AI must choose
+        //setChoice(playerA, false); // don't change target 1 - AI must choose
 
         //setStrictChooseMode(true); - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

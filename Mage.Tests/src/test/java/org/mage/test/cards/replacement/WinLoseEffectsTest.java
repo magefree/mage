@@ -130,10 +130,10 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angel's Grace");
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ad Nauseam");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        setChoice(playerA, true);
         
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Serum Visions");
         

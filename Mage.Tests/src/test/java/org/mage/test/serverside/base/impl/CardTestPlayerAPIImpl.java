@@ -1912,7 +1912,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * For use choices set "Yes" or "No" the the choice string.<br>
+     * For use choices set "Yes" or "No" the the choice string or use boolean.<br>
      * For X values set "X=[xValue]" example: for X=3 set choice string to
      * "X=3".<br>
      * For ColorChoice use "Red", "Green", "Blue", "Black" or "White"<br>
@@ -1922,6 +1922,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player
      * @param choice
      */
+    public void setChoice(TestPlayer player, boolean choice) {
+        setChoice(player, choice ? "Yes" : "No");
+    }
+
     public void setChoice(TestPlayer player, String choice) {
         setChoice(player, choice, 1);
     }
