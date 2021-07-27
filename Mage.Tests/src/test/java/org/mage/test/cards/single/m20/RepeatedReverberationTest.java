@@ -68,9 +68,9 @@ public class RepeatedReverberationTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, soothingBalm);
         addTarget(playerA, playerA);
-        setChoice(playerA, "Yes"); //Choose new targets?
+        setChoice(playerA, true); //Choose new targets?
         addTarget(playerA, playerB);
-        setChoice(playerA, "Yes"); //Choose new targets?
+        setChoice(playerA, true); //Choose new targets?
         addTarget(playerA, playerA);
 
         setStrictChooseMode(true);
@@ -101,8 +101,8 @@ public class RepeatedReverberationTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, repeatedReverb);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, soulFeast);
         addTarget(playerA, playerB);
-        setChoice(playerA, "No"); //Choose new targets?
-        setChoice(playerA, "No"); //Choose new targets?
+        setChoice(playerA, false); //Choose new targets?
+        setChoice(playerA, false); //Choose new targets?
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

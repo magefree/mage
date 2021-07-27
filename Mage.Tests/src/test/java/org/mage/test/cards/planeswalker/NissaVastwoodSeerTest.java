@@ -48,7 +48,7 @@ Later I used her -2 to kill her, which (after putting another spell on the stack
         addCard(Zone.HAND, playerA, "Nissa, Vastwood Seer");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nissa, Vastwood Seer");
-        setChoice(playerA, "Yes");        
+        setChoice(playerA, true);
         addTarget(playerA, "Forest");
         
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");

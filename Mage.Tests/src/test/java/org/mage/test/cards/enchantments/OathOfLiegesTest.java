@@ -25,7 +25,7 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         // turn 1 - A
         // oath A triggers for A and activates
         addTarget(playerA, playerB); // who control more lands
-        setChoice(playerA, "Yes"); // search library
+        setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -57,7 +57,7 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         // turn 2 - B
         // oath A triggers for B and activates
         addTarget(playerB, playerA); // who control more lands
-        setChoice(playerB, "Yes"); // search library
+        setChoice(playerB, true); // search library
         addTarget(playerB, "Plains"); // card from library
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -81,7 +81,7 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         // turn 1 - A
         // oath B triggers for A and activates
         addTarget(playerA, playerB); // who control more lands
-        setChoice(playerA, "Yes"); // search library
+        setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -106,11 +106,11 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         // oath B triggers for A and activates
         // 1
         addTarget(playerA, playerB); // who control more lands
-        setChoice(playerA, "Yes"); // search library
+        setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library
         // 2
         addTarget(playerA, playerB); // who control more lands
-        setChoice(playerA, "Yes"); // search library
+        setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -142,7 +142,7 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Replenish");
         // cast oath copy
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Copy Enchantment");
-        setChoice(playerA, "Yes"); // use copy effect
+        setChoice(playerA, true); // use copy effect
         setChoice(playerA, "Oath of Lieges"); // target for copy
         checkPermanentCount("A have 2 oath", 1, PhaseStep.END_TURN, playerA, "Oath of Lieges", 2);
         checkPermanentCount("A have 10 plains", 1, PhaseStep.END_TURN, playerA, "Plains", 10);
@@ -161,11 +161,11 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         setChoice(playerA, "At the beginning of each player's upkeep"); // two triggers on upkeep
         // 1
         addTarget(playerA, playerB); // who control more lands
-        setChoice(playerA, "Yes"); // search library
+        setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library
         // 2
         addTarget(playerA, playerB); // who control more lands
-        setChoice(playerA, "Yes"); // search library
+        setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library
 
         setStrictChooseMode(true);
@@ -201,7 +201,7 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Replenish");
         // cast oath copy by opponent
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Copy Enchantment");
-        setChoice(playerB, "Yes"); // use copy effect
+        setChoice(playerB, true); // use copy effect
         setChoice(playerB, "Oath of Lieges"); // target for copy
         checkPermanentCount("A have 1 oath", 2, PhaseStep.END_TURN, playerA, "Oath of Lieges", 1);
         checkPermanentCount("B have 1 oath", 2, PhaseStep.END_TURN, playerA, "Oath of Lieges", 1);
@@ -213,11 +213,11 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         // copy oath B triggers for A and activates
         // 1
         addTarget(playerA, playerB); // who control more lands
-        setChoice(playerA, "Yes"); // search library
+        setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library
         // 2
         addTarget(playerA, playerB); // who control more lands
-        setChoice(playerA, "Yes"); // search library
+        setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library
 
         setStopAt(3, PhaseStep.END_TURN);

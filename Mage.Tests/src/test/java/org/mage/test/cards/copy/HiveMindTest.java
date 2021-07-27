@@ -23,7 +23,7 @@ public class HiveMindTest extends CardTestPlayerBase {
         // Each of those players may choose new targets for their copy.
         addCard(Zone.BATTLEFIELD, playerA, "Hive Mind", 1);
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         addTarget(playerB, playerA);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
@@ -55,7 +55,7 @@ public class HiveMindTest extends CardTestPlayerBase {
         // Whenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell.
         addCard(Zone.BATTLEFIELD, playerB, "Chalice of the Void", 1);
 
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pact of the Titan");
 

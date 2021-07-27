@@ -43,7 +43,7 @@ public class NivmagusElementalTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bolt, playerB);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exile");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, grapeshot, playerB);
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exile");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exile");
 

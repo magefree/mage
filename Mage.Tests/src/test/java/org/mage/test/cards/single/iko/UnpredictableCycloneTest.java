@@ -22,7 +22,7 @@ public class UnpredictableCycloneTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Desert Cerodon");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -120,7 +120,7 @@ public class UnpredictableCycloneTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plagiarize", playerB);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cycling");
-        setChoice(playerA, "Yes"); // cast found library card
+        setChoice(playerA, true); // cast found library card
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

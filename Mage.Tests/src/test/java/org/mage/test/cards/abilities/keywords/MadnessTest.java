@@ -44,7 +44,7 @@ public class MadnessTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raven's Crime", playerA);
-        setChoice(playerA, "Yes"); // use madness triggered ability
+        setChoice(playerA, true); // use madness triggered ability
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -65,7 +65,7 @@ public class MadnessTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Raven's Crime");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raven's Crime", playerA);
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -94,8 +94,8 @@ public class MadnessTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Haunting Hymn");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Haunting Hymn", playerA);
-        setChoice(playerA, "Yes"); // use madness triggered ability
-        setChoice(playerA, "Yes"); // use madness cast
+        setChoice(playerA, true); // use madness triggered ability
+        setChoice(playerA, true); // use madness cast
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -123,7 +123,7 @@ public class MadnessTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Haunting Hymn");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Haunting Hymn", playerA);
-        setChoice(playerA, "Yes"); // use madness triggered ability
+        setChoice(playerA, true); // use madness triggered ability
         setChoice(playerA, "X=4");
         addTargetAmount(playerA, "Pillarfield Ox", 4);
 
@@ -176,11 +176,11 @@ public class MadnessTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Falkenrath Gorger");
 
-        setChoice(playerA, "Yes"); // Discard a card and put a +1/+1 counter on that creature, it gains haste until end of turn, and it becomes a Vampire in addition to its other types?
+        setChoice(playerA, true); // Discard a card and put a +1/+1 counter on that creature, it gains haste until end of turn, and it becomes a Vampire in addition to its other types?
         setChoice(playerA, "Asylum Visitor"); // Card to discard from Falkenrath entering by Olivia effect
         setChoice(playerA, "Asylum Visito"); // Madness {1}{B}
-        setChoice(playerA, "Yes"); // use madness triggered ability
-        setChoice(playerA, "Yes"); // Discard a card and put a +1/+1 counter on that creature, it gains haste until end of turn, and it becomes a Vampire in addition to its other types?
+        setChoice(playerA, true); // use madness triggered ability
+        setChoice(playerA, true); // Discard a card and put a +1/+1 counter on that creature, it gains haste until end of turn, and it becomes a Vampire in addition to its other types?
         setChoice(playerA, "Forest");
 
         setStrictChooseMode(true);

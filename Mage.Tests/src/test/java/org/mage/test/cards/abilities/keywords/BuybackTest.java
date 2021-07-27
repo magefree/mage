@@ -23,7 +23,7 @@ public class BuybackTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Elvish Fury", 1); // Instant  {G}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elvish Fury", "Silvercoat Lion");
-        setChoice(playerA, "Yes"); // use buyback
+        setChoice(playerA, true); // use buyback
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -44,7 +44,7 @@ public class BuybackTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Elvish Fury", 1); // Instant  {G}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elvish Fury", "Silvercoat Lion");
-        //setChoice(playerA, "Yes"); // use buyback - AI must choose
+        //setChoice(playerA, true); // use buyback - AI must choose
 
         //setStrictChooseMode(true); - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

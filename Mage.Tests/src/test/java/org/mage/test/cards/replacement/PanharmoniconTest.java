@@ -92,8 +92,8 @@ public class PanharmoniconTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scion of Ugin");
-        setChoice(playerA, "No"); // Return Bladewing's Thrall from your graveyard to the battlefield?
-        setChoice(playerA, "Yes"); // Should not get run since there is only one trigger.
+        setChoice(playerA, false); // Return Bladewing's Thrall from your graveyard to the battlefield?
+        setChoice(playerA, true); // Should not get run since there is only one trigger.
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();

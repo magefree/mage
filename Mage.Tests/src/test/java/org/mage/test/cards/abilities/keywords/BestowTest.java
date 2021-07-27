@@ -357,7 +357,7 @@ public class BestowTest extends CardTestPlayerBase {
 
         // attacks by Alesha and return card on trigger
         attack(2, playerB, "Alesha, Who Smiles at Death");
-        setChoice(playerB, "Yes"); // use trigger
+        setChoice(playerB, true); // use trigger
         addTarget(playerB, "Pillarfield Ox"); // target card to return
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Chandra's Outrage", "Alesha, Who Smiles at Death");

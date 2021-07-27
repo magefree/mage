@@ -23,7 +23,7 @@ public class SilumgarScavengerTest extends CardTestPlayerBase {
 
         // cast and exploit
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silumgar Scavenger");
-        setChoice(playerA, "Yes"); // yes, exploit
+        setChoice(playerA, true); // yes, exploit
         addTarget(playerA, "Balduvian Bears");
 
         checkPermanentCounters("boost", 1, PhaseStep.BEGIN_COMBAT, playerA, "Silumgar Scavenger", CounterType.P1P1, 1);

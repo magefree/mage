@@ -375,7 +375,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         setChoice(playerA, "Whispers of the Muse");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback"); // Flashback Whispers of the Muse
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

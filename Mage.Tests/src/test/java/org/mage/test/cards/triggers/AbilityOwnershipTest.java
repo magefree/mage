@@ -34,7 +34,7 @@ public class AbilityOwnershipTest extends CardTestPlayerBase {
         setChoice(playerA, "When "); // two triggers
         // * Ability: Soul Snuffers - EntersBattlefieldTriggeredAbility: When {this} enters the battlefield, put a -1/-1 counter on each creature.
         // * Ability: Minister of Pain - ExploitAbility: Exploit <i>(When this creature enters the battlefield, you may sacrifice a creature.)</i>
-        setChoice(playerA, "No"); // no exploit
+        setChoice(playerA, false); // no exploit
         // 3x life triggers
         setChoice(playerA, "Whenever you put one or more");
         setChoice(playerA, "Whenever you put one or more");
@@ -68,7 +68,7 @@ public class AbilityOwnershipTest extends CardTestPlayerBase {
         // - SO Obelisk Spider must triggers 2x times, BUT it's controlled by opponent, so no triggers at all
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rise of the Dark Realms");
         setChoice(playerA, "When "); // two triggers
-        setChoice(playerA, "No"); // no exploit
+        setChoice(playerA, false); // no exploit
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);

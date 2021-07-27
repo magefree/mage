@@ -48,7 +48,7 @@ public class ChainerNightmareAdeptTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, khenra);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, maaka);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, khenra);
 

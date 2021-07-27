@@ -81,7 +81,7 @@ public class SpellQuellerTest extends CardTestPlayerBase {
         
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder");
         addTarget(playerA, "Spell Queller");
-        setChoice(playerB, "Yes"); // elect to cast exiled card (divination) for free
+        setChoice(playerB, true); // elect to cast exiled card (divination) for free
         
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -124,7 +124,7 @@ public class SpellQuellerTest extends CardTestPlayerBase {
         addTarget(playerB, "Centaur Courser"); // exiles courser
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Wasteland Strangler");
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         setChoice(playerB, "Centaur Courser"); // put courser from exile into grave from ETB ability
         addTarget(playerB, "Sylvan Advocate"); // gives -3/-3 to Advocate 
         

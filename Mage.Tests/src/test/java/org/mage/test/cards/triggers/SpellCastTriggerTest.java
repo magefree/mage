@@ -79,7 +79,7 @@ public class SpellCastTriggerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dance with Devils");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

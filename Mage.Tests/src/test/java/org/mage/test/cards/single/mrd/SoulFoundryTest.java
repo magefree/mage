@@ -26,7 +26,7 @@ public class SoulFoundryTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Bloodline Keeper");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Foundry");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X}, {T}: Create a token");
 
         setStopAt(1, PhaseStep.END_TURN);

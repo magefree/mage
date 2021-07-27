@@ -83,7 +83,7 @@ public class TwoFacedCardEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mayor of Avabruck");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
-        setChoice(playerB, "Yes"); // use copy
+        setChoice(playerB, true); // use copy
         setChoice(playerB, "Mayor of Avabruck"); // clone target
 
         setStrictChooseMode(true);

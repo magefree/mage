@@ -130,7 +130,7 @@ public class CyclingTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "New Perspectives");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cycling");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

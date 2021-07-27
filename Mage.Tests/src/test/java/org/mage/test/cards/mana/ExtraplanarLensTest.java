@@ -24,7 +24,7 @@ public class ExtraplanarLensTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, snow_covered_forest, 10);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lens);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, snow_covered_forest);
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -49,7 +49,7 @@ public class ExtraplanarLensTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, forest, 10);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lens);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, forest);
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);

@@ -36,7 +36,7 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
 
         // bolt after (1 + 1x copy)
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "No"); // change target for copy 1
+        setChoice(playerA, false); // change target for copy 1
         checkLife("copy", 1, PhaseStep.END_COMBAT, playerB, 20 - 3 - 3 * 2);
 
         setStrictChooseMode(true);
@@ -64,7 +64,7 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
 
         // bolt after (1 + 1x copy)
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "No"); // change target for copy 1
+        setChoice(playerA, false); // change target for copy 1
         checkLife("copy", 1, PhaseStep.END_COMBAT, playerB, 20 - 3 - 3 * 2);
 
         setStrictChooseMode(true);
@@ -92,7 +92,7 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
 
         // bolt after (1 + 1x copy)
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "No"); // change target for copy 1
+        setChoice(playerA, false); // change target for copy 1
         checkLife("copy", 1, PhaseStep.END_COMBAT, playerB, 20 - 3 - 3 * 2);
 
         setStrictChooseMode(true);
@@ -120,7 +120,7 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", playerB);
         // bolt after (1 + 1x copy)
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "No"); // change target for copy 1
+        setChoice(playerA, false); // change target for copy 1
         checkLife("copy", 1, PhaseStep.END_COMBAT, playerB, 20 - 3 - 3 * 2);
 
         setStrictChooseMode(true);
@@ -148,7 +148,7 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", playerB);
         // bolt after (1 + 1x copy)
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "No"); // change target for copy 1
+        setChoice(playerA, false); // change target for copy 1
         checkLife("copy", 1, PhaseStep.END_TURN, playerB, 20 - 3 - 3 * 2);
 
         setStrictChooseMode(true);
@@ -184,17 +184,17 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         // 1
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         checkLife("1x copy", 1, PhaseStep.BEGIN_COMBAT, playerB, startLife - 3 - 3 * 2);
-        setChoice(playerA, "No"); // change target for copy 1
+        setChoice(playerA, false); // change target for copy 1
         // 2
         castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "No"); // change target for copy 1
-        setChoice(playerA, "No"); // change target for copy 2
+        setChoice(playerA, false); // change target for copy 1
+        setChoice(playerA, false); // change target for copy 2
         checkLife("2x copy", 1, PhaseStep.END_COMBAT, playerB, startLife - 3 - 3 * 2 - 3 * 3);
         // 3
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "No"); // change target for copy 1
-        setChoice(playerA, "No"); // change target for copy 2
-        setChoice(playerA, "No"); // change target for copy 3
+        setChoice(playerA, false); // change target for copy 1
+        setChoice(playerA, false); // change target for copy 2
+        setChoice(playerA, false); // change target for copy 3
         checkLife("3x copy", 1, PhaseStep.END_TURN, playerB, startLife - 3 - 3 * 2 - 3 * 3 - 3 * 4);
 
         // turn 3
@@ -205,12 +205,12 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         checkLife("3. no copy", 3, PhaseStep.BEGIN_COMBAT, playerB, startLife - 3);
         // after storm 1x
         castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "No"); // change target for copy 1
+        setChoice(playerA, false); // change target for copy 1
         checkLife("3. 1x copy", 3, PhaseStep.END_COMBAT, playerB, startLife - 3 - 3 * 2);
         // after storm 2x
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "No"); // change target for copy 1
-        setChoice(playerA, "No"); // change target for copy 2
+        setChoice(playerA, false); // change target for copy 1
+        setChoice(playerA, false); // change target for copy 2
         checkLife("3. 2x copy", 3, PhaseStep.END_TURN, playerB, startLife - 3 - 3 * 2 - 3 * 3);
 
         setStrictChooseMode(true);
@@ -241,7 +241,7 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
 
         // 2a
         castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "No"); // change target for copy 1
+        setChoice(playerA, false); // change target for copy 1
         checkLife("1x copy", 1, PhaseStep.END_COMBAT, playerB, 20 - 3 - 3 * 2);
         // 2b
         castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, "Lightning Bolt", playerA);
@@ -299,7 +299,7 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         checkLife("a 0x copy", 2, PhaseStep.BEGIN_COMBAT, playerB, 20 - 3);
         // 2
         castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "No"); // change target for copy 1
+        setChoice(playerA, false); // change target for copy 1
         checkLife("a 1x copy", 2, PhaseStep.END_COMBAT, playerB, 20 - 3 - 3 * 2);
 
         // change controller to B
@@ -316,7 +316,7 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         checkLife("b 0x copy", 4, PhaseStep.BEGIN_COMBAT, playerA, 20 - 3 - 3);
         // 2
         castSpell(4, PhaseStep.DECLARE_ATTACKERS, playerB, "Lightning Bolt", playerA);
-        setChoice(playerB, "No"); // change target for copy 1
+        setChoice(playerB, false); // change target for copy 1
         checkLife("b 1x copy", 4, PhaseStep.END_COMBAT, playerA, 20 - 3 - 3 - 3 * 2);
 
         setStrictChooseMode(true);

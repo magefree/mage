@@ -55,7 +55,7 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Aether Figment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
-        setChoice(playerA, "Yes"); // with Kicker
+        setChoice(playerA, true); // with Kicker
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -75,7 +75,7 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Aether Figment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
-        //setChoice(playerA, "Yes"); // with Kicker - AI must choose
+        //setChoice(playerA, true); // with Kicker - AI must choose
 
         //setStrictChooseMode(true); - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -93,7 +93,7 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Aether Figment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -113,7 +113,7 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Aether Figment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
-        //setChoice(playerA, "No"); - AI must choose
+        //setChoice(playerA, false); - AI must choose
 
         //setStrictChooseMode(true); - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -137,8 +137,8 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Apex Hawks");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Apex Hawks");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "No");
+        setChoice(playerA, true);
+        setChoice(playerA, false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -157,9 +157,9 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Apex Hawks");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Apex Hawks");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "No");
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        setChoice(playerA, false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -177,7 +177,7 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Apex Hawks");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Apex Hawks");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -200,8 +200,8 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Sunscape Battlemage", 1); // 2/2  {2}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sunscape Battlemage");
-        setChoice(playerA, "No");  // not use kicker {1}{G}
-        setChoice(playerA, "Yes"); // use kicker {2}{U}
+        setChoice(playerA, false);  // not use kicker {1}{G}
+        setChoice(playerA, true); // use kicker {2}{U}
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -226,8 +226,8 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Birds of Paradise", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sunscape Battlemage");
-        setChoice(playerA, "Yes"); // use kicker {1}{G}
-        setChoice(playerA, "Yes"); // use kicker {2}{U}
+        setChoice(playerA, true); // use kicker {1}{G}
+        setChoice(playerA, true); // use kicker {2}{U}
         setChoice(playerA, "When "); // two triggers from two kicker options
         addTarget(playerA, "Birds of Paradise");
 
@@ -259,8 +259,8 @@ public class KickerTest extends CardTestPlayerBase {
 
         // cast with kicker
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sunscape Battlemage");
-        setChoice(playerA, "Yes");  // use kicker {1}{G} - destroy target creature with flying
-        setChoice(playerA, "Yes"); // use kicker {2}{U} - draw two cards
+        setChoice(playerA, true);  // use kicker {1}{G} - destroy target creature with flying
+        setChoice(playerA, true); // use kicker {2}{U} - draw two cards
         // spell must be countered, so no chooses
         //setChoice(playerA, "When "); // two triggers rised: When {this} enters the battlefield, if it was kicked...
         //addTarget(playerA, "Birds of Paradise"); // target for {1}{G} trigger
@@ -297,10 +297,10 @@ public class KickerTest extends CardTestPlayerBase {
 
         // cast kicked spell
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thornscape Battlemage");
-        setChoice(playerA, "Yes");  // use kicker {R} - 2 damage to any target
-        setChoice(playerA, "No"); // not use kicker {W} - destroy target
+        setChoice(playerA, true);  // use kicker {R} - 2 damage to any target
+        setChoice(playerA, false); // not use kicker {W} - destroy target
         addTarget(playerA, playerB); // target for 2 damage
-        setChoice(playerA, "Yes"); // put counter on hallar
+        setChoice(playerA, true); // put counter on hallar
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -332,7 +332,7 @@ public class KickerTest extends CardTestPlayerBase {
 
         // first cast with kicker
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gatekeeper of Malakir");
-        setChoice(playerA, "Yes");  // use kicker
+        setChoice(playerA, true);  // use kicker
         addTarget(playerA, playerB); // trigger's target
         addTarget(playerB, "Birds of Paradise"); // sacrifice
 
@@ -341,7 +341,7 @@ public class KickerTest extends CardTestPlayerBase {
 
         // second cast without kicker
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Gatekeeper of Malakir");
-        setChoice(playerA, "No");  // no kicker
+        setChoice(playerA, false);  // no kicker
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -377,14 +377,14 @@ public class KickerTest extends CardTestPlayerBase {
         // cast spell with kicker and copy it (kicker status must be saved)
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 4);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Agonizing Demise", "@bear1");
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
         checkStackSize("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2); // spell + trigger
         checkStackObject("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ago", 1);
         checkStackObject("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Whenever you cast", 1);
         //
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
-        setChoice(playerA, "Yes"); // copy spell
-        setChoice(playerA, "Yes"); // new target
+        setChoice(playerA, true); // copy spell
+        setChoice(playerA, true); // new target
         addTarget(playerA, "@bear2");
         checkStackSize("after copy trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2); // spell + copy
         checkStackObject("after copy trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ago", 2);
@@ -422,14 +422,14 @@ public class KickerTest extends CardTestPlayerBase {
         // cast spell with kicker and copy it (kicker status must be saved)
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 4);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Agonizing Demise", "@bear1");
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
         checkStackSize("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2); // spell + trigger
         checkStackObject("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ago", 1);
         checkStackObject("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Whenever you cast", 1);
         //
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
-        setChoice(playerA, "Yes"); // copy spell
-        setChoice(playerA, "Yes"); // new target
+        setChoice(playerA, true); // copy spell
+        setChoice(playerA, true); // new target
         addTarget(playerA, "@bear2");
         checkStackSize("after copy trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2); // spell + copy
         checkStackObject("after copy trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ago", 2);
@@ -443,7 +443,7 @@ public class KickerTest extends CardTestPlayerBase {
         checkStackObject("before counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Absorb", 1);
         //
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true); // trigger
-        setChoice(playerA, "No"); // do not copy counter spell
+        setChoice(playerA, false); // do not copy counter spell
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true); // counter
         checkStackSize("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1); // copy
         checkStackObject("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ago", 1);
@@ -481,7 +481,7 @@ public class KickerTest extends CardTestPlayerBase {
         // cast spell with kicker
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 3);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Academy Drake");
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
 
         // copy spell
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 4);
@@ -536,10 +536,10 @@ public class KickerTest extends CardTestPlayerBase {
 
         // cast 2x kicked spell for 4x damage
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deathforge Shaman");
-        setChoice(playerA, "Yes"); // 1x kick
-        setChoice(playerA, "Yes"); // 2x kick
-        setChoice(playerA, "No"); // stop multikicker
-        setChoice(playerA, "Yes"); // remove counters and activate verazol's copy
+        setChoice(playerA, true); // 1x kick
+        setChoice(playerA, true); // 2x kick
+        setChoice(playerA, false); // stop multikicker
+        setChoice(playerA, true); // remove counters and activate verazol's copy
         addTarget(playerA, playerA); // on resolve: target for copied spell
         addTarget(playerA, playerB); // on resolve: target for original spell
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -571,7 +571,7 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Orim's Chant", playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         attack(1, playerA, "Raging Goblin");
 
@@ -607,7 +607,7 @@ public class KickerTest extends CardTestPlayerBase {
         // When Bloodhusk Ritualist enters the battlefield, target opponent discards a card for each time it was kicked.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodhusk Ritualist");
         setChoice(playerA, "Yes", 2); // 2 x Multikicker
-        setChoice(playerA, "No"); // stop the kicking
+        setChoice(playerA, false); // stop the kicking
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Bloodhusk Ritualist");
         addTarget(playerA, playerB); // target for kicker's trigger (discard cards)
 
@@ -640,7 +640,7 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Centaur Courser", 1); // 3/3
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Marsh Casualties", playerB);
-        setChoice(playerA, "Yes");  // Pay Kicker
+        setChoice(playerA, true);  // Pay Kicker
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

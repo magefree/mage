@@ -168,7 +168,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         addCard(Zone.HAND, playerA, lieutenant);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lieutenant);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoices("Yes", "Yes", "No", "No");
 
         setStrictChooseMode(true);
@@ -188,8 +188,8 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lieutenant);
         setChoices("Yes", "Yes", "No", "No");
-        setChoice(playerA, "Yes"); // to have an additional vote
-        setChoice(playerA, "No"); // the additional vote
+        setChoice(playerA, true); // to have an additional vote
+        setChoice(playerA, false); // the additional vote
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -269,7 +269,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         addCard(Zone.HAND, playerA, lieutenant);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         setChoices("Yes", "No", "No", "No");
 
         setStrictChooseMode(true);
@@ -294,8 +294,8 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         addCard(Zone.HAND, playerA, lieutenant);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
-        setChoice(playerA, "No");
-        setChoice(playerB, "No");
+        setChoice(playerA, false);
+        setChoice(playerB, false);
         setChoices("Yes");
 
         setStrictChooseMode(true);

@@ -61,7 +61,7 @@ public class TheGitrogMonsterTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Gitrog Monster");
 
         // on 3rd turn during upkeep opt to sacrifice a land
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Swamp");
         setStopAt(3, PhaseStep.DRAW);
         execute();
