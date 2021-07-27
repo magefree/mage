@@ -21,8 +21,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -91,7 +89,7 @@ class BruenorBattlehammerBoostEffect extends ContinuousEffectImpl {
 class BruenorBattlehammerCostEffect extends CostModificationEffectImpl {
 
     BruenorBattlehammerCostEffect() {
-        super(Duration.Custom, Benefit, CostModificationType.SET_COST);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.SET_COST);
         this.staticText = "you may pay {0} rather than pay the equip cost " +
                 "of the first equip ability you activate each turn.";
     }
@@ -102,16 +100,13 @@ class BruenorBattlehammerCostEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return source.isControlledBy(abilityToModify.getControllerId())
-                && !BruenorBattlehammerWatcher.checkPlayer(abilityToModify.getControllerId(), game)
-                && abilityToModify instanceof EquipAbility;
+        return abilityToModify instanceof EquipAbility
+                && source.isControlledBy(abilityToModify.getControllerId())
+                && !BruenorBattlehammerWatcher.checkPlayer(abilityToModify.getControllerId(), game);
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        if (!game.inCheckPlayableState()) {
-            return false;
-        }
         Player controller = game.getPlayer(abilityToModify.getControllerId());
         if (controller == null || !controller.chooseUse(
                 Outcome.PlayForFree, "Pay {0} to equip?", source, game
