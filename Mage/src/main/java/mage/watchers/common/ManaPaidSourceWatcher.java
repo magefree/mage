@@ -26,6 +26,7 @@ import java.util.UUID;
 public class ManaPaidSourceWatcher extends Watcher {
 
     private static final class ManaPaidTracker implements Serializable {
+        private int total = 0;
         private int whiteSnow = 0;
         private int blueSnow = 0;
         private int blackSnow = 0;
@@ -35,6 +36,7 @@ public class ManaPaidSourceWatcher extends Watcher {
         private int treasure = 0;
 
         private void increment(MageObject sourceObject, ManaType manaType, Game game) {
+            total++;
             if (sourceObject.hasSubtype(SubType.TREASURE, game)) {
                 treasure++;
             }
@@ -106,6 +108,11 @@ public class ManaPaidSourceWatcher extends Watcher {
     public void reset() {
         super.reset();
         manaMap.clear();
+    }
+
+    public static int getTotalPaid(UUID sourceId, Game game) {
+        ManaPaidSourceWatcher watcher = game.getState().getWatcher(ManaPaidSourceWatcher.class);
+        return watcher == null ? 0 : watcher.manaMap.getOrDefault(sourceId, emptyTracker).total;
     }
 
     public static int getTreasurePaid(UUID sourceId, Game game) {

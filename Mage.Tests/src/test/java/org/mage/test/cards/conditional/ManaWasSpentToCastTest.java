@@ -5,6 +5,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -135,5 +136,40 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         assertAbility(playerA, "Jaded Sell-Sword", FirstStrikeAbility.getInstance(), false);
         assertAbility(playerA, "Jaded Sell-Sword", HasteAbility.getInstance(), false);
+    }
+
+    @Test
+    public void testVerazol() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.HAND, playerA, "Verazol, the Split Current");
+
+        setChoice(playerA, "X=2");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Verazol, the Split Current");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertCounterCount(playerA, "Verazol, the Split Current", CounterType.P1P1, 4);
+        assertPowerToughness(playerA, "Verazol, the Split Current", 4, 4);
+    }
+
+    @Test
+    public void testProssh() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes");
+        addCard(Zone.BATTLEFIELD, playerA, "Sphere of Resistance");
+        addCard(Zone.HAND, playerA, "Prossh, Skyraider of Kher");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Prossh, Skyraider of Kher");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Kobolds of Kher Keep", 7);
     }
 }

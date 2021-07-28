@@ -1,13 +1,10 @@
-
 package mage.abilities.dynamicvalue.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.stack.Spell;
+import mage.watchers.common.ManaPaidSourceWatcher;
 
 /**
  * @author LevelX2
@@ -17,18 +14,7 @@ public enum ManaSpentToCastCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Spell spell = game.getStack().getSpell(sourceAbility.getSourceId());
-        if (spell == null) {
-            MageObject mageObject = game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.STACK);
-            if (mageObject instanceof Spell) {
-                spell = (Spell) mageObject;
-            }
-        }
-        if (spell != null) {
-            // NOT the cmc of the spell on the stack
-            return spell.getSpellAbility().getManaCostsToPay().manaValue();
-        }
-        return 0;
+        return ManaPaidSourceWatcher.getTotalPaid(sourceAbility.getSourceId(), game);
     }
 
     @Override
@@ -45,5 +31,4 @@ public enum ManaSpentToCastCount implements DynamicValue {
     public String getMessage() {
         return "the amount of mana spent to cast it";
     }
-
 }
