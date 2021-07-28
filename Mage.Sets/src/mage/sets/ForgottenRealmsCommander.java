@@ -144,6 +144,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Meteor Golem", 210, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Midnight Pathlighter", 52, Rarity.RARE, mage.cards.m.MidnightPathlighter.class));
         cards.add(new SetCardInfo("Mind Stone", 211, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
+        cards.add(new SetCardInfo("Minn, Wily Illusionist", 16, Rarity.RARE, mage.cards.m.MinnWilyIllusionist.class));
         cards.add(new SetCardInfo("Mishra's Factory", 248, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Moonsilver Spear", 212, Rarity.RARE, mage.cards.m.MoonsilverSpear.class));
         cards.add(new SetCardInfo("Mortuary Mire", 249, Rarity.COMMON, mage.cards.m.MortuaryMire.class));
