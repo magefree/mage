@@ -52,6 +52,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Chain Reaction", 116, Rarity.RARE, mage.cards.c.ChainReaction.class));
         cards.add(new SetCardInfo("Chameleon Colossus", 153, Rarity.RARE, mage.cards.c.ChameleonColossus.class));
         cards.add(new SetCardInfo("Champion of Wits", 80, Rarity.RARE, mage.cards.c.ChampionOfWits.class));
+        cards.add(new SetCardInfo("Chaos Dragon", 30, Rarity.RARE, mage.cards.c.ChaosDragon.class));
         cards.add(new SetCardInfo("Chaos Wand", 201, Rarity.RARE, mage.cards.c.ChaosWand.class));
         cards.add(new SetCardInfo("Chaos Warp", 117, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chittering Witch", 95, Rarity.RARE, mage.cards.c.ChitteringWitch.class));
