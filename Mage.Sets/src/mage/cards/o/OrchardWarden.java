@@ -4,7 +4,7 @@ package mage.cards.o;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +36,7 @@ public final class OrchardWarden extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Whenever another Treefolk creature enters the battlefield under your control, you may gain life equal to that creature's toughness.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new OrchardWardenffect(), filter, true, SetTargetPointer.PERMANENT, ""));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new OrchardWardenffect(), filter, true, SetTargetPointer.PERMANENT, ""));
     }
 
     private OrchardWarden(final OrchardWarden card) {
