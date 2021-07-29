@@ -7,6 +7,7 @@ import mage.view.GameView;
 import mage.view.PlayerView;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -218,6 +219,65 @@ public class CardIconsTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_CostX_MDFC() {
+        // Agadeem's Awakening
+        // Sorcery {X}{B}{B}{B}
+        // Return from your graveyard to the battlefield any number of target creature cards that each have a different converted mana cost X or less.
+        //
+        // Agadeem, the Undercrypt
+        // Land
+        // As Agadeem, the Undercrypt enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        addCard(Zone.HAND, playerA, "Agadeem's Awakening", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+
+        // hand (not visible)
+        runCode("card icons in hand", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            CardView cardView = gameView.getHand().values().stream()
+                    .filter(c -> c.getName().equals("Agadeem's Awakening"))
+                    .findFirst()
+                    .orElse(null);
+            Assert.assertEquals("main must have non x cost card icons in hand", 0, cardView.getCardIcons().size());
+            Assert.assertEquals("right must have non x cost card icons in hand", 0, cardView.getSecondCardFace().getCardIcons().size());
+        });
+
+        // play spell and check X
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Agadeem's Awakening");
+        setChoice(playerA, "X=2");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        // stack (spell - visible)
+        runCode("card icons on stack (visible)", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            Assert.assertEquals("must have 1 card in stack", 1, gameView.getStack().values().size());
+            CardView cardView = gameView.getStack().values().stream()
+                    .filter(c -> c.getName().equals("Agadeem's Awakening"))
+                    .findFirst()
+                    .orElse(null);
+            Assert.assertEquals("main must have x cost card icons in stack", 1, cardView.getCardIcons().size());
+            Assert.assertNull("right must be null in stack", cardView.getSecondCardFace());
+        });
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // play land and check X
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Agadeem, the Undercrypt");
+        setChoice(playerA, false); // not pay life
+        runCode("card icons in battlefield", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            PlayerView playerView = gameView.getPlayers().get(0);
+            Assert.assertEquals("player", player.getName(), playerView.getName());
+            CardView cardView = playerView.getBattlefield().values().stream().filter(p -> p.getName().equals("Agadeem, the Undercrypt")).findFirst().orElse(null);
+            Assert.assertNotNull("must have Agadeem, the Undercrypt in battlefield", cardView);
+            Assert.assertEquals("main must have not x cost card icons in battlefield", 0, cardView.getCardIcons().size());
+            Assert.assertNull("second side must be null", cardView.getSecondCardFace());
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
     }

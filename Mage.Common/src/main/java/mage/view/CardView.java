@@ -453,6 +453,7 @@ public class CardView extends SimpleCardView {
             // x cost
             Zone cardZone = game.getState().getZone(card.getId());
             if (card.getManaCost().containsX()
+                    && card.getSpellAbility() != null
                     && (cardZone.match(Zone.BATTLEFIELD) || cardZone.match(Zone.STACK))) {
                 int costX;
                 if (card instanceof Permanent) {
