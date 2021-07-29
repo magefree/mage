@@ -5,6 +5,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -34,7 +35,9 @@ public final class SkeletalSwarming extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.SKELETON);
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent(SubType.SKELETON, "");
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final DynamicValue xValue = new AdditiveDynamicValue(
+            new PermanentsOnBattlefieldCount(filter), StaticValue.get(-1)
+    );
 
     public SkeletalSwarming(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{G}");
@@ -54,8 +57,8 @@ public final class SkeletalSwarming extends CardImpl {
                 new ConditionalOneShotEffect(
                         new CreateTokenEffect(new SkeletonToken(), 2, true, false),
                         new CreateTokenEffect(new SkeletonToken(), 1, true, false),
-                        MorbidCondition.instance, "create a tapped 1/1 black Skeleton creature token. "
-                        + "If a creature died this turn, create two of those tokens instead"
+                        MorbidCondition.instance, "create a tapped 1/1 black Skeleton creature token. " +
+                        "If a creature died this turn, create two of those tokens instead"
                 ), TargetController.YOU, false
         ).addHint(MorbidHint.instance));
     }
