@@ -29,7 +29,7 @@ public final class ElshaOfTheInfinite extends CardImpl {
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-        filter.add(CardOnTopOfLibraryPredicate.instance);
+        filter.add(CardOnTopOfLibraryPredicate.YOUR);
     }
 
     public ElshaOfTheInfinite(UUID ownerId, CardSetInfo setInfo) {
