@@ -40,12 +40,19 @@ public final class XanatharGuildKingpin extends CardImpl {
 
         // At the beginning of your upkeep, choose target opponent. Until end of turn, that player can’t cast spells, you may look at the top card of their library any time, you may play the top card of their library, and you may spend mana as though it were mana of any color to cast spells this way.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new XanatharGuildKingpinRuleModifyingEffect(),
+                Zone.BATTLEFIELD, new XanatharGuildKingpinRuleModifyingEffect()
+                .setText("choose target opponent. Until end of turn, that player can't cast spells,"),
                 TargetController.YOU, false
         );
-        ability.addEffect(new LookAtTopCardOfLibraryAnyTimeTargetEffect());
-        ability.addEffect(new PlayTheTopCardTargetEffect());
-        ability.addEffect(new XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect());
+        ability.addEffect(new LookAtTopCardOfLibraryAnyTimeTargetEffect()
+                .setText(" you may look at the top card of their library any time,"));
+
+        ability.addEffect(new PlayTheTopCardTargetEffect()
+                .setText(" you may play the top card of their library,"));
+
+        ability.addEffect(new XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect()
+                .setText(" and you may spend mana as thought it were mana of any color to cast spells this way"));
+
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

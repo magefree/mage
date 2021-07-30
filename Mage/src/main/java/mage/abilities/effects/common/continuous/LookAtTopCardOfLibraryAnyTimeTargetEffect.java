@@ -12,6 +12,7 @@ import mage.players.Player;
 
 /**
  * @author raphael-schulz
+ * Implementation taken from LookAtTopCardOfLibraryAnyTimeEffect and adjusted accordingly
  */
 public class LookAtTopCardOfLibraryAnyTimeTargetEffect extends ContinuousEffectImpl {
 

@@ -15,6 +15,7 @@ import java.util.UUID;
 
 /**
  * @author raphael-schulz
+ * Implementation taken from PlayTheTopCardEffect and adjusted accordingly
  */
 public class PlayTheTopCardTargetEffect extends AsThoughEffectImpl  {
 
@@ -64,8 +65,6 @@ public class PlayTheTopCardTargetEffect extends AsThoughEffectImpl  {
         // two modes:
         // * can play cards (must check main card and allows any parts)
         // * can play lands/spells (must check specific part and allows specific part)
-
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
 
         // current card's part
         Card cardToCheck = game.getCard(objectId);
