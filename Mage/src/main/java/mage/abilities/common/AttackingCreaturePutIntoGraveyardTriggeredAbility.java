@@ -94,9 +94,6 @@ public class AttackingCreaturePutIntoGraveyardTriggeredAbility extends Triggered
                 }
             case REMOVED_FROM_COMBAT:
                 // a card removed from combat is no longer an attacker or blocker so remove it from the list
-                if (game.isSimulation()) {  // a simulated game will always choose to apply any triggered effect IE: Gustcloak Savior
-                    return false;
-                }
                 List<UUID> attackersList = (List<UUID>) game.getState().getValue(this.getSourceId() + "Attackers");
                 if (attackersList != null
                         && attackersList.contains(event.getTargetId())) {

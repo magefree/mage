@@ -172,6 +172,8 @@ public class GameState implements Serializable, Copyable<GameState> {
                 this.values.put(entry.getKey(), ((EnumSet) entry.getValue()).clone());
             } else if (entry.getValue() instanceof HashMap) {
                 this.values.put(entry.getKey(), ((HashMap) entry.getValue()).clone());
+            } else if (entry.getValue() instanceof List) {
+                this.values.put(entry.getKey(), ((List) entry.getValue()).stream().collect(Collectors.toList()));
             } else {
                 this.values.put(entry.getKey(), entry.getValue());
             }
