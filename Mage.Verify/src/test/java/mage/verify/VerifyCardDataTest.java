@@ -905,6 +905,12 @@ public class VerifyCardDataTest {
         }
 
         for (ExpansionSet set : sets) {
+            // additional info
+            Set<String> cardNames = new HashSet<>();
+            for (ExpansionSet.SetCardInfo cardInfo : set.getSetCardInfo()) {
+                cardNames.add(cardInfo.getName());
+            }
+
             for (ExpansionSet.SetCardInfo cardInfo : set.getSetCardInfo()) {
                 Card card = CardImpl.createCard(cardInfo.getCardClass(), new CardSetInfo(cardInfo.getName(), set.getCode(),
                         cardInfo.getCardNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
@@ -923,6 +929,16 @@ public class VerifyCardDataTest {
                 if (!CharMatcher.ascii().matchesAllOf(card.getName()) || !CharMatcher.ascii().matchesAllOf(card.getCardNumber())) {
                     errorsList.add("Error: card name or number contains non-ascii symbols: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
+
+                // CHECK: second side cards in one set
+                // https://github.com/magefree/mage/issues/8081
+                /*
+                if (card.getSecondCardFace() != null && cardNames.contains(card.getSecondCardFace().getName())) {
+                    errorsList.add("Error: set contains second side cards: " + set.getCode() + " - " + set.getName()
+                            + " - " + card.getName() + " - " + card.getCardNumber()
+                            + " - " + card.getSecondCardFace().getName() + " - " + card.getSecondCardFace().getCardNumber());
+                }
+                 */
             }
         }
 

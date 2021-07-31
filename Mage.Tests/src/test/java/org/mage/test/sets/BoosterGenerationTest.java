@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
+import mage.cards.ExpansionSet;
 import mage.cards.ModalDoubleFacesCard;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardScanner;
@@ -13,6 +14,7 @@ import mage.constants.SubType;
 import mage.sets.*;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
 
@@ -560,5 +562,40 @@ public class BoosterGenerationTest extends MageTestBase {
                             .count()
             );
         }
+    }
+
+    @Ignore // debug only: collect info about cards in boosters, see https://github.com/magefree/mage/issues/8081
+    @Test
+    public void test_CollectBoosterStats() {
+        ExpansionSet setToAnalyse = Innistrad.getInstance();
+        int openBoosters = 1000;
+
+        Map<String, Integer> resRatio = new HashMap<>();
+        int totalCards = 0;
+        for (int i = 1; i <= openBoosters; i++) {
+            List<Card> booster = setToAnalyse.createBooster();
+            totalCards += booster.size();
+            booster.forEach(card -> {
+                String code = String.format("%s %s", card.getRarity().getCode(), card.getName());
+                resRatio.putIfAbsent(code, 0);
+                resRatio.computeIfPresent(code, (u, count) -> count + 1);
+            });
+        }
+        final Integer totalCardsFinal = totalCards;
+        List<String> info = resRatio.entrySet().stream()
+                .sorted(new Comparator<Map.Entry<String, Integer>>() {
+                    @Override
+                    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                        return Integer.compare(o2.getValue(), o1.getValue());
+                    }
+                })
+                .map(e -> String.format("%s: %d",
+                        e.getKey(),
+                        e.getValue()
+                        //(double) e.getValue() / totalCardsFinal * 100.0
+                ))
+                .collect(Collectors.toList());
+        System.out.println(setToAnalyse.getName() + " - boosters opened: " + openBoosters + ". Found cards: " + totalCardsFinal + "\n"
+                + info.stream().collect(Collectors.joining("\n")));
     }
 }
