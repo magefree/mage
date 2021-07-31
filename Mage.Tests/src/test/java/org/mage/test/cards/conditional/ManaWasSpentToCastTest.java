@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.conditional;
 
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -6,6 +5,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -171,5 +171,104 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Kobolds of Kher Keep", 7);
+    }
+
+    @Test
+    public void testRitualManaNormal() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, "Pyretic Ritual");
+        addCard(Zone.HAND, playerA, "Gray Ogre");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pyretic Ritual");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Pyretic Ritual", 1);
+        assertPermanentCount(playerA, "Gray Ogre", 1);
+    }
+
+    @Test
+    public void testRitualManaCopied() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.HAND, playerA, "Isochron Scepter");
+        addCard(Zone.HAND, playerA, "Pyretic Ritual");
+        addCard(Zone.HAND, playerA, "Gray Ogre");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
+        setChoice(playerA, true);
+        setChoice(playerA, "Pyretic Ritual");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}:");
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertTapped("Isochron Scepter", true);
+        assertExileCount(playerA, "Pyretic Ritual", 1);
+        assertPermanentCount(playerA, "Gray Ogre", 1);
+    }
+
+    @Test
+    public void testManaDrainNormal() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Mana Drain");
+        addCard(Zone.HAND, playerA, "Gray Ogre");
+        addCard(Zone.HAND, playerA, "Sliver Construct");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mana Drain", "Gray Ogre");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sliver Construct");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Mana Drain", 1);
+        assertGraveyardCount(playerA, "Gray Ogre", 1);
+        assertPermanentCount(playerA, "Sliver Construct", 1);
+    }
+
+    @Ignore // currently fails
+    @Test
+    public void testManaDrainCopied() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 11);
+        addCard(Zone.HAND, playerA, "Isochron Scepter");
+        addCard(Zone.HAND, playerA, "Mana Drain");
+        addCard(Zone.HAND, playerA, "Gray Ogre");
+        addCard(Zone.HAND, playerA, "Sliver Construct");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
+        setChoice(playerA, true);
+        setChoice(playerA, "Mana Drain");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}:");
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        addTarget(playerA, "Gray Ogre");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sliver Construct");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertTapped("Isochron Scepter", true);
+        assertExileCount(playerA, "Mana Drain", 1);
+        assertGraveyardCount(playerA, "Gray Ogre", 1);
+        assertPermanentCount(playerA, "Sliver Construct", 1);
     }
 }
