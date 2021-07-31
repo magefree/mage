@@ -672,4 +672,8 @@ public abstract class ExpansionSet implements Serializable {
         return maxCardNumberInBooster;
     }
 
+    public int getNumBoosterDoubleFaced() {
+        return numBoosterDoubleFaced;
+    }
+
 }

@@ -911,10 +911,15 @@ public class VerifyCardDataTest {
                 cardNames.add(cardInfo.getName());
             }
 
+            boolean containsDoubleSideCards = false;
             for (ExpansionSet.SetCardInfo cardInfo : set.getSetCardInfo()) {
                 Card card = CardImpl.createCard(cardInfo.getCardClass(), new CardSetInfo(cardInfo.getName(), set.getCode(),
                         cardInfo.getCardNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
                 Assert.assertNotNull(card);
+
+                if (card.getSecondCardFace() != null) {
+                    containsDoubleSideCards = true;
+                }
 
                 // CHECK: all planeswalkers must be legendary
                 if (card.isPlaneswalker() && !card.getSuperType().contains(SuperType.LEGENDARY)) {
@@ -939,6 +944,16 @@ public class VerifyCardDataTest {
                             + " - " + card.getSecondCardFace().getName() + " - " + card.getSecondCardFace().getCardNumber());
                 }
                  */
+            }
+
+            // CHECK: double side cards must be in boosters
+            boolean hasBoosterSettings = (set.getNumBoosterDoubleFaced() > 0);
+            if (set.hasBoosters()
+                    && (set.getNumBoosterDoubleFaced() != -1) // -1 must ignore double cards in booster
+                    && containsDoubleSideCards
+                    && !hasBoosterSettings) {
+                errorsList.add("Error: set with boosters contains second side cards, but numBoosterDoubleFaced is not set - "
+                        + set.getCode() + " - " + set.getName());
             }
         }
 
