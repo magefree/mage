@@ -240,7 +240,6 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Sliver Construct", 1);
     }
 
-    @Ignore // currently fails
     @Test
     public void testManaDrainCopied() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 11);

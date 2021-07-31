@@ -4472,7 +4472,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 } else if (card instanceof Spell) {
                     final Spell spell = (Spell) card;
                     if (spell.isCopy()) {
-                        // Copied spell, only remove from stack
+                        // copied spell, only remove from stack
                         game.getStack().remove(spell, game);
                     }
                 }

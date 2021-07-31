@@ -65,7 +65,6 @@ import mage.util.MessageToClient;
 import mage.util.RandomUtil;
 import mage.util.functions.CopyApplier;
 import mage.watchers.Watcher;
-import mage.watchers.Watchers;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
 
@@ -2051,6 +2050,7 @@ public abstract class GameImpl implements Game, Serializable {
         // to exist the next time state-based actions are checked.
         //
         // Copied cards can be stored in GameState.copiedCards or in game state value (until LKI rework)
+        // Copied cards list contains all parts of split/adventure/mdfc
         Set<Card> allCopiedCards = new HashSet<>();
         allCopiedCards.addAll(this.getState().getCopiedCards());
         Map<String, Object> stateSavedCopiedCards = this.getState().getValues(GameState.COPIED_CARD_KEY);
@@ -2060,6 +2060,7 @@ public abstract class GameImpl implements Game, Serializable {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList())
         );
+        Set<Card> copiedCardsToRemove = new HashSet<>();
         for (Card copiedCard : allCopiedCards) {
             // 1. Zone must be checked from main card only cause mdf parts can have different zones
             //    (one side on battlefield, another side on outside)
@@ -2070,13 +2071,25 @@ public abstract class GameImpl implements Game, Serializable {
             Zone zone = state.getZone(copiedCard.getMainCard().getId());
             // TODO: remember LKI of copied cards here after LKI rework
             switch (zone) {
-                case BATTLEFIELD:
+                case OUTSIDE:
+                case BATTLEFIELD: {
+                    // keep in battlefield
+                    // keep in outside (it's a final zone for all copied cards)
                     continue;
-                case STACK:
-                    if (getStack().getStackObject(copiedCard.getId()) != null) {
+                }
+
+                case STACK: {
+                    // copied cards aren't moves and keeps in Stack zone after resolve,
+                    // so it must be moved manually as SBA (see Outside zone change at the end)
+                    MageObject object = getStack().getStackObject(copiedCard.getId());
+                    if (object != null) {
+                        // keep in stack until resolve
                         continue;
                     }
-                case GRAVEYARD:
+                    break;
+                }
+
+                case GRAVEYARD: {
                     for (Player player : getPlayers().values()) {
                         if (player.getGraveyard().contains(copiedCard.getId())) {
                             player.getGraveyard().remove(copiedCard);
@@ -2084,7 +2097,9 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                     break;
-                case HAND:
+                }
+
+                case HAND: {
                     for (Player player : getPlayers().values()) {
                         if (player.getHand().contains(copiedCard.getId())) {
                             player.getHand().remove(copiedCard);
@@ -2092,7 +2107,9 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                     break;
-                case LIBRARY:
+                }
+
+                case LIBRARY: {
                     for (Player player : getPlayers().values()) {
                         if (player.getLibrary().getCard(copiedCard.getId(), this) != null) {
                             player.getLibrary().remove(copiedCard.getId(), this);
@@ -2100,15 +2117,30 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                     break;
-                case EXILED:
+                }
+
+                case EXILED: {
                     getExile().removeCard(copiedCard, this);
                     break;
+                }
+
+                case COMMAND:
+                default: {
+                    break;
+                }
             }
 
-            // remove copied card info
-            this.getState().getCopiedCards().remove(copiedCard);
-            this.getState().removeValue(GameState.COPIED_CARD_KEY + copiedCard.getId().toString());
+            // copied card can be removed to Outside
+            copiedCardsToRemove.add(copiedCard);
         }
+        // real remove
+        copiedCardsToRemove.forEach(card -> {
+            card.setZone(Zone.OUTSIDE, this);
+            this.getState().getCopiedCards().remove(card);
+            // must keep card in game state as LKI alternative until LKI rework, so don't remove from it
+            // TODO: change after LKI rework
+            //this.getState().removeValue(GameState.COPIED_CARD_KEY + copiedCard.getId().toString());
+        });
 
         List<Permanent> legendary = new ArrayList<>();
         List<Permanent> worldEnchantment = new ArrayList<>();
