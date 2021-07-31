@@ -1923,7 +1923,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param choice
      */
     public void setChoice(TestPlayer player, boolean choice) {
-        setChoice(player, choice ? "Yes" : "No");
+        setChoice(player, choice, 1);
+    }
+
+    public void setChoice(TestPlayer player, boolean choice, int timesToChoose) {
+        setChoice(player, choice ? "Yes" : "No", timesToChoose);
     }
 
     public void setChoice(TestPlayer player, String choice) {

@@ -142,7 +142,7 @@ public class ModularTest extends CardTestPlayerBase {
 
         // put three -1/-1 counters on lancer, which leaves it with one +1/+1
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Puncture Blast", "Arcbound Lancer");
-        setChoice(playerA, "Yes", 2);
+        setChoice(playerA, true, 2);
         checkStackSize("stack1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1);
 
         // kill lancer with one +1/+1 counter on it

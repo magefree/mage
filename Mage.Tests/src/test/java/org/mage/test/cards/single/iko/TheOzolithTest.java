@@ -132,7 +132,7 @@ public class TheOzolithTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MURDER, FERTILID);
 
-        setChoice(playerA, "Yes", 2); // Move counters at beginning of combat
+        setChoice(playerA, true, 2); // Move counters at beginning of combat
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

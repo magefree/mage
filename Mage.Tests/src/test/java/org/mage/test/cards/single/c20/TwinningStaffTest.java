@@ -74,7 +74,7 @@ public class TwinningStaffTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, fork);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, disfigure, bear);
-        setChoice(playerA, "Yes", 2);
+        setChoice(playerA, true, 2);
         addTarget(playerA, elite, 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fork, disfigure, disfigure);
 

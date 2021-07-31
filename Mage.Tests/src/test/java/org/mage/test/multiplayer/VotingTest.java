@@ -208,7 +208,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, illusion);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
-        setChoice(playerA, "Yes", 4);
+        setChoice(playerA, true, 4);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -228,7 +228,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, illusion);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
-        setChoice(playerA, "Yes", 5);
+        setChoice(playerA, true, 5);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -250,7 +250,7 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, illusion);
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, illusion);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
-        setChoice(playerB, "Yes", 4);
+        setChoice(playerB, true, 4);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

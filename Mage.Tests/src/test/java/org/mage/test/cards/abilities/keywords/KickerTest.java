@@ -606,7 +606,7 @@ public class KickerTest extends CardTestPlayerBase {
         // Multikicker (You may pay an additional {B} any number of times as you cast this spell.)
         // When Bloodhusk Ritualist enters the battlefield, target opponent discards a card for each time it was kicked.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodhusk Ritualist");
-        setChoice(playerA, "Yes", 2); // 2 x Multikicker
+        setChoice(playerA, true, 2); // 2 x Multikicker
         setChoice(playerA, false); // stop the kicking
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Bloodhusk Ritualist");
         addTarget(playerA, playerB); // target for kicker's trigger (discard cards)
