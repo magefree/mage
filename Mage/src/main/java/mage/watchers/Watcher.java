@@ -1,5 +1,6 @@
 package mage.watchers;
 
+import mage.cards.Cards;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -131,6 +132,14 @@ public abstract class Watcher implements Serializable {
                             target.clear();
                             for (Map.Entry<Object, PlayerList> e : source.entrySet()) {
                                 PlayerList list = e.getValue().copy();
+                                target.put(e.getKey(), list);
+                            }
+                        } else if (valueType.getTypeName().endsWith("Cards")) {
+                            Map<Object, Cards> source = (Map<Object, Cards>) field.get(this);
+                            Map<Object, Cards> target = (Map<Object, Cards>) field.get(watcher);
+                            target.clear();
+                            for (Map.Entry<Object, Cards> e : source.entrySet()) {
+                                Cards list = e.getValue().copy();
                                 target.put(e.getKey(), list);
                             }
                         } else if (valueType.getTypeName().contains("List")) {
