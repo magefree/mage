@@ -58,7 +58,7 @@ public class DraftOptions extends LimitedOptions implements Serializable {
                 cardNum = 15;
             }
 
-            if (times.size() <= cardNum) {
+            if (times.size() >= cardNum) {
                 return times.get(cardNum - 1);
             } else {
                 return times.get(times.size() - 1);
