@@ -10,14 +10,14 @@ import java.io.Serializable;
 public class MageVersion implements Serializable, Comparable<MageVersion> {
 
     // version must be compatible with maven version numbers
-    // launcher can update only to newest version
+    // launcher can update only to the newest version
     // example: 1.4.48-V1-beta3
     // * 1.4.48 compares as numbers
     // * V1-beta3 is qualifier and compares as string
     // * launcher gives priority to 1.4.48 instead 1.4.48-any-text, so don't use empty release info
     public static final int MAGE_VERSION_MAJOR = 1;
     public static final int MAGE_VERSION_MINOR = 4;
-    public static final int MAGE_VERSION_RELEASE = 48;
+    public static final int MAGE_VERSION_RELEASE = 49;
     public static final String MAGE_VERSION_RELEASE_INFO = "V2"; // V1 for releases, V1-beta3 for betas
 
     // strict mode
