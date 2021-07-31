@@ -14,19 +14,18 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
-
 import java.util.UUID;
 import mage.abilities.common.AttackingCreaturePutIntoGraveyardTriggeredAbility;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 
 /**
  * @author TheElk801
  */
 public final class KardurDoomscourge extends CardImpl {
-    
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("an attacking creature");
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent("an attacking creature");
 
     static {
         filter.add(AttackingPredicate.instance);
