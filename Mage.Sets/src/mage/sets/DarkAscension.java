@@ -26,6 +26,7 @@ public final class DarkAscension extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.numBoosterDoubleFaced = 1;
         this.parentSet = Innistrad.getInstance();
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Afflicted Deserter", 81, Rarity.UNCOMMON, mage.cards.a.AfflictedDeserter.class));
