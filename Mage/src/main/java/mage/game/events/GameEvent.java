@@ -457,6 +457,7 @@ public class GameEvent implements Serializable {
         ROOM_ENTERED,
         VENTURE, VENTURED,
         DUNGEON_COMPLETED,
+        REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
         //custom events
         CUSTOM_EVENT
     }
