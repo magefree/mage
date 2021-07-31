@@ -22,6 +22,7 @@ import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
@@ -1258,6 +1259,10 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Permanent getSourcePermanentOrLKI(Game game) {
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getSourceId());
+        if (permanent instanceof PermanentToken) {
+            return permanent;
+        }
         if (getSourceObjectZoneChangeCounter() == 0
                 || getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(getSourceId())) {
             return game.getPermanent(getSourceId());

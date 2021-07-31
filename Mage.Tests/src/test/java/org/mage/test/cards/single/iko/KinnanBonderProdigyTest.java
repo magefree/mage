@@ -13,6 +13,7 @@ public class KinnanBonderProdigyTest extends CardTestPlayerBase {
     private static final String kinnan = "Kinnan, Bonder Prodigy";
     private static final String egg = "Golden Egg";
     private static final String hovermyr = "Hovermyr";
+    private static final String strike = "Strike It Rich";
 
     @Test
     public void testSacrificedPermanent() {
@@ -31,5 +32,24 @@ public class KinnanBonderProdigyTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, hovermyr, 1);
         assertPermanentCount(playerA, egg, 0);
         assertGraveyardCount(playerA, egg, 1);
+    }
+
+    @Test
+    public void testSacrificedToken() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, kinnan);
+        addCard(Zone.HAND, playerA, strike);
+        addCard(Zone.HAND, playerA, hovermyr);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, strike);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hovermyr);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, hovermyr, 1);
+        assertPermanentCount(playerA, "Treasure", 0);
     }
 }
