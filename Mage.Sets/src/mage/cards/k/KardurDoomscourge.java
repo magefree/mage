@@ -17,12 +17,20 @@ import mage.watchers.common.AttackedThisTurnWatcher;
 
 import java.util.UUID;
 import mage.abilities.common.AttackingCreaturePutIntoGraveyardTriggeredAbility;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AttackingPredicate;
 
 /**
  * @author TheElk801
  */
 public final class KardurDoomscourge extends CardImpl {
+    
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("an attacking creature");
+
+    static {
+        filter.add(AttackingPredicate.instance);
+    }
 
     public KardurDoomscourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
@@ -42,7 +50,7 @@ public final class KardurDoomscourge extends CardImpl {
         this.addAbility(ability);
 
         // Whenever an attacking creature dies, each opponent loses 1 life and you gain 1 life.
-        Ability ability2 = new AttackingCreaturePutIntoGraveyardTriggeredAbility(new LoseLifeOpponentsEffect(1), new FilterCreaturePermanent("an attacking creature"), false, true, false);
+        Ability ability2 = new AttackingCreaturePutIntoGraveyardTriggeredAbility(new LoseLifeOpponentsEffect(1), filter, false, true, false);
         ability2.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability2);
     }
