@@ -17,14 +17,21 @@ public class KinnanBonderProdigyTest extends CardTestPlayerBase {
 
     @Test
     public void testSacrificedPermanent() {
-        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        // Whenever you tap a nonland permanent for mana, add one mana of any type that permanent produced.
         addCard(Zone.BATTLEFIELD, playerA, kinnan);
+        //
+        // {1}, {T}, Sacrifice Golden Egg: Add one mana of any color.
         addCard(Zone.BATTLEFIELD, playerA, egg);
-        addCard(Zone.HAND, playerA, hovermyr);
+        //
+        addCard(Zone.HAND, playerA, hovermyr); // {2}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
 
+        // sacrifice egg and add additional mana
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1},");
+        setChoice(playerA, "Red");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hovermyr);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -36,15 +43,24 @@ public class KinnanBonderProdigyTest extends CardTestPlayerBase {
 
     @Test
     public void testSacrificedToken() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        // Whenever you tap a nonland permanent for mana, add one mana of any type that permanent produced.
         addCard(Zone.BATTLEFIELD, playerA, kinnan);
-        addCard(Zone.HAND, playerA, strike);
-        addCard(Zone.HAND, playerA, hovermyr);
+        //
+        // Create a Treasure token.
+        addCard(Zone.HAND, playerA, strike); // {R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        //
+        addCard(Zone.HAND, playerA, hovermyr); // {2}
 
+        // prepare treasure token
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, strike);
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}");
+
+        // sacrifice treasure and add additional mana
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
+        setChoice(playerA, "Red");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hovermyr);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();

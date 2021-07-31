@@ -71,6 +71,12 @@ public interface Game extends MageItem, Serializable {
 
     GameOptions getOptions();
 
+    /**
+     * Return object or LKI from battlefield
+     *
+     * @param objectId
+     * @return
+     */
     MageObject getObject(UUID objectId);
 
     MageObject getBaseObject(UUID objectId);

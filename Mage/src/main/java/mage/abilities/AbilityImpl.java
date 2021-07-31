@@ -22,7 +22,6 @@ import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
@@ -374,10 +373,7 @@ public abstract class AbilityImpl implements Ability {
 
         // fused spell contains 3 abilities (fused, left, right)
         // fused cost added to fused ability, so no need cost modification for other parts
-        boolean needCostModification = true;
-        if (CardUtil.isFusedPartAbility(this, game)) {
-            needCostModification = false;
-        }
+        boolean needCostModification = !CardUtil.isFusedPartAbility(this, game);
 
         //20101001 - 601.2e
         if (needCostModification && sourceObject != null) {
@@ -603,7 +599,7 @@ public abstract class AbilityImpl implements Ability {
                             manaSymbol = "W";
                         }
                         if (manaSymbol == null) {
-                            throw new UnsupportedOperationException("ManaFilter is not supported: " + this.toString());
+                            throw new UnsupportedOperationException("ManaFilter is not supported: " + this);
                         }
                         for (int i = 0; i < amountMana; i++) {
                             manaString.append('{').append(manaSymbol).append('}');
@@ -1094,7 +1090,7 @@ public abstract class AbilityImpl implements Ability {
         }
         MageObject object = game.getObject(this.sourceId);
         if (object == null) { // e.g. sacrificed token
-            logger.warn("Could get no object: " + this.toString());
+            logger.warn("Could get no object: " + this);
         }
         return new StringBuilder(" activates: ")
                 .append(object != null ? this.formatRule(getModes().getText(), object.getLogName()) : getModes().getText())
@@ -1243,6 +1239,7 @@ public abstract class AbilityImpl implements Ability {
     public MageObject getSourceObjectIfItStillExists(Game game) {
         if (getSourceObjectZoneChangeCounter() == 0
                 || getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(getSourceId())) {
+            // exists or lki from battlefield
             return game.getObject(getSourceId());
         }
         return null;
@@ -1259,15 +1256,11 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Permanent getSourcePermanentOrLKI(Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getSourceId());
-        if (permanent instanceof PermanentToken) {
-            return permanent;
+        Permanent permanent = getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getSourceObjectZoneChangeCounter());
         }
-        if (getSourceObjectZoneChangeCounter() == 0
-                || getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(getSourceId())) {
-            return game.getPermanent(getSourceId());
-        }
-        return (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getSourceObjectZoneChangeCounter());
+        return permanent;
     }
 
     @Override
