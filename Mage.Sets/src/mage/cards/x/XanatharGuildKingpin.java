@@ -21,7 +21,6 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-
 import java.util.Objects;
 import java.util.UUID;
 
@@ -71,7 +70,6 @@ class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEff
 
     public XanatharGuildKingpinRuleModifyingEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "choose target opponent";
     }
 
     private XanatharGuildKingpinRuleModifyingEffect(final XanatharGuildKingpinRuleModifyingEffect effect) {
@@ -162,16 +160,12 @@ class SpendManaAsAnyColorToCastTopOfLibraryTargetEffect extends AsThoughEffectIm
         UUID targetId = CardUtil.getMainCardId(game, fixedTarget.getTarget());
 
         Card topCard = game.getPlayer(source.getFirstTarget()).getLibrary().getFromTop(game);
-        // If top card of target opponent library changed discard the current ContinuousEffect and create a new one
-        if (!topCard.getId().equals(targetId)) {
-            // Keep the current ContinuousEffect alive while the spell is still on the stack
-            if (game.getState().getZone(targetId) != Zone.STACK) {
-                if (!this.isDiscarded()) {
-                    int zcc = game.getState().getZoneChangeCounter(topCard.getId());
-                    game.addEffect(new SpendManaAsAnyColorToCastTopOfLibraryTargetEffect().setTargetPointer(new FixedTarget(topCard.getId(), zcc)), source);
-                }
-                this.discard();
-            }
+
+        // If top card of target opponent's library changed, discard the current ContinuousEffect and create a new one
+        if (!topCard.getId().equals(targetId) && canLookAtNextTopLibraryCard(game) && !this.isDiscarded()) {
+            int zcc = game.getState().getZoneChangeCounter(topCard.getId());
+            game.addEffect(new SpendManaAsAnyColorToCastTopOfLibraryTargetEffect().setTargetPointer(new FixedTarget(topCard.getId(), zcc)), source);
+            this.discard();
         }
         return source.isControlledBy(affectedControllerId)
                 && Objects.equals(objectId, targetId)
