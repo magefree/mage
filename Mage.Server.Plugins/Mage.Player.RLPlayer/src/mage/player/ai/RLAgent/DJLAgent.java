@@ -15,19 +15,21 @@ import ai.djl.nn.core.*;
 import ai.djl.ndarray.*;
 import ai.djl.ndarray.types.*;
 import ai.djl.ndarray.index.*;
+import java.util.concurrent.ThreadLocalRandom;   
 
 public class DJLAgent{
     public Representer representer;
-    PyConnection conn;
     private static final Logger logger = Logger.getLogger(DJLAgent.class);
     List<RepresentedState> experience;
-    NDManager nd;
-    DJLPolicy policy;
+    NDManager baseND;
+    Policy policy;
+    Critic critic;
     public DJLAgent(){
         representer=new Representer();
         experience=new ArrayList<RepresentedState>();
-        nd=NDManager.newBaseManager();
-        policy=new DJLPolicy();
+        baseND=NDManager.newBaseManager();
+        policy=new Policy();
+        critic=new Critic();
     }
     public void trainIfReady(){
         if(experience.size()>HParams.expForTrain){
@@ -35,37 +37,44 @@ public class DJLAgent{
         }
     } 
     void train(){
-        NDList netInput=prepare(experience);
-        NDArray baseLogProbs=policy.logProbs(netInput);
-        int numExp=experience.size();
-        float[] arrRewards=new float[numExp];
-        int[] arrChosenActs=new int[numExp];
-        for(int i=0;i<experience.size();i++){
-            arrRewards[i]=experience.get(i).reward;
-            arrChosenActs[i]=experience.get(i).chosenAction;
+        try(NDManager nd=baseND.newSubManager();){
+            NDList netInput=prepare(nd,experience);
+            for(int i=0;i<netInput.size();i++){
+                netInput.get(i).setRequiresGradient(true);
+            }
+            NDArray baseLogProbs=policy.logProbs(netInput);
+            int numExp=experience.size();
+            float[] arrRewards=new float[numExp];
+            int[] arrChosenActs=new int[numExp];
+            for(int i=0;i<experience.size();i++){
+                arrRewards[i]=experience.get(i).reward;
+                arrChosenActs[i]=experience.get(i).chosenAction;
+            }
+            NDArray rewards=nd.create(arrRewards, new Shape(numExp,1));
+            int actionSize=(int) netInput.get(0).getShape().get(1);
+            NDArray actsTaken=nd.create(arrChosenActs, new Shape(numExp)).oneHot(actionSize);
+            NDArray predReward=nd.zeros(rewards.getShape());
+            NDList label=new NDList(actsTaken,predReward,rewards,baseLogProbs);
+            /*for(int i=0;i<label.size();i++){
+                label.get(i).setRequiresGradient(true);
+            }*/
+            policy.train(nd.newSubManager(),netInput,label);
+            experience=new ArrayList<RepresentedState>();
         }
-        NDArray rewards=nd.create(arrRewards, new Shape(numExp,1));
-        int actionSize=(int) netInput.get(0).getShape().get(1);
-        NDArray actsTaken=nd.create(arrChosenActs, new Shape(numExp)).oneHot(actionSize);
-        NDArray predReward=nd.zeros(rewards.getShape());
-        NDList label=new NDList(actsTaken,predReward,rewards,baseLogProbs);
-        for(int i=0;i<label.size();i++){
-            label.get(i).setRequiresGradient(true);
-        }
-        policy.train(nd.newSubManager(),netInput,label);
     }
     public int choose(Game game, RLPlayer player, List<RLAction> actions){
         RepresentedState state=representer.represent(game, player, actions);
         List<RepresentedState> stateSingle=new ArrayList<RepresentedState>();
         stateSingle.add(state);
-        NDList netInput=prepare(stateSingle);
-        NDArray logProbs=policy.logProbs(netInput);
-        int choice=sample(logProbs);
-        assertTrue(choice < actions.size());
-        System.out.println("choice is "+choice+" with size "+actions.size());
-        state.chosenAction=choice;
-        player.addExperience(state);
-        return choice;
+        try(NDManager nd=baseND.newSubManager();){
+            NDList netInput=prepare(nd,stateSingle);
+            NDArray logProbs=policy.logProbs(netInput);
+            int choice=sample(logProbs);
+            assertTrue(choice < actions.size());
+            state.chosenAction=choice;
+            player.addExperience(state);
+            return choice;
+        }
     }
     public void addExperiences(List<RepresentedState> exp){
         //TODO add rewards
@@ -73,14 +82,14 @@ public class DJLAgent{
     }
     int sample(NDArray logProbs){
         NDArray probs=logProbs.exp();
-        System.out.println("probs are "+probs);
         probs=probs.reshape(-1);
         probs=probs.div(probs.sum()); //This extra normalization is needed to ensure that 
         //The true sum is less than 1+1e-12, or it will crash. Rounding error ensures that 
         //happens without the extra normalization
 
         //the builtin randomMultinomial is broken, so I am writing my own implementation of it
-        float target=(float) Math.random();
+        float target=ThreadLocalRandom.current().nextFloat();
+        float origTarget=target;
         int i=0;
         while(target>probs.getFloat(i)){
             target-=probs.getFloat(i);
@@ -88,59 +97,73 @@ public class DJLAgent{
         }
         return i;
     }
-    NDArray listToNDArray2D(List<List<Integer>> data,int nestedSize){
-        NDArray arr=nd.zeros(new Shape(data.size(),nestedSize),DataType.INT32);
+    //These series of functions are returining java arrays becuase there is an 
+    //overhead on each DJL operation so setting values 1 by 1 in the array
+    //becomes a bottleneck according to a profiler
+    int[][] listToArray2D(List<List<Integer>> data,int nestedSize){
+        int[][] res=new int[data.size()][nestedSize];
         for(int i=0;i<data.size();i++){
             if(data.get(i).size()!=nestedSize){
                 throw new IllegalStateException("Wrong size provided for array creation");
             }
             for(int j=0;j<nestedSize;j++){
-                arr.setScalar(new NDIndex(i,j), data.get(i).get(j));
+                res[i][j]=data.get(i).get(j);
             }
         }
-        return arr;
+        return res;
     }
     //Requires all input arrays the same shape in second dimention
     //Returns the arrays stacked and a mask where the stacked 
     //values are 
-    List<NDArray> paddedStack(List<NDArray> inputs,int nestedSize){
-        long maxSize=0;
+    List<NDArray> paddedStack(NDManager nd,List<int[][]> inputs,int nestedSize){
+        int maxSize=0;
         for(int i=0;i<inputs.size();i++){
-            long arrSize=inputs.get(i).getShape().get(0);
+            int arrSize=inputs.get(i).length;
             if(arrSize>maxSize) maxSize=arrSize;
         }
-        NDArray data=nd.zeros(new Shape(inputs.size(),maxSize,nestedSize),DataType.INT32);
-        NDArray mask=nd.zeros(new Shape(inputs.size(),maxSize));
+        int[][] data=new int[inputs.size()*maxSize][nestedSize];//Must be 2D to allow for transformation
+        //into NDarray becuase DJL can't create an array from a 3D inputs 
+        int[][] mask=new int[inputs.size()][maxSize];
         for(int i=0;i<inputs.size();i++){
-            NDIndex setLoc=new NDIndex(i+",0:"+inputs.get(i).getShape().get(0));
-            data.set(setLoc, inputs.get(i));
-            for(int j=0;j<inputs.get(i).getShape().get(0);j++){
-                mask.set(new NDIndex(i,j),1);
+            int[][] slice=inputs.get(i);
+            assertTrue(slice.length<=maxSize);
+            for(int j=0;j<slice.length;j++){
+                assertTrue(slice[j].length==nestedSize);
+                for(int k=0;k<nestedSize;k++){
+                    data[i*maxSize+j][k]=slice[j][k];
+                }
+                mask[i][j]=1;
             }
         }
-        List<NDArray> result=new ArrayList<NDArray>();
-        result.add(data);
-        result.add(mask);
-        return result;
+        NDArray NDdata;
+        if(maxSize>0){
+            NDdata=nd.create(data);
+        }else{
+            NDdata=nd.zeros(new Shape(0));//will be reshaped to right size later
+        }
+
+        NDdata=NDdata.reshape(inputs.size(),maxSize,nestedSize);
+        NDArray NDmask=nd.create(mask);
+        return new NDList(NDdata,NDmask);
     }
-    NDList prepare(List<RepresentedState> states){
-        List<NDArray> unstackedActions=new ArrayList<NDArray>();
-        List<NDArray> unstackedPermanents=new ArrayList<NDArray>();
-        NDArray gameInts=nd.create(new Shape(states.size(),HParams.numGameInts),DataType.INT32);
+    NDList prepare(NDManager nd,List<RepresentedState> states){
+        List<int[][]> unstackedActions=new ArrayList<int[][]>();
+        List<int[][]> unstackedPermanents=new ArrayList<int[][]>();
+        int[][] gameInts=new int[states.size()][HParams.numGameInts]; 
         for(int i=0;i<states.size();i++){
-            unstackedActions.add(listToNDArray2D(states.get(i).actions,HParams.actionParts));
-            unstackedPermanents.add(listToNDArray2D(states.get(i).permanents,HParams.numPermParts));
-            List<Integer> stateGameInts=states.get(i).gameInts;
+            unstackedActions.add(listToArray2D(states.get(i).actions,HParams.actionParts));
+            unstackedPermanents.add(listToArray2D(states.get(i).permanents,HParams.numPermParts));
             for(int j=0;j<HParams.numGameInts;j++){
-                gameInts.setScalar(new NDIndex(i,j), stateGameInts.get(j));
+                gameInts[i][j]=states.get(i).gameInts.get(j);
             }
         }
-        List<NDArray> actions=paddedStack(unstackedActions, HParams.actionParts);
-        List<NDArray> permanents=paddedStack(unstackedActions, HParams.actionParts);
+        List<NDArray> actions=paddedStack(nd,unstackedActions, HParams.actionParts);
+        List<NDArray> permanents=paddedStack(nd,unstackedPermanents, HParams.numPermParts);
+        NDArray NDGameInts=nd.create(gameInts);
         NDList result=new NDList();
         result.addAll(actions);
         result.addAll(permanents);
-        result.add(gameInts);
+        result.add(NDGameInts);
         return result;
     }
 }

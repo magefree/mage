@@ -55,7 +55,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>mage-player-ai-rl</artifactId>
+            <artifactId>mage-player-randomplayer</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>

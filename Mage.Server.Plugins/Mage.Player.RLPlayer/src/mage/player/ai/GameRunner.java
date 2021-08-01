@@ -18,6 +18,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
+import mage.cards.repository.CardRepository;
 import mage.player.ai.RLPlayer;
 import mage.player.ai.RLAgent.*;
 import java.io.FileNotFoundException;
@@ -32,10 +33,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.json.simple.JSONObject;
+import mage.cards.repository.CardScanner;
+import java.util.stream.Collectors;
 
 /**
  * @author ayratn
- * Modified by Elchanan Haas
+ * Adapted by Elchanan Haas
  */
 
 public class  GameRunner{
@@ -46,13 +49,28 @@ public class  GameRunner{
     public DJLAgent agent;
     public GameRunner(){
         agent=new DJLAgent();
+        buildDB();
+    }
+
+    void buildDB() {
+        // load all cards to db from class list
+        ArrayList<String> errorsList = new ArrayList<>();
+        if (CardRepository.instance.findCard("Mountain") != null) {
+            CardScanner.scanned = true;
+        }
+        CardScanner.scan(errorsList);
+
+        if (errorsList.size() > 0) {
+            logger.error("Found errors on card loading: " + '\n' + errorsList.stream().collect(Collectors.joining("\n")));
+        }
     }
     public void playGames(int number) throws GameException, FileNotFoundException, IllegalArgumentException{
-        int netWins=0;
+        int wins=0;
         String deckLoc="/home/elchanan/java/mage/Mage.Tests/RBTestAggro.dck";
-        for(int count=0;count<number;count++){
-            netWins+=playOneGame(deckLoc,deckLoc,true);
-            System.out.println("netWins is "+netWins+" at timestep "+count);
+        for(int count=1;count<=number;count++){
+            int score=playOneGame(deckLoc,deckLoc,true);
+            if(score==1) wins++;
+            System.out.println("Wins is "+wins+" at timestep "+count);
         }
     }
     public int playOneGame(String deck1loc,String deck2loc,boolean player2random) throws GameException, FileNotFoundException, IllegalArgumentException {
@@ -116,9 +134,6 @@ public class  GameRunner{
         StringBuilder errormsg= new StringBuilder(); 
         list=DeckImporter.importDeckFromFile(name, errormsg,true);
         if(errormsg.length()>0) logger.info(errormsg.toString());
-        //for(int i=0;i<list.getCards().size();i++){
-        //    logger.info(list.getCards().get(i).getCardName());
-        //}
         Deck deck;
         try{
             deck = Deck.load(list, false, false);

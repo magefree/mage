@@ -25,6 +25,7 @@ import ai.djl.training.Trainer;
 import ai.djl.training.dataset.ArrayDataset;
 import ai.djl.training.dataset.Batch;
 import ai.djl.training.listener.TrainingListener;
+import ai.djl.training.loss.L2Loss;
 import ai.djl.training.loss.Loss;
 import ai.djl.training.optimizer.Optimizer;
 import ai.djl.training.tracker.Tracker;
@@ -37,14 +38,14 @@ import ai.djl.translate.Translator;
 import java.io.IOException;
 import java.nio.file.*;
 
-public class DJLPolicy {
+public class BaseNet {
     Model net;
     Trainer train;
     Predictor<NDList,NDList> pred;
     boolean synced=false;
-    DJLPolicy(){
+    BaseNet(Loss loss){
         net=makeModel();
-        train=makeTrainer(net);
+        train=makeTrainer(net,loss);
         syncPredictor();
     }
     void train(NDManager nd,NDList inputs,NDList labels){
@@ -59,7 +60,7 @@ public class DJLPolicy {
         pred=net.newPredictor(new NoopTranslator());
         synced=true;
     }
-    NDArray logProbs(NDList input){
+    NDArray predict(NDList input){
         if(!synced){
             syncPredictor();
         }
@@ -76,10 +77,9 @@ public class DJLPolicy {
         }
         return res; 
     } 
-    Trainer makeTrainer(Model model){
+    Trainer makeTrainer(Model model,Loss loss){
         Tracker lrt = Tracker.fixed(0.003f);
         Optimizer adam=Optimizer.adam().optLearningRateTracker(lrt).setRescaleGrad(1).build();
-        Loss loss=new PPOLoss();
         DefaultTrainingConfig config = new DefaultTrainingConfig(loss)
         .optOptimizer(adam)
         .addTrainingListeners(TrainingListener.Defaults.logging());
@@ -90,8 +90,8 @@ public class DJLPolicy {
         return trainer;
     }
     Model makeModel(){
-        Model model = Model.newInstance("policy-net");
-        DJLBlock block=new DJLBlock();
+        Model model = Model.newInstance("critic-net");
+        BaseBlock block=new BaseBlock();
         model.setBlock(block);
         return model;
     }

@@ -5,6 +5,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.MageObject;
 import java.util.*;
+import mage.player.ai.RandomPlayer;
 
 public class RandomNonTappingPlayer extends RandomPlayer{
     public RandomNonTappingPlayer(String name) {

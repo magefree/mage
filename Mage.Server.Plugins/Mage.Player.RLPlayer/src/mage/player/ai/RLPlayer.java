@@ -42,16 +42,17 @@ import mage.player.ai.RLAction;
  * @author Elchanan Haas
  */
 
-public class RLPlayer extends RandomNonTappingPlayer{
+public class RLPlayer extends ComputerPlayer{
     public DJLAgent learner;
     private static final Logger logger = Logger.getLogger(RLPlayer.class);
     List<RepresentedState> experiences=new ArrayList<RepresentedState>();
+    private PassAbility pass = new PassAbility();
     public RLPlayer(String name , RangeOfInfluence range, int skill){
-        super(name);
+        super(name,RangeOfInfluence.ALL);
         learner=new DJLAgent();
     }
     public RLPlayer(String name,DJLAgent inLearner) {  
-        super(name);
+        super(name,RangeOfInfluence.ALL);
         learner=inLearner;
     }
     public void addExperience(RepresentedState state){
@@ -69,9 +70,10 @@ public class RLPlayer extends RandomNonTappingPlayer{
             reward=-1;
         }
         for(int i=0;i<experiences.size();i++){
-            experiences.get(i).reward=((float) reward)/experiences.size();
+            experiences.get(i).reward=((float) reward);
         }
         learner.addExperiences(experiences);
+        experiences=new ArrayList<RepresentedState>();
     }
     public RLPlayer(final RLPlayer player) {
         super(player);   
@@ -105,6 +107,19 @@ public class RLPlayer extends RandomNonTappingPlayer{
             }
         }
     }
+
+    @Override
+    public boolean priority(Game game) {
+        boolean didSomething = false;
+        Ability ability = getAction(game);
+        if (!(ability instanceof PassAbility)) {
+            didSomething = true;
+        }
+
+        activateAbility((ActivatedAbility) ability, game);
+        return didSomething;
+    }
+
     private Ability chooseAbility(Game game, List<Ability> options){
         Ability ability=pass;
         List<String> names=new ArrayList<String>();
@@ -140,8 +155,26 @@ public class RLPlayer extends RandomNonTappingPlayer{
         }
         return ability;
     }
+    protected List<ActivatedAbility> getPlayableAbilities(Game game) {
+        List<ActivatedAbility> playables = getPlayable(game, true);
+        playables.add(pass);
+        return playables;
+    }
+    protected List<ActivatedAbility> getFilteredPlayableAbilities(Game game){
+        List<ActivatedAbility> playables=getPlayableAbilities(game);
+        List<ActivatedAbility> filtered=new ArrayList<ActivatedAbility>();
+        for(int i=0;i<playables.size();i++){
+            MageObject source=playables.get(i).getSourceObjectIfItStillExists(game);
+            if(source!=null && source instanceof Permanent && source.isLand()){
+                //Don't allow just tapping a land to be an action
+                //May break lands with activated abilities
+                continue;
+            }
+            filtered.add(playables.get(i));
+        }
+        return filtered;
+    }
 
-    @Override
     protected Ability getAction(Game game) {
         //logger.info("Getting action");
         List<ActivatedAbility> playables =getFilteredPlayableAbilities(game);//already contains pass
@@ -163,7 +196,7 @@ public class RLPlayer extends RandomNonTappingPlayer{
     }
 
     @Override
-    public void selectAttackers(Game game, UUID attackingPlayerId) { //Recorded by AI now!
+    public void selectAttackers(Game game, UUID attackingPlayerId) { 
         //logger.info("life total of " + getName() +" is "+getLife());
         UUID defenderId = game.getOpponents(playerId).iterator().next();
         List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
@@ -180,7 +213,6 @@ public class RLPlayer extends RandomNonTappingPlayer{
                 }
             }
         }
-        actionCount++;
     }
 
     @Override
@@ -201,29 +233,28 @@ public class RLPlayer extends RandomNonTappingPlayer{
         List<Permanent> blockers = getAvailableBlockers(game);
         for (Permanent blocker : blockers) {
             List<RLAction> actions=new ArrayList<RLAction>();
-            List<CombatGroup> groups=game.getCombat().getGroups();
+            List<CombatGroup> rawGroups=game.getCombat().getGroups();
             List<CombatGroup> nonZeroGroups=new ArrayList<CombatGroup>();
             for(int i=0;i<numGroups;i++){
-                List<UUID> groupIDs=groups.get(i).getAttackers();
+                List<UUID> groupIDs=rawGroups.get(i).getAttackers();
                 if(groupIDs.size()>0){
                     UUID attacker=groupIDs.get(0);
                     String attackerName="BlockAttacker:"+game.getPermanent(attacker).getName();
                     String blockerName="Blocker:"+blocker.getName();
                     actions.add(new RLAction(blockerName, attackerName));
-                    nonZeroGroups.add(groups.get(i));
+                    nonZeroGroups.add(rawGroups.get(i));
                 }
             } 
             actions.add(new RLAction("Blocker:"+blocker.getName(), "NoAttackerToBlock"));
             int choice=learner.choose(game,this,actions);
             assertTrue(actions.size()==nonZeroGroups.size()+1);
-            if (choice<groups.size()) { //Not the last one where no block occurs
+            if (choice<nonZeroGroups.size()) { //Not the last one where no block occurs
                 CombatGroup group = nonZeroGroups.get(choice);
                 if (!group.getAttackers().isEmpty()) {
                     this.declareBlocker(this.getId(), blocker.getId(), group.getAttackers().get(0), game);
                 }
             }
         }
-        actionCount++;
     }
     private String namePlayer(UUID playerId){
         if(playerId==getId()){
@@ -283,27 +314,31 @@ public class RLPlayer extends RandomNonTappingPlayer{
         if (targetSet.isEmpty()) {
             return false;
         }
+        boolean required = target.isRequired(source);
+        if (target.getTargets().size() >= target.getNumberOfTargets()) {
+            required = false;
+        }
         List<UUID> targets=new ArrayList<UUID>(targetSet);
-        if (target.isRequired(source) && targets.size() == 1) {
+        if (required && targets.size() == 1) {
             target.addTarget(targets.get(0), source, game); // todo: addtryaddtarget or return type (see computerPlayer)
             return true;
         }
         List<RLAction> actions=new ArrayList<RLAction>();
+        String causeName;
+        if(source!=null){
+            MageObject cause=source.getSourceObject(game);
+            causeName="TargetAbility:"+cause.getName();
+        }
+        else{
+            causeName="TargetAbility:None";
+        }
         for(int i=0;i<targets.size();i++){
             UUID thingId=targets.get(i);
             String name="Target:"+nameUUID(thingId, game);
-            String causeName;
-            if(source!=null){
-                MageObject cause=source.getSourceObject(game);
-                causeName="TargetAbility:"+cause.getName();
-            }
-            else{
-                causeName="TargetAbility:None";
-            }
             actions.add(new RLAction(name,causeName));
         }
-        if (!target.isRequired(source)) {
-            actions.add(new RLAction("Target:None","TargetAbility:None"));
+        if (!required) {
+            actions.add(new RLAction("Target:None",causeName));
         }
         int choice=learner.choose(game,this,actions);
         if(choice==targets.size()){
@@ -313,29 +348,46 @@ public class RLPlayer extends RandomNonTappingPlayer{
         return true;
     }
 
-
+    
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
-        //System.out.println("Chose target with source");
-        Set<UUID> targetSet = target.possibleTargets(playerId, game);
+        //System.out.println("Chose target with source"+outcome+" "+target);
+        Set<UUID> targetSet = target.possibleTargets(sourceId,playerId, game);
         if (targetSet.isEmpty()) {
             return false;
         }
+        boolean required = target.isRequired(sourceId, game);
+        if (target.getTargets().size() >= target.getNumberOfTargets()) {
+            required = false;
+        }
+
         List<UUID> targets=new ArrayList<UUID>(targetSet);
-        if (targets.size() == 1) {
+        if (required && targets.size() == 1) {
             target.add(targets.get(0), game); // todo: addtryaddtarget or return type (see computerPlayer)
             return true;
         }
         List<RLAction> actions=new ArrayList<RLAction>();
+        String causeName="TargetSource:"+nameUUID(sourceId, game);
         for(int i=0;i<targets.size();i++){
             UUID thingId=targets.get(i);
             String name="Target:"+nameUUID(thingId, game);
-            String causeName;
-            causeName="TargetSource:"+nameUUID(sourceId, game);
             actions.add(new RLAction(name,causeName));
         }
-        int choice=learner.choose(game,this,actions);
-        target.add(targets.get(choice), game);
+        if (!required) {
+            actions.add(new RLAction("Target:None",causeName));
+        }
+        boolean added=false;
+        while(target.getTargets().size()<target.getMinNumberOfTargets() || target.getNumberOfTargets()==0){
+            int choice=learner.choose(game,this,actions);
+            if(choice==targets.size() ){
+               return added; 
+            }
+            target.add(targets.get(choice), game);
+            actions.remove(choice);
+            targets.remove(choice);
+            added=true;
+            if(target.getTargets().size()==target.getMaxNumberOfTargets()) break;
+        }
         return true;
     }
 }

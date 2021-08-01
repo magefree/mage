@@ -1203,7 +1203,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                         if (!playableAbilities.isEmpty()) {
                             for (ActivatedAbility ability : playableAbilities) {
                                 if (ability.canActivate(playerId, game).canActivate()) {
-                                    if (!(ability.getEffects().get(0) instanceof BecomesCreatureSourceEffect)) {
+                                    if (ability.getEffects().size()>0 && !(ability.getEffects().get(0) instanceof BecomesCreatureSourceEffect)) {
                                         if (this.activateAbility(ability, game)) {
                                             return true;
                                         }

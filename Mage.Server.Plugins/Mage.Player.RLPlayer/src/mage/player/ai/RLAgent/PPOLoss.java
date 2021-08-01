@@ -46,21 +46,22 @@ public class PPOLoss extends Loss{
         NDArray predReward=labels.get(1);
         NDArray reward=labels.get(2);
         NDArray baseLogProb=labels.get(3);
-        NDArray res=baseLogProb.sub(baseLogProb.mean()).square().mean();
-        return res;
-        /*NDArray logProbs=predictions.singletonOrThrow();
+        NDArray logProbs=predictions.singletonOrThrow();
+
         NDArray advantage1D=reward.sub(predReward);
         advantage1D=advantage1D.sub(advantage1D.mean()); //Normalize mean of advantage1D to 0
         advantage1D=advantage1D.div(std(advantage1D).add(1e-5)); //and standard deviation 1
-        //1e-5 is added to prevent division by 0
-        NDArray advantage=actTaken.mul(advantage1D);
+        //TODO change line below when switching to PPO
+        NDArray advantage=actTaken.mul(reward);
+        //NDArray advantage=actTaken.mul(advantage1D);
+
         NDArray action_ratio=logProbs.sub(baseLogProb).exp();
-        NDArray unclipped=advantage.mul(action_ratio);
+        NDArray unclipped=action_ratio.mul(advantage);
         float eps=.1f;
-        NDArray clipped=advantage.mul(action_ratio.clip(1-eps, 1+eps));
+        NDArray clipped=action_ratio.clip(1-eps, 1+eps).mul(advantage);
         NDArray loss=unclipped.minimum(clipped);
         loss=loss.sum(new int[]{1});
-        return loss.mean();*/
+        return loss.mean().mul(-1);
     }
     NDArray std(NDArray centeredData){
         return centeredData.square().mean().sqrt();
