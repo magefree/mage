@@ -431,7 +431,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             StackObject stackObject = game.getStack().getFirst();
             return !(stackObject instanceof Spell)
                     || !Zone.LIBRARY.equals(((Spell) stackObject).getFromZone())
-                    || ((Spell) stackObject).getCurrentActivatingManaAbilitiesStep() == ActivationManaAbilityStep.AFTER; // mana payment finished
+                    || stackObject.getStackAbility().getManaCostsToPay().isPaid(); // mana payment finished
         }
         return true;
     }
