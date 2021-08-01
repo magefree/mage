@@ -5,6 +5,7 @@
  */
 package mage.abilities.common;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -13,7 +14,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import static mage.game.events.GameEvent.EventType.DECLARE_ATTACKERS_STEP;
 import static mage.game.events.GameEvent.EventType.END_COMBAT_STEP_POST;
 import static mage.game.events.GameEvent.EventType.REMOVED_FROM_COMBAT;
 import static mage.game.events.GameEvent.EventType.ZONE_CHANGE;
@@ -52,7 +52,7 @@ public class AttackingCreaturePutIntoGraveyardTriggeredAbility extends Triggered
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         switch (event.getType()) {
-            case DECLARE_ATTACKERS_STEP:
+            case ATTACKER_DECLARED:
             case END_COMBAT_STEP_POST:
             case ZONE_CHANGE:
             case REMOVED_FROM_COMBAT:
@@ -65,13 +65,19 @@ public class AttackingCreaturePutIntoGraveyardTriggeredAbility extends Triggered
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         switch (event.getType()) {
-            case DECLARE_ATTACKERS_STEP:
-                Permanent permanent = game.getPermanent(event.getTargetId());
+            case ATTACKER_DECLARED:
+                Permanent permanent = game.getPermanent(event.getSourceId());
                 if (permanent != null
                         && !filterPermanent.match(permanent, game)) {
                     return false;
                 }
-                game.getState().setValue(this.getSourceId() + "Attackers", game.getCombat().getAttackers());
+                List<UUID> attackersList = new ArrayList<>();
+                List<UUID> attackersListCopy = (List<UUID>) game.getState().getValue(this.getSourceId() + "Attackers");
+                if (attackersListCopy == null) {
+                    attackersListCopy = attackersList;
+                }
+                attackersListCopy.add(event.getSourceId()); // add the filtered creature to the list
+                game.getState().setValue(this.getSourceId() + "Attackers", attackersListCopy);
                 return false;
             case END_COMBAT_STEP_POST:
                 game.getState().setValue(this.getSourceId() + "Attackers", null);
@@ -94,11 +100,11 @@ public class AttackingCreaturePutIntoGraveyardTriggeredAbility extends Triggered
                 }
             case REMOVED_FROM_COMBAT:
                 // a card removed from combat is no longer an attacker or blocker so remove it from the list
-                List<UUID> attackersList = (List<UUID>) game.getState().getValue(this.getSourceId() + "Attackers");
-                if (attackersList != null
-                        && attackersList.contains(event.getTargetId())) {
-                    attackersList.remove(event.getTargetId());
-                    game.getState().setValue(this.getSourceId() + "Attackers", attackersList);
+                List<UUID> attackersListRFC = (List<UUID>) game.getState().getValue(this.getSourceId() + "Attackers");
+                if (attackersListRFC != null
+                        && attackersListRFC.contains(event.getTargetId())) {
+                    attackersListRFC.remove(event.getTargetId());
+                    game.getState().setValue(this.getSourceId() + "Attackers", attackersListRFC);
                 }
 
             default:
