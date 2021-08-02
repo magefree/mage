@@ -72,6 +72,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cultivate", 155, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Curator of Mysteries", 81, Rarity.RARE, mage.cards.c.CuratorOfMysteries.class));
         cards.add(new SetCardInfo("Curse of Verbosity", 82, Rarity.UNCOMMON, mage.cards.c.CurseOfVerbosity.class));
+        cards.add(new SetCardInfo("Danse Macabre", 22, Rarity.RARE, mage.cards.d.DanseMacabre.class));
         cards.add(new SetCardInfo("Dark-Dweller Oracle", 119, Rarity.RARE, mage.cards.d.DarkDwellerOracle.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 232, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Dead Man's Chest", 97, Rarity.RARE, mage.cards.d.DeadMansChest.class));
