@@ -68,7 +68,7 @@ class CeaselessSearbladesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
+        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY || event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override
