@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -16,14 +14,15 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Will
  */
 public final class CeaselessSearblades extends CardImpl {
-   
+
     public CeaselessSearblades(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.WARRIOR);
 
@@ -32,9 +31,9 @@ public final class CeaselessSearblades extends CardImpl {
 
         // Whenever you activate an ability of an Elemental, Ceaseless Searblades gets +1/+0 until end of turn.
         this.addAbility(new CeaselessSearbladesTriggeredAbility());
-        
+
     }
-    
+
     private CeaselessSearblades(final CeaselessSearblades card) {
         super(card);
     }
@@ -68,22 +67,25 @@ class CeaselessSearbladesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
+        // can be normal and mana abilities
         return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY || event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (event.getPlayerId().equals(getControllerId())
-            && source != null
-            && filter.match(source, game)) {
-            return true;
+        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA && game.inCheckPlayableState()) {
+            // ignore mana abilities on playable checking
+            return false;
         }
-        return false;
+
+        Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        return event.getPlayerId().equals(getControllerId())
+                && source != null
+                && filter.match(source, game);
     }
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever you activate an ability of an Elemental, " ;
+        return "Whenever you activate an ability of an Elemental, ";
     }
 }
