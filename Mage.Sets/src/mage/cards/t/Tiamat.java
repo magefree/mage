@@ -44,7 +44,7 @@ public final class Tiamat extends CardImpl {
 
         // When Tiamat enters the battlefield, if you cast it, search your library for up to five Dragon cards named Tiama that each have different names, reveal them, put them into your hand, then shuffle.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TiamatTarget())),
+                new SearchLibraryPutInHandEffect(new TiamatTarget(), true, true, )),
                 CastFromEverywhereSourceCondition.instance, "When {this} enters the battlefield, " +
                 "if you cast it, search your library for up to five Dragon cards not named Tiamat " +
                 "that each have different names, reveal them, put them into your hand, then shuffle."
