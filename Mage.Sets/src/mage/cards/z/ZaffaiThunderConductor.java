@@ -80,6 +80,7 @@ class ZaffaiThunderConductorEffect extends OneShotEffect {
             return true;
         }
         TargetOpponent target = new TargetOpponent(true);
+        target.setRandom(true);
         player.chooseTarget(outcome, target, source, game);
         Player opponent = game.getPlayer(target.getFirstTarget());
         opponent.damage(10, source.getSourceId(), source, game);
