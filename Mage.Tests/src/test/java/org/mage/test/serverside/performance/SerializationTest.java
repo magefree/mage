@@ -61,6 +61,21 @@ public class SerializationTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_Single_KentaroTheSmilingCat() {
+        CardInfo cardInfo = CardRepository.instance.findCard("Kentaro, the Smiling Cat");
+        Card newCard = cardInfo.getCard();
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+        PermanentImpl permanent = new PermanentCard(permCard, playerA.getId(), currentGame);
+        currentGame.addPermanent(permanent, 0);
+
+        // test compress (it uses default java serialization)
+        Object compressed = CompressUtil.compress(permanent);
+        Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
+        PermanentImpl uncompressed = (PermanentImpl) CompressUtil.decompress(compressed);
+        Assert.assertEquals("Must be same", permanent.getName(), uncompressed.getName());
+    }
+
+    @Test
     public void test_LondonMulligan() {
         LondonMulligan mulligan = new LondonMulligan(15);
         Object compressed = CompressUtil.compress(mulligan);
