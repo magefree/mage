@@ -70,23 +70,25 @@ class ZaffaiThunderConductorEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
+
         player.scry(1, source, game);
         Spell spell = (Spell) getValue(MagecraftAbility.SPELL_KEY);
         if (spell == null || spell.getManaValue() < 5) {
-            return false;
+            return true;
         }
+
         new Elemental44Token().putOntoBattlefield(1, game, source, source.getControllerId());
         if (spell.getManaValue() < 10) {
             return true;
         }
+
         TargetOpponent target = new TargetOpponent(true);
         target.setRandom(true);
-        player.chooseTarget(outcome, target, source, game);
+        target.chooseTarget(Outcome.Damage, player.getId(), source, game);
         Player opponent = game.getPlayer(target.getFirstTarget());
         if (opponent != null) {
-            return true;
+            opponent.damage(10, source.getSourceId(), source, game);
         }
-        opponent.damage(10, source.getSourceId(), source, game);
         return true;
     }
 }
