@@ -22,7 +22,7 @@ public final class DarkAscension extends ExpansionSet {
         this.blockName = "Innistrad";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
-        this.numBoosterCommon = 10;
+        this.numBoosterCommon = 9;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
