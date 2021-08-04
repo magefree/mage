@@ -2,9 +2,6 @@ package mage.player.ai.RLAgent;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.players.Player;
-
-import static org.junit.Assert.assertTrue;
-
 import java.util.*;
 import org.apache.log4j.Logger;
 import mage.player.ai.RLAction;
@@ -27,6 +24,7 @@ public class DJLAgent implements Serializable{
     transient NDManager baseND;
     transient Policy policy;//This will be loaded using its own load methods
     transient Critic critic;//This too
+    public transient boolean runMode=false;
     public DJLAgent(){
         representer=new Representer();
         experience=new ArrayList<RepresentedState>();
@@ -99,7 +97,9 @@ public class DJLAgent implements Serializable{
             NDList netInput=prepare(nd,stateSingle);
             NDArray logProbs=policy.logProbs(netInput);
             int choice=sample(logProbs);
-            assertTrue(choice < actions.size());
+            if(choice >=actions.size()){
+                throw new RuntimeException("Choice bigger than array");
+            }
             state.chosenAction=choice;
             player.addExperience(state);
             return choice;
@@ -154,9 +154,13 @@ public class DJLAgent implements Serializable{
         int[][] mask=new int[inputs.size()][maxSize];
         for(int i=0;i<inputs.size();i++){
             int[][] slice=inputs.get(i);
-            assertTrue(slice.length<=maxSize);
+            if(slice.length>maxSize) {
+                throw new RuntimeException("too big slice");
+            }
             for(int j=0;j<slice.length;j++){
-                assertTrue(slice[j].length==nestedSize);
+                if(slice[j].length!=nestedSize){
+                    throw new RuntimeException("wrong nested size");
+                } 
                 for(int k=0;k<nestedSize;k++){
                     data[i*maxSize+j][k]=slice[j][k];
                 }

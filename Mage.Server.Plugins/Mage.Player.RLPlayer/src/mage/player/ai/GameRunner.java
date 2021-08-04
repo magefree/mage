@@ -3,6 +3,7 @@ package mage.player.ai;
 import mage.cards.Card;
 import mage.cards.Sets;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardInfo;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
@@ -50,7 +51,7 @@ public class  GameRunner{
     private static final int DECK_SIZE = 40;
     private static final Logger logger = Logger.getLogger(GameRunner.class);
     public DJLAgent agent;
-    private String deckLoc;
+    private String deckLoc="";
     public GameRunner(){
         InputStream configStream = RLPlayer.class.getClassLoader().getResourceAsStream("config.properties"); //no leading "/"!!!
         Properties config = new Properties();
@@ -64,9 +65,8 @@ public class  GameRunner{
         catch(IOException e){
             throw new RuntimeException("couldn't open config file");
         }
-        System.out.println("resuming is "+resume);
         if(resume){
-            RLPlayer player=new RLPlayer("steal");
+            RLPlayer player=new RLPlayer("getagent");
             agent=player.learner;
         }else{
             agent=new DJLAgent();
@@ -94,7 +94,6 @@ public class  GameRunner{
             CardScanner.scanned = true;
         }
         CardScanner.scan(errorsList);
-
         if (errorsList.size() > 0) {
             logger.error("Found errors on card loading: " + '\n' + errorsList.stream().collect(Collectors.joining("\n")));
         }
@@ -167,6 +166,11 @@ public class  GameRunner{
         return ComputerPlayer.buildDeck(DECK_SIZE, cardPool, allowedColors);
     }
     private Deck loadDeck(String name){
+        Path path = Paths.get(name);
+        if(!Files.exists(path)){
+            logger.error("deck file doesn't exist at "+name);
+            throw new RuntimeException();
+        }
         DeckCardLists list;
         StringBuilder errormsg= new StringBuilder(); 
         list=DeckImporter.importDeckFromFile(name, errormsg,true);

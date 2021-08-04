@@ -1,3 +1,7 @@
+This is a work in progress reinforcement learning computer player.
+The goal is to create an AI that has stronger play
+and runs faster than the current ones.  
+
 Usage: 
 Set the deck the AI is to be trained on in config.properties 
 Train by running ./run.sh

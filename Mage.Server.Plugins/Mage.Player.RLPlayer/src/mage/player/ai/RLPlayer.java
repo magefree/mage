@@ -33,8 +33,6 @@ import javax.management.RuntimeErrorException;
 
 import mage.player.ai.RLAgent.*;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.*;
 import java.nio.file.*;
 import mage.abilities.*;
@@ -46,11 +44,12 @@ import mage.player.ai.RLAction;
  * @author Elchanan Haas
  */
 
-public class RLPlayer extends ComputerPlayer{
+public class RLPlayer extends RandomNonTappingPlayer{
     public DJLAgent learner;
     private static final Logger logger = Logger.getLogger(RLPlayer.class);
     List<RepresentedState> experiences=new ArrayList<RepresentedState>();
     private PassAbility pass = new PassAbility();
+    private boolean runMode=false;
     public RLPlayer(String name) {
         this(name, RangeOfInfluence.ALL);
     }
@@ -78,11 +77,14 @@ public class RLPlayer extends ComputerPlayer{
             FileInputStream fileIn =new FileInputStream(path+File.separator+"representer.bin");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             learner=(DJLAgent) in.readObject();
+            runMode=true;
+            learner.runMode=true;
             in.close();
             fileIn.close();
             learner.loadNets(path);
-        }catch(Exception e){
-            logger.error(e.getMessage());
+        }catch(ClassNotFoundException| IOException e){
+            System.out.println("couldn't construct player");
+            System.out.println(e.getMessage());
             for(int i=0;i<e.getStackTrace().length;i++){
                 logger.error(e.getStackTrace()[i]);
             }
@@ -114,10 +116,6 @@ public class RLPlayer extends ComputerPlayer{
         learner.addExperiences(experiences);
         experiences=new ArrayList<RepresentedState>();
     }
-    public RLPlayer(final RLPlayer player) {
-        super(player);   
-    }
-
     /* 
     JSONObject actRepr=new JSONObject();
     if(action instanceof ActionAbility){
@@ -286,7 +284,9 @@ public class RLPlayer extends ComputerPlayer{
             } 
             actions.add(new RLAction("Blocker:"+blocker.getName(), "NoAttackerToBlock"));
             int choice=learner.choose(game,this,actions);
-            assertTrue(actions.size()==nonZeroGroups.size()+1);
+            if(actions.size()!=nonZeroGroups.size()+1){
+                throw new RuntimeException("wrong group size in blockers");
+            }
             if (choice<nonZeroGroups.size()) { //Not the last one where no block occurs
                 CombatGroup group = nonZeroGroups.get(choice);
                 if (!group.getAttackers().isEmpty()) {

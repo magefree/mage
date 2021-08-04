@@ -1,6 +1,7 @@
 package mage.player.ai;
 
 import mage.abilities.*;
+import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.MageObject;
@@ -11,6 +12,10 @@ public class RandomNonTappingPlayer extends RandomPlayer{
     public RandomNonTappingPlayer(String name) {
         super(name);
     }
+    public RandomNonTappingPlayer(String name,RangeOfInfluence inf) {
+        super(name);
+    }
+
 
     public RandomNonTappingPlayer(final RandomPlayer player) {
         super(player);
