@@ -76,13 +76,12 @@
               <groupId>ai.djl.mxnet</groupId>
               <artifactId>mxnet-engine</artifactId>
           </dependency>   
-          <dependency>
+        <dependency>
             <groupId>ai.djl.mxnet</groupId>
-            <artifactId>mxnet-native-mkl</artifactId>
-            <classifier>linux-x86_64</classifier>
+            <artifactId>mxnet-native-auto</artifactId>
             <scope>runtime</scope>
-        </dependency> 
-       <!-- <dependency>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.26</version>
@@ -91,7 +90,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.26</version>
-        </dependency>  -->
+        </dependency> 
     </dependencies>
 
     <build>

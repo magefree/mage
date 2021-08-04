@@ -16,5 +16,5 @@ public class HParams implements Serializable {
     public static final int embedDim=32;
     public static final int batchSize=32;
     public static final int expForTrain=1;
-
+    public static final int saveInterval=200;
 }

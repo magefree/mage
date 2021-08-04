@@ -16,20 +16,45 @@ import ai.djl.ndarray.*;
 import ai.djl.ndarray.types.*;
 import ai.djl.ndarray.index.*;
 import java.util.concurrent.ThreadLocalRandom;   
+import java.nio.file.*;
+import java.io.*;
 
-public class DJLAgent{
+
+public class DJLAgent implements Serializable{
     public Representer representer;
     private static final Logger logger = Logger.getLogger(DJLAgent.class);
     List<RepresentedState> experience;
-    NDManager baseND;
-    Policy policy;
-    Critic critic;
+    transient NDManager baseND;
+    transient Policy policy;//This will be loaded using its own load methods
+    transient Critic critic;//This too
     public DJLAgent(){
         representer=new Representer();
         experience=new ArrayList<RepresentedState>();
         baseND=NDManager.newBaseManager();
-        policy=new Policy();
-        critic=new Critic();
+        policy=new Policy(true);
+        critic=new Critic(true);
+    }
+    public void save(int iter) throws IOException{
+        String home=System.getProperty("user.home");
+        Path path = Paths.get(home,"xmage-models");
+        save(path.toString(),iter);
+    }
+    public void save(String path,int iter) throws IOException{
+        Files.createDirectories(Paths.get(path));
+        FileOutputStream fileOut =new FileOutputStream(path+File.separator+"representer.bin");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(this);
+         out.close();
+         fileOut.close();
+        critic.save(path,iter);
+        policy.save(path,iter);
+    }
+    public void loadNets(String path){
+        baseND=NDManager.newBaseManager();
+        policy=new Policy(false);
+        critic=new Critic(false);
+        policy.load(path,"policy-net");
+        critic.load(path,"critic-net");
     }
     public void trainIfReady(){
         if(experience.size()>HParams.expForTrain){
@@ -45,20 +70,24 @@ public class DJLAgent{
             NDArray baseLogProbs=policy.logProbs(netInput);
             int numExp=experience.size();
             float[] arrRewards=new float[numExp];
+            float[] arrRewardScale=new float[numExp];
             int[] arrChosenActs=new int[numExp];
             for(int i=0;i<experience.size();i++){
                 arrRewards[i]=experience.get(i).reward;
                 arrChosenActs[i]=experience.get(i).chosenAction;
+                arrRewardScale[i]=experience.get(i).rewardScale;
             }
             NDArray rewards=nd.create(arrRewards, new Shape(numExp,1));
+            NDArray rewardScale=nd.create(arrRewardScale, new Shape(numExp,1));
             int actionSize=(int) netInput.get(0).getShape().get(1);
             NDArray actsTaken=nd.create(arrChosenActs, new Shape(numExp)).oneHot(actionSize);
-            NDArray predReward=nd.zeros(rewards.getShape());
-            NDList label=new NDList(actsTaken,predReward,rewards,baseLogProbs);
+            NDArray predReward=critic.predict(netInput);
+            NDList label=new NDList(actsTaken,predReward,rewards,baseLogProbs,rewardScale);
             /*for(int i=0;i<label.size();i++){
                 label.get(i).setRequiresGradient(true);
             }*/
             policy.train(nd.newSubManager(),netInput,label);
+            critic.train(nd.newSubManager(),netInput,new NDList(rewards));
             experience=new ArrayList<RepresentedState>();
         }
     }
@@ -77,7 +106,6 @@ public class DJLAgent{
         }
     }
     public void addExperiences(List<RepresentedState> exp){
-        //TODO add rewards
         experience.addAll(exp);
     }
     int sample(NDArray logProbs){

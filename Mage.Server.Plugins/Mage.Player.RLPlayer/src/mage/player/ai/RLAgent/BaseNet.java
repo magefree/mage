@@ -36,17 +36,20 @@ import ai.djl.translate.TranslateException;
 import ai.djl.translate.Translator;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.*;
 
-public class BaseNet {
-    Model net;
-    Trainer train;
-    Predictor<NDList,NDList> pred;
-    boolean synced=false;
-    BaseNet(Loss loss){
+public class BaseNet implements Serializable{
+    transient Model net;
+    transient Trainer train;
+    transient Predictor<NDList,NDList> pred;
+    transient boolean synced=false;
+    BaseNet(Loss loss,boolean makeTrainer){
         net=makeModel();
-        train=makeTrainer(net,loss);
-        syncPredictor();
+        if(makeTrainer) {
+            train=makeTrainer(net,loss);
+            syncPredictor();
+        }
     }
     void train(NDManager nd,NDList inputs,NDList labels){
         synced=false;
@@ -54,7 +57,24 @@ public class BaseNet {
         Batch batch=new Batch(nd, inputs, labels, 1, batchmaker, batchmaker, 0, 0);
         EasyTrain.trainBatch(train, batch);
         train.step();
-        batch.close();
+        train.notifyListeners(listener -> listener.onEpoch(train));
+    }
+    void save(String path,int iter) throws IOException{
+        net.setProperty("Epoch", Integer.toString(iter));
+        Path savePath=Paths.get(path,net.getName());
+        Files.createDirectories(savePath);
+        net.save(savePath, null);
+    }
+    void load(String path,String subname){
+        try{
+            Path modelPath=Paths.get(path,subname);
+            net.load(modelPath);
+            System.out.println("loaded model");
+        }catch(IOException|MalformedModelException e){
+            System.out.println("Couldn't load model");
+            throw new RuntimeException(e);
+        }
+       
     }
     void syncPredictor(){
         pred=net.newPredictor(new NoopTranslator());
@@ -90,10 +110,7 @@ public class BaseNet {
         return trainer;
     }
     Model makeModel(){
-        Model model = Model.newInstance("critic-net");
-        BaseBlock block=new BaseBlock();
-        model.setBlock(block);
-        return model;
+        return null;
     }
 
 }

@@ -23,7 +23,7 @@ public class CriticBlock extends AbstractBlock{
         NDArray zeroed=in.mul(mask);
         NDArray summed=zeroed.sum(new int[]{1});
         NDArray maskDiv=mask.sum(new int[]{1});
-        return summed.div(maskDiv);
+        return summed.div(maskDiv).reshape(-1,1);
     }
     public NDList forwardInternal(ParameterStore parameterStore, NDList inputs, boolean training, PairList<String, Object> pairList) {
         NDArray preMask=base.forward(parameterStore, inputs, training, pairList).singletonOrThrow();
@@ -33,7 +33,7 @@ public class CriticBlock extends AbstractBlock{
     }
     public Shape[] getOutputShapes(Shape[] inputs) {
         Shape[] res=new Shape[1];
-        res[0]=new Shape(inputs[0].get(0),inputs[0].get(1));
+        res[0]=new Shape(inputs[0].get(0));
         return res;
     }
 

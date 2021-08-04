@@ -28,11 +28,15 @@ import java.util.*;
 import org.apache.log4j.Logger;
 import mage.player.ai.RLAgent.*;
 import java.util.stream.Collectors;
+
+import javax.management.RuntimeErrorException;
+
 import mage.player.ai.RLAgent.*;
 
 import static org.junit.Assert.assertTrue;
 
 import java.io.*;
+import java.nio.file.*;
 import mage.abilities.*;
 import mage.player.ai.RLAction;
 
@@ -47,9 +51,34 @@ public class RLPlayer extends ComputerPlayer{
     private static final Logger logger = Logger.getLogger(RLPlayer.class);
     List<RepresentedState> experiences=new ArrayList<RepresentedState>();
     private PassAbility pass = new PassAbility();
+    public RLPlayer(String name) {
+        this(name, RangeOfInfluence.ALL);
+    }
+    public RLPlayer(String name, RangeOfInfluence range){
+        this(name,range,0);
+    }
     public RLPlayer(String name , RangeOfInfluence range, int skill){
         super(name,RangeOfInfluence.ALL);
-        learner=new DJLAgent();
+        logger.info("Constructing RLPlayer");
+        try{
+            InputStream configStream = RLPlayer.class.getClassLoader().getResourceAsStream("config.properties"); //no leading "/"!!!
+            Properties config=new Properties();
+            config.load(configStream);
+            configStream.close();
+            String path=config.getProperty("modelPath");
+            FileInputStream fileIn =new FileInputStream(path+File.separator+"representer.bin");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            learner=(DJLAgent) in.readObject();
+            in.close();
+            fileIn.close();
+            learner.loadNets(path);
+        }catch(Exception e){
+            logger.error(e.getMessage());
+            for(int i=0;i<e.getStackTrace().length;i++){
+                logger.error(e.getStackTrace()[i]);
+            }
+            throw new RuntimeException(e);
+        }
     }
     public RLPlayer(String name,DJLAgent inLearner) {  
         super(name,RangeOfInfluence.ALL);
@@ -71,6 +100,7 @@ public class RLPlayer extends ComputerPlayer{
         }
         for(int i=0;i<experiences.size();i++){
             experiences.get(i).reward=((float) reward);
+            experiences.get(i).rewardScale=(1.0f/experiences.size());
         }
         learner.addExperiences(experiences);
         experiences=new ArrayList<RepresentedState>();

@@ -14,6 +14,8 @@ import mage.game.mulligan.MulliganType;
 import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
 import mage.util.RandomUtil;
+import java.util.Properties;
+
 import org.junit.Ignore;
 import org.junit.Test;
 import mage.cards.decks.DeckCardLists;
@@ -35,7 +37,8 @@ import org.json.simple.parser.ParseException;
 import org.json.simple.JSONObject;
 import mage.cards.repository.CardScanner;
 import java.util.stream.Collectors;
-
+import java.io.*;
+import java.nio.file.*;
 /**
  * @author ayratn
  * Adapted by Elchanan Haas
@@ -48,6 +51,16 @@ public class  GameRunner{
     private static final Logger logger = Logger.getLogger(GameRunner.class);
     public DJLAgent agent;
     public GameRunner(){
+        InputStream configStream = RLPlayer.class.getClassLoader().getResourceAsStream("config.properties"); //no leading "/"!!!
+        Properties config = new Properties();
+        boolean resume=false;
+        try{
+            config.load(configStream);
+            configStream.close();
+        }
+        catch(IOException e){
+
+        }
         agent=new DJLAgent();
         buildDB();
     }
@@ -64,13 +77,16 @@ public class  GameRunner{
             logger.error("Found errors on card loading: " + '\n' + errorsList.stream().collect(Collectors.joining("\n")));
         }
     }
-    public void playGames(int number) throws GameException, FileNotFoundException, IllegalArgumentException{
+    public void playGames(int number) throws IOException,GameException, FileNotFoundException, IllegalArgumentException{
         int wins=0;
         String deckLoc="/home/elchanan/java/mage/Mage.Tests/RBTestAggro.dck";
-        for(int count=1;count<=number;count++){
+        for(int count=0;count<number;count++){
             int score=playOneGame(deckLoc,deckLoc,true);
             if(score==1) wins++;
-            System.out.println("Wins is "+wins+" at timestep "+count);
+            System.out.println("Wins is "+wins+" at game "+(count+1));
+            if(count%HParams.saveInterval==0){
+                agent.save(count);
+            }
         }
     }
     public int playOneGame(String deck1loc,String deck2loc,boolean player2random) throws GameException, FileNotFoundException, IllegalArgumentException {
