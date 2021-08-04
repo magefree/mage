@@ -31,8 +31,8 @@ public class DJLAgent implements Serializable{
         representer=new Representer();
         experience=new ArrayList<RepresentedState>();
         baseND=NDManager.newBaseManager();
-        policy=new Policy(true);
-        critic=new Critic(true);
+        policy=new Policy();
+        critic=new Critic();
     }
     public void save(int iter) throws IOException{
         String home=System.getProperty("user.home");
@@ -51,8 +51,8 @@ public class DJLAgent implements Serializable{
     }
     public void loadNets(String path){
         baseND=NDManager.newBaseManager();
-        policy=new Policy(false);
-        critic=new Critic(false);
+        policy=new Policy();
+        critic=new Critic();
         policy.load(path,"policy-net");
         critic.load(path,"critic-net");
     }

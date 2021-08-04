@@ -43,8 +43,8 @@ public class Critic extends BaseNet{
     Trainer train;
     Predictor<NDList,NDList> pred;
     boolean synced=false;
-    Critic(boolean makeTrainer){
-        super(new L2Loss(),makeTrainer);
+    Critic(){
+        super(new L2Loss());
     }
 
     Model makeModel(){

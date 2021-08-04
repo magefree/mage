@@ -57,15 +57,24 @@ public class RLPlayer extends ComputerPlayer{
     public RLPlayer(String name, RangeOfInfluence range){
         this(name,range,0);
     }
+    public static String getSavePath(){
+        try{
+        InputStream configStream = RLPlayer.class.getClassLoader().getResourceAsStream("config.properties"); //no leading "/"!!!
+        Properties config=new Properties();
+        config.load(configStream);
+        configStream.close();
+        String path=config.getProperty("modelPath");
+        return path;
+        }
+        catch(IOException e){
+            throw new RuntimeException(e);
+        }
+    }
     public RLPlayer(String name , RangeOfInfluence range, int skill){
         super(name,RangeOfInfluence.ALL);
         logger.info("Constructing RLPlayer");
         try{
-            InputStream configStream = RLPlayer.class.getClassLoader().getResourceAsStream("config.properties"); //no leading "/"!!!
-            Properties config=new Properties();
-            config.load(configStream);
-            configStream.close();
-            String path=config.getProperty("modelPath");
+            String path=getSavePath();
             FileInputStream fileIn =new FileInputStream(path+File.separator+"representer.bin");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             learner=(DJLAgent) in.readObject();

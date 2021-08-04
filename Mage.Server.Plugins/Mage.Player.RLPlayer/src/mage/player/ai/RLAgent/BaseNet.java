@@ -44,12 +44,10 @@ public class BaseNet implements Serializable{
     transient Trainer train;
     transient Predictor<NDList,NDList> pred;
     transient boolean synced=false;
-    BaseNet(Loss loss,boolean makeTrainer){
+    BaseNet(Loss loss){
         net=makeModel();
-        if(makeTrainer) {
-            train=makeTrainer(net,loss);
-            syncPredictor();
-        }
+        train=makeTrainer(net,loss);
+        syncPredictor();
     }
     void train(NDManager nd,NDList inputs,NDList labels){
         synced=false;
@@ -98,7 +96,7 @@ public class BaseNet implements Serializable{
         return res; 
     } 
     Trainer makeTrainer(Model model,Loss loss){
-        Tracker lrt = Tracker.fixed(0.003f);
+        Tracker lrt = Tracker.fixed(HParams.lr);
         Optimizer adam=Optimizer.adam().optLearningRateTracker(lrt).setRescaleGrad(1).build();
         DefaultTrainingConfig config = new DefaultTrainingConfig(loss)
         .optOptimizer(adam)

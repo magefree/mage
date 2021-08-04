@@ -50,6 +50,7 @@ public class  GameRunner{
     private static final int DECK_SIZE = 40;
     private static final Logger logger = Logger.getLogger(GameRunner.class);
     public DJLAgent agent;
+    private String deckLoc;
     public GameRunner(){
         InputStream configStream = RLPlayer.class.getClassLoader().getResourceAsStream("config.properties"); //no leading "/"!!!
         Properties config = new Properties();
@@ -57,13 +58,34 @@ public class  GameRunner{
         try{
             config.load(configStream);
             configStream.close();
+            resume=Boolean.parseBoolean(config.getProperty("resume"));
+            deckLoc=config.getProperty("deck");
         }
         catch(IOException e){
-
+            throw new RuntimeException("couldn't open config file");
         }
-        agent=new DJLAgent();
+        System.out.println("resuming is "+resume);
+        if(resume){
+            RLPlayer player=new RLPlayer("steal");
+            agent=player.learner;
+        }else{
+            agent=new DJLAgent();
+            String path=RLPlayer.getSavePath();
+            deleteFiles(new File(path));
+        }
         buildDB();
     }
+
+    public static void deleteFiles(File dirPath) {
+        File filesList[] = dirPath.listFiles();
+        for(File file : filesList) {
+           if(file.isFile()) {
+              file.delete();
+           } else {
+              deleteFiles(file);
+           }
+        }
+     }
 
     void buildDB() {
         // load all cards to db from class list
@@ -79,7 +101,6 @@ public class  GameRunner{
     }
     public void playGames(int number) throws IOException,GameException, FileNotFoundException, IllegalArgumentException{
         int wins=0;
-        String deckLoc="/home/elchanan/java/mage/Mage.Tests/RBTestAggro.dck";
         for(int count=0;count<number;count++){
             int score=playOneGame(deckLoc,deckLoc,true);
             if(score==1) wins++;

@@ -42,8 +42,8 @@ public class Policy extends BaseNet{
     Trainer train;
     Predictor<NDList,NDList> pred;
     boolean synced=false;
-    Policy(boolean makeTrainer){
-        super(new PPOLoss(),makeTrainer);
+    Policy(){
+        super(new PPOLoss());
     }
     NDArray logProbs(NDList input){
         return predict(input);
