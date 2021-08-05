@@ -1,0 +1,1215 @@
+# Archaeology (1)
+1 JMP 471 Juggernaut
+1 JMP 474 Meteor Golem
+1 JMP 458 Ancestral Statue
+1 JMP 150 Erratic Visionary
+1 JMP 183 Thirst for Knowledge
+1 JMP 462 Chromatic Sphere
+1 JMP 468 Hedron Archive
+1 JMP 491 Buried Ruin
+5 JMP 50 Island
+1 JMP 14 Scholar of the Lost Trove
+1 JMP 456 Aether Spellbomb
+2 JMP 9 Archaeomender
+1 JMP 32 Lightning-Core Excavator
+1 JMP 36 Thriving Isle
+1 JMP 49 Island
+
+# Archaeology (2)
+1 JMP 471 Juggernaut
+1 JMP 474 Meteor Golem
+1 JMP 458 Ancestral Statue
+1 JMP 150 Erratic Visionary
+1 JMP 183 Thirst for Knowledge
+1 JMP 464 Dreamstone Hedron
+1 JMP 488 Terrarion
+1 JMP 491 Buried Ruin
+5 JMP 50 Island
+1 JMP 14 Scholar of the Lost Trove
+1 JMP 456 Aether Spellbomb
+2 JMP 9 Archaeomender
+1 JMP 32 Lightning-Core Excavator
+1 JMP 36 Thriving Isle
+1 JMP 49 Island
+
+# Archaeology (3)
+1 JMP 176 Sharding Sphinx
+1 JMP 187 Vedalken Archmage
+1 JMP 471 Juggernaut
+1 JMP 474 Meteor Golem
+1 JMP 458 Ancestral Statue
+1 M21 235 Prismite
+1 JMP 183 Thirst for Knowledge
+1 JMP 468 Hedron Archive
+1 JMP 491 Buried Ruin
+5 JMP 50 Island
+1 JMP 456 Aether Spellbomb
+2 JMP 9 Archaeomender
+1 JMP 32 Lightning-Core Excavator
+1 JMP 36 Thriving Isle
+1 JMP 49 Island
+
+# Archaeology (4)
+1 JMP 482 Scarecrone
+1 JMP 471 Juggernaut
+1 JMP 474 Meteor Golem
+1 JMP 484 Scuttlemutt
+1 JMP 470 Jousting Dummy
+1 JMP 485 Signpost Scarecrow
+1 JMP 183 Thirst for Knowledge
+1 M21 236 Short Sword
+1 JMP 491 Buried Ruin
+5 JMP 50 Island
+1 JMP 456 Aether Spellbomb
+2 JMP 9 Archaeomender
+1 JMP 32 Lightning-Core Excavator
+1 JMP 36 Thriving Isle
+1 JMP 49 Island
+
+# Basri
+1 M21 12 Concordia Pegasus
+1 JMP 114 Knight of the Tusk
+1 M21 24 Legion's Judgment
+1 M21 19 Feat of Resistance
+1 M21 17 Faith's Fetters
+7 JMP 45 Plains
+1 JMP 35 Thriving Heath
+1 M21 280 Basri Ket
+1 M21 9 Basri's Lieutenant
+1 M21 41 Tempered Veteran
+1 M21 37 Siege Striker
+1 M21 10 Basri's Solidarity
+1 M21 39 Staunch Shieldmate
+1 M21 287 Basri's Acolyte
+
+# Cats (1)
+1 JMP 407 Keeper of Fables
+1 JMP 403 Initiate's Companion
+1 JMP 419 Pouncing Cheetah
+1 JMP 397 Feral Prowler
+1 JMP 392 Enlarge
+1 JMP 412 Nature's Way
+1 JMP 386 Crushing Canopy
+1 JMP 396 Feral Invocation
+6 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 JMP 74 Forest
+1 M21 374 Feline Sovereign
+1 M21 175 Canopy Stalker
+1 M21 202 Sabertooth Mauler
+1 M21 196 Pridemalkin
+
+# Cats (2)
+1 JMP 407 Keeper of Fables
+1 JMP 403 Initiate's Companion
+1 JMP 418 Penumbra Bobcat
+1 JMP 397 Feral Prowler
+1 JMP 392 Enlarge
+1 JMP 412 Nature's Way
+1 JMP 386 Crushing Canopy
+1 JMP 410 Lurking Predators
+1 JMP 396 Feral Invocation
+6 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 JMP 74 Forest
+1 M21 374 Feline Sovereign
+1 M21 175 Canopy Stalker
+1 M21 196 Pridemalkin
+
+# Chandra
+1 JMP 356 Pyroclastic Elemental
+1 JMP 372 Young Pyromancer
+1 JMP 315 Fanatical Firebrand
+1 JMP 317 Flames of the Firebrand
+1 JMP 355 Pillar of Flame
+1 JMP 336 Hungry Flames
+1 M21 165 Thrill of Possibility
+7 JMP 64 Mountain
+1 JMP 33 Thriving Bluff
+1 M21 135 Chandra, Heart of Fire
+1 M21 136 Chandra's Incinerator
+1 M21 138 Chandra's Pyreling
+2 M21 303 Chandra's Magmutt
+
+# Dinosaurs (1)
+1 JMP 399 Ghalta, Primal Hunger
+1 JMP 388 Drover of the Mighty
+1 JMP 416 Orazca Frillback
+1 M21 209 Thrashing Brontodon
+1 M21 176 Colossal Dreadmaw
+1 JMP 427 Savage Stomp
+1 JMP 384 Commune with Dinosaurs
+1 M21 177 Cultivate
+1 JMP 386 Crushing Canopy
+1 M21 205 Setessan Training
+6 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 JMP 73 Forest
+1 M21 194 Ornery Dilophosaur
+1 M21 178 Drowsing Tyrannodon
+
+# Dinosaurs (2)
+1 JMP 429 Selvala, Heart of the Wilds
+1 JMP 388 Drover of the Mighty
+1 JMP 437 Thundering Spineback
+1 JMP 416 Orazca Frillback
+1 M21 176 Colossal Dreadmaw
+1 JMP 427 Savage Stomp
+1 JMP 384 Commune with Dinosaurs
+1 JMP 386 Crushing Canopy
+1 JMP 414 New Horizons
+6 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 JMP 73 Forest
+1 M21 308 Garruk's Uprising
+1 M21 194 Ornery Dilophosaur
+1 M21 178 Drowsing Tyrannodon
+
+# Dinosaurs (3)
+1 JMP 399 Ghalta, Primal Hunger
+1 JMP 388 Drover of the Mighty
+1 JMP 437 Thundering Spineback
+1 JMP 416 Orazca Frillback
+1 M21 176 Colossal Dreadmaw
+1 JMP 427 Savage Stomp
+1 JMP 384 Commune with Dinosaurs
+1 M21 177 Cultivate
+1 JMP 386 Crushing Canopy
+1 M21 210 Titanic Growth
+6 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 JMP 73 Forest
+1 M21 194 Ornery Dilophosaur
+1 M21 178 Drowsing Tyrannodon
+
+# Dinosaurs (4)
+1 JMP 388 Drover of the Mighty
+1 JMP 416 Orazca Frillback
+1 M21 209 Thrashing Brontodon
+1 M21 176 Colossal Dreadmaw
+1 JMP 427 Savage Stomp
+1 JMP 384 Commune with Dinosaurs
+1 JMP 414 New Horizons
+6 JMP 74 Forest
+1 JMP 423 Rampaging Brontodon
+1 JMP 34 Thriving Grove
+1 JMP 73 Forest
+1 M21 377 Primal Might
+1 M21 308 Garruk's Uprising
+1 M21 194 Ornery Dilophosaur
+1 M21 178 Drowsing Tyrannodon
+
+# Discarding 1
+1 JMP 233 Fell Specter
+1 JMP 269 Ravenous Chupacabra
+1 JMP 227 Entomber Exarch
+1 JMP 214 Burglar Rat
+1 JMP 266 Phyrexian Rager
+1 JMP 279 Slate Street Ruffian
+2 JMP 287 Wight of Precinct Six
+1 JMP 200 Assassin's Strike
+1 M21 115 Mind Rot
+1 JMP 222 Death's Approach
+7 JMP 57 Swamp
+1 JMP 17 Tinybones, Trinket Thief
+1 JMP 37 Thriving Moor
+
+# Discarding 2
+1 JMP 251 Liliana's Reaver
+1 JMP 259 Nyxathid
+1 JMP 233 Fell Specter
+1 JMP 269 Ravenous Chupacabra
+1 JMP 227 Entomber Exarch
+1 JMP 214 Burglar Rat
+1 JMP 266 Phyrexian Rager
+1 JMP 279 Slate Street Ruffian
+2 JMP 287 Wight of Precinct Six
+1 JMP 200 Assassin's Strike
+1 JMP 222 Death's Approach
+7 JMP 57 Swamp
+1 JMP 37 Thriving Moor
+
+# Dogs (1)
+1 JMP 81 Affa Guard Hound
+1 JMP 94 Cathar's Companion
+1 M21 19 Feat of Resistance
+1 JMP 125 Pacifism
+6 JMP 45 Plains
+1 JMP 4 Release the Dogs
+1 JMP 7 Supply Runners
+1 JMP 8 Trusty Retriever
+1 JMP 35 Thriving Heath
+1 JMP 45 Plains
+1 M21 29 Pack Leader
+1 M21 36 Selfless Savior
+1 M21 35 Secure the Scene
+1 M21 2 Alpine Watchdog
+1 M21 30 Rambunctious Mutt
+
+# Dogs (2)
+1 JMP 113 Isamaru, Hound of Konda
+1 JMP 81 Affa Guard Hound
+1 JMP 94 Cathar's Companion
+1 JMP 99 Dauntless Onslaught
+1 JMP 125 Pacifism
+6 JMP 45 Plains
+1 JMP 4 Release the Dogs
+1 JMP 7 Supply Runners
+1 JMP 8 Trusty Retriever
+1 JMP 35 Thriving Heath
+1 JMP 45 Plains
+1 M21 29 Pack Leader
+1 M21 35 Secure the Scene
+1 M21 2 Alpine Watchdog
+1 M21 30 Rambunctious Mutt
+
+# Elves (1)
+1 JMP 385 Craterhoof Behemoth
+1 JMP 391 Elvish Archdruid
+1 JMP 389 Dwynen's Elite
+1 JMP 400 Ghirapur Guide
+1 JMP 430 Silhana Wayfinder
+1 JMP 444 Wildheart Invoker
+1 JMP 386 Crushing Canopy
+1 M21 210 Titanic Growth
+1 JMP 420 Presence of Gond
+6 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 JMP 77 Forest
+1 M21 206 Skyway Sniper
+1 M21 193 Llanowar Visionary
+1 M21 189 Hunter's Edge
+
+# Elves (2)
+1 JMP 389 Dwynen's Elite
+1 JMP 430 Silhana Wayfinder
+1 JMP 447 Wren's Run Vanquisher
+1 JMP 408 Leaf Gilder
+1 JMP 444 Wildheart Invoker
+1 JMP 386 Crushing Canopy
+1 M21 210 Titanic Growth
+1 JMP 420 Presence of Gond
+6 JMP 74 Forest
+1 JMP 28 Allosaurus Shepherd
+1 JMP 34 Thriving Grove
+1 JMP 77 Forest
+1 M21 206 Skyway Sniper
+1 M21 193 Llanowar Visionary
+1 M21 189 Hunter's Edge
+
+# Feathered Friends (1)
+1 JMP 107 Healer's Hawk
+1 M21 12 Concordia Pegasus
+1 JMP 80 Aerial Assault
+1 JMP 99 Dauntless Onslaught
+1 JMP 124 Moment of Heroism
+1 JMP 133 Sky Tether
+6 JMP 45 Plains
+1 JMP 5 Steel-Plume Marshal
+1 JMP 35 Thriving Heath
+1 JMP 44 Plains
+1 M21 5 Aven Gagglemaster
+1 M21 18 Falconer Adept
+1 M21 44 Warded Battlements
+1 M21 20 Gale Swooper
+1 M21 11 Celestial Enforcer
+
+# Feathered Friends (2)
+1 M21 12 Concordia Pegasus
+1 JMP 107 Healer's Hawk
+1 JMP 135 Tandem Tactics
+1 JMP 133 Sky Tether
+6 JMP 45 Plains
+1 JMP 5 Steel-Plume Marshal
+1 JMP 35 Thriving Heath
+1 JMP 44 Plains
+1 M21 3 Angelic Ascension
+1 M21 5 Aven Gagglemaster
+1 M21 18 Falconer Adept
+1 M21 44 Warded Battlements
+1 M21 40 Swift Response
+1 M21 20 Gale Swooper
+1 M21 11 Celestial Enforcer
+
+# Feathered Friends (3)
+1 JMP 85 Angel of the Dire Hour
+1 JMP 107 Healer's Hawk
+1 M21 12 Concordia Pegasus
+1 JMP 99 Dauntless Onslaught
+1 JMP 134 Take Heart
+1 JMP 133 Sky Tether
+6 JMP 45 Plains
+1 JMP 35 Thriving Heath
+1 JMP 44 Plains
+1 M21 5 Aven Gagglemaster
+1 M21 18 Falconer Adept
+1 M21 44 Warded Battlements
+1 M21 40 Swift Response
+1 M21 20 Gale Swooper
+1 M21 11 Celestial Enforcer
+
+# Feathered Friends (4)
+1 JMP 89 Archon of Justice
+1 JMP 90 Archon of Redemption
+1 JMP 107 Healer's Hawk
+1 M21 12 Concordia Pegasus
+1 JMP 80 Aerial Assault
+1 JMP 79 Aegis of the Heavens
+1 JMP 99 Dauntless Onslaught
+1 JMP 133 Sky Tether
+6 JMP 45 Plains
+1 JMP 35 Thriving Heath
+1 JMP 44 Plains
+1 M21 18 Falconer Adept
+1 M21 44 Warded Battlements
+1 M21 20 Gale Swooper
+1 M21 11 Celestial Enforcer
+
+# Garruk
+1 JMP 373 Affectionate Indrik
+1 JMP 381 Brushstrider
+1 JMP 426 Rumbling Baloth
+1 JMP 416 Orazca Frillback
+1 JMP 402 Hunter's Insight
+1 M21 199 Ranger's Guile
+7 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 M21 305 Garruk, Unleashed
+1 M21 185 Garruk's Harbinger
+1 M21 308 Garruk's Uprising
+1 M21 189 Hunter's Edge
+1 M21 306 Garruk's Gorehorn
+1 M21 178 Drowsing Tyrannodon
+
+# Heavily Armored (1)
+1 JMP 128 Patron of the Valiant
+1 JMP 93 Bulwark Giant
+1 JMP 118 Lightwalker
+1 M21 26 Makeshift Battalion
+1 M21 19 Feat of Resistance
+1 JMP 95 Cathars' Crusade
+6 JMP 45 Plains
+1 JMP 8 Trusty Retriever
+1 JMP 35 Thriving Heath
+1 JMP 43 Plains
+1 M21 41 Tempered Veteran
+1 M21 37 Siege Striker
+1 M21 10 Basri's Solidarity
+1 M21 35 Secure the Scene
+1 M21 287 Basri's Acolyte
+
+# Heavily Armored (2)
+1 JMP 128 Patron of the Valiant
+1 JMP 93 Bulwark Giant
+1 JMP 118 Lightwalker
+1 M21 26 Makeshift Battalion
+1 JMP 106 Gird for Battle
+1 JMP 91 Battlefield Promotion
+1 JMP 95 Cathars' Crusade
+6 JMP 45 Plains
+1 JMP 8 Trusty Retriever
+1 JMP 35 Thriving Heath
+1 JMP 43 Plains
+1 M21 41 Tempered Veteran
+1 M21 37 Siege Striker
+1 M21 35 Secure the Scene
+1 M21 287 Basri's Acolyte
+
+# Heavily Armored (3)
+1 JMP 123 Mikaeus, the Lunarch
+1 JMP 128 Patron of the Valiant
+1 JMP 93 Bulwark Giant
+1 JMP 118 Lightwalker
+1 M21 26 Makeshift Battalion
+1 JMP 91 Battlefield Promotion
+1 JMP 100 Divine Arrow
+6 JMP 45 Plains
+1 JMP 7 Supply Runners
+1 JMP 8 Trusty Retriever
+1 JMP 35 Thriving Heath
+1 JMP 43 Plains
+1 M21 41 Tempered Veteran
+1 M21 10 Basri's Solidarity
+1 M21 287 Basri's Acolyte
+
+# Heavily Armored (4)
+1 JMP 108 High Sentinels of Arashin
+1 JMP 93 Bulwark Giant
+1 JMP 118 Lightwalker
+1 M21 26 Makeshift Battalion
+1 JMP 120 Long Road Home
+1 JMP 101 Duelist's Heritage
+6 JMP 45 Plains
+1 JMP 7 Supply Runners
+1 JMP 8 Trusty Retriever
+1 JMP 35 Thriving Heath
+1 JMP 43 Plains
+1 M21 41 Tempered Veteran
+1 M21 37 Siege Striker
+1 M21 40 Swift Response
+1 M21 287 Basri's Acolyte
+
+# Lands (1)
+1 JMP 439 Ulvenwald Hydra
+1 JMP 379 Awakener Druid
+1 JMP 395 Feral Hydra
+1 JMP 394 Fa'adiyah Seer
+1 JMP 398 Fertilid
+1 JMP 435 Sylvan Ranger
+1 JMP 444 Wildheart Invoker
+1 M21 177 Cultivate
+1 JMP 386 Crushing Canopy
+1 JMP 390 Elemental Uprising
+1 JMP 448 Zendikar's Roil
+1 JMP 440 Vastwood Zendikon
+6 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 JMP 71 Forest
+
+# Lands (2)
+1 JMP 415 Oracle of Mul Daya
+1 JMP 379 Awakener Druid
+1 JMP 395 Feral Hydra
+1 JMP 446 Woodborn Behemoth
+1 JMP 394 Fa'adiyah Seer
+1 JMP 398 Fertilid
+1 JMP 433 Sporemound
+1 JMP 435 Sylvan Ranger
+1 JMP 444 Wildheart Invoker
+1 M21 177 Cultivate
+1 JMP 386 Crushing Canopy
+1 JMP 390 Elemental Uprising
+6 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 JMP 71 Forest
+
+# Lightning (1)
+1 JMP 371 Weaver of Lightning
+1 JMP 344 Lightning Elemental
+1 JMP 345 Lightning Shrieker
+1 JMP 335 Homing Lightning
+1 JMP 341 Lightning Axe
+1 JMP 342 Lightning Bolt
+1 JMP 343 Lightning Diadem
+6 JMP 64 Mountain
+1 JMP 21 Lightning Phoenix
+1 JMP 23 Living Lightning
+2 JMP 22 Lightning Visionary
+1 JMP 32 Lightning-Core Excavator
+1 JMP 33 Thriving Bluff
+1 JMP 68 Mountain
+
+# Lightning (2)
+1 JMP 291 Ball Lightning
+1 JMP 371 Weaver of Lightning
+1 JMP 344 Lightning Elemental
+1 JMP 302 Chain Lightning
+1 JMP 341 Lightning Axe
+1 JMP 359 Riddle of Lightning
+1 JMP 343 Lightning Diadem
+6 JMP 64 Mountain
+1 JMP 21 Lightning Phoenix
+1 JMP 23 Living Lightning
+2 JMP 22 Lightning Visionary
+1 JMP 32 Lightning-Core Excavator
+1 JMP 33 Thriving Bluff
+1 JMP 68 Mountain
+
+# Liliana
+1 JMP 250 Liliana's Elite
+1 JMP 205 Blighted Bat
+1 JMP 238 Ghoulraiser
+1 JMP 286 Wailing Ghoul
+1 JMP 276 Settle the Score
+1 JMP 217 Cemetery Recruitment
+7 JMP 57 Swamp
+1 JMP 37 Thriving Moor
+1 M21 297 Liliana, Waker of the Dead
+1 M21 110 Liliana's Standard Bearer
+1 M21 101 Goremand
+1 M21 109 Liliana's Devotee
+1 M21 119 Rise Again
+1 M21 300 Liliana's Steward
+
+# Minions (1)
+1 JMP 237 Ghoulcaller's Accomplice
+1 JMP 212 Bone Picker
+1 JMP 226 Dutiful Attendant
+1 JMP 277 Shambling Goblin
+1 JMP 244 Innocent Blood
+6 JMP 57 Swamp
+1 JMP 15 Kels, Fight Fixer
+1 JMP 16 Nocturnal Feeder
+1 JMP 37 Thriving Moor
+1 JMP 54 Swamp
+1 M21 129 Witch's Cauldron
+1 M21 97 Eliminate
+1 M21 101 Goremand
+1 M21 93 Crypt Lurker
+1 M21 126 Village Rites
+
+# Minions (2)
+1 JMP 228 Eternal Taskmaster
+1 JMP 224 Drainpipe Vermin
+1 JMP 226 Dutiful Attendant
+1 JMP 237 Ghoulcaller's Accomplice
+1 JMP 213 Bone Splinters
+6 JMP 57 Swamp
+1 JMP 15 Kels, Fight Fixer
+1 JMP 16 Nocturnal Feeder
+1 JMP 37 Thriving Moor
+1 JMP 54 Swamp
+1 M21 129 Witch's Cauldron
+1 M21 97 Eliminate
+1 M21 101 Goremand
+1 M21 93 Crypt Lurker
+1 M21 126 Village Rites
+
+# Minions (3)
+1 JMP 226 Dutiful Attendant
+1 JMP 224 Drainpipe Vermin
+1 JMP 237 Ghoulcaller's Accomplice
+1 M21 98 Fetid Imp
+1 JMP 248 Launch Party
+1 JMP 493 Phyrexian Tower
+5 JMP 57 Swamp
+1 JMP 16 Nocturnal Feeder
+1 JMP 37 Thriving Moor
+1 JMP 54 Swamp
+1 M21 129 Witch's Cauldron
+1 M21 97 Eliminate
+1 M21 101 Goremand
+1 M21 109 Liliana's Devotee
+1 M21 93 Crypt Lurker
+1 M21 126 Village Rites
+
+# Minions (4)
+1 JMP 236 Ghoulcaller Gisa
+1 JMP 226 Dutiful Attendant
+1 JMP 237 Ghoulcaller's Accomplice
+1 JMP 277 Shambling Goblin
+1 M21 98 Fetid Imp
+1 JMP 244 Innocent Blood
+6 JMP 57 Swamp
+1 JMP 16 Nocturnal Feeder
+1 JMP 37 Thriving Moor
+1 JMP 54 Swamp
+1 M21 129 Witch's Cauldron
+1 M21 97 Eliminate
+1 M21 101 Goremand
+1 M21 109 Liliana's Devotee
+1 M21 126 Village Rites
+
+# Phyrexian
+1 JMP 278 Sheoldred, Whispering One
+1 JMP 227 Entomber Exarch
+1 JMP 265 Phyrexian Gargantua
+1 JMP 475 Myr Sire
+1 JMP 476 Perilous Myr
+1 JMP 263 Phyrexian Broodlings
+1 JMP 264 Phyrexian Debaser
+1 JMP 266 Phyrexian Rager
+1 JMP 223 Douse in Gloom
+1 JMP 267 Phyrexian Reclamation
+1 JMP 262 Parasitic Implant
+6 JMP 57 Swamp
+1 JMP 37 Thriving Moor
+1 JMP 58 Swamp
+1 M21 112 Malefic Scythe
+
+# Pirates (1)
+1 JMP 170 Rishadan Airship
+1 JMP 149 Departed Deckhand
+1 JMP 178 Spectral Sailor
+1 JMP 155 Kitesail Corsair
+1 JMP 165 Prosperous Pirates
+1 JMP 172 Sailor of Means
+1 JMP 142 Chart a Course
+1 JMP 189 Voyage's End
+1 JMP 477 Pirate's Cutlass
+1 JMP 144 Coastal Piracy
+1 JMP 192 Waterknot
+6 JMP 50 Island
+1 JMP 11 Corsair Captain
+1 JMP 36 Thriving Isle
+1 JMP 52 Island
+
+# Pirates (2)
+1 JMP 149 Departed Deckhand
+1 JMP 178 Spectral Sailor
+1 JMP 155 Kitesail Corsair
+1 JMP 165 Prosperous Pirates
+1 JMP 170 Rishadan Airship
+1 JMP 172 Sailor of Means
+1 JMP 142 Chart a Course
+1 JMP 477 Pirate's Cutlass
+1 JMP 148 Curious Obsession
+1 M21 47 Capture Sphere
+6 JMP 50 Island
+1 JMP 11 Corsair Captain
+1 JMP 36 Thriving Isle
+1 JMP 52 Island
+1 M21 62 Read the Tides
+
+# Predatory (1)
+1 JMP 431 Somberwald Stag
+1 JMP 434 Sylvan Brushstrider
+1 JMP 380 Brindle Shoat
+1 JMP 387 Dawntreader Elk
+1 JMP 406 Irresistible Prey
+1 JMP 438 Time to Feed
+1 JMP 386 Crushing Canopy
+1 JMP 473 Marauder's Axe
+6 JMP 74 Forest
+1 JMP 30 Neyith of the Dire Hunt
+1 JMP 34 Thriving Grove
+1 JMP 76 Forest
+1 M21 182 Fungal Rebirth
+1 M21 212 Trufflesnout
+1 M21 202 Sabertooth Mauler
+
+# Predatory (2)
+1 JMP 466 Gingerbrute
+1 JMP 373 Affectionate Indrik
+1 JMP 380 Brindle Shoat
+1 JMP 387 Dawntreader Elk
+1 JMP 406 Irresistible Prey
+1 JMP 438 Time to Feed
+1 JMP 386 Crushing Canopy
+1 JMP 473 Marauder's Axe
+6 JMP 74 Forest
+1 JMP 30 Neyith of the Dire Hunt
+1 JMP 34 Thriving Grove
+1 JMP 76 Forest
+1 M21 182 Fungal Rebirth
+1 M21 212 Trufflesnout
+1 M21 202 Sabertooth Mauler
+
+# Predatory (3)
+1 JMP 436 Thragtusk
+1 JMP 431 Somberwald Stag
+1 JMP 380 Brindle Shoat
+1 JMP 387 Dawntreader Elk
+1 JMP 466 Gingerbrute
+1 JMP 406 Irresistible Prey
+1 JMP 438 Time to Feed
+1 JMP 386 Crushing Canopy
+1 JMP 473 Marauder's Axe
+6 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 JMP 76 Forest
+1 M21 182 Fungal Rebirth
+1 M21 212 Trufflesnout
+1 M21 202 Sabertooth Mauler
+
+# Predatory (4)
+1 JMP 424 Ravenous Baloth
+1 JMP 373 Affectionate Indrik
+1 JMP 380 Brindle Shoat
+1 JMP 387 Dawntreader Elk
+1 JMP 434 Sylvan Brushstrider
+1 JMP 406 Irresistible Prey
+1 JMP 438 Time to Feed
+1 JMP 411 Momentous Fall
+1 JMP 386 Crushing Canopy
+6 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 JMP 76 Forest
+1 M21 182 Fungal Rebirth
+1 M21 212 Trufflesnout
+1 M21 202 Sabertooth Mauler
+
+# Rainbow
+1 JMP 454 Maelstrom Archangel
+1 JMP 461 Chamber Sentry
+1 JMP 450 Dinrova Horror
+1 JMP 451 Fusion Elemental
+1 JMP 455 Raging Regisaur
+1 JMP 452 Ironroot Warlord
+1 JMP 457 Alloy Myr
+1 JMP 486 Skittering Surveyor
+1 M21 235 Prismite
+1 JMP 449 Auger Spree
+1 JMP 478 Prophetic Prism
+1 JMP 453 Lawmage's Binding
+1 JMP 492 Mirrodin's Core
+1 JMP 495 Rupture Spire
+1 JMP 74 Forest
+1 JMP 50 Island
+1 JMP 64 Mountain
+1 JMP 45 Plains
+1 JMP 57 Swamp
+1 JMP 78 Terramorphic Expanse
+
+# Reanimated (1)
+1 JMP 257 Mire Triton
+1 JMP 215 Cadaver Imp
+1 JMP 221 Crow of Dark Tidings
+1 JMP 256 Miasmic Mummy
+1 JMP 284 Tithebearer Giant
+1 JMP 270 Reanimate
+1 JMP 235 Funeral Rites
+6 JMP 57 Swamp
+1 JMP 37 Thriving Moor
+1 JMP 56 Swamp
+1 M21 88 Archfiend's Vessel
+1 M21 101 Goremand
+1 M21 97 Eliminate
+1 M21 93 Crypt Lurker
+1 M21 119 Rise Again
+
+# Reanimated (2)
+1 JMP 257 Mire Triton
+1 JMP 221 Crow of Dark Tidings
+1 JMP 256 Miasmic Mummy
+1 JMP 270 Reanimate
+1 JMP 235 Funeral Rites
+1 JMP 252 Macabre Waltz
+6 JMP 57 Swamp
+1 JMP 37 Thriving Moor
+1 JMP 56 Swamp
+1 M21 92 Carrion Grub
+1 M21 101 Goremand
+1 M21 97 Eliminate
+1 M21 93 Crypt Lurker
+1 M21 119 Rise Again
+1 M21 100 Gloom Sower
+
+# Reanimated (3)
+1 JMP 241 Gravewaker
+1 JMP 274 Scourge of Nel Toth
+1 JMP 257 Mire Triton
+1 JMP 221 Crow of Dark Tidings
+1 JMP 256 Miasmic Mummy
+1 JMP 230 Exhume
+1 JMP 235 Funeral Rites
+1 JMP 288 Zombie Infestation
+6 JMP 57 Swamp
+1 JMP 37 Thriving Moor
+1 JMP 56 Swamp
+1 M21 101 Goremand
+1 M21 97 Eliminate
+1 M21 93 Crypt Lurker
+1 M21 119 Rise Again
+
+# Reanimated (4)
+1 JMP 257 Mire Triton
+1 JMP 221 Crow of Dark Tidings
+1 JMP 256 Miasmic Mummy
+1 JMP 271 Rise of the Dark Realms
+1 JMP 235 Funeral Rites
+1 JMP 280 Soul Salvage
+6 JMP 57 Swamp
+1 JMP 37 Thriving Moor
+1 JMP 56 Swamp
+1 M21 92 Carrion Grub
+1 M21 101 Goremand
+1 M21 97 Eliminate
+1 M21 93 Crypt Lurker
+1 M21 119 Rise Again
+1 M21 100 Gloom Sower
+
+# Seismic
+1 JMP 331 Grim Lavamancer
+1 JMP 304 Cinder Elemental
+1 JMP 362 Seismic Elemental
+1 JMP 290 Ashmouth Hound
+1 JMP 297 Bloodrock Cyclops
+1 JMP 351 Molten Ravager
+1 JMP 364 Spitting Earth
+1 JMP 347 Magmaquake
+1 JMP 346 Magma Jet
+1 JMP 368 Volcanic Fallout
+1 M21 171 Volcanic Geyser
+1 JMP 472 Mana Geode
+6 JMP 64 Mountain
+1 JMP 33 Thriving Bluff
+1 JMP 64 Mountain
+
+# Teferi
+1 JMP 164 Prescient Chimera
+1 JMP 171 Sage's Row Savant
+1 M21 83 Vodalian Arcanist
+1 JMP 182 Talrand's Invocation
+1 JMP 152 Exclude
+1 JMP 156 Leave in the Dust
+1 M21 59 Opt
+7 JMP 50 Island
+1 JMP 36 Thriving Isle
+1 M21 290 Teferi, Master of Time
+1 M21 76 Teferi's Ageless Insight
+1 M21 80 Tolarian Kraken
+1 M21 78 Teferi's Tutelage
+1 M21 295 Teferi's Protege
+
+# Tree-Hugging (1)
+1 JMP 422 Primordial Sage
+1 JMP 442 Wall of Blossoms
+1 JMP 375 Ambassador Oak
+1 M21 207 Snarespinner
+1 JMP 412 Nature's Way
+1 JMP 393 Explore
+1 JMP 374 Aggressive Urge
+1 JMP 386 Crushing Canopy
+6 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 JMP 70 Forest
+1 M21 174 Burlfist Oak
+1 M21 213 Warden of the Woods
+1 M21 193 Llanowar Visionary
+1 M21 187 Gnarled Sage
+
+# Tree-Hugging (2)
+1 JMP 422 Primordial Sage
+1 JMP 442 Wall of Blossoms
+1 JMP 375 Ambassador Oak
+1 M21 207 Snarespinner
+1 JMP 412 Nature's Way
+1 JMP 393 Explore
+1 JMP 386 Crushing Canopy
+1 JMP 445 Wildsize
+6 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 JMP 70 Forest
+1 M21 174 Burlfist Oak
+1 M21 213 Warden of the Woods
+1 M21 193 Llanowar Visionary
+1 M21 187 Gnarled Sage
+
+# Tree-Hugging (3)
+1 JMP 442 Wall of Blossoms
+1 JMP 375 Ambassador Oak
+1 M21 207 Snarespinner
+1 JMP 412 Nature's Way
+1 JMP 393 Explore
+1 JMP 374 Aggressive Urge
+1 JMP 386 Crushing Canopy
+6 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 JMP 70 Forest
+1 M21 376 Jolrael, Mwonvuli Recluse
+1 M21 174 Burlfist Oak
+1 M21 213 Warden of the Woods
+1 M21 193 Llanowar Visionary
+1 M21 187 Gnarled Sage
+
+# Tree-Hugging (4)
+1 JMP 432 Soul of the Harvest
+1 JMP 442 Wall of Blossoms
+1 M21 207 Snarespinner
+1 JMP 412 Nature's Way
+1 JMP 393 Explore
+1 JMP 386 Crushing Canopy
+1 JMP 445 Wildsize
+1 JMP 441 Verdant Embrace
+6 JMP 74 Forest
+1 JMP 34 Thriving Grove
+1 JMP 70 Forest
+1 M21 174 Burlfist Oak
+1 M21 213 Warden of the Woods
+1 M21 193 Llanowar Visionary
+1 M21 187 Gnarled Sage
+
+# Under the Sea (1)
+1 JMP 177 Sigiled Starfish
+1 JMP 161 Octoprophet
+1 JMP 197 Wishful Merfolk
+1 JMP 138 Aegis Turtle
+1 JMP 189 Voyage's End
+1 JMP 489 Unstable Obelisk
+1 JMP 192 Waterknot
+7 JMP 50 Island
+1 JMP 36 Thriving Isle
+1 JMP 46 Island
+1 M21 60 Pursued Whale
+1 M21 80 Tolarian Kraken
+1 M21 84 Waker of Waves
+1 M21 67 Rousing Read
+
+# Under the Sea (2)
+1 JMP 146 Cryptic Serpent
+1 JMP 177 Sigiled Starfish
+1 JMP 161 Octoprophet
+1 JMP 197 Wishful Merfolk
+1 JMP 138 Aegis Turtle
+1 JMP 193 Whelming Wave
+1 JMP 180 Sweep Away
+1 JMP 489 Unstable Obelisk
+1 JMP 192 Waterknot
+7 JMP 50 Island
+1 JMP 36 Thriving Isle
+1 JMP 46 Island
+1 M21 60 Pursued Whale
+1 M21 84 Waker of Waves
+
+# Unicorns
+1 JMP 112 Inspiring Unicorn
+1 JMP 122 Mesa Unicorn
+1 JMP 131 Ronom Unicorn
+1 JMP 136 Valorous Stance
+1 JMP 97 Cloudshift
+1 JMP 110 Inspired Charge
+1 M21 17 Faith's Fetters
+6 JMP 45 Plains
+1 JMP 3 Emiel the Blessed
+1 JMP 1 Blessed Sanctuary
+1 JMP 2 Brightmare
+1 JMP 35 Thriving Heath
+1 JMP 41 Plains
+1 M21 42 Valorous Steed
+1 M21 14 Daybreak Charger
+
+# Vampires (1)
+1 JMP 206 Blood Artist
+1 JMP 209 Bloodbond Vampire
+1 JMP 239 Gifted Aetherborn
+1 JMP 245 Kalastria Nightwatch
+1 JMP 199 Agonizing Syphon
+1 JMP 247 Last Gasp
+1 JMP 229 Eternal Thirst
+6 JMP 57 Swamp
+1 JMP 16 Nocturnal Feeder
+1 JMP 37 Thriving Moor
+1 JMP 60 Swamp
+1 M21 362 Vito, Thorn of the Dusk Rose
+1 M21 122 Silversmote Ghoul
+1 M21 121 Sanguine Indulgence
+1 M21 100 Gloom Sower
+
+# Vampires (2)
+1 JMP 208 Blood Host
+1 JMP 209 Bloodbond Vampire
+1 JMP 239 Gifted Aetherborn
+1 JMP 218 Child of Night
+1 JMP 199 Agonizing Syphon
+1 JMP 247 Last Gasp
+1 JMP 229 Eternal Thirst
+6 JMP 57 Swamp
+1 JMP 16 Nocturnal Feeder
+1 JMP 37 Thriving Moor
+1 JMP 60 Swamp
+1 M21 362 Vito, Thorn of the Dusk Rose
+1 M21 122 Silversmote Ghoul
+1 M21 121 Sanguine Indulgence
+1 M21 100 Gloom Sower
+
+# Vampires (3)
+1 JMP 272 Sangromancer
+1 JMP 209 Bloodbond Vampire
+1 JMP 239 Gifted Aetherborn
+1 JMP 275 Sengir Vampire
+1 JMP 285 Vampire Neonate
+1 JMP 199 Agonizing Syphon
+1 JMP 247 Last Gasp
+1 JMP 231 Exquisite Blood
+6 JMP 57 Swamp
+1 JMP 16 Nocturnal Feeder
+1 JMP 37 Thriving Moor
+1 JMP 60 Swamp
+1 M21 122 Silversmote Ghoul
+1 M21 121 Sanguine Indulgence
+1 M21 100 Gloom Sower
+
+# Vampires (4)
+1 JMP 225 Drana, Liberator of Malakir
+1 JMP 209 Bloodbond Vampire
+1 JMP 232 Falkenrath Noble
+1 JMP 239 Gifted Aetherborn
+1 JMP 218 Child of Night
+1 JMP 199 Agonizing Syphon
+1 JMP 247 Last Gasp
+1 JMP 254 Mark of the Vampire
+6 JMP 57 Swamp
+1 JMP 16 Nocturnal Feeder
+1 JMP 37 Thriving Moor
+1 JMP 60 Swamp
+1 M21 122 Silversmote Ghoul
+1 M21 121 Sanguine Indulgence
+1 M21 100 Gloom Sower
+
+# Walls
+1 JMP 442 Wall of Blossoms
+1 JMP 382 Carven Caryatid
+1 JMP 465 Gargoyle Sentinel
+1 JMP 417 Overgrown Battlement
+1 JMP 401 Grave Bramble
+1 JMP 443 Wall of Vines
+1 JMP 480 Roving Keep
+1 M21 195 Portcullis Vine
+1 JMP 386 Crushing Canopy
+1 JMP 490 Warmonger's Chariot
+1 JMP 378 Assault Formation
+6 JMP 74 Forest
+1 JMP 31 Towering Titan
+1 JMP 34 Thriving Grove
+1 JMP 75 Forest
+
+# Well-Read (1)
+1 JMP 487 Suspicious Bookcase
+1 JMP 162 Oneirophage
+1 JMP 150 Erratic Visionary
+1 JMP 481 Runed Servitor
+1 M21 59 Opt
+1 JMP 147 Curiosity
+1 JMP 159 Narcolepsy
+6 JMP 50 Island
+1 JMP 13 Ormos, Archive Keeper
+1 JMP 36 Thriving Isle
+1 JMP 53 Island
+1 M21 80 Tolarian Kraken
+1 M21 81 Tome Anima
+1 M21 55 Library Larcenist
+1 M21 67 Rousing Read
+
+# Well-Read (2)
+1 JMP 162 Oneirophage
+1 JMP 150 Erratic Visionary
+1 JMP 481 Runed Servitor
+1 M21 59 Opt
+1 JMP 459 Arcane Encyclopedia
+1 JMP 147 Curiosity
+1 M21 47 Capture Sphere
+6 JMP 50 Island
+1 JMP 13 Ormos, Archive Keeper
+1 JMP 36 Thriving Isle
+1 JMP 53 Island
+1 M21 80 Tolarian Kraken
+1 M21 81 Tome Anima
+1 M21 55 Library Larcenist
+1 M21 67 Rousing Read
+
+# Well-Read (3)
+1 JMP 162 Oneirophage
+1 JMP 487 Suspicious Bookcase
+1 JMP 143 Cloudreader Sphinx
+1 JMP 150 Erratic Visionary
+1 JMP 481 Runed Servitor
+1 M21 59 Opt
+1 JMP 169 Rhystic Study
+1 JMP 147 Curiosity
+1 JMP 159 Narcolepsy
+6 JMP 50 Island
+1 JMP 36 Thriving Isle
+1 JMP 53 Island
+1 M21 80 Tolarian Kraken
+1 M21 81 Tome Anima
+1 M21 55 Library Larcenist
+
+# Well-Read (4)
+1 JMP 158 Mystic Archaeologist
+1 JMP 162 Oneirophage
+1 JMP 487 Suspicious Bookcase
+1 JMP 143 Cloudreader Sphinx
+1 JMP 481 Runed Servitor
+1 JMP 167 Read the Runes
+1 M21 59 Opt
+1 JMP 147 Curiosity
+1 M21 47 Capture Sphere
+6 JMP 50 Island
+1 JMP 36 Thriving Isle
+1 JMP 53 Island
+1 M21 80 Tolarian Kraken
+1 M21 81 Tome Anima
+1 M21 55 Library Larcenist
+
+# Witchcraft (1)
+1 JMP 211 Bogbrew Witch
+1 JMP 253 Malakir Familiar
+1 JMP 283 Tempting Witch
+1 JMP 210 Bloodhunter Bat
+1 JMP 216 Cauldron Familiar
+2 JMP 234 Festering Newt
+1 JMP 201 Bake into a Pie
+1 JMP 460 Bubbling Cauldron
+6 JMP 57 Swamp
+1 JMP 18 Witch of the Moors
+1 JMP 37 Thriving Moor
+1 JMP 59 Swamp
+1 M21 129 Witch's Cauldron
+1 M21 99 Finishing Blow
+
+# Witchcraft (2)
+1 JMP 283 Tempting Witch
+1 JMP 211 Bogbrew Witch
+1 JMP 282 Swarm of Bloodflies
+1 JMP 203 Black Cat
+1 JMP 210 Bloodhunter Bat
+2 JMP 234 Festering Newt
+1 JMP 207 Blood Divination
+1 JMP 201 Bake into a Pie
+1 JMP 247 Last Gasp
+1 JMP 460 Bubbling Cauldron
+6 JMP 57 Swamp
+1 JMP 18 Witch of the Moors
+1 JMP 37 Thriving Moor
+1 JMP 59 Swamp
+
+# Wizards (1)
+1 JMP 181 Talrand, Sky Summoner
+1 JMP 153 Exclusion Mage
+1 JMP 171 Sage's Row Savant
+1 M21 83 Vodalian Arcanist
+1 JMP 182 Talrand's Invocation
+1 JMP 196 Winged Words
+1 JMP 198 Wizard's Retort
+1 JMP 140 Befuddle
+1 M21 51 Frost Breath
+1 M21 59 Opt
+6 JMP 50 Island
+1 JMP 36 Thriving Isle
+1 JMP 47 Island
+1 M21 71 Shipwreck Dowser
+1 M21 62 Read the Tides
+
+# Wizards (2)
+1 JMP 153 Exclusion Mage
+1 JMP 145 Crookclaw Transmuter
+1 JMP 171 Sage's Row Savant
+1 JMP 173 Sea Gate Oracle
+1 M21 83 Vodalian Arcanist
+1 JMP 182 Talrand's Invocation
+1 JMP 196 Winged Words
+1 JMP 198 Wizard's Retort
+1 M21 59 Opt
+1 JMP 494 Riptide Laboratory
+5 JMP 50 Island
+1 JMP 36 Thriving Isle
+1 JMP 47 Island
+1 M21 71 Shipwreck Dowser
+1 M21 66 Rookie Mistake
+1 M21 62 Read the Tides
+
+# Wizards (3)
+1 JMP 181 Talrand, Sky Summoner
+1 JMP 171 Sage's Row Savant
+1 M21 83 Vodalian Arcanist
+1 JMP 182 Talrand's Invocation
+1 JMP 196 Winged Words
+1 JMP 198 Wizard's Retort
+1 M21 82 Unsubstantiate
+1 M21 59 Opt
+1 M21 47 Capture Sphere
+6 JMP 50 Island
+1 JMP 36 Thriving Isle
+1 JMP 47 Island
+1 M21 71 Shipwreck Dowser
+1 M21 62 Read the Tides
+1 M21 295 Teferi's Protege
+
+# Wizards (4)
+1 JMP 171 Sage's Row Savant
+1 JMP 179 Storm Sculptor
+1 M21 83 Vodalian Arcanist
+1 JMP 182 Talrand's Invocation
+1 JMP 198 Wizard's Retort
+1 JMP 163 Peel from Reality
+1 M21 61 Rain of Revelation
+1 M21 51 Frost Breath
+6 JMP 50 Island
+1 JMP 36 Thriving Isle
+1 JMP 47 Island
+1 M21 348 Barrin, Tolarian Archmage
+1 M21 71 Shipwreck Dowser
+1 M21 62 Read the Tides
+1 M21 295 Teferi's Protege
+
