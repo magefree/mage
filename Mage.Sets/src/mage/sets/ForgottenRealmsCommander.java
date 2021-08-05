@@ -192,6 +192,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Return of the Wildspeaker", 168, Rarity.RARE, mage.cards.r.ReturnOfTheWildspeaker.class));
         cards.add(new SetCardInfo("Return to Nature", 169, Rarity.COMMON, mage.cards.r.ReturnToNature.class));
         cards.add(new SetCardInfo("Revivify", 10, Rarity.RARE, mage.cards.r.Revivify.class));
+        cards.add(new SetCardInfo("Ride the Avalanche", 54, Rarity.RARE, mage.cards.r.RideTheAvalanche.class));
         cards.add(new SetCardInfo("Rile", 136, Rarity.COMMON, mage.cards.r.Rile.class));
         cards.add(new SetCardInfo("Rishkar's Expertise", 170, Rarity.RARE, mage.cards.r.RishkarsExpertise.class));
         cards.add(new SetCardInfo("Riverwise Augur", 93, Rarity.UNCOMMON, mage.cards.r.RiverwiseAugur.class));
