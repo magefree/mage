@@ -110,4 +110,51 @@ public class BuybackTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Elvish Fury", 0);
         assertGraveyardCount(playerA, "Elvish Fury", 1);
     }
+
+    @Test
+    public void test_FreeCast() {
+        // bug: buyback doesn't work on free cast (no mana)
+        // https://github.com/magefree/mage/issues/4721
+
+        // {1}, {T}: You may cast a nonland card from your hand without paying its mana cost if it has
+        // the same name as a spell that was cast this turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Twinning Glass", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        // Buyback {3} (You may pay an additional 3 as you cast this spell. If you do, put this card into your hand as it resolves.)
+        // Copy target instant or sorcery spell. You may choose new targets for the copy.
+        addCard(Zone.HAND, playerA, "Reiterate", 1); // Instant  {1}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", (3 + 3) * 3);
+        //
+        // Lightning Bolt deals 3 damage to any target.
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2); // {R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        // bolt 1 - cast (R) and copy (RRR), return reiterate with buyback (RRR)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reiterate", "Lightning Bolt");
+        setChoice(playerA, true); // use buyback
+        setChoice(playerA, false); // same bolt's target
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkLife("bolt 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 20 - 3 * 2);
+        checkHandCardCount("bolt 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reiterate", 1);
+        checkPermanentTapped("bolt 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain", true, 1 + 3 + 3);
+
+        // bolt 2 - cast (R) and copy as free cast (R), return reiterate with buyback (RRR)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}:");
+        setChoice(playerA, "Reiterate"); // free cast
+        setChoice(playerA, true); // use buyback
+        addTarget(playerA, "Lightning Bolt"); // copy target
+        setChoice(playerA, false); // same bolt's target
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkLife("bolt 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 20 - 3 * 2 - 3 * 2);
+        checkHandCardCount("bolt 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reiterate", 1);
+        checkPermanentTapped("bolt 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain", true, (1 + 3 + 3) + (1 + 1 + 3));
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
 }
