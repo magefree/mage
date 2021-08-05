@@ -64,4 +64,8 @@ public interface VariableCost {
      * @return
      */
     Cost getFixedCostsFromAnnouncedValue(int xValue);
+
+    VariableCostType getCostType();
+
+    void setCostType(VariableCostType costType);
 }

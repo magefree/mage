@@ -2,10 +2,7 @@ package mage.abilities.costs.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
-import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.ColoredManaSymbol;
@@ -32,7 +29,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     protected final UUID id;
     protected String text = null;
 
-    private static Map<String, ManaCosts> costsCache = new ConcurrentHashMap<>(); // must be thread safe, can't use nulls
+    private static final Map<String, ManaCosts> costsCache = new ConcurrentHashMap<>(); // must be thread safe, can't use nulls
 
     public ManaCostsImpl() {
         this.id = UUID.randomUUID();
@@ -471,7 +468,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                                         modifierForX++;
                                     }
                                 }
-                                this.add(new VariableManaCost(modifierForX));
+                                this.add(new VariableManaCost(VariableCostType.NORMAL, modifierForX));
                             } //TODO: handle multiple {X} and/or {Y} symbols
                     } else if (Character.isDigit(symbol.charAt(0))) {
                         MonoHybridManaCost cost;

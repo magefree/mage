@@ -4,11 +4,9 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.OptionalAdditionalCostImpl;
-import mage.abilities.costs.OptionalAdditionalSourceCosts;
+import mage.abilities.costs.*;
 import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -62,9 +60,9 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
         MORE
     }
 
-    private UUID conspireId;
+    private final UUID conspireId;
     private String reminderText;
-    private OptionalAdditionalCostImpl conspireCost;
+    private OptionalAdditionalCost conspireCost;
 
     /**
      * Unique Id for a ConspireAbility but may not change while a continuous
@@ -87,10 +85,17 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
                 reminderText = "As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.";
                 break;
         }
+
         Cost cost = new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true));
         cost.setText("");
-        conspireCost = new OptionalAdditionalCostImpl(keywordText, " ", reminderText, cost);
+        addConspireCostAndSetup(new OptionalAdditionalCostImpl(keywordText, " ", reminderText, cost));
+
         addSubAbility(new ConspireTriggeredAbility(conspireId));
+    }
+
+    private void addConspireCostAndSetup(OptionalAdditionalCost newCost) {
+        this.conspireCost = newCost;
+        this.conspireCost.setCostType(VariableCostType.ADDITIONAL);
     }
 
     public ConspireAbility(final ConspireAbility ability) {
@@ -139,9 +144,13 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
                 if (conspireCost.canPay(ability, this, getControllerId(), game)
                         && player.chooseUse(Outcome.Benefit, "Pay " + conspireCost.getText(false) + " ?", ability, game)) {
                     activateConspire(ability, game);
-                    for (Iterator it = conspireCost.iterator(); it.hasNext(); ) {
+                    for (Iterator it = ((Costs) conspireCost).iterator(); it.hasNext(); ) {
                         Cost cost = (Cost) it.next();
-                        ability.getCosts().add(cost.copy());
+                        if (cost instanceof ManaCostsImpl) {
+                            ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
+                        } else {
+                            ability.getCosts().add(cost.copy());
+                        }
                     }
                 }
             }
@@ -194,7 +203,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
 
 class ConspireTriggeredAbility extends TriggeredAbilityImpl {
 
-    private UUID conspireId;
+    private final UUID conspireId;
 
     public ConspireTriggeredAbility(UUID conspireId) {
         super(Zone.STACK, new ConspireEffect());

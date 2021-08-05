@@ -1,5 +1,6 @@
 package org.mage.test.cards.continuous;
 
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -182,7 +183,7 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         int xInstancesCount = 2;
         int xAnnouncedValue = 3;
         int xMultiplier = 2;
-        VariableManaCost cost = new VariableManaCost(xInstancesCount);
+        VariableManaCost cost = new VariableManaCost(VariableCostType.NORMAL, xInstancesCount);
         cost.setAmount(xAnnouncedValue * xMultiplier, xAnnouncedValue * xInstancesCount, false);
 
         Assert.assertEquals("instances count", xInstancesCount, cost.getXInstancesCount());

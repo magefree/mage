@@ -36,25 +36,31 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
     private static final String keywordText = "Buyback";
     private static final String reminderTextCost = "You may {cost} in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.";
     private static final String reminderTextMana = "You may pay an additional {cost} as you cast this spell. If you do, put this card into your hand as it resolves.";
+
     protected OptionalAdditionalCost buybackCost;
     private int amountToReduceBy = 0;
 
     public BuybackAbility(String manaString) {
         super(Zone.STACK, new BuybackEffect());
-        this.buybackCost = new OptionalAdditionalCostImpl(keywordText, reminderTextMana, new ManaCostsImpl(manaString));
+        addBuybackCostAndSetup(new OptionalAdditionalCostImpl(keywordText, reminderTextMana, new ManaCostsImpl(manaString)));
         setRuleAtTheTop(true);
     }
 
     public BuybackAbility(Cost cost) {
         super(Zone.STACK, new BuybackEffect());
-        this.buybackCost = new OptionalAdditionalCostImpl(keywordText, "&mdash;", reminderTextCost, cost);
+        addBuybackCostAndSetup(new OptionalAdditionalCostImpl(keywordText, "&mdash;", reminderTextCost, cost));
         setRuleAtTheTop(true);
+    }
+
+    private void addBuybackCostAndSetup(OptionalAdditionalCost newCost) {
+        this.buybackCost = newCost;
+        this.buybackCost.setCostType(VariableCostType.ADDITIONAL);
     }
 
     public BuybackAbility(final BuybackAbility ability) {
         super(ability);
-        buybackCost = new OptionalAdditionalCostImpl((OptionalAdditionalCostImpl) ability.buybackCost);
-        amountToReduceBy = ability.amountToReduceBy;
+        this.buybackCost = ability.buybackCost.copy();
+        this.amountToReduceBy = ability.amountToReduceBy;
     }
 
     @Override

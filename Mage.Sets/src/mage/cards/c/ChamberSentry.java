@@ -1,12 +1,12 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -26,8 +26,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jmharmon
  */
 public final class ChamberSentry extends CardImpl {
@@ -69,7 +70,7 @@ public final class ChamberSentry extends CardImpl {
 class ChamberSentryRemoveVariableCountersSourceCost extends VariableCostImpl {
 
     protected int minimalCountersToPay = 0;
-    private String counterName;
+    private final String counterName;
 
     public ChamberSentryRemoveVariableCountersSourceCost(Counter counter) {
         this(counter, 0);
@@ -84,7 +85,7 @@ class ChamberSentryRemoveVariableCountersSourceCost extends VariableCostImpl {
     }
 
     public ChamberSentryRemoveVariableCountersSourceCost(Counter counter, int minimalCountersToPay, String text) {
-        super(counter.getName() + " counters to remove");
+        super(VariableCostType.NORMAL, counter.getName() + " counters to remove");
         this.minimalCountersToPay = minimalCountersToPay;
         this.counterName = counter.getName();
         if (text == null || text.isEmpty()) {

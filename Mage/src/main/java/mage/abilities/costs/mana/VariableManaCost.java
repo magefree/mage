@@ -4,6 +4,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.VariableCostType;
 import mage.constants.ColoredManaSymbol;
 import mage.filter.FilterMana;
 import mage.game.Game;
@@ -18,6 +19,7 @@ public final class VariableManaCost extends ManaCostImpl implements VariableCost
     // 1. as X value in spell/ability cast (announce X, set VariableManaCost as paid and add generic mana to pay instead)
     // 2. as X value in direct pay (X already announced, cost is unpaid, need direct pay)
 
+    protected VariableCostType costType;
     protected int xInstancesCount; // number of {X} instances in cost like {X} or {X}{X}
     protected int xValue = 0; // final X value after announce and replace events
     protected int xPay = 0; // final/total need pay after announce and replace events (example: {X}{X}, X=3, xPay = 6)
@@ -27,11 +29,12 @@ public final class VariableManaCost extends ManaCostImpl implements VariableCost
     protected int minX = 0;
     protected int maxX = Integer.MAX_VALUE;
 
-    public VariableManaCost() {
-        this(1);
+    public VariableManaCost(VariableCostType costType) {
+        this(costType, 1);
     }
 
-    public VariableManaCost(int xInstancesCount) {
+    public VariableManaCost(VariableCostType costType, int xInstancesCount) {
+        this.costType = costType;
         this.xInstancesCount = xInstancesCount;
         this.cost = new Mana();
         options.add(new Mana());
@@ -39,6 +42,7 @@ public final class VariableManaCost extends ManaCostImpl implements VariableCost
 
     public VariableManaCost(final VariableManaCost manaCost) {
         super(manaCost);
+        this.costType = manaCost.costType;
         this.xInstancesCount = manaCost.xInstancesCount;
         this.xValue = manaCost.xValue;
         this.xPay = manaCost.xPay;
@@ -170,5 +174,15 @@ public final class VariableManaCost extends ManaCostImpl implements VariableCost
 
     public void setFilter(FilterMana filter) {
         this.filter = filter;
+    }
+
+    @Override
+    public VariableCostType getCostType() {
+        return this.costType;
+    }
+
+    @Override
+    public void setCostType(VariableCostType costType) {
+        this.costType = costType;
     }
 }

@@ -1,11 +1,13 @@
 package mage.abilities.keyword;
 
+import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
@@ -26,7 +28,6 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * 502.59. Suspend
@@ -108,16 +109,16 @@ import mage.ApprovingObject;
  */
 public class SuspendAbility extends SpecialAction {
 
-    private String ruleText;
+    private final String ruleText;
     private boolean gainedTemporary;
 
     /**
      * Gives the card the SuspendAbility
      *
      * @param suspend - amount of time counters, if Integer.MAX_VALUE is set
-     * there will be {X} costs and X counters added
-     * @param cost - null is used for temporary gained suspend ability
-     * @param card - card that has the suspend ability
+     *                there will be {X} costs and X counters added
+     * @param cost    - null is used for temporary gained suspend ability
+     * @param card    - card that has the suspend ability
      */
     public SuspendAbility(int suspend, ManaCost cost, Card card) {
         this(suspend, cost, card, false);
@@ -129,7 +130,7 @@ public class SuspendAbility extends SpecialAction {
         this.addEffect(new SuspendExileEffect(suspend));
         this.usesStack = false;
         if (suspend == Integer.MAX_VALUE) {
-            VariableManaCost xCosts = new VariableManaCost();
+            VariableManaCost xCosts = new VariableManaCost(VariableCostType.ALTERNATIVE);
             xCosts.setMinX(1);
             this.addManaCost(xCosts);
             cost = new ManaCostsImpl("{X}" + cost.getText());
@@ -138,7 +139,7 @@ public class SuspendAbility extends SpecialAction {
         if (cost != null) {
             sb.append(suspend == Integer.MAX_VALUE ? "X" : suspend).append("&mdash;")
                     .append(cost.getText()).append(suspend
-                    == Integer.MAX_VALUE ? ". X can't be 0." : "");
+                            == Integer.MAX_VALUE ? ". X can't be 0." : "");
             if (!shortRule) {
                 sb.append(" <i>(Rather than cast this card from your hand, pay ")
                         .append(cost.getText())
@@ -191,7 +192,7 @@ public class SuspendAbility extends SpecialAction {
         UUID exileId = (UUID) game.getState().getValue("SuspendExileId" + controllerId.toString());
         if (exileId == null) {
             exileId = UUID.randomUUID();
-            game.getState().setValue("SuspendExileId" + controllerId.toString(), exileId);
+            game.getState().setValue("SuspendExileId" + controllerId, exileId);
         }
         return exileId;
     }
@@ -212,7 +213,7 @@ public class SuspendAbility extends SpecialAction {
         return new ActivationStatus(object.isInstant(game)
                 || object.hasAbility(FlashAbility.getInstance(), game)
                 || null != game.getContinuousEffects().asThough(sourceId,
-                        AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
+                AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
                 || game.canPlaySorcery(playerId), null);
     }
 
@@ -306,7 +307,7 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "When the last time counter is removed from this card ({this}), "
-                + "if it's removed from the game, " ;
+                + "if it's removed from the game, ";
     }
 
     @Override
@@ -428,7 +429,7 @@ class SuspendBeginningOfUpkeepInterveningIfTriggeredAbility extends ConditionalI
 
     public SuspendBeginningOfUpkeepInterveningIfTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()),
-                TargetController.YOU, false),
+                        TargetController.YOU, false),
                 SuspendedCondition.instance,
                 "At the beginning of your upkeep, if this card ({this}) is suspended, remove a time counter from it.");
         this.setRuleVisible(false);

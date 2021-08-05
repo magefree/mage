@@ -16,6 +16,7 @@ import java.util.UUID;
 public abstract class VariableCostImpl implements Cost, VariableCost {
 
     protected UUID id;
+    protected VariableCostType costType;
     protected String text;
     protected boolean paid;
     protected Targets targets;
@@ -23,8 +24,8 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
     protected String xText;
     protected String actionText;
 
-    public VariableCostImpl(String actionText) {
-        this("X", actionText);
+    public VariableCostImpl(VariableCostType costType, String actionText) {
+        this(costType, "X", actionText);
     }
 
     /**
@@ -32,17 +33,19 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
      * @param actionText what happens with the value (e.g. "to tap", "to exile
      *                   from your graveyard")
      */
-    public VariableCostImpl(String xText, String actionText) {
-        id = UUID.randomUUID();
-        paid = false;
-        targets = new Targets();
-        amountPaid = 0;
+    public VariableCostImpl(VariableCostType costType, String xText, String actionText) {
+        this.id = UUID.randomUUID();
+        this.costType = costType;
+        this.paid = false;
+        this.targets = new Targets();
+        this.amountPaid = 0;
         this.xText = xText;
         this.actionText = actionText;
     }
 
     public VariableCostImpl(final VariableCostImpl cost) {
         this.id = cost.id;
+        this.costType = cost.costType;
         this.text = cost.text;
         this.paid = cost.paid;
         this.targets = cost.targets.copy();
@@ -107,14 +110,12 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return true;
         /* not used */
-
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         return true;
         /* not used */
-
     }
 
     @Override
@@ -149,5 +150,15 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
                     "Announce the number of " + actionText, game, source, this);
         }
         return xValue;
+    }
+
+    @Override
+    public VariableCostType getCostType() {
+        return this.costType;
+    }
+
+    @Override
+    public void setCostType(VariableCostType costType) {
+        this.costType = costType;
     }
 }

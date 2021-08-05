@@ -1,11 +1,9 @@
-
-
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -13,11 +11,12 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX
  */
-public class RemoveVariableCountersTargetCost extends VariableCostImpl  {
+public class RemoveVariableCountersTargetCost extends VariableCostImpl {
 
     protected FilterPermanent filter;
     protected CounterType counterTypeToRemove;
@@ -32,7 +31,7 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl  {
     }
 
     public RemoveVariableCountersTargetCost(FilterPermanent filter, CounterType counterTypeToRemove, String xText, int minValue) {
-        super(xText, new StringBuilder(counterTypeToRemove != null ? counterTypeToRemove.getName() + ' ' :"").append("counters to remove").toString());
+        super(VariableCostType.NORMAL, xText, new StringBuilder(counterTypeToRemove != null ? counterTypeToRemove.getName() + ' ' : "").append("counters to remove").toString());
         this.filter = filter;
         this.counterTypeToRemove = counterTypeToRemove;
         this.text = setText();
@@ -67,11 +66,11 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl  {
     @Override
     public int getMaxValue(Ability source, Game game) {
         int maxValue = 0;
-        for (Permanent permanent :game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
             if (counterTypeToRemove != null) {
                 maxValue += permanent.getCounters(game).getCount(counterTypeToRemove);
             } else {
-                for(Counter counter :permanent.getCounters(game).values()){
+                for (Counter counter : permanent.getCounters(game).values()) {
                     maxValue += counter.getCount();
                 }
             }
@@ -81,7 +80,7 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl  {
 
     @Override
     public Cost getFixedCostsFromAnnouncedValue(int xValue) {
-        return new RemoveCounterCost(new TargetPermanent(minValue,Integer.MAX_VALUE, filter, true), counterTypeToRemove, xValue);
+        return new RemoveCounterCost(new TargetPermanent(minValue, Integer.MAX_VALUE, filter, true), counterTypeToRemove, xValue);
     }
 
 }

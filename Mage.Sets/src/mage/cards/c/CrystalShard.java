@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.ManaUtil;
 
 import java.util.UUID;
 
@@ -79,7 +80,7 @@ class CrystalShardEffect extends OneShotEffect {
         if (player == null) {
             return true;
         }
-        Cost cost = new GenericManaCost(1);
+        Cost cost = ManaUtil.createManaCost(1, false);
         String message = "Pay {1}? (Otherwise " + targetCreature.getName() + " will be returned to its owner's hand)";
         if (player.chooseUse(Outcome.Benefit, message, source, game)) {
             cost.pay(source, game, source, targetCreature.getControllerId(), false, null);

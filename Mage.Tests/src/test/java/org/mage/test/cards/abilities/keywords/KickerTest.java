@@ -651,4 +651,68 @@ public class KickerTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Marsh Casualties", 1);
         assertPowerToughness(playerB, "Centaur Courser", 1, 1);
     }
+
+    @Test
+    public void test_FreeCast_Normal() {
+        skipInitShuffling();
+
+        // Kicker {2}
+        // If Ardent Soldier was kicked, it enters the battlefield with a +1/+1 counter on it.
+        addCard(Zone.LIBRARY, playerA, "Ardent Soldier", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2); // for kicker cost
+        //
+        // Whenever Etali, Primal Storm attacks, exile the top card of each player's library,
+        // then you may cast any number of nonland cards exiled this way without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Etali, Primal Storm", 1);
+
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ardent Soldier", false);
+
+        // attack and prepare free cast, use kicker
+        attack(1, playerA, "Etali, Primal Storm", playerB);
+        setChoice(playerA, true); // cast for free
+        setChoice(playerA, "Ardent Soldier"); // cast for free
+        setChoice(playerA, true); // use kicker
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertCounterCount(playerA, "Ardent Soldier", CounterType.P1P1, 1); // from kicker
+    }
+
+    @Test
+    public void test_FreeCast_MinXValueMustWork() {
+        // bug:
+        // Can cast Thieving Skydiver with kicker's X = 0 on Etali, Primal Storm
+        skipInitShuffling();
+
+        // Kicker {X}. X can't be 0.
+        // When Thieving Skydiver enters the battlefield, if it was kicked, gain control of target artifact with
+        // converted mana cost X or less. If that artifact is an Equipment, attach it to Thieving Skydiver.
+        addCard(Zone.LIBRARY, playerA, "Thieving Skydiver", 1); // {1}{U}
+        addCard(Zone.BATTLEFIELD, playerB, "Brain in a Jar", 1); // {2}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2); // for kicker cost
+        //
+        // Whenever Etali, Primal Storm attacks, exile the top card of each player's library,
+        // then you may cast any number of nonland cards exiled this way without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Etali, Primal Storm", 1);
+
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Thieving Skydiver", false);
+
+        // attack and prepare free cast
+        attack(1, playerA, "Etali, Primal Storm", playerB);
+        setChoice(playerA, true); // cast for free
+        setChoice(playerA, "Thieving Skydiver"); // cast for free
+        setChoice(playerA, true); // use kicker
+        setChoiceAmount(playerA, 2); // X=2 for Kicker X
+        addTarget(playerA, "Brain in a Jar"); // kicker's target (take control of artifact)
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Brain in a Jar", 1);
+    }
 }

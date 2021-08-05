@@ -259,7 +259,7 @@ public abstract class AbilityImpl implements Ability {
             if (!this.getManaCostsToPay().getVariableCosts().isEmpty()) {
                 int xValue = this.getManaCostsToPay().getX();
                 this.getManaCostsToPay().clear();
-                VariableManaCost xCosts = new VariableManaCost();
+                VariableManaCost xCosts = new VariableManaCost(VariableCostType.ADDITIONAL);
                 // no x events - rules from Unbound Flourishing:
                 // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
                 xCosts.setAmount(xValue, xValue, false);
@@ -555,9 +555,17 @@ public abstract class AbilityImpl implements Ability {
      * @return variableManaCost for posting to log later
      */
     protected VariableManaCost handleManaXCosts(Game game, boolean noMana, Player controller) {
-        // 20121001 - 601.2b
-        // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
-        // its mana cost; see rule 107.3), the player announces the value of that variable.
+        // 20210723 - 601.2b
+        // If the spell has alternative or additional costs that will
+        // be paid as it’s being cast such as buyback or kicker costs (see rules 118.8 and 118.9),
+        // the player announces their intentions to pay any or all of those costs (see rule 601.2f).
+        // A player can’t apply two alternative methods of casting or two alternative costs to a
+        // single spell. If the spell has a variable cost that will be paid as it’s being cast
+        // (such as an {X} in its mana cost; see rule 107.3), the player announces the value of that
+        // variable. If the value of that variable is defined in the text of the spell by a choice
+        // that player would make later in the announcement or resolution of the spell, that player
+        // makes that choice at this time instead of that later time.
+
         // TODO: Handle announcing other variable costs here like: RemoveVariableCountersSourceCost
         VariableManaCost variableManaCost = null;
         for (ManaCost cost : manaCostsToPay) {
@@ -574,7 +582,7 @@ public abstract class AbilityImpl implements Ability {
             if (!variableManaCost.isPaid()) { // should only happen for human players
                 int xValue;
                 int xValueMultiplier = handleManaXMultiplier(game, 1);
-                if (!noMana) {
+                if (!noMana || variableManaCost.getCostType().canUseAnnounceOnFreeCast()) {
                     xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(), xValueMultiplier,
                             "Announce the value for " + variableManaCost.getText(), game, this);
                     int amountMana = xValue * variableManaCost.getXInstancesCount();
