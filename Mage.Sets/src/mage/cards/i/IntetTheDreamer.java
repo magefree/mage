@@ -121,6 +121,7 @@ class IntetTheDreamerAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        // note to always discard the effect if anything fails
         UUID targetId = getTargetPointer().getFirst(game, source);
         if (targetId == null) {
             this.discard();
@@ -132,7 +133,7 @@ class IntetTheDreamerAsThoughEffect extends AsThoughEffectImpl {
             return false;
         }
 
-        // split cards
+        // split cards, etc
         objectId = card.getMainCard().getId();
 
         if (objectId.equals(targetId)
@@ -147,7 +148,11 @@ class IntetTheDreamerAsThoughEffect extends AsThoughEffectImpl {
             allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
 
             // while Intet remains on battlefield
-            return new SourceRemainsInZoneCondition(Zone.BATTLEFIELD).apply(game, source);
+            if(!(new SourceRemainsInZoneCondition(Zone.BATTLEFIELD).apply(game, source))) {
+                this.discard();
+                return false;
+            }
+            return true;
         }
         return false;
     }

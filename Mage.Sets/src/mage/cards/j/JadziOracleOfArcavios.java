@@ -2,7 +2,6 @@ package mage.cards.j;
 
 import mage.ApprovingObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.MagecraftAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -25,6 +24,10 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
 import java.util.UUID;
+import mage.cards.AdventureCard;
+import mage.cards.ModalDoubleFacesCardHalf;
+import mage.cards.SplitCard;
+import mage.cards.SplitCardHalf;
 
 /**
  * @author TheElk801
@@ -65,8 +68,8 @@ public final class JadziOracleOfArcavios extends ModalDoubleFacesCard {
         this.getRightHalfCard().getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DoIfCostPaid(
                         new ReturnToHandSourceEffect(), new DiscardCardCost()
-                ), condition, "Then if you control eight or more lands, " +
-                "you may discard a card. If you do, return {this} to its owner's hand."
+                ), condition, "Then if you control eight or more lands, "
+                + "you may discard a card. If you do, return {this} to its owner's hand."
         ));
         this.getRightHalfCard().getSpellAbility().addHint(LandsYouControlHint.instance);
     }
@@ -85,8 +88,8 @@ class JadziOracleOfArcaviosEffect extends OneShotEffect {
 
     JadziOracleOfArcaviosEffect() {
         super(Outcome.Benefit);
-        staticText = "reveal the top card of your library. If it's a nonland card, you may cast it " +
-                "by paying {1} rather than paying its mana cost. If it's a land card, put it onto the battlefield";
+        staticText = "reveal the top card of your library. If it's a nonland card, you may cast it "
+                + "by paying {1} rather than paying its mana cost. If it's a land card, put it onto the battlefield";
     }
 
     private JadziOracleOfArcaviosEffect(final JadziOracleOfArcaviosEffect effect) {
@@ -100,29 +103,92 @@ class JadziOracleOfArcaviosEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        Card card = player.getLibrary().getFromTop(game);
+        Card card = controller.getLibrary().getFromTop(game);
         if (card == null) {
             return false;
         }
-        player.revealCards(source, new CardsImpl(card), game);
+        controller.revealCards(source, new CardsImpl(card), game);
         if (card.isLand(game)) {
-            return player.moveCards(card, Zone.BATTLEFIELD, source, game);
+            // this is a bit wierd in game, though it works fine
+            // note that MDFC land cards are handled differently: they can't be moved
+            return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         }
-        if (!player.chooseUse(outcome, "Cast " + card.getName() + " by paying {1}?", source, game)) {
+
+        // query player
+        if (!controller.chooseUse(outcome, "Cast " + card.getName() + " by paying {1}?", source, game)) {
             return false;
         }
-        SpellAbility spellAbility = player.chooseAbilityForCast(card, game, true);
-        if (spellAbility == null) {
-            return false;
+
+        // handle split-cards
+        if (card instanceof SplitCard) {
+            SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
+            SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
+            controller.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), new ManaCostsImpl<>("{1}"), null);
+            controller.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), new ManaCostsImpl<>("{1}"), null);
         }
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-        player.setCastSourceIdWithAlternateMana(card.getId(), new ManaCostsImpl<>("{1}"), null);
-        player.cast(spellAbility, game, false, new ApprovingObject(source, game));
+
+        // handle MDFC
+        if (card instanceof ModalDoubleFacesCard) {
+            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+            // some MDFC cards are lands.  IE: sea gate restoration
+            if (!leftHalfCard.isLand(game)) {
+                controller.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), new ManaCostsImpl<>("{1}"), null);
+            }
+            if (!rightHalfCard.isLand(game)) {
+                controller.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), new ManaCostsImpl<>("{1}"), null);
+            }
+            game.getState().setValue("PlayFromNotOwnHandZone" + ((ModalDoubleFacesCard) card).getLeftHalfCard().getId(), Boolean.TRUE);
+            game.getState().setValue("PlayFromNotOwnHandZone" + ((ModalDoubleFacesCard) card).getRightHalfCard().getId(), Boolean.TRUE);
+        }
+
+        // handle adventure cards
+        if (card instanceof AdventureCard) {
+            Card creatureCard = card.getMainCard();
+            Card spellCard = ((AdventureCard) card).getSpellCard();
+            controller.setCastSourceIdWithAlternateMana(creatureCard.getId(), new ManaCostsImpl<>("{1}"), null);
+            controller.setCastSourceIdWithAlternateMana(spellCard.getId(), new ManaCostsImpl<>("{1}"), null);
+            game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), Boolean.TRUE);
+            game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), Boolean.TRUE);
+        }
+
+        // normal card
+        if (!(card instanceof SplitCard)
+                || !(card instanceof ModalDoubleFacesCard)
+                || !(card instanceof AdventureCard)) {
+            controller.setCastSourceIdWithAlternateMana(card.getMainCard().getId(), new ManaCostsImpl<>("{1}"), null);
+        }
+
+        // cast it
+        controller.cast(controller.chooseAbilityForCast(card.getMainCard(), game, false),
+                game, false, new ApprovingObject(source, game));
+
+        // turn off effect after cast on every possible card-face
+        if (card instanceof SplitCard) {
+            SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
+            SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
+            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
+            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
+        }
+        if (card instanceof ModalDoubleFacesCard) {
+            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
+            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
+        }
+        if (card instanceof AdventureCard) {
+            Card creatureCard = card.getMainCard();
+            Card spellCard = ((AdventureCard) card).getSpellCard();
+            game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), null);
+            game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), null);
+        }
+        // turn off effect on a normal card
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+
         return true;
     }
 }
