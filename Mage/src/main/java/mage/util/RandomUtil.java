@@ -1,9 +1,9 @@
 package mage.util;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Random;
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * Created by IGOUDT on 5-9-2016.
@@ -43,13 +43,13 @@ public final class RandomUtil {
         random.setSeed(newSeed);
     }
 
-    public static UUID randomFromSet(Set<UUID> uuids) {
-        if (uuids.size() < 2) {
-            return uuids.stream().findFirst().orElse(null);
+    public static <T extends Serializable> T randomFromSet(Set<T> collection) {
+        if (collection.size() < 2) {
+            return collection.stream().findFirst().orElse(null);
         }
-        int rand = nextInt(uuids.size());
+        int rand = nextInt(collection.size());
         int count = 0;
-        for (UUID currentId : uuids) {
+        for (T currentId : collection) {
             if (count == rand) {
                 return currentId;
             }
