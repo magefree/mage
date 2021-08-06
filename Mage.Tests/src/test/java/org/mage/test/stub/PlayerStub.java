@@ -20,6 +20,7 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
+import mage.filter.FilterCard;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -582,6 +583,11 @@ public class PlayerStub implements Player {
 
     @Override
     public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId) {
+        return false;
+    }
+
+    @Override
+    public boolean seekCard(FilterCard filter, Ability source, Game game) {
         return false;
     }
 
