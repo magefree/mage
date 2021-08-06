@@ -610,6 +610,13 @@ public class ManaOptions extends ArrayList<Mana> {
      * @return
      */
     public boolean enough(Mana mana) {
+        // 117.5. Some costs are represented by {0}, or are reduced to {0}. The action necessary for a player to pay
+        // such a cost is the player’s acknowledgment that he or she is paying it. Even though such a cost requires
+        // no resources, it’s not automatically paid.
+        if (mana.count() == 0) {
+            return true;
+        }
+
         for (Mana avail : this) {
             if (mana.enough(avail)) {
                 return true;
