@@ -21,5 +21,6 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Faceless Agent", 31, Rarity.COMMON, mage.cards.f.FacelessAgent.class));
+        cards.add(new SetCardInfo("Manor Guardian", 16, Rarity.UNCOMMON, mage.cards.m.ManorGuardian.class));
     }
 }
