@@ -15,34 +15,33 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import java.util.UUID;
 
 /**
- * @author nantuko
+ * @author TheElk801
  */
-public final class ChampionOfTheParish extends CardImpl {
+public final class ChampionOfThePerished extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.HUMAN, "another Human");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ZOMBIE, "another Zombie");
 
     static {
         filter.add(AnotherPredicate.instance);
     }
 
-    public ChampionOfTheParish(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SOLDIER);
+    public ChampionOfThePerished(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
 
+        this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever another Human enters the battlefield under your control, put a +1/+1 counter on Champion of the Parish.
+        // Whenever another Zombie enters the battlefield under your control, put a +1/+1 counter on Champion of the Perished.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
     }
 
-    private ChampionOfTheParish(final ChampionOfTheParish card) {
+    private ChampionOfThePerished(final ChampionOfThePerished card) {
         super(card);
     }
 
     @Override
-    public ChampionOfTheParish copy() {
-        return new ChampionOfTheParish(this);
+    public ChampionOfThePerished copy() {
+        return new ChampionOfThePerished(this);
     }
 }
