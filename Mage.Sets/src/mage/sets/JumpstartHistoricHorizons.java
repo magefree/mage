@@ -24,5 +24,6 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Faceless Agent", 31, Rarity.COMMON, mage.cards.f.FacelessAgent.class));
         cards.add(new SetCardInfo("Manor Guardian", 16, Rarity.UNCOMMON, mage.cards.m.ManorGuardian.class));
         cards.add(new SetCardInfo("Skyshroud Lookout", 29, Rarity.UNCOMMON, mage.cards.s.SkyshroudLookout.class));
+        cards.add(new SetCardInfo("Wingsteed Trainer", 6, Rarity.UNCOMMON, mage.cards.w.WingsteedTrainer.class));
     }
 }
