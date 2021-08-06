@@ -120,6 +120,7 @@ Journey into Nyx|JourneyIntoNyx|
 Judge Promo|JudgePromo|
 Judgment|Judgment|
 Jumpstart|Jumpstart|
+Jumpstart: Historic Horizons|JumpstartHistoricHorizons|
 Kaladesh|Kaladesh|
 Kaldheim|Kaldheim|
 Kaldheim Commander|KaldheimCommander|

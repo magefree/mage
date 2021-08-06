@@ -120,6 +120,7 @@ Journey into Nyx|JOU|
 Judge Promo|JR|
 Judgment|JUD|
 Jumpstart|JMP|
+Jumpstart: Historic Horizons|J21|
 Kaladesh|KLD|
 Kaldheim|KHM|
 Kaldheim Commander|KHC|
