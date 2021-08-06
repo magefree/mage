@@ -3303,6 +3303,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         if (alternateSourceCostsAbility.getCosts().canPay(ability, ability, playerId, game)) {
                             ManaCostsImpl manaCosts = new ManaCostsImpl();
                             for (Cost cost : alternateSourceCostsAbility.getCosts()) {
+                                // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
                                 if (cost instanceof AlternativeCost2) {
                                     if (((AlternativeCost2) cost).getCost() instanceof ManaCost) {
                                         manaCosts.add((ManaCost) ((AlternativeCost2) cost).getCost());
@@ -3351,8 +3352,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                         if (((Ability) alternateSourceCosts).getCosts().canPay(ability, ability, playerId, game)) {
                             ManaCostsImpl manaCosts = new ManaCostsImpl();
                             for (Cost cost : ((Ability) alternateSourceCosts).getCosts()) {
-                                if (cost instanceof ManaCost) {
-                                    manaCosts.add((ManaCost) cost);
+                                // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
+                                if (cost instanceof AlternativeCost2) {
+                                    if (((AlternativeCost2) cost).getCost() instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) ((AlternativeCost2) cost).getCost());
+                                    }
+                                } else {
+                                    if (cost instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) cost);
+                                    }
                                 }
                             }
 
