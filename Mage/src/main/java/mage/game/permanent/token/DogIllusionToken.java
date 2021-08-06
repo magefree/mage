@@ -29,7 +29,7 @@ public final class DogIllusionToken extends TokenImpl {
         toughness = new MageInt(0);
         addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(
                 DogIllusionValue.instance, Duration.EndOfGame)
-                .setText("{this}'s power and toughness are each equal to twice the number of cards in your hand")
+                .setText("this creature's power and toughness are each equal to twice the number of cards in your hand")
         ));
     }
 
