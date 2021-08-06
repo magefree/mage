@@ -505,6 +505,7 @@ public class ScryfallImageSupportCards {
             add("H1R"); // Modern Horizons 1 Timeshifts
             add("AFR"); // Adventures in the Forgotten Realms
             add("AFC"); // Forgotten Realms Commander
+            add("MID"); // Innistrad, Midnight Hunt
         }
     };
 
