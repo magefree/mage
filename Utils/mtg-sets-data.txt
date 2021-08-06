@@ -115,6 +115,7 @@ Iconic Masters|IMA|
 Ikoria: Lair of Behemoths|IKO|
 Invasion|INV|
 Innistrad|ISD|
+Innistrad: Midnight Hunt|MID|
 Journey into Nyx|JOU|
 Judge Promo|JR|
 Judgment|JUD|
