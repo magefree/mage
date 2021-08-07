@@ -38,7 +38,7 @@ public final class WrennAndSeven extends CardImpl {
         ), 1));
 
         // 0: Put any number of land cards from your hand onto the battlefield tapped.
-        this.addAbility(new LoyaltyAbility(new WrennAndSevenLandEffect()));
+        this.addAbility(new LoyaltyAbility(new WrennAndSevenLandEffect(), 0));
 
         // −3: Create a green Treefolk creature token with reach and "This creature's power and toughness are each equal to the number of lands you control."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new WrennAndSevenToken()), -3));
