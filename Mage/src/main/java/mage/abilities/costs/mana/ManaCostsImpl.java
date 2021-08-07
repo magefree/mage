@@ -508,8 +508,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
-    public void setText(String text) {
+    public ManaCostsImpl<T> setText(String text) {
         this.text = text;
+        return this;
     }
 
     @Override

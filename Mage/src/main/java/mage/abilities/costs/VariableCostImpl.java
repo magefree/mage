@@ -55,8 +55,9 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
     }
 
     @Override
-    public void setText(String text) {
+    public VariableCostImpl setText(String text) {
         this.text = text;
+        return this;
     }
 
     @Override
