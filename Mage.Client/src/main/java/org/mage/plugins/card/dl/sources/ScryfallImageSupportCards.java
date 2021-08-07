@@ -505,7 +505,7 @@ public class ScryfallImageSupportCards {
             add("H1R"); // Modern Horizons 1 Timeshifts
             add("AFR"); // Adventures in the Forgotten Realms
             add("AFC"); // Forgotten Realms Commander
-//            add("J21"); // Jumpstart: Historic Horizons (removed until proper card info is available)
+            add("J21"); // Jumpstart: Historic Horizons
             add("MID"); // Innistrad, Midnight Hunt
         }
     };
