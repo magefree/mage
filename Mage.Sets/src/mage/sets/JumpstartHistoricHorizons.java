@@ -18,7 +18,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
     private JumpstartHistoricHorizons() {
         super("Jumpstart: Historic Horizons", "J21", ExpansionSet.buildDate(2021, 8, 12), SetType.MAGIC_ARENA);
         this.hasBoosters = false;
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Abandoned Sarcophagus", 732, Rarity.RARE, mage.cards.a.AbandonedSarcophagus.class));
         cards.add(new SetCardInfo("Abiding Grace", 32, Rarity.UNCOMMON, mage.cards.a.AbidingGrace.class));
