@@ -576,7 +576,9 @@ class ModernHorizons2Collator implements BoosterCollator {
         private static final ModernHorizons2Run rareA = new ModernHorizons2Run(false, "12", "12", "22", "22", "23", "23", "26", "26", "27", "27", "29", "29", "30", "32", "35", "35", "39", "39", "44", "44", "47", "47", "52", "58", "58", "59", "59", "67", "68", "68", "69", "71", "71", "75", "80", "80", "81", "81", "87", "92", "92", "93", "93", "96", "96", "97", "97", "102", "106", "106", "116", "116", "117", "117", "118", "118", "120", "120", "126", "129", "129", "132", "132", "137", "137", "138", "148", "148", "151", "153", "153", "157", "162", "162", "166", "166", "171", "171", "176", "176", "178", "182", "182", "186", "186", "189", "189", "192", "197", "198", "198", "199", "202", "204", "204", "205", "205", "206", "206", "207", "207", "208", "208", "214", "214", "216", "216", "218", "218", "219", "219", "224", "224", "225", "225", "227", "231", "231", "234", "236", "236", "238", "242", "242", "243", "243", "244", "244", "248", "248", "250", "250", "254", "254", "259", "259", "260", "260", "261", "261");
         private static final ModernHorizons2Run rareB = new ModernHorizons2Run(false, "328", "328", "331", "331", "332", "332", "333", "334", "334", "336", "336", "337", "340", "340", "341", "341", "342", "344", "344", "345", "345", "352", "352", "353", "353", "355", "355", "357", "357", "359", "359", "363", "365", "366", "366", "367", "368", "370", "370", "371", "371", "372", "372", "377", "377", "378", "378", "379", "380", "380", "383", "383", "385", "385", "386", "386", "388", "388", "390", "390", "391", "391", "393", "396", "396", "397", "397", "398", "398", "400", "400", "401", "401", "402", "405", "405", "407", "407", "409", "409", "410", "412", "412", "414", "414", "417", "417", "418", "418", "420", "422", "422", "425", "425", "427", "427", "431", "432", "432", "433", "435", "435", "436", "436", "437", "437", "438", "438", "439", "439", "440", "440", "441", "441");
         private static final ModernHorizons2Run rareC = new ModernHorizons2Run(false, "304", "305", "306", "307", "309", "310", "311", "312", "313", "315", "316", "317", "318", "323", "324");
-        private static final ModernHorizons2Run reprintA = new ModernHorizons2Run(true, "262", "262", "262", "262", "263", "263", "264", "264", "264", "264", "265", "265", "266", "266", "266", "266", "267", "267", "267", "267", "268", "268", "268", "268", "269", "269", "269", "269", "270", "270", "271", "271", "272", "272", "272", "272", "273", "273", "274", "274", "274", "274", "275", "275", "276", "276", "276", "276", "277", "277", "278", "278", "278", "278", "279", "279", "280", "280", "280", "280", "281", "282", "282", "282", "282", "283", "283", "284", "284", "284", "284", "285", "285", "285", "285", "286", "286", "287", "288", "288", "288", "288", "289", "289", "290", "290", "291", "292", "292", "293", "293", "294", "294", "295", "295", "296", "296", "296", "296", "297", "297", "297", "297", "298", "298", "299", "299", "299", "299", "300", "300", "300", "300", "301", "302", "302", "302", "302", "303", "303");
+        private static final ModernHorizons2Run reprintUncommon = new ModernHorizons2Run(false, "262", "264", "266", "267", "268", "269", "272", "274", "276", "278", "280", "282", "284", "285", "288", "296", "297", "299", "300", "302");
+        private static final ModernHorizons2Run reprintRare = new ModernHorizons2Run(false, "263", "265", "270", "271", "273", "275", "277", "279", "283", "286", "289", "290", "292", "293", "294", "295", "298", "303");
+        private static final ModernHorizons2Run reprintMythic = new ModernHorizons2Run(false, "281", "287", "291", "301");
 
         private ModernHorizons2Run(boolean keepOrder, String... numbers) {
             super(keepOrder, numbers);
@@ -664,7 +666,13 @@ class ModernHorizons2Collator implements BoosterCollator {
                 ModernHorizons2Run.rareC
         );
         private static final ModernHorizons2Structure RP1 = new ModernHorizons2Structure(
-                ModernHorizons2Run.reprintA
+                ModernHorizons2Run.reprintUncommon
+        );
+        private static final ModernHorizons2Structure RP2 = new ModernHorizons2Structure(
+                ModernHorizons2Run.reprintRare
+        );
+        private static final ModernHorizons2Structure RP3 = new ModernHorizons2Structure(
+                ModernHorizons2Run.reprintMythic
         );
 
         private ModernHorizons2Structure(CardRun... runs) {
@@ -728,7 +736,11 @@ class ModernHorizons2Collator implements BoosterCollator {
             ModernHorizons2Structure.R3
     );
     private final RarityConfiguration reprintRuns = new RarityConfiguration(
-            ModernHorizons2Structure.RP1
+            false,
+            ModernHorizons2Structure.RP1, ModernHorizons2Structure.RP1,
+            ModernHorizons2Structure.RP1, ModernHorizons2Structure.RP1,
+            ModernHorizons2Structure.RP2, ModernHorizons2Structure.RP2,
+            ModernHorizons2Structure.RP3
     );
 
     @Override
