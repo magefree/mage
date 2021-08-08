@@ -509,33 +509,31 @@ public class BoosterGenerationTest extends MageTestBase {
         assertTrue("Every booster contained an uncommon Lesson", foundNoUncommonLesson);
     }
 
+    private static final List<String> mh2Reprints = Collections.unmodifiableList(Arrays.asList(
+            "262", "263", "264", "265", "266", "267", "268", "269", "270", "271", "272", "273", "274", "275",
+            "276", "277", "278", "279", "280", "281", "282", "283", "284", "285", "286", "287", "288", "289",
+            "290", "291", "292", "293", "294", "295", "296", "297", "298", "299", "300", "301", "302", "303",
+            "308", "314", "319", "320", "321", "322", "325", "326", "387", "416", "419", "423", "491"
+    ));
+
     @Test
     public void testModernHorizons2ReprintSlot() {
         for (int i = 0; i < 20; i++) {
             List<Card> booster = ModernHorizons2.getInstance().createBooster();
             List<Card> notReprint = booster
                     .stream()
-                    .filter(card -> Integer.parseInt(card.getCardNumber()) < 262)
+                    .filter(card -> !mh2Reprints.contains(card.getCardNumber()))
                     .collect(Collectors.toList());
             List<Card> reprint = booster
                     .stream()
-                    .filter(card -> Integer.parseInt(card.getCardNumber()) >= 262)
+                    .filter(card -> mh2Reprints.contains(card.getCardNumber()))
                     .collect(Collectors.toList());
 
-            assertTrue(
-                    "Booster must not contain cards with collector number over 303",
-                    booster
-                            .stream()
-                            .map(Card::getCardNumber)
-                            .mapToInt(Integer::parseInt)
-                            .max()
-                            .orElse(0) <= 303
-            );
             assertEquals(
                     "Booster must contain exactly one reprint (other than fetches)", 1, reprint.size()
             );
             assertEquals(
-                    "Booster must containt exactly 14 other cards", 14, notReprint.size()
+                    "Booster must contain exactly 14 other cards", 14, notReprint.size()
             );
             assertEquals(
                     "Booster must contain one non-reprint rare/mythic", 1,

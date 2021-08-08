@@ -3,10 +3,15 @@ package mage.sets;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardInfo;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +26,7 @@ public final class ModernHorizons2 extends ExpansionSet {
     }
 
     private ModernHorizons2() {
-        super("Modern Horizons 2", "MH2", ExpansionSet.buildDate(2021, 6, 11), SetType.SUPPLEMENTAL_MODERN_LEGAL);
+        super("Modern Horizons 2", "MH2", ExpansionSet.buildDate(2021, 6, 11), SetType.SUPPLEMENTAL_MODERN_LEGAL, new ModernHorizons2Collator());
         this.blockName = "Modern Horizons 2";
         this.hasBasicLands = true;
         this.hasBoosters = true;
@@ -83,8 +88,8 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Braids, Cabal Minion", 273, Rarity.RARE, mage.cards.b.BraidsCabalMinion.class));
         cards.add(new SetCardInfo("Brainstone", 223, Rarity.UNCOMMON, mage.cards.b.Brainstone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brainstone", 426, Rarity.UNCOMMON, mage.cards.b.Brainstone.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Break the Ice", 77, Rarity.UNCOMMON, mage.cards.b.BreakTheIce.class));
         cards.add(new SetCardInfo("Break Ties", 8, Rarity.COMMON, mage.cards.b.BreakTies.class));
+        cards.add(new SetCardInfo("Break the Ice", 77, Rarity.UNCOMMON, mage.cards.b.BreakTheIce.class));
         cards.add(new SetCardInfo("Breathless Knight", 187, Rarity.COMMON, mage.cards.b.BreathlessKnight.class));
         cards.add(new SetCardInfo("Breya's Apprentice", 117, Rarity.RARE, mage.cards.b.BreyasApprentice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breya's Apprentice", 455, Rarity.RARE, mage.cards.b.BreyasApprentice.class, NON_FULL_USE_VARIOUS));
@@ -413,9 +418,9 @@ public final class ModernHorizons2 extends ExpansionSet {
         cards.add(new SetCardInfo("Solitary Confinement", 265, Rarity.RARE, mage.cards.s.SolitaryConfinement.class));
         cards.add(new SetCardInfo("Solitude", 307, Rarity.MYTHIC, mage.cards.s.Solitude.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Solitude", 32, Rarity.MYTHIC, mage.cards.s.Solitude.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Soul of Migration", 33, Rarity.COMMON, mage.cards.s.SoulOfMigration.class));
         cards.add(new SetCardInfo("Soul Snare", 266, Rarity.UNCOMMON, mage.cards.s.SoulSnare.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soul Snare", 387, Rarity.UNCOMMON, mage.cards.s.SoulSnare.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Soul of Migration", 33, Rarity.COMMON, mage.cards.s.SoulOfMigration.class));
         cards.add(new SetCardInfo("Specimen Collector", 64, Rarity.UNCOMMON, mage.cards.s.SpecimenCollector.class));
         cards.add(new SetCardInfo("Spreading Insurrection", 142, Rarity.UNCOMMON, mage.cards.s.SpreadingInsurrection.class));
         cards.add(new SetCardInfo("Squirrel Mob", 286, Rarity.RARE, mage.cards.s.SquirrelMob.class));
@@ -534,12 +539,11 @@ public final class ModernHorizons2 extends ExpansionSet {
     }
 
     private void addReprints(List<Card> booster) {
-        // TODO: these rarity ratios are probably wrong
         final Rarity rarity;
-        int i = RandomUtil.nextInt(121);
-        if (i < 2) {
+        int i = RandomUtil.nextInt(120);
+        if (i < 4) {
             rarity = Rarity.MYTHIC;
-        } else if (i < 22) {
+        } else if (i < 40) {
             rarity = Rarity.RARE;
         } else {
             rarity = Rarity.UNCOMMON;
@@ -554,5 +558,194 @@ public final class ModernHorizons2 extends ExpansionSet {
         List<CardInfo> cards = super.getCardsByRarity(rarity);
         cards.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() >= 262);
         return cards;
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/mh2.html
+// Using US collation
+// TODO: add reprint variants (waiting on more info for this)
+class ModernHorizons2Collator implements BoosterCollator {
+
+    private static class ModernHorizons2Run extends CardRun {
+        private static final ModernHorizons2Run commonA = new ModernHorizons2Run(true, "62", "134", "38", "156", "136", "168", "43", "170", "145", "65", "154", "112", "49", "169", "131", "51", "155", "144", "46", "181", "114", "40", "173", "111", "57", "159", "140", "54", "149", "139", "62", "161", "136", "38", "168", "134", "63", "146", "156", "65", "145", "170", "43", "131", "169", "51", "114", "154", "49", "112", "155", "46", "140", "181", "40", "144", "173", "63", "139", "159", "57", "111", "161", "54", "146", "149");
+        private static final ModernHorizons2Run commonB = new ModernHorizons2Run(true, "15", "395", "8", "95", "21", "89", "381", "88", "36", "86", "4", "109", "20", "91", "17", "107", "18", "78", "33", "99", "329", "76", "15", "95", "8", "101", "21", "88", "6", "86", "4", "343", "36", "109", "17", "91", "18", "78", "330", "107", "15", "99", "19", "399", "33", "76", "8", "88", "382", "86", "6", "101", "4", "348", "36", "91", "17", "89", "18", "107", "20", "78", "19", "99", "33", "101");
+        private static final ModernHorizons2Run commonC1 = new ModernHorizons2Run(true, "3", "246", "24", "253", "190", "103", "226", "187", "239", "252", "230", "255", "11", "213", "249", "83", "256", "104", "194", "13", "82", "24", "257", "193", "245", "3", "196", "235", "246", "188", "222", "190", "253", "187", "252", "230", "226", "255", "11", "239", "103", "249", "194", "104", "13", "82", "213", "256", "196", "245", "83", "193", "257", "188", "235");
+        private static final ModernHorizons2Run commonC2 = new ModernHorizons2Run(true, "424", "163", "349", "167", "37", "152", "430", "200", "354", "135", "247", "258", "55", "217", "127", "351", "163", "122", "215", "152", "66", "356", "42", "408", "200", "147", "232", "37", "406", "247", "55", "258", "217", "128", "335", "167", "215", "411", "66", "413", "122", "135", "421", "147", "232", "389", "127", "339", "258", "247", "217", "222", "392", "128", "42");
+        private static final ModernHorizons2Run uncommonA = new ModernHorizons2Run(true, "5", "429", "172", "125", "110", "369", "2", "228", "165", "123", "28", "185", "64", "150", "98", "14", "164", "376", "94", "237", "191", "143", "251", "108", "360", "221", "113", "179", "85", "124", "241", "16", "79", "56", "195", "77", "220", "2", "110", "174", "50", "5", "203", "404", "229", "172", "125", "28", "228", "150", "361", "123", "98", "64", "165", "143", "94", "14", "164", "191", "237", "251", "212", "221", "403", "124", "179", "16", "85", "184", "113", "241", "79", "56", "364", "77", "174", "220", "50", "2", "110", "150", "28", "115", "229", "5", "350", "203", "172", "428", "64", "98", "123", "165", "185", "94", "14", "143", "212", "164", "221", "362", "251", "108", "124", "237", "358", "16", "113", "184", "220", "85", "195", "174", "79", "241", "56", "77", "115", "50");
+        private static final ModernHorizons2Run uncommonB = new ModernHorizons2Run(true, "74", "373", "141", "60", "183", "31", "70", "233", "10", "130", "211", "72", "180", "133", "41", "160", "346", "25", "121", "48", "210", "90", "177", "201", "34", "73", "9", "434", "119", "105", "1", "426", "53", "84", "175", "45", "141", "327", "60", "142", "209", "74", "61", "158", "233", "72", "133", "180", "10", "130", "375", "160", "31", "90", "48", "183", "210", "70", "384", "100", "41", "121", "201", "9", "73", "240", "177", "34", "45", "84", "415", "61", "119", "1", "53", "347", "223", "141", "60", "209", "142", "7", "158", "74", "133", "180", "31", "394", "211", "10", "233", "130", "183", "70", "100", "48", "160", "90", "25", "374", "121", "41", "177", "9", "240", "73", "201", "34", "175", "45", "223", "84", "338", "1", "119", "105", "61", "158", "142", "7");
+        private static final ModernHorizons2Run rareA = new ModernHorizons2Run(false, "12", "12", "22", "22", "23", "23", "26", "26", "27", "27", "29", "29", "30", "32", "35", "35", "39", "39", "44", "44", "47", "47", "52", "58", "58", "59", "59", "67", "68", "68", "69", "71", "71", "75", "80", "80", "81", "81", "87", "92", "92", "93", "93", "96", "96", "97", "97", "102", "106", "106", "116", "116", "117", "117", "118", "118", "120", "120", "126", "129", "129", "132", "132", "137", "137", "138", "148", "148", "151", "153", "153", "157", "162", "162", "166", "166", "171", "171", "176", "176", "178", "182", "182", "186", "186", "189", "189", "192", "197", "198", "198", "199", "202", "204", "204", "205", "205", "206", "206", "207", "207", "208", "208", "214", "214", "216", "216", "218", "218", "219", "219", "224", "224", "225", "225", "227", "231", "231", "234", "236", "236", "238", "242", "242", "243", "243", "244", "244", "248", "248", "250", "250", "254", "254", "259", "259", "260", "260", "261", "261");
+        private static final ModernHorizons2Run rareB = new ModernHorizons2Run(false, "328", "328", "331", "331", "332", "332", "333", "334", "334", "336", "336", "337", "340", "340", "341", "341", "342", "344", "344", "345", "345", "352", "352", "353", "353", "355", "355", "357", "357", "359", "359", "363", "365", "366", "366", "367", "368", "370", "370", "371", "371", "372", "372", "377", "377", "378", "378", "379", "380", "380", "383", "383", "385", "385", "386", "386", "388", "388", "390", "390", "391", "391", "393", "396", "396", "397", "397", "398", "398", "400", "400", "401", "401", "402", "405", "405", "407", "407", "409", "409", "410", "412", "412", "414", "414", "417", "417", "418", "418", "420", "422", "422", "425", "425", "427", "427", "431", "432", "432", "433", "435", "435", "436", "436", "437", "437", "438", "438", "439", "439", "440", "440", "441", "441");
+        private static final ModernHorizons2Run rareC = new ModernHorizons2Run(false, "304", "305", "306", "307", "309", "310", "311", "312", "313", "315", "316", "317", "318", "323", "324");
+        private static final ModernHorizons2Run reprintA = new ModernHorizons2Run(true, "262", "262", "262", "262", "263", "263", "264", "264", "264", "264", "265", "265", "266", "266", "266", "266", "267", "267", "267", "267", "268", "268", "268", "268", "269", "269", "269", "269", "270", "270", "271", "271", "272", "272", "272", "272", "273", "273", "274", "274", "274", "274", "275", "275", "276", "276", "276", "276", "277", "277", "278", "278", "278", "278", "279", "279", "280", "280", "280", "280", "281", "282", "282", "282", "282", "283", "283", "284", "284", "284", "284", "285", "285", "285", "285", "286", "286", "287", "288", "288", "288", "288", "289", "289", "290", "290", "291", "292", "292", "293", "293", "294", "294", "295", "295", "296", "296", "296", "296", "297", "297", "297", "297", "298", "298", "299", "299", "299", "299", "300", "300", "300", "300", "301", "302", "302", "302", "302", "303", "303");
+
+        private ModernHorizons2Run(boolean keepOrder, String... numbers) {
+            super(keepOrder, numbers);
+        }
+    }
+
+    private static class ModernHorizons2Structure extends BoosterStructure {
+        private static final ModernHorizons2Structure C1 = new ModernHorizons2Structure(
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonB,
+                ModernHorizons2Run.commonC1,
+                ModernHorizons2Run.commonC1,
+                ModernHorizons2Run.commonC1,
+                ModernHorizons2Run.commonC1,
+                ModernHorizons2Run.commonC1,
+                ModernHorizons2Run.commonC1
+        );
+        private static final ModernHorizons2Structure C2 = new ModernHorizons2Structure(
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonB,
+                ModernHorizons2Run.commonB,
+                ModernHorizons2Run.commonC1,
+                ModernHorizons2Run.commonC1,
+                ModernHorizons2Run.commonC1,
+                ModernHorizons2Run.commonC1,
+                ModernHorizons2Run.commonC1
+        );
+        private static final ModernHorizons2Structure C3 = new ModernHorizons2Structure(
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonB,
+                ModernHorizons2Run.commonB,
+                ModernHorizons2Run.commonB,
+                ModernHorizons2Run.commonC2,
+                ModernHorizons2Run.commonC2,
+                ModernHorizons2Run.commonC2,
+                ModernHorizons2Run.commonC2
+        );
+        private static final ModernHorizons2Structure C4 = new ModernHorizons2Structure(
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonB,
+                ModernHorizons2Run.commonB,
+                ModernHorizons2Run.commonC2,
+                ModernHorizons2Run.commonC2,
+                ModernHorizons2Run.commonC2,
+                ModernHorizons2Run.commonC2
+        );
+        private static final ModernHorizons2Structure C5 = new ModernHorizons2Structure(
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonA,
+                ModernHorizons2Run.commonB,
+                ModernHorizons2Run.commonB,
+                ModernHorizons2Run.commonB,
+                ModernHorizons2Run.commonC2,
+                ModernHorizons2Run.commonC2,
+                ModernHorizons2Run.commonC2
+        );
+        private static final ModernHorizons2Structure U1 = new ModernHorizons2Structure(
+                ModernHorizons2Run.uncommonA,
+                ModernHorizons2Run.uncommonA,
+                ModernHorizons2Run.uncommonA
+        );
+        private static final ModernHorizons2Structure U2 = new ModernHorizons2Structure(
+                ModernHorizons2Run.uncommonB,
+                ModernHorizons2Run.uncommonB,
+                ModernHorizons2Run.uncommonB
+        );
+        private static final ModernHorizons2Structure R1 = new ModernHorizons2Structure(
+                ModernHorizons2Run.rareA
+        );
+        private static final ModernHorizons2Structure R2 = new ModernHorizons2Structure(
+                ModernHorizons2Run.rareB
+        );
+        private static final ModernHorizons2Structure R3 = new ModernHorizons2Structure(
+                ModernHorizons2Run.rareC
+        );
+        private static final ModernHorizons2Structure RP1 = new ModernHorizons2Structure(
+                ModernHorizons2Run.reprintA
+        );
+
+        private ModernHorizons2Structure(CardRun... runs) {
+            super(runs);
+        }
+    }
+
+    private final RarityConfiguration commonRuns = new RarityConfiguration(
+            false,
+            ModernHorizons2Structure.C1,
+            ModernHorizons2Structure.C2,
+            ModernHorizons2Structure.C3,
+            ModernHorizons2Structure.C4,
+            ModernHorizons2Structure.C5,
+            ModernHorizons2Structure.C1,
+            ModernHorizons2Structure.C2,
+            ModernHorizons2Structure.C3,
+            ModernHorizons2Structure.C4,
+            ModernHorizons2Structure.C5,
+            ModernHorizons2Structure.C1,
+            ModernHorizons2Structure.C2
+    );
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(
+            ModernHorizons2Structure.U1,
+            ModernHorizons2Structure.U2
+    );
+    private final RarityConfiguration rareRuns = new RarityConfiguration(
+            false,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1, ModernHorizons2Structure.R1, ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R1,
+            ModernHorizons2Structure.R2, ModernHorizons2Structure.R2,
+            ModernHorizons2Structure.R3
+    );
+    private final RarityConfiguration reprintRuns = new RarityConfiguration(
+            ModernHorizons2Structure.RP1
+    );
+
+    @Override
+    public void shuffle() {
+        commonRuns.shuffle();
+        uncommonRuns.shuffle();
+        rareRuns.shuffle();
+        reprintRuns.shuffle();
+    }
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(commonRuns.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(reprintRuns.getNext().makeRun());
+        return booster;
     }
 }
