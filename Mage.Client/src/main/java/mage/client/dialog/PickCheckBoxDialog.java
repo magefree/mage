@@ -324,9 +324,9 @@ public class PickCheckBoxDialog extends MageDialog {
 
         if (item != null) {
             if (choice.isKeyChoice()) {
-                choice.setChoiceByKey(item.getKey());
+                choice.setChoiceByKey(item.getKey(), false);
             } else {
-                choice.setChoice(item.getKey());
+                choice.setChoice(item.getKey(), false);
             }
             return true;
         } else {

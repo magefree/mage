@@ -108,7 +108,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private boolean initComponents;
 
-    private Timer resizeTimer; // can't be final
+    private final Timer resizeTimer; // can't be final
 
     private enum PopUpMenuType {
         TRIGGER_ORDER
@@ -128,6 +128,7 @@ public final class GamePanel extends javax.swing.JPanel {
         Map<String, Serializable> options;
         Set<UUID> targets;
     }
+
     private final LastGameData lastGameData = new LastGameData();
 
 
@@ -1746,18 +1747,22 @@ public final class GamePanel extends javax.swing.JPanel {
         // TODO: remember last choices and search incremental for same events?
         PickChoiceDialog pickChoice = new PickChoiceDialog();
         pickChoice.showDialog(choice, objectId, choiceWindowState);
+
+        // special mode adds # to the answer (server side code must process that prefix, see replacementEffectChoice)
+        String specialPrefix = choice.isChosenSpecial() ? "#" : "";
+
+        String valueToSend;
         if (choice.isKeyChoice()) {
-            SessionHandler.sendPlayerString(gameId, choice.getChoiceKey());
-            /* // old code, auto complete was for auto scripting?
-            if (pickChoice.isAutoSelect()) {
-                SessionHandler.sendPlayerString(gameId, '#' + choice.getChoiceKey());
-            } else {
-                SessionHandler.sendPlayerString(gameId, choice.getChoiceKey());
-            }*/
+            valueToSend = choice.getChoiceKey();
         } else {
+            valueToSend = choice.getChoice();
             SessionHandler.sendPlayerString(gameId, choice.getChoice());
         }
+        SessionHandler.sendPlayerString(gameId, valueToSend == null ? null : specialPrefix + valueToSend);
+
+        // keep dialog position
         choiceWindowState = new MageDialogState(pickChoice);
+
         pickChoice.removeDialog();
     }
 

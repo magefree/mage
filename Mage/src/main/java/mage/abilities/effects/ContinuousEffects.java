@@ -189,7 +189,7 @@ public class ContinuousEffects implements Serializable {
                             }
                         }
                     } else {
-                        logger.error("No abilities for continuous effect: " + effect.toString());
+                        logger.error("No abilities for continuous effect: " + effect);
                     }
                     break;
                 default:
@@ -1282,7 +1282,7 @@ public class ContinuousEffects implements Serializable {
             logger.error("Effect is null: " + source.toString());
             return;
         } else if (source == null) {
-            logger.warn("Adding effect without ability : " + effect.toString());
+            logger.warn("Adding effect without ability : " + effect);
         }
         switch (effect.getEffectType()) {
             case REPLACEMENT:
@@ -1369,6 +1369,8 @@ public class ContinuousEffects implements Serializable {
     }
 
     public Map<String, String> getReplacementEffectsTexts(Map<ReplacementEffect, Set<Ability>> rEffects, Game game) {
+        // warning, autoSelectReplacementEffects uses [object id] in texts as different settings,
+        // so if you change keys or texts logic then don't forget to change auto-choose too
         Map<String, String> texts = new LinkedHashMap<>();
         for (Map.Entry<ReplacementEffect, Set<Ability>> entry : rEffects.entrySet()) {
             if (entry.getValue() != null) {

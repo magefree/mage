@@ -4082,8 +4082,8 @@
                           <Component id="checkBoxEndTurnOthers" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="phases_stopSettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="phases_stopSettings" pref="291" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -4182,7 +4182,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="1"/>
-                <Property name="rows" type="int" value="9"/>
+                <Property name="rows" type="int" value="10"/>
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbStopAttack">
@@ -4281,8 +4281,8 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbAutoOrderTrigger">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Set order for your triggers automatically if all have the same text"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;If activated the order to put on the stack your triggers that trigger at the same time&lt;br/&gt;&#xa;is set automatically if all have the same text."/>
+                    <Property name="text" type="java.lang.String" value="TRIGGERS: auto-choose triggers order for same rule texts (put same triggers to the stack at default order)"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;If you put same triggers with same texts on the stack then auto-choose their order.&lt;br/&gt;&#xa;You can change that settings anytime at the game."/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[300, 25]"/>
@@ -4290,6 +4290,19 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbAutoOrderTriggerActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbUseSameSettingsForReplacementEffect">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="REPLACEMENT EFFECTS: use same auto-choose settings for same cards (choose replacement effects order dialog)"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;If you setup auto-choose for one object/card then it will be applied for all other objects with same name.&lt;br/&gt;&#xa;You can change that settings anytime at the game."/>
+                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[300, 25]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbUseSameSettingsForReplacementEffectActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
