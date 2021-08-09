@@ -108,7 +108,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private boolean initComponents;
 
-    private final Timer resizeTimer; // can't be final
+    private Timer resizeTimer; // can't be final
 
     private enum PopUpMenuType {
         TRIGGER_ORDER
