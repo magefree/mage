@@ -1,10 +1,8 @@
-
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsCombatDamageEquippedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -17,12 +15,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.DamagedEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -30,12 +25,14 @@ import mage.target.common.TargetCreaturePermanent;
 public final class UmezawasJitte extends CardImpl {
 
     public UmezawasJitte(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature deals combat damage, put two charge counters on Umezawa's Jitte.
-        this.addAbility(new UmezawasJitteAbility());
+        this.addAbility(new DealsCombatDamageEquippedTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2))
+        ));
 
         // Remove a charge counter from Umezawa's Jitte: Choose one &mdash; Equipped creature gets +2/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(
@@ -66,56 +63,5 @@ public final class UmezawasJitte extends CardImpl {
     @Override
     public UmezawasJitte copy() {
         return new UmezawasJitte(this);
-    }
-}
-
-class UmezawasJitteAbility extends TriggeredAbilityImpl {
-
-    private boolean usedInPhase;
-
-    public UmezawasJitteAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));
-        this.usedInPhase = false;
-    }
-
-    public UmezawasJitteAbility(final UmezawasJitteAbility ability) {
-        super(ability);
-        this.usedInPhase = ability.usedInPhase;
-    }
-
-    @Override
-    public UmezawasJitteAbility copy() {
-        return new UmezawasJitteAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        switch(event.getType()) {
-            case DAMAGED_PERMANENT:
-            case DAMAGED_PLAYER:
-            case COMBAT_DAMAGE_STEP_PRE:
-                return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedEvent && !usedInPhase && ((DamagedEvent) event).isCombatDamage()) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.getAttachments().contains(this.getSourceId())) {
-                usedInPhase = true;
-                return true;
-            }
-        }
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE) {
-            usedInPhase = false;
-        }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever equipped creature deals combat damage, " ;
     }
 }

@@ -226,6 +226,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sungrass Prairie", 264, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Sunken Hollow", 265, Rarity.RARE, mage.cards.s.SunkenHollow.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 217, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
+        cards.add(new SetCardInfo("Sword of Hours", 61, Rarity.UNCOMMON, mage.cards.s.SwordOfHours.class));
         cards.add(new SetCardInfo("Sword of the Animist", 218, Rarity.RARE, mage.cards.s.SwordOfTheAnimist.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 75, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Tainted Peak", 266, Rarity.UNCOMMON, mage.cards.t.TaintedPeak.class));
