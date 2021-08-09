@@ -129,8 +129,8 @@ class JadziOracleOfArcaviosEffect extends OneShotEffect {
             SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
             SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
             // get additional cost if any
-            Costs additionalCostsLeft = leftHalfCard.getAbilities().get(0).getCosts();
-            Costs additionalCostsRight = rightHalfCard.getAbilities().get(0).getCosts();
+            Costs additionalCostsLeft = leftHalfCard.getSpellAbility().getCosts();
+            Costs additionalCostsRight = rightHalfCard.getSpellAbility().getCosts();
             // set alternative cost and any additional cost
             controller.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), new ManaCostsImpl<>("{1}"), additionalCostsLeft);
             controller.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), new ManaCostsImpl<>("{1}"), additionalCostsRight);
@@ -146,13 +146,13 @@ class JadziOracleOfArcaviosEffect extends OneShotEffect {
             // some MDFC cards are lands.  IE: sea gate restoration
             if (!leftHalfCard.isLand(game)) {
                 // get additional cost if any
-                Costs additionalCostsMDFCLeft = leftHalfCard.getAbilities().get(0).getCosts();
+                Costs additionalCostsMDFCLeft = leftHalfCard.getSpellAbility().getCosts();
                 // set alternative cost and any additional cost
                 controller.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), new ManaCostsImpl<>("{1}"), additionalCostsMDFCLeft);
             }
             if (!rightHalfCard.isLand(game)) {
                 // get additional cost if any
-                Costs additionalCostsMDFCRight = rightHalfCard.getAbilities().get(0).getCosts();
+                Costs additionalCostsMDFCRight = rightHalfCard.getSpellAbility().getCosts();
                 // set alternative cost and any additional cost
                 controller.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), new ManaCostsImpl<>("{1}"), additionalCostsMDFCRight);
             }
@@ -166,8 +166,8 @@ class JadziOracleOfArcaviosEffect extends OneShotEffect {
             Card creatureCard = card.getMainCard();
             Card spellCard = ((AdventureCard) card).getSpellCard();
             // get additional cost if any
-            Costs additionalCostsCreature = creatureCard.getAbilities().get(0).getCosts();
-            Costs additionalCostsSpellCard = spellCard.getAbilities().get(0).getCosts();
+            Costs additionalCostsCreature = creatureCard.getSpellAbility().getCosts();
+            Costs additionalCostsSpellCard = spellCard.getSpellAbility().getCosts();
             // set alternative cost and any additional cost
             controller.setCastSourceIdWithAlternateMana(creatureCard.getId(), new ManaCostsImpl<>("{1}"), additionalCostsCreature);
             controller.setCastSourceIdWithAlternateMana(spellCard.getId(), new ManaCostsImpl<>("{1}"), additionalCostsSpellCard);
@@ -181,7 +181,7 @@ class JadziOracleOfArcaviosEffect extends OneShotEffect {
                 || !(card instanceof ModalDoubleFacesCard)
                 || !(card instanceof AdventureCard)) {
             // get additional cost if any
-            Costs additionalCostsNormalCard = card.getAbilities().get(0).getCosts();
+            Costs additionalCostsNormalCard = card.getSpellAbility().getCosts();
             controller.setCastSourceIdWithAlternateMana(card.getMainCard().getId(), new ManaCostsImpl<>("{1}"), additionalCostsNormalCard);
         }
 
