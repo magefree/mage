@@ -48,7 +48,7 @@
             <!-- server xml config needs optional dependency for jaxb-impl -->
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
-            <version>2.3.3</version>
+            <version>3.0.2</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
