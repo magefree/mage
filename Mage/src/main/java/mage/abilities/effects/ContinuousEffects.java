@@ -1333,7 +1333,7 @@ public class ContinuousEffects implements Serializable {
         }
     }
 
-    public void setController(UUID cardId, UUID controllerId) {
+    public synchronized void setController(UUID cardId, UUID controllerId) {
         for (ContinuousEffectsList effectsList : allEffectsLists) {
             setControllerForEffect(effectsList, cardId, controllerId);
         }
