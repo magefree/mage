@@ -59,10 +59,7 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.util.CardUtil;
-import mage.util.GameLog;
-import mage.util.MessageToClient;
-import mage.util.RandomUtil;
+import mage.util.*;
 import mage.util.functions.CopyApplier;
 import mage.watchers.Watcher;
 import mage.watchers.common.*;
@@ -74,10 +71,10 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-public abstract class GameImpl implements Game, Serializable {
+public abstract class GameImpl implements Game {
 
     private static final int ROLLBACK_TURNS_MAX = 4;
-
+    private static final String UNIT_TESTS_ERROR_TEXT = "Error in unit tests";
     private static final Logger logger = Logger.getLogger(GameImpl.class);
 
     private transient Object customData;
@@ -1489,7 +1486,7 @@ public abstract class GameImpl implements Game, Serializable {
                             errorContinueCounter++;
                             continue;
                         } else {
-                            throw new MageException("Error in unit tests");
+                            throw new MageException(UNIT_TESTS_ERROR_TEXT);
                         }
                     } finally {
                         setCheckPlayableState(false);
@@ -1498,9 +1495,15 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         } catch (Exception ex) {
-            logger.fatal("Game exception ", ex);
+            logger.fatal("Game exception " + ex.getMessage(), ex);
             this.fireErrorEvent("Game exception occurred: ", ex);
             this.end();
+
+            // don't catch game errors in unit tests, so test framework can process it (example: errors in AI simulations)
+            if (ex.getMessage() != null && ex.getMessage().equals(UNIT_TESTS_ERROR_TEXT)) {
+                //this.getContinuousEffects().traceContinuousEffects(this);
+                throw new IllegalStateException(UNIT_TESTS_ERROR_TEXT);
+            }
         } finally {
             resetLKI();
             clearAllBookmarks();

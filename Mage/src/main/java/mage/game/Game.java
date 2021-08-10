@@ -37,6 +37,7 @@ import mage.game.turn.Turn;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
+import mage.util.Copyable;
 import mage.util.MessageToClient;
 import mage.util.functions.CopyApplier;
 
@@ -44,7 +45,7 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public interface Game extends MageItem, Serializable {
+public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     MatchType getGameType();
 
@@ -216,8 +217,6 @@ public interface Game extends MageItem, Serializable {
     GameStates getGameStates();
 
     void loadGameStates(GameStates states);
-
-    Game copy();
 
     boolean isSimulation();
 
