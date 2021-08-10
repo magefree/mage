@@ -35,4 +35,9 @@ public class TestComputerPlayer7 extends ComputerPlayer7 {
     public boolean flipCoinResult(Game game) {
         return testPlayerLink.flipCoinResult(game);
     }
+
+    @Override
+    public int rollDieResult(int sides, Game game) {
+        return testPlayerLink.rollDieResult(sides, game);
+    }
 }
