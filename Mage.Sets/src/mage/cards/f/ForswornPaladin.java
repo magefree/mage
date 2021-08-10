@@ -53,7 +53,7 @@ public final class ForswornPaladin extends CardImpl {
         );
         ability.addEffect(new ForswornPaladinEffect());
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability, new ManaPaidSourceWatcher());
+        this.addAbility(ability);
     }
 
     private ForswornPaladin(final ForswornPaladin card) {

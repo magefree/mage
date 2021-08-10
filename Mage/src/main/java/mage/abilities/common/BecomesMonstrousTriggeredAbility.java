@@ -44,7 +44,7 @@ public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature you control becomes monstrous, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature you control becomes monstrous, " ;
     }
 }

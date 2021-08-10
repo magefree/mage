@@ -100,8 +100,8 @@ public class ElendaTheDuskRoseTest extends CardTestPlayerBase {
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
 
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Elenda, the Dusk Rose");
-        setChoice(playerA, "No"); // use Angelic Renewal on Silvercoat Lion
-        setChoice(playerA, "Yes"); // use Angelic Renewal on Elenda, the Dusk Rose
+        setChoice(playerA, false); // use Angelic Renewal on Silvercoat Lion
+        setChoice(playerA, true); // use Angelic Renewal on Elenda, the Dusk Rose
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
@@ -142,8 +142,8 @@ public class ElendaTheDuskRoseTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Sweltering Suns");
 
-        setChoice(playerA, "Yes"); // use Angelic Renewal on Elenda, the Dusk Rose
-        setChoice(playerA, "No"); // use Angelic Renewal on Silvercoat Lion
+        setChoice(playerA, true); // use Angelic Renewal on Elenda, the Dusk Rose
+        setChoice(playerA, false); // use Angelic Renewal on Silvercoat Lion
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();

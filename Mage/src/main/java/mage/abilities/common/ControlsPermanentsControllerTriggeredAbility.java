@@ -51,7 +51,7 @@ public class ControlsPermanentsControllerTriggeredAbility extends StateTriggered
     }
 
     @Override
-    public String getRule() {
-        return "When you control " + filter.getMessage() + ", " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When you control " + filter.getMessage() + ", " ;
     }
 }

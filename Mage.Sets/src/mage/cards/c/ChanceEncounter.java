@@ -76,7 +76,7 @@ class ChanceEncounterTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you win a coin flip, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you win a coin flip, " ;
     }
 }

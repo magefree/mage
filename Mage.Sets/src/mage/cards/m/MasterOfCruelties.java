@@ -99,8 +99,8 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} attacks a player and isn't blocked, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} attacks a player and isn't blocked, " ;
     }
 }
 

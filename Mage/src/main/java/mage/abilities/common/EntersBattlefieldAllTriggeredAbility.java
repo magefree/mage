@@ -108,6 +108,11 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         if (rule != null && !rule.isEmpty()) {
             return rule;
         }
+        return super.getRule();
+    }
+
+    @Override
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ");
         if (thisOrAnother) {
             sb.append("{this} or another ");
@@ -123,7 +128,6 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         } else {
             sb.append(", ");
         }
-        sb.append(super.getRule());
         return sb.toString();
     }
 

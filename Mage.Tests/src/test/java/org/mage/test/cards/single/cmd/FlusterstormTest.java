@@ -18,8 +18,8 @@ public class FlusterstormTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Spray", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Flusterstorm", "Spark Spray", "Spark Spray");
 
-        setChoice(playerA, "No");
-        setChoice(playerB, "No");
+        setChoice(playerA, false);
+        setChoice(playerB, false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

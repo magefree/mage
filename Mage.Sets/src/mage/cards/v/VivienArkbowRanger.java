@@ -7,6 +7,7 @@ import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect
 import mage.abilities.effects.common.WishEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -58,7 +59,8 @@ public final class VivienArkbowRanger extends CardImpl {
         this.addAbility(ability);
 
         // −5: You may choose a creature card you own from outside the game, reveal it, and put it into your hand.
-        this.addAbility(new LoyaltyAbility(new WishEffect(StaticFilters.FILTER_CARD_CREATURE_A), -5));
+        this.addAbility(new LoyaltyAbility(new WishEffect(StaticFilters.FILTER_CARD_CREATURE_A), -5)
+                .addHint(OpenSideboardHint.instance));
     }
 
     private VivienArkbowRanger(final VivienArkbowRanger card) {

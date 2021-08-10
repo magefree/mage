@@ -24,12 +24,11 @@ public final class AdmiralsOrder extends CardImpl {
 
         // Raid - If you attacked with a creature this turn, you may pay {U} rather than pay this spell's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{U}"), RaidCondition.instance,
-                        "<br/><br/><i>Raid</i> &mdash; If you attacked with a creature this turn, you may pay {U} rather than pay this spell's mana cost"),
+                        "<br/><i>Raid</i> &mdash; If you attacked this turn, you may pay {U} rather than pay this spell's mana cost"),
                 new PlayerAttackedWatcher());
         // Counter target spell. 
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().setAbilityWord(AbilityWord.RAID);
         this.getSpellAbility().addHint(RaidHint.instance);
     }
 

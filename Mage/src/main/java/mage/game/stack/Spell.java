@@ -233,7 +233,10 @@ public class Spell extends StackObjectImpl implements Card {
                     }
                 }
                 if (game.getState().getZone(card.getMainCard().getId()) == Zone.STACK) {
-                    if (!isCopy()) {
+                    if (isCopy()) {
+                        // copied spell, only remove from stack
+                        game.getStack().remove(this, game);
+                    } else {
                         controller.moveCards(card, Zone.GRAVEYARD, ability, game);
                     }
                 }
@@ -438,7 +441,7 @@ public class Spell extends StackObjectImpl implements Card {
                 }
             }
         } else {
-            // Copied spell, only remove from stack
+            // copied spell, only remove from stack
             game.getStack().remove(this, game);
         }
     }
@@ -847,6 +850,7 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
         if (this.isCopy()) {
+            // copied spell, only remove from stack
             game.getStack().remove(this, game);
             return true;
         }

@@ -75,6 +75,6 @@ class BeckTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Whenever a creature enters the battlefield this turn, you may " + modes.getText();
+        return "Whenever a creature enters the battlefield this turn, you may draw a card.";
     }
 }

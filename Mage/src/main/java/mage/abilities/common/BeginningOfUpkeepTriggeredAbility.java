@@ -9,8 +9,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.Locale;
-
 /**
  * @author Loki
  */
@@ -119,30 +117,22 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        StringBuilder sb = new StringBuilder(super.getRule());
+    public String getTriggerPhrase() {
         if (ruleTrigger != null && !ruleTrigger.isEmpty()) {
-            return sb.insert(0, ruleTrigger).toString();
+            return ruleTrigger;
         }
         switch (targetController) {
             case YOU:
-                if (this.optional) {
-                    if (sb.substring(0, 6).toLowerCase(Locale.ENGLISH).equals("target")) {
-                        sb.insert(0, "you may have ");
-                    } else if (!sb.substring(0, 4).toLowerCase(Locale.ENGLISH).equals("you ")) {
-                        sb.insert(0, "you may ");
-                    }
-                }
-                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of your upkeep, ").toString();
+                return "At the beginning of your upkeep, " + generateZoneString();
             case OPPONENT:
-                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each opponent's upkeep, ").toString();
+                return "At the beginning of each opponent's upkeep, " + generateZoneString();
             case ANY:
             case ACTIVE:
-                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each player's upkeep, ").toString();
+                return "At the beginning of each player's upkeep, " + generateZoneString();
             case EACH_PLAYER:
-                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each upkeep, ").toString();
+                return "At the beginning of each upkeep, " + generateZoneString();
             case CONTROLLER_ATTACHED_TO:
-                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of the upkeep of enchanted creature's controller, ").toString();
+                return "At the beginning of the upkeep of enchanted creature's controller, " + generateZoneString();
         }
         return "";
     }

@@ -29,8 +29,8 @@ public class AttacksOrBlocksTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return startText + " {this} attacks or blocks, " + super.getRule();
+    public String getTriggerPhrase() {
+        return startText + " {this} attacks or blocks, " ;
     }
 
     @Override

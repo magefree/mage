@@ -81,8 +81,8 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever " + filter.getMessage() + " attacks you, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever " + filter.getMessage() + " attacks you, " ;
     }
 
 }

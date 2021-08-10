@@ -182,7 +182,7 @@ class GrinningTotemDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "At the beginning of your next upkeep, if you haven't played it, " + modes.getText();
+        return "At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard.";
     }
 }
 
@@ -193,7 +193,6 @@ class GrinningTotemPutIntoGraveyardEffect extends OneShotEffect {
     public GrinningTotemPutIntoGraveyardEffect(UUID exileZoneId) {
         super(Outcome.Detriment);
         this.exileZoneId = exileZoneId;
-        this.staticText = "put it into its owner's graveyard";
     }
     
     public GrinningTotemPutIntoGraveyardEffect(final GrinningTotemPutIntoGraveyardEffect effect) {

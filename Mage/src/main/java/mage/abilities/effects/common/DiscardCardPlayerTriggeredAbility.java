@@ -45,7 +45,7 @@ public class DiscardCardPlayerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player discards a card, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a player discards a card, " ;
     }
 }

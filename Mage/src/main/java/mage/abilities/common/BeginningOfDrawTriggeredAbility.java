@@ -95,20 +95,19 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         switch (targetController) {
             case ACTIVE:
-                return "At the beginning of your draw step, " + generateZoneString() + getEffects().getText(modes.getMode());
             case YOU:
-                return "At the beginning of your draw step, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of your draw step, " + generateZoneString();
             case OPPONENT:
-                return "At the beginning of each opponent's draw step, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of each opponent's draw step, " + generateZoneString();
             case NOT_YOU:
-                return "At the beginning of each other player's draw step, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of each other player's draw step, " + generateZoneString();
             case ANY:
-                return "At the beginning of each player's draw step, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of each player's draw step, " + generateZoneString();
             case CONTROLLER_ATTACHED_TO:
-                return "At the beginning of the draw step of enchanted creature's controller, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of the draw step of enchanted creature's controller, " + generateZoneString();
         }
         return "";
     }

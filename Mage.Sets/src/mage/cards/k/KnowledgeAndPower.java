@@ -67,7 +67,7 @@ class ScryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you scry, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you scry, " ;
     }
 }

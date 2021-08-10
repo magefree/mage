@@ -12,7 +12,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author North, Loki
  */
 public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
@@ -81,7 +80,12 @@ public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl
         if (rule != null) {
             return rule;
         }
-        return "Whenever {this} blocks or becomes blocked" + (setTargetPointer ? " by a " + filter.getMessage() : "") + ", " + super.getRule();
+        return super.getRule();
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever {this} blocks or becomes blocked" + (setTargetPointer ? " by a " + filter.getMessage() : "") + ", ";
     }
 
     @Override

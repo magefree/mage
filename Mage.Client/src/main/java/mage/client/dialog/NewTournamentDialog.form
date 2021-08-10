@@ -545,7 +545,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jLabel6" min="-2" pref="49" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cbDraftTiming" min="-2" pref="107" max="-2" attributes="0"/>
+                  <Component id="cbDraftTiming" min="-2" pref="140" max="-2" attributes="0"/>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
           </Group>

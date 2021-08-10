@@ -31,6 +31,7 @@ public final class JoragaBard extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ROGUE);
+        this.subtype.add(SubType.BARD);
         this.subtype.add(SubType.ALLY);
 
         this.power = new MageInt(1);

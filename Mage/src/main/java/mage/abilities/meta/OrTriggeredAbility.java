@@ -1,9 +1,5 @@
 package mage.abilities.meta;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -11,6 +7,11 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
 /**
  * A triggered ability that combines several others and triggers whenever one or
@@ -81,9 +82,9 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         if (ruleTrigger != null && !ruleTrigger.isEmpty()) {
-            return ruleTrigger + super.getRule();
+            return ruleTrigger;
         }
         StringBuilder sb = new StringBuilder();
         if (triggeredAbilities[0].getRule().length() > 0) {
@@ -96,7 +97,7 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         sb.append(" or ").append(triggeredAbilities[triggeredAbilities.length - 1].getRule().toLowerCase(Locale.ENGLISH));
-        return sb.toString() + super.getRule();
+        return sb.toString();
     }
 
     @Override

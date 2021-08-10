@@ -9,6 +9,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -37,7 +38,7 @@ public final class KnowledgePool extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // Imprint - When Knowledge Pool enters the battlefield, each player exiles the top three cards of their library
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new KnowledgePoolEffect1(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new KnowledgePoolEffect1(), false).setAbilityWord(AbilityWord.IMPRINT));
 
         // Whenever a player casts a spell from their hand, that player exiles it. If the player does, they may cast another nonland card exiled with Knowledge Pool without paying that card's mana cost.
         this.addAbility(new KnowledgePoolAbility());

@@ -7,6 +7,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LearnEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -29,7 +30,8 @@ public final class PoetsQuill extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // When Poet's Quill enters the battlefield, learn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LearnEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LearnEffect())
+                .addHint(OpenSideboardHint.instance));
 
         // Equipped creature gets +1/+1 and has lifelink.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 1));

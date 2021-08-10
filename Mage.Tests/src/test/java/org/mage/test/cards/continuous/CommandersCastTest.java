@@ -52,7 +52,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
 
         // destroy commander
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Balduvian Bears");
-        setChoice(playerA, "Yes"); // put to command zone again
+        setChoice(playerA, true); // put to command zone again
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after destroy", 1, PhaseStep.PRECOMBAT_MAIN, playerB, playerA, "Balduvian Bears", 0);
 
@@ -105,7 +105,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
 
         // destroy commander land
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pillage", "Academy Ruins");
-        setChoice(playerA, "Yes"); // put to command zone again
+        setChoice(playerA, true); // put to command zone again
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after destroy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Academy Ruins", 0);
 
@@ -177,7 +177,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setModeChoice(playerA, "1");
         setModeChoice(playerA, "1");
         setModeChoice(playerA, "4");
-        setChoice(playerA, "Yes"); // return commander
+        setChoice(playerA, true); // return commander
 
         checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen", 3);
         checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerA, 20 + 4);
@@ -203,7 +203,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         // cast 1 and counter (increase commander tax)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Remand", "Balduvian Bears", "Balduvian Bears");
-        setChoice(playerA, "No"); // move to hand
+        setChoice(playerA, false); // move to hand
         checkCommandCardCount("cast 1", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Balduvian Bears", 0);
         checkHandCardCount("cast 1", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Balduvian Bears", 1);
         checkPermanentCount("cast 1", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Balduvian Bears", 0);
@@ -212,7 +212,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         // cast 2 from hand without tax
         castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
         castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerB, "Remand", "Balduvian Bears", "Balduvian Bears");
-        setChoice(playerA, "Yes"); // move to command zone
+        setChoice(playerA, true); // move to command zone
         checkCommandCardCount("cast 2", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Balduvian Bears", 1);
         checkHandCardCount("cast 2", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Balduvian Bears", 0);
         checkPermanentCount("cast 2", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Balduvian Bears", 0);
@@ -265,7 +265,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
 
         // cast overload
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Weapon Surge with overload");
-        setChoice(playerA, "Yes"); // move to command zone
+        setChoice(playerA, true); // move to command zone
         checkAbility("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Balduvian Bears", FirstStrikeAbility.class, true);
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -306,7 +306,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Balduvian Bears");
         setChoice(playerA, "Red"); // pay
-        setChoice(playerA, "No"); // leave in graveyard
+        setChoice(playerA, false); // leave in graveyard
 
         // use commander as delve pay
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 5);
@@ -314,7 +314,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setChoice(playerA, "Blue", 5); // pay normal
         setChoice(playerA, "Exile a card"); // pay delve
         setChoice(playerA, "Balduvian Bears");
-        setChoice(playerA, "Yes"); // move to command zone
+        setChoice(playerA, true); // move to command zone
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -350,7 +350,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         // turn 1 - cast left
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire");
         addTargetAmount(playerA, playerB, 2);
-        setChoice(playerA, "Yes"); // return commander
+        setChoice(playerA, true); // return commander
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         // can't cast due commander cost added
         checkCommandCardCount("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire // Ice", 1);
@@ -363,7 +363,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         // cast right and use all mana (4 = card + commander cost)
         castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Ice");
         addTarget(playerA, "Mountain"); // tap target
-        setChoice(playerA, "Yes"); // move to commander
+        setChoice(playerA, true); // move to commander
         waitStackResolved(5, PhaseStep.PRECOMBAT_MAIN);
         checkCommandCardCount("after second cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire // Ice", 1);
         checkPlayableAbility("after second cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fire", false);
@@ -406,7 +406,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
 
         // cast adventure spell
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
-        setChoice(playerA, "Yes"); // return commander
+        setChoice(playerA, true); // return commander
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkCommandCardCount("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
         checkPermanentCount("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food", 1);
@@ -423,7 +423,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
 
         // play adventure spell, but keep it
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
-        setChoice(playerA, "No"); // do not return commander
+        setChoice(playerA, false); // do not return commander
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food", 2);
         checkPlayableAbility("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
@@ -439,7 +439,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
 
         // return commander to command zone
         activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "target damage 10", "Curious Pair");
-        setChoice(playerA, "Yes"); // return to command zone
+        setChoice(playerA, true); // return to command zone
         // can't cast - only {2} mana, but need {G} + {2} + {2}
         checkPlayableAbility("after return 2", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
         checkPlayableAbility("after return 2", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
@@ -518,7 +518,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
 
         // exile and return
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angelic Edict", "Tergrid, God of Fright");
-        setChoice(playerA, "Yes"); // return to command
+        setChoice(playerA, true); // return to command
 
         // turn 5 - check commander cost
         checkPlayableAbility("before second cast 1", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Tergrid, God of Fright", true);
@@ -572,7 +572,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         checkStackSize("must have 2 bolts on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
         checkPlayableAbility("must see commander on battle for free cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fierce Guardianship", true);
         //
-        setChoice(playerA, "Yes"); // return to command zone after kill
+        setChoice(playerA, true); // return to command zone after kill
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -599,8 +599,8 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Uro, Titan of Nature's Wrath");
         setChoice(playerA, "Whenever {this} enters the battlefield or attacks"); // gain life trigger first, sacrifice next
-        setChoice(playerA, "No"); // keep in graveyard
-        setChoice(playerA, "Yes"); // put land to battlefield
+        setChoice(playerA, false); // keep in graveyard
+        setChoice(playerA, true); // put land to battlefield
         setChoice(playerA, "Swamp"); // put a Swamp
 
         setStrictChooseMode(true);

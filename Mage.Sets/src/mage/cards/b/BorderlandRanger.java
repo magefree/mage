@@ -21,7 +21,7 @@ public final class BorderlandRanger extends CardImpl {
 
     public BorderlandRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add(SubType.HUMAN, SubType.SCOUT);
+        this.subtype.add(SubType.HUMAN, SubType.SCOUT, SubType.RANGER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

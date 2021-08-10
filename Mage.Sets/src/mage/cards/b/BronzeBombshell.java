@@ -78,8 +78,8 @@ class LoseControlTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When a player other than {this}'s owner controls it, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When a player other than {this}'s owner controls it, " ;
     }
 }
 

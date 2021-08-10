@@ -38,7 +38,7 @@ public class ControllerPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         return "Whenever you play a land, ";
     }
 }

@@ -45,7 +45,7 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
 
         checkPlayableAbility("pay 2 life for Banehound", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Banehound", true);  
         
-        setChoice(playerA, "Yes");        
+        setChoice(playerA, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banehound");
 
         checkPlayableAbility("no Mana for Banehound", 2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Banehound", false);            
@@ -71,11 +71,11 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
 
-        setChoice(playerA, "Yes"); //yes to pay 2 life to cast Crypt Ghast
+        setChoice(playerA, true); //yes to pay 2 life to cast Crypt Ghast
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crypt Ghast"); //3 mana used, 2 life paid (18 life total)
-        setChoice(playerA, "Yes"); //yes to pay 2 life to cast Banehound
-        setChoice(playerA, "Yes"); //yes to Extort
-        setChoice(playerA, "Yes"); //yes to pay 2 life to Extort
+        setChoice(playerA, true); //yes to pay 2 life to cast Banehound
+        setChoice(playerA, true); //yes to Extort
+        setChoice(playerA, true); //yes to pay 2 life to Extort
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banehound"); //0 mana used, 4 life paid, 1 life gained (15 life total)
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -94,7 +94,7 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
 
-        setChoice(playerA, "Yes"); //yes to pay 2 life to activate Frozen Shade's +1/+1 ability
+        setChoice(playerA, true); //yes to pay 2 life to activate Frozen Shade's +1/+1 ability
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{B}: {this} gets +1/+1 until end of turn.");
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -114,10 +114,10 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Banehound");
         
-        setChoice(playerA, "No"); //don't pay 2 life for Dismember's Phyrexian cost
-        setChoice(playerA, "No"); //don't pay 2 life for Dismember's Phyrexian cost
-        setChoice(playerA, "Yes"); //yes to pay 2 life for Dismember's {B} cost via K'rrik
-        setChoice(playerA, "Yes"); //yes to pay 2 life for Dismember's {B} cost via K'rrik
+        setChoice(playerA, false); //don't pay 2 life for Dismember's Phyrexian cost
+        setChoice(playerA, false); //don't pay 2 life for Dismember's Phyrexian cost
+        setChoice(playerA, true); //yes to pay 2 life for Dismember's {B} cost via K'rrik
+        setChoice(playerA, true); //yes to pay 2 life for Dismember's {B} cost via K'rrik
         
         //Dismember costs {1} now + life paid. Normally this would be {3} + life paid with true Phyrexian mana and Trinisphere active.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dismember", "Banehound");
@@ -144,7 +144,7 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Banehound");
                         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banehound");
-        setChoice(playerA, "Yes"); // Pay 2 life for {B}
+        setChoice(playerA, true); // Pay 2 life for {B}
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

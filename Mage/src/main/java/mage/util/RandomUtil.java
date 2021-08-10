@@ -1,7 +1,9 @@
 package mage.util;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Created by IGOUDT on 5-9-2016.
@@ -39,5 +41,20 @@ public final class RandomUtil {
 
     public static void setSeed(long newSeed) {
         random.setSeed(newSeed);
+    }
+
+    public static <T extends Serializable> T randomFromSet(Set<T> collection) {
+        if (collection.size() < 2) {
+            return collection.stream().findFirst().orElse(null);
+        }
+        int rand = nextInt(collection.size());
+        int count = 0;
+        for (T currentId : collection) {
+            if (count == rand) {
+                return currentId;
+            }
+            count++;
+        }
+        return null;
     }
 }

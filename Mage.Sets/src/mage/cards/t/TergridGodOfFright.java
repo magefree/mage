@@ -106,8 +106,9 @@ class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
         if (!game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
             return false;
         }
+        // it must be in the graveyard IE: Rest in Peace effect
         switch (event.getType()) {
-            case SACRIFICE_PERMANENT:
+            case SACRIFICED_PERMANENT:
                 Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
                 if (permanent == null
                         || permanent instanceof PermanentToken
@@ -117,7 +118,9 @@ class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
                 break;
             case DISCARDED_CARD:
                 Card discardedCard = game.getCard(event.getTargetId());
-                if (discardedCard == null || !discardedCard.isPermanent(game)) {
+                if (discardedCard == null
+                        || !discardedCard.isPermanent(game)
+                        || game.getState().getZone(discardedCard.getId()) != Zone.GRAVEYARD) {
                     return false;
                 }
                 break;

@@ -3,9 +3,11 @@ package mage.view;
 import mage.MageObject;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
+import mage.abilities.icon.other.VariableCostCardIcon;
 import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
@@ -28,7 +30,7 @@ public class StackAbilityView extends CardView {
     private static final long serialVersionUID = 1L;
 
     // in GUI: that's view will be replaced by sourceCard, so don't forget to sync settings like
-    // selectable, chooseable, etc. Search by getSourceCard
+    // selectable, chooseable, card icons etc. Search by getSourceCard
     private final CardView sourceCard;
 
     public StackAbilityView(Game game, StackAbility ability, String sourceName, CardView sourceCard) {
@@ -73,6 +75,13 @@ public class StackAbilityView extends CardView {
         this.counters = sourceCard.getCounters();
 
         updateTargets(game, ability);
+
+        // card icons (warning, it must be synced in gui dialogs with replaced card, see comments at the start of the file)
+        // cost x
+        if (ability.getManaCostsToPay().containsX()) {
+            int costX = ManacostVariableValue.REGULAR.calculate(game, ability, null);
+            this.cardIcons.add(new VariableCostCardIcon(costX));
+        }
     }
 
     private void updateTargets(Game game, StackAbility ability) {
@@ -108,7 +117,7 @@ public class StackAbilityView extends CardView {
             }
         }
         if (!names.isEmpty()) {
-            getRules().add("<i>Related objects: " + names.toString() + "</i>");
+            getRules().add("<i>Related objects: " + names + "</i>");
         }
 
         // show for modal ability, which mode was choosen

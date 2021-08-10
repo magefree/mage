@@ -7,17 +7,24 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class EndOfCombatTriggeredAbility extends TriggeredAbilityImpl {
 
+    private final String rule;
+
     public EndOfCombatTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, null);
+    }
+
+    public EndOfCombatTriggeredAbility(Effect effect, boolean optional, String rule) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.rule = rule;
     }
 
     public EndOfCombatTriggeredAbility(final EndOfCombatTriggeredAbility ability) {
         super(ability);
+        this.rule = ability.rule;
     }
 
     @Override
@@ -36,7 +43,15 @@ public class EndOfCombatTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public String getTriggerPhrase() {
+        return "At end of combat, ";
+    }
+
+    @Override
     public String getRule() {
-        return "At end of combat, " + super.getRule();
+        if (rule != null) {
+            return rule;
+        }
+        return super.getRule();
     }
 }

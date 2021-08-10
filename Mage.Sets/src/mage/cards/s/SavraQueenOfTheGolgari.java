@@ -84,8 +84,8 @@ class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you sacrifice a black creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you sacrifice a black creature, " ;
     }
 }
 
@@ -161,7 +161,7 @@ class SavraSacrificeGreenCreatureAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you sacrifice a green creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you sacrifice a green creature, " ;
     }
 }

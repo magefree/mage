@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Mock card for GUI (deck editor and panels)
+ * Mock card for GUI (deck editor and panels, contains only texts)
  *
  * @author North
  */

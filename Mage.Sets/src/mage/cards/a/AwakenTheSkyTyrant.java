@@ -69,7 +69,7 @@ class AwakenTheSkyTyrantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When a source an opponent controls deals damage to you, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When a source an opponent controls deals damage to you, " ;
     }
 }

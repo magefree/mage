@@ -6,6 +6,7 @@ import mage.game.Game;
 import mage.game.Seat;
 import mage.game.Table;
 import mage.game.draft.Draft;
+import mage.game.draft.DraftOptions;
 import mage.game.match.MatchPlayer;
 import mage.game.tournament.TournamentPlayer;
 
@@ -155,6 +156,10 @@ public class TableView implements Serializable {
                     if (table.getTournament().getTournamentType().isLimited()) {
                         infoText.append(" Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append(" Min.");
                     }
+                    if (table.getTournament().getOptions().getLimitedOptions() instanceof DraftOptions) {
+                        DraftOptions draftOptions = (DraftOptions) table.getTournament().getOptions().getLimitedOptions();
+                        infoText.append(" Pick time: ").append(draftOptions.getTiming().getShortName());
+                    }
                     if (table.getTournament().getOptions().getMatchOptions().isRollbackTurnsAllowed()) {
                         infoText.append(" RB");
                     }
@@ -172,7 +177,7 @@ public class TableView implements Serializable {
                 case DRAFTING:
                     Draft draft = table.getTournament().getDraft();
                     if (draft != null) {
-                        stateText.append(' ').append(draft.getBoosterNum()).append('/').append(draft.getCardNum() - 1);
+                        stateText.append(' ').append(draft.getBoosterNum()).append('/').append(draft.getCardNum());
                     }
                     break;
                 default:

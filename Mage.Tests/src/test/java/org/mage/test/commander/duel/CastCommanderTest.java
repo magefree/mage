@@ -77,7 +77,7 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 8); // Cost reduction does not work for getPlayable so you need to have 8 mana available
        
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Patron of the Orochi");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Coiled Tinviper");
 
         setStrictChooseMode(true);
@@ -112,7 +112,7 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unexpectedly Absent", "Ob Nixilis of the Black Oath");
         setChoice(playerA, "X=0");
-        setChoice(playerA, "Yes"); // Move Commander to command zone instead library?
+        setChoice(playerA, true); // Move Commander to command zone instead library?
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

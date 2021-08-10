@@ -105,8 +105,8 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature dealt damage by equipped creature this turn dies, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature dealt damage by equipped creature this turn dies, " ;
     }
 }
 

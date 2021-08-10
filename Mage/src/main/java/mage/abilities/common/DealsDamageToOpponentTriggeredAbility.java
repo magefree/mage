@@ -72,12 +72,12 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever {this} deals ");
         if (onlyCombat) {
             sb.append("combat ");
         }
-        sb.append("damage to an opponent, ").append(super.getRule());
+        sb.append("damage to an opponent, ");
         return sb.toString();
     }
 }

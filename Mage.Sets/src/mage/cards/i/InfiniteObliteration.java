@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ChooseACardNameEffect;
@@ -56,7 +54,7 @@ class InfiniteObliterationEffect extends SearchTargetGraveyardHandLibraryForCard
         if (player == null || controller == null) {
             return true;
         }
-        String cardName = ChooseACardNameEffect.TypeOfName.CREATURE_NAME.getChoice(player, game, source, false);
+        String cardName = ChooseACardNameEffect.TypeOfName.CREATURE_NAME.getChoice(controller, game, source, false);
         super.applySearchAndExile(game, source, cardName, player.getId());
         return true;
     }

@@ -187,8 +187,8 @@ public class CascadeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Enlisted Wurm"); // Creature {4}{G}{W}  5/5
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enlisted Wurm");
-        setChoice(playerA, "Yes"); // Use cascade on Promise of Power
-        setChoice(playerA, "No"); // Pay no Entwine
+        setChoice(playerA, true); // Use cascade on Promise of Power
+        setChoice(playerA, false); // Pay no Entwine
         setModeChoice(playerA, "1");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -224,7 +224,7 @@ public class CascadeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Ardent Plea"); // Enchantment {1}{W}{U}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ardent Plea");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

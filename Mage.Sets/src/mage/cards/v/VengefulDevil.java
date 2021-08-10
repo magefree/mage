@@ -6,6 +6,7 @@ import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +40,7 @@ public final class VengefulDevil extends CardImpl {
         );
         ability.addTarget(new TargetAnyTarget());
         ability.setAbilityWord(AbilityWord.MORBID);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MorbidHint.instance));
     }
 
     private VengefulDevil(final VengefulDevil card) {

@@ -24,6 +24,7 @@ public final class TurntimberRanger extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SCOUT);
+        this.subtype.add(SubType.RANGER);
         this.subtype.add(SubType.ALLY);
 
         this.power = new MageInt(2);

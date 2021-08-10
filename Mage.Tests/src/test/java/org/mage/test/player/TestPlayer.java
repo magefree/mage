@@ -23,10 +23,7 @@ import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
-import mage.filter.Filter;
-import mage.filter.FilterMana;
-import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
+import mage.filter.*;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -1977,7 +1974,14 @@ public class TestPlayer implements Player {
             //Assert.fail("Wrong choice");
         }
 
-        this.chooseStrictModeFailed("choice", game, choice.getMessage());
+        String choicesInfo;
+        if (choice.isKeyChoice()) {
+            choicesInfo = String.join("\n", choice.getKeyChoices().values());
+        } else {
+            choicesInfo = String.join("\n", choice.getChoices());
+        }
+        this.chooseStrictModeFailed("choice", game,
+                "Message: " + choice.getMessage() + "\nPossible choices:\n" + choicesInfo);
         return computerPlayer.choose(outcome, choice, game);
     }
 
@@ -3438,6 +3442,11 @@ public class TestPlayer implements Player {
     @Override
     public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId) {
         return computerPlayer.searchLibrary(target, source, game, targetPlayerId);
+    }
+
+    @Override
+    public boolean seekCard(FilterCard filter, Ability source, Game game) {
+        return computerPlayer.seekCard(filter, source, game);
     }
 
     @Override

@@ -23,11 +23,11 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.GriffinToken;
 import mage.target.TargetPermanent;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 import java.util.UUID;
+import mage.game.permanent.token.Angel33Token;
 
 /**
  * @author TheElk801
@@ -46,9 +46,9 @@ public final class TheBookOfExaltedDeeds extends CardImpl {
         // At the beginning of your end step, if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new GriffinToken()), TargetController.YOU, false
-                ), condition, "At the beginning of your end step, " +
-                "if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying."
+                        new CreateTokenEffect(new Angel33Token()), TargetController.YOU, false
+                ), condition, "At the beginning of your end step, "
+                + "if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying."
         ).addHint(hint), new PlayerGainedLifeWatcher());
 
         // {W}{W}{W}, {T}, Exile The Book of Exalted Deeds: Put an enlightened counter on target Angel. It gains "You can't lose the game and your opponents can't win the game." Activate only as a sorcery.

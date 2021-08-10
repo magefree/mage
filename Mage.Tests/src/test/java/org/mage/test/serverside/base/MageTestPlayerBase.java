@@ -25,6 +25,7 @@ import mage.cards.repository.CardRepository;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.match.Match;
 import mage.game.match.MatchType;
 import mage.game.permanent.PermanentCard;
 import mage.game.tournament.TournamentType;
@@ -91,6 +92,8 @@ public abstract class MageTestPlayerBase {
      * Game instance initialized in load method.
      */
     protected static Game currentGame = null;
+
+    protected static Match currentMatch = null;
 
     /**
      * Player thats starts the game first. By default, it is ComputerA.

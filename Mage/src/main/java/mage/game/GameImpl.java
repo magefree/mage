@@ -64,6 +64,7 @@ import mage.util.GameLog;
 import mage.util.MessageToClient;
 import mage.util.RandomUtil;
 import mage.util.functions.CopyApplier;
+import mage.watchers.Watcher;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
 
@@ -1185,18 +1186,29 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     public void initGameDefaultWatchers() {
-        getState().addWatcher(new MorbidWatcher());
-        getState().addWatcher(new CastSpellLastTurnWatcher());
-        getState().addWatcher(new CastSpellYourLastTurnWatcher());
-        getState().addWatcher(new PlayerLostLifeWatcher());
-        getState().addWatcher(new PlayerLostLifeNonCombatWatcher());
-        getState().addWatcher(new BlockedAttackerWatcher());
-        getState().addWatcher(new DamageDoneWatcher());
-        getState().addWatcher(new PlanarRollWatcher());
-        getState().addWatcher(new AttackedThisTurnWatcher());
-        getState().addWatcher(new PlayersAttackedThisTurnWatcher());
-        getState().addWatcher(new CardsDrawnThisTurnWatcher());
-        getState().addWatcher(new ManaSpentToCastWatcher());
+        List<Watcher> newWatchers = new ArrayList<>();
+        newWatchers.add(new MorbidWatcher());
+        newWatchers.add(new CastSpellLastTurnWatcher());
+        newWatchers.add(new CastSpellYourLastTurnWatcher());
+        newWatchers.add(new PlayerLostLifeWatcher());
+        newWatchers.add(new PlayerLostLifeNonCombatWatcher());
+        newWatchers.add(new BlockedAttackerWatcher());
+        newWatchers.add(new DamageDoneWatcher());
+        newWatchers.add(new PlanarRollWatcher());
+        newWatchers.add(new AttackedThisTurnWatcher());
+        newWatchers.add(new PlayersAttackedThisTurnWatcher());
+        newWatchers.add(new CardsDrawnThisTurnWatcher());
+        newWatchers.add(new ManaSpentToCastWatcher());
+        newWatchers.add(new ManaPaidSourceWatcher());
+
+        // runtime check - allows only GAME scope (one watcher per game)
+        newWatchers.forEach(watcher -> {
+            if (!watcher.getScope().equals(WatcherScope.GAME)) {
+                throw new IllegalStateException("Game default watchers must have GAME scope: " + watcher.getClass().getCanonicalName());
+            }
+        });
+
+        newWatchers.forEach(getState()::addWatcher);
     }
 
     public void initPlayerDefaultWatchers(UUID playerId) {
@@ -2038,6 +2050,7 @@ public abstract class GameImpl implements Game, Serializable {
         // to exist the next time state-based actions are checked.
         //
         // Copied cards can be stored in GameState.copiedCards or in game state value (until LKI rework)
+        // Copied cards list contains all parts of split/adventure/mdfc
         Set<Card> allCopiedCards = new HashSet<>();
         allCopiedCards.addAll(this.getState().getCopiedCards());
         Map<String, Object> stateSavedCopiedCards = this.getState().getValues(GameState.COPIED_CARD_KEY);
@@ -2047,6 +2060,7 @@ public abstract class GameImpl implements Game, Serializable {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList())
         );
+        Set<Card> copiedCardsToRemove = new HashSet<>();
         for (Card copiedCard : allCopiedCards) {
             // 1. Zone must be checked from main card only cause mdf parts can have different zones
             //    (one side on battlefield, another side on outside)
@@ -2057,13 +2071,25 @@ public abstract class GameImpl implements Game, Serializable {
             Zone zone = state.getZone(copiedCard.getMainCard().getId());
             // TODO: remember LKI of copied cards here after LKI rework
             switch (zone) {
-                case BATTLEFIELD:
+                case OUTSIDE:
+                case BATTLEFIELD: {
+                    // keep in battlefield
+                    // keep in outside (it's a final zone for all copied cards)
                     continue;
-                case STACK:
-                    if (getStack().getStackObject(copiedCard.getId()) != null) {
+                }
+
+                case STACK: {
+                    // copied cards aren't moves and keeps in Stack zone after resolve,
+                    // so it must be moved manually as SBA (see Outside zone change at the end)
+                    MageObject object = getStack().getStackObject(copiedCard.getId());
+                    if (object != null) {
+                        // keep in stack until resolve
                         continue;
                     }
-                case GRAVEYARD:
+                    break;
+                }
+
+                case GRAVEYARD: {
                     for (Player player : getPlayers().values()) {
                         if (player.getGraveyard().contains(copiedCard.getId())) {
                             player.getGraveyard().remove(copiedCard);
@@ -2071,7 +2097,9 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                     break;
-                case HAND:
+                }
+
+                case HAND: {
                     for (Player player : getPlayers().values()) {
                         if (player.getHand().contains(copiedCard.getId())) {
                             player.getHand().remove(copiedCard);
@@ -2079,7 +2107,9 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                     break;
-                case LIBRARY:
+                }
+
+                case LIBRARY: {
                     for (Player player : getPlayers().values()) {
                         if (player.getLibrary().getCard(copiedCard.getId(), this) != null) {
                             player.getLibrary().remove(copiedCard.getId(), this);
@@ -2087,15 +2117,30 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                     break;
-                case EXILED:
+                }
+
+                case EXILED: {
                     getExile().removeCard(copiedCard, this);
                     break;
+                }
+
+                case COMMAND:
+                default: {
+                    break;
+                }
             }
 
-            // remove copied card info
-            this.getState().getCopiedCards().remove(copiedCard);
-            this.getState().removeValue(GameState.COPIED_CARD_KEY + copiedCard.getId().toString());
+            // copied card can be removed to Outside
+            copiedCardsToRemove.add(copiedCard);
         }
+        // real remove
+        copiedCardsToRemove.forEach(card -> {
+            card.setZone(Zone.OUTSIDE, this);
+            this.getState().getCopiedCards().remove(card);
+            // must keep card in game state as LKI alternative until LKI rework, so don't remove from it
+            // TODO: change after LKI rework
+            //this.getState().removeValue(GameState.COPIED_CARD_KEY + copiedCard.getId().toString());
+        });
 
         List<Permanent> legendary = new ArrayList<>();
         List<Permanent> worldEnchantment = new ArrayList<>();
@@ -3185,8 +3230,8 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command) {
         // fake test ability for triggers and events
-        Ability fakeSourceAbility = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
-        fakeSourceAbility.setControllerId(ownerId);
+        Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
+        fakeSourceAbilityTemplate.setControllerId(ownerId);
 
         Player player = getPlayer(ownerId);
         if (player != null) {
@@ -3221,6 +3266,8 @@ public abstract class GameImpl implements Game, Serializable {
             }
 
             for (PermanentCard permanentCard : battlefield) {
+                Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
+                fakeSourceAbility.setSourceId(permanentCard.getId());
                 CardUtil.putCardOntoBattlefieldWithEffects(fakeSourceAbility, this, permanentCard, player);
             }
 

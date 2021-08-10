@@ -65,8 +65,8 @@ class EmissaryOfGrudgesEffect extends OneShotEffect {
 
     public EmissaryOfGrudgesEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Choose new targets for target spell or ability if it's controlled by the chosen player and" +
-                " if it targets you or a permanent you control. Activate only once.";
+        this.staticText = "Choose new targets for target spell or ability if it's controlled by the chosen player and"
+                + " if it targets you or a permanent you control. Activate only once.";
     }
 
     public EmissaryOfGrudgesEffect(final EmissaryOfGrudgesEffect effect) {
@@ -105,6 +105,6 @@ class EmissaryOfGrudgesEffect extends OneShotEffect {
         if (targetsYouOrAPermanentYouControl) {
             return stackObject.chooseNewTargets(game, source.getControllerId(), false, false, null);
         }
-        return true;
+        return false;
     }
 }

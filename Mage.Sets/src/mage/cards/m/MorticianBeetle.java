@@ -68,8 +68,8 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player sacrifices a creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a player sacrifices a creature, " ;
     }
 
     @Override

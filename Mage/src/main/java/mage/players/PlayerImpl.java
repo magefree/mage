@@ -8,10 +8,7 @@ import mage.abilities.common.PassAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.common.WhileSearchingPlayFromLibraryAbility;
 import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
-import mage.abilities.costs.AlternativeSourceCosts;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.OptionalAdditionalSourceCosts;
+import mage.abilities.costs.*;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -247,6 +244,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         this.inRange.addAll(player.inRange);
         this.userData = player.userData;
+        this.matchPlayer = player.matchPlayer;
+
         this.canPayLifeCost = player.canPayLifeCost;
         this.sacrificeCostFilter = player.sacrificeCostFilter;
         this.alternativeSourceCosts.addAll(player.alternativeSourceCosts);
@@ -497,6 +496,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void updateRange(Game game) {
         // 20100423 - 801.2c
         // 801.2c The particular players within each player’s range of influence are determined as each turn begins.
+        // BUT it also uses before game start to fill game and card data in starting game events
         inRange.clear();
         inRange.add(this.playerId);
         inRange.addAll(getAllNearPlayers(game, true));
@@ -1536,9 +1536,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     /**
-     * Return spells for possible cast
-     * Uses in GUI to show only playable spells for choosing from the card
-     * (example: effect allow to cast card and player must choose the spell ability)
+     * Return spells for possible cast Uses in GUI to show only playable spells
+     * for choosing from the card (example: effect allow to cast card and player
+     * must choose the spell ability)
      *
      * @param playerId
      * @param object
@@ -2711,6 +2711,22 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public boolean seekCard(FilterCard filter, Ability source, Game game) {
+        Set<Card> cards = this.getLibrary()
+                .getCards(game)
+                .stream()
+                .filter(card -> filter.match(card, source.getSourceId(), getId(), game))
+                .collect(Collectors.toSet());
+        Card card = RandomUtil.randomFromSet(cards);
+        if (card == null) {
+            return false;
+        }
+        game.informPlayers(this.getLogName() + " seeks a card from their library");
+        this.moveCards(card, Zone.HAND, source, game);
+        return true;
+    }
+
+    @Override
     public void lookAtAllLibraries(Ability source, Game game) {
         for (UUID playerId : game.getState().getPlayersInRange(this.getId(), game)) {
             Player player = game.getPlayer(playerId);
@@ -2760,7 +2776,6 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             // AI NOTICE: if you want AI implement here then remove selected card from castable after each
             // choice (otherwise you catch infinite freeze on uncastable use case)
-
             // casting selected card
             // TODO: fix costs (why is Panglacial Wurm automatically accepting payment?)
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
@@ -3388,8 +3403,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                         if (alternateSourceCostsAbility.getCosts().canPay(ability, ability, playerId, game)) {
                             ManaCostsImpl manaCosts = new ManaCostsImpl();
                             for (Cost cost : alternateSourceCostsAbility.getCosts()) {
-                                if (cost instanceof ManaCost) {
-                                    manaCosts.add((ManaCost) cost);
+                                // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
+                                if (cost instanceof AlternativeCost2) {
+                                    if (((AlternativeCost2) cost).getCost() instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) ((AlternativeCost2) cost).getCost());
+                                    }
+                                } else {
+                                    if (cost instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) cost);
+                                    }
                                 }
                             }
 
@@ -3430,8 +3452,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                         if (((Ability) alternateSourceCosts).getCosts().canPay(ability, ability, playerId, game)) {
                             ManaCostsImpl manaCosts = new ManaCostsImpl();
                             for (Cost cost : ((Ability) alternateSourceCosts).getCosts()) {
-                                if (cost instanceof ManaCost) {
-                                    manaCosts.add((ManaCost) cost);
+                                // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
+                                if (cost instanceof AlternativeCost2) {
+                                    if (((AlternativeCost2) cost).getCost() instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) ((AlternativeCost2) cost).getCost());
+                                    }
+                                } else {
+                                    if (cost instanceof ManaCost) {
+                                        manaCosts.add((ManaCost) cost);
+                                    }
                                 }
                             }
 
@@ -3520,8 +3549,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             // Even mana cost can't be checked here without lookahead
             // So make it available all the time
             boolean canUse;
-            if (ability instanceof MorphAbility && object instanceof Card && (game.canPlaySorcery(getId()) ||
-                    (null != game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST_AS_INSTANT, playAbility, this.getId(), game)))) {
+            if (ability instanceof MorphAbility && object instanceof Card && (game.canPlaySorcery(getId())
+                    || (null != game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST_AS_INSTANT, playAbility, this.getId(), game)))) {
                 canUse = canPlayCardByAlternateCost((Card) object, availableMana, playAbility, game);
             } else {
                 canUse = canPlay(playAbility, availableMana, object, game); // canPlay already checks alternative source costs and all conditions
@@ -3659,13 +3688,11 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     /**
      * Returns a list of all available spells and abilities the player can
-     * currently cast/activate with his available ressources
+     * currently cast/activate with his available resources
      *
      * @param game
-     * @param hidden                  also from hidden objects (e.g. turned face
-     *                                down cards ?)
-     * @param fromZone                of objects from which zone (ALL = from all
-     *                                zones)
+     * @param hidden                  also from hidden objects (e.g. turned face down cards ?)
+     * @param fromZone                of objects from which zone (ALL = from all zones)
      * @param hideDuplicatedAbilities if equal abilities exist return only the
      *                                first instance
      * @return
@@ -3746,11 +3773,20 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
 
-            // check to play companion cards
+            // outside cards
             if (fromAll || fromZone == Zone.OUTSIDE) {
+                // companion cards
                 for (Cards companionCards : game.getState().getCompanion().values()) {
                     for (Card card : companionCards.getCards(game)) {
                         getPlayableFromObjectAll(game, Zone.OUTSIDE, card, availableMana, playable);
+                    }
+                }
+
+                // sideboard cards (example: Wish)
+                for (UUID sideboardCardId : this.getSideboard()) {
+                    Card sideboardCard = game.getCard(sideboardCardId);
+                    if (sideboardCard != null) {
+                        getPlayableFromObjectAll(game, Zone.OUTSIDE, sideboardCard, availableMana, playable);
                     }
                 }
             }
@@ -3763,6 +3799,20 @@ public abstract class PlayerImpl implements Player, Serializable {
                         Card card = player.getLibrary().getFromTop(game);
                         if (card != null) {
                             getPlayableFromObjectAll(game, Zone.LIBRARY, card, availableMana, playable);
+                        }
+                    }
+                }
+            }
+
+            // check the hand zone (Sen Triplets)
+            if (fromAll || fromZone == Zone.HAND) {
+                for (UUID playerInRangeId : game.getState().getPlayersInRange(getId(), game)) {
+                    Player player = game.getPlayer(playerInRangeId);
+                    if (player != null && !player.getHand().isEmpty()) {
+                        for (Card card : player.getHand().getCards(game)) {
+                            if (card != null) {
+                                getPlayableFromObjectAll(game, Zone.HAND, card, availableMana, playable);
+                            }
                         }
                     }
                 }
@@ -3871,7 +3921,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         playableObjects.get(objectId).add(ability);
     }
-
 
     /**
      * Skip "silent" phase step when players are not allowed to cast anything.
@@ -4550,7 +4599,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 } else if (card instanceof Spell) {
                     final Spell spell = (Spell) card;
                     if (spell.isCopy()) {
-                        // Copied spell, only remove from stack
+                        // copied spell, only remove from stack
                         game.getStack().remove(spell, game);
                     }
                 }

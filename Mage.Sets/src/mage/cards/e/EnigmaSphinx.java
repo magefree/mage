@@ -95,8 +95,8 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When {this} is put into your graveyard from the battlefield, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When {this} is put into your graveyard from the battlefield, " ;
     }
 }
 

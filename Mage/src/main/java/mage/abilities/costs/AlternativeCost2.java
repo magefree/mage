@@ -4,11 +4,11 @@ package mage.abilities.costs;
 import mage.game.Game;
 
 /**
+ * Virtual alternative cost, it must be tranformed to simple cost on activate in your
+ * custom ability (see askToActivateAlternativeCosts). Example: DashAbility
  *
  * @author LevelX2
  */
-
-
 public interface AlternativeCost2 extends Cost {
     
     String getName();

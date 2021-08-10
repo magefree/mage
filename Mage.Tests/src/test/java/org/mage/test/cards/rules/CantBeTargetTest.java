@@ -27,7 +27,7 @@ public class CantBeTargetTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Divine Favor", "Silvercoat Lion");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Vines of Vastwood", "Silvercoat Lion", "Divine Favor");
-        setChoice(playerB, "No"); // don't use kicker
+        setChoice(playerB, false); // don't use kicker
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

@@ -32,7 +32,7 @@ public class CircleOfAfflictionTest extends CardTestPlayerBase {
         
         attack(2, playerB, "Hill Giant");
         addTarget(playerA, playerB); // Circle of Affliction drain ability
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -60,9 +60,9 @@ public class CircleOfAfflictionTest extends CardTestPlayerBase {
         attack(2, playerB, "Silvercoat Lion");
         attack(2, playerB, "Silvercoat Lion");
         addTarget(playerA, playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -93,18 +93,18 @@ public class CircleOfAfflictionTest extends CardTestPlayerBase {
         
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Lava Spike", playerA);        
         addTarget(playerA, playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         attack(2, playerB, "Hill Giant");
         attack(2, playerB, "Hill Giant");
         addTarget(playerA, playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lava Spike", playerA);
         addTarget(playerA, playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
@@ -135,9 +135,9 @@ public class CircleOfAfflictionTest extends CardTestPlayerBase {
         attack(2, playerB, "Silvercoat Lion");
         attack(2, playerB, "Hill Giant");
         addTarget(playerA, playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, playerB); // should not be able to drain Hill Giant with white selected
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();

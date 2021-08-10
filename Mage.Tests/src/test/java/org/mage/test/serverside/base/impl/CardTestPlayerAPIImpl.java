@@ -16,19 +16,19 @@ import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.game.ExileZone;
-import mage.game.Game;
-import mage.game.GameException;
-import mage.game.GameOptions;
+import mage.game.*;
 import mage.game.command.CommandObject;
+import mage.game.match.MatchOptions;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.player.ai.ComputerPlayer7;
 import mage.player.ai.ComputerPlayerMCTS;
 import mage.players.ManaPool;
 import mage.players.Player;
+import mage.server.game.GameSessionPlayer;
 import mage.server.util.SystemUtil;
 import mage.util.CardUtil;
+import mage.view.GameView;
 import org.junit.Assert;
 import org.junit.Before;
 import org.mage.test.player.PlayerAction;
@@ -216,6 +216,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             currentGame = null;
         }
 
+        // prepare fake match (needs for testing some client-server code)
+        // always 4 seats
+        MatchOptions matchOptions = new MatchOptions("test match", "test game type", true, 4);
+        currentMatch = new FreeForAllMatch(matchOptions);
         currentGame = createNewGameAndPlayers();
 
         activePlayer = playerA;
@@ -267,6 +271,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         game.loadCards(deck.getCards(), player.getId());
         game.loadCards(deck.getSideboard(), player.getId());
         game.addPlayer(player, deck);
+        currentMatch.addPlayer(player, deck); // fake match
 
         return player;
     }
@@ -1907,7 +1912,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * For use choices set "Yes" or "No" the the choice string.<br>
+     * For use choices set "Yes" or "No" the the choice string or use boolean.<br>
      * For X values set "X=[xValue]" example: for X=3 set choice string to
      * "X=3".<br>
      * For ColorChoice use "Red", "Green", "Blue", "Black" or "White"<br>
@@ -1917,6 +1922,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player
      * @param choice
      */
+    public void setChoice(TestPlayer player, boolean choice) {
+        setChoice(player, choice, 1);
+    }
+
+    public void setChoice(TestPlayer player, boolean choice, int timesToChoose) {
+        setChoice(player, choice ? "Yes" : "No", timesToChoose);
+    }
+
     public void setChoice(TestPlayer player, String choice) {
         setChoice(player, choice, 1);
     }
@@ -2116,4 +2129,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertFalse(player.getName() + " has lost the game.", player.hasLost());
     }
 
+    public GameView getGameView(Player player) {
+        // prepare client-server data for tests
+        return GameSessionPlayer.prepareGameView(currentGame, player.getId(), null);
+    }
 }

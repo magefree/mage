@@ -12,7 +12,7 @@ pauper, oathbreaker, historic, freeform and much more.
 Local server supports a [special test mode](https://github.com/magefree/mage/wiki/Development-Testing-Tools) for 
 testing combos and other game situations with pre-defined conditions.
 
-There are [public servers](http://xmageservers.online/) where you can play XMage against other players. 
+There are [public servers](http://xmage.today/servers/) where you can play XMage against other players. 
 You can also host your own server to play against the AI and/or your friends.
 
 XMage community and resources:
@@ -25,7 +25,7 @@ XMage community and resources:
 * [Project documentation](https://github.com/magefree/mage/wiki).
 
 Servers status:
-* http://xmageservers.online/
+* http://xmage.today/servers/
 
 Beta server with un-released or under development features:
 * http://xmage.today/

@@ -1,5 +1,6 @@
 package mage.client.cards;
 
+import mage.abilities.icon.CardIconColor;
 import mage.abilities.icon.CardIconOrder;
 import mage.abilities.icon.CardIconPosition;
 import mage.abilities.icon.CardIconRenderSettings;
@@ -15,6 +16,7 @@ public class CardIconsPanelFactory {
         return new CardIconsPanel(
                 CardIconPosition.LEFT,
                 CardIconOrder.CENTER,
+                CardIconColor.DEFAULT,
                 5,
                 30
         );
@@ -24,8 +26,20 @@ public class CardIconsPanelFactory {
         return new CardIconsPanel(
                 CardIconPosition.CORNER_BOTTOM_LEFT,
                 CardIconOrder.CENTER,
+                CardIconColor.DEFAULT,
                 1,
                 30
+        );
+    }
+
+    public static CardIconsPanel createCommanderPanel() {
+        // must be x2 bigger than normal icons
+        return new CardIconsPanel(
+                CardIconPosition.TOP,
+                CardIconOrder.CENTER,
+                CardIconColor.RED,
+                1,
+                30 * 2 // TODO: big size doesn't work due icons same size limits, see CardIconsPanel
         );
     }
 

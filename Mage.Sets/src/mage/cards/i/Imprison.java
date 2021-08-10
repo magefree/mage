@@ -106,8 +106,8 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, " ;
     }
 }
 

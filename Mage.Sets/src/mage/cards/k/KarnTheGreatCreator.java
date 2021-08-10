@@ -7,6 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.WishEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -50,7 +51,7 @@ public final class KarnTheGreatCreator extends CardImpl {
         // -2: You may choose an artifact card you own from outside the game or in exile, reveal that card, and put it into your hand.
         this.addAbility(new LoyaltyAbility(new WishEffect(
                 StaticFilters.FILTER_CARD_ARTIFACT_AN, true, true
-        ), -2));
+        ), -2).addHint(OpenSideboardHint.instance));
     }
 
     private KarnTheGreatCreator(final KarnTheGreatCreator card) {

@@ -55,7 +55,7 @@ public class AttacksAloneTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} attacks alone, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} attacks alone, " ;
     }
 }

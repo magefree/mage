@@ -97,7 +97,7 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Balduvian Bears", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chrome Mox");
-        setChoice(playerA, "Yes"); // use imprint
+        setChoice(playerA, true); // use imprint
         setChoice(playerA, "Balduvian Bears"); // discard
 
         activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add one");
@@ -138,7 +138,7 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mana Reflection", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chrome Mox");
-        setChoice(playerA, "Yes"); // use imprint
+        setChoice(playerA, true); // use imprint
         setChoice(playerA, "Balduvian Bears"); // discard
 
         activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add one");

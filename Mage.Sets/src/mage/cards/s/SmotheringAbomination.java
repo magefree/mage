@@ -83,7 +83,7 @@ class SmotheringAbominationTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you sacrifice a creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you sacrifice a creature, " ;
     }
 }

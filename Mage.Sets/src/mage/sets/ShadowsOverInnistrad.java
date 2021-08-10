@@ -379,15 +379,16 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
 
     /* add double faced card for SOI booster
      * add only common or uncommon
+       80/120 packs contain one of 20 uncommon DFCs and 40/120 packs contain one of 4 common DFCs
      */
     @Override
     public void addDoubleFace(List<Card> booster) {
         for (int i = 0; i < numBoosterDoubleFaced; i++) {
             List<CardInfo> doubleFacedCards;
             if (RandomUtil.nextInt(15) < 10) {
-                doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.COMMON);
-            } else {
                 doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.UNCOMMON);
+            } else {
+                doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.COMMON);
             }
             addToBooster(booster, doubleFacedCards);
         }

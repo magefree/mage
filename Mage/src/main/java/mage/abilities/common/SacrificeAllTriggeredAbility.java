@@ -62,7 +62,7 @@ public class SacrificeAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         String targetControllerText = "a player sacrifices ";
         switch (sacrificingPlayer) {
             case YOU:
@@ -72,6 +72,6 @@ public class SacrificeAllTriggeredAbility extends TriggeredAbilityImpl {
                 targetControllerText = "an opponent sacrifices ";
                 break;
         }
-        return "Whenever " + targetControllerText + filter.getMessage() + ", " + super.getRule();
+        return "Whenever " + targetControllerText + filter.getMessage() + ", ";
     }
 }

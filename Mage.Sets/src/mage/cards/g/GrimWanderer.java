@@ -4,6 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CastOnlyIfConditionIsTrueAbility;
 import mage.abilities.condition.common.MorbidCondition;
+import mage.abilities.hint.common.MorbidHint;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
@@ -28,7 +29,7 @@ public final class GrimWanderer extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Tragic Backstory — Cast this spell only if a creature died this turn.
-        this.addAbility(new CastOnlyIfConditionIsTrueAbility(MorbidCondition.instance).withFlavorWord("Tragic Backstory"));
+        this.addAbility(new CastOnlyIfConditionIsTrueAbility(MorbidCondition.instance).withFlavorWord("Tragic Backstory").addHint(MorbidHint.instance));
     }
 
     private GrimWanderer(final GrimWanderer card) {

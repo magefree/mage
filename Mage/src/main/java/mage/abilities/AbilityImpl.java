@@ -259,7 +259,7 @@ public abstract class AbilityImpl implements Ability {
             if (!this.getManaCostsToPay().getVariableCosts().isEmpty()) {
                 int xValue = this.getManaCostsToPay().getX();
                 this.getManaCostsToPay().clear();
-                VariableManaCost xCosts = new VariableManaCost();
+                VariableManaCost xCosts = new VariableManaCost(VariableCostType.ADDITIONAL);
                 // no x events - rules from Unbound Flourishing:
                 // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
                 xCosts.setAmount(xValue, xValue, false);
@@ -373,10 +373,7 @@ public abstract class AbilityImpl implements Ability {
 
         // fused spell contains 3 abilities (fused, left, right)
         // fused cost added to fused ability, so no need cost modification for other parts
-        boolean needCostModification = true;
-        if (CardUtil.isFusedPartAbility(this, game)) {
-            needCostModification = false;
-        }
+        boolean needCostModification = !CardUtil.isFusedPartAbility(this, game);
 
         //20101001 - 601.2e
         if (needCostModification && sourceObject != null) {
@@ -558,9 +555,17 @@ public abstract class AbilityImpl implements Ability {
      * @return variableManaCost for posting to log later
      */
     protected VariableManaCost handleManaXCosts(Game game, boolean noMana, Player controller) {
-        // 20121001 - 601.2b
-        // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
-        // its mana cost; see rule 107.3), the player announces the value of that variable.
+        // 20210723 - 601.2b
+        // If the spell has alternative or additional costs that will
+        // be paid as it’s being cast such as buyback or kicker costs (see rules 118.8 and 118.9),
+        // the player announces their intentions to pay any or all of those costs (see rule 601.2f).
+        // A player can’t apply two alternative methods of casting or two alternative costs to a
+        // single spell. If the spell has a variable cost that will be paid as it’s being cast
+        // (such as an {X} in its mana cost; see rule 107.3), the player announces the value of that
+        // variable. If the value of that variable is defined in the text of the spell by a choice
+        // that player would make later in the announcement or resolution of the spell, that player
+        // makes that choice at this time instead of that later time.
+
         // TODO: Handle announcing other variable costs here like: RemoveVariableCountersSourceCost
         VariableManaCost variableManaCost = null;
         for (ManaCost cost : manaCostsToPay) {
@@ -577,7 +582,7 @@ public abstract class AbilityImpl implements Ability {
             if (!variableManaCost.isPaid()) { // should only happen for human players
                 int xValue;
                 int xValueMultiplier = handleManaXMultiplier(game, 1);
-                if (!noMana) {
+                if (!noMana || variableManaCost.getCostType().canUseAnnounceOnFreeCast()) {
                     xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(), xValueMultiplier,
                             "Announce the value for " + variableManaCost.getText(), game, this);
                     int amountMana = xValue * variableManaCost.getXInstancesCount();
@@ -602,7 +607,7 @@ public abstract class AbilityImpl implements Ability {
                             manaSymbol = "W";
                         }
                         if (manaSymbol == null) {
-                            throw new UnsupportedOperationException("ManaFilter is not supported: " + this.toString());
+                            throw new UnsupportedOperationException("ManaFilter is not supported: " + this);
                         }
                         for (int i = 0; i < amountMana; i++) {
                             manaString.append('{').append(manaSymbol).append('}');
@@ -803,10 +808,12 @@ public abstract class AbilityImpl implements Ability {
             rule = ruleStart;
         }
         String prefix;
-        if (abilityWord != null) {
+        if (this instanceof TriggeredAbility) {
+            prefix = null;
+        } else if (abilityWord != null) {
             prefix = abilityWord.formatWord();
         } else if (flavorWord != null) {
-            prefix = "<i>" + flavorWord + "</i> &mdash; ";
+            prefix = CardUtil.italicizeWithEmDash(flavorWord);
         } else {
             prefix = null;
         }
@@ -1091,7 +1098,7 @@ public abstract class AbilityImpl implements Ability {
         }
         MageObject object = game.getObject(this.sourceId);
         if (object == null) { // e.g. sacrificed token
-            logger.warn("Could get no object: " + this.toString());
+            logger.warn("Could get no object: " + this);
         }
         return new StringBuilder(" activates: ")
                 .append(object != null ? this.formatRule(getModes().getText(), object.getLogName()) : getModes().getText())
@@ -1240,6 +1247,7 @@ public abstract class AbilityImpl implements Ability {
     public MageObject getSourceObjectIfItStillExists(Game game) {
         if (getSourceObjectZoneChangeCounter() == 0
                 || getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(getSourceId())) {
+            // exists or lki from battlefield
             return game.getObject(getSourceId());
         }
         return null;
@@ -1256,11 +1264,11 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Permanent getSourcePermanentOrLKI(Game game) {
-        if (getSourceObjectZoneChangeCounter() == 0
-                || getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(getSourceId())) {
-            return game.getPermanent(getSourceId());
+        Permanent permanent = getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getSourceObjectZoneChangeCounter());
         }
-        return (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getSourceObjectZoneChangeCounter());
+        return permanent;
     }
 
     @Override
@@ -1340,7 +1348,12 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public List<CardIcon> getIcons() {
+    final public List<CardIcon> getIcons() {
+        return getIcons(null);
+    }
+
+    @Override
+    public List<CardIcon> getIcons(Game game) {
         return this.icons;
     }
 

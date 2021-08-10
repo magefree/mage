@@ -100,8 +100,8 @@ class VeiledCrocodileStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When a player has no cards in hand, if {this} is an enchantment, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When a player has no cards in hand, if {this} is an enchantment, " ;
     }
 
 }

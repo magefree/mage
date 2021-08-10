@@ -96,7 +96,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -119,7 +119,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Fire // Ice");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire", playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -147,7 +147,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Shrapnel Blast", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shrapnel Blast");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -177,7 +177,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Trinisphere", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -214,7 +214,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Far // Away");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Far // Away");
-        setChoice(playerA, "Yes"); // Cast without paying its mana cost?
+        setChoice(playerA, true); // Cast without paying its mana cost?
         addTarget(playerA, "Silvercoat Lion");
         addTarget(playerA, playerB);
         playerB.addTarget("Pillarfield Ox");
@@ -253,7 +253,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -287,8 +287,8 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Bog Wraith", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
-        setChoice(playerA, "Yes"); // cast without cost
-        setChoice(playerA, "Yes"); // pay Entwine
+        setChoice(playerA, true); // cast without cost
+        setChoice(playerA, true); // pay Entwine
         addTarget(playerA, "Bog Wraith"); // target form mode 1
         addTarget(playerA, playerB); // target for mode 2
 
@@ -364,12 +364,12 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Bog Wraith", 1); // Creature {3}{B} (3/3)
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Omniscience");
-        setChoice(playerA, "Yes"); // Pay alternative costs? ({W}{U}{B}{R}{G})   
+        setChoice(playerA, true); // Pay alternative costs? ({W}{U}{B}{R}{G})   
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bog Wraith");
         // The order of the two alternate casting abilities is not fixed, so it's not clear which ability is asked for first
-        setChoice(playerA, "No"); // Pay alternative costs? ({W}{U}{B}{R}{G})   
-        setChoice(playerA, "Yes"); // Cast without paying its mana cost?
+        setChoice(playerA, false); // Pay alternative costs? ({W}{U}{B}{R}{G})   
+        setChoice(playerA, true); // Cast without paying its mana cost?
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -414,9 +414,9 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, jeleva);
 
         attack(3, playerA, jeleva);
-        setChoice(playerA, "Yes"); // opt to use Jeleva ability
+        setChoice(playerA, true); // opt to use Jeleva ability
         setChoice(playerA, savageBeating); // choose to cast Savage Beating for free
-        setChoice(playerA, "No"); // opt not to pay entwine cost
+        setChoice(playerA, false); // opt not to pay entwine cost
         setModeChoice(playerA, "1"); // use first mode of Savage Beating granting double strike
 
         setStopAt(3, PhaseStep.END_COMBAT);

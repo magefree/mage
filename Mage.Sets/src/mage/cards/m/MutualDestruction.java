@@ -28,6 +28,7 @@ import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
  * @author TheElk801
  */
 public final class MutualDestruction extends CardImpl {
+
     private static final FilterPermanent filter = new FilterControlledPermanent();
     private static final FilterPermanent filter2 = new FilterCreaturePermanent("creature (to destoy)");
 
@@ -42,7 +43,7 @@ public final class MutualDestruction extends CardImpl {
 
         // This spell has flash as long as you control a permanent with flash.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(FlashAbility.getInstance(), Duration.Custom, true),
+                new GainAbilitySourceEffect(FlashAbility.getInstance(), Duration.EndOfGame, true),
                 condition, "This spell has flash as long as you control a permanent with flash."
         )).setRuleAtTheTop(true));
 

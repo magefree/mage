@@ -21,6 +21,7 @@ public final class JadelightRanger extends CardImpl {
 
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.SCOUT);
+        this.subtype.add(SubType.RANGER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -39,6 +39,7 @@ public final class CloudgoatRanger extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.RANGER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

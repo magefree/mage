@@ -93,7 +93,7 @@ class GlissaTheTraitorTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature an opponent controls is put into a graveyard from the battlefield, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature an opponent controls is put into a graveyard from the battlefield, " ;
     }
 }

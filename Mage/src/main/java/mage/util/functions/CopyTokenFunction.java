@@ -81,7 +81,11 @@ public class CopyTokenFunction implements Function<Token, Card> {
 
         for (Ability ability0 : sourceObj.getAbilities()) {
             Ability ability = ability0.copy();
-            ability.newOriginalId(); // The token is independant from the copy from object so it need a new original Id, otherwise there are problems to check for created continuous effects to check if the source (the Token) has still this ability
+
+            // The token is independant from the copy from object so it need a new original Id,
+            // otherwise there are problems to check for created continuous effects to check if
+            // the source (the Token) has still this ability
+            ability.newOriginalId();
 
             target.addAbility(ability);
         }

@@ -52,8 +52,8 @@ public class CycleControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you cycle " + (excludeSource ? "another" : "a") + " card, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you cycle " + (excludeSource ? "another" : "a") + " card, " ;
     }
 
     @Override

@@ -69,8 +69,8 @@ class BlocksCreatureWithFlyingTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} blocks a creature with flying, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} blocks a creature with flying, " ;
     }
 
     @Override

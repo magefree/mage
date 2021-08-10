@@ -152,8 +152,8 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you cast a spell with the indicated numeral in its mana cost, text box, power, or toughness, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you cast a spell with the indicated numeral in its mana cost, text box, power, or toughness, " ;
     }
 }
 
@@ -225,8 +225,8 @@ class BaronVonCountSecondTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When the doom counter moves from \"1,\" " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When the doom counter moves from \"1,\" " ;
     }
 }
 

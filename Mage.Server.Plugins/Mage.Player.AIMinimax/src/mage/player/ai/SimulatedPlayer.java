@@ -11,8 +11,10 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
+import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
+import mage.players.Player;
 import mage.target.Target;
 import org.apache.log4j.Logger;
 
@@ -31,11 +33,12 @@ public class SimulatedPlayer extends ComputerPlayer {
     private static PassAbility pass = new PassAbility();
     protected int maxDepth;
 
-    public SimulatedPlayer(UUID id, boolean isSimulatedPlayer, int maxDepth) {
-        super(id);
+    public SimulatedPlayer(Player originalPlayer, boolean isSimulatedPlayer, int maxDepth) {
+        super(originalPlayer.getId());
         this.maxDepth = maxDepth;
         pass.setControllerId(playerId);
         this.isSimulatedPlayer = isSimulatedPlayer;
+        this.matchPlayer = new MatchPlayer(originalPlayer.getMatchPlayer(), this);
     }
 
     public SimulatedPlayer(final SimulatedPlayer player) {

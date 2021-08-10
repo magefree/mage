@@ -100,11 +100,11 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         return "Whenever " + (filter.getMessage().startsWith("an") ? "" : "a ")
                 + filter.getMessage() + " attacks"
                 + (attacksYouOrYourPlaneswalker ? " you or a planeswalker you control" : "")
-                + ", " + super.getRule();
+                + ", " ;
     }
 
 }

@@ -18,10 +18,11 @@ import mage.client.util.gui.MageDialogState;
 public class PickChoiceDialog extends MageDialog {
 
     Choice choice;
+
     java.util.List<KeyValueItem> allItems = new ArrayList<>();
     DefaultListModel<KeyValueItem> dataModel = new DefaultListModel<>();
 
-    final private static String HTML_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
+    final private static String HTML_HEADERS_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
 
     public void showDialog(Choice choice) {
         showDialog(choice, null, null, null);
@@ -40,8 +41,12 @@ public class PickChoiceDialog extends MageDialog {
 
         setLabelText(this.labelMessage, choice.getMessage());
         setLabelText(this.labelSubMessage, choice.getSubMessage());
-
         btCancel.setEnabled(!choice.isRequired());
+
+        // special choice (example: auto-choose answer next time)
+        cbSpecial.setVisible(choice.isSpecialEnabled());
+        cbSpecial.setText(choice.getSpecialText());
+        cbSpecial.setToolTipText(choice.getSpecialHint());
 
         // 2 modes: string or key-values
         // sore data in allItems for inremental filtering
@@ -199,7 +204,7 @@ public class PickChoiceDialog extends MageDialog {
 
     private void setLabelText(JLabel label, String text) {
         if ((text != null) && !text.equals("")) {
-            label.setText(String.format(HTML_TEMPLATE, text));
+            label.setText(String.format(HTML_HEADERS_TEMPLATE, text));
             label.setVisible(true);
         } else {
             label.setText("");
@@ -247,6 +252,7 @@ public class PickChoiceDialog extends MageDialog {
 
     public boolean setChoice() {
         KeyValueItem item = (KeyValueItem) this.listChoices.getSelectedValue();
+        boolean isSpecial = choice.isSpecialEnabled() && cbSpecial.isSelected();
 
         // auto select one item (after incemental filtering)
         if ((item == null) && (this.listChoices.getModel().getSize() == 1)) {
@@ -256,12 +262,23 @@ public class PickChoiceDialog extends MageDialog {
 
         if (item != null) {
             if (choice.isKeyChoice()) {
-                choice.setChoiceByKey(item.getKey());
+                choice.setChoiceByKey(item.getKey(), isSpecial);
             } else {
-                choice.setChoice(item.getKey());
+                choice.setChoice(item.getKey(), isSpecial);
             }
             return true;
         } else {
+            // special choice can be empty
+            if (choice.isSpecialEnabled() && choice.isSpecialCanBeEmpty()) {
+                if (choice.isKeyChoice()) {
+                    choice.setChoiceByKey(null, isSpecial);
+                } else {
+                    choice.setChoice(null, isSpecial);
+                }
+                return true;
+            }
+
+            // nothing to choose
             choice.clearChoice();
             return false;
         }
@@ -311,6 +328,7 @@ public class PickChoiceDialog extends MageDialog {
         panelCommands = new javax.swing.JPanel();
         btOK = new javax.swing.JButton();
         btCancel = new javax.swing.JButton();
+        cbSpecial = new javax.swing.JCheckBox();
 
         setResizable(true);
 
@@ -386,19 +404,22 @@ public class PickChoiceDialog extends MageDialog {
             }
         });
 
+        cbSpecial.setText("Remember choose");
+
         javax.swing.GroupLayout panelCommandsLayout = new javax.swing.GroupLayout(panelCommands);
         panelCommands.setLayout(panelCommandsLayout);
         panelCommandsLayout.setHorizontalGroup(
             panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCommandsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbSpecial)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btOK)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        panelCommandsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btCancel, btOK);
+        panelCommandsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCancel, btOK});
 
         panelCommandsLayout.setVerticalGroup(
             panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,7 +427,8 @@ public class PickChoiceDialog extends MageDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCancel)
-                    .addComponent(btOK))
+                    .addComponent(btOK)
+                    .addComponent(cbSpecial))
                 .addContainerGap())
         );
 
@@ -460,6 +482,7 @@ public class PickChoiceDialog extends MageDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancel;
     private javax.swing.JButton btOK;
+    private javax.swing.JCheckBox cbSpecial;
     private javax.swing.JTextField editSearch;
     private javax.swing.JLabel labelMessage;
     private javax.swing.JLabel labelSearch;

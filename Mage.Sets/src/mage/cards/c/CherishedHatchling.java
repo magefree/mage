@@ -107,7 +107,7 @@ class CherishedHatchlingTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "and whenever you cast a Dinosaur spell this turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "and whenever you cast a Dinosaur spell this turn, " ;
     }
 }

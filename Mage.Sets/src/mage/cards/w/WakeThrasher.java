@@ -71,8 +71,8 @@ class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilit
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a permanent you control becomes untapped, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a permanent you control becomes untapped, " ;
     }
 
 }

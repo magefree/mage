@@ -21,6 +21,7 @@ public final class ElvishBard extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.BARD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

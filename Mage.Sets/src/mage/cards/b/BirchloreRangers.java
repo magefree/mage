@@ -30,7 +30,7 @@ public final class BirchloreRangers extends CardImpl {
 
     public BirchloreRangers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
-        this.subtype.add(SubType.ELF, SubType.DRUID);
+        this.subtype.add(SubType.ELF, SubType.DRUID, SubType.RANGER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

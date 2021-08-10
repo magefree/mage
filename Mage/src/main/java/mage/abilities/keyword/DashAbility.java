@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import java.util.Iterator;
@@ -11,6 +10,7 @@ import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.common.DashedCondition;
+import mage.abilities.condition.common.SourceOnBattlefieldCondition;
 import mage.abilities.costs.AlternativeCost2;
 import mage.abilities.costs.AlternativeCost2Impl;
 import mage.abilities.costs.AlternativeSourceCosts;
@@ -18,7 +18,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -202,11 +202,12 @@ class DashAddDelayedTriggeredAbilityEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         if (game.getPermanentEntering(source.getSourceId()) != null) {
-            Effect effect = new ReturnToHandTargetEffect();
-            effect.setText("return the dashed creature from the battlefield to its owner's hand");
+            OneShotEffect returnToHandEffect = new ReturnToHandTargetEffect();
+            ConditionalOneShotEffect mustBeOnBattlefieldToReturn = new ConditionalOneShotEffect(returnToHandEffect, SourceOnBattlefieldCondition.instance);
+            mustBeOnBattlefieldToReturn.setText("return the dashed creature from the battlefield to its owner's hand");
             // init target pointer now because the dashed creature will only be returned from battlefield zone (now in entering state so zone change counter is not raised yet)
-            effect.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1));
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+            mustBeOnBattlefieldToReturn.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1));
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(mustBeOnBattlefieldToReturn);
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }

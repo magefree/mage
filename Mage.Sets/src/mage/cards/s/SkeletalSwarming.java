@@ -25,7 +25,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.SkeletonToken;
-import mage.watchers.common.MorbidWatcher;
 
 import java.util.UUID;
 
@@ -36,7 +35,9 @@ public final class SkeletalSwarming extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.SKELETON);
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent(SubType.SKELETON, "");
-    private static final DynamicValue xValue = new AdditiveDynamicValue(new PermanentsOnBattlefieldCount(), StaticValue.get(-1));
+    private static final DynamicValue xValue = new AdditiveDynamicValue(
+            new PermanentsOnBattlefieldCount(filter), StaticValue.get(-1)
+    );
 
     public SkeletalSwarming(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{G}");
@@ -47,7 +48,7 @@ public final class SkeletalSwarming extends CardImpl {
         ).setText("each Skeleton you control has trample"));
         ability.addEffect(new AttacksIfAbleAllEffect(filter2).setText(", attacks each combat if able"));
         ability.addEffect(new BoostControlledEffect(
-                xValue, xValue, Duration.WhileOnBattlefield, filter2, false
+                xValue, StaticValue.get(0), Duration.WhileOnBattlefield, filter2, false
         ).setText(", and gets +X/+0, where X is the number of other Skeletons you control"));
         this.addAbility(ability);
 
@@ -59,7 +60,7 @@ public final class SkeletalSwarming extends CardImpl {
                         MorbidCondition.instance, "create a tapped 1/1 black Skeleton creature token. " +
                         "If a creature died this turn, create two of those tokens instead"
                 ), TargetController.YOU, false
-        ).addHint(MorbidHint.instance), new MorbidWatcher());
+        ).addHint(MorbidHint.instance));
     }
 
     private SkeletalSwarming(final SkeletalSwarming card) {

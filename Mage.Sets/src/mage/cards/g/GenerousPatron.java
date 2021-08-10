@@ -80,7 +80,7 @@ class GenerousPatronTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you put one or more counters on a creature you don't control, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you put one or more counters on a creature you don't control, " ;
     }
 }

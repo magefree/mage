@@ -3,6 +3,7 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.LearnEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +25,8 @@ public final class ProfessorOfSymbology extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Professor of Symbology enters the battlefield, learn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LearnEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LearnEffect())
+                .addHint(OpenSideboardHint.instance));
     }
 
     private ProfessorOfSymbology(final ProfessorOfSymbology card) {

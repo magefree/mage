@@ -45,8 +45,8 @@ public class GripOfChaosTest extends CardTestPlayerBase {
 
         setChoice(playerB, "Whenever "); // Select order of Grip of Chaos trigger
 
-        setChoice(playerA, "Yes"); // use for the original trigger of Felidar Guardian
-        setChoice(playerA, "Yes"); // use for the copied trigger of Felidar Guardian
+        setChoice(playerA, true); // use for the original trigger of Felidar Guardian
+        setChoice(playerA, true); // use for the copied trigger of Felidar Guardian
 
         addTarget(playerA, "Forest");
         addTarget(playerA, "Mountain");

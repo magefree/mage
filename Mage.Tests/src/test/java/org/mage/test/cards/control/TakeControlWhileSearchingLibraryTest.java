@@ -72,7 +72,7 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         // search under control of B
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 3);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Buried Alive");
-        setChoice(playerB, "Yes"); // continue
+        setChoice(playerB, true); // continue
         addTarget(playerB, "Balduvian Bears"); // player B must take control for searching
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
@@ -115,7 +115,7 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         // search as normal and cast
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 3);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Buried Alive");
-        setChoice(playerA, "Yes"); // yes, try to cast a creature card from lib
+        setChoice(playerA, true); // yes, try to cast a creature card from lib
         setChoice(playerA, "Panglacial Wurm"); // try to cast
         addTarget(playerA, "Balduvian Bears"); // choice for searching
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -169,8 +169,8 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         // search under control of B and cast under B too
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 3);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Buried Alive");
-        setChoice(playerB, "Yes"); // continue
-        setChoice(playerB, "Yes"); // yes, try to cast a creature card from lib
+        setChoice(playerB, true); // continue
+        setChoice(playerB, true); // yes, try to cast a creature card from lib
         setChoice(playerB, "Panglacial Wurm"); // try to cast
         addTarget(playerB, "Balduvian Bears"); // choice for searching
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -233,7 +233,7 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
 
         // start searching under B (bears must go to exile instead graveyard)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Buried Alive");
-        setChoice(playerB, "Yes"); // continue after new control
+        setChoice(playerB, true); // continue after new control
         addTarget(playerB, "Balduvian Bears");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkGraveyardCount("after grave a", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 0);

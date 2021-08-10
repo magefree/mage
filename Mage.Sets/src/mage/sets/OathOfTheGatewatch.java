@@ -53,7 +53,8 @@ public final class OathOfTheGatewatch extends ExpansionSet {
         cards.add(new SetCardInfo("Brute Strength", 103, Rarity.COMMON, mage.cards.b.BruteStrength.class));
         cards.add(new SetCardInfo("Call the Gatewatch", 16, Rarity.RARE, mage.cards.c.CallTheGatewatch.class));
         cards.add(new SetCardInfo("Canopy Gorger", 129, Rarity.COMMON, mage.cards.c.CanopyGorger.class));
-        cards.add(new SetCardInfo("Captain's Claws", 162, Rarity.RARE, mage.cards.c.CaptainsClaws.class));
+        cards.add(new SetCardInfo("Captain's Claws", "162+", Rarity.RARE, mage.cards.c.CaptainsClaws.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Captain's Claws", 162, Rarity.RARE, mage.cards.c.CaptainsClaws.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra, Flamecaller", 104, Rarity.MYTHIC, mage.cards.c.ChandraFlamecaller.class));
         cards.add(new SetCardInfo("Chitinous Cloak", 163, Rarity.UNCOMMON, mage.cards.c.ChitinousCloak.class));
         cards.add(new SetCardInfo("Cinder Barrens", 168, Rarity.UNCOMMON, mage.cards.c.CinderBarrens.class));

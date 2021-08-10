@@ -20,6 +20,7 @@ import java.util.UUID;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.game.permanent.PermanentToken;
 
 /**
  * @author LevelX2
@@ -82,6 +83,12 @@ class CurseOfTheSwineEffect extends OneShotEffect {
             Map<UUID, Integer> playersWithTargets = new HashMap<>();
             for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                 Permanent creature = game.getPermanent(targetId);
+                // handle creature tokens here due to LKI being non-existent for them
+                // TODO implement a way to verify that tokens are indeed exiled from the battlefield
+                if (creature instanceof PermanentToken) {
+                    playersWithTargets.put(creature.getControllerId(),
+                            playersWithTargets.getOrDefault(creature.getControllerId(), 0) + 1);
+                }
                 if (creature != null) {
                     creaturesToExile.add(creature);
                 }
@@ -93,6 +100,7 @@ class CurseOfTheSwineEffect extends OneShotEffect {
             // Count all creatures actually exiled and add them to the player's count
             for (Card card : creaturesToExile.getCards(game)) {
                 Permanent lkiP = game.getPermanentOrLKIBattlefield(card.getId());
+                // note that tokens have no LKI once they are moved from the battlefield so they are handled earlier
                 if (lkiP != null
                         && game.getState().getZone(lkiP.getId()) == Zone.EXILED) {
                     playersWithTargets.put(lkiP.getControllerId(),
@@ -108,28 +116,3 @@ class CurseOfTheSwineEffect extends OneShotEffect {
         return false;
     }
 }
-
-
-/*
-if (controller != null) {
-            Map<UUID, Integer> playersWithTargets = new HashMap<>();
-            for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
-                Permanent creature = game.getPermanent(targetId);
-                if (creature != null) {
-                    if (controller.moveCards(creature, Zone.EXILED, source, game)) {
-                        playersWithTargets.put(creature.getControllerId(),
-                                playersWithTargets.getOrDefault(creature.getControllerId(), 0) + 1);
-                    }
-                }
-            }
-            Boar2Token swineToken = new Boar2Token();
-            for (Map.Entry<UUID, Integer> exiledByController : playersWithTargets.entrySet()) {
-                swineToken.putOntoBattlefield(exiledByController.getValue(), game, source, exiledByController.getKey());
-            }
-            return true;
-        }
-
-
-
-
-*/

@@ -53,7 +53,7 @@ public class CommanderAsIndomitableCreativityCastTest extends CardTestCommander4
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Indomitable Creativity");
         setChoice(playerA, "X=1");
         addTarget(playerA, "Balduvian Bears");
-        setChoice(playerA, "Yes"); // return spell as commander
+        setChoice(playerA, true); // return spell as commander
 
         checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Balduvian Bears", 0);
 

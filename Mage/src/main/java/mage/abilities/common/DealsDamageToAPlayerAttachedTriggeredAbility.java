@@ -85,7 +85,7 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ").append(attachedDescription);
         sb.append(" deals");
         if (onlyCombat) {
@@ -105,7 +105,6 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
             default:
                 throw new UnsupportedOperationException();
         }
-        sb.append(super.getRule());
         return sb.toString();
     }
 }

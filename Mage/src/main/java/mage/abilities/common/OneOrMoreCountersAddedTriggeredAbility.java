@@ -47,7 +47,7 @@ public class OneOrMoreCountersAddedTriggeredAbility extends TriggeredAbilityImpl
     }
 
     @Override
-    public String getRule() {
-        return "Whenever one or more " + counterType.getName() + " counters are put on {this}, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever one or more " + counterType.getName() + " counters are put on {this}, " ;
     }
 }

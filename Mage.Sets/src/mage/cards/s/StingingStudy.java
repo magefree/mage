@@ -10,6 +10,7 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.CommanderCardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -64,7 +65,7 @@ class StingingStudyEffect extends OneShotEffect {
             return false;
         }
         Set<Integer> manaValues = new HashSet<>();
-        for (Card commander : game.getCommanderCardsFromAnyZones(player, CommanderCardType.ANY)) {
+        for (Card commander : game.getCommanderCardsFromAnyZones(player, CommanderCardType.ANY, Zone.BATTLEFIELD, Zone.COMMAND)) {
             manaValues.add(commander.getManaValue());
         }
         int chosenValue = 0;

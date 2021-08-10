@@ -39,8 +39,8 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
     }
 
     @Override
-    public String getRule() {
-        return "Whenever enchanted player is attacked, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever enchanted player is attacked, " ;
     }
 
     @Override

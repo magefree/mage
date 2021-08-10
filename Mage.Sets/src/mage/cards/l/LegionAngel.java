@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.WishEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -37,7 +38,8 @@ public final class LegionAngel extends CardImpl {
 
         // When Legion Angel enters the battlefield, you may reveal a card you own named Legion Angel from outside the game and put it into your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new WishEffect(filter, true, false)
-                .setText("you may reveal a card you own named Legion Angel from outside the game and put it into your hand")));
+                .setText("you may reveal a card you own named Legion Angel from outside the game and put it into your hand"))
+                .addHint(OpenSideboardHint.instance));
     }
 
     private LegionAngel(final LegionAngel card) {

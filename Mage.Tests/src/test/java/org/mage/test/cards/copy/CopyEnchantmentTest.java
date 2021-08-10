@@ -50,7 +50,7 @@ public class CopyEnchantmentTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Inferno Fist", "Geist of the Moors");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Copy Enchantment");
-        setChoice(playerB, "Yes"); // copy
+        setChoice(playerB, true); // copy
         setChoice(playerB, "Inferno Fist"); // copied
         setChoice(playerB, "Silvercoat Lion"); // target for copy
 

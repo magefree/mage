@@ -111,7 +111,7 @@ public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Pharika, God of Affliction", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        setChoice(playerA, true); // cast it face down as 2/2 creature
 
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerB, "{B}{G}: Exile target creature card from a graveyard",

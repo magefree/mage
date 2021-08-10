@@ -128,8 +128,8 @@ class GoldenGuardianDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When {this} dies this turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When {this} dies this turn, " ;
     }
 }
 

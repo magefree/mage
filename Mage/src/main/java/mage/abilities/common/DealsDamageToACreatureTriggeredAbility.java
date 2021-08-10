@@ -71,7 +71,7 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever {this} deals ");
         if (combatOnly) {
             sb.append("combat ");
@@ -83,7 +83,6 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
             sb.append(filter.getMessage());
             sb.append(", ");
         }
-        sb.append(super.getRule());
         return sb.toString();
     }
 

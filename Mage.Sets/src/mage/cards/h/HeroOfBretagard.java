@@ -110,47 +110,39 @@ class HeroOfBretagardTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent.getToZone() != Zone.EXILED || zEvent.getCards() == null) {
+        final int numberExiled = zEvent.getCards().size() + zEvent.getTokens().size();
+        if (zEvent.getToZone() != Zone.EXILED
+                || numberExiled == 0) {
             return false;
         }
-        int cardCount;
         switch (zEvent.getFromZone()) {
             case BATTLEFIELD:
-                if (!isControlledBy(game.getControllerId(zEvent.getSourceId()))) {
-                    return false;
+                if (controllerId.equals(zEvent.getSource().getControllerId())
+                        && numberExiled > 0) {  // must include both card permanents and tokens on the battlefield
+                    this.getEffects().clear();
+                    this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(numberExiled)));
+                    return true;
                 }
-                cardCount = zEvent
-                        .getCards()
-                        .stream()
-                        .filter(Objects::nonNull)
-                        .mapToInt(x -> 1)
-                        .sum();
-                break;
             case HAND:
-                cardCount = zEvent
+                if (zEvent
                         .getCards()
                         .stream()
                         .filter(Objects::nonNull)
                         .map(Card::getOwnerId)
-                        .filter(this::isControlledBy)
-                        .mapToInt(x -> 1)
-                        .sum();
-                break;
-            default:
-                return false;
+                        .anyMatch(this::isControlledBy)
+                        && numberExiled > 0) {
+                    this.getEffects().clear();
+                    this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(numberExiled)));
+                    return true;
+                }
         }
-        if (cardCount < 1) {
-            return false;
-        }
-        this.getEffects().clear();
-        this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(cardCount)));
-        return true;
+        return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever one or more cards are put into exile from your hand " +
-                "or a spell or ability you control exiles one or more permanents from the battlefield, " +
-                "put that many +1/+1 counters on {this}.";
+        return "Whenever one or more cards are put into exile from your hand "
+                + "or a spell or ability you control exiles one or more permanents from the battlefield, "
+                + "put that many +1/+1 counters on {this}.";
     }
 }

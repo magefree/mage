@@ -6,6 +6,7 @@ import mage.abilities.common.BecomesTargetTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.LearnEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -36,7 +37,8 @@ public final class DreamStrix extends CardImpl {
         ));
 
         // When Dream Strix dies, learn.
-        this.addAbility(new DiesSourceTriggeredAbility(new LearnEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new LearnEffect())
+                .addHint(OpenSideboardHint.instance));
     }
 
     private DreamStrix(final DreamStrix card) {

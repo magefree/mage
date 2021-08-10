@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -11,23 +9,24 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author nantuko
  */
 public final class ChampionOfTheParish extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another Human");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.HUMAN, "another Human");
+
     static {
-        filter.add(SubType.HUMAN.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 
     public ChampionOfTheParish(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 

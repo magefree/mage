@@ -30,6 +30,7 @@ public enum CounterType {
     CHARGE("charge"),
     CHIP("chip"),
     COIN("coin"),
+    COMPONENT("component"),
     CORPSE("corpse"),
     CORRUPTION("corruption"),
     CREDIT("credit"),

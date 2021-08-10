@@ -4,6 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.WishEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,6 +27,7 @@ public final class CunningWish extends CardImpl {
 
         // You may choose an instant card you own from outside the game, reveal that card, and put it into your hand.
         this.getSpellAbility().addEffect(new WishEffect(filter));
+        this.getSpellAbility().addHint(OpenSideboardHint.instance);
 
         // Exile Cunning Wish.
         this.getSpellAbility().addEffect(new ExileSpellEffect());

@@ -45,7 +45,6 @@ public final class BloodOnTheSnow extends CardImpl {
                 "Then return a creature or planeswalker card with mana value X or less"
                         + " from your graveyard to the battlefield, where X is the amount of {S} spent to cast this spell."
         );
-        this.getSpellAbility().addWatcher(new ManaPaidSourceWatcher());
     }
 
     private BloodOnTheSnow(final BloodOnTheSnow card) {

@@ -1,11 +1,10 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -13,19 +12,18 @@ import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class HarvestMage extends CardImpl {
@@ -38,9 +36,9 @@ public final class HarvestMage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {G}, {T}, Discard a card: Until end of turn, if you tap a land for mana, it produces one mana of a color of your choice instead of any other type and amount.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HarvestMageReplacementEffect(), new ManaCostsImpl("{G}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new HarvestMageReplacementEffect(), new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
+        ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }
 
@@ -56,14 +54,12 @@ public final class HarvestMage extends CardImpl {
 
 class HarvestMageReplacementEffect extends ReplacementEffectImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
-
     HarvestMageReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);
         staticText = "Until end of turn, if you tap a land for mana, it produces one mana of a color of your choice instead of any other type and amount";
     }
 
-    HarvestMageReplacementEffect(final HarvestMageReplacementEffect effect) {
+    private HarvestMageReplacementEffect(final HarvestMageReplacementEffect effect) {
         super(effect);
     }
 
@@ -84,11 +80,10 @@ class HarvestMageReplacementEffect extends ReplacementEffectImpl {
         if (game != null && game.inCheckPlayableState()) {
             mana.setToMana(new Mana(0, 0, 0, 0, 0, 0, 1, 0));
             return false;
-        } else {
-            new AddManaOfAnyColorEffect().apply(game, source);
-            mana.setToMana(new Mana(0, 0, 0, 0, 0, 0, 0, 0));
-            return true;
         }
+        new AddManaOfAnyColorEffect().apply(game, source);
+        mana.setToMana(new Mana(0, 0, 0, 0, 0, 0, 0, 0));
+        return true;
     }
 
     @Override
@@ -98,10 +93,7 @@ class HarvestMageReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent != null && permanent.isLand(game)) {
-            return filter.match(permanent, game);
-        }
-        return false;
+        Permanent permanent = ((TappedForManaEvent) event).getPermanent();
+        return permanent != null && permanent.isLand(game) && permanent.isControlledBy(source.getControllerId());
     }
 }

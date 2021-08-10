@@ -30,7 +30,7 @@ public class DamageEffectsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Gratuitous Violence");
 
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Mountain");
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         addTarget(playerB, playerA);
 
         attack(2, playerB, "Ob Nixilis, the Fallen");

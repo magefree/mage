@@ -1,5 +1,6 @@
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -19,8 +20,6 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -152,7 +151,13 @@ class EliteSpellbinderCostEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return mor.refersTo(CardUtil.getMainCardId(game, abilityToModify.getSourceId()), game);
+        if (game.inCheckPlayableState()) { // during playable check, the card is still in exile zone, the zcc is one less
+            UUID cardtoCheckId = CardUtil.getMainCardId(game, abilityToModify.getSourceId());
+            return mor.getSourceId().equals(cardtoCheckId)
+                    && mor.getZoneChangeCounter() == game.getState().getZoneChangeCounter(cardtoCheckId) + 1;           
+        } else {
+            return mor.refersTo(CardUtil.getMainCardId(game, abilityToModify.getSourceId()), game);
+        }
     }
 
     @Override

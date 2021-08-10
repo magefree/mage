@@ -32,7 +32,7 @@ public class MasterOfCrueltiesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
         attack(2, playerB, "Alesha, Who Smiles at Death");
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         addTarget(playerB, "Master of Cruelties");
 
         block(2, playerA, "Silvercoat Lion", "Master of Cruelties");

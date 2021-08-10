@@ -27,7 +27,7 @@ public class NephaliaAcademyTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Duress");
         addTarget(playerA, playerB);
         setChoice(playerA, "Giant Growth"); // choose to discard Giant Growth
-        setChoice(playerB, "Yes"); // replacement effect, choose to reveal the card and place on top of library
+        setChoice(playerB, true); // replacement effect, choose to reveal the card and place on top of library
         execute();
                 
         assertGraveyardCount(playerA, "Duress", 1);
@@ -52,7 +52,7 @@ public class NephaliaAcademyTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Duress");
         addTarget(playerA, playerB);
         setChoice(playerA, "Giant Growth"); // choose to discard Giant Growth
-        setChoice(playerB, "No"); // decline the replacement effect, allow the discard to happen
+        setChoice(playerB, false); // decline the replacement effect, allow the discard to happen
         execute();
                 
         assertGraveyardCount(playerA, "Duress", 1);
@@ -75,7 +75,7 @@ public class NephaliaAcademyTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Sift", 1);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sift");
-        setChoice(playerA, "Yes"); // should not be given the option to use Nephalia Academy replacement effect
+        setChoice(playerA, true); // should not be given the option to use Nephalia Academy replacement effect
         setChoice(playerA, "Memnite");
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

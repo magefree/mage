@@ -34,7 +34,7 @@ public final class SilverSeraph extends CardImpl {
         // Threshold - Other creatures you control get +2/+2 as long as seven or more cards are in your graveyard.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, true), new CardsInControllerGraveyardCondition(7),
-            "other creatures you control +2/+2 as long as seven or more cards are in your graveyard"));
+            "other creatures you control get +2/+2 as long as seven or more cards are in your graveyard"));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }

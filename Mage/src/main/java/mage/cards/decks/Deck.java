@@ -145,7 +145,6 @@ public class Deck implements Serializable {
 
         deckCardLists.setName(name);
         for (Card card : cards) {
-
             deckCardLists.getCards().add(new DeckCardInfo(card.getName(), card.getCardNumber(), card.getExpansionSetCode()));
         }
         for (Card card : sideboard) {

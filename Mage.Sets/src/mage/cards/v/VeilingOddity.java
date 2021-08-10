@@ -69,8 +69,8 @@ class VeilingOddityTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When the last time counter is removed from {this} while it's exiled, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When the last time counter is removed from {this} while it's exiled, " ;
     }
 
     @Override

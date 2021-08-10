@@ -32,7 +32,7 @@ public class RoonOfTheHiddenRealmTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}", "Perplexing Chimera");
 

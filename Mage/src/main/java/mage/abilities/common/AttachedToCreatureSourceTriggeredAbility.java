@@ -34,8 +34,8 @@ public class AttachedToCreatureSourceTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public String getRule() {
-        return "As {this} becomes attached to a creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "As {this} becomes attached to a creature, " ;
     }
 
     @Override

@@ -85,7 +85,7 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever " + filter.getMessage() + (filter.getMessage().startsWith("one or more") ? " die, " : " dies, ") + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever " + filter.getMessage() + (filter.getMessage().startsWith("one or more") ? " die, " : " dies, ") ;
     }
 }

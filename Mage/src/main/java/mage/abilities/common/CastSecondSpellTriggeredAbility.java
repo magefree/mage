@@ -47,8 +47,8 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you cast your second spell each turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you cast your second spell each turn, " ;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -8,11 +7,16 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import mage.game.events.TappedForManaEvent;
+import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
@@ -27,10 +31,10 @@ public final class DampingSphere extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // If a land is tapped for two or more mana, it produces {C} instead of any other type and amount.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DampingSphereReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new DampingSphereReplacementEffect()));
 
         // Each spell a player casts costs {1} more to cast for each other spell that player has cast this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DampingSphereIncreasementAllEffect()), new CastSpellLastTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(new DampingSphereIncreasementAllEffect()), new CastSpellLastTurnWatcher());
     }
 
     private DampingSphere(final DampingSphere card) {
@@ -50,7 +54,7 @@ class DampingSphereReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a land is tapped for two or more mana, it produces {C} instead of any other type and amount";
     }
 
-    DampingSphereReplacementEffect(final DampingSphereReplacementEffect effect) {
+    private DampingSphereReplacementEffect(final DampingSphereReplacementEffect effect) {
         super(effect);
     }
 
@@ -79,10 +83,10 @@ class DampingSphereReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        MageObject mageObject = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        ManaEvent manaEvent = (ManaEvent) event;
+        TappedForManaEvent manaEvent = (TappedForManaEvent) event;
+        Permanent land = manaEvent.getPermanent();
         Mana mana = manaEvent.getMana();
-        return mageObject != null && mageObject.isLand(game) && mana.count() > 1;
+        return land != null && land.isLand(game) && mana.count() > 1;
     }
 }
 
@@ -93,7 +97,7 @@ class DampingSphereIncreasementAllEffect extends SpellsCostIncreasingAllEffect {
         this.staticText = "Each spell a player casts costs {1} more to cast for each other spell that player has cast this turn";
     }
 
-    DampingSphereIncreasementAllEffect(DampingSphereIncreasementAllEffect effect) {
+    private DampingSphereIncreasementAllEffect(DampingSphereIncreasementAllEffect effect) {
         super(effect);
     }
 

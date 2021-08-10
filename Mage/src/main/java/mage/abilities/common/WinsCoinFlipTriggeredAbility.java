@@ -38,7 +38,7 @@ public class WinsCoinFlipTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player wins a coin flip, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a player wins a coin flip, " ;
     }
 }

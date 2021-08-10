@@ -41,7 +41,7 @@ public final class BorealOutrider extends CardImpl {
                 ), BorealOutriderCondition.instance, "Whenever you cast a creature spell, " +
                 "if {S} of any of that spell's colors was spent to cast it, that creature " +
                 "enters the battlefield with an additional +1/+1 counter on it."
-        ), new ManaPaidSourceWatcher());
+        ));
     }
 
     private BorealOutrider(final BorealOutrider card) {

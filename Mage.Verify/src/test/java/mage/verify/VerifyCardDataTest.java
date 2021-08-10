@@ -56,7 +56,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "MH2"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "AFR"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -102,14 +102,10 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-        skipListAddName(SKIP_LIST_TYPE, "AFR", "Iron Golem"); // temporary
-        skipListAddName(SKIP_LIST_TYPE, "AFR", "Silver Raven"); // temporary
 
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
-        skipListAddName(SKIP_LIST_SUBTYPE, "AFR", "Iron Golem"); // temporary
-        skipListAddName(SKIP_LIST_SUBTYPE, "AFR", "Silver Raven"); // temporary
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
@@ -909,10 +905,21 @@ public class VerifyCardDataTest {
         }
 
         for (ExpansionSet set : sets) {
+            // additional info
+            Set<String> cardNames = new HashSet<>();
+            for (ExpansionSet.SetCardInfo cardInfo : set.getSetCardInfo()) {
+                cardNames.add(cardInfo.getName());
+            }
+
+            boolean containsDoubleSideCards = false;
             for (ExpansionSet.SetCardInfo cardInfo : set.getSetCardInfo()) {
                 Card card = CardImpl.createCard(cardInfo.getCardClass(), new CardSetInfo(cardInfo.getName(), set.getCode(),
                         cardInfo.getCardNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
                 Assert.assertNotNull(card);
+
+                if (card.getSecondCardFace() != null) {
+                    containsDoubleSideCards = true;
+                }
 
                 // CHECK: all planeswalkers must be legendary
                 if (card.isPlaneswalker() && !card.getSuperType().contains(SuperType.LEGENDARY)) {
@@ -927,6 +934,26 @@ public class VerifyCardDataTest {
                 if (!CharMatcher.ascii().matchesAllOf(card.getName()) || !CharMatcher.ascii().matchesAllOf(card.getCardNumber())) {
                     errorsList.add("Error: card name or number contains non-ascii symbols: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
+
+                // CHECK: second side cards in one set
+                // https://github.com/magefree/mage/issues/8081
+                /*
+                if (card.getSecondCardFace() != null && cardNames.contains(card.getSecondCardFace().getName())) {
+                    errorsList.add("Error: set contains second side cards: " + set.getCode() + " - " + set.getName()
+                            + " - " + card.getName() + " - " + card.getCardNumber()
+                            + " - " + card.getSecondCardFace().getName() + " - " + card.getSecondCardFace().getCardNumber());
+                }
+                 */
+            }
+
+            // CHECK: double side cards must be in boosters
+            boolean hasBoosterSettings = (set.getNumBoosterDoubleFaced() > 0);
+            if (set.hasBoosters()
+                    && (set.getNumBoosterDoubleFaced() != -1) // -1 must ignore double cards in booster
+                    && containsDoubleSideCards
+                    && !hasBoosterSettings) {
+                errorsList.add("Error: set with boosters contains second side cards, but numBoosterDoubleFaced is not set - "
+                        + set.getCode() + " - " + set.getName());
             }
         }
 

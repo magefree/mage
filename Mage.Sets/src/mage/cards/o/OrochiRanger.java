@@ -22,6 +22,7 @@ public final class OrochiRanger extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.RANGER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

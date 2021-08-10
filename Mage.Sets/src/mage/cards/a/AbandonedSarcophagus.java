@@ -99,7 +99,7 @@ class AbandonedSarcophagusReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         boolean cardWasCycledThisTurn = false;
         boolean cardHasCycling = false;
-        if (!(((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) || game.isSimulation()) {
+        if (!(((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD)) {
             return false;
         }
         Player controller = game.getPlayer(source.getControllerId());
@@ -137,8 +137,7 @@ class AbandonedSarcophagusWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.CYCLE_CARD
-                && !game.isSimulation()) {
+        if (event.getType() == GameEvent.EventType.CYCLE_CARD) {
             Card card = game.getCard(event.getSourceId());
             Player controller = game.getPlayer(event.getPlayerId());
             if (card != null

@@ -86,8 +86,8 @@ public class ControlledCreaturesDealCombatDamagePlayerTriggeredAbility extends T
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         return "Whenever one or more creatures you control deal combat damage to "
-                + (onlyOpponents ? "an opponent" : "a player") + ", " + super.getRule();
+                + (onlyOpponents ? "an opponent" : "a player") + ", " ;
     }
 }

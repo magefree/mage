@@ -133,8 +133,8 @@ class TidalInfluenceTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever there are four tide counters on {this}, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever there are four tide counters on {this}, " ;
     }
 
 }

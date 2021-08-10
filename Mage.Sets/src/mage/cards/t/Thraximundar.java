@@ -96,7 +96,7 @@ class ThraximundarTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         return "Whenever {this} attacks, defending player sacrifices a creature.";
     }
 }
@@ -124,7 +124,7 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player sacrifices a creature, " + super.getRule();
+        return "Whenever a player sacrifices a creature, " ;
     }
 
     @Override

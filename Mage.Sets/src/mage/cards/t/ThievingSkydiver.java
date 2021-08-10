@@ -38,7 +38,7 @@ public final class ThievingSkydiver extends CardImpl {
 
         // Kicker {X}. X can't be 0.
         KickerAbility kickerAbility = new KickerAbility("{X}");
-        kickerAbility.getKickerCosts().stream().forEach(cost -> {
+        kickerAbility.getKickerCosts().forEach(cost -> {
             cost.setMinimumCost(1);
             cost.setReminderText(". X can't be 0.");
         });

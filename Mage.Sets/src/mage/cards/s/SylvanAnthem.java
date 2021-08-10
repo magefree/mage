@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class SylvanAnthem extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
 
         // Green creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
                 1, 1, Duration.WhileOnBattlefield, filter, false
         ).setText("green creatures you control get +1/+1")));
 

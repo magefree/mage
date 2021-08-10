@@ -42,7 +42,6 @@ public final class SearchForGlory extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(
                 SnowManaSpentValue.instance
         ).setText("You gain 1 life for each {S} spent to cast this spell"));
-        this.getSpellAbility().addWatcher(new ManaPaidSourceWatcher());
     }
 
     private SearchForGlory(final SearchForGlory card) {

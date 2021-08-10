@@ -10,7 +10,7 @@ Bloodthirst|number|
 Bushido|number|
 Buyback|manaString|
 Cascade|new|
-Changeling|instance|
+Changeling|new|
 Convoke|new|
 Crew|number|
 Cumulative upkeep|cost|

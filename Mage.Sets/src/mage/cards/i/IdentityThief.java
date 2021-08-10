@@ -83,8 +83,8 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} attacks, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} attacks, " ;
     }
 
     @Override

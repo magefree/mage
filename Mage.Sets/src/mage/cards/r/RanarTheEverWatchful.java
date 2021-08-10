@@ -5,11 +5,9 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.ForetellAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -19,10 +17,11 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.token.SpiritWhiteToken;
-import mage.watchers.common.ForetoldWatcher;
 
 import java.util.Objects;
 import java.util.UUID;
+import mage.abilities.keyword.ForetellAbility;
+import mage.watchers.common.ForetoldWatcher;
 
 /**
  * @author jeffwadsworth
@@ -46,10 +45,10 @@ public final class RanarTheEverWatchful extends CardImpl {
 
         // The first card you foretell each turn costs 0 to foretell
         Ability ability = new SimpleStaticAbility(new RanarTheEverWatchfulCostReductionEffect());
-        this.addAbility(ability);
+        this.addAbility(ability, new ForetoldWatcher());
 
         // Whenever you exile one or more cards from your hand and/or permanents from the battlefield, create a 1/1 white Spirit creature token with flying.
-        this.addAbility(new RanarTheEverWatchfulTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken())));
+        this.addAbility(new RanarTheEverWatchfulTriggeredAbility());
 
     }
 
@@ -98,8 +97,8 @@ class RanarTheEverWatchfulCostReductionEffect extends CostModificationEffectImpl
 
 class RanarTheEverWatchfulTriggeredAbility extends TriggeredAbilityImpl {
 
-    RanarTheEverWatchfulTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
+    RanarTheEverWatchfulTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()), false);
     }
 
     RanarTheEverWatchfulTriggeredAbility(final RanarTheEverWatchfulTriggeredAbility ability) {
@@ -119,16 +118,16 @@ class RanarTheEverWatchfulTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent.getToZone() != Zone.EXILED || zEvent.getCards() == null) {
+        final int numberExiled = zEvent.getCards().size() + zEvent.getTokens().size();
+        if (zEvent.getToZone() != Zone.EXILED
+                || numberExiled == 0) {
             return false;
         }
         switch (zEvent.getFromZone()) {
             case BATTLEFIELD:
-                return isControlledBy(game.getControllerId(zEvent.getSourceId()))
-                        && zEvent
-                        .getCards()
-                        .stream()
-                        .anyMatch(Objects::nonNull);
+                return zEvent.getSource() != null  // source ability/spell that exiled the permanent
+                        && controllerId.equals(zEvent.getSource().getControllerId())
+                        && numberExiled > 0;  // must include both card permanents and tokens on the battlefield
             case HAND:
                 return zEvent
                         .getCards()
@@ -142,8 +141,8 @@ class RanarTheEverWatchfulTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever one or more cards are put into exile from your hand " +
-                "or a spell or ability you control exiles one or more permanents from the battlefield, " +
-                "create a 1/1 white Spirit creature token with flying.";
+        return "Whenever one or more cards are put into exile from your hand "
+                + "or a spell or ability you control exiles one or more permanents from the battlefield, "
+                + "create a 1/1 white Spirit creature token with flying.";
     }
 }

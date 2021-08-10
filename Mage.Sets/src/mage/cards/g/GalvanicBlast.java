@@ -31,7 +31,6 @@ public final class GalvanicBlast extends CardImpl {
                 MetalcraftCondition.instance, effectText
         ));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().setAbilityWord(AbilityWord.METALCRAFT);
         this.getSpellAbility().addHint(MetalcraftHint.instance);
     }
 

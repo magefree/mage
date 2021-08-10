@@ -75,8 +75,8 @@ class VengefulWarchiefTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you lose life for the first time each turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you lose life for the first time each turn, " ;
     }
 }
 

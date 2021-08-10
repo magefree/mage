@@ -20,6 +20,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author TheElk801
@@ -82,7 +83,7 @@ class CodieVociferousCodexCantCastEffect extends ContinuousRuleModifyingEffectIm
         if (!source.isControlledBy(event.getPlayerId())) {
             return false;
         }
-        Card card = game.getCard(event.getSourceId());
+        Card card = game.getCard(event.getTargetId());
         return card != null && card.isPermanent(game);
     }
 }
@@ -122,10 +123,10 @@ class CodieVociferousCodexDelayedTriggeredAbility extends DelayedTriggeredAbilit
 
     @Override
     public String getRule() {
-        return "When you cast your next spell this turn, exile cards from the top of your library " +
-                "until you exile an instant or sorcery card with lesser mana value. Until end of turn, " +
-                "you may cast that card without paying its mana cost. Put each other card exiled this way " +
-                "on the bottom of your library in a random order.";
+        return "When you cast your next spell this turn, exile cards from the top of your library "
+                + "until you exile an instant or sorcery card with lesser mana value. Until end of turn, "
+                + "you may cast that card without paying its mana cost. Put each other card exiled this way "
+                + "on the bottom of your library in a random order.";
     }
 }
 
@@ -146,31 +147,33 @@ class CodieVociferousCodexEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Spell spell = (Spell) getValue("spellCast");
-        if (player == null || spell == null) {
+        if (controller == null
+                || spell == null) {
             return false;
         }
         Cards toExile = new CardsImpl();
         Card toCast = null;
-        for (Card card : player.getLibrary().getCards(game)) {
+        for (Card card : controller.getLibrary().getCards(game)) {
             toExile.add(card);
-            if (card.isInstantOrSorcery(game) && card.getManaValue() < spell.getManaValue()) {
+            if (card.isInstantOrSorcery(game)
+                    && card.getManaValue() < spell.getManaValue()) {
                 toCast = card;
                 break;
             }
         }
         if (toCast == null) {
-            player.moveCards(toExile, Zone.EXILED, source, game);
-            player.putCardsOnBottomOfLibrary(toExile, game, source, false);
+            controller.moveCards(toExile, Zone.EXILED, source, game);
+            controller.putCardsOnBottomOfLibrary(toExile, game, source, false);
             return true;
         }
-        PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
-                game, source, toExile.getCards(game), TargetController.YOU,
-                Duration.EndOfTurn, true, true
-        );
+        controller.moveCards(toCast, Zone.EXILED, source, game);
+        PlayFromNotOwnHandZoneTargetEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, true);
+        effect.setTargetPointer(new FixedTarget(toCast.getId()));
+        game.addEffect(effect, source);
         toExile.remove(toCast);
-        player.putCardsOnBottomOfLibrary(toExile, game, source, false);
+        controller.putCardsOnBottomOfLibrary(toExile, game, source, false);
         return true;
     }
 }

@@ -89,8 +89,7 @@ class CuratorsWardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When enchanted permanent leaves the battlefield, if it was historic, " + super.getRule()
-                + " <i>(Artifacts, legendaries, and Sagas are historic.)</i>";
+        return "When enchanted permanent leaves the battlefield, if it was historic, draw two cards. <i>(Artifacts, legendaries, and Sagas are historic.)</i>";
     }
 
     @Override

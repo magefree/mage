@@ -49,9 +49,9 @@ public class ShowOfConfidenceTest extends CardTestPlayerBase {
 
         // cast and copy 3x
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Show of Confidence", "Balduvian Bears");
-        setChoice(playerA, "No"); // no change target (copy 1)
-        setChoice(playerA, "No"); // no change target (copy 2)
-        setChoice(playerA, "No"); // no change target (copy 3)
+        setChoice(playerA, false); // no change target (copy 1)
+        setChoice(playerA, false); // no change target (copy 2)
+        setChoice(playerA, false); // no change target (copy 3)
 
         // test watcher's copy
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);

@@ -32,7 +32,7 @@ public class TributeTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerB, "Pharagax Giant"); // Creature 3/3
 
         attack(1, playerA, "Ink-Eyes, Servant of Oni");
-        setChoice(playerB, "Yes"); // pay tribute
+        setChoice(playerB, true); // pay tribute
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();

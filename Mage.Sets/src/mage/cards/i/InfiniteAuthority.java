@@ -105,8 +105,8 @@ class InfiniteAuthorityTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, " ;
     }
 }
 

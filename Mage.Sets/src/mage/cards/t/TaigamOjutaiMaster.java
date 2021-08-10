@@ -108,8 +108,8 @@ class TaigamOjutaiMasterTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you cast an instant or sorcery spell from your hand, if {this} attacked this turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you cast an instant or sorcery spell from your hand, if {this} attacked this turn, " ;
 
     }
 }

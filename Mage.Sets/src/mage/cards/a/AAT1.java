@@ -84,8 +84,8 @@ public final class AAT1 extends CardImpl {
         }
 
         @Override
-        public String getRule() {
-            return "Whenever a repair counter is removed from a creature card in your graveyard " + super.getRule();
+        public String getTriggerPhrase() {
+            return "Whenever a repair counter is removed from a creature card in your graveyard " ;
         }
 
         @Override

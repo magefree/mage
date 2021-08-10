@@ -116,7 +116,7 @@ public class CursesTest extends CardTestPlayerBase {
 
         castSpell(4, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Copy Enchantment");
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         setChoice(playerB, "Curse of Exhaustion");
         setChoice(playerB, "targetPlayer=PlayerA");
         castSpell(4, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
@@ -384,7 +384,7 @@ public class CursesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, memnite);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
-        setChoice(playerB, "No");
+        setChoice(playerB, false);
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();

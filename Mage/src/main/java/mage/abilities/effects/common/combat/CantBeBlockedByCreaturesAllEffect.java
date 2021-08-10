@@ -10,7 +10,6 @@ import mage.game.permanent.Permanent;
 /**
  * @author LevelX2
  */
-
 public class CantBeBlockedByCreaturesAllEffect extends RestrictionEffect {
 
     private final FilterCreaturePermanent filterBlockedBy;
@@ -20,8 +19,9 @@ public class CantBeBlockedByCreaturesAllEffect extends RestrictionEffect {
         super(duration);
         this.filterCreatures = filterCreatures;
         this.filterBlockedBy = filterBlockedBy;
-        staticText = new StringBuilder(filterCreatures.getMessage()).append(" can't be blocked ")
-                .append(filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ").append(filterBlockedBy.getMessage()).toString();
+        staticText = filterCreatures.getMessage() + " can't be blocked "
+                + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
+                + filterBlockedBy.getMessage();
     }
 
     public CantBeBlockedByCreaturesAllEffect(final CantBeBlockedByCreaturesAllEffect effect) {

@@ -32,7 +32,6 @@ public final class SpoilsOfTheHunt extends CardImpl {
         ));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
-        this.getSpellAbility().addWatcher(new ManaPaidSourceWatcher());
     }
 
     private SpoilsOfTheHunt(final SpoilsOfTheHunt card) {

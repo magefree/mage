@@ -67,12 +67,16 @@ class FlickeringSpiritEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null || player == null) {
+        if (permanent == null
+                || player == null) {
             return false;
         }
-        Card card = permanent.getMainCard();
-        player.moveCards(card, Zone.EXILED, source, game);
-        player.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
-        return true;
+        if (player.moveCards(permanent, Zone.EXILED, source, game)) {
+            Card card = game.getExile().getCard(source.getSourceId(), game);
+            if (card != null) {
+                return player.moveCards(card, Zone.BATTLEFIELD, source, game);
+            }
+        }
+        return false;
     }
 }

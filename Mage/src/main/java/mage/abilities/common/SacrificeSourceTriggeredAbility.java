@@ -39,7 +39,7 @@ public class SacrificeSourceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When you sacrifice {this}, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When you sacrifice {this}, " ;
     }
 }

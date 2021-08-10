@@ -24,6 +24,8 @@ import java.util.UUID;
 import static mage.client.dialog.PreferencesDialog.*;
 
 /**
+ * GUI: play area panel (player with avatar/mana panel + battlefield panel)
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class PlayAreaPanel extends javax.swing.JPanel {
@@ -441,14 +443,28 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         popupMenu.addSeparator();
 
-        menuItem = new JMenuItem("<html>View current deck");
-        menuItem.setMnemonic(KeyEvent.VK_V);
+        // view deck
+        menuItem = new JMenuItem("<html>View player's deck");
+        menuItem.setMnemonic(KeyEvent.VK_D);
         popupMenu.add(menuItem);
-
-        // View limited deck
         menuItem.addActionListener(e -> {
             SessionHandler.sendPlayerAction(PlayerAction.VIEW_LIMITED_DECK, gameId, null);
         });
+
+        // view sideboard (allows to view only own sideboard or computer)
+        // it's a client side checks... same checks must be on server side too (see PlayerView)
+        if (options.playerItself || !options.isHuman) {
+            String menuCaption = "<html>View my sideboard";
+            if (!options.isHuman) {
+                menuCaption = "<html>View computer's sideboard";
+            }
+            menuItem = new JMenuItem(menuCaption);
+            menuItem.setMnemonic(KeyEvent.VK_S);
+            popupMenu.add(menuItem);
+            menuItem.addActionListener(e -> {
+                SessionHandler.sendPlayerAction(PlayerAction.VIEW_SIDEBOARD, gameId, playerId);
+            });
+        }
     }
 
     private void addPopupMenuWatcher() {

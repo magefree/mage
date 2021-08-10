@@ -1,15 +1,14 @@
-
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 
 /**
- *
  * @author LevelX2
  */
 public class SacrificeXTargetCost extends VariableCostImpl {
@@ -20,9 +19,10 @@ public class SacrificeXTargetCost extends VariableCostImpl {
         this(filter, false);
     }
 
-    public SacrificeXTargetCost(FilterControlledPermanent filter, boolean additionalCostText) {
-        super(filter.getMessage() + " to sacrifice");
-        this.text = (additionalCostText ? "as an additional cost to cast this spell, sacrifice " : "Sacrifice ") + xText + ' ' + filter.getMessage();
+    public SacrificeXTargetCost(FilterControlledPermanent filter, boolean useAsAdditionalCost) {
+        super(useAsAdditionalCost ? VariableCostType.ADDITIONAL : VariableCostType.NORMAL,
+                filter.getMessage() + " to sacrifice");
+        this.text = (useAsAdditionalCost ? "as an additional cost to cast this spell, sacrifice " : "Sacrifice ") + xText + ' ' + filter.getMessage();
         this.filter = filter;
     }
 

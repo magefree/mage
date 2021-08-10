@@ -28,8 +28,9 @@ public class CardIconsPanel extends JPanel {
 
     private static final CardIconPosition DEFAULT_POSITION = CardIconPosition.LEFT;
     private static final CardIconOrder DEFAULT_ORDER = CardIconOrder.START;
+    private static final CardIconColor DEFAULT_COLOR = CardIconColor.DEFAULT; // from theme
     private static final int DEFAULT_MAX_VISIBLE_COUNT = 5;
-    private static final int DEFAULT_ICON_SIZE_PERCENT = 30;
+    private static final int DEFAULT_ICON_SIZE_PERCENT = 30; // TODO: add support of big icons (current: wrong align, wrong size)
 
     private static final int MINIMUM_ICON_SIZE = 32; // TODO: not working?
     private static final int KEEP_ICON_IN_CARD_INSIDE_PERCENT = 70; // example: 66% - 2/3 keep inside and 1/3 keep outside
@@ -37,6 +38,7 @@ public class CardIconsPanel extends JPanel {
 
     private final CardIconPosition position;
     private final CardIconOrder order;
+    private final CardIconColor color;
     private final int iconSizePercent; // icons size, related to card's width
     private final List<CardIcon> icons;
     private final int cellsMaxCount; // split card side to cells, can be 1, 3, 5, 7 (x left + 1x center + x right)
@@ -57,18 +59,20 @@ public class CardIconsPanel extends JPanel {
     public CardIconsPanel(CardIconRenderSettings render) {
         this(render.getCustomPosition() != null ? render.getCustomPosition() : DEFAULT_POSITION,
                 render.getCustomOrder() != null ? render.getCustomOrder() : DEFAULT_ORDER,
+                render.getCustomColor() != null ? render.getCustomColor() : DEFAULT_COLOR,
                 render.getCustomMaxVisibleCount() > 0 ? render.getCustomMaxVisibleCount() : DEFAULT_MAX_VISIBLE_COUNT,
                 render.getCustomIconSizePercent() > 0 ? render.getCustomIconSizePercent() : DEFAULT_ICON_SIZE_PERCENT
         );
     }
 
-    public CardIconsPanel(CardIconPosition position, CardIconOrder order, int cellsVisibleCount, int iconSizePercent) {
-        this(position, order, cellsVisibleCount, iconSizePercent, new ArrayList<>(), new Rectangle(100, 100));
+    public CardIconsPanel(CardIconPosition position, CardIconOrder order, CardIconColor color, int cellsVisibleCount, int iconSizePercent) {
+        this(position, order, color, cellsVisibleCount, iconSizePercent, new ArrayList<>(), new Rectangle(100, 100));
     }
 
-    public CardIconsPanel(CardIconPosition position, CardIconOrder order, int cellsVisibleCount, int iconSizePercent, List<CardIcon> icons, Rectangle startingCardSize) {
+    public CardIconsPanel(CardIconPosition position, CardIconOrder order, CardIconColor color, int cellsVisibleCount, int iconSizePercent, List<CardIcon> icons, Rectangle startingCardSize) {
         super(null);
-        this.position = position != null ? position : DEFAULT_POSITION;
+        this.position = (position != null ? position : DEFAULT_POSITION);
+        this.color = (color != null ? color : DEFAULT_COLOR);
         this.iconSizePercent = iconSizePercent;
         this.icons = icons;
 
@@ -289,7 +293,7 @@ public class CardIconsPanel extends JPanel {
         //BufferedImage iconImage = ImageManagerImpl.instance.getCardIcon(icon.getIconType().getResourceName(), this.halfSize * 2);
 
         // cached call
-        BufferedImage iconImageCached = ImageCache.getCardIconImage(icon.getIconType().getResourceName(), this.halfSize * 2);
+        BufferedImage iconImageCached = ImageCache.getCardIconImage(icon.getIconType().getResourceName(), this.halfSize * 2, color.toString());
 
         if (iconImageCached != null && this.font != null) {
             BufferedImage iconImageWithText = ImageManagerImpl.deepCopy(iconImageCached); // must copy cached value before modify
@@ -299,7 +303,7 @@ public class CardIconsPanel extends JPanel {
             label.setToolTipText("<html>" + ManaSymbols.replaceSymbolsWithHTML(icon.getHint(), ManaSymbols.Type.CARD_ICON_HINT));
             if (!icon.getText().isEmpty()) {
                 Graphics2D g2d = iconImageWithText.createGraphics();
-                g2d.setColor(PreferencesDialog.getCurrentTheme().getCardIconsTextColor());
+                g2d.setColor(PreferencesDialog.getCurrentTheme().getCardIconsTextColor(this.color));
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 Rectangle rect = CardRendererUtils.reduceRect(new Rectangle(0, 0, iconImageWithText.getWidth(), iconImageWithText.getHeight()), 0.8f);
                 CardRendererUtils.drawCenteredText(g2d, icon.getText(), rect, this.font, true);

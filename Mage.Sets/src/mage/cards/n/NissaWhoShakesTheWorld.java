@@ -25,6 +25,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.command.emblems.NissaWhoShakesTheWorldEmblem;
 import mage.game.events.GameEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetPermanent;
@@ -87,15 +88,8 @@ public final class NissaWhoShakesTheWorld extends CardImpl {
 
 class NissaWhoShakesTheWorldTriggeredAbility extends TriggeredManaAbility {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Forest");
-
-    static {
-        filter.add(SubType.FOREST.getPredicate());
-    }
-
     NissaWhoShakesTheWorldTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(1)), false);
-        this.usesStack = false;
     }
 
     private NissaWhoShakesTheWorldTriggeredAbility(final NissaWhoShakesTheWorldTriggeredAbility ability) {
@@ -109,8 +103,11 @@ class NissaWhoShakesTheWorldTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent land = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return land != null && filter.match(land, this.getSourceId(), this.getControllerId(), game);
+        if (!isControlledBy(event.getPlayerId())) {
+            return false;
+        }
+        Permanent permanent = ((TappedForManaEvent) event).getPermanent();
+        return permanent != null && permanent.hasSubtype(SubType.FOREST, game);
     }
 
     @Override

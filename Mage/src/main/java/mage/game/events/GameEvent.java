@@ -342,6 +342,7 @@ public class GameEvent implements Serializable {
          */
         BECOMES_EXERTED,
         BECOMES_RENOWNED,
+        GAINS_CLASS_LEVEL,
         /* BECOMES_MONARCH
          targetId    playerId of the player that becomes the monarch
          sourceId    id of the source object that created that effect, if no effect exist it's null
@@ -458,6 +459,7 @@ public class GameEvent implements Serializable {
         ROOM_ENTERED,
         VENTURE, VENTURED,
         DUNGEON_COMPLETED,
+        REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
         //custom events
         CUSTOM_EVENT
     }

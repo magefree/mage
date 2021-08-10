@@ -105,10 +105,10 @@ public class HauntAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         return (creatureHaunt ? "When {this} enters the battlefield or the creature it haunts dies, "
                 : "When the creature {this} haunts dies, ")
-                + super.getRule();
+                ;
     }
 }
 

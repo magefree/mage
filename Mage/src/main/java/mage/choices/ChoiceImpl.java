@@ -2,15 +2,15 @@ package mage.choices;
 
 import mage.util.RandomUtil;
 
-import java.io.Serializable;
 import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
-public class ChoiceImpl implements Choice, Serializable {
+public class ChoiceImpl implements Choice {
 
-    protected boolean chosen;
+    protected boolean chosenNormal;
+    protected boolean chosenSpecial;
     protected final boolean required;
     protected String choice;
     protected String choiceKey;
@@ -22,6 +22,13 @@ public class ChoiceImpl implements Choice, Serializable {
     protected boolean searchEnabled = true; // enable for all windows by default
     protected String searchText;
 
+    // special button with #-answer
+    // warning, only for human's GUI, not AI
+    protected boolean specialEnabled = false;
+    protected boolean specialCanBeEmpty = false; // enable if you want to select "nothing", but not cancel
+    protected String specialText = "";
+    protected String specialHint = "";
+
     public ChoiceImpl() {
         this(false);
     }
@@ -30,9 +37,10 @@ public class ChoiceImpl implements Choice, Serializable {
         this.required = required;
     }
 
-    public ChoiceImpl(ChoiceImpl choice) {
+    public ChoiceImpl(final ChoiceImpl choice) {
         this.choice = choice.choice;
-        this.chosen = choice.chosen;
+        this.chosenNormal = choice.chosenNormal;
+        this.chosenSpecial = choice.chosenSpecial;
         this.required = choice.required;
         this.message = choice.message;
         this.subMessage = choice.subMessage;
@@ -42,18 +50,28 @@ public class ChoiceImpl implements Choice, Serializable {
         this.choiceKey = choice.choiceKey;
         this.keyChoices = choice.keyChoices; // list should never change for the same object so copy by reference TODO: check errors with that, it that ok? Color list is static
         this.sortData = choice.sortData;
+        this.specialEnabled = choice.specialEnabled;
+        this.specialCanBeEmpty = choice.specialCanBeEmpty;
+        this.specialText = choice.specialText;
+        this.specialHint = choice.specialHint;
     }
 
     @Override
     public boolean isChosen() {
-        return chosen;
+        return chosenNormal || chosenSpecial;
+    }
+
+    @Override
+    public boolean isChosenSpecial() {
+        return chosenSpecial;
     }
 
     @Override
     public void clearChoice() {
-        choice = null;
-        choiceKey = null;
-        chosen = false;
+        this.choice = null;
+        this.choiceKey = null;
+        this.chosenNormal = false;
+        this.chosenSpecial = false;
     }
 
     @Override
@@ -92,10 +110,17 @@ public class ChoiceImpl implements Choice, Serializable {
     }
 
     @Override
-    public void setChoice(String choice) {
+    public void setChoice(String choice, boolean isSpecial) {
         if (choices.contains(choice)) {
             this.choice = choice;
-            this.chosen = true;
+            this.chosenNormal = true;
+            this.chosenSpecial = isSpecial;
+        }
+
+        if (isSpecial && this.specialCanBeEmpty && (choice == null || choice.isEmpty())) {
+            clearChoice();
+            this.chosenNormal = false;
+            this.chosenSpecial = true;
         }
     }
 
@@ -134,12 +159,19 @@ public class ChoiceImpl implements Choice, Serializable {
     }
 
     @Override
-    public void setChoiceByKey(String choiceKey) {
+    public void setChoiceByKey(String choiceKey, boolean isSpecial) {
         String choiceToSet = keyChoices.get(choiceKey);
         if (choiceToSet != null) {
             this.choice = choiceToSet;
             this.choiceKey = choiceKey;
-            this.chosen = true;
+            this.chosenNormal = true;
+            this.chosenSpecial = isSpecial;
+        }
+
+        if (isSpecial && this.specialCanBeEmpty && (choiceKey == null || choiceKey.isEmpty())) {
+            clearChoice();
+            this.chosenNormal = false;
+            this.chosenSpecial = true;
         }
     }
 
@@ -191,14 +223,14 @@ public class ChoiceImpl implements Choice, Serializable {
             String[] vals = this.getKeyChoices().keySet().toArray(new String[0]);
             if (vals.length > 0) {
                 int choiceNum = RandomUtil.nextInt(vals.length);
-                this.setChoiceByKey(vals[choiceNum]);
+                this.setChoiceByKey(vals[choiceNum], false);
             }
         } else {
             // string mode
             String[] vals = this.getChoices().toArray(new String[0]);
             if (vals.length > 0) {
                 int choiceNum = RandomUtil.nextInt(vals.length);
-                this.setChoice(vals[choiceNum]);
+                this.setChoice(vals[choiceNum], false);
             }
         }
     }
@@ -211,18 +243,18 @@ public class ChoiceImpl implements Choice, Serializable {
             for (String needChoice : answers) {
                 for (Map.Entry<String, String> currentChoice : this.getKeyChoices().entrySet()) {
                     if (currentChoice.getKey().equals(needChoice)) {
-                        this.setChoiceByKey(needChoice);
+                        this.setChoiceByKey(needChoice, false);
                         answers.remove(needChoice);
                         return true;
                     }
 
                 }
             }
-            // no key answer found, try to macht by text starting with
+            // no key answer found, try to match by text starting with
             for (String needChoice : answers) {
                 for (Map.Entry<String, String> currentChoice : this.getKeyChoices().entrySet()) {
                     if (currentChoice.getValue().startsWith(needChoice)) {
-                        this.setChoiceByKey(currentChoice.getKey());
+                        this.setChoiceByKey(currentChoice.getKey(), false);
                         answers.remove(needChoice);
                         return true;
                     }
@@ -233,7 +265,7 @@ public class ChoiceImpl implements Choice, Serializable {
             for (String needChoice : answers) {
                 for (String currentChoice : this.getChoices()) {
                     if (currentChoice.equals(needChoice)) {
-                        this.setChoice(needChoice);
+                        this.setChoice(needChoice, false);
                         answers.remove(needChoice);
                         return true;
                     }
@@ -241,5 +273,33 @@ public class ChoiceImpl implements Choice, Serializable {
             }
         }
         return false; // can't find answer
+    }
+
+    @Override
+    public void setSpecial(boolean enabled, boolean canBeEmpty, String text, String hint) {
+        this.specialEnabled = enabled;
+        this.specialCanBeEmpty = canBeEmpty;
+        this.specialText = text;
+        this.specialHint = hint;
+    }
+
+    @Override
+    public boolean isSpecialEnabled() {
+        return this.specialEnabled;
+    }
+
+    @Override
+    public boolean isSpecialCanBeEmpty() {
+        return this.specialCanBeEmpty;
+    }
+
+    @Override
+    public String getSpecialText() {
+        return this.specialText;
+    }
+
+    @Override
+    public String getSpecialHint() {
+        return this.specialHint;
     }
 }

@@ -44,8 +44,8 @@ class RitesOfSpringEffect extends OneShotEffect {
 
     RitesOfSpringEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "discard any number of cards. Search your library for up to that many basic land cards, " +
-                "reveal them, put them into your hand, then shuffle";
+        this.staticText = "discard any number of cards. Search your library for up to that many basic land cards, "
+                + "reveal them, put them into your hand, then shuffle";
     }
 
     private RitesOfSpringEffect(final RitesOfSpringEffect effect) {
@@ -63,9 +63,15 @@ class RitesOfSpringEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
+
         int numDiscarded = controller.discard(0, Integer.MAX_VALUE, false, source, game).size();
+
+        if (numDiscarded == 0) {
+            return true;
+        }
+
         TargetCardInLibrary target = new TargetCardInLibrary(
-                0, numDiscarded, StaticFilters.FILTER_CARD_BASIC_LAND
+                numDiscarded, StaticFilters.FILTER_CARD_BASIC_LAND
         );
         controller.searchLibrary(target, source, game);
         Cards cards = new CardsImpl();

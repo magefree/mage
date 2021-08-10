@@ -32,6 +32,7 @@ public final class JuniperOrderRanger extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
+        this.subtype.add(SubType.RANGER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
