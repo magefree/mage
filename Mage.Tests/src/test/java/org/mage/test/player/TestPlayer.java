@@ -80,6 +80,7 @@ public class TestPlayer implements Player {
     public static final String NO_TARGET = "NO_TARGET"; // cast spell or activate ability without target defines
     public static final String FLIPCOIN_RESULT_TRUE = "[flipcoin_true]";
     public static final String FLIPCOIN_RESULT_FALSE = "[flipcoin_false]";
+    public static final String DIE_ROLL = "[die_roll]: ";
 
     private int maxCallsWithoutAction = 400;
     private int foundNoAction = 0;
@@ -3477,7 +3478,7 @@ public class TestPlayer implements Player {
                 return false;
             }
         }
-        this.chooseStrictModeFailed("flipcoin result", game, "Use setFlipCoinResult to setup it in unit tests");
+        this.chooseStrictModeFailed("flip coin result", game, "Use setFlipCoinResult to set it up in unit tests");
 
         // implementation from PlayerImpl:
         return RandomUtil.nextBoolean();
@@ -3500,7 +3501,18 @@ public class TestPlayer implements Player {
 
     @Override
     public int rollDieResult(int sides, Game game) {
-        return computerPlayer.rollDieResult(sides, game);
+        assertAliasSupportInChoices(false);
+        if (!choices.isEmpty()) {
+            String nextResult = choices.get(0);
+            if (nextResult.startsWith(DIE_ROLL)) {
+                choices.remove(0);
+                return Integer.parseInt(nextResult.substring(DIE_ROLL.length(), nextResult.length()));
+            }
+        }
+        this.chooseStrictModeFailed("die roll result", game, "Use setDieRollResult to set it up in unit tests");
+
+        // implementation from PlayerImpl:
+        return RandomUtil.nextInt(sides) + 1;
     }
 
     @Override

@@ -1979,6 +1979,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addChoice(result ? TestPlayer.FLIPCOIN_RESULT_TRUE : TestPlayer.FLIPCOIN_RESULT_FALSE);
     }
 
+    public void setDieRollResult(TestPlayer player, int result) {
+        player.addChoice(TestPlayer.DIE_ROLL + result);
+    }
+
     /**
      * Set target permanents
      *
