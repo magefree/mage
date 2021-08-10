@@ -2953,7 +2953,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             List<DieResult> newRolls = new ArrayList<>();
             for (DieResult dieResult : dieRolls) {
                 if (toIgnore.contains(dieResult.result)) {
-                    toIgnore.remove(dieResult.result);
+                    toIgnore.remove((Integer) dieResult.result);
                 } else {
                     newRolls.add(dieResult);
                 }

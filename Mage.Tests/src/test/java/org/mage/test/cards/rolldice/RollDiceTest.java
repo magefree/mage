@@ -11,6 +11,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class RollDiceTest extends CardTestPlayerBase {
 
     private static final String goblins = "Swarming Goblins";
+    private static final String guide = "Pixie Guide";
 
     private void runGoblinTest(int roll, int goblinCount) {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
@@ -51,5 +52,47 @@ public class RollDiceTest extends CardTestPlayerBase {
     @Test
     public void testGoblinRoll20() {
         runGoblinTest(20, 3);
+    }
+
+    @Test
+    public void testOneGuide() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, guide);
+        addCard(Zone.HAND, playerA, goblins);
+
+        setDieRollResult(playerA, 9);
+        setDieRollResult(playerA, 10);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, goblins);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, goblins, 1);
+        assertPermanentCount(playerA, guide, 1);
+        assertPermanentCount(playerA, "Goblin", 2);
+    }
+
+    @Test
+    public void testTwoGuides() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, guide, 2);
+        addCard(Zone.HAND, playerA, goblins);
+
+        setChoice(playerA, guide); // choose replacement effect
+        setDieRollResult(playerA, 9);
+        setDieRollResult(playerA, 9);
+        setDieRollResult(playerA, 10);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, goblins);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, goblins, 1);
+        assertPermanentCount(playerA, guide, 2);
+        assertPermanentCount(playerA, "Goblin", 2);
     }
 }
