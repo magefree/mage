@@ -5,6 +5,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -12,6 +14,8 @@ public class RollDiceTest extends CardTestPlayerBase {
 
     private static final String goblins = "Swarming Goblins";
     private static final String guide = "Pixie Guide";
+    private static final String thumb = "Krark's Other Thumb";
+    private static final String gallery = "Mirror Gallery";
 
     @Test(expected = AssertionError.class)
     public void testStrictFailWithoutSetup() {
@@ -107,5 +111,73 @@ public class RollDiceTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, goblins, 1);
         assertPermanentCount(playerA, guide, 2);
         assertPermanentCount(playerA, "Goblin", 2);
+    }
+
+    private void runKrarksOtherThumbTest(int choice, int thumbCount, int goblinCount, int... rolls) {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, thumb, thumbCount);
+        addCard(Zone.BATTLEFIELD, playerA, gallery);
+        addCard(Zone.HAND, playerA, goblins);
+
+        for (int i = 0; i < thumbCount - 1; i++) {
+            setChoice(playerA, thumb); // choose replacement effect
+        }
+        for (int roll : rolls) {
+            setDieRollResult(playerA, roll);
+        }
+        if (Arrays.stream(rolls).distinct().count() > 1) {
+            setChoice(playerA, "" + choice);
+        }
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, goblins);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, goblins, 1);
+        assertPermanentCount(playerA, gallery, 1);
+        assertPermanentCount(playerA, thumb, thumbCount);
+        assertPermanentCount(playerA, "Goblin", goblinCount);
+    }
+
+    @Test(expected = AssertionError.class)
+    public void test_KrarksOtherThumb_1copy_ChooseFailure() {
+        runKrarksOtherThumbTest(8, 1, 1, 9, 10);
+    }
+
+    @Test
+    public void test_KrarksOtherThumb_1copy_ChooseLower() {
+        runKrarksOtherThumbTest(9, 1, 1, 9, 10);
+    }
+
+    @Test
+    public void test_KrarksOtherThumb_1copy_ChooseHigher() {
+        runKrarksOtherThumbTest(10, 1, 2, 9, 10);
+    }
+
+    @Test
+    public void test_KrarksOtherThumb_1copy_SameRoll() {
+        runKrarksOtherThumbTest(10, 1, 2, 10, 10);
+    }
+
+    @Test
+    public void test_KrarksOtherThumb_2copies_ChooseLowest() {
+        runKrarksOtherThumbTest(8, 2, 1, 8, 9, 10, 11);
+    }
+
+    @Test
+    public void test_KrarksOtherThumb_2copies_ChooseMedium() {
+        runKrarksOtherThumbTest(9, 2, 1, 8, 9, 10, 11);
+    }
+
+    @Test
+    public void test_KrarksOtherThumb_2copies_ChooseHighest() {
+        runKrarksOtherThumbTest(11, 2, 2, 8, 9, 10, 11);
+    }
+
+    @Test
+    public void test_KrarksOtherThumb_2copies_SameRoll() {
+        runKrarksOtherThumbTest(8, 2, 1, 8, 8, 8, 8);
     }
 }
