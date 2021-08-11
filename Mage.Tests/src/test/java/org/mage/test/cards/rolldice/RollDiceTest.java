@@ -43,32 +43,32 @@ public class RollDiceTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testGoblinRoll1() {
+    public void test_GoblinRoll_1() {
         runGoblinTest(1, 1);
     }
 
     @Test
-    public void testGoblinRoll9() {
+    public void test_GoblinRoll_9() {
         runGoblinTest(9, 1);
     }
 
     @Test
-    public void testGoblinRoll10() {
+    public void test_GoblinRoll_10() {
         runGoblinTest(10, 2);
     }
 
     @Test
-    public void testGoblinRoll19() {
+    public void test_GoblinRoll_19() {
         runGoblinTest(19, 2);
     }
 
     @Test
-    public void testGoblinRoll20() {
+    public void test_GoblinRoll_20() {
         runGoblinTest(20, 3);
     }
 
     @Test
-    public void testOneGuide() {
+    public void test_PixieGuide_1() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         addCard(Zone.BATTLEFIELD, playerA, guide);
         addCard(Zone.HAND, playerA, goblins);
@@ -88,7 +88,7 @@ public class RollDiceTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testTwoGuides() {
+    public void test_PixieGuide_2() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         addCard(Zone.BATTLEFIELD, playerA, guide, 2);
         addCard(Zone.HAND, playerA, goblins);
