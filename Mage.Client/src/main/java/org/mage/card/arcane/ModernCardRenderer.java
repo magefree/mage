@@ -162,6 +162,12 @@ public class ModernCardRenderer extends CardRenderer {
     public static final Color LAND_TEXTBOX_GREEN = new Color(198, 220, 198, 234);
     public static final Color LAND_TEXTBOX_GOLD = new Color(236, 229, 207, 234);
 
+    public static final Color LAND_SPIRAL_TEXTBOX_WHITE = new Color(248, 232, 188, 220);
+    public static final Color LAND_SPIRAL_TEXTBOX_BLUE = new Color(189, 212, 236, 220);
+    public static final Color LAND_SPIRAL_TEXTBOX_BLACK = new Color(174, 164, 162, 220);
+    public static final Color LAND_SPIRAL_TEXTBOX_RED = new Color(242, 168, 133, 220);
+    public static final Color LAND_SPIRAL_TEXTBOX_GREEN = new Color(198, 220, 198, 220);
+
     public static final Color TEXTBOX_WHITE = new Color(252, 249, 244, 234);
     public static final Color TEXTBOX_BLUE = new Color(229, 238, 247, 234);
     public static final Color TEXTBOX_BLACK = new Color(241, 241, 240, 234);
@@ -379,6 +385,10 @@ public class ModernCardRenderer extends CardRenderer {
         return cardView.getFrameStyle() == FrameStyle.UST_FULL_ART_BASIC;
     }
 
+    private boolean isOriginalDualLand() {
+        return cardView.getFrameStyle() == FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC;
+    }
+
     protected boolean isSourceArtFullArt() {
         int color = artImage.getRGB(0, artImage.getHeight() / 2);
         return (((color & 0x00FF0000) > 0x00200000)
@@ -471,6 +481,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Is this a Zendikar or Unstable land
         boolean isZenUst = isZendikarFullArtLand() || isUnstableFullArtLand();
+        boolean isOriginalDual = isOriginalDualLand();
 
         // Draw the main card content border
         g.setPaint(borderPaint);
@@ -494,9 +505,56 @@ public class ModernCardRenderer extends CardRenderer {
         }
 
         if (!isZenUst) {
-            g.fillRect(
+            if (cardView.getCardTypes().contains(CardType.LAND)) {
+                int total_height_of_box = cardHeight - borderWidth * 3 - typeLineY - 2 - boxHeight;
+
+                // Analysis of LEA Duals (Scrubland) gives 16.5 height of unit of 'spirals' in the text area
+                int height_of_spiral = (int) Math.round(total_height_of_box / 16.5);
+                int total_height_spiral = total_height_of_box;
+
+                List<ObjectColor> twoColors = frameColors.getColors();
+
+                if (twoColors.size() <= 2) {
+                    if (isOriginalDual && twoColors.size() == 2) {
+                        g.setPaint(getSpiralLandTextboxColor(twoColors.get(0), twoColors.get(1), false));
+                    }
+                    g.fillRect(totalContentInset + 1, typeLineY + boxHeight + 1, contentWidth - 2, total_height_of_box);
+                }
+                if (frameColors.getColorCount() >= 3) {
+                    g.fillRect(totalContentInset + 1, typeLineY + boxHeight + 1, contentWidth - 2, total_height_of_box);
+                }
+                if (frameColors.getColorCount() == 2) {
+                    if (isOriginalDual) {
+                        g.setPaint(getSpiralLandTextboxColor(twoColors.get(0), twoColors.get(1), true));
+
+                        // Horizontal bars
+                        g.fillRect(totalContentInset + 1                     , typeLineY + boxHeight + 1                                           , contentWidth - 2                      , height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 2*height_of_spiral, typeLineY + boxHeight + 1 + 2*height_of_spiral                      , contentWidth - 2 - 4*height_of_spiral , height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 4*height_of_spiral, typeLineY + boxHeight + 1 + 4*height_of_spiral                      , contentWidth - 2 - 8*height_of_spiral , height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 6*height_of_spiral, typeLineY + boxHeight + 1 + 6*height_of_spiral                      , contentWidth - 2 - 12*height_of_spiral, height_of_spiral);
+
+                        g.fillRect(totalContentInset + 1 + 6*height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 7*height_of_spiral, contentWidth - 2 - 12*height_of_spiral, height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 4*height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 5*height_of_spiral, contentWidth - 2 - 8*height_of_spiral , height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 2*height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 3*height_of_spiral, contentWidth - 2 - 4*height_of_spiral , height_of_spiral);
+                        g.fillRect(totalContentInset + 1                     , typeLineY + boxHeight + 1 + total_height_of_box - height_of_spiral  , contentWidth - 2                      , height_of_spiral);
+
+                        // Vertical bars
+                        g.fillRect(totalContentInset + 1                     , typeLineY + boxHeight + 1                     , height_of_spiral, total_height_spiral - 1                      );
+                        g.fillRect(totalContentInset + 1 + 2*height_of_spiral, typeLineY + boxHeight + 1 + 2*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4*height_of_spiral );
+                        g.fillRect(totalContentInset + 1 + 4*height_of_spiral, typeLineY + boxHeight + 1 + 4*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8*height_of_spiral );
+                        g.fillRect(totalContentInset + 1 + 6*height_of_spiral, typeLineY + boxHeight + 1 + 6*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12*height_of_spiral);
+
+                        g.fillRect(totalContentInset + contentWidth - 7*height_of_spiral, typeLineY + boxHeight + 1 + 6*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12*height_of_spiral);
+                        g.fillRect(totalContentInset + contentWidth - 5*height_of_spiral, typeLineY + boxHeight + 1 + 4*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8*height_of_spiral );
+                        g.fillRect(totalContentInset + contentWidth - 3*height_of_spiral, typeLineY + boxHeight + 1 + 2*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4*height_of_spiral );
+                        g.fillRect(totalContentInset + contentWidth - 1*height_of_spiral, typeLineY + boxHeight + 1 + 0*height_of_spiral, height_of_spiral, total_height_spiral - 1                      );
+                    }
+                }
+            } else {
+                g.fillRect(
                     totalContentInset + 1, typeLineY,
                     contentWidth - 2, cardHeight - borderWidth * 3 - typeLineY - 1);
+            }
         }
 
         // If it's a planeswalker, extend the textbox left border by some
@@ -575,7 +633,7 @@ public class ModernCardRenderer extends CardRenderer {
                 drawZendikarCurvedFace(g, image, x, thisy, x2, y2,
                         boxColor, borderPaint);
             } else if (cardView.getFrameStyle() == FrameStyle.BFZ_FULL_ART_BASIC) {
-                // Draw curved lines (BFZ land style) 
+                // Draw curved lines (BFZ land style)
                 int y2 = y;
                 int yb = totalContentInset + boxHeight;
                 int topxdelta = 45 * contentWidth / 1000;
@@ -770,7 +828,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         g2.setPaint(paint);
 
-        // Dimensions:  534 height, 384 width, 34 offset at top, 41 offset at bottom.  Curve at bottom right is from an ellipse: 245 high, 196 wide, with center offset from 
+        // Dimensions:  534 height, 384 width, 34 offset at top, 41 offset at bottom.  Curve at bottom right is from an ellipse: 245 high, 196 wide, with center offset from
         // right side by 36  (so top left is at: (width - 159, height - 41 -196)  center at: 41+127 = width - 36, height - 168)
         int scan_width = 384;
         int scan_height = 534;
@@ -1643,6 +1701,50 @@ public class ModernCardRenderer extends CardRenderer {
         } else {
             return ERROR_COLOR;
         }
+    }
+
+    // Determine the land textbox color for the spiral colours
+    protected static Color getSpiralLandTextboxColor(ObjectColor color, ObjectColor secondColor, boolean firstOne) {
+        // Absolutely mental, but the coloring for the spirals is as follows (reading from biggest box in):
+        // WG WU BW RW UG BU BG RB RG RU
+        boolean white = color.isWhite() || secondColor.isWhite();
+        boolean blue = color.isBlue() || secondColor.isBlue();
+        boolean black = color.isBlack() || secondColor.isBlack();
+        boolean red = color.isRed() || secondColor.isRed();
+        boolean green = color.isGreen() || secondColor.isGreen();
+
+        if (white && green) {
+            return firstOne ? LAND_SPIRAL_TEXTBOX_WHITE : LAND_SPIRAL_TEXTBOX_GREEN;
+        }
+        if (white && blue) {
+            return firstOne ? LAND_SPIRAL_TEXTBOX_WHITE : LAND_SPIRAL_TEXTBOX_BLUE;
+        }
+        if (black && white) {
+            return firstOne ? LAND_SPIRAL_TEXTBOX_BLACK : LAND_SPIRAL_TEXTBOX_WHITE;
+        }
+        if (red && white) {
+            return firstOne ? LAND_SPIRAL_TEXTBOX_RED : LAND_SPIRAL_TEXTBOX_WHITE;
+        }
+        if (blue && green) {
+            return firstOne ? LAND_SPIRAL_TEXTBOX_BLUE : LAND_SPIRAL_TEXTBOX_GREEN;
+        }
+        if (black && blue) {
+            return firstOne ? LAND_SPIRAL_TEXTBOX_BLACK : LAND_SPIRAL_TEXTBOX_BLUE;
+        }
+        if (black && green) {
+            return firstOne ? LAND_SPIRAL_TEXTBOX_BLACK : LAND_SPIRAL_TEXTBOX_GREEN;
+        }
+        if (red && black) {
+            return firstOne ? LAND_SPIRAL_TEXTBOX_RED : LAND_SPIRAL_TEXTBOX_BLACK;
+        }
+        if (red && green) {
+            return firstOne ? LAND_SPIRAL_TEXTBOX_RED : LAND_SPIRAL_TEXTBOX_GREEN;
+        }
+        if (red && blue) {
+            return firstOne ? LAND_SPIRAL_TEXTBOX_RED : LAND_SPIRAL_TEXTBOX_BLUE;
+        }
+
+        return getLandTextboxColor(color);
     }
 
     // Determine the land textbox color for a single color. Uses the same colors as the
