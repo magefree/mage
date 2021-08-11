@@ -13,6 +13,19 @@ public class RollDiceTest extends CardTestPlayerBase {
     private static final String goblins = "Swarming Goblins";
     private static final String guide = "Pixie Guide";
 
+    @Test(expected = AssertionError.class)
+    public void testStrictFailWithoutSetup() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.HAND, playerA, goblins);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, goblins);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
     private void runGoblinTest(int roll, int goblinCount) {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         addCard(Zone.HAND, playerA, goblins);
