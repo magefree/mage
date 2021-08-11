@@ -159,9 +159,11 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Murder of Crows", 88, Rarity.UNCOMMON, mage.cards.m.MurderOfCrows.class));
         cards.add(new SetCardInfo("Nature's Lore", 164, Rarity.COMMON, mage.cards.n.NaturesLore.class));
         cards.add(new SetCardInfo("Netherese Puzzle-Ward", 17, Rarity.RARE, mage.cards.n.NetheresePuzzleWard.class));
+        cards.add(new SetCardInfo("Neverwinter Hydra", 41, Rarity.RARE, mage.cards.n.NeverwinterHydra.class));
         cards.add(new SetCardInfo("Reckless Endeavor", 33, Rarity.RARE, mage.cards.r.RecklessEndeavor.class));
         cards.add(new SetCardInfo("Necromantic Selection", 103, Rarity.RARE, mage.cards.n.NecromanticSelection.class));
         cards.add(new SetCardInfo("Necrotic Sliver", 188, Rarity.UNCOMMON, mage.cards.n.NecroticSliver.class));
+        cards.add(new SetCardInfo("Neverwinter Hydra", 41, Rarity.RARE, mage.cards.n.NeverwinterHydra.class));
         cards.add(new SetCardInfo("Nimbus Maze", 252, Rarity.RARE, mage.cards.n.NimbusMaze.class));
         cards.add(new SetCardInfo("Obsessive Stitcher", 189, Rarity.UNCOMMON, mage.cards.o.ObsessiveStitcher.class));
         cards.add(new SetCardInfo("Ogre Slumlord", 104, Rarity.RARE, mage.cards.o.OgreSlumlord.class));
