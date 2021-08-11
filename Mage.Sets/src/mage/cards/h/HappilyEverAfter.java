@@ -88,7 +88,7 @@ enum HappilyEverAfterCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || player.getLife() < game.getLife()) {
+        if (player == null || player.getLife() < game.getStartingLife()) {
             return false;
         }
         ObjectColor color = new ObjectColor("");

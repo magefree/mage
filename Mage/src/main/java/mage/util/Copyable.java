@@ -1,9 +1,6 @@
-
-
 package mage.util;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 @FunctionalInterface

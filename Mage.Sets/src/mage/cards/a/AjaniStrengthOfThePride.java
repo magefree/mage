@@ -112,7 +112,7 @@ class AjaniStrengthOfThePrideEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || player.getLife() < game.getLife() + 15) {
+        if (player == null || player.getLife() < game.getStartingLife() + 15) {
             return false;
         }
         new ExileSourceEffect().apply(game, source);

@@ -1,6 +1,7 @@
 package mage.game;
 
 import mage.constants.PhaseStep;
+import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -12,7 +13,7 @@ import java.util.Set;
  *
  * @author ayratn
  */
-public class GameOptions implements Serializable {
+public class GameOptions implements Serializable, Copyable<GameOptions> {
 
     private static final GameOptions deinstance = new GameOptions();
 
@@ -50,10 +51,28 @@ public class GameOptions implements Serializable {
      * Names of users banned from participating in the game
      */
     public Set<String> bannedUsers = Collections.emptySet();
-    
+
     /**
      * Use planechase variant
      */
     public boolean planeChase = false;
 
+    public GameOptions() {
+        super();
+    }
+
+    private GameOptions(final GameOptions options) {
+        this.testMode = options.testMode;
+        this.stopOnTurn = options.stopOnTurn;
+        this.stopAtStep = options.stopAtStep;
+        this.skipInitShuffling = options.skipInitShuffling;
+        this.rollbackTurnsAllowed = options.rollbackTurnsAllowed;
+        this.bannedUsers.addAll(options.bannedUsers);
+        this.planeChase = options.planeChase;
+    }
+
+    @Override
+    public GameOptions copy() {
+        return new GameOptions(this);
+    }
 }

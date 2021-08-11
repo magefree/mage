@@ -51,7 +51,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     int getNumPlayers();
 
-    int getLife();
+    int getStartingLife();
 
     RangeOfInfluence getRangeOfInfluence();
 
@@ -243,10 +243,6 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     void setLosingPlayer(Player player);
 
     Player getLosingPlayer();
-
-    void setStateCheckRequired();
-
-    boolean getStateCheckRequired();
 
     //client event methods
     void addTableEventListener(Listener<TableEvent> listener);

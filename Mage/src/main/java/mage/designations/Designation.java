@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.Copyable;
 import mage.util.GameLog;
 import mage.util.SubTypes;
 
@@ -28,7 +27,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public abstract class Designation implements MageObject, Copyable<Designation> {
+public abstract class Designation implements MageObject {
 
     private static final List<CardType> emptySet = new ArrayList<>();
     private static final ObjectColor emptyColor = new ObjectColor();
@@ -68,6 +67,9 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
         this.expansionSetCodeForImage = designation.expansionSetCodeForImage;
         this.unique = designation.unique;
     }
+
+    @Override
+    public abstract Designation copy();
 
     @Override
     public FrameStyle getFrameStyle() {

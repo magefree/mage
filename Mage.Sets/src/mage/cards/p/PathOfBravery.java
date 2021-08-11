@@ -62,7 +62,7 @@ enum LifeCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
-            return you.getLife() >= game.getLife();
+            return you.getLife() >= game.getStartingLife();
         }
         return false;
     }

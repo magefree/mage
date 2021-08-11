@@ -125,7 +125,7 @@ class LongRestEffect extends OneShotEffect {
             if (numCards > 0) {
                 controller.moveCards(cardsToHand, Zone.HAND, source, game);
                 if (numCards >= 8) {
-                    controller.setLife(game.getLife(), game, source);
+                    controller.setLife(game.getStartingLife(), game, source);
                 }
                 return true;
             }

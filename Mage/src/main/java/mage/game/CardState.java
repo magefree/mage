@@ -12,12 +12,13 @@ import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.util.Copyable;
 
 /**
  *
  * @author BetaSteward
  */
-public class CardState implements Serializable {
+public class CardState implements Serializable, Copyable<CardState> {
 
     protected boolean faceDown;
     protected Map<String, String> info;
@@ -50,6 +51,7 @@ public class CardState implements Serializable {
         this.melded = state.melded;
     }
 
+    @Override
     public CardState copy() {
         return new CardState(this);
     }

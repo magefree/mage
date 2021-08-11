@@ -440,7 +440,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canLoseLife = true;
         this.topCardRevealed = false;
         this.payManaMode = false;
-        this.setLife(game.getLife(), game, null);
+        this.setLife(game.getStartingLife(), game, null);
         this.setReachedNextTurnAfterLeaving(false);
 
         this.clearCastSourceIdManaCosts();

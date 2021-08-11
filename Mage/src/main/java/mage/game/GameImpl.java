@@ -59,7 +59,10 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.util.*;
+import mage.util.CardUtil;
+import mage.util.GameLog;
+import mage.util.MessageToClient;
+import mage.util.RandomUtil;
 import mage.util.functions.CopyApplier;
 import mage.watchers.Watcher;
 import mage.watchers.common.*;
@@ -71,14 +74,23 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+/**
+ * Game object. It must contain static data (e.g. no changeable in the game like game settings)
+ * <p>
+ * "transient field" logic uses for serialization/replays (mark temporary fields as transient,
+ * also look for non restored fields in copy constructor for details)
+ * <p>
+ * WARNING, if you add new fields then don't forget to add it to copy constructor (deep copy, not ref).
+ * If it's a temporary/auto-generated data then mark that field as transient and comment in copy constructor.
+ */
 public abstract class GameImpl implements Game {
 
     private static final int ROLLBACK_TURNS_MAX = 4;
     private static final String UNIT_TESTS_ERROR_TEXT = "Error in unit tests";
     private static final Logger logger = Logger.getLogger(GameImpl.class);
 
-    private transient Object customData;
-
+    private transient Object customData; // temporary data, used in AI simulations
+    private transient Player losingPlayer; // temporary data, used in AI simulations
     protected boolean simulation = false;
     protected boolean checkPlayableState = false;
 
@@ -95,18 +107,21 @@ public abstract class GameImpl implements Game {
     protected Map<Zone, Map<UUID, CardState>> lkiCardState = new EnumMap<>(Zone.class);
     protected Map<UUID, Map<Integer, MageObject>> lkiExtended = new HashMap<>();
     // Used to check if an object was moved by the current effect in resolution (so Wrath like effect can be handled correctly)
-    protected Map<Zone, Set<UUID>> shortLivingLKI = new EnumMap<>(Zone.class);
+    protected Map<Zone, Set<UUID>> lkiShortLiving = new EnumMap<>(Zone.class);
 
     // Permanents entering the Battlefield while handling replacement effects before they are added to the battlefield
     protected Map<UUID, Permanent> permanentsEntering = new HashMap<>();
+    // used to set the counters a permanent adds the battlefield (if no replacement effect is used e.g. Persist)
+    protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
 
     protected GameState state;
     private transient Stack<Integer> savedStates = new Stack<>();
     protected transient GameStates gameStates = new GameStates();
+
     // game states to allow player rollback
     protected transient Map<Integer, GameState> gameStatesRollBack = new HashMap<>();
-    protected boolean executingRollback;
-    protected int turnToGoToForRollback;
+    protected transient boolean executingRollback;
+    protected transient int turnToGoToForRollback;
 
     protected Date startTime;
     protected Date endTime;
@@ -121,73 +136,126 @@ public abstract class GameImpl implements Game {
     protected GameOptions gameOptions;
     protected String startMessage;
 
-    // private final transient LinkedList<MageAction> actions;
-    private Player scorePlayer;
-    // private int score = 0;
-    private Player losingPlayer;
-    private boolean stateCheckRequired = false;
+    private boolean scopeRelevant = false; // replacement effects: used to indicate that currently applied replacement effects have to check for scope relevance (614.12 13/01/18)
+    private boolean saveGame = false; // replay code, not done
+    private int priorityTime; // match time limit
+    private final int startingLife;
+    private final int startingHandSize;
+    protected transient PlayerList playerList; // auto-generated from state, don't copy
 
-    // used to indicate that currently applied replacement effects have to check for scope relevance (614.12 13/01/18)
-    private boolean scopeRelevant = false;
-    private boolean saveGame = false;
-    private int priorityTime;
-
-    private final int startLife;
-    private final int startingSize;
-    protected PlayerList playerList; // auto-generated from state, don't copy
-
-    // infinite loop check (no copy of this attributes neccessary)
-    private int infiniteLoopCounter; // used to check if the game is in an infinite loop
-    private int lastNumberOfAbilitiesOnTheStack; // used to check how long no new ability was put to stack
-    private List<Integer> lastPlayersLifes = null; // if life is going down, it's no infinite loop
-    private final LinkedList<UUID> stackObjectsCheck = new LinkedList<>(); // used to check if different sources used the stack
-
-    // used to set the counters a permanent adds the battlefield (if no replacement effect is used e.g. Persist)
-    protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
+    // infinite loop check (temporary data, do not copy)
+    private transient int infiniteLoopCounter; // used to check if the game is in an infinite loop
+    private transient int lastNumberOfAbilitiesOnTheStack; // used to check how long no new ability was put to stack
+    private transient List<Integer> lastPlayersLifes = null; // if life is going down, it's no infinite loop
+    private transient final LinkedList<UUID> stackObjectsCheck = new LinkedList<>(); // used to check if different sources used the stack
 
     // temporary store for income concede commands, don't copy
     private final LinkedList<UUID> concedingPlayers = new LinkedList<>();
 
-    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startingSize) {
+    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int startingHandSize) {
         this.id = UUID.randomUUID();
         this.range = range;
         this.mulligan = mulligan;
         this.attackOption = attackOption;
         this.state = new GameState();
-        this.startLife = startLife;
+        this.startingLife = startingLife;
         this.executingRollback = false;
-        this.startingSize = startingSize;
+        this.startingHandSize = startingHandSize;
         initGameDefaultWatchers();
     }
 
     public GameImpl(final GameImpl game) {
-        this.id = game.id;
-        this.ready = game.ready;
-        this.startingPlayerId = game.startingPlayerId;
-        this.winnerId = game.winnerId;
-        this.range = game.range;
-        this.mulligan = game.getMulligan().copy();
-        this.attackOption = game.attackOption;
-        this.state = game.state.copy();
-        this.gameCards = game.gameCards;
+        //this.customData = game.customData; // temporary data, no need on game copy
+        //this.losingPlayer = game.losingPlayer; // temporary data, no need on game copy
         this.simulation = game.simulation;
         this.checkPlayableState = game.checkPlayableState;
-        this.gameOptions = game.gameOptions;
-        this.lki.putAll(game.lki);
-        this.lkiExtended.putAll(game.lkiExtended);
-        this.lkiCardState.putAll(game.lkiCardState);
-        this.shortLivingLKI.putAll(game.shortLivingLKI);
-        this.permanentsEntering.putAll(game.permanentsEntering);
 
-        this.stateCheckRequired = game.stateCheckRequired;
-        this.scorePlayer = game.scorePlayer;
-        this.scopeRelevant = game.scopeRelevant;
-        this.priorityTime = game.priorityTime;
-        this.saveGame = game.saveGame;
-        this.startLife = game.startLife;
-        this.enterWithCounters.putAll(game.enterWithCounters);
-        this.startingSize = game.startingSize;
+        this.id = game.id;
+
+        this.ready = game.ready;
+        //this.tableEventSource = game.tableEventSource; // client-server part, not need on copy/simulations
+        //this.playerQueryEventSource = game.playerQueryEventSource; // client-server part, not need on copy/simulations
+
+        for (Entry<UUID, Card> entry : game.gameCards.entrySet()) {
+            this.gameCards.put(entry.getKey(), entry.getValue().copy());
+        }
+        for (Entry<UUID, MeldCard> entry : game.meldCards.entrySet()) {
+            this.meldCards.put(entry.getKey(), entry.getValue().copy());
+        }
+
+        // lki
+        for (Entry<Zone, Map<UUID, MageObject>> entry : game.lki.entrySet()) {
+            Map<UUID, MageObject> lkiMap = new HashMap<>();
+            for (Entry<UUID, MageObject> entryMap : entry.getValue().entrySet()) {
+                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
+            }
+            this.lki.put(entry.getKey(), lkiMap);
+        }
+        // lkiCardState
+        for (Entry<Zone, Map<UUID, CardState>> entry : game.lkiCardState.entrySet()) {
+            Map<UUID, CardState> lkiMap = new HashMap<>();
+            for (Entry<UUID, CardState> entryMap : entry.getValue().entrySet()) {
+                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
+            }
+            this.lkiCardState.put(entry.getKey(), lkiMap);
+        }
+        // lkiExtended
+        for (Entry<UUID, Map<Integer, MageObject>> entry : game.lkiExtended.entrySet()) {
+            Map<Integer, MageObject> lkiMap = new HashMap<>();
+            for (Entry<Integer, MageObject> entryMap : entry.getValue().entrySet()) {
+                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
+            }
+            this.lkiExtended.put(entry.getKey(), lkiMap);
+        }
+        // lkiShortLiving
+        for (Entry<Zone, Set<UUID>> entry : game.lkiShortLiving.entrySet()) {
+            this.lkiShortLiving.put(entry.getKey(), new HashSet<>(entry.getValue()));
+        }
+
+        for (Entry<UUID, Permanent> entry : game.permanentsEntering.entrySet()) {
+            this.permanentsEntering.put(entry.getKey(), entry.getValue().copy());
+        }
+        for (Entry<UUID, Counters> entry : game.enterWithCounters.entrySet()) {
+            this.enterWithCounters.put(entry.getKey(), entry.getValue().copy());
+        }
+
+        this.state = game.state.copy();
+        // client-server part, not need on copy/simulations:
+        /*
+        this.savedStates = game.savedStates;
+        this.gameStates = game.gameStates;
+        this.gameStatesRollBack = game.gameStatesRollBack;
+        this.executingRollback = game.executingRollback;
+        this.turnToGoToForRollback = game.turnToGoToForRollback;
+        */
+
+        this.startTime = game.startTime;
+        this.endTime = game.endTime;
+        this.startingPlayerId = game.startingPlayerId;
+        this.winnerId = game.winnerId;
         this.gameStopped = game.gameStopped;
+
+        this.range = game.range;
+        this.mulligan = game.mulligan.copy();
+
+        this.attackOption = game.attackOption;
+        this.gameOptions = game.gameOptions.copy();
+        this.startMessage = game.startMessage;
+
+        this.scopeRelevant = game.scopeRelevant;
+        this.saveGame = game.saveGame;
+        this.priorityTime = game.priorityTime;
+        this.startingLife = game.startingLife;
+        this.startingHandSize = game.startingHandSize;
+        //this.playerList = game.playerList; // auto-generated list, don't copy
+
+        // loop check code, no need to copy
+        /*
+        this.infiniteLoopCounter = game.infiniteLoopCounter;
+        this.lastNumberOfAbilitiesOnTheStack = game.lastNumberOfAbilitiesOnTheStack;
+        this.lastPlayersLifes = game.lastPlayersLifes;
+        this.stackObjectsCheck = game.stackObjectsCheck;
+         */
     }
 
     @Override
@@ -605,7 +673,7 @@ public abstract class GameImpl implements Game {
         // copied cards removes, but delayed triggered possible from it, see https://github.com/magefree/mage/issues/5437
         // TODO: remove that workround after LKI rework, see GameState.copyCard
         if (card == null) {
-            card = (Card) state.getValue(GameState.COPIED_CARD_KEY + cardId.toString());
+            card = (Card) state.getValue(GameState.COPIED_CARD_KEY + cardId);
         }
         return card;
     }
@@ -845,7 +913,6 @@ public abstract class GameImpl implements Game {
     public void start(UUID choosingPlayerId) {
         startTime = new Date();
         if (state.getPlayers().values().iterator().hasNext()) {
-            scorePlayer = state.getPlayers().values().iterator().next();
             init(choosingPlayerId);
             play(startingPlayerId);
         }
@@ -1039,7 +1106,7 @@ public abstract class GameImpl implements Game {
                 for (Ability ability : card.getAbilities(this)) {
                     if (ability instanceof CompanionAbility) {
                         CompanionAbility companionAbility = (CompanionAbility) ability;
-                        if (companionAbility.isLegal(new HashSet<>(player.getLibrary().getCards(this)), startingSize)) {
+                        if (companionAbility.isLegal(new HashSet<>(player.getLibrary().getCards(this)), startingHandSize)) {
                             potentialCompanions.add(card);
                             break;
                         }
@@ -1123,7 +1190,7 @@ public abstract class GameImpl implements Game {
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (!gameOptions.testMode || player.getLife() == 0) {
-                player.initLife(this.getLife());
+                player.initLife(this.getStartingLife());
             }
             if (!gameOptions.testMode) {
                 player.drawCards(startingHandSize, null, this);
@@ -3128,7 +3195,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public boolean getShortLivingLKI(UUID objectId, Zone zone) {
-        Set<UUID> idSet = shortLivingLKI.get(zone);
+        Set<UUID> idSet = lkiShortLiving.get(zone);
         if (idSet != null) {
             return idSet.contains(objectId);
         }
@@ -3153,7 +3220,7 @@ public abstract class GameImpl implements Game {
             // remembers if a object was in a zone during the resolution of an effect
             // e.g. Wrath destroys all and you the question is is the replacement effect to apply because the source was also moved by the same effect
             // because it happens all at the same time the replacement effect has still to be applied
-            Set<UUID> idSet = shortLivingLKI.computeIfAbsent(zone, k -> new HashSet<>());
+            Set<UUID> idSet = lkiShortLiving.computeIfAbsent(zone, k -> new HashSet<>());
             idSet.add(objectId);
             if (object instanceof Permanent) {
                 Map<Integer, MageObject> lkiExtendedMap = lkiExtended.computeIfAbsent(objectId, k -> new HashMap<>());
@@ -3184,7 +3251,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void resetShortLivingLKI() {
-        shortLivingLKI.clear();
+        lkiShortLiving.clear();
     }
 
     @Override
@@ -3336,16 +3403,6 @@ public abstract class GameImpl implements Game {
         playerQueryEventSource.informPlayer(player.getId(), message);
     }
 
-    @Override
-    public boolean getStateCheckRequired() {
-        return stateCheckRequired;
-    }
-
-    @Override
-    public void setStateCheckRequired() {
-        stateCheckRequired = true;
-    }
-
     /**
      * If true, only self scope replacement effects are applied
      *
@@ -3420,8 +3477,8 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public int getLife() {
-        return startLife;
+    public int getStartingLife() {
+        return startingLife;
     }
 
     @Override
