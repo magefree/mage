@@ -19,6 +19,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * Auto-generated table on each release, so no need SQL-updates on structure changes.
+ *
  * @author North
  */
 @DatabaseTable(tableName = "card")
@@ -41,9 +43,9 @@ public class CardInfo {
     @DatabaseField(indexName = "lower_name_index")
     protected String lower_name;
     @DatabaseField(indexName = "setCode_cardNumber_index")
-    protected String cardNumber;
-    @DatabaseField(indexName = "setCode_cardNumber_index")
     protected String setCode;
+    @DatabaseField(indexName = "setCode_cardNumber_index")
+    protected String cardNumber;
     @DatabaseField(indexName = "className_index")
     protected String className;
     @DatabaseField
