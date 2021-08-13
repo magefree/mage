@@ -88,7 +88,8 @@ class GlamerSpinnersEffect extends OneShotEffect {
         Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         Permanent glamerSpinners = game.getPermanent(source.getSourceId());
-        if (controller != null
+        if (targetPermanent != null
+                && controller != null
                 && glamerSpinners != null) {
             boolean passed = true;
             FilterPermanent filterChoice = new FilterPermanent("a different permanent with the same controller as the target to attach the enchantments to");
