@@ -1957,22 +1957,30 @@ public class TestPlayer implements Player {
         return computerPlayer.chooseMode(modes, source, game);
     }
 
+    public boolean hasChoice(Choice choice, boolean removeSelectAnswerFromList) {
+        if (choices.isEmpty()) {
+            return false;
+        }
+        // skip choices
+        if (choices.get(0).equals(CHOICE_SKIP)) {
+            if (removeSelectAnswerFromList) {
+                choices.remove(0);
+            }
+            return true;
+        }
+        if (choice.setChoiceByAnswers(choices, removeSelectAnswerFromList)) {
+            return true;
+        }
+        // TODO: enable fail checks and fix tests
+        //Assert.fail("Wrong choice");
+        return false;
+    }
+
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         assertAliasSupportInChoices(false);
-        if (!choices.isEmpty()) {
-
-            // skip choices
-            if (choices.get(0).equals(CHOICE_SKIP)) {
-                choices.remove(0);
-                return true;
-            }
-
-            if (choice.setChoiceByAnswers(choices, true)) {
-                return true;
-            }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
+        if (hasChoice(choice, true)) {
+            return true;
         }
 
         String choicesInfo;
@@ -4329,5 +4337,13 @@ public class TestPlayer implements Player {
     @Override
     public String toString() {
         return computerPlayer.toString();
+    }
+
+    public boolean isStrictChooseMode() {
+        return strictChooseMode;
+    }
+
+    public boolean isAIRealGameSimulation() {
+        return AIRealGameSimulation;
     }
 }

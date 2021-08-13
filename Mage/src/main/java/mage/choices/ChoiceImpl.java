@@ -243,8 +243,10 @@ public class ChoiceImpl implements Choice {
             for (String needChoice : answers) {
                 for (Map.Entry<String, String> currentChoice : this.getKeyChoices().entrySet()) {
                     if (currentChoice.getKey().equals(needChoice)) {
-                        this.setChoiceByKey(needChoice, false);
-                        answers.remove(needChoice);
+                        if (removeSelectAnswerFromList) {
+                            this.setChoiceByKey(needChoice, false);
+                            answers.remove(needChoice);
+                        }
                         return true;
                     }
 
@@ -254,8 +256,10 @@ public class ChoiceImpl implements Choice {
             for (String needChoice : answers) {
                 for (Map.Entry<String, String> currentChoice : this.getKeyChoices().entrySet()) {
                     if (currentChoice.getValue().startsWith(needChoice)) {
-                        this.setChoiceByKey(currentChoice.getKey(), false);
-                        answers.remove(needChoice);
+                        if (removeSelectAnswerFromList) {
+                            this.setChoiceByKey(currentChoice.getKey(), false);
+                            answers.remove(needChoice);
+                        }
                         return true;
                     }
                 }
@@ -265,8 +269,10 @@ public class ChoiceImpl implements Choice {
             for (String needChoice : answers) {
                 for (String currentChoice : this.getChoices()) {
                     if (currentChoice.equals(needChoice)) {
-                        this.setChoice(needChoice, false);
-                        answers.remove(needChoice);
+                        if (removeSelectAnswerFromList) {
+                            this.setChoice(needChoice, false);
+                            answers.remove(needChoice);
+                        }
                         return true;
                     }
                 }

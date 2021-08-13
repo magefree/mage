@@ -1,5 +1,6 @@
 package org.mage.test.player;
 
+import mage.choices.Choice;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
@@ -29,6 +30,15 @@ public class TestComputerPlayer7 extends ComputerPlayer7 {
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
         return testPlayerLink.choose(outcome, target, sourceId, game);
+    }
+
+    @Override
+    public boolean choose(Outcome outcome, Choice choice, Game game) {
+        if (testPlayerLink.hasChoice(choice, false)
+                || (testPlayerLink.isStrictChooseMode() && !testPlayerLink.isAIRealGameSimulation())) {
+            return testPlayerLink.choose(outcome, choice, game);
+        }
+        return super.choose(outcome, choice, game);
     }
 
     @Override
