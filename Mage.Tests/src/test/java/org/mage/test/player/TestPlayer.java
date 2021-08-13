@@ -4339,11 +4339,7 @@ public class TestPlayer implements Player {
         return computerPlayer.toString();
     }
 
-    public boolean isStrictChooseMode() {
-        return strictChooseMode;
-    }
-
-    public boolean isAIRealGameSimulation() {
-        return AIRealGameSimulation;
+    public boolean mustHavePresetChoice() {
+        return strictChooseMode && !AIRealGameSimulation;
     }
 }

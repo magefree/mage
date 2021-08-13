@@ -35,7 +35,7 @@ public class TestComputerPlayerMonteCarlo extends ComputerPlayerMCTS {
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         if (testPlayerLink.hasChoice(choice, false)
-                || (testPlayerLink.isStrictChooseMode() && !testPlayerLink.isAIRealGameSimulation())) {
+                || testPlayerLink.mustHavePresetChoice()) {
             return testPlayerLink.choose(outcome, choice, game);
         }
         return super.choose(outcome, choice, game);
