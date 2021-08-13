@@ -52,19 +52,23 @@ public final class CardScanner {
         // check cards (only add mode, without updates)
         for (ExpansionSet set : Sets.getInstance().values()) {
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
-                if (CardRepository.instance.findCard(set.getCode(), setInfo.getCardNumber()) == null) {
-                    // need add
+                if (CardRepository.instance.findCard(set.getCode(), setInfo.getCardNumber(), false) == null) {
+                    // found new card
                     Card card = CardImpl.createCard(
                             setInfo.getCardClass(),
                             new CardSetInfo(setInfo.getName(), set.getCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()),
                             errorsList);
                     if (card != null) {
-                        cardsToAdd.add(new CardInfo(card)); // normal, transformed, adventure, modal double faces -- all must have single face in db
-                        if (card instanceof SplitCard) {
-                            SplitCard splitCard = (SplitCard) card;
-                            cardsToAdd.add(new CardInfo(splitCard.getLeftHalfCard()));
-                            cardsToAdd.add(new CardInfo(splitCard.getRightHalfCard()));
-                        }
+                        // Adds only main card, except night cards.
+
+                        // TODO: remove night cards from sets and db someday
+                        // Possible reasons for night cards in sets:
+                        // - direct put night card to battlefield by name in tests;
+                        // - images download;
+                        // - in old days xmage client was able to works without card classes, e.g.
+                        //   downloads unknown cards from the server as texts (images, hints and all other works fine with it)
+
+                        cardsToAdd.add(new CardInfo(card));
                     }
                 }
             }

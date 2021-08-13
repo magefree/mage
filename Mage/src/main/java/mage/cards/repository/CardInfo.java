@@ -478,4 +478,9 @@ public class CardInfo {
     public String getModalDoubleFacesSecondSideName() {
         return modalDoubleFacesSecondSideName;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s (%s, %s)", getName(), getSetCode(), getCardNumber());
+    }
 }
