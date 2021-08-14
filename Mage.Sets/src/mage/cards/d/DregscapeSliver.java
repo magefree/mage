@@ -62,7 +62,7 @@ class DregscapeSliverEffect extends ContinuousEffectImpl {
         }
         for (UUID cardId : controller.getGraveyard()) {
             Card card = game.getCard(cardId);
-            if (card == null || !card.isCreature() || !card.hasSubtype(SubType.SLIVER, game)) {
+            if (card == null || !card.isCreature(game) || !card.hasSubtype(SubType.SLIVER, game)) {
                 continue;
             }
             UnearthAbility ability = new UnearthAbility(new ManaCostsImpl("{2}"));

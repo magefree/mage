@@ -76,7 +76,7 @@ enum DreadhordeArcanistPredicate implements ObjectSourcePlayerPredicate<ObjectSo
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(input.getSourceId());
         return sourcePermanent != null
-                & input.getObject().getManaValue() <= sourcePermanent.getPower().getValue();
+                && input.getObject().getManaValue() <= sourcePermanent.getPower().getValue();
     }
 }
 

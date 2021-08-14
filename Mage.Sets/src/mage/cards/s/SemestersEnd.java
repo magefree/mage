@@ -126,10 +126,10 @@ class SemestersEndReturnEffect extends OneShotEffect {
             return false;
         }
         cards.stream().map(game::getPermanent).filter(Objects::nonNull).forEach(p -> {
-            if (p.isCreature()) {
+            if (p.isCreature(game)) {
                 p.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
             }
-            if (p.isPlaneswalker()) {
+            if (p.isPlaneswalker(game)) {
                 p.addCounters(CounterType.LOYALTY.createInstance(), source.getControllerId(), source, game);
             }
         });

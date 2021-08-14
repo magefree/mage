@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -75,7 +74,7 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
             if (zEvent.isDiesEvent()
                     && permanent.isControlledBy(this.controllerId)
                     && (targetId.equals(this.getSourceId())
-                    || (permanent.isCreature()
+                    || (permanent.isCreature(game)
                     && !(permanent instanceof PermanentToken)))) {
                 return true;
             }

@@ -26,7 +26,7 @@ public final class TurbulentDreams extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{U}");
 
         // As an additional cost to cast Turbulent Dreams, discard X cards.
-        this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS, false));
+        this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS, true));
 
         // Return X target nonland permanents to their owners' hands.
         Effect effect = new ReturnToHandTargetEffect();

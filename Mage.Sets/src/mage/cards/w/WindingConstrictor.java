@@ -74,7 +74,7 @@ class WindingConstrictorPermanentEffect extends ReplacementEffectImpl {
         }
         return permanent != null
                 && event.getAmount() > 0
-                && (permanent.isCreature() || permanent.isArtifact())
+                && (permanent.isCreature(game) || permanent.isArtifact(game))
                 && permanent.isControlledBy(source.getControllerId());
     }
 

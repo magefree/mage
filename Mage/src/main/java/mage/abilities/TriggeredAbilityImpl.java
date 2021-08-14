@@ -173,8 +173,21 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 sb.append(" This ability triggers only once each turn.");
             }
         }
+        String prefix;
+        if (abilityWord != null) {
+            prefix = abilityWord.formatWord();
+        } else if (flavorWord != null) {
+            prefix = CardUtil.italicizeWithEmDash(flavorWord);
+        } else {
+            prefix = "";
+        }
 
-        return sb.toString();
+        return prefix + getTriggerPhrase() + sb;
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "";
     }
 
     @Override
@@ -281,7 +294,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         }
         if (sourceObject == null) { // source is no permanent
             sourceObject = game.getObject(source.getSourceId());
-            if (sourceObject == null || sourceObject.isPermanent()) {
+            if (sourceObject == null || sourceObject.isPermanent(game)) {
                 return false; // No source object found => ability is not valid
             }
         }

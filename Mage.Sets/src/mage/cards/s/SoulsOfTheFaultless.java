@@ -88,8 +88,8 @@ class SoulsOfTheFaultlessTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} is dealt combat damage, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} is dealt combat damage, " ;
     }
 }
 

@@ -12,13 +12,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -39,7 +33,7 @@ public final class MyrWelder extends CardImpl {
         // Imprint - {tap}: Exile target artifact card from a graveyard
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyrWelderEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInGraveyard(new FilterArtifactCard("artifact card from a graveyard")));
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(AbilityWord.IMPRINT));
 
         // Myr Welder has all activated abilities of all cards exiled with it
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MyrWelderContinuousEffect()));

@@ -44,7 +44,7 @@ public class ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility extends Triggere
             return false;
         }
         Permanent permanent = stackAbility.getSourcePermanentOrLKI(game);
-        if (permanent == null || !permanent.isPlaneswalker()
+        if (permanent == null || !permanent.isPlaneswalker(game)
                 || !permanent.hasSubtype(planeswalkerSubType, game)) {
             return false;
         }
@@ -53,9 +53,9 @@ public class ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility extends Triggere
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         return "Whenever you activate a loyalty ability of a "
                 + planeswalkerSubType.getDescription()
-                + " planeswalker, " + super.getRule();
+                + " planeswalker, " ;
     }
 }

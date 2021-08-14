@@ -61,7 +61,7 @@ class WellLaidPlansPreventionEffect extends PreventionEffectImpl {
         Permanent attacker = game.getPermanentOrLKIBattlefield(event.getSourceId());
         Permanent damaged = game.getPermanentOrLKIBattlefield(event.getTargetId());
         if (attacker == null || damaged == null
-                || !attacker.isCreature() || !damaged.isCreature()) {
+                || !attacker.isCreature(game) || !damaged.isCreature(game)) {
             return false;
         }
         return !attacker.getColor(game).intersection(damaged.getColor(game)).isColorless();

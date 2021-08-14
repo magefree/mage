@@ -77,7 +77,7 @@ class TappedCreaturesControlledByTargetCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public TappedCreaturesControlledByTargetCount copy() {
         return new TappedCreaturesControlledByTargetCount();
     }
 

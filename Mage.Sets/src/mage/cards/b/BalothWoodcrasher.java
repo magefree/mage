@@ -26,8 +26,8 @@ public final class BalothWoodcrasher extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        LandfallAbility ability = new LandfallAbility(new BoostSourceEffect(4, 4, Duration.EndOfTurn), false);
-        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        LandfallAbility ability = new LandfallAbility(new BoostSourceEffect(4, 4, Duration.EndOfTurn).setText("{this} gets +4/+4"), false);
+        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn).setText("and gains trample until end of turn"));
         this.addAbility(ability);
     }
 

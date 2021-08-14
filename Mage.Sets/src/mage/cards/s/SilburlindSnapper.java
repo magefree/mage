@@ -72,7 +72,7 @@ class SilburlindSnapperEffect extends RestrictionEffect {
                 List<Spell> spellsCast = watcher.getSpellsCastThisTurn(source.getControllerId());
                 if (spellsCast != null) {
                     for (Spell spell : spellsCast) {
-                        if (!spell.isCreature()) {
+                        if (!spell.isCreature(game)) {
                             return false;
                         }
                     }

@@ -32,6 +32,7 @@ public enum SubType {
     // 205.3h Enchantments have their own unique set of subtypes; these subtypes are called enchantment types.
     AURA("Aura", SubTypeSet.EnchantmentType),
     CARTOUCHE("Cartouche", SubTypeSet.EnchantmentType),
+    CLASS("Class", SubTypeSet.EnchantmentType),
     CURSE("Curse", SubTypeSet.EnchantmentType),
     RUNE("Rune", SubTypeSet.EnchantmentType),
     SAGA("Saga", SubTypeSet.EnchantmentType),
@@ -173,6 +174,7 @@ public enum SubType {
     // H
     HAG("Hag", SubTypeSet.CreatureType),
     HALFLING("Halfling", SubTypeSet.CreatureType),
+    HAMSTER("Hamster", SubTypeSet.CreatureType),
     HARPY("Harpy", SubTypeSet.CreatureType),
     HELLION("Hellion", SubTypeSet.CreatureType),
     HIPPO("Hippo", SubTypeSet.CreatureType),
@@ -222,7 +224,6 @@ public enum SubType {
     LICID("Licid", SubTypeSet.CreatureType),
     LIZARD("Lizard", SubTypeSet.CreatureType),
     LOBSTER("Lobster", SubTypeSet.CreatureType, true), // Unglued
-    LOLTH("Lolth", SubTypeSet.CreatureType),
     LUKE("Luke", SubTypeSet.PlaneswalkerType, true), // Star Wars
     // M
     MANTELLIAN("Mantellian", SubTypeSet.CreatureType, true), // Star Wars
@@ -401,6 +402,7 @@ public enum SubType {
     ARLINN("Arlinn", SubTypeSet.PlaneswalkerType),
     ASHIOK("Ashiok", SubTypeSet.PlaneswalkerType),
     AURRA("Aurra", SubTypeSet.PlaneswalkerType, true), // Star Wars
+    BAHAMUT("Bahamut", SubTypeSet.PlaneswalkerType),
     BASRI("Basri", SubTypeSet.PlaneswalkerType),
     BOLAS("Bolas", SubTypeSet.PlaneswalkerType),
     CALIX("Calix", SubTypeSet.PlaneswalkerType),
@@ -419,6 +421,7 @@ public enum SubType {
     FREYALISE("Freyalise", SubTypeSet.PlaneswalkerType),
     GARRUK("Garruk", SubTypeSet.PlaneswalkerType),
     GIDEON("Gideon", SubTypeSet.PlaneswalkerType),
+    GRIST("Grist", SubTypeSet.PlaneswalkerType),
     HUATLI("Huatli", SubTypeSet.PlaneswalkerType),
     JACE("Jace", SubTypeSet.PlaneswalkerType),
     JESKA("Jeska", SubTypeSet.PlaneswalkerType),
@@ -429,6 +432,8 @@ public enum SubType {
     KOTH("Koth", SubTypeSet.PlaneswalkerType),
     LILIANA("Liliana", SubTypeSet.PlaneswalkerType),
     LUKKA("Lukka", SubTypeSet.PlaneswalkerType),
+    LOLTH("Lolth", SubTypeSet.PlaneswalkerType),
+    MORDENKAINEN("Mordenkainen", SubTypeSet.PlaneswalkerType),
     NAHIRI("Nahiri", SubTypeSet.PlaneswalkerType),
     NARSET("Narset", SubTypeSet.PlaneswalkerType),
     NIKO("Niko", SubTypeSet.PlaneswalkerType),
@@ -462,7 +467,8 @@ public enum SubType {
     XENAGOS("Xenagos", SubTypeSet.PlaneswalkerType),
     YANGGU("Yanggu", SubTypeSet.PlaneswalkerType),
     YANLING("Yanling", SubTypeSet.PlaneswalkerType),
-    YODA("Yoda", SubTypeSet.PlaneswalkerType, true);  // Star Wars
+    YODA("Yoda", SubTypeSet.PlaneswalkerType, true),  // Star Wars,
+    ZARIEL("Zariel", SubTypeSet.PlaneswalkerType);
 
     public static class SubTypePredicate implements Predicate<MageObject> {
 
@@ -542,6 +548,10 @@ public enum SubType {
         return "AEIOUaeiou".indexOf(c) != -1;
     }
 
+    public boolean isCustomSet() {
+        return customSet;
+    }
+
     public static SubType fromString(String value) {
         for (SubType st : SubType.values()) {
             if (st.toString().equals(value)) {
@@ -567,18 +577,24 @@ public enum SubType {
     }
 
     public boolean canGain(MageObject mageObject) {
+        return canGain(null, mageObject);
+    }
+
+    public boolean canGain(Game game, MageObject mageObject) {
         switch (subTypeSet) {
             case CreatureType:
-                return mageObject.isCreature() || mageObject.isTribal();
+                return mageObject.isCreature(game) || mageObject.isTribal(game);
             case BasicLandType:
             case NonBasicLandType:
-                return mageObject.isLand();
+                return mageObject.isLand(game);
             case EnchantmentType:
-                return mageObject.isEnchantment();
+                return mageObject.isEnchantment(game);
             case ArtifactType:
-                return mageObject.isArtifact();
+                return mageObject.isArtifact(game);
             case PlaneswalkerType:
-                return mageObject.isPlaneswalker();
+                return mageObject.isPlaneswalker(game);
+            case SpellType:
+                return mageObject.isInstantOrSorcery(game);
         }
         return false;
     }

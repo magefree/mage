@@ -25,7 +25,7 @@ public class DustOfMomentsTest extends CardTestPlayerBase {
     execute();
 
     // Chronozoa should have duplicated
-    final List<Permanent> activeCreatures = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE);
+    final List<Permanent> activeCreatures = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE, currentGame);
     Assert.assertEquals(2, activeCreatures.size());
 
     for (final Permanent creature : activeCreatures) {

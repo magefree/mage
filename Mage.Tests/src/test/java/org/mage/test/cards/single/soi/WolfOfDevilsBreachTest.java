@@ -25,7 +25,7 @@ public class WolfOfDevilsBreachTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1); // 2/2
 
         attack(1, playerA, "Wolf of Devil's Breach");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Bronze Sable");
         addTarget(playerA, "Grizzly Bears");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -48,7 +48,7 @@ public class WolfOfDevilsBreachTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1); // 2/2
 
         attack(1, playerA, "Wolf of Devil's Breach");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
         setChoice(playerA, "Bronze Sable");
         addTarget(playerA, "Grizzly Bears");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

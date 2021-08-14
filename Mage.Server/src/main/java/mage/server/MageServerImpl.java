@@ -200,12 +200,14 @@ public class MageServerImpl implements MageServer {
                         return null;
                     }
                     User user = _user.get();
+
                     // check if user can create another table
                     int notStartedTables = user.getNumberOfNotStartedTables();
                     if (notStartedTables > 1) {
                         user.showUserMessage("Create table", "You have already " + notStartedTables + " not started tables. You can't create another.");
                         throw new MageException("No message");
                     }
+
                     // check AI players max
                     String maxAiOpponents = managerFactory.configSettings().getMaxAiOpponents();
                     if (maxAiOpponents != null) {
@@ -221,6 +223,7 @@ public class MageServerImpl implements MageServer {
                             throw new MageException("No message");
                         }
                     }
+
                     // check if the user satisfies the quitRatio requirement.
                     int quitRatio = options.getQuitRatio();
                     if (quitRatio < user.getTourneyQuitRatio()) {
@@ -229,6 +232,7 @@ public class MageServerImpl implements MageServer {
                         user.showUserMessage("Create tournament", message);
                         throw new MageException("No message");
                     }
+
                     // check if the user satisfies the minimumRating requirement.
                     int minimumRating = options.getMinimumRating();
                     int userRating;

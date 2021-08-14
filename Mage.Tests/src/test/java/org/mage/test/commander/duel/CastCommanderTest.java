@@ -57,8 +57,8 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         assertPermanentCount(playerA, "Kestia, the Cultivator", 1);
         
         Permanent kestia = getPermanent("Kestia, the Cultivator", playerA);
-        Assert.assertNotEquals("Kestia may not be an creature", true, kestia.isCreature());        
-        Assert.assertEquals("Kestia has to be an enchantment", true, kestia.isEnchantment());        
+        Assert.assertNotEquals("Kestia may not be an creature", true, kestia.isCreature(currentGame));
+        Assert.assertEquals("Kestia has to be an enchantment", true, kestia.isEnchantment(currentGame));
         
         assertPowerToughness(playerA, "Silvercoat Lion", 6, 6);
     }     
@@ -77,7 +77,7 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 8); // Cost reduction does not work for getPlayable so you need to have 8 mana available
        
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Patron of the Orochi");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Coiled Tinviper");
 
         setStrictChooseMode(true);
@@ -112,7 +112,7 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unexpectedly Absent", "Ob Nixilis of the Black Oath");
         setChoice(playerA, "X=0");
-        setChoice(playerA, "Yes"); // Move Commander to command zone instead library?
+        setChoice(playerA, true); // Move Commander to command zone instead library?
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

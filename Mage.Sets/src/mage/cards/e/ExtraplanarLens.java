@@ -20,6 +20,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
@@ -113,7 +114,7 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent landTappedForMana = game.getPermanentOrLKIBattlefield(event.getSourceId()); // need only info about permanent
+        Permanent landTappedForMana = ((TappedForManaEvent) event).getPermanent(); // need only info about permanent
         Permanent extraplanarLens = game.getPermanent(getSourceId());
         if (extraplanarLens != null
                 && landTappedForMana != null
@@ -122,10 +123,11 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
             if (imprinted != null
                     && game.getState().getZone(imprinted.getId()) == Zone.EXILED) {
                 if (landTappedForMana.getName().equals(imprinted.getName())
-                        && landTappedForMana.isLand()) {
+                        && landTappedForMana.isLand(game)) {
                     ManaEvent mEvent = (ManaEvent) event;
                     for (Effect effect : getEffects()) {
                         effect.setValue("mana", mEvent.getMana());
+                        effect.setValue("tappedPermanent", landTappedForMana);
                     }
                     getEffects().get(0).setTargetPointer(new FixedTarget(landTappedForMana.getId()));
                     return true;
@@ -136,8 +138,8 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a land with the same name as the exiled card is tapped for mana, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a land with the same name as the exiled card is tapped for mana, " ;
     }
 
     @Override

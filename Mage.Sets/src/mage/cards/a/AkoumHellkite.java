@@ -76,7 +76,7 @@ class AkoumHellkiteTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null
-                && permanent.isLand()
+                && permanent.isLand(game)
                 && permanent.isControlledBy(getControllerId())) {
             Permanent sourcePermanent = game.getPermanent(getSourceId());
             if (sourcePermanent != null) {

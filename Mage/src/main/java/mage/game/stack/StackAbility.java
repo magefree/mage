@@ -45,7 +45,7 @@ import java.util.UUID;
  */
 public class StackAbility extends StackObjectImpl implements Ability {
 
-    private static final ArrayList<CardType> emptyCardType = new ArrayList<>();
+    private static final List<CardType> emptyCardType = new ArrayList<>();
     private static final List<String> emptyString = new ArrayList<>();
     private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
@@ -158,7 +158,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public ArrayList<CardType> getCardType() {
+    public List<CardType> getCardType(Game game) {
         return emptyCardType;
     }
 
@@ -690,6 +690,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public List<CardIcon> getIcons() {
         return this.ability.getIcons();
+    }
+
+    @Override
+    public List<CardIcon> getIcons(Game game) {
+        return this.ability.getIcons(game);
     }
 
     @Override

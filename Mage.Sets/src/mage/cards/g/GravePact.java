@@ -67,14 +67,14 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
         if (zoneChangeEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            return permanent != null && permanent.isControlledBy(this.getControllerId()) && permanent.isCreature();
+            return permanent != null && permanent.isControlledBy(this.getControllerId()) && permanent.isCreature(game);
         }
         return false;
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature you control dies, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature you control dies, " ;
     }
 }
 

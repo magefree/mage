@@ -65,7 +65,7 @@ class MindFuneralEffect extends OneShotEffect {
             int landsFound = 0;
             for (Card card : opponent.getLibrary().getCards(game)) {
                 cards.add(card);
-                if (card.isLand() && ++landsFound == 4) {
+                if (card.isLand(game) && ++landsFound == 4) {
                     break;
                 }
             }

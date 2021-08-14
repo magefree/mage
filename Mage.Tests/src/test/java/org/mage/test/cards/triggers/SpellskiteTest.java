@@ -257,7 +257,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         // B activate Spellskite, but can't change any targets cause it's already targeted
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
-        setChoice(playerB, "Yes"); // pay 2 life
+        setChoice(playerB, true); // pay 2 life
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -293,8 +293,8 @@ public class SpellskiteTest extends CardTestPlayerBase {
         addTargetAmount(playerA, "Scute Mob", 5);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
-        setChoice(playerB, "Yes"); // pay 2 life
-        setChoice(playerB, "Yes"); // retarget
+        setChoice(playerB, true); // pay 2 life
+        setChoice(playerB, true); // retarget
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -326,10 +326,10 @@ public class SpellskiteTest extends CardTestPlayerBase {
         addTargetAmount(playerA, "Pearled Unicorn", 2);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
-        setChoice(playerB, "Yes"); // pay 2 life
-        setChoice(playerB, "No"); // skip royal
-        setChoice(playerB, "No"); // skip blink
-        setChoice(playerB, "Yes"); // change pearl
+        setChoice(playerB, true); // pay 2 life
+        setChoice(playerB, false); // skip royal
+        setChoice(playerB, false); // skip blink
+        setChoice(playerB, true); // change pearl
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

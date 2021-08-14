@@ -96,7 +96,7 @@ class MetzaliTowerOfTriumphEffect extends OneShotEffect {
             List<Permanent> available = new ArrayList<>();
             for (MageObjectReference mor : attackedThisTurn) {
                 Permanent permanent = mor.getPermanent(game);
-                if (permanent != null && permanent.isCreature()) {
+                if (permanent != null && permanent.isCreature(game)) {
                     available.add(permanent);
                 }
             }

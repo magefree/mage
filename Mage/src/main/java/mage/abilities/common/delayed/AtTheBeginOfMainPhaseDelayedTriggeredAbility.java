@@ -102,22 +102,16 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder();
         switch (targetController) {
             case YOU:
-                sb.append("At the beginning of your ").append(phaseSelection.toString()).append(", ");
-                break;
+                return "At the beginning of your " + phaseSelection + ", ";
             case OPPONENT:
-                sb.append("At the beginning of an opponent's ").append(phaseSelection.toString()).append(", ");
-                break;
+                return "At the beginning of an opponent's " + phaseSelection + ", ";
             case ANY:
-                sb.append("At the beginning of the ").append(phaseSelection.toString()).append(", ");
-                break;
+                return "At the beginning of the " + phaseSelection + ", ";
             case CONTROLLER_ATTACHED_TO:
-                sb.append("At the beginning of the ").append(phaseSelection.toString()).append(" of enchanted creature's controller, ");
-                break;
+                return "At the beginning of the " + phaseSelection + " of enchanted creature's controller, ";
         }
-        sb.append(getEffects().getText(modes.getMode()));
-        return sb.toString();
+        return "";
     }
 }

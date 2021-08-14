@@ -87,13 +87,13 @@ class MagusOfTheBridgeTriggeredAbility extends TriggeredAbilityImpl {
             Permanent permanent = zEvent.getTarget();
             Player controller = game.getPlayer(getControllerId());
             return permanent != null && controller != null
-                    && permanent.isCreature() && controller.hasOpponent(permanent.getOwnerId(), game);
+                    && permanent.isCreature(game) && controller.hasOpponent(permanent.getOwnerId(), game);
         }
         return false;
     }
 
     @Override
-    public String getRule() {
-        return "When a creature is put into an opponent's graveyard from the battlefield, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When a creature is put into an opponent's graveyard from the battlefield, " ;
     }
 }

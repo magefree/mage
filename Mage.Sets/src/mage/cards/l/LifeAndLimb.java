@@ -49,8 +49,9 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
     LifeAndLimbEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "All Forests and all Saprolings are 1/1 green Saproling creatures and Forest lands in addition to their other types";
-        this.dependencyTypes.add(DependencyType.BecomeForest);
-        this.dependencyTypes.add(DependencyType.BecomeCreature);
+
+        this.dependendToTypes.add(DependencyType.BecomeForest);
+        this.dependendToTypes.add(DependencyType.BecomeCreature);
     }
 
     LifeAndLimbEffect(final LifeAndLimbEffect effect) {
@@ -69,8 +70,8 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
             for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
-                        permanent.addCardType(CardType.CREATURE);
-                        permanent.addCardType(CardType.LAND);
+                        permanent.addCardType(game, CardType.CREATURE);
+                        permanent.addCardType(game, CardType.LAND);
                         permanent.addSubType(game, SubType.SAPROLING);
                         // land abilities are intrinsic, so add them here, not in layer 6
                         permanent.addSubType(game, SubType.FOREST);

@@ -70,7 +70,7 @@ class TamanoaDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         MageObject eventSourceObject = game.getObject(event.getSourceId());
-        if (eventSourceObject != null && !eventSourceObject.isCreature()) {
+        if (eventSourceObject != null && !eventSourceObject.isCreature(game)) {
             if (isControlledBy(game.getControllerId(event.getSourceId()))) {
                 this.getEffects().forEach((effect) -> {
                     effect.setValue("damage", event.getAmount());
@@ -82,7 +82,7 @@ class TamanoaDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a noncreature source you control deals damage, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a noncreature source you control deals damage, " ;
     }
 }

@@ -119,7 +119,7 @@ class VivienChampionOfTheWildsEffect extends OneShotEffect {
         ContinuousEffect effect = new VivienChampionOfTheWildsLookEffect(player.getId());
         effect.setTargetPointer(new FixedTarget(cardToExile, game));
         game.addEffect(effect, source);
-        if (cardToExile.isCreature()) {
+        if (cardToExile.isCreature(game)) {
             effect = new VivienChampionOfTheWildsCastFromExileEffect(player.getId());
             effect.setTargetPointer(new FixedTarget(cardToExile, game));
             game.addEffect(effect, source);
@@ -202,7 +202,7 @@ class VivienChampionOfTheWildsCastFromExileEffect extends AsThoughEffectImpl {
                 && affectedControllerId.equals(authorizedPlayerId)) {
             Card card = game.getCard(objectId);
             // TODO: Allow to cast Zoetic Cavern face down
-            return card != null && !card.isLand();
+            return card != null && !card.isLand(game);
         }
         return false;
     }

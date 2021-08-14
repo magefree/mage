@@ -3,6 +3,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.AbilityWord;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -10,13 +11,13 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author North
  */
 public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
     public AllyEntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.setAbilityWord(AbilityWord.RALLY);
     }
 
     public AllyEntersBattlefieldTriggeredAbility(AllyEntersBattlefieldTriggeredAbility ability) {
@@ -37,8 +38,8 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
-    public String getRule() {
-        return "<i>Rally</i> &mdash; Whenever {this} or another Ally enters the battlefield under your control, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} or another Ally enters the battlefield under your control, ";
     }
 
     @Override

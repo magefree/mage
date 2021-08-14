@@ -43,7 +43,7 @@ public class CommanderColorChangeTest extends CardTestCommanderDuelBase {
         // When a player casts a spell or a creature attacks, exile Norin the Wary. 
         // Return it to the battlefield under its owner's control at the beginning of the next end step.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Norin the Wary");       
-        setChoice(playerA, "Yes"); //  Whenever a player casts a blue spell, you may gain 1 life. Choices: Yes - No
+        setChoice(playerA, true); //  Whenever a player casts a blue spell, you may gain 1 life. Choices: Yes - No
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -98,9 +98,9 @@ public class CommanderColorChangeTest extends CardTestCommanderDuelBase {
         // When a player casts a spell or a creature attacks, exile Norin the Wary. 
         // Return it to the battlefield under its owner's control at the beginning of the next end step.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Norin the Wary");
-        setChoice(playerA, "Yes"); //  Whenever a player casts a blue spell, you may gain 1 life. Choices: Yes - No
+        setChoice(playerA, true); //  Whenever a player casts a blue spell, you may gain 1 life. Choices: Yes - No
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Altar's Light", "Painter's Servant", "Norin the Wary");
-        setChoice(playerA, "Yes"); //  Whenever a player casts a blue spell, you may gain 1 life. Choices: Yes - No
+        setChoice(playerA, true); //  Whenever a player casts a blue spell, you may gain 1 life. Choices: Yes - No
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

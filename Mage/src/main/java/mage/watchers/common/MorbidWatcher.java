@@ -24,7 +24,7 @@ public class MorbidWatcher extends Watcher {
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).isDiesEvent()
-                && ((ZoneChangeEvent) event).getTarget().isCreature()) {
+                && ((ZoneChangeEvent) event).getTarget().isCreature(game)) {
             condition = true;
         }
     }

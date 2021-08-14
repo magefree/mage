@@ -1,12 +1,9 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -15,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -34,7 +30,9 @@ public final class GuildThief extends CardImpl {
 
         // Whenever Guild Thief deals combat damage to a player, put a +1/+1 counter on it.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1))
+                        .setText("put a +1/+1 counter on it"),
+                false
         ));
 
         // Cunning Action — {3}{U}: Guild Thief can't be blocked this turn.

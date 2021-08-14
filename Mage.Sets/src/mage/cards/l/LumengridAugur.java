@@ -73,7 +73,7 @@ class LumengridAugurEffect extends OneShotEffect {
         if (player != null) {
             player.drawCards(1, source, game);
             Card discardedCard = player.discardOne(false, false, source, game);
-            if (discardedCard != null && discardedCard.isArtifact()) {
+            if (discardedCard != null && discardedCard.isArtifact(game)) {
                 if (sourcePermanent != null) {
                     sourcePermanent.untap(game);
                 }

@@ -23,7 +23,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SaprolingToken;
@@ -93,7 +92,7 @@ class SporogenesisTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
             if (permanent != null
-                    && permanent.isCreature()
+                    && permanent.isCreature(game)
                     && permanent.getCounters(game).containsKey(CounterType.FUNGUS)) {
                 Effect effect = this.getEffects().get(0);
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
@@ -154,7 +153,7 @@ class SporogenesisRemoveCountersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE, game)) {
             permanent.removeCounters(CounterType.FUNGUS.createInstance(permanent.getCounters(game).getCount(CounterType.FUNGUS)), source, game);
         }
         return true;

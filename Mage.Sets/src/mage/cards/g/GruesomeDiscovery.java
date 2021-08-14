@@ -5,6 +5,7 @@ import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -36,6 +37,7 @@ public final class GruesomeDiscovery extends CardImpl {
                 "you choose two cards from it, then that player discards those cards"
         ));
         this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addHint(MorbidHint.instance);
     }
 
     private GruesomeDiscovery(final GruesomeDiscovery card) {

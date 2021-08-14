@@ -79,7 +79,7 @@ public class HideawayTest extends CardTestPlayerBase {
         setChoice(playerA, "Ulamog, the Ceaseless Hunger");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{G},");
-        setChoice(playerA, "Yes"); // play Ghost Quarter
+        setChoice(playerA, true); // play Ghost Quarter
 
         addTarget(playerA, "Dross Crocodile^Dross Crocodile");
 
@@ -126,7 +126,7 @@ public class HideawayTest extends CardTestPlayerBase {
         attack(3, playerA, "Auriok Champion");
 
         activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
-        setChoice(playerA, "Yes"); // play Ghost Quarter
+        setChoice(playerA, true); // play Ghost Quarter
 
         setStopAt(3, PhaseStep.END_COMBAT);
 
@@ -180,7 +180,7 @@ public class HideawayTest extends CardTestPlayerBase {
         attack(3, playerA, "Auriok Champion");
 
         activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
-        setChoice(playerA, "Yes"); // play Ghost Quarter
+        setChoice(playerA, true); // play Ghost Quarter
 
         setStopAt(3, PhaseStep.END_COMBAT);
 
@@ -214,7 +214,7 @@ public class HideawayTest extends CardTestPlayerBase {
         attack(3, playerA, "Auriok Champion");
 
         activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
-        setChoice(playerA, "Yes"); // play Ghost Quarter
+        setChoice(playerA, true); // play Ghost Quarter
 
         setStopAt(3, PhaseStep.END_COMBAT);
 
@@ -254,7 +254,7 @@ public class HideawayTest extends CardTestPlayerBase {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, sIsle);
         setChoice(playerA, ulamog);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}");
-        setChoice(playerA, "Yes"); // play Ulamog's Crusher
+        setChoice(playerA, true); // play Ulamog's Crusher
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
 
@@ -299,7 +299,7 @@ public class HideawayTest extends CardTestPlayerBase {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, sIsle);
         setChoice(playerA, ulamog);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}");
-        setChoice(playerA, "Yes"); // play Ulamog's Crusher        
+        setChoice(playerA, true); // play Ulamog's Crusher        
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();

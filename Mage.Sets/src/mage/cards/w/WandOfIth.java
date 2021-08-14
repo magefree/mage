@@ -66,7 +66,7 @@ class WandOfIthEffect extends OneShotEffect {
             if (card != null) {
                 revealed.add(card);
                 player.revealCards(sourcePermanent.getName(), revealed, game);
-                int lifeToPay = card.isLand() ? 1 : card.getManaValue();
+                int lifeToPay = card.isLand(game) ? 1 : card.getManaValue();
                 PayLifeCost cost = new PayLifeCost(lifeToPay);
                 if (cost.canPay(source, source, player.getId(), game)
                         && player.chooseUse(outcome, "Pay " + lifeToPay + " life to prevent discarding " + card.getLogName() + "?", source, game)

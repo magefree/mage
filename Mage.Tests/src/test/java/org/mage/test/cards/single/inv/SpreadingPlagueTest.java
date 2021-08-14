@@ -34,7 +34,7 @@ public class SpreadingPlagueTest extends CardTestPlayerBase {
         // play colorless creature and do not destroy anything
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Golos, Tireless Pilgrim");
         setChoice(playerA, "When {this} enters the battlefield"); // two replacement effects
-        setChoice(playerA, "No"); // no search
+        setChoice(playerA, false); // no search
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after colorless play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Golos, Tireless Pilgrim", 1);
         checkPermanentCount("after colorless play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Archaeologist", 1);

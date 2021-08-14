@@ -75,7 +75,7 @@ class GuidingSpiritEffect extends OneShotEffect {
             return false;
         }
         Card card = player.getGraveyard().getTopCard(game);
-        if (card != null && card.isCreature()) {
+        if (card != null && card.isCreature(game)) {
             player.putCardsOnTopOfLibrary(new CardsImpl(card), game, source, false);
         }
         return true;

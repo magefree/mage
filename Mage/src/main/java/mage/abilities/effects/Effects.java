@@ -110,8 +110,9 @@ public class Effects extends ArrayList<Effect> {
 
         // flavor word
         if (mode.getFlavorWord() != null) {
-            return "<i>" + mode.getFlavorWord() + "</i> &mdash; " + CardUtil.getTextWithFirstCharUpperCase(sbText.toString());
-        };
+            return CardUtil.italicizeWithEmDash(mode.getFlavorWord())
+                    + CardUtil.getTextWithFirstCharUpperCase(sbText.toString());
+        }
 
         return sbText.toString();
     }

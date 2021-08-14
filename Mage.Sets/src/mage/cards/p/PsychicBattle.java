@@ -1,10 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -22,8 +18,12 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class PsychicBattle extends CardImpl {
@@ -80,7 +80,7 @@ class PsychicBattleTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player chooses one or more targets, " + super.getRule() + " Changing targets this way doesn't trigger abilities of permanents named Psychic Battle.";
+        return "Whenever a player chooses one or more targets, each player reveals the top card of their library. The player who reveals the card with the highest mana value may change the target or targets. If two or more cards are tied for highest, the target or targets remain unchanged. Changing targets this way doesn't trigger abilities of permanents named Psychic Battle.";
     }
 }
 
@@ -88,7 +88,6 @@ class PsychicBattleEffect extends OneShotEffect {
 
     public PsychicBattleEffect() {
         super(Outcome.Benefit);
-        this.staticText = "each player reveals the top card of their library. The player who reveals the card with the highest mana value may change the target or targets. If two or more cards are tied for highest, the target or targets remain unchanged";
     }
 
     public PsychicBattleEffect(final PsychicBattleEffect effect) {

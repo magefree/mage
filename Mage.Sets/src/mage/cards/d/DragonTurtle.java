@@ -34,7 +34,7 @@ public final class DragonTurtle extends CardImpl {
 
         // Drag Below — When Dragon Turtle enters the battlefield, tap it and up to one target creature an opponent controls. They don't untap during their controllers' next untap steps.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapSourceEffect().setText(null));
-        ability.addEffect(new TapTargetEffect("it and up to one target creature an opponent controls"));
+        ability.addEffect(new TapTargetEffect("tap it and up to one target creature an opponent controls"));
         ability.addEffect(new DontUntapInControllersNextUntapStepSourceEffect().setText(null));
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect().setText("They don't untap during their controllers' next untap steps"));
         ability.addTarget(new TargetOpponentsCreaturePermanent(0, 1));

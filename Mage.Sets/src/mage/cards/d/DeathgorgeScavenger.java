@@ -71,7 +71,7 @@ class DeathgorgeScavengerEffect extends OneShotEffect {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
                 controller.moveCards(card, Zone.EXILED, source, game);
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     controller.gainLife(2, game, source);
                 } else {
                     game.addEffect(new BoostSourceEffect(1, 1, Duration.EndOfTurn), source);

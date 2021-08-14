@@ -36,7 +36,7 @@ public class UginTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Nissa, Vastwood Seer");
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Forest");
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "-2: Create a legendary 4/4 green Elemental creature token named Ashaya, the Awoken World.");
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "-2: Create Ashaya, the Awoken World, a legendary 4/4 green Elemental creature token.");
 
         attack(3, playerA, "Silvercoat Lion");
         block(3, playerB, "Ashaya, the Awoken World", "Silvercoat Lion");

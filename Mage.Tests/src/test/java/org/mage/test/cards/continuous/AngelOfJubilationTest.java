@@ -153,7 +153,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Tomb of Urami");
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{B}{B}, {T}, Sacrifice all lands you control: Create a legendary 5/5 black Demon Spirit creature token with flying named Urami.");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{B}{B}, {T}, Sacrifice all lands you control: Create Urami, a legendary 5/5 black Demon Spirit creature token with flying.");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -201,7 +201,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
-        setChoice(playerB, "Yes"); // Pay 3 life to prevent that returns to PlayerA's hand?
+        setChoice(playerB, true); // Pay 3 life to prevent that returns to PlayerA's hand?
 
         addTarget(playerA, playerB);
 

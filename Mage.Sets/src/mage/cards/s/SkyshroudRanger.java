@@ -22,6 +22,7 @@ public final class SkyshroudRanger extends CardImpl {
     public SkyshroudRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.RANGER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

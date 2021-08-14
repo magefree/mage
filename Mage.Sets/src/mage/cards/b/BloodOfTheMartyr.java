@@ -82,7 +82,7 @@ class BloodOfTheMartyrEffect extends ReplacementEffectImpl {
         DamageEvent damageEvent = (DamageEvent) event;
         return controller != null
                 && permanent != null
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && controller.chooseUse(outcome, "Have " + damageEvent.getAmount() + " damage dealt to you instead of " + permanent.getLogName() + "?", source, game);
     }
 }

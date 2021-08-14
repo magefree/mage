@@ -64,9 +64,13 @@ class SaprazzanBailiffEffect extends OneShotEffect {
         staticText = "exile all artifact and enchantment cards from all graveyards";
     }
 
+    private SaprazzanBailiffEffect(final SaprazzanBailiffEffect effect) {
+        super(effect);
+    }
+
     @Override
     public SaprazzanBailiffEffect copy() {
-        return new SaprazzanBailiffEffect();
+        return new SaprazzanBailiffEffect(this);
     }
 
     @Override
@@ -81,7 +85,7 @@ class SaprazzanBailiffEffect extends OneShotEffect {
             if (player != null) {
                 for (UUID cid : player.getGraveyard().copy()) {
                     Card card = game.getCard(cid);
-                    if (card != null && (card.isArtifact() || card.isEnchantment())) {
+                    if (card != null && (card.isArtifact(game) || card.isEnchantment(game))) {
                         controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true);
                     }
                 }

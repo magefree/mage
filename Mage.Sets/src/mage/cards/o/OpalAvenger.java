@@ -63,7 +63,7 @@ class OpalAvengerStateTriggeredAbility extends StateTriggeredAbility {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         if (getSourcePermanentIfItStillExists(game) != null) {
-            return getSourcePermanentIfItStillExists(game).isEnchantment();
+            return getSourcePermanentIfItStillExists(game).isEnchantment(game);
         }
         return false;
     }
@@ -95,8 +95,8 @@ class OpalAvengerStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When you have 10 or less life, if {this} is an enchantment, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When you have 10 or less life, if {this} is an enchantment, " ;
     }
 
 }

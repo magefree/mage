@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -13,9 +11,11 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.RollDieEvent;
+
+import java.util.UUID;
 
 /**
- *
  * @author spjspj
  */
 public final class SquirrelPoweredScheme extends CardImpl {
@@ -50,19 +50,18 @@ class SquirrelPoweredSchemeEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 2);
+        ((RollDieEvent) event).incrementModifier(2);
         return false;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ROLL_DICE;
+        return event.getType() == GameEvent.EventType.ROLL_DIE;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // ignore planar dies (dice roll amount of planar dies is equal to 0)
-        return event.getAmount() > 0 && source.isControlledBy(event.getPlayerId());
+        return source.isControlledBy(event.getPlayerId());
     }
 
     @Override

@@ -99,7 +99,7 @@ class ScholarOfTheLostTroveEffect extends OneShotEffect {
         Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
                 game, true, new ApprovingObject(source, game));
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-        if (!cardWasCast || !card.isInstantOrSorcery()) {
+        if (!cardWasCast || !card.isInstantOrSorcery(game)) {
             return true;
         }
         ContinuousEffect effect = new ScholarOfTheLostTroveReplacementEffect(card.getId());

@@ -59,7 +59,7 @@ class SharedSummonsTarget extends TargetCardInLibrary {
     @Override
     public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
         Card card = cards.get(id, game);
-        if (card == null || !card.isCreature()) {
+        if (card == null || !card.isCreature(game)) {
             return false;
         }
 

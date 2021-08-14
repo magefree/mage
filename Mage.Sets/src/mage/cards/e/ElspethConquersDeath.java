@@ -102,7 +102,7 @@ class ElspethConquersDeathCostEffect extends CostModificationEffectImpl {
                 && game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
             Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
             if (spellCard != null) {
-                return !spellCard.isCreature();
+                return !spellCard.isCreature(game);
             }
         }
         return false;

@@ -16,6 +16,7 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
 
@@ -59,12 +60,7 @@ enum BorealOutriderCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = (Spell) source.getEffects().get(0).getValue("spellCast");
-        return spell != null
-                && spell
-                .getSpellAbility()
-                .getManaCostsToPay()
-                .getUsedManaToPay()
-                .checkSnow(spell.getColor(game));
+        return spell != null && ManaPaidSourceWatcher.checkSnowColor(spell, game);
     }
 }
 

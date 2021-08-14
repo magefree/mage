@@ -70,8 +70,8 @@ public class SpelltwineTest extends CardTestPlayerBase {
         addTarget(playerA, "Impulse"); // target 1 to exile
         addTarget(playerA, "Blasphemous Act"); // target 2 to exile
 
-        setChoice(playerA, "Yes"); //  pay {3} and copy spell
-        setChoice(playerA, "Yes"); // Change targets
+        setChoice(playerA, true); //  pay {3} and copy spell
+        setChoice(playerA, true); // Change targets
         addTarget(playerA, "Night's Whisper");
         addTarget(playerA, "Divination");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

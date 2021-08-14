@@ -43,8 +43,8 @@ public class ForetellSourceControllerTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you foretell a card, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you foretell a card, " ;
     }
 
     @Override

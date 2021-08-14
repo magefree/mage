@@ -72,7 +72,7 @@ class WallOfEssenceTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent == null
-                || !permanent.isCreature()
+                || !permanent.isCreature(game)
                 || !event.getTargetId().equals(this.sourceId)
                 || !((DamagedEvent) event).isCombatDamage()) {
             return false;
@@ -82,8 +82,8 @@ class WallOfEssenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} is dealt combat damage, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} is dealt combat damage, " ;
     }
 }
 

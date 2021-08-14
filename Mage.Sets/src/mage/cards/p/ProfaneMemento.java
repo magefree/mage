@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 
 /**
@@ -61,7 +60,7 @@ class ProfaneMementoTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.isCreature() && game.getOpponents(controllerId).contains(card.getOwnerId())) {
+            if (card != null && card.isCreature(game) && game.getOpponents(controllerId).contains(card.getOwnerId())) {
                 return true;
             }
         }
@@ -69,7 +68,7 @@ class ProfaneMementoTriggeredAbility extends TriggeredAbilityImpl {
     }
     
     @Override
-    public String getRule() {
-        return "Whenever a creature card is put into an opponent's graveyard from anywhere, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature card is put into an opponent's graveyard from anywhere, " ;
     }
 }

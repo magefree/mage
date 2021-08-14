@@ -28,7 +28,7 @@ public class MulldrifterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mulldrifter");
-        setChoice(playerA, "No"); // cast regularly, not evoked
+        setChoice(playerA, false); // cast regularly, not evoked
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         
@@ -47,7 +47,7 @@ public class MulldrifterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mulldrifter");
-        setChoice(playerA, "Yes"); // only paid evoke cost
+        setChoice(playerA, true); // only paid evoke cost
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         
@@ -73,7 +73,7 @@ public class MulldrifterTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ghostly Flicker");
         addTarget(playerA, "Mulldrifter^Merfolk Looter");
-        setChoice(playerA, "No"); // do not pay evoke cost
+        setChoice(playerA, false); // do not pay evoke cost
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         

@@ -48,7 +48,7 @@ public final class LegionGuildmage extends CardImpl {
 
         // {2}{W}, {T}: Tap another target creature.
         ability = new SimpleActivatedAbility(
-                new TapTargetEffect("another target creature"),
+                new TapTargetEffect("tap another target creature"),
                 new ManaCostsImpl("{2}{W}")
         );
         ability.addCost(new TapSourceCost());

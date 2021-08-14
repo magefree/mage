@@ -1,6 +1,5 @@
 package mage.abilities.hint.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.hint.Hint;
 import mage.cards.Card;
@@ -19,6 +18,7 @@ import java.util.stream.Stream;
  * @author JayDi85
  */
 public enum CardTypesInGraveyardHint implements Hint {
+
     YOU("your graveyard"),
     ALL("all graveyards"),
     OPPONENTS("your opponents' graveyards");
@@ -35,7 +35,7 @@ public enum CardTypesInGraveyardHint implements Hint {
             return null;
         }
         List<String> types = stream
-                .map(MageObject::getCardType)
+                .map(card -> card.getCardType(game))
                 .flatMap(Collection::stream)
                 .distinct()
                 .map(CardType::toString)
@@ -43,9 +43,9 @@ public enum CardTypesInGraveyardHint implements Hint {
                 .collect(Collectors.toList());
         String message = "" + types.size();
         if (types.size() > 0) {
-            message += " (" + String.join(" , ", types) + ')';
+            message += " (" + String.join(", ", types) + ')';
         }
-        return "Card types in " + message + ": " + message;
+        return "Card types in " + this.message + ": " + message;
     }
 
     @Override

@@ -75,7 +75,7 @@ class CounterlashEffect extends OneShotEffect {
                     + "shares a card type with that spell without paying its mana cost?", source, game)) {
                 FilterCard filter = new FilterCard();
                 List<Predicate<MageObject>> types = new ArrayList<>();
-                for (CardType type : stackObject.getCardType()) {
+                for (CardType type : stackObject.getCardType(game)) {
                     if (type != CardType.LAND) {
                         types.add(type.getPredicate());
                     }

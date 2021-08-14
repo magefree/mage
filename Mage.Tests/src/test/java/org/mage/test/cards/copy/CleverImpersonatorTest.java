@@ -65,7 +65,7 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Balduvian Bears", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clever Impersonator");
-        setChoice(playerA, "Yes"); // make copy
+        setChoice(playerA, true); // make copy
         setChoice(playerA, "Liliana, Defiant Necromancer"); // copy target
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Each player discards a card");
         addTarget(playerA, "Balduvian Bears"); // discard

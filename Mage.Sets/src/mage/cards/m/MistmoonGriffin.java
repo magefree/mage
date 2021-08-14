@@ -72,7 +72,7 @@ class MistmoonGriffinEffect extends OneShotEffect {
         if (controller != null) {
             Card lastCreatureCard = null;
             for (Card card : controller.getGraveyard().getCards(game)) {
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     lastCreatureCard = card;
                 }
             }

@@ -46,7 +46,7 @@ public class DealsCombatDamageToACreatureTriggeredAbility extends TriggeredAbili
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent == null
-                || !permanent.isCreature()
+                || !permanent.isCreature(game)
                 || !event.getSourceId().equals(this.sourceId)
                 || !((DamagedEvent) event).isCombatDamage()) {
             return false;
@@ -61,8 +61,8 @@ public class DealsCombatDamageToACreatureTriggeredAbility extends TriggeredAbili
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} deals combat damage to a creature, " ;
     }
 
 }

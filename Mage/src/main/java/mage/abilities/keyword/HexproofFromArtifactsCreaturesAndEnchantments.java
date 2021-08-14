@@ -32,7 +32,7 @@ public class HexproofFromArtifactsCreaturesAndEnchantments extends HexproofBaseA
 
     @Override
     public boolean checkObject(MageObject source, Game game) {
-        return source.isArtifact() || source.isCreature() || source.isEnchantment();
+        return source.isArtifact(game) || source.isCreature(game) || source.isEnchantment(game);
     }
 
     @Override

@@ -2,12 +2,12 @@ package mage.abilities.keyword;
 
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenAttachSourceEffect;
-import mage.game.permanent.token.GermToken;
+import mage.game.permanent.token.PhyrexianGermToken;
 
 public class LivingWeaponAbility extends EntersBattlefieldTriggeredAbility {
 
     public LivingWeaponAbility() {
-        super(new CreateTokenAttachSourceEffect(new GermToken()));
+        super(new CreateTokenAttachSourceEffect(new PhyrexianGermToken()));
     }
 
     public LivingWeaponAbility(final LivingWeaponAbility ability) {

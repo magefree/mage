@@ -48,7 +48,7 @@ public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever one or more cards leave your graveyard, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever one or more cards leave your graveyard, " ;
     }
 }

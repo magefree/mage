@@ -67,7 +67,7 @@ class CreativeTechniqueEffect extends OneShotEffect {
         Card toCast = null;
         for (Card card : player.getLibrary().getCards(game)) {
             cards.add(card);
-            if (!card.isLand()) {
+            if (!card.isLand(game)) {
                 toCast = card;
                 break;
             }

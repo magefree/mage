@@ -58,7 +58,7 @@ enum MercadianAtlasCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} is attacking";
+        return "you didn't play a land this turn";
     }
 
 }

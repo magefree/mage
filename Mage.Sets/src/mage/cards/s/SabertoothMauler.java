@@ -7,6 +7,7 @@ import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -37,7 +38,7 @@ public final class SabertoothMauler extends CardImpl {
                 "if a creature died this turn, put a +1/+1 counter on {this} and untap it."
         );
         ability.addEffect(new UntapSourceEffect());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MorbidHint.instance));
     }
 
     private SabertoothMauler(final SabertoothMauler card) {

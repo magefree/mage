@@ -14,7 +14,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.watchers.common.CastFromGraveyardWatcher;
@@ -114,8 +113,8 @@ class JayaBallardReplacementEffect extends ReplacementEffectImpl {
         if (Zone.GRAVEYARD == ((ZoneChangeEvent) event).getToZone()) {
             Card card = game.getCard(event.getSourceId());
             if (card != null
-                    && (card.isInstant()
-                    || card.isSorcery())) {
+                    && (card.isInstant(game)
+                    || card.isSorcery(game))) {
                 CastFromGraveyardWatcher watcher = game.getState().getWatcher(CastFromGraveyardWatcher.class);
                 return watcher != null
                         && watcher.spellWasCastFromGraveyard(event.getTargetId(),

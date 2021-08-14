@@ -10,7 +10,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.PrismariToken;
+import mage.game.permanent.token.Elemental44Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -64,7 +64,7 @@ class ResculptEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(permanent.getControllerId());
         player.moveCards(permanent, Zone.EXILED, source, game);
-        new PrismariToken().putOntoBattlefield(1, game, source, player.getId());
+        new Elemental44Token().putOntoBattlefield(1, game, source, player.getId());
         return true;
     }
 }

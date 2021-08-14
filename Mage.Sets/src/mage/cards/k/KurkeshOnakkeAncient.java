@@ -73,7 +73,7 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (source == null || !source.isArtifact()) {
+        if (source == null || !source.isArtifact(game)) {
             return false;
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
@@ -85,7 +85,7 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you activate an ability of an artifact, if it isn't a mana ability" + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you activate an ability of an artifact, if it isn't a mana ability" ;
     }
 }

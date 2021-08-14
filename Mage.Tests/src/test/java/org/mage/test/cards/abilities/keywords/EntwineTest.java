@@ -23,7 +23,7 @@ public class EntwineTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1); // 2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
-        setChoice(playerA, "No"); // not use Entwine
+        setChoice(playerA, false); // not use Entwine
         setModeChoice(playerA, "1"); // target creature
         addTarget(playerA, "Balduvian Bears");
 
@@ -49,7 +49,7 @@ public class EntwineTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1); // 2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
-        setChoice(playerA, "Yes"); // use Entwine
+        setChoice(playerA, true); // use Entwine
         addTarget(playerA, "Balduvian Bears");
         addTarget(playerA, playerA);
 
@@ -77,7 +77,7 @@ public class EntwineTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1); // 2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
-        setChoice(playerA, "Yes"); // use Entwine
+        setChoice(playerA, true); // use Entwine
         addTarget(playerA, "Balduvian Bears");
         addTarget(playerA, playerA);
 
@@ -105,7 +105,7 @@ public class EntwineTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1); // 2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
-        setChoice(playerA, "Yes"); // use Entwine
+        setChoice(playerA, true); // use Entwine
         addTarget(playerA, "Balduvian Bears");
         addTarget(playerA, playerA);
 
@@ -134,8 +134,8 @@ public class EntwineTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1); // 2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
-        setChoice(playerA, "Yes"); // cast for free
-        setChoice(playerA, "Yes"); // use Entwine
+        setChoice(playerA, true); // cast for free
+        setChoice(playerA, true); // use Entwine
         addTarget(playerA, "Balduvian Bears");
         addTarget(playerA, playerA);
 
@@ -164,7 +164,7 @@ public class EntwineTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Tooth and Nail"); // Sorcery {5}{G}{G}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tooth and Nail");
-        setChoice(playerA, "Yes"); // Message: Pay Entwine {2} ?
+        setChoice(playerA, true); // Message: Pay Entwine {2} ?
         addTarget(playerA, "Silvercoat Lion^Pillarfield Ox");
         setChoice(playerA, "Silvercoat Lion^Pillarfield Ox");
 

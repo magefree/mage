@@ -51,7 +51,7 @@ public class LilianaTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, liliannaDM);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-3:"); // Liliana -3
         addTarget(playerA, wShepherd); // returns to battlefield and become zombie on top of other types
-        setChoice(playerA, "Yes"); // use Binding Mummy ability
+        setChoice(playerA, true); // use Binding Mummy ability
         addTarget(playerA, yOx); // tap the ox
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

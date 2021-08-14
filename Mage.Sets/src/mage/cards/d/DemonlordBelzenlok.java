@@ -76,7 +76,7 @@ class DemonlordBelzenlokEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 controller.moveCards(card, Zone.EXILED, source, game);
-                if (!card.isLand()) {
+                if (!card.isLand(game)) {
                     if (card.getManaValue() < 4) {
                         cont = false;
                     }

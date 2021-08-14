@@ -113,7 +113,7 @@ class AlrundGodOfTheCosmosEffect extends OneShotEffect {
             cards.addAll(twoCardsFromTop);
             controller.revealCards(source, cards, game);
             for (Card card : cards.getCards(game)) {
-                if (card.getCardType().toString().contains(chosenCardType)) {
+                if (card.getCardType(game).toString().contains(chosenCardType)) {
                     cardsToHand.add(card);
                 } else {
                     cardsToBottomOfLibrary.add(card);

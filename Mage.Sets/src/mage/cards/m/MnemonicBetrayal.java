@@ -88,7 +88,7 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
                 source.getSourceId(), CardUtil.getSourceLogName(game, source)
         );
         for (Card card : cards.getCards(game)) {
-            if (card.isLand()) {
+            if (card.isLand(game)) {
                 continue;
             }
             CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);

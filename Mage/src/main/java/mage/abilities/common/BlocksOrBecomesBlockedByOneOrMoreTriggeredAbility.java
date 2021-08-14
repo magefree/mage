@@ -14,7 +14,6 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- *
  * @author North, Loki
  */
 public class BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility extends TriggeredAbilityImpl {
@@ -51,23 +50,23 @@ public class BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility extends Triggered
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         for (CombatGroup group : game.getCombat().getGroups()) {
-            if (group.getAttackers().contains(sourceId)){
-                if (filter == null){
+            if (group.getAttackers().contains(sourceId)) {
+                if (filter == null) {
                     return group.getBlocked();
                 }
-                for (UUID uuid : group.getBlockers()){
+                for (UUID uuid : group.getBlockers()) {
                     Permanent permanent = game.getPermanentOrLKIBattlefield(uuid);
-                    if (filter.match(permanent, game)){
+                    if (filter.match(permanent, game)) {
                         return true;
                     }
                 }
-            } else if (group.getBlockers().contains(sourceId)){
-                if (filter == null){
+            } else if (group.getBlockers().contains(sourceId)) {
+                if (filter == null) {
                     return true;
                 }
-                for (UUID uuid : group.getAttackers()){
+                for (UUID uuid : group.getAttackers()) {
                     Permanent permanent = game.getPermanentOrLKIBattlefield(uuid);
-                    if (filter.match(permanent, game)){
+                    if (filter.match(permanent, game)) {
                         return true;
                     }
                 }
@@ -81,7 +80,12 @@ public class BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility extends Triggered
         if (rule != null) {
             return rule;
         }
-        return "Whenever {this} blocks or becomes blocked by one or more " + (filter != null ? filter.getMessage() : "creatures") + ", " + super.getRule();
+        return super.getRule();
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever {this} blocks or becomes blocked by one or more " + (filter != null ? filter.getMessage() : "creatures") + ", ";
     }
 
     @Override

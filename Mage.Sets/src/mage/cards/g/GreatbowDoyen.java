@@ -12,7 +12,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -80,7 +79,7 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
         Permanent creature = game.getPermanent(event.getSourceId());
         Permanent damagedCreature = game.getPermanent(event.getTargetId());
         if (creature != null && damagedCreature != null
-                && creature.isCreature()
+                && creature.isCreature(game)
                 && creature.hasSubtype(SubType.ARCHER, game)
                 && creature.isControlledBy(controllerId)) {
             this.getEffects().get(0).setValue("damageAmount", event.getAmount());
@@ -92,8 +91,8 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an Archer you control deals damage to a creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever an Archer you control deals damage to a creature, " ;
     }
 }
 

@@ -75,7 +75,7 @@ class LegionsLandingTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When you attack with three or more creatures, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When you attack with three or more creatures, " ;
     }
 }

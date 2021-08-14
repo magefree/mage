@@ -13,7 +13,7 @@ public class IdentityThiefTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
         attack(1, playerA, "Identity Thief");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
         execute();
@@ -28,7 +28,7 @@ public class IdentityThiefTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
         attack(1, playerA, "Identity Thief");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
         execute();

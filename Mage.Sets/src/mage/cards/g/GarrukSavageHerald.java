@@ -104,7 +104,7 @@ class GarrukSavageHeraldEffect extends OneShotEffect {
             return false;
         }
         player.revealCards(source, new CardsImpl(card), game);
-        if (card.isCreature()) {
+        if (card.isCreature(game)) {
             return player.moveCards(card, Zone.HAND, source, game);
         } else {
             return player.putCardsOnBottomOfLibrary(card, game, source, false);

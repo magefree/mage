@@ -28,7 +28,7 @@ public class KarmicJusticeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Naturalize", "Karmic Justice");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Forest");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -58,11 +58,11 @@ public class KarmicJusticeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Planar Cleansing");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Plains");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Swamp");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Mountain");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);

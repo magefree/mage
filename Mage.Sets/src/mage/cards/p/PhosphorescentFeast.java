@@ -1,15 +1,9 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -17,16 +11,15 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class PhosphorescentFeast extends CardImpl {
 
     public PhosphorescentFeast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}{G}{G}");
 
         // Chroma - Reveal any number of cards in your hand. You gain 2 life for each green mana symbol in those cards' mana costs.
         Effect effect = new PhosphorescentFeastEffect();

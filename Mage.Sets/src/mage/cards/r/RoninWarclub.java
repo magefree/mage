@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
@@ -70,7 +69,7 @@ public final class RoninWarclub extends CardImpl {
         public boolean checkTrigger(GameEvent event, Game game) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null
-                    && permanent.isCreature()
+                    && permanent.isCreature(game)
                     && permanent.isControlledBy(this.controllerId)) {
 
                 if (!this.getTargets().isEmpty()) {

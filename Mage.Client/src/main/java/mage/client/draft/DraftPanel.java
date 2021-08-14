@@ -62,9 +62,11 @@
      private List<String> setCodes;
 
      // Number of the current booster (for draft log writing).
+     // starts with 1
      private int packNo;
 
      // Number of the current card pick (for draft log writing).
+     // starts with 1
      private int pickNo;
 
      // Cached booster data to be written into the log (see logLastPick).
@@ -155,9 +157,9 @@
              this.txtPack2.setText(draftView.getSets().get(1));
              this.txtPack3.setText(draftView.getSets().get(2));
          }
-         this.chkPack1.setSelected(draftView.getBoosterNum() > 0);
-         this.chkPack2.setSelected(draftView.getBoosterNum() > 1);
-         this.chkPack3.setSelected(draftView.getBoosterNum() > 2);
+         this.chkPack1.setSelected(draftView.getBoosterNum() > 1);
+         this.chkPack2.setSelected(draftView.getBoosterNum() > 2);
+         this.chkPack3.setSelected(draftView.getBoosterNum() > 3);
          this.txtCardNo.setText(Integer.toString(draftView.getCardNum()));
 
          packNo = draftView.getBoosterNum();
@@ -169,7 +171,7 @@
          int left = draftView.getPlayers().size() - right;
          int height = left * 18;
          lblTableImage.setSize(new Dimension(lblTableImage.getWidth(), height));
-         Image tableImage = ImageHelper.getImageFromResources(draftView.getBoosterNum() == 2 ? "/draft/table_left.png" : "/draft/table_right.png");
+         Image tableImage = ImageHelper.getImageFromResources((draftView.getBoosterNum() + 1) % 2 == 1 ? "/draft/table_left.png" : "/draft/table_right.png");
          BufferedImage resizedTable = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(tableImage, BufferedImage.TYPE_INT_ARGB), lblTableImage.getWidth(), lblTableImage.getHeight());
          lblTableImage.setIcon(new ImageIcon(resizedTable));
 
@@ -414,7 +416,7 @@
          if (currentBooster != null) {
              String lastPick = getCardName(getLastPick(pickView.getPicks().values()));
              if (lastPick != null && currentBooster.length > 1) {
-                 draftLogger.logPick(getCurrentSetCode(), packNo, pickNo - 1, lastPick, currentBooster);
+                 draftLogger.logPick(getCurrentSetCode(), packNo, pickNo - 1, lastPick, currentBooster); // wtf pickno need -1?
              }
              currentBooster = null;
          }

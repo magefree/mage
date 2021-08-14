@@ -8,6 +8,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,7 +35,7 @@ public final class MorkrutBanshee extends CardImpl {
         TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
         TriggeredAbility ability = new ConditionalInterveningIfTriggeredAbility(triggeredAbility, MorbidCondition.instance, staticText);
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MorbidHint.instance));
     }
 
     private MorkrutBanshee(final MorkrutBanshee card) {

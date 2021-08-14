@@ -141,7 +141,7 @@ class TimeToFeedDiesTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "When that creature dies this turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When that creature dies this turn, " ;
     }
 }

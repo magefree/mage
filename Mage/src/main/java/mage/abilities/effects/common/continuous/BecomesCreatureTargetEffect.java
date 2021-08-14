@@ -81,8 +81,8 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                     break;
 
                 case TypeChangingEffects_4:
-                    for (CardType t : token.getCardType()) {
-                        permanent.addCardType(t);
+                    for (CardType t : token.getCardType(game)) {
+                        permanent.addCardType(game, t);
                     }
                     if (loseAllAbilities || removeSubtypes) {
                         permanent.removeAllCreatureTypes(game);
@@ -182,10 +182,13 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         sb.append(token.getDescription());
         sb.append(' ').append(duration.toString());
         if (addStillALandText) {
+            if (!sb.toString().endsWith("\" ")) {
+                sb.append(". ");
+            }
             if (target.getMaxNumberOfTargets() > 1) {
-                sb.append(". They're still lands");
+                sb.append("They're still lands");
             } else {
-                sb.append(". It's still a land");
+                sb.append("It's still a land");
             }
         }
         return sb.toString().replace(" .", ".");

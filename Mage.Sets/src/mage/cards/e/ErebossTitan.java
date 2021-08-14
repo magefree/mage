@@ -93,7 +93,7 @@ class ErebossTitanTriggeredAbility extends TriggeredAbilityImpl {
             Card card = game.getCard(zEvent.getTargetId());
             Player controller = game.getPlayer(getControllerId());
             return card != null
-                    && card.isCreature()
+                    && card.isCreature(game)
                     && controller != null
                     && controller.hasOpponent(card.getOwnerId(), game);
         }
@@ -101,7 +101,7 @@ class ErebossTitanTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature leaves an opponent's graveyard, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature leaves an opponent's graveyard, " ;
     }
 }

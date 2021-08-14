@@ -34,7 +34,7 @@ public class OverloadAbility extends SpellAbility {
         super(costs, card.getName() + " with overload");
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.addEffect(effect);
-        this.timing = (card.isSorcery() ? TimingRule.SORCERY : TimingRule.INSTANT);
+        this.timing = (card.isSorcery(null) ? TimingRule.SORCERY : TimingRule.INSTANT);
     }
 
     public OverloadAbility(final OverloadAbility ability) {

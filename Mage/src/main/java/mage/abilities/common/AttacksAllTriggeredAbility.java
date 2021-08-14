@@ -66,7 +66,7 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
                     check = true;
                 } else {
                     Permanent planeswalker = game.getPermanent(event.getTargetId());
-                    if (planeswalker != null && planeswalker.isPlaneswalker() && planeswalker.isControlledBy(getControllerId())) {
+                    if (planeswalker != null && planeswalker.isPlaneswalker(game) && planeswalker.isControlledBy(getControllerId())) {
                         check = true;
                     }
                 }
@@ -100,11 +100,11 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         return "Whenever " + (filter.getMessage().startsWith("an") ? "" : "a ")
                 + filter.getMessage() + " attacks"
                 + (attacksYouOrYourPlaneswalker ? " you or a planeswalker you control" : "")
-                + ", " + super.getRule();
+                + ", " ;
     }
 
 }

@@ -107,7 +107,7 @@ class SarkhanTheMasterlessBecomeDragonEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent != null && permanent.isPlaneswalker()) {
+            if (permanent != null && permanent.isPlaneswalker(game)) {
                 affectedObjectList.add(new MageObjectReference(permanent, game));
             }
         }
@@ -125,8 +125,8 @@ class SarkhanTheMasterlessBecomeDragonEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        permanent.getCardType().clear();
-                        permanent.addCardType(CardType.CREATURE);
+                        permanent.removeAllCardTypes(game);
+                        permanent.addCardType(game, CardType.CREATURE);
                         permanent.removeAllSubTypes(game);
                         permanent.addSubType(game, SubType.DRAGON);
                     }

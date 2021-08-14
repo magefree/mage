@@ -89,8 +89,8 @@ class FiresongAndSunspeakerTriggeredAbility extends TriggeredAbilityImpl {
         if (object instanceof Spell) {
             if (event.getTargetId().equals(this.getControllerId())
                     && object.getColor(game).contains(ObjectColor.WHITE)
-                    && (object.isInstant()
-                    || object.isSorcery())) {
+                    && (object.isInstant(game)
+                    || object.isSorcery(game))) {
                 return true;
             }
         }

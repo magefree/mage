@@ -25,7 +25,7 @@ public final class BrilliantSpectrum extends CardImpl {
         Effect effect = new DrawCardSourceControllerEffect(ColorsOfManaSpentToCastCount.getInstance());
         effect.setText("Draw X cards, where X is the number of colors of mana spent to cast this spell");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new DiscardControllerEffect(2));
+        this.getSpellAbility().addEffect(new DiscardControllerEffect(2).concatBy("Then"));
     }
 
     private BrilliantSpectrum(final BrilliantSpectrum card) {

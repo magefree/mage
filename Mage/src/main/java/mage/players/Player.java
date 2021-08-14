@@ -21,6 +21,7 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
+import mage.filter.FilterCard;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -431,6 +432,12 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId);
 
     /**
+     * Gets a random card which matches the given filter and puts it into its owner's hand
+     * Doesn't reveal the card
+     */
+    boolean seekCard(FilterCard filter, Ability source, Game game);
+
+    /**
      * Reveals all players' libraries. Useful for abilities like Jace, Architect
      * of Thought's -8 that have effects that require information from all
      * libraries.
@@ -485,7 +492,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     int rollDice(Ability source, Game game, int numSides);
 
-    int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides);
+    List<Integer> rollDice(Ability source, Game game, int numSides, int numDice);
+
+    List<Integer> rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice, boolean ignoreLowest);
+
+    int rollDieResult(int sides, Game game);
 
     PlanarDieRoll rollPlanarDie(Ability source, Game game);
 

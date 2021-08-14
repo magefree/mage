@@ -52,8 +52,8 @@ public class GainLifeFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When" + (when ? "" : "ever") + " you gain life for the first time each turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When" + (when ? "" : "ever") + " you gain life for the first time each turn, " ;
     }
 
     @Override

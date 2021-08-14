@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -59,7 +58,7 @@ class AmnesiaEffect extends OneShotEffect {
             Cards hand = player.getHand();
             player.revealCards(source, hand, game);
             Set<Card> cards = hand.getCards(game);
-            cards.removeIf(MageObject::isLand);
+            cards.removeIf(card -> card.isLand(game));
             player.discard(new CardsImpl(cards), false, source, game);
             return true;
         }

@@ -15,10 +15,10 @@ public enum EnchantmentOrEnchantedPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        if (!input.isCreature()) {
+        if (!input.isCreature(game)) {
             return false;
         }
-        if (input.isEnchantment()) {
+        if (input.isEnchantment(game)) {
             return true;
         }
         return input

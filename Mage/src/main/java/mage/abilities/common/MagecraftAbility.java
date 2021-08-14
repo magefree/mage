@@ -2,6 +2,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.AbilityWord;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -20,6 +21,7 @@ public class MagecraftAbility extends TriggeredAbilityImpl {
 
     public MagecraftAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.setAbilityWord(AbilityWord.MAGECRAFT);
     }
 
     private MagecraftAbility(final MagecraftAbility ability) {
@@ -37,7 +39,7 @@ public class MagecraftAbility extends TriggeredAbilityImpl {
         Spell spell = game.getSpell(event.getTargetId());
         if (spell == null
                 || !spell.isControlledBy(getControllerId())
-                || !spell.isInstantOrSorcery()) {
+                || !spell.isInstantOrSorcery(game)) {
             return false;
         }
         getEffects().setValue(SPELL_KEY, spell);
@@ -45,8 +47,8 @@ public class MagecraftAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "<i>Magecraft</i> &mdash; Whenever you cast or copy an instant or sorcery spell, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you cast or copy an instant or sorcery spell, ";
     }
 
     @Override

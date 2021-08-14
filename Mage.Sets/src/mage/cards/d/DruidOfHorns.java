@@ -100,7 +100,7 @@ class DruidOfHornsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you cast an Aura spell that targets {this}, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you cast an Aura spell that targets {this}, " ;
     }
 }

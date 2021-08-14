@@ -296,6 +296,8 @@ public class GameEvent implements Serializable {
         SURVEIL, SURVEILED,
         FATESEALED,
         FLIP_COIN, COIN_FLIPPED,
+        REPLACE_ROLLED_DIE,
+        ROLL_DIE, DIE_ROLLED,
         ROLL_DICE, DICE_ROLLED,
         ROLL_PLANAR_DIE, PLANAR_DIE_ROLLED,
         PLANESWALK, PLANESWALKED,
@@ -340,6 +342,7 @@ public class GameEvent implements Serializable {
          */
         BECOMES_EXERTED,
         BECOMES_RENOWNED,
+        GAINS_CLASS_LEVEL,
         /* BECOMES_MONARCH
          targetId    playerId of the player that becomes the monarch
          sourceId    id of the source object that created that effect, if no effect exist it's null
@@ -454,7 +457,9 @@ public class GameEvent implements Serializable {
          playerId    player in the dungeon
          */
         ROOM_ENTERED,
+        VENTURE, VENTURED,
         DUNGEON_COMPLETED,
+        REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
         //custom events
         CUSTOM_EVENT
     }

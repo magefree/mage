@@ -85,7 +85,7 @@ class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && spell.isInstantOrSorcery()) {
+        if (spell != null && spell.isInstantOrSorcery(game)) {
             Permanent enchantment = game.getPermanent(sourceId);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());

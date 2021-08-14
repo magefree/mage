@@ -62,7 +62,7 @@ public class SpellCostReductionForEachSourceEffect extends CostModificationEffec
             if (reduceManaCosts != null) {
                 // color reduce
                 ManaCosts<ManaCost> needReduceMana = new ManaCostsImpl<>();
-                for (int i = 0; i <= needReduceAmount; i++) {
+                for (int i = 0; i < needReduceAmount; i++) {
                     needReduceMana.add(reduceManaCosts.copy());
                 }
                 CardUtil.adjustCost((SpellAbility) abilityToModify, needReduceMana, false);

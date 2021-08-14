@@ -20,6 +20,7 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
+import mage.filter.FilterCard;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -586,6 +587,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public boolean seekCard(FilterCard filter, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
     public void lookAtAllLibraries(Ability source, Game game) {
     }
 
@@ -644,8 +650,17 @@ public class PlayerStub implements Player {
         return 1;
     }
 
+    public List<Integer> rollDice(Ability source, Game game, int numSides, int numDice) {
+        return null;
+    }
+
     @Override
-    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides) {
+    public List<Integer> rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice, boolean ignoreLowest) {
+        return null;
+    }
+
+    @Override
+    public int rollDieResult(int sides, Game game) {
         return 1;
     }
 

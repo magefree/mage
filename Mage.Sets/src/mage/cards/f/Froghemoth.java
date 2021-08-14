@@ -92,7 +92,7 @@ class FroghemothEffect extends OneShotEffect {
 
     public FroghemothEffect() {
         super(Outcome.Exile);
-        this.staticText = "exile up to that many target cards from their graveyard. Put a +1/+1 counter on {this} for each creature exiled this way. You gain 1 life for each noncreature card exiled this way";
+        this.staticText = "exile up to that many target cards from their graveyard. Put a +1/+1 counter on {this} for each creature card exiled this way. You gain 1 life for each noncreature card exiled this way";
     }
 
     private FroghemothEffect(final FroghemothEffect effect) {
@@ -116,7 +116,7 @@ class FroghemothEffect extends OneShotEffect {
         for (UUID cardId : getTargetPointer().getTargets(game, source)) {
             Card card = game.getCard(cardId);
             if (card != null && game.getState().getZone(cardId) == Zone.GRAVEYARD && cardsToExile.add(card)) {
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     numCounters++;
                 } else {
                     lifeGain++;

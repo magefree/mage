@@ -214,7 +214,7 @@ public class CloneTest extends CardTestPlayerBase {
         setChoice(playerA, "Elf");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         setChoice(playerB, "Adaptive Automaton");
         setChoice(playerB, "Goblin");
 
@@ -271,7 +271,7 @@ public class CloneTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ixidron");
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
 
         setStrictChooseMode(true);

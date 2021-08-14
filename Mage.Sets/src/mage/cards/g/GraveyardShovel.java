@@ -74,7 +74,7 @@ class GraveyardShovelEffect extends OneShotEffect {
             return true;
         }
         targetPlayer.moveCards(card, Zone.EXILED, source, game);
-        if (card.isCreature()) {
+        if (card.isCreature(game)) {
             controller.gainLife(2, game, source);
         }
         return true;

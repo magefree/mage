@@ -1,12 +1,11 @@
 package mage.abilities.dynamicvalue.common;
 
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.constants.AbilityType;
 import mage.game.Game;
-import mage.watchers.common.ManaSpentToCastWatcher;
+import mage.watchers.common.ManaPaidSourceWatcher;
 
 /**
  * @author TheElk801
@@ -17,17 +16,9 @@ public enum SnowManaSpentValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (sourceAbility.getAbilityType() == AbilityType.SPELL) {
-            return sourceAbility.getManaCostsToPay().getUsedManaToPay().getSnow();
+            return ManaPaidSourceWatcher.getSnowPaid(sourceAbility.getId(), game);
         }
-        ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
-        if (watcher == null) {
-            return 0;
-        }
-        Mana payment = watcher.getAndResetLastPayment(sourceAbility.getSourceId());
-        if (payment == null) {
-            return 0;
-        }
-        return payment.getSnow();
+        return ManaPaidSourceWatcher.getSnowPaid(sourceAbility.getSourceId(), game);
     }
 
     @Override

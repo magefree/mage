@@ -23,10 +23,7 @@ import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
-import mage.filter.Filter;
-import mage.filter.FilterMana;
-import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
+import mage.filter.*;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -83,6 +80,7 @@ public class TestPlayer implements Player {
     public static final String NO_TARGET = "NO_TARGET"; // cast spell or activate ability without target defines
     public static final String FLIPCOIN_RESULT_TRUE = "[flipcoin_true]";
     public static final String FLIPCOIN_RESULT_FALSE = "[flipcoin_false]";
+    public static final String DIE_ROLL = "[die_roll]: ";
 
     private int maxCallsWithoutAction = 400;
     private int foundNoAction = 0;
@@ -1161,7 +1159,7 @@ public class TestPlayer implements Player {
                         + c.getIdName()
                         + (c.isCopy() ? " [copy of " + c.getCopyFrom().getId().toString().substring(0, 3) + "]" : "")
                         + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
-                        + (c.isPlaneswalker() ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
+                        + (c.isPlaneswalker(game) ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
                         + ", " + (c.isTapped() ? "Tapped" : "Untapped")
                         + getPrintableAliases(", [", c.getId(), "]")
                         + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())))
@@ -1479,7 +1477,7 @@ public class TestPlayer implements Player {
         Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
 
         boolean found = false;
-        for (CardType ct : perm.getCardType()) {
+        for (CardType ct : perm.getCardType(game)) {
             if (ct.equals(type)) {
                 found = true;
                 break;
@@ -1959,25 +1957,40 @@ public class TestPlayer implements Player {
         return computerPlayer.chooseMode(modes, source, game);
     }
 
+    public boolean hasChoice(Choice choice, boolean removeSelectAnswerFromList) {
+        if (choices.isEmpty()) {
+            return false;
+        }
+        // skip choices
+        if (choices.get(0).equals(CHOICE_SKIP)) {
+            if (removeSelectAnswerFromList) {
+                choices.remove(0);
+            }
+            return true;
+        }
+        if (choice.setChoiceByAnswers(choices, removeSelectAnswerFromList)) {
+            return true;
+        }
+        // TODO: enable fail checks and fix tests
+        //Assert.fail("Wrong choice");
+        return false;
+    }
+
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         assertAliasSupportInChoices(false);
-        if (!choices.isEmpty()) {
-
-            // skip choices
-            if (choices.get(0).equals(CHOICE_SKIP)) {
-                choices.remove(0);
-                return true;
-            }
-
-            if (choice.setChoiceByAnswers(choices, true)) {
-                return true;
-            }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
+        if (hasChoice(choice, true)) {
+            return true;
         }
 
-        this.chooseStrictModeFailed("choice", game, choice.getMessage());
+        String choicesInfo;
+        if (choice.isKeyChoice()) {
+            choicesInfo = String.join("\n", choice.getKeyChoices().values());
+        } else {
+            choicesInfo = String.join("\n", choice.getChoices());
+        }
+        this.chooseStrictModeFailed("choice", game,
+                "Message: " + choice.getMessage() + "\nPossible choices:\n" + choicesInfo);
         return computerPlayer.choose(outcome, choice, game);
     }
 
@@ -3441,6 +3454,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean seekCard(FilterCard filter, Ability source, Game game) {
+        return computerPlayer.seekCard(filter, source, game);
+    }
+
+    @Override
     public void lookAtAllLibraries(Ability source, Game game) {
         computerPlayer.lookAtAllLibraries(source, game);
     }
@@ -3468,7 +3486,7 @@ public class TestPlayer implements Player {
                 return false;
             }
         }
-        this.chooseStrictModeFailed("flipcoin result", game, "Use setFlipCoinResult to setup it in unit tests");
+        this.chooseStrictModeFailed("flip coin result", game, "Use setFlipCoinResult to set it up in unit tests");
 
         // implementation from PlayerImpl:
         return RandomUtil.nextBoolean();
@@ -3480,8 +3498,29 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides) {
-        return computerPlayer.rollDice(source, game, appliedEffects, numSides);
+    public List<Integer> rollDice(Ability source, Game game, int numSides, int numDice) {
+        return computerPlayer.rollDice(source, game, numSides, numDice);
+    }
+
+    @Override
+    public List<Integer> rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice, boolean ignoreLowest) {
+        return computerPlayer.rollDice(source, game, appliedEffects, numSides, numDice, ignoreLowest);
+    }
+
+    @Override
+    public int rollDieResult(int sides, Game game) {
+        assertAliasSupportInChoices(false);
+        if (!choices.isEmpty()) {
+            String nextResult = choices.get(0);
+            if (nextResult.startsWith(DIE_ROLL)) {
+                choices.remove(0);
+                return Integer.parseInt(nextResult.substring(DIE_ROLL.length(), nextResult.length()));
+            }
+        }
+        this.chooseStrictModeFailed("die roll result", game, "Use setDieRollResult to set it up in unit tests");
+
+        // implementation from PlayerImpl:
+        return RandomUtil.nextInt(sides) + 1;
     }
 
     @Override
@@ -4298,5 +4337,9 @@ public class TestPlayer implements Player {
     @Override
     public String toString() {
         return computerPlayer.toString();
+    }
+
+    public boolean mustHavePresetChoice() {
+        return strictChooseMode && !AIRealGameSimulation;
     }
 }

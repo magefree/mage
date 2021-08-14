@@ -18,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetAmount;
 import mage.target.common.TargetCreaturePermanentAmount;
+import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
 
@@ -75,7 +76,7 @@ class BlessingOfFrostEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int snow = source.getManaCostsToPay().getUsedManaToPay().getSnow();
+        int snow = ManaPaidSourceWatcher.getSnowPaid(source.getId(), game);
         if (snow > 0) {
             TargetAmount target = new TargetCreaturePermanentAmount(snow, StaticFilters.FILTER_CONTROLLED_CREATURE);
             target.setNotTarget(true);

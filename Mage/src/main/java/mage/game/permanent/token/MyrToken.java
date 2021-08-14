@@ -4,32 +4,19 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public final class MyrToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("C14", "MM2", "NPH", "SOM", "MH1"));
-    }
-
     public MyrToken() {
-        this((String) null);
-    }
-
-    public MyrToken(String expansionSetCode) {
         super("Myr", "1/1 colorless Myr artifact creature token");
-        this.setOriginalExpansionSetCode(expansionSetCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.MYR);
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = tokenImageSets;
+        availableImageSetCodes = Arrays.asList("C13", "C14", "DST", "MBS", "MM2", "MRD", "NPH", "SOM", "MH1", "C21");
     }
 
     public MyrToken(final MyrToken token) {

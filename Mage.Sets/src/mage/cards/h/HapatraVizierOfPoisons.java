@@ -80,7 +80,7 @@ class HapatraVizierOfPoisonsTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null) {
             permanent = game.getPermanentEntering(event.getTargetId());
         }
-        return permanent != null && permanent.isCreature();
+        return permanent != null && permanent.isCreature(game);
 
     }
 
@@ -90,7 +90,7 @@ class HapatraVizierOfPoisonsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you put one or more -1/-1 counters on a creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you put one or more -1/-1 counters on a creature, " ;
     }
 }

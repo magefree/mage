@@ -16,7 +16,7 @@ public class ZursWeirdingTest extends CardTestPlayerBase {
     public void testYes() {
         addCard(Zone.BATTLEFIELD, playerA, weirding);
 
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
@@ -32,7 +32,7 @@ public class ZursWeirdingTest extends CardTestPlayerBase {
     public void testNo() {
         addCard(Zone.BATTLEFIELD, playerA, weirding);
 
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);

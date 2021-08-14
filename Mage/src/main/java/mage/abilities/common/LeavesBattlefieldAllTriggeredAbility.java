@@ -82,7 +82,7 @@ public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever " + filter.getMessage() + " leaves the battlefield, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever " + filter.getMessage() + " leaves the battlefield, " ;
     }
 }

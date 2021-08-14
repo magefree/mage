@@ -96,7 +96,7 @@ class TaigamOjutaiMasterTriggeredAbility extends DelayedTriggeredAbility {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.getFromZone() == Zone.HAND) {
                 if (spell.getCard() != null
-                        && spell.getCard().isInstantOrSorcery()) {
+                        && spell.getCard().isInstantOrSorcery(game)) {
                     for (Effect effect : getEffects()) {
                         effect.setTargetPointer(new FixedTarget(spell.getId()));
                     }
@@ -108,8 +108,8 @@ class TaigamOjutaiMasterTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you cast an instant or sorcery spell from your hand, if {this} attacked this turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you cast an instant or sorcery spell from your hand, if {this} attacked this turn, " ;
 
     }
 }

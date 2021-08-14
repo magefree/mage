@@ -46,7 +46,7 @@ class CanTapPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return input.canTap();
+        return input.canTap(game);
     }
 
     @Override

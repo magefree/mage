@@ -153,7 +153,7 @@ class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
                             exileZone.getCards(game).stream().map((card) -> {
                                 card.setFaceDown(false, game);
                                 return card;
-                            }).filter((card) -> (card.isPermanent())).forEachOrdered((card) -> {
+                            }).filter((card) -> (card.isPermanent(game))).forEachOrdered((card) -> {
                                 cardsToBringIntoPlay.add(card);
                             });
                         }

@@ -82,7 +82,7 @@ class AttachedToOpponentControlledAttackingCreaturePredicate implements ObjectPl
         if (attachement != null) {
             Permanent permanent = game.getPermanent(attachement.getAttachedTo());
             if (permanent != null) {
-                if (permanent.isCreature()) {
+                if (permanent.isCreature(game)) {
                     if (permanent.isAttacking()) {
                         if (!permanent.isControlledBy(input.getPlayerId()) &&
                                 game.getPlayer(input.getPlayerId()).hasOpponent(permanent.getControllerId(), game)) {

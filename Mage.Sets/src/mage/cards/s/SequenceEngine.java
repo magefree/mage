@@ -14,7 +14,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.QuandrixToken;
+import mage.game.permanent.token.FractalToken;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 
@@ -35,7 +35,7 @@ public final class SequenceEngine extends CardImpl {
                 new ManaCostsImpl<>("{X}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addEffect(QuandrixToken.getEffect(
+        ability.addEffect(FractalToken.getEffect(
                 ManacostVariableValue.REGULAR, "Put X +1/+1 counters on it"
         ));
         ability.setTargetAdjuster(SequenceEngineAdjuster.instance);

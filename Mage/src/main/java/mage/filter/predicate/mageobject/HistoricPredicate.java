@@ -12,7 +12,7 @@ public enum HistoricPredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        return input.isHistoric();
+        return input.isHistoric(game);
     }
 
     @Override

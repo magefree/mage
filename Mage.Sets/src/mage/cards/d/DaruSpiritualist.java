@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -68,7 +67,7 @@ class DaruSpiritualistTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent creature = game.getPermanent(event.getTargetId());
-        if (creature != null && creature.hasSubtype(SubType.CLERIC, game) && creature.getControllerId().equals(getControllerId()) && creature.isCreature()) {
+        if (creature != null && creature.hasSubtype(SubType.CLERIC, game) && creature.getControllerId().equals(getControllerId()) && creature.isCreature(game)) {
             this.getEffects().setTargetPointer(new FixedTarget(creature, game));
             return true;
         }

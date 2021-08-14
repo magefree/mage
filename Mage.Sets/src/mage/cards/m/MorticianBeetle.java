@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -62,15 +61,15 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-        if (mageObject != null && mageObject.isCreature()) {
+        if (mageObject != null && mageObject.isCreature(game)) {
             return true;
         }
         return false;
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player sacrifices a creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a player sacrifices a creature, " ;
     }
 
     @Override

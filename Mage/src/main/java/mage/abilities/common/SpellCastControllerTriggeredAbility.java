@@ -89,7 +89,12 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
         if (rule != null && !rule.isEmpty()) {
             return rule;
         }
-        return "Whenever you cast " + filter.getMessage() + ", " + super.getRule();
+        return super.getRule();
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever you cast " + filter.getMessage() + ", ";
     }
 
     @Override

@@ -66,9 +66,13 @@ class ManaCacheEffect extends OneShotEffect {
         this.staticText = "put a charge counter on {this} for each untapped land that player controls";
     }
 
+    private ManaCacheEffect(final ManaCacheEffect effect) {
+        super(effect);
+    }
+
     @Override
-    public Effect copy() {
-        return new ManaCacheEffect();
+    public ManaCacheEffect copy() {
+        return new ManaCacheEffect(this);
     }
 
     @Override

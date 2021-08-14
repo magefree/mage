@@ -12,6 +12,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -45,7 +46,7 @@ public final class TitanHunter extends CardImpl {
                         new TitanHunterEffect(), TargetController.EACH_PLAYER, false
                 ), condition, "At the beginning of each player's end step, " +
                 "if no creatures died this turn, {this} deals 4 damage to that player."
-        ));
+        ).addHint(MorbidHint.instance));
 
         // {1}{B}, Sacrifice a creature: You gain 4 life.
         Ability ability = new SimpleActivatedAbility(new GainLifeEffect(4), new ManaCostsImpl("{1}{B}"));

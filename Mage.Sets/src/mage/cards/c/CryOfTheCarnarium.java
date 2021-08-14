@@ -70,7 +70,7 @@ class CryOfTheCarnariumExileEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(watcher.getCardsPutToGraveyardFromBattlefield(game));
-        cards.removeIf(uuid -> !game.getCard(uuid).isCreature());
+        cards.removeIf(uuid -> !game.getCard(uuid).isCreature(game));
         player.moveCards(cards, Zone.EXILED, source, game);
         return true;
     }
@@ -113,7 +113,7 @@ class CryOfTheCarnariumReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.getTarget() != null
-                && zEvent.getTarget().isCreature()
+                && zEvent.getTarget().isCreature(game)
                 && zEvent.isDiesEvent();
     }
 

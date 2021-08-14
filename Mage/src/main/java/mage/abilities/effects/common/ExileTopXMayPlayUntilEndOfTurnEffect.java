@@ -3,7 +3,6 @@ package mage.abilities.effects.common;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
@@ -21,21 +20,28 @@ public class ExileTopXMayPlayUntilEndOfTurnEffect extends OneShotEffect {
 
     private final int amount;
     private final boolean showHint;
+    private final Duration duration;
 
     public ExileTopXMayPlayUntilEndOfTurnEffect(int amount) {
         this(amount, false);
     }
 
     public ExileTopXMayPlayUntilEndOfTurnEffect(int amount, boolean showHint) {
+        this(amount, showHint, Duration.EndOfTurn);
+    }
+
+    public ExileTopXMayPlayUntilEndOfTurnEffect(int amount, boolean showHint, Duration duration) {
         super(Outcome.Benefit);
         this.amount = amount;
         this.showHint = showHint;
+        this.duration = duration;
     }
 
     private ExileTopXMayPlayUntilEndOfTurnEffect(final ExileTopXMayPlayUntilEndOfTurnEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.showHint = effect.showHint;
+        this.duration = effect.duration;
     }
 
     @Override
@@ -47,21 +53,21 @@ public class ExileTopXMayPlayUntilEndOfTurnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            Set<Card> cards = controller.getLibrary().getTopCards(game, amount);
-            if (!cards.isEmpty()) {
-                controller.moveCardsToExile(cards, source, game, true, source.getSourceId(), sourceObject.getIdName());
-                // remove cards that could not be moved to exile
-                cards.removeIf(card -> !Zone.EXILED.equals(game.getState().getZone(card.getId())));
-                if (!cards.isEmpty()) {
-                    ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn);
-                    effect.setTargetPointer(new FixedTargets(cards, game));
-                    game.addEffect(effect, source);
-                }
-            }
+        if (controller == null || sourceObject == null) {
+            return false;
+        }
+        Set<Card> cards = controller.getLibrary().getTopCards(game, amount);
+        if (cards.isEmpty()) {
             return true;
         }
-        return false;
+        controller.moveCardsToExile(cards, source, game, true, source.getSourceId(), sourceObject.getIdName());
+        // remove cards that could not be moved to exile
+        cards.removeIf(card -> !Zone.EXILED.equals(game.getState().getZone(card.getId())));
+        if (!cards.isEmpty()) {
+            game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, duration)
+                    .setTargetPointer(new FixedTargets(cards, game)), source);
+        }
+        return true;
     }
 
     @Override
@@ -71,11 +77,15 @@ public class ExileTopXMayPlayUntilEndOfTurnEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder();
         if (amount == 1) {
-            sb.append("exile the top card of your library. You may play that card this turn");
+            sb.append("exile the top card of your library. ");
+            sb.append(CardUtil.getTextWithFirstCharUpperCase(duration.toString()));
+            sb.append(", you may play that card");
         } else {
             sb.append("exile the top ");
             sb.append(CardUtil.numberToText(amount));
-            sb.append(" cards of your library. Until end of turn, you may play cards exiled this way");
+            sb.append(" cards of your library. ");
+            sb.append(CardUtil.getTextWithFirstCharUpperCase(duration.toString()));
+            sb.append(", you may play cards exiled this way");
         }
         if (showHint) {
             sb.append(". <i>(You still pay its costs. You can play a land this way only if you have an available land play remaining.)</i>");

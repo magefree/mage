@@ -30,11 +30,7 @@ public class AtTheEndOfCombatDelayedTriggeredAbility extends DelayedTriggeredAbi
     }
 
     @Override
-    public String getRule() {
-        String ruleText = modes.getText();
-        if (ruleText.contains("at end of combat")) {
-            return ruleText;
-        }
-        return "At end of combat, " + ruleText;
+    public String getTriggerPhrase() {
+        return "At end of combat, ";
     }
 }

@@ -10,7 +10,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.PrismariToken;
+import mage.game.permanent.token.Elemental44Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
@@ -74,7 +74,7 @@ class MultipleChoiceEffect extends OneShotEffect {
             controller.drawCards(1, source, game);
         }
         if (xValue == 3 || xValue >= 4) {
-            new PrismariToken().putOntoBattlefield(1, game, source, source.getControllerId());
+            new Elemental44Token().putOntoBattlefield(1, game, source, source.getControllerId());
         }
         if (xValue != 2 && xValue < 4) {
             return true;

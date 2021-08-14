@@ -96,7 +96,7 @@ public final class DeathMaskDuplicant extends CardImpl {
                     if (exileId != null) {
                         for (UUID cardId : game.getState().getExile().getExileZone(exileId)) {
                             Card card = game.getCard(cardId);
-                            if (card != null && card.isCreature()) {
+                            if (card != null && card.isCreature(game)) {
                                 for (Ability ability : card.getAbilities(game)) {
                                     if (ability instanceof MageSingleton) {
                                         if (ability instanceof FlyingAbility

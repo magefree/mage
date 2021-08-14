@@ -23,7 +23,7 @@ public class ThrummingStoneTest extends CardTestPlayerBase {
     addCard(Zone.LIBRARY, playerA, "Swamp", 3);
 
     castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shadowborn Apostle");
-    setChoice(playerA, "Yes");
+    setChoice(playerA, true);
 
     setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
     execute();
@@ -48,7 +48,7 @@ public class ThrummingStoneTest extends CardTestPlayerBase {
     skipInitShuffling();
 
     castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shadowborn Apostle");
-    setChoice(playerA, "Yes");
+    setChoice(playerA, true);
 
     setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
     execute();

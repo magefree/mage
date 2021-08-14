@@ -70,7 +70,7 @@ class GenerousPatronTriggeredAbility extends TriggeredAbilityImpl {
             permanent = game.getPermanentEntering(event.getTargetId());
         }
         return permanent != null
-                && permanent.isCreature()
+                && permanent.isCreature(game)
                 && !permanent.isControlledBy(getControllerId());
     }
 
@@ -80,7 +80,7 @@ class GenerousPatronTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you put one or more counters on a creature you don't control, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you put one or more counters on a creature you don't control, " ;
     }
 }

@@ -13,8 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import static mage.constants.Layer.PTChangingEffects_7;
-import static mage.constants.Layer.TypeChangingEffects_4;
 import mage.constants.Outcome;
 import mage.constants.SagaChapter;
 import mage.constants.SubLayer;
@@ -92,11 +90,11 @@ class TheAntiquitiesWarEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            if (!permanent.isArtifact()) {
-                                permanent.addCardType(CardType.ARTIFACT);
+                            if (!permanent.isArtifact(game)) {
+                                permanent.addCardType(game, CardType.ARTIFACT);
                             }
-                            if (!permanent.isCreature()) {
-                                permanent.addCardType(CardType.CREATURE);
+                            if (!permanent.isCreature(game)) {
+                                permanent.addCardType(game, CardType.CREATURE);
                             }
                         }
                         break;

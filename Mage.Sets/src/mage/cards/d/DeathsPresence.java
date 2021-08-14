@@ -12,7 +12,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -66,7 +65,7 @@ class DeathsPresenceTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
         if (zoneChangeEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null && permanent.isControlledBy(this.getControllerId()) && permanent.isCreature()) {
+            if (permanent != null && permanent.isControlledBy(this.getControllerId()) && permanent.isCreature(game)) {
                 this.getTargets().clear();
                 this.addTarget(new TargetControlledCreaturePermanent());
                 this.getEffects().clear();

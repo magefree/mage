@@ -65,9 +65,9 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
     }
 
     @Override
-    public String getRule() {
+    public String getTriggerPhrase() {
         return "Whenever " + filter.getMessage() + " is put into " + (onlyToControllerGraveyard ? "your" : "a")
-                + " graveyard from the battlefield, " + super.getRule();
+                + " graveyard from the battlefield, " ;
     }
 
     @Override

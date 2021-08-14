@@ -11,7 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
-import mage.game.permanent.token.PrismariToken;
+import mage.game.permanent.token.Elemental44Token;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -70,19 +70,25 @@ class ZaffaiThunderConductorEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
+
         player.scry(1, source, game);
         Spell spell = (Spell) getValue(MagecraftAbility.SPELL_KEY);
         if (spell == null || spell.getManaValue() < 5) {
-            return false;
+            return true;
         }
-        new PrismariToken().putOntoBattlefield(1, game, source, source.getControllerId());
+
+        new Elemental44Token().putOntoBattlefield(1, game, source, source.getControllerId());
         if (spell.getManaValue() < 10) {
             return true;
         }
+
         TargetOpponent target = new TargetOpponent(true);
-        player.chooseTarget(outcome, target, source, game);
+        target.setRandom(true);
+        target.chooseTarget(Outcome.Damage, player.getId(), source, game);
         Player opponent = game.getPlayer(target.getFirstTarget());
-        opponent.damage(10, source.getSourceId(), source, game);
+        if (opponent != null) {
+            opponent.damage(10, source.getSourceId(), source, game);
+        }
         return true;
     }
 }

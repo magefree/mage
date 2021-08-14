@@ -9,6 +9,7 @@ Seventh Edition|7ED|
 Eighth Edition|8ED|
 Ninth Edition|9ED|
 Adventures in the Forgotten Realms|AFR|
+Forgotten Realms Commander|AFC|
 Aether Revolt|AER|
 Amonkhet|AKH|
 Shards of Alara|ALA|
@@ -114,10 +115,12 @@ Iconic Masters|IMA|
 Ikoria: Lair of Behemoths|IKO|
 Invasion|INV|
 Innistrad|ISD|
+Innistrad: Midnight Hunt|MID|
 Journey into Nyx|JOU|
 Judge Promo|JR|
 Judgment|JUD|
 Jumpstart|JMP|
+Jumpstart: Historic Horizons|J21|
 Kaladesh|KLD|
 Kaldheim|KHM|
 Kaldheim Commander|KHC|

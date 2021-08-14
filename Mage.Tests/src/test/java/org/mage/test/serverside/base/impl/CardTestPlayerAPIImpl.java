@@ -16,19 +16,19 @@ import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.game.ExileZone;
-import mage.game.Game;
-import mage.game.GameException;
-import mage.game.GameOptions;
+import mage.game.*;
 import mage.game.command.CommandObject;
+import mage.game.match.MatchOptions;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.player.ai.ComputerPlayer7;
 import mage.player.ai.ComputerPlayerMCTS;
 import mage.players.ManaPool;
 import mage.players.Player;
+import mage.server.game.GameSessionPlayer;
 import mage.server.util.SystemUtil;
 import mage.util.CardUtil;
+import mage.view.GameView;
 import org.junit.Assert;
 import org.junit.Before;
 import org.mage.test.player.PlayerAction;
@@ -216,6 +216,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             currentGame = null;
         }
 
+        // prepare fake match (needs for testing some client-server code)
+        // always 4 seats
+        MatchOptions matchOptions = new MatchOptions("test match", "test game type", true, 4);
+        currentMatch = new FreeForAllMatch(matchOptions);
         currentGame = createNewGameAndPlayers();
 
         activePlayer = playerA;
@@ -267,6 +271,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         game.loadCards(deck.getCards(), player.getId());
         game.loadCards(deck.getSideboard(), player.getId());
         game.addPlayer(player, deck);
+        currentMatch.addPlayer(player, deck); // fake match
 
         return player;
     }
@@ -687,7 +692,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 CardInfo cardInfo = CardRepository.instance.findCard(cardName);
                 Card card = cardInfo != null ? cardInfo.getCard() : null;
                 if (card == null) {
-                    throw new AssertionError("Couldn't find a card: " + cardName);
+                    throw new AssertionError("Couldn't find a card in db: " + cardName);
                 }
                 cards.add(card);
 
@@ -1114,7 +1119,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
 
         Assert.assertTrue("(Battlefield) card type " + (mustHave ? "not " : "")
-                + "found (" + cardName + ':' + type + ')', (found.getCardType().contains(type) == mustHave));
+                + "found (" + cardName + ':' + type + ')', (found.getCardType(currentGame).contains(type) == mustHave));
 
     }
 
@@ -1128,7 +1133,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertType(String cardName, CardType type, SubType subType) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
         Permanent found = getPermanent(cardName);
-        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
+        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', found.getCardType(currentGame).contains(type));
         if (subType != null) {
             Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ':' + subType.getDescription() + ')', found.hasSubtype(subType, currentGame));
         }
@@ -1143,7 +1148,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertNotType(String cardName, CardType type) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
         Permanent found = getPermanent(cardName);
-        Assert.assertFalse("(Battlefield) card type found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
+        Assert.assertFalse("(Battlefield) card type found (" + cardName + ':' + type + ')', found.getCardType(currentGame).contains(type));
     }
 
     /**
@@ -1201,9 +1206,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
 
         if (mustHave) {
-            Assert.assertEquals("must contain colors [" + searchColors.toString() + "] but found only [" + cardColor.toString() + "]", 0, colorsDontHave.size());
+            Assert.assertEquals("must contain colors [" + searchColors + "] but found only [" + cardColor.toString() + "]", 0, colorsDontHave.size());
         } else {
-            Assert.assertEquals("must not contain colors [" + searchColors.toString() + "] but found [" + cardColor.toString() + "]", 0, colorsHave.size());
+            Assert.assertEquals("must not contain colors [" + searchColors + "] but found [" + cardColor.toString() + "]", 0, colorsHave.size());
         }
     }
 
@@ -1358,13 +1363,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert card subtype in exile.
      *
      * @param cardName Name of the card.
-     * @param subType    Expected subtype.
+     * @param subType  Expected subtype.
      */
     public void assertExiledCardSubtype(String cardName, SubType subType) throws AssertionError {
         boolean found = false;
         for (ExileZone exile : currentGame.getExile().getExileZones()) {
             for (Card card : exile.getCards(currentGame)) {
-                if(CardUtil.haveSameNames(card.getName(), cardName, true) && card.hasSubtype(subType, currentGame)){
+                if (CardUtil.haveSameNames(card.getName(), cardName, true) && card.hasSubtype(subType, currentGame)) {
                     found = true;
                 }
             }
@@ -1907,7 +1912,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * For use choices set "Yes" or "No" the the choice string.<br>
+     * For use choices set "Yes" or "No" the the choice string or use boolean.<br>
      * For X values set "X=[xValue]" example: for X=3 set choice string to
      * "X=3".<br>
      * For ColorChoice use "Red", "Green", "Blue", "Black" or "White"<br>
@@ -1917,6 +1922,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player
      * @param choice
      */
+    public void setChoice(TestPlayer player, boolean choice) {
+        setChoice(player, choice, 1);
+    }
+
+    public void setChoice(TestPlayer player, boolean choice, int timesToChoose) {
+        setChoice(player, choice ? "Yes" : "No", timesToChoose);
+    }
+
     public void setChoice(TestPlayer player, String choice) {
         setChoice(player, choice, 1);
     }
@@ -1929,7 +1942,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     /**
      * Setup amount choices.
-     *
+     * <p>
      * Multi amount choices uses WUBRG order (so use 1,2,3,4,5 values list)
      *
      * @param player
@@ -1964,6 +1977,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void setFlipCoinResult(TestPlayer player, boolean result) {
         player.addChoice(result ? TestPlayer.FLIPCOIN_RESULT_TRUE : TestPlayer.FLIPCOIN_RESULT_FALSE);
+    }
+
+    public void setDieRollResult(TestPlayer player, int result) {
+        player.addChoice(TestPlayer.DIE_ROLL + result);
     }
 
     /**
@@ -2096,24 +2113,28 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
 
-    public void assertWonTheGame(Player player){
+    public void assertWonTheGame(Player player) {
 
         Assert.assertTrue(player.getName() + " has not won the game.", player.hasWon());
     }
 
-    public void assertHasNotWonTheGame(Player player){
+    public void assertHasNotWonTheGame(Player player) {
 
         Assert.assertFalse(player.getName() + " has won the game.", player.hasWon());
     }
 
-    public void assertLostTheGame(Player player){
+    public void assertLostTheGame(Player player) {
 
         Assert.assertTrue(player.getName() + " has not lost the game.", player.hasLost());
     }
 
-    public void assertHasNotLostTheGame(Player player){
+    public void assertHasNotLostTheGame(Player player) {
 
         Assert.assertFalse(player.getName() + " has lost the game.", player.hasLost());
     }
 
+    public GameView getGameView(Player player) {
+        // prepare client-server data for tests
+        return GameSessionPlayer.prepareGameView(currentGame, player.getId(), null);
+    }
 }

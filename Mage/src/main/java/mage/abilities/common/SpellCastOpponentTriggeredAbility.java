@@ -81,8 +81,8 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever an opponent casts " + filter.getMessage() + ", " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever an opponent casts " + filter.getMessage() + ", " ;
     }
 
     @Override

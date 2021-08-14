@@ -73,6 +73,6 @@ class DeathFrenzyDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Whenever a creature dies this turn, " + modes.getText();
+        return "Whenever a creature dies this turn, you gain 1 life.";
     }
 }

@@ -5,10 +5,10 @@ import java.util.UUID;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.watchers.common.MorbidWatcher;
 
 /**
  *
@@ -21,8 +21,8 @@ public final class LifeGoesOn extends CardImpl {
         
 
         // You gain 4 life. If a creature died this turn, you gain 8 life instead.
-        getSpellAbility().addWatcher(new MorbidWatcher());
         getSpellAbility().addEffect(new ConditionalOneShotEffect(new GainLifeEffect(8), new GainLifeEffect(4), MorbidCondition.instance, "You gain 4 life. If a creature died this turn, you gain 8 life instead"));
+        this.getSpellAbility().addHint(MorbidHint.instance);
     }
 
     private LifeGoesOn(final LifeGoesOn card) {

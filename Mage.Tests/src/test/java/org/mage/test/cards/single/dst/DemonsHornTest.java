@@ -24,7 +24,7 @@ public class DemonsHornTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Demon's Horn", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Abyssal Gatekeeper");
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

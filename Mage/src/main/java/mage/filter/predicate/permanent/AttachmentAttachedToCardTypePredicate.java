@@ -17,7 +17,7 @@ public class AttachmentAttachedToCardTypePredicate implements Predicate<Permanen
     public boolean apply(Permanent input, Game game) {
         if (input.getAttachedTo() != null) {
             Permanent attachedTo = game.getPermanent(input.getAttachedTo());
-            if (attachedTo != null && attachedTo.getCardType().contains(cardType)) {
+            if (attachedTo != null && attachedTo.getCardType(game).contains(cardType)) {
                 return true;
             }
         }

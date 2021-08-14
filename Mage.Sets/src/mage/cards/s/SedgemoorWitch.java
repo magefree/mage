@@ -10,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.WitherbloomToken;
+import mage.game.permanent.token.Pest11GainLifeToken;
 
 import java.util.UUID;
 
@@ -34,7 +34,7 @@ public final class SedgemoorWitch extends CardImpl {
         this.addAbility(new WardAbility(new PayLifeCost(3)));
 
         // Magecraft — Whenever you cast or copy an instant or sorcery spell, create a 1/1 black and green Pest creature token with "Whenever this creature dies, you gain 1 life."
-        this.addAbility(new MagecraftAbility(new CreateTokenEffect(new WitherbloomToken())));
+        this.addAbility(new MagecraftAbility(new CreateTokenEffect(new Pest11GainLifeToken())));
     }
 
     private SedgemoorWitch(final SedgemoorWitch card) {

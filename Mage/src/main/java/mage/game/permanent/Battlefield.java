@@ -223,13 +223,14 @@ public class Battlefield implements Serializable {
      * {@link CardType}. This method ignores the range of influence.
      *
      * @param type
+     * @param game
      * @return a list of {@link Permanent}
      * @see Permanent
      */
-    public List<Permanent> getAllActivePermanents(CardType type) {
+    public List<Permanent> getAllActivePermanents(CardType type, Game game) {
         return field.values()
                 .stream()
-                .filter(perm -> perm.isPhasedIn() && perm.getCardType().contains(type))
+                .filter(perm -> perm.isPhasedIn() && perm.getCardType(game).contains(type))
                 .collect(Collectors.toList());
     }
 

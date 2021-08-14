@@ -26,7 +26,7 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Relic of Progenitus");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glint Hawk");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Relic of Progenitus");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -53,7 +53,7 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Relic of Progenitus");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glint Hawk");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -78,7 +78,7 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Glint Hawk");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glint Hawk");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -102,7 +102,7 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Moat");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Familiar");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Moat");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -130,7 +130,7 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Propaganda");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Familiar");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Propaganda");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -156,7 +156,7 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Drake Familiar");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Familiar");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -180,7 +180,7 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Propaganda");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Familiar");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

@@ -76,7 +76,7 @@ enum PistonFistCyclopsCondition implements Condition {
         }
         for (Spell spell : spells) {
             if (!spell.getSourceId().equals(source.getSourceId())
-                    && spell.isInstantOrSorcery()) {
+                    && spell.isInstantOrSorcery(game)) {
                 return true;
             }
         }

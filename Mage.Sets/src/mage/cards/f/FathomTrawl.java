@@ -63,7 +63,7 @@ public final class FathomTrawl extends CardImpl {
             for (Card card : controller.getLibrary().getCards(game)) {
                 if (card != null) {
                     cards.add(card);
-                    if (!card.isLand()) {
+                    if (!card.isLand(game)) {
                         nonlandCards.add(card);
                         if (nonlandCards.size() == 3) {
                             break;

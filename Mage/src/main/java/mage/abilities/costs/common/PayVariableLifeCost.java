@@ -3,11 +3,11 @@ package mage.abilities.costs.common;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class PayVariableLifeCost extends VariableCostImpl {
@@ -16,9 +16,10 @@ public class PayVariableLifeCost extends VariableCostImpl {
         this(false);
     }
 
-    public PayVariableLifeCost(boolean additionalCostText) {
-        super("life to pay");
-        this.text = new StringBuilder(additionalCostText ? "as an additional cost to cast this spell, pay " : "Pay ")
+    public PayVariableLifeCost(boolean useAsAdditionalCost) {
+        super(useAsAdditionalCost ? VariableCostType.ADDITIONAL : VariableCostType.NORMAL,
+                "life to pay");
+        this.text = new StringBuilder(useAsAdditionalCost ? "as an additional cost to cast this spell, pay " : "Pay ")
                 .append(xText).append(' ').append("life").toString();
     }
 

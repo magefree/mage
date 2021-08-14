@@ -159,7 +159,7 @@ class TombstoneStairwellTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of each end step or when {this} leaves the battlefield, " + modes.getText();
+        return "At the beginning of each end step or when {this} leaves the battlefield, destroy all tokens created with {this}. They can't be regenerated.";
     }
 }
 
@@ -169,7 +169,6 @@ class TombstoneStairwellDestroyEffect extends OneShotEffect {
 
     TombstoneStairwellDestroyEffect() {
         super(Outcome.Benefit);
-        this.staticText = "destroy all tokens created with {this}. They can't be regenerated";
     }
 
     TombstoneStairwellDestroyEffect(final TombstoneStairwellDestroyEffect effect) {

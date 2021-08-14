@@ -34,7 +34,7 @@ public enum EquippedSourceCondition implements Condition {
 
     @Override
     public String toString() {
-        return "equipped";
+        return "{this} is equipped";
     }
 
 }

@@ -27,7 +27,7 @@ public final class UnholyHunger extends CardImpl {
         
         // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, you gain 2 life.
         Effect effect = new ConditionalOneShotEffect(new GainLifeEffect(2),
-                SpellMasteryCondition.instance, "<i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, you gain 2 life");
+                SpellMasteryCondition.instance, "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, you gain 2 life");
         this.getSpellAbility().addEffect(effect);
     }
 

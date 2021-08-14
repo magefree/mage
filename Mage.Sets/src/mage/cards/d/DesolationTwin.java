@@ -69,7 +69,7 @@ class DesolationTwinOnCastAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When you cast this spell, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When you cast this spell, " ;
     }
 }

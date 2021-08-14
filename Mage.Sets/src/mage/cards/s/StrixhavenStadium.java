@@ -83,7 +83,7 @@ class StrixhavenStadiumTriggeredAbility extends TriggeredAbilityImpl {
         return isControlledBy(damageEvent.getTargetId())
                 && damageEvent.isCombatDamage()
                 && sourcePermanent != null
-                && sourcePermanent.isCreature();
+                && sourcePermanent.isCreature(game);
     }
 
     @Override

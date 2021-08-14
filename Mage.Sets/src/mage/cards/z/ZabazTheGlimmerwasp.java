@@ -101,7 +101,7 @@ class ZabazTheGlimmerwaspEffect extends ReplacementEffectImpl {
         }
         return permanent != null
                 && permanent.isControlledBy(source.getControllerId())
-                && permanent.isCreature();
+                && permanent.isCreature(game);
     }
 
     @Override

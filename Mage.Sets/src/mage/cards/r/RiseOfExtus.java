@@ -2,6 +2,7 @@ package mage.cards.r;
 
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.LearnEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,6 +30,7 @@ public final class RiseOfExtus extends CardImpl {
 
         // Learn.
         this.getSpellAbility().addEffect(new LearnEffect().concatBy("<br>"));
+        this.getSpellAbility().addHint(OpenSideboardHint.instance);
     }
 
     private RiseOfExtus(final RiseOfExtus card) {

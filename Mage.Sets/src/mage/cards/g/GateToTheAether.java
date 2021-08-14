@@ -62,10 +62,10 @@ class GateToTheAetherEffect extends OneShotEffect {
             Card card = activePlayer.getLibrary().getFromTop(game);
             if (card != null) {
                 activePlayer.revealCards("Gate to the Aether", new CardsImpl(card), game);
-                if (card.isArtifact()
-                        || card.isCreature()
-                        || card.isEnchantment()
-                        || card.isLand()) {
+                if (card.isArtifact(game)
+                        || card.isCreature(game)
+                        || card.isEnchantment(game)
+                        || card.isLand(game)) {
                     if (activePlayer.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield?", source, game)) {
                         activePlayer.moveCards(card, Zone.BATTLEFIELD, source, game);
                     }

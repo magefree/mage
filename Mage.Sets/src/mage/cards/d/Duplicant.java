@@ -125,7 +125,7 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
             return false;
         }
         Card card = game.getCard(imprinted.get(imprinted.size() - 1));
-        if (card == null || !card.isCreature()) {
+        if (card == null || !card.isCreature(game)) {
             return false;
         }
         switch (layer) {

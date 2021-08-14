@@ -1,4 +1,5 @@
 Adventures in the Forgotten Realms|AdventuresInTheForgottenRealms|
+Forgotten Realms Commander|ForgottenRealmsCommander|
 Aether Revolt|AetherRevolt|
 Alara Reborn|AlaraReborn|
 Alliances|Alliances|
@@ -112,12 +113,14 @@ Ice Age|IceAge|
 IconicMasters|IconicMasters|
 Ikoria: Lair of Behemoths|IkoriaLairOfBehemoths|
 Innistrad|Innistrad|
+Innistrad: Midnight Hunt|InnistradMidnightHunt|
 Invasion|Invasion|
 Ixalan|Ixalan|
 Journey into Nyx|JourneyIntoNyx|
 Judge Promo|JudgePromo|
 Judgment|Judgment|
 Jumpstart|Jumpstart|
+Jumpstart: Historic Horizons|JumpstartHistoricHorizons|
 Kaladesh|Kaladesh|
 Kaldheim|Kaldheim|
 Kaldheim Commander|KaldheimCommander|

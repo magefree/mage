@@ -131,7 +131,7 @@ class MysticReflectionReplacementEffect extends ReplacementEffectImpl {
         Permanent targetedPermanent = (Permanent) game.getState().getValue("MysticReflection" + identifier);
         return permanentEnteringTheBattlefield != null
                 && targetedPermanent != null
-                && permanentEnteringTheBattlefield.isCreature();
+                && permanentEnteringTheBattlefield.isCreature(game);
     }
 
     @Override
@@ -174,7 +174,7 @@ class MysticReflectionWatcher extends Watcher {
                 .map(MageItem::getId)
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .anyMatch(p -> p.isPlaneswalker() || p.isCreature())) {
+                .anyMatch(p -> p.isPlaneswalker(game) || p.isCreature(game))) {
             enteredThisTurn++;
         }
     }

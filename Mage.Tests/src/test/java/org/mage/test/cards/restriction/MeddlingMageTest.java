@@ -49,14 +49,14 @@ public class MeddlingMageTest extends CardTestPlayerBase {
         setChoice(playerA, "Lightning Bolt"); // name a spell that can't be cast
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
-        setChoice(playerA, "Yes"); // use imprint
+        setChoice(playerA, true); // use imprint
         setChoice(playerA, "Lightning Bolt"); // target for imprint
 
         // copy and cast imprinted card
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}:");
-        setChoice(playerA, "Yes"); // create copy
-        setChoice(playerA, "Yes"); // cast copy
+        setChoice(playerA, true); // create copy
+        setChoice(playerA, true); // cast copy
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -83,7 +83,7 @@ public class MeddlingMageTest extends CardTestPlayerBase {
         setChoice(playerA, "Ainok Tracker"); // name a spell that can't be cast
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ainok Tracker");
-        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        setChoice(playerA, true); // cast it face down as 2/2 creature
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

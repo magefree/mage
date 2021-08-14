@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -12,22 +11,19 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * Gatecrash FAQ (01.2013) Multiple instances of lifelink are redundant. Giving
  * the same creature lifelink more than once won't cause you to gain additional
  * life.
- *
+ * <p>
  * Each time the second ability resolves, a delayed triggered ability is
  * created. Whenever you gain life that turn, each of those abilities will
  * trigger. For example, if you activate the second ability twice (and let those
@@ -99,7 +95,7 @@ class VizkopaGuildmageDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Whenever you gain life this turn, " + modes.getText();
+        return "Whenever you gain life this turn, each opponent loses that much life.";
     }
 }
 
@@ -107,7 +103,6 @@ class OpponentsLoseLifeEffect extends OneShotEffect {
 
     public OpponentsLoseLifeEffect() {
         super(Outcome.Damage);
-        this.staticText = "each opponent loses that much life";
     }
 
     public OpponentsLoseLifeEffect(final OpponentsLoseLifeEffect effect) {

@@ -108,8 +108,8 @@ class EssenceSymbioteTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature you control mutates, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature you control mutates, " ;
     }
 
 }

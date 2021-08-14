@@ -12,18 +12,15 @@ import java.io.Serializable;
  */
 public class MatchPlayer implements Serializable {
 
-    private static final long serialVersionUID = 42L;
-
     private int wins;
     private int winsNeeded;
     private boolean matchWinner;
 
     private Deck deck;
     private Player player;
-    private final String name;
+    private String name;
 
     private boolean quit;
-    //private final boolean timerTimeout;
     private boolean doneSideboarding;
     private int priorityTimeLeft;
 
@@ -34,9 +31,27 @@ public class MatchPlayer implements Serializable {
         this.winsNeeded = match.getWinsNeeded();
         this.doneSideboarding = true;
         this.quit = false;
-        //this.timerTimeout = false;
         this.name = player.getName();
         this.matchWinner = false;
+    }
+
+    /**
+     * Create match player's copy for simulated/ai games,
+     * so game and cards can get access to player's deck
+     *
+     * @param newPlayer
+     * @return
+     */
+    public MatchPlayer(final MatchPlayer source, Player newPlayer) {
+        this.wins = source.wins;
+        this.winsNeeded = source.winsNeeded;
+        this.matchWinner = source.matchWinner;
+        this.deck = source.deck;
+        this.player = newPlayer; // new
+        this.name = newPlayer.getName(); // new
+        this.quit = source.quit;
+        this.doneSideboarding = source.doneSideboarding;
+        this.priorityTimeLeft = source.priorityTimeLeft;
     }
 
     public int getPriorityTimeLeft() {

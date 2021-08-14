@@ -1,5 +1,6 @@
 package org.mage.card.arcane;
 
+import mage.abilities.icon.CardIconColor;
 import mage.abilities.icon.abilities.FlyingAbilityIcon;
 import mage.utils.StreamUtils;
 import org.apache.batik.anim.dom.SVGDOMImplementation;
@@ -216,7 +217,7 @@ public class SvgUtils {
     public static boolean checkSvgSupport() {
         // usa sample icon for svg support testing
         // direct call, no needs in cache
-        BufferedImage sampleImage = ImageManagerImpl.instance.getCardIcon(FlyingAbilityIcon.instance.getIconType().getResourceName(), 32);
+        BufferedImage sampleImage = ImageManagerImpl.instance.getCardIcon(FlyingAbilityIcon.instance.getIconType().getResourceName(), 32, CardIconColor.DEFAULT);
         haveSvgSupport = (sampleImage != null && sampleImage.getWidth() > 0);
         if (!haveSvgSupport) {
             logger.warn("WARNING, your system doesn't support svg images, so card icons will be disabled. Please, make a bug report in the github.");

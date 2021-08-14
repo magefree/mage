@@ -29,7 +29,7 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, courser);
 
         setChoice(playerA, disenchant);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, courser);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Choose");
 
@@ -51,7 +51,7 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, garth);
 
         setChoice(playerA, braingeyser);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "X=3");
         addTarget(playerA, playerA);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Choose");
@@ -74,7 +74,7 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, courser);
 
         setChoice(playerA, terror);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, courser);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Choose");
 
@@ -116,7 +116,7 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, courser);
 
         setChoice(playerA, regrowth);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, courser);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Choose");
 

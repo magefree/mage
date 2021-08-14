@@ -85,7 +85,7 @@ class ParadisePlumeSpellCastTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player casts a spell of the chosen color, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a player casts a spell of the chosen color, " ;
     }
 }

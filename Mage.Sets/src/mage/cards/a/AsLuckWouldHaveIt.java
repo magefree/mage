@@ -1,10 +1,7 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
@@ -18,8 +15,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class AsLuckWouldHaveIt extends CardImpl {
@@ -63,23 +61,21 @@ class AsLuckWouldHaveItTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DICE_ROLLED;
+        return event.getType() == GameEvent.EventType.DIE_ROLLED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (this.isControlledBy(event.getPlayerId()) && event.getFlag()) {
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("rolled", event.getAmount());
-            }
-            return true;
+        if (!this.isControlledBy(event.getPlayerId()) || event.getAmount() < 1) {
+            return false;
         }
-        return false;
+        this.getEffects().setValue("rolled", event.getAmount());
+        return true;
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you roll a die, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you roll a die, " ;
     }
 }
 

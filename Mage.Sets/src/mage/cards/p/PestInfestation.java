@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.WitherbloomToken;
+import mage.game.permanent.token.Pest11GainLifeToken;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
@@ -30,7 +30,7 @@ public final class PestInfestation extends CardImpl {
         // Destroy up to X target artifacts and/or enchantments. Create twice X 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life."
         this.getSpellAbility().addEffect(new DestroyTargetEffect()
                 .setText("destroy up to X target artifacts and/or enchantments."));
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new WitherbloomToken(), xValue)
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new Pest11GainLifeToken(), xValue)
                 .setText("Create twice X 1/1 black and green Pest creature tokens with \"When this creature dies, you gain 1 life.\""));
         this.getSpellAbility().setTargetAdjuster(PestInfestationAdjuster.instance);
     }

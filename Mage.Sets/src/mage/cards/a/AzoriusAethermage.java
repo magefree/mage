@@ -95,8 +95,8 @@ class AzoriusAEthermageAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return rule + super.getRule();
+    public String getTriggerPhrase() {
+        return rule ;
     }
 
     @Override

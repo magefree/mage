@@ -62,9 +62,8 @@ class CrimsonHonorGuardEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    @Override
-    public Effect copy() {
-        return new CrimsonHonorGuardEffect();
+    private CrimsonHonorGuardEffect(final CrimsonHonorGuardEffect effect) {
+        super(effect);
     }
 
     @Override
@@ -83,5 +82,10 @@ class CrimsonHonorGuardEffect extends OneShotEffect {
     @Override
     public String getText(Mode mode) {
         return "{this} deals 4 damage to that player unless they control a commander";
+    }
+
+    @Override
+    public CrimsonHonorGuardEffect copy() {
+        return new CrimsonHonorGuardEffect(this);
     }
 }

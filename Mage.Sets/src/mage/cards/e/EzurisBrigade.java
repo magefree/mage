@@ -20,7 +20,7 @@ import java.util.UUID;
  * @author Loki
  */
 public final class EzurisBrigade extends CardImpl {
-    private static final String rule = "<i>Metalcraft</i> &mdash; As long as you control three or more artifacts, Ezuri's Brigade gets +4/+4 and has trample";
+    private static final String rule = "As long as you control three or more artifacts, {this} gets +4/+4";
 
     public EzurisBrigade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
@@ -33,7 +33,7 @@ public final class EzurisBrigade extends CardImpl {
         ContinuousEffect boostSource = new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, MetalcraftCondition.instance, rule);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield), MetalcraftCondition.instance, ""));
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield), MetalcraftCondition.instance, "and has trample"));
         ability.setAbilityWord(AbilityWord.METALCRAFT);
         ability.addHint(MetalcraftHint.instance);
         this.addAbility(ability);

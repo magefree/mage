@@ -74,12 +74,12 @@ class PreventDamageToSourceByEnchantedCreatures extends PreventAllDamageToSource
     }
 
     public boolean isEnchantedCreature(MageObject input, Game game) {
-        if (input == null || input.isCreature()) {
+        if (input == null || input.isCreature(game)) {
             return false;
         }
         for (UUID attachmentId : ((Permanent) input).getAttachments()) {
             Permanent attachment = game.getPermanent(attachmentId);
-            if (attachment != null && attachment.isEnchantment()) {
+            if (attachment != null && attachment.isEnchantment(game)) {
                 return true;
             }
         }

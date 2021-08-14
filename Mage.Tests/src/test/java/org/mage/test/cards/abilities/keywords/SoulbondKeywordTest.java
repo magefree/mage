@@ -379,9 +379,9 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Trusted Forcemage");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -415,7 +415,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deadeye Navigator");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "Palinchron");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Doom Blade", "Deadeye Navigator");
 

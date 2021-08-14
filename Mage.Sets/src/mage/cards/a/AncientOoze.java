@@ -61,7 +61,7 @@ class AncientOozePowerToughnessValue implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public AncientOozePowerToughnessValue copy() {
         return new AncientOozePowerToughnessValue();
     }
 

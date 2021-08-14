@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -122,7 +121,7 @@ class MilaCraftyCompanionTriggeredAbility extends TriggeredAbilityImpl {
                 .map(game.getCombat()::getDefenderId)
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .filter(MageObject::isPlaneswalker)
+                .filter(permanent -> permanent.isPlaneswalker(game))
                 .map(Controllable::getControllerId)
                 .anyMatch(getControllerId()::equals);
     }
@@ -161,7 +160,7 @@ class LukkaWaywardBonderDiscardEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.drawCards(card.isCreature() ? 2 : 1, source, game);
+        player.drawCards(card.isCreature(game) ? 2 : 1, source, game);
         return true;
     }
 }

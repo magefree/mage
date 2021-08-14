@@ -11,7 +11,7 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.permanent.token.KioraKrakenToken;
+import mage.game.permanent.token.Kraken99Token;
 
 import java.util.UUID;
 
@@ -41,7 +41,7 @@ public final class SpawningKraken extends CardImpl {
 
         // Whenever a Kraken, Leviathan, Octopus, or Serpent you control deals combat damage to a player, create a 9/9 blue Kraken creature token.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
-                new CreateTokenEffect(new KioraKrakenToken()), filter,
+                new CreateTokenEffect(new Kraken99Token()), filter,
                 false, SetTargetPointer.NONE, true
         ));
     }

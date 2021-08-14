@@ -91,7 +91,7 @@ class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "When you're dealt combat damage, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When you're dealt combat damage, " ;
     }
 }

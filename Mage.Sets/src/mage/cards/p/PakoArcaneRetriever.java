@@ -105,7 +105,7 @@ class PakoArcaneRetrieverEffect extends OneShotEffect {
         cards.getCards(game)
                 .stream()
                 .filter(card -> card.addCounters(CounterType.FETCH.createInstance(), source.getControllerId(), source, game))
-                .filter(card -> !card.isCreature())
+                .filter(card -> !card.isCreature(game))
                 .forEach(card -> watcher.addCard(controller.getId(), card, game));
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null || counters == 0) {

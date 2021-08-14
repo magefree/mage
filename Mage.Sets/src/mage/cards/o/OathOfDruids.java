@@ -122,7 +122,7 @@ class OathOfDruidsEffect extends OneShotEffect {
         for (Card card : controller.getLibrary().getCards(game)) {
             revealed.add(card);
             // until they reveal a creature card.
-            if (card.isCreature()) {
+            if (card.isCreature(game)) {
                 selectedCard = card;
                 break;
             } else {

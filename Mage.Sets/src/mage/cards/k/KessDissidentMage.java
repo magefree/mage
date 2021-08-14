@@ -87,7 +87,7 @@ class KessDissidentMageCastFromGraveyardEffect extends AsThoughEffectImpl {
         }
         Card card = game.getCard(objectId);
         if (card == null
-                || !card.isInstantOrSorcery()
+                || !card.isInstantOrSorcery(game)
                 || !game.getState().getZone(objectId).equals(Zone.GRAVEYARD)
                 || !card.isOwnedBy(source.getControllerId())) {
             return false;

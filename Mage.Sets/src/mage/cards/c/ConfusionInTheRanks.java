@@ -89,7 +89,7 @@ enum ConfusionInTheRanksAdjuster implements TargetAdjuster {
         String message = "";
         filterTarget.add(Predicates.not(new ControllerIdPredicate(enteringPermanent.getControllerId())));
         Set<CardType.CardTypePredicate> cardTypesPredicates = new HashSet<>(1);
-        for (CardType cardTypeEntering : enteringPermanent.getCardType()) {
+        for (CardType cardTypeEntering : enteringPermanent.getCardType(game)) {
             cardTypesPredicates.add(cardTypeEntering.getPredicate());
             if (!message.isEmpty()) {
                 message += "or ";

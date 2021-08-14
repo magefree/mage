@@ -77,7 +77,7 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a " + filter.getMessage() + " dealt damage by {this} this turn dies, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a " + filter.getMessage() + " dealt damage by {this} this turn dies, " ;
     }
 }

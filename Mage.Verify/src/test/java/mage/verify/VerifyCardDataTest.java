@@ -56,7 +56,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "MH2"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "AFR"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -87,33 +87,25 @@ public class VerifyCardDataTest {
 
         // power-toughness
         skipListCreate(SKIP_LIST_PT);
-        skipListAddName(SKIP_LIST_PT, "UST", "Garbage Elemental");
-        skipListAddName(SKIP_LIST_PT, "UST", "Infinity Elemental");
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
 
         // cost
         skipListCreate(SKIP_LIST_COST);
-        skipListAddName(SKIP_LIST_COST, "KTK", "Erase");
-        skipListAddName(SKIP_LIST_COST, "M13", "Erase");
-        skipListAddName(SKIP_LIST_COST, "ULG", "Erase");
-        skipListAddName(SKIP_LIST_COST, "WC00", "Erase");
-        skipListAddName(SKIP_LIST_COST, "H17", "Grimlock, Dinobot Leader");
-        skipListAddName(SKIP_LIST_COST, "UST", "Everythingamajig");
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
 
         // type
         skipListCreate(SKIP_LIST_TYPE);
-        skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey");
+        skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
-        skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense");
+        skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
 
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
-        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
+        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
@@ -516,7 +508,7 @@ public class VerifyCardDataTest {
             rootPath = Paths.get("..", "Mage.Client", "release", "sample-decks");
         }
         if (!Files.exists(rootPath)) {
-            Assert.fail("Sample decks: unknown root folder " + rootPath.toAbsolutePath().toString());
+            Assert.fail("Sample decks: unknown root folder " + rootPath.toAbsolutePath());
         }
 
         // collect all files in all root's folders
@@ -533,7 +525,7 @@ public class VerifyCardDataTest {
             e.printStackTrace();
             errorsList.add("Error: sample deck - can't get folder content - " + e.getMessage());
         }
-        Assert.assertTrue("Sample decks: can't find any deck files in " + rootPath.toAbsolutePath().toString(), filesList.size() > 0);
+        Assert.assertTrue("Sample decks: can't find any deck files in " + rootPath.toAbsolutePath(), filesList.size() > 0);
 
         // try to open deck files
         int totalErrorFiles = 0;
@@ -548,7 +540,7 @@ public class VerifyCardDataTest {
 
             if (!deckErrors.toString().isEmpty()) {
                 errorsList.add("Error: sample deck contains errors " + deckName);
-                System.out.println("Errors in sample deck " + deckName + ":\n" + deckErrors.toString());
+                System.out.println("Errors in sample deck " + deckName + ":\n" + deckErrors);
                 totalErrorFiles++;
                 continue;
             }
@@ -913,13 +905,24 @@ public class VerifyCardDataTest {
         }
 
         for (ExpansionSet set : sets) {
+            // additional info
+            Set<String> cardNames = new HashSet<>();
+            for (ExpansionSet.SetCardInfo cardInfo : set.getSetCardInfo()) {
+                cardNames.add(cardInfo.getName());
+            }
+
+            boolean containsDoubleSideCards = false;
             for (ExpansionSet.SetCardInfo cardInfo : set.getSetCardInfo()) {
                 Card card = CardImpl.createCard(cardInfo.getCardClass(), new CardSetInfo(cardInfo.getName(), set.getCode(),
                         cardInfo.getCardNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
                 Assert.assertNotNull(card);
 
+                if (card.getSecondCardFace() != null) {
+                    containsDoubleSideCards = true;
+                }
+
                 // CHECK: all planeswalkers must be legendary
-                if (card.getCardType().contains(CardType.PLANESWALKER) && !card.getSuperType().contains(SuperType.LEGENDARY)) {
+                if (card.isPlaneswalker() && !card.getSuperType().contains(SuperType.LEGENDARY)) {
                     errorsList.add("Error: planeswalker must have legendary type: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
@@ -931,6 +934,26 @@ public class VerifyCardDataTest {
                 if (!CharMatcher.ascii().matchesAllOf(card.getName()) || !CharMatcher.ascii().matchesAllOf(card.getCardNumber())) {
                     errorsList.add("Error: card name or number contains non-ascii symbols: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
+
+                // CHECK: second side cards in one set
+                // https://github.com/magefree/mage/issues/8081
+                /*
+                if (card.getSecondCardFace() != null && cardNames.contains(card.getSecondCardFace().getName())) {
+                    errorsList.add("Error: set contains second side cards: " + set.getCode() + " - " + set.getName()
+                            + " - " + card.getName() + " - " + card.getCardNumber()
+                            + " - " + card.getSecondCardFace().getName() + " - " + card.getSecondCardFace().getCardNumber());
+                }
+                 */
+            }
+
+            // CHECK: double side cards must be in boosters
+            boolean hasBoosterSettings = (set.getNumBoosterDoubleFaced() > 0);
+            if (set.hasBoosters()
+                    && (set.getNumBoosterDoubleFaced() != -1) // -1 must ignore double cards in booster
+                    && containsDoubleSideCards
+                    && !hasBoosterSettings) {
+                errorsList.add("Error: set with boosters contains second side cards, but numBoosterDoubleFaced is not set - "
+                        + set.getCode() + " - " + set.getName());
             }
         }
 
@@ -1258,6 +1281,20 @@ public class VerifyCardDataTest {
             expected.removeIf(subtypesToIgnore::contains);
         }
 
+        for (SubType subType : card.getSubtype()) {
+            if (!subType.isCustomSet() && !subType.canGain(card)) {
+                String cardTypeString = card
+                        .getCardType()
+                        .stream()
+                        .map(CardType::toString)
+                        .reduce((a, b) -> a + " " + b)
+                        .orElse("");
+                fail(card, "subtypes", "card has subtype "
+                        + subType.getDescription() + " (" + subType.getSubTypeSet() + ')'
+                        + " that doesn't match its card type(s) (" + cardTypeString + ')');
+            }
+        }
+
         if (!eqSet(actual, expected)) {
             fail(card, "subtypes", actual + " != " + expected);
         }
@@ -1325,7 +1362,7 @@ public class VerifyCardDataTest {
         }
 
         // spells have only 1 ability
-        if (card.isSorcery() || card.isInstant()) {
+        if (card.isInstantOrSorcery()) {
             return;
         }
 

@@ -96,7 +96,7 @@ class BrandOfIllOmenEffect extends ContinuousRuleModifyingEffectImpl {
         MageObject sourceObject = game.getObject(event.getSourceId());
         if (sourceObject != null && brand != null && brand.getAttachedTo() != null) {
             UUID enchantedController = game.getPermanent(brand.getAttachedTo()).getControllerId();
-            return Objects.equals(enchantedController, event.getPlayerId()) && sourceObject.isCreature();
+            return Objects.equals(enchantedController, event.getPlayerId()) && sourceObject.isCreature(game);
         }
         return false;
     }

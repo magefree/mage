@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -12,7 +11,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author spjspj
  */
 public class RollDiceEffect extends OneShotEffect {
@@ -58,8 +56,7 @@ public class RollDiceEffect extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder("Roll a " + numSides + " sided dice");
-        return sb.toString();
+        return "Roll a " + numSides + " sided die";
     }
 
     @Override

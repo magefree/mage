@@ -1,9 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -14,12 +10,15 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ReignOfThePitToken;
+import mage.game.permanent.token.DemonFlyingToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class ReignOfThePit extends CardImpl {
@@ -86,7 +85,7 @@ class ReignOfThePitEffect extends OneShotEffect {
                 }
             }
         }
-        new CreateTokenEffect(new ReignOfThePitToken(totalPowerSacrificed)).apply(game, source);
+        new CreateTokenEffect(new DemonFlyingToken(totalPowerSacrificed)).apply(game, source);
         return true;
     }
 }

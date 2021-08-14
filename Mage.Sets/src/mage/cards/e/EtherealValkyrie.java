@@ -97,8 +97,8 @@ class EtherealValkyrieTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} enters the battlefield or attacks, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} enters the battlefield or attacks, " ;
     }
 }
 
@@ -140,11 +140,11 @@ class EtherealValkyrieEffect extends OneShotEffect {
                     foretellAbility = new ForetellAbility(exileCard, leftHalfCost, rightHalfCost);
                 } else if (exileCard instanceof ModalDoubleFacesCard) {
                     ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) exileCard).getLeftHalfCard();
-                    if (!leftHalfCard.isLand()) {
+                    if (!leftHalfCard.isLand(game)) {
                         String leftHalfCost = CardUtil.reduceCost(leftHalfCard.getManaCost(), 2).getText();
                         game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Cost", leftHalfCost);
                         ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) exileCard).getRightHalfCard();
-                        if (rightHalfCard.isLand()) {
+                        if (rightHalfCard.isLand(game)) {
                             foretellAbility = new ForetellAbility(exileCard, leftHalfCost);
                         } else {
                             String rightHalfCost = CardUtil.reduceCost(rightHalfCard.getManaCost(), 2).getText();

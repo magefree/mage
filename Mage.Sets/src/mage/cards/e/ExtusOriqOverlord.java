@@ -63,7 +63,7 @@ public final class ExtusOriqOverlord extends ModalDoubleFacesCard {
         // Awaken the Blood Avatar
         // Sorcery
         // As an additional cost to cast this spell, you may sacrifice any number of creatures. This spell costs {2} less to cast for each creature sacrificed this way.
-        Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
+        Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true);
         cost.setText("As an additional cost to cast this spell, you may sacrifice any number of creatures. " +
                 "This spell costs {2} less to cast for each creature sacrificed this way");
         this.getRightHalfCard().getSpellAbility().addCost(cost);

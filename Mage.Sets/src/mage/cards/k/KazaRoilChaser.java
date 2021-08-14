@@ -117,7 +117,7 @@ class KazaRoilChaserEffect extends CostModificationEffectImpl {
             return false;
         }
         Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
-        return spellCard != null && spellCard.isInstantOrSorcery();
+        return spellCard != null && spellCard.isInstantOrSorcery(game);
     }
 
     @Override
@@ -140,7 +140,7 @@ class KazaRoilChaserWatcher extends Watcher {
             return;
         }
         Spell spell = game.getSpell(event.getSourceId());
-        if (spell != null && spell.isInstantOrSorcery()) {
+        if (spell != null && spell.isInstantOrSorcery(game)) {
             playerMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
         }
     }

@@ -38,10 +38,9 @@ public final class HowlOfTheHorde extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CreateDelayedTriggeredAbilityEffect(new HowlOfTheHordeDelayedTriggeredAbility()),
                 RaidCondition.instance,
-                "<br><br><i>Raid</i> &mdash; If you attacked with a creature this turn, when you cast your next instant or sorcery spell this turn, copy that spell an additional time. You may choose new targets for the copy.")
+                "<br><br><i>Raid</i> &mdash; If you attacked this turn, when you cast your next instant or sorcery spell this turn, copy that spell an additional time. You may choose new targets for the copy.")
         );
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
-        this.getSpellAbility().setAbilityWord(AbilityWord.RAID);
         this.getSpellAbility().addHint(RaidHint.instance);
     }
 
@@ -79,7 +78,7 @@ class HowlOfTheHordeDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isInstantOrSorcery()) {
+            if (spell != null && spell.isInstantOrSorcery(game)) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }

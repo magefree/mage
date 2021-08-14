@@ -3,7 +3,7 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
+import mage.abilities.common.AttackingCreaturePutIntoGraveyardTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,8 +32,7 @@ public final class KithkinMourncaller extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever an attacking Kithkin or Elf is put into your graveyard from the battlefield, you may draw a card.
-        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new DrawCardSourceControllerEffect(1),
-            true, filter, false, true));
+        this.addAbility(new AttackingCreaturePutIntoGraveyardTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, true, false, true));
     }
 
     private KithkinMourncaller(final KithkinMourncaller card) {

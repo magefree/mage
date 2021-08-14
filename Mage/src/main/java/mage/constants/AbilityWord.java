@@ -1,5 +1,7 @@
 package mage.constants;
 
+import mage.util.CardUtil;
+
 /**
  * @author LevelX2
  */
@@ -55,7 +57,7 @@ public enum AbilityWord {
     }
 
     public String formatWord() {
-        return "<i>" + this + "</i> &mdash; ";
+        return CardUtil.italicizeWithEmDash(this.toString());
     }
 
     @Override

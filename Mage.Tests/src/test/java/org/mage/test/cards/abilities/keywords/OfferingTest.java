@@ -20,7 +20,7 @@ public class OfferingTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, kurosTaken);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, nezumiPatron);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, kurosTaken);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -40,7 +40,7 @@ public class OfferingTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, kurosTaken);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, nezumiPatron);
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -63,7 +63,7 @@ public class OfferingTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Akki Drillmaster"); // Creature Goblin {2}{R}  (2/2)
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, patron);                
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Akki Drillmaster");
         
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -93,7 +93,7 @@ public class OfferingTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Boros Recruit"); // Creature Goblin {R/W}  (1/1)
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, patron);                
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Boros Recruit");
         
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -126,7 +126,7 @@ public class OfferingTest extends CardTestPlayerBase {
         
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, patron);                
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Boggart Ram-Gang");
         
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

@@ -14,7 +14,7 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.QuandrixToken;
+import mage.game.permanent.token.FractalToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
@@ -85,7 +85,7 @@ class EmergentSequenceEffect extends OneShotEffect {
             return true;
         }
         game.addEffect(new BecomesCreatureTargetEffect(
-                new QuandrixToken(), false, true, Duration.Custom
+                new FractalToken(), false, true, Duration.Custom
         ).setTargetPointer(new FixedTarget(permanent, game)), source);
         permanent.addCounters(CounterType.P1P1.createInstance(
                 EmergentSequenceWatcher.getAmount(source.getControllerId(), game)
@@ -104,8 +104,9 @@ class EmergentSequenceWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                && ((EntersTheBattlefieldEvent) event).getTarget().isLand()) {
+        if (event.getType() == GameEvent.EventType.PLAY_LAND ||
+                (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
+                && ((EntersTheBattlefieldEvent) event).getTarget().isLand(game))) {
             playerMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
         }
     }

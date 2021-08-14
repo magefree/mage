@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.WitherbloomToken;
+import mage.game.permanent.token.Pest11GainLifeToken;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -32,7 +32,7 @@ public final class CallousBloodmage extends CardImpl {
 
         // When Callous Bloodmage enters the battlefield, choose one —
         // • Create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WitherbloomToken()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Pest11GainLifeToken()));
 
         // • You draw a card and you lose 1 life.
         Mode mode = new Mode(new DrawCardSourceControllerEffect(1).setText("you draw a card"));

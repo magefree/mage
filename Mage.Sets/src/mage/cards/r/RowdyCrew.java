@@ -87,7 +87,7 @@ class RowdyCrewEffect extends OneShotEffect {
                 for (CardType type : CardType.values()) {
                     int count = 0;
                     for (UUID cardId : cards) {
-                        if (game.getCard(cardId).getCardType().contains(type)) {
+                        if (game.getCard(cardId).getCardType(game).contains(type)) {
                             count++;
                             if (count > 1) {
                                 creature.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game);

@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -26,6 +27,7 @@ public final class ResearchDevelopment extends SplitCard {
 
         // Choose up to four cards you own from outside the game and shuffle them into your library.
         getLeftHalfCard().getSpellAbility().addEffect(new ResearchEffect());
+        getLeftHalfCard().getSpellAbility().addHint(OpenSideboardHint.instance);
 
         // Create a 3/1 red Elemental creature token unless any opponent has you draw a card. Repeat this process two more times.
         getRightHalfCard().getSpellAbility().addEffect(new DevelopmentEffect());

@@ -20,7 +20,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -80,13 +79,13 @@ class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature()
+                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game)
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getColor(game).isBlack();
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you sacrifice a black creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you sacrifice a black creature, " ;
     }
 }
 
@@ -157,12 +156,12 @@ class SavraSacrificeGreenCreatureAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature()
+                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game)
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getColor(game).isGreen();
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you sacrifice a green creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you sacrifice a green creature, " ;
     }
 }

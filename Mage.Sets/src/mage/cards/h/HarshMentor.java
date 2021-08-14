@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
 import mage.target.targetpointer.FixedTarget;
 
@@ -71,7 +70,7 @@ class HarshMentorTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!event.getPlayerId().equals(getControllerId())) {
             Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (source != null && (source.isArtifact() || source.isCreature() || source.isLand())) {
+            if (source != null && (source.isArtifact(game) || source.isCreature(game) || source.isLand(game))) {
                 StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
                 if (!(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
                     for (Effect effect : getEffects()) {

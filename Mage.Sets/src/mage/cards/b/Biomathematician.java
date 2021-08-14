@@ -12,7 +12,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.QuandrixToken;
+import mage.game.permanent.token.FractalToken;
 
 import java.util.UUID;
 
@@ -32,7 +32,7 @@ public final class Biomathematician extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Biomathematician enters the battlefield, create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on each Fractal you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new QuandrixToken()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new FractalToken()));
         ability.addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter));
         this.addAbility(ability);
     }

@@ -63,7 +63,7 @@ class HornOfGreedAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a player plays a land, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a player plays a land, " ;
     }
 }

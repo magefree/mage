@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
@@ -97,7 +96,7 @@ class TheMirariConjectureDelayedTriggeredAbility extends DelayedTriggeredAbility
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null
-                    && spell.isInstantOrSorcery()) {
+                    && spell.isInstantOrSorcery(game)) {
                 this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
                 return true;
             }

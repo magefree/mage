@@ -26,9 +26,11 @@ public class Historic extends Constructed {
         // Additional sets
         setCodes.add("JMP"); // Jumpstart (replacements below)
         setCodes.add("STA"); // Strixhaven Mystical Archive
+        setCodes.add("J21"); // Jumpstart: Historic Horizons
 
         // Regular ban list
         banned.add("Agent of Treachery");
+        banned.add("Brainstorm");
         banned.add("Channel");
         banned.add("Counterspell");
         banned.add("Dark Ritual");

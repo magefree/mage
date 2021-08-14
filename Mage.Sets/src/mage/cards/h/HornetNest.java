@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
@@ -11,14 +9,15 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.permanent.token.HornetNestInsectToken;
+import mage.game.permanent.token.InsectDeathToken;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HornetNest extends CardImpl {
@@ -32,6 +31,7 @@ public final class HornetNest extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
+
         // Whenever Hornet Nest is dealt damage, create that many 1/1 green Insect creature tokens with flying and deathtouch.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(new HornetNestDealDamageEffect(), false, false, true));
     }
@@ -68,7 +68,7 @@ class HornetNestDealDamageEffect extends OneShotEffect {
         if (player != null) {
             int amount = (Integer) getValue("damage");
             if (amount > 0) {
-                return new CreateTokenEffect(new HornetNestInsectToken(), amount).apply(game, source);
+                return new CreateTokenEffect(new InsectDeathToken(), amount).apply(game, source);
             }
         }
         return false;

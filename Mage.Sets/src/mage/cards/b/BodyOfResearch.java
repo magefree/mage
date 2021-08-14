@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
-import mage.game.permanent.token.QuandrixToken;
+import mage.game.permanent.token.FractalToken;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -21,7 +21,7 @@ public final class BodyOfResearch extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{G}{G}{U}{U}{U}");
 
         // Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is the number of cards in your library.
-        this.getSpellAbility().addEffect(QuandrixToken.getEffect(
+        this.getSpellAbility().addEffect(FractalToken.getEffect(
                 BodyOfResearchValue.instance, "Put X +1/+1 counters on it, " +
                         "where X is the number of cards in your library"
         ));

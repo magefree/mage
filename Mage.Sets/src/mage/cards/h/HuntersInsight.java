@@ -101,7 +101,7 @@ class HuntersInsightTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && !permanent.isPlaneswalker()) {
+        if (permanent != null && !permanent.isPlaneswalker(game)) {
             return false;
         }
         this.getEffects().clear();

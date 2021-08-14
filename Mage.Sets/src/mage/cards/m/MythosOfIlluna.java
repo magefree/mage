@@ -94,6 +94,6 @@ enum MythosOfIllunaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        return permanent != null && permanent.isCreature();
+        return permanent != null && permanent.isCreature(game);
     }
 }

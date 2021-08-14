@@ -72,7 +72,7 @@ public final class Conversion extends CardImpl {
 
         @Override
         public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-            for (Permanent land : game.getBattlefield().getAllActivePermanents(CardType.LAND)) {
+            for (Permanent land : game.getBattlefield().getAllActivePermanents(CardType.LAND, game)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (land.hasSubtype(SubType.MOUNTAIN, game)) {

@@ -123,10 +123,10 @@ public class WorldEnchantmentsRuleTest extends CardTestMultiPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Charmed Griffin");
 
-        setChoice(playerD, "Yes"); // Put an artifact or enchantment card from your hand onto the battlefield?
+        setChoice(playerD, true); // Put an artifact or enchantment card from your hand onto the battlefield?
         setChoice(playerD, "Concordant Crossroads");
 
-        setChoice(playerB, "Yes"); // Put an artifact or enchantment card from your hand onto the battlefield?
+        setChoice(playerB, true); // Put an artifact or enchantment card from your hand onto the battlefield?
         setChoice(playerB, "Concordant Crossroads");
 
         concede(1, PhaseStep.PRECOMBAT_MAIN, playerC); // World Enchantments come into range

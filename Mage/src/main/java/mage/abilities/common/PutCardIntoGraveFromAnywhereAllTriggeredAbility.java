@@ -14,7 +14,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAbilityImpl {
@@ -42,7 +41,8 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
         this.filter.add(targetController.getOwnerPredicate());
         StringBuilder sb = new StringBuilder("Whenever ");
         sb.append(filter.getMessage());
-        sb.append(" is put into ");
+        sb.append(filter.getMessage().startsWith("one or more") ? " are" : "is");
+        sb.append(" put into ");
         switch (targetController) {
             case OPPONENT:
                 sb.append("an opponent's");
@@ -102,7 +102,7 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
     }
 
     @Override
-    public String getRule() {
-        return ruleText + super.getRule();
+    public String getTriggerPhrase() {
+        return ruleText;
     }
 }

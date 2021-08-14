@@ -18,7 +18,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.SkeletonToken;
+import mage.game.permanent.token.SkeletonRegenerateToken;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -38,7 +38,7 @@ public final class DrudgeSpell extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}");
 
         // {B}, Exile two creature cards from your graveyard: Create a 1/1 black Skeleton creature token. It has "{B}: Regenerate this creature."
-        Effect effect = new CreateTokenEffect(new SkeletonToken());
+        Effect effect = new CreateTokenEffect(new SkeletonRegenerateToken());
         effect.setText("create a 1/1 black Skeleton creature token. It has \"{B}: Regenerate this creature.\"");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{B}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, 2, new FilterCreatureCard("creature cards from your graveyard"))));

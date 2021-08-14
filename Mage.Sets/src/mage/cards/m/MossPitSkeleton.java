@@ -83,7 +83,7 @@ class MossPitSkeletonTriggeredAbility extends TriggeredAbilityImpl {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
             return (permanent != null
-                    && permanent.isCreature()
+                    && permanent.isCreature(game)
                     && permanent.isControlledBy(this.getControllerId()));
         }
         return false;

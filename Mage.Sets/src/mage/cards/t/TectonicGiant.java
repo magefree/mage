@@ -87,8 +87,8 @@ class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} attacks or becomes the target of a spell an opponent controls, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} attacks or becomes the target of a spell an opponent controls, " ;
     }
 
     @Override

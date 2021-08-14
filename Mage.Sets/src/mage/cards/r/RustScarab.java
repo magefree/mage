@@ -84,8 +84,8 @@ class RustScarabBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} becomes blocked, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} becomes blocked, " ;
     }
 
     @Override

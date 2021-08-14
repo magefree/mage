@@ -72,7 +72,7 @@ public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever " + attachedDescription + " creature blocks" + (setFixedTargetPointerToBlocked ? " a creature, " : ", ") + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever " + attachedDescription + " creature blocks" + (setFixedTargetPointerToBlocked ? " a creature, " : ", ") ;
     }
 }

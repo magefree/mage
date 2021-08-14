@@ -66,7 +66,7 @@ class PowerleechTriggeredAbility extends TriggeredAbilityImpl {
         }
         if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (permanent == null || !permanent.isArtifact()) {
+            if (permanent == null || !permanent.isArtifact(game)) {
                 return false;
             }
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
@@ -78,7 +78,7 @@ class PowerleechTriggeredAbility extends TriggeredAbilityImpl {
         }
         if (event.getType() == GameEvent.EventType.TAPPED) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (permanent == null || !permanent.isArtifact()) {
+            if (permanent == null || !permanent.isArtifact(game)) {
                 return false;
             }
             return player.hasOpponent(permanent.getControllerId(), game);

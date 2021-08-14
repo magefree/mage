@@ -12,7 +12,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.LoreholdToken;
+import mage.game.permanent.token.Spirit32Token;
 
 import java.util.UUID;
 
@@ -38,7 +38,7 @@ public final class QuintoriusFieldHistorian extends CardImpl {
         )));
 
         // Whenever one or more cards leave your graveyard, create a 3/2 red and white Spirit creature token.
-        this.addAbility(new CardsLeaveGraveyardTriggeredAbility(new CreateTokenEffect(new LoreholdToken())));
+        this.addAbility(new CardsLeaveGraveyardTriggeredAbility(new CreateTokenEffect(new Spirit32Token())));
     }
 
     private QuintoriusFieldHistorian(final QuintoriusFieldHistorian card) {

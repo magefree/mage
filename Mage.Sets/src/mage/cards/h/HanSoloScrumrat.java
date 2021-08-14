@@ -93,7 +93,7 @@ class HanSoloScrumratTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} creature deals damage during your turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever {this} creature deals damage during your turn, " ;
     }
 }

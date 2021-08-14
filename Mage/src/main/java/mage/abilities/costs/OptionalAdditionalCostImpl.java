@@ -166,6 +166,12 @@ public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements Optio
         return activatedCounter;
     }
 
+    @Override
+    public void setCostType(VariableCostType costType) {
+        this.getVariableCosts().forEach(cost -> {
+            cost.setCostType(costType);
+        });
+    }
 
     @Override
     public OptionalAdditionalCostImpl copy() {

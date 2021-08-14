@@ -78,7 +78,7 @@ class DyingWishAttachedPermanentPowerCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public DyingWishAttachedPermanentPowerCount copy() {
         return new DyingWishAttachedPermanentPowerCount();
     }
 

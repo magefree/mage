@@ -3,6 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.LearnEffect;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +29,8 @@ public final class GnarledProfessor extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Gnarled Professor enters the battlefield, learn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LearnEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LearnEffect())
+                .addHint(OpenSideboardHint.instance));
     }
 
     private GnarledProfessor(final GnarledProfessor card) {

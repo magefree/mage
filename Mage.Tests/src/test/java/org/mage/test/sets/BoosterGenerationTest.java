@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
+import mage.cards.ExpansionSet;
 import mage.cards.ModalDoubleFacesCard;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardScanner;
@@ -13,6 +14,7 @@ import mage.constants.SubType;
 import mage.sets.*;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
 
@@ -154,8 +156,8 @@ public class BoosterGenerationTest extends MageTestBase {
         Assert.assertTrue(
                 "Slot 12 is colorless (" + booster.get(11).getName() + ')',
                 booster.get(11).getColor(null).isColorless()
-                        || booster.get(11).isLand()
-                        || booster.get(11).isArtifact()
+                        || booster.get(11).isLand(currentGame)
+                        || booster.get(11).isArtifact(currentGame)
         );
 
         Assert.assertEquals("Slot 15 is from FMB1 set", "FMB1", booster.get(14).getExpansionSetCode());
@@ -221,11 +223,11 @@ public class BoosterGenerationTest extends MageTestBase {
         for (int i = 0; i < 50; i++) {
             List<Card> booster = CoreSet2019.getInstance().createBooster();
             // check that booster contains a land card
-            assertTrue(booster.stream().anyMatch(card -> card.getCardType().contains(CardType.LAND)));
+            assertTrue(booster.stream().anyMatch(card -> card.getCardType(currentGame).contains(CardType.LAND)));
             allCards.addAll(booster);
         }
         // check that some dual lands were generated
-        assertTrue(allCards.stream().anyMatch(card -> card.getCardType().contains(CardType.LAND) && Objects.equals(card.getRarity(), Rarity.COMMON)));
+        assertTrue(allCards.stream().anyMatch(card -> card.getCardType(currentGame).contains(CardType.LAND) && Objects.equals(card.getRarity(), Rarity.COMMON)));
     }
 
     @Test
@@ -233,7 +235,7 @@ public class BoosterGenerationTest extends MageTestBase {
         for (int i = 0; i < 10; i++) {
             List<Card> booster = WarOfTheSpark.getInstance().createBooster();
             // check that booster contains a planeswalker
-            assertTrue(booster.stream().anyMatch(MageObject::isPlaneswalker));
+            assertTrue(booster.stream().anyMatch(card -> card.isPlaneswalker(currentGame)));
         }
     }
 
@@ -242,7 +244,7 @@ public class BoosterGenerationTest extends MageTestBase {
         for (int i = 0; i < 10; i++) {
             List<Card> booster = Dominaria.getInstance().createBooster();
             // check that booster contains legendary creature
-            assertTrue(booster.stream().anyMatch(card -> card.isCreature() && card.isLegendary()));
+            assertTrue(booster.stream().anyMatch(card -> card.isCreature(currentGame) && card.isLegendary()));
         }
     }
 
@@ -274,7 +276,7 @@ public class BoosterGenerationTest extends MageTestBase {
     public void testBattlebond_BoosterMustHaveOneLand() {
         for (int i = 0; i < 10; i++) {
             List<Card> booster = Battlebond.getInstance().createBooster();
-            assertTrue("battlebond's booster must contain 1 land", booster.stream().anyMatch(card -> card.isBasic() && card.isLand()));
+            assertTrue("battlebond's booster must contain 1 land", booster.stream().anyMatch(card -> card.isBasic() && card.isLand(currentGame)));
         }
     }
 
@@ -290,7 +292,7 @@ public class BoosterGenerationTest extends MageTestBase {
             assertFalse(str(booster), contains(booster, basics, null));
 
             // special lands in land slot (can have multiple special lands per booster: one from land slot, one from common slot)
-            List<Card> boosterLands = booster.stream().filter(card -> !card.isBasic() && card.isLand()).collect(Collectors.toList());
+            List<Card> boosterLands = booster.stream().filter(card -> !card.isBasic() && card.isLand(currentGame)).collect(Collectors.toList());
             Assert.assertTrue("Amonkhet Remastered's booster must contains minimum 1 special land", boosterLands.size() >= 1);
 
             // Regal Caracal is top-boxer card, not booster
@@ -358,7 +360,7 @@ public class BoosterGenerationTest extends MageTestBase {
                     booster.stream().map(Card::getRarity).filter(Rarity.UNCOMMON::equals).count()
             );
 
-            List<Card> snowLands = booster.stream().filter(card -> card.isSnow() && card.isLand()).collect(Collectors.toList());
+            List<Card> snowLands = booster.stream().filter(card -> card.isSnow() && card.isLand(currentGame)).collect(Collectors.toList());
             switch (snowLands.size()) {
                 case 0:
                     fail("Booster must have snow lands");
@@ -507,33 +509,31 @@ public class BoosterGenerationTest extends MageTestBase {
         assertTrue("Every booster contained an uncommon Lesson", foundNoUncommonLesson);
     }
 
+    private static final List<String> mh2Reprints = Collections.unmodifiableList(Arrays.asList(
+            "262", "263", "264", "265", "266", "267", "268", "269", "270", "271", "272", "273", "274", "275",
+            "276", "277", "278", "279", "280", "281", "282", "283", "284", "285", "286", "287", "288", "289",
+            "290", "291", "292", "293", "294", "295", "296", "297", "298", "299", "300", "301", "302", "303",
+            "308", "314", "319", "320", "321", "322", "325", "326", "387", "416", "419", "423", "491"
+    ));
+
     @Test
     public void testModernHorizons2ReprintSlot() {
         for (int i = 0; i < 20; i++) {
             List<Card> booster = ModernHorizons2.getInstance().createBooster();
             List<Card> notReprint = booster
                     .stream()
-                    .filter(card -> Integer.parseInt(card.getCardNumber()) < 262)
+                    .filter(card -> !mh2Reprints.contains(card.getCardNumber()))
                     .collect(Collectors.toList());
             List<Card> reprint = booster
                     .stream()
-                    .filter(card -> Integer.parseInt(card.getCardNumber()) >= 262)
+                    .filter(card -> mh2Reprints.contains(card.getCardNumber()))
                     .collect(Collectors.toList());
 
-            assertTrue(
-                    "Booster must not contain cards with collector number over 303",
-                    booster
-                            .stream()
-                            .map(Card::getCardNumber)
-                            .mapToInt(Integer::parseInt)
-                            .max()
-                            .orElse(0) <= 303
-            );
             assertEquals(
                     "Booster must contain exactly one reprint (other than fetches)", 1, reprint.size()
             );
             assertEquals(
-                    "Booster must containt exactly 14 other cards", 14, notReprint.size()
+                    "Booster must contain exactly 14 other cards", 14, notReprint.size()
             );
             assertEquals(
                     "Booster must contain one non-reprint rare/mythic", 1,
@@ -560,5 +560,40 @@ public class BoosterGenerationTest extends MageTestBase {
                             .count()
             );
         }
+    }
+
+    @Ignore // debug only: collect info about cards in boosters, see https://github.com/magefree/mage/issues/8081
+    @Test
+    public void test_CollectBoosterStats() {
+        ExpansionSet setToAnalyse = Innistrad.getInstance();
+        int openBoosters = 1000;
+
+        Map<String, Integer> resRatio = new HashMap<>();
+        int totalCards = 0;
+        for (int i = 1; i <= openBoosters; i++) {
+            List<Card> booster = setToAnalyse.createBooster();
+            totalCards += booster.size();
+            booster.forEach(card -> {
+                String code = String.format("%s %s", card.getRarity().getCode(), card.getName());
+                resRatio.putIfAbsent(code, 0);
+                resRatio.computeIfPresent(code, (u, count) -> count + 1);
+            });
+        }
+        final Integer totalCardsFinal = totalCards;
+        List<String> info = resRatio.entrySet().stream()
+                .sorted(new Comparator<Map.Entry<String, Integer>>() {
+                    @Override
+                    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                        return Integer.compare(o2.getValue(), o1.getValue());
+                    }
+                })
+                .map(e -> String.format("%s: %d",
+                        e.getKey(),
+                        e.getValue()
+                        //(double) e.getValue() / totalCardsFinal * 100.0
+                ))
+                .collect(Collectors.toList());
+        System.out.println(setToAnalyse.getName() + " - boosters opened: " + openBoosters + ". Found cards: " + totalCardsFinal + "\n"
+                + info.stream().collect(Collectors.joining("\n")));
     }
 }

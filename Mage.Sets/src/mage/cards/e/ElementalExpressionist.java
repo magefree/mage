@@ -14,7 +14,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.token.PrismariToken;
+import mage.game.permanent.token.Elemental44Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -99,7 +99,7 @@ class ElementalExpressionistReplacementEffect extends ReplacementEffectImpl {
 class ElementalExpressionistTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     ElementalExpressionistTriggeredAbility() {
-        super(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.EXILED, new CreateTokenEffect(new PrismariToken()), "", false);
+        super(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.EXILED, new CreateTokenEffect(new Elemental44Token()), "", false);
     }
 
     private ElementalExpressionistTriggeredAbility(final ElementalExpressionistTriggeredAbility ability) {

@@ -89,8 +89,8 @@ class JihadTriggeredAbility extends StateTriggeredAbility {
     }
     
     @Override
-    public String getRule() {
-        return "When the chosen player controls no nontoken permanents of the chosen color, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "When the chosen player controls no nontoken permanents of the chosen color, " ;
     }
 }
 

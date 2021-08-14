@@ -26,7 +26,7 @@ public class EquipEffect extends AttachEffect {
         // state-based action. See rule 704.) An Equipment can’t equip more than one creature. If a spell or ability
         // would cause an Equipment to equip more than one creature, the Equipment’s controller chooses which creature
         // it equips.
-        if (sourcePermanent != null && sourcePermanent.hasSubtype(SubType.EQUIPMENT, game) && !sourcePermanent.isCreature()) {
+        if (sourcePermanent != null && sourcePermanent.hasSubtype(SubType.EQUIPMENT, game) && !sourcePermanent.isCreature(game)) {
             return super.apply(game, source);
         }
         return false;

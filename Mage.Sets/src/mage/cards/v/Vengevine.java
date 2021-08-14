@@ -15,7 +15,6 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
@@ -99,7 +98,7 @@ class VengevineWatcher extends Watcher {
         condition = false;
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isCreature()) {
+            if (spell != null && spell.isCreature(game)) {
                 creatureSpellCount++;
                 if (creatureSpellCount == 2)
                     condition = true;

@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.game.permanent.token.QuandrixToken;
+import mage.game.permanent.token.FractalToken;
 
 import java.util.UUID;
 
@@ -37,7 +37,7 @@ public final class ParadoxZone extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new DoubleCountersSourceEffect(CounterType.GROWTH), TargetController.YOU, false
         );
-        Effect effect = QuandrixToken.getEffect(
+        Effect effect = FractalToken.getEffect(
                 xValue, "Put X +1/+1 counters on it, where X is the number of growth counters on {this}"
         );
         ability.addEffect(effect.concatBy("Then"));

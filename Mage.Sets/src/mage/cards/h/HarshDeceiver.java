@@ -81,7 +81,7 @@ class HarshDeceiverEffect extends OneShotEffect {
             if (card != null) {
                 Cards cards = new CardsImpl(card);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
-                if (card.isLand()) {
+                if (card.isLand(game)) {
                     new UntapSourceEffect().apply(game, source);
                     game.addEffect(new BoostSourceEffect(1, 1, Duration.EndOfTurn), source);
                 }

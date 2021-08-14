@@ -3,7 +3,6 @@ package mage.cards.k;
 import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -83,7 +82,7 @@ enum KollTheForgemasterEnchantedPredicate implements Predicate<Permanent> {
                 .stream()
                 .map(game::getPermanentOrLKIBattlefield)
                 .filter(Objects::nonNull)
-                .anyMatch(MageObject::isEnchantment);
+                .anyMatch(permanent -> permanent.isEnchantment(game));
     }
 
     @Override

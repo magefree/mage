@@ -1008,7 +1008,7 @@
         "manaCost": "{1}{U}",
         "name": "Chart a Course",
         "number": "48",
-        "originalText": "Draw two cards. Then discard a card unless you attacked with a creature this turn.",
+        "originalText": "Draw two cards. Then discard a card unless you attacked this turn.",
         "originalType": "Sorcery",
         "printings": [
           "JMP",

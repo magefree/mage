@@ -61,7 +61,7 @@ class TargetPermanentsThatShareCardType extends TargetPermanent {
                 if (targetOne == null || targetTwo == null) {
                     return false;
                 }
-                return targetOne.shareTypes(targetTwo);
+                return targetOne.shareTypes(targetTwo, game);
             }
             return true;
         }
@@ -75,12 +75,12 @@ class TargetPermanentsThatShareCardType extends TargetPermanent {
         if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
                 if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                    for (CardType cardType : permanent.getCardType()) {
+                    for (CardType cardType : permanent.getCardType(game)) {
                         if (cardTypes.contains(cardType)) {
                             return true;
                         }
                     }
-                    cardTypes.addAll(permanent.getCardType());
+                    cardTypes.addAll(permanent.getCardType(game));
                 }
             }
         }

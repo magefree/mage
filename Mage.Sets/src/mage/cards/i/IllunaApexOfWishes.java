@@ -79,7 +79,7 @@ class IllunaApexOfWishesEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         for (Card card : player.getLibrary().getCards(game)) {
             cards.add(card);
-            if (card == null || card.isLand() || !card.isPermanent()) {
+            if (card == null || card.isLand(game) || !card.isPermanent(game)) {
                 continue;
             }
             permCard = card;

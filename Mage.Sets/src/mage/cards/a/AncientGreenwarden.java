@@ -86,7 +86,7 @@ class AncientGreenwardenEffect extends ReplacementEffectImpl {
         if (sourceEvent == null
                 || sourceEvent.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD
                 || !(sourceEvent instanceof EntersTheBattlefieldEvent)
-                || !((EntersTheBattlefieldEvent) sourceEvent).getTarget().isLand()) {
+                || !((EntersTheBattlefieldEvent) sourceEvent).getTarget().isLand(game)) {
             return false;
         }
         return game.getPermanent(numberOfTriggersEvent.getSourceId()) != null;

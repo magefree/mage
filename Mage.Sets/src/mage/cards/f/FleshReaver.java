@@ -71,7 +71,7 @@ class FleshReaverTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if ((permanent != null && permanent.isCreature())
+        if ((permanent != null && permanent.isCreature(game))
                 || game.getOpponents(event.getTargetId()).contains(getControllerId())) {
             this.getEffects().setValue("damage", event.getAmount());
             return true;

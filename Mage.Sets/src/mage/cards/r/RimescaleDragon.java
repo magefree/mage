@@ -45,7 +45,7 @@ public final class RimescaleDragon extends CardImpl {
 
         // {2}{snow}: Tap target creature and put an ice counter on it.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new TapTargetEffect("target creature"),
+                new TapTargetEffect("tap target creature"),
                 new ManaCostsImpl("{2}{S}")
         );
         Effect effect = new AddCountersTargetEffect(CounterType.ICE.createInstance());

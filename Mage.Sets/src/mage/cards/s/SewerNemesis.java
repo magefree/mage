@@ -72,7 +72,7 @@ class CardsInTargetOpponentsGraveyardCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public CardsInTargetOpponentsGraveyardCount copy() {
         return new CardsInTargetOpponentsGraveyardCount();
     }
 

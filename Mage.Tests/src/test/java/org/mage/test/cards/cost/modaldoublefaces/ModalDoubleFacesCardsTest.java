@@ -256,8 +256,8 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
 
         // stats in hand - normal
         Card card = getHandCards(playerA).stream().filter(c -> CardUtil.haveSameNames(c, "Akoum Warrior", currentGame)).findFirst().get();
-        Assert.assertFalse("must be non land", card.isLand());
-        Assert.assertTrue("must be creature", card.isCreature());
+        Assert.assertFalse("must be non land", card.isLand(currentGame));
+        Assert.assertTrue("must be creature", card.isCreature(currentGame));
         Assert.assertTrue("must be minotaur", card.hasSubtype(SubType.MINOTAUR, currentGame));
         Assert.assertEquals("power", 4, card.getPower().getValue());
         Assert.assertEquals("toughness", 5, card.getToughness().getValue());
@@ -265,7 +265,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         // stats in hand - mdf
         card = getHandCards(playerA).stream().filter(c -> CardUtil.haveSameNames(c, "Halvar, God of Battle", currentGame)).findFirst().get();
         Assert.assertTrue("must be legendary", card.isLegendary());
-        Assert.assertTrue("must be creature", card.isCreature());
+        Assert.assertTrue("must be creature", card.isCreature(currentGame));
         Assert.assertTrue("must be god", card.hasSubtype(SubType.GOD, currentGame));
 
         // stats in hand - mdf - color identity must be from both sides
@@ -670,7 +670,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
 
         // cast and make copy of bear
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glasspool Mimic");
-        setChoice(playerA, "Yes"); // as copy
+        setChoice(playerA, true); // as copy
         setChoice(playerA, "Balduvian Bears"); // copy of
 
         setStrictChooseMode(true);
@@ -695,16 +695,16 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Aether Vial", 1);
 
         // prepare charge counters
-        setChoice(playerA, "Yes"); // +1 charge on turn 1
-        setChoice(playerA, "Yes"); // +1 charge on turn 3
-        setChoice(playerA, "Yes"); // +1 charge on turn 5
+        setChoice(playerA, true); // +1 charge on turn 1
+        setChoice(playerA, true); // +1 charge on turn 3
+        setChoice(playerA, true); // +1 charge on turn 5
 
         // put card from hand to battlefield
         activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: You may put a creature card");
-        setChoice(playerA, "Yes"); // put card
+        setChoice(playerA, true); // put card
         setChoice(playerA, "Glasspool Mimic"); // select card with cmc 3 from hand
         //
-        setChoice(playerA, "Yes"); // put to battlefield as copy
+        setChoice(playerA, true); // put to battlefield as copy
         setChoice(playerA, "Balduvian Bears"); // copy of
 
         setStrictChooseMode(true);
@@ -820,7 +820,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
 
         // play elf with cascade
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
-        setChoice(playerA, "Yes"); // use free cast
+        setChoice(playerA, true); // use free cast
         //setChoice(playerA, "Cast Valki, God of Lies"); possible bug: you can see two spell abilities to choose, but only one allows here
         setChoice(playerA, TestPlayer.CHOICE_SKIP); // no choices for valki's etb exile
 
@@ -853,7 +853,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
 
         // play elf with cascade
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
-        setChoice(playerA, "Yes"); // use free cast
+        setChoice(playerA, true); // use free cast
         setChoice(playerA, "Cast The Omenkeel"); // can cast any side here
 
         setStrictChooseMode(true);

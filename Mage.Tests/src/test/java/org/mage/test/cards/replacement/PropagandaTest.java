@@ -22,7 +22,7 @@ public class PropagandaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
 
         attack(2, playerB, "Silvercoat Lion");
-        setChoice(playerB, "Yes");// Pay {2} to attack?
+        setChoice(playerB, true);// Pay {2} to attack?
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -45,8 +45,8 @@ public class PropagandaTest extends CardTestPlayerBase {
 
         attack(2, playerB, "Silvercoat Lion");
         setChoice(playerB, "Propaganda"); // Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.");
-        setChoice(playerB, "Yes");// Pay {2} to attack?
-        setChoice(playerB, "Yes");// Pay {2} to attack?
+        setChoice(playerB, true);// Pay {2} to attack?
+        setChoice(playerB, true);// Pay {2} to attack?
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();

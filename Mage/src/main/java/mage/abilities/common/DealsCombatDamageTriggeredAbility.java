@@ -57,8 +57,8 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-            return "Whenever {this} deals combat damage, " + super.getRule();
+    public String getTriggerPhrase() {
+            return "Whenever {this} deals combat damage, " ;
     }
 
 }

@@ -70,7 +70,7 @@ class GoblinMachinistEffect extends OneShotEffect {
             for (Card card : controller.getLibrary().getCards(game)) {
                 if (card != null) {
                     cards.add(card);
-                    if (!card.isLand()) {
+                    if (!card.isLand(game)) {
                         if (card.getManaValue() > 0) {
                             game.addEffect(new BoostSourceEffect(card.getManaValue(), 0, Duration.EndOfTurn), source);
                         }

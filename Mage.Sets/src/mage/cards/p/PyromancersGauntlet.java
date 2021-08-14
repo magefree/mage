@@ -62,14 +62,14 @@ class PyromancersGauntletReplacementEffect extends ReplacementEffectImpl {
         MageObject object = game.getObject(event.getSourceId());
         if (object instanceof Spell) {
             if (((Spell) object).isControlledBy(source.getControllerId())
-                    && (object.isInstant()
-                    || object.isSorcery())) {
+                    && (object.isInstant(game)
+                    || object.isSorcery(game))) {
                 return true;
             }
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         return permanent != null
-                && permanent.isPlaneswalker()
+                && permanent.isPlaneswalker(game)
                 && source.isControlledBy(permanent.getControllerId());
     }
 

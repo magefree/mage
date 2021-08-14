@@ -13,7 +13,7 @@ import mage.filter.StaticFilters;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.QuandrixToken;
+import mage.game.permanent.token.FractalToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -83,7 +83,7 @@ class OversimplifyEffect extends OneShotEffect {
                 ));
         controller.moveCards(new CardsImpl(permanents), Zone.EXILED, source, game);
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Token token = new QuandrixToken();
+            Token token = new FractalToken();
             token.putOntoBattlefield(1, game, source, playerId);
             int counter = playerMap.getOrDefault(playerId, 0);
             for (UUID tokenId : token.getLastAddedTokenIds()) {

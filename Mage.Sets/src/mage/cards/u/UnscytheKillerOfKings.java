@@ -19,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
@@ -83,7 +82,7 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent) event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getTarget().isCreature()) { // target token can't create Zombie
+            if (zEvent.getTarget().isCreature(game)) { // target token can't create Zombie
                 Permanent equipment = game.getPermanent(getSourceId());
                 // the currently equiped creature must have done damage to the dying creature
                 if (equipment != null && equipment.getAttachedTo() != null) {
@@ -106,8 +105,8 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature dealt damage by equipped creature this turn dies, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature dealt damage by equipped creature this turn dies, " ;
     }
 }
 

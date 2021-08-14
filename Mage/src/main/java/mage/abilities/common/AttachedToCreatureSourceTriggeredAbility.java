@@ -30,12 +30,12 @@ public class AttachedToCreatureSourceTriggeredAbility extends TriggeredAbilityIm
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent attachedPermanent = game.getPermanent(event.getTargetId());
-        return attachedPermanent != null && attachedPermanent.isCreature();
+        return attachedPermanent != null && attachedPermanent.isCreature(game);
     }
 
     @Override
-    public String getRule() {
-        return "As {this} becomes attached to a creature, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "As {this} becomes attached to a creature, " ;
     }
 
     @Override

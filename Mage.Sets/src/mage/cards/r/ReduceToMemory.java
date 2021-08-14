@@ -10,7 +10,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.LoreholdToken;
+import mage.game.permanent.token.Spirit32Token;
 import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -65,7 +65,7 @@ class ReduceToMemoryEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(permanent.getControllerId());
         player.moveCards(permanent, Zone.EXILED, source, game);
-        new LoreholdToken().putOntoBattlefield(1, game, source, player.getId());
+        new Spirit32Token().putOntoBattlefield(1, game, source, player.getId());
         return true;
     }
 }

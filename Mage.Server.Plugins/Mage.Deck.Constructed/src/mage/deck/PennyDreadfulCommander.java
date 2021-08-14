@@ -12,6 +12,7 @@ import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
 import mage.cards.decks.PennyDreadfulLegalityUtil;
+import mage.constants.CardType;
 import mage.filter.FilterMana;
 import mage.util.ManaUtil;
 
@@ -127,8 +128,8 @@ public class PennyDreadfulCommander extends Constructed {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander banned (" + commander.getName() + ')', true);
                 valid = false;
             }
-            if ((!commander.isCreature() || !commander.isLegendary())
-                    && (!commander.isPlaneswalker() || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+            if ((!commander.hasCardTypeForDeckbuilding(CardType.CREATURE) || !commander.isLegendary())
+                    && !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance())) {
                 addError(DeckValidatorErrorType.PRIMARY, commander.getName(), "Commander invalid (" + commander.getName() + ')', true);
                 valid = false;
             }

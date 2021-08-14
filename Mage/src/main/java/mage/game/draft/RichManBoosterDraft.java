@@ -16,8 +16,8 @@ public class RichManBoosterDraft extends DraftImpl {
 
     private static final Logger logger = Logger.getLogger(RichManBoosterDraft.class);
 
-    //protected int[] richManTimes = {75, 70, 65, 60, 55, 50, 45, 40, 35, 35, 35, 35, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25};
-    protected int[] richManTimes = {70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40};
+    // custom timeouts per pick on profi timing
+    protected int[] customProfiTimes = {70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40};
 
     public RichManBoosterDraft(DraftOptions options, List<ExpansionSet> sets) {
         super(options, sets);
@@ -25,14 +25,17 @@ public class RichManBoosterDraft extends DraftImpl {
 
     @Override
     public void start() {
-        cardNum = 0;
-        while (!isAbort() && cardNum < 36) {
+        cardNum = 1;
+        boosterNum = 1;
+        while (!isAbort() && cardNum <= 36) {
             openBooster();
-            cardNum = 0;
+            cardNum = 1;
+            fireUpdatePlayersEvent();
             while (!isAbort() && pickCards()) {
                 passLeft();
                 fireUpdatePlayersEvent();
             }
+            boosterNum++;
         }
         resetBufferedCards();
         this.fireEndDraftEvent();
@@ -46,7 +49,7 @@ public class RichManBoosterDraft extends DraftImpl {
             UUID nextId = table.getNext();
             DraftPlayer next = players.get(nextId);
             while (true) {
-                List<Card> nextBooster = sets.get(cardNum % sets.size()).createBooster();
+                List<Card> nextBooster = sets.get((cardNum - 1) % sets.size()).createBooster();
                 next.setBooster(nextBooster);
                 if (Objects.equals(nextId, startId)) {
                     break;
@@ -59,7 +62,6 @@ public class RichManBoosterDraft extends DraftImpl {
 
     @Override
     protected boolean pickCards() {
-        cardNum++;
         for (DraftPlayer player : players.values()) {
             if (cardNum > 36) {
                 return false;
@@ -67,6 +69,7 @@ public class RichManBoosterDraft extends DraftImpl {
             player.setPicking();
             player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
         }
+        cardNum++;
         synchronized (this) {
             while (!donePicking()) {
                 try {
@@ -81,13 +84,9 @@ public class RichManBoosterDraft extends DraftImpl {
     @Override
     public void firePickCardEvent(UUID playerId) {
         DraftPlayer player = players.get(playerId);
-        if (cardNum > 36) {
-            cardNum = 36;
-        }
-        if (cardNum <= 0) {
-            cardNum = 1;
-        }
-        int time = richManTimes[cardNum - 1] * timing.getFactor();
+        int cardNum = Math.min(36, this.cardNum);
+        // richman uses custom times
+        int time = (int) Math.ceil(customProfiTimes[cardNum - 1] * timing.getCustomTimeoutFactor());
         playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
     }
 } 

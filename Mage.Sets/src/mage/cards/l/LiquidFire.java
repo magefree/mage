@@ -3,6 +3,7 @@ package mage.cards.l;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
@@ -27,7 +28,7 @@ public final class LiquidFire extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
 
         // As an additional cost to cast Liquid Fire, choose a number between 0 and 5.
-        this.getSpellAbility().addCost(new LiquidFireCost());
+        this.getSpellAbility().addCost(new LiquidFireAdditionalCost());
         // Liquid Fire deals X damage to target creature and 5 minus X damage to that creature's controller, where X is the chosen number.
         DynamicValue choiceValue = GetXValue.instance;
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -79,30 +80,31 @@ public final class LiquidFire extends CardImpl {
             return new LiquidFireEffect(this);
         }
     }
+}
 
-    static class LiquidFireCost extends VariableCostImpl {
-        public LiquidFireCost() {
-            super("Choose a Number");
-            this.text = "as an additional cost to cast this spell, choose a number between 0 and 5";
-        }
+class LiquidFireAdditionalCost extends VariableCostImpl {
 
-        public LiquidFireCost(final LiquidFireCost cost) {
-            super(cost);
-        }
+    public LiquidFireAdditionalCost() {
+        super(VariableCostType.ADDITIONAL, "Choose a Number");
+        this.text = "as an additional cost to cast this spell, choose a number between 0 and 5";
+    }
 
-        @Override
-        public Cost copy() {
-            return new LiquidFireCost(this);
-        }
+    public LiquidFireAdditionalCost(final LiquidFireAdditionalCost cost) {
+        super(cost);
+    }
 
-        @Override
-        public Cost getFixedCostsFromAnnouncedValue(int xValue) {
-            return null;
-        }
+    @Override
+    public Cost copy() {
+        return new LiquidFireAdditionalCost(this);
+    }
 
-        @Override
-        public int getMaxValue(Ability source, Game game) {
-            return 5;
-        }
+    @Override
+    public Cost getFixedCostsFromAnnouncedValue(int xValue) {
+        return null;
+    }
+
+    @Override
+    public int getMaxValue(Ability source, Game game) {
+        return 5;
     }
 }

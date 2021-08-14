@@ -10,6 +10,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
+import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
@@ -33,9 +34,10 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     private int actionCount = 0;
     private static final Logger logger = Logger.getLogger(SimulatedPlayerMCTS.class);
 
-    public SimulatedPlayerMCTS(UUID id, boolean isSimulatedPlayer) {
-        super(id);
+    public SimulatedPlayerMCTS(Player originalPlayer, boolean isSimulatedPlayer) {
+        super(originalPlayer.getId());
         this.isSimulatedPlayer = isSimulatedPlayer;
+        this.matchPlayer = new MatchPlayer(originalPlayer.getMatchPlayer(), this);
     }
 
     public SimulatedPlayerMCTS(final SimulatedPlayerMCTS player) {

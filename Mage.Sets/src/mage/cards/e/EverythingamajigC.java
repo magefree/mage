@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
@@ -47,7 +48,7 @@ public final class EverythingamajigC extends CardImpl {
 
         // Chimeric Staff
         // X: Everythingamajig becomes an X/X Construct artifact creature until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChimericStaffEffect(), new VariableManaCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChimericStaffEffect(), new VariableManaCost(VariableCostType.NORMAL)));
     }
 
     private EverythingamajigC(final EverythingamajigC card) {
@@ -147,11 +148,11 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
         }
         switch (layer) {
             case TypeChangingEffects_4:
-                if (!permanent.isArtifact()) {
-                    permanent.addCardType(CardType.ARTIFACT);
+                if (!permanent.isArtifact(game)) {
+                    permanent.addCardType(game, CardType.ARTIFACT);
                 }
-                if (!permanent.isCreature()) {
-                    permanent.addCardType(CardType.CREATURE);
+                if (!permanent.isCreature(game)) {
+                    permanent.addCardType(game, CardType.CREATURE);
                 }
                 permanent.removeAllCreatureTypes(game);
                 permanent.addSubType(game, SubType.CONSTRUCT);

@@ -1,5 +1,6 @@
 package mage.client.cards;
 
+import mage.abilities.icon.CardIconColor;
 import mage.abilities.icon.CardIconOrder;
 import mage.abilities.icon.CardIconPosition;
 import mage.abilities.icon.CardIconRenderSettings;
@@ -49,6 +50,7 @@ public class CardArea extends JPanel implements CardEventProducer {
     private int customXOffsetBetweenCardsOrColumns = 0;
     private CardIconPosition customCardIconPosition = null;
     private CardIconOrder customCardIconOrder = null;
+    private CardIconColor customCardIconColor = null;
     private int customCardIconsMaxVisibleCount = 0;
 
     /**
@@ -188,6 +190,7 @@ public class CardArea extends JPanel implements CardEventProducer {
                 .withDebugMode(true)
                 .withCustomPosition(customCardIconPosition)
                 .withCustomOrder(customCardIconOrder)
+                .withCustomColor(customCardIconColor)
                 .withCustomMaxVisibleCount(customCardIconsMaxVisibleCount)
                 .withCustomIconSizePercent(30);
         MageCard cardPanel = Plugins.instance.getMageCard(card, bigCard, customIconsRender, cardDimension, gameId, true, true,
@@ -292,6 +295,10 @@ public class CardArea extends JPanel implements CardEventProducer {
 
     public void setCustomCardIconsPanelOrder(CardIconOrder panelOrder) {
         this.customCardIconOrder = panelOrder;
+    }
+
+    public void setCustomCardIconsPanelColor(CardIconColor cardIconColor) {
+        this.customCardIconColor = cardIconColor;
     }
 
     public void setCustomCardIconsMaxVisibleCount(int maxVisibleCount) {

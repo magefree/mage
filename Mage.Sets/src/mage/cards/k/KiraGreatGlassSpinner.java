@@ -15,7 +15,6 @@ import mage.constants.*;
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.NumberOfTimesPermanentTargetedATurnWatcher;
@@ -81,7 +80,7 @@ class KiraGreatGlassSpinnerAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getSourceId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.isCreature()) {
+            if (permanent != null && permanent.isCreature(game)) {
                 NumberOfTimesPermanentTargetedATurnWatcher watcher = game.getState().getWatcher(NumberOfTimesPermanentTargetedATurnWatcher.class);
                 if (watcher != null && watcher.notMoreThanOnceTargetedThisTurn(permanent, game)) {
                     for (Effect effect : getEffects()) {

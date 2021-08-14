@@ -42,7 +42,11 @@ public final class GameStateEvaluator {
 
     public static int evaluate(UUID playerId, Game game, boolean ignoreTapped) {
         Player player = game.getPlayer(playerId);
-        Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next());
+        Player opponent = game.getPlayer(game.getOpponents(playerId).stream().findFirst().orElse(null));
+        if (opponent == null) {
+            return WIN_SCORE;
+        }
+
         if (game.checkIfGameIsOver()) {
             if (player.hasLost() || opponent.hasWon()) {
                 return LOSE_SCORE;
@@ -80,7 +84,7 @@ public final class GameStateEvaluator {
         } else {
             value = permanent.isTapped() ? 4 : 5;
         }
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
+        if (permanent.getCardType(game).contains(CardType.CREATURE)) {
             value += evaluateCreature(permanent, game) * CREATURE_FACTOR;
         }
         value += permanent.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD).size();

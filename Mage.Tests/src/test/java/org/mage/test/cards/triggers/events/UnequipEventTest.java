@@ -77,12 +77,12 @@ public class UnequipEventTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nazahn, Revered Bladesmith");
         addTarget(playerA, "Hammer of Nazahn");
-        setChoice(playerA, "Yes"); // Put the hammer on the battlefield
-        setChoice(playerA, "Yes"); // Attach the hammer to a creature
+        setChoice(playerA, true); // Put the hammer on the battlefield
+        setChoice(playerA, true); // Attach the hammer to a creature
         addTarget(playerA, "Nazahn, Revered Bladesmith");
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Grafted Exoskeleton");
-        setChoice(playerA, "Yes"); // Attach the Grafted Exoskeleton to a creature
+        setChoice(playerA, true); // Attach the Grafted Exoskeleton to a creature
         addTarget(playerA, "Nazahn, Revered Bladesmith");
         
         castSpell(3, PhaseStep.BEGIN_COMBAT, playerA, "Beast Within", "Grafted Exoskeleton");

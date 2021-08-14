@@ -7,6 +7,7 @@ import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.common.*;
+import mage.abilities.hint.common.OpenSideboardHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.Duration;
 import mage.constants.SagaChapter;
@@ -51,6 +52,7 @@ public final class TheRavensWarning extends CardImpl {
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
                 new WishEffect(StaticFilters.FILTER_CARD_A, false, false, true)
         );
+        sagaAbility.addHint(OpenSideboardHint.instance);
         this.addAbility(sagaAbility);
     }
 

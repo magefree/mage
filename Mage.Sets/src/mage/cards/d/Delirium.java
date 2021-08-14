@@ -39,7 +39,7 @@ public final class Delirium extends CardImpl {
         // Cast this spell only during an opponent’s turn.
         this.addAbility(new CastOnlyIfConditionIsTrueAbility(OnOpponentsTurnCondition.instance, "Cast this spell only during an opponent's turn."));
         // Tap target creature that player controls. That creature deals damage equal to its power to the player. Prevent all combat damage that would be dealt to and dealt by the creature this turn.
-        this.getSpellAbility().addEffect(new TapTargetEffect().setText("target creature that player controls"));
+        this.getSpellAbility().addEffect(new TapTargetEffect("tap target creature that player controls"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DeliriumEffect());
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, true).setText("Prevent all combat damage that would be dealt to"));

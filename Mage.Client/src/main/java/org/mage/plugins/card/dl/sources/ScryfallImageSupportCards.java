@@ -504,6 +504,9 @@ public class ScryfallImageSupportCards {
             add("MH2"); // Modern Horizons 2
             add("H1R"); // Modern Horizons 1 Timeshifts
             add("AFR"); // Adventures in the Forgotten Realms
+            add("AFC"); // Forgotten Realms Commander
+            add("J21"); // Jumpstart: Historic Horizons
+            add("MID"); // Innistrad, Midnight Hunt
         }
     };
 
@@ -704,6 +707,8 @@ public class ScryfallImageSupportCards {
             put("M20/Corpse Knight/206+", "https://api.scryfall.com/cards/m20/206†/");
             // MIR
             put("MIR/Reality Ripple/87+", "https://api.scryfall.com/cards/mir/87†/");
+            // OGW
+            put("OGW/Captain's Claws/162+", "https://api.scryfall.com/cards/ogw/162†/");
             // ODY
             put("ODY/Cephalid Looter/72+", "https://api.scryfall.com/cards/ody/72†/");
             put("ODY/Seafloor Debris/325+", "https://api.scryfall.com/cards/ody/325†/");

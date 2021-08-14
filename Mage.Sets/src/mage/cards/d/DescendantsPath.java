@@ -75,7 +75,7 @@ class DescendantsPathEffect extends OneShotEffect {
                     return false;
                 }
                 controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
-                if (card.isCreature()) {
+                if (card.isCreature(game)) {
                     FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                     boolean found = false;
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {

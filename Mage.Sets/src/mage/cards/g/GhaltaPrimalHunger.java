@@ -77,7 +77,7 @@ class GhaltaPrimalHungerCostReductionEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int totalPower = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent.isCreature()) {
+            if (permanent.isCreature(game)) {
                 totalPower += permanent.getPower().getValue();
             }
 

@@ -75,10 +75,10 @@ class EsperSentinelTriggeredAbility extends TriggeredAbilityImpl {
         Player controller = game.getPlayer(getControllerId());
         Spell spell = game.getSpell(event.getTargetId());
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        if (controller != null && spell != null && watcher != null && !spell.isCreature() && controller.hasOpponent(spell.getControllerId(), game)) {
+        if (controller != null && spell != null && watcher != null && !spell.isCreature(game) && controller.hasOpponent(spell.getControllerId(), game)) {
             int nonCreatureSpells = 0;
             for (Spell spellCastThisTurn : watcher.getSpellsCastThisTurn(spell.getControllerId())) {
-                if (!spellCastThisTurn.isCreature() && ++nonCreatureSpells > 1) {
+                if (!spellCastThisTurn.isCreature(game) && ++nonCreatureSpells > 1) {
                     break;
                 }
             }

@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -68,7 +67,7 @@ class RootMazeEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null && (permanent.isLand() || permanent.isArtifact());
+        return permanent != null && (permanent.isLand(game) || permanent.isArtifact(game));
     }
 
     @Override

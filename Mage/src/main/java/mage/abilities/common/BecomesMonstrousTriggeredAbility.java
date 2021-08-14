@@ -35,7 +35,7 @@ public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isCreature()
+        if (permanent != null && permanent.isCreature(game)
                 && (permanent.isControlledBy(getControllerId()))) {
             this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
             return true;
@@ -44,7 +44,7 @@ public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature you control becomes monstrous, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a creature you control becomes monstrous, " ;
     }
 }

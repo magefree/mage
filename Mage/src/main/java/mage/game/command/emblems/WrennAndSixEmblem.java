@@ -50,7 +50,7 @@ class WrennAndSixEmblemEffect extends ContinuousEffectImpl {
                 // Adventure cards are castable per https://twitter.com/elishffrn/status/1179047911729946624
                 card = ((AdventureCard) card).getSpellCard();
             }
-            if (!card.isInstantOrSorcery()) {
+            if (!card.isInstantOrSorcery(game)) {
                 continue;
             }
             Ability ability = new RetraceAbility(card);

@@ -77,7 +77,7 @@ class GlyphOfLifeTriggeredAbility extends DelayedTriggeredAbility {
         if (event.getTargetId().equals(this.getFirstTarget())) {
             DamagedEvent damageEvent = (DamagedEvent) event;
             Permanent attackingCreature = game.getPermanentOrLKIBattlefield(damageEvent.getSourceId());
-            if (attackingCreature != null && attackingCreature.isCreature() && attackingCreature.isAttacking()) {
+            if (attackingCreature != null && attackingCreature.isCreature(game) && attackingCreature.isAttacking()) {
                 this.getEffects().get(0).setValue("damageAmount", event.getAmount());
                 return true;
             }
@@ -86,8 +86,8 @@ class GlyphOfLifeTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever that creature is dealt damage by an attacking creature this turn, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever that creature is dealt damage by an attacking creature this turn, " ;
     }
 }
 

@@ -1,11 +1,14 @@
 package mage.abilities.costs;
 
-import mage.util.Copyable;
-
 /**
+ * Virtual optional/additional cost, it must be tranformed to simple cost on resolve in your custom ability.
+ * Don't forget to set up cost type for variable costs
+ * <p>
+ * Example: KickerAbility.
+ *
  * @author LevelX2
  */
-public interface OptionalAdditionalCost extends Cost, Copyable<OptionalAdditionalCost> {
+public interface OptionalAdditionalCost extends Cost {
 
     String getName();
 
@@ -77,4 +80,13 @@ public interface OptionalAdditionalCost extends Cost, Copyable<OptionalAdditiona
      */
     int getActivateCount();
 
+    /**
+     * Set cost type to variable costs like additional or normal (example: Kicker)
+     *
+     * @param costType
+     */
+    void setCostType(VariableCostType costType);
+
+    @Override
+    OptionalAdditionalCost copy();
 }

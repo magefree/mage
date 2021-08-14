@@ -1,7 +1,6 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -75,7 +74,7 @@ class AngelicGuardianGainEffect extends OneShotEffect {
                     .map(game::getPermanent)
                     .filter(Objects::nonNull)
                     .filter(permanent -> permanent.isControlledBy(you.getId()))
-                    .filter(MageObject::isCreature)
+                    .filter(permanent1 -> permanent1.isCreature(game))
                     .forEach(permanent -> {
                         ContinuousEffect effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
                         effect.setTargetPointer(new FixedTarget(permanent, game));

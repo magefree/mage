@@ -26,7 +26,7 @@ public final class RestlessDreams extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // As an additional cost to cast Restless Dreams, discard X cards.
-        this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS, false));
+        this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS, true));
 
         // Return X target creature cards from your graveyard to your hand.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();

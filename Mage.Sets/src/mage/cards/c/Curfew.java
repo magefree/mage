@@ -46,6 +46,10 @@ class CurfewEffect extends OneShotEffect {
         staticText = "Each player returns a creature they control to its owner's hand";
     }
 
+    private CurfewEffect(final CurfewEffect effect) {
+        super(effect);
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
         game.informPlayers("Each player returns a creature they control to its owner's hand");
@@ -64,7 +68,7 @@ class CurfewEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
-        return new CurfewEffect();
+    public CurfewEffect copy() {
+        return new CurfewEffect(this);
     }
 }

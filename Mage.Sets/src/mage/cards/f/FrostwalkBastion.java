@@ -39,7 +39,7 @@ public final class FrostwalkBastion extends CardImpl {
 
         // Whenever Frostwalk Bastion deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
         Ability ability = new DealsDamageToACreatureTriggeredAbility(
-                new TapTargetEffect().setText("that creature"),
+                new TapTargetEffect("tap that creature"),
                 true, false, true
         );
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect()

@@ -54,7 +54,7 @@ class CleansingEffect extends OneShotEffect {
         while (permanents.hasNext()) {
             boolean paidLife = false;
             Permanent p = permanents.next();
-            if (p.isLand()) {
+            if (p.isLand(game)) {
                 game.informPlayers("Any player may pay 1 life to prevent the destruction of " + p.getLogName() + " controlled by " + game.getPlayer(p.getControllerId()).getLogName() + ".");
                 PayLifeCost cost = new PayLifeCost(1);
                 for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {

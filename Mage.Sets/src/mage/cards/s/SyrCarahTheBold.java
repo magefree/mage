@@ -79,7 +79,7 @@ class SyrCarahTheBoldTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         Spell spell = game.getSpellOrLKIStack(event.getSourceId());
-        return spell != null && spell.isInstantOrSorcery()
+        return spell != null && spell.isInstantOrSorcery(game)
                 && spell.isControlledBy(this.getControllerId());
     }
 

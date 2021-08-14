@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 
 /**
@@ -63,7 +62,7 @@ class MolderBeastTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.isDiesEvent()
-                && zEvent.getTarget().isArtifact();
+                && zEvent.getTarget().isArtifact(game);
     }
 
     @Override

@@ -69,11 +69,6 @@ public class DraftPlayer {
         picking = false;
     }
 
-//    public void openBooster(ExpansionSet set) {
-//        synchronized(booster) {
-//            booster = set.createBooster();
-//        }
-//    }
     public void setBooster(List<Card> booster) {
         this.booster = booster;
     }

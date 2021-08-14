@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
@@ -86,7 +85,7 @@ class ChandraTheFirebrandAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isInstantOrSorcery()) {
+            if (spell != null && spell.isInstantOrSorcery(game)) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }

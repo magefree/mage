@@ -65,7 +65,7 @@ class BlacksmithsSkillEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null && permanent.isArtifact() && permanent.isCreature()) {
+        if (permanent != null && permanent.isArtifact(game) && permanent.isCreature(game)) {
             game.addEffect(new BoostTargetEffect(2, 2), source);
             return true;
         }

@@ -36,7 +36,7 @@ public final class NekoTe extends CardImpl {
         skipUntapEffect.setText("That creature doesn't untap during its controller's untap step for as long as {this} remains on the battlefield");
         ConditionalContinuousRuleModifyingEffect effect = new ConditionalContinuousRuleModifyingEffect(skipUntapEffect, 
                 new SourceRemainsInZoneCondition(Zone.BATTLEFIELD));
-        Ability ability = new DealsDamageToACreatureAttachedTriggeredAbility(new TapTargetEffect("that creature"), false, "equipped creature", false, true);
+        Ability ability = new DealsDamageToACreatureAttachedTriggeredAbility(new TapTargetEffect("tap that creature"), false, "equipped creature", false, true);
         ability.addEffect(effect);
         this.addAbility(ability);
 

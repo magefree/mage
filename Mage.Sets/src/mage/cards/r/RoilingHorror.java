@@ -92,8 +92,8 @@ class RoilingHorrorTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a time counter is removed from {this} while it's exiled, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever a time counter is removed from {this} while it's exiled, " ;
     }
 
 }

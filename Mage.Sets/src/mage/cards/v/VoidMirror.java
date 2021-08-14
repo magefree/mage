@@ -72,7 +72,7 @@ class VoidMirrorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = (Spell) getValue("spellCast");
-        if (spell != null && new MageObjectReference(spell.getId(), game).refersTo(spell, game)) {
+        if (spell != null) {
             spell.counter(source, game);
             return true;
         }

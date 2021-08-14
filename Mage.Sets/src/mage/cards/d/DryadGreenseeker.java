@@ -75,7 +75,7 @@ class DryadGreenseekerEffect extends OneShotEffect {
             return false;
         }
         player.lookAtCards(null, card, game);
-        if (!card.isLand()) {
+        if (!card.isLand(game)) {
             return true;
         }
         if (!player.chooseUse(outcome, "Reveal " + card.getName() + " and put it into your hand?", source, game)) {
