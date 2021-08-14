@@ -12,6 +12,10 @@ import mage.game.command.Emblem;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacesCardHalf;
+import mage.cards.SplitCard;
+import mage.cards.SplitCardHalf;
 
 /**
  * @author TheElk801
@@ -26,6 +30,7 @@ public final class WrennAndSixEmblem extends Emblem {
 }
 
 class WrennAndSixEmblemEffect extends ContinuousEffectImpl {
+
     WrennAndSixEmblemEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "Instant and sorcery cards in your graveyard have retrace.";
@@ -45,6 +50,38 @@ class WrennAndSixEmblemEffect extends ContinuousEffectImpl {
             Card card = game.getCard(cardId);
             if (card == null) {
                 continue;
+            }
+            if (card instanceof SplitCard) {
+                SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
+                SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
+                if (leftHalfCard.isInstantOrSorcery(game)) {
+                    Ability ability = new RetraceAbility(leftHalfCard);
+                    ability.setSourceId(cardId);
+                    ability.setControllerId(leftHalfCard.getOwnerId());
+                    game.getState().addOtherAbility(leftHalfCard, ability);
+                }
+                if (rightHalfCard.isInstantOrSorcery(game)) {
+                    Ability ability = new RetraceAbility(rightHalfCard);
+                    ability.setSourceId(cardId);
+                    ability.setControllerId(rightHalfCard.getOwnerId());
+                    game.getState().addOtherAbility(rightHalfCard, ability);
+                }
+            }
+            if (card instanceof ModalDoubleFacesCard) {
+                ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+                ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+                if (leftHalfCard.isInstantOrSorcery(game)) {
+                    Ability ability = new RetraceAbility(leftHalfCard);
+                    ability.setSourceId(cardId);
+                    ability.setControllerId(leftHalfCard.getOwnerId());
+                    game.getState().addOtherAbility(leftHalfCard, ability);
+                }
+                if (rightHalfCard.isInstantOrSorcery(game)) {
+                    Ability ability = new RetraceAbility(rightHalfCard);
+                    ability.setSourceId(cardId);
+                    ability.setControllerId(rightHalfCard.getOwnerId());
+                    game.getState().addOtherAbility(rightHalfCard, ability);
+                }
             }
             if (card instanceof AdventureCard) {
                 // Adventure cards are castable per https://twitter.com/elishffrn/status/1179047911729946624
