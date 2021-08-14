@@ -1,6 +1,7 @@
 package mage.choices;
 
 import mage.util.RandomUtil;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -9,9 +10,11 @@ import java.util.*;
  */
 public class ChoiceImpl implements Choice {
 
+    private static final Logger logger = Logger.getLogger(Choice.class);
+
     protected boolean chosenNormal;
     protected boolean chosenSpecial;
-    protected final boolean required;
+    protected boolean required;
     protected String choice;
     protected String choiceKey;
     protected Set<String> choices = new LinkedHashSet<>();
@@ -109,6 +112,7 @@ public class ChoiceImpl implements Choice {
     @Override
     public void setChoices(Set<String> choices) {
         this.choices = choices;
+        protectFromEmptyChoices();
     }
 
     @Override
@@ -149,6 +153,7 @@ public class ChoiceImpl implements Choice {
     @Override
     public void setKeyChoices(Map<String, String> choices) {
         keyChoices = choices;
+        protectFromEmptyChoices();
     }
 
     @Override
@@ -313,5 +318,26 @@ public class ChoiceImpl implements Choice {
     @Override
     public ChoiceHintType getHintType() {
         return this.hintType;
+    }
+
+    private void protectFromEmptyChoices() {
+        // if there are no choices then required must be disabled to allow user to close a dialog
+        // example: database error on too low memory, see Brain Pry and 500 Mb server
+
+        // normal situation
+        if (!this.required) {
+            return;
+        }
+
+        // special checkbox can allow empty choices
+        if (this.specialEnabled && this.specialCanBeEmpty) {
+            return;
+        }
+
+        if (this.choices.isEmpty() && this.keyChoices.isEmpty()) {
+            // it can be a server problems or wrong card code
+            this.required = false;
+            logger.error("Empty choice dialog in " + this.getClass().getCanonicalName(), new Throwable());
+        }
     }
 }
