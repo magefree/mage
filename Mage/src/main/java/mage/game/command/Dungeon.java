@@ -14,6 +14,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.text.TextPart;
 import mage.cards.FrameStyle;
 import mage.choices.Choice;
+import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -130,11 +131,15 @@ public class Dungeon implements CommandObject {
 
     public static Dungeon selectDungeon(UUID playerId, Game game) {
         Player player = game.getPlayer(playerId);
-        Choice choice = new ChoiceImpl(true);
+        Choice choice = new ChoiceImpl(true, ChoiceHintType.CARD_DUNGEON);
         choice.setMessage("Choose a dungeon to venture into");
         choice.setChoices(dungeonNames);
         player.choose(Outcome.Neutral, choice, game);
-        switch (choice.getChoice()) {
+        return createDungeon(choice.getChoice());
+    }
+
+    public static Dungeon createDungeon(String name) {
+        switch (name) {
             case "Tomb of Annihilation":
                 return new TombOfAnnihilation();
             case "Lost Mine of Phandelver":

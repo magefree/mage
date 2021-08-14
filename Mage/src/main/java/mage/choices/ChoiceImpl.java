@@ -21,6 +21,7 @@ public class ChoiceImpl implements Choice {
     protected String subMessage;
     protected boolean searchEnabled = true; // enable for all windows by default
     protected String searchText;
+    protected ChoiceHintType hintType;
 
     // special button with #-answer
     // warning, only for human's GUI, not AI
@@ -34,7 +35,12 @@ public class ChoiceImpl implements Choice {
     }
 
     public ChoiceImpl(boolean required) {
+        this(required, ChoiceHintType.TEXT);
+    }
+
+    public ChoiceImpl(boolean required, ChoiceHintType hintType) {
         this.required = required;
+        this.hintType = hintType;
     }
 
     public ChoiceImpl(final ChoiceImpl choice) {
@@ -46,6 +52,7 @@ public class ChoiceImpl implements Choice {
         this.subMessage = choice.subMessage;
         this.searchEnabled = choice.searchEnabled;
         this.searchText = choice.searchText;
+        this.hintType = choice.hintType;
         this.choices.addAll(choice.choices);
         this.choiceKey = choice.choiceKey;
         this.keyChoices = choice.keyChoices; // list should never change for the same object so copy by reference TODO: check errors with that, it that ok? Color list is static
@@ -301,5 +308,10 @@ public class ChoiceImpl implements Choice {
     @Override
     public String getSpecialHint() {
         return this.specialHint;
+    }
+
+    @Override
+    public ChoiceHintType getHintType() {
+        return this.hintType;
     }
 }

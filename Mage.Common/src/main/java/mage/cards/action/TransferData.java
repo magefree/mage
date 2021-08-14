@@ -9,6 +9,7 @@ import java.util.UUID;
 
 /**
  * Data for main card panel events like mouse moves or clicks
+ *
  */
 public class TransferData {
 

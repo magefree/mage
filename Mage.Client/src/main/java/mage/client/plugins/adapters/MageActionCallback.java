@@ -132,6 +132,7 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseEntered(MouseEvent e, final TransferData data) {
+        // MouseEvent can be null for custom hints calls, e.g. from choose dialog
         this.popupData = data;
         handleMouseMoveOverNewCard(data);
     }
@@ -288,10 +289,13 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseMoved(MouseEvent e, TransferData data) {
+        // MouseEvent can be null for custom hints calls, e.g. from choose dialog
+
         if (!Plugins.instance.isCardPluginLoaded()) {
             return;
         }
-        if (!popupData.getCard().equals(data.getCard())) {
+        if (this.popupData == null
+                || !popupData.getCard().equals(data.getCard())) {
             this.popupData = data;
             handleMouseMoveOverNewCard(data);
         }
@@ -336,6 +340,7 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseExited(MouseEvent e, final TransferData data) {
+        // MouseEvent can be null for custom hints calls, e.g. from choose dialog
         if (data != null) {
             hideAll(data.getGameId());
         } else {
@@ -452,6 +457,10 @@ public class MageActionCallback implements ActionCallback {
         hideTooltipPopup();
         cancelTimeout();
         Component parentComponent = SwingUtilities.getRoot(cardPanel);
+        if (parentComponent == null) {
+            // virtual card (example: show card popup in non cards panel like PickChoiceDialog)
+            parentComponent = MageFrame.getDesktop();
+        }
         Point parentPoint = parentComponent.getLocationOnScreen();
 
         if (data.getLocationOnScreen() == null) {
