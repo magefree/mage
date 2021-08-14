@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiceRolledTriggeredAbility;
+import mage.abilities.common.OneOrMoreDiceRolledTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class FeywildTrickster extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you roll one or more dice, create a 1/1 blue Faerie Dragon creature token with flying.
-        this.addAbility(new DiceRolledTriggeredAbility(new CreateTokenEffect(new FaerieDragonToken())));
+        this.addAbility(new OneOrMoreDiceRolledTriggeredAbility(new CreateTokenEffect(new FaerieDragonToken())));
     }
 
     private FeywildTrickster(final FeywildTrickster card) {

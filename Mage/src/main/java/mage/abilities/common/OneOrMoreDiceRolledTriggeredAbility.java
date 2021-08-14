@@ -7,22 +7,21 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author weirddan455
  */
-public class DiceRolledTriggeredAbility extends TriggeredAbilityImpl {
+public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
 
-    public DiceRolledTriggeredAbility(Effect effect) {
+    public OneOrMoreDiceRolledTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    private DiceRolledTriggeredAbility(final DiceRolledTriggeredAbility effect) {
+    private OneOrMoreDiceRolledTriggeredAbility(final OneOrMoreDiceRolledTriggeredAbility effect) {
         super(effect);
     }
 
     @Override
-    public DiceRolledTriggeredAbility copy() {
-        return new DiceRolledTriggeredAbility(this);
+    public OneOrMoreDiceRolledTriggeredAbility copy() {
+        return new OneOrMoreDiceRolledTriggeredAbility(this);
     }
 
     @Override
@@ -36,7 +35,7 @@ public class DiceRolledTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getRule() {
-        return "Whenever you roll one or more dice, " + super.getRule();
+    public String getTriggerPhrase() {
+        return "Whenever you roll one or more dice, ";
     }
 }

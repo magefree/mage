@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiceRolledTriggeredAbility;
+import mage.abilities.common.OneOrMoreDiceRolledTriggeredAbility;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class BrazenDwarf extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you roll one or more dice, Brazen Dwarf deals 1 damage to each opponent.
-        this.addAbility(new DiceRolledTriggeredAbility(new DamagePlayersEffect(1, TargetController.OPPONENT)));
+        this.addAbility(new OneOrMoreDiceRolledTriggeredAbility(new DamagePlayersEffect(1, TargetController.OPPONENT)));
     }
 
     private BrazenDwarf(final BrazenDwarf card) {
