@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
+import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -56,7 +57,7 @@ public class ChooseACardNameEffect extends OneShotEffect {
             if (player == null) {
                 return null;
             }
-            Choice cardChoice = new ChoiceImpl(true);
+            Choice cardChoice = new ChoiceImpl(true, ChoiceHintType.CARD);
             cardChoice.setChoices(this.getNames());
             cardChoice.setMessage(CardUtil.getTextWithFirstCharUpperCase(this.getMessage()));
             cardChoice.clearChoice();

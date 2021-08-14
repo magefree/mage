@@ -8,6 +8,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.choices.Choice;
+import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
 import mage.filter.predicate.Predicate;
@@ -93,7 +94,7 @@ public abstract class StackObjectImpl implements StackObject {
             if (choice != null) {
                 return;
             }
-            choice = new ChoiceImpl(false);
+            choice = new ChoiceImpl(false, ChoiceHintType.CARD);
             choice.setMessage("Choose the order of copies to go on the stack");
             choice.setSubMessage("Press cancel to put the rest in any order");
             choice.setChoices(new HashSet<>(predicateMap.keySet()));
