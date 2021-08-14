@@ -13,7 +13,7 @@ import mage.game.events.GameEvent;
 public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
 
     public OneOrMoreDiceRolledTriggeredAbility(Effect effect) {
-        this(effect, true);
+        this(effect, false);
     }
 
     public OneOrMoreDiceRolledTriggeredAbility(Effect effect, boolean optional) {
