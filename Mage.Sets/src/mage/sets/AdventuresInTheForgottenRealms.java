@@ -49,6 +49,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Barrowin of Clan Undurr", 218, Rarity.UNCOMMON, mage.cards.b.BarrowinOfClanUndurr.class));
         cards.add(new SetCardInfo("Battle Cry Goblin", 132, Rarity.UNCOMMON, mage.cards.b.BattleCryGoblin.class));
         cards.add(new SetCardInfo("Black Dragon", 90, Rarity.UNCOMMON, mage.cards.b.BlackDragon.class));
+        cards.add(new SetCardInfo("Brazen Dwarf", 134, Rarity.COMMON, mage.cards.b.BrazenDwarf.class));
         cards.add(new SetCardInfo("Blink Dog", 3, Rarity.UNCOMMON, mage.cards.b.BlinkDog.class));
         cards.add(new SetCardInfo("Blue Dragon", 49, Rarity.UNCOMMON, mage.cards.b.BlueDragon.class));
         cards.add(new SetCardInfo("Boots of Speed", 133, Rarity.COMMON, mage.cards.b.BootsOfSpeed.class));
@@ -108,6 +109,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Farideh's Fireball", 142, Rarity.COMMON, mage.cards.f.FaridehsFireball.class));
         cards.add(new SetCardInfo("Fates' Reversal", 102, Rarity.COMMON, mage.cards.f.FatesReversal.class));
         cards.add(new SetCardInfo("Feign Death", 103, Rarity.COMMON, mage.cards.f.FeignDeath.class));
+        cards.add(new SetCardInfo("Feywild Trickster", 58, Rarity.UNCOMMON, mage.cards.f.FeywildTrickster.class));
         cards.add(new SetCardInfo("Fifty Feet of Rope", 244, Rarity.UNCOMMON, mage.cards.f.FiftyFeetOfRope.class));
         cards.add(new SetCardInfo("Fighter Class", 222, Rarity.RARE, mage.cards.f.FighterClass.class));
         cards.add(new SetCardInfo("Find the Path", 183, Rarity.COMMON, mage.cards.f.FindThePath.class));
