@@ -259,6 +259,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Victimize", 112, Rarity.UNCOMMON, mage.cards.v.Victimize.class));
         cards.add(new SetCardInfo("Viridian Longbow", 221, Rarity.COMMON, mage.cards.v.ViridianLongbow.class));
         cards.add(new SetCardInfo("Vitu-Ghazi, the City-Tree", 272, Rarity.UNCOMMON, mage.cards.v.VituGhaziTheCityTree.class));
+        cards.add(new SetCardInfo("Vrondiss, Rage of Ancients", 4, Rarity.MYTHIC, mage.cards.v.VrondissRageOfAncients.class));
         cards.add(new SetCardInfo("Wall of Omens", 77, Rarity.UNCOMMON, mage.cards.w.WallOfOmens.class));
         cards.add(new SetCardInfo("Wand of Orcus", 28, Rarity.RARE, mage.cards.w.WandOfOrcus.class));
         cards.add(new SetCardInfo("Warstorm Surge", 149, Rarity.RARE, mage.cards.w.WarstormSurge.class));
