@@ -4,6 +4,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DiceRolledEvent;
 import mage.game.events.GameEvent;
 
 /**
@@ -31,7 +32,17 @@ public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(getControllerId());
+        if (!isControlledBy(event.getPlayerId())) {
+            return false;
+        }
+        int maxRoll = ((DiceRolledEvent) event)
+                .getResults()
+                .stream()
+                .mapToInt(x -> x)
+                .max()
+                .orElse(0);
+        this.getEffects().setValue("maxDieRoll", maxRoll);
+        return true;
     }
 
     @Override
