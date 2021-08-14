@@ -1,5 +1,6 @@
 package org.mage.test.cards.rolldice;
 
+import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -16,6 +17,7 @@ public class RollDiceTest extends CardTestPlayerBase {
     private static final String guide = "Pixie Guide";
     private static final String thumb = "Krark's Other Thumb";
     private static final String gallery = "Mirror Gallery";
+    private static final String farideh = "Farideh, Devil's Chosen";
 
     @Test(expected = AssertionError.class)
     public void testStrictFailWithoutSetup() {
@@ -179,5 +181,34 @@ public class RollDiceTest extends CardTestPlayerBase {
     @Test
     public void test_KrarksOtherThumb_2copies_SameRoll() {
         runKrarksOtherThumbTest(8, 2, 1, 8, 8, 8, 8);
+    }
+
+    private void runFaridehTest(int goblinCount, int handCount, int roll) {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, farideh);
+        addCard(Zone.HAND, playerA, goblins);
+
+        setDieRollResult(playerA, roll);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, goblins);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, goblins, 1);
+        assertPermanentCount(playerA, "Goblin", goblinCount);
+        assertAbility(playerA, farideh, FlyingAbility.getInstance(), true);
+        assertHandCount(playerA, handCount);
+    }
+
+    @Test
+    public void test_FaridehDevilsChosen_NoDraw() {
+        runFaridehTest(1, 0, 9);
+    }
+
+    @Test
+    public void test_FaridehDevilsChosen_Draw() {
+        runFaridehTest(2, 1, 10);
     }
 }
