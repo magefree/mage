@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -104,7 +103,8 @@ class CoffinQueenDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.LOST_CONTROL
-                || event.getType() == GameEvent.EventType.UNTAPPED;
+                || event.getType() == GameEvent.EventType.UNTAPPED
+                || event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -113,8 +113,16 @@ class CoffinQueenDelayedTriggeredAbility extends DelayedTriggeredAbility {
                 && event.getTargetId().equals(this.getSourceId())) {
             return true;
         }
-        return EventType.UNTAPPED == event.getType()
-                && event.getTargetId() != null && event.getTargetId().equals(getSourceId());
+        if (EventType.UNTAPPED == event.getType()
+                && event.getTargetId() != null
+                && event.getTargetId().equals(getSourceId())) {
+            return true;
+        }
+        if (EventType.ZONE_CHANGE == event.getType()
+                && event.getTargetId().equals(this.getSourceId())) {
+            return true;
+        }
+        return false;
     }
 
     @Override
