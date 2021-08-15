@@ -42,18 +42,30 @@ public abstract class StackObjectImpl implements StackObject {
         createCopyOnStack(game, source, newControllerId, chooseNewTargets, amount, null);
     }
 
-    private static final class PredicateIterator implements Iterator<MageObjectReferencePredicate> {
+    /**
+     * Copy logic:
+     * - multiple copies allows
+     * - new targets for each copy allows
+     * - each next copy can have new target type/filter
+     * - player can choose copies order on stack
+     * <p>
+     * Code logic:
+     * - find all possible target types (any target or custom)
+     * - user can choose next target type to put on stack
+     * - put all copies with that target type and request next choice
+     * - implemented by iterator mechanic (target type -> target filter)
+     */
+    private static final class NewTargetTypeIterator implements Iterator<MageObjectReferencePredicate> {
+
         private final StackObjectCopyApplier applier;
         private final Player player;
         private final int amount;
         private final Game game;
-        private Map<String, MageObjectReferencePredicate> predicateMap = null;
-        private int anyCount = 0;
-        private int setCount = 0;
-        private Iterator<MageObjectReferencePredicate> iterator = null;
-        private Choice choice = null;
+        private Map<String, MageObjectReferencePredicate> newTargetTypes = null;
+        private Iterator<MageObjectReferencePredicate> currentNewTargetType = null;
+        private Choice newTargetTypeChoiceDialog = null;
 
-        private PredicateIterator(Game game, UUID newControllerId, int amount, StackObjectCopyApplier applier) {
+        private NewTargetTypeIterator(Game game, UUID newControllerId, int amount, StackObjectCopyApplier applier) {
             this.applier = applier;
             this.player = game.getPlayer(newControllerId);
             this.amount = amount;
@@ -65,39 +77,47 @@ public abstract class StackObjectImpl implements StackObject {
             return true;
         }
 
-        private void makeMap() {
-            if (predicateMap != null) {
+        private void prepareNewTargetTypes() {
+            if (newTargetTypes != null) {
+                // already prepared
                 return;
             }
-            predicateMap = new HashMap<>();
 
+            int currentAnyTargetNumber = 0;
+            int currentFilteredTargetNumber = 0;
+
+            newTargetTypes = new HashMap<>();
             for (int i = 0; i < amount; i++) {
-                MageObjectReferencePredicate predicate = applier.getNextPredicate();
-                if (predicate == null) {
-                    anyCount++;
+                MageObjectReferencePredicate newTargetType = applier.getNextNewTargetType(i + 1);
+                if (newTargetType == null) {
+                    currentAnyTargetNumber++;
                     String message = "Any target";
-                    if (anyCount > 1) {
-                        message += " (" + anyCount + ")";
+                    if (currentAnyTargetNumber > 1) {
+                        message += " (" + currentAnyTargetNumber + ")";
                     }
-                    predicateMap.put(message, predicate);
+                    newTargetTypes.put(message, null);
                     continue;
                 }
-                setCount++;
-                predicateMap.put(predicate.getName(game), predicate);
+                currentFilteredTargetNumber++;
+                newTargetTypes.put(newTargetType.getName(game), newTargetType);
             }
-            if ((setCount == 1 && anyCount == 0) || setCount == 0) {
-                iterator = predicateMap.values().stream().collect(Collectors.toList()).iterator();
+
+            // if only one target type then choose it by default
+            if ((currentFilteredTargetNumber == 1 && currentAnyTargetNumber == 0) || currentFilteredTargetNumber == 0) {
+                currentNewTargetType = newTargetTypes.values().stream().collect(Collectors.toList()).iterator();
             }
         }
 
-        private void makeChoice() {
-            if (choice != null) {
+        private void prepareFilterChooseDialog() {
+            // used choices removes from the dialog
+            if (newTargetTypeChoiceDialog != null) {
+                // already prepared
                 return;
             }
-            choice = new ChoiceImpl(false, ChoiceHintType.CARD);
-            choice.setMessage("Choose the order of copies to go on the stack");
-            choice.setSubMessage("Press cancel to put the rest in any order");
-            choice.setChoices(new HashSet<>(predicateMap.keySet()));
+            newTargetTypeChoiceDialog = new ChoiceImpl(false, ChoiceHintType.CARD);
+            newTargetTypeChoiceDialog.setMessage("Choose the order of copies to go on the stack");
+            newTargetTypeChoiceDialog.setSubMessage("Press cancel to put the rest in any order");
+            newTargetTypeChoiceDialog.setChoices(new HashSet<>(newTargetTypes.keySet()));
         }
 
         @Override
@@ -105,24 +125,30 @@ public abstract class StackObjectImpl implements StackObject {
             if (player == null || applier == null) {
                 return null;
             }
-            makeMap();
-            if (iterator != null) {
-                return iterator.hasNext() ? iterator.next() : null;
+
+            prepareNewTargetTypes();
+            if (currentNewTargetType != null) {
+                // target type already selected
+                return currentNewTargetType.hasNext() ? currentNewTargetType.next() : null;
             }
-            makeChoice();
-            if (choice.getChoices().size() < 2) {
-                iterator = choice.getChoices().stream().map(predicateMap::get).iterator();
+
+            prepareFilterChooseDialog();
+            if (newTargetTypeChoiceDialog.getChoices().size() < 2) {
+                // no more unused target types - select the last one
+                currentNewTargetType = newTargetTypeChoiceDialog.getChoices().stream().map(newTargetTypes::get).iterator();
                 return next();
             }
-            choice.clearChoice();
-            player.choose(Outcome.AIDontUseIt, choice, game);
-            String chosen = choice.getChoice();
+
+            // choose next target type for usage
+            newTargetTypeChoiceDialog.clearChoice();
+            player.choose(Outcome.AIDontUseIt, newTargetTypeChoiceDialog, game);
+            String chosen = newTargetTypeChoiceDialog.getChoice();
             if (chosen == null) {
-                iterator = choice.getChoices().stream().map(predicateMap::get).iterator();
+                currentNewTargetType = newTargetTypeChoiceDialog.getChoices().stream().map(newTargetTypes::get).iterator();
                 return next();
             }
-            choice.getChoices().remove(chosen);
-            return predicateMap.get(chosen);
+            newTargetTypeChoiceDialog.getChoices().remove(chosen);
+            return newTargetTypes.get(chosen);
         }
     }
 
@@ -132,9 +158,9 @@ public abstract class StackObjectImpl implements StackObject {
         if (game.replaceEvent(gameEvent)) {
             return;
         }
-        Iterator<MageObjectReferencePredicate> predicates = new PredicateIterator(game, newControllerId, gameEvent.getAmount(), applier);
+        Iterator<MageObjectReferencePredicate> newTargetTypeIterator = new NewTargetTypeIterator(game, newControllerId, gameEvent.getAmount(), applier);
         for (int i = 0; i < gameEvent.getAmount(); i++) {
-            createSingleCopy(newControllerId, applier, predicates.next(), game, source, chooseNewTargets);
+            createSingleCopy(newControllerId, applier, newTargetTypeIterator.next(), game, source, chooseNewTargets);
         }
         Player player = game.getPlayer(newControllerId);
         if (player == null) {
@@ -210,18 +236,17 @@ public abstract class StackObjectImpl implements StackObject {
      * targets will be, the copy is put onto the stack with those targets.
      *
      * @param game
-     * @param targetControllerId - player that can/has to change the target of
-     *                           the spell
-     * @param forceChange        - does only work for targets with maximum of one
-     *                           targetId
-     * @param onlyOneTarget      - 114.6b one target must be changed to another
-     *                           target
-     * @param extraPredicate     restriction for the new target, if null nothing is
-     *                           cheched
+     * @param targetControllerId       - player that can/has to change the target of
+     *                                 the spell
+     * @param forceChange              - does only work for targets with maximum of one
+     *                                 targetId
+     * @param onlyOneTarget            - 114.6b one target must be changed to another
+     *                                 target
+     * @param newTargetFilterPredicate restriction for the new target (null - can select same targets)
      * @return
      */
     @Override
-    public boolean chooseNewTargets(Game game, UUID targetControllerId, boolean forceChange, boolean onlyOneTarget, Predicate<MageItem> extraPredicate) {
+    public boolean chooseNewTargets(Game game, UUID targetControllerId, boolean forceChange, boolean onlyOneTarget, Predicate<MageItem> newTargetFilterPredicate) {
         Player targetController = game.getPlayer(targetControllerId);
         if (targetController != null) {
             StringBuilder oldTargetDescription = new StringBuilder();
@@ -240,7 +265,7 @@ public abstract class StackObjectImpl implements StackObject {
                     ability.getModes().setActiveMode(mode);
                     oldTargetDescription.append(ability.getTargetDescription(mode.getTargets(), game));
                     for (Target target : mode.getTargets()) {
-                        Target newTarget = chooseNewTarget(targetController, ability, mode, target, forceChange, extraPredicate, game);
+                        Target newTarget = chooseNewTarget(targetController, ability, mode, target, forceChange, newTargetFilterPredicate, game);
                         // clear the old target and copy all targets from new target
                         target.clearChosen();
                         for (UUID targetId : newTarget.getTargets()) {
@@ -263,21 +288,25 @@ public abstract class StackObjectImpl implements StackObject {
     /**
      * Handles the change of one target instance of a mode
      *
-     * @param targetController - player that can choose the new target
+     * @param targetController         - player that can choose the new target
      * @param ability
      * @param mode
      * @param target
      * @param forceChange
+     * @param newTargetFilterPredicate
      * @param game
      * @return
      */
-    private Target chooseNewTarget(Player targetController, Ability ability, Mode mode, Target target, boolean forceChange, Predicate predicate, Game game) {
+    private Target chooseNewTarget(Player targetController, Ability ability, Mode mode, Target target, boolean forceChange, Predicate newTargetFilterPredicate, Game game) {
         Target newTarget = target.copy();
-        if (predicate != null) {
-            newTarget.getFilter().add(predicate);
+
+        // filter targets
+        if (newTargetFilterPredicate != null) {
+            newTarget.getFilter().add(newTargetFilterPredicate);
             // If adding a predicate, there will only be one choice and therefore target can be automatic
             newTarget.setRandom(true);
         }
+
         newTarget.setEventReporting(false);
         if (!targetController.getId().equals(getControllerId())) {
             newTarget.setTargetController(targetController.getId()); // target controller for the change is different from spell controller
@@ -318,8 +347,8 @@ public abstract class StackObjectImpl implements StackObject {
                 } else {
                     // build a target definition with exactly one possible target to select that replaces old target
                     Target tempTarget = target.copy();
-                    if (predicate != null) {
-                        tempTarget.getFilter().add(predicate);
+                    if (newTargetFilterPredicate != null) {
+                        tempTarget.getFilter().add(newTargetFilterPredicate);
                         // If adding a predicate, there will only be one choice and therefore target can be automatic
                         tempTarget.setRandom(true);
                     }

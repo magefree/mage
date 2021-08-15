@@ -17,12 +17,12 @@ import java.util.List;
  */
 public abstract class CopySpellForEachItCouldTargetEffect extends OneShotEffect {
 
-    private static final class CopyApplier implements StackObjectCopyApplier {
+    private static final class ForEachCopyApplier implements StackObjectCopyApplier {
 
-        private final Iterator<MageObjectReferencePredicate> iterator;
+        private final Iterator<MageObjectReferencePredicate> newTargetTypes;
 
-        private CopyApplier(List<MageObjectReferencePredicate> predicates) {
-            this.iterator = predicates.iterator();
+        private ForEachCopyApplier(List<MageObjectReferencePredicate> copiesWithTargets) {
+            this.newTargetTypes = copiesWithTargets.iterator();
         }
 
         @Override
@@ -30,9 +30,9 @@ public abstract class CopySpellForEachItCouldTargetEffect extends OneShotEffect 
         }
 
         @Override
-        public MageObjectReferencePredicate getNextPredicate() {
-            if (iterator.hasNext()) {
-                return iterator.next();
+        public MageObjectReferencePredicate getNextNewTargetType(int copyNumber) {
+            if (newTargetTypes.hasNext()) {
+                return newTargetTypes.next();
             }
             return null;
         }
@@ -50,7 +50,16 @@ public abstract class CopySpellForEachItCouldTargetEffect extends OneShotEffect 
 
     protected abstract Player getPlayer(Game game, Ability source);
 
-    protected abstract List<MageObjectReferencePredicate> getPossibleTargets(StackObject stackObject, Player player, Ability source, Game game);
+    /**
+     * Prepare copies list. Each item must contain filter for new target (target type).
+     *
+     * @param stackObject
+     * @param player
+     * @param source
+     * @param game
+     * @return
+     */
+    protected abstract List<MageObjectReferencePredicate> prepareCopiesWithTargets(StackObject stackObject, Player player, Ability source, Game game);
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -59,10 +68,10 @@ public abstract class CopySpellForEachItCouldTargetEffect extends OneShotEffect 
         if (actingPlayer == null || stackObject == null) {
             return false;
         }
-        List<MageObjectReferencePredicate> predicates = getPossibleTargets(stackObject, actingPlayer, source, game);
+        List<MageObjectReferencePredicate> copies = prepareCopiesWithTargets(stackObject, actingPlayer, source, game);
         stackObject.createCopyOnStack(
                 game, source, actingPlayer.getId(), false,
-                predicates.size(), new CopyApplier(predicates)
+                copies.size(), new ForEachCopyApplier(copies)
         );
         return true;
     }
