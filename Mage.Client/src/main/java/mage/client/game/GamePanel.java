@@ -465,6 +465,10 @@ public final class GamePanel extends javax.swing.JPanel {
         this.btnCancelSkip.setVisible(true);
         this.btnToggleMacro.setVisible(true);
 
+        // cards popup info in chats
+        this.gameChatPanel.setGameData(gameId, bigCard);
+        this.userChatPanel.setGameData(gameId, bigCard);
+
         this.btnSkipToNextTurn.setVisible(true);
         this.btnSkipToEndTurn.setVisible(true);
         this.btnSkipToNextMain.setVisible(true);
@@ -1914,6 +1918,8 @@ public final class GamePanel extends javax.swing.JPanel {
         lblPriority.setText("Priority Player:");
 
         bigCard.setBorder(new LineBorder(Color.black, 1, true));
+
+        // CHATS and HINTS support
 
         // HOTKEYS
 

@@ -18,9 +18,17 @@ import java.util.UUID;
  * GUI: virtual card component for popup hint (move mouse over card to show a hint)
  * <p>
  * Use case: you don't have a real card but want to show a popup card hint.
+ * <p>
  * Howto use:
  * - call "init" on new card;
- * - call "onMouseXXX" on start, update and close
+ * - call "onMouseEntered" to prepare;
+ * - call "onMouseMoved" to draw;
+ * - call "onMouseExited" to hide;
+ * <p>
+ * Hints:
+ * - for game GUI: you must init with gameId (otherwise you can't see it)
+ * - for non-game GUI: no needs in gameId or bigCard (bigCard is a panel with card image)
+ * - if you want to show card immediately then use init + onMouseEntered + onMouseMoved
  *
  * @author JayDi85
  */
@@ -76,6 +84,10 @@ public class VirtualCardInfo {
         data.setComponent(this.cardComponent);
         data.setCard(this.cardView);
         data.setGameId(gameId);
+    }
+
+    public void setTooltipDelay(int tooltipDelay) {
+        data.setTooltipDelay(tooltipDelay);
     }
 
     public boolean prepared() {

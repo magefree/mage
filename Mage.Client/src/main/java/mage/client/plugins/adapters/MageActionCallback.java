@@ -43,11 +43,13 @@ import java.util.concurrent.TimeUnit;
 /**
  * Class that handles the callbacks from the card panels to mage to display big
  * card images from the cards the mouse hovers on. Also handles tooltip text
- * window.
+ * window (from non-card calls, example: chats)
  * <p>
  * Only ONE action callback possible for the app
  * <p>
  * If you want to process card events in your component then use CardEventProducer, see example with mouseClicked here
+ *
+ * If you want virtual popup hint (without real card) then use VirtualCardInfo
  *
  * @author Nantuko, noxx, JayDi85
  */
@@ -140,8 +142,15 @@ public class MageActionCallback implements ActionCallback {
     private void startCardHintPopup(final TransferData data, final Component parentComponent, final Point parentPoint) {
         MageCard cardPanel = data.getComponent().getTopPanelRef();
 
-        tooltipDelay = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_DELAY, 300);
+        if (data.getTooltipDelay() > 0) {
+            // custom tooltip
+            tooltipDelay = data.getTooltipDelay();
+        } else {
+            // from preferences
+            tooltipDelay = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_DELAY, 300);
+        }
         if (tooltipDelay == 0) {
+            // disabled
             return;
         }
 
@@ -449,7 +458,7 @@ public class MageActionCallback implements ActionCallback {
         // Prevent to show tooltips from panes not in front
         MagePane topPane = MageFrame.getTopMost(null);
         if (topPane instanceof GamePane) {
-            if (!((GamePane) topPane).getGameId().equals(data.getGameId())) {
+            if (data.getGameId() != null && !((GamePane) topPane).getGameId().equals(data.getGameId())) {
                 return;
             }
         }
