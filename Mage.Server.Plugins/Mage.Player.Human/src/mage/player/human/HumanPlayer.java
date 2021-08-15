@@ -82,6 +82,7 @@ public class HumanPlayer extends PlayerImpl {
     protected Set<String> triggerAutoOrderNameFirst = new HashSet<>();
     protected Set<String> triggerAutoOrderNameLast = new HashSet<>();
 
+    // auto-answer
     protected Map<String, Boolean> requestAutoAnswerId = new HashMap<>();
     protected Map<String, Boolean> requestAutoAnswerText = new HashMap<>();
 
@@ -296,18 +297,23 @@ public class HumanPlayer extends PlayerImpl {
         if (falseText != null) {
             options.put("UI.right.btn.text", falseText);
         }
+        if (source != null) {
+            //options.put(Constants.Option.ORIGINAL_ID, "")
+        }
+
 
         // auto-answer
+        Boolean answer = null;
         if (source != null) {
-            Boolean answer = requestAutoAnswerId.get(source.getOriginalId() + "#" + message);
-            if (answer != null) {
-                return answer;
-            } else {
-                answer = requestAutoAnswerText.get(message);
-                if (answer != null) {
-                    return answer;
-                }
-            }
+            // ability + text
+            answer = requestAutoAnswerId.get(source.getOriginalId() + "#" + message);
+        }
+        if (answer == null) {
+            // text
+            answer = requestAutoAnswerText.get(message);
+        }
+        if (answer != null) {
+            return answer;
         }
 
         while (canRespond()) {

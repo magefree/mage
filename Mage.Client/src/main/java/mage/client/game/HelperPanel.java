@@ -53,9 +53,13 @@ public class HelperPanel extends JPanel {
     private static final String CMD_AUTO_ANSWER_NAME_NO = "cmdAutoAnswerNameNo";
     private static final String CMD_AUTO_ANSWER_RESET_ALL = "cmdAutoAnswerResetAll";
 
-    // popup menu for set automatic answers
+    // popup menu for keep auto-answer in yes/no dialogs
     private JPopupMenu popupMenuAskYes;
+    private JMenuItem popupItemYesAsText;
+    private JMenuItem popupItemYesAsTextAndAbility;
     private JPopupMenu popupMenuAskNo;
+    private JMenuItem popupItemNoAsText;
+    private JMenuItem popupItemNoAsTextAndAbility;
 
     // originalId of feedback causing ability
     private UUID originalId;
@@ -244,8 +248,8 @@ public class HelperPanel extends JPanel {
     }
 
     private void checkPopupMenu(MouseEvent e) {
-        if (e.isPopupTrigger()
-                && originalId != null) { // only Yes/No requests from abilities can be automated
+        if (e.isPopupTrigger()) {
+            // allows any yes/no dialogs
             JButton source = (JButton) e.getSource();
             if (source.getActionCommand().startsWith(QUESTION.toString())) {
                 showPopupMenu(e.getComponent(), source.getActionCommand());
@@ -268,16 +272,26 @@ public class HelperPanel extends JPanel {
         if (!txtLeft.isEmpty()) {
             this.btnLeft.setText(txtLeft);
             if (mode != null) {
-                this.btnLeft.setActionCommand(mode.toString() + txtLeft);
+                this.btnLeft.setActionCommand(mode + txtLeft);
             }
         }
+
         this.btnRight.setVisible(rightVisible);
         if (!txtRight.isEmpty()) {
             this.btnRight.setText(txtRight);
             if (mode != null) {
-                this.btnRight.setActionCommand(mode.toString() + txtRight);
+                this.btnRight.setActionCommand(mode + txtRight);
             }
         }
+
+        // auto-answer hints
+        String buttonTooltip = null;
+        if (mode == QUESTION) {
+            buttonTooltip = "Right click on button to make auto-answer.";
+        }
+        this.btnLeft.setToolTipText(buttonTooltip);
+        this.btnRight.setToolTipText(buttonTooltip);
+
         autoSizeButtonsAndFeedbackState();
     }
 
@@ -310,7 +324,7 @@ public class HelperPanel extends JPanel {
     public void setGameNeedFeedback(boolean need, TurnPhase gameTurnPhase) {
         this.gameNeedFeedback = need;
         this.gameTurnPhase = gameTurnPhase;
-        
+
         if (this.gameNeedFeedback) {
             // start notification sound timer
             this.needFeedbackTimer.restart();
@@ -465,37 +479,42 @@ public class HelperPanel extends JPanel {
         popupMenuAskNo = new JPopupMenu();
 
         // String tooltipText = "";
-        JMenuItem menuItem;
-        menuItem = new JMenuItem("Always Yes for the same text and ability");
-        menuItem.setActionCommand(CMD_AUTO_ANSWER_ID_YES);
-        menuItem.addActionListener(actionListener);
-        menuItem.setToolTipText("<HTML>If the same question from the same ability would<br/>be asked again, it's automatically answered with <b>Yes</b>.");
-        popupMenuAskYes.add(menuItem);
+        popupItemYesAsTextAndAbility = new JMenuItem("Auto-answer YES for the same TEXT and ABILITY");
+        popupItemYesAsTextAndAbility.setActionCommand(CMD_AUTO_ANSWER_ID_YES);
+        popupItemYesAsTextAndAbility.addActionListener(actionListener);
+        popupItemYesAsTextAndAbility.setToolTipText("<HTML>If the same question from the same ability would<br/>be asked again, it's automatically answered with <b>Yes</b>.<br/>You can reset it by battlefield right click menu.");
+        popupMenuAskYes.add(popupItemYesAsTextAndAbility);
 
-        menuItem = new JMenuItem("Always No for the same text and ability");
-        menuItem.setActionCommand(CMD_AUTO_ANSWER_ID_NO);
-        menuItem.setToolTipText("<HTML>If the same question from the same ability would<br/>be asked again, it's automatically answered with <b>No</b>.");
-        menuItem.addActionListener(actionListener);
-        popupMenuAskNo.add(menuItem);
+        popupItemNoAsTextAndAbility = new JMenuItem("Auto-answer NO for the same TEXT and ABILITY");
+        popupItemNoAsTextAndAbility.setActionCommand(CMD_AUTO_ANSWER_ID_NO);
+        popupItemNoAsTextAndAbility.setToolTipText("<HTML>If the same question from the same ability would<br/>"
+                + "be asked again, it's automatically answered with <b>No</b>.<br/>"
+                + "You can reset it by battlefield right click menu.");
+        popupItemNoAsTextAndAbility.addActionListener(actionListener);
+        popupMenuAskNo.add(popupItemNoAsTextAndAbility);
 
-        menuItem = new JMenuItem("Always Yes for the same text");
-        menuItem.setActionCommand(CMD_AUTO_ANSWER_NAME_YES);
-        menuItem.setToolTipText("<HTML>If the same question would be asked again (regardless from which source),<br/> it's automatically answered with <b>Yes</b>.");
-        menuItem.addActionListener(actionListener);
-        popupMenuAskYes.add(menuItem);
+        popupItemYesAsText = new JMenuItem("Auto-answer YES for the same TEXT");
+        popupItemYesAsText.setActionCommand(CMD_AUTO_ANSWER_NAME_YES);
+        popupItemYesAsText.setToolTipText("<HTML>If the same question would be asked again (regardless from which source),<br/>"
+                + "it's automatically answered with <b>Yes</b>.<br/>"
+                + "You can reset it by battlefield right click menu.");
+        popupItemYesAsText.addActionListener(actionListener);
+        popupMenuAskYes.add(popupItemYesAsText);
 
-        menuItem = new JMenuItem("Always No for the same text");
-        menuItem.setActionCommand(CMD_AUTO_ANSWER_NAME_NO);
-        menuItem.setToolTipText("<HTML>If the same question would be asked again (regardless from which source),<br/> it's automatically answered with <b>No</b>.");
-        menuItem.addActionListener(actionListener);
-        popupMenuAskNo.add(menuItem);
+        popupItemNoAsText = new JMenuItem("Auto-answer NO for the same TEXT");
+        popupItemNoAsText.setActionCommand(CMD_AUTO_ANSWER_NAME_NO);
+        popupItemNoAsText.setToolTipText("<HTML>If the same question would be asked again (regardless from which source),<br/>"
+                + "it's automatically answered with <b>No</b>.<br/>"
+                + "You can reset it by battlefield right click menu.");
+        popupItemNoAsText.addActionListener(actionListener);
+        popupMenuAskNo.add(popupItemNoAsText);
 
-        menuItem = new JMenuItem("Delete all automatic Yes/No settings");
+        JMenuItem menuItem = new JMenuItem("Reset all YER/NO auto-answers");
         menuItem.setActionCommand(CMD_AUTO_ANSWER_RESET_ALL);
         menuItem.addActionListener(actionListener);
         popupMenuAskYes.add(menuItem);
 
-        menuItem = new JMenuItem("Delete all automatic Yes/No settings");
+        menuItem = new JMenuItem("Reset all YER/NO auto-answers");
         menuItem.setActionCommand(CMD_AUTO_ANSWER_RESET_ALL);
         menuItem.addActionListener(actionListener);
         popupMenuAskNo.add(menuItem);
@@ -528,13 +547,29 @@ public class HelperPanel extends JPanel {
     }
 
     private void showPopupMenu(Component callingComponent, String actionCommand) {
-        // Get the location of the point 'on the screen'
+        // keep auto-answer for yes/no
+
+        // two modes:
+        // - remember text for all (example: commander zone change);
+        // - remember text + ability for source only (example: any optional ability)
+
+        // yes
+        popupItemYesAsText.setEnabled(true);
+        popupItemYesAsTextAndAbility.setEnabled(originalId != null);
+        popupItemYesAsText.setEnabled(true);
+        popupItemYesAsTextAndAbility.setEnabled(originalId != null);
+        // no
+        popupItemNoAsText.setEnabled(true);
+        popupItemNoAsTextAndAbility.setEnabled(originalId != null);
+        popupItemNoAsText.setEnabled(true);
+        popupItemNoAsTextAndAbility.setEnabled(originalId != null);
+
         Point p = callingComponent.getLocationOnScreen();
         // Show the JPopupMenu via program
         // Parameter desc
         // ----------------
         // this - represents current frame
-        // 0,0 is the co ordinate where the popup
+        // 0,0 is the coordinate where the popup
         // is shown
         JPopupMenu menu;
         if (actionCommand.endsWith("Yes")) {
