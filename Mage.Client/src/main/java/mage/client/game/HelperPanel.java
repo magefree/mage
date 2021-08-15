@@ -509,12 +509,12 @@ public class HelperPanel extends JPanel {
         popupItemNoAsText.addActionListener(actionListener);
         popupMenuAskNo.add(popupItemNoAsText);
 
-        JMenuItem menuItem = new JMenuItem("Reset all YER/NO auto-answers");
+        JMenuItem menuItem = new JMenuItem("Reset all YES/NO auto-answers");
         menuItem.setActionCommand(CMD_AUTO_ANSWER_RESET_ALL);
         menuItem.addActionListener(actionListener);
         popupMenuAskYes.add(menuItem);
 
-        menuItem = new JMenuItem("Reset all YER/NO auto-answers");
+        menuItem = new JMenuItem("Reset all YES/NO auto-answers");
         menuItem.setActionCommand(CMD_AUTO_ANSWER_RESET_ALL);
         menuItem.addActionListener(actionListener);
         popupMenuAskNo.add(menuItem);
