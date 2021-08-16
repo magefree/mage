@@ -131,6 +131,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hostage Taker", 186, Rarity.RARE, mage.cards.h.HostageTaker.class));
         cards.add(new SetCardInfo("Ignite the Future", 129, Rarity.RARE, mage.cards.i.IgniteTheFuture.class));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 85, Rarity.RARE, mage.cards.i.ImprisonedInTheMoon.class));
+        cards.add(new SetCardInfo("Indomitable Might", 40, Rarity.RARE, mage.cards.i.IndomitableMight.class));
         cards.add(new SetCardInfo("Izzet Chemister", 130, Rarity.RARE, mage.cards.i.IzzetChemister.class));
         cards.add(new SetCardInfo("Karmic Guide", 68, Rarity.RARE, mage.cards.k.KarmicGuide.class));
         cards.add(new SetCardInfo("Kenrith's Transformation", 162, Rarity.UNCOMMON, mage.cards.k.KenrithsTransformation.class));
