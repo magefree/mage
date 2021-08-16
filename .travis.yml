@@ -1,6 +1,6 @@
 # faster builds
 git:
-  depth: false
+  depth: 3
   submodules: false
 sudo: false
 dist: trusty
