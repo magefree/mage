@@ -9,6 +9,7 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
@@ -140,13 +141,13 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
     }
 
     public static boolean exileAndPlayFromExile(Game game, Ability source, Card card, TargetController allowedCaster,
-                                                Duration duration, boolean withoutMana, boolean onlyCastAllowed) {
+                                                Duration duration, boolean withoutMana, boolean anyColor, boolean onlyCastAllowed) {
         if (card == null) {
             return true;
         }
         Set<Card> cards = new HashSet<>();
         cards.add(card);
-        return exileAndPlayFromExile(game, source, cards, allowedCaster, duration, withoutMana, onlyCastAllowed);
+        return exileAndPlayFromExile(game, source, cards, allowedCaster, duration, withoutMana, anyColor, onlyCastAllowed);
     }
 
     /**
@@ -158,11 +159,12 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
      * @param allowedCaster
      * @param duration
      * @param withoutMana
+     * @param anyColor
      * @param onlyCastAllowed true for rule "cast that card" and false for rule "play that card"
      * @return
      */
     public static boolean exileAndPlayFromExile(Game game, Ability source, Set<Card> cards, TargetController allowedCaster,
-                                                Duration duration, boolean withoutMana, boolean onlyCastAllowed) {
+                                                Duration duration, boolean withoutMana, boolean anyColor, boolean onlyCastAllowed) {
         if (cards == null || cards.isEmpty()) {
             return true;
         }
@@ -196,6 +198,11 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
         ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, allowedCaster, duration, withoutMana, onlyCastAllowed);
         effect.setTargetPointer(new FixedTargets(cardsToPlay, game));
         game.addEffect(effect, source);
+        if (anyColor) {
+            for (Card card : cardsToPlay) {
+                game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration).setTargetPointer(new FixedTarget(card, game)), source);
+            }
+        }
         return true;
     }
 }

@@ -69,6 +69,6 @@ class IgniteTheFutureEffect extends OneShotEffect {
         }
         Set<Card> cards = controller.getLibrary().getTopCards(game, 3);
         return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, cards,
-                TargetController.YOU, Duration.UntilEndOfYourNextTurn, Zone.GRAVEYARD.equals(spell.getFromZone()), false);
+                TargetController.YOU, Duration.UntilEndOfYourNextTurn, Zone.GRAVEYARD.equals(spell.getFromZone()), false, false);
     }
 }

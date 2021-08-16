@@ -80,7 +80,7 @@ class MagusOfTheMindEffect extends OneShotEffect {
             if (controller.getLibrary().hasCards()) {
                 Set<Card> cards = controller.getLibrary().getTopCards(game, stormCount);
                 return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, cards,
-                        TargetController.YOU, Duration.EndOfTurn, true, false);
+                        TargetController.YOU, Duration.EndOfTurn, true, false, false);
             }
             return true;
         }
