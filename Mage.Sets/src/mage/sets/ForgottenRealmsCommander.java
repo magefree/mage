@@ -25,6 +25,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Gift", 64, Rarity.COMMON, mage.cards.a.AngelicGift.class));
         cards.add(new SetCardInfo("Anger", 113, Rarity.UNCOMMON, mage.cards.a.Anger.class));
         cards.add(new SetCardInfo("Apex of Power", 114, Rarity.MYTHIC, mage.cards.a.ApexOfPower.class));
+        cards.add(new SetCardInfo("Arcane Endeavor", 14, Rarity.RARE, mage.cards.a.ArcaneEndeavor.class));
         cards.add(new SetCardInfo("Arcane Sanctum", 223, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
         cards.add(new SetCardInfo("Arcane Signet", 197, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Argentum Armor", 198, Rarity.RARE, mage.cards.a.ArgentumArmor.class));
