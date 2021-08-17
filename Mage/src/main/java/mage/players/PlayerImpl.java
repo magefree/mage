@@ -4772,6 +4772,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public SpellAbility chooseAbilityForCast(Card card, List<SpellAbility> spellAbilities, Game game) {
+        return spellAbilities.get(0);
+    }
+
+    @Override
     public String toString() {
         return getName() + " (" + super.getClass().getSimpleName() + ")";
     }

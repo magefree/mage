@@ -1,6 +1,7 @@
 package mage.util;
 
 import com.google.common.collect.ImmutableList;
+import mage.ApprovingObject;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -18,6 +19,7 @@ import mage.abilities.hint.HintUtils;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.Filter;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
@@ -31,6 +33,11 @@ import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetCard;
+import mage.target.common.TargetCardInExile;
+import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.CopyTokenFunction;
 import org.apache.log4j.Logger;
@@ -1146,6 +1153,98 @@ public final class CardUtil {
         if (anyColor) {
             game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
         }
+    }
+
+    private static List<SpellAbility> getCastableWithAttributes(Card cardToCast, FilterCard filter, UUID sourceId, UUID playerId, Game game) {
+        List<SpellAbility> spellAbilities = new ArrayList<>();
+        if (cardToCast instanceof SplitCard) {
+            if (filter.match(((SplitCard) cardToCast).getLeftHalfCard(), sourceId, playerId, game)) {
+                spellAbilities.add(((SplitCard) cardToCast).getLeftHalfCard().getSpellAbility());
+            }
+            if (filter.match(((SplitCard) cardToCast).getRightHalfCard(), sourceId, playerId, game)) {
+                spellAbilities.add(((SplitCard) cardToCast).getRightHalfCard().getSpellAbility());
+            }
+        } else if (cardToCast instanceof AdventureCard) {
+            if (filter.match(cardToCast, sourceId, playerId, game)) {
+                spellAbilities.add(cardToCast.getSpellAbility());
+            }
+            if (filter.match(((AdventureCard) cardToCast).getSpellCard(), sourceId, playerId, game)) {
+                spellAbilities.add(((AdventureCard) cardToCast).getSpellCard().getSpellAbility());
+            }
+        } else if (cardToCast instanceof ModalDoubleFacesCard) {
+            if (filter.match(((ModalDoubleFacesCard) cardToCast).getLeftHalfCard(), sourceId, playerId, game)) {
+                spellAbilities.add(((ModalDoubleFacesCard) cardToCast).getLeftHalfCard().getSpellAbility());
+            }
+            if (filter.match(((ModalDoubleFacesCard) cardToCast).getRightHalfCard(), sourceId, playerId, game)) {
+                spellAbilities.add(((ModalDoubleFacesCard) cardToCast).getRightHalfCard().getSpellAbility());
+            }
+        } else {
+            spellAbilities.add(cardToCast.getSpellAbility());
+        }
+        spellAbilities.removeIf(Objects::isNull);
+        return spellAbilities;
+    }
+
+    private static final FilterCard defaultFilter = new FilterCard("card to cast");
+
+    private static TargetCard getTarget(Set<UUID> cardIds, Game game) {
+        Zone zone = game.getState().getZone(cardIds.stream().findFirst().orElse(null));
+        switch (zone) {
+            case HAND:
+                return new TargetCardInHand(0, 1, defaultFilter);
+            case GRAVEYARD:
+                return new TargetCardInGraveyard(0, 1, defaultFilter);
+            case EXILED:
+                return new TargetCardInExile(0, 1, defaultFilter, null);
+            case LIBRARY:
+                return new TargetCardInLibrary(0, 1, defaultFilter);
+            default:
+                throw new UnsupportedOperationException("can't choose a card from zone: " + zone);
+        }
+    }
+
+    public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter) {
+        Map<UUID, List<SpellAbility>> cardMap = new HashMap<>();
+        for (Card card : cards.getCards(game)) {
+            List<SpellAbility> spellAbilities = getCastableWithAttributes(card, filter, source.getSourceId(), player.getId(), game);
+            if (!spellAbilities.isEmpty()) {
+                cardMap.put(card.getId(), spellAbilities);
+            }
+        }
+        Card cardToCast;
+        switch (cardMap.size()) {
+            case 0:
+                return false;
+            case 1:
+                cardToCast = cards.get(cardMap.keySet().stream().findFirst().orElse(null), game);
+                break;
+            default:
+                Cards castableCards = new CardsImpl(cardMap.keySet());
+                TargetCard target = getTarget(cardMap.keySet(), game);
+                player.choose(Outcome.PlayForFree, castableCards, target, game);
+                cardToCast = castableCards.get(target.getFirstTarget(), game);
+        }
+        if (cardToCast == null) {
+            return false;
+        }
+        List<SpellAbility> partsToCast = cardMap.get(cardToCast.getId());
+        String partsInfo = partsToCast.stream()
+                .map(SpellAbility::getName)
+                .collect(Collectors.joining(" or "));
+        if (cardToCast == null
+                || partsToCast.size() <= 0
+                || !player.chooseUse(
+                Outcome.PlayForFree, "Cast spell without paying its mana cost (" + partsInfo + ")?", source, game
+        )) {
+            return false;
+        }
+        game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), Boolean.TRUE);
+        boolean result = player.cast(
+                player.chooseAbilityForCast(cardToCast, partsToCast, game),
+                game, true, new ApprovingObject(source, game)
+        );
+        game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), null);
+        return result;
     }
 
     /**
