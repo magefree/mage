@@ -1221,6 +1221,7 @@ public final class CardUtil {
             default:
                 Cards castableCards = new CardsImpl(cardMap.keySet());
                 TargetCard target = getTarget(cardMap.keySet(), game);
+                target.setNotTarget(true);
                 player.choose(Outcome.PlayForFree, castableCards, target, game);
                 cardToCast = castableCards.get(target.getFirstTarget(), game);
         }
