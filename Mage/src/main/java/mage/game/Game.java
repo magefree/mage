@@ -452,7 +452,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     int bookmarkState();
 
-    void restoreState(int bookmark, String context);
+    GameState restoreState(int bookmark, String context);
 
     void removeBookmark(int bookmark);
 

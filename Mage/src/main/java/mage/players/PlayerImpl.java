@@ -294,13 +294,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.human = player.isHuman();
         this.life = player.getLife();
 
+        this.passed = player.isPassed();
+
         // Don't restore more global states. If restored they are probably cause for unintended draws (https://github.com/magefree/mage/issues/1205).
 //        this.wins = player.hasWon();
 //        this.loses = player.hasLost();
 //        this.left = player.hasLeft();
 //        this.quit = player.hasQuit();
         // Makes no sense to restore
-//        this.passed = player.isPassed();
 //        this.priorityTimeLeft = player.getPriorityTimeLeft();
 //        this.idleTimeout = player.hasIdleTimeout();
 //        this.timerTimeout = player.hasTimerTimeout();

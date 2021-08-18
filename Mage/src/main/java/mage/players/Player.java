@@ -25,6 +25,7 @@ import mage.filter.FilterCard;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.Graveyard;
 import mage.game.Table;
 import mage.game.combat.CombatGroup;
@@ -541,11 +542,12 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void resetStoredBookmark(Game game);
 
-    default void restoreState(int bookmark, String text, Game game) {
-        game.restoreState(bookmark, text);
+    default GameState restoreState(int bookmark, String text, Game game) {
+        GameState state = game.restoreState(bookmark, text);
         if (getStoredBookmark() >= bookmark) {
             resetStoredBookmark(game);
         }
+        return state;
     }
 
     void revealCards(Ability source, Cards cards, Game game);
