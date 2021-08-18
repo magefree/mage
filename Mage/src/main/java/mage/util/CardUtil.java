@@ -1254,6 +1254,7 @@ public final class CardUtil {
 
     public static void castMultipleWithAttributeFromExile(Player player, Ability source, Game game, Cards cards, FilterCard filter, Zone zone, int maxSpells) {
         int spellsCast = 0;
+        cards.retainZone(zone, game);
         while (player.canRespond() && spellsCast < maxSpells && !cards.isEmpty()) {
             if (CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter)) {
                 spellsCast++;
