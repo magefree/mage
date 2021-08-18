@@ -80,7 +80,7 @@ class HellcarverDemonEffect extends OneShotEffect {
             }
         }
         controller.discard(controller.getHand(), false, source, game);
-        CardUtil.castMultipleWithAttributeFromExile(
+        CardUtil.castMultipleWithAttributeForFree(
                 controller, source, game, new CardsImpl(
                         controller.getLibrary().getTopCards(game, 6)
                 ), StaticFilters.FILTER_CARD, Zone.EXILED

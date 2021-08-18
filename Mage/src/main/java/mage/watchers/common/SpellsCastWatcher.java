@@ -11,6 +11,7 @@ import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @author LevelX2
@@ -55,6 +56,10 @@ public class SpellsCastWatcher extends Watcher {
         nonCreatureSpells = 0;
         spellsCast.clear();
         spellsCastFromGraveyard.clear();
+    }
+
+    public Stream<Spell> getAllSpellsCastThisTurn() {
+        return spellsCast.values().stream().flatMap(Collection::stream);
     }
 
     public List<Spell> getSpellsCastThisTurn(UUID playerId) {

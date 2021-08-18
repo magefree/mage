@@ -1248,11 +1248,15 @@ public final class CardUtil {
         return result;
     }
 
-    public static void castMultipleWithAttributeFromExile(Player player, Ability source, Game game, Cards cards, FilterCard filter, Zone zone) {
-        castMultipleWithAttributeFromExile(player, source, game, cards, filter, zone, Integer.MAX_VALUE);
+    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, Zone zone) {
+        castMultipleWithAttributeForFree(player, source, game, cards, filter, zone, Integer.MAX_VALUE);
     }
 
-    public static void castMultipleWithAttributeFromExile(Player player, Ability source, Game game, Cards cards, FilterCard filter, Zone zone, int maxSpells) {
+    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, Zone zone, int maxSpells) {
+        if (maxSpells == 1) {
+            CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter);
+            return;
+        }
         int spellsCast = 0;
         cards.retainZone(zone, game);
         while (player.canRespond() && spellsCast < maxSpells && !cards.isEmpty()) {

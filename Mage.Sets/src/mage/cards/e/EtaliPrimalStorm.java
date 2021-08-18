@@ -78,7 +78,7 @@ class EtaliPrimalStormEffect extends OneShotEffect {
             }
         }
         controller.moveCards(cards, Zone.EXILED, source, game);
-        CardUtil.castMultipleWithAttributeFromExile(controller, source, game, cards, filter, Zone.EXILED);
+        CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, filter, Zone.EXILED);
         return true;
     }
 }

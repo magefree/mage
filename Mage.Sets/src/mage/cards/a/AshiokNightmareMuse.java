@@ -122,7 +122,7 @@ class AshiokNightmareMuseCastEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        CardUtil.castMultipleWithAttributeFromExile(
+        CardUtil.castMultipleWithAttributeForFree(
                 controller, source, game, new CardsImpl(game.getExile().getCards(filter, game)),
                 StaticFilters.FILTER_CARD, Zone.EXILED, 3
         );

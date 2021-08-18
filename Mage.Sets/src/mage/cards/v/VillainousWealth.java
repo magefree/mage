@@ -73,7 +73,7 @@ class VillainousWealthEffect extends OneShotEffect {
         opponent.moveCards(cards, Zone.EXILED, source, game);
         FilterCard filter = new FilterCard();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
-        CardUtil.castMultipleWithAttributeFromExile(controller, source, game, cards, filter, Zone.EXILED);
+        CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, filter, Zone.EXILED);
         return true;
     }
 }

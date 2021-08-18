@@ -86,7 +86,7 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
         controller.moveCards(cards, Zone.EXILED, source, game);
         // cast the possible cards without paying the mana
-        CardUtil.castMultipleWithAttributeFromExile(controller, source, game, cards, filter, Zone.EXILED);
+        CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, filter, Zone.EXILED);
         return true;
     }
 }
