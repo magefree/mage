@@ -4295,6 +4295,9 @@ public class TestPlayer implements Player {
     @Override
     public SpellAbility chooseAbilityForCast(Card card, List<SpellAbility> spellAbilities, Game game) {
         assertAliasSupportInChoices(false);
+        if (spellAbilities.size() == 1) {
+            return spellAbilities.get(0);
+        }
         if (!choices.isEmpty()) {
             for (SpellAbility ability : spellAbilities) {
                 if (ability.toString().startsWith(choices.get(0))) {
