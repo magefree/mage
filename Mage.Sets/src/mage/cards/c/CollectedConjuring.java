@@ -76,17 +76,7 @@ class CollectedConjuringEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 6));
         controller.moveCards(cards, Zone.EXILED, source, game);
-        int spellsCast = 0;
-        while (controller.canRespond() && spellsCast < 2 && !cards.isEmpty()) {
-            if (CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, filter)) {
-                spellsCast++;
-                cards.retainZone(Zone.EXILED, game);
-            } else if (cards.isEmpty() || !controller.chooseUse(
-                    outcome, "Continue casting spells?", source, game
-            )) {
-                break;
-            }
-        }
+        CardUtil.castMultipleWithAttributeFromExile(controller, source, game, cards, filter, Zone.EXILED, 2);
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }

@@ -1247,6 +1247,24 @@ public final class CardUtil {
         return result;
     }
 
+    public static void castMultipleWithAttributeFromExile(Player player, Ability source, Game game, Cards cards, FilterCard filter, Zone zone) {
+        castMultipleWithAttributeFromExile(player, source, game, cards, filter, zone, Integer.MAX_VALUE);
+    }
+
+    public static void castMultipleWithAttributeFromExile(Player player, Ability source, Game game, Cards cards, FilterCard filter, Zone zone, int maxSpells) {
+        int spellsCast = 0;
+        while (player.canRespond() && spellsCast < maxSpells && !cards.isEmpty()) {
+            if (CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter)) {
+                spellsCast++;
+                cards.retainZone(zone, game);
+            } else if (cards.isEmpty() || !player.chooseUse(
+                    Outcome.PlayForFree, "Continue casting spells?", source, game
+            )) {
+                break;
+            }
+        }
+    }
+
     /**
      * Pay life in effects
      *
