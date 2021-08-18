@@ -4294,7 +4294,17 @@ public class TestPlayer implements Player {
 
     @Override
     public SpellAbility chooseAbilityForCast(Card card, List<SpellAbility> spellAbilities, Game game) {
-        // TODO: add proper test handling here
+        assertAliasSupportInChoices(false);
+        if (!choices.isEmpty()) {
+            for (SpellAbility ability : spellAbilities) {
+                if (ability.toString().startsWith(choices.get(0))) {
+                    choices.remove(0);
+                    return ability;
+                }
+            }
+        }
+        String allInfo = spellAbilities.stream().map(Object::toString).collect(Collectors.joining("\n"));
+        this.chooseStrictModeFailed("choice", game, getInfo(card) + " - can't select ability to cast.\n" + "Abilities available:\n" + allInfo);
         return computerPlayer.chooseAbilityForCast(card, spellAbilities, game);
     }
 
