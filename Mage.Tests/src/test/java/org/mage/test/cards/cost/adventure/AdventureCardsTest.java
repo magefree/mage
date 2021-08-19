@@ -5,7 +5,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -793,10 +792,11 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
+        assertPermanentCount(playerA, "Curious Pair", 0);
         assertPermanentCount(playerA, "Food", 1);
+        assertExileCount(playerA, "Curious Pair", 1);
     }
 
-    @Ignore // currently fails
     @Test
     public void test_Cascade_FlaxenIntruder() {
         // If a player cascades into Flaxen Intruder with Bloodbraid Elf they shouldn't be able to cast Welcome Home
@@ -822,6 +822,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Flaxen Intruder", 1);
+        assertPermanentCount(playerA, "Bear", 0);
     }
 
     @Test
@@ -839,11 +840,12 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
+        assertPermanentCount(playerA, "Curious Pair", 0);
         assertPermanentCount(playerA, "Food", 1);
         assertPermanentCount(playerA, "Servo", 3);
+        assertExileCount(playerA, "Curious Pair", 1);
     }
 
-    @Ignore // currently fails
     @Test
     public void test_SramsExpertise_FlaxenIntruder() {
         addCard(Zone.HAND, playerA, "Sram's Expertise");
@@ -859,6 +861,27 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Flaxen Intruder", 1);
+        assertPermanentCount(playerA, "Bear", 0);
         assertPermanentCount(playerA, "Servo", 3);
+    }
+
+    @Test
+    public void test_SramsExpertise_LonesomeUnicorn() {
+        addCard(Zone.HAND, playerA, "Sram's Expertise");
+        addCard(Zone.HAND, playerA, "Lonesome Unicorn");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sram's Expertise");
+        setChoice(playerA, true); // use free cast
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Lonesome Unicorn", 0);
+        assertPermanentCount(playerA, "Knight", 1);
+        assertPermanentCount(playerA, "Servo", 3);
+        assertExileCount(playerA, "Lonesome Unicorn", 1);
     }
 }
