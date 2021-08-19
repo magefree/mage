@@ -768,6 +768,34 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
     }
 
+    @Test
+    public void test_Cascade_CuriousPair() {
+        // If a player cascades into Curious Pair with Bloodbraid Elf they can cast either spell
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+
+        // Cascade
+        addCard(Zone.HAND, playerA, "Bloodbraid Elf"); // {2}{R}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        //
+        addCard(Zone.LIBRARY, playerA, "Swamp", 2);
+        addCard(Zone.LIBRARY, playerA, "Curious Pair", 1);
+        addCard(Zone.LIBRARY, playerA, "Island", 2);
+
+        // play elf with cascade
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
+        setChoice(playerA, true); // use free cast
+        setChoice(playerA, "Cast Treats to Share"); // can cast either
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Food", 1);
+    }
+
     @Ignore // currently fails
     @Test
     public void test_Cascade_FlaxenIntruder() {
@@ -794,5 +822,43 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Flaxen Intruder", 1);
+    }
+
+    @Test
+    public void test_SramsExpertise_CuriousPair() {
+        addCard(Zone.HAND, playerA, "Sram's Expertise");
+        addCard(Zone.HAND, playerA, "Curious Pair");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sram's Expertise");
+        setChoice(playerA, true); // use free cast
+        setChoice(playerA, "Cast Treats to Share");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Servo", 3);
+    }
+
+    @Ignore // currently fails
+    @Test
+    public void test_SramsExpertise_FlaxenIntruder() {
+        addCard(Zone.HAND, playerA, "Sram's Expertise");
+        addCard(Zone.HAND, playerA, "Flaxen Intruder");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sram's Expertise");
+        setChoice(playerA, true); // use free cast
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Flaxen Intruder", 1);
+        assertPermanentCount(playerA, "Servo", 3);
     }
 }
