@@ -1232,6 +1232,9 @@ public final class CardUtil {
                 game, true, new ApprovingObject(source, game)
         );
         partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null));
+        if (player.isComputer() && !result) {
+            cards.remove(cardToCast);
+        }
         return result;
     }
 
