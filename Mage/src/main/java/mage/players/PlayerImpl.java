@@ -1544,59 +1544,66 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param game
      * @return
      */
-    public static LinkedHashMap<UUID, ActivatedAbility> getSpellAbilities(UUID playerId, MageObject object, Zone zone, Game game) {
+    public static LinkedHashMap<UUID, SpellAbility> getSpellAbilities(UUID playerId, MageObject object, Zone zone, Game game) {
         // it uses simple check from spellCanBeActivatedRegularlyNow
         // reason: no approved info here (e.g. forced to choose spell ability from cast card)
-        LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
+        LinkedHashMap<UUID, SpellAbility> useable = new LinkedHashMap<>();
         Abilities<Ability> allAbilities;
         if (object instanceof Card) {
             allAbilities = ((Card) object).getAbilities(game);
         } else {
             allAbilities = object.getAbilities();
         }
-
-        for (Ability ability : allAbilities) {
-            if (ability instanceof SpellAbility) {
-                switch (((SpellAbility) ability).getSpellAbilityType()) {
-                    case BASE_ALTERNATE:
-                        if (((SpellAbility) ability).spellCanBeActivatedRegularlyNow(playerId, game)) {
-                            useable.put(ability.getId(), (SpellAbility) ability);  // example: Chandra, Torch of Defiance +1 loyal ability
+        for (SpellAbility ability : allAbilities
+                .stream()
+                .filter(SpellAbility.class::isInstance)
+                .map(SpellAbility.class::cast)
+                .collect(Collectors.toList())) {
+            switch (ability.getSpellAbilityType()) {
+                case BASE_ALTERNATE:
+                    if (ability.spellCanBeActivatedRegularlyNow(playerId, game)) {
+                        useable.put(ability.getId(), ability);  // example: Chandra, Torch of Defiance +1 loyal ability
+                    }
+                    return useable;
+                case SPLIT_FUSED:
+                    if (zone == Zone.HAND) {
+                        if (ability.canChooseTarget(game, playerId)) {
+                            useable.put(ability.getId(), ability);
                         }
-                        return useable;
-                    case SPLIT_FUSED:
-                        if (zone == Zone.HAND) {
-                            if (ability.canChooseTarget(game, playerId)) {
-                                useable.put(ability.getId(), (SpellAbility) ability);
-                            }
-                        }
-                    case SPLIT:
-                        if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
-                            useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
-                                    ((SplitCard) object).getLeftHalfCard().getSpellAbility());
-                        }
+                    }
+                case SPLIT:
+                    if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
+                        useable.put(
+                                ((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
+                                ((SplitCard) object).getLeftHalfCard().getSpellAbility()
+                        );
+                    }
+                    if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
+                        useable.put(
+                                ((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
+                                ((SplitCard) object).getRightHalfCard().getSpellAbility()
+                        );
+                    }
+                    return useable;
+                case SPLIT_AFTERMATH:
+                    if (zone == Zone.GRAVEYARD) {
                         if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
-                            useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
-                                    ((SplitCard) object).getRightHalfCard().getSpellAbility());
+                            useable.put(
+                                    ((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
+                                    ((SplitCard) object).getRightHalfCard().getSpellAbility()
+                            );
                         }
-                        return useable;
-                    case SPLIT_AFTERMATH:
-                        if (zone == Zone.GRAVEYARD) {
-                            if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
-                                useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
-                                        ((SplitCard) object).getRightHalfCard().getSpellAbility());
-                            }
-                        } else {
-                            if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
-                                useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
-                                        ((SplitCard) object).getLeftHalfCard().getSpellAbility());
-                            }
-                        }
-                        return useable;
-                    default:
-                        if (((SpellAbility) ability).spellCanBeActivatedRegularlyNow(playerId, game)) {
-                            useable.put(ability.getId(), (SpellAbility) ability);
-                        }
-                }
+                    } else if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
+                        useable.put(
+                                ((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
+                                ((SplitCard) object).getLeftHalfCard().getSpellAbility()
+                        );
+                    }
+                    return useable;
+                default:
+                    if (ability.spellCanBeActivatedRegularlyNow(playerId, game)) {
+                        useable.put(ability.getId(), ability);
+                    }
             }
         }
         return useable;

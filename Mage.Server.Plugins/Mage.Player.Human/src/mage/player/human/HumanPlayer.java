@@ -2182,10 +2182,10 @@ public class HumanPlayer extends PlayerImpl {
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
         if (object != null) {
             String message = "Choose ability to cast" + (nonMana ? " for FREE" : "") + "<br>" + object.getLogName();
-            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
+            LinkedHashMap<UUID, SpellAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
             if (useableAbilities != null
                     && useableAbilities.size() == 1) {
-                return (SpellAbility) useableAbilities.values().iterator().next();
+                return useableAbilities.values().iterator().next();
             } else if (useableAbilities != null
                     && !useableAbilities.isEmpty()) {
 
@@ -2199,7 +2199,7 @@ public class HumanPlayer extends PlayerImpl {
                 UUID responseId = getFixedResponseUUID(game);
                 if (responseId != null) {
                     if (useableAbilities.containsKey(responseId)) {
-                        return (SpellAbility) useableAbilities.get(responseId);
+                        return useableAbilities.get(responseId);
                     }
                 }
             }
