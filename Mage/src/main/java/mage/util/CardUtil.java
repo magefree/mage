@@ -1184,6 +1184,8 @@ public final class CardUtil {
                 return new TargetCardInExile(0, 1, defaultFilter, null);
             case LIBRARY:
                 return new TargetCardInLibrary(0, 1, defaultFilter);
+            case COMMAND:
+                return new TargetCard(0, 1, Zone.COMMAND, defaultFilter);
             default:
                 throw new UnsupportedOperationException("can't choose a card from zone: " + zone);
         }
