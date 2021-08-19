@@ -1235,6 +1235,16 @@ public final class CardUtil {
         return result;
     }
 
+    private static boolean checkForPlayable(Cards cards, FilterCard filter, UUID sourceId, UUID playerId, Game game) {
+        return cards
+                .getCards(game)
+                .stream()
+                .map(card -> getCastableComponents(card, filter, sourceId, playerId, game))
+                .flatMap(Collection::stream)
+                .findFirst()
+                .isPresent();
+    }
+
     public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, Zone zone) {
         castMultipleWithAttributeForFree(player, source, game, cards, filter, zone, Integer.MAX_VALUE);
     }
@@ -1250,7 +1260,9 @@ public final class CardUtil {
             if (CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter)) {
                 spellsCast++;
                 cards.retainZone(zone, game);
-            } else if (cards.isEmpty() || !player.chooseUse(
+            } else if (!checkForPlayable(
+                    cards, filter, source.getSourceId(), player.getId(), game
+            ) || !player.chooseUse(
                     Outcome.PlayForFree, "Continue casting spells?", source, game
             )) {
                 break;
