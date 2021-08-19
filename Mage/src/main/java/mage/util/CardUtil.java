@@ -1242,10 +1242,7 @@ public final class CardUtil {
         return cards
                 .getCards(game)
                 .stream()
-                .map(card -> getCastableComponents(card, filter, sourceId, playerId, game))
-                .flatMap(Collection::stream)
-                .findFirst()
-                .isPresent();
+                .anyMatch(card -> !getCastableComponents(card, filter, sourceId, playerId, game).isEmpty());
     }
 
     public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, Zone zone) {
