@@ -52,7 +52,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
@@ -2208,49 +2207,6 @@ public class HumanPlayer extends PlayerImpl {
 
         // default ability (example: on disconnect or cancel)
         return card.getSpellAbility();
-    }
-
-    @Override
-    public SpellAbility chooseAbilityForCast(Card card, List<SpellAbility> spellAbilities, Game game) {
-        if (gameInCheckPlayableState(game)) {
-            return null;
-        }
-        if (spellAbilities.size() < 2) {
-            return spellAbilities.stream().findFirst().orElse(null);
-        }
-
-        // TODO: add canRespond cycle?
-        if (!canRespond()) {
-            return null;
-        }
-        MageObject object = game.getObject(card.getId());
-        if (object == null) {
-            return spellAbilities.get(0);
-        }
-        String message = "Choose ability to cast" + "<br>" + object.getLogName();
-        LinkedHashMap<UUID, SpellAbility> useableAbilities = new LinkedHashMap<>(
-                spellAbilities.stream().collect(Collectors.toMap(AbilityImpl::getId, Function.identity()))
-        );
-        if (useableAbilities != null
-                && useableAbilities.size() == 1) {
-            return useableAbilities.values().iterator().next();
-        } else if (useableAbilities != null
-                && !useableAbilities.isEmpty()) {
-
-            updateGameStatePriority("chooseAbilityForCast", game);
-            prepareForResponse(game);
-            if (!isExecutingMacro()) {
-                game.fireGetChoiceEvent(playerId, message, object, new ArrayList<>(useableAbilities.values()));
-            }
-            waitForResponse(game);
-            SpellAbility response = useableAbilities.getOrDefault(getFixedResponseUUID(game), null);
-            if (response != null) {
-                return response;
-            }
-        }
-
-        // default ability (example: on disconnect or cancel)
-        return spellAbilities.get(0);
     }
 
     @Override

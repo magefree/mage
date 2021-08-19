@@ -4292,25 +4292,6 @@ public class TestPlayer implements Player {
         return computerPlayer.chooseAbilityForCast(card, game, noMana);
     }
 
-    @Override
-    public SpellAbility chooseAbilityForCast(Card card, List<SpellAbility> spellAbilities, Game game) {
-        assertAliasSupportInChoices(false);
-        if (spellAbilities.size() == 1) {
-            return spellAbilities.get(0);
-        }
-        if (!choices.isEmpty()) {
-            for (SpellAbility ability : spellAbilities) {
-                if (ability.toString().startsWith(choices.get(0))) {
-                    choices.remove(0);
-                    return ability;
-                }
-            }
-        }
-        String allInfo = spellAbilities.stream().map(Object::toString).collect(Collectors.joining("\n"));
-        this.chooseStrictModeFailed("choice", game, getInfo(card) + " - can't select ability to cast.\n" + "Abilities available:\n" + allInfo);
-        return computerPlayer.chooseAbilityForCast(card, spellAbilities, game);
-    }
-
     public ComputerPlayer getComputerPlayer() {
         return computerPlayer;
     }

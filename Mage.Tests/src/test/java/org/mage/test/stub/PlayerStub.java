@@ -1435,8 +1435,4 @@ public class PlayerStub implements Player {
         return card.getSpellAbility();
     }
 
-    @Override
-    public SpellAbility chooseAbilityForCast(Card card, List<SpellAbility> spellAbilities, Game game) {
-        return null;
-    }
 }
