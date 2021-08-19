@@ -5,6 +5,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -765,5 +766,33 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
+    }
+
+    @Ignore // currently fails
+    @Test
+    public void test_Cascade_FlaxenIntruder() {
+        // If a player cascades into Flaxen Intruder with Bloodbraid Elf they shouldn't be able to cast Welcome Home
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+
+        // Cascade
+        addCard(Zone.HAND, playerA, "Bloodbraid Elf"); // {2}{R}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        //
+        addCard(Zone.LIBRARY, playerA, "Swamp", 2);
+        addCard(Zone.LIBRARY, playerA, "Flaxen Intruder", 1);
+        addCard(Zone.LIBRARY, playerA, "Island", 2);
+
+        // play elf with cascade
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
+        setChoice(playerA, true); // use free cast
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Flaxen Intruder", 1);
     }
 }
