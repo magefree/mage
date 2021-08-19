@@ -42,11 +42,14 @@ import java.util.*;
 import static mage.client.dialog.PreferencesDialog.*;
 
 /**
- * @author BetaSteward_at_googlemail.com, nantuko
+ * GUI: deck editor's panel with filters and search
+ *
+ * @author BetaSteward_at_googlemail.com, nantuko, JayDi85
  */
 public class CardSelector extends javax.swing.JPanel implements ComponentListener, DragCardTarget {
 
     private static final Logger logger = Logger.getLogger(CardSelector.class);
+    private final String MULTI_SETS_SELECTION_TEXT = "Multiple sets selected";
 
     private final java.util.List<Card> cards = new ArrayList<>();
     private BigCard bigCard;
@@ -54,8 +57,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private final SortSetting sortSetting;
     private static final Map<String, Integer> pdAllowed = new HashMap<>();
     private static Listener<RepositoryEvent> setsDbListener = null;
-
-    private final String TEST_MULTI_SET = "Multiple Sets selected";
+    private boolean isSetsFilterLoading = false; // use it on sets combobox modify
 
     private final ActionListener searchAction = evt -> jButtonSearchActionPerformed(evt);
 
@@ -71,17 +73,15 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         setGUISize();
         currentView = mainModel; // by default we use List View
 
+        // prepare search dialog with checkboxes
         listCodeSelected = new CheckBoxList();
-
-        String[] setCodes = ConstructedFormats.getTypes();
-        java.util.List<String> result = new ArrayList<>();
-
-        for (String item : setCodes) {
+        List<String> checkboxes = new ArrayList<>();
+        for (String item : ConstructedFormats.getTypes()) {
             if (!item.equals(ConstructedFormats.ALL_SETS)) {
-                result.add(item);
+                checkboxes.add(item);
             }
         }
-        listCodeSelected.setListData(result.toArray());
+        listCodeSelected.setListData(checkboxes.toArray());
     }
 
     private void makeTransparent() {
@@ -216,9 +216,15 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         this.btnClear.setVisible(true);
         this.cbExpansionSet.setVisible(true);
         this.btnExpansionSearch.setVisible(true);
-//        cbExpansionSet.setModel(new DefaultComboBoxModel<>(ConstructedFormats.getTypes()));
-        // Action event on Expansion set triggers loadCards method
-        cbExpansionSet.setSelectedIndex(0);
+
+        // select "all" by default
+        try {
+            isSetsFilterLoading = true;
+            cbExpansionSet.setSelectedIndex(0);
+        } finally {
+            isSetsFilterLoading = false;
+        }
+        filterCards();
     }
 
     private FilterCard buildFilter() {
@@ -274,19 +280,60 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
             filter.add(Predicates.or(predicates));
 
-            if (this.cbExpansionSet.isVisible()) {
-                String expansionSelection = this.cbExpansionSet.getSelectedItem().toString();
-                if (!expansionSelection.equals("- All Sets")) {
-                    List<Predicate<Card>> expansionPredicates = new ArrayList<>();
-                    for (String setCode : ConstructedFormats.getSetsByFormat(expansionSelection)) {
-                        expansionPredicates.add(new ExpansionSetPredicate(setCode));
-                    }
-                    filter.add(Predicates.or(expansionPredicates));
+            List<String> filteredSets = getFilteredSets();
+            if (!filteredSets.isEmpty()) {
+                List<Predicate<Card>> expansionPredicates = new ArrayList<>();
+                for (String setCode : filteredSets) {
+                    expansionPredicates.add(new ExpansionSetPredicate(setCode));
                 }
+                filter.add(Predicates.or(expansionPredicates));
             }
         }
 
         return filter;
+    }
+
+    private void setSetsSelection(String newSelection) {
+        // combo and checkbox can contain different elements (e.g. without "all" or "multi" options),
+        // so must search by string value
+        for (int index = 0; index < cbExpansionSet.getItemCount(); index++) {
+            if (cbExpansionSet.getItemAt(index).equals(newSelection)) {
+                if (cbExpansionSet.getSelectedIndex() != index) {
+                    cbExpansionSet.setSelectedIndex(index);
+                }
+            }
+        }
+    }
+
+    private List<String> getFilteredSets() {
+        // empty list - show all sets
+
+        List<String> res = new ArrayList<>();
+        if (!this.cbExpansionSet.isVisible()) {
+            return res;
+        }
+
+        if (listCodeSelected.getCheckedIndices().length <= 1) {
+            // single set selected
+            String expansionSelection = this.cbExpansionSet.getSelectedItem().toString();
+            if (!expansionSelection.equals(ConstructedFormats.ALL_SETS)
+                    && !expansionSelection.startsWith(MULTI_SETS_SELECTION_TEXT)) {
+                res.addAll(ConstructedFormats.getSetsByFormat(expansionSelection));
+            }
+        } else {
+            // multiple sets selected
+            int[] choiseValue = listCodeSelected.getCheckedIndices();
+            ListModel x = listCodeSelected.getModel();
+
+            for (int itemIndex : choiseValue) {
+                java.util.List<String> listReceived = ConstructedFormats.getSetsByFormat(x.getElementAt(itemIndex).toString());
+                listReceived.stream()
+                        .filter(item -> !res.contains(item))
+                        .forEachOrdered(res::add);
+            }
+        }
+
+        return res;
     }
 
     private CardCriteria buildCriteria() {
@@ -338,27 +385,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             criteria.rarities(Rarity.SPECIAL);
             criteria.rarities(Rarity.BONUS);
         }
-        if (this.cbExpansionSet.isVisible()) {
-            if (listCodeSelected.getCheckedIndices().length <= 1) {
-                String expansionSelection = this.cbExpansionSet.getSelectedItem().toString();
-                if (!expansionSelection.equals("- All Sets")) {
-                    java.util.List<String> setCodes = ConstructedFormats.getSetsByFormat(expansionSelection);
-                    criteria.setCodes(setCodes.toArray(new String[0]));
-                }
-            } else {
-                java.util.List<String> setCodes = new ArrayList<>();
-                //java.util.List<String> listReceived=new ArrayList<>() ;
 
-                int[] choiseValue = listCodeSelected.getCheckedIndices();
-                ListModel x = listCodeSelected.getModel();
-
-                for (int itemIndex : choiseValue) {
-
-                    java.util.List<String> listReceived = ConstructedFormats.getSetsByFormat(x.getElementAt(itemIndex).toString());
-                    listReceived.stream().filter(item -> !setCodes.contains(item)).forEachOrdered(setCodes::add);
-                }
-                criteria.setCodes(setCodes.toArray(new String[0]));
-            }
+        List<String> filteredSets = getFilteredSets();
+        if (!filteredSets.isEmpty()) {
+            criteria.setCodes(filteredSets.toArray(new String[0]));
         }
 
         return criteria;
@@ -681,7 +711,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 cbExpansionSetActionPerformed(evt);
             }
         });
+
         // auto-update sets list on changes
+        // doesn't use any more due to db recreation on update
         setsDbListener = new Listener<RepositoryEvent>() {
             @Override
             public void event(RepositoryEvent event) {
@@ -1218,19 +1250,37 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbExpansionSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExpansionSetActionPerformed
-        if (!cbExpansionSet.getSelectedItem().toString().contains(TEST_MULTI_SET)) {
-            int index = cbExpansionSet.getSelectedIndex();
-            if (cbExpansionSet.getItemAt(0).contains(TEST_MULTI_SET)) {
-                cbExpansionSet.removeItemAt(0);
-                index--;
+        // one item selected by user
+
+        // ignore combobox modifing
+        if (isSetsFilterLoading) {
+            return;
+        }
+
+        // auto-remove unused multi-select item and sync checkboxes
+        if (!cbExpansionSet.getSelectedItem().toString().startsWith(MULTI_SETS_SELECTION_TEXT)) {
+            int currentSelection = cbExpansionSet.getSelectedIndex();
+            isSetsFilterLoading = true;
+            try {
+                // remove multi item and fix selection
+                if (cbExpansionSet.getItemAt(0).startsWith(MULTI_SETS_SELECTION_TEXT)) {
+                    cbExpansionSet.removeItemAt(0);
+                    currentSelection = Math.max(0, currentSelection - 1);
+                }
+            } finally {
+                isSetsFilterLoading = false;
             }
+
+            // sync checkboxes
             listCodeSelected.uncheckAll();
-            if (index > 0) {
-                //ofset because all sets is removed from the list
-                listCodeSelected.setChecked(index - 1, true);
+            if (currentSelection > 0) {
+                // if not "all" option selected
+                // checkbox haven't "all", so use another indexes
+                listCodeSelected.setChecked(currentSelection - 1, true);
             }
         }
 
+        // update data
         filterCards();
     }//GEN-LAST:event_cbExpansionSetActionPerformed
 
@@ -1241,7 +1291,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnBoosterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoosterActionPerformed
-        java.util.List<String> sets = ConstructedFormats.getSetsByFormat(this.cbExpansionSet.getSelectedItem().toString());
+        List<String> sets = getFilteredSets();
         if (sets.size() == 1) {
             if (!this.limited) {
                 this.limited = true;
@@ -1415,43 +1465,45 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }//GEN-LAST:event_chkRulesActionPerformed
 
     private void btnExpansionSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpansionSearchActionPerformed
+        // search and check multiple items
+
+        int[] oldChecks = listCodeSelected.getCheckedIndices();
+
+        // call dialog
         FastSearchUtil.showFastSearchForStringComboBox(listCodeSelected, FastSearchUtil.DEFAULT_EXPANSION_SEARCH_MESSAGE);
-//
-        int[] choiseValue = listCodeSelected.getCheckedIndices();
-        ListModel x = listCodeSelected.getModel();
 
-        if (choiseValue.length == 0)//none
-        {
-            cbExpansionSet.setSelectedIndex(0);
-        } else if (choiseValue.length == 1)//one
-        {
-            String itemSelected = listCodeSelected.getModel().getElementAt(choiseValue[0]).toString();
-            for (int index = 0; index < cbExpansionSet.getItemCount(); index++) {
-                if (cbExpansionSet.getItemAt(index).equals(itemSelected)) {
-                    cbExpansionSet.setSelectedIndex(index);
-                }
-            }
-
-        } else//many
-        {
-            String message = String.format("%s:%d", TEST_MULTI_SET, choiseValue.length);
-
-            cbExpansionSet.insertItemAt(message, 0);
-            cbExpansionSet.setSelectedIndex(0);
-
-            if (cbExpansionSet.getItemAt(1).contains(TEST_MULTI_SET)) {
-                cbExpansionSet.removeItemAt(1);
-            }
-
-            //listCodeSelected.setChecked(index-1, true);
-            //cbExpansionSet.
+        int[] newChecks = listCodeSelected.getCheckedIndices();
+        if (Arrays.equals(oldChecks, newChecks)) {
+            // no changes or cancel
+            return;
         }
 
-        /*for(int itemIndex: choiseValue){
-                  //  LogLog.warn(String.format("%d:%s",itemIndex,x.getElementAt(itemIndex).toString()));
+        isSetsFilterLoading = true;
+        try {
+            // delete old item
+            if (cbExpansionSet.getItemAt(0).startsWith(MULTI_SETS_SELECTION_TEXT)) {
+                cbExpansionSet.removeItemAt(0);
+            }
+
+            // set new selection
+            if (newChecks.length == 0) {
+                // all
+                cbExpansionSet.setSelectedIndex(0);
+            } else if (newChecks.length == 1) {
+                // one
+                setSetsSelection(listCodeSelected.getModel().getElementAt(newChecks[0]).toString());
+            } else {
+                // multiple
+                // insert custom text
+                String message = String.format("%s: %d", MULTI_SETS_SELECTION_TEXT, newChecks.length);
+                cbExpansionSet.insertItemAt(message, 0);
+                cbExpansionSet.setSelectedIndex(0);
+            }
+        } finally {
+            isSetsFilterLoading = false;
         }
-         */
-//
+
+        // update data
         filterCards();
     }//GEN-LAST:event_btnExpansionSearchActionPerformed
 
