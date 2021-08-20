@@ -1591,9 +1591,9 @@ public class VerifyCardDataTest {
         }
 
         boolean isFine = true;
-        for (int i = 0; i <= cardRules.length - 1; i++) {
+        for (int i = 0; i < cardRules.length; i++) {
             boolean isAbilityFounded = false;
-            for (int j = 0; j <= refRules.length - 1; j++) {
+            for (int j = 0; j < refRules.length; j++) {
                 String refRule = refRules[j];
                 if (compareText(cardRules[i], refRule, card.getName())) {
                     cardRules[i] = "+ " + cardRules[i];

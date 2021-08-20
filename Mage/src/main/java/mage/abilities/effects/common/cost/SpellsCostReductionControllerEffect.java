@@ -71,8 +71,8 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
             if (upTo) {
                 Mana mana = abilityToModify.getManaCostsToPay().getMana();
                 int reduceMax = mana.getGeneric();
-                if (reduceMax > amount) {
-                    reduceMax = amount;
+                if (reduceMax > this.amount) {
+                    reduceMax = this.amount;
                 }
                 if (reduceMax > 0) {
                     Player controller = game.getPlayer(abilityToModify.getControllerId());
@@ -83,7 +83,7 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
                     if (!game.inCheckPlayableState()) {
                         ChoiceImpl choice = new ChoiceImpl(false);
                         Set<String> set = new LinkedHashSet<>();
-                        for (int i = 0; i <= amount; i++) {
+                        for (int i = 0; i <= reduceMax; i++) {
                             set.add(String.valueOf(i));
                         }
                         choice.setChoices(set);

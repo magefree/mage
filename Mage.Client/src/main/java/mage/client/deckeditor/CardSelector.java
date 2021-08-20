@@ -1252,7 +1252,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private void cbExpansionSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExpansionSetActionPerformed
         // one item selected by user
 
-        // ignore combobox modifing
+        // ignore combobox modifying
         if (isSetsFilterLoading) {
             return;
         }
