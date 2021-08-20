@@ -142,6 +142,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of Autumn", 187, Rarity.RARE, mage.cards.k.KnightOfAutumn.class));
         cards.add(new SetCardInfo("Light Up the Stage", 131, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
         cards.add(new SetCardInfo("Lightning Greaves", 331, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
+        cards.add(new SetCardInfo("Lorcan, Warlock Collector", 27, Rarity.RARE, mage.cards.l.LorcanWarlockCollector.class));
         cards.add(new SetCardInfo("Loyal Apprentice", 132, Rarity.UNCOMMON, mage.cards.l.LoyalApprentice.class));
         cards.add(new SetCardInfo("Lumbering Falls", 247, Rarity.RARE, mage.cards.l.LumberingFalls.class));
         cards.add(new SetCardInfo("Maddening Hex", 32, Rarity.RARE, mage.cards.m.MaddeningHex.class));

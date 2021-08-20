@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -8,6 +7,7 @@ import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -23,7 +23,7 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
     private final SetTargetPointer setTargetPointer;
 
     public PutCardIntoGraveFromAnywhereAllTriggeredAbility(Effect effect, boolean optional, TargetController targetController) {
-        this(effect, optional, new FilterCard("a card"), targetController);
+        this(effect, optional, StaticFilters.FILTER_CARD_A, targetController);
     }
 
     public PutCardIntoGraveFromAnywhereAllTriggeredAbility(Effect effect, boolean optional, FilterCard filter, TargetController targetController) {
@@ -77,28 +77,23 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null
-                    && !card.isCopy()
-                    && filter.match(card, getSourceId(), getControllerId(), game)) {
-                switch (setTargetPointer) {
-                    case CARD:
-                        for (Effect effect : getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(card, game));
-                        }
-                        break;
-                    case PLAYER:
-                        for (Effect effect : getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(card.getOwnerId(), 0));
-                        }
-                        break;
-
-                }
-                return true;
-            }
+        if (((ZoneChangeEvent) event).getToZone() != Zone.GRAVEYARD) {
+            return false;
         }
-        return false;
+        Card card = game.getCard(event.getTargetId());
+        if (card == null || card.isCopy() || !filter.match(card, getSourceId(), getControllerId(), game)) {
+            return false;
+        }
+        switch (setTargetPointer) {
+            case CARD:
+                this.getEffects().setTargetPointer(new FixedTarget(card, game));
+                break;
+            case PLAYER:
+                this.getEffects().setTargetPointer(new FixedTarget(card.getOwnerId(), 0));
+                break;
+
+        }
+        return true;
     }
 
     @Override
