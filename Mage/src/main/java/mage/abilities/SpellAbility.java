@@ -80,6 +80,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
         return null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
                 || timing == TimingRule.INSTANT
+                || object.isInstant(game)
                 || object.hasAbility(FlashAbility.getInstance(), game)
                 || game.canPlaySorcery(playerId);
     }

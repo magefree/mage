@@ -9,6 +9,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.keyword.FlashAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.*;
@@ -145,6 +146,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     protected boolean checkTargetController(UUID playerId, Game game) {
         switch (mayActivate) {
             case ANY:
+            case EACH_PLAYER:
                 return true;
             case ACTIVE:
                 return game.getActivePlayerId() == playerId;
@@ -170,6 +172,15 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         return true;
     }
 
+    /**
+     * Basic activation check. It contains costs and targets legality too.
+     * <p>
+     * WARNING, don't forget to call super.canActivate on override in card's code in most cases.
+     *
+     * @param playerId
+     * @param game
+     * @return
+     */
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         //20091005 - 602.2
@@ -178,26 +189,43 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 || condition.apply(game, this)))) {
             return ActivationStatus.getFalse();
         }
+
         if (!this.checkTargetController(playerId, game)) {
             return ActivationStatus.getFalse();
         }
+
+        // timing check
         //20091005 - 602.5d/602.5e
+        boolean asInstant;
         ApprovingObject approvingObject = game.getContinuousEffects()
                 .asThough(sourceId,
                         AsThoughEffectType.ACTIVATE_AS_INSTANT,
                         this,
                         controllerId,
                         game);
-        if (timing == TimingRule.INSTANT
-                || game.canPlaySorcery(playerId)
-                || null != approvingObject) {
-            if (costs.canPay(this, this, playerId, game)
-                    && canChooseTarget(game, playerId)) {
-                this.activatorId = playerId;
-                return new ActivationStatus(true, approvingObject);
-            }
+        asInstant = approvingObject != null;
+        asInstant |= (timing == TimingRule.INSTANT);
+        Card card = game.getCard(getSourceId());
+        if (card != null) {
+            asInstant |= card.isInstant(game);
+            asInstant |= card.hasAbility(FlashAbility.getInstance(), game);
         }
-        return ActivationStatus.getFalse();
+        if (!asInstant && !game.canPlaySorcery(playerId)) {
+            return ActivationStatus.getFalse();
+        }
+
+        // targets and costs check
+        if (!costs.canPay(this, this, playerId, game)
+                || canChooseTarget(game, playerId)) {
+            return ActivationStatus.getFalse();
+        }
+
+        // all fine, can be activated
+        // TODO: WTF, must be rework to remove data change in canActivate call
+        //  (it can be called from any place by any player or card).
+        //  So add game.inCheckPlayableState() here?
+        this.activatorId = playerId;
+        return new ActivationStatus(true, approvingObject);
     }
 
     @Override

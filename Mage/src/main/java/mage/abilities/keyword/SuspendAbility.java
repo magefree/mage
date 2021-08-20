@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import mage.ApprovingObject;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.TriggeredAbilityImpl;
@@ -127,6 +126,8 @@ public class SuspendAbility extends SpecialAction {
     public SuspendAbility(int suspend, ManaCost cost, Card card, boolean shortRule) {
         super(Zone.HAND);
         this.addCost(cost);
+        // suspend uses both sorcery/instant timing depends on object, so it checks with object, see canActivate
+        this.setTiming(TimingRule.SORCERY);
         this.addEffect(new SuspendExileEffect(suspend));
         this.usesStack = false;
         if (suspend == Integer.MAX_VALUE) {
@@ -205,16 +206,12 @@ public class SuspendAbility extends SpecialAction {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
+        // suspend can only be activated from a hand
         if (game.getState().getZone(getSourceId()) != Zone.HAND) {
-            // Supend can only be activated from hand
             return ActivationStatus.getFalse();
         }
-        MageObject object = game.getObject(sourceId);
-        return new ActivationStatus(object.isInstant(game)
-                || object.hasAbility(FlashAbility.getInstance(), game)
-                || null != game.getContinuousEffects().asThough(sourceId,
-                AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
-                || game.canPlaySorcery(playerId), null);
+
+        return super.canActivate(playerId, game);
     }
 
     @Override

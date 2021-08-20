@@ -1319,7 +1319,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                         SpellAbility ability = card.getSpellAbility();
                         if (ability != null && ability.canActivate(playerId, game).canActivate()
                                 && !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability, playerId), ability, game, true)) {
-                            if (card.getCardType(game).contains(CardType.INSTANT)
+                            if (card.isInstant(game)
                                     || card.hasAbility(FlashAbility.getInstance(), game)) {
                                 playableInstant.add(card);
                             } else {
