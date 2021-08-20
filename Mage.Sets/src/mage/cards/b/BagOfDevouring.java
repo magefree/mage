@@ -42,7 +42,7 @@ public final class BagOfDevouring extends CardImpl {
             = new FilterControlledPermanent("another artifact or creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(AnotherPredicate.instance);
         filter.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),

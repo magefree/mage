@@ -16,7 +16,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SpiritWhiteToken;
@@ -36,7 +35,7 @@ public final class AlharuSolemnRitualist extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter2.add(Predicates.not(TokenPredicate.instance));
+        filter2.add(TokenPredicate.FALSE);
         filter2.add(CounterType.P1P1.getPredicate());
     }
 

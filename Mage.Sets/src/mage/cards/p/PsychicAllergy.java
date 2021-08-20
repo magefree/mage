@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -78,7 +77,7 @@ class PsychicAllergyEffect extends OneShotEffect {
         if (player != null) {
             FilterPermanent filter = new FilterPermanent();
             filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(source.getSourceId() + "_color")));
-            filter.add(Predicates.not(TokenPredicate.instance));
+            filter.add(TokenPredicate.FALSE);
             int damage = game.getBattlefield().countAll(filter, player.getId(), game);
             player.damage(damage, source.getSourceId(), source, game);
             return true;

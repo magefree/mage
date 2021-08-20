@@ -60,7 +60,7 @@ enum ChromeReplicatorCondition implements Condition {
 
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     @Override

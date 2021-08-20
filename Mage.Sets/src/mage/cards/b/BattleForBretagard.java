@@ -110,7 +110,7 @@ class BattleForBretagardTarget extends TargetPermanent {
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate()
         ));
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     BattleForBretagardTarget() {

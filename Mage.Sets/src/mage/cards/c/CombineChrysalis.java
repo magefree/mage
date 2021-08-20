@@ -29,7 +29,7 @@ public final class CombineChrysalis extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a token");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public CombineChrysalis(UUID ownerId, CardSetInfo setInfo) {

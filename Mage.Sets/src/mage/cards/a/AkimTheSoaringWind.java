@@ -37,7 +37,7 @@ public final class AkimTheSoaringWind extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public AkimTheSoaringWind(UUID ownerId, CardSetInfo setInfo) {

@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -26,7 +25,7 @@ public final class SoulOfTheHarvest extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another nontoken creature");
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public SoulOfTheHarvest(UUID ownerId, CardSetInfo setInfo) {

@@ -11,7 +11,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -91,7 +90,7 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent();
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(TargetController.YOU.getOwnerPredicate());
     }
 

@@ -24,7 +24,7 @@ public final class DoggedHunter extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature token");
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public DoggedHunter(UUID ownerId, CardSetInfo setInfo) {

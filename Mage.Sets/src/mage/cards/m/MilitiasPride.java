@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -61,7 +60,7 @@ class MilitiasPrideTriggerAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         Permanent permanent = game.getPermanent(event.getSourceId());
         return permanent != null && filter.match(permanent, sourceId, controllerId, game);
     }

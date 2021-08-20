@@ -27,7 +27,7 @@ public final class EsikasChariot extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("token you control");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public EsikasChariot(UUID ownerId, CardSetInfo setInfo) {

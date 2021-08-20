@@ -54,7 +54,7 @@ class DanseMacabreEffect extends OneShotEffect {
             = new FilterControlledCreaturePermanent("nontoken creature you control");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     DanseMacabreEffect() {

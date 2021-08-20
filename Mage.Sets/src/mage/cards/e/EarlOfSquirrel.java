@@ -26,7 +26,7 @@ public final class EarlOfSquirrel extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Squirrels you control");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
         filter.add(TargetController.YOU.getControllerPredicate());
         filter2.add(SubType.SQUIRREL.getPredicate());
     }

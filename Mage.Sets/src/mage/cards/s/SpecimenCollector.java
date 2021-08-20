@@ -27,7 +27,7 @@ public final class SpecimenCollector extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent("token you control");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public SpecimenCollector(UUID ownerId, CardSetInfo setInfo) {

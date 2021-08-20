@@ -25,7 +25,7 @@ public final class EternalSkylord extends CardImpl {
             = new FilterPermanent(SubType.ZOMBIE, "Zombie tokens");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public EternalSkylord(UUID ownerId, CardSetInfo setInfo) {

@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
@@ -23,7 +22,7 @@ public final class ItThatBetrays extends CardImpl {
     private static final FilterPermanent FILTER = new FilterPermanent("nontoken permanent");
 
     static {
-        FILTER.add(Predicates.not(TokenPredicate.instance));
+        FILTER.add(TokenPredicate.FALSE);
     }
 
     public ItThatBetrays(UUID ownerId, CardSetInfo setInfo) {

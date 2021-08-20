@@ -15,7 +15,6 @@ import mage.constants.SetTargetPointer;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -78,7 +77,7 @@ class BazaarOfWondersEffect extends OneShotEffect {
         String spellName = spell.getName();
         FilterPermanent filter1 = new FilterPermanent();
         filter1.add(new NamePredicate(spellName));
-        filter1.add(Predicates.not(TokenPredicate.instance));
+        filter1.add(TokenPredicate.FALSE);
         if (!game.getBattlefield().getActivePermanents(filter1, 
                 source.getControllerId(), game).isEmpty()) {
             game.getStack().counter(spell.getId(), source, game);

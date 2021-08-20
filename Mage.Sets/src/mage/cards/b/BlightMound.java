@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.Pest11GainLifeToken;
@@ -34,7 +33,7 @@ public final class BlightMound extends CardImpl {
 
     static {
         filter.add(AttackingPredicate.instance);
-        filter2.add(Predicates.not(TokenPredicate.instance));
+        filter2.add(TokenPredicate.FALSE);
     }
 
     public BlightMound(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -63,7 +62,7 @@ class AshayaSoulOfTheWildEffect extends ContinuousEffectImpl {
             = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public AshayaSoulOfTheWildEffect() {
