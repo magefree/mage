@@ -216,14 +216,15 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
         // targets and costs check
         if (!costs.canPay(this, this, playerId, game)
-                || canChooseTarget(game, playerId)) {
+                || !canChooseTarget(game, playerId)) {
             return ActivationStatus.getFalse();
         }
 
         // all fine, can be activated
         // TODO: WTF, must be rework to remove data change in canActivate call
         //  (it can be called from any place by any player or card).
-        //  So add game.inCheckPlayableState() here?
+        //  game.inCheckPlayableState() can't be a help here cause some cards checking activating status,
+        //  activatorId must be removed
         this.activatorId = playerId;
         return new ActivationStatus(true, approvingObject);
     }
