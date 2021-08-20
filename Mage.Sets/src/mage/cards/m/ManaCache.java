@@ -11,10 +11,7 @@ import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -94,6 +91,7 @@ class ManaCacheManaAbility extends ActivatedManaAbilityImpl {
         super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.ColorlessMana(1), new CountersSourceCount(CounterType.CHARGE)),
                 new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, 1));
+        this.setMayActivate(TargetController.ANY);
     }
 
     public ManaCacheManaAbility(final ManaCacheManaAbility ability) {
@@ -102,17 +100,15 @@ class ManaCacheManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        if (!super.hasMoreActivationsThisTurn(game) || !(condition == null || condition.apply(game, this))) {
+        // any player, but only during their turn before the end step
+        Player player = game.getPlayer(playerId);
+        if (player == null
+                || !playerId.equals(game.getActivePlayerId())
+                || !game.getStep().getType().isBefore(PhaseStep.END_TURN)) {
             return ActivationStatus.getFalse();
         }
-        Player player = game.getPlayer(playerId);
-        if (player != null && playerId.equals(game.getActivePlayerId()) && game.getStep().getType().isBefore(PhaseStep.END_TURN)) {
-            if (costs.canPay(this, this, playerId, game)) {
-                this.setControllerId(playerId);
-                return ActivationStatus.getTrue(this, game);
-            }
-        }
-        return ActivationStatus.getFalse();
+
+        return super.canActivate(playerId, game);
     }
 
     @Override

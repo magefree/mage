@@ -53,6 +53,11 @@ public interface ActivatedAbility extends Ability {
      */
     ActivationStatus canActivate(UUID playerId, Game game); // has to return a reference to the permitting ability/source
 
+    /**
+     * Who can activate an ability. By default, only you (the controller/owner).
+     *
+     * @param mayActivate
+     */
     void setMayActivate(TargetController mayActivate);
 
     /**

@@ -53,6 +53,7 @@ public class GlimpseTheCosmos extends CardImpl {
 
 }
 
+// TODO: card can't use custom SpellAbility, must be reworked to PLAY_FROM_NOT_OWN_HAND_ZONE (example: Worldheart Phoenix)
 class GlimpseTheCosmosAbility extends SpellAbility {
 
     private String abilityName;
@@ -74,6 +75,7 @@ class GlimpseTheCosmosAbility extends SpellAbility {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
+        // TODO: miss super.canActivate?
         Card card = game.getCard(getSourceId());
         if (card != null) {
             // Card must be in the graveyard zone
