@@ -613,8 +613,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             FilterPermanent filter = null;
             if (target.getOriginalTarget().getFilter() instanceof FilterPermanent) {
                 filter = (FilterPermanent) target.getOriginalTarget().getFilter();
-            } else if (target.getOriginalTarget().getFilter() instanceof FilterPermanentOrSuspendedCard) {
-                filter = ((FilterPermanentOrSuspendedCard) target.getOriginalTarget().getFilter()).getPermanentFilter();
             }
             if (filter == null) {
                 throw new IllegalStateException("Unsupported permanent filter in computer's chooseTarget method: "
