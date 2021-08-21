@@ -2716,7 +2716,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 .stream()
                 .filter(card -> filter.match(card, source.getSourceId(), getId(), game))
                 .collect(Collectors.toSet());
-        Card card = RandomUtil.randomFromSet(cards);
+        Card card = RandomUtil.randomFromCollection(cards);
         if (card == null) {
             return false;
         }
