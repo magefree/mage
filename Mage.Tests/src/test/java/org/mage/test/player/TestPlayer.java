@@ -2419,13 +2419,13 @@ public class TestPlayer implements Player {
             if (target.getOriginalTarget() instanceof TargetCardInExile
                     || target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard) {
 
-                FilterCard filterCard = null;
+                FilterCard filter = null;
                 if (target.getOriginalTarget().getFilter() instanceof FilterCard) {
-                    filterCard = (FilterCard) target.getOriginalTarget().getFilter();
+                    filter = (FilterCard) target.getOriginalTarget().getFilter();
                 } else if (target.getOriginalTarget().getFilter() instanceof FilterPermanentOrSuspendedCard) {
-                    filterCard = ((FilterPermanentOrSuspendedCard) target.getOriginalTarget().getFilter()).getCardFilter();
+                    filter = ((FilterPermanentOrSuspendedCard) target.getOriginalTarget().getFilter()).getCardFilter();
                 }
-                if (filterCard == null) {
+                if (filter == null) {
                     Assert.fail("Unsupported exile target filter in TestPlayer: "
                             + target.getOriginalTarget().getClass().getCanonicalName());
                 }
@@ -2435,7 +2435,7 @@ public class TestPlayer implements Player {
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
-                        for (Card card : game.getExile().getCards(filterCard, game)) {
+                        for (Card card : game.getExile().getCards(filter, game)) {
                             if (hasObjectTargetNameOrAlias(card, targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) { // TODO: remove set code search?
                                 if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
                                     target.addTarget(card.getId(), source, game);
