@@ -446,8 +446,14 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             logger.info("simulating - timed out");
             task.cancel(true);
         } catch (ExecutionException e) {
+            // exception error in simulated game
             e.printStackTrace();
             task.cancel(true);
+            // real games: must catch
+            // unit tests: must raise again for test fail
+            if (this.isTestsMode()) {
+                throw new IllegalStateException("One of the simulated games raise the error: " + e.getCause());
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
             task.cancel(true);
