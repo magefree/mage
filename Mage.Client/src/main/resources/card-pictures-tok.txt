@@ -181,6 +181,11 @@
 |Generate|TOK:AER|Gremlin|||GremlinToken|
 |Generate|TOK:AER|Ragavan|||RagavanToken|
 
+# Dungeons
+|Generate|DUNGEON:AFR|Tomb of Annihilation|||TombOfAnnihilationDungeon|
+|Generate|DUNGEON:AFR|Lost Mine of Phandelver|||LostMineOfPhandelverDungeon|
+|Generate|DUNGEON:AFR|Dungeon of the Mad Mage|||DungeonOfTheMadMageDungeon|
+
 # AKH
 |Generate|TOK:AKH|Beast|||BeastToken3|
 |Generate|TOK:AKH|Cat|||CatToken2|

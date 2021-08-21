@@ -550,7 +550,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                             CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, "", "", true);
                             card.setTokenClassName(tokenClassName);
                             list.add(card);
-                            // logger.debug("Token: " + set + "/" + card.getName() + " type: " + type);
                         } else if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("EMBLEM:")) {
                             String set = params[2].substring(7);
                             CardDownloadData card = new CardDownloadData("Emblem " + params[3], set, "0", false, type, "", "", true, fileName);
@@ -568,6 +567,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                             list.add(card);
                         } else if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("PLANE:")) {
                             String set = params[2].substring(6);
+                            CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, "", "", true, fileName);
+                            card.setTokenClassName(tokenClassName);
+                            list.add(card);
+                        } else if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("DUNGEON:")) {
+                            String set = params[2].substring(8);
                             CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, "", "", true, fileName);
                             card.setTokenClassName(tokenClassName);
                             list.add(card);

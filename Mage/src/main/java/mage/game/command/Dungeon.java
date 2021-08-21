@@ -21,9 +21,9 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
-import mage.game.command.dungeons.DungeonOfTheMadMage;
-import mage.game.command.dungeons.LostMineOfPhandelver;
-import mage.game.command.dungeons.TombOfAnnihilation;
+import mage.game.command.dungeons.DungeonOfTheMadMageDungeon;
+import mage.game.command.dungeons.LostMineOfPhandelverDungeon;
+import mage.game.command.dungeons.TombOfAnnihilationDungeon;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
@@ -56,7 +56,7 @@ public class Dungeon implements CommandObject {
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private FrameStyle frameStyle;
     private final Abilities<Ability> abilites = new AbilitiesImpl<>();
-    private final String expansionSetCodeForImage;
+    private String expansionSetCodeForImage;
     private final List<DungeonRoom> dungeonRooms = new ArrayList<>();
     private DungeonRoom currentRoom = null;
 
@@ -141,11 +141,11 @@ public class Dungeon implements CommandObject {
     public static Dungeon createDungeon(String name) {
         switch (name) {
             case "Tomb of Annihilation":
-                return new TombOfAnnihilation();
+                return new TombOfAnnihilationDungeon();
             case "Lost Mine of Phandelver":
-                return new LostMineOfPhandelver();
+                return new LostMineOfPhandelverDungeon();
             case "Dungeon of the Mad Mage":
-                return new DungeonOfTheMadMage();
+                return new DungeonOfTheMadMageDungeon();
             default:
                 throw new UnsupportedOperationException("A dungeon should have been chosen");
         }
@@ -320,6 +320,10 @@ public class Dungeon implements CommandObject {
 
     public String getExpansionSetCodeForImage() {
         return expansionSetCodeForImage;
+    }
+
+    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
+        this.expansionSetCodeForImage = expansionSetCodeForImage;
     }
 
     @Override

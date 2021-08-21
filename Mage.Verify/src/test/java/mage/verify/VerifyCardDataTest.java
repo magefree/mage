@@ -19,6 +19,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.game.command.Dungeon;
 import mage.game.command.Plane;
 import mage.game.draft.DraftCube;
 import mage.game.draft.RateCard;
@@ -1185,6 +1186,47 @@ public class VerifyCardDataTest {
         printMessages(errorsList);
         if (errorsList.size() > 0) {
             Assert.fail("Found plane errors: " + errorsList.size());
+        }
+    }
+
+    @Test
+    public void test_checkMissingDungeonsData() {
+        Collection<String> errorsList = new ArrayList<>();
+
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<? extends Dungeon>> dungeonClassesList = reflections.getSubTypesOf(Dungeon.class);
+
+        // 1. correct class name
+        for (Class<? extends Dungeon> dungeonClass : dungeonClassesList) {
+            if (!dungeonClass.getName().endsWith("Dungeon")) {
+                String className = extractShortClass(dungeonClass);
+                errorsList.add("Error: dungeon class must ends with Dungeon: " + className + " from " + dungeonClass.getName());
+            }
+        }
+
+        // 2. correct package
+        for (Class<? extends Dungeon> dungeonClass : dungeonClassesList) {
+            String fullClass = dungeonClass.getName();
+            if (!fullClass.startsWith("mage.game.command.dungeons.")) {
+                String className = extractShortClass(dungeonClass);
+                errorsList.add("Error: dungeon must be stored in mage.game.command.dungeons package: " + className + " from " + dungeonClass.getName());
+            }
+        }
+
+        // 3. correct constructor
+        for (Class<? extends Dungeon> dungeonClass : dungeonClassesList) {
+            String className = extractShortClass(dungeonClass);
+            Dungeon dungeon;
+            try {
+                dungeon = (Dungeon) createNewObject(dungeonClass);
+            } catch (Throwable e) {
+                errorsList.add("Error: can't create dungeon with default constructor: " + className + " from " + dungeonClass.getName());
+            }
+        }
+
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found dungeon errors: " + errorsList.size());
         }
     }
 
