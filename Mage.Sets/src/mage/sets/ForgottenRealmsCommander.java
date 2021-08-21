@@ -168,6 +168,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nature's Lore", 164, Rarity.COMMON, mage.cards.n.NaturesLore.class));
         cards.add(new SetCardInfo("Necromantic Selection", 103, Rarity.RARE, mage.cards.n.NecromanticSelection.class));
         cards.add(new SetCardInfo("Necrotic Sliver", 188, Rarity.UNCOMMON, mage.cards.n.NecroticSliver.class));
+        cards.add(new SetCardInfo("Nihiloor", 53, Rarity.MYTHIC, mage.cards.n.Nihiloor.class));
         cards.add(new SetCardInfo("Nimbus Maze", 252, Rarity.RARE, mage.cards.n.NimbusMaze.class));
         cards.add(new SetCardInfo("Obsessive Stitcher", 189, Rarity.UNCOMMON, mage.cards.o.ObsessiveStitcher.class));
         cards.add(new SetCardInfo("Ogre Slumlord", 104, Rarity.RARE, mage.cards.o.OgreSlumlord.class));
