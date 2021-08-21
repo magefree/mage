@@ -125,6 +125,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Halimar Depths", 244, Rarity.COMMON, mage.cards.h.HalimarDepths.class));
         cards.add(new SetCardInfo("Haven of the Spirit Dragon", 245, Rarity.RARE, mage.cards.h.HavenOfTheSpiritDragon.class));
         cards.add(new SetCardInfo("Heirloom Blade", 208, Rarity.UNCOMMON, mage.cards.h.HeirloomBlade.class));
+        cards.add(new SetCardInfo("Hellish Rebuke", 26, Rarity.RARE, mage.cards.h.HellishRebuke.class));
         cards.add(new SetCardInfo("Heroic Intervention", 161, Rarity.RARE, mage.cards.h.HeroicIntervention.class));
         cards.add(new SetCardInfo("Hex", 101, Rarity.RARE, mage.cards.h.Hex.class));
         cards.add(new SetCardInfo("High Market", 246, Rarity.RARE, mage.cards.h.HighMarket.class));
