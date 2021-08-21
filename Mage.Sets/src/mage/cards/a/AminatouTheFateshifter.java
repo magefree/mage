@@ -30,7 +30,6 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 
 /**
- *
  * @author Colin Redman
  */
 public class AminatouTheFateshifter extends CardImpl {
@@ -53,9 +52,9 @@ public class AminatouTheFateshifter extends CardImpl {
         Ability ability = new LoyaltyAbility(new AminatouPlusEffect(), +1);
         this.addAbility(ability);
 
-        // -1: Exile another target permanent you own, then return it to the battlefield under your control.
+        // −1: Exile another target permanent you own, then return it to the battlefield under your control.
         ability = new LoyaltyAbility(new ExileTargetForSourceEffect(), -1);
-        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true));
+        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(false));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 

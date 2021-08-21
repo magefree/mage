@@ -429,9 +429,11 @@ public class CardView extends SimpleCardView {
                 this.cardIcons.add(FaceDownCardIcon.instance);
             }
             // commander
-            Player owner = game.getPlayer(game.getOwnerId(permanent));
-            if (owner != null && game.isCommanderObject(owner, permanent)) {
-                this.cardIcons.add(CommanderCardIcon.instance);
+            if (game != null) {
+                Player owner = game.getPlayer(game.getOwnerId(permanent));
+                if (owner != null && game.isCommanderObject(owner, permanent)) {
+                    this.cardIcons.add(CommanderCardIcon.instance);
+                }
             }
         } else {
             if (card.isCopy()) {

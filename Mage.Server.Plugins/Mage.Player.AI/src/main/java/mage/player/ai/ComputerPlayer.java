@@ -130,7 +130,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
 
         if (log.isDebugEnabled()) {
-            log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
+            log.debug("choose: " + outcome.toString() + ':' + target.toString());
         }
 
         // controller hints:
@@ -205,21 +205,30 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         if (target.getOriginalTarget() instanceof TargetPermanent) {
-            TargetPermanent origTarget = (TargetPermanent) target.getOriginalTarget();
+
+            FilterPermanent filter = null;
+            if (target.getOriginalTarget().getFilter() instanceof FilterPermanent) {
+                filter = (FilterPermanent) target.getOriginalTarget().getFilter();
+            }
+            if (filter == null) {
+                throw new IllegalStateException("Unsupported permanent filter in computer's choose method: "
+                        + target.getOriginalTarget().getClass().getCanonicalName());
+            }
+
             List<Permanent> targets;
             if (outcome.isCanTargetAll()) {
-                targets = threats(null, sourceId, origTarget.getFilter(), game, target.getTargets());
+                targets = threats(null, sourceId, filter, game, target.getTargets());
             } else {
                 if (outcome.isGood()) {
-                    targets = threats(abilityControllerId, sourceId, origTarget.getFilter(), game, target.getTargets());
+                    targets = threats(abilityControllerId, sourceId, filter, game, target.getTargets());
                 } else {
-                    targets = threats(randomOpponentId, sourceId, origTarget.getFilter(), game, target.getTargets());
+                    targets = threats(randomOpponentId, sourceId, filter, game, target.getTargets());
                 }
                 if (targets.isEmpty() && target.isRequired()) {
                     if (!outcome.isGood()) {
-                        targets = threats(abilityControllerId, sourceId, origTarget.getFilter(), game, target.getTargets());
+                        targets = threats(abilityControllerId, sourceId, filter, game, target.getTargets());
                     } else {
-                        targets = threats(randomOpponentId, sourceId, origTarget.getFilter(), game, target.getTargets());
+                        targets = threats(randomOpponentId, sourceId, filter, game, target.getTargets());
                     }
                 }
             }
@@ -429,8 +438,17 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         if (target.getOriginalTarget() instanceof TargetCardInExile) {
             List<UUID> alreadyTargeted = target.getTargets();
-            TargetCard originalTarget = (TargetCard) target.getOriginalTarget();
-            List<Card> cards = game.getExile().getCards(originalTarget.getFilter(), game);
+
+            FilterCard filter = null;
+            if (target.getOriginalTarget().getFilter() instanceof FilterCard) {
+                filter = (FilterCard) target.getOriginalTarget().getFilter();
+            }
+            if (filter == null) {
+                throw new IllegalStateException("Unsupported exile target filter in computer's choose method: "
+                        + target.getOriginalTarget().getClass().getCanonicalName());
+            }
+
+            List<Card> cards = game.getExile().getCards(filter, game);
             while (!cards.isEmpty()) {
                 Card card = pickTarget(abilityControllerId, cards, outcome, target, null, game);
                 if (card != null && alreadyTargeted != null && !alreadyTargeted.contains(card.getId())) {
@@ -461,10 +479,23 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (!required) {
                 return false;
             }
-            throw new IllegalStateException("TargetSource wasn't handled. class: " + target.getClass().toString());
+            throw new IllegalStateException("TargetSource wasn't handled in computer's choose method: " + target.getClass().getCanonicalName());
         }
 
-        throw new IllegalStateException("Target wasn't handled. class: " + target.getClass().toString());
+        if (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard) {
+            Cards cards = new CardsImpl(possibleTargets);
+            List<Card> possibleCards = new ArrayList<>(cards.getCards(game));
+            while (!target.isChosen() && !possibleCards.isEmpty()) {
+                Card pick = pickTarget(abilityControllerId, possibleCards, outcome, target, null, game);
+                if (pick != null) {
+                    target.addTarget(pick.getId(), null, game);
+                    possibleCards.remove(pick);
+                }
+            }
+            return target.isChosen();
+        }
+
+        throw new IllegalStateException("Target wasn't handled in computer's choose method: " + target.getClass().getCanonicalName());
     } //end of choose method
 
     @Override
@@ -578,8 +609,17 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // TODO: implemented findBestPlayerTargets
         // TODO: add findBest*Targets for all target types
         if (target.getOriginalTarget() instanceof TargetPermanent) {
-            TargetPermanent origTarget = (TargetPermanent) target.getOriginalTarget();
-            findBestPermanentTargets(outcome, abilityControllerId, sourceId, origTarget.getFilter(),
+
+            FilterPermanent filter = null;
+            if (target.getOriginalTarget().getFilter() instanceof FilterPermanent) {
+                filter = (FilterPermanent) target.getOriginalTarget().getFilter();
+            }
+            if (filter == null) {
+                throw new IllegalStateException("Unsupported permanent filter in computer's chooseTarget method: "
+                        + target.getOriginalTarget().getClass().getCanonicalName());
+            }
+
+            findBestPermanentTargets(outcome, abilityControllerId, sourceId, filter,
                     game, target, goodList, badList, allList);
 
             // use good list all the time and add maximum targets
@@ -921,10 +961,20 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         if (target.getOriginalTarget() instanceof TargetCardInExile) {
+
+            FilterCard filter = null;
+            if (target.getOriginalTarget().getFilter() instanceof FilterCard) {
+                filter = (FilterCard) target.getOriginalTarget().getFilter();
+            }
+            if (filter == null) {
+                throw new IllegalStateException("Unsupported exile target filter in computer's chooseTarget method: "
+                        + target.getOriginalTarget().getClass().getCanonicalName());
+            }
+
             List<Card> cards = new ArrayList<>();
             for (UUID uuid : target.possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
                 Card card = game.getCard(uuid);
-                if (card != null) {
+                if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
                     cards.add(card);
                 }
             }
@@ -968,7 +1018,20 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
         }
 
-        throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
+        if (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard) {
+            Cards cards = new CardsImpl(possibleTargets);
+            List<Card> possibleCards = new ArrayList<>(cards.getCards(game));
+            while (!target.isChosen() && !possibleCards.isEmpty()) {
+                Card pick = pickTarget(abilityControllerId, possibleCards, outcome, target, source, game);
+                if (pick != null) {
+                    target.addTarget(pick.getId(), source, game);
+                    possibleCards.remove(pick);
+                }
+            }
+            return target.isChosen();
+        }
+
+        throw new IllegalStateException("Target wasn't handled in computer's chooseTarget method: " + target.getClass().getCanonicalName());
     } //end of chooseTarget method
 
     protected Card pickTarget(UUID abilityControllerId, List<Card> cards, Outcome outcome, Target target, Ability source, Game game) {
@@ -1996,7 +2059,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             // mode was already set by the AI
             return modes.getMode();
         }
-        //TODO: improve this;
+
+        // spell modes simulated by AI, see addModeOptions
+        // trigger modes chooses here
+        // TODO: add AI support to select best modes, current code uses first valid mode
         AvailableMode:
         for (Mode mode : modes.getAvailableModes(source, game)) {
             for (UUID selectedModeId : modes.getSelectedModes()) {

@@ -173,7 +173,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     /**
-     * Basic activation check. It contains costs and targets legality too.
+     * Activated ability check, not spells. It contains costs and targets legality too.
      * <p>
      * WARNING, don't forget to call super.canActivate on override in card's code in most cases.
      *

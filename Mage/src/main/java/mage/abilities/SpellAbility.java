@@ -87,6 +87,9 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
+        // spells can be cast from non hand zones, so must use custom check
+        // no super.canActivate() call
+
         if (this.spellCanBeActivatedRegularlyNow(playerId, game)) {
             if (spellAbilityType == SpellAbilityType.SPLIT
                     || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
@@ -121,7 +124,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 }
             }
 
-            // can pay all costs
+            // can pay all costs and choose targets
             if (costs.canPay(this, this, playerId, game)) {
                 if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());

@@ -1,16 +1,15 @@
 package mage.util;
 
 import java.awt.*;
-import java.io.Serializable;
+import java.util.Collection;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * Created by IGOUDT on 5-9-2016.
  */
 public final class RandomUtil {
 
-    private static Random random = new Random(); // thread safe with seed support
+    private static final Random random = new Random(); // thread safe with seed support
 
     private RandomUtil() {
     }
@@ -43,15 +42,15 @@ public final class RandomUtil {
         random.setSeed(newSeed);
     }
 
-    public static <T extends Serializable> T randomFromSet(Set<T> collection) {
+    public static <T> T randomFromCollection(Collection<T> collection) {
         if (collection.size() < 2) {
             return collection.stream().findFirst().orElse(null);
         }
         int rand = nextInt(collection.size());
         int count = 0;
-        for (T currentId : collection) {
+        for (T current : collection) {
             if (count == rand) {
-                return currentId;
+                return current;
             }
             count++;
         }

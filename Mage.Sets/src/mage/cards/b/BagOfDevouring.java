@@ -59,7 +59,7 @@ public final class BagOfDevouring extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{B}");
 
         // Whenever you sacrifice another nontoken artifact or creature, exile it.
-        this.addAbility(new SacrificePermanentTriggeredAbility(new ExileTargetForSourceEffect(), filter, true));
+        this.addAbility(new SacrificePermanentTriggeredAbility(new ExileTargetForSourceEffect().setText("exile it"), filter, true));
 
         // {2}, {T}, Sacrifice another artifact or creature: Draw a card.
         Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(2));

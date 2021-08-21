@@ -97,6 +97,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
     public static final String CHECK_COMMAND_PERMANENT_TAPPED = "PERMANENT_TAPPED";
     public static final String CHECK_COMMAND_PERMANENT_COUNTERS = "PERMANENT_COUNTERS";
+    public static final String CHECK_COMMAND_CARD_COUNTERS = "CARD_COUNTERS";
     public static final String CHECK_COMMAND_EXILE_COUNT = "EXILE_COUNT";
     public static final String CHECK_COMMAND_GRAVEYARD_COUNT = "GRAVEYARD_COUNT";
     public static final String CHECK_COMMAND_LIBRARY_COUNT = "LIBRARY_COUNT";
@@ -455,6 +456,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void checkPermanentCounters(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, CounterType counterType, Integer count) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_PERMANENT_COUNTERS, permanentName, counterType.toString(), count.toString());
+    }
+
+    public void checkCardCounters(String checkName, int turnNum, PhaseStep step, TestPlayer player, String cardName, CounterType counterType, Integer count) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_CARD_COUNTERS, cardName, counterType.toString(), count.toString());
     }
 
     public void checkExileCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {

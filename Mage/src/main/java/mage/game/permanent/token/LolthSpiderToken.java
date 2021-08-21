@@ -6,6 +6,8 @@ import mage.abilities.keyword.ReachAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -18,8 +20,14 @@ public final class LolthSpiderToken extends TokenImpl {
         subtype.add(SubType.SPIDER);
         power = new MageInt(2);
         toughness = new MageInt(1);
-        addAbility(new MenaceAbility());
-        addAbility(ReachAbility.getInstance());
+
+        // Menace
+        this.addAbility(new MenaceAbility());
+
+        // Reach
+        this.addAbility(ReachAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("AFR");
     }
 
     public LolthSpiderToken(final LolthSpiderToken token) {

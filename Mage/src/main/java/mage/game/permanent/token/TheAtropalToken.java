@@ -6,6 +6,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -20,7 +22,11 @@ public final class TheAtropalToken extends TokenImpl {
         subtype.add(SubType.HORROR);
         power = new MageInt(4);
         toughness = new MageInt(4);
+
+        // Deathtouch
         addAbility(DeathtouchAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("AFR");
     }
 
     public TheAtropalToken(final TheAtropalToken token) {

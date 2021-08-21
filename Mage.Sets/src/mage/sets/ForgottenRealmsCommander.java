@@ -125,6 +125,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Halimar Depths", 244, Rarity.COMMON, mage.cards.h.HalimarDepths.class));
         cards.add(new SetCardInfo("Haven of the Spirit Dragon", 245, Rarity.RARE, mage.cards.h.HavenOfTheSpiritDragon.class));
         cards.add(new SetCardInfo("Heirloom Blade", 208, Rarity.UNCOMMON, mage.cards.h.HeirloomBlade.class));
+        cards.add(new SetCardInfo("Hellish Rebuke", 26, Rarity.RARE, mage.cards.h.HellishRebuke.class));
         cards.add(new SetCardInfo("Heroic Intervention", 161, Rarity.RARE, mage.cards.h.HeroicIntervention.class));
         cards.add(new SetCardInfo("Hex", 101, Rarity.RARE, mage.cards.h.Hex.class));
         cards.add(new SetCardInfo("High Market", 246, Rarity.RARE, mage.cards.h.HighMarket.class));
@@ -136,9 +137,11 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Imprisoned in the Moon", 85, Rarity.RARE, mage.cards.i.ImprisonedInTheMoon.class));
         cards.add(new SetCardInfo("Indomitable Might", 40, Rarity.RARE, mage.cards.i.IndomitableMight.class));
         cards.add(new SetCardInfo("Izzet Chemister", 130, Rarity.RARE, mage.cards.i.IzzetChemister.class));
+        cards.add(new SetCardInfo("Karazikar, the Eye Tyrant", 49, Rarity.MYTHIC, mage.cards.k.KarazikarTheEyeTyrant.class));
         cards.add(new SetCardInfo("Karmic Guide", 68, Rarity.RARE, mage.cards.k.KarmicGuide.class));
         cards.add(new SetCardInfo("Kenrith's Transformation", 162, Rarity.UNCOMMON, mage.cards.k.KenrithsTransformation.class));
         cards.add(new SetCardInfo("Kindred Summons", 163, Rarity.RARE, mage.cards.k.KindredSummons.class));
+        cards.add(new SetCardInfo("Klauth's Will", 51, Rarity.RARE, mage.cards.k.KlauthsWill.class));
         cards.add(new SetCardInfo("Klauth, Unrivaled Ancient", 50, Rarity.MYTHIC, mage.cards.k.KlauthUnrivaledAncient.class));
         cards.add(new SetCardInfo("Knight of Autumn", 187, Rarity.RARE, mage.cards.k.KnightOfAutumn.class));
         cards.add(new SetCardInfo("Light Up the Stage", 131, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
@@ -165,6 +168,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nature's Lore", 164, Rarity.COMMON, mage.cards.n.NaturesLore.class));
         cards.add(new SetCardInfo("Necromantic Selection", 103, Rarity.RARE, mage.cards.n.NecromanticSelection.class));
         cards.add(new SetCardInfo("Necrotic Sliver", 188, Rarity.UNCOMMON, mage.cards.n.NecroticSliver.class));
+        cards.add(new SetCardInfo("Nihiloor", 53, Rarity.MYTHIC, mage.cards.n.Nihiloor.class));
         cards.add(new SetCardInfo("Nimbus Maze", 252, Rarity.RARE, mage.cards.n.NimbusMaze.class));
         cards.add(new SetCardInfo("Obsessive Stitcher", 189, Rarity.UNCOMMON, mage.cards.o.ObsessiveStitcher.class));
         cards.add(new SetCardInfo("Ogre Slumlord", 104, Rarity.RARE, mage.cards.o.OgreSlumlord.class));

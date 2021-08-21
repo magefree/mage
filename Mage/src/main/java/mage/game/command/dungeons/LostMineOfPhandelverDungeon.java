@@ -18,9 +18,9 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author TheElk801
  */
-public class LostMineOfPhandelver extends Dungeon {
+public class LostMineOfPhandelverDungeon extends Dungeon {
 
-    public LostMineOfPhandelver() {
+    public LostMineOfPhandelverDungeon() {
         super("Lost Mine of Phandelver", "AFR");
         // (1) Cave Entrance — Scry 1. (→ 2a or 2b)
         DungeonRoom caveEntrance = new DungeonRoom(
@@ -75,12 +75,12 @@ public class LostMineOfPhandelver extends Dungeon {
         this.addRoom(templeOfDumathoin);
     }
 
-    private LostMineOfPhandelver(final LostMineOfPhandelver dungeon) {
+    private LostMineOfPhandelverDungeon(final LostMineOfPhandelverDungeon dungeon) {
         super(dungeon);
     }
 
     @Override
-    public LostMineOfPhandelver copy() {
-        return new LostMineOfPhandelver(this);
+    public LostMineOfPhandelverDungeon copy() {
+        return new LostMineOfPhandelverDungeon(this);
     }
 }

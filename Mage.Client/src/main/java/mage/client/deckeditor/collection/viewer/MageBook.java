@@ -318,6 +318,33 @@ public class MageBook extends JComponent {
             }
         }
 
+        // dungeons
+        List<CardDownloadData> allDungeons = getTokenCardUrls();
+        for (CardDownloadData dungeon : allDungeons) {
+            if (dungeon.getSet().equals(currentSet)) {
+                try {
+                    String className = dungeon.getName();
+                    if (dungeon.getTokenClassName() != null && dungeon.getTokenClassName().length() > 0) {
+                        if (dungeon.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*dungeon.*")) {
+                            className = dungeon.getTokenClassName();
+                            className = "mage.game.command.dungeons." + className;
+                        }
+                    } else {
+                        continue;
+                    }
+                    Class<?> c = Class.forName(className);
+                    Constructor<?> cons = c.getConstructor();
+                    Object newDungeon = cons.newInstance();
+                    if (newDungeon instanceof Dungeon) {
+                        ((Dungeon) newDungeon).setExpansionSetCodeForImage(currentSet);
+                        res.add(newDungeon);
+                    }
+                } catch (ClassNotFoundException | InvocationTargetException | IllegalArgumentException | IllegalAccessException | InstantiationException | SecurityException | NoSuchMethodException ex) {
+                    // Swallow exception
+                }
+            }
+        }
+
         return res;
     }
 

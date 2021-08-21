@@ -2716,7 +2716,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 .stream()
                 .filter(card -> filter.match(card, source.getSourceId(), getId(), game))
                 .collect(Collectors.toSet());
-        Card card = RandomUtil.randomFromSet(cards);
+        Card card = RandomUtil.randomFromCollection(cards);
         if (card == null) {
             return false;
         }
@@ -3706,6 +3706,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             // check the hand zone (Sen Triplets)
+            // TODO: remove direct hand check (reveal fix in Sen Triplets)?
+            // human games: cards from opponent's hand must be revealed before play
+            // AI games: computer can see and play cards from opponent's hand without reveal
             if (fromAll || fromZone == Zone.HAND) {
                 for (UUID playerInRangeId : game.getState().getPlayersInRange(getId(), game)) {
                     Player player = game.getPlayer(playerInRangeId);

@@ -26,9 +26,9 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author TheElk801
  */
-public class DungeonOfTheMadMage extends Dungeon {
+public class DungeonOfTheMadMageDungeon extends Dungeon {
 
-    public DungeonOfTheMadMage() {
+    public DungeonOfTheMadMageDungeon() {
         super("Dungeon of the Mad Mage", "AFR");
         // (1) Yawning Portal — You gain 1 life. (→ 2)
         DungeonRoom yawningPortal = new DungeonRoom("Yawning Portal", new GainLifeEffect(1));
@@ -86,12 +86,12 @@ public class DungeonOfTheMadMage extends Dungeon {
         this.addRoom(madWizardsLair);
     }
 
-    private DungeonOfTheMadMage(final DungeonOfTheMadMage dungeon) {
+    private DungeonOfTheMadMageDungeon(final DungeonOfTheMadMageDungeon dungeon) {
         super(dungeon);
     }
 
-    public DungeonOfTheMadMage copy() {
-        return new DungeonOfTheMadMage(this);
+    public DungeonOfTheMadMageDungeon copy() {
+        return new DungeonOfTheMadMageDungeon(this);
     }
 }
 

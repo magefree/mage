@@ -28,7 +28,7 @@ import java.util.*;
 /**
  * @author TheElk801
  */
-public final class TombOfAnnihilation extends Dungeon {
+public final class TombOfAnnihilationDungeon extends Dungeon {
 
     static final FilterControlledPermanent filter
             = new FilterControlledPermanent("an artifact, a creature, or a land");
@@ -41,7 +41,7 @@ public final class TombOfAnnihilation extends Dungeon {
         ));
     }
 
-    public TombOfAnnihilation() {
+    public TombOfAnnihilationDungeon() {
         super("Tomb of Annihilation", "AFR");
         // (1) Trapped Entry — Each player loses 1 life. (→ 2a or 2b)
         DungeonRoom trappedEntry = new DungeonRoom("Trapped Entry", new LoseLifeAllPlayersEffect(1));
@@ -71,12 +71,12 @@ public final class TombOfAnnihilation extends Dungeon {
         this.addRoom(cradleOfTheDeathGod);
     }
 
-    private TombOfAnnihilation(final TombOfAnnihilation dungeon) {
+    private TombOfAnnihilationDungeon(final TombOfAnnihilationDungeon dungeon) {
         super(dungeon);
     }
 
-    public TombOfAnnihilation copy() {
-        return new TombOfAnnihilation(this);
+    public TombOfAnnihilationDungeon copy() {
+        return new TombOfAnnihilationDungeon(this);
     }
 }
 
@@ -169,7 +169,7 @@ class OublietteTarget extends TargetControlledPermanent {
             CardType.CREATURE,
             CardType.LAND
     );
-    private static final FilterControlledPermanent filter = TombOfAnnihilation.filter.copy();
+    private static final FilterControlledPermanent filter = TombOfAnnihilationDungeon.filter.copy();
 
     static {
         filter.setMessage("an artifact, a creature, and a land");
@@ -245,7 +245,7 @@ class SandfallCellEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            TargetPermanent target = new TargetPermanent(0, 1, TombOfAnnihilation.filter, true);
+            TargetPermanent target = new TargetPermanent(0, 1, TombOfAnnihilationDungeon.filter, true);
             player.choose(Outcome.PreventDamage, target, source.getSourceId(), game);
             map.put(playerId, game.getPermanent(target.getFirstTarget()));
         }
