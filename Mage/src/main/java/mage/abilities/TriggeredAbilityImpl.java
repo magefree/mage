@@ -189,7 +189,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             prefix = "";
         }
 
-        return prefix + triggerPhrase == null ? getTriggerPhrase() : triggerPhrase + sb;
+        return prefix + (triggerPhrase == null ? getTriggerPhrase() : triggerPhrase) + sb;
     }
 
     @Override
