@@ -34,7 +34,7 @@ public final class ArlinnVoiceOfThePack extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ArlinnVoiceOfThePackReplacementEffect()));
 
         // -2: Create a 2/2 green Wolf creature token.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new WolfToken("WAR")), -2));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new WolfToken()), -2));
     }
 
     private ArlinnVoiceOfThePack(final ArlinnVoiceOfThePack card) {

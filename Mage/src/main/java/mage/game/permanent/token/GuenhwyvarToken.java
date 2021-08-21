@@ -6,6 +6,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -19,7 +21,11 @@ public final class GuenhwyvarToken extends TokenImpl {
         subtype.add(SubType.CAT);
         power = new MageInt(4);
         toughness = new MageInt(1);
-        addAbility(TrampleAbility.getInstance());
+
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("AFR");
     }
 
     private GuenhwyvarToken(final GuenhwyvarToken token) {

@@ -613,6 +613,30 @@ public class ScryfallImageSupportTokens {
             put("MH2/Zombie Army", "https://api.scryfall.com/cards/tmh2/7/en?format=image");
             put("MH2/Zombie", "https://api.scryfall.com/cards/tmh2/6/en?format=image");
 
+            // AFR
+            put("AFR/Angel", "https://api.scryfall.com/cards/tafr/1/en?format=image");
+            put("AFR/Boo", "https://api.scryfall.com/cards/tafr/10/en?format=image");
+            put("AFR/Devil", "https://api.scryfall.com/cards/tafr/11/en?format=image");
+            put("AFR/Dog Illusion", "https://api.scryfall.com/cards/tafr/3/en?format=image");
+            put("AFR/Dungeon of the Mad Mage", "https://api.scryfall.com/cards/tafr/20/en?format=image");
+            put("AFR/Emblem Ellywick Tumblestrum", "https://api.scryfall.com/cards/tafr/16/en?format=image");
+            put("AFR/Faerie Dragon", "https://api.scryfall.com/cards/tafr/4/en?format=image");
+            put("AFR/Goblin", "https://api.scryfall.com/cards/tafr/12/en?format=image");
+            put("AFR/Guenhwyvar", "https://api.scryfall.com/cards/tafr/13/en?format=image");
+            put("AFR/Icingdeath, Frost Tongue", "https://api.scryfall.com/cards/tafr/2/en?format=image");
+            put("AFR/Emblem Lolth, Spider Queen", "https://api.scryfall.com/cards/tafr/17/en?format=image");
+            put("AFR/Lost Mine of Phandelver", "https://api.scryfall.com/cards/tafr/21/en?format=image");
+            put("AFR/Emblem Mordenkainen", "https://api.scryfall.com/cards/tafr/18/en?format=image");
+            put("AFR/Skeleton", "https://api.scryfall.com/cards/tafr/6/en?format=image");
+            put("AFR/Spider", "https://api.scryfall.com/cards/tafr/7/en?format=image");
+            put("AFR/The Atropal", "https://api.scryfall.com/cards/tafr/5/en?format=image");
+            put("AFR/Tomb of Annihilation", "https://api.scryfall.com/cards/tafr/22/en?format=image");
+            put("AFR/Treasure", "https://api.scryfall.com/cards/tafr/15/en?format=image");
+            put("AFR/Vecna", "https://api.scryfall.com/cards/tafr/8/en?format=image");
+            put("AFR/Wolf", "https://api.scryfall.com/cards/tafr/14/en?format=image");
+            put("AFR/Emblem Zariel, Archduke of Avernus", "https://api.scryfall.com/cards/tafr/19/en?format=image");
+            put("AFR/Zombie", "https://api.scryfall.com/cards/tafr/9/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

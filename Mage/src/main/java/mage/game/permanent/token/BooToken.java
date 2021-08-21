@@ -7,6 +7,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -20,8 +22,11 @@ public final class BooToken extends TokenImpl {
         subtype.add(SubType.HAMSTER);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
         addAbility(TrampleAbility.getInstance());
         addAbility(HasteAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("AFR");
     }
 
     private BooToken(final BooToken token) {
