@@ -139,6 +139,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Karmic Guide", 68, Rarity.RARE, mage.cards.k.KarmicGuide.class));
         cards.add(new SetCardInfo("Kenrith's Transformation", 162, Rarity.UNCOMMON, mage.cards.k.KenrithsTransformation.class));
         cards.add(new SetCardInfo("Kindred Summons", 163, Rarity.RARE, mage.cards.k.KindredSummons.class));
+        cards.add(new SetCardInfo("Klauth's Will", 51, Rarity.RARE, mage.cards.k.KlauthsWill.class));
         cards.add(new SetCardInfo("Klauth, Unrivaled Ancient", 50, Rarity.MYTHIC, mage.cards.k.KlauthUnrivaledAncient.class));
         cards.add(new SetCardInfo("Knight of Autumn", 187, Rarity.RARE, mage.cards.k.KnightOfAutumn.class));
         cards.add(new SetCardInfo("Light Up the Stage", 131, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
