@@ -87,6 +87,10 @@ public class SacrificeTargetCost extends CostImpl {
                 }
             }
         }
+        // solves issue #8097, if a sacrifice cost is optional and you don't have valid targets, then the cost can be paid
+        if(validTargets == 0 && targets.get(0).getMinNumberOfTargets() == 0){
+            return true;
+        }
         return false;
     }
 
