@@ -64,7 +64,7 @@ class DanseMacabreEffect extends OneShotEffect {
                 "<br>1-14 | Return a creature card put into a graveyard " +
                 "this way to the battlefield under your control." +
                 "<br>15+ | Return up to two creature cards put into " +
-                "a graveyard this way to the battlefield under your control";
+                "graveyards this way to the battlefield under your control";
     }
 
     private DanseMacabreEffect(final DanseMacabreEffect effect) {

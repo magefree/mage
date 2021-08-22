@@ -13,7 +13,7 @@ public enum PhaseStep {
     DECLARE_BLOCKERS("Declare Blockers", 6, "declare blockers step", "DB"),
     FIRST_COMBAT_DAMAGE("First Combat Damage", 7, "first combat damage", "FCD"),
     COMBAT_DAMAGE("Combat Damage", 8, "combat damage step", "CD"),
-    END_COMBAT("End Combat", 9, "end combat step", "EC"),
+    END_COMBAT("End Combat", 9, "end of combat step", "EC"),
     POSTCOMBAT_MAIN("Postcombat Main", 10, "postcombat main step", "M2"),
     END_TURN("End Turn", 11, "end turn step", "ET"),
     CLEANUP("Cleanup", 12, "cleanup step", "CL");

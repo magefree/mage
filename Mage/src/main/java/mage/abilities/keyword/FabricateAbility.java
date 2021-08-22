@@ -18,17 +18,29 @@ import mage.util.CardUtil;
  */
 public class FabricateAbility extends EntersBattlefieldTriggeredAbility {
 
+    private final int value;
+
     public FabricateAbility(int value) {
         super(new FabricateEffect(value), false, true);
+        this.value = value;
     }
 
     public FabricateAbility(final FabricateAbility ability) {
         super(ability);
+        this.value = ability.value;
     }
 
     @Override
     public FabricateAbility copy() {
         return new FabricateAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "Fabricate " + value + " <i>(When this creature enters the battlefield, put "
+                + CardUtil.numberToText(value, "a") + " +1/+1 counter" + (value > 1 ? "s" : "")
+                + " on it or create " + CardUtil.numberToText(value, "a")
+                + " 1/1 colorless Servo artifact creature token" + (value > 1 ? "s" : "") + ".)</i>";
     }
 }
 
@@ -39,9 +51,6 @@ class FabricateEffect extends OneShotEffect {
     FabricateEffect(int value) {
         super(Outcome.Benefit);
         this.value = value;
-        this.staticText = "Fabricate " + value
-                + " <i>(When this creature enters the battlefield, put " + CardUtil.numberToText(value, "a") + " +1/+1 counter" + (value > 1 ? "s" : "")
-                + " on it or create " + CardUtil.numberToText(value, "a") + " 1/1 colorless Servo artifact creature token" + (value > 1 ? "s" : "") + ".)</i>";
     }
 
     FabricateEffect(final FabricateEffect effect) {
@@ -68,8 +77,7 @@ class FabricateEffect extends OneShotEffect {
                     source,
                     game)) {
                 ((Card) sourceObject).addCounters(CounterType.P1P1.createInstance(value), source.getControllerId(), source, game);
-            }
-            else {
+            } else {
                 new ServoToken().putOntoBattlefield(value, game, source, controller.getId());
             }
             return true;

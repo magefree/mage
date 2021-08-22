@@ -35,8 +35,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class OutpostSiege extends CardImpl {
 
-    private static final String ruleTrigger1 = "&bull Khans &mdash; At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.";
-    private static final String ruleTrigger2 = "&bull Dragons &mdash; Whenever a creature you control leaves the battlefield, {this} deals 1 damage to any target.";
+    private static final String ruleTrigger1 = "&bull  Khans &mdash; At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.";
+    private static final String ruleTrigger2 = "&bull  Dragons &mdash; Whenever a creature you control leaves the battlefield, {this} deals 1 damage to any target.";
 
     public OutpostSiege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");

@@ -47,7 +47,7 @@ public final class Nihiloor extends CardImpl {
 
         // Whenever you attack with a creature an opponent owns, you gain 2 life and that player loses 2 life.
         Ability ability = new AttacksAllTriggeredAbility(
-                new GainLifeEffect(1), false, filter,
+                new GainLifeEffect(2), false, filter,
                 SetTargetPointer.PERMANENT, false
         ).setTriggerPhrase("Whenever you attack with a creature an opponent owns, ");
         ability.addEffect(new NihiloorLoseLifeEffect());
@@ -145,7 +145,7 @@ class NihiloorLoseLifeEffect extends OneShotEffect {
 
     NihiloorLoseLifeEffect() {
         super(Outcome.Benefit);
-        staticText = "you gain 2 life and that player loses 2 life";
+        staticText = "and that player loses 2 life";
     }
 
     private NihiloorLoseLifeEffect(final NihiloorLoseLifeEffect effect) {

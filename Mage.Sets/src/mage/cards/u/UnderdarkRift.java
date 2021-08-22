@@ -63,7 +63,7 @@ class UnderdarkRiftEffect extends OneShotEffect {
 
     UnderdarkRiftEffect() {
         super(Outcome.Benefit);
-        staticText = "roll a d10. Put a target artifact, creature, or planeswalker into its owner's library " +
+        staticText = "roll a d10. Put target artifact, creature, or planeswalker into its owner's library " +
                 "just beneath the top X cards of that library, where X is the result";
     }
 

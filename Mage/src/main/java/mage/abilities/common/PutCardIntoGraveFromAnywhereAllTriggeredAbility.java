@@ -41,7 +41,7 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
         this.filter.add(targetController.getOwnerPredicate());
         StringBuilder sb = new StringBuilder("Whenever ");
         sb.append(filter.getMessage());
-        sb.append(filter.getMessage().startsWith("one or more") ? " are" : "is");
+        sb.append(filter.getMessage().startsWith("one or more") ? " are" : " is");
         sb.append(" put into ");
         switch (targetController) {
             case OPPONENT:
