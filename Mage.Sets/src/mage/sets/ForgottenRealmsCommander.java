@@ -179,6 +179,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Paradise Druid", 165, Rarity.UNCOMMON, mage.cards.p.ParadiseDruid.class));
         cards.add(new SetCardInfo("Path of Ancestry", 254, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Phantasmal Image", 89, Rarity.RARE, mage.cards.p.PhantasmalImage.class));
+        cards.add(new SetCardInfo("Phantom Steed", 18, Rarity.RARE, mage.cards.p.PhantomSteed.class));
         cards.add(new SetCardInfo("Phthisis", 105, Rarity.UNCOMMON, mage.cards.p.Phthisis.class));
         cards.add(new SetCardInfo("Piper of the Swarm", 106, Rarity.RARE, mage.cards.p.PiperOfTheSwarm.class));
         cards.add(new SetCardInfo("Plaguecrafter", 107, Rarity.UNCOMMON, mage.cards.p.Plaguecrafter.class));
