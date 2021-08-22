@@ -3,16 +3,13 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
+import mage.abilities.common.AttacksOrBlocksAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -35,7 +32,7 @@ public final class LuminousWake extends CardImpl {
         this.addAbility(ability);
         
         // Whenever enchanted creature attacks or blocks, you gain 4 life.
-        Ability ability2 = new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(4));
+        Ability ability2 = new AttacksOrBlocksAttachedTriggeredAbility(new GainLifeEffect(4), AttachmentType.AURA);
         this.addAbility(ability2);
     }
 

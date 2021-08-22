@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
+import mage.abilities.common.AttacksOrBlocksAttachedTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -37,12 +37,9 @@ public final class WandOfOrcus extends CardImpl {
 
         // Whenever equipped creature attacks or blocks, it and Zombies you control gain
         // deathtouch until end of turn.
-        Ability deathTouchAbility = new AttacksOrBlocksEnchantedTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new GainAbilityAttachedEffect(
-                        DeathtouchAbility.getInstance(), AttachmentType.EQUIPMENT, Duration.EndOfTurn
-                ).setText("it")
-        );
+        Ability deathTouchAbility = new AttacksOrBlocksAttachedTriggeredAbility(new GainAbilityAttachedEffect(
+                DeathtouchAbility.getInstance(), AttachmentType.EQUIPMENT, Duration.EndOfTurn
+        ).setText("it"), AttachmentType.EQUIPMENT);
         deathTouchAbility.addEffect(new GainAbilityControlledEffect(
                 DeathtouchAbility.getInstance(), Duration.EndOfTurn, filter
         ).concatBy("and"));
