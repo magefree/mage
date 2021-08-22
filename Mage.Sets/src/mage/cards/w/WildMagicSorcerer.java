@@ -114,6 +114,6 @@ class WildMagicSorcererWatcher extends Watcher {
         }
         WildMagicSorcererWatcher watcher = game.getState().getWatcher(WildMagicSorcererWatcher.class);
         return watcher.playerMap.containsKey(stackObject.getControllerId())
-                && watcher.playerMap.get(stackObject).refersTo(((Spell) stackObject).getMainCard(), game);
+                && watcher.playerMap.get(stackObject.getControllerId()).refersTo(((Spell) stackObject).getMainCard(), game);
     }
 }

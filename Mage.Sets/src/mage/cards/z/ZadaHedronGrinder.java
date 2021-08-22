@@ -135,7 +135,7 @@ class ZadaHedronGrinderCopySpellEffect extends CopySpellForEachItCouldTargetEffe
     }
 
     @Override
-    protected List<MageObjectReferencePredicate> getPossibleTargets(StackObject stackObject, Player player, Ability source, Game game) {
+    protected List<MageObjectReferencePredicate> prepareCopiesWithTargets(StackObject stackObject, Player player, Ability source, Game game) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         return game.getBattlefield()
                 .getActivePermanents(

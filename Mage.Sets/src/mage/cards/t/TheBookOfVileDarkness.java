@@ -187,7 +187,10 @@ class TheBookOfVileDarknessEffect extends OneShotEffect {
             }
             for (Ability ability : card.getAbilities(game)) {
                 if (ability instanceof TriggeredAbility) {
-                    token.addAbility(ability.copy());
+                    Ability copyAbility = ability.copy();
+                    copyAbility.newId();
+                    copyAbility.setControllerId(source.getControllerId());
+                    token.addAbility(copyAbility);
                 }
             }
         }

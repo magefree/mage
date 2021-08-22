@@ -25,6 +25,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     protected boolean leavesTheBattlefieldTrigger;
     private boolean triggersOnce = false;
     private GameEvent triggerEvent = null;
+    private String triggerPhrase = null;
 
     public TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
@@ -69,6 +70,12 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         game.getState().setValue(CardUtil.getCardZoneString(
                 "lastTurnTriggered" + originalId, sourceId, game
         ), game.getTurnNum());
+    }
+
+    @Override
+    public TriggeredAbilityImpl setTriggerPhrase(String triggerPhrase) {
+        this.triggerPhrase = triggerPhrase;
+        return this;
     }
 
     @Override
@@ -182,7 +189,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             prefix = "";
         }
 
-        return prefix + getTriggerPhrase() + sb;
+        return prefix + (triggerPhrase == null ? getTriggerPhrase() : triggerPhrase) + sb;
     }
 
     @Override

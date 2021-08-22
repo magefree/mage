@@ -20,7 +20,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -37,7 +36,7 @@ public final class DualNature extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public DualNature(UUID ownerId, CardSetInfo setInfo) {
@@ -130,7 +129,7 @@ class DualNatureCreatureLeavesEffect extends OneShotEffect {
         Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (creature != null) {
             FilterPermanent filter = new FilterPermanent();
-            filter.add(TokenPredicate.instance);
+            filter.add(TokenPredicate.TRUE);
             filter.add(new NamePredicate(creature.getName()));
             new ExileAllEffect(filter).apply(game, source);
             return true;

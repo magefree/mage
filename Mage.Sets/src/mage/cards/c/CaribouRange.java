@@ -33,7 +33,7 @@ public final class CaribouRange extends CardImpl {
     static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Caribou token");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
         filter.add(SubType.CARIBOU.getPredicate());
     }
 

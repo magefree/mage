@@ -86,6 +86,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
             case QUESTION:
                 setButtonState("Yes", "No", mode);
                 if (options != null && options.containsKey(ORIGINAL_ID)) {
+                    // allows yes/no auto-answers for ability related
                     this.helper.setOriginalId((UUID) options.get(ORIGINAL_ID));
                 }
                 break;

@@ -296,13 +296,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.human = player.isHuman();
         this.life = player.getLife();
 
+        this.passed = player.isPassed();
+
         // Don't restore more global states. If restored they are probably cause for unintended draws (https://github.com/magefree/mage/issues/1205).
 //        this.wins = player.hasWon();
 //        this.loses = player.hasLost();
 //        this.left = player.hasLeft();
 //        this.quit = player.hasQuit();
         // Makes no sense to restore
-//        this.passed = player.isPassed();
 //        this.priorityTimeLeft = player.getPriorityTimeLeft();
 //        this.idleTimeout = player.hasIdleTimeout();
 //        this.timerTimeout = player.hasTimerTimeout();
@@ -442,7 +443,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canLoseLife = true;
         this.topCardRevealed = false;
         this.payManaMode = false;
-        this.setLife(game.getLife(), game, null);
+        this.setLife(game.getStartingLife(), game, null);
         this.setReachedNextTurnAfterLeaving(false);
 
         this.clearCastSourceIdManaCosts();
@@ -2717,7 +2718,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 .stream()
                 .filter(card -> filter.match(card, source.getSourceId(), getId(), game))
                 .collect(Collectors.toSet());
-        Card card = RandomUtil.randomFromSet(cards);
+        Card card = RandomUtil.randomFromCollection(cards);
         if (card == null) {
             return false;
         }
@@ -3805,6 +3806,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             // check the hand zone (Sen Triplets)
+            // TODO: remove direct hand check (reveal fix in Sen Triplets)?
+            // human games: cards from opponent's hand must be revealed before play
+            // AI games: computer can see and play cards from opponent's hand without reveal
             if (fromAll || fromZone == Zone.HAND) {
                 for (UUID playerInRangeId : game.getState().getPlayersInRange(getId(), game)) {
                     Player player = game.getPlayer(playerInRangeId);

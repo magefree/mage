@@ -73,10 +73,12 @@ enum AnyaMercilessAngelDynamicValue implements DynamicValue {
         if (controller == null) {
             return 3 * opponentCount;
         }
-        int startingLifeTotal = game.getLife();
+        int startingLifeTotal = game.getStartingLife();
         for (UUID opponentId : game.getOpponents(controller.getId())) {
             Player opponent = game.getPlayer(opponentId);
-            if (opponent != null && opponent.getLife() < startingLifeTotal / 2) {
+            if (opponent != null 
+                    && opponent.isInGame()
+                    && opponent.getLife() < startingLifeTotal / 2) {
                 opponentCount++;
             }
         }

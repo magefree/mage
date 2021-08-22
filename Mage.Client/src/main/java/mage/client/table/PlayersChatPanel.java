@@ -1,5 +1,6 @@
 package mage.client.table;
 
+import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.MageTableRowSorter;
@@ -18,6 +19,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import static mage.client.chat.ChatPanelBasic.CHAT_ALPHA;
 import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_ORDER;
@@ -101,6 +103,10 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     public void cleanUp() {
         TableUtil.saveColumnWidthAndOrderToPrefs(jTablePlayers, KEY_USERS_COLUMNS_WIDTH, KEY_USERS_COLUMNS_ORDER);
         jScrollPaneTalk.cleanUp();
+    }
+
+    public void setGameData(UUID gameId, BigCard bigCard) {
+        colorPaneSystem.setGameData(gameId, bigCard);
     }
 
     public void changeGUISize() {

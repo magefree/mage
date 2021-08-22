@@ -11,7 +11,6 @@ import mage.constants.Duration;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.InklingToken;
 
@@ -26,7 +25,7 @@ public final class DramaticFinale extends CardImpl {
             = new FilterControlledCreaturePermanent("one or more nontoken creatures you control");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public DramaticFinale(UUID ownerId, CardSetInfo setInfo) {

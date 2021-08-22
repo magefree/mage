@@ -97,6 +97,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
     public static final String CHECK_COMMAND_PERMANENT_TAPPED = "PERMANENT_TAPPED";
     public static final String CHECK_COMMAND_PERMANENT_COUNTERS = "PERMANENT_COUNTERS";
+    public static final String CHECK_COMMAND_CARD_COUNTERS = "CARD_COUNTERS";
     public static final String CHECK_COMMAND_EXILE_COUNT = "EXILE_COUNT";
     public static final String CHECK_COMMAND_GRAVEYARD_COUNT = "GRAVEYARD_COUNT";
     public static final String CHECK_COMMAND_LIBRARY_COUNT = "LIBRARY_COUNT";
@@ -150,7 +151,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public CardTestPlayerAPIImpl() {
         // load all cards to db from class list
         ArrayList<String> errorsList = new ArrayList<>();
-        if (FAST_SCAN_WITHOUT_DATABASE_CREATE && CardRepository.instance.findCard("Mountain") != null) {
+        if (FAST_SCAN_WITHOUT_DATABASE_CREATE && CardRepository.instance.findCard("XLN", "272") != null) {
             CardScanner.scanned = true;
         }
         CardScanner.scan(errorsList);
@@ -457,6 +458,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         check(checkName, turnNum, step, player, CHECK_COMMAND_PERMANENT_COUNTERS, permanentName, counterType.toString(), count.toString());
     }
 
+    public void checkCardCounters(String checkName, int turnNum, PhaseStep step, TestPlayer player, String cardName, CounterType counterType, Integer count) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_CARD_COUNTERS, cardName, counterType.toString(), count.toString());
+    }
+
     public void checkExileCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
         //Assert.assertNotEquals("", permanentName);
         check(checkName, turnNum, step, player, CHECK_COMMAND_EXILE_COUNT, permanentName, count.toString());
@@ -665,14 +670,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             Assert.fail("Can't add card " + cardName + " - alias " + aliasName + " already exists for " + player.getName());
         }
 
+        CardInfo cardInfo = CardRepository.instance.findCard(cardName);
+        if (cardInfo == null) {
+            throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
+        }
+
         if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
-                CardInfo cardInfo = CardRepository.instance.findCard(cardName);
-                Card newCard = cardInfo != null ? cardInfo.getCard() : null;
-                if (newCard == null) {
-                    throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
-                }
-
+                Card newCard = cardInfo.getCard();
                 Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
 
                 PermanentCard p = new PermanentCard(permCard, player.getId(), currentGame);
@@ -689,15 +694,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
             List<Card> cards = getCardList(gameZone, player);
             for (int i = 0; i < count; i++) {
-                CardInfo cardInfo = CardRepository.instance.findCard(cardName);
-                Card card = cardInfo != null ? cardInfo.getCard() : null;
-                if (card == null) {
-                    throw new AssertionError("Couldn't find a card in db: " + cardName);
-                }
-                cards.add(card);
-
+                Card newCard = cardInfo.getCard();
+                cards.add(newCard);
                 if (!aliasName.isEmpty()) {
-                    player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), card.getId());
+                    player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), newCard.getId());
                 }
             }
         }

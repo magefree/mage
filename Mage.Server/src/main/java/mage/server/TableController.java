@@ -48,7 +48,7 @@ public class TableController {
     private final UUID chatId;
     private final String controllerName;
     private final Table table;
-    private final ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<>(); // human players only, use table.seats for AI
 
     private Match match;
     private MatchOptions options;
@@ -985,10 +985,14 @@ public class TableController {
                     // return false;
                 }
             }
+
             // check for active players
             int validHumanPlayers = 0;
+            int validAIPlayers = 0;
             int aiPlayers = 0;
             int humanPlayers = 0;
+
+            // check humans
             for (Map.Entry<UUID, UUID> userPlayerEntry : userPlayerMap.entrySet()) {
                 MatchPlayer matchPlayer = match.getPlayer(userPlayerEntry.getValue());
                 if (matchPlayer == null) {
@@ -1016,12 +1020,21 @@ public class TableController {
                         // user exits on the server and match player has not quit -> player is valid
                         validHumanPlayers++;
                     }
-                } else {
-                    aiPlayers++;
                 }
             }
-            // if at least 2 human players are valid (multiplayer) or all human players are valid the table is valid or it's an AI match
-            return validHumanPlayers >= 2 || validHumanPlayers == humanPlayers || aiPlayers > 1;
+
+            // check AI
+            for (MatchPlayer matchPlayer : match.getPlayers()) {
+                if (!matchPlayer.getPlayer().isHuman()) {
+                    aiPlayers++;
+                    if (matchPlayer.getPlayer().isInGame()) {
+                        validAIPlayers++;
+                    }
+                }
+            }
+
+            // table must contain minimum two active players
+            return (validAIPlayers + validHumanPlayers) >= 2;
         }
         return true;
     }

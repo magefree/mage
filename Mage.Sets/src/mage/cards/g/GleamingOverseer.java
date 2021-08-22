@@ -26,7 +26,7 @@ public final class GleamingOverseer extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent(SubType.ZOMBIE, "Zombie tokens");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public GleamingOverseer(UUID ownerId, CardSetInfo setInfo) {

@@ -6,12 +6,19 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 import mage.choices.Choice;
+import mage.choices.ChoiceHintType;
 import mage.client.MageFrame;
+import mage.client.cards.BigCard;
+import mage.client.cards.VirtualCardInfo;
 import mage.client.util.gui.MageDialogState;
+import mage.game.command.Dungeon;
+import mage.view.CardView;
+import mage.view.DungeonView;
 
 /**
- * Game GUI: choosing one of the list's item
+ * GUI: choosing one of the list's item. Uses in game's and non game's GUI like fast search
  *
  * @author JayDi85
  */
@@ -19,25 +26,25 @@ public class PickChoiceDialog extends MageDialog {
 
     Choice choice;
 
+    // popup card info
+    int lastModelIndex = -1;
+    VirtualCardInfo cardInfo = new VirtualCardInfo();
+    BigCard bigCard;
+    UUID gameId;
+
     java.util.List<KeyValueItem> allItems = new ArrayList<>();
     DefaultListModel<KeyValueItem> dataModel = new DefaultListModel<>();
 
     final private static String HTML_HEADERS_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
 
-    public void showDialog(Choice choice) {
-        showDialog(choice, null, null, null);
-    }
-
     public void showDialog(Choice choice, String startSelectionValue) {
-        showDialog(choice, null, null, startSelectionValue);
+        showDialog(choice, startSelectionValue, null, null, null);
     }
 
-    public void showDialog(Choice choice, UUID objectId, MageDialogState mageDialogState) {
-        showDialog(choice, objectId, mageDialogState, null);
-    }
-
-    public void showDialog(Choice choice, UUID objectId, MageDialogState mageDialogState, String startSelectionValue) {
+    public void showDialog(Choice choice, String startSelectionValue, UUID objectId, MageDialogState mageDialogState, BigCard bigCard) {
         this.choice = choice;
+        this.bigCard = bigCard;
+        this.gameId = objectId;
 
         setLabelText(this.labelMessage, choice.getMessage());
         setLabelText(this.labelSubMessage, choice.getSubMessage());
@@ -54,20 +61,20 @@ public class PickChoiceDialog extends MageDialog {
         this.allItems.clear();
         if (choice.isKeyChoice()) {
             for (Map.Entry<String, String> entry : choice.getKeyChoices().entrySet()) {
-                this.allItems.add(new KeyValueItem(entry.getKey(), entry.getValue()));
+                this.allItems.add(new KeyValueItem(entry.getKey(), entry.getValue(), choice.getHintType()));
             }
         } else {
             for (String value : choice.getChoices()) {
-                this.allItems.add(new KeyValueItem(value, value));
+                this.allItems.add(new KeyValueItem(value, value, choice.getHintType()));
             }
         }
 
         // sorting
         if (choice.isSortEnabled()) {
             this.allItems.sort((o1, o2) -> {
-                Integer n1 = choice.getSortData().get(o1.Key);
-                Integer n2 = choice.getSortData().get(o2.Key);
-                return n1.compareTo(n2);
+                Integer n1 = choice.getSortData().get(o1.getKey());
+                Integer n2 = choice.getSortData().get(o2.getKey());
+                return Integer.compare(n1, n2);
             });
         }
 
@@ -123,12 +130,34 @@ public class PickChoiceDialog extends MageDialog {
             }
         });
 
-        // listeners double click choose
+        // listeners double click
+        // you can't use mouse wheel to switch hint type, cause wheel move a scrollbar
         listChoices.addMouseListener(new MouseAdapter() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     doChoose();
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                choiceHintHide();
+            }
+        });
+
+        listChoices.addMouseMotionListener(new MouseMotionAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                // hint show
+                JList listSource = (JList) e.getSource();
+                int index = listSource.locationToIndex(e.getPoint());
+                if (index > -1) {
+                    choiceHintShow(index);
+                } else {
+                    choiceHintHide();
                 }
             }
         });
@@ -163,11 +192,11 @@ public class PickChoiceDialog extends MageDialog {
         loadData();
 
         // start selection
-        if ((startSelectionValue != null)) {
+        if (startSelectionValue != null) {
             int selectIndex = -1;
             for (int i = 0; i < this.listChoices.getModel().getSize(); i++) {
                 KeyValueItem listItem = (KeyValueItem) this.listChoices.getModel().getElementAt(i);
-                if (listItem.Key.equals(startSelectionValue)) {
+                if (listItem.getKey().equals(startSelectionValue)) {
                     selectIndex = i;
                     break;
                 }
@@ -182,8 +211,75 @@ public class PickChoiceDialog extends MageDialog {
         this.setVisible(true);
     }
 
+    private void choiceHintShow(int modelIndex) {
+
+        switch (choice.getHintType()) {
+            case CARD:
+            case CARD_DUNGEON: {
+                // as popup card
+                if (lastModelIndex != modelIndex) {
+                    // new card
+                    KeyValueItem item = (KeyValueItem) listChoices.getModel().getElementAt(modelIndex);
+                    String cardName = item.getValue();
+
+                    if (choice.getHintType() == ChoiceHintType.CARD) {
+                        cardInfo.init(cardName, this.bigCard, this.gameId);
+                    } else if (choice.getHintType() == ChoiceHintType.CARD_DUNGEON) {
+                        CardView cardView = new CardView(new DungeonView(Dungeon.createDungeon(cardName)));
+                        cardInfo.init(cardView, this.bigCard, this.gameId);
+                    }
+
+                    cardInfo.onMouseEntered(MouseInfo.getPointerInfo().getLocation());
+                } else {
+                    // old card
+                    cardInfo.onMouseMoved(MouseInfo.getPointerInfo().getLocation());
+                }
+                lastModelIndex = modelIndex;
+                break;
+            }
+
+            default:
+            case TEXT: {
+                // as popup text
+                if (lastModelIndex != modelIndex) {
+                    // new hint
+                    listChoices.setToolTipText(null);
+                    KeyValueItem item = (KeyValueItem) listChoices.getModel().getElementAt(modelIndex);
+                    listChoices.setToolTipText(item.getValue());
+                }
+                lastModelIndex = modelIndex;
+                break;
+            }
+        }
+    }
+
+    private void choiceHintHide() {
+        switch (choice.getHintType()) {
+            case CARD: {
+                // as popup card
+                cardInfo.onMouseExited();
+                break;
+            }
+
+            default:
+            case TEXT: {
+                // as popup text
+                listChoices.setToolTipText(null);
+                break;
+            }
+        }
+
+        lastModelIndex = -1;
+    }
+
     public void setWindowSize(int width, int height) {
         this.setSize(new Dimension(width, height));
+    }
+
+    @Override
+    public void hideDialog() {
+        choiceHintHide();
+        super.hideDialog();
     }
 
     private void loadData() {
@@ -196,7 +292,7 @@ public class PickChoiceDialog extends MageDialog {
 
         this.dataModel.clear();
         for (KeyValueItem item : this.allItems) {
-            if (!choice.isSearchEnabled() || item.Value.toLowerCase(Locale.ENGLISH).contains(filter)) {
+            if (!choice.isSearchEnabled() || item.getValue().toLowerCase(Locale.ENGLISH).contains(filter)) {
                 this.dataModel.addElement(item);
             }
         }
@@ -284,27 +380,33 @@ public class PickChoiceDialog extends MageDialog {
         }
     }
 
-    class KeyValueItem {
+    static class KeyValueItem {
 
-        private final String Key;
-        private final String Value;
+        protected final String key;
+        protected final String value;
+        protected final ChoiceHintType hint;
 
-        public KeyValueItem(String value, String label) {
-            this.Key = value;
-            this.Value = label;
+        public KeyValueItem(String key, String value, ChoiceHintType hint) {
+            this.key = key;
+            this.value = value;
+            this.hint = hint;
         }
 
         public String getKey() {
-            return this.Key;
+            return this.key;
         }
 
         public String getValue() {
-            return this.Value;
+            return this.value;
+        }
+
+        public ChoiceHintType getHint() {
+            return this.hint;
         }
 
         @Override
         public String toString() {
-            return this.Value;
+            return this.value;
         }
     }
 

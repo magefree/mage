@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.ZombieToken;
@@ -31,7 +30,7 @@ public final class OverseerOfTheDamned extends CardImpl {
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public OverseerOfTheDamned(UUID ownerId, CardSetInfo setInfo) {

@@ -291,7 +291,7 @@ public class LoadTest {
         }
 
         LoadTestGameResultsList gameResults = new LoadTestGameResultsList();
-        for (int i = 0; i <= seedsList.size() - 1; i++) {
+        for (int i = 0; i < seedsList.size(); i++) {
             long randomSeed = seedsList.get(i);
             logger.info("Game " + (i + 1) + " of " + seedsList.size() + ", RANDOM seed: " + randomSeed);
             RandomUtil.setSeed(randomSeed);

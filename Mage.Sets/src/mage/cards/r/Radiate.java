@@ -120,7 +120,7 @@ class RadiateEffect extends CopySpellForEachItCouldTargetEffect {
     }
 
     @Override
-    protected List<MageObjectReferencePredicate> getPossibleTargets(StackObject stackObject, Player player, Ability source, Game game) {
+    protected List<MageObjectReferencePredicate> prepareCopiesWithTargets(StackObject stackObject, Player player, Ability source, Game game) {
         List<MageObjectReferencePredicate> predicates = new ArrayList<>();
         UUID targeted = ((Spell) stackObject)
                 .getSpellAbilities()

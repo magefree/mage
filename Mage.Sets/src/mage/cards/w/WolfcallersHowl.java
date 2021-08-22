@@ -72,7 +72,7 @@ class WolfcallersHowlEffect extends OneShotEffect {
                 }
             }
             if (count > 0) {
-                return new CreateTokenEffect(new WolfToken("C14"), count).apply(game, source);
+                return new CreateTokenEffect(new WolfToken(), count).apply(game, source);
             }
             return true;
         }

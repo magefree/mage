@@ -99,7 +99,7 @@ class UrzaLordHighArtificerEffect extends OneShotEffect {
         controller.shuffleLibrary(source, game);
         Card card = controller.getLibrary().getFromTop(game);
         return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, card,
-                TargetController.YOU, Duration.EndOfTurn, true, false);
+                TargetController.YOU, Duration.EndOfTurn, true, false, false);
     }
 }
 

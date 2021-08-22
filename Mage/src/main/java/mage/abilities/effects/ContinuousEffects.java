@@ -1433,7 +1433,7 @@ public class ContinuousEffects implements Serializable {
     }
 
     /**
-     * Prints out a status of the currently existing continuous effects
+     * Debug only: prints out a status of the currently existing continuous effects
      *
      * @param game
      */

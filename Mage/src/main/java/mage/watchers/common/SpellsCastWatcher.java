@@ -1,6 +1,8 @@
 package mage.watchers.common;
 
 import mage.MageObject;
+import mage.abilities.Ability;
+import mage.cards.Card;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -67,5 +69,19 @@ public class SpellsCastWatcher extends Watcher {
 
     public int getNumberOfNonCreatureSpells() {
         return nonCreatureSpells;
+    }
+
+    public UUID getCasterId(Ability source, Game game) {
+        for (Map.Entry<UUID, List<Spell>> entry : spellsCast.entrySet()) {
+            if (entry.getValue()
+                    .stream()
+                    .map(Spell::getCard)
+                    .map(Card::getMainCard)
+                    .anyMatch(card -> card.getId().equals(source.getSourceId())
+                            && card.getZoneChangeCounter(game) == source.getSourceObjectZoneChangeCounter())) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 }

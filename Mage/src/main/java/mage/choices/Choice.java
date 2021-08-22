@@ -39,6 +39,8 @@ public interface Choice extends Serializable, Copyable<Choice> {
 
     String getSpecialHint();
 
+    ChoiceHintType getHintType();
+
     // string choice
     void setChoices(Set<String> choices);
 

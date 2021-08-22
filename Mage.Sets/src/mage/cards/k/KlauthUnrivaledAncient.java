@@ -97,7 +97,7 @@ class KlauthUnrivaledAncientEffect extends OneShotEffect {
                 outcome, manaSymbols, attackerPower, attackerPower, MultiAmountType.MANA, game
         );
         player.getManaPool().addMana(
-                new KlauthUnrivaledAncientConditionalMana(manaList), game, source, false
+                new KlauthUnrivaledAncientConditionalMana(manaList), game, source, true
         );
         return true;
     }

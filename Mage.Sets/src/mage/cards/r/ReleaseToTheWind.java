@@ -62,7 +62,7 @@ class ReleaseToTheWindEffect extends OneShotEffect {
             Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetPermanent != null) {
                 return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, targetPermanent,
-                        TargetController.OWNER, Duration.Custom, true, true);
+                        TargetController.OWNER, Duration.Custom, true, false, true);
             }
         }
         return false;

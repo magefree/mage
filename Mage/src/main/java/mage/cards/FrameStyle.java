@@ -43,7 +43,11 @@ public enum FrameStyle {
     /**
      * Arena New Player Experience full art lands
      */
-    ANA_FULL_ART_BASIC(BorderType.M15, true);
+    ANA_FULL_ART_BASIC(BorderType.M15, true),
+    /**
+     * Original Dual lands (box pattern in the text box)
+     */
+    LEA_ORIGINAL_DUAL_LAND_ART_BASIC(BorderType.M15, false);
 
 
     /**

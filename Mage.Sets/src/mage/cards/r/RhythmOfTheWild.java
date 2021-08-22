@@ -20,7 +20,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureSpell;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -44,7 +43,7 @@ public final class RhythmOfTheWild extends CardImpl {
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter2.add(Predicates.not(TokenPredicate.instance));
+        filter2.add(TokenPredicate.FALSE);
     }
 
     public RhythmOfTheWild(UUID ownerId, CardSetInfo setInfo) {

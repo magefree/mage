@@ -1,14 +1,8 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.Card;
@@ -21,9 +15,18 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
-
 import java.util.UUID;
+import mage.Mana;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalAsThoughEffect;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.watchers.common.ManaSpentToCastWatcher;
+
+/**
+ *
+ * @author jeffwadsworth
+ */
 
 public class GlimpseTheCosmos extends CardImpl {
 
@@ -35,11 +38,17 @@ public class GlimpseTheCosmos extends CardImpl {
                 StaticValue.get(3), false, StaticValue.get(1),
                 StaticFilters.FILTER_CARD, Zone.LIBRARY, false,
                 false, false, Zone.HAND, false
-        ).setText("look at the top three cards of your library. " +
-                "Put one of them into your hand and the rest on the bottom of your library in any order"));
+        ).setText("look at the top three cards of your library. "
+                + "Put one of them into your hand and the rest on the bottom of your library in any order"));
 
         //As long as you control a Giant, you may cast Glimpse the Cosmos from your graveyard by paying {U} rather than paying its mana cost. If you cast Glimpse the Cosmos this way and it would be put into your graveyard, exile it instead.
-        this.addAbility(new GlimpseTheCosmosAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD,
+                new ConditionalAsThoughEffect(
+                        new GlimpseTheCosmosPlayEffect(),
+                        new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.GIANT)))));
+
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new GlimpseTheCosmosReplacementEffect()));
+
     }
 
     private GlimpseTheCosmos(final GlimpseTheCosmos card) {
@@ -53,88 +62,40 @@ public class GlimpseTheCosmos extends CardImpl {
 
 }
 
-class GlimpseTheCosmosAbility extends SpellAbility {
+class GlimpseTheCosmosPlayEffect extends AsThoughEffectImpl {
 
-    private String abilityName;
-    private SpellAbility spellAbilityToResolve;
-
-    public GlimpseTheCosmosAbility(Cost cost) {
-        super(null, "", Zone.GRAVEYARD, SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.NORMAL);
-        this.setAdditionalCostsRuleVisible(false);
-        this.addCost(cost);
-        this.timing = TimingRule.SORCERY;
+    public GlimpseTheCosmosPlayEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        staticText = "As long as you control a Giant, you may cast {this} from your graveyard by paying {U} rather than paying its mana cost";
     }
 
-    public GlimpseTheCosmosAbility(final GlimpseTheCosmosAbility ability) {
-        super(ability);
-        this.spellAbilityType = ability.spellAbilityType;
-        this.abilityName = ability.abilityName;
-        this.spellAbilityToResolve = ability.spellAbilityToResolve;
+    public GlimpseTheCosmosPlayEffect(final GlimpseTheCosmosPlayEffect effect) {
+        super(effect);
     }
 
     @Override
-    public ActivationStatus canActivate(UUID playerId, Game game) {
-        Card card = game.getCard(getSourceId());
-        if (card != null) {
-            // Card must be in the graveyard zone
-            if (game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
-                return ActivationStatus.getFalse();
-            }
-
-            //Must control a giant
-            Condition controlGiantCondition = new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.GIANT, "you control a Giant"));
-            if (!controlGiantCondition.apply(game, this)) {
-                return ActivationStatus.getFalse();
-            }
-
-            return card.getSpellAbility().canActivate(playerId, game);
-        }
-
-        return ActivationStatus.getFalse();
+    public boolean apply(Game game, Ability source) {
+        return true;
     }
 
     @Override
-    public SpellAbility getSpellAbilityToResolve(Game game) {
-        Card card = game.getCard(getSourceId());
-        if (card != null) {
-            if (spellAbilityToResolve == null) {
-                SpellAbility spellAbilityCopy = card.getSpellAbility().copy();
-                spellAbilityCopy.setId(this.getId());
-                spellAbilityCopy.getManaCosts().clear();
-                spellAbilityCopy.getManaCostsToPay().clear();
-                spellAbilityCopy.getCosts().addAll(this.getCosts().copy());
-                spellAbilityCopy.addCost(this.getManaCosts().copy());
-                spellAbilityCopy.setSpellAbilityCastMode(this.getSpellAbilityCastMode());
-                spellAbilityToResolve = spellAbilityCopy;
-                ContinuousEffect effect = new GlimpseTheCosmosReplacementEffect();
-                effect.setTargetPointer(new FixedTarget(getSourceId(), game.getState().getZoneChangeCounter(getSourceId())));
-                game.addEffect(effect, this);
+    public GlimpseTheCosmosPlayEffect copy() {
+        return new GlimpseTheCosmosPlayEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        if (sourceId.equals(source.getSourceId())
+                && source.isControlledBy(affectedControllerId)) {
+            if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
+                Player controller = game.getPlayer(affectedControllerId);
+                if (controller != null) {
+                    controller.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{U}"), null);
+                    return true;
+                }
             }
         }
-        return spellAbilityToResolve;
-    }
-
-    @Override
-    public Costs<Cost> getCosts() {
-        if (spellAbilityToResolve == null) {
-            return super.getCosts();
-        }
-        return spellAbilityToResolve.getCosts();
-    }
-
-    @Override
-    public GlimpseTheCosmosAbility copy() {
-        return new GlimpseTheCosmosAbility(this);
-    }
-
-    @Override
-    public String getRule(boolean all) {
-        return this.getRule();
-    }
-
-    @Override
-    public String getRule() {
-        return "As long as you control a Giant, you may cast Glimpse the Cosmos from your graveyard by paying {U} rather than paying its mana cost. If you cast Glimpse the Cosmos this way and it would be put into your graveyard, exile it instead.";
+        return false;
     }
 
 }
@@ -143,7 +104,7 @@ class GlimpseTheCosmosReplacementEffect extends ReplacementEffectImpl {
 
     public GlimpseTheCosmosReplacementEffect() {
         super(Duration.OneUse, Outcome.Exile);
-        staticText = "If you cast Glimpse the Cosmos this way and it would be put into your graveyard, exile it instead";
+        staticText = "If you cast {this} this way and it would be put into your graveyard, exile it instead";
     }
 
     public GlimpseTheCosmosReplacementEffect(final GlimpseTheCosmosReplacementEffect effect) {
@@ -181,10 +142,19 @@ class GlimpseTheCosmosReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getSourceId())
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.STACK
-                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-            return game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter() + 1;
+        ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
+        if (watcher == null) {
+            return false;
+        }
+        Mana payment = watcher.getAndResetLastPayment(source.getSourceId());
+        if (payment != null
+                && payment.getBlue() == 1 // most be blue mana
+                && payment.count() == 1) {  // must be just one
+            if (event.getTargetId().equals(source.getSourceId())
+                    && ((ZoneChangeEvent) event).getFromZone() == Zone.STACK
+                    && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
+                return true;
+            }
         }
         return false;
     }

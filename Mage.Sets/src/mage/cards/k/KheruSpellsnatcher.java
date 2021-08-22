@@ -78,7 +78,7 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
                 MageObject card = game.getObject(stackObject.getSourceId());
                 if (card instanceof Card) {
                     return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, (Card) card,
-                            TargetController.YOU, Duration.Custom, true, true);
+                            TargetController.YOU, Duration.Custom, true, false, true);
                 }
             }
         }

@@ -96,7 +96,7 @@ enum KaheeraTheOrphanguardCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingSize) {
+    public boolean isLegal(Set<Card> deck, int startingHandSize) {
         return deck.stream()
                 .filter(card -> card.hasCardTypeForDeckbuilding(CardType.CREATURE))
                 .allMatch(KaheeraTheOrphanguardCompanionCondition::isCardLegal);

@@ -126,14 +126,14 @@ public class PermanentCard extends PermanentImpl {
         }
         this.subtype.copyFrom(card.getSubtype());
         this.supertype.clear();
-        supertype.addAll(card.getSuperType());
+        this.supertype.addAll(card.getSuperType());
         this.expansionSetCode = card.getExpansionSetCode();
         this.rarity = card.getRarity();
         this.cardNumber = card.getCardNumber();
         this.usesVariousArt = card.getUsesVariousArt();
 
-        transformable = card.isTransformable();
-        if (transformable) {
+        this.transformable = card.isTransformable();
+        if (this.transformable) {
             this.nightCard = card.isNightCard();
             if (!this.nightCard) {
                 this.secondSideCard = card.getSecondCardFace();

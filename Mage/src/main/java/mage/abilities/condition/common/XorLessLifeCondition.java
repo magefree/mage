@@ -28,11 +28,17 @@ public class XorLessLifeCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean conditionApplies = false;
+        
+        /*
+        104.5. If a player loses the game, that player leaves the game.
+        Once a player leaves the game, their life check is no longer valid.  IE Anya, Merciless Angel
+        */
 
         switch ( this.type ) {
             case AN_OPPONENT:
                 for ( UUID opponentUUID : game.getOpponents(source.getControllerId()) ) {
-                    conditionApplies |= game.getPlayer(opponentUUID).getLife() <= amount;
+                    conditionApplies |= game.getPlayer(opponentUUID).isInGame() 
+                            && game.getPlayer(opponentUUID).getLife() <= amount;
                 }
                 break;
             case CONTROLLER:
@@ -46,7 +52,8 @@ public class XorLessLifeCondition implements Condition {
                 PlayerList playerList = game.getState().getPlayersInRange(source.getControllerId(), game);
                 for ( UUID pid : playerList ) {
                     Player p = game.getPlayer(pid);
-                    if (p != null) {
+                    if (p != null
+                            && p.isInGame()) {
                         if (maxLife < p.getLife()) {
                             maxLife = p.getLife();
                         }

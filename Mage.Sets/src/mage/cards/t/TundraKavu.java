@@ -11,6 +11,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -72,7 +73,7 @@ class TundraKavuEffect extends BecomesBasicLandTargetEffect {
             Set<String> choiceSet = new LinkedHashSet<>();
             choiceSet.add("Island");
             choiceSet.add("Plains");
-            ChoiceImpl choice = new ChoiceImpl(true);
+            ChoiceImpl choice = new ChoiceImpl(true, ChoiceHintType.CARD);
             choice.setChoices(choiceSet);
             choice.setMessage("Choose a basic land type");
             if (!controller.choose(outcome, choice, game)) {

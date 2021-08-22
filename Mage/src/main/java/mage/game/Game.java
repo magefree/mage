@@ -37,6 +37,7 @@ import mage.game.turn.Turn;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
+import mage.util.Copyable;
 import mage.util.MessageToClient;
 import mage.util.functions.CopyApplier;
 
@@ -44,13 +45,13 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public interface Game extends MageItem, Serializable {
+public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     MatchType getGameType();
 
     int getNumPlayers();
 
-    int getLife();
+    int getStartingLife();
 
     RangeOfInfluence getRangeOfInfluence();
 
@@ -217,8 +218,6 @@ public interface Game extends MageItem, Serializable {
 
     void loadGameStates(GameStates states);
 
-    Game copy();
-
     boolean isSimulation();
 
     void setSimulation(boolean checkPlayableState);
@@ -244,10 +243,6 @@ public interface Game extends MageItem, Serializable {
     void setLosingPlayer(Player player);
 
     Player getLosingPlayer();
-
-    void setStateCheckRequired();
-
-    boolean getStateCheckRequired();
 
     //client event methods
     void addTableEventListener(Listener<TableEvent> listener);
@@ -457,7 +452,7 @@ public interface Game extends MageItem, Serializable {
 
     int bookmarkState();
 
-    void restoreState(int bookmark, String context);
+    GameState restoreState(int bookmark, String context);
 
     void removeBookmark(int bookmark);
 

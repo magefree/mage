@@ -108,6 +108,10 @@
 |Generate|EMBLEM:KHM|Tyvar Kell||Emblem Tyvar|TyvarKellEmblem|
 |Generate|EMBLEM:STX|Lukka, Wayward Bonder||Emblem Lukka|LukkaWaywardBonderEmblem|
 |Generate|EMBLEM:STX|Rowan, Scholar of Sparks||Emblem Rowan|RowanScholarOfSparksEmblem|
+|Generate|EMBLEM:AFR|Ellywick Tumblestrum||Emblem Ellywick|EllywickTumblestrumEmblem|
+|Generate|EMBLEM:AFR|Lolth, Spider Queen||Emblem Lolth|LolthSpiderQueenEmblem|
+|Generate|EMBLEM:AFR|Mordenkainen||Emblem Mordenkainen|MordenkainenEmblem|
+|Generate|EMBLEM:AFR|Zariel, Archduke of Avernus||Emblem Zariel|ZarielArchdukeOfAvernusEmblem|
 
 # Planes
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
@@ -176,6 +180,11 @@
 |Generate|TOK:AER|Etherium Cell|||EtheriumCellToken|
 |Generate|TOK:AER|Gremlin|||GremlinToken|
 |Generate|TOK:AER|Ragavan|||RagavanToken|
+
+# Dungeons
+|Generate|DUNGEON:AFR|Tomb of Annihilation|||TombOfAnnihilationDungeon|
+|Generate|DUNGEON:AFR|Lost Mine of Phandelver|||LostMineOfPhandelverDungeon|
+|Generate|DUNGEON:AFR|Dungeon of the Mad Mage|||DungeonOfTheMadMageDungeon|
 
 # AKH
 |Generate|TOK:AKH|Beast|||BeastToken3|
@@ -1564,3 +1573,20 @@
 |Generate|TOK:MH2|Treasure|2||TreasureToken|
 |Generate|TOK:MH2|Zombie|||ZombieToken|
 |Generate|TOK:MH2|Zombie Army|||ZombieArmyToken|
+
+# AFR
+|Generate|TOK:AFR|Angel|||Angel33Token|
+|Generate|TOK:AFR|Boo|||BooToken|
+|Generate|TOK:AFR|Devil|||DevilToken|
+|Generate|TOK:AFR|Dog Illusion|||DogIllusionToken|
+# |Generate|TOK:AFR|Faerie Dragon|||xxx| TODO: add after dice pr merge
+|Generate|TOK:AFR|Goblin|||GoblinToken|
+|Generate|TOK:AFR|Guenhwyvar|||GuenhwyvarToken|
+|Generate|TOK:AFR|Icingdeath, Frost Tongue|||IcingdeathFrostTongueToken|
+|Generate|TOK:AFR|Skeleton|||SkeletonToken|
+|Generate|TOK:AFR|Spider|||LolthSpiderToken|
+|Generate|TOK:AFR|The Atropal|||TheAtropalToken|
+|Generate|TOK:AFR|Treasure|||TreasureToken|
+|Generate|TOK:AFR|Vecna|||VecnaToken|
+|Generate|TOK:AFR|Wolf|||WolfToken|
+|Generate|TOK:AFR|Zombie|||ZombieToken|

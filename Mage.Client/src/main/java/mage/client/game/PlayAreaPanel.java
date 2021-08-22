@@ -283,29 +283,29 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             SessionHandler.sendPlayerAction(useFirstManaAbility ? PlayerAction.USE_FIRST_MANA_ABILITY_ON : PlayerAction.USE_FIRST_MANA_ABILITY_OFF, gameId, null);
         });
 
-        JMenu automaticConfirmsMenu = new JMenu("Automatic confirms");
+        JMenu automaticConfirmsMenu = new JMenu("Auto-answers");
         automaticConfirmsMenu.setMnemonic(KeyEvent.VK_U);
         popupMenu.add(automaticConfirmsMenu);
 
-        menuItem = new JMenuItem("Replacement effects - reset auto select");
+        menuItem = new JMenuItem("Replacement effects - reset all auto-answers");
         menuItem.setMnemonic(KeyEvent.VK_R);
         menuItem.setToolTipText("Reset all effects that were added to the list of auto select replacement effects this game.");
         automaticConfirmsMenu.add(menuItem);
         // Reset the replacement effcts that were auto selected for the game
         menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.RESET_AUTO_SELECT_REPLACEMENT_EFFECTS, gameId, null));
 
-        menuItem = new JMenuItem("Triggered abilities - reset auto stack order");
+        menuItem = new JMenuItem("Triggered abilities - reset all auto-answers for stack order");
         menuItem.setMnemonic(KeyEvent.VK_T);
-        menuItem.setToolTipText("Deletes all triggered ability order settings you added during the game.");
+        menuItem.setToolTipText("Reset all triggered ability order settings you added during the game.");
         automaticConfirmsMenu.add(menuItem);
         // Reset the replacement effcts that were auto selected for the game
         menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL, gameId, null));
 
-        menuItem = new JMenuItem("Use requests - reset automatic answers");
+        menuItem = new JMenuItem("Yes/no requests - reset all auto-answers");
         menuItem.setMnemonic(KeyEvent.VK_T);
-        menuItem.setToolTipText("Deletes all defined automatic answers for Yes/No usage requests.");
+        menuItem.setToolTipText("Reset all defined automatic answers for Yes/No usage requests (with two buttons).");
         automaticConfirmsMenu.add(menuItem);
-        // Reset the replacement effcts that were auto selected for the game
+        // Reset the replacement and yes/no dialogs that were auto selected for the game
         menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL, gameId, null));
 
         JMenu handCardsMenu = new JMenu("Cards on hand");

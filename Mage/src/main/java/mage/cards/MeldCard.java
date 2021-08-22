@@ -36,6 +36,9 @@ public abstract class MeldCard extends CardImpl {
         this.halves = new CardsImpl(card.halves);
     }
 
+    @Override
+    public abstract MeldCard copy();
+
     public void setMelded(boolean isMelded, Game game) {
         game.getState().getCardState(getId()).setMelded(isMelded);
     }

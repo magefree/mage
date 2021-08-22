@@ -33,7 +33,7 @@ public final class JunkWinder extends CardImpl {
     private static final FilterPermanent filter2 = new FilterNonlandPermanent("nonland permanent an opponent controls");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
         filter2.add(TargetController.OPPONENT.getControllerPredicate());
     }
 

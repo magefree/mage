@@ -63,7 +63,7 @@ enum JeganthaTheWellspringCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingSize) {
+    public boolean isLegal(Set<Card> deck, int startingHandSize) {
         return deck.stream().noneMatch(JeganthaTheWellspringCompanionCondition::checkCard);
     }
 
