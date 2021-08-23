@@ -104,7 +104,7 @@ class GlimpseTheCosmosReplacementEffect extends ReplacementEffectImpl {
 
     public GlimpseTheCosmosReplacementEffect() {
         super(Duration.OneUse, Outcome.Exile);
-        staticText = "If you cast {this} this way and it would be put into your graveyard, exile it instead";
+        staticText = "As long as you control a Giant, you may cast {this} from your graveyard by paying {U} rather than paying its mana cost.  If you cast {this} this way and it would be put into your graveyard, exile it instead";
     }
 
     public GlimpseTheCosmosReplacementEffect(final GlimpseTheCosmosReplacementEffect effect) {
@@ -148,7 +148,7 @@ class GlimpseTheCosmosReplacementEffect extends ReplacementEffectImpl {
         }
         Mana payment = watcher.getAndResetLastPayment(source.getSourceId());
         if (payment != null
-                && payment.getBlue() == 1 // most be blue mana
+                && payment.getBlue() == 1 // must be blue mana
                 && payment.count() == 1) {  // must be just one
             if (event.getTargetId().equals(source.getSourceId())
                     && ((ZoneChangeEvent) event).getFromZone() == Zone.STACK
