@@ -31,6 +31,7 @@ public final class BasiliskCollar extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 LifelinkAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and lifelink"));
+        this.addAbility(ability);
 
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
