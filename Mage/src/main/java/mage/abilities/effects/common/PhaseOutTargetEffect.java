@@ -74,7 +74,8 @@ public class PhaseOutTargetEffect extends OneShotEffect {
             sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         }
         sb.append(" phase");
-        if (mode.getTargets().get(0).getMaxNumberOfTargets() <= 1) {
+        if (mode.getTargets().isEmpty()
+                || mode.getTargets().get(0).getMaxNumberOfTargets() <= 1) {
             sb.append('s');
         }
         sb.append(" out");
