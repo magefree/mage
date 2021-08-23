@@ -100,8 +100,13 @@ public class TestPlayer implements Player {
     private final Map<String, UUID> aliases = new HashMap<>(); // aliases for game objects/players (use it for cards with same name to save and use)
     private final List<String> modesSet = new ArrayList<>();
 
-    private final ComputerPlayer computerPlayer;
-    private boolean strictChooseMode = false; // test will raise error on empty choice/target (e.g. devs must setup all choices/targets for all spells)
+    private final ComputerPlayer computerPlayer; // real player
+
+    // Strict mode for all choose dialogs:
+    // - enable checks for wrong or missing choice commands (you must set up all choices by unit test)
+    // - enable inner choice dialogs accessable by set up choices
+    //   (example: card call TestPlayer's choice, but it uses another choices, see docs in TestComputerPlayer)
+    private boolean strictChooseMode = false;
 
     private String[] groupsForTargetHandling = null;
 
@@ -1927,7 +1932,7 @@ public class TestPlayer implements Player {
     }
 
     private void chooseStrictModeFailed(String choiceType, Game game, String reason, boolean printAbilities) {
-        if (strictChooseMode && !AIRealGameSimulation) {
+        if (!this.canChooseByComputer()) {
             if (printAbilities) {
                 printStart("Available mana for " + computerPlayer.getName());
                 printMana(game, computerPlayer.getManaAvailable(game));
@@ -1994,30 +1999,23 @@ public class TestPlayer implements Player {
         return computerPlayer.chooseMode(modes, source, game);
     }
 
-    public boolean hasChoice(Choice choice, boolean removeSelectAnswerFromList) {
-        if (choices.isEmpty()) {
-            return false;
-        }
-        // skip choices
-        if (choices.get(0).equals(CHOICE_SKIP)) {
-            if (removeSelectAnswerFromList) {
-                choices.remove(0);
-            }
-            return true;
-        }
-        if (choice.setChoiceByAnswers(choices, removeSelectAnswerFromList)) {
-            return true;
-        }
-        // TODO: enable fail checks and fix tests
-        //Assert.fail("Wrong choice");
-        return false;
-    }
-
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         assertAliasSupportInChoices(false);
-        if (hasChoice(choice, true)) {
-            return true;
+
+        if (!choices.isEmpty()) {
+
+            // skip choices
+            if (choices.get(0).equals(CHOICE_SKIP)) {
+                choices.remove(0);
+                return true;
+            }
+
+            if (choice.setChoiceByAnswers(choices, true)) {
+                return true;
+            }
+            // TODO: enable fail checks and fix tests
+            //Assert.fail("Wrong choice");
         }
 
         String choicesInfo;
@@ -3197,12 +3195,13 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean isComputer() {
-        // all players in unit tests are computers, so you must use AIRealGameSimulation to test different logic (Human vs AI)
+        // all players in unit tests are computers, so it allows testing different logic (Human vs AI)
         if (isTestsMode()) {
+            // AIRealGameSimulation = true - full plyable AI
+            // AIRealGameSimulation = false - choose assisted AI (Human)
             return AIRealGameSimulation;
         } else {
             throw new IllegalStateException("Can't use test player outside of unit tests");
-            //return !isHuman();
         }
     }
 
@@ -3568,7 +3567,7 @@ public class TestPlayer implements Player {
             String nextResult = choices.get(0);
             if (nextResult.startsWith(DIE_ROLL)) {
                 choices.remove(0);
-                return Integer.parseInt(nextResult.substring(DIE_ROLL.length(), nextResult.length()));
+                return Integer.parseInt(nextResult.substring(DIE_ROLL.length()));
             }
         }
         this.chooseStrictModeFailed("die roll result", game, "Use setDieRollResult to set it up in unit tests");
@@ -4393,7 +4392,17 @@ public class TestPlayer implements Player {
         return computerPlayer.toString();
     }
 
-    public boolean mustHavePresetChoice() {
-        return strictChooseMode && !AIRealGameSimulation;
+    public boolean canChooseByComputer() {
+        // full playable AI can choose any time
+        if (this.AIRealGameSimulation) {
+            return true;
+        }
+
+        // non-strict mode allows computer assisted choices (for old tests compatibility only)
+        if (!this.strictChooseMode) {
+            return true;
+        }
+
+        return false;
     }
 }

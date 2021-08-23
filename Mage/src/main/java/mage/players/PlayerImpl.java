@@ -2907,8 +2907,12 @@ public abstract class PlayerImpl implements Player, Serializable {
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Choose which die roll to keep (the rest will be ignored)");
         choice.setChoices(choices.stream().sorted().map(x -> "" + x).collect(Collectors.toSet()));
-        choose(Outcome.Neutral, choice, game);
-        return Integer.parseInt(choice.getChoice());
+        this.choose(Outcome.Neutral, choice, game);
+        if (choice.getChoice() != null) {
+            return Integer.parseInt(choice.getChoice());
+        } else {
+            return choices.iterator().next();
+        }
     }
 
     /**

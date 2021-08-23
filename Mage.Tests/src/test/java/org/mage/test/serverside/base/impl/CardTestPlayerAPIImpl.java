@@ -1506,11 +1506,21 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void assertChoicesCount(TestPlayer player, int count) throws AssertionError {
-        Assert.assertEquals("(Choices of " + player.getName() + ") Count are not equal (found " + player.getChoices() + ")", count, player.getChoices().size());
+        String mes = String.format(
+                "(Choices of %s) Count are not equal (found %s). Some inner choose dialogs can be set up only in strict mode.",
+                player.getName(),
+                player.getChoices()
+        );
+        Assert.assertEquals(mes, count, player.getChoices().size());
     }
 
     public void assertTargetsCount(TestPlayer player, int count) throws AssertionError {
-        Assert.assertEquals("(Targets of " + player.getName() + ") Count are not equal (found " + player.getTargets() + ")", count, player.getTargets().size());
+        String mes = String.format(
+                "(Targets of %s) Count are not equal (found %s). Some inner choose dialogs can be set up only in strict mode.",
+                player.getName(),
+                player.getTargets()
+        );
+        Assert.assertEquals(mes, count, player.getTargets().size());
     }
 
     /**

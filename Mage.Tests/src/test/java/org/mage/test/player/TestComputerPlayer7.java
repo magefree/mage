@@ -10,7 +10,7 @@ import mage.target.Target;
 import java.util.UUID;
 
 /**
- * Copy paste methods from TestComputerPlayer, see docs in there
+ * Copied-pasted methods from TestComputerPlayer, see docs in there
  *
  * @author JayDi85
  */
@@ -29,25 +29,37 @@ public class TestComputerPlayer7 extends ComputerPlayer7 {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
-        return testPlayerLink.choose(outcome, target, sourceId, game);
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.choose(outcome, target, sourceId, game);
+        } else {
+            return testPlayerLink.choose(outcome, target, sourceId, game);
+        }
     }
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
-        if (testPlayerLink.hasChoice(choice, false)
-                || testPlayerLink.mustHavePresetChoice()) {
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.choose(outcome, choice, game);
+        } else {
             return testPlayerLink.choose(outcome, choice, game);
         }
-        return super.choose(outcome, choice, game);
     }
 
     @Override
     public boolean flipCoinResult(Game game) {
-        return testPlayerLink.flipCoinResult(game);
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.flipCoinResult(game);
+        } else {
+            return testPlayerLink.flipCoinResult(game);
+        }
     }
 
     @Override
     public int rollDieResult(int sides, Game game) {
-        return testPlayerLink.rollDieResult(sides, game);
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.rollDieResult(sides, game);
+        } else {
+            return testPlayerLink.rollDieResult(sides, game);
+        }
     }
 }
