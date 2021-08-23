@@ -12,7 +12,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 
@@ -23,11 +23,7 @@ import java.util.UUID;
  */
 public final class WandOfOrcus extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombies you control");
-
-    static {
-        filter.add(SubType.ZOMBIE.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ZOMBIE, "Zombies");
 
     public WandOfOrcus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{B}");

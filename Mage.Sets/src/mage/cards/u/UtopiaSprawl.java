@@ -62,7 +62,7 @@ class UtopiaSprawlEffect extends ManaEffect {
 
      UtopiaSprawlEffect() {
         super();
-        staticText = "its controller adds one mana of the chosen color";
+        staticText = "its controller adds an additional one mana of the chosen color";
     }
 
     private UtopiaSprawlEffect(final UtopiaSprawlEffect effect) {

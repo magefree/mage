@@ -94,8 +94,8 @@ class TheaterOfHorrorsCastEffect extends AsThoughEffectImpl {
 
     TheaterOfHorrorsCastEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "During your turn, if an opponent lost life this turn, " +
-                "you may play cards exiled with {this}";
+        staticText = "during your turn, if an opponent lost life this turn, " +
+                "you may play lands and cast spells from among cards exiled with {this}";
     }
 
     private TheaterOfHorrorsCastEffect(final TheaterOfHorrorsCastEffect effect) {
