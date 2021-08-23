@@ -132,7 +132,7 @@ class SorcererClassEffect extends OneShotEffect {
     SorcererClassEffect() {
         super(Outcome.Benefit);
         staticText = "that spell deals damage to each opponent equal " +
-                "to the number of instant or sorcery spells you've cast this turn";
+                "to the number of instant and sorcery spells you've cast this turn";
     }
 
     private SorcererClassEffect(final SorcererClassEffect effect) {

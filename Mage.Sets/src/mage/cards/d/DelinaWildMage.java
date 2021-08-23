@@ -56,7 +56,7 @@ class DelinaWildMageEffect extends OneShotEffect {
     DelinaWildMageEffect() {
         super(Outcome.Benefit);
         staticText = "choose target creature you control, then roll a d20." +
-                "<br>1-14 | Create a tapped and attacking token that's a copy of that creature " +
+                "<br>1-14 | Create a tapped and attacking token that's a copy of that creature, " +
                 "except it's not legendary and it has \"Exile this creature at end of combat.\"" +
                 "<br>15-20 | Create one of those tokens. You may roll again.";
     }

@@ -42,7 +42,8 @@ public final class ArcaneInvestigator extends CardImpl {
         effect.addTableEntry(10, 20, new LookLibraryAndPickControllerEffect(
                 StaticValue.get(3), false, StaticValue.get(1),
                 StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false
-        ));
+        ).setText("look at the top three cards of your library. Put one of them " +
+                "into your hand and the rest on the bottom of your library in any order"));
     }
 
     private ArcaneInvestigator(final ArcaneInvestigator card) {

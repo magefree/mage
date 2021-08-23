@@ -30,7 +30,7 @@ public class IcingdeathFrostTongueToken extends TokenImpl {
 
     public IcingdeathFrostTongueToken() {
         super("Icingdeath, Frost Tongue", "Icingdeath, Frost Tongue, a legendary white " +
-                "Equipment artifact token with \"Equipped creature gets +2/+0\", " +
+                "Equipment artifact token with \"Equipped creature gets +2/+0,\" " +
                 "\"Whenever equipped creature attacks, tap target creature " +
                 "defending player controls,\" and equip {2}");
         supertype.add(SuperType.LEGENDARY);
