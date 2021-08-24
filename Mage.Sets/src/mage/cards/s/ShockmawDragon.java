@@ -34,7 +34,7 @@ public final class ShockmawDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Shockmaw Dragon deals combat damage to a player, it deals 1 damage to each creature that player controls.
-        this.addAbility(new PolisCrusherTriggeredAbility());
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ShockmawDragonEffect(), false, true));
     }
 
     private ShockmawDragon(final ShockmawDragon card) {
@@ -47,45 +47,35 @@ public final class ShockmawDragon extends CardImpl {
     }
 }
 
-class PolisCrusherTriggeredAbility extends TriggeredAbilityImpl {
+class ShockmawDragonEffect extends OneShotEffect {
 
-    public PolisCrusherTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1), true);
+    public ShockmawDragonEffect() {
+        super(Outcome.Damage);
+        staticText = "it deals 1 damage to each creature that player controls";
     }
 
-    public PolisCrusherTriggeredAbility(final PolisCrusherTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PolisCrusherTriggeredAbility copy() {
-        return new PolisCrusherTriggeredAbility(this);
+    public ShockmawDragonEffect(final ShockmawDragonEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.sourceId) && ((DamagedPlayerEvent) event).isCombatDamage()) {
-            Player player = game.getPlayer(event.getTargetId());
-            if (player != null) {
-                FilterPermanent filter = new FilterPermanent("a creature controlled by " + player.getLogName());
-                filter.add(CardType.CREATURE.getPredicate());
-                filter.add(new ControllerIdPredicate(event.getTargetId()));
-                this.getTargets().clear();
-                this.addTarget(new TargetPermanent(filter));
-                return true;
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null) {
+            int amount = (Integer) getValue("damage");
+            if (amount > 0) {
+                for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
+                    creature.damage(1, source.getSourceId(), source, game, false, true);
+                }
             }
+            return true;
         }
         return false;
     }
 
     @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player,"
-                + " it deals 1 damage to each creature that player controls";
+    public ShockmawDragonEffect copy() {
+        return new ShockmawDragonEffect(this);
     }
+
 }
