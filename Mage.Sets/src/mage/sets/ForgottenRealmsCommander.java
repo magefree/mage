@@ -130,6 +130,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hex", 101, Rarity.RARE, mage.cards.h.Hex.class));
         cards.add(new SetCardInfo("High Market", 246, Rarity.RARE, mage.cards.h.HighMarket.class));
         cards.add(new SetCardInfo("Hoard-Smelter Dragon", 128, Rarity.RARE, mage.cards.h.HoardSmelterDragon.class));
+        cards.add(new SetCardInfo("Holy Avenger", 6, Rarity.RARE, mage.cards.h.HolyAvenger.class));
         cards.add(new SetCardInfo("Hostage Taker", 186, Rarity.RARE, mage.cards.h.HostageTaker.class));
         cards.add(new SetCardInfo("Hurl Through Hell", 48, Rarity.RARE, mage.cards.h.HurlThroughHell.class));
         cards.add(new SetCardInfo("Ignite the Future", 129, Rarity.RARE, mage.cards.i.IgniteTheFuture.class));
