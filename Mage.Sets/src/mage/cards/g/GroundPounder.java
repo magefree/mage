@@ -103,7 +103,8 @@ class GroundPounderTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         DieRolledEvent drEvent = (DieRolledEvent) event;
-        return this.isControlledBy(event.getPlayerId()) && drEvent.getNaturalResult() >= 5;
+        // silver border card must look for "result" instead "natural result"
+        return this.isControlledBy(event.getPlayerId()) && drEvent.getResult() >= 5;
     }
 
     @Override

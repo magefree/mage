@@ -42,7 +42,7 @@ public final class TheBigIdea extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // 2{BR}{BR}, T: Roll a six-sided dice. Create a number of 1/1 red Brainiac creature tokens equal to the result. 
+        // {2}{B/R}{B/R}, {T}: Roll a six-sided dice. Create a number of 1/1 red Brainiac creature tokens equal to the result.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TheBigIdeaEffect(), new ManaCostsImpl("{2}{B/R}{B/R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -84,7 +84,7 @@ class TheBigIdeaReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((RollDieEvent) event).incBigIdea();
+        ((RollDieEvent) event).incBigIdeaRollsAmount();
         discard();
         return true;
     }

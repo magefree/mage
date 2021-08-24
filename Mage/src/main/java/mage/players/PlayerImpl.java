@@ -2885,7 +2885,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return rollDieResult(numSides, game);
     }
 
-    private int applySingleDieReplacement(int numSides, int rollsAmount, Ability source, Game game) {
+    private int rollDieSingle(int numSides, int rollsAmount, Ability source, Game game) {
         if (rollsAmount == 1) {
             return rollDieWithReplacement(numSides, source, game);
         }
@@ -2932,24 +2932,28 @@ public abstract class PlayerImpl implements Player, Serializable {
             RollDieEvent rollDieEvent = new RollDieEvent(rollDiceEvent.getSides(), source);
             game.replaceEvent(rollDieEvent);
             int naturalResult;
-            if (rollDieEvent.getBigIdea() > 0) {
+            if (rollDieEvent.getBigIdeaRollsAmount() > 0) {
                 // rolls 2x + sum results
+                // The Big Idea: roll two six-sided dice and use the total of those results
                 // TODO: change big idea logic to replace effect logic with REPLACE_ROLLED_DIE?
-                int singleResult = 0;
-                for (int j = 0; j < rollDieEvent.getBigIdea(); j++) {
-                    singleResult += applySingleDieReplacement(rollDiceEvent.getSides(), rollDieEvent.getRollsAmount(), source, game);
+                int totalSum = 0;
+                for (int j = 0; j < rollDieEvent.getBigIdeaRollsAmount() + 1; j++) {
+                    int singleResult = rollDieSingle(rollDieEvent.getSides(), rollDieEvent.getRollsAmount(), source, game);
+                    totalSum += singleResult;
                     dieRolls.add(new RollDieResult(singleResult, rollDieEvent.getResultModifier()));
                 }
-                naturalResult = singleResult;
+                naturalResult = totalSum;
             } else {
                 // rolls 1x
-                naturalResult = applySingleDieReplacement(rollDiceEvent.getSides(), rollDieEvent.getRollsAmount(), source, game);
+                naturalResult = rollDieSingle(rollDieEvent.getSides(), rollDieEvent.getRollsAmount(), source, game);
                 dieRolls.add(new RollDieResult(naturalResult, rollDieEvent.getResultModifier()));
             }
             dieResults.add(naturalResult + rollDieEvent.getResultModifier());
         }
 
         // ignore the lowest results
+        // planar dies: due to 706.6. planar die results must be fully ignored
+        //
         // 706.5.
         // If a player is instructed to roll two or more dice and ignore the lowest roll, the roll
         // that yielded the lowest result is considered to have never happened. No abilities trigger

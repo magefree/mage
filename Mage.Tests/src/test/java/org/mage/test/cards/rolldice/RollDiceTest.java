@@ -4,6 +4,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Planes;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -214,7 +215,7 @@ public class RollDiceTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_PlanarDice_Activate() {
+    public void test_PlanarDie_Single() {
         // Active player can roll the planar die: Whenever you roll {CHAOS}, create a 7/7 colorless Eldrazi creature with annhilator 1
         addPlane(playerA, Planes.PLANE_HEDRON_FIELDS_OF_AGADEEM);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
@@ -233,5 +234,196 @@ public class RollDiceTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Eldrazi", 2);
+    }
+
+    @Test
+    public void test_PlanarDice_OneOrMoreDieRollTriggersMustWork() {
+        // Active player can roll the planar die: Whenever you roll {CHAOS}, create a 7/7 colorless Eldrazi creature with annhilator 1
+        addPlane(playerA, Planes.PLANE_HEDRON_FIELDS_OF_AGADEEM);
+        //
+        // Whenever you roll one or more dice, Farideh, Devil's Chosen gains flying and menace until end of turn.
+        // If any of those results was 10 or higher, draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Farideh, Devil's Chosen");
+
+        checkAbility("no fly before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Farideh, Devil's Chosen", FlyingAbility.class, false);
+
+        // roll planar die and trigger Farideh
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}: Roll the planar");
+        setDieRollResult(playerA, 1); // make chaos
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        checkAbility("must be fly after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Farideh, Devil's Chosen", FlyingAbility.class, true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Eldrazi", 1);
+    }
+
+    @Test
+    public void test_PlanarDice_DieRollTrigger_MustWorkAndSeeEmptyResult_1() {
+        // Active player can roll the planar die: Whenever you roll {CHAOS}, create a 7/7 colorless Eldrazi creature with annhilator 1
+        addPlane(playerA, Planes.PLANE_HEDRON_FIELDS_OF_AGADEEM);
+        //
+        // As Hammer Jammer enters the battlefield, roll a six-sided die. Hammer Jammer enters the battlefield with a number of +1/+1 counters on it equal to the result.
+        // Whenever you roll a die, remove all +1/+1 counters from Hammer Jammer, then put a number of +1/+1 counters on it equal to the result.
+        addCard(Zone.HAND, playerA, "Hammer Jammer");// {3}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+
+        // prepare 5/5 hammer
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hammer Jammer");
+        setDieRollResult(playerA, 5);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPT("must have 5/5 hammer", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hammer Jammer", 5, 5);
+
+        // roll planar die and trigger event with 0 result
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}: Roll the planar");
+        setDieRollResult(playerA, 1); // make chaos
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkGraveyardCount("hammer must die", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hammer Jammer", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Eldrazi", 1);
+    }
+
+    @Test
+    public void test_PlanarDice_DieRollTrigger_MustWorkAndSeeEmptyResult_2() {
+        // Active player can roll the planar die: Whenever you roll {CHAOS}, create a 7/7 colorless Eldrazi creature with annhilator 1
+        addPlane(playerA, Planes.PLANE_HEDRON_FIELDS_OF_AGADEEM);
+        //
+        // Whenever you roll a 5 or higher on a die, Steel Squirrel gets +X/+X until end of turn, where X is the result.
+        addCard(Zone.BATTLEFIELD, playerA, "Steel Squirrel", 1); // 1/1
+        //
+        // Roll a six-sided die. Create a number of 1/1 red Goblin creature tokens equal to the result.
+        addCard(Zone.HAND, playerA, "Box of Free-Range Goblins", 1); // {4}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+
+        checkPT("no boost before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Steel Squirrel", 1, 1);
+
+        // roll planar die and trigger event with 0 result
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}: Roll the planar");
+        setDieRollResult(playerA, 7); // make blank
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPT("no boost after planar", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Steel Squirrel", 1, 1);
+
+        // roll normal die and trigger with boost
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Box of Free-Range Goblins");
+        setDieRollResult(playerA, 6);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPT("boost after normal", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Steel Squirrel", 1 + 6, 1 + 6);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Eldrazi", 0);
+    }
+
+    @Test
+    public void test_AdditionalRoll_WithLowest() {
+        // If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.
+        addCard(Zone.BATTLEFIELD, playerA, "Barbarian Class", 2);
+        //
+        // Roll a six-sided die. Create a number of 1/1 red Goblin creature tokens equal to the result.
+        addCard(Zone.HAND, playerA, "Box of Free-Range Goblins", 1); // {4}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+
+        // roll normal die and trigger 2x additional roll
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Box of Free-Range Goblins");
+        setChoice(playerA, "Barbarian Class"); // replace events
+        setDieRollResult(playerA, 3); // normal roll
+        setDieRollResult(playerA, 6); // additional roll - will be selected
+        setDieRollResult(playerA, 5); // additional roll
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin", 6);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_AdditionalRoll_WithBigIdea() {
+        // {2}{B/R}{B/R}, {T}: Roll a six-sided dice. Create a number of 1/1 red Brainiac creature tokens equal to the result.
+        // Tap three untapped Brainiacs you control: The next time you would roll a six-sided die,
+        // instead roll two six-sided dice and use the total of those results.
+        addCard(Zone.BATTLEFIELD, playerA, "The Big Idea", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        //
+        // Roll a six-sided die. Create a number of 1/1 red Goblin creature tokens equal to the result.
+        addCard(Zone.HAND, playerA, "Box of Free-Range Goblins", 1); // {4}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+
+        // prepare idea cost
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{B/R}{B/R}, {T}");
+        setDieRollResult(playerA, 3);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brainiac", 3);
+
+        // prepare idea effect
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tap three Brainiac");
+        setChoice(playerA, "Brainiac", 3);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // roll and trigger idea replace event
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Box of Free-Range Goblins");
+        setDieRollResult(playerA, 3); // normal roll
+        setDieRollResult(playerA, 6); // additional roll - will be sums
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin", 3 + 6);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_AdditionalRoll_WithChoose() {
+        // If you would roll a die, instead roll two of those dice and ignore one of those results.
+        addCard(Zone.BATTLEFIELD, playerA, "Krark's Other Thumb", 1);
+        //
+        // Roll a six-sided die. Create a number of 1/1 red Goblin creature tokens equal to the result.
+        addCard(Zone.HAND, playerA, "Box of Free-Range Goblins", 1); // {4}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+
+        // roll normal die and trigger 2x additional roll
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Box of Free-Range Goblins");
+        setDieRollResult(playerA, 3); // normal roll
+        setDieRollResult(playerA, 6); // additional roll
+        setChoice(playerA, "6"); // keep 6 as roll result
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin", 6);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    @Ignore
+    public void test_PlanarDice_AdditionalRoll_WithLowest_MustIgnore() {
+        // TODO: add test
+    }
+
+    @Test
+    @Ignore
+    public void test_PlanarDice_AdditionalRoll_WithChoose_MustWork() {
+        // TODO: add test
+    }
+
+    @Test
+    @Ignore
+    public void test_PlanarDice_AdditionalRoll_WithBigIdea_MustIgnore() {
+        // TODO: add test
     }
 }

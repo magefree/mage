@@ -10,8 +10,8 @@ public class RollDieEvent extends GameEvent {
 
     private final int sides;
     private int resultModifier = 0;
-    private int rollsAmount = 1;
-    private int bigIdea = 0; // rolls 2x + sum result
+    private int rollsAmount = 1; // rolls X times and choose result from it
+    private int bigIdeaRollsAmount = 0; // rolls 2x and sum result
 
     public RollDieEvent(int sides, Ability source) {
         super(EventType.ROLL_DIE, source.getControllerId(), source, source.getControllerId());
@@ -38,11 +38,11 @@ public class RollDieEvent extends GameEvent {
         this.rollsAmount = CardUtil.overflowMultiply(this.rollsAmount, 2);
     }
 
-    public int getBigIdea() {
-        return bigIdea;
+    public int getBigIdeaRollsAmount() {
+        return bigIdeaRollsAmount;
     }
 
-    public void incBigIdea() {
-        this.bigIdea = CardUtil.overflowInc(this.bigIdea, 1);
+    public void incBigIdeaRollsAmount() {
+        this.bigIdeaRollsAmount = CardUtil.overflowInc(this.bigIdeaRollsAmount, 1);
     }
 }
