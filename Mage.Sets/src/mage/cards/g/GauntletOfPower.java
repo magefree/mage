@@ -7,7 +7,6 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.abilities.effects.mana.AddManaChosenColorEffect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
@@ -69,7 +68,7 @@ public final class GauntletOfPower extends CardImpl {
 class GauntletOfPowerTapForManaAllTriggeredAbility extends TriggeredManaAbility {
 
     GauntletOfPowerTapForManaAllTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddManaChosenColorEffect(), false);
+        super(Zone.BATTLEFIELD, new GauntletOfPowerManaEffect2(), false);
     }
 
     private GauntletOfPowerTapForManaAllTriggeredAbility(GauntletOfPowerTapForManaAllTriggeredAbility ability) {
