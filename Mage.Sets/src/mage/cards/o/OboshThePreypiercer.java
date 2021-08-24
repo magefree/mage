@@ -61,7 +61,7 @@ enum OboshThePreypiercerCompanionCondition implements CompanionCondition {
     public boolean isLegal(Set<Card> deck, int startingHandSize) {
         return deck
                 .stream()
-                .filter(card -> !card.isLand())
+                .filter(card -> !card.hasCardTypeForDeckbuilding(CardType.LAND))
                 .mapToInt(MageObject::getManaValue)
                 .map(i -> i % 2)
                 .allMatch(i -> i == 1);
