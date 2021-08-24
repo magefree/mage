@@ -4288,7 +4288,7 @@ public class TestPlayer implements Player {
 
     @Override
     public PlanarDieRoll rollPlanarDie(Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return computerPlayer.rollPlanarDie(source, game, numberChaosSides, numberPlanarSides);
     }
 
     @Override

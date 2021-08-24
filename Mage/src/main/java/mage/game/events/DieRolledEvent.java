@@ -14,7 +14,7 @@ public class DieRolledEvent extends GameEvent {
     // considering all applicable modifiers, the final number is the result of the die roll.
 
     private final int sides;
-    private final int naturalResult;
+    private final int naturalResult; // planar die raise event with 0 values in result and natural result
 
     public DieRolledEvent(int sides, int naturalResult, int modifier, Ability source) {
         super(EventType.DIE_ROLLED, source.getControllerId(), source, source.getControllerId(), naturalResult + modifier, false);

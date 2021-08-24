@@ -1989,6 +1989,17 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addChoice(result ? TestPlayer.FLIPCOIN_RESULT_TRUE : TestPlayer.FLIPCOIN_RESULT_FALSE);
     }
 
+    /**
+     * Set next result of next die roll (uses for both normal or planar rolls)
+     *
+     * For planar rolls:
+     * 1..2 - chaos
+     * 3..7 - blank
+     * 8..9 - planar
+     *
+     * @param player
+     * @param result
+     */
     public void setDieRollResult(TestPlayer player, int result) {
         player.addChoice(TestPlayer.DIE_ROLL + result);
     }

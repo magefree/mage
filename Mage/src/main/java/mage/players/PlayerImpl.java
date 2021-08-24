@@ -3006,25 +3006,30 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param numberPlanarSides The number of chaos sides the planar die
      *                          currently has (normally 1)
      * @return the outcome that the player rolled. Either ChaosRoll, PlanarRoll
-     * or NilRoll
+     * or BlankRoll
      */
     @Override
     public PlanarDieRoll rollPlanarDie(Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
-        int result = RandomUtil.nextInt(9) + 1;
+        int maxSides = GameOptions.PLANECHASE_PLANAR_DIE_TOTAL_SIDES;
+        int result = this.rollDieResult(maxSides, game);
         PlanarDieRoll roll = PlanarDieRoll.BLANK_ROLL;
-        if (numberChaosSides + numberPlanarSides > 9) {
-            numberChaosSides = 2;
-            numberPlanarSides = 2;
+        if (numberChaosSides + numberPlanarSides > maxSides) {
+            numberChaosSides = GameOptions.PLANECHASE_PLANAR_DIE_CHAOS_SIDES;
+            numberPlanarSides = GameOptions.PLANECHASE_PLANAR_DIE_PLANAR_SIDES;
         }
+
+        // 1..2 - chaos
+        // 3..7 - blank
+        // 8..9 - planar
         if (result <= numberChaosSides) {
             roll = PlanarDieRoll.CHAOS_ROLL;
-        } else if (result > 9 - numberPlanarSides) {
+        } else if (result > maxSides - numberPlanarSides) {
             roll = PlanarDieRoll.PLANAR_ROLL;
         }
-        if (!game.isSimulation()) {
-            game.informPlayers("[Roll the planar die] " + getLogName()
-                    + " rolled a " + roll + " on the planar die" + CardUtil.getSourceLogName(game, source));
-        }
+
+        game.informPlayers("[Roll the planar die] " + getLogName()
+                + " rolled a " + roll + " on the planar die" + CardUtil.getSourceLogName(game, source));
+
         GameEvent event = new GameEvent(GameEvent.EventType.ROLL_PLANAR_DIE,
                 playerId, source, playerId, result, true);
         event.setData(roll + "");
@@ -3034,8 +3039,15 @@ public abstract class PlayerImpl implements Player, Serializable {
             ge.setData(roll + "");
             game.fireEvent(ge);
         }
-        game.fireEvent(new DieRolledEvent(6, -1, 0, source));
-        game.fireEvent(new DiceRolledEvent(6, Arrays.asList(-1), source));
+
+        // 706.6.
+        // In a Planechase game, rolling the planar die will cause any ability that triggers whenever a
+        // player rolls one or more dice to trigger. However, any effect that refers to a numerical
+        // result of a die roll, including ones that compare the results of that roll to other rolls
+        // or to a given number, ignores the rolling of the planar die. See rule 901, “Planechase.”
+        game.fireEvent(new DieRolledEvent(maxSides, 0, 0, source));
+        game.fireEvent(new DiceRolledEvent(maxSides, Arrays.asList(0), source));
+
         return roll;
     }
 

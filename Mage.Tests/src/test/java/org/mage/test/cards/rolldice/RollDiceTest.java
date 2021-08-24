@@ -2,6 +2,7 @@ package org.mage.test.cards.rolldice;
 
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
+import mage.constants.Planes;
 import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -9,7 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 import java.util.Arrays;
 
 /**
- * @author TheElk801
+ * @author TheElk801, JayDi85
  */
 public class RollDiceTest extends CardTestPlayerBase {
 
@@ -20,7 +21,7 @@ public class RollDiceTest extends CardTestPlayerBase {
     private static final String farideh = "Farideh, Devil's Chosen";
 
     @Test(expected = AssertionError.class)
-    public void testStrictFailWithoutSetup() {
+    public void test_StrictFailWithoutSetup() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         addCard(Zone.HAND, playerA, goblins);
 
@@ -144,7 +145,7 @@ public class RollDiceTest extends CardTestPlayerBase {
     }
 
     @Test(expected = AssertionError.class)
-    public void test_KrarksOtherThumb_1copy_ChooseFailure() {
+    public void test_KrarksOtherThumb_1copy_MustFailOnWrongChoiceSetup() {
         runKrarksOtherThumbTest(8, 1, 1, 9, 10);
     }
 
@@ -210,5 +211,27 @@ public class RollDiceTest extends CardTestPlayerBase {
     @Test
     public void test_FaridehDevilsChosen_Draw() {
         runFaridehTest(2, 1, 10);
+    }
+
+    @Test
+    public void test_PlanarDice_Activate() {
+        // Active player can roll the planar die: Whenever you roll {CHAOS}, create a 7/7 colorless Eldrazi creature with annhilator 1
+        addPlane(playerA, Planes.PLANE_HEDRON_FIELDS_OF_AGADEEM);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        // first chaos
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}: Roll the planar");
+        setDieRollResult(playerA, 1); // make chaos
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        // second chaos
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}: Roll the planar");
+        setDieRollResult(playerA, 1); // make chaos
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Eldrazi", 2);
     }
 }

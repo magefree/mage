@@ -24,10 +24,7 @@ import mage.designations.DesignationType;
 import mage.filter.FilterCard;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.GameState;
-import mage.game.Graveyard;
-import mage.game.Table;
+import mage.game.*;
 import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
 import mage.game.events.GameEvent;
@@ -498,7 +495,7 @@ public interface Player extends MageItem, Copyable<Player> {
     int rollDieResult(int sides, Game game);
 
     default PlanarDieRoll rollPlanarDie(Ability source, Game game) {
-        return rollPlanarDie(source, game, 2, 2);
+        return rollPlanarDie(source, game, GameOptions.PLANECHASE_PLANAR_DIE_CHAOS_SIDES, GameOptions.PLANECHASE_PLANAR_DIE_PLANAR_SIDES);
     }
 
     PlanarDieRoll rollPlanarDie(Ability source, Game game, int numberChaosSides, int numberPlanarSides);
