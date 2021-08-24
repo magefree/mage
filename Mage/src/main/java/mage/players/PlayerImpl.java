@@ -2788,21 +2788,15 @@ public abstract class PlayerImpl implements Player, Serializable {
         return casted;
     }
 
-    @Override
-    public boolean flipCoin(Ability source, Game game, boolean winnable) {
-        return this.flipCoin(source, game, winnable, null);
-    }
-
     /**
      * @param source
      * @param game
      * @param winnable
-     * @param appliedEffects
      * @return if winnable, true if player won the toss, if not winnable, true
      * for heads and false for tails
      */
     @Override
-    public boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects) {
+    public boolean flipCoin(Ability source, Game game, boolean winnable) {
         boolean chosen = false;
         if (winnable) {
             chosen = this.chooseUse(Outcome.Benefit, "Heads or tails?", "", "Heads", "Tails", source, game);
@@ -2810,7 +2804,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         boolean result = this.flipCoinResult(game);
         FlipCoinEvent event = new FlipCoinEvent(playerId, source, result, chosen, winnable);
-        event.addAppliedEffects(appliedEffects);
         game.replaceEvent(event);
         game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(event.getResult())
                 + CardUtil.getSourceLogName(game, source));
@@ -2837,7 +2830,6 @@ public abstract class PlayerImpl implements Player, Serializable {
             game.informPlayers(getLogName() + " " + (event.getResult() == event.getChosen() ? "won" : "lost") + " the flip"
                     + CardUtil.getSourceLogName(game, source));
         }
-        event.setAppliedEffects(appliedEffects);
         game.fireEvent(event.createFlippedEvent());
         if (event.isWinnable()) {
             return event.getResult() == event.getChosen();
@@ -2853,16 +2845,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean flipCoinResult(Game game) {
         return RandomUtil.nextBoolean();
-    }
-
-    @Override
-    public int rollDice(Ability source, Game game, int numSides) {
-        return this.rollDice(source, game, numSides, 1).get(0);
-    }
-
-    @Override
-    public List<Integer> rollDice(Ability source, Game game, int numSides, int numDice) {
-        return this.rollDice(source, game, null, numSides, numDice, false);
     }
 
     private static final class RollDieResult {
@@ -2932,26 +2914,22 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * @param source
      * @param game
-     * @param appliedEffects
-     * @param numSides       Number of sides the dice has
+     * @param sidesAmount number of sides the dice has
+     * @param rollsAmount number of tries to roll the dice
      * @return the number that the player rolled
      */
     @Override
-    public List<Integer> rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice, boolean ignoreLowest) {
-        RollDiceEvent rollDiceEvent = new RollDiceEvent(numSides, numDice, source);
-        if (ignoreLowest) {
-            // TODO: remove unused?
-            rollDiceEvent.incIgnoreLowestAmount(1);
-        }
+    public List<Integer> rollDice(Ability source, Game game, int sidesAmount, int rollsAmount) {
+        RollDiceEvent rollDiceEvent = new RollDiceEvent(sidesAmount, rollsAmount, source);
         game.replaceEvent(rollDiceEvent);
 
-        // roll multiple dies
+        // roll multiple dices
         // results amount can be less than a rolls amount (example: The Big Idea allows rolling 2x instead 1x)
         List<Integer> dieResults = new ArrayList<>();
         List<RollDieResult> dieRolls = new ArrayList<>();
         for (int i = 0; i < rollDiceEvent.getAmount(); i++) {
-            // roll single die
-            RollDieEvent rollDieEvent = new RollDieEvent(numSides, source);
+            // roll single dice
+            RollDieEvent rollDieEvent = new RollDieEvent(rollDiceEvent.getSides(), source);
             game.replaceEvent(rollDieEvent);
             int naturalResult;
             if (rollDieEvent.getBigIdea() > 0) {
@@ -2959,13 +2937,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // TODO: change big idea logic to replace effect logic with REPLACE_ROLLED_DIE?
                 int singleResult = 0;
                 for (int j = 0; j < rollDieEvent.getBigIdea(); j++) {
-                    singleResult += applySingleDieReplacement(numSides, rollDieEvent.getRollsAmount(), source, game);
+                    singleResult += applySingleDieReplacement(rollDiceEvent.getSides(), rollDieEvent.getRollsAmount(), source, game);
                     dieRolls.add(new RollDieResult(singleResult, rollDieEvent.getResultModifier()));
                 }
                 naturalResult = singleResult;
             } else {
                 // rolls 1x
-                naturalResult = applySingleDieReplacement(numSides, rollDieEvent.getRollsAmount(), source, game);
+                naturalResult = applySingleDieReplacement(rollDiceEvent.getSides(), rollDieEvent.getRollsAmount(), source, game);
                 dieRolls.add(new RollDieResult(naturalResult, rollDieEvent.getResultModifier()));
             }
             dieResults.add(naturalResult + rollDieEvent.getResultModifier());
@@ -3000,39 +2978,29 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         // raise affected roll events
         for (RollDieResult result : dieRolls) {
-            game.fireEvent(new DieRolledEvent(numSides, result.naturalResult, result.modifier, source));
+            game.fireEvent(new DieRolledEvent(rollDiceEvent.getSides(), result.naturalResult, result.modifier, source));
         }
-        game.fireEvent(new DiceRolledEvent(numSides, dieResults, source));
+        game.fireEvent(new DiceRolledEvent(rollDiceEvent.getSides(), dieResults, source));
 
         if (dieResults.size() > 1) {
             game.informPlayers(
-                    "[Roll a die] " + getLogName() + " rolled " + dieResults.size() + " " + numSides
-                            + " sided dice and got the following results: "
+                    "[Roll a die] " + getLogName() + " rolled " + dieResults.size() + " d" + rollDiceEvent.getSides()
+                            + " dice and got: "
                             + String.join(", ", dieResults.stream().map(x -> "" + x).collect(Collectors.toSet()))
                             + CardUtil.getSourceLogName(game, source)
             );
         } else {
             game.informPlayers(
-                    "[Roll a die] " + getLogName() + " rolled a " + numSides + " sided die and got "
+                    "[Roll a die] " + getLogName() + " rolled a d" + rollDiceEvent.getSides()
+                            + " dice and got: "
                             + dieResults.get(0) + CardUtil.getSourceLogName(game, source)
             );
         }
         return dieResults;
     }
 
-    @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game) {
-        return this.rollPlanarDie(source, game, null);
-    }
-
-    @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects) {
-        return rollPlanarDie(source, game, appliedEffects, 2, 2);
-    }
-
     /**
      * @param game
-     * @param appliedEffects
      * @param numberChaosSides  The number of chaos sides the planar die
      *                          currently has (normally 1 but can be 5)
      * @param numberPlanarSides The number of chaos sides the planar die
@@ -3041,9 +3009,9 @@ public abstract class PlayerImpl implements Player, Serializable {
      * or NilRoll
      */
     @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
+    public PlanarDieRoll rollPlanarDie(Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
         int result = RandomUtil.nextInt(9) + 1;
-        PlanarDieRoll roll = PlanarDieRoll.NIL_ROLL;
+        PlanarDieRoll roll = PlanarDieRoll.BLANK_ROLL;
         if (numberChaosSides + numberPlanarSides > 9) {
             numberChaosSides = 2;
             numberPlanarSides = 2;
@@ -3059,7 +3027,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         GameEvent event = new GameEvent(GameEvent.EventType.ROLL_PLANAR_DIE,
                 playerId, source, playerId, result, true);
-        event.setAppliedEffects(appliedEffects);
         event.setData(roll + "");
         if (!game.replaceEvent(event)) {
             GameEvent ge = new GameEvent(GameEvent.EventType.PLANAR_DIE_ROLLED,

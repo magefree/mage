@@ -128,7 +128,7 @@ public class RandomTest {
                 image.setRGB(x, y, new Color(
                         res.equals(PlanarDieRoll.CHAOS_ROLL) ? 255 : 0,
                         res.equals(PlanarDieRoll.PLANAR_ROLL) ? 255 : 0,
-                        res.equals(PlanarDieRoll.NIL_ROLL) ? 255 : 0
+                        res.equals(PlanarDieRoll.BLANK_ROLL) ? 255 : 0
                 ).getRGB());
             }
         }

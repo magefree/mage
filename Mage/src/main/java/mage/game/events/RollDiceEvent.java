@@ -11,10 +11,9 @@ public class RollDiceEvent extends GameEvent {
     private final int sides;
     private int ignoreLowestAmount = 0; // ignore the lowest results
 
-    public RollDiceEvent(int sides, int amount, Ability source) {
-        super(EventType.ROLL_DICE, source.getControllerId(), source, source.getControllerId(), amount, false);
+    public RollDiceEvent(int sides, int rollsAmount, Ability source) {
+        super(EventType.ROLL_DICE, source.getControllerId(), source, source.getControllerId(), rollsAmount, false);
         this.sides = sides;
-        this.amount = amount;
     }
 
     public int getSides() {

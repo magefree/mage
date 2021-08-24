@@ -623,7 +623,7 @@ public class GameEvent implements Serializable {
 
     /**
      * used to store which replacement effects were already applied to an event
-     * or or any modified events that may replace it
+     * or any modified events that may replace it
      * <p>
      * 614.5. A replacement effect doesn't invoke itself repeatedly; it gets
      * only one opportunity to affect an event or any modified events that may

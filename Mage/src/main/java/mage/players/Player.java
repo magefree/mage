@@ -487,23 +487,21 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean flipCoin(Ability source, Game game, boolean winnable);
 
-    boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects);
-
     boolean flipCoinResult(Game game);
 
-    int rollDice(Ability source, Game game, int numSides);
+    default int rollDice(Ability source, Game game, int numSides) {
+        return rollDice(source, game, numSides, 1).stream().findFirst().orElse(0);
+    }
 
     List<Integer> rollDice(Ability source, Game game, int numSides, int numDice);
 
-    List<Integer> rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice, boolean ignoreLowest);
-
     int rollDieResult(int sides, Game game);
 
-    PlanarDieRoll rollPlanarDie(Ability source, Game game);
+    default PlanarDieRoll rollPlanarDie(Ability source, Game game) {
+        return rollPlanarDie(source, game, 2, 2);
+    }
 
-    PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects);
-
-    PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides);
+    PlanarDieRoll rollPlanarDie(Ability source, Game game, int numberChaosSides, int numberPlanarSides);
 
     Card discardOne(boolean random, boolean payForCost, Ability source, Game game);
 

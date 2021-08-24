@@ -3522,11 +3522,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects) {
-        return computerPlayer.flipCoin(source, game, true, appliedEffects);
-    }
-
-    @Override
     public boolean flipCoinResult(Game game) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
@@ -3546,18 +3541,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int rollDice(Ability source, Game game, int numSides) {
-        return computerPlayer.rollDice(source, game, numSides);
-    }
-
-    @Override
     public List<Integer> rollDice(Ability source, Game game, int numSides, int numDice) {
         return computerPlayer.rollDice(source, game, numSides, numDice);
-    }
-
-    @Override
-    public List<Integer> rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice, boolean ignoreLowest) {
-        return computerPlayer.rollDice(source, game, appliedEffects, numSides, numDice, ignoreLowest);
     }
 
     @Override
@@ -4302,17 +4287,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
+    public PlanarDieRoll rollPlanarDie(Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
