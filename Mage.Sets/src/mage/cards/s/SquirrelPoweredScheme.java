@@ -50,7 +50,7 @@ class SquirrelPoweredSchemeEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((RollDieEvent) event).incrementModifier(2);
+        ((RollDieEvent) event).incResultModifier(2);
         return false;
     }
 

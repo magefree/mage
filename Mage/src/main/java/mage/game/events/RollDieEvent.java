@@ -9,40 +9,40 @@ import mage.util.CardUtil;
 public class RollDieEvent extends GameEvent {
 
     private final int sides;
-    private int modifier = 0;
-    private int multiplier = 1;
-    private int bigIdea = 0;
+    private int resultModifier = 0;
+    private int rollsAmount = 1;
+    private int bigIdea = 0; // rolls 2x + sum result
 
     public RollDieEvent(int sides, Ability source) {
         super(EventType.ROLL_DIE, source.getControllerId(), source, source.getControllerId());
         this.sides = sides;
     }
 
-    public void incrementModifier(int modifier) {
-        this.modifier = CardUtil.overflowInc(this.modifier, modifier);
+    public int getResultModifier() {
+        return resultModifier;
     }
 
-    public int getModifier() {
-        return modifier;
+    public void incResultModifier(int modifier) {
+        this.resultModifier = CardUtil.overflowInc(this.resultModifier, modifier);
     }
 
     public int getSides() {
         return sides;
     }
 
-    public void doubleMultiplier(int multiplier) {
-        this.multiplier = CardUtil.overflowMultiply(this.multiplier, 2);
+    public int getRollsAmount() {
+        return rollsAmount;
     }
 
-    public int getMultiplier() {
-        return multiplier;
-    }
-
-    public void incrementBigIdea() {
-        this.bigIdea = CardUtil.overflowInc(this.bigIdea, 1);
+    public void doubleRollsAmount() {
+        this.rollsAmount = CardUtil.overflowMultiply(this.rollsAmount, 2);
     }
 
     public int getBigIdea() {
         return bigIdea;
+    }
+
+    public void incBigIdea() {
+        this.bigIdea = CardUtil.overflowInc(this.bigIdea, 1);
     }
 }

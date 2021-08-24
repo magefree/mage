@@ -16,6 +16,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 
 import java.util.UUID;
@@ -59,7 +60,6 @@ class WillingTestSubjectTriggeredAbility extends TriggeredAbilityImpl {
 
     public WillingTestSubjectTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-
     }
 
     public WillingTestSubjectTriggeredAbility(final WillingTestSubjectTriggeredAbility ability) {
@@ -78,7 +78,9 @@ class WillingTestSubjectTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return this.isControlledBy(event.getPlayerId()) && event.getAmount() >= 4;
+        DieRolledEvent drEvent = (DieRolledEvent) event;
+        // silver border card must look for "result" instead "natural result"
+        return this.isControlledBy(event.getPlayerId()) && drEvent.getResult() >= 4;
     }
 
     @Override

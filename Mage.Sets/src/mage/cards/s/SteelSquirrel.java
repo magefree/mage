@@ -13,6 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -71,8 +72,10 @@ class SteelSquirrelTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (this.isControlledBy(event.getPlayerId()) && event.getAmount() >= 5) {
-            this.getEffects().setValue("rolled", event.getAmount());
+        DieRolledEvent drEvent = (DieRolledEvent) event;
+        // silver border card must look for "result" instead "natural result"
+        if (this.isControlledBy(event.getPlayerId()) && drEvent.getResult() >= 5) {
+            this.getEffects().setValue("rolled", drEvent.getResult());
             return true;
         }
         return false;
@@ -104,12 +107,10 @@ class SteelSquirrelEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
-            if (this.getValue("rolled") != null) {
-                int rolled = (Integer) this.getValue("rolled");
-                game.addEffect(new BoostSourceEffect(rolled, rolled, Duration.EndOfTurn), source);
-                return true;
-            }
+        Integer amount = (Integer) this.getValue("rolled");
+        if (controller != null && permanent != null && amount != null) {
+            game.addEffect(new BoostSourceEffect(amount, amount, Duration.EndOfTurn), source);
+            return true;
         }
         return false;
     }

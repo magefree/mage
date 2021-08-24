@@ -61,9 +61,9 @@ class CriticalHitTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DieRolledEvent dieRolledEvent = (DieRolledEvent) event;
+        DieRolledEvent drEvent = (DieRolledEvent) event;
         return isControlledBy(event.getPlayerId())
-                && dieRolledEvent.getAmount() - dieRolledEvent.getModifier() == 20;
+                && drEvent.getNaturalResult() == 20;
     }
 
     @Override

@@ -16,6 +16,7 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -105,8 +106,11 @@ class HammerJammerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (this.isControlledBy(event.getPlayerId()) && event.getAmount() > 0) {
-            this.getEffects().setValue("rolled", event.getAmount());
+        DieRolledEvent drEvent = (DieRolledEvent) event;
+        // silver border card must look for "result" instead "natural result"
+        // planar die will trigger it with 0 amount
+        if (this.isControlledBy(drEvent.getPlayerId())) {
+            this.getEffects().setValue("rolled", drEvent.getResult());
             return true;
         }
         return false;
@@ -139,10 +143,12 @@ class HammerJammerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            if (getValue("rolled") != null) {
-                int amount = (Integer) getValue("rolled");
+            Integer amount = (Integer) getValue("rolled");
+            if (amount != null) {
                 permanent.removeCounters(CounterType.P1P1.createInstance(permanent.getCounters(game).getCount(CounterType.P1P1)), source, game);
-                permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
+                if (amount > 0) {
+                    permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
+                }
                 return true;
             }
         }

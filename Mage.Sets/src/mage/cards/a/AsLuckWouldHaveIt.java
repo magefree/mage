@@ -11,6 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.game.Game;
+import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -66,11 +67,16 @@ class AsLuckWouldHaveItTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!this.isControlledBy(event.getPlayerId()) || event.getAmount() < 1) {
-            return false;
+        DieRolledEvent drEvent = (DieRolledEvent) event;
+        // Any die roll with a numerical result will add luck counters to As Luck Would Have It.
+        // Rolling the planar die will not cause the second ability to trigger.
+        // (2018-01-19)
+        if (this.isControlledBy(event.getPlayerId()) && drEvent.getResult() > 0) {
+            // silver border card must look for "result" instead "natural result"
+            this.getEffects().setValue("rolled", drEvent.getResult());
+            return true;
         }
-        this.getEffects().setValue("rolled", event.getAmount());
-        return true;
+        return false;
     }
 
     @Override

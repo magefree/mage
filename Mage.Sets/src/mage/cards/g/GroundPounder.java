@@ -14,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -101,7 +102,8 @@ class GroundPounderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return this.isControlledBy(event.getPlayerId()) && event.getAmount() >= 5;
+        DieRolledEvent drEvent = (DieRolledEvent) event;
+        return this.isControlledBy(event.getPlayerId()) && drEvent.getNaturalResult() >= 5;
     }
 
     @Override

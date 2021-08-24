@@ -84,7 +84,7 @@ class TheBigIdeaReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((RollDieEvent) event).incrementBigIdea();
+        ((RollDieEvent) event).incBigIdea();
         discard();
         return true;
     }

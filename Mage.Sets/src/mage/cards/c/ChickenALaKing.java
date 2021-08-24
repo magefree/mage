@@ -88,9 +88,11 @@ class ChickenALaKingTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return this.isControlledBy(event.getPlayerId())
-                && event.getAmount() == 6
-                && ((DieRolledEvent) event).getSides() == 6;
+        DieRolledEvent drEvent = (DieRolledEvent) event;
+        // silver border card must look for "result" instead "natural result"
+        return this.isControlledBy(drEvent.getPlayerId())
+                && drEvent.getNaturalResult() == 6
+                && drEvent.getSides() == 6;
     }
 
     @Override

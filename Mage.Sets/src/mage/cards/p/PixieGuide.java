@@ -60,8 +60,8 @@ class PixieGuideEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         RollDiceEvent rollDiceEvent = (RollDiceEvent) event;
-        rollDiceEvent.increaseAmount();
-        rollDiceEvent.increaseToIgnore();
+        rollDiceEvent.incAmount(1);
+        rollDiceEvent.incIgnoreLowestAmount(1);
         return false;
     }
 

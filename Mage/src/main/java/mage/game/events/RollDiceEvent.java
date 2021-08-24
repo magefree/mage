@@ -9,7 +9,7 @@ import mage.util.CardUtil;
 public class RollDiceEvent extends GameEvent {
 
     private final int sides;
-    private int toIgnore = 0;
+    private int ignoreLowestAmount = 0; // ignore the lowest results
 
     public RollDiceEvent(int sides, int amount, Ability source) {
         super(EventType.ROLL_DICE, source.getControllerId(), source, source.getControllerId(), amount, false);
@@ -21,15 +21,15 @@ public class RollDiceEvent extends GameEvent {
         return sides;
     }
 
-    public void increaseAmount() {
-        this.amount = CardUtil.overflowInc(this.amount, 1);
+    public void incAmount(int additionalAmount) {
+        this.amount = CardUtil.overflowInc(this.amount, additionalAmount);
     }
 
-    public void increaseToIgnore() {
-        this.toIgnore = CardUtil.overflowInc(this.toIgnore, 1);
+    public void incIgnoreLowestAmount(int additionalCount) {
+        this.ignoreLowestAmount = CardUtil.overflowInc(this.ignoreLowestAmount, additionalCount);
     }
 
-    public int getToIgnore() {
-        return toIgnore;
+    public int getIgnoreLowestAmount() {
+        return ignoreLowestAmount;
     }
 }

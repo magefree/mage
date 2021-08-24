@@ -8,6 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.SquirrelToken;
 
@@ -57,7 +58,9 @@ class ChitteringDoomTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return this.isControlledBy(event.getPlayerId()) && event.getAmount() >= 4;
+        DieRolledEvent drEvent = (DieRolledEvent) event;
+        // silver border card must look for "result" instead "natural result"
+        return this.isControlledBy(event.getPlayerId()) && drEvent.getResult() >= 4;
     }
 
     @Override

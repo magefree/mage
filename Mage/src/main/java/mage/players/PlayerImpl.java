@@ -2865,13 +2865,23 @@ public abstract class PlayerImpl implements Player, Serializable {
         return this.rollDice(source, game, null, numSides, numDice, false);
     }
 
-    private static final class DieResult {
-        private final int result;
+    private static final class RollDieResult {
+
+        // 706.2.
+        // After the roll, the number indicated on the top face of the die before any modifiers is
+        // the natural result. The instruction may include modifiers to the roll which add to or
+        // subtract from the natural result. Modifiers may also come from other sources. After
+        // considering all applicable modifiers, the final number is the result of the die roll.
+        private final int naturalResult;
         private final int modifier;
 
-        DieResult(int result, int modifier) {
-            this.result = result;
+        RollDieResult(int naturalResult, int modifier) {
+            this.naturalResult = naturalResult;
             this.modifier = modifier;
+        }
+
+        public int getResult() {
+            return this.naturalResult + this.modifier;
         }
     }
 
@@ -2893,20 +2903,24 @@ public abstract class PlayerImpl implements Player, Serializable {
         return rollDieResult(numSides, game);
     }
 
-    private int applySingleDieReplacement(int numSides, int multiplier, Ability source, Game game) {
-        if (multiplier == 1) {
+    private int applySingleDieReplacement(int numSides, int rollsAmount, Ability source, Game game) {
+        if (rollsAmount == 1) {
             return rollDieWithReplacement(numSides, source, game);
         }
         Set<Integer> choices = new HashSet<>();
-        for (int j = 0; j < multiplier; j++) {
+        for (int j = 0; j < rollsAmount; j++) {
             choices.add(rollDieWithReplacement(numSides, source, game));
         }
         if (choices.size() == 1) {
             return choices.stream().findFirst().orElse(0);
         }
+
+        // TODO: add AI hint
+
         Choice choice = new ChoiceImpl(true);
-        choice.setMessage("Choose which die roll to keep (the rest will be ignored)");
+        choice.setMessage("Choose which die roll result to keep (the rest will be ignored)");
         choice.setChoices(choices.stream().sorted().map(x -> "" + x).collect(Collectors.toSet()));
+
         this.choose(Outcome.Neutral, choice, game);
         if (choice.getChoice() != null) {
             return Integer.parseInt(choice.getChoice());
@@ -2926,64 +2940,84 @@ public abstract class PlayerImpl implements Player, Serializable {
     public List<Integer> rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides, int numDice, boolean ignoreLowest) {
         RollDiceEvent rollDiceEvent = new RollDiceEvent(numSides, numDice, source);
         if (ignoreLowest) {
-            rollDiceEvent.increaseToIgnore();
+            // TODO: remove unused?
+            rollDiceEvent.incIgnoreLowestAmount(1);
         }
         game.replaceEvent(rollDiceEvent);
-        List<Integer> results = new ArrayList<>();
-        List<DieResult> dieRolls = new ArrayList<>();
+
+        // roll multiple dies
+        // results amount can be less than a rolls amount (example: The Big Idea allows rolling 2x instead 1x)
+        List<Integer> dieResults = new ArrayList<>();
+        List<RollDieResult> dieRolls = new ArrayList<>();
         for (int i = 0; i < rollDiceEvent.getAmount(); i++) {
+            // roll single die
             RollDieEvent rollDieEvent = new RollDieEvent(numSides, source);
             game.replaceEvent(rollDieEvent);
-            int result;
+            int naturalResult;
             if (rollDieEvent.getBigIdea() > 0) {
+                // rolls 2x + sum results
+                // TODO: change big idea logic to replace effect logic with REPLACE_ROLLED_DIE?
                 int singleResult = 0;
                 for (int j = 0; j < rollDieEvent.getBigIdea(); j++) {
-                    singleResult += applySingleDieReplacement(numSides, rollDieEvent.getMultiplier(), source, game);
-                    dieRolls.add(new DieResult(singleResult, rollDieEvent.getModifier()));
+                    singleResult += applySingleDieReplacement(numSides, rollDieEvent.getRollsAmount(), source, game);
+                    dieRolls.add(new RollDieResult(singleResult, rollDieEvent.getResultModifier()));
                 }
-                result = singleResult;
+                naturalResult = singleResult;
             } else {
-                result = applySingleDieReplacement(numSides, rollDieEvent.getMultiplier(), source, game);
-                dieRolls.add(new DieResult(result, rollDieEvent.getModifier()));
+                // rolls 1x
+                naturalResult = applySingleDieReplacement(numSides, rollDieEvent.getRollsAmount(), source, game);
+                dieRolls.add(new RollDieResult(naturalResult, rollDieEvent.getResultModifier()));
             }
-            results.add(result + rollDieEvent.getModifier());
+            dieResults.add(naturalResult + rollDieEvent.getResultModifier());
         }
-        if (rollDiceEvent.getToIgnore() > 0) {
-            List<Integer> toIgnore = new ArrayList<>();
-            for (int i = 0; i < rollDiceEvent.getToIgnore(); i++) {
-                int min = results.stream().mapToInt(x -> x).min().orElse(0);
-                results.remove(Integer.valueOf(min));
-                toIgnore.add(min);
+
+        // ignore the lowest results
+        // 706.5.
+        // If a player is instructed to roll two or more dice and ignore the lowest roll, the roll
+        // that yielded the lowest result is considered to have never happened. No abilities trigger
+        // because of the ignored roll, and no effects apply to that roll. If multiple results are tied
+        // for the lowest, the player chooses one of those rolls to be ignored.
+        if (rollDiceEvent.getIgnoreLowestAmount() > 0) {
+            List<Integer> ignoredResults = new ArrayList<>();
+            for (int i = 0; i < rollDiceEvent.getIgnoreLowestAmount(); i++) {
+                int min = dieResults.stream().mapToInt(x -> x).min().orElse(0);
+                dieResults.remove(Integer.valueOf(min));
+                ignoredResults.add(min);
             }
-            List<DieResult> newRolls = new ArrayList<>();
-            for (DieResult dieResult : dieRolls) {
-                if (toIgnore.contains(dieResult.result)) {
-                    toIgnore.remove((Integer) dieResult.result);
+            // remove 1x die by 1x result
+            // TODO: no need in player choices?
+            List<RollDieResult> newRolls = new ArrayList<>();
+            for (RollDieResult rollDieResult : dieRolls) {
+                if (ignoredResults.contains(rollDieResult.getResult())) {
+                    ignoredResults.remove((Integer) rollDieResult.getResult());
                 } else {
-                    newRolls.add(dieResult);
+                    newRolls.add(rollDieResult);
                 }
             }
             dieRolls.clear();
             dieRolls.addAll(newRolls);
         }
-        for (DieResult result : dieRolls) {
-            game.fireEvent(new DieRolledEvent(numSides, result.result, result.modifier, source));
+
+        // raise affected roll events
+        for (RollDieResult result : dieRolls) {
+            game.fireEvent(new DieRolledEvent(numSides, result.naturalResult, result.modifier, source));
         }
-        game.fireEvent(new DiceRolledEvent(numSides, results, source));
-        if (results.size() > 1) {
+        game.fireEvent(new DiceRolledEvent(numSides, dieResults, source));
+
+        if (dieResults.size() > 1) {
             game.informPlayers(
-                    "[Roll a die] " + getLogName() + " rolled " + results.size() + " " + numSides
+                    "[Roll a die] " + getLogName() + " rolled " + dieResults.size() + " " + numSides
                             + " sided dice and got the following results: "
-                            + String.join(", ", results.stream().map(x -> "" + x).collect(Collectors.toSet()))
+                            + String.join(", ", dieResults.stream().map(x -> "" + x).collect(Collectors.toSet()))
                             + CardUtil.getSourceLogName(game, source)
             );
         } else {
             game.informPlayers(
                     "[Roll a die] " + getLogName() + " rolled a " + numSides + " sided die and got "
-                            + results.get(0) + CardUtil.getSourceLogName(game, source)
+                            + dieResults.get(0) + CardUtil.getSourceLogName(game, source)
             );
         }
-        return results;
+        return dieResults;
     }
 
     @Override
