@@ -152,6 +152,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lumbering Falls", 247, Rarity.RARE, mage.cards.l.LumberingFalls.class));
         cards.add(new SetCardInfo("Maddening Hex", 32, Rarity.RARE, mage.cards.m.MaddeningHex.class));
         cards.add(new SetCardInfo("Magmaquake", 133, Rarity.RARE, mage.cards.m.Magmaquake.class));
+        cards.add(new SetCardInfo("Mantle of the Ancients", 8, Rarity.RARE, mage.cards.m.MantleOfTheAncients.class));
         cards.add(new SetCardInfo("Marionette Master", 102, Rarity.RARE, mage.cards.m.MarionetteMaster.class));
         cards.add(new SetCardInfo("Masterwork of Ingenuity", 209, Rarity.RARE, mage.cards.m.MasterworkOfIngenuity.class));
         cards.add(new SetCardInfo("Merfolk Looter", 86, Rarity.UNCOMMON, mage.cards.m.MerfolkLooter.class));
