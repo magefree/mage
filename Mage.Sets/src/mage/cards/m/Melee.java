@@ -37,7 +37,7 @@ public final class Melee extends CardImpl {
             new IsPhaseCondition(TurnPhase.COMBAT),
             MyTurnCondition.instance
     );
-    private static final Hint hint = new ConditionHint(condition, "Can cast melee (it's combat phase on your turn)");
+    private static final Hint hint = new ConditionHint(condition, "Can be cast");
 
     public Melee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");
