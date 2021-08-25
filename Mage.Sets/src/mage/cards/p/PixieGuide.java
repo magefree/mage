@@ -7,10 +7,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.RollDiceEvent;
@@ -59,15 +56,16 @@ class PixieGuideEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        RollDiceEvent rollDiceEvent = (RollDiceEvent) event;
-        rollDiceEvent.incAmount(1);
-        rollDiceEvent.incIgnoreLowestAmount(1);
+        RollDiceEvent rdEvent = (RollDiceEvent) event;
+        rdEvent.incAmount(1);
+        rdEvent.incIgnoreLowestAmount(1);
         return false;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ROLL_DICE;
+        return event.getType() == GameEvent.EventType.ROLL_DICE
+                && ((RollDiceEvent) event).getRollDieType() == RollDieType.NUMERICAL;
     }
 
     @Override

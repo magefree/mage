@@ -42,7 +42,9 @@ public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
         int maxRoll = ((DiceRolledEvent) event)
                 .getResults()
                 .stream()
-                .mapToInt(x -> x)
+                .filter(Integer.class::isInstance) // only numerical die result can be masured
+                .map(Integer.class::cast)
+                .mapToInt(Integer::intValue)
                 .max()
                 .orElse(0);
         this.getEffects().setValue("maxDieRoll", maxRoll);

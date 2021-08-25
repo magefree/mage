@@ -4,7 +4,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Planes;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -432,7 +431,6 @@ public class RollDiceTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: planar code must be integrated to normal dice code
     public void test_PlanarDice_AdditionalRoll_WithChoose_MustWork() {
         // If you would roll a die, instead roll two of those dice and ignore one of those results.
         addCard(Zone.BATTLEFIELD, playerA, "Krark's Other Thumb", 1);
@@ -444,7 +442,7 @@ public class RollDiceTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}: Roll the planar");
         setDieRollResult(playerA, 4); // first roll as blank
         setDieRollResult(playerA, 1); // second roll as chaos
-        setChoice(playerA, "1"); // must choose result
+        setChoice(playerA, "Chaos Roll"); // must choose result
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         setStrictChooseMode(true);

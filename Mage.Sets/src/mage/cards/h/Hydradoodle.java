@@ -91,7 +91,7 @@ class HydradoodleEffect extends OneShotEffect {
                     && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
                 int amount = spellAbility.getManaCostsToPay().getX();
                 if (amount > 0) {
-                    int total = controller.rollDice(source, game, 6, amount).stream().mapToInt(x -> x).sum();
+                    int total = controller.rollDice(source, game, 6, amount, 0).stream().mapToInt(x -> x).sum();
                     permanent.addCounters(CounterType.P1P1.createInstance(total), source.getControllerId(), source, game);
                 }
             }

@@ -5,10 +5,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.RollDieEvent;
@@ -56,7 +53,8 @@ class SquirrelPoweredSchemeEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ROLL_DIE;
+        return event.getType() == GameEvent.EventType.ROLL_DIE
+                && ((RollDieEvent) event).getRollDieType() == RollDieType.NUMERICAL;
     }
 
     @Override

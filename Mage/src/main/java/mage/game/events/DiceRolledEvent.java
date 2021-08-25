@@ -11,9 +11,9 @@ import java.util.List;
 public class DiceRolledEvent extends GameEvent {
 
     private final int sides;
-    private final List<Integer> results = new ArrayList<>();
+    private final List<Object> results = new ArrayList<>(); // Integer for numerical and PlanarDieRollResult for planar
 
-    public DiceRolledEvent(int sides, List<Integer> results, Ability source) {
+    public DiceRolledEvent(int sides, List<Object> results, Ability source) {
         super(EventType.DICE_ROLLED, source.getControllerId(), source, source.getControllerId());
         this.sides = sides;
         this.results.addAll(results);
@@ -23,7 +23,7 @@ public class DiceRolledEvent extends GameEvent {
         return sides;
     }
 
-    public List<Integer> getResults() {
+    public List<Object> getResults() {
         return results;
     }
 }

@@ -66,7 +66,7 @@ class ArcaneEndeavorEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        List<Integer> results = player.rollDice(source, game, 8, 2);
+        List<Integer> results = player.rollDice(source, game, 8, 2, 0);
         int firstResult = results.get(0);
         int secondResult = results.get(1);
         int first, second;

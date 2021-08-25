@@ -4,7 +4,7 @@ package mage.constants;
  *
  * @author spjspj
  */
-public enum PlanarDieRoll {
+public enum PlanarDieRollResult {
 
     BLANK_ROLL("Blank Roll"),
     CHAOS_ROLL("Chaos Roll"),
@@ -12,7 +12,7 @@ public enum PlanarDieRoll {
 
     private final String text;
 
-    PlanarDieRoll(String text) {
+    PlanarDieRollResult(String text) {
         this.text = text;
     }
 

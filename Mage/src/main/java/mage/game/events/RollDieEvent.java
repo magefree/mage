@@ -1,6 +1,7 @@
 package mage.game.events;
 
 import mage.abilities.Ability;
+import mage.constants.RollDieType;
 import mage.util.CardUtil;
 
 /**
@@ -8,13 +9,16 @@ import mage.util.CardUtil;
  */
 public class RollDieEvent extends GameEvent {
 
+    private final RollDieType rollDieType;
     private final int sides;
+
     private int resultModifier = 0;
     private int rollsAmount = 1; // rolls X times and choose result from it
     private int bigIdeaRollsAmount = 0; // rolls 2x and sum result
 
-    public RollDieEvent(int sides, Ability source) {
+    public RollDieEvent(Ability source, RollDieType rollDieType, int sides) {
         super(EventType.ROLL_DIE, source.getControllerId(), source, source.getControllerId());
+        this.rollDieType = rollDieType;
         this.sides = sides;
     }
 
@@ -24,6 +28,10 @@ public class RollDieEvent extends GameEvent {
 
     public void incResultModifier(int modifier) {
         this.resultModifier = CardUtil.overflowInc(this.resultModifier, modifier);
+    }
+
+    public RollDieType getRollDieType() {
+        return rollDieType;
     }
 
     public int getSides() {

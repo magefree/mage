@@ -65,7 +65,7 @@ class FreeRangeChickenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            List<Integer> results = controller.rollDice(source, game, 6, 2);
+            List<Integer> results = controller.rollDice(source, game, 6, 2, 0);
             int firstRoll = results.get(0);
             int secondRoll = results.get(1);
             if (firstRoll == secondRoll) {

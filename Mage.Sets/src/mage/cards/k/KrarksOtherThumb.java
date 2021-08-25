@@ -52,6 +52,7 @@ class KrarksOtherThumbEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        // support any roll type
         RollDieEvent rollDieEvent = (RollDieEvent) event;
         rollDieEvent.doubleRollsAmount();
         return false;

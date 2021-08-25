@@ -2440,7 +2440,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 userData.resetRequestedHandPlayersList(game.getId()); // users can send request again
                 break;
         }
-        logger.trace("PASS Priority: " + playerAction.toString());
+        logger.trace("PASS Priority: " + playerAction);
     }
 
     @Override
@@ -2856,14 +2856,20 @@ public abstract class PlayerImpl implements Player, Serializable {
         // considering all applicable modifiers, the final number is the result of the die roll.
         private final int naturalResult;
         private final int modifier;
+        private final PlanarDieRollResult planarResult;
 
-        RollDieResult(int naturalResult, int modifier) {
+        RollDieResult(int naturalResult, int modifier, PlanarDieRollResult planarResult) {
             this.naturalResult = naturalResult;
             this.modifier = modifier;
+            this.planarResult = planarResult;
         }
 
         public int getResult() {
             return this.naturalResult + this.modifier;
+        }
+
+        public PlanarDieRollResult getPlanarResult() {
+            return this.planarResult;
         }
     }
 
@@ -2872,42 +2878,85 @@ public abstract class PlayerImpl implements Player, Serializable {
         return RandomUtil.nextInt(sides) + 1;
     }
 
-    private int rollDieWithReplacement(int numSides, Ability source, Game game) {
-        int result = rollDieResult(numSides, game);
-        // currently only used for Clam-I-Am
-        if (numSides != 6
-                || result != 3
-                || !game.replaceEvent(GameEvent.getEvent(
-                GameEvent.EventType.REPLACE_ROLLED_DIE, source.getControllerId(), source, source.getControllerId()
-        )) || !chooseUse(Outcome.Neutral, "Re-roll the 3?", source, game)) {
-            return result;
-        }
-        return rollDieResult(numSides, game);
-    }
-
-    private int rollDieSingle(int numSides, int rollsAmount, Ability source, Game game) {
+    /**
+     * Roll single die. Support both die types: planar and numerical.
+     *
+     * @param game
+     * @param source
+     * @param rollDieType
+     * @param sidesAmount
+     * @param chaosSidesAmount
+     * @param planarSidesAmount
+     * @param rollsAmount
+     * @return
+     */
+    private Object rollDieInner(Game game, Ability source, RollDieType rollDieType,
+                                int sidesAmount, int chaosSidesAmount, int planarSidesAmount, int rollsAmount) {
         if (rollsAmount == 1) {
-            return rollDieWithReplacement(numSides, source, game);
+            return rollDieInnerWithReplacement(game, source, rollDieType, sidesAmount, chaosSidesAmount, planarSidesAmount);
         }
-        Set<Integer> choices = new HashSet<>();
+        Set<Object> choices = new HashSet<>();
         for (int j = 0; j < rollsAmount; j++) {
-            choices.add(rollDieWithReplacement(numSides, source, game));
+            choices.add(rollDieInnerWithReplacement(game, source, rollDieType, sidesAmount, chaosSidesAmount, planarSidesAmount));
         }
         if (choices.size() == 1) {
             return choices.stream().findFirst().orElse(0);
         }
 
-        // TODO: add AI hint
+        // TODO: add AI hint here
 
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Choose which die roll result to keep (the rest will be ignored)");
-        choice.setChoices(choices.stream().sorted().map(x -> "" + x).collect(Collectors.toSet()));
+        choice.setChoices(choices.stream().sorted().map(Object::toString).collect(Collectors.toSet()));
 
         this.choose(Outcome.Neutral, choice, game);
-        if (choice.getChoice() != null) {
-            return Integer.parseInt(choice.getChoice());
-        } else {
-            return choices.iterator().next();
+        Object defaultChoice = choices.iterator().next();
+        return choices.stream()
+                .filter(o -> o.toString().equals(choice.getChoice()))
+                .findFirst()
+                .orElse(defaultChoice);
+    }
+
+    private Object rollDieInnerWithReplacement(Game game, Ability source, RollDieType rollDieType, int numSides, int numChaosSides, int numPlanarSides) {
+        switch (rollDieType) {
+
+            case NUMERICAL: {
+                int result = rollDieResult(numSides, game);
+                // Clam-I-Am workaround:
+                // If you roll a 3 on a six-sided die, you may reroll that die.
+                if (numSides == 6
+                        && result == 3
+                        && game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.REPLACE_ROLLED_DIE, source.getControllerId(), source, source.getControllerId()))
+                        && chooseUse(Outcome.Neutral, "Re-roll the 3?", source, game)) {
+                    result = rollDieResult(numSides, game);
+                }
+                return result;
+            }
+
+            case PLANAR: {
+                if (numChaosSides + numPlanarSides > numSides) {
+                    numChaosSides = GameOptions.PLANECHASE_PLANAR_DIE_CHAOS_SIDES;
+                    numPlanarSides = GameOptions.PLANECHASE_PLANAR_DIE_PLANAR_SIDES;
+                }
+                // for 9 sides:
+                // 1..2 - chaos
+                // 3..7 - blank
+                // 8..9 - planar
+                int result = this.rollDieResult(numSides, game);
+                PlanarDieRollResult roll;
+                if (result <= numChaosSides) {
+                    roll = PlanarDieRollResult.CHAOS_ROLL;
+                } else if (result > numSides - numPlanarSides) {
+                    roll = PlanarDieRollResult.PLANAR_ROLL;
+                } else {
+                    roll = PlanarDieRollResult.BLANK_ROLL;
+                }
+                return roll;
+            }
+
+            default: {
+                throw new IllegalArgumentException("Unknown roll die type " + rollDieType);
+            }
         }
     }
 
@@ -2919,36 +2968,106 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @return the number that the player rolled
      */
     @Override
-    public List<Integer> rollDice(Ability source, Game game, int sidesAmount, int rollsAmount) {
-        RollDiceEvent rollDiceEvent = new RollDiceEvent(sidesAmount, rollsAmount, source);
+    public List<Integer> rollDice(Ability source, Game game, int sidesAmount, int rollsAmount, int ignoreLowestAmount) {
+        return rollDiceInner(source, game, RollDieType.NUMERICAL, sidesAmount, 0, 0, rollsAmount, ignoreLowestAmount)
+                .stream()
+                .map(Integer.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Inner code to roll a dice. Support normal and planar types.
+     *
+     * @param source
+     * @param game
+     * @param rollDieType        die type to roll, e.g. planar or numerical
+     * @param sidesAmount        sides per die
+     * @param chaosSidesAmount   for planar die: chaos sides
+     * @param planarSidesAmount  for planar die: planar sides
+     * @param rollsAmount        rolls
+     * @param ignoreLowestAmount for numerical die: ignore multiple rolls with the lowest values
+     * @return
+     */
+    private List<Object> rollDiceInner(Ability source, Game game, RollDieType rollDieType,
+                                       int sidesAmount, int chaosSidesAmount, int planarSidesAmount,
+                                       int rollsAmount, int ignoreLowestAmount) {
+        RollDiceEvent rollDiceEvent = new RollDiceEvent(source, rollDieType, sidesAmount, rollsAmount);
+        if (ignoreLowestAmount > 0) {
+            rollDiceEvent.incIgnoreLowestAmount(ignoreLowestAmount);
+        }
         game.replaceEvent(rollDiceEvent);
 
-        // roll multiple dices
+        // 706.6.
+        // In a Planechase game, rolling the planar die will cause any ability that triggers whenever a
+        // player rolls one or more dice to trigger. However, any effect that refers to a numerical
+        // result of a die roll, including ones that compare the results of that roll to other rolls
+        // or to a given number, ignores the rolling of the planar die. See rule 901, “Planechase.”
+
+        // ROLL MULTIPLE dies
         // results amount can be less than a rolls amount (example: The Big Idea allows rolling 2x instead 1x)
-        List<Integer> dieResults = new ArrayList<>();
+        List<Object> dieResults = new ArrayList<>();
         List<RollDieResult> dieRolls = new ArrayList<>();
         for (int i = 0; i < rollDiceEvent.getAmount(); i++) {
-            // roll single dice
-            RollDieEvent rollDieEvent = new RollDieEvent(rollDiceEvent.getSides(), source);
+            // ROLL SINGLE die
+            RollDieEvent rollDieEvent = new RollDieEvent(source, rollDiceEvent.getRollDieType(), rollDiceEvent.getSides());
             game.replaceEvent(rollDieEvent);
-            int naturalResult;
-            if (rollDieEvent.getBigIdeaRollsAmount() > 0) {
+
+            Object rollResult;
+            // big idea logic for numerical rolls only
+            if (rollDieEvent.getRollDieType() == RollDieType.NUMERICAL && rollDieEvent.getBigIdeaRollsAmount() > 0) {
                 // rolls 2x + sum results
                 // The Big Idea: roll two six-sided dice and use the total of those results
                 // TODO: change big idea logic to replace effect logic with REPLACE_ROLLED_DIE?
                 int totalSum = 0;
                 for (int j = 0; j < rollDieEvent.getBigIdeaRollsAmount() + 1; j++) {
-                    int singleResult = rollDieSingle(rollDieEvent.getSides(), rollDieEvent.getRollsAmount(), source, game);
+                    int singleResult = (Integer) rollDieInner(
+                            game,
+                            source,
+                            rollDieEvent.getRollDieType(),
+                            rollDieEvent.getSides(),
+                            chaosSidesAmount,
+                            planarSidesAmount,
+                            rollDieEvent.getRollsAmount());
                     totalSum += singleResult;
-                    dieRolls.add(new RollDieResult(singleResult, rollDieEvent.getResultModifier()));
+                    dieRolls.add(new RollDieResult(singleResult, rollDieEvent.getResultModifier(), null));
                 }
-                naturalResult = totalSum;
+                rollResult = totalSum;
             } else {
                 // rolls 1x
-                naturalResult = rollDieSingle(rollDieEvent.getSides(), rollDieEvent.getRollsAmount(), source, game);
-                dieRolls.add(new RollDieResult(naturalResult, rollDieEvent.getResultModifier()));
+                switch (rollDieEvent.getRollDieType()) {
+                    default:
+                    case NUMERICAL: {
+                        int naturalResult = (Integer) rollDieInner(
+                                game,
+                                source,
+                                rollDieEvent.getRollDieType(),
+                                rollDieEvent.getSides(),
+                                chaosSidesAmount,
+                                planarSidesAmount,
+                                rollDieEvent.getRollsAmount()
+                        );
+                        dieRolls.add(new RollDieResult(naturalResult, rollDieEvent.getResultModifier(), null));
+                        rollResult = naturalResult;
+                        break;
+                    }
+
+                    case PLANAR: {
+                        PlanarDieRollResult planarResult = (PlanarDieRollResult) rollDieInner(
+                                game,
+                                source,
+                                rollDieEvent.getRollDieType(),
+                                rollDieEvent.getSides(),
+                                chaosSidesAmount,
+                                planarSidesAmount,
+                                rollDieEvent.getRollsAmount()
+                        );
+                        dieRolls.add(new RollDieResult(0, 0, planarResult));
+                        rollResult = planarResult;
+                        break;
+                    }
+                }
             }
-            dieResults.add(naturalResult + rollDieEvent.getResultModifier());
+            dieResults.add(rollResult);
         }
 
         // ignore the lowest results
@@ -2959,15 +3078,15 @@ public abstract class PlayerImpl implements Player, Serializable {
         // that yielded the lowest result is considered to have never happened. No abilities trigger
         // because of the ignored roll, and no effects apply to that roll. If multiple results are tied
         // for the lowest, the player chooses one of those rolls to be ignored.
-        if (rollDiceEvent.getIgnoreLowestAmount() > 0) {
+        if (rollDiceEvent.getRollDieType() == RollDieType.NUMERICAL && rollDiceEvent.getIgnoreLowestAmount() > 0) {
+            // find ignored values
             List<Integer> ignoredResults = new ArrayList<>();
             for (int i = 0; i < rollDiceEvent.getIgnoreLowestAmount(); i++) {
-                int min = dieResults.stream().mapToInt(x -> x).min().orElse(0);
+                int min = dieResults.stream().map(Integer.class::cast).mapToInt(Integer::intValue).min().orElse(0);
                 dieResults.remove(Integer.valueOf(min));
                 ignoredResults.add(min);
             }
-            // remove 1x die by 1x result
-            // TODO: no need in player choices?
+            // remove ignored rolls (they not exist anymore)
             List<RollDieResult> newRolls = new ArrayList<>();
             for (RollDieResult rollDieResult : dieRolls) {
                 if (ignoredResults.contains(rollDieResult.getResult())) {
@@ -2982,77 +3101,51 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         // raise affected roll events
         for (RollDieResult result : dieRolls) {
-            game.fireEvent(new DieRolledEvent(rollDiceEvent.getSides(), result.naturalResult, result.modifier, source));
+            game.fireEvent(new DieRolledEvent(source, rollDiceEvent.getRollDieType(), rollDiceEvent.getSides(), result.naturalResult, result.modifier, result.planarResult));
         }
         game.fireEvent(new DiceRolledEvent(rollDiceEvent.getSides(), dieResults, source));
 
-        if (dieResults.size() > 1) {
-            game.informPlayers(
-                    "[Roll a die] " + getLogName() + " rolled " + dieResults.size() + " d" + rollDiceEvent.getSides()
-                            + " dice and got: "
-                            + String.join(", ", dieResults.stream().map(x -> "" + x).collect(Collectors.toSet()))
-                            + CardUtil.getSourceLogName(game, source)
-            );
-        } else {
-            game.informPlayers(
-                    "[Roll a die] " + getLogName() + " rolled a d" + rollDiceEvent.getSides()
-                            + " dice and got: "
-                            + dieResults.get(0) + CardUtil.getSourceLogName(game, source)
-            );
+        String message;
+        switch (rollDiceEvent.getRollDieType()) {
+            default:
+            case NUMERICAL:
+                // [Roll a die] user rolled 2x d6 and got [1, 4] (source: xxx)
+                message = String.format("[Roll a die] %s rolled %s %s and got [%s]%s",
+                        getLogName(),
+                        (dieResults.size() > 1 ? dieResults.size() + "x" : "a"),
+                        "d" + rollDiceEvent.getSides(),
+                        dieResults.stream().map(Object::toString).collect(Collectors.joining(", ")),
+                        CardUtil.getSourceLogName(game, source));
+                break;
+            case PLANAR:
+                // [Roll a planar die] user rolled CHAOS (source: xxx)
+                message = String.format("[Roll a planar die] %s rolled [%s]%s",
+                        getLogName(),
+                        dieResults.stream().map(Object::toString).collect(Collectors.joining(", ")),
+                        CardUtil.getSourceLogName(game, source));
+                break;
         }
+        game.informPlayers(message);
         return dieResults;
     }
 
     /**
+     * @param source
      * @param game
-     * @param numberChaosSides  The number of chaos sides the planar die
+     * @param chaosSidesAmount  The number of chaos sides the planar die
      *                          currently has (normally 1 but can be 5)
-     * @param numberPlanarSides The number of chaos sides the planar die
+     * @param planarSidesAmount The number of chaos sides the planar die
      *                          currently has (normally 1)
      * @return the outcome that the player rolled. Either ChaosRoll, PlanarRoll
      * or BlankRoll
      */
     @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
-        int maxSides = GameOptions.PLANECHASE_PLANAR_DIE_TOTAL_SIDES;
-        int result = this.rollDieResult(maxSides, game);
-        PlanarDieRoll roll = PlanarDieRoll.BLANK_ROLL;
-        if (numberChaosSides + numberPlanarSides > maxSides) {
-            numberChaosSides = GameOptions.PLANECHASE_PLANAR_DIE_CHAOS_SIDES;
-            numberPlanarSides = GameOptions.PLANECHASE_PLANAR_DIE_PLANAR_SIDES;
-        }
-
-        // 1..2 - chaos
-        // 3..7 - blank
-        // 8..9 - planar
-        if (result <= numberChaosSides) {
-            roll = PlanarDieRoll.CHAOS_ROLL;
-        } else if (result > maxSides - numberPlanarSides) {
-            roll = PlanarDieRoll.PLANAR_ROLL;
-        }
-
-        game.informPlayers("[Roll the planar die] " + getLogName()
-                + " rolled a " + roll + " on the planar die" + CardUtil.getSourceLogName(game, source));
-
-        GameEvent event = new GameEvent(GameEvent.EventType.ROLL_PLANAR_DIE,
-                playerId, source, playerId, result, true);
-        event.setData(roll + "");
-        if (!game.replaceEvent(event)) {
-            GameEvent ge = new GameEvent(GameEvent.EventType.PLANAR_DIE_ROLLED,
-                    playerId, source, playerId, event.getAmount(), event.getFlag());
-            ge.setData(roll + "");
-            game.fireEvent(ge);
-        }
-
-        // 706.6.
-        // In a Planechase game, rolling the planar die will cause any ability that triggers whenever a
-        // player rolls one or more dice to trigger. However, any effect that refers to a numerical
-        // result of a die roll, including ones that compare the results of that roll to other rolls
-        // or to a given number, ignores the rolling of the planar die. See rule 901, “Planechase.”
-        game.fireEvent(new DieRolledEvent(maxSides, 0, 0, source));
-        game.fireEvent(new DiceRolledEvent(maxSides, Arrays.asList(0), source));
-
-        return roll;
+    public PlanarDieRollResult rollPlanarDie(Ability source, Game game, int chaosSidesAmount, int planarSidesAmount) {
+        return rollDiceInner(source, game, RollDieType.PLANAR, GameOptions.PLANECHASE_PLANAR_DIE_TOTAL_SIDES, chaosSidesAmount, planarSidesAmount, 1, 0)
+                .stream()
+                .map(o -> (PlanarDieRollResult) o)
+                .findFirst()
+                .orElse(PlanarDieRollResult.BLANK_ROLL);
     }
 
     @Override
@@ -3660,15 +3753,12 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             boolean canActivateAsHandZone = approvingObject != null
                     || (fromZone == Zone.GRAVEYARD && canPlayCardsFromGraveyard());
-            boolean possibleToPlay = false;
+            boolean possibleToPlay = canActivateAsHandZone
+                    && ability.getZone().match(Zone.HAND)
+                    && (isPlaySpell || isPlayLand);
 
             // spell/hand abilities (play from all zones)
             // need permitingObject or canPlayCardsFromGraveyard
-            if (canActivateAsHandZone
-                    && ability.getZone().match(Zone.HAND)
-                    && (isPlaySpell || isPlayLand)) {
-                possibleToPlay = true;
-            }
 
             // zone's abilities (play from specific zone)
             // no need in permitingObject
@@ -4396,7 +4486,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 break;
             default:
-                throw new UnsupportedOperationException("to Zone" + toZone.toString() + " not supported yet");
+                throw new UnsupportedOperationException("to Zone" + toZone + " not supported yet");
         }
         return !successfulMovedCards.isEmpty();
     }
