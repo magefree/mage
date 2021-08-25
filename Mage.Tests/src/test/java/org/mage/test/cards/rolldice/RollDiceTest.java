@@ -224,7 +224,7 @@ public class RollDiceTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}: Roll the planar");
         setDieRollResult(playerA, 1); // make chaos
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        // second chaos
+        // second chaos (with additional cost)
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}: Roll the planar");
         setDieRollResult(playerA, 1); // make chaos
 
@@ -234,6 +234,7 @@ public class RollDiceTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Eldrazi", 2);
+        assertTappedCount("Mountain", true, 1); // cost for second planar die
     }
 
     @Test
@@ -410,20 +411,86 @@ public class RollDiceTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
     public void test_PlanarDice_AdditionalRoll_WithLowest_MustIgnore() {
-        // TODO: add test
+        // If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.
+        addCard(Zone.BATTLEFIELD, playerA, "Barbarian Class", 2);
+        //
+        // Active player can roll the planar die: Whenever you roll {CHAOS}, create a 7/7 colorless Eldrazi creature with annhilator 1
+        addPlane(playerA, Planes.PLANE_HEDRON_FIELDS_OF_AGADEEM);
+
+        // roll planar die, but no triggers with double roll - cause it works with numerical results (lowest)
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}: Roll the planar");
+        setDieRollResult(playerA, 1); // only one roll, chaos
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Eldrazi", 1);
     }
 
     @Test
-    @Ignore
+    @Ignore // TODO: planar code must be integrated to normal dice code
     public void test_PlanarDice_AdditionalRoll_WithChoose_MustWork() {
-        // TODO: add test
+        // If you would roll a die, instead roll two of those dice and ignore one of those results.
+        addCard(Zone.BATTLEFIELD, playerA, "Krark's Other Thumb", 1);
+        //
+        // Active player can roll the planar die: Whenever you roll {CHAOS}, create a 7/7 colorless Eldrazi creature with annhilator 1
+        addPlane(playerA, Planes.PLANE_HEDRON_FIELDS_OF_AGADEEM);
+
+        // roll planar die, but no triggers with second roll - cause it works with numerical results (lowest)
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}: Roll the planar");
+        setDieRollResult(playerA, 4); // first roll as blank
+        setDieRollResult(playerA, 1); // second roll as chaos
+        setChoice(playerA, "1"); // must choose result
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Eldrazi", 1);
     }
 
     @Test
-    @Ignore
     public void test_PlanarDice_AdditionalRoll_WithBigIdea_MustIgnore() {
-        // TODO: add test
+        // see consts comments about planar die size
+        //Assert.assertEquals("Planar dice must be six sided", 6, GameOptions.PLANECHASE_PLANAR_DIE_TOTAL_SIDES);
+
+        // {2}{B/R}{B/R}, {T}: Roll a six-sided dice. Create a number of 1/1 red Brainiac creature tokens equal to the result.
+        // Tap three untapped Brainiacs you control: The next time you would roll a six-sided die,
+        // instead roll two six-sided dice and use the total of those results.
+        addCard(Zone.BATTLEFIELD, playerA, "The Big Idea", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        //
+        // Active player can roll the planar die: Whenever you roll {CHAOS}, create a 7/7 colorless Eldrazi creature with annhilator 1
+        addPlane(playerA, Planes.PLANE_HEDRON_FIELDS_OF_AGADEEM);
+
+        // prepare idea cost
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{B/R}{B/R}, {T}");
+        setDieRollResult(playerA, 3);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brainiac", 3);
+
+        // prepare idea effect
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tap three Brainiac");
+        setChoice(playerA, "Brainiac", 3);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // roll planar die, but no triggers with second roll - cause it works with numerical results (sum)
+        // or planar dice hasn't 6 sides
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}: Roll the planar");
+        setDieRollResult(playerA, 1); // only one roll, chaos
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Eldrazi", 1);
     }
 }
