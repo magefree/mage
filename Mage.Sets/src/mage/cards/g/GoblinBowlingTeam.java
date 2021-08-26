@@ -92,13 +92,13 @@ class GoblinBowlingTeamEffect extends ReplacementEffectImpl {
             if (damageEvent.getType() == GameEvent.EventType.DAMAGE_PLAYER) {
                 Player targetPlayer = game.getPlayer(event.getTargetId());
                 if (targetPlayer != null) {
-                    targetPlayer.damage(CardUtil.overflowInc(damageEvent.getAmount(), controller.rollDice(source, game, 6)), damageEvent.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
+                    targetPlayer.damage(CardUtil.overflowInc(damageEvent.getAmount(), controller.rollDice(Outcome.Benefit, source, game, 6)), damageEvent.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
                     return true;
                 }
             } else {
                 Permanent targetPermanent = game.getPermanent(event.getTargetId());
                 if (targetPermanent != null) {
-                    targetPermanent.damage(CardUtil.overflowInc(damageEvent.getAmount(), controller.rollDice(source, game, 6)), damageEvent.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
+                    targetPermanent.damage(CardUtil.overflowInc(damageEvent.getAmount(), controller.rollDice(Outcome.Benefit, source, game, 6)), damageEvent.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
                     return true;
                 }
             }

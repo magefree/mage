@@ -91,7 +91,7 @@ class NeverwinterHydraEffect extends OneShotEffect {
         if (xValue < 1) {
             return false;
         }
-        int amount = player.rollDice(source, game, 6, xValue, 0).stream().mapToInt(x -> x).sum();
+        int amount = player.rollDice(outcome, source, game, 6, xValue, 0).stream().mapToInt(x -> x).sum();
         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
         permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game, appliedEffects);
         return true;

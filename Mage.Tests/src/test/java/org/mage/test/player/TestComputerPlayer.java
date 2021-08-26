@@ -25,6 +25,9 @@ import java.util.UUID;
  * Example 2: TestPlayer's code uses outer computerPlayer call to flipCoin but flipCoin's inner code must call flipCoinResult from TestPlayer
  * <p>
  * Don't forget to add new methods in another classes like TestComputerPlayer7 or TestComputerPlayerMonteCarlo
+ * <p>
+ * If you implement set up of random results for tests (die roll, flip coin, etc) and want to support AI tests
+ * (same random results in simulated games) then override same methods in SimulatedPlayer2 too
  */
 
 public class TestComputerPlayer extends ComputerPlayer {
@@ -72,6 +75,15 @@ public class TestComputerPlayer extends ComputerPlayer {
             return super.rollDieResult(sides, game);
         } else {
             return testPlayerLink.rollDieResult(sides, game);
+        }
+    }
+
+    @Override
+    public boolean isComputer() {
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.isComputer();
+        } else {
+            return testPlayerLink.isComputer();
         }
     }
 }

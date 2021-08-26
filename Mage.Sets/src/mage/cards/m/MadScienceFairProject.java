@@ -64,7 +64,7 @@ class MadScienceFairProjectEffect extends OneShotEffect {
         if (controller == null || player == null) {
             return false;
         }
-        int amount = controller.rollDice(source, game, 6);
+        int amount = controller.rollDice(outcome, source, game, 6);
         Mana mana = amount <= 3 ? Mana.ColorlessMana(1) : ManaChoice.chooseAnyColor(player, game, 1);
         player.getManaPool().addMana(mana, game, source);
         return true;

@@ -68,7 +68,7 @@ class NetheresePuzzleWardEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        return player.scry(player.rollDice(source, game, 4), source, game);
+        return player.scry(player.rollDice(outcome, source, game, 4), source, game);
     }
 }
 

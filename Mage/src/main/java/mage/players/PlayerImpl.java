@@ -2881,6 +2881,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * Roll single die. Support both die types: planar and numerical.
      *
+     * @param outcome
      * @param game
      * @param source
      * @param rollDieType
@@ -2890,7 +2891,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param rollsAmount
      * @return
      */
-    private Object rollDieInner(Game game, Ability source, RollDieType rollDieType,
+    private Object rollDieInner(Outcome outcome, Game game, Ability source, RollDieType rollDieType,
                                 int sidesAmount, int chaosSidesAmount, int planarSidesAmount, int rollsAmount) {
         if (rollsAmount == 1) {
             return rollDieInnerWithReplacement(game, source, rollDieType, sidesAmount, chaosSidesAmount, planarSidesAmount);
@@ -2903,7 +2904,30 @@ public abstract class PlayerImpl implements Player, Serializable {
             return choices.stream().findFirst().orElse(0);
         }
 
-        // TODO: add AI hint here
+        // AI hint - use max/min values
+        if (this.isComputer()) {
+            if (rollDieType == RollDieType.NUMERICAL) {
+                // numerical
+                if (outcome.isGood()) {
+                    return choices.stream()
+                            .map(Integer.class::cast)
+                            .max(Comparator.naturalOrder())
+                            .orElse(null);
+                } else {
+                    return choices.stream()
+                            .map(Integer.class::cast)
+                            .min(Comparator.naturalOrder())
+                            .orElse(null);
+                }
+            } else {
+                // planar
+                // priority: chaos -> planar -> blank
+                return choices.stream()
+                        .map(PlanarDieRollResult.class::cast)
+                        .max(Comparator.comparingInt(PlanarDieRollResult::getAIPriority))
+                        .orElse(null);
+            }
+        }
 
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Choose which die roll result to keep (the rest will be ignored)");
@@ -2961,15 +2985,17 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     /**
+     * @param outcome
      * @param source
      * @param game
-     * @param sidesAmount number of sides the dice has
-     * @param rollsAmount number of tries to roll the dice
+     * @param sidesAmount        number of sides the dice has
+     * @param rollsAmount        number of tries to roll the dice
+     * @param ignoreLowestAmount remove the lowest rolls from the results
      * @return the number that the player rolled
      */
     @Override
-    public List<Integer> rollDice(Ability source, Game game, int sidesAmount, int rollsAmount, int ignoreLowestAmount) {
-        return rollDiceInner(source, game, RollDieType.NUMERICAL, sidesAmount, 0, 0, rollsAmount, ignoreLowestAmount)
+    public List<Integer> rollDice(Outcome outcome, Ability source, Game game, int sidesAmount, int rollsAmount, int ignoreLowestAmount) {
+        return rollDiceInner(outcome, source, game, RollDieType.NUMERICAL, sidesAmount, 0, 0, rollsAmount, ignoreLowestAmount)
                 .stream()
                 .map(Integer.class::cast)
                 .collect(Collectors.toList());
@@ -2978,6 +3004,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * Inner code to roll a dice. Support normal and planar types.
      *
+     * @param outcome
      * @param source
      * @param game
      * @param rollDieType        die type to roll, e.g. planar or numerical
@@ -2988,7 +3015,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param ignoreLowestAmount for numerical die: ignore multiple rolls with the lowest values
      * @return
      */
-    private List<Object> rollDiceInner(Ability source, Game game, RollDieType rollDieType,
+    private List<Object> rollDiceInner(Outcome outcome, Ability source, Game game, RollDieType rollDieType,
                                        int sidesAmount, int chaosSidesAmount, int planarSidesAmount,
                                        int rollsAmount, int ignoreLowestAmount) {
         RollDiceEvent rollDiceEvent = new RollDiceEvent(source, rollDieType, sidesAmount, rollsAmount);
@@ -3017,10 +3044,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (rollDieEvent.getRollDieType() == RollDieType.NUMERICAL && rollDieEvent.getBigIdeaRollsAmount() > 0) {
                 // rolls 2x + sum results
                 // The Big Idea: roll two six-sided dice and use the total of those results
-                // TODO: change big idea logic to replace effect logic with REPLACE_ROLLED_DIE?
                 int totalSum = 0;
                 for (int j = 0; j < rollDieEvent.getBigIdeaRollsAmount() + 1; j++) {
                     int singleResult = (Integer) rollDieInner(
+                            outcome,
                             game,
                             source,
                             rollDieEvent.getRollDieType(),
@@ -3038,6 +3065,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     default:
                     case NUMERICAL: {
                         int naturalResult = (Integer) rollDieInner(
+                                outcome,
                                 game,
                                 source,
                                 rollDieEvent.getRollDieType(),
@@ -3053,6 +3081,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                     case PLANAR: {
                         PlanarDieRollResult planarResult = (PlanarDieRollResult) rollDieInner(
+                                outcome,
                                 game,
                                 source,
                                 rollDieEvent.getRollDieType(),
@@ -3140,8 +3169,8 @@ public abstract class PlayerImpl implements Player, Serializable {
      * or BlankRoll
      */
     @Override
-    public PlanarDieRollResult rollPlanarDie(Ability source, Game game, int chaosSidesAmount, int planarSidesAmount) {
-        return rollDiceInner(source, game, RollDieType.PLANAR, GameOptions.PLANECHASE_PLANAR_DIE_TOTAL_SIDES, chaosSidesAmount, planarSidesAmount, 1, 0)
+    public PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int chaosSidesAmount, int planarSidesAmount) {
+        return rollDiceInner(outcome, source, game, RollDieType.PLANAR, GameOptions.PLANECHASE_PLANAR_DIE_TOTAL_SIDES, chaosSidesAmount, planarSidesAmount, 1, 0)
                 .stream()
                 .map(o -> (PlanarDieRollResult) o)
                 .findFirst()

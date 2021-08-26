@@ -68,7 +68,7 @@ class TempOfTheDamnedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return new AddCountersSourceEffect(CounterType.FUNK.createInstance(controller.rollDice(source, game, 6))).apply(game, source);
+            return new AddCountersSourceEffect(CounterType.FUNK.createInstance(controller.rollDice(Outcome.Benefit, source, game, 6))).apply(game, source);
         }
         return false;
     }

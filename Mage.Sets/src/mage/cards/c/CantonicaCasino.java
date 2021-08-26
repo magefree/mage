@@ -52,7 +52,7 @@ class CantonicaCasinoEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
             // Roll two six-sided dice
-            List<Integer> results = you.rollDice(source, game, 6, 2, 0);
+            List<Integer> results = you.rollDice(outcome, source, game, 6, 2, 0);
             int dice1 = results.get(0);
             int dice2 = results.get(1);
 

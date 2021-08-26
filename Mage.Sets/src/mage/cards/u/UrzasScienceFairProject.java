@@ -55,7 +55,7 @@ public final class UrzasScienceFairProject extends CardImpl {
 class UrzasScienceFairProjectEffect extends OneShotEffect {
 
     public UrzasScienceFairProjectEffect() {
-        super(Outcome.PutCreatureInPlay);
+        super(Outcome.Benefit);
         this.staticText = "Roll a six-sided die. {this} gets the indicated result. 1 - -2/-2 until end of turn. 2 - Prevent all combat damage it would deal this turn. 3 - gains vigilance until end of turn. 4 - gains first strike until end of turn. 5 - gains flying until end of turn. 6 - gets +2/+2 until end of turn";
     }
 
@@ -72,7 +72,7 @@ class UrzasScienceFairProjectEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int amount = controller.rollDice(source, game, 6);
+            int amount = controller.rollDice(outcome, source, game, 6);
 
             Effect effect = null;
             // 1 - -2/-2 until end of turn.

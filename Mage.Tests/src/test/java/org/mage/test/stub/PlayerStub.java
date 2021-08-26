@@ -641,7 +641,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public List<Integer> rollDice(Ability source, Game game, int numSides, int numDice, int ignoreLowestAmount) {
+    public List<Integer> rollDice(Outcome outcome, Ability source, Game game, int numSides, int numDice, int ignoreLowestAmount) {
         return null;
     }
 
@@ -1361,7 +1361,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public PlanarDieRollResult rollPlanarDie(Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
+    public PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

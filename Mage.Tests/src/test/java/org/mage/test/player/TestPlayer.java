@@ -3541,8 +3541,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public List<Integer> rollDice(Ability source, Game game, int numSides, int numDice, int ignoreLowestAmount) {
-        return computerPlayer.rollDice(source, game, numSides, numDice, ignoreLowestAmount);
+    public List<Integer> rollDice(Outcome outcome, Ability source, Game game, int numSides, int numDice, int ignoreLowestAmount) {
+        return computerPlayer.rollDice(outcome, source, game, numSides, numDice, ignoreLowestAmount);
     }
 
     @Override
@@ -4287,8 +4287,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public PlanarDieRollResult rollPlanarDie(Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
-        return computerPlayer.rollPlanarDie(source, game, numberChaosSides, numberPlanarSides);
+    public PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
+        return computerPlayer.rollPlanarDie(outcome, source, game, numberChaosSides, numberPlanarSides);
     }
 
     @Override

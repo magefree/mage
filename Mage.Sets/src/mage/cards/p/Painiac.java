@@ -66,7 +66,7 @@ class PainiacEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            int amount = controller.rollDice(source, game, 6);
+            int amount = controller.rollDice(outcome, source, game, 6);
             game.addEffect(new BoostSourceEffect(amount, 0, Duration.EndOfTurn), source);
             return true;
         }

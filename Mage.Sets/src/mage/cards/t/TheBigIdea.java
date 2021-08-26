@@ -123,7 +123,7 @@ class TheBigIdeaEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int amount = controller.rollDice(source, game, 6);
+        int amount = controller.rollDice(outcome, source, game, 6);
         return new BrainiacToken().putOntoBattlefield(amount, game, source, source.getControllerId());
     }
 }

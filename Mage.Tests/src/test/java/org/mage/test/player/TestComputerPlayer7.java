@@ -47,19 +47,22 @@ public class TestComputerPlayer7 extends ComputerPlayer7 {
 
     @Override
     public boolean flipCoinResult(Game game) {
-        if (testPlayerLink.canChooseByComputer()) {
-            return super.flipCoinResult(game);
-        } else {
-            return testPlayerLink.flipCoinResult(game);
-        }
+        // same random results must be same in any mode
+        return testPlayerLink.flipCoinResult(game);
     }
 
     @Override
     public int rollDieResult(int sides, Game game) {
+        // same random results must be same in any mode
+        return testPlayerLink.rollDieResult(sides, game);
+    }
+
+    @Override
+    public boolean isComputer() {
         if (testPlayerLink.canChooseByComputer()) {
-            return super.rollDieResult(sides, game);
+            return super.isComputer();
         } else {
-            return testPlayerLink.rollDieResult(sides, game);
+            return testPlayerLink.isComputer();
         }
     }
 }

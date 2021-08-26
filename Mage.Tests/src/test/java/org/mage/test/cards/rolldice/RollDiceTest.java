@@ -5,14 +5,14 @@ import mage.constants.PhaseStep;
 import mage.constants.Planes;
 import mage.constants.Zone;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestPlayerBase;
+import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 import java.util.Arrays;
 
 /**
  * @author TheElk801, JayDi85
  */
-public class RollDiceTest extends CardTestPlayerBase {
+public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
 
     private static final String goblins = "Swarming Goblins";
     private static final String guide = "Pixie Guide";
@@ -490,5 +490,30 @@ public class RollDiceTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Eldrazi", 1);
+    }
+
+    @Test
+    public void test_AI_AdditionalRollChoose() {
+        // If you would roll a die, instead roll two of those dice and ignore one of those results.
+        addCard(Zone.BATTLEFIELD, playerA, "Krark's Other Thumb", 1);
+        //
+        // Roll a six-sided die. Create a number of 1/1 red Goblin creature tokens equal to the result.
+        addCard(Zone.HAND, playerA, "Box of Free-Range Goblins", 1); // {4}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+
+        // roll normal die and trigger 2x additional roll
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Box of Free-Range Goblins");
+        setDieRollResult(playerA, 3); // normal roll
+        setDieRollResult(playerA, 6); // additional roll
+        // AI must choose max value due good outcome
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin", 6);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
     }
 }

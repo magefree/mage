@@ -62,4 +62,13 @@ public class TestComputerPlayerMonteCarlo extends ComputerPlayerMCTS {
             return testPlayerLink.rollDieResult(sides, game);
         }
     }
+
+    @Override
+    public boolean isComputer() {
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.isComputer();
+        } else {
+            return testPlayerLink.isComputer();
+        }
+    }
 }
