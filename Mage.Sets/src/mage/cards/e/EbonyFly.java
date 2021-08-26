@@ -91,7 +91,7 @@ class EbonyFlyEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int result = player.rollDice(source, game, 6);
+        int result = player.rollDice(outcome, source, game, 6);
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null || !player.chooseUse(
                 outcome, "Have " + permanent.getName() + " become a "

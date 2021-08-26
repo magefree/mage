@@ -118,7 +118,7 @@ class MaddeningHexEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int result = controller.rollDice(source, game, 6);
+        int result = controller.rollDice(outcome, source, game, 6);
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             player.damage(result, source.getSourceId(), source, game);

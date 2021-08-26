@@ -83,7 +83,7 @@ class UnderdarkRiftEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
-        int result = player.rollDice(source, game, 10);
+        int result = player.rollDice(outcome, source, game, 10);
         player.putCardOnTopXOfLibrary(permanent, game, source, result + 1, true);
         return true;
     }

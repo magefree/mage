@@ -24,10 +24,7 @@ import mage.designations.DesignationType;
 import mage.filter.FilterCard;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.GameState;
-import mage.game.Graveyard;
-import mage.game.Table;
+import mage.game.*;
 import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
 import mage.game.events.GameEvent;
@@ -487,19 +484,21 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean flipCoin(Ability source, Game game, boolean winnable);
 
-    boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects);
-
     boolean flipCoinResult(Game game);
 
-    int rollDice(Ability source, Game game, int numSides);
+    default int rollDice(Outcome outcome, Ability source, Game game, int numSides) {
+        return rollDice(outcome, source, game, numSides, 1, 0).stream().findFirst().orElse(0);
+    }
 
-    int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides);
+    List<Integer> rollDice(Outcome outcome, Ability source, Game game, int numSides, int numDice, int ignoreLowestAmount);
 
-    PlanarDieRoll rollPlanarDie(Ability source, Game game);
+    int rollDieResult(int sides, Game game);
 
-    PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects);
+    default PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game) {
+        return rollPlanarDie(outcome, source, game, GameOptions.PLANECHASE_PLANAR_DIE_CHAOS_SIDES, GameOptions.PLANECHASE_PLANAR_DIE_PLANAR_SIDES);
+    }
 
-    PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides);
+    PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides);
 
     Card discardOne(boolean random, boolean payForCost, Ability source, Game game);
 

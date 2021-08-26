@@ -116,7 +116,7 @@ class RicochetEffect extends OneShotEffect {
             }
             do {
                 for (Player player : playerRolls.keySet()) {
-                    playerRolls.put(player, player.rollDice(source, game, 6));
+                    playerRolls.put(player, player.rollDice(Outcome.Detriment, source, game, 6)); // bad outcome - ai must choose lowest value
                 }
                 int minValueInMap = Collections.min(playerRolls.values());
                 for (Map.Entry<Player, Integer> mapEntry : new HashSet<>(playerRolls.entrySet())) {

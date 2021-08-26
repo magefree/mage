@@ -56,7 +56,7 @@ class GrowthSpurtEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int result = controller.rollDice(source, game, 6);
+            int result = controller.rollDice(outcome, source, game, 6);
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
                 ContinuousEffect effect = new BoostTargetEffect(result, result, Duration.EndOfTurn);

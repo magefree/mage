@@ -70,7 +70,7 @@ class StrategySchmategyffect extends OneShotEffect {
             // 5 - Each player discards their hand and draws seven cards.
             // 6 - Repeat this process two more times
             while (numTimesToDo > 0) {
-                int amount = controller.rollDice(source, game, 6);
+                int amount = controller.rollDice(Outcome.Detriment, source, game, 6); // ai must try to choose min
                 numTimesToDo--;
                 if (amount == 2) {
                     List<Permanent> artifactPermanents = game.getBattlefield().getActivePermanents(new FilterArtifactPermanent(), controller.getId(), game);

@@ -296,8 +296,9 @@ public class GameEvent implements Serializable {
         SURVEIL, SURVEILED,
         FATESEALED,
         FLIP_COIN, COIN_FLIPPED,
+        REPLACE_ROLLED_DIE, // for Clam-I-Am workaround only
+        ROLL_DIE, DIE_ROLLED,
         ROLL_DICE, DICE_ROLLED,
-        ROLL_PLANAR_DIE, PLANAR_DIE_ROLLED,
         PLANESWALK, PLANESWALKED,
         PAID_CUMULATIVE_UPKEEP,
         DIDNT_PAY_CUMULATIVE_UPKEEP,
@@ -621,7 +622,7 @@ public class GameEvent implements Serializable {
 
     /**
      * used to store which replacement effects were already applied to an event
-     * or or any modified events that may replace it
+     * or any modified events that may replace it
      * <p>
      * 614.5. A replacement effect doesn't invoke itself repeatedly; it gets
      * only one opportunity to affect an event or any modified events that may

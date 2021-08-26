@@ -107,7 +107,7 @@ class BagOfDevouringEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int result = player.rollDice(source, game, 10);
+        int result = player.rollDice(Outcome.Benefit, source, game, 10);
         TargetCard target = new TargetCardInExile(
                 0, result, StaticFilters.FILTER_CARD,
                 CardUtil.getExileZoneId(game, source)
