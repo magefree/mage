@@ -68,7 +68,7 @@ class DeadMansChestEffect extends OneShotEffect {
     public DeadMansChestEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile cards equal to its power from the top of its owner's library. "
-                + "You may cast nonland cards from among them as long as they remain exiled, "
+                + "You may cast spells from among those cards for as long as they remain exiled, "
                 + "and you may spend mana as though it were mana of any type to cast those spells";
     }
 

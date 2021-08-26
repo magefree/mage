@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.ZombieToken;
@@ -32,7 +31,7 @@ public final class LilianaHereticalHealer extends CardImpl {
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public LilianaHereticalHealer(UUID ownerId, CardSetInfo setInfo) {

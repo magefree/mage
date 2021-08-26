@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterStackObject;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.TargetPermanent;
@@ -35,7 +34,7 @@ public final class RebelInformer extends CardImpl {
 
     static {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
-        filterRebel.add(Predicates.not(TokenPredicate.instance));
+        filterRebel.add(TokenPredicate.FALSE);
         filterRebel.add(SubType.REBEL.getPredicate());
     }
 

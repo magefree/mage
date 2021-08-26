@@ -636,22 +636,17 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects) {
-        return false;
-    }
-
-    @Override
     public boolean flipCoinResult(Game game) {
         return false;
     }
 
     @Override
-    public int rollDice(Ability source, Game game, int numSides) {
-        return 1;
+    public List<Integer> rollDice(Outcome outcome, Ability source, Game game, int numSides, int numDice, int ignoreLowestAmount) {
+        return null;
     }
 
     @Override
-    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides) {
+    public int rollDieResult(int sides, Game game) {
         return 1;
     }
 
@@ -1366,17 +1361,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
+    public PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

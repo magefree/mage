@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -35,7 +34,7 @@ public final class TheGreatHenge extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public TheGreatHenge(UUID ownerId, CardSetInfo setInfo) {

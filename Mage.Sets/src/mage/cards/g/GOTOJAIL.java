@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -20,14 +19,15 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class GOTOJAIL extends CardImpl {
@@ -153,8 +153,9 @@ class GoToJailUpkeepEffect extends OneShotEffect {
             Player opponent = game.getPlayer(opponentId);
 
             if (opponent != null) {
-                int thisRoll = opponent.rollDice(source, game, 6);
-                int thatRoll = opponent.rollDice(source, game, 6);
+                List<Integer> results = opponent.rollDice(outcome, source, game, 6, 2, 0);
+                int thisRoll = results.get(0);
+                int thatRoll = results.get(1);
                 if (thisRoll == thatRoll) {
                     return permanent.sacrifice(source, game);
                 }

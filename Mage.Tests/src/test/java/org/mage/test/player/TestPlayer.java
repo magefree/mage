@@ -80,6 +80,7 @@ public class TestPlayer implements Player {
     public static final String NO_TARGET = "NO_TARGET"; // cast spell or activate ability without target defines
     public static final String FLIPCOIN_RESULT_TRUE = "[flipcoin_true]";
     public static final String FLIPCOIN_RESULT_FALSE = "[flipcoin_false]";
+    public static final String DIE_ROLL = "[die_roll]: ";
 
     private int maxCallsWithoutAction = 400;
     private int foundNoAction = 0;
@@ -99,8 +100,13 @@ public class TestPlayer implements Player {
     private final Map<String, UUID> aliases = new HashMap<>(); // aliases for game objects/players (use it for cards with same name to save and use)
     private final List<String> modesSet = new ArrayList<>();
 
-    private final ComputerPlayer computerPlayer;
-    private boolean strictChooseMode = false; // test will raise error on empty choice/target (e.g. devs must setup all choices/targets for all spells)
+    private final ComputerPlayer computerPlayer; // real player
+
+    // Strict mode for all choose dialogs:
+    // - enable checks for wrong or missing choice commands (you must set up all choices by unit test)
+    // - enable inner choice dialogs accessable by set up choices
+    //   (example: card call TestPlayer's choice, but it uses another choices, see docs in TestComputerPlayer)
+    private boolean strictChooseMode = false;
 
     private String[] groupsForTargetHandling = null;
 
@@ -342,7 +348,7 @@ public class TestPlayer implements Player {
         for (Player player : game.getPlayers().values()) {
             if (player.getName().equals(target)) {
                 if (ability.getTargets().isEmpty()) {
-                    throw new UnsupportedOperationException("Ability has no targets, but there is a player target set - " + ability.toString());
+                    throw new UnsupportedOperationException("Ability has no targets, but there is a player target set - " + ability);
                 }
                 if (ability.getTargets().get(0) instanceof TargetAmount) {
                     return true; // targetAmount have to be set by setTargetAmount in the test script
@@ -461,10 +467,10 @@ public class TestPlayer implements Player {
                 selectedMode = ability.getModes().getMode();
             }
             if (selectedMode == null) {
-                throw new UnsupportedOperationException("Mode not available for " + ability.toString());
+                throw new UnsupportedOperationException("Mode not available for " + ability);
             }
             if (selectedMode.getTargets().isEmpty()) {
-                throw new AssertionError("Ability has no targets. " + ability.toString());
+                throw new AssertionError("Ability has no targets. " + ability);
             }
             if (index >= selectedMode.getTargets().size()) {
                 break; // this can happen if targets should be set but can't be used because of hexproof e.g.
@@ -817,6 +823,13 @@ public class TestPlayer implements Player {
                         // check permanent counters: card name, counter type, count
                         if (params[0].equals(CHECK_COMMAND_PERMANENT_COUNTERS) && params.length == 4) {
                             assertPermanentCounters(action, game, computerPlayer, params[1], CounterType.findByName(params[2]), Integer.parseInt(params[3]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // check card counters: card name, counter type, count
+                        if (params[0].equals(CHECK_COMMAND_CARD_COUNTERS) && params.length == 4) {
+                            assertCardCounters(action, game, computerPlayer, params[1], CounterType.findByName(params[2]), Integer.parseInt(params[3]));
                             actions.remove(action);
                             wasProccessed = true;
                         }
@@ -1365,6 +1378,25 @@ public class TestPlayer implements Player {
         Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have " + count + " " + counterType.toString(), count, foundCount);
     }
 
+    private void assertCardCounters(PlayerAction action, Game game, Player player, String cardName, CounterType counterType, int count) {
+        int foundCount = 0;
+
+        Set<Card> allCards = new HashSet<>();
+
+        // collect possible cards from visible zones except library
+        allCards.addAll(player.getHand().getCards(game));
+        allCards.addAll(player.getGraveyard().getCards(game));
+        allCards.addAll(game.getExile().getAllCards(game));
+
+        for (Card card : allCards) {
+            if (hasObjectTargetNameOrAlias(card, cardName) && card.getOwnerId().equals(player.getId())) {
+                foundCount = card.getCounters(game).getCount(counterType);
+            }
+        }
+
+        Assert.assertEquals(action.getActionName() + " - card " + cardName + " must have " + count + " " + counterType.toString(), count, foundCount);
+    }
+
     private void assertExileCount(PlayerAction action, Game game, String permanentName, int count) {
         int foundCount = 0;
         for (Card card : game.getExile().getAllCards(game)) {
@@ -1465,9 +1497,9 @@ public class TestPlayer implements Player {
         }
 
         if (mustHave) {
-            Assert.assertEquals(action.getActionName() + " - must contain colors [" + searchColors.toString() + "] but found only [" + cardColor.toString() + "]", 0, colorsDontHave.size());
+            Assert.assertEquals(action.getActionName() + " - must contain colors [" + searchColors + "] but found only [" + cardColor.toString() + "]", 0, colorsDontHave.size());
         } else {
-            Assert.assertEquals(action.getActionName() + " - must not contain colors [" + searchColors.toString() + "] but found [" + cardColor.toString() + "]", 0, colorsHave.size());
+            Assert.assertEquals(action.getActionName() + " - must not contain colors [" + searchColors + "] but found [" + cardColor.toString() + "]", 0, colorsHave.size());
         }
     }
 
@@ -1558,7 +1590,7 @@ public class TestPlayer implements Player {
         Integer normal = player.getManaPool().getMana().get(manaType);
         Integer conditional = player.getManaPool().getConditionalMana().stream().mapToInt(a -> a.get(manaType)).sum(); // calcs FULL conditional mana, not real conditions
         Integer current = normal + conditional;
-        Assert.assertEquals(action.getActionName() + " - mana pool must contain [" + amount.toString() + " " + manaType.toString() + "], but found [" + current.toString() + "]", amount, current);
+        Assert.assertEquals(action.getActionName() + " - mana pool must contain [" + amount.toString() + " " + manaType + "], but found [" + current + "]", amount, current);
     }
 
     private void assertManaPool(PlayerAction action, Game game, Player player, String colors, Integer amount) {
@@ -1900,7 +1932,7 @@ public class TestPlayer implements Player {
     }
 
     private void chooseStrictModeFailed(String choiceType, Game game, String reason, boolean printAbilities) {
-        if (strictChooseMode && !AIRealGameSimulation) {
+        if (!this.canChooseByComputer()) {
             if (printAbilities) {
                 printStart("Available mana for " + computerPlayer.getName());
                 printMana(game, computerPlayer.getManaAvailable(game));
@@ -1952,13 +1984,25 @@ public class TestPlayer implements Player {
             return null;
         }
 
-        this.chooseStrictModeFailed("mode", game, getInfo(source, game));
+        StringBuilder modesInfo = new StringBuilder();
+        modesInfo.append("\nAvailable modes:");
+        int i = 1;
+        for (Mode mode : modes.getAvailableModes(source, game)) {
+            if (modesInfo.length() > 0) {
+                modesInfo.append("\n");
+            }
+            modesInfo.append(String.format("%d: %s", i, mode.getEffects().getText(mode)));
+            i++;
+        }
+
+        this.chooseStrictModeFailed("mode", game, getInfo(source, game) + modesInfo);
         return computerPlayer.chooseMode(modes, source, game);
     }
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         assertAliasSupportInChoices(false);
+
         if (!choices.isEmpty()) {
 
             // skip choices
@@ -2298,7 +2342,8 @@ public class TestPlayer implements Player {
                     || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)
                     || (target.getOriginalTarget() instanceof TargetAnyTarget)
                     || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer)
-                    || (target.getOriginalTarget() instanceof TargetDefender)) {
+                    || (target.getOriginalTarget() instanceof TargetDefender)
+                    || (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard)) {
                 for (String targetDefinition : targets) {
                     if (targetDefinition.startsWith("targetPlayer=")) {
                         continue;
@@ -2329,6 +2374,9 @@ public class TestPlayer implements Player {
                         }
                         if (filter instanceof FilterPlaneswalkerOrPlayer) {
                             filter = ((FilterPlaneswalkerOrPlayer) filter).getFilterPermanent();
+                        }
+                        if (filter instanceof FilterPermanentOrSuspendedCard) {
+                            filter = ((FilterPermanentOrSuspendedCard) filter).getPermanentFilter();
                         }
                         for (Permanent permanent : game.getBattlefield().getActivePermanents((FilterPermanent) filter, abilityControllerId, sourceId, game)) {
                             if (hasObjectTargetNameOrAlias(permanent, targetName) || (permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) { // TODO: remove exp code search?
@@ -2375,14 +2423,26 @@ public class TestPlayer implements Player {
             }
 
             // card in exile
-            if (target.getOriginalTarget() instanceof TargetCardInExile) {
-                TargetCardInExile targetFull = (TargetCardInExile) target.getOriginalTarget();
+            if (target.getOriginalTarget() instanceof TargetCardInExile
+                    || target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard) {
+
+                FilterCard filter = null;
+                if (target.getOriginalTarget().getFilter() instanceof FilterCard) {
+                    filter = (FilterCard) target.getOriginalTarget().getFilter();
+                } else if (target.getOriginalTarget().getFilter() instanceof FilterPermanentOrSuspendedCard) {
+                    filter = ((FilterPermanentOrSuspendedCard) target.getOriginalTarget().getFilter()).getCardFilter();
+                }
+                if (filter == null) {
+                    Assert.fail("Unsupported exile target filter in TestPlayer: "
+                            + target.getOriginalTarget().getClass().getCanonicalName());
+                }
+
                 for (String targetDefinition : targets) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
-                        for (Card card : game.getExile().getCards(targetFull.getFilter(), game)) {
+                        for (Card card : game.getExile().getCards(filter, game)) {
                             if (hasObjectTargetNameOrAlias(card, targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) { // TODO: remove set code search?
                                 if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
                                     target.addTarget(card.getId(), source, game);
@@ -2508,16 +2568,17 @@ public class TestPlayer implements Player {
             String message;
 
             if (source != null) {
-                message = this.getName() + " - Targets list was setup by addTarget with " + targets + ", but not used in ["
-                        + "card " + source.getSourceObject(game)
-                        + " -> ability " + source.getClass().getSimpleName() + " (" + source.getRule().substring(0, Math.min(20, source.getRule().length()) - 1) + "..." + ")"
-                        + " -> target " + target.getClass().getSimpleName() + " (" + target.getMessage() + ")"
-                        + "]";
+                message = this.getName() + " - Targets list was setup by addTarget with " + targets + ", but not used"
+                        + "\nCard: " + source.getSourceObject(game)
+                        + "\nAbility: " + source.getClass().getSimpleName() + " (" + source.getRule() + ")"
+                        + "\nTarget: " + target.getClass().getSimpleName() + " (" + target.getMessage() + ")"
+                        + "\nYou must implement target class support in TestPlayer or setup good targets";
             } else {
-                message = this.getName() + " - Targets list was setup by addTarget with " + targets + ", but not used in ["
-                        + "card XXX"
-                        + " -> target " + target.getClass().getSimpleName() + " (" + target.getMessage() + ")"
-                        + "]";
+                message = this.getName() + " - Targets list was setup by addTarget with " + targets + ", but not used"
+                        + "\nCard: unknown source"
+                        + "\nAbility: unknown source"
+                        + "\nTarget: " + target.getClass().getSimpleName() + " (" + target.getMessage() + ")"
+                        + "\nYou must implement target class support in TestPlayer or setup good targets";
             }
             Assert.fail(message);
         }
@@ -3134,12 +3195,13 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean isComputer() {
-        // all players in unit tests are computers, so you must use AIRealGameSimulation to test different logic (Human vs AI)
+        // all players in unit tests are computers, so it allows testing different logic (Human vs AI)
         if (isTestsMode()) {
+            // AIRealGameSimulation = true - full plyable AI
+            // AIRealGameSimulation = false - choose assisted AI (Human)
             return AIRealGameSimulation;
         } else {
             throw new IllegalStateException("Can't use test player outside of unit tests");
-            //return !isHuman();
         }
     }
 
@@ -3460,11 +3522,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects) {
-        return computerPlayer.flipCoin(source, game, true, appliedEffects);
-    }
-
-    @Override
     public boolean flipCoinResult(Game game) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
@@ -3477,20 +3534,31 @@ public class TestPlayer implements Player {
                 return false;
             }
         }
-        this.chooseStrictModeFailed("flipcoin result", game, "Use setFlipCoinResult to setup it in unit tests");
+        this.chooseStrictModeFailed("flip coin result", game, "Use setFlipCoinResult to set it up in unit tests");
 
         // implementation from PlayerImpl:
         return RandomUtil.nextBoolean();
     }
 
     @Override
-    public int rollDice(Ability source, Game game, int numSides) {
-        return computerPlayer.rollDice(source, game, numSides);
+    public List<Integer> rollDice(Outcome outcome, Ability source, Game game, int numSides, int numDice, int ignoreLowestAmount) {
+        return computerPlayer.rollDice(outcome, source, game, numSides, numDice, ignoreLowestAmount);
     }
 
     @Override
-    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides) {
-        return computerPlayer.rollDice(source, game, appliedEffects, numSides);
+    public int rollDieResult(int sides, Game game) {
+        assertAliasSupportInChoices(false);
+        if (!choices.isEmpty()) {
+            String nextResult = choices.get(0);
+            if (nextResult.startsWith(DIE_ROLL)) {
+                choices.remove(0);
+                return Integer.parseInt(nextResult.substring(DIE_ROLL.length()));
+            }
+        }
+        this.chooseStrictModeFailed("die roll result", game, "Use setDieRollResult to set it up in unit tests");
+
+        // implementation from PlayerImpl:
+        return RandomUtil.nextInt(sides) + 1;
     }
 
     @Override
@@ -4219,18 +4287,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
+        return computerPlayer.rollPlanarDie(outcome, source, game, numberChaosSides, numberPlanarSides);
     }
 
     @Override
@@ -4306,5 +4364,19 @@ public class TestPlayer implements Player {
     @Override
     public String toString() {
         return computerPlayer.toString();
+    }
+
+    public boolean canChooseByComputer() {
+        // full playable AI can choose any time
+        if (this.AIRealGameSimulation) {
+            return true;
+        }
+
+        // non-strict mode allows computer assisted choices (for old tests compatibility only)
+        if (!this.strictChooseMode) {
+            return true;
+        }
+
+        return false;
     }
 }

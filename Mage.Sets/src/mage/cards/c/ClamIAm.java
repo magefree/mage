@@ -1,24 +1,18 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class ClamIAm extends CardImpl {
@@ -56,28 +50,17 @@ class ClamIAmEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if (player != null) {
-            String data = event.getData();
-            int numSides = Integer.parseInt(data);
-            if (numSides == 6 && event.getAmount() == 3) {
-                if (player.chooseUse(outcome, "Reroll the die?", source, game)) {
-                    game.informPlayers(player.getLogName() + " chose to reroll the die.");
-                    event.setAmount(player.rollDice(source, game, 6));
-                }
-            }
-        }
-        return false;
+        return true;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ROLL_DICE;
+        return event.getType() == GameEvent.EventType.REPLACE_ROLLED_DIE;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.getControllerId().equals(event.getPlayerId());
+        return source.isControlledBy(event.getPlayerId());
     }
 
     @Override

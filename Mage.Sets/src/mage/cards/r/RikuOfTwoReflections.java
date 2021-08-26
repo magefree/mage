@@ -31,7 +31,7 @@ public final class RikuOfTwoReflections extends CardImpl {
         filter.add(Predicates.or(
                 CardType.INSTANT.getPredicate(),
                 CardType.SORCERY.getPredicate()));
-        filterPermanent.add(Predicates.not(TokenPredicate.instance));
+        filterPermanent.add(TokenPredicate.FALSE);
         filterPermanent.add(AnotherPredicate.instance);
 
     }

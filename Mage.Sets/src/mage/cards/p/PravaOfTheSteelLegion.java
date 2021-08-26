@@ -29,7 +29,7 @@ public final class PravaOfTheSteelLegion extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public PravaOfTheSteelLegion(UUID ownerId, CardSetInfo setInfo) {

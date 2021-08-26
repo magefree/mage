@@ -52,7 +52,7 @@ public final class RogueClass extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
                 new GainAbilityControlledEffect(
                         new MenaceAbility(), Duration.WhileOnBattlefield,
-                        StaticFilters.FILTER_CONTROLLED_CREATURES
+                        StaticFilters.FILTER_PERMANENT_CREATURES
                 ), 2
         )));
 
@@ -182,7 +182,7 @@ class RogueClassManaEffect extends AsThoughEffectImpl implements AsThoughManaEff
 
     RogueClassManaEffect() {
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
-        this.staticText = ", and you may spend mana as through it were mana of any color to cast them";
+        this.staticText = ", and you may spend mana as though it were mana of any color to cast those spells";
     }
 
     private RogueClassManaEffect(final RogueClassManaEffect effect) {

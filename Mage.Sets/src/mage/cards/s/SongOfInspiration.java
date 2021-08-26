@@ -70,7 +70,7 @@ class SongOfInspirationEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
         int totalMv = cards.getCards(game).stream().mapToInt(MageObject::getManaValue).sum();
-        int result = player.rollDice(source, game, 20);
+        int result = player.rollDice(outcome, source, game, 20);
         player.moveCards(cards, Zone.HAND, source, game);
         if (result + totalMv >= 15) {
             player.gainLife(totalMv, game, source);

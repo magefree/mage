@@ -66,7 +66,7 @@ class ThranTomeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
 
-        if (sourceObject == null && controller == null) {
+        if (sourceObject == null || controller == null) {
             return false;
         }
 

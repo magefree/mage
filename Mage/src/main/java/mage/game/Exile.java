@@ -16,7 +16,7 @@ public class Exile implements Serializable, Copyable<Exile> {
 
     private static final UUID PERMANENT = UUID.randomUUID();
 
-    private Map<UUID, ExileZone> exileZones = new HashMap<>();
+    private final Map<UUID, ExileZone> exileZones = new HashMap<>();
 
     public Exile() {
         createZone(PERMANENT, "Permanent");
@@ -86,6 +86,25 @@ public class Exile implements Serializable, Copyable<Exile> {
             }
         }
         return false;
+    }
+
+    /**
+     * Move card from one exile zone to another. Use case example: create special zone for exiled and castable card.
+     *
+     * @param card
+     * @param game
+     * @param toZoneId
+     */
+    public void moveToAnotherZone(Card card, Game game, ExileZone exileZone) {
+        if (getCard(card.getId(), game) == null) {
+            throw new IllegalArgumentException("Card must be in exile zone: " + card.getIdName());
+        }
+        if (exileZone == null) {
+            throw new IllegalArgumentException("Exile zone must exists: " + card.getIdName());
+        }
+
+        removeCard(card, game);
+        exileZone.add(card);
     }
 
     @Override

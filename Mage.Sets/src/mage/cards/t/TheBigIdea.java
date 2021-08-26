@@ -8,7 +8,6 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -16,7 +15,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.game.events.RollDieEvent;
 import mage.game.permanent.token.BrainiacToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -43,7 +42,7 @@ public final class TheBigIdea extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // 2{BR}{BR}, T: Roll a six-sided dice. Create a number of 1/1 red Brainiac creature tokens equal to the result. 
+        // {2}{B/R}{B/R}, {T}: Roll a six-sided dice. Create a number of 1/1 red Brainiac creature tokens equal to the result.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TheBigIdeaEffect(), new ManaCostsImpl("{2}{B/R}{B/R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -85,35 +84,20 @@ class TheBigIdeaReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (event.getData() != null) {
-            String data = event.getData();
-            int numSides = Integer.parseInt(data);
-            if (numSides != 6) {
-                return false;
-            }
-        }
-
-        if (controller != null) {
-            discard();
-            int amount = controller.rollDice(source, game, 6);
-            event.setAmount(event.getAmount() + amount);
-            return true;
-        }
-        return false;
+        ((RollDieEvent) event).incBigIdeaRollsAmount();
+        discard();
+        return true;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ROLL_DICE;
+        return event.getType() == GameEvent.EventType.ROLL_DIE
+                && ((RollDieEvent) event).getRollDieType() == RollDieType.NUMERICAL;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used) {
-            return source.isControlledBy(event.getPlayerId());
-        }
-        return false;
+        return !this.used && source.isControlledBy(event.getPlayerId()) && ((RollDieEvent) event).getSides() == 6;
     }
 }
 
@@ -121,7 +105,7 @@ class TheBigIdeaEffect extends OneShotEffect {
 
     public TheBigIdeaEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Roll a six-sided dice. Create a number of 1/1 red Brainiac creature tokens equal to the result";
+        this.staticText = "Roll a six-sided die. Create a number of 1/1 red Brainiac creature tokens equal to the result";
     }
 
     public TheBigIdeaEffect(final TheBigIdeaEffect effect) {
@@ -136,11 +120,10 @@ class TheBigIdeaEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
-            int amount = controller.rollDice(source, game, 6);
-            return new CreateTokenEffect(new BrainiacToken(), amount).apply(game, source);
+        if (controller == null) {
+            return false;
         }
-        return false;
+        int amount = controller.rollDice(outcome, source, game, 6);
+        return new BrainiacToken().putOntoBattlefield(amount, game, source, source.getControllerId());
     }
 }

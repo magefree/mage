@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SquirrelToken;
 
@@ -26,7 +25,7 @@ public final class SquirrelSanctuary extends CardImpl {
             = new FilterControlledCreaturePermanent("a nontoken creature you control");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public SquirrelSanctuary(UUID ownerId, CardSetInfo setInfo) {

@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterStackObject;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.TargetPermanent;
@@ -35,7 +34,7 @@ public final class MercenaryInformer extends CardImpl {
 
     static {
         filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
-        filterMercenary.add(Predicates.not(TokenPredicate.instance));
+        filterMercenary.add(TokenPredicate.FALSE);
         filterMercenary.add(SubType.MERCENARY.getPredicate());
     }
 

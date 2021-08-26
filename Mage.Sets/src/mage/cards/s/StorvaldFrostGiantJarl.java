@@ -40,7 +40,7 @@ public final class StorvaldFrostGiantJarl extends CardImpl {
         // Other creatures you control have ward {3}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new WardAbility(new GenericManaCost(3)), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_CONTROLLED_CREATURES, true
+                StaticFilters.FILTER_PERMANENT_CREATURES, true
         )));
 
         // Whenever Storvald, Frost Giant Jarl enters the battlefield or attacks, choose one or both —
@@ -54,6 +54,8 @@ public final class StorvaldFrostGiantJarl extends CardImpl {
         Mode mode = new Mode(new SetPowerToughnessTargetEffect(1, 1, Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
+        ability.getModes().setMinModes(1);
+        ability.getModes().setMaxModes(2);
         this.addAbility(ability);
     }
 

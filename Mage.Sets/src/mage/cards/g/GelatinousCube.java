@@ -33,7 +33,7 @@ import java.util.UUID;
  */
 public final class GelatinousCube extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterOpponentsCreaturePermanent("non-Ooze creature an opponent controls");
+    private static final FilterPermanent filter = new FilterOpponentsCreaturePermanent("non-Ooze creature");
 
     static {
         filter.add(Predicates.not(SubType.OOZE.getPredicate()));

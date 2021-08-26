@@ -38,7 +38,7 @@ public final class ImmovableRod extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // Whenever Immovable Rod becomes untapped, venture into the dungeon.
-        this.addAbility(new InspiredAbility(new VentureIntoTheDungeonEffect()));
+        this.addAbility(new InspiredAbility(new VentureIntoTheDungeonEffect(), false, false));
 
         // {3}{W}, {T}: For as long as Immovable Rod remains tapped, another target permanent loses all abilities and can't attack or block.
         Ability ability = new SimpleActivatedAbility(new ImmovableRodAbilityEffect(), new ManaCostsImpl<>("{3}{W}"));

@@ -21,7 +21,6 @@ import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -41,7 +40,7 @@ public final class TaboraxHopesDemise extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public TaboraxHopesDemise(UUID ownerId, CardSetInfo setInfo) {

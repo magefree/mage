@@ -56,7 +56,7 @@ class SphereOfAnnihilationEffect extends OneShotEffect {
     SphereOfAnnihilationEffect() {
         super(Outcome.Benefit);
         staticText = "exile {this}, all creatures and planeswalkers with mana value less than or equal to " +
-                "the number of void counters on it, and all creature and planeswalker cards in all graveyards " +
+                "the number of void counters on it, and all creature and planeswalker cards in graveyards " +
                 "with mana value less than or equal to the number of void counters on it";
     }
 

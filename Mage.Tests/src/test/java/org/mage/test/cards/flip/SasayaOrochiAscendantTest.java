@@ -87,7 +87,7 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
         assertManaOptions("{C}{C}{C}{G}{G}", manaOptions);
         assertManaOptions("{G}{G}{G}{G}{G}", manaOptions);
-        assertManaOptions("{W}{W}{W}{G}{G}", manaOptions);
+        assertManaOptions("{G}{G}{W}{W}{W}", manaOptions);
 
     }
 

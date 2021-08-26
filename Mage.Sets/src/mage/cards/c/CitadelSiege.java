@@ -28,8 +28,8 @@ import java.util.UUID;
  */
 public final class CitadelSiege extends CardImpl {
 
-    private static final String ruleTrigger1 = "&bull Khans &mdash; At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.";
-    private static final String ruleTrigger2 = "&bull Dragons &mdash; At the beginning of combat on each opponent's turn, tap target creature that player controls.";
+    private static final String ruleTrigger1 = "&bull  Khans &mdash; At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.";
+    private static final String ruleTrigger2 = "&bull  Dragons &mdash; At the beginning of combat on each opponent's turn, tap target creature that player controls.";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature controlled by the active player");
 
     static {

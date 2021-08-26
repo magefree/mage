@@ -79,7 +79,7 @@ class ChaosDragonEffect extends OneShotEffect {
             if (player == null) {
                 return false;
             }
-            playerMap.computeIfAbsent(player.rollDice(source, game, 20), x -> new HashSet<>()).add(playerId);
+            playerMap.computeIfAbsent(player.rollDice(outcome, source, game, 20), x -> new HashSet<>()).add(playerId);
         }
         int max = playerMap.keySet().stream().mapToInt(x -> x).max().orElse(0);
         game.addEffect(new ChaosDragonRestrictionEffect(playerMap.get(max)), source);

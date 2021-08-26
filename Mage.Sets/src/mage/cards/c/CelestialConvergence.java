@@ -1,9 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -11,7 +7,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,10 +15,12 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.*;
+
 /**
- *
  * @author LevelX2
  */
 public final class CelestialConvergence extends CardImpl {
@@ -70,49 +67,42 @@ class CelestialConvergenceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card sourceObject = game.getCard(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
         Player controller = game.getPlayer(source.getControllerId());
-        if (sourceObject != null
-                && controller != null
-                && sourceObject.getCounters(game).getCount(CounterType.OMEN) == 0) {
+        if (sourcePermanent == null || controller == null
+                || sourcePermanent.getCounters(game).getCount(CounterType.OMEN) > 0) {
+            return false;
+        }
 
-            /**
-             * 801.14. If an effect states that a player wins the game, all of
-             * that player's opponents within their range of influence lose the
-             * game instead. #
-             *
-             * 801.15. If the effect of a spell or ability states that the game
-             * is a draw, the game is a draw for that spell or ability's
-             * controller and all players within their range of influence. They
-             * leave the game. All remaining players continue to play the game.
-             *
-             */
-            List<UUID> highestLifePlayers = new ArrayList<>();
-            int highLife = Integer.MIN_VALUE;
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    if (player.getLife() > highLife) {
-                        highestLifePlayers.clear();
-                        highestLifePlayers.add(player.getId());
-                    } else if (player.getLife() == highLife) {
-                        highestLifePlayers.add(player.getId());
-                    }
-                }
-            }
-            if (highestLifePlayers.isEmpty()) {
-                return false;
-            }
-            if (highestLifePlayers.size() > 1) {
-                game.setDraw(controller.getId());
-            } else {
-                Player winner = game.getPlayer(highestLifePlayers.iterator().next());
-                if (winner != null) {
-                    winner.won(game);
-                }
-            }
+        /**
+         * 801.14. If an effect states that a player wins the game, all of
+         * that player's opponents within their range of influence lose the
+         * game instead. #
+         *
+         * 801.15. If the effect of a spell or ability states that the game
+         * is a draw, the game is a draw for that spell or ability's
+         * controller and all players within their range of influence. They
+         * leave the game. All remaining players continue to play the game.
+         *
+         */
+        Map<Integer, Set<UUID>> playerMap = new HashMap<>();
+        game.getState()
+                .getPlayersInRange(controller.getId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .forEach(player -> playerMap.computeIfAbsent(
+                        player.getLife(), x -> new HashSet<>()
+                ).add(player.getId()));
+        int highLife = playerMap.keySet().stream().mapToInt(x -> x).max().orElse(Integer.MIN_VALUE);
+        if (playerMap.get(highLife).size() > 1) {
+            game.setDraw(controller.getId());
             return true;
         }
-        return false;
+        Player winner = game.getPlayer(playerMap.get(highLife).iterator().next());
+        if (winner != null) {
+            winner.won(game);
+        }
+        return true;
     }
 }

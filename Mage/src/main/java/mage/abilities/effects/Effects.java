@@ -62,7 +62,10 @@ public class Effects extends ArrayList<Effect> {
             }
 
             //check if nextRule is a new sentence or not.
-            if (nextRule.startsWith("and ") || nextRule.startsWith("with ") || nextRule.startsWith("then ")) {
+            if (nextRule.startsWith("and ")
+                    || nextRule.startsWith("with ")
+                    || nextRule.startsWith("then ")
+                    || nextRule.startsWith("or ")) {
                 endString = " ";
             } else if (nextRule.startsWith(",") || nextRule.startsWith(" ")) {
                 endString = "";

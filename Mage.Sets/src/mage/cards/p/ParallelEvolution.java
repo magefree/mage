@@ -50,7 +50,7 @@ class ParallelEvolutionEffect extends OneShotEffect {
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public ParallelEvolutionEffect() {

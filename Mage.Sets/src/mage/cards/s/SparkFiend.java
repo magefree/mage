@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -18,14 +16,16 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class SparkFiend extends CardImpl {
 
     public SparkFiend(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
@@ -67,7 +67,7 @@ class SparkFiendEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int roll = controller.rollDice(source, game, 6) + controller.rollDice(source, game, 6);
+            int roll = controller.rollDice(outcome, source, game, 6, 2, 0).stream().mapToInt(x -> x).sum();
             MageObject mageObject = game.getObject(source.getSourceId());
             if (mageObject instanceof Permanent) {
                 Permanent sourcePermanent = (Permanent) mageObject;
@@ -112,7 +112,7 @@ class SparkFiendUpkeepEffect extends OneShotEffect {
         if (controller != null) {
             if (game.getState().getValue("SparkFiend" + source.getSourceId().toString()) != null
                     && (Integer) game.getState().getValue("SparkFiend" + source.getSourceId().toString()) != 0) {
-                int roll = controller.rollDice(source, game, 6) + controller.rollDice(source, game, 6);
+                int roll = controller.rollDice(outcome, source, game, 6, 2, 0).stream().mapToInt(x -> x).sum();
                 MageObject mageObject = game.getObject(source.getSourceId());
                 if (mageObject instanceof Permanent) {
                     Permanent sourcePermanent = (Permanent) mageObject;

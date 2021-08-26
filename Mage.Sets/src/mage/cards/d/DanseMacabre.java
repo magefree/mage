@@ -54,7 +54,7 @@ class DanseMacabreEffect extends OneShotEffect {
             = new FilterControlledCreaturePermanent("nontoken creature you control");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     DanseMacabreEffect() {
@@ -64,7 +64,7 @@ class DanseMacabreEffect extends OneShotEffect {
                 "<br>1-14 | Return a creature card put into a graveyard " +
                 "this way to the battlefield under your control." +
                 "<br>15+ | Return up to two creature cards put into " +
-                "a graveyard this way to the battlefield under your control";
+                "graveyards this way to the battlefield under your control";
     }
 
     private DanseMacabreEffect(final DanseMacabreEffect effect) {
@@ -104,7 +104,7 @@ class DanseMacabreEffect extends OneShotEffect {
             cards.add(permanent);
             permanent.sacrifice(source, game);
         }
-        int result = controller.rollDice(source, game, 20) + toughness;
+        int result = controller.rollDice(outcome, source, game, 20) + toughness;
         cards.retainZone(Zone.GRAVEYARD, game);
         if (cards.isEmpty()) {
             return true;

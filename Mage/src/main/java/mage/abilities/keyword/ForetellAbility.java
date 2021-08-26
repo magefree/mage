@@ -72,7 +72,6 @@ public class ForetellAbility extends SpecialAction {
         // activate only during the controller's turn
         if (game.getState().getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.ALLOW_FORETELL_ANYTIME, game).isEmpty()
                 && !game.isActivePlayer(this.getControllerId())) {
-            // TODO: must be fixed to call super.canActivate here for additional checks someday
             return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);

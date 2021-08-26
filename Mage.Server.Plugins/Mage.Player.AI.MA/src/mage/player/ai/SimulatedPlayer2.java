@@ -27,19 +27,24 @@ import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
+ * AI: mock player in simulated games (each player replaced by simulated)
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class SimulatedPlayer2 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(SimulatedPlayer2.class);
     private static final PassAbility pass = new PassAbility();
+
     private final boolean isSimulatedPlayer;
     private final List<String> suggested;
     private transient ConcurrentLinkedQueue<Ability> allActions;
     private boolean forced;
+    private final Player originalPlayer; // copy of the original player, source of choices/results in tests
 
     public SimulatedPlayer2(Player originalPlayer, boolean isSimulatedPlayer, List<String> suggested) {
         super(originalPlayer.getId());
+        this.originalPlayer = originalPlayer.copy();
         pass.setControllerId(playerId);
         this.isSimulatedPlayer = isSimulatedPlayer;
         this.suggested = suggested;
@@ -50,11 +55,9 @@ public class SimulatedPlayer2 extends ComputerPlayer {
     public SimulatedPlayer2(final SimulatedPlayer2 player) {
         super(player);
         this.isSimulatedPlayer = player.isSimulatedPlayer;
-        this.suggested = new ArrayList<>();
-        for (String s : player.suggested) {
-            this.suggested.add(s);
-        }
-
+        this.suggested = new ArrayList<>(player.suggested);
+        // this.allActions = player.allActions; // dynamic, no need to copy
+        this.originalPlayer = player.originalPlayer.copy();
     }
 
     @Override
@@ -447,5 +450,17 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         }
         pass(game);
         return false;
+    }
+
+    @Override
+    public boolean flipCoinResult(Game game) {
+        // same random results set up support in AI tests, see TestComputerPlayer for docs
+        return originalPlayer.flipCoinResult(game);
+    }
+
+    @Override
+    public int rollDieResult(int sides, Game game) {
+        // same random results set up support in AI tests, see TestComputerPlayer for docs
+        return originalPlayer.rollDieResult(sides, game);
     }
 }

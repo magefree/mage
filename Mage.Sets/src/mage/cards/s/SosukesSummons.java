@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SnakeToken;
 
@@ -25,7 +24,7 @@ public final class SosukesSummons extends CardImpl {
 
     static {
         filter.add(SubType.SNAKE.getPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public SosukesSummons(UUID ownerId, CardSetInfo setInfo) {

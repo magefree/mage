@@ -22,11 +22,9 @@ import java.util.UUID;
  * @author Loki
  */
 public final class PuresteelPaladin extends CardImpl {
-    private static final FilterPermanent filter = new FilterControlledPermanent("Equipment");
 
-    static {
-        filter.add(SubType.EQUIPMENT.getPredicate());
-    }
+    private static final FilterPermanent filter
+            = new FilterControlledPermanent(SubType.EQUIPMENT, "an Equipment");
 
     public PuresteelPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");
@@ -37,16 +35,17 @@ public final class PuresteelPaladin extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever an Equipment enters the battlefield under your control, you may draw a card.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true
+        ));
 
         // <i>Metalcraft</i> &mdash; Equipment you control have equip {0} as long as you control three or more artifacts
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new GainAbilityControlledEffect(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)), Duration.WhileOnBattlefield, filter),
-                MetalcraftCondition.instance,
-                "<i>Metalcraft</i> &mdash; Equipment you control have equip {0} as long as you control three or more artifacts"))
-                .setAbilityWord(AbilityWord.METALCRAFT)
-                .addHint(MetalcraftHint.instance)
-        );
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new GainAbilityControlledEffect(new EquipAbility(
+                        Outcome.AddAbility, new GenericManaCost(0)
+                ), Duration.WhileOnBattlefield, filter), MetalcraftCondition.instance,
+                "equipment you control have equip {0} as long as you control three or more artifacts"
+        )).setAbilityWord(AbilityWord.METALCRAFT).addHint(MetalcraftHint.instance));
     }
 
     private PuresteelPaladin(final PuresteelPaladin card) {

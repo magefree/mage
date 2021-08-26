@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -65,7 +64,7 @@ public final class ScroungingBandar extends CardImpl {
 class ScroungingBandarEffect extends OneShotEffect {
 
     public ScroungingBandarEffect() {
-        super(Outcome.Detriment);
+        super(Outcome.Benefit);
         this.staticText = "move any number of +1/+1 counters from Scrounging Bandar onto another target creature";
     }
 

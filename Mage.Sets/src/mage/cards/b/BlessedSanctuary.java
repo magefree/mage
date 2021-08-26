@@ -11,7 +11,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.UnicornToken;
 
@@ -23,7 +22,7 @@ public class BlessedSanctuary extends CardImpl {
     private static final FilterControlledCreaturePermanent filterNontoken = new FilterControlledCreaturePermanent("a nontoken creature");
 
     static {
-        filterNontoken.add(Predicates.not(TokenPredicate.instance));
+        filterNontoken.add(TokenPredicate.FALSE);
     }
 
     public BlessedSanctuary(UUID ownerId, CardSetInfo setInfo) {

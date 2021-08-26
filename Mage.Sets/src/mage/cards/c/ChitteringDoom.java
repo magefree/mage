@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -9,11 +8,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.SquirrelToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class ChitteringDoom extends CardImpl {
@@ -52,17 +53,14 @@ class ChitteringDoomTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DICE_ROLLED;
+        return event.getType() == GameEvent.EventType.DIE_ROLLED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (this.isControlledBy(event.getPlayerId()) && event.getFlag()) {
-            if (event.getAmount() >= 4) {
-                return true;
-            }
-        }
-        return false;
+        DieRolledEvent drEvent = (DieRolledEvent) event;
+        // silver border card must look for "result" instead "natural result"
+        return this.isControlledBy(event.getPlayerId()) && drEvent.getResult() >= 4;
     }
 
     @Override

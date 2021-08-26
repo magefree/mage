@@ -1,9 +1,7 @@
 package mage.cards.w;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
+import mage.abilities.common.AttacksOrBlocksAttachedTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -13,48 +11,42 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author zeffirojoe
  */
 public final class WandOfOrcus extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombies you control");
-
-    static {
-        filter.add(SubType.ZOMBIE.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ZOMBIE, "Zombies");
 
     public WandOfOrcus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.ARTIFACT }, "{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{B}");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature attacks or blocks, it and Zombies you control gain
         // deathtouch until end of turn.
-        Ability deathTouchAbility = new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD,
-                new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.EQUIPMENT,
-                        Duration.EndOfTurn));
-        deathTouchAbility.addEffect(
-                new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn, filter));
+        Ability deathTouchAbility = new AttacksOrBlocksAttachedTriggeredAbility(new GainAbilityAttachedEffect(
+                DeathtouchAbility.getInstance(), AttachmentType.EQUIPMENT, Duration.EndOfTurn
+        ).setText("it"), AttachmentType.EQUIPMENT);
+        deathTouchAbility.addEffect(new GainAbilityControlledEffect(
+                DeathtouchAbility.getInstance(), Duration.EndOfTurn, filter
+        ).concatBy("and"));
         this.addAbility(deathTouchAbility);
 
         // Whenever equipped creature deals combat damage to a player, create that many
         // 2/2 black Zombie creature tokens.
-        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new WandOfOrcusZombieEffect(), "equipped",
-                false, true));
+        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(
+                new WandOfOrcusZombieEffect(), "equipped creature",
+                false, true
+        ));
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{3}")));

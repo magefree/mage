@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import java.util.UUID;
 
-import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
+import mage.abilities.common.AttacksOrBlocksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeControllerAttachedEffect;
@@ -35,7 +35,7 @@ public final class NettlingCurse extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature attacks or blocks, its controller loses 3 life.
-        this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeControllerAttachedEffect(3)));
+        this.addAbility(new AttacksOrBlocksAttachedTriggeredAbility(new LoseLifeControllerAttachedEffect(3), AttachmentType.AURA));
 
         // {1}{R}: Enchanted creature attacks this turn if able.
         this.addAbility(new SimpleActivatedAbility(new AttacksIfAbleAttachedEffect(Duration.EndOfTurn, AttachmentType.AURA).setText("Enchanted creature attacks this turn if able."), new ManaCostsImpl("{1}{R}")));

@@ -8,6 +8,8 @@ import mage.util.Copyable;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -538,6 +540,60 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         any = 0;
     }
 
+    private static final Map<String, String> colorLetterMap = new HashMap<>();
+
+    static {
+        colorLetterMap.put("wr", "rw");
+        colorLetterMap.put("wg", "gw");
+        colorLetterMap.put("ug", "gu");
+        colorLetterMap.put("wrg", "rgw");
+        colorLetterMap.put("wug", "gwu");
+        colorLetterMap.put("wur", "urw");
+        colorLetterMap.put("urg", "gur");
+        colorLetterMap.put("ubg", "bgu");
+        colorLetterMap.put("wbr", "rwb");
+        colorLetterMap.put("wbrg", "brgw");
+        colorLetterMap.put("wurg", "rgwu");
+        colorLetterMap.put("wubg", "gwub");
+    }
+
+    private String getColorsInOrder() {
+        StringBuilder sb = new StringBuilder();
+        if (white > 0) {
+            sb.append('w');
+        }
+        if (blue > 0) {
+            sb.append('u');
+        }
+        if (black > 0) {
+            sb.append('b');
+        }
+        if (red > 0) {
+            sb.append('r');
+        }
+        if (green > 0) {
+            sb.append('g');
+        }
+        String manaString = sb.toString();
+        return colorLetterMap.getOrDefault(manaString, manaString);
+    }
+
+    private int colorCharToAmount(char color) {
+        switch (color) {
+            case 'w':
+                return white;
+            case 'u':
+                return blue;
+            case 'b':
+                return black;
+            case 'r':
+                return red;
+            case 'g':
+                return green;
+        }
+        return 0;
+    }
+
     /**
      * Returns this objects values as a {@link String}.
      *
@@ -549,54 +605,34 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         if (generic > 0) {
             sbMana.append('{').append(generic).append('}');
         }
-
-        // too many mana - replace by single icon
-        if (colorless >= 20) {
+        // normal mana
+        if (colorless < 20) {
+            for (int i = 0; i < colorless; i++) {
+                sbMana.append("{C}");
+            }
+        } else {
             sbMana.append(colorless).append("{C}");
         }
-        if (white >= 20) {
-            sbMana.append(white).append("{W}");
+        String colorsInOrder = getColorsInOrder();
+        for (char c : colorsInOrder.toCharArray()) {
+            int amount = colorCharToAmount(c);
+            if (amount < 20) {
+                for (int i = 0; i < amount; i++) {
+                    sbMana.append('{').append(c).append('}');
+                }
+            } else {
+                sbMana.append(amount).append('{').append(c).append('}');
+            }
         }
-        if (blue >= 20) {
-            sbMana.append(blue).append("{U}");
-        }
-        if (black >= 20) {
-            sbMana.append(black).append("{B}");
-        }
-        if (red >= 20) {
-            sbMana.append(red).append("{R}");
-        }
-        if (green >= 20) {
-            sbMana.append(green).append("{G}");
-        }
-        if (any >= 20) {
+        if (any < 20) {
+            for (int i = 0; i < any; i++) {
+                sbMana.append("{Any}");
+            }
+        } else {
             sbMana.append(any).append("{Any}");
         }
 
-        // normal mana
-        for (int i = 0; i < colorless && colorless < 20; i++) {
-            sbMana.append("{C}");
-        }
-        for (int i = 0; i < white && white < 20; i++) {
-            sbMana.append("{W}");
-        }
-        for (int i = 0; i < blue && blue < 20; i++) {
-            sbMana.append("{U}");
-        }
-        for (int i = 0; i < black && black < 20; i++) {
-            sbMana.append("{B}");
-        }
-        for (int i = 0; i < red && red < 20; i++) {
-            sbMana.append("{R}");
-        }
-        for (int i = 0; i < green && green < 20; i++) {
-            sbMana.append("{G}");
-        }
-        for (int i = 0; i < any && any < 20; i++) {
-            sbMana.append("{Any}");
-        }
-
-        return sbMana.toString();
+        return sbMana.toString().toUpperCase().replace("ANY", "Any");
     }
 
     /**

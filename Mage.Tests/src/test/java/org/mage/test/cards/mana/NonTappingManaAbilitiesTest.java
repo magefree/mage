@@ -224,15 +224,15 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 9, manaOptions.size());
-        assertManaOptions("{C}{U}{U}{U}{R}{R}{G}{G}", manaOptions);
-        assertManaOptions("{C}{U}{U}{U}{G}{G}{G}{G}", manaOptions);
-        assertManaOptions("{C}{U}{U}{U}{R}{G}{G}{G}", manaOptions);
-        assertManaOptions("{C}{C}{U}{U}{R}{R}{G}{G}", manaOptions);
-        assertManaOptions("{C}{C}{U}{U}{G}{G}{G}{G}", manaOptions);
-        assertManaOptions("{C}{C}{U}{U}{R}{G}{G}{G}", manaOptions);
-        assertManaOptions("{C}{W}{U}{U}{R}{R}{G}{G}", manaOptions);
-        assertManaOptions("{C}{W}{U}{U}{G}{G}{G}{G}", manaOptions);
-        assertManaOptions("{C}{W}{U}{U}{R}{G}{G}{G}", manaOptions);
+        assertManaOptions("{C}{G}{G}{U}{U}{U}{R}{R}", manaOptions);
+        assertManaOptions("{C}{G}{G}{G}{G}{U}{U}{U}", manaOptions);
+        assertManaOptions("{C}{G}{G}{G}{U}{U}{U}{R}", manaOptions);
+        assertManaOptions("{C}{C}{G}{G}{U}{U}{R}{R}", manaOptions);
+        assertManaOptions("{C}{C}{G}{G}{G}{G}{U}{U}", manaOptions);
+        assertManaOptions("{C}{C}{G}{G}{G}{U}{U}{R}", manaOptions);
+        assertManaOptions("{C}{R}{R}{G}{G}{W}{U}{U}", manaOptions);
+        assertManaOptions("{C}{G}{G}{G}{G}{W}{U}{U}", manaOptions);
+        assertManaOptions("{C}{R}{G}{G}{G}{W}{U}{U}", manaOptions);
     }
 
     @Test

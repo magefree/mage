@@ -31,7 +31,7 @@ public final class BeltOfGiantStrength extends CardImpl {
 
         // Equip {10}. This ability costs {X} less to activate where X is the power of the creature it targets.
         EquipAbility ability = new EquipAbility(10);
-        ability.setCostReduceText("This ability costs {X} less to activate where X is the power of the creature it targets.");
+        ability.setCostReduceText("This ability costs {X} less to activate, where X is the power of the creature it targets.");
         ability.setCostAdjuster(BeltOfGiantStrengthAdjuster.instance);
         this.addAbility(ability);
     }

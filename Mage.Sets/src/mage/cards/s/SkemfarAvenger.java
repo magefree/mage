@@ -31,7 +31,7 @@ public final class SkemfarAvenger extends CardImpl {
                 SubType.BERSERKER.getPredicate()
         ));
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public SkemfarAvenger(UUID ownerId, CardSetInfo setInfo) {

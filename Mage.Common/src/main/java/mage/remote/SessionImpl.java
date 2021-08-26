@@ -518,7 +518,7 @@ public class SessionImpl implements Session {
         }
 
         try {
-            if (callbackClient.isConnected()) {
+            if (callbackClient != null && callbackClient.isConnected()) {
                 callbackClient.removeListener(callbackHandler);
                 callbackClient.disconnect();
             }

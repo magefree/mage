@@ -60,7 +60,7 @@ class IndomitableMightEffect extends AsThoughEffectImpl {
     IndomitableMightEffect() {
         super(AsThoughEffectType.DAMAGE_NOT_BLOCKED, Duration.WhileOnBattlefield, Outcome.Damage);
         this.staticText = "enchanted creature's controller may have it " +
-                "assign combat damage as though it weren't blocked";
+                "assign its combat damage as though it weren't blocked";
     }
 
     private IndomitableMightEffect(IndomitableMightEffect effect) {

@@ -64,7 +64,7 @@ class InhumaniacEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            int amount = controller.rollDice(source, game, 6);
+            int amount = controller.rollDice(outcome, source, game, 6);
             if (amount >= 3 && amount <= 4) {
                 permanent.addCounters(CounterType.P1P1.createInstance(1), source.getControllerId(), source, game);
             } else if (amount >= 5) {

@@ -44,7 +44,7 @@ public final class AcererakTheArchlich extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandSourceEffect(true)),
                 AcererakTheArchlichCondition.instance, "When {this} enters the battlefield, " +
-                "if you have not completed Tomb of Annihilation, return {this} " +
+                "if you haven't completed Tomb of Annihilation, return {this} " +
                 "to its owner's hand and venture into the dungeon."
         );
         ability.addEffect(new VentureIntoTheDungeonEffect());

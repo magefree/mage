@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -21,8 +19,9 @@ import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class KnightsOfTheBlackRose extends CardImpl {
@@ -39,12 +38,9 @@ public final class KnightsOfTheBlackRose extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
 
         // Whenever an opponent becomes the monarch, if you were the monarch as the turn began, that player loses 2 life and you gain 2 life.
-        Ability ability = new BecomesMonarchTriggeredAbility(new LoseLifeTargetEffect(2));
-        Effect effect = new GainLifeEffect(2);
-        effect.setText("and you gain 2 life");
-        ability.addEffect(effect);
-        this.addAbility(ability);
-
+        Ability ability = new KnightsOfTheBlackRoseTriggeredAbility(new LoseLifeTargetEffect(2));
+        ability.addEffect(new GainLifeEffect(2).concatBy("and"));
+        this.addAbility(ability, new KnightsOfTheBlackRoseWatcher());
     }
 
     private KnightsOfTheBlackRose(final KnightsOfTheBlackRose card) {
@@ -57,13 +53,13 @@ public final class KnightsOfTheBlackRose extends CardImpl {
     }
 }
 
-class BecomesMonarchTriggeredAbility extends TriggeredAbilityImpl {
+class KnightsOfTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
 
-    public BecomesMonarchTriggeredAbility(Effect effect) {
+    public KnightsOfTheBlackRoseTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
 
-    public BecomesMonarchTriggeredAbility(final BecomesMonarchTriggeredAbility ability) {
+    public KnightsOfTheBlackRoseTriggeredAbility(final KnightsOfTheBlackRoseTriggeredAbility ability) {
         super(ability);
     }
 
@@ -85,26 +81,26 @@ class BecomesMonarchTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        MonarchAtTurnStartWatcher watcher = game.getState().getWatcher(MonarchAtTurnStartWatcher.class);
+        KnightsOfTheBlackRoseWatcher watcher = game.getState().getWatcher(KnightsOfTheBlackRoseWatcher.class);
         return watcher != null && isControlledBy(watcher.getMonarchIdAtTurnStart());
     }
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever an opponent becomes the monarch, if you were the monarch as the turn began, " ;
+        return "Whenever an opponent becomes the monarch, if you were the monarch as the turn began, ";
     }
 
     @Override
-    public BecomesMonarchTriggeredAbility copy() {
-        return new BecomesMonarchTriggeredAbility(this);
+    public KnightsOfTheBlackRoseTriggeredAbility copy() {
+        return new KnightsOfTheBlackRoseTriggeredAbility(this);
     }
 }
 
-class MonarchAtTurnStartWatcher extends Watcher {
+class KnightsOfTheBlackRoseWatcher extends Watcher {
 
     private UUID monarchIdAtTurnStart;
 
-    public MonarchAtTurnStartWatcher() {
+    public KnightsOfTheBlackRoseWatcher() {
         super(WatcherScope.GAME);
     }
 

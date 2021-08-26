@@ -21,7 +21,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -38,7 +37,7 @@ public final class LenaSelflessChampion extends CardImpl {
             = new FilterControlledCreaturePermanent("nontoken creature you control");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public LenaSelflessChampion(UUID ownerId, CardSetInfo setInfo) {

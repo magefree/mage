@@ -846,9 +846,10 @@ public abstract class GameImpl implements Game {
      *
      * @param bookmark
      * @param context  additional information for error message
+     * @return current restored state (if all fine)
      */
     @Override
-    public void restoreState(int bookmark, String context) {
+    public GameState restoreState(int bookmark, String context) {
         if (!simulation && !this.hasEnded()) { // if player left or game is over no undo is possible - this could lead to wrong winner
             if (bookmark != 0) {
                 if (!savedStates.contains(bookmark - 1)) {
@@ -863,11 +864,12 @@ public abstract class GameImpl implements Game {
                     if (restore != null) {
                         state.restore(restore);
                         playerList.setCurrent(state.getPlayerByOrderId());
+                        return state;
                     }
                 }
             }
         }
-
+        return null;
     }
 
     @Override
@@ -1469,7 +1471,7 @@ public abstract class GameImpl implements Game {
     public void playPriority(UUID activePlayerId, boolean resuming) {
         int errorContinueCounter = 0;
         infiniteLoopCounter = 0;
-        int bookmark = 0;
+        int rollbackBookmark = 0;
         clearAllBookmarks();
         try {
             applyEffects();
@@ -1484,8 +1486,8 @@ public abstract class GameImpl implements Game {
                 Player player;
                 while (!isPaused() && !checkIfGameIsOver()) {
                     try {
-                        if (bookmark == 0) {
-                            bookmark = bookmarkState();
+                        if (rollbackBookmark == 0) {
+                            rollbackBookmark = bookmarkState();
                         }
                         player = getPlayer(state.getPlayerList().get());
                         state.setPriorityPlayerId(player.getId());
@@ -1542,12 +1544,22 @@ public abstract class GameImpl implements Game {
                             logger.fatal(ex.getStackTrace());
                         }
                         this.fireErrorEvent("Game exception occurred: ", ex);
-                        restoreState(bookmark, "Game exception: " + ex.getMessage());
-                        bookmark = 0;
+
+                        // rollback game to prev state
+                        GameState restoredState = restoreState(rollbackBookmark, "Game exception: " + ex.getMessage());
+                        rollbackBookmark = 0;
+
                         if (errorContinueCounter > 15) {
                             throw new MageException("Iterated player priority after game exception too often, game ends! Last error:\n "
                                     + ex.getMessage());
                         }
+
+                        if (restoredState != null) {
+                            this.informPlayers(String.format("Auto-restored to %s due game error: %s", restoredState, ex.getMessage()));
+                        } else {
+                            logger.error("Can't auto-restore to prev state.");
+                        }
+
                         Player activePlayer = this.getPlayer(getActivePlayerId());
                         if (activePlayer != null && !activePlayer.isTestsMode()) {
                             errorContinueCounter++;

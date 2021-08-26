@@ -80,7 +80,7 @@ class TheDeckOfManyThingsEffect extends RollDieWithResultTableEffect {
         if (player == null) {
             return false;
         }
-        int result = player.rollDice(source, game, sides) - player.getHand().size();
+        int result = player.rollDice(outcome, source, game, sides) - player.getHand().size();
         if (result <= 0) {
             player.discard(player.getHand(), false, source, game);
         }

@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * App GUI: fast search in the combobox, uses in deck editor (sets choosing)
@@ -26,6 +27,7 @@ public class PickCheckBoxDialog extends MageDialog {
     CheckBoxList.CheckBoxListModel m_dataModel;
 
     CheckBoxList tList;
+    int[] startingCheckboxes; // restore to it on cancel
 
     final private static String HTML_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
 
@@ -276,6 +278,12 @@ public class PickCheckBoxDialog extends MageDialog {
     }
 
     private void doCancel() {
+        // restore starting checkboxes
+        Set<Integer> checks = Arrays.stream(startingCheckboxes).boxed().collect(Collectors.toSet());
+        for (int i = 0; i < tList.getModel().getSize(); i++) {
+            tList.setChecked(i, checks.contains(i));
+        }
+
         this.listChoices.clearSelection();
         this.choice.clearChoice();
         hideDialog();
@@ -289,6 +297,7 @@ public class PickCheckBoxDialog extends MageDialog {
     public PickCheckBoxDialog(CheckBoxList list) {
         initComponents();
         tList = list;
+        startingCheckboxes = list.getCheckedIndices();
 
         this.listChoices.setModel(dataModel);
         this.setModal(true);
@@ -302,7 +311,6 @@ public class PickCheckBoxDialog extends MageDialog {
             if (this.tList instanceof javax.swing.JList) {
                 setFocus(tList);
             }
-
         }
     }
 
@@ -553,9 +561,7 @@ public class PickCheckBoxDialog extends MageDialog {
     }//GEN-LAST:event_closeDialog
 
     private void btClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearActionPerformed
-        // TODO add your handling code here:
         this.tList.uncheckAll();
-        //this.tList.repaint();
         scrollList.repaint();
     }//GEN-LAST:event_btClearActionPerformed
 

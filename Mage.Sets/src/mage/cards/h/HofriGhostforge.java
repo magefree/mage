@@ -20,7 +20,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -43,7 +42,7 @@ public final class HofriGhostforge extends CardImpl {
 
     static {
         filter3.add(AnotherPredicate.instance);
-        filter3.add(Predicates.not(TokenPredicate.instance));
+        filter3.add(TokenPredicate.FALSE);
     }
 
     public HofriGhostforge(UUID ownerId, CardSetInfo setInfo) {

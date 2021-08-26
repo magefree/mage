@@ -190,4 +190,21 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         assertHandCount(playerB, "Propaganda", 0);
         assertPermanentCount(playerB, "Propaganda", 1);
     }
+
+    /**
+     As an additional cost to cast Devouring Greed, you may sacrifice any number of Spirits.
+
+     // Target player loses 2 life plus 2 life for each Spirit sacrificed this way. You gain that much life.
+     **/
+    @Test
+    public void testDevouringGreedWithoutSpirits(){
+        addCard(Zone.HAND, playerA, "Devouring Greed");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Devouring Greed", playerB);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertLife(playerB, 18);
+        assertLife(playerA, 22);
+        assertGraveyardCount(playerA, "Devouring Greed", 1);
+    }
 }

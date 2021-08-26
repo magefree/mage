@@ -11,7 +11,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
@@ -25,7 +24,7 @@ public final class Overburden extends CardImpl {
     private static final FilterControlledLandPermanent RETURN_FILTER = new FilterControlledLandPermanent("a land");
 
     static {
-        ENTERS_BATTLEFIELD_FILTER.add(Predicates.not(TokenPredicate.instance));
+        ENTERS_BATTLEFIELD_FILTER.add(TokenPredicate.FALSE);
     }
 
     public Overburden(UUID ownerId, CardSetInfo setInfo) {
