@@ -86,7 +86,7 @@ class DelinaWildMageEffect extends OneShotEffect {
         ));
         effect.setTargetPointer(getTargetPointer());
         while (true) {
-            int result = player.rollDice(source, game, 20);
+            int result = player.rollDice(outcome, source, game, 20);
             effect.apply(game, source);
             if (result < 15 || 20 < result || !player.chooseUse(outcome, "Roll again?", source, game)) {
                 break;

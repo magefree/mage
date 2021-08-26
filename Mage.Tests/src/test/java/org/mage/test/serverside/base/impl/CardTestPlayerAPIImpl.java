@@ -1508,11 +1508,21 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void assertChoicesCount(TestPlayer player, int count) throws AssertionError {
-        Assert.assertEquals("(Choices of " + player.getName() + ") Count are not equal (found " + player.getChoices() + ")", count, player.getChoices().size());
+        String mes = String.format(
+                "(Choices of %s) Count are not equal (found %s). Some inner choose dialogs can be set up only in strict mode.",
+                player.getName(),
+                player.getChoices()
+        );
+        Assert.assertEquals(mes, count, player.getChoices().size());
     }
 
     public void assertTargetsCount(TestPlayer player, int count) throws AssertionError {
-        Assert.assertEquals("(Targets of " + player.getName() + ") Count are not equal (found " + player.getTargets() + ")", count, player.getTargets().size());
+        String mes = String.format(
+                "(Targets of %s) Count are not equal (found %s). Some inner choose dialogs can be set up only in strict mode.",
+                player.getName(),
+                player.getTargets()
+        );
+        Assert.assertEquals(mes, count, player.getTargets().size());
     }
 
     /**
@@ -1996,6 +2006,21 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void setFlipCoinResult(TestPlayer player, boolean result) {
         player.addChoice(result ? TestPlayer.FLIPCOIN_RESULT_TRUE : TestPlayer.FLIPCOIN_RESULT_FALSE);
+    }
+
+    /**
+     * Set next result of next die roll (uses for both normal or planar rolls)
+     *
+     * For planar rolls:
+     * 1..2 - chaos
+     * 3..7 - blank
+     * 8..9 - planar
+     *
+     * @param player
+     * @param result
+     */
+    public void setDieRollResult(TestPlayer player, int result) {
+        player.addChoice(TestPlayer.DIE_ROLL + result);
     }
 
     /**

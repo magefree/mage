@@ -62,7 +62,7 @@ class BagOfTricksEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int result = player.rollDice(source, game, 8);
+        int result = player.rollDice(outcome, source, game, 8);
         Cards cards = new CardsImpl();
         for (Card card : player.getLibrary().getCards(game)) {
             cards.add(card);

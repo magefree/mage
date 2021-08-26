@@ -25,6 +25,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Gift", 64, Rarity.COMMON, mage.cards.a.AngelicGift.class));
         cards.add(new SetCardInfo("Anger", 113, Rarity.UNCOMMON, mage.cards.a.Anger.class));
         cards.add(new SetCardInfo("Apex of Power", 114, Rarity.MYTHIC, mage.cards.a.ApexOfPower.class));
+        cards.add(new SetCardInfo("Arcane Endeavor", 14, Rarity.RARE, mage.cards.a.ArcaneEndeavor.class));
         cards.add(new SetCardInfo("Arcane Sanctum", 223, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
         cards.add(new SetCardInfo("Arcane Signet", 197, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Argentum Armor", 198, Rarity.RARE, mage.cards.a.ArgentumArmor.class));
@@ -169,8 +170,11 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mulldrifter", 87, Rarity.UNCOMMON, mage.cards.m.Mulldrifter.class));
         cards.add(new SetCardInfo("Murder of Crows", 88, Rarity.UNCOMMON, mage.cards.m.MurderOfCrows.class));
         cards.add(new SetCardInfo("Nature's Lore", 164, Rarity.COMMON, mage.cards.n.NaturesLore.class));
+        cards.add(new SetCardInfo("Netherese Puzzle-Ward", 17, Rarity.RARE, mage.cards.n.NetheresePuzzleWard.class));
+        cards.add(new SetCardInfo("Reckless Endeavor", 33, Rarity.RARE, mage.cards.r.RecklessEndeavor.class));
         cards.add(new SetCardInfo("Necromantic Selection", 103, Rarity.RARE, mage.cards.n.NecromanticSelection.class));
         cards.add(new SetCardInfo("Necrotic Sliver", 188, Rarity.UNCOMMON, mage.cards.n.NecroticSliver.class));
+        cards.add(new SetCardInfo("Neverwinter Hydra", 41, Rarity.RARE, mage.cards.n.NeverwinterHydra.class));
         cards.add(new SetCardInfo("Nihiloor", 53, Rarity.MYTHIC, mage.cards.n.Nihiloor.class));
         cards.add(new SetCardInfo("Nimbus Maze", 252, Rarity.RARE, mage.cards.n.NimbusMaze.class));
         cards.add(new SetCardInfo("Obsessive Stitcher", 189, Rarity.UNCOMMON, mage.cards.o.ObsessiveStitcher.class));
@@ -262,6 +266,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Unstable Obelisk", 220, Rarity.UNCOMMON, mage.cards.u.UnstableObelisk.class));
         cards.add(new SetCardInfo("Utopia Sprawl", 172, Rarity.UNCOMMON, mage.cards.u.UtopiaSprawl.class));
         cards.add(new SetCardInfo("Utter End", 195, Rarity.RARE, mage.cards.u.UtterEnd.class));
+        cards.add(new SetCardInfo("Valiant Endeavor", 13, Rarity.RARE, mage.cards.v.ValiantEndeavor.class));
         cards.add(new SetCardInfo("Valorous Stance", 76, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
         cards.add(new SetCardInfo("Vandalblast", 148, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class));
         cards.add(new SetCardInfo("Vanish into Memory", 196, Rarity.UNCOMMON, mage.cards.v.VanishIntoMemory.class));
@@ -269,10 +274,12 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Victimize", 112, Rarity.UNCOMMON, mage.cards.v.Victimize.class));
         cards.add(new SetCardInfo("Viridian Longbow", 221, Rarity.COMMON, mage.cards.v.ViridianLongbow.class));
         cards.add(new SetCardInfo("Vitu-Ghazi, the City-Tree", 272, Rarity.UNCOMMON, mage.cards.v.VituGhaziTheCityTree.class));
+        cards.add(new SetCardInfo("Vrondiss, Rage of Ancients", 4, Rarity.MYTHIC, mage.cards.v.VrondissRageOfAncients.class));
         cards.add(new SetCardInfo("Wall of Omens", 77, Rarity.UNCOMMON, mage.cards.w.WallOfOmens.class));
         cards.add(new SetCardInfo("Wand of Orcus", 28, Rarity.RARE, mage.cards.w.WandOfOrcus.class));
         cards.add(new SetCardInfo("Warstorm Surge", 149, Rarity.RARE, mage.cards.w.WarstormSurge.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 222, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
+        cards.add(new SetCardInfo("Wild Endeavor", 43, Rarity.RARE, mage.cards.w.WildEndeavor.class));
         cards.add(new SetCardInfo("Wild Growth", 174, Rarity.COMMON, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Wild-Magic Sorcerer", 36, Rarity.RARE, mage.cards.w.WildMagicSorcerer.class));
         cards.add(new SetCardInfo("Winds of Rath", 78, Rarity.RARE, mage.cards.w.WindsOfRath.class));

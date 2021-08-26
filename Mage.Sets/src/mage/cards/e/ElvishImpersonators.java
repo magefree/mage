@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -9,22 +8,20 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class ElvishImpersonators extends CardImpl {
 
     public ElvishImpersonators(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.ELVES);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
@@ -63,8 +60,9 @@ class ElvishImpersonatorsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int firstRoll = controller.rollDice(source, game, 6);
-            int secondRoll = controller.rollDice(source, game, 6);
+            List<Integer> results = controller.rollDice(outcome, source, game, 6, 2, 0);
+            int firstRoll = results.get(0);
+            int secondRoll = results.get(1);
             game.addEffect(new SetPowerToughnessSourceEffect(firstRoll, secondRoll, Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
             return true;
         }

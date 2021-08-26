@@ -45,10 +45,12 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Bag of Holding", 240, Rarity.UNCOMMON, mage.cards.b.BagOfHolding.class));
         cards.add(new SetCardInfo("Baleful Beholder", 89, Rarity.COMMON, mage.cards.b.BalefulBeholder.class));
         cards.add(new SetCardInfo("Bar the Gate", 47, Rarity.COMMON, mage.cards.b.BarTheGate.class));
+        cards.add(new SetCardInfo("Barbarian Class", 131, Rarity.UNCOMMON, mage.cards.b.BarbarianClass.class));
         cards.add(new SetCardInfo("Bard Class", 217, Rarity.RARE, mage.cards.b.BardClass.class));
         cards.add(new SetCardInfo("Barrowin of Clan Undurr", 218, Rarity.UNCOMMON, mage.cards.b.BarrowinOfClanUndurr.class));
         cards.add(new SetCardInfo("Battle Cry Goblin", 132, Rarity.UNCOMMON, mage.cards.b.BattleCryGoblin.class));
         cards.add(new SetCardInfo("Black Dragon", 90, Rarity.UNCOMMON, mage.cards.b.BlackDragon.class));
+        cards.add(new SetCardInfo("Brazen Dwarf", 134, Rarity.COMMON, mage.cards.b.BrazenDwarf.class));
         cards.add(new SetCardInfo("Blink Dog", 3, Rarity.UNCOMMON, mage.cards.b.BlinkDog.class));
         cards.add(new SetCardInfo("Blue Dragon", 49, Rarity.UNCOMMON, mage.cards.b.BlueDragon.class));
         cards.add(new SetCardInfo("Boots of Speed", 133, Rarity.COMMON, mage.cards.b.BootsOfSpeed.class));
@@ -70,6 +72,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Cloister Gargoyle", 7, Rarity.UNCOMMON, mage.cards.c.CloisterGargoyle.class));
         cards.add(new SetCardInfo("Compelled Duel", 178, Rarity.COMMON, mage.cards.c.CompelledDuel.class));
         cards.add(new SetCardInfo("Contact Other Plane", 52, Rarity.COMMON, mage.cards.c.ContactOtherPlane.class));
+        cards.add(new SetCardInfo("Critical Hit", 137, Rarity.UNCOMMON, mage.cards.c.CriticalHit.class));
         cards.add(new SetCardInfo("Dancing Sword", 8, Rarity.RARE, mage.cards.d.DancingSword.class));
         cards.add(new SetCardInfo("Dawnbringer Cleric", 9, Rarity.COMMON, mage.cards.d.DawnbringerCleric.class));
         cards.add(new SetCardInfo("Deadly Dispute", 94, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
@@ -105,8 +108,10 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Eye of Vecna", 243, Rarity.RARE, mage.cards.e.EyeOfVecna.class));
         cards.add(new SetCardInfo("Eyes of the Beholder", 101, Rarity.COMMON, mage.cards.e.EyesOfTheBeholder.class));
         cards.add(new SetCardInfo("Farideh's Fireball", 142, Rarity.COMMON, mage.cards.f.FaridehsFireball.class));
+        cards.add(new SetCardInfo("Farideh, Devil's Chosen", 221, Rarity.UNCOMMON, mage.cards.f.FaridehDevilsChosen.class));
         cards.add(new SetCardInfo("Fates' Reversal", 102, Rarity.COMMON, mage.cards.f.FatesReversal.class));
         cards.add(new SetCardInfo("Feign Death", 103, Rarity.COMMON, mage.cards.f.FeignDeath.class));
+        cards.add(new SetCardInfo("Feywild Trickster", 58, Rarity.UNCOMMON, mage.cards.f.FeywildTrickster.class));
         cards.add(new SetCardInfo("Fifty Feet of Rope", 244, Rarity.UNCOMMON, mage.cards.f.FiftyFeetOfRope.class));
         cards.add(new SetCardInfo("Fighter Class", 222, Rarity.RARE, mage.cards.f.FighterClass.class));
         cards.add(new SetCardInfo("Find the Path", 183, Rarity.COMMON, mage.cards.f.FindThePath.class));
@@ -191,6 +196,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Owlbear", 198, Rarity.COMMON, mage.cards.o.Owlbear.class));
         cards.add(new SetCardInfo("Paladin Class", 29, Rarity.RARE, mage.cards.p.PaladinClass.class));
         cards.add(new SetCardInfo("Paladin's Shield", 30, Rarity.COMMON, mage.cards.p.PaladinsShield.class));
+        cards.add(new SetCardInfo("Pixie Guide", 66, Rarity.COMMON, mage.cards.p.PixieGuide.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Ally", 31, Rarity.COMMON, mage.cards.p.PlanarAlly.class));
         cards.add(new SetCardInfo("Plate Armor", 32, Rarity.UNCOMMON, mage.cards.p.PlateArmor.class));

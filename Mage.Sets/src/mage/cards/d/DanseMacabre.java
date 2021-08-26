@@ -104,7 +104,7 @@ class DanseMacabreEffect extends OneShotEffect {
             cards.add(permanent);
             permanent.sacrifice(source, game);
         }
-        int result = controller.rollDice(source, game, 20) + toughness;
+        int result = controller.rollDice(outcome, source, game, 20) + toughness;
         cards.retainZone(Zone.GRAVEYARD, game);
         if (cards.isEmpty()) {
             return true;

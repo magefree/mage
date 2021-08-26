@@ -68,7 +68,7 @@ public class RollDieWithResultTableEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int result = player.rollDice(source, game, sides) + modifier.calculate(game, source, this);
+        int result = player.rollDice(outcome, source, game, sides) + modifier.calculate(game, source, this);
         this.applyResult(result, game, source);
         return true;
     }
