@@ -3,6 +3,7 @@ package mage.cards.b;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RollDieWithResultTableEffect;
 import mage.abilities.effects.common.combat.BlocksIfAbleTargetEffect;
@@ -39,9 +40,8 @@ public final class BerserkersFrenzy extends CardImpl {
         ).addHint(hint));
 
         // Roll two d20 and ignore the lower roll.
-        // TODO: once the die roll PR is merged this needs to actually roll correctly
         RollDieWithResultTableEffect effect = new RollDieWithResultTableEffect(
-                20, "roll two d20 and ignore the lower roll"
+                20, "roll two d20 and ignore the lower roll", StaticValue.get(0), 1
         );
 
         // 1-14 | Choose any number of creatures. They block this turn if able.
