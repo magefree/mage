@@ -1,5 +1,6 @@
 package mage.deck;
 
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
@@ -17,6 +18,7 @@ import mage.filter.FilterMana;
 import mage.util.ManaUtil;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @author Plopman
@@ -94,6 +96,52 @@ public class Commander extends Constructed {
     @Override
     public int getSideboardMinSize() {
         return 1;
+    }
+
+    private boolean checkColorIdentity(Deck deck, FilterMana colorIdentity, Set<Card> commanders) {
+        int piperCount = commanders
+                .stream()
+                .map(MageObject::getName)
+                .map("The Prismatic Piper"::equals)
+                .mapToInt(x -> x ? 1 : 0)
+                .sum();
+        if (piperCount == 0) {
+            boolean valid = true;
+            for (Card card : deck.getCards()) {
+                if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
+                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')', true);
+                    valid = false;
+                }
+            }
+            for (Card card : deck.getSideboard()) {
+                if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
+                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')', true);
+                    valid = false;
+                }
+            }
+            return valid;
+        }
+        FilterMana filterMana = new FilterMana();
+        Stream.concat(
+                deck.getCards().stream(),
+                deck.getSideboard().stream()
+        ).map(Card::getColorIdentity).forEach(filterMana::addAll);
+        if (colorIdentity.getColorCount() + piperCount >= filterMana.getColorCount()) {
+            return true;
+        }
+        StringBuilder sb = new StringBuilder()
+                .append("Invalid color, commander color identity has ")
+                .append(colorIdentity.getColorCount())
+                .append(" color")
+                .append(colorIdentity.getColorCount() > 1 ? "s" : "")
+                .append(", plus ")
+                .append(piperCount)
+                .append(" cop")
+                .append(piperCount > 1 ? "ies" : "y")
+                .append(" of The Prismatic Piper, but the total amount of colors in the deck is ")
+                .append(filterMana.getColorCount());
+        addError(DeckValidatorErrorType.OTHER, "The Prismatic Piper", sb.toString());
+        return false;
     }
 
     @Override
@@ -220,18 +268,8 @@ public class Commander extends Constructed {
             return false;
         }
 
-        for (Card card : deck.getCards()) {
-            if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')', true);
-                valid = false;
-            }
-        }
-        for (Card card : deck.getSideboard()) {
-            if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')', true);
-                valid = false;
-            }
-        }
+        valid = checkColorIdentity(deck, colorIdentity, commanders);
+
         for (Card card : deck.getCards()) {
             if (!isSetAllowed(card.getExpansionSetCode())) {
                 if (!legalSets(card)) {
