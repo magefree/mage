@@ -1683,8 +1683,8 @@ public class TestPlayer implements Player {
                 mustAttackByAction = true;
                 madeAttackByAction = true;
                 this.computerPlayer.selectAttackers(game, attackingPlayerId);
-                it.remove();
-                break;
+                // play step action will be removed on step end
+                continue;
             }
 
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
@@ -1774,8 +1774,8 @@ public class TestPlayer implements Player {
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().equals(AI_PREFIX + AI_COMMAND_PLAY_STEP)) {
                 mustBlockByAction = true;
                 this.computerPlayer.selectBlockers(source, game, defendingPlayerId);
-                actions.remove(action);
-                break;
+                // play step action will be removed on step end
+                continue;
             }
 
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("block:")) {
