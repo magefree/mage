@@ -112,6 +112,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Forbidden Alchemy", 84, Rarity.UNCOMMON, mage.cards.f.ForbiddenAlchemy.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 238, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Fortified Village", 239, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
+        cards.add(new SetCardInfo("Galea, Kindler of Hope", 1, Rarity.MYTHIC, mage.cards.g.GaleaKindlerOfHope.class));
         cards.add(new SetCardInfo("Game Trail", 240, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Garruk's Uprising", 159, Rarity.UNCOMMON, mage.cards.g.GarruksUprising.class));
         cards.add(new SetCardInfo("Geier Reach Sanitarium", 241, Rarity.RARE, mage.cards.g.GeierReachSanitarium.class));
