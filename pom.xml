@@ -51,16 +51,52 @@
                     </archive>
                 </configuration>
             </plugin>
+
+            <!-- JaCoCo Code Coverage report generation -->
+            <!-- Examples: http://tdongsi.github.io/blog/2017/09/23/jacoco-in-maven-project/ -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.7</version>
+                <executions>
+                    <execution>
+                        <!-- prepare command line to inject in java agent (collect code executing stats) -->
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <!-- generate current module's report -->
+                        <id>generate-code-coverage-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <!-- generate combined report (current and dependency modules) -->
+                        <id>report-aggregate</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report-aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+
         <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.22.2</version>
+                    <!--
+                    for compatible with jacoco code coverage - argLine moved to properties section
                     <configuration>
                         <argLine>-Dfile.encoding=UTF-8</argLine>
                     </configuration>
+                    -->
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -99,8 +135,24 @@
 
     <properties>
         <mage-version>1.4.49</mage-version>
+        <argLine>-Dfile.encoding=UTF-8</argLine>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
+
+        <!--
+            JaCoCo code coverage disabled by default. If you need to generate
+            execute stats and reports then run tests by maven command
+            like "mvn install -Djacoco.skip=false".
+            Stats:
+            - load coverage data for IntelliJ IDEA from ./target/jacoco.exec
+            - web report in ./target/site/jacoco/index.html
+            - for sonar support see below
+        -->
+        <jacoco.skip>true</jacoco.skip>
+
+        <!-- Sonar settings for code coverage. Must be only one report for all modules (use report-aggregate goal report from JaCoCo) -->
+        <aggregate.report.dir>Mage.Verify/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../${aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <dependencyManagement>
