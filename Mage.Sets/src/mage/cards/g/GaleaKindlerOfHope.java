@@ -40,7 +40,7 @@ public final class GaleaKindlerOfHope extends CardImpl {
     }
 
     public GaleaKindlerOfHope(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
