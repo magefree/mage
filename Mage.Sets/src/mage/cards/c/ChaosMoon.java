@@ -84,7 +84,7 @@ class ChaosMoonEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT, source.getSourceId(), source.getControllerId(), game
         );
         // Odd
-        if (permanentsInPlay % 2 != 0) {
+        if (permanentsInPlay % 2 == 1) {
             game.addEffect(new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false), source);
             new CreateDelayedTriggeredAbilityEffect(new ChaosMoonOddTriggeredAbility()).apply(game, source);
         } // Even
