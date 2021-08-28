@@ -8,7 +8,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,7 +46,7 @@ class ThievesAuctionEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent("nontoken permanents");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     ThievesAuctionEffect() {

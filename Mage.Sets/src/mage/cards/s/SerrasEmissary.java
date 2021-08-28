@@ -66,21 +66,25 @@ class SerrasEmissaryEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Object savedType = game.getState().getValue(source.getSourceId() + "_type");
-        if (controller == null || !(savedType instanceof CardType)) {
+        if (controller == null
+                || savedType == null) {
             return false;
         }
-        CardType cardType = ((CardType) savedType);
-        FilterCard filter = new FilterCard(cardType + "s");
-        filter.add(cardType.getPredicate());
-        Ability ability = new ProtectionAbility(filter);
-        controller.addAbility(ability);
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
-        )) {
-            permanent.addAbility(ability, source.getSourceId(), game);
+        if (savedType instanceof String) {
+            CardType cardType = CardType.fromString((String) savedType);
+            FilterCard filter = new FilterCard(cardType + "s");
+            filter.add(cardType.getPredicate());
+            Ability ability = new ProtectionAbility(filter);
+            controller.addAbility(ability);
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                    StaticFilters.FILTER_CONTROLLED_CREATURE,
+                    source.getControllerId(), source.getSourceId(), game
+            )) {
+                permanent.addAbility(ability, source.getSourceId(), game);
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override

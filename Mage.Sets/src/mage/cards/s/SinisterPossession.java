@@ -3,16 +3,13 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
+import mage.abilities.common.AttacksOrBlocksAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.LoseLifeControllerAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -37,7 +34,7 @@ public final class SinisterPossession extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature attacks or blocks, it's controller loses 2 life.
-        this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeControllerAttachedEffect(2)));
+        this.addAbility(new AttacksOrBlocksAttachedTriggeredAbility(new LoseLifeControllerAttachedEffect(2), AttachmentType.AURA));
     }
 
     private SinisterPossession(final SinisterPossession card) {

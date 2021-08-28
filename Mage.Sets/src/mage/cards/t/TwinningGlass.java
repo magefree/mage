@@ -36,8 +36,7 @@ public final class TwinningGlass extends CardImpl {
     public TwinningGlass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {1}, {tap}: You may cast a nonland card from your hand without paying 
-        // its mana cost if it has the same name as a spell that was cast this turn.
+        // {1}, {T}: You may cast a nonland card from your hand without paying its mana cost if it has the same name as a spell that was cast this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new TwinningGlassEffect(), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
@@ -104,17 +103,15 @@ class TwinningGlassEffect extends OneShotEffect {
             FilterNonlandCard filterCard = new FilterNonlandCard("nonland card that was cast this turn");
             filterCard.add(Predicates.or(predicates));
             TargetCard target = new TargetCard(0, 1, Zone.HAND, filterCard);
+            target.withChooseHint("free cast");
             if (controller.choose(Outcome.PlayForFree, controller.getHand(), target, game)) {
                 Card chosenCard = game.getCard(target.getFirstTarget());
                 if (chosenCard != null) {
-                    if (controller.chooseUse(Outcome.PlayForFree, "Cast "
-                            + chosenCard.getName() + " without paying its mana cost?", source, game)) {
-                        game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), Boolean.TRUE);
-                        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(chosenCard, game, true),
-                                game, true, new ApprovingObject(source, game));
-                        game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), null);
-                        return cardWasCast;
-                    }
+                    game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), Boolean.TRUE);
+                    Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(chosenCard, game, true),
+                            game, true, new ApprovingObject(source, game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), null);
+                    return cardWasCast;
                 }
             }
         }

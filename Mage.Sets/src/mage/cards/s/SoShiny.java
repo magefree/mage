@@ -34,7 +34,7 @@ public final class SoShiny extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);

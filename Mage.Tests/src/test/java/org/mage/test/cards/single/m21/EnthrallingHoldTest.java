@@ -29,7 +29,7 @@ public class EnthrallingHoldTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enthralling Hold", "Traxos, Scourge of Kroog");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twiddle", "Traxos, Scourge of Kroog");
 
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);

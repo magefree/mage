@@ -32,7 +32,7 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         setFlipCoinResult(playerA, true);
 
         attack(2, playerB, "Identity Thief");
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         addTarget(playerB, "Molten Sentry");
 
         setStrictChooseMode(true);

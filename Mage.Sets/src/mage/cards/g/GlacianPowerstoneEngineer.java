@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.OneShotEffect;
@@ -114,7 +115,7 @@ class GlacianPowerstoneEngineerCost extends VariableCostImpl {
     }
 
     GlacianPowerstoneEngineerCost() {
-        super("controlled untapped artifacts you would like to tap");
+        super(VariableCostType.NORMAL, "controlled untapped artifacts you would like to tap");
         this.text = "Tap X untapped artifacts you control";
     }
 

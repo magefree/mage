@@ -80,7 +80,7 @@ class RagavanNimblePilfererEffect extends OneShotEffect {
             return false;
         }
         return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
-                game, source, card, TargetController.YOU, Duration.EndOfTurn, false, true
+                game, source, card, TargetController.YOU, Duration.EndOfTurn, false, false, true
         );
     }
 }

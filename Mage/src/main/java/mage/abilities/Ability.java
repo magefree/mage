@@ -494,9 +494,7 @@ public interface Ability extends Controllable, Serializable {
     boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game);
 
     /**
-     * Returns the object that actually existed while a ability triggered or an
-     * ability was activated. If not set yet, the current object will be
-     * retrieved from the game.
+     * Return source object or LKI from battlefield
      *
      * @param game
      * @return
@@ -508,9 +506,9 @@ public interface Ability extends Controllable, Serializable {
     int getSourceObjectZoneChangeCounter();
 
     /**
-     * Returns the object that actually existed while a ability triggerd or an
-     * ability was activated only if it has not changed zone meanwhile. If not
-     * set yet, the current object will be retrieved from the game.
+     * Returns exists source object:
+     * - for not activated ability - returns exists object
+     * - for activated ability - returns exists object or LKI (if it triggers from non battlefield, e.g. sacrifice cost);
      *
      * @param game
      * @return
@@ -518,16 +516,19 @@ public interface Ability extends Controllable, Serializable {
     MageObject getSourceObjectIfItStillExists(Game game);
 
     /**
-     * Returns the permanent that actually existed while the ability triggerd or
-     * an ability was activated only if it has not changed zone meanwhile. If
-     * not set yet, the current permanent if one exists will be retrieved from
-     * the game and returned.
+     * See getSourceObjectIfItStillExists for details. Works with Permanent only.
      *
      * @param game
      * @return
      */
     Permanent getSourcePermanentIfItStillExists(Game game);
 
+    /**
+     * Returns source permanent info (actual or from LKI)
+     *
+     * @param game
+     * @return
+     */
     Permanent getSourcePermanentOrLKI(Game game);
 
     String getTargetDescription(Targets targets, Game game);

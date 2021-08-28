@@ -3,7 +3,6 @@ package mage.cards.w;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.*;
@@ -15,6 +14,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.ManaUtil;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -85,7 +85,7 @@ class WanderingArchaicEffect extends OneShotEffect {
         if (controller == null || opponent == null || spell == null) {
             return false;
         }
-        Cost cost = new GenericManaCost(2);
+        Cost cost = ManaUtil.createManaCost(2, false);
         if (cost.canPay(source, source, opponent.getId(), game)
                 && opponent.chooseUse(outcome, "Pay {2}?", source, game)
                 && cost.pay(source, game, source, opponent.getId(), false)) {

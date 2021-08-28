@@ -49,7 +49,7 @@ public final class OchreJelly extends CardImpl {
                 )), OchreJellyCondition.instance, CardUtil.italicizeWithEmDash("Split")
                 + "When {this} dies, if it had two or more +1/+1 counters on it, " +
                 "create a token that's a copy of it at the beginning of the next end step. " +
-                "That token enters the battlefield with half that many +1/+1 counters on it, rounded down."
+                "The token enters the battlefield with half that many +1/+1 counters on it, rounded down."
         ));
     }
 

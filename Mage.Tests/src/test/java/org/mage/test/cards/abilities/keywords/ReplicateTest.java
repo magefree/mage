@@ -38,8 +38,8 @@ public class ReplicateTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Train of Thought");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Train of Thought");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "No");
+        setChoice(playerA, true);
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -54,9 +54,9 @@ public class ReplicateTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Train of Thought");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Train of Thought");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "No");
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -71,7 +71,7 @@ public class ReplicateTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Train of Thought");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Train of Thought");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -89,12 +89,12 @@ public class ReplicateTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pyromatics");
         addTarget(playerA, playerB);
-        setChoice(playerA, "Yes"); // replicate 1
-        setChoice(playerA, "Yes"); // replicate 2
-        setChoice(playerA, "No"); // stop
+        setChoice(playerA, true); // replicate 1
+        setChoice(playerA, true); // replicate 2
+        setChoice(playerA, false); // stop
         //
-        setChoice(playerA, "No"); // don't change target 1
-        setChoice(playerA, "No"); // don't change target 2
+        setChoice(playerA, false); // don't change target 1
+        setChoice(playerA, false); // don't change target 2
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -114,12 +114,12 @@ public class ReplicateTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pyromatics");
         addTarget(playerA, playerB);
-        //setChoice(playerA, "Yes"); // replicate 1 - AI must choice max possible
-        //setChoice(playerA, "Yes"); // replicate 2 - AI must choice max possible
-        //setChoice(playerA, "No"); // stop - AI must choice max possible
+        //setChoice(playerA, true); // replicate 1 - AI must choice max possible
+        //setChoice(playerA, true); // replicate 2 - AI must choice max possible
+        //setChoice(playerA, false); // stop - AI must choice max possible
         //
-        //setChoice(playerA, "No"); // don't change target 1
-        //setChoice(playerA, "No"); // don't change target 2
+        //setChoice(playerA, false); // don't change target 1
+        //setChoice(playerA, false); // don't change target 2
 
         //setStrictChooseMode(true); - AI must choice
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

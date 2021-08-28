@@ -429,9 +429,11 @@ public class CardView extends SimpleCardView {
                 this.cardIcons.add(FaceDownCardIcon.instance);
             }
             // commander
-            Player owner = game.getPlayer(game.getOwnerId(permanent));
-            if (owner != null && game.isCommanderObject(owner, permanent)) {
-                this.cardIcons.add(CommanderCardIcon.instance);
+            if (game != null) {
+                Player owner = game.getPlayer(game.getOwnerId(permanent));
+                if (owner != null && game.isCommanderObject(owner, permanent)) {
+                    this.cardIcons.add(CommanderCardIcon.instance);
+                }
             }
         } else {
             if (card.isCopy()) {
@@ -453,6 +455,7 @@ public class CardView extends SimpleCardView {
             // x cost
             Zone cardZone = game.getState().getZone(card.getId());
             if (card.getManaCost().containsX()
+                    && card.getSpellAbility() != null
                     && (cardZone.match(Zone.BATTLEFIELD) || cardZone.match(Zone.STACK))) {
                 int costX;
                 if (card instanceof Permanent) {

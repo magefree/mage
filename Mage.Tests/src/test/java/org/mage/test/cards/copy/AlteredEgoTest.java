@@ -22,7 +22,7 @@ public class AlteredEgoTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Altered Ego");
         setChoice(playerA, "X=3");
-        setChoice(playerA, "Yes"); // use copy
+        setChoice(playerA, true); // use copy
         setChoice(playerA, "Silvercoat Lion"); // copy target
 
         setStrictChooseMode(true);
@@ -44,7 +44,7 @@ public class AlteredEgoTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Altered Ego");
         setChoice(playerA, "X=3");
-        setChoice(playerA, "Yes"); // use copy (but no targets for copy)
+        setChoice(playerA, true); // use copy (but no targets for copy)
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

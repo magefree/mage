@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -10,11 +9,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.RollDieEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class SnickeringSquirrel extends CardImpl {
@@ -55,26 +56,27 @@ class SnickeringSquirrelEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         Player dieRoller = game.getPlayer(event.getPlayerId());
-        if (controller != null && dieRoller != null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null && !permanent.isTapped()) {
-                if (controller.chooseUse(Outcome.AIDontUseIt, "Do you want to tap this to increase the result of a die ("
-                        + event.getAmount() + ") "
-                        + dieRoller.getName() + " rolled by 1?", null, "Yes", "No", source, game)) {
-                    permanent.tap(source, game);
-                    // ignore planar dies (dice roll amount of planar dies is equal to 0)
-                    if (event.getAmount() > 0) {
-                        event.setAmount(event.getAmount() + 1);
-                    }
-                }
-            }
+        if (controller == null || dieRoller == null) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null || permanent.isTapped()) {
+            return false;
+        }
+        // TODO: allow AI for itself
+        // TODO: remove tap check on applies (no useless replace events)?
+        if (controller.chooseUse(Outcome.AIDontUseIt, "Tap this to increase the result of a die ("
+                + event.getAmount() + ") " + dieRoller.getName() + " rolled by 1?", source, game)) {
+            permanent.tap(source, game);
+            ((RollDieEvent) event).incResultModifier(1);
         }
         return false;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ROLL_DICE;
+        return event.getType() == GameEvent.EventType.ROLL_DIE
+                && ((RollDieEvent) event).getRollDieType() == RollDieType.NUMERICAL;
     }
 
     @Override

@@ -1,24 +1,22 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.constants.SubType;
+
+import mage.constants.*;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
+import mage.abilities.common.AttacksOrBlocksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextCleanupDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.constants.Outcome;
 import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -44,8 +42,8 @@ public final class Cunning extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3)));
 
         // When enchanted creature attacks or blocks, sacrifice Cunning at the beginning of the next cleanup step.
-        this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD,
-                new SacrificeSourceBeginningCleanupStepEffect()));
+        this.addAbility(new AttacksOrBlocksAttachedTriggeredAbility(
+                new SacrificeSourceBeginningCleanupStepEffect(), AttachmentType.AURA));
     }
 
     private Cunning(final Cunning card) {

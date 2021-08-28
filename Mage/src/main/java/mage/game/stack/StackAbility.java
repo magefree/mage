@@ -607,16 +607,19 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate predicate, Game game, Ability source, boolean chooseNewTargets) {
+    public void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate newTargetFilterPredicate, Game game, Ability source, boolean chooseNewTargets) {
         Ability newAbility = this.copy();
         newAbility.newId();
         StackAbility newStackAbility = new StackAbility(newAbility, newControllerId);
         game.getStack().push(newStackAbility);
-        if (predicate != null) {
-            newStackAbility.chooseNewTargets(game, newControllerId, true, false, predicate);
+
+        // new targets
+        if (newTargetFilterPredicate != null) {
+            newStackAbility.chooseNewTargets(game, newControllerId, true, false, newTargetFilterPredicate);
         } else if (chooseNewTargets || applier != null) { // if applier is non-null but predicate is null then it's extra
             newStackAbility.chooseNewTargets(game, newControllerId);
         }
+
         game.fireEvent(new CopiedStackObjectEvent(this, newStackAbility, newControllerId));
     }
 

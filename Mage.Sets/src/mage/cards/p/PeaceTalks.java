@@ -136,23 +136,22 @@ class PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities ex
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL
-                || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+        return event.getType() == GameEvent.EventType.TARGET;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             if (event.getTargetId().equals(playerId)) {
-                return false;
+                return true;
             }
         }
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
             if (event.getTargetId().equals(permanent.getId())) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override

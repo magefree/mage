@@ -18,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -63,7 +64,7 @@ class UnboundFlourishingDoubleXEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() * 2);
+        event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
         return false;
     }
 

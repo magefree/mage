@@ -2,7 +2,6 @@ package mage.cards.w;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -10,6 +9,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.ManaUtil;
+
 import java.util.Objects;
 import java.util.UUID;
 
@@ -65,22 +66,22 @@ class WhirlwindDenialEffect extends OneShotEffect {
                     if (player == null) {
                         return;
                     }
-                    Cost cost = new GenericManaCost(4);
+                    Cost cost = ManaUtil.createManaCost(4, false);
                     if (cost.canPay(source, source, stackObject.getControllerId(), game)
                             && player.chooseUse(outcome, "Pay {4} to prevent "
-                                    + stackObject.getIdName() + " from being countered?", source, game)
+                            + stackObject.getIdName() + " from being countered?", source, game)
                             && cost.pay(source, game, source, stackObject.getControllerId(), false)) {
-                        game.informPlayers("The cost was paid by " 
-                                + player.getLogName() 
-                                + " to prevent " 
-                                + stackObject.getIdName() 
+                        game.informPlayers("The cost was paid by "
+                                + player.getLogName()
+                                + " to prevent "
+                                + stackObject.getIdName()
                                 + " from being countered.");
                         return;
                     }
-                    game.informPlayers("The cost was not paid by " 
-                            + player.getLogName() 
-                            + " to prevent " 
-                            + stackObject.getIdName() 
+                    game.informPlayers("The cost was not paid by "
+                            + player.getLogName()
+                            + " to prevent "
+                            + stackObject.getIdName()
                             + " from being countered.");
                     game.getStack().counter(stackObject.getId(), source, game);
                 });

@@ -80,7 +80,7 @@ public class MizzixOfTheIzmagnusTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Seething Anger", "Mizzix of the Izmagnus");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

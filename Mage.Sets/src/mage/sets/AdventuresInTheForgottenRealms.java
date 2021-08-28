@@ -1,8 +1,15 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -17,6 +24,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
 
     private AdventuresInTheForgottenRealms() {
         super("Adventures in the Forgotten Realms", "AFR", ExpansionSet.buildDate(2021, 7, 23), SetType.EXPANSION);
+        // TODO: add collation object when set is fully implemented
         this.blockName = "Adventures in the Forgotten Realms";
         this.hasBoosters = true;
         this.hasBasicLands = true;
@@ -33,13 +41,16 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Arborea Pegasus", 2, Rarity.COMMON, mage.cards.a.ArboreaPegasus.class));
         cards.add(new SetCardInfo("Arcane Investigator", 46, Rarity.COMMON, mage.cards.a.ArcaneInvestigator.class));
         cards.add(new SetCardInfo("Armory Veteran", 130, Rarity.COMMON, mage.cards.a.ArmoryVeteran.class));
+        cards.add(new SetCardInfo("Asmodeus the Archfiend", 88, Rarity.RARE, mage.cards.a.AsmodeusTheArchfiend.class));
         cards.add(new SetCardInfo("Bag of Holding", 240, Rarity.UNCOMMON, mage.cards.b.BagOfHolding.class));
         cards.add(new SetCardInfo("Baleful Beholder", 89, Rarity.COMMON, mage.cards.b.BalefulBeholder.class));
         cards.add(new SetCardInfo("Bar the Gate", 47, Rarity.COMMON, mage.cards.b.BarTheGate.class));
+        cards.add(new SetCardInfo("Barbarian Class", 131, Rarity.UNCOMMON, mage.cards.b.BarbarianClass.class));
         cards.add(new SetCardInfo("Bard Class", 217, Rarity.RARE, mage.cards.b.BardClass.class));
         cards.add(new SetCardInfo("Barrowin of Clan Undurr", 218, Rarity.UNCOMMON, mage.cards.b.BarrowinOfClanUndurr.class));
         cards.add(new SetCardInfo("Battle Cry Goblin", 132, Rarity.UNCOMMON, mage.cards.b.BattleCryGoblin.class));
         cards.add(new SetCardInfo("Black Dragon", 90, Rarity.UNCOMMON, mage.cards.b.BlackDragon.class));
+        cards.add(new SetCardInfo("Brazen Dwarf", 134, Rarity.COMMON, mage.cards.b.BrazenDwarf.class));
         cards.add(new SetCardInfo("Blink Dog", 3, Rarity.UNCOMMON, mage.cards.b.BlinkDog.class));
         cards.add(new SetCardInfo("Blue Dragon", 49, Rarity.UNCOMMON, mage.cards.b.BlueDragon.class));
         cards.add(new SetCardInfo("Boots of Speed", 133, Rarity.COMMON, mage.cards.b.BootsOfSpeed.class));
@@ -61,6 +72,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Cloister Gargoyle", 7, Rarity.UNCOMMON, mage.cards.c.CloisterGargoyle.class));
         cards.add(new SetCardInfo("Compelled Duel", 178, Rarity.COMMON, mage.cards.c.CompelledDuel.class));
         cards.add(new SetCardInfo("Contact Other Plane", 52, Rarity.COMMON, mage.cards.c.ContactOtherPlane.class));
+        cards.add(new SetCardInfo("Critical Hit", 137, Rarity.UNCOMMON, mage.cards.c.CriticalHit.class));
         cards.add(new SetCardInfo("Dancing Sword", 8, Rarity.RARE, mage.cards.d.DancingSword.class));
         cards.add(new SetCardInfo("Dawnbringer Cleric", 9, Rarity.COMMON, mage.cards.d.DawnbringerCleric.class));
         cards.add(new SetCardInfo("Deadly Dispute", 94, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
@@ -96,8 +108,10 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Eye of Vecna", 243, Rarity.RARE, mage.cards.e.EyeOfVecna.class));
         cards.add(new SetCardInfo("Eyes of the Beholder", 101, Rarity.COMMON, mage.cards.e.EyesOfTheBeholder.class));
         cards.add(new SetCardInfo("Farideh's Fireball", 142, Rarity.COMMON, mage.cards.f.FaridehsFireball.class));
+        cards.add(new SetCardInfo("Farideh, Devil's Chosen", 221, Rarity.UNCOMMON, mage.cards.f.FaridehDevilsChosen.class));
         cards.add(new SetCardInfo("Fates' Reversal", 102, Rarity.COMMON, mage.cards.f.FatesReversal.class));
         cards.add(new SetCardInfo("Feign Death", 103, Rarity.COMMON, mage.cards.f.FeignDeath.class));
+        cards.add(new SetCardInfo("Feywild Trickster", 58, Rarity.UNCOMMON, mage.cards.f.FeywildTrickster.class));
         cards.add(new SetCardInfo("Fifty Feet of Rope", 244, Rarity.UNCOMMON, mage.cards.f.FiftyFeetOfRope.class));
         cards.add(new SetCardInfo("Fighter Class", 222, Rarity.RARE, mage.cards.f.FighterClass.class));
         cards.add(new SetCardInfo("Find the Path", 183, Rarity.COMMON, mage.cards.f.FindThePath.class));
@@ -182,6 +196,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         cards.add(new SetCardInfo("Owlbear", 198, Rarity.COMMON, mage.cards.o.Owlbear.class));
         cards.add(new SetCardInfo("Paladin Class", 29, Rarity.RARE, mage.cards.p.PaladinClass.class));
         cards.add(new SetCardInfo("Paladin's Shield", 30, Rarity.COMMON, mage.cards.p.PaladinsShield.class));
+        cards.add(new SetCardInfo("Pixie Guide", 66, Rarity.COMMON, mage.cards.p.PixieGuide.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Ally", 31, Rarity.COMMON, mage.cards.p.PlanarAlly.class));
         cards.add(new SetCardInfo("Plate Armor", 32, Rarity.UNCOMMON, mage.cards.p.PlateArmor.class));
@@ -287,3 +302,132 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
     }
 }
 
+// Booster collation info from https://www.lethe.xyz/mtg/collation/afr.html
+// Using USA collation for common/uncommon, rare collation inferred from other information
+class AdventuresInTheForgottenRealmsCollator implements BoosterCollator {
+
+    private static class AdventuresInTheForgottenRealmsRun extends CardRun {
+        private static final AdventuresInTheForgottenRealmsRun commonA = new AdventuresInTheForgottenRealmsRun(true, "144", "30", "122", "85", "153", "250", "164", "199", "133", "38", "141", "251", "101", "74", "245", "153", "122", "85", "30", "318", "250", "133", "199", "38", "153", "245", "74", "101", "251", "141", "30", "85", "164", "122", "144", "101", "251", "133", "199", "164", "250", "85", "141", "38", "74", "144", "30", "245", "122", "164", "38", "133", "250", "153", "248", "144", "101", "245", "74", "199", "141", "251", "30", "250", "122", "153", "85", "38", "164", "199", "133", "245", "101", "251", "141", "74", "153", "85", "133", "250", "318", "122", "164", "30", "199", "101", "251", "38", "85", "122", "245", "164", "74", "30", "141", "199", "101", "153", "38", "144", "250", "133", "245", "74", "164", "85", "122", "251", "141", "250", "144", "30", "153", "38", "133", "199", "74", "251", "141", "245", "101");
+        private static final AdventuresInTheForgottenRealmsRun commonB = new AdventuresInTheForgottenRealmsRun(true, "115", "182", "37", "47", "134", "119", "204", "16", "70", "146", "103", "189", "31", "51", "139", "102", "177", "14", "72", "158", "128", "205", "10", "46", "168", "108", "203", "43", "75", "150", "110", "178", "19", "52", "142", "123", "174", "40", "83", "140", "94", "213", "34", "73", "130", "109", "206", "9", "71", "162", "97", "183", "1", "65", "148", "118", "187", "11", "84", "159", "115", "204", "37", "51", "146", "119", "182", "31", "47", "134", "102", "177", "16", "70", "139", "103", "189", "14", "46", "168", "108", "205", "10", "72", "158", "128", "178", "19", "75", "150", "123", "203", "43", "52", "140", "110", "174", "40", "73", "142", "97", "206", "9", "83", "130", "118", "183", "34", "71", "162", "94", "213", "1", "65", "159", "109", "187", "11", "84", "148", "248");
+        private static final AdventuresInTheForgottenRealmsRun commonC = new AdventuresInTheForgottenRealmsRun(true, "55", "311", "24", "208", "106", "69", "165", "179", "129", "249", "50", "42", "198", "353", "35", "113", "185", "2", "309", "195", "312", "5", "45", "334", "152", "89", "24", "173", "306", "106", "179", "165", "69", "129", "198", "256", "50", "249", "35", "113", "326", "42", "45", "195", "93", "299", "66", "208", "24", "89", "152", "324", "55", "5", "165", "69", "106", "179", "50", "314", "185", "2", "129", "349", "198", "42", "66", "256", "35", "329", "45", "5", "152", "89", "55", "208", "93", "310", "165", "173", "24", "249", "331", "42", "50", "106", "256", "35", "325", "129", "2", "185", "113", "66", "195", "93", "45", "301", "152", "173");
+        private static final AdventuresInTheForgottenRealmsRun uncommonA = new AdventuresInTheForgottenRealmsRun(true, "76", "234", "92", "67", "175", "132", "96", "79", "154", "98", "188", "21", "125", "215", "61", "13", "120", "44", "136", "99", "244", "214", "135", "6", "81", "114", "170", "59", "116", "200", "68", "22", "240", "111", "58", "26", "210", "145", "25", "77", "242", "131", "33", "180", "163", "12", "117", "57", "32", "137", "212", "107", "36", "169", "191", "234", "76", "92", "132", "67", "96", "175", "79", "98", "21", "188", "125", "154", "44", "13", "120", "215", "61", "244", "136", "214", "99", "81", "135", "6", "59", "114", "170", "200", "22", "68", "116", "240", "26", "58", "111", "25", "131", "210", "33", "145", "77", "12", "163", "242", "180", "137", "107", "57", "32", "212", "117", "169", "191", "36");
+        private static final AdventuresInTheForgottenRealmsRun uncommonB = new AdventuresInTheForgottenRealmsRun(true, "247", "332", "49", "224", "300", "41", "219", "357", "160", "223", "225", "54", "90", "7", "346", "218", "95", "231", "186", "149", "327", "221", "161", "194", "348", "49", "224", "201", "343", "41", "219", "260", "305", "223", "160", "3", "342", "95", "218", "7", "236", "291", "247", "149", "186", "345", "192", "339", "161", "194", "288", "219", "201", "289", "224", "226", "160", "340", "95", "3", "336", "54", "260", "225", "231", "7", "90", "149", "236", "295", "321", "192", "49", "341", "247", "194", "221", "226", "260", "54", "223", "41", "201", "337", "218", "302", "3", "95", "294", "225", "192", "236", "90", "319", "231", "186", "226", "328", "161", "221");
+        private static final AdventuresInTheForgottenRealmsRun rareA = new AdventuresInTheForgottenRealmsRun(false, "87", "53", "100", "181", "143", "17", "20", "151", "62", "112", "227", "64", "197", "4", "91", "241", "207", "235", "239", "172", "216", "88", "217", "253", "176", "8", "138", "254", "56", "220", "255", "243", "222", "15", "104", "184", "105", "60", "18", "257", "246", "258", "147", "190", "259", "193", "23", "155", "63", "156", "228", "27", "196", "157", "229", "28", "29", "202", "230", "232", "233", "121", "78", "39", "48", "252", "261", "237", "80", "209", "238", "124", "211", "126", "127", "166", "82", "167", "86", "171", "216", "88", "217", "253", "176", "8", "138", "254", "56", "220", "255", "243", "222", "15", "104", "184", "105", "60", "18", "257", "246", "258", "147", "190", "259", "193", "23", "155", "63", "156", "228", "27", "196", "157", "229", "28", "29", "202", "230", "232", "233", "121", "78", "39", "48", "252", "261", "237", "80", "209", "238", "124", "211", "126", "127", "166", "82", "167", "86", "171");
+        private static final AdventuresInTheForgottenRealmsRun rareB = new AdventuresInTheForgottenRealmsRun(false, "87", "53", "292", "286", "143", "282", "287", "293", "290", "284", "344", "283", "296", "4", "91", "241", "333", "298", "239", "285", "297", "88", "217", "350", "176", "8", "317", "351", "307", "338", "352", "243", "222", "15", "104", "184", "313", "60", "18", "354", "246", "355", "147", "190", "356", "193", "23", "155", "308", "320", "228", "303", "330", "157", "229", "304", "29", "202", "230", "232", "233", "121", "78", "39", "48", "397", "358", "237", "80", "335", "347", "396", "211", "315", "316", "166", "82", "322", "86", "323", "297", "88", "217", "350", "176", "8", "317", "351", "307", "338", "352", "243", "222", "15", "104", "184", "313", "60", "18", "354", "246", "355", "147", "190", "356", "193", "23", "155", "308", "320", "228", "303", "330", "157", "229", "304", "29", "202", "230", "232", "233", "121", "78", "39", "48", "397", "358", "237", "80", "335", "347", "396", "211", "315", "316", "166", "82", "322", "86", "323");
+        private static final AdventuresInTheForgottenRealmsRun land = new AdventuresInTheForgottenRealmsRun(false, "262", "263", "264", "265", "266", "267", "268", "269", "270", "271", "272", "273", "274", "275", "276", "277", "278", "279", "280", "281");
+
+        private AdventuresInTheForgottenRealmsRun(boolean keepOrder, String... numbers) {
+            super(keepOrder, numbers);
+        }
+    }
+
+    private static class AdventuresInTheForgottenRealmsStructure extends BoosterStructure {
+        private static final AdventuresInTheForgottenRealmsStructure C1 = new AdventuresInTheForgottenRealmsStructure(
+                AdventuresInTheForgottenRealmsRun.commonA,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonC,
+                AdventuresInTheForgottenRealmsRun.commonC,
+                AdventuresInTheForgottenRealmsRun.commonC
+        );
+        private static final AdventuresInTheForgottenRealmsStructure C2 = new AdventuresInTheForgottenRealmsStructure(
+                AdventuresInTheForgottenRealmsRun.commonA,
+                AdventuresInTheForgottenRealmsRun.commonA,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonC,
+                AdventuresInTheForgottenRealmsRun.commonC,
+                AdventuresInTheForgottenRealmsRun.commonC
+        );
+        private static final AdventuresInTheForgottenRealmsStructure C3 = new AdventuresInTheForgottenRealmsStructure(
+                AdventuresInTheForgottenRealmsRun.commonA,
+                AdventuresInTheForgottenRealmsRun.commonA,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonB,
+                AdventuresInTheForgottenRealmsRun.commonC,
+                AdventuresInTheForgottenRealmsRun.commonC
+        );
+        private static final AdventuresInTheForgottenRealmsStructure U1 = new AdventuresInTheForgottenRealmsStructure(
+                AdventuresInTheForgottenRealmsRun.uncommonA,
+                AdventuresInTheForgottenRealmsRun.uncommonA,
+                AdventuresInTheForgottenRealmsRun.uncommonA
+        );
+        private static final AdventuresInTheForgottenRealmsStructure U2 = new AdventuresInTheForgottenRealmsStructure(
+                AdventuresInTheForgottenRealmsRun.uncommonB,
+                AdventuresInTheForgottenRealmsRun.uncommonB,
+                AdventuresInTheForgottenRealmsRun.uncommonB
+        );
+        private static final AdventuresInTheForgottenRealmsStructure R1 = new AdventuresInTheForgottenRealmsStructure(
+                AdventuresInTheForgottenRealmsRun.rareA
+        );
+        private static final AdventuresInTheForgottenRealmsStructure R2 = new AdventuresInTheForgottenRealmsStructure(
+                AdventuresInTheForgottenRealmsRun.rareB
+        );
+        private static final AdventuresInTheForgottenRealmsStructure L1 = new AdventuresInTheForgottenRealmsStructure(
+                AdventuresInTheForgottenRealmsRun.land
+        );
+
+        private AdventuresInTheForgottenRealmsStructure(CardRun... runs) {
+            super(runs);
+        }
+    }
+
+    private final RarityConfiguration commonRuns = new RarityConfiguration(
+            false,
+            AdventuresInTheForgottenRealmsStructure.C1,
+            AdventuresInTheForgottenRealmsStructure.C2,
+            AdventuresInTheForgottenRealmsStructure.C3
+    );
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(
+            false,
+            AdventuresInTheForgottenRealmsStructure.U1, AdventuresInTheForgottenRealmsStructure.U1,
+            AdventuresInTheForgottenRealmsStructure.U1, AdventuresInTheForgottenRealmsStructure.U1,
+            AdventuresInTheForgottenRealmsStructure.U1, AdventuresInTheForgottenRealmsStructure.U1,
+            AdventuresInTheForgottenRealmsStructure.U1, AdventuresInTheForgottenRealmsStructure.U1,
+            AdventuresInTheForgottenRealmsStructure.U1, AdventuresInTheForgottenRealmsStructure.U1,
+            AdventuresInTheForgottenRealmsStructure.U1,
+            AdventuresInTheForgottenRealmsStructure.U2, AdventuresInTheForgottenRealmsStructure.U2,
+            AdventuresInTheForgottenRealmsStructure.U2, AdventuresInTheForgottenRealmsStructure.U2,
+            AdventuresInTheForgottenRealmsStructure.U2
+    );
+    private final RarityConfiguration rareRuns = new RarityConfiguration(
+            false,
+            AdventuresInTheForgottenRealmsStructure.R1,
+            AdventuresInTheForgottenRealmsStructure.R1,
+            AdventuresInTheForgottenRealmsStructure.R1,
+            AdventuresInTheForgottenRealmsStructure.R2
+    );
+    private final RarityConfiguration landRuns = new RarityConfiguration(
+            AdventuresInTheForgottenRealmsStructure.L1
+    );
+
+
+    @Override
+    public void shuffle() {
+        commonRuns.shuffle();
+        uncommonRuns.shuffle();
+        rareRuns.shuffle();
+        landRuns.shuffle();
+    }
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(commonRuns.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(landRuns.getNext().makeRun());
+        return booster;
+    }
+}

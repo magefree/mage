@@ -20,7 +20,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -69,7 +68,7 @@ class DeathsOasisTriggeredAbility extends DiesCreatureTriggeredAbility {
     private static final FilterPermanent defaultFilter = new FilterControlledCreaturePermanent();
 
     static {
-        defaultFilter.add(Predicates.not(TokenPredicate.instance));
+        defaultFilter.add(TokenPredicate.FALSE);
     }
 
     DeathsOasisTriggeredAbility() {

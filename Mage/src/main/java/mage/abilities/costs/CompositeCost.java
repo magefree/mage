@@ -1,9 +1,10 @@
 package mage.abilities.costs;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.target.Targets;
+
+import java.util.UUID;
 
 public class CompositeCost implements Cost {
 
@@ -29,8 +30,9 @@ public class CompositeCost implements Cost {
     }
 
     @Override
-    public void setText(String text) {
+    public CompositeCost setText(String text) {
         this.description = text;
+        return this;
     }
 
     @Override

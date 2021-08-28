@@ -91,7 +91,7 @@ enum DemilichValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "instant and sorcery you've cast this turn";
+        return "instant and sorcery spell you've cast this turn";
     }
 }
 
@@ -134,7 +134,7 @@ class DemilichPlayEffect extends AsThoughEffectImpl {
 
     public DemilichPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        this.staticText = "You may cast {this} from your graveyard by exiling four instants and/or sorcery cards from your graveyard in addition to paying its other costs";
+        this.staticText = "You may cast {this} from your graveyard by exiling four instant and/or sorcery cards from your graveyard in addition to paying its other costs";
     }
 
     private DemilichPlayEffect(final DemilichPlayEffect effect) {

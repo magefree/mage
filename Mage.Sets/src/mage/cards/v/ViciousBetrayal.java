@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import mage.abilities.Ability;
@@ -27,7 +26,7 @@ public final class ViciousBetrayal extends CardImpl {
 
 
         // As an additional cost to cast Vicious Betrayal, sacrifice any number of creatures.
-        this.getSpellAbility().addCost(new SacrificeXTargetCost(new FilterControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeXTargetCost(new FilterControlledCreaturePermanent(), true));
         // Target creature gets +2/+2 until end of turn for each creature sacrificed this way.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(GetXValue.instance, GetXValue.instance, Duration.EndOfTurn));

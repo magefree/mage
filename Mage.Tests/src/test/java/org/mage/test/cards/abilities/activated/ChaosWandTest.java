@@ -24,7 +24,7 @@ public class ChaosWandTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}, {T}: ");
         addTarget(playerA, playerB);
-        setChoice(playerA, "Yes"); // cast for free
+        setChoice(playerA, true); // cast for free
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

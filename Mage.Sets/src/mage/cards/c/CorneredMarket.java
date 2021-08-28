@@ -49,7 +49,7 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(mage.filter.predicate.Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public CorneredMarketReplacementEffect() {

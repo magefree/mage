@@ -38,7 +38,7 @@ public class SerraAscendantTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Ascendant");
         
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Stomping Ground");
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Wild Nacatl");
         
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");

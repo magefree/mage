@@ -61,7 +61,7 @@ class OketrasLastMercyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.setLife(game.getLife(), game, source);
+            controller.setLife(game.getStartingLife(), game, source);
             return true;
         }
         return false;

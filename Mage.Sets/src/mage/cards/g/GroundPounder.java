@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -13,18 +12,16 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class GroundPounder extends CardImpl {
@@ -38,7 +35,7 @@ public final class GroundPounder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // 3G: Roll a six-sided die. Ground Pounder gets +X/+X until end of turn, where X is the result.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GroundPounderEffect(), new ManaCostsImpl("{3}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GroundPounderEffect(), new ManaCostsImpl<>("{3}{G}")));
 
         // Whenever you roll a 5 or higher on a die, Ground Pounder gains trample until end of turn.
         this.addAbility(new GroundPounderTriggeredAbility());
@@ -75,7 +72,7 @@ class GroundPounderEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            int amount = controller.rollDice(source, game, 6);
+            int amount = controller.rollDice(outcome, source, game, 6);
             game.addEffect(new BoostSourceEffect(amount, amount, Duration.EndOfTurn), source);
             return true;
         }
@@ -100,17 +97,14 @@ class GroundPounderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DICE_ROLLED;
+        return event.getType() == GameEvent.EventType.DIE_ROLLED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (this.isControlledBy(event.getPlayerId()) && event.getFlag()) {
-            if (event.getAmount() >= 5) {
-                return true;
-            }
-        }
-        return false;
+        DieRolledEvent drEvent = (DieRolledEvent) event;
+        // silver border card must look for "result" instead "natural result"
+        return this.isControlledBy(event.getPlayerId()) && drEvent.getResult() >= 5;
     }
 
     @Override

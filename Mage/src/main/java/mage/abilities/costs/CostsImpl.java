@@ -1,18 +1,18 @@
 package mage.abilities.costs;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.game.Game;
 import mage.target.Targets;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
- * @author BetaSteward_at_googlemail.com
  * @param <T>
+ * @author BetaSteward_at_googlemail.com
  */
 public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> {
 
@@ -34,8 +34,9 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
     }
 
     @Override
-    public void setText(String text) {
+    public CostsImpl<T> setText(String text) {
         this.text = text;
+        return this;
     }
 
     @Override

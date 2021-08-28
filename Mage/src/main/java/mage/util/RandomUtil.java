@@ -1,6 +1,7 @@
 package mage.util;
 
 import java.awt.*;
+import java.util.Collection;
 import java.util.Random;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Random;
  */
 public final class RandomUtil {
 
-    private static Random random = new Random(); // thread safe with seed support
+    private static final Random random = new Random(); // thread safe with seed support
 
     private RandomUtil() {
     }
@@ -39,5 +40,20 @@ public final class RandomUtil {
 
     public static void setSeed(long newSeed) {
         random.setSeed(newSeed);
+    }
+
+    public static <T> T randomFromCollection(Collection<T> collection) {
+        if (collection.size() < 2) {
+            return collection.stream().findFirst().orElse(null);
+        }
+        int rand = nextInt(collection.size());
+        int count = 0;
+        for (T current : collection) {
+            if (count == rand) {
+                return current;
+            }
+            count++;
+        }
+        return null;
     }
 }

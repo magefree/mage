@@ -26,7 +26,7 @@ public final class DreadhordeInvasion extends CardImpl {
 
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 5));
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 

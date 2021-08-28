@@ -2,6 +2,7 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -21,17 +22,16 @@ import mage.target.common.TargetOpponent;
 import java.util.UUID;
 
 /**
- *
  * @author noahg
  */
 public final class ThoughtDissector extends CardImpl {
 
     public ThoughtDissector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        
+
 
         // {X}, {tap}: Target opponent reveals cards from the top of their library until an artifact card or X cards are revealed, whichever comes first. If an artifact card is revealed this way, put it onto the battlefield under your control and sacrifice Thought Dissector. Put the rest of the revealed cards into that player's graveyard.
-        SimpleActivatedAbility abilitiy = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThoughtDissectorEffect(), new VariableManaCost());
+        SimpleActivatedAbility abilitiy = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThoughtDissectorEffect(), new VariableManaCost(VariableCostType.NORMAL));
         abilitiy.addCost(new TapSourceCost());
         abilitiy.addTarget(new TargetOpponent());
         this.addAbility(abilitiy);
@@ -82,7 +82,7 @@ class ThoughtDissectorEffect extends OneShotEffect {
                     break;
                 } else {
                     numberOfCard++;
-                    if (numberOfCard > max){
+                    if (numberOfCard > max) {
                         break;
                     }
                     nonArtifacts.add(card);

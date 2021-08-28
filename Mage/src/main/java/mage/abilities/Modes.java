@@ -127,7 +127,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     }
 
     public List<UUID> getSelectedModes() {
-        // sorted as original modes
+        // modes can be selected in any order by user, but execution must be in rule's order
         List<UUID> res = new ArrayList<>();
         for (Mode mode : this.values()) {
             for (UUID selectedId : this.selectedModes) {

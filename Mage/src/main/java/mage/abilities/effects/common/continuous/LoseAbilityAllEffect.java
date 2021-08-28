@@ -99,18 +99,6 @@ public class LoseAbilityAllEffect extends ContinuousEffectImpl {
                     perm.removeAbilities(ability, source.getSourceId(), game);
                 }
             }
-            // still as long as the prev. permanent is known to the LKI (e.g. Mikaeus, the Unhallowed) so gained dies triggered ability will trigger
-            Map<UUID, MageObject> LKIBattlefield = game.getLKI().get(Zone.BATTLEFIELD);
-            if (LKIBattlefield != null) {
-                for (MageObject mageObject : LKIBattlefield.values()) {
-                    Permanent perm = (Permanent) mageObject;
-                    if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-                        if (filter.match(perm, source.getSourceId(), source.getControllerId(), game)) {
-                            perm.removeAbilities(ability, source.getSourceId(), game);
-                        }
-                    }
-                }
-            }
         }
         return true;
     }

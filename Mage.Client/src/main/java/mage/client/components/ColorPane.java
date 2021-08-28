@@ -2,10 +2,9 @@ package mage.client.components;
 
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.client.MageFrame;
+import mage.client.cards.BigCard;
+import mage.client.cards.VirtualCardInfo;
 import mage.client.dialog.PreferencesDialog;
-import mage.client.util.gui.GuiDisplayUtil;
-import mage.components.CardInfoPane;
 import mage.game.command.Plane;
 import mage.util.CardUtil;
 import mage.utils.ThreadUtils;
@@ -23,19 +22,26 @@ import java.awt.event.MouseEvent;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
- * Enhanced {@link JTextPane} with text highlighting support.
+ * GUI: chats with html and hints popup support for objects
  *
- * @author nantuko
+ * @author nantuko, JayDi85
  */
 public class ColorPane extends JEditorPane {
 
     final HTMLEditorKit kit = new HTMLEditorKit();
     final HTMLDocument doc = new HTMLDocument();
-    private int tooltipDelay;
-    private int tooltipCounter;
+
+    private static final int CHAT_TOOLTIP_DELAY_MS = 50; // cards popup from chat must be fast all time
+
+    // cards popup info
     private boolean hyperlinkEnabled = false;
+    VirtualCardInfo cardInfo = new VirtualCardInfo();
+    UUID gameId = null;
+    BigCard bigCard = null;
+
 
     public ColorPane() {
         this.setEditorKit(kit);
@@ -44,8 +50,8 @@ public class ColorPane extends JEditorPane {
 
     private void addHyperlinkHandlers() {
         addHyperlinkListener(e -> ThreadUtils.threadPool2.submit(() -> {
-            tooltipDelay = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_DELAY, 300);
-            if (tooltipDelay == 0) {
+            if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_DELAY, 300) == 0) {
+                // if disabled
                 return;
             }
 
@@ -77,60 +83,50 @@ public class ColorPane extends JEditorPane {
             if (!alternativeName.isEmpty()) {
                 cardName = alternativeName;
             }
-            try {
-                final Component container = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
-                if (e.getEventType() == EventType.EXITED) {
-                    setPopupVisibility(container, false);
-                }
-                if (e.getEventType() == EventType.ENTERED) {
-                    CardInfoPane cardInfoPane = (CardInfoPane) MageFrame.getUI().getComponent(MageComponents.CARD_INFO_PANE);
 
-                    // card
-                    CardInfo card = CardRepository.instance.findCard(cardName);
+            if (e.getEventType() == EventType.ENTERED) {
+                CardView cardView = null;
+
+                // card
+                CardInfo card = CardRepository.instance.findCards(cardName).stream().findFirst().orElse(null);
+                if (card != null) {
+                    cardView = new CardView(card.getMockCard());
+                }
+
+                // plane
+                if (cardView == null) {
                     Plane plane = Plane.createPlaneByFullName(cardName);
-                    if (card != null) {
-                        cardInfoPane.setCard(new CardView(card.getMockCard()), container);
-                        setPopupVisibility(container, true);
-                    } else if (plane != null) {
-                        cardInfoPane.setCard(new CardView(new PlaneView(plane)), container);
-                        setPopupVisibility(container, true);
+                    if (plane != null) {
+                        cardView = new CardView(new PlaneView(plane));
                     }
                 }
-            } catch (InterruptedException e1) {
-                e1.printStackTrace();
+
+                // TODO: add other objects like dungeon, emblem, commander
+
+                if (cardView != null) {
+                    cardInfo.init(cardView, this.bigCard, this.gameId);
+                    cardInfo.setTooltipDelay(CHAT_TOOLTIP_DELAY_MS);
+                    cardInfo.onMouseEntered(MouseInfo.getPointerInfo().getLocation());
+                    cardInfo.onMouseMoved(MouseInfo.getPointerInfo().getLocation());
+                }
             }
 
+            if (e.getEventType() == EventType.EXITED) {
+                cardInfo.onMouseExited();
+            }
         }));
 
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
-                tooltipCounter = 1; // will decrement and become effectively zero on leaving the pane
-                try {
-                    setPopupVisibility(MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER), false);
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
+                cardInfo.onMouseExited();
             }
         });
     }
 
-    private void setPopupVisibility(final Component container, final boolean show) throws InterruptedException {
-        final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
-        SwingUtilities.invokeLater(() -> {
-            tooltipCounter += show ? 1 : -1;
-            if (tooltipCounter < 0) {
-                tooltipCounter = 0;
-            }
-            if (tooltipCounter > 0) {
-                Point location = new Point(this.getLocationOnScreen().x - container.getWidth(), MouseInfo.getPointerInfo().getLocation().y);
-                Component parentComponent = MageFrame.getInstance();
-                location = GuiDisplayUtil.keepComponentInsideParent(location, parentComponent.getLocationOnScreen(), container, parentComponent);
-                container.setLocation(location);
-            }
-            container.setVisible(tooltipCounter > 0);
-            c.repaint();
-        });
+    public void setGameData(UUID gameId, BigCard bigCard) {
+        this.gameId = gameId;
+        this.bigCard = bigCard;
     }
 
     /**

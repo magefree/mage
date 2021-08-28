@@ -57,9 +57,9 @@ public final class FighterClass extends CardImpl {
 
         // Equip abilities you activate cost {2} less to activate.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
-                new AbilitiesCostReductionControllerEffect(EquipAbility.class, "Equip")
-                        .setText("equip abilities you activate cost {2} less to activate"),
-                2
+                new AbilitiesCostReductionControllerEffect(
+                        EquipAbility.class, "Equip", 2
+                ).setText("equip abilities you activate cost {2} less to activate"), 2
         )));
 
         // {3}{R}{W}: Level 3

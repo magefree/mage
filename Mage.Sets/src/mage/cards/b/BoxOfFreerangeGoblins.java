@@ -56,7 +56,7 @@ class BoxOfFreerangeGoblinsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int amount = controller.rollDice(source, game, 6);
+            int amount = controller.rollDice(outcome, source, game, 6);
             CreateTokenEffect effect = new CreateTokenEffect(new GoblinToken(), amount);
             effect.apply(game, source);
             return true;

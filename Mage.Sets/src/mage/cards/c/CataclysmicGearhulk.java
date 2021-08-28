@@ -81,7 +81,7 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
     public CataclysmicGearhulkEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "each player chooses an artifact, a creature, an enchantment, and a planeswalker " +
-                "from among the nonland permanents they control then sacrifices the rest";
+                "from among the nonland permanents they control, then sacrifices the rest";
     }
 
     public CataclysmicGearhulkEffect(CataclysmicGearhulkEffect effect) {

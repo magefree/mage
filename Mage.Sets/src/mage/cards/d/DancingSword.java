@@ -33,7 +33,7 @@ public final class DancingSword extends CardImpl {
         // When equipped creature dies, you may have Dancing Sword become a 2/1 Construct artifact creature with flying and ward {1}. If you do, it isn't an Equipment.
         this.addAbility(new DiesAttachedTriggeredAbility(
                 new DancingSwordEffect(), "equipped creature", true
-        ));
+        ).setTriggerPhrase("When equipped creature dies, "));
 
         // Equip {1}
         this.addAbility(new EquipAbility(1));

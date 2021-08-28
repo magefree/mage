@@ -65,7 +65,6 @@ import mage.util.MessageToClient;
 import mage.util.RandomUtil;
 import mage.util.functions.CopyApplier;
 import mage.watchers.Watcher;
-import mage.watchers.Watchers;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
 
@@ -75,14 +74,23 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-public abstract class GameImpl implements Game, Serializable {
+/**
+ * Game object. It must contain static data (e.g. no changeable in the game like game settings)
+ * <p>
+ * "transient field" logic uses for serialization/replays (mark temporary fields as transient,
+ * also look for non restored fields in copy constructor for details)
+ * <p>
+ * WARNING, if you add new fields then don't forget to add it to copy constructor (deep copy, not ref).
+ * If it's a temporary/auto-generated data then mark that field as transient and comment in copy constructor.
+ */
+public abstract class GameImpl implements Game {
 
     private static final int ROLLBACK_TURNS_MAX = 4;
-
+    private static final String UNIT_TESTS_ERROR_TEXT = "Error in unit tests";
     private static final Logger logger = Logger.getLogger(GameImpl.class);
 
-    private transient Object customData;
-
+    private transient Object customData; // temporary data, used in AI simulations
+    private transient Player losingPlayer; // temporary data, used in AI simulations
     protected boolean simulation = false;
     protected boolean checkPlayableState = false;
 
@@ -99,18 +107,21 @@ public abstract class GameImpl implements Game, Serializable {
     protected Map<Zone, Map<UUID, CardState>> lkiCardState = new EnumMap<>(Zone.class);
     protected Map<UUID, Map<Integer, MageObject>> lkiExtended = new HashMap<>();
     // Used to check if an object was moved by the current effect in resolution (so Wrath like effect can be handled correctly)
-    protected Map<Zone, Set<UUID>> shortLivingLKI = new EnumMap<>(Zone.class);
+    protected Map<Zone, Set<UUID>> lkiShortLiving = new EnumMap<>(Zone.class);
 
     // Permanents entering the Battlefield while handling replacement effects before they are added to the battlefield
     protected Map<UUID, Permanent> permanentsEntering = new HashMap<>();
+    // used to set the counters a permanent adds the battlefield (if no replacement effect is used e.g. Persist)
+    protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
 
     protected GameState state;
     private transient Stack<Integer> savedStates = new Stack<>();
     protected transient GameStates gameStates = new GameStates();
+
     // game states to allow player rollback
     protected transient Map<Integer, GameState> gameStatesRollBack = new HashMap<>();
-    protected boolean executingRollback;
-    protected int turnToGoToForRollback;
+    protected transient boolean executingRollback;
+    protected transient int turnToGoToForRollback;
 
     protected Date startTime;
     protected Date endTime;
@@ -125,73 +136,126 @@ public abstract class GameImpl implements Game, Serializable {
     protected GameOptions gameOptions;
     protected String startMessage;
 
-    // private final transient LinkedList<MageAction> actions;
-    private Player scorePlayer;
-    // private int score = 0;
-    private Player losingPlayer;
-    private boolean stateCheckRequired = false;
+    private boolean scopeRelevant = false; // replacement effects: used to indicate that currently applied replacement effects have to check for scope relevance (614.12 13/01/18)
+    private boolean saveGame = false; // replay code, not done
+    private int priorityTime; // match time limit
+    private final int startingLife;
+    private final int startingHandSize;
+    protected transient PlayerList playerList; // auto-generated from state, don't copy
 
-    // used to indicate that currently applied replacement effects have to check for scope relevance (614.12 13/01/18)
-    private boolean scopeRelevant = false;
-    private boolean saveGame = false;
-    private int priorityTime;
-
-    private final int startLife;
-    private final int startingSize;
-    protected PlayerList playerList; // auto-generated from state, don't copy
-
-    // infinite loop check (no copy of this attributes neccessary)
-    private int infiniteLoopCounter; // used to check if the game is in an infinite loop
-    private int lastNumberOfAbilitiesOnTheStack; // used to check how long no new ability was put to stack
-    private List<Integer> lastPlayersLifes = null; // if life is going down, it's no infinite loop
-    private final LinkedList<UUID> stackObjectsCheck = new LinkedList<>(); // used to check if different sources used the stack
-
-    // used to set the counters a permanent adds the battlefield (if no replacement effect is used e.g. Persist)
-    protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
+    // infinite loop check (temporary data, do not copy)
+    private transient int infiniteLoopCounter; // used to check if the game is in an infinite loop
+    private transient int lastNumberOfAbilitiesOnTheStack; // used to check how long no new ability was put to stack
+    private transient List<Integer> lastPlayersLifes = null; // if life is going down, it's no infinite loop
+    private transient final LinkedList<UUID> stackObjectsCheck = new LinkedList<>(); // used to check if different sources used the stack
 
     // temporary store for income concede commands, don't copy
     private final LinkedList<UUID> concedingPlayers = new LinkedList<>();
 
-    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startingSize) {
+    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int startingHandSize) {
         this.id = UUID.randomUUID();
         this.range = range;
         this.mulligan = mulligan;
         this.attackOption = attackOption;
         this.state = new GameState();
-        this.startLife = startLife;
+        this.startingLife = startingLife;
         this.executingRollback = false;
-        this.startingSize = startingSize;
+        this.startingHandSize = startingHandSize;
         initGameDefaultWatchers();
     }
 
     public GameImpl(final GameImpl game) {
-        this.id = game.id;
-        this.ready = game.ready;
-        this.startingPlayerId = game.startingPlayerId;
-        this.winnerId = game.winnerId;
-        this.range = game.range;
-        this.mulligan = game.getMulligan().copy();
-        this.attackOption = game.attackOption;
-        this.state = game.state.copy();
-        this.gameCards = game.gameCards;
+        //this.customData = game.customData; // temporary data, no need on game copy
+        //this.losingPlayer = game.losingPlayer; // temporary data, no need on game copy
         this.simulation = game.simulation;
         this.checkPlayableState = game.checkPlayableState;
-        this.gameOptions = game.gameOptions;
-        this.lki.putAll(game.lki);
-        this.lkiExtended.putAll(game.lkiExtended);
-        this.lkiCardState.putAll(game.lkiCardState);
-        this.shortLivingLKI.putAll(game.shortLivingLKI);
-        this.permanentsEntering.putAll(game.permanentsEntering);
 
-        this.stateCheckRequired = game.stateCheckRequired;
-        this.scorePlayer = game.scorePlayer;
-        this.scopeRelevant = game.scopeRelevant;
-        this.priorityTime = game.priorityTime;
-        this.saveGame = game.saveGame;
-        this.startLife = game.startLife;
-        this.enterWithCounters.putAll(game.enterWithCounters);
-        this.startingSize = game.startingSize;
+        this.id = game.id;
+
+        this.ready = game.ready;
+        //this.tableEventSource = game.tableEventSource; // client-server part, not need on copy/simulations
+        //this.playerQueryEventSource = game.playerQueryEventSource; // client-server part, not need on copy/simulations
+
+        for (Entry<UUID, Card> entry : game.gameCards.entrySet()) {
+            this.gameCards.put(entry.getKey(), entry.getValue().copy());
+        }
+        for (Entry<UUID, MeldCard> entry : game.meldCards.entrySet()) {
+            this.meldCards.put(entry.getKey(), entry.getValue().copy());
+        }
+
+        // lki
+        for (Entry<Zone, Map<UUID, MageObject>> entry : game.lki.entrySet()) {
+            Map<UUID, MageObject> lkiMap = new HashMap<>();
+            for (Entry<UUID, MageObject> entryMap : entry.getValue().entrySet()) {
+                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
+            }
+            this.lki.put(entry.getKey(), lkiMap);
+        }
+        // lkiCardState
+        for (Entry<Zone, Map<UUID, CardState>> entry : game.lkiCardState.entrySet()) {
+            Map<UUID, CardState> lkiMap = new HashMap<>();
+            for (Entry<UUID, CardState> entryMap : entry.getValue().entrySet()) {
+                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
+            }
+            this.lkiCardState.put(entry.getKey(), lkiMap);
+        }
+        // lkiExtended
+        for (Entry<UUID, Map<Integer, MageObject>> entry : game.lkiExtended.entrySet()) {
+            Map<Integer, MageObject> lkiMap = new HashMap<>();
+            for (Entry<Integer, MageObject> entryMap : entry.getValue().entrySet()) {
+                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
+            }
+            this.lkiExtended.put(entry.getKey(), lkiMap);
+        }
+        // lkiShortLiving
+        for (Entry<Zone, Set<UUID>> entry : game.lkiShortLiving.entrySet()) {
+            this.lkiShortLiving.put(entry.getKey(), new HashSet<>(entry.getValue()));
+        }
+
+        for (Entry<UUID, Permanent> entry : game.permanentsEntering.entrySet()) {
+            this.permanentsEntering.put(entry.getKey(), entry.getValue().copy());
+        }
+        for (Entry<UUID, Counters> entry : game.enterWithCounters.entrySet()) {
+            this.enterWithCounters.put(entry.getKey(), entry.getValue().copy());
+        }
+
+        this.state = game.state.copy();
+        // client-server part, not need on copy/simulations:
+        /*
+        this.savedStates = game.savedStates;
+        this.gameStates = game.gameStates;
+        this.gameStatesRollBack = game.gameStatesRollBack;
+        this.executingRollback = game.executingRollback;
+        this.turnToGoToForRollback = game.turnToGoToForRollback;
+        */
+
+        this.startTime = game.startTime;
+        this.endTime = game.endTime;
+        this.startingPlayerId = game.startingPlayerId;
+        this.winnerId = game.winnerId;
         this.gameStopped = game.gameStopped;
+
+        this.range = game.range;
+        this.mulligan = game.mulligan.copy();
+
+        this.attackOption = game.attackOption;
+        this.gameOptions = game.gameOptions.copy();
+        this.startMessage = game.startMessage;
+
+        this.scopeRelevant = game.scopeRelevant;
+        this.saveGame = game.saveGame;
+        this.priorityTime = game.priorityTime;
+        this.startingLife = game.startingLife;
+        this.startingHandSize = game.startingHandSize;
+        //this.playerList = game.playerList; // auto-generated list, don't copy
+
+        // loop check code, no need to copy
+        /*
+        this.infiniteLoopCounter = game.infiniteLoopCounter;
+        this.lastNumberOfAbilitiesOnTheStack = game.lastNumberOfAbilitiesOnTheStack;
+        this.lastPlayersLifes = game.lastPlayersLifes;
+        this.stackObjectsCheck = game.stackObjectsCheck;
+         */
     }
 
     @Override
@@ -609,7 +673,7 @@ public abstract class GameImpl implements Game, Serializable {
         // copied cards removes, but delayed triggered possible from it, see https://github.com/magefree/mage/issues/5437
         // TODO: remove that workround after LKI rework, see GameState.copyCard
         if (card == null) {
-            card = (Card) state.getValue(GameState.COPIED_CARD_KEY + cardId.toString());
+            card = (Card) state.getValue(GameState.COPIED_CARD_KEY + cardId);
         }
         return card;
     }
@@ -782,9 +846,10 @@ public abstract class GameImpl implements Game, Serializable {
      *
      * @param bookmark
      * @param context  additional information for error message
+     * @return current restored state (if all fine)
      */
     @Override
-    public void restoreState(int bookmark, String context) {
+    public GameState restoreState(int bookmark, String context) {
         if (!simulation && !this.hasEnded()) { // if player left or game is over no undo is possible - this could lead to wrong winner
             if (bookmark != 0) {
                 if (!savedStates.contains(bookmark - 1)) {
@@ -799,11 +864,12 @@ public abstract class GameImpl implements Game, Serializable {
                     if (restore != null) {
                         state.restore(restore);
                         playerList.setCurrent(state.getPlayerByOrderId());
+                        return state;
                     }
                 }
             }
         }
-
+        return null;
     }
 
     @Override
@@ -849,7 +915,6 @@ public abstract class GameImpl implements Game, Serializable {
     public void start(UUID choosingPlayerId) {
         startTime = new Date();
         if (state.getPlayers().values().iterator().hasNext()) {
-            scorePlayer = state.getPlayers().values().iterator().next();
             init(choosingPlayerId);
             play(startingPlayerId);
         }
@@ -1043,7 +1108,7 @@ public abstract class GameImpl implements Game, Serializable {
                 for (Ability ability : card.getAbilities(this)) {
                     if (ability instanceof CompanionAbility) {
                         CompanionAbility companionAbility = (CompanionAbility) ability;
-                        if (companionAbility.isLegal(new HashSet<>(player.getLibrary().getCards(this)), startingSize)) {
+                        if (companionAbility.isLegal(new HashSet<>(player.getLibrary().getCards(this)), startingHandSize)) {
                             potentialCompanions.add(card);
                             break;
                         }
@@ -1127,7 +1192,7 @@ public abstract class GameImpl implements Game, Serializable {
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (!gameOptions.testMode || player.getLife() == 0) {
-                player.initLife(this.getLife());
+                player.initLife(this.getStartingLife());
             }
             if (!gameOptions.testMode) {
                 player.drawCards(startingHandSize, null, this);
@@ -1406,7 +1471,7 @@ public abstract class GameImpl implements Game, Serializable {
     public void playPriority(UUID activePlayerId, boolean resuming) {
         int errorContinueCounter = 0;
         infiniteLoopCounter = 0;
-        int bookmark = 0;
+        int rollbackBookmark = 0;
         clearAllBookmarks();
         try {
             applyEffects();
@@ -1421,8 +1486,8 @@ public abstract class GameImpl implements Game, Serializable {
                 Player player;
                 while (!isPaused() && !checkIfGameIsOver()) {
                     try {
-                        if (bookmark == 0) {
-                            bookmark = bookmarkState();
+                        if (rollbackBookmark == 0) {
+                            rollbackBookmark = bookmarkState();
                         }
                         player = getPlayer(state.getPlayerList().get());
                         state.setPriorityPlayerId(player.getId());
@@ -1479,18 +1544,28 @@ public abstract class GameImpl implements Game, Serializable {
                             logger.fatal(ex.getStackTrace());
                         }
                         this.fireErrorEvent("Game exception occurred: ", ex);
-                        restoreState(bookmark, "Game exception: " + ex.getMessage());
-                        bookmark = 0;
+
+                        // rollback game to prev state
+                        GameState restoredState = restoreState(rollbackBookmark, "Game exception: " + ex.getMessage());
+                        rollbackBookmark = 0;
+
                         if (errorContinueCounter > 15) {
                             throw new MageException("Iterated player priority after game exception too often, game ends! Last error:\n "
                                     + ex.getMessage());
                         }
+
+                        if (restoredState != null) {
+                            this.informPlayers(String.format("Auto-restored to %s due game error: %s", restoredState, ex.getMessage()));
+                        } else {
+                            logger.error("Can't auto-restore to prev state.");
+                        }
+
                         Player activePlayer = this.getPlayer(getActivePlayerId());
                         if (activePlayer != null && !activePlayer.isTestsMode()) {
                             errorContinueCounter++;
                             continue;
                         } else {
-                            throw new MageException("Error in unit tests");
+                            throw new MageException(UNIT_TESTS_ERROR_TEXT);
                         }
                     } finally {
                         setCheckPlayableState(false);
@@ -1499,9 +1574,15 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         } catch (Exception ex) {
-            logger.fatal("Game exception ", ex);
+            logger.fatal("Game exception " + ex.getMessage(), ex);
             this.fireErrorEvent("Game exception occurred: ", ex);
             this.end();
+
+            // don't catch game errors in unit tests, so test framework can process it (example: errors in AI simulations)
+            if (ex.getMessage() != null && ex.getMessage().equals(UNIT_TESTS_ERROR_TEXT)) {
+                //this.getContinuousEffects().traceContinuousEffects(this);
+                throw new IllegalStateException(UNIT_TESTS_ERROR_TEXT);
+            }
         } finally {
             resetLKI();
             clearAllBookmarks();
@@ -2051,6 +2132,7 @@ public abstract class GameImpl implements Game, Serializable {
         // to exist the next time state-based actions are checked.
         //
         // Copied cards can be stored in GameState.copiedCards or in game state value (until LKI rework)
+        // Copied cards list contains all parts of split/adventure/mdfc
         Set<Card> allCopiedCards = new HashSet<>();
         allCopiedCards.addAll(this.getState().getCopiedCards());
         Map<String, Object> stateSavedCopiedCards = this.getState().getValues(GameState.COPIED_CARD_KEY);
@@ -2060,6 +2142,7 @@ public abstract class GameImpl implements Game, Serializable {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList())
         );
+        Set<Card> copiedCardsToRemove = new HashSet<>();
         for (Card copiedCard : allCopiedCards) {
             // 1. Zone must be checked from main card only cause mdf parts can have different zones
             //    (one side on battlefield, another side on outside)
@@ -2070,13 +2153,25 @@ public abstract class GameImpl implements Game, Serializable {
             Zone zone = state.getZone(copiedCard.getMainCard().getId());
             // TODO: remember LKI of copied cards here after LKI rework
             switch (zone) {
-                case BATTLEFIELD:
+                case OUTSIDE:
+                case BATTLEFIELD: {
+                    // keep in battlefield
+                    // keep in outside (it's a final zone for all copied cards)
                     continue;
-                case STACK:
-                    if (getStack().getStackObject(copiedCard.getId()) != null) {
+                }
+
+                case STACK: {
+                    // copied cards aren't moves and keeps in Stack zone after resolve,
+                    // so it must be moved manually as SBA (see Outside zone change at the end)
+                    MageObject object = getStack().getStackObject(copiedCard.getId());
+                    if (object != null) {
+                        // keep in stack until resolve
                         continue;
                     }
-                case GRAVEYARD:
+                    break;
+                }
+
+                case GRAVEYARD: {
                     for (Player player : getPlayers().values()) {
                         if (player.getGraveyard().contains(copiedCard.getId())) {
                             player.getGraveyard().remove(copiedCard);
@@ -2084,7 +2179,9 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                     break;
-                case HAND:
+                }
+
+                case HAND: {
                     for (Player player : getPlayers().values()) {
                         if (player.getHand().contains(copiedCard.getId())) {
                             player.getHand().remove(copiedCard);
@@ -2092,7 +2189,9 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                     break;
-                case LIBRARY:
+                }
+
+                case LIBRARY: {
                     for (Player player : getPlayers().values()) {
                         if (player.getLibrary().getCard(copiedCard.getId(), this) != null) {
                             player.getLibrary().remove(copiedCard.getId(), this);
@@ -2100,15 +2199,30 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                     break;
-                case EXILED:
+                }
+
+                case EXILED: {
                     getExile().removeCard(copiedCard, this);
                     break;
+                }
+
+                case COMMAND:
+                default: {
+                    break;
+                }
             }
 
-            // remove copied card info
-            this.getState().getCopiedCards().remove(copiedCard);
-            this.getState().removeValue(GameState.COPIED_CARD_KEY + copiedCard.getId().toString());
+            // copied card can be removed to Outside
+            copiedCardsToRemove.add(copiedCard);
         }
+        // real remove
+        copiedCardsToRemove.forEach(card -> {
+            card.setZone(Zone.OUTSIDE, this);
+            this.getState().getCopiedCards().remove(card);
+            // must keep card in game state as LKI alternative until LKI rework, so don't remove from it
+            // TODO: change after LKI rework
+            //this.getState().removeValue(GameState.COPIED_CARD_KEY + copiedCard.getId().toString());
+        });
 
         List<Permanent> legendary = new ArrayList<>();
         List<Permanent> worldEnchantment = new ArrayList<>();
@@ -3093,7 +3207,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public boolean getShortLivingLKI(UUID objectId, Zone zone) {
-        Set<UUID> idSet = shortLivingLKI.get(zone);
+        Set<UUID> idSet = lkiShortLiving.get(zone);
         if (idSet != null) {
             return idSet.contains(objectId);
         }
@@ -3118,7 +3232,7 @@ public abstract class GameImpl implements Game, Serializable {
             // remembers if a object was in a zone during the resolution of an effect
             // e.g. Wrath destroys all and you the question is is the replacement effect to apply because the source was also moved by the same effect
             // because it happens all at the same time the replacement effect has still to be applied
-            Set<UUID> idSet = shortLivingLKI.computeIfAbsent(zone, k -> new HashSet<>());
+            Set<UUID> idSet = lkiShortLiving.computeIfAbsent(zone, k -> new HashSet<>());
             idSet.add(objectId);
             if (object instanceof Permanent) {
                 Map<Integer, MageObject> lkiExtendedMap = lkiExtended.computeIfAbsent(objectId, k -> new HashMap<>());
@@ -3149,7 +3263,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void resetShortLivingLKI() {
-        shortLivingLKI.clear();
+        lkiShortLiving.clear();
     }
 
     @Override
@@ -3301,16 +3415,6 @@ public abstract class GameImpl implements Game, Serializable {
         playerQueryEventSource.informPlayer(player.getId(), message);
     }
 
-    @Override
-    public boolean getStateCheckRequired() {
-        return stateCheckRequired;
-    }
-
-    @Override
-    public void setStateCheckRequired() {
-        stateCheckRequired = true;
-    }
-
     /**
      * If true, only self scope replacement effects are applied
      *
@@ -3385,8 +3489,8 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public int getLife() {
-        return startLife;
+    public int getStartingLife() {
+        return startingLife;
     }
 
     @Override

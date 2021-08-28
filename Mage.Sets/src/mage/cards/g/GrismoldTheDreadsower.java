@@ -30,7 +30,7 @@ public final class GrismoldTheDreadsower extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature token");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public GrismoldTheDreadsower(UUID ownerId, CardSetInfo setInfo) {

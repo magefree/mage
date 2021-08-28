@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.common.TargetAnyTarget;
 
@@ -26,7 +25,7 @@ public final class JudithTheScourgeDiva extends CardImpl {
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public JudithTheScourgeDiva(UUID ownerId, CardSetInfo setInfo) {

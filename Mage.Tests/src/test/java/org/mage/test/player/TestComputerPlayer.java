@@ -1,5 +1,6 @@
 package org.mage.test.player;
 
+import mage.choices.Choice;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
@@ -13,16 +14,20 @@ import java.util.UUID;
  */
 
 /**
- * Mock class to override AI logic for test, cause PlayerImpl uses inner calls for other methods. If you
- * want to override that methods for tests then call it here.
+ * Mock class to inject test player support in the inner choice calls, e.g. in PlayerImpl. If you
+ * want to set up inner choices then override it here.
  * <p>
- * It's a workaround and can be bugged (if you catch overflow error with new method then TestPlayer
- * class must re-implement full method code without computerPlayer calls).
+ * Works in strict mode only.
+ * <p>
+ * If you catch overflow error with new method then check strict mode in it.
  * <p>
  * Example 1: TestPlayer's code uses outer computerPlayer call to discard but discard's inner code must call choose from TestPlayer
  * Example 2: TestPlayer's code uses outer computerPlayer call to flipCoin but flipCoin's inner code must call flipCoinResult from TestPlayer
  * <p>
  * Don't forget to add new methods in another classes like TestComputerPlayer7 or TestComputerPlayerMonteCarlo
+ * <p>
+ * If you implement set up of random results for tests (die roll, flip coin, etc) and want to support AI tests
+ * (same random results in simulated games) then override same methods in SimulatedPlayer2 too
  */
 
 public class TestComputerPlayer extends ComputerPlayer {
@@ -39,12 +44,47 @@ public class TestComputerPlayer extends ComputerPlayer {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
-        return testPlayerLink.choose(outcome, target, sourceId, game);
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.choose(outcome, target, sourceId, game);
+        } else {
+            return testPlayerLink.choose(outcome, target, sourceId, game);
+        }
+    }
+
+    @Override
+    public boolean choose(Outcome outcome, Choice choice, Game game) {
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.choose(outcome, choice, game);
+        } else {
+            return testPlayerLink.choose(outcome, choice, game);
+        }
     }
 
     @Override
     public boolean flipCoinResult(Game game) {
-        return testPlayerLink.flipCoinResult(game);
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.flipCoinResult(game);
+        } else {
+            return testPlayerLink.flipCoinResult(game);
+        }
+    }
+
+    @Override
+    public int rollDieResult(int sides, Game game) {
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.rollDieResult(sides, game);
+        } else {
+            return testPlayerLink.rollDieResult(sides, game);
+        }
+    }
+
+    @Override
+    public boolean isComputer() {
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.isComputer();
+        } else {
+            return testPlayerLink.isComputer();
+        }
     }
 }
 

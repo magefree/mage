@@ -90,6 +90,6 @@ class ThunderbreakRegentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a Dragon you control becomes the target of a spell or ability your opponent controls, {this} deals 3 damage to that player.";
+        return "Whenever a Dragon you control becomes the target of a spell or ability an opponent controls, {this} deals 3 damage to that player.";
     }
 }

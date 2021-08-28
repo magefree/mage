@@ -74,7 +74,7 @@ public class HumanPlayer extends PlayerImpl {
     protected final Choice replacementEffectChoice;
     private static final Logger logger = Logger.getLogger(HumanPlayer.class);
 
-    protected HashSet<String> autoSelectReplacementEffects = new HashSet<>();
+    protected HashSet<String> autoSelectReplacementEffects = new LinkedHashSet<>(); // must be sorted
     protected ManaCost currentlyUnpaidMana;
 
     protected Set<UUID> triggerAutoOrderAbilityFirst = new HashSet<>();
@@ -82,6 +82,7 @@ public class HumanPlayer extends PlayerImpl {
     protected Set<String> triggerAutoOrderNameFirst = new HashSet<>();
     protected Set<String> triggerAutoOrderNameLast = new HashSet<>();
 
+    // auto-answer
     protected Map<String, Boolean> requestAutoAnswerId = new HashMap<>();
     protected Map<String, Boolean> requestAutoAnswerText = new HashMap<>();
 
@@ -96,9 +97,16 @@ public class HumanPlayer extends PlayerImpl {
 
     public HumanPlayer(String name, RangeOfInfluence range, int skill) {
         super(name, range);
+        human = true;
+
         replacementEffectChoice = new ChoiceImpl(true);
         replacementEffectChoice.setMessage("Choose replacement effect to resolve first");
-        human = true;
+        replacementEffectChoice.setSpecial(
+                true,
+                false,
+                "Remember answer",
+                "Choose same answer next time (you can reset saved answers by battlefield popup menu)"
+        );
     }
 
     public HumanPlayer(final HumanPlayer player) {
@@ -290,15 +298,22 @@ public class HumanPlayer extends PlayerImpl {
             options.put("UI.right.btn.text", falseText);
         }
         if (source != null) {
-            Boolean answer = requestAutoAnswerId.get(source.getOriginalId() + "#" + message);
-            if (answer != null) {
-                return answer;
-            } else {
-                answer = requestAutoAnswerText.get(message);
-                if (answer != null) {
-                    return answer;
-                }
-            }
+            //options.put(Constants.Option.ORIGINAL_ID, "")
+        }
+
+
+        // auto-answer
+        Boolean answer = null;
+        if (source != null) {
+            // ability + text
+            answer = requestAutoAnswerId.get(source.getOriginalId() + "#" + message);
+        }
+        if (answer == null) {
+            // text
+            answer = requestAutoAnswerText.get(message);
+        }
+        if (answer != null) {
+            return answer;
         }
 
         while (canRespond()) {
@@ -359,11 +374,20 @@ public class HumanPlayer extends PlayerImpl {
             return 0;
         }
 
+        // use auto-choice:
+        // - uses "always first" logic (choose in same order as user answer saves)
+        // - search same effects by text (object name [id]: rules)
+        // - autoSelectReplacementEffects is sorted set
+        // - must get "same settings" option between cycle/response (user can change it by preferences)
+
+        boolean useSameSettings = getControllingPlayersUserData(game).isUseSameSettingsForReplacementEffects();
         if (!autoSelectReplacementEffects.isEmpty()) {
-            for (String autoKey : autoSelectReplacementEffects) {
+            for (String autoText : autoSelectReplacementEffects) {
                 int count = 0;
+                // find effect with same saved text
                 for (String effectKey : rEffects.keySet()) {
-                    if (effectKey.equals(autoKey)) {
+                    String currentText = prepareReplacementText(rEffects.get(effectKey), useSameSettings);
+                    if (currentText.equals(autoText)) {
                         return count;
                     }
                     count++;
@@ -371,10 +395,11 @@ public class HumanPlayer extends PlayerImpl {
             }
         }
 
+        replacementEffectChoice.clearChoice();
         replacementEffectChoice.getChoices().clear();
         replacementEffectChoice.setKeyChoices(rEffects);
 
-        // Check if there are different ones
+        // if same choices then select first
         int differentChoices = 0;
         String lastChoice = "";
         for (String value : replacementEffectChoice.getKeyChoices().values()) {
@@ -397,11 +422,18 @@ public class HumanPlayer extends PlayerImpl {
 
             logger.debug("Choose effect: " + response.getString());
             if (response.getString() != null) {
+                // save auto-choice (effect's text)
                 if (response.getString().startsWith("#")) {
-                    autoSelectReplacementEffects.add(response.getString().substring(1));
-                    replacementEffectChoice.setChoiceByKey(response.getString().substring(1));
+                    replacementEffectChoice.setChoiceByKey(response.getString().substring(1), true);
+                    if (replacementEffectChoice.isChosen()) {
+                        // put auto-choice to the end
+                        useSameSettings = getControllingPlayersUserData(game).isUseSameSettingsForReplacementEffects();
+                        String effectText = prepareReplacementText(replacementEffectChoice.getChoiceValue(), useSameSettings);
+                        autoSelectReplacementEffects.remove(effectText);
+                        autoSelectReplacementEffects.add(effectText);
+                    }
                 } else {
-                    replacementEffectChoice.setChoiceByKey(response.getString());
+                    replacementEffectChoice.setChoiceByKey(response.getString(), false);
                 }
 
                 if (replacementEffectChoice.getChoiceKey() != null) {
@@ -417,6 +449,14 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         return 0;
+    }
+
+    private String prepareReplacementText(String fullText, boolean useSameSettingsForDifferentObjects) {
+        // remove object id from the rules text (example: object [abd]: rules -> object : rules)
+        if (useSameSettingsForDifferentObjects) {
+            fullText = fullText.replaceAll("\\[\\w+\\]", "");
+        }
+        return fullText;
     }
 
     @Override
@@ -2569,6 +2609,10 @@ public class HumanPlayer extends PlayerImpl {
     private boolean gameInCheckPlayableState(Game game, boolean ignoreWarning) {
         if (game.inCheckPlayableState()) {
             if (!ignoreWarning) {
+                logger.warn(String.format("Current stack: %d - %s",
+                        game.getStack().size(),
+                        game.getStack().stream().map(Object::toString).collect(Collectors.joining(", "))
+                ));
                 logger.warn("Player interaction in checkPlayableState", new Throwable());
             }
             return true;

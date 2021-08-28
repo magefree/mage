@@ -75,7 +75,7 @@ class GolosTirelessPilgrimEffect extends OneShotEffect {
         }
         Set<Card> cards = player.getLibrary().getTopCards(game, 3);
         return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, cards,
-                TargetController.YOU, Duration.EndOfTurn, true, false);
+                TargetController.YOU, Duration.EndOfTurn, true, false, false);
     }
 
     @Override

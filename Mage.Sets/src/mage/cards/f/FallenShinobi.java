@@ -71,6 +71,6 @@ class FallenShinobiEffect extends OneShotEffect {
             return false;
         }
         return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, player.getLibrary().getTopCards(game, 2),
-                TargetController.YOU, Duration.EndOfTurn, true, false);
+                TargetController.YOU, Duration.EndOfTurn, true, false, false);
     }
 }

@@ -22,7 +22,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre"); // Cast Orgre by discarding the Lightning Bolt
-        setChoice(playerA, "Yes"); // Pay alternative costs? (Discard a card that shares a color with that spell)
+        setChoice(playerA, true); // Pay alternative costs? (Discard a card that shares a color with that spell)
         setChoice(playerA, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -93,7 +93,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
 
         checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", "Alpha Myr");
-        setChoice(playerA, "Yes"); // use alternative cost
+        setChoice(playerA, true); // use alternative cost
         setChoice(playerA, "Plains");
 
         setStrictChooseMode(true);
@@ -118,7 +118,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
 
         checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", "Alpha Myr");
-        setChoice(playerA, "Yes"); // use alternative cost
+        setChoice(playerA, true); // use alternative cost
         setChoice(playerA, "Plains");
 
         setStrictChooseMode(true);
@@ -158,7 +158,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Invigorate", "Silvercoat Lion");
-        setChoice(playerA, "Yes"); // use alternative cost
+        setChoice(playerA, true); // use alternative cost
         addTarget(playerA, playerB); // Opponent to gain live
         
         setStrictChooseMode(true);

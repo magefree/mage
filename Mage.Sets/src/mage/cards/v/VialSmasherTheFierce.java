@@ -20,13 +20,13 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.util.RandomUtil;
 import mage.watchers.common.SpellsCastWatcher;
 
-import java.util.Iterator;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -123,31 +123,34 @@ class VialSmasherTheFierceEffect extends OneShotEffect {
         if (controller != null) {
             int damage = (Integer) getValue("VialSmasherTheFierceCMC");
             if (damage > 0) {
-                Set<UUID> opponents = game.getOpponents(source.getControllerId());
-                int random = RandomUtil.nextInt(opponents.size());
-                Iterator<UUID> iterator = opponents.iterator();
-                for (int i = 0; i < random; i++) {
-                    iterator.next();
+                List<Player> opponents = game.getOpponents(source.getControllerId())
+                        .stream()
+                        .map(game::getPlayer)
+                        .filter(Objects::nonNull)
+                        .filter(o -> !o.hasLost())
+                        .filter(o -> !o.hasLeft())
+                        .collect(Collectors.toList());
+                if(opponents.isEmpty()){
+                    return false;
                 }
-                UUID opponentId = iterator.next();
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null) {
-                    game.informPlayers(opponent.getLogName() + " was chosen at random.");
-                    if (game.getBattlefield().getAllActivePermanents(new FilterPlaneswalkerPermanent(), opponentId, game).size() > 0) {
-                        if (controller.chooseUse(Outcome.Damage, "Redirect to a planeswalker controlled by " + opponent.getLogName() + "?", source, game)) {
-                            FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("a planeswalker controlled by " + opponent.getLogName());
-                            filter.add(new ControllerIdPredicate(opponent.getId()));
-                            TargetPermanent target = new TargetPermanent(1, 1, filter, false);
-                            if (target.choose(Outcome.Damage, controller.getId(), source.getSourceId(), game)) {
-                                Permanent permanent = game.getPermanent(target.getFirstTarget());
-                                if (permanent != null) {
-                                    return permanent.damage(damage, source.getSourceId(), source, game, false, true) > 0;
-                                }
+                Collections.shuffle(opponents);
+                Player opponent = opponents.get(0);
+                game.informPlayers(opponent.getLogName() + " was chosen at random.");
+                if (game.getBattlefield().getAllActivePermanents(new FilterPlaneswalkerPermanent(), opponent.getId(), game).size() > 0) {
+                    if (controller.chooseUse(Outcome.Damage, "Redirect to a planeswalker controlled by " + opponent.getLogName() + "?", source, game)) {
+                        FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("a planeswalker controlled by " + opponent.getLogName());
+                        filter.add(new ControllerIdPredicate(opponent.getId()));
+                        TargetPermanent target = new TargetPermanent(1, 1, filter, false);
+                        if (target.choose(Outcome.Damage, controller.getId(), source.getSourceId(), game)) {
+                            Permanent permanent = game.getPermanent(target.getFirstTarget());
+                            if (permanent != null) {
+                                return permanent.damage(damage, source.getSourceId(), source, game, false, true) > 0;
                             }
                         }
                     }
-                    opponent.damage(damage, source.getSourceId(), source, game);
                 }
+                opponent.damage(damage, source.getSourceId(), source, game);
+
             }
             return true;
         }

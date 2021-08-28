@@ -44,7 +44,7 @@ public final class PuppetConjurer extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // At the beginning of your upkeep, sacrifice a Homunculus.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, ""), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, ""), TargetController.YOU, false));
     }
 
     private PuppetConjurer(final PuppetConjurer card) {

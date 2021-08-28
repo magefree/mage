@@ -201,7 +201,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
-        setChoice(playerB, "Yes"); // Pay 3 life to prevent that returns to PlayerA's hand?
+        setChoice(playerB, true); // Pay 3 life to prevent that returns to PlayerA's hand?
 
         addTarget(playerA, playerB);
 

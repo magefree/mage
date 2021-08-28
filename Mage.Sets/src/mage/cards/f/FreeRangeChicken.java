@@ -16,6 +16,7 @@ import mage.players.Player;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -64,8 +65,9 @@ class FreeRangeChickenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int firstRoll = controller.rollDice(source, game, 6);
-            int secondRoll = controller.rollDice(source, game, 6);
+            List<Integer> results = controller.rollDice(outcome, source, game, 6, 2, 0);
+            int firstRoll = results.get(0);
+            int secondRoll = results.get(1);
             if (firstRoll == secondRoll) {
                 game.addEffect(new BoostSourceEffect(firstRoll, firstRoll, Duration.EndOfTurn), source);
             }

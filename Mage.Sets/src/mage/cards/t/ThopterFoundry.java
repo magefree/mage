@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.ThopterToken;
 import mage.target.common.TargetControlledPermanent;
@@ -28,7 +27,7 @@ public final class ThopterFoundry extends CardImpl {
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public ThopterFoundry(UUID ownerId, CardSetInfo setInfo) {

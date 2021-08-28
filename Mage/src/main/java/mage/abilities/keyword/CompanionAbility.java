@@ -41,8 +41,8 @@ public class CompanionAbility extends SpecialAction {
         return "Companion &mdash; " + companionCondition.getRule();
     }
 
-    public boolean isLegal(Set<Card> cards, int startingSize) {
-        return companionCondition.isLegal(cards, startingSize);
+    public boolean isLegal(Set<Card> cards, int startingHandSize) {
+        return companionCondition.isLegal(cards, startingHandSize);
     }
 }
 

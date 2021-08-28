@@ -21,10 +21,10 @@ import mage.util.CardUtil;
  */
 public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
 
-    private FilterCard filter;
-    private int amount;
+    private final FilterCard filter;
+    private final int amount;
     private final boolean upTo;
-    private boolean onlyControlled;
+    private final boolean onlyControlled;
     private UUID controllerId;
 
     public SpellsCostReductionAllEffect(int amount) {
@@ -72,8 +72,8 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
             }
             Mana mana = abilityToModify.getManaCostsToPay().getMana();
             int reduceMax = mana.getGeneric();
-            if (reduceMax > 2) {
-                reduceMax = 2;
+            if (reduceMax > this.amount) {
+                reduceMax = this.amount;
             }
             if (reduceMax > 0) {
                 Player controller = game.getPlayer(abilityToModify.getControllerId());

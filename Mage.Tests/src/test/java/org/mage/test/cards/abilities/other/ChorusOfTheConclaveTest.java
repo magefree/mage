@@ -33,7 +33,7 @@ public class ChorusOfTheConclaveTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Goblin Roughrider");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Roughrider");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "X=1");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -70,16 +70,16 @@ public class ChorusOfTheConclaveTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Hamza, Guardian of Arashin"); // {4}{G}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Roughrider");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "X=1");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hamza, Guardian of Arashin");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "X=1");
         
         playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mountain");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Akki Drillmaster");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "X=1");
         
         setStopAt(1, PhaseStep.END_TURN);

@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -30,7 +29,7 @@ public final class MagusOfTheBridge extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public MagusOfTheBridge(UUID ownerId, CardSetInfo setInfo) {

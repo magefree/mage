@@ -31,7 +31,7 @@ public class InfernalCaretakerTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerB, "Elvish Visionary", 4);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Infernal Caretaker");
-        setChoice(playerA, "Yes"); // Cast as a morph
+        setChoice(playerA, true); // Cast as a morph
         
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{B}: Turn this face-down permanent face up.");
         setStopAt(1, PhaseStep.END_TURN);

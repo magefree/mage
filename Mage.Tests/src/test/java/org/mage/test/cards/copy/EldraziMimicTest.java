@@ -59,7 +59,7 @@ public class EldraziMimicTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Eldrazi Mimic", 1); // 2/1
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Composite Golem");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

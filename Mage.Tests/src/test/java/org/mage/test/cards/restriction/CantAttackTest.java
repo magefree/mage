@@ -125,8 +125,8 @@ public class CantAttackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Orzhov Advokist");
-        setChoice(playerA, "Yes");
-        setChoice(playerB, "Yes");
+        setChoice(playerA, true);
+        setChoice(playerB, true);
         attack(2, playerB, "Silvercoat Lion");
         attack(4, playerB, "Silvercoat Lion");
         setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
@@ -239,7 +239,7 @@ public class CantAttackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
 
         attack(1, playerA, memnite);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -264,7 +264,7 @@ public class CantAttackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
 
         attack(1, playerA, memnite);
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -290,7 +290,7 @@ public class CantAttackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
 
         attack(1, playerA, memnite);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -316,7 +316,7 @@ public class CantAttackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
 
         attack(1, playerA, memnite);
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -341,7 +341,7 @@ public class CantAttackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
         attack(1, playerA, memnite);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -366,7 +366,7 @@ public class CantAttackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
         attack(1, playerA, memnite);
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();

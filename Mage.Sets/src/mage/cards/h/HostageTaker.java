@@ -64,8 +64,8 @@ class HostageTakerExileEffect extends OneShotEffect {
 
     HostageTakerExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile another target artifact or creature until {this} leaves the battlefield. "
-                + "You may cast that card as long as it remains exiled, "
+        this.staticText = "exile another target creature or artifact until {this} leaves the battlefield. "
+                + "You may cast that card for as long as it remains exiled, "
                 + "and you may spend mana as though it were mana of any type to cast that spell";
     }
 

@@ -33,7 +33,7 @@ public class PopulateEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature token for populate");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 

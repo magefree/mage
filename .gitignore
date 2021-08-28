@@ -15,6 +15,7 @@ Mage.Client/target
 Mage.Common/target
 
 # Mage.Plugins
+Mage.Plugins/target
 Mage.Plugins/Mage.Card.Plugin/target
 Mage.Plugins/Mage.Counter.Plugin/target
 Mage.Plugins/Mage.Theme.Plugin/target

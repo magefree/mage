@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -27,7 +26,7 @@ public final class Mirrorworks extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public Mirrorworks(UUID ownerId, CardSetInfo setInfo) {

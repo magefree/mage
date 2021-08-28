@@ -13,5 +13,12 @@ public interface StackObjectCopyApplier extends Serializable {
 
     void modifySpell(StackObject stackObject, Game game);
 
-    MageObjectReferencePredicate getNextPredicate();
+    /**
+     * For multi copies: allows change new target filter for each next copy (e.g. add some restict)
+     * Return null to use same target type as original spell
+     *
+     * @param copyNumber current number of copy, starts with 1
+     * @return
+     */
+    MageObjectReferencePredicate getNextNewTargetType(int copyNumber);
 }

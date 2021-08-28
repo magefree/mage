@@ -29,7 +29,7 @@ public class ProwlTest extends CardTestPlayerBase {
 
         checkPlayableAbility("must play", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Auntie's Snitch", true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Auntie's Snitch");
-        setChoice(playerA, "Yes"); // choosing to pay prowl cost
+        setChoice(playerA, true); // choosing to pay prowl cost
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -65,7 +65,7 @@ public class ProwlTest extends CardTestPlayerBase {
 
         checkPlayableAbility("must play", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Auntie's Snitch", true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Auntie's Snitch"); // should only cost {B} with Warchief discount
-        setChoice(playerA, "Yes"); // choosing to pay prowl cost
+        setChoice(playerA, true); // choosing to pay prowl cost
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

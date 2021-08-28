@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Class is used to save parameters and to send them to dialog.
+ * GUI: parameters for dialogs, uses to store useful data
  *
  * @author mw, noxx
  */

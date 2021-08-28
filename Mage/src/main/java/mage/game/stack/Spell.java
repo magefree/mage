@@ -233,7 +233,10 @@ public class Spell extends StackObjectImpl implements Card {
                     }
                 }
                 if (game.getState().getZone(card.getMainCard().getId()) == Zone.STACK) {
-                    if (!isCopy()) {
+                    if (isCopy()) {
+                        // copied spell, only remove from stack
+                        game.getStack().remove(this, game);
+                    } else {
                         controller.moveCards(card, Zone.GRAVEYARD, ability, game);
                     }
                 }
@@ -438,7 +441,7 @@ public class Spell extends StackObjectImpl implements Card {
                 }
             }
         } else {
-            // Copied spell, only remove from stack
+            // copied spell, only remove from stack
             game.getStack().remove(this, game);
         }
     }
@@ -847,6 +850,7 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
         if (this.isCopy()) {
+            // copied spell, only remove from stack
             game.getStack().remove(this, game);
             return true;
         }
@@ -1054,18 +1058,21 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate predicate, Game game, Ability source, boolean chooseNewTargets) {
+    public void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate newTargetFilterPredicate, Game game, Ability source, boolean chooseNewTargets) {
         Spell spellCopy = this.copySpell(game, source, newControllerId);
         if (applier != null) {
             applier.modifySpell(spellCopy, game);
         }
         spellCopy.setZone(Zone.STACK, game);  // required for targeting ex: Nivmagus Elemental
         game.getStack().push(spellCopy);
-        if (predicate != null) {
-            spellCopy.chooseNewTargets(game, newControllerId, true, false, predicate);
+
+        // new targets
+        if (newTargetFilterPredicate != null) {
+            spellCopy.chooseNewTargets(game, newControllerId, true, false, newTargetFilterPredicate);
         } else if (chooseNewTargets || applier != null) { // if applier is non-null but predicate is null then it's extra
             spellCopy.chooseNewTargets(game, newControllerId);
         }
+
         game.fireEvent(new CopiedStackObjectEvent(this, spellCopy, newControllerId));
     }
 

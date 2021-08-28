@@ -52,7 +52,7 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Muraganda Petroglyphs", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        setChoice(playerA, true); // cast it face down as 2/2 creature
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -75,7 +75,7 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Muraganda Petroglyphs", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        setChoice(playerA, true); // cast it face down as 2/2 creature
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -202,7 +202,7 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Shadow Slice"); // {4}{B}
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shadow Slice", playerB);
-        setChoice(playerA, "Yes"); // do cipher
+        setChoice(playerA, true); // do cipher
         addTarget(playerA, "Grizzly Bears");
 
         setStrictChooseMode(true);

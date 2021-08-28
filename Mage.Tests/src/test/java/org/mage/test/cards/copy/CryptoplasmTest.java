@@ -54,14 +54,14 @@ public class CryptoplasmTest extends CardTestPlayerBase {
 
         // turn 2 - prepare (crypto to paladin, footsteps to crypto)
         // crypto:  copy as paladin on upkeep
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
         addTarget(playerB, "Sigiled Paladin");
         // footsteps: enchant copy of paladin (crypto)
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Followed Footsteps");
         addTarget(playerB, "Sigiled Paladin[only copy]");
 
         // turn 4 - ignore crypto ask for new copy
-        setChoice(playerB, "No");
+        setChoice(playerB, false);
 
         setStopAt(4, PhaseStep.END_TURN);
         execute();

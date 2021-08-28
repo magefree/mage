@@ -17,6 +17,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
+import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -82,20 +83,16 @@ class ChickenALaKingTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DICE_ROLLED;
+        return event.getType() == GameEvent.EventType.DIE_ROLLED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (this.isControlledBy(event.getPlayerId()) && event.getFlag()) {
-            // event.getData holds the num of sides of the die to roll
-            String data = event.getData();
-            if (data != null) {
-                int numSides = Integer.parseInt(data);
-                return event.getAmount() == 6 && numSides == 6;
-            }
-        }
-        return false;
+        DieRolledEvent drEvent = (DieRolledEvent) event;
+        // silver border card must look for "result" instead "natural result"
+        return this.isControlledBy(drEvent.getPlayerId())
+                && drEvent.getSides() == 6
+                && drEvent.getResult() == 6;
     }
 
     @Override

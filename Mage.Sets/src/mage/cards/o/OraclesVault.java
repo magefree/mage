@@ -75,7 +75,7 @@ class OraclesVaultEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, controller.getLibrary().getFromTop(game),
-                    TargetController.YOU, Duration.EndOfTurn, false, false);
+                    TargetController.YOU, Duration.EndOfTurn, false, false, false);
         }
         return false;
     }
@@ -101,7 +101,7 @@ class OraclesVaultFreeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, controller.getLibrary().getFromTop(game),
-                    TargetController.YOU, Duration.EndOfTurn, true, false);
+                    TargetController.YOU, Duration.EndOfTurn, true, false, false);
         }
         return false;
     }

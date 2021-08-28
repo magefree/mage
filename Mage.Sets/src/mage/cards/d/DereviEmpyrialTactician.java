@@ -117,7 +117,7 @@ class DereviEmpyrialTacticianAbility extends ActivatedAbilityImpl {
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         Zone currentZone = game.getState().getZone(this.getSourceId());
-        if (currentZone == null || currentZone != Zone.COMMAND) {
+        if (currentZone != Zone.COMMAND) {
             return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);

@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import java.util.UUID;
 
 /**
- *
  * @author jmharmon
  */
 
@@ -32,7 +31,7 @@ public final class GoldenEgg extends CardImpl {
         // When Golden Egg enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
-        // {1}, {T}: Sacrifice Golden Egg: Add one mana of any color.
+        // {1}, {T}, Sacrifice Golden Egg: Add one mana of any color.
         Ability ability = new AnyColorManaAbility(new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

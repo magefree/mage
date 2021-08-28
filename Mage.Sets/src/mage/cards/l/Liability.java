@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -25,7 +24,7 @@ public final class Liability extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("a nontoken permanent");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public Liability(UUID ownerId, CardSetInfo setInfo) {

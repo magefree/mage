@@ -6,6 +6,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
@@ -14,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.common.TargetAnyTarget;
@@ -43,7 +44,14 @@ public final class TerrorOfThePeaks extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new TerrorOfThePeaksCostIncreaseEffect()));
 
         // Whenever another creature enters the battlefield under your control, Terror of the Peaks deals damage equal to that creature's power to any target.
-        this.addAbility(new TerrorOfThePeaksTriggeredAbility());
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(
+                new DamageTargetEffect(TerrorOfThePeaksValue.instance),
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
+                "Whenever another creature enters the battlefield under your control, " +
+                        "{this} deals damage equal to that creature's power to any target."
+        );
+        ability.addTarget(new TargetAnyTarget());
+        this.addAbility(ability);
     }
 
     private TerrorOfThePeaks(final TerrorOfThePeaks card) {
@@ -113,40 +121,22 @@ class TerrorOfThePeaksCostIncreaseEffect extends CostModificationEffectImpl {
     }
 }
 
-class TerrorOfThePeaksTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
+enum TerrorOfThePeaksValue implements DynamicValue {
+    instance;
 
-    TerrorOfThePeaksTriggeredAbility() {
-        super(null, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE);
-    }
-
-    private TerrorOfThePeaksTriggeredAbility(final TerrorOfThePeaksTriggeredAbility ability) {
-        super(ability);
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Permanent permanent = (Permanent) effect.getValue("permanentEnteringBattlefield");
+        return permanent != null ? permanent.getPower().getValue() : 0;
     }
 
     @Override
-    public TerrorOfThePeaksTriggeredAbility copy() {
-        return new TerrorOfThePeaksTriggeredAbility(this);
+    public TerrorOfThePeaksValue copy() {
+        return this;
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!super.checkTrigger(event, game)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null) {
-            return false;
-        }
-        this.getEffects().clear();
-        this.getTargets().clear();
-        this.addEffect(new DamageTargetEffect(permanent.getPower().getValue()));
-        this.addTarget(new TargetAnyTarget().withChooseHint("gets " + permanent.getPower().getValue() + " damage"));
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever another creature enters the battlefield under your control, " +
-                "{this} deals damage equal to that creature's power to any target.";
+    public String getMessage() {
+        return "";
     }
 }

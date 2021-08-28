@@ -67,7 +67,7 @@ public class DredgeTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Silvercoat Lion", 5);
         skipInitShuffling();
         
-        setChoice(playerB, "Yes"); // Use Dredge
+        setChoice(playerB, true); // Use Dredge
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();

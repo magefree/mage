@@ -19,6 +19,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.game.command.Dungeon;
 import mage.game.command.Plane;
 import mage.game.draft.DraftCube;
 import mage.game.draft.RateCard;
@@ -905,10 +906,21 @@ public class VerifyCardDataTest {
         }
 
         for (ExpansionSet set : sets) {
+            // additional info
+            Set<String> cardNames = new HashSet<>();
+            for (ExpansionSet.SetCardInfo cardInfo : set.getSetCardInfo()) {
+                cardNames.add(cardInfo.getName());
+            }
+
+            boolean containsDoubleSideCards = false;
             for (ExpansionSet.SetCardInfo cardInfo : set.getSetCardInfo()) {
                 Card card = CardImpl.createCard(cardInfo.getCardClass(), new CardSetInfo(cardInfo.getName(), set.getCode(),
                         cardInfo.getCardNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
                 Assert.assertNotNull(card);
+
+                if (card.getSecondCardFace() != null) {
+                    containsDoubleSideCards = true;
+                }
 
                 // CHECK: all planeswalkers must be legendary
                 if (card.isPlaneswalker() && !card.getSuperType().contains(SuperType.LEGENDARY)) {
@@ -923,6 +935,26 @@ public class VerifyCardDataTest {
                 if (!CharMatcher.ascii().matchesAllOf(card.getName()) || !CharMatcher.ascii().matchesAllOf(card.getCardNumber())) {
                     errorsList.add("Error: card name or number contains non-ascii symbols: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
+
+                // CHECK: second side cards in one set
+                // https://github.com/magefree/mage/issues/8081
+                /*
+                if (card.getSecondCardFace() != null && cardNames.contains(card.getSecondCardFace().getName())) {
+                    errorsList.add("Error: set contains second side cards: " + set.getCode() + " - " + set.getName()
+                            + " - " + card.getName() + " - " + card.getCardNumber()
+                            + " - " + card.getSecondCardFace().getName() + " - " + card.getSecondCardFace().getCardNumber());
+                }
+                 */
+            }
+
+            // CHECK: double side cards must be in boosters
+            boolean hasBoosterSettings = (set.getNumBoosterDoubleFaced() > 0);
+            if (set.hasBoosters()
+                    && (set.getNumBoosterDoubleFaced() != -1) // -1 must ignore double cards in booster
+                    && containsDoubleSideCards
+                    && !hasBoosterSettings) {
+                errorsList.add("Error: set with boosters contains second side cards, but numBoosterDoubleFaced is not set - "
+                        + set.getCode() + " - " + set.getName());
             }
         }
 
@@ -1154,6 +1186,47 @@ public class VerifyCardDataTest {
         printMessages(errorsList);
         if (errorsList.size() > 0) {
             Assert.fail("Found plane errors: " + errorsList.size());
+        }
+    }
+
+    @Test
+    public void test_checkMissingDungeonsData() {
+        Collection<String> errorsList = new ArrayList<>();
+
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<? extends Dungeon>> dungeonClassesList = reflections.getSubTypesOf(Dungeon.class);
+
+        // 1. correct class name
+        for (Class<? extends Dungeon> dungeonClass : dungeonClassesList) {
+            if (!dungeonClass.getName().endsWith("Dungeon")) {
+                String className = extractShortClass(dungeonClass);
+                errorsList.add("Error: dungeon class must ends with Dungeon: " + className + " from " + dungeonClass.getName());
+            }
+        }
+
+        // 2. correct package
+        for (Class<? extends Dungeon> dungeonClass : dungeonClassesList) {
+            String fullClass = dungeonClass.getName();
+            if (!fullClass.startsWith("mage.game.command.dungeons.")) {
+                String className = extractShortClass(dungeonClass);
+                errorsList.add("Error: dungeon must be stored in mage.game.command.dungeons package: " + className + " from " + dungeonClass.getName());
+            }
+        }
+
+        // 3. correct constructor
+        for (Class<? extends Dungeon> dungeonClass : dungeonClassesList) {
+            String className = extractShortClass(dungeonClass);
+            Dungeon dungeon;
+            try {
+                dungeon = (Dungeon) createNewObject(dungeonClass);
+            } catch (Throwable e) {
+                errorsList.add("Error: can't create dungeon with default constructor: " + className + " from " + dungeonClass.getName());
+            }
+        }
+
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found dungeon errors: " + errorsList.size());
         }
     }
 
@@ -1560,9 +1633,9 @@ public class VerifyCardDataTest {
         }
 
         boolean isFine = true;
-        for (int i = 0; i <= cardRules.length - 1; i++) {
+        for (int i = 0; i < cardRules.length; i++) {
             boolean isAbilityFounded = false;
-            for (int j = 0; j <= refRules.length - 1; j++) {
+            for (int j = 0; j < refRules.length; j++) {
                 String refRule = refRules[j];
                 if (compareText(cardRules[i], refRule, card.getName())) {
                     cardRules[i] = "+ " + cardRules[i];

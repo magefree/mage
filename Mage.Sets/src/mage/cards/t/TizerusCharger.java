@@ -82,8 +82,7 @@ class TizerusChargerEffect extends OneShotEffect {
         SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
         if (!(spellAbility instanceof EscapeAbility)
                 || !spellAbility.getSourceId().equals(source.getSourceId())
-                || permanent.getZoneChangeCounter(game) != spellAbility.getSourceObjectZoneChangeCounter()
-                || !spellAbility.getSourceId().equals(source.getSourceId())) {
+                || permanent.getZoneChangeCounter(game) != spellAbility.getSourceObjectZoneChangeCounter()) {
             return false;
         }
         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");

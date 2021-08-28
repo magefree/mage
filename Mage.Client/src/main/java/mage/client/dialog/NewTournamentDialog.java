@@ -86,7 +86,10 @@ public class NewTournamentDialog extends MageDialog {
             cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
             cbSkillLevel.setModel(new DefaultComboBoxModel(SkillLevel.values()));
             cbDraftCube.setModel(new DefaultComboBoxModel(SessionHandler.getDraftCubes()));
-            cbDraftTiming.setModel(new DefaultComboBoxModel(DraftOptions.TimingOption.values()));
+            cbDraftTiming.setModel(new DefaultComboBoxModel(Arrays.stream(TimingOption.values())
+                    .filter(o -> !o.equals(TimingOption.NONE))
+                    .toArray())
+            );
             // update player types
             int i = 2;
             for (TournamentPlayerPanel tournamentPlayerPanel : players) {
@@ -679,6 +682,13 @@ public class NewTournamentDialog extends MageDialog {
         if (tournamentType.isRandom() || tournamentType.isRichMan()) {
             if (tOptions.getLimitedOptions().getSetCodes().isEmpty()) {
                 JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Warning, you must select packs for the pool", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+        if (tournamentType.isDraft() && tOptions.getLimitedOptions() instanceof DraftOptions) {
+            DraftOptions draftOptions = (DraftOptions) tOptions.getLimitedOptions();
+            if (draftOptions.getTiming() == TimingOption.NONE) {
+                JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Warning, you must select draft timing option", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
         }

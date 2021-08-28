@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -24,7 +25,7 @@ public class PayVariableLoyaltyCost extends VariableCostImpl {
     private int costModification = 0;
 
     public PayVariableLoyaltyCost() {
-        super("loyality counters to remove");
+        super(VariableCostType.NORMAL, "loyality counters to remove");
         this.text = "-X";
     }
 

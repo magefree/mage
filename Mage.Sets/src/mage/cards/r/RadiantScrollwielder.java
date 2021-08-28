@@ -104,7 +104,7 @@ class RadiantScrollwielderEffect extends OneShotEffect {
         }
         PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
                 game, source, card, TargetController.YOU,
-                Duration.EndOfTurn, false, true
+                Duration.EndOfTurn, false, false, true
         );
         game.addEffect(new RadiantScrollwielderReplacementEffect(card, game), source);
         return true;

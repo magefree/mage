@@ -140,7 +140,7 @@ class PrecursorGolemCopySpellEffect extends CopySpellForEachItCouldTargetEffect 
     }
 
     @Override
-    protected List<MageObjectReferencePredicate> getPossibleTargets(StackObject stackObject, Player player, Ability source, Game game) {
+    protected List<MageObjectReferencePredicate> prepareCopiesWithTargets(StackObject stackObject, Player player, Ability source, Game game) {
         Permanent permanent = game.getPermanent((UUID) getValue("targetedGolem"));
         return game.getBattlefield()
                 .getActivePermanents(

@@ -69,7 +69,7 @@ public class CommanderReplaceEffectTest extends CardTestCommanderDuelBase {
 
         // Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way.
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phyrexian Rebirth");
-        setChoice(playerA, "No"); // Let the commander go to graveyard because of Gift of Immortality
+        setChoice(playerA, false); // Let the commander go to graveyard because of Gift of Immortality
 
         setStopAt(3, PhaseStep.UPKEEP);
         execute();
@@ -102,9 +102,9 @@ public class CommanderReplaceEffectTest extends CardTestCommanderDuelBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daxos of Meletis");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Soulherder");
 
-        setChoice(playerA, "Yes"); // Use Soulherder's triggered ability
+        setChoice(playerA, true); // Use Soulherder's triggered ability
         addTarget(playerA, "Daxos of Meletis");
-        setChoice(playerA, "Yes"); // Move Daxos to command Zone
+        setChoice(playerA, true); // Move Daxos to command Zone
 
         setStopAt(2, PhaseStep.UPKEEP);
         execute();
@@ -139,13 +139,13 @@ public class CommanderReplaceEffectTest extends CardTestCommanderDuelBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daxos of Meletis");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Soulherder");
 
-        setChoice(playerA, "No"); // Use Soulherder's triggered ability
+        setChoice(playerA, false); // Use Soulherder's triggered ability
 
         attack(3, playerA, "Daxos of Meletis");
 
         castSpell(3, PhaseStep.DECLARE_BLOCKERS, playerB, "Farm", "Daxos of Meletis");
 
-        setChoice(playerA, "Yes"); // Move Daxos to command Zone
+        setChoice(playerA, true); // Move Daxos to command Zone
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();

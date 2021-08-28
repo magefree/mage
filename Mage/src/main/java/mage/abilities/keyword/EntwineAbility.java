@@ -3,10 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.OptionalAdditionalCost;
-import mage.abilities.costs.OptionalAdditionalCostImpl;
-import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
+import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -14,6 +11,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -35,12 +33,12 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
     private static final String keywordText = "Entwine";
     protected static final String reminderText = "You may {cost} in addition to any other costs to use all modes.";
 
-    protected OptionalAdditionalCost additionalCost;
+    protected OptionalAdditionalCost entwineCost;
     protected Set<String> activations = new HashSet<>(); // same logic as KickerAbility: activations per zoneChangeCounter
 
     public EntwineAbility(String manaString) {
         super(Zone.STACK, null);
-        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderText, new ManaCostsImpl(manaString));
+        addEntwineCostAndSetup(new OptionalAdditionalCostImpl(keywordText, reminderText, new ManaCostsImpl(manaString)));
     }
 
     public EntwineAbility(Cost cost) {
@@ -49,14 +47,20 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
 
     public EntwineAbility(Cost cost, String reminderText) {
         super(Zone.STACK, null);
-        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, "&mdash;", reminderText, cost);
+
+        addEntwineCostAndSetup(new OptionalAdditionalCostImpl(keywordText, "&mdash;", reminderText, cost));
         setRuleAtTheTop(true);
+    }
+
+    private void addEntwineCostAndSetup(OptionalAdditionalCost newCost) {
+        this.entwineCost = newCost;
+        this.entwineCost.setCostType(VariableCostType.ADDITIONAL);
     }
 
     public EntwineAbility(final EntwineAbility ability) {
         super(ability);
-        if (ability.additionalCost != null) {
-            this.additionalCost = ability.additionalCost.copy();
+        if (ability.entwineCost != null) {
+            this.entwineCost = ability.entwineCost.copy();
         }
         this.activations.addAll(ability.activations);
     }
@@ -77,32 +81,40 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
             return;
         }
 
-        this.resetCosts(game, ability);
-        if (additionalCost == null) {
+        this.resetEntwine(game, ability);
+        if (entwineCost == null) {
             return;
         }
 
-        if (additionalCost.canPay(ability, this, ability.getControllerId(), game)
-                && player.chooseUse(Outcome.Benefit, "Pay " + additionalCost.getText(false) + " ?", ability, game)) {
-            addCostsToAbility(additionalCost, ability);
-            activateCost(game, ability);
+        // AI can use it
+        if (entwineCost.canPay(ability, this, ability.getControllerId(), game)
+                && player.chooseUse(Outcome.Benefit, "Pay " + entwineCost.getText(false) + " ?", ability, game)) {
+            for (Iterator it = ((Costs) entwineCost).iterator(); it.hasNext(); ) {
+                Cost cost = (Cost) it.next();
+                if (cost instanceof ManaCostsImpl) {
+                    ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
+                } else {
+                    ability.getCosts().add(cost.copy());
+                }
+            }
+            activateEntwine(game, ability);
         }
     }
 
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder();
-        if (additionalCost != null) {
-            sb.append(additionalCost.getText(false));
-            sb.append(' ').append(additionalCost.getReminderText());
+        if (entwineCost != null) {
+            sb.append(entwineCost.getText(false));
+            sb.append(' ').append(entwineCost.getReminderText());
         }
         return sb.toString();
     }
 
     @Override
     public String getCastMessageSuffix() {
-        if (additionalCost != null) {
-            return additionalCost.getCastSuffixMessage(0);
+        if (entwineCost != null) {
+            return entwineCost.getCastSuffixMessage(0);
         } else {
             return "";
         }
@@ -119,20 +131,16 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
         ability.getModes().setMaxModes(maxModes);
     }
 
-    private void addCostsToAbility(Cost cost, Ability ability) {
-        ability.addCost(cost.copy());
-    }
-
-    private void resetCosts(Game game, Ability source) {
-        if (additionalCost != null) {
-            additionalCost.reset();
+    private void resetEntwine(Game game, Ability source) {
+        if (entwineCost != null) {
+            entwineCost.reset();
         }
 
         String key = getActivationKey(source, game);
         this.activations.remove(key);
     }
 
-    private void activateCost(Game game, Ability source) {
+    private void activateEntwine(Game game, Ability source) {
         String key = getActivationKey(source, game);
         this.activations.add(key);
     }

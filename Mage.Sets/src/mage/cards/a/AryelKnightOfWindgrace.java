@@ -1,12 +1,12 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,11 +15,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -30,8 +26,9 @@ import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
+import java.util.UUID;
+
 /**
- *
  * @author jack-the-BOSS
  */
 public final class AryelKnightOfWindgrace extends CardImpl {
@@ -83,7 +80,7 @@ class AryelTapXTargetCost extends VariableCostImpl {
     }
 
     public AryelTapXTargetCost() {
-        super("controlled untapped Knights you would like to tap");
+        super(VariableCostType.NORMAL, "controlled untapped Knights you would like to tap");
         this.text = "Tap X untapped Knights you control";
     }
 

@@ -26,15 +26,15 @@ public class CumulativeUpkeepTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phobian Phantasm");
 
         // Phobian Phantasm - CumulativeUpkeepAbility: Cumulative upkeep {B}
-        setChoice(playerA, "Yes"); // Pay {B}?                        
+        setChoice(playerA, true); // Pay {B}?
         attack(3, playerA, "Phobian Phantasm");
         checkPermanentCounters("Age counters", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Phobian Phantasm", CounterType.AGE, 1);
         
-        setChoice(playerA, "Yes"); // Pay {B}{B}?
+        setChoice(playerA, true); // Pay {B}{B}?
         attack(5, playerA, "Phobian Phantasm");
         checkPermanentCounters("Age counters", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Phobian Phantasm", CounterType.AGE, 2);
         
-        setChoice(playerA, "No"); // Pay {B}{B}{B}?
+        setChoice(playerA, false); // Pay {B}{B}{B}?
         
         setStopAt(7, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -79,7 +79,7 @@ public class CumulativeUpkeepTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Kor Celebrant");
         
         // Illusions of Grandeur - CumulativeUpkeepAbility: Cumulative upkeep {2}
-        setChoice(playerA, "Yes"); // Pay {2}?                        
+        setChoice(playerA, true); // Pay {2}?
         
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Puca's Mischief");
         
@@ -87,8 +87,8 @@ public class CumulativeUpkeepTest extends CardTestPlayerBase {
         addTarget(playerA, "Illusions of Grandeur"); // Own target permanent of Puca's Mischief
         addTarget(playerA, "Kor Celebrant"); // Opponent's target permanent of Puca's Mischief
         
-        setChoice(playerA, "Yes"); // At the beginning of your upkeep, you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser converted mana cost.
-        setChoice(playerA, "No"); // Pay {2}{2}?
+        setChoice(playerA, true); // At the beginning of your upkeep, you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser converted mana cost.
+        setChoice(playerA, false); // Pay {2}{2}?
         
         checkPermanentCounters("Age counters", 5, PhaseStep.PRECOMBAT_MAIN, playerB, "Illusions of Grandeur", CounterType.AGE, 2);
         

@@ -31,7 +31,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lava Spike", playerB);
         // activate splice: yes -> card with splice ability -> new target for spliced ability
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Through the Breach");
         addTarget(playerA, "Silvercoat Lion"); // target for spliced ability: put from hand to battlefield
 
@@ -64,7 +64,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         // cast arcane Lava Spike
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lava Spike", playerB);
         // activate splice: yes -> card with splice ability -> new target for spliced ability
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Torrent of Stone");
         addTarget(playerA, "Silvercoat Lion"); // target for spliced ability: 4 damage
 
@@ -103,7 +103,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nourishing Shoal");
         // activate splice: yes -> card with splice ability -> new target for spliced ability
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, "Through the Breach");
         addTarget(playerA, "Silvercoat Lion"); // target for spliced ability: put from hand to battlefield
 
@@ -168,7 +168,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nourishing Shoal");
         setChoice(playerA, "X=3");
-        setChoice(playerA, "Yes"); // splice
+        setChoice(playerA, true); // splice
         addTarget(playerA, "Griselbrand");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goryo's Vengeance", "Griselbrand", "Nourishing Shoal");

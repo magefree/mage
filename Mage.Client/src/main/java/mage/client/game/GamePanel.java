@@ -128,6 +128,7 @@ public final class GamePanel extends javax.swing.JPanel {
         Map<String, Serializable> options;
         Set<UUID> targets;
     }
+
     private final LastGameData lastGameData = new LastGameData();
 
 
@@ -463,6 +464,10 @@ public final class GamePanel extends javax.swing.JPanel {
         this.btnSwitchHands.setVisible(false);
         this.btnCancelSkip.setVisible(true);
         this.btnToggleMacro.setVisible(true);
+
+        // cards popup info in chats
+        this.gameChatPanel.setGameData(gameId, bigCard);
+        this.userChatPanel.setGameData(gameId, bigCard);
 
         this.btnSkipToNextTurn.setVisible(true);
         this.btnSkipToEndTurn.setVisible(true);
@@ -1745,19 +1750,23 @@ public final class GamePanel extends javax.swing.JPanel {
         hideAll();
         // TODO: remember last choices and search incremental for same events?
         PickChoiceDialog pickChoice = new PickChoiceDialog();
-        pickChoice.showDialog(choice, objectId, choiceWindowState);
+        pickChoice.showDialog(choice, null, objectId, choiceWindowState, bigCard);
+
+        // special mode adds # to the answer (server side code must process that prefix, see replacementEffectChoice)
+        String specialPrefix = choice.isChosenSpecial() ? "#" : "";
+
+        String valueToSend;
         if (choice.isKeyChoice()) {
-            SessionHandler.sendPlayerString(gameId, choice.getChoiceKey());
-            /* // old code, auto complete was for auto scripting?
-            if (pickChoice.isAutoSelect()) {
-                SessionHandler.sendPlayerString(gameId, '#' + choice.getChoiceKey());
-            } else {
-                SessionHandler.sendPlayerString(gameId, choice.getChoiceKey());
-            }*/
+            valueToSend = choice.getChoiceKey();
         } else {
+            valueToSend = choice.getChoice();
             SessionHandler.sendPlayerString(gameId, choice.getChoice());
         }
+        SessionHandler.sendPlayerString(gameId, valueToSend == null ? null : specialPrefix + valueToSend);
+
+        // keep dialog position
         choiceWindowState = new MageDialogState(pickChoice);
+
         pickChoice.removeDialog();
     }
 
@@ -1909,6 +1918,8 @@ public final class GamePanel extends javax.swing.JPanel {
         lblPriority.setText("Priority Player:");
 
         bigCard.setBorder(new LineBorder(Color.black, 1, true));
+
+        // CHATS and HINTS support
 
         // HOTKEYS
 

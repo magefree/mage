@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.FaceDownPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -33,7 +32,7 @@ public final class Ixidron extends CardImpl {
     static {
         filter.add(FaceDownPredicate.instance);
         filterTurnFaceDown.add(AnotherPredicate.instance);
-        filterTurnFaceDown.add(Predicates.not(TokenPredicate.instance));
+        filterTurnFaceDown.add(TokenPredicate.FALSE);
     }
 
     public Ixidron(UUID ownerId, CardSetInfo setInfo) {

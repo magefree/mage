@@ -7,6 +7,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.StaticFilters;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -63,8 +64,8 @@ class AuthorOfShadowsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
         Cards cards = new CardsImpl();
@@ -78,18 +79,27 @@ class AuthorOfShadowsEffect extends OneShotEffect {
         if (cards.isEmpty()) {
             return false;
         }
-        player.moveCards(cards, Zone.EXILED, source, game);
+
+        controller.moveCards(cards, Zone.EXILED, source, game);
         cards.retainZone(Zone.EXILED, game);
         if (cards.isEmpty()) {
             return false;
         }
+
         TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD_A_NON_LAND);
         target.setNotTarget(true);
-        player.choose(outcome, cards, target, game);
+        controller.choose(outcome, cards, target, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
-            return false;
+            return true;
         }
+
+        // use same player's zone for all Author of Shadows instances
+        String exileZoneName = controller.getName() + " - Author of Shadows - cast with any color";
+        UUID exileZoneId = CardUtil.getExileZoneId(exileZoneName, game);
+        ExileZone exileZone = game.getExile().createZone(exileZoneId, exileZoneName);
+        game.getExile().moveToAnotherZone(card, game, exileZone);
+
         CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
         return true;
     }

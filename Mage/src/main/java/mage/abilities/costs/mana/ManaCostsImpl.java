@@ -2,10 +2,7 @@ package mage.abilities.costs.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
-import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.ColoredManaSymbol;
@@ -32,7 +29,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     protected final UUID id;
     protected String text = null;
 
-    private static Map<String, ManaCosts> costsCache = new ConcurrentHashMap<>(); // must be thread safe, can't use nulls
+    private static final Map<String, ManaCosts> costsCache = new ConcurrentHashMap<>(); // must be thread safe, can't use nulls
 
     public ManaCostsImpl() {
         this.id = UUID.randomUUID();
@@ -45,6 +42,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     public ManaCostsImpl(final ManaCostsImpl<T> costs) {
         this.id = costs.id;
+        this.text = costs.text;
         for (T cost : costs) {
             this.add(cost.copy());
         }
@@ -130,7 +128,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             assignPayment(game, ability, player.getManaPool(), this);
         }
         game.getState().getSpecialActions().removeManaActions();
-        while (!isPaid()) {
+        while (player.canRespond() && !isPaid()) {
             ManaCost unpaid = this.getUnpaid();
             String promptText = ManaUtil.addSpecialManaPayAbilities(ability, game, unpaid);
             if (player.playMana(ability, unpaid, promptText, game)) {
@@ -140,7 +138,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             }
             game.getState().getSpecialActions().removeManaActions();
         }
-        return true;
+        return isPaid();
     }
 
     /**
@@ -471,7 +469,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                                         modifierForX++;
                                     }
                                 }
-                                this.add(new VariableManaCost(modifierForX));
+                                this.add(new VariableManaCost(VariableCostType.NORMAL, modifierForX));
                             } //TODO: handle multiple {X} and/or {Y} symbols
                     } else if (Character.isDigit(symbol.charAt(0))) {
                         MonoHybridManaCost cost;
@@ -511,8 +509,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
-    public void setText(String text) {
+    public ManaCostsImpl<T> setText(String text) {
         this.text = text;
+        return this;
     }
 
     @Override

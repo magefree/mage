@@ -29,7 +29,7 @@ public class ReversalOfFortuneTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reversal of Fortune", playerB);
         setChoice(playerA, "Lightning Bolt"); // select to copy
-        setChoice(playerA, "Yes"); // cast copy
+        setChoice(playerA, true); // cast copy
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -49,7 +49,7 @@ public class ReversalOfFortuneTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reversal of Fortune", playerB);
         addTarget(playerA, "Lightning Bolt");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

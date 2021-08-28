@@ -52,7 +52,7 @@ class KeenEaredSentryEffect extends ContinuousRuleModifyingEffectImpl {
 
     KeenEaredSentryEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "your opponents can't venture into the dungeon more than once each turn";
+        staticText = "each opponent can't venture into the dungeon more than once each turn";
     }
 
     private KeenEaredSentryEffect(final KeenEaredSentryEffect effect) {

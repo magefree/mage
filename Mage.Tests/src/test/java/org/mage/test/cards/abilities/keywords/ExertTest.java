@@ -23,7 +23,7 @@ public class ExertTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, gWalker);
         attack(1, playerA, gWalker);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
 
         execute();
@@ -40,7 +40,7 @@ public class ExertTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, brawler);
         attack(1, playerA, brawler);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -56,7 +56,7 @@ public class ExertTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, warrior);
         attack(1, playerA, warrior);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -72,7 +72,7 @@ public class ExertTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, spearmaster);
         attack(1, playerA, spearmaster);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -87,7 +87,7 @@ public class ExertTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
         addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
         attack(1, playerA, elite);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         assertPowerToughness(playerA, "Grizzly Bears", 3, 3);
@@ -101,7 +101,7 @@ public class ExertTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, minotaur);
         attack(1, playerA, minotaur);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -115,7 +115,7 @@ public class ExertTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, entangler);
         attack(1, playerA, entangler);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -129,7 +129,7 @@ public class ExertTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Hyena Pack");
         addCard(Zone.BATTLEFIELD, playerB, "Dune Beetle");
         attack(1, playerA, twins);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -148,7 +148,7 @@ public class ExertTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, gWalker);
         addCard(Zone.BATTLEFIELD, playerA, twins);
         attack(1, playerA, gWalker);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -170,7 +170,7 @@ public class ExertTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, gbInitiate);
         attack(1, playerA, gbInitiate);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -192,7 +192,7 @@ public class ExertTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, gbInitiate);
         attack(1, playerA, gbInitiate);
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -225,7 +225,7 @@ public class ExertTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, gbInitiate);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, aTreason, gbInitiate);
         attack(2, playerB, gbInitiate);
-        setChoice(playerB, "Yes");
+        setChoice(playerB, true);
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -251,10 +251,10 @@ public class ExertTest extends CardTestPlayerBase {
 
         attack(1, playerA, cCelebrant);
         attack(1, playerA, memnite);
-        setChoice(playerA, "Yes"); // exert for extra turn
+        setChoice(playerA, true); // exert for extra turn
         attack(1, playerA, cCelebrant);
         attack(1, playerA, memnite);
-        setChoice(playerA, "Yes"); // try to exert again
+        setChoice(playerA, true); // try to exert again
         attack(1, playerA, cCelebrant); // should not be able to enter this 3rd combat phase
         attack(1, playerA, memnite);
 
@@ -292,10 +292,10 @@ public class ExertTest extends CardTestPlayerBase {
 
         attack(1, playerA, cCelebrant);
         attack(1, playerA, memnite);
-        setChoice(playerA, "Yes"); // exert for extra turn
+        setChoice(playerA, true); // exert for extra turn
         attack(1, playerA, cCelebrant);
         attack(1, playerA, memnite);
-        setChoice(playerA, "Yes"); // try to exert again
+        setChoice(playerA, true); // try to exert again
         attack(1, playerA, cCelebrant); // should not be able to enter this 3rd combat phase
         attack(1, playerA, memnite);
 
@@ -333,9 +333,9 @@ public class ExertTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1:"); // grant +2/+2 vig and haste to celebrant
         addTarget(playerA, cCelebrant);
         attack(1, playerA, cCelebrant);
-        setChoice(playerA, "Yes"); // exert for extra turn
+        setChoice(playerA, true); // exert for extra turn
         attack(1, playerA, cCelebrant);
-        setChoice(playerA, "Yes"); // try to exert again
+        setChoice(playerA, true); // try to exert again
         attack(1, playerA, cCelebrant); // should not be able to enter this 3rd combat phase
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

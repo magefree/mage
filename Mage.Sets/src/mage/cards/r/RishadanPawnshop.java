@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -31,7 +30,7 @@ public final class RishadanPawnshop extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("nontoken permanent you control");
     
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 

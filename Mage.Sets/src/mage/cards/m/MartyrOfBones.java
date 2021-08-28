@@ -7,6 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -84,7 +85,7 @@ class RevealVariableBlackCardsFromHandCost extends VariableCostImpl {
     }
 
     RevealVariableBlackCardsFromHandCost() {
-        super("black cards to reveal");
+        super(VariableCostType.NORMAL, "black cards to reveal");
         this.text = "Reveal " + xText + " black cards from {this}";
     }
 

@@ -26,6 +26,7 @@ public class DuelCommander extends Commander {
         banned.add("Food Chain");
         banned.add("Gaea's Cradle");
         banned.add("Genesis Storm");
+        banned.add("Gifts Ungiven");
         banned.add("Grim Monolith");
         banned.add("Hermit Druid");
         banned.add("High Tide");
@@ -85,6 +86,7 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Emry, Lurker of the Loch");
         bannedCommander.add("Esior, Wardwing Familiar");
         bannedCommander.add("Geist of Saint Traft");
+        bannedCommander.add("Inalla, Archmage Ritualist");
         bannedCommander.add("Jeska, Thrice Reborn");
         bannedCommander.add("Keleth, Sunmane Familiar");
         bannedCommander.add("Krark, the Thumbless");
@@ -94,6 +96,7 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Oloro, Ageless Ascetic");
         bannedCommander.add("Omnath, Locus of Creation");
         bannedCommander.add("Prime Speaker Vannifar");
+        bannedCommander.add("Ragavan, Nimble Pilferer");
         bannedCommander.add("Reyhan, Last of the Abzan");
         bannedCommander.add("Rofellos, Llanowar Emissary");
         bannedCommander.add("Rograkh, Son of Rohgahh");

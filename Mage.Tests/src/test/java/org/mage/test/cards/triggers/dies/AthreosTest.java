@@ -43,7 +43,7 @@ public class AthreosTest extends CardTestPlayerBase {
         setChoice(playerA, gBears); // sac bears to Cartel activated ability
         setChoice(playerA, "Red"); // color chosen for Cartel
 
-        setChoice(playerB, "No"); // opponent does not pay 3 life
+        setChoice(playerB, false); // opponent does not pay 3 life
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -86,7 +86,7 @@ public class AthreosTest extends CardTestPlayerBase {
         setChoice(playerA, gBears); // sac bears to Cartel activated ability
         setChoice(playerA, "Red"); // color chosen for Cartel
 
-        setChoice(playerB, "Yes"); // opponent does pay 3 life
+        setChoice(playerB, true); // opponent does pay 3 life
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

@@ -27,7 +27,7 @@ public final class CuriosityCrafter extends CardImpl {
             = new FilterControlledCreaturePermanent("a creature token you control");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(TokenPredicate.TRUE);
     }
 
     public CuriosityCrafter(UUID ownerId, CardSetInfo setInfo) {

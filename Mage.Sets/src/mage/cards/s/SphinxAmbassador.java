@@ -13,6 +13,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
+import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -86,7 +87,7 @@ class SphinxAmbassadorEffect extends OneShotEffect {
                     }
                 }
 
-                Choice cardChoice = new ChoiceImpl();
+                Choice cardChoice = new ChoiceImpl(false, ChoiceHintType.CARD);
                 cardChoice.setChoices(choices);
                 cardChoice.clearChoice();
                 if (!targetPlayer.choose(Outcome.Benefit, cardChoice, game)) {

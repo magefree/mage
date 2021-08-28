@@ -33,7 +33,7 @@ public class RecoverTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sun's Bounty");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -62,7 +62,7 @@ public class RecoverTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sun's Bounty");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
-        setChoice(playerA, "No");
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

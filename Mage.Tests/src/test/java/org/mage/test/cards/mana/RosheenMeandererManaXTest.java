@@ -26,7 +26,7 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Verdeloth the Ancient");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Verdeloth the Ancient");
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
         setChoice(playerA, "X=2");
 
         checkPermanentCount("after", 1, PhaseStep.END_TURN, playerA, "Verdeloth the Ancient", 1);
@@ -51,7 +51,7 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
 
         // cast kicker X and use extra 4 mana
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Verdeloth the Ancient");
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
         setChoice(playerA, "X=2");
 
         checkPermanentCount("after", 1, PhaseStep.END_TURN, playerA, "Verdeloth the Ancient", 1);
@@ -81,7 +81,7 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
 
         // cast kicker X and use extra 4 mana
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Verdeloth the Ancient");
-        setChoice(playerA, "Yes"); // use kicker
+        setChoice(playerA, true); // use kicker
         setChoice(playerA, "X=0");
 
         checkPermanentCount("after", 1, PhaseStep.END_TURN, playerA, "Verdeloth the Ancient", 1);
@@ -109,7 +109,7 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         attack(1, playerA, "Flameblast Dragon", playerB);
 
         // with extra damage (-3)
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "X=3");
         addTarget(playerA, playerB);
 
@@ -135,7 +135,7 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         attack(1, playerA, "Flameblast Dragon", playerB);
 
         // with extra damage (-3)
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         setChoice(playerA, "X=3"); // need to pay {3}{R}
         addTarget(playerA, playerB);
 
@@ -170,7 +170,7 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}");
         checkManaPool("mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "C", 4);
         // pay to prevent
-        setChoice(playerA, "Yes"); // pay 2 to prevent counter
+        setChoice(playerA, true); // pay 2 to prevent counter
 
         checkLife("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, 20 - 3);
         checkHandCardCount("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", 0);

@@ -7,7 +7,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.PlanarDieRoll;
+import mage.constants.PlanarDieRollResult;
 import mage.constants.Planes;
 import mage.game.Game;
 import mage.game.command.CommandObject;
@@ -61,8 +61,8 @@ public class RollPlanarDieEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
         if (controller != null && mageObject != null) {
-            PlanarDieRoll planarRoll = controller.rollPlanarDie(source, game);
-            if (planarRoll == PlanarDieRoll.CHAOS_ROLL && chaosEffects != null && chaosTargets != null) {
+            PlanarDieRollResult planarRoll = controller.rollPlanarDie(outcome, source, game);
+            if (planarRoll == PlanarDieRollResult.CHAOS_ROLL && chaosEffects != null && chaosTargets != null) {
                 for (int i = 0; i < chaosTargets.size(); i++) {
                     Target target = chaosTargets.get(i);
                     if (target != null) {
@@ -95,7 +95,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
                         done = true;
                     }
                 }
-            } else if (planarRoll == PlanarDieRoll.PLANAR_ROLL) {
+            } else if (planarRoll == PlanarDieRollResult.PLANAR_ROLL) {
                 // Steps: 1) Remove the last plane and set its effects to discarded
                 for (CommandObject cobject : game.getState().getCommand()) {
                     if (cobject instanceof Plane) {

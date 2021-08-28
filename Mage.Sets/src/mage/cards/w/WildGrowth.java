@@ -35,7 +35,9 @@ public final class WildGrowth extends CardImpl {
 
         // Whenever enchanted land is tapped for mana, its controller adds {G}.
         this.addAbility(new EnchantedTappedTriggeredManaAbility(
-                new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.G), "their")
+                new AddManaToManaPoolTargetControllerEffect(
+                        new Mana(ColoredManaSymbol.G), "their"
+                ).setText("its controller adds an additional {G}")
         ));
     }
 

@@ -33,7 +33,7 @@ public final class WhisperwoodElemental extends CardImpl {
 
     static {
         filter.add(Predicates.not(FaceDownPredicate.instance));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public WhisperwoodElemental(UUID ownerId, CardSetInfo setInfo) {

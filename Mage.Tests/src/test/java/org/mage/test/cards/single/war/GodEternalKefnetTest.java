@@ -26,11 +26,11 @@ public class GodEternalKefnetTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
 
         // draw on tune 3 - bear - ignore
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
 
         // draw on tune 5 - bolt - reveal and cast
-        setChoice(playerA, "Yes"); // reveal
-        setChoice(playerA, "Yes"); // cast
+        setChoice(playerA, true); // reveal
+        setChoice(playerA, true); // cast
         addTarget(playerA, playerB);
 
         setStrictChooseMode(true);
@@ -62,8 +62,8 @@ public class GodEternalKefnetTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
 
         showAvailableMana("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        setChoice(playerA, "Yes"); // reveal
-        setChoice(playerA, "Yes"); // cast
+        setChoice(playerA, true); // reveal
+        setChoice(playerA, true); // cast
         setChoice(playerA, "Cast Fire");
         addTargetAmount(playerA, playerB, 2);
 

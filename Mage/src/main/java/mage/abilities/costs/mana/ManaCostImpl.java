@@ -241,7 +241,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
             assignPayment(game, ability, player.getManaPool(), costToPay != null ? costToPay : this);
         }
         game.getState().getSpecialActions().removeManaActions();
-        while (!isPaid()) {
+        while (player.canRespond() && !isPaid()) {
             ManaCost unpaid = this.getUnpaid();
             String promptText = ManaUtil.addSpecialManaPayAbilities(ability, game, unpaid);
             if (player.playMana(ability, unpaid, promptText, game)) {
@@ -251,7 +251,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
             }
             game.getState().getSpecialActions().removeManaActions();
         }
-        return true;
+        return isPaid();
     }
 
     @Override

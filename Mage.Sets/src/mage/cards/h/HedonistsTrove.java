@@ -111,7 +111,7 @@ class HedonistsTrovePlayLandEffect extends AsThoughEffectImpl {
             return false;
         }
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        return exileZone != null && exileZone.contains(cardToCheck.getMainCard());
+        return exileZone != null && exileZone.contains(cardToCheck.getMainCard().getId());
     }
 }
 
@@ -149,7 +149,7 @@ class HedonistsTroveCastNonlandCardsEffect extends AsThoughEffectImpl {
                 && !cardToCheck.isLand(game)
                 && source.isControlledBy(affectedControllerId)
                 && exileZone != null
-                && exileZone.contains(cardToCheck.getMainCard());
+                && exileZone.contains(cardToCheck.getMainCard().getId());
     }
 }
 

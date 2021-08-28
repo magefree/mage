@@ -13,6 +13,12 @@ import mage.game.Game;
  */
 public interface OptionalAdditionalSourceCosts {
 
+    /**
+     * Warning, don't forget to set up cost type for costs, it can help with X announce
+     *
+     * @param ability
+     * @param game
+     */
     // TODO: add AI support to use buyback, replicate and other additional costs (current version can't calc available mana before buyback use)
     void addOptionalAdditionalCosts(Ability ability, Game game);
 

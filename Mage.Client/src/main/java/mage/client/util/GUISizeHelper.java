@@ -162,6 +162,14 @@ public final class GUISizeHelper {
         enlargedImageHeight = 25 * PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_ENLARGED_IMAGE_SIZE, 20);
     }
 
+    public static int getTooltipCardWidth() {
+        return 20 * GUISizeHelper.cardTooltipFontSize - 50;
+    }
+
+    public static int getTooltipCardHeight() {
+        return 12 * GUISizeHelper.cardTooltipFontSize - 20;
+    }
+
     public static void changePopupMenuFont(JPopupMenu popupMenu) {
         for (Component comp : popupMenu.getComponents()) {
             if (comp instanceof JMenuItem) {

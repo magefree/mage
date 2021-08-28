@@ -316,7 +316,7 @@ public class ManaPoolTest extends CardTestPlayerBase {
         setChoice(playerB, "X=3");
         addTarget(playerB, "Lightning Bolt");
         // pay to prevent
-        setChoice(playerA, "Yes"); // pay 3 to prevent counter
+        setChoice(playerA, true); // pay 3 to prevent counter
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkManaPool("mana after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "R", 4 - 3);
@@ -362,7 +362,7 @@ public class ManaPoolTest extends CardTestPlayerBase {
         setChoice(playerB, "X=3");
         addTarget(playerB, "Lightning Bolt");
         // pay to prevent
-        setChoice(playerA, "Yes"); // pay 3 to prevent counter
+        setChoice(playerA, true); // pay 3 to prevent counter
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkManaPool("mana after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "R", 10 + 1 - 1 - 3);

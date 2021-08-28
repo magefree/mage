@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -56,7 +55,7 @@ class VerdantSuccessionTriggeredAbility extends TriggeredAbilityImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(TokenPredicate.FALSE);
     }
 
     public VerdantSuccessionTriggeredAbility() {

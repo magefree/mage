@@ -354,8 +354,8 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))
                     || (!canBand && !canBandWithOther)
                     || !player.chooseUse(Outcome.Benefit,
-                    (isBanded ? "Band " + attacker.getLogName()
-                            + " with another " : "Form a band with " + attacker.getLogName() + " and an ")
+                            (isBanded ? "Band " + attacker.getLogName()
+                                    + " with another " : "Form a band with " + attacker.getLogName() + " and an ")
                             + "attacking creature?", null, game)) {
                 break;
             }
@@ -573,7 +573,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * Handle the blocker selection process
      *
      * @param blockController player that controls how to block, if null the
-     *                        defender is the controller
+     * defender is the controller
      * @param game
      */
     public void selectBlockers(Player blockController, Ability source, Game game) {
@@ -1390,7 +1390,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @param playerId
      * @param game
      * @param solveBanding check whether also add creatures banded with
-     *                     attackerId
+     * attackerId
      */
     public void addBlockingGroup(UUID blockerId, UUID attackerId, UUID playerId, Game game, boolean solveBanding) {
         Permanent blocker = game.getPermanent(blockerId);
@@ -1463,6 +1463,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             creature.clearBandedCards();
             blockingGroups.remove(creatureId);
             if (result && withInfo) {
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.REMOVED_FROM_COMBAT, creatureId, null, null));
                 game.informPlayers(creature.getLogName() + " removed from combat");
             }
         }

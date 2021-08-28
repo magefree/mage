@@ -18,7 +18,7 @@ public class ExperimentalOverloadTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Shock");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Experimental Overload");
-       // setChoice(playerA, "Yes");
+       // setChoice(playerA, true);
         setChoice(playerA, "Shock");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);

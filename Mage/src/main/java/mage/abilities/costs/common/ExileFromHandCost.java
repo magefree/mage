@@ -3,6 +3,7 @@ package mage.abilities.costs.common;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -23,7 +24,7 @@ import java.util.UUID;
 public class ExileFromHandCost extends CostImpl {
 
     List<Card> cards = new ArrayList<>();
-    private boolean setXFromCMC;
+    private final boolean setXFromCMC;
 
     public ExileFromHandCost(TargetCardInHand target) {
         this(target, false);
@@ -32,7 +33,7 @@ public class ExileFromHandCost extends CostImpl {
     /**
      * @param target
      * @param setXFromCMC the spells X value on the stack is set to the
-     *                    converted mana costs of the exiled card
+     *                    converted mana costs of the exiled card (alternative cost)
      */
     public ExileFromHandCost(TargetCardInHand target, boolean setXFromCMC) {
         this.addTarget(target);
@@ -66,9 +67,10 @@ public class ExileFromHandCost extends CostImpl {
             player.moveCards(cardsToExile, Zone.EXILED, ability, game);
             paid = true;
             if (setXFromCMC) {
-                VariableManaCost vmc = new VariableManaCost();
+                VariableManaCost vmc = new VariableManaCost(VariableCostType.ALTERNATIVE);
                 // no x events - rules from Unbound Flourishing:
                 // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
+                // TODO: wtf, look at setXFromCMC usage -- it used in cards with alternative costs, not additional... need to fix?
                 vmc.setAmount(cmc, cmc, false);
                 vmc.setPaid();
                 ability.getManaCostsToPay().add(vmc);

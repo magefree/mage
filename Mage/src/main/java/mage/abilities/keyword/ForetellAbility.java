@@ -72,7 +72,6 @@ public class ForetellAbility extends SpecialAction {
         // activate only during the controller's turn
         if (game.getState().getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.ALLOW_FORETELL_ANYTIME, game).isEmpty()
                 && !game.isActivePlayer(this.getControllerId())) {
-            // TODO: must be fixed to call super.canActivate here for additional checks someday
             return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);
@@ -231,21 +230,27 @@ public class ForetellAbility extends SpecialAction {
                     } else if (card instanceof ModalDoubleFacesCard) {
                         if (foretellCost != null) {
                             ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-                            ForetellCostAbility ability = new ForetellCostAbility(foretellCost);
-                            ability.setSourceId(leftHalfCard.getId());
-                            ability.setControllerId(source.getControllerId());
-                            ability.setSpellAbilityType(leftHalfCard.getSpellAbility().getSpellAbilityType());
-                            ability.setAbilityName(leftHalfCard.getName());
-                            game.getState().addOtherAbility(leftHalfCard, ability);
+                            // some MDFC's are land IE: sea gate restoration
+                            if (!leftHalfCard.isLand(game)) {
+                                ForetellCostAbility ability = new ForetellCostAbility(foretellCost);
+                                ability.setSourceId(leftHalfCard.getId());
+                                ability.setControllerId(source.getControllerId());
+                                ability.setSpellAbilityType(leftHalfCard.getSpellAbility().getSpellAbilityType());
+                                ability.setAbilityName(leftHalfCard.getName());
+                                game.getState().addOtherAbility(leftHalfCard, ability);
+                            }
                         }
                         if (foretellSplitCost != null) {
                             ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
-                            ForetellCostAbility ability = new ForetellCostAbility(foretellSplitCost);
-                            ability.setSourceId(rightHalfCard.getId());
-                            ability.setControllerId(source.getControllerId());
-                            ability.setSpellAbilityType(rightHalfCard.getSpellAbility().getSpellAbilityType());
-                            ability.setAbilityName(rightHalfCard.getName());
-                            game.getState().addOtherAbility(rightHalfCard, ability);
+                            // some MDFC's are land IE: sea gate restoration
+                            if (!rightHalfCard.isLand(game)) {
+                                ForetellCostAbility ability = new ForetellCostAbility(foretellSplitCost);
+                                ability.setSourceId(rightHalfCard.getId());
+                                ability.setControllerId(source.getControllerId());
+                                ability.setSpellAbilityType(rightHalfCard.getSpellAbility().getSpellAbilityType());
+                                ability.setAbilityName(rightHalfCard.getName());
+                                game.getState().addOtherAbility(rightHalfCard, ability);
+                            }
                         }
                     } else if (card instanceof AdventureCard) {
                         if (foretellCost != null) {

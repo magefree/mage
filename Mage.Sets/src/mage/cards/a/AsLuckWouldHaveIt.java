@@ -1,25 +1,25 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.RollDieType;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.game.Game;
+import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class AsLuckWouldHaveIt extends CardImpl {
@@ -63,15 +63,18 @@ class AsLuckWouldHaveItTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DICE_ROLLED;
+        return event.getType() == GameEvent.EventType.DIE_ROLLED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (this.isControlledBy(event.getPlayerId()) && event.getFlag()) {
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("rolled", event.getAmount());
-            }
+        DieRolledEvent drEvent = (DieRolledEvent) event;
+        // Any die roll with a numerical result will add luck counters to As Luck Would Have It.
+        // Rolling the planar die will not cause the second ability to trigger.
+        // (2018-01-19)
+        if (this.isControlledBy(event.getPlayerId()) && drEvent.getRollDieType() == RollDieType.NUMERICAL) {
+            // silver border card must look for "result" instead "natural result"
+            this.getEffects().setValue("rolled", drEvent.getResult());
             return true;
         }
         return false;
