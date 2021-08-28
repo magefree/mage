@@ -52,7 +52,7 @@ public final class VivienMonstersAdvocate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast creature spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter, false)));
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(TargetController.YOU, filter, false)));
 
         // +1: Create a 3/3 green Beast creature token. Put your choice of a vigilance 
         // counter, a reach counter, or a trample counter on it.

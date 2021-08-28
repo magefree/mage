@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -58,7 +59,7 @@ class VergeRangersEffect extends PlayTheTopCardEffect {
     private static final FilterCard filter = new FilterLandCard("play lands");
 
     public VergeRangersEffect() {
-        super(filter, false);
+        super(TargetController.YOU, filter, false);
         staticText = "As long as an opponent controls more lands than you, you may play lands from the top of your library";
     }
 

@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
@@ -34,7 +35,7 @@ public final class CourserOfKruphix extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
 
         // You may play lands from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter, false)));
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(TargetController.YOU, filter, false)));
 
         // Whenever a land enters the battlefield under your control, you gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), StaticFilters.FILTER_LAND_A));

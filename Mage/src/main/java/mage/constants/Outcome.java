@@ -28,7 +28,7 @@ public enum Outcome {
     PutManaInPool(true),
     Regenerate(true),
     PreventDamage(true), // TODO: check good or bad
-    PreventCast(false), // TODO: check good or bad
+    PreventCast(false),
     RedirectDamage(true), // TODO: check good or bad
     Tap(false),
     Transform(true),
