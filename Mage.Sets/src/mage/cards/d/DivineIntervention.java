@@ -41,7 +41,7 @@ public final class DivineIntervention extends CardImpl {
         // At the beginning of your upkeep, remove an intervention counter from Divine Intervention.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.INTERVENTION.createInstance()), TargetController.YOU, false));
 
-        // Whenever a intervention counter is removed from Protean Hydra, put two intervention counters on it at the beginning of the next end step.
+        // When you remove the last intervention counter from Divine Intervention, the game is a draw.
         this.addAbility(new DivineInterventionAbility());
     }
 
