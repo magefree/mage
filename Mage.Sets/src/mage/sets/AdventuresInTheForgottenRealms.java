@@ -23,8 +23,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
     }
 
     private AdventuresInTheForgottenRealms() {
-        super("Adventures in the Forgotten Realms", "AFR", ExpansionSet.buildDate(2021, 7, 23), SetType.EXPANSION);
-        // TODO: add collation object when set is fully implemented
+        super("Adventures in the Forgotten Realms", "AFR", ExpansionSet.buildDate(2021, 7, 23), SetType.EXPANSION, new AdventuresInTheForgottenRealmsCollator());
         this.blockName = "Adventures in the Forgotten Realms";
         this.hasBoosters = true;
         this.hasBasicLands = true;
