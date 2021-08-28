@@ -55,7 +55,7 @@ public final class GaleaKindlerOfHope extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast Aura and Equipment spells from the top of your library. When you cast an Equipment spell this way, it gains "When this Equipment enters the battlefield, attach it to target creature you control."
-        Ability ability = new SimpleStaticAbility(new PlayTheTopCardEffect(filter, false));
+        Ability ability = new SimpleStaticAbility(new PlayTheTopCardEffect(TargetController.YOU, filter, false));
         ability.addEffect(new InfoEffect("When you cast an Equipment spell this way, it gains " +
                 "\"When this Equipment enters the battlefield, attach it to target creature you control.\""));
         this.addAbility(ability);

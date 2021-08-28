@@ -171,7 +171,7 @@
          int left = draftView.getPlayers().size() - right;
          int height = left * 18;
          lblTableImage.setSize(new Dimension(lblTableImage.getWidth(), height));
-         Image tableImage = ImageHelper.getImageFromResources((draftView.getBoosterNum() + 1) % 2 == 1 ? "/draft/table_left.png" : "/draft/table_right.png");
+         Image tableImage = ImageHelper.getImageFromResources(draftView.getBoosterNum() % 2 == 1 ? "/draft/table_left.png" : "/draft/table_right.png");
          BufferedImage resizedTable = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(tableImage, BufferedImage.TYPE_INT_ARGB), lblTableImage.getWidth(), lblTableImage.getHeight());
          lblTableImage.setIcon(new ImageIcon(resizedTable));
 

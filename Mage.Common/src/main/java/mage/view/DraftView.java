@@ -19,8 +19,8 @@ public class DraftView implements Serializable {
 
     private final List<String> sets = new ArrayList<>();
     private final List<String> setCodes = new ArrayList<>();
-    private final int boosterNum;
-    private final int cardNum;
+    private final int boosterNum; // starts with 1
+    private final int cardNum; // starts with 1
     private final List<String> players = new ArrayList<>();
 
     public DraftView(Draft draft) {
