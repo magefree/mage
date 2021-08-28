@@ -21,6 +21,7 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
 import java.util.Objects;
 import java.util.UUID;
 
@@ -43,15 +44,13 @@ public final class XanatharGuildKingpin extends CardImpl {
                 .setText("choose target opponent. Until end of turn, that player can't cast spells,"),
                 TargetController.YOU, false
         );
-        ability.addEffect(new LookAtTopCardOfLibraryAnyTimeTargetEffect()
+        ability.addEffect(new LookAtTopCardOfLibraryAnyTimeTargetEffect(Duration.EndOfTurn)
                 .setText(" you may look at the top card of their library any time,"));
-
         ability.addEffect(new PlayTheTopCardTargetEffect()
                 .setText(" you may play the top card of their library,"));
-
         ability.addEffect(new XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect()
                 .setText(" and you may spend mana as thought it were mana of any color to cast spells this way"));
-
+        ability.addCustomOutcome(Outcome.PreventCast);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -121,6 +120,9 @@ class XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect extends OneShotEffect
     @Override
     public boolean apply(Game game, Ability source) {
         Card topCard = game.getPlayer(source.getFirstTarget()).getLibrary().getFromTop(game);
+        if (topCard == null) {
+            return false;
+        }
 
         int zcc = game.getState().getZoneChangeCounter(topCard.getId());
         game.addEffect(new SpendManaAsAnyColorToCastTopOfLibraryTargetEffect().setTargetPointer(new FixedTarget(topCard.getId(), zcc)), source);
@@ -160,6 +162,9 @@ class SpendManaAsAnyColorToCastTopOfLibraryTargetEffect extends AsThoughEffectIm
         UUID targetId = CardUtil.getMainCardId(game, fixedTarget.getTarget());
 
         Card topCard = game.getPlayer(source.getFirstTarget()).getLibrary().getFromTop(game);
+        if (topCard == null) {
+            return false;
+        }
 
         // If top card of target opponent's library changed, discard the current ContinuousEffect and create a new one
         if (!topCard.getId().equals(targetId) && canLookAtNextTopLibraryCard(game) && !this.isDiscarded()) {
