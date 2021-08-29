@@ -36,6 +36,10 @@ public final class BattleForZendikar extends ExpansionSet {
         this.numBoosterSpecial = 0;
         this.ratioBoosterSpecialLand = 144;
 
+        // validateColors does not work well with Devoid
+        // it makes all Devoid cards too rare and the non-Devoid blue and black cards too common
+        this.validateBoosterColors = false;
+
         cards.add(new SetCardInfo("Adverse Conditions", 54, Rarity.UNCOMMON, mage.cards.a.AdverseConditions.class));
         cards.add(new SetCardInfo("Akoum Firebird", 138, Rarity.MYTHIC, mage.cards.a.AkoumFirebird.class));
         cards.add(new SetCardInfo("Akoum Hellkite", 139, Rarity.RARE, mage.cards.a.AkoumHellkite.class));
