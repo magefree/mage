@@ -1,9 +1,9 @@
 package mage.deck;
 
-import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
+import mage.abilities.common.CommanderChooseColorAbility;
 import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.PartnerAbility;
 import mage.abilities.keyword.PartnerWithAbility;
@@ -112,9 +112,8 @@ public abstract class AbstractCommander extends Constructed {
     private boolean checkColorIdentity(Deck deck, FilterMana colorIdentity, Set<Card> commanders) {
         int piperCount = commanders
                 .stream()
-                .map(MageObject::getName)
-                .map("The Prismatic Piper"::equals)
-                .mapToInt(x -> x ? 1 : 0)
+                .filter(CommanderChooseColorAbility::checkCard)
+                .mapToInt(x -> 1)
                 .sum();
         if (piperCount == 0) {
             boolean valid = true;

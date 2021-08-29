@@ -1,15 +1,13 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.common.CommanderChooseColorAbility;
 import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -27,9 +25,7 @@ public final class ThePrismaticPiper extends CardImpl {
         this.toughness = new MageInt(3);
 
         // If The Prismatic Piper is your commander, choose a color before the game begins. The Prismatic Piper is the chosen color.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
-                "If {this} is your commander, choose a color before the game begins. {this} is the chosen color."
-        )));
+        this.addAbility(new CommanderChooseColorAbility());
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());
