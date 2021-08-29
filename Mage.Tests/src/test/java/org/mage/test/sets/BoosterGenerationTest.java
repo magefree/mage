@@ -249,14 +249,6 @@ public class BoosterGenerationTest extends MageTestBase {
     }
 
     @Test
-    public void testColdSnap_BoosterMustHaveOneSnowLand() {
-        for (int i = 0; i < 10; i++) {
-            List<Card> booster = Coldsnap.getInstance().createBooster();
-            assertTrue("coldsnap's booster must contain 1 snow covered land", booster.stream().anyMatch(card -> card.isBasic() && card.getName().startsWith("Snow-Covered ")));
-        }
-    }
-
-    @Test
     public void testModernHorizons_BoosterMustHaveOneSnowLand() {
         for (int i = 0; i < 10; i++) {
             List<Card> booster = ModernHorizons.getInstance().createBooster();
