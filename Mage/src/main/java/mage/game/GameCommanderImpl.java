@@ -118,8 +118,11 @@ public abstract class GameCommanderImpl extends GameImpl {
             handlePipers(player, commanders);
 
             // init commanders
-            for (Card commander : commanders) {
-                initCommander(commander, player);
+            for (UUID commanderId : this.getCommandersIds(player, CommanderCardType.ANY, false)) {
+                Card commander = this.getCard(commanderId);
+                if (commander != null) {
+                    initCommander(commander, player);
+                }
             }
         }
 
