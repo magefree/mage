@@ -61,7 +61,7 @@ public abstract class GameCommanderImpl extends GameImpl {
         FilterMana nonPiperIdentity = new FilterMana();
         commanders
                 .stream()
-                .filter(CommanderChooseColorAbility::checkCard)
+                .filter(card -> !CommanderChooseColorAbility.checkCard(card))
                 .map(Card::getColorIdentity)
                 .forEach(nonPiperIdentity::addAll);
         leftoverColors.removeAll(nonPiperIdentity);
