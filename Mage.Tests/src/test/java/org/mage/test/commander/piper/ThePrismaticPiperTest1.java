@@ -9,6 +9,10 @@ import org.junit.Test;
  */
 public class ThePrismaticPiperTest1 extends ThePrismaticPiperBaseTest {
 
+    // Decklist:
+    // 99 Island
+    // SB: 1 The Prismatic Piper
+
     public ThePrismaticPiperTest1() {
         super(1);
     }

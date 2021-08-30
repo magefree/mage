@@ -9,6 +9,12 @@ import org.junit.Test;
  */
 public class ThePrismaticPiperTest3 extends ThePrismaticPiperBaseTest {
 
+    // Decklist:
+    // 98 Island
+    // 1 Mountain
+    // SB: 1 The Prismatic Piper
+    // SB: 1 Kraum, Ludevic's Opus
+
     public ThePrismaticPiperTest3() {
         super(3);
     }
