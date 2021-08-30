@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import mage.MageObject;
@@ -33,7 +32,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author L_J
  */
 public final class RagingRiver extends CardImpl {
@@ -42,7 +40,9 @@ public final class RagingRiver extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
 
         // Whenever one or more creatures you control attack, each defending player divides all creatures without flying they control into a "left" pile and a "right" pile. Then, for each attacking creature you control, choose "left" or "right." That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label.
-        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new RagingRiverEffect(), 1));
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(
+                new RagingRiverEffect(), 1
+        ).setTriggerPhrase("Whenever one or more creatures you control attack, "));
     }
 
     private RagingRiver(final RagingRiver card) {
@@ -92,20 +92,19 @@ class RagingRiverEffect extends OneShotEffect {
                                 if (target.getTargets().contains(permanent.getId())) {
                                     left.add(permanent);
                                     leftLog.add(permanent);
-                                } 
-                                else if (filterBlockers.match(permanent, source.getSourceId(), defenderId, game)) {
+                                } else if (filterBlockers.match(permanent, source.getSourceId(), defenderId, game)) {
                                     right.add(permanent);
                                     rightLog.add(permanent);
                                 }
                             }
                         }
-                        
+
                         // it could be nice to invoke some graphic indicator of which creature is Left or Right in this spot
                         StringBuilder sb = new StringBuilder("Left pile of ").append(defender.getLogName()).append(": ");
                         sb.append(leftLog.stream().map(MageObject::getLogName).collect(Collectors.joining(", ")));
 
                         game.informPlayers(sb.toString());
-                        
+
                         sb = new StringBuilder("Right pile of ").append(defender.getLogName()).append(": ");
                         sb.append(rightLog.stream().map(MageObject::getLogName).collect(Collectors.joining(", ")));
 
@@ -135,7 +134,7 @@ class RagingRiverEffect extends OneShotEffect {
                                         .filter(permanent -> permanent.isControlledBy(defender.getId()))
                                         .collect(Collectors.toList());
 
-                                
+
                                 if (controller.choosePile(outcome, attacker.getName() + ": attacking " + defender.getName(), leftLog, rightLog, game)) {
                                     filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentInListPredicate(left))));
                                     game.informPlayers(attacker.getLogName() + ": attacks left (" + defender.getLogName() + ")");

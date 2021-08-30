@@ -47,7 +47,7 @@ public final class RangerClass extends CardImpl {
 
         // Whenever you attack, put a +1/+1 counter on target attacking creature.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 0
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 1
         );
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(ability, 2)));

@@ -37,7 +37,9 @@ public final class AngelicGuardian extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever one or more creatures you control attack, they gain indestructible until end of turn
-        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new AngelicGuardianGainEffect(), 1));
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(
+                new AngelicGuardianGainEffect(), 1
+        ).setTriggerPhrase("Whenever one or more creatures you control attack, "));
     }
 
     private AngelicGuardian(final AngelicGuardian card) {
