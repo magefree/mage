@@ -1,8 +1,13 @@
 package org.mage.test.commander.piper;
 
+import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.utils.ManaOptionsTestUtils;
+
+import static org.mage.test.utils.ManaOptionsTestUtils.assertDuplicatedManaOptions;
 
 /**
  * @author TheElk801
@@ -31,5 +36,18 @@ public class ThePrismaticPiperTest2 extends ThePrismaticPiperBaseTest {
         assertAllCommandsUsed();
 
         assertColor(playerA, piper, "R", true);
+    }
+
+    @Test
+    public void testManaOptions() {
+        addCard(Zone.BATTLEFIELD, playerA, "Command Tower");
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+        Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
+        ManaOptionsTestUtils.assertManaOptions("{U}", manaOptions);
+        ManaOptionsTestUtils.assertManaOptions("{R}", manaOptions);
     }
 }
