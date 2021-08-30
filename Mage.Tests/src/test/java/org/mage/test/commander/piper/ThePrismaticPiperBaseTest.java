@@ -5,7 +5,7 @@ import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 /**
  * @author TheElk801
  */
-public class ThePrismaticPiperBaseTest extends CardTestCommanderDuelBase {
+public abstract class ThePrismaticPiperBaseTest extends CardTestCommanderDuelBase {
 
     protected static final String piper = "The Prismatic Piper";
 
