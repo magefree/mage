@@ -68,7 +68,7 @@ public final class PaladinClass extends CardImpl {
                 new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true)
                         .setText("until end of turn, target attacking creature " +
                                 "gets +1/+1 for each other attacking creature"),
-                0
+                1
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 DoubleStrikeAbility.getInstance(), Duration.EndOfTurn

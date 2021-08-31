@@ -11,6 +11,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.HintUtils;
 import mage.abilities.text.TextPart;
 import mage.cards.FrameStyle;
 import mage.choices.Choice;
@@ -125,7 +126,19 @@ public class Dungeon implements CommandObject {
                         "Currently in " + currentRoom.getName() :
                         "Not currently in a room"
         ) + ")</i>");
-        dungeonRooms.stream().map(DungeonRoom::toString).forEach(rules::add);
+        dungeonRooms.stream()
+                .map(room -> {
+                    // mark useful rooms by icons
+                    String prefix = "";
+                    if (room.equals(currentRoom)) {
+                        prefix += HintUtils.prepareText(null, null, HintUtils.HINT_ICON_DUNGEON_ROOM_CURRENT);
+                    }
+                    if (currentRoom != null && currentRoom.getNextRooms().stream().anyMatch(room::equals)) {
+                        prefix += HintUtils.prepareText(null, null, HintUtils.HINT_ICON_DUNGEON_ROOM_NEXT);
+                    }
+                    return prefix + room;
+                })
+                .forEach(rules::add);
         return rules;
     }
 

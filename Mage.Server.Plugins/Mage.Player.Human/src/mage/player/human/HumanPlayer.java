@@ -2609,6 +2609,10 @@ public class HumanPlayer extends PlayerImpl {
     private boolean gameInCheckPlayableState(Game game, boolean ignoreWarning) {
         if (game.inCheckPlayableState()) {
             if (!ignoreWarning) {
+                logger.warn(String.format("Current stack: %d - %s",
+                        game.getStack().size(),
+                        game.getStack().stream().map(Object::toString).collect(Collectors.joining(", "))
+                ));
                 logger.warn("Player interaction in checkPlayableState", new Throwable());
             }
             return true;

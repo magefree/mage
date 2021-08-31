@@ -25,7 +25,8 @@ public enum TargetController {
     OWNER,
     CONTROLLER_ATTACHED_TO,
     NEXT,
-    EACH_PLAYER;
+    EACH_PLAYER,
+    SOURCE_TARGETS;
 
     private final OwnerPredicate ownerPredicate;
     private final PlayerPredicate playerPredicate;

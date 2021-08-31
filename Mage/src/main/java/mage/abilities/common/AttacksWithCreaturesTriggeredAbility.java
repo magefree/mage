@@ -7,18 +7,15 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author Styxo
  */
 public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
 
-    private FilterCreaturePermanent filter;
-    private int minAttackers;
+    private final FilterCreaturePermanent filter;
+    private final int minAttackers;
 
     public AttacksWithCreaturesTriggeredAbility(Effect effect, int minAttackers) {
         this(effect, minAttackers, StaticFilters.FILTER_PERMANENT_CREATURES);
@@ -52,28 +49,26 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getCombat().getAttackingPlayerId().equals(getControllerId())) {
-            int attackerCount = 0;
-            for (UUID attackerId : game.getCombat().getAttackers()) {
-                Permanent attacker = game.getPermanent(attackerId);
-                if (filter.match(attacker, game)) {
-                    attackerCount++;
-                }
-            }
-            return attackerCount >= minAttackers;
-        }
-        return false;
+        return isControlledBy(game.getCombat().getAttackingPlayerId())
+                && game
+                .getCombat()
+                .getAttackers()
+                .stream()
+                .map(game::getPermanent)
+                .filter(permanent -> filter.match(permanent, sourceId, controllerId, game))
+                .mapToInt(x -> 1).sum() > minAttackers;
     }
 
     @Override
     public String getTriggerPhrase() {
-        if (minAttackers == 0) {
+        if (minAttackers == 1) {
             return "Whenever you attack, ";
         }
-        StringBuilder sb = new StringBuilder("Whenever you attack with " + CardUtil.numberToText(minAttackers) + " or more ");
+        StringBuilder sb = new StringBuilder("Whenever you attack with ");
+        sb.append(CardUtil.numberToText(minAttackers));
+        sb.append(" or more ");
         sb.append(filter.getMessage());
         sb.append(", ");
         return sb.toString();
     }
-
 }

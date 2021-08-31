@@ -415,7 +415,7 @@ class TherosBeyondDeathCollator implements BoosterCollator {
     }
 
     private static class TherosBeyondDeathStructure extends BoosterStructure {
-        private static final TherosBeyondDeathStructure C1 = new TherosBeyondDeathStructure(
+        private static final TherosBeyondDeathStructure AABBC1C1C1C1C1C1 = new TherosBeyondDeathStructure(
                 TherosBeyondDeathRun.commonA,
                 TherosBeyondDeathRun.commonA,
                 TherosBeyondDeathRun.commonB,
@@ -427,7 +427,7 @@ class TherosBeyondDeathCollator implements BoosterCollator {
                 TherosBeyondDeathRun.commonC1,
                 TherosBeyondDeathRun.commonC1
         );
-        private static final TherosBeyondDeathStructure C2 = new TherosBeyondDeathStructure(
+        private static final TherosBeyondDeathStructure AAABBC1C1C1C1C1 = new TherosBeyondDeathStructure(
                 TherosBeyondDeathRun.commonA,
                 TherosBeyondDeathRun.commonA,
                 TherosBeyondDeathRun.commonA,
@@ -439,7 +439,7 @@ class TherosBeyondDeathCollator implements BoosterCollator {
                 TherosBeyondDeathRun.commonC1,
                 TherosBeyondDeathRun.commonC1
         );
-        private static final TherosBeyondDeathStructure C3 = new TherosBeyondDeathStructure(
+        private static final TherosBeyondDeathStructure AAAABBC2C2C2C2 = new TherosBeyondDeathStructure(
                 TherosBeyondDeathRun.commonA,
                 TherosBeyondDeathRun.commonA,
                 TherosBeyondDeathRun.commonA,
@@ -451,7 +451,7 @@ class TherosBeyondDeathCollator implements BoosterCollator {
                 TherosBeyondDeathRun.commonC2,
                 TherosBeyondDeathRun.commonC2
         );
-        private static final TherosBeyondDeathStructure C4 = new TherosBeyondDeathStructure(
+        private static final TherosBeyondDeathStructure AAAABBBC2C2C2 = new TherosBeyondDeathStructure(
                 TherosBeyondDeathRun.commonA,
                 TherosBeyondDeathRun.commonA,
                 TherosBeyondDeathRun.commonA,
@@ -463,7 +463,7 @@ class TherosBeyondDeathCollator implements BoosterCollator {
                 TherosBeyondDeathRun.commonC2,
                 TherosBeyondDeathRun.commonC2
         );
-        private static final TherosBeyondDeathStructure C5 = new TherosBeyondDeathStructure(
+        private static final TherosBeyondDeathStructure AAAABBBBC2C2 = new TherosBeyondDeathStructure(
                 TherosBeyondDeathRun.commonA,
                 TherosBeyondDeathRun.commonA,
                 TherosBeyondDeathRun.commonA,
@@ -475,12 +475,12 @@ class TherosBeyondDeathCollator implements BoosterCollator {
                 TherosBeyondDeathRun.commonC2,
                 TherosBeyondDeathRun.commonC2
         );
-        private static final TherosBeyondDeathStructure U1 = new TherosBeyondDeathStructure(
+        private static final TherosBeyondDeathStructure ABB = new TherosBeyondDeathStructure(
                 TherosBeyondDeathRun.uncommonA,
                 TherosBeyondDeathRun.uncommonB,
                 TherosBeyondDeathRun.uncommonB
         );
-        private static final TherosBeyondDeathStructure U2 = new TherosBeyondDeathStructure(
+        private static final TherosBeyondDeathStructure AAB = new TherosBeyondDeathStructure(
                 TherosBeyondDeathRun.uncommonA,
                 TherosBeyondDeathRun.uncommonA,
                 TherosBeyondDeathRun.uncommonB
@@ -500,24 +500,41 @@ class TherosBeyondDeathCollator implements BoosterCollator {
         }
     }
 
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 3.28 A commons (36 / 11)
+    // 2.18 B commons (24 / 11)
+    // 2.72 C1 commons (30 / 11, or 60 / 11 in each C1 booster)
+    // 1.81 C2 commons (20 / 11, or 40 / 11 in each C2 booster)
+    // (these numbers are the same for all sets with 101 commons and 10 common slots per booster)
     private final RarityConfiguration commonRuns = new RarityConfiguration(
             false,
-            TherosBeyondDeathStructure.C1,
-            TherosBeyondDeathStructure.C2,
-            TherosBeyondDeathStructure.C3,
-            TherosBeyondDeathStructure.C4,
-            TherosBeyondDeathStructure.C5,
-            TherosBeyondDeathStructure.C1,
-            TherosBeyondDeathStructure.C2,
-            TherosBeyondDeathStructure.C3,
-            TherosBeyondDeathStructure.C4,
-            TherosBeyondDeathStructure.C5,
-            TherosBeyondDeathStructure.C4,
-            TherosBeyondDeathStructure.C5
+            TherosBeyondDeathStructure.AABBC1C1C1C1C1C1,
+            TherosBeyondDeathStructure.AABBC1C1C1C1C1C1,
+            TherosBeyondDeathStructure.AABBC1C1C1C1C1C1,
+            TherosBeyondDeathStructure.AABBC1C1C1C1C1C1,
+            TherosBeyondDeathStructure.AABBC1C1C1C1C1C1,
+            TherosBeyondDeathStructure.AAABBC1C1C1C1C1,
+            TherosBeyondDeathStructure.AAABBC1C1C1C1C1,
+            TherosBeyondDeathStructure.AAABBC1C1C1C1C1,
+            TherosBeyondDeathStructure.AAABBC1C1C1C1C1,
+            TherosBeyondDeathStructure.AAABBC1C1C1C1C1,
+            TherosBeyondDeathStructure.AAABBC1C1C1C1C1,
+
+            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
+            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
+            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
+            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
+            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
+            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
+            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
+            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
+            TherosBeyondDeathStructure.AAAABBBC2C2C2,
+            TherosBeyondDeathStructure.AAAABBBC2C2C2,
+            TherosBeyondDeathStructure.AAAABBBBC2C2
     );
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(
-            TherosBeyondDeathStructure.U1,
-            TherosBeyondDeathStructure.U2
+            TherosBeyondDeathStructure.ABB,
+            TherosBeyondDeathStructure.AAB
     );
     private final RarityConfiguration rareRuns = new RarityConfiguration(
             false,

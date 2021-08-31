@@ -153,7 +153,14 @@ public class PickChoiceDialog extends MageDialog {
             public void mouseMoved(MouseEvent e) {
                 // hint show
                 JList listSource = (JList) e.getSource();
-                int index = listSource.locationToIndex(e.getPoint());
+
+                // workaround to raise on real element, not empty space
+                int index = -1;
+                Rectangle r = listSource.getCellBounds(0, listSource.getLastVisibleIndex());
+                if (r != null && r.contains(e.getPoint())) {
+                    index = listSource.locationToIndex(e.getPoint());
+                }
+
                 if (index > -1) {
                     choiceHintShow(index);
                 } else {
@@ -255,7 +262,8 @@ public class PickChoiceDialog extends MageDialog {
 
     private void choiceHintHide() {
         switch (choice.getHintType()) {
-            case CARD: {
+            case CARD:
+            case CARD_DUNGEON: {
                 // as popup card
                 cardInfo.onMouseExited();
                 break;

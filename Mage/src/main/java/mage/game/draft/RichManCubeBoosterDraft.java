@@ -30,7 +30,8 @@ public class RichManCubeBoosterDraft extends DraftImpl {
             cardNum = 1;
             fireUpdatePlayersEvent();
             while (!isAbort() && pickCards()) {
-                passLeft();
+                // new booster each time, so order is irrelevant
+                passBoosterToLeft();
                 fireUpdatePlayersEvent();
             }
             boosterNum++;
@@ -40,7 +41,7 @@ public class RichManCubeBoosterDraft extends DraftImpl {
     }
 
     @Override
-    protected void passLeft() {
+    protected void passBoosterToLeft() {
         synchronized (players) {
             UUID startId = table.get(0);
             UUID currentId = startId;

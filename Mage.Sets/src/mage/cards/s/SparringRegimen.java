@@ -29,7 +29,7 @@ public final class SparringRegimen extends CardImpl {
 
         // Whenever you attack, put a +1/+1 counter on target attacking creature and untap it.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 0
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 1
         );
         ability.addEffect(new UntapTargetEffect().setText("and untap it"));
         ability.addTarget(new TargetAttackingCreature());
