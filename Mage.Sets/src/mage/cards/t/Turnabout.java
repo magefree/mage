@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.abilities.Ability;
@@ -10,7 +9,7 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.TappedPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -31,7 +30,6 @@ public final class Turnabout extends CardImpl {
         // Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new TurnaboutEffect());
-
     }
 
     private Turnabout(final Turnabout card) {
@@ -54,13 +52,6 @@ class TurnaboutEffect extends OneShotEffect {
         choice.add(CardType.LAND.toString());
     }
 
-    private static final Set<String> choice2 = new HashSet<>();
-
-    static {
-        choice2.add("Untap");
-        choice2.add("Tap");
-    }
-
     public TurnaboutEffect() {
         super(Outcome.Benefit);
         staticText = "Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls";
@@ -78,53 +69,43 @@ class TurnaboutEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        UUID target = source.getFirstTarget();
-        if (controller != null && target != null) {
-            Choice choiceImpl = new ChoiceImpl();
-            choiceImpl.setMessage("Choose card type to tap or untap");
-            choiceImpl.setChoices(choice);
-            if (!controller.choose(Outcome.Neutral, choiceImpl, game)) {
-                return false;
-            }
-            CardType type;
-            String choosenType = choiceImpl.getChoice();
-
-            if (choosenType.equals(CardType.ARTIFACT.toString())) {
-                type = CardType.ARTIFACT;
-            } else if (choosenType.equals(CardType.LAND.toString())) {
-                type = CardType.LAND;
-            } else {
-                type = CardType.CREATURE;
-            }
-
-            choiceImpl = new ChoiceImpl();
-            choiceImpl.setMessage("Choose to tap or untap");
-            choiceImpl.setChoices(choice2);
-            if (!controller.choose(Outcome.Neutral, choiceImpl, game)) {
-                return false;
-            }
-
-            FilterPermanent filter = new FilterPermanent();
-            filter.add(type.getPredicate());
-
-            if (choiceImpl.getChoice().equals("Untap")) {
-                filter.add(TappedPredicate.TAPPED);
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    if (permanent.isControlledBy(target)) {
-                        permanent.untap(game);
-                    }
-                }
-            } else {
-                filter.add(TappedPredicate.UNTAPPED);
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    if (permanent.isControlledBy(target)) {
-                        permanent.tap(source, game);
-                    }
-                }
-            }
+        if (controller == null || game.getPlayer(source.getFirstTarget()) == null) {
+            return true;
+        }
+        Choice choiceImpl = new ChoiceImpl(true);
+        choiceImpl.setMessage("Choose card type to tap or untap");
+        choiceImpl.setChoices(choice);
+        if (!controller.choose(Outcome.Neutral, choiceImpl, game)) {
+            return false;
+        }
+        FilterPermanent filter;
+        switch (choiceImpl.getChoice()) {
+            case "Artifact":
+                filter = StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT;
+                break;
+            case "Land":
+                filter = StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND;
+                break;
+            case "Creature":
+                filter = StaticFilters.FILTER_CONTROLLED_CREATURE;
+                break;
+            default:
+                throw new IllegalArgumentException("Choice is required");
 
         }
-
+        boolean tap = controller.chooseUse(
+                Outcome.Neutral, "Tap or untap?", null,
+                "Tap", "Untap", source, game
+        );
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                filter, source.getFirstTarget(), source.getSourceId(), game
+        )) {
+            if (tap) {
+                permanent.tap(source, game);
+            } else {
+                permanent.untap(game);
+            }
+        }
         return true;
     }
 }
