@@ -247,7 +247,7 @@ public class StormTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Emerald");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Turnabout");
         setChoice(playerA, "Land");
-        setChoice(playerA, true);
+        setChoice(playerA, false);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yawgmoth's Will");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Palinchron");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind's Desire");
