@@ -515,7 +515,7 @@ class KaldheimCollator implements BoosterCollator {
     }
 
     private static class KaldheimStructure extends BoosterStructure {
-        private static final KaldheimStructure C1 = new KaldheimStructure(
+        private static final KaldheimStructure AABBC1C1C1C1C1C1 = new KaldheimStructure(
                 KaldheimRun.commonA,
                 KaldheimRun.commonA,
                 KaldheimRun.commonB,
@@ -527,7 +527,7 @@ class KaldheimCollator implements BoosterCollator {
                 KaldheimRun.commonC1,
                 KaldheimRun.commonC1
         );
-        private static final KaldheimStructure C2 = new KaldheimStructure(
+        private static final KaldheimStructure AAABBC1C1C1C1C1 = new KaldheimStructure(
                 KaldheimRun.commonA,
                 KaldheimRun.commonA,
                 KaldheimRun.commonA,
@@ -539,19 +539,7 @@ class KaldheimCollator implements BoosterCollator {
                 KaldheimRun.commonC1,
                 KaldheimRun.commonC1
         );
-        private static final KaldheimStructure C3 = new KaldheimStructure(
-                KaldheimRun.commonA,
-                KaldheimRun.commonA,
-                KaldheimRun.commonA,
-                KaldheimRun.commonB,
-                KaldheimRun.commonB,
-                KaldheimRun.commonB,
-                KaldheimRun.commonC2,
-                KaldheimRun.commonC2,
-                KaldheimRun.commonC2,
-                KaldheimRun.commonC2
-        );
-        private static final KaldheimStructure C4 = new KaldheimStructure(
+        private static final KaldheimStructure AAAABBBC2C2C2 = new KaldheimStructure(
                 KaldheimRun.commonA,
                 KaldheimRun.commonA,
                 KaldheimRun.commonA,
@@ -563,7 +551,7 @@ class KaldheimCollator implements BoosterCollator {
                 KaldheimRun.commonC2,
                 KaldheimRun.commonC2
         );
-        private static final KaldheimStructure C5 = new KaldheimStructure(
+        private static final KaldheimStructure AAAABBC2C2C2C2 = new KaldheimStructure(
                 KaldheimRun.commonA,
                 KaldheimRun.commonA,
                 KaldheimRun.commonA,
@@ -575,12 +563,12 @@ class KaldheimCollator implements BoosterCollator {
                 KaldheimRun.commonC2,
                 KaldheimRun.commonC2
         );
-        private static final KaldheimStructure U1 = new KaldheimStructure(
+        private static final KaldheimStructure AAA = new KaldheimStructure(
                 KaldheimRun.uncommonA,
                 KaldheimRun.uncommonA,
                 KaldheimRun.uncommonA
         );
-        private static final KaldheimStructure U2 = new KaldheimStructure(
+        private static final KaldheimStructure BBB = new KaldheimStructure(
                 KaldheimRun.uncommonB,
                 KaldheimRun.uncommonB,
                 KaldheimRun.uncommonB
@@ -600,24 +588,42 @@ class KaldheimCollator implements BoosterCollator {
         }
     }
 
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 3.27 A commons (36 / 11)
+    // 2.18 B commons (24 / 11)
+    // 2.73 C1 commons (30 / 11, or 60 / 11 in each C1 booster)
+    // 1.82 C2 commons (20 / 11, or 40 / 11 in each C2 booster)
+    // These numbers are the same for all sets with 101 commons in A/B/C1/C2 print runs
+    // and with 10 common slots per booster
     private final RarityConfiguration commonRuns = new RarityConfiguration(
             false,
-            KaldheimStructure.C1,
-            KaldheimStructure.C2,
-            KaldheimStructure.C3,
-            KaldheimStructure.C4,
-            KaldheimStructure.C5,
-            KaldheimStructure.C1,
-            KaldheimStructure.C2,
-            KaldheimStructure.C3,
-            KaldheimStructure.C4,
-            KaldheimStructure.C5,
-            KaldheimStructure.C4,
-            KaldheimStructure.C5
+            KaldheimStructure.AABBC1C1C1C1C1C1,
+            KaldheimStructure.AABBC1C1C1C1C1C1,
+            KaldheimStructure.AABBC1C1C1C1C1C1,
+            KaldheimStructure.AABBC1C1C1C1C1C1,
+            KaldheimStructure.AABBC1C1C1C1C1C1,
+            KaldheimStructure.AAABBC1C1C1C1C1,
+            KaldheimStructure.AAABBC1C1C1C1C1,
+            KaldheimStructure.AAABBC1C1C1C1C1,
+            KaldheimStructure.AAABBC1C1C1C1C1,
+            KaldheimStructure.AAABBC1C1C1C1C1,
+            KaldheimStructure.AAABBC1C1C1C1C1,
+
+            KaldheimStructure.AAAABBC2C2C2C2,
+            KaldheimStructure.AAAABBC2C2C2C2,
+            KaldheimStructure.AAAABBC2C2C2C2,
+            KaldheimStructure.AAAABBC2C2C2C2,
+            KaldheimStructure.AAAABBC2C2C2C2,
+            KaldheimStructure.AAAABBC2C2C2C2,
+            KaldheimStructure.AAAABBC2C2C2C2,
+            KaldheimStructure.AAAABBBC2C2C2,
+            KaldheimStructure.AAAABBBC2C2C2,
+            KaldheimStructure.AAAABBBC2C2C2,
+            KaldheimStructure.AAAABBBC2C2C2
     );
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(
-            KaldheimStructure.U1,
-            KaldheimStructure.U2
+            KaldheimStructure.AAA,
+            KaldheimStructure.BBB
     );
     private final RarityConfiguration rareRuns = new RarityConfiguration(
             false,
