@@ -3107,6 +3107,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         // that yielded the lowest result is considered to have never happened. No abilities trigger
         // because of the ignored roll, and no effects apply to that roll. If multiple results are tied
         // for the lowest, the player chooses one of those rolls to be ignored.
+        int diceRolledTotal = dieRolls.size();
+        String ignoreMessage;
         if (rollDiceEvent.getRollDieType() == RollDieType.NUMERICAL && rollDiceEvent.getIgnoreLowestAmount() > 0) {
             // find ignored values
             List<Integer> ignoredResults = new ArrayList<>();
@@ -3115,6 +3117,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                 dieResults.remove(Integer.valueOf(min));
                 ignoredResults.add(min);
             }
+            ignoreMessage = String.format(
+                    ignoredResults.size() > 1 ? ", ignoring [%s]" : ", ignoring %s",
+                    ignoredResults
+                            .stream()
+                            .map(x -> "" + x)
+                            .collect(Collectors.joining(", "))
+            );
             // remove ignored rolls (they not exist anymore)
             List<RollDieResult> newRolls = new ArrayList<>();
             for (RollDieResult rollDieResult : dieRolls) {
@@ -3126,6 +3135,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             dieRolls.clear();
             dieRolls.addAll(newRolls);
+        } else {
+            ignoreMessage = "";
         }
 
         // raise affected roll events
@@ -3134,23 +3145,29 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         game.fireEvent(new DiceRolledEvent(rollDiceEvent.getSides(), dieResults, source));
 
+        String resultString = dieResults
+                .stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
         String message;
         switch (rollDiceEvent.getRollDieType()) {
             default:
             case NUMERICAL:
-                // [Roll a die] user rolled 2x d6 and got [1, 4] (source: xxx)
-                message = String.format("[Roll a die] %s rolled %s %s and got [%s]%s",
+                // [Roll a die] user rolled 4d6, results: [4, 6], ignoring [1, 3] (source: xxx)
+                message = String.format("[Roll a die] %s rolled %sd%s, result%s: %s%s%s",
                         getLogName(),
-                        (dieResults.size() > 1 ? dieResults.size() + "x" : "a"),
-                        "d" + rollDiceEvent.getSides(),
-                        dieResults.stream().map(Object::toString).collect(Collectors.joining(", ")),
+                        diceRolledTotal > 1 ? diceRolledTotal : "a ",
+                        rollDiceEvent.getSides(),
+                        dieResults.size() > 1 ? 's' : "",
+                        dieResults.size() > 1 ? '[' + resultString + ']' : resultString,
+                        ignoreMessage,
                         CardUtil.getSourceLogName(game, source));
                 break;
             case PLANAR:
                 // [Roll a planar die] user rolled CHAOS (source: xxx)
-                message = String.format("[Roll a planar die] %s rolled [%s]%s",
+                message = String.format("[Roll a planar die] %s rolled %s%s",
                         getLogName(),
-                        dieResults.stream().map(Object::toString).collect(Collectors.joining(", ")),
+                        dieResults.size() > 1 ? '[' + resultString + ']' : resultString,
                         CardUtil.getSourceLogName(game, source));
                 break;
         }
