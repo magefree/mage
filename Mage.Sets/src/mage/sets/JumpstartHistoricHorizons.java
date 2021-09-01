@@ -18,7 +18,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
     private JumpstartHistoricHorizons() {
         super("Jumpstart: Historic Horizons", "J21", ExpansionSet.buildDate(2021, 8, 12), SetType.MAGIC_ARENA);
         this.hasBoosters = false;
-        this.hasBasicLands = true;
+        this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Abiding Grace", 32, Rarity.UNCOMMON, mage.cards.a.AbidingGrace.class));
         cards.add(new SetCardInfo("Abzan Battle Priest", 33, Rarity.UNCOMMON, mage.cards.a.AbzanBattlePriest.class));
