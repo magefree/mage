@@ -8,6 +8,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.common.OpponentsLostLifeHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,12 +37,12 @@ public final class TheaterOfHorrors extends CardImpl {
         ));
 
         // During your turn, if an opponent lost life this turn, you may play cards exiled with Theater of Horrors.
-        this.addAbility(new SimpleStaticAbility(new TheaterOfHorrorsCastEffect()));
+        this.addAbility(new SimpleStaticAbility(new TheaterOfHorrorsCastEffect()).addHint(OpponentsLostLifeHint.instance));
 
         // {3}{R}: Theater of Horrors deals 1 damage to target opponent or planeswalker.
         Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(1),
-                new ManaCostsImpl("{3}{R}")
+                new ManaCostsImpl<>("{3}{R}")
         );
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);

@@ -9,7 +9,7 @@ import mage.game.Game;
 /**
  * @author JayDi85
  */
-public enum SpectacleHint implements Hint {
+public enum OpponentsLostLifeHint implements Hint {
 
     instance;
     private static final ConditionHint hint = new ConditionHint(OpponentsLostLifeCondition.instance, "Opponents lost life this turn");
