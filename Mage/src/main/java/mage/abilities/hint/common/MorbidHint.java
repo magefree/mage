@@ -8,7 +8,6 @@ import mage.game.Game;
 
 /**
  * @author TheElk801
- * TODO: add this to other morbid cards
  */
 public enum MorbidHint implements Hint {
     instance;
