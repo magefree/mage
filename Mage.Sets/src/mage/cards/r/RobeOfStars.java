@@ -72,6 +72,6 @@ class RobeOfStarsEffect extends OneShotEffect {
             return false;
         }
         Permanent equipped = game.getPermanent(permanent.getAttachedTo());
-        return equipped != null && permanent.phaseOut(game);
+        return equipped != null && equipped.phaseOut(game);
     }
 }
