@@ -2314,6 +2314,8 @@ public class TestPlayer implements Player {
                 return true;
             }
 
+            Set<Zone> targetCardZonesChecked = new HashSet<>(); // control miss implementation
+
             // player
             if (target.getOriginalTarget() instanceof TargetPlayer
                     || target.getOriginalTarget() instanceof TargetAnyTarget
@@ -2397,9 +2399,12 @@ public class TestPlayer implements Player {
                 }
             }
 
-            // card in hand
+            // card in hand (only own hand supports here)
+            // TODO: add not own hand too, example
             if (target.getOriginalTarget() instanceof TargetCardInHand
-                    || target.getOriginalTarget() instanceof TargetDiscard) {
+                    || target.getOriginalTarget() instanceof TargetDiscard
+                    || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.HAND)) {
+                targetCardZonesChecked.add(Zone.HAND);
                 for (String targetDefinition : targets) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
                     String[] targetList = targetDefinition.split("\\^");
@@ -2424,8 +2429,9 @@ public class TestPlayer implements Player {
 
             // card in exile
             if (target.getOriginalTarget() instanceof TargetCardInExile
-                    || target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard) {
-
+                    || target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard
+                    || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.EXILED)) {
+                targetCardZonesChecked.add(Zone.EXILED);
                 FilterCard filter = null;
                 if (target.getOriginalTarget().getFilter() instanceof FilterCard) {
                     filter = (FilterCard) target.getOriginalTarget().getFilter();
@@ -2488,7 +2494,9 @@ public class TestPlayer implements Player {
             if (target.getOriginalTarget() instanceof TargetCardInOpponentsGraveyard
                     || target.getOriginalTarget() instanceof TargetCardInYourGraveyard
                     || target.getOriginalTarget() instanceof TargetCardInGraveyard
-                    || target.getOriginalTarget() instanceof TargetCardInGraveyardOrBattlefield) {
+                    || target.getOriginalTarget() instanceof TargetCardInGraveyardOrBattlefield
+                    || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.GRAVEYARD)) {
+                targetCardZonesChecked.add(Zone.GRAVEYARD);
                 TargetCard targetFull = (TargetCard) target.getOriginalTarget();
 
                 List<UUID> needPlayers = game.getState().getPlayersInRange(getId(), game).toList();
@@ -2559,6 +2567,14 @@ public class TestPlayer implements Player {
                         return true;
                     }
                 }
+            }
+
+            // uninplemented TargetCard's zone
+            if (target.getOriginalTarget() instanceof TargetCard && !targetCardZonesChecked.contains(target.getOriginalTarget().getZone())) {
+                Assert.fail("Found unimplemented TargetCard's zone or TargetCard's extented class: "
+                        + target.getOriginalTarget().getClass().getCanonicalName()
+                        + ", zone " + target.getOriginalTarget().getZone()
+                        + ", from " + (source == null ? "unknown source" : source.getSourceObject(game)));
             }
         }
 
