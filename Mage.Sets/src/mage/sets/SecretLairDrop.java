@@ -330,10 +330,13 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 573, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lucille", 581, Rarity.MYTHIC, mage.cards.l.Lucille.class));
         cards.add(new SetCardInfo("Brainstorm", 582, Rarity.RARE, mage.cards.b.Brainstorm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Terramorphic Expanse", 585, Rarity.RARE, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Arcane Signet", 589, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crash Through", 594, Rarity.RARE, mage.cards.c.CrashThrough.class));
         cards.add(new SetCardInfo("Eldrazi Monument", 603, Rarity.MYTHIC, mage.cards.e.EldraziMonument.class));
         cards.add(new SetCardInfo("Ornithopter", 604, Rarity.RARE, mage.cards.o.Ornithopter.class));
+        cards.add(new SetCardInfo("Panharmonicon", 605, Rarity.RARE, mage.cards.p.Panharmonicon.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 606, Rarity.RARE, mage.cards.s.SwiftfootBoots.class));
+        cards.add(new SetCardInfo("Rogue's Passage", 607, Rarity.RARE, mage.cards.r.RoguesPassage.class));
     }
 }
