@@ -27,7 +27,7 @@ public final class PortableHole extends CardImpl {
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
-        filter.add(TargetController.OPPONENT.getOwnerPredicate());
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public PortableHole(UUID ownerId, CardSetInfo setInfo) {
