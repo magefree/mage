@@ -507,6 +507,7 @@ public class ScryfallImageSupportCards {
             add("AFC"); // Forgotten Realms Commander
             add("J21"); // Jumpstart: Historic Horizons
             add("MID"); // Innistrad, Midnight Hunt
+            add("MIC"); // Midnight Hunt Commander
         }
     };
 
