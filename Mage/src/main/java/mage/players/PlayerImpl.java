@@ -1169,11 +1169,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         Card card = game.getCard(ability.getSourceId());
         if (card != null) {
-            if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
-                    ability.getId(), ability, playerId, approvingObject), ability)) {
+            Zone fromZone = game.getState().getZone(card.getMainCard().getId());
+            GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
+                    ability.getId(), ability, playerId, approvingObject);
+            castEvent.setZone(fromZone);
+            if (!game.replaceEvent(castEvent, ability)) {
                 int bookmark = game.bookmarkState();
                 setStoredBookmark(bookmark); // move global bookmark to current state (if you activated mana before then you can't rollback it)
-                Zone fromZone = game.getState().getZone(card.getMainCard().getId());
                 card.cast(game, fromZone, ability, playerId);
                 Spell spell = game.getStack().getSpell(ability.getId());
                 if (spell == null) {
@@ -1207,15 +1209,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 clearCastSourceIdManaCosts(); // TODO: test multiple alternative cost for different cards as same time
 
-                GameEvent event = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
+                castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
                         spell.getSpellAbility().getId(), spell.getSpellAbility(), playerId, approvingObject);
-                event.setZone(fromZone);  // why wasn't this set before??
-                game.fireEvent(event);
+                castEvent.setZone(fromZone);
+                game.fireEvent(castEvent);
                 if (spell.activate(game, noMana)) {
-                    event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,
+                    GameEvent castedEvent = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,
                             spell.getSpellAbility().getId(), spell.getSpellAbility(), playerId, approvingObject);
-                    event.setZone(fromZone);
-                    game.fireEvent(event);
+                    castedEvent.setZone(fromZone);
+                    game.fireEvent(castedEvent);
                     if (!game.isSimulation()) {
                         game.informPlayers(getLogName() + spell.getActivatedMessage(game));
                     }
@@ -3776,15 +3778,18 @@ public abstract class PlayerImpl implements Player, Serializable {
                 continue;
             }
             // cast spell restrictions 1
+            GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), ability, this.getId());
+            castEvent.setZone(fromZone);
             if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
-                    GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(),
-                            ability, this.getId()), ability, game, true)) {
+                    castEvent, ability, game, true)) {
                 continue;
             }
             // cast spell restrictions 2
+            GameEvent castLateEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE,
+                    ability.getId(), ability, this.getId());
+            castLateEvent.setZone(fromZone);
             if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
-                    GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, ability.getSourceId(),
-                            ability, this.getId()), ability, game, true)) {
+                    castLateEvent, ability, game, true)) {
                 continue;
             }
 
@@ -3880,15 +3885,19 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 continue;
                             }
                             // cast spell restrictions 1
+                            GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
+                                    ability.getId(), ability, this.getId());
+                            castEvent.setZone(fromZone);
                             if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
-                                    GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(),
-                                            ability, this.getId()), ability, game, true)) {
+                                    castEvent, ability, game, true)) {
                                 continue;
                             }
                             // cast spell restrictions 2
+                            GameEvent castLateEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE,
+                                    ability.getId(), ability, this.getId());
+                            castLateEvent.setZone(fromZone);
                             if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
-                                    GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, ability.getSourceId(),
-                                            ability, this.getId()), ability, game, true)) {
+                                    castLateEvent, ability, game, true)) {
                                 continue;
                             }
 
