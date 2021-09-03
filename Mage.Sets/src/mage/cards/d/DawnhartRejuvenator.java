@@ -14,9 +14,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class DawnheartRejuvenator extends CardImpl {
+public final class DawnhartRejuvenator extends CardImpl {
 
-    public DawnheartRejuvenator(UUID ownerId, CardSetInfo setInfo) {
+    public DawnhartRejuvenator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
         this.subtype.add(SubType.HUMAN);
@@ -24,19 +24,19 @@ public final class DawnheartRejuvenator extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // When Dawnheart Rejuvenator enters the battlefield, you gain 3 life.
+        // When Dawnhart Rejuvenator enters the battlefield, you gain 3 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
 
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
     }
 
-    private DawnheartRejuvenator(final DawnheartRejuvenator card) {
+    private DawnhartRejuvenator(final DawnhartRejuvenator card) {
         super(card);
     }
 
     @Override
-    public DawnheartRejuvenator copy() {
-        return new DawnheartRejuvenator(this);
+    public DawnhartRejuvenator copy() {
+        return new DawnhartRejuvenator(this);
     }
 }
