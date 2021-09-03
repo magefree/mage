@@ -1,7 +1,8 @@
-package mage.cards.t;
+package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.keyword.DayboundAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -13,31 +14,33 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class TavernRuffian extends CardImpl {
+public final class VillageWatch extends CardImpl {
 
-    public TavernRuffian(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
+    public VillageWatch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
 
         this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WARRIOR);
         this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
         this.transformable = true;
-        this.secondSideCardClazz = mage.cards.t.TavernSmasher.class;
+        this.secondSideCardClazz = mage.cards.v.VillageReavers.class;
+
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
 
         // Daybound
         this.addAbility(new TransformAbility());
         this.addAbility(DayboundAbility.getInstance());
     }
 
-    private TavernRuffian(final TavernRuffian card) {
+    private VillageWatch(final VillageWatch card) {
         super(card);
     }
 
     @Override
-    public TavernRuffian copy() {
-        return new TavernRuffian(this);
+    public VillageWatch copy() {
+        return new VillageWatch(this);
     }
 }

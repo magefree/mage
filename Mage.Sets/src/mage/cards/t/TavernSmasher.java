@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.keyword.NightboundAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,14 +18,16 @@ public final class TavernSmasher extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
         this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(5);
+
+        this.color.setRed(true);
 
         this.nightCard = true;
 
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(5);
+
         // Nightbound
         this.addAbility(NightboundAbility.getInstance());
-        this.addAbility(new TransformAbility());
     }
 
     private TavernSmasher(final TavernSmasher card) {
