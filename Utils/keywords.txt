@@ -16,6 +16,7 @@ Crew|number|
 Cumulative upkeep|cost|
 Cycling|cost|
 Dash|card, manaString|
+Daybound|instance|
 Deathtouch|instance|
 Demonstrate|new|
 Delve|new|
@@ -71,6 +72,7 @@ Mountainwalk|new|
 Morph|card, cost|
 Mutate|card, manaString|
 Myriad|new|
+Nightbound|instance|
 Ninjutsu|cost|
 Outlast|cost|
 Partner|instance|

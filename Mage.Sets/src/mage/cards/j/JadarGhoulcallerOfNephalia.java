@@ -4,7 +4,10 @@ import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.DecayedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,6 +33,9 @@ public final class JadarGhoulcallerOfNephalia extends CardImpl {
 
     private static final Condition condition
             = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0);
+    private static final Hint hint = new ValueHint(
+            "Creatures you control with decayed", new PermanentsOnBattlefieldCount(filter)
+    );
 
     public JadarGhoulcallerOfNephalia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
@@ -44,7 +50,7 @@ public final class JadarGhoulcallerOfNephalia extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieDecayedToken()),
                 TargetController.YOU, condition, false
-        ));
+        ).addHint(hint));
     }
 
     private JadarGhoulcallerOfNephalia(final JadarGhoulcallerOfNephalia card) {

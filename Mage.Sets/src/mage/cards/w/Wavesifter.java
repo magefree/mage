@@ -1,7 +1,6 @@
 package mage.cards.w;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.abilities.keyword.EvokeAbility;
@@ -29,9 +28,7 @@ public final class Wavesifter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Wavesifter enters the battlefield, investigate twice.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new InvestigateEffect().setText("investigate"));
-        ability.addEffect(new InvestigateEffect().setText("twice"));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect(2)));
 
         // Evoke {G}{U}
         this.addAbility(new EvokeAbility("{G}{U}"));
