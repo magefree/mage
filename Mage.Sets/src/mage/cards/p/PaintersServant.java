@@ -88,6 +88,20 @@ class PaintersServantEffect extends ContinuousEffectImpl {
             }
             // Exile
             for (Card card : game.getExile().getAllCards(game)) {
+                // handle MDFC
+                if (card instanceof ModalDoubleFacesCard) {
+                    ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+                    ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+                    game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().addColor(color);
+                    game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().addColor(color);
+                }
+                // handle Split-Cards
+                if (card instanceof SplitCard) {
+                    SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
+                    SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
+                    game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().addColor(color);
+                    game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().addColor(color);
+                }
                 game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(color);
             }
             // Command
@@ -95,6 +109,20 @@ class PaintersServantEffect extends ContinuousEffectImpl {
                 if (commandObject instanceof Commander) {
                     Card card = game.getCard(((Commander) commandObject).getId());
                     if (card != null) {
+                        // handle MDFC
+                        if (card instanceof ModalDoubleFacesCard) {
+                            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+                            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+                            game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().addColor(color);
+                            game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().addColor(color);
+                        }
+                        // handle Split-Cards
+                        if (card instanceof SplitCard) {
+                            SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
+                            SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
+                            game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().addColor(color);
+                            game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().addColor(color);
+                        }
                         game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(color);
                     }
                 }
@@ -126,10 +154,38 @@ class PaintersServantEffect extends ContinuousEffectImpl {
                     }
                     // Library
                     for (Card card : player.getLibrary().getCards(game)) {
+                        // handle MDFC
+                        if (card instanceof ModalDoubleFacesCard) {
+                            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+                            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+                            game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().addColor(color);
+                            game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().addColor(color);
+                        }
+                        // handle Split-Cards
+                        if (card instanceof SplitCard) {
+                            SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
+                            SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
+                            game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().addColor(color);
+                            game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().addColor(color);
+                        }
                         game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(color);
                     }
                     // Graveyard
                     for (Card card : player.getGraveyard().getCards(game)) {
+                        // handle MDFC
+                        if (card instanceof ModalDoubleFacesCard) {
+                            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+                            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+                            game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().addColor(color);
+                            game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().addColor(color);
+                        }
+                        // handle Split-Cards
+                        if (card instanceof SplitCard) {
+                            SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
+                            SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
+                            game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().addColor(color);
+                            game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().addColor(color);
+                        }
                         game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(color);
                     }
                 }
