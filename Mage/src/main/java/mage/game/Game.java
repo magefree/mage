@@ -400,6 +400,10 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void ventureIntoDungeon(UUID playerId);
 
+    boolean hasDayNight();
+
+    void setDaytime(boolean daytime);
+
     /**
      * Adds a permanent to the battlefield
      *

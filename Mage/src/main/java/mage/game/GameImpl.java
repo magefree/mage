@@ -552,6 +552,16 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
+    public boolean hasDayNight() {
+        return state.isHasDayNight();
+    }
+
+    @Override
+    public void setDaytime(boolean daytime) {
+        state.setDaytime(daytime);
+    }
+
+    @Override
     public UUID getOwnerId(UUID objectId) {
         return getOwnerId(getObject(objectId));
     }

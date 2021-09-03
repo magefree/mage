@@ -1,14 +1,16 @@
 package mage.abilities.keyword;
 
+import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
-import mage.constants.Zone;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.*;
+import mage.game.Game;
 
 import java.io.ObjectStreamException;
 
 /**
  * @author TheElk801
- * TODO: Implement this
  */
 public class NightboundAbility extends StaticAbility implements MageSingleton {
 
@@ -28,7 +30,7 @@ public class NightboundAbility extends StaticAbility implements MageSingleton {
     }
 
     private NightboundAbility() {
-        super(Zone.ALL, null);
+        super(Zone.ALL, new NightboundEffect());
     }
 
     @Override
@@ -39,5 +41,29 @@ public class NightboundAbility extends StaticAbility implements MageSingleton {
     @Override
     public NightboundAbility copy() {
         return instance;
+    }
+}
+
+class NightboundEffect extends ContinuousEffectImpl {
+
+    NightboundEffect() {
+        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
+    }
+
+    private NightboundEffect(final NightboundEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public NightboundEffect copy() {
+        return new NightboundEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (!game.hasDayNight()) {
+            game.setDaytime(false);
+        }
+        return true;
     }
 }
