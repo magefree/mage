@@ -11,6 +11,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ManaPaidEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
+import mage.util.Copyable;
 import mage.watchers.Watcher;
 
 import java.io.Serializable;
@@ -25,7 +26,8 @@ import java.util.UUID;
  */
 public class ManaPaidSourceWatcher extends Watcher {
 
-    private static final class ManaPaidTracker implements Serializable {
+    private static final class ManaPaidTracker implements Serializable, Copyable<ManaPaidTracker> {
+
         private int total = 0;
         private int whiteSnow = 0;
         private int blueSnow = 0;
@@ -34,6 +36,26 @@ public class ManaPaidSourceWatcher extends Watcher {
         private int greenSnow = 0;
         private int colorlessSnow = 0;
         private int treasure = 0;
+
+        private ManaPaidTracker() {
+            super();
+        }
+
+        private ManaPaidTracker(final ManaPaidTracker tracker) {
+            this.total = tracker.total;
+            this.whiteSnow = tracker.whiteSnow;
+            this.blueSnow = tracker.blueSnow;
+            this.blackSnow = tracker.blackSnow;
+            this.redSnow = tracker.redSnow;
+            this.greenSnow = tracker.greenSnow;
+            this.colorlessSnow = tracker.colorlessSnow;
+            this.treasure = tracker.treasure;
+        }
+
+        @Override
+        public ManaPaidTracker copy() {
+            return new ManaPaidTracker(this);
+        }
 
         private void increment(MageObject sourceObject, ManaType manaType, Game game) {
             total++;
@@ -128,5 +150,15 @@ public class ManaPaidSourceWatcher extends Watcher {
     public static boolean checkSnowColor(Spell spell, Game game) {
         ManaPaidSourceWatcher watcher = game.getState().getWatcher(ManaPaidSourceWatcher.class);
         return watcher != null && watcher.manaMap.getOrDefault(spell.getSpellAbility().getId(), emptyTracker).checkSnowColor(spell, game);
+    }
+
+    public void testsIncrementManaAmount(Game game, MageObject mageObject) {
+        // for tests only (logic here: change data in tracker like real event do)
+        this.manaMap.getOrDefault(mageObject.getId(), null).increment(mageObject, ManaType.RED, game);
+    }
+
+    public int testsReturnTotal(MageObject mageObject) {
+        // for tests only
+        return this.manaMap.getOrDefault(mageObject.getId(), null).total;
     }
 }

@@ -5,6 +5,7 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.PlayerList;
+import mage.util.Copyable;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
@@ -142,6 +143,14 @@ public abstract class Watcher implements Serializable {
                                 Cards list = e.getValue().copy();
                                 target.put(e.getKey(), list);
                             }
+                        } else if (Arrays.stream(((Class) valueType).getInterfaces()).anyMatch(c -> c.equals(Copyable.class))) {
+                            Map<Object, Copyable> source = (Map<Object, Copyable>) field.get(this);
+                            Map<Object, Copyable> target = (Map<Object, Copyable>) field.get(watcher);
+                            target.clear();
+                            for (Map.Entry<Object, Copyable> e : source.entrySet()) {
+                                Copyable object = (Copyable) e.getValue().copy();
+                                target.put(e.getKey(), object);
+                            }
                         } else if (valueType.getTypeName().contains("List")) {
                             Map<Object, List<Object>> source = (Map<Object, List<Object>>) field.get(this);
                             Map<Object, List<Object>> target = (Map<Object, List<Object>>) field.get(watcher);
@@ -161,6 +170,8 @@ public abstract class Watcher implements Serializable {
                                 target.put(e.getKey(), map);
                             }
                         } else {
+                            // TODO: add additional tests to find unsupported watcher data
+
                             ((Map) field.get(watcher)).putAll((Map) field.get(this));
                         }
                     } else if (field.getType() == List.class) {
