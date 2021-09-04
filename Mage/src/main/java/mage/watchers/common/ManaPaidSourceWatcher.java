@@ -92,7 +92,7 @@ public class ManaPaidSourceWatcher extends Watcher {
         switch (event.getType()) {
             case ZONE_CHANGE:
                 if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
-                    manaMap.remove(event.getSourceId());
+                    manaMap.remove(event.getTargetId());
                 }
                 return;
             case MANA_PAID:
