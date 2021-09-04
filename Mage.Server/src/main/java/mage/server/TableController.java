@@ -668,7 +668,7 @@ public class TableController {
             ServerMessagesUtil.instance.incGamesStarted();
 
             // log about game started
-            logger.info("GAME started " + (match.getGame() != null ? match.getGame().getId() : "no Game") + " [" + match.getName() + "] " + creator + " - " + opponent.toString());
+            logger.info("GAME started " + (match.getGame() != null ? match.getGame().getId() : "no Game") + " [" + match.getName() + "] " + creator + " - " + opponent);
             logger.debug("- matchId: " + match.getId() + " [" + match.getName() + ']');
             if (match.getGame() != null) {
                 logger.debug("- chatId:  " + managerFactory.gameManager().getChatId(match.getGame().getId()));
@@ -971,72 +971,79 @@ public class TableController {
     }
 
     public boolean isMatchTableStillValid() {
-        // check only normal match table with state != Finished
-        if (!table.isTournament()) {
-            if (!(table.getState() == TableState.WAITING || table.getState() == TableState.STARTING || table.getState() == TableState.READY_TO_START)) {
-                if (match == null) {
-                    logger.warn("- Match table with no match:");
-                    logger.warn("-- match: null , table : " + table.getId());
-                    // return false;
-                } else if (match.isDoneSideboarding() && match.getGame() == null) {
-                    // no sideboarding and not active game -> match seems to hang (maybe the Draw bug)
-                    logger.warn("- Match with no active game and not in sideboard state:");
-                    logger.warn("-- matchId:" + match.getId() + " [" + match.getName() + ']');
-                    // return false;
-                }
-            }
-
-            // check for active players
-            int validHumanPlayers = 0;
-            int validAIPlayers = 0;
-            int aiPlayers = 0;
-            int humanPlayers = 0;
-
-            // check humans
-            for (Map.Entry<UUID, UUID> userPlayerEntry : userPlayerMap.entrySet()) {
-                MatchPlayer matchPlayer = match.getPlayer(userPlayerEntry.getValue());
-                if (matchPlayer == null) {
-                    logger.warn("- Match player not found:");
-                    logger.warn("-- matchId:" + match.getId());
-                    logger.warn("-- userId:" + userPlayerEntry.getKey());
-                    logger.warn("-- playerId:" + userPlayerEntry.getValue());
-                    continue;
-                }
-                if (matchPlayer.getPlayer().isHuman()) {
-                    humanPlayers++;
-                    if ((table.getState() == TableState.WAITING
-                            || table.getState() == TableState.STARTING
-                            || table.getState() == TableState.READY_TO_START)
-                            || !match.isDoneSideboarding()
-                            || (!matchPlayer.hasQuit() && match.getGame() != null && matchPlayer.getPlayer().isInGame())) {
-                        Optional<User> user = managerFactory.userManager().getUser(userPlayerEntry.getKey());
-                        if (!user.isPresent() || !user.get().isActive()) {
-                            logger.warn("- Active user of match is missing: " + matchPlayer.getName());
-                            logger.warn("-- matchId:" + match.getId());
-                            logger.warn("-- userId:" + userPlayerEntry.getKey());
-                            logger.warn("-- playerId:" + userPlayerEntry.getValue());
-                            return false;
-                        }
-                        // user exits on the server and match player has not quit -> player is valid
-                        validHumanPlayers++;
-                    }
-                }
-            }
-
-            // check AI
-            for (MatchPlayer matchPlayer : match.getPlayers()) {
-                if (!matchPlayer.getPlayer().isHuman()) {
-                    aiPlayers++;
-                    if (matchPlayer.getPlayer().isInGame()) {
-                        validAIPlayers++;
-                    }
-                }
-            }
-
-            // table must contain minimum two active players
-            return (validAIPlayers + validHumanPlayers) >= 2;
+        // removes active match only, not tourney
+        if (table.isTournament()) {
+            return true;
         }
-        return true;
+
+        // only started games need to check
+        if (Arrays.asList(
+                TableState.WAITING,
+                TableState.READY_TO_START,
+                TableState.STARTING
+        ).contains(table.getState())) {
+            // waiting in start dialog
+            return true;
+        }
+        if (match != null && !match.isDoneSideboarding()) {
+            // waiting sideboard complete
+            return true;
+        }
+
+        // no games in started match (error in match init code?)
+        if (match.getGame() == null) {
+            logger.error("- Match without started games:");
+            logger.error("-- matchId:" + match.getId());
+            return false; // critical error
+        }
+
+        // find player stats
+        int validHumanPlayers = 0;
+        int validAIPlayers = 0;
+
+        // check humans
+        for (Map.Entry<UUID, UUID> userPlayerEntry : userPlayerMap.entrySet()) {
+            MatchPlayer matchPlayer = match.getPlayer(userPlayerEntry.getValue());
+
+            // de-synced users and players listst?
+            if (matchPlayer == null) {
+                logger.error("- Match player not found in started game:");
+                logger.error("-- matchId:" + match.getId());
+                logger.error("-- userId:" + userPlayerEntry.getKey());
+                logger.error("-- playerId:" + userPlayerEntry.getValue());
+                continue;
+            }
+
+            if (matchPlayer.getPlayer().isHuman()) {
+                if (matchPlayer.getPlayer().isInGame()) {
+                    Optional<User> user = managerFactory.userManager().getUser(userPlayerEntry.getKey());
+
+                    // user was logout or disconnected from server, but still in the game somehow
+                    if (!user.isPresent() || !user.get().isActive()) {
+                        logger.error("- Active user of match is missing: " + matchPlayer.getName());
+                        logger.error("-- matchId:" + match.getId());
+                        logger.error("-- userId:" + userPlayerEntry.getKey());
+                        logger.error("-- playerId:" + userPlayerEntry.getValue());
+                        return false; // critical error
+                    }
+
+                    // user exits on the server and match player has not quit -> player is valid
+                    validHumanPlayers++;
+                }
+            }
+        }
+
+        // check AI
+        for (MatchPlayer matchPlayer : match.getPlayers()) {
+            if (!matchPlayer.getPlayer().isHuman()) {
+                if (matchPlayer.getPlayer().isInGame()) {
+                    validAIPlayers++;
+                }
+            }
+        }
+
+        // if someone can play 1 vs 1 (e.g. 2+ players) then keep table
+        return validAIPlayers + validHumanPlayers >= 2;
     }
 
     void cleanUp() {
