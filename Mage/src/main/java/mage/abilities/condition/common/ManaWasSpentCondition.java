@@ -32,7 +32,7 @@ public class ManaWasSpentCondition implements Condition {
         }
         ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
         if (watcher != null) {
-            Mana payment = watcher.getAndResetLastPayment(source.getSourceId());
+            Mana payment = watcher.getLastManaPayment(source.getSourceId());
             if (payment != null) {
                 return payment.getColor(coloredManaSymbol) > 0;
             }

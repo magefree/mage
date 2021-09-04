@@ -459,10 +459,10 @@ public class CardView extends SimpleCardView {
                     && (cardZone.match(Zone.BATTLEFIELD) || cardZone.match(Zone.STACK))) {
                 int costX;
                 if (card instanceof Permanent) {
-                    // permanent on battlefield
-                    costX = ManacostVariableValue.ETB.calculate(game, card.getSpellAbility(), null);
+                    // permanent on battlefield (can show x icon multiple turns, so use end_game source)
+                    costX = ManacostVariableValue.END_GAME.calculate(game, card.getSpellAbility(), null);
                 } else {
-                    // other like Stack
+                    // other like Stack (can show x icon on stack only, so use normal source)
                     costX = ManacostVariableValue.REGULAR.calculate(game, card.getSpellAbility(), null);
                 }
                 this.cardIcons.add(new VariableCostCardIcon(costX));
