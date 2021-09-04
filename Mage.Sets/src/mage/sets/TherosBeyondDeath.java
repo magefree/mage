@@ -501,11 +501,12 @@ class TherosBeyondDeathCollator implements BoosterCollator {
     }
 
     // In order for equal numbers of each common to exist, the average booster must contain:
-    // 3.28 A commons (36 / 11)
+    // 3.27 A commons (36 / 11)
     // 2.18 B commons (24 / 11)
-    // 2.72 C1 commons (30 / 11, or 60 / 11 in each C1 booster)
-    // 1.81 C2 commons (20 / 11, or 40 / 11 in each C2 booster)
-    // (these numbers are the same for all sets with 101 commons and 10 common slots per booster)
+    // 2.73 C1 commons (30 / 11, or 60 / 11 in each C1 booster)
+    // 1.82 C2 commons (20 / 11, or 40 / 11 in each C2 booster)
+    // These numbers are the same for all sets with 101 commons in A/B/C1/C2 print runs
+    // and with 10 common slots per booster
     private final RarityConfiguration commonRuns = new RarityConfiguration(
             false,
             TherosBeyondDeathStructure.AABBC1C1C1C1C1C1,
