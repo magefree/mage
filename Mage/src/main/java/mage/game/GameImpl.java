@@ -161,6 +161,7 @@ public abstract class GameImpl implements Game {
         this.startingLife = startingLife;
         this.executingRollback = false;
         this.startingHandSize = startingHandSize;
+
         initGameDefaultWatchers();
     }
 
@@ -1266,6 +1267,7 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new CardsDrawnThisTurnWatcher());
         newWatchers.add(new ManaSpentToCastWatcher());
         newWatchers.add(new ManaPaidSourceWatcher());
+        newWatchers.add(new CommanderPlaysCountWatcher()); // commander plays count uses in non commander games by some cards
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {
