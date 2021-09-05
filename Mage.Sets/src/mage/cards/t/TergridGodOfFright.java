@@ -211,6 +211,10 @@ class TergridsLaternEffect extends OneShotEffect {
             choice.setChoices(choiceSet);
             targetedPlayer.choose(aiOutcome, choice, game);
             chosen = choice.getChoice();
+            if (chosen == null) {
+                // on disconnect
+                chosen = LIFE_LOSS_CHOICE;
+            }
         } else {
             chosen = LIFE_LOSS_CHOICE;
         }
