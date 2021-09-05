@@ -62,7 +62,7 @@ class HurlThroughHellEffect extends OneShotEffect {
             return false;
         }
         PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
-                game, source, permanent.getMainCard(), TargetController.YOU,
+                game, source, permanent, TargetController.YOU,
                 Duration.UntilEndOfYourNextTurn,
                 false, true, true
         );
