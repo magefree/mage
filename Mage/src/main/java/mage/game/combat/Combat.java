@@ -244,24 +244,26 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public void selectAttackers(Game game) {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))) {
-            Player player = game.getPlayer(attackingPlayerId);
             //20101001 - 508.1d
-            game.getCombat().checkAttackRequirements(player, game);
-            boolean firstTime = true;
-            do {
-                if (!firstTime
-                        || !game.getPlayer(game.getActivePlayerId()).getAvailableAttackers(game).isEmpty()) {
-                    player.selectAttackers(game, attackingPlayerId);
-                }
-                firstTime = false;
-                if (game.isPaused()
-                        || game.checkIfGameIsOver()
-                        || game.executingRollback()) {
-                    return;
-                }
-                // because of possible undo during declare attackers it's neccassary to call here the methods with "game.getCombat()." to get the current combat object!!!
-                // I don't like it too - it has to be redesigned
-            } while (!game.getCombat().checkAttackRestrictions(player, game));
+            Player player = game.getPlayer(attackingPlayerId);
+            if (player != null) {
+                game.getCombat().checkAttackRequirements(player, game);
+                boolean firstTime = true;
+                do {
+                    if (!firstTime
+                            || !game.getPlayer(game.getActivePlayerId()).getAvailableAttackers(game).isEmpty()) {
+                        player.selectAttackers(game, attackingPlayerId);
+                    }
+                    firstTime = false;
+                    if (game.isPaused()
+                            || game.checkIfGameIsOver()
+                            || game.executingRollback()) {
+                        return;
+                    }
+                    // because of possible undo during declare attackers it's neccassary to call here the methods with "game.getCombat()." to get the current combat object!!!
+                    // I don't like it too - it has to be redesigned
+                } while (!game.getCombat().checkAttackRestrictions(player, game));
+            }
             game.getCombat().resumeSelectAttackers(game);
         }
     }
