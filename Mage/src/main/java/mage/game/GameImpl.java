@@ -1547,6 +1547,10 @@ public abstract class GameImpl implements Game {
                         }
                         this.fireErrorEvent("Game exception occurred: ", ex);
 
+                        // stack info
+                        String info = this.getStack().stream().map(MageObject::toString).collect(Collectors.joining("\n"));
+                        logger.info(String.format("\nStack before error %d: \n%s\n", this.getStack().size(), info));
+
                         // rollback game to prev state
                         GameState restoredState = restoreState(rollbackBookmark, "Game exception: " + ex.getMessage());
                         rollbackBookmark = 0;
