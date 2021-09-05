@@ -614,6 +614,8 @@ public class HumanPlayer extends PlayerImpl {
             abilityControllerId = target.getAbilityController();
         }
 
+        Map<String, Serializable> options = new HashMap<>();
+
         while (canRespond()) {
             Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), abilityControllerId, game);
             boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
@@ -622,11 +624,14 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
+            java.util.List<UUID> chosen = target.getTargets();
+            options.put("chosen", (Serializable) chosen);
+
             updateGameStatePriority("chooseTarget", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)),
-                        possibleTargets, required, getOptions(target, null));
+                        possibleTargets, required, getOptions(target, options));
             }
             waitForResponse(game);
 
