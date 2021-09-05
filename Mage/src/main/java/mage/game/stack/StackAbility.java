@@ -738,4 +738,8 @@ public class StackAbility extends StackObjectImpl implements Ability {
         throw new UnsupportedOperationException("Not supported.");
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

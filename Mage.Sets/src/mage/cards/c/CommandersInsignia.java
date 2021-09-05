@@ -27,8 +27,7 @@ public final class CommandersInsignia extends CardImpl {
         // Creatures you control get +1/+1 for each time you've cast your commander from the command zone this game.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
                         CommandersInsigniaValue.instance, CommandersInsigniaValue.instance, Duration.WhileOnBattlefield
-                ).setText("Creatures you control get +1/+1 for each time you've cast your commander from the command zone this game.")),
-                new CommanderPlaysCountWatcher());
+                ).setText("Creatures you control get +1/+1 for each time you've cast your commander from the command zone this game.")));
     }
 
     private CommandersInsignia(final CommandersInsignia card) {

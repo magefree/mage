@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -12,27 +11,23 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class MasterOfCruelties extends CardImpl {
 
     public MasterOfCruelties(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
         this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(1);
@@ -84,6 +79,9 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent sourcePermanent = game.getPermanent(getSourceId());
+        if (sourcePermanent == null) {
+            return false;
+        }
         if (sourcePermanent.isAttacking()) {
             for (CombatGroup combatGroup : game.getCombat().getGroups()) {
                 if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(getSourceId())) {
@@ -100,7 +98,7 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever {this} attacks a player and isn't blocked, " ;
+        return "Whenever {this} attacks a player and isn't blocked, ";
     }
 }
 

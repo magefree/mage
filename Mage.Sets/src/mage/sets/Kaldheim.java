@@ -505,9 +505,9 @@ class KaldheimCollator implements BoosterCollator {
         private static final KaldheimRun commonC2 = new KaldheimRun(true,  "11","193","95","158","17","239","44","159","129","7","118","85","138","74","165","11","129","193","150","72","5","95","159","74","158","17","85","239","118","138","44","7","238","193","150","165","5","72","158","95","11","44","159","239","129","17","85","74","7","118","5","150","165","138","72");
         private static final KaldheimRun uncommonA = new KaldheimRun(true,  "215","236","212","208","195","224","332","6","232","18","106","268","209","162","8","76","122","88","182","206","202","62","110","132","200","325","271","211","144","103","215","236","258","56","163","113","28","226","2","58","263","148","232","162","224","208","195","323","268","18","106","6","233","8","76","122","209","88","182","206","202","62","110","132","321","220","271","211","144","258","2","28","263","113","226","103","236","163","56","215","148","58","329","195","6","232","233","18","212","162","268","106","208","103","322","76","122","88","182","206","202","62","110","132","200","220","271","211","144","8","58","28","258","113","56","148","2","263","226","163");
         private static final KaldheimRun uncommonB = new KaldheimRun(true,  "30","166","75","201","265","222","45","135","256","191","231","235","36","250","316","128","25","247","264","35","97","186","223","59","60","130","216","80","244","259","217","133","64","245","108","189","331","137","116","253","30","166","75","201","265","327","45","128","256","247","235","36","191","25","170","250","135","231","186","35","60","324","97","130","59","264","244","80","328","259","133","217","64","245","108","189","230","137","116","253","30","166","75","201","265","222","45","256","191","235","170","135","36","128","25","247","250","231","35","223","60","130","97","264","216","186","59","244","80","259","217","133","304","245","108","189","230","137","116","253");
-        private static final KaldheimRun rareA = new KaldheimRun(false,  "9","20","21","24","26","29","43","50","51","52","61","63","69","73","82","86","90","92","107","109","112","115","120","123","125","131","142","146","161","169","179","181","185","188","197","203","204","205","207","210","213","219","227","228","229","234","237","240","241","251","252","254","255","260","272","275","9","20","21","24","26","29","43","50","51","52","61","63","69","73","82","86","90","92","107","109","112","115","120","123","125","131","142","146","161","169","179","181","185","188","197","203","204","205","207","210","213","219","227","228","229","234","237","240","241","251","252","254","255","260","272","275","15","22","33","40","41","70","94","98","114","145","154","160","168","198","218","221","225","320");
-        private static final KaldheimRun rareB = new KaldheimRun(false,  "9","20","300","24","26","301","43","303","51","52","61","63","69","73","82","86","90","306","107","109","307","309","310","311","125","131","312","146","161","315","317","318","185","188","319","203","204","205","207","210","213","219","227","330","229","234","237","240","241","290","291","292","255","293","272","275","9","20","300","24","26","301","43","303","51","52","61","63","69","73","82","86","90","306","107","109","307","309","310","311","125","131","312","146","161","315","317","318","185","188","319","203","204","205","207","210","213","219","227","330","229","234","237","240","241","290","291","292","255","293","272","275","299","22","294","302","295","305","94","296","308","297","313","298","314","287","288","326","289","320");
-        private static final KaldheimRun land = new KaldheimRun(true,  "276","277","283","249","278","285","248","276","285","279","261","269","257","249","248","283","270","285","277","282","284","270","278","248","279","269","281","274","280","279","257","281","284","277","257","274","273","279","276","262","266","284","281","273","282","278","262","280","279","274","262","282","283","278","262","279","261","285","273","266","283","261","280","284","266","278","270","285","282","280","276","277","273","278","269","273","249","261","274");
+        private static final KaldheimRun rareA = new KaldheimRun(false,  "9","12","20","21","24","26","27","29","43","50","51","52","61","63","69","73","79","82","86","90","92","107","109","112","115","120","123","125","131","142","146","153","156","161","167","169","177","179","181","185","188","197","203","204","205","207","210","213","214","219","227","228","229","234","237","240","241","251","252","254","255","260","272","275","9","12","20","21","24","26","27","29","43","50","51","52","61","63","69","73","79","82","86","90","92","107","109","112","115","120","123","125","131","142","146","153","156","161","167","169","177","179","181","185","188","197","203","204","205","207","210","213","214","219","227","228","229","234","237","240","241","251","252","254","255","260","272","275","15","22","33","40","41","70","81","94","98","114","139","145","154","160","168","198","199","218","221","225");
+        private static final KaldheimRun rareB = new KaldheimRun(false,  "9","12","20","300","24","26","27","301","43","303","51","52","61","63","69","73","79","82","86","90","306","107","109","307","309","310","311","125","131","312","146","153","156","161","167","315","177","317","318","185","188","319","203","204","205","207","210","213","214","219","227","330","229","234","237","240","241","290","291","292","255","293","272","275","9","12","20","300","24","26","27","301","43","303","51","52","61","63","69","73","79","82","86","90","306","107","109","307","309","310","311","125","131","312","146","153","156","161","167","315","177","317","318","185","188","319","203","204","205","207","210","213","214","219","227","330","229","234","237","240","241","290","291","292","255","293","272","275","299","22","294","302","295","305","81","94","296","308","139","297","313","298","314","287","320","288","326","289");
+        private static final KaldheimRun land = new KaldheimRun(true,  "270","282","248","277","276","280","278","266","270","283","282","285","274","277","281","279","262","284","282","248","283","276","269","276","280","285","281","249","257","284","277","249","281","284","283","266","257","281","269","280","261","276","277","283","249","278","285","248","276","285","279","261","269","257","249","248","283","270","285","277","282","284","270","278","248","279","269","281","274","280","279","257","281","284","277","257","274","273","279","276","262","266","284","281","273","282","278","262","280","279","274","262","282","283","278","262","279","261","285","273","266","283","261","280","284","266","278","270","285","282","280","276","277","273","278","269","273","249","261","274");
 
         private KaldheimRun(boolean keepOrder, String... numbers) {
             super(keepOrder, numbers);
@@ -515,7 +515,7 @@ class KaldheimCollator implements BoosterCollator {
     }
 
     private static class KaldheimStructure extends BoosterStructure {
-        private static final KaldheimStructure C1 = new KaldheimStructure(
+        private static final KaldheimStructure AABBC1C1C1C1C1C1 = new KaldheimStructure(
                 KaldheimRun.commonA,
                 KaldheimRun.commonA,
                 KaldheimRun.commonB,
@@ -527,7 +527,7 @@ class KaldheimCollator implements BoosterCollator {
                 KaldheimRun.commonC1,
                 KaldheimRun.commonC1
         );
-        private static final KaldheimStructure C2 = new KaldheimStructure(
+        private static final KaldheimStructure AAABBC1C1C1C1C1 = new KaldheimStructure(
                 KaldheimRun.commonA,
                 KaldheimRun.commonA,
                 KaldheimRun.commonA,
@@ -539,19 +539,7 @@ class KaldheimCollator implements BoosterCollator {
                 KaldheimRun.commonC1,
                 KaldheimRun.commonC1
         );
-        private static final KaldheimStructure C3 = new KaldheimStructure(
-                KaldheimRun.commonA,
-                KaldheimRun.commonA,
-                KaldheimRun.commonA,
-                KaldheimRun.commonB,
-                KaldheimRun.commonB,
-                KaldheimRun.commonB,
-                KaldheimRun.commonC2,
-                KaldheimRun.commonC2,
-                KaldheimRun.commonC2,
-                KaldheimRun.commonC2
-        );
-        private static final KaldheimStructure C4 = new KaldheimStructure(
+        private static final KaldheimStructure AAAABBBC2C2C2 = new KaldheimStructure(
                 KaldheimRun.commonA,
                 KaldheimRun.commonA,
                 KaldheimRun.commonA,
@@ -563,7 +551,7 @@ class KaldheimCollator implements BoosterCollator {
                 KaldheimRun.commonC2,
                 KaldheimRun.commonC2
         );
-        private static final KaldheimStructure C5 = new KaldheimStructure(
+        private static final KaldheimStructure AAAABBC2C2C2C2 = new KaldheimStructure(
                 KaldheimRun.commonA,
                 KaldheimRun.commonA,
                 KaldheimRun.commonA,
@@ -575,12 +563,12 @@ class KaldheimCollator implements BoosterCollator {
                 KaldheimRun.commonC2,
                 KaldheimRun.commonC2
         );
-        private static final KaldheimStructure U1 = new KaldheimStructure(
+        private static final KaldheimStructure AAA = new KaldheimStructure(
                 KaldheimRun.uncommonA,
                 KaldheimRun.uncommonA,
                 KaldheimRun.uncommonA
         );
-        private static final KaldheimStructure U2 = new KaldheimStructure(
+        private static final KaldheimStructure BBB = new KaldheimStructure(
                 KaldheimRun.uncommonB,
                 KaldheimRun.uncommonB,
                 KaldheimRun.uncommonB
@@ -600,24 +588,42 @@ class KaldheimCollator implements BoosterCollator {
         }
     }
 
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 3.27 A commons (36 / 11)
+    // 2.18 B commons (24 / 11)
+    // 2.73 C1 commons (30 / 11, or 60 / 11 in each C1 booster)
+    // 1.82 C2 commons (20 / 11, or 40 / 11 in each C2 booster)
+    // These numbers are the same for all sets with 101 commons in A/B/C1/C2 print runs
+    // and with 10 common slots per booster
     private final RarityConfiguration commonRuns = new RarityConfiguration(
             false,
-            KaldheimStructure.C1,
-            KaldheimStructure.C2,
-            KaldheimStructure.C3,
-            KaldheimStructure.C4,
-            KaldheimStructure.C5,
-            KaldheimStructure.C1,
-            KaldheimStructure.C2,
-            KaldheimStructure.C3,
-            KaldheimStructure.C4,
-            KaldheimStructure.C5,
-            KaldheimStructure.C4,
-            KaldheimStructure.C5
+            KaldheimStructure.AABBC1C1C1C1C1C1,
+            KaldheimStructure.AABBC1C1C1C1C1C1,
+            KaldheimStructure.AABBC1C1C1C1C1C1,
+            KaldheimStructure.AABBC1C1C1C1C1C1,
+            KaldheimStructure.AABBC1C1C1C1C1C1,
+            KaldheimStructure.AAABBC1C1C1C1C1,
+            KaldheimStructure.AAABBC1C1C1C1C1,
+            KaldheimStructure.AAABBC1C1C1C1C1,
+            KaldheimStructure.AAABBC1C1C1C1C1,
+            KaldheimStructure.AAABBC1C1C1C1C1,
+            KaldheimStructure.AAABBC1C1C1C1C1,
+
+            KaldheimStructure.AAAABBC2C2C2C2,
+            KaldheimStructure.AAAABBC2C2C2C2,
+            KaldheimStructure.AAAABBC2C2C2C2,
+            KaldheimStructure.AAAABBC2C2C2C2,
+            KaldheimStructure.AAAABBC2C2C2C2,
+            KaldheimStructure.AAAABBC2C2C2C2,
+            KaldheimStructure.AAAABBC2C2C2C2,
+            KaldheimStructure.AAAABBBC2C2C2,
+            KaldheimStructure.AAAABBBC2C2C2,
+            KaldheimStructure.AAAABBBC2C2C2,
+            KaldheimStructure.AAAABBBC2C2C2
     );
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(
-            KaldheimStructure.U1,
-            KaldheimStructure.U2
+            KaldheimStructure.AAA,
+            KaldheimStructure.BBB
     );
     private final RarityConfiguration rareRuns = new RarityConfiguration(
             false,

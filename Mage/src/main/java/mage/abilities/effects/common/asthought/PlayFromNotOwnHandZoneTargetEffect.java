@@ -152,6 +152,9 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
 
     /**
      * Exiles the cards and let the allowed player play them from exile for the given duration
+     * Supports:
+     *  - cards (use any side)
+     *  - permanents (use permanent, not permanent's card)
      *
      * @param game
      * @param source

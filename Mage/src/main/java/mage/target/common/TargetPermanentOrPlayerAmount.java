@@ -214,7 +214,9 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
                 sb.append(permanent.getLogName()).append(" (").append(getTargetAmount(targetId)).append(") ");
             } else {
                 Player player = game.getPlayer(targetId);
-                sb.append(player.getLogName()).append(" (").append(getTargetAmount(targetId)).append(") ");
+                if (player != null) {
+                    sb.append(player.getLogName()).append(" (").append(getTargetAmount(targetId)).append(") ");
+                }
             }
         }
         return sb.toString().trim();

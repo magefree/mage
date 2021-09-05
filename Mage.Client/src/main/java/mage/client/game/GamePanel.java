@@ -1760,7 +1760,6 @@ public final class GamePanel extends javax.swing.JPanel {
             valueToSend = choice.getChoiceKey();
         } else {
             valueToSend = choice.getChoice();
-            SessionHandler.sendPlayerString(gameId, choice.getChoice());
         }
         SessionHandler.sendPlayerString(gameId, valueToSend == null ? null : specialPrefix + valueToSend);
 

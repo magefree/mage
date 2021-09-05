@@ -108,8 +108,11 @@ public class SpellAbility extends ActivatedAbilityImpl {
             // play restrict
             // Check if rule modifying events prevent to cast the spell in check playable mode
             if (game.inCheckPlayableState()) {
+                Card card = game.getCard(sourceId);
+                GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, this.getId(), this, playerId);
+                castEvent.setZone(card == null ? null : game.getState().getZone(card.getMainCard().getId()));
                 if (game.getContinuousEffects().preventedByRuleModification(
-                        GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, this.getId(), this, playerId), this, game, true)) {
+                        castEvent, this, game, true)) {
                     return ActivationStatus.getFalse();
                 }
             }

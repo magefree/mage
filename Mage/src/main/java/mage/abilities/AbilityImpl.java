@@ -302,9 +302,12 @@ public abstract class AbilityImpl implements Ability {
         String announceString = handleOtherXCosts(game, controller);
 
         // For effects from cards like Void Winnower x costs have to be set
-        if (this.getAbilityType() == AbilityType.SPELL
-                && game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, this.getId(), this, getControllerId()), this)) {
-            return false;
+        if (this.getAbilityType() == AbilityType.SPELL) {
+            GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, this.getId(), this, getControllerId());
+            castEvent.setZone(game.getState().getZone(CardUtil.getMainCardId(game, sourceId)));
+            if (game.replaceEvent(castEvent, this)) {
+                return false;
+            }
         }
 
         handlePhyrexianManaCosts(game, controller);
