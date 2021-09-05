@@ -148,7 +148,12 @@ public class Dungeon implements CommandObject {
         choice.setMessage("Choose a dungeon to venture into");
         choice.setChoices(dungeonNames);
         player.choose(Outcome.Neutral, choice, game);
-        return createDungeon(choice.getChoice());
+        if (choice.getChoice() != null) {
+            return createDungeon(choice.getChoice());
+        } else {
+            // on disconnect
+            return createDungeon("Tomb of Annihilation");
+        }
     }
 
     public static Dungeon createDungeon(String name) {
