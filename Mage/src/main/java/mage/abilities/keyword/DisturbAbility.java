@@ -1,13 +1,13 @@
 package mage.abilities.keyword;
 
+import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.constants.SpellAbilityCastMode;
-import mage.constants.SpellAbilityType;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
+import mage.game.MageObjectAttribute;
 
 import java.util.UUID;
 
@@ -34,6 +34,7 @@ public class DisturbAbility extends SpellAbility {
     public boolean activate(Game game, boolean noMana) {
         if (super.activate(game, noMana)) {
             game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getSourceId(), Boolean.TRUE);
+            game.addEffect(new DisturbEffect(), this);
             return true;
         }
         return false;
@@ -75,5 +76,43 @@ public class DisturbAbility extends SpellAbility {
         }
         sbRule.append(" <i>(You may cast this card transformed from your graveyard for its disturb cost.)</i>");
         return sbRule.toString();
+    }
+}
+
+class DisturbEffect extends ContinuousEffectImpl {
+
+    public DisturbEffect() {
+        super(Duration.WhileOnStack, Layer.CopyEffects_1, SubLayer.CopyEffects_1a, Outcome.BecomeCreature);
+        staticText = "";
+    }
+
+    private DisturbEffect(final DisturbEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DisturbEffect copy() {
+        return new DisturbEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Card card = game.getCard(source.getSourceId());
+        if (card != null) {
+            Card secondFace = card.getSecondCardFace();
+            if (secondFace != null) {
+                MageObjectAttribute moa = game.getState().getCreateMageObjectAttribute(card, game);
+                moa.getCardType().clear();
+                moa.getCardType().addAll(secondFace.getCardType());
+                moa.getColor().setColor(secondFace.getColor(game));
+                moa.getSubtype().copyFrom(secondFace.getSubtype());
+                game.getState().getCardState(card.getId()).clearAbilities();
+                for (Ability ability : secondFace.getAbilities()) {
+                    game.getState().addOtherAbility(card, ability);
+                }
+                return true;
+            }
+        }
+        return false;
     }
 }
