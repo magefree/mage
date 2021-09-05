@@ -46,9 +46,9 @@ public class ManaSpentToCastWatcher extends Watcher {
                 return;
             case ZONE_CHANGE:
                 if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
-                    manaMap.remove(event.getSourceId());
-                    xValueMap.remove(event.getSourceId());
-                    xValueMapLong.remove(event.getSourceId());
+                    manaMap.remove(event.getTargetId());
+                    xValueMap.remove(event.getTargetId());
+                    xValueMapLong.remove(event.getTargetId());
                 }
         }
     }
