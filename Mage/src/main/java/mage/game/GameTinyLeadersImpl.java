@@ -44,8 +44,8 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
 
     @Override
     protected void init(UUID choosingPlayerId) {
-        // plays watcher
-        state.addWatcher(new CommanderPlaysCountWatcher());
+        // add game mode specific watchers here
+        //state.addWatcher(new CommanderPlaysCountWatcher());
 
         // move tiny leader to command zone
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {

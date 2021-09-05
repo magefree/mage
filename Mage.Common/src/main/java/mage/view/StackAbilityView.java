@@ -79,7 +79,7 @@ public class StackAbilityView extends CardView {
         // card icons (warning, it must be synced in gui dialogs with replaced card, see comments at the start of the file)
         // cost x
         if (ability.getManaCostsToPay().containsX()) {
-            int costX = ManacostVariableValue.REGULAR.calculate(game, ability, null);
+            int costX = ManacostVariableValue.END_GAME.calculate(game, ability, null);
             this.cardIcons.add(new VariableCostCardIcon(costX));
         }
     }

@@ -161,6 +161,7 @@ public abstract class GameImpl implements Game {
         this.startingLife = startingLife;
         this.executingRollback = false;
         this.startingHandSize = startingHandSize;
+
         initGameDefaultWatchers();
     }
 
@@ -1276,6 +1277,7 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new CardsDrawnThisTurnWatcher());
         newWatchers.add(new ManaSpentToCastWatcher());
         newWatchers.add(new ManaPaidSourceWatcher());
+        newWatchers.add(new CommanderPlaysCountWatcher()); // commander plays count uses in non commander games by some cards
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {
@@ -1554,6 +1556,10 @@ public abstract class GameImpl implements Game {
                             logger.fatal(ex.getStackTrace());
                         }
                         this.fireErrorEvent("Game exception occurred: ", ex);
+
+                        // stack info
+                        String info = this.getStack().stream().map(MageObject::toString).collect(Collectors.joining("\n"));
+                        logger.info(String.format("\nStack before error %d: \n%s\n", this.getStack().size(), info));
 
                         // rollback game to prev state
                         GameState restoredState = restoreState(rollbackBookmark, "Game exception: " + ex.getMessage());
@@ -1992,8 +1998,7 @@ public abstract class GameImpl implements Game {
                     break;
                 }
             }
-            state.handleSimultaneousEvent(this);
-            applyEffects(); // needed e.g if boost effects end and cause creatures to die
+            this.getState().processAction(this); // needed e.g if boost effects end and cause creatures to die
             somethingHappened = true;
         }
         checkConcede();

@@ -48,7 +48,7 @@
             <!-- server xml config needs optional dependency for jaxb-impl -->
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
-            <version>2.3.3</version>
+            <version>3.0.2</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
@@ -232,7 +232,7 @@
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
-            <version>1.6.0</version>
+            <version>1.8.0</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -244,7 +244,7 @@
         <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-gmail</artifactId>
-            <version>v1-rev20200919-1.30.10</version>
+            <version>v1-rev20210614-1.32.1</version>
             <type>jar</type>
         </dependency>
         <dependency>

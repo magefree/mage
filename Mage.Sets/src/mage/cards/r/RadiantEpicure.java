@@ -72,7 +72,7 @@ class RadiantEpicureEffect extends OneShotEffect {
         if (player == null || watcher == null) {
             return false;
         }
-        Mana payment = watcher.getAndResetLastPayment(source.getSourceId());
+        Mana payment = watcher.getLastManaPayment(source.getSourceId());
         if (payment == null) {
             return false;
         }

@@ -2,8 +2,14 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author North
@@ -20,7 +26,7 @@ public final class Coldsnap extends ExpansionSet {
         super("Coldsnap", "CSP", ExpansionSet.buildDate(2006, 6, 21), SetType.EXPANSION);
         this.blockName = "Ice Age";
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
+        this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
@@ -183,5 +189,26 @@ public final class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Woolly Razorback", 25, Rarity.RARE, mage.cards.w.WoollyRazorback.class));
         cards.add(new SetCardInfo("Zombie Musher", 75, Rarity.COMMON, mage.cards.z.ZombieMusher.class));
         cards.add(new SetCardInfo("Zur the Enchanter", 135, Rarity.RARE, mage.cards.z.ZurTheEnchanter.class));
+    }
+
+    @Override
+    public List<CardInfo> getCardsByRarity(Rarity rarity) {
+        if (rarity != Rarity.COMMON) {
+            return super.getCardsByRarity(rarity);
+        }
+        List<CardInfo> savedCardsInfos = savedCards.get(rarity);
+        if (savedCardsInfos != null) {
+            return new ArrayList(savedCardsInfos);
+        }
+        CardCriteria criteria = new CardCriteria();
+        criteria.setCodes(this.code).rarities(rarity);
+        savedCardsInfos = CardRepository.instance.findCards(criteria);
+        // Snow basic lands are included in boosters as regular commons, not in a land slot
+        criteria = new CardCriteria();
+        criteria.setCodes(this.code).rarities(Rarity.LAND);
+        savedCardsInfos.addAll(CardRepository.instance.findCards(criteria));
+        savedCards.put(rarity, savedCardsInfos);
+        // Return a copy of the saved cards information, as not to modify the original.
+        return new ArrayList(savedCardsInfos);
     }
 }
