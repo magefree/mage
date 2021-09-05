@@ -276,10 +276,9 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
             } else {
                 break;
             }
-            playerList.stream().map((playerId) -> game.getPlayer(playerId)).filter((player) -> (player == null
-                    || !player.canRespond())).forEachOrdered((player) -> {
-                playerList.remove(player.getId());
-            });
+
+            // remove disconnected or quit players
+            playerList.removeIf(playerId -> game.getPlayer(playerId) == null || !game.getPlayer(playerId).canRespond());
         }
         checkList.stream().map((playerId) -> game.getPlayer(playerId)).filter((player) -> (player != null)).forEachOrdered((player) -> {
             player.shuffleLibrary(source, game);
