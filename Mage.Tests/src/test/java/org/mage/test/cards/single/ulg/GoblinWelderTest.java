@@ -17,7 +17,7 @@ public class GoblinWelderTest extends CardTestPlayerBase {
     private static final String relic = "Darksteel Relic";
     private static final String aspirant = "Blood Aspirant";
 
-    @Ignore
+    @Ignore // TODO: related to problems with dies triggers and short living LKI, see TriggeredAbilityImpl for details
     @Test
     public void testSacrificeDiesTrigger() {
         addCard(Zone.BATTLEFIELD, playerA, welder);
@@ -25,10 +25,15 @@ public class GoblinWelderTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, aspirant);
         addCard(Zone.GRAVEYARD, playerA, relic);
 
-        addTarget(playerA, relic);
-        addTarget(playerA, wurmcoil);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}:");
+        addTarget(playerA, wurmcoil);
+        addTarget(playerA, relic);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
+        // must have 2 dies triggers on stack: from source and from another, but it have only from another
+        setChoice(playerA, "Whenever you sacrifice a permanent"); // select from 2 triggers
+        checkStackSize("check triggers", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -36,6 +41,6 @@ public class GoblinWelderTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, wurmcoil, 1);
         assertPermanentCount(playerA, relic, 1);
         assertCounterCount(aspirant, CounterType.P1P1, 1);
-        assertPermanentCount(playerA, "Wurm", 2); // TODO: currently fails here
+        assertPermanentCount(playerA, "Wurm", 2);
     }
 }

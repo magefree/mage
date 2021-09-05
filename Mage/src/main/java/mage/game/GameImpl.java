@@ -1984,8 +1984,7 @@ public abstract class GameImpl implements Game {
                     break;
                 }
             }
-            state.handleSimultaneousEvent(this);
-            applyEffects(); // needed e.g if boost effects end and cause creatures to die
+            this.getState().processAction(this); // needed e.g if boost effects end and cause creatures to die
             somethingHappened = true;
         }
         checkConcede();
