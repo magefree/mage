@@ -56,11 +56,11 @@ public final class SigardaChampionOfLight extends CardImpl {
                 new AttacksTriggeredAbility(new LookLibraryAndPickControllerEffect(
                         StaticValue.get(5), false, StaticValue.get(1), filter2,
                         Zone.LIBRARY, false, true, false, Zone.HAND, true
-                ).setBackInRandomOrder(true)), CovenCondition.instance, AbilityWord.COVEN.formatWord() +
-                "Whenever {this} attacks, if you control three or more creatures with different powers, " +
-                "look at the top five cards of your library. You may reveal a Human creature card from among them " +
-                "and put it into your hand. Put the rest on the bottom of your library in a random order."
-        ).addHint(CovenHint.instance));
+                ).setBackInRandomOrder(true)), CovenCondition.instance, "Whenever {this} attacks, " +
+                "if you control three or more creatures with different powers, look at the top five cards " +
+                "of your library. You may reveal a Human creature card from among them and put it into your hand. " +
+                "Put the rest on the bottom of your library in a random order."
+        ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
     }
 
     private SigardaChampionOfLight(final SigardaChampionOfLight card) {

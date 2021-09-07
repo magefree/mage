@@ -61,6 +61,7 @@ public enum CounterType {
     FETCH("fetch"),
     FILIBUSTER("filibuster"),
     FIRST_STRIKE("first strike"),
+    FLAME("flame"),
     FLOOD("flood"),
     FLYING("flying"),
     FORESHADOW("foreshadow"),

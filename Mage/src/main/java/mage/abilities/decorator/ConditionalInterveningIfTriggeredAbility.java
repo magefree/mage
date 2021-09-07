@@ -78,7 +78,7 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
         if (abilityText == null || abilityText.isEmpty()) {
             return ability.getRule();
         }
-        return abilityText;
+        return (abilityWord != null ? abilityWord.formatWord() : "") + abilityText;
     }
 
     @Override
