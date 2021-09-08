@@ -559,7 +559,9 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void setDaytime(boolean daytime) {
-        state.setDaytime(daytime);
+        if (!state.setDaytime(daytime)) {
+            fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_DAY_NIGHT, null, null, null));
+        }
     }
 
     @Override

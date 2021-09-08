@@ -7,7 +7,6 @@ import mage.game.Game;
 
 /**
  * @author TheElk801
- * TODO: this is just a placeholder for the actual ability
  */
 public class BecomeDayAsEntersAbility extends EntersBattlefieldAbility {
 
@@ -33,7 +32,7 @@ public class BecomeDayAsEntersAbility extends EntersBattlefieldAbility {
 class BecomeDayEffect extends OneShotEffect {
 
     BecomeDayEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Neutral);
     }
 
     private BecomeDayEffect(final BecomeDayEffect effect) {
@@ -47,6 +46,10 @@ class BecomeDayEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
+        if (!game.hasDayNight()) {
+            game.setDaytime(true);
+            return true;
+        }
+        return false;
     }
 }
