@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.CovenCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.hint.common.CovenHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -25,6 +26,7 @@ public final class RitualOfHope extends CardImpl {
         // Creatures you control get +1/+1 until end of turn.
         // Coven — If you control three or more creatures with different powers, creatures you control get +2/+1 until end of turn instead.
         this.getSpellAbility().addEffect(new RitualOfHopeEffect());
+        this.getSpellAbility().addHint(CovenHint.instance);
     }
 
     private RitualOfHope(final RitualOfHope card) {
