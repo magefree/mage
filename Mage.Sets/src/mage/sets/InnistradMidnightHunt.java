@@ -145,6 +145,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Unruly Mob", 40, Rarity.COMMON, mage.cards.u.UnrulyMob.class));
         cards.add(new SetCardInfo("Untamed Pup", 187, Rarity.UNCOMMON, mage.cards.u.UntamedPup.class));
         cards.add(new SetCardInfo("Vampire Socialite", 249, Rarity.UNCOMMON, mage.cards.v.VampireSocialite.class));
+        cards.add(new SetCardInfo("Vanquish the Horde", 41, Rarity.RARE, mage.cards.v.VanquishTheHorde.class));
         cards.add(new SetCardInfo("Village Reavers", 165, Rarity.UNCOMMON, mage.cards.v.VillageReavers.class));
         cards.add(new SetCardInfo("Village Watch", 165, Rarity.UNCOMMON, mage.cards.v.VillageWatch.class));
         cards.add(new SetCardInfo("Voldaren Ambusher", 166, Rarity.UNCOMMON, mage.cards.v.VoldarenAmbusher.class));
