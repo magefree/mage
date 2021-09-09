@@ -110,7 +110,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
             if (player != null) {
                 this.resetDash();
                 for (AlternativeCost2 dashCost : alternativeSourceCosts) {
-                    if (dashCost.canPay(ability, this, controllerId, game)
+                    if (dashCost.canPay(ability, this, player.getId(), game)
                             && player.chooseUse(Outcome.Benefit, KEYWORD
                                     + " the creature for " + dashCost.getText(true) + " ?", ability, game)) {
                         activateDash(dashCost, game);

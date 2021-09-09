@@ -99,7 +99,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
             if (player != null) {
                 this.resetEvoke();
                 for (AlternativeCost2 evokeCost : evokeCosts) {
-                    if (evokeCost.canPay(ability, this, controllerId, game)
+                    if (evokeCost.canPay(ability, this, player.getId(), game)
                             && player.chooseUse(Outcome.Benefit, new StringBuilder(EVOKE_KEYWORD).append(" the creature for ").append(evokeCost.getText(true)).append(" ?").toString(), ability, game)) {
                         activateEvoke(evokeCost, game);
                         ability.getManaCostsToPay().clear();
