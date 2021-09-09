@@ -37,7 +37,9 @@ import mage.target.targetpointer.FixedTarget;
 public class DashAbility extends StaticAbility implements AlternativeSourceCosts {
 
     protected static final String KEYWORD = "Dash";
-    protected static final String REMINDER_TEXT = "(You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)";
+    protected static final String REMINDER_TEXT = "(You may cast this spell for its dash cost. "
+            + "If you do, it gains haste, and it's returned from the battlefield to its owner's "
+            + "hand at the beginning of the next end step.)";
 
     protected List<AlternativeCost2> alternativeSourceCosts = new LinkedList<>();
 
@@ -84,7 +86,8 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
     @Override
     public boolean isActivated(Ability ability, Game game) {
         Card card = game.getCard(sourceId);
-        if (card != null && card.getZoneChangeCounter(game) <= zoneChangeCounter + 1) {
+        if (card != null
+                && card.getZoneChangeCounter(game) <= zoneChangeCounter + 1) {
             for (AlternativeCost2 cost : alternativeSourceCosts) {
                 if (cost.isActivated(game)) {
                     return true;
@@ -102,12 +105,14 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            Player player = game.getPlayer(controllerId);
+            // we must use the controller of the ability here IE: Hedonist's Trove (play from not own hand when you aren't the owner)
+            Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 this.resetDash();
                 for (AlternativeCost2 dashCost : alternativeSourceCosts) {
                     if (dashCost.canPay(ability, this, controllerId, game)
-                            && player.chooseUse(Outcome.Benefit, KEYWORD + " the creature for " + dashCost.getText(true) + " ?", ability, game)) {
+                            && player.chooseUse(Outcome.Benefit, KEYWORD
+                                    + " the creature for " + dashCost.getText(true) + " ?", ability, game)) {
                         activateDash(dashCost, game);
                         ability.getManaCostsToPay().clear();
                         ability.getCosts().clear();

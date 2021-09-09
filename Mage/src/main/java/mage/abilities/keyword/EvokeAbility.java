@@ -25,7 +25,8 @@ import java.util.List;
 public class EvokeAbility extends StaticAbility implements AlternativeSourceCosts {
 
     protected static final String EVOKE_KEYWORD = "Evoke";
-    protected static final String REMINDER_TEXT = "(You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)";
+    protected static final String REMINDER_TEXT = "(You may cast this spell for its evoke cost. "
+            + "If you do, it's sacrificed when it enters the battlefield.)";
 
     protected List<AlternativeCost2> evokeCosts = new LinkedList<>();
 
@@ -40,7 +41,9 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
         super(Zone.ALL, null);
         name = EVOKE_KEYWORD;
         this.addEvokeCost(cost);
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceEffect()), EvokedCondition.instance, "Sacrifice {this} when it enters the battlefield and was evoked.");
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new SacrificeSourceEffect()),
+                EvokedCondition.instance, "Sacrifice {this} when it enters the battlefield and was evoked.");
         ability.setRuleVisible(false);
         addSubAbility(ability);
     }
@@ -72,7 +75,8 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
     @Override
     public boolean isActivated(Ability ability, Game game) {
         Card card = game.getCard(sourceId);
-        if (card != null && card.getZoneChangeCounter(game) <= zoneChangeCounter + 1) {
+        if (card != null
+                && card.getZoneChangeCounter(game) <= zoneChangeCounter + 1) {
             for (AlternativeCost2 cost : evokeCosts) {
                 if (cost.isActivated(game)) {
                     return true;
@@ -90,7 +94,8 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            Player player = game.getPlayer(controllerId);
+            // we must use the controller of the ability here IE: Hedonist's Trove (play from not own hand when you aren't the owner)
+            Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 this.resetEvoke();
                 for (AlternativeCost2 evokeCost : evokeCosts) {
@@ -99,7 +104,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
                         activateEvoke(evokeCost, game);
                         ability.getManaCostsToPay().clear();
                         ability.getCosts().clear();
-                        for (Iterator it = ((Costs) evokeCost).iterator(); it.hasNext(); ) {
+                        for (Iterator it = ((Costs) evokeCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();
                             if (cost instanceof ManaCostsImpl) {
                                 ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
