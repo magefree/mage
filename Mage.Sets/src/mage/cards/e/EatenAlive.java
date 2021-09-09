@@ -1,9 +1,9 @@
-package mage.cards.s;
+package mage.cards.e;
 
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -15,9 +15,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SparkHarvest extends CardImpl {
+public final class EatenAlive extends CardImpl {
 
-    public SparkHarvest(UUID ownerId, CardSetInfo setInfo) {
+    public EatenAlive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // As an additional cost to cast this spell, sacrifice a creature or pay {3}{B}.
@@ -26,17 +26,17 @@ public final class SparkHarvest extends CardImpl {
                 new ManaCostsImpl<>("{3}{B}"), "sacrifice a creature or pay {3}{B}"
         ));
 
-        // Destroy target creature or planeswalker.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        // Exile target creature or planeswalker.
+        this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }
 
-    private SparkHarvest(final SparkHarvest card) {
+    private EatenAlive(final EatenAlive card) {
         super(card);
     }
 
     @Override
-    public SparkHarvest copy() {
-        return new SparkHarvest(this);
+    public EatenAlive copy() {
+        return new EatenAlive(this);
     }
 }
