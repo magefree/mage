@@ -7,6 +7,7 @@ import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoIfAnyNumberCostPaid;
 import mage.abilities.effects.common.PhaseOutTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -19,6 +20,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -44,7 +46,9 @@ public final class SpectralAdversary extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Spectral Adversary enters the battlefield, you may pay {1}{U} any number of times. When you pay this cost one or more times, put that many +1/+1 counters on Spectral Adversary, then up to that many other target artifacts, creatures, and/or enchantments phase out.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SpectralAdversaryEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfAnyNumberCostPaid(
+                new SpectralAdversaryEffect(), new ManaCostsImpl<>("{1}{U}")
+        )));
     }
 
     private SpectralAdversary(final SpectralAdversary card) {
@@ -60,7 +64,7 @@ public final class SpectralAdversary extends CardImpl {
 class SpectralAdversaryEffect extends OneShotEffect {
 
     private static final FilterPermanent filter
-            = new FilterPermanent("artifacts, creatures, and/or enchantments");
+            = new FilterPermanent("other artifacts, creatures, and/or enchantments");
 
     static {
         filter.add(Predicates.or(
@@ -68,12 +72,12 @@ class SpectralAdversaryEffect extends OneShotEffect {
                 CardType.CREATURE.getPredicate(),
                 CardType.ENCHANTMENT.getPredicate()
         ));
+        filter.add(AnotherPredicate.instance);
     }
 
     SpectralAdversaryEffect() {
         super(Outcome.Benefit);
-        staticText = "you may pay {1}{U} any number of times. When you pay this cost one or more times, " +
-                "put that many +1/+1 counters on {this}, then up to that many other target " +
+        staticText = "put that many +1/+1 counters on {this}, then up to that many other target " +
                 "artifacts, creatures, and/or enchantments phase out";
     }
 
@@ -92,29 +96,16 @@ class SpectralAdversaryEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cost cost = new ManaCostsImpl<>("{1}{U}");
-        int amount = 0;
-        while (player.canRespond()) {
-            cost.clearPaid();
-            if (cost.canPay(source, source, source.getControllerId(), game)
-                    && player.chooseUse(
-                    outcome, "Pay {1}{U}? You have paid this cost " +
-                            amount + " time" + (amount != 1 ? "s" : ""), source, game
-            ) && cost.pay(source, game, source, source.getControllerId(), false)) {
-                amount++;
-            }
-            break;
-        }
-        if (amount == 0) {
+        Integer timesPaid = (Integer) getValue("timesPaid");
+        if (timesPaid == null || timesPaid <= 0) {
             return false;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount)),
-                false, "put that many +1/+1 counters on {this}, then " +
-                "up to that many other target artifacts, creatures, and/or enchantments phase out"
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(timesPaid)),
+                false, staticText
         );
         ability.addEffect(new PhaseOutTargetEffect());
-        ability.addTarget(new TargetPermanent(0, amount, filter));
+        ability.addTarget(new TargetPermanent(0, timesPaid, filter));
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }

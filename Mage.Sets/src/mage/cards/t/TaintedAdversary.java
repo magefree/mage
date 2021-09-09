@@ -8,6 +8,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.DoIfAnyNumberCostPaid;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
@@ -38,7 +39,9 @@ public final class TaintedAdversary extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // When Tainted Adversary enters the battlefield, you may pay {2}{B} any number of times. When you pay this cost one or more times, put that many +1/+1 counters on Tainted Adversary, then create twice that many black 2/2 Zombie creature tokens with decayed.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TaintedAdversaryEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfAnyNumberCostPaid(
+                new TaintedAdversaryEffect(), new ManaCostsImpl<>("{2}{B}")
+        )));
     }
 
     private TaintedAdversary(final TaintedAdversary card) {
@@ -55,8 +58,7 @@ class TaintedAdversaryEffect extends OneShotEffect {
 
     TaintedAdversaryEffect() {
         super(Outcome.Benefit);
-        staticText = "you may pay {2}{B} any number of times. When you pay this cost " +
-                "one or more times, put that many +1/+1 counters on {this}, " +
+        staticText = "put that many +1/+1 counters on {this}, " +
                 "then create twice that many black 2/2 Zombie creature tokens with decayed";
     }
 
@@ -75,28 +77,15 @@ class TaintedAdversaryEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cost cost = new ManaCostsImpl<>("{2}{B}");
-        int amount = 0;
-        while (player.canRespond()) {
-            cost.clearPaid();
-            if (cost.canPay(source, source, source.getControllerId(), game)
-                    && player.chooseUse(
-                    outcome, "Pay {2}{B}? You have paid this cost " +
-                            amount + " time" + (amount != 1 ? "s" : ""), source, game
-            ) && cost.pay(source, game, source, source.getControllerId(), false)) {
-                amount++;
-            }
-            break;
-        }
-        if (amount == 0) {
+        Integer timesPaid = (Integer) getValue("timesPaid");
+        if (timesPaid == null || timesPaid <= 0) {
             return false;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount)),
-                false, "put that many +1/+1 counters on {this}, then create " +
-                "twice that many black 2/2 Zombie creature tokens with decayed"
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(timesPaid)),
+                false, staticText
         );
-        ability.addEffect(new CreateTokenEffect(new ZombieDecayedToken(), 2 * amount));
+        ability.addEffect(new CreateTokenEffect(new ZombieDecayedToken(), 2 * timesPaid));
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }
