@@ -13,7 +13,11 @@ import mage.game.events.GameEvent;
 public class BecomesDayOrNightTriggeredAbility extends TriggeredAbilityImpl {
 
     public BecomesDayOrNightTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
+        this(Zone.BATTLEFIELD, effect);
+    }
+
+    public BecomesDayOrNightTriggeredAbility(Zone zone, Effect effect) {
+        super(zone, effect, false);
     }
 
     private BecomesDayOrNightTriggeredAbility(final BecomesDayOrNightTriggeredAbility ability) {
