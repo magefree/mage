@@ -12,6 +12,10 @@ import mage.constants.Zone;
  */
 public class DisturbAbility extends SpellAbility {
 
+    public DisturbAbility(Cost cost) {
+        this(cost, TimingRule.SORCERY);
+    }
+
     public DisturbAbility(Cost cost, TimingRule timingRule) {
         super(null, "", Zone.GRAVEYARD, SpellAbilityType.BASE_ALTERNATE);
     }
