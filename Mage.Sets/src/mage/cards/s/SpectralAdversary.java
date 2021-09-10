@@ -92,10 +92,6 @@ class SpectralAdversaryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
         Integer timesPaid = (Integer) getValue("timesPaid");
         if (timesPaid == null || timesPaid <= 0) {
             return false;
