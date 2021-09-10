@@ -1,11 +1,11 @@
-package mage.cards.b;
+package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.CreaturesDiedThisTurnCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.hint.common.CreaturesDiedThisTurnHint;
-import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,31 +18,31 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class BloodcrazedPaladin extends CardImpl {
+public final class GrizzlyGhoul extends CardImpl {
 
-    public BloodcrazedPaladin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
+    public GrizzlyGhoul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
 
-        this.subtype.add(SubType.VAMPIRE);
-        this.subtype.add(SubType.KNIGHT);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.subtype.add(SubType.ZOMBIE);
+        this.subtype.add(SubType.BEAR);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        // Flash
-        this.addAbility(FlashAbility.getInstance());
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
 
-        // Bloodcrazed Paladin enters the battlefield with a +1/+1 counter on it for each creature that died this turn.
+        // Grizzly Ghoul enters the battlefield with a +1/+1 counter on it for each creature that died this turn.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance(0), CreaturesDiedThisTurnCount.instance, true
         ).setText("with a +1/+1 counter on it for each creature that died this turn.")).addHint(CreaturesDiedThisTurnHint.instance), new CreaturesDiedWatcher());
     }
 
-    private BloodcrazedPaladin(final BloodcrazedPaladin card) {
+    private GrizzlyGhoul(final GrizzlyGhoul card) {
         super(card);
     }
 
     @Override
-    public BloodcrazedPaladin copy() {
-        return new BloodcrazedPaladin(this);
+    public GrizzlyGhoul copy() {
+        return new GrizzlyGhoul(this);
     }
 }
