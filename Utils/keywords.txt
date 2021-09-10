@@ -23,6 +23,7 @@ Delve|new|
 Dethrone|new|
 Devoid|color|
 Defender|instance|
+Disturb|cost|
 Dredge|number|
 Double Strike|instance|
 Dredge|number|
