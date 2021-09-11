@@ -31,6 +31,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = 1;
 
+        cards.add(new SetCardInfo("Abandon the Post", 127, Rarity.COMMON, mage.cards.a.AbandonThePost.class));
         cards.add(new SetCardInfo("Angelfire Ignition", 209, Rarity.RARE, mage.cards.a.AngelfireIgnition.class));
         cards.add(new SetCardInfo("Arcane Infusion", 210, Rarity.UNCOMMON, mage.cards.a.ArcaneInfusion.class));
         cards.add(new SetCardInfo("Archive Haunt", 68, Rarity.UNCOMMON, mage.cards.a.ArchiveHaunt.class));
