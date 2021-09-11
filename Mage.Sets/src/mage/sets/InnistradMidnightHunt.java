@@ -125,6 +125,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Flip the Switch", 54, Rarity.COMMON, mage.cards.f.FlipTheSwitch.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Foul Play", 101, Rarity.UNCOMMON, mage.cards.f.FoulPlay.class));
+        cards.add(new SetCardInfo("Frenzied Trapbreaker", 190, Rarity.UNCOMMON, mage.cards.f.FrenziedTrapbreaker.class));
         cards.add(new SetCardInfo("Galedrifter", 55, Rarity.COMMON, mage.cards.g.Galedrifter.class));
         cards.add(new SetCardInfo("Galvanic Iteration", 224, Rarity.RARE, mage.cards.g.GalvanicIteration.class));
         cards.add(new SetCardInfo("Gavony Dawnguard", 20, Rarity.UNCOMMON, mage.cards.g.GavonyDawnguard.class));
@@ -182,6 +183,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Obsessive Astronomer", 152, Rarity.UNCOMMON, mage.cards.o.ObsessiveAstronomer.class));
         cards.add(new SetCardInfo("Odric's Outrider", 29, Rarity.UNCOMMON, mage.cards.o.OdricsOutrider.class));
         cards.add(new SetCardInfo("Organ Hoarder", 66, Rarity.COMMON, mage.cards.o.OrganHoarder.class));
+        cards.add(new SetCardInfo("Outland Liberator", 190, Rarity.UNCOMMON, mage.cards.o.OutlandLiberator.class));
         cards.add(new SetCardInfo("Overgrown Farmland", 265, Rarity.RARE, mage.cards.o.OvergrownFarmland.class));
         cards.add(new SetCardInfo("Overwhelmed Archivist", 68, Rarity.UNCOMMON, mage.cards.o.OverwhelmedArchivist.class));
         cards.add(new SetCardInfo("Patrician Geist", 69, Rarity.RARE, mage.cards.p.PatricianGeist.class));
