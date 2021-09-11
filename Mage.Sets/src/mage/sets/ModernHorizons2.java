@@ -576,9 +576,7 @@ class ModernHorizons2Collator implements BoosterCollator {
         private static final ModernHorizons2Run rareA = new ModernHorizons2Run(false, "12", "12", "22", "22", "23", "23", "26", "26", "27", "27", "29", "29", "30", "32", "35", "35", "39", "39", "44", "44", "47", "47", "52", "58", "58", "59", "59", "67", "68", "68", "69", "71", "71", "75", "80", "80", "81", "81", "87", "92", "92", "93", "93", "96", "96", "97", "97", "102", "106", "106", "116", "116", "117", "117", "118", "118", "120", "120", "126", "129", "129", "132", "132", "137", "137", "138", "148", "148", "151", "153", "153", "157", "162", "162", "166", "166", "171", "171", "176", "176", "178", "182", "182", "186", "186", "189", "189", "192", "197", "198", "198", "199", "202", "204", "204", "205", "205", "206", "206", "207", "207", "208", "208", "214", "214", "216", "216", "218", "218", "219", "219", "224", "224", "225", "225", "227", "231", "231", "234", "236", "236", "238", "242", "242", "243", "243", "244", "244", "248", "248", "250", "250", "254", "254", "259", "259", "260", "260", "261", "261");
         private static final ModernHorizons2Run rareB = new ModernHorizons2Run(false, "328", "328", "331", "331", "332", "332", "333", "334", "334", "336", "336", "337", "340", "340", "341", "341", "342", "344", "344", "345", "345", "352", "352", "353", "353", "355", "355", "357", "357", "359", "359", "363", "365", "366", "366", "367", "368", "370", "370", "371", "371", "372", "372", "377", "377", "378", "378", "379", "380", "380", "383", "383", "385", "385", "386", "386", "388", "388", "390", "390", "391", "391", "393", "396", "396", "397", "397", "398", "398", "400", "400", "401", "401", "402", "405", "405", "407", "407", "409", "409", "410", "412", "412", "414", "414", "417", "417", "418", "418", "420", "422", "422", "425", "425", "427", "427", "431", "432", "432", "433", "435", "435", "436", "436", "437", "437", "438", "438", "439", "439", "440", "440", "441", "441");
         private static final ModernHorizons2Run rareC = new ModernHorizons2Run(false, "304", "305", "306", "307", "309", "310", "311", "312", "313", "315", "316", "317", "318", "323", "324");
-        private static final ModernHorizons2Run reprintUncommon = new ModernHorizons2Run(false, "262", "264", "266", "267", "268", "269", "272", "274", "276", "278", "280", "282", "284", "285", "288", "296", "297", "299", "300", "302");
-        private static final ModernHorizons2Run reprintRare = new ModernHorizons2Run(false, "263", "265", "270", "271", "273", "275", "277", "279", "283", "286", "289", "290", "292", "293", "294", "295", "298", "303");
-        private static final ModernHorizons2Run reprintMythic = new ModernHorizons2Run(false, "281", "287", "291", "301");
+        private static final ModernHorizons2Run reprint = new ModernHorizons2Run(false, "262", "264", "266", "267", "268", "269", "272", "274", "276", "278", "280", "282", "284", "285", "288", "296", "297", "299", "300", "302", "262", "264", "266", "267", "268", "269", "272", "274", "276", "278", "280", "282", "284", "285", "288", "296", "297", "299", "300", "302", "262", "264", "266", "267", "268", "269", "272", "274", "276", "278", "280", "282", "284", "285", "288", "296", "297", "299", "300", "302", "262", "264", "266", "267", "268", "269", "272", "274", "276", "278", "280", "282", "284", "285", "288", "296", "297", "299", "300", "302", "263", "265", "270", "271", "273", "275", "277", "279", "283", "286", "289", "290", "292", "293", "294", "295", "298", "303", "263", "265", "270", "271", "273", "275", "277", "279", "283", "286", "289", "290", "292", "293", "294", "295", "298", "303", "281", "287", "291", "301");
 
         private ModernHorizons2Run(boolean keepOrder, String... numbers) {
             super(keepOrder, numbers);
@@ -586,7 +584,7 @@ class ModernHorizons2Collator implements BoosterCollator {
     }
 
     private static class ModernHorizons2Structure extends BoosterStructure {
-        private static final ModernHorizons2Structure C1 = new ModernHorizons2Structure(
+        private static final ModernHorizons2Structure AAABC1C1C1C1C1C1 = new ModernHorizons2Structure(
                 ModernHorizons2Run.commonA,
                 ModernHorizons2Run.commonA,
                 ModernHorizons2Run.commonA,
@@ -598,7 +596,7 @@ class ModernHorizons2Collator implements BoosterCollator {
                 ModernHorizons2Run.commonC1,
                 ModernHorizons2Run.commonC1
         );
-        private static final ModernHorizons2Structure C2 = new ModernHorizons2Structure(
+        private static final ModernHorizons2Structure AAABBC1C1C1C1C1 = new ModernHorizons2Structure(
                 ModernHorizons2Run.commonA,
                 ModernHorizons2Run.commonA,
                 ModernHorizons2Run.commonA,
@@ -610,7 +608,7 @@ class ModernHorizons2Collator implements BoosterCollator {
                 ModernHorizons2Run.commonC1,
                 ModernHorizons2Run.commonC1
         );
-        private static final ModernHorizons2Structure C3 = new ModernHorizons2Structure(
+        private static final ModernHorizons2Structure AAABBBC2C2C2C2 = new ModernHorizons2Structure(
                 ModernHorizons2Run.commonA,
                 ModernHorizons2Run.commonA,
                 ModernHorizons2Run.commonA,
@@ -622,7 +620,7 @@ class ModernHorizons2Collator implements BoosterCollator {
                 ModernHorizons2Run.commonC2,
                 ModernHorizons2Run.commonC2
         );
-        private static final ModernHorizons2Structure C4 = new ModernHorizons2Structure(
+        private static final ModernHorizons2Structure AAAABBC2C2C2C2 = new ModernHorizons2Structure(
                 ModernHorizons2Run.commonA,
                 ModernHorizons2Run.commonA,
                 ModernHorizons2Run.commonA,
@@ -634,7 +632,7 @@ class ModernHorizons2Collator implements BoosterCollator {
                 ModernHorizons2Run.commonC2,
                 ModernHorizons2Run.commonC2
         );
-        private static final ModernHorizons2Structure C5 = new ModernHorizons2Structure(
+        private static final ModernHorizons2Structure AAAABBBC2C2C2 = new ModernHorizons2Structure(
                 ModernHorizons2Run.commonA,
                 ModernHorizons2Run.commonA,
                 ModernHorizons2Run.commonA,
@@ -646,12 +644,12 @@ class ModernHorizons2Collator implements BoosterCollator {
                 ModernHorizons2Run.commonC2,
                 ModernHorizons2Run.commonC2
         );
-        private static final ModernHorizons2Structure U1 = new ModernHorizons2Structure(
+        private static final ModernHorizons2Structure AAA = new ModernHorizons2Structure(
                 ModernHorizons2Run.uncommonA,
                 ModernHorizons2Run.uncommonA,
                 ModernHorizons2Run.uncommonA
         );
-        private static final ModernHorizons2Structure U2 = new ModernHorizons2Structure(
+        private static final ModernHorizons2Structure BBB = new ModernHorizons2Structure(
                 ModernHorizons2Run.uncommonB,
                 ModernHorizons2Run.uncommonB,
                 ModernHorizons2Run.uncommonB
@@ -666,13 +664,7 @@ class ModernHorizons2Collator implements BoosterCollator {
                 ModernHorizons2Run.rareC
         );
         private static final ModernHorizons2Structure RP1 = new ModernHorizons2Structure(
-                ModernHorizons2Run.reprintUncommon
-        );
-        private static final ModernHorizons2Structure RP2 = new ModernHorizons2Structure(
-                ModernHorizons2Run.reprintRare
-        );
-        private static final ModernHorizons2Structure RP3 = new ModernHorizons2Structure(
-                ModernHorizons2Run.reprintMythic
+                ModernHorizons2Run.reprint
         );
 
         private ModernHorizons2Structure(CardRun... runs) {
@@ -680,24 +672,42 @@ class ModernHorizons2Collator implements BoosterCollator {
         }
     }
 
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 3.27 A commons (36 / 11)
+    // 2.18 B commons (24 / 11)
+    // 2.73 C1 commons (30 / 11, or 60 / 11 in each C1 booster)
+    // 1.82 C2 commons (20 / 11, or 40 / 11 in each C2 booster)
+    // These numbers are the same for all sets with 101 commons in A/B/C1/C2 print runs
+    // and with 10 common slots per booster
     private final RarityConfiguration commonRuns = new RarityConfiguration(
             false,
-            ModernHorizons2Structure.C1,
-            ModernHorizons2Structure.C2,
-            ModernHorizons2Structure.C3,
-            ModernHorizons2Structure.C4,
-            ModernHorizons2Structure.C5,
-            ModernHorizons2Structure.C1,
-            ModernHorizons2Structure.C2,
-            ModernHorizons2Structure.C3,
-            ModernHorizons2Structure.C4,
-            ModernHorizons2Structure.C5,
-            ModernHorizons2Structure.C1,
-            ModernHorizons2Structure.C2
+            ModernHorizons2Structure.AAABC1C1C1C1C1C1,
+            ModernHorizons2Structure.AAABC1C1C1C1C1C1,
+            ModernHorizons2Structure.AAABC1C1C1C1C1C1,
+            ModernHorizons2Structure.AAABC1C1C1C1C1C1,
+            ModernHorizons2Structure.AAABC1C1C1C1C1C1,
+            ModernHorizons2Structure.AAABBC1C1C1C1C1,
+            ModernHorizons2Structure.AAABBC1C1C1C1C1,
+            ModernHorizons2Structure.AAABBC1C1C1C1C1,
+            ModernHorizons2Structure.AAABBC1C1C1C1C1,
+            ModernHorizons2Structure.AAABBC1C1C1C1C1,
+            ModernHorizons2Structure.AAABBC1C1C1C1C1,
+
+            ModernHorizons2Structure.AAABBBC2C2C2C2,
+            ModernHorizons2Structure.AAABBBC2C2C2C2,
+            ModernHorizons2Structure.AAABBBC2C2C2C2,
+            ModernHorizons2Structure.AAABBBC2C2C2C2,
+            ModernHorizons2Structure.AAABBBC2C2C2C2,
+            ModernHorizons2Structure.AAAABBC2C2C2C2,
+            ModernHorizons2Structure.AAAABBC2C2C2C2,
+            ModernHorizons2Structure.AAAABBBC2C2C2,
+            ModernHorizons2Structure.AAAABBBC2C2C2,
+            ModernHorizons2Structure.AAAABBBC2C2C2,
+            ModernHorizons2Structure.AAAABBBC2C2C2
     );
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(
-            ModernHorizons2Structure.U1,
-            ModernHorizons2Structure.U2
+            ModernHorizons2Structure.AAA,
+            ModernHorizons2Structure.BBB
     );
     private final RarityConfiguration rareRuns = new RarityConfiguration(
             false,
@@ -736,11 +746,7 @@ class ModernHorizons2Collator implements BoosterCollator {
             ModernHorizons2Structure.R3
     );
     private final RarityConfiguration reprintRuns = new RarityConfiguration(
-            false,
-            ModernHorizons2Structure.RP1, ModernHorizons2Structure.RP1,
-            ModernHorizons2Structure.RP1, ModernHorizons2Structure.RP1,
-            ModernHorizons2Structure.RP2, ModernHorizons2Structure.RP2,
-            ModernHorizons2Structure.RP3
+            ModernHorizons2Structure.RP1
     );
 
     @Override
