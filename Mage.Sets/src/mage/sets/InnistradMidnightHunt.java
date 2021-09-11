@@ -95,6 +95,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Evolving Wilds", 261, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Fading Hope", 51, Rarity.UNCOMMON, mage.cards.f.FadingHope.class));
         cards.add(new SetCardInfo("Faithful Mending", 221, Rarity.UNCOMMON, mage.cards.f.FaithfulMending.class));
+        cards.add(new SetCardInfo("Falcon Abomination", 52, Rarity.COMMON, mage.cards.f.FalconAbomination.class));
         cards.add(new SetCardInfo("Falkenrath Perforator", 136, Rarity.COMMON, mage.cards.f.FalkenrathPerforator.class));
         cards.add(new SetCardInfo("Falkenrath Pit Fighter", 137, Rarity.RARE, mage.cards.f.FalkenrathPitFighter.class));
         cards.add(new SetCardInfo("Famished Foragers", 138, Rarity.COMMON, mage.cards.f.FamishedForagers.class));
