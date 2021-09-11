@@ -19,13 +19,14 @@ jobs:
 
       - uses: actions/setup-java@v2
         with:
-          java-version: 11
+          java-version: 8
+          java-package: jre
           # https://github.com/actions/setup-java#supported-distributions
           distribution: zulu
           cache: maven
 
       # https://docs.travis-ci.com/user/languages/java/#maven-dependency-management
-      - run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      - run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -T 1C
 
       # https://docs.travis-ci.com/user/languages/java/#maven-default-script-command
       - run: mvn test -B
