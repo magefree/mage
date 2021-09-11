@@ -381,26 +381,26 @@ public enum CardRepository {
         return null;
     }
 
-    public CardInfo findPreferedCoreExpansionCard(String name, boolean caseInsensitive) {
-        return findPreferedCoreExpansionCard(name, caseInsensitive, null);
+    public CardInfo findPreferredCoreExpansionCard(String name, boolean caseInsensitive) {
+        return findPreferredCoreExpansionCard(name, caseInsensitive, null);
     }
 
-    public CardInfo findPreferedCoreExpansionCard(String name, boolean caseInsensitive, String preferedSetCode) {
+    public CardInfo findPreferredCoreExpansionCard(String name, boolean caseInsensitive, String preferredSetCode) {
         List<CardInfo> cards;
         if (caseInsensitive) {
             cards = findCardsCaseInsensitive(name);
         } else {
             cards = findCards(name);
         }
-        return findPreferedOrLatestCard(cards, preferedSetCode);
+        return findPreferredOrLatestCard(cards, preferredSetCode);
     }
 
-    public CardInfo findPreferedCoreExpansionCardByClassName(String canonicalClassName, String preferedSetCode) {
+    public CardInfo findPreferredCoreExpansionCardByClassName(String canonicalClassName, String preferredSetCode) {
         List<CardInfo> cards = findCardsByClass(canonicalClassName);
-        return findPreferedOrLatestCard(cards, preferedSetCode);
+        return findPreferredOrLatestCard(cards, preferredSetCode);
     }
 
-    private CardInfo findPreferedOrLatestCard(List<CardInfo> cards, String preferedSetCode) {
+    private CardInfo findPreferredOrLatestCard(List<CardInfo> cards, String preferredSetCode) {
         if (!cards.isEmpty()) {
             Date lastReleaseDate = null;
             Date lastExpansionDate = null;
@@ -409,7 +409,7 @@ public enum CardRepository {
                 ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
                 if (set != null) {
 
-                    if ((preferedSetCode != null) && (preferedSetCode.equals(set.getCode()))) {
+                    if ((preferredSetCode != null) && (preferredSetCode.equals(set.getCode()))) {
                         return cardinfo;
                     }
 
@@ -443,7 +443,7 @@ public enum CardRepository {
                 }
             }
         }
-        return findPreferedCoreExpansionCard(name, true);
+        return findPreferredCoreExpansionCard(name, true);
     }
 
     public List<CardInfo> findCards(String name) {
