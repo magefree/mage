@@ -29,4 +29,6 @@ jobs:
       - run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -T 1C
 
       # https://docs.travis-ci.com/user/languages/java/#maven-default-script-command
-      - run: mvn test -B -T 1C
+      # tests are interdependent and require a specific order
+      # running in parallel causes some tests to fail
+      - run: mvn test -B # -T 1C
