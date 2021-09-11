@@ -32,6 +32,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         this.numBoosterDoubleFaced = 1;
 
         cards.add(new SetCardInfo("Abandon the Post", 127, Rarity.COMMON, mage.cards.a.AbandonThePost.class));
+        cards.add(new SetCardInfo("Ambitious Farmhand", 2, Rarity.UNCOMMON, mage.cards.a.AmbitiousFarmhand.class));
         cards.add(new SetCardInfo("Angelfire Ignition", 209, Rarity.RARE, mage.cards.a.AngelfireIgnition.class));
         cards.add(new SetCardInfo("Arcane Infusion", 210, Rarity.UNCOMMON, mage.cards.a.ArcaneInfusion.class));
         cards.add(new SetCardInfo("Archive Haunt", 68, Rarity.UNCOMMON, mage.cards.a.ArchiveHaunt.class));
@@ -199,6 +200,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Sacred Fire", 239, Rarity.UNCOMMON, mage.cards.s.SacredFire.class));
         cards.add(new SetCardInfo("Saryth, the Viper's Fang", 197, Rarity.RARE, mage.cards.s.SarythTheVipersFang.class));
         cards.add(new SetCardInfo("Seafaring Werewolf", 80, Rarity.RARE, mage.cards.s.SeafaringWerewolf.class));
+        cards.add(new SetCardInfo("Seasoned Cathar", 2, Rarity.UNCOMMON, mage.cards.s.SeasonedCathar.class));
         cards.add(new SetCardInfo("Secrets of the Key", 73, Rarity.COMMON, mage.cards.s.SecretsOfTheKey.class));
         cards.add(new SetCardInfo("Shadowbeast Sighting", 198, Rarity.COMMON, mage.cards.s.ShadowbeastSighting.class));
         cards.add(new SetCardInfo("Shady Traveler", 120, Rarity.COMMON, mage.cards.s.ShadyTraveler.class));
