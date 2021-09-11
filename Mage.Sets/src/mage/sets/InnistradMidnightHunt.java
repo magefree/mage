@@ -127,6 +127,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Gavony Silversmith", 21, Rarity.COMMON, mage.cards.g.GavonySilversmith.class));
         cards.add(new SetCardInfo("Gavony Trapper", 22, Rarity.COMMON, mage.cards.g.GavonyTrapper.class));
         cards.add(new SetCardInfo("Geistflame Reservoir", 142, Rarity.RARE, mage.cards.g.GeistflameReservoir.class));
+        cards.add(new SetCardInfo("Geistwave", 56, Rarity.COMMON, mage.cards.g.Geistwave.class));
         cards.add(new SetCardInfo("Ghoulcaller's Harvest", 225, Rarity.RARE, mage.cards.g.GhoulcallersHarvest.class));
         cards.add(new SetCardInfo("Grafted Identity", 57, Rarity.RARE, mage.cards.g.GraftedIdentity.class));
         cards.add(new SetCardInfo("Graveyard Glutton", 104, Rarity.RARE, mage.cards.g.GraveyardGlutton.class));
