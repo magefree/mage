@@ -83,6 +83,18 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- covde coverage tracking via coveralls -->
+            <!-- https://github.com/trautonen/coveralls-maven-plugin -->
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.3.0</version>
+                <configuration>
+                    <!-- this needs to be replaced once a coveralls account is setup by an admin -->
+                    <repoToken>yourcoverallsprojectrepositorytoken</repoToken>
+                </configuration>
+            </plugin>
         </plugins>
 
         <pluginManagement>

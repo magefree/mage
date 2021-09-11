@@ -7,3 +7,5 @@ dist: trusty
 language: java
 before_install:
   - echo "MAVEN_OPTS='-Xmx2g'" > ~/.mavenrc
+after_success:
+  - mvn clean test jacoco:report coveralls:report
