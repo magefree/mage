@@ -67,6 +67,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Champion of the Perished", 91, Rarity.RARE, mage.cards.c.ChampionOfThePerished.class));
         cards.add(new SetCardInfo("Chapel Shieldgeist", 13, Rarity.UNCOMMON, mage.cards.c.ChapelShieldgeist.class));
         cards.add(new SetCardInfo("Chaplain of Alms", 13, Rarity.UNCOMMON, mage.cards.c.ChaplainOfAlms.class));
+        cards.add(new SetCardInfo("Chilling Chronicle", 63, Rarity.UNCOMMON, mage.cards.c.ChillingChronicle.class));
         cards.add(new SetCardInfo("Clarion Cathars", 14, Rarity.COMMON, mage.cards.c.ClarionCathars.class));
         cards.add(new SetCardInfo("Clear Shot", 176, Rarity.UNCOMMON, mage.cards.c.ClearShot.class));
         cards.add(new SetCardInfo("Component Collector", 43, Rarity.COMMON, mage.cards.c.ComponentCollector.class));
@@ -165,6 +166,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Morkrut Behemoth", 114, Rarity.COMMON, mage.cards.m.MorkrutBehemoth.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mounted Dreadknight", 150, Rarity.COMMON, mage.cards.m.MountedDreadknight.class));
+        cards.add(new SetCardInfo("Mysterious Tome", 63, Rarity.UNCOMMON, mage.cards.m.MysteriousTome.class));
         cards.add(new SetCardInfo("Mystic Monstrosity", 256, Rarity.UNCOMMON, mage.cards.m.MysticMonstrosity.class));
         cards.add(new SetCardInfo("Mystic Skull", 256, Rarity.UNCOMMON, mage.cards.m.MysticSkull.class));
         cards.add(new SetCardInfo("Nebelgast Intruder", 64, Rarity.UNCOMMON, mage.cards.n.NebelgastIntruder.class));
