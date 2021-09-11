@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           java-version: 8
-          java-package: jre+fx
+          java-package: jdk+fx
           # https://github.com/actions/setup-java#supported-distributions
           distribution: zulu
           cache: maven
