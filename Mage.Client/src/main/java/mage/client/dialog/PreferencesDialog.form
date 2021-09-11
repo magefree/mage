@@ -4378,11 +4378,11 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="labelNumberOfDownloadThreads" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="labelPreferedImageLanguage" alignment="0" max="-2" attributes="0"/>
+                                              <Component id="labelPreferredImageLanguage" alignment="0" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="cbPreferedImageLanguage" min="-2" pref="153" max="-2" attributes="0"/>
+                                              <Component id="cbPreferredImageLanguage" min="-2" pref="153" max="-2" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="cbNumberOfDownloadThreads" min="-2" pref="153" max="-2" attributes="0"/>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -4416,8 +4416,8 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="labelPreferedImageLanguage" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbPreferedImageLanguage" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelPreferredImageLanguage" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbPreferredImageLanguage" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -4453,7 +4453,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbSaveToZipFilesActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="cbPreferedImageLanguage">
+                <Component class="javax.swing.JComboBox" name="cbPreferredImageLanguage">
                   <Properties>
                     <Property name="maximumRowCount" type="int" value="20"/>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -4469,7 +4469,7 @@
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JLabel" name="labelPreferedImageLanguage">
+                <Component class="javax.swing.JLabel" name="labelPreferredImageLanguage">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Default images language:"/>
                     <Property name="focusable" type="boolean" value="false"/>
