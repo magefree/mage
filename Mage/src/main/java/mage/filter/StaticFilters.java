@@ -613,6 +613,12 @@ public final class StaticFilters {
         FILTER_SPELL_NON_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterSpell FILTER_SPELLS_NON_CREATURE = (FilterSpell) new FilterSpell("noncreature spells").add(Predicates.not(CardType.CREATURE.getPredicate()));
+
+    static {
+        FILTER_SPELLS_NON_CREATURE.setLockedFilter(true);
+    }
+
     public static final FilterSpell FILTER_SPELL_A_NON_CREATURE = (FilterSpell) new FilterSpell("a noncreature spell").add(Predicates.not(CardType.CREATURE.getPredicate()));
 
     static {

@@ -40,6 +40,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Augur of Autumn", 168, Rarity.RARE, mage.cards.a.AugurOfAutumn.class));
         cards.add(new SetCardInfo("Baithook Angler", 42, Rarity.COMMON, mage.cards.b.BaithookAngler.class));
         cards.add(new SetCardInfo("Bat Whisperer", 86, Rarity.COMMON, mage.cards.b.BatWhisperer.class));
+        cards.add(new SetCardInfo("Benevolent Geist", 61, Rarity.RARE, mage.cards.b.BenevolentGeist.class));
         cards.add(new SetCardInfo("Bird Admirer", 169, Rarity.COMMON, mage.cards.b.BirdAdmirer.class));
         cards.add(new SetCardInfo("Bladebrand", 87, Rarity.COMMON, mage.cards.b.Bladebrand.class));
         cards.add(new SetCardInfo("Bladestitched Skaab", 212, Rarity.UNCOMMON, mage.cards.b.BladestitchedSkaab.class));
@@ -154,6 +155,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Lord of the Ulvenwald", 231, Rarity.UNCOMMON, mage.cards.l.LordOfTheUlvenwald.class));
         cards.add(new SetCardInfo("Loyal Gryff", 26, Rarity.UNCOMMON, mage.cards.l.LoyalGryff.class));
         cards.add(new SetCardInfo("Lunar Frenzy", 147, Rarity.UNCOMMON, mage.cards.l.LunarFrenzy.class));
+        cards.add(new SetCardInfo("Malevolent Hermit", 61, Rarity.RARE, mage.cards.m.MalevolentHermit.class));
         cards.add(new SetCardInfo("Mask of Griselbrand", 111, Rarity.RARE, mage.cards.m.MaskOfGriselbrand.class));
         cards.add(new SetCardInfo("Might of the Old Ways", 189, Rarity.COMMON, mage.cards.m.MightOfTheOldWays.class));
         cards.add(new SetCardInfo("Moonsilver Key", 255, Rarity.UNCOMMON, mage.cards.m.MoonsilverKey.class));
