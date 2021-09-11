@@ -19,7 +19,7 @@ jobs:
 
       - uses: actions/setup-java@v2
         with:
-          java-version: 8
+          java-version: 11
           # https://github.com/actions/setup-java#supported-distributions
           distribution: zulu
           cache: maven
