@@ -20,41 +20,41 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class FaithFlare extends CardImpl {
+public final class FlareOfFaith extends CardImpl {
 
-    public FaithFlare(UUID ownerId, CardSetInfo setInfo) {
+    public FlareOfFaith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Target creature gets +2/+2 until end of turn. If it's a Human, it gets +3/+3 and gains indestructible until end of turn instead.
-        this.getSpellAbility().addEffect(new FaithFlareEffect());
+        this.getSpellAbility().addEffect(new FlareOfFaithEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    private FaithFlare(final FaithFlare card) {
+    private FlareOfFaith(final FlareOfFaith card) {
         super(card);
     }
 
     @Override
-    public FaithFlare copy() {
-        return new FaithFlare(this);
+    public FlareOfFaith copy() {
+        return new FlareOfFaith(this);
     }
 }
 
-class FaithFlareEffect extends OneShotEffect {
+class FlareOfFaithEffect extends OneShotEffect {
 
-    FaithFlareEffect() {
+    FlareOfFaithEffect() {
         super(Outcome.Benefit);
         staticText = "target creature gets +2/+2 until end of turn. If it's a Human, " +
                 "it gets +3/+3 and gains indestructible until end of turn instead";
     }
 
-    private FaithFlareEffect(final FaithFlareEffect effect) {
+    private FlareOfFaithEffect(final FlareOfFaithEffect effect) {
         super(effect);
     }
 
     @Override
-    public FaithFlareEffect copy() {
-        return new FaithFlareEffect(this);
+    public FlareOfFaithEffect copy() {
+        return new FlareOfFaithEffect(this);
     }
 
     @Override
