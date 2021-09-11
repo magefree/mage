@@ -77,7 +77,9 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Consider", 44, Rarity.COMMON, mage.cards.c.Consider.class));
         cards.add(new SetCardInfo("Contortionist Troupe", 178, Rarity.UNCOMMON, mage.cards.c.ContortionistTroupe.class));
         cards.add(new SetCardInfo("Corpse Cobble", 214, Rarity.UNCOMMON, mage.cards.c.CorpseCobble.class));
+        cards.add(new SetCardInfo("Covert Cutpurse", 92, Rarity.UNCOMMON, mage.cards.c.CovertCutpurse.class));
         cards.add(new SetCardInfo("Covetous Castaway", 45, Rarity.UNCOMMON, mage.cards.c.CovetousCastaway.class));
+        cards.add(new SetCardInfo("Covetous Geist", 92, Rarity.UNCOMMON, mage.cards.c.CovetousGeist.class));
         cards.add(new SetCardInfo("Croaking Counterpart", 215, Rarity.RARE, mage.cards.c.CroakingCounterpart.class));
         cards.add(new SetCardInfo("Crossroads Candleguide", 253, Rarity.COMMON, mage.cards.c.CrossroadsCandleguide.class));
         cards.add(new SetCardInfo("Curse of Shaken Faith", 134, Rarity.RARE, mage.cards.c.CurseOfShakenFaith.class));

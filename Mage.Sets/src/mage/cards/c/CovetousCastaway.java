@@ -5,6 +5,7 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.keyword.DisturbAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,6 +31,7 @@ public final class CovetousCastaway extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new MillCardsControllerEffect(3)));
 
         // Disturb {3}{U}{U}
+        this.addAbility(new TransformAbility());
         this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{3}{U}{U}")));
     }
 
