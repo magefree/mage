@@ -9,7 +9,7 @@ on:
       - master
 
 env:
-  MAVEN_OPTS: -Xmx2g
+  MAVEN_OPTS: -Xmx3g
 
 jobs:
   test:
