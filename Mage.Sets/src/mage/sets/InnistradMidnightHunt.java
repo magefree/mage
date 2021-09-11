@@ -88,6 +88,8 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Dawnhart Mentor", 179, Rarity.UNCOMMON, mage.cards.d.DawnhartMentor.class));
         cards.add(new SetCardInfo("Dawnhart Rejuvenator", 180, Rarity.COMMON, mage.cards.d.DawnhartRejuvenator.class));
         cards.add(new SetCardInfo("Dawnhart Wardens", 216, Rarity.UNCOMMON, mage.cards.d.DawnhartWardens.class));
+        cards.add(new SetCardInfo("Deathbonnet Hulk", 181, Rarity.UNCOMMON, mage.cards.d.DeathbonnetHulk.class));
+        cards.add(new SetCardInfo("Deathbonnet Sprout", 181, Rarity.UNCOMMON, mage.cards.d.DeathbonnetSprout.class));
         cards.add(new SetCardInfo("Defend the Celestus", 182, Rarity.UNCOMMON, mage.cards.d.DefendTheCelestus.class));
         cards.add(new SetCardInfo("Defenestrate", 95, Rarity.COMMON, mage.cards.d.Defenestrate.class));
         cards.add(new SetCardInfo("Delver of Secrets", 47, Rarity.UNCOMMON, mage.cards.d.DelverOfSecrets.class));
