@@ -38,6 +38,8 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Infusion", 210, Rarity.UNCOMMON, mage.cards.a.ArcaneInfusion.class));
         cards.add(new SetCardInfo("Archive Haunt", 68, Rarity.UNCOMMON, mage.cards.a.ArchiveHaunt.class));
         cards.add(new SetCardInfo("Ardent Elementalist", 128, Rarity.COMMON, mage.cards.a.ArdentElementalist.class));
+        cards.add(new SetCardInfo("Arlinn, the Moon's Fury", 211, Rarity.MYTHIC, mage.cards.a.ArlinnTheMoonsFury.class));
+        cards.add(new SetCardInfo("Arlinn, the Pack's Hope", 211, Rarity.MYTHIC, mage.cards.a.ArlinnThePacksHope.class));
         cards.add(new SetCardInfo("Arrogant Outlaw", 84, Rarity.COMMON, mage.cards.a.ArrogantOutlaw.class));
         cards.add(new SetCardInfo("Augur of Autumn", 168, Rarity.RARE, mage.cards.a.AugurOfAutumn.class));
         cards.add(new SetCardInfo("Awoken Demon", 100, Rarity.COMMON, mage.cards.a.AwokenDemon.class));
