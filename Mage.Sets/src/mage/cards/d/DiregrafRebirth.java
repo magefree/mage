@@ -37,7 +37,7 @@ public final class DiregrafRebirth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
         // Flashback {5}{B}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{5}{B}{G}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{B}{G}")));
     }
 
     private DiregrafRebirth(final DiregrafRebirth card) {

@@ -28,7 +28,7 @@ public final class TurnTheEarth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(0, 3));
 
         // Flashback {1}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{1}{G}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{G}")));
     }
 
     private TurnTheEarth(final TurnTheEarth card) {

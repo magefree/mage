@@ -37,7 +37,7 @@ public final class CrawlFromTheCellar extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 1, filter, false));
 
         // Flashback {3}{B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{3}{B}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{B}")));
     }
 
     private CrawlFromTheCellar(final CrawlFromTheCellar card) {

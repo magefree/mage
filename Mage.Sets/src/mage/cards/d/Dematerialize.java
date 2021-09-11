@@ -25,7 +25,7 @@ public final class Dematerialize extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());
         // Flashback {5}{U}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{U}{U}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{U}{U}")));
     }
 
     private Dematerialize(final Dematerialize card) {

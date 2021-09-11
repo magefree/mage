@@ -37,7 +37,7 @@ public final class FlashOfInsight extends CardImpl {
         this.getSpellAbility().addEffect(new FlashOfInsightEffect());
 
         // Flashback-{1}{U}, Exile X blue cards from your graveyard.
-        Ability ability = new FlashbackAbility(new ManaCostsImpl("{1}{U}"), TimingRule.INSTANT);
+        Ability ability = new FlashbackAbility(this, new ManaCostsImpl("{1}{U}"));
         FilterCard filter = new FilterCard("blue cards from your graveyard");
         filter.add(new ColorPredicate(ObjectColor.BLUE));
         filter.add(Predicates.not(new CardIdPredicate(getId())));

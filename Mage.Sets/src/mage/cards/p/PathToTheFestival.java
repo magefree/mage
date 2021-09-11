@@ -39,7 +39,7 @@ public final class PathToTheFestival extends CardImpl {
         this.getSpellAbility().addHint(DomainHint.instance);
 
         // Flashback {4}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{4}{G}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{G}")));
     }
 
     private PathToTheFestival(final PathToTheFestival card) {

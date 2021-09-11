@@ -38,7 +38,7 @@ public final class CorpseCobble extends CardImpl {
         this.getSpellAbility().addEffect(new CorpseCobbleEffect());
 
         // Flashback {3}{U}{B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{3}{U}{B}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{U}{B}")));
     }
 
     private CorpseCobble(final CorpseCobble card) {

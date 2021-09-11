@@ -25,7 +25,7 @@ public final class Firebolt extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Flashback {4}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{R}")));
     }
 
     private Firebolt(final Firebolt card) {

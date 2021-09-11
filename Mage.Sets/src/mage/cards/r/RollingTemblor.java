@@ -33,7 +33,7 @@ public final class RollingTemblor extends CardImpl {
         // Rolling Temblor deals 2 damage to each creature without flying.
         this.getSpellAbility().addEffect(new DamageAllEffect(2, filter));
         // Flashback {4}{R}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{R}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{R}{R}")));
     }
 
     private RollingTemblor(final RollingTemblor card) {

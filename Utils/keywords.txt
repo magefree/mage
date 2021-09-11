@@ -43,7 +43,7 @@ Fear|instance|
 First strike|instance|
 Flanking|new|
 Flash|instance|
-Flashback|cost|
+Flashback|card, cost|
 Flying|instance|
 Forestcycling|cost|
 Forestwalk|new|

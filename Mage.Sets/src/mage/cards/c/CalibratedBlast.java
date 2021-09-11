@@ -28,7 +28,7 @@ public final class CalibratedBlast extends CardImpl {
         this.getSpellAbility().addEffect(new CalibratedBlastEffect());
 
         // Flashback {3}{R}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{3}{R}{R}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{R}{R}")));
     }
 
     private CalibratedBlast(final CalibratedBlast card) {

@@ -28,7 +28,7 @@ public final class IgniteTheFuture extends CardImpl {
         this.getSpellAbility().addEffect(new IgniteTheFutureEffect());
 
         // Flashback {7}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{7}{R}")));
     }
 
     private IgniteTheFuture(final IgniteTheFuture card) {

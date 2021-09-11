@@ -25,7 +25,7 @@ public final class UnburialRites extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
         // Flashback {3}{W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{W}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{W}")));
     }
 
     private UnburialRites(final UnburialRites card) {

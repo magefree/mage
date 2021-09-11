@@ -42,7 +42,7 @@ public final class AngelfireIgnition extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Flashback {2}{R}{W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{2}{R}{W}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{R}{W}")));
     }
 
     private AngelfireIgnition(final AngelfireIgnition card) {

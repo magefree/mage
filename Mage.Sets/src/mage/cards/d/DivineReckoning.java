@@ -35,7 +35,7 @@ public final class DivineReckoning extends CardImpl {
         this.getSpellAbility().addEffect(new DivineReckoningEffect());
 
         // Flashback {5}{W}{W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{W}{W}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{W}{W}")));
     }
 
     private DivineReckoning(final DivineReckoning card) {

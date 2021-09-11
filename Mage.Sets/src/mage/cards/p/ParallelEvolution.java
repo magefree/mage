@@ -31,7 +31,7 @@ public final class ParallelEvolution extends CardImpl {
         this.getSpellAbility().addEffect(new ParallelEvolutionEffect());
 
         // Flashback {4}{G}{G}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{G}{G}{G}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{G}{G}{G}")));
     }
 
     private ParallelEvolution(final ParallelEvolution card) {
