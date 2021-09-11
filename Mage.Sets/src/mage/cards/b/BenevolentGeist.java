@@ -27,6 +27,9 @@ public final class BenevolentGeist extends CardImpl {
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        this.color.setBlue(true);
+        this.transformable = true;
+        this.nightCard = true;
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

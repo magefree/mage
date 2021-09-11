@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.DayboundAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,6 +37,7 @@ public final class SpellrunePainter extends CardImpl {
         ));
 
         // Daybound
+        this.addAbility(new TransformAbility());
         this.addAbility(DayboundAbility.getInstance());
     }
 

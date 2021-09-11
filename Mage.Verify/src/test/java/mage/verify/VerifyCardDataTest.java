@@ -9,6 +9,7 @@ import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MultikickerAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
@@ -1379,6 +1380,14 @@ public class VerifyCardDataTest {
         }
         if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && !card.isNightCard()) {
             fail(card, "abilities", "card is a front face werewolf with a back face ability");
+        }
+
+        if (card.getSecondCardFace() != null && !card.isNightCard() && !card.getAbilities().containsClass(TransformAbility.class)) {
+            fail(card, "abilities", "double-faced cards should have transform ability on the front");
+        }
+
+        if (card.getSecondCardFace() != null && card.isNightCard() && card.getAbilities().containsClass(TransformAbility.class)) {
+            fail(card, "abilities", "double-faced cards should not have transform ability on the back");
         }
 
         // special check: missing or wrong ability/effect hints

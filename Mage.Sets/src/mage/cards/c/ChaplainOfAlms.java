@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,6 +35,7 @@ public final class ChaplainOfAlms extends CardImpl {
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
 
         // Disturb {3}{W}
+        this.addAbility(new TransformAbility());
         this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{3}{W}")));
     }
 
