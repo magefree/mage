@@ -29,4 +29,4 @@ jobs:
       - run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -T 1C
 
       # https://docs.travis-ci.com/user/languages/java/#maven-default-script-command
-      - run: mvn test -B
+      - run: mvn test -B -T 1C
