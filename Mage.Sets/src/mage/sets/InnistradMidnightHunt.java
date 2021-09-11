@@ -216,6 +216,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Shipwreck Marsh", 267, Rarity.RARE, mage.cards.s.ShipwreckMarsh.class));
         cards.add(new SetCardInfo("Siege Zombie", 121, Rarity.COMMON, mage.cards.s.SiegeZombie.class));
         cards.add(new SetCardInfo("Sigarda, Champion of Light", 240, Rarity.MYTHIC, mage.cards.s.SigardaChampionOfLight.class));
+        cards.add(new SetCardInfo("Skaab Wrangler", 75, Rarity.UNCOMMON, mage.cards.s.SkaabWrangler.class));
         cards.add(new SetCardInfo("Slaughter Specialist", 122, Rarity.RARE, mage.cards.s.SlaughterSpecialist.class));
         cards.add(new SetCardInfo("Snarling Wolf", 199, Rarity.COMMON, mage.cards.s.SnarlingWolf.class));
         cards.add(new SetCardInfo("Soul-Guide Gryff", 35, Rarity.COMMON, mage.cards.s.SoulGuideGryff.class));
