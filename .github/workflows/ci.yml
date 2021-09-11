@@ -17,6 +17,8 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           java-version: 8
+          # https://github.com/actions/setup-java#supported-distributions
+          distribution: temurin
           cache: maven
 
       # https://docs.travis-ci.com/user/languages/java/#maven-dependency-management
