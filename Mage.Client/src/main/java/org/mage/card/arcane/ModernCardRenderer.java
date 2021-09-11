@@ -450,9 +450,11 @@ public class ModernCardRenderer extends CardRenderer {
 
             // Normal drawing of art from a source part of the card frame into the rect
             if (useFaceArt) {
+                int alternate_height = cardHeight - boxHeight * 2 - totalContentInset;
                 drawFaceArtIntoRect(g,
                         totalContentInset + 1, totalContentInset + boxHeight,
                         contentWidth - 2, typeLineY - totalContentInset - boxHeight,
+                        alternate_height,
                         sourceRect, shouldPreserveAspect);
             } else if (!isZendikarFullArtLand()) {
                 drawArtIntoRect(g,
@@ -464,14 +466,14 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     @Override
-    protected void drawFrame(Graphics2D g, CardPanelAttributes attribs, BufferedImage image) {
+    protected void drawFrame(Graphics2D g, CardPanelAttributes attribs, BufferedImage image, boolean lessOpaqueRulesTextBox) {
         // Get the card colors to base the frame on
         ObjectColor frameColors = getFrameObjectColor();
 
         // Get the border paint
         Color boxColor = getBoxColor(frameColors, cardView.getCardTypes(), attribs.isTransformed);
         Color additionalBoxColor = getAdditionalBoxColor(frameColors, cardView.getCardTypes(), attribs.isTransformed);
-        Paint textboxPaint = getTextboxPaint(frameColors, cardView.getCardTypes(), cardWidth);
+        Paint textboxPaint = getTextboxPaint(frameColors, cardView.getCardTypes(), cardWidth, lessOpaqueRulesTextBox);
         Paint borderPaint = getBorderPaint(frameColors, cardView.getCardTypes(), cardWidth);
 
         // Special colors
@@ -1765,21 +1767,29 @@ public class ModernCardRenderer extends CardRenderer {
         }
     }
 
+    private static Color getLessOpaqueColor(Color color, boolean lessOpaqueRulesTextBox) {
+        if (lessOpaqueRulesTextBox) {
+            Color lessOpaque = new Color (color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() - 50);
+            return lessOpaque;
+        }
+        return color;
+    }
+
     // Determine the border paint to use, based on an ObjectColors
-    protected static Paint getTextboxPaint(ObjectColor colors, Collection<CardType> types, int width) {
+    protected static Paint getTextboxPaint(ObjectColor colors, Collection<CardType> types, int width, boolean lessOpaqueRulesTextBox) {
         if (colors.isMulticolored()) {
             if (colors.getColorCount() == 2) {
                 List<ObjectColor> twoColors = colors.getColors();
                 Color[] translatedColors;
                 if (types.contains(CardType.LAND)) {
                     translatedColors = new Color[]{
-                            getLandTextboxColor(twoColors.get(0)),
-                            getLandTextboxColor(twoColors.get(1))
+                            getLessOpaqueColor(getLandTextboxColor(twoColors.get(0)), lessOpaqueRulesTextBox),
+                            getLessOpaqueColor(getLandTextboxColor(twoColors.get(1)), lessOpaqueRulesTextBox)
                     };
                 } else {
                     translatedColors = new Color[]{
-                            getTextboxColor(twoColors.get(0)),
-                            getTextboxColor(twoColors.get(1))
+                            getLessOpaqueColor(getTextboxColor(twoColors.get(0)), lessOpaqueRulesTextBox),
+                            getLessOpaqueColor(getTextboxColor(twoColors.get(1)), lessOpaqueRulesTextBox)
                     };
                 }
 
@@ -1789,20 +1799,20 @@ public class ModernCardRenderer extends CardRenderer {
                         new float[]{0.4f, 0.6f},
                         translatedColors);
             } else if (types.contains(CardType.LAND)) {
-                return LAND_TEXTBOX_GOLD;
+                return getLessOpaqueColor(LAND_TEXTBOX_GOLD, lessOpaqueRulesTextBox);
             } else {
-                return TEXTBOX_GOLD;
+                return getLessOpaqueColor(TEXTBOX_GOLD, lessOpaqueRulesTextBox);
             }
         } else if (colors.isColorless()) {
             if (types.contains(CardType.LAND)) {
-                return TEXTBOX_LAND;
+                return getLessOpaqueColor(TEXTBOX_LAND, lessOpaqueRulesTextBox);
             } else {
-                return TEXTBOX_COLORLESS;
+                return getLessOpaqueColor(TEXTBOX_COLORLESS, lessOpaqueRulesTextBox);
             }
         } else if (types.contains(CardType.LAND)) {
-            return getLandTextboxColor(colors);
+            return getLessOpaqueColor(getLandTextboxColor(colors), lessOpaqueRulesTextBox);
         } else {
-            return getTextboxColor(colors);
+            return getLessOpaqueColor(getTextboxColor(colors), lessOpaqueRulesTextBox);
         }
     }
 }
