@@ -223,7 +223,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     protected void drawSplitHalfFrame(Graphics2D g, CardPanelAttributes attribs, HalfCardProps half, int typeLineY) {
         // Get the border paint
         Color boxColor = getBoxColor(half.color, cardView.getCardTypes(), attribs.isTransformed);
-        Paint textboxPaint = getTextboxPaint(half.color, cardView.getCardTypes(), cardWidth);
+        Paint textboxPaint = getTextboxPaint(half.color, cardView.getCardTypes(), cardWidth, false);
         Paint borderPaint = getBorderPaint(half.color, cardView.getCardTypes(), cardWidth);
 
         // Draw main frame
@@ -299,7 +299,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     }
 
     @Override
-    protected void drawFrame(Graphics2D g, CardPanelAttributes attribs, BufferedImage image) {
+    protected void drawFrame(Graphics2D g, CardPanelAttributes attribs, BufferedImage image, boolean lessOpaqueRulesTextBox) {
         if (isAftermath()) {
             drawSplitHalfFrame(getUnmodifiedHalfContext(g), attribs, leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
             drawSplitHalfFrame(getAftermathHalfContext(g), attribs, rightHalf, (rightHalf.ch - boxHeight) / 2);
@@ -309,7 +309,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
             if (isFuse()) {
                 Graphics2D g2 = getRightHalfContext(g);
                 int totalFuseBoxWidth = rightHalf.cw * 2 + 2 * borderWidth + dividerSize;
-                Paint boxColor = getTextboxPaint(cardView.getColor(), ONLY_LAND_TYPE, totalFuseBoxWidth);
+                Paint boxColor = getTextboxPaint(cardView.getColor(), ONLY_LAND_TYPE, totalFuseBoxWidth, false);
                 Paint borderPaint = getBorderPaint(cardView.getColor(), ONLY_LAND_TYPE, totalFuseBoxWidth);
                 CardRendererUtils.drawRoundedBox(g2,
                         -borderWidth, rightHalf.ch,
