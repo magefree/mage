@@ -1419,18 +1419,18 @@ public class GameState implements Serializable, Copyable<GameState> {
         return manaBurn;
     }
 
-    public boolean isHasDayNight() {
+    boolean isHasDayNight() {
         return hasDayNight;
     }
 
-    public boolean setDaytime(boolean daytime) {
+    boolean setDaytime(boolean daytime) {
         boolean flag = this.hasDayNight || this.isDaytime == daytime;
         this.hasDayNight = true;
         this.isDaytime = daytime;
         return flag;
     }
 
-    public boolean isDaytime() {
+    boolean isDaytime() {
         return isDaytime;
     }
 
