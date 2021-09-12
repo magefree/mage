@@ -30,7 +30,7 @@ public final class CatharCommando extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // {1}, Sacrifice Cathar Commando: Destroy target artifact or enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(ability);
