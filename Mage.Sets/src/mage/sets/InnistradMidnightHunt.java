@@ -193,6 +193,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Lunarch Veteran", 27, Rarity.COMMON, mage.cards.l.LunarchVeteran.class));
         cards.add(new SetCardInfo("Malevolent Hermit", 61, Rarity.RARE, mage.cards.m.MalevolentHermit.class));
         cards.add(new SetCardInfo("Mask of Griselbrand", 111, Rarity.RARE, mage.cards.m.MaskOfGriselbrand.class));
+        cards.add(new SetCardInfo("Memory Deluge", 62, Rarity.RARE, mage.cards.m.MemoryDeluge.class));
         cards.add(new SetCardInfo("Might of the Old Ways", 189, Rarity.COMMON, mage.cards.m.MightOfTheOldWays.class));
         cards.add(new SetCardInfo("Moonsilver Key", 255, Rarity.UNCOMMON, mage.cards.m.MoonsilverKey.class));
         cards.add(new SetCardInfo("Moonveil Regent", 149, Rarity.MYTHIC, mage.cards.m.MoonveilRegent.class));
