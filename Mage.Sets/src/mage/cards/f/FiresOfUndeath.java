@@ -25,7 +25,7 @@ public final class FiresOfUndeath extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         // Flashback {5}{B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{B}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{B}")));
     }
 
     private FiresOfUndeath(final FiresOfUndeath card) {

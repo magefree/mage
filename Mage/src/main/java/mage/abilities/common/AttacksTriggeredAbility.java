@@ -15,8 +15,8 @@ import java.util.UUID;
  */
 public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected SetTargetPointer setTargetPointer;
-    protected String text;
+    protected final String text;
+    protected final SetTargetPointer setTargetPointer;
 
     public AttacksTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -49,21 +49,16 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getCombat().getAttackers().contains(this.getSourceId())) {
-            switch (setTargetPointer) {
-                case PLAYER:
-                    UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
-                    if (defendingPlayerId != null) {
-                        for (Effect effect : getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(defendingPlayerId));
-                        }
-                    }
-                    break;
-
-            }
-            return true;
+        if (!game.getCombat().getAttackers().contains(this.getSourceId())) {
+            return false;
         }
-        return false;
+        if (setTargetPointer == SetTargetPointer.PLAYER) {
+            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
+            if (defendingPlayerId != null) {
+                getEffects().setTargetPointer(new FixedTarget(defendingPlayerId));
+            }
+        }
+        return true;
     }
 
     @Override

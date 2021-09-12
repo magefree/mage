@@ -44,7 +44,7 @@ public final class CantStayAway extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
 
         // Flashback {3}{W}{B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{3}{W}{B}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{W}{B}")));
     }
 
     private CantStayAway(final CantStayAway card) {

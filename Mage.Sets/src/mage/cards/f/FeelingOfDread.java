@@ -26,7 +26,7 @@ public final class FeelingOfDread extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
         // Flashback {1}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{U}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{1}{U}")));
     }
 
     private FeelingOfDread(final FeelingOfDread card) {

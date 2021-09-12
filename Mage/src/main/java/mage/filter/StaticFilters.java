@@ -10,6 +10,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.KickedSpellPredicate;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
@@ -440,6 +441,13 @@ public final class StaticFilters {
         FILTER_CONTROLLED_ANOTHER_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_UNTAPPED_CREATURES = new FilterControlledCreaturePermanent("untapped creature you control");
+
+    static {
+        FILTER_CONTROLLED_UNTAPPED_CREATURES.add(TappedPredicate.UNTAPPED);
+        FILTER_CONTROLLED_UNTAPPED_CREATURES.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_NON_LAND = new FilterControlledPermanent("nonland permanent");
 
     static {
@@ -611,6 +619,12 @@ public final class StaticFilters {
 
     static {
         FILTER_SPELL_NON_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterSpell FILTER_SPELLS_NON_CREATURE = (FilterSpell) new FilterSpell("noncreature spells").add(Predicates.not(CardType.CREATURE.getPredicate()));
+
+    static {
+        FILTER_SPELLS_NON_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterSpell FILTER_SPELL_A_NON_CREATURE = (FilterSpell) new FilterSpell("a noncreature spell").add(Predicates.not(CardType.CREATURE.getPredicate()));

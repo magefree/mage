@@ -26,7 +26,7 @@ public final class FaithfulMending extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardControllerEffect(2).concatBy(", then"));
 
         // Flashback {1}{W}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{1}{W}{U}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{W}{U}")));
     }
 
     private FaithfulMending(final FaithfulMending card) {

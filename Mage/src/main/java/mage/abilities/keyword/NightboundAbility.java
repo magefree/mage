@@ -7,30 +7,16 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 
-import java.io.ObjectStreamException;
-
 /**
  * @author TheElk801
  */
-public class NightboundAbility extends StaticAbility implements MageSingleton {
+public class NightboundAbility extends StaticAbility {
 
-    private static final NightboundAbility instance;
+    public NightboundAbility() {
+        super(Zone.BATTLEFIELD, new NightboundEffect());
 
-    static {
-        instance = new NightboundAbility();
-        // instance.addIcon(NightboundAbilityIcon.instance); (needs to be added)
-    }
-
-    private Object readResolve() throws ObjectStreamException {
-        return instance;
-    }
-
-    public static NightboundAbility getInstance() {
-        return instance;
-    }
-
-    private NightboundAbility() {
-        super(Zone.ALL, new NightboundEffect());
+    private NightboundAbility(final NightboundAbility ability) {
+        super(ability);
     }
 
     @Override
@@ -40,7 +26,7 @@ public class NightboundAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public NightboundAbility copy() {
-        return instance;
+        return new NightboundAbility(this);
     }
 }
 

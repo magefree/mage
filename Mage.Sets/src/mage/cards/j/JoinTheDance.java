@@ -23,7 +23,7 @@ public final class JoinTheDance extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new HumanToken(), 2));
 
         // Flashback {3}{G}{W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{3}{G}{W}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{G}{W}")));
     }
 
     private JoinTheDance(final JoinTheDance card) {

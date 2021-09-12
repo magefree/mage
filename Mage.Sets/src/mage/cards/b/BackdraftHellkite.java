@@ -93,15 +93,7 @@ class BackdraftHellkiteEffect extends ContinuousEffectImpl {
                     if (card == null) {
                         return;
                     }
-                    FlashbackAbility ability = null;
-                    if (card.isInstant(game)) {
-                        ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
-                    } else if (card.isSorcery(game)) {
-                        ability = new FlashbackAbility(card.getManaCost(), TimingRule.SORCERY);
-                    }
-                    if (ability == null) {
-                        return;
-                    }
+                    FlashbackAbility ability = new FlashbackAbility(card, card.getManaCost());
                     ability.setSourceId(cardId);
                     ability.setControllerId(card.getOwnerId());
                     game.getState().addOtherAbility(card, ability);

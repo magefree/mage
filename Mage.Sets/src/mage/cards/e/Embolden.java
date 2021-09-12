@@ -26,7 +26,7 @@ public final class Embolden extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4));
 
         // Flashback {1}{W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{W}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{1}{W}")));
 
     }
 

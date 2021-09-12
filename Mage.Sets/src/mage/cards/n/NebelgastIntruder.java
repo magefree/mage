@@ -17,9 +17,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class NeblegastIntruder extends CardImpl {
+public final class NebelgastIntruder extends CardImpl {
 
-    public NeblegastIntruder(UUID ownerId, CardSetInfo setInfo) {
+    public NebelgastIntruder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
         this.subtype.add(SubType.SPIRIT);
@@ -38,12 +38,12 @@ public final class NeblegastIntruder extends CardImpl {
         this.addAbility(ability);
     }
 
-    private NeblegastIntruder(final NeblegastIntruder card) {
+    private NebelgastIntruder(final NebelgastIntruder card) {
         super(card);
     }
 
     @Override
-    public NeblegastIntruder copy() {
-        return new NeblegastIntruder(this);
+    public NebelgastIntruder copy() {
+        return new NebelgastIntruder(this);
     }
 }

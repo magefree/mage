@@ -586,13 +586,7 @@ public class Commander extends Constructed {
             }
 
             if (card.isPlaneswalker()) {
-                if (card.getName().toLowerCase(Locale.ENGLISH).equals("jace, the mind sculptor")) {
-                    thisMaxPower = Math.max(thisMaxPower, 6);
-                }
-                if (card.getName().toLowerCase(Locale.ENGLISH).equals("ugin, the spirit dragon")) {
-                    thisMaxPower = Math.max(thisMaxPower, 5);
-                }
-                thisMaxPower = Math.max(thisMaxPower, 4);
+                thisMaxPower = Math.max(thisMaxPower, 6);
             }
 
             String cn = card.getName().toLowerCase(Locale.ENGLISH);
@@ -673,7 +667,7 @@ public class Commander extends Constructed {
                     || cn.equals("vorinclex, voice of hunger")
                     || cn.equals("winter orb")
                     || cn.equals("zur the enchanter")) {
-                thisMaxPower = Math.max(thisMaxPower, 5);
+                thisMaxPower = Math.max(thisMaxPower, 12);
             }
 
             // Parts of infinite combos
@@ -734,8 +728,150 @@ public class Commander extends Constructed {
                     || cn.equals("workhorse") || cn.equals("worldgorger dragon")
                     || cn.equals("worthy cause") || cn.equals("yawgmoth's will")
                     || cn.equals("zealous conscripts")) {
-                thisMaxPower = Math.max(thisMaxPower, 12);
+                thisMaxPower = Math.max(thisMaxPower, 15);
                 numberInfinitePieces++;
+            }
+
+            // Saltiest cards (edhrec)
+            if (cn.equals("acid rain")
+                    || cn.equals("agent of treachery")
+                    || cn.equals("apocalypse")
+                    || cn.equals("armageddon")
+                    || cn.equals("atraxa, praetors' voice")
+                    || cn.equals("aura shards")
+                    || cn.equals("avacyn, angel of hope")
+                    || cn.equals("back to basics")
+                    || cn.equals("bend or break")
+                    || cn.equals("blightsteel colossus")
+                    || cn.equals("blood moon")
+                    || cn.equals("boil")
+                    || cn.equals("boiling seas")
+                    || cn.equals("bribery")
+                    || cn.equals("burning sands")
+                    || cn.equals("card view")
+                    || cn.equals("cataclysm")
+                    || cn.equals("catastrophe")
+                    || cn.equals("chulane, teller of tales")
+                    || cn.equals("confusion in the ranks")
+                    || cn.equals("consecrated sphinx")
+                    || cn.equals("contamination")
+                    || cn.equals("craterhoof behemoth")
+                    || cn.equals("cyclonic rift")
+                    || cn.equals("death cloud")
+                    || cn.equals("decree of annihilation")
+                    || cn.equals("decree of silence")
+                    || cn.equals("demonic consultation")
+                    || cn.equals("derevi, empyrial tactician")
+                    || cn.equals("devastation")
+                    || cn.equals("divine intervention")
+                    || cn.equals("dockside extortionist")
+                    || cn.equals("doomsday")
+                    || cn.equals("doubling season")
+                    || cn.equals("drannith magistrate")
+                    || cn.equals("elesh norn, grand cenobite")
+                    || cn.equals("embargo")
+                    || cn.equals("emrakul, the promised end")
+                    || cn.equals("epicenter")
+                    || cn.equals("expropriate")
+                    || cn.equals("fall of the thran")
+                    || cn.equals("fierce guardianship")
+                    || cn.equals("food chain")
+                    || cn.equals("force of negation")
+                    || cn.equals("force of will")
+                    || cn.equals("gaddock teeg")
+                    || cn.equals("gaea's cradle")
+                    || cn.equals("gilded drake")
+                    || cn.equals("glenn, the voice of calm")
+                    || cn.equals("global ruin")
+                    || cn.equals("golos, tireless pilgrim")
+                    || cn.equals("grand arbiter augustin iv")
+                    || cn.equals("grip of chaos")
+                    || cn.equals("hokori, dust drinker")
+                    || cn.equals("humility")
+                    || cn.equals("impending disaster")
+                    || cn.equals("invoke prejudice")
+                    || cn.equals("iona, shield of emeria")
+                    || cn.equals("jin-gitaxias, core augur")
+                    || cn.equals("jokulhaups")
+                    || cn.equals("keldon firebombers")
+                    || cn.equals("kinnan, bonder prodigy")
+                    || cn.equals("kozilek, butcher of truth")
+                    || cn.equals("land equilibrium")
+                    || cn.equals("linvala, keeper of silence")
+                    || cn.equals("magister sphinx")
+                    || cn.equals("mana breach")
+                    || cn.equals("mana crypt")
+                    || cn.equals("mana drain")
+                    || cn.equals("mana vortex")
+                    || cn.equals("mindslaver")
+                    || cn.equals("narset, enlightened master")
+                    || cn.equals("narset, parter of veils")
+                    || cn.equals("negan, the cold-blooded")
+                    || cn.equals("nether void")
+                    || cn.equals("nexus of fate")
+                    || cn.equals("notion thief")
+                    || cn.equals("obliterate")
+                    || cn.equals("oko, thief of crowns")
+                    || cn.equals("oloro, ageless ascetic")
+                    || cn.equals("omniscience")
+                    || cn.equals("opposition agent")
+                    || cn.equals("oppression")
+                    || cn.equals("overwhelming splendor")
+                    || cn.equals("palinchron")
+                    || cn.equals("paradox engine")
+                    || cn.equals("possessed portal")
+                    || cn.equals("price of glory")
+                    || cn.equals("protean hulk")
+                    || cn.equals("ravages of war")
+                    || cn.equals("rhystic study")
+                    || cn.equals("rick, steadfast leader")
+                    || cn.equals("rising waters")
+                    || cn.equals("ruination")
+                    || cn.equals("scrambleverse")
+                    || cn.equals("seedborn muse")
+                    || cn.equals("sen triplets")
+                    || cn.equals("sire of insanity")
+                    || cn.equals("skithiryx, the blight dragon")
+                    || cn.equals("smokestack")
+                    || cn.equals("smothering tithe")
+                    || cn.equals("sorin markov")
+                    || cn.equals("stasis")
+                    || cn.equals("static orb")
+                    || cn.equals("storage matrix")
+                    || cn.equals("sunder")
+                    || cn.equals("survival of the fittest")
+                    || cn.equals("table view")
+                    || cn.equals("tainted aether")
+                    || cn.equals("tectonic break")
+                    || cn.equals("teferi's protection")
+                    || cn.equals("teferi, master of time")
+                    || cn.equals("teferi, time raveler")
+                    || cn.equals("temporal manipulation")
+                    || cn.equals("tergrid, god of fright")
+                    || cn.equals("text view")
+                    || cn.equals("thassa's oracle")
+                    || cn.equals("the tabernacle at pendrell vale")
+                    || cn.equals("thieves' auction")
+                    || cn.equals("thoughts of ruin")
+                    || cn.equals("thrasios, triton hero")
+                    || cn.equals("time stretch")
+                    || cn.equals("time warp")
+                    || cn.equals("tooth and nail")
+                    || cn.equals("torment of hailfire")
+                    || cn.equals("torpor orb")
+                    || cn.equals("triumph of the hordes")
+                    || cn.equals("ugin, the spirit dragon")
+                    || cn.equals("ulamog, the ceaseless hunger")
+                    || cn.equals("ulamog, the infinite gyre")
+                    || cn.equals("urza, lord high artificer")
+                    || cn.equals("void winnower")
+                    || cn.equals("vorinclex, voice of hunger")
+                    || cn.equals("wake of destruction")
+                    || cn.equals("warp world")
+                    || cn.equals("winter orb")
+                    || cn.equals("xanathar, guild kingpin")
+                    || cn.equals("zur the enchanter")) {
+                thisMaxPower = Math.max(thisMaxPower, 15);
             }
             edhPowerLevel += thisMaxPower;
         }
@@ -769,11 +905,17 @@ public class Commander extends Constructed {
 
             // Least fun commanders
             if (cn.equals("animar, soul of element")
+                    || cn.equals("anafenza, the foremost")
+                    || cn.equals("arcum dagsson")
                     || cn.equals("azami, lady of scrolls")
+                    || cn.equals("azusa, lost but seeking")
+                    || cn.equals("brago, king eternal")
                     || cn.equals("braids, cabal minion")
+                    || cn.equals("captain sisay")
                     || cn.equals("child of alara")
                     || cn.equals("derevi, empyrial tactician")
                     || cn.equals("edric, spymaster of trest")
+                    || cn.equals("elesh norn, grand cenobite")
                     || cn.equals("gaddock teeg")
                     || cn.equals("grand arbiter augustin iv")
                     || cn.equals("hokori, dust drinker")
@@ -784,41 +926,67 @@ public class Commander extends Constructed {
                     || cn.equals("leovold, emissary of trest")
                     || cn.equals("linvala, keeper of silence")
                     || cn.equals("llawan, cephalid empress")
+                    || cn.equals("maelstrom wanderer")
+                    || cn.equals("malfegor")
                     || cn.equals("memnarch")
                     || cn.equals("meren of clan nel toth")
                     || cn.equals("michiko konda, truth seeker")
+                    || cn.equals("mikaeus the unhallowed")
                     || cn.equals("narset, enlightened master")
+                    || cn.equals("nath of the gilt-leaf")
                     || cn.equals("nekusar, the mindrazer")
                     || cn.equals("norin the wary")
                     || cn.equals("numot, the devastator")
+                    || cn.equals("prossh, skyraider of kher")
+                    || cn.equals("purphoros, god of the forge")
+                    || cn.equals("sen triplets")
                     || cn.equals("sheoldred, whispering one")
                     || cn.equals("teferi, mage of zhalfir")
+                    || cn.equals("urabrask the hidden")
+                    || cn.equals("vorinclex, voice of hunger")
                     || cn.equals("zur the enchanter")) {
                 thisMaxPower = Math.max(thisMaxPower, 25);
             }
 
-            // Next least fun commanders
-            if (cn.equals("anafenza, the foremost")
-                    || cn.equals("arcum dagsson")
-                    || cn.equals("azusa, lost but seeking")
-                    || cn.equals("brago, king eternal")
-                    || cn.equals("captain sisay")
+            // Saltiest commanders
+            if (cn.equals("atraxa, praetors' voice")
+                    || cn.equals("avacyn, angel of hope")
+                    || cn.equals("chulane, teller of tales")
+                    || cn.equals("derevi, empyrial tactician")
                     || cn.equals("elesh norn, grand cenobite")
-                    || cn.equals("malfegor")
-                    || cn.equals("maelstrom wanderer")
-                    || cn.equals("mikaeus the unhallowed")
-                    || cn.equals("nath of the gilt-leaf")
-                    || cn.equals("prossh, skyraider of kher")
-                    || cn.equals("purphoros, god of the forge")
+                    || cn.equals("emrakul, the promised end")
+                    || cn.equals("gaddock teeg")
+                    || cn.equals("glenn, the voice of calm")
+                    || cn.equals("golos, tireless pilgrim")
+                    || cn.equals("grand arbiter augustin iv")
+                    || cn.equals("hokori, dust drinker")
+                    || cn.equals("iona, shield of emeria")
+                    || cn.equals("jin-gitaxias, core augur")
+                    || cn.equals("kinnan, bonder prodigy")
+                    || cn.equals("kozilek, butcher of truth")
+                    || cn.equals("linvala, keeper of silence")
+                    || cn.equals("narset, enlightened master")
+                    || cn.equals("negan, the cold-blooded")
+                    || cn.equals("oko, thief of crowns")
+                    || cn.equals("oloro, ageless ascetic")
+                    || cn.equals("rick, steadfast leader")
                     || cn.equals("sen triplets")
-                    || cn.equals("urabrask the hidden")
-                    || cn.equals("vorinclex, voice of hunger")) {
-                thisMaxPower = Math.max(thisMaxPower, 15);
+                    || cn.equals("skithiryx, the blight dragon")
+                    || cn.equals("teferi, master of time")
+                    || cn.equals("teferi, time raveler")
+                    || cn.equals("thrasios, triton hero")
+                    || cn.equals("ulamog, the ceaseless hunger")
+                    || cn.equals("ulamog, the infinite gyre")
+                    || cn.equals("urza, lord high artificer")
+                    || cn.equals("vorinclex, voice of hunger")
+                    || cn.equals("xanathar, guild kingpin")
+                    || cn.equals("zur the enchanter")) {
+                thisMaxPower = Math.max(thisMaxPower, 20);
             }
             edhPowerLevel += thisMaxPower;
         }
 
-        edhPowerLevel += numberInfinitePieces * 12;
+        edhPowerLevel += numberInfinitePieces * 18;
         edhPowerLevel = Math.round(edhPowerLevel / 10);
         if (edhPowerLevel >= 100) {
             edhPowerLevel = 99;

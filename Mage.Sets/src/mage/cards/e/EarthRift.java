@@ -25,7 +25,7 @@ public final class EarthRift extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());
         // Flashback {5}{R}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{R}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{R}{R}")));
     }
 
     private EarthRift(final EarthRift card) {

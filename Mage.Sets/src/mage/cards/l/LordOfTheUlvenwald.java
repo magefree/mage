@@ -56,7 +56,7 @@ public final class LordOfTheUlvenwald extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new LordOfTheUlvenwaldEffect()));
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private LordOfTheUlvenwald(final LordOfTheUlvenwald card) {

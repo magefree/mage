@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class GravebreakerLamia extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("spells you cast from your graveyard");
 
     static {
         filter.add(new CastFromZonePredicate(Zone.GRAVEYARD));
@@ -43,8 +43,7 @@ public final class GravebreakerLamia extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInGraveyardEffect(), false));
 
         // Spells you cast from your graveyard cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)
-                .setText("Spells you cast from your graveyard cost {1} less to cast.")));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     private GravebreakerLamia(final GravebreakerLamia card) {

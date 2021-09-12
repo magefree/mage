@@ -40,7 +40,7 @@ public final class SevinnesReclamation extends CardImpl {
         this.getSpellAbility().addEffect(new SevinnesReclamationEffect());
 
         // Flashback {4}{W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{W}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{W}")));
     }
 
     private SevinnesReclamation(final SevinnesReclamation card) {

@@ -7,30 +7,16 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 
-import java.io.ObjectStreamException;
-
 /**
  * @author TheElk801
  */
-public class DayboundAbility extends StaticAbility implements MageSingleton {
+public class DayboundAbility extends StaticAbility {
 
-    private static final DayboundAbility instance;
+    public DayboundAbility() {
+        super(Zone.BATTLEFIELD, new DayboundEffect());
 
-    static {
-        instance = new DayboundAbility();
-        // instance.addIcon(DayboundAbilityIcon.instance); (needs to be added)
-    }
-
-    private Object readResolve() throws ObjectStreamException {
-        return instance;
-    }
-
-    public static DayboundAbility getInstance() {
-        return instance;
-    }
-
-    private DayboundAbility() {
-        super(Zone.ALL, new DayboundEffect());
+    private DayboundAbility(final DayboundAbility ability) {
+        super(ability);
     }
 
     @Override
@@ -40,7 +26,7 @@ public class DayboundAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public DayboundAbility copy() {
-        return instance;
+        return new DayboundAbility(this);
     }
 }
 

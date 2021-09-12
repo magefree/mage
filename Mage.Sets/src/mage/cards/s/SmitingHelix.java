@@ -26,7 +26,7 @@ public final class SmitingHelix extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Flashback {R}{W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{R}{W}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{R}{W}")));
     }
 
     private SmitingHelix(final SmitingHelix card) {

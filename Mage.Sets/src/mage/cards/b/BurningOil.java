@@ -25,7 +25,7 @@ public final class BurningOil extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         // Flashback {3}{W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{W}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{W}")));
     }
 
     private BurningOil(final BurningOil card) {
