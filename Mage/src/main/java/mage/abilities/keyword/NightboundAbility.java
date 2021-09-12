@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
 
@@ -27,6 +28,12 @@ public class NightboundAbility extends StaticAbility {
     @Override
     public NightboundAbility copy() {
         return new NightboundAbility(this);
+    }
+
+    public static boolean checkCard(Card card, Game game) {
+        return game.checkDayNight(false)
+                && card.getSecondCardFace() != null
+                && card.getSecondCardFace().getAbilities().containsClass(NightboundAbility.class);
     }
 }
 
