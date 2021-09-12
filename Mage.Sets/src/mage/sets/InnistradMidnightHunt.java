@@ -41,6 +41,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Arlinn, the Moon's Fury", 211, Rarity.MYTHIC, mage.cards.a.ArlinnTheMoonsFury.class));
         cards.add(new SetCardInfo("Arlinn, the Pack's Hope", 211, Rarity.MYTHIC, mage.cards.a.ArlinnThePacksHope.class));
         cards.add(new SetCardInfo("Arrogant Outlaw", 84, Rarity.COMMON, mage.cards.a.ArrogantOutlaw.class));
+        cards.add(new SetCardInfo("Ashmouth Dragon", 159, Rarity.RARE, mage.cards.a.AshmouthDragon.class));
         cards.add(new SetCardInfo("Augur of Autumn", 168, Rarity.RARE, mage.cards.a.AugurOfAutumn.class));
         cards.add(new SetCardInfo("Awoken Demon", 100, Rarity.COMMON, mage.cards.a.AwokenDemon.class));
         cards.add(new SetCardInfo("Baithook Angler", 42, Rarity.COMMON, mage.cards.b.BaithookAngler.class));
@@ -251,6 +252,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Skaab Wrangler", 75, Rarity.UNCOMMON, mage.cards.s.SkaabWrangler.class));
         cards.add(new SetCardInfo("Slaughter Specialist", 122, Rarity.RARE, mage.cards.s.SlaughterSpecialist.class));
         cards.add(new SetCardInfo("Sludge Monster", 76, Rarity.RARE, mage.cards.s.SludgeMonster.class));
+        cards.add(new SetCardInfo("Smoldering Egg", 159, Rarity.RARE, mage.cards.s.SmolderingEgg.class));
         cards.add(new SetCardInfo("Snarling Wolf", 199, Rarity.COMMON, mage.cards.s.SnarlingWolf.class));
         cards.add(new SetCardInfo("Soul-Guide Gryff", 35, Rarity.COMMON, mage.cards.s.SoulGuideGryff.class));
         cards.add(new SetCardInfo("Spectral Adversary", 77, Rarity.MYTHIC, mage.cards.s.SpectralAdversary.class));
