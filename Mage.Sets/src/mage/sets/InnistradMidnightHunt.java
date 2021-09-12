@@ -246,6 +246,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Seafaring Werewolf", 80, Rarity.RARE, mage.cards.s.SeafaringWerewolf.class));
         cards.add(new SetCardInfo("Seasoned Cathar", 2, Rarity.UNCOMMON, mage.cards.s.SeasonedCathar.class));
         cards.add(new SetCardInfo("Secrets of the Key", 73, Rarity.COMMON, mage.cards.s.SecretsOfTheKey.class));
+        cards.add(new SetCardInfo("Seize the Storm", 158, Rarity.UNCOMMON, mage.cards.s.SeizeTheStorm.class));
         cards.add(new SetCardInfo("Shadowbeast Sighting", 198, Rarity.COMMON, mage.cards.s.ShadowbeastSighting.class));
         cards.add(new SetCardInfo("Shady Traveler", 120, Rarity.COMMON, mage.cards.s.ShadyTraveler.class));
         cards.add(new SetCardInfo("Shipwreck Marsh", 267, Rarity.RARE, mage.cards.s.ShipwreckMarsh.class));
