@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
@@ -14,6 +13,7 @@ public class DayboundAbility extends StaticAbility {
 
     public DayboundAbility() {
         super(Zone.BATTLEFIELD, new DayboundEffect());
+    }
 
     private DayboundAbility(final DayboundAbility ability) {
         super(ability);

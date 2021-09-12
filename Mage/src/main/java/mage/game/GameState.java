@@ -1430,6 +1430,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         return flag;
     }
 
+    public boolean isDaytime() {
+        return isDaytime;
+    }
+
     @Override
     public String toString() {
         return CardUtil.getTurnInfo(this);
