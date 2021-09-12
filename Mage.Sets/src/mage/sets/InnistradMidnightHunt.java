@@ -81,6 +81,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Clear Shot", 176, Rarity.UNCOMMON, mage.cards.c.ClearShot.class));
         cards.add(new SetCardInfo("Component Collector", 43, Rarity.COMMON, mage.cards.c.ComponentCollector.class));
         cards.add(new SetCardInfo("Consider", 44, Rarity.COMMON, mage.cards.c.Consider.class));
+        cards.add(new SetCardInfo("Consuming Blob", 177, Rarity.MYTHIC, mage.cards.c.ConsumingBlob.class));
         cards.add(new SetCardInfo("Contortionist Troupe", 178, Rarity.UNCOMMON, mage.cards.c.ContortionistTroupe.class));
         cards.add(new SetCardInfo("Corpse Cobble", 214, Rarity.UNCOMMON, mage.cards.c.CorpseCobble.class));
         cards.add(new SetCardInfo("Covert Cutpurse", 92, Rarity.UNCOMMON, mage.cards.c.CovertCutpurse.class));
