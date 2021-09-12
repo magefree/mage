@@ -1,23 +1,24 @@
 package mage.abilities.hint.common;
 
 import mage.abilities.Ability;
-import mage.abilities.condition.common.NightCondition;
-import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.game.Game;
 
 /**
  * @author TheElk801
  */
-public enum NightHint implements Hint {
+public enum DayNightHint implements Hint {
     instance;
-    private static final Hint hint = new ConditionHint(
-            NightCondition.instance, "It's currently night"
-    );
 
     @Override
     public String getText(Game game, Ability ability) {
-        return hint.getText(game, ability);
+        if (game.checkDayNight(true)) {
+            return "It's currently day";
+        } else if (game.checkDayNight(false)) {
+            return "It's currently night";
+        } else {
+            return "It's neither day nor night";
+        }
     }
 
     @Override
