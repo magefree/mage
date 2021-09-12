@@ -264,6 +264,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Tainted Adversary", 124, Rarity.MYTHIC, mage.cards.t.TaintedAdversary.class));
         cards.add(new SetCardInfo("Tavern Ruffian", 163, Rarity.COMMON, mage.cards.t.TavernRuffian.class));
         cards.add(new SetCardInfo("Tavern Smasher", 163, Rarity.COMMON, mage.cards.t.TavernSmasher.class));
+        cards.add(new SetCardInfo("The Meathook Massacre", 112, Rarity.MYTHIC, mage.cards.t.TheMeathookMassacre.class));
         cards.add(new SetCardInfo("Thermo-Alchemist", 164, Rarity.UNCOMMON, mage.cards.t.ThermoAlchemist.class));
         cards.add(new SetCardInfo("Thraben Exorcism", 39, Rarity.COMMON, mage.cards.t.ThrabenExorcism.class));
         cards.add(new SetCardInfo("Timberland Guide", 202, Rarity.COMMON, mage.cards.t.TimberlandGuide.class));
