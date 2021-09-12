@@ -8,6 +8,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,6 +42,7 @@ public final class FangbladeBrigand extends CardImpl {
         this.addAbility(ability);
 
         // Daybound
+        this.addAbility(new TransformAbility());
         this.addAbility(DayboundAbility.getInstance());
     }
 

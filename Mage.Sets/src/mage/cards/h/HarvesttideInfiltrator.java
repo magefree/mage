@@ -3,6 +3,7 @@ package mage.cards.h;
 import mage.MageInt;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,6 +30,7 @@ public final class HarvesttideInfiltrator extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Daybound
+        this.addAbility(new TransformAbility());
         this.addAbility(DayboundAbility.getInstance());
     }
 

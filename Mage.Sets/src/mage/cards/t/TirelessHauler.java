@@ -2,6 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.keyword.DayboundAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,6 +30,7 @@ public final class TirelessHauler extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Daybound
+        this.addAbility(new TransformAbility());
         this.addAbility(DayboundAbility.getInstance());
     }
 

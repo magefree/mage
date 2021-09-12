@@ -24,6 +24,7 @@ public final class CovetousGeist extends CardImpl {
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        this.color.setBlack(true);
         this.transformable = true;
         this.nightCard = true;
 

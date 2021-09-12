@@ -3,6 +3,7 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DisturbAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,6 +31,7 @@ public final class MourningPatrol extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Disturb {3}{W}
+        this.addAbility(new TransformAbility());
         this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{3}{W}")));
     }
 

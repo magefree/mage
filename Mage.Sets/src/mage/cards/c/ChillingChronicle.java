@@ -21,6 +21,7 @@ public final class ChillingChronicle extends CardImpl {
     public ChillingChronicle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "");
 
+        this.color.setBlue(true);
         this.transformable = true;
         this.nightCard = true;
 
