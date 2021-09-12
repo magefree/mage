@@ -279,6 +279,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Suspicious Stowaway", 80, Rarity.RARE, mage.cards.s.SuspiciousStowaway.class));
         cards.add(new SetCardInfo("Swamp", 272, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Tainted Adversary", 124, Rarity.MYTHIC, mage.cards.t.TaintedAdversary.class));
+        cards.add(new SetCardInfo("Tapping at the Window", 201, Rarity.COMMON, mage.cards.t.TappingAtTheWindow.class));
         cards.add(new SetCardInfo("Tavern Ruffian", 163, Rarity.COMMON, mage.cards.t.TavernRuffian.class));
         cards.add(new SetCardInfo("Tavern Smasher", 163, Rarity.COMMON, mage.cards.t.TavernSmasher.class));
         cards.add(new SetCardInfo("The Meathook Massacre", 112, Rarity.MYTHIC, mage.cards.t.TheMeathookMassacre.class));
