@@ -400,10 +400,24 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void ventureIntoDungeon(UUID playerId);
 
+    /**
+     * Tells whether the current game has day or night, defaults to false
+     */
     boolean hasDayNight();
 
+    /**
+     * Sets game to day or night, sets hasDayNight to true
+     *
+     * @param daytime day is true, night is false
+     */
     void setDaytime(boolean daytime);
 
+    /**
+     * Returns true if hasDayNight is true and parameter matches current day/night value
+     * Returns false if hasDayNight is false
+     *
+     * @param daytime day is true, night is false
+     */
     boolean checkDayNight(boolean daytime);
 
     /**
