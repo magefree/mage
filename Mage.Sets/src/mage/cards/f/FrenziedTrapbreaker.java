@@ -52,7 +52,7 @@ public final class FrenziedTrapbreaker extends CardImpl {
         this.addAbility(ability);
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private FrenziedTrapbreaker(final FrenziedTrapbreaker card) {

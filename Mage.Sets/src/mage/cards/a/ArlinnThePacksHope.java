@@ -40,7 +40,7 @@ public final class ArlinnThePacksHope extends CardImpl {
 
         // Daybound
         this.addAbility(new TransformAbility());
-        this.addAbility(DayboundAbility.getInstance());
+        this.addAbility(new DayboundAbility());
 
         // +1: Until your next turn, you may cast creature spells as though they had flash, and each creature you control enters the battlefield with an additional +1/+1 counter on it.
         Ability ability = new LoyaltyAbility(new CastAsThoughItHadFlashAllEffect(

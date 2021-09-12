@@ -34,7 +34,7 @@ public final class MoonrageBrute extends CardImpl {
         this.addAbility(new WardAbility(new PayLifeCost(3)));
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private MoonrageBrute(final MoonrageBrute card) {

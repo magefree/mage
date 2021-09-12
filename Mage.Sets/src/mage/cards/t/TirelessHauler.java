@@ -31,7 +31,7 @@ public final class TirelessHauler extends CardImpl {
 
         // Daybound
         this.addAbility(new TransformAbility());
-        this.addAbility(DayboundAbility.getInstance());
+        this.addAbility(new DayboundAbility());
     }
 
     private TirelessHauler(final TirelessHauler card) {

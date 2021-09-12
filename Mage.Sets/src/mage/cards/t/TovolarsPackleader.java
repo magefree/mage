@@ -61,7 +61,7 @@ public final class TovolarsPackleader extends CardImpl {
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private TovolarsPackleader(final TovolarsPackleader card) {

@@ -35,7 +35,7 @@ public final class SpellruneHowler extends CardImpl {
         ));
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private SpellruneHowler(final SpellruneHowler card) {

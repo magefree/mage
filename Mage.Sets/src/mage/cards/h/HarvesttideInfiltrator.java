@@ -31,7 +31,7 @@ public final class HarvesttideInfiltrator extends CardImpl {
 
         // Daybound
         this.addAbility(new TransformAbility());
-        this.addAbility(DayboundAbility.getInstance());
+        this.addAbility(new DayboundAbility());
     }
 
     private HarvesttideInfiltrator(final HarvesttideInfiltrator card) {

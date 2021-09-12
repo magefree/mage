@@ -38,7 +38,7 @@ public final class KessigNaturalist extends CardImpl {
 
         // Daybound
         this.addAbility(new TransformAbility());
-        this.addAbility(DayboundAbility.getInstance());
+        this.addAbility(new DayboundAbility());
     }
 
     private KessigNaturalist(final KessigNaturalist card) {

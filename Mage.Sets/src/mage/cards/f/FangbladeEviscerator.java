@@ -47,7 +47,7 @@ public final class FangbladeEviscerator extends CardImpl {
         ), new ManaCostsImpl<>("{4}{R}")));
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private FangbladeEviscerator(final FangbladeEviscerator card) {

@@ -30,7 +30,7 @@ public final class WingShredder extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private WingShredder(final WingShredder card) {

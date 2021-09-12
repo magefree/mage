@@ -49,7 +49,7 @@ public final class StormChargedSlasher extends CardImpl {
         this.addAbility(ability);
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private StormChargedSlasher(final StormChargedSlasher card) {

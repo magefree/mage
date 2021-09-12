@@ -35,7 +35,7 @@ public final class ArlinnTheMoonsFury extends CardImpl {
         this.nightCard = true;
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
 
         // +2: Add {R}{G}.
         this.addAbility(new LoyaltyAbility(new BasicManaEffect(new Mana(

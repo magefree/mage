@@ -38,7 +38,7 @@ public final class SpellrunePainter extends CardImpl {
 
         // Daybound
         this.addAbility(new TransformAbility());
-        this.addAbility(DayboundAbility.getInstance());
+        this.addAbility(new DayboundAbility());
     }
 
     private SpellrunePainter(final SpellrunePainter card) {
