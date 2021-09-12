@@ -230,6 +230,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Raze the Effigy", 156, Rarity.COMMON, mage.cards.r.RazeTheEffigy.class));
         cards.add(new SetCardInfo("Reckless Stormseeker", 157, Rarity.RARE, mage.cards.r.RecklessStormseeker.class));
         cards.add(new SetCardInfo("Return to Nature", 195, Rarity.COMMON, mage.cards.r.ReturnToNature.class));
+        cards.add(new SetCardInfo("Revenge of the Drowned", 72, Rarity.COMMON, mage.cards.r.RevengeOfTheDrowned.class));
         cards.add(new SetCardInfo("Rite of Harmony", 236, Rarity.RARE, mage.cards.r.RiteOfHarmony.class));
         cards.add(new SetCardInfo("Ritual Guardian", 30, Rarity.COMMON, mage.cards.r.RitualGuardian.class));
         cards.add(new SetCardInfo("Ritual of Hope", 31, Rarity.UNCOMMON, mage.cards.r.RitualOfHope.class));
