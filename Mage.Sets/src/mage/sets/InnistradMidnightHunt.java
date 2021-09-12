@@ -299,6 +299,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Turn the Earth", 205, Rarity.UNCOMMON, mage.cards.t.TurnTheEarth.class));
         cards.add(new SetCardInfo("Unblinking Observer", 82, Rarity.COMMON, mage.cards.u.UnblinkingObserver.class));
         cards.add(new SetCardInfo("Unnatural Growth", 206, Rarity.RARE, mage.cards.u.UnnaturalGrowth.class));
+        cards.add(new SetCardInfo("Unnatural Moonrise", 247, Rarity.UNCOMMON, mage.cards.u.UnnaturalMoonrise.class));
         cards.add(new SetCardInfo("Unruly Mob", 40, Rarity.COMMON, mage.cards.u.UnrulyMob.class));
         cards.add(new SetCardInfo("Untamed Pup", 187, Rarity.UNCOMMON, mage.cards.u.UntamedPup.class));
         cards.add(new SetCardInfo("Vadrik, Astral Archmage", 248, Rarity.RARE, mage.cards.v.VadrikAstralArchmage.class));
