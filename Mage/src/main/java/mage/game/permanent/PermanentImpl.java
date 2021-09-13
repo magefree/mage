@@ -562,15 +562,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean transform(Game game) {
-        if (transformable) {
-            if (!replaceEvent(EventType.TRANSFORM, game)) {
-                setTransformed(!transformed);
-                game.applyEffects();
-                game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.TRANSFORMED, getId(), getControllerId()));
-                return true;
-            }
+        if (!transformable || replaceEvent(EventType.TRANSFORM, game)) {
+            return false;
         }
-        return false;
+        setTransformed(!transformed);
+        game.applyEffects();
+        game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, getId(), getControllerId()));
+        return true;
     }
 
     @Override
@@ -1401,17 +1399,28 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean canTransform(Game game) {
-        if (transformable) {
-            for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
-                RestrictionEffect effect = entry.getKey();
-                for (Ability ability : entry.getValue()) {
-                    if (!effect.canTransform(this, ability, game, true)) {
-                        return false;
-                    }
+        return canTransform(game, false);
+    }
+
+    @Override
+    public boolean canTransform(Game game, boolean ignoreDayNight) {
+        if (!transformable) {
+            return false;
+        }
+        if (!ignoreDayNight &&
+                (getAbilities().containsClass(DayboundAbility.class)
+                        || getAbilities().containsClass(NightboundAbility.class))) {
+            return false;
+        }
+        for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+            RestrictionEffect effect = entry.getKey();
+            for (Ability ability : entry.getValue()) {
+                if (!effect.canTransform(this, ability, game, true)) {
+                    return false;
                 }
             }
         }
-        return transformable;
+        return true;
     }
 
     @Override

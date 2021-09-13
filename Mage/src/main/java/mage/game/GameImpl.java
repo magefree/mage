@@ -565,7 +565,7 @@ public abstract class GameImpl implements Game {
         informPlayers("It has become " + (daytime ? "day" : "night"));
         fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_DAY_NIGHT, null, null, null));
         for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
-            if (!permanent.canTransform(this)) {
+            if (!permanent.canTransform(this, true)) {
                 continue;
             }
             if ((daytime && permanent.getAbilities(this).containsClass(NightboundAbility.class))

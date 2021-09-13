@@ -297,6 +297,8 @@ public interface Permanent extends Card, Controllable {
      */
     boolean canTransform(Game game);
 
+    boolean canTransform(Game game, boolean ignoreDayNight);
+
     boolean removeFromCombat(Game game);
 
     boolean removeFromCombat(Game game, boolean withInfo);

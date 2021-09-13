@@ -13,6 +13,9 @@ public class DayNightTest extends CardTestPlayerBase {
 
     private static final String ruffian = "Tavern Ruffian";
     private static final String smasher = "Tavern Smasher";
+    private static final String moonmist = "Moonmist";
+    private static final String outcasts = "Grizzled Outcasts";
+    private static final String wantons = "Krallenhorde Wantons";
 
     private void assertDayNight(boolean daytime) {
         Assert.assertTrue("It should not be neither day nor night", currentGame.hasDayNight());
@@ -98,4 +101,24 @@ public class DayNightTest extends CardTestPlayerBase {
 
         assertRuffianSmasher(true);
     }
+
+    @Test
+    public void testMoonmistFails() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, ruffian);
+        addCard(Zone.BATTLEFIELD, playerA, outcasts);
+        addCard(Zone.HAND, playerA, moonmist);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, moonmist);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertRuffianSmasher(true);
+        assertPermanentCount(playerA, outcasts, 0);
+        assertPowerToughness(playerA, wantons, 7, 7);
+    }
+
 }
