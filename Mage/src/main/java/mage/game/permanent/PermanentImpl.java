@@ -562,7 +562,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean transform(Game game) {
+        return this.transform(game, false);
+    }
+
+    @Override
+    public boolean transform(Game game, boolean ignoreDayNight) {
         if (!isTransformable() || replaceEvent(EventType.TRANSFORM, game)) {
+            return false;
+        }
+        if (!ignoreDayNight &&
+                (getAbilities().containsClass(DayboundAbility.class)
+                        || getAbilities().containsClass(NightboundAbility.class))) {
             return false;
         }
         if (transformed) {
@@ -1395,32 +1405,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             RestrictionEffect effect = entry.getKey();
             for (Ability ability : entry.getValue()) {
                 if (!effect.canUseActivatedAbilities(this, ability, game, true)) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean canTransform(Game game) {
-        return canTransform(game, false);
-    }
-
-    @Override
-    public boolean canTransform(Game game, boolean ignoreDayNight) {
-        if (!isTransformable()) {
-            return false;
-        }
-        if (!ignoreDayNight &&
-                (getAbilities().containsClass(DayboundAbility.class)
-                        || getAbilities().containsClass(NightboundAbility.class))) {
-            return false;
-        }
-        for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
-            RestrictionEffect effect = entry.getKey();
-            for (Ability ability : entry.getValue()) {
-                if (!effect.canTransform(this, ability, game, true)) {
                     return false;
                 }
             }

@@ -49,6 +49,8 @@ public interface Permanent extends Card, Controllable {
 
     boolean transform(Game game);
 
+    boolean transform(Game game, boolean ignoreDayNight);
+
     boolean isTransformed();
 
     void setTransformed(boolean value);
@@ -288,16 +290,6 @@ public interface Permanent extends Card, Controllable {
      * @return true - permanent can use activated abilities
      */
     boolean canUseActivatedAbilities(Game game);
-
-    /**
-     * Checks by restriction effects if the permanent can transform
-     *
-     * @param game
-     * @return true - permanent can transform
-     */
-    boolean canTransform(Game game);
-
-    boolean canTransform(Game game, boolean ignoreDayNight);
 
     boolean removeFromCombat(Game game);
 
