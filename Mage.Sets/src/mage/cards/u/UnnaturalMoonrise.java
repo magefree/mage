@@ -7,6 +7,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.hint.common.DayNightHint;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -40,6 +41,7 @@ public final class UnnaturalMoonrise extends CardImpl {
                 ).setTriggerPhrase("Whenever this creature deals combat damage to a player, "), Duration.EndOfTurn
         ).setText("and has \"Whenever this creature deals combat damage to a player, draw a card.\""));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addHint(DayNightHint.instance);
 
         // Flashback {2}{R}{G}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{R}{G}")));

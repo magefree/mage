@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.hint.common.DayNightHint;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
@@ -14,6 +15,7 @@ public class NightboundAbility extends StaticAbility {
 
     public NightboundAbility() {
         super(Zone.BATTLEFIELD, new NightboundEffect());
+        this.addHint(DayNightHint.instance);
     }
 
     private NightboundAbility(final NightboundAbility ability) {

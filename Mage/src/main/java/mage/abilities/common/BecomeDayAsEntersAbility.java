@@ -2,6 +2,7 @@ package mage.abilities.common;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.common.DayNightHint;
 import mage.constants.Outcome;
 import mage.game.Game;
 
@@ -12,6 +13,7 @@ public class BecomeDayAsEntersAbility extends EntersBattlefieldAbility {
 
     public BecomeDayAsEntersAbility() {
         super(new BecomeDayEffect());
+        this.addHint(DayNightHint.instance);
     }
 
     private BecomeDayAsEntersAbility(final BecomeDayAsEntersAbility ability) {
