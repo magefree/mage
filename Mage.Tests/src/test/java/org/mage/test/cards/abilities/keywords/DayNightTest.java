@@ -67,7 +67,7 @@ public class DayNightTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testNightTransform() {
+    public void testDayToNightTransform() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.HAND, playerA, ruffian);
 
@@ -83,7 +83,7 @@ public class DayNightTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testNightToDay() {
+    public void testNightToDayTransform() {
         currentGame.setDaytime(false);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.HAND, playerA, ruffian);

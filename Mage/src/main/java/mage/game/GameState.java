@@ -1424,7 +1424,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     boolean setDaytime(boolean daytime) {
-        boolean flag = this.hasDayNight || this.isDaytime == daytime;
+        boolean flag = this.hasDayNight && this.isDaytime != daytime;
         this.hasDayNight = true;
         this.isDaytime = daytime;
         return flag;
