@@ -44,7 +44,7 @@ public final class DeathbonnetSprout extends CardImpl {
         this.addAbility(new TransformAbility());
         Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(1));
         ability.addEffect(new ConditionalOneShotEffect(
-                new TransformSourceEffect(true), condition,
+                new TransformSourceEffect(), condition,
                 "Then if there are three or more creature cards in your graveyard, transform {this}"
         ));
         this.addAbility(ability.addHint(hint));

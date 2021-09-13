@@ -81,7 +81,7 @@ class HeirloomMirrorEffect extends OneShotEffect {
             return true;
         }
         permanent.removeCounters(CounterType.RITUAL.createInstance(counters), source, game);
-        new TransformSourceEffect(true).apply(game, source);
+        new TransformSourceEffect().apply(game, source);
         return true;
     }
 }

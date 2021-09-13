@@ -27,7 +27,7 @@ public final class ChillingChronicle extends CardImpl {
         // {1}, {T}: Tap target nonland permanent. Transform Chilling Chronicle.
         Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new TransformSourceEffect(false));
+        ability.addEffect(new TransformSourceEffect());
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
     }

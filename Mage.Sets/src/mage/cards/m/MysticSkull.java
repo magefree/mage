@@ -30,7 +30,7 @@ public final class MysticSkull extends CardImpl {
 
         // {5}, {T}: Transform Mystic Skull.
         this.addAbility(new TransformAbility());
-        ability = new SimpleActivatedAbility(new TransformSourceEffect(true), new GenericManaCost(5));
+        ability = new SimpleActivatedAbility(new TransformSourceEffect(), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

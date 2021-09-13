@@ -131,7 +131,7 @@ class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
 class VancesBlastingCannonsFlipTrigger extends TriggeredAbilityImpl {
 
     public VancesBlastingCannonsFlipTrigger() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true), true);
+        super(Zone.BATTLEFIELD, new TransformSourceEffect(), true);
     }
 
     public VancesBlastingCannonsFlipTrigger(final VancesBlastingCannonsFlipTrigger ability) {

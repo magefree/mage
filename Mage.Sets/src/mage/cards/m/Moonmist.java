@@ -67,10 +67,7 @@ class MoonmistEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            if (permanent.canTransform(game)) {
-                permanent.transform(game);
-                game.informPlayers(permanent.getName() + " transforms into " + permanent.getSecondCardFace().getName());
-            }
+            permanent.transform(game);
         }
         return true;
     }

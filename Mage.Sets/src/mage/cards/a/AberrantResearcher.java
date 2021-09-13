@@ -70,7 +70,7 @@ class AberrantResearcherEffect extends OneShotEffect {
                 .noneMatch(card -> card.isInstantOrSorcery(game))) {
             return false;
         }
-        new TransformSourceEffect(true).apply(game, source);
+        new TransformSourceEffect().apply(game, source);
         return true;
     }
 

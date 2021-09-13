@@ -47,7 +47,7 @@ public final class DaringSleuth extends CardImpl {
 class DaringSleuthTriggeredAbility extends TriggeredAbilityImpl {
 
     public DaringSleuthTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true));
+        super(Zone.BATTLEFIELD, new TransformSourceEffect());
     }
 
     public DaringSleuthTriggeredAbility(final DaringSleuthTriggeredAbility ability) {

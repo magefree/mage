@@ -49,7 +49,7 @@ public final class LoneRider extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new TransformSourceEffect(true), TargetController.NEXT, false
+                        new TransformSourceEffect(), TargetController.NEXT, false
                 ), condition, ruleText
         ).addHint(hint), new PlayerGainedLifeWatcher());
     }

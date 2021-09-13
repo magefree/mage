@@ -46,7 +46,7 @@ public final class DowsingDagger extends CardImpl {
 
         // Whenever equipped creature deals combat damage to a player, you may transform Dowsing Dagger.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new TransformSourceEffect(true), "equipped", true));
+        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new TransformSourceEffect(), "equipped", true));
 
         // Equip 2
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));

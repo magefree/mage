@@ -116,7 +116,7 @@ class TovolarDireOverlordEffect extends OneShotEffect {
         player.choose(outcome, target, source.getControllerId(), game);
         for (UUID permanentId : target.getTargets()) {
             Permanent permanent = game.getPermanent(permanentId);
-            if (permanent != null && permanent.canTransform(game)) {
+            if (permanent != null) {
                 permanent.transform(game);
             }
         }

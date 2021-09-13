@@ -32,7 +32,7 @@ public final class ThrabenSentry extends CardImpl {
 
         // Whenever another creature you control dies, you may transform Thraben Sentry.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DiesCreatureTriggeredAbility(new TransformSourceEffect(true), true, new FilterControlledCreaturePermanent()));
+        this.addAbility(new DiesCreatureTriggeredAbility(new TransformSourceEffect(), true, new FilterControlledCreaturePermanent()));
     }
 
     private ThrabenSentry(final ThrabenSentry card) {

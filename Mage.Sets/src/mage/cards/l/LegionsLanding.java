@@ -35,7 +35,7 @@ public final class LegionsLanding extends CardImpl {
 
         // When you attack with three or more creatures, transform Legion's Landing.
         this.addAbility(new TransformAbility());
-        this.addAbility(new LegionsLandingTriggeredAbility(new TransformSourceEffect(true)));
+        this.addAbility(new LegionsLandingTriggeredAbility(new TransformSourceEffect()));
     }
 
     private LegionsLanding(final LegionsLanding card) {

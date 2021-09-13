@@ -46,7 +46,7 @@ public final class AmbitiousFarmhand extends CardImpl {
         // Coven—{1}{W}{W}: Transform Ambitious Farmhand. Activate only if you control three or more creatures with different powers.
         this.addAbility(new TransformAbility());
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new TransformSourceEffect(true),
+                Zone.BATTLEFIELD, new TransformSourceEffect(),
                 new ManaCostsImpl<>("{1}{W}{W}"), CovenCondition.instance
         ).setAbilityWord(AbilityWord.COVEN).addHint(CovenHint.instance));
     }

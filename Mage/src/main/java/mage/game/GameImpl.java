@@ -570,11 +570,6 @@ public abstract class GameImpl implements Game {
             }
             if ((daytime && permanent.getAbilities(this).containsClass(NightboundAbility.class))
                     || (!daytime && permanent.getAbilities(this).containsClass(DayboundAbility.class))) {
-                if (permanent.isTransformed()) {
-                    Card orgCard = permanent.getMainCard();
-                    permanent.getPower().modifyBaseValue(orgCard.getPower().getValue());
-                    permanent.getToughness().modifyBaseValue(orgCard.getToughness().getValue());
-                }
                 permanent.transform(this);
             }
         }

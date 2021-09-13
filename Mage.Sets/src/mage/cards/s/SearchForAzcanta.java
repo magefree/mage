@@ -79,7 +79,7 @@ class SearchForAzcantaLookLibraryEffect extends OneShotEffect {
                         controller.moveCards(card, Zone.GRAVEYARD, source, game);
                     }
                     if (controller.getGraveyard().size() > 6 && controller.chooseUse(Outcome.Neutral, "Transform " + sourceObject.getLogName() + "?", source, game)) {
-                        new TransformSourceEffect(true).apply(game, source);
+                        new TransformSourceEffect().apply(game, source);
                     }
                 }
             }

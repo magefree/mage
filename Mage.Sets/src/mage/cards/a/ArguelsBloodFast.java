@@ -39,7 +39,7 @@ public final class ArguelsBloodFast extends CardImpl {
         // At the beginning of your upkeep, if you have 5 or less life, you may transform Arguel's Blood Fast.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, true),
+                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, true),
                 FatefulHourCondition.instance,
                 "At the beginning of your upkeep, if you have 5 or less life, you may transform {this}"
         ));

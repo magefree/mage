@@ -47,7 +47,7 @@ public final class FlameChanneler extends CardImpl {
 class FlameChannelerTriggeredAbility extends TriggeredAbilityImpl {
 
     FlameChannelerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true));
+        super(Zone.BATTLEFIELD, new TransformSourceEffect());
     }
 
     private FlameChannelerTriggeredAbility(final FlameChannelerTriggeredAbility ability) {

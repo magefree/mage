@@ -31,7 +31,7 @@ public final class UninvitedGeist extends CardImpl {
 
         // When Uninvited Geist deals combat damage to a player, transform it.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new TransformSourceEffect(true), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new TransformSourceEffect(), false));
 
     }
 

@@ -62,7 +62,7 @@ public final class GarrukRelentless extends CardImpl {
 class GarrukRelentlessStateTrigger extends StateTriggeredAbility {
 
     public GarrukRelentlessStateTrigger() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true));
+        super(Zone.BATTLEFIELD, new TransformSourceEffect());
     }
 
     public GarrukRelentlessStateTrigger(final GarrukRelentlessStateTrigger ability) {

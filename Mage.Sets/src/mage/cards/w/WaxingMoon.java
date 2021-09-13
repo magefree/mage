@@ -33,7 +33,7 @@ public final class WaxingMoon extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Transform up to one target Werewolf you control.
-        Effect effect = new TransformTargetEffect(false);
+        Effect effect = new TransformTargetEffect();
         effect.setText("Transform up to one target Werewolf you control");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, filter, false));

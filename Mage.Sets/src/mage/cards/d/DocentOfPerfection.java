@@ -97,7 +97,7 @@ class DocentOfPerfectionEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) >= 3) {
-                return new TransformSourceEffect(true).apply(game, source);
+                return new TransformSourceEffect().apply(game, source);
             }
         }
         return false;

@@ -86,7 +86,7 @@ class PrimalAmuletEffect extends OneShotEffect {
             int counters = permanent.getCounters(game).getCount(CounterType.CHARGE);
             if (counters > 3 && player.chooseUse(Outcome.Benefit, "Transform this?", source, game)) {
                 permanent.removeCounters("charge", counters, source, game);
-                new TransformSourceEffect(true).apply(game, source);
+                new TransformSourceEffect().apply(game, source);
             }
             return true;
         }

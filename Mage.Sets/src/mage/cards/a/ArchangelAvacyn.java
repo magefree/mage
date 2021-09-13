@@ -95,7 +95,7 @@ class ArchangelAvacynEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
         if (sourceObject instanceof Permanent) {
             //create delayed triggered ability
-            Effect effect = new TransformTargetEffect(false);
+            Effect effect = new TransformTargetEffect();
             effect.setTargetPointer(new FixedTarget((Permanent) sourceObject, game));
             AtTheBeginOfNextUpkeepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(effect);
             game.addDelayedTriggeredAbility(delayedAbility, source);

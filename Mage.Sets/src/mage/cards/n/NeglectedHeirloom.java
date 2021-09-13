@@ -55,7 +55,7 @@ public final class NeglectedHeirloom extends CardImpl {
 class NeglectedHeirloomTriggeredAbility extends TriggeredAbilityImpl {
 
     public NeglectedHeirloomTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true), false);
+        super(Zone.BATTLEFIELD, new TransformSourceEffect(), false);
     }
 
     public NeglectedHeirloomTriggeredAbility(final NeglectedHeirloomTriggeredAbility ability) {

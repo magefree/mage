@@ -30,7 +30,7 @@ public final class StalkingVampire extends CardImpl {
 
         // At the beginning of your upkeep, you may pay {2}{B}{B}. If you do, transform Stalking Vampire.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
-                new TransformSourceEffect(false),
+                new TransformSourceEffect(),
                 new ManaCostsImpl<>("{2}{B}{B}")
         ), TargetController.YOU, false));
     }

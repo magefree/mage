@@ -29,7 +29,7 @@ public final class MysteriousTome extends CardImpl {
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new TransformSourceEffect(true));
+        ability.addEffect(new TransformSourceEffect());
         this.addAbility(ability);
     }
 

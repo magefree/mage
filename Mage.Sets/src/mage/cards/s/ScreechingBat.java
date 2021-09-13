@@ -34,7 +34,7 @@ public final class ScreechingBat extends CardImpl {
         // At the beginning of your upkeep, you may pay {2}{B}{B}. If you do, transform Screeching Bat.
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
-                new TransformSourceEffect(true),
+                new TransformSourceEffect(),
                 new ManaCostsImpl<>("{2}{B}{B}")
         ), TargetController.YOU, false));
     }

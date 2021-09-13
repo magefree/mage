@@ -79,7 +79,7 @@ class PathOfMettleTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public PathOfMettleTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true));
+        super(Zone.BATTLEFIELD, new TransformSourceEffect());
     }
 
     public PathOfMettleTriggeredAbility(final PathOfMettleTriggeredAbility ability) {

@@ -37,7 +37,7 @@ public final class StormTheVault extends CardImpl {
         // At the beginning of your end step, if you control five or more artifacts, transform Storm the Vault.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, false),
+                new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, ComparisonType.MORE_THAN, 4),
                 "At the beginning of your end step, if you control five or more artifacts, transform {this}"));
 

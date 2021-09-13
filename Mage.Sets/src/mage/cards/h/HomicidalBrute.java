@@ -51,7 +51,7 @@ class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl {
 
     public HomicidalBruteTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TapSourceEffect(), false);
-        addEffect(new TransformSourceEffect(false));
+        addEffect(new TransformSourceEffect());
     }
 
     public HomicidalBruteTriggeredAbility(HomicidalBruteTriggeredAbility ability) {
