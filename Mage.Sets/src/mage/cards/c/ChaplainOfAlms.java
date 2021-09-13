@@ -25,7 +25,6 @@ public final class ChaplainOfAlms extends CardImpl {
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.c.ChapelShieldgeist.class;
 
         // First strike

@@ -42,7 +42,6 @@ public final class ThingInTheIce extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.AwokenHorror.class;
 
         // Defender

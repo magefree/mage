@@ -36,7 +36,6 @@ public final class GrowingRitesOfItlimoc extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.i.ItlimocCradleOfTheSun.class;
 
         // When Growing Rites of Itlimoc enters the battlefield, look at the top four cards of your library.

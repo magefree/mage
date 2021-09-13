@@ -31,7 +31,6 @@ public final class SmolderingWerewolf extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.e.EruptingDreadwolf.class;
 
         // When Smoldering Werewolf enters the battlefield, it deals 1 damage to each of up to two target creatures.

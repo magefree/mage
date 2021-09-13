@@ -25,7 +25,6 @@ public final class ChaliceOfLife extends CardImpl {
     public ChaliceOfLife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        this.transformable = true;
         this.secondSideCardClazz = ChaliceOfDeath.class;
         this.addAbility(new TransformAbility());
 

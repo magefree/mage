@@ -26,7 +26,6 @@ public final class ThrabenGargoyle extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.StonewingAntagonizer.class;
 
         // Defender

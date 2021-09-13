@@ -27,7 +27,6 @@ public final class StartledAwake extends CardImpl {
     public StartledAwake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.p.PersistentNightmare.class;
 
         // Target opponent puts the top thirteen cards of their library into their graveyard.

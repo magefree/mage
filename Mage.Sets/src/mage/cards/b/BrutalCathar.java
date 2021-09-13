@@ -32,7 +32,6 @@ public final class BrutalCathar extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.m.MoonrageBrute.class;
 
         // When this creature enters the battlefield or transforms into Brutal Cathar, exile target creature an opponent controls until this creature leaves the battlefield.

@@ -24,7 +24,6 @@ public final class SeafaringWerewolf extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.color.setGreen(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Seafaring Werewolf can't be blocked.

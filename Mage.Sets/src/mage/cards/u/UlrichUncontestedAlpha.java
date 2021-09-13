@@ -33,7 +33,6 @@ public final class UlrichUncontestedAlpha extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.transformable = true;
 
         // Whenever this creature transforms into Ulrich, Uncontested Alpha, you may have it fight target non-Werewolf creature you don't control.
         this.addAbility(new UlrichUncontestedAlphaAbility());

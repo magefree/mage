@@ -31,7 +31,6 @@ public final class CivilizedScholar extends CardImpl {
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.h.HomicidalBrute.class;
 
         this.power = new MageInt(0);

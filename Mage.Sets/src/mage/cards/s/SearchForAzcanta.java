@@ -29,7 +29,6 @@ public final class SearchForAzcanta extends CardImpl {
     public SearchForAzcanta(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.AzcantaTheSunkenRuin.class;
 
         this.addSuperType(SuperType.LEGENDARY);

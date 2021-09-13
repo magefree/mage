@@ -36,7 +36,6 @@ public final class DauntlessAvenger extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
         this.color.setWhite(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Whenever Dauntless Avenger attacks, return target creature card with mana value 2 or less from your graveyard to the battlefield tapped and attacking.

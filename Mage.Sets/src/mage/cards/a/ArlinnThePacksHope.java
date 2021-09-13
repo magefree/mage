@@ -35,7 +35,6 @@ public final class ArlinnThePacksHope extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ARLINN);
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.ArlinnTheMoonsFury.class;
 
         // Daybound

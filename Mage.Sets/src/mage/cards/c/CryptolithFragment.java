@@ -25,7 +25,6 @@ public final class CryptolithFragment extends CardImpl {
     public CryptolithFragment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.AuroraOfEmrakul.class;
 
         // Cryptolith Fragment enters the battlefield tapped.

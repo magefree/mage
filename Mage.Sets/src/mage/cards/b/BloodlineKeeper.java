@@ -41,7 +41,6 @@ public final class BloodlineKeeper extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.l.LordOfLineage.class;
 
         this.addAbility(FlyingAbility.getInstance());

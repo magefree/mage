@@ -33,7 +33,6 @@ public final class DowsingDagger extends CardImpl {
 
         this.subtype.add(SubType.EQUIPMENT);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.l.LostVale.class;
 
         // When Dowsing Dagger enters the battlefield, target opponent creates two 0/2 green Plant creature tokens with defender.

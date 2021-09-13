@@ -43,7 +43,6 @@ public final class PoppetStitcher extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.p.PoppetFactory.class;
 
         // Whenever you cast an instant or sorcery spell, create a 2/2 black Zombie creature token with decayed.

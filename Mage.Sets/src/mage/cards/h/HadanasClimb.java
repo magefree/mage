@@ -27,7 +27,6 @@ public final class HadanasClimb extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
-        this.transformable = true;
 
         this.secondSideCardClazz = mage.cards.w.WingedTempleOfOrazca.class;
 

@@ -22,7 +22,6 @@ public final class ChillingChronicle extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "");
 
         this.color.setBlue(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // {1}, {T}: Tap target nonland permanent. Transform Chilling Chronicle.

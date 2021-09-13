@@ -42,7 +42,6 @@ public final class GideonBattleForged extends CardImpl {
         this.color.setWhite(true);
 
         this.nightCard = true;
-        this.transformable = true;
 
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 

@@ -42,7 +42,6 @@ public final class ExtricatorOfSin extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-        this.transformable = true;
         this.secondSideCardClazz = ExtricatorOfFlesh.class;
 
         // When Extricator of Sin enters the battlefield, you may sacrifice another permanent. If you do, create a 3/2 colorless Eldrazi Horror creature token.

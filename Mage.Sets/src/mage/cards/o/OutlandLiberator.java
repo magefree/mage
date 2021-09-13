@@ -27,7 +27,6 @@ public final class OutlandLiberator extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.f.FrenziedTrapbreaker.class;
 
         // {1}, Sacrifice Outland Liberator: Destroy target artifact or enchantment.

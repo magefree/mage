@@ -33,7 +33,6 @@ public final class ConduitOfStorms extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.transformable = true;
         this.secondSideCardClazz = ConduitOfEmrakul.class;
 
         // Whenever Conduit of Storms attacks, add {R} at the beginning of your next main phase this turn.

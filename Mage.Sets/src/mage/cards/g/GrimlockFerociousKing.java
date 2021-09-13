@@ -31,8 +31,7 @@ public final class GrimlockFerociousKing extends CardImpl{
         this.color.setGreen(true);
         this.color.setWhite(true);
 
-        this.transformable = true;
-        this.nightCard = true;
+       this.nightCard = true;
         
         // Trample
         this.addAbility(TrampleAbility.getInstance());

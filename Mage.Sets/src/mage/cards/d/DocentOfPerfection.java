@@ -45,7 +45,6 @@ public final class DocentOfPerfection extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.f.FinalIteration.class;
 
         // Flying

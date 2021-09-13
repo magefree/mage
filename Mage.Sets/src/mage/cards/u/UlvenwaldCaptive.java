@@ -28,7 +28,6 @@ public final class UlvenwaldCaptive extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        this.transformable = true;
         this.secondSideCardClazz = UlvenwaldAbomination.class;
 
         // Defender

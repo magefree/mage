@@ -31,7 +31,6 @@ public final class ElbrusTheBindingBlade extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.w.WithengarUnbound.class;
         this.addAbility(new TransformAbility());
 

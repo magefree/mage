@@ -37,7 +37,6 @@ public final class LoneRider extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.i.ItThatRidesAsOne.class;
 
         // First strike

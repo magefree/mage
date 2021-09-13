@@ -22,7 +22,6 @@ public final class DireStrainBrawler extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.color.setGreen(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Vigilance

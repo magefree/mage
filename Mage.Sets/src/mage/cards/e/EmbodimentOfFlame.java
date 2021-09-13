@@ -34,7 +34,6 @@ public final class EmbodimentOfFlame extends CardImpl {
         this.toughness = new MageInt(3);
         this.color.setRed(true);
         this.nightCard = true;
-        this.transformable = true;
 
         // Whenever a spell you control deals damage, put a flame counter on Embodiment of Flame.
         this.addAbility(new EmbodimentOfFlameTriggeredAbility());

@@ -22,7 +22,6 @@ public final class SeasonedCathar extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.color.setWhite(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Lifelink

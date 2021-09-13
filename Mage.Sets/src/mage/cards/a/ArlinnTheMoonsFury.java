@@ -31,7 +31,6 @@ public final class ArlinnTheMoonsFury extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
         this.color.setRed(true);
         this.color.setGreen(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Nightbound

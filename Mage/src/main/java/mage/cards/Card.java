@@ -70,8 +70,6 @@ public interface Card extends MageObject {
 
     boolean isTransformable();
 
-    void setTransformable(boolean transformable);
-
     Card getSecondCardFace();
 
     boolean isNightCard();

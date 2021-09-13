@@ -45,7 +45,6 @@ public final class TovolarsPackleader extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
         this.color.setGreen(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Whenever Tovolar's Packleader enters the battlefield or attacks, create two 2/2 green Wolf creature tokens.

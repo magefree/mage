@@ -30,7 +30,6 @@ public final class WestvaleAbbey extends CardImpl {
     public WestvaleAbbey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.o.OrmendahlProfanePrince.class;
 
         // {T}: Add {C}.

@@ -42,7 +42,6 @@ public final class UntamedPup extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.color.setGreen(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Trample

@@ -29,7 +29,6 @@ public final class FangbladeBrigand extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.f.FangbladeEviscerator.class;
 
         // {1}{R}: Fangblade Brigand gets +1/+0 and gains first strike until end of turn.

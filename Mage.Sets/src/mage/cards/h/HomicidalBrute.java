@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
 
 /**
@@ -28,7 +27,6 @@ public final class HomicidalBrute extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.transformable = true;
 
         this.color.setRed(true);
         this.power = new MageInt(5);

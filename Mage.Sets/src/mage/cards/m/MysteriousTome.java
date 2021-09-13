@@ -21,7 +21,6 @@ public final class MysteriousTome extends CardImpl {
     public MysteriousTome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{U}");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.c.ChillingChronicle.class;
 
         // {2}, {T}: Draw a card. Transform Mysterious Tome.

@@ -46,8 +46,7 @@ public final class GrimlockDinobotLeader extends CardImpl{
         this.subtype.add(SubType.AUTOBOT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        
-        this.transformable = true;
+
         this.secondSideCardClazz = GrimlockFerociousKing.class;
 
         // Dinosaurs, Vehicles and other Transformers creatures you control get +2/+0.

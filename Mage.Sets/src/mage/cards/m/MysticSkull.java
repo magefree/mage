@@ -21,7 +21,6 @@ public final class MysticSkull extends CardImpl {
     public MysticSkull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.m.MysticMonstrosity.class;
 
         // {1}, {T}: Add one mana of any color.

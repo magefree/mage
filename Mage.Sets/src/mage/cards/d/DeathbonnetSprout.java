@@ -38,7 +38,6 @@ public final class DeathbonnetSprout extends CardImpl {
         this.subtype.add(SubType.FUNGUS);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.d.DeathbonnetHulk.class;
 
         // At the beginning of your upkeep, mill a card. Then if there are three or more creature cards in your graveyard, transform Deathbonnet Sprout.

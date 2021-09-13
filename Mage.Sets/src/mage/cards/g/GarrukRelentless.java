@@ -31,7 +31,6 @@ public final class GarrukRelentless extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
-        this.transformable = true;
         this.secondSideCardClazz = GarrukTheVeilCursed.class;
 
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));

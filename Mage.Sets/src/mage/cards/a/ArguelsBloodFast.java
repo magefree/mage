@@ -29,7 +29,6 @@ public final class ArguelsBloodFast extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         addSuperType(SuperType.LEGENDARY);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.t.TempleOfAclazotz.class;
 
         // {1}{B}, Pay 2 life: Draw a card.

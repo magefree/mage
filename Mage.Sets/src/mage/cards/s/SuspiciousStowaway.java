@@ -26,7 +26,6 @@ public final class SuspiciousStowaway extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.SeafaringWerewolf.class;
 
         // Suspicious Stowaway can't be blocked.

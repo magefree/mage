@@ -26,7 +26,6 @@ public final class KessigProwler extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.SinuousPredator.class;
 
         // {4}{G}: Transform Kessig Prowler.

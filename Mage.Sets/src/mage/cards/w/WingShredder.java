@@ -24,7 +24,6 @@ public final class WingShredder extends CardImpl {
         this.toughness = new MageInt(5);
         this.color.setGreen(true);
         this.nightCard = true;
-        this.transformable = true;
 
         // Reach
         this.addAbility(ReachAbility.getInstance());

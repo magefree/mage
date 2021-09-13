@@ -31,7 +31,6 @@ public final class ThaumaticCompass extends CardImpl {
 
     public ThaumaticCompass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.SpiresOfOrazca.class;
 
         // {3}, {T}: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.

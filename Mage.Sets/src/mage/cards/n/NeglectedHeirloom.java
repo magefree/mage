@@ -28,7 +28,6 @@ public final class NeglectedHeirloom extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.AshmouthBlade.class;
 
         // Equipped creature gets +1/+1.

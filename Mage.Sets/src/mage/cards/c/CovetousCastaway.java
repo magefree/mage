@@ -24,7 +24,6 @@ public final class CovetousCastaway extends CardImpl {
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.g.GhostlyCastigator.class;
 
         // When Covetous Castaway dies, mill three cards.

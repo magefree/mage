@@ -28,7 +28,6 @@ public final class AberrantResearcher extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.p.PerfectedForm.class;
 
         // Flying

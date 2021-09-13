@@ -31,7 +31,6 @@ public final class WerewolfOfAncientHunger extends CardImpl {
         this.color.setGreen(true);
 
         this.nightCard = true;
-        this.transformable = true;
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());

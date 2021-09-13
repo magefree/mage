@@ -45,7 +45,6 @@ public final class TovolarTheMidnightScourge extends CardImpl {
         this.toughness = new MageInt(4);
         this.color.setRed(true);
         this.color.setGreen(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Whenever a Wolf or Werewolf you control deals combat damage to a player, draw a card.

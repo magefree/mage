@@ -36,7 +36,6 @@ public final class AmbitiousFarmhand extends CardImpl {
         this.subtype.add(SubType.PEASANT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.SeasonedCathar.class;
 
         // When Ambitious Farmhand enters the battlefield, you may search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.

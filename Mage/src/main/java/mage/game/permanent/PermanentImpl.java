@@ -562,7 +562,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean transform(Game game) {
-        if (!transformable || replaceEvent(EventType.TRANSFORM, game)) {
+        if (!isTransformable() || replaceEvent(EventType.TRANSFORM, game)) {
             return false;
         }
         setTransformed(!transformed);
@@ -1404,7 +1404,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean canTransform(Game game, boolean ignoreDayNight) {
-        if (!transformable) {
+        if (!isTransformable()) {
             return false;
         }
         if (!ignoreDayNight &&

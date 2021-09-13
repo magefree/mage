@@ -25,7 +25,6 @@ public final class OverwhelmedArchivist extends CardImpl {
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.ArchiveHaunt.class;
 
         // When Overwhelmed Archivist enters the battlefield, draw a card, then discard a card.

@@ -33,7 +33,6 @@ public final class ChandraRoaringFlame extends CardImpl {
         this.color.setRed(true);
 
         this.nightCard = true;
-        this.transformable = true;
 
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
 

@@ -25,7 +25,6 @@ public final class AutumnalGloom extends CardImpl {
 
     public AutumnalGloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.transformable = true;
         this.secondSideCardClazz = AncientOfTheEquinox.class;
 
         // {B}: Put the top card of your library into your graveyard.

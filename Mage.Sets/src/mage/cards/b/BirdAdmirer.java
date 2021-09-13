@@ -24,7 +24,6 @@ public final class BirdAdmirer extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.w.WingShredder.class;
 
         // Reach

@@ -52,7 +52,6 @@ public final class TovolarDireOverlord extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.t.TovolarTheMidnightScourge.class;
 
         // Whenever a Wolf or Werewolf you control deals combat damage to a player, draw a card.

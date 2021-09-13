@@ -27,7 +27,6 @@ public final class AvacynianMissionaries extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.l.LunarchInquisitors.class;
 
         // At the beginning of your end step, if Avacynian Missionaries is equipped, transform it.

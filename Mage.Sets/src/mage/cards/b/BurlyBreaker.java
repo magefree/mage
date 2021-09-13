@@ -24,7 +24,6 @@ public final class BurlyBreaker extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.d.DireStrainDemolisher.class;
 
         // Ward {1}

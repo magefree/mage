@@ -44,7 +44,6 @@ public final class ArchangelAvacyn extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.transformable = true;
         this.secondSideCardClazz = AvacynThePurifier.class;
 
         // Flash

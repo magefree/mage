@@ -23,7 +23,6 @@ public final class TirelessHauler extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.d.DireStrainBrawler.class;
 
         // Vigilance

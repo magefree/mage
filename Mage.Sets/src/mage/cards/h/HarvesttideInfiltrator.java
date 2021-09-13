@@ -23,7 +23,6 @@ public final class HarvesttideInfiltrator extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.h.HarvesttideAssailant.class;
 
         // Trample

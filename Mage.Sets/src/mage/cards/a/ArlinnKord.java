@@ -32,7 +32,6 @@ public final class ArlinnKord extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ARLINN);
 
-        this.transformable = true;
         this.secondSideCardClazz = ArlinnEmbracedByTheMoon.class;
 
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));

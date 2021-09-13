@@ -30,7 +30,6 @@ public final class RavenousDemon extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.DEMON);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.ArchdemonOfGreed.class;
 
         this.power = new MageInt(4);

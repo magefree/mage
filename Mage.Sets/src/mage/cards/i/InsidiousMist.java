@@ -36,7 +36,6 @@ public final class InsidiousMist extends CardImpl {
         this.color.setBlue(true);
 
         this.nightCard = true;
-        this.transformable = true;
 
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());

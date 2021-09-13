@@ -39,7 +39,6 @@ public final class PrimalAmulet extends CardImpl {
 
     public PrimalAmulet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.transformable = true;
         this.secondSideCardClazz = PrimalWellspring.class;
 
         // Instant and sorcery spells you cast cost {1} less to cast.
