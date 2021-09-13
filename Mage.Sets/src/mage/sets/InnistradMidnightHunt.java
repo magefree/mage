@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class InnistradMidnightHunt extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Arlinn, the Pack's Hope", "Arlinn, the Moon's Fury", "Baithook Angler", "Hook-Haunt Drifter", "Baneblade Scoundrel", "Baneclaw Marauder", "Beloved Beggar", "Generous Soul", "Bird Admirer", "Wing Shredder", "Brimstone Vandal", "Brutal Cathar", "Moonrage Brute", "Burly Breaker", "Dire-Strain Demolisher", "Celestus Sanctifier", "Chaplain of Alms", "Chapel Shieldgeist", "Component Collector", "Covert Cutpurse", "Covetous Geist", "Covetous Castaway", "Ghostly Castigator", "Curse of Leeches", "Leeching Lurker", "Dennick, Pious Apprentice", "Dennick, Pious Apparition", "Devoted Grafkeeper", "Departed Soulkeeper", "Fangblade Brigand", "Fangblade Eviscerator", "Firmament Sage", "Galedrifter", "Waildrifter", "Gavony Dawnguard", "Graveyard Trespasser", "Graveyard Glutton", "Harvesttide Infiltrator", "Harvesttide Assailant", "Hound Tamer", "Untamed Pup", "Kessig Naturalist", "Lord of the Ulvenwald", "Lunarch Veteran", "Luminous Phantom", "Malevolent Hermit", "Benevolent Geist", "Mourning Patrol", "Morning Apparition", "Obsessive Astronomer", "Outland Liberator", "Frenzied Trapbreaker", "Overwhelmed Archivist", "Archive Haunt", "Phantom Carriage", "Reckless Stormseeker", "Storm-Charged Slasher", "Shady Traveler", "Stalking Predator", "Shipwreck Sifters", "Spellrune Painter", "Spellrune Howler", "Sunrise Cavalier", "Sunstreak Phoenix", "Suspicious Stowaway", "Seafaring Werewolf", "Tavern Ruffian", "Tavern Smasher", "The Celestus", "Thraben Exorcism", "Tireless Hauler", "Dire-Strain Brawler", "Tovolar, Dire Overlord", "Tovolar, the Midnight Scourge", "Tovolar's Huntmaster", "Tovolar's Packleader", "Unblinking Observer", "Vadrik, Astral Archmage", "Village Watch", "Village Reavers");
+    private static final List<String> unfinished = Arrays.asList("Baithook Angler", "Hook-Haunt Drifter", "Beloved Beggar", "Generous Soul", "Chaplain of Alms", "Chapel Shieldgeist", "Covert Cutpurse", "Covetous Geist", "Covetous Castaway", "Ghostly Castigator", "Dennick, Pious Apprentice", "Dennick, Pious Apparition", "Devoted Grafkeeper", "Departed Soulkeeper", "Galedrifter", "Waildrifter", "Lunarch Veteran", "Luminous Phantom", "Malevolent Hermit", "Benevolent Geist", "Mourning Patrol", "Morning Apparition", "Overwhelmed Archivist", "Archive Haunt", "Phantom Carriage", "Shipwreck Sifters", "Thraben Exorcism", "Unblinking Observer");
     private static final InnistradMidnightHunt instance = new InnistradMidnightHunt();
 
     public static InnistradMidnightHunt getInstance() {
@@ -316,5 +316,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Willow Geist", 207, Rarity.RARE, mage.cards.w.WillowGeist.class));
         cards.add(new SetCardInfo("Wing Shredder", 169, Rarity.COMMON, mage.cards.w.WingShredder.class));
         cards.add(new SetCardInfo("Wrenn and Seven", 208, Rarity.MYTHIC, mage.cards.w.WrennAndSeven.class));
+
+        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is fully implemented
     }
 }
