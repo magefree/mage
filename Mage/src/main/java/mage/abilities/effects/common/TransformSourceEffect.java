@@ -50,7 +50,7 @@ public class TransformSourceEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObjectIfItStillExists(game); // Transform only if it's the same object as the effect was put on the stack
         if (sourceObject instanceof Permanent) {
             Permanent sourcePermanent = (Permanent) sourceObject;
-            if (sourcePermanent.canTransform(source, game)) {
+            if (sourcePermanent.canTransform(game)) {
                 // check not to transform twice the same side
                 if (sourcePermanent.isTransformed() != fromDayToNight) {
                     if (withoutTrigger) {

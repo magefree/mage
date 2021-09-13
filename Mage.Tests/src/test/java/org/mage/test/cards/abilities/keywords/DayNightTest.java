@@ -16,13 +16,23 @@ public class DayNightTest extends CardTestPlayerBase {
 
     private void assertDayNight(boolean daytime) {
         Assert.assertTrue("It should not be neither day nor night", currentGame.hasDayNight());
+        Assert.assertTrue("It should be " + (daytime ? "day" : "night"), currentGame.checkDayNight(daytime));
+        Assert.assertFalse("It should not be " + (daytime ? "night" : "day"), currentGame.checkDayNight(!daytime));
+    }
+
+    private void assertRuffianSmasher(boolean daytime) {
+        assertDayNight(daytime);
         if (daytime) {
-            Assert.assertTrue("It should be day", currentGame.checkDayNight(true));
-            Assert.assertFalse("It should not be night", currentGame.checkDayNight(false));
+            assertPowerToughness(playerA, ruffian, 2, 5);
+            assertPermanentCount(playerA, smasher, 0);
         } else {
-            Assert.assertTrue("It should be night", currentGame.checkDayNight(false));
-            Assert.assertFalse("It should not be day", currentGame.checkDayNight(true));
+            assertPermanentCount(playerA, ruffian, 0);
+            assertPowerToughness(playerA, smasher, 6, 5);
         }
+    }
+
+    private void setDayNight(int turn, PhaseStep phaseStep, boolean daytime) {
+        runCode("set game to " + (daytime ? "day" : "night"), turn, phaseStep, playerA, (i, p, game) -> game.setDaytime(daytime));
     }
 
     @Test
@@ -37,8 +47,7 @@ public class DayNightTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertDayNight(true);
-        assertPermanentCount(playerA, ruffian, 1);
+        assertRuffianSmasher(true);
     }
 
     @Test
@@ -54,7 +63,39 @@ public class DayNightTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertDayNight(false);
-        assertPermanentCount(playerA, smasher, 1);
+        assertRuffianSmasher(false);
+    }
+
+    @Test
+    public void testNightTransform() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, ruffian);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ruffian);
+        setDayNight(1, PhaseStep.POSTCOMBAT_MAIN, false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertRuffianSmasher(false);
+    }
+
+    @Test
+    public void testNightToDay() {
+        currentGame.setDaytime(false);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, ruffian);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ruffian);
+        setDayNight(1, PhaseStep.POSTCOMBAT_MAIN, true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertRuffianSmasher(true);
     }
 }

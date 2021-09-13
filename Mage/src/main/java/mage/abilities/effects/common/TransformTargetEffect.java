@@ -41,7 +41,7 @@ public class TransformTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            if (permanent.canTransform(source, game)) {
+            if (permanent.canTransform(game)) {
                 // check not to transform twice the same side
                 if (withoutTrigger) {
                     permanent.setTransformed(!permanent.isTransformed());

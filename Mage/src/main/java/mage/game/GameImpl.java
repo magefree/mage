@@ -14,10 +14,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.CompanionAbility;
-import mage.abilities.keyword.MorphAbility;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.keyword.*;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.actions.impl.MageAction;
@@ -560,11 +557,21 @@ public abstract class GameImpl implements Game {
     @Override
     public void setDaytime(boolean daytime) {
         if (!state.isHasDayNight()) {
-            informPlayers("it has become " + (daytime ? "day" : "night"));
+            informPlayers("It has become " + (daytime ? "day" : "night"));
         }
-        if (!state.setDaytime(daytime)) {
-            informPlayers("it has become " + (daytime ? "day" : "night"));
-            fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_DAY_NIGHT, null, null, null));
+        if (state.setDaytime(daytime)) {
+            return;
+        }
+        informPlayers("It has become " + (daytime ? "day" : "night"));
+        fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_DAY_NIGHT, null, null, null));
+        for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
+            if (!permanent.canTransform(this)) {
+                continue;
+            }
+            if ((daytime && permanent.getAbilities(this).containsClass(NightboundAbility.class))
+                    || (!daytime && permanent.getAbilities(this).containsClass(DayboundAbility.class))) {
+                permanent.transform(this);
+            }
         }
     }
 

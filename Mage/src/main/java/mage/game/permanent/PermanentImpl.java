@@ -1400,7 +1400,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean canTransform(Ability source, Game game) {
+    public boolean canTransform(Game game) {
         if (transformable) {
             for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
                 RestrictionEffect effect = entry.getKey();
