@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class InnistradMidnightHunt extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Beloved Beggar", "Generous Soul", "Dennick, Pious Apprentice", "Dennick, Pious Apparition", "Angelic Enforcer", "Curse of Leeches", "Enduring Angel", "Gisa, Glorious Resurrector", "Leeching Lurker", "Necrosynthesis", "Ormendahl, the Corrupter", "Siphon Insight", "Sigarda's Splendor", "Sungold Sentinel", "Lord of the Forsaken", "Rem Karolus, Stalwart Slayer", "Rootcoil Creeper", "Slogurk, the Overslime", "Baneblade Scoundrel", "Baneclaw Marauder ", "Jerren, Corrupted Bishop", "Vengeful Strangler", "Strangling Grasp", "Ludevic, Necrogenius", "Olag, Ludevic's Hubris");
+    private static final List<String> unfinished = Arrays.asList("Beloved Beggar", "Generous Soul", "Dennick, Pious Apprentice", "Dennick, Pious Apparition", "Angelic Enforcer", "Curse of Leeches", "Enduring Angel", "Gisa, Glorious Resurrector", "Leeching Lurker", "Ormendahl, the Corrupter", "Siphon Insight", "Sigarda's Splendor", "Sungold Sentinel", "Lord of the Forsaken", "Rem Karolus, Stalwart Slayer", "Rootcoil Creeper", "Slogurk, the Overslime", "Baneblade Scoundrel", "Baneclaw Marauder ", "Jerren, Corrupted Bishop", "Vengeful Strangler", "Strangling Grasp", "Ludevic, Necrogenius", "Olag, Ludevic's Hubris");
     private static final InnistradMidnightHunt instance = new InnistradMidnightHunt();
 
     public static InnistradMidnightHunt getInstance() {
@@ -213,6 +213,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Mystic Monstrosity", 256, Rarity.UNCOMMON, mage.cards.m.MysticMonstrosity.class));
         cards.add(new SetCardInfo("Mystic Skull", 256, Rarity.UNCOMMON, mage.cards.m.MysticSkull.class));
         cards.add(new SetCardInfo("Nebelgast Intruder", 64, Rarity.UNCOMMON, mage.cards.n.NebelgastIntruder.class));
+        cards.add(new SetCardInfo("Necrosynthesis", 115, Rarity.UNCOMMON, mage.cards.n.Necrosynthesis.class));
         cards.add(new SetCardInfo("Neonate's Rush", 151, Rarity.COMMON, mage.cards.n.NeonatesRush.class));
         cards.add(new SetCardInfo("No Way Out", 116, Rarity.COMMON, mage.cards.n.NoWayOut.class));
         cards.add(new SetCardInfo("Novice Occultist", 117, Rarity.COMMON, mage.cards.n.NoviceOccultist.class));
