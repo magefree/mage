@@ -110,7 +110,7 @@ class SoulSeizerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null || !permanent.transform(game)) {
+        if (permanent == null || !permanent.transform(source, game)) {
             return false;
         }
         Permanent attachTo = game.getPermanent(targetPointer.getFirst(game, source));

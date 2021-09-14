@@ -103,6 +103,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected List<MarkedDamageInfo> markedDamage;
     protected int markedLifelink;
     protected int timesLoyaltyUsed = 0;
+    protected int transformCount = 0;
     protected Map<String, String> info;
     protected int createOrder;
 
@@ -168,6 +169,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.pairedPermanent = permanent.pairedPermanent;
         this.bandedCards.addAll(permanent.bandedCards);
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
+        this.transformCount = permanent.transformCount;
 
         this.morphed = permanent.morphed;
         this.manifested = permanent.manifested;
@@ -561,13 +563,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean transform(Game game) {
-        return this.transform(game, false);
+    public boolean transform(Ability source, Game game) {
+        return this.transform(source, game, false);
     }
 
     @Override
-    public boolean transform(Game game, boolean ignoreDayNight) {
+    public boolean transform(Ability source, Game game, boolean ignoreDayNight) {
         if (!isTransformable() || replaceEvent(EventType.TRANSFORM, game)) {
+            return false;
+        }
+        if (source != null && !source.checkTransformCount(this, game)) {
             return false;
         }
         if (!ignoreDayNight &&
@@ -581,9 +586,15 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.getToughness().modifyBaseValue(orgCard.getToughness().getValue());
         }
         setTransformed(!transformed);
+        transformCount++;
         game.applyEffects();
         game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, getId(), getControllerId()));
         return true;
+    }
+
+    @Override
+    public int getTransformCount() {
+        return transformCount;
     }
 
     @Override
@@ -1741,5 +1752,4 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         detachAllAttachments(game);
         return successfullyMoved;
     }
-
 }

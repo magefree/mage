@@ -69,7 +69,7 @@ class ElbrusTheBindingBladeEffect extends OneShotEffect {
             Permanent attachedTo = game.getPermanent(equipment.getAttachedTo());
             if (attachedTo != null) {
                 attachedTo.removeAttachment(equipment.getId(), source, game);
-                equipment.transform(game);
+                equipment.transform(source, game);
                 game.informPlayers(equipment.getName() + " transforms into " + equipment.getSecondCardFace().getName());
 
             }

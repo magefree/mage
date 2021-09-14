@@ -47,13 +47,15 @@ public interface Permanent extends Card, Controllable {
 
     boolean flip(Game game);
 
-    boolean transform(Game game);
+    boolean transform(Ability source, Game game);
 
-    boolean transform(Game game, boolean ignoreDayNight);
+    boolean transform(Ability source, Game game, boolean ignoreDayNight);
 
     boolean isTransformed();
 
     void setTransformed(boolean value);
+
+    int getTransformCount();
 
     boolean isPhasedIn();
 
@@ -406,5 +408,4 @@ public interface Permanent extends Card, Controllable {
         }
         return getAttachedTo().equals(otherId);
     }
-
 }

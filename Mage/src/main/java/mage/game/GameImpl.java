@@ -567,7 +567,7 @@ public abstract class GameImpl implements Game {
         for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
             if ((daytime && permanent.getAbilities(this).containsClass(NightboundAbility.class))
                     || (!daytime && permanent.getAbilities(this).containsClass(DayboundAbility.class))) {
-                permanent.transform(this, true);
+                permanent.transform(null, this, true);
             }
         }
     }
@@ -1958,6 +1958,7 @@ public abstract class GameImpl implements Game {
             if (newAbility.getSourceObjectZoneChangeCounter() == 0) {
                 newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
             }
+            newAbility.setSourcePermanentTransformCount(this);
             newAbility.setTriggerEvent(triggeringEvent);
             state.addTriggeredAbility(newAbility);
         }
@@ -1974,6 +1975,7 @@ public abstract class GameImpl implements Game {
         newAbility.newId();
         if (source != null) {
             newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
+            newAbility.setSourcePermanentTransformCount(this);
         }
         newAbility.initOnAdding(this);
         // ability.init is called as the ability triggeres not now.

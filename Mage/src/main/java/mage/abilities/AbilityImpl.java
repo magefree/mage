@@ -78,6 +78,7 @@ public abstract class AbilityImpl implements Ability {
     protected Outcome customOutcome = null; // uses for AI decisions instead effects
     protected MageIdentifier identifier; // used to identify specific ability (e.g. to match with corresponding watcher)
     protected String appendToRule = null;
+    protected int sourcePermanentTransformCount = 0;
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -133,6 +134,7 @@ public abstract class AbilityImpl implements Ability {
         this.identifier = ability.identifier;
         this.activated = ability.activated;
         this.appendToRule = ability.appendToRule;
+        this.sourcePermanentTransformCount = ability.sourcePermanentTransformCount;
     }
 
     @Override
@@ -244,6 +246,7 @@ public abstract class AbilityImpl implements Ability {
         if (getSourceObjectZoneChangeCounter() == 0) {
             setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(getSourceId()));
         }
+        setSourcePermanentTransformCount(game);
 
         /* 20130201 - 601.2b
          * If the player wishes to splice any cards onto the spell (see rule 702.45), he
@@ -1282,6 +1285,24 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public int getSourceObjectZoneChangeCounter() {
         return sourceObjectZoneChangeCounter;
+    }
+
+    @Override
+    public void setSourcePermanentTransformCount(Game game) {
+        Permanent permanent = getSourcePermanentOrLKI(game);
+        if (permanent != null) {
+            this.sourcePermanentTransformCount = permanent.getTransformCount();
+        }
+    }
+
+    @Override
+    public boolean checkTransformCount(Permanent permanent, Game game) {
+        if (permanent == null
+                || !permanent.getId().equals(sourceId)
+                || permanent.getZoneChangeCounter(game) != sourceObjectZoneChangeCounter) {
+            return true;
+        }
+        return permanent.getTransformCount() == sourcePermanentTransformCount;
     }
 
     @Override

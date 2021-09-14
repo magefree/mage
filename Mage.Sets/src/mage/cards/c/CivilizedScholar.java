@@ -79,7 +79,7 @@ class CivilizedScholarEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
                     permanent.untap(game);
-                    permanent.transform(game);
+                    permanent.transform(source, game);
                 }
             }
             return true;

@@ -29,6 +29,6 @@ public class TransformSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         // check not to transform twice the same side
-        return permanent != null && permanent.transform(game);
+        return permanent != null && permanent.transform(source, game);
     }
 }

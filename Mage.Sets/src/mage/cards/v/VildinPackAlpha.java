@@ -76,7 +76,7 @@ class VildinPackAlphaEffect extends OneShotEffect {
         }
         Permanent werewolf = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (werewolf != null) {
-            werewolf.transform(game);
+            werewolf.transform(source, game);
         }
         return true;
     }
