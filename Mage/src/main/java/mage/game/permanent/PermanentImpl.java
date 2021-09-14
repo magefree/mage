@@ -567,17 +567,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return this.transform(source, game, false);
     }
 
+    private boolean checkDayNightBound() {
+        return this.getAbilities().containsClass(DayboundAbility.class)
+                || this.getAbilities().containsClass(NightboundAbility.class);
+    }
+
     @Override
     public boolean transform(Ability source, Game game, boolean ignoreDayNight) {
-        if (!isTransformable() || replaceEvent(EventType.TRANSFORM, game)) {
-            return false;
-        }
-        if (source != null && !source.checkTransformCount(this, game)) {
-            return false;
-        }
-        if (!ignoreDayNight &&
-                (getAbilities().containsClass(DayboundAbility.class)
-                        || getAbilities().containsClass(NightboundAbility.class))) {
+        if (!isTransformable()
+                || (!ignoreDayNight && checkDayNightBound())
+                || (source != null && !source.checkTransformCount(this, game))
+                || replaceEvent(EventType.TRANSFORM, game)) {
             return false;
         }
         if (transformed) {
