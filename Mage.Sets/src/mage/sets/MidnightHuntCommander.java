@@ -20,5 +20,6 @@ public final class MidnightHuntCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Avacyn's Memorial", 31, Rarity.MYTHIC, mage.cards.a.AvacynsMemorial.class));
+        cards.add(new SetCardInfo("Zombie Apocalypse", 131, Rarity.RARE, mage.cards.z.ZombieApocalypse.class));
     }
 }
