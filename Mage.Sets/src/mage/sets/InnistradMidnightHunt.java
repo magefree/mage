@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class InnistradMidnightHunt extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Beloved Beggar", "Generous Soul", "Dennick, Pious Apprentice", "Dennick, Pious Apparition", "Angelic Enforcer", "Curse of Leeches", "Enduring Angel", "Gisa, Glorious Resurrector", "Leeching Lurker", "Necrosynthesis", "Old Stickfingers", "Ominous Roost", "Ormendahl, the Corrupter", "Siphon Insight", "Wake to Slaughter", "Sigarda's Splendor", "Sungold Sentinel", "Lord of the Forsaken", "Light Up the Night", "Rem Karolus, Stalwart Slayer", "Rootcoil Creeper", "Slogurk, the Overslime", "Baneblade Scoundrel", "Baneclaw Marauder ", "Jerren, Corrupted Bishop", "Vengeful Strangler", "Strangling Grasp", "Ludevic, Necrogenius", "Olag, Ludevic's Hubris");
+    private static final List<String> unfinished = Arrays.asList("Beloved Beggar", "Generous Soul", "Dennick, Pious Apprentice", "Dennick, Pious Apparition", "Angelic Enforcer", "Curse of Leeches", "Enduring Angel", "Gisa, Glorious Resurrector", "Leeching Lurker", "Necrosynthesis", "Ominous Roost", "Ormendahl, the Corrupter", "Siphon Insight", "Wake to Slaughter", "Sigarda's Splendor", "Sungold Sentinel", "Lord of the Forsaken", "Light Up the Night", "Rem Karolus, Stalwart Slayer", "Rootcoil Creeper", "Slogurk, the Overslime", "Baneblade Scoundrel", "Baneclaw Marauder ", "Jerren, Corrupted Bishop", "Vengeful Strangler", "Strangling Grasp", "Ludevic, Necrogenius", "Olag, Ludevic's Hubris");
     private static final InnistradMidnightHunt instance = new InnistradMidnightHunt();
 
     public static InnistradMidnightHunt getInstance() {
@@ -218,6 +218,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Novice Occultist", 117, Rarity.COMMON, mage.cards.n.NoviceOccultist.class));
         cards.add(new SetCardInfo("Obsessive Astronomer", 152, Rarity.UNCOMMON, mage.cards.o.ObsessiveAstronomer.class));
         cards.add(new SetCardInfo("Odric's Outrider", 29, Rarity.UNCOMMON, mage.cards.o.OdricsOutrider.class));
+        cards.add(new SetCardInfo("Old Stickfingers", 234, Rarity.RARE, mage.cards.o.OldStickfingers.class));
         cards.add(new SetCardInfo("Olivia's Midnight Ambush", 118, Rarity.COMMON, mage.cards.o.OliviasMidnightAmbush.class));
         cards.add(new SetCardInfo("Organ Hoarder", 66, Rarity.COMMON, mage.cards.o.OrganHoarder.class));
         cards.add(new SetCardInfo("Otherworldly Gaze", 67, Rarity.COMMON, mage.cards.o.OtherworldlyGaze.class));
