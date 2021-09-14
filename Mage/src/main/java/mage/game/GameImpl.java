@@ -1958,7 +1958,9 @@ public abstract class GameImpl implements Game {
             if (newAbility.getSourceObjectZoneChangeCounter() == 0) {
                 newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
             }
-            newAbility.setSourcePermanentTransformCount(this);
+            if (!(newAbility instanceof DelayedTriggeredAbility)) {
+                newAbility.setSourcePermanentTransformCount(this);
+            }
             newAbility.setTriggerEvent(triggeringEvent);
             state.addTriggeredAbility(newAbility);
         }

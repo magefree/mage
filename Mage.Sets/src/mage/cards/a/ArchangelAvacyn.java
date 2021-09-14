@@ -56,9 +56,11 @@ public final class ArchangelAvacyn extends CardImpl {
 
         // When a non-Angel creature you control dies, transform Archangel Avacyn at the beginning of the next upkeep.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DiesCreatureTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new TransformSourceEffect())
-        ).setText("transform {this} at the beginning of the next upkeep"), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                new CreateDelayedTriggeredAbilityEffect(
+                        new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new TransformSourceEffect())
+                ).setText("transform {this} at the beginning of the next upkeep"), false, filter
+        ).setTriggerPhrase("When a non-Angel creature you control dies, "));
     }
 
     private ArchangelAvacyn(final ArchangelAvacyn card) {

@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class TransformTest extends CardTestPlayerBase {
@@ -133,7 +132,7 @@ public class TransformTest extends CardTestPlayerBase {
      * 4G Creature - Human Shaman Whenever a permanent you control transforms
      * into a non-Human creature, put a 2/2 green Wolf creature token onto the
      * battlefield.
-     *
+     * <p>
      * Reported bug: "It appears to trigger either when a non-human creature
      * transforms OR when a creature transforms from a non-human into a human
      * (as in when a werewolf flips back to the sun side), rather than when a
@@ -188,7 +187,7 @@ public class TransformTest extends CardTestPlayerBase {
     /**
      * When copy token of Lambholt Pacifist transforms with "its transform
      * ability", I see below error. Then rollback.
-     *
+     * <p>
      * 701.25a Only permanents represented by double-faced cards can transform.
      * (See rule 711, “Double-Faced Cards.”) If a spell or ability instructs a
      * player to transform any permanent that isn‘t represented by a
@@ -221,7 +220,7 @@ public class TransformTest extends CardTestPlayerBase {
     /**
      * Mirror Mockery copies the front face of a Transformed card rather than
      * the current face.
-     *
+     * <p>
      * It's worth pointing out that my opponent cast Mirror Mockery the previous
      * turn - after it had transformed. I should have included the part of the
      * log that showed that Mirror Mockery was applied to the Unimpeded
@@ -280,11 +279,13 @@ public class TransformTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Wastes", 3);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{C}", "Archangel Avacyn", "Whenever a non-Angel creature you control dies");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{C}", "Archangel Avacyn");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
@@ -317,9 +318,9 @@ public class TransformTest extends CardTestPlayerBase {
      * was on stack, my opponent used Displacer's ability targeting Huntmaster.
      * That ability resolved and Huntmaster still transformed like it never left
      * the battlefield.
-     *
+     * <p>
      * http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=20014&p=210533#p210513
-     *
+     * <p>
      * The transform effect on the stack should fizzle. The card brought back
      * from Exile should be a new object unless I am interpreting the rules
      * incorrectly. The returned permanent uses the same GUID.
@@ -356,12 +357,13 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Ravager of the Fells", 0);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
-        assertPowerToughness(playerA,  "Huntmaster of the Fells", 2, 2);
+        assertPowerToughness(playerA, "Huntmaster of the Fells", 2, 2);
         assertTappedCount("Plains", true, 2);
         assertTappedCount("Wastes", true, 1);
 
     }
-   @Test
+
+    @Test
     public void testHuntmasterTransformed() {
         // Whenever this creature enters the battlefield or transforms into Huntmaster of the Fells, create a 2/2 green Wolf creature token and you gain 2 life.
         // At the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells.
@@ -387,15 +389,16 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Ravager of the Fells", 0);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
         assertPowerToughness(playerA, "Huntmaster of the Fells", 2, 2);
-        
+
 
     }
+
     /**
      * Having cast Phantasmal Image copying my opponent's flipped Thing in the
      * Ice, I was left with a 0/4 Awoken Horror.
-     *
+     * <p>
      * https://github.com/magefree/mage/issues/5893
-     *
+     * <p>
      * The transform effect on the stack should fizzle. The card brought back
      * from Exile should be a new object unless I am interpreting the rules
      * incorrectly. The returned permanent uses the same GUID.
