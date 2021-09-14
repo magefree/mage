@@ -5,10 +5,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.SacrificeAllCost;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.EnterBattlefieldPayCostOrPutGraveyardEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -30,7 +29,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 public final class ShelteredValley extends CardImpl {
 
     private static final FilterPermanent filterShelteredValley = new FilterPermanent("permanent named Sheltered Valley");
-    
+
     static {
         filterShelteredValley.add(new NamePredicate("Sheltered Valley"));
     }
@@ -43,13 +42,13 @@ public final class ShelteredValley extends CardImpl {
         effect.setText("If {this} would enter the battlefield, instead sacrifice each other permanent named {this} you control, then put {this} onto the battlefield.");
         Ability ability = new SimpleStaticAbility(Zone.ALL, effect);
         this.addAbility(ability);
-        
+
         // At the beginning of your upkeep, if you control three or fewer lands, you gain 1 life.
-        Condition controls = new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_LANDS, ComparisonType.FEWER_THAN, 4);
-        effect = new ConditionalOneShotEffect(new GainLifeEffect(1), controls);
-        effect.setText("if you control three or fewer lands, you gain 1 life");
-        ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false);
-        this.addAbility(ability);
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), TargetController.YOU, false),
+                new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_LANDS, ComparisonType.FEWER_THAN, 4),
+                "At the beginning of your upkeep, if you control three or fewer lands, you gain 1 life."
+        ));
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
     }
