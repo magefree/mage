@@ -141,6 +141,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Flare of Faith", 19, Rarity.COMMON, mage.cards.f.FlareOfFaith.class));
         cards.add(new SetCardInfo("Fleshtaker", 222, Rarity.UNCOMMON, mage.cards.f.Fleshtaker.class));
         cards.add(new SetCardInfo("Flip the Switch", 54, Rarity.COMMON, mage.cards.f.FlipTheSwitch.class));
+        cards.add(new SetCardInfo("Florian, Voldaren Scion", 223, Rarity.RARE, mage.cards.f.FlorianVoldarenScion.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Foul Play", 101, Rarity.UNCOMMON, mage.cards.f.FoulPlay.class));
         cards.add(new SetCardInfo("Frenzied Trapbreaker", 190, Rarity.UNCOMMON, mage.cards.f.FrenziedTrapbreaker.class));

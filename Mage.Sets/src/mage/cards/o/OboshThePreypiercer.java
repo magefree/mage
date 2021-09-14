@@ -88,7 +88,7 @@ class OboshThePreypiercerEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PERMANENT);
+                || event.getType().equals(GameEvent.EventType.DAMAGE_PERMANENT);
     }
 
     @Override
