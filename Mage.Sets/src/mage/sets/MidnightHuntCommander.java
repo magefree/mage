@@ -23,6 +23,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kyler, Sigardian Emissary", 4, Rarity.MYTHIC, mage.cards.k.KylerSigardianEmissary.class));
         cards.add(new SetCardInfo("Leinore, Autumn Sovereign", 1, Rarity.MYTHIC, mage.cards.l.LeinoreAutumnSovereign.class));
         cards.add(new SetCardInfo("Ravenous Rotbelly", 22, Rarity.RARE, mage.cards.r.RavenousRotbelly.class));
+        cards.add(new SetCardInfo("Somberwald Beastmaster", 30, Rarity.RARE, mage.cards.s.SomberwaldBeastmaster.class));
         cards.add(new SetCardInfo("Wilhelt, the Rotcleaver", 2, Rarity.MYTHIC, mage.cards.w.WilheltTheRotcleaver.class));
         cards.add(new SetCardInfo("Zombie Apocalypse", 131, Rarity.RARE, mage.cards.z.ZombieApocalypse.class));
     }
