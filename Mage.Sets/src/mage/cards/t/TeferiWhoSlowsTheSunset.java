@@ -23,8 +23,6 @@ import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -83,7 +81,6 @@ class TeferiWhoSlowsTheSunsetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> chosen = new ArrayList<>();
         Player player = game.getPlayer(source.getControllerId());
         for (Target target : source.getTargets()) {
             Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
