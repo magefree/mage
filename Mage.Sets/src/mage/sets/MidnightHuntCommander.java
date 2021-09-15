@@ -56,6 +56,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Distant Melody", 98, Rarity.COMMON, mage.cards.d.DistantMelody.class));
         cards.add(new SetCardInfo("Dread Summons", 113, Rarity.RARE, mage.cards.d.DreadSummons.class));
         cards.add(new SetCardInfo("Dreadhorde Invasion", 114, Rarity.RARE, mage.cards.d.DreadhordeInvasion.class));
+        cards.add(new SetCardInfo("Drown in Dreams", 13, Rarity.RARE, mage.cards.d.DrownInDreams.class));
         cards.add(new SetCardInfo("Eater of Hope", 115, Rarity.RARE, mage.cards.e.EaterOfHope.class));
         cards.add(new SetCardInfo("Elite Scaleguard", 85, Rarity.UNCOMMON, mage.cards.e.EliteScaleguard.class));
         cards.add(new SetCardInfo("Eloise, Nephalia Sleuth", 3, Rarity.MYTHIC, mage.cards.e.EloiseNephaliaSleuth.class));
