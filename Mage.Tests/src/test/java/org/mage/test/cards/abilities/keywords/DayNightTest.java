@@ -17,6 +17,7 @@ public class DayNightTest extends CardTestPlayerBase {
     private static final String outcasts = "Grizzled Outcasts";
     private static final String wantons = "Krallenhorde Wantons";
     private static final String immerwolf = "Immerwolf";
+    private static final String bolt = "Lightning Bolt";
 
     private void assertDayNight(boolean daytime) {
         Assert.assertTrue("It should not be neither day nor night", currentGame.hasDayNight());
@@ -140,5 +141,60 @@ public class DayNightTest extends CardTestPlayerBase {
         assertDayNight(true);
         assertPowerToughness(playerA, smasher, 6 + 1, 5 + 1);
         assertPermanentCount(playerA, ruffian, 0);
+    }
+
+    @Test
+    public void testNoSpellsBecomesNight() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, ruffian);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ruffian);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertRuffianSmasher(true);
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertRuffianSmasher(true);
+
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertRuffianSmasher(false);
+    }
+
+    @Test
+    public void testTwoSpellsBecomesDay() {
+        currentGame.setDaytime(false);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.HAND, playerA, ruffian);
+        addCard(Zone.HAND, playerA, bolt);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ruffian);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bolt, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 3);
+        assertGraveyardCount(playerA, bolt, 1);
+        assertRuffianSmasher(false);
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertRuffianSmasher(true);
+
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertRuffianSmasher(false);
     }
 }
