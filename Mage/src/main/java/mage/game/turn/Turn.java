@@ -11,7 +11,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.ThreadLocalStringBuilder;
-import mage.watchers.common.CastSpellLastTurnWatcher;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -119,17 +118,6 @@ public class Turn implements Serializable {
         this.activePlayerId = activePlayer.getId();
         resetCounts();
         game.getPlayer(activePlayer.getId()).beginTurn(game);
-        if (game.hasDayNight() && game.getTurnNum() > 1) {
-            int previousSpells = game
-                    .getState()
-                    .getWatcher(CastSpellLastTurnWatcher.class)
-                    .getActivePlayerPrevTurnCount();
-            if (game.checkDayNight(true) && previousSpells == 0) {
-                game.setDaytime(false);
-            } else if (game.checkDayNight(false) && previousSpells >= 2) {
-                game.setDaytime(true);
-            }
-        }
         for (Phase phase : phases) {
             if (game.isPaused() || game.checkIfGameIsOver()) {
                 return false;
