@@ -109,6 +109,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ruthless Deathfang", 154, Rarity.UNCOMMON, mage.cards.r.RuthlessDeathfang.class));
         cards.add(new SetCardInfo("Selesnya Sanctuary", 180, Rarity.UNCOMMON, mage.cards.s.SelesnyaSanctuary.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 143, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
+        cards.add(new SetCardInfo("Sigarda's Vanguard", 8, Rarity.RARE, mage.cards.s.SigardasVanguard.class));
         cards.add(new SetCardInfo("Sigarda, Heron's Grace", 155, Rarity.MYTHIC, mage.cards.s.SigardaHeronsGrace.class));
         cards.add(new SetCardInfo("Sky Diamond", 161, Rarity.COMMON, mage.cards.s.SkyDiamond.class));
         cards.add(new SetCardInfo("Sol Ring", 162, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
