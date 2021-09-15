@@ -241,6 +241,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Purifying Dragon", 155, Rarity.UNCOMMON, mage.cards.p.PurifyingDragon.class));
         cards.add(new SetCardInfo("Raze the Effigy", 156, Rarity.COMMON, mage.cards.r.RazeTheEffigy.class));
         cards.add(new SetCardInfo("Reckless Stormseeker", 157, Rarity.RARE, mage.cards.r.RecklessStormseeker.class));
+        cards.add(new SetCardInfo("Rem Karolus, Stalwart Slayer", 235, Rarity.RARE, mage.cards.r.RemKarolusStalwartSlayer.class));
         cards.add(new SetCardInfo("Return to Nature", 195, Rarity.COMMON, mage.cards.r.ReturnToNature.class));
         cards.add(new SetCardInfo("Revenge of the Drowned", 72, Rarity.COMMON, mage.cards.r.RevengeOfTheDrowned.class));
         cards.add(new SetCardInfo("Rise of the Ants", 196, Rarity.UNCOMMON, mage.cards.r.RiseOfTheAnts.class));
