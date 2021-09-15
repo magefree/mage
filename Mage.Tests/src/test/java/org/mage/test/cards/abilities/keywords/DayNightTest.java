@@ -21,6 +21,7 @@ public class DayNightTest extends CardTestPlayerBase {
     private static final String bolt = "Lightning Bolt";
     private static final String curse = "Curse of Leeches";
     private static final String lurker = "Leeching Lurker";
+    private static final String vandal = "Brimstone Vandal";
 
     private void assertDayNight(boolean daytime) {
         Assert.assertTrue("It should not be neither day nor night", currentGame.hasDayNight());
@@ -211,6 +212,7 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertDayNight(true);
         Permanent permanent = getPermanent(curse);
@@ -229,6 +231,7 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertDayNight(false);
         assertPermanentCount(playerA, curse, 0);
@@ -246,6 +249,7 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertDayNight(false);
         assertPermanentCount(playerA, curse, 0);
@@ -265,10 +269,53 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertDayNight(true);
         Permanent permanent = getPermanent(curse);
         Assert.assertTrue("Curse is attached to playerB", permanent.isAttachedTo(playerB.getId()));
         assertPermanentCount(playerA, lurker, 0);
+    }
+
+    @Test
+    public void testBrimstoneVandalBecomeDay() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, vandal);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, vandal);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertDayNight(true);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void testBrimstoneVandalTrigger() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, bolt, 2);
+        addCard(Zone.HAND, playerA, vandal);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, vandal);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.UPKEEP);
+        execute();
+
+        assertDayNight(false);
+        assertLife(playerB, 20 - 1);
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, bolt, playerB);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, bolt, playerB);
+
+        setStopAt(4, PhaseStep.UPKEEP);
+        execute();
+        assertAllCommandsUsed();
+
+        assertDayNight(true);
+        assertLife(playerB, 20 - 1 - 3 - 3 - 1);
     }
 }
