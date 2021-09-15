@@ -2,7 +2,6 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.abilities.common.CanBlockOnlyFlyingAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -16,9 +15,9 @@ public class OminousRoostToken extends TokenImpl {
         subtype.add(SubType.BIRD);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        
+
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(new CanBlockOnlyFlyingAbility()));
+        this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
     private OminousRoostToken(final OminousRoostToken token) {
