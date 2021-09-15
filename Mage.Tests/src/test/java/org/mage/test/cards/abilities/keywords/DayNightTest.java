@@ -2,6 +2,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -18,6 +19,8 @@ public class DayNightTest extends CardTestPlayerBase {
     private static final String wantons = "Krallenhorde Wantons";
     private static final String immerwolf = "Immerwolf";
     private static final String bolt = "Lightning Bolt";
+    private static final String curse = "Curse of Leeches";
+    private static final String lurker = "Leeching Lurker";
 
     private void assertDayNight(boolean daytime) {
         Assert.assertTrue("It should not be neither day nor night", currentGame.hasDayNight());
@@ -196,5 +199,76 @@ public class DayNightTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertRuffianSmasher(false);
+    }
+
+    @Test
+    public void testCurseOfLeechesRegular() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, curse);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, curse, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertDayNight(true);
+        Permanent permanent = getPermanent(curse);
+        Assert.assertTrue("Curse is attached to playerB", permanent.isAttachedTo(playerB.getId()));
+        assertPermanentCount(playerA, lurker, 0);
+    }
+
+    @Test
+    public void testCurseOfLeechesNightbound() {
+        currentGame.setDaytime(false);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, curse);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, curse, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertDayNight(false);
+        assertPermanentCount(playerA, curse, 0);
+        assertPermanentCount(playerA, lurker, 1);
+    }
+
+    @Test
+    public void testCurseOfLeechesDayToNight() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, curse);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, curse, playerB);
+        setDayNight(1, PhaseStep.POSTCOMBAT_MAIN, false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertDayNight(false);
+        assertPermanentCount(playerA, curse, 0);
+        assertPermanentCount(playerA, lurker, 1);
+    }
+
+    @Test
+    public void testCurseOfLeechesNightToDay() {
+        currentGame.setDaytime(false);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, curse);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, curse, playerB);
+        setChoice(playerA, playerB.getName());
+        setDayNight(1, PhaseStep.POSTCOMBAT_MAIN, true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertDayNight(true);
+        Permanent permanent = getPermanent(curse);
+        Assert.assertTrue("Curse is attached to playerB", permanent.isAttachedTo(playerB.getId()));
+        assertPermanentCount(playerA, lurker, 0);
     }
 }
