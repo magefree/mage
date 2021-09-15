@@ -267,6 +267,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Silver Bolt", 258, Rarity.COMMON, mage.cards.s.SilverBolt.class));
         cards.add(new SetCardInfo("Skaab Wrangler", 75, Rarity.UNCOMMON, mage.cards.s.SkaabWrangler.class));
         cards.add(new SetCardInfo("Slaughter Specialist", 122, Rarity.RARE, mage.cards.s.SlaughterSpecialist.class));
+        cards.add(new SetCardInfo("Slogurk, the Overslime", 242, Rarity.RARE, mage.cards.s.SlogurkTheOverslime.class));
         cards.add(new SetCardInfo("Sludge Monster", 76, Rarity.RARE, mage.cards.s.SludgeMonster.class));
         cards.add(new SetCardInfo("Smoldering Egg", 159, Rarity.RARE, mage.cards.s.SmolderingEgg.class));
         cards.add(new SetCardInfo("Snarling Wolf", 199, Rarity.COMMON, mage.cards.s.SnarlingWolf.class));
