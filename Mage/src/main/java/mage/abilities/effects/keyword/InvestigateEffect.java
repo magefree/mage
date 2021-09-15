@@ -60,7 +60,7 @@ public class InvestigateEffect extends OneShotEffect {
             default:
                 message = CardUtil.numberToText(amount) + " times. <i>(To investigate, c";
         }
-        return "investigate " + message + "reate a colorless Clue artifact token " +
+        return "investigate" + message + "reate a colorless Clue artifact token " +
                 "with \"{2}, Sacrifice this artifact: Draw a card.\")</i>";
     }
 }
