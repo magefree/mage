@@ -17,7 +17,9 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
+import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;
 
@@ -30,10 +32,10 @@ public final class WinterthornBlessing extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{U}");
 
         // Put a +1/+1 counter on up to one target creature you control. Tap up to one target creature you don't control, and that creature doesn't untap during its controller's next untap step.
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 1));
         this.getSpellAbility().addTarget(new TargetPermanent(new TargetOpponentsCreaturePermanent()));
-        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        this.getSpellAbility().addEffect(new WinterthornBlessingEffect());
+        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setTargetPointer(new FirstTargetPointer()));
+        this.getSpellAbility().addEffect(new WinterthornBlessingEffect().setTargetPointer(new SecondTargetPointer()));
 
         // Flashback {1}{G}{U}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{G}{U}")));
