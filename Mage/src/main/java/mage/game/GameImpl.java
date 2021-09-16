@@ -2797,6 +2797,8 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void informPlayers(String message) {
+        // Uncomment to print game messages
+        // System.out.println(message.replaceAll("\\<.*?\\>", ""));
         if (simulation) {
             return;
         }
