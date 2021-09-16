@@ -137,6 +137,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Undead Augur", 130, Rarity.UNCOMMON, mage.cards.u.UndeadAugur.class));
         cards.add(new SetCardInfo("Verdurous Gearhulk", 145, Rarity.MYTHIC, mage.cards.v.VerdurousGearhulk.class));
         cards.add(new SetCardInfo("Victory's Envoy", 96, Rarity.RARE, mage.cards.v.VictorysEnvoy.class));
+        cards.add(new SetCardInfo("Visions of Duplicity", 33, Rarity.RARE, mage.cards.v.VisionsOfDuplicity.class));
         cards.add(new SetCardInfo("Visions of Glory", 32, Rarity.RARE, mage.cards.v.VisionsOfGlory.class));
         cards.add(new SetCardInfo("Wild Beastmaster", 146, Rarity.RARE, mage.cards.w.WildBeastmaster.class));
         cards.add(new SetCardInfo("Wilhelt, the Rotcleaver", 2, Rarity.MYTHIC, mage.cards.w.WilheltTheRotcleaver.class));
