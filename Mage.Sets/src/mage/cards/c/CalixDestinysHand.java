@@ -29,6 +29,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static mage.constants.Outcome.Benefit;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -105,21 +106,24 @@ class CalixDestinysHandExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         if (source.getTargets().size() > 2) {
             return false;
         }
         source.getTargets();
         Permanent theirPerm = game.getPermanent(source.getTargets().get(0).getFirstTarget());
         Permanent myPerm = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (player == null || theirPerm == null || myPerm == null) {
+        if (controller == null 
+                || theirPerm == null 
+                || myPerm == null) {
             return false;
         }
         MageObjectReference theirMor = new MageObjectReference(
                 theirPerm.getId(), theirPerm.getZoneChangeCounter(game) + 1, game
         );
         MageObjectReference myMor = new MageObjectReference(myPerm, game);
-        player.moveCards(theirPerm, Zone.EXILED, source, game);
+        UUID exileId = CardUtil.getExileZoneId(game, source);
+        controller.moveCardsToExile(theirPerm, source, game, true, exileId, myPerm.getLogName());
         game.addDelayedTriggeredAbility(new CalixDestinysHandDelayedTriggeredAbility(theirMor, myMor), source);
         return true;
     }
