@@ -9,6 +9,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,6 +39,7 @@ public final class LudevicNecrogenius extends CardImpl {
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new MillCardsControllerEffect(1)));
 
         // {X}{U}{U}{B}{B}, Exile X creature cards from your graveyard: Transform Ludevic, Necrogenius. X can't be zero. Activate only as a sorcery.
+        this.addAbility(new TransformAbility());
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new TransformSourceEffect(), new ManaCostsImpl<>("{X}{U}{U}{B}{B}")
         );
