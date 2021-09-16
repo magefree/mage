@@ -1323,8 +1323,9 @@ public abstract class AbilityImpl implements Ability {
      * @param costAdjuster
      */
     @Override
-    public void setCostAdjuster(CostAdjuster costAdjuster) {
+    public AbilityImpl setCostAdjuster(CostAdjuster costAdjuster) {
         this.costAdjuster = costAdjuster;
+        return this;
     }
 
     @Override
