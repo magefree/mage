@@ -585,6 +585,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.getPower().modifyBaseValue(orgCard.getPower().getValue());
             this.getToughness().modifyBaseValue(orgCard.getToughness().getValue());
         }
+        game.informPlayers(this.getName() + " transforms into "
+                + (transformed
+                ? this.getMainCard().getName()
+                : this.getMainCard().getSecondCardFace().getName()));
         setTransformed(!transformed);
         transformCount++;
         game.applyEffects();
