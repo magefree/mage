@@ -36,6 +36,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Butcher of Malakir", 107, Rarity.RARE, mage.cards.b.ButcherOfMalakir.class));
         cards.add(new SetCardInfo("Canopy Vista", 168, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Celebrate the Harvest", 24, Rarity.RARE, mage.cards.c.CelebrateTheHarvest.class));
+        cards.add(new SetCardInfo("Celestial Judgment", 5, Rarity.RARE, mage.cards.c.CelestialJudgment.class));
         cards.add(new SetCardInfo("Cemetery Reaper", 108, Rarity.RARE, mage.cards.c.CemeteryReaper.class));
         cards.add(new SetCardInfo("Champion of Lambholt", 136, Rarity.RARE, mage.cards.c.ChampionOfLambholt.class));
         cards.add(new SetCardInfo("Charcoal Diamond", 158, Rarity.COMMON, mage.cards.c.CharcoalDiamond.class));
