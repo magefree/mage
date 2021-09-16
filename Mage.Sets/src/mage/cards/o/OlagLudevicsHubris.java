@@ -33,8 +33,11 @@ public final class OlagLudevicsHubris extends CardImpl {
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+        this.color.setBlue(true);
+        this.color.setBlack(true);
+        this.nightCard = true;
 
-        // As this creature transforms in Olag, Ludevic’s Hubris, it becomes a copy of a creature card exiled with it, except its name is Olag, Ludevic’s Hubris, it’s 4/4, and it’s a legendary blue and black Zombie in addition to its other colors and types. Put a number of +1/+1 counters on Olag equal to the number of creature cards exiled with it.
+        // As this creature transforms in Olag, Ludevic's Hubris, it becomes a copy of a creature card exiled with it, except its name is Olag, Ludevic's Hubris, it's 4/4, and it's a legendary blue and black Zombie in addition to its other colors and types. Put a number of +1/+1 counters on Olag equal to the number of creature cards exiled with it.
         this.addAbility(new SimpleStaticAbility(new OlagLudevicsHubrisEffect()));
     }
 
@@ -53,7 +56,7 @@ class OlagLudevicsHubrisEffect extends ReplacementEffectImpl {
     OlagLudevicsHubrisEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "as this creature transforms in {this}, it becomes a copy of a creature card exiled with it, " +
-                "except its name is Olag, Ludevic’s Hubris, it’s 4/4, and it’s a legendary blue and black " +
+                "except its name is Olag, Ludevic's Hubris, it's 4/4, and it's a legendary blue and black " +
                 "Zombie in addition to its other colors and types. Put a number of +1/+1 counters on {this} " +
                 "equal to the number of creature cards exiled with it";
     }
@@ -120,7 +123,7 @@ class OlagLudevicsHubrisCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-        blueprint.setName("Olag, Ludevic’s Hubris");
+        blueprint.setName("Olag, Ludevic's Hubris");
         blueprint.addSuperType(SuperType.LEGENDARY);
         blueprint.addSubType(SubType.ZOMBIE);
         blueprint.getColor().setBlue(true);
