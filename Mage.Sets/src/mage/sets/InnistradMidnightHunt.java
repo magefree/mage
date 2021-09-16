@@ -189,6 +189,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Leeching Lurker", 94, Rarity.RARE, mage.cards.l.LeechingLurker.class));
         cards.add(new SetCardInfo("Lier, Disciple of the Drowned", 59, Rarity.MYTHIC, mage.cards.l.LierDiscipleOfTheDrowned.class));
         cards.add(new SetCardInfo("Liesa, Forgotten Archangel", 232, Rarity.RARE, mage.cards.l.LiesaForgottenArchangel.class));
+        cards.add(new SetCardInfo("Light Up the Night", 146, Rarity.RARE, mage.cards.l.LightUpTheNight.class));
         cards.add(new SetCardInfo("Locked in the Cemetery", 60, Rarity.COMMON, mage.cards.l.LockedInTheCemetery.class));
         cards.add(new SetCardInfo("Lord of the Ulvenwald", 231, Rarity.UNCOMMON, mage.cards.l.LordOfTheUlvenwald.class));
         cards.add(new SetCardInfo("Loyal Gryff", 26, Rarity.UNCOMMON, mage.cards.l.LoyalGryff.class));
@@ -214,13 +215,16 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Mystic Monstrosity", 256, Rarity.UNCOMMON, mage.cards.m.MysticMonstrosity.class));
         cards.add(new SetCardInfo("Mystic Skull", 256, Rarity.UNCOMMON, mage.cards.m.MysticSkull.class));
         cards.add(new SetCardInfo("Nebelgast Intruder", 64, Rarity.UNCOMMON, mage.cards.n.NebelgastIntruder.class));
+        cards.add(new SetCardInfo("Necrosynthesis", 115, Rarity.UNCOMMON, mage.cards.n.Necrosynthesis.class));
         cards.add(new SetCardInfo("Neonate's Rush", 151, Rarity.COMMON, mage.cards.n.NeonatesRush.class));
         cards.add(new SetCardInfo("No Way Out", 116, Rarity.COMMON, mage.cards.n.NoWayOut.class));
         cards.add(new SetCardInfo("Novice Occultist", 117, Rarity.COMMON, mage.cards.n.NoviceOccultist.class));
         cards.add(new SetCardInfo("Obsessive Astronomer", 152, Rarity.UNCOMMON, mage.cards.o.ObsessiveAstronomer.class));
         cards.add(new SetCardInfo("Odric's Outrider", 29, Rarity.UNCOMMON, mage.cards.o.OdricsOutrider.class));
         cards.add(new SetCardInfo("Olag, Ludevic's Hubris", 233, Rarity.RARE, mage.cards.o.OlagLudevicsHubris.class));
+        cards.add(new SetCardInfo("Old Stickfingers", 234, Rarity.RARE, mage.cards.o.OldStickfingers.class));
         cards.add(new SetCardInfo("Olivia's Midnight Ambush", 118, Rarity.COMMON, mage.cards.o.OliviasMidnightAmbush.class));
+        cards.add(new SetCardInfo("Ominous Roost", 65, Rarity.UNCOMMON, mage.cards.o.OminousRoost.class));
         cards.add(new SetCardInfo("Organ Hoarder", 66, Rarity.COMMON, mage.cards.o.OrganHoarder.class));
         cards.add(new SetCardInfo("Otherworldly Gaze", 67, Rarity.COMMON, mage.cards.o.OtherworldlyGaze.class));
         cards.add(new SetCardInfo("Outland Liberator", 190, Rarity.UNCOMMON, mage.cards.o.OutlandLiberator.class));
@@ -241,6 +245,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Purifying Dragon", 155, Rarity.UNCOMMON, mage.cards.p.PurifyingDragon.class));
         cards.add(new SetCardInfo("Raze the Effigy", 156, Rarity.COMMON, mage.cards.r.RazeTheEffigy.class));
         cards.add(new SetCardInfo("Reckless Stormseeker", 157, Rarity.RARE, mage.cards.r.RecklessStormseeker.class));
+        cards.add(new SetCardInfo("Rem Karolus, Stalwart Slayer", 235, Rarity.RARE, mage.cards.r.RemKarolusStalwartSlayer.class));
         cards.add(new SetCardInfo("Return to Nature", 195, Rarity.COMMON, mage.cards.r.ReturnToNature.class));
         cards.add(new SetCardInfo("Revenge of the Drowned", 72, Rarity.COMMON, mage.cards.r.RevengeOfTheDrowned.class));
         cards.add(new SetCardInfo("Rise of the Ants", 196, Rarity.UNCOMMON, mage.cards.r.RiseOfTheAnts.class));
@@ -267,6 +272,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Silver Bolt", 258, Rarity.COMMON, mage.cards.s.SilverBolt.class));
         cards.add(new SetCardInfo("Skaab Wrangler", 75, Rarity.UNCOMMON, mage.cards.s.SkaabWrangler.class));
         cards.add(new SetCardInfo("Slaughter Specialist", 122, Rarity.RARE, mage.cards.s.SlaughterSpecialist.class));
+        cards.add(new SetCardInfo("Slogurk, the Overslime", 242, Rarity.RARE, mage.cards.s.SlogurkTheOverslime.class));
         cards.add(new SetCardInfo("Sludge Monster", 76, Rarity.RARE, mage.cards.s.SludgeMonster.class));
         cards.add(new SetCardInfo("Smoldering Egg", 159, Rarity.RARE, mage.cards.s.SmolderingEgg.class));
         cards.add(new SetCardInfo("Snarling Wolf", 199, Rarity.COMMON, mage.cards.s.SnarlingWolf.class));
