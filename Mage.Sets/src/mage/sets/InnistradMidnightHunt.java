@@ -192,6 +192,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Locked in the Cemetery", 60, Rarity.COMMON, mage.cards.l.LockedInTheCemetery.class));
         cards.add(new SetCardInfo("Lord of the Ulvenwald", 231, Rarity.UNCOMMON, mage.cards.l.LordOfTheUlvenwald.class));
         cards.add(new SetCardInfo("Loyal Gryff", 26, Rarity.UNCOMMON, mage.cards.l.LoyalGryff.class));
+        cards.add(new SetCardInfo("Ludevic, Necrogenius", 233, Rarity.RARE, mage.cards.l.LudevicNecrogenius.class));
         cards.add(new SetCardInfo("Luminous Phantom", 27, Rarity.COMMON, mage.cards.l.LuminousPhantom.class));
         cards.add(new SetCardInfo("Lunar Frenzy", 147, Rarity.UNCOMMON, mage.cards.l.LunarFrenzy.class));
         cards.add(new SetCardInfo("Lunarch Veteran", 27, Rarity.COMMON, mage.cards.l.LunarchVeteran.class));
@@ -218,6 +219,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Novice Occultist", 117, Rarity.COMMON, mage.cards.n.NoviceOccultist.class));
         cards.add(new SetCardInfo("Obsessive Astronomer", 152, Rarity.UNCOMMON, mage.cards.o.ObsessiveAstronomer.class));
         cards.add(new SetCardInfo("Odric's Outrider", 29, Rarity.UNCOMMON, mage.cards.o.OdricsOutrider.class));
+        cards.add(new SetCardInfo("Olag, Ludevic's Hubris", 233, Rarity.RARE, mage.cards.o.OlagLudevicsHubris.class));
         cards.add(new SetCardInfo("Olivia's Midnight Ambush", 118, Rarity.COMMON, mage.cards.o.OliviasMidnightAmbush.class));
         cards.add(new SetCardInfo("Organ Hoarder", 66, Rarity.COMMON, mage.cards.o.OrganHoarder.class));
         cards.add(new SetCardInfo("Otherworldly Gaze", 67, Rarity.COMMON, mage.cards.o.OtherworldlyGaze.class));
