@@ -2614,6 +2614,17 @@ public abstract class GameImpl implements Game {
             }
         }
 
+        // Daybound/Nightbound permanents should be transformed according to day/night
+        // This is not a state-based action but it's unclear where else to put it
+        if (hasDayNight()) {
+            for (Permanent permanent : getBattlefield().getAllActivePermanents()) {
+                if ((permanent.getAbilities(this).containsClass(DayboundAbility.class) && !state.isDaytime())
+                        || (permanent.getAbilities(this).containsClass(NightboundAbility.class) && state.isDaytime())) {
+                    somethingHappened = permanent.transform(null, this, true) || somethingHappened;
+                }
+            }
+        }
+
         //TODO: implement the rest
         return somethingHappened;
     }

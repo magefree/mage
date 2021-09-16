@@ -128,7 +128,7 @@ public class DayNightTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testImmerwolf() {
+    public void testImmerwolfPreventsTransformation() {
         currentGame.setDaytime(false);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.BATTLEFIELD, playerA, immerwolf);
@@ -145,6 +145,34 @@ public class DayNightTest extends CardTestPlayerBase {
         assertDayNight(true);
         assertPowerToughness(playerA, smasher, 6 + 1, 5 + 1);
         assertPermanentCount(playerA, ruffian, 0);
+    }
+
+    @Test
+    public void testImmerwolfRemoved() {
+        currentGame.setDaytime(false);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, immerwolf);
+        addCard(Zone.HAND, playerA, bolt);
+        addCard(Zone.HAND, playerA, ruffian);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ruffian);
+        setDayNight(1, PhaseStep.BEGIN_COMBAT, true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertDayNight(true);
+        assertPowerToughness(playerA, smasher, 6 + 1, 5 + 1);
+        assertPermanentCount(playerA, ruffian, 0);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, bolt, immerwolf);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertRuffianSmasher(true);
     }
 
     @Test
