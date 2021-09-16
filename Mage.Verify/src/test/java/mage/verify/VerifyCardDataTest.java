@@ -89,7 +89,6 @@ public class VerifyCardDataTest {
 
         // power-toughness
         skipListCreate(SKIP_LIST_PT);
-        skipListAddName(SKIP_LIST_PT, "MID", "Tovolar, Dire Overlord");
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
