@@ -23,7 +23,7 @@ public final class ArmyOfTheDamned extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 13, true, false));
 
         // Flashback {7}{B}{B}{B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{B}{B}{B}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{7}{B}{B}{B}")));
     }
 
     private ArmyOfTheDamned(final ArmyOfTheDamned card) {

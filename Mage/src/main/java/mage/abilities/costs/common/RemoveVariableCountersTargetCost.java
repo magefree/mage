@@ -31,16 +31,25 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl {
     }
 
     public RemoveVariableCountersTargetCost(FilterPermanent filter, CounterType counterTypeToRemove, String xText, int minValue) {
+        this(filter, counterTypeToRemove, xText, minValue, null);
+    }
+
+    public RemoveVariableCountersTargetCost(FilterPermanent filter, CounterType counterTypeToRemove, String xText, int minValue, String text) {
         super(VariableCostType.NORMAL, xText, new StringBuilder(counterTypeToRemove != null ? counterTypeToRemove.getName() + ' ' : "").append("counters to remove").toString());
         this.filter = filter;
         this.counterTypeToRemove = counterTypeToRemove;
-        this.text = setText();
+        if (text != null && !text.isEmpty()) {
+            this.text = text;
+        } else {
+            this.text = setText();
+        }
         this.minValue = minValue;
     }
 
     public RemoveVariableCountersTargetCost(final RemoveVariableCountersTargetCost cost) {
         super(cost);
         this.filter = cost.filter;
+        this.counterTypeToRemove = cost.counterTypeToRemove;
         this.minValue = cost.minValue;
     }
 
@@ -61,6 +70,16 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl {
     @Override
     public RemoveVariableCountersTargetCost copy() {
         return new RemoveVariableCountersTargetCost(this);
+    }
+
+    @Override
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return getMaxValue(source, game) >= minValue;
+    }
+
+    @Override
+    public int getMinValue(Ability source, Game game) {
+        return minValue;
     }
 
     @Override

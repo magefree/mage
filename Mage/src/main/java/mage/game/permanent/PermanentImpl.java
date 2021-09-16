@@ -841,6 +841,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public int damage(int damage, Ability source, Game game) {
+        return damage(damage, source.getSourceId(), source, game);
+    }
+
+    @Override
     public int damage(int damage, UUID attackerId, Ability source, Game game) {
         return doDamage(damage, attackerId, source, game, true, false, false, null);
     }
@@ -1163,6 +1168,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         // instead it adds damage prevention
         //return (!hasProtectionFrom(source, game));
         return true;
+    }
+
+    @Override
+    public boolean destroy(Ability source, Game game) {
+        return destroy(source, game, false);
     }
 
     @Override

@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -23,21 +21,24 @@ import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class DralnuLichLord extends CardImpl {
-    
+
     private static final FilterCard filter = new FilterCard("instant or sorcery card in your graveyard");
+
     static {
         filter.add(Predicates.or(
                 CardType.INSTANT.getPredicate(),
-                CardType.SORCERY.getPredicate()));
+                CardType.SORCERY.getPredicate()
+        ));
     }
 
     public DralnuLichLord(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WIZARD);
@@ -46,10 +47,10 @@ public final class DralnuLichLord extends CardImpl {
         this.toughness = new MageInt(3);
 
         // If damage would be dealt to Dralnu, Lich Lord, sacrifice that many permanents instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DralnuLichLordReplacementEffect()));
-        
+        this.addAbility(new SimpleStaticAbility(new DralnuLichLordReplacementEffect()));
+
         // {tap}: Target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DralnuLichLordFlashbackEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DralnuLichLordFlashbackEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
@@ -85,7 +86,7 @@ class DralnuLichLordReplacementEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(source.getSourceId());
@@ -117,13 +118,7 @@ class DralnuLichLordFlashbackEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card != null) {
-            FlashbackAbility ability;
-            if (card.isInstant(game)) {
-                ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
-            }
-            else {
-                ability = new FlashbackAbility(card.getManaCost(), TimingRule.SORCERY);
-            }
+            FlashbackAbility ability = new FlashbackAbility(card, card.getManaCost());
             ability.setSourceId(card.getId());
             ability.setControllerId(card.getOwnerId());
             game.getState().addOtherAbility(card, ability);

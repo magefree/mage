@@ -44,7 +44,7 @@ public final class PrismaticStrands extends CardImpl {
         this.getSpellAbility().addEffect(new PrismaticStrandsEffect());
 
         // Flashback-Tap an untapped white creature you control.
-        this.addAbility(new FlashbackAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
     }
 
     private PrismaticStrands(final PrismaticStrands card) {

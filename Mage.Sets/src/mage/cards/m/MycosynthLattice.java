@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -9,17 +8,17 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.hint.StaticHint;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.command.CommandObject;
-import mage.game.command.Commander;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author duncant
@@ -89,46 +88,73 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             ObjectColor colorless = new ObjectColor();
+
             // permaments
             for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
                 perm.getColor(game).setColor(colorless);
             }
+
+            List<Card> affectedCards = new ArrayList<>();
+
             // spells
             for (MageObject object : game.getStack()) {
                 if (object instanceof Spell) {
                     game.getState().getCreateMageObjectAttribute(object, game).getColor().setColor(colorless);
+
+                    Card card = ((Spell) object).getCard();
+                    affectedCards.add(card);
                 }
             }
+
             // exile
-            for (Card card : game.getExile().getAllCards(game)) {
-                game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
-            }
-            // command
-            for (CommandObject commandObject : game.getState().getCommand()) {
-                if (commandObject instanceof Commander) {
-                    Card card = game.getCard(((Commander) commandObject).getId());
-                    if (card != null) {
-                        game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(colorless);
-                    }
-                }
-            }
+            affectedCards.addAll(game.getExile().getAllCardsByRange(game, controller.getId()));
+
+
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    // hand
-                    for (Card card : player.getHand().getCards(game)) {
-                        game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
-                    }
-                    // library
-                    for (Card card : player.getLibrary().getCards(game)) {
-                        game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
-                    }
-                    // graveyard
-                    for (Card card : player.getGraveyard().getCards(game)) {
-                        game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
-                    }
+                if (player == null) {
+                    continue;
                 }
+
+                // command
+                affectedCards.addAll(game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY));
+
+                // hand
+                affectedCards.addAll(player.getHand().getCards(game));
+
+                // library
+                affectedCards.addAll(player.getLibrary().getCards(game));
+
+                // graveyard
+                affectedCards.addAll(player.getGraveyard().getCards(game));
             }
+
+
+            // apply colors to all cards
+            affectedCards.forEach(card -> {
+                game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
+
+                // mdf cards
+                if (card instanceof ModalDoubleFacesCard) {
+                    ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+                    ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+                    game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().setColor(colorless);
+                    game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().setColor(colorless);
+                }
+
+                // split cards
+                if (card instanceof SplitCard) {
+                    SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
+                    SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
+                    game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().setColor(colorless);
+                    game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().setColor(colorless);
+                }
+
+                // double faces cards
+                if (card.getSecondCardFace() != null) {
+                    game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
+                }
+            });
             return true;
         }
         return false;

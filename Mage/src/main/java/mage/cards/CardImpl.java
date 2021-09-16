@@ -271,7 +271,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     && mainCardState != null
                     && !mainCardState.hasLostAllAbilities()
                     && mainCardState.getAbilities().containsClass(FlashbackAbility.class)) {
-                FlashbackAbility flash = new FlashbackAbility(this.getManaCost(), this.isInstant(game) ? TimingRule.INSTANT : TimingRule.SORCERY);
+                FlashbackAbility flash = new FlashbackAbility(this, this.getManaCost());
                 flash.setSourceId(this.getId());
                 flash.setControllerId(this.getOwnerId());
                 flash.setSpellAbilityType(this.getSpellAbility().getSpellAbilityType());
@@ -747,11 +747,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 break;
             }
             GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, source, getControllerOrOwner());
+            if (source != null
+                    && source.getControllerId() != null) {
+                event.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counter
+            }
             event.setData(name);
             game.fireEvent(event);
             finalAmount++;
         }
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTERS_REMOVED, objectId, source, getControllerOrOwner());
+        if (source != null
+                && source.getControllerId() != null) {
+            event.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counter
+        }
         event.setData(name);
         event.setAmount(finalAmount);
         game.fireEvent(event);

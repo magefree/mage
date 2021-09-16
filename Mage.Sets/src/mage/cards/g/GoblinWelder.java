@@ -68,6 +68,9 @@ public final class GoblinWelder extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
+            if (getTargetPointer().getTargets(game, source).size() < 2) {
+                return false;
+            }
             Permanent artifact = game.getPermanent(getTargetPointer().getFirst(game, source));
             Card card = game.getCard(getTargetPointer().getTargets(game, source).get(1));
             Player controller = game.getPlayer(source.getControllerId());

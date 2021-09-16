@@ -1,34 +1,40 @@
-
 package mage.cards.m;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class MarshalingTheTroops extends CardImpl {
 
+    static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped creatures you control");
+
+    static {
+        filter.add(TappedPredicate.UNTAPPED);
+    }
+
     public MarshalingTheTroops(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way.
         this.getSpellAbility().addEffect(new MarshalingTheTroopsEffect());
+        this.getSpellAbility().addHint(new ValueHint(filter.getMessage(), new PermanentsOnBattlefieldCount(filter)));
     }
 
     private MarshalingTheTroops(final MarshalingTheTroops card) {
@@ -42,16 +48,9 @@ public final class MarshalingTheTroops extends CardImpl {
 }
 
 class MarshalingTheTroopsEffect extends OneShotEffect {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creatures you control");
-    
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(TappedPredicate.UNTAPPED);
-    }
 
     public MarshalingTheTroopsEffect() {
-        super(Outcome.GainLife);
+        super(Outcome.AIDontUseIt);
         staticText = "Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way";
     }
 
@@ -62,34 +61,28 @@ class MarshalingTheTroopsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int tappedAmount = 0;
-            TargetPermanent target = new TargetPermanent(0, 1, filter, false);
-            while (true) {
-                target.clearChosen();
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
-                    Map<String, Serializable> options = new HashMap<>();
-                    options.put("UI.right.btn.text", "Tapping complete");
-                    controller.choose(outcome, target, source.getControllerId(), game, options);
-                    if (!target.getTargets().isEmpty()) {
-                        UUID creature = target.getFirstTarget();
-                        if (creature != null) {
-                            game.getPermanent(creature).tap(source, game);
-                            tappedAmount++;
-                        }
-                    } else {
-                        break;
-                    }
-                } else {
-                    break;
-                }
-            }
-            if (tappedAmount > 0) {
-                controller.gainLife(tappedAmount * 4, game, source);
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+
+        TargetPermanent target = new TargetControlledPermanent(0, Integer.MAX_VALUE, MarshalingTheTroops.filter, true);
+        controller.choose(outcome, target, source.getSourceId(), game);
+        if (target.getTargets().isEmpty()) {
+            return false;
+        }
+
+        int tappedAmount = 0;
+        for (UUID permanentId : target.getTargets()) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent != null && permanent.tap(source, game)) {
+                tappedAmount++;
+            }
+        }
+
+        if (tappedAmount > 0) {
+            controller.gainLife(tappedAmount * 4, game, source);
+        }
+        return true;
     }
 
     @Override

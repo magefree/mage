@@ -9,6 +9,7 @@ import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MultikickerAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
@@ -1381,6 +1382,14 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "card is a front face werewolf with a back face ability");
         }
 
+        if (card.getSecondCardFace() != null && !card.isNightCard() && !card.getAbilities().containsClass(TransformAbility.class)) {
+            fail(card, "abilities", "double-faced cards should have transform ability on the front");
+        }
+
+        if (card.getSecondCardFace() != null && card.isNightCard() && card.getAbilities().containsClass(TransformAbility.class)) {
+            fail(card, "abilities", "double-faced cards should not have transform ability on the back");
+        }
+
         // special check: missing or wrong ability/effect hints
         Map<Class, String> hints = new HashMap<>();
         hints.put(MenaceAbility.class, "can't be blocked except by two or more");
@@ -1849,7 +1858,7 @@ public class VerifyCardDataTest {
                 if (!cardId.getExtension().isEmpty()) {
                     cardInfo = CardRepository.instance.findCardWPreferredSet(cardId.getName(), cardId.getExtension(), false);
                 } else {
-                    cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardId.getName(), false);
+                    cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(cardId.getName(), false);
                 }
                 if (cardInfo == null) {
                     errorsList.add("Error: broken cube, can't find card: " + cube.getClass().getCanonicalName() + " - " + cardId.getName());

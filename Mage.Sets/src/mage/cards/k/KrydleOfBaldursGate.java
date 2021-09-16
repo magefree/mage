@@ -47,7 +47,7 @@ public final class KrydleOfBaldursGate extends CardImpl {
         // Whenever you attack, you may pay {2}. If you do, target creature can't be blocked this turn.
         ability = new AttacksWithCreaturesTriggeredAbility(new DoIfCostPaid(
                 new CantBeBlockedTargetEffect(), new GenericManaCost(2)
-        ), 0);
+        ), 1);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

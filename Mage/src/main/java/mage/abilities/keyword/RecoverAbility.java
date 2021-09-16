@@ -76,7 +76,7 @@ class RecoverEffect extends OneShotEffect {
 
     public RecoverEffect(final RecoverEffect effect) {
         super(effect);
-        this.cost = effect.cost;
+        this.cost = effect.cost.copy();
     }
 
     @Override

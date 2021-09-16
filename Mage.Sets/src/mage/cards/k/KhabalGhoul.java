@@ -6,6 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CreaturesDiedThisTurnCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.common.CreaturesDiedThisTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,7 +29,7 @@ public final class KhabalGhoul extends CardImpl {
 
         // At the beginning of each end step, put a +1/+1 counter on Khabal Ghoul for each creature that died this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(),
-            CreaturesDiedThisTurnCount.instance, true), TargetController.ANY, false), new CreaturesDiedWatcher());
+            CreaturesDiedThisTurnCount.instance, true), TargetController.ANY, false).addHint(CreaturesDiedThisTurnHint.instance), new CreaturesDiedWatcher());
     }
 
     private KhabalGhoul(final KhabalGhoul card) {

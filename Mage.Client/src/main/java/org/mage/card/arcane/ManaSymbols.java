@@ -667,6 +667,12 @@ public final class ManaSymbols {
         if (replaced.contains(HintUtils.HINT_ICON_REQUIRE)) {
             replaced = replaced.replace(HintUtils.HINT_ICON_REQUIRE, GuiDisplayUtil.getHintIconHtml("require", symbolSize) + "&nbsp;");
         }
+        if (replaced.contains(HintUtils.HINT_ICON_DUNGEON_ROOM_CURRENT)) {
+            replaced = replaced.replace(HintUtils.HINT_ICON_DUNGEON_ROOM_CURRENT, GuiDisplayUtil.getHintIconHtml("arrow-right-square-fill-green", symbolSize) + "&nbsp;");
+        }
+        if (replaced.contains(HintUtils.HINT_ICON_DUNGEON_ROOM_NEXT)) {
+            replaced = replaced.replace(HintUtils.HINT_ICON_DUNGEON_ROOM_NEXT, GuiDisplayUtil.getHintIconHtml("arrow-down-right-square fill-yellow", symbolSize) + "&nbsp;");
+        }
 
         // ignored data restore
         replaced = replaced

@@ -13,16 +13,24 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BeginningOfUpkeepAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
+    private final boolean setTargetPointer;
+
     public BeginningOfUpkeepAttachedTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public BeginningOfUpkeepAttachedTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, true);
+    }
+
+    public BeginningOfUpkeepAttachedTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.setTargetPointer = setTargetPointer;
     }
 
     private BeginningOfUpkeepAttachedTriggeredAbility(final BeginningOfUpkeepAttachedTriggeredAbility ability) {
         super(ability);
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -41,7 +49,10 @@ public class BeginningOfUpkeepAttachedTriggeredAbility extends TriggeredAbilityI
         if (enchantment == null || !game.isActivePlayer(enchantment.getAttachedTo())) {
             return false;
         }
-        this.getEffects().setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+        if (setTargetPointer) {
+            this.getEffects().setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+        }
+        this.getEffects().setValue("enchantedPlayer", enchantment.getAttachedTo());
         return true;
     }
 

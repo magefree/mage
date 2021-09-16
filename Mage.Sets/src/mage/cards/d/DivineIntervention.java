@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -20,9 +18,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
@@ -41,7 +37,7 @@ public final class DivineIntervention extends CardImpl {
         // At the beginning of your upkeep, remove an intervention counter from Divine Intervention.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.INTERVENTION.createInstance()), TargetController.YOU, false));
 
-        // Whenever a intervention counter is removed from Protean Hydra, put two intervention counters on it at the beginning of the next end step.
+        // When you remove the last intervention counter from Divine Intervention, the game is a draw.
         this.addAbility(new DivineInterventionAbility());
     }
 
@@ -71,38 +67,15 @@ public final class DivineIntervention extends CardImpl {
 
         @Override
         public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
+            return event.getType() == GameEvent.EventType.COUNTERS_REMOVED;
         }
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getData().equals(CounterType.INTERVENTION.getName()) && event.getTargetId().equals(this.getSourceId())) {
-
-                boolean onlyYouOnStack = true;
-                boolean onlyOpponentOnStack = true;
-                UUID you = getControllerId();
-                boolean firstOnStack = false;
-
-                for (StackObject stackObject : game.getStack()) {
-
-                    if (stackObject.getControllerId() != null && !firstOnStack) {
-                        if (!Objects.equals(you, stackObject.getControllerId())) {
-                            onlyYouOnStack = false;
-                        } else if (Objects.equals(you, stackObject.getControllerId())) {
-                            onlyOpponentOnStack = false;
-                        }
-
-                        firstOnStack = true;
-                    }
-                }
-
-                if (onlyYouOnStack && !onlyOpponentOnStack) {
-                    return true;
-                } else if (!onlyYouOnStack && onlyOpponentOnStack) {
-                    return false;
-                }
-            }
-            return false;
+            return (event.getData().equals(CounterType.INTERVENTION.getName())
+                    && event.getTargetId().equals(this.getSourceId())
+                    && event.getPlayerId() != null
+                    && event.getPlayerId() == this.getControllerId());  // the controller of this removed the counter 
         }
 
         @Override
@@ -131,8 +104,10 @@ public final class DivineIntervention extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Player controller = game.getPlayer(source.getControllerId());
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (controller != null && sourcePermanent != null) {
-                if (game.getState().getZone(sourcePermanent.getId()) == Zone.BATTLEFIELD && sourcePermanent.getCounters(game).getCount(CounterType.INTERVENTION) == 0) {
+            if (controller != null 
+                    && sourcePermanent != null) {
+                if (game.getState().getZone(sourcePermanent.getId()) == Zone.BATTLEFIELD
+                        && sourcePermanent.getCounters(game).getCount(CounterType.INTERVENTION) == 0) {
                     game.setDraw(controller.getId());
                 }
                 return true;

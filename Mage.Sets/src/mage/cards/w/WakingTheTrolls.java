@@ -34,7 +34,7 @@ public final class WakingTheTrolls extends CardImpl {
 
         this.subtype.add(SubType.SAGA);
 
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_I);
+        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
 
         // I — Destroy target land.
         sagaAbility.addChapterEffect(
@@ -73,8 +73,8 @@ class WakingTheTrollsEffect extends OneShotEffect {
 
     WakingTheTrollsEffect() {
         super(Outcome.Benefit);
-        staticText = "choose target opponent. If they control fewer lands than you, " +
-                "create a number of 4/4 green Troll Warrior creature tokens with trample equal to the difference";
+        staticText = "choose target opponent. If they control fewer lands than you, "
+                + "create a number of 4/4 green Troll Warrior creature tokens with trample equal to the difference";
     }
 
     private WakingTheTrollsEffect(final WakingTheTrollsEffect effect) {

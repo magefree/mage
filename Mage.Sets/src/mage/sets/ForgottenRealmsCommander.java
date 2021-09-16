@@ -114,12 +114,14 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Forbidden Alchemy", 84, Rarity.UNCOMMON, mage.cards.f.ForbiddenAlchemy.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 238, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Fortified Village", 239, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
+        cards.add(new SetCardInfo("Galea, Kindler of Hope", 1, Rarity.MYTHIC, mage.cards.g.GaleaKindlerOfHope.class));
         cards.add(new SetCardInfo("Game Trail", 240, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Garruk's Uprising", 159, Rarity.UNCOMMON, mage.cards.g.GarruksUprising.class));
         cards.add(new SetCardInfo("Geier Reach Sanitarium", 241, Rarity.RARE, mage.cards.g.GeierReachSanitarium.class));
         cards.add(new SetCardInfo("Gonti, Lord of Luxury", 100, Rarity.RARE, mage.cards.g.GontiLordOfLuxury.class));
         cards.add(new SetCardInfo("Grasslands", 242, Rarity.UNCOMMON, mage.cards.g.Grasslands.class));
         cards.add(new SetCardInfo("Gratuitous Violence", 127, Rarity.RARE, mage.cards.g.GratuitousViolence.class));
+        cards.add(new SetCardInfo("Grave Endeavor", 24, Rarity.RARE, mage.cards.g.GraveEndeavor.class));
         cards.add(new SetCardInfo("Greater Good", 160, Rarity.RARE, mage.cards.g.GreaterGood.class));
         cards.add(new SetCardInfo("Grim Hireling", 25, Rarity.RARE, mage.cards.g.GrimHireling.class));
         cards.add(new SetCardInfo("Gruul Signet", 207, Rarity.UNCOMMON, mage.cards.g.GruulSignet.class));

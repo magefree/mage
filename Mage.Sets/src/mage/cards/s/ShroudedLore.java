@@ -84,13 +84,12 @@ class ShroudedLoreEffect extends OneShotEffect {
                 }
 
                 if (!done) {
+                    done = true;
                     if (cost.canPay(source, source, you.getId(), game) && you.chooseUse(Outcome.Benefit, "Pay {B} to choose a different card ?", source, game)) {
                         cost.clearPaid();
-                        if (!cost.pay(source, game, source, you.getId(), false, null)) {
-                            done = true;
+                        if (cost.pay(source, game, source, you.getId(), false, null)) {
+                            done = false;
                         }
-                    } else {
-                        done = true;
                     }
                 }
 

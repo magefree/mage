@@ -664,8 +664,9 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void setCostAdjuster(CostAdjuster costAdjuster) {
+    public StackAbility setCostAdjuster(CostAdjuster costAdjuster) {
         this.costAdjuster = costAdjuster;
+        return this;
     }
 
     @Override
@@ -738,4 +739,8 @@ public class StackAbility extends StackObjectImpl implements Ability {
         throw new UnsupportedOperationException("Not supported.");
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

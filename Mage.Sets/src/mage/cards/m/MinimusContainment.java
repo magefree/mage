@@ -60,7 +60,7 @@ class MinimusContainmentEffect extends ContinuousEffectImpl {
     }
 
     MinimusContainmentEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "enchanted permanent is a Treasure artifact with " +
                 "\"{T}, Sacrifice this artifact: Add one mana of any color,\" and it loses all other abilities";
     }

@@ -11,11 +11,24 @@ import mage.players.Player;
  */
 
 public enum CardOnTopOfLibraryPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>> {
-    instance;
+    YOUR,
+    ANY;
 
     @Override
     public boolean apply(ObjectPlayer<Card> input, Game game) {
-        Player player = game.getPlayer(input.getObject().getOwnerId());
+
+        Player player;
+        switch (this) {
+            case YOUR:
+                player = game.getPlayer(input.getPlayerId());
+                break;
+
+            case ANY:
+            default:
+                player = game.getPlayer(input.getObject().getOwnerId());
+                break;
+        }
+
         if (player == null) {
             return false;
         }

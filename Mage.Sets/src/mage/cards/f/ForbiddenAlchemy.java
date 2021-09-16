@@ -26,7 +26,7 @@ public final class ForbiddenAlchemy extends CardImpl {
                 StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false));
 
         // Flashback {6}{B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{6}{B}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{6}{B}")));
     }
 
     private ForbiddenAlchemy(final ForbiddenAlchemy card) {

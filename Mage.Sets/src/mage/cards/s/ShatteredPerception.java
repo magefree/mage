@@ -22,7 +22,7 @@ public final class ShatteredPerception extends CardImpl {
         // Discard all the cards in your hand, then draw that many cards.
         this.getSpellAbility().addEffect(new DiscardHandDrawSameNumberSourceEffect());
         // Flashback {5}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{R}")));
     }
 
     private ShatteredPerception(final ShatteredPerception card) {

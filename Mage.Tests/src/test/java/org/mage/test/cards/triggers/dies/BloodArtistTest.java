@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.triggers.dies;
 
 import mage.constants.PhaseStep;
@@ -7,9 +6,8 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author noxx
- *
+ * <p>
  * Whenever Blood Artist or another creature dies, target player loses 1 life
  * and you gain 1 life.
  */
@@ -30,11 +28,20 @@ public class BloodArtistTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Bloodflow Connoisseur", 1);
 
+        // 2x blood artist, kill one of it and get 3x dies triggers
+        // from living artist: 2x triggers
+        // from killed artist: 1x trigger
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Blood Artist");
+        setChoice(playerA, "Whenever {this} or another creature"); // 2x dies triggers
+        addTarget(playerA, playerB, 2); // targets for 2x triggers
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Bloodflow Connoisseur");
+        addTarget(playerA, playerB); // targets for 1x trigger (from living artist)
 
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 23);
         assertLife(playerB, 17);
@@ -53,11 +60,15 @@ public class BloodArtistTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
 
+        // sac 2x and gen 2x dies triggers
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bone Splinters", "Pillarfield Ox");
-        setChoice(playerA, "Silvercoat Lion");
+        setChoice(playerA, "Silvercoat Lion"); // sacrifice for cost
+        addTarget(playerA, playerB, 2);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Bone Splinters", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
@@ -77,11 +88,15 @@ public class BloodArtistTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
 
+        // sac blood artist as a cost and trigger 1x
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bone Splinters", "Pillarfield Ox");
-        setChoice(playerA, "Blood Artist");
+        setChoice(playerA, "Blood Artist"); // sacrifice for cost
+        addTarget(playerA, playerB); // dies trigger with lose life
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Bone Splinters", 1);
         assertGraveyardCount(playerA, "Blood Artist", 1);
@@ -104,13 +119,17 @@ public class BloodArtistTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
+        // sac blood artist for cost, trigger 1x BUT remove blood artist before trigger resolve
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bone Splinters", "Pillarfield Ox");
-        setChoice(playerA, "Blood Artist");
-        // Blood Artist may no longer trigger from destroyed creature because already in the graveyard
+        setChoice(playerA, "Blood Artist"); // sacrifice for cost
+        addTarget(playerA, playerB); // dies trigger with lose life, but it will be fizzled
+        // remove boold artist first - Blood Artist may no longer trigger from destroyed creature because already in the graveyard
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Terror", "Silvercoat Lion", "Bone Splinters");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Bone Splinters", 1);
         assertGraveyardCount(playerA, "Terror", 1);

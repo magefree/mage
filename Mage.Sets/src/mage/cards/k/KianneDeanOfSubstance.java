@@ -152,23 +152,19 @@ enum KianneDeanOfSubstanceHint implements Hint {
 
     @Override
     public String getText(Game game, Ability ability) {
-        List<Integer> values = game.getExile()
+        List<String> values = game.getExile()
                 .getAllCards(game)
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(card -> card.isOwnedBy(ability.getControllerId()))
                 .filter(card -> card.getCounters(game).containsKey(CounterType.STUDY))
-                .map(MageObject::getManaValue)
+                .mapToInt(MageObject::getManaValue)
                 .distinct()
                 .sorted()
+                .mapToObj(String::valueOf)
                 .collect(Collectors.toList());
-        String message = "" + values.size();
-        if (values.size() > 0) {
-            message += " (";
-            message += values.stream().map(i -> "" + i).reduce((a, b) -> a + ", " + b).orElse("");
-            message += ')';
-        }
-        return "Mana values of cards exiled with study counters: " + message;
+        return "Mana values of cards exiled with study counters: " + values.size()
+                + (values.size() > 0 ? " (" + String.join(", ", values) + ')' : "");
     }
 
     @Override

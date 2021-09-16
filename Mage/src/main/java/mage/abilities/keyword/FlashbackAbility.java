@@ -38,12 +38,12 @@ public class FlashbackAbility extends SpellAbility {
     private String abilityName;
     private SpellAbility spellAbilityToResolve;
 
-    public FlashbackAbility(Cost cost, TimingRule timingRule) {
+    public FlashbackAbility(Card card, Cost cost) {
         super(null, "", Zone.GRAVEYARD, SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.FLASHBACK);
         this.setAdditionalCostsRuleVisible(false);
         this.name = "Flashback " + cost.getText();
         this.addCost(cost);
-        this.timing = timingRule;
+        this.timing = card.isSorcery() ? TimingRule.SORCERY : TimingRule.INSTANT;
     }
 
     public FlashbackAbility(final FlashbackAbility ability) {
@@ -177,8 +177,9 @@ public class FlashbackAbility extends SpellAbility {
      *
      * @param abilityName
      */
-    public void setAbilityName(String abilityName) {
+    public FlashbackAbility setAbilityName(String abilityName) {
         this.abilityName = abilityName;
+        return this;
     }
 
 }
