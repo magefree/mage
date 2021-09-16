@@ -118,6 +118,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Somberwald Beastmaster", 30, Rarity.RARE, mage.cards.s.SomberwaldBeastmaster.class));
         cards.add(new SetCardInfo("Somberwald Sage", 144, Rarity.RARE, mage.cards.s.SomberwaldSage.class));
         cards.add(new SetCardInfo("Spark Reaper", 128, Rarity.COMMON, mage.cards.s.SparkReaper.class));
+        cards.add(new SetCardInfo("Stalwart Pathlighter", 9, Rarity.RARE, mage.cards.s.StalwartPathlighter.class));
         cards.add(new SetCardInfo("Stitcher Geralf", 104, Rarity.MYTHIC, mage.cards.s.StitcherGeralf.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 181, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Sunken Hollow", 182, Rarity.RARE, mage.cards.s.SunkenHollow.class));
