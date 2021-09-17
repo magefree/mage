@@ -59,7 +59,7 @@ class AccursedWitchReturnTransformedEffect extends OneShotEffect {
 
     AccursedWitchReturnTransformedEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Put {this} from your graveyard onto the battlefield transformed under your control attached to target opponent";
+        this.staticText = "return it to the battlefield transformed under your control attached to target opponent";
     }
 
     private AccursedWitchReturnTransformedEffect(final AccursedWitchReturnTransformedEffect effect) {
