@@ -181,6 +181,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jack-o'-Lantern", 254, Rarity.COMMON, mage.cards.j.JackOLantern.class));
         cards.add(new SetCardInfo("Jadar, Ghoulcaller of Nephalia", 108, Rarity.RARE, mage.cards.j.JadarGhoulcallerOfNephalia.class));
+        cards.add(new SetCardInfo("Jerren, Corrupted Bishop", 109, Rarity.MYTHIC, mage.cards.j.JerrenCorruptedBishop.class));
         cards.add(new SetCardInfo("Join the Dance", 229, Rarity.UNCOMMON, mage.cards.j.JoinTheDance.class));
         cards.add(new SetCardInfo("Katilda, Dawnhart Prime", 230, Rarity.RARE, mage.cards.k.KatildaDawnhartPrime.class));
         cards.add(new SetCardInfo("Kessig Naturalist", 231, Rarity.UNCOMMON, mage.cards.k.KessigNaturalist.class));
@@ -224,6 +225,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Olivia's Midnight Ambush", 118, Rarity.COMMON, mage.cards.o.OliviasMidnightAmbush.class));
         cards.add(new SetCardInfo("Ominous Roost", 65, Rarity.UNCOMMON, mage.cards.o.OminousRoost.class));
         cards.add(new SetCardInfo("Organ Hoarder", 66, Rarity.COMMON, mage.cards.o.OrganHoarder.class));
+        cards.add(new SetCardInfo("Ormendahl, the Corrupter", 109, Rarity.MYTHIC, mage.cards.o.OrmendahlTheCorrupter.class));
         cards.add(new SetCardInfo("Otherworldly Gaze", 67, Rarity.COMMON, mage.cards.o.OtherworldlyGaze.class));
         cards.add(new SetCardInfo("Outland Liberator", 190, Rarity.UNCOMMON, mage.cards.o.OutlandLiberator.class));
         cards.add(new SetCardInfo("Overgrown Farmland", 265, Rarity.RARE, mage.cards.o.OvergrownFarmland.class));
