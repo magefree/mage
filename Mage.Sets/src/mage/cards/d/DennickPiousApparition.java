@@ -28,6 +28,8 @@ public final class DennickPiousApparition extends CardImpl {
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
+        this.color.setWhite(true);
+        this.color.setBlue(true);
         this.nightCard = true;
 
         // Flying
