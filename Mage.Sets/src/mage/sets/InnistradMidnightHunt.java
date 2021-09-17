@@ -256,6 +256,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Ritual Guardian", 30, Rarity.COMMON, mage.cards.r.RitualGuardian.class));
         cards.add(new SetCardInfo("Ritual of Hope", 31, Rarity.UNCOMMON, mage.cards.r.RitualOfHope.class));
         cards.add(new SetCardInfo("Rockfall Vale", 266, Rarity.RARE, mage.cards.r.RockfallVale.class));
+        cards.add(new SetCardInfo("Rootcoil Creeper", 238, Rarity.UNCOMMON, mage.cards.r.RootcoilCreeper.class));
         cards.add(new SetCardInfo("Rotten Reunion", 119, Rarity.COMMON, mage.cards.r.RottenReunion.class));
         cards.add(new SetCardInfo("Sacred Fire", 239, Rarity.UNCOMMON, mage.cards.s.SacredFire.class));
         cards.add(new SetCardInfo("Saryth, the Viper's Fang", 197, Rarity.RARE, mage.cards.s.SarythTheVipersFang.class));
