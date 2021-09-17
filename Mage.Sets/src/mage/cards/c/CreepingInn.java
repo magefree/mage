@@ -36,6 +36,8 @@ public final class CreepingInn extends CardImpl {
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(7);
+        this.color.setBlack(true);
+        this.transformable = true;
         this.nightCard = true;
 
         // Whenever Creeping Inn attacks, you may exile a creature card from your graveyard.
@@ -78,31 +80,30 @@ class CreepingInnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        game.informPlayers(permanent.getName());
-        if (permanent != null && player != null) {
-            UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + permanent.getZoneChangeCounter(game), game);
-            TargetCardInGraveyard target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        if (player != null && permanent != null) {
+            UUID exileId = CardUtil.getExileZoneId(game, source);
+            TargetCardInGraveyard target = new TargetCardInGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
             target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), player.getId(), game) && player.chooseUse(outcome, "Exile a creature card from your graveyard?", source, game)) {
+            if (target.canChoose(source.getSourceId(), player.getId(), game)) {
                 if (player.choose(Outcome.Exile, target, source.getId(), game)) {
                     Card cardChosen = game.getCard(target.getFirstTarget());
                     if (cardChosen != null) {
-                        int amount = 0;
+                        int lifeAmount = 0;
                         player.moveCardsToExile(cardChosen, source, game, true, exileId, permanent.getName());
                         ExileZone exile = game.getExile().getExileZone(exileId);
                         if (exile != null) {
                             for (UUID cardId : exile) {
-                                amount++;
+                                lifeAmount++;
                             }
                         }
                         for (UUID playerId : game.getOpponents(source.getControllerId())) {
-                            game.getPlayer(playerId).loseLife(amount, game, source, false);
+                            game.getPlayer(playerId).loseLife(lifeAmount, game, source, false);
+                            player.gainLife(lifeAmount, game, source);
                         }
                     }
                 }
             }
-
             return true;
         }
         return false;
