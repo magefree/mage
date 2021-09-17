@@ -38,7 +38,6 @@ public final class VengefulStrangler extends CardImpl {
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.StranglingGrasp.class;
 
         // Vengeful Strangler can't block.
