@@ -2400,7 +2400,7 @@ public class TestPlayer implements Player {
             }
 
             // card in hand (only own hand supports here)
-            // TODO: add not own hand too, example
+            // cards from non-own hand must be targeted through revealed cards
             if (target.getOriginalTarget() instanceof TargetCardInHand
                     || target.getOriginalTarget() instanceof TargetDiscard
                     || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.HAND)) {
@@ -2567,6 +2567,13 @@ public class TestPlayer implements Player {
                         return true;
                     }
                 }
+            }
+
+            // library
+            if (target.getOriginalTarget() instanceof TargetCardInLibrary
+                || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.LIBRARY)) {
+                // user don't have access to library, so it must be targeted through list/revealed cards
+                Assert.fail("Library zone is private, you must target through cards list, e.g. revealed: " + target.getOriginalTarget().getClass().getCanonicalName());
             }
 
             // uninplemented TargetCard's zone

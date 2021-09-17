@@ -26,7 +26,9 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetCard;
 import mage.target.Targets;
+import mage.target.common.TargetCardInLibrary;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.CardUtil;
 import mage.util.GameLog;
@@ -881,6 +883,12 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public void addTarget(Target target) {
+        // verify check
+        if (target instanceof TargetCardInLibrary
+                || (target instanceof TargetCard && target.getZone().equals(Zone.LIBRARY))) {
+            throw new IllegalArgumentException("Wrong usage of TargetCardInLibrary - you must use it with SearchLibrary only");
+        }
+
         if (target != null) {
             getTargets().add(target);
         }

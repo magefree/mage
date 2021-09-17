@@ -85,6 +85,8 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
         if (affectedAbility == null) {
             // ContinuousEffects.asThough already checks affectedAbility, so that error must never be called here
             // PLAY_FROM_NOT_OWN_HAND_ZONE must applies to affectedAbility only
+            // If you see it then parent conditional effect must override both applies methods to support different
+            // AsThough effect types in one conditional effect
             throw new IllegalArgumentException("ERROR, can't call applies method on empty affectedAbility");
         }
 
