@@ -1,24 +1,18 @@
 package mage.cards.w;
 
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FirstTargetPointer;
-import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;
@@ -35,7 +29,8 @@ public final class WinterthornBlessing extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 1));
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setTargetPointer(new FirstTargetPointer()));
-        this.getSpellAbility().addEffect(new WinterthornBlessingEffect().setTargetPointer(new SecondTargetPointer()));
+        this.getSpellAbility().addEffect(new TapTargetEffect().setTargetPointer(new SecondTargetPointer()).setText("tap up to one target creature you don't control"));
+        this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect().setTargetPointer(new SecondTargetPointer()).setText("that creature doesn't untap during its controller's next untap step"));
 
         // Flashback {1}{G}{U}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{G}{U}")));
@@ -49,36 +44,5 @@ public final class WinterthornBlessing extends CardImpl {
     @Override
     public WinterthornBlessing copy() {
         return new WinterthornBlessing(this);
-    }
-}
-
-class WinterthornBlessingEffect extends OneShotEffect {
-    WinterthornBlessingEffect() {
-        super(Outcome.Benefit);
-        staticText = "Tap up to one target creature you don't control, " +
-                "and that creature doesn't untap during its controller's next untap step.";
-    }
-
-    private WinterthornBlessingEffect(final WinterthornBlessingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WinterthornBlessingEffect copy() {
-        return new WinterthornBlessingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (creature != null) {
-            ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
-            effect.setTargetPointer(new FixedTarget(creature, game));
-
-            game.addEffect(effect, source);
-            creature.tap(source, game);
-            return true;
-        }
-        return false;
     }
 }
