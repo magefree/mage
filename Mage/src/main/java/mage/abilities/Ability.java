@@ -547,7 +547,7 @@ public interface Ability extends Controllable, Serializable {
 
     void adjustTargets(Game game);
 
-    void setCostAdjuster(CostAdjuster costAdjuster);
+    Ability setCostAdjuster(CostAdjuster costAdjuster);
 
     CostAdjuster getCostAdjuster();
 

@@ -36,6 +36,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Butcher of Malakir", 107, Rarity.RARE, mage.cards.b.ButcherOfMalakir.class));
         cards.add(new SetCardInfo("Canopy Vista", 168, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Celebrate the Harvest", 24, Rarity.RARE, mage.cards.c.CelebrateTheHarvest.class));
+        cards.add(new SetCardInfo("Celestial Judgment", 5, Rarity.RARE, mage.cards.c.CelestialJudgment.class));
         cards.add(new SetCardInfo("Cemetery Reaper", 108, Rarity.RARE, mage.cards.c.CemeteryReaper.class));
         cards.add(new SetCardInfo("Champion of Lambholt", 136, Rarity.RARE, mage.cards.c.ChampionOfLambholt.class));
         cards.add(new SetCardInfo("Charcoal Diamond", 158, Rarity.COMMON, mage.cards.c.CharcoalDiamond.class));
@@ -45,6 +46,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 170, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 159, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Corpse Augur", 109, Rarity.UNCOMMON, mage.cards.c.CorpseAugur.class));
+        cards.add(new SetCardInfo("Crowded Crypt", 17, Rarity.RARE, mage.cards.c.CrowdedCrypt.class));
         cards.add(new SetCardInfo("Custodi Soulbinders", 83, Rarity.RARE, mage.cards.c.CustodiSoulbinders.class));
         cards.add(new SetCardInfo("Dark Salvation", 110, Rarity.RARE, mage.cards.d.DarkSalvation.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 171, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
@@ -112,11 +114,13 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shamanic Revelation", 143, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
         cards.add(new SetCardInfo("Sigarda's Vanguard", 8, Rarity.RARE, mage.cards.s.SigardasVanguard.class));
         cards.add(new SetCardInfo("Sigarda, Heron's Grace", 155, Rarity.MYTHIC, mage.cards.s.SigardaHeronsGrace.class));
+        cards.add(new SetCardInfo("Sigardian Zealot", 29, Rarity.RARE, mage.cards.s.SigardianZealot.class));
         cards.add(new SetCardInfo("Sky Diamond", 161, Rarity.COMMON, mage.cards.s.SkyDiamond.class));
         cards.add(new SetCardInfo("Sol Ring", 162, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Somberwald Beastmaster", 30, Rarity.RARE, mage.cards.s.SomberwaldBeastmaster.class));
         cards.add(new SetCardInfo("Somberwald Sage", 144, Rarity.RARE, mage.cards.s.SomberwaldSage.class));
         cards.add(new SetCardInfo("Spark Reaper", 128, Rarity.COMMON, mage.cards.s.SparkReaper.class));
+        cards.add(new SetCardInfo("Stalwart Pathlighter", 9, Rarity.RARE, mage.cards.s.StalwartPathlighter.class));
         cards.add(new SetCardInfo("Stitcher Geralf", 104, Rarity.MYTHIC, mage.cards.s.StitcherGeralf.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 181, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Sunken Hollow", 182, Rarity.RARE, mage.cards.s.SunkenHollow.class));
@@ -136,6 +140,8 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Undead Augur", 130, Rarity.UNCOMMON, mage.cards.u.UndeadAugur.class));
         cards.add(new SetCardInfo("Verdurous Gearhulk", 145, Rarity.MYTHIC, mage.cards.v.VerdurousGearhulk.class));
         cards.add(new SetCardInfo("Victory's Envoy", 96, Rarity.RARE, mage.cards.v.VictorysEnvoy.class));
+        cards.add(new SetCardInfo("Visions of Duplicity", 33, Rarity.RARE, mage.cards.v.VisionsOfDuplicity.class));
+        cards.add(new SetCardInfo("Visions of Glory", 32, Rarity.RARE, mage.cards.v.VisionsOfGlory.class));
         cards.add(new SetCardInfo("Wild Beastmaster", 146, Rarity.RARE, mage.cards.w.WildBeastmaster.class));
         cards.add(new SetCardInfo("Wilhelt, the Rotcleaver", 2, Rarity.MYTHIC, mage.cards.w.WilheltTheRotcleaver.class));
         cards.add(new SetCardInfo("Yavimaya Elder", 147, Rarity.COMMON, mage.cards.y.YavimayaElder.class));

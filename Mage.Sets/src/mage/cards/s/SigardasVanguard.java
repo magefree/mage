@@ -1,9 +1,9 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.hint.common.CovenHint;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -11,15 +11,17 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.players.Player;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturesWithDifferentPowers;
+import mage.target.targetpointer.FixedTargets;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -41,14 +43,7 @@ public final class SigardasVanguard extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Sigarda's Vanguard enters the battlefield or attacks, choose any number of creatures with different powers. Those creatures gain double strike until end of turn.
-        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
-                new GainAbilityTargetEffect(
-                        DoubleStrikeAbility.getInstance(), Duration.EndOfTurn
-                ).setText("choose any number of creatures with different powers. " +
-                        "Those creatures gain double strike until end of turn")
-        );
-        ability.addTarget(new SigardasVanguardTarget());
-        this.addAbility(ability.addHint(CovenHint.instance));
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new SigardasVanguardEffect()).addHint(CovenHint.instance));
     }
 
     private SigardasVanguard(final SigardasVanguard card) {
@@ -61,39 +56,37 @@ public final class SigardasVanguard extends CardImpl {
     }
 }
 
-class SigardasVanguardTarget extends TargetCreaturePermanent {
+class SigardasVanguardEffect extends OneShotEffect {
 
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creatures with different powers");
-
-    SigardasVanguardTarget() {
-        super(0, Integer.MAX_VALUE, filter, false);
+    SigardasVanguardEffect() {
+        super(Outcome.Benefit);
+        staticText = "choose any number of creatures with different powers. " +
+                "Those creatures gain double strike until end of turn";
     }
 
-    private SigardasVanguardTarget(final SigardasVanguardTarget target) {
-        super(target);
-    }
-
-    @Override
-    public SigardasVanguardTarget copy() {
-        return new SigardasVanguardTarget(this);
+    private SigardasVanguardEffect(final SigardasVanguardEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(controllerId, id, source, game)) {
+    public SigardasVanguardEffect copy() {
+        return new SigardasVanguardEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
             return false;
         }
-        Permanent creature = game.getPermanent(id);
-        if (creature == null) {
+        TargetPermanent target = new TargetCreaturesWithDifferentPowers();
+        player.choose(outcome, target, source.getSourceId(), game);
+        if (target.getTargets().isEmpty()) {
             return false;
         }
-        return this.getTargets()
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .map(MageObject::getPower)
-                .mapToInt(MageInt::getValue)
-                .noneMatch(p -> creature.getPower().getValue() == p);
+        game.addEffect(new GainAbilityTargetEffect(
+                DoubleStrikeAbility.getInstance(), Duration.EndOfTurn
+        ).setTargetPointer(new FixedTargets(new CardsImpl(target.getTargets()), game)), source);
+        return true;
     }
 }

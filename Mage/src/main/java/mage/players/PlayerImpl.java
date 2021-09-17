@@ -3794,8 +3794,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             ApprovingObject approvingObject;
-            if (isPlaySpell || isPlayLand) {
-                // play hand from non hand zone
+            if ((isPlaySpell || isPlayLand) && (fromZone != Zone.BATTLEFIELD)) {
+                // play hand from non hand zone (except battlefield - you can't play already played permanents)
                 approvingObject = game.getContinuousEffects().asThough(object.getId(),
                         AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game);
             } else {

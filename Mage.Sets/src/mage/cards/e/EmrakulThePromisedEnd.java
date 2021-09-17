@@ -1,18 +1,16 @@
-
 package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -21,10 +19,7 @@ import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.util.CardUtil;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -46,12 +41,15 @@ public final class EmrakulThePromisedEnd extends CardImpl {
         this.toughness = new MageInt(13);
 
         // Emrakul, the Promised End costs {1} less to cast for each card type among cards in your graveyard.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new EmrakulThePromisedEndCostReductionEffect());
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability.addHint(CardTypesInGraveyardHint.YOU));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL,
+                new SpellCostReductionForEachSourceEffect(
+                        1, CardTypesInGraveyardCount.YOU
+                ).setText("this spell costs {1} less to cast for each card type among cards in your graveyard")
+        ).setRuleAtTheTop(true).addHint(CardTypesInGraveyardHint.YOU));
 
         // When you cast Emrakul, you gain control of target opponent during that player's next turn. After that turn, that player takes an extra turn.
-        ability = new CastSourceTriggeredAbility(new EmrakulThePromisedEndGainControlEffect());
+        Ability ability = new CastSourceTriggeredAbility(new EmrakulThePromisedEndGainControlEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
@@ -75,44 +73,6 @@ public final class EmrakulThePromisedEnd extends CardImpl {
     }
 }
 
-class EmrakulThePromisedEndCostReductionEffect extends CostModificationEffectImpl {
-
-    EmrakulThePromisedEndCostReductionEffect() {
-        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "this spell costs {1} less to cast for each card type among cards in your graveyard";
-    }
-
-    EmrakulThePromisedEndCostReductionEffect(EmrakulThePromisedEndCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Set<CardType> foundCardTypes = new HashSet<>(8);
-            for (Card card : controller.getGraveyard().getCards(game)) {
-                foundCardTypes.addAll(card.getCardType(game));
-            }
-            CardUtil.reduceCost(abilityToModify, foundCardTypes.size());
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify instanceof SpellAbility
-                && abilityToModify.getSourceId().equals(source.getSourceId())
-                && game.getCard(abilityToModify.getSourceId()) != null;
-    }
-
-    @Override
-    public EmrakulThePromisedEndCostReductionEffect copy() {
-        return new EmrakulThePromisedEndCostReductionEffect(this);
-    }
-}
-
 class EmrakulThePromisedEndGainControlEffect extends OneShotEffect {
 
     EmrakulThePromisedEndGainControlEffect() {
@@ -120,7 +80,7 @@ class EmrakulThePromisedEndGainControlEffect extends OneShotEffect {
         this.staticText = "you gain control of target opponent during that player's next turn. After that turn, that player takes an extra turn";
     }
 
-    EmrakulThePromisedEndGainControlEffect(final EmrakulThePromisedEndGainControlEffect effect) {
+    private EmrakulThePromisedEndGainControlEffect(final EmrakulThePromisedEndGainControlEffect effect) {
         super(effect);
     }
 

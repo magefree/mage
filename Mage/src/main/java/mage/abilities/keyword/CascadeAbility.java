@@ -20,23 +20,27 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Cascade
- * A keyword ability that may let a player cast a random extra spell for no cost. See rule 702.84, “Cascade.”
+ * Cascade A keyword ability that may let a player cast a random extra spell for
+ * no cost. See rule 702.84, “Cascade.”
  * <p>
  * 702.84. Cascade
  * <p>
- * 702.84a Cascade is a triggered ability that functions only while the spell with cascade is on the stack.
- * “Cascade” means “When you cast this spell, exile cards from the top of your library until you exile a
- * nonland card whose converted mana cost is less than this spell’s converted mana cost. You may cast that
- * card without paying its mana cost. Then put all cards exiled this way that weren’t cast on the bottom
- * of your library in a random order.”
+ * 702.84a Cascade is a triggered ability that functions only while the spell
+ * with cascade is on the stack. “Cascade” means “When you cast this spell,
+ * exile cards from the top of your library until you exile a nonland card whose
+ * converted mana cost is less than this spell’s converted mana cost. You may
+ * cast that card without paying its mana cost. Then put all cards exiled this
+ * way that weren’t cast on the bottom of your library in a random order.”
  * <p>
- * 702.84b If an effect allows a player to take an action with one or more of the exiled cards “as you cascade,”
- * the player may take that action after they have finished exiling cards due to the cascade ability. This action
- * is taken before choosing whether to cast the last exiled card or, if no appropriate card was exiled, before
- * putting the exiled cards on the bottom of their library in a random order.
+ * 702.84b If an effect allows a player to take an action with one or more of
+ * the exiled cards “as you cascade,” the player may take that action after they
+ * have finished exiling cards due to the cascade ability. This action is taken
+ * before choosing whether to cast the last exiled card or, if no appropriate
+ * card was exiled, before putting the exiled cards on the bottom of their
+ * library in a random order.
  * <p>
- * 702.84c If a spell has multiple instances of cascade, each triggers separately.
+ * 702.84c If a spell has multiple instances of cascade, each triggers
+ * separately.
  *
  * @author BetaSteward_at_googlemail.com
  */
@@ -46,7 +50,6 @@ public class CascadeAbility extends TriggeredAbilityImpl {
 
     // can't use singletone due rules:
     // 702.84c If a spell has multiple instances of cascade, each triggers separately.
-
     private static final String REMINDERTEXT = " <i>(When you cast this spell, "
             + "exile cards from the top of your library until you exile a "
             + "nonland card whose mana value is less than this spell's mana value. "
@@ -124,12 +127,15 @@ class CascadeEffect extends OneShotEffect {
         Card cardToCast = null;
         for (Card card : controller.getLibrary().getCards(game)) {
             cardsToExile.add(card);
-            if (!card.isLand(game) && card.getManaValue() < sourceCost) {
+            // the card move is sequential, not all at once.
+            controller.moveCards(card, Zone.EXILED, source, game);
+            game.getState().processAction(game);  // Laelia, the Blade Reforged
+            if (!card.isLand(game)
+                    && card.getManaValue() < sourceCost) {
                 cardToCast = card;
                 break;
             }
         }
-        controller.moveCards(cardsToExile, Zone.EXILED, source, game);
         controller.getLibrary().reset(); // set back empty draw state if that caused an empty draw
 
         // additional replacement effect: As you cascade, you may put a land card from among the exiled cards onto the battlefield tapped

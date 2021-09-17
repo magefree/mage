@@ -177,8 +177,9 @@ public class FlashbackAbility extends SpellAbility {
      *
      * @param abilityName
      */
-    public void setAbilityName(String abilityName) {
+    public FlashbackAbility setAbilityName(String abilityName) {
         this.abilityName = abilityName;
+        return this;
     }
 
 }
