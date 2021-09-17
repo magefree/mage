@@ -79,4 +79,8 @@ public class CastSpellLastTurnWatcher extends Watcher {
     public int getActivePlayerPrevTurnCount() {
         return activePlayerPrevTurnCount;
     }
+
+    public int getActivePlayerThisTurnCount() {
+        return activePlayerThisTurnCount;
+    }
 }
