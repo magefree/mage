@@ -1,11 +1,18 @@
 package mage.cards.w;
 
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -16,6 +23,7 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.Set;
 import java.util.UUID;
@@ -71,9 +79,8 @@ class WakeToSlaughterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && source.getTargets() != null) {
-            Cards pickedCards = new CardsImpl(source.getTargets().get(0).getTargets());
-            player.revealCards(staticText, pickedCards, game);
+        Cards pickedCards = new CardsImpl(getTargetPointer().getTargets(game, source));
+        if (player != null && !pickedCards.isEmpty()) {
             Card cardToHand;
             if (pickedCards.size() == 1) {
                 cardToHand = pickedCards.getRandom(game);
@@ -93,11 +100,24 @@ class WakeToSlaughterEffect extends OneShotEffect {
                 opponent.chooseTarget(outcome, pickedCards, target, source, game);
                 cardToHand = game.getCard(target.getFirstTarget());
             }
-            if (cardToHand != null) {
-                player.moveCards(cardToHand, Zone.HAND, source, game);
-                pickedCards.remove(cardToHand);
+            for (Card card : pickedCards.getCards(game)) {
+                if (card == cardToHand) {
+                    player.moveCards(cardToHand, Zone.HAND, source, game);
+                } else {
+                    player.moveCards(card, Zone.BATTLEFIELD, source, game);
+
+                    FixedTarget fixedTarget = new FixedTarget(card, game);
+                    ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfGame);
+                    effect.setTargetPointer(fixedTarget);
+                    game.addEffect(effect, source);
+
+                    ExileTargetEffect exileEffect = new ExileTargetEffect(null, null, Zone.BATTLEFIELD);
+                    exileEffect.setTargetPointer(fixedTarget);
+                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+                    game.addDelayedTriggeredAbility(delayedAbility, source);
+                }
             }
-            player.moveCards(pickedCards, Zone.BATTLEFIELD, source, game);
+            pickedCards.clear();
             return true;
         }
 
