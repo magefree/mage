@@ -672,7 +672,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             Assert.fail("Can't add card " + cardName + " - alias " + aliasName + " already exists for " + player.getName());
         }
 
-        CardInfo cardInfo = CardRepository.instance.findCard(cardName);
+        // game tests don't need cards from a specific set, so it can be from any set
+        CardInfo cardInfo = CardRepository.instance.findCard(cardName, true);
         if (cardInfo == null) {
             throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
         }

@@ -369,12 +369,18 @@ public enum CardRepository {
         return Collections.emptyList();
     }
 
+    public CardInfo findCard(String name) {
+        return findCard(name, false);
+    }
+
     /**
      * @param name
+     * @param returnAnySet return card from first available set (WARNING, it's a performance optimization for tests,
+     *                     don't use it in real games - users must get random set)
      * @return random card with the provided name or null if none is found
      */
-    public CardInfo findCard(String name) {
-        List<CardInfo> cards = findCards(name);
+    public CardInfo findCard(String name, boolean returnAnySet) {
+        List<CardInfo> cards = returnAnySet ? findCards(name, 1) : findCards(name);
         if (!cards.isEmpty()) {
             return cards.get(RandomUtil.nextInt(cards.size()));
         }
@@ -447,9 +453,23 @@ public enum CardRepository {
     }
 
     public List<CardInfo> findCards(String name) {
+        return findCards(name, 0);
+    }
+
+    /**
+     * Find card's reprints from all sets
+     *
+     * @param name
+     * @param limitByMaxAmount return max amount of different cards (if 0 then return card from all sets)
+     * @return
+     */
+    public List<CardInfo> findCards(String name, long limitByMaxAmount) {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
             queryBuilder.where().eq("name", new SelectArg(name));
+            if (limitByMaxAmount > 0) {
+                queryBuilder.limit(limitByMaxAmount);
+            }
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
         }
