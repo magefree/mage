@@ -292,6 +292,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Stromkirk Bloodthief", 123, Rarity.UNCOMMON, mage.cards.s.StromkirkBloodthief.class));
         cards.add(new SetCardInfo("Stuffed Bear", 259, Rarity.COMMON, mage.cards.s.StuffedBear.class));
         cards.add(new SetCardInfo("Sungold Barrage", 36, Rarity.COMMON, mage.cards.s.SungoldBarrage.class));
+        cards.add(new SetCardInfo("Sungold Sentinel", 37, Rarity.RARE, mage.cards.s.SungoldSentinel.class));
         cards.add(new SetCardInfo("Sunrise Cavalier", 244, Rarity.UNCOMMON, mage.cards.s.SunriseCavalier.class));
         cards.add(new SetCardInfo("Sunset Revelry", 38, Rarity.UNCOMMON, mage.cards.s.SunsetRevelry.class));
         cards.add(new SetCardInfo("Sunstreak Phoenix", 162, Rarity.MYTHIC, mage.cards.s.SunstreakPhoenix.class));
