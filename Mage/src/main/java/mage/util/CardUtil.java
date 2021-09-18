@@ -41,6 +41,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author nantuko
@@ -1365,4 +1366,9 @@ public final class CardUtil {
         }
         return sb.toString();
     }
+
+    public static <T> Stream<T> castStream(Stream<?> stream, Class<T> clazz) {
+        return stream.filter(clazz::isInstance).map(clazz::cast);
+    }
+
 }

@@ -33,7 +33,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final UUID playerId;
     private final CardType additionalCardType;
     private boolean hasHaste;
-    private final int number;
+    private int number;
     private final List<Permanent> addedTokenPermanents;
     private SubType additionalSubType;
     private SubType onlySubType;
@@ -300,6 +300,10 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     public void setStartingLoyalty(int startingLoyalty) {
         this.startingLoyalty = startingLoyalty;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public void exileTokensCreatedAtNextEndStep(Game game, Ability source) {
