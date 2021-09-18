@@ -585,14 +585,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 || this.replaceEvent(EventType.TRANSFORM, game)) {
             return false;
         }
-        if (transformed) {
+        if (this.transformed) {
             Card orgCard = this.getMainCard();
             this.getPower().modifyBaseValue(orgCard.getPower().getValue());
             this.getToughness().modifyBaseValue(orgCard.getToughness().getValue());
         }
         game.informPlayers(this.getName() + " transforms into " + this.getOtherFace().getName());
-        this.setTransformed(!transformed);
-        transformCount++;
+        this.setTransformed(!this.transformed);
+        this.transformCount++;
         game.applyEffects();
         this.replaceEvent(EventType.TRANSFORMING, game);
         game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, this.getId(), this.getControllerId()));

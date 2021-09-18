@@ -469,4 +469,32 @@ public class TransformTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void testMoonmistDelver() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Delver of Secrets");
+        addCard(Zone.HAND, playerA, "Moonmist", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Delver of Secrets");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Moonmist");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Delver of Secrets", 0);
+        assertPermanentCount(playerA, "Insectile Aberration", 1);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Moonmist");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Delver of Secrets", 1);
+        assertPermanentCount(playerA, "Insectile Aberration", 0);
+    }
 }
