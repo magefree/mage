@@ -1,10 +1,9 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.permanent.Permanent;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -170,18 +169,45 @@ public class TransformTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Startled Awake"); // SORCERY {2}{U}{U}"
         addCard(Zone.BATTLEFIELD, playerA, "Island", 9);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Startled Awake");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Startled Awake", playerB);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{U}{U}");
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, 13);
         assertGraveyardCount(playerA, "Startled Awake", 0);
         assertPermanentCount(playerA, "Persistent Nightmare", 1); // Night-side card of Startled Awake
-        Permanent nightmare = getPermanent("Persistent Nightmare", playerA);
-        Assert.assertTrue("Has to have creature card type", nightmare.isCreature(currentGame));
-        Assert.assertFalse("Has not to have sorcery card type", nightmare.isSorcery(currentGame));
+        assertType("Persistent Nightmare", CardType.CREATURE, true);
+        assertType("Persistent Nightmare", CardType.SORCERY, false);
+    }
+
+    @Test
+    public void testStartledAwakeMoonmist() {
+        addCard(Zone.HAND, playerA, "Startled Awake");
+        addCard(Zone.HAND, playerA, "Moonmist");
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 11);
+        addCard(Zone.BATTLEFIELD, playerA, "Maskwood Nexus");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Startled Awake", playerB);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{U}{U}");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Moonmist");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerB, 13);
+        assertGraveyardCount(playerA, "Startled Awake", 0);
+        assertPermanentCount(playerA, "Persistent Nightmare", 1); // Night-side card of Startled Awake
+        assertType("Persistent Nightmare", CardType.CREATURE, true);
+        assertType("Persistent Nightmare", CardType.SORCERY, false);
     }
 
     /**

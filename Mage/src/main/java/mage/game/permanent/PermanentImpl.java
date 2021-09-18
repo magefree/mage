@@ -572,12 +572,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 || this.getAbilities().containsClass(NightboundAbility.class);
     }
 
+    private Card getOtherFace() {
+        return transformed ? this.getMainCard() : this.getMainCard().getSecondCardFace();
+    }
+
     @Override
     public boolean transform(Ability source, Game game, boolean ignoreDayNight) {
-        if (!isTransformable()
-                || (!ignoreDayNight && checkDayNightBound())
+        if (!this.isTransformable()
+                || (!ignoreDayNight && this.checkDayNightBound())
+                || this.getOtherFace().isInstantOrSorcery()
                 || (source != null && !source.checkTransformCount(this, game))
-                || replaceEvent(EventType.TRANSFORM, game)) {
+                || this.replaceEvent(EventType.TRANSFORM, game)) {
             return false;
         }
         if (transformed) {
@@ -585,15 +590,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.getPower().modifyBaseValue(orgCard.getPower().getValue());
             this.getToughness().modifyBaseValue(orgCard.getToughness().getValue());
         }
-        game.informPlayers(this.getName() + " transforms into "
-                + (transformed
-                ? this.getMainCard().getName()
-                : this.getMainCard().getSecondCardFace().getName()));
-        setTransformed(!transformed);
+        game.informPlayers(this.getName() + " transforms into " + this.getOtherFace().getName());
+        this.setTransformed(!transformed);
         transformCount++;
         game.applyEffects();
-        replaceEvent(EventType.TRANSFORMING, game);
-        game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, getId(), getControllerId()));
+        this.replaceEvent(EventType.TRANSFORMING, game);
+        game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, this.getId(), this.getControllerId()));
         return true;
     }
 
