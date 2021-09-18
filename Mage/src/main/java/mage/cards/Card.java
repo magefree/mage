@@ -152,6 +152,8 @@ public interface Card extends MageObject {
 
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect);
 
+    boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters);
+
     void removeCounters(String name, int amount, Ability source, Game game);
 
     void removeCounters(Counter counter, Ability source, Game game);
