@@ -133,6 +133,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Deceit", 184, Rarity.RARE, mage.cards.t.TempleOfDeceit.class));
         cards.add(new SetCardInfo("Temple of Plenty", 185, Rarity.RARE, mage.cards.t.TempleOfPlenty.class));
         cards.add(new SetCardInfo("Temple of the False God", 186, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
+        cards.add(new SetCardInfo("Tomb Tyrant", 23, Rarity.RARE, mage.cards.t.TombTyrant.class));
         cards.add(new SetCardInfo("Trostani's Summoner", 156, Rarity.UNCOMMON, mage.cards.t.TrostanisSummoner.class));
         cards.add(new SetCardInfo("Unbreakable Formation", 95, Rarity.RARE, mage.cards.u.UnbreakableFormation.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 187, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
