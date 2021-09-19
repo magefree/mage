@@ -6,7 +6,6 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -31,7 +30,6 @@ public final class HostileHostel extends CardImpl {
 
     public HostileHostel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.c.CreepingInn.class;
 
         // {T}: Add {C}.
@@ -39,11 +37,10 @@ public final class HostileHostel extends CardImpl {
 
         // {1}, {T}, Sacrifice a creature: Put a soul counter on Hostile Hostel. Then if there are three or more soul counters on it, remove those counters, transform it, then untap it. Activate only as a sorcery.
         this.addAbility(new TransformAbility());
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new HostileHostelEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new HostileHostelEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
-
     }
 
     private HostileHostel(final HostileHostel card) {
@@ -82,7 +79,7 @@ class HostileHostelEffect extends OneShotEffect {
             int counters = permanent.getCounters(game).getCount(CounterType.SOUL);
             if (counters > 2) {
                 permanent.removeCounters(CounterType.SOUL.getName(), counters, source, game);
-                new TransformSourceEffect(true).apply(game, source);
+                permanent.transform(source, game);
                 permanent.untap(game);
             }
             return true;
