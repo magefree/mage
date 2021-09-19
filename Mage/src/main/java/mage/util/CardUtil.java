@@ -1394,7 +1394,7 @@ public final class CardUtil {
         if (!controller.moveCards(card, toZone, source, game)) {
             return false;
         }
-        
+
         // add counter
         // after move it's a new object (not a permanent), so must work with main card
         Effect effect = new AddCountersTargetEffect(counter);

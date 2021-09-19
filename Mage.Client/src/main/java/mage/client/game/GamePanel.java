@@ -274,8 +274,7 @@ public final class GamePanel extends javax.swing.JPanel {
             windowDialog.removeDialog();
         }
 
-        clearPickTargetDialogs();
-        clearPickPileDialogs();
+        clearPickDialogs();
 
         Plugins.instance.getActionCallback().hideOpenComponents();
         try {
@@ -288,18 +287,41 @@ public final class GamePanel extends javax.swing.JPanel {
         this.bigCard = null;
     }
 
+    private void hidePickDialogs() {
+        // temporary hide opened dialog on redraw/update
+
+        //try {
+            // pick target
+            for (ShowCardsDialog dialog : this.pickTarget) {
+                dialog.setVisible(false);
+            }
+            // pick pile
+            for (PickPileDialog dialog : this.pickPile) {
+                dialog.setVisible(false);
+            }
+        //} catch (PropertyVetoException e) {
+          //  logger.error("Couldn't close pick dialog", e);
+        //}
+    }
+
+    private void clearPickDialogs() {
+        // remove dialogs forever on clean or full update
+        clearPickTargetDialogs();
+        clearPickPileDialogs();
+    }
+
     private void clearPickTargetDialogs() {
-        for (ShowCardsDialog pickTargetDialog : this.pickTarget) {
-            pickTargetDialog.cleanUp();
-            pickTargetDialog.removeDialog();
+        for (ShowCardsDialog dialog : this.pickTarget) {
+            dialog.cleanUp();
+            dialog.removeDialog();
         }
         this.pickTarget.clear();
     }
 
     private void clearPickPileDialogs() {
-        for (PickPileDialog pickPileDialog : this.pickPile) {
-            pickPileDialog.cleanUp();
-            pickPileDialog.removeDialog();
+        for (PickPileDialog dialog : this.pickPile) {
+            dialog.cleanUp();
+            dialog.removeDialog();
         }
         this.pickPile.clear();
     }
@@ -929,6 +951,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
 
         feedbackPanel.disableUndo();
+        feedbackPanel.updateOptions(lastGameData.options);
 
         this.revalidate();
         this.repaint();
@@ -1344,7 +1367,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void ask(String question, GameView gameView, int messageId, Map<String, Serializable> options) {
         updateGame(gameView, false, options, null);
-        this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, options, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.QUESTION, question, false, options, messageId, true, gameView.getPhase());
     }
 
     private void keepLastGameData(GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
@@ -1604,11 +1627,16 @@ public final class GamePanel extends javax.swing.JPanel {
      * @param options
      * @param messageId
      */
-    public void pickTarget(String message, CardsView cardsView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options, int messageId) {
+    public void pickTarget(GameView gameView, Map<String, Serializable> options, String message, CardsView cardsView, Set<UUID> targets, boolean required, int messageId) {
+        updateGame(gameView, false, options, targets);
+        hideAll();
+        DialogManager.getManager(gameId).fadeOut();
+        clearPickTargetDialogs();
+
         PopUpMenuType popupMenuType = null;
-        if (options != null) {
+        if (lastGameData.options != null) {
             if (options.containsKey("queryType")) {
-                PlayerQueryEvent.QueryType needType = (PlayerQueryEvent.QueryType) options.get("queryType");
+                PlayerQueryEvent.QueryType needType = (PlayerQueryEvent.QueryType) lastGameData.options.get("queryType");
                 switch (needType) {
                     case PICK_ABILITY:
                         popupMenuType = PopUpMenuType.TRIGGER_ORDER;
@@ -1622,17 +1650,13 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
 
-        updateGame(gameView, false, options, targets);
-
-        Map<String, Serializable> options0 = options == null ? new HashMap<>() : options;
+        Map<String, Serializable> options0 = lastGameData.options == null ? new HashMap<>() : lastGameData.options;
         ShowCardsDialog dialog = null;
         if (cardsView != null && !cardsView.isEmpty()) {
-            // clear old dialogs before the new
-            clearPickTargetDialogs();
-            dialog = showCards(message, cardsView, required, options0, popupMenuType);
+            dialog = prepareCardsDialog(message, cardsView, required, options0, popupMenuType);
             options0.put("dialog", dialog);
         }
-        this.feedbackPanel.getFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId, true, gameView.getPhase());
         if (dialog != null) {
             this.pickTarget.add(dialog);
         }
@@ -1640,15 +1664,23 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void inform(String information, GameView gameView, int messageId) {
         updateGame(gameView);
-        this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null, messageId, false, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null, messageId, false, gameView.getPhase());
     }
 
-    public void endMessage(String message, int messageId) {
-        this.feedbackPanel.getFeedback(FeedbackMode.END, message, false, null, messageId, true, null);
+    public void endMessage(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
+        updateGame(gameView, false, options, null);
+        hideAll();
+        DialogManager.getManager(gameId).fadeOut();
+
+        this.feedbackPanel.prepareFeedback(FeedbackMode.END, message, false, null, messageId, true, null);
         ArrowBuilder.getBuilder().removeAllArrows(gameId);
     }
 
-    public void select(String message, GameView gameView, int messageId, Map<String, Serializable> options) {
+    public void select(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
+        updateGame(gameView, true, options, null);
+        hideAll();
+        DialogManager.getManager(gameId).fadeOut();
+
         this.abilityPicker.setVisible(false);
 
         holdingPriority = false;
@@ -1658,8 +1690,6 @@ public final class GamePanel extends javax.swing.JPanel {
                 PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
                 PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
                 false);
-
-        updateGame(gameView, true, options, null);
 
         boolean controllingPlayer = false;
         for (PlayerView playerView : gameView.getPlayers()) {
@@ -1675,8 +1705,8 @@ public final class GamePanel extends javax.swing.JPanel {
 
         }
         Map<String, Serializable> panelOptions = new HashMap<>();
-        if (options != null) {
-            panelOptions.putAll(options);
+        if (lastGameData.options != null) {
+            panelOptions.putAll(lastGameData.options);
         }
         panelOptions.put("your_turn", true);
         String activePlayerText;
@@ -1690,39 +1720,45 @@ public final class GamePanel extends javax.swing.JPanel {
             priorityPlayerText = " / priority " + gameView.getPriorityPlayerName();
         }
         String messageToDisplay = message + FeedbackPanel.getSmallText(activePlayerText + " / " + gameView.getStep().toString() + priorityPlayerText);
-        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId, true, gameView.getPhase());
     }
 
-    public void playMana(String message, GameView gameView, Map<String, Serializable> options, int messageId) {
+    public void playMana(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
         updateGame(gameView, true, options, null);
+        hideAll();
         DialogManager.getManager(gameId).fadeOut();
-        this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options, messageId, true, gameView.getPhase());
+
+        this.feedbackPanel.prepareFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options, messageId, true, gameView.getPhase());
     }
 
-    public void playXMana(String message, GameView gameView, int messageId) {
-        updateGame(gameView, true, null, null);
+    public void playXMana(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
+        updateGame(gameView, true, options, null);
+        hideAll();
         DialogManager.getManager(gameId).fadeOut();
-        this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, messageId, true, gameView.getPhase());
+
+        this.feedbackPanel.prepareFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, messageId, true, gameView.getPhase());
     }
 
     public void replayMessage(String message) {
         //TODO: implement this
     }
 
-    public void pickAbility(AbilityPickerView choices) {
+    public void pickAbility(GameView gameView, Map<String, Serializable> options, AbilityPickerView choices) {
+        updateGame(gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
+
         this.abilityPicker.show(choices, MageFrame.getDesktop().getMousePosition());
     }
 
     private void hideAll() {
+        hidePickDialogs();
         this.abilityPicker.setVisible(false);
         ActionCallback callback = Plugins.instance.getActionCallback();
         ((MageActionCallback) callback).hideGameUpdate(gameId);
     }
 
-    private ShowCardsDialog showCards(String title, CardsView cards, boolean required, Map<String, Serializable> options, PopUpMenuType popupMenuType) {
-        hideAll();
+    private ShowCardsDialog prepareCardsDialog(String title, CardsView cards, boolean required, Map<String, Serializable> options, PopUpMenuType popupMenuType) {
         ShowCardsDialog showCards = new ShowCardsDialog();
         JPopupMenu popupMenu = null;
         if (PopUpMenuType.TRIGGER_ORDER == popupMenuType) {
@@ -1732,7 +1768,11 @@ public final class GamePanel extends javax.swing.JPanel {
         return showCards;
     }
 
-    public void getAmount(int min, int max, String message) {
+    public void getAmount(GameView gameView, Map<String, Serializable> options, int min, int max, String message) {
+        updateGame(gameView, false, options, null);
+        hideAll();
+        DialogManager.getManager(gameId).fadeOut();
+
         pickNumber.showDialog(min, max, message);
         if (pickNumber.isCancel()) {
             SessionHandler.sendPlayerBoolean(gameId, false);
@@ -1741,13 +1781,20 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public void getMultiAmount(List<String> messages, int min, int max, Map<String, Serializable> options) {
-        pickMultiNumber.showDialog(messages, min, max, options);
+    public void getMultiAmount(List<String> messages, GameView gameView, Map<String, Serializable> options, int min, int max) {
+        updateGame(gameView, false, options, null);
+        hideAll();
+        DialogManager.getManager(gameId).fadeOut();
+
+        pickMultiNumber.showDialog(messages, min, max, lastGameData.options);
         SessionHandler.sendPlayerString(gameId, pickMultiNumber.getMultiAmount());
     }
 
-    public void getChoice(Choice choice, UUID objectId) {
+    public void getChoice(GameView gameView, Map<String, Serializable> options, Choice choice, UUID objectId) {
+        updateGame(gameView, false, options, null);
         hideAll();
+        DialogManager.getManager(gameId).fadeOut();
+
         // TODO: remember last choices and search incremental for same events?
         PickChoiceDialog pickChoice = new PickChoiceDialog();
         pickChoice.showDialog(choice, null, objectId, choiceWindowState, bigCard);
@@ -1769,8 +1816,10 @@ public final class GamePanel extends javax.swing.JPanel {
         pickChoice.removeDialog();
     }
 
-    public void pickPile(String message, CardsView pile1, CardsView pile2) {
+    public void pickPile(GameView gameView, Map<String, Serializable> options, String message, CardsView pile1, CardsView pile2) {
+        updateGame(gameView, false, options, null);
         hideAll();
+        DialogManager.getManager(gameId).fadeOut();
 
         // remove old dialogs before the new
         clearPickPileDialogs();
