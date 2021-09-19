@@ -43,8 +43,9 @@ public class Standard extends Constructed {
                 .filter(set -> !set.getReleaseDate().after(current.getTime()))
                 .filter(Standard::isFallSet)
                 .sorted(ExpansionSet.getComparator())
-                .collect(Collectors.toList())
-                .get(1)
+                .skip(1)
+                .findFirst()
+                .get()
                 .getReleaseDate();
         return Sets.getInstance()
                 .values()
