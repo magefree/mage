@@ -23,8 +23,10 @@ public class Standard extends Constructed {
     private static boolean isFallSet(ExpansionSet set) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(set.getReleaseDate());
-        // Fall sets are normally released during or after September
-        return set.getSetType() == SetType.EXPANSION && (cal.get(Calendar.MONTH) > 7);
+        // Fall sets are normally released during or after September and before November
+        return set.getSetType() == SetType.EXPANSION
+                && Calendar.SEPTEMBER <= cal.get(Calendar.MONTH)
+                && cal.get(Calendar.MONTH) < Calendar.NOVEMBER;
     }
 
     static List<String> makeLegalSets() {
