@@ -88,6 +88,8 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
             if (card == null) {
                 return false;
             }
+            card = card.getMainCard();
+
             boolean hasSuspend = card.getAbilities(game).containsClass(SuspendAbility.class);
 
             UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
