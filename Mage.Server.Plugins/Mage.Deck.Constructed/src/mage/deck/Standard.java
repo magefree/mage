@@ -5,7 +5,11 @@ import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.constants.SetType;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -30,37 +34,25 @@ public class Standard extends Constructed {
     }
 
     static List<String> makeLegalSets() {
-        List<String> codes = new ArrayList<>();
         GregorianCalendar current = new GregorianCalendar();
-        List<ExpansionSet> sets = new ArrayList(Sets.getInstance().values());
-        Collections.sort(sets, new Comparator<ExpansionSet>() {
-            @Override
-            public int compare(final ExpansionSet lhs, ExpansionSet rhs) {
-                return lhs.getReleaseDate().after(rhs.getReleaseDate()) ? -1 : 1;
-            }
-        });
-        int fallSetsAdded = 0;
-        Date earliestDate = null;
         // Get the second most recent fall set that's been released.
-        for (ExpansionSet set : sets) {
-            if (set.getReleaseDate().after(current.getTime())) {
-                continue;
-            }
-            if (isFallSet(set)) {
-                fallSetsAdded++;
-                if (fallSetsAdded == 2) {
-                    earliestDate = set.getReleaseDate();
-                    break;
-                }
-            }
-        }
-
-        for (ExpansionSet set : sets) {
-            boolean isDateCompatible = earliestDate != null && !set.getReleaseDate().before(earliestDate) /*!set.getReleaseDate().after(current.getTime())*/; // no after date restrict for early tests and beta
-            if (set.getSetType().isStandardLegal() && isDateCompatible) {
-                codes.add(set.getCode());
-            }
-        }
-        return codes;
+        Date earliestDate = Sets
+                .getInstance()
+                .values()
+                .stream()
+                .filter(set -> !set.getReleaseDate().after(current.getTime()))
+                .filter(Standard::isFallSet)
+                .sorted(ExpansionSet.getComparator())
+                .collect(Collectors.toList())
+                .get(1)
+                .getReleaseDate();
+        return Sets.getInstance()
+                .values()
+                .stream()
+                .filter(set -> set.getSetType().isStandardLegal())
+                .filter(set -> !set.getReleaseDate().before(earliestDate))
+//                .filter(set -> !set.getReleaseDate().after(current.getTime())) // no after date restrict for early tests and beta
+                .map(ExpansionSet::getCode)
+                .collect(Collectors.toList());
     }
 }
