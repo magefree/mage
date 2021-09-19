@@ -99,8 +99,8 @@ class CreepingInnEffect extends OneShotEffect {
                         }
                         for (UUID playerId : game.getOpponents(source.getControllerId())) {
                             game.getPlayer(playerId).loseLife(lifeAmount, game, source, false);
-                            player.gainLife(lifeAmount, game, source);
                         }
+                        player.gainLife(lifeAmount, game, source);
                     }
                 }
             }
