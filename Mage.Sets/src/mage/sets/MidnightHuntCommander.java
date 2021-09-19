@@ -43,6 +43,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Choked Estuary", 169, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
         cards.add(new SetCardInfo("Citadel Siege", 81, Rarity.RARE, mage.cards.c.CitadelSiege.class));
         cards.add(new SetCardInfo("Cleansing Nova", 82, Rarity.RARE, mage.cards.c.CleansingNova.class));
+        cards.add(new SetCardInfo("Cleaver Skaab", 11, Rarity.RARE, mage.cards.c.CleaverSkaab.class));
         cards.add(new SetCardInfo("Command Tower", 170, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 159, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Corpse Augur", 109, Rarity.UNCOMMON, mage.cards.c.CorpseAugur.class));
@@ -133,6 +134,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Deceit", 184, Rarity.RARE, mage.cards.t.TempleOfDeceit.class));
         cards.add(new SetCardInfo("Temple of Plenty", 185, Rarity.RARE, mage.cards.t.TempleOfPlenty.class));
         cards.add(new SetCardInfo("Temple of the False God", 186, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
+        cards.add(new SetCardInfo("Tomb Tyrant", 23, Rarity.RARE, mage.cards.t.TombTyrant.class));
         cards.add(new SetCardInfo("Trostani's Summoner", 156, Rarity.UNCOMMON, mage.cards.t.TrostanisSummoner.class));
         cards.add(new SetCardInfo("Unbreakable Formation", 95, Rarity.RARE, mage.cards.u.UnbreakableFormation.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 187, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));

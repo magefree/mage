@@ -132,8 +132,8 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     }
 
     @Override
-    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
-        return leftHalfCard.addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect);
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters) {
+        return leftHalfCard.addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect, maxCounters);
     }
 
     @Override

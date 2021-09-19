@@ -483,7 +483,7 @@ class TimeSpiralRemasteredCollator implements BoosterCollator {
     }
 
     private static class TimeSpiralRemasteredStructure extends BoosterStructure {
-        private static final TimeSpiralRemasteredStructure C1 = new TimeSpiralRemasteredStructure(
+        private static final TimeSpiralRemasteredStructure AAABBBC1C1C1C1 = new TimeSpiralRemasteredStructure(
                 TimeSpiralRemasteredRun.commonA,
                 TimeSpiralRemasteredRun.commonA,
                 TimeSpiralRemasteredRun.commonA,
@@ -495,7 +495,7 @@ class TimeSpiralRemasteredCollator implements BoosterCollator {
                 TimeSpiralRemasteredRun.commonC1,
                 TimeSpiralRemasteredRun.commonC1
         );
-        private static final TimeSpiralRemasteredStructure C2 = new TimeSpiralRemasteredStructure(
+        private static final TimeSpiralRemasteredStructure AAABBC1C1C1C1C1 = new TimeSpiralRemasteredStructure(
                 TimeSpiralRemasteredRun.commonA,
                 TimeSpiralRemasteredRun.commonA,
                 TimeSpiralRemasteredRun.commonA,
@@ -507,7 +507,7 @@ class TimeSpiralRemasteredCollator implements BoosterCollator {
                 TimeSpiralRemasteredRun.commonC1,
                 TimeSpiralRemasteredRun.commonC1
         );
-        private static final TimeSpiralRemasteredStructure C3 = new TimeSpiralRemasteredStructure(
+        private static final TimeSpiralRemasteredStructure AABBBC1C1C1C1C1 = new TimeSpiralRemasteredStructure(
                 TimeSpiralRemasteredRun.commonA,
                 TimeSpiralRemasteredRun.commonA,
                 TimeSpiralRemasteredRun.commonB,
@@ -519,7 +519,7 @@ class TimeSpiralRemasteredCollator implements BoosterCollator {
                 TimeSpiralRemasteredRun.commonC1,
                 TimeSpiralRemasteredRun.commonC1
         );
-        private static final TimeSpiralRemasteredStructure C4 = new TimeSpiralRemasteredStructure(
+        private static final TimeSpiralRemasteredStructure AAABBBC2C2C2C2 = new TimeSpiralRemasteredStructure(
                 TimeSpiralRemasteredRun.commonA,
                 TimeSpiralRemasteredRun.commonA,
                 TimeSpiralRemasteredRun.commonA,
@@ -531,7 +531,7 @@ class TimeSpiralRemasteredCollator implements BoosterCollator {
                 TimeSpiralRemasteredRun.commonC2,
                 TimeSpiralRemasteredRun.commonC2
         );
-        private static final TimeSpiralRemasteredStructure C5 = new TimeSpiralRemasteredStructure(
+        private static final TimeSpiralRemasteredStructure AAABBC2C2C2C2C2 = new TimeSpiralRemasteredStructure(
                 TimeSpiralRemasteredRun.commonA,
                 TimeSpiralRemasteredRun.commonA,
                 TimeSpiralRemasteredRun.commonA,
@@ -543,7 +543,7 @@ class TimeSpiralRemasteredCollator implements BoosterCollator {
                 TimeSpiralRemasteredRun.commonC2,
                 TimeSpiralRemasteredRun.commonC2
         );
-        private static final TimeSpiralRemasteredStructure C6 = new TimeSpiralRemasteredStructure(
+        private static final TimeSpiralRemasteredStructure AABBBC2C2C2C2C2 = new TimeSpiralRemasteredStructure(
                 TimeSpiralRemasteredRun.commonA,
                 TimeSpiralRemasteredRun.commonA,
                 TimeSpiralRemasteredRun.commonB,
@@ -555,12 +555,12 @@ class TimeSpiralRemasteredCollator implements BoosterCollator {
                 TimeSpiralRemasteredRun.commonC2,
                 TimeSpiralRemasteredRun.commonC2
         );
-        private static final TimeSpiralRemasteredStructure U1 = new TimeSpiralRemasteredStructure(
+        private static final TimeSpiralRemasteredStructure AAA = new TimeSpiralRemasteredStructure(
                 TimeSpiralRemasteredRun.uncommonA,
                 TimeSpiralRemasteredRun.uncommonA,
                 TimeSpiralRemasteredRun.uncommonA
         );
-        private static final TimeSpiralRemasteredStructure U2 = new TimeSpiralRemasteredStructure(
+        private static final TimeSpiralRemasteredStructure BBB = new TimeSpiralRemasteredStructure(
                 TimeSpiralRemasteredRun.uncommonB,
                 TimeSpiralRemasteredRun.uncommonB,
                 TimeSpiralRemasteredRun.uncommonB
@@ -577,22 +577,44 @@ class TimeSpiralRemasteredCollator implements BoosterCollator {
         }
     }
 
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 2.73 A commons (30 / 11)
+    // 2.73 B commons (30 / 11)
+    // 2.27 C1 commons (25 / 11, or 50 / 11 in each C1 booster)
+    // 2.27 C2 commons (25 / 11, or 50 / 11 in each C2 booster)
     private final RarityConfiguration commonRuns = new RarityConfiguration(
             false,
-            TimeSpiralRemasteredStructure.C1,
-            TimeSpiralRemasteredStructure.C2,
-            TimeSpiralRemasteredStructure.C3,
-            TimeSpiralRemasteredStructure.C4,
-            TimeSpiralRemasteredStructure.C5,
-            TimeSpiralRemasteredStructure.C6
+            TimeSpiralRemasteredStructure.AAABBBC1C1C1C1,
+            TimeSpiralRemasteredStructure.AAABBBC1C1C1C1,
+            TimeSpiralRemasteredStructure.AAABBBC1C1C1C1,
+            TimeSpiralRemasteredStructure.AAABBBC1C1C1C1,
+            TimeSpiralRemasteredStructure.AAABBBC1C1C1C1,
+            TimeSpiralRemasteredStructure.AAABBC1C1C1C1C1,
+            TimeSpiralRemasteredStructure.AAABBC1C1C1C1C1,
+            TimeSpiralRemasteredStructure.AAABBC1C1C1C1C1,
+            TimeSpiralRemasteredStructure.AABBBC1C1C1C1C1,
+            TimeSpiralRemasteredStructure.AABBBC1C1C1C1C1,
+            TimeSpiralRemasteredStructure.AABBBC1C1C1C1C1,
+
+            TimeSpiralRemasteredStructure.AAABBBC2C2C2C2,
+            TimeSpiralRemasteredStructure.AAABBBC2C2C2C2,
+            TimeSpiralRemasteredStructure.AAABBBC2C2C2C2,
+            TimeSpiralRemasteredStructure.AAABBBC2C2C2C2,
+            TimeSpiralRemasteredStructure.AAABBBC2C2C2C2,
+            TimeSpiralRemasteredStructure.AAABBC2C2C2C2C2,
+            TimeSpiralRemasteredStructure.AAABBC2C2C2C2C2,
+            TimeSpiralRemasteredStructure.AAABBC2C2C2C2C2,
+            TimeSpiralRemasteredStructure.AABBBC2C2C2C2C2,
+            TimeSpiralRemasteredStructure.AABBBC2C2C2C2C2,
+            TimeSpiralRemasteredStructure.AABBBC2C2C2C2C2
     );
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(
             false,
-            TimeSpiralRemasteredStructure.U1,
-            TimeSpiralRemasteredStructure.U1,
-            TimeSpiralRemasteredStructure.U1,
-            TimeSpiralRemasteredStructure.U2,
-            TimeSpiralRemasteredStructure.U2
+            TimeSpiralRemasteredStructure.AAA,
+            TimeSpiralRemasteredStructure.AAA,
+            TimeSpiralRemasteredStructure.AAA,
+            TimeSpiralRemasteredStructure.BBB,
+            TimeSpiralRemasteredStructure.BBB
     );
     private final RarityConfiguration rareRuns = new RarityConfiguration(
             TimeSpiralRemasteredStructure.R1

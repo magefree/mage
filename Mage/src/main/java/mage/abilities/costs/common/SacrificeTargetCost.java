@@ -1,4 +1,3 @@
-
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
@@ -7,6 +6,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -22,6 +22,10 @@ import java.util.UUID;
 public class SacrificeTargetCost extends CostImpl {
 
     private final List<Permanent> permanents = new ArrayList<>();
+
+    public SacrificeTargetCost(FilterControlledPermanent filter) {
+        this(new TargetControlledPermanent(filter));
+    }
 
     public SacrificeTargetCost(TargetControlledPermanent target) {
         this.addTarget(target);
@@ -88,7 +92,7 @@ public class SacrificeTargetCost extends CostImpl {
             }
         }
         // solves issue #8097, if a sacrifice cost is optional and you don't have valid targets, then the cost can be paid
-        if(validTargets == 0 && targets.get(0).getMinNumberOfTargets() == 0){
+        if (validTargets == 0 && targets.get(0).getMinNumberOfTargets() == 0) {
             return true;
         }
         return false;

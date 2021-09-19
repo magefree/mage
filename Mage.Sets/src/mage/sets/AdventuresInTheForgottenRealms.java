@@ -27,6 +27,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         this.blockName = "Adventures in the Forgotten Realms";
         this.hasBoosters = true;
         this.hasBasicLands = true;
+        this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
@@ -457,7 +458,7 @@ class AdventuresInTheForgottenRealmsCollator implements BoosterCollator {
     }
 
     private static class AdventuresInTheForgottenRealmsStructure extends BoosterStructure {
-        private static final AdventuresInTheForgottenRealmsStructure C1 = new AdventuresInTheForgottenRealmsStructure(
+        private static final AdventuresInTheForgottenRealmsStructure ABBBBBBCCC = new AdventuresInTheForgottenRealmsStructure(
                 AdventuresInTheForgottenRealmsRun.commonA,
                 AdventuresInTheForgottenRealmsRun.commonB,
                 AdventuresInTheForgottenRealmsRun.commonB,
@@ -469,19 +470,7 @@ class AdventuresInTheForgottenRealmsCollator implements BoosterCollator {
                 AdventuresInTheForgottenRealmsRun.commonC,
                 AdventuresInTheForgottenRealmsRun.commonC
         );
-        private static final AdventuresInTheForgottenRealmsStructure C2 = new AdventuresInTheForgottenRealmsStructure(
-                AdventuresInTheForgottenRealmsRun.commonA,
-                AdventuresInTheForgottenRealmsRun.commonA,
-                AdventuresInTheForgottenRealmsRun.commonB,
-                AdventuresInTheForgottenRealmsRun.commonB,
-                AdventuresInTheForgottenRealmsRun.commonB,
-                AdventuresInTheForgottenRealmsRun.commonB,
-                AdventuresInTheForgottenRealmsRun.commonB,
-                AdventuresInTheForgottenRealmsRun.commonC,
-                AdventuresInTheForgottenRealmsRun.commonC,
-                AdventuresInTheForgottenRealmsRun.commonC
-        );
-        private static final AdventuresInTheForgottenRealmsStructure C3 = new AdventuresInTheForgottenRealmsStructure(
+        private static final AdventuresInTheForgottenRealmsStructure AABBBBBBCC = new AdventuresInTheForgottenRealmsStructure(
                 AdventuresInTheForgottenRealmsRun.commonA,
                 AdventuresInTheForgottenRealmsRun.commonA,
                 AdventuresInTheForgottenRealmsRun.commonB,
@@ -493,12 +482,12 @@ class AdventuresInTheForgottenRealmsCollator implements BoosterCollator {
                 AdventuresInTheForgottenRealmsRun.commonC,
                 AdventuresInTheForgottenRealmsRun.commonC
         );
-        private static final AdventuresInTheForgottenRealmsStructure U1 = new AdventuresInTheForgottenRealmsStructure(
+        private static final AdventuresInTheForgottenRealmsStructure AAA = new AdventuresInTheForgottenRealmsStructure(
                 AdventuresInTheForgottenRealmsRun.uncommonA,
                 AdventuresInTheForgottenRealmsRun.uncommonA,
                 AdventuresInTheForgottenRealmsRun.uncommonA
         );
-        private static final AdventuresInTheForgottenRealmsStructure U2 = new AdventuresInTheForgottenRealmsStructure(
+        private static final AdventuresInTheForgottenRealmsStructure BBB = new AdventuresInTheForgottenRealmsStructure(
                 AdventuresInTheForgottenRealmsRun.uncommonB,
                 AdventuresInTheForgottenRealmsRun.uncommonB,
                 AdventuresInTheForgottenRealmsRun.uncommonB
@@ -518,23 +507,28 @@ class AdventuresInTheForgottenRealmsCollator implements BoosterCollator {
         }
     }
 
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 1.503 A commons (242 / 161)
+    // 6.012 B commons (968 / 161)
+    // 2.484 C commons (400 / 161)
+    // However, boosters with more than six B commons are not known to exist.
+    // This discrepancy is presumably related to foils--the above values are based on
+    // 10 commons per booster, but real boosters contain only 9.67 non-foil commons
     private final RarityConfiguration commonRuns = new RarityConfiguration(
-            false,
-            AdventuresInTheForgottenRealmsStructure.C1,
-            AdventuresInTheForgottenRealmsStructure.C2,
-            AdventuresInTheForgottenRealmsStructure.C3
+            AdventuresInTheForgottenRealmsStructure.ABBBBBBCCC,
+            AdventuresInTheForgottenRealmsStructure.AABBBBBBCC
     );
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(
             false,
-            AdventuresInTheForgottenRealmsStructure.U1, AdventuresInTheForgottenRealmsStructure.U1,
-            AdventuresInTheForgottenRealmsStructure.U1, AdventuresInTheForgottenRealmsStructure.U1,
-            AdventuresInTheForgottenRealmsStructure.U1, AdventuresInTheForgottenRealmsStructure.U1,
-            AdventuresInTheForgottenRealmsStructure.U1, AdventuresInTheForgottenRealmsStructure.U1,
-            AdventuresInTheForgottenRealmsStructure.U1, AdventuresInTheForgottenRealmsStructure.U1,
-            AdventuresInTheForgottenRealmsStructure.U1,
-            AdventuresInTheForgottenRealmsStructure.U2, AdventuresInTheForgottenRealmsStructure.U2,
-            AdventuresInTheForgottenRealmsStructure.U2, AdventuresInTheForgottenRealmsStructure.U2,
-            AdventuresInTheForgottenRealmsStructure.U2
+            AdventuresInTheForgottenRealmsStructure.AAA, AdventuresInTheForgottenRealmsStructure.AAA,
+            AdventuresInTheForgottenRealmsStructure.AAA, AdventuresInTheForgottenRealmsStructure.AAA,
+            AdventuresInTheForgottenRealmsStructure.AAA, AdventuresInTheForgottenRealmsStructure.AAA,
+            AdventuresInTheForgottenRealmsStructure.AAA, AdventuresInTheForgottenRealmsStructure.AAA,
+            AdventuresInTheForgottenRealmsStructure.AAA, AdventuresInTheForgottenRealmsStructure.AAA,
+            AdventuresInTheForgottenRealmsStructure.AAA,
+            AdventuresInTheForgottenRealmsStructure.BBB, AdventuresInTheForgottenRealmsStructure.BBB,
+            AdventuresInTheForgottenRealmsStructure.BBB, AdventuresInTheForgottenRealmsStructure.BBB,
+            AdventuresInTheForgottenRealmsStructure.BBB
     );
     private final RarityConfiguration rareRuns = new RarityConfiguration(
             false,

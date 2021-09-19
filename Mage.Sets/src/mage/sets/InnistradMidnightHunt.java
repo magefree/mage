@@ -90,6 +90,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Covetous Castaway", 45, Rarity.UNCOMMON, mage.cards.c.CovetousCastaway.class));
         cards.add(new SetCardInfo("Covetous Geist", 92, Rarity.UNCOMMON, mage.cards.c.CovetousGeist.class));
         cards.add(new SetCardInfo("Crawl from the Cellar", 93, Rarity.COMMON, mage.cards.c.CrawlFromTheCellar.class));
+        cards.add(new SetCardInfo("Creeping Inn", 264, Rarity.MYTHIC, mage.cards.c.CreepingInn.class));
         cards.add(new SetCardInfo("Croaking Counterpart", 215, Rarity.RARE, mage.cards.c.CroakingCounterpart.class));
         cards.add(new SetCardInfo("Crossroads Candleguide", 253, Rarity.COMMON, mage.cards.c.CrossroadsCandleguide.class));
         cards.add(new SetCardInfo("Curse of Leeches", 94, Rarity.RARE, mage.cards.c.CurseOfLeeches.class));
@@ -175,6 +176,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Hobbling Zombie", 106, Rarity.COMMON, mage.cards.h.HobblingZombie.class));
         cards.add(new SetCardInfo("Homestead Courage", 24, Rarity.COMMON, mage.cards.h.HomesteadCourage.class));
         cards.add(new SetCardInfo("Hook-Haunt Drifter", 42, Rarity.COMMON, mage.cards.h.HookHauntDrifter.class));
+        cards.add(new SetCardInfo("Hostile Hostel", 264, Rarity.MYTHIC, mage.cards.h.HostileHostel.class));
         cards.add(new SetCardInfo("Hound Tamer", 187, Rarity.UNCOMMON, mage.cards.h.HoundTamer.class));
         cards.add(new SetCardInfo("Howl of the Hunt", 188, Rarity.COMMON, mage.cards.h.HowlOfTheHunt.class));
         cards.add(new SetCardInfo("Hungry for More", 228, Rarity.UNCOMMON, mage.cards.h.HungryForMore.class));
@@ -262,6 +264,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Ritual Guardian", 30, Rarity.COMMON, mage.cards.r.RitualGuardian.class));
         cards.add(new SetCardInfo("Ritual of Hope", 31, Rarity.UNCOMMON, mage.cards.r.RitualOfHope.class));
         cards.add(new SetCardInfo("Rockfall Vale", 266, Rarity.RARE, mage.cards.r.RockfallVale.class));
+        cards.add(new SetCardInfo("Rootcoil Creeper", 238, Rarity.UNCOMMON, mage.cards.r.RootcoilCreeper.class));
         cards.add(new SetCardInfo("Rotten Reunion", 119, Rarity.COMMON, mage.cards.r.RottenReunion.class));
         cards.add(new SetCardInfo("Sacred Fire", 239, Rarity.UNCOMMON, mage.cards.s.SacredFire.class));
         cards.add(new SetCardInfo("Saryth, the Viper's Fang", 197, Rarity.RARE, mage.cards.s.SarythTheVipersFang.class));
@@ -275,6 +278,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Shipwreck Marsh", 267, Rarity.RARE, mage.cards.s.ShipwreckMarsh.class));
         cards.add(new SetCardInfo("Shipwreck Sifters", 74, Rarity.COMMON, mage.cards.s.ShipwreckSifters.class));
         cards.add(new SetCardInfo("Siege Zombie", 121, Rarity.COMMON, mage.cards.s.SiegeZombie.class));
+        cards.add(new SetCardInfo("Sigarda's Splendor", 33, Rarity.RARE, mage.cards.s.SigardasSplendor.class));
         cards.add(new SetCardInfo("Sigarda, Champion of Light", 240, Rarity.MYTHIC, mage.cards.s.SigardaChampionOfLight.class));
         cards.add(new SetCardInfo("Sigardian Savior", 34, Rarity.MYTHIC, mage.cards.s.SigardianSavior.class));
         cards.add(new SetCardInfo("Silver Bolt", 258, Rarity.COMMON, mage.cards.s.SilverBolt.class));

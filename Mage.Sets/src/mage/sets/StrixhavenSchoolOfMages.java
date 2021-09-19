@@ -488,15 +488,14 @@ class StrixhavenSchoolOfMagesCollator implements BoosterCollator {
     private static class StrixhavenSchoolOfMagesRun extends CardRun {
         private static final StrixhavenSchoolOfMagesRun commonA = new StrixhavenSchoolOfMagesRun(true, "249", "206", "182", "226", "237", "255", "210", "209", "239", "226", "251", "185", "219", "243", "206", "164", "215", "238", "256", "184", "239", "208", "254", "237", "185", "223", "251", "206", "166", "182", "164", "238", "204", "233", "184", "210", "182", "252", "243", "254", "208", "194", "255", "243", "249", "201", "204", "194", "235", "239", "166", "251", "223", "252", "237", "208", "233", "241", "219", "255", "201", "194", "164", "252", "170", "223", "241", "215", "166", "249", "237", "238", "184", "210", "243", "209", "235", "252", "204", "210", "185", "233", "249", "256", "239", "235", "209", "170", "201", "226", "241", "215", "206", "256", "208", "254", "185", "251", "226", "170", "184", "256", "235", "233", "209", "238", "254", "219", "201", "241", "182", "164", "194", "223", "170", "204", "166", "219", "215", "255");
         private static final StrixhavenSchoolOfMagesRun commonB = new StrixhavenSchoolOfMagesRun(true, "79", "9", "111", "136", "52", "85", "12", "118", "131", "40", "90", "34", "117", "141", "60", "69", "30", "93", "140", "36", "74", "16", "97", "143", "40", "87", "11", "99", "121", "39", "75", "30", "106", "122", "38", "79", "22", "97", "131", "51", "90", "23", "112", "145", "50", "87", "18", "103", "124", "43", "68", "34", "102", "142", "49", "77", "16", "93", "140", "52", "73", "32", "116", "144", "60", "63", "22", "109", "124", "55", "69", "9", "106", "143", "39", "73", "23", "116", "142", "61", "84", "8", "99", "122", "43", "74", "32", "117", "145", "36", "75", "19", "112", "141", "61", "77", "8", "109", "144", "50", "84", "18", "118", "137", "55", "68", "12", "111", "121", "38", "63", "19", "103", "136", "51", "85", "11", "102", "137", "49");
-        private static final StrixhavenSchoolOfMagesRun commonC = new StrixhavenSchoolOfMagesRun(true, "263", "268", "270", "271", "273", "275");
+        private static final StrixhavenSchoolOfMagesRun commonC = new StrixhavenSchoolOfMagesRun(false, "263", "268", "270", "271", "273", "275");
         private static final StrixhavenSchoolOfMagesRun uncommonA = new StrixhavenSchoolOfMagesRun(true, "257", "65", "56", "132", "92", "125", "72", "62", "104", "89", "123", "54", "10", "135", "114", "53", "105", "188", "45", "115", "47", "70", "100", "129", "88", "260", "46", "76", "257", "110", "65", "13", "139", "78", "92", "26", "72", "15", "56", "89", "134", "28", "70", "91", "132", "105", "31", "123", "88", "104", "135", "54", "115", "25", "76", "13", "62", "125", "35", "188", "65", "260", "10", "114", "129", "47", "100", "15", "257", "53", "26", "110", "139", "28", "134", "56", "35", "45", "91", "72", "10", "31", "132", "54", "89", "15", "78", "46", "123", "25", "92", "135", "104", "70", "125", "105", "260", "62", "188", "129", "114", "88", "13", "53", "26", "115", "47", "76", "28", "139", "100", "35", "91", "45", "78", "134", "31", "46", "25", "110");
         private static final StrixhavenSchoolOfMagesRun uncommonB = new StrixhavenSchoolOfMagesRun(true, "229", "218", "216", "222", "212", "198", "71", "177", "202", "138", "258", "162", "81", "175", "213", "224", "220", "176", "227", "107", "247", "186", "169", "216", "261", "197", "242", "126", "262", "198", "24", "225", "207", "229", "190", "202", "81", "178", "200", "193", "41", "162", "71", "171", "59", "212", "218", "222", "227", "138", "231", "220", "258", "175", "169", "186", "107", "193", "250", "197", "176", "171", "126", "261", "247", "227", "213", "177", "262", "207", "190", "224", "225", "24", "216", "200", "242", "71", "178", "41", "212", "59", "198", "81", "231", "220", "229", "218", "202", "169", "175", "222", "193", "197", "250", "213", "186", "126", "177", "190", "258", "138", "162", "107", "261", "224", "200", "176", "178", "24", "247", "262", "207", "171", "225", "59", "231", "242", "41", "250");
         private static final StrixhavenSchoolOfMagesRun rareA = new StrixhavenSchoolOfMagesRun(false, "6", "14", "17", "20", "27", "29", "33", "37", "42", "44", "48", "58", "64", "66", "80", "82", "86", "94", "96", "98", "101", "113", "119", "127", "130", "133", "146", "147", "150", "152", "154", "155", "157", "158", "159", "160", "161", "165", "172", "173", "174", "179", "180", "181", "199", "205", "214", "217", "221", "228", "232", "234", "244", "246", "248", "253", "259", "264", "265", "266", "267", "269", "272", "274", "6", "14", "17", "20", "27", "29", "33", "37", "42", "44", "48", "58", "64", "66", "80", "82", "86", "94", "96", "98", "101", "113", "119", "127", "130", "133", "146", "147", "150", "152", "154", "155", "157", "158", "159", "160", "161", "165", "172", "173", "174", "179", "180", "181", "199", "205", "214", "217", "221", "228", "232", "234", "244", "246", "248", "253", "259", "264", "265", "266", "267", "269", "272", "274", "21", "83", "95", "128", "148", "149", "151", "153", "156", "163", "167", "168", "189", "191", "192", "196", "203", "230", "240", "245");
-        private static final StrixhavenSchoolOfMagesRun commonLesson = new StrixhavenSchoolOfMagesRun(false, "1", "2", "3", "4", "183", "187", "195", "211", "236");
+        private static final StrixhavenSchoolOfMagesRun commonLesson = new StrixhavenSchoolOfMagesRun(true, "4", "187", "183", "195", "211", "3", "1", "236", "2", "187", "195", "4", "183", "211", "1", "2", "236", "3", "183", "187", "4", "195", "2", "211", "3", "1", "236", "187", "183", "195", "4", "1", "211", "3", "2", "236", "187", "4", "183", "195", "3", "1", "2", "211", "236", "187", "195", "4", "183", "2", "1", "211", "3", "187", "183", "4", "236", "195", "1", "3", "211", "236", "2", "187", "4", "195", "183", "3", "211", "1", "2", "236", "187", "4", "195", "183", "211", "3", "1", "2", "236", "183", "195", "4", "187", "1", "211", "3", "2", "236", "187", "4", "195", "183", "2", "211", "3", "1", "187", "236", "4", "183", "195", "211", "1", "236", "3", "2", "195", "187", "183", "4", "2", "236", "3", "211", "1");
         private static final StrixhavenSchoolOfMagesRun rareLesson = new StrixhavenSchoolOfMagesRun(false, "5", "7", "57", "67", "108", "120", "7", "57", "67", "108", "120");
         private static final StrixhavenSchoolOfMagesRun uncommonArchive = new StrixhavenSchoolOfMagesRun(true, "18", "29", "19", "41", "4", "57", "46", "23", "35", "3", "20", "49", "37", "30", "41", "24", "9", "44", "4", "29", "3", "46", "35", "18", "57", "41", "9", "19", "24", "44", "51", "30", "23", "37", "18", "49", "20", "29", "4", "19", "35", "46", "51", "23", "30", "18", "57", "3", "37", "49", "41", "24", "9", "44", "20", "4", "23", "37", "30", "3", "35", "46", "57", "29", "9", "29", "49", "19", "51", "44", "4", "24", "41", "18", "46", "3", "20", "57", "19", "35", "44", "23", "24", "9", "51", "30", "49", "37", "20", "51");
-        private static final StrixhavenSchoolOfMagesRun rareArchive = new StrixhavenSchoolOfMagesRun(false, "5", "6", "7", "8", "10", "13", "14", "15", "16", "21", "26", "28", "31", "32", "34", "38", "39", "42", "45", "47", "48", "52", "53", "56", "58", "59", "60", "61", "62", "63");
-        private static final StrixhavenSchoolOfMagesRun mythicArchive = new StrixhavenSchoolOfMagesRun(false, "1", "2", "11", "12", "17", "22", "25", "27", "33", "36", "40", "43", "50", "54", "55");
+        private static final StrixhavenSchoolOfMagesRun rareArchive = new StrixhavenSchoolOfMagesRun(false, "5", "6", "7", "8", "10", "13", "14", "15", "16", "21", "26", "28", "31", "32", "34", "38", "39", "42", "45", "47", "48", "52", "53", "56", "58", "59", "60", "61", "62", "63", "5", "6", "7", "8", "10", "13", "14", "15", "16", "21", "26", "28", "31", "32", "34", "38", "39", "42", "45", "47", "48", "52", "53", "56", "58", "59", "60", "61", "62", "63", "1", "2", "11", "12", "17", "22", "25", "27", "33", "36", "40", "43", "50", "54", "55");
 
         private StrixhavenSchoolOfMagesRun(boolean keepOrder, String... numbers) {
             super(keepOrder, numbers);
@@ -504,18 +503,18 @@ class StrixhavenSchoolOfMagesCollator implements BoosterCollator {
     }
 
     private static class StrixhavenSchoolOfMagesStructure extends BoosterStructure {
-        private static final StrixhavenSchoolOfMagesStructure C1 = new StrixhavenSchoolOfMagesStructure(
+        private static final StrixhavenSchoolOfMagesStructure AABBBBBBC = new StrixhavenSchoolOfMagesStructure(
                 StrixhavenSchoolOfMagesRun.commonA,
                 StrixhavenSchoolOfMagesRun.commonA,
-                StrixhavenSchoolOfMagesRun.commonC,
                 StrixhavenSchoolOfMagesRun.commonB,
                 StrixhavenSchoolOfMagesRun.commonB,
                 StrixhavenSchoolOfMagesRun.commonB,
                 StrixhavenSchoolOfMagesRun.commonB,
                 StrixhavenSchoolOfMagesRun.commonB,
-                StrixhavenSchoolOfMagesRun.commonB
+                StrixhavenSchoolOfMagesRun.commonB,
+                StrixhavenSchoolOfMagesRun.commonC
         );
-        private static final StrixhavenSchoolOfMagesStructure C2 = new StrixhavenSchoolOfMagesStructure(
+        private static final StrixhavenSchoolOfMagesStructure AAABBBBBC = new StrixhavenSchoolOfMagesStructure(
                 StrixhavenSchoolOfMagesRun.commonA,
                 StrixhavenSchoolOfMagesRun.commonA,
                 StrixhavenSchoolOfMagesRun.commonA,
@@ -524,20 +523,9 @@ class StrixhavenSchoolOfMagesCollator implements BoosterCollator {
                 StrixhavenSchoolOfMagesRun.commonB,
                 StrixhavenSchoolOfMagesRun.commonB,
                 StrixhavenSchoolOfMagesRun.commonB,
-                StrixhavenSchoolOfMagesRun.commonB
+                StrixhavenSchoolOfMagesRun.commonC
         );
-        private static final StrixhavenSchoolOfMagesStructure C3 = new StrixhavenSchoolOfMagesStructure(
-                StrixhavenSchoolOfMagesRun.commonA,
-                StrixhavenSchoolOfMagesRun.commonA,
-                StrixhavenSchoolOfMagesRun.commonA,
-                StrixhavenSchoolOfMagesRun.commonC,
-                StrixhavenSchoolOfMagesRun.commonB,
-                StrixhavenSchoolOfMagesRun.commonB,
-                StrixhavenSchoolOfMagesRun.commonB,
-                StrixhavenSchoolOfMagesRun.commonB,
-                StrixhavenSchoolOfMagesRun.commonB
-        );
-        private static final StrixhavenSchoolOfMagesStructure C4 = new StrixhavenSchoolOfMagesStructure(
+        private static final StrixhavenSchoolOfMagesStructure AAABBBBBB = new StrixhavenSchoolOfMagesStructure(
                 StrixhavenSchoolOfMagesRun.commonA,
                 StrixhavenSchoolOfMagesRun.commonA,
                 StrixhavenSchoolOfMagesRun.commonA,
@@ -548,12 +536,12 @@ class StrixhavenSchoolOfMagesCollator implements BoosterCollator {
                 StrixhavenSchoolOfMagesRun.commonB,
                 StrixhavenSchoolOfMagesRun.commonB
         );
-        private static final StrixhavenSchoolOfMagesStructure U1 = new StrixhavenSchoolOfMagesStructure(
+        private static final StrixhavenSchoolOfMagesStructure ABB = new StrixhavenSchoolOfMagesStructure(
                 StrixhavenSchoolOfMagesRun.uncommonA,
                 StrixhavenSchoolOfMagesRun.uncommonB,
                 StrixhavenSchoolOfMagesRun.uncommonB
         );
-        private static final StrixhavenSchoolOfMagesStructure U2 = new StrixhavenSchoolOfMagesStructure(
+        private static final StrixhavenSchoolOfMagesStructure AAB = new StrixhavenSchoolOfMagesStructure(
                 StrixhavenSchoolOfMagesRun.uncommonA,
                 StrixhavenSchoolOfMagesRun.uncommonA,
                 StrixhavenSchoolOfMagesRun.uncommonB
@@ -573,29 +561,45 @@ class StrixhavenSchoolOfMagesCollator implements BoosterCollator {
         private static final StrixhavenSchoolOfMagesStructure A2 = new StrixhavenSchoolOfMagesStructure(
                 StrixhavenSchoolOfMagesRun.rareArchive
         );
-        private static final StrixhavenSchoolOfMagesStructure A3 = new StrixhavenSchoolOfMagesStructure(
-                StrixhavenSchoolOfMagesRun.mythicArchive
-        );
 
         private StrixhavenSchoolOfMagesStructure(CardRun... runs) {
             super(runs);
         }
     }
 
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 2.81 A commons (45 / 16)
+    // 5.63 B commons (90 / 16)
+    // 0.56 C commons ( 9 / 16)
     private final RarityConfiguration commonRuns = new RarityConfiguration(
             false,
-            StrixhavenSchoolOfMagesStructure.C1,
-            StrixhavenSchoolOfMagesStructure.C2,
-            StrixhavenSchoolOfMagesStructure.C3,
-            StrixhavenSchoolOfMagesStructure.C4
+            StrixhavenSchoolOfMagesStructure.AABBBBBBC,
+            StrixhavenSchoolOfMagesStructure.AABBBBBBC,
+            StrixhavenSchoolOfMagesStructure.AABBBBBBC,
+            StrixhavenSchoolOfMagesStructure.AAABBBBBC,
+            StrixhavenSchoolOfMagesStructure.AAABBBBBC,
+            StrixhavenSchoolOfMagesStructure.AAABBBBBC,
+            StrixhavenSchoolOfMagesStructure.AAABBBBBC,
+            StrixhavenSchoolOfMagesStructure.AAABBBBBC,
+            StrixhavenSchoolOfMagesStructure.AAABBBBBC,
+            StrixhavenSchoolOfMagesStructure.AAABBBBBB,
+            StrixhavenSchoolOfMagesStructure.AAABBBBBB,
+            StrixhavenSchoolOfMagesStructure.AAABBBBBB,
+            StrixhavenSchoolOfMagesStructure.AAABBBBBB,
+            StrixhavenSchoolOfMagesStructure.AAABBBBBB,
+            StrixhavenSchoolOfMagesStructure.AAABBBBBB,
+            StrixhavenSchoolOfMagesStructure.AAABBBBBB
     );
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(
-            StrixhavenSchoolOfMagesStructure.U1,
-            StrixhavenSchoolOfMagesStructure.U2
+            StrixhavenSchoolOfMagesStructure.ABB,
+            StrixhavenSchoolOfMagesStructure.AAB
     );
     private final RarityConfiguration rareRuns = new RarityConfiguration(
             StrixhavenSchoolOfMagesStructure.R1
     );
+
+    // The ratio of common to rare/mythic Lesson cards hasn't been officially disclosed
+    // rare/mythic Lessons were observed in 37 out of 468 packs, which is very close to 2/25
     private final RarityConfiguration lessonRuns = new RarityConfiguration(
             false,
             StrixhavenSchoolOfMagesStructure.L1, StrixhavenSchoolOfMagesStructure.L1,
@@ -605,18 +609,17 @@ class StrixhavenSchoolOfMagesCollator implements BoosterCollator {
             StrixhavenSchoolOfMagesStructure.L1, StrixhavenSchoolOfMagesStructure.L1,
             StrixhavenSchoolOfMagesStructure.L1, StrixhavenSchoolOfMagesStructure.L1,
             StrixhavenSchoolOfMagesStructure.L1, StrixhavenSchoolOfMagesStructure.L1,
+            StrixhavenSchoolOfMagesStructure.L1, StrixhavenSchoolOfMagesStructure.L1,
+            StrixhavenSchoolOfMagesStructure.L1, StrixhavenSchoolOfMagesStructure.L1,
+            StrixhavenSchoolOfMagesStructure.L1, StrixhavenSchoolOfMagesStructure.L1,
+            StrixhavenSchoolOfMagesStructure.L1, StrixhavenSchoolOfMagesStructure.L1,
             StrixhavenSchoolOfMagesStructure.L1,
-
-            StrixhavenSchoolOfMagesStructure.L2
+            StrixhavenSchoolOfMagesStructure.L2, StrixhavenSchoolOfMagesStructure.L2
     );
     private final RarityConfiguration archiveRuns = new RarityConfiguration(
             false,
             StrixhavenSchoolOfMagesStructure.A1, StrixhavenSchoolOfMagesStructure.A1,
-
-            StrixhavenSchoolOfMagesStructure.A2, StrixhavenSchoolOfMagesStructure.A2,
-            StrixhavenSchoolOfMagesStructure.A2, StrixhavenSchoolOfMagesStructure.A2,
-
-            StrixhavenSchoolOfMagesStructure.A3
+            StrixhavenSchoolOfMagesStructure.A2
     );
 
     @Override

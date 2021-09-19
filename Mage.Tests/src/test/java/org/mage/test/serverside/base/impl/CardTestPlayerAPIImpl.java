@@ -259,13 +259,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         logger.debug("Loading deck...");
         DeckCardLists list;
-        if (loadedDeckCardLists.containsKey(deckName)) {
-            list = loadedDeckCardLists.get(deckName);
+        if (loadedDecks.containsKey(deckName)) {
+            list = loadedDecks.get(deckName);
         } else {
             list = DeckImporter.importDeckFromFile(deckName, true);
-            loadedDeckCardLists.put(deckName, list);
+            loadedDecks.put(deckName, list);
         }
-        Deck deck = Deck.load(list, false, false);
+        Deck deck = Deck.load(list, false, false, loadedCardInfo);
         logger.debug("Done!");
         if (deck.getCards().size() < 40) {
             throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
