@@ -113,7 +113,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (hand.size() < 6
                 || isTestsMode() // ignore mulligan in tests
                 || game.getClass().getName().contains("Momir") // ignore mulligan in Momir games
-        ) {
+                ) {
             return false;
         }
         Set<Card> lands = hand.getCards(new FilterLandCard(), game);
@@ -538,6 +538,58 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         if (target.getOriginalTarget() instanceof TargetPlayer) {
             return setTargetPlayer(outcome, target, source, sourceId, abilityControllerId, randomOpponentId, game, required);
+        }
+
+        // Angel of Serenity trigger
+        if (target.getOriginalTarget() instanceof TargetCardInGraveyardOrBattlefield) {
+            Cards cards = new CardsImpl(possibleTargets);
+            List<Card> possibleCards = new ArrayList<>(cards.getCards(game));
+            for (Card card : possibleCards) {
+                // check permanents first; they have more intrinsic worth
+                if (card instanceof Permanent) {
+                    Permanent p = ((Permanent) card);
+                    if (outcome.isGood()
+                            && p.isControlledBy(abilityControllerId)) {
+                        if (target.canTarget(abilityControllerId, p.getId(), source, game)) {
+                            if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
+                                break;
+                            }
+                            target.addTarget(p.getId(), source, game);
+                        }
+                    }
+                    if (!outcome.isGood()
+                            && !p.isControlledBy(abilityControllerId)) {
+                        if (target.canTarget(abilityControllerId, p.getId(), source, game)) {
+                            if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
+                                break;
+                            }
+                            target.addTarget(p.getId(), source, game);
+                        }
+                    }
+                }
+                // check the graveyards last
+                if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
+                    if (outcome.isGood()
+                            && card.isOwnedBy(abilityControllerId)) {
+                        if (target.canTarget(abilityControllerId, card.getId(), source, game)) {
+                            if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
+                                break;
+                            }
+                            target.addTarget(card.getId(), source, game);
+                        }
+                    }
+                    if (!outcome.isGood()
+                            && !card.isOwnedBy(abilityControllerId)) {
+                        if (target.canTarget(abilityControllerId, card.getId(), source, game)) {
+                            if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
+                                break;
+                            }
+                            target.addTarget(card.getId(), source, game);
+                        }
+                    }
+                }
+            }
+            return target.isChosen();
         }
 
         if (target.getOriginalTarget() instanceof TargetDiscard
@@ -2659,7 +2711,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     protected void findBestPermanentTargets(Outcome outcome, UUID abilityControllerId, UUID sourceId, FilterPermanent filter, Game game, Target target,
-                                            List<Permanent> goodList, List<Permanent> badList, List<Permanent> allList) {
+            List<Permanent> goodList, List<Permanent> badList, List<Permanent> allList) {
         // searching for most valuable/powerfull permanents
         goodList.clear();
         badList.clear();
