@@ -193,11 +193,15 @@ public abstract class DraftImpl implements Draft {
 
     protected void openBooster() {
         if (boosterNum <= numberBoosters) {
-            for (DraftPlayer player : players.values()) {
-                if (draftCube != null) {
+            if (draftCube != null) {
+                for (DraftPlayer player : players.values()) {
                     player.setBooster(draftCube.createBooster());
-                } else {
-                    player.setBooster(sets.get(boosterNum - 1).createBooster());
+                }
+            } else {
+                ExpansionSet set = sets.get(boosterNum - 1);
+                set.openBoosterBox();
+                for (DraftPlayer player : players.values()) {
+                    player.setBooster(set.createBooster());
                 }
             }
         }

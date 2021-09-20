@@ -122,8 +122,11 @@ public abstract class ExpansionSet implements Serializable {
 
     protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
 
+    protected int boosterBoxSize = 36;
+
     protected final EnumMap<Rarity, List<CardInfo>> savedCards;
     protected final Map<String, CardInfo> inBoosterMap = new HashMap<>();
+    protected final List<List<Card>> boosterBox = new ArrayList<>();
 
     public ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
         this(name, code, releaseDate, setType, null);
@@ -253,7 +256,7 @@ public abstract class ExpansionSet implements Serializable {
 
     public List<Card> createBooster() {
         if (boosterCollator != null) {
-            return createBoosterUsingCollator();
+            return createBoosterFromBox();
         }
 
         for (int i = 0; i < 100; i++) {//don't want to somehow loop forever
@@ -277,12 +280,6 @@ public abstract class ExpansionSet implements Serializable {
         return tryBooster();
     }
 
-    public void shuffleCollator() {
-        if (boosterCollator != null) {
-            boosterCollator.shuffle();
-        }
-    }
-
     private List<Card> createBoosterUsingCollator() {
         if (inBoosterMap.isEmpty()) {
             generateBoosterMap();
@@ -293,6 +290,29 @@ public abstract class ExpansionSet implements Serializable {
                 .map(inBoosterMap::get)
                 .map(CardInfo::getCard)
                 .collect(Collectors.toList());
+    }
+
+    public void openBoosterBox() {
+        // nothing to do if not using collator
+        if (boosterCollator == null) {
+            return;
+        }
+        // don't open a new box if the old one hasn't been used yet
+        if (boosterBox.size() >= boosterBoxSize) {
+            return;
+        }
+        boosterCollator.shuffle();
+        boosterBox.clear();
+        for (int i = 0; i < boosterBoxSize; i++) {
+            boosterBox.add(createBoosterUsingCollator());
+        }
+    }
+
+    private List<Card> createBoosterFromBox() {
+        if (boosterBox.isEmpty()) {
+            openBoosterBox();
+        }
+        return boosterBox.remove(RandomUtil.nextInt(boosterBox.size()));
     }
 
     protected void generateBoosterMap() {

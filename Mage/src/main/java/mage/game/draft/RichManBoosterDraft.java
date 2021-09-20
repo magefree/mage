@@ -25,6 +25,9 @@ public class RichManBoosterDraft extends DraftImpl {
 
     @Override
     public void start() {
+        for (ExpansionSet set : sets) {
+            set.openBoosterBox();
+        }
         cardNum = 1;
         boosterNum = 1;
         while (!isAbort() && cardNum <= 36) {
@@ -62,6 +65,15 @@ public class RichManBoosterDraft extends DraftImpl {
     }
 
     @Override
+    protected void openBooster() {
+        if (boosterNum <= numberBoosters) {
+            for (DraftPlayer player : players.values()) {
+                player.setBooster(sets.get(boosterNum - 1).createBooster());
+            }
+        }
+    }
+
+    @Override
     protected boolean pickCards() {
         for (DraftPlayer player : players.values()) {
             if (cardNum > 36) {
@@ -90,4 +102,4 @@ public class RichManBoosterDraft extends DraftImpl {
         int time = (int) Math.ceil(customProfiTimes[cardNum - 1] * timing.getCustomTimeoutFactor());
         playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
     }
-} 
+}

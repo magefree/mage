@@ -414,6 +414,10 @@ public abstract class TournamentImpl implements Tournament {
                     player.getDeck().getCards().addAll(JumpstartPoolGenerator.generatePool(options.getLimitedOptions().jumpstartPacks));
                 }
             } else {
+                // each player gets their own fresh box so pools aren't negatively correlated
+                for (ExpansionSet set : sets) {
+                    set.openBoosterBox();
+                }
                 for (ExpansionSet set : sets) {
                     player.getDeck().getSideboard().addAll(set.createBooster());
                 }
