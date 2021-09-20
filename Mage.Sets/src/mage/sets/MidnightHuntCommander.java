@@ -48,6 +48,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Commander's Sphere", 159, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Corpse Augur", 109, Rarity.UNCOMMON, mage.cards.c.CorpseAugur.class));
         cards.add(new SetCardInfo("Crowded Crypt", 17, Rarity.RARE, mage.cards.c.CrowdedCrypt.class));
+        cards.add(new SetCardInfo("Curse of Clinging Webs", 25, Rarity.RARE, mage.cards.c.CurseOfClingingWebs.class));
         cards.add(new SetCardInfo("Custodi Soulbinders", 83, Rarity.RARE, mage.cards.c.CustodiSoulbinders.class));
         cards.add(new SetCardInfo("Dark Salvation", 110, Rarity.RARE, mage.cards.d.DarkSalvation.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 171, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
