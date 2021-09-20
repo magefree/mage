@@ -688,6 +688,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
+    public boolean addCounters(Counter counter, Ability source, Game game) {
+        return addCounters(counter, source.getControllerId(), source, game);
+    }
+
+    @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
         return addCounters(counter, playerAddingCounters, source, game, null, true);
     }

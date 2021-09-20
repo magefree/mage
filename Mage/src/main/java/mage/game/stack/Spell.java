@@ -990,6 +990,11 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public boolean addCounters(Counter counter, Ability source, Game game) {
+        return card.addCounters(counter, source, game);
+    }
+
+    @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
         return card.addCounters(counter, playerAddingCounters, source, game);
     }
