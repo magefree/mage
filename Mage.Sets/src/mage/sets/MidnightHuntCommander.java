@@ -50,6 +50,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Crowded Crypt", 17, Rarity.RARE, mage.cards.c.CrowdedCrypt.class));
         cards.add(new SetCardInfo("Curse of Clinging Webs", 25, Rarity.RARE, mage.cards.c.CurseOfClingingWebs.class));
         cards.add(new SetCardInfo("Curse of Conformity", 6, Rarity.RARE, mage.cards.c.CurseOfConformity.class));
+        cards.add(new SetCardInfo("Curse of Obsession", 35, Rarity.RARE, mage.cards.c.CurseOfObsession.class));
         cards.add(new SetCardInfo("Curse of Unbinding", 12, Rarity.RARE, mage.cards.c.CurseOfUnbinding.class));
         cards.add(new SetCardInfo("Curse of the Restless Dead", 18, Rarity.RARE, mage.cards.c.CurseOfTheRestlessDead.class));
         cards.add(new SetCardInfo("Custodi Soulbinders", 83, Rarity.RARE, mage.cards.c.CustodiSoulbinders.class));
