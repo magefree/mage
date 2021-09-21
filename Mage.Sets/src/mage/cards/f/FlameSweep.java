@@ -7,8 +7,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -43,11 +43,11 @@ public final class FlameSweep extends CardImpl {
     }
 }
 
-enum FlameSweepPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+enum FlameSweepPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
     instance;
 
     @Override
-    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent object = input.getObject();
         UUID playerId = input.getPlayerId();
         return !(object.isControlledBy(playerId)

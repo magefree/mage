@@ -8,8 +8,8 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -47,7 +47,7 @@ public final class SoulShatter extends CardImpl {
     }
 }
 
-enum SoulShatterPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+enum SoulShatterPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
     instance;
 
     private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent();
@@ -57,7 +57,7 @@ enum SoulShatterPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanen
     }
 
     @Override
-    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         int cmc = game.getBattlefield()
                 .getActivePermanents(filter, input.getPlayerId(), game)
                 .stream()

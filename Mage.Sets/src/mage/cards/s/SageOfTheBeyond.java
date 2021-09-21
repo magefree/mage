@@ -12,8 +12,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
@@ -59,7 +59,7 @@ public final class SageOfTheBeyond extends CardImpl {
     }
 }
 
-enum SageOfTheBeyondPredicate implements ObjectPlayerPredicate<ObjectSourcePlayer<Card>> {
+enum SageOfTheBeyondPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
     instance;
 
     @Override

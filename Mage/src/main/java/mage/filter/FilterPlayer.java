@@ -1,8 +1,7 @@
 package mage.filter;
 
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
@@ -17,7 +16,7 @@ import java.util.UUID;
  */
 public class FilterPlayer extends FilterImpl<Player> {
 
-    protected List<ObjectPlayerPredicate<ObjectPlayer<Player>>> extraPredicates = new ArrayList<>();
+    protected List<ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>>> extraPredicates = new ArrayList<>();
 
     public FilterPlayer() {
         this("player");
@@ -32,7 +31,7 @@ public class FilterPlayer extends FilterImpl<Player> {
         this.extraPredicates = new ArrayList<>(filter.extraPredicates);
     }
 
-    public void add(ObjectPlayerPredicate predicate) {
+    public void add(ObjectSourcePlayerPredicate predicate) {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
@@ -49,7 +48,7 @@ public class FilterPlayer extends FilterImpl<Player> {
             return false;
         }
 
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(checkPlayer, sourceId, sourceControllerId), game);
+        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<Player>(checkPlayer, sourceId, sourceControllerId), game);
     }
 
     @Override

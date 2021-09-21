@@ -11,8 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.Target;
@@ -59,10 +59,10 @@ public final class DawnCharm extends CardImpl {
     }
 }
 
-class DawnCharmPredicate implements ObjectPlayerPredicate<ObjectPlayer<StackObject>> {
+class DawnCharmPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>> {
 
     @Override
-    public boolean apply(ObjectPlayer<StackObject> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
         UUID controllerId = input.getPlayerId();
         if (controllerId == null) {
             return false;

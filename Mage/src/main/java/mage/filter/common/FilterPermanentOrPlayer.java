@@ -5,7 +5,8 @@ import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,7 +47,7 @@ public class FilterPermanentOrPlayer extends FilterImpl<MageItem> implements Fil
         return true;
     }
 
-    public void add(ObjectPlayerPredicate predicate) {
+    public void add(ObjectSourcePlayerPredicate predicate) {
         playerFilter.add((Predicate<? super Player>) predicate);
         permanentFilter.add((Predicate<? super Permanent>) predicate);
     }

@@ -10,8 +10,8 @@ import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -55,11 +55,11 @@ public final class Radiate extends CardImpl {
     }
 }
 
-enum SpellWithOnlySingleTargetPredicate implements ObjectPlayerPredicate<ObjectPlayer<Spell>> {
+enum SpellWithOnlySingleTargetPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Spell>> {
     instance;
 
     @Override
-    public boolean apply(ObjectPlayer<Spell> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {
         Spell spell = input.getObject();
         if (spell == null) {
             return false;
@@ -79,11 +79,11 @@ enum SpellWithOnlySingleTargetPredicate implements ObjectPlayerPredicate<ObjectP
     }
 }
 
-enum SpellWithOnlyPermanentOrPlayerTargetsPredicate implements ObjectPlayerPredicate<ObjectPlayer<Spell>> {
+enum SpellWithOnlyPermanentOrPlayerTargetsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Spell>> {
     instance;
 
     @Override
-    public boolean apply(ObjectPlayer<Spell> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {
         Spell spell = input.getObject();
         if (spell == null) {
             return false;

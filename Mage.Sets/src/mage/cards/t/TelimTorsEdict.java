@@ -10,8 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -49,13 +49,13 @@ public final class TelimTorsEdict extends CardImpl {
     }
 }
 
-class TelimTorsEdictPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+class TelimTorsEdictPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
 
     public TelimTorsEdictPredicate() {
     }
 
     @Override
-    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent permanent = input.getObject();
         UUID playerId = input.getPlayerId();
         if (permanent.isControlledBy(playerId) || permanent.isOwnedBy(playerId)) {

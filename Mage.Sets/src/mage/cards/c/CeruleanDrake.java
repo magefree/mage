@@ -13,8 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
@@ -61,11 +61,11 @@ public final class CeruleanDrake extends CardImpl {
     }
 }
 
-enum CeruleanDrakePredicate implements ObjectPlayerPredicate<ObjectPlayer<StackObject>> {
+enum CeruleanDrakePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>> {
     instance;
 
     @Override
-    public boolean apply(ObjectPlayer<StackObject> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
         if (input.getPlayerId() == null) {
             return false;
         }

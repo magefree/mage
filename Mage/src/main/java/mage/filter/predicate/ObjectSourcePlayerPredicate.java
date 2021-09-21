@@ -1,11 +1,9 @@
-
 package mage.filter.predicate;
 
 /**
- *
- * @author North
  * @param <T>
+ * @author North
  */
 @FunctionalInterface
-public interface ObjectSourcePlayerPredicate<T extends ObjectSourcePlayer> extends ObjectPlayerPredicate<T> {
+public interface ObjectSourcePlayerPredicate<T extends ObjectSourcePlayer<?>> extends Predicate<T> {
 }

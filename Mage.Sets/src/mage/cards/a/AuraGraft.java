@@ -14,8 +14,8 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -54,19 +54,19 @@ public final class AuraGraft extends CardImpl {
     }
 }
 
-class AttachedToPermanentPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+class AttachedToPermanentPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
 
     public AttachedToPermanentPredicate() {
         super();
     }
 
-    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent attached = input.getObject();
         return attached != null && game.getPermanent(attached.getAttachedTo()) != null;
     }
 }
 
-class PermanentCanBeAttachedToPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+class PermanentCanBeAttachedToPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
 
     protected Permanent aura;
 
@@ -76,7 +76,7 @@ class PermanentCanBeAttachedToPredicate implements ObjectPlayerPredicate<ObjectP
     }
 
     @Override
-    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent potentialAttachment = input.getObject();
         for (TargetAddress addr : TargetAddress.walk(aura)) {
             Target target = addr.getTarget(aura);
