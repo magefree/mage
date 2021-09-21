@@ -171,7 +171,10 @@ class ChandraAblazeEffect5 extends OneShotEffect {
                 if (player.choose(outcome, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        player.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                        player.cast(player.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+
                         cards.remove(card);
                     }
                 }

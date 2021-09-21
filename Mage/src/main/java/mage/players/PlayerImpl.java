@@ -1128,16 +1128,21 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, ApprovingObject approvingObject) {
+    public boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject) {
         if (card == null) {
             return false;
         }
+
+        // play without timing and from any zone
         boolean result;
         if (card.isLand(game)) {
-            result = playLand(card, game, ignoreTiming);
+            result = playLand(card, game, true);
         } else {
-            result = cast(card.getSpellAbility(), game, noMana, approvingObject);
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+            result = cast(this.chooseAbilityForCast(card, game, noMana), game, noMana, approvingObject);
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
         }
+
         if (!result) {
             game.informPlayer(this, "You can't play " + card.getIdName() + '.');
         }

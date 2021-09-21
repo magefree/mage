@@ -3092,8 +3092,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, ApprovingObject approvingObject) {
-        return computerPlayer.playCard(card, game, noMana, ignoreTiming, approvingObject);
+    public boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject) {
+        return computerPlayer.playCard(card, game, noMana, approvingObject);
     }
 
     @Override
