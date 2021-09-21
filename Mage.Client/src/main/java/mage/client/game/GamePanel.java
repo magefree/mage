@@ -289,19 +289,12 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void hidePickDialogs() {
         // temporary hide opened dialog on redraw/update
-
-        //try {
-            // pick target
-            for (ShowCardsDialog dialog : this.pickTarget) {
-                dialog.setVisible(false);
-            }
-            // pick pile
-            for (PickPileDialog dialog : this.pickPile) {
-                dialog.setVisible(false);
-            }
-        //} catch (PropertyVetoException e) {
-          //  logger.error("Couldn't close pick dialog", e);
-        //}
+        for (ShowCardsDialog dialog : this.pickTarget) {
+            dialog.setVisible(false);
+        }
+        for (PickPileDialog dialog : this.pickPile) {
+            dialog.setVisible(false);
+        }
     }
 
     private void clearPickDialogs() {

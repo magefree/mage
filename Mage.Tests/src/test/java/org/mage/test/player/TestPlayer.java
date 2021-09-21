@@ -4351,7 +4351,7 @@ public class TestPlayer implements Player {
         assertAliasSupportInChoices(false);
 
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
-        Map<UUID, ActivatedAbility> useable = PlayerImpl.getSpellAbilities(this.getId(), object, game.getState().getZone(object.getId()), game);
+        Map<UUID, ActivatedAbility> useable = PlayerImpl.getCastableSpellAbilities(game, this.getId(), object, game.getState().getZone(object.getId()), noMana);
         String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
         if (useable.size() == 1) {
             return (SpellAbility) useable.values().iterator().next();
