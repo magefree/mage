@@ -78,15 +78,17 @@ class AccursedWitchReturnTransformedEffect extends OneShotEffect {
         if (controller == null || !(game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) || attachTo == null) {
             return false;
         }
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-        UUID secondFaceId = game.getCard(source.getSourceId()).getSecondCardFace().getId();
-        game.getState().setValue("attachTo:" + secondFaceId, attachTo.getId());
-        //note: should check for null after game.getCard
+
         Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                attachTo.addAttachment(card.getId(), source, game);
-            }
+        if (card == null) {
+            return false;
+        }
+
+        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        UUID secondFaceId = card.getSecondCardFace().getId();
+        game.getState().setValue("attachTo:" + secondFaceId, attachTo.getId());
+        if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+            attachTo.addAttachment(card.getId(), source, game);
         }
         return true;
     }
