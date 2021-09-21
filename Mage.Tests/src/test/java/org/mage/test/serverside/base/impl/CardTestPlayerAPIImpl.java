@@ -55,6 +55,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     // DEBUG only, enable it to fast startup tests without database create (delete \db\ folder to force db recreate)
     private static final boolean FAST_SCAN_WITHOUT_DATABASE_CREATE = false;
 
+    private static final boolean SHOW_EXECUTE_TIME_PER_TEST = false;
+
     public static final String ALIAS_PREFIX = "@"; // don't change -- it uses in user's tests
     public static final String CHECK_PARAM_DELIMETER = "#";
     public static final String CHECK_PREFIX = "check:"; // prefix for all check commands
@@ -332,7 +334,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         currentGame.setGameStopped(true); // used for rollback handling
         long t2 = System.nanoTime();
         logger.debug("Winner: " + currentGame.getWinner());
-        logger.info(Thread.currentThread().getStackTrace()[2].getMethodName() + " has been executed. Execution time: " + (t2 - t1) / 1000000 + " ms");
+        if (SHOW_EXECUTE_TIME_PER_TEST) {
+            logger.info(Thread.currentThread().getStackTrace()[2].getMethodName() + " has been executed. Execution time: " + (t2 - t1) / 1000000 + " ms");
+        }
 
         // TODO: 01.12.2018, JayDi85 - uncomment and fix MANY broken tests with wrong commands
         //assertAllCommandsUsed();
