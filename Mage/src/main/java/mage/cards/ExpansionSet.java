@@ -297,22 +297,25 @@ public abstract class ExpansionSet implements Serializable {
         if (boosterCollator == null) {
             return;
         }
-        // don't open a new box if the old one hasn't been used yet
-        if (boosterBox.size() >= boosterBoxSize) {
-            return;
-        }
-        boosterCollator.shuffle();
-        boosterBox.clear();
-        for (int i = 0; i < boosterBoxSize; i++) {
-            boosterBox.add(createBoosterUsingCollator());
+        synchronized (boosterBox) {
+            // don't open a new box if haven't taken any boosters from the old one
+            if (boosterBox.size() < boosterBoxSize) {
+                boosterCollator.shuffle();
+                boosterBox.clear();
+                for (int i = 0; i < boosterBoxSize; i++) {
+                    boosterBox.add(createBoosterUsingCollator());
+                }
+            }
         }
     }
 
     private List<Card> createBoosterFromBox() {
-        if (boosterBox.isEmpty()) {
-            openBoosterBox();
+        synchronized (boosterBox) {
+            if (boosterBox.isEmpty()) {
+                openBoosterBox();
+            }
+            return boosterBox.remove(RandomUtil.nextInt(boosterBox.size()));
         }
-        return boosterBox.remove(RandomUtil.nextInt(boosterBox.size()));
     }
 
     protected void generateBoosterMap() {

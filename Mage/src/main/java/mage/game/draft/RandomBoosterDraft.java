@@ -42,10 +42,7 @@ public class RandomBoosterDraft extends BoosterDraft {
         return theBooster;
     }
 
-    private void resetBoosters() {
-        for (ExpansionSet set : allSets) {
-            set.openBoosterBox();
-        }
+    private void resetBoosters(){
         useBoosters = new ArrayList<>(allSets);
         Collections.shuffle(useBoosters);
     }

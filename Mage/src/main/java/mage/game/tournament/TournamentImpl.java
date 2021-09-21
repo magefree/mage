@@ -415,6 +415,8 @@ public abstract class TournamentImpl implements Tournament {
                 }
             } else {
                 // each player gets their own fresh box so pools aren't negatively correlated
+                // (seeing duplicate cards in your pool shouldn't leak information
+                //  that your opponents don't have those cards)
                 for (ExpansionSet set : sets) {
                     set.openBoosterBox();
                 }

@@ -199,6 +199,9 @@ public abstract class DraftImpl implements Draft {
                 }
             } else {
                 ExpansionSet set = sets.get(boosterNum - 1);
+                // each round gets a fresh box so rounds aren't negatively correlated
+                // (seeing duplicate cards go around the table in P1 shouldn't leak
+                //  information that those cards won't be opened in P2 and P3)
                 set.openBoosterBox();
                 for (DraftPlayer player : players.values()) {
                     player.setBooster(set.createBooster());

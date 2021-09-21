@@ -25,9 +25,6 @@ public class RichManBoosterDraft extends DraftImpl {
 
     @Override
     public void start() {
-        for (ExpansionSet set : sets) {
-            set.openBoosterBox();
-        }
         cardNum = 1;
         boosterNum = 1;
         while (!isAbort() && cardNum <= 36) {
