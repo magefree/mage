@@ -6,12 +6,8 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.EnchantPlayerControlsPredicate;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -25,7 +21,7 @@ public final class CurseOfDeathsHold extends CardImpl {
             = new FilterCreaturePermanent("creatures enchanted player controls");
 
     static {
-        filter.add(EnchantPlayerControlsPredicate.instance);
+        filter.add(TargetController.ENCHANTED.getControllerPredicate());
     }
 
     public CurseOfDeathsHold(UUID ownerId, CardSetInfo setInfo) {

@@ -11,9 +11,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.EnchantPlayerControlsPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SpiderToken;
 import mage.target.TargetPlayer;
@@ -30,7 +30,7 @@ public final class CurseOfClingingWebs extends CardImpl {
 
     static {
         filter.add(TokenPredicate.FALSE);
-        filter.add(EnchantPlayerControlsPredicate.instance);
+        filter.add(TargetController.ENCHANTED.getControllerPredicate());
     }
 
     public CurseOfClingingWebs(UUID ownerId, CardSetInfo setInfo) {

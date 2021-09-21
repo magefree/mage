@@ -11,7 +11,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.EnchantPlayerControlsPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
@@ -55,7 +54,7 @@ class CurseOfConformityEffect extends ContinuousEffectImpl {
 
     static {
         filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
-        filter.add(EnchantPlayerControlsPredicate.instance);
+        filter.add(TargetController.ENCHANTED.getControllerPredicate());
     }
 
     CurseOfConformityEffect() {

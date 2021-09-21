@@ -14,8 +14,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
 
-    private TargetController targetController;
-    private boolean setTargetPointer;
+    private final TargetController targetController;
+    private final boolean setTargetPointer;
     protected String ruleTrigger;
 
     public BeginningOfUpkeepTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
@@ -59,30 +59,20 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
         switch (targetController) {
             case YOU:
                 boolean yours = event.getPlayerId().equals(this.controllerId);
-                if (yours && setTargetPointer) {
-                    if (getTargets().isEmpty()) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
-                    }
+                if (yours && setTargetPointer && getTargets().isEmpty()) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
                 return yours;
             case NOT_YOU:
                 boolean notYours = !event.getPlayerId().equals(this.controllerId);
-                if (notYours && setTargetPointer) {
-                    if (getTargets().isEmpty()) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
-                    }
+                if (notYours && setTargetPointer && getTargets().isEmpty()) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
                 return notYours;
             case OPPONENT:
                 if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
                     if (setTargetPointer && getTargets().isEmpty()) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
+                        this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
                     return true;
                 }
@@ -91,9 +81,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
             case ACTIVE:
             case EACH_PLAYER:
                 if (setTargetPointer && getTargets().isEmpty()) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                    }
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
                 return true;
             case CONTROLLER_ATTACHED_TO:
@@ -102,16 +90,23 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
                     Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
                     if (attachedTo != null && attachedTo.isControlledBy(event.getPlayerId())) {
                         if (setTargetPointer && getTargets().isEmpty()) {
-                            for (Effect effect : this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                            }
+                            this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
                         return true;
                     }
                 }
                 break;
+            case ENCHANTED:
+                Permanent permanent = getSourcePermanentIfItStillExists(game);
+                if (permanent == null || !game.isActivePlayer(permanent.getAttachedTo())) {
+                    break;
+                }
+                if (setTargetPointer && getTargets().isEmpty()) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
+                return true;
             default:
-                throw new UnsupportedOperationException("Value for targetController not supported: " + targetController.toString());
+                throw new UnsupportedOperationException("Value for targetController not supported: " + targetController);
         }
         return false;
     }
@@ -133,6 +128,8 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
                 return "At the beginning of each upkeep, " + generateZoneString();
             case CONTROLLER_ATTACHED_TO:
                 return "At the beginning of the upkeep of enchanted creature's controller, " + generateZoneString();
+            case ENCHANTED:
+                return "At the beginning of enchanted player's upkeep, " + generateZoneString();
         }
         return "";
     }
