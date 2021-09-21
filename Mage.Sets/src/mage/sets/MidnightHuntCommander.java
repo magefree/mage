@@ -69,6 +69,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Eater of Hope", 115, Rarity.RARE, mage.cards.e.EaterOfHope.class));
         cards.add(new SetCardInfo("Elite Scaleguard", 85, Rarity.UNCOMMON, mage.cards.e.EliteScaleguard.class));
         cards.add(new SetCardInfo("Eloise, Nephalia Sleuth", 3, Rarity.MYTHIC, mage.cards.e.EloiseNephaliaSleuth.class));
+        cards.add(new SetCardInfo("Empty the Laboratory", 14, Rarity.RARE, mage.cards.e.EmptyTheLaboratory.class));
         cards.add(new SetCardInfo("Endless Ranks of the Dead", 116, Rarity.RARE, mage.cards.e.EndlessRanksOfTheDead.class));
         cards.add(new SetCardInfo("Enduring Scalelord", 149, Rarity.UNCOMMON, mage.cards.e.EnduringScalelord.class));
         cards.add(new SetCardInfo("Eternal Skylord", 99, Rarity.UNCOMMON, mage.cards.e.EternalSkylord.class));
