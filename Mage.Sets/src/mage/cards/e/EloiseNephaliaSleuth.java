@@ -11,6 +11,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 import java.util.UUID;
@@ -20,10 +22,12 @@ import java.util.UUID;
  */
 public final class EloiseNephaliaSleuth extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("a token");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature you control");
+    private static final FilterPermanent filter2 = new FilterPermanent("a token");
 
     static {
-        filter.add(TokenPredicate.TRUE);
+        filter.add(AnotherPredicate.instance);
+        filter2.add(TokenPredicate.TRUE);
     }
 
     public EloiseNephaliaSleuth(UUID ownerId, CardSetInfo setInfo) {
@@ -36,12 +40,10 @@ public final class EloiseNephaliaSleuth extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever another creature you control dies, investigate.
-        this.addAbility(new DiesCreatureTriggeredAbility(
-                new InvestigateEffect(1), false, true
-        ));
+        this.addAbility(new DiesCreatureTriggeredAbility(new InvestigateEffect(1), false, filter));
 
         // Whenever you sacrifice a token, surveil 1.
-        this.addAbility(new SacrificePermanentTriggeredAbility(new SurveilEffect(1), filter));
+        this.addAbility(new SacrificePermanentTriggeredAbility(new SurveilEffect(1), filter2));
     }
 
     private EloiseNephaliaSleuth(final EloiseNephaliaSleuth card) {
