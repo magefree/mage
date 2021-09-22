@@ -11,8 +11,8 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.permanent.AttachedToControlledPermanentPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -74,10 +74,10 @@ public final class RemoveEnchantments extends CardImpl {
     }
 }
 
-class AttachedToOpponentControlledAttackingCreaturePredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+class AttachedToOpponentControlledAttackingCreaturePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
 
     @Override
-    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent attachement = input.getObject();
         if (attachement != null) {
             Permanent permanent = game.getPermanent(attachement.getAttachedTo());

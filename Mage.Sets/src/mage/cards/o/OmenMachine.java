@@ -100,7 +100,9 @@ class OmenMachineEffect2 extends OneShotEffect {
                 if (card.isLand(game)) {
                     player.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {
-                    player.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                    player.cast(player.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                 }
             }
             return true;

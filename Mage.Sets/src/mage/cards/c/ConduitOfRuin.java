@@ -19,8 +19,8 @@ import mage.constants.ComparisonType;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Controllable;
@@ -100,10 +100,10 @@ class ConduitOfRuinWatcher extends Watcher {
     }
 }
 
-class FirstCastCreatureSpellPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
+class FirstCastCreatureSpellPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Controllable>> {
 
     @Override
-    public boolean apply(ObjectPlayer<Controllable> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
         if (input.getObject() instanceof Card
                 && ((Card) input.getObject()).isCreature(game)) {
             ConduitOfRuinWatcher watcher = game.getState().getWatcher(ConduitOfRuinWatcher.class);

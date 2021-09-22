@@ -1128,16 +1128,21 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, ApprovingObject approvingObject) {
+    public boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject) {
         if (card == null) {
             return false;
         }
+
+        // play without timing and from any zone
         boolean result;
         if (card.isLand(game)) {
-            result = playLand(card, game, ignoreTiming);
+            result = playLand(card, game, true);
         } else {
-            result = cast(card.getSpellAbility(), game, noMana, approvingObject);
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+            result = cast(this.chooseAbilityForCast(card, game, noMana), game, noMana, approvingObject);
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
         }
+
         if (!result) {
             game.informPlayer(this, "You can't play " + card.getIdName() + '.');
         }
@@ -1544,13 +1549,14 @@ public abstract class PlayerImpl implements Player, Serializable {
      * for choosing from the card (example: effect allow to cast card and player
      * must choose the spell ability)
      *
+     * @param game
      * @param playerId
      * @param object
      * @param zone
-     * @param game
+     * @param noMana
      * @return
      */
-    public static LinkedHashMap<UUID, ActivatedAbility> getSpellAbilities(UUID playerId, MageObject object, Zone zone, Game game) {
+    public static LinkedHashMap<UUID, ActivatedAbility> getCastableSpellAbilities(Game game, UUID playerId, MageObject object, Zone zone, boolean noMana) {
         // it uses simple check from spellCanBeActivatedRegularlyNow
         // reason: no approved info here (e.g. forced to choose spell ability from cast card)
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
@@ -1563,16 +1569,29 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         for (Ability ability : allAbilities) {
             if (ability instanceof SpellAbility) {
-                switch (((SpellAbility) ability).getSpellAbilityType()) {
+                SpellAbility spellAbility = (SpellAbility) ability;
+
+                switch (spellAbility.getSpellAbilityType()) {
                     case BASE_ALTERNATE:
-                        if (((SpellAbility) ability).spellCanBeActivatedRegularlyNow(playerId, game)) {
-                            useable.put(ability.getId(), (SpellAbility) ability);  // example: Chandra, Torch of Defiance +1 loyal ability
+                        // rules:
+                        // If you cast a spell “without paying its mana cost,” you can’t choose to cast it for
+                        // any alternative costs. You can, however, pay additional costs, such as kicker costs.
+                        // If the card has any mandatory additional costs, those must be paid to cast the spell.
+                        // (2021-02-05)
+                        if (!noMana) {
+                            if (spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
+                                useable.put(spellAbility.getId(), spellAbility);  // example: Chandra, Torch of Defiance +1 loyal ability
+                            }
+                            return useable;
                         }
-                        return useable;
+                        break;
                     case SPLIT_FUSED:
+                        // rules:
+                        // If you cast a split card with fuse from your hand without paying its mana cost,
+                        // you can choose to use its fuse ability and cast both halves without paying their mana costs.
                         if (zone == Zone.HAND) {
-                            if (ability.canChooseTarget(game, playerId)) {
-                                useable.put(ability.getId(), (SpellAbility) ability);
+                            if (spellAbility.canChooseTarget(game, playerId)) {
+                                useable.put(spellAbility.getId(), spellAbility);
                             }
                         }
                     case SPLIT:
@@ -1599,8 +1618,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                         return useable;
                     default:
-                        if (((SpellAbility) ability).spellCanBeActivatedRegularlyNow(playerId, game)) {
-                            useable.put(ability.getId(), (SpellAbility) ability);
+                        if (spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
+                            useable.put(spellAbility.getId(), spellAbility);
                         }
                 }
             }

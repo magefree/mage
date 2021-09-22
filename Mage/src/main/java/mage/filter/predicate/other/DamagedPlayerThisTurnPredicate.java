@@ -1,8 +1,8 @@
 package mage.filter.predicate.other;
 
 import mage.constants.TargetController;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
@@ -12,7 +12,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class DamagedPlayerThisTurnPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
+public class DamagedPlayerThisTurnPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Controllable>> {
 
     private final TargetController controller;
 
@@ -21,7 +21,7 @@ public class DamagedPlayerThisTurnPredicate implements ObjectPlayerPredicate<Obj
     }
 
     @Override
-    public boolean apply(ObjectPlayer<Controllable> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
         Controllable object = input.getObject();
         UUID playerId = input.getPlayerId();
 

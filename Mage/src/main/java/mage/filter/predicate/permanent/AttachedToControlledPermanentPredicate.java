@@ -1,8 +1,8 @@
 
 package mage.filter.predicate.permanent;
 
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -10,10 +10,10 @@ import mage.game.permanent.Permanent;
  *
  * @author North & L_J
  */
-public class AttachedToControlledPermanentPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+public class AttachedToControlledPermanentPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
 
     @Override
-    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent attachement = input.getObject();
         if (attachement != null) {
             Permanent permanent = game.getPermanent(attachement.getAttachedTo());

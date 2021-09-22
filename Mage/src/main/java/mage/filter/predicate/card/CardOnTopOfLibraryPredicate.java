@@ -1,8 +1,8 @@
 package mage.filter.predicate.card;
 
 import mage.cards.Card;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -10,12 +10,12 @@ import mage.players.Player;
  * @author JayDi85
  */
 
-public enum CardOnTopOfLibraryPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>> {
+public enum CardOnTopOfLibraryPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
     YOUR,
     ANY;
 
     @Override
-    public boolean apply(ObjectPlayer<Card> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
 
         Player player;
         switch (this) {

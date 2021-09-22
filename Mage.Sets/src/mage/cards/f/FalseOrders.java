@@ -13,8 +13,8 @@ import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.permanent.PermanentInListPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -64,11 +64,11 @@ public final class FalseOrders extends CardImpl {
 
 }
 
-enum FalseOrdersDefendingPlayerControlsPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
+enum FalseOrdersDefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Controllable>> {
     instance;
 
     @Override
-    public boolean apply(ObjectPlayer<Controllable> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
         return game.getCombat().getPlayerDefenders(game).contains(input.getObject().getControllerId());
     }
 }

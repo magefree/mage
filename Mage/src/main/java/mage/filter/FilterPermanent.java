@@ -1,8 +1,8 @@
 package mage.filter;
 
 import mage.constants.SubType;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public class FilterPermanent extends FilterObject<Permanent> implements FilterInPlay<Permanent> {
 
-    protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<>();
+    protected List<ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>>> extraPredicates = new ArrayList<>();
 
     public FilterPermanent() {
         super("permanent");
@@ -56,10 +56,10 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
             return false;
         }
 
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(permanent, sourceId, playerId), game);
+        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<Permanent>(permanent, sourceId, playerId), game);
     }
 
-    public final void add(ObjectPlayerPredicate predicate) {
+    public final void add(ObjectSourcePlayerPredicate predicate) {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }

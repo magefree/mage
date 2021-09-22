@@ -1,12 +1,11 @@
 package mage.constants;
 
 import mage.cards.Card;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -26,6 +25,7 @@ public enum TargetController {
     CONTROLLER_ATTACHED_TO,
     NEXT,
     EACH_PLAYER,
+    ENCHANTED,
     SOURCE_TARGETS;
 
     private final OwnerPredicate ownerPredicate;
@@ -50,7 +50,7 @@ public enum TargetController {
         return controllerPredicate;
     }
 
-    public static class OwnerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>> {
+    public static class OwnerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
 
         private final TargetController targetOwner;
 
@@ -59,7 +59,7 @@ public enum TargetController {
         }
 
         @Override
-        public boolean apply(ObjectPlayer<Card> input, Game game) {
+        public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
             Card card = input.getObject();
             UUID playerId = input.getPlayerId();
             if (card == null || playerId == null) {
@@ -83,6 +83,9 @@ public enum TargetController {
                         return true;
                     }
                     break;
+                case ENCHANTED:
+                    Permanent permanent = game.getPermanent(input.getSourceId());
+                    return permanent != null && input.getObject().isOwnedBy(permanent.getAttachedTo());
                 case ANY:
                     return true;
             }
@@ -140,7 +143,7 @@ public enum TargetController {
         }
     }
 
-    public static class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
+    public static class ControllerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Controllable>> {
 
         private final TargetController controller;
 
@@ -149,7 +152,7 @@ public enum TargetController {
         }
 
         @Override
-        public boolean apply(ObjectPlayer<Controllable> input, Game game) {
+        public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
             Controllable object = input.getObject();
             UUID playerId = input.getPlayerId();
 
@@ -180,6 +183,9 @@ public enum TargetController {
                         return true;
                     }
                     break;
+                case ENCHANTED:
+                    Permanent permanent = game.getPermanent(input.getSourceId());
+                    return permanent != null && input.getObject().isControlledBy(permanent.getAttachedTo());
                 case ANY:
                     return true;
             }

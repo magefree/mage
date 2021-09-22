@@ -2,7 +2,10 @@ package mage.filter;
 
 import mage.cards.Card;
 import mage.constants.TargetController;
-import mage.filter.predicate.*;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 
 import java.util.ArrayList;
@@ -20,7 +23,7 @@ import java.util.stream.Collectors;
 public class FilterCard extends FilterObject<Card> {
 
     private static final long serialVersionUID = 1L;
-    protected List<ObjectPlayerPredicate<ObjectPlayer<Card>>> extraPredicates = new ArrayList<>();
+    protected List<ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>>> extraPredicates = new ArrayList<>();
 
     public FilterCard() {
         super("card");
@@ -53,21 +56,17 @@ public class FilterCard extends FilterObject<Card> {
     }
 
     public boolean match(Card card, UUID playerId, Game game) {
-        if (!this.match(card, game)) {
-            return false;
-        }
-
-        return Predicates.and(extraPredicates).apply(new ObjectPlayer(card, playerId), game);
+        return match(card, null, playerId, game);
     }
 
     public boolean match(Card card, UUID sourceId, UUID playerId, Game game) {
         if (!this.match(card, game)) {
             return false;
         }
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(card, sourceId, playerId), game);
+        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<Card>(card, sourceId, playerId), game);
     }
 
-    public final void add(ObjectPlayerPredicate predicate) {
+    public final void add(ObjectSourcePlayerPredicate predicate) {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }

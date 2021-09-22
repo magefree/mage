@@ -17,8 +17,8 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -156,10 +156,10 @@ class ShellOfTheLastKappaCastEffect extends OneShotEffect {
     }
 }
 
-class TargetYouPredicate implements ObjectPlayerPredicate<ObjectPlayer<StackObject>> {
+class TargetYouPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>> {
 
     @Override
-    public boolean apply(ObjectPlayer<StackObject> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
         UUID controllerId = input.getPlayerId();
         if (controllerId == null) {
             return false;

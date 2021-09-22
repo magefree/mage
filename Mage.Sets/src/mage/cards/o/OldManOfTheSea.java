@@ -21,8 +21,8 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -148,7 +148,7 @@ class SourcePowerGreaterEqualTargetCondition implements Condition {
     }
 }
 
-class PowerLowerEqualSourcePredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+class PowerLowerEqualSourcePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
 
     UUID sourceId;
 
@@ -157,7 +157,7 @@ class PowerLowerEqualSourcePredicate implements ObjectPlayerPredicate<ObjectPlay
     }
 
     @Override
-    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent sourcePermanent = game.getPermanent(sourceId);
         Permanent permanent = input.getObject();
         if (permanent != null && sourcePermanent != null) {

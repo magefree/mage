@@ -9,8 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
@@ -49,10 +49,10 @@ public final class HinderingLight extends CardImpl {
     }
 }
 
-class HinderingLightPredicate implements ObjectPlayerPredicate<ObjectPlayer<StackObject>> {
+class HinderingLightPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>> {
 
     @Override
-    public boolean apply(ObjectPlayer<StackObject> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
         UUID controllerId = input.getPlayerId();
         if (controllerId == null) {
             return false;

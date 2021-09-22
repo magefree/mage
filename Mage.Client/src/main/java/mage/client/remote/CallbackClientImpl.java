@@ -157,7 +157,7 @@ public class CallbackClientImpl implements CallbackClient {
                     case REPLAY_DONE: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            panel.endMessage((String) callback.getData(), callback.getMessageId());
+                            panel.endMessage(null, null, (String) callback.getData(), callback.getMessageId());
                         }
                         break;
                     }
@@ -180,16 +180,17 @@ public class CallbackClientImpl implements CallbackClient {
                     }
 
                     case GAME_OVER: {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             Session session = SessionHandler.getSession();
                             if (session.isJsonLogActive()) {
-                                appendJsonEvent("GAME_OVER", callback.getObjectId(), callback.getData());
-                                ActionData actionData = appendJsonEvent("GAME_OVER", callback.getObjectId(), callback.getData());
-                                String logFileName = "game-" + actionData.gameId + ".json";
-                                S3Uploader.upload(logFileName, actionData.gameId.toString());
+                                UUID gameId = callback.getObjectId();
+                                appendJsonEvent("GAME_OVER", callback.getObjectId(), message);
+                                String logFileName = "game-" + gameId + ".json";
+                                S3Uploader.upload(logFileName, gameId.toString());
                             }
-                            panel.endMessage((String) callback.getData(), callback.getMessageId());
+                            panel.endMessage(message.getGameView(), message.getOptions(), message.getMessage(), callback.getMessageId());
                         }
                         break;
                     }
@@ -209,35 +210,34 @@ public class CallbackClientImpl implements CallbackClient {
                         break;
                     }
 
-                    case GAME_TARGET: // e.g. Pick triggered ability
-                    {
+                    case GAME_TARGET: {
+                        // e.g. Pick triggered ability
                         GameClientMessage message = (GameClientMessage) callback.getData();
-
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_TARGET", callback.getObjectId(), message);
-                            panel.pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(),
-                                    message.getTargets(), message.isFlag(), message.getOptions(), callback.getMessageId());
+                            panel.pickTarget(message.getGameView(), message.getOptions(), message.getMessage(),
+                                    message.getCardsView1(), message.getTargets(), message.isFlag(), callback.getMessageId());
                         }
                         break;
                     }
 
                     case GAME_SELECT: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
-
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_SELECT", callback.getObjectId(), message);
-                            panel.select(message.getMessage(), message.getGameView(), callback.getMessageId(), message.getOptions());
+                            panel.select(message.getGameView(), message.getOptions(), message.getMessage(), callback.getMessageId());
                         }
                         break;
                     }
 
                     case GAME_CHOOSE_ABILITY: {
+                        AbilityPickerView abilityPickerView = (AbilityPickerView) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_CHOOSE_ABILITY", callback.getObjectId(), callback.getData());
-                            panel.pickAbility((AbilityPickerView) callback.getData());
+                            panel.pickAbility(abilityPickerView.getGameView(), null, abilityPickerView);
                         }
                         break;
                     }
@@ -247,19 +247,17 @@ public class CallbackClientImpl implements CallbackClient {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_CHOOSE_PILE", callback.getObjectId(), message);
-                            panel.pickPile(message.getMessage(), message.getPile1(), message.getPile2());
+                            panel.pickPile(message.getGameView(), message.getOptions(), message.getMessage(), message.getCardsView1(), message.getCardsView2());
                         }
                         break;
                     }
 
                     case GAME_CHOOSE_CHOICE: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
-
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
-
                         if (panel != null) {
                             appendJsonEvent("GAME_CHOOSE_CHOICE", callback.getObjectId(), message);
-                            panel.getChoice(message.getChoice(), callback.getObjectId());
+                            panel.getChoice(message.getGameView(), message.getOptions(), message.getChoice(), callback.getObjectId());
                         }
                         break;
                     }
@@ -269,53 +267,48 @@ public class CallbackClientImpl implements CallbackClient {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_PLAY_MANA", callback.getObjectId(), message);
-                            panel.playMana(message.getMessage(), message.getGameView(), message.getOptions(), callback.getMessageId());
+                            panel.playMana(message.getGameView(), message.getOptions(), message.getMessage(), callback.getMessageId());
                         }
                         break;
                     }
 
                     case GAME_PLAY_XMANA: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
-
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_PLAY_XMANA", callback.getObjectId(), message);
-                            panel.playXMana(message.getMessage(), message.getGameView(), callback.getMessageId());
+                            panel.playXMana(message.getGameView(), message.getOptions(), message.getMessage(), callback.getMessageId());
                         }
                         break;
                     }
 
                     case GAME_GET_AMOUNT: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
-
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_GET_AMOUNT", callback.getObjectId(), message);
 
-                            panel.getAmount(message.getMin(), message.getMax(), message.getMessage());
+                            panel.getAmount(message.getGameView(), message.getOptions(), message.getMin(), message.getMax(), message.getMessage());
                         }
                         break;
                     }
 
                     case GAME_GET_MULTI_AMOUNT: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
-
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
                             appendJsonEvent("GAME_GET_MULTI_AMOUNT", callback.getObjectId(), message);
 
-                            panel.getMultiAmount(message.getMessages(), message.getMin(), message.getMax(), message.getOptions());
+                            panel.getMultiAmount(message.getMessages(), message.getGameView(), message.getOptions(), message.getMin(), message.getMax());
                         }
                         break;
                     }
 
                     case GAME_UPDATE: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
-
                         if (panel != null) {
                             appendJsonEvent("GAME_UPDATE", callback.getObjectId(), callback.getData());
-
-                            panel.updateGame((GameView) callback.getData(), true, null, null); // update after undo
+                            panel.updateGame((GameView) callback.getData(), true, null, null); // update after undo wtf?!
                         }
                         break;
                     }
@@ -325,6 +318,7 @@ public class CallbackClientImpl implements CallbackClient {
                         // uses for client side only (example: update after scrollbars support)
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
+                            logger.info("redraw");
                             panel.updateGame();
                         }
                         break;

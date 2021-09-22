@@ -14,6 +14,7 @@ import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.util.*;
+import mage.game.permanent.Permanent;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -332,7 +333,16 @@ public abstract class TargetImpl implements Target {
         for (UUID targetId : targets.keySet()) {
             Card card = game.getCard(targetId);
             if (card != null) {
-                if (zoneChangeCounters.containsKey(targetId) && zoneChangeCounters.get(targetId) != card.getZoneChangeCounter(game)) {
+                // if a permanent, verify it is phased in, otherwise it is illegal
+                Permanent p = game.getPermanent(targetId);
+                if (p != null
+                        && !p.isPhasedIn()) {
+                    illegalTargets.add(targetId);
+                    continue; // it's not legal so continue to have a look at other targeted objects
+                }
+                // check if the card moved to another zone
+                if (zoneChangeCounters.containsKey(targetId)
+                        && zoneChangeCounters.get(targetId) != card.getZoneChangeCounter(game)) {
                     illegalTargets.add(targetId);
                     continue; // it's not legal so continue to have a look at other targeted objects
                 }

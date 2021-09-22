@@ -11,8 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.stack.StackObject;
@@ -53,10 +53,10 @@ public final class MirrorSheen extends CardImpl {
     }
 }
 
-class TargetYouPredicate implements ObjectPlayerPredicate<ObjectPlayer<StackObject>> {
+class TargetYouPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>> {
 
     @Override
-    public boolean apply(ObjectPlayer<StackObject> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
         UUID controllerId = input.getPlayerId();
         if (controllerId == null) {
             return false;
