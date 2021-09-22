@@ -138,6 +138,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean canPayLifeCost = true;
     protected boolean loseByZeroOrLessLife = true;
     protected boolean canPlayCardsFromGraveyard = true;
+    protected boolean drawsOnOpponentsTurn = false;
 
     protected FilterPermanent sacrificeCostFilter;
 
@@ -239,6 +240,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canLoseLife = player.canLoseLife;
         this.loseByZeroOrLessLife = player.loseByZeroOrLessLife;
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard;
+        this.drawsOnOpponentsTurn = player.drawsOnOpponentsTurn;
 
         this.attachments.addAll(player.attachments);
 
@@ -347,6 +349,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 ? player.getSacrificeCostFilter().copy() : null;
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
+        this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
         this.alternativeSourceCosts.clear();
         this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
 
@@ -470,6 +473,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.sacrificeCostFilter = null;
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = false;
+        this.drawsOnOpponentsTurn = false;
         this.topCardRevealed = false;
         this.alternativeSourceCosts.clear();
         this.clearCastSourceIdManaCosts();
@@ -637,9 +641,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     && this.hasOpponent(sourceControllerId, game)
                     && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null
                     && abilities.stream()
-                            .filter(HexproofBaseAbility.class::isInstance)
-                            .map(HexproofBaseAbility.class::cast)
-                            .anyMatch(ability -> ability.checkObject(source, game))) {
+                    .filter(HexproofBaseAbility.class::isInstance)
+                    .map(HexproofBaseAbility.class::cast)
+                    .anyMatch(ability -> ability.checkObject(source, game))) {
                 return false;
             }
 
@@ -679,7 +683,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(getLogName() + " discards down to "
                         + this.maxHandSize
                         + (this.maxHandSize == 1
-                                ? " hand card" : " hand cards"));
+                        ? " hand card" : " hand cards"));
             }
             discard(hand.size() - this.maxHandSize, false, false, null, game);
         }
@@ -1152,7 +1156,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * @param originalAbility
      * @param game
-     * @param noMana cast it without paying mana costs
+     * @param noMana          cast it without paying mana costs
      * @param approvingObject which object approved the cast
      * @return
      */
@@ -2914,7 +2918,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @return
      */
     private Object rollDieInner(Outcome outcome, Game game, Ability source, RollDieType rollDieType,
-            int sidesAmount, int chaosSidesAmount, int planarSidesAmount, int rollsAmount) {
+                                int sidesAmount, int chaosSidesAmount, int planarSidesAmount, int rollsAmount) {
         if (rollsAmount == 1) {
             return rollDieInnerWithReplacement(game, source, rollDieType, sidesAmount, chaosSidesAmount, planarSidesAmount);
         }
@@ -3010,8 +3014,8 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param outcome
      * @param source
      * @param game
-     * @param sidesAmount number of sides the dice has
-     * @param rollsAmount number of tries to roll the dice
+     * @param sidesAmount        number of sides the dice has
+     * @param rollsAmount        number of tries to roll the dice
      * @param ignoreLowestAmount remove the lowest rolls from the results
      * @return the number that the player rolled
      */
@@ -3029,18 +3033,18 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param outcome
      * @param source
      * @param game
-     * @param rollDieType die type to roll, e.g. planar or numerical
-     * @param sidesAmount sides per die
-     * @param chaosSidesAmount for planar die: chaos sides
-     * @param planarSidesAmount for planar die: planar sides
-     * @param rollsAmount rolls
+     * @param rollDieType        die type to roll, e.g. planar or numerical
+     * @param sidesAmount        sides per die
+     * @param chaosSidesAmount   for planar die: chaos sides
+     * @param planarSidesAmount  for planar die: planar sides
+     * @param rollsAmount        rolls
      * @param ignoreLowestAmount for numerical die: ignore multiple rolls with
-     * the lowest values
+     *                           the lowest values
      * @return
      */
     private List<Object> rollDiceInner(Outcome outcome, Ability source, Game game, RollDieType rollDieType,
-            int sidesAmount, int chaosSidesAmount, int planarSidesAmount,
-            int rollsAmount, int ignoreLowestAmount) {
+                                       int sidesAmount, int chaosSidesAmount, int planarSidesAmount,
+                                       int rollsAmount, int ignoreLowestAmount) {
         RollDiceEvent rollDiceEvent = new RollDiceEvent(source, rollDieType, sidesAmount, rollsAmount);
         if (ignoreLowestAmount > 0) {
             rollDiceEvent.incIgnoreLowestAmount(ignoreLowestAmount);
@@ -3200,10 +3204,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * @param source
      * @param game
-     * @param chaosSidesAmount The number of chaos sides the planar die
-     * currently has (normally 1 but can be 5)
+     * @param chaosSidesAmount  The number of chaos sides the planar die
+     *                          currently has (normally 1 but can be 5)
      * @param planarSidesAmount The number of chaos sides the planar die
-     * currently has (normally 1)
+     *                          currently has (normally 1)
      * @return the outcome that the player rolled. Either ChaosRoll, PlanarRoll
      * or BlankRoll
      */
@@ -3261,7 +3265,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Card card : getHand().getCards(game)) {
             Abilities<ActivatedManaAbilityImpl> manaAbilities
                     = card.getAbilities(game).getAvailableActivatedManaAbilities(Zone.HAND, playerId, game);
-            for (Iterator<ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext();) {
+            for (Iterator<ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext(); ) {
                 ActivatedManaAbilityImpl ability = it.next();
                 Abilities<ActivatedManaAbilityImpl> noTapAbilities = new AbilitiesImpl<>(ability);
                 if (ability.getManaCosts().isEmpty() && !ability.isPoolDependant()) {
@@ -3278,7 +3282,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             boolean useLater = false; // sources with mana costs or mana pool dependency 
             Abilities<ActivatedManaAbilityImpl> manaAbilities
                     = permanent.getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game); // returns ability only if canActivate is true
-            for (Iterator<ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext();) {
+            for (Iterator<ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext(); ) {
                 ActivatedManaAbilityImpl ability = it.next();
                 if (canUse == null) {
                     canUse = permanent.canUseActivatedAbilities(game);
@@ -3320,7 +3324,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean usePoolDependantAbilities = false; // use such abilities later than other if possible because it can maximize mana production
         while (anAbilityWasUsed && !sourceWithCosts.isEmpty()) {
             anAbilityWasUsed = false;
-            for (Iterator<Abilities<ActivatedManaAbilityImpl>> iterator = sourceWithCosts.iterator(); iterator.hasNext();) {
+            for (Iterator<Abilities<ActivatedManaAbilityImpl>> iterator = sourceWithCosts.iterator(); iterator.hasNext(); ) {
                 Abilities<ActivatedManaAbilityImpl> manaAbilities = iterator.next();
                 if (usePoolDependantAbilities || !manaAbilities.hasPoolDependantAbilities()) {
                     boolean used;
@@ -3356,7 +3360,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * and cleared thereafter
      *
      * @param netManaAvailable the net mana produced by the triggered mana
-     * abaility
+     *                         abaility
      */
     @Override
     public void addAvailableTriggeredMana(List<Mana> netManaAvailable
@@ -3438,7 +3442,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * @param ability
      * @param availableMana if null, it won't be checked if enough mana is
-     * available
+     *                      available
      * @param sourceObject
      * @param game
      * @return
@@ -3873,10 +3877,10 @@ public abstract class PlayerImpl implements Player, Serializable {
      * currently cast/activate with his available resources
      *
      * @param game
-     * @param hidden also from hidden objects (e.g. turned face down cards ?)
-     * @param fromZone of objects from which zone (ALL = from all zones)
+     * @param hidden                  also from hidden objects (e.g. turned face down cards ?)
+     * @param fromZone                of objects from which zone (ALL = from all zones)
      * @param hideDuplicatedAbilities if equal abilities exist return only the
-     * first instance
+     *                                first instance
      * @return
      */
     public List<ActivatedAbility> getPlayable(Game game, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities) {
@@ -4336,6 +4340,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
+        this.drawsOnOpponentsTurn = drawsOnOpponentsTurn;
+    }
+
+    @Override
+    public boolean isDrawsOnOpponentsTurn() {
+        return drawsOnOpponentsTurn;
+    }
+
+    @Override
     public boolean autoLoseGame() {
         return false;
     }
@@ -4462,7 +4476,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCards(Set<? extends Card> cards, Zone toZone,
-            Ability source, Game game
+                             Ability source, Game game
     ) {
         return moveCards(cards, toZone, source, game, false, false, false, null);
     }
@@ -4621,7 +4635,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // identify cards from one owner
             Cards cards = new CardsImpl();
             UUID ownerId = null;
-            for (Iterator<? extends Card> it = allCards.iterator(); it.hasNext();) {
+            for (Iterator<? extends Card> it = allCards.iterator(); it.hasNext(); ) {
                 Card card = it.next();
                 if (cards.isEmpty()) {
                     ownerId = card.getOwnerId();
@@ -4799,7 +4813,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName()
                             + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '
                             + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH)
-                                    + ' ' : "") + "to the exile zone" + CardUtil.getSourceLogName(game, source, card.getId()));
+                            + ' ' : "") + "to the exile zone" + CardUtil.getSourceLogName(game, source, card.getId()));
                 }
 
             }

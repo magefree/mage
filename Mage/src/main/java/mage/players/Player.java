@@ -178,6 +178,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean canPlayCardsFromGraveyard();
 
+    void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn);
+
+    boolean isDrawsOnOpponentsTurn();
+
     /**
      * Returns alternative casting costs a player can cast spells for
      *
