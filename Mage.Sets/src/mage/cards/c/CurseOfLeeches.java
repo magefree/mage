@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepAttachedTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
@@ -12,10 +12,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -47,8 +44,9 @@ public final class CurseOfLeeches extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CurseOfLeechesEffect()));
 
         // At the beginning of enchanted player's upkeep, they lose 1 life and you gain 1 life.
-        ability = new BeginningOfUpkeepAttachedTriggeredAbility(
-                new LoseLifeTargetEffect(1).setText("they lose 1 life"), false, true
+        ability = new BeginningOfUpkeepTriggeredAbility(
+                Zone.BATTLEFIELD, new LoseLifeTargetEffect(1).setText("they lose 1 life"),
+                TargetController.ENCHANTED, true, true
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
