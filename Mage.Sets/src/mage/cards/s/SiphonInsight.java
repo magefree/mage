@@ -1,14 +1,13 @@
-package mage.cards.g;
+package mage.cards.s;
 
-import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
@@ -25,55 +24,50 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author TheElk801 plus everyone who worked on Gonti
  */
-public final class GontiLordOfLuxury extends CardImpl {
+public final class SiphonInsight extends CardImpl {
 
-    public GontiLordOfLuxury(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.AETHERBORN);
-        this.subtype.add(SubType.ROGUE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+    public SiphonInsight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{B}");
 
-        // Deathtouch
-        this.addAbility(DeathtouchAbility.getInstance());
+        // Look at the top two cards of target opponent's library. Exile one of them face down and put the other on the bottom of that library. You may look at and play the exiled card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell.
+        this.getSpellAbility().addEffect(new SiphonInsightEffect());
+        this.getSpellAbility().addTarget(new TargetOpponent());
 
-        // When Gonti, Lord of Luxury enters the battlefield, look at the top four cards of target opponent's library, exile one of them face down,
-        // then put the rest on the bottom of that library in a random order. For as long as that card remains exiled,
-        // you may look at it, you may cast it, and you may spend mana as though it were mana of any type to cast it.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GontiLordOfLuxuryEffect());
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+        // Flashback {1}{U}{B}
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{U}{B}")));
     }
 
-    private GontiLordOfLuxury(final GontiLordOfLuxury card) {
+    private SiphonInsight(final SiphonInsight card) {
         super(card);
     }
 
     @Override
-    public GontiLordOfLuxury copy() {
-        return new GontiLordOfLuxury(this);
+    public SiphonInsight copy() {
+        return new SiphonInsight(this);
     }
 }
 
-class GontiLordOfLuxuryEffect extends OneShotEffect {
+class SiphonInsightEffect extends OneShotEffect {
 
     private static final String VALUE_PREFIX = "ExileZones";
 
-    public GontiLordOfLuxuryEffect() {
+    public SiphonInsightEffect() {
         super(Outcome.Benefit);
-        this.staticText = "look at the top four cards of target opponent's library, exile one of them face down, then put the rest on the bottom of that library in a random order. You may look at and cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell";
+        this.staticText = "look at the top two cards of target opponent's library. " +
+                "Exile one of them face down and put the other on the bottom of that library. " +
+                "You may look at and play the exiled card for as long as it remains exiled, " +
+                "and you may spend mana as though it were mana of any color to cast that spell";
     }
 
-    private GontiLordOfLuxuryEffect(final GontiLordOfLuxuryEffect effect) {
+    private SiphonInsightEffect(final SiphonInsightEffect effect) {
         super(effect);
     }
 
     @Override
-    public GontiLordOfLuxuryEffect copy() {
-        return new GontiLordOfLuxuryEffect(this);
+    public SiphonInsightEffect copy() {
+        return new SiphonInsightEffect(this);
     }
 
     @Override
@@ -85,7 +79,7 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
             return false;
         }
         Cards topCards = new CardsImpl();
-        topCards.addAll(opponent.getLibrary().getTopCards(game, 4));
+        topCards.addAll(opponent.getLibrary().getTopCards(game, 2));
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to exile"));
         controller.choose(outcome, topCards, target, game);
         Card card = game.getCard(target.getFirstTarget());
@@ -106,15 +100,15 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
             }
             exileZones.add(exileZoneId);
             // allow to cast the card
-            ContinuousEffect effect = new GontiLordOfLuxuryCastFromExileEffect();
+            ContinuousEffect effect = new SiphonInsightCastFromExileEffect();
             effect.setTargetPointer(new FixedTarget(card.getId(), game));
             game.addEffect(effect, source);
             // and you may spend mana as though it were mana of any color to cast it
-            effect = new GontiLordOfLuxurySpendAnyManaEffect();
+            effect = new SiphonInsightSpendAnyManaEffect();
             effect.setTargetPointer(new FixedTarget(card.getId(), game));
             game.addEffect(effect, source);
             // For as long as that card remains exiled, you may look at it
-            effect = new GontiLordOfLuxuryLookEffect(controller.getId());
+            effect = new SiphonInsightLookEffect(controller.getId());
             effect.setTargetPointer(new FixedTarget(card.getId(), game));
             game.addEffect(effect, source);
         }
@@ -124,14 +118,14 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
     }
 }
 
-class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
+class SiphonInsightCastFromExileEffect extends AsThoughEffectImpl {
 
-    public GontiLordOfLuxuryCastFromExileEffect() {
+    public SiphonInsightCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
     }
 
-    private GontiLordOfLuxuryCastFromExileEffect(final GontiLordOfLuxuryCastFromExileEffect effect) {
+    private SiphonInsightCastFromExileEffect(final SiphonInsightCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -141,8 +135,8 @@ class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public GontiLordOfLuxuryCastFromExileEffect copy() {
-        return new GontiLordOfLuxuryCastFromExileEffect(this);
+    public SiphonInsightCastFromExileEffect copy() {
+        return new SiphonInsightCastFromExileEffect(this);
     }
 
     @Override
@@ -168,14 +162,14 @@ class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
     }
 }
 
-class GontiLordOfLuxurySpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
+class SiphonInsightSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
-    public GontiLordOfLuxurySpendAnyManaEffect() {
+    public SiphonInsightSpendAnyManaEffect() {
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
         staticText = "you may spend mana as though it were mana of any color to cast it";
     }
 
-    private GontiLordOfLuxurySpendAnyManaEffect(final GontiLordOfLuxurySpendAnyManaEffect effect) {
+    private SiphonInsightSpendAnyManaEffect(final SiphonInsightSpendAnyManaEffect effect) {
         super(effect);
     }
 
@@ -185,8 +179,8 @@ class GontiLordOfLuxurySpendAnyManaEffect extends AsThoughEffectImpl implements 
     }
 
     @Override
-    public GontiLordOfLuxurySpendAnyManaEffect copy() {
-        return new GontiLordOfLuxurySpendAnyManaEffect(this);
+    public SiphonInsightSpendAnyManaEffect copy() {
+        return new SiphonInsightSpendAnyManaEffect(this);
     }
 
     @Override
@@ -213,17 +207,17 @@ class GontiLordOfLuxurySpendAnyManaEffect extends AsThoughEffectImpl implements 
     }
 }
 
-class GontiLordOfLuxuryLookEffect extends AsThoughEffectImpl {
+class SiphonInsightLookEffect extends AsThoughEffectImpl {
 
     private final UUID authorizedPlayerId;
 
-    public GontiLordOfLuxuryLookEffect(UUID authorizedPlayerId) {
+    public SiphonInsightLookEffect(UUID authorizedPlayerId) {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
         this.authorizedPlayerId = authorizedPlayerId;
         staticText = "You may look at the cards exiled with {this}";
     }
 
-    private GontiLordOfLuxuryLookEffect(final GontiLordOfLuxuryLookEffect effect) {
+    private SiphonInsightLookEffect(final SiphonInsightLookEffect effect) {
         super(effect);
         this.authorizedPlayerId = effect.authorizedPlayerId;
     }
@@ -234,8 +228,8 @@ class GontiLordOfLuxuryLookEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public GontiLordOfLuxuryLookEffect copy() {
-        return new GontiLordOfLuxuryLookEffect(this);
+    public SiphonInsightLookEffect copy() {
+        return new SiphonInsightLookEffect(this);
     }
 
     @Override
