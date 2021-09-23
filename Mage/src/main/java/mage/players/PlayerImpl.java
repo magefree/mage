@@ -634,13 +634,19 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
         if (source != null) {
+            // there is only variant of shroud, so check the instance and any asthougheffects that would ignore it
             if (abilities.containsKey(ShroudAbility.getInstance().getId())
                     && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.SHROUD, null, sourceControllerId, game) == null) {
                 return false;
             }
-            if (abilities.containsKey(HexproofAbility.getInstance().getId())
-                    && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null) {
-                return false;
+            // check for all variants of hexproof and any asthougheffects that would ignore it
+            // TODO there may be "prevented by rule-modification" effects, so add them if known
+            for (Ability a : abilities) {
+                if (a instanceof HexproofBaseAbility
+                        && ((HexproofBaseAbility) a).checkObject(source, game)
+                        && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null) {
+                    return false;
+                }
             }
             return !hasProtectionFrom(source, game);
         }
