@@ -117,6 +117,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Riders of Gavony", 93, Rarity.RARE, mage.cards.r.RidersOfGavony.class));
         cards.add(new SetCardInfo("Rogue's Passage", 179, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Rooftop Storm", 103, Rarity.RARE, mage.cards.r.RooftopStorm.class));
+        cards.add(new SetCardInfo("Ruinous Intrusion", 28, Rarity.RARE, mage.cards.r.RuinousIntrusion.class));
         cards.add(new SetCardInfo("Ruthless Deathfang", 154, Rarity.UNCOMMON, mage.cards.r.RuthlessDeathfang.class));
         cards.add(new SetCardInfo("Selesnya Sanctuary", 180, Rarity.UNCOMMON, mage.cards.s.SelesnyaSanctuary.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 143, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
