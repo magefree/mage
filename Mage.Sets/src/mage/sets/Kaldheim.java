@@ -30,7 +30,7 @@ public final class Kaldheim extends ExpansionSet {
     private final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private Kaldheim() {
-        super("Kaldheim", "KHM", ExpansionSet.buildDate(2021, 2, 5), SetType.EXPANSION, new KaldheimCollator());
+        super("Kaldheim", "KHM", ExpansionSet.buildDate(2021, 2, 5), SetType.EXPANSION);
         this.blockName = "Kaldheim";
         this.hasBasicLands = true;
         this.hasBoosters = true;
@@ -492,101 +492,52 @@ public final class Kaldheim extends ExpansionSet {
         }
         return new ArrayList<>(savedSpecialLand);
     }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new KaldheimCollator();
+    }
 }
 
 // Booster collation info from https://www.lethe.xyz/mtg/collation/khm.html
 // Using USA collation for common/uncommon and JP for rare/mythic
 class KaldheimCollator implements BoosterCollator {
 
-    private static class KaldheimRun extends CardRun {
-        private static final KaldheimRun commonA = new KaldheimRun(true,  "34","77","136","13","78","149","3","47","127","14","67","140","19","54","124","38","49","147","39","55","157","1","53","141","37","66","126","10","71","155","4","65","121","13","77","136","34","78","127","3","47","149","14","54","124","38","67","140","19","55","147","39","49","157","37","53","141","10","65","155","1","71","121","4","66","126");
-        private static final KaldheimRun commonB = new KaldheimRun(true,  "102","176","87","183","93","184","104","178","117","174","111","171","96","194","84","176","119","180","83","164","89","172","87","175","102","183","104","178","93","174","117","184","111","171","84","194","119","164","96","180","89","176","83","172","102","175","87","178","104","174","93","183","117","171","119","184","84","164","111","194","89","180","96","172","83","175");
-        private static final KaldheimRun commonC1 = new KaldheimRun(true,  "187","152","242","46","173","23","101","246","48","190","32","151","99","68","267","31","91","192","143","57","100","243","105","16","134","42","196","238","187","46","23","242","152","173","48","32","246","190","151","101","31","68","99","267","91","134","105","57","16","192","100","143","243","196","42");
-        private static final KaldheimRun commonC2 = new KaldheimRun(true,  "11","193","95","158","17","239","44","159","129","7","118","85","138","74","165","11","129","193","150","72","5","95","159","74","158","17","85","239","118","138","44","7","238","193","150","165","5","72","158","95","11","44","159","239","129","17","85","74","7","118","5","150","165","138","72");
-        private static final KaldheimRun uncommonA = new KaldheimRun(true,  "215","236","212","208","195","224","332","6","232","18","106","268","209","162","8","76","122","88","182","206","202","62","110","132","200","325","271","211","144","103","215","236","258","56","163","113","28","226","2","58","263","148","232","162","224","208","195","323","268","18","106","6","233","8","76","122","209","88","182","206","202","62","110","132","321","220","271","211","144","258","2","28","263","113","226","103","236","163","56","215","148","58","329","195","6","232","233","18","212","162","268","106","208","103","322","76","122","88","182","206","202","62","110","132","200","220","271","211","144","8","58","28","258","113","56","148","2","263","226","163");
-        private static final KaldheimRun uncommonB = new KaldheimRun(true,  "30","166","75","201","265","222","45","135","256","191","231","235","36","250","316","128","25","247","264","35","97","186","223","59","60","130","216","80","244","259","217","133","64","245","108","189","331","137","116","253","30","166","75","201","265","327","45","128","256","247","235","36","191","25","170","250","135","231","186","35","60","324","97","130","59","264","244","80","328","259","133","217","64","245","108","189","230","137","116","253","30","166","75","201","265","222","45","256","191","235","170","135","36","128","25","247","250","231","35","223","60","130","97","264","216","186","59","244","80","259","217","133","304","245","108","189","230","137","116","253");
-        private static final KaldheimRun rareA = new KaldheimRun(false,  "9","12","20","21","24","26","27","29","43","50","51","52","61","63","69","73","79","82","86","90","92","107","109","112","115","120","123","125","131","142","146","153","156","161","167","169","177","179","181","185","188","197","203","204","205","207","210","213","214","219","227","228","229","234","237","240","241","251","252","254","255","260","272","275","9","12","20","21","24","26","27","29","43","50","51","52","61","63","69","73","79","82","86","90","92","107","109","112","115","120","123","125","131","142","146","153","156","161","167","169","177","179","181","185","188","197","203","204","205","207","210","213","214","219","227","228","229","234","237","240","241","251","252","254","255","260","272","275","15","22","33","40","41","70","81","94","98","114","139","145","154","160","168","198","199","218","221","225");
-        private static final KaldheimRun rareB = new KaldheimRun(false,  "9","12","20","300","24","26","27","301","43","303","51","52","61","63","69","73","79","82","86","90","306","107","109","307","309","310","311","125","131","312","146","153","156","161","167","315","177","317","318","185","188","319","203","204","205","207","210","213","214","219","227","330","229","234","237","240","241","290","291","292","255","293","272","275","9","12","20","300","24","26","27","301","43","303","51","52","61","63","69","73","79","82","86","90","306","107","109","307","309","310","311","125","131","312","146","153","156","161","167","315","177","317","318","185","188","319","203","204","205","207","210","213","214","219","227","330","229","234","237","240","241","290","291","292","255","293","272","275","299","22","294","302","295","305","81","94","296","308","139","297","313","298","314","287","320","288","326","289");
-        private static final KaldheimRun land = new KaldheimRun(true,  "270","282","248","277","276","280","278","266","270","283","282","285","274","277","281","279","262","284","282","248","283","276","269","276","280","285","281","249","257","284","277","249","281","284","283","266","257","281","269","280","261","276","277","283","249","278","285","248","276","285","279","261","269","257","249","248","283","270","285","277","282","284","270","278","248","279","269","281","274","280","279","257","281","284","277","257","274","273","279","276","262","266","284","281","273","282","278","262","280","279","274","262","282","283","278","262","279","261","285","273","266","283","261","280","284","266","278","270","285","282","280","276","277","273","278","269","273","249","261","274");
+    private final CardRun commonA = new CardRun(true,  "34","77","136","13","78","149","3","47","127","14","67","140","19","54","124","38","49","147","39","55","157","1","53","141","37","66","126","10","71","155","4","65","121","13","77","136","34","78","127","3","47","149","14","54","124","38","67","140","19","55","147","39","49","157","37","53","141","10","65","155","1","71","121","4","66","126");
+    private final CardRun commonB = new CardRun(true,  "102","176","87","183","93","184","104","178","117","174","111","171","96","194","84","176","119","180","83","164","89","172","87","175","102","183","104","178","93","174","117","184","111","171","84","194","119","164","96","180","89","176","83","172","102","175","87","178","104","174","93","183","117","171","119","184","84","164","111","194","89","180","96","172","83","175");
+    private final CardRun commonC1 = new CardRun(true,  "187","152","242","46","173","23","101","246","48","190","32","151","99","68","267","31","91","192","143","57","100","243","105","16","134","42","196","238","187","46","23","242","152","173","48","32","246","190","151","101","31","68","99","267","91","134","105","57","16","192","100","143","243","196","42");
+    private final CardRun commonC2 = new CardRun(true,  "11","193","95","158","17","239","44","159","129","7","118","85","138","74","165","11","129","193","150","72","5","95","159","74","158","17","85","239","118","138","44","7","238","193","150","165","5","72","158","95","11","44","159","239","129","17","85","74","7","118","5","150","165","138","72");
+    private final CardRun uncommonA = new CardRun(true,  "215","236","212","208","195","224","332","6","232","18","106","268","209","162","8","76","122","88","182","206","202","62","110","132","200","325","271","211","144","103","215","236","258","56","163","113","28","226","2","58","263","148","232","162","224","208","195","323","268","18","106","6","233","8","76","122","209","88","182","206","202","62","110","132","321","220","271","211","144","258","2","28","263","113","226","103","236","163","56","215","148","58","329","195","6","232","233","18","212","162","268","106","208","103","322","76","122","88","182","206","202","62","110","132","200","220","271","211","144","8","58","28","258","113","56","148","2","263","226","163");
+    private final CardRun uncommonB = new CardRun(true,  "30","166","75","201","265","222","45","135","256","191","231","235","36","250","316","128","25","247","264","35","97","186","223","59","60","130","216","80","244","259","217","133","64","245","108","189","331","137","116","253","30","166","75","201","265","327","45","128","256","247","235","36","191","25","170","250","135","231","186","35","60","324","97","130","59","264","244","80","328","259","133","217","64","245","108","189","230","137","116","253","30","166","75","201","265","222","45","256","191","235","170","135","36","128","25","247","250","231","35","223","60","130","97","264","216","186","59","244","80","259","217","133","304","245","108","189","230","137","116","253");
+    private final CardRun rareA = new CardRun(false,  "9","12","20","21","24","26","27","29","43","50","51","52","61","63","69","73","79","82","86","90","92","107","109","112","115","120","123","125","131","142","146","153","156","161","167","169","177","179","181","185","188","197","203","204","205","207","210","213","214","219","227","228","229","234","237","240","241","251","252","254","255","260","272","275","9","12","20","21","24","26","27","29","43","50","51","52","61","63","69","73","79","82","86","90","92","107","109","112","115","120","123","125","131","142","146","153","156","161","167","169","177","179","181","185","188","197","203","204","205","207","210","213","214","219","227","228","229","234","237","240","241","251","252","254","255","260","272","275","15","22","33","40","41","70","81","94","98","114","139","145","154","160","168","198","199","218","221","225");
+    private final CardRun rareB = new CardRun(false,  "9","12","20","300","24","26","27","301","43","303","51","52","61","63","69","73","79","82","86","90","306","107","109","307","309","310","311","125","131","312","146","153","156","161","167","315","177","317","318","185","188","319","203","204","205","207","210","213","214","219","227","330","229","234","237","240","241","290","291","292","255","293","272","275","9","12","20","300","24","26","27","301","43","303","51","52","61","63","69","73","79","82","86","90","306","107","109","307","309","310","311","125","131","312","146","153","156","161","167","315","177","317","318","185","188","319","203","204","205","207","210","213","214","219","227","330","229","234","237","240","241","290","291","292","255","293","272","275","299","22","294","302","295","305","81","94","296","308","139","297","313","298","314","287","320","288","326","289");
+    private final CardRun land = new CardRun(true,  "270","282","248","277","276","280","278","266","270","283","282","285","274","277","281","279","262","284","282","248","283","276","269","276","280","285","281","249","257","284","277","249","281","284","283","266","257","281","269","280","261","276","277","283","249","278","285","248","276","285","279","261","269","257","249","248","283","270","285","277","282","284","270","278","248","279","269","281","274","280","279","257","281","284","277","257","274","273","279","276","262","266","284","281","273","282","278","262","280","279","274","262","282","283","278","262","279","261","285","273","266","283","261","280","284","266","278","270","285","282","280","276","277","273","278","269","273","249","261","274");
 
-        private KaldheimRun(boolean keepOrder, String... numbers) {
-            super(keepOrder, numbers);
-        }
-    }
-
-    private static class KaldheimStructure extends BoosterStructure {
-        private static final KaldheimStructure AABBC1C1C1C1C1C1 = new KaldheimStructure(
-                KaldheimRun.commonA,
-                KaldheimRun.commonA,
-                KaldheimRun.commonB,
-                KaldheimRun.commonB,
-                KaldheimRun.commonC1,
-                KaldheimRun.commonC1,
-                KaldheimRun.commonC1,
-                KaldheimRun.commonC1,
-                KaldheimRun.commonC1,
-                KaldheimRun.commonC1
-        );
-        private static final KaldheimStructure AAABBC1C1C1C1C1 = new KaldheimStructure(
-                KaldheimRun.commonA,
-                KaldheimRun.commonA,
-                KaldheimRun.commonA,
-                KaldheimRun.commonB,
-                KaldheimRun.commonB,
-                KaldheimRun.commonC1,
-                KaldheimRun.commonC1,
-                KaldheimRun.commonC1,
-                KaldheimRun.commonC1,
-                KaldheimRun.commonC1
-        );
-        private static final KaldheimStructure AAAABBBC2C2C2 = new KaldheimStructure(
-                KaldheimRun.commonA,
-                KaldheimRun.commonA,
-                KaldheimRun.commonA,
-                KaldheimRun.commonA,
-                KaldheimRun.commonB,
-                KaldheimRun.commonB,
-                KaldheimRun.commonB,
-                KaldheimRun.commonC2,
-                KaldheimRun.commonC2,
-                KaldheimRun.commonC2
-        );
-        private static final KaldheimStructure AAAABBC2C2C2C2 = new KaldheimStructure(
-                KaldheimRun.commonA,
-                KaldheimRun.commonA,
-                KaldheimRun.commonA,
-                KaldheimRun.commonA,
-                KaldheimRun.commonB,
-                KaldheimRun.commonB,
-                KaldheimRun.commonC2,
-                KaldheimRun.commonC2,
-                KaldheimRun.commonC2,
-                KaldheimRun.commonC2
-        );
-        private static final KaldheimStructure AAA = new KaldheimStructure(
-                KaldheimRun.uncommonA,
-                KaldheimRun.uncommonA,
-                KaldheimRun.uncommonA
-        );
-        private static final KaldheimStructure BBB = new KaldheimStructure(
-                KaldheimRun.uncommonB,
-                KaldheimRun.uncommonB,
-                KaldheimRun.uncommonB
-        );
-        private static final KaldheimStructure R1 = new KaldheimStructure(
-                KaldheimRun.rareA
-        );
-        private static final KaldheimStructure R2 = new KaldheimStructure(
-                KaldheimRun.rareB
-        );
-        private static final KaldheimStructure L1 = new KaldheimStructure(
-                KaldheimRun.land
-        );
-
-        private KaldheimStructure(CardRun... runs) {
-            super(runs);
-        }
-    }
+    private final BoosterStructure AABBC1C1C1C1C1C1 = new BoosterStructure(
+            commonA, commonA,
+            commonB, commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1, commonC1
+    );
+    private final BoosterStructure AAABBC1C1C1C1C1 = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1
+    );
+    private final BoosterStructure AAAABBBC2C2C2 = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB,
+            commonC2, commonC2, commonC2
+    );
+    private final BoosterStructure AAAABBC2C2C2C2 = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB, commonB,
+            commonC2, commonC2, commonC2, commonC2
+    );
+    private final BoosterStructure AAA = new BoosterStructure(uncommonA, uncommonA, uncommonA);
+    private final BoosterStructure BBB = new BoosterStructure(uncommonB, uncommonB, uncommonB);
+    private final BoosterStructure R1 = new BoosterStructure(rareA);
+    private final BoosterStructure R2 = new BoosterStructure(rareB);
+    private final BoosterStructure L1 = new BoosterStructure(land);
 
     // In order for equal numbers of each common to exist, the average booster must contain:
     // 3.27 A commons (36 / 11)
@@ -596,53 +547,33 @@ class KaldheimCollator implements BoosterCollator {
     // These numbers are the same for all sets with 101 commons in A/B/C1/C2 print runs
     // and with 10 common slots per booster
     private final RarityConfiguration commonRuns = new RarityConfiguration(
-            false,
-            KaldheimStructure.AABBC1C1C1C1C1C1,
-            KaldheimStructure.AABBC1C1C1C1C1C1,
-            KaldheimStructure.AABBC1C1C1C1C1C1,
-            KaldheimStructure.AABBC1C1C1C1C1C1,
-            KaldheimStructure.AABBC1C1C1C1C1C1,
-            KaldheimStructure.AAABBC1C1C1C1C1,
-            KaldheimStructure.AAABBC1C1C1C1C1,
-            KaldheimStructure.AAABBC1C1C1C1C1,
-            KaldheimStructure.AAABBC1C1C1C1C1,
-            KaldheimStructure.AAABBC1C1C1C1C1,
-            KaldheimStructure.AAABBC1C1C1C1C1,
+            AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
 
-            KaldheimStructure.AAAABBC2C2C2C2,
-            KaldheimStructure.AAAABBC2C2C2C2,
-            KaldheimStructure.AAAABBC2C2C2C2,
-            KaldheimStructure.AAAABBC2C2C2C2,
-            KaldheimStructure.AAAABBC2C2C2C2,
-            KaldheimStructure.AAAABBC2C2C2C2,
-            KaldheimStructure.AAAABBC2C2C2C2,
-            KaldheimStructure.AAAABBBC2C2C2,
-            KaldheimStructure.AAAABBBC2C2C2,
-            KaldheimStructure.AAAABBBC2C2C2,
-            KaldheimStructure.AAAABBBC2C2C2
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBBC2C2C2,
+            AAAABBBC2C2C2,
+            AAAABBBC2C2C2,
+            AAAABBBC2C2C2
     );
-    private final RarityConfiguration uncommonRuns = new RarityConfiguration(
-            KaldheimStructure.AAA,
-            KaldheimStructure.BBB
-    );
-    private final RarityConfiguration rareRuns = new RarityConfiguration(
-            false,
-            KaldheimStructure.R1,
-            KaldheimStructure.R1,
-            KaldheimStructure.R2
-    );
-    private final RarityConfiguration landRuns = new RarityConfiguration(
-            KaldheimStructure.L1
-    );
-
-
-    @Override
-    public void shuffle() {
-        commonRuns.shuffle();
-        uncommonRuns.shuffle();
-        rareRuns.shuffle();
-        landRuns.shuffle();
-    }
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(AAA, BBB);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1, R1, R2);
+    private final RarityConfiguration landRuns = new RarityConfiguration(L1);
 
     @Override
     public List<String> makeBooster() {

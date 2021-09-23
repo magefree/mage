@@ -50,7 +50,7 @@ public final class SpectralDeluge extends CardImpl {
     }
 }
 
-enum SpectralDelugePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum SpectralDelugePredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ISLAND);
 

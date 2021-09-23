@@ -59,7 +59,7 @@ public final class SavaenElves extends CardImpl {
     }
 }
 
-class SavaenElvesPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class SavaenElvesPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent attachment = input.getObject();

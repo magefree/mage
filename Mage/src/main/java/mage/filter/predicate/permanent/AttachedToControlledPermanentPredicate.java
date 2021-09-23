@@ -10,7 +10,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North & L_J
  */
-public class AttachedToControlledPermanentPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+public class AttachedToControlledPermanentPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

@@ -62,7 +62,7 @@ public final class VedalkenShackles extends CardImpl {
     }
 }
 
-class PowerIslandPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class PowerIslandPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     static final FilterLandPermanent filter = new FilterLandPermanent("Island");
     static {

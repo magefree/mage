@@ -2571,7 +2571,7 @@ public class TestPlayer implements Player {
 
             // library
             if (target.getOriginalTarget() instanceof TargetCardInLibrary
-                || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.LIBRARY)) {
+                    || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.LIBRARY)) {
                 // user don't have access to library, so it must be targeted through list/revealed cards
                 Assert.fail("Library zone is private, you must target through cards list, e.g. revealed: " + target.getOriginalTarget().getClass().getCanonicalName());
             }
@@ -3712,6 +3712,16 @@ public class TestPlayer implements Player {
     @Override
     public boolean canPlayCardsFromGraveyard() {
         return computerPlayer.canPlayCardsFromGraveyard();
+    }
+
+    @Override
+    public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
+        computerPlayer.setDrawsOnOpponentsTurn(drawsOnOpponentsTurn);
+    }
+
+    @Override
+    public boolean isDrawsOnOpponentsTurn() {
+        return computerPlayer.isDrawsOnOpponentsTurn();
     }
 
     @Override

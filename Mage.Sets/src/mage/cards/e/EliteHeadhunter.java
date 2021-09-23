@@ -63,7 +63,7 @@ public final class EliteHeadhunter extends CardImpl {
     }
 }
 
-enum EliteHeadhunterPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum EliteHeadhunterPredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override

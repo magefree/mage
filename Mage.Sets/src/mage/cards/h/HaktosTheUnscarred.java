@@ -101,7 +101,7 @@ class HaktosTheUnscarredChooseEffect extends OneShotEffect {
     }
 }
 
-enum HaktosTheUnscarredPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+enum HaktosTheUnscarredPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override

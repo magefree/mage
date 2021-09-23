@@ -237,6 +237,16 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
+
+    }
+
+    @Override
+    public boolean isDrawsOnOpponentsTurn() {
+        return false;
+    }
+
+    @Override
     public List<AlternativeSourceCosts> getAlternativeSourceCosts() {
         return null;
     }

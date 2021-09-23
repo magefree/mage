@@ -47,7 +47,7 @@ public final class SoulShatter extends CardImpl {
     }
 }
 
-enum SoulShatterPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+enum SoulShatterPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
 
     private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent();

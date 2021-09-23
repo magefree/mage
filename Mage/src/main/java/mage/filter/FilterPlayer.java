@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public class FilterPlayer extends FilterImpl<Player> {
 
-    protected List<ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>>> extraPredicates = new ArrayList<>();
+    protected List<ObjectSourcePlayerPredicate<Player>> extraPredicates = new ArrayList<>();
 
     public FilterPlayer() {
         this("player");

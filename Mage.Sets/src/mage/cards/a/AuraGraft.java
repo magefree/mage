@@ -54,7 +54,7 @@ public final class AuraGraft extends CardImpl {
     }
 }
 
-class AttachedToPermanentPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class AttachedToPermanentPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     public AttachedToPermanentPredicate() {
         super();
@@ -66,7 +66,7 @@ class AttachedToPermanentPredicate implements ObjectSourcePlayerPredicate<Object
     }
 }
 
-class PermanentCanBeAttachedToPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class PermanentCanBeAttachedToPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     protected Permanent aura;
 

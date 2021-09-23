@@ -103,7 +103,7 @@ class AkiriFearlessVoyagerTriggeredAbility extends TriggeredAbilityImpl {
 
 class AkiriFearlessVoyagerEffect extends OneShotEffect {
 
-    private static enum AkiriFearlessVoyagerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+    private static enum AkiriFearlessVoyagerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
         instance;
 
         @Override

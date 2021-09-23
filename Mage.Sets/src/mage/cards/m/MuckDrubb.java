@@ -69,7 +69,7 @@ public final class MuckDrubb extends CardImpl {
     }
 }
 
-class SpellWithOnlySingleTargetPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Spell>> {
+class SpellWithOnlySingleTargetPredicate implements ObjectSourcePlayerPredicate<Spell> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {

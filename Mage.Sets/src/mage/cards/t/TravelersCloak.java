@@ -86,7 +86,7 @@ class TravelersCloakGainAbilityAttachedEffect extends GainAbilityAttachedEffect 
     }
 }
 
-enum TravelersCloakChosenSubtypePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum TravelersCloakChosenSubtypePredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override

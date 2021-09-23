@@ -59,7 +59,7 @@ public final class DawnCharm extends CardImpl {
     }
 }
 
-class DawnCharmPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>> {
+class DawnCharmPredicate implements ObjectSourcePlayerPredicate<StackObject> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {

@@ -12,7 +12,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class DamagedPlayerThisTurnPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Controllable>> {
+public class DamagedPlayerThisTurnPredicate implements ObjectSourcePlayerPredicate<Controllable> {
 
     private final TargetController controller;
 

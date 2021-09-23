@@ -105,7 +105,7 @@ class GyrusWakerOfCorpsesEffect extends OneShotEffect {
     }
 }
 
-class GyrusWakerOfCorpsesPowerLessThanSourcePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+class GyrusWakerOfCorpsesPowerLessThanSourcePredicate implements ObjectSourcePlayerPredicate<Card> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

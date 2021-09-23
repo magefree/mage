@@ -94,7 +94,6 @@ public abstract class ExpansionSet implements Serializable {
     protected Date releaseDate;
     protected ExpansionSet parentSet;
     protected SetType setType;
-    protected BoosterCollator boosterCollator;
 
     // TODO: 03.10.2018, hasBasicLands can be removed someday -- it's uses to optimize lands search in deck generation and lands adding (search all available lands from sets)
     protected boolean hasBasicLands = true;
@@ -126,20 +125,12 @@ public abstract class ExpansionSet implements Serializable {
     protected final Map<String, CardInfo> inBoosterMap = new HashMap<>();
 
     public ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
-        this(name, code, releaseDate, setType, null);
-    }
-
-    public ExpansionSet(String name, String code, Date releaseDate, SetType setType, BoosterCollator boosterCollator) {
         this.name = name;
         this.code = code;
         this.releaseDate = releaseDate;
         this.setType = setType;
         this.maxCardNumberInBooster = Integer.MAX_VALUE;
         savedCards = new EnumMap<>(Rarity.class);
-        this.boosterCollator = boosterCollator;
-        if (this.boosterCollator != null) {
-            this.boosterCollator.shuffle();
-        }
     }
 
     public String getName() {
@@ -251,9 +242,14 @@ public abstract class ExpansionSet implements Serializable {
         }
     }
 
+    public BoosterCollator createCollator() {
+        return null;
+    }
+
     public List<Card> createBooster() {
-        if (boosterCollator != null) {
-            return createBoosterUsingCollator();
+        BoosterCollator collator = createCollator();
+        if (collator != null) {
+            return createBoosterUsingCollator(collator);
         }
 
         for (int i = 0; i < 100; i++) {//don't want to somehow loop forever
@@ -277,17 +273,11 @@ public abstract class ExpansionSet implements Serializable {
         return tryBooster();
     }
 
-    public void shuffleCollator() {
-        if (boosterCollator != null) {
-            boosterCollator.shuffle();
-        }
-    }
-
-    private List<Card> createBoosterUsingCollator() {
+    private List<Card> createBoosterUsingCollator(BoosterCollator collator) {
         if (inBoosterMap.isEmpty()) {
             generateBoosterMap();
         }
-        return boosterCollator
+        return collator
                 .makeBooster()
                 .stream()
                 .map(inBoosterMap::get)

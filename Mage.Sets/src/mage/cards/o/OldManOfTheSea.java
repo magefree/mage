@@ -148,7 +148,7 @@ class SourcePowerGreaterEqualTargetCondition implements Condition {
     }
 }
 
-class PowerLowerEqualSourcePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class PowerLowerEqualSourcePredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     UUID sourceId;
 

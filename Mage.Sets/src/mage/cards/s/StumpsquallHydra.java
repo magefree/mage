@@ -59,7 +59,7 @@ class StumpsquallHydraEffect extends OneShotEffect {
         filter.add(StumpsquallHydraPredicate.instance);
     }
 
-    private enum StumpsquallHydraPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+    private enum StumpsquallHydraPredicate implements ObjectSourcePlayerPredicate<MageObject> {
         instance;
 
         @Override

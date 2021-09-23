@@ -43,7 +43,7 @@ public final class FlameSweep extends CardImpl {
     }
 }
 
-enum FlameSweepPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+enum FlameSweepPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
 
     @Override

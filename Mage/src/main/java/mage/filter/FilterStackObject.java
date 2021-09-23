@@ -2,10 +2,8 @@ package mage.filter;
 
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 
 import java.util.ArrayList;
@@ -17,7 +15,7 @@ import java.util.UUID;
  */
 public class FilterStackObject extends FilterObject<StackObject> {
 
-    protected List<ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>>> extraPredicates = new ArrayList<>();
+    protected List<ObjectSourcePlayerPredicate<StackObject>> extraPredicates = new ArrayList<>();
 
     public FilterStackObject() {
         this("spell or ability");

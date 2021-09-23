@@ -83,7 +83,7 @@ public final class Torchling extends CardImpl {
     }
 }
 
-enum TorchlingPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>> {
+enum TorchlingPredicate implements ObjectSourcePlayerPredicate<StackObject> {
 
     instance;
 

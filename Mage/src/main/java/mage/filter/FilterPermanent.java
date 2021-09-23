@@ -3,7 +3,6 @@ package mage.filter;
 import mage.constants.SubType;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -18,7 +17,7 @@ import java.util.UUID;
  */
 public class FilterPermanent extends FilterObject<Permanent> implements FilterInPlay<Permanent> {
 
-    protected List<ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>>> extraPredicates = new ArrayList<>();
+    protected List<ObjectSourcePlayerPredicate<Permanent>> extraPredicates = new ArrayList<>();
 
     public FilterPermanent() {
         super("permanent");

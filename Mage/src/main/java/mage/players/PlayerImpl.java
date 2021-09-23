@@ -138,6 +138,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean canPayLifeCost = true;
     protected boolean loseByZeroOrLessLife = true;
     protected boolean canPlayCardsFromGraveyard = true;
+    protected boolean drawsOnOpponentsTurn = false;
 
     protected FilterPermanent sacrificeCostFilter;
 
@@ -239,6 +240,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canLoseLife = player.canLoseLife;
         this.loseByZeroOrLessLife = player.loseByZeroOrLessLife;
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard;
+        this.drawsOnOpponentsTurn = player.drawsOnOpponentsTurn;
 
         this.attachments.addAll(player.attachments);
 
@@ -347,6 +349,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 ? player.getSacrificeCostFilter().copy() : null;
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
+        this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
         this.alternativeSourceCosts.clear();
         this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
 
@@ -470,6 +473,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.sacrificeCostFilter = null;
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = false;
+        this.drawsOnOpponentsTurn = false;
         this.topCardRevealed = false;
         this.alternativeSourceCosts.clear();
         this.clearCastSourceIdManaCosts();
@@ -630,22 +634,22 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
         if (source != null) {
-            if (abilities.containsKey(ShroudAbility.getInstance().getId())) {
+            // there is only variant of shroud, so check the instance and any asthougheffects that would ignore it
+            if (abilities.containsKey(ShroudAbility.getInstance().getId())
+                    && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.SHROUD, null, sourceControllerId, game) == null) {
                 return false;
             }
-            if (sourceControllerId != null
-                    && this.hasOpponent(sourceControllerId, game)
-                    && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null
-                    && abilities.stream()
-                            .filter(HexproofBaseAbility.class::isInstance)
-                            .map(HexproofBaseAbility.class::cast)
-                            .anyMatch(ability -> ability.checkObject(source, game))) {
-                return false;
+            // check for all variants of hexproof and any asthougheffects that would ignore it
+            // TODO there may be "prevented by rule-modification" effects, so add them if known
+            for (Ability a : abilities) {
+                if (a instanceof HexproofBaseAbility
+                        && ((HexproofBaseAbility) a).checkObject(source, game)
+                        && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null) {
+                    return false;
+                }
             }
-
             return !hasProtectionFrom(source, game);
         }
-
         return true;
     }
 
@@ -4333,6 +4337,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void setPlayCardsFromGraveyard(boolean playCardsFromGraveyard) {
         this.canPlayCardsFromGraveyard = playCardsFromGraveyard;
+    }
+
+    @Override
+    public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
+        this.drawsOnOpponentsTurn = drawsOnOpponentsTurn;
+    }
+
+    @Override
+    public boolean isDrawsOnOpponentsTurn() {
+        return drawsOnOpponentsTurn;
     }
 
     @Override

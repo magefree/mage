@@ -15,7 +15,7 @@ import java.util.UUID;
 /**
  * @author LoneFox
  */
-public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<MageObject> {
 
     private final FilterPermanent targetFilter;
 
