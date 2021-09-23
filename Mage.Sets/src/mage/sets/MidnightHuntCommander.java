@@ -89,6 +89,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Herald of War", 86, Rarity.RARE, mage.cards.h.HeraldOfWar.class));
         cards.add(new SetCardInfo("Heron's Grace Champion", 152, Rarity.RARE, mage.cards.h.HeronsGraceChampion.class));
         cards.add(new SetCardInfo("Heronblade Elite", 26, Rarity.RARE, mage.cards.h.HeronbladeElite.class));
+        cards.add(new SetCardInfo("Hordewing Skaab", 15, Rarity.RARE, mage.cards.h.HordewingSkaab.class));
         cards.add(new SetCardInfo("Hour of Eternity", 102, Rarity.RARE, mage.cards.h.HourOfEternity.class));
         cards.add(new SetCardInfo("Hour of Reckoning", 87, Rarity.RARE, mage.cards.h.HourOfReckoning.class));
         cards.add(new SetCardInfo("Inspiring Call", 141, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
