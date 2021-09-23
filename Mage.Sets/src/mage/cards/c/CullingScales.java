@@ -52,7 +52,7 @@ public final class CullingScales extends CardImpl {
 
 }
 
-class HasLowestCMCAmongstNonlandPermanentsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class HasLowestCMCAmongstNonlandPermanentsPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

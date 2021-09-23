@@ -56,7 +56,7 @@ public final class BarteredCow extends CardImpl {
     }
 }
 
-enum BarteredCowPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum BarteredCowPredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override

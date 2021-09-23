@@ -72,7 +72,7 @@ enum OathOfGhoulsAdjuster implements TargetAdjuster {
     }
 }
 
-class OathOfGhoulsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+class OathOfGhoulsPredicate implements ObjectSourcePlayerPredicate<Player> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {

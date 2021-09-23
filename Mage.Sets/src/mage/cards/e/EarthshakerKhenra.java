@@ -68,7 +68,7 @@ public final class EarthshakerKhenra extends CardImpl {
     }
 }
 
-enum EarthshakerKhenraPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+enum EarthshakerKhenraPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override

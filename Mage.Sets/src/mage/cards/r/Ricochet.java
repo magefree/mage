@@ -57,7 +57,7 @@ public final class Ricochet extends CardImpl {
     }
 }
 
-class SpellWithOnlyPlayerTargetsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Spell>> {
+class SpellWithOnlyPlayerTargetsPredicate implements ObjectSourcePlayerPredicate<Spell> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {

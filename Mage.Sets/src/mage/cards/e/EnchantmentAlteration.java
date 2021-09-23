@@ -62,7 +62,7 @@ public final class EnchantmentAlteration extends CardImpl {
 
 }
 
-class SharesEnchantedCardTypePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageItem>> {
+class SharesEnchantedCardTypePredicate implements ObjectSourcePlayerPredicate<MageItem> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageItem> input, Game game) {

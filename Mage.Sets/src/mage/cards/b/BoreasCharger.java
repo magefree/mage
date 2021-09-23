@@ -138,7 +138,7 @@ class BoreasChargerEffect extends OneShotEffect {
     }
 }
 
-class BoreasChargerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+class BoreasChargerPredicate implements ObjectSourcePlayerPredicate<Player> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {

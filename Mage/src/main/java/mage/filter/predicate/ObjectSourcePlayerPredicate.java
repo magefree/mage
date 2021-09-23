@@ -5,5 +5,5 @@ package mage.filter.predicate;
  * @author North
  */
 @FunctionalInterface
-public interface ObjectSourcePlayerPredicate<T extends ObjectSourcePlayer<?>> extends Predicate<T> {
+public interface ObjectSourcePlayerPredicate<T> extends Predicate<ObjectSourcePlayer<T>> {
 }

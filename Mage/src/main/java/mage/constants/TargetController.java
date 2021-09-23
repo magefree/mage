@@ -50,7 +50,7 @@ public enum TargetController {
         return controllerPredicate;
     }
 
-    public static class OwnerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+    public static class OwnerPredicate implements ObjectSourcePlayerPredicate<Card> {
 
         private final TargetController targetOwner;
 
@@ -99,7 +99,7 @@ public enum TargetController {
         }
     }
 
-    public static class PlayerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+    public static class PlayerPredicate implements ObjectSourcePlayerPredicate<Player> {
 
         private final TargetController targetPlayer;
 
@@ -143,7 +143,7 @@ public enum TargetController {
         }
     }
 
-    public static class ControllerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Controllable>> {
+    public static class ControllerPredicate implements ObjectSourcePlayerPredicate<Controllable> {
 
         private final TargetController controller;
 

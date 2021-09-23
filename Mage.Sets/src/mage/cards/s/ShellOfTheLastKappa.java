@@ -156,7 +156,7 @@ class ShellOfTheLastKappaCastEffect extends OneShotEffect {
     }
 }
 
-class TargetYouPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>> {
+class TargetYouPredicate implements ObjectSourcePlayerPredicate<StackObject> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {

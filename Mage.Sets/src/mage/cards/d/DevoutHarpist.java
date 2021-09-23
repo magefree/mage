@@ -56,7 +56,7 @@ public final class DevoutHarpist extends CardImpl {
 
 }
 
-class DevoutHarpistPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class DevoutHarpistPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent attachment = input.getObject();

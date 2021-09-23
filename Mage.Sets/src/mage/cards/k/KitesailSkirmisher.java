@@ -69,7 +69,7 @@ public final class KitesailSkirmisher extends CardImpl {
     }
 }
 
-enum KitesailSkirmisherPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum KitesailSkirmisherPredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override

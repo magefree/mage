@@ -49,7 +49,7 @@ public final class TelimTorsEdict extends CardImpl {
     }
 }
 
-class TelimTorsEdictPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class TelimTorsEdictPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     public TelimTorsEdictPredicate() {
     }

@@ -59,7 +59,7 @@ public final class SageOfTheBeyond extends CardImpl {
     }
 }
 
-enum SageOfTheBeyondPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+enum SageOfTheBeyondPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override

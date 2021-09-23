@@ -181,7 +181,7 @@ class SwordOfTheRealmsEffect extends OneShotEffect {
     }
 }
 
-class HalvarGodOfBattlePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class HalvarGodOfBattlePredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     private final FilterPermanent filter;
 

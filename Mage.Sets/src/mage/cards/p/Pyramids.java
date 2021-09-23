@@ -60,7 +60,7 @@ public final class Pyramids extends CardImpl {
         return new Pyramids(this);
     }
 }
-class PyramidsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class PyramidsPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent attachment = input.getObject();

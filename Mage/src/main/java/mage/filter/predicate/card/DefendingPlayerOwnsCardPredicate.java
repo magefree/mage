@@ -8,7 +8,7 @@ import mage.game.Game;
 /**
  * @author TheElk801
  */
-public enum DefendingPlayerOwnsCardPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+public enum DefendingPlayerOwnsCardPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override

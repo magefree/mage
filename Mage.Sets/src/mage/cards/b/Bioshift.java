@@ -100,7 +100,7 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
     }
 }
 
-class SameControllerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageItem>> {
+class SameControllerPredicate implements ObjectSourcePlayerPredicate<MageItem> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageItem> input, Game game) {

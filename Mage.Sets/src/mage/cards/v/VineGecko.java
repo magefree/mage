@@ -67,7 +67,7 @@ public final class VineGecko extends CardImpl {
     }
 }
 
-enum VineGeckoPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+enum VineGeckoPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override

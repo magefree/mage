@@ -61,7 +61,7 @@ public final class CeruleanDrake extends CardImpl {
     }
 }
 
-enum CeruleanDrakePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>> {
+enum CeruleanDrakePredicate implements ObjectSourcePlayerPredicate<StackObject> {
     instance;
 
     @Override

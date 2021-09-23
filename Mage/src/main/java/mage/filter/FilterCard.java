@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class FilterCard extends FilterObject<Card> {
 
     private static final long serialVersionUID = 1L;
-    protected List<ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>>> extraPredicates = new ArrayList<>();
+    protected List<ObjectSourcePlayerPredicate<Card>> extraPredicates = new ArrayList<>();
 
     public FilterCard() {
         super("card");

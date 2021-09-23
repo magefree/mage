@@ -79,7 +79,7 @@ public final class FrostpyreArcanist extends CardImpl {
     }
 }
 
-enum FrostpyreArcanistPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+enum FrostpyreArcanistPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override

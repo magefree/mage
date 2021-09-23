@@ -49,7 +49,7 @@ public final class HinderingLight extends CardImpl {
     }
 }
 
-class HinderingLightPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>> {
+class HinderingLightPredicate implements ObjectSourcePlayerPredicate<StackObject> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {

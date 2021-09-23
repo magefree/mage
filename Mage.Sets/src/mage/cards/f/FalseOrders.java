@@ -64,7 +64,7 @@ public final class FalseOrders extends CardImpl {
 
 }
 
-enum FalseOrdersDefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Controllable>> {
+enum FalseOrdersDefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<Controllable> {
     instance;
 
     @Override

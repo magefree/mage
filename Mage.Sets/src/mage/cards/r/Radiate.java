@@ -55,7 +55,7 @@ public final class Radiate extends CardImpl {
     }
 }
 
-enum SpellWithOnlySingleTargetPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Spell>> {
+enum SpellWithOnlySingleTargetPredicate implements ObjectSourcePlayerPredicate<Spell> {
     instance;
 
     @Override
@@ -79,7 +79,7 @@ enum SpellWithOnlySingleTargetPredicate implements ObjectSourcePlayerPredicate<O
     }
 }
 
-enum SpellWithOnlyPermanentOrPlayerTargetsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Spell>> {
+enum SpellWithOnlyPermanentOrPlayerTargetsPredicate implements ObjectSourcePlayerPredicate<Spell> {
     instance;
 
     @Override

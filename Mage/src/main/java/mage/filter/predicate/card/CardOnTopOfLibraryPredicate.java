@@ -10,7 +10,7 @@ import mage.players.Player;
  * @author JayDi85
  */
 
-public enum CardOnTopOfLibraryPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+public enum CardOnTopOfLibraryPredicate implements ObjectSourcePlayerPredicate<Card> {
     YOUR,
     ANY;
 

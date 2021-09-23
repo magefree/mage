@@ -46,7 +46,7 @@ public final class PersonalEnergyShield extends CardImpl {
     }
 }
 
-class PersonalEnergyFieldPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>> {
+class PersonalEnergyFieldPredicate implements ObjectSourcePlayerPredicate<StackObject> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {

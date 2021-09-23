@@ -100,7 +100,7 @@ class ConduitOfRuinWatcher extends Watcher {
     }
 }
 
-class FirstCastCreatureSpellPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Controllable>> {
+class FirstCastCreatureSpellPredicate implements ObjectSourcePlayerPredicate<Controllable> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {

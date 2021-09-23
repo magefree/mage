@@ -91,7 +91,7 @@ class PsychicRebuttalEffect extends OneShotEffect {
     }
 }
 
-class PsychicRebuttalPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>> {
+class PsychicRebuttalPredicate implements ObjectSourcePlayerPredicate<StackObject> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {

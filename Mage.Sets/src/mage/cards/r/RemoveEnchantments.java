@@ -74,7 +74,7 @@ public final class RemoveEnchantments extends CardImpl {
     }
 }
 
-class AttachedToOpponentControlledAttackingCreaturePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class AttachedToOpponentControlledAttackingCreaturePredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
