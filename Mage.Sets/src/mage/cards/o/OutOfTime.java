@@ -156,7 +156,6 @@ class OutOfTimeLeavesBattlefieldEffect extends OneShotEffect {
                     creature.phaseIn(game);
                 }
             }
-            game.getState().processAction(game);
             return true;
         }
         return false;
@@ -191,7 +190,6 @@ class OutOfTimeReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        game.getState().processAction(game);
         Set<UUID> creatureIds = (Set<UUID>) game.getState().getValue("phasedOutCreatures"
                 + source.getId().toString());
         return source.getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(source.getSourceId()) // blinked
