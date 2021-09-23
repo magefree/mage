@@ -28,7 +28,7 @@ public class TimeSpiralRemastered extends ExpansionSet {
     private final List<CardInfo> savedSpecialBonus = new ArrayList<>();
 
     private TimeSpiralRemastered() {
-        super("Time Spiral Remastered", "TSR", ExpansionSet.buildDate(2021, 3, 19), SetType.SUPPLEMENTAL, new TimeSpiralRemasteredCollator());
+        super("Time Spiral Remastered", "TSR", ExpansionSet.buildDate(2021, 3, 19), SetType.SUPPLEMENTAL);
         this.hasBoosters = true;
         this.hasBasicLands = true;
         this.maxCardNumberInBooster = 410;
@@ -461,121 +461,60 @@ public class TimeSpiralRemastered extends ExpansionSet {
 
         return new ArrayList<>(savedSpecialBonus);
     }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new TimeSpiralRemasteredCollator();
+    }
 }
 
 // Booster collation info from https://www.lethe.xyz/mtg/collation/tsr.html
 // Using USA collation for common/uncommon, rare and bonus sheet are standard
 class TimeSpiralRemasteredCollator implements BoosterCollator {
 
-    private static class TimeSpiralRemasteredRun extends CardRun {
-        private static final TimeSpiralRemasteredRun commonA = new TimeSpiralRemasteredRun(true, "176", "65", "177", "94", "192", "70", "86", "191", "84", "168", "80", "69", "173", "73", "154", "87", "197", "92", "166", "67", "183", "78", "171", "81", "155", "95", "190", "70", "191", "58", "168", "63", "162", "89", "157", "65", "173", "69", "159", "73", "176", "94", "192", "86", "197", "84", "166", "67", "177", "92", "171", "80", "162", "81", "155", "78", "154", "87", "157", "95", "190", "58", "159", "63", "183", "89");
-        private static final TimeSpiralRemasteredRun commonB = new TimeSpiralRemasteredRun(true, "110", "245", "135", "241", "104", "226", "233", "108", "236", "107", "207", "229", "101", "201", "116", "199", "123", "246", "130", "240", "109", "245", "103", "202", "118", "221", "117", "230", "105", "212", "148", "243", "134", "237", "135", "226", "110", "236", "108", "233", "107", "241", "101", "229", "116", "201", "118", "199", "104", "246", "109", "240", "130", "207", "103", "202", "117", "221", "105", "230", "134", "243", "148", "212", "123", "237");
-        private static final TimeSpiralRemasteredRun commonC1 = new TimeSpiralRemasteredRun(true, "44", "223", "20", "140", "53", "21", "181", "17", "184", "2", "205", "151", "42", "119", "74", "1", "161", "272", "10", "228", "12", "68", "6", "285", "7", "48", "53", "20", "133", "44", "223", "21", "140", "151", "2", "184", "17", "74", "42", "181", "228", "1", "10", "119", "12", "68", "285", "48", "272", "6", "205", "161", "7", "133", "185");
-        private static final TimeSpiralRemasteredRun commonC2 = new TimeSpiralRemasteredRun(true, "25", "147", "31", "64", "269", "47", "206", "43", "178", "132", "263", "18", "200", "59", "26", "145", "9", "66", "50", "14", "147", "28", "232", "49", "122", "71", "22", "25", "165", "132", "31", "206", "43", "47", "269", "64", "18", "178", "200", "26", "263", "59", "9", "145", "14", "66", "50", "165", "28", "122", "232", "22", "49", "71", "185");
-        private static final TimeSpiralRemasteredRun uncommonA = new TimeSpiralRemasteredRun(true, "217", "283", "196", "242", "126", "194", "13", "222", "248", "40", "128", "195", "204", "5", "189", "113", "56", "249", "218", "180", "149", "276", "16", "258", "224", "79", "163", "142", "19", "61", "273", "153", "85", "30", "111", "170", "57", "231", "24", "99", "143", "279", "100", "174", "213", "55", "131", "46", "244", "126", "196", "82", "219", "102", "188", "208", "33", "120", "60", "186", "217", "283", "169", "124", "242", "194", "61", "218", "16", "153", "142", "258", "13", "224", "249", "113", "189", "79", "248", "204", "19", "149", "163", "5", "276", "222", "195", "40", "56", "180", "128", "273", "85", "30", "111", "170", "231", "57", "24", "143", "99", "279", "174", "213", "100", "131", "46", "244", "124", "55", "208", "188", "120", "60", "186", "33", "219", "169", "102", "82");
-        private static final TimeSpiralRemasteredRun uncommonB = new TimeSpiralRemasteredRun(true, "38", "152", "141", "29", "72", "225", "11", "158", "88", "271", "23", "76", "247", "160", "139", "250", "216", "288", "264", "45", "93", "252", "137", "275", "214", "39", "54", "129", "193", "227", "35", "112", "83", "282", "38", "164", "254", "115", "90", "37", "211", "152", "72", "141", "29", "247", "250", "158", "88", "11", "271", "225", "76", "139", "23", "160", "216", "288", "93", "45", "252", "137", "275", "214", "54", "264", "39", "227", "129", "193", "35", "282", "83", "112", "37", "254", "211", "38", "115", "90", "164", "29", "72", "152", "141", "225", "11", "88", "271", "158", "247", "23", "139", "76", "250", "160", "288", "252", "216", "93", "45", "137", "264", "214", "54", "275", "227", "129", "39", "193", "112", "35", "282", "83", "254", "211", "115", "37", "164", "90");
-        private static final TimeSpiralRemasteredRun rare = new TimeSpiralRemasteredRun(false, "3", "4", "8", "27", "32", "34", "41", "51", "62", "75", "77", "96", "97", "98", "114", "125", "127", "136", "138", "144", "146", "156", "167", "172", "175", "179", "182", "187", "203", "209", "215", "220", "234", "238", "239", "251", "253", "255", "256", "257", "259", "260", "265", "266", "268", "270", "274", "277", "278", "281", "284", "286", "287", "3", "4", "8", "27", "32", "34", "41", "51", "62", "75", "77", "96", "97", "98", "114", "125", "127", "136", "138", "144", "146", "156", "167", "172", "175", "179", "182", "187", "203", "209", "215", "220", "234", "238", "239", "251", "253", "255", "256", "257", "259", "260", "265", "266", "268", "270", "274", "277", "278", "281", "284", "286", "287", "15", "36", "52", "91", "106", "121", "150", "198", "210", "235", "261", "262", "267", "280", "289");
-        private static final TimeSpiralRemasteredRun special = new TimeSpiralRemasteredRun(false, "290", "291", "292", "293", "294", "295", "296", "297", "298", "299", "300", "301", "302", "303", "304", "305", "306", "307", "308", "309", "310", "311", "312", "313", "314", "315", "316", "317", "318", "319", "320", "321", "322", "323", "324", "325", "326", "327", "328", "329", "330", "331", "332", "333", "334", "335", "336", "337", "338", "339", "340", "341", "342", "343", "344", "345", "346", "347", "348", "349", "350", "351", "352", "353", "354", "355", "356", "357", "358", "359", "360", "361", "362", "363", "364", "365", "366", "367", "368", "369", "370", "371", "372", "373", "374", "375", "376", "377", "378", "379", "380", "381", "382", "383", "384", "385", "386", "387", "388", "389", "390", "391", "392", "393", "394", "395", "396", "397", "398", "399", "400", "401", "402", "403", "404", "405", "406", "407", "408", "409", "410");
+    private final CardRun commonA = new CardRun(true, "176", "65", "177", "94", "192", "70", "86", "191", "84", "168", "80", "69", "173", "73", "154", "87", "197", "92", "166", "67", "183", "78", "171", "81", "155", "95", "190", "70", "191", "58", "168", "63", "162", "89", "157", "65", "173", "69", "159", "73", "176", "94", "192", "86", "197", "84", "166", "67", "177", "92", "171", "80", "162", "81", "155", "78", "154", "87", "157", "95", "190", "58", "159", "63", "183", "89");
+    private final CardRun commonB = new CardRun(true, "110", "245", "135", "241", "104", "226", "233", "108", "236", "107", "207", "229", "101", "201", "116", "199", "123", "246", "130", "240", "109", "245", "103", "202", "118", "221", "117", "230", "105", "212", "148", "243", "134", "237", "135", "226", "110", "236", "108", "233", "107", "241", "101", "229", "116", "201", "118", "199", "104", "246", "109", "240", "130", "207", "103", "202", "117", "221", "105", "230", "134", "243", "148", "212", "123", "237");
+    private final CardRun commonC1 = new CardRun(true, "44", "223", "20", "140", "53", "21", "181", "17", "184", "2", "205", "151", "42", "119", "74", "1", "161", "272", "10", "228", "12", "68", "6", "285", "7", "48", "53", "20", "133", "44", "223", "21", "140", "151", "2", "184", "17", "74", "42", "181", "228", "1", "10", "119", "12", "68", "285", "48", "272", "6", "205", "161", "7", "133", "185");
+    private final CardRun commonC2 = new CardRun(true, "25", "147", "31", "64", "269", "47", "206", "43", "178", "132", "263", "18", "200", "59", "26", "145", "9", "66", "50", "14", "147", "28", "232", "49", "122", "71", "22", "25", "165", "132", "31", "206", "43", "47", "269", "64", "18", "178", "200", "26", "263", "59", "9", "145", "14", "66", "50", "165", "28", "122", "232", "22", "49", "71", "185");
+    private final CardRun uncommonA = new CardRun(true, "217", "283", "196", "242", "126", "194", "13", "222", "248", "40", "128", "195", "204", "5", "189", "113", "56", "249", "218", "180", "149", "276", "16", "258", "224", "79", "163", "142", "19", "61", "273", "153", "85", "30", "111", "170", "57", "231", "24", "99", "143", "279", "100", "174", "213", "55", "131", "46", "244", "126", "196", "82", "219", "102", "188", "208", "33", "120", "60", "186", "217", "283", "169", "124", "242", "194", "61", "218", "16", "153", "142", "258", "13", "224", "249", "113", "189", "79", "248", "204", "19", "149", "163", "5", "276", "222", "195", "40", "56", "180", "128", "273", "85", "30", "111", "170", "231", "57", "24", "143", "99", "279", "174", "213", "100", "131", "46", "244", "124", "55", "208", "188", "120", "60", "186", "33", "219", "169", "102", "82");
+    private final CardRun uncommonB = new CardRun(true, "38", "152", "141", "29", "72", "225", "11", "158", "88", "271", "23", "76", "247", "160", "139", "250", "216", "288", "264", "45", "93", "252", "137", "275", "214", "39", "54", "129", "193", "227", "35", "112", "83", "282", "38", "164", "254", "115", "90", "37", "211", "152", "72", "141", "29", "247", "250", "158", "88", "11", "271", "225", "76", "139", "23", "160", "216", "288", "93", "45", "252", "137", "275", "214", "54", "264", "39", "227", "129", "193", "35", "282", "83", "112", "37", "254", "211", "38", "115", "90", "164", "29", "72", "152", "141", "225", "11", "88", "271", "158", "247", "23", "139", "76", "250", "160", "288", "252", "216", "93", "45", "137", "264", "214", "54", "275", "227", "129", "39", "193", "112", "35", "282", "83", "254", "211", "115", "37", "164", "90");
+    private final CardRun rare = new CardRun(false, "3", "4", "8", "27", "32", "34", "41", "51", "62", "75", "77", "96", "97", "98", "114", "125", "127", "136", "138", "144", "146", "156", "167", "172", "175", "179", "182", "187", "203", "209", "215", "220", "234", "238", "239", "251", "253", "255", "256", "257", "259", "260", "265", "266", "268", "270", "274", "277", "278", "281", "284", "286", "287", "3", "4", "8", "27", "32", "34", "41", "51", "62", "75", "77", "96", "97", "98", "114", "125", "127", "136", "138", "144", "146", "156", "167", "172", "175", "179", "182", "187", "203", "209", "215", "220", "234", "238", "239", "251", "253", "255", "256", "257", "259", "260", "265", "266", "268", "270", "274", "277", "278", "281", "284", "286", "287", "15", "36", "52", "91", "106", "121", "150", "198", "210", "235", "261", "262", "267", "280", "289");
+    private final CardRun special = new CardRun(false, "290", "291", "292", "293", "294", "295", "296", "297", "298", "299", "300", "301", "302", "303", "304", "305", "306", "307", "308", "309", "310", "311", "312", "313", "314", "315", "316", "317", "318", "319", "320", "321", "322", "323", "324", "325", "326", "327", "328", "329", "330", "331", "332", "333", "334", "335", "336", "337", "338", "339", "340", "341", "342", "343", "344", "345", "346", "347", "348", "349", "350", "351", "352", "353", "354", "355", "356", "357", "358", "359", "360", "361", "362", "363", "364", "365", "366", "367", "368", "369", "370", "371", "372", "373", "374", "375", "376", "377", "378", "379", "380", "381", "382", "383", "384", "385", "386", "387", "388", "389", "390", "391", "392", "393", "394", "395", "396", "397", "398", "399", "400", "401", "402", "403", "404", "405", "406", "407", "408", "409", "410");
 
-        private TimeSpiralRemasteredRun(boolean keepOrder, String... numbers) {
-            super(keepOrder, numbers);
-        }
-    }
-
-    private static class TimeSpiralRemasteredStructure extends BoosterStructure {
-        private static final TimeSpiralRemasteredStructure AAABBBC1C1C1C1 = new TimeSpiralRemasteredStructure(
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonC1,
-                TimeSpiralRemasteredRun.commonC1,
-                TimeSpiralRemasteredRun.commonC1,
-                TimeSpiralRemasteredRun.commonC1
-        );
-        private static final TimeSpiralRemasteredStructure AAABBC1C1C1C1C1 = new TimeSpiralRemasteredStructure(
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonC1,
-                TimeSpiralRemasteredRun.commonC1,
-                TimeSpiralRemasteredRun.commonC1,
-                TimeSpiralRemasteredRun.commonC1,
-                TimeSpiralRemasteredRun.commonC1
-        );
-        private static final TimeSpiralRemasteredStructure AABBBC1C1C1C1C1 = new TimeSpiralRemasteredStructure(
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonC1,
-                TimeSpiralRemasteredRun.commonC1,
-                TimeSpiralRemasteredRun.commonC1,
-                TimeSpiralRemasteredRun.commonC1,
-                TimeSpiralRemasteredRun.commonC1
-        );
-        private static final TimeSpiralRemasteredStructure AAABBBC2C2C2C2 = new TimeSpiralRemasteredStructure(
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonC2,
-                TimeSpiralRemasteredRun.commonC2,
-                TimeSpiralRemasteredRun.commonC2,
-                TimeSpiralRemasteredRun.commonC2
-        );
-        private static final TimeSpiralRemasteredStructure AAABBC2C2C2C2C2 = new TimeSpiralRemasteredStructure(
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonC2,
-                TimeSpiralRemasteredRun.commonC2,
-                TimeSpiralRemasteredRun.commonC2,
-                TimeSpiralRemasteredRun.commonC2,
-                TimeSpiralRemasteredRun.commonC2
-        );
-        private static final TimeSpiralRemasteredStructure AABBBC2C2C2C2C2 = new TimeSpiralRemasteredStructure(
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonA,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonB,
-                TimeSpiralRemasteredRun.commonC2,
-                TimeSpiralRemasteredRun.commonC2,
-                TimeSpiralRemasteredRun.commonC2,
-                TimeSpiralRemasteredRun.commonC2,
-                TimeSpiralRemasteredRun.commonC2
-        );
-        private static final TimeSpiralRemasteredStructure AAA = new TimeSpiralRemasteredStructure(
-                TimeSpiralRemasteredRun.uncommonA,
-                TimeSpiralRemasteredRun.uncommonA,
-                TimeSpiralRemasteredRun.uncommonA
-        );
-        private static final TimeSpiralRemasteredStructure BBB = new TimeSpiralRemasteredStructure(
-                TimeSpiralRemasteredRun.uncommonB,
-                TimeSpiralRemasteredRun.uncommonB,
-                TimeSpiralRemasteredRun.uncommonB
-        );
-        private static final TimeSpiralRemasteredStructure R1 = new TimeSpiralRemasteredStructure(
-                TimeSpiralRemasteredRun.rare
-        );
-        private static final TimeSpiralRemasteredStructure S1 = new TimeSpiralRemasteredStructure(
-                TimeSpiralRemasteredRun.special
-        );
-
-        private TimeSpiralRemasteredStructure(CardRun... runs) {
-            super(runs);
-        }
-    }
+    private final BoosterStructure AAABBBC1C1C1C1 = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB, commonB,
+            commonC1, commonC1, commonC1, commonC1
+    );
+    private final BoosterStructure AAABBC1C1C1C1C1 = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1
+    );
+    private final BoosterStructure AABBBC1C1C1C1C1 = new BoosterStructure(
+            commonA, commonA,
+            commonB, commonB, commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1
+    );
+    private final BoosterStructure AAABBBC2C2C2C2 = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB, commonB,
+            commonC2, commonC2, commonC2, commonC2
+    );
+    private final BoosterStructure AAABBC2C2C2C2C2 = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB,
+            commonC2, commonC2, commonC2, commonC2, commonC2
+    );
+    private final BoosterStructure AABBBC2C2C2C2C2 = new BoosterStructure(
+            commonA, commonA,
+            commonB, commonB, commonB,
+            commonC2, commonC2, commonC2, commonC2, commonC2
+    );
+    private final BoosterStructure AAA = new BoosterStructure(uncommonA, uncommonA, uncommonA);
+    private final BoosterStructure BBB = new BoosterStructure(uncommonB, uncommonB, uncommonB);
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+    private final BoosterStructure S1 = new BoosterStructure(special);
 
     // In order for equal numbers of each common to exist, the average booster must contain:
     // 2.73 A commons (30 / 11)
@@ -583,53 +522,33 @@ class TimeSpiralRemasteredCollator implements BoosterCollator {
     // 2.27 C1 commons (25 / 11, or 50 / 11 in each C1 booster)
     // 2.27 C2 commons (25 / 11, or 50 / 11 in each C2 booster)
     private final RarityConfiguration commonRuns = new RarityConfiguration(
-            false,
-            TimeSpiralRemasteredStructure.AAABBBC1C1C1C1,
-            TimeSpiralRemasteredStructure.AAABBBC1C1C1C1,
-            TimeSpiralRemasteredStructure.AAABBBC1C1C1C1,
-            TimeSpiralRemasteredStructure.AAABBBC1C1C1C1,
-            TimeSpiralRemasteredStructure.AAABBBC1C1C1C1,
-            TimeSpiralRemasteredStructure.AAABBC1C1C1C1C1,
-            TimeSpiralRemasteredStructure.AAABBC1C1C1C1C1,
-            TimeSpiralRemasteredStructure.AAABBC1C1C1C1C1,
-            TimeSpiralRemasteredStructure.AABBBC1C1C1C1C1,
-            TimeSpiralRemasteredStructure.AABBBC1C1C1C1C1,
-            TimeSpiralRemasteredStructure.AABBBC1C1C1C1C1,
+            AAABBBC1C1C1C1,
+            AAABBBC1C1C1C1,
+            AAABBBC1C1C1C1,
+            AAABBBC1C1C1C1,
+            AAABBBC1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AABBBC1C1C1C1C1,
+            AABBBC1C1C1C1C1,
+            AABBBC1C1C1C1C1,
 
-            TimeSpiralRemasteredStructure.AAABBBC2C2C2C2,
-            TimeSpiralRemasteredStructure.AAABBBC2C2C2C2,
-            TimeSpiralRemasteredStructure.AAABBBC2C2C2C2,
-            TimeSpiralRemasteredStructure.AAABBBC2C2C2C2,
-            TimeSpiralRemasteredStructure.AAABBBC2C2C2C2,
-            TimeSpiralRemasteredStructure.AAABBC2C2C2C2C2,
-            TimeSpiralRemasteredStructure.AAABBC2C2C2C2C2,
-            TimeSpiralRemasteredStructure.AAABBC2C2C2C2C2,
-            TimeSpiralRemasteredStructure.AABBBC2C2C2C2C2,
-            TimeSpiralRemasteredStructure.AABBBC2C2C2C2C2,
-            TimeSpiralRemasteredStructure.AABBBC2C2C2C2C2
+            AAABBBC2C2C2C2,
+            AAABBBC2C2C2C2,
+            AAABBBC2C2C2C2,
+            AAABBBC2C2C2C2,
+            AAABBBC2C2C2C2,
+            AAABBC2C2C2C2C2,
+            AAABBC2C2C2C2C2,
+            AAABBC2C2C2C2C2,
+            AABBBC2C2C2C2C2,
+            AABBBC2C2C2C2C2,
+            AABBBC2C2C2C2C2
     );
-    private final RarityConfiguration uncommonRuns = new RarityConfiguration(
-            false,
-            TimeSpiralRemasteredStructure.AAA,
-            TimeSpiralRemasteredStructure.AAA,
-            TimeSpiralRemasteredStructure.AAA,
-            TimeSpiralRemasteredStructure.BBB,
-            TimeSpiralRemasteredStructure.BBB
-    );
-    private final RarityConfiguration rareRuns = new RarityConfiguration(
-            TimeSpiralRemasteredStructure.R1
-    );
-    private final RarityConfiguration specialRuns = new RarityConfiguration(
-            TimeSpiralRemasteredStructure.S1
-    );
-
-    @Override
-    public void shuffle() {
-        commonRuns.shuffle();
-        uncommonRuns.shuffle();
-        rareRuns.shuffle();
-        specialRuns.shuffle();
-    }
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(AAA, AAA, AAA, BBB, BBB);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+    private final RarityConfiguration specialRuns = new RarityConfiguration(S1);
 
     @Override
     public List<String> makeBooster() {
