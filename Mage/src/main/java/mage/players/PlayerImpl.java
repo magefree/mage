@@ -641,11 +641,14 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             // check for all variants of hexproof and any asthougheffects that would ignore it
             // TODO there may be "prevented by rule-modification" effects, so add them if known
-            for (Ability a : abilities) {
-                if (a instanceof HexproofBaseAbility
-                        && ((HexproofBaseAbility) a).checkObject(source, game)
-                        && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null) {
-                    return false;
+            if (sourceControllerId != null
+                    && this.hasOpponent(sourceControllerId, game)) {
+                for (Ability a : abilities) {
+                    if (a instanceof HexproofBaseAbility
+                            && ((HexproofBaseAbility) a).checkObject(source, game)
+                            && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null) {
+                        return false;
+                    }
                 }
             }
             return !hasProtectionFrom(source, game);
