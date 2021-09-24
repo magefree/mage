@@ -74,7 +74,7 @@ public final class BaneclawMarauder extends CardImpl {
     }
 }
 
-enum BaneclawMarauderPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+enum BaneclawMarauderPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
 
     @Override
