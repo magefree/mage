@@ -3,6 +3,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.abilities.keyword.HexproofAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
@@ -127,6 +128,7 @@ public class HexproofTest extends CardTestPlayerBaseWithAIHelps {
         assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Swamp", 1);
+        assertCounterCount(playerA, "Liliana Vess", CounterType.LOYALTY, 5 + 1);
     }
 
     @Test
@@ -158,7 +160,7 @@ public class HexproofTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    public void test_AI_MustTargetOnlyValid() {
+    public void test_AI_MustTargetOnlyValid_1() {
         // +1: Target player discards a card.
         addCard(Zone.BATTLEFIELD, playerA, "Liliana Vess", 1);
         addCard(Zone.HAND, playerA, "Balduvian Bears", 1);
@@ -180,6 +182,54 @@ public class HexproofTest extends CardTestPlayerBaseWithAIHelps {
         // no discarded cards
         assertGraveyardCount(playerA, 0);
         assertGraveyardCount(playerB, 0);
+        // no activated abilities
+        assertCounterCount(playerA, "Liliana Vess", CounterType.LOYALTY, 5 - 2); // search library for -2
+    }
+
+    @Test
+    public void test_AI_MustTargetOnlyValid_2() {
+        // +1: Target player discards a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Liliana Vess", 1);
+        addCard(Zone.HAND, playerA, "Balduvian Bears", 1);
+        addCard(Zone.HAND, playerA, "Swamp", 1);
+        addCard(Zone.HAND, playerB, "Matter Reshaper", 1);
+        addCard(Zone.HAND, playerB, "Mountain", 1);
+        //
+        // You and permanents you control gain hexproof from blue and from black until end of turn.
+        addCard(Zone.HAND, playerB, "Veil of Summer", 1); // instant {G}
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 1);
+
+        // prepare hexproof
+        castSpell(1, PhaseStep.UPKEEP, playerB, "Veil of Summer");
+
+        // ai must not use +1 on itself (due bad score) and must not use on opponent (due hexproof)
+        aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        // no discarded cards
+        assertGraveyardCount(playerA, 0);
+        assertGraveyardCount(playerB, 1); // Veil of Summer
+        // no activated abilities
+        assertCounterCount(playerA, "Liliana Vess", CounterType.LOYALTY, 5 - 2); // search library for -2
+    }
+
+    @Test
+    public void test_AI_Logs() {
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerB, 20 - 3 * 3);
     }
 
     @Test

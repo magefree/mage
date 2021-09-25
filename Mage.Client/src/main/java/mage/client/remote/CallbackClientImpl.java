@@ -318,7 +318,6 @@ public class CallbackClientImpl implements CallbackClient {
                         // uses for client side only (example: update after scrollbars support)
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            logger.info("redraw");
                             panel.updateGame();
                         }
                         break;

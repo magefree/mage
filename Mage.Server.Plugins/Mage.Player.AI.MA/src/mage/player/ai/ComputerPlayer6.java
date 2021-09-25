@@ -391,6 +391,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     protected void resolve(SimulationNode2 node, int depth, Game game) {
         StackObject stackObject = game.getStack().getFirst();
         if (stackObject instanceof StackAbility) {
+            // AI hint for search effects (calc all possible cards for best score)
             SearchEffect effect = getSearchEffect((StackAbility) stackObject);
             if (effect != null
                     && stackObject.getControllerId().equals(playerId)) {
