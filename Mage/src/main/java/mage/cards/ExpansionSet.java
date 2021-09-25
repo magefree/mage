@@ -87,6 +87,19 @@ public abstract class ExpansionSet implements Serializable {
         }
     }
 
+    private static enum ExpansionSetComparator implements Comparator<ExpansionSet> {
+        instance;
+
+        @Override
+        public int compare(ExpansionSet lhs, ExpansionSet rhs) {
+            return lhs.getReleaseDate().after(rhs.getReleaseDate()) ? -1 : 1;
+        }
+    }
+
+    public static ExpansionSetComparator getComparator() {
+        return ExpansionSetComparator.instance;
+    }
+
     protected final List<SetCardInfo> cards = new ArrayList<>();
 
     protected String name;
