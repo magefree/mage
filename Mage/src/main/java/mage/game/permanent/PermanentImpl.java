@@ -1117,8 +1117,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     return false;
                 }
             }
+
             if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                    && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null
+                    && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
                     && abilities.stream()
                     .filter(HexproofBaseAbility.class::isInstance)
                     .map(HexproofBaseAbility.class::cast)
@@ -1129,9 +1130,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (hasProtectionFrom(source, game)) {
                 return false;
             }
-            // needed to get the correct possible targets if target rule modification effects are active
-            // e.g. Fiendslayer Paladin tried to target with Ultimate Price
-            return !game.getContinuousEffects().preventedByRuleModification(new TargetEvent(this, source.getId(), sourceControllerId), null, game, true);
+
+            // example: Fiendslayer Paladin tried to target with Ultimate Price
+            return !game.getContinuousEffects().preventedByRuleModification(
+                    new TargetEvent(this, source.getId(), sourceControllerId),
+                    null,
+                    game,
+                    true
+            );
         }
 
         return true;
