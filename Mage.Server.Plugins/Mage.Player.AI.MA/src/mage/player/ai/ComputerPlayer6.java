@@ -162,13 +162,12 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             boolean usedStack = false;
             while (actions.peek() != null) {
                 Ability ability = actions.poll();
-                // log example: ===> Act [PlayerA] Action: Cast Blessings of Nature (target 1; target 2)
-                logger.info(new StringBuilder("===> Act [")
-                        .append(game.getPlayer(playerId).getName())
-                        .append("] Action: ")
-                        .append(ability.toString())
-                        .append(listTargets(game, ability.getTargets(), " (targeting %s)", ""))
-                        .toString());
+                // example: ===> SELECTED ACTION for PlayerA: Play Swamp
+                logger.info(String.format("===> SELECTED ACTION for %s: %s",
+                        getName(),
+                        ability.toString()
+                                + listTargets(game, ability.getTargets(), " (targeting %s)", "")
+                ));
                 if (!ability.getTargets().isEmpty()) {
                     for (Target target : ability.getTargets()) {
                         for (UUID id : target.getTargets()) {
@@ -478,15 +477,24 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         SimulationNode2 bestNode = null;
         List<Ability> allActions = currentPlayer.simulatePriority(game);
         optimize(game, allActions);
+        int startedScore = GameStateEvaluator2.evaluate(this.getId(), node.getGame()).getTotalScore();
         if (logger.isInfoEnabled()
                 && !allActions.isEmpty()
                 && depth == maxDepth) {
-            logger.info("ADDED ACTIONS (" + allActions.size() + ") " + ' ' + allActions);
+            logger.info(String.format("POSSIBLE ACTIONS for %s (%d, started score: %d)%s",
+                    getName(),
+                    allActions.size(),
+                    startedScore,
+                    (actions.isEmpty() ? "" : ":")
+            ));
+            for (int i = 0; i < allActions.size(); i++) {
+                logger.info(String.format("-> #%d (%s)", i + 1, allActions.get(i)));
+            }
         }
-        int counter = 0;
+        int actionNumber = 0;
         int bestValSubNodes = Integer.MIN_VALUE;
         for (Ability action : allActions) {
-            counter++;
+            actionNumber++;
             if (!COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS
                     && Thread.interrupted()) {
                 Thread.currentThread().interrupt();
@@ -504,7 +512,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 }
                 if (!sim.checkIfGameIsOver()
                         && (action.isUsesStack() || action instanceof PassAbility)) {
-                    // only pass if the last action uses the stack
+                    // skip priority for opponents before stack resolve
                     UUID nextPlayerId = sim.getPlayerList().get();
                     do {
                         sim.getPlayer(nextPlayerId).pass(game);
@@ -513,48 +521,73 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 }
                 SimulationNode2 newNode = new SimulationNode2(node, sim, action, depth, currentPlayer.getId());
                 sim.checkStateAndTriggered();
-                int val;
+                int actionScore;
                 if (action instanceof PassAbility && sim.getStack().isEmpty()) {
-                    // Stop to simulate deeper if PassAbility and stack is empty
-                    val = GameStateEvaluator2.evaluate(this.getId(), sim).getTotalScore();
+                    // no more next actions, it's a final score
+                    actionScore = GameStateEvaluator2.evaluate(this.getId(), sim).getTotalScore();
                 } else {
-                    val = addActions(newNode, depth - 1, alpha, beta);
+                    // resolve current action and calc all next actions to find best score (return max possible score)
+                    actionScore = addActions(newNode, depth - 1, alpha, beta);
                 }
-                logger.debug("Sim Prio " + BLANKS.substring(0, 2 + (maxDepth - depth) * 3) + '[' + depth + "]#" + counter + " <" + val + "> - (" + action + ") ");
+                logger.debug("Sim Prio " + BLANKS.substring(0, 2 + (maxDepth - depth) * 3) + '[' + depth + "]#" + actionNumber + " <" + actionScore + "> - (" + action + ") ");
+
+                // Hints on data:
+                // * node - started game with executed command (pay and put on stack)
+                // * newNode - resolved game with resolved command (resolve stack)
+                // * node.children - rewrites to store only best tree (e.g. contains only final data)
+                // * node.score - rewrites to store max score (e.g. contains only final data)
                 if (logger.isInfoEnabled()
                         && depth >= maxDepth) {
-                    StringBuilder sb = new StringBuilder("Sim Prio [").append(depth).append("] #").append(counter)
-                            .append(" <").append(val).append("> (").append(action)
-                            .append(action.isModal() ? " Mode = " + action.getModes().getMode().toString() : "")
-                            .append(listTargets(game, action.getTargets(), " (targeting %s)", "")).append(')')
-                            .append(logger.isTraceEnabled() ? " #" + newNode.hashCode() : "");
+                    // show calculated actions and score
+                    // example: Sim Prio [6] #1 <605> (Play Swamp)
+                    int currentActionScore = GameStateEvaluator2.evaluate(this.getId(), newNode.getGame()).getTotalScore();
+                    int diffCurrentAction = currentActionScore - startedScore;
+                    int diffNextActions = actionScore - startedScore - diffCurrentAction;
+                    logger.info(String.format("Sim Prio [%d] #%d <diff %s, %s> (%s)",
+                            depth,
+                            actionNumber,
+                            printDiffScore(diffCurrentAction),
+                            printDiffScore(diffNextActions),
+                            action
+                                    + (action.isModal() ? " Mode = " + action.getModes().getMode().toString() : "")
+                                    + listTargets(game, action.getTargets(), " (targeting %s)", "")
+                                    + (logger.isTraceEnabled() ? " #" + newNode.hashCode() : "")
+                    ));
+                    // collect childs info (next actions chain)
                     SimulationNode2 logNode = newNode;
                     while (logNode.getChildren() != null
                             && !logNode.getChildren().isEmpty()) {
                         logNode = logNode.getChildren().get(0);
                         if (logNode.getAbilities() != null
                                 && !logNode.getAbilities().isEmpty()) {
-                            sb.append(" -> [").append(logNode.getDepth()).append(']').append(logNode.getAbilities().toString()).append('<').append(logNode.getScore()).append('>');
+                            int logCurrentScore = GameStateEvaluator2.evaluate(this.getId(), logNode.getGame()).getTotalScore();
+                            int logPrevScore = GameStateEvaluator2.evaluate(this.getId(), logNode.getParent().getGame()).getTotalScore();
+                            logger.info(String.format("Sim Prio [%d] -> next action: [%d]%s <diff %s, %s>",
+                                    depth,
+                                    logNode.getDepth(),
+                                    logNode.getAbilities().toString(),
+                                    printDiffScore(logCurrentScore - logPrevScore),
+                                    printDiffScore(actionScore - logCurrentScore)
+                            ));
                         }
                     }
-                    logger.info(sb);
                 }
 
                 if (currentPlayer.getId().equals(playerId)) {
-                    if (val > bestValSubNodes) {
-                        bestValSubNodes = val;
+                    if (actionScore > bestValSubNodes) {
+                        bestValSubNodes = actionScore;
                     }
                     if (depth == maxDepth
                             && action instanceof PassAbility) {
-                        val = val - PASSIVITY_PENALTY; // passivity penalty
+                        actionScore = actionScore - PASSIVITY_PENALTY; // passivity penalty
                     }
-                    if (val > alpha
+                    if (actionScore > alpha
                             || (depth == maxDepth
-                            && val == alpha
+                            && actionScore == alpha
                             && RandomUtil.nextBoolean())) { // Adding random for equal value to get change sometimes
-                        alpha = val;
+                        alpha = actionScore;
                         bestNode = newNode;
-                        bestNode.setScore(val);
+                        bestNode.setScore(actionScore);
                         if (!newNode.getChildren().isEmpty()) {
                             bestNode.setCombat(newNode.getChildren().get(0).getCombat());
                         }
@@ -565,7 +598,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                                     .stream()
                                     .map(a -> a.toString() + listTargets(game, a.getTargets(), " (targeting %s)", ""))
                                     .collect(Collectors.joining("; "));
-                            logger.info("Sim Prio [" + depth + "] -- Saved best node yet <" + bestNode.getScore() + scoreInfo + "> " + abilitiesInfo);
+                            logger.info("Sim Prio [" + depth + "] >> BEST action chain found <" + bestNode.getScore() + scoreInfo + "> " + abilitiesInfo);
                             node.children.clear();
                             node.children.add(bestNode);
                             node.setScore(bestNode.getScore());
@@ -573,22 +606,22 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     }
 
                     // no need to check other actions
-                    if (val == GameStateEvaluator2.WIN_GAME_SCORE) {
+                    if (actionScore == GameStateEvaluator2.WIN_GAME_SCORE) {
                         logger.debug("Sim Prio -- win - break");
                         break;
                     }
                 } else {
-                    if (val < beta) {
-                        beta = val;
+                    if (actionScore < beta) {
+                        beta = actionScore;
                         bestNode = newNode;
-                        bestNode.setScore(val);
+                        bestNode.setScore(actionScore);
                         if (!newNode.getChildren().isEmpty()) {
                             bestNode.setCombat(newNode.getChildren().get(0).getCombat());
                         }
                     }
 
                     // no need to check other actions
-                    if (val == GameStateEvaluator2.LOSE_GAME_SCORE) {
+                    if (actionScore == GameStateEvaluator2.LOSE_GAME_SCORE) {
                         logger.debug("Sim Prio -- lose - break");
                         break;
                     }
@@ -620,6 +653,14 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             return bestValSubNodes;
         } else {
             return beta;
+        }
+    }
+
+    private String printDiffScore(int score) {
+        if (score >= 0) {
+            return "+" + score;
+        } else {
+            return "" + score;
         }
     }
 
