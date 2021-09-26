@@ -16,7 +16,7 @@ import mage.game.Game;
 public final class ConsumingBlobToken extends TokenImpl {
 
     public ConsumingBlobToken() {
-        super("Ooze", "green Ooze creature token with \"This creature's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.\"");
+        super("Ooze", "green Ooze creature token with \"This creature's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1\".");
         setOriginalExpansionSetCode("MID");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.OOZE);

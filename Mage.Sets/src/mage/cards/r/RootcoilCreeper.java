@@ -33,7 +33,7 @@ import java.util.UUID;
  */
 public final class RootcoilCreeper extends CardImpl {
 
-    private static final FilterCard filter = new FilterOwnedCard("card with flashback you own in exile");
+    private static final FilterCard filter = new FilterOwnedCard("card with flashback you own from exile");
 
     static {
         filter.add(new AbilityPredicate(FlashbackAbility.class));
@@ -51,10 +51,16 @@ public final class RootcoilCreeper extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
 
         // {T}: Add two mana of any one color. Spend this mana only to cast spells from your graveyard.
-        this.addAbility(new ConditionalAnyColorManaAbility(2, new RootcoilCreeperManaBuilder()));
+        this.addAbility(new ConditionalAnyColorManaAbility(
+                new TapSourceCost(), 2, new RootcoilCreeperManaBuilder(), true
+        ));
 
         // {G}{U}, {T}, Exile Rootcoil Creeper: Return target card with flashback you own in exile to your hand.
-        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{G}{U}"));
+        Ability ability = new SimpleActivatedAbility(
+                new ReturnToHandTargetEffect()
+                        .setText("return target card with flashback you own in exile to your hand"),
+                new ManaCostsImpl<>("{G}{U}")
+        );
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileSourceCost());
         ability.addTarget(new TargetCardInExile(filter));

@@ -38,8 +38,9 @@ public class ReturnToHandChosenControlledPermanentEffect extends ReturnToHandCho
 
     @Override
     protected String getText() {
-        StringBuilder sb = new StringBuilder("return ");
+        StringBuilder sb = new StringBuilder("return");
         if (!filter.getMessage().startsWith("another")) {
+            sb.append(' ');
             if(filter.getMessage().startsWith("a")){
                 sb.append("an");
             }

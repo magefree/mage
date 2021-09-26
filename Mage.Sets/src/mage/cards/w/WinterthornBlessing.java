@@ -30,7 +30,7 @@ public final class WinterthornBlessing extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setTargetPointer(new FirstTargetPointer()));
         this.getSpellAbility().addEffect(new TapTargetEffect().setTargetPointer(new SecondTargetPointer()).setText("tap up to one target creature you don't control"));
-        this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect().setTargetPointer(new SecondTargetPointer()).setText("that creature doesn't untap during its controller's next untap step"));
+        this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect().setTargetPointer(new SecondTargetPointer()).setText(", and that creature doesn't untap during its controller's next untap step"));
 
         // Flashback {1}{G}{U}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{G}{U}")));

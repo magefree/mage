@@ -1,8 +1,5 @@
 package mage.cards.k;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.ObjectColor;
@@ -16,11 +13,11 @@ import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -29,14 +26,17 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class KatildaDawnhartPrime extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.WEREWOLF, "Werewolves");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent(SubType.HUMAN, "Human creatures you control");
+    private static final FilterPermanent filter2 = new FilterControlledCreaturePermanent(SubType.HUMAN, "Human creatures");
 
     public KatildaDawnhartPrime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
@@ -51,10 +51,16 @@ public final class KatildaDawnhartPrime extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
 
         // Human creatures you control have "{T}: Add one mana of any of this creature's colors."
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(new KatildaDawnhartPrimeManaAbility(), Duration.WhileOnBattlefield, filter2)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+                new KatildaDawnhartPrimeManaAbility(), Duration.WhileOnBattlefield, filter2
+        )));
 
         // {4}{G}{W}, {T}: Put a +1/+1 counter on each creature you control.
-        this.addAbility(new SimpleActivatedAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE), new ManaCostsImpl<>("{4}{G}{W}")));
+        Ability ability = new SimpleActivatedAbility(new AddCountersAllEffect(
+                CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE
+        ), new ManaCostsImpl<>("{4}{G}{W}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
     }
 
     private KatildaDawnhartPrime(final KatildaDawnhartPrime card) {
