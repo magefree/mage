@@ -23,6 +23,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.watchers.common.SpellsCastWatcher;
 
 import java.util.UUID;
@@ -134,12 +135,13 @@ class MonkClassCastEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (!sourceId.equals(source.getSourceId()) || !source.isControlledBy(affectedControllerId)) {
+        UUID mainCardId = CardUtil.getMainCardId(game, sourceId);
+        if (!mainCardId.equals(source.getSourceId()) || !source.isControlledBy(affectedControllerId)) {
             return false;
         }
-        Card card = game.getCard(source.getSourceId());
+        Card card = game.getCard(sourceId);
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        return card != null && watcher != null
+        return card != null && watcher != null && !card.isLand(game)
                 && watcher.getSpellsCastThisTurn(affectedControllerId).size() > 0;
     }
 
