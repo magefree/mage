@@ -114,6 +114,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Orzhov Advokist", 91, Rarity.UNCOMMON, mage.cards.o.OrzhovAdvokist.class));
         cards.add(new SetCardInfo("Overseer of the Damned", 127, Rarity.RARE, mage.cards.o.OverseerOfTheDamned.class));
         cards.add(new SetCardInfo("Path of Ancestry", 178, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
+        cards.add(new SetCardInfo("Prowling Geistcatcher", 21, Rarity.RARE, mage.cards.p.ProwlingGeistcatcher.class));
         cards.add(new SetCardInfo("Ravenous Rotbelly", 22, Rarity.RARE, mage.cards.r.RavenousRotbelly.class));
         cards.add(new SetCardInfo("Return to Dust", 92, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("Riders of Gavony", 93, Rarity.RARE, mage.cards.r.RidersOfGavony.class));
