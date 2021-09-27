@@ -114,7 +114,7 @@ class MonkClassEffect extends OneShotEffect {
         }
         player.moveCards(card, Zone.EXILED, source, game);
         game.addEffect(new GainAbilityTargetEffect(
-                new SimpleStaticAbility(new MonkClassCastEffect()),
+                new SimpleStaticAbility(Zone.EXILED, new MonkClassCastEffect()),
                 Duration.Custom, null, true
         ).setTargetPointer(new FixedTarget(card, game)), source);
         return true;
