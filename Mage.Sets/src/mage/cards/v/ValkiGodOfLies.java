@@ -283,14 +283,16 @@ class ExileTopCardEachPlayersLibrary extends OneShotEffect {
                 && Tibalt != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null) {
+                if (player != null
+                        && player.getLibrary().hasCards()) {
                     Card topCard = player.getLibrary().getFromTop(game);
                     cardsToExile.add(topCard);
                 }
             }
             // exile all cards at one time
-            controller.moveCardsToExile(cardsToExile, source, game, true, exileId, Tibalt.getName());
-            return true;
+            if (!cardsToExile.isEmpty()) {
+                return controller.moveCardsToExile(cardsToExile, source, game, true, exileId, Tibalt.getName());
+            }
         }
         return false;
     }
