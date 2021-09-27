@@ -106,6 +106,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lord of the Accursed", 124, Rarity.UNCOMMON, mage.cards.l.LordOfTheAccursed.class));
         cards.add(new SetCardInfo("Midnight Reaper", 125, Rarity.RARE, mage.cards.m.MidnightReaper.class));
         cards.add(new SetCardInfo("Mikaeus, the Lunarch", 89, Rarity.MYTHIC, mage.cards.m.MikaeusTheLunarch.class));
+        cards.add(new SetCardInfo("Moorland Rescuer", 7, Rarity.RARE, mage.cards.m.MoorlandRescuer.class));
         cards.add(new SetCardInfo("Mortuary Mire", 176, Rarity.COMMON, mage.cards.m.MortuaryMire.class));
         cards.add(new SetCardInfo("Myriad Landscape", 177, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Odric, Master Tactician", 90, Rarity.RARE, mage.cards.o.OdricMasterTactician.class));
