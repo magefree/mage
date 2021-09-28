@@ -119,7 +119,10 @@ public class ForetellAbility extends SpecialAction {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null
                     && card != null) {
+
+                // get main card id
                 UUID mainCardId = card.getMainCard().getId();
+
                 // retrieve the exileId of the foretold card
                 UUID exileId = CardUtil.getExileZoneId(mainCardId.toString() + "foretellAbility", game);
 
