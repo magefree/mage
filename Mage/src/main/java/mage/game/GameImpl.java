@@ -3068,11 +3068,6 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public PreventionEffectData preventDamage(GameEvent event, Ability source, Game game, boolean preventAllDamage) {
-        return preventDamage(event, source, game, Integer.MAX_VALUE);
-    }
-
-    @Override
     public PreventionEffectData preventDamage(GameEvent event, Ability source, Game game, int amountToPrevent) {
         PreventionEffectData result = new PreventionEffectData(amountToPrevent);
         if (!event.getFlag()) { // damage is not preventable
