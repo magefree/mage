@@ -465,6 +465,7 @@ public class GameEvent implements Serializable {
         DUNGEON_COMPLETED,
         REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
         FORETOLD, // targetId   id of card foretold
+        FORETELL, // targetId   id of card foretell  playerId   id of the controller
         //custom events
         CUSTOM_EVENT
     }

@@ -3,11 +3,11 @@ package mage.watchers.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.abilities.keyword.ForetellAbility;
 import mage.cards.Card;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 /**
@@ -26,10 +26,9 @@ public class ForetoldWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAKEN_SPECIAL_ACTION) {
-            Card card = game.getCard(event.getSourceId());
+        if (event.getType() == GameEvent.EventType.FORETELL) {
+            Card card = game.getCard(event.getTargetId());
             if (card != null
-                    && card.getAbilities(game).containsClass(ForetellAbility.class)
                     && controllerId == event.getPlayerId()) {
                 foretellCardsThisTurn.add(card.getId());
                 foretoldCards.add(card.getId());
