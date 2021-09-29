@@ -287,8 +287,10 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     private List<Card> createBoosterUsingCollator(BoosterCollator collator) {
-        if (inBoosterMap.isEmpty()) {
-            generateBoosterMap();
+        synchronized (inBoosterMap) {
+            if (inBoosterMap.isEmpty()) {
+                generateBoosterMap();
+            }
         }
         return collator
                 .makeBooster()
@@ -304,6 +306,15 @@ public abstract class ExpansionSet implements Serializable {
                 .findCards(new CardCriteria().setCodes(code))
                 .stream()
                 .forEach(cardInfo -> inBoosterMap.put(cardInfo.getCardNumber(), cardInfo));
+        // get basic lands from parent set if this set doesn't have them
+        if (!hasBasicLands && parentSet != null) {
+            String parentCode = parentSet.code;
+            CardRepository
+                .instance
+                .findCards(new CardCriteria().setCodes(parentCode).rarities(Rarity.LAND))
+                .stream()
+                .forEach(cardInfo -> inBoosterMap.put(parentCode + "_" + cardInfo.getCardNumber(), cardInfo));
+        }
     }
 
     protected boolean boosterIsValid(List<Card> booster) {
@@ -621,9 +632,9 @@ public abstract class ExpansionSet implements Serializable {
         List<CardInfo> savedCardsInfos = savedCards.get(rarity);
         if (savedCardsInfos == null) {
             CardCriteria criteria = new CardCriteria();
-            if (rarity == Rarity.LAND) {
-                // get basic lands from parent set if current haven't it
-                criteria.setCodes(!hasBasicLands && parentSet != null ? parentSet.code : this.code);
+            if (rarity == Rarity.LAND && !hasBasicLands && parentSet != null) {
+                // get basic lands from parent set if this set doesn't have them
+                criteria.setCodes(parentSet.code);
             } else {
                 criteria.setCodes(this.code);
             }
