@@ -43,6 +43,10 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
+        <dependency>
+            <groupId>net.java.truevfs</groupId>
+            <artifactId>truevfs-profile-base</artifactId>
+        </dependency>
 
         <dependency>
             <!-- needs for server connection by jboss -->
@@ -88,7 +92,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <type>jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -111,22 +114,6 @@
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.14.2</version>
-        </dependency>
-        <dependency>
-            <artifactId>truevfs-profile-base</artifactId>
-            <groupId>net.java.truevfs</groupId>
-            <type>jar</type>
-            <version>0.11.1</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>truevfs-access-swing</artifactId>
-                    <groupId>net.java.truevfs</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>truecommons-key-swing</artifactId>
-                    <groupId>net.java.truecommons</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- music player START -->

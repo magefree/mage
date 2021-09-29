@@ -22,7 +22,6 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <type>jar</type>
         </dependency>
         <dependency>
             <!-- WARNING, do not update db engine (stable: 1.4.197) cause compatibility issues, see https://github.com/h2database/h2database/issues/2078 -->

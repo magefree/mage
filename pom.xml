@@ -156,11 +156,13 @@
     </properties>
 
     <dependencyManagement>
+        <!-- write libs from all childs here to control a versions -->
         <dependencies>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.13.1</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>log4j</groupId>
@@ -191,6 +193,22 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>3.11</version>
+            </dependency>
+            <dependency>
+                <!-- zip files support -->
+                <groupId>net.java.truevfs</groupId>
+                <artifactId>truevfs-profile-base</artifactId>
+                <version>0.11.1</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>net.java.truevfs</groupId>
+                        <artifactId>truevfs-access-swing</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>net.java.truecommons</groupId>
+                        <artifactId>truecommons-key-swing</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
