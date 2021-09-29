@@ -206,7 +206,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         asInstant = approvingObject != null;
         asInstant |= (timing == TimingRule.INSTANT);
         Card card = game.getCard(getSourceId());
-        if (card != null) {
+        if (card != null && this instanceof SpellAbility) {
             asInstant |= card.isInstant(game);
             asInstant |= card.hasAbility(FlashAbility.getInstance(), game);
         }
