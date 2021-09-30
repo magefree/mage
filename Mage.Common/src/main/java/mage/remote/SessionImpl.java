@@ -122,11 +122,23 @@ public class SessionImpl implements Session {
         client.showMessage("Remote task error. " + message);
     }
 
-    private boolean doRemoteWorkAndHandleErrors(RemotingTask remoting) {
+    private boolean doRemoteWorkAndHandleErrors(boolean closeConnectionOnFinish, boolean mustWaitServerMessageOnFail,
+                                                RemotingTask remoting) {
         // execute remote task and wait result, can be canceled
         lastRemotingTask = remoting;
         try {
-            return remoting.doWork();
+            boolean res = remoting.doWork();
+            if (!res && mustWaitServerMessageOnFail) {
+                // server send detail error as separate message by existing connection,
+                // so you need wait some time before disconnect
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    logger.fatal("waiting of error message had failed", e);
+                    Thread.currentThread().interrupt();
+                }
+            }
+            return res;
         } catch (InterruptedException | CancellationException t) {
             // was canceled by user, nothing to show
         } catch (MalformedURLException ex) {
@@ -180,13 +192,16 @@ public class SessionImpl implements Session {
             }
         } finally {
             lastRemotingTask = null;
+            if (closeConnectionOnFinish) {
+                disconnect(false); // it's ok on mutiple calls
+            }
         }
         return false;
     }
 
     @Override
     public synchronized boolean register(final Connection connection) {
-        return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(new RemotingTask() {
+        return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(true, true, new RemotingTask() {
             @Override
             public boolean work() throws Throwable {
                 logger.info("Registration: username " + getUserName() + " for email " + getEmail());
@@ -199,7 +214,7 @@ public class SessionImpl implements Session {
 
     @Override
     public synchronized boolean emailAuthToken(final Connection connection) {
-        return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(new RemotingTask() {
+        return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(true, true, new RemotingTask() {
             @Override
             public boolean work() throws Throwable {
                 logger.info("Auth request: requesting auth token for username " + getUserName() + " to email " + getEmail());
@@ -212,7 +227,7 @@ public class SessionImpl implements Session {
 
     @Override
     public synchronized boolean resetPassword(final Connection connection) {
-        return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(new RemotingTask() {
+        return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(true, true, new RemotingTask() {
             @Override
             public boolean work() throws Throwable {
                 logger.info("Password reset: reseting password for username " + getUserName());
@@ -225,7 +240,7 @@ public class SessionImpl implements Session {
 
     @Override
     public synchronized boolean connect(final Connection connection) {
-        return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(new RemotingTask() {
+        return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(false, true, new RemotingTask() {
             @Override
             public boolean work() throws Throwable {
                 setLastError("");
@@ -258,7 +273,6 @@ public class SessionImpl implements Session {
                 }
 
                 logger.info("Logging: FAIL");
-                disconnect(false);
                 return false;
             }
         });
@@ -437,7 +451,7 @@ public class SessionImpl implements Session {
 
         boolean result;
         try {
-            result = doRemoteWorkAndHandleErrors(lastRemotingTask);
+            result = doRemoteWorkAndHandleErrors(false, false, lastRemotingTask);
         } finally {
             lastRemotingTask = null;
         }
@@ -529,6 +543,7 @@ public class SessionImpl implements Session {
 
         if (sessionState == SessionState.DISCONNECTING || sessionState == SessionState.CONNECTING) {
             sessionState = SessionState.DISCONNECTED;
+            serverState = null;
             logger.info("Disconnecting DONE");
             if (askForReconnect) {
                 client.showError("Network error. You have been disconnected from " + connection.getHost());
@@ -1654,7 +1669,10 @@ public class SessionImpl implements Session {
     @Override
     public boolean ping() {
         try {
-            if (isConnected() && sessionId != null) {
+            // ping must work after login only, all other actions are single call (example: register new user)
+            // sessionId fills on connection
+            // serverState fills on good login
+            if (isConnected() && sessionId != null && serverState != null) {
                 long startTime = System.nanoTime();
                 if (!server.ping(sessionId, pingInfo)) {
                     logger.error("Ping failed: " + this.getUserName() + " Session: " + sessionId + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
