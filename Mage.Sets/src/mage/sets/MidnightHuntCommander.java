@@ -159,6 +159,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Visions of Duplicity", 33, Rarity.RARE, mage.cards.v.VisionsOfDuplicity.class));
         cards.add(new SetCardInfo("Visions of Glory", 32, Rarity.RARE, mage.cards.v.VisionsOfGlory.class));
         cards.add(new SetCardInfo("Visions of Ruin", 36, Rarity.RARE, mage.cards.v.VisionsOfRuin.class));
+        cards.add(new SetCardInfo("Wall of Mourning", 10, Rarity.RARE, mage.cards.w.WallOfMourning.class));
         cards.add(new SetCardInfo("Wild Beastmaster", 146, Rarity.RARE, mage.cards.w.WildBeastmaster.class));
         cards.add(new SetCardInfo("Wilhelt, the Rotcleaver", 2, Rarity.MYTHIC, mage.cards.w.WilheltTheRotcleaver.class));
         cards.add(new SetCardInfo("Yavimaya Elder", 147, Rarity.COMMON, mage.cards.y.YavimayaElder.class));
