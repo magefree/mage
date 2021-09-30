@@ -79,6 +79,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fleshbag Marauder", 118, Rarity.UNCOMMON, mage.cards.f.FleshbagMarauder.class));
         cards.add(new SetCardInfo("Forgotten Creation", 100, Rarity.RARE, mage.cards.f.ForgottenCreation.class));
         cards.add(new SetCardInfo("Fortified Village", 174, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
+        cards.add(new SetCardInfo("Ghouls' Night Out", 19, Rarity.RARE, mage.cards.g.GhoulsNightOut.class));
         cards.add(new SetCardInfo("Gisa and Geralf", 150, Rarity.MYTHIC, mage.cards.g.GisaAndGeralf.class));
         cards.add(new SetCardInfo("Gleaming Overseer", 151, Rarity.UNCOMMON, mage.cards.g.GleamingOverseer.class));
         cards.add(new SetCardInfo("Go for the Throat", 119, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
