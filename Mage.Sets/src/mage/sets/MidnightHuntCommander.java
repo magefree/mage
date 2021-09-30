@@ -97,6 +97,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kessig Cagebreakers", 142, Rarity.RARE, mage.cards.k.KessigCagebreakers.class));
         cards.add(new SetCardInfo("Knight of the White Orchid", 88, Rarity.RARE, mage.cards.k.KnightOfTheWhiteOrchid.class));
         cards.add(new SetCardInfo("Krosan Verge", 175, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
+        cards.add(new SetCardInfo("Kurbis, Harvest Celebrant", 27, Rarity.RARE, mage.cards.k.KurbisHarvestCelebrant.class));
         cards.add(new SetCardInfo("Kyler, Sigardian Emissary", 4, Rarity.MYTHIC, mage.cards.k.KylerSigardianEmissary.class));
         cards.add(new SetCardInfo("Leinore, Autumn Sovereign", 1, Rarity.MYTHIC, mage.cards.l.LeinoreAutumnSovereign.class));
         cards.add(new SetCardInfo("Lifecrafter's Bestiary", 160, Rarity.RARE, mage.cards.l.LifecraftersBestiary.class));
