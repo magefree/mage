@@ -379,7 +379,8 @@ class InnistradMidnightHuntCollator implements BoosterCollator {
             commonDFC
     );
     private final BoosterStructure ABD1 = new BoosterStructure(uncommonA, uncommonB, uncommonDFC1, rare);
-    private final BoosterStructure BBD1 = new BoosterStructure(uncommonB, uncommonB, uncommonDFC1, rare);    private final BoosterStructure ABD2 = new BoosterStructure(uncommonA, uncommonB, uncommonDFC2, rare);
+    private final BoosterStructure BBD1 = new BoosterStructure(uncommonB, uncommonB, uncommonDFC1, rare);
+    private final BoosterStructure ABD2 = new BoosterStructure(uncommonA, uncommonB, uncommonDFC2, rare);
     private final BoosterStructure BBD2 = new BoosterStructure(uncommonB, uncommonB, uncommonDFC2, rare);
     private final BoosterStructure ABB = new BoosterStructure(uncommonA, uncommonB, uncommonB, rareDFC);
     private final BoosterStructure L1 = new BoosterStructure(land);
