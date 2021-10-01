@@ -84,9 +84,12 @@ class GisaGloriousResurrectorExileEffect extends ReplacementEffectImpl {
         if (zEvent.getTarget() instanceof PermanentToken) {
             return player.moveCards(zEvent.getTarget(), Zone.EXILED, source, game);
         }
+        game.getState().setValue("GisaGloriousResurrectorExile"
+                + source.getSourceId().toString()
+                + game.getState().getZoneChangeCounter(source.getSourceId()), source);
         return player.moveCardsToExile(
                 zEvent.getTarget(), source, game, false,
-                CardUtil.getExileZoneId(game, source), null
+                CardUtil.getExileZoneId(game, source), "Gisa, Glorious Resurrector"
         );
     }
 
@@ -109,8 +112,8 @@ class GisaGloriousResurrectorReturnEffect extends OneShotEffect {
 
     GisaGloriousResurrectorReturnEffect() {
         super(Outcome.Benefit);
-        staticText = "put all creature cards exiled with {this} " +
-                "onto the battlefield under your control. They gain decayed";
+        staticText = "put all creature cards exiled with {this} "
+                + "onto the battlefield under your control. They gain decayed";
     }
 
     private GisaGloriousResurrectorReturnEffect(final GisaGloriousResurrectorReturnEffect effect) {
@@ -125,8 +128,16 @@ class GisaGloriousResurrectorReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        if (player == null || exileZone == null || exileZone.isEmpty()) {
+        Ability exiledWithSource = (Ability) game.getState().getValue("GisaGloriousResurrectorExile"
+                + source.getSourceId().toString()
+                + game.getState().getZoneChangeCounter(source.getSourceId()));
+        if (exiledWithSource == null) {
+            return false;
+        }
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, exiledWithSource));
+        if (player == null
+                || exileZone == null
+                || exileZone.isEmpty()) {
             return false;
         }
         Cards cards = new CardsImpl(exileZone.getCards(StaticFilters.FILTER_CARD_CREATURE, game));
