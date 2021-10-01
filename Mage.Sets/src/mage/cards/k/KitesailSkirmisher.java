@@ -1,6 +1,5 @@
 package mage.cards.k;
 
-import com.google.common.base.Objects;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -22,6 +21,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -74,7 +74,7 @@ enum KitesailSkirmisherPredicate implements ObjectSourcePlayerPredicate<MageObje
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        return Objects.equal(
+        return Objects.equals(
                 game.getCombat().getDefenderId(input.getSourceId()),
                 game.getCombat().getDefenderId(input.getObject().getId())
         );

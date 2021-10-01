@@ -26,12 +26,6 @@
             <artifactId>jspf-core</artifactId>
             <version>0.9.1</version>            
         </dependency>
-        <dependency>
-            <!-- json support -->
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.8.8</version>
-        </dependency>
 
         <dependency>
             <groupId>org.jboss.remoting</groupId>
@@ -59,6 +53,11 @@
             <groupId>trove</groupId>
             <artifactId>trove</artifactId>
             <version>1.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
         </dependency>
 
         <dependency>

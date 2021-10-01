@@ -1,11 +1,11 @@
 package org.mage.plugins.card.dl.sources;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import mage.MageException;
 import mage.client.util.CardLanguage;
+import mage.util.JsonUtil;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
@@ -174,14 +174,18 @@ public enum ScryfallImageSource implements CardImageSource {
 
         // OK, found card data, parse it
         JsonObject jsonCard = JsonParser.parseReader(new InputStreamReader(jsonStream)).getAsJsonObject();
-        if (!jsonCard.has("card_faces")) {
+        JsonArray jsonFaces = JsonUtil.getAsArray(jsonCard, "card_faces");
+        if (jsonFaces == null) {
             throw new MageException("Couldn't find card_faces in card's JSON data: " + jsonUrl);
         }
-        JsonArray jsonCardFaces = jsonCard.getAsJsonArray("card_faces");
-        JsonObject jsonCardFace = jsonCardFaces.get(card.isSecondSide() ? 1 : 0).getAsJsonObject();
-        JsonObject jsonImageUris = jsonCardFace.getAsJsonObject("image_uris");
 
-        return jsonImageUris.get("large").getAsString();
+        JsonObject jsonFace = jsonFaces.get(card.isSecondSide() ? 1 : 0).getAsJsonObject();
+        JsonObject jsonImages = JsonUtil.getAsObject(jsonFace, "image_uris");
+        if (jsonImages == null) {
+            throw new MageException("Couldn't find image_uris in card's JSON data: " + jsonUrl);
+        }
+
+        return JsonUtil.getAsString(jsonImages, "large");
     }
 
     @Override
