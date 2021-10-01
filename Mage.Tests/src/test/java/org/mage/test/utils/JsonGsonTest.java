@@ -21,9 +21,9 @@ public class JsonGsonTest {
 
     @Test
     public void test_ReadByStreamParser() {
-        String sampleFileName = Paths.get("src", "test", "resources", "scryfall-card.json").toString();
+        String sampleFileName = Paths.get("src", "test", "data", "scryfall-card.json").toString();
         try {
-            // low level parser for unknown data structor
+            // low level parser for unknown data structure
             JsonObject json = JsonParser.parseReader(new FileReader(sampleFileName)).getAsJsonObject();
             Assert.assertEquals("Unknown data", "card", json.get("object").getAsString());
             JsonArray jsonFaces = json.getAsJsonArray("card_faces");

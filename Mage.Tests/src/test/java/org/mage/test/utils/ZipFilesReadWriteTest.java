@@ -26,19 +26,19 @@ public class ZipFilesReadWriteTest {
     @Test
     public void test_Read() {
         // exists
-        TFile fileZip = new TFile(Paths.get("src", "test", "resources", "images.zip").toString());
+        TFile fileZip = new TFile(Paths.get("src", "test", "data", "images.zip").toString());
         Assert.assertTrue(fileZip.exists());
-        TFile fileZipDir = new TFile(Paths.get("src", "test", "resources", "images.zip", "SET").toString());
+        TFile fileZipDir = new TFile(Paths.get("src", "test", "data", "images.zip", "SET").toString());
         Assert.assertTrue(fileZipDir.exists());
-        TFile fileZipFile = new TFile(Paths.get("src", "test", "resources", "images.zip", "SET", "image1.png").toString());
+        TFile fileZipFile = new TFile(Paths.get("src", "test", "data", "images.zip", "SET", "image1.png").toString());
         Assert.assertTrue(fileZipFile.exists());
 
         // not exists
-        TFile fileNotZip = new TFile(Paths.get("src", "test", "resources", "images-FAIL.zip").toString());
+        TFile fileNotZip = new TFile(Paths.get("src", "test", "data", "images-FAIL.zip").toString());
         Assert.assertFalse(fileNotZip.exists());
-        TFile fileNotZipDir = new TFile(Paths.get("src", "test", "resources", "images.zip", "SET-FAIL").toString());
+        TFile fileNotZipDir = new TFile(Paths.get("src", "test", "data", "images.zip", "SET-FAIL").toString());
         Assert.assertFalse(fileNotZipDir.exists());
-        TFile fileNotZipFile = new TFile(Paths.get("src", "test", "resources", "images.zip", "SET", "image1-FAIL.png").toString());
+        TFile fileNotZipFile = new TFile(Paths.get("src", "test", "data", "images.zip", "SET", "image1-FAIL.png").toString());
         Assert.assertFalse(fileNotZipFile.exists());
 
         // reading
