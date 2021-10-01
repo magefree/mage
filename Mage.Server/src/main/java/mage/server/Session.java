@@ -79,7 +79,6 @@ public class Session {
             password = randomString.nextString();
             returnMessage = validatePassword(password, userName);
             if (returnMessage != null) {
-                logger.warn("pas: " + password);
                 sendErrorMessageToClient("Auto-generated password fail, try again: " + returnMessage);
                 return returnMessage;
             }
