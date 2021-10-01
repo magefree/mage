@@ -61,15 +61,17 @@ class GhoulsNightOutEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
+        UUID controllerId = source.getControllerId();
+        Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             Set<Card> cardsToBattlefield = new HashSet<>();
-            for (Player player : game.getPlayers().values()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controllerId, game)) {
+                Player player = game.getPlayer(playerId);
                 if (player != null) {
                     boolean creatureInGraveyard = false;
                     for (UUID cardId : player.getGraveyard()) {
                         Card card = game.getCard(cardId);
-                        if (card != null && card.isCreature()) {
+                        if (card != null && card.isCreature(game)) {
                             creatureInGraveyard = true;
                             break;
                         }
@@ -78,7 +80,7 @@ class GhoulsNightOutEffect extends OneShotEffect {
                         FilterCreatureCard filter = new FilterCreatureCard("creature card in " + player.getName() + "'s graveyard");
                         TargetCard target = new TargetCard(Zone.GRAVEYARD, filter);
                         target.setNotTarget(true);
-                        controller.chooseTarget(outcome, player.getGraveyard(), target, source, game);
+                        controller.chooseTarget(controllerId.equals(playerId) ? Outcome.Benefit : Outcome.Detriment, player.getGraveyard(), target, source, game);
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
                             cardsToBattlefield.add(card);
