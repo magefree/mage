@@ -173,9 +173,7 @@ public enum ScryfallImageSource implements CardImageSource {
         }
 
         // OK, found card data, parse it
-        JsonParser jp = new JsonParser();
-        JsonElement root = jp.parse(new InputStreamReader(jsonStream));
-        JsonObject jsonCard = root.getAsJsonObject();
+        JsonObject jsonCard = JsonParser.parseReader(new InputStreamReader(jsonStream)).getAsJsonObject();
         if (!jsonCard.has("card_faces")) {
             throw new MageException("Couldn't find card_faces in card's JSON data: " + jsonUrl);
         }
