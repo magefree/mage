@@ -232,7 +232,7 @@ public class SessionImpl implements Session {
             public boolean work() throws Throwable {
                 logger.info("Password reset: reseting password for username " + getUserName());
                 boolean result = server.resetPassword(sessionId, connection.getEmail(), connection.getAuthToken(), connection.getPassword());
-                logger.info("Password reset: " + (result ? "DONE, check your email for new password" : "FAIL"));
+                logger.info("Password reset: " + (result ? "DONE, now you can login with new password" : "FAIL"));
                 return result;
             }
         });

@@ -35,6 +35,8 @@ public class Session {
     private static final Pattern alphabetsPattern = Pattern.compile("[a-zA-Z]");
     private static final Pattern digitsPattern = Pattern.compile("[0-9]");
 
+    public static final String REGISTRATION_DISABLED_MESSAGE = "Registration has been disabled on the server. You can use any name and empty password to login.";
+
     private final ManagerFactory managerFactory;
     private final String sessionId;
     private UUID userId;
@@ -60,30 +62,37 @@ public class Session {
 
     public String registerUser(String userName, String password, String email) throws MageException {
         if (!managerFactory.configSettings().isAuthenticationActivated()) {
-            String returnMessage = "Registration is disabled by the server config";
+            String returnMessage = REGISTRATION_DISABLED_MESSAGE;
             sendErrorMessageToClient(returnMessage);
             return returnMessage;
         }
-        synchronized (AuthorizedUserRepository.instance) {
+        synchronized (AuthorizedUserRepository.getInstance()) {
+            // name
             String returnMessage = validateUserName(userName);
             if (returnMessage != null) {
                 sendErrorMessageToClient(returnMessage);
                 return returnMessage;
             }
 
+            // auto-generated password
             RandomString randomString = new RandomString(10);
             password = randomString.nextString();
             returnMessage = validatePassword(password, userName);
             if (returnMessage != null) {
-                sendErrorMessageToClient(returnMessage);
+                logger.warn("pas: " + password);
+                sendErrorMessageToClient("Auto-generated password fail, try again: " + returnMessage);
                 return returnMessage;
             }
+
+            // email
             returnMessage = validateEmail(email);
             if (returnMessage != null) {
                 sendErrorMessageToClient(returnMessage);
                 return returnMessage;
             }
-            AuthorizedUserRepository.instance.add(userName, password, email);
+
+            // create
+            AuthorizedUserRepository.getInstance().add(userName, password, email);
             String text = "You are successfully registered as " + userName + '.';
             text += "  Your initial, generated password is: " + password;
 
@@ -95,15 +104,15 @@ public class Session {
                 success = managerFactory.mailgunClient().sendMessage(email, subject, text);
             }
             if (success) {
-                String ok = "Sent a registration confirmation / initial password email to " + email + " for " + userName;
+                String ok = "Email with initial password sent to " + email + " for a user " + userName;
                 logger.info(ok);
                 sendInfoMessageToClient(ok);
             } else if (Main.isTestMode()) {
-                String ok = "Server is in test mode.  Your account is registered with a password of " + password + " for " + userName;
+                String ok = "Email sending failed. Server is in test mode. Your account registered with a password " + password + " for a user " + userName;
                 logger.info(ok);
                 sendInfoMessageToClient(ok);
             } else {
-                String err = "Failed sending a registration confirmation / initial password email to " + email + " for " + userName;
+                String err = "Email sending failed. Try use another email address or service. Or reset password by email " + email + " for a user " + userName;
                 logger.error(err);
                 sendErrorMessageToClient(err);
                 return err;
@@ -113,9 +122,13 @@ public class Session {
     }
 
     private String validateUserName(String userName) {
+        // return error message or null on good name
+
         if (userName.equals("Admin")) {
+            // virtual user for admin console
             return "User name Admin already in use";
         }
+
         ConfigSettings config = managerFactory.configSettings();
         if (userName.length() < config.getMinUserNameLength()) {
             return "User name may not be shorter than " + config.getMinUserNameLength() + " characters";
@@ -123,15 +136,19 @@ public class Session {
         if (userName.length() > config.getMaxUserNameLength()) {
             return "User name may not be longer than " + config.getMaxUserNameLength() + " characters";
         }
+
         Pattern invalidUserNamePattern = Pattern.compile(managerFactory.configSettings().getInvalidUserNamePattern(), Pattern.CASE_INSENSITIVE);
         Matcher m = invalidUserNamePattern.matcher(userName);
         if (m.find()) {
             return "User name '" + userName + "' includes not allowed characters: use a-z, A-Z and 0-9";
         }
-        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
+
+        AuthorizedUser authorizedUser = AuthorizedUserRepository.getInstance().getByName(userName);
         if (authorizedUser != null) {
             return "User name '" + userName + "' already in use";
         }
+
+        // all fine
         return null;
     }
 
@@ -159,7 +176,7 @@ public class Session {
         if (email == null || email.isEmpty()) {
             return "Email address cannot be blank";
         }
-        AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByEmail(email);
+        AuthorizedUser authorizedUser = AuthorizedUserRepository.getInstance().getByEmail(email);
         if (authorizedUser != null) {
             return "Email address '" + email + "' is associated with another user";
         }
@@ -182,8 +199,8 @@ public class Session {
         this.isAdmin = false;
         AuthorizedUser authorizedUser = null;
         if (managerFactory.configSettings().isAuthenticationActivated()) {
-            authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
-            String errorMsg = "Wrong username or password. In case you haven't, please register your account first.";
+            authorizedUser = AuthorizedUserRepository.getInstance().getByName(userName);
+            String errorMsg = "Wrong username or password. You must register your account first.";
             if (authorizedUser == null) {
                 return errorMsg;
             }
@@ -193,16 +210,16 @@ public class Session {
             }
 
             if (!authorizedUser.active) {
-                return "Your profile is deactivated, you can't sign on.";
+                return "Your profile has been deactivated by admin.";
             }
             if (authorizedUser.lockedUntil != null) {
                 if (authorizedUser.lockedUntil.compareTo(Calendar.getInstance().getTime()) > 0) {
-                    return "Your profile is deactivated until " + SystemUtil.dateFormat.format(authorizedUser.lockedUntil);
+                    return "Your profile has need deactivated by admin until " + SystemUtil.dateFormat.format(authorizedUser.lockedUntil);
                 } else {
+                    // unlock on timeout end
                     managerFactory.userManager().createUser(userName, host, authorizedUser).ifPresent(user
                             -> user.setLockedUntil(null)
                     );
-
                 }
             }
         }
