@@ -1756,22 +1756,27 @@ public class VerifyCardDataTest {
                 || checkName.equals("Forest")
                 || checkName.equals("Swamp")
                 || checkName.equals("Plains")
-                || checkName.equals("Mountain")
-                || checkName.equals("Wastes");
+                || checkName.equals("Mountain");
     }
 
     private void checkBasicLands(Card card, MtgJsonCard ref) {
 
         // basic lands must have Rarity.LAND and SuperType.BASIC
         // other cards can't have that stats
-        if (isBasicLandName(card.getName())) {
+        String name = card.getName();
+        if (isBasicLandName(name)) {
             // lands
-            if (card.getRarity() != Rarity.LAND && card.getRarity() != Rarity.SPECIAL) {
+            if (card.getRarity() != Rarity.LAND) {
                 fail(card, "rarity", "basic land must be Rarity.LAND");
             }
 
             if (!card.getSuperType().contains(SuperType.BASIC)) {
                 fail(card, "supertype", "basic land must be SuperType.BASIC");
+            }
+        } else if (name.equals("Wastes")) {
+            // Wastes are SuperType.BASIC but not necessarily Rarity.LAND
+            if (!card.getSuperType().contains(SuperType.BASIC)) {
+                fail(card, "supertype", "Wastes must be SuperType.BASIC");
             }
         } else {
             // non lands
