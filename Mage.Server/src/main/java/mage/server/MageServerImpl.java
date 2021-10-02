@@ -34,8 +34,8 @@ import mage.server.util.SystemUtil;
 import mage.utils.*;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
+import org.unbescape.html.HtmlEscape;
 
 import javax.management.timer.Timer;
 import java.security.SecureRandom;
@@ -489,7 +489,7 @@ public class MageServerImpl implements MageServer {
     public void sendChatMessage(final UUID chatId, final String userName, final String message) throws MageException {
         try {
             callExecutor.execute(
-                    () -> managerFactory.chatManager().broadcast(chatId, userName, StringEscapeUtils.escapeHtml4(message), MessageColor.BLUE, true, null, ChatMessage.MessageType.TALK, null)
+                    () -> managerFactory.chatManager().broadcast(chatId, userName, HtmlEscape.escapeHtml4(message), MessageColor.BLUE, true, null, ChatMessage.MessageType.TALK, null)
             );
         } catch (Exception ex) {
             handleException(ex);

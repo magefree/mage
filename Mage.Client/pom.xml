@@ -14,7 +14,6 @@
     <name>Mage Client</name>
 
     <dependencies>
-
         <dependency>
             <groupId>org.mage</groupId>
             <artifactId>mage</artifactId>
@@ -31,89 +30,105 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.googlecode.jspf</groupId>
-            <artifactId>jspf-core</artifactId>
-            <version>0.9.1</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-counter-plugin</artifactId>
+            <version>0.1</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
-        <dependency>
             <groupId>net.java.truevfs</groupId>
             <artifactId>truevfs-profile-base</artifactId>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.unbescape</groupId>
+            <artifactId>unbescape</artifactId>
+        </dependency>
 
         <dependency>
-            <!-- needs for server connection by jboss -->
+            <!-- inner lib for jboss network implementation -->
             <groupId>net.sf.trove4j</groupId>
             <artifactId>trove4j</artifactId>
             <version>3.0.3</version>
         </dependency>
 
         <dependency>
+            <!-- wtf lib, related to plugins system TODO: unused and can be deleted? -->
+            <groupId>com.googlecode.jspf</groupId>
+            <artifactId>jspf-core</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
+        <dependency>
+            <!-- image scaling for card images -->
+            <!-- TODO: library is dead, must be replaced -->
             <groupId>com.mortennobel</groupId>
             <artifactId>java-image-scaling</artifactId>
             <version>0.8.6</version>
         </dependency>
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
+            <!-- graphic lib to draw GUI with effects -->
+            <!-- TODO: library is dead, must be replaced -->
             <groupId>org.swinglabs</groupId>
             <artifactId>swingx</artifactId>
             <version>1.6.1</version>
         </dependency>
         <dependency>
-            <groupId>org.jetlang</groupId>
-            <artifactId>jetlang</artifactId>
-            <version>0.2.23</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-s3</artifactId>
-            <version>1.11.827</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>forms</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.intellij</groupId>
-            <artifactId>forms_rt</artifactId>
-            <version>7.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mage-counter-plugin</artifactId>
-            <version>0.1</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jdesktop</groupId>
-            <artifactId>beansbinding</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
+            <!-- GUI lib, part of SwingX -->
             <groupId>org.swinglabs</groupId>
             <artifactId>swing-layout</artifactId>
             <version>1.0.3</version>
         </dependency>
         <dependency>
+            <!-- multi-threading lib for symbols/images download -->
+            <groupId>org.jetlang</groupId>
+            <artifactId>jetlang</artifactId>
+            <version>0.2.23</version>
+        </dependency>
+        <dependency>
+            <!-- amazon s3 cloud lib to upload game logs from experimental client -->
+            <!-- TODO: feature must be removed as unused or implemented for all -->
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>1.12.78</version>
+        </dependency>
+
+        <dependency>
+            <!-- GUI lib TODO: unused and can be deleted? -->
+            <groupId>com.jgoodies</groupId>
+            <artifactId>forms</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+        <dependency>
+            <!-- GUI lib TODO: unused and can be deleted? -->
+            <groupId>com.intellij</groupId>
+            <artifactId>forms_rt</artifactId>
+            <version>7.0.3</version>
+        </dependency>
+
+        <dependency>
+            <!-- GUI lib -->
+            <groupId>org.jdesktop</groupId>
+            <artifactId>beansbinding</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+        <dependency>
+            <!-- scraping lib to download and parse symbols/images/svg -->
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.14.2</version>
+            <version>1.14.3</version>
         </dependency>
 
         <!-- music player START -->
@@ -135,6 +150,7 @@
         <!-- music player END -->
 
         <dependency>
+            <!-- GUI lib for balloon popup TODO: unused and can be deleted? -->
             <groupId>net.java.balloontip</groupId>
             <artifactId>balloontip</artifactId>
             <version>1.2.4.1</version>
@@ -153,14 +169,10 @@
         <!-- svg support END -->
 
         <dependency>
+            <!-- time lib for GUI time info -->
             <groupId>org.ocpsoft.prettytime</groupId>
             <artifactId>prettytime</artifactId>
             <version>4.0.6.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.unbescape</groupId>
-            <artifactId>unbescape</artifactId>
-            <version>1.1.6.RELEASE</version>
         </dependency>
     </dependencies>
 
