@@ -120,7 +120,6 @@
         <module>Mage.Server.Console</module>
         <module>Mage.Tests</module>
         <module>Mage.Verify</module>
-        <module>report</modile>
     </modules>
 
     <repositories>
