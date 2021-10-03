@@ -48,6 +48,7 @@ jobs:
           test
           jacoco:report
           jacoco:report-aggregate
+          verify
           coveralls:report
           --no-transfer-progress
           --define repoToken=${{ secrets.GITHUB_TOKEN }}
