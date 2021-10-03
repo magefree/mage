@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.mage</groupId>
     <artifactId>mage-root</artifactId>
     <version>1.4.50</version>
     <packaging>pom</packaging>
     <name>Mage Root</name>
     <description>Mage Root POM</description>
+
     <build>
         <plugins>
             <plugin>
@@ -101,6 +100,7 @@
             </plugins>
         </pluginManagement>
     </build>
+
     <modules>
         <module>Mage</module>
         <module>Mage.Common</module>
@@ -155,16 +155,59 @@
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../${aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
+    <dependencies>
+        <!-- GLOBAL dependencies - used in all xmage modules (no need to add it to child modules) -->
+        <dependency>
+            <!-- logs support (log4j as engine + slf4j as facade) -->
+            <!-- TODO: migrate from log4j to logback code usage (see SLF4J Migrator http://www.slf4j.org/migrator.html) -->
+            <!-- TODO: migrate log4j configs to logback xml (see properties to xml translation http://logback.qos.ch/translator/ -->
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.12</version>
+        </dependency>
+
+        <dependency>
+            <!-- database support - ORM -->
+            <groupId>com.j256.ormlite</groupId>
+            <artifactId>ormlite-jdbc</artifactId>
+            <version>5.6</version>
+        </dependency>
+        <dependency>
+            <!-- database support - H2 db engine (main db) -->
+            <!-- WARNING, do not update db engine (stable: 1.4.197) cause compatibility issues, see https://github.com/h2database/h2database/issues/2078 -->
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.197</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <!-- junit 4 tests -->
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <!-- junit 5 tests -->
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <!-- write asserts in unit tests like a real language -->
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.19.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <dependencyManagement>
-        <!-- write libs from all childs here to control a versions -->
-        <!-- if you want to use it in the child module then copy groupId and artifactId only (without scope and version) -->
+        <!-- OTHER dependencies - you must add it to child modules manually (copy groupId and artifactId without scope and version) -->
+        <!-- write shared libs from all childs here to version control -->
         <dependencies>
-            <dependency>
-                <!-- logs support -->
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>1.2.17</version>
-            </dependency>
             <dependency>
                 <!-- json support -->
                 <groupId>com.google.code.gson</groupId>
@@ -194,28 +237,6 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>3.12.0</version>
-            </dependency>
-
-            <dependency>
-                <!-- junit 4 tests -->
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.13.1</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <!-- junit 5 tests -->
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter</artifactId>
-                <version>5.8.1</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <!-- write asserts in unit tests like a real language -->
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-core</artifactId>
-                <version>3.19.0</version>
-                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
