@@ -44,7 +44,7 @@ jobs:
           CI_NAME: github
         run: >
           mvn
-          clean
+          --define jacoco.skip=false
           jacoco:prepare-agent
           test
           jacoco:report
