@@ -51,5 +51,6 @@ jobs:
           verify
           coveralls:report
           --no-transfer-progress
+          --define jacoco.skip=false
           --define repoToken=${{ secrets.GITHUB_TOKEN }}
           --define pullRequest=${{ github.event.number }}
