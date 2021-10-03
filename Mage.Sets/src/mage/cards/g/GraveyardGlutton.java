@@ -46,7 +46,7 @@ public final class GraveyardGlutton extends CardImpl {
         this.addAbility(ability);
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private GraveyardGlutton(final GraveyardGlutton card) {

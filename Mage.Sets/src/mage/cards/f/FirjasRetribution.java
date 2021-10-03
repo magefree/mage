@@ -75,7 +75,7 @@ public final class FirjasRetribution extends CardImpl {
     }
 }
 
-enum FirjasRetributionPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+enum FirjasRetributionPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
 
     @Override

@@ -58,13 +58,14 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
             if (filter.match(zEvent.getTarget(), game)) {
                 boolean damageDealt = false;
                 for (MageObjectReference mor : zEvent.getTarget().getDealtDamageByThisTurn()) {
-                    if (mor.refersTo(getSourceObject(game), game)) {
+                    if (mor.refersTo(game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD), game)
+                            || (mor.refersTo(getSourceObject(game), game))) {
                         damageDealt = true;
                         break;
                     }
                 }
                 if (damageDealt) {
-                    if(this.setTargetPointer == SetTargetPointer.PERMANENT) {
+                    if (this.setTargetPointer == SetTargetPointer.PERMANENT) {
                         for (Effect effect : getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                         }
@@ -78,6 +79,6 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever a " + filter.getMessage() + " dealt damage by {this} this turn dies, " ;
+        return "Whenever a " + filter.getMessage() + " dealt damage by {this} this turn dies, ";
     }
 }

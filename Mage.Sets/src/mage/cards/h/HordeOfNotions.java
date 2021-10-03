@@ -84,7 +84,7 @@ class HordeOfNotionsEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null && controller.chooseUse(outcome, "Play " + card.getName() + " from your graveyard for free?", source, game)) {
-                controller.playCard(card, game, true, true, new ApprovingObject(source, game));
+                controller.playCard(card, game, true, new ApprovingObject(source, game));
             }
             return true;
         }

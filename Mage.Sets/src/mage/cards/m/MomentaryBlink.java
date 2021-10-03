@@ -26,7 +26,7 @@ public final class MomentaryBlink extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
 
         // Flashback {3}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{U}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{U}")));
     }
 
     private MomentaryBlink(final MomentaryBlink card) {

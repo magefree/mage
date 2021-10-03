@@ -34,7 +34,7 @@ public final class MysticRetrieval extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
         // Flashback {2}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{R}")));
     }
 
     private MysticRetrieval(final MysticRetrieval card) {

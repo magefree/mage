@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,20 +10,15 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TimingRule;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class SnapcasterMage extends CardImpl {
@@ -38,7 +32,7 @@ public final class SnapcasterMage extends CardImpl {
     }
 
     public SnapcasterMage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -84,13 +78,7 @@ class SnapcasterMageEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card != null) {
-            FlashbackAbility ability;
-            if (card.isInstant(game)) {
-                ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
-            }
-            else {
-                ability = new FlashbackAbility(card.getManaCost(), TimingRule.SORCERY);
-            }
+            FlashbackAbility ability = new FlashbackAbility(card, card.getManaCost());
             ability.setSourceId(card.getId());
             ability.setControllerId(card.getOwnerId());
             game.getState().addOtherAbility(card, ability);

@@ -45,4 +45,9 @@ public class HexproofFromMonocoloredAbility extends HexproofBaseAbility {
     public String getRule() {
         return "hexproof from monocolored <i>(This creature can't be the target of monocolored spells or abilities your opponents control.)</i>";
     }
+
+    @Override
+    public String getCardIconHint(Game game) {
+        return "hexproof from monocolored";
+    }
 }

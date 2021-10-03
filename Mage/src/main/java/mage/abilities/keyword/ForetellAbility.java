@@ -24,6 +24,7 @@ import mage.util.CardUtil;
 import mage.watchers.common.ForetoldWatcher;
 
 import java.util.UUID;
+import mage.game.events.GameEvent;
 
 /**
  * @author jeffwadsworth
@@ -119,7 +120,10 @@ public class ForetellAbility extends SpecialAction {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null
                     && card != null) {
+
+                // get main card id
                 UUID mainCardId = card.getMainCard().getId();
+
                 // retrieve the exileId of the foretold card
                 UUID exileId = CardUtil.getExileZoneId(mainCardId.toString() + "foretellAbility", game);
 
@@ -139,6 +143,7 @@ public class ForetellAbility extends SpecialAction {
                 effect.apply(game, source);
                 card.setFaceDown(true, game);
                 game.addEffect(new ForetellAddCostEffect(new MageObjectReference(card, game)), source);
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FORETELL, card.getId(), null, source.getControllerId()));
                 return true;
             }
             return false;

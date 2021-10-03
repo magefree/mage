@@ -68,7 +68,7 @@ class StrengthOfTheTajuruAddCountersTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        int amount = source.getManaCostsToPay().getX() + 1;
+        int amount = source.getManaCostsToPay().getX();
         Counter counter = CounterType.P1P1.createInstance(amount);
         for (UUID uuid : targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(uuid);

@@ -33,7 +33,7 @@ public final class SylvanMight extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Flashback {2}{G}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{G}{G}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{G}{G}")));
     }
 
     private SylvanMight(final SylvanMight card) {

@@ -42,7 +42,7 @@ public final class CroakingCounterpart extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         // Flashback {3}{G}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{3}{G}{U}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{G}{U}")));
     }
 
     private CroakingCounterpart(final CroakingCounterpart card) {

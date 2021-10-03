@@ -33,7 +33,7 @@ public final class Conflagrate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
 
         // Flashback-{R}{R}, Discard X cards.
-        Ability ability = new FlashbackAbility(new ManaCostsImpl("{R}{R}"), TimingRule.SORCERY);
+        Ability ability = new FlashbackAbility(this, new ManaCostsImpl("{R}{R}"));
         ability.addCost(new DiscardXTargetCost(new FilterCard("cards")));
         this.addAbility(ability);
 

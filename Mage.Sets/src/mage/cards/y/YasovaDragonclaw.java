@@ -71,7 +71,7 @@ public final class YasovaDragonclaw extends CardImpl {
     }
 }
 
-class YasovaDragonclawPowerLessThanSourcePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class YasovaDragonclawPowerLessThanSourcePredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

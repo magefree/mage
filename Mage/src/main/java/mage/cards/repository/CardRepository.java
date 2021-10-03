@@ -369,38 +369,44 @@ public enum CardRepository {
         return Collections.emptyList();
     }
 
+    public CardInfo findCard(String name) {
+        return findCard(name, false);
+    }
+
     /**
      * @param name
+     * @param returnAnySet return card from first available set (WARNING, it's a performance optimization for tests,
+     *                     don't use it in real games - users must get random set)
      * @return random card with the provided name or null if none is found
      */
-    public CardInfo findCard(String name) {
-        List<CardInfo> cards = findCards(name);
+    public CardInfo findCard(String name, boolean returnAnySet) {
+        List<CardInfo> cards = returnAnySet ? findCards(name, 1) : findCards(name);
         if (!cards.isEmpty()) {
             return cards.get(RandomUtil.nextInt(cards.size()));
         }
         return null;
     }
 
-    public CardInfo findPreferedCoreExpansionCard(String name, boolean caseInsensitive) {
-        return findPreferedCoreExpansionCard(name, caseInsensitive, null);
+    public CardInfo findPreferredCoreExpansionCard(String name, boolean caseInsensitive) {
+        return findPreferredCoreExpansionCard(name, caseInsensitive, null);
     }
 
-    public CardInfo findPreferedCoreExpansionCard(String name, boolean caseInsensitive, String preferedSetCode) {
+    public CardInfo findPreferredCoreExpansionCard(String name, boolean caseInsensitive, String preferredSetCode) {
         List<CardInfo> cards;
         if (caseInsensitive) {
             cards = findCardsCaseInsensitive(name);
         } else {
             cards = findCards(name);
         }
-        return findPreferedOrLatestCard(cards, preferedSetCode);
+        return findPreferredOrLatestCard(cards, preferredSetCode);
     }
 
-    public CardInfo findPreferedCoreExpansionCardByClassName(String canonicalClassName, String preferedSetCode) {
+    public CardInfo findPreferredCoreExpansionCardByClassName(String canonicalClassName, String preferredSetCode) {
         List<CardInfo> cards = findCardsByClass(canonicalClassName);
-        return findPreferedOrLatestCard(cards, preferedSetCode);
+        return findPreferredOrLatestCard(cards, preferredSetCode);
     }
 
-    private CardInfo findPreferedOrLatestCard(List<CardInfo> cards, String preferedSetCode) {
+    private CardInfo findPreferredOrLatestCard(List<CardInfo> cards, String preferredSetCode) {
         if (!cards.isEmpty()) {
             Date lastReleaseDate = null;
             Date lastExpansionDate = null;
@@ -409,7 +415,7 @@ public enum CardRepository {
                 ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
                 if (set != null) {
 
-                    if ((preferedSetCode != null) && (preferedSetCode.equals(set.getCode()))) {
+                    if ((preferredSetCode != null) && (preferredSetCode.equals(set.getCode()))) {
                         return cardinfo;
                     }
 
@@ -443,13 +449,27 @@ public enum CardRepository {
                 }
             }
         }
-        return findPreferedCoreExpansionCard(name, true);
+        return findPreferredCoreExpansionCard(name, true);
     }
 
     public List<CardInfo> findCards(String name) {
+        return findCards(name, 0);
+    }
+
+    /**
+     * Find card's reprints from all sets
+     *
+     * @param name
+     * @param limitByMaxAmount return max amount of different cards (if 0 then return card from all sets)
+     * @return
+     */
+    public List<CardInfo> findCards(String name, long limitByMaxAmount) {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
             queryBuilder.where().eq("name", new SelectArg(name));
+            if (limitByMaxAmount > 0) {
+                queryBuilder.limit(limitByMaxAmount);
+            }
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
         }

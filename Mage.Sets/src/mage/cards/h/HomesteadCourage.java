@@ -31,7 +31,7 @@ public final class HomesteadCourage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Flashback {W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{W}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{W}")));
     }
 
     private HomesteadCourage(final HomesteadCourage card) {

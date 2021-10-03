@@ -128,7 +128,7 @@ public class ChatManagerImpl implements ChatManager {
                     Matcher matchPattern = cardNamePattern.matcher(message);
                     while (matchPattern.find()) {
                         String cardName = matchPattern.group(1);
-                        CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, true);
+                        CardInfo cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(cardName, true);
                         if (cardInfo != null) {
                             String colour = "silver";
                             if (cardInfo.getCard().getColor(null).isMulticolored()) {
@@ -270,7 +270,7 @@ public class ChatManagerImpl implements ChatManager {
             Matcher matchPattern = getCardTextPattern.matcher(message.toLowerCase(Locale.ENGLISH));
             if (matchPattern.find()) {
                 String cardName = matchPattern.group(1);
-                CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, true);
+                CardInfo cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(cardName, true);
                 if (cardInfo != null) {
                     cardInfo.getRules();
                     message = "<font color=orange>" + cardInfo.getName() + "</font>: Cost:" + cardInfo.getManaCosts(CardInfo.ManaCostSide.ALL).toString() + ",  Types:" + cardInfo.getTypes().toString() + ", ";

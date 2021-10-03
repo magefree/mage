@@ -29,7 +29,7 @@ public final class GalvanicIteration extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new GalvanicIterationAbility()));
 
         // Flashback {1}{U}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{1}{U}{R}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{U}{R}")));
     }
 
     private GalvanicIteration(final GalvanicIteration card) {

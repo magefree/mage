@@ -26,7 +26,7 @@ public final class SacredFire extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Flashback {4}{R}{W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{4}{R}{W}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{R}{W}")));
     }
 
     private SacredFire(final SacredFire card) {

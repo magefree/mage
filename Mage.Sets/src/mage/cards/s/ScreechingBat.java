@@ -1,15 +1,13 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.condition.common.TransformedCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
@@ -20,7 +18,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -29,7 +26,7 @@ import mage.game.permanent.Permanent;
 public final class ScreechingBat extends CardImpl {
 
     public ScreechingBat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.BAT);
 
         this.transformable = true;
@@ -42,7 +39,7 @@ public final class ScreechingBat extends CardImpl {
 
         // At the beginning of your upkeep, you may pay {2}{B}{B}. If you do, transform Screeching Bat.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalTriggeredAbility(new ScreechingBatBeginningOfUpkeepTriggeredAbility(), new TransformedCondition(true), ""));
+        this.addAbility(new ScreechingBatBeginningOfUpkeepTriggeredAbility());
     }
 
     private ScreechingBat(final ScreechingBat card) {
@@ -108,9 +105,7 @@ class ScreechingBatTransformSourceEffect extends OneShotEffect {
         if (permanent != null) {
             Cost cost = new ManaCostsImpl("{2}{B}{B}");
             if (cost.pay(source, game, source, permanent.getControllerId(), false, null)) {
-                if (permanent.isTransformable()) {
-                    permanent.setTransformed(!permanent.isTransformed());
-                }
+                new TransformSourceEffect(true).apply(game, source);
             }
             return true;
         }

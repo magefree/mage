@@ -31,7 +31,7 @@ public final class HungryForMore extends CardImpl {
         this.getSpellAbility().addEffect(new HungryForMoreEffect());
 
         // Flashback {1}{B}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{1}{B}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{B}{R}")));
     }
 
     private HungryForMore(final HungryForMore card) {

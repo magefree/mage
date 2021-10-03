@@ -115,7 +115,7 @@ class WordOfCommandEffect extends OneShotEffect {
                 boolean canPlay = checkPlayability(card, targetPlayer, game, source);
                 while (canPlay
                         && targetPlayer.canRespond()
-                        && !targetPlayer.playCard(card, game, false, true, new ApprovingObject(source, game))) {
+                        && !targetPlayer.playCard(card, game, false, new ApprovingObject(source, game))) {
                     SpellAbility spellAbility = card.getSpellAbility();
                     if (spellAbility != null) {
                         spellAbility.getManaCostsToPay().clear();

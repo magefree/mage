@@ -56,7 +56,7 @@ public final class JeweledTorque extends CardImpl {
     }
 }
 
-enum JeweledTorquePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum JeweledTorquePredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override

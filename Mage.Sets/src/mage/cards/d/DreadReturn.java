@@ -30,7 +30,7 @@ public final class DreadReturn extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
         // Flashback-Sacrifice three creatures.
-        this.addAbility(new FlashbackAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, filter)), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new SacrificeTargetCost(new TargetControlledPermanent(3, filter))));
     }
 
     private DreadReturn(final DreadReturn card) {

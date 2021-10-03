@@ -114,7 +114,7 @@ class DiseasedVerminEffect extends OneShotEffect {
     }
 }
 
-class DiseasedVerminPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+class DiseasedVerminPredicate implements ObjectSourcePlayerPredicate<Player> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {

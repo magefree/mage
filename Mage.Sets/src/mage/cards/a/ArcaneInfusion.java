@@ -32,7 +32,7 @@ public final class ArcaneInfusion extends CardImpl {
                 "Put the rest on the bottom of your library in a random order."));
 
         // Flashback {3}{U}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{3}{U}{R}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{U}{R}")));
     }
 
     private ArcaneInfusion(final ArcaneInfusion card) {

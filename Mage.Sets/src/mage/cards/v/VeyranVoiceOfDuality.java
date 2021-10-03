@@ -12,7 +12,9 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -71,30 +73,23 @@ class VeyranVoiceOfDualityEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
-        if (!source.isControlledBy(event.getPlayerId())) {
-            return false;
-        }
-        GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
-        if (sourceEvent == null) {
-            return false;
-        }
+        GameEvent sourceEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
         if (sourceEvent.getType() != GameEvent.EventType.COPIED_STACKOBJECT
                 && sourceEvent.getType() != GameEvent.EventType.SPELL_CAST) {
             return false;
         }
-        // Only for entering artifacts or creatures
         Spell spell = game.getSpell(sourceEvent.getTargetId());
-        if (spell == null || !spell.isInstantOrSorcery(game)) {
-            return false;
-        }
-        // Only for triggers of permanents
-        return game.getPermanent(numberOfTriggersEvent.getSourceId()) != null;
+        Permanent permanent = game.getPermanent(sourceEvent.getSourceId());
+        return spell != null
+                && permanent != null
+                && spell.isInstantOrSorcery(game)
+                && spell.isControlledBy(source.getControllerId())
+                && permanent.isControlledBy(source.getControllerId());
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
+        event.setAmount(CardUtil.overflowInc(event.getAmount(), 1));
         return false;
     }
 }

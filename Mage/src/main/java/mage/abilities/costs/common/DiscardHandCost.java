@@ -44,6 +44,6 @@ public class DiscardHandCost extends CostImpl {
 
     @Override
     public String getText() {
-        return "Discard your hand";
+        return "discard your hand";
     }
 }

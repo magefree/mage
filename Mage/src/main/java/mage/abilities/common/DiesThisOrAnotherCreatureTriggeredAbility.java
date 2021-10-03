@@ -4,7 +4,8 @@ import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -14,14 +15,14 @@ import mage.game.events.ZoneChangeEvent;
  */
 public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected FilterCreaturePermanent filter;
+    protected FilterPermanent filter;
     private boolean applyFilterOnSource = false;
 
     public DiesThisOrAnotherCreatureTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, new FilterCreaturePermanent());
+        this(effect, optional, StaticFilters.FILTER_PERMANENT_CREATURE);
     }
 
-    public DiesThisOrAnotherCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
+    public DiesThisOrAnotherCreatureTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter) {
         super(Zone.ALL, effect, optional); // Needs "ALL" if the source itself should trigger or multiple (incl. source go to grave)
         this.filter = filter;
     }
@@ -63,7 +64,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
         }
         return false;
     }
-    
+
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
@@ -71,6 +72,6 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever {this} or another " + filter.getMessage() + " dies, " ;
+        return "Whenever {this} or another " + filter.getMessage() + " dies, ";
     }
 }

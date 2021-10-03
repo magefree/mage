@@ -33,7 +33,7 @@ public final class TrackersInstincts extends CardImpl {
         // Reveal the top four cards of your library. Put a creature card from among them into your hand and the rest into your graveyard.
         this.getSpellAbility().addEffect(new TrackersInstinctsEffect());
         // Flashback {2}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{U}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{U}")));
     }
 
     private TrackersInstincts(final TrackersInstincts card) {

@@ -91,8 +91,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         if (this.isEmpty()) {
             return null;
         }
-        UUID[] cards = this.toArray(new UUID[this.size()]);
-        MageObject object = game.getObject(cards[RandomUtil.nextInt(cards.length)]); // neccessary if permanent tokens are in the collection
+        MageObject object = game.getObject(RandomUtil.randomFromCollection(this)); // neccessary if permanent tokens are in the collection
         if (object instanceof Card) {
             return (Card) object;
         }

@@ -50,6 +50,7 @@ public enum CounterType {
     ECHO("echo"),
     EGG("egg"),
     ELIXIR("elixir"),
+    EMBER("ember"),
     ENERGY("energy"),
     ENLIGHTENED("enlightened"),
     EON("eon"),

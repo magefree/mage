@@ -351,6 +351,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
     }
 
     protected int simulatePriority(SimulationNode node, Game game, int alpha, int beta) {
+        // NOT USED in real AI, see ComputerPlayer6
         if (Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.debug(indent(node.depth) + "interrupted");

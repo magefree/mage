@@ -4,7 +4,9 @@ package mage.constants;
  * Created by IGOUDT on 5-3-2017.
  */
 public enum ComparisonType {
-    MORE_THAN(">", "more", "than"), FEWER_THAN("<", "fewer", "than"), EQUAL_TO("==", "equal", "to");
+    FEWER_THAN("<", "fewer", "than"),
+    EQUAL_TO("==", "equal", "to"),
+    MORE_THAN(">", "more", "than");
 
     String operator;
     String text1;

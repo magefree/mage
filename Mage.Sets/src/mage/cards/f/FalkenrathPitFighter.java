@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class FalkenrathPitFighter extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.VAMPIRE);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.VAMPIRE, "Vampire");
 
     public FalkenrathPitFighter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

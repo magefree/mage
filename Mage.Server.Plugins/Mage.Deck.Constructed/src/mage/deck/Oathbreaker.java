@@ -25,7 +25,6 @@ public class Oathbreaker extends Vintage {
         setName("Oathbreaker");
 
         // banned = vintage + oathbreaker's list: https://oathbreakermtg.org/banned-list/
-        // last updated 4/24/20 - Dark Ritual banned
         banned.add("Ad Nauseam");
         banned.add("Ancestral Recall");
         banned.add("Balance");
@@ -77,7 +76,6 @@ public class Oathbreaker extends Vintage {
         banned.add("Tooth and Nail");
         banned.add("Trade Secrets");
         banned.add("Upheaval");
-        banned.add("Worldfire");
         banned.add("Yawgmoth's Bargain");
     }
 

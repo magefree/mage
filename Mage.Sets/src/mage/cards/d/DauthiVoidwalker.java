@@ -22,6 +22,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -84,17 +85,12 @@ class DauthiVoidwalkerReplacementEffect extends ReplacementEffectImpl {
         if (card == null) {
             card = game.getCard(event.getTargetId());
         }
-        if (controller == null
-                || card == null) {
+
+        if (controller == null || card == null) {
             return false;
         }
-        controller.moveCards(card, Zone.EXILED, source, game);
-        // okay, not sure why this needs to be done to work correctly with creature permanents
-        Card cardFromObject = (Card) game.getObject(card.getId());
-        if (cardFromObject != null) {
-            return cardFromObject.addCounters(CounterType.VOID.createInstance(), source.getControllerId(), source, game);
-        }
-        return false;
+        CardUtil.moveCardWithCounter(game, source, controller, card, Zone.EXILED, CounterType.VOID.createInstance());
+        return true;
     }
 
     @Override
