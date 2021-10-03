@@ -1,6 +1,7 @@
 # faster builds
 git:
   depth: 3
+  quiet: true
   submodules: false
 sudo: false
 dist: trusty
@@ -10,5 +11,25 @@ before_install:
 cache:
   directories:
     - $HOME/.m2
+install: >
+  mvn
+  install
+  --define jacoco.skip=false
+  --define maven.javadoc.skip=true
+  --define skipTests=true
+  --batch-mode
+  --show-version
+script: >
+  mvn
+  jacoco:prepare-agent
+  test
+  jacoco:report
+  jacoco:report-aggregate
+  verify
+  coveralls:report
+  --no-transfer-progress
+  --define jacoco.skip=false
+  --define repoToken=${{ secrets.GITHUB_TOKEN }}
+  --define pullRequest=${{ github.event.number }}
 after_success:
   - mvn jacoco:prepare-agent test jacoco:report jacoco:report-aggregate coveralls:report
