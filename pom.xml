@@ -83,6 +83,14 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- code coverage tracking via coveralls -->
+            <!-- https://github.com/trautonen/coveralls-maven-plugin -->
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.3.0</version>
+            </plugin>
         </plugins>
 
         <pluginManagement>

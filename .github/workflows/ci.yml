@@ -31,4 +31,18 @@ jobs:
       # https://docs.travis-ci.com/user/languages/java/#maven-default-script-command
       # tests are interdependent and require a specific order
       # running in parallel causes some tests to fail
-      - run: mvn test -B # -T 1C
+      # - run: mvn test -B # -T 1C
+
+      - env:
+          CI_NAME: github
+        run: >
+          mvn
+          clean
+          jacoco:prepare-agent
+          test
+          jacoco:report
+          jacoco:report-aggregate
+          coveralls:report
+          --no-transfer-progress
+          --define repoToken=${{ secrets.GITHUB_TOKEN }}
+          --define pullRequest=${{ github.event.number }}
