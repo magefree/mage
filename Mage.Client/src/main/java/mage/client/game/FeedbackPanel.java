@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Executors;
@@ -38,6 +39,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private MageDialog connectedDialog;
     private ChatPanelBasic connectedChatPanel;
     private int lastMessageId;
+    private Map<String, Serializable> lastOptions = new HashMap<>();
 
     private static final ScheduledExecutorService WORKER = Executors.newSingleThreadScheduledExecutor();
 
@@ -63,8 +65,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private void setGUISize() {
     }
 
-    public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options,
-                            int messageId, boolean gameNeedUserFeedback, TurnPhase gameTurnPhase) {
+    public void prepareFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options,
+                                int messageId, boolean gameNeedUserFeedback, TurnPhase gameTurnPhase) {
         synchronized (this) {
             if (messageId < this.lastMessageId) {
                 // if too many warning messages here then look at GAME_REDRAW_GUI event logic
@@ -72,13 +74,16 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 return;
             }
             this.lastMessageId = messageId;
+            this.lastOptions = options;
+            this.mode = mode;
         }
+
         this.helper.setBasicMessage(message);
         this.helper.setOriginalId(null); // reference to the feedback causing ability
         String lblText = addAdditionalText(message, options);
         this.helper.setTextArea(lblText);
 
-        this.mode = mode;
+
         switch (this.mode) {
             case INFORM:
                 setButtonState("", "", mode);
@@ -113,7 +118,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         }
 
         requestFocusIfPossible();
-        handleOptions(options);
+        updateOptions(options);
 
         this.revalidate();
         this.repaint();
@@ -167,29 +172,35 @@ public class FeedbackPanel extends javax.swing.JPanel {
         WORKER.schedule(task, 8, TimeUnit.SECONDS);
     }
 
-    private void handleOptions(Map<String, Serializable> options) {
-        // clear already opened dialog (second request)
-        if (connectedDialog != null) {
-            connectedDialog.removeDialog();
-            connectedDialog = null;
-        }
+    public void updateOptions(Map<String, Serializable> options) {
+        this.lastOptions = options;
 
-        if (options != null) {
-            if (options.containsKey("UI.left.btn.text")) {
-                String text = (String) options.get("UI.left.btn.text");
+        if (this.lastOptions != null) {
+            if (this.lastOptions.containsKey("UI.left.btn.text")) {
+                String text = (String) this.lastOptions.get("UI.left.btn.text");
                 this.btnLeft.setText(text);
                 this.helper.setLeft(text, !text.isEmpty());
             }
-            if (options.containsKey("UI.right.btn.text")) {
-                String text = (String) options.get("UI.right.btn.text");
+            if (this.lastOptions.containsKey("UI.right.btn.text")) {
+                String text = (String) this.lastOptions.get("UI.right.btn.text");
                 this.btnRight.setText(text);
                 this.helper.setRight(text, !text.isEmpty());
             }
-            if (options.containsKey("dialog")) {
-                connectedDialog = (MageDialog) options.get("dialog");
-            }
-
+            updateConnectedDialog((MageDialog) this.lastOptions.getOrDefault("dialog", null));
             this.helper.autoSizeButtonsAndFeedbackState();
+        } else {
+            updateConnectedDialog(null);
+        }
+    }
+
+    private void updateConnectedDialog(MageDialog newDialog) {
+        if (this.connectedDialog != null && this.connectedDialog != newDialog) {
+            // remove old
+            this.connectedDialog.removeDialog();
+        }
+        this.connectedDialog = newDialog;
+        if (this.connectedDialog != null) {
+            this.connectedDialog.setVisible(true);
         }
     }
 
@@ -244,10 +255,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
-        if (connectedDialog != null) {
-            connectedDialog.removeDialog();
-            connectedDialog = null;
-        }
+        updateConnectedDialog(null);
         if (mode == FeedbackMode.SELECT && (evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
             SessionHandler.sendPlayerInteger(gameId, 0);
         } else if (mode == FeedbackMode.END) {

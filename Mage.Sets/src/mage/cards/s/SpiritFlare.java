@@ -45,7 +45,7 @@ public final class SpiritFlare extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter2));
 
         // Flashback-{1}{W}, Pay 3 life.
-        FlashbackAbility ability = new FlashbackAbility(new ManaCostsImpl("{1}{W}"), TimingRule.INSTANT);
+        FlashbackAbility ability = new FlashbackAbility(this, new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
     }

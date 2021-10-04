@@ -70,7 +70,7 @@ public final class ThunderkinAwakener extends CardImpl {
     }
 }
 
-enum ThunderkinAwakenerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+enum ThunderkinAwakenerPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override

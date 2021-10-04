@@ -22,7 +22,7 @@ public class AusHighlander extends Constructed {
         pointMap.put("Black Lotus", 4);
         pointMap.put("Time Vault", 4);
         pointMap.put("Demonic Tutor", 3);
-        pointMap.put("Imperial Seal", 3);
+        pointMap.put("Mana Crypt", 3);
         pointMap.put("Mox Emerald", 3);
         pointMap.put("Mox Jet", 3);
         pointMap.put("Mox Pearl", 3);
@@ -30,11 +30,12 @@ public class AusHighlander extends Constructed {
         pointMap.put("Mox Sapphire", 3);
         pointMap.put("Sol Ring", 3);
         pointMap.put("Thassa's Oracle", 3);
+        pointMap.put("Underworld Breach", 3);
         pointMap.put("Vampiric Tutor", 3);
         pointMap.put("Channel", 2);
         pointMap.put("Dig Through Time", 2);
         pointMap.put("Flash", 2);
-        pointMap.put("Mana Crypt", 2);
+        pointMap.put("Imperial Seal", 2);
         pointMap.put("Mind Twist", 2);
         pointMap.put("Mystical Tutor", 2);
         pointMap.put("Oko, Thief of Crowns", 2);
@@ -46,11 +47,12 @@ public class AusHighlander extends Constructed {
         pointMap.put("Balance", 1);
         pointMap.put("Birthing Pod", 1);
         pointMap.put("Crop Rotation", 1);
-        pointMap.put("Dark Petition", 1);
+        pointMap.put("Deathrite Shaman", 1);
         pointMap.put("Doomsday", 1);
         pointMap.put("Enlightened Tutor", 1);
         pointMap.put("Fastbond", 1);
         pointMap.put("Force of Will", 1);
+        pointMap.put("Gifts Ungiven", 1);
         pointMap.put("Green Sun's Zenith", 1);
         pointMap.put("Hermit Druid", 1);
         pointMap.put("Intuition", 1);
@@ -77,7 +79,7 @@ public class AusHighlander extends Constructed {
         pointMap.put("Timetwister", 1);
         pointMap.put("Tolarian Academy", 1);
         pointMap.put("Umezawa's Jitte", 1);
-        pointMap.put("Underworld Breach", 1);
+        pointMap.put("Uro, Titan of Nature's Wrath", 1);
         pointMap.put("Wasteland", 1);
         pointMap.put("Wishclaw Talisman", 1);
         pointMap.put("Wrenn and Six", 1);

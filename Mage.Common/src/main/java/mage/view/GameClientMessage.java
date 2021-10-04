@@ -24,15 +24,13 @@ public class GameClientMessage implements Serializable {
     @Expose
     private GameView gameView;
     @Expose
-    private CardsView cardsView;
+    private CardsView cardsView1;
     @Expose
     private CardsView cardsView2;
     @Expose
     private String message;
     @Expose
     private boolean flag;
-    @Expose
-    private String[] strings;
     @Expose
     private Set<UUID> targets;
     @Expose
@@ -46,64 +44,53 @@ public class GameClientMessage implements Serializable {
     @Expose
     private List<String> messages;
 
-    public GameClientMessage(GameView gameView) {
+    public GameClientMessage(GameView gameView, Map<String, Serializable> options) {
         this.gameView = gameView;
-    }
-
-    public GameClientMessage(GameView gameView, String message) {
-        this.gameView = gameView;
-        this.message = message;
-    }
-
-    public GameClientMessage(GameView gameView, String message, Map<String, Serializable> options) {
-        this.gameView = gameView;
-        this.message = message;
         this.options = options;
     }
 
-    private GameClientMessage(GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required) {
+    public GameClientMessage(GameView gameView, Map<String, Serializable> options, String message) {
         this.gameView = gameView;
-        this.message = question;
-        this.cardsView = cardView;
+        this.options = options;
+        this.message = message;
+    }
+
+    public GameClientMessage(GameView gameView, Map<String, Serializable> options, String message, CardsView cardsView1, Set<UUID> targets, boolean required) {
+        this.gameView = gameView;
+        this.options = options;
+        this.message = message;
+        this.cardsView1 = cardsView1;
         this.targets = targets;
         this.flag = required;
     }
 
-    public GameClientMessage(GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
-        this(gameView, question, cardView, targets, required);
+    public GameClientMessage(GameView gameView, Map<String, Serializable> options, String message, int min, int max) {
+        this.gameView = gameView;
         this.options = options;
-    }
-
-    public GameClientMessage(String[] choices, String message) {
-        this.strings = choices;
-        this.message = message;
-    }
-
-    public GameClientMessage(String message, int min, int max) {
         this.message = message;
         this.min = min;
         this.max = max;
     }
 
-    public GameClientMessage(String message, CardsView pile1, CardsView pile2) {
+    public GameClientMessage(GameView gameView, Map<String, Serializable> options, String message, CardsView pile1, CardsView pile2) {
+        this.gameView = gameView;
+        this.options = options;
         this.message = message;
-        this.cardsView = pile1;
+        this.cardsView1 = pile1;
         this.cardsView2 = pile2;
     }
 
-    public GameClientMessage(CardsView cardView, String name) {
-        this.cardsView = cardView;
-        this.message = name;
-    }
-
-    public GameClientMessage(List<String> messages, int min, int max, Map<String, Serializable> options) {
+    public GameClientMessage(GameView gameView, Map<String, Serializable> options, List<String> messages, int min, int max) {
+        this.gameView = gameView;
+        this.options = options;
         this.messages = messages;
         this.min = min;
         this.max = max;
-        this.options = options;
     }
 
-    public GameClientMessage(Choice choice) {
+    public GameClientMessage(GameView gameView, Map<String, Serializable> options, Choice choice) {
+        this.gameView = gameView;
+        this.options = options;
         this.choice = choice;
     }
 
@@ -111,8 +98,12 @@ public class GameClientMessage implements Serializable {
         return gameView;
     }
 
-    public CardsView getCardsView() {
-        return cardsView;
+    public CardsView getCardsView1() {
+        return cardsView1;
+    }
+
+    public CardsView getCardsView2() {
+        return cardsView2;
     }
 
     public String getMessage() {
@@ -123,20 +114,8 @@ public class GameClientMessage implements Serializable {
         return flag;
     }
 
-    public String[] getStrings() {
-        return strings;
-    }
-
     public Set<UUID> getTargets() {
         return targets;
-    }
-
-    public CardsView getPile1() {
-        return cardsView;
-    }
-
-    public CardsView getPile2() {
-        return cardsView2;
     }
 
     public int getMin() {

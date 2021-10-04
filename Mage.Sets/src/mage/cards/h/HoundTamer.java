@@ -44,7 +44,7 @@ public final class HoundTamer extends CardImpl {
 
         // Daybound
         this.addAbility(new TransformAbility());
-        this.addAbility(DayboundAbility.getInstance());
+        this.addAbility(new DayboundAbility());
     }
 
     private HoundTamer(final HoundTamer card) {

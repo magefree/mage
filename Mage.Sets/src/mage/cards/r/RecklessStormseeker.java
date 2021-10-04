@@ -47,7 +47,7 @@ public final class RecklessStormseeker extends CardImpl {
 
         // Daybound
         this.addAbility(new TransformAbility());
-        this.addAbility(DayboundAbility.getInstance());
+        this.addAbility(new DayboundAbility());
     }
 
     private RecklessStormseeker(final RecklessStormseeker card) {

@@ -50,7 +50,7 @@ public final class DireStrainRampage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Flashback {3}{R}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{3}{R}{G}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{R}{G}")));
     }
 
     private DireStrainRampage(final DireStrainRampage card) {

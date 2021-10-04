@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import com.google.common.collect.Sets;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -17,6 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -66,7 +67,7 @@ public final class AkromaVisionOfIxidor extends CardImpl {
 
 class AkromaVisionOfIxidorEffect extends OneShotEffect {
 
-    private static final Set<Class<? extends Ability>> classes = Sets.newHashSet(
+    private static final Set<Class<? extends Ability>> classes = new HashSet<>(Arrays.asList(
             FlyingAbility.class,
             FirstStrikeAbility.class,
             DoubleStrikeAbility.class,
@@ -81,7 +82,7 @@ class AkromaVisionOfIxidorEffect extends OneShotEffect {
             TrampleAbility.class,
             VigilanceAbility.class,
             PartnerAbility.class
-    );
+    ));
 
     AkromaVisionOfIxidorEffect() {
         super(Outcome.Benefit);

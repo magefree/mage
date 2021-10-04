@@ -67,7 +67,9 @@ class TaintedPactEffect extends OneShotEffect {
                 && controller.getLibrary().hasCards()) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
+                // the card move is sequential, not all at once.
                 controller.moveCards(card, Zone.EXILED, source, game);
+                game.getState().processAction(game);  // Laelia, the Blade Reforged
                 // Checks if there was already exiled a card with the same name
                 if (names.contains(card.getName())) {
                     break;

@@ -29,7 +29,7 @@ public final class IncreasingDevotion extends CardImpl {
         this.getSpellAbility().addEffect(new IncreasingDevotionEffect());
 
         // Flashback {7}{W}{W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{W}{W}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{7}{W}{W}")));
     }
 
     private IncreasingDevotion(final IncreasingDevotion card) {

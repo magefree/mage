@@ -46,20 +46,14 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         switch (targetController) {
             case YOU:
                 boolean yours = event.getPlayerId().equals(this.controllerId);
-                if (yours) {
-                    if (getTargets().isEmpty()) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
-                    }
+                if (yours && getTargets().isEmpty()) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
                 return yours;
             case OPPONENT:
                 if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
                     if (getTargets().isEmpty()) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
+                        this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
                     return true;
                 }
@@ -68,24 +62,31 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
             case EACH_PLAYER:
             case NEXT:
                 if (getTargets().isEmpty()) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                    }
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
                 return true;
             case CONTROLLER_ATTACHED_TO:
                 Permanent attachment = game.getPermanent(sourceId);
-                if (attachment != null && attachment.getAttachedTo() != null) {
-                    Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
-                    if (attachedTo != null && attachedTo.isControlledBy(event.getPlayerId())) {
-                        if (getTargets().isEmpty()) {
-                            for (Effect effect : this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                            }
-                        }
-                        return true;
-                    }
+                if (attachment == null || attachment.getAttachedTo() == null) {
+                    break;
                 }
+                Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
+                if (attachedTo == null || !attachedTo.isControlledBy(event.getPlayerId())) {
+                    break;
+                }
+                if (getTargets().isEmpty()) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
+                return true;
+            case ENCHANTED:
+                Permanent permanent = getSourcePermanentIfItStillExists(game);
+                if (permanent == null || !game.isActivePlayer(permanent.getAttachedTo())) {
+                    break;
+                }
+                if (getTargets().isEmpty()) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
+                return true;
         }
         return false;
     }
@@ -113,6 +114,8 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
                 return "At the beginning of each player's end step, " + generateConditionString();
             case CONTROLLER_ATTACHED_TO:
                 return "At the beginning of the end step of enchanted permanent's controller, " + generateConditionString();
+            case ENCHANTED:
+                return "At the beginning of enchanted player's draw step, " + generateConditionString();
         }
         return "";
     }

@@ -110,8 +110,7 @@ class BrilliantUltimatumEffect extends OneShotEffect {
                 TargetCard targetExiledCard = new TargetCard(Zone.EXILED, new FilterCard());
                 if (controller.chooseTarget(Outcome.PlayForFree, selectedPile, targetExiledCard, source, game)) {
                     Card card = selectedPile.get(targetExiledCard.getFirstTarget(), game);
-                    controller.canPlayLand();
-                    if (controller.playCard(card, game, true, true, new ApprovingObject(source, game))) {
+                    if (controller.playCard(card, game, true, new ApprovingObject(source, game))) {
                         selectedPileCards.remove(card);
                         selectedPile.remove(card);
                     }

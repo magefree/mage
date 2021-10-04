@@ -540,6 +540,58 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return setTargetPlayer(outcome, target, source, sourceId, abilityControllerId, randomOpponentId, game, required);
         }
 
+        // Angel of Serenity trigger
+        if (target.getOriginalTarget() instanceof TargetCardInGraveyardOrBattlefield) {
+            Cards cards = new CardsImpl(possibleTargets);
+            List<Card> possibleCards = new ArrayList<>(cards.getCards(game));
+            for (Card card : possibleCards) {
+                // check permanents first; they have more intrinsic worth
+                if (card instanceof Permanent) {
+                    Permanent p = ((Permanent) card);
+                    if (outcome.isGood()
+                            && p.isControlledBy(abilityControllerId)) {
+                        if (target.canTarget(abilityControllerId, p.getId(), source, game)) {
+                            if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
+                                break;
+                            }
+                            target.addTarget(p.getId(), source, game);
+                        }
+                    }
+                    if (!outcome.isGood()
+                            && !p.isControlledBy(abilityControllerId)) {
+                        if (target.canTarget(abilityControllerId, p.getId(), source, game)) {
+                            if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
+                                break;
+                            }
+                            target.addTarget(p.getId(), source, game);
+                        }
+                    }
+                }
+                // check the graveyards last
+                if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
+                    if (outcome.isGood()
+                            && card.isOwnedBy(abilityControllerId)) {
+                        if (target.canTarget(abilityControllerId, card.getId(), source, game)) {
+                            if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
+                                break;
+                            }
+                            target.addTarget(card.getId(), source, game);
+                        }
+                    }
+                    if (!outcome.isGood()
+                            && !card.isOwnedBy(abilityControllerId)) {
+                        if (target.canTarget(abilityControllerId, card.getId(), source, game)) {
+                            if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
+                                break;
+                            }
+                            target.addTarget(card.getId(), source, game);
+                        }
+                    }
+                }
+            }
+            return target.isChosen();
+        }
+
         if (target.getOriginalTarget() instanceof TargetDiscard
                 || target.getOriginalTarget() instanceof TargetCardInHand) {
             if (outcome.isGood()) {
@@ -2841,27 +2893,38 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     /**
-     * Sets a possible target player
+     * Sets a possible target player. Depends on bad/good outcome
+     *
+     * @param source null on choose and non-null on chooseTarget
      */
     private boolean setTargetPlayer(Outcome outcome, Target target, Ability source, UUID sourceId, UUID abilityControllerId, UUID randomOpponentId, Game game, boolean required) {
+        Outcome affectedOutcome;
+        if (abilityControllerId == this.playerId) {
+            // selects for itself
+            affectedOutcome = outcome;
+        } else {
+            // selects for another player
+            affectedOutcome = Outcome.inverse(outcome);
+        }
+
         if (target.getOriginalTarget() instanceof TargetOpponent) {
             if (source == null) {
                 if (target.canTarget(randomOpponentId, game)) {
                     target.add(randomOpponentId, game);
                     return true;
                 }
-            } else if (target.canTarget(randomOpponentId, source, game)) {
-                target.add(randomOpponentId, game);
+            } else if (target.canTarget(abilityControllerId, randomOpponentId, source, game)) {
+                target.addTarget(randomOpponentId, source, game);
                 return true;
             }
-            for (UUID currentId : game.getOpponents(abilityControllerId)) {
+            for (UUID possibleOpponentId : game.getOpponents(abilityControllerId)) {
                 if (source == null) {
-                    if (target.canTarget(currentId, game)) {
-                        target.add(currentId, game);
+                    if (target.canTarget(possibleOpponentId, game)) {
+                        target.add(possibleOpponentId, game);
                         return true;
                     }
-                } else if (target.canTarget(currentId, source, game)) {
-                    target.add(currentId, game);
+                } else if (target.canTarget(abilityControllerId, possibleOpponentId, source, game)) {
+                    target.addTarget(possibleOpponentId, source, game);
                     return true;
                 }
             }
@@ -2869,8 +2932,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         if (target.getOriginalTarget() instanceof TargetPlayer) {
-            if (outcome.isGood()) {
+            if (affectedOutcome.isGood()) {
                 if (source == null) {
+                    // good
                     if (target.canTarget(abilityControllerId, game)) {
                         target.add(abilityControllerId, game);
                         return true;
@@ -2882,19 +2946,20 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                         }
                     }
                 } else {
+                    // good
                     if (target.canTarget(abilityControllerId, abilityControllerId, source, game)) {
-                        target.addTarget(playerId, source, game);
+                        target.addTarget(abilityControllerId, source, game);
                         return true;
                     }
                     if (target.isRequired(sourceId, game)) {
-                        if (target.canTarget(randomOpponentId, game)) {
-                            target.add(randomOpponentId, game);
+                        if (target.canTarget(abilityControllerId, randomOpponentId, source, game)) {
+                            target.addTarget(randomOpponentId, source, game);
                             return true;
                         }
                     }
                 }
-
             } else if (source == null) {
+                // bad
                 if (target.canTarget(randomOpponentId, game)) {
                     target.add(randomOpponentId, game);
                     return true;
@@ -2906,13 +2971,14 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     }
                 }
             } else {
-                if (target.canTarget(randomOpponentId, game)) {
-                    target.add(randomOpponentId, game);
+                // bad
+                if (target.canTarget(abilityControllerId, randomOpponentId, source, game)) {
+                    target.addTarget(randomOpponentId, source, game);
                     return true;
                 }
                 if (required) {
-                    if (target.canTarget(abilityControllerId, game)) {
-                        target.add(abilityControllerId, game);
+                    if (target.canTarget(abilityControllerId, abilityControllerId, source, game)) {
+                        target.addTarget(abilityControllerId, source, game);
                         return true;
                     }
                 }
@@ -2950,7 +3016,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
-        Map<UUID, ActivatedAbility> useable = PlayerImpl.getSpellAbilities(this.getId(), card, game.getState().getZone(card.getId()), game);
+        Map<UUID, ActivatedAbility> useable = PlayerImpl.getCastableSpellAbilities(game, this.getId(), card, game.getState().getZone(card.getId()), noMana);
         return (SpellAbility) useable.values().stream().findFirst().orElse(null);
     }
 

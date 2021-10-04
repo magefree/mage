@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.UUID;
 
 /**
+ *
+ * Can be used with SearchLibrary only. User hasn't access to libs.
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetCardInLibrary extends TargetCard {

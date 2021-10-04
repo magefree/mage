@@ -128,7 +128,9 @@ class PossibilityStormEffect extends OneShotEffect {
                             && !card.isLand(game)
                             && card.getSpellAbility().canChooseTarget(game, spellController.getId())) {
                         if (spellController.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
-                            spellController.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                            spellController.cast(spellController.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                         }
                     }
 

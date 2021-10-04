@@ -28,7 +28,7 @@ public final class TavernSmasher extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private TavernSmasher(final TavernSmasher card) {

@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepAttachedTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -35,9 +36,10 @@ public final class CurseOfThirst extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // At the beginning of enchanted player's upkeep, Curse of Thirst deals damage to that player equal to the number of Curses attached to them.
-        this.addAbility(new BeginningOfUpkeepAttachedTriggeredAbility(
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DamageTargetEffect(CursesAttachedCount.instance)
-                        .setText("{this} deals damage to that player equal to the number of Curses attached to them")
+                        .setText("{this} deals damage to that player equal to the number of Curses attached to them"),
+                TargetController.ENCHANTED, false
         ));
     }
 

@@ -1,26 +1,34 @@
 package mage.cards.y;
 
+import java.util.Optional;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.common.SubTypeAssignment;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.common.PayVariableLifeCost;
+import mage.abilities.costs.common.SacrificeAllCost;
+import mage.abilities.costs.common.SacrificeAttachedCost;
+import mage.abilities.costs.common.SacrificeAttachmentCost;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.SacrificeXTargetCost;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.filter.Filter;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  * @author TheElk801
@@ -39,13 +47,12 @@ public final class YasharnImplacableEarth extends CardImpl {
         // When Yasharn, Implacable Earth enters the battlefield, search your library for a basic Forest card and a basic Plains card, reveal those cards, put them into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new SearchLibraryPutInHandEffect(new YasharnImplacableEarthTarget(), true)
-                        .setText("search your library for a basic Forest card and a basic Plains card, " +
-                                "reveal those cards, put them into your hand, then shuffle")
+                        .setText("search your library for a basic Forest card and a basic Plains card, "
+                                + "reveal those cards, put them into your hand, then shuffle")
         ));
 
         // Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities.
         Ability ability = new SimpleStaticAbility(new YasharnImplacableEarthEffect());
-        ability.addEffect(new YasharnImplacableEarthSacrificeFilterEffect());
         this.addAbility(ability);
     }
 
@@ -105,14 +112,14 @@ class YasharnImplacableEarthTarget extends TargetCardInLibrary {
     }
 }
 
-class YasharnImplacableEarthEffect extends ContinuousEffectImpl {
+class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
 
-    YasharnImplacableEarthEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
+    public YasharnImplacableEarthEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities";
     }
 
-    private YasharnImplacableEarthEffect(final YasharnImplacableEarthEffect effect) {
+    public YasharnImplacableEarthEffect(final YasharnImplacableEarthEffect effect) {
         super(effect);
     }
 
@@ -123,48 +130,102 @@ class YasharnImplacableEarthEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            player.setCanPayLifeCost(false);
-            player.setCanPaySacrificeCostFilter(StaticFilters.FILTER_PERMANENTS_NON_LAND);
-        }
         return true;
-    }
-}
-
-class YasharnImplacableEarthSacrificeFilterEffect extends CostModificationEffectImpl {
-
-    YasharnImplacableEarthSacrificeFilterEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.SET_COST);
-    }
-
-    private YasharnImplacableEarthSacrificeFilterEffect(YasharnImplacableEarthSacrificeFilterEffect effect) {
-        super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        for (Cost cost : abilityToModify.getCosts()) {
-            if (cost instanceof SacrificeTargetCost) {
-                ((SacrificeTargetCost) cost)
-                        .getTargets()
-                        .get(0)
-                        .getFilter()
-                        .add(CardType.LAND.getPredicate());
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject != null) {
+            return "Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities.  (" + mageObject.getIdName() + ").";
+        }
+        return null;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        boolean canTargetLand = true;
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY
+                || event.getType() == GameEvent.EventType.CAST_SPELL) {
+            if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
+                if (permanent == null) {
+                    return false;
+                }
+            }
+            Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
+            for (Cost cost : ability.get().getCosts()) {
+                if (cost instanceof PayLifeCost
+                        || cost instanceof PayVariableLifeCost) {
+                    return true;  // can't pay with life
+                }
+                if (cost instanceof SacrificeSourceCost
+                        && !permanent.isLand()) {
+                    return true;
+                }
+                if (cost instanceof SacrificeTargetCost) {
+                    SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
+                    Filter filter = sacrificeCost.getTargets().get(0).getFilter();
+                    for (Object predicate : filter.getPredicates()) {
+                        if (predicate instanceof CardType.CardTypePredicate) {
+                            if (!predicate.toString().equals("CardType(Land)")) {
+                                canTargetLand = false;
+                            }
+                        }
+                    }
+                    return !canTargetLand;  // must be nonland target
+                }
+                if (cost instanceof SacrificeAllCost) {
+                    SacrificeAllCost sacrificeAllCost = (SacrificeAllCost) cost;
+                    Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
+                    for (Object predicate : filter.getPredicates()) {
+                        if (predicate instanceof CardType.CardTypePredicate) {
+                            if (!predicate.toString().equals("CardType(Land)")) {
+                                canTargetLand = false;
+                            }
+                        }
+                    }
+                    return !canTargetLand;  // must be nonland target
+                }
+                if (cost instanceof SacrificeAttachedCost) {
+                    SacrificeAttachedCost sacrificeAllCost = (SacrificeAttachedCost) cost;
+                    Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
+                    for (Object predicate : filter.getPredicates()) {
+                        if (predicate instanceof CardType.CardTypePredicate) {
+                            if (!predicate.toString().equals("CardType(Land)")) {
+                                canTargetLand = false;
+                            }
+                        }
+                    }
+                    return !canTargetLand;  // must be nonland target
+                }
+                if (cost instanceof SacrificeAttachmentCost) {
+                    SacrificeAttachmentCost sacrificeAllCost = (SacrificeAttachmentCost) cost;
+                    Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
+                    for (Object predicate : filter.getPredicates()) {
+                        if (predicate instanceof CardType.CardTypePredicate) {
+                            if (!predicate.toString().equals("CardType(Land)")) {
+                                canTargetLand = false;
+                            }
+                        }
+                    }
+                    return !canTargetLand;  // must be nonland target
+                }
+
+                if (cost instanceof SacrificeXTargetCost) {
+                    SacrificeXTargetCost sacrificeCost = (SacrificeXTargetCost) cost;
+                    Filter filter = sacrificeCost.getFilter();
+                    for (Object predicate : filter.getPredicates()) {
+                        if (predicate instanceof CardType.CardTypePredicate) {
+                            if (!predicate.toString().equals("CardType(Land)")) {
+                                canTargetLand = false;
+                            }
+                        }
+                    }
+                    return !canTargetLand;  // must be nonland target
+                }
             }
         }
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                || abilityToModify instanceof SpellAbility)
-                && game.getState().getPlayersInRange(source.getControllerId(), game).contains(abilityToModify.getControllerId());
-    }
-
-    @Override
-    public YasharnImplacableEarthSacrificeFilterEffect copy() {
-        return new YasharnImplacableEarthSacrificeFilterEffect(this);
+        return false;
     }
 }

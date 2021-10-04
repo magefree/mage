@@ -7,6 +7,7 @@ import mage.cards.repository.CardRepository;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentImpl;
 import mage.view.AbilityPickerView;
+import mage.view.GameView;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -16,13 +17,17 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class AbilityPickerTest extends CardTestPlayerBase {
 
+    private GameView prepareGameView() {
+        return new GameView(currentGame.getState(), currentGame, playerA.getId(), null);
+    }
+
     @Test
     public void test_PickerChoices_FusedSpells() {
         // must be 3 spells for choices
         Abilities<Ability> abilities = getAbilitiesFromCard("Armed // Dangerous");
         Assert.assertEquals(3, abilities.size());
 
-        AbilityPickerView view = new AbilityPickerView("test name", abilities, "test message");
+        AbilityPickerView view = new AbilityPickerView(prepareGameView(), "test name", abilities, "test message");
         Assert.assertEquals(3, view.getChoices().size());
         view.getChoices().values().forEach(c -> {
             Assert.assertTrue("Must start with Cast text, but found: " + c, c.contains("Cast "));
@@ -35,7 +40,7 @@ public class AbilityPickerTest extends CardTestPlayerBase {
         Abilities<Ability> abilities = getAbilitiesFromCard("Foulmire Knight");
         Assert.assertEquals(3, abilities.size());
 
-        AbilityPickerView view = new AbilityPickerView("test name", abilities, "test message");
+        AbilityPickerView view = new AbilityPickerView(prepareGameView(), "test name", abilities, "test message");
         Assert.assertEquals(3, view.getChoices().size());
         view.getChoices().values().forEach(c -> {
             if (c.contains("Deathtouch")) {
@@ -51,7 +56,7 @@ public class AbilityPickerTest extends CardTestPlayerBase {
         Abilities<Ability> abilities = getAbilitiesFromCard("Dimir Cluestone");
         Assert.assertEquals(4, abilities.size());
 
-        AbilityPickerView view = new AbilityPickerView("test name", abilities, "test message");
+        AbilityPickerView view = new AbilityPickerView(prepareGameView(), "test name", abilities, "test message");
         Assert.assertEquals(4, view.getChoices().size());
         int castCount = 0;
         int abilsCount = 0;
@@ -72,7 +77,7 @@ public class AbilityPickerTest extends CardTestPlayerBase {
         Abilities<Ability> abilities = getAbilitiesFromCard("Cling to Dust");
         Assert.assertEquals(2, abilities.size());
 
-        AbilityPickerView view = new AbilityPickerView("test name", abilities, "test message");
+        AbilityPickerView view = new AbilityPickerView(prepareGameView(), "test name", abilities, "test message");
         Assert.assertEquals(2, view.getChoices().size());
         view.getChoices().values().forEach(c -> {
             Assert.assertTrue("Must start with Cast text, but found: " + c, c.contains("Cast "));

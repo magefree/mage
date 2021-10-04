@@ -17,6 +17,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -79,10 +80,8 @@ class DraugrNecromancerReplacementEffect extends ReplacementEffectImpl {
                 || !controller.hasOpponent(permanent.getControllerId(), game)) {
             return false;
         }
-        Card card = game.getCard(permanent.getId());
-        controller.moveCards(permanent, Zone.EXILED, source, game);
-        card.getMainCard().addCounters(CounterType.ICE.createInstance(), source.getControllerId(), source, game);
-        return true;
+
+        return CardUtil.moveCardWithCounter(game, source, controller, permanent, Zone.EXILED, CounterType.ICE.createInstance());
     }
 
     @Override

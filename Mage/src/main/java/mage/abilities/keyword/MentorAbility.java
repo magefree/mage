@@ -45,7 +45,7 @@ public class MentorAbility extends AttacksTriggeredAbility {
 
 }
 
-enum MentorAbilityPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+enum MentorAbilityPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override

@@ -9,7 +9,7 @@ import mage.game.Game;
 /**
  * @author TheElk801
  */
-public enum ChosenColorPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+public enum ChosenColorPredicate implements ObjectSourcePlayerPredicate<MageObject> {
     TRUE(true), FALSE(false);
 
     private final boolean value;

@@ -36,8 +36,9 @@ public class DuelCommander extends Commander {
         banned.add("Karakas");
         banned.add("Library of Alexandria");
         banned.add("Lion's Eye Diamond");
+        banned.add("Lutri, The Spellchaser");
         banned.add("Loyal Retainers");
-        banned.add("Lutri, the Spellchaser");
+        banned.add("Maddening Hex");
         banned.add("Mana Crypt");
         banned.add("Mana Drain");
         banned.add("Mana Vault");
@@ -77,6 +78,7 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Akiri, Line-Slinger");
         bannedCommander.add("Arahbo, Roar of the World");
         bannedCommander.add("Ardenn, Intrepid Archaeologist");
+        bannedCommander.add("Asmoranomardicadaistinaculdacar");
         bannedCommander.add("Baral, Chief of Compliance");
         bannedCommander.add("Breya, Etherium Shaper");
         bannedCommander.add("Bruse Tarl, Boorish Herder");
@@ -106,6 +108,7 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Tymna, the Weaver");
         bannedCommander.add("Urza, Lord High Artificer");
         bannedCommander.add("Vial Smasher the Fierce");
+        bannedCommander.add("Winota, Joiner of Forces");
         bannedCommander.add("Yuriko, the Tiger's Shadow");
         bannedCommander.add("Zurgo Bellstriker");
     }

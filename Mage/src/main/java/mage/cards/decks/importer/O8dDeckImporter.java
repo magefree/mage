@@ -22,9 +22,9 @@ public class O8dDeckImporter extends XmlDeckImporter {
      * @return
      */
     @Override
-    public DeckCardLists importDeck(String filename, StringBuilder errorMessages, boolean saveAutoFixedFile) {
+    public DeckCardLists importDeck(String fileName, StringBuilder errorMessages, boolean saveAutoFixedFile) {
         try {
-            Document doc = getXmlDocument(filename);
+            Document doc = getXmlDocument(fileName);
             DeckCardLists decklist = new DeckCardLists();
 
             List<Node> mainCards = getNodes(doc, "/deck/section[@name='Main']/card");

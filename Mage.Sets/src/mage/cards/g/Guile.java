@@ -86,7 +86,7 @@ class GuileReplacementEffect extends ReplacementEffectImpl {
                 Card spellCard = spell.getCard();
                 if (spellCard != null
                         && controller.chooseUse(Outcome.PlayForFree, "Play " + spellCard.getIdName() + " for free?", source, game)) {
-                    controller.playCard(spellCard, game, true, true, new ApprovingObject(source, game));
+                    controller.playCard(spellCard, game, true, new ApprovingObject(source, game));
                 }
                 return true;
             }

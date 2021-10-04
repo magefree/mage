@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.*;
 
 /**
- * Dialog for choosing abilities.
+ * GUI: Dialog for choosing abilities (list)
  *
  * @author nantuko, JayDi85
  */

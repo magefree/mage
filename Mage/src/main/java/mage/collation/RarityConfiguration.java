@@ -13,15 +13,8 @@ public class RarityConfiguration extends Rotater<BoosterStructure> {
         super(item1, item2);
     }
 
-    public RarityConfiguration(boolean keepOrder, BoosterStructure... items) {
-        super(keepOrder, items);
-    }
-
-    @Override
-    public void shuffle() {
-        for (BoosterStructure structure : this.items) {
-            structure.shuffle();
-        }
-        super.shuffle();
+    public RarityConfiguration(BoosterStructure... items) {
+        // change to false if we ever decide to generate sequential boosters
+        super(true, items);
     }
 }

@@ -27,7 +27,7 @@ public final class RottenReunion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(0, 1));
 
         // Flashback {1}{B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{1}{B}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{B}")));
     }
 
     private RottenReunion(final RottenReunion card) {

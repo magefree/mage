@@ -29,7 +29,7 @@ public final class IncreasingConfusion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Flashback {X}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{X}{U}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{X}{U}")));
     }
 
     private IncreasingConfusion(final IncreasingConfusion card) {

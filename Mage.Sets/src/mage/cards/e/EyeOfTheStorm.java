@@ -154,7 +154,9 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                     if (cardToCopy != null) {
                         Card copy = game.copyCard(cardToCopy, source, source.getControllerId());
                         if (spellController.chooseUse(outcome, "Cast " + copy.getIdName() + " without paying mana cost?", source, game)) {
-                            spellController.cast(copy.getSpellAbility(), game, true, new ApprovingObject(source, game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + copy.getId(), Boolean.TRUE);
+                            spellController.cast(spellController.chooseAbilityForCast(copy, game, true), game, true, new ApprovingObject(source, game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + copy.getId(), null);
                         }
                     }
                 }

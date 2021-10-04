@@ -1,34 +1,20 @@
 package mage.abilities.keyword;
 
-import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
 import mage.constants.Zone;
-
-import java.io.ObjectStreamException;
 
 /**
  * @author TheElk801
  * TODO: Implement this
  */
-public class NightboundAbility extends StaticAbility implements MageSingleton {
+public class NightboundAbility extends StaticAbility {
 
-    private static final NightboundAbility instance;
-
-    static {
-        instance = new NightboundAbility();
-        // instance.addIcon(NightboundAbilityIcon.instance); (needs to be added)
+    public NightboundAbility() {
+        super(Zone.BATTLEFIELD, null);
     }
 
-    private Object readResolve() throws ObjectStreamException {
-        return instance;
-    }
-
-    public static NightboundAbility getInstance() {
-        return instance;
-    }
-
-    private NightboundAbility() {
-        super(Zone.ALL, null);
+    private NightboundAbility(final NightboundAbility ability) {
+        super(ability);
     }
 
     @Override
@@ -38,6 +24,6 @@ public class NightboundAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public NightboundAbility copy() {
-        return instance;
+        return new NightboundAbility(this);
     }
 }

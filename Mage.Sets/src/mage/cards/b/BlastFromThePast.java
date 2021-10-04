@@ -35,7 +35,7 @@ public final class BlastFromThePast extends CardImpl {
         // Kicker {2}{R}
         this.addAbility(new KickerAbility("{2}{R}"));
         // Flashback {3}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{R}")));
         // Buyback {4}{R}
         this.addAbility(new BuybackAbility("{4}{R}"));
 

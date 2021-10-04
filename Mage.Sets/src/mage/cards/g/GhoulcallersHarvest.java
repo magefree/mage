@@ -39,7 +39,7 @@ public final class GhoulcallersHarvest extends CardImpl {
         this.getSpellAbility().addHint(hint);
 
         // Flashback {3}{B}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{3}{B}{G}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{B}{G}")));
     }
 
     private GhoulcallersHarvest(final GhoulcallersHarvest card) {

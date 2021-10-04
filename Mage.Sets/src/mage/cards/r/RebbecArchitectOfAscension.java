@@ -62,7 +62,7 @@ public final class RebbecArchitectOfAscension extends CardImpl {
     }
 }
 
-enum RebbecArchitectOfAscensionPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum RebbecArchitectOfAscensionPredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override

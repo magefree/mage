@@ -38,7 +38,7 @@ public final class SlaughterSpecialist extends CardImpl {
         // Whenever a creature an opponent controls dies, put a +1/+1 counter on Slaughter Specialist.
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                false, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE
+                false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE
         ));
     }
 

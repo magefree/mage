@@ -57,7 +57,7 @@ public final class SalvageTrader extends CardImpl {
     }
 }
 
-class SameCastingCostPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageItem>> {
+class SameCastingCostPredicate implements ObjectSourcePlayerPredicate<MageItem> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageItem> input, Game game) {

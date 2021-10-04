@@ -41,7 +41,7 @@ public final class IncreasingVengeance extends CardImpl {
         this.getSpellAbility().addTarget(target);
 
         // Flashback {3}{R}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}{R}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{R}{R}")));
     }
 
     private IncreasingVengeance(final IncreasingVengeance card) {

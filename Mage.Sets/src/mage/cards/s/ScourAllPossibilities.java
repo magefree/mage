@@ -24,7 +24,7 @@ public final class ScourAllPossibilities extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy(", then"));
 
         // Flashback {4}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{U}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{U}")));
 
     }
 
