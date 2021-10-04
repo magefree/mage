@@ -122,8 +122,8 @@ class CalixDestinysHandExileEffect extends OneShotEffect {
                 theirPerm.getId(), theirPerm.getZoneChangeCounter(game) + 1, game
         );
         MageObjectReference myMor = new MageObjectReference(myPerm, game);
-        UUID exileId = CardUtil.getExileZoneId(game, source);
-        controller.moveCardsToExile(theirPerm, source, game, true, exileId, myPerm.getLogName());
+        UUID exileId = CardUtil.getExileZoneId(myPerm.toString(), game);
+        controller.moveCardsToExile(theirPerm, source, game, true, exileId, myPerm.getIdName());
         game.addDelayedTriggeredAbility(new CalixDestinysHandDelayedTriggeredAbility(theirMor, myMor), source);
         return true;
     }
