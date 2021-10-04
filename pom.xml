@@ -89,7 +89,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.22.2</version>
+                    <version>3.0.0-M5</version>
                     <!--
                     for compatible with jacoco code coverage - argLine moved to properties section
                     <configuration>
@@ -183,9 +183,9 @@
 
         <dependency>
             <!-- junit 4 tests -->
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>5.7.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -208,6 +208,14 @@
         <!-- OTHER dependencies - you must add it to child modules manually (copy groupId and artifactId without scope and version) -->
         <!-- write shared libs from all childs here to version control -->
         <dependencies>
+            <dependency>
+                <!-- junit compatible dependencies (xmage uses junit 5 platform for all v4 and v5 tests) -->
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>5.8.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <!-- json support -->
                 <groupId>com.google.code.gson</groupId>
