@@ -1,9 +1,24 @@
 # faster builds
 git:
   depth: 3
+  quiet: true
   submodules: false
 sudo: false
 dist: trusty
 language: java
 before_install:
   - echo "MAVEN_OPTS='-Xmx2g'" > ~/.mavenrc
+cache:
+  directories:
+    - $HOME/.m2
+install: >
+  mvn
+  install
+  jacoco:prepare-agent
+  --define jacoco.skip=false
+  --define maven.javadoc.skip=true
+  --define skipTests=true
+  --batch-mode
+  --show-version
+after_success:
+  - mvn jacoco:report jacoco:report-aggregate verify coveralls:report --define jacoco.skip=false
