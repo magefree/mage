@@ -185,7 +185,7 @@
             <!-- junit 4 tests -->
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
-            <version>5.7.2</version>
+            <version>5.8.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
