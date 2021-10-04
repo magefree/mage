@@ -38,7 +38,7 @@ public final class TraitorsClutch extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Flashback {1}{B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{B}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{1}{B}")));
     }
 
     private TraitorsClutch(final TraitorsClutch card) {

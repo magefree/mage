@@ -29,7 +29,7 @@ public final class HarvesttideAssailant extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private HarvesttideAssailant(final HarvesttideAssailant card) {

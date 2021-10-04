@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -22,6 +23,7 @@ public final class MightOfTheOldWays extends CardImpl {
 
         // Target creature gets +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Coven — Then if you control three or more creatures with different powers, draw a card.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

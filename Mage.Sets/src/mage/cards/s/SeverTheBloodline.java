@@ -34,7 +34,7 @@ public final class SeverTheBloodline extends CardImpl {
         this.getSpellAbility().addEffect(new SeverTheBloodlineEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Flashback {5}{B}{B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{B}{B}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{B}{B}")));
     }
 
     private SeverTheBloodline(final SeverTheBloodline card) {

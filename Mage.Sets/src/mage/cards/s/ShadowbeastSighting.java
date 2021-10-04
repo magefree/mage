@@ -23,7 +23,7 @@ public final class ShadowbeastSighting extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2()));
 
         // Flashback {6}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{6}{G}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{6}{G}")));
     }
 
     private ShadowbeastSighting(final ShadowbeastSighting card) {

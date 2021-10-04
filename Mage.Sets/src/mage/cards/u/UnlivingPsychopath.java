@@ -63,7 +63,7 @@ public final class UnlivingPsychopath extends CardImpl {
     }
 }
 
-class UnlivingPsychopathPowerLessThanSourcePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+class UnlivingPsychopathPowerLessThanSourcePredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

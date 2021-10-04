@@ -28,7 +28,7 @@ public final class Kaleidoscorch extends CardImpl {
         this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
 
         // Flashback {4}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{4}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{R}")));
     }
 
     private Kaleidoscorch(final Kaleidoscorch card) {

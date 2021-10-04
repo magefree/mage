@@ -31,7 +31,7 @@ public final class RecklessCharge extends CardImpl {
         ).setText("and gains haste until end of turn"));
 
         // Flashback {2}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{2}{R}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{R}")));
     }
 
     private RecklessCharge(final RecklessCharge card) {

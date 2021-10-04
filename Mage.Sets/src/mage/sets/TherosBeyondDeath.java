@@ -23,7 +23,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
     }
 
     private TherosBeyondDeath() {
-        super("Theros Beyond Death", "THB", ExpansionSet.buildDate(2020, 1, 24), SetType.EXPANSION, new TherosBeyondDeathCollator());
+        super("Theros Beyond Death", "THB", ExpansionSet.buildDate(2020, 1, 24), SetType.EXPANSION);
         this.blockName = "Theros Beyond Death";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
@@ -392,113 +392,56 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Wolfwillow Haven", 357, Rarity.UNCOMMON, mage.cards.w.WolfwillowHaven.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wrap in Flames", 164, Rarity.COMMON, mage.cards.w.WrapInFlames.class));
     }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new TherosBeyondDeathCollator();
+    }
 }
 
 // Booster collation info from https://www.lethe.xyz/mtg/collation/thb.html
 // Using USA collation for common/uncommon, rare collation inferred from other sets
 class TherosBeyondDeathCollator implements BoosterCollator {
+    private final CardRun commonA = new CardRun(true, "155", "29", "79", "127", "38", "57", "159", "41", "66", "140", "30", "78", "163", "28", "56", "137", "25", "68", "144", "20", "67", "146", "26", "49", "134", "40", "61", "159", "29", "51", "164", "17", "57", "149", "38", "66", "127", "30", "47", "144", "36", "79", "155", "41", "67", "137", "28", "78", "140", "25", "56", "163", "20", "49", "146", "40", "68", "134", "17", "51", "149", "26", "47", "164", "36", "61");
+    private final CardRun commonB = new CardRun(true, "186", "85", "191", "116", "201", "103", "202", "115", "184", "120", "194", "110", "192", "88", "177", "113", "171", "86", "195", "109", "179", "114", "202", "85", "201", "103", "184", "116", "186", "115", "192", "110", "191", "114", "177", "120", "194", "88", "171", "113", "179", "86", "195", "109", "201", "85", "184", "116", "202", "110", "186", "103", "191", "115", "192", "114", "179", "113", "194", "109", "195", "86", "177", "88", "171", "120");
+    private final CardRun commonC1 = new CardRun(true, "203", "154", "106", "77", "10", "174", "58", "16", "141", "238", "122", "46", "173", "152", "22", "240", "100", "74", "200", "142", "97", "11", "48", "203", "241", "154", "106", "35", "82", "174", "77", "10", "240", "141", "100", "58", "238", "122", "232", "152", "22", "46", "111", "173", "241", "16", "74", "97", "48", "11", "200", "142", "111", "82", "35");
+    private final CardRun commonC2 = new CardRun(true, "44", "96", "197", "145", "232", "34", "126", "204", "249", "54", "135", "231", "187", "175", "44", "143", "95", "96", "197", "135", "107", "6", "32", "204", "126", "34", "54", "249", "145", "231", "187", "96", "6", "143", "44", "107", "34", "175", "135", "249", "95", "197", "54", "204", "126", "32", "6", "175", "95", "231", "145", "107", "187", "32", "143");
+    private final CardRun uncommonA = new CardRun(true, "223", "65", "153", "8", "112", "227", "99", "167", "33", "138", "4", "189", "228", "45", "59", "180", "105", "1", "136", "196", "206", "139", "83", "89", "233", "31", "131", "91", "219", "193", "27", "133", "64", "199", "213", "264", "42", "153", "205", "8", "136", "4", "189", "33", "223", "2", "138", "112", "27", "233", "260", "180", "31", "59", "99", "131", "105", "267", "81", "139", "228", "167", "133", "219", "65", "1", "83", "125", "206", "193", "42", "91", "227", "89", "199", "153", "8", "81", "213", "64", "112", "223", "4", "136", "205", "105", "139", "99", "65", "2", "180", "228", "59", "1", "233", "45", "189", "227", "33", "196", "83", "138", "206", "42", "219", "167", "131", "31", "89", "193", "91", "125", "213", "199", "81", "27", "2", "64", "133", "205");
+    private final CardRun uncommonB = new CardRun(true, "226", "101", "128", "183", "21", "234", "87", "50", "242", "176", "239", "132", "9", "216", "62", "119", "172", "160", "104", "69", "168", "225", "130", "237", "63", "15", "102", "166", "5", "129", "121", "53", "239", "70", "182", "128", "21", "234", "92", "69", "101", "160", "23", "230", "75", "130", "104", "172", "50", "7", "162", "87", "183", "226", "62", "216", "258", "132", "176", "237", "263", "15", "242", "63", "5", "225", "168", "129", "121", "53", "230", "21", "70", "102", "166", "128", "92", "234", "23", "183", "160", "104", "75", "226", "162", "7", "239", "182", "9", "132", "101", "69", "172", "216", "242", "50", "176", "87", "225", "62", "15", "168", "119", "237", "130", "5", "70", "102", "166", "63", "23", "129", "121", "53", "182", "7", "162", "230", "92", "75");
+    private final CardRun rareA = new CardRun(false, "207", "84", "165", "3", "43", "209", "210", "212", "214", "169", "90", "12", "13", "215", "94", "217", "98", "218", "19", "24", "222", "243", "178", "55", "181", "108", "188", "235", "148", "60", "151", "198", "236", "37", "156", "157", "39", "158", "244", "245", "246", "247", "248", "72", "73", "124", "170", "76", "117", "118", "161", "80", "123", "207", "84", "165", "3", "43", "209", "210", "212", "214", "169", "90", "12", "13", "215", "94", "217", "98", "218", "19", "24", "222", "243", "178", "55", "181", "108", "188", "235", "148", "60", "151", "198", "236", "37", "156", "157", "39", "158", "244", "245", "246", "247", "248", "72", "73", "124", "170", "76", "117", "118", "161", "80", "123", "14", "18", "52", "71", "93", "147", "150", "185", "190", "208", "211", "220", "221", "224", "229");
+    private final CardRun rareB = new CardRun(false, "207", "84", "165", "3", "43", "209", "210", "212", "214", "169", "90", "12", "13", "215", "94", "217", "98", "218", "19", "24", "222", "243", "178", "55", "181", "108", "188", "235", "148", "60", "151", "198", "236", "37", "156", "157", "39", "158", "244", "245", "246", "247", "248", "72", "73", "124", "170", "76", "117", "118", "161", "80", "123", "207", "84", "165", "3", "43", "209", "210", "212", "214", "169", "90", "12", "13", "215", "94", "217", "98", "218", "19", "24", "222", "243", "178", "55", "181", "108", "188", "235", "148", "60", "151", "198", "236", "37", "156", "157", "39", "158", "244", "245", "246", "247", "248", "72", "73", "124", "170", "76", "117", "118", "161", "80", "123", "255", "259", "52", "261", "262", "147", "265", "266", "190", "256", "257", "268", "221", "224", "229");
+    private final CardRun land = new CardRun(false, "250", "251", "252", "253", "254");
 
-    private static class TherosBeyondDeathRun extends CardRun {
-        private static final TherosBeyondDeathRun commonA = new TherosBeyondDeathRun(true, "155", "29", "79", "127", "38", "57", "159", "41", "66", "140", "30", "78", "163", "28", "56", "137", "25", "68", "144", "20", "67", "146", "26", "49", "134", "40", "61", "159", "29", "51", "164", "17", "57", "149", "38", "66", "127", "30", "47", "144", "36", "79", "155", "41", "67", "137", "28", "78", "140", "25", "56", "163", "20", "49", "146", "40", "68", "134", "17", "51", "149", "26", "47", "164", "36", "61");
-        private static final TherosBeyondDeathRun commonB = new TherosBeyondDeathRun(true, "186", "85", "191", "116", "201", "103", "202", "115", "184", "120", "194", "110", "192", "88", "177", "113", "171", "86", "195", "109", "179", "114", "202", "85", "201", "103", "184", "116", "186", "115", "192", "110", "191", "114", "177", "120", "194", "88", "171", "113", "179", "86", "195", "109", "201", "85", "184", "116", "202", "110", "186", "103", "191", "115", "192", "114", "179", "113", "194", "109", "195", "86", "177", "88", "171", "120");
-        private static final TherosBeyondDeathRun commonC1 = new TherosBeyondDeathRun(true, "203", "154", "106", "77", "10", "174", "58", "16", "141", "238", "122", "46", "173", "152", "22", "240", "100", "74", "200", "142", "97", "11", "48", "203", "241", "154", "106", "35", "82", "174", "77", "10", "240", "141", "100", "58", "238", "122", "232", "152", "22", "46", "111", "173", "241", "16", "74", "97", "48", "11", "200", "142", "111", "82", "35");
-        private static final TherosBeyondDeathRun commonC2 = new TherosBeyondDeathRun(true, "44", "96", "197", "145", "232", "34", "126", "204", "249", "54", "135", "231", "187", "175", "44", "143", "95", "96", "197", "135", "107", "6", "32", "204", "126", "34", "54", "249", "145", "231", "187", "96", "6", "143", "44", "107", "34", "175", "135", "249", "95", "197", "54", "204", "126", "32", "6", "175", "95", "231", "145", "107", "187", "32", "143");
-        private static final TherosBeyondDeathRun uncommonA = new TherosBeyondDeathRun(true, "223", "65", "153", "8", "112", "227", "99", "167", "33", "138", "4", "189", "228", "45", "59", "180", "105", "1", "136", "196", "206", "139", "83", "89", "233", "31", "131", "91", "219", "193", "27", "133", "64", "199", "213", "264", "42", "153", "205", "8", "136", "4", "189", "33", "223", "2", "138", "112", "27", "233", "260", "180", "31", "59", "99", "131", "105", "267", "81", "139", "228", "167", "133", "219", "65", "1", "83", "125", "206", "193", "42", "91", "227", "89", "199", "153", "8", "81", "213", "64", "112", "223", "4", "136", "205", "105", "139", "99", "65", "2", "180", "228", "59", "1", "233", "45", "189", "227", "33", "196", "83", "138", "206", "42", "219", "167", "131", "31", "89", "193", "91", "125", "213", "199", "81", "27", "2", "64", "133", "205");
-        private static final TherosBeyondDeathRun uncommonB = new TherosBeyondDeathRun(true, "226", "101", "128", "183", "21", "234", "87", "50", "242", "176", "239", "132", "9", "216", "62", "119", "172", "160", "104", "69", "168", "225", "130", "237", "63", "15", "102", "166", "5", "129", "121", "53", "239", "70", "182", "128", "21", "234", "92", "69", "101", "160", "23", "230", "75", "130", "104", "172", "50", "7", "162", "87", "183", "226", "62", "216", "258", "132", "176", "237", "263", "15", "242", "63", "5", "225", "168", "129", "121", "53", "230", "21", "70", "102", "166", "128", "92", "234", "23", "183", "160", "104", "75", "226", "162", "7", "239", "182", "9", "132", "101", "69", "172", "216", "242", "50", "176", "87", "225", "62", "15", "168", "119", "237", "130", "5", "70", "102", "166", "63", "23", "129", "121", "53", "182", "7", "162", "230", "92", "75");
-        private static final TherosBeyondDeathRun rareA = new TherosBeyondDeathRun(false, "207", "84", "165", "3", "43", "209", "210", "212", "214", "169", "90", "12", "13", "215", "94", "217", "98", "218", "19", "24", "222", "243", "178", "55", "181", "108", "188", "235", "148", "60", "151", "198", "236", "37", "156", "157", "39", "158", "244", "245", "246", "247", "248", "72", "73", "124", "170", "76", "117", "118", "161", "80", "123", "207", "84", "165", "3", "43", "209", "210", "212", "214", "169", "90", "12", "13", "215", "94", "217", "98", "218", "19", "24", "222", "243", "178", "55", "181", "108", "188", "235", "148", "60", "151", "198", "236", "37", "156", "157", "39", "158", "244", "245", "246", "247", "248", "72", "73", "124", "170", "76", "117", "118", "161", "80", "123", "14", "18", "52", "71", "93", "147", "150", "185", "190", "208", "211", "220", "221", "224", "229");
-        private static final TherosBeyondDeathRun rareB = new TherosBeyondDeathRun(false, "207", "84", "165", "3", "43", "209", "210", "212", "214", "169", "90", "12", "13", "215", "94", "217", "98", "218", "19", "24", "222", "243", "178", "55", "181", "108", "188", "235", "148", "60", "151", "198", "236", "37", "156", "157", "39", "158", "244", "245", "246", "247", "248", "72", "73", "124", "170", "76", "117", "118", "161", "80", "123", "207", "84", "165", "3", "43", "209", "210", "212", "214", "169", "90", "12", "13", "215", "94", "217", "98", "218", "19", "24", "222", "243", "178", "55", "181", "108", "188", "235", "148", "60", "151", "198", "236", "37", "156", "157", "39", "158", "244", "245", "246", "247", "248", "72", "73", "124", "170", "76", "117", "118", "161", "80", "123", "255", "259", "52", "261", "262", "147", "265", "266", "190", "256", "257", "268", "221", "224", "229");
-        private static final TherosBeyondDeathRun land = new TherosBeyondDeathRun(false, "250", "251", "252", "253", "254");
-
-        private TherosBeyondDeathRun(boolean keepOrder, String... numbers) {
-            super(keepOrder, numbers);
-        }
-    }
-
-    private static class TherosBeyondDeathStructure extends BoosterStructure {
-        private static final TherosBeyondDeathStructure AABBC1C1C1C1C1C1 = new TherosBeyondDeathStructure(
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonB,
-                TherosBeyondDeathRun.commonB,
-                TherosBeyondDeathRun.commonC1,
-                TherosBeyondDeathRun.commonC1,
-                TherosBeyondDeathRun.commonC1,
-                TherosBeyondDeathRun.commonC1,
-                TherosBeyondDeathRun.commonC1,
-                TherosBeyondDeathRun.commonC1
-        );
-        private static final TherosBeyondDeathStructure AAABBC1C1C1C1C1 = new TherosBeyondDeathStructure(
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonB,
-                TherosBeyondDeathRun.commonB,
-                TherosBeyondDeathRun.commonC1,
-                TherosBeyondDeathRun.commonC1,
-                TherosBeyondDeathRun.commonC1,
-                TherosBeyondDeathRun.commonC1,
-                TherosBeyondDeathRun.commonC1
-        );
-        private static final TherosBeyondDeathStructure AAAABBC2C2C2C2 = new TherosBeyondDeathStructure(
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonB,
-                TherosBeyondDeathRun.commonB,
-                TherosBeyondDeathRun.commonC2,
-                TherosBeyondDeathRun.commonC2,
-                TherosBeyondDeathRun.commonC2,
-                TherosBeyondDeathRun.commonC2
-        );
-        private static final TherosBeyondDeathStructure AAAABBBC2C2C2 = new TherosBeyondDeathStructure(
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonB,
-                TherosBeyondDeathRun.commonB,
-                TherosBeyondDeathRun.commonB,
-                TherosBeyondDeathRun.commonC2,
-                TherosBeyondDeathRun.commonC2,
-                TherosBeyondDeathRun.commonC2
-        );
-        private static final TherosBeyondDeathStructure AAAABBBBC2C2 = new TherosBeyondDeathStructure(
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonA,
-                TherosBeyondDeathRun.commonB,
-                TherosBeyondDeathRun.commonB,
-                TherosBeyondDeathRun.commonB,
-                TherosBeyondDeathRun.commonB,
-                TherosBeyondDeathRun.commonC2,
-                TherosBeyondDeathRun.commonC2
-        );
-        private static final TherosBeyondDeathStructure ABB = new TherosBeyondDeathStructure(
-                TherosBeyondDeathRun.uncommonA,
-                TherosBeyondDeathRun.uncommonB,
-                TherosBeyondDeathRun.uncommonB
-        );
-        private static final TherosBeyondDeathStructure AAB = new TherosBeyondDeathStructure(
-                TherosBeyondDeathRun.uncommonA,
-                TherosBeyondDeathRun.uncommonA,
-                TherosBeyondDeathRun.uncommonB
-        );
-        private static final TherosBeyondDeathStructure R1 = new TherosBeyondDeathStructure(
-                TherosBeyondDeathRun.rareA
-        );
-        private static final TherosBeyondDeathStructure R2 = new TherosBeyondDeathStructure(
-                TherosBeyondDeathRun.rareB
-        );
-        private static final TherosBeyondDeathStructure L1 = new TherosBeyondDeathStructure(
-                TherosBeyondDeathRun.land
-        );
-
-        private TherosBeyondDeathStructure(CardRun... runs) {
-            super(runs);
-        }
-    }
+    private final BoosterStructure AABBC1C1C1C1C1C1 = new BoosterStructure(
+            commonA, commonA,
+            commonB, commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1, commonC1
+    );
+    private final BoosterStructure AAABBC1C1C1C1C1 = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1
+    );
+    private final BoosterStructure AAAABBC2C2C2C2 = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB, commonB,
+            commonC2, commonC2, commonC2, commonC2
+    );
+    private final BoosterStructure AAAABBBC2C2C2 = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB,
+            commonC2, commonC2, commonC2
+    );
+    private final BoosterStructure AAAABBBBC2C2 = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB,
+            commonC2, commonC2
+    );
+    private final BoosterStructure AAB = new BoosterStructure(uncommonA, uncommonA, uncommonB);
+    private final BoosterStructure ABB = new BoosterStructure(uncommonA, uncommonB, uncommonB);
+    private final BoosterStructure R1 = new BoosterStructure(rareA);
+    private final BoosterStructure R2 = new BoosterStructure(rareB);
+    private final BoosterStructure L1 = new BoosterStructure(land);
 
     // In order for equal numbers of each common to exist, the average booster must contain:
     // 3.27 A commons (36 / 11)
@@ -508,53 +451,33 @@ class TherosBeyondDeathCollator implements BoosterCollator {
     // These numbers are the same for all sets with 101 commons in A/B/C1/C2 print runs
     // and with 10 common slots per booster
     private final RarityConfiguration commonRuns = new RarityConfiguration(
-            false,
-            TherosBeyondDeathStructure.AABBC1C1C1C1C1C1,
-            TherosBeyondDeathStructure.AABBC1C1C1C1C1C1,
-            TherosBeyondDeathStructure.AABBC1C1C1C1C1C1,
-            TherosBeyondDeathStructure.AABBC1C1C1C1C1C1,
-            TherosBeyondDeathStructure.AABBC1C1C1C1C1C1,
-            TherosBeyondDeathStructure.AAABBC1C1C1C1C1,
-            TherosBeyondDeathStructure.AAABBC1C1C1C1C1,
-            TherosBeyondDeathStructure.AAABBC1C1C1C1C1,
-            TherosBeyondDeathStructure.AAABBC1C1C1C1C1,
-            TherosBeyondDeathStructure.AAABBC1C1C1C1C1,
-            TherosBeyondDeathStructure.AAABBC1C1C1C1C1,
+            AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1,
 
-            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
-            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
-            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
-            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
-            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
-            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
-            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
-            TherosBeyondDeathStructure.AAAABBC2C2C2C2,
-            TherosBeyondDeathStructure.AAAABBBC2C2C2,
-            TherosBeyondDeathStructure.AAAABBBC2C2C2,
-            TherosBeyondDeathStructure.AAAABBBBC2C2
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2,
+            AAAABBBC2C2C2,
+            AAAABBBC2C2C2,
+            AAAABBBBC2C2
     );
-    private final RarityConfiguration uncommonRuns = new RarityConfiguration(
-            TherosBeyondDeathStructure.ABB,
-            TherosBeyondDeathStructure.AAB
-    );
-    private final RarityConfiguration rareRuns = new RarityConfiguration(
-            false,
-            TherosBeyondDeathStructure.R1,
-            TherosBeyondDeathStructure.R1,
-            TherosBeyondDeathStructure.R2
-    );
-    private final RarityConfiguration landRuns = new RarityConfiguration(
-            TherosBeyondDeathStructure.L1
-    );
-
-
-    @Override
-    public void shuffle() {
-        commonRuns.shuffle();
-        uncommonRuns.shuffle();
-        rareRuns.shuffle();
-        landRuns.shuffle();
-    }
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(AAB, ABB);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1, R1, R2);
+    private final RarityConfiguration landRuns = new RarityConfiguration(L1);
 
     @Override
     public List<String> makeBooster() {

@@ -5,6 +5,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.keyword.DisturbAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,6 +32,7 @@ public final class OverwhelmedArchivist extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(1, 1)));
 
         // Disturb {3}{U}
+        this.addAbility(new TransformAbility());
         this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{3}{U}")));
     }
 

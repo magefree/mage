@@ -72,7 +72,7 @@ public final class CrownOfDoom extends CardImpl {
     }
 }
 
-enum CrownOfDoomPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+enum CrownOfDoomPredicate implements ObjectSourcePlayerPredicate<Player> {
     instance;
 
     @Override

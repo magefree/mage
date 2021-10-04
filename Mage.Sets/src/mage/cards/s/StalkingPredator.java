@@ -29,7 +29,7 @@ public final class StalkingPredator extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private StalkingPredator(final StalkingPredator card) {

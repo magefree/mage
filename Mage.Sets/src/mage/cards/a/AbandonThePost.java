@@ -25,7 +25,7 @@ public final class AbandonThePost extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
         // Flashback {3}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{3}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{R}")));
     }
 
     private AbandonThePost(final AbandonThePost card) {

@@ -9,7 +9,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author jeffwadsworth
  */
-public enum GreatestPowerControlledPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+public enum GreatestPowerControlledPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
 
     @Override

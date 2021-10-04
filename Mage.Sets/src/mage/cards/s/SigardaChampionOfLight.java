@@ -29,7 +29,7 @@ public final class SigardaChampionOfLight extends CardImpl {
     private static final FilterCard filter2 = new FilterCreatureCard("Human creature card");
 
     static {
-        filter.add(SubType.HUMAN.getPredicate());
+        filter2.add(SubType.HUMAN.getPredicate());
     }
 
     public SigardaChampionOfLight(UUID ownerId, CardSetInfo setInfo) {

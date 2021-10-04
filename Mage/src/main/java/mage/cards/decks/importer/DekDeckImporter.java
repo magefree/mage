@@ -21,7 +21,7 @@ public class DekDeckImporter extends PlainTextDeckImporter {
             Integer cardCount = Integer.parseInt(extractAttribute(line, "Quantity"));
             String cardName = extractAttribute(line, "Name");
             boolean isSideboard = "true".equals(extractAttribute(line, "Sideboard"));
-            CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, true);
+            CardInfo cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(cardName, true);
             if (cardInfo == null) {
                 sbMessage.append("Could not find card: '").append(cardName).append("' at line ").append(lineCount).append('\n');
             } else {

@@ -58,7 +58,7 @@ public final class MalevolentNoble extends CardImpl {
     }
 }
 
-enum MalevolentNoblePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum MalevolentNoblePredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
     @Override

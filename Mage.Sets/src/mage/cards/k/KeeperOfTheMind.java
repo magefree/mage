@@ -102,7 +102,7 @@ enum KeeperOfTheMindAdjuster implements TargetAdjuster {
     }
 }
 
-class KeeperOfTheMindPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+class KeeperOfTheMindPredicate implements ObjectSourcePlayerPredicate<Player> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {

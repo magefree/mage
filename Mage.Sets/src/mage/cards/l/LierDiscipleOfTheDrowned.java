@@ -104,9 +104,7 @@ class LierDiscipleOfTheDrownedFlashbackEffect extends ContinuousEffectImpl {
             return false;
         }
         for (Card card : player.getGraveyard().getCards(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, game)) {
-            Ability ability = new FlashbackAbility(
-                    card.getManaCost(), card.isInstant(game) ? TimingRule.INSTANT : TimingRule.SORCERY
-            );
+            Ability ability = new FlashbackAbility(card, card.getManaCost());
             ability.setSourceId(card.getId());
             ability.setControllerId(card.getOwnerId());
             game.getState().addOtherAbility(card, ability);

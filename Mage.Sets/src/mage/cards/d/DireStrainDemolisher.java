@@ -30,7 +30,7 @@ public final class DireStrainDemolisher extends CardImpl {
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}")));
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private DireStrainDemolisher(final DireStrainDemolisher card) {

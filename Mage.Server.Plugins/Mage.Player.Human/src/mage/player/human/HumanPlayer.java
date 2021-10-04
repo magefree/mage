@@ -2174,7 +2174,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public SpellAbility chooseAbilityForCast(Card card, Game game, boolean nonMana) {
+    public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         if (gameInCheckPlayableState(game)) {
             return null;
         }
@@ -2186,8 +2186,8 @@ public class HumanPlayer extends PlayerImpl {
 
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
         if (object != null) {
-            String message = "Choose ability to cast" + (nonMana ? " for FREE" : "") + "<br>" + object.getLogName();
-            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
+            String message = "Choose ability to cast" + (noMana ? " for FREE" : "") + "<br>" + object.getLogName();
+            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = PlayerImpl.getCastableSpellAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana);
             if (useableAbilities != null
                     && useableAbilities.size() == 1) {
                 return (SpellAbility) useableAbilities.values().iterator().next();

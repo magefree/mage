@@ -61,7 +61,7 @@ public final class UntamedPup extends CardImpl {
         this.addAbility(ability);
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private UntamedPup(final UntamedPup card) {

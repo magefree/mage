@@ -26,7 +26,7 @@ public final class ElectricRevelation extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
 
         // Flashback {3}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl<>("{3}{R}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{R}")));
     }
 
     private ElectricRevelation(final ElectricRevelation card) {

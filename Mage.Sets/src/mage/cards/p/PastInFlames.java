@@ -22,12 +22,11 @@ public final class PastInFlames extends CardImpl {
     public PastInFlames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
-
         // Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
         this.getSpellAbility().addEffect(new PastInFlamesEffect());
 
         // Flashback {4}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{R}")));
 
     }
 
@@ -73,25 +72,18 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.getGraveyard().stream().filter((cardId) -> (affectedObjectList.contains(new MageObjectReference(cardId, game)))).forEachOrdered((cardId) -> {
-                Card card = game.getCard(cardId);
-                if (card != null) {
-                    FlashbackAbility ability = null;
-                    if (card.isInstant(game)) {
-                        ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
-                    } else if (card.isSorcery(game)) {
-                        ability = new FlashbackAbility(card.getManaCost(), TimingRule.SORCERY);
-                    }
-                    if (ability != null) {
-                        ability.setSourceId(cardId);
-                        ability.setControllerId(card.getOwnerId());
-                        game.getState().addOtherAbility(card, ability);
-                    }
-                }
-            });
-            return true;
+        if (player == null) {
+            return false;
         }
-        return false;
+        player.getGraveyard().stream().filter((cardId) -> (affectedObjectList.contains(new MageObjectReference(cardId, game)))).forEachOrdered((cardId) -> {
+            Card card = game.getCard(cardId);
+            if (card != null) {
+                FlashbackAbility ability = new FlashbackAbility(card, card.getManaCost());
+                ability.setSourceId(cardId);
+                ability.setControllerId(card.getOwnerId());
+                game.getState().addOtherAbility(card, ability);
+            }
+        });
+        return true;
     }
 }

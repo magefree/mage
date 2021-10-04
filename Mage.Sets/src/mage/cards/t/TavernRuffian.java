@@ -29,7 +29,7 @@ public final class TavernRuffian extends CardImpl {
 
         // Daybound
         this.addAbility(new TransformAbility());
-        this.addAbility(DayboundAbility.getInstance());
+        this.addAbility(new DayboundAbility());
     }
 
     private TavernRuffian(final TavernRuffian card) {

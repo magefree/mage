@@ -28,7 +28,7 @@ public final class EngulfingFlames extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new CantRegenerateTargetEffect(Duration.EndOfTurn, "It"));
         // Flashback {3}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{R}")));
     }
 
     private EngulfingFlames(final EngulfingFlames card) {

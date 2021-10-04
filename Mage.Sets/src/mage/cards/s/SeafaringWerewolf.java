@@ -36,7 +36,7 @@ public final class SeafaringWerewolf extends CardImpl {
         ));
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private SeafaringWerewolf(final SeafaringWerewolf card) {

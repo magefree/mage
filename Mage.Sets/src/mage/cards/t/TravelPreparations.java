@@ -29,7 +29,7 @@ public final class TravelPreparations extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
         // Flashback {1}{W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{W}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{1}{W}")));
     }
 
     private TravelPreparations(final TravelPreparations card) {

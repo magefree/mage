@@ -92,7 +92,9 @@ class YennettCrypticSovereignEffect extends OneShotEffect {
         player.revealCards(source, new CardsImpl(card), game);
         if (card.getManaValue() % 2 == 1) {
             if (player.chooseUse(outcome, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
-                player.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                player.cast(player.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
             } else {
                 /*
                 7/13/2018 | If the revealed card doesn’t have an odd converted mana cost or if that card does but you 

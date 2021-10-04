@@ -23,7 +23,7 @@ public final class AncientGrudge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
 
         // Flashback {G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{G}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{G}")));
     }
 
     private AncientGrudge(final AncientGrudge card) {

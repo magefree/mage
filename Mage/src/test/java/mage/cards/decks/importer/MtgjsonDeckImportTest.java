@@ -3,6 +3,8 @@ package mage.cards.decks.importer;
 import mage.cards.decks.DeckCardLists;
 import org.junit.Test;
 
+import java.nio.file.Paths;
+
 import static org.junit.Assert.assertEquals;
 
 public class MtgjsonDeckImportTest {
@@ -21,7 +23,10 @@ public class MtgjsonDeckImportTest {
 
         // offline deck from https://mtgjson.com/api/v5/decks/ArcaneTempo_GRN.json
         DeckCardLists deck = importer.importDeck(
-                "src/test/java/mage/cards/decks/importer/samples/testdeck.json", errors, false);
+                Paths.get("src", "test", "data", "importer", "testdeck.json").toString(),
+                errors,
+                false
+        );
         assertEquals("Arcane Tempo", deck.getName());
         TestDeckChecker.checker()
                 .addMain("Goblin Electromancer", 4)

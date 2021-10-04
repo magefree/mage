@@ -29,7 +29,7 @@ public final class DireStrainBrawler extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private DireStrainBrawler(final DireStrainBrawler card) {

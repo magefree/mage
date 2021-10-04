@@ -1,19 +1,18 @@
 package mage.cards.c;
 
-import java.util.UUID;
-
-import mage.abilities.common.BeginningOfUpkeepAttachedTriggeredAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.constants.SubType;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.AttachEffect;
-import mage.constants.Outcome;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterPlayer;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.PlayerIdPredicate;
@@ -22,8 +21,9 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 import mage.target.targetadjustment.TargetAdjuster;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class CurseOfSurveillance extends CardImpl {
@@ -42,11 +42,11 @@ public final class CurseOfSurveillance extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of enchanted player's upkeep, any number of target players other than that player each draw cards equal to the number of Curses attached to that player.
-        ability = new BeginningOfUpkeepAttachedTriggeredAbility(
+        ability = new BeginningOfUpkeepTriggeredAbility(
                 new DrawCardTargetEffect(CurseOfSurveillanceValue.instance).setText(
                         "any number of target players other than that player each draw cards equal to the number of Curses attached to that player"
                 ),
-                false, false
+                TargetController.ENCHANTED, false
         );
         ability.setTargetAdjuster(CurseOfSurveillanceTargetAdjuster.instance);
         ability.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
@@ -68,13 +68,12 @@ enum CurseOfSurveillanceValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        UUID enchantedPlayerId = (UUID) effect.getValue("enchantedPlayer");
         int curses = 0;
-        if (enchantedPlayerId != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
-                if (permanent != null && permanent.hasSubtype(SubType.CURSE, game) && permanent.isAttachedTo(enchantedPlayerId)) {
-                    curses++;
-                }
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+            if (permanent != null
+                    && permanent.hasSubtype(SubType.CURSE, game)
+                    && permanent.isAttachedTo(game.getActivePlayerId())) {
+                curses++;
             }
         }
         return curses;

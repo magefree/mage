@@ -58,7 +58,7 @@ public final class MistformWarchief extends CardImpl {
     }
 }
 
-class MistformWarchiefPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+class MistformWarchiefPredicate implements ObjectSourcePlayerPredicate<Card> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

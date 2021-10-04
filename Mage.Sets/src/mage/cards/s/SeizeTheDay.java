@@ -27,7 +27,7 @@ public final class SeizeTheDay extends CardImpl {
         this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect());
 
         // Flashback {2}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{R}")));
     }
 
     private SeizeTheDay(final SeizeTheDay card) {

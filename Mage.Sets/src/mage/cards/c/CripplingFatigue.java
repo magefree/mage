@@ -28,7 +28,7 @@ public final class CripplingFatigue extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
 
         // Flashback-{1}{B}, Pay 3 life
-        Ability ability = new FlashbackAbility(new ManaCostsImpl("{1}{B}"), TimingRule.SORCERY);
+        Ability ability = new FlashbackAbility(this, new ManaCostsImpl("{1}{B}"));
         ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
     }

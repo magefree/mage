@@ -63,7 +63,7 @@ class LeafCrownedElderPlayEffect extends OneShotEffect {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null && card != null) {
             if (controller.chooseUse(Outcome.PlayForFree, "Play " + card.getIdName() + " without paying its mana cost?", source, game)) {
-                controller.playCard(card, game, true, true, new ApprovingObject(source, game));
+                controller.playCard(card, game, true, new ApprovingObject(source, game));
             }
             return true;
         }

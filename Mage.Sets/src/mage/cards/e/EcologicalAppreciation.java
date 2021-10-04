@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import com.google.common.collect.Sets;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -22,6 +21,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -109,7 +109,10 @@ class EcologicalAppreciationEffect extends OneShotEffect {
                         Set<Card> disallowedCards = this.getTargets().stream()
                             .map(game::getCard)
                             .collect(Collectors.toSet());
-                        return isValidTarget(card, Sets.union(disallowedCards, cards.getCards(game)));
+                        Set<Card> checkList = new HashSet<>();
+                        checkList.addAll(disallowedCards);
+                        checkList.addAll(cards.getCards(game));
+                        return isValidTarget(card, checkList);
                     }
                 };
                 targetCardsInGY.setNotTarget(true);

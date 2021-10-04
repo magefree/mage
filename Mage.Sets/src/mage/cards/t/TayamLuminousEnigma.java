@@ -35,8 +35,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import static com.google.common.collect.Iterables.getOnlyElement;
-
 /**
  * @author htrajan
  */
@@ -97,8 +95,7 @@ class TayamLuminousEnigmaCost extends RemoveCounterCost {
         Player controller = game.getPlayer(controllerId);
         for (int i = 0; i < countersToRemove; i++) {
             if (target.choose(Outcome.UnboostCreature, controllerId, source.getSourceId(), game)) {
-                UUID targetId = getOnlyElement(target.getTargets());
-                Permanent permanent = game.getPermanent(targetId);
+                Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     if (!permanent.getCounters(game).isEmpty()) {
                         String counterName = null;

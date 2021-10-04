@@ -24,7 +24,7 @@ public final class MoanOfTheUnhallowed extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 2));
 
         // Flashback {5}{B}{B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{B}{B}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{B}{B}")));
     }
 
     private MoanOfTheUnhallowed(final MoanOfTheUnhallowed card) {

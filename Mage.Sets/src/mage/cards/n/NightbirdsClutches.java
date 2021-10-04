@@ -26,7 +26,7 @@ public final class NightbirdsClutches extends CardImpl {
         this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
         // Flashback {3}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{R}")));
     }
 
     private NightbirdsClutches(final NightbirdsClutches card) {

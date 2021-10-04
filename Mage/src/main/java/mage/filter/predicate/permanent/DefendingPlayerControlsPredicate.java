@@ -8,7 +8,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author TheElk801
  */
-public enum DefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+public enum DefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
 
     @Override

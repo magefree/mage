@@ -102,21 +102,25 @@ public abstract class MageTestBase {
     @BeforeClass
     public static void init() {
         Logger.getRootLogger().setLevel(Level.DEBUG);
-        deleteSavedGames();
-        ConfigSettings config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
-        config.getGameTypes().forEach((gameType) -> {
-            GameFactory.instance.addGameType(gameType.getName(), loadGameType(gameType), loadPlugin(gameType));
-        });
-        config.getTournamentTypes().forEach((tournamentType) -> {
-            TournamentFactory.instance.addTournamentType(tournamentType.getName(), loadTournamentType(tournamentType), loadPlugin(tournamentType));
-        });
-        config.getPlayerTypes().forEach((playerType) -> {
-            PlayerFactory.instance.addPlayerType(playerType.getName(), loadPlugin(playerType));
-        });
+
+        // one time init for all tests
+        if (GameFactory.instance.getGameTypes().isEmpty()) {
+            deleteSavedGames();
+            ConfigSettings config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
+            config.getGameTypes().forEach((gameType) -> {
+                GameFactory.instance.addGameType(gameType.getName(), loadGameType(gameType), loadPlugin(gameType));
+            });
+            config.getTournamentTypes().forEach((tournamentType) -> {
+                TournamentFactory.instance.addTournamentType(tournamentType.getName(), loadTournamentType(tournamentType), loadPlugin(tournamentType));
+            });
+            config.getPlayerTypes().forEach((playerType) -> {
+                PlayerFactory.instance.addPlayerType(playerType.getName(), loadPlugin(playerType));
+            });
 //        for (Plugin plugin : config.getDeckTypes()) {
 //            DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
 //        }
-        Copier.setLoader(classLoader);
+            Copier.setLoader(classLoader);
+        }
     }
 
     @SuppressWarnings("UseSpecificCatch")

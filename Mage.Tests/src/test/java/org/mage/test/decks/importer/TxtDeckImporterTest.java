@@ -21,13 +21,13 @@ public class TxtDeckImporterTest {
         String[] sideboard = {"Swamp", "Mountain"};
 
         for (String c : cards) {
-            card = CardRepository.instance.findPreferedCoreExpansionCard(c, true);
+            card = CardRepository.instance.findPreferredCoreExpansionCard(c, true);
             assert card != null;
             deck.getCards().add(new DeckCardInfo(card.getName(), card.getCardNumber(), card.getSetCode()));
         }
 
         for (String s : sideboard) {
-            card = CardRepository.instance.findPreferedCoreExpansionCard(s, true);
+            card = CardRepository.instance.findPreferredCoreExpansionCard(s, true);
             assert card != null;
             deck.getSideboard().add(new DeckCardInfo(card.getName(), card.getCardNumber(), card.getSetCode()));
         }
