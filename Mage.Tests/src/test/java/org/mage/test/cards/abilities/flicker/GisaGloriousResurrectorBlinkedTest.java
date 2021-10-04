@@ -45,7 +45,7 @@ public class GisaGloriousResurrectorBlinkedTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);  // mana for Lightning Bolt
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);  // mana for Flicker
 
-        // The Memnite dies and gets exiled.  It should be put onto the battlefield under playerA's control during the next upkeep
+        // The Memnite dies and gets exiled.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Memnite");
         
         // Blink the Gisa, Glorious Resurrector
