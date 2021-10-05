@@ -42,7 +42,9 @@ jobs:
       - run: mvn test -B # -T 1C
 
       - env:
-          CI_NAME: github
+          CI_BRANCH: ${{ env.GITHUB_REF }}
+          CI_NAME: github-actions
+          CI_PULL_REQUEST: ${{ github.event.number }}
         run: >
           mvn
           jacoco:report
@@ -51,4 +53,3 @@ jobs:
           coveralls:report
           --define jacoco.skip=false
           --define repoToken=${{ secrets.GITHUB_TOKEN }}
-          --define pullRequest=${{ github.event.number }}
