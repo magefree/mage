@@ -74,7 +74,7 @@ class StranglingGraspEffect extends OneShotEffect {
 
     StranglingGraspEffect() {
         super(Outcome.Benefit);
-        staticText = "enchanted permanent's controller sacrifices a nonland permanent and loses 1 life";
+        staticText = "enchanted permanent's controller sacrifices a nonland permanent, then that player loses 1 life";
     }
 
     private StranglingGraspEffect(final StranglingGraspEffect effect) {

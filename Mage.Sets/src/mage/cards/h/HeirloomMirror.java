@@ -55,7 +55,7 @@ class HeirloomMirrorEffect extends OneShotEffect {
     HeirloomMirrorEffect() {
         super(Outcome.Benefit);
         staticText = "draw a card, mill a card, then put a ritual counter on {this}. " +
-                "Then if it has 3 or more ritual counters on it, remove them and transform it";
+                "Then if it has three or more ritual counters on it, remove them and transform it";
     }
 
     private HeirloomMirrorEffect(final HeirloomMirrorEffect effect) {

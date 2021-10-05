@@ -70,7 +70,7 @@ public final class TombTyrant extends CardImpl {
                 new ManaCostsImpl<>("{2}{B}"), condition
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability.addHint(MyTurnHint.instance).addHint(hint));
     }
 

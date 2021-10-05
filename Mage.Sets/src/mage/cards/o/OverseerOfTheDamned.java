@@ -26,7 +26,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class OverseerOfTheDamned extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature an opponent controls");
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());

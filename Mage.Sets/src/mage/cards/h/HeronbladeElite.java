@@ -1,13 +1,14 @@
 package mage.cards.h;
 
 import mage.MageInt;
+import mage.Mana;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -43,7 +44,10 @@ public final class HeronbladeElite extends CardImpl {
         ));
 
         // {T}: Add X mana of any one color, where X is Heronblade Elite's power.
-        this.addAbility(new AnyColorManaAbility(new TapSourceCost(), xValue, false));
+        this.addAbility(new DynamicManaAbility(
+                Mana.AnyMana(1), xValue, new TapSourceCost(), "Add X mana " +
+                "of any one color, where X is {this}'s power", true
+        ));
     }
 
     private HeronbladeElite(final HeronbladeElite card) {

@@ -30,8 +30,8 @@ public final class TrostanisSummoner extends CardImpl {
 
         // When Trostani's Summoner enters the battlefield, create a 2/2 white Knight creature token with vigilance, a 3/3 green Centaur creature token, and a 4/4 green Rhino creature token with trample.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightToken()));
-        ability.addEffect(new CreateTokenEffect(new CentaurToken()));
-        ability.addEffect(new CreateTokenEffect(new RhinoToken()));
+        ability.addEffect(new CreateTokenEffect(new CentaurToken()).setText(", a 3/3 green Centaur creature token"));
+        ability.addEffect(new CreateTokenEffect(new RhinoToken()).setText(", and a 4/4 green Rhino creature token with trample"));
         this.addAbility(ability);
 
     }

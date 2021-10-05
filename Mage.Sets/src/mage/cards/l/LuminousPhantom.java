@@ -10,7 +10,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
 
@@ -18,6 +20,13 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class LuminousPhantom extends CardImpl {
+
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("another creature you control");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
 
     public LuminousPhantom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
@@ -34,9 +43,7 @@ public final class LuminousPhantom extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever another creature you control leaves the battlefield, you gain 1 life.
-        this.addAbility(new LeavesBattlefieldAllTriggeredAbility(
-                new GainLifeEffect(1), StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-        ));
+        this.addAbility(new LeavesBattlefieldAllTriggeredAbility(new GainLifeEffect(1), filter));
 
         // If Luminous Phantom would be put into a graveyard from anywhere, exile it instead.
         this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));

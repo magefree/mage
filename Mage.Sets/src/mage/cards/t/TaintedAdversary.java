@@ -59,7 +59,7 @@ class TaintedAdversaryEffect extends OneShotEffect {
     TaintedAdversaryEffect() {
         super(Outcome.Benefit);
         staticText = "put that many +1/+1 counters on {this}, " +
-                "then create twice that many black 2/2 Zombie creature tokens with decayed";
+                "then create twice that many 2/2 black Zombie creature tokens with decayed";
     }
 
     private TaintedAdversaryEffect(final TaintedAdversaryEffect effect) {

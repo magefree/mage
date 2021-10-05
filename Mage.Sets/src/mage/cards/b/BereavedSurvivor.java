@@ -32,7 +32,7 @@ public final class BereavedSurvivor extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new TransformSourceEffect(true), false,
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-        ));
+        ).setTriggerPhrase("When another creature you control dies, "));
     }
 
     private BereavedSurvivor(final BereavedSurvivor card) {
