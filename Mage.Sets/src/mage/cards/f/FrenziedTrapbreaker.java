@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
 import mage.target.TargetPermanent;
@@ -44,6 +45,7 @@ public final class FrenziedTrapbreaker extends CardImpl {
         // {1}, Sacrifice Frenzied Trapbreaker: Destroy target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(ability);
 
         // Whenever Frenzied Trapbreaker attacks, destroy target artifact or enchantment defending player controls.

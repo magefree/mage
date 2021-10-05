@@ -29,7 +29,7 @@ import java.util.UUID;
 public final class WilheltTheRotcleaver extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledPermanent(SubType.ZOMBIE);
+            = new FilterControlledPermanent(SubType.ZOMBIE, "another Zombie you control");
     private static final FilterControlledPermanent filter2
             = new FilterControlledPermanent(SubType.ZOMBIE, "a Zombie");
 
@@ -49,7 +49,7 @@ public final class WilheltTheRotcleaver extends CardImpl {
         // Whenever another Zombie you control dies, if it didn't have decayed, create a 2/2 black Zombie creature token with decayed.
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new CreateTokenEffect(new ZombieDecayedToken())
-                        .concatBy(", if it didn't have decayed, "),
+                        .setText("if it didn't have decayed, create a 2/2 black Zombie creature token with decayed"),
                 false, filter
         ));
 

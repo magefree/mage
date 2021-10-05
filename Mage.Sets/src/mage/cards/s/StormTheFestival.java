@@ -32,7 +32,7 @@ public final class StormTheFestival extends CardImpl {
 
         // Look at the top five cards of your library. Put up to two permanent cards with mana value 5 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                5, 2, filter, false, true, Zone.BATTLEFIELD, false
+                5, 2, filter, false, true, Zone.BATTLEFIELD, true
         ).setBackInRandomOrder(true));
 
         // Flashback {7}{G}{G}{G}

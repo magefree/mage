@@ -66,7 +66,7 @@ class PhantomCarriageEffect extends SearchEffect {
 
     public PhantomCarriageEffect() {
         super(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), Outcome.Neutral);
-        staticText = "search your library for a card with flashback or disturb, put that card into your graveyard, then shuffle";
+        staticText = "search your library for a card with flashback or disturb, put it into your graveyard, then shuffle";
     }
 
     public PhantomCarriageEffect(final PhantomCarriageEffect effect) {

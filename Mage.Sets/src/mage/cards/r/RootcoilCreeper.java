@@ -58,7 +58,7 @@ public final class RootcoilCreeper extends CardImpl {
         // {G}{U}, {T}, Exile Rootcoil Creeper: Return target card with flashback you own in exile to your hand.
         Ability ability = new SimpleActivatedAbility(
                 new ReturnToHandTargetEffect()
-                        .setText("return target card with flashback you own in exile to your hand"),
+                        .setText("return target card with flashback you own from exile to your hand"),
                 new ManaCostsImpl<>("{G}{U}")
         );
         ability.addCost(new TapSourceCost());
