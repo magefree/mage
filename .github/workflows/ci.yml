@@ -42,9 +42,9 @@ jobs:
       - run: mvn test -B # -T 1C
 
       - env:
-          CI_BRANCH: ${{ env.GITHUB_REF }}
+          CI_BRANCH: ${{ github.ref }}
           CI_NAME: github-actions
-          CI_PULL_REQUEST: ${{ github.event.number }}
+          # CI_PULL_REQUEST: ${{ github.event.number }}
         run: >
           mvn
           jacoco:report
