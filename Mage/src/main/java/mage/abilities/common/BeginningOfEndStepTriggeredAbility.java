@@ -115,7 +115,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
             case CONTROLLER_ATTACHED_TO:
                 return "At the beginning of the end step of enchanted permanent's controller, " + generateConditionString();
             case ENCHANTED:
-                return "At the beginning of enchanted player's draw step, " + generateConditionString();
+                return "At the beginning of enchanted player's end step, " + generateConditionString();
         }
         return "";
     }
