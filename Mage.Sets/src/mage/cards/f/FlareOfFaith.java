@@ -45,7 +45,7 @@ class FlareOfFaithEffect extends OneShotEffect {
     FlareOfFaithEffect() {
         super(Outcome.Benefit);
         staticText = "target creature gets +2/+2 until end of turn. If it's a Human, " +
-                "it gets +3/+3 and gains indestructible until end of turn instead";
+                "instead it gets +3/+3 and gains indestructible until end of turn";
     }
 
     private FlareOfFaithEffect(final FlareOfFaithEffect effect) {
