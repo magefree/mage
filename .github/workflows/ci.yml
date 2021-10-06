@@ -43,9 +43,16 @@ jobs:
       - run: mvn test -B # -T 1C
 
       - env:
-          # CI_BRANCH: ${{ github.ref }}
-          CI_NAME: github-actions
-          # CI_PULL_REQUEST: ${{ github.event.number }}
+          BRANCH: ${{ github.ref }}
+        id: setup
+        run: |
+          echo "::set-output name=branch-name::${BRANCH#refs/heades/}"
+          echo "::set-output name=pr-number::$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")"
+      - env:
+          CI_BUILD_URL: https://github.com/${{ github.repository }}/comit/${{ github.sha }}/checks
+          CI_BRANCH: ${{ steps.setup.output.branch-name }}
+          CI_NAME: github
+          CI_PULL_REQUEST: ${{ steps.setup.output.pr-number }}
         run: >
           mvn
           jacoco:report
@@ -54,4 +61,3 @@ jobs:
           coveralls:report
           --define jacoco.skip=false
           --define repoToken=${{ secrets.GITHUB_TOKEN }}
-          --define pullRequest=${{ github.event.number }}
