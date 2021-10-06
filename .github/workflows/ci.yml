@@ -9,7 +9,8 @@ on:
       - master
 
 env:
-  MAVEN_OPTS: -Xmx3g
+  MAVEN_OPTS: -Xmx3g -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
+
 
 jobs:
   test:
