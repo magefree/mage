@@ -42,18 +42,18 @@ jobs:
       # running in parallel causes some tests to fail
       - run: mvn test -B # -T 1C
 
-      - env:
-          BRANCH: ${{ github.ref }}
+      - name: Parse branch name
+        env:
+          BRANCH: ${{ github.head_ref || github.ref }}
         id: setup
         run: |
-          echo "::set-output name=branch-name::${BRANCH#refs/heades/}"
-          echo "::set-output name=pr-number::$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")"
+          echo "::set-output name=branch-name::${BRANCH#refs/heads/}"
       - env:
           CI_BUILD_NUMBER: ${{ github.run_id }}
           CI_BUILD_URL: https://github.com/${{ github.repository }}/comit/${{ github.sha }}/checks
           CI_BRANCH: ${{ steps.setup.output.branch-name }}
           CI_NAME: github
-          CI_PULL_REQUEST: ${{ steps.setup.output.pr-number }}
+          CI_PULL_REQUEST: ${{ github.event.pull_request.number }}
         run: >
           mvn
           jacoco:report
