@@ -49,6 +49,7 @@ jobs:
           echo "::set-output name=branch-name::${BRANCH#refs/heades/}"
           echo "::set-output name=pr-number::$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")"
       - env:
+          CI_BUILD_NUMBER: ${{ github.run_id }}
           CI_BUILD_URL: https://github.com/${{ github.repository }}/comit/${{ github.sha }}/checks
           CI_BRANCH: ${{ steps.setup.output.branch-name }}
           CI_NAME: github
