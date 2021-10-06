@@ -23,7 +23,7 @@ jobs:
           java-package: jdk+fx
           # https://github.com/actions/setup-java#supported-distributions
           distribution: zulu
-          # cache: maven
+          cache: maven
 
       # https://docs.travis-ci.com/user/languages/java/#maven-dependency-management
       - run: >
