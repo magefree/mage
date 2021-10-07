@@ -40,15 +40,7 @@ jobs:
       # https://docs.travis-ci.com/user/languages/java/#maven-default-script-command
       # tests are interdependent and require a specific order
       # running in parallel causes some tests to fail
-      - run: mvn test -B # -T 1C
-
-      # do we need all these goals? Most other projects just do jacoco:report and coveralls:report
-      - run: >
-          mvn
-          jacoco:report
-          jacoco:report-aggregate
-          verify
-          --define jacoco.skip=false
+      - run: mvn test --batch-mode
 
       - env:
           CI_BUILD_NUMBER: ${{ github.run_id }}
@@ -57,7 +49,12 @@ jobs:
           CI_BRANCH: ${{ github.head_ref }}
           CI_NAME: github
           CI_PULL_REQUEST: ${{ github.event.pull_request.number }}
+        # do we need all these goals? Most other projects just do jacoco:report and coveralls:report
         run: >
           mvn
+          jacoco:report
+          jacoco:report-aggregate
+          verify
           coveralls:report
+          --define jacoco.skip=false
           --define repoToken=${{ secrets.GITHUB_TOKEN }}
