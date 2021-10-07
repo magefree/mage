@@ -3,14 +3,16 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -28,7 +30,9 @@ public final class CoalhaulerSwine extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Coalhauler Swine is dealt damage, it deals that much damage to each player.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(new CoalhaulerSwineEffect(), false, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new DamagePlayersEffect(
+                Outcome.Neutral, CoalhaulerSwineValue.instance, TargetController.ANY, "it"
+        ), false, false, true));
     }
 
     private CoalhaulerSwine(final CoalhaulerSwine card) {
@@ -39,33 +43,28 @@ public final class CoalhaulerSwine extends CardImpl {
     public CoalhaulerSwine copy() {
         return new CoalhaulerSwine(this);
     }
+}
 
-    static class CoalhaulerSwineEffect extends OneShotEffect {
+enum CoalhaulerSwineValue implements DynamicValue {
+    instance;
 
-        public CoalhaulerSwineEffect() {
-            super(Outcome.Damage);
-            staticText = "it deals that much damage to each player";
-        }
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return (Integer) effect.getValue("damage");
+    }
 
-        public CoalhaulerSwineEffect(final CoalhaulerSwineEffect effect) {
-            super(effect);
-        }
+    @Override
+    public CoalhaulerSwineValue copy() {
+        return this;
+    }
 
-        @Override
-        public CoalhaulerSwineEffect copy() {
-            return new CoalhaulerSwineEffect(this);
-        }
+    @Override
+    public String getMessage() {
+        return "";
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            for (UUID playerId : game.getPlayers().keySet()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    player.damage((Integer) this.getValue("damage"), source.getSourceId(), source, game);
-                }
-            }
-            return true;
-        }
-
+    @Override
+    public String toString() {
+        return "that much";
     }
 }
