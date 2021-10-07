@@ -1,5 +1,6 @@
-package mage.cards.decks;
+package org.mage.test.decks.exporter;
 
+import mage.cards.decks.DeckFormats;
 import org.junit.Assert;
 import org.junit.Test;
 

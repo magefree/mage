@@ -4,12 +4,15 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.icon.CardIcon;
+import mage.abilities.icon.CardIconImpl;
+import mage.abilities.icon.CardIconType;
 import mage.abilities.icon.abilities.HexproofAbilityIcon;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * an abstract base class for hexproof abilities
@@ -20,7 +23,6 @@ public abstract class HexproofBaseAbility extends SimpleStaticAbility implements
 
     HexproofBaseAbility() {
         super(Zone.BATTLEFIELD, null);
-        this.addIcon(HexproofAbilityIcon.instance);
     }
 
     public abstract boolean checkObject(MageObject source, Game game);
@@ -59,5 +61,21 @@ public abstract class HexproofBaseAbility extends SimpleStaticAbility implements
         } else {
             return null;
         }
+    }
+
+    public abstract String getCardIconHint(Game game);
+
+    @Override
+    public List<CardIcon> getIcons(Game game) {
+        if (game == null) {
+            return new ArrayList<>(Collections.singletonList(
+                    HexproofAbilityIcon.instance
+            ));
+        }
+
+        // dynamic icon (example: colored hexproof)
+        return new ArrayList<>(Collections.singletonList(
+                HexproofAbilityIcon.createDynamicCardIcon(getCardIconHint(game))
+        ));
     }
 }

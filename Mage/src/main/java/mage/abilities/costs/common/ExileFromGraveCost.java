@@ -90,7 +90,8 @@ public class ExileFromGraveCost extends CostImpl {
                 cardsToExile.addAll(exiledCards);
                 controller.moveCardsToExile(
                         cardsToExile.getCards(game), source, game, true,
-                        CardUtil.getExileZoneId(game, source), null
+                        CardUtil.getExileZoneId(game, source),
+                        CardUtil.getSourceLogName(game, source)
                 );
                 if (setTargetPointer) {
                     source.getEffects().setTargetPointer(new FixedTargets(cardsToExile, game));

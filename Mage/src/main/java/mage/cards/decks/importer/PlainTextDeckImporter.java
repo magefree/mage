@@ -26,13 +26,13 @@ public abstract class PlainTextDeckImporter extends DeckImporter {
      * @param saveAutoFixedFile save fixed deck file (if any fixes applied)
      * @return decks list
      */
-    public DeckCardLists importDeck(String file, StringBuilder errorMessages, boolean saveAutoFixedFile) {
-        File f = new File(file);
+    public DeckCardLists importDeck(String fileName, StringBuilder errorMessages, boolean saveAutoFixedFile) {
+        File f = new File(fileName);
         List<String> originalFile = new ArrayList<>();
         List<String> fixedFile = new ArrayList<>();
         DeckCardLists deckList = new DeckCardLists();
         if (!f.exists()) {
-            logger.warn("Deckfile " + file + " not found.");
+            logger.warn("Deckfile " + fileName + " not found.");
             return deckList;
         }
         lineCount = 0;
@@ -94,8 +94,8 @@ public abstract class PlainTextDeckImporter extends DeckImporter {
 
 
     @Override
-    public DeckCardLists importDeck(String file, boolean saveAutoFixedFile) {
-        return importDeck(file, null, saveAutoFixedFile);
+    public DeckCardLists importDeck(String fileName, boolean saveAutoFixedFile) {
+        return importDeck(fileName, null, saveAutoFixedFile);
     }
 
     /**

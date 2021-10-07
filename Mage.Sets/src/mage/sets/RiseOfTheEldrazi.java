@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -328,6 +327,11 @@ class RiseOfTheEldraziCollator implements BoosterCollator {
             commonB, commonB, commonB,
             commonC2, commonC2, commonC2, commonC2
     );
+    private final BoosterStructure AAABBBBC2C2C2 = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB,
+            commonC2, commonC2, commonC2
+    );
     private final BoosterStructure AAAABBBC2C2C2 = new BoosterStructure(
             commonA, commonA, commonA, commonA,
             commonB, commonB, commonB,
@@ -366,9 +370,9 @@ class RiseOfTheEldraziCollator implements BoosterCollator {
 
             AAABC2C2C2C2C2C2,
             AAABBC2C2C2C2C2,
+            AAABBC2C2C2C2C2,
             AAABBBC2C2C2C2,
-            AAABBBC2C2C2C2,
-            AAABBBC2C2C2C2,
+            AAABBBBC2C2C2,
             AAAABBBC2C2C2,
             AAAABBBC2C2C2,
             AAAABBBC2C2C2,

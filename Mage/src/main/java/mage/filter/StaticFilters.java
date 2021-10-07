@@ -389,6 +389,13 @@ public final class StaticFilters {
         FILTER_OPPONENTS_PERMANENT_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_A_CREATURE = new FilterCreaturePermanent("a creature an opponent controls");
+
+    static {
+        FILTER_OPPONENTS_PERMANENT_A_CREATURE.add(TargetController.OPPONENT.getControllerPredicate());
+        FILTER_OPPONENTS_PERMANENT_A_CREATURE.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_OPPONENTS_PERMANENT_ARTIFACT = new FilterPermanent("artifact an opponent controls");
 
     static {
@@ -447,7 +454,7 @@ public final class StaticFilters {
         FILTER_CONTROLLED_ANOTHER_CREATURE.setLockedFilter(true);
     }
 
-    public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_UNTAPPED_CREATURES = new FilterControlledCreaturePermanent("untapped creature you control");
+    public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_UNTAPPED_CREATURES = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
         FILTER_CONTROLLED_UNTAPPED_CREATURES.add(TappedPredicate.UNTAPPED);

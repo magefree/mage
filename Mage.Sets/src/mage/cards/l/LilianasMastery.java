@@ -21,7 +21,7 @@ import mage.game.permanent.token.ZombieToken;
  */
 public final class LilianasMastery extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombies");
 
     static {
         filter.add(SubType.ZOMBIE.getPredicate());

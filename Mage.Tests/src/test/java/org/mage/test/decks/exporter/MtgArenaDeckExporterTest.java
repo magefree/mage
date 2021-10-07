@@ -1,7 +1,9 @@
-package mage.cards.decks.exporter;
+package org.mage.test.decks.exporter;
 
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.exporter.DeckExporter;
+import mage.cards.decks.exporter.MtgArenaDeckExporter;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;

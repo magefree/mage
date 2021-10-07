@@ -164,7 +164,7 @@ public class FlashbackAbility extends SpellAbility {
             sbRule.append('.');
         }
         if (abilityName != null) {
-            sbRule.append(' ');
+            sbRule.append(". ");
             sbRule.append(abilityName);
         }
         sbRule.append(" <i>(You may cast this card from your graveyard for its flashback cost. Then exile it.)</i>");

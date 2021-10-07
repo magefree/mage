@@ -79,9 +79,11 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fleshbag Marauder", 118, Rarity.UNCOMMON, mage.cards.f.FleshbagMarauder.class));
         cards.add(new SetCardInfo("Forgotten Creation", 100, Rarity.RARE, mage.cards.f.ForgottenCreation.class));
         cards.add(new SetCardInfo("Fortified Village", 174, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
+        cards.add(new SetCardInfo("Ghouls' Night Out", 19, Rarity.RARE, mage.cards.g.GhoulsNightOut.class));
         cards.add(new SetCardInfo("Gisa and Geralf", 150, Rarity.MYTHIC, mage.cards.g.GisaAndGeralf.class));
         cards.add(new SetCardInfo("Gleaming Overseer", 151, Rarity.UNCOMMON, mage.cards.g.GleamingOverseer.class));
         cards.add(new SetCardInfo("Go for the Throat", 119, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
+        cards.add(new SetCardInfo("Gorex, the Tombshell", 20, Rarity.RARE, mage.cards.g.GorexTheTombshell.class));
         cards.add(new SetCardInfo("Gravespawn Sovereign", 120, Rarity.RARE, mage.cards.g.GravespawnSovereign.class));
         cards.add(new SetCardInfo("Growth Spasm", 139, Rarity.COMMON, mage.cards.g.GrowthSpasm.class));
         cards.add(new SetCardInfo("Gyre Sage", 140, Rarity.RARE, mage.cards.g.GyreSage.class));
@@ -97,6 +99,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kessig Cagebreakers", 142, Rarity.RARE, mage.cards.k.KessigCagebreakers.class));
         cards.add(new SetCardInfo("Knight of the White Orchid", 88, Rarity.RARE, mage.cards.k.KnightOfTheWhiteOrchid.class));
         cards.add(new SetCardInfo("Krosan Verge", 175, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
+        cards.add(new SetCardInfo("Kurbis, Harvest Celebrant", 27, Rarity.RARE, mage.cards.k.KurbisHarvestCelebrant.class));
         cards.add(new SetCardInfo("Kyler, Sigardian Emissary", 4, Rarity.MYTHIC, mage.cards.k.KylerSigardianEmissary.class));
         cards.add(new SetCardInfo("Leinore, Autumn Sovereign", 1, Rarity.MYTHIC, mage.cards.l.LeinoreAutumnSovereign.class));
         cards.add(new SetCardInfo("Lifecrafter's Bestiary", 160, Rarity.RARE, mage.cards.l.LifecraftersBestiary.class));
@@ -104,8 +107,10 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana's Mastery", 123, Rarity.RARE, mage.cards.l.LilianasMastery.class));
         cards.add(new SetCardInfo("Liliana, Death's Majesty", 121, Rarity.MYTHIC, mage.cards.l.LilianaDeathsMajesty.class));
         cards.add(new SetCardInfo("Lord of the Accursed", 124, Rarity.UNCOMMON, mage.cards.l.LordOfTheAccursed.class));
+        cards.add(new SetCardInfo("Lynde, Cheerful Tormentor", 38, Rarity.MYTHIC, mage.cards.l.LyndeCheerfulTormentor.class));
         cards.add(new SetCardInfo("Midnight Reaper", 125, Rarity.RARE, mage.cards.m.MidnightReaper.class));
         cards.add(new SetCardInfo("Mikaeus, the Lunarch", 89, Rarity.MYTHIC, mage.cards.m.MikaeusTheLunarch.class));
+        cards.add(new SetCardInfo("Moorland Rescuer", 7, Rarity.RARE, mage.cards.m.MoorlandRescuer.class));
         cards.add(new SetCardInfo("Mortuary Mire", 176, Rarity.COMMON, mage.cards.m.MortuaryMire.class));
         cards.add(new SetCardInfo("Myriad Landscape", 177, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Odric, Master Tactician", 90, Rarity.RARE, mage.cards.o.OdricMasterTactician.class));
@@ -113,6 +118,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Orzhov Advokist", 91, Rarity.UNCOMMON, mage.cards.o.OrzhovAdvokist.class));
         cards.add(new SetCardInfo("Overseer of the Damned", 127, Rarity.RARE, mage.cards.o.OverseerOfTheDamned.class));
         cards.add(new SetCardInfo("Path of Ancestry", 178, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
+        cards.add(new SetCardInfo("Prowling Geistcatcher", 21, Rarity.RARE, mage.cards.p.ProwlingGeistcatcher.class));
         cards.add(new SetCardInfo("Ravenous Rotbelly", 22, Rarity.RARE, mage.cards.r.RavenousRotbelly.class));
         cards.add(new SetCardInfo("Return to Dust", 92, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("Riders of Gavony", 93, Rarity.RARE, mage.cards.r.RidersOfGavony.class));
@@ -121,6 +127,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ruinous Intrusion", 28, Rarity.RARE, mage.cards.r.RuinousIntrusion.class));
         cards.add(new SetCardInfo("Ruthless Deathfang", 154, Rarity.UNCOMMON, mage.cards.r.RuthlessDeathfang.class));
         cards.add(new SetCardInfo("Selesnya Sanctuary", 180, Rarity.UNCOMMON, mage.cards.s.SelesnyaSanctuary.class));
+        cards.add(new SetCardInfo("Shadow Kin", 16, Rarity.RARE, mage.cards.s.ShadowKin.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 143, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
         cards.add(new SetCardInfo("Sigarda's Vanguard", 8, Rarity.RARE, mage.cards.s.SigardasVanguard.class));
         cards.add(new SetCardInfo("Sigarda, Heron's Grace", 155, Rarity.MYTHIC, mage.cards.s.SigardaHeronsGrace.class));
@@ -156,6 +163,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Visions of Duplicity", 33, Rarity.RARE, mage.cards.v.VisionsOfDuplicity.class));
         cards.add(new SetCardInfo("Visions of Glory", 32, Rarity.RARE, mage.cards.v.VisionsOfGlory.class));
         cards.add(new SetCardInfo("Visions of Ruin", 36, Rarity.RARE, mage.cards.v.VisionsOfRuin.class));
+        cards.add(new SetCardInfo("Wall of Mourning", 10, Rarity.RARE, mage.cards.w.WallOfMourning.class));
         cards.add(new SetCardInfo("Wild Beastmaster", 146, Rarity.RARE, mage.cards.w.WildBeastmaster.class));
         cards.add(new SetCardInfo("Wilhelt, the Rotcleaver", 2, Rarity.MYTHIC, mage.cards.w.WilheltTheRotcleaver.class));
         cards.add(new SetCardInfo("Yavimaya Elder", 147, Rarity.COMMON, mage.cards.y.YavimayaElder.class));

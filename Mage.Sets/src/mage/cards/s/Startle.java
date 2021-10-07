@@ -25,7 +25,7 @@ public final class Startle extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieDecayedToken()));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Startle(final Startle card) {

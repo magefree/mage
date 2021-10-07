@@ -58,7 +58,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "AFR"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "MID"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -1756,22 +1756,27 @@ public class VerifyCardDataTest {
                 || checkName.equals("Forest")
                 || checkName.equals("Swamp")
                 || checkName.equals("Plains")
-                || checkName.equals("Mountain")
-                || checkName.equals("Wastes");
+                || checkName.equals("Mountain");
     }
 
     private void checkBasicLands(Card card, MtgJsonCard ref) {
 
         // basic lands must have Rarity.LAND and SuperType.BASIC
         // other cards can't have that stats
-        if (isBasicLandName(card.getName())) {
+        String name = card.getName();
+        if (isBasicLandName(name)) {
             // lands
-            if (card.getRarity() != Rarity.LAND && card.getRarity() != Rarity.SPECIAL) {
+            if (card.getRarity() != Rarity.LAND) {
                 fail(card, "rarity", "basic land must be Rarity.LAND");
             }
 
             if (!card.getSuperType().contains(SuperType.BASIC)) {
                 fail(card, "supertype", "basic land must be SuperType.BASIC");
+            }
+        } else if (name.equals("Wastes")) {
+            // Wastes are SuperType.BASIC but not necessarily Rarity.LAND
+            if (!card.getSuperType().contains(SuperType.BASIC)) {
+                fail(card, "supertype", "Wastes must be SuperType.BASIC");
             }
         } else {
             // non lands

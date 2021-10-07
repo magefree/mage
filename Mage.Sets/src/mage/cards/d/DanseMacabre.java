@@ -94,7 +94,7 @@ class DanseMacabreEffect extends OneShotEffect {
             TargetPermanent target = new TargetPermanent(filter);
             target.setNotTarget(true);
             player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent == null) {
                 continue;
             }

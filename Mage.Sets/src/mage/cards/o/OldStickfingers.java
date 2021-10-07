@@ -33,7 +33,7 @@ public final class OldStickfingers extends CardImpl {
         this.addAbility(new CastSourceTriggeredAbility(new OldStickfingersEffect()));
 
         // Old Stickfingers' power and toughness are equal to the number of creature cards in your graveyard.
-        DynamicValue value = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
+        DynamicValue value = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURES);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value, Duration.EndOfGame)));
     }
 
@@ -51,7 +51,7 @@ class OldStickfingersEffect extends OneShotEffect {
 
     public OldStickfingersEffect() {
         super(Outcome.Discard);
-        this.staticText = "reveal cards from the top of your library until you reveal X creature cards. Put all the creature cards revealed this way into your graveyard and the rest on the bottom of your library in a random order";
+        this.staticText = "reveal cards from the top of your library until you reveal X creature cards. Put all creature cards revealed this way into your graveyard, then put the rest on the bottom of your library in a random order";
     }
 
     public OldStickfingersEffect(final OldStickfingersEffect effect) {

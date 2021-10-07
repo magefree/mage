@@ -24,11 +24,8 @@ public final class PeaceTalks extends CardImpl {
     public PeaceTalks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}");
 
-        // This turn and next turn, creatures can't attack, 
-        // and players and permanents can't be the targets 
-        // of spells or activated abilities.
+        // This turn and next turn, creatures can't attack, and players and permanents can't be the targets of spells or activated abilities.
         this.getSpellAbility().addEffect(new PeaceTalksEffect());
-
     }
 
     private PeaceTalks(final PeaceTalks card) {

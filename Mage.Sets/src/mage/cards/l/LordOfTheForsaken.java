@@ -80,7 +80,7 @@ class LordOfTheForsakenManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public String getRule() {
-        return "Spend this mana only to cast a spell from a graveyard";
+        return "Spend this mana only to cast a spell from your graveyard";
     }
 }
 
@@ -88,7 +88,7 @@ class LordOfTheForsakenConditionalMana extends ConditionalMana {
 
     public LordOfTheForsakenConditionalMana(Mana mana) {
         super(mana);
-        staticText = "Spend this mana only to cast a spell from a graveyard";
+        staticText = "Spend this mana only to cast a spell from your graveyard";
         addCondition(LordOfTheForsakenManaCondition.instance);
     }
 }
@@ -98,7 +98,8 @@ enum LordOfTheForsakenManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game == null || !game.inCheckPlayableState()) {
+        if (game == null || !game.inCheckPlayableState()
+                || !source.isControlledBy(game.getOwnerId(source.getSourceId()))) {
             return false;
         }
         if (game.getCard(source.getSourceId()) != null

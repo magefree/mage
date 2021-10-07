@@ -75,6 +75,6 @@ enum SeizeTheStormValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "instant and sorcery cards in your graveyard, plus the number of cards with flashback you own in exile";
+        return "instant and sorcery cards in your graveyard plus the number of cards with flashback you own in exile";
     }
 }

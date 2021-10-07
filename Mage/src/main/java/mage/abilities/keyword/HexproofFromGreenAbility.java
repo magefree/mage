@@ -45,4 +45,9 @@ public class HexproofFromGreenAbility extends HexproofBaseAbility {
     public String getRule() {
         return "hexproof from green <i>(This creature can't be the target of green spells or abilities your opponents control.)</i>";
     }
+
+    @Override
+    public String getCardIconHint(Game game) {
+        return "hexproof from green";
+    }
 }

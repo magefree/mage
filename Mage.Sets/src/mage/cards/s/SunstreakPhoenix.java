@@ -37,7 +37,7 @@ public final class SunstreakPhoenix extends CardImpl {
         this.addAbility(new BecomesDayOrNightTriggeredAbility(
                 Zone.GRAVEYARD,
                 new DoIfCostPaid(
-                        new ReturnSourceFromGraveyardToBattlefieldEffect(true),
+                        new ReturnSourceFromGraveyardToBattlefieldEffect(true, false),
                         new ManaCostsImpl<>("{1}{R}")
                 )
         ));
