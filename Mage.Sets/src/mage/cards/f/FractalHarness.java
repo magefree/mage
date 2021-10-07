@@ -56,8 +56,8 @@ class FractalHarnessTokenEffect extends OneShotEffect {
 
     FractalHarnessTokenEffect() {
         super(Outcome.Benefit);
-        staticText = "create a 0/0 green and blue Fractal creature token. " +
-                "Put X +1/+1 counters on it and attach {this} to it";
+        staticText = "create a 0/0 green and blue Fractal creature token. "
+                + "Put X +1/+1 counters on it and attach {this} to it";
     }
 
     private FractalHarnessTokenEffect(final FractalHarnessTokenEffect effect) {
@@ -80,7 +80,8 @@ class FractalHarnessTokenEffect extends OneShotEffect {
             if (permanent == null) {
                 continue;
             }
-            if (flag && permanent.addAttachment(tokenId, source, game)) {
+            if (flag
+                    && permanent.addAttachment(source.getSourceId(), source, game)) {
                 flag = false;
             }
             permanent.addCounters(CounterType.P1P1.createInstance(xValue), source.getControllerId(), source, game);
@@ -108,8 +109,13 @@ class FractalHarnessDoubleEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) getValue("attachedPermanent");
-        return permanent != null && permanent.addCounters(CounterType.P1P1.createInstance(
-                permanent.getCounters(game).getCount(CounterType.P1P1)
-        ), source.getControllerId(), source, game);
+        if (permanent == null) {
+            return false;
+        }
+        // BUG : changed this to a integer due to the trigger firing twice
+        final int addedCounters = permanent.getCounters(game).getCount(CounterType.P1P1);
+        // BUG : this oneShotEffect is being run twice for some reason, so the number of counters is four times as many
+        return permanent.addCounters(CounterType.P1P1.createInstance(addedCounters),
+                 source.getControllerId(), source, game);
     }
 }
