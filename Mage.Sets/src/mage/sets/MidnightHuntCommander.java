@@ -83,6 +83,7 @@ public final class MidnightHuntCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Gisa and Geralf", 150, Rarity.MYTHIC, mage.cards.g.GisaAndGeralf.class));
         cards.add(new SetCardInfo("Gleaming Overseer", 151, Rarity.UNCOMMON, mage.cards.g.GleamingOverseer.class));
         cards.add(new SetCardInfo("Go for the Throat", 119, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
+        cards.add(new SetCardInfo("Gorex, the Tombshell", 20, Rarity.RARE, mage.cards.g.GorexTheTombshell.class));
         cards.add(new SetCardInfo("Gravespawn Sovereign", 120, Rarity.RARE, mage.cards.g.GravespawnSovereign.class));
         cards.add(new SetCardInfo("Growth Spasm", 139, Rarity.COMMON, mage.cards.g.GrowthSpasm.class));
         cards.add(new SetCardInfo("Gyre Sage", 140, Rarity.RARE, mage.cards.g.GyreSage.class));
