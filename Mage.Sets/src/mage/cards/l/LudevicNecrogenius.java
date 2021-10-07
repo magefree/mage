@@ -7,6 +7,7 @@ import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.costs.common.ExileXFromYourGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
@@ -43,7 +44,8 @@ public final class LudevicNecrogenius extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new TransformSourceEffect(), new ManaCostsImpl<>("{X}{U}{U}{B}{B}")
         );
-        ability.addCost(new ExileXFromYourGraveCost(StaticFilters.FILTER_CARD_CREATURES));
+        ability.addEffect(new InfoEffect("X can't be 0"));
+        ability.addCost(new ExileXFromYourGraveCost(StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
         CardUtil.castStream(ability.getCosts().stream(), VariableManaCost.class).forEach(cost -> cost.setMinX(1));
         this.addAbility(ability);
     }

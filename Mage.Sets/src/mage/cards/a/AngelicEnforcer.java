@@ -41,7 +41,7 @@ public final class AngelicEnforcer extends CardImpl {
         // Angelic Enforcer's power and toughness are each equal to your life total.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(
                 ControllerLifeCount.instance, Duration.EndOfGame
-        )));
+        ).setText("{this}'s power and toughness are each equal to your life total")));
 
         // Whenever Angelic Enforcer attacks, double your life total.
         this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(

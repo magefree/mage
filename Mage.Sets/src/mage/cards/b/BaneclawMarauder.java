@@ -30,8 +30,7 @@ import java.util.*;
  */
 public final class BaneclawMarauder extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("each creature blocking it");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final FilterPermanent filter2 = new FilterCreaturePermanent("a creature blocking {this}");
 
     static {
@@ -51,7 +50,7 @@ public final class BaneclawMarauder extends CardImpl {
         // Whenever Baneclaw Marauder becomes blocked, each creature blocking it gets -1/-1 until end of turn.
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostAllEffect(
                 -1, -1, Duration.EndOfTurn, filter, false
-        ), false));
+        ).setText("each creature blocking it gets -1/-1 until end of turn"), false));
 
         // Whenever a creature blocking Baneclaw Marauder dies, its controller loses 1 life.
         this.addAbility(new DiesCreatureTriggeredAbility(

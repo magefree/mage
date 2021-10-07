@@ -39,7 +39,7 @@ public final class UnnaturalMoonrise extends CardImpl {
                 new DealsCombatDamageToAPlayerTriggeredAbility(
                         new DrawCardSourceControllerEffect(1), false
                 ).setTriggerPhrase("Whenever this creature deals combat damage to a player, "), Duration.EndOfTurn
-        ).setText("and has \"Whenever this creature deals combat damage to a player, draw a card.\""));
+        ).setText("and \"Whenever this creature deals combat damage to a player, draw a card.\""));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addHint(DayNightHint.instance);
 

@@ -20,8 +20,7 @@ import java.util.UUID;
  */
 public final class BanebladeScoundrel extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("each creature blocking it");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(BlockingOrBlockedBySourcePredicate.BLOCKING);
@@ -40,7 +39,7 @@ public final class BanebladeScoundrel extends CardImpl {
         // Whenever Baneblade Scoundrel becomes blocked, each creature blocking it gets -1/-1 until end of turn.
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostAllEffect(
                 -1, -1, Duration.EndOfTurn, filter, false
-        ), false));
+        ).setText("each creature blocking it gets -1/-1 until end of turn"), false));
 
         // Daybound
         this.addAbility(new TransformAbility());
