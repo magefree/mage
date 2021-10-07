@@ -42,18 +42,14 @@ jobs:
       # running in parallel causes some tests to fail
       - run: mvn test -B # -T 1C
 
-      - env:
-          CI_BUILD_NUMBER: ${{ github.run_id }}
-          # this will need to be updated to work on the main branch
-          CI_BUILD_URL: https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}/checks
-          CI_BRANCH: ${{ github.head_ref }}
-          CI_NAME: github
-          CI_PULL_REQUEST: ${{ github.event.pull_request.number }}
-        run: >
+      - run: >
           mvn
           jacoco:report
           jacoco:report-aggregate
           verify
-          coveralls:report
           --define jacoco.skip=false
-          --define repoToken=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@1.1.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
