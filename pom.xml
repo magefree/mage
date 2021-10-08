@@ -91,7 +91,9 @@
                 <version>4.3.0</version>
 
                 <configuration>
-                  <jacocoReports>${project.basedir}/../Mage.Verify/target/site/jacoco-aggregate/jacoco.xml</jacocoReports>
+                  <jacocoReports>
+                    <jacocoReport>${project.basedir}/../Mage.Verify/target/site/jacoco-aggregate/jacoco.xml</jacocoReport>
+                  </jacocoReports>
                 </configuration>
             </plugin>
         </plugins>
