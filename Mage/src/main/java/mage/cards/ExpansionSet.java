@@ -678,10 +678,6 @@ public abstract class ExpansionSet implements Serializable {
         return new ArrayList<>();
     }
 
-    public void removeSavedCards() {
-        savedCards.clear();
-    }
-
     public int getMaxCardNumberInBooster() {
         return maxCardNumberInBooster;
     }
