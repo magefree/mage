@@ -1248,10 +1248,10 @@ public class VerifyCardDataTest {
         if (!ONLY_TEXT) {
             return true;
         }
-        if (checkedNames.contains(ref.name)) {
+        if (checkedNames.contains(ref.getRealCardName())) {
             return false;
         }
-        checkedNames.add(ref.name);
+        checkedNames.add(ref.getRealCardName());
         return true;
     }
 
