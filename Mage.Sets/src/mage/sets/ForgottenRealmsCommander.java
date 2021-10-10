@@ -42,6 +42,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bedevil", 179, Rarity.RARE, mage.cards.b.Bedevil.class));
         cards.add(new SetCardInfo("Behemoth Sledge", 180, Rarity.UNCOMMON, mage.cards.b.BehemothSledge.class));
         cards.add(new SetCardInfo("Belt of Giant Strength", 38, Rarity.RARE, mage.cards.b.BeltOfGiantStrength.class));
+        cards.add(new SetCardInfo("Berserker's Frenzy", 29, Rarity.RARE, mage.cards.b.BerserkersFrenzy.class));
         cards.add(new SetCardInfo("Bituminous Blast", 181, Rarity.UNCOMMON, mage.cards.b.BituminousBlast.class));
         cards.add(new SetCardInfo("Bogardan Hellkite", 115, Rarity.MYTHIC, mage.cards.b.BogardanHellkite.class));
         cards.add(new SetCardInfo("Bojuka Bog", 226, Rarity.COMMON, mage.cards.b.BojukaBog.class));
