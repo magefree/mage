@@ -37,7 +37,7 @@ public final class BattleScreech extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(), 2));
 
         // Flashback-Tap three untapped white creatures you control.
-        this.addAbility(new FlashbackAbility(new TapTargetCost(new TargetControlledCreaturePermanent(3,3, filter, true)), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new TapTargetCost(new TargetControlledCreaturePermanent(3,3, filter, true))));
     }
 
     private BattleScreech(final BattleScreech card) {

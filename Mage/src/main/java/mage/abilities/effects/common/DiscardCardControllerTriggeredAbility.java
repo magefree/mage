@@ -11,7 +11,6 @@ import mage.game.events.GameEvent;
 /**
  * @author TheElk801
  */
-
 public class DiscardCardControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterCard filter;
@@ -48,6 +47,6 @@ public class DiscardCardControllerTriggeredAbility extends TriggeredAbilityImpl 
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever you discard " + filter.getMessage() + ", " ;
+        return "Whenever you discard " + filter.getMessage() + ", ";
     }
 }

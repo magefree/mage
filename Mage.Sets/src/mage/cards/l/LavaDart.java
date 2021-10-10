@@ -34,7 +34,7 @@ public final class LavaDart extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         
         // Flashback-Sacrifice a Mountain.
-        this.addAbility(new FlashbackAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter)), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
     private LavaDart(final LavaDart card) {

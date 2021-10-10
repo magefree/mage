@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponent;
@@ -27,11 +26,8 @@ import java.util.UUID;
  */
 public final class DiregrafCaptain extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie");
-
-    static {
-        filter.add(SubType.ZOMBIE.getPredicate());
-    }
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent(SubType.ZOMBIE, "Zombie creatures");
 
     public DiregrafCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");

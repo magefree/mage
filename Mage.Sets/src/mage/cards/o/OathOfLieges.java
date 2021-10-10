@@ -100,7 +100,7 @@ class OathOfLiegesEffect extends OneShotEffect {
     }
 }
 
-class OathOfLiegesPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+class OathOfLiegesPredicate implements ObjectSourcePlayerPredicate<Player> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {

@@ -26,7 +26,7 @@ public final class AcornHarvest extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SquirrelToken(), 2));
 
         // Flashback-{1}{G} - Pay 3 life.
-        FlashbackAbility ability = new FlashbackAbility(new ManaCostsImpl("{1}{G}"), TimingRule.SORCERY);
+        FlashbackAbility ability = new FlashbackAbility(this, new ManaCostsImpl("{1}{G}"));
         ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
         

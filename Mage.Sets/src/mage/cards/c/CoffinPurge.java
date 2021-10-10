@@ -26,7 +26,7 @@ public final class CoffinPurge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());
 
         // Flashback {B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{B}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{B}")));
     }
 
     private CoffinPurge(final CoffinPurge card) {

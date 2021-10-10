@@ -78,7 +78,9 @@ class SpellshiftEffect extends OneShotEffect {
             }
             spellController.revealCards(source, cardsToReveal, game);
             if (toCast != null && spellController.chooseUse(outcome, "Cast " + toCast.getLogName() + " without paying its mana cost?", source, game)) {
-                spellController.cast(toCast.getSpellAbility(), game, true, new ApprovingObject(source, game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + toCast.getId(), Boolean.TRUE);
+                spellController.cast(spellController.chooseAbilityForCast(toCast, game, true), game, true, new ApprovingObject(source, game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + toCast.getId(), null);
             }
             spellController.shuffleLibrary(source, game);
             return true;

@@ -116,6 +116,7 @@ Ikoria: Lair of Behemoths|IKO|
 Invasion|INV|
 Innistrad|ISD|
 Innistrad: Midnight Hunt|MID|
+Midnight Hunt Commander|MIC|
 Journey into Nyx|JOU|
 Judge Promo|JR|
 Judgment|JUD|

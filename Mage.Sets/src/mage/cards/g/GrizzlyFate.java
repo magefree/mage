@@ -33,7 +33,7 @@ public final class GrizzlyFate extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Flashback {5}{G}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{G}{G}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{G}{G}")));
     }
 
     private GrizzlyFate(final GrizzlyFate card) {

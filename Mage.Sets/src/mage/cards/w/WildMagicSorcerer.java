@@ -2,9 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.MageObjectReference;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -13,12 +11,14 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.players.Player;
 import mage.watchers.Watcher;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.players.Player;
 
 /**
  * @author TheElk801
@@ -34,7 +34,9 @@ public final class WildMagicSorcerer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // The first spell you cast from exile each turn has cascade.
-        this.addAbility(new SimpleStaticAbility(new WildMagicSorcererEffect()), new WildMagicSorcererWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect()),
+                new WildMagicSorcererWatcher());
     }
 
     private WildMagicSorcerer(final WildMagicSorcerer card) {
@@ -47,38 +49,60 @@ public final class WildMagicSorcerer extends CardImpl {
     }
 }
 
-class WildMagicSorcererEffect extends ContinuousEffectImpl {
+class WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect extends ContinuousEffectImpl {
 
     private final Ability cascadeAbility = new CascadeAbility();
 
-    public WildMagicSorcererEffect() {
+    public WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        staticText = "the first spell you cast from exile each turn has cascade";
+        staticText = "The first spell you cast from exile each turn has cascade";
     }
 
-    public WildMagicSorcererEffect(final WildMagicSorcererEffect effect) {
+    public WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect(final WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect effect) {
         super(effect);
     }
 
     @Override
-    public WildMagicSorcererEffect copy() {
-        return new WildMagicSorcererEffect(this);
+    public WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect copy() {
+        return new WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        if (controller != null) {
+            for (StackObject stackObject : game.getStack()) {
+                // only spells cast, so no copies of spells
+                if ((stackObject instanceof Spell)
+                        && !stackObject.isCopy()
+                        && stackObject.isControlledBy(source.getControllerId())) {
+                    Spell spell = (Spell) stackObject;
+                    WildMagicSorcererWatcher watcher = game.getState().getWatcher(WildMagicSorcererWatcher.class);
+                    if (watcher != null
+                            && FirstSpellCastFromExileEachTurnCondition.instance.apply(game, source)) {
+                        game.getState().addOtherAbility(spell.getCard(), cascadeAbility);
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+}
+
+enum FirstSpellCastFromExileEachTurnCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (game.getStack().isEmpty()) {
             return false;
         }
-        for (StackObject stackObject : game.getStack()) {
-            // only spells cast, so no copies of spells
-            if (stackObject.isControlledBy(source.getControllerId())
-                    && WildMagicSorcererWatcher.checkSpell(stackObject, game)) {
-                game.getState().addOtherAbility(((Spell) stackObject).getCard(), cascadeAbility);
-            }
-        }
-        return true;
+        WildMagicSorcererWatcher watcher = game.getState().getWatcher(WildMagicSorcererWatcher.class);
+        StackObject so = game.getStack().getFirst();
+        return so != null
+                && watcher != null
+                && WildMagicSorcererWatcher.checkSpell(so, game);
     }
 }
 
@@ -92,10 +116,11 @@ class WildMagicSorcererWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getZone() == Zone.EXILED) {
+        if (event.getType() != GameEvent.EventType.CAST_SPELL
+                || event.getZone() != Zone.EXILED) {
             return;
         }
-        Spell spell = game.getSpell(event.getTargetId());
+        Spell spell = game.getSpell(event.getSourceId());
         if (spell == null) {
             return;
         }
@@ -109,7 +134,8 @@ class WildMagicSorcererWatcher extends Watcher {
     }
 
     static boolean checkSpell(StackObject stackObject, Game game) {
-        if (stackObject.isCopy() || !(stackObject instanceof Spell)) {
+        if (stackObject.isCopy()
+                || !(stackObject instanceof Spell)) {
             return false;
         }
         WildMagicSorcererWatcher watcher = game.getState().getWatcher(WildMagicSorcererWatcher.class);

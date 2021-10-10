@@ -45,4 +45,9 @@ public class HexproofFromWhiteAbility extends HexproofBaseAbility {
     public String getRule() {
         return "hexproof from white <i>(This creature can't be the target of white spells or abilities your opponents control.)</i>";
     }
+
+    @Override
+    public String getCardIconHint(Game game) {
+        return "hexproof from white";
+    }
 }

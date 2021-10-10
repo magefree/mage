@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>1.4.49</version>
+        <version>1.4.50</version>
     </parent>
 
     <artifactId>mage.server.console</artifactId>
@@ -23,11 +23,6 @@
             <groupId>org.swinglabs</groupId>
             <artifactId>swingx</artifactId>
             <version>1.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 

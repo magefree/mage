@@ -27,7 +27,7 @@ public final class MorbidHunger extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
         // Flashback {7}{B}{B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{B}{B}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{7}{B}{B}")));
         
     }
 

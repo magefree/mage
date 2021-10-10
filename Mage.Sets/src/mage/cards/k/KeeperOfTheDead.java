@@ -74,7 +74,7 @@ public final class KeeperOfTheDead extends CardImpl {
     }
 }
 
-class KeeperOfDeadPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+class KeeperOfDeadPredicate implements ObjectSourcePlayerPredicate<Player> {
 
     private static final FilterCard filter = new FilterCard("creature cards");
 

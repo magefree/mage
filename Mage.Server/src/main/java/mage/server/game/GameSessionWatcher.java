@@ -58,14 +58,14 @@ public class GameSessionWatcher {
 
     public void inform(final String message) {
         if (!killed) {
-            userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_INFORM, game.getId(), new GameClientMessage(getGameView(), message))));
+            userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_INFORM, game.getId(), new GameClientMessage(getGameView(), null, message))));
         }
 
     }
 
     public void informPersonal(final String message) {
         if (!killed) {
-            userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_INFORM_PERSONAL, game.getId(), new GameClientMessage(getGameView(), message))));
+            userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_INFORM_PERSONAL, game.getId(), new GameClientMessage(getGameView(), null, message))));
         }
 
     }
@@ -74,7 +74,7 @@ public class GameSessionWatcher {
         if (!killed) {
             userManager.getUser(userId).ifPresent(user -> {
                 user.removeGameWatchInfo(game.getId());
-                user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_OVER, game.getId(), message));
+                user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_OVER, game.getId(), new GameClientMessage(getGameView(), null, message)));
             });
         }
     }
@@ -89,7 +89,6 @@ public class GameSessionWatcher {
     public void gameError(final String message) {
         if (!killed) {
             userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_ERROR, game.getId(), message)));
-
         }
     }
 

@@ -614,6 +614,8 @@ public class HumanPlayer extends PlayerImpl {
             abilityControllerId = target.getAbilityController();
         }
 
+        Map<String, Serializable> options = new HashMap<>();
+
         while (canRespond()) {
             Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), abilityControllerId, game);
             boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
@@ -622,11 +624,14 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
+            java.util.List<UUID> chosen = target.getTargets();
+            options.put("chosen", (Serializable) chosen);
+
             updateGameStatePriority("chooseTarget", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)),
-                        possibleTargets, required, getOptions(target, null));
+                        possibleTargets, required, getOptions(target, options));
             }
             waitForResponse(game);
 
@@ -2169,7 +2174,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public SpellAbility chooseAbilityForCast(Card card, Game game, boolean nonMana) {
+    public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         if (gameInCheckPlayableState(game)) {
             return null;
         }
@@ -2181,8 +2186,8 @@ public class HumanPlayer extends PlayerImpl {
 
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
         if (object != null) {
-            String message = "Choose ability to cast" + (nonMana ? " for FREE" : "") + "<br>" + object.getLogName();
-            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(playerId, object, game.getState().getZone(object.getId()), game);
+            String message = "Choose ability to cast" + (noMana ? " for FREE" : "") + "<br>" + object.getLogName();
+            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = PlayerImpl.getCastableSpellAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana);
             if (useableAbilities != null
                     && useableAbilities.size() == 1) {
                 return (SpellAbility) useableAbilities.values().iterator().next();
@@ -2609,6 +2614,10 @@ public class HumanPlayer extends PlayerImpl {
     private boolean gameInCheckPlayableState(Game game, boolean ignoreWarning) {
         if (game.inCheckPlayableState()) {
             if (!ignoreWarning) {
+                logger.warn(String.format("Current stack: %d - %s",
+                        game.getStack().size(),
+                        game.getStack().stream().map(Object::toString).collect(Collectors.joining(", "))
+                ));
                 logger.warn("Player interaction in checkPlayableState", new Throwable());
             }
             return true;

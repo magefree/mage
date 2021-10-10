@@ -156,10 +156,16 @@ public class GameEvent implements Serializable {
          amount      X multiplier to change X value, default 1
          */
         CAST_SPELL,
-        /* SPELL_CAST
-         x-Costs are already defined
-         */
         CAST_SPELL_LATE,
+        /* SPELL_CAST, CAST_SPELL_LATE
+         targetId    id of the spell that's try to cast
+         sourceId    sourceId of the spell that's try to cast
+         playerId    player that try to cast the spell
+         amount      not used for this event
+         flag        not used for this event
+         zone        zone the spell is cast from (main card)
+         */
+        SPELL_CAST,
         /* SPELL_CAST
          targetId    id of the spell that's cast
          sourceId    sourceId of the spell that's cast
@@ -168,7 +174,6 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          zone        zone the spell is cast from
          */
-        SPELL_CAST,
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
         /* ACTIVATE_ABILITY, ACTIVATED_ABILITY,
          targetId    id of the ability to activate / use
@@ -459,6 +464,8 @@ public class GameEvent implements Serializable {
         VENTURE, VENTURED,
         DUNGEON_COMPLETED,
         REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
+        FORETOLD, // targetId   id of card foretold
+        FORETELL, // targetId   id of card foretell  playerId   id of the controller
         //custom events
         CUSTOM_EVENT
     }

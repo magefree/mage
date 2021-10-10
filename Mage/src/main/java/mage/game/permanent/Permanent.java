@@ -125,6 +125,8 @@ public interface Permanent extends Card, Controllable {
 
     int getDamage();
 
+    int damage(int damage, Ability source, Game game);
+
     int damage(int damage, UUID attackerId, Ability source, Game game);
 
     int damage(int damage, UUID attackerId, Ability source, Game game, boolean combat, boolean preventable);
@@ -167,6 +169,8 @@ public interface Permanent extends Card, Controllable {
     void reset(Game game);
 
     MageObject getBasicMageObject(Game game);
+
+    boolean destroy(Ability source, Game game);
 
     boolean destroy(Ability source, Game game, boolean noRegen);
 

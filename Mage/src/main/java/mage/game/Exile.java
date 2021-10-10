@@ -71,12 +71,36 @@ public class Exile implements Serializable, Copyable<Exile> {
         return allCards.stream().filter(card -> filter.match(card, game)).collect(Collectors.toList());
     }
 
+    @Deprecated // TODO: must use related request due game range
     public List<Card> getAllCards(Game game) {
-        List<Card> cards = new ArrayList<>();
+        return getAllCards(game, null);
+    }
+
+    /**
+     * Return exiled cards from specific player. Use it in effects to find all cards in range.
+     *
+     * @param game
+     * @param fromPlayerId
+     * @return
+     */
+    public List<Card> getAllCards(Game game, UUID fromPlayerId) {
+        List<Card> res = new ArrayList<>();
         for (ExileZone exile : exileZones.values()) {
-            cards.addAll(exile.getCards(game));
+            for (Card card : exile.getCards(game)) {
+                if (fromPlayerId == null || card.getOwnerId().equals(fromPlayerId)) {
+                    res.add(card);
+                }
+            }
         }
-        return cards;
+        return res;
+    }
+
+    public List<Card> getAllCardsByRange(Game game, UUID controllerId) {
+        List<Card> res = new ArrayList<>();
+        for (UUID playerId : game.getState().getPlayersInRange(controllerId, game)) {
+            res.addAll(getAllCards(game, playerId));
+        }
+        return res;
     }
 
     public boolean removeCard(Card card, Game game) {

@@ -72,7 +72,8 @@ public class ReturnToHandSourceEffect extends OneShotEffect {
         switch (game.getState().getZone(mageObject.getId())) {
             case BATTLEFIELD:
                 Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
+                if (permanent != null
+                        && permanent.isPhasedIn()) {
                     return controller.moveCards(permanent, Zone.HAND, source, game);
                 }
                 break;

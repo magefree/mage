@@ -10,7 +10,7 @@ import mage.game.Game;
  * @author LevelX2
  */
 
-public class SharesColorWithSourcePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+public class SharesColorWithSourcePredicate implements ObjectSourcePlayerPredicate<MageObject> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

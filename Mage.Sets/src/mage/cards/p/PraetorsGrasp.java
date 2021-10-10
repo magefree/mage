@@ -71,10 +71,13 @@ class PraetorsGraspEffect extends OneShotEffect {
             if (controller.searchLibrary(target, source, game, opponent.getId())) {
                 UUID targetId = target.getFirstTarget();
                 Card card = opponent.getLibrary().getCard(targetId, game);
-                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(),
-                        source.getSourceObjectZoneChangeCounter());
-                if (card != null
-                        && exileId != null) {
+                if (card == null) {
+                    return false;
+                }
+                // account for card going into exile from the library
+                final int zcc = game.getState().getZoneChangeCounter(card.getId()) + 1;
+                UUID exileId = CardUtil.getExileZoneId(card.getId().toString() + zcc, game);
+                if (exileId != null) {
                     game.informPlayers(controller.getLogName() + " moves the searched "
                             + "card face down to exile");
                     card.moveToExile(exileId, sourceObject.getIdName(), source, game);
@@ -120,14 +123,15 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
         if (objectId.equals(cardId)
                 && affectedControllerId.equals(source.getControllerId())) {
             Player controller = game.getPlayer(source.getControllerId());
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(),
-                    source.getSourceObjectZoneChangeCounter());
+            UUID exileId = CardUtil.getExileZoneId(cardId.toString() + game.getState().getZoneChangeCounter(cardId), game);
             if (exileId != null
                     && controller != null) {
                 ExileZone exileZone = game.getExile().getExileZone(exileId);
                 if (exileZone != null
                         && exileZone.contains(cardId)) {
                     return true;
+                } else {
+                    discard();
                 }
             }
         }
@@ -166,8 +170,7 @@ class PraetorsGraspRevealEffect extends AsThoughEffectImpl {
         if (objectId.equals(cardId)
                 && affectedControllerId.equals(source.getControllerId())) {
             MageObject sourceObject = source.getSourceObject(game);
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(),
-                    source.getSourceObjectZoneChangeCounter());
+            UUID exileId = CardUtil.getExileZoneId(cardId.toString() + game.getState().getZoneChangeCounter(cardId), game);
             if (exileId != null
                     && sourceObject != null) {
                 ExileZone exileZone = game.getExile().getExileZone(exileId);

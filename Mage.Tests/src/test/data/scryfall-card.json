@@ -1,0 +1,154 @@
+{
+  "object": "card",
+  "id": "8093f8b0-5d50-48ca-b616-e92535a47138",
+  "oracle_id": "80b07882-e144-4815-8b6f-04b3ab343d97",
+  "multiverse_ids": [
+    409843,
+    409844
+  ],
+  "mtgo_id": 60370,
+  "mtgo_foil_id": 60371,
+  "tcgplayer_id": 116486,
+  "cardmarket_id": 289120,
+  "name": "Accursed Witch // Infectious Curse",
+  "lang": "en",
+  "released_at": "2016-04-08",
+  "uri": "https://api.scryfall.com/cards/8093f8b0-5d50-48ca-b616-e92535a47138",
+  "scryfall_uri": "https://scryfall.com/card/soi/97/accursed-witch-infectious-curse?utm_source=api",
+  "layout": "transform",
+  "highres_image": true,
+  "image_status": "highres_scan",
+  "cmc": 4.0,
+  "type_line": "Creature — Human Shaman // Enchantment — Aura Curse",
+  "color_identity": [
+    "B"
+  ],
+  "keywords": [
+    "Enchant"
+  ],
+  "card_faces": [
+    {
+      "object": "card_face",
+      "name": "Accursed Witch",
+      "mana_cost": "{3}{B}",
+      "type_line": "Creature — Human Shaman",
+      "oracle_text": "Spells your opponents cast that target Accursed Witch cost {1} less to cast.\nWhen Accursed Witch dies, return it to the battlefield transformed under your control attached to target opponent.",
+      "colors": [
+        "B"
+      ],
+      "power": "4",
+      "toughness": "2",
+      "artist": "Wesley Burt",
+      "artist_id": "b98c9d94-8bdb-49af-871d-7bac92274535",
+      "illustration_id": "e648ea98-8935-4b00-b3d9-d4d1e98026d8",
+      "image_uris": {
+        "small": "https://c1.scryfall.com/file/scryfall-cards/small/front/8/0/8093f8b0-5d50-48ca-b616-e92535a47138.jpg?1576384328",
+        "normal": "https://c1.scryfall.com/file/scryfall-cards/normal/front/8/0/8093f8b0-5d50-48ca-b616-e92535a47138.jpg?1576384328",
+        "large": "https://c1.scryfall.com/file/scryfall-cards/large/front/8/0/8093f8b0-5d50-48ca-b616-e92535a47138.jpg?1576384328",
+        "png": "https://c1.scryfall.com/file/scryfall-cards/png/front/8/0/8093f8b0-5d50-48ca-b616-e92535a47138.png?1576384328",
+        "art_crop": "https://c1.scryfall.com/file/scryfall-cards/art_crop/front/8/0/8093f8b0-5d50-48ca-b616-e92535a47138.jpg?1576384328",
+        "border_crop": "https://c1.scryfall.com/file/scryfall-cards/border_crop/front/8/0/8093f8b0-5d50-48ca-b616-e92535a47138.jpg?1576384328"
+      }
+    },
+    {
+      "object": "card_face",
+      "name": "Infectious Curse",
+      "mana_cost": "",
+      "type_line": "Enchantment — Aura Curse",
+      "oracle_text": "Enchant player\nSpells you cast that target enchanted player cost {1} less to cast.\nAt the beginning of enchanted player's upkeep, that player loses 1 life and you gain 1 life.",
+      "colors": [
+        "B"
+      ],
+      "color_indicator": [
+        "B"
+      ],
+      "artist": "Wesley Burt",
+      "artist_id": "b98c9d94-8bdb-49af-871d-7bac92274535",
+      "illustration_id": "828863bf-ddb7-4719-bcfd-2a20c667829f",
+      "image_uris": {
+        "small": "https://c1.scryfall.com/file/scryfall-cards/small/back/8/0/8093f8b0-5d50-48ca-b616-e92535a47138.jpg?1576384328",
+        "normal": "https://c1.scryfall.com/file/scryfall-cards/normal/back/8/0/8093f8b0-5d50-48ca-b616-e92535a47138.jpg?1576384328",
+        "large": "https://c1.scryfall.com/file/scryfall-cards/large/back/8/0/8093f8b0-5d50-48ca-b616-e92535a47138.jpg?1576384328",
+        "png": "https://c1.scryfall.com/file/scryfall-cards/png/back/8/0/8093f8b0-5d50-48ca-b616-e92535a47138.png?1576384328",
+        "art_crop": "https://c1.scryfall.com/file/scryfall-cards/art_crop/back/8/0/8093f8b0-5d50-48ca-b616-e92535a47138.jpg?1576384328",
+        "border_crop": "https://c1.scryfall.com/file/scryfall-cards/border_crop/back/8/0/8093f8b0-5d50-48ca-b616-e92535a47138.jpg?1576384328"
+      }
+    }
+  ],
+  "legalities": {
+    "standard": "not_legal",
+    "future": "not_legal",
+    "historic": "not_legal",
+    "gladiator": "not_legal",
+    "pioneer": "legal",
+    "modern": "legal",
+    "legacy": "legal",
+    "pauper": "not_legal",
+    "vintage": "legal",
+    "penny": "not_legal",
+    "commander": "legal",
+    "brawl": "not_legal",
+    "historicbrawl": "not_legal",
+    "paupercommander": "restricted",
+    "duel": "legal",
+    "oldschool": "not_legal",
+    "premodern": "not_legal"
+  },
+  "games": [
+    "paper",
+    "mtgo"
+  ],
+  "reserved": false,
+  "foil": true,
+  "nonfoil": true,
+  "finishes": [
+    "nonfoil",
+    "foil"
+  ],
+  "oversized": false,
+  "promo": false,
+  "reprint": false,
+  "variation": false,
+  "set_id": "5e914d7e-c1e9-446c-a33d-d093c02b2743",
+  "set": "soi",
+  "set_name": "Shadows over Innistrad",
+  "set_type": "expansion",
+  "set_uri": "https://api.scryfall.com/sets/5e914d7e-c1e9-446c-a33d-d093c02b2743",
+  "set_search_uri": "https://api.scryfall.com/cards/search?order=set&q=e%3Asoi&unique=prints",
+  "scryfall_set_uri": "https://scryfall.com/sets/soi?utm_source=api",
+  "rulings_uri": "https://api.scryfall.com/cards/8093f8b0-5d50-48ca-b616-e92535a47138/rulings",
+  "prints_search_uri": "https://api.scryfall.com/cards/search?order=released&q=oracleid%3A80b07882-e144-4815-8b6f-04b3ab343d97&unique=prints",
+  "collector_number": "97",
+  "digital": false,
+  "rarity": "uncommon",
+  "card_back_id": "0aeebaf5-8c7d-4636-9e82-8c27447861f7",
+  "artist": "Wesley Burt",
+  "artist_ids": [
+    "b98c9d94-8bdb-49af-871d-7bac92274535"
+  ],
+  "border_color": "black",
+  "frame": "2015",
+  "frame_effects": [
+    "sunmoondfc"
+  ],
+  "full_art": false,
+  "textless": false,
+  "booster": true,
+  "story_spotlight": false,
+  "edhrec_rank": 6115,
+  "prices": {
+    "usd": "0.31",
+    "usd_foil": "0.77",
+    "usd_etched": null,
+    "eur": "0.16",
+    "eur_foil": null,
+    "tix": "0.03"
+  },
+  "related_uris": {
+    "gatherer": "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=409843",
+    "tcgplayer_infinite_articles": "https://infinite.tcgplayer.com/search?contentMode=article&game=magic&partner=scryfall&q=Accursed+Witch+%2F%2F+Infectious+Curse&utm_campaign=affiliate&utm_medium=api&utm_source=scryfall",
+    "tcgplayer_infinite_decks": "https://infinite.tcgplayer.com/search?contentMode=deck&game=magic&partner=scryfall&q=Accursed+Witch+%2F%2F+Infectious+Curse&utm_campaign=affiliate&utm_medium=api&utm_source=scryfall",
+    "edhrec": "https://edhrec.com/route/?cc=Accursed+Witch",
+    "mtgtop8": "https://mtgtop8.com/search?MD_check=1&SB_check=1&cards=Accursed+Witch"
+  }
+}

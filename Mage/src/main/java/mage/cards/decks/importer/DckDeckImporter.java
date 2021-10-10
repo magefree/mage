@@ -92,7 +92,7 @@ public class DckDeckImporter extends PlainTextDeckImporter {
                 }
 
                 if (!cardName.equals("")) {
-                    foundedCard = CardRepository.instance.findPreferedCoreExpansionCard(cardName, false, setCode);
+                    foundedCard = CardRepository.instance.findPreferredCoreExpansionCard(cardName, false, setCode);
                 }
 
                 if (foundedCard != null) {

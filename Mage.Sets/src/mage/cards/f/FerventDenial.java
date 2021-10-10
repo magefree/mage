@@ -25,7 +25,7 @@ public final class FerventDenial extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
         // Flashback {5}{U}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{U}{U}"),TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{U}{U}")));
     }
 
     private FerventDenial(final FerventDenial card) {

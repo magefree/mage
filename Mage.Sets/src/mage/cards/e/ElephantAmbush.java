@@ -24,7 +24,7 @@ public final class ElephantAmbush extends CardImpl {
         // Create a 3/3 green Elephant creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));
         // Flashback {6}{G}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{6}{G}{G}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{6}{G}{G}")));
     }
 
     private ElephantAmbush(final ElephantAmbush card) {

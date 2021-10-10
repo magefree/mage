@@ -21,7 +21,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
 public final class MidnightReaper extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("nontoken creature you control");
+            = new FilterCreaturePermanent("a nontoken creature you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());

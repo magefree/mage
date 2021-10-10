@@ -6,11 +6,14 @@ import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.Locale;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -19,20 +22,44 @@ import java.util.UUID;
 public class PlayTheTopCardEffect extends AsThoughEffectImpl {
 
     private final FilterCard filter;
+    private final TargetController targetLibrary;
 
     // can play card or can play lands/cast spells, see two modes below
     private final boolean canPlayCardOnly;
 
 
+    /**
+     * Support targets, use TargetController.SOURCE_TARGETS
+     */
     public PlayTheTopCardEffect() {
-        this(new FilterCard("play lands and cast spells"), false);
+        this(TargetController.YOU);
     }
 
-    public PlayTheTopCardEffect(FilterCard filter, boolean canPlayCardOnly) {
+    public PlayTheTopCardEffect(TargetController targetLibrary) {
+        this(targetLibrary, new FilterCard("play lands and cast spells"), false);
+    }
+
+    public PlayTheTopCardEffect(TargetController targetLibrary, FilterCard filter, boolean canPlayCardOnly) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
+        this.targetLibrary = targetLibrary;
         this.canPlayCardOnly = canPlayCardOnly;
-        this.staticText = "You may " + filter.getMessage() + " from the top of your library";
+
+        String libInfo;
+        switch (this.targetLibrary) {
+            case YOU:
+                libInfo = "your library";
+                break;
+            case OPPONENT:
+                libInfo = "opponents libraries";
+                break;
+            case SOURCE_TARGETS:
+                libInfo = "target player's library";
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown target library type: " + targetLibrary);
+        }
+        this.staticText = "You may " + filter.getMessage() + " from the top of " + libInfo;
 
         // verify check: if you see "card" text in the rules then use card mode
         // (there aren't any real cards after oracle update, but can be added in the future)
@@ -44,6 +71,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
     public PlayTheTopCardEffect(final PlayTheTopCardEffect effect) {
         super(effect);
         this.filter = effect.filter;
+        this.targetLibrary = effect.targetLibrary;
         this.canPlayCardOnly = effect.canPlayCardOnly;
     }
 
@@ -71,7 +99,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
         }
 
         if (this.canPlayCardOnly) {
-            // check whole card intead part
+            // check whole card instead part
             cardToCheck = cardToCheck.getMainCard();
         }
 
@@ -80,16 +108,50 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
             return false;
         }
 
-        // must be your card
-        Player player = game.getPlayer(cardToCheck.getOwnerId());
-        if (player == null || !player.getId().equals(affectedControllerId)) {
+        Player cardOwner = game.getPlayer(cardToCheck.getOwnerId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (cardOwner == null || controller == null) {
             return false;
         }
 
-        // must be from your library
-        Card topCard = player.getLibrary().getFromTop(game);
-        if (topCard == null || !topCard.getId().equals(cardToCheck.getMainCard().getId())) {
-            return false;
+        // must be your or opponents library
+        switch (this.targetLibrary) {
+            case YOU: {
+                Card topCard = controller.getLibrary().getFromTop(game);
+                if (topCard == null || !topCard.getId().equals(cardToCheck.getMainCard().getId())) {
+                    return false;
+                }
+                break;
+            }
+
+            case OPPONENT: {
+                if (!game.getOpponents(controller.getId()).contains(cardOwner.getId())) {
+                    return false;
+                }
+                Card topCard = cardOwner.getLibrary().getFromTop(game);
+                if (topCard == null || !topCard.getId().equals(cardToCheck.getMainCard().getId())) {
+                    return false;
+                }
+                break;
+            }
+
+            case SOURCE_TARGETS: {
+                UUID needCardId = cardToCheck.getMainCard().getId();
+                if (CardUtil.getAllSelectedTargets(source, game).stream()
+                        .map(game::getPlayer)
+                        .filter(Objects::nonNull)
+                        .noneMatch(player -> {
+                            Card topCard = player.getLibrary().getFromTop(game);
+                            return topCard != null && topCard.getId().equals(needCardId);
+                        })) {
+                    return false;
+                }
+                break;
+            }
+
+            default: {
+                return false;
+            }
         }
 
         // can't cast without mana cost

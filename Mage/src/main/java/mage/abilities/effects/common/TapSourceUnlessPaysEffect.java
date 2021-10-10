@@ -26,7 +26,7 @@ public class TapSourceUnlessPaysEffect extends OneShotEffect {
 
     public TapSourceUnlessPaysEffect(final TapSourceUnlessPaysEffect effect) {
         super(effect);
-        this.cost = effect.cost;
+        this.cost = effect.cost.copy();
     }
 
     @Override

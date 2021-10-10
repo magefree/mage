@@ -41,7 +41,7 @@ public final class FirecatBlitz extends CardImpl {
         this.getSpellAbility().addEffect(new FirecatBlitzEffect());
 
         // Flashback-{R}{R}, Sacrifice X Mountains.
-        Ability ability = new FlashbackAbility(new SacrificeXTargetCost(filter), TimingRule.SORCERY);
+        Ability ability = new FlashbackAbility(this, new SacrificeXTargetCost(filter));
         ability.addManaCost(new ManaCostsImpl("{R}{R}"));
         this.addAbility(ability);
     }

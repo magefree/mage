@@ -33,7 +33,7 @@ public final class LightningSurge extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Flashback {5}{R}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{R}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{R}{R}")));
     }
 
     private LightningSurge(final LightningSurge card) {

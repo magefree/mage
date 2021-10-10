@@ -38,7 +38,7 @@ public final class MythUnbound extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new MythUnboundCostReductionEffect()
-        ), new CommanderPlaysCountWatcher());
+        ));
 
         // Whenever your commander is put into the command zone from anywhere, draw a card.
         this.addAbility(new ZoneChangeAllTriggeredAbility(

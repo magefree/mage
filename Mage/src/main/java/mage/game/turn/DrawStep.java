@@ -29,6 +29,14 @@ public class DrawStep extends Step {
         //20091005 - 504.1/703.4c
         activePlayer.drawCards(1, null, game);
         game.applyEffects();
+        for (UUID playerId : game.getState().getPlayersInRange(activePlayerId, game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null
+                    && player.isDrawsOnOpponentsTurn()
+                    && player.hasOpponent(activePlayerId, game)) {
+                player.drawCards(1, null, game);
+            }
+        }
         super.beginStep(game, activePlayerId);
     }
 

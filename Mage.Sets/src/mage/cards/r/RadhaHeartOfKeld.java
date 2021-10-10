@@ -16,10 +16,7 @@ import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
@@ -51,7 +48,7 @@ public final class RadhaHeartOfKeld extends CardImpl {
         // You may look at the top card of your library any time, and you may play lands from the top of your library.
         LookAtTopCardOfLibraryAnyTimeEffect lookEffect = new LookAtTopCardOfLibraryAnyTimeEffect();
         lookEffect.setText("You may look at the top card of your library any time");
-        PlayTheTopCardEffect playEffect = new PlayTheTopCardEffect(filter, false);
+        PlayTheTopCardEffect playEffect = new PlayTheTopCardEffect(TargetController.YOU, filter, false);
         playEffect.setText(", and you may play lands from the top of your library");
 
         SimpleStaticAbility lookAndPlayAbility = new SimpleStaticAbility(lookEffect);

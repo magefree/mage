@@ -146,7 +146,7 @@ class GlimpseTheCosmosReplacementEffect extends ReplacementEffectImpl {
         if (watcher == null) {
             return false;
         }
-        Mana payment = watcher.getAndResetLastPayment(source.getSourceId());
+        Mana payment = watcher.getLastManaPayment(source.getSourceId());
         if (payment != null
                 && payment.getBlue() == 1 // must be blue mana
                 && payment.count() == 1) {  // must be just one

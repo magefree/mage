@@ -37,7 +37,7 @@ public final class MysticalTeachings extends CardImpl {
         // Search your library for an instant card or a card with flash, reveal it, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
         // Flashback {5}{B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{B}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{B}")));
     }
 
     private MysticalTeachings(final MysticalTeachings card) {

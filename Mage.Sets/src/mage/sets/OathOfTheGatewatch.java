@@ -28,7 +28,7 @@ public final class OathOfTheGatewatch extends ExpansionSet {
         this.blockName = "Battle for Zendikar";
         this.parentSet = BattleForZendikar.getInstance();
         this.hasBoosters = true;
-        this.hasBasicLands = true;
+        this.hasBasicLands = false;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
@@ -213,16 +213,26 @@ public final class OathOfTheGatewatch extends ExpansionSet {
         cards.add(new SetCardInfo("Wandering Fumarole", 182, Rarity.RARE, mage.cards.w.WanderingFumarole.class));
         cards.add(new SetCardInfo("Warden of Geometries", 11, Rarity.COMMON, mage.cards.w.WardenOfGeometries.class));
         cards.add(new SetCardInfo("Warping Wail", 12, Rarity.UNCOMMON, mage.cards.w.WarpingWail.class));
-        cards.add(new SetCardInfo("Wastes", "183a", Rarity.LAND, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wastes", "184a", Rarity.LAND, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wastes", 183, Rarity.LAND, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Wastes", 184, Rarity.LAND, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", "183a", Rarity.COMMON, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", "184a", Rarity.COMMON, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", 183, Rarity.COMMON, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", 184, Rarity.COMMON, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Weapons Trainer", 160, Rarity.UNCOMMON, mage.cards.w.WeaponsTrainer.class));
         cards.add(new SetCardInfo("Witness the End", 82, Rarity.COMMON, mage.cards.w.WitnessTheEnd.class));
         cards.add(new SetCardInfo("World Breaker", 126, Rarity.MYTHIC, mage.cards.w.WorldBreaker.class));
         cards.add(new SetCardInfo("Zada's Commando", 120, Rarity.COMMON, mage.cards.z.ZadasCommando.class));
         cards.add(new SetCardInfo("Zendikar Resurgent", 147, Rarity.RARE, mage.cards.z.ZendikarResurgent.class));
         cards.add(new SetCardInfo("Zulaport Chainmage", 93, Rarity.COMMON, mage.cards.z.ZulaportChainmage.class));
+    }
+
+    @Override
+    public List<CardInfo> getCardsByRarity(Rarity rarity) {
+        List<CardInfo> cards = super.getCardsByRarity(rarity);
+        if (rarity == Rarity.COMMON) {
+            // only the full-art versions of Wastes are found in boosters
+            cards.removeIf(cardInfo -> cardInfo.getCardNumber().contains("a"));
+        }
+        return cards;
     }
 
     @Override

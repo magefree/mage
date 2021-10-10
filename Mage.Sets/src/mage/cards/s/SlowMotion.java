@@ -69,7 +69,7 @@ class SacrificeEquipedUnlessPaysEffect extends OneShotEffect {
 
     public SacrificeEquipedUnlessPaysEffect(final SacrificeEquipedUnlessPaysEffect effect) {
         super(effect);
-        this.cost = effect.cost;
+        this.cost = effect.cost.copy();
     }
 
     @Override

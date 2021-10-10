@@ -9,7 +9,6 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
-import org.junit.Assert;
 
 import java.util.*;
 
@@ -48,13 +47,13 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
         // checks for compatibility
         EffectType needType = EffectType.CONTINUOUS;
         if (effect.getEffectType() != needType) {
-            Assert.fail("ConditionalContinuousEffect supports only " + needType.toString() + " but found " + effect.getEffectType().toString());
+            throw new IllegalArgumentException("ConditionalContinuousEffect supports only " + needType + " but found " + effect.getEffectType().toString());
         }
         if (otherwiseEffect != null && otherwiseEffect.getEffectType() != needType) {
-            Assert.fail("ConditionalContinuousEffect supports only " + needType.toString() + " but found " + effect.getEffectType().toString());
+            throw new IllegalArgumentException("ConditionalContinuousEffect supports only " + needType.toString() + " but found " + effect.getEffectType().toString());
         }
         if (otherwiseEffect != null && effect.getEffectType() != otherwiseEffect.getEffectType()) {
-            Assert.fail("ConditionalContinuousEffect must be same but found " + effect.getEffectType().toString() + " and " + otherwiseEffect.getEffectType().toString());
+            throw new IllegalArgumentException("ConditionalContinuousEffect must be same but found " + effect.getEffectType().toString() + " and " + otherwiseEffect.getEffectType().toString());
         }
     }
 

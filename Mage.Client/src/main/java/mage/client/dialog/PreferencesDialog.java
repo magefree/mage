@@ -81,7 +81,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_THREADS = "cardImagesThreads";
     public static final String KEY_CARD_IMAGES_THREADS_DEFAULT = "3";
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
-    public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferedImageLaguage";
+    public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferredImageLaguage";
 
     public static final String KEY_CARD_RENDERING_FALLBACK = "cardRenderingFallback";
     public static final String KEY_CARD_RENDERING_ICONS_FOR_ABILITIES = "cardRenderingIconsForAbilities";
@@ -400,7 +400,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbTheme.setModel(new DefaultComboBoxModel<>(ThemeType.values()));
         addAvatars();
 
-        cbPreferedImageLanguage.setModel(new DefaultComboBoxModel<>(CardLanguage.toList()));
+        cbPreferredImageLanguage.setModel(new DefaultComboBoxModel<>(CardLanguage.toList()));
         cbNumberOfDownloadThreads.setModel(new DefaultComboBoxModel<>(new String[]{"10", "9", "8", "7", "6", "5", "4", "3", "2", "1"}));
     }
 
@@ -509,8 +509,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         txtImageFolderPath = new javax.swing.JTextField();
         btnBrowseImageLocation = new javax.swing.JButton();
         cbSaveToZipFiles = new javax.swing.JCheckBox();
-        cbPreferedImageLanguage = new javax.swing.JComboBox<>();
-        labelPreferedImageLanguage = new javax.swing.JLabel();
+        cbPreferredImageLanguage = new javax.swing.JComboBox<>();
+        labelPreferredImageLanguage = new javax.swing.JLabel();
         labelNumberOfDownloadThreads = new javax.swing.JLabel();
         cbNumberOfDownloadThreads = new javax.swing.JComboBox();
         labelHint1 = new javax.swing.JLabel();
@@ -1658,11 +1658,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        cbPreferedImageLanguage.setMaximumRowCount(20);
-        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbPreferredImageLanguage.setMaximumRowCount(20);
+        cbPreferredImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        labelPreferedImageLanguage.setText("Default images language:");
-        labelPreferedImageLanguage.setFocusable(false);
+        labelPreferredImageLanguage.setText("Default images language:");
+        labelPreferredImageLanguage.setFocusable(false);
 
         labelNumberOfDownloadThreads.setText("Default download threads:");
 
@@ -1689,10 +1689,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                             .add(panelCardImagesLayout.createSequentialGroup()
                                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(labelNumberOfDownloadThreads)
-                                    .add(labelPreferedImageLanguage))
+                                    .add(labelPreferredImageLanguage))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(cbPreferredImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                     .add(panelCardImagesLayout.createSequentialGroup()
                                         .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
@@ -1716,8 +1716,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(labelHint1))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(labelPreferedImageLanguage)
-                    .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(labelPreferredImageLanguage)
+                    .add(cbPreferredImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
 
         panelCardStyles.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card styles (restart xmage to apply new settings)"));
@@ -2945,7 +2945,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         saveImagesPath(prefs);
         save(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbNumberOfDownloadThreads, KEY_CARD_IMAGES_THREADS);
-        save(prefs, dialog.cbPreferedImageLanguage, KEY_CARD_IMAGES_PREF_LANGUAGE);
+        save(prefs, dialog.cbPreferredImageLanguage, KEY_CARD_IMAGES_PREF_LANGUAGE);
 
         save(prefs, dialog.cbUseDefaultBackground, KEY_BACKGROUND_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbUseDefaultBattleImage, KEY_BATTLEFIELD_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
@@ -3518,7 +3518,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
         load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
         dialog.cbNumberOfDownloadThreads.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_THREADS, KEY_CARD_IMAGES_THREADS_DEFAULT));
-        dialog.cbPreferedImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
+        dialog.cbPreferredImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
 
         // rendering settings
         load(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_FALLBACK, "true", "false");
@@ -4073,7 +4073,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox cbNumberOfDownloadThreads;
     private javax.swing.JCheckBox cbPassPriorityActivation;
     private javax.swing.JCheckBox cbPassPriorityCast;
-    private javax.swing.JComboBox<String> cbPreferedImageLanguage;
+    private javax.swing.JComboBox<String> cbPreferredImageLanguage;
     private javax.swing.JComboBox<ProxyType> cbProxyType;
     private javax.swing.JCheckBox cbSaveToZipFiles;
     private javax.swing.JCheckBox cbShowStormCounter;
@@ -4176,7 +4176,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelMainStep;
     private javax.swing.JLabel labelNextTurn;
     private javax.swing.JLabel labelNumberOfDownloadThreads;
-    private javax.swing.JLabel labelPreferedImageLanguage;
+    private javax.swing.JLabel labelPreferredImageLanguage;
     private javax.swing.JLabel labelPriorEnd;
     private javax.swing.JLabel labelSkipStep;
     private javax.swing.JLabel labelStackWidth;

@@ -36,7 +36,7 @@ public final class HowlingGale extends CardImpl {
         effect.setText("and each player");
         this.getSpellAbility().addEffect(effect);
         // Flashback {1}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{G}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{1}{G}")));
     }
 
     private HowlingGale(final HowlingGale card) {

@@ -66,7 +66,7 @@ public final class GomaFadaVanguard extends CardImpl {
     }
 }
 
-enum GomaFadaVanguardPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+enum GomaFadaVanguardPredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
     private static final FilterPermanent filter = new FilterPermanent(SubType.WARRIOR, "");
 

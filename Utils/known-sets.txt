@@ -114,6 +114,7 @@ IconicMasters|IconicMasters|
 Ikoria: Lair of Behemoths|IkoriaLairOfBehemoths|
 Innistrad|Innistrad|
 Innistrad: Midnight Hunt|InnistradMidnightHunt|
+Midnight Hunt Commander|MidnightHuntCommander|
 Invasion|Invasion|
 Ixalan|Ixalan|
 Journey into Nyx|JourneyIntoNyx|

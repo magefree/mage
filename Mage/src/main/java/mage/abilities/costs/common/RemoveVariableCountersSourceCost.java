@@ -62,12 +62,7 @@ public class RemoveVariableCountersSourceCost extends VariableCostImpl {
 
     @Override
     public int getMaxValue(Ability source, Game game) {
-        int maxValue = 0;
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            maxValue = permanent.getCounters(game).getCount(counterName);
-        }
-        return maxValue;
+        return permanent != null ? permanent.getCounters(game).getCount(counterName) : 0;
     }
-
 }

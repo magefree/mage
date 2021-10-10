@@ -149,11 +149,11 @@ public abstract class DraftImpl implements Draft {
         this.addPick(playerId, booster.get(booster.size()-1).getId(), null);
     }
 
-    protected void passLeft() {
+    protected void passBoosterToLeft() {
         synchronized (players) {
             UUID startId = table.get(0);
             UUID currentId = startId;
-            UUID nextId = table.getNext();
+            UUID nextId = table.getNext(); // getNext return left player by default
             DraftPlayer current = players.get(currentId);
             DraftPlayer next = players.get(nextId);
             List<Card> currentBooster = current.booster;
@@ -170,11 +170,11 @@ public abstract class DraftImpl implements Draft {
         }
     }
 
-    protected void passRight() {
+    protected void passBoosterToRight() {
         synchronized (players) {
             UUID startId = table.get(0);
             UUID currentId = startId;
-            UUID prevId = table.getPrevious();
+            UUID prevId = table.getPrevious(); // getPrevious return right player by default
             DraftPlayer current = players.get(currentId);
             DraftPlayer prev = players.get(prevId);
             List<Card> currentBooster = current.booster;

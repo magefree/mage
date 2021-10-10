@@ -34,7 +34,7 @@ public final class DemonicTorment extends CardImpl {
         // Enchanted creature can't attack.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
         // Prevent all combat damage that would be dealt by enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", true)));
     }
 
     private DemonicTorment(final DemonicTorment card) {

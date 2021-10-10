@@ -2314,6 +2314,8 @@ public class TestPlayer implements Player {
                 return true;
             }
 
+            Set<Zone> targetCardZonesChecked = new HashSet<>(); // control miss implementation
+
             // player
             if (target.getOriginalTarget() instanceof TargetPlayer
                     || target.getOriginalTarget() instanceof TargetAnyTarget
@@ -2397,9 +2399,12 @@ public class TestPlayer implements Player {
                 }
             }
 
-            // card in hand
+            // card in hand (only own hand supports here)
+            // cards from non-own hand must be targeted through revealed cards
             if (target.getOriginalTarget() instanceof TargetCardInHand
-                    || target.getOriginalTarget() instanceof TargetDiscard) {
+                    || target.getOriginalTarget() instanceof TargetDiscard
+                    || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.HAND)) {
+                targetCardZonesChecked.add(Zone.HAND);
                 for (String targetDefinition : targets) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
                     String[] targetList = targetDefinition.split("\\^");
@@ -2424,8 +2429,9 @@ public class TestPlayer implements Player {
 
             // card in exile
             if (target.getOriginalTarget() instanceof TargetCardInExile
-                    || target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard) {
-
+                    || target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard
+                    || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.EXILED)) {
+                targetCardZonesChecked.add(Zone.EXILED);
                 FilterCard filter = null;
                 if (target.getOriginalTarget().getFilter() instanceof FilterCard) {
                     filter = (FilterCard) target.getOriginalTarget().getFilter();
@@ -2488,7 +2494,9 @@ public class TestPlayer implements Player {
             if (target.getOriginalTarget() instanceof TargetCardInOpponentsGraveyard
                     || target.getOriginalTarget() instanceof TargetCardInYourGraveyard
                     || target.getOriginalTarget() instanceof TargetCardInGraveyard
-                    || target.getOriginalTarget() instanceof TargetCardInGraveyardOrBattlefield) {
+                    || target.getOriginalTarget() instanceof TargetCardInGraveyardOrBattlefield
+                    || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.GRAVEYARD)) {
+                targetCardZonesChecked.add(Zone.GRAVEYARD);
                 TargetCard targetFull = (TargetCard) target.getOriginalTarget();
 
                 List<UUID> needPlayers = game.getState().getPlayersInRange(getId(), game).toList();
@@ -2559,6 +2567,21 @@ public class TestPlayer implements Player {
                         return true;
                     }
                 }
+            }
+
+            // library
+            if (target.getOriginalTarget() instanceof TargetCardInLibrary
+                    || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.LIBRARY)) {
+                // user don't have access to library, so it must be targeted through list/revealed cards
+                Assert.fail("Library zone is private, you must target through cards list, e.g. revealed: " + target.getOriginalTarget().getClass().getCanonicalName());
+            }
+
+            // uninplemented TargetCard's zone
+            if (target.getOriginalTarget() instanceof TargetCard && !targetCardZonesChecked.contains(target.getOriginalTarget().getZone())) {
+                Assert.fail("Found unimplemented TargetCard's zone or TargetCard's extented class: "
+                        + target.getOriginalTarget().getClass().getCanonicalName()
+                        + ", zone " + target.getOriginalTarget().getZone()
+                        + ", from " + (source == null ? "unknown source" : source.getSourceObject(game)));
             }
         }
 
@@ -3069,8 +3092,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, ApprovingObject approvingObject) {
-        return computerPlayer.playCard(card, game, noMana, ignoreTiming, approvingObject);
+    public boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject) {
+        return computerPlayer.playCard(card, game, noMana, approvingObject);
     }
 
     @Override
@@ -3689,6 +3712,16 @@ public class TestPlayer implements Player {
     @Override
     public boolean canPlayCardsFromGraveyard() {
         return computerPlayer.canPlayCardsFromGraveyard();
+    }
+
+    @Override
+    public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
+        computerPlayer.setDrawsOnOpponentsTurn(drawsOnOpponentsTurn);
+    }
+
+    @Override
+    public boolean isDrawsOnOpponentsTurn() {
+        return computerPlayer.isDrawsOnOpponentsTurn();
     }
 
     @Override
@@ -4328,7 +4361,7 @@ public class TestPlayer implements Player {
         assertAliasSupportInChoices(false);
 
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
-        Map<UUID, ActivatedAbility> useable = PlayerImpl.getSpellAbilities(this.getId(), object, game.getState().getZone(object.getId()), game);
+        Map<UUID, ActivatedAbility> useable = PlayerImpl.getCastableSpellAbilities(game, this.getId(), object, game.getState().getZone(object.getId()), noMana);
         String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
         if (useable.size() == 1) {
             return (SpellAbility) useable.values().iterator().next();

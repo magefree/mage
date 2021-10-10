@@ -34,7 +34,7 @@ public final class ThunderOfHooves extends CardImpl {
 
         // Thunder of Hooves deals X damage to each creature without flying and each player, where X is the number of Beasts on the battlefield.
         Effect effect = new DamageEverythingEffect(new PermanentsOnBattlefieldCount(new FilterPermanent(filterBeasts)), new FilterCreaturePermanent(filterNotFlying));
-        effect.setText("{this} deals X damage to each creature and each player, where X is the number of creatures on the battlefield");
+        effect.setText("{this} deals X damage to each creature without flying and each player, where X is the number of Beasts on the battlefield");
         this.getSpellAbility().addEffect(effect);
     }
 

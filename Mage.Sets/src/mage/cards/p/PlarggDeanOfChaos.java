@@ -82,7 +82,7 @@ public final class PlarggDeanOfChaos extends ModalDoubleFacesCard {
 
         // Whenever you attack, untap each creature you control, then tap any number of creatures you control.
         AttacksWithCreaturesTriggeredAbility augustaAbility = new AttacksWithCreaturesTriggeredAbility(
-                new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURES, "untap each creature you control"), 0);
+                new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURES, "untap each creature you control"), 1);
         augustaAbility.addEffect(new AugustaDeanOfOrderEffect().concatBy(", then"));
         this.getRightHalfCard().addAbility(augustaAbility);
     }

@@ -15,6 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -46,7 +47,7 @@ public final class RangerClass extends CardImpl {
 
         // Whenever you attack, put a +1/+1 counter on target attacking creature.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 0
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 1
         );
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(ability, 2)));
@@ -61,7 +62,7 @@ public final class RangerClass extends CardImpl {
 
         // You may cast creature spells from the top of your library.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
-                new PlayTheTopCardEffect(filter, false), 3
+                new PlayTheTopCardEffect(TargetController.YOU, filter, false), 3
         )));
     }
 

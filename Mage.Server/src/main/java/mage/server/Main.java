@@ -66,7 +66,15 @@ public final class Main {
 
     public static final PluginClassLoader classLoader = new PluginClassLoader();
     private static TransporterServer server;
+
+    // special test mode:
+    // - fast game buttons;
+    // - cheat commands;
+    // - no deck validation;
+    // - simplified registration and login (no password check);
+    // - debug main menu for GUI and rendering testing;
     private static boolean testMode;
+
     private static boolean fastDbMode;
 
     /**
@@ -98,7 +106,7 @@ public final class Main {
 
         if (config.isAuthenticationActivated()) {
             logger.info("Check authorized user DB version ...");
-            if (!AuthorizedUserRepository.instance.checkAlterAndMigrateAuthorizedUser()) {
+            if (!AuthorizedUserRepository.getInstance().checkAlterAndMigrateAuthorizedUser()) {
                 logger.fatal("Failed to start server.");
                 return;
             }

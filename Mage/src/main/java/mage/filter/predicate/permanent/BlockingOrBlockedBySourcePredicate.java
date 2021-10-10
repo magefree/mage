@@ -11,7 +11,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public enum BlockingOrBlockedBySourcePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+public enum BlockingOrBlockedBySourcePredicate implements ObjectSourcePlayerPredicate<Permanent> {
     BLOCKING,
     BLOCKED_BY,
     EITHER;

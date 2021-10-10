@@ -186,14 +186,22 @@ public class CardArea extends JPanel implements CardEventProducer {
             card = tmp;
         }
 
-        CardIconRenderSettings customIconsRender = new CardIconRenderSettings()
-                .withDebugMode(true)
-                .withCustomPosition(customCardIconPosition)
-                .withCustomOrder(customCardIconOrder)
-                .withCustomColor(customCardIconColor)
-                .withCustomMaxVisibleCount(customCardIconsMaxVisibleCount)
-                .withCustomIconSizePercent(30);
-        MageCard cardPanel = Plugins.instance.getMageCard(card, bigCard, customIconsRender, cardDimension, gameId, true, true,
+        CardIconRenderSettings currentIconsRender;
+        if (this.customRenderMode >= 0) {
+            // debug
+            currentIconsRender = new CardIconRenderSettings()
+                    .withDebugMode(true)
+                    .withCustomPosition(customCardIconPosition)
+                    .withCustomOrder(customCardIconOrder)
+                    .withCustomColor(customCardIconColor)
+                    .withCustomMaxVisibleCount(customCardIconsMaxVisibleCount)
+                    .withCustomIconSizePercent(30);
+        } else {
+            // default
+            currentIconsRender = new CardIconRenderSettings();
+        }
+
+        MageCard cardPanel = Plugins.instance.getMageCard(card, bigCard, currentIconsRender, cardDimension, gameId, true, true,
                 customRenderMode != -1 ? customRenderMode : PreferencesDialog.getRenderMode(), customNeedFullPermanentRender);
         cardPanel.setCardContainerRef(this);
         cardPanel.update(card);

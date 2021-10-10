@@ -19,11 +19,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -67,15 +65,14 @@ enum NilsDisciplineEnforcerAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        for (UUID playerId : game.getState().getPlayersInRange(ability.getControllerId(), game)) {
+        game.getState().getPlayersInRange(ability.getControllerId(), game).forEach(playerId -> {
             Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
+            if (!(player == null)) {
+                FilterPermanent filter = new FilterCreaturePermanent("creature controlled by " + player.getName());
+                filter.add(new ControllerIdPredicate(playerId));
+                ability.addTarget(new TargetPermanent(0, 1, filter));
             }
-            FilterPermanent filter = new FilterCreaturePermanent("creature controlled by " + player.getName());
-            filter.add(new ControllerIdPredicate(playerId));
-            ability.addTarget(new TargetPermanent(0, 1, filter));
-        }
+        });
     }
 }
 
@@ -99,13 +96,14 @@ class NilsDisciplineEnforcerCountersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         source.getTargets()
                 .stream()
-                .map(Target::getFirstTarget)
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .map(permanent -> permanent.addCounters(
-                        CounterType.P1P1.createInstance(),
-                        source.getControllerId(), source, game
-                ));
+                .filter(
+                        t -> (t != null))
+                .map(t -> game.getPermanent(t.getFirstTarget()))
+                .filter(targetedPermanent
+                        -> (targetedPermanent != null))
+                .forEachOrdered(targetedPermanent -> {
+                    targetedPermanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
+                });
         return true;
     }
 }
@@ -114,8 +112,8 @@ class NilsDisciplineEnforcerEffect extends CantAttackYouUnlessPayManaAllEffect {
 
     NilsDisciplineEnforcerEffect() {
         super(null, true);
-        staticText = "Each creature with one or more counters on it can't attack you or planeswalkers you control " +
-                "unless its controller pays {X}, where X is the number of counters on that creature.";
+        staticText = "Each creature with one or more counters on it can't attack you or planeswalkers you control "
+                + "unless its controller pays {X}, where X is the number of counters on that creature.";
     }
 
     private NilsDisciplineEnforcerEffect(NilsDisciplineEnforcerEffect effect) {

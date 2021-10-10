@@ -16,6 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
+import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
 
@@ -75,6 +76,8 @@ class SpareDaggerEffect extends GainAbilityWithAttachmentEffect {
                 new DamageTargetEffect(1), false,
                 "This creature deals 1 damage to any target"
         );
+        ability.addTarget(new TargetAnyTarget());
+
         return new AttacksTriggeredAbility(new DoWhenCostPaid(
                 ability, useAttachedCost.copy().setMageObjectReference(source, game),
                 "Sacrifice " + sourceName + "?"

@@ -810,7 +810,7 @@ public class GameController implements GameCallback {
     }
 
     private synchronized void chooseAbility(UUID playerId, final String objectName, final List<? extends Ability> choices, String message) throws MageException {
-        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(objectName, choices, message)));
+        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(getGameView(playerId), objectName, choices, message)));
     }
 
     private synchronized void choosePile(UUID playerId, final String message, final List<? extends Card> pile1, final List<? extends Card> pile2) throws MageException {
@@ -818,7 +818,7 @@ public class GameController implements GameCallback {
     }
 
     private synchronized void chooseMode(UUID playerId, final Map<UUID, String> modes, final String message) throws MageException {
-        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(modes, message)));
+        perform(playerId, playerId1 -> getGameSession(playerId1).chooseAbility(new AbilityPickerView(getGameView(playerId), modes, message)));
     }
 
     private synchronized void chooseChoice(UUID playerId, final Choice choice) throws MageException {

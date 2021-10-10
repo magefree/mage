@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-plugins</artifactId>
-        <version>1.4.49</version>
+        <version>1.4.50</version>
     </parent>
 
     <artifactId>mage-counter-plugin</artifactId>
@@ -21,11 +21,6 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>mage-common</artifactId>
             <version>${mage-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 

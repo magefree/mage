@@ -30,6 +30,7 @@ public class Commander extends AbstractCommander {
         banned.add("Fastbond");
         banned.add("Flash");
         banned.add("Gifts Ungiven");
+        banned.add("Golos, Tireless Pilgrim");
         banned.add("Griselbrand");
         banned.add("Hullbreacher");
         banned.add("Iona, Shield of Emeria");
@@ -58,7 +59,6 @@ public class Commander extends AbstractCommander {
         banned.add("Tolarian Academy");
         banned.add("Trade Secrets");
         banned.add("Upheaval");
-        banned.add("Worldfire");
         banned.add("Yawgmoth's Bargain");
     }
 

@@ -24,10 +24,11 @@ public class BoosterDraft extends DraftImpl {
             cardNum = 1;
             fireUpdatePlayersEvent();
             while (!isAbort() && pickCards()) {
-                if ((boosterNum + 1) % 2 == 1) {
-                    passLeft();
+                // pass booster order: left -> right -> left
+                if (boosterNum % 2 == 1) {
+                    passBoosterToLeft();
                 } else {
-                    passRight();
+                    passBoosterToRight();
                 }
                 fireUpdatePlayersEvent();
             }

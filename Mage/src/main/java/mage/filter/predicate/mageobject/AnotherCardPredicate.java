@@ -10,7 +10,7 @@ import mage.game.Game;
  *
  * @author North
  */
-public class AnotherCardPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+public class AnotherCardPredicate implements ObjectSourcePlayerPredicate<MageObject> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

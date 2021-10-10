@@ -26,7 +26,9 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetCard;
 import mage.target.Targets;
+import mage.target.common.TargetCardInLibrary;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.CardUtil;
 import mage.util.GameLog;
@@ -302,9 +304,12 @@ public abstract class AbilityImpl implements Ability {
         String announceString = handleOtherXCosts(game, controller);
 
         // For effects from cards like Void Winnower x costs have to be set
-        if (this.getAbilityType() == AbilityType.SPELL
-                && game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, this.getId(), this, getControllerId()), this)) {
-            return false;
+        if (this.getAbilityType() == AbilityType.SPELL) {
+            GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, this.getId(), this, getControllerId());
+            castEvent.setZone(game.getState().getZone(CardUtil.getMainCardId(game, sourceId)));
+            if (game.replaceEvent(castEvent, this)) {
+                return false;
+            }
         }
 
         handlePhyrexianManaCosts(game, controller);
@@ -878,6 +883,12 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public void addTarget(Target target) {
+        // verify check
+        if (target instanceof TargetCardInLibrary
+                || (target instanceof TargetCard && target.getZone().equals(Zone.LIBRARY))) {
+            throw new IllegalArgumentException("Wrong usage of TargetCardInLibrary - you must use it with SearchLibrary only");
+        }
+
         if (target != null) {
             getTargets().add(target);
         }
@@ -1320,8 +1331,9 @@ public abstract class AbilityImpl implements Ability {
      * @param costAdjuster
      */
     @Override
-    public void setCostAdjuster(CostAdjuster costAdjuster) {
+    public AbilityImpl setCostAdjuster(CostAdjuster costAdjuster) {
         this.costAdjuster = costAdjuster;
+        return this;
     }
 
     @Override

@@ -25,7 +25,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class LordOfTheAccursed extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.ZOMBIE, "Zombie creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.ZOMBIE, "Zombies");
 
     public LordOfTheAccursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
@@ -41,7 +41,7 @@ public final class LordOfTheAccursed extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
                 new MenaceAbility(),
                 Duration.EndOfTurn,
-                filter, "All Zombies gains menace until end of turn."),
+                filter, "All Zombies gain menace until end of turn."),
                 new ManaCostsImpl("{1}{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

@@ -1,11 +1,11 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.OpponentsLostLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.common.OpponentsLostLifeHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -13,8 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.watchers.common.PlayerLostLifeWatcher;
 
 import java.util.UUID;
 
@@ -37,9 +35,9 @@ public final class SavageGorger extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance()), TargetController.YOU, false
-                ), SavageGorgerCondition.instance, "At the beginning of your end step, " +
+                ), OpponentsLostLifeCondition.instance, "At the beginning of your end step, " +
                 "if an opponent lost life this turn, put a +1/+1 counter on {this}."
-        ));
+        ).addHint(OpponentsLostLifeHint.instance));
     }
 
     private SavageGorger(final SavageGorger card) {
@@ -49,20 +47,5 @@ public final class SavageGorger extends CardImpl {
     @Override
     public SavageGorger copy() {
         return new SavageGorger(this);
-    }
-}
-
-enum SavageGorgerCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
-        return watcher != null && watcher.getAllOppLifeLost(source.getControllerId(), game) > 0;
-    }
-
-    @Override
-    public String toString() {
-        return "";
     }
 }
