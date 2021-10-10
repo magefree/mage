@@ -1,8 +1,6 @@
 package mage.cards;
 
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -123,7 +121,6 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterRare;
     protected int numBoosterDoubleFaced; // -1 = include normally 0 = exclude  1-n = include explicit
     protected double ratioBoosterMythic;
-    protected boolean hasPartnerMechanic = false;
 
     protected boolean validateBoosterColors = true;
     protected double rejectMissingColorProbability = 0.8;
@@ -211,35 +208,6 @@ public abstract class ExpansionSet implements Serializable {
         return theBooster;
     }
 
-    protected int addMissingPartner(List<Card> booster, boolean partnerAllowed, int max, int i) {
-
-        Card sourceCard = booster.get(booster.size() - 1);
-        for (Ability ability : sourceCard.getAbilities()) {
-
-            //Check if fetched card has the PartnerWithAbility
-            if (ability instanceof PartnerWithAbility) {
-                String partnerName = ((PartnerWithAbility) ability).getPartnerName();
-                //Check if the pack already contains a partner pair
-                if (partnerAllowed) {
-                    //Added card always replaces an uncommon card
-                    Card card = CardRepository.instance.findCardWPreferredSet(partnerName, sourceCard.getExpansionSetCode(), false).getCard();
-                    if (i < max) {
-                        booster.add(card);
-                    } else {
-                        booster.set(0, card);
-                    }
-                    //2 return value indicates found partner
-                    return 2;
-                } else {
-                    //If partner already exists, remove card and loop again
-                    booster.remove(booster.size() - 1);
-                    return 0;
-                }
-            }
-        }
-        return 1;
-    }
-
     protected void addToBooster(List<Card> booster, List<CardInfo> cards) {
         if (!cards.isEmpty()) {
             CardInfo cardInfo = cards.remove(RandomUtil.nextInt(cards.size()));
@@ -264,15 +232,7 @@ public abstract class ExpansionSet implements Serializable {
 
         for (int i = 0; i < 100; i++) {//don't want to somehow loop forever
 
-            List<Card> booster;
-            if (hasPartnerMechanic) {
-                // battlebond's partners cards
-                booster = createPartnerBooster();
-            } else {
-                // all other sets
-                booster = tryBooster();
-            }
-
+            List<Card> booster = tryBooster();
             if (boosterIsValid(booster)) {
                 return booster;
             }
@@ -378,86 +338,8 @@ public abstract class ExpansionSet implements Serializable {
         return true;
     }
 
-    private boolean checkMythic() {
+    protected boolean checkMythic() {
         return ratioBoosterMythic > 0 && ratioBoosterMythic * RandomUtil.nextDouble() <= 1;
-    }
-
-    public List<Card> createPartnerBooster() {
-
-        List<Card> booster = new ArrayList<>();
-
-        boolean partnerAllowed = true;
-
-        List<CardInfo> uncommons = getCardsByRarity(Rarity.UNCOMMON);
-        for (int i = 0; i < numBoosterUncommon; i++) {
-            while (true) {
-                addToBooster(booster, uncommons);
-                int check = addMissingPartner(booster, partnerAllowed, numBoosterUncommon - 1, i);
-                if (check == 1) {
-                    break;
-                }
-                if (check == 2) {
-                    partnerAllowed = false;
-                    //Be sure to account for the added card
-                    if (i != numBoosterUncommon - 1) {
-                        i += 1;
-                    }
-                    break;
-                }
-            }
-        }
-
-        int numSpecialCommons = getNumberOfSpecialCommons();
-        int numCommonsToGenerate = numBoosterCommon - numSpecialCommons;
-
-        List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
-        for (int i = 0; i < numCommonsToGenerate; i++) {
-            addToBooster(booster, commons);
-        }
-
-        List<CardInfo> rares = getCardsByRarity(Rarity.RARE);
-        List<CardInfo> mythics = getCardsByRarity(Rarity.MYTHIC);
-        for (int i = 0; i < numBoosterRare; i++) {
-            if (checkMythic()) {
-                while (true) {
-                    addToBooster(booster, mythics);
-                    int check = addMissingPartner(booster, partnerAllowed, -1, 1);
-                    if (check == 1) {
-                        break;
-                    }
-                    if (check == 2) {
-                        partnerAllowed = false;
-                        break;
-                    }
-                }
-            } else {
-                while (true) {
-                    addToBooster(booster, rares);
-                    int check = addMissingPartner(booster, partnerAllowed, -1, 1);
-                    if (check == 1) {
-                        break;
-                    }
-                    if (check == 2) {
-                        partnerAllowed = false;
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (numBoosterLands > 0) {
-            List<CardInfo> specialLands = getSpecialLand();
-            List<CardInfo> basicLands = getCardsByRarity(Rarity.LAND);
-            for (int i = 0; i < numBoosterLands; i++) {
-                if (ratioBoosterSpecialLand > 0 && RandomUtil.nextInt(ratioBoosterSpecialLand) < ratioBoosterSpecialLandNumerator && specialLands != null) {
-                    addToBooster(booster, specialLands);
-                } else {
-                    addToBooster(booster, basicLands);
-                }
-            }
-        }
-
-        return booster;
     }
 
     public List<Card> tryBooster() {
