@@ -1,13 +1,13 @@
-
 package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -16,10 +16,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.target.targetpointer.FixedTargets;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -35,17 +37,20 @@ public final class GrimoireOfTheDead extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
 
         // {1}, {tap}, Discard a card: Put a study counter on Grimoire of the Dead.
-        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STUDY.createInstance()), new ManaCostsImpl("{1}"));
+        Ability ability1 = new SimpleActivatedAbility(
+                new AddCountersSourceEffect(CounterType.STUDY.createInstance()), new GenericManaCost(1)
+        );
         ability1.addCost(new TapSourceCost());
         ability1.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability1);
 
         // {tap}, Remove three study counters from Grimoire of the Dead and sacrifice it: Put all creature cards from all graveyards onto the battlefield under your control. They're black Zombies in addition to their other colors and types.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrimoireOfTheDeadEffect(), new TapSourceCost());
-        ability2.addCost(new RemoveCountersSourceCost(CounterType.STUDY.createInstance(3)));
-        ability2.addCost(new SacrificeSourceCost());
+        Ability ability2 = new SimpleActivatedAbility(new GrimoireOfTheDeadEffect(), new TapSourceCost());
+        ability2.addCost(new CompositeCost(
+                new RemoveCountersSourceCost(CounterType.STUDY.createInstance(3)),
+                new SacrificeSourceCost(), "Remove three study counters from {this} and sacrifice it"
+        ));
         this.addAbility(ability2);
-
     }
 
     private GrimoireOfTheDead(final GrimoireOfTheDead card) {
@@ -62,7 +67,8 @@ class GrimoireOfTheDeadEffect extends OneShotEffect {
 
     public GrimoireOfTheDeadEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put all creature cards in all graveyards onto the battlefield under your control. They're black Zombies in addition to their other colors and types";
+        staticText = "Put all creature cards in all graveyards onto the battlefield under your control. " +
+                "They're black Zombies in addition to their other colors and types";
     }
 
     public GrimoireOfTheDeadEffect(final GrimoireOfTheDeadEffect effect) {
@@ -72,20 +78,20 @@ class GrimoireOfTheDeadEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Set<Card> creatureCards = new LinkedHashSet<>();
-            for (Player player : game.getPlayers().values()) {
-                for (Card card : player.getGraveyard().getCards(game)) {
-                    if (card.isCreature(game)) {
-                        creatureCards.add(card);
-                        game.addEffect(new GrimoireOfTheDeadEffect2(card.getId()), source);
-                    }
-                }
-            }
-            controller.moveCards(creatureCards, Zone.BATTLEFIELD, source, game, false, false, false, null);
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Set<Card> creatureCards = new LinkedHashSet<>();
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
+            }
+            creatureCards.addAll(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
+        }
+        controller.moveCards(creatureCards, Zone.BATTLEFIELD, source, game);
+        game.addEffect(new GrimoireOfTheDeadEffect2().setTargetPointer(new FixedTargets(creatureCards, game)), source);
+        return true;
     }
 
     @Override
@@ -97,17 +103,12 @@ class GrimoireOfTheDeadEffect extends OneShotEffect {
 
 class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl {
 
-    private final UUID targetId;
-
-    public GrimoireOfTheDeadEffect2(UUID targetId) {
+    public GrimoireOfTheDeadEffect2() {
         super(Duration.Custom, Outcome.Neutral);
-        this.targetId = targetId;
-        staticText = "Becomes a black Zombie in addition to its other colors and types";
     }
 
     public GrimoireOfTheDeadEffect2(final GrimoireOfTheDeadEffect2 effect) {
         super(effect);
-        this.targetId = effect.targetId;
     }
 
     @Override
@@ -117,8 +118,11 @@ class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(targetId);
-        if (permanent != null) {
+        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent == null) {
+                continue;
+            }
             switch (layer) {
                 case ColorChangingEffects_5:
                     permanent.getColor(game).setBlack(true);
@@ -127,9 +131,8 @@ class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl {
                     permanent.addSubType(game, SubType.ZOMBIE);
                     break;
             }
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -141,5 +144,4 @@ class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl {
     public boolean hasLayer(Layer layer) {
         return layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
     }
-
 }
