@@ -56,7 +56,7 @@ class TreasureMapEffect extends OneShotEffect {
         this.staticText = "Scry 1. Put a landmark counter on {this}. "
                 + "Then if there are three or more landmark counters on it, "
                 + "remove those counters, transform {this}, and create "
-                + "three colorless Treasure artifact tokens with \"{T}, Sacrifice this artifact: Add one mana of any color.\"";
+                + "three Treasure tokens";
     }
 
     TreasureMapEffect(final TreasureMapEffect effect) {
