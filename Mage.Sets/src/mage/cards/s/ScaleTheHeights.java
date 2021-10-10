@@ -28,7 +28,7 @@ public final class ScaleTheHeights extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private ScaleTheHeights(final ScaleTheHeights card) {
