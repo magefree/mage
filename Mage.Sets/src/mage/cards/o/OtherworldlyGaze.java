@@ -24,7 +24,7 @@ public final class OtherworldlyGaze extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
                 StaticValue.get(3), false, StaticValue.get(5), StaticFilters.FILTER_CARD_CARDS,
                 Zone.LIBRARY, true, false, true, Zone.GRAVEYARD, false
-        ));
+        ).setText("look at the top three cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order"));
 
         // Flashback {1}{U}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{U}")));

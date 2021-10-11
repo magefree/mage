@@ -58,7 +58,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "MID"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "ZNR"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -1248,10 +1248,10 @@ public class VerifyCardDataTest {
         if (!ONLY_TEXT) {
             return true;
         }
-        if (checkedNames.contains(ref.name)) {
+        if (checkedNames.contains(ref.getRealCardName())) {
             return false;
         }
-        checkedNames.add(ref.name);
+        checkedNames.add(ref.getRealCardName());
         return true;
     }
 
