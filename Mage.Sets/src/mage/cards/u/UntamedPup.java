@@ -49,7 +49,7 @@ public final class UntamedPup extends CardImpl {
 
         // Other Wolves and Werewolves you control have trample.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter
+                TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true
         )));
 
         // {3}{G}: Put a +1/+1 counter on target creature.

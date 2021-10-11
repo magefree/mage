@@ -55,7 +55,7 @@ class OlagLudevicsHubrisEffect extends ReplacementEffectImpl {
 
     OlagLudevicsHubrisEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "as this creature transforms in {this}, it becomes a copy of a creature card exiled with it, " +
+        staticText = "as this creature transforms into {this}, it becomes a copy of a creature card exiled with it, " +
                 "except its name is Olag, Ludevic's Hubris, it's 4/4, and it's a legendary blue and black " +
                 "Zombie in addition to its other colors and types. Put a number of +1/+1 counters on {this} " +
                 "equal to the number of creature cards exiled with it";

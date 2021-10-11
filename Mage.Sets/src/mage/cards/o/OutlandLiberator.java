@@ -12,6 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -32,6 +34,7 @@ public final class OutlandLiberator extends CardImpl {
         // {1}, Sacrifice Outland Liberator: Destroy target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(ability);
 
         // Daybound

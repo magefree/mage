@@ -55,7 +55,7 @@ public final class BaneclawMarauder extends CardImpl {
         // Whenever a creature blocking Baneclaw Marauder dies, its controller loses 1 life.
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new LoseLifeTargetControllerEffect(1)
-                        .setText("its controller loses 1 life"),
+                        .setText("that creature's controller loses 1 life"),
                 false, filter2, true
         ), new BaneclawMarauderWatcher());
 
