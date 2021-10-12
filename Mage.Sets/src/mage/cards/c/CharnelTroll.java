@@ -49,7 +49,7 @@ public final class CharnelTroll extends CardImpl {
                         )), false
                 ).setText("exile a creature card from your graveyard. "
                         + "If you do, put a +1/+1 counter on {this}."
-                        + " Otherwise sacrifice it."),
+                        + " Otherwise, sacrifice it."),
                 TargetController.YOU, false
         ));
 

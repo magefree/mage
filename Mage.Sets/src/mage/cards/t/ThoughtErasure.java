@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.cards.CardImpl;
@@ -11,8 +10,9 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ThoughtErasure extends CardImpl {
@@ -23,13 +23,11 @@ public final class ThoughtErasure extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{B}");
 
         // Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(
-                filter, TargetController.ANY
-        ));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.OPPONENT));
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Surveil 1.
-        this.getSpellAbility().addEffect(new SurveilEffect(1));
+        this.getSpellAbility().addEffect(new SurveilEffect(1).concatBy("<br>"));
     }
 
     private ThoughtErasure(final ThoughtErasure card) {
