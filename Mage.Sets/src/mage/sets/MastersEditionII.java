@@ -114,6 +114,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Glacial Crevasses", 127, Rarity.RARE, mage.cards.g.GlacialCrevasses.class));
         cards.add(new SetCardInfo("Gorilla Shaman", 129, Rarity.UNCOMMON, mage.cards.g.GorillaShaman.class));
         cards.add(new SetCardInfo("Grandmother Sengir", 93, Rarity.RARE, mage.cards.g.GrandmotherSengir.class));
+        cards.add(new SetCardInfo("Gustha's Scepter", 209, Rarity.RARE, mage.cards.g.GusthasScepter.class));
         cards.add(new SetCardInfo("Havenwood Battleground", 230, Rarity.UNCOMMON, mage.cards.h.HavenwoodBattleground.class));
         cards.add(new SetCardInfo("Heart of Yavimaya", 231, Rarity.RARE, mage.cards.h.HeartOfYavimaya.class));
         cards.add(new SetCardInfo("Helm of Obedience", 210, Rarity.RARE, mage.cards.h.HelmOfObedience.class));

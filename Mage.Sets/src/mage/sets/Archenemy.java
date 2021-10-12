@@ -67,6 +67,7 @@ public final class Archenemy extends ExpansionSet {
         cards.add(new SetCardInfo("Forgotten Ancient", 57, Rarity.RARE, mage.cards.f.ForgottenAncient.class));
         cards.add(new SetCardInfo("Furnace Whelp", 39, Rarity.UNCOMMON, mage.cards.f.FurnaceWhelp.class));
         cards.add(new SetCardInfo("Gathan Raiders", 40, Rarity.COMMON, mage.cards.g.GathanRaiders.class));
+        cards.add(new SetCardInfo("Gleeful Sabotage", 58, Rarity.COMMON, mage.cards.g.GleefulSabotage.class));
         cards.add(new SetCardInfo("Graypelt Refuge", 125, Rarity.UNCOMMON, mage.cards.g.GraypeltRefuge.class));
         cards.add(new SetCardInfo("Gruul Signet", 108, Rarity.COMMON, mage.cards.g.GruulSignet.class));
         cards.add(new SetCardInfo("Harmonize", 59, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
