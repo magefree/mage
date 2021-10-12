@@ -98,6 +98,7 @@ public final class Archenemy extends ExpansionSet {
         cards.add(new SetCardInfo("Makeshift Mannequin", 20, Rarity.UNCOMMON, mage.cards.m.MakeshiftMannequin.class));
         cards.add(new SetCardInfo("March of the Machines", 6, Rarity.RARE, mage.cards.m.MarchOfTheMachines.class));
         cards.add(new SetCardInfo("Master Transmuter", 7, Rarity.RARE, mage.cards.m.MasterTransmuter.class));
+        cards.add(new SetCardInfo("Memnarch", 112, Rarity.RARE, mage.cards.m.Memnarch.class));
         cards.add(new SetCardInfo("Metallurgeon", 2, Rarity.UNCOMMON, mage.cards.m.Metallurgeon.class));
         cards.add(new SetCardInfo("Mistvein Borderpost", 90, Rarity.COMMON, mage.cards.m.MistveinBorderpost.class));
         cards.add(new SetCardInfo("Molimo, Maro-Sorcerer", 64, Rarity.RARE, mage.cards.m.MolimoMaroSorcerer.class));

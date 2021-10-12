@@ -226,6 +226,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Stampede", 178, Rarity.UNCOMMON, mage.cards.s.Stampede.class));
         cards.add(new SetCardInfo("Stone Spirit", 150, Rarity.UNCOMMON, mage.cards.s.StoneSpirit.class));
         cards.add(new SetCardInfo("Stonehands", 151, Rarity.COMMON, mage.cards.s.Stonehands.class));
+        cards.add(new SetCardInfo("Storm Elemental", 68, Rarity.UNCOMMON, mage.cards.s.StormElemental.class));
         cards.add(new SetCardInfo("Storm Spirit", 198, Rarity.RARE, mage.cards.s.StormSpirit.class));
         cards.add(new SetCardInfo("Stromgald Cabal", 113, Rarity.RARE, mage.cards.s.StromgaldCabal.class));
         cards.add(new SetCardInfo("Stunted Growth", 179, Rarity.RARE, mage.cards.s.StuntedGrowth.class));
