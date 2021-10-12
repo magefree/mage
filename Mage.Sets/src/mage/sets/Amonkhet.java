@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -8,7 +7,6 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,8 +21,6 @@ public final class Amonkhet extends ExpansionSet {
         return instance;
     }
 
-    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
-
     private Amonkhet() {
         super("Amonkhet", "AKH", ExpansionSet.buildDate(2017, 4, 28), SetType.EXPANSION);
         this.blockName = "Amonkhet";
@@ -35,8 +31,8 @@ public final class Amonkhet extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.ratioBoosterSpecialCommon = 129;
         this.maxCardNumberInBooster = 269;
-        this.ratioBoosterSpecialLand = 144;
 
         cards.add(new SetCardInfo("Ahn-Crop Champion", 194, Rarity.UNCOMMON, mage.cards.a.AhnCropChampion.class));
         cards.add(new SetCardInfo("Ahn-Crop Crasher", 117, Rarity.UNCOMMON, mage.cards.a.AhnCropCrasher.class));
@@ -328,15 +324,12 @@ public final class Amonkhet extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getSpecialLand() {
-        if (savedSpecialLand.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes("MP2");
-            criteria.minCardNumber(1);
-            criteria.maxCardNumber(30);
-            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
+        if (rarity == Rarity.SPECIAL) {
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("MP2")));
+            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() > 30);
         }
-
-        return new ArrayList<>(savedSpecialLand);
+        return cardInfos;
     }
 }

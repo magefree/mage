@@ -1,14 +1,10 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public final class RavnicaAllegiance extends ExpansionSet {
@@ -23,12 +19,12 @@ public final class RavnicaAllegiance extends ExpansionSet {
         super("Ravnica Allegiance", "RNA", ExpansionSet.buildDate(2019, 1, 25), SetType.EXPANSION);
         this.blockName = "Guilds of Ravnica";
         this.hasBoosters = true;
-        this.numBoosterSpecial = 1;
-        this.numBoosterLands = 0;
+        this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.ratioBoosterSpecialLand = 1; // replace all basic lands
         this.maxCardNumberInBooster = 259;
 
         cards.add(new SetCardInfo("Absorb", 151, Rarity.RARE, mage.cards.a.Absorb.class));
@@ -307,40 +303,12 @@ public final class RavnicaAllegiance extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        if (rarity == Rarity.COMMON) {
-            List<CardInfo> savedCardsInfos = savedCards.get(rarity);
-            if (savedCardsInfos == null) {
-                CardCriteria criteria = new CardCriteria();
-                criteria.setCodes(this.code).notTypes(CardType.LAND);
-                criteria.rarities(rarity).doubleFaced(false);
-                savedCardsInfos = CardRepository.instance.findCards(criteria);
-                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
-                }
-                criteria = new CardCriteria();
-                // Gateway Plaza is a normal common: https://twitter.com/EliShffrn/status/1043156989218414593s
-                criteria.setCodes(this.code).nameExact("Gateway Plaza");
-                savedCardsInfos.addAll(CardRepository.instance.findCards(criteria));
-                savedCards.put(rarity, savedCardsInfos);
-            }
-            // Return a copy of the saved cards information, as not to modify the original.
-            return new ArrayList<>(savedCardsInfos);
-        } else {
-            return super.getCardsByRarity(rarity);
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findSpecialCardsByRarity(rarity);
+        if (rarity == Rarity.LAND) {
+            // Gateway Plaza is a normal common
+            cardInfos.removeIf(cardInfo -> "Gateway Plaza".equals(cardInfo.getName()));
         }
-    }
-
-    @Override
-    public List<CardInfo> getSpecialCommon() {
-        List<CardInfo> specialCards = getCardsByRarity(Rarity.SPECIAL);
-        if (specialCards.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.rarities(Rarity.COMMON).setCodes(this.code).name("Guildgate");
-            List<CardInfo> specialCardsSave = CardRepository.instance.findCards(criteria);
-            savedCards.put(Rarity.SPECIAL, specialCardsSave);
-            specialCards.addAll(specialCardsSave);
-        }
-        return specialCards;
+        return cardInfos;
     }
 }

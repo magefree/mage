@@ -1,11 +1,11 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
 
 import java.util.List;
 
@@ -30,6 +30,7 @@ public final class VintageMasters extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        cards.add(new SetCardInfo("Academy Elite", 55, Rarity.RARE, mage.cards.a.AcademyElite.class));
         cards.add(new SetCardInfo("Addle", 103, Rarity.COMMON, mage.cards.a.Addle.class));
         cards.add(new SetCardInfo("Aether Mutation", 241, Rarity.UNCOMMON, mage.cards.a.AetherMutation.class));
         cards.add(new SetCardInfo("Afterlife", 10, Rarity.COMMON, mage.cards.a.Afterlife.class));
@@ -92,6 +93,7 @@ public final class VintageMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Control Magic", 63, Rarity.RARE, mage.cards.c.ControlMagic.class));
         cards.add(new SetCardInfo("Council's Judgment", 20, Rarity.RARE, mage.cards.c.CouncilsJudgment.class));
         cards.add(new SetCardInfo("Counterspell", 64, Rarity.COMMON, mage.cards.c.Counterspell.class));
+        cards.add(new SetCardInfo("Crater Hellion", 157, Rarity.RARE, mage.cards.c.CraterHellion.class));
         cards.add(new SetCardInfo("Crescendo of War", 21, Rarity.RARE, mage.cards.c.CrescendoOfWar.class));
         cards.add(new SetCardInfo("Crovax the Cursed", 110, Rarity.RARE, mage.cards.c.CrovaxTheCursed.class));
         cards.add(new SetCardInfo("Cruel Bargain", 111, Rarity.RARE, mage.cards.c.CruelBargain.class));
@@ -154,6 +156,7 @@ public final class VintageMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Goon", 166, Rarity.UNCOMMON, mage.cards.g.GoblinGoon.class));
         cards.add(new SetCardInfo("Goblin Lackey", 167, Rarity.RARE, mage.cards.g.GoblinLackey.class));
         cards.add(new SetCardInfo("Goblin Matron", 168, Rarity.COMMON, mage.cards.g.GoblinMatron.class));
+        cards.add(new SetCardInfo("Goblin Patrol", 169, Rarity.COMMON, mage.cards.g.GoblinPatrol.class));
         cards.add(new SetCardInfo("Goblin Piledriver", 170, Rarity.RARE, mage.cards.g.GoblinPiledriver.class));
         cards.add(new SetCardInfo("Goblin Ringleader", 171, Rarity.UNCOMMON, mage.cards.g.GoblinRingleader.class));
         cards.add(new SetCardInfo("Goblin Settler", 172, Rarity.UNCOMMON, mage.cards.g.GoblinSettler.class));
@@ -190,6 +193,7 @@ public final class VintageMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Lake of the Dead", 302, Rarity.RARE, mage.cards.l.LakeOfTheDead.class));
         cards.add(new SetCardInfo("Laquatus's Champion", 125, Rarity.RARE, mage.cards.l.LaquatussChampion.class));
         cards.add(new SetCardInfo("Library of Alexandria", 303, Rarity.MYTHIC, mage.cards.l.LibraryOfAlexandria.class));
+        cards.add(new SetCardInfo("Lightning Dragon", 177, Rarity.RARE, mage.cards.l.LightningDragon.class));
         cards.add(new SetCardInfo("Lightning Rift", 178, Rarity.UNCOMMON, mage.cards.l.LightningRift.class));
         cards.add(new SetCardInfo("Lion's Eye Diamond", 271, Rarity.MYTHIC, mage.cards.l.LionsEyeDiamond.class));
         cards.add(new SetCardInfo("Living Death", 126, Rarity.RARE, mage.cards.l.LivingDeath.class));
@@ -230,6 +234,7 @@ public final class VintageMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Obsessive Search", 83, Rarity.COMMON, mage.cards.o.ObsessiveSearch.class));
         cards.add(new SetCardInfo("Ophidian", 84, Rarity.COMMON, mage.cards.o.Ophidian.class));
         cards.add(new SetCardInfo("Orcish Lumberjack", 179, Rarity.COMMON, mage.cards.o.OrcishLumberjack.class));
+        cards.add(new SetCardInfo("Owl Familiar", 85, Rarity.COMMON, mage.cards.o.OwlFamiliar.class));
         cards.add(new SetCardInfo("Palinchron", 86, Rarity.RARE, mage.cards.p.Palinchron.class));
         cards.add(new SetCardInfo("Parallax Wave", 37, Rarity.RARE, mage.cards.p.ParallaxWave.class));
         cards.add(new SetCardInfo("Paralyze", 132, Rarity.COMMON, mage.cards.p.Paralyze.class));
@@ -353,38 +358,25 @@ public final class VintageMasters extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getSpecialCommon() {
-        CardCriteria criteria = new CardCriteria();
-        criteria.rarities(Rarity.COMMON).setCodes(this.code);
-        return CardRepository.instance.findCards(criteria);
+    protected void addSpecialCards(List<Card> booster, int number) {
+        // number is here always 1
+        Rarity rarity;
+        // You will open a Power Nine card about once in 53 packs
+        if (RandomUtil.nextInt(53) == 0) {
+            rarity = Rarity.BONUS;
+        } else {
+            // assuming same distribution as foils in paper Masters sets, 10:3:1 C:U:R
+            int rarityKey = RandomUtil.nextInt(112);
+            if (rarityKey < 80) {
+                rarity = Rarity.COMMON;
+            } else if (rarityKey < 104) {
+                rarity = Rarity.UNCOMMON;
+            } else if (rarityKey < 111) {
+                rarity = Rarity.RARE;
+            } else {
+                rarity = Rarity.MYTHIC;
+            }
+        }
+        addToBooster(booster, getCardsByRarity(rarity));
     }
-
-    @Override
-    public List<CardInfo> getSpecialUncommon() {
-        CardCriteria criteria = new CardCriteria();
-        criteria.rarities(Rarity.UNCOMMON).setCodes(this.code);
-        return CardRepository.instance.findCards(criteria);
-    }
-
-    @Override
-    public List<CardInfo> getSpecialRare() {
-        CardCriteria criteria = new CardCriteria();
-        criteria.rarities(Rarity.RARE).setCodes(this.code);
-        return CardRepository.instance.findCards(criteria);
-    }
-
-    @Override
-    public List<CardInfo> getSpecialMythic() {
-        CardCriteria criteria = new CardCriteria();
-        criteria.rarities(Rarity.MYTHIC).setCodes(this.code);
-        return CardRepository.instance.findCards(criteria);
-    }
-
-    @Override
-    public List<CardInfo> getSpecialBonus() {
-        CardCriteria criteria = new CardCriteria();
-        criteria.rarities(Rarity.BONUS).setCodes(this.code);
-        return CardRepository.instance.findCards(criteria);
-    }
-
 }

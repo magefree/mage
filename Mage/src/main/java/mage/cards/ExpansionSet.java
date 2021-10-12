@@ -5,6 +5,7 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
+import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.CardUtil;
@@ -115,6 +116,7 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterLands;
     protected int ratioBoosterSpecialLand = 0; // if > 0 basic lands are replaced with special land with probability ratioBoosterSpecialLandNumerator / ratioBoosterSpecialLand
     protected int ratioBoosterSpecialLandNumerator = 1;
+    protected int ratioBoosterSpecialCommon = 0; // if > 0 one common is replaced with special card with probability 1 / ratioBoosterSpecialCommon
 
     protected int numBoosterCommon;
     protected int numBoosterUncommon;
@@ -128,7 +130,8 @@ public abstract class ExpansionSet implements Serializable {
 
     protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
 
-    protected final EnumMap<Rarity, List<CardInfo>> savedCards;
+    protected final EnumMap<Rarity, List<CardInfo>> savedCards = new EnumMap<>(Rarity.class);
+    protected final EnumMap<Rarity, List<CardInfo>> savedSpecialCards = new EnumMap<>(Rarity.class);
     protected final Map<String, CardInfo> inBoosterMap = new HashMap<>();
 
     public ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
@@ -137,7 +140,6 @@ public abstract class ExpansionSet implements Serializable {
         this.releaseDate = releaseDate;
         this.setType = setType;
         this.maxCardNumberInBooster = Integer.MAX_VALUE;
-        savedCards = new EnumMap<>(Rarity.class);
     }
 
     public String getName() {
@@ -231,7 +233,6 @@ public abstract class ExpansionSet implements Serializable {
         }
 
         for (int i = 0; i < 100; i++) {//don't want to somehow loop forever
-
             List<Card> booster = tryBooster();
             if (boosterIsValid(booster)) {
                 return booster;
@@ -349,26 +350,27 @@ public abstract class ExpansionSet implements Serializable {
         }
 
         if (numBoosterLands > 0) {
-            List<CardInfo> specialLands = getSpecialLand();
+            List<CardInfo> specialLands = getSpecialCardsByRarity(Rarity.LAND);
             List<CardInfo> basicLands = getCardsByRarity(Rarity.LAND);
             for (int i = 0; i < numBoosterLands; i++) {
-                if (ratioBoosterSpecialLand > 0 && RandomUtil.nextInt(ratioBoosterSpecialLand) < ratioBoosterSpecialLandNumerator && specialLands != null) {
+                if (ratioBoosterSpecialLand > 0 && RandomUtil.nextInt(ratioBoosterSpecialLand) < ratioBoosterSpecialLandNumerator) {
                     addToBooster(booster, specialLands);
                 } else {
                     addToBooster(booster, basicLands);
                 }
             }
         }
-        int numSpecialCommons = getNumberOfSpecialCommons();
-        int numCommonsToGenerate = numBoosterCommon - numSpecialCommons;
+
+        int numCommonsToGenerate = numBoosterCommon;
+        int numSpecialToGenerate = numBoosterSpecial;
+        if (ratioBoosterSpecialCommon > 0 && RandomUtil.nextInt(ratioBoosterSpecialCommon) < 1) {
+            --numCommonsToGenerate;
+            ++numSpecialToGenerate;
+        }
 
         List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
         for (int i = 0; i < numCommonsToGenerate; i++) {
             addToBooster(booster, commons);
-        }
-
-        if (numSpecialCommons > 0) { // e.g. used to conditionally replace common cards in the booster
-            addSpecialCommon(booster, numSpecialCommons);
         }
 
         List<CardInfo> uncommons = getCardsByRarity(Rarity.UNCOMMON);
@@ -390,8 +392,8 @@ public abstract class ExpansionSet implements Serializable {
             addDoubleFace(booster);
         }
 
-        if (numBoosterSpecial > 0) {
-            addSpecial(booster);
+        if (numSpecialToGenerate > 0) {
+            addSpecialCards(booster, numSpecialToGenerate);
         }
 
         return booster;
@@ -400,96 +402,33 @@ public abstract class ExpansionSet implements Serializable {
     /* add double faced card for Innistrad booster
      * rarity near as the normal distribution
      */
-    public void addDoubleFace(List<Card> booster) {
+    protected void addDoubleFace(List<Card> booster) {
+        Rarity rarity;
         for (int i = 0; i < numBoosterDoubleFaced; i++) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes(this.code).doubleFaced(true);
-            if (RandomUtil.nextInt(15) < 10) {
-                criteria.rarities(Rarity.COMMON);
-            } else if (RandomUtil.nextInt(5) < 4) {
-                criteria.rarities(Rarity.UNCOMMON);
-            } else if (RandomUtil.nextInt(8) < 7) {
-                criteria.rarities(Rarity.RARE);
+            int rarityKey = RandomUtil.nextInt(121);
+            if (rarityKey < 66) {
+                rarity = Rarity.COMMON;
+            } else if (rarityKey < 108) {
+                rarity = Rarity.UNCOMMON;
+            } else if (rarityKey < 120) {
+                rarity = Rarity.RARE;
             } else {
-                criteria.rarities(Rarity.MYTHIC);
+                rarity = Rarity.MYTHIC;
             }
-            List<CardInfo> doubleFacedCards = CardRepository.instance.findCards(criteria);
-            addToBooster(booster, doubleFacedCards);
+            addToBooster(booster, getSpecialCardsByRarity(rarity));
+        }
+    }
+
+    protected void addSpecialCards(List<Card> booster, int number) {
+        List<CardInfo> specialCards = getCardsByRarity(Rarity.SPECIAL);
+        for (int i = 0; i < number; i++) {
+            addToBooster(booster, specialCards);
         }
     }
 
     public static Date buildDate(int year, int month, int day) {
         // The month starts with 0 = jan ... dec = 11
         return new GregorianCalendar(year, month - 1, day).getTime();
-    }
-
-    /**
-     * Can be overwritten if sometimes special cards will be generated instead
-     * of common slots
-     *
-     * @return
-     */
-    public int getNumberOfSpecialCommons() {
-        return 0;
-    }
-
-    /**
-     * Can be overwritten to add a replacement for common card in boosters
-     *
-     * @param booster
-     * @param number
-     */
-    public void addSpecialCommon(List<Card> booster, int number) {
-
-    }
-
-    private void addSpecial(List<Card> booster) {
-        int specialCards = 0;
-        List<CardInfo> specialBonus = getSpecialBonus();
-        specialCards += specialBonus.size();
-
-        List<CardInfo> specialMythic = getSpecialMythic();
-        specialCards += specialMythic.size();
-
-        List<CardInfo> specialRare = getSpecialRare();
-        specialCards += specialRare.size();
-
-        List<CardInfo> specialUncommon = getSpecialUncommon();
-        specialCards += specialUncommon.size();
-
-        List<CardInfo> specialCommon = getSpecialCommon();
-        specialCards += specialCommon.size();
-
-        if (specialCards > 0) {
-            for (int i = 0; i < numBoosterSpecial; i++) {
-                if (!specialCommon.isEmpty()
-                        && RandomUtil.nextInt(15) < 10) {
-                    addToBooster(booster, specialCommon);
-                    continue;
-                }
-                if (!specialUncommon.isEmpty()
-                        && RandomUtil.nextInt(4) < 3) {
-                    addToBooster(booster, specialUncommon);
-                    continue;
-                }
-                if (!specialRare.isEmpty()
-                        && RandomUtil.nextInt(8) < 7) {
-                    addToBooster(booster, specialRare);
-                    continue;
-                }
-                if (!specialMythic.isEmpty()) {
-                    if (specialBonus.isEmpty() || RandomUtil.nextInt(3) < 2) {
-                        addToBooster(booster, specialMythic);
-                        continue;
-                    }
-                }
-                if (!specialBonus.isEmpty()) {
-                    addToBooster(booster, specialBonus);
-                    continue;
-                }
-                i--;
-            }
-        }
     }
 
     public boolean hasBoosters() {
@@ -500,54 +439,82 @@ public abstract class ExpansionSet implements Serializable {
         return hasBasicLands;
     }
 
-    public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        List<CardInfo> savedCardsInfos = savedCards.get(rarity);
-        if (savedCardsInfos == null) {
-            CardCriteria criteria = new CardCriteria();
-            if (rarity == Rarity.LAND && !hasBasicLands && parentSet != null) {
-                // get basic lands from parent set if this set doesn't have them
-                criteria.setCodes(parentSet.code);
-            } else {
-                criteria.setCodes(this.code);
-            }
-            criteria.rarities(rarity);
-            if (numBoosterDoubleFaced > -1) {
-                criteria.doubleFaced(false);
-            }
-            savedCardsInfos = CardRepository.instance.findCards(criteria);
-            // Workaround after card number is numeric
-            if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster && rarity != Rarity.LAND);
-            }
-
-            savedCards.put(rarity, savedCardsInfos);
+    public final synchronized List<CardInfo> getCardsByRarity(Rarity rarity) {
+        List<CardInfo> savedCardInfos = savedCards.get(rarity);
+        if (savedCardInfos == null) {
+            savedCardInfos = findCardsByRarity(rarity);
+            savedCards.put(rarity, savedCardInfos);
         }
         // Return a copy of the saved cards information, as not to let modify the original.
-        return new ArrayList<>(savedCardsInfos);
+        return new ArrayList<>(savedCardInfos);
     }
 
-    public List<CardInfo> getSpecialCommon() {
-        return new ArrayList<>();
+    public final synchronized List<CardInfo> getSpecialCardsByRarity(Rarity rarity) {
+        List<CardInfo> savedCardInfos = savedSpecialCards.get(rarity);
+        if (savedCardInfos == null) {
+            savedCardInfos = findSpecialCardsByRarity(rarity);
+            savedSpecialCards.put(rarity, savedCardInfos);
+        }
+        // Return a copy of the saved cards information, as not to let modify the original.
+        return new ArrayList<>(savedCardInfos);
     }
 
-    public List<CardInfo> getSpecialUncommon() {
-        return new ArrayList<>();
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        CardCriteria criteria = new CardCriteria();
+        final int maxCardNumber;
+        if (rarity == Rarity.LAND && !hasBasicLands && parentSet != null) {
+            // get basic lands from parent set if this set doesn't have them
+            criteria.setCodes(parentSet.code);
+            maxCardNumber = parentSet.getMaxCardNumberInBooster();
+        } else {
+            criteria.setCodes(this.code);
+            maxCardNumber = maxCardNumberInBooster;
+        }
+        criteria.rarities(rarity);
+        List<CardInfo> cardInfos = CardRepository.instance.findCards(criteria);
+
+        cardInfos.removeIf(next -> (
+                next.getCardNumberAsInt() > maxCardNumber
+                || next.getCardNumber().contains("*")
+                || next.getCardNumber().contains("+")));
+
+        // special slot cards (e.g. DFCs) must not also appear in regular slots of their rarity
+        // special land slot cards must not appear in regular common slots either
+        List<CardInfo> specialCards = getSpecialCardsByRarity(rarity);
+        if (rarity == Rarity.COMMON && ratioBoosterSpecialLand > 0) {
+            specialCards.addAll(getSpecialCardsByRarity(Rarity.LAND));
+        }
+        cardInfos.removeAll(specialCards);
+        return cardInfos;
     }
 
-    public List<CardInfo> getSpecialRare() {
-        return new ArrayList<>();
-    }
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = new ArrayList<>();
 
-    public List<CardInfo> getSpecialMythic() {
-        return new ArrayList<>();
-    }
+        // if set has special land slot, assume all common lands are special cards
+        if (rarity == Rarity.LAND && ratioBoosterSpecialLand > 0) {
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
+                    .setCodes(this.code)
+                    .rarities(Rarity.COMMON)
+                    .types(CardType.LAND)));
+        }
 
-    public List<CardInfo> getSpecialBonus() {
-        return new ArrayList<>();
-    }
+        // if set has special slot(s) for DFCs, they are special cards
+        if (numBoosterDoubleFaced > 0) {
+            CardCriteria criteria = new CardCriteria();
+            criteria.setCodes(this.code).rarities(rarity).doubleFaced(true);
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
+                    .setCodes(this.code)
+                    .rarities(rarity)
+                    .doubleFaced(true)));
+        }
 
-    public List<CardInfo> getSpecialLand() {
-        return new ArrayList<>();
+        cardInfos.removeIf(next -> (
+                next.getCardNumberAsInt() > maxCardNumberInBooster
+                || next.getCardNumber().contains("*")
+                || next.getCardNumber().contains("+")));
+
+        return cardInfos;
     }
 
     public int getMaxCardNumberInBooster() {

@@ -1,14 +1,11 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
 import mage.collation.RarityConfiguration;
-import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.constants.SuperType;
@@ -26,8 +23,6 @@ public final class Kaldheim extends ExpansionSet {
     public static Kaldheim getInstance() {
         return instance;
     }
-
-    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private Kaldheim() {
         super("Kaldheim", "KHM", ExpansionSet.buildDate(2021, 2, 5), SetType.EXPANSION);
@@ -451,46 +446,13 @@ public final class Kaldheim extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        if (savedCards.containsKey(rarity)) {
-            return new ArrayList<>(savedCards.get(rarity));
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findSpecialCardsByRarity(rarity);
+        if (rarity == Rarity.LAND) {
+            // Shimmerdrift Vale is a normal common
+            cardInfos.removeIf(cardInfo -> "Shimmerdrift Vale".equals(cardInfo.getName()));
         }
-        CardCriteria criteria = new CardCriteria();
-        criteria.setCodes(this.code);
-        criteria.rarities(rarity);
-        List<CardInfo> savedCardsInfos = CardRepository.instance.findCards(criteria);
-        switch (rarity) {
-            case LAND:
-                savedCardsInfos.removeIf(cardInfo -> !cardInfo.getSupertypes().contains(SuperType.SNOW));
-                savedCardsInfos.removeIf(cardInfo -> !cardInfo.getSupertypes().contains(SuperType.BASIC));
-                break;
-            case COMMON:
-                savedCardsInfos.removeIf(cardInfo ->
-                        cardInfo.getCard().isSnow()
-                                && cardInfo.getCard().isLand()
-                                && !cardInfo.getCard().getName().equals("Shimmerdrift Vale")
-                );
-                break;
-        }
-        savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
-        savedCards.put(rarity, savedCardsInfos);
-        return new ArrayList<>(savedCardsInfos);
-    }
-
-    @Override
-    public List<CardInfo> getSpecialLand() {
-        if (savedSpecialLand.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes(this.code);
-            criteria.types(CardType.LAND);
-            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
-            savedSpecialLand.removeIf(cardInfo -> cardInfo.getSupertypes().contains(SuperType.BASIC));
-            savedSpecialLand.removeIf(cardInfo -> !cardInfo.getSupertypes().contains(SuperType.SNOW));
-            savedSpecialLand.removeIf(cardInfo -> cardInfo.getName().equals("Shimmerdrift Vale"));
-            savedSpecialLand.removeIf(cardInfo -> cardInfo.getName().equals("Faceless Haven"));
-            savedSpecialLand.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() > maxCardNumberInBooster);
-        }
-        return new ArrayList<>(savedSpecialLand);
+        return cardInfos;
     }
 
     @Override

@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -8,7 +7,6 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,8 +20,6 @@ public final class HourOfDevastation extends ExpansionSet {
         return instance;
     }
 
-    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
-
     private HourOfDevastation() {
         super("Hour of Devastation", "HOU", ExpansionSet.buildDate(2017, 7, 14), SetType.EXPANSION);
         this.blockName = "Amonkhet";
@@ -35,7 +31,7 @@ public final class HourOfDevastation extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.ratioBoosterSpecialLand = 144;
+        this.ratioBoosterSpecialCommon = 129;
         this.maxCardNumberInBooster = 199;
 
         cards.add(new SetCardInfo("Abandoned Sarcophagus", 158, Rarity.RARE, mage.cards.a.AbandonedSarcophagus.class));
@@ -250,15 +246,12 @@ public final class HourOfDevastation extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getSpecialLand() {
-        if (savedSpecialLand.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes("MP2");
-            criteria.minCardNumber(31);
-            criteria.maxCardNumber(54);
-            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
+        if (rarity == Rarity.SPECIAL) {
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("MP2")));
+            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() < 31);
         }
-
-        return new ArrayList<>(savedSpecialLand);
+        return cardInfos;
     }
 }
