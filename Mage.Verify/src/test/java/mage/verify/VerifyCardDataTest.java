@@ -262,13 +262,13 @@ public class VerifyCardDataTest {
         for (Card card : CardScanner.getAllCards()) {
             cardIndex++;
             if (card instanceof SplitCard) {
-                check(((SplitCard) card).getLeftHalfCard(), cardIndex, true);
-                check(((SplitCard) card).getRightHalfCard(), cardIndex, true);
+                check(((SplitCard) card).getLeftHalfCard(), cardIndex);
+                check(((SplitCard) card).getRightHalfCard(), cardIndex);
             } else if (card instanceof ModalDoubleFacesCard) {
-                check(((ModalDoubleFacesCard) card).getLeftHalfCard(), cardIndex, false);
-                check(((ModalDoubleFacesCard) card).getRightHalfCard(), cardIndex, false);
+                check(((ModalDoubleFacesCard) card).getLeftHalfCard(), cardIndex);
+                check(((ModalDoubleFacesCard) card).getRightHalfCard(), cardIndex);
             } else {
-                check(card, cardIndex, false);
+                check(card, cardIndex);
             }
         }
 
@@ -1231,11 +1231,11 @@ public class VerifyCardDataTest {
         }
     }
 
-    private void check(Card card, int cardIndex, boolean skipWarning) {
+    private void check(Card card, int cardIndex) {
         MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
         if (ref != null) {
             checkAll(card, ref, cardIndex);
-        } else if (!skipWarning && !ONLY_TEXT) {
+        } else {
             warn(card, "Missing card reference");
         }
     }
