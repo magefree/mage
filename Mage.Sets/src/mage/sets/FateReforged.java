@@ -227,7 +227,6 @@ public final class FateReforged extends ExpansionSet {
     protected void addSpecialCards(List<Card> booster, int number) {
         // number is here always 1
         Rarity rarity;
-        int rarityKey = RandomUtil.nextInt(242);
         if (RandomUtil.nextInt(24) < 23) {
             rarity = Rarity.COMMON;
         } else {

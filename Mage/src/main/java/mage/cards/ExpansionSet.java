@@ -460,25 +460,21 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     protected List<CardInfo> findCardsByRarity(Rarity rarity) {
-        CardCriteria criteria = new CardCriteria();
-        final int maxCardNumber;
+        // get basic lands from parent set if this set doesn't have them
         if (rarity == Rarity.LAND && !hasBasicLands && parentSet != null) {
-            // get basic lands from parent set if this set doesn't have them
-            criteria.setCodes(parentSet.code);
-            maxCardNumber = parentSet.getMaxCardNumberInBooster();
-        } else {
-            criteria.setCodes(this.code);
-            maxCardNumber = maxCardNumberInBooster;
+            return parentSet.getCardsByRarity(rarity);
         }
-        criteria.rarities(rarity);
-        List<CardInfo> cardInfos = CardRepository.instance.findCards(criteria);
+
+        List<CardInfo> cardInfos = CardRepository.instance.findCards(new CardCriteria()
+                .setCodes(this.code)
+                .rarities(rarity));
 
         cardInfos.removeIf(next -> (
-                next.getCardNumberAsInt() > maxCardNumber
+                next.getCardNumberAsInt() > maxCardNumberInBooster
                 || next.getCardNumber().contains("*")
                 || next.getCardNumber().contains("+")));
 
-        // special slot cards (e.g. DFCs) must not also appear in regular slots of their rarity
+        // special slot cards must not also appear in regular slots of their rarity
         // special land slot cards must not appear in regular common slots either
         List<CardInfo> specialCards = getSpecialCardsByRarity(rarity);
         if (rarity == Rarity.COMMON && ratioBoosterSpecialLand > 0) {
@@ -488,6 +484,19 @@ public abstract class ExpansionSet implements Serializable {
         return cardInfos;
     }
 
+    /**
+     * "Special cards" are cards that have common/uncommon/rare/mythic rarities
+     * but can only appear in a specific slot in boosters. Examples are DFCs in
+     * Innistrad sets and common nonbasic lands in many post-2018 sets.
+     *
+     * Note that Rarity.SPECIAL and Rarity.BONUS cards are not normally treated
+     * as "special cards" because by default boosters don't even have slots for
+     * those rarities.
+     *
+     * Also note that getCardsByRarity calls getSpecialCardsByRarity to exclude
+     * special cards from non-special booster slots, so sets that override this
+     * method must not call getCardsByRarity in it or infinite recursion will occur.
+     */
     protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
         List<CardInfo> cardInfos = new ArrayList<>();
 
@@ -501,8 +510,6 @@ public abstract class ExpansionSet implements Serializable {
 
         // if set has special slot(s) for DFCs, they are special cards
         if (numBoosterDoubleFaced > 0) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes(this.code).rarities(rarity).doubleFaced(true);
             cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
                     .setCodes(this.code)
                     .rarities(rarity)
