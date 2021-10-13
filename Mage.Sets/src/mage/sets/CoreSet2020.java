@@ -1,15 +1,8 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author TheElk801
@@ -22,13 +15,10 @@ public final class CoreSet2020 extends ExpansionSet {
         return instance;
     }
 
-    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
-
     private CoreSet2020() {
         super("Core Set 2020", "M20", ExpansionSet.buildDate(2019, 7, 12), SetType.CORE);
         this.hasBoosters = true;
         this.hasBasicLands = true;
-        this.numBoosterSpecial = 0;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
@@ -386,41 +376,5 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Yarok, the Desecrated", 220, Rarity.MYTHIC, mage.cards.y.YarokTheDesecrated.class));
         cards.add(new SetCardInfo("Yoked Ox", 41, Rarity.COMMON, mage.cards.y.YokedOx.class));
         cards.add(new SetCardInfo("Zephyr Charge", 82, Rarity.COMMON, mage.cards.z.ZephyrCharge.class));
-    }
-
-    @Override
-    public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        // Common cards retrievement of Core Set 2020 boosters - prevent the retrievement of the common lands
-        if (rarity == Rarity.COMMON) {
-            List<CardInfo> savedCardsInfos = savedCards.get(rarity);
-            if (savedCardsInfos == null) {
-                CardCriteria criteria = new CardCriteria();
-                criteria.rarities(Rarity.COMMON);
-                criteria.setCodes(this.code).notTypes(CardType.LAND);
-                savedCardsInfos = CardRepository.instance.findCards(criteria);
-                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
-                }
-                savedCards.put(rarity, savedCardsInfos);
-            }
-            // Return a copy of the saved cards information, as not to let modify the original.
-            return new ArrayList<>(savedCardsInfos);
-        } else {
-            return super.getCardsByRarity(rarity);
-        }
-    }
-
-    @Override
-    // the common taplands replacing the basic land
-    public List<CardInfo> getSpecialLand() {
-        if (savedSpecialLand.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes(this.code);
-            criteria.rarities(Rarity.COMMON);
-            criteria.types(CardType.LAND);
-            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
-        }
-
-        return new ArrayList<>(savedSpecialLand);
     }
 }

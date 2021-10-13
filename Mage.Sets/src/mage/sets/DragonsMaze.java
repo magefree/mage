@@ -1,5 +1,6 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -7,8 +8,8 @@ import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,8 +22,6 @@ public final class DragonsMaze extends ExpansionSet {
     public static DragonsMaze getInstance() {
         return instance;
     }
-
-    private final List<CardInfo> savedSpecialRares = new ArrayList<>();
 
     private DragonsMaze() {
         super("Dragon's Maze", "DGM", ExpansionSet.buildDate(2013, 5, 3), SetType.EXPANSION);
@@ -194,61 +193,36 @@ public final class DragonsMaze extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        if (rarity == Rarity.COMMON) {
-            List<CardInfo> savedCardsInfos = savedCards.get(rarity);
-            if (savedCardsInfos == null) {
-                CardCriteria criteria = new CardCriteria();
-                criteria.setCodes(this.code).notTypes(CardType.LAND);
-                criteria.rarities(rarity).doubleFaced(false);
-                savedCardsInfos = CardRepository.instance.findCards(criteria);
-                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
-                }
-                savedCards.put(rarity, savedCardsInfos);
-            }
-            // Return a copy of the saved cards information, as not to modify the original.
-            return new ArrayList<>(savedCardsInfos);
+    protected void addSpecialCards(List<Card> booster, int number) {
+        // number is here always 1
+        // the land print sheets are believed to contain 23 copies of each Guildgate,
+        // one copy of each RTR and GTC shockland, and two copies of Maze's End
+        Rarity rarity;
+        int rarityKey = RandomUtil.nextInt(242);
+        if (rarityKey < 230) {
+            rarity = Rarity.COMMON;
+        } else if (rarityKey < 240) {
+            rarity = Rarity.RARE;
         } else {
-            return super.getCardsByRarity(rarity);
+            rarity = Rarity.MYTHIC;
         }
+        addToBooster(booster, getSpecialCardsByRarity(rarity));
     }
 
     @Override
-    public List<CardInfo> getSpecialCommon() {
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
         CardCriteria criteria = new CardCriteria();
-        criteria.rarities(Rarity.COMMON).setCodes(this.code).types(CardType.LAND);
-        return CardRepository.instance.findCards(criteria);
-    }
-
-    @Override
-    public List<CardInfo> getSpecialRare() {
-        if (savedSpecialRares.isEmpty()) {
-            fillSpecialRares("GTC", "Breeding Pool");
-            fillSpecialRares("GTC", "Godless Shrine");
-            fillSpecialRares("GTC", "Sacred Foundry");
-            fillSpecialRares("GTC", "Stomping Ground");
-            fillSpecialRares("GTC", "Watery Grave");
-            fillSpecialRares("RTR", "Blood Crypt");
-            fillSpecialRares("RTR", "Hallowed Fountain");
-            fillSpecialRares("RTR", "Overgrown Tomb");
-            fillSpecialRares("RTR", "Steam Vents");
-            fillSpecialRares("RTR", "Temple Garden");
+        criteria.rarities(rarity).types(CardType.LAND);
+        if (rarity == Rarity.RARE) {
+            // shocklands
+            criteria.setCodes("RTR", "GTC");
+        } else {
+            // Guildgates and Maze's End
+            criteria.setCodes(this.code);
         }
-        return new ArrayList<>(savedSpecialRares);
+        List<CardInfo> cardInfos = CardRepository.instance.findCards(criteria);
+        cardInfos.removeIf(cardInfo -> (cardInfo.getName().equals("Grove of the Guardian")
+                                    || cardInfo.getName().equals("Thespian's Stage")));
+        return cardInfos;
     }
-
-    private void fillSpecialRares(String setCode, String cardName) {
-        CardCriteria criteria = new CardCriteria();
-        criteria.setCodes(setCode).name(cardName);
-        savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
-    }
-
-    @Override
-    public List<CardInfo> getSpecialMythic() {
-        CardCriteria criteria = new CardCriteria();
-        criteria.rarities(Rarity.MYTHIC).setCodes(this.code).types(CardType.LAND);
-        return CardRepository.instance.findCards(criteria);
-    }
-
 }

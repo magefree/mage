@@ -3,6 +3,7 @@ package mage.sets;
 import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardInfo;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
@@ -303,6 +304,16 @@ public final class Zendikar extends ExpansionSet {
         cards.add(new SetCardInfo("World Queller", 39, Rarity.RARE, mage.cards.w.WorldQueller.class));
         cards.add(new SetCardInfo("Zektar Shrine Expedition", 155, Rarity.COMMON, mage.cards.z.ZektarShrineExpedition.class));
         cards.add(new SetCardInfo("Zendikar Farguide", 194, Rarity.COMMON, mage.cards.z.ZendikarFarguide.class));
+    }
+
+    @Override
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
+        if (rarity == Rarity.LAND) {
+            // only the full-art basic lands are found in boosters
+            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumber().contains("a"));
+        }
+        return cardInfos;
     }
 
     @Override

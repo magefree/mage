@@ -1,5 +1,6 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
@@ -32,7 +33,6 @@ public final class Dominaria extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.needsLegendCreature = true;
         this.maxCardNumberInBooster = 269;
 
         cards.add(new SetCardInfo("Academy Drake", 40, Rarity.COMMON, mage.cards.a.AcademyDrake.class));
@@ -315,6 +315,12 @@ public final class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Yawgmoth's Vile Offering", 114, Rarity.RARE, mage.cards.y.YawgmothsVileOffering.class));
         cards.add(new SetCardInfo("Zahid, Djinn of the Lamp", 76, Rarity.RARE, mage.cards.z.ZahidDjinnOfTheLamp.class));
         cards.add(new SetCardInfo("Zhalfirin Void", 249, Rarity.UNCOMMON, mage.cards.z.ZhalfirinVoid.class));
+    }
+
+    @Override
+    protected boolean boosterIsValid(List<Card> booster) {
+        return super.boosterIsValid(booster)
+                && booster.stream().anyMatch(card -> card.isLegendary() && card.isCreature());
     }
 
     @Override

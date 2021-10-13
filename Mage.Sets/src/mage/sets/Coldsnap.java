@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -8,7 +7,6 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -192,23 +190,12 @@ public final class Coldsnap extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        if (rarity != Rarity.COMMON) {
-            return super.getCardsByRarity(rarity);
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
+        if (rarity == Rarity.COMMON) {
+            // Snow basic lands are included in boosters as regular commons
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes(this.code).rarities(Rarity.LAND)));
         }
-        List<CardInfo> savedCardsInfos = savedCards.get(rarity);
-        if (savedCardsInfos != null) {
-            return new ArrayList(savedCardsInfos);
-        }
-        CardCriteria criteria = new CardCriteria();
-        criteria.setCodes(this.code).rarities(rarity);
-        savedCardsInfos = CardRepository.instance.findCards(criteria);
-        // Snow basic lands are included in boosters as regular commons, not in a land slot
-        criteria = new CardCriteria();
-        criteria.setCodes(this.code).rarities(Rarity.LAND);
-        savedCardsInfos.addAll(CardRepository.instance.findCards(criteria));
-        savedCards.put(rarity, savedCardsInfos);
-        // Return a copy of the saved cards information, as not to modify the original.
-        return new ArrayList(savedCardsInfos);
+        return cardInfos;
     }
 }

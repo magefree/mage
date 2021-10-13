@@ -1,13 +1,17 @@
 
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
 import mage.collation.RarityConfiguration;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -207,6 +211,25 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Wrack with Madness", 107, Rarity.COMMON, mage.cards.w.WrackWithMadness.class));
         cards.add(new SetCardInfo("Young Wolf", 134, Rarity.COMMON, mage.cards.y.YoungWolf.class));
         cards.add(new SetCardInfo("Zombie Apocalypse", 80, Rarity.RARE, mage.cards.z.ZombieApocalypse.class));
+    }
+
+    @Override
+    protected void addDoubleFace(List<Card> booster) {
+        Rarity rarity;
+        for (int i = 0; i < numBoosterDoubleFaced; i++) {
+            int rarityKey = RandomUtil.nextInt(121);
+            if (rarityKey < 72) {
+                rarity = Rarity.COMMON;
+            } else if (rarityKey < 108) {
+                rarity = Rarity.UNCOMMON;
+            } else if (rarityKey < 117) {
+                rarity = Rarity.RARE;
+            } else {
+                rarity = Rarity.MYTHIC;
+            }
+            List<CardInfo> doubleFacedCards = getSpecialCardsByRarity(rarity);
+            addToBooster(booster, doubleFacedCards);
+        }
     }
 
     @Override
