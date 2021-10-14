@@ -274,6 +274,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Impact Tremors", 313, Rarity.RARE, mage.cards.i.ImpactTremors.class));
         cards.add(new SetCardInfo("Primal Vigor", 314, Rarity.RARE, mage.cards.p.PrimalVigor.class));
         cards.add(new SetCardInfo("Commander's Sphere", 315, Rarity.RARE, mage.cards.c.CommandersSphere.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Chief Jim Hopper", 341, Rarity.RARE, mage.cards.c.ChiefJimHopper.class));
         cards.add(new SetCardInfo("Dustin, Gadget Genius", 342, Rarity.RARE, mage.cards.d.DustinGadgetGenius.class));
         cards.add(new SetCardInfo("Generous Gift", 369, Rarity.RARE, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Chain Lightning", 370, Rarity.RARE, mage.cards.c.ChainLightning.class));
