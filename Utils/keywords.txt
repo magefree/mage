@@ -48,6 +48,7 @@ Flying|instance|
 Forestcycling|cost|
 Forestwalk|new|
 Foretell|card, manaString|
+Friends forever|instance|
 Haste|instance|
 Hexproof|instance|
 Improvise|new|
