@@ -1,5 +1,7 @@
 package mage.sets;
 
+import mage.MageObject;
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
@@ -28,7 +30,6 @@ public final class WarOfTheSpark extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.needsPlaneswalker = true;
         this.maxCardNumberInBooster = 264;
 
         cards.add(new SetCardInfo("Ahn-Crop Invader", 113, Rarity.COMMON, mage.cards.a.AhnCropInvader.class));
@@ -342,6 +343,12 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("War Screecher", 39, Rarity.COMMON, mage.cards.w.WarScreecher.class));
         cards.add(new SetCardInfo("Wardscale Crocodile", 183, Rarity.COMMON, mage.cards.w.WardscaleCrocodile.class));
         cards.add(new SetCardInfo("Widespread Brutality", 226, Rarity.RARE, mage.cards.w.WidespreadBrutality.class));
+    }
+
+    @Override
+    protected boolean boosterIsValid(List<Card> booster) {
+        return super.boosterIsValid(booster)
+                && booster.stream().filter(MageObject::isPlaneswalker).count() == 1;
     }
 
     @Override

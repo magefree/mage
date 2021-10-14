@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -16,6 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -43,7 +44,9 @@ public final class DeathbonnetSprout extends CardImpl {
 
         // At the beginning of your upkeep, mill a card. Then if there are three or more creature cards in your graveyard, transform Deathbonnet Sprout.
         this.addAbility(new TransformAbility());
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(1));
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                new MillCardsControllerEffect(1), TargetController.YOU, false
+        );
         ability.addEffect(new ConditionalOneShotEffect(
                 new TransformSourceEffect(true), condition,
                 "Then if there are three or more creature cards in your graveyard, transform {this}"

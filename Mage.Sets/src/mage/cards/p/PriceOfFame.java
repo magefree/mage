@@ -44,7 +44,7 @@ public final class PriceOfFame extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Surveil 2.
-        this.getSpellAbility().addEffect(new SurveilEffect(2));
+        this.getSpellAbility().addEffect(new SurveilEffect(2).concatBy("<br>"));
     }
 
     private PriceOfFame(final PriceOfFame card) {

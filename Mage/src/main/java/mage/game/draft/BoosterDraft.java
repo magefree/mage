@@ -34,7 +34,6 @@ public class BoosterDraft extends DraftImpl {
             }
             boosterNum++;
         }
-        resetBufferedCards();
         this.fireEndDraftEvent();
     }
 

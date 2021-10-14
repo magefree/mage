@@ -24,7 +24,7 @@ public final class MoonragersSlash extends CardImpl {
         // This spell costs {2} less to cast if it's night.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionSourceEffect(2, NightCondition.instance)
-        ).addHint(NightHint.instance));
+        ).addHint(NightHint.instance).setRuleAtTheTop(true));
 
         // Moonrager's Slash deals 3 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

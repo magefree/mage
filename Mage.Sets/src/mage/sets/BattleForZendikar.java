@@ -7,7 +7,6 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,8 +20,6 @@ public final class BattleForZendikar extends ExpansionSet {
         return instance;
     }
 
-    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
-
     private BattleForZendikar() {
         super("Battle for Zendikar", "BFZ", ExpansionSet.buildDate(2015, 10, 2), SetType.EXPANSION);
         this.blockName = "Battle for Zendikar";
@@ -33,8 +30,7 @@ public final class BattleForZendikar extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.numBoosterSpecial = 0;
-        this.ratioBoosterSpecialLand = 144;
+        this.ratioBoosterSpecialCommon = 144;
 
         cards.add(new SetCardInfo("Adverse Conditions", 54, Rarity.UNCOMMON, mage.cards.a.AdverseConditions.class));
         cards.add(new SetCardInfo("Akoum Firebird", 138, Rarity.MYTHIC, mage.cards.a.AkoumFirebird.class));
@@ -338,15 +334,15 @@ public final class BattleForZendikar extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getSpecialLand() {
-        if (savedSpecialLand.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes("EXP");
-            criteria.minCardNumber(1);
-            criteria.maxCardNumber(45);
-            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
+        if (rarity == Rarity.LAND) {
+            // only the full-art basic lands are found in boosters
+            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumber().contains("a"));
+        } else if (rarity == Rarity.SPECIAL) {
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("EXP")));
+            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() > 25);
         }
-
-        return new ArrayList<>(savedSpecialLand);
+        return cardInfos;
     }
 }

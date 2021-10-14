@@ -274,6 +274,10 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Impact Tremors", 313, Rarity.RARE, mage.cards.i.ImpactTremors.class));
         cards.add(new SetCardInfo("Primal Vigor", 314, Rarity.RARE, mage.cards.p.PrimalVigor.class));
         cards.add(new SetCardInfo("Commander's Sphere", 315, Rarity.RARE, mage.cards.c.CommandersSphere.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Chief Jim Hopper", 341, Rarity.RARE, mage.cards.c.ChiefJimHopper.class));
+        cards.add(new SetCardInfo("Dustin, Gadget Genius", 342, Rarity.RARE, mage.cards.d.DustinGadgetGenius.class));
+        cards.add(new SetCardInfo("Eleven, the Mage", 343, Rarity.COMMON, mage.cards.e.ElevenTheMage.class));
+        cards.add(new SetCardInfo("Mike, the Dungeon Master", 346, Rarity.RARE, mage.cards.m.MikeTheDungeonMaster.class));
         cards.add(new SetCardInfo("Generous Gift", 369, Rarity.RARE, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Chain Lightning", 370, Rarity.RARE, mage.cards.c.ChainLightning.class));
         cards.add(new SetCardInfo("Kodama's Reach", 371, Rarity.RARE, mage.cards.k.KodamasReach.class));
@@ -317,6 +321,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Tibalt, the Fiend-Blooded", 537, Rarity.MYTHIC, mage.cards.t.TibaltTheFiendBlooded.class));
         cards.add(new SetCardInfo("Evolving Wilds", 538, Rarity.RARE, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Swamp", 539, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 549, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 551, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 552, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 555, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
@@ -326,13 +331,14 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 561, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 563, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 566, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 568, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 572, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 573, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lucille", 581, Rarity.MYTHIC, mage.cards.l.Lucille.class));
         cards.add(new SetCardInfo("Brainstorm", 582, Rarity.RARE, mage.cards.b.Brainstorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terramorphic Expanse", 585, Rarity.RARE, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Arcane Signet", 589, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Crash Through", 594, Rarity.RARE, mage.cards.c.CrashThrough.class));
+        cards.add(new SetCardInfo("Crash Through", 591, Rarity.RARE, mage.cards.c.CrashThrough.class));
         cards.add(new SetCardInfo("Eldrazi Monument", 603, Rarity.MYTHIC, mage.cards.e.EldraziMonument.class));
         cards.add(new SetCardInfo("Ornithopter", 604, Rarity.RARE, mage.cards.o.Ornithopter.class));
         cards.add(new SetCardInfo("Panharmonicon", 605, Rarity.RARE, mage.cards.p.Panharmonicon.class));

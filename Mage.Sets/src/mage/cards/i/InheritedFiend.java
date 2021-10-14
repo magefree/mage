@@ -12,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;
@@ -20,6 +22,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class InheritedFiend extends CardImpl {
+
+    private static final FilterCard filter = new FilterCreatureCard("creature card from a graveyard");
 
     public InheritedFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
@@ -37,7 +41,7 @@ public final class InheritedFiend extends CardImpl {
         // {2}{B}: Exile target creature card from a graveyard. Put a +1/+1 counter on Inherited Fiend.
         Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).concatBy("."));
-        ability.addTarget(new TargetCardInGraveyard());
+        ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
     }
 

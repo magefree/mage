@@ -24,7 +24,8 @@ public final class ZendikarRisingCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Acidic Slime", 59, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Admonition Angel", 10, Rarity.MYTHIC, mage.cards.a.AdmonitionAngel.class));
         cards.add(new SetCardInfo("Aetherize", 23, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));
-        cards.add(new SetCardInfo("Anowon, the Ruin Thief", 1, Rarity.MYTHIC, mage.cards.a.AnowonTheRuinThief.class));
+        cards.add(new SetCardInfo("Anowon, the Ruin Thief", 1, Rarity.MYTHIC, mage.cards.a.AnowonTheRuinThief.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Anowon, the Ruin Thief", 7, Rarity.MYTHIC, mage.cards.a.AnowonTheRuinThief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Signet", 106, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Armorcraft Judge", 60, Rarity.UNCOMMON, mage.cards.a.ArmorcraftJudge.class));
         cards.add(new SetCardInfo("Banishing Light", 11, Rarity.UNCOMMON, mage.cards.b.BanishingLight.class));
@@ -46,7 +47,7 @@ public final class ZendikarRisingCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dimir Guildgate", 127, Rarity.COMMON, mage.cards.d.DimirGuildgate.class));
         cards.add(new SetCardInfo("Dimir Keyrune", 110, Rarity.UNCOMMON, mage.cards.d.DimirKeyrune.class));
         cards.add(new SetCardInfo("Dimir Locket", 111, Rarity.COMMON, mage.cards.d.DimirLocket.class));
-        cards.add(new SetCardInfo("Dimir Signet", 112, Rarity.UNCOMMON, mage.cards.d.DimirSignet.class));
+        cards.add(new SetCardInfo("Dimir Signet", 112, Rarity.COMMON, mage.cards.d.DimirSignet.class));
         cards.add(new SetCardInfo("Dismal Backwater", 128, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Distant Melody", 24, Rarity.COMMON, mage.cards.d.DistantMelody.class));
         cards.add(new SetCardInfo("Elite Scaleguard", 14, Rarity.UNCOMMON, mage.cards.e.EliteScaleguard.class));
@@ -92,7 +93,7 @@ public final class ZendikarRisingCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Master Thief", 30, Rarity.UNCOMMON, mage.cards.m.MasterThief.class));
         cards.add(new SetCardInfo("Military Intelligence", 31, Rarity.UNCOMMON, mage.cards.m.MilitaryIntelligence.class));
         cards.add(new SetCardInfo("Mina and Denn, Wildborn", 94, Rarity.RARE, mage.cards.m.MinaAndDennWildborn.class));
-        cards.add(new SetCardInfo("Mind Stone", 114, Rarity.COMMON, mage.cards.m.MindStone.class));
+        cards.add(new SetCardInfo("Mind Stone", 114, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Multani, Yavimaya's Avatar", 75, Rarity.MYTHIC, mage.cards.m.MultaniYavimayasAvatar.class));
         cards.add(new SetCardInfo("Murder", 47, Rarity.COMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Myriad Landscape", 135, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
@@ -106,7 +107,8 @@ public final class ZendikarRisingCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Notion Thief", 96, Rarity.RARE, mage.cards.n.NotionThief.class));
         cards.add(new SetCardInfo("Notorious Throng", 33, Rarity.RARE, mage.cards.n.NotoriousThrong.class));
         cards.add(new SetCardInfo("Obelisk of Urd", 115, Rarity.RARE, mage.cards.o.ObeliskOfUrd.class));
-        cards.add(new SetCardInfo("Obuun, Mul Daya Ancestor", 2, Rarity.MYTHIC, mage.cards.o.ObuunMulDayaAncestor.class));
+        cards.add(new SetCardInfo("Obuun, Mul Daya Ancestor", 2, Rarity.MYTHIC, mage.cards.o.ObuunMulDayaAncestor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Obuun, Mul Daya Ancestor", 8, Rarity.MYTHIC, mage.cards.o.ObuunMulDayaAncestor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ogre Slumlord", 50, Rarity.RARE, mage.cards.o.OgreSlumlord.class));
         cards.add(new SetCardInfo("Omnath, Locus of Rage", 97, Rarity.MYTHIC, mage.cards.o.OmnathLocusOfRage.class));
         cards.add(new SetCardInfo("Oona's Blackguard", 51, Rarity.UNCOMMON, mage.cards.o.OonasBlackguard.class));
@@ -139,6 +141,7 @@ public final class ZendikarRisingCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Springbloom Druid", 83, Rarity.COMMON, mage.cards.s.SpringbloomDruid.class));
         cards.add(new SetCardInfo("Stinkdrinker Bandit", 55, Rarity.UNCOMMON, mage.cards.s.StinkdrinkerBandit.class));
         cards.add(new SetCardInfo("Stolen Identity", 37, Rarity.RARE, mage.cards.s.StolenIdentity.class));
+        cards.add(new SetCardInfo("Struggle // Survive", 102, Rarity.UNCOMMON, mage.cards.s.StruggleSurvive.class));
         cards.add(new SetCardInfo("Submerged Boneyard", 141, Rarity.UNCOMMON, mage.cards.s.SubmergedBoneyard.class));
         cards.add(new SetCardInfo("Sun Titan", 21, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
         cards.add(new SetCardInfo("Sygg, River Cutthroat", 103, Rarity.RARE, mage.cards.s.SyggRiverCutthroat.class));

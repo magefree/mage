@@ -35,7 +35,7 @@ public final class InvertInvent extends SplitCard {
 
         // Invent
         // Search your library for an instant card and/or a sorcery card, reveal them, put them into your hand, then shuffle your library.
-        this.getRightHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new InventTarget(), true));
+        this.getRightHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new InventTarget(), true).setText("search your library for an instant card and/or a sorcery card, reveal them, put them into your hand, then shuffle"));
     }
 
     private InvertInvent(final InvertInvent card) {
