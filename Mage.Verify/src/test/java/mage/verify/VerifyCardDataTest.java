@@ -201,8 +201,6 @@ public class VerifyCardDataTest {
         // scryfall download sets (missing from scryfall website)
         skipListCreate(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS);
         skipListAddName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, "SWS"); // Star Wars
-        //skipListAddName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, "8EB"); // Eighth Edition Box - inner xmage set, split from 8ED
-        //skipListAddName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, "9EB"); // Ninth Edition Box - inner xmage set, split from 9ED
 
         // sample decks checking - some decks can contains unimplemented cards, so ignore it
         // file name must be related to sample-decks folder
@@ -481,7 +479,6 @@ public class VerifyCardDataTest {
                 continue;
             }
 
-            // TODO: 8EB and 9EB uses workaround to split from main set, so it will be in unofficial list until booster cards improve
             xmageUnofficialSets++;
             xmageUnofficialCards += set.getSetCardInfo().size();
             info.add("Unofficial set: " + set.getCode() + " - " + set.getName() + ", cards: " + set.getSetCardInfo().size() + ", year: " + set.getReleaseYear());
