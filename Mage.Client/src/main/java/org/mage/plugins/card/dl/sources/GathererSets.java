@@ -243,7 +243,7 @@ public class GathererSets implements Iterable<DownloadJob> {
                     }
                 }
 
-                // 4. info: sets with missing cards for boosters (todo: what about +20 number for alternative land arts?)
+                // 4. info: sets with missing cards for boosters
                 if (set.getMaxCardNumberInBooster() != Integer.MAX_VALUE) {
                     for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
                         if (card.getCardNumberAsInt() > set.getMaxCardNumberInBooster()) {
