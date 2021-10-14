@@ -16,10 +16,6 @@ import java.util.regex.Pattern;
  */
 public class ScryfallImageSupportCards {
 
-    private static final Map<String, String> xmageSetsToScryfall = ImmutableMap.<String, String>builder()
-            .put("8EB", "8ED")
-            .put("9EB", "9ED")
-            .build();
     static final Pattern REGEXP_DIRECT_KEY_SET_CODE_PATTERN = Pattern.compile("(\\w+)\\/", Pattern.MULTILINE);
     static final Pattern REGEXP_DIRECT_KEY_CARD_NAME_PATTERN = Pattern.compile("\\/(.+?)\\/", Pattern.MULTILINE);
 
@@ -125,7 +121,6 @@ public class ScryfallImageSupportCards {
             add("LGN"); // Legions
             add("SCG"); // Scourge
             add("8ED"); // Eighth Edition
-            add("8EB"); // Eighth Edition Box
             add("WC03"); // World Championship Decks 2003
             add("MRD"); // Mirrodin
             add("PAL04"); // Arena League 2004
@@ -145,7 +140,6 @@ public class ScryfallImageSupportCards {
             add("BOK"); // Betrayers of Kamigawa
             add("SOK"); // Saviors of Kamigawa
             add("9ED"); // Ninth Edition
-            add("9EB"); // Ninth Edition Box
             //add("PSAL"); // Salvat 2005
             add("RAV"); // Ravnica: City of Guilds
             add("P2HG"); // Two-Headed Giant Tournament
@@ -957,7 +951,7 @@ public class ScryfallImageSupportCards {
     };
 
     public static String findScryfallSetCode(String xmageCode) {
-        return xmageSetsToScryfall.getOrDefault(xmageCode, xmageCode).toLowerCase(Locale.ENGLISH);
+        return xmageCode.toLowerCase(Locale.ENGLISH);
     }
 
     public static Set<String> getSupportedSets() {
@@ -987,8 +981,8 @@ public class ScryfallImageSupportCards {
     }
 
     public static String extractSetCodeFromDirectKey(String key) {
-        // from: 8EB/Giant Octopus
-        // to: 8EB
+        // from: 8ED/Giant Octopus
+        // to: 8ED
         Matcher matcher = REGEXP_DIRECT_KEY_SET_CODE_PATTERN.matcher(key);
         if (matcher.find()) {
             return matcher.group(1);
@@ -997,7 +991,7 @@ public class ScryfallImageSupportCards {
     }
 
     public static String extractCardNameFromDirectKey(String key) {
-        // from: 8EB/Giant Octopus/
+        // from: 8ED/Giant Octopus/
         // to: Giant Octopus
         Matcher matcher = REGEXP_DIRECT_KEY_CARD_NAME_PATTERN.matcher(key + "/"); // add / for regexp workaround
         if (matcher.find()) {
