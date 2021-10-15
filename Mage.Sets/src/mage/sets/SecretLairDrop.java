@@ -289,6 +289,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Chief Jim Hopper", 341, Rarity.RARE, mage.cards.c.ChiefJimHopper.class));
         cards.add(new SetCardInfo("Dustin, Gadget Genius", 342, Rarity.RARE, mage.cards.d.DustinGadgetGenius.class));
         cards.add(new SetCardInfo("Eleven, the Mage", 343, Rarity.COMMON, mage.cards.e.ElevenTheMage.class));
+        cards.add(new SetCardInfo("Lucas, the Sharpshooter", 344, Rarity.RARE, mage.cards.l.LucasTheSharpshooter.class));
         cards.add(new SetCardInfo("Max, the Daredevil", 345, Rarity.RARE, mage.cards.m.MaxTheDaredevil.class));
         cards.add(new SetCardInfo("Mike, the Dungeon Master", 346, Rarity.RARE, mage.cards.m.MikeTheDungeonMaster.class));
         cards.add(new SetCardInfo("Generous Gift", 369, Rarity.RARE, mage.cards.g.GenerousGift.class));
