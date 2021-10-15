@@ -286,6 +286,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Blasphemous Act", 322, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Beast Within", 323, Rarity.RARE, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Grafdigger's Cage", 324, Rarity.RARE, mage.cards.g.GrafdiggersCage.class));
+        cards.add(new SetCardInfo("Mind Flayer, the Shadow", 340, Rarity.MYTHIC, mage.cards.m.MindFlayerTheShadow.class));
         cards.add(new SetCardInfo("Chief Jim Hopper", 341, Rarity.RARE, mage.cards.c.ChiefJimHopper.class));
         cards.add(new SetCardInfo("Dustin, Gadget Genius", 342, Rarity.RARE, mage.cards.d.DustinGadgetGenius.class));
         cards.add(new SetCardInfo("Eleven, the Mage", 343, Rarity.COMMON, mage.cards.e.ElevenTheMage.class));
