@@ -34,7 +34,7 @@ public class CrewsVehicleSourceTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getTargetId().equals(getSourceId())) {
             for (Effect effect : getEffects()) {
                 // set the vehicle id as target
-                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
             }
             return true;
         }

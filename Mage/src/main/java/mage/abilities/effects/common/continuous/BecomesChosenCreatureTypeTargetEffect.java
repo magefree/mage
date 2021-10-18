@@ -71,7 +71,7 @@ public class BecomesChosenCreatureTypeTargetEffect extends OneShotEffect {
             if (chosenType != null && !chosenType.isEmpty()) {
                 // ADD TYPE TO TARGET
                 ContinuousEffect effect = new BecomesCreatureTypeTargetEffect(duration, SubType.byDescription(chosenType));
-                effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
+                effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source), game));
                 game.addEffect(effect, source);
                 return true;
             }
