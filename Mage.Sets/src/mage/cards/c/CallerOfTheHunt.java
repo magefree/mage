@@ -119,7 +119,7 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
         effectPowerToughness.setText("");
         SimpleStaticAbility setPT = new SimpleStaticAbility(Zone.ALL, effectPowerToughness);
         GainAbilityTargetEffect gainAbility = new GainAbilityTargetEffect(setPT, Duration.EndOfGame);
-        gainAbility.setTargetPointer(new FixedTarget(ability.getSourceId(), game));
+        gainAbility.setTargetPointer(new FixedTarget(ability.getSourceId()));
         game.getState().addEffect(gainAbility, ability);
     }
 }
