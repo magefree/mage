@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -25,6 +26,7 @@ public final class SavageSurge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         Effect effect = new UntapTargetEffect();
+        effect.setOutcome(Outcome.Benefit);
         effect.setText("Untap that creature");
         this.getSpellAbility().addEffect(effect);
     }

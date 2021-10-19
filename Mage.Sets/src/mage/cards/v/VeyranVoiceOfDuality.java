@@ -53,8 +53,8 @@ class VeyranVoiceOfDualityEffect extends ReplacementEffectImpl {
 
     VeyranVoiceOfDualityEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "if you casting or copying an instant or sorcery spell causes a triggered ability " +
-                "of a permanent you control to trigger, that ability triggers an additional time";
+        staticText = "if you casting or copying an instant or sorcery spell causes a triggered ability "
+                + "of a permanent you control to trigger, that ability triggers an additional time";
     }
 
     private VeyranVoiceOfDualityEffect(final VeyranVoiceOfDualityEffect effect) {
@@ -73,18 +73,19 @@ class VeyranVoiceOfDualityEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        GameEvent sourceEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
-        if (sourceEvent.getType() != GameEvent.EventType.COPIED_STACKOBJECT
-                && sourceEvent.getType() != GameEvent.EventType.SPELL_CAST) {
-            return false;
+        NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
+        GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+        if (sourceEvent.getType() == GameEvent.EventType.SPELL_CAST
+                || sourceEvent.getType() == GameEvent.EventType.COPIED_STACKOBJECT) {
+            Spell spell = game.getSpell(sourceEvent.getTargetId());
+            Permanent permanent = game.getPermanent(((NumberOfTriggersEvent) event).getSourceId());
+            return spell != null
+                    && permanent != null
+                    && spell.isInstantOrSorcery(game)
+                    && spell.isControlledBy(source.getControllerId())
+                    && permanent.isControlledBy(source.getControllerId());
         }
-        Spell spell = game.getSpell(sourceEvent.getTargetId());
-        Permanent permanent = game.getPermanent(sourceEvent.getSourceId());
-        return spell != null
-                && permanent != null
-                && spell.isInstantOrSorcery(game)
-                && spell.isControlledBy(source.getControllerId())
-                && permanent.isControlledBy(source.getControllerId());
+        return false;
     }
 
     @Override
