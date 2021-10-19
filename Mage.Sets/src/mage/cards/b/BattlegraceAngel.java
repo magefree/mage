@@ -1,5 +1,3 @@
-
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -27,8 +25,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class BattlegraceAngel extends CardImpl {
 
-    public BattlegraceAngel (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
+    public BattlegraceAngel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(4);
@@ -44,7 +42,7 @@ public final class BattlegraceAngel extends CardImpl {
         this.addAbility(new BattlegraceAngelAbility());
     }
 
-    public BattlegraceAngel (final BattlegraceAngel card) {
+    public BattlegraceAngel(final BattlegraceAngel card) {
         super(card);
     }
 
@@ -77,10 +75,10 @@ class BattlegraceAngelAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.isActivePlayer(this.controllerId) ) {
+        if (game.isActivePlayer(this.controllerId)) {
             if (game.getCombat().attacksAlone()) {
-                for (Effect effect: this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0), game));
                 }
                 return true;
             }

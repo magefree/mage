@@ -72,7 +72,7 @@ class BurnFromWithinEffect extends OneShotEffect {
                 int damageDealt = creature.damage(amount, source.getSourceId(), source, game, false, true);
                 if (damageDealt > 0) {
                     ContinuousEffect effect = new LoseAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(new FixedTarget(creature.getId()));
+                    effect.setTargetPointer(new FixedTarget(creature.getId(), game));
                     game.addEffect(effect, source);
                 }
                 return true;
