@@ -84,7 +84,7 @@ class CurseOfVengeanceTriggeredAbility extends TriggeredAbilityImpl {
 
         if (enchantment != null && spell != null
                 && enchantment.isAttachedTo(spell.getControllerId())) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(getSourceId()));
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(getSourceId(), game));
             return true;
         }
         return false;

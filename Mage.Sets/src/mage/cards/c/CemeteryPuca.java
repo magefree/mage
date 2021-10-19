@@ -73,7 +73,7 @@ class CemeteryPucaEffect extends OneShotEffect {
             if (copyFromCreature != null) {
                 game.copyPermanent(Duration.WhileOnBattlefield, copyFromCreature, copyToCreature.getId(), source, new EmptyCopyApplier());
                 ContinuousEffect effect = new GainAbilityTargetEffect(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new CemeteryPucaEffect(), new ManaCostsImpl("{1}")), false, new FilterCreaturePermanent("a creature"), true), Duration.WhileOnBattlefield);
-                effect.setTargetPointer(new FixedTarget(copyToCreature.getId()));
+                effect.setTargetPointer(new FixedTarget(copyToCreature.getId(), game));
                 game.addEffect(effect, source);
                 return true;
             }

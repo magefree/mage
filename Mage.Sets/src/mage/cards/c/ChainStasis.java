@@ -70,7 +70,7 @@ class ChainStasisEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
             Effect effect = new MayTapOrUntapTargetEffect();
-            effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+            effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
             effect.apply(game, source);
             Player player = game.getPlayer(permanent.getControllerId());
             if (player == null) {
