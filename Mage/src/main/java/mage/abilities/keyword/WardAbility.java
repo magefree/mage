@@ -8,6 +8,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
+import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
@@ -33,16 +34,29 @@ public class WardAbility extends TriggeredAbilityImpl {
         return event.getType() == GameEvent.EventType.TARGETED;
     }
 
+    private StackObject getTargetingObject(GameEvent event, Game game) {
+        for (StackObject stackObject : game.getStack()) {
+            if (stackObject.getId().equals(event.getSourceId()) || stackObject.getSourceId().equals(event.getSourceId())) {
+                for (Target target : stackObject.getStackAbility().getTargets()) {
+                    if (target.contains(getSourceId())) {
+                        return stackObject;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!getSourceId().equals(event.getTargetId())) {
             return false;
         }
-        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+        StackObject stackObject = getTargetingObject(event, game);
         if (stackObject == null || !game.getOpponents(getControllerId()).contains(stackObject.getControllerId())) {
             return false;
         }
-        getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
+        getEffects().setTargetPointer(new FixedTarget(stackObject.getId(), game));
         return true;
     }
 
