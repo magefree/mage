@@ -54,6 +54,8 @@ public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
         if (equipment != null && equipment.getAttachedTo() != null
                 && event.getSourceId().equals(equipment.getAttachedTo())) {
             getEffects().setValue("sourceId", event.getSourceId());
+            // TODO: Passing a permanent object like this can cause bugs. May need refactoring to use UUID instead.
+            // See https://github.com/magefree/mage/issues/8377
             getEffects().setValue("attachedPermanent", game.getPermanent(event.getSourceId()));
             return true;
         }
