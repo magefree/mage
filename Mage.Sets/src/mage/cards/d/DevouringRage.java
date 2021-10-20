@@ -85,7 +85,7 @@ class DevouringRageEffect extends OneShotEffect {
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature != null) {
             ContinuousEffect effect = new BoostTargetEffect(amount, 0, Duration.EndOfTurn);
-            effect.setTargetPointer(new FixedTarget(targetCreature.getId()));
+            effect.setTargetPointer(new FixedTarget(targetCreature.getId(), game));
             game.addEffect(effect, source);
             return true;
         }

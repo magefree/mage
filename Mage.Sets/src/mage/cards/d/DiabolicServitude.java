@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -21,7 +20,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
@@ -148,7 +146,7 @@ class DiabolicServitudeExileCreatureEffect extends OneShotEffect {
         Object object = game.getState().getValue(source.getSourceId().toString() + "returnedCreature");
         if ((object instanceof MageObjectReference)) {
             Effect effect = new ExileTargetEffect();
-            effect.setTargetPointer(new FixedTarget(((MageObjectReference) object).getSourceId()));
+            effect.setTargetPointer(new FixedTarget(((MageObjectReference) object).getSourceId(), game));
             effect.apply(game, source);
             return new ReturnToHandSourceEffect(true).apply(game, source);
         }
@@ -177,7 +175,7 @@ class DiabolicServitudeSourceLeftBattlefieldEffect extends OneShotEffect {
         Object object = game.getState().getValue(source.getSourceId().toString() + "returnedCreature");
         if ((object instanceof MageObjectReference)) {
             Effect effect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
-            effect.setTargetPointer(new FixedTarget(((MageObjectReference) object).getSourceId()));
+            effect.setTargetPointer(new FixedTarget(((MageObjectReference) object).getSourceId(), game));
             effect.apply(game, source);
         }
         return false;
