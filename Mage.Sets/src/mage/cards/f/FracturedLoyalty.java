@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -77,7 +76,7 @@ public final class FracturedLoyalty extends CardImpl {
                     if (enchantment.getAttachedTo() != null) {
                         if (controller != null && !enchantedCreature.isControlledBy(this.getTargetPointer().getFirst(game, source))) {
                             ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, this.getTargetPointer().getFirst(game, source));
-                            effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+                            effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo(), game));
                             game.addEffect(effect, source);
                             return true;
                         }

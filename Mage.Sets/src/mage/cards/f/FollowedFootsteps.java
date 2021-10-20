@@ -81,7 +81,7 @@ class FollowedFootstepsEffect extends OneShotEffect {
             Permanent target = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
             if (target != null) {
                 Effect effect = new CreateTokenCopyTargetEffect();
-                effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+                effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo(), game));
                 return effect.apply(game, source);
             }
         }
