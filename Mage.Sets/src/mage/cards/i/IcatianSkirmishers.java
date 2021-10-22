@@ -1,5 +1,3 @@
-
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -26,8 +24,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class IcatianSkirmishers extends CardImpl {
 
-    public IcatianSkirmishers (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+    public IcatianSkirmishers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(1);
@@ -38,12 +36,12 @@ public final class IcatianSkirmishers extends CardImpl {
 
         // Banding
         this.addAbility(BandingAbility.getInstance());
-        
+
         // Whenever Icatian Skirmishers attacks, all creatures banded with it gain first strike until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new IcatianSkirmishersEffect(), false));
     }
 
-    public IcatianSkirmishers (final IcatianSkirmishers card) {
+    public IcatianSkirmishers(final IcatianSkirmishers card) {
         super(card);
     }
 
@@ -76,9 +74,11 @@ class IcatianSkirmishersEffect extends OneShotEffect {
         if (sourcePermanent != null) {
             for (UUID bandedId : sourcePermanent.getBandedCards()) {
                 Permanent banded = game.getPermanent(bandedId);
-                if (banded != null && banded.getBandedCards() != null && banded.getBandedCards().contains(sourcePermanent.getId())) {
+                if (banded != null 
+                        && banded.getBandedCards() != null 
+                        && banded.getBandedCards().contains(sourcePermanent.getId())) {
                     GainAbilityTargetEffect effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(new FixedTarget(bandedId));
+                    effect.setTargetPointer(new FixedTarget(bandedId, game));
                     game.addEffect(effect, source);
                 }
             }

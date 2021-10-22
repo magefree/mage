@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -124,7 +123,7 @@ class InfernalDenizenEffect extends OneShotEffect {
                                     new GainControlTargetEffect(Duration.Custom, true, opponent.getId()),
                                     SourceOnBattlefieldCondition.instance,
                                     "");
-                            giveEffect.setTargetPointer(new FixedTarget(targetCreature.getFirstTarget()));
+                            giveEffect.setTargetPointer(new FixedTarget(targetCreature.getFirstTarget(), game));
                             game.addEffect(giveEffect, source);
                             return true;
                         }

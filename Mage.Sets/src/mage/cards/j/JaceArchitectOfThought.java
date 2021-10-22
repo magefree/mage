@@ -113,7 +113,7 @@ class JaceArchitectOfThoughtDelayedTriggeredAbility extends DelayedTriggeredAbil
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
             getEffects().forEach((effect) -> {
-                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
             });
             return true;
         }
