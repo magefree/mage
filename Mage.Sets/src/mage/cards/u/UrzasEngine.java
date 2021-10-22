@@ -1,5 +1,3 @@
-
-
 package mage.cards.u;
 
 import java.util.UUID;
@@ -29,8 +27,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class UrzasEngine extends CardImpl {
 
-    public UrzasEngine (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
+    public UrzasEngine(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
         this.subtype.add(SubType.JUGGERNAUT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);
@@ -45,7 +43,7 @@ public final class UrzasEngine extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasEngineEffect(), new ManaCostsImpl("{3}")));
     }
 
-    public UrzasEngine (final UrzasEngine card) {
+    public UrzasEngine(final UrzasEngine card) {
         super(card);
     }
 
@@ -78,9 +76,12 @@ class UrzasEngineEffect extends OneShotEffect {
         if (sourcePermanent != null) {
             for (UUID bandedId : sourcePermanent.getBandedCards()) {
                 Permanent banded = game.getPermanent(bandedId);
-                if (banded != null && banded.isAttacking() && banded.getBandedCards() != null && banded.getBandedCards().contains(sourcePermanent.getId())) {
+                if (banded != null
+                        && banded.isAttacking()
+                        && banded.getBandedCards() != null
+                        && banded.getBandedCards().contains(sourcePermanent.getId())) {
                     GainAbilityTargetEffect effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(new FixedTarget(bandedId));
+                    effect.setTargetPointer(new FixedTarget(bandedId, game));
                     game.addEffect(effect, source);
                 }
             }

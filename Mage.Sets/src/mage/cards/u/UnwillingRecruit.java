@@ -1,4 +1,3 @@
-
 package mage.cards.u;
 
 import java.util.UUID;
@@ -25,8 +24,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class UnwillingRecruit extends CardImpl {
 
     public UnwillingRecruit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}{R}");
 
         // Gain control of target creature until end of turn. Untap that creature. It gets +X/+0 and gains haste until end of turn.
         this.getSpellAbility().addEffect(new UnwillingRecruitEffect());
@@ -64,7 +62,7 @@ class UnwillingRecruitEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null) {
-            source.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId()));
+            source.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId(), game));
             game.addEffect(new GainControlTargetEffect(Duration.EndOfTurn), source);
             targetCreature.untap(game);
             game.addEffect(new BoostTargetEffect(source.getManaCostsToPay().getX(), 0, Duration.EndOfTurn), source);

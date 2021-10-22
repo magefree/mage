@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.abilities.Ability;
@@ -77,7 +76,7 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
                 && game.getControllerId(event.getTargetId()).equals(enchantment.getAttachedTo())
                 && game.getPermanent(event.getTargetId()).isCreature(game)) {
             for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+                effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo(), game));
             }
             return true;
         }
@@ -86,7 +85,7 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever a creature enters the battlefield under enchanted player's control, " ;
+        return "Whenever a creature enters the battlefield under enchanted player's control, ";
     }
 
     @Override

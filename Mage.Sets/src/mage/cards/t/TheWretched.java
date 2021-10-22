@@ -110,11 +110,12 @@ class TheWretchedEffect extends OneShotEffect {
             if (combatGroup.getAttackers().contains(source.getSourceId())) {
                 for (UUID creatureId : combatGroup.getBlockers()) {
                     Permanent blocker = game.getPermanent(creatureId);
-                    if (blocker != null && blocker.getBlocking() > 0) {
+                    if (blocker != null
+                            && blocker.getBlocking() > 0) {
                         ContinuousEffect effect = new ConditionalContinuousEffect(
                                 new GainControlTargetEffect(Duration.Custom, source.getControllerId()),
                                 new SourceOnBattlefieldControlUnchangedCondition(), "");
-                        effect.setTargetPointer(new FixedTarget(blocker.getId()));
+                        effect.setTargetPointer(new FixedTarget(blocker.getId(), game));
                         game.addEffect(effect, source);
 
                     }

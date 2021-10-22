@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class WoodenStake extends CardImpl {
 
     public WoodenStake(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equip {1}
@@ -73,7 +72,7 @@ class WoodenStakeBlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbility
                 Permanent blocks = game.getPermanent(event.getTargetId());
                 if (blocks != null && blocks.hasSubtype(SubType.VAMPIRE, game)) {
                     for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                     }
                     return true;
                 }
@@ -83,7 +82,7 @@ class WoodenStakeBlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbility
                 Permanent blockedBy = game.getPermanent(event.getSourceId());
                 if (blockedBy != null && blockedBy.hasSubtype(SubType.VAMPIRE, game)) {
                     for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                        effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
                     }
                     return true;
                 }
