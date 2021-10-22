@@ -25,7 +25,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -88,15 +87,15 @@ class PhantasmalMountEffect extends OneShotEffect {
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null) {
             ContinuousEffect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
-            effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+            effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
             game.addEffect(effect, source);
             Effect sacrificeCreatureEffect = new SacrificeTargetEffect();
             Effect sacrificePhantasmalMountEffect = new SacrificeTargetEffect();
             ContinuousEffect gainAbility = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-            gainAbility.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+            gainAbility.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
             game.addEffect(gainAbility, source);
-            sacrificeCreatureEffect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-            sacrificePhantasmalMountEffect.setTargetPointer(new FixedTarget(source.getSourceId()));
+            sacrificeCreatureEffect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
+            sacrificePhantasmalMountEffect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
             DelayedTriggeredAbility dTA = new PhantasmalMountDelayedTriggeredAbility(
                     sacrificeCreatureEffect,
                     source.getSourceId());

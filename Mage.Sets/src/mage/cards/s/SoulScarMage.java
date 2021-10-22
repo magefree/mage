@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
@@ -71,7 +70,7 @@ class SoulScarMageDamageReplacementEffect extends ReplacementEffectImpl {
         Permanent toGetCounters = game.getPermanent(event.getTargetId());
         if (toGetCounters != null) {
             AddCountersTargetEffect addCounters = new AddCountersTargetEffect(CounterType.M1M1.createInstance(), StaticValue.get(event.getAmount()));
-            addCounters.setTargetPointer(new FixedTarget(toGetCounters.getId()));
+            addCounters.setTargetPointer(new FixedTarget(toGetCounters.getId(), game));
             addCounters.apply(game, source);
             return true;
         }

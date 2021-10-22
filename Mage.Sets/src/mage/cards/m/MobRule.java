@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.List;
@@ -26,7 +25,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class MobRule extends CardImpl {
 
     public MobRule(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
 
         // Choose one
         // Gain control of all creatures with power 4 or greater until end of turn. Untap those creatures. They gain haste until end of turn.
@@ -83,7 +82,7 @@ class MobRuleEffect extends OneShotEffect {
         List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(filter, game);
         for (Permanent creature : creatures) {
             ContinuousEffect effect = new MobRuleControlAllEffect(source.getControllerId());
-            effect.setTargetPointer(new FixedTarget(creature.getId()));
+            effect.setTargetPointer(new FixedTarget(creature.getId(), game));
             game.addEffect(effect, source);
             applied = true;
         }
@@ -93,7 +92,7 @@ class MobRuleEffect extends OneShotEffect {
         }
         for (Permanent creature : creatures) {
             ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-            effect.setTargetPointer(new FixedTarget(creature.getId()));
+            effect.setTargetPointer(new FixedTarget(creature.getId(), game));
             game.addEffect(effect, source);
             applied = true;
         }

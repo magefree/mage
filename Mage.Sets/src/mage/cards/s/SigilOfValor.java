@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class SigilOfValor extends CardImpl {
 
     public SigilOfValor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature attacks alone, it gets +1/+1 until end of turn for each other creature you control.
@@ -81,7 +80,7 @@ class SigilOfValorTriggeredAbility extends TriggeredAbilityImpl {
                 UUID attackerId = game.getCombat().getAttackers().get(0);
                 if (equipment != null
                         && equipment.isAttachedTo(attackerId)) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(attackerId));
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(attackerId, game));
                     return true;
                 }
             }

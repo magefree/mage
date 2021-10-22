@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import mage.MageObject;
@@ -88,13 +87,14 @@ class NecromanticSelectionEffect extends OneShotEffect {
             }
             filter.add(Predicates.or(cardIdPredicates));
             Target target = new TargetCardInGraveyard(filter);
-            if (controller.chooseTarget(outcome, target, source, game)) {
+            target.setNotTarget(true);
+            if (controller.chooseTarget(Outcome.Benefit, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
                     effect.setText("It's a black Zombie in addition to its other colors and types");
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    effect.setTargetPointer(new FixedTarget(card.getId(), game));
                     game.addEffect(effect, source);
                 }
             }

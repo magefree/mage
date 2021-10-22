@@ -86,8 +86,8 @@ class RichesEffect extends OneShotEffect {
             // Has to be done as a separate loop in case there's a situation where one creature's
             // controller depends on another creatures controller.
             for (UUID target : creaturesToSteal) {
-                GainControlTargetEffect eff = new GainControlTargetEffect(Duration.Custom, true);
-                eff.setTargetPointer(new FixedTarget(target));
+                GainControlTargetEffect eff = new GainControlTargetEffect(Duration.EndOfGame, true);
+                eff.setTargetPointer(new FixedTarget(target, game));
                 game.addEffect(eff, source);
             }
 

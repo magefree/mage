@@ -66,9 +66,9 @@ class OracleEnVecEffect extends OneShotEffect {
 
     OracleEnVecEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target opponent chooses any number of creatures they control. During that player's next turn, " +
-                "the chosen creatures attack if able, and other creatures can't attack. At the beginning of that turn's end step, " +
-                "destroy each of the chosen creatures that didn't attack this turn";
+        this.staticText = "Target opponent chooses any number of creatures they control. During that player's next turn, "
+                + "the chosen creatures attack if able, and other creatures can't attack. At the beginning of that turn's end step, "
+                + "destroy each of the chosen creatures that didn't attack this turn";
     }
 
     OracleEnVecEffect(final OracleEnVecEffect effect) {
@@ -270,7 +270,7 @@ class OracleEnVecDestroyEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null && !watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                     Effect effect = new DestroyTargetEffect();
-                    effect.setTargetPointer(new FixedTarget(targetId));
+                    effect.setTargetPointer(new FixedTarget(targetId, game));
                     effect.apply(game, source);
                 }
             }

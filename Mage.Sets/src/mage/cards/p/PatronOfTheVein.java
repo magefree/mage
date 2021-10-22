@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -99,9 +98,10 @@ class PatronOfTheVeinCreatureDiesTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent) event).isDiesEvent()) {
             if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
                 Card creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
-                if (creature != null && creature.isCreature(game)) {
+                if (creature != null
+                        && creature.isCreature(game)) {
                     for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(creature.getId()));
+                        effect.setTargetPointer(new FixedTarget(creature.getId(), game));
                     }
                     return true;
                 }
@@ -141,7 +141,7 @@ class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller == null){
+        if (controller == null) {
             return false;
         }
         MageObject sourceObject = source.getSourceObject(game);
@@ -149,7 +149,7 @@ class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
 
         if (card != null) {
             Effect effect = new ExileTargetEffect();
-            effect.setTargetPointer(new FixedTarget(card.getId()));
+            effect.setTargetPointer(new FixedTarget(card.getId(), game));
             effect.apply(game, source);
         }
 

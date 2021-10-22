@@ -88,11 +88,11 @@ class MassMutinyEffect extends OneShotEffect {
                 Permanent targetCreature = game.getPermanent(target.getFirstTarget());
                 if (targetCreature != null) {
                     ContinuousEffect effect1 = new GainControlTargetEffect(Duration.EndOfTurn);
-                    effect1.setTargetPointer(new FixedTarget(targetCreature.getId()));
+                    effect1.setTargetPointer(new FixedTarget(targetCreature.getId(), game));
                     game.addEffect(effect1, source);
 
                     ContinuousEffect effect2 = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                    effect2.setTargetPointer(new FixedTarget(targetCreature.getId()));
+                    effect2.setTargetPointer(new FixedTarget(targetCreature.getId(), game));
                     game.addEffect(effect2, source);
 
                     targetCreature.untap(game);
