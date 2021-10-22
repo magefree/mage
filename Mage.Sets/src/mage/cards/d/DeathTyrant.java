@@ -81,7 +81,7 @@ class DeathTyrantTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
-            Permanent permanent = zEvent.getTarget();
+            Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
             if (permanent != null && permanent.isCreature(game)) {
                 if (permanent.isControlledBy(controllerId) && permanent.isAttacking()) {
                     return true;

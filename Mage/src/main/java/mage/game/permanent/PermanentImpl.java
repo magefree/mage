@@ -1723,7 +1723,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         Zone fromZone = game.getState().getZone(objectId);
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            ZoneChangeEvent event = new ZoneChangeEvent(this.copy(), source, controllerId, fromZone, toZone, appliedEffects);
+            ZoneChangeEvent event = new ZoneChangeEvent(this, source, controllerId, fromZone, toZone, appliedEffects);
             ZoneChangeInfo zoneChangeInfo;
             if (toZone == Zone.LIBRARY) {
                 zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
