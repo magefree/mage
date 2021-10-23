@@ -125,6 +125,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     public void addAbility(Ability ability) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
+        abilities.addAll(ability.getSubAbilities());
     }
 
     @Override

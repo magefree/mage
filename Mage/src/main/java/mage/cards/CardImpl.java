@@ -305,9 +305,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public void addAbility(Ability ability) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
-        for (Ability subAbility : ability.getSubAbilities()) {
-            abilities.add(subAbility);
-        }
+        abilities.addAll(ability.getSubAbilities());
 
         // dynamic check: you can't add ability to the PermanentCard, use permanent.addAbility(a, source, game) instead
         // reason: triggered abilities are not processing here
