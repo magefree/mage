@@ -72,8 +72,8 @@ class ToshiroUmezawaEffect extends OneShotEffect {
 
     public ToshiroUmezawaEffect() {
         super(Outcome.Benefit);
-        this.staticText = "cast target instant card from your graveyard. "
-                + "If that card would be put into a graveyard this turn, exile it instead";
+        this.staticText = "you may cast target instant card from your graveyard. "
+                + "If that spell would be put into a graveyard this turn, exile it instead";
     }
 
     public ToshiroUmezawaEffect(final ToshiroUmezawaEffect effect) {

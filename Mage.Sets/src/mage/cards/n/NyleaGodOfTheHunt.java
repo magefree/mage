@@ -45,7 +45,7 @@ public final class NyleaGodOfTheHunt extends CardImpl {
         // Other creatures you control have trample.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_CREATURE, true
+                StaticFilters.FILTER_PERMANENT_CREATURES, true
         )));
 
         // {3}{G}: Target creature gets +2/+2 until end of turn.
