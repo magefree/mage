@@ -2,6 +2,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,10 +58,17 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if ((fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone)) {
-                return true;
+            // Workaround for cards in graveyards losing abilities (ex. Yixlid Jailer)
+            // https://github.com/magefree/mage/issues/8311
+            if (fromZone != Zone.BATTLEFIELD && toZone == Zone.GRAVEYARD) {
+                game.applyEffects();
+                Card card = game.getCard(this.getSourceId());
+                if (card == null || !card.hasAbility(this, game)) {
+                    return false;
+                }
             }
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            return (fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone);
         }
         return false;
     }
