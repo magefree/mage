@@ -2298,6 +2298,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void addAbility(Ability ability) {
         ability.setSourceId(playerId);
         this.abilities.add(ability);
+        this.abilities.addAll(ability.getSubAbilities());
     }
 
     @Override
