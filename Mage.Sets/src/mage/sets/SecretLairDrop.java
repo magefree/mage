@@ -380,5 +380,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Panharmonicon", 605, Rarity.RARE, mage.cards.p.Panharmonicon.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 606, Rarity.RARE, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Rogue's Passage", 607, Rarity.RARE, mage.cards.r.RoguesPassage.class));
+        cards.add(new SetCardInfo("Hawkins National Laboratory", 609, Rarity.RARE, mage.cards.h.HawkinsNationalLaboratory.class));
+        cards.add(new SetCardInfo("The Upside Down", 609, Rarity.RARE, mage.cards.t.TheUpsideDown.class));
     }
 }
