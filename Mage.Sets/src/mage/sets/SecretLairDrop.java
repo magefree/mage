@@ -299,7 +299,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Flayer, the Shadow", 340, Rarity.MYTHIC, mage.cards.m.MindFlayerTheShadow.class));
         cards.add(new SetCardInfo("Chief Jim Hopper", 341, Rarity.RARE, mage.cards.c.ChiefJimHopper.class));
         cards.add(new SetCardInfo("Dustin, Gadget Genius", 342, Rarity.RARE, mage.cards.d.DustinGadgetGenius.class));
-        cards.add(new SetCardInfo("Eleven, the Mage", 343, Rarity.COMMON, mage.cards.e.ElevenTheMage.class));
+        cards.add(new SetCardInfo("Eleven, the Mage", 343, Rarity.RARE, mage.cards.e.ElevenTheMage.class));
         cards.add(new SetCardInfo("Lucas, the Sharpshooter", 344, Rarity.RARE, mage.cards.l.LucasTheSharpshooter.class));
         cards.add(new SetCardInfo("Max, the Daredevil", 345, Rarity.RARE, mage.cards.m.MaxTheDaredevil.class));
         cards.add(new SetCardInfo("Mike, the Dungeon Master", 346, Rarity.RARE, mage.cards.m.MikeTheDungeonMaster.class));
@@ -307,7 +307,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Moorland Haunt", 349, Rarity.RARE, mage.cards.m.MoorlandHaunt.class));
         cards.add(new SetCardInfo("Vault of the Archangel", 350, Rarity.RARE, mage.cards.v.VaultOfTheArchangel.class));
         cards.add(new SetCardInfo("Nephalia Drownyard", 351, Rarity.RARE, mage.cards.n.NephaliaDrownyard.class));
-        cards.add(new SetCardInfo("Desolate Lighthouse", 352, Rarity.COMMON, mage.cards.d.DesolateLighthouse.class));
+        cards.add(new SetCardInfo("Desolate Lighthouse", 352, Rarity.RARE, mage.cards.d.DesolateLighthouse.class));
         cards.add(new SetCardInfo("Stensia Bloodhall", 353, Rarity.RARE, mage.cards.s.StensiaBloodhall.class));
         cards.add(new SetCardInfo("Grim Backwoods", 354, Rarity.RARE, mage.cards.g.GrimBackwoods.class));
         cards.add(new SetCardInfo("Kessig Wolf Run", 355, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
@@ -318,6 +318,12 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Chain Lightning", 370, Rarity.RARE, mage.cards.c.ChainLightning.class));
         cards.add(new SetCardInfo("Kodama's Reach", 371, Rarity.RARE, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Heirloom Blade", 372, Rarity.RARE, mage.cards.h.HeirloomBlade.class));
+        cards.add(new SetCardInfo("Mulldrifter", 373, Rarity.RARE, mage.cards.m.Mulldrifter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mulldrifter", 374, Rarity.RARE, mage.cards.m.Mulldrifter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Craterhoof Behemoth", 375, Rarity.MYTHIC, mage.cards.c.CraterhoofBehemoth.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Craterhoof Behemoth", 376, Rarity.MYTHIC, mage.cards.c.CraterhoofBehemoth.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Metalwork Colossus", 377, Rarity.RARE, mage.cards.m.MetalworkColossus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Metalwork Colossus", 378, Rarity.RARE, mage.cards.m.MetalworkColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Karn, the Great Creator", 501, Rarity.RARE, mage.cards.k.KarnTheGreatCreator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ugin, the Ineffable", 502, Rarity.RARE, mage.cards.u.UginTheIneffable.class));
         cards.add(new SetCardInfo("Gideon Blackblade", 503, Rarity.MYTHIC, mage.cards.g.GideonBlackblade.class));
