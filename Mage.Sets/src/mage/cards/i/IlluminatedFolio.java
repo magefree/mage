@@ -1,44 +1,42 @@
-
 package mage.cards.i;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import mage.MageItem;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
- * @author jeffwadsworth
+ * @author TheElk801
  */
 public final class IlluminatedFolio extends CardImpl {
 
     public IlluminatedFolio(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // {1}, {tap}, Reveal two cards from your hand that share a color: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(
+                new DrawCardSourceControllerEffect(1), new GenericManaCost(1)
+        );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new RevealTwoCardsSharedColorFromHandCost());
+        ability.addCost(new RevealTargetFromHandCost(new IlluminatedFolioTarget()));
         this.addAbility(ability);
-
     }
 
     private IlluminatedFolio(final IlluminatedFolio card) {
@@ -51,111 +49,75 @@ public final class IlluminatedFolio extends CardImpl {
     }
 }
 
-class RevealTwoCardsSharedColorFromHandCost extends RevealTargetFromHandCost {
+class IlluminatedFolioTarget extends TargetCardInHand {
 
-    public RevealTwoCardsSharedColorFromHandCost() {
-        super(new TargetTwoCardsWithTheSameColorInHand());
+    private static final FilterCard filter = new FilterCard("two cards from your hand that share a color");
+
+    static {
+        filter.add(Predicates.not(ColorlessPredicate.instance));
     }
 
-    public RevealTwoCardsSharedColorFromHandCost(RevealTwoCardsSharedColorFromHandCost cost) {
-        super(cost);
+    public IlluminatedFolioTarget() {
+        super(2, 2, filter);
     }
 
-    @Override
-    public RevealTwoCardsSharedColorFromHandCost copy() {
-        return new RevealTwoCardsSharedColorFromHandCost(this);
-    }
-
-}
-
-class TargetTwoCardsWithTheSameColorInHand extends TargetCardInHand {
-
-    public TargetTwoCardsWithTheSameColorInHand() {
-        super(2, 2, new FilterCard("two cards from your hand that share a color"));
-    }
-
-    public TargetTwoCardsWithTheSameColorInHand(final TargetTwoCardsWithTheSameColorInHand target) {
+    private IlluminatedFolioTarget(final IlluminatedFolioTarget target) {
         super(target);
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> newPossibleTargets = new HashSet<>();
-        Set<UUID> possibleTargets = new HashSet<>();
-        Player player = game.getPlayer(sourceControllerId);
-        for (Card card : player.getHand().getCards(filter, game)) {
-            possibleTargets.add(card.getId());
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, game);
+        if (this.getTargets().size() == 1) {
+            Card card = game.getCard(this.getTargets().get(0));
+            possibleTargets.removeIf(
+                    uuid -> game
+                            .getCard(uuid)
+                            .getColor(game)
+                            .shares(card.getColor(game))
+            );
+            return possibleTargets;
         }
-
-        Cards cardsToCheck = new CardsImpl();
-        cardsToCheck.addAll(possibleTargets);
-        if (targets.size() == 1) {
-            // first target is already choosen, now only targets with the shared color are selectable
-            for (Map.Entry<UUID, Integer> entry : targets.entrySet()) {
-                Card chosenCard = cardsToCheck.get(entry.getKey(), game);
-                if (chosenCard != null) {
-                    for (UUID cardToCheck : cardsToCheck) {
-                        if (!cardToCheck.equals(chosenCard.getId()) && chosenCard.getColor(game).equals(game.getCard(cardToCheck).getColor(game))) {
-                            newPossibleTargets.add(cardToCheck);
-                        }
-                    }
-                }
+        if (possibleTargets.size() < 2) {
+            possibleTargets.clear();
+            return possibleTargets;
+        }
+        Set<Card> allTargets = possibleTargets
+                .stream()
+                .map(game::getCard)
+                .collect(Collectors.toSet());
+        possibleTargets.clear();
+        for (ObjectColor color : ObjectColor.getAllColors()) {
+            Set<Card> inColor = allTargets
+                    .stream()
+                    .filter(card -> card.getColor(game).shares(color))
+                    .collect(Collectors.toSet());
+            if (inColor.size() > 1) {
+                inColor.stream().map(MageItem::getId).forEach(possibleTargets::add);
             }
-        } else {
-            for (UUID cardToCheck : cardsToCheck) {
-                FilterCard colorFilter = new FilterCard();
-                colorFilter.add(new ColorPredicate(game.getCard(cardToCheck).getColor(game)));
-                if (cardsToCheck.count(colorFilter, game) > 1) {
-                    newPossibleTargets.add(cardToCheck);
-                }
-            }
-        }
-        return newPossibleTargets;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        Cards cardsToCheck = new CardsImpl();
-        Player player = game.getPlayer(sourceControllerId);
-        for (Card card : player.getHand().getCards(filter, game)) {
-            cardsToCheck.add(card.getId());
-        }
-        int possibleCards = 0;
-        for (UUID cardToCheck : cardsToCheck) {
-            FilterCard colorFilter = new FilterCard();
-            colorFilter.add(new ColorPredicate(game.getCard(cardToCheck).getColor(game)));
-            if (cardsToCheck.count(colorFilter, game) > 1) {
-                ++possibleCards;
+            if (possibleTargets.size() == allTargets.size()) {
+                break;
             }
         }
-        return possibleCards > 0;
+        return possibleTargets;
     }
 
     @Override
     public boolean canTarget(UUID id, Game game) {
-        if (super.canTarget(id, game)) {
-            Card card = game.getCard(id);
-            if (card != null) {
-                if (targets.size() == 1) {
-                    Card card2 = game.getCard(targets.entrySet().iterator().next().getKey());
-                    if (card2 != null && card2.getColor(game).equals(card.getColor(game))) {
-                        return true;
-                    }
-                } else {
-                    FilterCard colorFilter = new FilterCard();
-                    colorFilter.add(new ColorPredicate(card.getColor(game)));
-                    Player player = game.getPlayer(card.getOwnerId());
-                    if (player.getHand().getCards(colorFilter, game).size() > 1) {
-                        return true;
-                    }
-                }
-            }
+        if (!super.canTarget(id, game)) {
+            return false;
         }
-        return false;
+        Card card = game.getCard(id);
+        return card != null
+                && this
+                .getTargets()
+                .stream()
+                .map(game::getCard)
+                .anyMatch(c -> c.getColor(game).shares(card.getColor(game)));
     }
 
     @Override
-    public TargetTwoCardsWithTheSameColorInHand copy() {
-        return new TargetTwoCardsWithTheSameColorInHand(this);
+    public IlluminatedFolioTarget copy() {
+        return new IlluminatedFolioTarget(this);
     }
 }
