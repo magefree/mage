@@ -1,7 +1,5 @@
 package mage.cards.i;
 
-import mage.MageItem;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
@@ -18,9 +16,8 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInHand;
 
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -66,51 +63,17 @@ class IlluminatedFolioTarget extends TargetCardInHand {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, game);
-        if (this.getTargets().size() == 1) {
-            Card card = game.getCard(this.getTargets().get(0));
-            possibleTargets.removeIf(
-                    uuid -> game
-                            .getCard(uuid)
-                            .getColor(game)
-                            .shares(card.getColor(game))
-            );
-            return possibleTargets;
-        }
-        if (possibleTargets.size() < 2) {
-            possibleTargets.clear();
-            return possibleTargets;
-        }
-        Set<Card> allTargets = possibleTargets
-                .stream()
-                .map(game::getCard)
-                .collect(Collectors.toSet());
-        possibleTargets.clear();
-        for (ObjectColor color : ObjectColor.getAllColors()) {
-            Set<Card> inColor = allTargets
-                    .stream()
-                    .filter(card -> card.getColor(game).shares(color))
-                    .collect(Collectors.toSet());
-            if (inColor.size() > 1) {
-                inColor.stream().map(MageItem::getId).forEach(possibleTargets::add);
-            }
-            if (possibleTargets.size() == allTargets.size()) {
-                break;
-            }
-        }
-        return possibleTargets;
-    }
-
-    @Override
     public boolean canTarget(UUID id, Game game) {
         if (!super.canTarget(id, game)) {
             return false;
         }
+        List<UUID> targetList = this.getTargets();
+        if (targetList.isEmpty()) {
+            return true;
+        }
         Card card = game.getCard(id);
         return card != null
-                && this
-                .getTargets()
+                && targetList
                 .stream()
                 .map(game::getCard)
                 .anyMatch(c -> c.getColor(game).shares(card.getColor(game)));
