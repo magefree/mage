@@ -110,7 +110,6 @@ enum NikoDefiesDestinyValue implements DynamicValue {
         Cards cardsForetoldInExileZones = new CardsImpl();
         FilterCard filter = new FilterCard();
         filter.add(new OwnerIdPredicate(controller.getId()));
-        filter.add(new AbilityPredicate(ForetellAbility.class));
         for (ExileZone exile : exileZones) {
             for (Card card : exile.getCards(filter, game)) {
                 // verify that the card is actually Foretold
