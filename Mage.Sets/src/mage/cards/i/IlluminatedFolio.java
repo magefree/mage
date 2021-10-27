@@ -1,5 +1,7 @@
 package mage.cards.i;
 
+import mage.MageItem;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
@@ -9,6 +11,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -17,7 +20,9 @@ import mage.game.Game;
 import mage.target.common.TargetCardInHand;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -60,6 +65,49 @@ class IlluminatedFolioTarget extends TargetCardInHand {
 
     private IlluminatedFolioTarget(final IlluminatedFolioTarget target) {
         super(target);
+    }
+
+    @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        return super.canChoose(sourceId, sourceControllerId, game)
+                && !possibleTargets(sourceId,sourceControllerId, game).isEmpty();
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceId,sourceControllerId, game);
+        if (this.getTargets().size() == 1) {
+            Card card = game.getCard(this.getTargets().get(0));
+            possibleTargets.removeIf(
+                    uuid -> !game
+                            .getCard(uuid)
+                            .getColor(game)
+                            .shares(card.getColor(game))
+            );
+            return possibleTargets;
+        }
+        if (possibleTargets.size() < 2) {
+            possibleTargets.clear();
+            return possibleTargets;
+        }
+        Set<Card> allTargets = possibleTargets
+                .stream()
+                .map(game::getCard)
+                .collect(Collectors.toSet());
+        possibleTargets.clear();
+        for (ObjectColor color : ObjectColor.getAllColors()) {
+            Set<Card> inColor = allTargets
+                    .stream()
+                    .filter(card -> card.getColor(game).shares(color))
+                    .collect(Collectors.toSet());
+            if (inColor.size() > 1) {
+                inColor.stream().map(MageItem::getId).forEach(possibleTargets::add);
+            }
+            if (possibleTargets.size() == allTargets.size()) {
+                break;
+            }
+        }
+        return possibleTargets;
     }
 
     @Override
