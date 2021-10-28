@@ -113,6 +113,7 @@ Ice Age|IceAge|
 IconicMasters|IconicMasters|
 Ikoria: Lair of Behemoths|IkoriaLairOfBehemoths|
 Innistrad|Innistrad|
+Innistrad: Crimson Vow|InnistradCrimsonVow|
 Innistrad: Midnight Hunt|InnistradMidnightHunt|
 Midnight Hunt Commander|MidnightHuntCommander|
 Invasion|Invasion|

@@ -115,6 +115,7 @@ Iconic Masters|IMA|
 Ikoria: Lair of Behemoths|IKO|
 Invasion|INV|
 Innistrad|ISD|
+Innistrad: Crimson Vow|VOW|
 Innistrad: Midnight Hunt|MID|
 Midnight Hunt Commander|MIC|
 Journey into Nyx|JOU|
