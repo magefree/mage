@@ -16,7 +16,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
 
     private InnistradCrimsonVow() {
         super("Innistrad: Crimson Vow", "VOW", ExpansionSet.buildDate(2021, 11, 19), SetType.EXPANSION);
-        this.blockName = "Innistrad: Crimson Vow";
+        this.blockName = "Innistrad: Midnight Hunt";
         this.hasBoosters = true;
         this.hasBasicLands = true;
         this.numBoosterLands = 1;
