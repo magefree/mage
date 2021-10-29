@@ -104,6 +104,7 @@ Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Totem armor|new|
+Training|new|
 Trample|instance|
 Tribute|number|
 Unblockable|new|
