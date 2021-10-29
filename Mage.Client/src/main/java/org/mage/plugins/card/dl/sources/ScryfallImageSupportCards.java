@@ -1,6 +1,5 @@
 package org.mage.plugins.card.dl.sources;
 
-import com.google.common.collect.ImmutableMap;
 import org.tritonus.share.ArraySet;
 
 import java.util.HashMap;
@@ -500,8 +499,9 @@ public class ScryfallImageSupportCards {
             add("AFR"); // Adventures in the Forgotten Realms
             add("AFC"); // Forgotten Realms Commander
             add("J21"); // Jumpstart: Historic Horizons
-            add("MID"); // Innistrad, Midnight Hunt
+            add("MID"); // Innistrad: Midnight Hunt
             add("MIC"); // Midnight Hunt Commander
+            add("VOW"); // Innistrad: Crimson Vow
         }
     };
 
