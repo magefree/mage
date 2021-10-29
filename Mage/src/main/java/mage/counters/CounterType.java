@@ -91,6 +91,7 @@ public enum CounterType {
     INDESTRUCTIBLE("indestructible"),
     INFECTION("infection"),
     INTERVENTION("intervention"),
+    INVITATION("invitation"),
     ISOLATION("isolation"),
     JAVELIN("javelin"),
     KNOWLEDGE("knowledge"),
