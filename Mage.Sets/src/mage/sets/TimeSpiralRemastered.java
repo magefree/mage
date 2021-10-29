@@ -1,9 +1,6 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
@@ -24,8 +21,6 @@ public class TimeSpiralRemastered extends ExpansionSet {
     public static TimeSpiralRemastered getInstance() {
         return instance;
     }
-
-    private final List<CardInfo> savedSpecialBonus = new ArrayList<>();
 
     private TimeSpiralRemastered() {
         super("Time Spiral Remastered", "TSR", ExpansionSet.buildDate(2021, 3, 19), SetType.SUPPLEMENTAL);
@@ -449,17 +444,6 @@ public class TimeSpiralRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Young Pyromancer", 353, Rarity.SPECIAL, mage.cards.y.YoungPyromancer.class));
         cards.add(new SetCardInfo("Zealous Conscripts", 354, Rarity.SPECIAL, mage.cards.z.ZealousConscripts.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 337, Rarity.SPECIAL, mage.cards.z.ZulaportCutthroat.class));
-    }
-
-    @Override
-    public List<CardInfo> getSpecialBonus() {
-        if (savedSpecialBonus.isEmpty()) {
-            savedSpecialBonus.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes(this.code)));
-            savedSpecialBonus.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() > 410);
-            savedSpecialBonus.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() <= 289);
-        }
-
-        return new ArrayList<>(savedSpecialBonus);
     }
 
     @Override

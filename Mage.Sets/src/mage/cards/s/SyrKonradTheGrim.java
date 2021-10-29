@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -91,6 +92,11 @@ class SyrKonradTheGrimTriggeredAbility extends TriggeredAbilityImpl {
         // Or a creature card leaves your graveyard
         return zEvent.getFromZone() == Zone.GRAVEYARD
                 && zEvent.getPlayerId() == this.getControllerId();
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 
     @Override

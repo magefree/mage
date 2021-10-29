@@ -305,16 +305,4 @@ public abstract class DraftImpl implements Draft {
         started = true;
     }
 
-    @Override
-    public void resetBufferedCards() {
-        Set<ExpansionSet> setsDone = new HashSet<>();
-        for (ExpansionSet set : sets) {
-            if (!setsDone.contains(set)) {
-                set.removeSavedCards();
-                setsDone.add(set);
-            }
-        }
-
-    }
-
 }

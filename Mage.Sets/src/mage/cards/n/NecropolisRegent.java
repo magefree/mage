@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -17,7 +16,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -28,9 +26,8 @@ import mage.target.targetpointer.FixedTarget;
 public final class NecropolisRegent extends CardImpl {
 
     public NecropolisRegent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
         this.subtype.add(SubType.VAMPIRE);
-
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
@@ -79,7 +76,7 @@ class NecropolisRegentTriggeredAbility extends TriggeredAbilityImpl {
             if (creature != null && creature.isControlledBy(controllerId)) {
                 this.getEffects().clear();
                 Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(event.getAmount()));
-                effect.setTargetPointer(new FixedTarget(creature.getId()));
+                effect.setTargetPointer(new FixedTarget(creature.getId(), game));
                 this.addEffect(effect);
                 return true;
             }

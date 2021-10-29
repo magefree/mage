@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -64,7 +63,7 @@ class BesmirchEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         if (game.getPermanent(source.getFirstTarget()) != null) {
-            TargetPointer target = new FixedTarget(source.getFirstTarget());
+            TargetPointer target = new FixedTarget(source.getFirstTarget(), game);
 
             // gain control
             ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfTurn);

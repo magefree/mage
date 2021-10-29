@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -94,8 +93,8 @@ class SokenzanRenegadeEffect extends OneShotEffect {
                 }
             }
             if (newController != null) {
-                ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
-                effect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
+                ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, newController.getId());
+                effect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
                 game.addEffect(effect, source);
                 if (!source.isControlledBy(newController.getId())) {
                     game.informPlayers(newController.getLogName() + " got control of " + sourcePermanent.getLogName());

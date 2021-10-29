@@ -1,8 +1,11 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardInfo;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.List;
 
 public final class EighthEdition extends ExpansionSet {
 
@@ -20,9 +23,6 @@ public final class EighthEdition extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
-
-        // scryfall combines Eighth Edition and Eighth Edition Box sets in one, but xmage must split it
-        // reason: remove box's cards from booster? TODO: implement booster ignore settings for cards instead max card number
 
         cards.add(new SetCardInfo("Abyssal Specter", 117, Rarity.UNCOMMON, mage.cards.a.AbyssalSpecter.class));
         cards.add(new SetCardInfo("Air Elemental", 59, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
@@ -101,6 +101,7 @@ public final class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Drudge Skeletons", 129, Rarity.COMMON, mage.cards.d.DrudgeSkeletons.class));
         cards.add(new SetCardInfo("Dusk Imp", 130, Rarity.COMMON, mage.cards.d.DuskImp.class));
         cards.add(new SetCardInfo("Dwarven Demolition Team", 184, Rarity.UNCOMMON, mage.cards.d.DwarvenDemolitionTeam.class));
+        cards.add(new SetCardInfo("Eager Cadet", "S1", Rarity.COMMON, mage.cards.e.EagerCadet.class));
         cards.add(new SetCardInfo("Eastern Paladin", 131, Rarity.RARE, mage.cards.e.EasternPaladin.class));
         cards.add(new SetCardInfo("Elfhame Palace", 324, Rarity.UNCOMMON, mage.cards.e.ElfhamePalace.class));
         cards.add(new SetCardInfo("Elite Archers", 18, Rarity.RARE, mage.cards.e.EliteArchers.class));
@@ -111,6 +112,7 @@ public final class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Piper", 244, Rarity.RARE, mage.cards.e.ElvishPiper.class));
         cards.add(new SetCardInfo("Elvish Scrapper", 245, Rarity.UNCOMMON, mage.cards.e.ElvishScrapper.class));
         cards.add(new SetCardInfo("Emperor Crocodile", 246, Rarity.RARE, mage.cards.e.EmperorCrocodile.class));
+        cards.add(new SetCardInfo("Enormous Baloth", "S6", Rarity.UNCOMMON, mage.cards.e.EnormousBaloth.class));
         cards.add(new SetCardInfo("Enrage", 185, Rarity.UNCOMMON, mage.cards.e.Enrage.class));
         cards.add(new SetCardInfo("Ensnaring Bridge", 300, Rarity.RARE, mage.cards.e.EnsnaringBridge.class));
         cards.add(new SetCardInfo("Evacuation", 76, Rarity.RARE, mage.cards.e.Evacuation.class));
@@ -139,6 +141,7 @@ public final class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Badger", 253, Rarity.COMMON, mage.cards.g.GiantBadger.class));
         cards.add(new SetCardInfo("Giant Cockroach", 135, Rarity.COMMON, mage.cards.g.GiantCockroach.class));
         cards.add(new SetCardInfo("Giant Growth", 254, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
+        cards.add(new SetCardInfo("Giant Octopus", "S3", Rarity.COMMON, mage.cards.g.GiantOctopus.class));
         cards.add(new SetCardInfo("Giant Spider", 255, Rarity.COMMON, mage.cards.g.GiantSpider.class));
         cards.add(new SetCardInfo("Glorious Anthem", 20, Rarity.RARE, mage.cards.g.GloriousAnthem.class));
         cards.add(new SetCardInfo("Glory Seeker", 21, Rarity.COMMON, mage.cards.g.GlorySeeker.class));
@@ -281,6 +284,7 @@ public final class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Sanctimony", 42, Rarity.UNCOMMON, mage.cards.s.Sanctimony.class));
         cards.add(new SetCardInfo("Savannah Lions", 43, Rarity.RARE, mage.cards.s.SavannahLions.class));
         cards.add(new SetCardInfo("Scathe Zombies", 160, Rarity.COMMON, mage.cards.s.ScatheZombies.class));
+        cards.add(new SetCardInfo("Sea Eagle", "S4", Rarity.COMMON, mage.cards.s.SeaEagle.class));
         cards.add(new SetCardInfo("Sea Monster", 99, Rarity.COMMON, mage.cards.s.SeaMonster.class));
         cards.add(new SetCardInfo("Searing Wind", 218, Rarity.RARE, mage.cards.s.SearingWind.class));
         cards.add(new SetCardInfo("Seasoned Marshal", 44, Rarity.UNCOMMON, mage.cards.s.SeasonedMarshal.class));
@@ -295,6 +299,7 @@ public final class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Shivan Oasis", 326, Rarity.UNCOMMON, mage.cards.s.ShivanOasis.class));
         cards.add(new SetCardInfo("Shock", 222, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Shock Troops", 223, Rarity.COMMON, mage.cards.s.ShockTroops.class));
+        cards.add(new SetCardInfo("Silverback Ape", "S7", Rarity.UNCOMMON, mage.cards.s.SilverbackApe.class));
         cards.add(new SetCardInfo("Sizzle", 224, Rarity.COMMON, mage.cards.s.Sizzle.class));
         cards.add(new SetCardInfo("Skull of Orm", 313, Rarity.RARE, mage.cards.s.SkullOfOrm.class));
         cards.add(new SetCardInfo("Slay", 164, Rarity.UNCOMMON, mage.cards.s.Slay.class));
@@ -350,12 +355,14 @@ public final class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Tower", 330, Rarity.UNCOMMON, mage.cards.u.UrzasTower.class));
         cards.add(new SetCardInfo("Vampiric Spirit", 170, Rarity.RARE, mage.cards.v.VampiricSpirit.class));
         cards.add(new SetCardInfo("Venerable Monk", 55, Rarity.COMMON, mage.cards.v.VenerableMonk.class));
+        cards.add(new SetCardInfo("Vengeance", "S2", Rarity.UNCOMMON, mage.cards.v.Vengeance.class));
         cards.add(new SetCardInfo("Verduran Enchantress", 285, Rarity.RARE, mage.cards.v.VerduranEnchantress.class));
         cards.add(new SetCardInfo("Vernal Bloom", 286, Rarity.RARE, mage.cards.v.VernalBloom.class));
         cards.add(new SetCardInfo("Vexing Arcanix", 319, Rarity.RARE, mage.cards.v.VexingArcanix.class));
         cards.add(new SetCardInfo("Viashino Sandstalker", 230, Rarity.UNCOMMON, mage.cards.v.ViashinoSandstalker.class));
         cards.add(new SetCardInfo("Vicious Hunger", 171, Rarity.COMMON, mage.cards.v.ViciousHunger.class));
         cards.add(new SetCardInfo("Vine Trellis", 287, Rarity.COMMON, mage.cards.v.VineTrellis.class));
+        cards.add(new SetCardInfo("Vizzerdrix", "S5", Rarity.RARE, mage.cards.v.Vizzerdrix.class));
         cards.add(new SetCardInfo("Volcanic Hammer", 231, Rarity.COMMON, mage.cards.v.VolcanicHammer.class));
         cards.add(new SetCardInfo("Wall of Air", 113, Rarity.UNCOMMON, mage.cards.w.WallOfAir.class));
         cards.add(new SetCardInfo("Wall of Spears", 320, Rarity.UNCOMMON, mage.cards.w.WallOfSpears.class));
@@ -373,15 +380,13 @@ public final class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Yavimaya Enchantress", 290, Rarity.UNCOMMON, mage.cards.y.YavimayaEnchantress.class));
         cards.add(new SetCardInfo("Zombify", 174, Rarity.UNCOMMON, mage.cards.z.Zombify.class));
         cards.add(new SetCardInfo("Zur's Weirding", 116, Rarity.RARE, mage.cards.z.ZursWeirding.class));
-        // 8ed Edition Box Set (we need to create own set)
-        // http://www.magiclibrarities.net/540-rarities-eighth-edition-box-set-cards-english-cards-index.html
-        // cards.add(new SetCardInfo("Eager Cadet", 1, Rarity.COMMON, mage.cards.e.EagerCadet.class));
-        // cards.add(new SetCardInfo("Vengeance", 2, Rarity.UNCOMMON, mage.cards.v.Vengeance.class));
-        // cards.add(new SetCardInfo("Sea Eagle", 4, Rarity.COMMON, mage.cards.s.SeaEagle.class));
-        // cards.add(new SetCardInfo("Vizzerdrix", 5, Rarity.RARE, mage.cards.v.Vizzerdrix.class));
-        // cards.add(new SetCardInfo("Enormous Baloth", 6, Rarity.UNCOMMON, mage.cards.e.EnormousBaloth.class));
-        // cards.add(new SetCardInfo("Silverback Ape", 7, Rarity.UNCOMMON, mage.cards.s.SilverbackApe.class));
-
     }
 
+    @Override
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
+        // card numbers containing S are Starter Set cards not found in boosters
+        cardInfos.removeIf(cardInfo -> cardInfo.getCardNumber().contains("S"));
+        return cardInfos;
+    }
 }

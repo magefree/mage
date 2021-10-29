@@ -388,6 +388,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 game.getState().addAbility(copyAbility, sourceId, this);
             }
             abilities.add(copyAbility);
+            abilities.addAll(ability.getSubAbilities());
         }
     }
 

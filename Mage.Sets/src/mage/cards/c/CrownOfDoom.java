@@ -115,7 +115,7 @@ class CrownOfDoomEffect extends OneShotEffect {
                 && newController != null
                 && !Objects.equals(controller.getId(), newController.getId())) {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
-            effect.setTargetPointer(new FixedTarget(source.getSourceId()));
+            effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
             game.addEffect(effect, source);
             return true;
         }

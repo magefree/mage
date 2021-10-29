@@ -114,6 +114,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Glacial Crevasses", 127, Rarity.RARE, mage.cards.g.GlacialCrevasses.class));
         cards.add(new SetCardInfo("Gorilla Shaman", 129, Rarity.UNCOMMON, mage.cards.g.GorillaShaman.class));
         cards.add(new SetCardInfo("Grandmother Sengir", 93, Rarity.RARE, mage.cards.g.GrandmotherSengir.class));
+        cards.add(new SetCardInfo("Gustha's Scepter", 209, Rarity.RARE, mage.cards.g.GusthasScepter.class));
         cards.add(new SetCardInfo("Havenwood Battleground", 230, Rarity.UNCOMMON, mage.cards.h.HavenwoodBattleground.class));
         cards.add(new SetCardInfo("Heart of Yavimaya", 231, Rarity.RARE, mage.cards.h.HeartOfYavimaya.class));
         cards.add(new SetCardInfo("Helm of Obedience", 210, Rarity.RARE, mage.cards.h.HelmOfObedience.class));
@@ -226,6 +227,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Stampede", 178, Rarity.UNCOMMON, mage.cards.s.Stampede.class));
         cards.add(new SetCardInfo("Stone Spirit", 150, Rarity.UNCOMMON, mage.cards.s.StoneSpirit.class));
         cards.add(new SetCardInfo("Stonehands", 151, Rarity.COMMON, mage.cards.s.Stonehands.class));
+        cards.add(new SetCardInfo("Storm Elemental", 68, Rarity.UNCOMMON, mage.cards.s.StormElemental.class));
         cards.add(new SetCardInfo("Storm Spirit", 198, Rarity.RARE, mage.cards.s.StormSpirit.class));
         cards.add(new SetCardInfo("Stromgald Cabal", 113, Rarity.RARE, mage.cards.s.StromgaldCabal.class));
         cards.add(new SetCardInfo("Stunted Growth", 179, Rarity.RARE, mage.cards.s.StuntedGrowth.class));

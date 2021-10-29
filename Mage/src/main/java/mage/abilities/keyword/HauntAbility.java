@@ -201,7 +201,7 @@ class HauntEffect extends OneShotEffect {
                 .append(source.getSourceId().toString())
                 .append(card.getZoneChangeCounter(game)
                         + hauntedCreature.getZoneChangeCounter(game)).toString();  // in case it is blinked
-        game.getState().setValue(key, new FixedTarget(targetPointer.getFirst(game, source)));
+        game.getState().setValue(key, new FixedTarget(targetPointer.getFirst(game, source), game));
         card.addInfo("hauntinfo", new StringBuilder("Haunting ").append(hauntedCreature.getLogName()).toString(), game);
         hauntedCreature.addInfo("hauntinfo", new StringBuilder("Haunted by ").append(card.getLogName()).toString(), game);
         game.informPlayers(new StringBuilder(card.getName()).append(" haunting ").append(hauntedCreature.getLogName()).toString());

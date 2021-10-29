@@ -108,14 +108,11 @@ class FractalHarnessDoubleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) getValue("attachedPermanent");
+        Permanent permanent = game.getPermanent((UUID) getValue("sourceId"));
         if (permanent == null) {
             return false;
         }
-        // BUG : changed this to a integer due to the trigger firing twice
-        final int addedCounters = permanent.getCounters(game).getCount(CounterType.P1P1);
-        // BUG : this oneShotEffect is being run twice for some reason, so the number of counters is four times as many
-        return permanent.addCounters(CounterType.P1P1.createInstance(addedCounters),
+        return permanent.addCounters(CounterType.P1P1.createInstance(permanent.getCounters(game).getCount(CounterType.P1P1)),
                  source.getControllerId(), source, game);
     }
 }

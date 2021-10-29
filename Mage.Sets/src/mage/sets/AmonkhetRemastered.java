@@ -1,14 +1,9 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,8 +16,6 @@ public class AmonkhetRemastered extends ExpansionSet {
     public static AmonkhetRemastered getInstance() {
         return instance;
     }
-
-    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private AmonkhetRemastered() {
         super("Amonkhet Remastered", "AKR", ExpansionSet.buildDate(2020, 8, 13), SetType.MAGIC_ARENA);
@@ -376,19 +369,4 @@ public class AmonkhetRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Wrath of God", 46, Rarity.RARE, mage.cards.w.WrathOfGod.class));
         cards.add(new SetCardInfo("Zealot of the God-Pharaoh", 181, Rarity.COMMON, mage.cards.z.ZealotOfTheGodPharaoh.class));
     }
-
-    @Override
-    // the common taplands replacing the basic land
-    public List<CardInfo> getSpecialLand() {
-        if (savedSpecialLand.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes(this.code);
-            criteria.rarities(Rarity.COMMON);
-            criteria.types(CardType.LAND);
-            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
-        }
-
-        return new ArrayList<>(savedSpecialLand);
-    }
-
 }

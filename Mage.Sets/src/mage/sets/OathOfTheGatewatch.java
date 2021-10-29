@@ -7,7 +7,6 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,8 +20,6 @@ public final class OathOfTheGatewatch extends ExpansionSet {
         return instance;
     }
 
-    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
-
     private OathOfTheGatewatch() {
         super("Oath of the Gatewatch", "OGW", ExpansionSet.buildDate(2016, 1, 22), SetType.EXPANSION);
         this.blockName = "Battle for Zendikar";
@@ -34,7 +31,7 @@ public final class OathOfTheGatewatch extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.ratioBoosterSpecialLand = 48;
+        this.ratioBoosterSpecialCommon = 144;
 
         cards.add(new SetCardInfo("Abstruse Interference", 40, Rarity.COMMON, mage.cards.a.AbstruseInterference.class));
         cards.add(new SetCardInfo("Affa Protector", 14, Rarity.COMMON, mage.cards.a.AffaProtector.class));
@@ -226,25 +223,15 @@ public final class OathOfTheGatewatch extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        List<CardInfo> cards = super.getCardsByRarity(rarity);
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
         if (rarity == Rarity.COMMON) {
             // only the full-art versions of Wastes are found in boosters
-            cards.removeIf(cardInfo -> cardInfo.getCardNumber().contains("a"));
+            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumber().contains("a"));
+        } else if (rarity == Rarity.SPECIAL) {
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("EXP")));
+            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() < 26);
         }
-        return cards;
-    }
-
-    @Override
-    public List<CardInfo> getSpecialLand() {
-        if (savedSpecialLand.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes("EXP");
-            criteria.minCardNumber(26);
-            criteria.maxCardNumber(45);
-            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
-        }
-
-        return new ArrayList<>(savedSpecialLand);
+        return cardInfos;
     }
 }

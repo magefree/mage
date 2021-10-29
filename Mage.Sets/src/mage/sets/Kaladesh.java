@@ -7,7 +7,6 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,8 +20,6 @@ public final class Kaladesh extends ExpansionSet {
         return instance;
     }
 
-    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
-
     private Kaladesh() {
         super("Kaladesh", "KLD", ExpansionSet.buildDate(2016, 9, 30), SetType.EXPANSION);
         this.blockName = "Kaladesh";
@@ -33,9 +30,8 @@ public final class Kaladesh extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.numBoosterSpecial = 0;
+        this.ratioBoosterSpecialCommon = 144;
         this.maxCardNumberInBooster = 264;
-        this.ratioBoosterSpecialLand = 144;
 
         cards.add(new SetCardInfo("Accomplished Automaton", 191, Rarity.COMMON, mage.cards.a.AccomplishedAutomaton.class));
         cards.add(new SetCardInfo("Acrobatic Maneuver", 1, Rarity.COMMON, mage.cards.a.AcrobaticManeuver.class));
@@ -318,15 +314,12 @@ public final class Kaladesh extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getSpecialLand() {
-        if (savedSpecialLand.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes("MPS");
-            criteria.minCardNumber(1);
-            criteria.maxCardNumber(30);
-            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
+        if (rarity == Rarity.SPECIAL) {
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("MPS")));
+            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() > 30);
         }
-
-        return new ArrayList<>(savedSpecialLand);
+        return cardInfos;
     }
 }

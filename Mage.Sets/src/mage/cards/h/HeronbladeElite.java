@@ -18,6 +18,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 
 import java.util.UUID;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 
 /**
  * @author TheElk801
@@ -25,6 +26,11 @@ import java.util.UUID;
 public final class HeronbladeElite extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.HUMAN, "another Human");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
     private static final DynamicValue xValue = new SourcePermanentPowerCount();
 
     public HeronbladeElite(UUID ownerId, CardSetInfo setInfo) {
@@ -45,8 +51,8 @@ public final class HeronbladeElite extends CardImpl {
 
         // {T}: Add X mana of any one color, where X is Heronblade Elite's power.
         this.addAbility(new DynamicManaAbility(
-                Mana.AnyMana(1), xValue, new TapSourceCost(), "Add X mana " +
-                "of any one color, where X is {this}'s power", true
+                new Mana(0, 0, 0, 0, 0, 0, 1, 0), xValue, new TapSourceCost(), "Add X mana "
+                + "of any one color, where X is {this}'s power", true
         ));
     }
 

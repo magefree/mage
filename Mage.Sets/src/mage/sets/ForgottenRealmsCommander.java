@@ -79,6 +79,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dark-Dweller Oracle", 119, Rarity.RARE, mage.cards.d.DarkDwellerOracle.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 232, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Dead Man's Chest", 97, Rarity.RARE, mage.cards.d.DeadMansChest.class));
+        cards.add(new SetCardInfo("Death Tyrant", 23, Rarity.RARE, mage.cards.d.DeathTyrant.class));
         cards.add(new SetCardInfo("Decree of Savagery", 156, Rarity.RARE, mage.cards.d.DecreeOfSavagery.class));
         cards.add(new SetCardInfo("Demanding Dragon", 120, Rarity.RARE, mage.cards.d.DemandingDragon.class));
         cards.add(new SetCardInfo("Desert", 233, Rarity.UNCOMMON, mage.cards.d.Desert.class));

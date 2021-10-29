@@ -58,7 +58,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "ZNR"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "SLD"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -201,8 +201,6 @@ public class VerifyCardDataTest {
         // scryfall download sets (missing from scryfall website)
         skipListCreate(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS);
         skipListAddName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, "SWS"); // Star Wars
-        //skipListAddName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, "8EB"); // Eighth Edition Box - inner xmage set, split from 8ED
-        //skipListAddName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, "9EB"); // Ninth Edition Box - inner xmage set, split from 9ED
 
         // sample decks checking - some decks can contains unimplemented cards, so ignore it
         // file name must be related to sample-decks folder
@@ -262,13 +260,13 @@ public class VerifyCardDataTest {
         for (Card card : CardScanner.getAllCards()) {
             cardIndex++;
             if (card instanceof SplitCard) {
-                check(((SplitCard) card).getLeftHalfCard(), cardIndex, true);
-                check(((SplitCard) card).getRightHalfCard(), cardIndex, true);
+                check(((SplitCard) card).getLeftHalfCard(), cardIndex);
+                check(((SplitCard) card).getRightHalfCard(), cardIndex);
             } else if (card instanceof ModalDoubleFacesCard) {
-                check(((ModalDoubleFacesCard) card).getLeftHalfCard(), cardIndex, false);
-                check(((ModalDoubleFacesCard) card).getRightHalfCard(), cardIndex, false);
+                check(((ModalDoubleFacesCard) card).getLeftHalfCard(), cardIndex);
+                check(((ModalDoubleFacesCard) card).getRightHalfCard(), cardIndex);
             } else {
-                check(card, cardIndex, false);
+                check(card, cardIndex);
             }
         }
 
@@ -481,7 +479,6 @@ public class VerifyCardDataTest {
                 continue;
             }
 
-            // TODO: 8EB and 9EB uses workaround to split from main set, so it will be in unofficial list until booster cards improve
             xmageUnofficialSets++;
             xmageUnofficialCards += set.getSetCardInfo().size();
             info.add("Unofficial set: " + set.getCode() + " - " + set.getName() + ", cards: " + set.getSetCardInfo().size() + ", year: " + set.getReleaseYear());
@@ -1231,11 +1228,11 @@ public class VerifyCardDataTest {
         }
     }
 
-    private void check(Card card, int cardIndex, boolean skipWarning) {
+    private void check(Card card, int cardIndex) {
         MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
         if (ref != null) {
             checkAll(card, ref, cardIndex);
-        } else if (!skipWarning && !ONLY_TEXT) {
+        } else {
             warn(card, "Missing card reference");
         }
     }

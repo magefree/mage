@@ -74,7 +74,8 @@ class LuminousBroodmothTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getTarget() == null || zEvent.getTarget().getId().equals(this.getSourceId())) {
+        if (zEvent.getTarget() == null
+                || zEvent.getTarget().getId().equals(this.getSourceId())) {
             return false;
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTarget().getId());
@@ -92,8 +93,8 @@ class LuminousBroodmothTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature you control without flying dies, " +
-                "return it to the battlefield under its owner's control with a flying counter on it.";
+        return "Whenever a creature you control without flying dies, "
+                + "return it to the battlefield under its owner's control with a flying counter on it.";
     }
 }
 

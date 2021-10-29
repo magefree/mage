@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import mage.MageInt;
@@ -89,7 +88,7 @@ class DecimatorBeetleEffect extends OneShotEffect {
         targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (targetCreature != null) {
             Effect effect = new AddCountersTargetEffect(CounterType.M1M1.createInstance(1));
-            effect.setTargetPointer(new FixedTarget(source.getTargets().get(1).getFirstTarget()));
+            effect.setTargetPointer(new FixedTarget(source.getTargets().get(1).getFirstTarget(), game));
             effect.apply(game, source);
         }
 

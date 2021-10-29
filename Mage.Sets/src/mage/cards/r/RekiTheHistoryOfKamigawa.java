@@ -18,7 +18,7 @@ import mage.filter.FilterSpell;
  */
 public final class RekiTheHistoryOfKamigawa extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("legendary spell");
+    private static final FilterSpell filter = new FilterSpell("a legendary spell");
 
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());

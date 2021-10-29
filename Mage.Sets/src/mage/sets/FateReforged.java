@@ -1,9 +1,6 @@
-
 package mage.sets;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -11,6 +8,9 @@ import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
+
+import java.util.List;
 
 /**
  * @author fireshoes
@@ -18,9 +18,6 @@ import mage.constants.SetType;
 public final class FateReforged extends ExpansionSet {
 
     private static final FateReforged instance = new FateReforged();
-
-    private List<CardInfo> savedSpecialRares = new ArrayList<>();
-    private List<CardInfo> savedSpecialCommon = new ArrayList<>();
 
     public static FateReforged getInstance() {
         return instance;
@@ -37,7 +34,6 @@ public final class FateReforged extends ExpansionSet {
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
-        this.numBoosterDoubleFaced = -1;
         this.ratioBoosterMythic = 8;
 
         cards.add(new SetCardInfo("Abzan Advantage", 2, Rarity.COMMON, mage.cards.a.AbzanAdvantage.class));
@@ -228,60 +224,28 @@ public final class FateReforged extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        // Common cards retrievement of Fate Reforged boosters - prevent the retrievement of the common lands (e.g. Blossoming Sands)
-        if (rarity == Rarity.COMMON) {
-            List<CardInfo> savedCardsInfos = savedCards.get(rarity);
-            if (savedCardsInfos == null) {
-                CardCriteria criteria = new CardCriteria();
-                criteria.rarities(Rarity.COMMON);
-                criteria.setCodes(this.code).notTypes(CardType.LAND);
-                savedCardsInfos = CardRepository.instance.findCards(criteria);
-                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
-                }
-                savedCards.put(rarity, savedCardsInfos);
-            }
-            // Return a copy of the saved cards information, as not to let modify the original.
-            return new ArrayList<>(savedCardsInfos);
+    protected void addSpecialCards(List<Card> booster, int number) {
+        // number is here always 1
+        Rarity rarity;
+        if (RandomUtil.nextInt(24) < 23) {
+            rarity = Rarity.COMMON;
         } else {
-            return super.getCardsByRarity(rarity);
+            rarity = Rarity.RARE;
         }
+        addToBooster(booster, getSpecialCardsByRarity(rarity));
     }
 
     @Override
-    public List<CardInfo> getSpecialCommon() {
-        if (savedSpecialCommon.isEmpty()) {
-            // the 10 common lands from Fate Reforged can show up in the basic lands slot
-            // http://magic.wizards.com/en/articles/archive/feature/fetching-look-fate-reforged-2014-12-24
-            CardCriteria criteria = new CardCriteria();
-            criteria.rarities(Rarity.COMMON).setCodes(this.code).types(CardType.LAND);
-            savedSpecialCommon = CardRepository.instance.findCards(criteria);
-            criteria.rarities(Rarity.LAND).setCodes(this.code);
-            savedSpecialCommon.addAll(CardRepository.instance.findCards(criteria));
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        CardCriteria criteria = new CardCriteria();
+        criteria.rarities(rarity).types(CardType.LAND);
+        if (rarity == Rarity.RARE) {
+            // fetchlands
+            criteria.setCodes("KTK");
+        } else {
+            // gainlands
+            criteria.setCodes(this.code);
         }
-        return new ArrayList<>(savedSpecialCommon);
-    }
-
-    @Override
-    public List<CardInfo> getSpecialRare() {
-        if (savedSpecialRares.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes("KTK").name("Bloodstained Mire");
-            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
-            criteria = new CardCriteria();
-            criteria.setCodes("KTK").name("Flooded Strand");
-            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
-            criteria = new CardCriteria();
-            criteria.setCodes("KTK").name("Polluted Delta");
-            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
-            criteria = new CardCriteria();
-            criteria.setCodes("KTK").name("Windswept Heath");
-            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
-            criteria = new CardCriteria();
-            criteria.setCodes("KTK").name("Wooded Foothills");
-            savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
-        }
-        return new ArrayList<>(savedSpecialRares);
+        return CardRepository.instance.findCards(criteria);
     }
 }

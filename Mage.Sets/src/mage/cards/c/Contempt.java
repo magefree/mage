@@ -78,7 +78,7 @@ class ContemptEffect extends OneShotEffect {
             if (attachedToPermanent != null) {
                 Effect effect = new ReturnToHandTargetEffect();
                 effect.setTargetPointer(new FixedTarget(
-                        attachedToPermanent.getId())).setText("return "
+                        attachedToPermanent.getId(), game)).setText("return "
                         + attachedToPermanent.getName() + " to owner's hand.");
                 AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(effect);
                 game.addDelayedTriggeredAbility(ability, source);

@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -64,7 +63,7 @@ class HammerHelperEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (controller != null && targetCreature != null) {
-            source.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId()));
+            source.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId(), game));
             game.addEffect(new GainControlTargetEffect(Duration.EndOfTurn), source);
             targetCreature.untap(game);
             int amount = controller.rollDice(outcome, source, game, 6);

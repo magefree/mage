@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -103,7 +102,7 @@ class TaigamSidisisHandEffect extends OneShotEffect {
                     if (cost instanceof ExileFromGraveCost) {
                         amount = ((ExileFromGraveCost) cost).getExiledCards().size();
                         ContinuousEffect effect = new BoostTargetEffect(-amount, -amount, Duration.EndOfTurn);
-                        effect.setTargetPointer(new FixedTarget(source.getTargets().getFirstTarget()));
+                        effect.setTargetPointer(new FixedTarget(source.getTargets().getFirstTarget(), game));
                         game.addEffect(effect, source);
                     }
                 }

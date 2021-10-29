@@ -2,15 +2,10 @@ package mage.sets;
 
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
 
 /**
@@ -24,8 +19,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         return instance;
     }
 
-    private final EnumMap<Rarity, List<CardInfo>> savedDoubleFacedCards;
-
     private ShadowsOverInnistrad() {
         super("Shadows over Innistrad", "SOI", ExpansionSet.buildDate(2016, 4, 8), SetType.EXPANSION);
         this.blockName = "Shadows over Innistrad";
@@ -36,9 +29,8 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.ratioBoosterSpecialCommon = 8;
         this.numBoosterDoubleFaced = 1;
-
-        savedDoubleFacedCards = new EnumMap<>(Rarity.class);
 
         cards.add(new SetCardInfo("Aberrant Researcher", 49, Rarity.UNCOMMON, mage.cards.a.AberrantResearcher.class));
         cards.add(new SetCardInfo("Accursed Witch", 97, Rarity.UNCOMMON, mage.cards.a.AccursedWitch.class));
@@ -377,53 +369,32 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Woodland Stream", 282, Rarity.UNCOMMON, mage.cards.w.WoodlandStream.class));
     }
 
-    /* add double faced card for SOI booster
-     * add only common or uncommon
-       80/120 packs contain one of 20 uncommon DFCs and 40/120 packs contain one of 4 common DFCs
-     */
+    // add common or uncommon double faced card to booster
+    // 40/120 packs contain one of 4 common DFCs and 80/120 packs contain one of 20 uncommon DFCs
     @Override
-    public void addDoubleFace(List<Card> booster) {
+    protected void addDoubleFace(List<Card> booster) {
+        Rarity rarity;
         for (int i = 0; i < numBoosterDoubleFaced; i++) {
-            List<CardInfo> doubleFacedCards;
-            if (RandomUtil.nextInt(15) < 10) {
-                doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.UNCOMMON);
+            if (RandomUtil.nextInt(120) < 40) {
+                rarity = Rarity.COMMON;
             } else {
-                doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.COMMON);
+                rarity = Rarity.UNCOMMON;
             }
-            addToBooster(booster, doubleFacedCards);
+            addToBooster(booster, getSpecialCardsByRarity(rarity));
         }
     }
 
-    private List<CardInfo> getDoubleFacedCardsByRarity(Rarity rarity) {
-        List<CardInfo> savedCardsInfos = savedDoubleFacedCards.get(rarity);
-        if (savedCardsInfos == null) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes(getCode());
-            criteria.rarities(rarity);
-            criteria.doubleFaced(true);
-            savedCardsInfos = CardRepository.instance.findCards(criteria);
-            savedDoubleFacedCards.put(rarity, savedCardsInfos);
-        }
-        // Return a copy of the saved cards information, as not to let modify the original.
-        return new ArrayList<>(savedCardsInfos);
-    }
-
+    // Then about an eighth of the packs will have a second double-faced card, which will be a rare or mythic rare
+    // 12/15 of such packs contain one of 6 rare DFCs and 3/15 packs contain one of 3 mythic DFCs
     @Override
-    public int getNumberOfSpecialCommons() {
-        // Then about an eighth of the packs will have a second double-faced card, which will be a rare or mythic rare.
-        return RandomUtil.nextInt(8) == 0 ? 1 : 0;
-    }
-
-    @Override
-    public void addSpecialCommon(List<Card> booster, int number) {
+    protected void addSpecialCards(List<Card> booster, int number) {
         // number is here always 1
-        List<CardInfo> doubleFacedCards;
-        if (RandomUtil.nextInt(8) > 0) {
-            doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.RARE);
+        Rarity rarity;
+        if (RandomUtil.nextInt(15) < 12) {
+            rarity = Rarity.RARE;
         } else {
-            doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.MYTHIC);
+            rarity = Rarity.MYTHIC;
         }
-        addToBooster(booster, doubleFacedCards);
+        addToBooster(booster, getSpecialCardsByRarity(rarity));
     }
-
 }

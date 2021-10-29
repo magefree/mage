@@ -114,7 +114,7 @@ class AkromaVisionOfIxidorEffect extends OneShotEffect {
                     .sum();
             if (count > 0) {
                 ContinuousEffect effect = new BoostTargetEffect(count, count, Duration.EndOfTurn);
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
                 game.addEffect(effect, source);
             }
         }

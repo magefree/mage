@@ -137,7 +137,7 @@ class UginTheIneffableEffect extends OneShotEffect {
 
             // look at face-down card in exile
             UginTheIneffableLookAtFaceDownEffect lookAtEffect = new UginTheIneffableLookAtFaceDownEffect();
-            lookAtEffect.setTargetPointer(new FixedTarget(card.getId()));
+            lookAtEffect.setTargetPointer(new FixedTarget(card.getId(), game));
             game.addEffect(lookAtEffect, source);
 
             tokenObjs.add(new MageObjectReference(addedTokenId, game));

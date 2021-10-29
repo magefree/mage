@@ -2,7 +2,9 @@ package mage.sets;
 
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
@@ -34,6 +36,7 @@ public final class ModernHorizons2 extends ExpansionSet {
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
+        this.numBoosterSpecial = 1;
         this.ratioBoosterMythic = 7;
         this.maxCardNumberInBooster = 303;
 
@@ -532,32 +535,30 @@ public final class ModernHorizons2 extends ExpansionSet {
     }
 
     @Override
-    public List<Card> tryBooster() {
-        List<Card> booster = super.tryBooster();
-        addReprints(booster);
-        return booster;
-    }
-
-    private void addReprints(List<Card> booster) {
-        final Rarity rarity;
-        int i = RandomUtil.nextInt(120);
-        if (i < 4) {
+    protected void addSpecialCards(List<Card> booster, int number) {
+        // number is here always 1
+        Rarity rarity;
+        int rarityKey = RandomUtil.nextInt(120);
+        if (rarityKey < 4) {
             rarity = Rarity.MYTHIC;
-        } else if (i < 40) {
+        } else if (rarityKey < 40) {
             rarity = Rarity.RARE;
         } else {
             rarity = Rarity.UNCOMMON;
         }
-        List<CardInfo> cards = super.getCardsByRarity(rarity);
-        cards.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() < 262);
-        addToBooster(booster, cards);
+        List<CardInfo> reprintCards = getSpecialCardsByRarity(rarity);
+        addToBooster(booster, reprintCards);
     }
 
     @Override
-    public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        List<CardInfo> cards = super.getCardsByRarity(rarity);
-        cards.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() >= 262);
-        return cards;
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = CardRepository
+                .instance
+                .findCards(new CardCriteria().setCodes(this.code).rarities(rarity));
+        cardInfos.removeIf(cardInfo -> (
+                cardInfo.getCardNumberAsInt() < 262
+                || cardInfo.getCardNumberAsInt() > maxCardNumberInBooster));
+        return cardInfos;
     }
 
     @Override

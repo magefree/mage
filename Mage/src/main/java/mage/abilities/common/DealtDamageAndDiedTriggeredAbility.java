@@ -67,7 +67,7 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
                 if (damageDealt) {
                     if (this.setTargetPointer == SetTargetPointer.PERMANENT) {
                         for (Effect effect : getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                            effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                         }
                     }
                     return true;

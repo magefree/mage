@@ -7,7 +7,6 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,8 +20,6 @@ public final class AetherRevolt extends ExpansionSet {
         return instance;
     }
 
-    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
-
     private AetherRevolt() {
         super("Aether Revolt", "AER", ExpansionSet.buildDate(2017, 1, 20), SetType.EXPANSION);
         this.blockName = "Kaladesh";
@@ -34,8 +31,8 @@ public final class AetherRevolt extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.ratioBoosterSpecialCommon = 144;
         this.maxCardNumberInBooster = 184;
-        this.ratioBoosterSpecialLand = 144;
 
         cards.add(new SetCardInfo("Aegis Automaton", 141, Rarity.COMMON, mage.cards.a.AegisAutomaton.class));
         cards.add(new SetCardInfo("Aerial Modification", 1, Rarity.UNCOMMON, mage.cards.a.AerialModification.class));
@@ -237,15 +234,12 @@ public final class AetherRevolt extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getSpecialLand() {
-        if (savedSpecialLand.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes("MPS");
-            criteria.minCardNumber(31);
-            criteria.maxCardNumber(54);
-            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
+        if (rarity == Rarity.SPECIAL) {
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("MPS")));
+            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() < 31);
         }
-
-        return new ArrayList<>(savedSpecialLand);
+        return cardInfos;
     }
 }

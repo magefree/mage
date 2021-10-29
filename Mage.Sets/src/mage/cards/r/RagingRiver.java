@@ -144,7 +144,7 @@ class RagingRiverEffect extends OneShotEffect {
                                 }
                             }
                             RestrictionEffect effect = new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfCombat);
-                            effect.setTargetPointer(new FixedTarget(attacker.getId()));
+                            effect.setTargetPointer(new FixedTarget(attacker.getId(), game));
                             game.addEffect(effect, source);
                         }
                     }

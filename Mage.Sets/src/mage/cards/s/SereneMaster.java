@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class SereneMaster extends CardImpl {
 
     public SereneMaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
 
@@ -83,10 +82,10 @@ class SereneMasterEffect extends OneShotEffect {
                         int newSourcePower = attackingCreature.getPower().getValue();
                         int newAttackerPower = sourceCreature.getPower().getValue();
                         ContinuousEffect effect = new SetPowerToughnessTargetEffect(newSourcePower, sourceCreature.getToughness().getValue(), Duration.EndOfCombat);
-                        effect.setTargetPointer(new FixedTarget(source.getSourceId()));
+                        effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
                         game.addEffect(effect, source);
                         effect = new SetPowerToughnessTargetEffect(newAttackerPower, attackingCreature.getToughness().getValue(), Duration.EndOfCombat);
-                        effect.setTargetPointer(new FixedTarget(attackingCreature.getId()));
+                        effect.setTargetPointer(new FixedTarget(attackingCreature.getId(), game));
                         game.addEffect(effect, source);
                         return true;
                     }

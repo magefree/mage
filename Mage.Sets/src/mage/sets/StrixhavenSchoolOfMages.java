@@ -36,6 +36,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         this.numBoosterCommon = 9;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
+        this.numBoosterSpecial = 2;
         this.ratioBoosterMythic = 7.4;
         this.maxCardNumberInBooster = 275;
 
@@ -424,50 +425,43 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
     }
 
     @Override
-    public List<Card> tryBooster() {
-        List<Card> booster = super.tryBooster();
-        addArchive(booster);
-        addLesson(booster);
-        return booster;
-    }
-
-    private void addArchive(List<Card> booster) {
+    protected void addSpecialCards(List<Card> booster, int number) {
+        // number is here always 2
         // Boosters have one card from STA, odds are 2/3 for uncommon, 4/15 for rare, 1/15 for mythic
-        final Rarity rarity;
-        int i = RandomUtil.nextInt(15);
-        if (i == 14) {
+        Rarity rarity;
+        int rarityKey = RandomUtil.nextInt(15);
+        if (rarityKey == 14) {
             rarity = Rarity.MYTHIC;
-        } else if (i >= 10) {
+        } else if (rarityKey >= 10) {
             rarity = Rarity.RARE;
         } else {
             rarity = Rarity.UNCOMMON;
         }
         addToBooster(booster, StrixhavenMysticalArchive.getInstance().getCardsByRarity(rarity));
-    }
 
-    private void addLesson(List<Card> booster) {
         // Boosters have one Lesson card
-        final Rarity rarity;
-        int i = RandomUtil.nextInt(148);
-        if (i == 0) {
+        rarityKey = RandomUtil.nextInt(148);
+        if (rarityKey == 0) {
             rarity = Rarity.MYTHIC;
-        } else if (i < 11) {
+        } else if (rarityKey < 11) {
             rarity = Rarity.RARE;
         } else {
             rarity = Rarity.COMMON;
         }
-        List<CardInfo> cards = super.getCardsByRarity(rarity);
-        cards.removeIf(cardInfo -> !cardInfo.getCard().hasSubtype(SubType.LESSON, null));
-        addToBooster(booster, cards);
+        addToBooster(booster, getSpecialCardsByRarity(rarity));
     }
 
     @Override
-    public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        List<CardInfo> cards = super.getCardsByRarity(rarity);
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findSpecialCardsByRarity(rarity);
         if (rarity != Rarity.UNCOMMON) {
-            cards.removeIf(cardInfo -> cardInfo.getCard().hasSubtype(SubType.LESSON, null));
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
+                    .setCodes(this.code)
+                    .rarities(rarity)
+                    .subtypes("Lesson")));
+            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() > maxCardNumberInBooster);
         }
-        return cards;
+        return cardInfos;
     }
 
     @Override

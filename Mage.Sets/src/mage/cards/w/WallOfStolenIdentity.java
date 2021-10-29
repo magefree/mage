@@ -122,9 +122,9 @@ class WallOfStolenIdentityCopyEffect extends OneShotEffect {
         ContinuousEffect effect2 = new GainAbilityTargetEffect(ability, Duration.Custom);
         ConditionalContinuousEffect conditionalEffect = new ConditionalContinuousEffect(
                 effect2, new WallOfStolenIdentityCondition(
-                source,
-                source.getControllerId(),
-                sourcePermanent.getZoneChangeCounter(game)), "");
+                        source,
+                        source.getControllerId(),
+                        sourcePermanent.getZoneChangeCounter(game)), "");
         conditionalEffect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
         game.addEffect(conditionalEffect, source);
         return true;

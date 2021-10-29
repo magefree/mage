@@ -66,7 +66,7 @@ class CommuneWithLavaEffect extends OneShotEffect {
 
             for (Card card : cards) {
                 ContinuousEffect effect = new CommuneWithLavaMayPlayEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId()));
+                effect.setTargetPointer(new FixedTarget(card.getId(), game));
                 game.addEffect(effect, source);
             }
 

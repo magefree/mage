@@ -119,6 +119,7 @@ public abstract class Designation implements MageObject {
     public void addAbility(Ability ability) {
         ability.setSourceId(id);
         abilites.add(ability);
+        abilites.addAll(ability.getSubAbilities());
     }
 
     @Override

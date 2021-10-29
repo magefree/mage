@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import mage.MageObjectReference;
@@ -131,7 +130,7 @@ class BerserkDestroyEffect extends OneShotEffect {
         if (controller != null) {
             //create delayed triggered ability
             Effect effect = new BerserkDelayedDestroyEffect();
-            effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
+            effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source), game));
             AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;

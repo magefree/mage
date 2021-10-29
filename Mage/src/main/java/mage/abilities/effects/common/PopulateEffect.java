@@ -78,7 +78,7 @@ public class PopulateEffect extends OneShotEffect {
         Effect effect = new CreateTokenCopyTargetEffect(
                 null, null, false, 1, tappedAndAttacking, tappedAndAttacking
         );
-        effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
+        effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
         return effect.apply(game, source);
     }
 

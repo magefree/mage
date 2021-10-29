@@ -102,7 +102,7 @@ class SkyfireKirinEffect extends OneShotEffect {
         }
         if (targetCreature != null) {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfTurn);
-            effect.setTargetPointer(new FixedTarget(targetCreature.getId()));
+            effect.setTargetPointer(new FixedTarget(targetCreature.getId(), game));
             game.addEffect(effect, source);
             return true;
         }
