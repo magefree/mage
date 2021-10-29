@@ -116,6 +116,7 @@ Innistrad|Innistrad|
 Innistrad: Midnight Hunt|InnistradMidnightHunt|
 Midnight Hunt Commander|MidnightHuntCommander|
 Innistrad: Crimson Vow|InnistradCrimsonVow|
+Crimson Vow Commander|CrimsonVowCommander|
 Invasion|Invasion|
 Ixalan|Ixalan|
 Journey into Nyx|JourneyIntoNyx|

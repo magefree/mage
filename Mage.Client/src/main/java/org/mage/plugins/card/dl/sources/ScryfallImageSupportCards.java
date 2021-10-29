@@ -502,6 +502,7 @@ public class ScryfallImageSupportCards {
             add("MID"); // Innistrad: Midnight Hunt
             add("MIC"); // Midnight Hunt Commander
             add("VOW"); // Innistrad: Crimson Vow
+            add("VOC"); // Crimson Vow Commander
         }
     };
 
