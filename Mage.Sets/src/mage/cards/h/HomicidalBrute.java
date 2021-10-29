@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -33,7 +34,7 @@ public final class HomicidalBrute extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your end step, if Homicidal Brute didn't attack this turn, tap Homicidal Brute, then transform it.
-        this.addAbility(new HomicidalBruteTriggeredAbility());
+        this.addAbility(new HomicidalBruteTriggeredAbility(), new HomicidalBruteWatcher());
     }
 
     private HomicidalBrute(final HomicidalBrute card) {
@@ -85,5 +86,19 @@ class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
+class HomicidalBruteWatcher extends Watcher {
 
+    public HomicidalBruteWatcher() {
+        super(WatcherScope.CARD);
+    }
 
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (condition) {
+            return;
+        }
+        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(sourceId)) {
+            condition = true;
+        }
+    }
+}
