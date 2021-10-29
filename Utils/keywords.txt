@@ -11,6 +11,7 @@ Bushido|number|
 Buyback|manaString|
 Cascade|new|
 Changeling|new|
+Cleave|card, manaString|
 Convoke|new|
 Crew|number|
 Cumulative upkeep|cost|
