@@ -581,7 +581,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean transform(Ability source, Game game, boolean ignoreDayNight) {
         if (!this.isTransformable()
                 || (!ignoreDayNight && this.checkDayNightBound())
-                || this.getOtherFace().isInstantOrSorcery()
+                || this.getOtherFace().isInstantOrSorcery(game)
                 || (source != null && !source.checkTransformCount(this, game))
                 || this.replaceEvent(EventType.TRANSFORM, game)) {
             return false;
@@ -591,7 +591,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.getPower().modifyBaseValue(orgCard.getPower().getValue());
             this.getToughness().modifyBaseValue(orgCard.getToughness().getValue());
         }
-        game.informPlayers(this.getName() + " transforms into " + this.getOtherFace().getName());
+        game.informPlayers(this.getLogName() + " transforms into " + this.getOtherFace().getLogName()
+                + CardUtil.getSourceLogName(game, source, this.getId()));
         this.setTransformed(!this.transformed);
         this.transformCount++;
         game.applyEffects();

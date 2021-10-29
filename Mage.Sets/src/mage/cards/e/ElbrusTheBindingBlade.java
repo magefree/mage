@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -70,8 +69,6 @@ class ElbrusTheBindingBladeEffect extends OneShotEffect {
             if (attachedTo != null) {
                 attachedTo.removeAttachment(equipment.getId(), source, game);
                 equipment.transform(source, game);
-                game.informPlayers(equipment.getName() + " transforms into " + equipment.getSecondCardFace().getName());
-
             }
         }
         return false;

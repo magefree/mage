@@ -562,6 +562,7 @@ public abstract class GameImpl implements Game {
         if (!state.setDaytime(daytime)) {
             return;
         }
+        // TODO: add day/night sound effect
         informPlayers("It has become " + (daytime ? "day" : "night"));
         fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_DAY_NIGHT, null, null, null));
         for (Permanent permanent : state.getBattlefield().getAllPermanents()) {

@@ -26,10 +26,10 @@ public enum DayNightHint implements Hint {
         sb.append(", active player has cast ");
         sb.append(spellsThisTurn);
         sb.append(" spells this turn. It will ");
-        sb.append((isDay ? spellsThisTurn == 0 : spellsThisTurn >= 2) ? "" : "not ");
-        sb.append("become ");
+        sb.append((isDay ? spellsThisTurn == 0 : spellsThisTurn >= 2) ? "" : "not");
+        sb.append(" become ");
         sb.append(isDay ? "night" : "day");
-        sb.append("next turn.");
+        sb.append(" next turn.");
         return sb.toString();
     }
 
