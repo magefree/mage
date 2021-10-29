@@ -16,7 +16,7 @@ public final class KrakenHexproofToken extends TokenImpl {
         super("Kraken", "8/8 blue Kraken creature token with hexproof");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.KRAKEN);
-        this.color = ObjectColor.BLUE;
+        this.color.setBlue(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
         this.addAbility(HexproofAbility.getInstance());
@@ -29,5 +29,4 @@ public final class KrakenHexproofToken extends TokenImpl {
     public KrakenHexproofToken copy() {
         return new KrakenHexproofToken(this);
     }
-
 }
