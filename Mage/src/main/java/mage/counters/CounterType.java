@@ -34,6 +34,7 @@ public enum CounterType {
     CORPSE("corpse"),
     CORRUPTION("corruption"),
     CREDIT("credit"),
+    CROAK("croak"),
     CRYSTAL("crystal"),
     CUBE("cube"),
     CURRENCY("currency"),
