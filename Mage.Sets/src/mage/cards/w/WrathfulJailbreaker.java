@@ -22,7 +22,6 @@ public final class WrathfulJailbreaker extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.color.setRed(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Wrathful Jailbreaker attacks each combat if able.
