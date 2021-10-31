@@ -53,6 +53,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Grolnok, the Omnivore", 238, Rarity.RARE, mage.cards.g.GrolnokTheOmnivore.class));
         cards.add(new SetCardInfo("Gryff Rider", 15, Rarity.COMMON, mage.cards.g.GryffRider.class));
         cards.add(new SetCardInfo("Halana and Alena, Partners", 239, Rarity.RARE, mage.cards.h.HalanaAndAlenaPartners.class));
+        cards.add(new SetCardInfo("Hallowed Haunting", 17, Rarity.MYTHIC, mage.cards.h.HallowedHaunting.class));
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Massive Might", 208, Rarity.COMMON, mage.cards.m.MassiveMight.class));
         cards.add(new SetCardInfo("Mindleech Ghoul", 122, Rarity.COMMON, mage.cards.m.MindleechGhoul.class));
