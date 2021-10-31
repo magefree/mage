@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class InnistradCrimsonVow extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Dorothea, Vengeful Victim", "Dorothea's Retribution", "Drogskol Infantry", "Drogskol Armaments", "Kindly Ancestor", "Ancestor's Embrace", "Volatile Arsonist", "Dire-Strain Anarchist", "Weary Prisoner", "Wrathful Jailbreaker");
+    private static final List<String> unfinished = Arrays.asList("Brine Comber", "Brinebound Gift", "Dorothea, Vengeful Victim", "Dorothea's Retribution", "Drogskol Infantry", "Drogskol Armaments", "Fearful Villager", "Fearsome Werewolf", "Kindly Ancestor", "Ancestor's Embrace", "Twinblade Geist", "Twinblade Invocation", "Volatile Arsonist", "Dire-Strain Anarchist", "Weary Prisoner", "Wrathful Jailbreaker");
     private static final InnistradCrimsonVow instance = new InnistradCrimsonVow();
 
     public static InnistradCrimsonVow getInstance() {
