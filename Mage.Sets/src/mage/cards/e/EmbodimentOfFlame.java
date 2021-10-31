@@ -83,7 +83,7 @@ class EmbodimentOfFlameTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getSpellOrLKIStack(event.getSourceId());
-        return spell != null && isControlledBy(spell.getControllerId());
+        return spell != null && isControlledBy(spell.getControllerId()) && spell.isInstantOrSorcery(game);
     }
 
     @Override
