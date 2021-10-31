@@ -2122,6 +2122,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public int damage(int damage, Ability source, Game game) {
+        return doDamage(damage, source.getSourceId(), source, game, false, true, null);
+    }
+
+    @Override
     public int damage(int damage, UUID attackerId, Ability source, Game game) {
         return doDamage(damage, attackerId, source, game, false, true, null);
     }
