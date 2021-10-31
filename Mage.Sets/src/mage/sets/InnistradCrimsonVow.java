@@ -59,6 +59,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Hallowed Haunting", 17, Rarity.MYTHIC, mage.cards.h.HallowedHaunting.class));
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Kindly Ancestor", 22, Rarity.COMMON, mage.cards.k.KindlyAncestor.class));
+        cards.add(new SetCardInfo("Lunar Rejection", 67, Rarity.UNCOMMON, mage.cards.l.LunarRejection.class));
         cards.add(new SetCardInfo("Massive Might", 208, Rarity.COMMON, mage.cards.m.MassiveMight.class));
         cards.add(new SetCardInfo("Mindleech Ghoul", 122, Rarity.COMMON, mage.cards.m.MindleechGhoul.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
