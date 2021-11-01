@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class InnistradCrimsonVow extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Brine Comber", "Brinebound Gift", "Dorothea, Vengeful Victim", "Dorothea's Retribution", "Drogskol Infantry", "Drogskol Armaments", "Fearful Villager", "Fearsome Werewolf", "Kindly Ancestor", "Ancestor's Embrace", "Twinblade Geist", "Twinblade Invocation", "Volatile Arsonist", "Dire-Strain Anarchist", "Weary Prisoner", "Wrathful Jailbreaker");
+    private static final List<String> unfinished = Arrays.asList("Brine Comber", "Brinebound Gift", "Distracting Geist", "Clever Distraction", "Dorothea, Vengeful Victim", "Dorothea's Retribution", "Drogskol Infantry", "Drogskol Armaments", "Fearful Villager", "Fearsome Werewolf", "Kindly Ancestor", "Ancestor's Embrace", "Lantern Bearer", "Lanterns' Lift", "Mischievous Geist", "Catlike Curiosity", "Twinblade Geist", "Twinblade Invocation", "Volatile Arsonist", "Dire-Strain Anarchist", "Weary Prisoner", "Wrathful Jailbreaker");
     private static final InnistradCrimsonVow instance = new InnistradCrimsonVow();
 
     public static InnistradCrimsonVow getInstance() {
@@ -31,6 +31,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = 1;
 
+        cards.add(new SetCardInfo("Abrade", 139, Rarity.COMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Ancestor's Embrace", 22, Rarity.COMMON, mage.cards.a.AncestorsEmbrace.class));
         cards.add(new SetCardInfo("Angelic Quartermaster", 2, Rarity.UNCOMMON, mage.cards.a.AngelicQuartermaster.class));
         cards.add(new SetCardInfo("Anje, Maid of Dishonor", 231, Rarity.RARE, mage.cards.a.AnjeMaidOfDishonor.class));
@@ -62,6 +63,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Gryff Rider", 15, Rarity.COMMON, mage.cards.g.GryffRider.class));
         cards.add(new SetCardInfo("Halana and Alena, Partners", 239, Rarity.RARE, mage.cards.h.HalanaAndAlenaPartners.class));
         cards.add(new SetCardInfo("Hallowed Haunting", 17, Rarity.MYTHIC, mage.cards.h.HallowedHaunting.class));
+        cards.add(new SetCardInfo("Hero's Downfall", 120, Rarity.UNCOMMON, mage.cards.h.HerosDownfall.class));
         cards.add(new SetCardInfo("Investigator's Journal", 258, Rarity.RARE, mage.cards.i.InvestigatorsJournal.class));
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Kessig Wolfrider", 165, Rarity.RARE, mage.cards.k.KessigWolfrider.class));
@@ -82,12 +84,13 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Stormcarved Coast", 265, Rarity.RARE, mage.cards.s.StormcarvedCoast.class));
         cards.add(new SetCardInfo("Sundown Pass", 266, Rarity.RARE, mage.cards.s.SundownPass.class));
         cards.add(new SetCardInfo("Swamp", 272, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Syncopate", 83, Rarity.COMMON, mage.cards.s.Syncopate.class));
         cards.add(new SetCardInfo("Thalia, Guardian of Thraben", 38, Rarity.RARE, mage.cards.t.ThaliaGuardianOfThraben.class));
         cards.add(new SetCardInfo("Torens, Fist of the Angels", 249, Rarity.RARE, mage.cards.t.TorensFistOfTheAngels.class));
         cards.add(new SetCardInfo("Twinblade Geist", 40, Rarity.UNCOMMON, mage.cards.t.TwinbladeGeist.class));
         cards.add(new SetCardInfo("Twinblade Invocation", 40, Rarity.UNCOMMON, mage.cards.t.TwinbladeInvocation.class));
-        cards.add(new SetCardInfo("Ulvenwald Behemoth", 394, Rarity.RARE, mage.cards.u.UlvenwaldBehemoth.class));
-        cards.add(new SetCardInfo("Ulvenwald Oddity", 394, Rarity.RARE, mage.cards.u.UlvenwaldOddity.class));
+        cards.add(new SetCardInfo("Ulvenwald Behemoth", 225, Rarity.UNCOMMON, mage.cards.u.UlvenwaldBehemoth.class));
+        cards.add(new SetCardInfo("Ulvenwald Oddity", 225, Rarity.UNCOMMON, mage.cards.u.UlvenwaldOddity.class));
         cards.add(new SetCardInfo("Valorous Stance", 42, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
         cards.add(new SetCardInfo("Vampires' Vengeance", 180, Rarity.UNCOMMON, mage.cards.v.VampiresVengeance.class));
         cards.add(new SetCardInfo("Volatile Arsonist", 181, Rarity.MYTHIC, mage.cards.v.VolatileArsonist.class));
