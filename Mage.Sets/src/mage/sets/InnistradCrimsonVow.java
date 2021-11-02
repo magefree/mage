@@ -71,6 +71,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Gryff Rider", 15, Rarity.COMMON, mage.cards.g.GryffRider.class));
         cards.add(new SetCardInfo("Halana and Alena, Partners", 239, Rarity.RARE, mage.cards.h.HalanaAndAlenaPartners.class));
         cards.add(new SetCardInfo("Hallowed Haunting", 17, Rarity.MYTHIC, mage.cards.h.HallowedHaunting.class));
+        cards.add(new SetCardInfo("Headless Rider", 118, Rarity.RARE, mage.cards.h.HeadlessRider.class));
         cards.add(new SetCardInfo("Hero's Downfall", 120, Rarity.UNCOMMON, mage.cards.h.HerosDownfall.class));
         cards.add(new SetCardInfo("Honored Heirloom", 257, Rarity.COMMON, mage.cards.h.HonoredHeirloom.class));
         cards.add(new SetCardInfo("Inspired Idea", 64, Rarity.RARE, mage.cards.i.InspiredIdea.class));
