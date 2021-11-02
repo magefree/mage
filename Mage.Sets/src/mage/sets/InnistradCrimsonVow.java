@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class InnistradCrimsonVow extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Brine Comber", "Brinebound Gift", "Distracting Geist", "Clever Distraction", "Dorothea, Vengeful Victim", "Dorothea's Retribution", "Drogskol Infantry", "Drogskol Armaments", "Fearful Villager", "Fearsome Werewolf", "Kindly Ancestor", "Ancestor's Embrace", "Lantern Bearer", "Lanterns' Lift", "Mischievous Geist", "Catlike Curiosity", "Twinblade Geist", "Twinblade Invocation", "Volatile Arsonist", "Dire-Strain Anarchist", "Weary Prisoner", "Wrathful Jailbreaker");
+    private static final List<String> unfinished = Arrays.asList("Brine Comber", "Brinebound Gift", "Distracting Geist", "Clever Distraction", "Dorothea, Vengeful Victim", "Dorothea's Retribution", "Drogskol Infantry", "Drogskol Armaments", "Fearful Villager", "Fearsome Werewolf", "Kindly Ancestor", "Ancestor's Embrace", "Lantern Bearer", "Lanterns' Lift", "Mischievous Geist", "Catlike Curiosity", "Twinblade Geist", "Twinblade Invocation", "Volatile Arsonist", "Dire-Strain Anarchist", "Weary Prisoner", "Wrathful Jailbreaker", "Weaver of Blossoms", "Blossom-Clad Werewolf");
     private static final InnistradCrimsonVow instance = new InnistradCrimsonVow();
 
     public static InnistradCrimsonVow getInstance() {
@@ -82,6 +82,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Massive Might", 208, Rarity.COMMON, mage.cards.m.MassiveMight.class));
         cards.add(new SetCardInfo("Mindleech Ghoul", 122, Rarity.COMMON, mage.cards.m.MindleechGhoul.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mulch", 210, Rarity.COMMON, mage.cards.m.Mulch.class));
         cards.add(new SetCardInfo("Olivia, Crimson Bride", 245, Rarity.MYTHIC, mage.cards.o.OliviaCrimsonBride.class));
         cards.add(new SetCardInfo("Overcharged Amalgam", 71, Rarity.RARE, mage.cards.o.OverchargedAmalgam.class));
         cards.add(new SetCardInfo("Packsong Pup", 213, Rarity.UNCOMMON, mage.cards.p.PacksongPup.class));
@@ -100,8 +101,8 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Torens, Fist of the Angels", 249, Rarity.RARE, mage.cards.t.TorensFistOfTheAngels.class));
         cards.add(new SetCardInfo("Twinblade Geist", 40, Rarity.UNCOMMON, mage.cards.t.TwinbladeGeist.class));
         cards.add(new SetCardInfo("Twinblade Invocation", 40, Rarity.UNCOMMON, mage.cards.t.TwinbladeInvocation.class));
-        cards.add(new SetCardInfo("Ulvenwald Behemoth", 225, Rarity.UNCOMMON, mage.cards.u.UlvenwaldBehemoth.class));
-        cards.add(new SetCardInfo("Ulvenwald Oddity", 225, Rarity.UNCOMMON, mage.cards.u.UlvenwaldOddity.class));
+        cards.add(new SetCardInfo("Ulvenwald Behemoth", 225, Rarity.RARE, mage.cards.u.UlvenwaldBehemoth.class));
+        cards.add(new SetCardInfo("Ulvenwald Oddity", 225, Rarity.RARE, mage.cards.u.UlvenwaldOddity.class));
         cards.add(new SetCardInfo("Valorous Stance", 42, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
         cards.add(new SetCardInfo("Vampires' Vengeance", 180, Rarity.UNCOMMON, mage.cards.v.VampiresVengeance.class));
         cards.add(new SetCardInfo("Volatile Arsonist", 181, Rarity.MYTHIC, mage.cards.v.VolatileArsonist.class));
