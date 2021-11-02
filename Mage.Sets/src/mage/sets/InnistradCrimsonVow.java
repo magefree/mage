@@ -72,6 +72,8 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Kessig Wolfrider", 165, Rarity.RARE, mage.cards.k.KessigWolfrider.class));
         cards.add(new SetCardInfo("Kindly Ancestor", 22, Rarity.COMMON, mage.cards.k.KindlyAncestor.class));
         cards.add(new SetCardInfo("Laid to Rest", 207, Rarity.UNCOMMON, mage.cards.l.LaidToRest.class));
+        cards.add(new SetCardInfo("Lantern Bearer", 66, Rarity.COMMON, mage.cards.l.LanternBearer.class));
+        cards.add(new SetCardInfo("Lanterns' Lift", 66, Rarity.COMMON, mage.cards.l.LanternsLift.class));
         cards.add(new SetCardInfo("Lunar Rejection", 67, Rarity.UNCOMMON, mage.cards.l.LunarRejection.class));
         cards.add(new SetCardInfo("Massive Might", 208, Rarity.COMMON, mage.cards.m.MassiveMight.class));
         cards.add(new SetCardInfo("Mindleech Ghoul", 122, Rarity.COMMON, mage.cards.m.MindleechGhoul.class));
