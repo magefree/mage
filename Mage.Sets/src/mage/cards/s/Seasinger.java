@@ -1,12 +1,12 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
+import mage.abilities.condition.CompoundCondition;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -23,8 +23,9 @@ import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class Seasinger extends CardImpl {
@@ -39,7 +40,7 @@ public final class Seasinger extends CardImpl {
     }
 
     public Seasinger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add(SubType.MERFOLK);
 
         this.power = new MageInt(0);
@@ -48,6 +49,7 @@ public final class Seasinger extends CardImpl {
         FilterPermanent seasinger = new FilterPermanent();
         seasinger.add(TargetController.YOU.getControllerPredicate());
         seasinger.add(new CardIdPredicate(this.getId()));
+        Condition condition = new CompoundCondition(new PermanentsOnTheBattlefieldCondition(seasinger, ComparisonType.EQUAL_TO, 1), SourceTappedCondition.instance);
 
         // When you control no Islands, sacrifice Seasinger.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
@@ -60,7 +62,7 @@ public final class Seasinger extends CardImpl {
         // {tap}: Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom),
-                new PermanentsOnTheBattlefieldCondition(seasinger, ComparisonType.EQUAL_TO, 1, SourceTappedCondition.instance), rule);
+                condition, rule);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         creatureWhoseControllerControlsIsland.add(new ControllerControlsIslandPredicate());
         ability.addTarget(new TargetCreaturePermanent(creatureWhoseControllerControlsIsland));

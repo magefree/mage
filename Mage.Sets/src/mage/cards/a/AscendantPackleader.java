@@ -40,7 +40,7 @@ public final class AscendantPackleader extends CardImpl {
         // Ascendant Packleader enters the battlefield with a +1/+1 counter on it if you control a permanent with mana value 4 or greater.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0, true),
+                new PermanentsOnTheBattlefieldCondition(filter),
                 null,
                 "with a +1/+1 counter on it if you control a permanent with mana value 4 or greater"
         ));

@@ -14,12 +14,10 @@ import mage.game.Game;
  * @author nantuko
  * @author maurer.it_at_gmail.com
  * @see #Controls(mage.filter.Filter)
- * @see #Controls(mage.filter.Filter, mage.abilities.condition.Condition)
  */
 public class PermanentsOnTheBattlefieldCondition implements Condition {
 
     private final FilterPermanent filter;
-    private final Condition condition;
     private final ComparisonType type;
     private final int count;
     private final boolean onlyControlled;
@@ -58,46 +56,20 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
         this.type = type;
         this.count = count;
         this.onlyControlled = onlyControlled;
-        this.condition = null;
-    }
-
-    /**
-     * Applies a filter, a {@link ComparisonType}, and count to permanents on
-     * the battlefield and calls the decorated condition to see if it
-     * {@link #apply(mage.game.Game, mage.abilities.Ability) applies} as well.
-     * This will force both conditions to apply for this to be true.
-     *
-     * @param filter
-     * @param type
-     * @param count
-     * @param conditionToDecorate
-     */
-    public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, ComparisonType type, int count, Condition conditionToDecorate) {
-        this.filter = filter;
-        this.type = type;
-        this.count = count;
-        this.onlyControlled = true;
-        this.condition = conditionToDecorate;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean conditionApplies;
-
-        FilterPermanent localFilter = filter.copy();
+        FilterPermanent localFilter;
         if (onlyControlled) {
+            localFilter = filter.copy();
             localFilter.add(new ControllerIdPredicate(source.getControllerId()));
+        } else {
+            localFilter = filter;
         }
-
-        int permanentsOnBattlefield = game.getBattlefield().count(localFilter, source.getSourceId(), source.getControllerId(), game);
-        conditionApplies = ComparisonType.compare(permanentsOnBattlefield, type, count);
-
-        //If a decorated condition exists, check it as well and apply them together.
-        if (this.condition != null) {
-            conditionApplies = conditionApplies && this.condition.apply(game, source);
-        }
-
-        return conditionApplies;
+        return ComparisonType.compare(game.getBattlefield().count(
+                localFilter, source.getSourceId(), source.getControllerId(), game
+        ), type, count);
     }
 
     @Override
