@@ -12,9 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -28,13 +25,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class Dermotaxi extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledCreaturePermanent("untapped creatures you control");
-
-    static {
-        filter.add(TappedPredicate.UNTAPPED);
-    }
 
     public Dermotaxi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
@@ -51,7 +41,10 @@ public final class Dermotaxi extends CardImpl {
 
         // Tap two untapped creatures you control: Until end of turn, Dermotaxi becomes a copy of the imprinted card, except it's a Vehicle artifact in addition to its other types.
         this.addAbility(new SimpleActivatedAbility(
-                new DermotaxiCopyEffect(), new TapTargetCost(new TargetControlledPermanent(2, filter))
+                new DermotaxiCopyEffect(),
+                new TapTargetCost(new TargetControlledPermanent(
+                        2, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES
+                ))
         ));
     }
 
