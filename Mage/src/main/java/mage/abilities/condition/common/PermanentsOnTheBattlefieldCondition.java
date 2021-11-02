@@ -1,4 +1,3 @@
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -19,11 +18,11 @@ import mage.game.Game;
  */
 public class PermanentsOnTheBattlefieldCondition implements Condition {
 
-    private FilterPermanent filter;
-    private Condition condition;
-    private ComparisonType type;
-    private int count;
-    private boolean onlyControlled;
+    private final FilterPermanent filter;
+    private final Condition condition;
+    private final ComparisonType type;
+    private final int count;
+    private final boolean onlyControlled;
 
     /**
      * Applies a filter and delegates creation to
@@ -33,7 +32,11 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
      * @param filter
      */
     public PermanentsOnTheBattlefieldCondition(FilterPermanent filter) {
-        this(filter, ComparisonType.MORE_THAN, 0);
+        this(filter, true);
+    }
+
+    public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, boolean onlyControlled) {
+        this(filter, ComparisonType.MORE_THAN, 0, onlyControlled);
     }
 
     /**
@@ -55,6 +58,7 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
         this.type = type;
         this.count = count;
         this.onlyControlled = onlyControlled;
+        this.condition = null;
     }
 
     /**
@@ -69,7 +73,10 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
      * @param conditionToDecorate
      */
     public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, ComparisonType type, int count, Condition conditionToDecorate) {
-        this(filter, type, count);
+        this.filter = filter;
+        this.type = type;
+        this.count = count;
+        this.onlyControlled = true;
         this.condition = conditionToDecorate;
     }
 
