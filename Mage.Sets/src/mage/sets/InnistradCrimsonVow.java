@@ -40,12 +40,14 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Ascendant Packleader", 186, Rarity.RARE, mage.cards.a.AscendantPackleader.class));
         cards.add(new SetCardInfo("By Invitation Only", 5, Rarity.RARE, mage.cards.b.ByInvitationOnly.class));
         cards.add(new SetCardInfo("Change of Fortune", 150, Rarity.RARE, mage.cards.c.ChangeOfFortune.class));
+        cards.add(new SetCardInfo("Clever Distraction", 9, Rarity.UNCOMMON, mage.cards.c.CleverDistraction.class));
         cards.add(new SetCardInfo("Cloaked Cadet", 192, Rarity.UNCOMMON, mage.cards.c.CloakedCadet.class));
         cards.add(new SetCardInfo("Dawnhart Geist", 8, Rarity.UNCOMMON, mage.cards.d.DawnhartGeist.class));
         cards.add(new SetCardInfo("Deathcap Glade", 261, Rarity.RARE, mage.cards.d.DeathcapGlade.class));
         cards.add(new SetCardInfo("Demonic Bargain", 103, Rarity.RARE, mage.cards.d.DemonicBargain.class));
         cards.add(new SetCardInfo("Dig Up", 197, Rarity.RARE, mage.cards.d.DigUp.class));
         cards.add(new SetCardInfo("Dire-Strain Anarchist", 181, Rarity.MYTHIC, mage.cards.d.DireStrainAnarchist.class));
+        cards.add(new SetCardInfo("Distracting Geist", 9, Rarity.UNCOMMON, mage.cards.d.DistractingGeist.class));
         cards.add(new SetCardInfo("Dominating Vampire", 154, Rarity.RARE, mage.cards.d.DominatingVampire.class));
         cards.add(new SetCardInfo("Dormant Grove", 198, Rarity.UNCOMMON, mage.cards.d.DormantGrove.class));
         cards.add(new SetCardInfo("Dreadfeast Demon", 108, Rarity.RARE, mage.cards.d.DreadfeastDemon.class));
