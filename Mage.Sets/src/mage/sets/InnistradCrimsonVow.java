@@ -40,6 +40,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Ascendant Packleader", 186, Rarity.RARE, mage.cards.a.AscendantPackleader.class));
         cards.add(new SetCardInfo("Bloodsworn Knight", 97, Rarity.UNCOMMON, mage.cards.b.BloodswornKnight.class));
         cards.add(new SetCardInfo("Bloodsworn Squire", 97, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class));
+        cards.add(new SetCardInfo("Blossom-Clad Werewolf", 226, Rarity.COMMON, mage.cards.b.BlossomCladWerewolf.class));
         cards.add(new SetCardInfo("By Invitation Only", 5, Rarity.RARE, mage.cards.b.ByInvitationOnly.class));
         cards.add(new SetCardInfo("Change of Fortune", 150, Rarity.RARE, mage.cards.c.ChangeOfFortune.class));
         cards.add(new SetCardInfo("Clever Distraction", 9, Rarity.UNCOMMON, mage.cards.c.CleverDistraction.class));
@@ -108,6 +109,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Volatile Arsonist", 181, Rarity.MYTHIC, mage.cards.v.VolatileArsonist.class));
         cards.add(new SetCardInfo("Voldaren Estate", 267, Rarity.RARE, mage.cards.v.VoldarenEstate.class));
         cards.add(new SetCardInfo("Weary Prisoner", 184, Rarity.COMMON, mage.cards.w.WearyPrisoner.class));
+        cards.add(new SetCardInfo("Weaver of Blossoms", 226, Rarity.COMMON, mage.cards.w.WeaverOfBlossoms.class));
         cards.add(new SetCardInfo("Wedding Announcement", 45, Rarity.RARE, mage.cards.w.WeddingAnnouncement.class));
         cards.add(new SetCardInfo("Wedding Festivity", 45, Rarity.RARE, mage.cards.w.WeddingFestivity.class));
         cards.add(new SetCardInfo("Wedding Invitation", 260, Rarity.COMMON, mage.cards.w.WeddingInvitation.class));
