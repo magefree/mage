@@ -104,6 +104,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Retrieve", 215, Rarity.UNCOMMON, mage.cards.r.Retrieve.class));
         cards.add(new SetCardInfo("Rot-Tide Gargantua", 129, Rarity.COMMON, mage.cards.r.RotTideGargantua.class));
         cards.add(new SetCardInfo("Sanctify", 33, Rarity.COMMON, mage.cards.s.Sanctify.class));
+        cards.add(new SetCardInfo("Scattered Thoughts", 74, Rarity.COMMON, mage.cards.s.ScatteredThoughts.class));
         cards.add(new SetCardInfo("Shattered Sanctum", 264, Rarity.RARE, mage.cards.s.ShatteredSanctum.class));
         cards.add(new SetCardInfo("Sorin the Mirthless", 131, Rarity.MYTHIC, mage.cards.s.SorinTheMirthless.class));
         cards.add(new SetCardInfo("Stormcarved Coast", 265, Rarity.RARE, mage.cards.s.StormcarvedCoast.class));
