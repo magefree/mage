@@ -67,6 +67,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Geistlight Snare", 60, Rarity.UNCOMMON, mage.cards.g.GeistlightSnare.class));
         cards.add(new SetCardInfo("Geralf, Visionary Stitcher", 61, Rarity.RARE, mage.cards.g.GeralfVisionaryStitcher.class));
+        cards.add(new SetCardInfo("Glorious Sunrise", 200, Rarity.RARE, mage.cards.g.GloriousSunrise.class));
         cards.add(new SetCardInfo("Gluttonous Guest", 114, Rarity.COMMON, mage.cards.g.GluttonousGuest.class));
         cards.add(new SetCardInfo("Gnarled Grovestrider", 198, Rarity.UNCOMMON, mage.cards.g.GnarledGrovestrider.class));
         cards.add(new SetCardInfo("Grolnok, the Omnivore", 238, Rarity.RARE, mage.cards.g.GrolnokTheOmnivore.class));
