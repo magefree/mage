@@ -39,6 +39,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Apprentice Sharpshooter", 185, Rarity.COMMON, mage.cards.a.ApprenticeSharpshooter.class));
         cards.add(new SetCardInfo("Archghoul of Thraben", 93, Rarity.UNCOMMON, mage.cards.a.ArchghoulOfThraben.class));
         cards.add(new SetCardInfo("Ascendant Packleader", 186, Rarity.RARE, mage.cards.a.AscendantPackleader.class));
+        cards.add(new SetCardInfo("Belligerent Guest", 144, Rarity.COMMON, mage.cards.b.BelligerentGuest.class));
         cards.add(new SetCardInfo("Bloodsworn Knight", 97, Rarity.UNCOMMON, mage.cards.b.BloodswornKnight.class));
         cards.add(new SetCardInfo("Bloodsworn Squire", 97, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class));
         cards.add(new SetCardInfo("Blossom-Clad Werewolf", 226, Rarity.COMMON, mage.cards.b.BlossomCladWerewolf.class));
