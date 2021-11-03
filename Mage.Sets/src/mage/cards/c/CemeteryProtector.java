@@ -7,6 +7,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
@@ -98,19 +99,12 @@ class CemeteryProtectorEffect extends OneShotEffect {
 
 class CemeteryProtectorTriggeredAbility extends TriggeredAbilityImpl {
 
-    private UUID idToCheck = null;
-    private GameEvent.EventType eventToCheck = null;
-    private UUID exileZoneId = null;
-
     public CemeteryProtectorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanToken()));
     }
 
     private CemeteryProtectorTriggeredAbility(final CemeteryProtectorTriggeredAbility ability) {
         super(ability);
-        idToCheck = ability.idToCheck;
-        eventToCheck = ability.eventToCheck;
-        exileZoneId = ability.exileZoneId;
     }
 
     @Override
@@ -126,27 +120,25 @@ class CemeteryProtectorTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(controllerId)) {
-            idToCheck = event.getTargetId();
-            eventToCheck = event.getType();
-            // TODO: sourceObjectZoneChangeCounter is incorrect here (always reporting 0).  Workaround is to get ZCC from GameState.
-            // May need research as to why this variable isn't reporting correctly.
-            exileZoneId = CardUtil.getExileZoneId(game, sourceId, game.getState().getZoneChangeCounter(sourceId));
+            Effect effect = getEffects().get(0);
+            effect.setValue("targetId", event.getTargetId());
+            effect.setValue("eventType", event.getType());
+            // sourceObjectZoneChangeCounter is not updated until after checkTrigger is called.  Get ZCC from GameState instead.
+            effect.setValue("exileId", CardUtil.getExileZoneId(game, sourceId, game.getState().getZoneChangeCounter(sourceId)));
             return true;
        }
         return false;
     }
 
-    private boolean checkCardTypes(List<CardType> playedCardTypes, Game game) {
-        if (exileZoneId != null) {
-            ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
-            if (exileZone != null) {
-                for (UUID cardId : exileZone) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        for (CardType exileCardType : card.getCardType(game)) {
-                            if (playedCardTypes.contains(exileCardType)) {
-                                return true;
-                            }
+    private boolean checkCardTypes(List<CardType> playedCardTypes, UUID exileId, Game game) {
+        ExileZone exileZone = game.getExile().getExileZone(exileId);
+        if (exileZone != null) {
+            for (UUID cardId : exileZone) {
+                Card card = game.getCard(cardId);
+                if (card != null) {
+                    for (CardType exileCardType : card.getCardType(game)) {
+                        if (playedCardTypes.contains(exileCardType)) {
+                            return true;
                         }
                     }
                 }
@@ -157,12 +149,18 @@ class CemeteryProtectorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        if (eventToCheck == GameEvent.EventType.LAND_PLAYED) {
-            Permanent permanent = game.getPermanent(idToCheck);
-            return permanent != null && checkCardTypes(permanent.getCardType(game), game);
-        } else if (eventToCheck == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = game.getSpellOrLKIStack(idToCheck);
-            return spell != null && checkCardTypes(spell.getCardType(game), game);
+        Effect effect = getEffects().get(0);
+        UUID targetId = (UUID) effect.getValue("targetId");
+        GameEvent.EventType eventType = (GameEvent.EventType) effect.getValue("eventType");
+        UUID exileId = (UUID) effect.getValue("exileId");
+        if (targetId != null && eventType != null && exileId != null) {
+            if (eventType == GameEvent.EventType.LAND_PLAYED) {
+                Permanent permanent = game.getPermanent(targetId);
+                return permanent != null && checkCardTypes(permanent.getCardType(game), exileId, game);
+            } else if (eventType == GameEvent.EventType.SPELL_CAST) {
+                Spell spell = game.getSpellOrLKIStack(targetId);
+                return spell != null && checkCardTypes(spell.getCardType(game), exileId, game);
+            }
         }
         return false;
     }
