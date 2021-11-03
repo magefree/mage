@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class InnistradCrimsonVow extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Brine Comber", "Brinebound Gift", "Distracting Geist", "Clever Distraction", "Dorothea, Vengeful Victim", "Dorothea's Retribution", "Drogskol Infantry", "Drogskol Armaments", "Fearful Villager", "Fearsome Werewolf", "Howlpack Piper", "Wildsong Howler", "Kindly Ancestor", "Ancestor's Embrace", "Lantern Bearer", "Lanterns' Lift", "Mischievous Geist", "Catlike Curiosity", "Twinblade Geist", "Twinblade Invocation", "Volatile Arsonist", "Dire-Strain Anarchist", "Weary Prisoner", "Wrathful Jailbreaker", "Weaver of Blossoms", "Blossom-Clad Werewolf");
+    private static final List<String> unfinished = Arrays.asList("Brine Comber", "Brinebound Gift", "Distracting Geist", "Clever Distraction", "Dorothea, Vengeful Victim", "Dorothea's Retribution", "Drogskol Infantry", "Drogskol Armaments", "Fearful Villager", "Fearsome Werewolf", "Howlpack Piper", "Wildsong Howler", "Kindly Ancestor", "Ancestor's Embrace", "Lantern Bearer", "Lanterns' Lift", "Mirrorhall Mimic", "Ghastly Mimicry", "Mischievous Geist", "Catlike Curiosity", "Twinblade Geist", "Twinblade Invocation", "Volatile Arsonist", "Dire-Strain Anarchist", "Weary Prisoner", "Wrathful Jailbreaker", "Weaver of Blossoms", "Blossom-Clad Werewolf");
     private static final InnistradCrimsonVow instance = new InnistradCrimsonVow();
 
     public static InnistradCrimsonVow getInstance() {
@@ -122,7 +122,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Wedding Festivity", 45, Rarity.RARE, mage.cards.w.WeddingFestivity.class));
         cards.add(new SetCardInfo("Wedding Invitation", 260, Rarity.COMMON, mage.cards.w.WeddingInvitation.class));
         cards.add(new SetCardInfo("Wedding Security", 138, Rarity.UNCOMMON, mage.cards.w.WeddingSecurity.class));
-        cards.add(new SetCardInfo("Whispering Wizard", 88, Rarity.UNCOMMON, mage.cards.w.WhisperingWizard.class));
+        cards.add(new SetCardInfo("Whispering Wizard", 68, Rarity.UNCOMMON, mage.cards.w.WhisperingWizard.class));
         cards.add(new SetCardInfo("Wrathful Jailbreaker", 184, Rarity.COMMON, mage.cards.w.WrathfulJailbreaker.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is fully implemented
