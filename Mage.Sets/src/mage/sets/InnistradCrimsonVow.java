@@ -97,6 +97,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Hallowed Haunting", 17, Rarity.MYTHIC, mage.cards.h.HallowedHaunting.class));
         cards.add(new SetCardInfo("Headless Rider", 118, Rarity.RARE, mage.cards.h.HeadlessRider.class));
         cards.add(new SetCardInfo("Hero's Downfall", 120, Rarity.UNCOMMON, mage.cards.h.HerosDownfall.class));
+        cards.add(new SetCardInfo("Heron of Hope", 18, Rarity.COMMON, mage.cards.h.HeronOfHope.class));
         cards.add(new SetCardInfo("Honeymoon Hearse", 160, Rarity.UNCOMMON, mage.cards.h.HoneymoonHearse.class));
         cards.add(new SetCardInfo("Honored Heirloom", 257, Rarity.COMMON, mage.cards.h.HonoredHeirloom.class));
         cards.add(new SetCardInfo("Infestation Expert", 206, Rarity.UNCOMMON, mage.cards.i.InfestationExpert.class));
