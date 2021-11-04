@@ -50,6 +50,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Cemetery Protector", 6, Rarity.MYTHIC, mage.cards.c.CemeteryProtector.class));
         cards.add(new SetCardInfo("Cemetery Prowler", 191, Rarity.MYTHIC, mage.cards.c.CemeteryProwler.class));
         cards.add(new SetCardInfo("Change of Fortune", 150, Rarity.RARE, mage.cards.c.ChangeOfFortune.class));
+        cards.add(new SetCardInfo("Child of the Pack", 234, Rarity.UNCOMMON, mage.cards.c.ChildOfThePack.class));
         cards.add(new SetCardInfo("Clever Distraction", 9, Rarity.UNCOMMON, mage.cards.c.CleverDistraction.class));
         cards.add(new SetCardInfo("Cloaked Cadet", 192, Rarity.UNCOMMON, mage.cards.c.CloakedCadet.class));
         cards.add(new SetCardInfo("Consuming Tide", 53, Rarity.RARE, mage.cards.c.ConsumingTide.class));
@@ -116,6 +117,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Rot-Tide Gargantua", 129, Rarity.COMMON, mage.cards.r.RotTideGargantua.class));
         cards.add(new SetCardInfo("Runebound Wolf", 176, Rarity.UNCOMMON, mage.cards.r.RuneboundWolf.class));
         cards.add(new SetCardInfo("Sanctify", 33, Rarity.COMMON, mage.cards.s.Sanctify.class));
+        cards.add(new SetCardInfo("Savage Packmate", 234, Rarity.UNCOMMON, mage.cards.s.SavagePackmate.class));
         cards.add(new SetCardInfo("Sawblade Slinger", 217, Rarity.UNCOMMON, mage.cards.s.SawbladeSlinger.class));
         cards.add(new SetCardInfo("Scattered Thoughts", 74, Rarity.COMMON, mage.cards.s.ScatteredThoughts.class));
         cards.add(new SetCardInfo("Shattered Sanctum", 264, Rarity.RARE, mage.cards.s.ShatteredSanctum.class));
