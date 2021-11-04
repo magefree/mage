@@ -50,7 +50,7 @@ class VirulentWoundEffect extends OneShotEffect {
 
     public VirulentWoundEffect() {
         super(Outcome.UnboostCreature);
-        this.staticText = "Put a -1/-1 counter on target creature. When that creature dies this turn, its controller gets a poison counter";
+        this.staticText = "When that creature dies this turn, its controller gets a poison counter";
     }
 
     public VirulentWoundEffect(final VirulentWoundEffect effect) {
