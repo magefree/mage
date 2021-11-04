@@ -55,6 +55,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Cloaked Cadet", 192, Rarity.UNCOMMON, mage.cards.c.CloakedCadet.class));
         cards.add(new SetCardInfo("Consuming Tide", 53, Rarity.RARE, mage.cards.c.ConsumingTide.class));
         cards.add(new SetCardInfo("Dawnhart Geist", 8, Rarity.UNCOMMON, mage.cards.d.DawnhartGeist.class));
+        cards.add(new SetCardInfo("Daybreak Combatants", 153, Rarity.COMMON, mage.cards.d.DaybreakCombatants.class));
         cards.add(new SetCardInfo("Deathcap Glade", 261, Rarity.RARE, mage.cards.d.DeathcapGlade.class));
         cards.add(new SetCardInfo("Demonic Bargain", 103, Rarity.RARE, mage.cards.d.DemonicBargain.class));
         cards.add(new SetCardInfo("Dig Up", 197, Rarity.RARE, mage.cards.d.DigUp.class));
