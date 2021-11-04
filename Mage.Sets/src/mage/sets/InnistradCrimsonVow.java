@@ -48,6 +48,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Blossom-Clad Werewolf", 226, Rarity.COMMON, mage.cards.b.BlossomCladWerewolf.class));
         cards.add(new SetCardInfo("Bramble Wurm", 189, Rarity.UNCOMMON, mage.cards.b.BrambleWurm.class));
         cards.add(new SetCardInfo("By Invitation Only", 5, Rarity.RARE, mage.cards.b.ByInvitationOnly.class));
+        cards.add(new SetCardInfo("Cartographer's Survey", 190, Rarity.UNCOMMON, mage.cards.c.CartographersSurvey.class));
         cards.add(new SetCardInfo("Cemetery Protector", 6, Rarity.MYTHIC, mage.cards.c.CemeteryProtector.class));
         cards.add(new SetCardInfo("Cemetery Prowler", 191, Rarity.MYTHIC, mage.cards.c.CemeteryProwler.class));
         cards.add(new SetCardInfo("Change of Fortune", 150, Rarity.RARE, mage.cards.c.ChangeOfFortune.class));
