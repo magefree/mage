@@ -133,6 +133,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Massive Might", 208, Rarity.COMMON, mage.cards.m.MassiveMight.class));
         cards.add(new SetCardInfo("Militia Rallier", 24, Rarity.COMMON, mage.cards.m.MilitiaRallier.class));
         cards.add(new SetCardInfo("Mindleech Ghoul", 122, Rarity.COMMON, mage.cards.m.MindleechGhoul.class));
+        cards.add(new SetCardInfo("Moldgraf Millipede", 209, Rarity.COMMON, mage.cards.m.MoldgrafMillipede.class));
         cards.add(new SetCardInfo("Moonlit Ambusher", 212, Rarity.UNCOMMON, mage.cards.m.MoonlitAmbusher.class));
         cards.add(new SetCardInfo("Mountain", 401, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mulch", 210, Rarity.COMMON, mage.cards.m.Mulch.class));
