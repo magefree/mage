@@ -25,12 +25,11 @@ public final class BelovedBeggar extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.g.GenerousSoul.class;
 
         // Disturb {4}{W}{W}
         this.addAbility(new TransformAbility());
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{4}{W}{W}"), TimingRule.SORCERY));
+        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{4}{W}{W}")));
     }
 
     private BelovedBeggar(final BelovedBeggar card) {

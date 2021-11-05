@@ -3,6 +3,7 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DisturbAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,6 +26,7 @@ public final class DrogskolInfantry extends CardImpl {
         this.secondSideCardClazz = mage.cards.d.DrogskolArmaments.class;
 
         // Disturb {3}{W}
+        this.addAbility(new TransformAbility());
         this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{3}{W}")));
     }
 
