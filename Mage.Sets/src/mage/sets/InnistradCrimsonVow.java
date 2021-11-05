@@ -132,6 +132,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Moonlit Ambusher", 212, Rarity.UNCOMMON, mage.cards.m.MoonlitAmbusher.class));
         cards.add(new SetCardInfo("Mountain", 401, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mulch", 210, Rarity.COMMON, mage.cards.m.Mulch.class));
+        cards.add(new SetCardInfo("Necroduality", 70, Rarity.MYTHIC, mage.cards.n.Necroduality.class));
         cards.add(new SetCardInfo("Oakshade Stalker", 212, Rarity.UNCOMMON, mage.cards.o.OakshadeStalker.class));
         cards.add(new SetCardInfo("Odric, Blood-Cursed", 243, Rarity.RARE, mage.cards.o.OdricBloodCursed.class));
         cards.add(new SetCardInfo("Old Rutstein", 244, Rarity.RARE, mage.cards.o.OldRutstein.class));
