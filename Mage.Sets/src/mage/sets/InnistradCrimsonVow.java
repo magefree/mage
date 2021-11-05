@@ -34,6 +34,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Abrade", 139, Rarity.COMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Adamant Will", 1, Rarity.COMMON, mage.cards.a.AdamantWill.class));
         cards.add(new SetCardInfo("Aim for the Head", 92, Rarity.COMMON, mage.cards.a.AimForTheHead.class));
+        cards.add(new SetCardInfo("Alchemist's Retrieval", 47, Rarity.COMMON, mage.cards.a.AlchemistsRetrieval.class));
         cards.add(new SetCardInfo("Ancestor's Embrace", 22, Rarity.COMMON, mage.cards.a.AncestorsEmbrace.class));
         cards.add(new SetCardInfo("Ancient Lumberknot", 230, Rarity.UNCOMMON, mage.cards.a.AncientLumberknot.class));
         cards.add(new SetCardInfo("Angelic Quartermaster", 2, Rarity.UNCOMMON, mage.cards.a.AngelicQuartermaster.class));
