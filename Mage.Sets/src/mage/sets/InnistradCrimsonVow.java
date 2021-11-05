@@ -45,6 +45,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Avabruck Caretaker", 187, Rarity.MYTHIC, mage.cards.a.AvabruckCaretaker.class));
         cards.add(new SetCardInfo("Belligerent Guest", 144, Rarity.COMMON, mage.cards.b.BelligerentGuest.class));
         cards.add(new SetCardInfo("Binding Geist", 48, Rarity.COMMON, mage.cards.b.BindingGeist.class));
+        cards.add(new SetCardInfo("Blood Fountain", 95, Rarity.COMMON, mage.cards.b.BloodFountain.class));
         cards.add(new SetCardInfo("Blood Hypnotist", 145, Rarity.UNCOMMON, mage.cards.b.BloodHypnotist.class));
         cards.add(new SetCardInfo("Blood Petal Celebrant", 146, Rarity.COMMON, mage.cards.b.BloodPetalCelebrant.class));
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 96, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class));
