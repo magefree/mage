@@ -334,7 +334,7 @@ public class GameEvent implements Serializable {
         UNTAP, UNTAPPED,
         FLIP, FLIPPED,
         UNFLIP, UNFLIPPED,
-        TRANSFORM, TRANSFORMED,
+        TRANSFORM, TRANSFORMING, TRANSFORMED,
         ADAPT,
         BECOMES_MONSTROUS,
         /* BECOMES_EXERTED
@@ -356,6 +356,7 @@ public class GameEvent implements Serializable {
          */
         BECOME_MONARCH,
         BECOMES_MONARCH,
+        BECOMES_DAY_NIGHT,
         MEDITATED,
         PHASE_OUT, PHASED_OUT,
         PHASE_IN, PHASED_IN,
@@ -464,6 +465,8 @@ public class GameEvent implements Serializable {
         VENTURE, VENTURED,
         DUNGEON_COMPLETED,
         REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
+        FORETOLD, // targetId   id of card foretold
+        FORETELL, // targetId   id of card foretell  playerId   id of the controller
         //custom events
         CUSTOM_EVENT
     }

@@ -44,7 +44,7 @@ public final class ArchmagesCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
 
         // • Gain control of target nonland permanent with converted mana cost 1 or less.
-        mode = new Mode(new GainControlTargetEffect(Duration.Custom, true));
+        mode = new Mode(new GainControlTargetEffect(Duration.EndOfGame, true));
         mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode);
     }

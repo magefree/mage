@@ -56,7 +56,7 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
                 .stream()
                 .map(game::getPermanent)
                 .filter(permanent -> filter.match(permanent, sourceId, controllerId, game))
-                .mapToInt(x -> 1).sum() > minAttackers;
+                .mapToInt(x -> 1).sum() >= minAttackers;
     }
 
     @Override

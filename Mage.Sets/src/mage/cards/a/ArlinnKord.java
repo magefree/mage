@@ -32,7 +32,6 @@ public final class ArlinnKord extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ARLINN);
 
-        this.transformable = true;
         this.secondSideCardClazz = ArlinnEmbracedByTheMoon.class;
 
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
@@ -53,7 +52,7 @@ public final class ArlinnKord extends CardImpl {
         // 0: Create a 2/2 green Wolf creature token. Transform Arlinn Kord.
         this.addAbility(new TransformAbility());
         ability = new LoyaltyAbility(new CreateTokenEffect(new WolfToken()), 0);
-        ability.addEffect(new TransformSourceEffect(true));
+        ability.addEffect(new TransformSourceEffect());
         this.addAbility(ability);
     }
 

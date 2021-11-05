@@ -66,7 +66,7 @@ public final class SilverWyvern extends CardImpl {
     }
 }
 
-enum SilverWyvernPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<StackObject>> {
+enum SilverWyvernPredicate implements ObjectSourcePlayerPredicate<StackObject> {
     instance;
 
     @Override

@@ -80,7 +80,7 @@ class HolisticWisdomEffect extends OneShotEffect {
                     for (CardType cardtype : card.getCardType(game)) {
                         if (cardtypes.contains(cardtype)) {
                             Effect effect = new ReturnToHandTargetEffect();
-                            effect.setTargetPointer(new FixedTarget(card.getId()));
+                            effect.setTargetPointer(new FixedTarget(card.getId(), game));
                             return effect.apply(game, source);
                         }
                     }

@@ -92,7 +92,7 @@ class HixusPrisonWardenTriggeredAbility extends TriggeredAbilityImpl {
                 && damageEvent.isCombatDamage()
                 && sourcePermanent != null
                 && sourcePermanent.isCreature(game)) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
+            getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId(), game));
             return true;
         }
         return false;

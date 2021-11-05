@@ -17,7 +17,7 @@ public final class RedHumanToken extends TokenImpl {
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.HUMAN);
 
-        this.color = ObjectColor.RED;
+        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
     }

@@ -1,11 +1,9 @@
 package mage.filter;
 
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 
 import java.util.ArrayList;
@@ -17,7 +15,7 @@ import java.util.UUID;
  */
 public class FilterStackObject extends FilterObject<StackObject> {
 
-    protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<>();
+    protected List<ObjectSourcePlayerPredicate<StackObject>> extraPredicates = new ArrayList<>();
 
     public FilterStackObject() {
         this("spell or ability");
@@ -37,10 +35,10 @@ public class FilterStackObject extends FilterObject<StackObject> {
             return false;
         }
 
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(stackObject, sourceId, playerId), game);
+        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<StackObject>(stackObject, sourceId, playerId), game);
     }
 
-    public final void add(ObjectPlayerPredicate predicate) {
+    public final void add(ObjectSourcePlayerPredicate predicate) {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }

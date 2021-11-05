@@ -123,7 +123,7 @@ class VraskaTheUnseenTriggeredAbility extends TriggeredAbilityImpl {
             Permanent sourceOfDamage = game.getPermanent(event.getSourceId());
             if (sourceOfDamage != null && sourceOfDamage.isCreature(game)) {
                 Effect effect = this.getEffects().get(0);
-                effect.setTargetPointer(new FixedTarget(sourceOfDamage.getId()));
+                effect.setTargetPointer(new FixedTarget(sourceOfDamage.getId(), game));
                 return true;
             }
         }

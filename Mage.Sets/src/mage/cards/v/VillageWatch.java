@@ -24,7 +24,6 @@ public final class VillageWatch extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.v.VillageReavers.class;
 
         // Haste
@@ -32,7 +31,7 @@ public final class VillageWatch extends CardImpl {
 
         // Daybound
         this.addAbility(new TransformAbility());
-        this.addAbility(DayboundAbility.getInstance());
+        this.addAbility(new DayboundAbility());
     }
 
     private VillageWatch(final VillageWatch card) {

@@ -48,7 +48,6 @@ public final class NicolBolasTheArisen extends CardImpl {
         this.color.setBlack(true);
         this.color.setRed(true);
         this.nightCard = true;
-        this.transformable = true;
 
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(7));
 

@@ -53,7 +53,7 @@ public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
                 effect.setValue("damage", event.getAmount());
                 switch(setTargetPointer) {
                     case PERMANENT:
-                        effect.setTargetPointer(new FixedTarget(targetId));
+                        effect.setTargetPointer(new FixedTarget(targetId, game));
                         break;
                     case PLAYER:
                         effect.setTargetPointer(new FixedTarget(game.getPermanentOrLKIBattlefield(targetId).getControllerId()));

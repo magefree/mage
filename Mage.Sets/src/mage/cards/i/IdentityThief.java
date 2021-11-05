@@ -82,7 +82,7 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever {this} attacks, " ;
+        return "Whenever {this} attacks, ";
     }
 
     @Override
@@ -112,7 +112,7 @@ class IdentityThiefEffect extends OneShotEffect {
                 && targetPermanent != null
                 && sourcePermanent != null) {
             ContinuousEffect copyEffect = new CopyEffect(Duration.EndOfTurn, targetPermanent, source.getSourceId());
-            copyEffect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
+            copyEffect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
             game.addEffect(copyEffect, source);
             UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (controller.moveCardsToExile(targetPermanent, source, game, true, exileZoneId, sourcePermanent.getName())) {

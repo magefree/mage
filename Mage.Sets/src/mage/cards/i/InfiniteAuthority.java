@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.Objects;
@@ -90,13 +89,13 @@ class InfiniteAuthorityTriggeredAbility extends TriggeredAbilityImpl {
                 if (blocker != null
                         && Objects.equals(blocked, enchantedCreature)
                         && blocker.getToughness().getValue() <= 3) {
-                    effect.setTargetPointer(new FixedTarget(blocker.getId()));
+                    effect.setTargetPointer(new FixedTarget(blocker.getId(), game));
                     return true;
                 }
                 if (blocked != null
                         && Objects.equals(blocker, enchantedCreature)
                         && blocked.getToughness().getValue() <= 3) {
-                    effect.setTargetPointer(new FixedTarget(blocked.getId()));
+                    effect.setTargetPointer(new FixedTarget(blocked.getId(), game));
                     return true;
                 }
             }
@@ -106,7 +105,7 @@ class InfiniteAuthorityTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, " ;
+        return "Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, ";
     }
 }
 

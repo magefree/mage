@@ -30,7 +30,6 @@ public final class KessigNaturalist extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.l.LordOfTheUlvenwald.class;
 
         // Whenever Kessig Naturalist attacks, add {R} or {G}. Until end of turn, you don't lose this mana as steps and phases end.
@@ -38,7 +37,7 @@ public final class KessigNaturalist extends CardImpl {
 
         // Daybound
         this.addAbility(new TransformAbility());
-        this.addAbility(DayboundAbility.getInstance());
+        this.addAbility(new DayboundAbility());
     }
 
     private KessigNaturalist(final KessigNaturalist card) {

@@ -107,7 +107,7 @@ class SengirTheDarkBaronWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.BEGINNING_PHASE_PRE) {
+        if (event.getType() == GameEvent.EventType.BEGINNING_PHASE_PRE) {
             game.getPlayers()
                     .values()
                     .stream()

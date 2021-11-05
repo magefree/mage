@@ -17,9 +17,11 @@ public class AbilityPickerView implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Map<UUID, String> choices = new LinkedHashMap<>();
-    private String message = null;
+    private String message;
+    private GameView gameView;
 
-    public AbilityPickerView(String objectName, List<? extends Ability> abilities, String message) {
+    public AbilityPickerView(GameView gameView, String objectName, List<? extends Ability> abilities, String message) {
+        this.gameView = gameView;
         this.message = message;
 
         int num = 0;
@@ -44,6 +46,12 @@ public class AbilityPickerView implements Serializable {
         }
     }
 
+    public AbilityPickerView(GameView gameView, Map<UUID, String> modes, String message) {
+        this.gameView = gameView;
+        this.choices = modes;
+        this.message = message;
+    }
+
     private String getAbilityRules(Ability ability, String objectName) {
         String rule = ability.getRule(objectName);
         if (rule.isEmpty()) {
@@ -55,16 +63,15 @@ public class AbilityPickerView implements Serializable {
         return rule;
     }
 
-    public AbilityPickerView(Map<UUID, String> modes, String message) {
-        this.choices = modes;
-        this.message = message;
-    }
-
     public Map<UUID, String> getChoices() {
         return choices;
     }
 
     public String getMessage() {
         return message;
+    }
+
+    public GameView getGameView() {
+        return gameView;
     }
 }

@@ -22,7 +22,7 @@ public final class SinisterSabotage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
 
         // Surveil 1.
-        this.getSpellAbility().addEffect(new SurveilEffect(1));
+        this.getSpellAbility().addEffect(new SurveilEffect(1).concatBy("<br>"));
     }
 
     private SinisterSabotage(final SinisterSabotage card) {

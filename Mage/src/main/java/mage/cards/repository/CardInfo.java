@@ -480,6 +480,16 @@ public class CardInfo {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !(o instanceof CardInfo)) return false;
+        CardInfo other = (CardInfo) o;
+        return (this.name.equals(other.name)
+            && this.setCode.equals(other.setCode)
+            && this.cardNumber.equals(other.cardNumber));
+    }
+
+    @Override
     public String toString() {
         return String.format("%s (%s, %s)", getName(), getSetCode(), getCardNumber());
     }

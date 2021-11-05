@@ -38,7 +38,6 @@ public final class VillageReavers extends CardImpl {
         this.color.setRed(true);
 
         this.nightCard = true;
-        this.transformable = true;
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
@@ -49,7 +48,7 @@ public final class VillageReavers extends CardImpl {
         )));
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private VillageReavers(final VillageReavers card) {

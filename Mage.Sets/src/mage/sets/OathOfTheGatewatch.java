@@ -7,7 +7,6 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,20 +20,18 @@ public final class OathOfTheGatewatch extends ExpansionSet {
         return instance;
     }
 
-    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
-
     private OathOfTheGatewatch() {
         super("Oath of the Gatewatch", "OGW", ExpansionSet.buildDate(2016, 1, 22), SetType.EXPANSION);
         this.blockName = "Battle for Zendikar";
         this.parentSet = BattleForZendikar.getInstance();
         this.hasBoosters = true;
-        this.hasBasicLands = true;
+        this.hasBasicLands = false;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.ratioBoosterSpecialLand = 48;
+        this.ratioBoosterSpecialCommon = 144;
 
         cards.add(new SetCardInfo("Abstruse Interference", 40, Rarity.COMMON, mage.cards.a.AbstruseInterference.class));
         cards.add(new SetCardInfo("Affa Protector", 14, Rarity.COMMON, mage.cards.a.AffaProtector.class));
@@ -213,10 +210,10 @@ public final class OathOfTheGatewatch extends ExpansionSet {
         cards.add(new SetCardInfo("Wandering Fumarole", 182, Rarity.RARE, mage.cards.w.WanderingFumarole.class));
         cards.add(new SetCardInfo("Warden of Geometries", 11, Rarity.COMMON, mage.cards.w.WardenOfGeometries.class));
         cards.add(new SetCardInfo("Warping Wail", 12, Rarity.UNCOMMON, mage.cards.w.WarpingWail.class));
-        cards.add(new SetCardInfo("Wastes", "183a", Rarity.LAND, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wastes", "184a", Rarity.LAND, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wastes", 183, Rarity.LAND, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Wastes", 184, Rarity.LAND, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", "183a", Rarity.COMMON, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", "184a", Rarity.COMMON, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", 183, Rarity.COMMON, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", 184, Rarity.COMMON, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Weapons Trainer", 160, Rarity.UNCOMMON, mage.cards.w.WeaponsTrainer.class));
         cards.add(new SetCardInfo("Witness the End", 82, Rarity.COMMON, mage.cards.w.WitnessTheEnd.class));
         cards.add(new SetCardInfo("World Breaker", 126, Rarity.MYTHIC, mage.cards.w.WorldBreaker.class));
@@ -226,15 +223,15 @@ public final class OathOfTheGatewatch extends ExpansionSet {
     }
 
     @Override
-    public List<CardInfo> getSpecialLand() {
-        if (savedSpecialLand.isEmpty()) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes("EXP");
-            criteria.minCardNumber(26);
-            criteria.maxCardNumber(45);
-            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
+        if (rarity == Rarity.COMMON) {
+            // only the full-art versions of Wastes are found in boosters
+            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumber().contains("a"));
+        } else if (rarity == Rarity.SPECIAL) {
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("EXP")));
+            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() < 26);
         }
-
-        return new ArrayList<>(savedSpecialLand);
+        return cardInfos;
     }
 }

@@ -72,7 +72,7 @@ public class GraftAbility extends TriggeredAbilityImpl {
                 && sourcePermanent.getCounters(game).containsKey(CounterType.P1P1)
                 && filter.match(permanent, game)) {
             for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
             }
             return true;
         }

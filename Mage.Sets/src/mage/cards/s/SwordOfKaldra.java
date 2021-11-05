@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -71,7 +70,7 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
         if (equipment != null
                 && equipment.getAttachedTo() != null
                 && event.getSourceId().equals(equipment.getAttachedTo())) {
-            getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+            getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }
         return false;
@@ -79,7 +78,7 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever equipped creature deals damage to a creature, " ;
+        return "Whenever equipped creature deals damage to a creature, ";
     }
 
 }

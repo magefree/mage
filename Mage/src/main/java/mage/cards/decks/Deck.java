@@ -4,13 +4,17 @@ import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.game.GameException;
+import mage.util.Copyable;
 import mage.util.DeckUtil;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
-public class Deck implements Serializable {
+public class Deck implements Serializable, Copyable<Deck> {
+
+    static final int MAX_CARDS_PER_DECK = 1000;
 
     private String name;
     private final Set<Card> cards = new LinkedHashSet<>();
@@ -19,6 +23,20 @@ public class Deck implements Serializable {
     private DeckCardLayout sideboardLayout;
     private long deckHashCode = 0;
     private long deckCompleteHashCode = 0;
+
+    public Deck() {
+        super();
+    }
+
+    public Deck(final Deck deck) {
+        this.name = deck.name;
+        this.cards.addAll(deck.cards.stream().map(Card::copy).collect(Collectors.toList()));
+        this.sideboard.addAll(deck.sideboard.stream().map(Card::copy).collect(Collectors.toList()));
+        this.cardsLayout = deck.cardsLayout == null ? null : deck.cardsLayout.copy();
+        this.sideboardLayout = deck.sideboardLayout == null ? null : deck.sideboardLayout.copy();
+        this.deckHashCode = deck.deckHashCode;
+        this.deckCompleteHashCode = deck.deckCompleteHashCode;
+    }
 
     public static Deck load(DeckCardLists deckCardLists) throws GameException {
         return Deck.load(deckCardLists, false);
@@ -51,6 +69,10 @@ public class Deck implements Serializable {
         return currentDeck;
     }
 
+    public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors, boolean mockCards) throws GameException {
+        return load(deckCardLists, ignoreErrors, mockCards, null);
+    }
+
     /**
      * Warning, AI can't play Mock cards, so call it with extra params in real games or tests
      *
@@ -60,17 +82,17 @@ public class Deck implements Serializable {
      * @return
      * @throws GameException
      */
-    public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors, boolean mockCards) throws GameException {
+    public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors, boolean mockCards, Map<String, CardInfo> cardInfoCache) throws GameException {
         Deck deck = new Deck();
         deck.setName(deckCardLists.getName());
-        deck.cardsLayout = deckCardLists.getCardLayout();
-        deck.sideboardLayout = deckCardLists.getSideboardLayout();
+        deck.cardsLayout = deckCardLists.getCardLayout() == null ? null : deckCardLists.getCardLayout().copy();
+        deck.sideboardLayout = deckCardLists.getSideboardLayout() == null ? null : deckCardLists.getSideboardLayout().copy();
         List<String> deckCardNames = new ArrayList<>();
         int totalCards = 0;
         for (DeckCardInfo deckCardInfo : deckCardLists.getCards()) {
-            Card card = createCard(deckCardInfo, mockCards);
+            Card card = createCard(deckCardInfo, mockCards, cardInfoCache);
             if (card != null) {
-                if (totalCards > 1000) {
+                if (totalCards > MAX_CARDS_PER_DECK) {
                     break;
                 }
                 deck.cards.add(card);
@@ -83,9 +105,9 @@ public class Deck implements Serializable {
         }
         List<String> sbCardNames = new ArrayList<>();
         for (DeckCardInfo deckCardInfo : deckCardLists.getSideboard()) {
-            Card card = createCard(deckCardInfo, mockCards);
+            Card card = createCard(deckCardInfo, mockCards, cardInfoCache);
             if (card != null) {
-                if (totalCards > 1000) {
+                if (totalCards > MAX_CARDS_PER_DECK) {
                     break;
                 }
                 deck.sideboard.add(card);
@@ -127,8 +149,21 @@ public class Deck implements Serializable {
 
     }
 
-    private static Card createCard(DeckCardInfo deckCardInfo, boolean mockCards) {
-        CardInfo cardInfo = CardRepository.instance.findCard(deckCardInfo.getSetCode(), deckCardInfo.getCardNum());
+    private static Card createCard(DeckCardInfo deckCardInfo, boolean mockCards, Map<String, CardInfo> cardInfoCache) {
+        CardInfo cardInfo;
+        if (cardInfoCache != null) {
+            // from cache
+            String key = String.format("%s_%s", deckCardInfo.getSetCode(), deckCardInfo.getCardNum());
+            cardInfo = cardInfoCache.getOrDefault(key, null);
+            if (cardInfo == null) {
+                cardInfo = CardRepository.instance.findCard(deckCardInfo.getSetCode(), deckCardInfo.getCardNum());
+                cardInfoCache.put(key, cardInfo);
+            }
+        } else {
+            // from db
+            cardInfo = CardRepository.instance.findCard(deckCardInfo.getSetCode(), deckCardInfo.getCardNum());
+        }
+
         if (cardInfo == null) {
             return null;
         }
@@ -226,4 +261,8 @@ public class Deck implements Serializable {
         this.sideboardLayout = null;
     }
 
+    @Override
+    public Deck copy() {
+        return new Deck(this);
+    }
 }

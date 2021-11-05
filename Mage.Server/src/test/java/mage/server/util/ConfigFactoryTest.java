@@ -24,7 +24,7 @@ public class ConfigFactoryTest {
     @DisplayName("should fail if config is malformed")
     void failOnMalformed() {
         assertThatExceptionOfType(ConfigurationException.class)
-                .isThrownBy(() -> ConfigFactory.loadFromFile(Paths.get("src", "test", "resources", "config_error.xml").toString()));
+                .isThrownBy(() -> ConfigFactory.loadFromFile(Paths.get("src", "test", "data", "config_error.xml").toString()));
     }
 
     @Test

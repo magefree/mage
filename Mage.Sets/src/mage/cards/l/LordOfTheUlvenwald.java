@@ -45,7 +45,6 @@ public final class LordOfTheUlvenwald extends CardImpl {
         this.color.setRed(true);
         this.color.setGreen(true);
         this.nightCard = true;
-        this.transformable = true;
 
         // Other Wolves and Werewolves you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
@@ -56,7 +55,7 @@ public final class LordOfTheUlvenwald extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new LordOfTheUlvenwaldEffect()));
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private LordOfTheUlvenwald(final LordOfTheUlvenwald card) {

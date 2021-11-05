@@ -61,7 +61,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
         if (fixedTarget) {
             Permanent equipment = game.getPermanent(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
-                this.setTargetPointer(new FixedTarget(equipment.getAttachedTo()));
+                this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game));
             }
         }
         super.init(source, game); // inits the target pointer so call it after setting the targetPointer

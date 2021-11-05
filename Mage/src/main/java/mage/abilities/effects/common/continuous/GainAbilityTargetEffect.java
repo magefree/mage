@@ -28,6 +28,10 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
     private UUID durationPlayerId;
     private boolean sameStep;
 
+    public GainAbilityTargetEffect(Ability ability) {
+        this(ability, Duration.EndOfTurn);
+    }
+
     public GainAbilityTargetEffect(Ability ability, Duration duration) {
         this(ability, duration, null);
     }

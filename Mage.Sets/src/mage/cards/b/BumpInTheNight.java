@@ -24,7 +24,7 @@ public final class BumpInTheNight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Flashback {5}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{R}")));
     }
 
     private BumpInTheNight(final BumpInTheNight card) {

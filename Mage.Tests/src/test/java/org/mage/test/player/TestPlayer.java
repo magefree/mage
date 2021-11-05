@@ -2400,7 +2400,7 @@ public class TestPlayer implements Player {
             }
 
             // card in hand (only own hand supports here)
-            // TODO: add not own hand too, example
+            // cards from non-own hand must be targeted through revealed cards
             if (target.getOriginalTarget() instanceof TargetCardInHand
                     || target.getOriginalTarget() instanceof TargetDiscard
                     || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.HAND)) {
@@ -2567,6 +2567,13 @@ public class TestPlayer implements Player {
                         return true;
                     }
                 }
+            }
+
+            // library
+            if (target.getOriginalTarget() instanceof TargetCardInLibrary
+                    || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.LIBRARY)) {
+                // user don't have access to library, so it must be targeted through list/revealed cards
+                Assert.fail("Library zone is private, you must target through cards list, e.g. revealed: " + target.getOriginalTarget().getClass().getCanonicalName());
             }
 
             // uninplemented TargetCard's zone
@@ -3085,8 +3092,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, ApprovingObject approvingObject) {
-        return computerPlayer.playCard(card, game, noMana, ignoreTiming, approvingObject);
+    public boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject) {
+        return computerPlayer.playCard(card, game, noMana, approvingObject);
     }
 
     @Override
@@ -3299,6 +3306,11 @@ public class TestPlayer implements Player {
     @Override
     public void exchangeLife(Player player, Ability source, Game game) {
         computerPlayer.exchangeLife(player, source, game);
+    }
+
+    @Override
+    public int damage(int damage, Ability source, Game game) {
+        return computerPlayer.damage(damage, source, game);
     }
 
     @Override
@@ -3705,6 +3717,16 @@ public class TestPlayer implements Player {
     @Override
     public boolean canPlayCardsFromGraveyard() {
         return computerPlayer.canPlayCardsFromGraveyard();
+    }
+
+    @Override
+    public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
+        computerPlayer.setDrawsOnOpponentsTurn(drawsOnOpponentsTurn);
+    }
+
+    @Override
+    public boolean isDrawsOnOpponentsTurn() {
+        return computerPlayer.isDrawsOnOpponentsTurn();
     }
 
     @Override
@@ -4344,7 +4366,7 @@ public class TestPlayer implements Player {
         assertAliasSupportInChoices(false);
 
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
-        Map<UUID, ActivatedAbility> useable = PlayerImpl.getSpellAbilities(this.getId(), object, game.getState().getZone(object.getId()), game);
+        Map<UUID, ActivatedAbility> useable = PlayerImpl.getCastableSpellAbilities(game, this.getId(), object, game.getState().getZone(object.getId()), noMana);
         String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
         if (useable.size() == 1) {
             return (SpellAbility) useable.values().iterator().next();

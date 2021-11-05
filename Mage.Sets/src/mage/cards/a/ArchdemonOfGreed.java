@@ -39,7 +39,6 @@ public final class ArchdemonOfGreed extends CardImpl {
         this.color.setBlack(true);
 
         this.nightCard = true;
-        this.transformable = true;
 
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);

@@ -11,18 +11,20 @@ Bushido|number|
 Buyback|manaString|
 Cascade|new|
 Changeling|new|
+Cleave|card, manaString|
 Convoke|new|
 Crew|number|
 Cumulative upkeep|cost|
 Cycling|cost|
 Dash|card, manaString|
-Daybound|instance|
+Daybound|new|
 Deathtouch|instance|
 Demonstrate|new|
 Delve|new|
 Dethrone|new|
 Devoid|color|
 Defender|instance|
+Disturb|cost|
 Dredge|number|
 Double Strike|instance|
 Dredge|number|
@@ -42,11 +44,12 @@ Fear|instance|
 First strike|instance|
 Flanking|new|
 Flash|instance|
-Flashback|cost|
+Flashback|card, cost|
 Flying|instance|
 Forestcycling|cost|
 Forestwalk|new|
 Foretell|card, manaString|
+Friends forever|instance|
 Haste|instance|
 Hexproof|instance|
 Improvise|new|
@@ -72,7 +75,7 @@ Mountainwalk|new|
 Morph|card, cost|
 Mutate|card, manaString|
 Myriad|new|
-Nightbound|instance|
+Nightbound|new|
 Ninjutsu|cost|
 Outlast|cost|
 Partner|instance|
@@ -101,6 +104,7 @@ Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Totem armor|new|
+Training|new|
 Trample|instance|
 Tribute|number|
 Unblockable|new|

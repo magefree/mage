@@ -6,7 +6,6 @@ import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CommanderInPlayCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -75,8 +74,6 @@ class LoyalApprenticeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CreateTokenEffect effect = new CreateTokenEffect(new ThopterColorlessToken());
-        effect.apply(game, source);
         Token token = new ThopterColorlessToken();
         token.putOntoBattlefield(1, game, source, source.getControllerId());
         game.addEffect(new GainAbilityTargetEffect(

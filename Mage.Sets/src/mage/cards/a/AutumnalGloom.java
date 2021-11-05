@@ -25,7 +25,6 @@ public final class AutumnalGloom extends CardImpl {
 
     public AutumnalGloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.transformable = true;
         this.secondSideCardClazz = AncientOfTheEquinox.class;
 
         // {B}: Put the top card of your library into your graveyard.
@@ -33,7 +32,7 @@ public final class AutumnalGloom extends CardImpl {
 
         // <i>Delirium</i> &mdash; At the beginning of your end step, if there are four or more card types among cards in your graveyard, transform Autumnal Gloom.
         this.addAbility(new TransformAbility());
-        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), TargetController.YOU, DeliriumCondition.instance, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), TargetController.YOU, DeliriumCondition.instance, false);
         ability.setAbilityWord(AbilityWord.DELIRIUM);
         ability.addHint(CardTypesInGraveyardHint.YOU);
         this.addAbility(ability);

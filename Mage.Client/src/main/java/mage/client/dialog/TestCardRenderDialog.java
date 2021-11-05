@@ -309,6 +309,7 @@ public class TestCardRenderDialog extends MageDialog {
         //* //test card icons
         cardViews.add(createHandCard(game, playerYou.getId(), "POR", "169")); // Grizzly Bears
         cardViews.add(createHandCard(game, playerYou.getId(), "DKA", "140")); // Huntmaster of the Fells, transforms
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 3, 3, 1, false, additionalIcons)); // Huntmaster of the Fells, transforms
         cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "401", 1, 1, 0, false, additionalIcons)); // Hinterland Drake
         cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "1441", 1, 1, 0, true, additionalIcons)); // Kathari Remnant
         cardViews.add(createPermanentCard(game, playerYou.getId(), "KHM", "50", 1, 1, 0, true, additionalIcons)); // Cosima, God of the Voyage

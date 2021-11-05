@@ -27,7 +27,7 @@ import mage.target.targetadjustment.TargetAdjuster;
  */
 public final class LeagueGuildmage extends CardImpl {
 
-    private static final FilterSpell filter = new FilterInstantOrSorcerySpell("instant or sorcery you control with mana value X");
+    private static final FilterSpell filter = new FilterInstantOrSorcerySpell("instant or sorcery spell you control with mana value X");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());

@@ -18,6 +18,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterUntappedCreature;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 
@@ -28,8 +29,8 @@ import java.util.UUID;
  */
 public final class SarythTheVipersFang extends CardImpl {
 
-    private static final FilterPermanent filterTapped = new FilterControlledCreaturePermanent("tapped creatures you control");
-    private static final FilterPermanent filterAbility = new FilterControlledPermanent("creature or land you control");
+    private static final FilterPermanent filterTapped = new FilterControlledCreaturePermanent("tapped creatures");
+    private static final FilterPermanent filterAbility = new FilterControlledPermanent("another target creature or land you control");
 
     static {
         filterTapped.add(TappedPredicate.TAPPED);
@@ -37,6 +38,7 @@ public final class SarythTheVipersFang extends CardImpl {
                 CardType.CREATURE.getPredicate(),
                 CardType.LAND.getPredicate()
         ));
+        filterAbility.add(AnotherPredicate.instance);
     }
 
     public SarythTheVipersFang(UUID ownerId, CardSetInfo setInfo) {

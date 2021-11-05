@@ -71,12 +71,10 @@ public class PermanentView extends CardView {
         if (original != null && !original.getName().equals(this.getName())) {
             if (permanent.isCopy() && permanent.isFlipCard()) {
                 this.alternateName = permanent.getFlipCardName();
-                this.originalName = this.getName();
             } else {
                 if (controlled // controller may always know
                         || (!morphed && !manifested)) { // others don't know for morph or transformed cards
                     this.alternateName = original.getName();
-                    this.originalName = this.getName();
                 }
             }
         }

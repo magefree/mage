@@ -186,7 +186,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
             sb.append(CardUtil.addArticle(filter.getMessage()));
         }
         if (revealAllCards) {
-            sb.append(" from it.");
+            sb.append(filter.getMessage().contains("from it") ? "." : " from it.");
         } else {
             sb.append(" of them.");
         }

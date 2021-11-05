@@ -35,7 +35,6 @@ public final class GraveyardTrespasser extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.g.GraveyardGlutton.class;
 
         // Ward—Discard a card.
@@ -48,7 +47,7 @@ public final class GraveyardTrespasser extends CardImpl {
 
         // Daybound
         this.addAbility(new TransformAbility());
-        this.addAbility(DayboundAbility.getInstance());
+        this.addAbility(new DayboundAbility());
     }
 
     private GraveyardTrespasser(final GraveyardTrespasser card) {

@@ -3,21 +3,15 @@ package mage.cards.d;
 import java.util.UUID;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
-import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 
@@ -34,7 +28,6 @@ public final class DuskwatchRecruiter extends CardImpl {
         this.subtype.add(SubType.WARRIOR);
         this.subtype.add(SubType.WEREWOLF);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.k.KrallenhordeHowler.class;
 
         this.power = new MageInt(2);

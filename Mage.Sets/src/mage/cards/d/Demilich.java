@@ -76,7 +76,7 @@ enum DemilichValue implements DynamicValue {
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher != null) {
             for (Spell spell : watcher.getSpellsCastThisTurn(sourceAbility.getControllerId())) {
-                if (spell.isInstantOrSorcery()) {
+                if (spell.isInstantOrSorcery(game)) {
                     spells++;
                 }
             }

@@ -34,7 +34,9 @@ public final class Willbreaker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a creature an opponent controls becomes the target of a spell or ability you control, gain control of that creature for as long as you control Willbreaker.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainControlTargetEffect(Duration.Custom), new SourceOnBattlefieldControlUnchangedCondition(), null);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
+                new GainControlTargetEffect(Duration.EndOfGame),
+                new SourceOnBattlefieldControlUnchangedCondition(), null);
         effect.setText("gain control of that creature for as long as you control {this}");
         this.addAbility(new WillbreakerTriggeredAbility(effect), new LostControlWatcher());
     }
@@ -68,10 +70,13 @@ class WillbreakerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (isControlledBy(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.isCreature(game)) {
+            if (permanent != null
+                    && permanent.isCreature(game)) {
                 Player controller = game.getPlayer(getControllerId());
-                if (controller != null && controller.hasOpponent(permanent.getControllerId(), game)) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+                if (controller != null
+                        && controller.hasOpponent(permanent.getControllerId(), game)) {
+                    // always call this method for FixedTargets in case it is blinked
+                    getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
                     return true;
                 }
             }
@@ -81,7 +86,7 @@ class WillbreakerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "Whenever a creature an opponent controls becomes the target of a spell or ability you control, " ;
+        return "Whenever a creature an opponent controls becomes the target of a spell or ability you control, ";
     }
 
     @Override

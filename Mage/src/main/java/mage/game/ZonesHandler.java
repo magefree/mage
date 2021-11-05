@@ -382,8 +382,8 @@ public final class ZonesHandler {
             } else if (event.getTarget() != null) {
                 card.setFaceDown(info.faceDown, game);
                 Permanent target = event.getTarget();
-                success = game.getPlayer(target.getControllerId()).removeFromBattlefield(target, source, game)
-                        && target.removeFromZone(game, fromZone, source);
+                success = target.removeFromZone(game, fromZone, source)
+                        && game.getPlayer(target.getControllerId()).removeFromBattlefield(target, source, game);
             } else {
                 card.setFaceDown(info.faceDown, game);
                 success = card.removeFromZone(game, fromZone, source);

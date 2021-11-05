@@ -22,19 +22,26 @@ import java.util.UUID;
 public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect {
 
     private final boolean tapped;
+    private final boolean attacking;
 
     public ReturnFromGraveyardToBattlefieldTargetEffect() {
         this(false);
     }
 
     public ReturnFromGraveyardToBattlefieldTargetEffect(boolean tapped) {
+        this(tapped, false);
+    }
+
+    public ReturnFromGraveyardToBattlefieldTargetEffect(boolean tapped, boolean attacking) {
         super(Outcome.PutCreatureInPlay);
         this.tapped = tapped;
+        this.attacking = attacking;
     }
 
     protected ReturnFromGraveyardToBattlefieldTargetEffect(final ReturnFromGraveyardToBattlefieldTargetEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
+        this.attacking = effect.attacking;
     }
 
     @Override
@@ -54,6 +61,11 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
                 }
             }
             controller.moveCards(cardsToMove, Zone.BATTLEFIELD, source, game, tapped, false, false, null);
+            if (attacking) {
+                for (Card card : cardsToMove) {
+                    game.getCombat().addAttackingCreature(card.getId(), game);
+                }
+            }
             return true;
         }
         return false;
@@ -82,8 +94,12 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
         }
         sb.append(yourGrave ? " to" : " onto");
         sb.append(" the battlefield");
-        if (tapped) {
+        if (tapped && attacking) {
+            sb.append(" tapped and attacking");
+        } else if (tapped) {
             sb.append(" tapped");
+        } else if (attacking) {
+            sb.append(" attacking");
         }
         if (!yourGrave) {
             sb.append(" under your control");

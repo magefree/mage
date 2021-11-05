@@ -72,7 +72,7 @@ class WithdrawEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Effect effect = new ReturnToHandTargetEffect();
-        effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+        effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
         effect.apply(game, source);
         Permanent secondCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (secondCreature != null) {

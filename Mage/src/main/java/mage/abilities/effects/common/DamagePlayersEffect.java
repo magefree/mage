@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -9,15 +10,17 @@ import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Collection;
 import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class DamagePlayersEffect extends OneShotEffect {
-    private DynamicValue amount;
-    private TargetController controller;
-    private String sourceName = "{this}";
+
+    private final DynamicValue amount;
+    private final TargetController controller;
+    private final String sourceName;
 
     public DamagePlayersEffect(int amount) {
         this(Outcome.Damage, StaticValue.get(amount));
@@ -28,10 +31,7 @@ public class DamagePlayersEffect extends OneShotEffect {
     }
 
     public DamagePlayersEffect(int amount, TargetController controller, String whoDealDamageName) {
-        this(Outcome.Damage, StaticValue.get(amount), controller);
-
-        this.sourceName = whoDealDamageName;
-        setText(); // TODO: replace to @Override public String getText()
+        this(Outcome.Damage, StaticValue.get(amount), controller, whoDealDamageName);
     }
 
     public DamagePlayersEffect(Outcome outcome, DynamicValue amount) {
@@ -39,10 +39,14 @@ public class DamagePlayersEffect extends OneShotEffect {
     }
 
     public DamagePlayersEffect(Outcome outcome, DynamicValue amount, TargetController controller) {
+        this(outcome, amount, controller, "{this}");
+    }
+
+    public DamagePlayersEffect(Outcome outcome, DynamicValue amount, TargetController controller, String whoDealDamageName) {
         super(outcome);
         this.amount = amount;
         this.controller = controller;
-        setText();
+        this.sourceName = whoDealDamageName;
     }
 
 
@@ -55,25 +59,24 @@ public class DamagePlayersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Collection<UUID> players;
         switch (controller) {
             case ANY:
-                for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        player.damage(amount.calculate(game, source, this), source.getSourceId(), source, game);
-                    }
-                }
+            case EACH_PLAYER:
+                players = game.getState().getPlayersInRange(source.getControllerId(), game);
                 break;
             case OPPONENT:
-                for (UUID playerId : game.getOpponents(source.getControllerId())) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        player.damage(amount.calculate(game, source, this), source.getSourceId(), source, game);
-                    }
-                }
+                players = game.getOpponents(source.getControllerId());
                 break;
             default:
                 throw new UnsupportedOperationException("TargetController type not supported.");
+        }
+        int damage = amount.calculate(game, source, this);
+        for (UUID playerId : players) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                player.damage(damage, source.getSourceId(), source, game);
+            }
         }
         return true;
     }
@@ -83,19 +86,20 @@ public class DamagePlayersEffect extends OneShotEffect {
         return new DamagePlayersEffect(this);
     }
 
-    private void setText() {
-        StringBuilder sb = new StringBuilder().append(this.sourceName).append(" deals ").append(amount.toString());
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        String message = sourceName + " deals " + amount.toString() + " damage to each ";
         switch (controller) {
             case ANY:
-                sb.append(" damage to each player");
-                break;
+            case EACH_PLAYER:
+                return message + "player";
             case OPPONENT:
-                sb.append(" damage to each opponent");
-                break;
+                return message + "opponent";
             default:
                 throw new UnsupportedOperationException("TargetController type not supported.");
         }
-        staticText = sb.toString();
     }
-
 }

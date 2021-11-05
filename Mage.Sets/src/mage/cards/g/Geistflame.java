@@ -25,7 +25,7 @@ public final class Geistflame extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Flashback {3}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{R}")));
     }
 
     private Geistflame(final Geistflame card) {

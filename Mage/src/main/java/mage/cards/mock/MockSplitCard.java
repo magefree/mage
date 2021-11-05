@@ -37,7 +37,6 @@ public class MockSplitCard extends SplitCard {
         this.color = card.getColor();
         this.flipCard = card.isFlipCard();
 
-        this.transformable = card.isDoubleFaced();
         this.nightCard = card.isNightCard();
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
             this.secondSideCard = new MockCard(CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode(), false));

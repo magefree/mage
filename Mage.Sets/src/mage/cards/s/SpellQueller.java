@@ -141,7 +141,9 @@ class SpellQuellerLeavesEffect extends OneShotEffect {
                         Player cardOwner = game.getPlayer(card.getOwnerId());
                         if (cardOwner != null) {
                             if (cardOwner.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
-                                cardOwner.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
+                                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                                cardOwner.cast(cardOwner.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
+                                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                             }
                         }
                     }

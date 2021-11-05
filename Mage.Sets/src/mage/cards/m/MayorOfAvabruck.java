@@ -31,7 +31,6 @@ public final class MayorOfAvabruck extends CardImpl {
         this.subtype.add(SubType.ADVISOR);
         this.subtype.add(SubType.WEREWOLF);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.h.HowlpackAlpha.class;
 
         this.power = new MageInt(1);

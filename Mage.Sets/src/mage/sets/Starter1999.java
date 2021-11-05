@@ -85,7 +85,7 @@ public final class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Commando", 100, Rarity.UNCOMMON, mage.cards.g.GoblinCommando.class));
         cards.add(new SetCardInfo("Goblin General", 101, Rarity.UNCOMMON, mage.cards.g.GoblinGeneral.class));
         cards.add(new SetCardInfo("Goblin Glider", 102, Rarity.UNCOMMON, mage.cards.g.GoblinGlider.class));
-        cards.add(new SetCardInfo("Goblin Hero", 103, Rarity.COMMON, mage.cards.g.GoblinHero.class));
+        cards.add(new SetCardInfo("Goblin Hero", 103, Rarity.RARE, mage.cards.g.GoblinHero.class));
         cards.add(new SetCardInfo("Goblin Lore", 104, Rarity.UNCOMMON, mage.cards.g.GoblinLore.class));
         cards.add(new SetCardInfo("Goblin Mountaineer", 105, Rarity.COMMON, mage.cards.g.GoblinMountaineer.class));
         cards.add(new SetCardInfo("Goblin Settler", 106, Rarity.UNCOMMON, mage.cards.g.GoblinSettler.class));
@@ -127,6 +127,7 @@ public final class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Norwood Archers", 137, Rarity.COMMON, mage.cards.n.NorwoodArchers.class));
         cards.add(new SetCardInfo("Norwood Ranger", 138, Rarity.COMMON, mage.cards.n.NorwoodRanger.class));
         cards.add(new SetCardInfo("Ogre Warrior", 113, Rarity.COMMON, mage.cards.o.OgreWarrior.class));
+        cards.add(new SetCardInfo("Owl Familiar", 43, Rarity.UNCOMMON, mage.cards.o.OwlFamiliar.class));
         cards.add(new SetCardInfo("Path of Peace", 21, Rarity.COMMON, mage.cards.p.PathOfPeace.class));
         cards.add(new SetCardInfo("Phantom Warrior", 44, Rarity.RARE, mage.cards.p.PhantomWarrior.class));
         cards.add(new SetCardInfo("Plains", 154, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));

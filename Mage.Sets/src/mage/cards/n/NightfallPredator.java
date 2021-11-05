@@ -30,7 +30,6 @@ public final class NightfallPredator extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.transformable = true;
 
         // {R}, {tap}: Nightfall Predator fights target creature.
         Ability activatedAbility = new SimpleActivatedAbility(

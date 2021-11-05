@@ -577,6 +577,16 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public void setSourcePermanentTransformCount(Game game) {
+        ability.setSourcePermanentTransformCount(game);
+    }
+
+    @Override
+    public boolean checkTransformCount(Permanent permanent, Game game) {
+        return ability.checkTransformCount(permanent, game);
+    }
+
+    @Override
     public int getZoneChangeCounter(Game game) {
         return game.getState().getZoneChangeCounter(getSourceId());
     }
@@ -664,8 +674,9 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void setCostAdjuster(CostAdjuster costAdjuster) {
+    public StackAbility setCostAdjuster(CostAdjuster costAdjuster) {
         this.costAdjuster = costAdjuster;
+        return this;
     }
 
     @Override

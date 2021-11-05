@@ -11,6 +11,9 @@ import mage.game.MageObjectAttribute;
 
 import java.util.UUID;
 
+/**
+ * @author weirddan455
+ */
 public class DisturbAbility extends SpellAbility {
 
     public DisturbAbility(Cost cost, TimingRule timingRule) {

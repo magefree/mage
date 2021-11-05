@@ -15,7 +15,7 @@ import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author Jeff
+ * @author jeffwadsworth
  */
 public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -57,7 +57,7 @@ public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
             if (setTargetPointer) {
-                this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+                this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             }
             return true;
         }

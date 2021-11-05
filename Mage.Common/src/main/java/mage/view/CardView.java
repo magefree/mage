@@ -93,7 +93,6 @@ public class CardView extends SimpleCardView {
     protected boolean faceDown;
 
     protected String alternateName;
-    protected String originalName;
 
     protected boolean isSplitCard;
     protected String leftSplitName;
@@ -197,7 +196,6 @@ public class CardView extends SimpleCardView {
         this.flipCard = cardView.flipCard;
         this.faceDown = cardView.faceDown;
         this.alternateName = cardView.alternateName;
-        this.originalName = cardView.originalName;
 
         this.isSplitCard = cardView.isSplitCard;
         this.leftSplitName = cardView.leftSplitName;
@@ -508,13 +506,11 @@ public class CardView extends SimpleCardView {
         if (secondSideCard != null) {
             this.secondCardFace = new CardView(secondSideCard, game);
             this.alternateName = secondCardFace.getName();
-            this.originalName = card.getName();
         }
 
         this.flipCard = card.isFlipCard();
         if (card.isFlipCard() && card.getFlipCardName() != null) {
             this.alternateName = card.getFlipCardName();
-            this.originalName = card.getName();
         }
 
         if (card instanceof ModalDoubleFacesCard) {
@@ -522,7 +518,6 @@ public class CardView extends SimpleCardView {
             ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card;
             this.secondCardFace = new CardView(mdfCard.getRightHalfCard(), game);
             this.alternateName = mdfCard.getRightHalfCard().getName();
-            this.originalName = card.getName();
         }
 
         if (card instanceof Spell) {
@@ -1006,22 +1001,8 @@ public class CardView extends SimpleCardView {
         return alternateName;
     }
 
-    /**
-     * Stores the name of the original name, to provide it for a flipped or
-     * transformed or copying card
-     *
-     * @return
-     */
-    public String getOriginalName() {
-        return originalName;
-    }
-
     public void setAlternateName(String alternateName) {
         this.alternateName = alternateName;
-    }
-
-    public void setOriginalName(String originalName) {
-        this.originalName = originalName;
     }
 
     public String getLeftSplitName() {

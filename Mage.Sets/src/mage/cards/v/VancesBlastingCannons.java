@@ -37,7 +37,6 @@ public final class VancesBlastingCannons extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         this.addSuperType(SuperType.LEGENDARY);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.SpitfireBastion.class;
 
         // At the beginning of your upkeep, exile the top card of your library.  If it's a nonland card, you may cast that card this turn.
@@ -132,7 +131,7 @@ class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
 class VancesBlastingCannonsFlipTrigger extends TriggeredAbilityImpl {
 
     public VancesBlastingCannonsFlipTrigger() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true), true);
+        super(Zone.BATTLEFIELD, new TransformSourceEffect(), true);
     }
 
     public VancesBlastingCannonsFlipTrigger(final VancesBlastingCannonsFlipTrigger ability) {

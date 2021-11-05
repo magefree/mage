@@ -11,12 +11,15 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.asthought.CanPlayCardControllerEffect;
 import mage.abilities.effects.common.asthought.YouMaySpendManaAsAnyColorToCastTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.cards.*;
 import mage.constants.*;
+import mage.counters.Counter;
 import mage.filter.Filter;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
@@ -41,6 +44,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author nantuko
@@ -1364,5 +1368,44 @@ public final class CardUtil {
             }
         }
         return sb.toString();
+    }
+
+    public static <T> Stream<T> castStream(Stream<?> stream, Class<T> clazz) {
+        return stream.filter(clazz::isInstance).map(clazz::cast);
+    }
+
+    /**
+     * Move card or permanent to dest zone and add counter to it
+     *
+     * @param game
+     * @param source
+     * @param controller
+     * @param card       can be card or permanent
+     * @param toZone
+     * @param counter
+     */
+    public static boolean moveCardWithCounter(Game game, Ability source, Player controller, Card card, Zone toZone, Counter counter) {
+        if (toZone == Zone.BATTLEFIELD) {
+            throw new IllegalArgumentException("Wrong code usage - method doesn't support moving to battlefield zone");
+        }
+
+        // workaround:
+        // in ZONE_CHANGE replace events you must set new zone by event's setToZone,
+        // BUT for counter effect you need to complete zone change event first (so moveCards calls here)
+        // TODO: must be fixed someday by:
+        //  * or by new event ZONE_CHANGED to apply counter effect on it
+        //  * or by counter effects applier in ZONE_CHANGE event (see copy or token as example)
+
+        // move to zone
+        if (!controller.moveCards(card, toZone, source, game)) {
+            return false;
+        }
+
+        // add counter
+        // after move it's a new object (not a permanent), so must work with main card
+        Effect effect = new AddCountersTargetEffect(counter);
+        effect.setTargetPointer(new FixedTarget(card.getMainCard(), game));
+        effect.apply(game, source);
+        return true;
     }
 }

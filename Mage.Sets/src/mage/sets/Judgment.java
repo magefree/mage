@@ -28,6 +28,7 @@ public final class Judgment extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        this.hasUnbalancedColors = true;
         cards.add(new SetCardInfo("Ancestor's Chosen", 1, Rarity.UNCOMMON, mage.cards.a.AncestorsChosen.class));
         cards.add(new SetCardInfo("Anger", 77, Rarity.UNCOMMON, mage.cards.a.Anger.class));
         cards.add(new SetCardInfo("Anurid Barkripper", 104, Rarity.COMMON, mage.cards.a.AnuridBarkripper.class));

@@ -908,11 +908,6 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public void setTransformable(boolean value) {
-        throw new UnsupportedOperationException("Unsupported operation");
-    }
-
-    @Override
     public int getZoneChangeCounter(Game game) {
         // spell's zcc can't be changed after put to stack
         return zoneChangeCounter;
@@ -990,6 +985,11 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public boolean addCounters(Counter counter, Ability source, Game game) {
+        return card.addCounters(counter, source, game);
+    }
+
+    @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
         return card.addCounters(counter, playerAddingCounters, source, game);
     }
@@ -1007,6 +1007,11 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
         return card.addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect);
+    }
+
+    @Override
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters) {
+        return card.addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect, maxCounters);
     }
 
     @Override

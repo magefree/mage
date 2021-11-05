@@ -103,6 +103,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected List<MarkedDamageInfo> markedDamage;
     protected int markedLifelink;
     protected int timesLoyaltyUsed = 0;
+    protected int transformCount = 0;
     protected Map<String, String> info;
     protected int createOrder;
 
@@ -168,6 +169,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.pairedPermanent = permanent.pairedPermanent;
         this.bandedCards.addAll(permanent.bandedCards);
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
+        this.transformCount = permanent.transformCount;
 
         this.morphed = permanent.morphed;
         this.manifested = permanent.manifested;
@@ -386,6 +388,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 game.getState().addAbility(copyAbility, sourceId, this);
             }
             abilities.add(copyAbility);
+            abilities.addAll(ability.getSubAbilities());
         }
     }
 
@@ -561,16 +564,46 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean transform(Game game) {
-        if (transformable) {
-            if (!replaceEvent(EventType.TRANSFORM, game)) {
-                setTransformed(!transformed);
-                game.applyEffects();
-                game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.TRANSFORMED, getId(), getControllerId()));
-                return true;
-            }
+    public boolean transform(Ability source, Game game) {
+        return this.transform(source, game, false);
+    }
+
+    private boolean checkDayNightBound() {
+        return this.getAbilities().containsClass(DayboundAbility.class)
+                || this.getAbilities().containsClass(NightboundAbility.class);
+    }
+
+    private Card getOtherFace() {
+        return transformed ? this.getMainCard() : this.getMainCard().getSecondCardFace();
+    }
+
+    @Override
+    public boolean transform(Ability source, Game game, boolean ignoreDayNight) {
+        if (!this.isTransformable()
+                || (!ignoreDayNight && this.checkDayNightBound())
+                || this.getOtherFace().isInstantOrSorcery()
+                || (source != null && !source.checkTransformCount(this, game))
+                || this.replaceEvent(EventType.TRANSFORM, game)) {
+            return false;
         }
-        return false;
+        if (this.transformed) {
+            Card orgCard = this.getMainCard();
+            this.getPower().modifyBaseValue(orgCard.getPower().getValue());
+            this.getToughness().modifyBaseValue(orgCard.getToughness().getValue());
+        }
+        game.informPlayers(this.getLogName() + " transforms into " + this.getOtherFace().getLogName()
+                + CardUtil.getSourceLogName(game, source, this.getId()));
+        this.setTransformed(!this.transformed);
+        this.transformCount++;
+        game.applyEffects();
+        this.replaceEvent(EventType.TRANSFORMING, game);
+        game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, this.getId(), this.getControllerId()));
+        return true;
+    }
+
+    @Override
+    public int getTransformCount() {
+        return transformCount;
     }
 
     @Override
@@ -838,6 +871,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public int getDamage() {
         return this.damage;
+    }
+
+    @Override
+    public int damage(int damage, Ability source, Game game) {
+        return damage(damage, source.getSourceId(), source, game);
     }
 
     @Override
@@ -1112,8 +1150,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     return false;
                 }
             }
+
             if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                    && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null
+                    && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
                     && abilities.stream()
                     .filter(HexproofBaseAbility.class::isInstance)
                     .map(HexproofBaseAbility.class::cast)
@@ -1124,9 +1163,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (hasProtectionFrom(source, game)) {
                 return false;
             }
-            // needed to get the correct possible targets if target rule modification effects are active
-            // e.g. Fiendslayer Paladin tried to target with Ultimate Price
-            return !game.getContinuousEffects().preventedByRuleModification(new TargetEvent(this, source.getId(), sourceControllerId), null, game, true);
+
+            // example: Fiendslayer Paladin tried to target with Ultimate Price
+            return !game.getContinuousEffects().preventedByRuleModification(
+                    new TargetEvent(this, source.getId(), sourceControllerId),
+                    null,
+                    game,
+                    true
+            );
         }
 
         return true;
@@ -1163,6 +1207,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         // instead it adds damage prevention
         //return (!hasProtectionFrom(source, game));
         return true;
+    }
+
+    @Override
+    public boolean destroy(Ability source, Game game) {
+        return destroy(source, game, false);
     }
 
     @Override
@@ -1387,21 +1436,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
         }
         return true;
-    }
-
-    @Override
-    public boolean canTransform(Ability source, Game game) {
-        if (transformable) {
-            for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
-                RestrictionEffect effect = entry.getKey();
-                for (Ability ability : entry.getValue()) {
-                    if (!effect.canTransform(this, ability, game, true)) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return transformable;
     }
 
     @Override
@@ -1733,5 +1767,4 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         detachAllAttachments(game);
         return successfullyMoved;
     }
-
 }

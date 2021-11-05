@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepAttachedTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -38,7 +39,9 @@ public final class TormentOfScarabs extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of enchanted player's upkeep, that player loses 3 life unless they sacrifice a nonland permanent or discards a card.
-        this.addAbility(new BeginningOfUpkeepAttachedTriggeredAbility(new TormentOfScarabsEffect()));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new TormentOfScarabsEffect(), TargetController.ENCHANTED, false
+        ));
     }
 
     private TormentOfScarabs(final TormentOfScarabs card) {

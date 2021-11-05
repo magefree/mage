@@ -84,7 +84,7 @@ class CrystallizationTriggeredAbility extends TriggeredAbilityImpl {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             UUID enchanted = enchantment.getAttachedTo();
             if (event.getTargetId().equals(enchanted)) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(enchanted));
+                getEffects().get(0).setTargetPointer(new FixedTarget(enchanted, game));
                 return true;
             }
         }

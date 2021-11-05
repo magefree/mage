@@ -1,19 +1,17 @@
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.combat.ChooseBlockersEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.watchers.common.ChooseBlockersRedundancyWatcher;
+import mage.watchers.common.ControlCombatRedundancyWatcher;
+
+import java.util.UUID;
 
 /**
  * @author noxx
@@ -49,9 +47,8 @@ public final class OdricMasterTactician extends CardImpl {
 class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
 
     public OdricMasterTacticianTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new OdricMasterTacticianChooseBlockersEffect());
-        this.addWatcher(new ChooseBlockersRedundancyWatcher());
-        this.addEffect(new ChooseBlockersRedundancyWatcherIncrementEffect());
+        super(Zone.BATTLEFIELD, new ChooseBlockersEffect(Duration.EndOfCombat));
+        this.addWatcher(new ControlCombatRedundancyWatcher());
     }
 
     public OdricMasterTacticianTriggeredAbility(final OdricMasterTacticianTriggeredAbility ability) {
@@ -71,81 +68,5 @@ class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getCombat().getAttackers().size() >= 4 && game.getCombat().getAttackers().contains(this.sourceId);
-    }
-
-    private class ChooseBlockersRedundancyWatcherIncrementEffect extends OneShotEffect {
-
-        ChooseBlockersRedundancyWatcherIncrementEffect() {
-            super(Outcome.Neutral);
-        }
-
-        ChooseBlockersRedundancyWatcherIncrementEffect(final ChooseBlockersRedundancyWatcherIncrementEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            ChooseBlockersRedundancyWatcher watcher = game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
-            if (watcher != null) {
-                watcher.increment();
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public ChooseBlockersRedundancyWatcherIncrementEffect copy() {
-            return new ChooseBlockersRedundancyWatcherIncrementEffect(this);
-        }
-    }
-}
-
-class OdricMasterTacticianChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public OdricMasterTacticianChooseBlockersEffect() {
-        super(Duration.EndOfCombat, Outcome.Benefit, false, false);
-        staticText = "Whenever {this} and at least three other creatures attack, you choose which creatures block this combat and how those creatures block";
-    }
-
-    public OdricMasterTacticianChooseBlockersEffect(final OdricMasterTacticianChooseBlockersEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public OdricMasterTacticianChooseBlockersEffect copy() {
-        return new OdricMasterTacticianChooseBlockersEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARING_BLOCKERS;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ChooseBlockersRedundancyWatcher watcher = game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
-        if (watcher == null) {
-            return false;
-        }
-        watcher.decrement();
-        watcher.copyCount--;
-        if (watcher.copyCountApply > 0) {
-            game.informPlayers(source.getSourceObject(game).getIdName() + " didn't apply");
-            this.discard();
-            return false;
-        }
-        watcher.copyCountApply = watcher.copyCount;
-        Player blockController = game.getPlayer(source.getControllerId());
-        if (blockController != null) {
-            game.getCombat().selectBlockers(blockController, source, game);
-            return true;
-        }
-        this.discard();
-        return false;
     }
 }

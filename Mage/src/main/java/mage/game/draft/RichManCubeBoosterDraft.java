@@ -36,7 +36,6 @@ public class RichManCubeBoosterDraft extends DraftImpl {
             }
             boosterNum++;
         }
-        resetBufferedCards();
         this.fireEndDraftEvent();
     }
 

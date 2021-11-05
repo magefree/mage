@@ -60,7 +60,7 @@ public final class Mistfolk extends CardImpl {
     }
 }
 
-enum MistfolkPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Spell>> {
+enum MistfolkPredicate implements ObjectSourcePlayerPredicate<Spell> {
     instance;
 
     @Override

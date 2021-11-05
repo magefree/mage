@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -29,10 +28,10 @@ import mage.target.targetpointer.FixedTarget;
 public final class InterventionPact extends CardImpl {
 
     public InterventionPact(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{0}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{0}");
 
         this.color.setWhite(true);
-        
+
         // The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.
         this.getSpellAbility().addEffect(new InterventionPactEffect());
         // At the beginning of your next upkeep, pay {1}{W}{W}. If you don't, you lose the game.
@@ -74,7 +73,7 @@ class InterventionPactEffect extends OneShotEffect {
             target.setNotTarget(true);
             if (controller.chooseTarget(outcome, target, source, game)) {
                 ContinuousEffect continuousEffect = new InterventionPactPreventDamageEffect();
-                continuousEffect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
+                continuousEffect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
                 game.addEffect(continuousEffect, source);
             }
             return true;
@@ -109,8 +108,8 @@ class InterventionPactPreventDamageEffect extends PreventionEffectImpl {
         PreventionEffectData preventEffectData = preventDamageAction(event, source, game);
         if (preventEffectData.getPreventedDamage() > 0) {
             used = true;
-            Player player = game .getPlayer(source.getControllerId());
-            if(player != null){
+            Player player = game.getPlayer(source.getControllerId());
+            if (player != null) {
                 player.gainLife(preventEffectData.getPreventedDamage(), game, source);
             }
         }

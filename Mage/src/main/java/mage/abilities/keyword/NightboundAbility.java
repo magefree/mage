@@ -1,34 +1,25 @@
 package mage.abilities.keyword;
 
-import mage.abilities.MageSingleton;
+import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
-import mage.constants.Zone;
-
-import java.io.ObjectStreamException;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.hint.common.DayNightHint;
+import mage.cards.Card;
+import mage.constants.*;
+import mage.game.Game;
 
 /**
  * @author TheElk801
- * TODO: Implement this
  */
-public class NightboundAbility extends StaticAbility implements MageSingleton {
+public class NightboundAbility extends StaticAbility {
 
-    private static final NightboundAbility instance;
-
-    static {
-        instance = new NightboundAbility();
-        // instance.addIcon(NightboundAbilityIcon.instance); (needs to be added)
+    public NightboundAbility() {
+        super(Zone.BATTLEFIELD, new NightboundEffect());
+        this.addHint(DayNightHint.instance);
     }
 
-    private Object readResolve() throws ObjectStreamException {
-        return instance;
-    }
-
-    public static NightboundAbility getInstance() {
-        return instance;
-    }
-
-    private NightboundAbility() {
-        super(Zone.ALL, null);
+    private NightboundAbility(final NightboundAbility ability) {
+        super(ability);
     }
 
     @Override
@@ -38,6 +29,36 @@ public class NightboundAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public NightboundAbility copy() {
-        return instance;
+        return new NightboundAbility(this);
+    }
+
+    public static boolean checkCard(Card card, Game game) {
+        return game.checkDayNight(false)
+                && card.getSecondCardFace() != null
+                && card.getSecondCardFace().getAbilities().containsClass(NightboundAbility.class);
+    }
+}
+
+class NightboundEffect extends ContinuousEffectImpl {
+
+    NightboundEffect() {
+        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
+    }
+
+    private NightboundEffect(final NightboundEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public NightboundEffect copy() {
+        return new NightboundEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (!game.hasDayNight()) {
+            game.setDaytime(false);
+        }
+        return true;
     }
 }

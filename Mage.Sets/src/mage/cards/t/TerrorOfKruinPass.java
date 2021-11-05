@@ -28,7 +28,6 @@ public final class TerrorOfKruinPass extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.transformable = true;
 
         this.color.setRed(true);
         this.power = new MageInt(3);

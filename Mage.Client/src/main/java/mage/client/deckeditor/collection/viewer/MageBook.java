@@ -40,8 +40,12 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.*;
+import java.util.Locale;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static java.lang.Math.min;
 import static org.mage.plugins.card.images.DownloadPicturesService.getTokenCardUrls;
@@ -515,39 +519,30 @@ public class MageBook extends JComponent {
         }
 
         // cards stats
-        int startNumber = 9999;
-        int endNumber = 0;
+        List<Integer> haveNumbers = set
+                .getSetCardInfo()
+                .stream()
+                .map(ExpansionSet.SetCardInfo::getCardNumberAsInt)
+                .collect(Collectors.toList());
 
-        List<ExpansionSet.SetCardInfo> cards = set.getSetCardInfo();
-
-        // first run for numbers list
-        LinkedList<Integer> haveNumbers = new LinkedList<>();
-        for (ExpansionSet.SetCardInfo card : cards) {
-            int cardNumber = card.getCardNumberAsInt();
-
-            // skip xmage special numbers for cards (TODO: replace full art cards numbers from 180+20 to 180b, 180c and vice versa like scryfall)
-            if (cardNumber > 500) {
-                continue;
-            }
-
-            startNumber = min(startNumber, cardNumber);
-            endNumber = Math.max(endNumber, cardNumber);
-            haveNumbers.add(cardNumber);
-        }
+        int startNumber = haveNumbers
+                .stream()
+                .min(Integer::compareTo)
+                .orElse(9999);
+        int endNumber = haveNumbers
+                .stream()
+                .max(Integer::compareTo)
+                .orElse(0);
 
         // second run for empty numbers
         int countHave = haveNumbers.size();
-        int countNotHave = 0;
-        if (!cards.isEmpty()) {
-            for (int i = startNumber; i <= endNumber; i++) {
-                if (!haveNumbers.contains(i)) {
-                    countNotHave++;
-                }
-            }
-        }
+        int countNotHave = IntStream
+                .range(startNumber, endNumber + 1)
+                .map(x -> haveNumbers.contains(x) ? 0 : 1)
+                .sum();
 
         // result
-        setInfo.setText(String.format("Have %d cards of %d", countHave, countHave + countNotHave));
+        setInfo.setText(String.format("%d cards of %d are available", countHave, countHave + countNotHave));
         if (countNotHave > 0) {
             setInfo.setForeground(new Color(150, 0, 0));
         } else {

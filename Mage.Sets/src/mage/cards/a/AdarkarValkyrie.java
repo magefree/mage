@@ -120,7 +120,8 @@ class AdarkarValkyrieDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent) event).isDiesEvent()
-                && mor.refersTo(((ZoneChangeEvent) event).getTarget(), game)) {
+                && mor.refersTo(((ZoneChangeEvent) event).getTarget(), game)
+                && game.getState().getZone(event.getTargetId()) == Zone.GRAVEYARD) { // must be in the graveyard
             getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
 

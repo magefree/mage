@@ -8,8 +8,10 @@ import mage.cards.Cards;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.Token;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -36,6 +38,10 @@ public class FixedTargets extends TargetPointerImpl {
             targets.add(mor);
         }
         this.initialized = true;
+    }
+
+    public FixedTargets(Token token, Game game) {
+        this(token.getLastAddedTokenIds().stream().map(game::getPermanent).collect(Collectors.toList()), game);
     }
 
     public FixedTargets(List<Permanent> permanents, Game game) {

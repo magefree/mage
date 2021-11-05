@@ -1,8 +1,15 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
+
+import java.util.List;
 
 /**
  * @author fireshoes
@@ -26,6 +33,7 @@ public final class EldritchMoon extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.ratioBoosterSpecialCommon = 8;
         this.numBoosterDoubleFaced = 1;
 
         cards.add(new SetCardInfo("Abandon Reason", 115, Rarity.UNCOMMON, mage.cards.a.AbandonReason.class));
@@ -251,5 +259,58 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Woodcutter's Grit", 179, Rarity.COMMON, mage.cards.w.WoodcuttersGrit.class));
         cards.add(new SetCardInfo("Woodland Patrol", 180, Rarity.COMMON, mage.cards.w.WoodlandPatrol.class));
         cards.add(new SetCardInfo("Wretched Gryff", 12, Rarity.COMMON, mage.cards.w.WretchedGryff.class));
+    }
+
+    // add common or uncommon double faced card to booster
+    // 60/120 packs contain one of 4 common DFCs and 60/120 packs contain one of 10 uncommon DFCs
+    @Override
+    protected void addDoubleFace(List<Card> booster) {
+        Rarity rarity;
+        for (int i = 0; i < numBoosterDoubleFaced; i++) {
+            if (RandomUtil.nextInt(120) < 60) {
+                rarity = Rarity.COMMON;
+            } else {
+                rarity = Rarity.UNCOMMON;
+            }
+            addToBooster(booster, getSpecialCardsByRarity(rarity));
+        }
+    }
+
+    // Then about an eighth of the packs will have a second double-faced card, which will be a rare or mythic rare
+    // 10/12 of such packs contain one of 5 rare DFCs and 2/12 packs contain one of 2 mythic DFCs
+    @Override
+    protected void addSpecialCards(List<Card> booster, int number) {
+        // number is here always 1
+        Rarity rarity;
+        if (RandomUtil.nextInt(12) < 10) {
+            rarity = Rarity.RARE;
+        } else {
+            rarity = Rarity.MYTHIC;
+        }
+        addToBooster(booster, getSpecialCardsByRarity(rarity));
+    }
+
+    // xmage doesn't recognize meldable cards as DFCs, so have to add them manually for now
+    private static final String[] commonMeldCards = {"Graf Rats", "Midnight Scavengers"};
+    private static final String[] rareMeldCards = {"Bruna, the Fading Light", "Hanweir Battlements", "Hanweir Garrison"};
+    private static final String[] mythicMeldCards = {"Gisela, the Broken Blade"};
+
+    @Override
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findSpecialCardsByRarity(rarity);
+        String[] meldCardNames = {};
+        if (rarity == Rarity.COMMON) {
+            meldCardNames = commonMeldCards;
+        } else if (rarity == Rarity.RARE) {
+            meldCardNames = rareMeldCards;
+        } else if (rarity == Rarity.MYTHIC) {
+            meldCardNames = mythicMeldCards;
+        }
+        for (String name : meldCardNames) {
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
+                    .setCodes(this.code)
+                    .nameExact(name)));
+        }
+        return cardInfos;
     }
 }

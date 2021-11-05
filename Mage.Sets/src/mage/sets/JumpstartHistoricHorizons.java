@@ -72,7 +72,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Bonescythe Sliver", 56, Rarity.RARE, mage.cards.b.BonescytheSliver.class));
         cards.add(new SetCardInfo("Boneyard Aberration", 14, Rarity.UNCOMMON, mage.cards.b.BoneyardAberration.class));
         cards.add(new SetCardInfo("Boros Elite", 57, Rarity.UNCOMMON, mage.cards.b.BorosElite.class));
-        cards.add(new SetCardInfo("Bounty of the Deep", 8, Rarity.UNCOMMON, mage.cards.b.BountyOfTheDeep.class));
+        cards.add(new SetCardInfo("Bounty of the Deep", 8, Rarity.COMMON, mage.cards.b.BountyOfTheDeep.class));
         cards.add(new SetCardInfo("Breaching Hippocamp", 170, Rarity.COMMON, mage.cards.b.BreachingHippocamp.class));
         cards.add(new SetCardInfo("Breathless Knight", 680, Rarity.COMMON, mage.cards.b.BreathlessKnight.class));
         cards.add(new SetCardInfo("Bred for the Hunt", 681, Rarity.UNCOMMON, mage.cards.b.BredForTheHunt.class));
@@ -86,6 +86,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Changeling Outcast", 304, Rarity.COMMON, mage.cards.c.ChangelingOutcast.class));
         cards.add(new SetCardInfo("Chatter of the Squirrel", 553, Rarity.COMMON, mage.cards.c.ChatterOfTheSquirrel.class));
         cards.add(new SetCardInfo("Chatterfang, Squirrel General", 552, Rarity.MYTHIC, mage.cards.c.ChatterfangSquirrelGeneral.class));
+        cards.add(new SetCardInfo("Chatterstorm", 554, Rarity.COMMON, mage.cards.c.Chatterstorm.class));
         cards.add(new SetCardInfo("Chitterspitter", 555, Rarity.RARE, mage.cards.c.Chitterspitter.class));
         cards.add(new SetCardInfo("Choking Tethers", 178, Rarity.COMMON, mage.cards.c.ChokingTethers.class));
         cards.add(new SetCardInfo("Chrome Courier", 684, Rarity.COMMON, mage.cards.c.ChromeCourier.class));

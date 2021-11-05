@@ -63,7 +63,7 @@ class FightingChanceEffect extends OneShotEffect {
             for (UUID blocker : game.getCombat().getBlockers()) {
                 if (player.flipCoin(source, game, true)) {
                     PreventDamageByTargetEffect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
-                    effect.setTargetPointer(new FixedTarget(blocker));
+                    effect.setTargetPointer(new FixedTarget(blocker, game));
                     game.addEffect(effect, source);
                 }
             }

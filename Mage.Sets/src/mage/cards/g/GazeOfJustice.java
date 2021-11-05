@@ -41,7 +41,7 @@ public final class GazeOfJustice extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         // Flashback {5}{W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{W}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{W}")));
     }
 
     private GazeOfJustice(final GazeOfJustice card) {

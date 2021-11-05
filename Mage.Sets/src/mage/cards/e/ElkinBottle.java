@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -67,7 +66,7 @@ class ElkinBottleExileEffect extends OneShotEffect {
             if (card != null) {
                 controller.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
                 ContinuousEffect effect = new ElkinBottleCastFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId()));
+                effect.setTargetPointer(new FixedTarget(card.getId(), game));
                 game.addEffect(effect, source);
             }
             return true;

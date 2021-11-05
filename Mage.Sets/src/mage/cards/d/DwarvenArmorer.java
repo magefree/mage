@@ -91,7 +91,7 @@ class DwarvenArmorerEffect extends OneShotEffect {
             if (controller.choose(outcome, choice, game)) {
                 Counter counter = choice.getChoice().equals("+0/+1") ? CounterType.P0P1.createInstance() : CounterType.P1P0.createInstance();
                 Effect effect = new AddCountersTargetEffect(counter);
-                effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
+                effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source), game));
                 return effect.apply(game, source);
             }
         }

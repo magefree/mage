@@ -6,6 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CreaturesDiedThisTurnCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffect;
+import mage.abilities.hint.common.CreaturesDiedThisTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,7 +35,7 @@ public final class CanopyStalker extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(
                 new GainLifeEffect(CreaturesDiedThisTurnCount.instance)
                         .setText("you gain 1 life for each creature that died this turn")
-        ), new CreaturesDiedWatcher());
+        ).addHint(CreaturesDiedThisTurnHint.instance), new CreaturesDiedWatcher());
     }
 
     private CanopyStalker(final CanopyStalker card) {

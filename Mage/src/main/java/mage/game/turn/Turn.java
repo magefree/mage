@@ -1,10 +1,5 @@
 package mage.game.turn;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
@@ -16,6 +11,12 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.ThreadLocalStringBuilder;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -95,7 +96,7 @@ public class Turn implements Serializable {
      * @param activePlayer
      * @return true if turn is skipped
      */
-    public boolean play(Game game, Player activePlayer) {    
+    public boolean play(Game game, Player activePlayer) {
         // uncomment this to trace triggered abilities and/or continous effects 
         // TraceUtil.traceTriggeredAbilities(game);
         // game.getState().getContinuousEffects().traceContinuousEffects(game);
@@ -121,24 +122,25 @@ public class Turn implements Serializable {
             if (game.isPaused() || game.checkIfGameIsOver()) {
                 return false;
             }
-            if (!isEndTurnRequested() || phase.getType() == TurnPhase.END) {
-                currentPhase = phase;
-                game.fireEvent(new PhaseChangedEvent(activePlayer.getId(), null));
-                if (!game.getState().getTurnMods().skipPhase(activePlayer.getId(), currentPhase.getType())) {
-                    if (phase.play(game, activePlayer.getId())) {
-                        if (game.executingRollback()) {
-                            return false;
-                        }
-                        //20091005 - 500.4/703.4n
-                        game.emptyManaPools(null);
-                        game.saveState(false);
-
-                        //20091005 - 500.8
-                        while (playExtraPhases(game, phase.getType())) {
-                        }
-                    }
-                }
+            if (isEndTurnRequested() && phase.getType() != TurnPhase.END) {
+                continue;
             }
+            currentPhase = phase;
+            game.fireEvent(new PhaseChangedEvent(activePlayer.getId(), null));
+            if (game.getState().getTurnMods().skipPhase(
+                    activePlayer.getId(), currentPhase.getType()
+            ) || !phase.play(game, activePlayer.getId())) {
+                continue;
+            }
+            if (game.executingRollback()) {
+                return false;
+            }
+            //20091005 - 500.4/703.4n
+            game.emptyManaPools(null);
+            game.saveState(false);
+
+            //20091005 - 500.8
+            while (playExtraPhases(game, phase.getType())) ;
         }
         return false;
     }

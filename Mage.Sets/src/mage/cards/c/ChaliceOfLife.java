@@ -25,7 +25,6 @@ public final class ChaliceOfLife extends CardImpl {
     public ChaliceOfLife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        this.transformable = true;
         this.secondSideCardClazz = ChaliceOfDeath.class;
         this.addAbility(new TransformAbility());
 
@@ -66,8 +65,7 @@ class ChaliceOfLifeEffect extends OneShotEffect {
 
                 // if you have at least 10 life more than your starting life total, transform Chalice of Life.
                 if (player.getLife() >= game.getStartingLife() + 10) {
-                    permanent.transform(game);
-                    game.informPlayers(permanent.getName() + " transforms into " + permanent.getSecondCardFace().getName());
+                    permanent.transform(source, game);
                 }
             }
         }

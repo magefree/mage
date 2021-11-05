@@ -37,7 +37,6 @@ public final class AzcantaTheSunkenRuin extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.transformable = true;
 
         // (Transforms from Search for Azcanta)/
         // {T} : Add {U}.

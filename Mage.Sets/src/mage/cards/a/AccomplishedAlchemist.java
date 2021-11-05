@@ -32,8 +32,7 @@ public final class AccomplishedAlchemist extends CardImpl {
 
         // {T}: Add X mana of any one color, where X is the amount of life you gained this turn.
         this.addAbility(new DynamicManaAbility(
-                new Mana(0, 0, 0, 0, 0, 0, 1, 0),
-                ControllerGotLifeCount.instance, new TapSourceCost(), "Add X mana " +
+                Mana.AnyMana(1), ControllerGotLifeCount.instance, new TapSourceCost(), "Add X mana " +
                 "of any one color, where X is the amount of life you gained this turn", true
         ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }

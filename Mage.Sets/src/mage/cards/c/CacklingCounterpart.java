@@ -24,7 +24,7 @@ public final class CacklingCounterpart extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Flashback {5}{U}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{U}{U}"), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{U}{U}")));
     }
 
     private CacklingCounterpart(final CacklingCounterpart card) {

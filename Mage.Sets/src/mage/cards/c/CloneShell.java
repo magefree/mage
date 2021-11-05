@@ -69,7 +69,7 @@ class CloneShellEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
         if (!cards.isEmpty()) {
             TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
-            if (controller.choose(Outcome.Detriment, cards, target1, game)) {
+            if (controller.choose(Outcome.Benefit, cards, target1, game)) {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
@@ -112,12 +112,15 @@ class CloneShellDiesEffect extends OneShotEffect {
             Permanent permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             if (permanent != null) {
                 List<UUID> imprinted = permanent.getImprinted();
-                if (imprinted != null && !imprinted.isEmpty()) {
-                    Card imprintedCard = game.getCard(imprinted.get(0));
-                    if (imprintedCard != null) {
-                        imprintedCard.setFaceDown(false, game);
-                        if (imprintedCard.isCreature(game)) {
-                            controller.moveCards(imprintedCard, Zone.BATTLEFIELD, source, game);
+                if (imprinted != null
+                        && !imprinted.isEmpty()) {
+                    for (UUID imprintedId : imprinted) {
+                        Card imprintedCard = game.getCard(imprintedId);
+                        if (imprintedCard != null) {
+                            imprintedCard.setFaceDown(false, game);
+                            if (imprintedCard.isCreature(game)) {
+                                controller.moveCards(imprintedCard, Zone.BATTLEFIELD, source, game);
+                            }
                         }
                     }
                 }

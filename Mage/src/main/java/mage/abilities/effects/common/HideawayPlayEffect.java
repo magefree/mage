@@ -67,7 +67,7 @@ public class HideawayPlayEffect extends OneShotEffect {
                     }
                 }
 
-                if (!controller.playCard(card, game, true, true, new ApprovingObject(source, game))) {
+                if (!controller.playCard(card, game, true, new ApprovingObject(source, game))) {
                     if (card.getZoneChangeCounter(game) == zcc) {
                         card.setFaceDown(true, game);
                     }

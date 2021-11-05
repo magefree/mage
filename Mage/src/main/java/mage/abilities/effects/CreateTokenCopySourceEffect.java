@@ -45,7 +45,7 @@ public class CreateTokenCopySourceEffect extends OneShotEffect {
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
                 source.getControllerId(), null, false, number, tapped, false
         );
-        effect.setTargetPointer(new FixedTarget(source.getSourceId()));
+        effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
         return effect.apply(game, source);
     }
 

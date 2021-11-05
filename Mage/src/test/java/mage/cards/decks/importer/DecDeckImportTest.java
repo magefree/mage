@@ -3,6 +3,8 @@ package mage.cards.decks.importer;
 import mage.cards.decks.DeckCardLists;
 import org.junit.Test;
 
+import java.nio.file.Paths;
+
 import static org.junit.Assert.assertEquals;
 
 public class DecDeckImportTest {
@@ -19,7 +21,10 @@ public class DecDeckImportTest {
             }
         };
         DeckCardLists deck = importer.importDeck(
-                "src/test/java/mage/cards/decks/importer/samples/testdeck.dec", errors, false);
+                Paths.get("src", "test", "data", "importer", "testdeck.dec").toString(),
+                errors,
+                false
+        );
 
         TestDeckChecker.checker()
                 .addMain("Masticore", 4)

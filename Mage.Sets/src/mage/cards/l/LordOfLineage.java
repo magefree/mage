@@ -40,7 +40,6 @@ public final class LordOfLineage extends CardImpl {
 
         // this card is the second face of double-faced card Bloodline Keeper
         this.nightCard = true;
-        this.transformable = true;
 
         this.addAbility(FlyingAbility.getInstance());
         // Other Vampire creatures you control get +2/+2.

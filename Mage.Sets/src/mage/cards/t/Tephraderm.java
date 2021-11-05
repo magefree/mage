@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class Tephraderm extends CardImpl {
 
     public Tephraderm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
@@ -74,10 +73,11 @@ class TephradermCreatureDamageTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         Permanent sourcePermanent = game.getPermanent(event.getSourceId());
-        if (sourcePermanent != null && FILTER_CREATURE.match(sourcePermanent, getSourceId(), getControllerId(), game)) {
+        if (sourcePermanent != null
+                && FILTER_CREATURE.match(sourcePermanent, getSourceId(), getControllerId(), game)) {
             for (Effect effect : getEffects()) {
                 if (effect instanceof DamageTargetEffect) {
-                    effect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
+                    effect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
                     ((DamageTargetEffect) effect).setAmount(StaticValue.get(event.getAmount()));
                 }
             }

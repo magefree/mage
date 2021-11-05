@@ -58,7 +58,7 @@ public final class KeeperOfTheFlame extends CardImpl {
     }
 }
 
-class KeeperOfTheFlamePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+class KeeperOfTheFlamePredicate implements ObjectSourcePlayerPredicate<Player> {
     
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {

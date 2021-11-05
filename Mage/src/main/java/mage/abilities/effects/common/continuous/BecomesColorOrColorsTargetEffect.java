@@ -74,7 +74,7 @@ public class BecomesColorOrColorsTargetEffect extends OneShotEffect {
             String colors = new String(sb);
             ObjectColor chosenColors = new ObjectColor(colors);
             ContinuousEffect effect = new BecomesColorTargetEffect(chosenColors, duration);
-            effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+            effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
             game.addEffect(effect, source);
 
             return true;

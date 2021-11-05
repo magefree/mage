@@ -102,7 +102,7 @@ class NorrittDelayedDestroyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         DestroyTargetEffect effect = new DestroyTargetEffect();
-        effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+        effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
         AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility
                 = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.ALL, effect, TargetController.ANY, new InvertCondition(TargetAttackedThisTurnCondition.instance));
         delayedAbility.getDuration();

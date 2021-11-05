@@ -225,8 +225,9 @@ public abstract class CardRenderer {
         // Call the template methods
         drawBorder(g);
         drawBackground(g);
+        lessOpaqueRulesTextBox = false;
         drawArt(g);
-        drawFrame(g, attribs, image);
+        drawFrame(g, attribs, image, lessOpaqueRulesTextBox);
         if (!cardView.isAbility()) {
             drawOverlays(g);
             drawCounters(g);
@@ -241,7 +242,7 @@ public abstract class CardRenderer {
 
     protected abstract void drawArt(Graphics2D g);
 
-    protected abstract void drawFrame(Graphics2D g, CardPanelAttributes attribs, BufferedImage image);
+    protected abstract void drawFrame(Graphics2D g, CardPanelAttributes attribs, BufferedImage image, boolean lessOpaqueRulesTextBox);
 
     // Template methods that are possible to override, but unlikely to be
     // overridden.
@@ -318,7 +319,8 @@ public abstract class CardRenderer {
         }
     }
 
-    protected void drawFaceArtIntoRect(Graphics2D g, int x, int y, int w, int h, Rectangle2D artRect, boolean shouldPreserveAspect) {
+    private boolean lessOpaqueRulesTextBox = false;
+    protected void drawFaceArtIntoRect(Graphics2D g, int x, int y, int w, int h, int alternate_h, Rectangle2D artRect, boolean shouldPreserveAspect) {
         // Perform a process to make sure that the art is scaled uniformly to fill the frame, cutting
         // off the minimum amount necessary to make it completely fill the frame without "squashing" it.
         double fullCardImgWidth = faceArtImage.getWidth();
@@ -346,10 +348,18 @@ public abstract class CardRenderer {
                     RenderingHints.KEY_INTERPOLATION,
                     RenderingHints.VALUE_INTERPOLATION_BICUBIC);
             g.setRenderingHints(rh);
-            g.drawImage(faceArtImage,
-                    x, y,
-                    (int) targetWidth, (int) targetHeight,
-                    null);
+            if (fullCardImgWidth > fullCardImgHeight) {
+                g.drawImage(faceArtImage,
+                        x, y,
+                        (int) targetWidth, (int) targetHeight,
+                        null);
+            } else {
+                g.drawImage(faceArtImage,
+                        x, y,
+                        (int) targetWidth, alternate_h, // alernate_h is roughly (targetWidth / 0.74)
+                        null);
+                lessOpaqueRulesTextBox = true;
+            }
         } catch (RasterFormatException e) {
             // At very small card sizes we may encounter a problem with rounding error making the rect not fit
             System.out.println(e);

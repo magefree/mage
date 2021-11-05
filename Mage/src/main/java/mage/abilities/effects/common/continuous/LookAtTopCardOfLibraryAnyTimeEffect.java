@@ -43,7 +43,16 @@ public class LookAtTopCardOfLibraryAnyTimeEffect extends ContinuousEffectImpl {
             default:
                 throw new IllegalArgumentException("Unknown target library type: " + targetLibrary);
         }
-        staticText = duration.toString().isEmpty() ? "" : duration + " you may look at the top card of " + libInfo + " any time.";
+        StringBuilder sb = new StringBuilder();
+        String durationString = duration.toString();
+        if (durationString != null && !durationString.isEmpty()) {
+            sb.append(durationString);
+            sb.append(' ');
+        }
+        sb.append("you may look at the top card of ");
+        sb.append(libInfo);
+        sb.append(" any time");
+        staticText = sb.toString();
     }
 
     protected LookAtTopCardOfLibraryAnyTimeEffect(final LookAtTopCardOfLibraryAnyTimeEffect effect) {

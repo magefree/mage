@@ -1,5 +1,3 @@
-
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -18,7 +16,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -28,8 +25,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class RafiqOfTheMany extends CardImpl {
 
     public RafiqOfTheMany(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
 
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
@@ -77,10 +73,10 @@ class RafiqOfTheManyAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.isActivePlayer(this.controllerId) ) {
+        if (game.isActivePlayer(this.controllerId)) {
             if (game.getCombat().attacksAlone()) {
-                for (Effect effect: this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0), game));
                 }
                 return true;
             }

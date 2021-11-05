@@ -24,12 +24,11 @@ public final class TavernRuffian extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.t.TavernSmasher.class;
 
         // Daybound
         this.addAbility(new TransformAbility());
-        this.addAbility(DayboundAbility.getInstance());
+        this.addAbility(new DayboundAbility());
     }
 
     private TavernRuffian(final TavernRuffian card) {

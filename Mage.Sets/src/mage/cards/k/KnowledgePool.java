@@ -157,7 +157,9 @@ class KnowledgePoolEffect2 extends OneShotEffect {
                     if (player.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null && !card.getId().equals(spell.getSourceId())) {
-                            player.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                            player.cast(player.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                         }
                     }
                 }

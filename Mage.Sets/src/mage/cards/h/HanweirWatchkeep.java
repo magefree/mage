@@ -22,7 +22,6 @@ public final class HanweirWatchkeep extends CardImpl {
         this.subtype.add(SubType.WARRIOR);
         this.subtype.add(SubType.WEREWOLF);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.b.BaneOfHanweir.class;
 
         this.power = new MageInt(1);

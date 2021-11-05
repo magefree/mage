@@ -32,10 +32,9 @@ public final class CandlelitCavalry extends CardImpl {
                         new GainAbilitySourceEffect(
                                 TrampleAbility.getInstance(), Duration.EndOfTurn
                         ), TargetController.YOU, false
-                ), CovenCondition.instance, AbilityWord.COVEN.formatWord() +
-                "At the beginning of combat on your turn, if you control three or more creatures " +
-                "with different powers, {this} gains trample until end of turn."
-        ).addHint(CovenHint.instance));
+                ), CovenCondition.instance, "At the beginning of combat on your turn, if you control " +
+                "three or more creatures with different powers, {this} gains trample until end of turn."
+        ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
     }
 
     private CandlelitCavalry(final CandlelitCavalry card) {

@@ -35,7 +35,6 @@ public final class GraveyardGlutton extends CardImpl {
         this.toughness = new MageInt(4);
         this.color.setBlack(true);
         this.nightCard = true;
-        this.transformable = true;
 
         // Ward—Discard a card.
         this.addAbility(new WardAbility(new DiscardCardCost()));
@@ -46,7 +45,7 @@ public final class GraveyardGlutton extends CardImpl {
         this.addAbility(ability);
 
         // Nightbound
-        this.addAbility(NightboundAbility.getInstance());
+        this.addAbility(new NightboundAbility());
     }
 
     private GraveyardGlutton(final GraveyardGlutton card) {

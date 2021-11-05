@@ -69,7 +69,7 @@ public final class DreadhordeArcanist extends CardImpl {
     }
 }
 
-enum DreadhordeArcanistPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+enum DreadhordeArcanistPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override

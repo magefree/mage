@@ -1,14 +1,12 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,8 +18,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.SquirrelToken;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SquirrelWrangler extends CardImpl {
@@ -29,7 +28,7 @@ public final class SquirrelWrangler extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.SQUIRREL, "Squirrel creatures");
 
     public SquirrelWrangler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DRUID);
 
@@ -42,7 +41,7 @@ public final class SquirrelWrangler extends CardImpl {
         this.addAbility(ability);
 
         // {1}{G}, Sacrifice a land: Squirrel creatures get +1/+1 until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1,Duration.EndOfTurn, filter), new ManaCostsImpl("{1}{G}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
         this.addAbility(ability);
 

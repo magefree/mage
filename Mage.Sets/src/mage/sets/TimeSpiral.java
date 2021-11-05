@@ -1,8 +1,8 @@
 package mage.sets;
 
-import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -25,7 +25,9 @@ public final class TimeSpiral extends ExpansionSet {
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
+        this.numBoosterSpecial = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Academy Ruins", 269, Rarity.RARE, mage.cards.a.AcademyRuins.class));
         cards.add(new SetCardInfo("Aether Web", 189, Rarity.COMMON, mage.cards.a.AetherWeb.class));
         cards.add(new SetCardInfo("Aetherflame Wall", 142, Rarity.COMMON, mage.cards.a.AetherflameWall.class));
@@ -330,11 +332,11 @@ public final class TimeSpiral extends ExpansionSet {
     }
 
     @Override
-    public List<Card> createBooster() {
-        List<Card> booster = super.createBooster();
-        CardCriteria criteria = new CardCriteria();
-        criteria.rarities(Rarity.SPECIAL).setCodes("TSB");
-        addToBooster(booster, CardRepository.instance.findCards(criteria));
-        return booster;
+    protected List<CardInfo> findCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
+        if (rarity == Rarity.SPECIAL) {
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("TSB")));
+        }
+        return cardInfos;
     }
 }
