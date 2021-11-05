@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class InnistradCrimsonVow extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Avabruck Caretaker", "Hollowhenge Huntmaster", "Ballista Watcher", "Ballista Wielder", "Brine Comber", "Brinebound Gift", "Child of the Pack", "Savage Packmate", "Distracting Geist", "Clever Distraction", "Dorothea, Vengeful Victim", "Dorothea's Retribution", "Drogskol Infantry", "Drogskol Armaments", "Faithbound Judge", "Sinner's Judgment", "Fearful Villager", "Fearsome Werewolf", "Gutter Skulker", "Gutter Shortcut", "Howlpack Piper", "Wildsong Howler", "Infestation Expert", "Infested Werewolf", "Katilda, Dawnhart Martyr", "Katilda's Rising Dawn", "Kindly Ancestor", "Ancestor's Embrace", "Lambholt Raconteur", "Lambholt Ravager", "Lantern Bearer", "Lanterns' Lift", "Mirrorhall Mimic", "Ghastly Mimicry", "Mischievous Catgeist", "Catlike Curiosity", "Oakshade Stalker", "Moonlit Ambusher", "Twinblade Geist", "Twinblade Invocation", "Volatile Arsonist", "Dire-Strain Anarchist", "Weary Prisoner", "Wrathful Jailbreaker", "Weaver of Blossoms", "Blossom-Clad Werewolf", "Wolfkin Outcast", "Wedding Crasher");
+    private static final List<String> unfinished = Arrays.asList("Avabruck Caretaker", "Hollowhenge Huntmaster", "Ballista Watcher", "Ballista Wielder", "Binding Geist", "Spectral Binding", "Brine Comber", "Brinebound Gift", "Child of the Pack", "Savage Packmate", "Distracting Geist", "Clever Distraction", "Dorothea, Vengeful Victim", "Dorothea's Retribution", "Drogskol Infantry", "Drogskol Armaments", "Faithbound Judge", "Sinner's Judgment", "Fearful Villager", "Fearsome Werewolf", "Gutter Skulker", "Gutter Shortcut", "Hookhand Mariner", "Riphook Raider", "Howlpack Piper", "Wildsong Howler", "Ill-Tempered Loner", "Howlpack Avenger", "Infestation Expert", "Infested Werewolf", "Katilda, Dawnhart Martyr", "Katilda's Rising Dawn", "Kindly Ancestor", "Ancestor's Embrace", "Lambholt Raconteur", "Lambholt Ravager", "Lantern Bearer", "Lanterns' Lift", "Mirrorhall Mimic", "Ghastly Mimicry", "Mischievous Catgeist", "Catlike Curiosity", "Oakshade Stalker", "Moonlit Ambusher", "Twinblade Geist", "Twinblade Invocation", "Volatile Arsonist", "Dire-Strain Anarchist", "Weary Prisoner", "Wrathful Jailbreaker", "Weaver of Blossoms", "Blossom-Clad Werewolf", "Wolfkin Outcast", "Wedding Crasher");
     private static final InnistradCrimsonVow instance = new InnistradCrimsonVow();
 
     public static InnistradCrimsonVow getInstance() {
@@ -32,6 +32,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         this.numBoosterDoubleFaced = 1;
 
         cards.add(new SetCardInfo("Abrade", 139, Rarity.COMMON, mage.cards.a.Abrade.class));
+        cards.add(new SetCardInfo("Adamant Will", 1, Rarity.COMMON, mage.cards.a.AdamantWill.class));
         cards.add(new SetCardInfo("Ancestor's Embrace", 22, Rarity.COMMON, mage.cards.a.AncestorsEmbrace.class));
         cards.add(new SetCardInfo("Ancient Lumberknot", 230, Rarity.UNCOMMON, mage.cards.a.AncientLumberknot.class));
         cards.add(new SetCardInfo("Angelic Quartermaster", 2, Rarity.UNCOMMON, mage.cards.a.AngelicQuartermaster.class));
@@ -48,6 +49,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodtithe Harvester", 232, Rarity.UNCOMMON, mage.cards.b.BloodtitheHarvester.class));
         cards.add(new SetCardInfo("Bloodvial Purveyor", 98, Rarity.RARE, mage.cards.b.BloodvialPurveyor.class));
         cards.add(new SetCardInfo("Blossom-Clad Werewolf", 226, Rarity.COMMON, mage.cards.b.BlossomCladWerewolf.class));
+        cards.add(new SetCardInfo("Bramble Armor", 188, Rarity.COMMON, mage.cards.b.BrambleArmor.class));
         cards.add(new SetCardInfo("Bramble Wurm", 189, Rarity.UNCOMMON, mage.cards.b.BrambleWurm.class));
         cards.add(new SetCardInfo("Bride's Gown", 4, Rarity.UNCOMMON, mage.cards.b.BridesGown.class));
         cards.add(new SetCardInfo("By Invitation Only", 5, Rarity.RARE, mage.cards.b.ByInvitationOnly.class));
@@ -65,6 +67,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Consuming Tide", 53, Rarity.RARE, mage.cards.c.ConsumingTide.class));
         cards.add(new SetCardInfo("Courier Bat", 102, Rarity.COMMON, mage.cards.c.CourierBat.class));
         cards.add(new SetCardInfo("Crawling Infestation", 193, Rarity.UNCOMMON, mage.cards.c.CrawlingInfestation.class));
+        cards.add(new SetCardInfo("Crushing Canopy", 194, Rarity.COMMON, mage.cards.c.CrushingCanopy.class));
         cards.add(new SetCardInfo("Dawnhart Disciple", 196, Rarity.COMMON, mage.cards.d.DawnhartDisciple.class));
         cards.add(new SetCardInfo("Dawnhart Geist", 8, Rarity.UNCOMMON, mage.cards.d.DawnhartGeist.class));
         cards.add(new SetCardInfo("Daybreak Combatants", 153, Rarity.COMMON, mage.cards.d.DaybreakCombatants.class));
@@ -75,12 +78,14 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Distracting Geist", 9, Rarity.UNCOMMON, mage.cards.d.DistractingGeist.class));
         cards.add(new SetCardInfo("Diver Skaab", 56, Rarity.UNCOMMON, mage.cards.d.DiverSkaab.class));
         cards.add(new SetCardInfo("Dominating Vampire", 154, Rarity.RARE, mage.cards.d.DominatingVampire.class));
+        cards.add(new SetCardInfo("Doomed Dissenter", 106, Rarity.COMMON, mage.cards.d.DoomedDissenter.class));
         cards.add(new SetCardInfo("Dormant Grove", 198, Rarity.UNCOMMON, mage.cards.d.DormantGrove.class));
         cards.add(new SetCardInfo("Dreadfeast Demon", 108, Rarity.RARE, mage.cards.d.DreadfeastDemon.class));
         cards.add(new SetCardInfo("Dreamroot Cascade", 262, Rarity.RARE, mage.cards.d.DreamrootCascade.class));
         cards.add(new SetCardInfo("Drogskol Armaments", 10, Rarity.COMMON, mage.cards.d.DrogskolArmaments.class));
         cards.add(new SetCardInfo("Drogskol Infantry", 10, Rarity.COMMON, mage.cards.d.DrogskolInfantry.class));
         cards.add(new SetCardInfo("Dying to Serve", 109, Rarity.RARE, mage.cards.d.DyingToServe.class));
+        cards.add(new SetCardInfo("Evolving Wilds", 263, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Falkenrath Forebear", 111, Rarity.RARE, mage.cards.f.FalkenrathForebear.class));
         cards.add(new SetCardInfo("Fearful Villager", 157, Rarity.COMMON, mage.cards.f.FearfulVillager.class));
         cards.add(new SetCardInfo("Fearsome Werewolf", 157, Rarity.COMMON, mage.cards.f.FearsomeWerewolf.class));
@@ -163,12 +168,14 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Shattered Sanctum", 264, Rarity.RARE, mage.cards.s.ShatteredSanctum.class));
         cards.add(new SetCardInfo("Sigarda's Imprisonment", 35, Rarity.COMMON, mage.cards.s.SigardasImprisonment.class));
         cards.add(new SetCardInfo("Sigardian Paladin", 247, Rarity.UNCOMMON, mage.cards.s.SigardianPaladin.class));
+        cards.add(new SetCardInfo("Snarling Wolf", 219, Rarity.COMMON, mage.cards.s.SnarlingWolf.class));
         cards.add(new SetCardInfo("Sorin the Mirthless", 131, Rarity.MYTHIC, mage.cards.s.SorinTheMirthless.class));
         cards.add(new SetCardInfo("Splendid Reclamation", 221, Rarity.RARE, mage.cards.s.SplendidReclamation.class));
         cards.add(new SetCardInfo("Stensia Uprising", 178, Rarity.RARE, mage.cards.s.StensiaUprising.class));
         cards.add(new SetCardInfo("Stormcarved Coast", 265, Rarity.RARE, mage.cards.s.StormcarvedCoast.class));
         cards.add(new SetCardInfo("Stormchaser Drake", 82, Rarity.UNCOMMON, mage.cards.s.StormchaserDrake.class));
         cards.add(new SetCardInfo("Sundown Pass", 266, Rarity.RARE, mage.cards.s.SundownPass.class));
+        cards.add(new SetCardInfo("Sure Strike", 179, Rarity.COMMON, mage.cards.s.SureStrike.class));
         cards.add(new SetCardInfo("Swamp", 400, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Syncopate", 83, Rarity.COMMON, mage.cards.s.Syncopate.class));
         cards.add(new SetCardInfo("Thalia, Guardian of Thraben", 38, Rarity.RARE, mage.cards.t.ThaliaGuardianOfThraben.class));
