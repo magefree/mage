@@ -95,6 +95,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Drogskol Armaments", 10, Rarity.COMMON, mage.cards.d.DrogskolArmaments.class));
         cards.add(new SetCardInfo("Drogskol Infantry", 10, Rarity.COMMON, mage.cards.d.DrogskolInfantry.class));
         cards.add(new SetCardInfo("Dying to Serve", 109, Rarity.RARE, mage.cards.d.DyingToServe.class));
+        cards.add(new SetCardInfo("End the Festivities", 155, Rarity.COMMON, mage.cards.e.EndTheFestivities.class));
         cards.add(new SetCardInfo("Evolving Wilds", 263, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Falkenrath Forebear", 111, Rarity.RARE, mage.cards.f.FalkenrathForebear.class));
         cards.add(new SetCardInfo("Fearful Villager", 157, Rarity.COMMON, mage.cards.f.FearfulVillager.class));
