@@ -27,7 +27,11 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter, boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect);
+        this(effect, filter, setTargetPointer, false);
+    }
+
+    public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter, boolean setTargetPointer, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
         setLeavesTheBattlefieldTrigger(true);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
