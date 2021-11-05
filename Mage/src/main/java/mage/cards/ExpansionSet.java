@@ -8,6 +8,7 @@ import mage.collation.BoosterCollator;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.filter.FilterMana;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
@@ -124,9 +125,8 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterDoubleFaced; // -1 = include normally 0 = exclude  1-n = include explicit
     protected double ratioBoosterMythic;
 
-    protected boolean validateBoosterColors = true;
-    protected double rejectMissingColorProbability = 0.8;
-    protected double rejectSameColorUncommonsProbability = 0.8;
+    protected boolean hasUnbalancedColors = false;
+    protected boolean hasOnlyMulticolorCards = false;
 
     protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
 
@@ -276,10 +276,12 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     protected boolean boosterIsValid(List<Card> booster) {
-        if (validateBoosterColors) {
-            if (!validateColors(booster)) {
-                return false;
-            }
+        if (!validateCommonColors(booster)) {
+            return false;
+        }
+
+        if (!validateUncommonColors(booster)) {
+            return false;
         }
 
         // TODO: add partner check
@@ -287,56 +289,79 @@ public abstract class ExpansionSet implements Serializable {
         return true;
     }
 
-    protected boolean validateColors(List<Card> booster) {
-        List<ObjectColor> magicColors
-                = Arrays.asList(ObjectColor.WHITE, ObjectColor.BLUE, ObjectColor.BLACK, ObjectColor.RED, ObjectColor.GREEN);
-
-        // all cards colors
-        Map<ObjectColor, Integer> colorWeight = new HashMap<>();
-        // uncommon/rare/mythic cards colors
-        Map<ObjectColor, Integer> uncommonWeight = new HashMap<>();
-
-        for (ObjectColor color : magicColors) {
-            colorWeight.put(color, 0);
-            uncommonWeight.put(color, 0);
+    private static ObjectColor getColorForValidate(Card card) {
+        ObjectColor color = card.getColor();
+        // treat colorless nonland cards with exactly one ID color as cards of that color
+        // (e.g. devoid, emerge, spellbombs... but not mana fixing artifacts)
+        if (color.isColorless() && !card.isLand()) {
+            FilterMana colorIdentity = card.getColorIdentity();
+            if (colorIdentity.getColorCount() == 1) {
+                return new ObjectColor(colorIdentity.toString());
+            }
         }
+        return color;
+    }
 
-        // count colors in the booster
-        for (Card card : booster) {
-            ObjectColor cardColor = card.getColor(null);
-            if (cardColor != null) {
-                List<ObjectColor> colors = cardColor.getColors();
-                // todo: do we need gold color?
-                colors.remove(ObjectColor.GOLD);
-                if (!colors.isEmpty()) {
-                    // 60 - full card weight
-                    // multicolored cards add part of the weight to each color
-                    int cardColorWeight = 60 / colors.size();
-                    for (ObjectColor color : colors) {
-                        colorWeight.put(color, colorWeight.get(color) + cardColorWeight);
-                        if (card.getRarity() != Rarity.COMMON) {
-                            uncommonWeight.put(color, uncommonWeight.get(color) + cardColorWeight);
-                        }
-                    }
-                }
+    protected boolean validateCommonColors(List<Card> booster) {
+        List<ObjectColor> commonColors = booster.stream()
+                .filter(card -> card.getRarity() == Rarity.COMMON)
+                .map(ExpansionSet::getColorForValidate)
+                .collect(Collectors.toList());
+
+        // for multicolor sets, count not just the colors present at common,
+        // but also the number of color combinations (guilds/shards/wedges)
+        // e.g. a booster with three UB commons, three RW commons and four G commons
+        // has all five colors but isn't "balanced"
+        ObjectColor colorsRepresented = new ObjectColor();
+        Set<ObjectColor> colorCombinations = new HashSet<>();
+        int colorlessCountPlusOne = 1;
+
+        for (ObjectColor color : commonColors) {
+            colorCombinations.add(color);
+            int colorCount = color.getColorCount();
+            if (colorCount == 0) {
+                ++colorlessCountPlusOne;
+            } else if (colorCount > 1 && !hasOnlyMulticolorCards) {
+                // to prevent biasing toward multicolor over monocolor cards,
+                // count them as one of their colors chosen at random
+                List<ObjectColor> multiColor = color.getColors();
+                colorsRepresented.addColor(multiColor.get(RandomUtil.nextInt(multiColor.size())));
+            } else {
+                colorsRepresented.addColor(color);
             }
         }
 
-        // check that all colors are present
-        if (magicColors.stream().anyMatch(color -> colorWeight.get(color) < 60)) {
-            // reject only part of the boosters
-            if (RandomUtil.nextDouble() < rejectMissingColorProbability) {
-                return false;
-            }
-        }
+        int colors = Math.min(colorsRepresented.getColorCount(), colorCombinations.size());
 
-        // check that we don't have 3 or more uncommons/rares of the same color
-        if (magicColors.stream().anyMatch(color -> uncommonWeight.get(color) >= 180)) {
-            // reject only part of the boosters
-            return !(RandomUtil.nextDouble() < rejectSameColorUncommonsProbability);
-        }
+        // if booster has all five colors in five unique combinations, or if it has
+        // one card per color and all but one of the rest are colorless, accept it
+        // ("all but one" adds some leeway for sets with small boosters)
+        if (colors >= Math.min(5, commonColors.size() - colorlessCountPlusOne)) return true;
+        // otherwise, if booster is missing more than one color, reject it
+        if (colors < 4) return false;
+        // for Torment and Judgment, always accept boosters with four out of five colors
+        if (hasUnbalancedColors) return true;
+        // if a common was replaced by a special card, increase the chance to accept four colors
+        if (commonColors.size() < numBoosterCommon) ++colorlessCountPlusOne;
 
-        return true;
+        // otherwise, stochiastically treat each colorless card as 1/5 of a card of the missing color
+        return (RandomUtil.nextDouble() > Math.pow(0.8, colorlessCountPlusOne));
+    }
+
+    private static final ObjectColor COLORLESS = new ObjectColor();
+
+    protected boolean validateUncommonColors(List<Card> booster) {
+        List<ObjectColor> uncommonColors = booster.stream()
+                .filter(card -> card.getRarity() == Rarity.UNCOMMON)
+                .map(ExpansionSet::getColorForValidate)
+                .collect(Collectors.toList());
+
+        // if there are only two uncommons, they can be the same color
+        if (uncommonColors.size() < 3) return true;
+        // boosters of artifact sets can have all colorless uncommons
+        if (uncommonColors.contains(COLORLESS)) return true;
+        // otherwise, reject if all uncommons are the same color combination
+        return (new HashSet<>(uncommonColors).size() > 1);
     }
 
     protected boolean checkMythic() {

@@ -36,7 +36,7 @@ public final class StatuteOfDenial extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawDiscardControllerEffect(1,1),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0, true),
+                new PermanentsOnTheBattlefieldCondition(filter),
                 "If you control a blue creature, draw a card, then discard a card"));
     }
 

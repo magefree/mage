@@ -15,7 +15,7 @@ import mage.cards.CardSetInfo;
 public class Swamp extends BasicLand {
     public Swamp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new BlackManaAbility());
-        this.frameColor = ObjectColor.BLACK;
+        this.frameColor.setBlack(true);
     }
 
     public Swamp(Swamp land) {

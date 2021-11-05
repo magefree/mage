@@ -23,6 +23,10 @@ public class TargetLandPermanent extends TargetPermanent {
         this(numTargets, numTargets, StaticFilters.FILTER_LAND, false);
     }
 
+    public TargetLandPermanent(int numTargets, int maxNumTargets) {
+        this(numTargets, maxNumTargets, StaticFilters.FILTER_LAND, false);
+    }
+
     public TargetLandPermanent(int minNumTargets, int maxNumTargets, FilterLandPermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
