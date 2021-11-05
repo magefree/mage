@@ -41,7 +41,7 @@ public final class WeddingAnnouncement extends CardImpl {
                 new DrawCardSourceControllerEffect(1),
                 new CreateTokenEffect(new HumanToken()),
                 WeddingAnnouncementCondition.instance,
-                "If you attacked with two or more creatures this turn, draw card. Otherwise, create a 1/1 white Human creature token"
+                "If you attacked with two or more creatures this turn, draw a card. Otherwise, create a 1/1 white Human creature token"
         ));
         ability.addEffect(new ConditionalOneShotEffect(
                 new TransformSourceEffect(),
