@@ -30,7 +30,6 @@ public final class ForebodingStatue extends CardImpl {
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.f.ForsakenThresher.class;
 
         // {T}: Add one mana of any color. Put an omen counter on Foreboding Statue.
@@ -44,7 +43,7 @@ public final class ForebodingStatue extends CardImpl {
                 Zone.BATTLEFIELD, new UntapSourceEffect().setText("untap it,"), TargetController.YOU,
                 new SourceHasCounterCondition(CounterType.OMEN, 3), false
         ).setTriggerPhrase("At the beginning of your end step, if there are three or more omen counters on {this}, ");
-        ability.addEffect(new TransformSourceEffect(true, true).setText("then transform it"));
+        ability.addEffect(new TransformSourceEffect().setText("then transform it"));
         this.addAbility(ability);
     }
 
