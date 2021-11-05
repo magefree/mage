@@ -33,7 +33,7 @@ public final class MarkovRetribution extends CardImpl {
 
         // Choose one or both —
         this.getSpellAbility().getModes().setMinModes(1);
-        this.getSpellAbility().getModes().setMinModes(2);
+        this.getSpellAbility().getModes().setMaxModes(2);
 
         // • Creatures you control get +1/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn));
