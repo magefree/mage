@@ -29,7 +29,6 @@ public final class WeddingAnnouncement extends CardImpl {
     public WeddingAnnouncement(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.w.WeddingFestivity.class;
 
         // At the beginning of your end step, put an invitation counter on Wedding Announcement.
@@ -45,7 +44,7 @@ public final class WeddingAnnouncement extends CardImpl {
                 "If you attacked with two or more creatures this turn, draw card. Otherwise, create a 1/1 white Human creature token"
         ));
         ability.addEffect(new ConditionalOneShotEffect(
-                new TransformSourceEffect(true, true),
+                new TransformSourceEffect(),
                 new SourceHasCounterCondition(CounterType.INVITATION, 3),
                 "Then if {this} has three or more invitation counters on it, transform it"
         ));

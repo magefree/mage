@@ -23,6 +23,7 @@ public final class WearyPrisoner extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);
+
         this.secondSideCardClazz = mage.cards.w.WrathfulJailbreaker.class;
 
         // Defender

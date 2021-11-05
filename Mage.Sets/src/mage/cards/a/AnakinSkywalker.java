@@ -38,7 +38,6 @@ public final class AnakinSkywalker extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.d.DarthVader.class;
 
         // Whenever another creature dies, put a +1/+1 counter on Anakin Skywalker.
@@ -82,7 +81,7 @@ class AnakinSkywalkerEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
             permanent.regenerate(source, game);
-            return new TransformSourceEffect(true).apply(game, source);
+            return new TransformSourceEffect().apply(game, source);
         }
         return false;
     }

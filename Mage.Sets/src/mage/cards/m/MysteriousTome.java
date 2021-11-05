@@ -21,7 +21,6 @@ public final class MysteriousTome extends CardImpl {
     public MysteriousTome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{U}");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.c.ChillingChronicle.class;
 
         // {2}, {T}: Draw a card. Transform Mysterious Tome.
@@ -30,7 +29,7 @@ public final class MysteriousTome extends CardImpl {
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new TransformSourceEffect(true));
+        ability.addEffect(new TransformSourceEffect());
         this.addAbility(ability);
     }
 

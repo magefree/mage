@@ -26,12 +26,11 @@ public final class KessigProwler extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.SinuousPredator.class;
 
         // {4}{G}: Transform Kessig Prowler.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new ManaCostsImpl("{4}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl("{4}{G}")));
     }
 
     private KessigProwler(final KessigProwler card) {

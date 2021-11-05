@@ -24,7 +24,6 @@ public final class InstigatorGang extends CardImpl {
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WEREWOLF);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.w.WildbloodPack.class;
 
         this.power = new MageInt(2);

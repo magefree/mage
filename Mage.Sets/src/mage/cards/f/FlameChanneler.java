@@ -27,7 +27,7 @@ public final class FlameChanneler extends CardImpl {
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.transformable=true;this.secondSideCardClazz=mage.cards.e.EmbodimentOfFlame.class;
+        this.secondSideCardClazz = mage.cards.e.EmbodimentOfFlame.class;
 
         // When a spell you control deals damage, transform Flame Channeler.
         this.addAbility(new TransformAbility());
@@ -47,7 +47,7 @@ public final class FlameChanneler extends CardImpl {
 class FlameChannelerTriggeredAbility extends TriggeredAbilityImpl {
 
     FlameChannelerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true));
+        super(Zone.BATTLEFIELD, new TransformSourceEffect());
     }
 
     private FlameChannelerTriggeredAbility(final FlameChannelerTriggeredAbility ability) {

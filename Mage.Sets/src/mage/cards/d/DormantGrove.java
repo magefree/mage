@@ -27,7 +27,6 @@ public final class DormantGrove extends CardImpl {
     public DormantGrove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.g.GnarledGrovestrider.class;
 
         // At the beginning of combat on your turn, put a +1/+1 counter on target creature you control.
@@ -39,7 +38,7 @@ public final class DormantGrove extends CardImpl {
                 TargetController.YOU, false
         );
         ability.addEffect(new ConditionalOneShotEffect(
-                new TransformSourceEffect(true, true),
+                new TransformSourceEffect(),
                 DormatGroveCondition.instance,
                 "Then if that creature has toughness 6 or greater, transform {this}"
         ));

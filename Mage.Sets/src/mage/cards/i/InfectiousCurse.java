@@ -33,7 +33,6 @@ public final class InfectiousCurse extends CardImpl {
         this.color.setBlack(true);
 
         this.nightCard = true;
-        this.transformable = true;
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();

@@ -28,7 +28,6 @@ public final class HuntmasterOfTheFells extends CardImpl {
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WEREWOLF);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.r.RavagerOfTheFells.class;
 
         this.power = new MageInt(2);

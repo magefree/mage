@@ -45,7 +45,6 @@ public final class PathOfMettle extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.m.MetzaliTowerOfTriumph.class;
 
         // When Path of Mettle enters the battlefield, it deals 1 damage to each creature that doesn't have first strike, double strike, vigilance, or haste.
@@ -80,7 +79,7 @@ class PathOfMettleTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public PathOfMettleTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true));
+        super(Zone.BATTLEFIELD, new TransformSourceEffect());
     }
 
     public PathOfMettleTriggeredAbility(final PathOfMettleTriggeredAbility ability) {

@@ -1408,5 +1408,4 @@ public final class CardUtil {
         effect.apply(game, source);
         return true;
     }
-
 }

@@ -34,7 +34,6 @@ public final class SkinInvasion extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
         this.subtype.add(SubType.AURA);
 
-        this.transformable = true;
         this.secondSideCardClazz = SkinShedder.class;
 
         // Enchant creature

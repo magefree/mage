@@ -23,7 +23,6 @@ public final class BaithookAngler extends CardImpl {
         this.subtype.add(SubType.PEASANT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.h.HookHauntDrifter.class;
 
         // Disturb {1}{U}

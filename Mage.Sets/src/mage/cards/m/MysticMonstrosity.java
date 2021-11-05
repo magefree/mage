@@ -24,7 +24,6 @@ public final class MysticMonstrosity extends CardImpl {
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
-        this.transformable = true;
         this.nightCard = true;
 
         // Lands you control have "{T}: Add one mana of any color."

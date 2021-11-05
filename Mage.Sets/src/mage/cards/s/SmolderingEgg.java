@@ -33,7 +33,6 @@ public final class SmolderingEgg extends CardImpl {
         this.subtype.add(SubType.EGG);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.AshmouthDragon.class;
 
         // Defender
@@ -92,7 +91,7 @@ class SmolderingEggEffect extends OneShotEffect {
             return true;
         }
         permanent.removeCounters(CounterType.EMBER.createInstance(counters), source, game);
-        new TransformSourceEffect(true).apply(game, source);
+        new TransformSourceEffect().apply(game, source);
         return true;
     }
 }

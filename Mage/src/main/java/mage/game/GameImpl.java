@@ -14,10 +14,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.CompanionAbility;
-import mage.abilities.keyword.MorphAbility;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.keyword.*;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.actions.impl.MageAction;
@@ -550,6 +547,35 @@ public abstract class GameImpl implements Game {
         }
         this.getOrCreateDungeon(playerId).moveToNextRoom(playerId, this);
         fireEvent(GameEvent.getEvent(GameEvent.EventType.VENTURED, playerId, null, playerId));
+    }
+
+    @Override
+    public boolean hasDayNight() {
+        return state.isHasDayNight();
+    }
+
+    @Override
+    public void setDaytime(boolean daytime) {
+        if (!state.isHasDayNight()) {
+            informPlayers("It has become " + (daytime ? "day" : "night"));
+        }
+        if (!state.setDaytime(daytime)) {
+            return;
+        }
+        // TODO: add day/night sound effect
+        informPlayers("It has become " + (daytime ? "day" : "night"));
+        fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_DAY_NIGHT, null, null, null));
+        for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
+            if ((daytime && permanent.getAbilities(this).containsClass(NightboundAbility.class))
+                    || (!daytime && permanent.getAbilities(this).containsClass(DayboundAbility.class))) {
+                permanent.transform(null, this, true);
+            }
+        }
+    }
+
+    @Override
+    public boolean checkDayNight(boolean daytime) {
+        return state.isHasDayNight() && state.isDaytime() == daytime;
     }
 
     @Override
@@ -1933,6 +1959,9 @@ public abstract class GameImpl implements Game {
             if (newAbility.getSourceObjectZoneChangeCounter() == 0) {
                 newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
             }
+            if (!(newAbility instanceof DelayedTriggeredAbility)) {
+                newAbility.setSourcePermanentTransformCount(this);
+            }
             newAbility.setTriggerEvent(triggeringEvent);
             state.addTriggeredAbility(newAbility);
         }
@@ -1949,6 +1978,7 @@ public abstract class GameImpl implements Game {
         newAbility.newId();
         if (source != null) {
             newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
+            newAbility.setSourcePermanentTransformCount(this);
         }
         newAbility.initOnAdding(this);
         // ability.init is called as the ability triggeres not now.
@@ -2585,6 +2615,17 @@ public abstract class GameImpl implements Game {
             }
         }
 
+        // Daybound/Nightbound permanents should be transformed according to day/night
+        // This is not a state-based action but it's unclear where else to put it
+        if (hasDayNight()) {
+            for (Permanent permanent : getBattlefield().getAllActivePermanents()) {
+                if ((permanent.getAbilities(this).containsClass(DayboundAbility.class) && !state.isDaytime())
+                        || (permanent.getAbilities(this).containsClass(NightboundAbility.class) && state.isDaytime())) {
+                    somethingHappened = permanent.transform(null, this, true) || somethingHappened;
+                }
+            }
+        }
+
         //TODO: implement the rest
         return somethingHappened;
     }
@@ -2757,6 +2798,8 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void informPlayers(String message) {
+        // Uncomment to print game messages
+        // System.out.println(message.replaceAll("\\<.*?\\>", ""));
         if (simulation) {
             return;
         }

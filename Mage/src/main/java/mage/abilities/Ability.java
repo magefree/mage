@@ -531,6 +531,10 @@ public interface Ability extends Controllable, Serializable {
      */
     Permanent getSourcePermanentOrLKI(Game game);
 
+    void setSourcePermanentTransformCount(Game game);
+
+    boolean checkTransformCount(Permanent permanent, Game game);
+
     String getTargetDescription(Targets targets, Game game);
 
     void setCanFizzle(boolean canFizzle);

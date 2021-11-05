@@ -39,7 +39,6 @@ public final class CovertCutpurse extends CardImpl {
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.c.CovetousGeist.class;
 
         // When Covert Cutpurse enters the battlefield, destroy target creature you don't control that was dealt damage this turn.

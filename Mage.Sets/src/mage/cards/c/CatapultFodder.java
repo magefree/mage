@@ -28,14 +28,12 @@ public final class CatapultFodder extends CardImpl {
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);
-
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.c.CatapultCaptain.class;
 
         // At the beginning of combat on your turn, if you control three or more creatures that each have toughness greater than their power, transform Catapult Fodder.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(new TransformSourceEffect(true, true), TargetController.YOU, false),
+                new BeginningOfCombatTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false),
                 CatapultFodderCondition.instance,
                 "At the beginning of combat on your turn, if you control three or more creatures that each have toughness greater than their power, transform {this}"
         ));

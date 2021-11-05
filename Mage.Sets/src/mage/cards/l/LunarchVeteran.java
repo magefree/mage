@@ -26,7 +26,6 @@ public final class LunarchVeteran extends CardImpl {
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.l.LuminousPhantom.class;
 
         // Whenever another creature enters the battlefield under your control, you gain 1 life.

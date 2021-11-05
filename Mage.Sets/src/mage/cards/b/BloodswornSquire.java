@@ -33,8 +33,6 @@ public final class BloodswornSquire extends CardImpl {
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.b.BloodswornKnight.class;
 
         this.addAbility(new TransformAbility());
@@ -47,7 +45,7 @@ public final class BloodswornSquire extends CardImpl {
         ability.addCost(new DiscardCardCost());
         ability.addEffect(new TapSourceEffect().setText("tap it"));
         ability.addEffect(new ConditionalOneShotEffect(
-                new TransformSourceEffect(true, true),
+                new TransformSourceEffect(),
                 new CardsInControllerGraveyardCondition(4, StaticFilters.FILTER_CARD_CREATURES),
                 "Then if there are four or more creature cards in your graveyard, transform {this}"
         ));

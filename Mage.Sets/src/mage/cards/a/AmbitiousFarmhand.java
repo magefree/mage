@@ -36,7 +36,6 @@ public final class AmbitiousFarmhand extends CardImpl {
         this.subtype.add(SubType.PEASANT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.SeasonedCathar.class;
 
         // When Ambitious Farmhand enters the battlefield, you may search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
@@ -47,7 +46,7 @@ public final class AmbitiousFarmhand extends CardImpl {
         // Coven—{1}{W}{W}: Transform Ambitious Farmhand. Activate only if you control three or more creatures with different powers.
         this.addAbility(new TransformAbility());
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new TransformSourceEffect(true),
+                Zone.BATTLEFIELD, new TransformSourceEffect(),
                 new ManaCostsImpl<>("{1}{W}{W}"), CovenCondition.instance
         ).setAbilityWord(AbilityWord.COVEN).addHint(CovenHint.instance));
     }

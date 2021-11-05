@@ -37,12 +37,11 @@ public final class ChosenOfMarkov extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.m.MarkovsServant.class;
 
         // {tap}, Tap an untapped Vampire you control: Transform Chosen of Markov.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }

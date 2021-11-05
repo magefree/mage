@@ -27,7 +27,6 @@ public final class ConquerorsGalleon extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(10);
 
-        this.transformable = true;
         this.secondSideCardClazz = ConquerorsFoothold.class;
 
         // When Conqueror's Galleon attacks, exile it at the end of combat, then return it to the battlefield transformed under your control.

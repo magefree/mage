@@ -25,7 +25,6 @@ public final class UlvenwaldOddity extends CardImpl {
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.u.UlvenwaldBehemoth.class;
 
         // Trample
@@ -37,7 +36,7 @@ public final class UlvenwaldOddity extends CardImpl {
         // {5}{G}{G}: Transform Ulvenwald Oddity.
         this.addAbility(new TransformAbility());
         this.addAbility(new SimpleActivatedAbility(
-                new TransformSourceEffect(true), new ManaCostsImpl<>("{5}{G}{G}")
+                new TransformSourceEffect(), new ManaCostsImpl<>("{5}{G}{G}")
         ));
     }
 

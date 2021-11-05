@@ -39,7 +39,6 @@ public final class FrenziedTrapbreaker extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.color.setGreen(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // {1}, Sacrifice Frenzied Trapbreaker: Destroy target artifact or enchantment.

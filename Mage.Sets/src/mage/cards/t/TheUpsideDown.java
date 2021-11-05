@@ -33,9 +33,8 @@ public final class TheUpsideDown extends CardImpl {
 
     public TheUpsideDown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-
         this.addSuperType(SuperType.LEGENDARY);
-        this.transformable = true;
+
         this.nightCard = true;
 
         // When this land transforms into The Upside Down, return target creature card from your graveyard to the battlefield.
@@ -144,7 +143,7 @@ class TheUpsideDownEffect extends OneShotEffect {
 class TheUpsideDownLeavesAbility extends TriggeredAbilityImpl {
 
     TheUpsideDownLeavesAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(false));
+        super(Zone.BATTLEFIELD, new TransformSourceEffect());
     }
 
     private TheUpsideDownLeavesAbility(final TheUpsideDownLeavesAbility ability) {

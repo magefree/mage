@@ -17,7 +17,7 @@ import java.util.List;
  */
 public final class InnistradMidnightHunt extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Arlinn, the Pack's Hope", "Arlinn, the Moon's Fury", "Baithook Angler", "Hook-Haunt Drifter", "Baneblade Scoundrel", "Baneclaw Marauder", "Beloved Beggar", "Generous Soul", "Bird Admirer", "Wing Shredder", "Brimstone Vandal", "Brutal Cathar", "Moonrage Brute", "Burly Breaker", "Dire-Strain Demolisher", "Celestus Sanctifier", "Chaplain of Alms", "Chapel Shieldgeist", "Component Collector", "Covert Cutpurse", "Covetous Geist", "Covetous Castaway", "Ghostly Castigator", "Curse of Leeches", "Leeching Lurker", "Dennick, Pious Apprentice", "Dennick, Pious Apparition", "Devoted Grafkeeper", "Departed Soulkeeper", "Fangblade Brigand", "Fangblade Eviscerator", "Firmament Sage", "Galedrifter", "Waildrifter", "Gavony Dawnguard", "Graveyard Trespasser", "Graveyard Glutton", "Harvesttide Infiltrator", "Harvesttide Assailant", "Hound Tamer", "Untamed Pup", "Kessig Naturalist", "Lord of the Ulvenwald", "Lunarch Veteran", "Luminous Phantom", "Malevolent Hermit", "Benevolent Geist", "Mourning Patrol", "Morning Apparition", "Obsessive Astronomer", "Outland Liberator", "Frenzied Trapbreaker", "Overwhelmed Archivist", "Archive Haunt", "Phantom Carriage", "Reckless Stormseeker", "Storm-Charged Slasher", "Shady Traveler", "Stalking Predator", "Shipwreck Sifters", "Spellrune Painter", "Spellrune Howler", "Sunrise Cavalier", "Sunstreak Phoenix", "Suspicious Stowaway", "Seafaring Werewolf", "Tavern Ruffian", "Tavern Smasher", "The Celestus", "Thraben Exorcism", "Tireless Hauler", "Dire-Strain Brawler", "Tovolar, Dire Overlord", "Tovolar, the Midnight Scourge", "Tovolar's Huntmaster", "Tovolar's Packleader", "Unblinking Observer", "Vadrik, Astral Archmage", "Village Watch", "Village Reavers");
+    private static final List<String> unfinished = Arrays.asList("Baithook Angler", "Hook-Haunt Drifter", "Beloved Beggar", "Generous Soul", "Chaplain of Alms", "Chapel Shieldgeist", "Covert Cutpurse", "Covetous Geist", "Covetous Castaway", "Ghostly Castigator", "Dennick, Pious Apprentice", "Dennick, Pious Apparition", "Devoted Grafkeeper", "Departed Soulkeeper", "Galedrifter", "Waildrifter", "Lunarch Veteran", "Luminous Phantom", "Malevolent Hermit", "Benevolent Geist", "Mourning Patrol", "Morning Apparition", "Overwhelmed Archivist", "Archive Haunt", "Phantom Carriage", "Shipwreck Sifters", "Thraben Exorcism", "Unblinking Observer");
     private static final InnistradMidnightHunt instance = new InnistradMidnightHunt();
 
     public static InnistradMidnightHunt getInstance() {
@@ -40,6 +40,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Adeline, Resplendent Cathar", 1, Rarity.RARE, mage.cards.a.AdelineResplendentCathar.class));
         cards.add(new SetCardInfo("Ambitious Farmhand", 2, Rarity.UNCOMMON, mage.cards.a.AmbitiousFarmhand.class));
         cards.add(new SetCardInfo("Angelfire Ignition", 209, Rarity.RARE, mage.cards.a.AngelfireIgnition.class));
+        cards.add(new SetCardInfo("Angelic Enforcer", 17, Rarity.MYTHIC, mage.cards.a.AngelicEnforcer.class));
         cards.add(new SetCardInfo("Arcane Infusion", 210, Rarity.UNCOMMON, mage.cards.a.ArcaneInfusion.class));
         cards.add(new SetCardInfo("Archive Haunt", 68, Rarity.UNCOMMON, mage.cards.a.ArchiveHaunt.class));
         cards.add(new SetCardInfo("Ardent Elementalist", 128, Rarity.COMMON, mage.cards.a.ArdentElementalist.class));
@@ -50,6 +51,8 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Augur of Autumn", 168, Rarity.RARE, mage.cards.a.AugurOfAutumn.class));
         cards.add(new SetCardInfo("Awoken Demon", 100, Rarity.COMMON, mage.cards.a.AwokenDemon.class));
         cards.add(new SetCardInfo("Baithook Angler", 42, Rarity.COMMON, mage.cards.b.BaithookAngler.class));
+        cards.add(new SetCardInfo("Baneblade Scoundrel", 85, Rarity.UNCOMMON, mage.cards.b.BanebladeScoundrel.class));
+        cards.add(new SetCardInfo("Baneclaw Marauder", 85, Rarity.UNCOMMON, mage.cards.b.BaneclawMarauder.class));
         cards.add(new SetCardInfo("Bat Whisperer", 86, Rarity.COMMON, mage.cards.b.BatWhisperer.class));
         cards.add(new SetCardInfo("Benevolent Geist", 61, Rarity.RARE, mage.cards.b.BenevolentGeist.class));
         cards.add(new SetCardInfo("Bereaved Survivor", 4, Rarity.UNCOMMON, mage.cards.b.BereavedSurvivor.class));
@@ -97,6 +100,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Creeping Inn", 264, Rarity.MYTHIC, mage.cards.c.CreepingInn.class));
         cards.add(new SetCardInfo("Croaking Counterpart", 215, Rarity.RARE, mage.cards.c.CroakingCounterpart.class));
         cards.add(new SetCardInfo("Crossroads Candleguide", 253, Rarity.COMMON, mage.cards.c.CrossroadsCandleguide.class));
+        cards.add(new SetCardInfo("Curse of Leeches", 94, Rarity.RARE, mage.cards.c.CurseOfLeeches.class));
         cards.add(new SetCardInfo("Curse of Shaken Faith", 134, Rarity.RARE, mage.cards.c.CurseOfShakenFaith.class));
         cards.add(new SetCardInfo("Curse of Silence", 15, Rarity.RARE, mage.cards.c.CurseOfSilence.class));
         cards.add(new SetCardInfo("Curse of Surveillance", 46, Rarity.RARE, mage.cards.c.CurseOfSurveillance.class));
@@ -132,6 +136,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Ecstatic Awakener", 100, Rarity.COMMON, mage.cards.e.EcstaticAwakener.class));
         cards.add(new SetCardInfo("Electric Revelation", 135, Rarity.COMMON, mage.cards.e.ElectricRevelation.class));
         cards.add(new SetCardInfo("Embodiment of Flame", 141, Rarity.UNCOMMON, mage.cards.e.EmbodimentOfFlame.class));
+        cards.add(new SetCardInfo("Enduring Angel", 17, Rarity.MYTHIC, mage.cards.e.EnduringAngel.class));
         cards.add(new SetCardInfo("Evolving Wilds", 261, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Fading Hope", 51, Rarity.UNCOMMON, mage.cards.f.FadingHope.class));
         cards.add(new SetCardInfo("Faithful Mending", 221, Rarity.UNCOMMON, mage.cards.f.FaithfulMending.class));
@@ -196,6 +201,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Kessig Naturalist", 231, Rarity.UNCOMMON, mage.cards.k.KessigNaturalist.class));
         cards.add(new SetCardInfo("Lambholt Harrier", 145, Rarity.COMMON, mage.cards.l.LambholtHarrier.class));
         cards.add(new SetCardInfo("Larder Zombie", 58, Rarity.COMMON, mage.cards.l.LarderZombie.class));
+        cards.add(new SetCardInfo("Leeching Lurker", 94, Rarity.RARE, mage.cards.l.LeechingLurker.class));
         cards.add(new SetCardInfo("Lier, Disciple of the Drowned", 59, Rarity.MYTHIC, mage.cards.l.LierDiscipleOfTheDrowned.class));
         cards.add(new SetCardInfo("Liesa, Forgotten Archangel", 232, Rarity.RARE, mage.cards.l.LiesaForgottenArchangel.class));
         cards.add(new SetCardInfo("Light Up the Night", 146, Rarity.RARE, mage.cards.l.LightUpTheNight.class));
@@ -203,6 +209,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Lord of the Forsaken", 110, Rarity.MYTHIC, mage.cards.l.LordOfTheForsaken.class));
         cards.add(new SetCardInfo("Lord of the Ulvenwald", 231, Rarity.UNCOMMON, mage.cards.l.LordOfTheUlvenwald.class));
         cards.add(new SetCardInfo("Loyal Gryff", 26, Rarity.UNCOMMON, mage.cards.l.LoyalGryff.class));
+        cards.add(new SetCardInfo("Ludevic, Necrogenius", 233, Rarity.RARE, mage.cards.l.LudevicNecrogenius.class));
         cards.add(new SetCardInfo("Luminous Phantom", 27, Rarity.COMMON, mage.cards.l.LuminousPhantom.class));
         cards.add(new SetCardInfo("Lunar Frenzy", 147, Rarity.UNCOMMON, mage.cards.l.LunarFrenzy.class));
         cards.add(new SetCardInfo("Lunarch Veteran", 27, Rarity.COMMON, mage.cards.l.LunarchVeteran.class));
@@ -230,6 +237,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Novice Occultist", 117, Rarity.COMMON, mage.cards.n.NoviceOccultist.class));
         cards.add(new SetCardInfo("Obsessive Astronomer", 152, Rarity.UNCOMMON, mage.cards.o.ObsessiveAstronomer.class));
         cards.add(new SetCardInfo("Odric's Outrider", 29, Rarity.UNCOMMON, mage.cards.o.OdricsOutrider.class));
+        cards.add(new SetCardInfo("Olag, Ludevic's Hubris", 233, Rarity.RARE, mage.cards.o.OlagLudevicsHubris.class));
         cards.add(new SetCardInfo("Old Stickfingers", 234, Rarity.RARE, mage.cards.o.OldStickfingers.class));
         cards.add(new SetCardInfo("Olivia's Midnight Ambush", 118, Rarity.COMMON, mage.cards.o.OliviasMidnightAmbush.class));
         cards.add(new SetCardInfo("Ominous Roost", 65, Rarity.UNCOMMON, mage.cards.o.OminousRoost.class));
@@ -314,6 +322,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Tavern Ruffian", 163, Rarity.COMMON, mage.cards.t.TavernRuffian.class));
         cards.add(new SetCardInfo("Tavern Smasher", 163, Rarity.COMMON, mage.cards.t.TavernSmasher.class));
         cards.add(new SetCardInfo("Teferi, Who Slows the Sunset", 245, Rarity.MYTHIC, mage.cards.t.TeferiWhoSlowsTheSunset.class));
+        cards.add(new SetCardInfo("The Celestus", 252, Rarity.RARE, mage.cards.t.TheCelestus.class));
         cards.add(new SetCardInfo("The Meathook Massacre", 112, Rarity.MYTHIC, mage.cards.t.TheMeathookMassacre.class));
         cards.add(new SetCardInfo("Thermo-Alchemist", 164, Rarity.UNCOMMON, mage.cards.t.ThermoAlchemist.class));
         cards.add(new SetCardInfo("Thraben Exorcism", 39, Rarity.COMMON, mage.cards.t.ThrabenExorcism.class));
@@ -321,10 +330,13 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Tireless Hauler", 203, Rarity.COMMON, mage.cards.t.TirelessHauler.class));
         cards.add(new SetCardInfo("Tovolar's Huntmaster", 204, Rarity.RARE, mage.cards.t.TovolarsHuntmaster.class));
         cards.add(new SetCardInfo("Tovolar's Packleader", 204, Rarity.RARE, mage.cards.t.TovolarsPackleader.class));
+        cards.add(new SetCardInfo("Tovolar, Dire Overlord", 246, Rarity.RARE, mage.cards.t.TovolarDireOverlord.class));
+        cards.add(new SetCardInfo("Tovolar, the Midnight Scourge", 246, Rarity.RARE, mage.cards.t.TovolarTheMidnightScourge.class));
         cards.add(new SetCardInfo("Triskaidekaphile", 81, Rarity.RARE, mage.cards.t.Triskaidekaphile.class));
         cards.add(new SetCardInfo("Turn the Earth", 205, Rarity.UNCOMMON, mage.cards.t.TurnTheEarth.class));
         cards.add(new SetCardInfo("Unblinking Observer", 82, Rarity.COMMON, mage.cards.u.UnblinkingObserver.class));
         cards.add(new SetCardInfo("Unnatural Growth", 206, Rarity.RARE, mage.cards.u.UnnaturalGrowth.class));
+        cards.add(new SetCardInfo("Unnatural Moonrise", 247, Rarity.UNCOMMON, mage.cards.u.UnnaturalMoonrise.class));
         cards.add(new SetCardInfo("Unruly Mob", 40, Rarity.COMMON, mage.cards.u.UnrulyMob.class));
         cards.add(new SetCardInfo("Untamed Pup", 187, Rarity.UNCOMMON, mage.cards.u.UntamedPup.class));
         cards.add(new SetCardInfo("Vadrik, Astral Archmage", 248, Rarity.RARE, mage.cards.v.VadrikAstralArchmage.class));

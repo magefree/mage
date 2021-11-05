@@ -30,7 +30,6 @@ public final class OrmendahlTheCorrupter extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.color.setBlack(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Flying

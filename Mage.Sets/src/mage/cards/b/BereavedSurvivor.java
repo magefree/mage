@@ -24,13 +24,12 @@ public final class BereavedSurvivor extends CardImpl {
         this.subtype.add(SubType.PEASANT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.d.DauntlessAvenger.class;
 
         // When another creature you control dies, transform Bereaved Survivor.
         this.addAbility(new TransformAbility());
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new TransformSourceEffect(true), false,
+                new TransformSourceEffect(), false,
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
         ).setTriggerPhrase("When another creature you control dies, "));
     }

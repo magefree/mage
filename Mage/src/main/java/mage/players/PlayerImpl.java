@@ -2063,11 +2063,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(this.getLogName() + " loses " + event.getAmount() + " life"
                         + (atCombat ? " at combat" : "") + CardUtil.getSourceLogName(game, " from ", needId, "", ""));
             }
-            if (amount > 0) {
+            if (event.getAmount() > 0) {
                 game.fireEvent(new GameEvent(GameEvent.EventType.LOST_LIFE,
-                        playerId, source, playerId, amount, atCombat));
+                        playerId, source, playerId, event.getAmount(), atCombat));
             }
-            return amount;
+            return event.getAmount();
         }
         return 0;
     }

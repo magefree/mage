@@ -6,14 +6,13 @@ import mage.game.Game;
 
 /**
  * @author TheElk801
- * TODO: Implement this
  */
 public enum NightCondition implements Condition {
     instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return false;
+        return game.checkDayNight(false);
     }
 
     @Override

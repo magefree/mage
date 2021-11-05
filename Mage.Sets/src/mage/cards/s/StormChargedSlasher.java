@@ -30,7 +30,6 @@ public final class StormChargedSlasher extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.color.setRed(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // At the beginning of combat on your turn, target creature you control gets +2/+0 and gains trample and haste until end of turn.

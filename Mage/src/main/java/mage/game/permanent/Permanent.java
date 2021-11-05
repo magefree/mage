@@ -47,11 +47,15 @@ public interface Permanent extends Card, Controllable {
 
     boolean flip(Game game);
 
-    boolean transform(Game game);
+    boolean transform(Ability source, Game game);
+
+    boolean transform(Ability source, Game game, boolean ignoreDayNight);
 
     boolean isTransformed();
 
     void setTransformed(boolean value);
+
+    int getTransformCount();
 
     boolean isPhasedIn();
 
@@ -289,15 +293,6 @@ public interface Permanent extends Card, Controllable {
      */
     boolean canUseActivatedAbilities(Game game);
 
-    /**
-     * Checks by restriction effects if the permanent can transform
-     *
-     * @param ability the ability that causes the transform
-     * @param game
-     * @return true - permanent can transform
-     */
-    boolean canTransform(Ability ability, Game game);
-
     boolean removeFromCombat(Game game);
 
     boolean removeFromCombat(Game game, boolean withInfo);
@@ -413,5 +408,4 @@ public interface Permanent extends Card, Controllable {
         }
         return getAttachedTo().equals(otherId);
     }
-
 }

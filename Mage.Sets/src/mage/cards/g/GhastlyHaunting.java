@@ -25,7 +25,6 @@ public final class GhastlyHaunting extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.transformable = true;
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

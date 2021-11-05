@@ -30,7 +30,6 @@ public final class RavenousDemon extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.DEMON);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.ArchdemonOfGreed.class;
 
         this.power = new MageInt(4);
@@ -38,7 +37,7 @@ public final class RavenousDemon extends CardImpl {
 
         // Sacrifice a Human: Transform Ravenous Demon. Activate this ability only any time you could cast a sorcery.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
     private RavenousDemon(final RavenousDemon card) {

@@ -31,7 +31,6 @@ public final class GarrukRelentless extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
-        this.transformable = true;
         this.secondSideCardClazz = GarrukTheVeilCursed.class;
 
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
@@ -63,7 +62,7 @@ public final class GarrukRelentless extends CardImpl {
 class GarrukRelentlessStateTrigger extends StateTriggeredAbility {
 
     public GarrukRelentlessStateTrigger() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true));
+        super(Zone.BATTLEFIELD, new TransformSourceEffect());
     }
 
     public GarrukRelentlessStateTrigger(final GarrukRelentlessStateTrigger ability) {

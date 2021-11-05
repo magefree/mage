@@ -30,7 +30,6 @@ public final class MalevolentHermit extends CardImpl {
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.b.BenevolentGeist.class;
 
         // {U}, Sacrifice Malevolent Hermit: Counter target noncreature spell unless its controller pays {3}.

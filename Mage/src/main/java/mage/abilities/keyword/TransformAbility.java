@@ -64,7 +64,6 @@ public class TransformAbility extends SimpleStaticAbility {
         }
         permanent.getPower().modifyBaseValue(sourceCard.getPower().getValue());
         permanent.getToughness().modifyBaseValue(sourceCard.getToughness().getValue());
-        permanent.setTransformable(sourceCard.isTransformable());
     }
 }
 

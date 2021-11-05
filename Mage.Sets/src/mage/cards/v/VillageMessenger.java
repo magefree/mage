@@ -23,7 +23,6 @@ public final class VillageMessenger extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.m.MoonriseIntruder.class;
 
         // Haste

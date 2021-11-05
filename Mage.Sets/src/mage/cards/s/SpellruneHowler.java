@@ -26,7 +26,6 @@ public final class SpellruneHowler extends CardImpl {
         this.toughness = new MageInt(4);
         this.color.setRed(true);
         this.nightCard = true;
-        this.transformable = true;
 
         // Whenever you cast an instant or sorcery spell, Spellrune Howler gets +2/+2 until end of turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(

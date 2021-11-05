@@ -47,7 +47,6 @@ public final class GoldenGuardian extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.transformable = true;
         this.secondSideCardClazz = GoldForgeGarrison.class;
 
         // Defender

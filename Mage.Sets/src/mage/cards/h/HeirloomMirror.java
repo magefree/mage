@@ -28,7 +28,6 @@ public final class HeirloomMirror extends CardImpl {
     public HeirloomMirror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{B}");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.i.InheritedFiend.class;
 
         // {1}, {T}, Pay 1 life, Discard a card: Draw a card, mill a card, then put a ritual counter on Heirloom Mirror. Then if it has 3 or more ritual counters on it, remove them and transform it. Activate only as a sorcery.
@@ -82,7 +81,7 @@ class HeirloomMirrorEffect extends OneShotEffect {
             return true;
         }
         permanent.removeCounters(CounterType.RITUAL.createInstance(counters), source, game);
-        new TransformSourceEffect(true).apply(game, source);
+        new TransformSourceEffect().apply(game, source);
         return true;
     }
 }

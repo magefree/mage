@@ -43,7 +43,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected String tokenSetCode;
     protected String tokenDescriptor;
     protected Rarity rarity;
-    protected boolean transformable;
     protected Class<?> secondSideCardClazz;
     protected Card secondSideCard;
     protected boolean nightCard;
@@ -121,7 +120,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         tokenDescriptor = card.tokenDescriptor;
         rarity = card.rarity;
 
-        transformable = card.transformable;
         secondSideCardClazz = card.secondSideCardClazz;
         secondSideCard = null; // will be set on first getSecondCardFace call if card has one
         nightCard = card.nightCard;
@@ -618,12 +616,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean isTransformable() {
-        return this.transformable;
-    }
-
-    @Override
-    public void setTransformable(boolean transformable) {
-        this.transformable = transformable;
+        return this.secondSideCardClazz != null || this.nightCard;
     }
 
     @Override

@@ -29,7 +29,6 @@ public final class HoundTamer extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.u.UntamedPup.class;
 
         // Trample

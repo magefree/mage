@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
@@ -16,13 +14,15 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class Moonmist extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures other than Werewolves and Wolves");
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("creatures other than Werewolves and Wolves");
 
     static {
         filter.add(Predicates.not(SubType.WEREWOLF.getPredicate()));
@@ -30,8 +30,7 @@ public final class Moonmist extends CardImpl {
     }
 
     public Moonmist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Transform all Humans. Prevent all combat damage that would be dealt this turn by creatures other than Werewolves and Wolves.
         this.getSpellAbility().addEffect(new MoonmistEffect());
@@ -67,11 +66,8 @@ class MoonmistEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            if (permanent.isTransformable()) {
-                permanent.transform(game);
-                game.informPlayers(permanent.getName() + " transforms into " + permanent.getSecondCardFace().getName());
-            }
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+            permanent.transform(source, game);
         }
         return true;
     }
@@ -80,5 +76,4 @@ class MoonmistEffect extends OneShotEffect {
     public MoonmistEffect copy() {
         return new MoonmistEffect(this);
     }
-
 }

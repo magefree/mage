@@ -29,7 +29,6 @@ public final class FangbladeEviscerator extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
         this.color.setRed(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // {1}{R}: Fangblade Eviscerator gets +1/+0 and gains first strike until end of turn.

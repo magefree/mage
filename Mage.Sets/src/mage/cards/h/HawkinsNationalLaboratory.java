@@ -29,9 +29,8 @@ public final class HawkinsNationalLaboratory extends CardImpl {
 
     public HawkinsNationalLaboratory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-
         this.addSuperType(SuperType.LEGENDARY);
-        this.transformable = true;
+
         this.secondSideCardClazz = mage.cards.t.TheUpsideDown.class;
 
         // {T}: Add {C}.
@@ -45,7 +44,7 @@ public final class HawkinsNationalLaboratory extends CardImpl {
         // At the beginning of your end step, if you sacrificed three or more Clues this turn, transform Hawkins National Laboratory.
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new TransformSourceEffect(true),
+                Zone.BATTLEFIELD, new TransformSourceEffect(),
                 TargetController.YOU, HawkinsNationalLaboratoryCondition.instance, false
         ), new HawkinsNationalLaboratoryWatcher());
     }

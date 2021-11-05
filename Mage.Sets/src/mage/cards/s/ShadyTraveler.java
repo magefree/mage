@@ -23,7 +23,6 @@ public final class ShadyTraveler extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.StalkingPredator.class;
 
         // Menace

@@ -32,7 +32,6 @@ public final class DevotedGrafkeeper extends CardImpl {
         this.subtype.add(SubType.PEASANT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.d.DepartedSoulkeeper.class;
 
         // When Devoted Grafkeeper enters the battlefield, mill two cards.

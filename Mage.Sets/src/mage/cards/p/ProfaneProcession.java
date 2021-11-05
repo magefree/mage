@@ -33,7 +33,6 @@ public final class ProfaneProcession extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.t.TombOfTheDuskRose.class;
 
         // {3}{W}{B}: Exile target creature. Then if there are three or more cards exiled with Profane Procession, transform it.
@@ -79,7 +78,7 @@ class ProfaneProcessionEffect extends OneShotEffect {
             game.getState().processAction(game);
             ExileZone exileZone = game.getExile().getExileZone(exileId);
             if (exileZone != null && exileZone.size() > 2) {
-                new TransformSourceEffect(true).apply(game, source);
+                new TransformSourceEffect().apply(game, source);
             }
             return true;
         }

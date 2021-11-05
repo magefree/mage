@@ -31,15 +31,14 @@ public final class GrimlockFerociousKing extends CardImpl{
         this.color.setGreen(true);
         this.color.setWhite(true);
 
-        this.transformable = true;
-        this.nightCard = true;
+       this.nightCard = true;
         
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         
         // {2}: Grimlock, Ferocious King becomes Grimlock, Dinobot Leader.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(false), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl("{2}")));
     }
 
     private GrimlockFerociousKing(final GrimlockFerociousKing card) {

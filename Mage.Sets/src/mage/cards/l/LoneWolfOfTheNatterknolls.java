@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -29,7 +28,6 @@ public final class LoneWolfOfTheNatterknolls extends CardImpl {
         this.color.setGreen(true);
 
         this.nightCard = true;
-        this.transformable = true;
 
         // Whenever an opponent cast a spell during your turn, draw two cards.
         this.addAbility(new ConditionalTriggeredAbility(
