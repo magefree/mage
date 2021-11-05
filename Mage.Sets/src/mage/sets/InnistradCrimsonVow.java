@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class InnistradCrimsonVow extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Avabruck Caretaker", "Hollowhenge Huntmaster", "Ballista Watcher", "Ballista Wielder", "Brine Comber", "Brinebound Gift", "Child of the Pack", "Savage Packmate", "Distracting Geist", "Clever Distraction", "Dorothea, Vengeful Victim", "Dorothea's Retribution", "Drogskol Infantry", "Drogskol Armaments", "Faithbound Judge", "Sinner's Judgment", "Fearful Villager", "Fearsome Werewolf", "Gutter Skulker", "Gutter Shortcut", "Howlpack Piper", "Wildsong Howler", "Infestation Expert", "Infested Werewolf", "Katilda, Dawnhart Martyr", "Katilda's Rising Dawn", "Kindly Ancestor", "Ancestor's Embrace", "Lambholt Raconteur", "Lambholt Ravager", "Lantern Bearer", "Lanterns' Lift", "Mirrorhall Mimic", "Ghastly Mimicry", "Mischievous Catgeist", "Catlike Curiosity", "Oakshade Stalker", "Twinblade Geist", "Twinblade Invocation", "Volatile Arsonist", "Dire-Strain Anarchist", "Weary Prisoner", "Wrathful Jailbreaker", "Weaver of Blossoms", "Blossom-Clad Werewolf", "Wolfkin Outcast", "Wedding Crasher");
+    private static final List<String> unfinished = Arrays.asList("Avabruck Caretaker", "Hollowhenge Huntmaster", "Ballista Watcher", "Ballista Wielder", "Brine Comber", "Brinebound Gift", "Child of the Pack", "Savage Packmate", "Distracting Geist", "Clever Distraction", "Dorothea, Vengeful Victim", "Dorothea's Retribution", "Drogskol Infantry", "Drogskol Armaments", "Faithbound Judge", "Sinner's Judgment", "Fearful Villager", "Fearsome Werewolf", "Gutter Skulker", "Gutter Shortcut", "Howlpack Piper", "Wildsong Howler", "Infestation Expert", "Infested Werewolf", "Katilda, Dawnhart Martyr", "Katilda's Rising Dawn", "Kindly Ancestor", "Ancestor's Embrace", "Lambholt Raconteur", "Lambholt Ravager", "Lantern Bearer", "Lanterns' Lift", "Mirrorhall Mimic", "Ghastly Mimicry", "Mischievous Catgeist", "Catlike Curiosity", "Oakshade Stalker", "Moonlit Ambusher", "Twinblade Geist", "Twinblade Invocation", "Volatile Arsonist", "Dire-Strain Anarchist", "Weary Prisoner", "Wrathful Jailbreaker", "Weaver of Blossoms", "Blossom-Clad Werewolf", "Wolfkin Outcast", "Wedding Crasher");
     private static final InnistradCrimsonVow instance = new InnistradCrimsonVow();
 
     public static InnistradCrimsonVow getInstance() {
@@ -126,7 +126,9 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Militia Rallier", 24, Rarity.COMMON, mage.cards.m.MilitiaRallier.class));
         cards.add(new SetCardInfo("Mindleech Ghoul", 122, Rarity.COMMON, mage.cards.m.MindleechGhoul.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Moonlit Ambusher", 212, Rarity.UNCOMMON, mage.cards.m.MoonlitAmbusher.class));
         cards.add(new SetCardInfo("Mulch", 210, Rarity.COMMON, mage.cards.m.Mulch.class));
+        cards.add(new SetCardInfo("Oakshade Stalker", 212, Rarity.UNCOMMON, mage.cards.o.OakshadeStalker.class));
         cards.add(new SetCardInfo("Old Rutstein", 244, Rarity.RARE, mage.cards.o.OldRutstein.class));
         cards.add(new SetCardInfo("Olivia, Crimson Bride", 245, Rarity.MYTHIC, mage.cards.o.OliviaCrimsonBride.class));
         cards.add(new SetCardInfo("Ollenbock Escort", 27, Rarity.UNCOMMON, mage.cards.o.OllenbockEscort.class));
