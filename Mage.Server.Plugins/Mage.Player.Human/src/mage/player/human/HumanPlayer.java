@@ -223,7 +223,7 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
 
-            // game recived immidiate response on OTHER player concede -- need to process end game and continue to wait
+            // game recived immediately response on OTHER player concede -- need to process end game and continue to wait
             if (response.getResponseConcedeCheck()) {
                 ((GameImpl) game).checkConcede();
                 if (game.hasEnded()) {

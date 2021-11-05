@@ -49,11 +49,9 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
     private static final float ROT_CENTER_TO_BOTTOM_CORNER = 0.7071067811865475244008443621048f;
 
     private CardView gameCard; // current card side, can be different for double faces cards (it's a gui sides, not mtg - so mdf cards will have second side too)
+    private CardView cardSideMain = null; // for gui card side switch
+    private CardView cardSideOther = null; // for gui card side switch
     private CardView updateCard;
-
-    // if null then gameCard contains main card
-    // if not null then gameCard contains second side
-    private CardView temporary;
 
     private double tappedAngle = 0;
     private double flippedAngle = 0;
@@ -98,7 +96,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     public double transformAngle = 1;
 
-    private boolean transformed;
+    private boolean guiTransformed;
     private boolean animationInProgress = false;
 
     private Container cardContainer;
@@ -115,6 +113,8 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
         // Store away params
         this.setGameCard(newGameCard);
+        this.setGameCardSides(newGameCard);
+
         this.callback = callback;
         this.gameId = gameId;
         this.needFullPermanentRender = needFullPermanentRender;
@@ -153,16 +153,24 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             // Create the day night button
             dayNightButton = new JButton("");
             dayNightButton.setSize(32, 32);
-            dayNightButton.setToolTipText("This permanent is a double faced card. To see the back face card, push this button or turn mouse wheel down while hovering with the mouse pointer over the permanent.");
+            dayNightButton.setToolTipText("This permanent is a double faced card. To see the another face card, push this button or move mouse wheel down while hovering over it.");
             BufferedImage day = ImageManagerImpl.instance.getDayImage();
             dayNightButton.setIcon(new ImageIcon(day));
             dayNightButton.addActionListener(e -> {
-                // if card is being rotated, ignore action performed
-                // if card is tapped, no visual transforming is possible (implementation limitation)
-                // if card is permanent, it will be rotated by Mage, so manual rotate should be possible
-                if (animationInProgress || isTapped() || isPermanent) {
+                // if card is rotating then ignore it
+                if (animationInProgress) {
                     return;
                 }
+
+                // if card is tapped then no visual transforming is possible, so switch it immediately
+                if (isTapped()) {
+                    // toggle without animation
+                    this.getTopPanelRef().toggleTransformed();
+                    this.getTopPanelRef().repaint();
+                    return;
+                }
+
+                // normal animation
                 Animation.transformCard(this);
             });
 
@@ -470,7 +478,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public final boolean isTapped() {
-        if (isPermanent) {
+        if (isPermanent && getGameCard() instanceof PermanentView) {
             return ((PermanentView) getGameCard()).isTapped();
         }
         return false;
@@ -478,7 +486,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public final boolean isFlipped() {
-        if (isPermanent) {
+        if (isPermanent && getGameCard() instanceof PermanentView) {
             return ((PermanentView) getGameCard()).isFlipped();
         }
         return false;
@@ -486,15 +494,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public final boolean isTransformed() {
-        if (isPermanent) {
-            if (getGameCard().isTransformed()) {
-                return !this.transformed;
-            } else {
-                return this.transformed;
-            }
-        } else {
-            return this.transformed;
-        }
+        return this.guiTransformed;
     }
 
     @Override
@@ -521,7 +521,9 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             return;
         }
 
-        if (transformed && card.equals(this.temporary)) {
+        // card param can be any card side (example: user switch a card side by transform button)
+
+        if (guiTransformed && card.equals(this.cardSideMain)) {
             // update can be called from different places (after transform click, after selection change, etc)
             // if card temporary transformed before (by icon click) then do not update full data (as example, after selection changed)
             this.isChoosable = card.isChoosable();
@@ -542,7 +544,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
                 AudioManager.playTapPermanent();
             }
             boolean needsTranforming = isTransformed() != card.isTransformed();
-            if (needsTranforming) {
+            if (needsTranforming && !animationInProgress) {
                 Animation.transformCard(this);
             }
         }
@@ -558,6 +560,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
         // Set the new card
         this.setGameCard(card);
+        this.setGameCardSides(card);
 
         // Update tooltip text
         String cardType = getType(card);
@@ -571,13 +574,13 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         // Update transform circle
         if (card.canTransform()) {
             BufferedImage transformIcon;
-            if (isTransformed() || card.isTransformed()) {
+            if (isTransformed() || card.isTransformed()) { // wtf
                 transformIcon = ImageManagerImpl.instance.getNightImage();
             } else {
                 transformIcon = ImageManagerImpl.instance.getDayImage();
             }
             if (dayNightButton != null) {
-                dayNightButton.setVisible(!isPermanent);
+                dayNightButton.setVisible(true); // show T button for any cards and permanents
                 dayNightButton.setIcon(new ImageIcon(transformIcon));
             }
         }
@@ -585,13 +588,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public CardView getOriginal() {
-        if (this.temporary == null) {
-            // current side: main, return: main
-            return this.getGameCard();
-        } else {
-            // current side: second, return: main
-            return this.temporary;
-        }
+        return this.cardSideMain;
     }
 
     @Override
@@ -827,14 +824,12 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public PermanentView getOriginalPermanent() {
+        // used in battlefield drawing, sorting and other GUI things
+        // users can switch current permanent to another side, but you must return original permanent here all the time
         if (isPermanent) {
-            return (PermanentView) this.getGameCard();
+            return (PermanentView) this.cardSideMain;
         }
         throw new IllegalStateException("Is not permanent.");
-    }
-
-    public void setTransformed(boolean transformed) {
-        this.transformed = transformed;
     }
 
     private void copySelections(CardView source, CardView dest) {
@@ -847,39 +842,30 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public void toggleTransformed() {
-        this.transformed = !this.transformed;
-        if (transformed) {
-            // show night card
-            if (dayNightButton != null) { // if transformbable card is copied, button can be null
-                BufferedImage night = ImageManagerImpl.instance.getNightImage();
-                dayNightButton.setIcon(new ImageIcon(night));
-            }
-            if (this.getGameCard().getSecondCardFace() == null) {
+        // VIEW mode (user can change card side at any time by n/d button)
+        this.guiTransformed = !this.guiTransformed;
+
+        if (dayNightButton != null) { // if transformbable card is copied, button can be null
+            BufferedImage image = this.guiTransformed ? ImageManagerImpl.instance.getNightImage() : ImageManagerImpl.instance.getDayImage();
+            dayNightButton.setIcon(new ImageIcon(image));
+        }
+
+        // switch card data
+        if (this.guiTransformed) {
+            // main side -> alternative side
+            if (this.cardSideOther == null) {
                 logger.error("no second side for card to transform!");
                 return;
             }
-            if (!isPermanent) { // use only for custom transformation (when pressing day-night button)
-                copySelections(this.getGameCard(), this.getGameCard().getSecondCardFace());
-                this.setTemporary(this.getGameCard());
-                update(this.getGameCard().getSecondCardFace());
-            }
+            copySelections(this.cardSideMain, this.cardSideOther);
+            update(this.cardSideOther);
+            this.getGameCard().setAlternateName(this.cardSideMain.getName());
         } else {
-            // show day card
-            if (dayNightButton != null) { // if transformbable card is copied, button can be null
-                BufferedImage day = ImageManagerImpl.instance.getDayImage();
-                dayNightButton.setIcon(new ImageIcon(day));
-            }
-            if (!isPermanent) { // use only for custom transformation (when pressing day-night button)
-                copySelections(this.getGameCard().getSecondCardFace(), this.getGameCard());
-                update(this.getTemporary());
-                this.setTemporary(null);
-            }
+            // alternative side -> main side
+            copySelections(this.cardSideOther, this.cardSideMain);
+            update(this.cardSideMain);
+            this.getGameCard().setAlternateName(this.cardSideOther.getName());
         }
-
-        // switch card names for render
-        String temp = this.getGameCard().getAlternateName();
-        this.getGameCard().setAlternateName(this.getGameCard().getOriginalName());
-        this.getGameCard().setOriginalName(temp);
 
         updateArtImage();
     }
@@ -939,20 +925,37 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         this.gameCard = gameCard;
     }
 
+    private void setGameCardSides(CardView gameCard) {
+        if (this.cardSideMain == null) {
+            // new card
+            this.cardSideMain = gameCard;
+            this.cardSideOther = gameCard.getSecondCardFace();
+        } else {
+            // updated card
+            if (this.cardSideMain.getName().equals(gameCard.getName())) {
+                // from main side
+                this.cardSideMain = gameCard;
+                this.cardSideOther = gameCard.getSecondCardFace();
+            } else {
+                // from other side
+                this.cardSideOther = gameCard;
+            }
+        }
+
+        // fix other side: if it's a night side permanent then the main side info must be extracted
+        if (this.cardSideOther != null
+                && this.cardSideOther.getName().equals(this.cardSideMain.getName())
+                && this.cardSideMain instanceof PermanentView) {
+            this.cardSideOther = ((PermanentView) this.cardSideMain).getOriginal();
+        }
+    }
+
     public CardView getUpdateCard() {
         return updateCard;
     }
 
     public void setUpdateCard(CardView updateCard) {
         this.updateCard = updateCard;
-    }
-
-    public CardView getTemporary() {
-        return temporary;
-    }
-
-    public void setTemporary(CardView temporary) {
-        this.temporary = temporary;
     }
 
     public double getTappedAngle() {
@@ -986,6 +989,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
                 needLocation.getCardHeight()
         );
         Rectangle animatedRect = MageLayer.animateCoords(this, normalRect);
+
         return animatedRect.contains(x, y);
     }
 
