@@ -145,6 +145,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Honeymoon Hearse", 160, Rarity.UNCOMMON, mage.cards.h.HoneymoonHearse.class));
         cards.add(new SetCardInfo("Honored Heirloom", 257, Rarity.COMMON, mage.cards.h.HonoredHeirloom.class));
         cards.add(new SetCardInfo("Hookhand Mariner", 203, Rarity.COMMON, mage.cards.h.HookhandMariner.class));
+        cards.add(new SetCardInfo("Hopeful Initiate", 20, Rarity.RARE, mage.cards.h.HopefulInitiate.class));
         cards.add(new SetCardInfo("Howling Moon", 204, Rarity.RARE, mage.cards.h.HowlingMoon.class));
         cards.add(new SetCardInfo("Hungry Ridgewolf", 161, Rarity.COMMON, mage.cards.h.HungryRidgewolf.class));
         cards.add(new SetCardInfo("Infestation Expert", 206, Rarity.UNCOMMON, mage.cards.i.InfestationExpert.class));
