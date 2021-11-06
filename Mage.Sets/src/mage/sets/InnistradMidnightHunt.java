@@ -54,6 +54,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Baneblade Scoundrel", 85, Rarity.UNCOMMON, mage.cards.b.BanebladeScoundrel.class));
         cards.add(new SetCardInfo("Baneclaw Marauder", 85, Rarity.UNCOMMON, mage.cards.b.BaneclawMarauder.class));
         cards.add(new SetCardInfo("Bat Whisperer", 86, Rarity.COMMON, mage.cards.b.BatWhisperer.class));
+        cards.add(new SetCardInfo("Beloved Beggar", 3, Rarity.UNCOMMON, mage.cards.b.BelovedBeggar.class));
         cards.add(new SetCardInfo("Benevolent Geist", 61, Rarity.RARE, mage.cards.b.BenevolentGeist.class));
         cards.add(new SetCardInfo("Bereaved Survivor", 4, Rarity.UNCOMMON, mage.cards.b.BereavedSurvivor.class));
         cards.add(new SetCardInfo("Bird Admirer", 169, Rarity.COMMON, mage.cards.b.BirdAdmirer.class));
@@ -165,6 +166,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Gavony Trapper", 22, Rarity.COMMON, mage.cards.g.GavonyTrapper.class));
         cards.add(new SetCardInfo("Geistflame Reservoir", 142, Rarity.RARE, mage.cards.g.GeistflameReservoir.class));
         cards.add(new SetCardInfo("Geistwave", 56, Rarity.COMMON, mage.cards.g.Geistwave.class));
+        cards.add(new SetCardInfo("Generous Soul", 3, Rarity.UNCOMMON, mage.cards.g.GenerousSoul.class));
         cards.add(new SetCardInfo("Ghostly Castigator", 45, Rarity.UNCOMMON, mage.cards.g.GhostlyCastigator.class));
         cards.add(new SetCardInfo("Ghoulcaller's Harvest", 225, Rarity.RARE, mage.cards.g.GhoulcallersHarvest.class));
         cards.add(new SetCardInfo("Ghoulish Procession", 102, Rarity.UNCOMMON, mage.cards.g.GhoulishProcession.class));
