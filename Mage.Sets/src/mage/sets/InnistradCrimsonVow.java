@@ -55,6 +55,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodsworn Squire", 97, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class));
         cards.add(new SetCardInfo("Bloodtithe Harvester", 232, Rarity.UNCOMMON, mage.cards.b.BloodtitheHarvester.class));
         cards.add(new SetCardInfo("Bloodvial Purveyor", 98, Rarity.RARE, mage.cards.b.BloodvialPurveyor.class));
+        cards.add(new SetCardInfo("Bloody Betrayal", 147, Rarity.COMMON, mage.cards.b.BloodyBetrayal.class));
         cards.add(new SetCardInfo("Blossom-Clad Werewolf", 226, Rarity.COMMON, mage.cards.b.BlossomCladWerewolf.class));
         cards.add(new SetCardInfo("Bramble Armor", 188, Rarity.COMMON, mage.cards.b.BrambleArmor.class));
         cards.add(new SetCardInfo("Bramble Wurm", 189, Rarity.UNCOMMON, mage.cards.b.BrambleWurm.class));
