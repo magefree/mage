@@ -249,6 +249,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Welcoming Vampire", 46, Rarity.RARE, mage.cards.w.WelcomingVampire.class));
         cards.add(new SetCardInfo("Whispering Wizard", 88, Rarity.UNCOMMON, mage.cards.w.WhisperingWizard.class));
         cards.add(new SetCardInfo("Winged Portent", 89, Rarity.RARE, mage.cards.w.WingedPortent.class));
+        cards.add(new SetCardInfo("Witch's Web", 227, Rarity.COMMON, mage.cards.w.WitchsWeb.class));
         cards.add(new SetCardInfo("Wrathful Jailbreaker", 184, Rarity.COMMON, mage.cards.w.WrathfulJailbreaker.class));
         cards.add(new SetCardInfo("Wretched Throng", 91, Rarity.COMMON, mage.cards.w.WretchedThrong.class));
 
