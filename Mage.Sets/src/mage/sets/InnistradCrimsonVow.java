@@ -110,6 +110,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Fearsome Werewolf", 157, Rarity.COMMON, mage.cards.f.FearsomeWerewolf.class));
         cards.add(new SetCardInfo("Fell Stinger", 112, Rarity.UNCOMMON, mage.cards.f.FellStinger.class));
         cards.add(new SetCardInfo("Fierce Retribution", 13, Rarity.COMMON, mage.cards.f.FierceRetribution.class));
+        cards.add(new SetCardInfo("Flame-Blessed Bolt", 158, Rarity.COMMON, mage.cards.f.FlameBlessedBolt.class));
         cards.add(new SetCardInfo("Flourishing Hunter", 199, Rarity.COMMON, mage.cards.f.FlourishingHunter.class));
         cards.add(new SetCardInfo("Foreboding Statue", 256, Rarity.UNCOMMON, mage.cards.f.ForebodingStatue.class));
         cards.add(new SetCardInfo("Forest", 402, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
