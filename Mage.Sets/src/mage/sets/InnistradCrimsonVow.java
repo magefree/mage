@@ -78,6 +78,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Cobbled Lancer", 52, Rarity.UNCOMMON, mage.cards.c.CobbledLancer.class));
         cards.add(new SetCardInfo("Consuming Tide", 53, Rarity.RARE, mage.cards.c.ConsumingTide.class));
         cards.add(new SetCardInfo("Courier Bat", 102, Rarity.COMMON, mage.cards.c.CourierBat.class));
+        cards.add(new SetCardInfo("Cradle of Safety", 54, Rarity.COMMON, mage.cards.c.CradleOfSafety.class));
         cards.add(new SetCardInfo("Crawling Infestation", 193, Rarity.UNCOMMON, mage.cards.c.CrawlingInfestation.class));
         cards.add(new SetCardInfo("Cruel Witness", 55, Rarity.COMMON, mage.cards.c.CruelWitness.class));
         cards.add(new SetCardInfo("Crushing Canopy", 194, Rarity.COMMON, mage.cards.c.CrushingCanopy.class));
