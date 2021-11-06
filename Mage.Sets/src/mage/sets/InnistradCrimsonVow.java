@@ -97,6 +97,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Dreadfeast Demon", 108, Rarity.RARE, mage.cards.d.DreadfeastDemon.class));
         cards.add(new SetCardInfo("Dreadlight Monstrosity", 57, Rarity.COMMON, mage.cards.d.DreadlightMonstrosity.class));
         cards.add(new SetCardInfo("Dreamroot Cascade", 262, Rarity.RARE, mage.cards.d.DreamrootCascade.class));
+        cards.add(new SetCardInfo("Dreamshackle Geist", 58, Rarity.RARE, mage.cards.d.DreamshackleGeist.class));
         cards.add(new SetCardInfo("Drogskol Armaments", 10, Rarity.COMMON, mage.cards.d.DrogskolArmaments.class));
         cards.add(new SetCardInfo("Drogskol Infantry", 10, Rarity.COMMON, mage.cards.d.DrogskolInfantry.class));
         cards.add(new SetCardInfo("Dying to Serve", 109, Rarity.RARE, mage.cards.d.DyingToServe.class));
