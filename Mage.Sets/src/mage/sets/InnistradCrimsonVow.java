@@ -171,6 +171,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Parasitic Grasp", 123, Rarity.UNCOMMON, mage.cards.p.ParasiticGrasp.class));
         cards.add(new SetCardInfo("Path of Peril", 124, Rarity.RARE, mage.cards.p.PathOfPeril.class));
         cards.add(new SetCardInfo("Persistent Specimen", 125, Rarity.COMMON, mage.cards.p.PersistentSpecimen.class));
+        cards.add(new SetCardInfo("Piercing Light", 30, Rarity.COMMON, mage.cards.p.PiercingLight.class));
         cards.add(new SetCardInfo("Plains", 398, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Reckless Impulse", 174, Rarity.COMMON, mage.cards.r.RecklessImpulse.class));
         cards.add(new SetCardInfo("Reclusive Taxidermist", 214, Rarity.UNCOMMON, mage.cards.r.ReclusiveTaxidermist.class));
