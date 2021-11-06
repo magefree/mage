@@ -198,6 +198,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Sorin the Mirthless", 131, Rarity.MYTHIC, mage.cards.s.SorinTheMirthless.class));
         cards.add(new SetCardInfo("Spectral Binding", 48, Rarity.COMMON, mage.cards.s.SpectralBinding.class));
         cards.add(new SetCardInfo("Splendid Reclamation", 221, Rarity.RARE, mage.cards.s.SplendidReclamation.class));
+        cards.add(new SetCardInfo("Spore Crawler", 222, Rarity.COMMON, mage.cards.s.SporeCrawler.class));
         cards.add(new SetCardInfo("Stensia Uprising", 178, Rarity.RARE, mage.cards.s.StensiaUprising.class));
         cards.add(new SetCardInfo("Stormcarved Coast", 265, Rarity.RARE, mage.cards.s.StormcarvedCoast.class));
         cards.add(new SetCardInfo("Stormchaser Drake", 82, Rarity.UNCOMMON, mage.cards.s.StormchaserDrake.class));
