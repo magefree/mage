@@ -221,6 +221,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Vilespawn Spider", 250, Rarity.UNCOMMON, mage.cards.v.VilespawnSpider.class));
         cards.add(new SetCardInfo("Voice of the Blessed", 44, Rarity.RARE, mage.cards.v.VoiceOfTheBlessed.class));
         cards.add(new SetCardInfo("Volatile Arsonist", 181, Rarity.MYTHIC, mage.cards.v.VolatileArsonist.class));
+        cards.add(new SetCardInfo("Voldaren Epicure", 182, Rarity.COMMON, mage.cards.v.VoldarenEpicure.class));
         cards.add(new SetCardInfo("Voldaren Estate", 267, Rarity.RARE, mage.cards.v.VoldarenEstate.class));
         cards.add(new SetCardInfo("Wash Away", 87, Rarity.UNCOMMON, mage.cards.w.WashAway.class));
         cards.add(new SetCardInfo("Weary Prisoner", 184, Rarity.COMMON, mage.cards.w.WearyPrisoner.class));
