@@ -220,6 +220,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Sure Strike", 179, Rarity.COMMON, mage.cards.s.SureStrike.class));
         cards.add(new SetCardInfo("Swamp", 400, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Syncopate", 83, Rarity.COMMON, mage.cards.s.Syncopate.class));
+        cards.add(new SetCardInfo("Syphon Essence", 84, Rarity.COMMON, mage.cards.s.SyphonEssence.class));
         cards.add(new SetCardInfo("Thalia, Guardian of Thraben", 38, Rarity.RARE, mage.cards.t.ThaliaGuardianOfThraben.class));
         cards.add(new SetCardInfo("Thirst for Discovery", 85, Rarity.UNCOMMON, mage.cards.t.ThirstForDiscovery.class));
         cards.add(new SetCardInfo("Torens, Fist of the Angels", 249, Rarity.RARE, mage.cards.t.TorensFistOfTheAngels.class));
