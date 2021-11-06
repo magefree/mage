@@ -157,6 +157,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Kessig Flamebreather", 164, Rarity.COMMON, mage.cards.k.KessigFlamebreather.class));
         cards.add(new SetCardInfo("Kessig Wolfrider", 165, Rarity.RARE, mage.cards.k.KessigWolfrider.class));
         cards.add(new SetCardInfo("Kindly Ancestor", 22, Rarity.COMMON, mage.cards.k.KindlyAncestor.class));
+        cards.add(new SetCardInfo("Lacerate Flesh", 166, Rarity.COMMON, mage.cards.l.LacerateFlesh.class));
         cards.add(new SetCardInfo("Laid to Rest", 207, Rarity.UNCOMMON, mage.cards.l.LaidToRest.class));
         cards.add(new SetCardInfo("Lambholt Raconteur", 167, Rarity.UNCOMMON, mage.cards.l.LambholtRaconteur.class));
         cards.add(new SetCardInfo("Lambholt Ravager", 167, Rarity.UNCOMMON, mage.cards.l.LambholtRavager.class));

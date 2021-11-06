@@ -3,7 +3,13 @@ package mage.game.permanent.token;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
@@ -12,17 +18,10 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
+import mage.target.Target;
 import mage.util.RandomUtil;
 
 import java.util.*;
-
-import mage.abilities.SpellAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.target.Target;
 
 public abstract class TokenImpl extends MageObjectImpl implements Token {
 
@@ -129,6 +128,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     @Override
+    public boolean putOntoBattlefield(int amount, Game game, Ability source) {
+        return this.putOntoBattlefield(amount, game, source, source.getControllerId());
+    }
+
+    @Override
     public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId) {
         return this.putOntoBattlefield(amount, game, source, controllerId, false, false);
     }
@@ -187,7 +191,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             if (amountToRemove > 0) {
                 game.informPlayers(
                         "The token limit per player is " + MAX_TOKENS_PER_GAME + ", " + controller.getName()
-                        + " will only create " + tokenSlots + " tokens."
+                                + " will only create " + tokenSlots + " tokens."
                 );
                 Iterator<Map.Entry<Token, Integer>> it = event.getTokens().entrySet().iterator();
                 while (it.hasNext() && amountToRemove > 0) {
