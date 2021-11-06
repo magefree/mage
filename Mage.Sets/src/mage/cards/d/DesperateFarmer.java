@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -39,6 +40,7 @@ public final class DesperateFarmer extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When another creature you control dies, transform Desperate Farmer.
+        this.addAbility(new TransformAbility());
         this.addAbility(new DiesCreatureTriggeredAbility(new TransformSourceEffect(), false, filter));
     }
 
