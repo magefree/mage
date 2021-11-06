@@ -213,6 +213,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Sporeback Wolf", 223, Rarity.COMMON, mage.cards.s.SporebackWolf.class));
         cards.add(new SetCardInfo("Steelclad Spirit", 80, Rarity.COMMON, mage.cards.s.SteelcladSpirit.class));
         cards.add(new SetCardInfo("Stensia Uprising", 178, Rarity.RARE, mage.cards.s.StensiaUprising.class));
+        cards.add(new SetCardInfo("Stitched Assistant", 81, Rarity.COMMON, mage.cards.s.StitchedAssistant.class));
         cards.add(new SetCardInfo("Stormcarved Coast", 265, Rarity.RARE, mage.cards.s.StormcarvedCoast.class));
         cards.add(new SetCardInfo("Stormchaser Drake", 82, Rarity.UNCOMMON, mage.cards.s.StormchaserDrake.class));
         cards.add(new SetCardInfo("Sundown Pass", 266, Rarity.RARE, mage.cards.s.SundownPass.class));
