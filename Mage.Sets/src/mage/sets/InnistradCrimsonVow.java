@@ -83,6 +83,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Crawling Infestation", 193, Rarity.UNCOMMON, mage.cards.c.CrawlingInfestation.class));
         cards.add(new SetCardInfo("Cruel Witness", 55, Rarity.COMMON, mage.cards.c.CruelWitness.class));
         cards.add(new SetCardInfo("Crushing Canopy", 194, Rarity.COMMON, mage.cards.c.CrushingCanopy.class));
+        cards.add(new SetCardInfo("Cultivator Colossus", 195, Rarity.MYTHIC, mage.cards.c.CultivatorColossus.class));
         cards.add(new SetCardInfo("Dawnhart Disciple", 196, Rarity.COMMON, mage.cards.d.DawnhartDisciple.class));
         cards.add(new SetCardInfo("Dawnhart Geist", 8, Rarity.UNCOMMON, mage.cards.d.DawnhartGeist.class));
         cards.add(new SetCardInfo("Daybreak Combatants", 153, Rarity.COMMON, mage.cards.d.DaybreakCombatants.class));
