@@ -43,7 +43,7 @@ public final class DistractingGeist extends CardImpl {
         this.addAbility(ability);
 
         // Disturb {4}{W}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{4}{W}")));
+        this.addAbility(new DisturbAbility(this, "{4}{W}"));
     }
 
     private DistractingGeist(final DistractingGeist card) {

@@ -28,7 +28,7 @@ public final class LanternBearer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Disturb {2}{U}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new DisturbAbility(this, "{2}{U}"));
     }
 
     private LanternBearer(final LanternBearer card) {

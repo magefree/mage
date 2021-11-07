@@ -29,7 +29,7 @@ public final class CovetousCastaway extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new MillCardsControllerEffect(3)));
 
         // Disturb {3}{U}{U}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{3}{U}{U}")));
+        this.addAbility(new DisturbAbility(this, "{3}{U}{U}"));
     }
 
     private CovetousCastaway(final CovetousCastaway card) {

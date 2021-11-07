@@ -28,7 +28,7 @@ public final class Galedrifter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Disturb {4}{U}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{4}{U}")));
+        this.addAbility(new DisturbAbility(this, "{4}{U}"));
     }
 
     private Galedrifter(final Galedrifter card) {

@@ -2,35 +2,58 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.MageObjectAttribute;
+import mage.game.stack.Spell;
 
 import java.util.UUID;
 
 /**
- * @author weirddan455
+ * 702.146. Disturb
+ * <p>
+ * 702.146a Disturb is an ability found on the front face of some transforming double-faced cards
+ * (see rule 712, “Double-Faced Cards”). “Disturb [cost]” means “You may cast this card
+ * transformed from your graveyard by paying [cost] rather than its mana cost.” See
+ * rule 712.4b.
+ * <p>
+ * 702.146b A resolving transforming double-faced spell that was cast using its disturb
+ * ability enters the battlefield with its back face up.
+ *
+ * @author weirddan455, JayDi85
  */
 public class DisturbAbility extends SpellAbility {
 
-    public DisturbAbility(Cost cost) {
-        this(cost, TimingRule.SORCERY);
-    }
+    private final String manaCost;
+    private SpellAbility spellAbilityToResolve;
 
-    public DisturbAbility(Cost cost, TimingRule timingRule) {
-        super(null, "", Zone.GRAVEYARD, SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.DISTURB);
-        this.setAdditionalCostsRuleVisible(false);
-        this.name = "Disturb " + cost.getText();
-        this.addCost(cost);
-        this.timing = timingRule;
+    public DisturbAbility(Card card, String manaCost) {
+        super(card.getSpellAbility());
+        this.newId();
+
+        // verify check
+        if (card.getSecondCardFace() == null || card.getSecondCardFace().getClass().equals(card.getClass())) {
+            throw new IllegalArgumentException("Wrong code usage. Disturb ability can be added to double faces card only (main side).");
+        }
+
+        this.setCardName(card.getSecondCardFace().getName() + " with Disturb");
+        this.zone = Zone.GRAVEYARD;
+        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        this.spellAbilityCastMode = SpellAbilityCastMode.DISTURB;
+
+        this.manaCost = manaCost;
+        this.getManaCosts().clear();
+        this.getManaCostsToPay().clear();
+        this.addManaCost(new ManaCostsImpl(manaCost));
         this.addSubAbility(new TransformAbility());
     }
 
     private DisturbAbility(final DisturbAbility ability) {
         super(ability);
+        this.manaCost = ability.manaCost;
+        this.spellAbilityToResolve = ability.spellAbilityToResolve;
     }
 
     @Override
@@ -42,6 +65,7 @@ public class DisturbAbility extends SpellAbility {
     public boolean activate(Game game, boolean noMana) {
         if (super.activate(game, noMana)) {
             game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getSourceId(), Boolean.TRUE);
+            // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
             game.addEffect(new DisturbEffect(), this);
             return true;
         }
@@ -66,24 +90,8 @@ public class DisturbAbility extends SpellAbility {
 
     @Override
     public String getRule() {
-        StringBuilder sbRule = new StringBuilder("Disturb");
-        if (!costs.isEmpty()) {
-            sbRule.append("&mdash;");
-        } else {
-            sbRule.append(' ');
-        }
-        if (!manaCosts.isEmpty()) {
-            sbRule.append(manaCosts.getText());
-        }
-        if (!costs.isEmpty()) {
-            if (!manaCosts.isEmpty()) {
-                sbRule.append(", ");
-            }
-            sbRule.append(costs.getText());
-            sbRule.append('.');
-        }
-        sbRule.append(" <i>(You may cast this card transformed from your graveyard for its disturb cost.)</i>");
-        return sbRule.toString();
+        return "Disturb " + this.manaCost
+                + " <i>(You may cast this card transformed from your graveyard for its disturb cost.)</i>";
     }
 }
 
@@ -105,22 +113,17 @@ class DisturbEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            Card secondFace = card.getSecondCardFace();
-            if (secondFace != null) {
-                MageObjectAttribute moa = game.getState().getCreateMageObjectAttribute(card, game);
-                moa.getCardType().clear();
-                moa.getCardType().addAll(secondFace.getCardType());
-                moa.getColor().setColor(secondFace.getColor(game));
-                moa.getSubtype().copyFrom(secondFace.getSubtype());
-                game.getState().getCardState(card.getId()).clearAbilities();
-                for (Ability ability : secondFace.getAbilities()) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-                return true;
-            }
+        Spell spell = game.getSpell(source.getSourceId());
+        if (spell == null || spell.getFromZone() != Zone.GRAVEYARD) {
+            return false;
         }
-        return false;
+
+        if (spell.getCard().getSecondCardFace() == null) {
+            return false;
+        }
+
+        // simulate another side as new card (another code part in spell constructor)
+        TransformAbility.transformCardSpellDynamic(spell, spell.getCard().getSecondCardFace(), game);
+        return true;
     }
 }

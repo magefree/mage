@@ -40,7 +40,7 @@ public final class MalevolentHermit extends CardImpl {
         this.addAbility(ability);
 
         // Disturb {2}{U}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new DisturbAbility(this, "{2}{U}"));
     }
 
     private MalevolentHermit(final MalevolentHermit card) {

@@ -32,7 +32,7 @@ public final class MischievousCatgeist extends CardImpl {
         ));
 
         // Disturb {2}{U}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new DisturbAbility(this, "{2}{U}"));
     }
 
     private MischievousCatgeist(final MischievousCatgeist card) {

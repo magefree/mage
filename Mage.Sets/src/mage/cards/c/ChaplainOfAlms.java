@@ -33,7 +33,7 @@ public final class ChaplainOfAlms extends CardImpl {
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
 
         // Disturb {3}{W}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{3}{W}")));
+        this.addAbility(new DisturbAbility(this, "{3}{W}"));
     }
 
     private ChaplainOfAlms(final ChaplainOfAlms card) {

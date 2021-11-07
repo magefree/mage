@@ -66,7 +66,7 @@ public final class KatildaDawnhartMartyr extends CardImpl {
         ).addHint(hint));
 
         // Disturb {3}{W}{W}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{3}{W}{W}")));
+        this.addAbility(new DisturbAbility(this, "{3}{W}{W}"));
     }
 
     private KatildaDawnhartMartyr(final KatildaDawnhartMartyr card) {

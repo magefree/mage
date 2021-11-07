@@ -29,7 +29,7 @@ public final class TwinbladeGeist extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // Disturb {2}{W}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{2}{W}")));
+        this.addAbility(new DisturbAbility(this, "{2}{W}"));
     }
 
     private TwinbladeGeist(final TwinbladeGeist card) {

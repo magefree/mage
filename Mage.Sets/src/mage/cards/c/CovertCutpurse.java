@@ -46,7 +46,7 @@ public final class CovertCutpurse extends CardImpl {
         this.addAbility(ability);
 
         // Disturb {4}{B}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{4}{B}")));
+        this.addAbility(new DisturbAbility(this, "{4}{B}"));
     }
 
     private CovertCutpurse(final CovertCutpurse card) {

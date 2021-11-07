@@ -26,7 +26,7 @@ public final class BelovedBeggar extends CardImpl {
         this.secondSideCardClazz = mage.cards.g.GenerousSoul.class;
 
         // Disturb {4}{W}{W}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{4}{W}{W}")));
+        this.addAbility(new DisturbAbility(this, "{4}{W}{W}"));
     }
 
     private BelovedBeggar(final BelovedBeggar card) {

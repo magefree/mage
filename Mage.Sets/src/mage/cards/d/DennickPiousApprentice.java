@@ -37,7 +37,7 @@ public final class DennickPiousApprentice extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedCardsGraveyardsEffect()));
 
         // Disturb {2}{W}{U}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{2}{W}{U}")));
+        this.addAbility(new DisturbAbility(this, "{2}{W}{U}"));
 
     }
 

@@ -1889,7 +1889,7 @@ public abstract class GameImpl implements Game {
             }
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
-                TransformAbility.transform(newBluePrint, newBluePrint.getSecondCardFace(), this, source);
+                TransformAbility.transformPermanent(newBluePrint, newBluePrint.getSecondCardFace(), this, source);
             }
         }
         if (applier != null) {

@@ -30,7 +30,7 @@ public final class OverwhelmedArchivist extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(1, 1)));
 
         // Disturb {3}{U}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{3}{U}")));
+        this.addAbility(new DisturbAbility(this, "{3}{U}"));
     }
 
     private OverwhelmedArchivist(final OverwhelmedArchivist card) {

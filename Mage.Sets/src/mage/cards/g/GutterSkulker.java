@@ -36,7 +36,7 @@ public final class GutterSkulker extends CardImpl {
         )));
 
         // Disturb {3}{U}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{3}{U}")));
+        this.addAbility(new DisturbAbility(this, "{3}{U}"));
     }
 
     private GutterSkulker(final GutterSkulker card) {

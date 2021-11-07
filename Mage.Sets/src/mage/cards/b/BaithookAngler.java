@@ -25,7 +25,7 @@ public final class BaithookAngler extends CardImpl {
         this.secondSideCardClazz = mage.cards.h.HookHauntDrifter.class;
 
         // Disturb {1}{U}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{1}{U}")));
+        this.addAbility(new DisturbAbility(this, "{1}{U}"));
     }
 
     private BaithookAngler(final BaithookAngler card) {

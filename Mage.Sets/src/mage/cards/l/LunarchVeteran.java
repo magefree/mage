@@ -33,7 +33,7 @@ public final class LunarchVeteran extends CardImpl {
         ));
 
         // Disturb {1}{W}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new DisturbAbility(this, "{1}{W}"));
     }
 
     private LunarchVeteran(final LunarchVeteran card) {

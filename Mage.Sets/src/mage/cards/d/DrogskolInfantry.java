@@ -25,7 +25,7 @@ public final class DrogskolInfantry extends CardImpl {
         this.secondSideCardClazz = mage.cards.d.DrogskolArmaments.class;
 
         // Disturb {3}{W}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{3}{W}")));
+        this.addAbility(new DisturbAbility(this, "{3}{W}"));
     }
 
     private DrogskolInfantry(final DrogskolInfantry card) {

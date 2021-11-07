@@ -66,7 +66,7 @@ public final class FaithboundJudge extends CardImpl {
                 " it can attack as though it didn't have defender")));
 
         // Disturb {5}{W}{W}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{5}{W}{W}")));
+        this.addAbility(new DisturbAbility(this, "{5}{W}{W}"));
     }
 
     private FaithboundJudge(final FaithboundJudge card) {
