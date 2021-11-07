@@ -161,6 +161,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Hungry Ridgewolf", 161, Rarity.COMMON, mage.cards.h.HungryRidgewolf.class));
         cards.add(new SetCardInfo("Infestation Expert", 206, Rarity.UNCOMMON, mage.cards.i.InfestationExpert.class));
         cards.add(new SetCardInfo("Infested Werewolf", 206, Rarity.UNCOMMON, mage.cards.i.InfestedWerewolf.class));
+        cards.add(new SetCardInfo("Innocent Traveler", 121, Rarity.UNCOMMON, mage.cards.i.InnocentTraveler.class));
         cards.add(new SetCardInfo("Inspired Idea", 64, Rarity.RARE, mage.cards.i.InspiredIdea.class));
         cards.add(new SetCardInfo("Into the Night", 163, Rarity.UNCOMMON, mage.cards.i.IntoTheNight.class));
         cards.add(new SetCardInfo("Investigator's Journal", 258, Rarity.RARE, mage.cards.i.InvestigatorsJournal.class));
@@ -180,6 +181,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Lanterns' Lift", 66, Rarity.COMMON, mage.cards.l.LanternsLift.class));
         cards.add(new SetCardInfo("Lightning Wolf", 168, Rarity.COMMON, mage.cards.l.LightningWolf.class));
         cards.add(new SetCardInfo("Lunar Rejection", 67, Rarity.UNCOMMON, mage.cards.l.LunarRejection.class));
+        cards.add(new SetCardInfo("Malicious Invader", 121, Rarity.UNCOMMON, mage.cards.m.MaliciousInvader.class));
         cards.add(new SetCardInfo("Manaform Hellkite", 170, Rarity.MYTHIC, mage.cards.m.ManaformHellkite.class));
         cards.add(new SetCardInfo("Markov Purifier", 241, Rarity.UNCOMMON, mage.cards.m.MarkovPurifier.class));
         cards.add(new SetCardInfo("Markov Retribution", 171, Rarity.UNCOMMON, mage.cards.m.MarkovRetribution.class));
