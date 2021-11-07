@@ -276,6 +276,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Weary Prisoner", 184, Rarity.COMMON, mage.cards.w.WearyPrisoner.class));
         cards.add(new SetCardInfo("Weaver of Blossoms", 226, Rarity.COMMON, mage.cards.w.WeaverOfBlossoms.class));
         cards.add(new SetCardInfo("Wedding Announcement", 45, Rarity.RARE, mage.cards.w.WeddingAnnouncement.class));
+        cards.add(new SetCardInfo("Wedding Crasher", 229, Rarity.UNCOMMON, mage.cards.w.WeddingCrasher.class));
         cards.add(new SetCardInfo("Wedding Festivity", 45, Rarity.RARE, mage.cards.w.WeddingFestivity.class));
         cards.add(new SetCardInfo("Wedding Invitation", 260, Rarity.COMMON, mage.cards.w.WeddingInvitation.class));
         cards.add(new SetCardInfo("Wedding Security", 138, Rarity.UNCOMMON, mage.cards.w.WeddingSecurity.class));
@@ -283,6 +284,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Whispering Wizard", 88, Rarity.UNCOMMON, mage.cards.w.WhisperingWizard.class));
         cards.add(new SetCardInfo("Winged Portent", 89, Rarity.RARE, mage.cards.w.WingedPortent.class));
         cards.add(new SetCardInfo("Witch's Web", 227, Rarity.COMMON, mage.cards.w.WitchsWeb.class));
+        cards.add(new SetCardInfo("Wolfkin Outcast", 229, Rarity.UNCOMMON, mage.cards.w.WolfkinOutcast.class));
         cards.add(new SetCardInfo("Wrathful Jailbreaker", 184, Rarity.COMMON, mage.cards.w.WrathfulJailbreaker.class));
         cards.add(new SetCardInfo("Wretched Throng", 91, Rarity.COMMON, mage.cards.w.WretchedThrong.class));
 
