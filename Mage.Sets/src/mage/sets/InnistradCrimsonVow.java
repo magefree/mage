@@ -106,6 +106,8 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Dominating Vampire", 154, Rarity.RARE, mage.cards.d.DominatingVampire.class));
         cards.add(new SetCardInfo("Doomed Dissenter", 106, Rarity.COMMON, mage.cards.d.DoomedDissenter.class));
         cards.add(new SetCardInfo("Dormant Grove", 198, Rarity.UNCOMMON, mage.cards.d.DormantGrove.class));
+        cards.add(new SetCardInfo("Dorothea's Retribution", 235, Rarity.RARE, mage.cards.d.DorotheasRetribution.class));
+        cards.add(new SetCardInfo("Dorothea, Vengeful Victim", 235, Rarity.RARE, mage.cards.d.DorotheaVengefulVictim.class));
         cards.add(new SetCardInfo("Dread Fugue", 107, Rarity.UNCOMMON, mage.cards.d.DreadFugue.class));
         cards.add(new SetCardInfo("Dreadfeast Demon", 108, Rarity.RARE, mage.cards.d.DreadfeastDemon.class));
         cards.add(new SetCardInfo("Dreadlight Monstrosity", 57, Rarity.COMMON, mage.cards.d.DreadlightMonstrosity.class));
