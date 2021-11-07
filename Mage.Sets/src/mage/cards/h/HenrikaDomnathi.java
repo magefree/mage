@@ -29,8 +29,8 @@ public final class HenrikaDomnathi extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
         this.secondSideCardClazz = mage.cards.h.HenrikaInfernalSeer.class;
 
         // Flying
