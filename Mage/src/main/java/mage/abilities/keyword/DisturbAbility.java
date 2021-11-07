@@ -26,6 +26,7 @@ public class DisturbAbility extends SpellAbility {
         this.name = "Disturb " + cost.getText();
         this.addCost(cost);
         this.timing = timingRule;
+        this.addSubAbility(new TransformAbility());
     }
 
     private DisturbAbility(final DisturbAbility ability) {
