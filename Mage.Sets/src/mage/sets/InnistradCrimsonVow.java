@@ -131,6 +131,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Frenzied Devils", 159, Rarity.UNCOMMON, mage.cards.f.FrenziedDevils.class));
         cards.add(new SetCardInfo("Geistlight Snare", 60, Rarity.UNCOMMON, mage.cards.g.GeistlightSnare.class));
         cards.add(new SetCardInfo("Geralf, Visionary Stitcher", 61, Rarity.RARE, mage.cards.g.GeralfVisionaryStitcher.class));
+        cards.add(new SetCardInfo("Ghastly Mimicry", 68, Rarity.RARE, mage.cards.g.GhastlyMimicry.class));
         cards.add(new SetCardInfo("Gift of Fangs", 113, Rarity.COMMON, mage.cards.g.GiftOfFangs.class));
         cards.add(new SetCardInfo("Glorious Sunrise", 200, Rarity.RARE, mage.cards.g.GloriousSunrise.class));
         cards.add(new SetCardInfo("Gluttonous Guest", 114, Rarity.COMMON, mage.cards.g.GluttonousGuest.class));
@@ -189,6 +190,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Massive Might", 208, Rarity.COMMON, mage.cards.m.MassiveMight.class));
         cards.add(new SetCardInfo("Militia Rallier", 24, Rarity.COMMON, mage.cards.m.MilitiaRallier.class));
         cards.add(new SetCardInfo("Mindleech Ghoul", 122, Rarity.COMMON, mage.cards.m.MindleechGhoul.class));
+        cards.add(new SetCardInfo("Mirrorhall Mimic", 68, Rarity.RARE, mage.cards.m.MirrorhallMimic.class));
         cards.add(new SetCardInfo("Mischievous Catgeist", 69, Rarity.UNCOMMON, mage.cards.m.MischievousCatgeist.class));
         cards.add(new SetCardInfo("Moldgraf Millipede", 209, Rarity.COMMON, mage.cards.m.MoldgrafMillipede.class));
         cards.add(new SetCardInfo("Moonlit Ambusher", 212, Rarity.UNCOMMON, mage.cards.m.MoonlitAmbusher.class));
