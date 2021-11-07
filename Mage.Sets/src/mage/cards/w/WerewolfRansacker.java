@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.TransformIntoSourceTriggeredAbility;
 import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
@@ -36,7 +35,9 @@ public final class WerewolfRansacker extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.
-        this.addAbility(new WerewolfRansackerAbility());
+        Ability ability = new TransformIntoSourceTriggeredAbility(new WerewolfRansackerEffect(), true, true);
+        ability.addTarget(new TargetArtifactPermanent());
+        this.addAbility(ability);
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Werewolf Ransacker.
         this.addAbility(new WerewolfBackTriggeredAbility());
@@ -52,47 +53,12 @@ public final class WerewolfRansacker extends CardImpl {
     }
 }
 
-class WerewolfRansackerAbility extends TriggeredAbilityImpl {
-
-    WerewolfRansackerAbility() {
-        super(Zone.BATTLEFIELD, new WerewolfRansackerEffect(), true);
-        this.addTarget(new TargetArtifactPermanent());
-    }
-
-    private WerewolfRansackerAbility(final WerewolfRansackerAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public WerewolfRansackerAbility copy() {
-        return new WerewolfRansackerAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TRANSFORMED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(sourceId)) {
-            Permanent permanent = game.getPermanent(sourceId);
-            return permanent != null && permanent.isTransformed();
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever this creature transforms into {this}, you may destroy target artifact. If that artifact " +
-                "is put into a graveyard this way, {this} deals 3 damage to that artifact's controller";
-    }
-}
-
 class WerewolfRansackerEffect extends OneShotEffect {
 
     WerewolfRansackerEffect() {
         super(Outcome.DestroyPermanent);
+        staticText = "destroy target artifact. If that artifact is put into a graveyard this way, " +
+                "{this} deals 3 damage to that artifact's controller";
     }
 
     private WerewolfRansackerEffect(final WerewolfRansackerEffect effect) {

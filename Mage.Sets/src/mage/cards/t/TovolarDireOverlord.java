@@ -13,7 +13,6 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.DayboundAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -69,7 +68,6 @@ public final class TovolarDireOverlord extends CardImpl {
         ));
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

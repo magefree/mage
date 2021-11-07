@@ -15,6 +15,7 @@ public class DayboundAbility extends StaticAbility {
     public DayboundAbility() {
         super(Zone.BATTLEFIELD, new DayboundEffect());
         this.addHint(DayNightHint.instance);
+        this.addSubAbility(new TransformAbility());
     }
 
     private DayboundAbility(final DayboundAbility ability) {

@@ -1,19 +1,19 @@
 package mage.cards.u;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.TransformIntoSourceTriggeredAbility;
 import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.effects.common.FightTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -21,6 +21,14 @@ import java.util.UUID;
  * @author fireshoes
  */
 public final class UlrichUncontestedAlpha extends CardImpl {
+
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("non-Werewolf creature you don't control");
+
+    static {
+        filter.add(Predicates.not(SubType.WEREWOLF.getPredicate()));
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
+    }
 
     public UlrichUncontestedAlpha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
@@ -35,7 +43,13 @@ public final class UlrichUncontestedAlpha extends CardImpl {
         this.nightCard = true;
 
         // Whenever this creature transforms into Ulrich, Uncontested Alpha, you may have it fight target non-Werewolf creature you don't control.
-        this.addAbility(new UlrichUncontestedAlphaAbility());
+        Ability ability = new TransformIntoSourceTriggeredAbility(
+                new FightTargetSourceEffect()
+                        .setText("you may have it fight target non-Werewolf creature you don't control"),
+                true, true
+        );
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Ulrich, Uncontested Alpha.
         this.addAbility(new WerewolfBackTriggeredAbility());
@@ -48,51 +62,5 @@ public final class UlrichUncontestedAlpha extends CardImpl {
     @Override
     public UlrichUncontestedAlpha copy() {
         return new UlrichUncontestedAlpha(this);
-    }
-}
-
-class UlrichUncontestedAlphaAbility extends TriggeredAbilityImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Werewolf creature you don't control");
-
-    static {
-        filter.add(Predicates.not(SubType.WEREWOLF.getPredicate()));
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
-    public UlrichUncontestedAlphaAbility() {
-        super(Zone.BATTLEFIELD, new FightTargetSourceEffect(), true);
-        Target target = new TargetCreaturePermanent(filter);
-        this.addTarget(target);
-    }
-
-    public UlrichUncontestedAlphaAbility(final UlrichUncontestedAlphaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public UlrichUncontestedAlphaAbility copy() {
-        return new UlrichUncontestedAlphaAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TRANSFORMED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(sourceId)) {
-            Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && permanent.isTransformed()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever this creature transforms into Ulrich, Uncontested Alpha, you may have it fight target non-Werewolf creature you don't control.";
     }
 }

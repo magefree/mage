@@ -7,7 +7,6 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.DayboundAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,7 +37,6 @@ public final class OutlandLiberator extends CardImpl {
         this.addAbility(ability);
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

@@ -7,7 +7,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,7 +41,6 @@ public final class HoundTamer extends CardImpl {
         this.addAbility(ability);
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

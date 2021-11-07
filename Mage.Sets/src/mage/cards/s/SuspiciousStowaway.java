@@ -5,7 +5,6 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.abilities.keyword.DayboundAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -37,7 +36,6 @@ public final class SuspiciousStowaway extends CardImpl {
         ));
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

@@ -3,7 +3,6 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,7 +28,6 @@ public final class ShadyTraveler extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

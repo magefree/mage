@@ -6,7 +6,6 @@ import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.HexproofAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -54,7 +53,6 @@ public final class AvabruckCaretaker extends CardImpl {
         this.addAbility(ability);
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

@@ -2,7 +2,6 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.keyword.DayboundAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +28,6 @@ public final class WeaverOfBlossoms extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

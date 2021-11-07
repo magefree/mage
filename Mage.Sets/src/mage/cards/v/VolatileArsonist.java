@@ -7,7 +7,6 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -47,7 +46,6 @@ public final class VolatileArsonist extends CardImpl {
         this.addAbility(ability);
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.PayMoreToCastAsThoughtItHadFlashAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DayboundAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,7 +30,6 @@ public final class OakshadeStalker extends CardImpl {
         this.addAbility(new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl<>("{2}")));
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

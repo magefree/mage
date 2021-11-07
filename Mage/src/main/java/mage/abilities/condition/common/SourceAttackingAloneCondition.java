@@ -14,7 +14,7 @@ public enum SourceAttackingAloneCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getCombat().attacksAlone() && game.getCombat().getAttackers().get(0).equals(source.getSourceId());
+        return game.getCombat().attacksAlone() && game.getCombat().getAttackers().contains(source.getSourceId());
     }
 
     @Override

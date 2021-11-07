@@ -95,6 +95,7 @@ public enum CounterType {
     INVITATION("invitation"),
     ISOLATION("isolation"),
     JAVELIN("javelin"),
+    JUDGMENT("judgment"),
     KNOWLEDGE("knowledge"),
     KI("ki"),
     LANDMARK("landmark"),
