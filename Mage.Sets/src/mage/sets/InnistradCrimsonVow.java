@@ -191,6 +191,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Nature's Embrace", 211, Rarity.COMMON, mage.cards.n.NaturesEmbrace.class));
         cards.add(new SetCardInfo("Nebelgast Beguiler", 25, Rarity.COMMON, mage.cards.n.NebelgastBeguiler.class));
         cards.add(new SetCardInfo("Necroduality", 70, Rarity.MYTHIC, mage.cards.n.Necroduality.class));
+        cards.add(new SetCardInfo("Nurturing Presence", 26, Rarity.COMMON, mage.cards.n.NurturingPresence.class));
         cards.add(new SetCardInfo("Oakshade Stalker", 212, Rarity.UNCOMMON, mage.cards.o.OakshadeStalker.class));
         cards.add(new SetCardInfo("Odric, Blood-Cursed", 243, Rarity.RARE, mage.cards.o.OdricBloodCursed.class));
         cards.add(new SetCardInfo("Old Rutstein", 244, Rarity.RARE, mage.cards.o.OldRutstein.class));
