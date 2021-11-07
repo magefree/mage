@@ -111,6 +111,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("End the Festivities", 155, Rarity.COMMON, mage.cards.e.EndTheFestivities.class));
         cards.add(new SetCardInfo("Estwald Shieldbasher", 11, Rarity.COMMON, mage.cards.e.EstwaldShieldbasher.class));
         cards.add(new SetCardInfo("Evolving Wilds", 263, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
+        cards.add(new SetCardInfo("Faithbound Judge", 12, Rarity.MYTHIC, mage.cards.f.FaithboundJudge.class));
         cards.add(new SetCardInfo("Falkenrath Celebrants", 156, Rarity.COMMON, mage.cards.f.FalkenrathCelebrants.class));
         cards.add(new SetCardInfo("Falkenrath Forebear", 111, Rarity.RARE, mage.cards.f.FalkenrathForebear.class));
         cards.add(new SetCardInfo("Fear of Death", 59, Rarity.COMMON, mage.cards.f.FearOfDeath.class));
@@ -225,6 +226,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Sheltering Boughs", 218, Rarity.COMMON, mage.cards.s.ShelteringBoughs.class));
         cards.add(new SetCardInfo("Sigarda's Imprisonment", 35, Rarity.COMMON, mage.cards.s.SigardasImprisonment.class));
         cards.add(new SetCardInfo("Sigardian Paladin", 247, Rarity.UNCOMMON, mage.cards.s.SigardianPaladin.class));
+        cards.add(new SetCardInfo("Sinner's Judgment", 12, Rarity.MYTHIC, mage.cards.s.SinnersJudgment.class));
         cards.add(new SetCardInfo("Skywarp Skaab", 78, Rarity.COMMON, mage.cards.s.SkywarpSkaab.class));
         cards.add(new SetCardInfo("Snarling Wolf", 219, Rarity.COMMON, mage.cards.s.SnarlingWolf.class));
         cards.add(new SetCardInfo("Sorin the Mirthless", 131, Rarity.MYTHIC, mage.cards.s.SorinTheMirthless.class));
