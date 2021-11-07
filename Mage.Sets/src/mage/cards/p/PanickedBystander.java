@@ -7,6 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -37,6 +38,7 @@ public final class PanickedBystander extends CardImpl {
         ));
 
         // At the beginning of your end step, if you gained 3 or more life this turn, transform Panicked Bystander.
+        this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new TransformSourceEffect(),
                 TargetController.YOU, condition, false

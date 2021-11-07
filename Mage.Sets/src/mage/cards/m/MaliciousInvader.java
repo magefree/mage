@@ -39,6 +39,8 @@ public final class MaliciousInvader extends CardImpl {
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+        this.color.setBlack(true);
+        this.nightCard = true;
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
