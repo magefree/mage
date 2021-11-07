@@ -63,6 +63,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Bramble Wurm", 189, Rarity.UNCOMMON, mage.cards.b.BrambleWurm.class));
         cards.add(new SetCardInfo("Bride's Gown", 4, Rarity.UNCOMMON, mage.cards.b.BridesGown.class));
         cards.add(new SetCardInfo("By Invitation Only", 5, Rarity.RARE, mage.cards.b.ByInvitationOnly.class));
+        cards.add(new SetCardInfo("Cackling Culprit", 28, Rarity.UNCOMMON, mage.cards.c.CacklingCulprit.class));
         cards.add(new SetCardInfo("Cartographer's Survey", 190, Rarity.UNCOMMON, mage.cards.c.CartographersSurvey.class));
         cards.add(new SetCardInfo("Catapult Captain", 99, Rarity.UNCOMMON, mage.cards.c.CatapultCaptain.class));
         cards.add(new SetCardInfo("Catapult Fodder", 99, Rarity.UNCOMMON, mage.cards.c.CatapultFodder.class));
@@ -203,6 +204,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Ollenbock Escort", 27, Rarity.UNCOMMON, mage.cards.o.OllenbockEscort.class));
         cards.add(new SetCardInfo("Overcharged Amalgam", 71, Rarity.RARE, mage.cards.o.OverchargedAmalgam.class));
         cards.add(new SetCardInfo("Packsong Pup", 213, Rarity.UNCOMMON, mage.cards.p.PacksongPup.class));
+        cards.add(new SetCardInfo("Panicked Bystander", 28, Rarity.UNCOMMON, mage.cards.p.PanickedBystander.class));
         cards.add(new SetCardInfo("Parasitic Grasp", 123, Rarity.UNCOMMON, mage.cards.p.ParasiticGrasp.class));
         cards.add(new SetCardInfo("Parish-Blade Trainee", 29, Rarity.COMMON, mage.cards.p.ParishBladeTrainee.class));
         cards.add(new SetCardInfo("Path of Peril", 124, Rarity.RARE, mage.cards.p.PathOfPeril.class));
