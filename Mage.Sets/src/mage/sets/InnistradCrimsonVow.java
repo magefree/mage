@@ -44,6 +44,8 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Archghoul of Thraben", 93, Rarity.UNCOMMON, mage.cards.a.ArchghoulOfThraben.class));
         cards.add(new SetCardInfo("Ascendant Packleader", 186, Rarity.RARE, mage.cards.a.AscendantPackleader.class));
         cards.add(new SetCardInfo("Avabruck Caretaker", 187, Rarity.MYTHIC, mage.cards.a.AvabruckCaretaker.class));
+        cards.add(new SetCardInfo("Ballista Watcher", 143, Rarity.UNCOMMON, mage.cards.b.BallistaWatcher.class));
+        cards.add(new SetCardInfo("Ballista Wielder", 143, Rarity.UNCOMMON, mage.cards.b.BallistaWielder.class));
         cards.add(new SetCardInfo("Belligerent Guest", 144, Rarity.COMMON, mage.cards.b.BelligerentGuest.class));
         cards.add(new SetCardInfo("Binding Geist", 48, Rarity.COMMON, mage.cards.b.BindingGeist.class));
         cards.add(new SetCardInfo("Bleed Dry", 94, Rarity.COMMON, mage.cards.b.BleedDry.class));
