@@ -505,12 +505,11 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Wrenn and Seven", 208, Rarity.MYTHIC, mage.cards.w.WrennAndSeven.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wrenn and Seven", 278, Rarity.MYTHIC, mage.cards.w.WrennAndSeven.class, NON_FULL_USE_VARIOUS));
     }
-    /*
+
     @Override
     public BoosterCollator createCollator() {
         return new InnistradMidnightHuntCollator();
     }
-    */
 }
 
 // Booster collation info from https://www.lethe.xyz/mtg/collation/mid.html
