@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.TransformIntoSourceTriggeredAbility;
 import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -12,14 +12,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
@@ -47,7 +44,12 @@ public final class RavagerOfTheFells extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.
-        this.addAbility(new RavagerOfTheFellsAbility());
+        Ability ability = new TransformIntoSourceTriggeredAbility(
+                new RavagerOfTheFellsEffect(), false, true
+        );
+        ability.addTarget(new TargetOpponentOrPlaneswalker());
+        ability.addTarget(new RavagerOfTheFellsTarget());
+        this.addAbility(ability);
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Ravager of the Fells.
         this.addAbility(new WerewolfBackTriggeredAbility());
@@ -63,53 +65,12 @@ public final class RavagerOfTheFells extends CardImpl {
     }
 }
 
-class RavagerOfTheFellsAbility extends TriggeredAbilityImpl {
-
-    RavagerOfTheFellsAbility() {
-        super(Zone.BATTLEFIELD, new RavagerOfTheFellsEffect(), false);
-        Target target1 = new TargetOpponentOrPlaneswalker();
-        this.addTarget(target1);
-        this.addTarget(new RavagerOfTheFellsTarget());
-    }
-
-    private RavagerOfTheFellsAbility(final RavagerOfTheFellsAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public RavagerOfTheFellsAbility copy() {
-        return new RavagerOfTheFellsAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TRANSFORMED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(sourceId)) {
-            Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && permanent.isTransformed()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever this creature transforms into {this}, "
-                + "it deals 2 damage to target opponent or planeswalker "
-                + "and 2 damage to up to one target creature that player or that planeswalker's controller controls.";
-    }
-
-}
-
 class RavagerOfTheFellsEffect extends OneShotEffect {
 
     RavagerOfTheFellsEffect() {
         super(Outcome.Damage);
+        staticText = "it deals 2 damage to target opponent or planeswalker and 2 damage " +
+                "to up to one target creature that player or that planeswalker's controller controls.";
     }
 
     private RavagerOfTheFellsEffect(final RavagerOfTheFellsEffect effect) {
