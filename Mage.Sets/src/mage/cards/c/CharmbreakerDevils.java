@@ -77,7 +77,7 @@ class CharmbreakerDevilsEffect extends OneShotEffect {
         TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_AND_SORCERY);
         target.setRandom(true);
         target.setNotTarget(true);
-        player.chooseTarget(outcome, target, source, game);
+        target.chooseTarget(outcome, player.getId(), source, game);
         Card card = game.getCard(target.getFirstTarget());
         return card != null && player.moveCards(card, Zone.HAND, source, game);
     }
