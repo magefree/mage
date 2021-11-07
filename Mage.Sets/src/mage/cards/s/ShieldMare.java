@@ -1,29 +1,25 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterStackObject;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class ShieldMare extends CardImpl {
@@ -43,10 +39,7 @@ public final class ShieldMare extends CardImpl {
 
         // Shield Mare can't be blocked by red creatures.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new CantBeBlockedByCreaturesSourceEffect(
-                        filter, Duration.WhileOnBattlefield
-                )
+                new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)
         ));
 
         // When Shield Mare enters the battlefield or becomes the target of a spell or ability and opponent controls, you gain 3 life.
@@ -64,12 +57,6 @@ public final class ShieldMare extends CardImpl {
 }
 
 class ShieldMareTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterStackObject filter = new FilterStackObject();
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public ShieldMareTriggeredAbility() {
         super(Zone.ALL, new GainLifeEffect(3));
@@ -92,24 +79,21 @@ class ShieldMareTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            return event.getTargetId().equals(getSourceId());
-        }
-        if (event.getType() == GameEvent.EventType.TARGETED) {
-            Permanent permanent = game.getPermanent(getSourceId());
-            if (permanent == null) {
+        switch (event.getType()) {
+            case ENTERS_THE_BATTLEFIELD:
+                return event.getTargetId().equals(getSourceId());
+            case TARGETED:
+                break;
+            default:
                 return false;
-            }
-            StackObject object = game.getStack().getStackObject(event.getSourceId());
-            return event.getTargetId().equals(getSourceId())
-                    && filter.match(object, getSourceId(), getControllerId(), game);
         }
-        return false;
+        return event.getTargetId().equals(this.getSourceId())
+                && game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId()));
     }
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield or becomes the target"
-                + " of a spell or ability an opponent controls, you gain 3 life";
+        return "When {this} enters the battlefield or becomes the target "
+                + "of a spell or ability an opponent controls, you gain 3 life";
     }
 }

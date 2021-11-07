@@ -62,6 +62,8 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Bramble Armor", 188, Rarity.COMMON, mage.cards.b.BrambleArmor.class));
         cards.add(new SetCardInfo("Bramble Wurm", 189, Rarity.UNCOMMON, mage.cards.b.BrambleWurm.class));
         cards.add(new SetCardInfo("Bride's Gown", 4, Rarity.UNCOMMON, mage.cards.b.BridesGown.class));
+        cards.add(new SetCardInfo("Brine Comber", 233, Rarity.UNCOMMON, mage.cards.b.BrineComber.class));
+        cards.add(new SetCardInfo("Brinebound Gift", 233, Rarity.UNCOMMON, mage.cards.b.BrineboundGift.class));
         cards.add(new SetCardInfo("By Invitation Only", 5, Rarity.RARE, mage.cards.b.ByInvitationOnly.class));
         cards.add(new SetCardInfo("Cackling Culprit", 28, Rarity.UNCOMMON, mage.cards.c.CacklingCulprit.class));
         cards.add(new SetCardInfo("Cartographer's Survey", 190, Rarity.UNCOMMON, mage.cards.c.CartographersSurvey.class));
