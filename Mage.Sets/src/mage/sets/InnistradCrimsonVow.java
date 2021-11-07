@@ -272,6 +272,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Unhallowed Phalanx", 135, Rarity.COMMON, mage.cards.u.UnhallowedPhalanx.class));
         cards.add(new SetCardInfo("Unholy Officiant", 41, Rarity.COMMON, mage.cards.u.UnholyOfficiant.class));
         cards.add(new SetCardInfo("Valorous Stance", 42, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
+        cards.add(new SetCardInfo("Vampire Slayer", 43, Rarity.COMMON, mage.cards.v.VampireSlayer.class));
         cards.add(new SetCardInfo("Vampire's Kiss", 136, Rarity.COMMON, mage.cards.v.VampiresKiss.class));
         cards.add(new SetCardInfo("Vampires' Vengeance", 180, Rarity.UNCOMMON, mage.cards.v.VampiresVengeance.class));
         cards.add(new SetCardInfo("Vilespawn Spider", 250, Rarity.UNCOMMON, mage.cards.v.VilespawnSpider.class));
