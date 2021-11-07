@@ -89,6 +89,7 @@ public class VerifyCardDataTest {
 
         // power-toughness
         skipListCreate(SKIP_LIST_PT);
+        skipListAddName(SKIP_LIST_PT, "VOW", "Henrika Domnathi");
 
         // color
         skipListCreate(SKIP_LIST_COLOR);

@@ -9,6 +9,7 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -49,6 +50,7 @@ public final class HenrikaDomnathi extends CardImpl {
 
         // • Transform Henrika Domnathi.
         ability.addEffect(new TransformSourceEffect());
+        this.addAbility(new TransformAbility());
         this.addAbility(ability);
     }
 
