@@ -62,7 +62,7 @@ class WolfStikeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         if (game.checkDayNight(false)) {
-            BoostTargetEffect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
+            BoostTargetEffect effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
             game.addEffect(effect, source);
             return true;
         }
