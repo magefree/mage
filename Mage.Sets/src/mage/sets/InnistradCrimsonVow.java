@@ -85,6 +85,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Clever Distraction", 9, Rarity.UNCOMMON, mage.cards.c.CleverDistraction.class));
         cards.add(new SetCardInfo("Cloaked Cadet", 192, Rarity.UNCOMMON, mage.cards.c.CloakedCadet.class));
         cards.add(new SetCardInfo("Cobbled Lancer", 52, Rarity.UNCOMMON, mage.cards.c.CobbledLancer.class));
+        cards.add(new SetCardInfo("Concealing Curtains", 101, Rarity.RARE, mage.cards.c.ConcealingCurtains.class));
         cards.add(new SetCardInfo("Consuming Tide", 53, Rarity.RARE, mage.cards.c.ConsumingTide.class));
         cards.add(new SetCardInfo("Courier Bat", 102, Rarity.COMMON, mage.cards.c.CourierBat.class));
         cards.add(new SetCardInfo("Cradle of Safety", 54, Rarity.COMMON, mage.cards.c.CradleOfSafety.class));
@@ -235,6 +236,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Resistance Squad", 32, Rarity.UNCOMMON, mage.cards.r.ResistanceSquad.class));
         cards.add(new SetCardInfo("Restless Bloodseeker", 128, Rarity.UNCOMMON, mage.cards.r.RestlessBloodseeker.class));
         cards.add(new SetCardInfo("Retrieve", 215, Rarity.UNCOMMON, mage.cards.r.Retrieve.class));
+        cards.add(new SetCardInfo("Revealing Eye", 101, Rarity.RARE, mage.cards.r.RevealingEye.class));
         cards.add(new SetCardInfo("Riphook Raider", 203, Rarity.COMMON, mage.cards.r.RiphookRaider.class));
         cards.add(new SetCardInfo("Rot-Tide Gargantua", 129, Rarity.COMMON, mage.cards.r.RotTideGargantua.class));
         cards.add(new SetCardInfo("Runebound Wolf", 176, Rarity.UNCOMMON, mage.cards.r.RuneboundWolf.class));
