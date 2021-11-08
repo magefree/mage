@@ -208,6 +208,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Necroduality", 70, Rarity.MYTHIC, mage.cards.n.Necroduality.class));
         cards.add(new SetCardInfo("Nurturing Presence", 26, Rarity.COMMON, mage.cards.n.NurturingPresence.class));
         cards.add(new SetCardInfo("Oakshade Stalker", 212, Rarity.UNCOMMON, mage.cards.o.OakshadeStalker.class));
+        cards.add(new SetCardInfo("Odious Witch", 127, Rarity.COMMON, mage.cards.o.OdiousWitch.class));
         cards.add(new SetCardInfo("Odric, Blood-Cursed", 243, Rarity.RARE, mage.cards.o.OdricBloodCursed.class));
         cards.add(new SetCardInfo("Old Rutstein", 244, Rarity.RARE, mage.cards.o.OldRutstein.class));
         cards.add(new SetCardInfo("Olivia's Attendants", 172, Rarity.RARE, mage.cards.o.OliviasAttendants.class));
@@ -224,6 +225,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 398, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Pointed Discussion", 126, Rarity.COMMON, mage.cards.p.PointedDiscussion.class));
         cards.add(new SetCardInfo("Pyre Spawn", 173, Rarity.COMMON, mage.cards.p.PyreSpawn.class));
+        cards.add(new SetCardInfo("Ragged Recluse", 127, Rarity.COMMON, mage.cards.r.RaggedRecluse.class));
         cards.add(new SetCardInfo("Reckless Impulse", 174, Rarity.COMMON, mage.cards.r.RecklessImpulse.class));
         cards.add(new SetCardInfo("Reclusive Taxidermist", 214, Rarity.UNCOMMON, mage.cards.r.ReclusiveTaxidermist.class));
         cards.add(new SetCardInfo("Rending Flame", 175, Rarity.UNCOMMON, mage.cards.r.RendingFlame.class));
