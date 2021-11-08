@@ -284,6 +284,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Twinblade Invocation", 40, Rarity.UNCOMMON, mage.cards.t.TwinbladeInvocation.class));
         cards.add(new SetCardInfo("Ulvenwald Behemoth", 225, Rarity.RARE, mage.cards.u.UlvenwaldBehemoth.class));
         cards.add(new SetCardInfo("Ulvenwald Oddity", 225, Rarity.RARE, mage.cards.u.UlvenwaldOddity.class));
+        cards.add(new SetCardInfo("Undying Malice", 134, Rarity.COMMON, mage.cards.u.UndyingMalice.class));
         cards.add(new SetCardInfo("Unhallowed Phalanx", 135, Rarity.COMMON, mage.cards.u.UnhallowedPhalanx.class));
         cards.add(new SetCardInfo("Unholy Officiant", 41, Rarity.COMMON, mage.cards.u.UnholyOfficiant.class));
         cards.add(new SetCardInfo("Valorous Stance", 42, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
