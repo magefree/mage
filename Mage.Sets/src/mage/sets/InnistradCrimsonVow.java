@@ -54,6 +54,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Petal Celebrant", 146, Rarity.COMMON, mage.cards.b.BloodPetalCelebrant.class));
         cards.add(new SetCardInfo("Blood Servitor", 252, Rarity.COMMON, mage.cards.b.BloodServitor.class));
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 96, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class));
+        cards.add(new SetCardInfo("Bloodsoaked Reveler", 128, Rarity.UNCOMMON, mage.cards.b.BloodsoakedReveler.class));
         cards.add(new SetCardInfo("Bloodsworn Knight", 97, Rarity.UNCOMMON, mage.cards.b.BloodswornKnight.class));
         cards.add(new SetCardInfo("Bloodsworn Squire", 97, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class));
         cards.add(new SetCardInfo("Bloodtithe Harvester", 232, Rarity.UNCOMMON, mage.cards.b.BloodtitheHarvester.class));
@@ -231,6 +232,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Rending Flame", 175, Rarity.UNCOMMON, mage.cards.r.RendingFlame.class));
         cards.add(new SetCardInfo("Repository Skaab", 73, Rarity.COMMON, mage.cards.r.RepositorySkaab.class));
         cards.add(new SetCardInfo("Resistance Squad", 32, Rarity.UNCOMMON, mage.cards.r.ResistanceSquad.class));
+        cards.add(new SetCardInfo("Restless Bloodseeker", 128, Rarity.UNCOMMON, mage.cards.r.RestlessBloodseeker.class));
         cards.add(new SetCardInfo("Retrieve", 215, Rarity.UNCOMMON, mage.cards.r.Retrieve.class));
         cards.add(new SetCardInfo("Riphook Raider", 203, Rarity.COMMON, mage.cards.r.RiphookRaider.class));
         cards.add(new SetCardInfo("Rot-Tide Gargantua", 129, Rarity.COMMON, mage.cards.r.RotTideGargantua.class));
