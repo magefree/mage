@@ -262,6 +262,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Snarling Wolf", 219, Rarity.COMMON, mage.cards.s.SnarlingWolf.class));
         cards.add(new SetCardInfo("Sorin the Mirthless", 131, Rarity.MYTHIC, mage.cards.s.SorinTheMirthless.class));
         cards.add(new SetCardInfo("Spectral Binding", 48, Rarity.COMMON, mage.cards.s.SpectralBinding.class));
+        cards.add(new SetCardInfo("Spiked Ripsaw", 220, Rarity.UNCOMMON, mage.cards.s.SpikedRipsaw.class));
         cards.add(new SetCardInfo("Splendid Reclamation", 221, Rarity.RARE, mage.cards.s.SplendidReclamation.class));
         cards.add(new SetCardInfo("Spore Crawler", 222, Rarity.COMMON, mage.cards.s.SporeCrawler.class));
         cards.add(new SetCardInfo("Sporeback Wolf", 223, Rarity.COMMON, mage.cards.s.SporebackWolf.class));

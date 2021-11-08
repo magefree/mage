@@ -35,7 +35,7 @@ public final class FractalHarness extends CardImpl {
 
         // Whenever equipped creature attacks, double the number of +1/+1 counters on it.
         this.addAbility(new AttacksAttachedTriggeredAbility(
-                new FractalHarnessDoubleEffect(), AttachmentType.EQUIPMENT, false
+                new FractalHarnessDoubleEffect(), AttachmentType.EQUIPMENT, false, true
         ));
 
         // Equip {2}
@@ -108,7 +108,7 @@ class FractalHarnessDoubleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent((UUID) getValue("sourceId"));
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent == null) {
             return false;
         }
