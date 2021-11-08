@@ -41,6 +41,7 @@ public final class EdgarCharmedGroom extends CardImpl {
         )));
 
         // When Edgar, Charmed Groom dies, return it to the battlefield transformed under its owner's control.
+        this.addAbility(new TransformAbility());
         this.addAbility(new DiesSourceTriggeredAbility(new EdgarCharmedGroomEffect()));
     }
 
