@@ -119,7 +119,9 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Drogskol Armaments", 10, Rarity.COMMON, mage.cards.d.DrogskolArmaments.class));
         cards.add(new SetCardInfo("Drogskol Infantry", 10, Rarity.COMMON, mage.cards.d.DrogskolInfantry.class));
         cards.add(new SetCardInfo("Dying to Serve", 109, Rarity.RARE, mage.cards.d.DyingToServe.class));
+        cards.add(new SetCardInfo("Edgar Markov's Coffin", 236, Rarity.RARE, mage.cards.e.EdgarMarkovsCoffin.class));
         cards.add(new SetCardInfo("Edgar's Awakening", 110, Rarity.UNCOMMON, mage.cards.e.EdgarsAwakening.class));
+        cards.add(new SetCardInfo("Edgar, Charmed Groom", 236, Rarity.RARE, mage.cards.e.EdgarCharmedGroom.class));
         cards.add(new SetCardInfo("End the Festivities", 155, Rarity.COMMON, mage.cards.e.EndTheFestivities.class));
         cards.add(new SetCardInfo("Estwald Shieldbasher", 11, Rarity.COMMON, mage.cards.e.EstwaldShieldbasher.class));
         cards.add(new SetCardInfo("Evolving Wilds", 263, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));

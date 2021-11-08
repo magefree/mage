@@ -1,9 +1,7 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
-
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -12,11 +10,13 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author halljared
@@ -48,12 +48,12 @@ public final class HarvestHand extends CardImpl {
 
 class HarvestHandReturnTransformedEffect extends OneShotEffect {
 
-    public HarvestHandReturnTransformedEffect() {
+    HarvestHandReturnTransformedEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Return {this} to the battlefield transformed under your control";
     }
 
-    public HarvestHandReturnTransformedEffect(final HarvestHandReturnTransformedEffect effect) {
+    private HarvestHandReturnTransformedEffect(final HarvestHandReturnTransformedEffect effect) {
         super(effect);
     }
 
@@ -65,17 +65,15 @@ class HarvestHandReturnTransformedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-                Card card = game.getCard(source.getSourceId());
-                if (card != null) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        if (!(sourceObject instanceof Card)) {
+            return false;
+        }
+        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        controller.moveCards((Card) sourceObject, Zone.BATTLEFIELD, source, game);
+        return true;
     }
-
 }
