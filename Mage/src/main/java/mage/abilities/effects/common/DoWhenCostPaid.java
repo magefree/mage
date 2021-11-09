@@ -72,7 +72,7 @@ public class DoWhenCostPaid extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return (optional ? "you may " : "") + getCostText() + ". When you do, " + ability.getText();
+        return (optional ? "you may " : "") + getCostText() + ". When you do, " + CardUtil.getTextWithFirstCharLowerCase(ability.getRule());
     }
 
     private String getCostText() {

@@ -915,6 +915,14 @@ public final class CardUtil {
         }
     }
 
+    public static String getTextWithFirstCharLowerCase(String text) {
+        if (text != null && text.length() >= 1) {
+            return Character.toLowerCase(text.charAt(0)) + text.substring(1);
+        } else {
+            return text;
+        }
+    }
+
     private static final String vowels = "aeiouAEIOU";
 
     public static String addArticle(String text) {

@@ -15,6 +15,10 @@ public class ReflexiveTriggeredAbility extends DelayedTriggeredAbility {
 
     private final String text;
 
+    public ReflexiveTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, null);
+    }
+
     public ReflexiveTriggeredAbility(Effect effect, boolean optional, String text) {
         super(effect, Duration.EndOfTurn, true, optional);
         this.text = text;
@@ -32,17 +36,16 @@ public class ReflexiveTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
+        return this.isControlledBy(event.getPlayerId())
                 && event.getSourceId().equals(this.getSourceId());
     }
 
     @Override
     public String getRule() {
+        if (text == null) {
+            return super.getRule();
+        }
         return text.substring(0, 1).toUpperCase(Locale.ENGLISH) + text.substring(1) + '.';
-    }
-
-    public String getText() {
-        return text;
     }
 
     @Override
