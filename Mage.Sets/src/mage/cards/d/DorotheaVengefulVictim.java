@@ -39,7 +39,7 @@ public final class DorotheaVengefulVictim extends CardImpl {
         ), false));
 
         // Disturb {1}{W}{U}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{1}{W}{U}")));
+        this.addAbility(new DisturbAbility(this, "{1}{W}{U}"));
     }
 
     private DorotheaVengefulVictim(final DorotheaVengefulVictim card) {

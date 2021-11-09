@@ -34,7 +34,7 @@ public final class BrineComber extends CardImpl {
         this.addAbility(new BrineComberTriggeredAbility());
 
         // Disturb {W}{U}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{W}{U}")));
+        this.addAbility(new DisturbAbility(this, "{W}{U}"));
     }
 
     private BrineComber(final BrineComber card) {

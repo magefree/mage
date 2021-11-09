@@ -37,7 +37,7 @@ public final class MirrorhallMimic extends CardImpl {
                 "any creature on the battlefield, except it's a Spirit in addition to its other types", null));
 
         // Disturb {3}{U}{U}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{3}{U}{U}")));
+        this.addAbility(new DisturbAbility(this, "{3}{U}{U}"));
     }
 
     private MirrorhallMimic(final MirrorhallMimic card) {
