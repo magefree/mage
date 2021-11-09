@@ -74,7 +74,6 @@ public class PermanentCard extends PermanentImpl {
             if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null
                     || NightboundAbility.checkCard(this, game)) {
                 game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
-                setTransformed(true);
                 TransformAbility.transformPermanent(this, getSecondCardFace(), game, null);
             }
         }

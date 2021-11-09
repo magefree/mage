@@ -6,6 +6,7 @@ import mage.abilities.icon.CardIconImpl;
 import mage.abilities.icon.CardIconOrder;
 import mage.abilities.icon.CardIconPosition;
 import mage.abilities.icon.CardIconType;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardInfo;
@@ -109,7 +110,7 @@ public class TestCardRenderDialog extends MageDialog {
         this.removeDialog();
     }
 
-    private PermanentView createPermanentCard(Game game, UUID controllerId, String code, String cardNumber, int power, int toughness, int damage, boolean tapped, List<Ability> extraAbilities) {
+    private PermanentView createPermanentCard(Game game, UUID controllerId, String code, String cardNumber, int power, int toughness, int damage, boolean tapped, boolean transform, List<Ability> extraAbilities) {
         CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
@@ -121,20 +122,21 @@ public class TestCardRenderDialog extends MageDialog {
         game.loadCards(cardsList, controllerId);
 
         Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
-
         if (extraAbilities != null) {
             extraAbilities.forEach(ability -> permCard.addAbility(ability));
         }
 
         PermanentCard perm = new PermanentCard(permCard, controllerId, game);
+        if (transform) {
+            // need direct transform call to keep other side info (original)
+            TransformAbility.transformPermanent(perm, permCard.getSecondCardFace(), game, null);
+        }
+
         if (damage > 0) perm.damage(damage, controllerId, null, game);
         if (power > 0) perm.getPower().setValue(power);
         if (toughness > 0) perm.getToughness().setValue(toughness);
         perm.removeSummoningSickness();
         perm.setTapped(tapped);
-        if (perm.isTransformable()) {
-            perm.setTransformed(true);
-        }
         PermanentView cardView = new PermanentView(perm, permCard, controllerId, game);
 
         return cardView;
@@ -290,16 +292,16 @@ public class TestCardRenderDialog extends MageDialog {
         //*/
 
         /* //test emblems
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "78", 125, 89, 0, false, null)); // Noxious Groodion
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "14", 3, 5, 2, false, null)); // Knight of Sorrows
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 5, 2, 2, false, null)); // Huntmaster of the Fells, transforms
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "221", 0, 0, 0, false, null)); // Bedeck // Bedazzle
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "XLN", "234", 0, 0, 0, false, null)); // Conqueror's Galleon
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "78", 125, 89, 0, false, false, null)); // Noxious Groodion
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "14", 3, 5, 2, false, false, null)); // Knight of Sorrows
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 5, 2, 2, false, false, null)); // Huntmaster of the Fells, transforms
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "221", 0, 0, 0, false, false, null)); // Bedeck // Bedazzle
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "XLN", "234", 0, 0, 0, false, false, null)); // Conqueror's Galleon
         cardViews.add(createEmblem(new AjaniAdversaryOfTyrantsEmblem())); // Emblem Ajani
         cardViews.add(createPlane(new AkoumPlane())); // Plane - Akoum
         //*/
 
-        /* //test split, transform and mdf in hands
+        //test split, transform and mdf in hands
         cardViews.add(createHandCard(game, playerYou.getId(), "SOI", "97")); // Accursed Witch
         cardViews.add(createHandCard(game, playerYou.getId(), "UMA", "225")); // Fire // Ice
         cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
@@ -309,11 +311,10 @@ public class TestCardRenderDialog extends MageDialog {
         //* //test card icons
         cardViews.add(createHandCard(game, playerYou.getId(), "POR", "169")); // Grizzly Bears
         cardViews.add(createHandCard(game, playerYou.getId(), "DKA", "140")); // Huntmaster of the Fells, transforms
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 3, 3, 1, false, additionalIcons)); // Huntmaster of the Fells, transforms
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "401", 1, 1, 0, false, additionalIcons)); // Hinterland Drake
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "1441", 1, 1, 0, true, additionalIcons)); // Kathari Remnant
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "KHM", "50", 1, 1, 0, true, additionalIcons)); // Cosima, God of the Voyage
-
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 3, 3, 1, false, true, additionalIcons)); // Huntmaster of the Fells, transforms
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "401", 1, 1, 0, false, false, additionalIcons)); // Hinterland Drake
+        //cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "1441", 1, 1, 0, true, false, additionalIcons)); // Kathari Remnant
+        //cardViews.add(createPermanentCard(game, playerYou.getId(), "KHM", "50", 1, 1, 0, true, false, additionalIcons)); // Cosima, God of the Voyage
 
         //*/
 

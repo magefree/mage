@@ -38,8 +38,7 @@ public class ModalDoubleFacesCardHalfImpl extends CardImpl implements ModalDoubl
 
     @Override
     public String getImageName() {
-        // TODO: own name?
-        return parentCard.getImageName();
+        return name;
     }
 
     @Override

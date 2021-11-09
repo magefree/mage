@@ -96,7 +96,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     public double transformAngle = 1;
 
-    private boolean guiTransformed;
+    private boolean guiTransformed; // current main or other side in gui (use isTransformed() to find a real transform state)
     private boolean animationInProgress = false;
 
     private Container cardContainer;
@@ -236,7 +236,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     public final void initialDraw() {
         // Kick off
-        if (getGameCard().isTransformed()) {
+        if (getGameCard().isTransformed() && !this.isTransformed()) {
             // this calls updateImage
             toggleTransformed();
         } else {
@@ -494,7 +494,11 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public final boolean isTransformed() {
-        return this.guiTransformed;
+        if (this.cardSideMain.isTransformed()) {
+            return !this.guiTransformed;
+        } else {
+            return this.guiTransformed;
+        }
     }
 
     @Override
@@ -572,17 +576,15 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         }
 
         // Update transform circle
-        if (card.canTransform()) {
+        if (card.canTransform() && dayNightButton != null) {
             BufferedImage transformIcon;
-            if (isTransformed() || card.isTransformed()) { // wtf
+            if (this.isTransformed()) {
                 transformIcon = ImageManagerImpl.instance.getNightImage();
             } else {
                 transformIcon = ImageManagerImpl.instance.getDayImage();
             }
-            if (dayNightButton != null) {
-                dayNightButton.setVisible(true); // show T button for any cards and permanents
-                dayNightButton.setIcon(new ImageIcon(transformIcon));
-            }
+            dayNightButton.setVisible(true); // show T button for any cards and permanents
+            dayNightButton.setIcon(new ImageIcon(transformIcon));
         }
     }
 
@@ -846,7 +848,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         this.guiTransformed = !this.guiTransformed;
 
         if (dayNightButton != null) { // if transformbable card is copied, button can be null
-            BufferedImage image = this.guiTransformed ? ImageManagerImpl.instance.getNightImage() : ImageManagerImpl.instance.getDayImage();
+            BufferedImage image = this.isTransformed() ? ImageManagerImpl.instance.getNightImage() : ImageManagerImpl.instance.getDayImage();
             dayNightButton.setIcon(new ImageIcon(image));
         }
 
@@ -864,7 +866,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             // alternative side -> main side
             copySelections(this.cardSideOther, this.cardSideMain);
             update(this.cardSideMain);
-            this.getGameCard().setAlternateName(this.cardSideOther.getName());
+            this.getGameCard().setAlternateName(this.cardSideOther.getName()); // wtf null protect
         }
 
         updateArtImage();
@@ -939,14 +941,15 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             } else {
                 // from other side
                 this.cardSideOther = gameCard;
+                return;
             }
         }
 
         // fix other side: if it's a night side permanent then the main side info must be extracted
-        if (this.cardSideOther != null
-                && this.cardSideOther.getName().equals(this.cardSideMain.getName())
-                && this.cardSideMain instanceof PermanentView) {
-            this.cardSideOther = ((PermanentView) this.cardSideMain).getOriginal();
+        if (this.cardSideOther == null || this.cardSideOther.getName().equals(this.cardSideMain.getName())) {
+            if (this.cardSideMain instanceof PermanentView) {
+                this.cardSideOther = ((PermanentView) this.cardSideMain).getOriginal();
+            }
         }
     }
 

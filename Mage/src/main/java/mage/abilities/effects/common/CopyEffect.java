@@ -98,7 +98,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.setName(copyFromObject.getName());
         permanent.getColor(game).setColor(copyFromObject.getColor(game));
         permanent.getManaCost().clear();
-        permanent.getManaCost().add(copyFromObject.getManaCost());
+        permanent.getManaCost().add(copyFromObject.getManaCost().copy());
         permanent.removeAllCardTypes(game);
         for (CardType type : copyFromObject.getCardType(game)) {
             permanent.addCardType(game, type);
