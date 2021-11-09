@@ -11,6 +11,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.abilities.text.TextPart;
 import mage.cards.*;
 import mage.constants.*;
@@ -66,21 +67,29 @@ public class Spell extends StackObjectImpl implements Card {
     private ActivationManaAbilityStep currentActivatingManaAbilitiesStep = ActivationManaAbilityStep.BEFORE;
 
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone, Game game) {
-        this.card = card;
-        this.color = card.getColor(null).copy();
-        this.frameColor = card.getFrameColor(null).copy();
-        this.frameStyle = card.getFrameStyle();
+        Card affectedCard = card;
+
+        // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
+        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.DISTURB && affectedCard.getSecondCardFace() != null) {
+            // simulate another side as new card (another code part in continues effect from disturb ability)
+            affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
+        }
+
+        this.card = affectedCard;
+        this.color = affectedCard.getColor(null).copy();
+        this.frameColor = affectedCard.getFrameColor(null).copy();
+        this.frameStyle = affectedCard.getFrameStyle();
         this.id = ability.getId();
-        this.zoneChangeCounter = card.getZoneChangeCounter(game); // sync card's ZCC with spell (copy spell settings)
+        this.zoneChangeCounter = affectedCard.getZoneChangeCounter(game); // sync card's ZCC with spell (copy spell settings)
         this.ability = ability;
         this.ability.setControllerId(controllerId);
         if (ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-            spellCards.add(((SplitCard) card).getLeftHalfCard());
-            spellAbilities.add(((SplitCard) card).getLeftHalfCard().getSpellAbility().copy());
-            spellCards.add(((SplitCard) card).getRightHalfCard());
-            spellAbilities.add(((SplitCard) card).getRightHalfCard().getSpellAbility().copy());
+            spellCards.add(((SplitCard) affectedCard).getLeftHalfCard());
+            spellAbilities.add(((SplitCard) affectedCard).getLeftHalfCard().getSpellAbility().copy());
+            spellCards.add(((SplitCard) affectedCard).getRightHalfCard());
+            spellAbilities.add(((SplitCard) affectedCard).getRightHalfCard().getSpellAbility().copy());
         } else {
-            spellCards.add(card);
+            spellCards.add(affectedCard);
             spellAbilities.add(ability);
         }
         this.controllerId = controllerId;

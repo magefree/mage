@@ -28,7 +28,7 @@ public final class KindlyAncestor extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Disturb {1}{W}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new DisturbAbility(this, "{1}{W}"));
     }
 
     private KindlyAncestor(final KindlyAncestor card) {

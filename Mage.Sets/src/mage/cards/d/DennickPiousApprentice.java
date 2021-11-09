@@ -6,7 +6,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CantBeTargetedCardsGraveyardsEffect;
 import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,8 +37,7 @@ public final class DennickPiousApprentice extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedCardsGraveyardsEffect()));
 
         // Disturb {2}{W}{U}
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{2}{W}{U}")));
+        this.addAbility(new DisturbAbility(this, "{2}{W}{U}"));
 
     }
 

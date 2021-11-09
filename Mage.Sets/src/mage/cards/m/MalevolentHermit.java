@@ -8,7 +8,6 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.DisturbAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,8 +40,7 @@ public final class MalevolentHermit extends CardImpl {
         this.addAbility(ability);
 
         // Disturb {2}{U}
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new DisturbAbility(this, "{2}{U}"));
     }
 
     private MalevolentHermit(final MalevolentHermit card) {

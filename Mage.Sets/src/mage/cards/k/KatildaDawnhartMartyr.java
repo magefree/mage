@@ -8,7 +8,10 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
-import mage.abilities.keyword.*;
+import mage.abilities.keyword.DisturbAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -63,8 +66,7 @@ public final class KatildaDawnhartMartyr extends CardImpl {
         ).addHint(hint));
 
         // Disturb {3}{W}{W}
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{3}{W}{W}")));
+        this.addAbility(new DisturbAbility(this, "{3}{W}{W}"));
     }
 
     private KatildaDawnhartMartyr(final KatildaDawnhartMartyr card) {

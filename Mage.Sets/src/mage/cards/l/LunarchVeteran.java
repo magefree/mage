@@ -5,7 +5,6 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.DisturbAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,8 +33,7 @@ public final class LunarchVeteran extends CardImpl {
         ));
 
         // Disturb {1}{W}
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new DisturbAbility(this, "{1}{W}"));
     }
 
     private LunarchVeteran(final LunarchVeteran card) {

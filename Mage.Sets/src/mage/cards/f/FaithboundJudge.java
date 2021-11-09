@@ -10,7 +10,10 @@ import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.*;
+import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.keyword.DisturbAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -63,8 +66,7 @@ public final class FaithboundJudge extends CardImpl {
                 " it can attack as though it didn't have defender")));
 
         // Disturb {5}{W}{W}
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{5}{W}{W}")));
+        this.addAbility(new DisturbAbility(this, "{5}{W}{W}"));
     }
 
     private FaithboundJudge(final FaithboundJudge card) {

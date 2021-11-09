@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
@@ -41,11 +40,11 @@ public final class SnapcasterMage extends CardImpl {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
+
         // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SnapcasterMageEffect());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
-
     }
 
     private SnapcasterMage(final SnapcasterMage card) {

@@ -9,7 +9,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,7 +16,6 @@ import java.util.List;
  */
 public final class InnistradMidnightHunt extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Baithook Angler", "Hook-Haunt Drifter", "Beloved Beggar", "Generous Soul", "Chaplain of Alms", "Chapel Shieldgeist", "Covert Cutpurse", "Covetous Geist", "Covetous Castaway", "Ghostly Castigator", "Dennick, Pious Apprentice", "Dennick, Pious Apparition", "Devoted Grafkeeper", "Departed Soulkeeper", "Galedrifter", "Waildrifter", "Lunarch Veteran", "Luminous Phantom", "Malevolent Hermit", "Benevolent Geist", "Mourning Patrol", "Morning Apparition", "Overwhelmed Archivist", "Archive Haunt", "Phantom Carriage", "Shipwreck Sifters", "Thraben Exorcism", "Unblinking Observer");
     private static final InnistradMidnightHunt instance = new InnistradMidnightHunt();
 
     public static InnistradMidnightHunt getInstance() {
@@ -506,15 +504,12 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Winterthorn Blessing", 251, Rarity.UNCOMMON, mage.cards.w.WinterthornBlessing.class));
         cards.add(new SetCardInfo("Wrenn and Seven", 208, Rarity.MYTHIC, mage.cards.w.WrennAndSeven.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wrenn and Seven", 278, Rarity.MYTHIC, mage.cards.w.WrennAndSeven.class, NON_FULL_USE_VARIOUS));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is fully implemented
     }
-    /*
+
     @Override
     public BoosterCollator createCollator() {
         return new InnistradMidnightHuntCollator();
     }
-    */
 }
 
 // Booster collation info from https://www.lethe.xyz/mtg/collation/mid.html

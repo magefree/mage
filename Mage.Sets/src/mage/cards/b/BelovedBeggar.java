@@ -1,18 +1,16 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DisturbAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class BelovedBeggar extends CardImpl {
@@ -28,8 +26,7 @@ public final class BelovedBeggar extends CardImpl {
         this.secondSideCardClazz = mage.cards.g.GenerousSoul.class;
 
         // Disturb {4}{W}{W}
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{4}{W}{W}")));
+        this.addAbility(new DisturbAbility(this, "{4}{W}{W}"));
     }
 
     private BelovedBeggar(final BelovedBeggar card) {

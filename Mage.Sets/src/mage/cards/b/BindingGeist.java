@@ -33,7 +33,7 @@ public final class BindingGeist extends CardImpl {
         this.addAbility(ability);
 
         // Disturb {1}{U}
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{1}{U}")));
+        this.addAbility(new DisturbAbility(this, "{1}{U}"));
     }
 
     private BindingGeist(final BindingGeist card) {

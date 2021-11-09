@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,8 +29,7 @@ public final class TwinbladeGeist extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // Disturb {2}{W}
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{2}{W}")));
+        this.addAbility(new DisturbAbility(this, "{2}{W}"));
     }
 
     private TwinbladeGeist(final TwinbladeGeist card) {
