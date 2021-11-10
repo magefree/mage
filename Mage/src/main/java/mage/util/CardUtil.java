@@ -10,6 +10,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.asthought.CanPlayCardControllerEffect;
@@ -852,20 +854,43 @@ public final class CardUtil {
         }
     }
 
-    public static String getBoostCountAsStr(int power, int toughness) {
+    public static String getBoostCountAsStr(DynamicValue power, DynamicValue toughness) {
         // sign fix for zero values
         // -1/+0 must be -1/-0
         // +0/-1 must be -0/-1
-        String signedP = String.format("%1$+d", power);
-        String signedT = String.format("%1$+d", toughness);
-        if (signedP.equals("+0") && signedT.startsWith("-")) {
-            signedP = "-0";
+        String p = power.toString();
+        String t = toughness.toString();
+        if (!p.startsWith("-")) {
+            p = (t.startsWith("-") && p.equals("0") ? "-" : "+") + p;
         }
-        if (signedT.equals("+0") && signedP.startsWith("-")) {
-            signedT = "-0";
+        if (!t.startsWith("-")) {
+            t = (p.startsWith("-") && t.equals("0") ? "-" : "+") + t;
         }
+        return p + "/" + t;
+    }
 
-        return signedP + "/" + signedT;
+    public static String getBoostCountAsStr(int power, int toughness) {
+        return getBoostCountAsStr(StaticValue.get(power), StaticValue.get(toughness));
+    }
+
+    public static String getBoostText(DynamicValue power, DynamicValue toughness, Duration duration) {
+        String boostCount = getBoostCountAsStr(power, toughness);
+        StringBuilder sb = new StringBuilder(boostCount);
+        // don't include "for the rest of the game" for emblems, etc.
+        if (duration != Duration.EndOfGame) {
+            String d = duration.toString();
+            if (!d.isEmpty()) {
+                sb.append(" ").append(d);
+            }
+        }
+        String message = power.getMessage();
+        if (message.isEmpty()) {
+            message = toughness.getMessage();
+        }
+        if (!message.isEmpty()) {
+            sb.append(boostCount.contains("X") ? ", where X is " : " for each ").append(message);
+        }
+        return sb.toString();
     }
 
     public static boolean isSpliceAbility(Ability ability, Game game) {

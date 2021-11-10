@@ -12,6 +12,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -41,7 +42,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
         if (duration == Duration.EndOfTurn) {
             fixedTarget = true;
         }
-        setText();
+        this.staticText = "equipped creature gets " + CardUtil.getBoostText(power, toughness, duration);
     }
 
     public BoostEquippedEffect(final BoostEquippedEffect effect) {
@@ -85,33 +86,5 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
         }
 
         return true;
-    }
-
-    private void setText() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("equipped creature gets ");
-        String p = power.toString();
-        if (!p.startsWith("-")) {
-            sb.append('+');
-        }
-        sb.append(p).append('/');
-        String t = toughness.toString();
-        if (!t.startsWith("-")) {
-            if (p.startsWith("-")) {
-                sb.append('-');
-            } else {
-                sb.append('+');
-            }
-        }
-        sb.append(t);
-        if (duration != Duration.WhileOnBattlefield) {
-            sb.append(' ').append(duration.toString());
-        }
-        String message = power.getMessage();
-        if (!message.isEmpty()) {
-            sb.append(" for each ");
-        }
-        sb.append(message);
-        staticText = sb.toString();
     }
 }
