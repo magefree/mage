@@ -24,7 +24,7 @@ public final class SnakeToken extends TokenImpl {
     }
 
     public SnakeToken(String setCode) {
-        super("Snake", "1/1 green Snake creature token");
+        super("Snake Token", "1/1 green Snake creature token");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C15")) {

@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class KorWarriorToken extends TokenImpl {
 
     public KorWarriorToken() {
-        super("Kor Warrior", "1/1 white Kor Warrior creature token");
+        super("Kor Warrior Token", "1/1 white Kor Warrior creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.KOR);
         subtype.add(SubType.WARRIOR);

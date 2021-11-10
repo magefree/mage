@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class RedElementalToken extends TokenImpl {
 
     public RedElementalToken() {
-        super("Elemental", "1/1 red Elemental creature token");
+        super("Elemental Token", "1/1 red Elemental creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);

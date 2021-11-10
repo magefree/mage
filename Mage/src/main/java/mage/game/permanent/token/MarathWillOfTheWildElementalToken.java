@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class MarathWillOfTheWildElementalToken extends TokenImpl {
 
     public MarathWillOfTheWildElementalToken() {
-        super("Elemental", "X/X green Elemental creature token");
+        super("Elemental Token", "X/X green Elemental creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELEMENTAL);
         color.setGreen(true);

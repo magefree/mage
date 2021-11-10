@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public class DragonIllusionToken extends TokenImpl {
 
     public DragonIllusionToken(int xValue) {
-        super("Dragon Illusion", "X/X red Dragon Illusion creature token with flying and haste");
+        super("Dragon Illusion Token", "X/X red Dragon Illusion creature token with flying and haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.DRAGON);

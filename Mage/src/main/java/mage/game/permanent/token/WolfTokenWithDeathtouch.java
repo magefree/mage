@@ -14,7 +14,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 public final class WolfTokenWithDeathtouch extends TokenImpl {
 
     public WolfTokenWithDeathtouch() {
-        super("Wolf", "1/1 black Wolf creature token with deathtouch");
+        super("Wolf Token", "1/1 black Wolf creature token with deathtouch");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.WOLF);

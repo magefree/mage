@@ -12,7 +12,7 @@ import mage.abilities.keyword.SpaceflightAbility;
 public final class RebelStarshipToken extends TokenImpl {
 
     public RebelStarshipToken() {
-        super("B-Wing", "2/3 blue Rebel Starship artifact creature tokens with spaceflight name B-Wing", 2, 3);
+        super("B-Wing Token", "2/3 blue Rebel Starship artifact creature tokens with spaceflight name B-Wing", 2, 3);
         this.setOriginalExpansionSetCode("SWS");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);

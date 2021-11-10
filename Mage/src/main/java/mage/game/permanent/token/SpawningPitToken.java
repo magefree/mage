@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class SpawningPitToken extends TokenImpl {
 
     public SpawningPitToken() {
-        super("Spawn", "2/2 colorless Spawn artifact creature token");
+        super("Spawn Token", "2/2 colorless Spawn artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.SPAWN);

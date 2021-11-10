@@ -22,7 +22,7 @@ import java.util.Arrays;
 public final class DogIllusionToken extends TokenImpl {
 
     public DogIllusionToken() {
-        super("Dog Illusion", "blue Dog Illusion creature token with \"This creature's power and toughness are each equal to twice the number of cards in your hand.\"");
+        super("Dog Illusion Token", "blue Dog Illusion creature token with \"This creature's power and toughness are each equal to twice the number of cards in your hand.\"");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.DOG);

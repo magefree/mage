@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class RatToken extends TokenImpl {
 
     public RatToken() {
-        super("Rat", "1/1 black Rat creature token");
+        super("Rat Token", "1/1 black Rat creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.RAT);

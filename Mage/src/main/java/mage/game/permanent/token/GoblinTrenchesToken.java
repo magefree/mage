@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class GoblinTrenchesToken extends TokenImpl {
 
     public GoblinTrenchesToken() {
-        super("Goblin Soldier", "1/1 red and white Goblin Soldier creature tokens");
+        super("Goblin Soldier Token", "1/1 red and white Goblin Soldier creature tokens");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setWhite(true);

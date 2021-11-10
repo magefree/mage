@@ -15,7 +15,7 @@ import mage.game.events.GameEvent;
 public final class TetraviteToken extends TokenImpl {
 
     public TetraviteToken() {
-        super("Tetravite", "1/1 colorless Tetravite artifact creature token with flying and \"This creature can't be enchanted.\"");
+        super("Tetravite Token", "1/1 colorless Tetravite artifact creature token with flying and \"This creature can't be enchanted.\"");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.TETRAVITE);

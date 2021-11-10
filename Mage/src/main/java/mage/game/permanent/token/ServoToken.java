@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class ServoToken extends TokenImpl {
 
     public ServoToken() {
-        super("Servo", "1/1 colorless Servo artifact creature token");
+        super("Servo Token", "1/1 colorless Servo artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SERVO);

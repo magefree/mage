@@ -11,7 +11,7 @@ public final class WizardToken extends TokenImpl {
     }
 
     public WizardToken(String setCode) {
-        super("Wizard", "2/2 blue Wizard creature token");
+        super("Wizard Token", "2/2 blue Wizard creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.WIZARD);
         color.setBlue(true);

@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class FrogLizardToken extends TokenImpl {
 
     public FrogLizardToken() {
-        super("Frog Lizard", "3/3 green Frog Lizard creature token");
+        super("Frog Lizard Token", "3/3 green Frog Lizard creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.FROG);

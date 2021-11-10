@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class KnightToken extends TokenImpl {
 
     public KnightToken() {
-        super("Knight", "2/2 white Knight creature token with vigilance");
+        super("Knight Token", "2/2 white Knight creature token with vigilance");
 
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

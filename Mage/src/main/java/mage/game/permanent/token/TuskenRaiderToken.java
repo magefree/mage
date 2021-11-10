@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class TuskenRaiderToken extends TokenImpl {
 
     public TuskenRaiderToken() {
-        super("Tusken Raider", "white Tusken Raider creature token", 1, 1);
+        super("Tusken Raider Token", "white Tusken Raider creature token", 1, 1);
         this.setOriginalExpansionSetCode("SWS");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

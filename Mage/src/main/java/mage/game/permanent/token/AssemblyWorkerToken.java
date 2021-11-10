@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class AssemblyWorkerToken extends TokenImpl {
 
     public AssemblyWorkerToken() {
-        super("Assembly-Worker", "2/2 colorless Assembly-Worker artifact creature token");
+        super("Assembly-Worker Token", "2/2 colorless Assembly-Worker artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ASSEMBLY_WORKER);

@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class DevastatingSummonsElementalToken extends TokenImpl {
 
     public DevastatingSummonsElementalToken() {
-        super("Elemental", "X/X red Elemental creature");
+        super("Elemental Token", "X/X red Elemental creature");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);

@@ -8,7 +8,7 @@ import mage.constants.SubType;
 public class ZombieMenaceToken extends TokenImpl {
 
     public ZombieMenaceToken(int xValue) {
-        super("Zombie", "X/X blue and black Zombie creature token with menace");
+        super("Zombie Token", "X/X blue and black Zombie creature token with menace");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         color.setBlack(true);

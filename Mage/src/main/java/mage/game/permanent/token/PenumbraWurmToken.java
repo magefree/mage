@@ -13,7 +13,7 @@ import mage.abilities.keyword.TrampleAbility;
 public final class PenumbraWurmToken extends TokenImpl {
 
     public PenumbraWurmToken() {
-        super("Wurm", "6/6 black Wurm creature token with trample");
+        super("Wurm Token", "6/6 black Wurm creature token with trample");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.WURM);

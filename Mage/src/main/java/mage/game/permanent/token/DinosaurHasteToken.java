@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class DinosaurHasteToken extends TokenImpl {
 
     public DinosaurHasteToken() {
-        super("Dinosaur", "1/1 red Dinosaur creature token with haste");
+        super("Dinosaur Token", "1/1 red Dinosaur creature token with haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.DINOSAUR);

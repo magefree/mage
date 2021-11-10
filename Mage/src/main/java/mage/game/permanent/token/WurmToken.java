@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class WurmToken extends TokenImpl {
 
     public WurmToken() {
-        super("Wurm", "6/6 green Wurm creature token");
+        super("Wurm Token", "6/6 green Wurm creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.WURM);

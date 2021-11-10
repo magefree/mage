@@ -7,7 +7,7 @@ package mage.game.permanent.token;
 public final class EmptyToken extends TokenImpl {
 
     public EmptyToken() {
-        super("", "");
+        super(" Token", "");
     }
 
     public EmptyToken(final EmptyToken token) {

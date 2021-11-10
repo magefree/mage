@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class EdgarMarkovsCoffinToken extends TokenImpl {
 
     public EdgarMarkovsCoffinToken() {
-        super("Vampire", "1/1 white and black Vampire creature token with lifelink");
+        super("Vampire Token", "1/1 white and black Vampire creature token with lifelink");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         color.setBlack(true);

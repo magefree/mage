@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class PongifyApeToken extends TokenImpl {
 
     public PongifyApeToken() {
-        super("Ape", "3/3 green Ape creature token");
+        super("Ape Token", "3/3 green Ape creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.APE);

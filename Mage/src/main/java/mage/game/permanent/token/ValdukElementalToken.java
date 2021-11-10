@@ -26,7 +26,7 @@ public final class ValdukElementalToken extends TokenImpl {
     }
 
     public ValdukElementalToken(String setCode) {
-        super("Elemental", "3/1 red Elemental creature token with trample and haste");
+        super("Elemental Token", "3/1 red Elemental creature token with trample and haste");
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setRed(true);

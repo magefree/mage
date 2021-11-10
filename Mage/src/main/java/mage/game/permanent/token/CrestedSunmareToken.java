@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class CrestedSunmareToken extends TokenImpl {
 
     public CrestedSunmareToken() {
-        super("Horse", "5/5 white Horse creature token");
+        super("Horse Token", "5/5 white Horse creature token");
         power = new MageInt(5);
         toughness = new MageInt(5);
         color.setWhite(true);

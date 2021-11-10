@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class KnightAllyToken extends TokenImpl {
 
     public KnightAllyToken() {
-        super("Knight Ally", "2/2 white Knight Ally creature token");
+        super("Knight Ally Token", "2/2 white Knight Ally creature token");
         this.setExpansionSetCodeForImage("BFZ");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

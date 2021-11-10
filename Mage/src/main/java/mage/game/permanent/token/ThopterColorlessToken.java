@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class ThopterColorlessToken extends TokenImpl {
 
     public ThopterColorlessToken() {
-        super("Thopter", "1/1 colorless Thopter artifact creature token with flying");
+        super("Thopter Token", "1/1 colorless Thopter artifact creature token with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.THOPTER);

@@ -13,7 +13,7 @@ import mage.abilities.keyword.HasteAbility;
 public final class BalduvianToken extends TokenImpl {
 
     public BalduvianToken() {
-        super("Graveborn", "3/1 black and red Graveborn creature token with haste");
+        super("Graveborn Token", "3/1 black and red Graveborn creature token with haste");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         color.setRed(true);

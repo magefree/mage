@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class HumanWarriorToken extends TokenImpl {
 
     public HumanWarriorToken() {
-        super("Human Warrior", "1/1 white Human Warrior creature token");
+        super("Human Warrior Token", "1/1 white Human Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.HUMAN);

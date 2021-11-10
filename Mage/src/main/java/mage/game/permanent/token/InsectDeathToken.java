@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class InsectDeathToken extends TokenImpl {
 
     public InsectDeathToken() {
-        super("Insect", "1/1 green Insect creature token with flying and deathtouch");
+        super("Insect Token", "1/1 green Insect creature token with flying and deathtouch");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.INSECT);

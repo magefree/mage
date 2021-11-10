@@ -27,7 +27,7 @@ public final class EldraziSpawnToken extends TokenImpl {
     }
 
     public EldraziSpawnToken() {
-        super("Eldrazi Spawn", "0/1 colorless Eldrazi Spawn creature with \"Sacrifice this creature: Add {C}.\"");
+        super("Eldrazi Spawn Token", "0/1 colorless Eldrazi Spawn creature with \"Sacrifice this creature: Add {C}.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELDRAZI);
         subtype.add(SubType.SPAWN);

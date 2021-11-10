@@ -21,7 +21,7 @@ public final class CentaurToken extends TokenImpl {
     }
 
     public CentaurToken() {
-        super("Centaur", "3/3 green Centaur creature token");
+        super("Centaur Token", "3/3 green Centaur creature token");
         cardType.add(CardType.CREATURE);
         availableImageSetCodes = tokenImageSets;
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("RNA")) {

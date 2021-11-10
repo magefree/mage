@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class GolemVigilanceToken extends TokenImpl {
 
     public GolemVigilanceToken() {
-        super("Golem", "3/3 colorless Golem artifact creature token with vigilance");
+        super("Golem Token", "3/3 colorless Golem artifact creature token with vigilance");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GOLEM);

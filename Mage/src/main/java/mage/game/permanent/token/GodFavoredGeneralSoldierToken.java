@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class GodFavoredGeneralSoldierToken extends TokenImpl {
 
     public GodFavoredGeneralSoldierToken() {
-        super("Soldier", "1/1 white Soldier enchantment creature token");
+        super("Soldier Token", "1/1 white Soldier enchantment creature token");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

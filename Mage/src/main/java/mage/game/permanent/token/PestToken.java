@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class PestToken extends TokenImpl {
 
     public PestToken() {
-        super("Pest", "0/1 colorless Pest artifact creature token");
+        super("Pest Token", "0/1 colorless Pest artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PEST);

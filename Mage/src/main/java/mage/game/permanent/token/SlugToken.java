@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class SlugToken extends TokenImpl {
 
     public SlugToken() {
-        super("Slug", "1/1 black Slug creature token");
+        super("Slug Token", "1/1 black Slug creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.SLUG);

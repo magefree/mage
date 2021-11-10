@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class RiseOfTheAntsToken extends TokenImpl {
 
     public RiseOfTheAntsToken() {
-        super("Insect", "3/3 green Insect creature token");
+        super("Insect Token", "3/3 green Insect creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.INSECT);

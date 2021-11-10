@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class ElephantToken extends TokenImpl {
 
     public ElephantToken() {
-        super("Elephant", "3/3 green Elephant creature token");
+        super("Elephant Token", "3/3 green Elephant creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.ELEPHANT);

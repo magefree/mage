@@ -18,7 +18,7 @@ import java.util.Arrays;
 public final class KarnConstructToken extends TokenImpl {
 
     public KarnConstructToken() {
-        super("Construct", "0/0 colorless Construct artifact creature token with \"This creature gets +1/+1 for each artifact you control.\"");
+        super("Construct Token", "0/0 colorless Construct artifact creature token with \"This creature gets +1/+1 for each artifact you control.\"");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.CONSTRUCT);

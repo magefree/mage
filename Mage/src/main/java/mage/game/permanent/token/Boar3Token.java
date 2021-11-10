@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class Boar3Token extends TokenImpl {
 
     public Boar3Token() {
-        super("Boar", "3/1 green Boar creature token");
+        super("Boar Token", "3/1 green Boar creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.BOAR);

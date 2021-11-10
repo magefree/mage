@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class TheLocustGodInsectToken extends TokenImpl {
 
     public TheLocustGodInsectToken() {
-        super("Insect", "1/1 blue and red Insect creature token with flying and haste");
+        super("Insect Token", "1/1 blue and red Insect creature token with flying and haste");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         color.setRed(true);

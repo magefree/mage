@@ -19,7 +19,7 @@ public final class HornetToken extends TokenImpl {
     }
     
     public HornetToken(String setCode) {
-        super("Hornet", "1/1 colorless Insect artifact creature token with flying and haste");
+        super("Hornet Token", "1/1 colorless Insect artifact creature token with flying and haste");
         this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);

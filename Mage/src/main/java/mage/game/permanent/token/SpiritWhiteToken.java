@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class SpiritWhiteToken extends TokenImpl {
 
     public SpiritWhiteToken() {
-        super("Spirit", "1/1 white Spirit creature token with flying");
+        super("Spirit Token", "1/1 white Spirit creature token with flying");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         color.setWhite(true);

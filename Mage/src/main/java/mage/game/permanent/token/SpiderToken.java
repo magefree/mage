@@ -29,7 +29,7 @@ public final class SpiderToken extends TokenImpl {
     }
 
     public SpiderToken(String setCode, int tokenType) {
-        super("Spider", "1/2 green Spider creature token with reach");
+        super("Spider Token", "1/2 green Spider creature token with reach");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);

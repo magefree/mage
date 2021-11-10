@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public final class HungryForMoreToken extends TokenImpl {
 
     public HungryForMoreToken() {
-        super("Vampire", "3/1 black and red Vampire creature token with trample, lifelink, and haste");
+        super("Vampire Token", "3/1 black and red Vampire creature token with trample, lifelink, and haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setBlack(true);

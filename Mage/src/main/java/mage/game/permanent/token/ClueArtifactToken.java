@@ -18,7 +18,7 @@ import java.util.Arrays;
 public final class ClueArtifactToken extends TokenImpl {
 
     public ClueArtifactToken() {
-        super("Clue", "colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\"");
+        super("Clue Token", "colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\"");
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.CLUE);
 

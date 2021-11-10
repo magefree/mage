@@ -23,7 +23,7 @@ public final class HuntedCentaurToken extends TokenImpl {
     }
 
     public HuntedCentaurToken() {
-        super("Centaur", "3/3 green Centaur creature tokens with protection from black");
+        super("Centaur Token", "3/3 green Centaur creature tokens with protection from black");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.CENTAUR);

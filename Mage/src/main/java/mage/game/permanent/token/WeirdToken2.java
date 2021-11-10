@@ -16,7 +16,7 @@ public final class WeirdToken2 extends TokenImpl {
     }
 
     public WeirdToken2(int xValue) {
-        super("Weird", "X/X blue and red Weird creature token");
+        super("Weird Token", "X/X blue and red Weird creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         color.setRed(true);

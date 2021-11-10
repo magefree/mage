@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class WurmCallingWurmToken extends TokenImpl {
 
     public WurmCallingWurmToken() {
-        super("Wurm", "X/X green Wurm creature token");
+        super("Wurm Token", "X/X green Wurm creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.WURM);

@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class DemonToken extends TokenImpl {
 
     public DemonToken() {
-        super("Demon", "5/5 black Demon creature token with flying");
+        super("Demon Token", "5/5 black Demon creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.DEMON);

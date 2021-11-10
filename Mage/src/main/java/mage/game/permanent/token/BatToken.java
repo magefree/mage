@@ -17,7 +17,7 @@ public final class BatToken extends TokenImpl {
     }
 
     public BatToken() {
-        super("Bat", "1/1 black Bat creature token with flying");
+        super("Bat Token", "1/1 black Bat creature token with flying");
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setBlack(true);

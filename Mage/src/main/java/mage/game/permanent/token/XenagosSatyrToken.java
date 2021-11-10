@@ -13,7 +13,7 @@ import mage.abilities.keyword.HasteAbility;
 public final class XenagosSatyrToken extends TokenImpl {
 
     public XenagosSatyrToken() {
-        super("Satyr", "2/2 red and green Satyr creature token with haste");
+        super("Satyr Token", "2/2 red and green Satyr creature token with haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setGreen(true);

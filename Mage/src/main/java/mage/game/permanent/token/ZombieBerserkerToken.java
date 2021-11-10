@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class ZombieBerserkerToken extends TokenImpl {
 
     public ZombieBerserkerToken() {
-        super("Zombie Berserker", "2/2 black Zombie Berserker creature token");
+        super("Zombie Berserker Token", "2/2 black Zombie Berserker creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ZOMBIE);

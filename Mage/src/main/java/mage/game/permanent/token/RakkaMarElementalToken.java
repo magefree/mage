@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public final class RakkaMarElementalToken extends TokenImpl {
 
     public RakkaMarElementalToken () {
-        super("Elemental", "3/1 red Elemental creature with Haste");
+        super("Elemental Token", "3/1 red Elemental creature with Haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);

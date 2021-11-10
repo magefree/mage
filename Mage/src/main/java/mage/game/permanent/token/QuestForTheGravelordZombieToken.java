@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public final class QuestForTheGravelordZombieToken extends TokenImpl {
 
     public QuestForTheGravelordZombieToken() {
-        super("Zombie Giant", "5/5 black Zombie Giant creature token");
+        super("Zombie Giant Token", "5/5 black Zombie Giant creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ZOMBIE);
         subtype.add(SubType.GIANT);

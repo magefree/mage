@@ -14,7 +14,7 @@ import mage.MageInt;
 public final class KorSoldierToken extends TokenImpl {
 
     public KorSoldierToken() {
-        super("Kor Soldier", "1/1 white Kor Soldier creature token");
+        super("Kor Soldier Token", "1/1 white Kor Soldier creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.KOR);

@@ -14,7 +14,7 @@ import mage.constants.SubType;
 public final class ThatcherHumanToken extends TokenImpl {
 
     public ThatcherHumanToken() {
-        super("Human", "1/1 red Human creature token with haste");
+        super("Human Token", "1/1 red Human creature token with haste");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.HUMAN);
         addAbility(HasteAbility.getInstance());

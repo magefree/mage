@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class ExpansionSymbolToken extends TokenImpl {
 
     public ExpansionSymbolToken() {
-        super("Expansion-Symbol", "1/1 colorless Expansion-Symbol creature token");
+        super("Expansion-Symbol Token", "1/1 colorless Expansion-Symbol creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.EXPANSION_SYMBOL);
         power = new MageInt(1);

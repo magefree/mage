@@ -20,7 +20,7 @@ public final class BelzenlokClericToken extends TokenImpl {
     }
 
     public BelzenlokClericToken() {
-        super("Cleric", "0/1 black Cleric creature token");
+        super("Cleric Token", "0/1 black Cleric creature token");
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.CLERIC);

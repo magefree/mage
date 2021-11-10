@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class ZombieArmyToken extends TokenImpl {
 
     public ZombieArmyToken() {
-        super("Zombie Army", "0/0 black Zombie Army creature token");
+        super("Zombie Army Token", "0/0 black Zombie Army creature token");
 
         cardType.add(CardType.CREATURE);
         color.setBlack(true);

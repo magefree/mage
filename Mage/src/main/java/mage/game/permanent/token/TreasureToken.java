@@ -18,7 +18,7 @@ import java.util.Arrays;
 public final class TreasureToken extends TokenImpl {
 
     public TreasureToken() {
-        super("Treasure", "Treasure token");
+        super("Treasure Token", "Treasure token");
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.TREASURE);
 

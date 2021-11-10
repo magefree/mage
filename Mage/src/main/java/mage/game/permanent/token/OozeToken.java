@@ -16,7 +16,7 @@ public final class OozeToken extends TokenImpl {
     }
 
     public OozeToken() {
-        super("Ooze", "X/X green ooze creature token");
+        super("Ooze Token", "X/X green ooze creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.OOZE);

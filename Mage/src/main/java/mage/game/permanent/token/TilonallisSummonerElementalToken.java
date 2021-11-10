@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class TilonallisSummonerElementalToken extends TokenImpl {
 
     public TilonallisSummonerElementalToken() {
-        super("Elemental", "1/1 red Elemental creature tokens");
+        super("Elemental Token", "1/1 red Elemental creature tokens");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELEMENTAL);
         color.setRed(true);

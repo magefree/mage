@@ -28,7 +28,7 @@ public final class SpiritToken extends TokenImpl {
     }
 
     public SpiritToken(String setCode, int tokenType) {
-        super("Spirit", "1/1 colorless Spirit creature token");
+        super("Spirit Token", "1/1 colorless Spirit creature token");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         if (tokenType > 0) {

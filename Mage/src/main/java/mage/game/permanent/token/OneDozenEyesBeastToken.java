@@ -12,7 +12,7 @@ import java.util.Arrays;
 public final class OneDozenEyesBeastToken extends TokenImpl {
 
     public OneDozenEyesBeastToken() {
-        super("Beast", "5/5 green Beast creature token");
+        super("Beast Token", "5/5 green Beast creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.BEAST);

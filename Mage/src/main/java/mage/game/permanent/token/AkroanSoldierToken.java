@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class AkroanSoldierToken extends TokenImpl {
 
     public AkroanSoldierToken() {
-        super("Soldier", "1/1 red Soldier creature token with haste");
+        super("Soldier Token", "1/1 red Soldier creature token with haste");
         setTokenType(3);
         cardType.add(CardType.CREATURE);
         color.setRed(true);

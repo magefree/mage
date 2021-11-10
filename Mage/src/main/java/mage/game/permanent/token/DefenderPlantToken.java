@@ -21,7 +21,7 @@ public final class DefenderPlantToken extends TokenImpl {
     }
 
     public DefenderPlantToken(String setCode, int tokenType) {
-        super("Plant", "0/2 green Plant creature token with defender");
+        super("Plant Token", "0/2 green Plant creature token with defender");
         color.setGreen(true);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PLANT);

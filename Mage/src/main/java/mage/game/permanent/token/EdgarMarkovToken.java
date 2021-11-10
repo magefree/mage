@@ -20,7 +20,7 @@ public final class EdgarMarkovToken extends TokenImpl {
     }
 
     public EdgarMarkovToken() {
-        super("Vampire", "1/1 black Vampire creature token");
+        super("Vampire Token", "1/1 black Vampire creature token");
         availableImageSetCodes = tokenImageSets;
         setExpansionSetCodeForImage("C17");
         cardType.add(CardType.CREATURE);

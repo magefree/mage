@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class CentaurEnchantmentCreatureToken extends TokenImpl {
 
     public CentaurEnchantmentCreatureToken() {
-        super("Centaur", "3/3 green Centaur enchantment creature token");
+        super("Centaur Token", "3/3 green Centaur enchantment creature token");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);

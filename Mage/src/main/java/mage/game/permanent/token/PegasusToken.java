@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class PegasusToken extends TokenImpl {
 
     public PegasusToken() {
-        super("Pegasus", "1/1 white Pegasus creature token with flying");
+        super("Pegasus Token", "1/1 white Pegasus creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.PEGASUS);
