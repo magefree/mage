@@ -40,6 +40,9 @@ public final class KrothussLordOfTheDeep extends CardImpl {
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
+        this.color.setBlue(true);
+        this.color.setBlack(true);
+        this.nightCard = true;
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
