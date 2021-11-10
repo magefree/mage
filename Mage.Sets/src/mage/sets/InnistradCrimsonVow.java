@@ -78,6 +78,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Cemetery Protector", 6, Rarity.MYTHIC, mage.cards.c.CemeteryProtector.class));
         cards.add(new SetCardInfo("Cemetery Prowler", 191, Rarity.MYTHIC, mage.cards.c.CemeteryProwler.class));
         cards.add(new SetCardInfo("Ceremonial Knife", 254, Rarity.COMMON, mage.cards.c.CeremonialKnife.class));
+        cards.add(new SetCardInfo("Chandra, Dressed to Kill", 149, Rarity.MYTHIC, mage.cards.c.ChandraDressedToKill.class));
         cards.add(new SetCardInfo("Change of Fortune", 150, Rarity.RARE, mage.cards.c.ChangeOfFortune.class));
         cards.add(new SetCardInfo("Child of the Pack", 234, Rarity.UNCOMMON, mage.cards.c.ChildOfThePack.class));
         cards.add(new SetCardInfo("Chill of the Grave", 51, Rarity.COMMON, mage.cards.c.ChillOfTheGrave.class));
