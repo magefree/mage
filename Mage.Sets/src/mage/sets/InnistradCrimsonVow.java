@@ -171,6 +171,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Hookhand Mariner", 203, Rarity.COMMON, mage.cards.h.HookhandMariner.class));
         cards.add(new SetCardInfo("Hopeful Initiate", 20, Rarity.RARE, mage.cards.h.HopefulInitiate.class));
         cards.add(new SetCardInfo("Howling Moon", 204, Rarity.RARE, mage.cards.h.HowlingMoon.class));
+        cards.add(new SetCardInfo("Howlpack Piper", 205, Rarity.RARE, mage.cards.h.HowlpackPiper.class));
         cards.add(new SetCardInfo("Hullbreaker Horror", 63, Rarity.RARE, mage.cards.h.HullbreakerHorror.class));
         cards.add(new SetCardInfo("Hungry Ridgewolf", 161, Rarity.COMMON, mage.cards.h.HungryRidgewolf.class));
         cards.add(new SetCardInfo("Infestation Expert", 206, Rarity.UNCOMMON, mage.cards.i.InfestationExpert.class));
@@ -319,6 +320,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Wedding Security", 138, Rarity.UNCOMMON, mage.cards.w.WeddingSecurity.class));
         cards.add(new SetCardInfo("Welcoming Vampire", 46, Rarity.RARE, mage.cards.w.WelcomingVampire.class));
         cards.add(new SetCardInfo("Whispering Wizard", 88, Rarity.UNCOMMON, mage.cards.w.WhisperingWizard.class));
+        cards.add(new SetCardInfo("Wildsong Howler", 205, Rarity.RARE, mage.cards.w.WildsongHowler.class));
         cards.add(new SetCardInfo("Winged Portent", 89, Rarity.RARE, mage.cards.w.WingedPortent.class));
         cards.add(new SetCardInfo("Witch's Web", 227, Rarity.COMMON, mage.cards.w.WitchsWeb.class));
         cards.add(new SetCardInfo("Witness the Future", 90, Rarity.UNCOMMON, mage.cards.w.WitnessTheFuture.class));
