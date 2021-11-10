@@ -7,6 +7,7 @@ package mage;
  * @author LevelX2
  */
 public enum MageIdentifier {
+    CemeteryIlluminatorWatcher,
     GisaAndGeralfWatcher,
     KaradorGhostChieftainWatcher,
     KessDissidentMageWatcher,
