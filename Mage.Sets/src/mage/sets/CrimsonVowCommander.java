@@ -45,6 +45,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Commander's Sphere", 163, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Cordial Vampire", 125, Rarity.RARE, mage.cards.c.CordialVampire.class));
         cards.add(new SetCardInfo("Crimson Honor Guard", 145, Rarity.RARE, mage.cards.c.CrimsonHonorGuard.class));
+        cards.add(new SetCardInfo("Crossway Troublemakers", 17, Rarity.RARE, mage.cards.c.CrosswayTroublemakers.class));
         cards.add(new SetCardInfo("Crush Contraband", 81, Rarity.UNCOMMON, mage.cards.c.CrushContraband.class));
         cards.add(new SetCardInfo("Custodi Soulbinders", 82, Rarity.RARE, mage.cards.c.CustodiSoulbinders.class));
         cards.add(new SetCardInfo("Custodi Squire", 83, Rarity.COMMON, mage.cards.c.CustodiSquire.class));
