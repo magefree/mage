@@ -120,6 +120,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Edgar's Awakening", 110, Rarity.UNCOMMON, mage.cards.e.EdgarsAwakening.class));
         cards.add(new SetCardInfo("Edgar, Charmed Groom", 236, Rarity.RARE, mage.cards.e.EdgarCharmedGroom.class));
         cards.add(new SetCardInfo("End the Festivities", 155, Rarity.COMMON, mage.cards.e.EndTheFestivities.class));
+        cards.add(new SetCardInfo("Eruth, Tormented Prophet", 237, Rarity.RARE, mage.cards.e.EruthTormentedProphet.class));
         cards.add(new SetCardInfo("Estwald Shieldbasher", 11, Rarity.COMMON, mage.cards.e.EstwaldShieldbasher.class));
         cards.add(new SetCardInfo("Evolving Wilds", 263, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Faithbound Judge", 12, Rarity.MYTHIC, mage.cards.f.FaithboundJudge.class));
