@@ -94,6 +94,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Night's Whisper", 133, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Nirkana Revenant", 134, Rarity.MYTHIC, mage.cards.n.NirkanaRevenant.class));
         cards.add(new SetCardInfo("Occult Epiphany", 14, Rarity.RARE, mage.cards.o.OccultEpiphany.class));
+        cards.add(new SetCardInfo("Olivia's Wrath", 20, Rarity.RARE, mage.cards.o.OliviasWrath.class));
         cards.add(new SetCardInfo("Oyobi, Who Split the Heavens", 95, Rarity.RARE, mage.cards.o.OyobiWhoSplitTheHeavens.class));
         cards.add(new SetCardInfo("Path of Ancestry", 177, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Patron of the Vein", 135, Rarity.RARE, mage.cards.p.PatronOfTheVein.class));
