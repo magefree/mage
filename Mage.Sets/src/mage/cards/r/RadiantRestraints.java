@@ -32,6 +32,8 @@ public final class RadiantRestraints extends CardImpl {
 
         this.subtype.add(SubType.AURA);
         this.subtype.add(SubType.CURSE);
+        this.color.setWhite(true);
+        this.nightCard = true;
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
