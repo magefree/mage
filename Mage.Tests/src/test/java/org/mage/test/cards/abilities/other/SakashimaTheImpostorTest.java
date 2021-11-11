@@ -67,7 +67,7 @@ public class SakashimaTheImpostorTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerB, "Sakashima the Impostor", 1);        
         
-        assertPermanentCount(playerA, "Eldrazi Spawn", 1);
-        assertPermanentCount(playerB, "Eldrazi Spawn", 1);
+        assertPermanentCount(playerA, "Eldrazi Spawn Token", 1);
+        assertPermanentCount(playerB, "Eldrazi Spawn Token", 1);
     }
 }

@@ -209,7 +209,7 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Memnite");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kindred Discovery");
-        setChoice(playerA, "Construct");
+        setChoice(playerA, "Construct Token");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clever Impersonator");
         setChoice(playerB, "Kindred Discovery");

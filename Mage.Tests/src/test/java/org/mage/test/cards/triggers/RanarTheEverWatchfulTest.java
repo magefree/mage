@@ -53,9 +53,9 @@ public class RanarTheEverWatchfulTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Boar", 3); // created token by Curse
+        assertPermanentCount(playerA, "Boar Token", 3); // created token by Curse
         assertPermanentCount(playerA, "Spirit Token", 1); // created token by Ranar
-        assertPermanentCount(playerB, "Boar", 3); // created token by Curse
+        assertPermanentCount(playerB, "Boar Token", 3); // created token by Curse
         assertPermanentCount(playerB, "Spirit Token", 0);  // no Spirit token for playerB
     }
     

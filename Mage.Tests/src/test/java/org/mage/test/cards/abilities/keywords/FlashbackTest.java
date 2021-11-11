@@ -198,7 +198,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Snapcaster Mage", 1);
-        assertPermanentCount(playerA, "Kor Ally", 4);
+        assertPermanentCount(playerA, "Kor Ally Token", 4);
         assertExileCount("Unified Front", 1);
     }
 
@@ -435,7 +435,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         execute();
 
         assertExileCount(playerA, fCatBlitz, 1);
-        assertPermanentCount(playerA, "Elemental Cat", 1);
+        assertPermanentCount(playerA, "Elemental Cat Token", 1);
         assertGraveyardCount(playerA, mountain, 1);
     }
 

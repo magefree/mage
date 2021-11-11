@@ -325,8 +325,8 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Hearthcage Giant", 1);
-        assertPermanentCount(playerA, "Elemental Shaman", 2);
-        assertPowerToughness(playerA, "Elemental Shaman", 3, 1);
+        assertPermanentCount(playerA, "Elemental Shaman Token", 2);
+        assertPowerToughness(playerA, "Elemental Shaman Token", 3, 1);
     }
 
     /**

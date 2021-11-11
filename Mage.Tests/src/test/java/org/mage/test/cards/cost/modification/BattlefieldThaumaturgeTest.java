@@ -166,7 +166,7 @@ public class BattlefieldThaumaturgeTest extends CardTestPlayerBase {
         }
 
         // All 4 creatures have been replaced by boars
-        assertPermanentCount(playerB, "Boar", 4);
+        assertPermanentCount(playerB, "Boar Token", 4);
 
         /* Cost to target 4 permanents will be:
          * + {4}{U}{U} for the base spell with X = 4

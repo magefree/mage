@@ -150,7 +150,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setModeChoice(playerA, "1");
         setModeChoice(playerA, "4");
 
-        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen", 3);
+        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen Token", 3);
         checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerA, 20 + 4);
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -179,7 +179,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setModeChoice(playerA, "4");
         setChoice(playerA, true); // return commander
 
-        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen", 3);
+        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen Token", 3);
         checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerA, 20 + 4);
 
         setStopAt(1, PhaseStep.END_TURN);

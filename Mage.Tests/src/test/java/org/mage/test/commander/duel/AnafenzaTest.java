@@ -89,9 +89,9 @@ public class AnafenzaTest extends CardTestCommanderDuelBase {
         playLand(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Forest");
 
         attack(5, playerA, "Acidic Slime");
-        block(5, playerB, "Elemental:0", "Acidic Slime");
+        block(5, playerB, "Elemental Token:0", "Acidic Slime");
         attack(5, playerA, "Anafenza, the Foremost");
-        block(5, playerB, "Elemental:1", "Anafenza, the Foremost");
+        block(5, playerB, "Elemental Token:1", "Anafenza, the Foremost");
         addTarget(playerB, playerA);
 
         setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);

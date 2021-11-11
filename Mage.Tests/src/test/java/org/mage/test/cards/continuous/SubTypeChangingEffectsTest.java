@@ -272,7 +272,7 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
         Assert.assertTrue(beast.hasSubtype(SubType.BEAST, currentGame));
         Assert.assertFalse(beast.hasSubtype(SubType.ORC, currentGame));
 
-        Permanent wurm = getPermanent("Wurm", playerA);
+        Permanent wurm = getPermanent("Wurm Token", playerA);
         Assert.assertTrue(wurm.hasSubtype(SubType.WURM, currentGame));
         Assert.assertFalse(wurm.hasSubtype(SubType.ORC, currentGame));
 

@@ -95,7 +95,7 @@ public class SpiritMirrorTest extends CardTestPlayerBase {
             addCard(Zone.BATTLEFIELD, playerB, creature);
             // Make them all reflections with Unnatural Selection
             activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: Choose a creature", creature);
-            setChoice(playerA, "Reflection Token");
+            setChoice(playerA, "Reflection");
             // Destroy them all with Spirit Mirror's ability
             activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}: Destroy target Reflection", creature);
         }

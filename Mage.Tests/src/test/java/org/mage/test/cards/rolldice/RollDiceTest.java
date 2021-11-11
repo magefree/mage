@@ -366,11 +366,11 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{B/R}{B/R}, {T}");
         setDieRollResult(playerA, 3);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brainiac", 3);
+        checkPermanentCount("after prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brainiac Token", 3);
 
         // prepare idea effect
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tap three Brainiac");
-        setChoice(playerA, "Brainiac", 3);
+        setChoice(playerA, "Brainiac Token", 3);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // roll and trigger idea replace event
@@ -471,11 +471,11 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{B/R}{B/R}, {T}");
         setDieRollResult(playerA, 3);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brainiac", 3);
+        checkPermanentCount("after prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brainiac Token", 3);
 
         // prepare idea effect
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tap three Brainiac");
-        setChoice(playerA, "Brainiac", 3);
+        setChoice(playerA, "Brainiac Token", 3);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // roll planar die, but no triggers with second roll - cause it works with numerical results (sum)
