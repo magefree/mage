@@ -47,9 +47,9 @@ public final class OchreJelly extends CardImpl {
                 new DiesSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
                         new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OchreJellyEffect())
                 )), OchreJellyCondition.instance, CardUtil.italicizeWithEmDash("Split")
-                + "When {this} dies, if it had two or more +1/+1 counters on it, " +
-                "create a token that's a copy of it at the beginning of the next end step. " +
-                "The token enters the battlefield with half that many +1/+1 counters on it, rounded down."
+                + "When {this} dies, if it had two or more +1/+1 counters on it, "
+                + "create a token that's a copy of it at the beginning of the next end step. "
+                + "The token enters the battlefield with half that many +1/+1 counters on it, rounded down."
         ));
     }
 
@@ -95,13 +95,10 @@ class OchreJellyEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
+        final int counters = permanent.getCounters(game).getCount(CounterType.P1P1) / 2;
+        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(CounterType.P1P1, counters);
         effect.setSavedPermanent(permanent);
         effect.apply(game, source);
-        int counters = permanent.getCounters(game).getCount(CounterType.P1P1) / 2;
-        for (Permanent token : effect.getAddedPermanent()) {
-            permanent.addCounters(CounterType.P1P1.createInstance(counters), source.getControllerId(), source, game);
-        }
         return true;
     }
 }
