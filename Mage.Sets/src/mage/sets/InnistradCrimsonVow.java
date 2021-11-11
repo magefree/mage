@@ -117,6 +117,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Diregraf Scavenger", 105, Rarity.COMMON, mage.cards.d.DiregrafScavenger.class));
         cards.add(new SetCardInfo("Distracting Geist", 9, Rarity.UNCOMMON, mage.cards.d.DistractingGeist.class));
         cards.add(new SetCardInfo("Diver Skaab", 56, Rarity.UNCOMMON, mage.cards.d.DiverSkaab.class));
+        cards.add(new SetCardInfo("Dollhouse of Horrors", 255, Rarity.RARE, mage.cards.d.DollhouseOfHorrors.class));
         cards.add(new SetCardInfo("Dominating Vampire", 154, Rarity.RARE, mage.cards.d.DominatingVampire.class));
         cards.add(new SetCardInfo("Doomed Dissenter", 106, Rarity.COMMON, mage.cards.d.DoomedDissenter.class));
         cards.add(new SetCardInfo("Dormant Grove", 198, Rarity.UNCOMMON, mage.cards.d.DormantGrove.class));
