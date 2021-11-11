@@ -240,6 +240,8 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 398, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Pointed Discussion", 126, Rarity.COMMON, mage.cards.p.PointedDiscussion.class));
         cards.add(new SetCardInfo("Pyre Spawn", 173, Rarity.COMMON, mage.cards.p.PyreSpawn.class));
+        cards.add(new SetCardInfo("Radiant Grace", 31, Rarity.UNCOMMON, mage.cards.r.RadiantGrace.class));
+        cards.add(new SetCardInfo("Radiant Restraints", 31, Rarity.UNCOMMON, mage.cards.r.RadiantRestraints.class));
         cards.add(new SetCardInfo("Ragged Recluse", 127, Rarity.COMMON, mage.cards.r.RaggedRecluse.class));
         cards.add(new SetCardInfo("Reckless Impulse", 174, Rarity.COMMON, mage.cards.r.RecklessImpulse.class));
         cards.add(new SetCardInfo("Reclusive Taxidermist", 214, Rarity.UNCOMMON, mage.cards.r.ReclusiveTaxidermist.class));
