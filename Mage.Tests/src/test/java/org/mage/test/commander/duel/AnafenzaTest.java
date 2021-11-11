@@ -100,7 +100,7 @@ public class AnafenzaTest extends CardTestCommanderDuelBase {
         assertExileCount(playerA, 0);
         assertExileCount(playerB, 0);
 
-        assertPermanentCount(playerB, "Elemental", 1);
+        assertPermanentCount(playerB, "Elemental Token", 1);
 
         assertGraveyardCount(playerA, "Acidic Slime", 1);
         assertGraveyardCount(playerA, "Anafenza, the Foremost", 0);

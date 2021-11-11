@@ -62,7 +62,7 @@ public class CripplingFearTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, elf);
         addCard(Zone.HAND, playerA, fear);
 
-        setChoice(playerA, "Goblin Token");
+        setChoice(playerA, "Goblin");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fear);
 
         setStrictChooseMode(true);

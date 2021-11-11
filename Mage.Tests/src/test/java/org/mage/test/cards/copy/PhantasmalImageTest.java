@@ -605,8 +605,8 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Phantasmal Image", 1);
         assertGraveyardCount(playerB, "Voice of Resurgence", 1);
 
-        assertPermanentCount(playerB, "Elemental", 1);
-        assertPermanentCount(playerA, "Elemental", 1);
+        assertPermanentCount(playerB, "Elemental Token", 1);
+        assertPermanentCount(playerA, "Elemental Token", 1);
 
     }
 

@@ -216,7 +216,7 @@ public class CloneTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
         setChoice(playerB, true);
         setChoice(playerB, "Adaptive Automaton");
-        setChoice(playerB, "Goblin Token");
+        setChoice(playerB, "Goblin");
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_COMBAT);

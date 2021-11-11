@@ -46,8 +46,8 @@ public class RanarTheEverWatchfulTest extends CardTestPlayerBase {
         addTarget(playerA, "Serra Angel");
         addTarget(playerA, "Bog Imp");
         addTarget(playerA, "Sengir Vampire");
-        addTarget(playerA, "Knight");
-        addTarget(playerA, "Knight");
+        addTarget(playerA, "Knight Token");
+        addTarget(playerA, "Knight Token");
 
         setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
         execute();

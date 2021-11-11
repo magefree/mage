@@ -216,8 +216,8 @@ public class BattlefieldThaumaturgeTest extends CardTestPlayerBase {
         }
 
         // And each player has 3 dragons
-        assertPermanentCount(playerA, "Dragon", 3);
-        assertPermanentCount(playerB, "Dragon", 3);
+        assertPermanentCount(playerA, "Dragon Token", 3);
+        assertPermanentCount(playerB, "Dragon Token", 3);
 
         /* Cost to target 6 creatures will be
          * + {4}{R}{R} for the fixed cost base spell
