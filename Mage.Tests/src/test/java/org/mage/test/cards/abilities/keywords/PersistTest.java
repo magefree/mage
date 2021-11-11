@@ -150,7 +150,7 @@ public class PersistTest extends CardTestPlayerBase {
         assertLife(playerB, 26); // +6 from lifelink of Wurmcoil
 
         assertPermanentCount(playerB, "Wurmcoil Engine", 0);
-        assertPermanentCount(playerB, "Phyrexian Wurm", 2);
+        assertPermanentCount(playerB, "Phyrexian Wurm Token", 2);
         assertPermanentCount(playerA, "Kitchen Finks", 2);
         assertPowerToughness(playerA, "Kitchen Finks", 2, 1, Filter.ComparisonScope.All);
 

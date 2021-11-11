@@ -24,7 +24,7 @@ public class ChatterfangSquirrelGeneralTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Plains", 2);
         assertPermanentCount(playerA, chatterfang, 1);
         assertPermanentCount(playerA, "Soldier Token", 2);
-        assertPermanentCount(playerA, "Squirrel", 2);
+        assertPermanentCount(playerA, "Squirrel Token", 2);
     }
 
     @Test
@@ -42,9 +42,9 @@ public class ChatterfangSquirrelGeneralTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Plains", 2);
         assertPermanentCount(playerB, chatterfang, 1);
         assertPermanentCount(playerA, "Soldier Token", 2);
-        assertPermanentCount(playerA, "Squirrel", 0);
+        assertPermanentCount(playerA, "Squirrel Token", 0);
         assertPermanentCount(playerB, "Soldier Token", 0);
-        assertPermanentCount(playerB, "Squirrel", 0);
+        assertPermanentCount(playerB, "Squirrel Token", 0);
     }
 
     @Test
@@ -69,6 +69,6 @@ public class ChatterfangSquirrelGeneralTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Clue Token", 1);
         assertPermanentCount(playerA, "Food Token", 1);
         assertPermanentCount(playerA, "Treasure Token", 1);
-        assertPermanentCount(playerA, "Squirrel", 3);
+        assertPermanentCount(playerA, "Squirrel Token", 3);
     }
 }

@@ -31,7 +31,7 @@ public class GutterGrimeTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertPermanentCount(playerA, "Ooze", 0);
+        assertPermanentCount(playerA, "Ooze Token", 0);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class GutterGrimeTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Gutter Grime", 1);
         assertPermanentCount(playerA, "Intangible Virtue", 1);
 
-        assertPermanentCount(playerA, "Ooze", 1);
-        assertPowerToughness(playerA, "Ooze", 2, 2, Filter.ComparisonScope.Any);
+        assertPermanentCount(playerA, "Ooze Token", 1);
+        assertPowerToughness(playerA, "Ooze Token", 2, 2, Filter.ComparisonScope.Any);
     }
 }

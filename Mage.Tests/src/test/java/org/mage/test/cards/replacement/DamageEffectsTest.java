@@ -42,7 +42,7 @@ public class DamageEffectsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Ob Nixilis, the Fallen", 1);
 
         assertGraveyardCount(playerA, "Wurmcoil Engine", 1);
-        assertPermanentCount(playerA, "Phyrexian Wurm", 2);
+        assertPermanentCount(playerA, "Phyrexian Wurm Token", 2);
 
         assertLife(playerB, 20);
         assertLife(playerA, 29); // -2 from Ob Nixilis + 12 from double damage with lifelink from Wurmcoil Engine

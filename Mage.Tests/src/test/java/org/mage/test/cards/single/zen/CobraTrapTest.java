@@ -27,7 +27,7 @@ public class CobraTrapTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Forest", 1);
-        assertPermanentCount(playerA, "Snake", 4);
+        assertPermanentCount(playerA, "Snake Token", 4);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class CobraTrapTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Forest", 2);
-        assertPermanentCount(playerA, "Snake", 0);
+        assertPermanentCount(playerA, "Snake Token", 0);
     }
 
 }

@@ -63,7 +63,7 @@ public class EngulfTheShoreTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, "Bronze Sable", 2);
         assertPermanentCount(playerB, "Hill Giant", 1);
-        assertPermanentCount(playerB, "Goblin", 0);
+        assertPermanentCount(playerB, "Goblin Token", 0);
         assertGraveyardCount(playerA, "Engulf the Shore", 1);
         assertGraveyardCount(playerB, "Hordeling Outburst", 1);
     }   

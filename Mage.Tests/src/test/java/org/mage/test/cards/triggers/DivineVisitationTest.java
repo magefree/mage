@@ -69,7 +69,7 @@ public class DivineVisitationTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, 1);
         assertPermanentCount(playerA, 5);
-        assertPermanentCount(playerA, "Goblin", 0);
+        assertPermanentCount(playerA, "Goblin Token", 0);
         assertPermanentCount(playerA, "Angel Token", 2);
         assertType("Angel Token", CardType.CREATURE, SubType.ANGEL);
         assertColor(playerA, "Angel Token", ObjectColor.WHITE, true);

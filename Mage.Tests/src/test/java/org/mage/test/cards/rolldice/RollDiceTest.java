@@ -46,7 +46,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, goblins, 1);
-        assertPermanentCount(playerA, "Goblin", goblinCount);
+        assertPermanentCount(playerA, "Goblin Token", goblinCount);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
 
         assertPermanentCount(playerA, goblins, 1);
         assertPermanentCount(playerA, guide, 1);
-        assertPermanentCount(playerA, "Goblin", 2);
+        assertPermanentCount(playerA, "Goblin Token", 2);
     }
 
     @Test
@@ -113,7 +113,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
 
         assertPermanentCount(playerA, goblins, 1);
         assertPermanentCount(playerA, guide, 2);
-        assertPermanentCount(playerA, "Goblin", 2);
+        assertPermanentCount(playerA, "Goblin Token", 2);
     }
 
     private void runKrarksOtherThumbTest(int choice, int thumbCount, int goblinCount, int... rolls) {
@@ -141,7 +141,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         assertPermanentCount(playerA, goblins, 1);
         assertPermanentCount(playerA, gallery, 1);
         assertPermanentCount(playerA, thumb, thumbCount);
-        assertPermanentCount(playerA, "Goblin", goblinCount);
+        assertPermanentCount(playerA, "Goblin Token", goblinCount);
     }
 
     @Test(expected = AssertionError.class)
@@ -198,7 +198,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, goblins, 1);
-        assertPermanentCount(playerA, "Goblin", goblinCount);
+        assertPermanentCount(playerA, "Goblin Token", goblinCount);
         assertAbility(playerA, farideh, FlyingAbility.getInstance(), true);
         assertHandCount(playerA, handCount);
     }
@@ -342,7 +342,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         setDieRollResult(playerA, 6); // additional roll - will be selected
         setDieRollResult(playerA, 5); // additional roll
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin", 6);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Token", 6);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -378,7 +378,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         setDieRollResult(playerA, 3); // normal roll
         setDieRollResult(playerA, 6); // additional roll - will be sums
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin", 3 + 6);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Token", 3 + 6);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -401,7 +401,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         setDieRollResult(playerA, 6); // additional roll
         setChoice(playerA, "6"); // keep 6 as roll result
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin", 6);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Token", 6);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -509,7 +509,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin", 6);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Token", 6);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
