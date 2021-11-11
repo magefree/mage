@@ -79,6 +79,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Karmic Guide", 90, Rarity.RARE, mage.cards.k.KarmicGuide.class));
         cards.add(new SetCardInfo("Kirtar's Wrath", 91, Rarity.RARE, mage.cards.k.KirtarsWrath.class));
         cards.add(new SetCardInfo("Knight of the White Orchid", 92, Rarity.RARE, mage.cards.k.KnightOfTheWhiteOrchid.class));
+        cards.add(new SetCardInfo("Laurine, the Diversion", 25, Rarity.RARE, mage.cards.l.LaurineTheDiversion.class));
         cards.add(new SetCardInfo("Malakir Bloodwitch", 131, Rarity.RARE, mage.cards.m.MalakirBloodwitch.class));
         cards.add(new SetCardInfo("Marble Diamond", 165, Rarity.COMMON, mage.cards.m.MarbleDiamond.class));
         cards.add(new SetCardInfo("Mentor of the Meek", 93, Rarity.RARE, mage.cards.m.MentorOfTheMeek.class));
