@@ -23,7 +23,7 @@ public class PermanentsEnterBattlefieldTappedEffect extends ReplacementEffectImp
     }
 
     public PermanentsEnterBattlefieldTappedEffect(FilterPermanent filter, Duration duration) {
-        super(duration, Outcome.Tap);
+        super(duration, Outcome.Tap, false);
         this.filter = filter;
     }
 
