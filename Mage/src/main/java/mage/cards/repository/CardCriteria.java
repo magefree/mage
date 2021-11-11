@@ -5,6 +5,8 @@ import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.Where;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,9 +25,9 @@ public class CardCriteria {
     private final List<String> ignoreSetCodes; // sets to ignore, use with little amount of sets (example: ignore sets with snow lands)
     private final List<CardType> types;
     private final List<CardType> notTypes;
-    private final List<String> supertypes;
-    private final List<String> notSupertypes;
-    private final List<String> subtypes;
+    private final List<SuperType> supertypes;
+    private final List<SuperType> notSupertypes;
+    private final List<SubType> subtypes;
     private final List<Rarity> rarities;
     private Boolean doubleFaced;
     private boolean black;
@@ -152,17 +154,17 @@ public class CardCriteria {
         return this;
     }
 
-    public CardCriteria supertypes(String... supertypes) {
+    public CardCriteria supertypes(SuperType... supertypes) {
         this.supertypes.addAll(Arrays.asList(supertypes));
         return this;
     }
 
-    public CardCriteria notSupertypes(String... supertypes) {
+    public CardCriteria notSupertypes(SuperType... supertypes) {
         this.notSupertypes.addAll(Arrays.asList(supertypes));
         return this;
     }
 
-    public CardCriteria subtypes(String... subtypes) {
+    public CardCriteria subtypes(SubType... subtypes) {
         this.subtypes.addAll(Arrays.asList(subtypes));
         return this;
     }
@@ -251,17 +253,17 @@ public class CardCriteria {
             clausesCount++;
         }
 
-        for (String superType : supertypes) {
-            where.like("supertypes", new SelectArg('%' + superType + '%'));
+        for (SuperType superType : supertypes) {
+            where.like("supertypes", new SelectArg('%' + superType.name() + '%'));
             clausesCount++;
         }
-        for (String subType : notSupertypes) {
-            where.not().like("supertypes", new SelectArg('%' + subType + '%'));
+        for (SuperType superType : notSupertypes) {
+            where.not().like("supertypes", new SelectArg('%' + superType.name() + '%'));
             clausesCount++;
         }
 
-        for (String subType : subtypes) {
-            where.like("subtypes", new SelectArg('%' + subType + '%'));
+        for (SubType subType : subtypes) {
+            where.like("subtypes", new SelectArg('%' + subType.name() + '%'));
             clausesCount++;
         }
 
@@ -389,15 +391,15 @@ public class CardCriteria {
         return notTypes;
     }
 
-    public List<String> getSupertypes() {
+    public List<SuperType> getSupertypes() {
         return supertypes;
     }
 
-    public List<String> getNotSupertypes() {
+    public List<SuperType> getNotSupertypes() {
         return notSupertypes;
     }
 
-    public List<String> getSubtypes() {
+    public List<SubType> getSubtypes() {
         return subtypes;
     }
 
