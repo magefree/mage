@@ -115,9 +115,21 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterSpecial;
 
     protected int numBoosterLands;
-    protected int ratioBoosterSpecialLand = 0; // if > 0 basic lands are replaced with special land with probability ratioBoosterSpecialLandNumerator / ratioBoosterSpecialLand
+
+    // if ratioBoosterSpecialLand > 0, one basic land may be replaced with a special card
+    // with probability ratioBoosterSpecialLandNumerator / ratioBoosterSpecialLand
+    protected int ratioBoosterSpecialLand = 0;
     protected int ratioBoosterSpecialLandNumerator = 1;
-    protected int ratioBoosterSpecialCommon = 0; // if > 0 one common is replaced with special card with probability 1 / ratioBoosterSpecialCommon
+
+    // if ratioBoosterSpecialCommon > 0, one common may be replaced with a special card
+    // with probability 1 / ratioBoosterSpecialCommon
+    protected int ratioBoosterSpecialCommon = 0;
+
+    // if ratioBoosterSpecialRare > 0, one uncommon or rare is always replaced with a special card
+    // probability that a rare rather than an uncommon is replaced is 1 / ratioBoosterSpecialRare
+    // probability that the replacement card for a rare is a mythic is 1 / ratioBoosterSpecialMythic
+    protected double ratioBoosterSpecialRare = 0;
+    protected double ratioBoosterSpecialMythic;
 
     protected int numBoosterCommon;
     protected int numBoosterUncommon;
@@ -368,6 +380,10 @@ public abstract class ExpansionSet implements Serializable {
         return ratioBoosterMythic > 0 && ratioBoosterMythic * RandomUtil.nextDouble() <= 1;
     }
 
+    protected boolean checkSpecialMythic() {
+        return ratioBoosterSpecialMythic > 0 && ratioBoosterSpecialMythic * RandomUtil.nextDouble() <= 1;
+    }
+
     public List<Card> tryBooster() {
         List<Card> booster = new ArrayList<>();
         if (!hasBoosters) {
@@ -398,18 +414,29 @@ public abstract class ExpansionSet implements Serializable {
             addToBooster(booster, commons);
         }
 
+        int numUncommonsToGenerate = numBoosterUncommon;
+        int numRaresToGenerate = numBoosterRare;
+        if (ratioBoosterSpecialRare > 0) {
+            Rarity specialRarity = Rarity.UNCOMMON;
+            if (ratioBoosterSpecialRare * RandomUtil.nextDouble() <= 1) {
+                specialRarity = (checkSpecialMythic() ? Rarity.MYTHIC : Rarity.RARE);
+                --numRaresToGenerate;
+            } else {
+                --numUncommonsToGenerate;
+            }
+            addToBooster(booster, getSpecialCardsByRarity(specialRarity));
+        }
+
         List<CardInfo> uncommons = getCardsByRarity(Rarity.UNCOMMON);
-        for (int i = 0; i < numBoosterUncommon; i++) {
+        for (int i = 0; i < numUncommonsToGenerate; i++) {
             addToBooster(booster, uncommons);
         }
 
-        List<CardInfo> rares = getCardsByRarity(Rarity.RARE);
-        List<CardInfo> mythics = getCardsByRarity(Rarity.MYTHIC);
-        for (int i = 0; i < numBoosterRare; i++) {
-            if (checkMythic()) {
-                addToBooster(booster, mythics);
-            } else {
-                addToBooster(booster, rares);
+        if (numRaresToGenerate > 0) {
+            List<CardInfo> rares = getCardsByRarity(Rarity.RARE);
+            List<CardInfo> mythics = getCardsByRarity(Rarity.MYTHIC);
+            for (int i = 0; i < numRaresToGenerate; i++) {
+                addToBooster(booster, checkMythic() ? mythics : rares);
             }
         }
 

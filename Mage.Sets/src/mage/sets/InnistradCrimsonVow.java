@@ -1,8 +1,11 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -25,7 +28,10 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.ratioBoosterSpecialRare = 5.5;
+        this.ratioBoosterSpecialMythic = 5.4;   // 5 mythic DFCs, 11 rare DFCs
         this.numBoosterDoubleFaced = 1;
+        this.maxCardNumberInBooster = 277;
 
         cards.add(new SetCardInfo("Abrade", 139, Rarity.COMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Adamant Will", 1, Rarity.COMMON, mage.cards.a.AdamantWill.class));
@@ -338,5 +344,11 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Wolfkin Outcast", 229, Rarity.UNCOMMON, mage.cards.w.WolfkinOutcast.class));
         cards.add(new SetCardInfo("Wrathful Jailbreaker", 184, Rarity.COMMON, mage.cards.w.WrathfulJailbreaker.class));
         cards.add(new SetCardInfo("Wretched Throng", 91, Rarity.COMMON, mage.cards.w.WretchedThrong.class));
+    }
+
+    // add common double faced card to booster
+    @Override
+    protected void addDoubleFace(List<Card> booster) {
+        addToBooster(booster, getSpecialCardsByRarity(Rarity.COMMON));
     }
 }

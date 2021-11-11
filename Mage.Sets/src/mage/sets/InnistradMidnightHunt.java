@@ -1,5 +1,6 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
@@ -32,7 +33,10 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.ratioBoosterSpecialRare = 5.5;
+        this.ratioBoosterSpecialMythic = 5.4;   // 5 mythic DFCs, 11 rare DFCs
         this.numBoosterDoubleFaced = 1;
+        this.maxCardNumberInBooster = 277;
 
         cards.add(new SetCardInfo("Abandon the Post", 127, Rarity.COMMON, mage.cards.a.AbandonThePost.class));
         cards.add(new SetCardInfo("Adeline, Resplendent Cathar", 1, Rarity.RARE, mage.cards.a.AdelineResplendentCathar.class, NON_FULL_USE_VARIOUS));
@@ -504,6 +508,12 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Winterthorn Blessing", 251, Rarity.UNCOMMON, mage.cards.w.WinterthornBlessing.class));
         cards.add(new SetCardInfo("Wrenn and Seven", 208, Rarity.MYTHIC, mage.cards.w.WrennAndSeven.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wrenn and Seven", 278, Rarity.MYTHIC, mage.cards.w.WrennAndSeven.class, NON_FULL_USE_VARIOUS));
+    }
+
+    // add common double faced card to booster
+    @Override
+    protected void addDoubleFace(List<Card> booster) {
+        addToBooster(booster, getSpecialCardsByRarity(Rarity.COMMON));
     }
 
     @Override
