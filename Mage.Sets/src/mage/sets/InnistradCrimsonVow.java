@@ -171,6 +171,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Halana and Alena, Partners", 239, Rarity.RARE, mage.cards.h.HalanaAndAlenaPartners.class));
         cards.add(new SetCardInfo("Hallowed Haunting", 17, Rarity.MYTHIC, mage.cards.h.HallowedHaunting.class));
         cards.add(new SetCardInfo("Hamlet Vanguard", 201, Rarity.RARE, mage.cards.h.HamletVanguard.class));
+        cards.add(new SetCardInfo("Hauken's Insight", 65, Rarity.MYTHIC, mage.cards.h.HaukensInsight.class));
         cards.add(new SetCardInfo("Headless Rider", 118, Rarity.RARE, mage.cards.h.HeadlessRider.class));
         cards.add(new SetCardInfo("Henrika Domnathi", 119, Rarity.MYTHIC, mage.cards.h.HenrikaDomnathi.class));
         cards.add(new SetCardInfo("Henrika, Infernal Seer", 119, Rarity.MYTHIC, mage.cards.h.HenrikaInfernalSeer.class));
@@ -194,6 +195,7 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Into the Night", 163, Rarity.UNCOMMON, mage.cards.i.IntoTheNight.class));
         cards.add(new SetCardInfo("Investigator's Journal", 258, Rarity.RARE, mage.cards.i.InvestigatorsJournal.class));
         cards.add(new SetCardInfo("Island", 399, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Jacob Hauken, Inspector", 65, Rarity.MYTHIC, mage.cards.j.JacobHaukenInspector.class));
         cards.add(new SetCardInfo("Katilda's Rising Dawn", 21, Rarity.RARE, mage.cards.k.KatildasRisingDawn.class));
         cards.add(new SetCardInfo("Katilda, Dawnhart Martyr", 21, Rarity.RARE, mage.cards.k.KatildaDawnhartMartyr.class));
         cards.add(new SetCardInfo("Kaya, Geist Hunter", 240, Rarity.MYTHIC, mage.cards.k.KayaGeistHunter.class));
