@@ -43,6 +43,7 @@ public final class BiolumeEgg extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(2)));
 
         // When you sacrifice Biolume Egg, return it to the battlefield transformed under its owner's control at the beginning of the next end step.
+        this.addAbility(new TransformAbility());
         this.addAbility(new SacrificeSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnLoyalCatharEffect()), true
         ).setText("return it to the battlefield transformed under its owner's control at the beginning of the next end step"), false));
