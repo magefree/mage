@@ -74,6 +74,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hollowhenge Overlord", 36, Rarity.RARE, mage.cards.h.HollowhengeOverlord.class));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 106, Rarity.RARE, mage.cards.i.ImprisonedInTheMoon.class));
         cards.add(new SetCardInfo("Indulgent Aristocrat", 130, Rarity.UNCOMMON, mage.cards.i.IndulgentAristocrat.class));
+        cards.add(new SetCardInfo("Kamber, the Plunderer", 19, Rarity.RARE, mage.cards.k.KamberThePlunderer.class));
         cards.add(new SetCardInfo("Kami of the Crescent Moon", 107, Rarity.RARE, mage.cards.k.KamiOfTheCrescentMoon.class));
         cards.add(new SetCardInfo("Karmic Guide", 90, Rarity.RARE, mage.cards.k.KarmicGuide.class));
         cards.add(new SetCardInfo("Kirtar's Wrath", 91, Rarity.RARE, mage.cards.k.KirtarsWrath.class));
