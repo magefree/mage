@@ -45,7 +45,7 @@ public final class BiolumeEgg extends CardImpl {
         // When you sacrifice Biolume Egg, return it to the battlefield transformed under its owner's control at the beginning of the next end step.
         this.addAbility(new TransformAbility());
         this.addAbility(new SacrificeSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnLoyalCatharEffect()), true
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new BiolumeEggEffect()), true
         ).setText("return it to the battlefield transformed under its owner's control at the beginning of the next end step"), false));
     }
 
@@ -59,20 +59,20 @@ public final class BiolumeEgg extends CardImpl {
     }
 }
 
-class ReturnLoyalCatharEffect extends OneShotEffect {
+class BiolumeEggEffect extends OneShotEffect {
 
-    public ReturnLoyalCatharEffect() {
+    public BiolumeEggEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "return it to the battlefield transformed under your control";
     }
 
-    public ReturnLoyalCatharEffect(final ReturnLoyalCatharEffect effect) {
+    public BiolumeEggEffect(final BiolumeEggEffect effect) {
         super(effect);
     }
 
     @Override
-    public ReturnLoyalCatharEffect copy() {
-        return new ReturnLoyalCatharEffect(this);
+    public BiolumeEggEffect copy() {
+        return new BiolumeEggEffect(this);
     }
 
     @Override

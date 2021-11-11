@@ -82,7 +82,7 @@ class EdgarCharmedGroomEffect extends OneShotEffect {
             return false;
         }
         game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-        controller.moveCards((Card) sourceObject, Zone.BATTLEFIELD, source, game);
+        controller.moveCards((Card) sourceObject, Zone.BATTLEFIELD, source, game, false, false, true, null);
         return true;
     }
 }
