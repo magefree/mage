@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -11,38 +12,32 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author Eirkei
  */
 public class PermanentsEnterBattlefieldTappedEffect extends ReplacementEffectImpl {
-    protected FilterPermanent filter;
-    
-    public PermanentsEnterBattlefieldTappedEffect() {
-        this(new FilterPermanent());
+
+    protected final FilterPermanent filter;
+
+    public PermanentsEnterBattlefieldTappedEffect(FilterPermanent filter) {
+        this(filter, Duration.WhileOnBattlefield);
     }
-    
-    public PermanentsEnterBattlefieldTappedEffect(FilterPermanent filter) { 
-        super(Duration.WhileOnBattlefield, Outcome.Tap);
+
+    public PermanentsEnterBattlefieldTappedEffect(FilterPermanent filter, Duration duration) {
+        super(duration, Outcome.Tap);
         this.filter = filter;
-        this.setText();
     }
 
     public PermanentsEnterBattlefieldTappedEffect(final PermanentsEnterBattlefieldTappedEffect effect) {
         super(effect);
-        
-        if (effect.filter != null){
-            this.filter = effect.filter.copy();
-        }
+        this.filter = effect.filter;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        
         if (target != null) {
             target.tap(source, game);
         }
-        
         return false;
     }
 
@@ -54,7 +49,6 @@ public class PermanentsEnterBattlefieldTappedEffect extends ReplacementEffectImp
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-
         return filter.match(permanent, source.getSourceId(), event.getPlayerId(), game);
     }
 
@@ -62,11 +56,14 @@ public class PermanentsEnterBattlefieldTappedEffect extends ReplacementEffectImp
     public PermanentsEnterBattlefieldTappedEffect copy() {
         return new PermanentsEnterBattlefieldTappedEffect(this);
     }
-    
-    private void setText() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(filter.getMessage());
-        sb.append(" enter the battlefield tapped");        
-        staticText = sb.toString();
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return filter.getMessage()
+                + " enter the battlefield tapped"
+                + (duration == Duration.EndOfTurn ? " this turn" : "");
     }
 }

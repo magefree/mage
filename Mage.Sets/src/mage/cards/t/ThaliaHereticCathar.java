@@ -1,28 +1,39 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.PermanentsEnterBattlefieldTappedEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class ThaliaHereticCathar extends CardImpl {
 
+    private static final FilterPermanent filter
+            = new FilterPermanent("creatures and nonbasic lands your opponents control");
+
+    static {
+        filter.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                Predicates.and(
+                        Predicates.not(SuperType.BASIC.getPredicate()),
+                        CardType.LAND.getPredicate()
+                )
+        ));
+    }
+
     public ThaliaHereticCathar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
@@ -33,7 +44,7 @@ public final class ThaliaHereticCathar extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Creatures and nonbasic lands your opponents control enter the battlefield tapped.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThaliaTapEffect()));
+        this.addAbility(new SimpleStaticAbility(new PermanentsEnterBattlefieldTappedEffect(filter)));
     }
 
     private ThaliaHereticCathar(final ThaliaHereticCathar card) {
@@ -43,48 +54,5 @@ public final class ThaliaHereticCathar extends CardImpl {
     @Override
     public ThaliaHereticCathar copy() {
         return new ThaliaHereticCathar(this);
-    }
-}
-
-class ThaliaTapEffect extends ReplacementEffectImpl {
-
-    ThaliaTapEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Tap);
-        staticText = "Creatures and nonbasic lands your opponents control enter the battlefield tapped";
-    }
-
-    ThaliaTapEffect(final ThaliaTapEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (target != null) {
-            target.setTapped(true);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null && (permanent.isCreature(game) ||
-                    (permanent.isLand(game) && !permanent.isBasic()))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public ThaliaTapEffect copy() {
-        return new ThaliaTapEffect(this);
     }
 }
