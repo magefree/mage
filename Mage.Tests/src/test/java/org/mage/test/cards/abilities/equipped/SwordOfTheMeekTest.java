@@ -48,12 +48,12 @@ public class SwordOfTheMeekTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Chromatic Star", 1);
 
-        assertPermanentCount(playerA, "Myr", 1);
-        assertPowerToughness(playerA, "Myr", 2, 2);
+        assertPermanentCount(playerA, "Myr Token", 1);
+        assertPowerToughness(playerA, "Myr Token", 2, 2);
         assertPermanentCount(playerA, "Sword of the Meek", 0);
         assertPowerToughness(playerA, "Master of Etherium", 3, 3);
 
-        Permanent myr = getPermanent("Myr", playerA.getId());
+        Permanent myr = getPermanent("Myr Token", playerA.getId());
         Assert.assertTrue("Myr may not have any attachments", myr.getAttachments().isEmpty());
     }
 

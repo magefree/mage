@@ -272,7 +272,7 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Zombie", 2);
+        assertPermanentCount(playerA, "Zombie Token", 2);
     }
 
 }

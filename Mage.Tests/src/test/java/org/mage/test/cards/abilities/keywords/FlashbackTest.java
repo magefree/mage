@@ -471,7 +471,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertTapped(yOx, true);
         assertTapped(wKnight, true);
         assertExileCount(playerA, bScreech, 1); // this fails, but the creatures are tapped as part of paying the cost
-        assertPermanentCount(playerA, "Bird", 2); // if you comment out the above line, this is failing as well
+        assertPermanentCount(playerA, "Bird Token", 2); // if you comment out the above line, this is failing as well
     }
 
     /*

@@ -34,7 +34,7 @@ public class BonecladNecromancerTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Boneclad Necromancer", 1);
-        assertPermanentCount(playerA, "Zombie", 1);
+        assertPermanentCount(playerA, "Zombie Token", 1);
         assertExileCount(playerA, "Raptor Hatchling", 1);
         assertGraveyardCount(playerA, "Raptor Hatchling", 0);
     }
@@ -51,7 +51,7 @@ public class BonecladNecromancerTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Boneclad Necromancer", 1);
-        assertPermanentCount(playerA, "Zombie", 1);
+        assertPermanentCount(playerA, "Zombie Token", 1);
         assertExileCount(playerB, "Raptor Hatchling", 1);
         assertGraveyardCount(playerB, "Raptor Hatchling", 0);
     }
@@ -68,7 +68,7 @@ public class BonecladNecromancerTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Boneclad Necromancer", 1);
-        assertPermanentCount(playerA, "Zombie", 0);
+        assertPermanentCount(playerA, "Zombie Token", 0);
         assertExileCount(playerA, "Feral Invocation", 0);
         assertGraveyardCount(playerA, "Feral Invocation", 1);
 

@@ -35,7 +35,7 @@ public class SilverfurPartisanTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Enlarge", 1);
         assertPowerToughness(playerA, "Silverfur Partisan", 5, 5); // +3+3 from Giant Growth
         assertPowerToughness(playerA, "Howlpack Wolf", 10, 10); // +7+7 from Enlarge
-        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Wolf Token", 2);
     }
     
     /**
@@ -63,6 +63,6 @@ public class SilverfurPartisanTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Arrow Storm", 1);
         assertGraveyardCount(playerA, "Howlpack Wolf", 1);
         assertGraveyardCount(playerA, "Silverfur Partisan", 1);
-        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Wolf Token", 2);
     }
 }

@@ -363,6 +363,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Soldier", 1);
+        assertPermanentCount(playerA, "Soldier Token", 1);
     }
 }

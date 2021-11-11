@@ -34,7 +34,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertExileCount(playerA, "Curious Pair", 1);
         assertGraveyardCount(playerA, 0);
     }
@@ -56,7 +56,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertExileCount(playerA, "Curious Pair", 1);
         assertGraveyardCount(playerA, 0);
     }
@@ -75,7 +75,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 0);
+        assertPermanentCount(playerA, "Food Token", 0);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, "Curious Pair", 0);
         assertGraveyardCount(playerA, 0);
@@ -97,7 +97,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, "Curious Pair", 0);
         assertGraveyardCount(playerA, 0);
@@ -125,7 +125,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertExileCount(playerA, "Curious Pair", 1);
         assertGraveyardCount(playerA, 0);
@@ -146,7 +146,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertHandCount(playerA, 1);
-        assertPermanentCount(playerA, "Food", 0);
+        assertPermanentCount(playerA, "Food Token", 0);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, "Curious Pair", 0);
         assertGraveyardCount(playerA, 0);
@@ -169,7 +169,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertHandCount(playerA, 1);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, "Curious Pair", 0);
         assertGraveyardCount(playerA, 0);
@@ -189,7 +189,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 0);
+        assertPermanentCount(playerA, "Food Token", 0);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertPowerToughness(playerA, "Curious Pair", 2, 4);
         assertExileCount(playerA, "Curious Pair", 0);
@@ -248,7 +248,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 2);
+        assertPermanentCount(playerA, "Food Token", 2);
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertExileCount(playerA, "Curious Pair", 1);
         assertGraveyardCount(playerA, 0);
@@ -276,7 +276,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 2);
+        assertPermanentCount(playerA, "Food Token", 2);
         assertPermanentCount(playerA, 5);
         assertExileCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, 1);
@@ -306,7 +306,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 0);
+        assertPermanentCount(playerA, "Food Token", 0);
         assertPermanentCount(playerA, 1);
         assertExileCount(playerA, 0);
         assertGraveyardCount(playerA, "Curious Pair", 1);
@@ -343,7 +343,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertHandCount(playerA, 0);
         assertHandCount(playerB, 0);
         assertPermanentCount(playerB, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, 0);
         assertExileCount(playerB, 0);
@@ -451,7 +451,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, 4);
-        assertPermanentCount(playerA, "Food", 2);
+        assertPermanentCount(playerA, "Food Token", 2);
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertExileCount(playerA, "Curious Pair", 1);
         assertGraveyardCount(playerA, 0);
@@ -501,7 +501,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 0);
+        assertPermanentCount(playerA, "Food Token", 0);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, 0);
         assertGraveyardCount(playerA, 0);
@@ -524,7 +524,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Food", 0);
+        assertPermanentCount(playerA, "Food Token", 0);
         assertLibraryCount(playerA, 1);
     }
 
@@ -559,7 +559,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertPermanentCount(playerA, "Wrenn and Six", 1);
         assertEmblemCount(playerA, 1);
@@ -594,7 +594,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, 3);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertExileCount(playerA, "Curious Pair", 1);
         assertGraveyardCount(playerA, 0);
@@ -759,7 +759,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         // play as adventure spell
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Treats to Share");
         waitStackResolved(3, PhaseStep.POSTCOMBAT_MAIN);
-        checkPermanentCount("after play 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Food", 1);
+        checkPermanentCount("after play 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Food Token", 1);
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);

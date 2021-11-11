@@ -20,7 +20,7 @@ public class DeathTyrantTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, "Grizzly Bears", 1);
-        assertPermanentCount(playerA, "Zombie", 1);
+        assertPermanentCount(playerA, "Zombie Token", 1);
         assertPermanentCount(playerA, "Death Tyrant", 1);
         assertPermanentCount(playerB, "Hill Giant", 1);
     }
@@ -38,7 +38,7 @@ public class DeathTyrantTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerB, "Grizzly Bears", 1);
-        assertPermanentCount(playerA, "Zombie", 1);
+        assertPermanentCount(playerA, "Zombie Token", 1);
         assertPermanentCount(playerA, "Death Tyrant", 1);
         assertPermanentCount(playerA, "Hill Giant", 1);
     }

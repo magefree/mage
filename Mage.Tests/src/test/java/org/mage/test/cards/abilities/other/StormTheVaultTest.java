@@ -40,7 +40,7 @@ public class StormTheVaultTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Treasure", 2);
+        assertPermanentCount(playerA, "Treasure Token", 2);
     }
 
     @Test
@@ -55,6 +55,6 @@ public class StormTheVaultTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Treasure", 1);
+        assertPermanentCount(playerA, "Treasure Token", 1);
     }
 }

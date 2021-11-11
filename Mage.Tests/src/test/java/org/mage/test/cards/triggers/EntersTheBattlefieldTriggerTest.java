@@ -97,7 +97,7 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Reanimate", 1);
         assertPermanentCount(playerA, "Scion of Vitu-Ghazi", 1);
-        assertPermanentCount(playerA, "Bird", 2); // only 2 from cast from hand creation and populate. Populate may not trigger from reanimate
+        assertPermanentCount(playerA, "Bird Token", 2); // only 2 from cast from hand creation and populate. Populate may not trigger from reanimate
 
         assertLife(playerA, 15);
         assertLife(playerB, 20);

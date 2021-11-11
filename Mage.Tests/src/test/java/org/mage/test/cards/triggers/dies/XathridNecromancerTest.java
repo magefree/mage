@@ -51,8 +51,8 @@ public class XathridNecromancerTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Xathrid Necromancer", 1);
         assertGraveyardCount(playerA, "Gather the Townsfolk", 1);
 
-        assertPermanentCount(playerA, "Human", 0);
-        assertPermanentCount(playerA, "Zombie", 3);
+        assertPermanentCount(playerA, "Human Token", 0);
+        assertPermanentCount(playerA, "Zombie Token", 3);
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

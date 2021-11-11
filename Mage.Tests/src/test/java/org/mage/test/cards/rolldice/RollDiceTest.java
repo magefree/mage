@@ -232,7 +232,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 2);
+        assertPermanentCount(playerA, "Eldrazi Token", 2);
         assertTappedCount("Mountain", true, 1); // cost for second planar die
     }
 
@@ -259,7 +259,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 1);
+        assertPermanentCount(playerA, "Eldrazi Token", 1);
     }
 
     @Test
@@ -289,7 +289,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 1);
+        assertPermanentCount(playerA, "Eldrazi Token", 1);
     }
 
     @Test
@@ -323,7 +323,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 0);
+        assertPermanentCount(playerA, "Eldrazi Token", 0);
     }
 
     @Test
@@ -427,7 +427,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 1);
+        assertPermanentCount(playerA, "Eldrazi Token", 1);
     }
 
     @Test
@@ -450,7 +450,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 1);
+        assertPermanentCount(playerA, "Eldrazi Token", 1);
     }
 
     @Test
@@ -489,7 +489,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         execute();
         assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Eldrazi", 1);
+        assertPermanentCount(playerA, "Eldrazi Token", 1);
     }
 
     @Test

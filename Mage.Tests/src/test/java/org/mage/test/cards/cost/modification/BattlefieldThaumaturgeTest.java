@@ -117,7 +117,7 @@ public class BattlefieldThaumaturgeTest extends CardTestPlayerBase {
             assertPermanentCount(playerA, creature, 1);
         }
         // Each has a solider token generated while attacking
-        assertPermanentCount(playerA, "Soldier", 5);
+        assertPermanentCount(playerA, "Soldier Token", 5);
         // Battlefield Thaumaturge will have hexproof from heroic trigger
         Permanent battlefieldThaumaturge = getPermanent("Battlefield Thaumaturge", playerA.getId());
         Assert.assertTrue("Battlefield Thaumaturge must have hexproof", battlefieldThaumaturge.getAbilities().contains(HexproofAbility.getInstance()));

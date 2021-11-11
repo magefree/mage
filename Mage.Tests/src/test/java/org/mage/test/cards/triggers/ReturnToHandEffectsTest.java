@@ -75,7 +75,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Lab Rats", 1);
         assertGraveyardCount(playerB, "Boomerang", 1);
 
-        assertPermanentCount(playerA, "Soldier", 3);
+        assertPermanentCount(playerA, "Soldier Token", 3);
         assertPermanentCount(playerA, "Rat", 0);
 
     }

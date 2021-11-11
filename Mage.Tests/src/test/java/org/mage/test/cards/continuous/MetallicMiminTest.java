@@ -90,7 +90,7 @@ public class MetallicMiminTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Howlpack Resurgence", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Metallic Mimic");
-        setChoice(playerA, "Wolf");
+        setChoice(playerA, "Wolf Token");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

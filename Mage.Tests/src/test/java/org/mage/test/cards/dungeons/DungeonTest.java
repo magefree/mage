@@ -287,7 +287,7 @@ public class DungeonTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
         assertPowerToughness(playerB, FLAMESPEAKER_ADEPT, 2 + 2 + 2, 3);
         assertPermanentCount(playerA, "Goblin", 1);
-        assertPermanentCount(playerB, "Treasure", 1);
+        assertPermanentCount(playerB, "Treasure Token", 1);
         assertDungeonRoom(playerA, LOST_MINE_OF_PHANDELVER, "Dark Pool");
         assertDungeonRoom(playerB, DUNGEON_OF_THE_MAD_MAGE, "Lost Level");
         assertLife(playerA, 20 + 1);
