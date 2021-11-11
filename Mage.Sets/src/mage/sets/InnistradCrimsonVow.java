@@ -46,6 +46,8 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Ballista Wielder", 143, Rarity.UNCOMMON, mage.cards.b.BallistaWielder.class));
         cards.add(new SetCardInfo("Belligerent Guest", 144, Rarity.COMMON, mage.cards.b.BelligerentGuest.class));
         cards.add(new SetCardInfo("Binding Geist", 48, Rarity.COMMON, mage.cards.b.BindingGeist.class));
+        cards.add(new SetCardInfo("Biolume Egg", 49, Rarity.UNCOMMON, mage.cards.b.BiolumeEgg.class));
+        cards.add(new SetCardInfo("Biolume Serpent", 49, Rarity.UNCOMMON, mage.cards.b.BiolumeSerpent.class));
         cards.add(new SetCardInfo("Bleed Dry", 94, Rarity.COMMON, mage.cards.b.BleedDry.class));
         cards.add(new SetCardInfo("Blood Fountain", 95, Rarity.COMMON, mage.cards.b.BloodFountain.class));
         cards.add(new SetCardInfo("Blood Hypnotist", 145, Rarity.UNCOMMON, mage.cards.b.BloodHypnotist.class));
