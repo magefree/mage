@@ -35,7 +35,7 @@ public final class TruefireCaptain extends CardImpl {
         // Whenever Truefire Captain is dealt damage, it deals that much damage to target player.
         Ability ability = new DealtDamageToSourceTriggeredAbility(
                 new TruefireCaptainEffect(),
-                false, false, true
+                false, false
         );
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

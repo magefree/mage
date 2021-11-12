@@ -48,7 +48,7 @@ public final class BrashTaunter extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // Whenever Brash Taunter is dealt damage, it deals that much damage to target opponent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(new BrashTaunterEffect(), false, false, true);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(new BrashTaunterEffect(), false, false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
