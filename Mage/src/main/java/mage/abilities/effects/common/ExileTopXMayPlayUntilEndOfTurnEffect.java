@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -52,15 +51,14 @@ public class ExileTopXMayPlayUntilEndOfTurnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
+        if (controller == null) {
             return false;
         }
         Set<Card> cards = controller.getLibrary().getTopCards(game, amount);
         if (cards.isEmpty()) {
             return true;
         }
-        controller.moveCardsToExile(cards, source, game, true, source.getSourceId(), sourceObject.getIdName());
+        controller.moveCardsToExile(cards, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceLogName(game, source));
         // remove cards that could not be moved to exile
         cards.removeIf(card -> !Zone.EXILED.equals(game.getState().getZone(card.getId())));
         if (!cards.isEmpty()) {

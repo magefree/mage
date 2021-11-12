@@ -328,6 +328,8 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Voldaren Bloodcaster", 137, Rarity.RARE, mage.cards.v.VoldarenBloodcaster.class));
         cards.add(new SetCardInfo("Voldaren Epicure", 182, Rarity.COMMON, mage.cards.v.VoldarenEpicure.class));
         cards.add(new SetCardInfo("Voldaren Estate", 267, Rarity.RARE, mage.cards.v.VoldarenEstate.class));
+        cards.add(new SetCardInfo("Volt-Charged Berserker", 183, Rarity.UNCOMMON, mage.cards.v.VoltChargedBerserker.class));
+        cards.add(new SetCardInfo("Voltaic Visionary", 183, Rarity.UNCOMMON, mage.cards.v.VoltaicVisionary.class));
         cards.add(new SetCardInfo("Wandering Mind", 251, Rarity.UNCOMMON, mage.cards.w.WanderingMind.class));
         cards.add(new SetCardInfo("Wanderlight Spirit", 86, Rarity.COMMON, mage.cards.w.WanderlightSpirit.class));
         cards.add(new SetCardInfo("Wash Away", 87, Rarity.UNCOMMON, mage.cards.w.WashAway.class));
