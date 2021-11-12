@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -36,7 +36,9 @@ public final class DollhouseOfHorrors extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // {1}, {T}, Exile a creature card from your graveyard: Create a token that's a copy of the exiled card, except it's a 0/0 Construct artifact in addition to its other types and it has "This creature gets +1/+1 for each Construct you control." It gains haste until end of turn. Activate only as a sorcery.
-        Ability ability = new SimpleActivatedAbility(new DollhouseOfHorrorsEffect(), new GenericManaCost(1));
+        Ability ability = new ActivateAsSorceryActivatedAbility(
+                new DollhouseOfHorrorsEffect(), new GenericManaCost(1)
+        );
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
                 StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD

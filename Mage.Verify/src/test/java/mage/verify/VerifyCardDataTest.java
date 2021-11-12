@@ -58,7 +58,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "SLD"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "VOW"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -1581,9 +1581,8 @@ public class VerifyCardDataTest {
             refText = refText.substring(1, refText.length() - 1);
         }
         // planeswalker fix [-7]: xxx
-        if (refText.contains("[") && refText.contains("]")) {
-            refText = refText.replace("[", "").replace("]", "");
-        }
+        refText = refText.replaceAll("\\[([\\−\\+]?\\d*)\\]\\: ", "$1: ");
+
         // evergreen keyword fix
         for (String s : refText.split("[\\$\\\n]")) {
             if (Arrays

@@ -1,19 +1,19 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class StormchaserDrake extends CardImpl {
@@ -35,7 +35,9 @@ public final class StormchaserDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Stormchaser Drake becomes the target of a spell you control, draw a card.
-        this.addAbility(new BecomesTargetTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
+        this.addAbility(new BecomesTargetTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), filter
+        ).setTriggerPhrase("Whenever {this} becomes the target of a spell you control, "));
     }
 
     private StormchaserDrake(final StormchaserDrake card) {

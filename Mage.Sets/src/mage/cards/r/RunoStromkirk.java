@@ -41,7 +41,7 @@ public final class RunoStromkirk extends CardImpl {
 
         // When Runo Stromkirk enters the battlefield, put up to one target creature card from your graveyard on top of your library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true));
-        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
 
         // At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If a creature card with mana value 6 or greater is revealed this way, transform Runo Stromkirk.

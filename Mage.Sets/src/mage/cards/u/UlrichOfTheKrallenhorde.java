@@ -32,7 +32,7 @@ public final class UlrichOfTheKrallenhorde extends CardImpl {
 
         // Whenever this creature enters the battlefield or transforms into Ulrich of the Krallenhorde, target creature gets +4/+4 until end of turn.
         Ability ability = new TransformsOrEntersTriggeredAbility(
-                new BoostTargetEffect(4, 4), false, true
+                new BoostTargetEffect(4, 4), false
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -9,9 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -19,13 +17,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DesperateFarmer extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public DesperateFarmer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -41,7 +32,10 @@ public final class DesperateFarmer extends CardImpl {
 
         // When another creature you control dies, transform Desperate Farmer.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DiesCreatureTriggeredAbility(new TransformSourceEffect(), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                new TransformSourceEffect(), false,
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
+        ).setTriggerPhrase("When another creature you control dies, "));
     }
 
     private DesperateFarmer(final DesperateFarmer card) {

@@ -36,7 +36,7 @@ public final class DorotheaVengefulVictim extends CardImpl {
         // When Dorothea, Vengeful Victim attacks or blocks, sacrifice it at end of combat.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())
-        ), false));
+        ).setText("sacrifice it at end of combat"), false));
 
         // Disturb {1}{W}{U}
         this.addAbility(new DisturbAbility(this, "{1}{W}{U}"));

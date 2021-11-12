@@ -60,7 +60,7 @@ class DreadFugueEffect extends OneShotEffect {
     public DreadFugueEffect(FilterCard filter) {
         super(Outcome.Discard);
         this.filter = filter;
-        staticText = "Target player reveals their hand. You may choose a nonland card from it [with mana value 2 or less]. That player discards that card";
+        staticText = "Target player reveals their hand. You choose a nonland card from it [with mana value 2 or less]. That player discards that card";
     }
 
     private DreadFugueEffect(final DreadFugueEffect effect) {

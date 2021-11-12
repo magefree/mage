@@ -50,7 +50,7 @@ public final class GeralfVisionaryStitcher extends CardImpl {
         // Zombies you control have flying.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
 
-        // {U}, {T}, Sacrifice another nontoken creature: Create an X/X blue Zombie token, where X is the sacrificed creature's power.
+        // {U}, {T}, Sacrifice another nontoken creature: Create an X/X blue Zombie token, where X is the sacrificed creature's toughness.
         Ability ability = new SimpleActivatedAbility(new GeralfVisionaryStitcherEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(filter2));
@@ -71,7 +71,7 @@ class GeralfVisionaryStitcherEffect extends OneShotEffect {
 
     public GeralfVisionaryStitcherEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Create an X/X blue Zombie token, where X is the sacrificed creature's power";
+        staticText = "Create an X/X blue Zombie creature token, where X is the sacrificed creature's toughness";
     }
 
     private GeralfVisionaryStitcherEffect(final GeralfVisionaryStitcherEffect effect) {
@@ -89,7 +89,7 @@ class GeralfVisionaryStitcherEffect extends OneShotEffect {
         for (Cost cost : source.getCosts()) {
             if (cost instanceof SacrificeTargetCost) {
                 for (Permanent permanent : ((SacrificeTargetCost) cost).getPermanents()) {
-                    xValue += permanent.getPower().getValue();
+                    xValue += permanent.getToughness().getValue();
                 }
             }
         }

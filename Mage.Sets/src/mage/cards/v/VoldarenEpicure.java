@@ -27,9 +27,9 @@ public final class VoldarenEpicure extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Voldaren Epicure enters the battlefield, it deals 1 damage to each opponent. Create a Blood token.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DamagePlayersEffect(1, TargetController.OPPONENT)
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamagePlayersEffect(
+                1, TargetController.OPPONENT, "it"
+        ));
         ability.addEffect(new CreateTokenEffect(new BloodToken()));
         this.addAbility(ability);
     }

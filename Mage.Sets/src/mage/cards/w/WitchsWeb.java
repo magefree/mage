@@ -22,8 +22,8 @@ public final class WitchsWeb extends CardImpl {
 
         // Target creature gets +3/+3 and gains reach until end of turn. Untap it.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                1, 2, Duration.EndOfTurn
-        ).setText("Target creature gets +1/+2"));
+                3, 3, Duration.EndOfTurn
+        ).setText("Target creature gets +3/+3"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 ReachAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains reach until end of turn"));

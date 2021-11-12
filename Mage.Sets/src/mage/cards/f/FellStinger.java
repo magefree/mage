@@ -36,7 +36,7 @@ public final class FellStinger extends CardImpl {
 
         // When Fell Stinger exploits a creature, target player draws two cards and loses 2 life.
         Ability ability = new ExploitCreatureTriggeredAbility(new DrawCardTargetEffect(2));
-        ability.addEffect(new LoseLifeTargetEffect(2));
+        ability.addEffect(new LoseLifeTargetEffect(2).setText("and loses 2 life"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

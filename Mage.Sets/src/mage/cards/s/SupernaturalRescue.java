@@ -44,7 +44,7 @@ public final class SupernaturalRescue extends CardImpl {
                 Zone.ALL,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(
                         FlashAbility.getInstance(), Duration.WhileOnBattlefield, true
-                ), condition, "{this} has flash as long as you control a Merfolk")
+                ), condition, "this spell has flash as long as you control a Spirit")
         ).setRuleAtTheTop(true).addHint(hint));
 
         // When you cast this spell, tap up to two target creatures you don't control.

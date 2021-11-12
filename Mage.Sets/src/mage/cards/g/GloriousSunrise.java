@@ -51,7 +51,7 @@ public final class GloriousSunrise extends CardImpl {
         // • Creatures you control get +1/+1 and gain trample until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new BoostControlledEffect(
                 1, 1, Duration.EndOfTurn
-        ).setText("reatures you control get +1/+1"), TargetController.YOU, false);
+        ).setText("creatures you control get +1/+1"), TargetController.YOU, false);
         ability.addEffect(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURE

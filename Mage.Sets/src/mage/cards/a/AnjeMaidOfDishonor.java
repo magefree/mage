@@ -32,7 +32,7 @@ import mage.game.permanent.token.BloodToken;
  */
 public final class AnjeMaidOfDishonor extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another creature or a Blood Token");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another creature or a Blood token");
 
     static {
         filter.add(AnjeMaidOfDishonorPredicate.instance);

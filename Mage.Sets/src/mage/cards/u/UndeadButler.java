@@ -38,7 +38,7 @@ public final class UndeadButler extends CardImpl {
         );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(new DiesSourceTriggeredAbility(new DoWhenCostPaid(
-                ability, new ExileSourceFromGraveCost(), "Exile {this}?"
+                ability, new ExileSourceFromGraveCost().setText("exile it"), "Exile {this}?"
         )));
     }
 

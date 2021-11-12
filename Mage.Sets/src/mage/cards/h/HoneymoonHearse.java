@@ -34,7 +34,7 @@ public final class HoneymoonHearse extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new AddCardTypeSourceEffect(
                         Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE
-                ),
+                ).setText("{this} becomes an artifact creature until end of turn"),
                 new TapTargetCost(new TargetControlledPermanent(
                         2, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES
                 ))

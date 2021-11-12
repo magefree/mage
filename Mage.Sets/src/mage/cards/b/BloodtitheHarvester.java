@@ -52,9 +52,9 @@ public final class BloodtitheHarvester extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BloodToken())));
 
         // {T}, Sacrifice Bloodtithe Harvester: Target creature gets -X/-X until end of turn, where X is twice the number of Blood tokens you control. Activate only as a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(
-                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn), new TapSourceCost()
-        );
+        Ability ability = new ActivateAsSorceryActivatedAbility(new BoostTargetEffect(
+                xValue, xValue, Duration.EndOfTurn
+        ).setText("target creature gets -X/-X until end of turn, where X is twice the number of Blood tokens you control"), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability.addHint(hint));

@@ -7,6 +7,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Locale;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -115,7 +117,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append(attachmentType.verb());
+        sb.append(attachmentType.verb().toLowerCase());
         sb.append(" " + targetObjectName + " ");
         if (duration == Duration.WhileOnBattlefield) {
             sb.append("has ");

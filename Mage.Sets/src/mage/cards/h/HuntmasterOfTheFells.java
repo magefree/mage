@@ -31,9 +31,7 @@ public final class HuntmasterOfTheFells extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever this creature enters the battlefield or transforms into Huntmaster of the Fells, create a 2/2 green Wolf creature token and you gain 2 life.
-        Ability ability = new TransformsOrEntersTriggeredAbility(
-                new CreateTokenEffect(new WolfToken()), false, true
-        );
+        Ability ability = new TransformsOrEntersTriggeredAbility(new CreateTokenEffect(new WolfToken()), false);
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         this.addAbility(ability);
 

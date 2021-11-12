@@ -2,6 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.PreventionEffectImpl;
@@ -33,7 +34,7 @@ public final class MagmaPummeler extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Magma Pummeler enters the battlefield with X +1/+1 counters on it.
-        this.addAbility(new SimpleStaticAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // If damage would be dealt to Magma Pummeler while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from it. When one or more counters are removed from Magma Pummeler this way, it deals that much damage to any target.
         this.addAbility(new SimpleStaticAbility(new MagmaPummelerEffect()));

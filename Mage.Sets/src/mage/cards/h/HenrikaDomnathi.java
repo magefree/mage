@@ -47,9 +47,10 @@ public final class HenrikaDomnathi extends CardImpl {
         // • You draw a card and you lose 1 life.
         Mode mode = new Mode(new DrawCardSourceControllerEffect(1).setText("you draw a card"));
         mode.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
+        ability.addMode(mode);
 
         // • Transform Henrika Domnathi.
-        ability.addEffect(new TransformSourceEffect());
+        ability.addMode(new Mode(new TransformSourceEffect()));
         this.addAbility(new TransformAbility());
         this.addAbility(ability);
     }

@@ -5,6 +5,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.ConditionHint;
@@ -16,7 +17,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 import java.util.UUID;
@@ -26,8 +27,9 @@ import java.util.UUID;
  */
 public final class HeronBlessedGeist extends CardImpl {
 
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT);
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterEnchantmentPermanent("you control an enchantment and only as a sorcery")
+    );
     private static final Hint hint = new ConditionHint(condition, "You control an enchantment");
 
     public HeronBlessedGeist(UUID ownerId, CardSetInfo setInfo) {
@@ -45,6 +47,7 @@ public final class HeronBlessedGeist extends CardImpl {
                 Zone.GRAVEYARD, new CreateTokenEffect(new SpiritWhiteToken(), 2),
                 new ManaCostsImpl<>("{3}{W}"), condition
         );
+        ability.addCost(new ExileSourceFromGraveCost());
         ability.setTiming(TimingRule.SORCERY);
         this.addAbility(ability.addHint(hint));
     }

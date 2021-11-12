@@ -37,7 +37,6 @@ public final class BallistaWielder extends CardImpl {
 
         // {2}{R}: Ballista Wielder deals 1 damage to any target. A creature dealt damage this way can't block this turn.
         Ability ability = new SimpleActivatedAbility(new BallistaWielderEffect(), new ManaCostsImpl<>("{2}{R}"));
-        ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 

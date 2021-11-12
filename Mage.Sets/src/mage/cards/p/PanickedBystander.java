@@ -34,7 +34,7 @@ public final class PanickedBystander extends CardImpl {
 
         // Whenever Panicked Bystander or another creature you control dies, you gain 1 life.
         this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
-                new GainLifeEffect(1), false, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
+                new GainLifeEffect(1), false, StaticFilters.FILTER_CONTROLLED_CREATURE
         ));
 
         // At the beginning of your end step, if you gained 3 or more life this turn, transform Panicked Bystander.
