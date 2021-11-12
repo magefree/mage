@@ -16,7 +16,7 @@ public class CleaveAbility extends SpellAbility {
         super(new ManaCostsImpl<>(manaString), card.getName() + " with cleave");
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.addEffect(effect);
-        this.setRuleAtTheTop(true);
+        setRuleAtTheTop(true);
         this.timing = (card.isSorcery(null) ? TimingRule.SORCERY : TimingRule.INSTANT);
     }
 
