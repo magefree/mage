@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.TreasureToken;
@@ -28,6 +28,8 @@ public final class ScionOfOpulence extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterControlledPermanent(SubType.VAMPIRE, "nontoken Vampire you control");
+    private static final FilterControlledPermanent filter2
+            = new FilterControlledArtifactPermanent("artifacts");
 
     static {
         filter.add(TokenPredicate.FALSE);
@@ -50,9 +52,7 @@ public final class ScionOfOpulence extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new ExileTopXMayPlayUntilEndOfTurnEffect(1), new ManaCostsImpl<>("{R}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                2, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN
-        )));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, filter2)));
         this.addAbility(ability);
     }
 

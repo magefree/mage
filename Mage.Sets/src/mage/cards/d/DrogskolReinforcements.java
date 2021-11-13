@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
@@ -38,12 +37,12 @@ public final class DrogskolReinforcements extends CardImpl {
         // Other Spirits you control have melee.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new MeleeAbility(), Duration.WhileOnBattlefield, filter, true
-        )));
+        ).setText("other Spirits you control have melee")));
 
         // Prevent all noncombat damage that would be dealt to Spirits you control.
-        this.addAbility(new SimpleStaticAbility(new PreventAllNonCombatDamageToAllEffect(
-                Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES
-        )));
+        this.addAbility(new SimpleStaticAbility(
+                new PreventAllNonCombatDamageToAllEffect(Duration.WhileOnBattlefield, filter)
+        ));
     }
 
     private DrogskolReinforcements(final DrogskolReinforcements card) {

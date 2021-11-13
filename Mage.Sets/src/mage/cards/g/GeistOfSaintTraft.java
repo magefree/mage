@@ -52,7 +52,7 @@ class GeistOfSaintTraftEffect extends OneShotEffect {
 
     GeistOfSaintTraftEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "create a 4/4 white Angel creature token with flying tapped and attacking. Exile that token at end of combat";
+        staticText = "create a 4/4 white Angel creature token with flying that's tapped and attacking. Exile that token at end of combat";
     }
 
     GeistOfSaintTraftEffect(final GeistOfSaintTraftEffect effect) {

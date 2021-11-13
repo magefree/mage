@@ -112,7 +112,7 @@ class PatronOfTheVeinCreatureDiesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature an opponent controls dies, exile it and put a +1/+1 counter on each Vampire you control";
+        return "Whenever a creature an opponent controls dies, exile it and put a +1/+1 counter on each Vampire you control.";
     }
 }
 

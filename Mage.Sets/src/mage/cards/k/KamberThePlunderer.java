@@ -41,7 +41,7 @@ public final class KamberThePlunderer extends CardImpl {
         Ability ability = new DiesCreatureTriggeredAbility(
                 new GainLifeEffect(1), false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE
         );
-        ability.addEffect(new CreateTokenEffect(new BloodToken()));
+        ability.addEffect(new CreateTokenEffect(new BloodToken()).concatBy("and"));
         this.addAbility(ability);
     }
 

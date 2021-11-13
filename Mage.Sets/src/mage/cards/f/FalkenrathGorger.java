@@ -69,7 +69,7 @@ class FalkenrathGorgerEffect extends ContinuousEffectImpl {
 
     public FalkenrathGorgerEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "Each Vampire creature card you own that isn't on the battlefield has madness. Its madness cost is equal to its mana cost";
+        this.staticText = "Each Vampire creature card you own that isn't on the battlefield has madness. The madness cost is equal to its mana cost";
     }
 
     public FalkenrathGorgerEffect(final FalkenrathGorgerEffect effect) {

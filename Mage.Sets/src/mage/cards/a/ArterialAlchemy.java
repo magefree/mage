@@ -31,6 +31,7 @@ public final class ArterialAlchemy extends CardImpl {
         // When Arterial Alchemy enters the battlefield, create a Blood token for each opponent you have.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new CreateTokenEffect(new BloodToken(), OpponentsCount.instance)
+                        .setText("create a Blood token for each opponent you have")
         ));
 
         // Blood tokens you control are Equipment in addition to their other types and have "Equipped creature gets +2/+0" and equip {2}.

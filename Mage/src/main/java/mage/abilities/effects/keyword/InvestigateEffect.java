@@ -67,13 +67,13 @@ public class InvestigateEffect extends OneShotEffect {
                     message = ". <i>(C";
                     break;
                 case 2:
-                    message = "twice. <i>(To investigate, c";
+                    message = " twice. <i>(To investigate, c";
                     break;
                 default:
-                    message = CardUtil.numberToText(value) + " times. <i>(To investigate, c";
+                    message = ' ' + CardUtil.numberToText(value) + " times. <i>(To investigate, c";
             }
         } else {
-            message = "X times, where X is the " + amount.getMessage() + ". <i>(To investigate, c";
+            message = " X times, where X is the " + amount.getMessage() + ". <i>(To investigate, c";
         }
         return "investigate" + message + "reate a colorless Clue artifact token " +
                 "with \"{2}, Sacrifice this artifact: Draw a card.\")</i>";
