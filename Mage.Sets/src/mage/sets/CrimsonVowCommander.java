@@ -25,6 +25,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Anowon, the Ruin Sage", 118, Rarity.RARE, mage.cards.a.AnowonTheRuinSage.class));
         cards.add(new SetCardInfo("Arcane Denial", 102, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
         cards.add(new SetCardInfo("Arcane Signet", 159, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Arterial Alchemy", 23, Rarity.RARE, mage.cards.a.ArterialAlchemy.class));
         cards.add(new SetCardInfo("Avacyn's Judgment", 142, Rarity.RARE, mage.cards.a.AvacynsJudgment.class));
         cards.add(new SetCardInfo("Azorius Chancery", 171, Rarity.UNCOMMON, mage.cards.a.AzoriusChancery.class));
         cards.add(new SetCardInfo("Azorius Locket", 160, Rarity.COMMON, mage.cards.a.AzoriusLocket.class));
