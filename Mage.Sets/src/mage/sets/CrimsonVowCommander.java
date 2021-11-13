@@ -133,6 +133,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Stromkirk Captain", 157, Rarity.UNCOMMON, mage.cards.s.StromkirkCaptain.class));
         cards.add(new SetCardInfo("Stromkirk Condemned", 137, Rarity.RARE, mage.cards.s.StromkirkCondemned.class));
         cards.add(new SetCardInfo("Stromkirk Occultist", 151, Rarity.RARE, mage.cards.s.StromkirkOccultist.class));
+        cards.add(new SetCardInfo("Sudden Salvation", 10, Rarity.RARE, mage.cards.s.SuddenSalvation.class));
         cards.add(new SetCardInfo("Supreme Phantom", 115, Rarity.RARE, mage.cards.s.SupremePhantom.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 169, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 99, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
