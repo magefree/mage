@@ -70,6 +70,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Geist of Saint Traft", 155, Rarity.MYTHIC, mage.cards.g.GeistOfSaintTraft.class));
         cards.add(new SetCardInfo("Ghostly Pilferer", 105, Rarity.RARE, mage.cards.g.GhostlyPilferer.class));
         cards.add(new SetCardInfo("Ghostly Prison", 87, Rarity.UNCOMMON, mage.cards.g.GhostlyPrison.class));
+        cards.add(new SetCardInfo("Glass-Cast Heart", 18, Rarity.RARE, mage.cards.g.GlassCastHeart.class));
         cards.add(new SetCardInfo("Hallowed Spiritkeeper", 88, Rarity.RARE, mage.cards.h.HallowedSpiritkeeper.class));
         cards.add(new SetCardInfo("Hanged Executioner", 89, Rarity.RARE, mage.cards.h.HangedExecutioner.class));
         cards.add(new SetCardInfo("Haunted Library", 6, Rarity.RARE, mage.cards.h.HauntedLibrary.class));
