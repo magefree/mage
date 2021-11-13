@@ -116,6 +116,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Reconnaissance Mission", 111, Rarity.UNCOMMON, mage.cards.r.ReconnaissanceMission.class));
         cards.add(new SetCardInfo("Remorseful Cleric", 97, Rarity.RARE, mage.cards.r.RemorsefulCleric.class));
         cards.add(new SetCardInfo("Sanctum Seeker", 136, Rarity.RARE, mage.cards.s.SanctumSeeker.class));
+        cards.add(new SetCardInfo("Scion of Opulence", 28, Rarity.RARE, mage.cards.s.ScionOfOpulence.class));
         cards.add(new SetCardInfo("Shacklegeist", 112, Rarity.RARE, mage.cards.s.Shacklegeist.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 181, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Sire of the Storm", 113, Rarity.UNCOMMON, mage.cards.s.SireOfTheStorm.class));
