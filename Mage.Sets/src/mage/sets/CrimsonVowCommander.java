@@ -57,6 +57,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Doom Weaver", 34, Rarity.RARE, mage.cards.d.DoomWeaver.class));
         cards.add(new SetCardInfo("Dovin, Grand Arbiter", 153, Rarity.MYTHIC, mage.cards.d.DovinGrandArbiter.class));
         cards.add(new SetCardInfo("Drogskol Captain", 154, Rarity.UNCOMMON, mage.cards.d.DrogskolCaptain.class));
+        cards.add(new SetCardInfo("Drogskol Reinforcements", 5, Rarity.RARE, mage.cards.d.DrogskolReinforcements.class));
         cards.add(new SetCardInfo("Ethereal Investigator", 12, Rarity.RARE, mage.cards.e.EtherealInvestigator.class));
         cards.add(new SetCardInfo("Exotic Orchard", 173, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Falkenrath Gorger", 146, Rarity.RARE, mage.cards.f.FalkenrathGorger.class));
