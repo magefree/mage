@@ -84,6 +84,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Malakir Bloodwitch", 131, Rarity.RARE, mage.cards.m.MalakirBloodwitch.class));
         cards.add(new SetCardInfo("Marble Diamond", 165, Rarity.COMMON, mage.cards.m.MarbleDiamond.class));
         cards.add(new SetCardInfo("Mentor of the Meek", 93, Rarity.RARE, mage.cards.m.MentorOfTheMeek.class));
+        cards.add(new SetCardInfo("Midnight Arsonist", 27, Rarity.RARE, mage.cards.m.MidnightArsonist.class));
         cards.add(new SetCardInfo("Midnight Clock", 108, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Mirror Entity", 94, Rarity.RARE, mage.cards.m.MirrorEntity.class));
         cards.add(new SetCardInfo("Mob Rule", 147, Rarity.RARE, mage.cards.m.MobRule.class));
