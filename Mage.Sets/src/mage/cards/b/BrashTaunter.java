@@ -31,7 +31,7 @@ import java.util.UUID;
 
 public final class BrashTaunter extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
+    private static final FilterPermanent filter = new FilterCreaturePermanent("another target creature");
 
     static {
         filter.add(AnotherPredicate.instance);
