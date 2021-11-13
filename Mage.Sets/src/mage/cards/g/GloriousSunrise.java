@@ -60,7 +60,7 @@ public final class GloriousSunrise extends CardImpl {
         // • Target land gains "{T}: Add {G}{G}{G}" until end of turn.
         Mode mode = new Mode(new GainAbilityTargetEffect(new SimpleManaAbility(
                 Zone.BATTLEFIELD, Mana.GreenMana(3), new TapSourceCost()
-        ), Duration.EndOfTurn));
+        ), Duration.EndOfTurn).setText("target land gains \"{T}: Add {G}{G}{G}\" until end of turn"));
         mode.addTarget(new TargetLandPermanent());
         ability.addMode(mode);
 

@@ -41,7 +41,7 @@ public final class NurturingPresence extends CardImpl {
                 new EntersBattlefieldControlledTriggeredAbility(
                         new BoostSourceEffect(1, 1, Duration.EndOfTurn)
                                 .setText("this creature gets +1/+1 until end of turn"),
-                        StaticFilters.FILTER_PERMANENT_CREATURE
+                        StaticFilters.FILTER_PERMANENT_CREATURE_A
                 ), AttachmentType.AURA
         )));
 

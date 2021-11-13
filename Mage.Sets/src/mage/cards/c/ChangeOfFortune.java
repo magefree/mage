@@ -58,6 +58,6 @@ enum ChangeOfFortuneValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return "X";
+        return "1";
     }
 }
