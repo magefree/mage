@@ -40,6 +40,7 @@ public class CardCriteria {
     private String sortBy;
     private Long start;
     private Long count;
+    // compare numerical card numbers (123b -> 123)
     private int minCardNumber;
     private int maxCardNumber;
 
@@ -304,12 +305,12 @@ public class CardCriteria {
         }
 
         if (minCardNumber != Integer.MIN_VALUE) {
-            where.ge("cardNumber", minCardNumber);
+            where.ge("cardNumberAsInt", minCardNumber);
             clausesCount++;
         }
 
         if (maxCardNumber != Integer.MAX_VALUE) {
-            where.le("cardNumber", maxCardNumber);
+            where.le("cardNumberAsInt", maxCardNumber);
             clausesCount++;
         }
 
