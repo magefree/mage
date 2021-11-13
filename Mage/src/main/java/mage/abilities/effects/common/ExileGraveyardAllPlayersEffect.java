@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
@@ -14,8 +12,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Jgod
  */
 public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
@@ -25,6 +24,7 @@ public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
 
     public ExileGraveyardAllPlayersEffect() {
         this(StaticFilters.FILTER_CARD_CARDS);
+        this.staticText = "exile all graveyards";
     }
 
     public ExileGraveyardAllPlayersEffect(FilterCard filter) {
