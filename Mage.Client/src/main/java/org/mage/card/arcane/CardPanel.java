@@ -866,7 +866,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             // alternative side -> main side
             copySelections(this.cardSideOther, this.cardSideMain);
             update(this.cardSideMain);
-            this.getGameCard().setAlternateName(this.cardSideOther.getName()); // wtf null protect
+            this.getGameCard().setAlternateName(this.cardSideOther.getName());
         }
 
         updateArtImage();

@@ -179,6 +179,6 @@ public class MockCard extends CardImpl {
     @Override
     public boolean isTransformable() {
         // must enable toggle mode in deck editor (switch between card sides);
-        return super.isTransformable() || this.isModalDoubleFacesCard;
+        return super.isTransformable() || this.isModalDoubleFacesCard || this.secondSideCard != null;
     }
 }
