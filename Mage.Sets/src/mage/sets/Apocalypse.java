@@ -145,6 +145,7 @@ public final class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Suffocating Blast", 124, Rarity.RARE, mage.cards.s.SuffocatingBlast.class));
         cards.add(new SetCardInfo("Sylvan Messenger", 87, Rarity.UNCOMMON, mage.cards.s.SylvanMessenger.class));
         cards.add(new SetCardInfo("Symbiotic Deployment", 88, Rarity.RARE, mage.cards.s.SymbioticDeployment.class));
+        cards.add(new SetCardInfo("Tahngarth's Glare", 70, Rarity.COMMON, mage.cards.t.TahngarthsGlare.class));
         cards.add(new SetCardInfo("Temporal Spring", 125, Rarity.COMMON, mage.cards.t.TemporalSpring.class));
         cards.add(new SetCardInfo("Tidal Courier", 31, Rarity.UNCOMMON, mage.cards.t.TidalCourier.class));
         cards.add(new SetCardInfo("Tranquil Path", 89, Rarity.COMMON, mage.cards.t.TranquilPath.class));
