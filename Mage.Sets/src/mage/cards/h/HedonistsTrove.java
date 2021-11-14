@@ -56,7 +56,7 @@ class HedonistsTroveExileEffect extends OneShotEffect {
 
     HedonistsTroveExileEffect() {
         super(Outcome.Exile);
-        staticText = "exile all cards from target opponent's graveyard";
+        staticText = "exile target opponent's graveyard";
     }
 
     private HedonistsTroveExileEffect(final HedonistsTroveExileEffect effect) {

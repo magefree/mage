@@ -335,7 +335,7 @@ class ExileAllCardsFromAllGraveyards extends OneShotEffect {
 
     public ExileAllCardsFromAllGraveyards() {
         super(Outcome.Benefit);
-        this.staticText = "Exile all cards from all graveyards. Add {R}{R}{R}";
+        this.staticText = "Exile all graveyards. Add {R}{R}{R}";
     }
 
     public ExileAllCardsFromAllGraveyards(final ExileAllCardsFromAllGraveyards effect) {

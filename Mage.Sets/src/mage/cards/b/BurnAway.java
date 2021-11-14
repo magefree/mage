@@ -78,6 +78,6 @@ class BurnAwayDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When that creature dies this turn, exile all cards from its controller's graveyard.";
+        return "When that creature dies this turn, exile its controller's graveyard.";
     }
 }

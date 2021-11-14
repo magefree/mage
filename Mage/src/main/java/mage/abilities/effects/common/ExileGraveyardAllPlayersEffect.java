@@ -24,7 +24,6 @@ public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
 
     public ExileGraveyardAllPlayersEffect() {
         this(StaticFilters.FILTER_CARD_CARDS);
-        this.staticText = "exile all graveyards";
     }
 
     public ExileGraveyardAllPlayersEffect(FilterCard filter) {
@@ -35,7 +34,7 @@ public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
         super(Outcome.Exile);
         this.filter = filter;
         this.targetController = targetController;
-        staticText = "exile all " + filter.getMessage() + " from all "
+        staticText = "exile all " + (filter.getMessage().equals("cards") ? "" : filter.getMessage() + " from all ")
                 + (targetController.equals(TargetController.OPPONENT) ? "opponents' " : "")
                 + "graveyards";
     }
