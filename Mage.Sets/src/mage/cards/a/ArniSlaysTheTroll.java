@@ -37,7 +37,7 @@ public final class ArniSlaysTheTroll extends CardImpl {
 
         // I — Target creature you control fights up to one target creature you don't control.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,
-                new Effects(new FightTargetsEffect(
+                new Effects(new FightTargetsEffect().setText(
                         "Target creature you control fights up to one target creature you don't control"
                 )), new Targets(
                         new TargetControlledCreaturePermanent(),

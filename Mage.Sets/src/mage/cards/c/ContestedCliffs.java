@@ -40,7 +40,6 @@ public final class ContestedCliffs extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         // {R}{G}, {tap}: Choose target Beast creature you control and target creature an opponent controls. Those creatures fight each other.
         Effect effect = new FightTargetsEffect();
-        effect.setText("Choose target Beast creature you control and target creature an opponent controls. Those creatures fight each other");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{R}{G}"));
         ability.addCost(new TapSourceCost());
         Target target1 = new TargetCreaturePermanent(filter1);

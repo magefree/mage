@@ -28,7 +28,7 @@ public final class AyulaQueenAmongBears extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.BEAR, "another Bear");
     private static final FilterPermanent filter2 = new FilterPermanent(SubType.BEAR, "Bear");
-    private static final FilterControlledPermanent filter3 = new FilterControlledPermanent("Bear you controls");
+    private static final FilterControlledPermanent filter3 = new FilterControlledPermanent("Bear you control");
 
     static {
         filter.add(AnotherPredicate.instance);

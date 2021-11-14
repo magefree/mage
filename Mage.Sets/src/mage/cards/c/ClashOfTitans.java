@@ -4,8 +4,7 @@ import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.filter.StaticFilters;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -16,12 +15,6 @@ import java.util.UUID;
  */
 public final class ClashOfTitans extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(new AnotherTargetPredicate(2));
-    }
-
     public ClashOfTitans(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
 
@@ -31,7 +24,7 @@ public final class ClashOfTitans extends CardImpl {
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
 
-        target = new TargetCreaturePermanent(filter);
+        target = new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2);
         target.setTargetTag(2);
         this.getSpellAbility().addTarget(target);
     }

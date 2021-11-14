@@ -7,6 +7,7 @@ import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 
 import java.util.UUID;
 
@@ -17,11 +18,6 @@ public class FightTargetsEffect extends OneShotEffect {
 
     public FightTargetsEffect() {
         super(Outcome.Damage);
-    }
-
-    public FightTargetsEffect(String effectText) {
-        this();
-        this.staticText = effectText;
     }
 
     public FightTargetsEffect(final FightTargetsEffect effect) {
@@ -70,18 +66,20 @@ public class FightTargetsEffect extends OneShotEffect {
     @Override
     public FightTargetsEffect copy() {
         return new FightTargetsEffect(this);
-
     }
 
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
-
         }
-        return "target " + mode
-                .getTargets().get(0).getTargetName() + " fights another target " + mode
-                .getTargets().get(1).getTargetName();
+        Target target=mode.getTargets().get(1);
+        StringBuilder sb=new StringBuilder("target ");
+        sb.append(mode.getTargets().get(0).getTargetName());
+        sb.append(" fights ");
+        if(!target.getTargetName().contains("other")){
+            sb.append("target ");
+        }
+        sb.append(target.getTargetName());return sb.toString();
     }
-
 }

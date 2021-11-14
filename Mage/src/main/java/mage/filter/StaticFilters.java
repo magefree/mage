@@ -9,6 +9,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.KickedSpellPredicate;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
+import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -413,6 +414,12 @@ public final class StaticFilters {
                 CardType.CREATURE.getPredicate()
         ));
         FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_ANOTHER_CREATURE_TARGET_2 = new FilterCreaturePermanent("another target creature");
+
+    static {
+        FILTER_ANOTHER_CREATURE_TARGET_2.add(new AnotherTargetPredicate(2));
     }
 
     public static final FilterCreaturePermanent FILTER_CREATURE_YOU_DONT_CONTROL = new FilterCreaturePermanent("creature you don't control");

@@ -12,9 +12,9 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
-import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.UUID;
 
@@ -45,7 +45,7 @@ public final class PrepareFight extends SplitCard {
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new FightTargetsEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
     }
 
     private PrepareFight(final PrepareFight card) {

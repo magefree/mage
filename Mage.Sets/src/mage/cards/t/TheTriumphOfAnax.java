@@ -54,7 +54,7 @@ public final class TheTriumphOfAnax extends CardImpl {
         // IV — Target creature you control fights up to one target creature you don't control.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_IV, SagaChapter.CHAPTER_IV,
-                new Effects(new FightTargetsEffect(
+                new Effects(new FightTargetsEffect().setText(
                         "Target creature you control fights up to one target creature you don't control"
                 )), new Targets(
                         new TargetControlledCreaturePermanent(),
