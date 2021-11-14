@@ -160,5 +160,6 @@ public final class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Wild Research", 72, Rarity.RARE, mage.cards.w.WildResearch.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 143, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Yavimaya's Embrace", 127, Rarity.RARE, mage.cards.y.YavimayasEmbrace.class));
+        cards.add(new SetCardInfo("Zombie Boa", 54, Rarity.COMMON, mage.cards.z.ZombieBoa.class));
     }
 }
