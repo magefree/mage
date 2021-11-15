@@ -137,11 +137,12 @@ enum MantleOfTheAncientsValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent permanent = sourceAbility.getSourcePermanentOrLKI(game);
-        if (permanent == null) {
+        Permanent sourcePermanent = sourceAbility.getSourcePermanentOrLKI(game);
+        if (sourcePermanent == null) {
             return 0;
         }
-        return permanent
+        Permanent permanent = game.getPermanent(sourcePermanent.getAttachedTo());
+        return permanent == null ? 0 : permanent
                 .getAttachments()
                 .stream()
                 .map(game::getPermanentOrLKIBattlefield)
