@@ -2,6 +2,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -91,9 +92,10 @@ class GiveControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
-        if (permanent != null) {
-            return permanent.changeControllerId(source.getFirstTarget(), game, source);
+        MageObject mageObject = source.getSourceObjectIfItStillExists(game);
+        if (mageObject != null
+                && mageObject instanceof Permanent) {
+            return ((Permanent) mageObject).changeControllerId(source.getFirstTarget(), game, source);
         } else {
             discard();
         }
