@@ -15,7 +15,6 @@ import mage.filter.predicate.mageobject.ManaValueParityPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInGraveyard;
 
 import java.util.Set;
 import java.util.UUID;
@@ -80,8 +79,8 @@ class GyrudaDoomOfDepthsEffect extends OneShotEffect {
 
     GyrudaDoomOfDepthsEffect() {
         super(Outcome.Benefit);
-        staticText = "each player mills four cards. Put a creature card with an even mana value " +
-                "from among the milled cards onto the battlefield under your control";
+        staticText = "each player mills four cards. Put a creature card with an even mana value "
+                + "from among the milled cards onto the battlefield under your control";
     }
 
     private GyrudaDoomOfDepthsEffect(final GyrudaDoomOfDepthsEffect effect) {
@@ -107,15 +106,20 @@ class GyrudaDoomOfDepthsEffect extends OneShotEffect {
             }
             cards.addAll(player.millCards(4, source, game));
         }
-        cards.removeIf(cardId -> game.getState().getZone(cardId) != Zone.GRAVEYARD
-                && game.getState().getZone(cardId) != Zone.EXILED);
+        /*
+        If a replacement effect causes a player to exile the top four cards of their library 
+        instead of putting them into their graveyard as Gyruda’s triggered ability resolves, 
+        the creature card you choose may be one of those cards in exile. (2020-04-17)
+         */
         if (cards.isEmpty()) {
             return true;
         }
-        TargetCard targetCard = new TargetCardInGraveyard(0, 1, filter);
+        // the creature card chosen can be in any zone, not just the graveyard
+        TargetCard targetCard = new TargetCard(0, 1, Zone.ALL, filter);
         targetCard.setNotTarget(true);
         controller.choose(outcome, cards, targetCard, game);
         Card card = game.getCard(targetCard.getFirstTarget());
-        return card != null && controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        return card != null
+                && controller.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }
