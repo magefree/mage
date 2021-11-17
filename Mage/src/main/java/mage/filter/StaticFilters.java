@@ -752,6 +752,10 @@ public final class StaticFilters {
 
     public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterEquipmentPermanent();
 
+    static {
+        FILTER_PERMANENT_EQUIPMENT.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENT_FORTIFICATION = new FilterPermanent();
 
     static {
