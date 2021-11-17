@@ -6,7 +6,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-public class Test_HorobiDeathsWail extends CardTestPlayerBase {
+public class HorobiDeathsWailTest extends CardTestPlayerBase {
 
     // issue 7772
     @Test
