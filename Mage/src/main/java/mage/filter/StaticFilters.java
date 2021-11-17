@@ -25,10 +25,10 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public final class StaticFilters {
 
-    public static final FilterSpiritOrArcaneCard SPIRIT_OR_ARCANE_CARD = new FilterSpiritOrArcaneCard();
+    public static final FilterSpiritOrArcaneCard FILTER_SPIRIT_OR_ARCANE_CARD = new FilterSpiritOrArcaneCard();
 
     static {
-        SPIRIT_OR_ARCANE_CARD.setLockedFilter(true);
+        FILTER_SPIRIT_OR_ARCANE_CARD.setLockedFilter(true);
     }
 
     public static final FilterEnchantmentPermanent FILTER_ENCHANTMENT_PERMANENT = new FilterEnchantmentPermanent();
