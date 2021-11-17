@@ -10,20 +10,20 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
 /**
+ * Make battlefield's permanent as a copy of the source object
+ * (source can be a card or another permanent)
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class CopyEffect extends ContinuousEffectImpl {
 
-    /**
-     * Object we copy from
-     */
     protected MageObject copyFromObject;
-
     protected UUID copyToObjectId;
     protected CopyApplier applier;
 
@@ -47,9 +47,13 @@ public class CopyEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+
+        // must copy the default side of the card (example: clone with mdf card)
         if (!(copyFromObject instanceof Permanent) && (copyFromObject instanceof Card)) {
-            this.copyFromObject = new PermanentCard((Card) copyFromObject, source.getControllerId(), game);
+            Card newBluePrint = CardUtil.getDefaultCardSideForBattlefield(game, (Card) copyFromObject);
+            this.copyFromObject = new PermanentCard(newBluePrint, source.getControllerId(), game);
         }
+
         Permanent permanent = game.getPermanent(copyToObjectId);
         if (permanent != null) {
             affectedObjectList.add(new MageObjectReference(permanent, game));

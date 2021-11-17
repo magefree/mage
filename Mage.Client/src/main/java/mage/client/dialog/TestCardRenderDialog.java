@@ -121,7 +121,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardsList.add(newCard);
         game.loadCards(cardsList, controllerId);
 
-        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(game, newCard);
         if (extraAbilities != null) {
             extraAbilities.forEach(ability -> permCard.addAbility(ability));
         }
@@ -153,7 +153,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardsList.add(newCard);
         game.loadCards(cardsList, controllerId);
 
-        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(game, newCard);
 
         PermanentCard perm = new PermanentCard(permCard, controllerId, game);
         perm.setFaceDown(true, game);

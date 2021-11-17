@@ -997,7 +997,7 @@ public final class CardUtil {
         // same logic as ZonesHandler->maybeRemoveFromSourceZone
 
         // workaround to put real permanent from one side (example: you call mdf card by cheats)
-        Card permCard = getDefaultCardSideForBattlefield(newCard);
+        Card permCard = getDefaultCardSideForBattlefield(game, newCard);
 
         // prepare card and permanent
         permCard.setZone(Zone.BATTLEFIELD, game);
@@ -1035,12 +1035,17 @@ public final class CardUtil {
 
     /**
      * Choose default card's part to put on battlefield (for cheats and tests only)
+     * or to find a default card side (for copy effect)
      *
      * @param card
      * @return
      */
-    public static Card getDefaultCardSideForBattlefield(Card card) {
-        // chose left side all time
+    public static Card getDefaultCardSideForBattlefield(Game game, Card card) {
+        if (card instanceof PermanentCard) {
+            return card;
+        }
+
+        // must choose left side all time
         Card permCard;
         if (card instanceof SplitCard) {
             permCard = card;
@@ -1051,6 +1056,12 @@ public final class CardUtil {
         } else {
             permCard = card;
         }
+
+        // must be creature/planeswalker (if you catch this error then check targeting/copying code)
+        if (permCard.isInstantOrSorcery(game)) {
+            throw new IllegalArgumentException("Card side can't be put to battlefield: " + permCard.getName());
+        }
+
         return permCard;
     }
 

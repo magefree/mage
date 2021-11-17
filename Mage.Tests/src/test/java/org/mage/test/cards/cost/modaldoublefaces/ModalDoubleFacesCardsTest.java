@@ -9,6 +9,7 @@ import mage.game.permanent.PermanentCard;
 import mage.util.CardUtil;
 import mage.util.ManaUtil;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -862,5 +863,111 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "The Omenkeel", 1);
+    }
+
+    @Test
+    public void test_Copy_AsSpell() {
+        addCard(Zone.HAND, playerA, "Akoum Warrior", 1); // {5}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        //
+        // Copy target creature spell you control, except it isn't legendary if the spell is legendary.
+        addCard(Zone.HAND, playerA, "Double Major", 1); // {G}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        // cast mdf card
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 6);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior");
+        // prepare copy of spell
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Akoum Warrior", "Akoum Warrior");
+        checkStackSize("before copy spell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
+        checkStackSize("after copy spell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 2);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_Copy_AsCloneFromPermanent() {
+        addCard(Zone.HAND, playerA, "Akoum Warrior", 1); // {5}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        //
+        // You may have Clone enter the battlefield as a copy of any creature on the battlefield.
+        addCard(Zone.HAND, playerA, "Clone", 1); // {3}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        // cast mdf card
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 6);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // copy permanent
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, true); // use copy
+        setChoice(playerA, "Akoum Warrior"); // copy source
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 2);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    @Ignore // TODO: Zam Wesell must be reworked to use on cast + etb abilities
+    public void test_Copy_AsCloneFromCard_ZamWesell() {
+        // When you cast Zam Wesell, target opponent reveals their hand. You may choose a creature card from it
+        // and have Zam Wesell enter the battlefield as a copy of that creature card.
+        addCard(Zone.HAND, playerA, "Zam Wesell"); // {2}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        //
+        addCard(Zone.HAND, playerB, "Akoum Warrior", 1);
+
+        // cast as copy of mdf card
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zam Wesell");
+        addTarget(playerA, playerB); // target opponent
+        setChoice(playerA, "Akoum Warrior"); // creature card to copy
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 2);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_Copy_AsCloneFromCard_ValkiGodOfLies() {
+        // When Valki enters the battlefield, each opponent reveals their hand. For each opponent,
+        // exile a creature card they revealed this way until Valki leaves the battlefield.
+        // X: Choose a creature card exiled with Valki with converted mana cost X. Valki becomes a copy of that card.
+        addCard(Zone.HAND, playerA, "Valki, God of Lies"); // {1}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2 + 3); // 3 for X
+        //
+        addCard(Zone.HAND, playerB, "Birgi, God of Storytelling", 1); // {2}{R}
+
+        // prepare valki
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Valki, God of Lies");
+        setChoice(playerA, "Birgi, God of Storytelling"); // exile
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // copy exiled card
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}:");
+        setChoice(playerA, "X=3");
+        setChoice(playerA, "Birgi, God of Storytelling");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Valki, God of Lies", 0);
+        assertPermanentCount(playerA, "Birgi, God of Storytelling", 1);
     }
 }
