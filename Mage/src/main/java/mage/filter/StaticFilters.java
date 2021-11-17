@@ -420,6 +420,7 @@ public final class StaticFilters {
 
     static {
         FILTER_ANOTHER_CREATURE_TARGET_2.add(new AnotherTargetPredicate(2));
+        FILTER_ANOTHER_CREATURE_TARGET_2.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_CREATURE_YOU_DONT_CONTROL = new FilterCreaturePermanent("creature you don't control");
