@@ -26,7 +26,7 @@ public final class OliviasWrath extends CardImpl {
     private static final FilterPermanent filter2 = new FilterControlledPermanent(SubType.VAMPIRE);
 
     static {
-        filter.add(Predicates.or(SubType.VAMPIRE.getPredicate()));
+        filter.add(Predicates.not(SubType.VAMPIRE.getPredicate()));
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter2, -1);
@@ -40,8 +40,8 @@ public final class OliviasWrath extends CardImpl {
         // Each non-Vampire creature gets -X/-X until end of turn, where X is the number of Vampires you control.
         this.getSpellAbility().addEffect(new BoostAllEffect(
                 xValue, xValue, Duration.EndOfTurn, filter, false,
-                "each non-Vampire creature gets -X/-X until end of turn, " +
-                        "where X is the number of Vampires you control", true
+                "each non-Vampire creature gets -X/-X until end of turn, "
+                + "where X is the number of Vampires you control", true
         ));
     }
 
