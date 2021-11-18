@@ -77,6 +77,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hallowed Spiritkeeper", 88, Rarity.RARE, mage.cards.h.HallowedSpiritkeeper.class));
         cards.add(new SetCardInfo("Hanged Executioner", 89, Rarity.RARE, mage.cards.h.HangedExecutioner.class));
         cards.add(new SetCardInfo("Haunted Library", 6, Rarity.RARE, mage.cards.h.HauntedLibrary.class));
+        cards.add(new SetCardInfo("Haunting Imitation", 13, Rarity.RARE, mage.cards.h.HauntingImitation.class));
         cards.add(new SetCardInfo("Hollowhenge Overlord", 36, Rarity.RARE, mage.cards.h.HollowhengeOverlord.class));
         cards.add(new SetCardInfo("Imperious Mindbreaker", 33, Rarity.RARE, mage.cards.i.ImperiousMindbreaker.class));
         cards.add(new SetCardInfo("Imposing Grandeur", 24, Rarity.RARE, mage.cards.i.ImposingGrandeur.class));
