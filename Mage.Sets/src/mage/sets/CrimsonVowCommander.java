@@ -38,6 +38,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodsworn Steward", 144, Rarity.RARE, mage.cards.b.BloodswornSteward.class));
         cards.add(new SetCardInfo("Bloodtracker", 122, Rarity.RARE, mage.cards.b.Bloodtracker.class));
         cards.add(new SetCardInfo("Boreas Charger", 79, Rarity.RARE, mage.cards.b.BoreasCharger.class));
+        cards.add(new SetCardInfo("Breath of the Sleepless", 11, Rarity.RARE, mage.cards.b.BreathOfTheSleepless.class));
         cards.add(new SetCardInfo("Butcher of Malakir", 123, Rarity.RARE, mage.cards.b.ButcherOfMalakir.class));
         cards.add(new SetCardInfo("Bygone Bishop", 80, Rarity.RARE, mage.cards.b.BygoneBishop.class));
         cards.add(new SetCardInfo("Champion of Dusk", 124, Rarity.RARE, mage.cards.c.ChampionOfDusk.class));
