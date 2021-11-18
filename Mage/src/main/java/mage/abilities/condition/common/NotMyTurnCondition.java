@@ -9,7 +9,7 @@ public enum NotMyTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source.isControlledBy(game.getActivePlayerId());
+        return !source.isControlledBy(game.getActivePlayerId());
     }
 
     @Override
