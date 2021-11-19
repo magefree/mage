@@ -1,4 +1,3 @@
-
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
@@ -33,7 +32,8 @@ public class ExileFromGraveCost extends CostImpl {
         this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1) {
             this.text = "exile "
-                    + (target.getNumberOfTargets() == 1 && target.getMaxNumberOfTargets() == Integer.MAX_VALUE ? "one or more"
+                    + (target.getNumberOfTargets() == 1
+                    && target.getMaxNumberOfTargets() == Integer.MAX_VALUE ? "one or more"
                     : ((target.getNumberOfTargets() < target.getMaxNumberOfTargets() ? "up to " : ""))
                     + CardUtil.numberToText(target.getMaxNumberOfTargets()))
                     + ' ' + target.getTargetName();
@@ -81,17 +81,19 @@ public class ExileFromGraveCost extends CostImpl {
             if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), game)) {
                 for (UUID targetId : targets.get(0).getTargets()) {
                     Card card = game.getCard(targetId);
-                    if (card == null || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
+                    if (card == null
+                            || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
                         return false;
                     }
                     exiledCards.add(card);
                 }
                 Cards cardsToExile = new CardsImpl();
                 cardsToExile.addAll(exiledCards);
+                Card sourceCard = game.getCard(source.getSourceId());
                 controller.moveCardsToExile(
                         cardsToExile.getCards(game), source, game, true,
                         CardUtil.getExileZoneId(game, source),
-                        CardUtil.getSourceLogName(game, source)
+                        sourceCard.getName()
                 );
                 if (setTargetPointer) {
                     source.getEffects().setTargetPointer(new FixedTargets(cardsToExile, game));
