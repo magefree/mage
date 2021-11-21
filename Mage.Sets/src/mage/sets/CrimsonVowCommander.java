@@ -148,6 +148,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thundering Mightmare", 37, Rarity.RARE, mage.cards.t.ThunderingMightmare.class));
         cards.add(new SetCardInfo("Timin, Youthful Geist", 16, Rarity.RARE, mage.cards.t.TiminYouthfulGeist.class));
         cards.add(new SetCardInfo("Twilight Drover", 100, Rarity.RARE, mage.cards.t.TwilightDrover.class));
+        cards.add(new SetCardInfo("Umbris, Fear Manifest", 38, Rarity.MYTHIC, mage.cards.u.UmbrisFearManifest.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 188, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
         cards.add(new SetCardInfo("Underworld Connections", 138, Rarity.RARE, mage.cards.u.UnderworldConnections.class));
         cards.add(new SetCardInfo("Unstable Obelisk", 170, Rarity.UNCOMMON, mage.cards.u.UnstableObelisk.class));
