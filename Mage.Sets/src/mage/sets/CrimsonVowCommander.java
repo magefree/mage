@@ -157,6 +157,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Vampiric Dragon", 158, Rarity.RARE, mage.cards.v.VampiricDragon.class));
         cards.add(new SetCardInfo("Vandalblast", 152, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class));
         cards.add(new SetCardInfo("Verity Circle", 116, Rarity.RARE, mage.cards.v.VerityCircle.class));
+        cards.add(new SetCardInfo("Wedding Ring", 32, Rarity.MYTHIC, mage.cards.w.WeddingRing.class));
         cards.add(new SetCardInfo("Windborn Muse", 101, Rarity.RARE, mage.cards.w.WindbornMuse.class));
     }
 }
