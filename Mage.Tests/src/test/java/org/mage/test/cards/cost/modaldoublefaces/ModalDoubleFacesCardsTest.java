@@ -1,5 +1,6 @@
 package org.mage.test.cards.cost.modaldoublefaces;
 
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.ModalDoubleFacesCard;
 import mage.constants.PhaseStep;
@@ -969,5 +970,34 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Valki, God of Lies", 0);
         assertPermanentCount(playerA, "Birgi, God of Storytelling", 1);
+    }
+
+    @Test
+    public void test_FindMovedPermanentByCard() {
+        // original problem: you must be able to find a card after move it to battlefield
+        // https://github.com/magefree/mage/issues/8474
+
+        // {R}: You may put a creature card from your hand onto the battlefield. That creature gains haste.
+        // Sacrifice the creature at the beginning of the next end step.
+        addCard(Zone.BATTLEFIELD, playerA, "Sneak Attack");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        addCard(Zone.HAND, playerA, "Akoum Warrior", 1);
+
+        // move
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}:");
+        setChoice(playerA, true); // yes, activate
+        setChoice(playerA, "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after move", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+        checkAbility("must have haste after etb", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", HasteAbility.class, true);
+
+        // must sacrifice
+        checkPermanentCount("after sacrifice", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
     }
 }
