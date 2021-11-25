@@ -309,11 +309,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Blasphemous Act", 322, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Beast Within", 323, Rarity.RARE, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Grafdigger's Cage", 324, Rarity.RARE, mage.cards.g.GrafdiggersCage.class));
-        cards.add(new SetCardInfo("Snow-Covered Plains", 325, Rarity.RARE, mage.cards.s.SnowCoveredPlains.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Island", 326, Rarity.RARE, mage.cards.s.SnowCoveredIsland.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Swamp", 327, Rarity.RARE, mage.cards.s.SnowCoveredSwamp.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Mountain", 328, Rarity.RARE, mage.cards.s.SnowCoveredMountain.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Forest", 329, Rarity.RARE, mage.cards.s.SnowCoveredForest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Plains", 325, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Island", 326, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Swamp", 327, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Mountain", 328, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Forest", 329, Rarity.LAND, mage.cards.s.SnowCoveredForest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Aether Gust", 330, Rarity.RARE, mage.cards.a.AetherGust.class));
         cards.add(new SetCardInfo("Counterspell", 331, Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fabricate", 332, Rarity.RARE, mage.cards.f.Fabricate.class));
