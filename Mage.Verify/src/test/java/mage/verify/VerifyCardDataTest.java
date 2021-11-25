@@ -1425,14 +1425,20 @@ public class VerifyCardDataTest {
         }
     }
 
+    private static final String[] wrongSymbols = {"’", "“", "”"};
+
     private void checkWrongSymbolsInRules(Card card) {
-        if (card.getName().contains("’")) {
-            fail(card, "card name", "card's names contains restricted symbol ’");
+        for (String s : wrongSymbols) {
+            if (card.getName().contains(s)) {
+                fail(card, "card name", "card's name contains restricted symbol " + s);
+            }
         }
 
         for (String rule : card.getRules()) {
-            if (rule.contains("’")) {
-                fail(card, "rules", "card's rules contains restricted symbol ’");
+            for (String s : wrongSymbols) {
+                if (rule.contains(s)) {
+                    fail(card, "rules", "card's rules contains restricted symbol " + s);
+                }
             }
             if (rule.contains("&mdash ")) {
                 fail(card, "rules", "card's rules contains restricted test [&mdash ] instead [&mdash;]");
