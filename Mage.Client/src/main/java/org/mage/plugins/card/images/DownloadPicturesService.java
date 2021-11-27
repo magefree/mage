@@ -314,6 +314,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private void reloadCardsToDownload(String selectedItem) {
         // find selected sets
         selectedSets.clear();
+        boolean onlyTokens = false;
         List<String> formatSets;
         List<String> sourceSets = selectedSource.getSupportedSets();
         switch (selectedItem) {
@@ -337,6 +338,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 break;
 
             case ALL_TOKENS:
+                selectedSets.addAll(selectedSource.getSupportedSets());
+                onlyTokens = true;
                 break;
 
             default:
@@ -355,12 +358,14 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         for (CardDownloadData data : cardsMissing) {
             if (data.isToken()) {
                 if (selectedSource.isTokenSource()
-                        && selectedSource.isTokenImageProvided(data.getSet(), data.getName(), data.getType())) {
+                        && selectedSource.isTokenImageProvided(data.getSet(), data.getName(), data.getType())
+                        && selectedSets.contains(data.getSet())) {
                     numberTokenImagesAvailable++;
                     cardsDownloadQueue.add(data);
                 }
             } else {
-                if (selectedSource.isCardSource()
+                if (!onlyTokens
+                        && selectedSource.isCardSource()
                         && selectedSource.isCardImageProvided(data.getSet(), data.getName())
                         && selectedSets.contains(data.getSet())) {
                     numberCardImagesAvailable++;
