@@ -196,6 +196,7 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UND"); // un-sets don't have full implementation of card variations
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UST"); // un-sets don't have full implementation of card variations
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "SOI", "Tamiyo's Journal"); // not all variations implemented
+        skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "SLD", "Zndrsplt, Eye of Wisdom"); // xmage adds additional card for alternative image (second side)
 
 
         // scryfall download sets (missing from scryfall website)
@@ -700,10 +701,16 @@ public class VerifyCardDataTest {
             }
 
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
+                if (skipListHaveName(SKIP_LIST_WRONG_CARD_NUMBERS, set.getCode(), card.getName())) {
+                    continue;
+                }
+
                 MtgJsonCard jsonCard = MtgJsonService.cardFromSet(set.getCode(), card.getName(), card.getCardNumber());
                 if (jsonCard == null) {
                     // see convertMtgJsonToXmageCardNumber for card number convert notation
-                    errorsList.add("Error: scryfall download can't find card from mtgjson " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                    if (!skipListHaveName(SKIP_LIST_WRONG_CARD_NUMBERS, set.getCode(), card.getName())) {
+                        errorsList.add("Error: scryfall download can't find card from mtgjson " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                    }
                     continue;
                 }
 
@@ -716,6 +723,16 @@ public class VerifyCardDataTest {
                         foundedDirectDownloadKeys.add(key);
                     } else {
                         errorsList.add("Error: scryfall download can't find non-ascii card link in direct download list " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + jsonCard.number);
+                    }
+                }
+
+                // CHECK: reversible_card must be in direct download list (xmage must have 2 cards with diff image face)
+                if (jsonCard.layout.equals("reversible_card")) {
+                    String key = ScryfallImageSupportCards.findDirectDownloadKey(set.getCode(), card.getName(), card.getCardNumber());
+                    if (key != null) {
+                        foundedDirectDownloadKeys.add(key);
+                    } else {
+                        errorsList.add("Error: scryfall download can't find face image of reversible_card in direct download list " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + jsonCard.number);
                     }
                 }
             }
@@ -731,7 +748,7 @@ public class VerifyCardDataTest {
                 continue;
             }
 
-            // skip non implemented cards list
+            // skip non-implemented cards list
             if (CardRepository.instance.findCard(cardName) == null) {
                 continue;
             }

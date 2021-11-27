@@ -508,21 +508,23 @@ public class ScryfallImageSupportCards {
 
     private static final Map<String, String> directDownloadLinks = new HashMap<String, String>() {
         {
-            // xmage card -> api link:
-            // examples:
-            //   api example: https://api.scryfall.com/cards/trix/6/
-            // api format is primary
+            // xmage card -> api or image link
+            // WARNING, try use api links as much as possible (it supports build-in translation)
             //
-            // code form for one card:
+            // example:
+            //   api link: https://api.scryfall.com/cards/trix/6/
+            //   image link: https://c1.scryfall.com/file/scryfall-cards/large/back/d/5/d5dfd236-b1da-4552-b94f-ebf6bb9dafdf.jpg
+            //
+            // key for one card:
             //   set/card_name
             //
-            // code form for same name cards (alternative images):
-            //   set/card_name/card_number
-            //   set/card_name/card_number
-
+            // key for same name cards (alternative images):
+            //   set/card_name/card_number_1
+            //   set/card_name/card_number_2
+            //
             // Cards with non-ASCII collector numbers must use direct download (cause xmage uses different card number)
             // Verify checks must check and show missing data from that list
-            // WARNING, must use as API link, not image
+
             // 10E
             put("10E/Air Elemental/64*", "https://api.scryfall.com/cards/10e/64★/");
             put("10E/Anaba Bodyguard/187*", "https://api.scryfall.com/cards/10e/187★/");
@@ -786,10 +788,6 @@ public class ScryfallImageSupportCards {
             put("PM14/Hive Stirrings/21*", "https://api.scryfall.com/cards/pm14/21★/");
             put("PM14/Megantic Sliver/185*", "https://api.scryfall.com/cards/pm14/185★/");
             put("PM14/Ratchet Bomb/215*", "https://api.scryfall.com/cards/pm14/215★/");
-            // PROE
-            put("PROE/Emrakul, the Aeons Torn/4*", "https://api.scryfall.com/cards/proe/4★/");
-            put("PROE/Lord of Shatterskull Pass/156*", "https://api.scryfall.com/cards/proe/156★/");
-            //
             // PMBS
             put("PMBS/Glissa, the Traitor/96*", "https://api.scryfall.com/cards/pmbs/96★/");
             put("PMBS/Hero of Bladehold/8*", "https://api.scryfall.com/cards/pmbs/8★/");
@@ -948,6 +946,18 @@ public class ScryfallImageSupportCards {
             put("WAR/Ugin, the Ineffable/2*", "https://api.scryfall.com/cards/war/2★/");
             put("WAR/Vivien, Champion of the Wilds/180*", "https://api.scryfall.com/cards/war/180★/");
             put("WAR/Vraska, Swarm's Eminence/236*", "https://api.scryfall.com/cards/war/236★/");
+            // SLD
+            // TODO: update direct image links in 2022 for HQ images
+            put("SLD/Zndrsplt, Eye of Wisdom/379", "https://api.scryfall.com/cards/sld/379/");
+            put("SLD/Zndrsplt, Eye of Wisdom/379b", "https://c1.scryfall.com/file/scryfall-cards/large/back/d/5/d5dfd236-b1da-4552-b94f-ebf6bb9dafdf.jpg");
+            put("SLD/Krark's Thumb/383", "https://api.scryfall.com/cards/sld/383/");
+            put("SLD/Krark's Thumb/383b", "https://c1.scryfall.com/file/scryfall-cards/large/back/9/f/9f63277b-e139-46c8-b9e3-0cfb647f44cc.jpg");
+            put("SLD/Okaun, Eye of Chaos/380", "https://api.scryfall.com/cards/sld/380/");
+            put("SLD/Okaun, Eye of Chaos/380b", "https://c1.scryfall.com/file/scryfall-cards/large/back/9/4/94eea6e3-20bc-4dab-90ba-3113c120fb90.jpg");
+            put("SLD/Propaganda/381", "https://api.scryfall.com/cards/sld/381/");
+            put("SLD/Propaganda/381b", "https://c1.scryfall.com/file/scryfall-cards/large/back/3/e/3e3f0bcd-0796-494d-bf51-94b33c1671e9.jpg");
+            put("SLD/Stitch in Time/382", "https://api.scryfall.com/cards/sld/382/");
+            put("SLD/Stitch in Time/382b", "https://c1.scryfall.com/file/scryfall-cards/large/back/0/8/087c3a0d-c710-4451-989e-596b55352184.jpg");
         }
     };
 
@@ -999,6 +1009,10 @@ public class ScryfallImageSupportCards {
             return matcher.group(1);
         }
         return "";
+    }
+
+    public static boolean isApiLink(String link) {
+        return !link.endsWith(".jpg") && !link.endsWith(".png");
     }
 
     public static Map<String, String> getDirectDownloadLinks() {

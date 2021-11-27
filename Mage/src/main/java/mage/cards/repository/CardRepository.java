@@ -504,7 +504,7 @@ public enum CardRepository {
     }
 
     /**
-     * Warning, don't use db functions in card's code - it generate heavy db loading in AI simulations. If you
+     * Warning, don't use db functions in card's code - it generates heavy db loading in AI simulations. If you
      * need that feature then check for simulation mode. See https://github.com/magefree/mage/issues/7014
      *
      * @param criteria

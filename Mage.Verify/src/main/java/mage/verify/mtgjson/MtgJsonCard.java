@@ -40,6 +40,7 @@ public final class MtgJsonCard {
                 || "flip".equals(layout)
                 || "adventure".equals(layout)
                 || "modal_dfc".equals(layout)
+                || "reversible_card".equals(layout) // example: Zndrsplt, Eye of Wisdom
                 || "split".equals(layout)
                 || "aftermath".equals(layout)
                 || "meld".equals(layout)) { // mtgjson uses composite names for meld cards, but scryfall uses simple face names

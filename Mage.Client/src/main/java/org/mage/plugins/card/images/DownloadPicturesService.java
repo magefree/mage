@@ -436,6 +436,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     String cardName = card.getName();
                     boolean isType2 = type2SetsFilter.contains(card.getSetCode());
                     CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), card.isNightCard());
+
+                    // variations must have diff file names with additional postfix
                     if (url.getUsesVariousArt()) {
                         url.setDownloadName(createDownloadName(card));
                     }
@@ -444,7 +446,10 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     url.setSplitCard(card.isSplitCard());
                     url.setType2(isType2);
 
+                    // main side
                     allCardsUrls.add(url);
+
+                    // second side (xmage's set doesn't have info about it, so generate it here)
                     if (card.isDoubleFaced()) {
                         if (card.getSecondSideName() == null || card.getSecondSideName().trim().isEmpty()) {
                             throw new IllegalStateException("Second side card can't have empty name.");
