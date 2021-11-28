@@ -36,7 +36,6 @@ public final class LuminousPhantom extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.color.setWhite(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Flying

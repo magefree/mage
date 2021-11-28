@@ -1,42 +1,51 @@
 
 package mage.abilities.effects.common.turn;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseGameSourceControllerEffect;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author noxx
  */
 public class AddExtraTurnControllerEffect extends OneShotEffect {
 
+    @FunctionalInterface
+    public static interface TurnModApplier {
+        void apply(UUID turnId, Ability source, Game game);
+    }
+
     private final boolean loseGameAtEnd;
+    private final TurnModApplier turnModApplier;
 
     public AddExtraTurnControllerEffect() {
         this(false);
     }
 
     public AddExtraTurnControllerEffect(boolean loseGameAtEnd) {
+        this(loseGameAtEnd, null);
+    }
+
+    public AddExtraTurnControllerEffect(boolean loseGameAtEnd, TurnModApplier turnModApplier) {
         super(loseGameAtEnd ? Outcome.AIDontUseIt : Outcome.ExtraTurn);
         this.loseGameAtEnd = loseGameAtEnd;
-        staticText = "take an extra turn after this one";
-        if (loseGameAtEnd) {
-            staticText += ". At the beginning of that turn's end step, you lose the game";
-        }
+        this.turnModApplier = turnModApplier;
     }
 
     public AddExtraTurnControllerEffect(final AddExtraTurnControllerEffect effect) {
         super(effect);
         this.loseGameAtEnd = effect.loseGameAtEnd;
+        this.turnModApplier = effect.turnModApplier;
     }
 
     @Override
@@ -47,26 +56,37 @@ public class AddExtraTurnControllerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            TurnMod extraTurn = new TurnMod(player.getId(), false);
-            game.getState().getTurnMods().add(extraTurn);
-            if (loseGameAtEnd) {
-                LoseGameDelayedTriggeredAbility delayedTriggeredAbility = new LoseGameDelayedTriggeredAbility();
-                delayedTriggeredAbility.setConnectedTurnMod(extraTurn.getId());
-                game.addDelayedTriggeredAbility(delayedTriggeredAbility, source);
-            }
+        if (player == null) {
+            return true;
+        }
+        TurnMod extraTurn = new TurnMod(player.getId(), false);
+        game.getState().getTurnMods().add(extraTurn);
+        if (loseGameAtEnd) {
+            game.addDelayedTriggeredAbility(new LoseGameDelayedTriggeredAbility(extraTurn.getId()), source);
+        }
+        if (turnModApplier != null) {
+            turnModApplier.apply(extraTurn.getId(), source, game);
         }
         return true;
     }
 
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return "take an extra turn after this one"
+                + (loseGameAtEnd ? ". At the beginning of that turn's end step, you lose the game" : "");
+    }
 }
 
 class LoseGameDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private UUID connectedTurnMod;
+    private final UUID connectedTurnMod;
 
-    public LoseGameDelayedTriggeredAbility() {
+    public LoseGameDelayedTriggeredAbility(UUID connectedTurnMod) {
         super(new LoseGameSourceControllerEffect(), Duration.EndOfGame);
+        this.connectedTurnMod = connectedTurnMod;
     }
 
     public LoseGameDelayedTriggeredAbility(final LoseGameDelayedTriggeredAbility ability) {
@@ -87,10 +107,6 @@ class LoseGameDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return connectedTurnMod != null && connectedTurnMod.equals(game.getState().getTurnId());
-    }
-
-    public void setConnectedTurnMod(UUID connectedTurnMod) {
-        this.connectedTurnMod = connectedTurnMod;
     }
 
     @Override

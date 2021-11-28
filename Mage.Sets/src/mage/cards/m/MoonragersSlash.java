@@ -4,7 +4,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.NightCondition;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
-import mage.abilities.hint.common.NightHint;
+import mage.abilities.hint.common.DayNightHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +24,7 @@ public final class MoonragersSlash extends CardImpl {
         // This spell costs {2} less to cast if it's night.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionSourceEffect(2, NightCondition.instance)
-        ).addHint(NightHint.instance).setRuleAtTheTop(true));
+        ).addHint(DayNightHint.instance).setRuleAtTheTop(true));
 
         // Moonrager's Slash deals 3 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

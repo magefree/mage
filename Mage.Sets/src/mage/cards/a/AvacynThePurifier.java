@@ -2,26 +2,32 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.TransformIntoSourceTriggeredAbility;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
  * @author fireshoes
  */
 public final class AvacynThePurifier extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent("other creature");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
 
     public AvacynThePurifier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
@@ -38,7 +44,11 @@ public final class AvacynThePurifier extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When this creature transforms into Avacyn, the Purifier, it deals 3 damage to each other creature and each opponent.
-        this.addAbility(new AvacynThePurifierAbility());
+        Ability ability = new TransformIntoSourceTriggeredAbility(
+                new DamageAllEffect(3, "it", filter)
+        );
+        ability.addEffect(new DamagePlayersEffect(3, TargetController.OPPONENT).setText("and each opponent"));
+        this.addAbility(ability);
     }
 
     private AvacynThePurifier(final AvacynThePurifier card) {
@@ -48,73 +58,5 @@ public final class AvacynThePurifier extends CardImpl {
     @Override
     public AvacynThePurifier copy() {
         return new AvacynThePurifier(this);
-    }
-}
-
-class AvacynThePurifierAbility extends TriggeredAbilityImpl {
-
-    public AvacynThePurifierAbility() {
-        super(Zone.BATTLEFIELD, new AvacynThePurifierEffect(), false);
-    }
-
-    public AvacynThePurifierAbility(final AvacynThePurifierAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public AvacynThePurifierAbility copy() {
-        return new AvacynThePurifierAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TRANSFORMED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(sourceId)) {
-            Permanent permanent = game.getPermanent(sourceId);
-            return permanent != null && permanent.isTransformed();
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever this creature transforms into Avacyn, the Purifier, it deals 3 damage to each other creature and each opponent.";
-    }
-}
-
-class AvacynThePurifierEffect extends OneShotEffect {
-
-    public AvacynThePurifierEffect() {
-        super(Outcome.Damage);
-    }
-
-    public AvacynThePurifierEffect(final AvacynThePurifierEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AvacynThePurifierEffect copy() {
-        return new AvacynThePurifierEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature");
-        filter.add(AnotherPredicate.instance);
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-        for (Permanent permanent : permanents) {
-            permanent.damage(3, source.getSourceId(), source, game, false, true);
-        }
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent != null) {
-                opponent.damage(3, source.getSourceId(), source, game);
-            }
-        }
-        return true;
     }
 }

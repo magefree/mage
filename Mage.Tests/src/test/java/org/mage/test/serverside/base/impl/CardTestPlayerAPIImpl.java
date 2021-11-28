@@ -685,7 +685,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
                 Card newCard = cardInfo.getCard();
-                Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+                Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
 
                 PermanentCard p = new PermanentCard(permCard, player.getId(), currentGame);
                 p.setTapped(tapped);

@@ -69,7 +69,7 @@ class BrackwaterElementalSacrificeEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
             SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice {this}");
-            sacrificeEffect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
+            sacrificeEffect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
             game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
         }
         return false;

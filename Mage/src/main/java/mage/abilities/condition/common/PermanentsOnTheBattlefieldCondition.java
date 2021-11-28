@@ -1,4 +1,3 @@
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -15,15 +14,13 @@ import mage.game.Game;
  * @author nantuko
  * @author maurer.it_at_gmail.com
  * @see #Controls(mage.filter.Filter)
- * @see #Controls(mage.filter.Filter, mage.abilities.condition.Condition)
  */
 public class PermanentsOnTheBattlefieldCondition implements Condition {
 
-    private FilterPermanent filter;
-    private Condition condition;
-    private ComparisonType type;
-    private int count;
-    private boolean onlyControlled;
+    private final FilterPermanent filter;
+    private final ComparisonType type;
+    private final int count;
+    private final boolean onlyControlled;
 
     /**
      * Applies a filter and delegates creation to
@@ -33,7 +30,11 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
      * @param filter
      */
     public PermanentsOnTheBattlefieldCondition(FilterPermanent filter) {
-        this(filter, ComparisonType.MORE_THAN, 0);
+        this(filter, true);
+    }
+
+    public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, boolean onlyControlled) {
+        this(filter, ComparisonType.MORE_THAN, 0, onlyControlled);
     }
 
     /**
@@ -57,40 +58,18 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
         this.onlyControlled = onlyControlled;
     }
 
-    /**
-     * Applies a filter, a {@link ComparisonType}, and count to permanents on
-     * the battlefield and calls the decorated condition to see if it
-     * {@link #apply(mage.game.Game, mage.abilities.Ability) applies} as well.
-     * This will force both conditions to apply for this to be true.
-     *
-     * @param filter
-     * @param type
-     * @param count
-     * @param conditionToDecorate
-     */
-    public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, ComparisonType type, int count, Condition conditionToDecorate) {
-        this(filter, type, count);
-        this.condition = conditionToDecorate;
-    }
-
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean conditionApplies;
-
-        FilterPermanent localFilter = filter.copy();
+        FilterPermanent localFilter;
         if (onlyControlled) {
+            localFilter = filter.copy();
             localFilter.add(new ControllerIdPredicate(source.getControllerId()));
+        } else {
+            localFilter = filter;
         }
-
-        int permanentsOnBattlefield = game.getBattlefield().count(localFilter, source.getSourceId(), source.getControllerId(), game);
-        conditionApplies = ComparisonType.compare(permanentsOnBattlefield, type, count);
-
-        //If a decorated condition exists, check it as well and apply them together.
-        if (this.condition != null) {
-            conditionApplies = conditionApplies && this.condition.apply(game, source);
-        }
-
-        return conditionApplies;
+        return ComparisonType.compare(game.getBattlefield().count(
+                localFilter, source.getSourceId(), source.getControllerId(), game
+        ), type, count);
     }
 
     @Override

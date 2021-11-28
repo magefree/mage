@@ -63,7 +63,7 @@ class AngelicExaltationAbility extends TriggeredAbilityImpl {
         if (game.isActivePlayer(this.controllerId)) {
             if (game.getCombat().attacksAlone()) {
                 for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
+                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0), game));
                 }
                 return true;
             }

@@ -33,7 +33,6 @@ public final class ConduitOfStorms extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.transformable = true;
         this.secondSideCardClazz = ConduitOfEmrakul.class;
 
         // Whenever Conduit of Storms attacks, add {R} at the beginning of your next main phase this turn.
@@ -44,7 +43,7 @@ public final class ConduitOfStorms extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(effect, false));
         // {3}{R}{R}: Transform Conduit of Storms.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new ManaCostsImpl("{3}{R}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl("{3}{R}{R}")));
     }
 
     private ConduitOfStorms(final ConduitOfStorms card) {

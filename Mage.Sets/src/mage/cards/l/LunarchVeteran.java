@@ -5,7 +5,6 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.DisturbAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,7 +25,6 @@ public final class LunarchVeteran extends CardImpl {
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.l.LuminousPhantom.class;
 
         // Whenever another creature enters the battlefield under your control, you gain 1 life.
@@ -35,8 +33,7 @@ public final class LunarchVeteran extends CardImpl {
         ));
 
         // Disturb {1}{W}
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DisturbAbility(new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new DisturbAbility(this, "{1}{W}"));
     }
 
     private LunarchVeteran(final LunarchVeteran card) {

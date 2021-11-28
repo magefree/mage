@@ -78,7 +78,7 @@ class CurseOfPredationTriggeredAbility extends TriggeredAbilityImpl {
             if (enchantment != null
                     && enchantment.isAttachedTo(defender.getId())) {
                 for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                    effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
                 }
                 return true;
             }

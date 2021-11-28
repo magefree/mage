@@ -3,7 +3,6 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.ReachAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,14 +23,12 @@ public final class BirdAdmirer extends CardImpl {
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.w.WingShredder.class;
 
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

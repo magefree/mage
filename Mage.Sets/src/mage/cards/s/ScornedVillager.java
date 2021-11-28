@@ -24,7 +24,6 @@ public final class ScornedVillager extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.m.MoonscarredWerewolf.class;
 
         // {tap}: Add {G}.

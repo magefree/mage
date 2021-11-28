@@ -117,6 +117,8 @@ Invasion|INV|
 Innistrad|ISD|
 Innistrad: Midnight Hunt|MID|
 Midnight Hunt Commander|MIC|
+Innistrad: Crimson Vow|VOW|
+Crimson Vow Commander|VOC|
 Journey into Nyx|JOU|
 Judge Promo|JR|
 Judgment|JUD|

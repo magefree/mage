@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -13,21 +11,17 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.emblems.DomriRadeEmblem;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DomriRade extends CardImpl {
@@ -48,16 +42,13 @@ public final class DomriRade extends CardImpl {
         target.setTargetTag(1);
         ability2.addTarget(target);
 
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature to fight");
-        filter.add(new AnotherTargetPredicate(2));
-        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2);
         target2.setTargetTag(2);
         ability2.addTarget(target2);
         this.addAbility(ability2);
 
         // -7: You get an emblem with "Creatures you control have double strike, trample, hexproof and haste."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new DomriRadeEmblem()), -7));
-
     }
 
     private DomriRade(final DomriRade card) {

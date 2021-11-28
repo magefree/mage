@@ -47,7 +47,7 @@ public class BlocksTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getSourceId().equals(this.getSourceId())) {
             if (setTargetPointer) {
                 for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                 }
             }
             return true;

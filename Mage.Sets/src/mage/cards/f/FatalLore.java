@@ -76,7 +76,7 @@ class FatalLoreEffect extends OneShotEffect {
                         && controller.choose(Outcome.DestroyPermanent, target, source.getSourceId(), game)) {
                     for (UUID targetId : target.getTargets()) {
                         Effect destroyCreature = new DestroyTargetEffect(true);
-                        destroyCreature.setTargetPointer(new FixedTarget(targetId));
+                        destroyCreature.setTargetPointer(new FixedTarget(targetId, game));
                         destroyCreature.apply(game, source);
                     }
                     Effect opponentDrawsCards = new DrawCardTargetEffect(StaticValue.get(3), false, true);

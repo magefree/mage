@@ -35,7 +35,7 @@ public final class FacelessAgent extends CardImpl {
 
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(2);
 
         // Changeling
         this.addAbility(new ChangelingAbility());

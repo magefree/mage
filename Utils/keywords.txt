@@ -11,6 +11,7 @@ Bushido|number|
 Buyback|manaString|
 Cascade|new|
 Changeling|new|
+Cleave|card, manaString|
 Convoke|new|
 Crew|number|
 Cumulative upkeep|cost|
@@ -93,7 +94,7 @@ Riot|new|
 Scavenge|cost|
 Shadow|instance|
 Shroud|instance|
-Soulbond|instance|
+Soulbond|new|
 Soulshift|number|
 Skulk|new|
 Spectacle|card, cost|
@@ -103,6 +104,7 @@ Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Totem armor|new|
+Training|new|
 Trample|instance|
 Tribute|number|
 Unblockable|new|

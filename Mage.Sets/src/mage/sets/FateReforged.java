@@ -5,11 +5,16 @@ import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -247,5 +252,63 @@ public final class FateReforged extends ExpansionSet {
             criteria.setCodes(this.code);
         }
         return CardRepository.instance.findCards(criteria);
+    }
+
+    @Override
+    protected void generateBoosterMap() {
+        super.generateBoosterMap();
+        CardRepository
+                .instance
+                .findCards(new CardCriteria().setCodes("KTK").rarities(Rarity.RARE).types(CardType.LAND))
+                .stream()
+                .forEach(cardInfo -> inBoosterMap.put("KTK_" + cardInfo.getCardNumber(), cardInfo));
+    }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new FateReforgedCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/frf.html
+// Using USA collation for common/uncommon, rare collation inferred from other sets
+class FateReforgedCollator implements BoosterCollator {
+    private final CardRun commonA = new CardRun(true, "5", "57", "82", "53", "24", "38", "86", "153", "21", "6", "39", "73", "152", "2", "47", "68", "58", "4", "33", "89", "153", "10", "45", "72", "86", "3", "31", "61", "158", "26", "53", "81", "154", "21", "57", "85", "37", "24", "38", "82", "150", "5", "2", "31", "89", "152", "10", "33", "72", "47", "26", "58", "61", "150", "3", "45", "81", "73", "6", "39", "85", "154", "4", "37", "68", "158");
+    private final CardRun commonB = new CardRun(true, "106", "121", "25", "115", "133", "107", "129", "88", "116", "135", "108", "124", "98", "128", "13", "92", "130", "96", "121", "60", "103", "144", "107", "122", "59", "102", "134", "95", "129", "25", "116", "133", "98", "140", "88", "108", "128", "106", "124", "115", "135", "13", "102", "122", "103", "130", "60", "96", "144", "95", "140", "59", "92", "134");
+    private final CardRun uncommon = new CardRun(true, "104", "49", "32", "67", "46", "139", "14", "101", "83", "23", "160", "16", "76", "69", "126", "105", "35", "97", "30", "159", "80", "125", "118", "77", "34", "51", "7", "40", "94", "28", "78", "136", "114", "161", "48", "42", "12", "66", "83", "120", "117", "44", "18", "67", "127", "15", "112", "141", "32", "29", "132", "164", "63", "123", "119", "93", "71", "41", "101", "111", "17", "49", "162", "74", "80", "139", "147", "30", "104", "46", "69", "77", "14", "105", "159", "164", "118", "23", "63", "160", "123", "97", "93", "141", "41", "44", "126", "17", "136", "34", "112", "76", "78", "71", "162", "16", "114", "7", "161", "120", "51", "35", "74", "66", "18", "125", "40", "42", "132", "28", "147", "12", "94", "48", "119", "29", "15", "117", "127", "111");
+    private final CardRun rare = new CardRun(false, "8", "9", "11", "19", "22", "36", "43", "50", "52", "54", "62", "65", "75", "79", "84", "87", "90", "91", "99", "100", "109", "110", "131", "137", "138", "142", "146", "148", "149", "151", "155", "156", "157", "163", "167", "8", "9", "11", "19", "22", "36", "43", "50", "52", "54", "62", "65", "75", "79", "84", "87", "90", "91", "99", "100", "109", "110", "131", "137", "138", "142", "146", "148", "149", "151", "155", "156", "157", "163", "167", "1", "20", "27", "55", "56", "64", "70", "113", "143", "145");
+    private final CardRun landCommon = new CardRun(true, "165", "169", "166", "171", "168", "165", "174", "171", "173", "172", "166", "170", "169", "175", "168", "173", "170", "165", "172", "169", "174", "166", "175", "171", "168", "170", "172", "174", "175", "173");
+    private final CardRun landRare = new CardRun(false, "KTK_230", "KTK_233", "KTK_239", "KTK_248", "KTK_249");
+
+    private final BoosterStructure AAAAABBBBB = new BoosterStructure(
+            commonA, commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB, commonB
+    );
+    private final BoosterStructure AAAAAABBBB = new BoosterStructure(
+            commonA, commonA, commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB
+    );
+    private final BoosterStructure U1 = new BoosterStructure(uncommon, uncommon, uncommon);
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+    private final BoosterStructure L1 = new BoosterStructure(landCommon);
+    private final BoosterStructure L2 = new BoosterStructure(landRare);
+
+    private final RarityConfiguration commonRuns = new RarityConfiguration(AAAAABBBBB, AAAAAABBBB);
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(U1);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+    private final RarityConfiguration landRuns = new RarityConfiguration(
+        L1, L1, L1, L1, L1, L1, L1, L1,
+        L1, L1, L1, L1, L1, L1, L1, L1,
+        L1, L1, L1, L1, L1, L1, L1, L2
+    );
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(commonRuns.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(landRuns.getNext().makeRun());
+        return booster;
     }
 }

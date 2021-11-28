@@ -409,7 +409,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
 
     private BufferedImage getFaceDownImage() {
         // TODO: add download default images
-        if (isPermanent()) {
+        if (isPermanent() && getGameCard() instanceof PermanentView) {
             if (((PermanentView) getGameCard()).isMorphed()) {
                 return ImageCache.getMorphImage();
             } else {

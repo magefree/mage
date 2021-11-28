@@ -62,7 +62,7 @@ class StromkirkOccultistExileEffect extends OneShotEffect {
 
     public StromkirkOccultistExileEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Exile the top card of your library. Until end of turn, you may play that card";
+        this.staticText = "exile the top card of your library. Until end of turn, you may play that card";
     }
 
     public StromkirkOccultistExileEffect(final StromkirkOccultistExileEffect effect) {

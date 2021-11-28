@@ -4,8 +4,6 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.List;
-
 /**
  * https://scryfall.com/sets/akr
  */

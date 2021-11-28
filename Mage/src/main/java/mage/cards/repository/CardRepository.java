@@ -34,7 +34,7 @@ public enum CardRepository {
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
     // raise this if db structure was changed
-    private static final long CARD_DB_VERSION = 53;
+    private static final long CARD_DB_VERSION = 54;
     // raise this if new cards were added to the server
     private static final long CARD_CONTENT_VERSION = 241;
     private Dao<CardInfo, Object> cardDao;
@@ -504,7 +504,7 @@ public enum CardRepository {
     }
 
     /**
-     * Warning, don't use db functions in card's code - it generate heavy db loading in AI simulations. If you
+     * Warning, don't use db functions in card's code - it generates heavy db loading in AI simulations. If you
      * need that feature then check for simulation mode. See https://github.com/magefree/mage/issues/7014
      *
      * @param criteria

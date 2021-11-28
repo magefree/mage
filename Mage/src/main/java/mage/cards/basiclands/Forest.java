@@ -15,7 +15,7 @@ import mage.cards.CardSetInfo;
 public class Forest extends BasicLand {
     public Forest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new GreenManaAbility());
-        this.frameColor = ObjectColor.GREEN;
+        this.frameColor.setGreen(true);
     }
 
     public Forest(final Forest land) {

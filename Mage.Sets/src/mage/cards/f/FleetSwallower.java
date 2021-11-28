@@ -48,7 +48,7 @@ class FleetSwallowerEffect extends OneShotEffect {
 
     public FleetSwallowerEffect() {
         super(Outcome.Detriment);
-        staticText = "target player puts the top half of their library, rounded up, into their graveyard";
+        staticText = "target player mills half their library, rounded up";
     }
 
     public FleetSwallowerEffect(final FleetSwallowerEffect effect) {

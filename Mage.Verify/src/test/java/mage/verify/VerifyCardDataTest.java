@@ -58,7 +58,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "GRN"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "VOC"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -196,6 +196,7 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UND"); // un-sets don't have full implementation of card variations
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UST"); // un-sets don't have full implementation of card variations
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "SOI", "Tamiyo's Journal"); // not all variations implemented
+        skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "SLD", "Zndrsplt, Eye of Wisdom"); // xmage adds additional card for alternative image (second side)
 
 
         // scryfall download sets (missing from scryfall website)
@@ -700,10 +701,16 @@ public class VerifyCardDataTest {
             }
 
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
+                if (skipListHaveName(SKIP_LIST_WRONG_CARD_NUMBERS, set.getCode(), card.getName())) {
+                    continue;
+                }
+
                 MtgJsonCard jsonCard = MtgJsonService.cardFromSet(set.getCode(), card.getName(), card.getCardNumber());
                 if (jsonCard == null) {
                     // see convertMtgJsonToXmageCardNumber for card number convert notation
-                    errorsList.add("Error: scryfall download can't find card from mtgjson " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                    if (!skipListHaveName(SKIP_LIST_WRONG_CARD_NUMBERS, set.getCode(), card.getName())) {
+                        errorsList.add("Error: scryfall download can't find card from mtgjson " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                    }
                     continue;
                 }
 
@@ -716,6 +723,16 @@ public class VerifyCardDataTest {
                         foundedDirectDownloadKeys.add(key);
                     } else {
                         errorsList.add("Error: scryfall download can't find non-ascii card link in direct download list " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + jsonCard.number);
+                    }
+                }
+
+                // CHECK: reversible_card must be in direct download list (xmage must have 2 cards with diff image face)
+                if (jsonCard.layout.equals("reversible_card")) {
+                    String key = ScryfallImageSupportCards.findDirectDownloadKey(set.getCode(), card.getName(), card.getCardNumber());
+                    if (key != null) {
+                        foundedDirectDownloadKeys.add(key);
+                    } else {
+                        errorsList.add("Error: scryfall download can't find face image of reversible_card in direct download list " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + jsonCard.number);
                     }
                 }
             }
@@ -731,7 +748,7 @@ public class VerifyCardDataTest {
                 continue;
             }
 
-            // skip non implemented cards list
+            // skip non-implemented cards list
             if (CardRepository.instance.findCard(cardName) == null) {
                 continue;
             }
@@ -1425,14 +1442,20 @@ public class VerifyCardDataTest {
         }
     }
 
+    private static final String[] wrongSymbols = {"’", "“", "”"};
+
     private void checkWrongSymbolsInRules(Card card) {
-        if (card.getName().contains("’")) {
-            fail(card, "card name", "card's names contains restricted symbol ’");
+        for (String s : wrongSymbols) {
+            if (card.getName().contains(s)) {
+                fail(card, "card name", "card's name contains restricted symbol " + s);
+            }
         }
 
         for (String rule : card.getRules()) {
-            if (rule.contains("’")) {
-                fail(card, "rules", "card's rules contains restricted symbol ’");
+            for (String s : wrongSymbols) {
+                if (rule.contains(s)) {
+                    fail(card, "rules", "card's rules contains restricted symbol " + s);
+                }
             }
             if (rule.contains("&mdash ")) {
                 fail(card, "rules", "card's rules contains restricted test [&mdash ] instead [&mdash;]");
@@ -1581,9 +1604,8 @@ public class VerifyCardDataTest {
             refText = refText.substring(1, refText.length() - 1);
         }
         // planeswalker fix [-7]: xxx
-        if (refText.contains("[") && refText.contains("]")) {
-            refText = refText.replace("[", "").replace("]", "");
-        }
+        refText = refText.replaceAll("\\[([\\−\\+]?\\d*)\\]\\: ", "$1: ");
+
         // evergreen keyword fix
         for (String s : refText.split("[\\$\\\n]")) {
             if (Arrays

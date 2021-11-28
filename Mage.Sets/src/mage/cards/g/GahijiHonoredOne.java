@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.Set;
@@ -16,7 +15,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -28,7 +26,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class GahijiHonoredOne extends CardImpl {
 
     public GahijiHonoredOne(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.BEAST);
 
@@ -53,7 +51,7 @@ public final class GahijiHonoredOne extends CardImpl {
 class GahijiHonoredOneTriggeredAbility extends TriggeredAbilityImpl {
 
     public GahijiHonoredOneTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BoostTargetEffect(2,0, Duration.EndOfTurn), false);
+        super(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), false);
     }
 
     public GahijiHonoredOneTriggeredAbility(Effect effect, boolean optional, String text) {
@@ -81,8 +79,8 @@ class GahijiHonoredOneTriggeredAbility extends TriggeredAbilityImpl {
         if (defender != null) {
             Set<UUID> opponents = game.getOpponents(this.getControllerId());
             if (opponents != null && opponents.contains(defender.getId())) {
-                for (Effect effect: this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
                 }
                 return true;
             }

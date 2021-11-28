@@ -12,6 +12,7 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -39,7 +40,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, isCanKill(toughness) ? Outcome.UnboostCreature : Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
-        setText();
+        this.staticText = "enchanted creature gets " + CardUtil.getBoostText(power, toughness, duration);
     }
 
     public BoostEnchantedEffect(final BoostEnchantedEffect effect) {
@@ -96,46 +97,4 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
     public void setLockedIn(boolean lockedIn) {
         this.lockedIn = lockedIn;
     }
-
-    private void setText() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("enchanted creature gets ");
-        String p = power.toString();
-        if (!p.startsWith("-")) {
-            sb.append('+');
-        }
-        sb.append(p).append('/');
-        String t = toughness.toString();
-        if (!t.startsWith("-")) {
-            if (p.startsWith("-")) {
-                sb.append('-');
-            } else {
-                sb.append('+');
-            }
-        }
-        sb.append(t);
-        if (duration != Duration.WhileOnBattlefield) {
-            sb.append(' ').append(duration.toString());
-        }
-        String message = null;
-        String fixedPart = null;
-        if (t.contains("X")) {
-            message = toughness.getMessage();
-            fixedPart = ", where X is ";
-        } else if (p.contains("X")) {
-            message = power.getMessage();
-            fixedPart = ", where X is ";
-        } else if (!power.getMessage().isEmpty()) {
-            message = power.getMessage();
-            fixedPart = " for each ";
-        } else if (!toughness.getMessage().isEmpty()) {
-            message = toughness.getMessage();
-            fixedPart = " for each ";
-        }
-        if (message != null && !message.isEmpty() && fixedPart != null) {
-            sb.append(fixedPart).append(message);
-        }
-        staticText = sb.toString();
-    }
-
 }

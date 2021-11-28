@@ -22,7 +22,7 @@ import mage.target.TargetSpell;
  */
 public final class SwanSong extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("enchantment, instant or sorcery spell");
+    private static final FilterSpell filter = new FilterSpell("enchantment, instant, or sorcery spell");
 
     static {
         filter.add(Predicates.or(CardType.ENCHANTMENT.getPredicate(),
@@ -52,7 +52,7 @@ class SwanSongEffect extends OneShotEffect {
 
     public SwanSongEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Counter target enchantment, instant or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying";
+        this.staticText = "Counter target enchantment, instant, or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying";
     }
 
     public SwanSongEffect(final SwanSongEffect effect) {

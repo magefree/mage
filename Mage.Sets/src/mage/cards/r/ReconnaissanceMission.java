@@ -23,7 +23,7 @@ public final class ReconnaissanceMission extends CardImpl {
         // Whenever a creature you control deals combat damage to a player, you may draw a card.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 new DrawCardSourceControllerEffect(1),
-                StaticFilters.FILTER_CONTROLLED_CREATURE,
+                StaticFilters.FILTER_CONTROLLED_A_CREATURE,
                 true, SetTargetPointer.NONE, true
         ));
 

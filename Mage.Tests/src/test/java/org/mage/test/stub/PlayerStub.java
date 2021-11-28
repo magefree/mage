@@ -148,6 +148,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public int damage(int damage, Ability source, Game game) {
+        return 0;
+    }
+
+    @Override
     public int damage(int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable) {
         return 0;
     }

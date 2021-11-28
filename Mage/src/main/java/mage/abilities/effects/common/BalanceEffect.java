@@ -7,7 +7,6 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -24,6 +23,10 @@ import java.util.stream.Collectors;
  * @author emerald000
  */
 public class BalanceEffect extends OneShotEffect {
+
+    private static final FilterControlledLandPermanent filterLand = new FilterControlledLandPermanent("lands to keep");
+    private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("creatures to keep");
+    private static final FilterCard filterCardHand = new FilterCard("cards to keep");
 
     public BalanceEffect() {
         super(Outcome.Sacrifice);
@@ -49,8 +52,8 @@ public class BalanceEffect extends OneShotEffect {
             return false;
         }
 
-        choosePermanentsToKeep(game, source, controller, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, new FilterControlledLandPermanent("lands to keep"));
-        choosePermanentsToKeep(game, source, controller, StaticFilters.FILTER_CONTROLLED_CREATURE, new FilterControlledCreaturePermanent("creatures to keep"));
+        choosePermanentsToKeep(game, source, controller, filterLand);
+        choosePermanentsToKeep(game, source, controller, filterCreature);
 
         //Cards in hand
         int lowestHandSize = Integer.MAX_VALUE;
@@ -70,17 +73,30 @@ public class BalanceEffect extends OneShotEffect {
                 continue;
             }
 
-            TargetCardInHand target = new TargetCardInHand(lowestHandSize, new FilterCard("cards to keep"));
-            if (!target.choose(Outcome.Protect, player.getId(), source.getSourceId(), game)) {
-                continue;
-            }
-
             Set<Card> allCardsInHand = player.getHand().getCards(game);
             Set<Card> cardsToKeep = new LinkedHashSet<>();
 
-            for (Card card : allCardsInHand) {
-                if (card != null && target.getTargets().contains(card.getId())) {
-                    cardsToKeep.add(card);
+            if (lowestHandSize > 0) {
+                TargetCardInHand target = new TargetCardInHand(lowestHandSize, filterCardHand);
+                if (target.choose(Outcome.Protect, player.getId(), source.getSourceId(), game)) {
+                    for (Card card : allCardsInHand) {
+                        if (card != null && target.getTargets().contains(card.getId())) {
+                            cardsToKeep.add(card);
+                        }
+                    }
+                // Prevent possible cheat by disconnecting.  If no targets are chosen, just pick the first in the list.
+                // https://github.com/magefree/mage/issues/4263
+                } else {
+                    int numCards = 0;
+                    for (Card card : allCardsInHand) {
+                        if (numCards >= lowestHandSize) {
+                            break;
+                        }
+                        if (card != null) {
+                            cardsToKeep.add(card);
+                            numCards++;
+                        }
+                    }
                 }
             }
 
@@ -100,7 +116,7 @@ public class BalanceEffect extends OneShotEffect {
     }
 
     private void choosePermanentsToKeep(Game game, Ability source, Player controller,
-                                         FilterControlledPermanent filterPermanent, FilterControlledPermanent filterPermanentDialog) {
+                                         FilterControlledPermanent filterPermanent) {
         int lowestPermanentsCount = Integer.MAX_VALUE;
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
@@ -120,24 +136,37 @@ public class BalanceEffect extends OneShotEffect {
                 continue;
             }
 
-            TargetControlledPermanent target = new TargetControlledPermanent(lowestPermanentsCount, lowestPermanentsCount, filterPermanentDialog, true);
-            if (!target.choose(Outcome.Protect, player.getId(), source.getSourceId(), game)) {
-                continue;
-            }
-
             List<Permanent> allPermanentsOfType = game.getBattlefield().getActivePermanents(filterPermanent, player.getId(), source.getSourceId(), game);
             List<Permanent> permanentsToKeep = new ArrayList<>();
 
-            for (Permanent permanent : allPermanentsOfType) {
-                if (permanent != null && target.getTargets().contains(permanent.getId())) {
-                    permanentsToKeep.add(permanent);
+            if (lowestPermanentsCount > 0) {
+                TargetControlledPermanent target = new TargetControlledPermanent(lowestPermanentsCount, lowestPermanentsCount, filterPermanent, true);
+                if (target.choose(Outcome.Protect, player.getId(), source.getSourceId(), game)) {
+                    for (Permanent permanent : allPermanentsOfType) {
+                        if (permanent != null && target.getTargets().contains(permanent.getId())) {
+                            permanentsToKeep.add(permanent);
+                        }
+                    }
+                // Prevent possible cheat by disconnecting.  If no targets are chosen, just pick the first in the list.
+                // https://github.com/magefree/mage/issues/4263
+                } else {
+                    int numPermanents = 0;
+                    for (Permanent permanent : allPermanentsOfType) {
+                        if (numPermanents >= lowestPermanentsCount) {
+                            break;
+                        }
+                        if (permanent != null) {
+                            permanentsToKeep.add(permanent);
+                            numPermanents++;
+                        }
+                    }
                 }
             }
 
             List<Permanent> playerPermanentsToSacrifice = allPermanentsOfType.stream().filter(e -> !permanentsToKeep.contains(e)).collect(Collectors.toList());
             permanentsToSacrifice.addAll(playerPermanentsToSacrifice);
 
-            if (playerPermanentsToSacrifice.isEmpty()) {
+            if (!playerPermanentsToSacrifice.isEmpty()) {
                 game.informPlayers(player.getLogName() + " chose permanents to be sacrificed: "
                         + playerPermanentsToSacrifice.stream().map(Permanent::getLogName).collect(Collectors.joining(", ")));
             }

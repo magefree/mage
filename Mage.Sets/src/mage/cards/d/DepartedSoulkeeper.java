@@ -25,7 +25,6 @@ public final class DepartedSoulkeeper extends CardImpl {
         this.toughness = new MageInt(1);
         this.color.setWhite(true);
         this.color.setBlue(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Flying

@@ -137,7 +137,7 @@ class IsarethTheAwakenerEffect extends OneShotEffect {
         }
         Counters countersToAdd = new Counters();
         countersToAdd.addCounter(CounterType.CORPSE.createInstance());
-        game.setEnterWithCounters(source.getSourceId(), countersToAdd);
+        game.setEnterWithCounters(card.getId(), countersToAdd);
         return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }

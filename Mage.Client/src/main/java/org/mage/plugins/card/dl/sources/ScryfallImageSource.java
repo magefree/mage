@@ -74,16 +74,22 @@ public enum ScryfallImageSource implements CardImageSource {
 
         // CARDS TRY
 
-        // direct links to images via hardcoded API path. Used for cards with non-ASCII collector numbers
+        // direct links to images via hardcoded API path
+        // used for cards with non-ASCII collector numbers or another use cases
         if (baseUrl == null) {
-            String apiUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
-            if (apiUrl != null) {
-                baseUrl = apiUrl + localizedCode + "?format=image";
-                alternativeUrl = apiUrl + defaultCode + "?format=image";
-
-                // workaround to use cards without english images (some promos or special cards)
-                if (Objects.equals(baseUrl, alternativeUrl) && baseUrl.endsWith("/en?format=image")) {
-                    alternativeUrl = alternativeUrl.replace("/en?format=image", "/?format=image");
+            String link = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
+            if (link != null) {
+                if (ScryfallImageSupportCards.isApiLink(link)) {
+                    // api
+                    baseUrl = link + localizedCode + "?format=image";
+                    alternativeUrl = link + defaultCode + "?format=image";
+                    // workaround to use cards without english images (some promos or special cards)
+                    if (Objects.equals(baseUrl, alternativeUrl) && baseUrl.endsWith("/en?format=image")) {
+                        alternativeUrl = alternativeUrl.replace("/en?format=image", "/?format=image");
+                    }
+                } else {
+                    // image
+                    baseUrl = link;
                 }
             }
         }
@@ -103,18 +109,22 @@ public enum ScryfallImageSource implements CardImageSource {
         // basic cards by api call (redirect to img link)
         // example: https://api.scryfall.com/cards/xln/121/en?format=image
         if (baseUrl == null) {
-            baseUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
-                    + card.getCollectorId() + "/" + localizedCode + "?format=image";
-            alternativeUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
-                    + card.getCollectorId() + "/" + defaultCode + "?format=image";
-
+            baseUrl = String.format("https://api.scryfall.com/cards/%s/%s/%s?format=image",
+                    formatSetName(card.getSet(), isToken),
+                    card.getCollectorId(),
+                    localizedCode);
+            alternativeUrl = String.format("https://api.scryfall.com/cards/%s/%s/%s?format=image",
+                    formatSetName(card.getSet(), isToken),
+                    card.getCollectorId(),
+                    defaultCode);
             // workaround to use cards without english images (some promos or special cards)
             // bug: https://github.com/magefree/mage/issues/6829
             // example: Mysterious Egg from IKO https://api.scryfall.com/cards/iko/385/?format=image
             if (Objects.equals(baseUrl, alternativeUrl)) {
                 // without loc code scryfall must return first available image
-                alternativeUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
-                        + card.getCollectorId() + "/?format=image";
+                alternativeUrl = String.format("https://api.scryfall.com/cards/%s/%s/?format=image",
+                        formatSetName(card.getSet(), isToken),
+                        card.getCollectorId());
             }
         }
 
@@ -126,6 +136,7 @@ public enum ScryfallImageSource implements CardImageSource {
         final String localizedCode = languageAliases.getOrDefault(this.getCurrentLanguage(), defaultCode);
 
         List<String> needUrls = new ArrayList<>();
+        int needFaceIndex = card.isSecondSide() ? 1 : 0;
 
         String apiUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
         if (apiUrl != null) {
@@ -143,11 +154,15 @@ public enum ScryfallImageSource implements CardImageSource {
         } else {
             // BY CARD NUMBER
             // localized and default
-            needUrls.add("https://api.scryfall.com/cards/"
-                    + formatSetName(card.getSet(), isToken) + "/" + card.getCollectorId() + "/" + localizedCode);
+            needUrls.add(String.format("https://api.scryfall.com/cards/%s/%s/%s",
+                    formatSetName(card.getSet(), isToken),
+                    card.getCollectorId(),
+                    localizedCode));
             if (!localizedCode.equals(defaultCode)) {
-                needUrls.add("https://api.scryfall.com/cards/"
-                        + formatSetName(card.getSet(), isToken) + "/" + card.getCollectorId() + "/" + defaultCode);
+                needUrls.add(String.format("https://api.scryfall.com/cards/%s/%s/%s",
+                        formatSetName(card.getSet(), isToken),
+                        card.getCollectorId(),
+                        defaultCode));
             }
         }
 
@@ -178,8 +193,11 @@ public enum ScryfallImageSource implements CardImageSource {
         if (jsonFaces == null) {
             throw new MageException("Couldn't find card_faces in card's JSON data: " + jsonUrl);
         }
+        if (jsonFaces.size() < needFaceIndex + 1) {
+            throw new MageException("card_faces doesn't contains face index in card's JSON data: " + jsonUrl);
+        }
 
-        JsonObject jsonFace = jsonFaces.get(card.isSecondSide() ? 1 : 0).getAsJsonObject();
+        JsonObject jsonFace = jsonFaces.get(needFaceIndex).getAsJsonObject();
         JsonObject jsonImages = JsonUtil.getAsObject(jsonFace, "image_uris");
         if (jsonImages == null) {
             throw new MageException("Couldn't find image_uris in card's JSON data: " + jsonUrl);

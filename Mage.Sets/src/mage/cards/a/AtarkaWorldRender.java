@@ -84,7 +84,7 @@ class AtarkaWorldRenderEffect extends TriggeredAbilityImpl {
         if (attacker != null
                 && filter.match(attacker, sourceId, controllerId, game)) {
             for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(attacker.getId()));
+                effect.setTargetPointer(new FixedTarget(attacker.getId(), game));
             }
             return true;
         }

@@ -21,7 +21,6 @@ import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
-
 /**
  * @author LevelX2
  */
@@ -35,7 +34,6 @@ public final class Teleportal extends CardImpl {
 
     public Teleportal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{R}");
-
 
         // Target creature you control gets +1/+0 until end of turn and can't be blocked this turn.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
@@ -77,7 +75,7 @@ class TeleportalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             CantBeBlockedTargetEffect effect = new CantBeBlockedTargetEffect();
-            effect.setTargetPointer(new FixedTarget(creature.getId()));
+            effect.setTargetPointer(new FixedTarget(creature.getId(), game));
             game.addEffect(effect, source);
         }
         return true;

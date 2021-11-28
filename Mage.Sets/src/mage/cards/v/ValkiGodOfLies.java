@@ -247,7 +247,7 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
                 Card chosenExiledCard = game.getCard(target.getFirstTarget());
                 if (chosenExiledCard != null) {
                     ContinuousEffect copyEffect = new CopyEffect(Duration.WhileOnBattlefield, chosenExiledCard.getMainCard(), source.getSourceId());
-                    copyEffect.setTargetPointer(new FixedTarget(Valki.getId()));
+                    copyEffect.setTargetPointer(new FixedTarget(Valki.getId(), game));
                     game.addEffect(copyEffect, source);
                     return true;
                 }
@@ -335,7 +335,7 @@ class ExileAllCardsFromAllGraveyards extends OneShotEffect {
 
     public ExileAllCardsFromAllGraveyards() {
         super(Outcome.Benefit);
-        this.staticText = "Exile all cards from all graveyards. Add {R}{R}{R}";
+        this.staticText = "Exile all graveyards. Add {R}{R}{R}";
     }
 
     public ExileAllCardsFromAllGraveyards(final ExileAllCardsFromAllGraveyards effect) {

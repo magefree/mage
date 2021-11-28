@@ -127,6 +127,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void exchangeLife(Player player, Ability source, Game game);
 
+    int damage(int damage, Ability source, Game game);
+
     int damage(int damage, UUID attackerId, Ability source, Game game);
 
     int damage(int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable);

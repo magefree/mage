@@ -33,7 +33,6 @@ public final class CuriousHomunculus extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.v.VoraciousReader.class;
 
         // {T}: Add {C}. Spend this mana only to cast an instant or sorcery spell.
@@ -42,7 +41,7 @@ public final class CuriousHomunculus extends CardImpl {
         // At the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform Curious Homunculus.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false),
                 new InstantOrSorceryCardsInControllerGraveyardCondition(3),
                 "At the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform {this}"));
     }

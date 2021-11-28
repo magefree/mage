@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -17,23 +15,26 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SpiritToken;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PromiseOfBunrei extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
-    
+
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
     }
-    
+
     public PromiseOfBunrei(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // When a creature you control dies, sacrifice Promise of Bunrei. If you do, create four 1/1 colorless Spirit creature tokens.
-        this.addAbility(new DiesCreatureTriggeredAbility(new PromiseOfBunreiEffect(), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                new PromiseOfBunreiEffect(), false, filter
+        ).setTriggerPhrase("When a creature you control dies, "));
     }
 
     private PromiseOfBunrei(final PromiseOfBunrei card) {
@@ -47,21 +48,21 @@ public final class PromiseOfBunrei extends CardImpl {
 }
 
 class PromiseOfBunreiEffect extends OneShotEffect {
-    
+
     public PromiseOfBunreiEffect() {
         super(Outcome.Benefit);
         this.staticText = "sacrifice {this}. If you do, create four 1/1 colorless Spirit creature tokens";
     }
-    
+
     public PromiseOfBunreiEffect(final PromiseOfBunreiEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public PromiseOfBunreiEffect copy() {
         return new PromiseOfBunreiEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());

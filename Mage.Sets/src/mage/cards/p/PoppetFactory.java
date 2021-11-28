@@ -26,14 +26,13 @@ public final class PoppetFactory extends CardImpl {
 
         this.color.setBlue(true);
         this.nightCard = true;
-        this.transformable = true;
 
         // Creature tokens you control lose all abilities and have base power and toughness 3/3.
         this.addAbility(new SimpleStaticAbility(new PoppetFactoryEffect()));
 
         // At the beginning of your upkeep, you may transform Poppet Factory.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TransformSourceEffect(false), TargetController.YOU, true
+                new TransformSourceEffect(), TargetController.YOU, true
         ));
     }
 

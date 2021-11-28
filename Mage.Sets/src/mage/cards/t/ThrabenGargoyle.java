@@ -26,7 +26,6 @@ public final class ThrabenGargoyle extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.s.StonewingAntagonizer.class;
 
         // Defender
@@ -34,7 +33,7 @@ public final class ThrabenGargoyle extends CardImpl {
 
         // {6}: Transform Thraben Gargoyle.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new GenericManaCost(6)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new GenericManaCost(6)));
     }
 
     private ThrabenGargoyle(final ThrabenGargoyle card) {

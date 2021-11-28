@@ -1,6 +1,9 @@
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
@@ -45,9 +48,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
                 independentEffect = true;
         }
 
-        if (rule == null) {
-            setText();
-        } else {
+        if (rule != null) {
             this.staticText = rule;
         }
 
@@ -113,20 +114,30 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         //
     }
 
-    private void setText() {
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
-        sb.append(attachmentType.verb());
+        sb.append(attachmentType.verb().toLowerCase());
         sb.append(" " + targetObjectName + " ");
         if (duration == Duration.WhileOnBattlefield) {
             sb.append("has ");
         } else {
             sb.append("gains ");
         }
-        sb.append(ability.getRule("this " + targetObjectName));
-        if (!duration.toString().isEmpty()) {
-            sb.append(' ').append(duration.toString());
+        boolean quotes = (ability instanceof SimpleActivatedAbility) || (ability instanceof TriggeredAbility);
+        if (quotes) {
+            sb.append('"');
         }
-        staticText = sb.toString();
+        sb.append(ability.getRule("this " + targetObjectName));
+        if (quotes) {
+            sb.append('"');
+        }
+        if (!duration.toString().isEmpty()) {
+            sb.append(' ').append(duration);
+        }
+        return sb.toString();
     }
-
 }

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import mage.counters.CounterType;
 
 /**
  * @author LevelX2
@@ -50,6 +51,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private int startingLoyalty = -1;
     private final List<Ability> additionalAbilities = new ArrayList();
     private Permanent savedPermanent = null;
+    private CounterType counter;
+    private int numberOfCounters;
 
     public CreateTokenCopyTargetEffect(boolean useLKI) {
         this();
@@ -58,6 +61,12 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     public CreateTokenCopyTargetEffect() {
         this((UUID) null);
+    }
+
+    public CreateTokenCopyTargetEffect(CounterType counter, int numberOfCounters) {
+        this((UUID) null);
+        this.counter = counter;
+        this.numberOfCounters = numberOfCounters;
     }
 
     public CreateTokenCopyTargetEffect(UUID playerId) {
@@ -73,11 +82,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     }
 
     /**
-     * @param playerId           null the token is controlled/owned by the
-     *                           controller of the source ability
+     * @param playerId null the token is controlled/owned by the controller of
+     * the source ability
      * @param additionalCardType the token gains this card type in addition
-     * @param hasHaste           the token gains haste
-     * @param number             number of tokens to put into play
+     * @param hasHaste the token gains haste
+     * @param number number of tokens to put into play
      * @param tapped
      * @param attacking
      */
@@ -220,6 +229,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             Permanent tokenPermanent = game.getPermanent(tokenId);
             if (tokenPermanent != null) {
                 addedTokenPermanents.add(tokenPermanent);
+                // add counters if necessary ie Ochre Jelly
+                if (counter != null
+                        && numberOfCounters > 0) {
+                    tokenPermanent.addCounters(counter.createInstance(numberOfCounters), source.getControllerId(), source, game);
+                }
             }
         }
         return true;

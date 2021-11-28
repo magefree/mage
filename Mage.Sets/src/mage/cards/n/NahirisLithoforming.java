@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.PermanentsEnterBattlefieldTappedEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,8 +11,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -29,7 +27,9 @@ public final class NahirisLithoforming extends CardImpl {
 
         // Sacrifice X lands. For each land sacrificed this way, draw a card. You may play X additional lands this turn. Lands you control enter the battlefield tapped this turn.
         this.getSpellAbility().addEffect(new NahirisLithoformingSacrificeEffect());
-        this.getSpellAbility().addEffect(new NahirisLithoformingTappedEffect());
+        this.getSpellAbility().addEffect(new PermanentsEnterBattlefieldTappedEffect(
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS, Duration.EndOfTurn
+        ));
     }
 
     private NahirisLithoforming(final NahirisLithoforming card) {
@@ -86,47 +86,5 @@ class NahirisLithoformingSacrificeEffect extends OneShotEffect {
                 source.getManaCostsToPay().getX(), Duration.EndOfTurn
         ), source);
         return true;
-    }
-}
-
-class NahirisLithoformingTappedEffect extends ReplacementEffectImpl {
-
-    NahirisLithoformingTappedEffect() {
-        super(Duration.EndOfTurn, Outcome.Tap);
-        staticText = "Lands you control enter the battlefield tapped this turn.";
-    }
-
-    NahirisLithoformingTappedEffect(final NahirisLithoformingTappedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (target != null) {
-            target.setTapped(true);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (source.getControllerId().equals(event.getPlayerId())) {
-            Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null && permanent.isLand(game)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public NahirisLithoformingTappedEffect copy() {
-        return new NahirisLithoformingTappedEffect(this);
     }
 }

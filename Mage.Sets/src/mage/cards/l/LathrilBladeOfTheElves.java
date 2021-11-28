@@ -6,8 +6,7 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
@@ -19,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.Game;
 import mage.game.permanent.token.ElfWarriorToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -51,7 +49,7 @@ public final class LathrilBladeOfTheElves extends CardImpl {
 
         // Whenever Lathril, Blade of the Elves deals combat damage to a player, create that many 1/1 green Elf Warrior creature tokens.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(
-                new ElfWarriorToken(), LathrilBladeOfTheElvesValue.instance
+                new ElfWarriorToken(), SavedDamageValue.instance
         ).setText("create that many 1/1 green Elf Warrior creature tokens"), false, true));
 
         // {T}, Tap ten untapped Elves you control: Each opponent loses 10 life and you gain 10 life.
@@ -68,24 +66,5 @@ public final class LathrilBladeOfTheElves extends CardImpl {
     @Override
     public LathrilBladeOfTheElves copy() {
         return new LathrilBladeOfTheElves(this);
-    }
-}
-
-enum LathrilBladeOfTheElvesValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return (Integer) effect.getValue("damage");
-    }
-
-    @Override
-    public LathrilBladeOfTheElvesValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
     }
 }

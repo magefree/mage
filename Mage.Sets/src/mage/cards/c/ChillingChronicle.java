@@ -22,13 +22,12 @@ public final class ChillingChronicle extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "");
 
         this.color.setBlue(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // {1}, {T}: Tap target nonland permanent. Transform Chilling Chronicle.
         Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new TransformSourceEffect(false));
+        ability.addEffect(new TransformSourceEffect());
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
     }

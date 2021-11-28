@@ -84,7 +84,7 @@ class KrovikanVampireEffect extends OneShotEffect {
             }).map((creatureId) -> {
                 OneShotEffect effect = new SacrificeTargetEffect();
                 effect.setText("Sacrifice this if Krovikan Vampire leaves the battlefield or its current controller loses control of it.");
-                effect.setTargetPointer(new FixedTarget(creatureId));
+                effect.setTargetPointer(new FixedTarget(creatureId, game));
                 return effect;
             }).map((effect) -> new KrovikanVampireDelayedTriggeredAbility(effect, krovikanVampire.getId())).forEachOrdered((dTA) -> {
                 game.addDelayedTriggeredAbility(dTA, source);

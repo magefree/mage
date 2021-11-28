@@ -13,6 +13,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.Iterator;
 
@@ -129,47 +130,8 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         if (excludeSource) {
             sb.append("other ");
         }
-        sb.append(filter.getMessage());
-        sb.append(" you control get ");
-
-        String p = power.toString();
-        if (!p.startsWith("-")) {
-            sb.append('+');
-        }
-        sb.append(p).append('/');
-        String t = toughness.toString();
-        if (!t.startsWith("-")) {
-            if (p.startsWith("-")) {
-                sb.append('-');
-            } else {
-                sb.append('+');
-            }
-        }
-        sb.append(t);
-
-        sb.append((duration == Duration.EndOfTurn ? " until end of turn" : ""));
-
-        // where X
-        String message = null;
-        if (t.equals("X")) {
-            message = toughness.getMessage();
-        } else if (p.equals("X")) {
-            message = power.getMessage();
-        }
-        if (message != null && !message.isEmpty()) {
-            sb.append(", where X is ").append(message);
-        }
-
-        // for each
-        if (message == null) {
-            message = toughness.getMessage();
-            if (message.isEmpty()) {
-                message = power.getMessage();
-            }
-            if (!message.isEmpty()) {
-                sb.append(" for each " + message);
-            }
-        }
+        sb.append(filter.getMessage()).append(" you control get ");
+        sb.append(CardUtil.getBoostText(power, toughness, duration));
         staticText = sb.toString();
     }
 

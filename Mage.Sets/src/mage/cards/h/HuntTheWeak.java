@@ -23,7 +23,7 @@ public final class HuntTheWeak extends CardImpl {
         // Put a +1/+1 counter on target creature you control. Then that creature fights target creature you don't control.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addEffect(new FightTargetsEffect().setText(
-                "Then that creature fights up to one target creature you don't control"
+                "Then that creature fights target creature you don't control"
         ));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));

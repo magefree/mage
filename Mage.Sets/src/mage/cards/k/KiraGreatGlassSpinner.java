@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -84,7 +83,7 @@ class KiraGreatGlassSpinnerAbility extends TriggeredAbilityImpl {
                 NumberOfTimesPermanentTargetedATurnWatcher watcher = game.getState().getWatcher(NumberOfTimesPermanentTargetedATurnWatcher.class);
                 if (watcher != null && watcher.notMoreThanOnceTargetedThisTurn(permanent, game)) {
                     for (Effect effect : getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                        effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
                     }
                     return true;
                 }

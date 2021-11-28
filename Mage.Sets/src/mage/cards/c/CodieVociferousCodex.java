@@ -170,7 +170,7 @@ class CodieVociferousCodexEffect extends OneShotEffect {
         }
         controller.moveCards(toCast, Zone.EXILED, source, game);
         PlayFromNotOwnHandZoneTargetEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, true);
-        effect.setTargetPointer(new FixedTarget(toCast.getId()));
+        effect.setTargetPointer(new FixedTarget(toCast.getId(), game));
         game.addEffect(effect, source);
         toExile.remove(toCast);
         controller.putCardsOnBottomOfLibrary(toExile, game, source, false);

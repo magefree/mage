@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -12,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -23,8 +21,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class RakingCanopy extends CardImpl {
 
     public RakingCanopy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
 
         // Whenever a creature with flying attacks you, Raking Canopy deals 4 damage to it.
         this.addAbility(new RakingCanopyTriggeredAbility());
@@ -63,12 +60,13 @@ class RakingCanopyTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent attacker = game.getPermanent(event.getSourceId());
-        if (attacker == null || !attacker.getAbilities().contains(FlyingAbility.getInstance())) {
+        if (attacker == null
+                || !attacker.getAbilities().contains(FlyingAbility.getInstance())) {
             return false;
         }
         if (event.getTargetId().equals(this.getControllerId())) {
             for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(attacker.getId()));
+                effect.setTargetPointer(new FixedTarget(attacker.getId(), game));
             }
             return true;
         }

@@ -499,7 +499,7 @@ public class MageActionCallback implements ActionCallback {
                         }
                         popupTextWindowOpen = true;
                         Image image = cardPanel.getImage();
-                        displayCardInfo(cardPanel, image, bigCard);
+                        displayCardInfo(cardPanel.getOriginal(), image, bigCard);
                     }
                 }
             } else {
@@ -671,7 +671,9 @@ public class MageActionCallback implements ActionCallback {
                     popupContainer.setLocation(location);
                     popupContainer.setVisible(true);
 
+                    // popup hint mode
                     Image image = null;
+                    CardView displayCard = cardPanel.getOriginal();
                     switch (enlargeMode) {
                         case COPY:
                             if (cardView instanceof PermanentView) {
@@ -687,6 +689,7 @@ public class MageActionCallback implements ActionCallback {
                                     image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal());
                                 } else {
                                     image = ImageCache.getImageOriginalAlternateName(cardView);
+                                    displayCard = displayCard.getSecondCardFace();
                                 }
                             }
                             break;
@@ -697,7 +700,7 @@ public class MageActionCallback implements ActionCallback {
                         image = cardPanel.getImage();
                     }
                     // shows the card in the popup Container
-                    displayCardInfo(cardPanel, image, (BigCard) cardPreviewPane);
+                    displayCardInfo(displayCard, image, (BigCard) cardPreviewPane);
 
                 } else {
                     logger.warn("No Card preview Pane in Mage Frame defined. Card: " + cardView.getName());
@@ -709,21 +712,21 @@ public class MageActionCallback implements ActionCallback {
         });
     }
 
-    private void displayCardInfo(MageCard mageCard, Image image, BigCard bigCard) {
+    private void displayCardInfo(CardView card, Image image, BigCard bigCard) {
         if (image instanceof BufferedImage) {
             // XXX: scaled to fit width
-            bigCard.setCard(mageCard.getOriginal().getId(), enlargeMode, image, mageCard.getOriginal().getRules(), mageCard.getOriginal().isToRotate());
+            bigCard.setCard(card.getId(), enlargeMode, image, card.getRules(), card.isToRotate());
             // if it's an ability, show only the ability text as overlay
-            if (mageCard.getOriginal().isAbility() && enlargeMode == EnlargeMode.NORMAL && isAbilityTextOverlayEnabled()) {
+            if (card.isAbility() && enlargeMode == EnlargeMode.NORMAL && isAbilityTextOverlayEnabled()) {
                 bigCard.showTextComponent();
             } else {
                 bigCard.hideTextComponent();
             }
         } else {
-            JXPanel panel = GuiDisplayUtil.getDescription(mageCard.getOriginal(), bigCard.getWidth(), bigCard.getHeight());
+            JXPanel panel = GuiDisplayUtil.getDescription(card, bigCard.getWidth(), bigCard.getHeight());
             panel.setVisible(true);
             bigCard.hideTextComponent();
-            bigCard.addJXPanel(mageCard.getOriginal().getId(), panel);
+            bigCard.addJXPanel(card.getId(), panel);
         }
         enlargeredViewOpened = new Date();
     }

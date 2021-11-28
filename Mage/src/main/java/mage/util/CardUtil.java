@@ -10,6 +10,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.asthought.CanPlayCardControllerEffect;
@@ -852,20 +854,43 @@ public final class CardUtil {
         }
     }
 
-    public static String getBoostCountAsStr(int power, int toughness) {
+    public static String getBoostCountAsStr(DynamicValue power, DynamicValue toughness) {
         // sign fix for zero values
         // -1/+0 must be -1/-0
         // +0/-1 must be -0/-1
-        String signedP = String.format("%1$+d", power);
-        String signedT = String.format("%1$+d", toughness);
-        if (signedP.equals("+0") && signedT.startsWith("-")) {
-            signedP = "-0";
+        String p = power.toString();
+        String t = toughness.toString();
+        if (!p.startsWith("-")) {
+            p = (t.startsWith("-") && p.equals("0") ? "-" : "+") + p;
         }
-        if (signedT.equals("+0") && signedP.startsWith("-")) {
-            signedT = "-0";
+        if (!t.startsWith("-")) {
+            t = (p.startsWith("-") && t.equals("0") ? "-" : "+") + t;
         }
+        return p + "/" + t;
+    }
 
-        return signedP + "/" + signedT;
+    public static String getBoostCountAsStr(int power, int toughness) {
+        return getBoostCountAsStr(StaticValue.get(power), StaticValue.get(toughness));
+    }
+
+    public static String getBoostText(DynamicValue power, DynamicValue toughness, Duration duration) {
+        String boostCount = getBoostCountAsStr(power, toughness);
+        StringBuilder sb = new StringBuilder(boostCount);
+        // don't include "for the rest of the game" for emblems, etc.
+        if (duration != Duration.EndOfGame) {
+            String d = duration.toString();
+            if (!d.isEmpty()) {
+                sb.append(" ").append(d);
+            }
+        }
+        String message = power.getMessage();
+        if (message.isEmpty()) {
+            message = toughness.getMessage();
+        }
+        if (!message.isEmpty()) {
+            sb.append(boostCount.contains("X") ? ", where X is " : " for each ").append(message);
+        }
+        return sb.toString();
     }
 
     public static boolean isSpliceAbility(Ability ability, Game game) {
@@ -910,6 +935,14 @@ public final class CardUtil {
     public static String getTextWithFirstCharUpperCase(String text) {
         if (text != null && text.length() >= 1) {
             return Character.toUpperCase(text.charAt(0)) + text.substring(1);
+        } else {
+            return text;
+        }
+    }
+
+    public static String getTextWithFirstCharLowerCase(String text) {
+        if (text != null && text.length() >= 1) {
+            return Character.toLowerCase(text.charAt(0)) + text.substring(1);
         } else {
             return text;
         }
@@ -964,7 +997,7 @@ public final class CardUtil {
         // same logic as ZonesHandler->maybeRemoveFromSourceZone
 
         // workaround to put real permanent from one side (example: you call mdf card by cheats)
-        Card permCard = getDefaultCardSideForBattlefield(newCard);
+        Card permCard = getDefaultCardSideForBattlefield(game, newCard);
 
         // prepare card and permanent
         permCard.setZone(Zone.BATTLEFIELD, game);
@@ -1002,12 +1035,17 @@ public final class CardUtil {
 
     /**
      * Choose default card's part to put on battlefield (for cheats and tests only)
+     * or to find a default card side (for copy effect)
      *
      * @param card
      * @return
      */
-    public static Card getDefaultCardSideForBattlefield(Card card) {
-        // chose left side all time
+    public static Card getDefaultCardSideForBattlefield(Game game, Card card) {
+        if (card instanceof PermanentCard) {
+            return card;
+        }
+
+        // must choose left side all time
         Card permCard;
         if (card instanceof SplitCard) {
             permCard = card;
@@ -1018,6 +1056,12 @@ public final class CardUtil {
         } else {
             permCard = card;
         }
+
+        // must be creature/planeswalker (if you catch this error then check targeting/copying code)
+        if (permCard.isInstantOrSorcery(game)) {
+            throw new IllegalArgumentException("Card side can't be put to battlefield: " + permCard.getName());
+        }
+
         return permCard;
     }
 
@@ -1124,7 +1168,7 @@ public final class CardUtil {
     }
 
     public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor) {
-        makeCardPlayable(game, source, card, duration, anyColor, null);
+        makeCardPlayable(game, source, card, duration, anyColor, null, null);
     }
 
     /**
@@ -1139,16 +1183,16 @@ public final class CardUtil {
      * @param anyColor
      * @param condition can be null
      */
-    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, Condition condition) {
+    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, UUID playerId, Condition condition) {
         // Effect can be used for cards in zones and permanents on battlefield
         // PermanentCard's ZCC is static, but we need updated ZCC from the card (after moved to another zone)
         // So there is a workaround to get actual card's ZCC
         // Example: Hostage Taker
         UUID objectId = card.getMainCard().getId();
         int zcc = game.getState().getZoneChangeCounter(objectId);
-        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, condition), source);
+        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, condition), source);
         if (anyColor) {
-            game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
+            game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, playerId, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
         }
     }
 
@@ -1408,5 +1452,4 @@ public final class CardUtil {
         effect.apply(game, source);
         return true;
     }
-
 }

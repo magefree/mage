@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ public final class EldraziMimic extends CardImpl {
     }
 
     public EldraziMimic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}");
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
@@ -76,7 +75,7 @@ class EldraziMimicEffect extends OneShotEffect {
             Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             if (permanent != null) {
                 ContinuousEffect effect = new SetPowerToughnessTargetEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn);
-                effect.setTargetPointer(new FixedTarget(source.getSourceId()));
+                effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
                 game.addEffect(effect, source);
                 return true;
             }

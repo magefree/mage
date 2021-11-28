@@ -30,7 +30,6 @@ public final class EcstaticAwakener extends CardImpl {
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.a.AwokenDemon.class;
 
         // {2}{B}, Sacrifice another creature: Draw a card, then transform Ecstatic Awakener. Activate only once each turn.
@@ -38,7 +37,7 @@ public final class EcstaticAwakener extends CardImpl {
         Ability ability = new LimitedTimesPerTurnActivatedAbility(
                 Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{B}")
         );
-        ability.addEffect(new TransformSourceEffect(true).concatBy(", then"));
+        ability.addEffect(new TransformSourceEffect().concatBy(", then"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         this.addAbility(ability);
     }

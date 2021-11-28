@@ -1,10 +1,10 @@
-
 package mage.filter;
+
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
 
 import java.io.Serializable;
 import java.util.List;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
 
 /**
  * @param <E>
@@ -28,6 +28,10 @@ public interface Filter<E> extends Serializable {
     void setMessage(String message);
 
     Filter<E> copy();
+
+    public boolean isLockedFilter();
+
+    public void setLockedFilter(boolean lockedFilter);
 
     List<Predicate<? super E>> getPredicates();
 }

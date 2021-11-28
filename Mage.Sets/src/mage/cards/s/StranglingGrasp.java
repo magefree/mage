@@ -38,7 +38,6 @@ public final class StranglingGrasp extends CardImpl {
 
         this.subtype.add(SubType.AURA);
         this.color.setBlack(true);
-        this.transformable = true;
         this.nightCard = true;
 
         // Enchant creature or planeswalker an opponent controls

@@ -8,7 +8,6 @@ import mage.game.events.GameEvent;
 
 /**
  * @author TheElk801
- * TODO: this is just a placeholder for the actual ability
  */
 public class BecomesDayOrNightTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -26,7 +25,7 @@ public class BecomesDayOrNightTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return false;
+        return event.getType() == GameEvent.EventType.BECOMES_DAY_NIGHT;
     }
 
     @Override

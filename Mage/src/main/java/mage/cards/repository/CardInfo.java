@@ -46,6 +46,11 @@ public class CardInfo {
     protected String setCode;
     @DatabaseField(indexName = "setCode_cardNumber_index")
     protected String cardNumber;
+    /**
+     * Fast access to numerical card number (number without prefix/postfix: 123b -> 123)
+     */
+    @DatabaseField(indexName = "cardNumberAsInt_index")
+    protected int cardNumberAsInt;
     @DatabaseField(indexName = "className_index")
     protected String className;
     @DatabaseField
@@ -124,6 +129,7 @@ public class CardInfo {
         this.name = card.getName();
         this.lower_name = name.toLowerCase(Locale.ENGLISH);
         this.cardNumber = card.getCardNumber();
+        this.cardNumberAsInt = CardUtil.parseCardNumberAsInt(card.getCardNumber());
         this.setCode = card.getExpansionSetCode();
         this.className = card.getClass().getCanonicalName();
         this.power = card.getPower().toString();
@@ -424,7 +430,7 @@ public class CardInfo {
     }
 
     public int getCardNumberAsInt() {
-        return CardUtil.parseCardNumberAsInt(cardNumber);
+        return cardNumberAsInt;
     }
 
     public boolean isSplitCard() {

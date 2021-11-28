@@ -31,7 +31,7 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
-        this.maxCardNumberInBooster = 275;
+        this.maxCardNumberInBooster = 281;
 
         cards.add(new SetCardInfo("+2 Mace", 1, Rarity.COMMON, mage.cards.p.Plus2Mace.class));
         cards.add(new SetCardInfo("Aberrant Mind Sorcerer", 44, Rarity.UNCOMMON, mage.cards.a.AberrantMindSorcerer.class));

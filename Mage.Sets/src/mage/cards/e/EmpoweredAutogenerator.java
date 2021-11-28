@@ -71,7 +71,7 @@ class EmpoweredAutogeneratorManaEffect extends ManaEffect {
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
         if (game != null) {
-            Permanent sourcePermanent = game.getState().getPermanent(source.getSourceId());
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent != null) {
                 int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE) + 1; // one counter will be added on real mana call
                 if (counters > 0) {
@@ -89,7 +89,7 @@ class EmpoweredAutogeneratorManaEffect extends ManaEffect {
             return mana;
         }
         game.getState().processAction(game);
-        Permanent sourcePermanent = game.getState().getPermanent(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent == null) {
             return mana;
         }

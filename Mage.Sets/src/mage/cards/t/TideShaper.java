@@ -35,7 +35,7 @@ public final class TideShaper extends CardImpl {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 0, false);
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, false);
     private static final Hint hint = new ConditionHint(condition);
 
     public TideShaper(UUID ownerId, CardSetInfo setInfo) {

@@ -1105,7 +1105,7 @@ public class ModernCardRenderer extends CardRenderer {
             g.setColor(defaultTextColor);
             g.drawString(ptText2, ptPosStart2, curY - ptTextOffset - 1); // center
             // t
-            g.setColor(CardRendererUtils.getCardTextColor(cardView.getOriginalCard().getPower(), CardRendererUtils.isCardWithDamage(cardView), defaultTextColor, defaultTextLight));
+            g.setColor(CardRendererUtils.getCardTextColor(cardView.getOriginalCard().getToughness(), CardRendererUtils.isCardWithDamage(cardView), defaultTextColor, defaultTextLight));
             g.drawString(ptText3, ptPosStart3, curY - ptTextOffset - 1); // right
             //
             g.setColor(defaultTextColor);

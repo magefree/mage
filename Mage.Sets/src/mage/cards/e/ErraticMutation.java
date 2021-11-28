@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -82,7 +81,7 @@ class ErraticMutationEffect extends OneShotEffect {
                 int boostValue = nonLandCard.getManaValue();
                 // unboost target
                 ContinuousEffect effect = new BoostTargetEffect(boostValue, -boostValue, Duration.EndOfTurn);
-                effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
+                effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source), game));
                 game.addEffect(effect, source);
             }
             // put the cards on the bottom of the library in any order

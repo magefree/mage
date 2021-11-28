@@ -9,6 +9,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.KickedSpellPredicate;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
+import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -24,10 +25,10 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public final class StaticFilters {
 
-    public static final FilterSpiritOrArcaneCard SPIRIT_OR_ARCANE_CARD = new FilterSpiritOrArcaneCard();
+    public static final FilterSpiritOrArcaneCard FILTER_SPIRIT_OR_ARCANE_CARD = new FilterSpiritOrArcaneCard();
 
     static {
-        SPIRIT_OR_ARCANE_CARD.setLockedFilter(true);
+        FILTER_SPIRIT_OR_ARCANE_CARD.setLockedFilter(true);
     }
 
     public static final FilterEnchantmentPermanent FILTER_ENCHANTMENT_PERMANENT = new FilterEnchantmentPermanent();
@@ -415,6 +416,13 @@ public final class StaticFilters {
         FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterCreaturePermanent FILTER_ANOTHER_CREATURE_TARGET_2 = new FilterCreaturePermanent("another target creature");
+
+    static {
+        FILTER_ANOTHER_CREATURE_TARGET_2.add(new AnotherTargetPredicate(2));
+        FILTER_ANOTHER_CREATURE_TARGET_2.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_CREATURE_YOU_DONT_CONTROL = new FilterCreaturePermanent("creature you don't control");
 
     static {
@@ -743,6 +751,10 @@ public final class StaticFilters {
     }
 
     public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterEquipmentPermanent();
+
+    static {
+        FILTER_PERMANENT_EQUIPMENT.setLockedFilter(true);
+    }
 
     public static final FilterPermanent FILTER_PERMANENT_FORTIFICATION = new FilterPermanent();
 

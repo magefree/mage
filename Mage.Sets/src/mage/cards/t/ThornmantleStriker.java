@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import java.util.Map;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -16,6 +17,8 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.counters.Counter;
+import mage.counters.Counters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -90,29 +93,51 @@ class ThornmantleStrikerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (controller != null && permanent != null) {
-            int toRemove = xValue.calculate(game, source, this);
-            int removed = 0;
-            String[] counterNames = permanent.getCounters(game).keySet().toArray(new String[0]);
-            for (String counterName : counterNames) {
-                if (controller.chooseUse(Outcome.Neutral, "Do you want to remove " + counterName + " counters?", source, game)) {
-                    if (permanent.getCounters(game).get(counterName).getCount() == 1 || (toRemove - removed == 1)) {
-                        permanent.removeCounters(counterName, 1, source, game);
-                        removed++;
-                    } else {
-                        int amount = controller.getAmount(1, Math.min(permanent.getCounters(game).get(counterName).getCount(), toRemove - removed), "How many?", game);
-                        if (amount > 0) {
-                            removed += amount;
-                            permanent.removeCounters(counterName, amount, source, game);
-                        }
-                    }
-                }
-                if (removed >= toRemove) {
-                    break;
-                }
+        if (controller == null || permanent == null) {
+            return false;
+        }
+        int elves = xValue.calculate(game, source, this);
+        if (elves < 1) {
+            return false;
+        }
+        // Make copy of counters to avoid concurrent modification exception
+        Counters counters = permanent.getCounters(game).copy();
+        int totalCounters = 0;
+        for (Counter counter : counters.values()) {
+            totalCounters += counter.getCount();
+        }
+        if (totalCounters == 0) {
+            return false;
+        }
+        if (totalCounters <= elves) {
+            for (Map.Entry<String, Counter> entry : counters.entrySet()) {
+                permanent.removeCounters(entry.getKey(), entry.getValue().getCount(), source, game);
             }
             return true;
         }
-        return false;
+        if (counters.size() == 1) {
+            String counterName = counters.keySet().iterator().next();
+            permanent.removeCounters(counterName, elves, source, game);
+            return true;
+        }
+        int remainingCounters = totalCounters;
+        int countersLeftToRemove = elves;
+        for (Map.Entry<String, Counter> entry : counters.entrySet()) {
+            String counterName = entry.getKey();
+            int numCounters = entry.getValue().getCount();
+            remainingCounters -= numCounters;
+            int min = Math.max(0, countersLeftToRemove - remainingCounters);
+            int max = Math.min(countersLeftToRemove, numCounters);
+            int toRemove = controller.getAmount(min, max, counterName + " counters to remove", game);
+            // Sanity check in case of GUI bugs/disconnects
+            toRemove = Math.max(toRemove, min);
+            toRemove = Math.min(toRemove, max);
+            permanent.removeCounters(counterName, toRemove, source, game);
+            countersLeftToRemove -= toRemove;
+            if (countersLeftToRemove <= 0) {
+                break;
+            }
+        }
+        return true;
     }
 }

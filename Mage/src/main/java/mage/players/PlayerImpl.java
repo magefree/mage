@@ -2063,11 +2063,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(this.getLogName() + " loses " + event.getAmount() + " life"
                         + (atCombat ? " at combat" : "") + CardUtil.getSourceLogName(game, " from ", needId, "", ""));
             }
-            if (amount > 0) {
+            if (event.getAmount() > 0) {
                 game.fireEvent(new GameEvent(GameEvent.EventType.LOST_LIFE,
-                        playerId, source, playerId, amount, atCombat));
+                        playerId, source, playerId, event.getAmount(), atCombat));
             }
-            return amount;
+            return event.getAmount();
         }
         return 0;
     }
@@ -2119,6 +2119,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             this.setLife(lifePlayer2, game, source);
             player.setLife(lifePlayer1, game, source);
         }
+    }
+
+    @Override
+    public int damage(int damage, Ability source, Game game) {
+        return doDamage(damage, source.getSourceId(), source, game, false, true, null);
     }
 
     @Override
@@ -2298,6 +2303,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void addAbility(Ability ability) {
         ability.setSourceId(playerId);
         this.abilities.add(ability);
+        this.abilities.addAll(ability.getSubAbilities());
     }
 
     @Override

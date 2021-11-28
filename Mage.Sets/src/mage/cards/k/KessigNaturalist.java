@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DayboundAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,14 +29,12 @@ public final class KessigNaturalist extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.l.LordOfTheUlvenwald.class;
 
         // Whenever Kessig Naturalist attacks, add {R} or {G}. Until end of turn, you don't lose this mana as steps and phases end.
         this.addAbility(new AttacksTriggeredAbility(new KessigNaturalistEffect()));
 
         // Daybound
-        this.addAbility(new TransformAbility());
         this.addAbility(new DayboundAbility());
     }
 

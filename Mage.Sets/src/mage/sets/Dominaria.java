@@ -1,15 +1,20 @@
 package mage.sets;
 
-import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
 import mage.collation.RarityConfiguration;
+import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.constants.SuperType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,7 +37,9 @@ public final class Dominaria extends ExpansionSet {
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 8;
+        this.ratioBoosterMythic = 10;
+        this.ratioBoosterSpecialRare = 4;
+        this.ratioBoosterSpecialMythic = 5;
         this.maxCardNumberInBooster = 269;
 
         cards.add(new SetCardInfo("Academy Drake", 40, Rarity.COMMON, mage.cards.a.AcademyDrake.class));
@@ -317,10 +324,22 @@ public final class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Zhalfirin Void", 249, Rarity.UNCOMMON, mage.cards.z.ZhalfirinVoid.class));
     }
 
+    // for sheet math reasons, four rare legendary creatures are collated as normal rares
+    // (a booster containing one of them will always contain an uncommon legend as well)
+    private static final List<String> nonSpecialLegends = Arrays.asList("Darigaaz Reincarnated", "Josu Vess, Lich Knight", "Muldrotha, the Gravetide", "Shalai, Voice of Plenty");
+
     @Override
-    protected boolean boosterIsValid(List<Card> booster) {
-        return super.boosterIsValid(booster)
-                && booster.stream().anyMatch(card -> card.isLegendary() && card.isCreature());
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findSpecialCardsByRarity(rarity);
+        cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
+                .setCodes(this.code)
+                .rarities(rarity)
+                .supertypes(SuperType.LEGENDARY)
+                .types(CardType.CREATURE)));
+        cardInfos.removeIf(cardInfo -> (
+                cardInfo.getCardNumberAsInt() > maxCardNumberInBooster
+                || nonSpecialLegends.contains(cardInfo.getName())));
+        return cardInfos;
     }
 
     @Override
@@ -339,7 +358,6 @@ class DominariaCollator implements BoosterCollator {
     private final CardRun uncommonA = new CardRun(true, "235", "119", "179", "145", "99", "38", "219", "175", "243", "33", "116", "210", "70", "160", "152", "81", "23", "235", "186", "242", "14", "130", "210", "54", "159", "121", "90", "38", "219", "180", "245", "23", "145", "179", "65", "186", "116", "82", "75", "121", "175", "99", "14", "119", "235", "70", "159", "130", "81", "54", "243", "160", "33", "82", "152", "210", "65", "180", "145", "90", "75", "242", "159", "99", "245", "116", "219", "70", "175", "119", "81", "65", "243", "186", "82", "38", "130", "235", "75", "160", "33", "121", "70", "152", "179", "90", "23", "145", "180", "54", "159", "116", "14", "65", "242", "179", "99", "38", "119", "210", "245", "180", "152", "23", "54", "243", "175", "90", "14", "130", "219", "242", "160", "121", "82", "75", "245", "186", "81", "33");
     private final CardRun uncommonB = new CardRun(true, "231", "103", "188", "31", "64", "222", "249", "161", "28", "185", "150", "213", "97", "8", "181", "49", "220", "246", "188", "228", "56", "123", "218", "93", "185", "30", "74", "231", "244", "181", "31", "64", "128", "222", "107", "161", "137", "51", "213", "249", "103", "28", "49", "150", "220", "97", "188", "123", "56", "228", "137", "246", "30", "64", "244", "218", "107", "161", "128", "74", "213", "249", "93", "31", "51", "150", "222", "103", "185", "123", "56", "231", "97", "8", "220", "74", "137", "228", "107", "181", "150", "49", "218", "244", "93", "28", "51", "128", "213", "188", "8", "137", "64", "222", "246", "97", "30", "56", "31", "231", "103", "28", "123", "74", "220", "249", "161", "107", "246", "51", "228", "185", "8", "128", "49", "218", "244", "93", "30", "181");
     private final CardRun uncommonLegend = new CardRun(true, "203", "109", "204", "66", "191", "4", "205", "111", "206", "12", "196", "165", "202", "69", "203", "113", "190", "109", "208", "25", "194", "148", "196", "12", "204", "66", "208", "111", "191", "165", "202", "4", "205", "113", "194", "148", "206", "25", "190", "69");
-    // Shalai (35), Josu Vess (95), Darigaaz (193) and Muldrotha (199) are on the non-legend sheet; boosters containing one of them will also contain an uncommon legend
     private final CardRun rare = new CardRun(false, "6", "13", "18", "35", "39", "42", "55", "57", "61", "68", "88", "95", "98", "102", "114", "122", "129", "131", "133", "143", "147", "166", "173", "182", "183", "184", "187", "200", "201", "211", "214", "215", "217", "223", "233", "238", "239", "240", "241", "247", "248", "6", "13", "18", "35", "39", "42", "55", "57", "61", "68", "88", "95", "98", "102", "114", "122", "129", "131", "133", "143", "147", "166", "173", "182", "183", "184", "187", "200", "201", "211", "214", "215", "217", "223", "233", "238", "239", "240", "241", "247", "248", "1", "21", "100", "132", "193", "199", "207", "224", "237");
     private final CardRun rareLegend = new CardRun(false, "16", "36", "58", "76", "96", "108", "146", "172", "192", "195", "198", "234", "16", "36", "58", "76", "96", "108", "146", "172", "192", "195", "198", "234", "26", "59", "86", "149", "174", "197");
     private final CardRun land = new CardRun(false, "250", "251", "252", "253", "254", "255", "256", "257", "258", "259", "260", "261", "262", "263", "264", "265", "266", "267", "268", "269");

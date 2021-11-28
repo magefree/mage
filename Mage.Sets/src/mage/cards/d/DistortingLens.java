@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class DistortingLens extends CardImpl {
 
     public DistortingLens(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {tap}: Target permanent becomes the color of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChangeColorEffect(), new TapSourceCost());
@@ -63,7 +62,7 @@ class ChangeColorEffect extends OneShotEffect {
         Permanent chosen = game.getPermanent(targetPointer.getFirst(game, source));
         if (player != null && permanent != null) {
             ContinuousEffect effect = new BecomesColorTargetEffect(null, Duration.EndOfTurn);
-            effect.setTargetPointer(new FixedTarget(chosen.getId()));
+            effect.setTargetPointer(new FixedTarget(chosen.getId(), game));
             game.addEffect(effect, source);
             return true;
         }

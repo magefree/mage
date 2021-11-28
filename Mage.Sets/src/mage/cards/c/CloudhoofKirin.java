@@ -35,7 +35,7 @@ public final class CloudhoofKirin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, you may have target player put the top X cards of their library into their graveyard, where X is that spell's converted mana cost.
-        Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new CloudhoofKirinEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, true, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new CloudhoofKirinEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true, true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

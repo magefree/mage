@@ -36,7 +36,6 @@ public final class InsidiousMist extends CardImpl {
         this.color.setBlue(true);
 
         this.nightCard = true;
-        this.transformable = true;
 
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
@@ -53,7 +52,7 @@ public final class InsidiousMist extends CardImpl {
 
         // Whenever Insideous Mist attacks and isn't blocked, you may pay {2}{B}. If you do, transform it.
         this.addAbility(new TransformAbility());
-        this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(new TransformSourceEffect(false), new ManaCostsImpl("{2}{B}"), "Pay {2}{B} to transform?")));
+        this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(new TransformSourceEffect(), new ManaCostsImpl("{2}{B}"), "Pay {2}{B} to transform?")));
     }
 
     private InsidiousMist(final InsidiousMist card) {

@@ -3,8 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.LandsYouControlCount;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
@@ -12,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -25,9 +23,6 @@ import java.util.UUID;
  */
 public final class AshayaSoulOfTheWild extends CardImpl {
 
-    private static final DynamicValue xValue
-            = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS);
-
     public AshayaSoulOfTheWild(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 
@@ -38,9 +33,8 @@ public final class AshayaSoulOfTheWild extends CardImpl {
 
         // Ashaya, Soul of the Wild’s power and toughness are each equal to the number of lands you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerToughnessSourceEffect(
-                xValue, Duration.EndOfGame
-        )));
+                Zone.ALL, new SetPowerToughnessSourceEffect(LandsYouControlCount.instance, Duration.EndOfGame)
+        ));
 
         // Nontoken creatures you control are Forest lands in addition to their other types. (They’re still affected by summoning sickness.)
         this.addAbility(new SimpleStaticAbility(new AshayaSoulOfTheWildEffect()));
