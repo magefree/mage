@@ -197,7 +197,7 @@ public class Commander extends Constructed {
                 .map(MageObject::getAbilities)
                 .filter(abilities -> abilities.contains(FriendsForeverAbility.getInstance()))
                 .count() != 2
-                && CardUtil
+                && !CardUtil
                 .castStream(commanders.stream().map(MageObject::getAbilities), PartnerWithAbility.class)
                 .map(PartnerWithAbility::getPartnerName)
                 .allMatch(commanderNames::contains)) {
