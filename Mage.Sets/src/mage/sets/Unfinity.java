@@ -36,6 +36,7 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 237, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 242, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Temple Garden", 281, Rarity.RARE, mage.cards.t.TempleGarden.class));
+        cards.add(new SetCardInfo("The Space Family Goblinson", 270, Rarity.UNCOMMON, mage.cards.t.TheSpaceFamilyGoblinson.class));
         cards.add(new SetCardInfo("Watery Grave", 278, Rarity.RARE, mage.cards.w.WateryGrave.class));
     }
 }
