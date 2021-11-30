@@ -16,6 +16,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.token.HumanSoldierToken;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -114,7 +115,7 @@ class ValiantRescuerWatcher extends Watcher {
                 && item.getStackAbility() instanceof CyclingAbility) {
             playerMap.computeIfAbsent(event.getPlayerId(), u -> new HashMap<>());
             playerMap.get(event.getPlayerId()).compute(
-                    event.getSourceId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1)
+                    event.getSourceId(), CardUtil::setOrIncrementValue
             );
         }
     }

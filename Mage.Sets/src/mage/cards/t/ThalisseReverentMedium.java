@@ -14,6 +14,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.SpiritWhiteToken;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -93,7 +94,7 @@ class ThalisseReverentMediumWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.CREATED_TOKEN) {
             return;
         }
-        tokenMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+        tokenMap.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
     }
 
     @Override

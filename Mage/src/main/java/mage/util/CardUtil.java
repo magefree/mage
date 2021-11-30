@@ -1452,4 +1452,8 @@ public final class CardUtil {
         effect.apply(game, source);
         return true;
     }
+
+    public static <T> int setOrIncrementValue(T u, Integer i) {
+        return i == null ? 1 : Integer.sum(i, 1);
+    }
 }

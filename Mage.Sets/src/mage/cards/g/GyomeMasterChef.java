@@ -27,6 +27,7 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.FoodToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -118,7 +119,7 @@ class GyomeMasterChefWatcher extends Watcher {
         if (permanent == null || permanent instanceof PermanentToken || !permanent.isCreature(game)) {
             return;
         }
-        playerMap.compute(event.getPlayerId(), (u, i) -> i != null ? Integer.sum(i, 1) : 1);
+        playerMap.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
     }
 
     @Override

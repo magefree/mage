@@ -19,6 +19,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -103,7 +104,7 @@ class TheSpaceFamilyGoblinsonWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DIE_ROLLED) {
-            map.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+            map.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
         }
     }
 

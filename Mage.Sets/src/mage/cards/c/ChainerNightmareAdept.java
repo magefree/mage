@@ -18,6 +18,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 import mage.watchers.common.CastFromHandWatcher;
 
@@ -147,7 +148,7 @@ class ChainerNightmareAdeptWatcher extends Watcher {
                 source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
         );
         morMap.computeIfAbsent(mor, m -> new HashMap<>())
-                .compute(source.getControllerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+                .compute(source.getControllerId(), CardUtil::setOrIncrementValue);
     }
 }
 

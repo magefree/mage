@@ -16,6 +16,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -90,7 +91,7 @@ class HawkinsNationalLaboratoryWatcher extends Watcher {
         if (permanent == null || !permanent.hasSubtype(SubType.CLUE, game)) {
             return;
         }
-        playerMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+        playerMap.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
     }
 
     @Override
