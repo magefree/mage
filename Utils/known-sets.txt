@@ -214,6 +214,7 @@ Torment|Torment|
 Ugin's Fate|UginsFate|
 Unglued|Unglued|
 Unhinged|Unhinged|
+Unfinity|Unfinity|
 Unlimited Edition|UnlimitedEdition|
 Unstable|Unstable|
 Urza's Destiny|UrzasDestiny|

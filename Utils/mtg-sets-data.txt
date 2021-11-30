@@ -212,6 +212,7 @@ Ugin's Fate|UGIN|
 Unglued|UGL|
 Urza's Legacy|ULG|
 Unhinged|UNH|
+Unfinity|UNF|
 Urza's Saga|USG|
 Unstable|UST|
 HASCON Promo 2017|H17|
