@@ -9,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 
@@ -23,6 +24,7 @@ public final class ThaliaHereticCathar extends CardImpl {
             = new FilterPermanent("creatures and nonbasic lands your opponents control");
 
     static {
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
                 Predicates.and(
