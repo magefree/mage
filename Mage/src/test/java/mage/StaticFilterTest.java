@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author TheElk801
@@ -15,15 +18,33 @@ public class StaticFilterTest {
 
     @Test
     public void testStaticFilters() throws IllegalAccessException {
+        List<String> errors = new ArrayList<>();
         for (Field field : StaticFilters.class.getFields()) {
-            Assert.assertTrue("Field must be public: " + field, Modifier.isPublic(field.getModifiers()));
-            Assert.assertTrue("Field must be static: " + field, Modifier.isStatic(field.getModifiers()));
-            Assert.assertTrue("Field must be final: " + field, Modifier.isFinal(field.getModifiers()));
-            Assert.assertTrue("Field name must start with \"FILTER_\"", field.getName().startsWith("FILTER_"));
-            Assert.assertEquals("Field name must be all upper case letters", field.getName().toUpperCase(), field.getName());
+            if (!Modifier.isPublic(field.getModifiers())) {
+                errors.add("Field must be public: " + field);
+            }
+            if (!Modifier.isStatic(field.getModifiers())) {
+                errors.add("Field must be static: " + field);
+            }
+            if (!Modifier.isFinal(field.getModifiers())) {
+                errors.add("Field must be final: " + field);
+            }
+            if (!field.getName().startsWith("FILTER_")) {
+                errors.add("Field name must start with \"FILTER_\"");
+            }
+            if (!Objects.equals(field.getName().toUpperCase(), field.getName())) {
+                errors.add("Field name must be all upper case letters");
+            }
             Object filter = field.get(field.getType());
-            Assert.assertTrue("Field must be a filter: " + field, filter instanceof Filter);
-            Assert.assertTrue("Field must be locked: " + field, ((Filter) filter).isLockedFilter());
+            if (!(filter instanceof Filter)) {
+                errors.add("Field must be a filter: " + field);
+            } else if (!((Filter) filter).isLockedFilter()) {
+                errors.add("Field must be locked: " + field);
+            }
         }
+        if (errors.size() > 0) {
+            errors.stream().forEach(System.out::println);
+        }
+        Assert.assertFalse("There were errors found in Static Filters", errors.size() > 0);
     }
 }
