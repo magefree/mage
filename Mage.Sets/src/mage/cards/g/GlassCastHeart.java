@@ -44,7 +44,7 @@ public final class GlassCastHeart extends CardImpl {
 
         // Whenever one or more Vampires you control attack, create a Blood token.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(
-                new CreateTokenEffect(new BloodToken()), 0, filter
+                new CreateTokenEffect(new BloodToken()), 1, filter
         ).setTriggerPhrase("Whenever one or more Vampires you control attack, "));
 
         // {B}, {T}, Pay 1 life: Create a 1/1 white and black Vampire creature token with lifelink.

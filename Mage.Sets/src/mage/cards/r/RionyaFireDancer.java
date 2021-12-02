@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -121,7 +122,7 @@ class RionyaFireDancerWatcher extends Watcher {
         }
         Spell spell = game.getSpell(event.getTargetId());
         if (spell != null && spell.isInstantOrSorcery(game)) {
-            playerMap.compute(spell.getControllerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+            playerMap.compute(spell.getControllerId(), CardUtil::setOrIncrementValue);
         }
     }
 

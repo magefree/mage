@@ -6,6 +6,7 @@ import mage.game.Game;
 import mage.game.events.VoteEvent;
 import mage.game.events.VotedEvent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -86,7 +87,7 @@ public abstract class VoteHandler<T> {
                 .stream()
                 .flatMap(votesList -> votesList.getValue().stream())
                 .forEach(vote -> {
-                    totalVotes.compute(vote, (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+                    totalVotes.compute(vote, CardUtil::setOrIncrementValue);
                 });
 
         Set<T> winners = this.getMostVoted();
@@ -157,7 +158,7 @@ public abstract class VoteHandler<T> {
                 .values()
                 .stream()
                 .flatMap(Collection::stream)
-                .forEach(t -> map.compute(t, (s, i) -> i == null ? 1 : Integer.sum(i, 1)));
+                .forEach(t -> map.compute(t, CardUtil::setOrIncrementValue));
         int max = map.values().stream().mapToInt(x -> x).max().orElse(0);
         return map
                 .entrySet()

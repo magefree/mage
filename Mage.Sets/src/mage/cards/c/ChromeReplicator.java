@@ -17,6 +17,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Construct4Token;
+import mage.util.CardUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,6 +76,6 @@ enum ChromeReplicatorCondition implements Condition {
                 .map(MageObject::getName)
                 .filter(Objects::nonNull)
                 .filter(s -> !s.isEmpty())
-                .anyMatch(s -> nameMap.compute(s, (x, i) -> i == null ? 1 : Integer.sum(i, 1)) >= 2);
+                .anyMatch(s -> nameMap.compute(s, CardUtil::setOrIncrementValue) >= 2);
     }
 }

@@ -100,13 +100,13 @@ class WarsTollAttackRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttackCheckAfter(int numberOfAttackers, Ability source, Game game, boolean canUseChooseDialogs) {
-        int creaturesAbleToAttack = 0;
+        if (numberOfAttackers == 0) return true;
         for (Permanent creaturePermanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, game.getActivePlayerId(), game)) {
-            if (creaturePermanent.canAttackInPrinciple(null, game)) {
-                creaturesAbleToAttack++;
+            if (creaturePermanent.canAttack(null, game) && !creaturePermanent.isAttacking()) {
+                return false;
             }
         }
-        return numberOfAttackers == 0 || numberOfAttackers == creaturesAbleToAttack;
+        return true;
     }
 
     @Override

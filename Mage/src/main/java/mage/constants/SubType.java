@@ -171,6 +171,7 @@ public enum SubType {
     GRAVEBORN("Graveborn", SubTypeSet.CreatureType),
     GREMLIN("Gremlin", SubTypeSet.CreatureType),
     GRIFFIN("Griffin", SubTypeSet.CreatureType),
+    GUEST("Guest", SubTypeSet.CreatureType),
     GUNGAN("Gungan", SubTypeSet.CreatureType, true), // Star Wars
     // H
     HAG("Hag", SubTypeSet.CreatureType),

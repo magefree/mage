@@ -12,6 +12,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.constants.*;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
@@ -24,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import mage.counters.CounterType;
 
 /**
  * @author LevelX2
@@ -82,11 +82,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     }
 
     /**
-     * @param playerId null the token is controlled/owned by the controller of
-     * the source ability
+     * @param playerId           null the token is controlled/owned by the controller of
+     *                           the source ability
      * @param additionalCardType the token gains this card type in addition
-     * @param hasHaste the token gains haste
-     * @param number number of tokens to put into play
+     * @param hasHaste           the token gains haste
+     * @param number             number of tokens to put into play
      * @param tapped
      * @param attacking
      */
@@ -341,7 +341,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         Arrays.stream(abilities).forEach(this.additionalAbilities::add);
     }
 
-    public void setSavedPermanent(Permanent savedPermanent) {
+    public CreateTokenCopyTargetEffect setSavedPermanent(Permanent savedPermanent) {
         this.savedPermanent = savedPermanent;
+        return this;
     }
 }
