@@ -85,7 +85,7 @@ enum UmbrisFearManifestValue implements DynamicValue {
                 .flatMap(Collection::stream)
                 .filter(Objects::nonNull)
                 .map(Card::getOwnerId)
-                .filter(game.getOpponents(sourceAbility.getSourceId())::contains)
+                .filter(game.getOpponents(sourceAbility.getControllerId())::contains)
                 .mapToInt(x -> 1)
                 .sum();
     }
