@@ -25,6 +25,7 @@
                     https://jira.codehaus.org/browse/MCOMPILER-209
                     -->
                     <useIncrementalCompilation>false</useIncrementalCompilation>
+                    	<fork>true</fork>
                     <!--                    <compilerArgument>-Xlint:all</compilerArgument> -->
                 </configuration>
             </plugin>
