@@ -1,6 +1,5 @@
 package mage.deck;
 
-
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.DeckValidatorErrorType;

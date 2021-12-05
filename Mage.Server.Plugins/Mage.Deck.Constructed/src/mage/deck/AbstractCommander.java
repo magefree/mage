@@ -307,7 +307,8 @@ public abstract class AbstractCommander extends Constructed {
                 if (ability instanceof CompanionAbility) {
                     CompanionAbility companionAbility = (CompanionAbility) ability;
                     if (!companionAbility.isLegal(cards, getDeckMinSize())) {
-                        addError(DeckValidatorErrorType.PRIMARY, companion.getName(), "Commander Companion (deck invalid for companion)", true);
+                        addError(DeckValidatorErrorType.PRIMARY, companion.getName(),
+                                String.format("Commander companion illegal: %s", companionAbility.getLegalRule()), true);
                         valid = false;
                     }
                     break;
