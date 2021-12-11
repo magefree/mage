@@ -1,5 +1,6 @@
 package mage.filter;
 
+import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -7,6 +8,7 @@ import mage.constants.TargetController;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.KickedSpellPredicate;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.filter.predicate.other.AnotherTargetPredicate;
@@ -567,6 +569,20 @@ public final class StaticFilters {
     static {
         FILTER_PERMANENT_CREATURES_CONTROLLED.add(TargetController.YOU.getControllerPredicate());
         FILTER_PERMANENT_CREATURES_CONTROLLED.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_NON_BLACK = new FilterCreaturePermanent("nonblack creature");
+
+    static {
+        FILTER_PERMANENT_CREATURE_NON_BLACK.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+        FILTER_PERMANENT_CREATURE_NON_BLACK.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURES_NON_BLACK = new FilterCreaturePermanent("nonblack creatures");
+
+    static {
+        FILTER_PERMANENT_CREATURES_NON_BLACK.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+        FILTER_PERMANENT_CREATURES_NON_BLACK.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_GOBLINS = new FilterCreaturePermanent(SubType.GOBLIN, "Goblin creatures");

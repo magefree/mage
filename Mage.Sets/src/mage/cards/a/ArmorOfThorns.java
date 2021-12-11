@@ -1,8 +1,6 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SacrificeIfCastAtInstantTimeTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,9 +11,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -25,12 +21,6 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class ArmorOfThorns extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
-
-    static {
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-    }
-
     public ArmorOfThorns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
         this.subtype.add(SubType.AURA);
@@ -39,7 +29,7 @@ public final class ArmorOfThorns extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame)));
         this.addAbility(new SacrificeIfCastAtInstantTimeTriggeredAbility());
         // Enchant nonblack creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
+        TargetPermanent auraTarget = new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

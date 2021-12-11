@@ -1,8 +1,6 @@
-
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -14,9 +12,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -27,12 +24,10 @@ import java.util.UUID;
  */
 public final class BountyHunter extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with a bounty counter on it");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a bounty counter on it");
 
     static {
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-        filter2.add(CounterType.BOUNTY.getPredicate());
+        filter.add(CounterType.BOUNTY.getPredicate());
     }
 
     public BountyHunter(UUID ownerId, CardSetInfo setInfo) {
@@ -43,11 +38,11 @@ public final class BountyHunter extends CardImpl {
 
         // {tap}: Put a bounty counter on target nonblack creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.addAbility(ability);
         // {tap}: Destroy target creature with a bounty counter on it.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter2));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
