@@ -15,7 +15,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -29,6 +28,7 @@ public class ProtectionAbility extends StaticAbility {
     protected boolean removeAuras;
     protected boolean removeEquipment;
     protected boolean doesntRemoveControlled;
+    protected ObjectColor fromColor;
     protected UUID auraIdNotToBeRemoved; // defines an Aura objectId that will not be removed from this protection ability
 
     public ProtectionAbility(Filter filter) {
@@ -37,6 +37,7 @@ public class ProtectionAbility extends StaticAbility {
         this.removeAuras = true;
         this.removeEquipment = true;
         this.doesntRemoveControlled = false;
+        this.fromColor = new ObjectColor();
         this.auraIdNotToBeRemoved = null;
     }
 
@@ -46,19 +47,25 @@ public class ProtectionAbility extends StaticAbility {
         this.removeAuras = ability.removeAuras;
         this.removeEquipment = ability.removeEquipment;
         this.doesntRemoveControlled = ability.doesntRemoveControlled;
+        this.fromColor = ability.fromColor;
         this.auraIdNotToBeRemoved = ability.auraIdNotToBeRemoved;
     }
 
     public static ProtectionAbility from(ObjectColor color) {
         FilterObject filter = new FilterObject(getFilterText(color));
         filter.add(new ColorPredicate(color));
-        return new ProtectionAbility(filter);
+        ProtectionAbility ability = new ProtectionAbility(filter);
+        ability.getFromColor().addColor(color);
+        return ability;
     }
 
     public static ProtectionAbility from(ObjectColor color1, ObjectColor color2) {
         FilterObject filter = new FilterObject(color1.getDescription() + " and from " + color2.getDescription());
         filter.add(Predicates.or(new ColorPredicate(color1), new ColorPredicate(color2)));
-        return new ProtectionAbility(filter);
+        ProtectionAbility ability = new ProtectionAbility(filter);
+        ability.getFromColor().addColor(color1);
+        ability.getFromColor().addColor(color2);
+        return ability;
     }
 
     @Override
@@ -165,6 +172,10 @@ public class ProtectionAbility extends StaticAbility {
 
     public boolean getDoesntRemoveControlled() {
         return doesntRemoveControlled;
+    }
+
+    public ObjectColor getFromColor() {
+        return fromColor;
     }
 
     public UUID getAuraIdNotToBeRemoved() {
