@@ -13,7 +13,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -26,18 +25,12 @@ import java.util.UUID;
  */
 public final class OpalTitan extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("creature spell");
-
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-    }
-
     public OpalTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // When an opponent casts a creature spell, if Opal Titan is an enchantment, Opal Titan becomes a 4/4 Giant creature with protection from each of that spell's colors.
         TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new OpalTitanBecomesCreatureEffect(),
-                filter, false, SetTargetPointer.SPELL);
+                StaticFilters.FILTER_SPELL_A_CREATURE, false, SetTargetPointer.SPELL);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT),
                 "When an opponent casts a creature spell, if Opal Titan is an enchantment, Opal Titan becomes a 4/4 Giant creature with protection from each of that spell's colors."));
 
@@ -87,27 +80,22 @@ class OpalTitanBecomesCreatureEffect extends ContinuousEffectImpl implements Sou
         if (permanent != null) {
             switch (layer) {
                 case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.removeAllCardTypes(game);
-                        permanent.addCardType(game, CardType.CREATURE);
-                        permanent.removeAllSubTypes(game);
-                        permanent.addSubType(game, SubType.GIANT);
-                    }
+                    permanent.removeAllCardTypes(game);
+                    permanent.addCardType(game, CardType.CREATURE);
+                    permanent.removeAllSubTypes(game);
+                    permanent.addSubType(game, SubType.GIANT);
                     break;
                 case AbilityAddingRemovingEffects_6:
-                    if (sublayer == SubLayer.NA) {
-                        if (game.getState().getValue("opalTitanColor" + source.getSourceId()) != null) {
-                            for (ObjectColor color : ((ObjectColor) game.getState().getValue("opalTitanColor" + source.getSourceId())).getColors()) {
-                                if (!permanent.getAbilities().contains(ProtectionAbility.from(color))) {
-                                    permanent.addAbility(ProtectionAbility.from(color));
-                                }
+                    if (game.getState().getValue("opalTitanColor" + source.getSourceId()) != null) {
+                        for (ObjectColor color : ((ObjectColor) game.getState().getValue("opalTitanColor" + source.getSourceId())).getColors()) {
+                            if (!permanent.getAbilities().contains(ProtectionAbility.from(color))) {
+                                permanent.addAbility(ProtectionAbility.from(color), source.getSourceId(), game);
                             }
                         }
                     }
                     break;
                 case PTChangingEffects_7:
-                    if ((sublayer == SubLayer.CharacteristicDefining_7a)
-                            || (sublayer == SubLayer.SetPT_7b)) {
+                    if (sublayer == SubLayer.SetPT_7b) {
                         permanent.getPower().setValue(4);
                         permanent.getToughness().setValue(4);
                     }
