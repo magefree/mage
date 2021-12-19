@@ -1,12 +1,10 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -33,10 +31,8 @@ public final class MobileFort extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         
         // {3}: Mobile Fort gets +3/-1 until end of turn and can attack this turn as though it didn't have defender. Activate this ability only once each turn.
-        Effect effect = new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn);
-        effect.setText("and can attack this turn as though it didn't have defender");
-        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, -1, Duration.EndOfTurn), new ManaCostsImpl("{3}"));
-        ability.addEffect(effect);
+        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, -1, Duration.EndOfTurn), new GenericManaCost(3));
+        ability.addEffect(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn, "and"));
         this.addAbility(ability);
     }
 
