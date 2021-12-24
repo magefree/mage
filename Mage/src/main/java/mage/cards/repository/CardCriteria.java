@@ -30,6 +30,7 @@ public class CardCriteria {
     private final List<SubType> subtypes;
     private final List<Rarity> rarities;
     private Boolean doubleFaced;
+    private Boolean modalDoubleFaced;
     private boolean black;
     private boolean blue;
     private boolean green;
@@ -97,6 +98,11 @@ public class CardCriteria {
 
     public CardCriteria doubleFaced(boolean doubleFaced) {
         this.doubleFaced = doubleFaced;
+        return this;
+    }
+
+    public CardCriteria modalDoubleFaced(boolean modalDoubleFaced) {
+        this.modalDoubleFaced = modalDoubleFaced;
         return this;
     }
 
@@ -212,6 +218,11 @@ public class CardCriteria {
 
         if (doubleFaced != null) {
             where.eq("doubleFaced", doubleFaced);
+            clausesCount++;
+        }
+
+        if (modalDoubleFaced != null) {
+            where.eq("modalDoubleFacesCard", modalDoubleFaced);
             clausesCount++;
         }
 
@@ -410,6 +421,10 @@ public class CardCriteria {
 
     public Boolean getDoubleFaced() {
         return doubleFaced;
+    }
+
+    public Boolean getModalDoubleFaced() {
+        return modalDoubleFaced;
     }
 
     public boolean isBlack() {
