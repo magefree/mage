@@ -245,7 +245,8 @@ class DarkAscensionCollator implements BoosterCollator {
     private final CardRun commonB = new CardRun(true, "103", "126", "29", "8", "73", "88", "60", "111", "19", "15", "29", "107", "35", "126", "150", "90", "73", "129", "6", "15", "68", "46", "155", "105", "72", "14", "129", "77", "38", "6", "121", "88", "134", "31", "111", "72", "103", "35", "19", "121", "90", "14", "31", "68", "105", "8", "60", "150", "134", "155", "38", "107", "46", "77");
     private final CardRun uncommonA = new CardRun(true, "5", "128", "101", "153", "45", "145", "12", "67", "78", "117", "97", "44", "153", "5", "136", "57", "128", "135", "101", "154", "53", "7", "12", "57", "116", "135", "97", "44", "58", "92", "12", "136", "145", "117", "5", "78", "116", "92", "53", "58", "145", "10", "97", "7", "116", "45", "67", "154", "58", "10", "92", "44", "117", "153", "7", "78", "128", "45", "101", "67", "136", "53", "10", "135", "154", "57");
     private final CardRun uncommonB = new CardRun(true, "83", "48", "16", "144", "127", "104", "42", "130", "48", "16", "84", "79", "141", "32", "130", "26", "127", "74", "83", "9", "42", "61", "144", "143", "108", "84", "26", "141", "127", "9", "48", "104", "74", "143", "79", "144", "108", "26", "32", "83", "104", "61", "42", "143", "16", "141", "130", "84", "32", "74", "108", "9", "79", "61");
-    private final CardRun rare = new CardRun(false, "11", "18", "20", "23", "24", "25", "30", "33", "34", "36", "37", "39", "41", "56", "62", "63", "64", "69", "80", "82", "85", "89", "93", "95", "96", "112", "114", "115", "120", "123", "124", "149", "152", "156", "158", "11", "18", "20", "23", "24", "25", "30", "33", "34", "36", "37", "39", "41", "56", "62", "63", "64", "69", "80", "82", "85", "89", "93", "95", "96", "112", "114", "115", "120", "123", "124", "149", "152", "156", "158", "1", "28", "70", "99", "131", "137", "138", "139", "142", "151");
+    private final CardRun rare = new CardRun(false, "11", "18", "20", "23", "24", "25", "30", "33", "34", "36", "37", "39", "41", "56", "62", "63", "64", "69", "80", "82", "85", "89", "93", "95", "96", "112", "114", "115", "120", "123", "124", "149", "152", "156", "158");
+    private final CardRun mythic = new CardRun(false, "1", "28", "70", "99", "131", "137", "138", "139", "142", "151");
     private final CardRun doubleFaced = new CardRun(false, "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "13", "55", "94", "125", "50", "81", "122", "146", "50", "81", "122", "146", "50", "81", "122", "146", "50", "81", "122", "146", "50", "81", "122", "146", "50", "81", "122", "146", "50", "81", "122", "146", "50", "81", "122", "146", "50", "81", "122", "146", "71", "98", "133", "71", "98", "133", "71", "98", "133", "140", "147", "140", "147");
     private final CardRun land = new CardRun(false, "ISD_250", "ISD_251", "ISD_252", "ISD_253", "ISD_254", "ISD_255", "ISD_256", "ISD_257", "ISD_258", "ISD_259", "ISD_260", "ISD_261", "ISD_262", "ISD_263", "ISD_264");
 
@@ -256,6 +257,7 @@ class DarkAscensionCollator implements BoosterCollator {
     private final BoosterStructure AAB = new BoosterStructure(uncommonA, uncommonA, uncommonB);
     private final BoosterStructure ABB = new BoosterStructure(uncommonA, uncommonB, uncommonB);
     private final BoosterStructure R1 = new BoosterStructure(rare);
+    private final BoosterStructure M1 = new BoosterStructure(mythic);
     private final BoosterStructure D1 = new BoosterStructure(doubleFaced);
     private final BoosterStructure L1 = new BoosterStructure(land);
 
@@ -268,7 +270,7 @@ class DarkAscensionCollator implements BoosterCollator {
             AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB,
             ABB, ABB, ABB, ABB, ABB, ABB, ABB
     );
-    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1, R1, R1, R1, R1, R1, R1, M1);
     private final RarityConfiguration dfcRuns = new RarityConfiguration(D1);
     private final RarityConfiguration landRuns = new RarityConfiguration(L1);
 

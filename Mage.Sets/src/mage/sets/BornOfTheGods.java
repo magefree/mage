@@ -214,7 +214,8 @@ class BornOfTheGodsCollator implements BoosterCollator {
     private final CardRun commonB = new CardRun(true, "99", "120", "77", "100", "19", "8", "127", "60", "3", "106", "141", "45", "90", "77", "53", "100", "117", "127", "36", "3", "64", "99", "134", "35", "34", "106", "74", "141", "8", "22", "36", "102", "125", "52", "21", "134", "60", "93", "90", "34", "120", "19", "74", "102", "53", "117", "64", "35", "21", "93", "125", "22", "52", "45");
     private final CardRun uncommonA = new CardRun(true, "12", "158", "54", "2", "71", "132", "4", "114", "30", "162", "62", "116", "158", "50", "112", "23", "54", "140", "71", "12", "2", "29", "47", "143", "160", "109", "79", "162", "42", "112", "146", "133", "23", "47", "59", "113", "150", "116", "154", "30", "83", "88", "146", "160", "32", "87", "109", "143", "59", "50", "150", "114", "154", "132", "79", "32", "113", "4", "140", "83", "87", "29", "42", "88", "62", "133");
     private final CardRun uncommonB = new CardRun(true, "14", "37", "65", "130", "111", "147", "6", "161", "58", "122", "43", "40", "92", "28", "128", "65", "153", "56", "105", "135", "1", "61", "43", "101", "155", "128", "13", "81", "37", "126", "92", "14", "58", "56", "28", "161", "135", "84", "147", "130", "1", "105", "155", "6", "81", "126", "153", "111", "84", "13", "122", "40", "101", "61");
-    private final CardRun rare = new CardRun(false, "7", "11", "17", "24", "26", "27", "31", "39", "44", "48", "55", "57", "66", "68", "69", "73", "75", "80", "94", "96", "98", "103", "108", "115", "119", "121", "123", "124", "129", "137", "157", "159", "163", "164", "165", "7", "11", "17", "24", "26", "27", "31", "39", "44", "48", "55", "57", "66", "68", "69", "73", "75", "80", "94", "96", "98", "103", "108", "115", "119", "121", "123", "124", "129", "137", "157", "159", "163", "164", "165", "5", "63", "97", "144", "145", "148", "149", "151", "152", "156");
+    private final CardRun rare = new CardRun(false, "7", "11", "17", "24", "26", "27", "31", "39", "44", "48", "55", "57", "66", "68", "69", "73", "75", "80", "94", "96", "98", "103", "108", "115", "119", "121", "123", "124", "129", "137", "157", "159", "163", "164", "165");
+    private final CardRun mythic = new CardRun(false, "5", "63", "97", "144", "145", "148", "149", "151", "152", "156");
     private final CardRun land = new CardRun(false, "THS_230", "THS_231", "THS_232", "THS_233", "THS_234", "THS_235", "THS_236", "THS_237", "THS_238", "THS_239", "THS_240", "THS_241", "THS_242", "THS_243", "THS_244", "THS_245", "THS_246", "THS_247", "THS_248", "THS_249");
 
     private final BoosterStructure AAAAABBBBB = new BoosterStructure(
@@ -228,6 +229,7 @@ class BornOfTheGodsCollator implements BoosterCollator {
     private final BoosterStructure AAB = new BoosterStructure(uncommonA, uncommonA, uncommonB);
     private final BoosterStructure ABB = new BoosterStructure(uncommonA, uncommonB, uncommonB);
     private final BoosterStructure R1 = new BoosterStructure(rare);
+    private final BoosterStructure M1 = new BoosterStructure(mythic);
     private final BoosterStructure L1 = new BoosterStructure(land);
 
     private final RarityConfiguration commonRuns = new RarityConfiguration(AAAAABBBBB, AAAAAABBBB);
@@ -239,7 +241,7 @@ class BornOfTheGodsCollator implements BoosterCollator {
             AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB,
             ABB, ABB, ABB, ABB, ABB, ABB, ABB
     );
-    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1, R1, R1, R1, R1, R1, R1, M1);
     private final RarityConfiguration landRuns = new RarityConfiguration(L1);
 
     @Override
