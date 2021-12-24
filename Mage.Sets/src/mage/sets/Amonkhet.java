@@ -327,8 +327,7 @@ public final class Amonkhet extends ExpansionSet {
     protected List<CardInfo> findCardsByRarity(Rarity rarity) {
         List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
         if (rarity == Rarity.SPECIAL) {
-            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("MP2")));
-            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() > 30);
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("MP2").maxCardNumber(30)));
         }
         return cardInfos;
     }

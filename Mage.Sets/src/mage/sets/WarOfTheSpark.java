@@ -355,8 +355,8 @@ public final class WarOfTheSpark extends ExpansionSet {
         cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
                 .setCodes(this.code)
                 .rarities(rarity)
-                .types(CardType.PLANESWALKER)));
-        cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() > maxCardNumberInBooster);
+                .types(CardType.PLANESWALKER)
+                .maxCardNumber(maxCardNumberInBooster)));
         return cardInfos;
     }
 

@@ -229,8 +229,7 @@ public final class OathOfTheGatewatch extends ExpansionSet {
             // only the full-art versions of Wastes are found in boosters
             cardInfos.removeIf(cardInfo -> cardInfo.getCardNumber().contains("a"));
         } else if (rarity == Rarity.SPECIAL) {
-            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("EXP")));
-            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() < 26);
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("EXP").minCardNumber(26)));
         }
         return cardInfos;
     }

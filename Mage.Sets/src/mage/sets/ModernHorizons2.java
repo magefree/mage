@@ -552,13 +552,11 @@ public final class ModernHorizons2 extends ExpansionSet {
 
     @Override
     protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
-        List<CardInfo> cardInfos = CardRepository
-                .instance
-                .findCards(new CardCriteria().setCodes(this.code).rarities(rarity));
-        cardInfos.removeIf(cardInfo -> (
-                cardInfo.getCardNumberAsInt() < 262
-                || cardInfo.getCardNumberAsInt() > maxCardNumberInBooster));
-        return cardInfos;
+        return CardRepository.instance.findCards(new CardCriteria()
+                .setCodes(this.code)
+                .rarities(rarity)
+                .minCardNumber(262)
+                .maxCardNumber(maxCardNumberInBooster));
     }
 
     @Override

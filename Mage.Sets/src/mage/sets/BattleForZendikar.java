@@ -340,8 +340,7 @@ public final class BattleForZendikar extends ExpansionSet {
             // only the full-art basic lands are found in boosters
             cardInfos.removeIf(cardInfo -> cardInfo.getCardNumber().contains("a"));
         } else if (rarity == Rarity.SPECIAL) {
-            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("EXP")));
-            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() > 25);
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("EXP").maxCardNumber(25)));
         }
         return cardInfos;
     }

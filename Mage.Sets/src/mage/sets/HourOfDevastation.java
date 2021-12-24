@@ -249,8 +249,7 @@ public final class HourOfDevastation extends ExpansionSet {
     protected List<CardInfo> findCardsByRarity(Rarity rarity) {
         List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
         if (rarity == Rarity.SPECIAL) {
-            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("MP2")));
-            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() < 31);
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("MP2").minCardNumber(31)));
         }
         return cardInfos;
     }

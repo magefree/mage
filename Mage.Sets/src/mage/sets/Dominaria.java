@@ -335,10 +335,9 @@ public final class Dominaria extends ExpansionSet {
                 .setCodes(this.code)
                 .rarities(rarity)
                 .supertypes(SuperType.LEGENDARY)
-                .types(CardType.CREATURE)));
-        cardInfos.removeIf(cardInfo -> (
-                cardInfo.getCardNumberAsInt() > maxCardNumberInBooster
-                || nonSpecialLegends.contains(cardInfo.getName())));
+                .types(CardType.CREATURE)
+                .maxCardNumber(maxCardNumberInBooster)));
+        cardInfos.removeIf(cardInfo -> nonSpecialLegends.contains(cardInfo.getName()));
         return cardInfos;
     }
 

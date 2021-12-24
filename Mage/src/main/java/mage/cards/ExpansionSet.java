@@ -519,11 +519,11 @@ public abstract class ExpansionSet implements Serializable {
 
         List<CardInfo> cardInfos = CardRepository.instance.findCards(new CardCriteria()
                 .setCodes(this.code)
-                .rarities(rarity));
+                .rarities(rarity)
+                .maxCardNumber(maxCardNumberInBooster));
 
         cardInfos.removeIf(next -> (
-                next.getCardNumberAsInt() > maxCardNumberInBooster
-                || next.getCardNumber().contains("*")
+                next.getCardNumber().contains("*")
                 || next.getCardNumber().contains("+")));
 
         // special slot cards must not also appear in regular slots of their rarity
@@ -557,7 +557,8 @@ public abstract class ExpansionSet implements Serializable {
             cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
                     .setCodes(this.code)
                     .rarities(Rarity.COMMON)
-                    .types(CardType.LAND)));
+                    .types(CardType.LAND)
+                    .maxCardNumber(maxCardNumberInBooster)));
         }
 
         // if set has special slot(s) for DFCs, they are special cards
@@ -565,12 +566,12 @@ public abstract class ExpansionSet implements Serializable {
             cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
                     .setCodes(this.code)
                     .rarities(rarity)
-                    .doubleFaced(true)));
+                    .doubleFaced(true)
+                    .maxCardNumber(maxCardNumberInBooster)));
         }
 
         cardInfos.removeIf(next -> (
-                next.getCardNumberAsInt() > maxCardNumberInBooster
-                || next.getCardNumber().contains("*")
+                next.getCardNumber().contains("*")
                 || next.getCardNumber().contains("+")));
 
         return cardInfos;

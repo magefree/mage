@@ -317,8 +317,7 @@ public final class Kaladesh extends ExpansionSet {
     protected List<CardInfo> findCardsByRarity(Rarity rarity) {
         List<CardInfo> cardInfos = super.findCardsByRarity(rarity);
         if (rarity == Rarity.SPECIAL) {
-            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("MPS")));
-            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() > 30);
+            cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("MPS").maxCardNumber(30)));
         }
         return cardInfos;
     }
