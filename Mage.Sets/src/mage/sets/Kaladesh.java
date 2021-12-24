@@ -1,12 +1,17 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -320,5 +325,120 @@ public final class Kaladesh extends ExpansionSet {
             cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria().setCodes("MPS").maxCardNumber(30)));
         }
         return cardInfos;
+    }
+    @Override
+    protected void generateBoosterMap() {
+        super.generateBoosterMap();
+        CardRepository
+                .instance
+                .findCards(new CardCriteria().setCodes("MPS").maxCardNumber(30))
+                .stream()
+                .forEach(cardInfo -> inBoosterMap.put("MPS_" + cardInfo.getCardNumber(), cardInfo));
+    }
+
+    //@Override
+    //public BoosterCollator createCollator() {
+    //    return new KaladeshCollator();
+    //}
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/kld.html
+// Using USA collation for all rarities
+// Foil rare sheet used for regular rares as regular rare sheet is not known
+class KaladeshCollator implements BoosterCollator {
+    private final CardRun commonA = new CardRun(true, "14", "47", "113", "22", "51", "108", "1", "58", "118", "28", "44", "139", "7", "61", "133", "30", "37", "126", "20", "38", "137", "31", "66", "138", "12", "68", "128", "18", "51", "108", "14", "69", "113", "6", "47", "109", "1", "58", "134", "7", "63", "118", "22", "37", "133", "28", "44", "139", "30", "61", "138", "20", "38", "126", "18", "66", "128", "12", "69", "134", "6", "68", "137", "31", "63", "109");
+    private final CardRun commonB = new CardRun(true, "93", "171", "86", "159", "98", "175", "100", "145", "77", "170", "102", "157", "72", "149", "91", "141", "95", "173", "81", "164", "87", "168", "93", "171", "86", "159", "72", "145", "102", "157", "95", "170", "98", "175", "91", "149", "87", "164", "77", "168", "81", "173", "86", "141", "93", "171", "100", "159", "102", "175", "98", "149", "95", "157", "72", "170", "91", "145", "100", "141", "77", "168", "87", "164", "81", "173");
+    private final CardRun commonC1 = new CardRun(true, "229", "48", "202", "148", "19", "213", "42", "111", "201", "230", "99", "238", "140", "160", "197", "26", "127", "232", "103", "218", "116", "19", "202", "42", "167", "195", "209", "55", "217", "148", "111", "229", "76", "232", "48", "213", "127", "230", "23", "197", "140", "201", "103", "218", "160", "26", "217", "99", "55", "195", "116", "76", "238");
+    private final CardRun commonC2 = new CardRun(true, "82", "240", "158", "65", "74", "224", "24", "241", "129", "233", "207", "237", "82", "228", "17", "191", "65", "221", "166", "224", "70", "233", "24", "240", "129", "241", "158", "237", "74", "17", "207", "228", "166", "240", "82", "191", "65", "221", "129", "224", "24", "237", "158", "233", "70", "74", "228", "166", "241", "17", "209", "207", "221", "70", "191");
+    private final CardRun uncommonA = new CardRun(true, "35", "206", "64", "97", "176", "71", "142", "211", "29", "198", "117", "79", "187", "212", "13", "85", "162", "219", "181", "146", "80", "225", "161", "104", "190", "215", "2", "89", "189", "200", "115", "105", "54", "196", "180", "97", "106", "212", "182", "83", "64", "225", "35", "71", "176", "205", "142", "85", "13", "211", "117", "79", "187", "206", "162", "104", "29", "198", "181", "97", "189", "219", "80", "177", "54", "200", "190", "89", "2", "196", "161", "105", "180", "215", "115", "83", "106", "205", "182", "85", "35", "206", "64", "104", "187", "212", "29", "79", "176", "219", "13", "146", "181", "198", "142", "177", "80", "215", "189", "71", "117", "211", "162", "105", "190", "205", "2", "146", "54", "225", "182", "83", "161", "196", "115", "89", "180", "200", "106", "177");
+    private final CardRun uncommonB = new CardRun(true, "185", "153", "227", "34", "36", "119", "25", "156", "40", "242", "10", "132", "155", "45", "16", "131", "236", "53", "169", "94", "33", "46", "107", "154", "239", "125", "11", "43", "150", "49", "27", "75", "120", "57", "144", "34", "248", "36", "119", "153", "227", "188", "50", "16", "135", "155", "107", "25", "46", "169", "131", "185", "40", "150", "10", "45", "156", "125", "43", "33", "236", "123", "154", "94", "53", "132", "242", "144", "120", "239", "49", "11", "153", "248", "57", "135", "188", "123", "75", "27", "50", "169", "131", "185", "45", "16", "227", "132", "154", "120", "25", "242", "236", "36", "119", "94", "34", "156", "40", "188", "43", "107", "155", "46", "10", "144", "53", "33", "239", "125", "150", "49", "11", "75", "135", "57", "27", "248", "123", "50");
+    private final CardRun rare = new CardRun(true, "208", "152", "110", "246", "39", "192", "130", "73", "247", "5", "222", "60", "223", "21", "210", "151", "4", "231", "78", "32", "243", "121", "124", "226", "163", "220", "3", "245", "84", "183", "56", "235", "90", "174", "244", "41", "178", "136", "179", "222", "101", "214", "15", "247", "59", "203", "193", "152", "114", "62", "143", "5", "204", "88", "130", "92", "246", "8", "122", "249", "96", "147", "121", "32", "39", "199", "194", "60", "208", "9", "78", "216", "52", "165", "3", "223", "90", "124", "112", "231", "84", "183", "21", "192", "151", "172", "174", "245", "143", "101", "243", "67", "210", "178", "41", "226", "15", "204", "114", "147", "8", "234", "235", "136", "88", "203", "184", "220", "52", "249", "216", "92", "244", "59", "199", "186", "214", "122", "62", "165", "194");
+    private final CardRun masterpiece = new CardRun(false, "MPS_1", "MPS_2", "MPS_3", "MPS_4", "MPS_5", "MPS_6", "MPS_7", "MPS_8", "MPS_9", "MPS_10", "MPS_11", "MPS_12", "MPS_13", "MPS_14", "MPS_15", "MPS_16", "MPS_17", "MPS_18", "MPS_19", "MPS_20", "MPS_21", "MPS_22", "MPS_23", "MPS_24", "MPS_25", "MPS_26", "MPS_27", "MPS_28", "MPS_29", "MPS_30");
+    private final CardRun land = new CardRun(false, "250", "251", "252", "253", "254", "255", "256", "257", "258", "259", "260", "261", "262", "263", "264");
+
+    private final BoosterStructure AABBC1C1C1C1C1C1 = new BoosterStructure(
+            commonA, commonA,
+            commonB, commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1, commonC1
+    );
+    private final BoosterStructure AAABBC1C1C1C1C1 = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1
+    );
+    private final BoosterStructure AABBC1C1C1C1C1M = new BoosterStructure(
+            commonA, commonA,
+            commonB, commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1,
+            masterpiece
+    );
+    private final BoosterStructure AAAABBC2C2C2C2 = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB, commonB,
+            commonC2, commonC2, commonC2, commonC2
+    );
+    private final BoosterStructure AAAABBBBC2C2 = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB,
+            commonC2, commonC2
+    );
+    private final BoosterStructure AAB = new BoosterStructure(uncommonA, uncommonA, uncommonB);
+    private final BoosterStructure ABB = new BoosterStructure(uncommonA, uncommonB, uncommonB);
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+    private final BoosterStructure L1 = new BoosterStructure(land);
+
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 3.27 A commons (36 / 11)  (rounded to 471/144)
+    // 2.18 B commons (24 / 11)  (rounded to 314/144)
+    // 2.73 C1 commons (30 / 11) (rounded to 392/144)
+    // 1.82 C2 commons (20 / 11) (rounded to 262/144)
+    // These numbers are the same for all sets with 101 commons in A/B/C1/C2 print runs
+    // and with 10 common slots per booster
+    private final RarityConfiguration commonRuns = new RarityConfiguration(
+            AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1,
+            AABBC1C1C1C1C1C1, AABBC1C1C1C1C1C1,
+            AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1,
+            AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AAABBC1C1C1C1C1, AABBC1C1C1C1C1M,
+
+            AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2,
+            AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2, AAAABBC2C2C2C2,
+
+            AAAABBBBC2C2, AAAABBBBC2C2, AAAABBBBC2C2, AAAABBBBC2C2, AAAABBBBC2C2,
+            AAAABBBBC2C2, AAAABBBBC2C2, AAAABBBBC2C2, AAAABBBBC2C2, AAAABBBBC2C2,
+            AAAABBBBC2C2, AAAABBBBC2C2, AAAABBBBC2C2
+    );
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(AAB, ABB);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+    private final RarityConfiguration landRuns = new RarityConfiguration(L1);
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(commonRuns.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(landRuns.getNext().makeRun());
+        return booster;
     }
 }
