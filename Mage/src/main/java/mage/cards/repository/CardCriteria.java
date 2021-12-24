@@ -264,7 +264,7 @@ public class CardCriteria {
         }
 
         for (SubType subType : subtypes) {
-            where.like("subtypes", new SelectArg('%' + subType.name() + '%'));
+            where.like("subtypes", new SelectArg('%' + subType.toString() + '%'));
             clausesCount++;
         }
 
