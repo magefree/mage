@@ -89,7 +89,7 @@ class GisaGloriousResurrectorExileEffect extends ReplacementEffectImpl {
                 + game.getState().getZoneChangeCounter(source.getSourceId()), source);
         return player.moveCardsToExile(
                 zEvent.getTarget(), source, game, false,
-                CardUtil.getExileZoneId(game, source), "Gisa, Glorious Resurrector"
+                CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
         );
     }
 

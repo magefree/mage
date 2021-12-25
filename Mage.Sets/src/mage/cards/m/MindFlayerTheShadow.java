@@ -103,7 +103,7 @@ class MindFlayerTheShadowExileEffect extends OneShotEffect {
         controller.moveCardsToExile(
                 cards.getCards(game), source, game, false,
                 CardUtil.getExileZoneId(game, source),
-                CardUtil.getSourceLogName(game, source)
+                CardUtil.getSourceName(game, source)
         );
         cards.getCards(game).stream().forEach(card -> card.setFaceDown(true, game));
         for (Card card : cards.getCards(game)) {

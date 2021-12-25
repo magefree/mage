@@ -85,7 +85,7 @@ class WallOfMourningExileEffect extends OneShotEffect {
         player.moveCardsToExile(
                 cards, source, game, false,
                 CardUtil.getExileZoneId(game, source),
-                CardUtil.getSourceLogName(game, source)
+                CardUtil.getSourceName(game, source)
         );
         for (Card card : cards) {
             card.setFaceDown(true, game);

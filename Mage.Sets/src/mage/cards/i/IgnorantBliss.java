@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -63,12 +62,11 @@ class IgnorantBlissEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller == null || sourceObject == null) {
+        if (controller == null) {
             return false;
         }
         Cards hand = new CardsImpl(controller.getHand());
-        controller.moveCardsToExile(hand.getCards(game), source, game, false, CardUtil.getExileZoneId(game, source), sourceObject.getIdName());
+        controller.moveCardsToExile(hand.getCards(game), source, game, false, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         hand.getCards(game)
                 .stream()
                 .filter(Objects::nonNull)

@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -72,17 +71,15 @@ class HedonistsTroveExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        MageObject sourceObject = source.getSourceObject(game);
         UUID exileId = CardUtil.getExileZoneId(game, source);
         // save the exileId associated with this specific source
         game.getState().setValue(source.getSourceId().toString(), exileId);
         return controller != null
                 && targetPlayer != null
-                && sourceObject != null
                 && controller.moveCardsToExile(
-                        targetPlayer.getGraveyard().getCards(game), source, game, true,
-                        exileId, sourceObject.getIdName()
-                );
+                targetPlayer.getGraveyard().getCards(game), source, game, true,
+                exileId, CardUtil.getSourceName(game, source)
+        );
     }
 }
 
@@ -189,9 +186,9 @@ class HedonistsTroveWatcher extends Watcher {
         Permanent permanent = source.getSourcePermanentOrLKI(game);
         return permanent != null
                 && playerMap
-                        .getOrDefault(playerId, emptySet)
-                        .stream()
-                        .noneMatch(mor -> mor.refersTo(permanent, game));
+                .getOrDefault(playerId, emptySet)
+                .stream()
+                .noneMatch(mor -> mor.refersTo(permanent, game));
     }
 
     @Override

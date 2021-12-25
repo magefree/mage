@@ -1229,6 +1229,11 @@ public final class CardUtil {
         return false;
     }
 
+    public static String getSourceName(Game game, Ability source) {
+        MageObject sourceObject = source.getSourceObject(game);
+        return sourceObject != null ? sourceObject.getName() : "";
+    }
+
     /**
      * Generates source log name to insert into log messages
      *

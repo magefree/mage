@@ -58,8 +58,7 @@ public class ExileTopXMayPlayUntilEndOfTurnEffect extends OneShotEffect {
         if (cards.isEmpty()) {
             return true;
         }
-        Card sourceCard = game.getCard(source.getSourceId());
-        controller.moveCardsToExile(cards, source, game, true, CardUtil.getExileZoneId(game, source), sourceCard.getName());
+        controller.moveCardsToExile(cards, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         // remove cards that could not be moved to exile
         cards.removeIf(card -> !Zone.EXILED.equals(game.getState().getZone(card.getId())));
         if (!cards.isEmpty()) {

@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -67,15 +66,14 @@ class BottledCloisterExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller == null || sourceObject == null) {
+        if (controller == null) {
             return false;
         }
         Cards cards = new CardsImpl(controller.getHand());
         if (cards.isEmpty()) {
             return false;
         }
-        controller.moveCardsToExile(cards.getCards(game), source, game, false, CardUtil.getExileZoneId(game, source), sourceObject.getIdName());
+        controller.moveCardsToExile(cards.getCards(game), source, game, false, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         cards.getCards(game)
                 .stream()
                 .filter(c -> game.getState().getZone(c.getId()) == Zone.EXILED)

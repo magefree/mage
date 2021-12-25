@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -69,15 +68,14 @@ class FreeForAllExileAllEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
-        if (player == null || sourcePermanent == null) {
+        if (player == null) {
             return false;
         }
         Cards cards = new CardsImpl();
         game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game
         ).stream().forEach(cards::add);
-        player.moveCardsToExile(cards.getCards(game), source, game, false, CardUtil.getExileZoneId(game, source), sourcePermanent.getIdName());
+        player.moveCardsToExile(cards.getCards(game), source, game, false, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         cards.getCards(game)
                 .stream()
                 .filter(card -> game.getState().getZone(card.getId()) == Zone.EXILED)

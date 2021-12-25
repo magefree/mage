@@ -27,11 +27,11 @@ import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.util.CardUtil;
 
 /**
  * @author htrajan
@@ -117,8 +117,7 @@ class ChandraHeartOfFireUltimateEffect extends OneShotEffect {
             }
 
             // exile cards all at once and set the exile name to the source card
-            Card sourceCard = game.getCard(source.getSourceId());
-            controller.moveCardsToExile(exiledCards, source, game, true, CardUtil.getExileZoneId(game, source), sourceCard.getName());
+            controller.moveCardsToExile(exiledCards, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
             controller.shuffleLibrary(source, game);
 
             exiledCards.removeIf(card -> !Zone.EXILED.equals(game.getState().getZone(card.getId())));

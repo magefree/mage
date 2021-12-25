@@ -85,7 +85,7 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
                 .forEach(cards::addAll);
         controller.moveCardsToExile(
                 cards.getCards(game), source, game, true,
-                source.getSourceId(), CardUtil.getSourceLogName(game, source)
+                source.getSourceId(), CardUtil.getSourceName(game, source)
         );
         for (Card card : cards.getCards(game)) {
             if (card.isLand(game)) {

@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.AttackedThisTurnWatcher;
@@ -120,13 +119,12 @@ class RobberOfTheRichEffect extends OneShotEffect {
         if (controller == null || damagedPlayer == null) {
             return false;
         }
-        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         Card card = damagedPlayer.getLibrary().getFromTop(game);
-        if (card == null || sourceObject == null) {
+        if (card == null) {
             return false;
         }
         // move card to exile
-        controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source), sourceObject.getIdName());
+        controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         // Add effects only if the card has a spellAbility (e.g. not for lands).
         if (card.getSpellAbility() != null) {
             // allow to cast the card
