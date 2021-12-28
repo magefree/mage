@@ -76,7 +76,7 @@ Morph|card, cost|
 Mutate|card, manaString|
 Myriad|new|
 Nightbound|new|
-Ninjutsu|cost|
+Ninjutsu|manaString|
 Outlast|cost|
 Partner|instance|
 Persist|new|

@@ -38,7 +38,7 @@ public final class ThroatSlitter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ninjutsu {2}{B} ({2}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new NinjutsuAbility("{2}{B}"));
 
         // Whenever Throat Slitter deals combat damage to a player, destroy target nonblack creature that player controls.
         this.addAbility(new ThroatSlitterTriggeredAbility());

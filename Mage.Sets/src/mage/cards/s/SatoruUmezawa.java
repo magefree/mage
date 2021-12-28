@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
@@ -116,7 +115,7 @@ class SatoruUmezawaEffect extends ContinuousEffectImpl {
             return false;
         }
         for (Card card : player.getHand().getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
-            game.getState().addOtherAbility(card, new NinjutsuAbility(new ManaCostsImpl<>("{2}{U}{B}")));
+            game.getState().addOtherAbility(card, new NinjutsuAbility("{2}{U}{B}"));
         }
         return true;
     }
