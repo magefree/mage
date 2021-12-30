@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class SoulcipherBoard extends CardImpl {
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.OMEN, 0);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.OMEN, 0, 0);
 
     public SoulcipherBoard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{U}");
