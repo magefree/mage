@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -9,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -18,23 +17,15 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class HandsOfBinding extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-    static{
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-    
     public HandsOfBinding (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
-
 
         //Tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         //Cipher 
         this.getSpellAbility().addEffect(new CipherEffect());
-        
-        
     }
 
     private HandsOfBinding(final HandsOfBinding card) {
@@ -42,7 +33,7 @@ public final class HandsOfBinding extends CardImpl {
     }
 
     @Override
-    public HandsOfBinding  copy() {
+    public HandsOfBinding copy() {
         return new HandsOfBinding(this);
     }
 }

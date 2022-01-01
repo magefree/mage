@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -28,8 +27,8 @@ public final class ShadowAlleyDenizen extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another black creature");
 
     static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
         filter.add(AnotherPredicate.instance);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public ShadowAlleyDenizen(UUID ownerId, CardSetInfo setInfo) {
