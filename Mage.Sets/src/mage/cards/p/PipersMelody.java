@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -10,7 +9,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -26,7 +25,7 @@ public final class PipersMelody extends CardImpl {
 
         // Shuffle any number of target creature cards from your graveyard into your library.
         this.getSpellAbility().addEffect(new PipersMelodyShuffleEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
     }
 
     private PipersMelody(final PipersMelody card) {
@@ -43,7 +42,7 @@ class PipersMelodyShuffleEffect extends OneShotEffect {
 
     PipersMelodyShuffleEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Shuffle any number of target cards from your graveyard into your library";
+        this.staticText = "Shuffle any number of target creature cards from your graveyard into your library";
     }
 
     PipersMelodyShuffleEffect(final PipersMelodyShuffleEffect effect) {
