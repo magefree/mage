@@ -16,11 +16,11 @@ public class BecomesBlockedSourceTriggeredAbility extends TriggeredAbilityImpl {
     boolean setTargetPointer;
 
     public BecomesBlockedSourceTriggeredAbility(Effect effect, boolean optional) {
-        this(Zone.BATTLEFIELD, effect, optional, false);
+        this(effect, optional, false);
     }
 
-    public BecomesBlockedSourceTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean setTargetPointer) {
-        super(zone, effect, optional);
+    public BecomesBlockedSourceTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
+        super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
     }
 
