@@ -71,10 +71,10 @@ class MindFlayerTheShadowExileEffect extends OneShotEffect {
 
     MindFlayerTheShadowExileEffect() {
         super(Outcome.Benefit);
-        staticText = "exile the bottom card of each opponent's library face down. " +
-                "For as long as those cards remain exiled, you may look at them, " +
-                "you may cast permanent spells from among them, " +
-                "and you may spend mana as though it were mana of any color to cast those spells";
+        staticText = "exile the bottom card of each opponent's library face down. "
+                + "For as long as those cards remain exiled, you may look at them, "
+                + "you may cast permanent spells from among them, "
+                + "and you may spend mana as though it were mana of any color to cast those spells";
     }
 
     private MindFlayerTheShadowExileEffect(final MindFlayerTheShadowExileEffect effect) {
@@ -144,7 +144,9 @@ class MindFlayerTheShadowCastFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
         Card theCard = game.getCard(objectId);
-        if (theCard == null || theCard.isLand(game)) {
+        if (theCard == null
+                || theCard.isLand(game)
+                || !theCard.isPermanent(game)) {
             return false;
         }
         objectId = theCard.getMainCard().getId(); // for split cards
