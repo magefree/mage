@@ -69,18 +69,18 @@ class ZombieBoaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getSourceId());
+        Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
         }
-        ChoiceColor choice = new ChoiceColor(true);
-        player.choose(outcome, choice, game);
-        ObjectColor color = choice.getColor();
-        if (color == null) {
-            return false;
+        ChoiceColor choice = new ChoiceColor();
+        if (player.choose(outcome, choice, game)) {
+            ObjectColor color = choice.getColor();
+            game.informPlayers(player.getLogName() + " chooses " + color);
+            game.addDelayedTriggeredAbility(new ZombieBoaTriggeredAbility(color), source);
+            return true;
         }
-        game.addDelayedTriggeredAbility(new ZombieBoaTriggeredAbility(color), source);
-        return true;
+        return false;
     }
 }
 
@@ -105,7 +105,7 @@ class ZombieBoaTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CREATURE_BLOCKED;
+        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
     }
 
     @Override
@@ -117,7 +117,7 @@ class ZombieBoaTriggeredAbility extends DelayedTriggeredAbility {
         if (permanent == null || !permanent.isCreature(game) || !permanent.getColor(game).contains(color)) {
             return false;
         }
-        this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
+        this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
         return true;
     }
 
