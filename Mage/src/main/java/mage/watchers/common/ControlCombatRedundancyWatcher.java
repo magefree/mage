@@ -15,7 +15,7 @@ import java.util.UUID;
  */
 public class ControlCombatRedundancyWatcher extends Watcher { // workaround for solving timestamp issues regarding "you choose which creatures block and how those creatures block" effects
 
-    private static final class PlayerDuration {
+    private static final class PlayerDuration implements java.io.Serializable {  // class must be serilizable Bug #8497
 
         private final Duration duration;
         private final UUID playerId;
@@ -63,6 +63,7 @@ public class ControlCombatRedundancyWatcher extends Watcher { // workaround for 
 
     public static void addBlockingController(UUID playerId, Duration duration, Game game) {
         ControlCombatRedundancyWatcher watcher = game.getState().getWatcher(ControlCombatRedundancyWatcher.class);
+        System.out.println("The watcher is okay? " + watcher);
         watcher.blockingControllers.add(0, new PlayerDuration(duration, playerId));
     }
 
