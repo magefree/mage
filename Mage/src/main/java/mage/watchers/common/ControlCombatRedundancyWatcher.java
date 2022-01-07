@@ -63,7 +63,6 @@ public class ControlCombatRedundancyWatcher extends Watcher { // workaround for 
 
     public static void addBlockingController(UUID playerId, Duration duration, Game game) {
         ControlCombatRedundancyWatcher watcher = game.getState().getWatcher(ControlCombatRedundancyWatcher.class);
-        System.out.println("The watcher is okay? " + watcher);
         watcher.blockingControllers.add(0, new PlayerDuration(duration, playerId));
     }
 
