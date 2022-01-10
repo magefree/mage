@@ -344,6 +344,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         criteria.red(this.tbRed.isSelected());
         criteria.white(this.tbWhite.isSelected());
         criteria.colorless(this.tbColorless.isSelected());
+        criteria.multicolor(this.tbMulticolor.isSelected());
 
         // if you add new type filter then sync it with CardType
         if (this.tbLand.isSelected()) {
@@ -703,9 +704,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbMulticolor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/multicolor_off.png"))); // NOI18N
         tbMulticolor.setSelected(true);
+        tbMulticolor.setToolTipText("ON: Multicolor Cards are displayed\\nOFF: Multicolored cards are NOT displayed");
         tbMulticolor.setFocusable(false);
         tbMulticolor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbMulticolor.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/multicolor.png"))); // NOI18N
+        tbMulticolor.setVerifyInputWhenFocusTarget(false);
         tbMulticolor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbMulticolor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1241,7 +1244,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tbColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(tbTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)

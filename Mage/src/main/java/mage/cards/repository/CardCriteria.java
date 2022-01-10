@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.HashMap;
 
 /**
  * @author North
@@ -37,6 +38,10 @@ public class CardCriteria {
     private boolean red;
     private boolean white;
     private boolean colorless;
+    private boolean multicolor;
+    private boolean[] colors;
+    private HashMap<Integer, String> colorMap;
+
     private Integer manaValue;
     private String sortBy;
     private Long start;
@@ -53,14 +58,17 @@ public class CardCriteria {
         this.notTypes = new ArrayList<>();
         this.supertypes = new ArrayList<>();
         this.notSupertypes = new ArrayList<>();
-        this.subtypes = new ArrayList<>();
-
+        this.subtypes = new ArrayList<>();        
+        
         this.black = true;
         this.blue = true;
         this.green = true;
         this.red = true;
         this.white = true;
         this.colorless = true;
+        this.multicolor = true;
+        this.colors = new boolean[6];
+        this.colorMap = new HashMap<>();
 
         this.minCardNumber = Integer.MIN_VALUE;
         this.maxCardNumber = Integer.MAX_VALUE;
@@ -68,34 +76,50 @@ public class CardCriteria {
 
     public CardCriteria black(boolean black) {
         this.black = black;
+        mapColor(0, "black", black);
         return this;
     }
 
     public CardCriteria blue(boolean blue) {
         this.blue = blue;
+        mapColor(1, "blue", blue);
         return this;
     }
 
     public CardCriteria green(boolean green) {
         this.green = green;
+        mapColor(2, "green", green);
         return this;
     }
 
     public CardCriteria red(boolean red) {
         this.red = red;
+        mapColor(3, "red", red);
         return this;
     }
 
     public CardCriteria white(boolean white) {
         this.white = white;
+        mapColor(4, "white", white);
         return this;
     }
 
     public CardCriteria colorless(boolean colorless) {
         this.colorless = colorless;
+        mapColor(5, "colorless", colorless);
+        return this;
+    }
+    
+    public CardCriteria multicolor(boolean multicolor){
+        this.multicolor = multicolor;
         return this;
     }
 
+    private void mapColor(int key, String color, boolean value){
+        colorMap.put(key, color);
+        colors[key] = value;
+    }
+    
     public CardCriteria doubleFaced(boolean doubleFaced) {
         this.doubleFaced = doubleFaced;
         return this;
@@ -285,6 +309,29 @@ public class CardCriteria {
         }
 
         int colorClauses = 0;
+        
+        if (!multicolor){
+            where.eq("multicolor", false);
+            colorClauses++;
+        }
+
+        if (black || blue || green || red || white || colorless){
+            for (int i = 0; i < colors.length; i++){
+                if(colors[i]){
+                    where.eq(colorMap.get(i), true);
+                }else{
+                    where.eq(colorMap.get(i), false);
+                }
+                colorClauses++;
+            }
+        }
+        
+        if (colorClauses > 0) {
+            where.and(colorClauses);
+            clausesCount++;
+        }
+        
+        /*
         if (black) {
             where.eq("black", true);
             colorClauses++;
@@ -305,6 +352,7 @@ public class CardCriteria {
             where.eq("white", true);
             colorClauses++;
         }
+                
         if (colorless) {
             where.eq("black", false).eq("blue", false).eq("green", false).eq("red", false).eq("white", false);
             where.and(5);
@@ -314,7 +362,8 @@ public class CardCriteria {
             where.or(colorClauses);
             clausesCount++;
         }
-
+        */
+        
         if (minCardNumber != Integer.MIN_VALUE) {
             where.ge("cardNumberAsInt", minCardNumber);
             clausesCount++;
@@ -354,7 +403,7 @@ public class CardCriteria {
         }
 
         // remove color
-        if (black && blue && green && red && white && colorless) {
+        if (black && blue && green && red && white && colorless && multicolor) {
             black = false;
             blue = false;
             green = false;
@@ -451,6 +500,10 @@ public class CardCriteria {
         return colorless;
     }
 
+    public boolean isMulticolor(){
+        return multicolor;
+    }
+    
     public Integer getManaValue() {
         return manaValue;
     }
