@@ -21,21 +21,21 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="tbColor" alignment="0" max="32767" attributes="0"/>
-          <Component id="tbTypes" alignment="0" pref="1491" max="32767" attributes="0"/>
+          <Component id="tbTypes" alignment="0" max="32767" attributes="0"/>
           <Component id="cardSelectorScrollPane" alignment="0" max="32767" attributes="0"/>
-          <Component id="cardSelectorBottomPanel" alignment="0" pref="1491" max="32767" attributes="0"/>
+          <Component id="cardSelectorBottomPanel" alignment="0" pref="1472" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="tbColor" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+              <Component id="tbColor" min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="tbTypes" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="cardSelectorScrollPane" pref="621" max="32767" attributes="0"/>
+              <Component id="cardSelectorScrollPane" pref="470" max="32767" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="cardSelectorBottomPanel" min="-2" pref="31" max="-2" attributes="0"/>
+              <Component id="cardSelectorBottomPanel" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -45,7 +45,9 @@
       <Properties>
         <Property name="floatable" type="boolean" value="false"/>
         <Property name="rollover" type="boolean" value="true"/>
-        <Property name="toolTipText" type="java.lang.String" value="Hold the ALT-key while clicking to deselect all other colors or hold the CTRL-key to select only all other colors."/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="&quot;Hold the ALT-key while clicking to deselect all other colors or hold the CTRL-key to select only all other colors./nDeselection filters out cards of matching color from the results&quot;" type="code"/>
+        </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
@@ -185,13 +187,14 @@
               <Image iconType="3" name="/buttons/multicolor_off.png"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="toolTipText" type="java.lang.String" value="ON: Multicolor Cards are displayed\u005cnOFF: Multicolored cards are NOT displayed" containsInvalidXMLChars="true"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;&lt;html&gt;&lt;font color=&apos;grey&apos;&gt;&lt;strong&gt;Multicolor Toggle&lt;/strong&gt;&lt;/font&gt;&lt;br/&gt;&quot; + &quot;\nON: Multicolor Cards are displayed.\nOFF: Multicolored cards are NOT displayed&quot;" type="code"/>
+            </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/buttons/multicolor.png"/>
             </Property>
-            <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <AccessibilityProperties>
@@ -672,7 +675,7 @@
                   <Component id="cardCountLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="cardCount" min="-2" pref="48" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="599" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -699,7 +702,7 @@
                                   <Component id="cardCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>

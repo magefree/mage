@@ -19,6 +19,24 @@ import java.util.HashMap;
  */
 public class CardCriteria {
 
+    private static enum ColorMap {
+        BLACK ("black"),
+        BLUE  ("blue"),
+        GREEN ("green"),
+        RED   ("red"),
+        WHITE ("white");
+        
+        public final String colorName;
+        
+        ColorMap(String colorName){
+            this.colorName = colorName;
+        }
+        
+        public static String getName(int index){
+            return ColorMap.values()[index].colorName;
+        }
+    }
+    
     private String name;
     private String nameExact;
     private String rules;
@@ -30,6 +48,7 @@ public class CardCriteria {
     private final List<SuperType> notSupertypes;
     private final List<SubType> subtypes;
     private final List<Rarity> rarities;
+    private final boolean[] colors;
     private Boolean doubleFaced;
     private Boolean modalDoubleFaced;
     private boolean black;
@@ -39,8 +58,8 @@ public class CardCriteria {
     private boolean white;
     private boolean colorless;
     private boolean multicolor;
-    private boolean[] colors;
-    private HashMap<Integer, String> colorMap;
+    
+//    private HashMap<Integer, String> colorMap;
 
     private Integer manaValue;
     private String sortBy;
@@ -67,8 +86,8 @@ public class CardCriteria {
         this.white = true;
         this.colorless = true;
         this.multicolor = true;
-        this.colors = new boolean[6];
-        this.colorMap = new HashMap<>();
+        this.colors = new boolean[5];
+//        this.colorMap = new HashMap<>();
 
         this.minCardNumber = Integer.MIN_VALUE;
         this.maxCardNumber = Integer.MAX_VALUE;
@@ -76,37 +95,36 @@ public class CardCriteria {
 
     public CardCriteria black(boolean black) {
         this.black = black;
-        mapColor(0, "black", black);
+        colors[ColorMap.BLACK.ordinal()] = black;
         return this;
     }
 
     public CardCriteria blue(boolean blue) {
         this.blue = blue;
-        mapColor(1, "blue", blue);
+        colors[ColorMap.BLUE.ordinal()] = blue;
         return this;
     }
 
     public CardCriteria green(boolean green) {
         this.green = green;
-        mapColor(2, "green", green);
+        colors[ColorMap.GREEN.ordinal()] = green;
         return this;
     }
 
     public CardCriteria red(boolean red) {
         this.red = red;
-        mapColor(3, "red", red);
+        colors[ColorMap.RED.ordinal()] = red;
         return this;
     }
 
     public CardCriteria white(boolean white) {
         this.white = white;
-        mapColor(4, "white", white);
+        colors[ColorMap.WHITE.ordinal()] = white;
         return this;
     }
 
     public CardCriteria colorless(boolean colorless) {
         this.colorless = colorless;
-        mapColor(5, "colorless", colorless);
         return this;
     }
     
@@ -115,10 +133,10 @@ public class CardCriteria {
         return this;
     }
 
-    private void mapColor(int key, String color, boolean value){
-        colorMap.put(key, color);
-        colors[key] = value;
-    }
+//    private void mapColor(int key, String colorName, boolean value){
+//        colorMap.put(key, colorName);
+//        //colors[key] = value;
+//    }
     
     public CardCriteria doubleFaced(boolean doubleFaced) {
         this.doubleFaced = doubleFaced;
@@ -310,24 +328,61 @@ public class CardCriteria {
 
         int colorClauses = 0;
         
-        if (!multicolor){
-            where.eq("multicolor", false);
-            colorClauses++;
-        }
-
-        if (black || blue || green || red || white || colorless){
-            for (int i = 0; i < colors.length; i++){
-                if(colors[i]){
-                    where.eq(colorMap.get(i), true);
-                }else{
-                    where.eq(colorMap.get(i), false);
+//        if (!multicolor){
+//            where.eq("multicolored", false);
+//            colorClauses++;
+//        }
+        boolean wubrg = (black || blue || green || red || white);
+        boolean any = (wubrg || colorless);
+        
+        if (any){
+            if (wubrg){
+                for (int i = 0; i < colors.length; i++){
+                    if(colors[i]){
+                        where.eq(ColorMap.getName(i), true);
+                        colorClauses++;
+                    }
                 }
-                colorClauses++;
+            }        
+//            boolean hasColor = (colorClauses > 0);
+            
+//            if (hasColor){   
+//                if (colorClauses > 1){
+//                    where.or(colorClauses);
+//                    colorClauses = 1;
+//                }
+//            }            
+            if (colorless) {
+               where.eq(ColorMap.BLACK.colorName, false)
+                    .eq(ColorMap.BLUE.colorName, false)
+                    .eq(ColorMap.GREEN.colorName, false)
+                    .eq(ColorMap.RED.colorName, false)
+                    .eq(ColorMap.WHITE.colorName, false);
+               where.and(5);
+               colorClauses++;
+            }
+            if (colorClauses > 1){
+                where.or(colorClauses);
+            }
+            
+            colorClauses = 1;
+            if (wubrg){
+                for (int i = 0; i < colors.length; i++){
+                    if(!colors[i]){
+                        where.not().eq(ColorMap.getName(i), true);
+                        colorClauses++;
+                    }
+                }        
+            }
+            
+            if (colorClauses > 1)
+            {
+                where.and(colorClauses);
+                colorClauses = 1;
             }
         }
         
         if (colorClauses > 0) {
-            where.and(colorClauses);
             clausesCount++;
         }
         
@@ -410,7 +465,7 @@ public class CardCriteria {
             red = false;
             white = false;
             colorless = false;
-        }
+        } 
 
         // remove card type
         if (types.size() > 0) {

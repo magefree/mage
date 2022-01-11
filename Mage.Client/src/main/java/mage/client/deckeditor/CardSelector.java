@@ -22,6 +22,7 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
+import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.filter.predicate.card.CardTextPredicate;
 import mage.filter.predicate.card.ExpansionSetPredicate;
 import mage.game.events.Listener;
@@ -232,7 +233,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         String name = jTextFieldSearch.getText().trim();
         filter.add(new CardTextPredicate(name, chkNames.isSelected(), chkTypes.isSelected(), chkRules.isSelected(), chkUnique.isSelected()));
-
+        
+        if (!this.tbMulticolor.isSelected()) {
+            filter.add(Predicates.not(MulticoloredPredicate.instance));
+        }
+        
         if (limited) {
             List<Predicate<MageObject>> predicates = new ArrayList<>();
 
@@ -606,7 +611,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbColor.setFloatable(false);
         tbColor.setRollover(true);
-        tbColor.setToolTipText("Hold the ALT-key while clicking to deselect all other colors or hold the CTRL-key to select only all other colors.");
+        tbColor.setToolTipText("Hold the ALT-key while clicking to deselect all other colors or hold the CTRL-key to select only all other colors./nDeselection filters out cards of matching color from the results");
         tbColor.setBorderPainted(false);
         tbColor.setName(""); // NOI18N
 
@@ -704,11 +709,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbMulticolor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/multicolor_off.png"))); // NOI18N
         tbMulticolor.setSelected(true);
-        tbMulticolor.setToolTipText("ON: Multicolor Cards are displayed\\nOFF: Multicolored cards are NOT displayed");
+        tbMulticolor.setToolTipText("<html><font color='grey'><strong>Multicolor Toggle</strong></font><br/>" + "\nON: Multicolor Cards are displayed.\nOFF: Multicolored cards are NOT displayed");
         tbMulticolor.setFocusable(false);
         tbMulticolor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbMulticolor.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/multicolor.png"))); // NOI18N
-        tbMulticolor.setVerifyInputWhenFocusTarget(false);
         tbMulticolor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tbMulticolor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1202,7 +1206,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addComponent(cardCountLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cardCount, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(599, Short.MAX_VALUE))
         );
         cardSelectorBottomPanelLayout.setVerticalGroup(
             cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1225,7 +1229,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                                 .addComponent(cardCount)
                                 .addComponent(jButtonAddToMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(cardCountLabel)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 1, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1237,20 +1241,20 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tbColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(tbTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 1491, Short.MAX_VALUE)
+            .addComponent(tbTypes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(cardSelectorScrollPane)
-            .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1491, Short.MAX_VALUE)
+            .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1472, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tbColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(tbTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(cardSelectorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+                .addComponent(cardSelectorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
