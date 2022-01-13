@@ -12,7 +12,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.KickedSpellPredicate;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.filter.predicate.other.AnotherTargetPredicate;
-import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -751,10 +750,9 @@ public final class StaticFilters {
         FILTER_CREATURE_TOKENS.setLockedFilter(true);
     }
 
-    public static final FilterCreaturePermanent FILTER_ATTACKING_CREATURES = new FilterCreaturePermanent("attacking creatures");
+    public static final FilterAttackingCreature FILTER_ATTACKING_CREATURES = new FilterAttackingCreature("attacking creatures");
 
     static {
-        FILTER_ATTACKING_CREATURES.add(AttackingPredicate.instance);
         FILTER_ATTACKING_CREATURES.setLockedFilter(true);
     }
 
