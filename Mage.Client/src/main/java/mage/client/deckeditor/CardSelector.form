@@ -146,7 +146,7 @@
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;&lt;html&gt;&lt;font color=&apos;black&apos;&gt;&lt;strong&gt;White&lt;/strong&gt;&lt;/font&gt;&lt;br/&gt;&quot; + tbColor.getToolTipText()" type="code"/>
+              <Connection code="&quot;&lt;html&gt;&lt;font color=&apos;grey&apos;&gt;&lt;strong&gt;White&lt;/strong&gt;&lt;/font&gt;&lt;br/&gt;&quot; + tbColor.getToolTipText()" type="code"/>
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="White"/>
             <Property name="focusable" type="boolean" value="false"/>

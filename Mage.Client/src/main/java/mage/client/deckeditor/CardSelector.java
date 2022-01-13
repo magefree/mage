@@ -60,6 +60,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private static final Map<String, Integer> pdAllowed = new HashMap<>();
     private static Listener<RepositoryEvent> setsDbListener = null;
     private boolean isSetsFilterLoading = false; // use it on sets combobox modify
+    
     private final ActionListener searchAction = evt -> jButtonSearchActionPerformed(evt);
 
     /**
@@ -682,7 +683,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbWhite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_white_off.png"))); // NOI18N
         tbWhite.setSelected(true);
-        tbWhite.setToolTipText("<html><font color='black'><strong>White</strong></font><br/>" + tbColor.getToolTipText());
+        tbWhite.setToolTipText("<html><font color='grey'><strong>White</strong></font><br/>" + tbColor.getToolTipText());
         tbWhite.setActionCommand("White");
         tbWhite.setFocusable(false);
         tbWhite.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
