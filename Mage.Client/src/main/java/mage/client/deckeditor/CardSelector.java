@@ -38,6 +38,7 @@ import java.awt.event.*;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
+import java.util.stream.Stream;
 import java.util.*;
 
 import static mage.client.dialog.PreferencesDialog.*;
@@ -1552,20 +1553,21 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }//GEN-LAST:event_tbSpecialActionPerformed
 
     private void tbMulticolorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbMulticolorActionPerformed
-        boolean oneColorCheck = (this.tbBlack.isSelected() ^ this.tbBlue.isSelected() ^ this.tbGreen.isSelected() ^ this.tbRed.isSelected() ^ this.tbWhite.isSelected() ^ this.tbColorless.isSelected());
+        boolean oneSelected = Stream.of(this.tbBlack.isSelected(), this.tbBlue.isSelected(), this.tbGreen.isSelected(), this.tbRed.isSelected(), this.tbWhite.isSelected(), this.tbColorless.isSelected())
+                                        .filter(b -> b)
+                                        .count() == 1;
         // Does nothing if only 1 color is selected and explicit mode is on.
-        if (!(oneColorCheck && tbExplicitMode.isSelected())){
+        if (!oneSelected || !tbExplicitMode.isSelected()){
             filterCardsColor(evt.getModifiers(), evt.getActionCommand());
         }
     }//GEN-LAST:event_tbMulticolorActionPerformed
 
     private void tbExplicitModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbExplicitModeActionPerformed
-       // Does nothing if all or nothing is selected and if just one color is selected while multicolor display is off
+        // Does nothing if all/nothing is selected, and if multicolor display is off
         boolean anySelected = (this.tbBlack.isSelected() || this.tbBlue.isSelected() || this.tbGreen.isSelected() || this.tbRed.isSelected() || this.tbWhite.isSelected() || this.tbColorless.isSelected());
         boolean allSelected = (this.tbBlack.isSelected() && this.tbBlue.isSelected() && this.tbGreen.isSelected() && this.tbRed.isSelected() && this.tbWhite.isSelected() && this.tbColorless.isSelected());
-        boolean oneColorCheck = (this.tbBlack.isSelected() ^ this.tbBlue.isSelected() ^ this.tbGreen.isSelected() ^ this.tbRed.isSelected() ^ this.tbWhite.isSelected() ^ this.tbColorless.isSelected());
-        if(anySelected && !allSelected && !(oneColorCheck && !tbMulticolor.isSelected())){
-            filterCardsColor(evt.getModifiers(), evt.getActionCommand());
+        if(anySelected && !allSelected && tbMulticolor.isSelected()){
+                filterCardsColor(evt.getModifiers(), evt.getActionCommand());
         }
     }//GEN-LAST:event_tbExplicitModeActionPerformed
 
