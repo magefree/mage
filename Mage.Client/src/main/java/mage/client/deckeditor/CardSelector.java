@@ -59,7 +59,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private static final Map<String, Integer> pdAllowed = new HashMap<>();
     private static Listener<RepositoryEvent> setsDbListener = null;
     private boolean isSetsFilterLoading = false; // use it on sets combobox modify
-
     private final ActionListener searchAction = evt -> jButtonSearchActionPerformed(evt);
 
     /**
@@ -235,7 +234,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         filter.add(new CardTextPredicate(name, chkNames.isSelected(), chkTypes.isSelected(), chkRules.isSelected(), chkUnique.isSelected()));
         
         if (!this.tbMulticolor.isSelected()) {
-            filter.add(Predicates.not(MulticoloredPredicate.instance));
+                filter.add(Predicates.not(MulticoloredPredicate.instance));
         }
         
         if (limited) {
@@ -350,6 +349,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         criteria.white(this.tbWhite.isSelected());
         criteria.colorless(this.tbColorless.isSelected());
         criteria.multicolor(this.tbMulticolor.isSelected());
+        criteria.explicitColor(this.tbExplicitMode.isSelected());
+
 
         // if you add new type filter then sync it with CardType
         if (this.tbLand.isSelected()) {
@@ -456,7 +457,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         try {
 
             // debug
-            //debugObjectMemorySize("Old cards size", this.currentView.getCardsStore());
+//            debugObjectMemorySize("Old cards size", this.currentView.getCardsStore());
             this.currentView.clearCardsStoreBeforeUpdate();
 
             java.util.List<Card> filteredCards = new ArrayList<>();
@@ -497,7 +498,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
 
             // debug
-            //debugObjectMemorySize("New cards size", filteredCards);
+//            debugObjectMemorySize("New cards size", filteredCards);
 
             this.currentView.loadCards(new CardsView(filteredCards), sortSetting, bigCard, null, false);
             this.cardCount.setText(String.valueOf(filteredCards.size()));
@@ -564,6 +565,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbWhite = new javax.swing.JToggleButton();
         tbColorless = new javax.swing.JToggleButton();
         tbMulticolor = new javax.swing.JToggleButton();
+        tbExplicitMode = new javax.swing.JToggleButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         cbExpansionSet = new javax.swing.JComboBox<>();
         btnExpansionSearch = new javax.swing.JButton();
@@ -611,7 +613,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbColor.setFloatable(false);
         tbColor.setRollover(true);
-        tbColor.setToolTipText("Hold the ALT-key while clicking to deselect all other colors or hold the CTRL-key to select only all other colors./nDeselection filters out cards of matching color from the results");
+        tbColor.setToolTipText("<html><font color='grey'>Hold the ALT-key while clicking to deselect all other colors or hold the CTRL-key to select only all other colors.<br/>");
         tbColor.setBorderPainted(false);
         tbColor.setName(""); // NOI18N
 
@@ -679,7 +681,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbWhite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_white_off.png"))); // NOI18N
         tbWhite.setSelected(true);
-        tbWhite.setToolTipText("<html><font color='grey'><strong>White</strong></font><br/>" + tbColor.getToolTipText());
+        tbWhite.setToolTipText("<html><font color='black'><strong>White</strong></font><br/>" + tbColor.getToolTipText());
         tbWhite.setActionCommand("White");
         tbWhite.setFocusable(false);
         tbWhite.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -709,7 +711,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbMulticolor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/multicolor_off.png"))); // NOI18N
         tbMulticolor.setSelected(true);
-        tbMulticolor.setToolTipText("<html><font color='grey'><strong>Multicolor Toggle</strong></font><br/>" + "\nON: Multicolor Cards are displayed.\nOFF: Multicolored cards are NOT displayed");
+        tbMulticolor.setToolTipText("<html><font color='grey'><strong>Multicolor Toggle</strong></font><br/>ON: Multicolored cards are included in the results.<br/>OFF: Multicolored cards are removed from the results");
         tbMulticolor.setFocusable(false);
         tbMulticolor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         tbMulticolor.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/multicolor.png"))); // NOI18N
@@ -722,6 +724,19 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbColor.add(tbMulticolor);
         tbMulticolor.getAccessibleContext().setAccessibleDescription("");
 
+        tbExplicitMode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/red_x_off.png"))); // NOI18N
+        tbExplicitMode.setToolTipText("<html><font color='grey'><strong>Explicit Mode</strong><br/>ON: Filtered cards will have <strong>at most</strong> the selected colors.<br/>OFF: Filtered cards will have <strong>at least</strong> the selected colors.");
+        tbExplicitMode.setFocusable(false);
+        tbExplicitMode.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbExplicitMode.setPreferredSize(new java.awt.Dimension(32, 32));
+        tbExplicitMode.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/red_x.png"))); // NOI18N
+        tbExplicitMode.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbExplicitMode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbExplicitModeActionPerformed(evt);
+            }
+        });
+        tbColor.add(tbExplicitMode);
         tbColor.add(jSeparator1);
 
         cbExpansionSet.setModel(new DefaultComboBoxModel<>(ConstructedFormats.getTypes()));
@@ -1537,9 +1552,26 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }//GEN-LAST:event_tbSpecialActionPerformed
 
     private void tbMulticolorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbMulticolorActionPerformed
-        // TODO add your handling code here:
-        filterCardsColor(evt.getModifiers(), evt.getActionCommand());
+        boolean oneColorCheck = (this.tbBlack.isSelected() ^ this.tbBlue.isSelected() ^ this.tbGreen.isSelected() ^ this.tbRed.isSelected() ^ this.tbWhite.isSelected() ^ this.tbColorless.isSelected());
+        
+        // Does nothing if only 1 color is selected and explicit mode is on.
+        if (!(oneColorCheck && tbExplicitMode.isSelected())){
+            filterCardsColor(evt.getModifiers(), evt.getActionCommand());
+        }
+
+            
     }//GEN-LAST:event_tbMulticolorActionPerformed
+
+    private void tbExplicitModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbExplicitModeActionPerformed
+        
+       // Does nothing if all or nothing is selected and if just one color is selected while multicolor display is off
+        boolean anySelected = (this.tbBlack.isSelected() || this.tbBlue.isSelected() || this.tbGreen.isSelected() || this.tbRed.isSelected() || this.tbWhite.isSelected() || this.tbColorless.isSelected());
+        boolean allSelected = (this.tbBlack.isSelected() && this.tbBlue.isSelected() && this.tbGreen.isSelected() && this.tbRed.isSelected() && this.tbWhite.isSelected() && this.tbColorless.isSelected());
+        boolean oneColorCheck = (this.tbBlack.isSelected() ^ this.tbBlue.isSelected() ^ this.tbGreen.isSelected() ^ this.tbRed.isSelected() ^ this.tbWhite.isSelected() ^ this.tbColorless.isSelected());
+        if(anySelected && !allSelected && !(oneColorCheck && !tbMulticolor.isSelected())){
+            filterCardsColor(evt.getModifiers(), evt.getActionCommand());
+        }
+    }//GEN-LAST:event_tbExplicitModeActionPerformed
 
     private void toggleViewMode() {
         if (currentView instanceof CardGrid) {
@@ -1621,6 +1653,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.JToggleButton tbCommon;
     private javax.swing.JToggleButton tbCreatures;
     private javax.swing.JToggleButton tbEnchantments;
+    private javax.swing.JToggleButton tbExplicitMode;
     private javax.swing.JToggleButton tbGreen;
     private javax.swing.JToggleButton tbInstants;
     private javax.swing.JToggleButton tbLand;

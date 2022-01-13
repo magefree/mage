@@ -19,7 +19,7 @@ import java.util.HashMap;
  */
 public class CardCriteria {
 
-    private static enum ColorMap {
+    private static enum ColorEnum {
         BLACK ("black"),
         BLUE  ("blue"),
         GREEN ("green"),
@@ -28,12 +28,12 @@ public class CardCriteria {
         
         public final String colorName;
         
-        ColorMap(String colorName){
+        ColorEnum(String colorName){
             this.colorName = colorName;
         }
         
         public static String getName(int index){
-            return ColorMap.values()[index].colorName;
+            return ColorEnum.values()[index].colorName;
         }
     }
     
@@ -58,6 +58,7 @@ public class CardCriteria {
     private boolean white;
     private boolean colorless;
     private boolean multicolor;
+    private boolean explicitColor;
     
 //    private HashMap<Integer, String> colorMap;
 
@@ -95,31 +96,31 @@ public class CardCriteria {
 
     public CardCriteria black(boolean black) {
         this.black = black;
-        colors[ColorMap.BLACK.ordinal()] = black;
+        colors[ColorEnum.BLACK.ordinal()] = black;
         return this;
     }
 
     public CardCriteria blue(boolean blue) {
         this.blue = blue;
-        colors[ColorMap.BLUE.ordinal()] = blue;
+        colors[ColorEnum.BLUE.ordinal()] = blue;
         return this;
     }
 
     public CardCriteria green(boolean green) {
         this.green = green;
-        colors[ColorMap.GREEN.ordinal()] = green;
+        colors[ColorEnum.GREEN.ordinal()] = green;
         return this;
     }
 
     public CardCriteria red(boolean red) {
         this.red = red;
-        colors[ColorMap.RED.ordinal()] = red;
+        colors[ColorEnum.RED.ordinal()] = red;
         return this;
     }
 
     public CardCriteria white(boolean white) {
         this.white = white;
-        colors[ColorMap.WHITE.ordinal()] = white;
+        colors[ColorEnum.WHITE.ordinal()] = white;
         return this;
     }
 
@@ -130,6 +131,11 @@ public class CardCriteria {
     
     public CardCriteria multicolor(boolean multicolor){
         this.multicolor = multicolor;
+        return this;
+    }
+    
+    public CardCriteria explicitColor(boolean explicitColor){
+        this.explicitColor = explicitColor;
         return this;
     }
 
@@ -328,57 +334,50 @@ public class CardCriteria {
 
         int colorClauses = 0;
         
-//        if (!multicolor){
-//            where.eq("multicolored", false);
-//            colorClauses++;
-//        }
         boolean wubrg = (black || blue || green || red || white);
-        boolean any = (wubrg || colorless);
         
-        if (any){
+        if (wubrg || colorless){
             if (wubrg){
                 for (int i = 0; i < colors.length; i++){
                     if(colors[i]){
-                        where.eq(ColorMap.getName(i), true);
+                        where.eq(ColorEnum.getName(i), true);
                         colorClauses++;
                     }
                 }
             }        
-//            boolean hasColor = (colorClauses > 0);
-            
-//            if (hasColor){   
-//                if (colorClauses > 1){
-//                    where.or(colorClauses);
-//                    colorClauses = 1;
-//                }
+        //            boolean hasColor = (colorClauses > 0);
+
+        //            if (hasColor){   
+        //                if (colorClauses > 1){
+        //                    where.or(colorClauses);
+        //                    colorClauses = 1;
+        //                }
 //            }            
             if (colorless) {
-               where.eq(ColorMap.BLACK.colorName, false)
-                    .eq(ColorMap.BLUE.colorName, false)
-                    .eq(ColorMap.GREEN.colorName, false)
-                    .eq(ColorMap.RED.colorName, false)
-                    .eq(ColorMap.WHITE.colorName, false);
+                where.eq(ColorEnum.BLACK.colorName, false)
+                    .eq(ColorEnum.BLUE.colorName, false)
+                    .eq(ColorEnum.GREEN.colorName, false)
+                    .eq(ColorEnum.RED.colorName, false)
+                    .eq(ColorEnum.WHITE.colorName, false);
                where.and(5);
                colorClauses++;
             }
             if (colorClauses > 1){
                 where.or(colorClauses);
+                colorClauses = 1;
             }
-            
-            colorClauses = 1;
-            if (wubrg){
+
+            if (wubrg && explicitColor){
                 for (int i = 0; i < colors.length; i++){
                     if(!colors[i]){
-                        where.not().eq(ColorMap.getName(i), true);
+                        where.not().eq(ColorEnum.getName(i), true);
                         colorClauses++;
                     }
-                }        
-            }
-            
-            if (colorClauses > 1)
-            {
-                where.and(colorClauses);
-                colorClauses = 1;
+                }    
+                if (colorClauses > 1){
+                    where.and(colorClauses);
+                    colorClauses = 1;
+                }
             }
         }
         
