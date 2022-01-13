@@ -457,7 +457,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         try {
 
             // debug
-//            debugObjectMemorySize("Old cards size", this.currentView.getCardsStore());
+            // debugObjectMemorySize("Old cards size", this.currentView.getCardsStore());
             this.currentView.clearCardsStoreBeforeUpdate();
 
             java.util.List<Card> filteredCards = new ArrayList<>();
@@ -498,7 +498,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
 
             // debug
-//            debugObjectMemorySize("New cards size", filteredCards);
+            // debugObjectMemorySize("New cards size", filteredCards);
 
             this.currentView.loadCards(new CardsView(filteredCards), sortSetting, bigCard, null, false);
             this.cardCount.setText(String.valueOf(filteredCards.size()));
@@ -1553,17 +1553,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
     private void tbMulticolorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbMulticolorActionPerformed
         boolean oneColorCheck = (this.tbBlack.isSelected() ^ this.tbBlue.isSelected() ^ this.tbGreen.isSelected() ^ this.tbRed.isSelected() ^ this.tbWhite.isSelected() ^ this.tbColorless.isSelected());
-        
         // Does nothing if only 1 color is selected and explicit mode is on.
         if (!(oneColorCheck && tbExplicitMode.isSelected())){
             filterCardsColor(evt.getModifiers(), evt.getActionCommand());
         }
-
-            
     }//GEN-LAST:event_tbMulticolorActionPerformed
 
     private void tbExplicitModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbExplicitModeActionPerformed
-        
        // Does nothing if all or nothing is selected and if just one color is selected while multicolor display is off
         boolean anySelected = (this.tbBlack.isSelected() || this.tbBlue.isSelected() || this.tbGreen.isSelected() || this.tbRed.isSelected() || this.tbWhite.isSelected() || this.tbColorless.isSelected());
         boolean allSelected = (this.tbBlack.isSelected() && this.tbBlue.isSelected() && this.tbGreen.isSelected() && this.tbRed.isSelected() && this.tbWhite.isSelected() && this.tbColorless.isSelected());

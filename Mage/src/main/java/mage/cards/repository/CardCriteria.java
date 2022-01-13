@@ -60,8 +60,6 @@ public class CardCriteria {
     private boolean multicolor;
     private boolean explicitColor;
     
-//    private HashMap<Integer, String> colorMap;
-
     private Integer manaValue;
     private String sortBy;
     private Long start;
@@ -78,8 +76,9 @@ public class CardCriteria {
         this.notTypes = new ArrayList<>();
         this.supertypes = new ArrayList<>();
         this.notSupertypes = new ArrayList<>();
-        this.subtypes = new ArrayList<>();        
+        this.subtypes = new ArrayList<>();      
         
+        this.colors = new boolean[5];
         this.black = true;
         this.blue = true;
         this.green = true;
@@ -87,8 +86,8 @@ public class CardCriteria {
         this.white = true;
         this.colorless = true;
         this.multicolor = true;
-        this.colors = new boolean[5];
-//        this.colorMap = new HashMap<>();
+        this.explicitColor =false;
+
 
         this.minCardNumber = Integer.MIN_VALUE;
         this.maxCardNumber = Integer.MAX_VALUE;
@@ -138,11 +137,6 @@ public class CardCriteria {
         this.explicitColor = explicitColor;
         return this;
     }
-
-//    private void mapColor(int key, String colorName, boolean value){
-//        colorMap.put(key, colorName);
-//        //colors[key] = value;
-//    }
     
     public CardCriteria doubleFaced(boolean doubleFaced) {
         this.doubleFaced = doubleFaced;
@@ -336,87 +330,48 @@ public class CardCriteria {
         
         boolean wubrg = (black || blue || green || red || white);
         
-        if (wubrg || colorless){
-            if (wubrg){
-                for (int i = 0; i < colors.length; i++){
-                    if(colors[i]){
-                        where.eq(ColorEnum.getName(i), true);
-                        colorClauses++;
-                    }
+        if (wubrg){
+            for (int i = 0; i < colors.length; i++){
+                if(colors[i]){
+                    where.eq(ColorEnum.getName(i), true);
+                    colorClauses++;
                 }
-            }        
-        //            boolean hasColor = (colorClauses > 0);
-
-        //            if (hasColor){   
-        //                if (colorClauses > 1){
-        //                    where.or(colorClauses);
-        //                    colorClauses = 1;
-        //                }
-//            }            
-            if (colorless) {
-                where.eq(ColorEnum.BLACK.colorName, false)
-                    .eq(ColorEnum.BLUE.colorName, false)
-                    .eq(ColorEnum.GREEN.colorName, false)
-                    .eq(ColorEnum.RED.colorName, false)
-                    .eq(ColorEnum.WHITE.colorName, false);
-               where.and(5);
-               colorClauses++;
             }
+        }        
+
+        if (colorless) {
+            where.eq(ColorEnum.BLACK.colorName, false)
+                .eq(ColorEnum.BLUE.colorName, false)
+                .eq(ColorEnum.GREEN.colorName, false)
+                .eq(ColorEnum.RED.colorName, false)
+                .eq(ColorEnum.WHITE.colorName, false);
+           where.and(5);
+           colorClauses++;
+        }
+
+        // add any colors + colorless if selected
+        if (colorClauses > 1){
+            where.or(colorClauses);
+            colorClauses = 1;
+        }
+
+        // Explicit mode handling, removes deselected colors
+        if (wubrg && explicitColor){
+            for (int i = 0; i < colors.length; i++){
+                if(!colors[i]){
+                    where.not().eq(ColorEnum.getName(i), true);
+                    colorClauses++;
+                }
+            }    
             if (colorClauses > 1){
-                where.or(colorClauses);
+                where.and(colorClauses);
                 colorClauses = 1;
             }
-
-            if (wubrg && explicitColor){
-                for (int i = 0; i < colors.length; i++){
-                    if(!colors[i]){
-                        where.not().eq(ColorEnum.getName(i), true);
-                        colorClauses++;
-                    }
-                }    
-                if (colorClauses > 1){
-                    where.and(colorClauses);
-                    colorClauses = 1;
-                }
-            }
         }
         
         if (colorClauses > 0) {
             clausesCount++;
         }
-        
-        /*
-        if (black) {
-            where.eq("black", true);
-            colorClauses++;
-        }
-        if (blue) {
-            where.eq("blue", true);
-            colorClauses++;
-        }
-        if (green) {
-            where.eq("green", true);
-            colorClauses++;
-        }
-        if (red) {
-            where.eq("red", true);
-            colorClauses++;
-        }
-        if (white) {
-            where.eq("white", true);
-            colorClauses++;
-        }
-                
-        if (colorless) {
-            where.eq("black", false).eq("blue", false).eq("green", false).eq("red", false).eq("white", false);
-            where.and(5);
-            colorClauses++;
-        }
-        if (colorClauses > 0) {
-            where.or(colorClauses);
-            clausesCount++;
-        }
-        */
         
         if (minCardNumber != Integer.MIN_VALUE) {
             where.ge("cardNumberAsInt", minCardNumber);
