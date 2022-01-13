@@ -12,12 +12,31 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.HashMap;
 
 /**
  * @author North
  */
 public class CardCriteria {
 
+    private static enum ColorEnum {
+        BLACK ("black"),
+        BLUE  ("blue"),
+        GREEN ("green"),
+        RED   ("red"),
+        WHITE ("white");
+        
+        public final String colorName;
+        
+        ColorEnum(String colorName){
+            this.colorName = colorName;
+        }
+        
+        public static String getName(int index){
+            return ColorEnum.values()[index].colorName;
+        }
+    }
+    
     private String name;
     private String nameExact;
     private String rules;
@@ -29,6 +48,7 @@ public class CardCriteria {
     private final List<SuperType> notSupertypes;
     private final List<SubType> subtypes;
     private final List<Rarity> rarities;
+    private final boolean[] colors;
     private Boolean doubleFaced;
     private Boolean modalDoubleFaced;
     private boolean black;
@@ -37,6 +57,9 @@ public class CardCriteria {
     private boolean red;
     private boolean white;
     private boolean colorless;
+    private boolean multicolor;
+    private boolean explicitColor;
+    
     private Integer manaValue;
     private String sortBy;
     private Long start;
@@ -53,14 +76,18 @@ public class CardCriteria {
         this.notTypes = new ArrayList<>();
         this.supertypes = new ArrayList<>();
         this.notSupertypes = new ArrayList<>();
-        this.subtypes = new ArrayList<>();
-
+        this.subtypes = new ArrayList<>();      
+        
+        this.colors = new boolean[5];
         this.black = true;
         this.blue = true;
         this.green = true;
         this.red = true;
         this.white = true;
         this.colorless = true;
+        this.multicolor = true;
+        this.explicitColor =false;
+
 
         this.minCardNumber = Integer.MIN_VALUE;
         this.maxCardNumber = Integer.MAX_VALUE;
@@ -68,26 +95,31 @@ public class CardCriteria {
 
     public CardCriteria black(boolean black) {
         this.black = black;
+        colors[ColorEnum.BLACK.ordinal()] = black;
         return this;
     }
 
     public CardCriteria blue(boolean blue) {
         this.blue = blue;
+        colors[ColorEnum.BLUE.ordinal()] = blue;
         return this;
     }
 
     public CardCriteria green(boolean green) {
         this.green = green;
+        colors[ColorEnum.GREEN.ordinal()] = green;
         return this;
     }
 
     public CardCriteria red(boolean red) {
         this.red = red;
+        colors[ColorEnum.RED.ordinal()] = red;
         return this;
     }
 
     public CardCriteria white(boolean white) {
         this.white = white;
+        colors[ColorEnum.WHITE.ordinal()] = white;
         return this;
     }
 
@@ -95,7 +127,17 @@ public class CardCriteria {
         this.colorless = colorless;
         return this;
     }
-
+    
+    public CardCriteria multicolor(boolean multicolor){
+        this.multicolor = multicolor;
+        return this;
+    }
+    
+    public CardCriteria explicitColor(boolean explicitColor){
+        this.explicitColor = explicitColor;
+        return this;
+    }
+    
     public CardCriteria doubleFaced(boolean doubleFaced) {
         this.doubleFaced = doubleFaced;
         return this;
@@ -285,36 +327,52 @@ public class CardCriteria {
         }
 
         int colorClauses = 0;
-        if (black) {
-            where.eq("black", true);
-            colorClauses++;
-        }
-        if (blue) {
-            where.eq("blue", true);
-            colorClauses++;
-        }
-        if (green) {
-            where.eq("green", true);
-            colorClauses++;
-        }
-        if (red) {
-            where.eq("red", true);
-            colorClauses++;
-        }
-        if (white) {
-            where.eq("white", true);
-            colorClauses++;
-        }
+        
+        boolean wubrg = (black || blue || green || red || white);
+        
+        if (wubrg){
+            for (int i = 0; i < colors.length; i++){
+                if(colors[i]){
+                    where.eq(ColorEnum.getName(i), true);
+                    colorClauses++;
+                }
+            }
+        }        
+
         if (colorless) {
-            where.eq("black", false).eq("blue", false).eq("green", false).eq("red", false).eq("white", false);
-            where.and(5);
-            colorClauses++;
-        }
-        if (colorClauses > 0) {
-            where.or(colorClauses);
-            clausesCount++;
+            where.eq(ColorEnum.BLACK.colorName, false)
+                .eq(ColorEnum.BLUE.colorName, false)
+                .eq(ColorEnum.GREEN.colorName, false)
+                .eq(ColorEnum.RED.colorName, false)
+                .eq(ColorEnum.WHITE.colorName, false);
+           where.and(5);
+           colorClauses++;
         }
 
+        // add any colors + colorless if selected
+        if (colorClauses > 1){
+            where.or(colorClauses);
+            colorClauses = 1;
+        }
+
+        // Explicit mode handling, removes deselected colors
+        if (wubrg && explicitColor){
+            for (int i = 0; i < colors.length; i++){
+                if(!colors[i]){
+                    where.not().eq(ColorEnum.getName(i), true);
+                    colorClauses++;
+                }
+            }    
+            if (colorClauses > 1){
+                where.and(colorClauses);
+                colorClauses = 1;
+            }
+        }
+        
+        if (colorClauses > 0) {
+            clausesCount++;
+        }
+        
         if (minCardNumber != Integer.MIN_VALUE) {
             where.ge("cardNumberAsInt", minCardNumber);
             clausesCount++;
@@ -354,14 +412,14 @@ public class CardCriteria {
         }
 
         // remove color
-        if (black && blue && green && red && white && colorless) {
+        if (black && blue && green && red && white && colorless && multicolor) {
             black = false;
             blue = false;
             green = false;
             red = false;
             white = false;
             colorless = false;
-        }
+        } 
 
         // remove card type
         if (types.size() > 0) {
@@ -451,6 +509,10 @@ public class CardCriteria {
         return colorless;
     }
 
+    public boolean isMulticolor(){
+        return multicolor;
+    }
+    
     public Integer getManaValue() {
         return manaValue;
     }
