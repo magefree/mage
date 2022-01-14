@@ -49,7 +49,7 @@ public class PermanentsEnterBattlefieldTappedEffect extends ReplacementEffectImp
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return filter.match(permanent, source.getSourceId(), event.getPlayerId(), game);
+        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override
