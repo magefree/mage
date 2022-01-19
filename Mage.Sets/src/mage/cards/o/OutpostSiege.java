@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -39,7 +38,7 @@ public final class OutpostSiege extends CardImpl {
     private static final String ruleTrigger2 = "&bull  Dragons &mdash; Whenever a creature you control leaves the battlefield, {this} deals 1 damage to any target.";
 
     public OutpostSiege(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // As Outpost Siege enters the battlefield, choose Khans or Dragons.
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,
@@ -132,6 +131,11 @@ class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card theCard = game.getCard(objectId);
+        if (theCard == null) {
+            return false;
+        }
+        objectId = theCard.getMainCard().getId(); // for split cards and mdfc
         if (getTargetPointer().getTargets(game, source).contains(objectId)
                 && source.isControlledBy(affectedControllerId)) {
             Card card = game.getCard(objectId);
