@@ -43,6 +43,7 @@ public class Commander implements CommandObject {
                 switch (spellAbility.getSpellAbilityType()) {
                     case BASE:
                     case BASE_ALTERNATE:
+                    case BASE_ADDITIONAL:
                     case SPLIT:
                     case SPLIT_FUSED:
                     case SPLIT_LEFT:
