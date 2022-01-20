@@ -40,7 +40,7 @@ public class JumpStartAbility extends SpellAbility {
         this.newId();
         this.setCardName(card.getName() + " with jump-start");
         zone = Zone.GRAVEYARD;
-        spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        spellAbilityType = SpellAbilityType.BASE_ADDITIONAL;
 
         Cost cost = new DiscardTargetCost(new TargetCardInHand());
         cost.setText("");

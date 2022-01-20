@@ -19,7 +19,7 @@ public class RetraceAbility extends SpellAbility {
         this.newId();
         this.setCardName(card.getName() + " with retrace");
         zone = Zone.GRAVEYARD;
-        spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        spellAbilityType = SpellAbilityType.BASE_ADDITIONAL;
 
         Cost cost = new DiscardTargetCost(new TargetCardInHand(new FilterLandCard()));
         cost.setText("");
