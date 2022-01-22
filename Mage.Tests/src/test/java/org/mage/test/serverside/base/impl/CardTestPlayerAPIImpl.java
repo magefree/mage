@@ -238,6 +238,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             getHandCards(testPlayer).clear();
             getBattlefieldCards(testPlayer).clear();
             getGraveCards(testPlayer).clear();
+            getExiledCards(testPlayer).clear();
             // Reset the turn counter for tests
             ((TestPlayer) player).setInitialTurns(0);
         }
@@ -731,6 +732,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 return getLibraryCards(player);
             case COMMAND:
                 return getCommandCards(player);
+            case EXILED:
+                return getExiledCards(player);
             default:
                 break;
         }
