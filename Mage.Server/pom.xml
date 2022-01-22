@@ -262,7 +262,7 @@
             <!-- database support - sqlite db engine (additional db for game records and stats) -->
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.32.3.2</version>
+            <version>3.36.0.2</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
