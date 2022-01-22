@@ -81,7 +81,7 @@ class ShareTheSpoilsExileTrigger extends TriggeredAbilityImpl {
     @Override
     public String getTriggerPhrase() {
         return "When Share the Spoils enters the battlefield or an opponent loses the game, " +
-                "exile the top card of each player’s library.";
+                "exile the top card of each player's library.";
     }
 }
 
@@ -90,7 +90,7 @@ class ShareTheSpoilsExileEffect extends OneShotEffect {
 
     public ShareTheSpoilsExileEffect() {
         super(Outcome.DrawCard);
-        staticText = "Exile the top card of each player’s library.";
+        staticText = "Exile the top card of each player's library.";
     }
 
     public ShareTheSpoilsExileEffect(final ShareTheSpoilsExileEffect effect) {
