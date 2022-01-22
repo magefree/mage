@@ -1445,7 +1445,21 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 }
             }
         }
-        Assert.assertEquals("(Exile " + owner.getName() + ") Card counts are not equal (" + cardName + ')', count, actualCount);
+        Assert.assertEquals("(Exile " + owner.getName() + ") Card counts are not equal (" + cardName + ").", count, actualCount);
+    }
+
+    /**
+     * Assert card count in a specific exile zone.
+     *
+     * @param exileZoneName Name of the exile zone to be counted.
+     * @param count         Expected count.
+     * @throws AssertionError
+     */
+    public void assertExileZoneCount(String exileZoneName, int count) throws AssertionError {
+        ExileZone exileZone = currentGame.getExile().getExileZone(CardUtil.getExileZoneId(exileZoneName, currentGame));
+        int actualCount = exileZone.getCards(currentGame).size();
+
+        Assert.assertEquals("(Exile \"" + exileZoneName + "\") Card counts are not equal.", count, actualCount);
     }
 
     /**
