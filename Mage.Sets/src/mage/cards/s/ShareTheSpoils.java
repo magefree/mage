@@ -58,9 +58,8 @@ public class ShareTheSpoils extends CardImpl {
 
     private ShareTheSpoils(final ShareTheSpoils card) {
         super(card);
-        // Increment everytime a new copy is cast so that they don't share
-        exileNumber++;
-        exileZoneName = "Share the Spoils " + exileNumber + ", cast with any color";
+        // This is only used for MageObject.copy(), so do not increment exileNumber, but set exileZoneName
+        exileZoneName = "Share the Spoils " + exileNumber;
     }
 
     @Override
@@ -84,8 +83,9 @@ public class ShareTheSpoils extends CardImpl {
             // TODO: I don't know if this will cast when a player loses the game.
             //       1. Make sure it triggers when an opponent dies
             //       2. Change this so it doesn't trigger if you die.
-            return event.getType() == GameEvent.EventType.LOSES ||
-                    event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+            //          Do I have to do anything or will it take care of itself?
+            return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD ||
+                    event.getType() == GameEvent.EventType.LOSES;
         }
 
         @Override
