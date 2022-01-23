@@ -91,7 +91,8 @@ public final class ShareTheSpoils extends CardImpl {
         @Override
         public boolean checkEventType(GameEvent event, Game game) {
             return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD ||
-                    event.getType() == GameEvent.EventType.LOST;
+                    event.getType() == GameEvent.EventType.LOST || // Player conceedes
+                    event.getType() == GameEvent.EventType.LOSES;  // Player loses by all other means
         }
 
         @Override
