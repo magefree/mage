@@ -1,5 +1,7 @@
 package mage.cards.s;
 
+import mage.MageIdentifier;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,22 +12,29 @@ import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.util.CardUtil;
+import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
  * @author Alex-Vasile
  */
-public class ShareTheSpoils extends CardImpl {
+
+public final class ShareTheSpoils extends CardImpl {
 
     // Number used to ensure that each cast of Share the Spoils has its own unique exile pile
     //      "Once Share the Spoils leaves the battlefield, players may no longer play the exiled cards.
     //       If Share the Spoils is destroyed and somehow returns to the battlefield,
     //       it’s a new object with no memory of the previously exiled cards."
+    // TODO: Can I replace this with this.getId()?
+    //       If I do, I won't be able to write tests with it until I figure out how to get individual cards by name.
     private static int exileNumber = 0;
     private final String exileZoneName;
 
@@ -49,11 +58,12 @@ public class ShareTheSpoils extends CardImpl {
 
         // During each player’s turn, that player may play a land or cast a spell from among cards exiled with Share the Spoils
         Ability castAbility = new SimpleStaticAbility(new ShareTheSpoilsPlayCardExileEffect());
+        castAbility.setIdentifier(MageIdentifier.ShareTheSpoilsWatcher);
         // , and they may spend mana as though it were mana of any color to cast that spell.
         castAbility.addEffect(new ShareTheSpoilsSpendAnyManaEffect());
-        // When they do, exile the top card of their library.
-        // TODO
+        // TODO: When they do, exile the top card of their library.
 
+        this.addAbility(castAbility, new ShareTheSpoilsWatcher());
     }
 
     private ShareTheSpoils(final ShareTheSpoils card) {
@@ -80,12 +90,8 @@ public class ShareTheSpoils extends CardImpl {
 
         @Override
         public boolean checkEventType(GameEvent event, Game game) {
-            // TODO: I don't know if this will cast when a player loses the game.
-            //       1. Make sure it triggers when an opponent dies
-            //       2. Change this so it doesn't trigger if you die.
-            //          Do I have to do anything or will it take care of itself?
             return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD ||
-                    event.getType() == GameEvent.EventType.LOSES;
+                    event.getType() == GameEvent.EventType.LOST;
         }
 
         @Override
@@ -105,11 +111,11 @@ public class ShareTheSpoils extends CardImpl {
     }
 
     // TODO
-    // Based on Author of Shadows
+    // Based on Hauken's Insight
     class ShareTheSpoilsExileEffect extends OneShotEffect {
 
         public ShareTheSpoilsExileEffect() {
-            super(Outcome.DrawCard);
+            super(Outcome.Exile);
             staticText = ", exile the top card of each player's library.";
         }
 
@@ -132,11 +138,10 @@ public class ShareTheSpoils extends CardImpl {
 
                 if (card == null) { continue; }
 
+                // TODO: are there any replacement effects I should check and account for?
                 player.moveCards(card, Zone.EXILED, source, game);
                 game.getExile().moveToAnotherZone(card, game, exileZone);
                 // TODO: How to make sure that the card is only playable while this is in play?
-                //       I think I should get rid fo this card.
-//                CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
             }
             return true;
         }
@@ -149,8 +154,6 @@ public class ShareTheSpoils extends CardImpl {
 
     // TODO
     class ShareTheSpoilsPlayCardExileEffect extends AsThoughEffectImpl {
-        private int currTurn = 0;
-        private boolean playedCardWithShareTheSpoils = false;
 
         ShareTheSpoilsPlayCardExileEffect() {
             super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -176,20 +179,20 @@ public class ShareTheSpoils extends CardImpl {
             // Have to play on your turn
             if (!game.getActivePlayerId().equals(source.getControllerId())) { return false; }
 
-            // Check that they haven't played a card with Share the Spoils before
-            if (currTurn < game.getTurnNum()) {
-                currTurn = game.getTurnNum();
-                playedCardWithShareTheSpoils = false;
-                return true;
-            } else {
-                // TODO: How do I know if they've player a card?
-                if (playedCardWithShareTheSpoils) {
-                    return false;
-                } else {
-                    playedCardWithShareTheSpoils = true;
-                    return true;
-                }
+            // TODO: what is this line doing?
+            Permanent sourceObject = game.getPermanent(source.getSourceId());
+            if (sourceObject == null) { return false; }
+
+            ShareTheSpoilsWatcher watcher = game.getState().getWatcher(ShareTheSpoilsWatcher.class);
+
+            boolean canPlayCard = watcher.hasNotUsedAbilityThisTurn(new MageObjectReference(sourceObject, game));
+
+            // Taken from Blim Comedic Genius
+            if (canPlayCard) {
+
             }
+
+            return canPlayCard;
         }
 
         @Override
@@ -235,4 +238,32 @@ public class ShareTheSpoils extends CardImpl {
             return mana.getFirstAvailable();
         }
     }
+}
+
+// Directly from Hauken's Insight
+class ShareTheSpoilsWatcher extends Watcher {
+
+    private final Set<MageObjectReference> usedFrom = new HashSet<>();
+
+    public ShareTheSpoilsWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST || event.getType() == GameEvent.EventType.LAND_PLAYED) {
+            // TODO: What does this if statement check for?
+            if (event.hasApprovingIdentifier(MageIdentifier.ShareTheSpoilsWatcher)) {
+                usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
+            }
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        usedFrom.clear();
+    }
+
+    public boolean hasNotUsedAbilityThisTurn(MageObjectReference mor) { return !usedFrom.contains(mor); }
 }
