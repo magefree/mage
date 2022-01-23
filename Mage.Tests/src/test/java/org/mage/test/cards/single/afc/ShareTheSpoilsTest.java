@@ -1,11 +1,14 @@
 package org.mage.test.cards.single.afc;
 
+import mage.cards.s.ShareTheSpoils;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.Game;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestPlayerBase;
+import org.mage.test.serverside.base.CardTestCommander4Players;
+import org.mage.test.serverside.base.MageTestPlayerBase;
 
-public class ShareTheSpoilsTest extends CardTestPlayerBase {
+public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
     // When Share the Spoils enters the battlefield or an opponent loses the game,
     // exile the top card of each player’s library.
@@ -26,15 +29,29 @@ public class ShareTheSpoilsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         assertAllCommandsUsed();
+        assertExileZoneCount("Share the Spoils " + ShareTheSpoils.getExileNumber(), 4);
         assertExileCount(playerA, 1);
+        assertExileCount(playerD, 1);
         assertExileCount(playerB, 1);
-
+        assertExileCount(playerC, 1);
     }
 
     // TODO: Make a 3 player game to test the following two
     @Test
     public void nonOwnerLoses() {
-        assert true;
+        addCard(Zone.HAND,        playerA, shareTheSpoils);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        concede(1, PhaseStep.PRECOMBAT_MAIN, playerD);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+        // 4 initial exiled cards - 1 card for playedD losing + 3 for another activation when D dies
+        assertExileZoneCount("Share the Spoils " + ShareTheSpoils.getExileNumber(), 6);
+        assertExileCount(playerA, 2);
+        assertExileCount(playerB, 2);
+        assertExileCount(playerC, 2);
+        assertExileCount(playerD, 0);
     }
 
     @Test
