@@ -1,11 +1,8 @@
 package mage.cards.r;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -18,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.game.Exile;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -40,7 +36,7 @@ public final class RodOfAbsorption extends CardImpl {
     static { filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate())); }
 
     public RodOfAbsorption(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{U}");
 
         this.color.setBlue(true);
 
@@ -48,6 +44,7 @@ public final class RodOfAbsorption extends CardImpl {
 
         // Whenever a player casts an instant or sorcery spell,
         // exile it instead of putting it into a graveyard as it resolves.
+        // TODO: I don't think I can use SpellCastAllTriggeredAbility since I need to pass the spell ID to the effect
         this.addAbility(new RodOfAbsorptionExileTriggeredAbility());
 
         // X, P, Sacrifice Rod of Absorption: You may cast any number of spells from among cards exiled with Rod of
@@ -106,6 +103,7 @@ public final class RodOfAbsorption extends CardImpl {
 
         @Override
         public String getRule() {
+            // TODO: How much should go into here, and how much should go into the effect's staticText?
             return "Whenever a player casts an instant or sorcery spell, " +
                     "exile it instead of putting it into a graveyard as it resolves.";
         }
@@ -167,7 +165,6 @@ public final class RodOfAbsorption extends CardImpl {
             return true;
         }
 
-        // TODO: I don't understand why it's .ZONE_CHANGE
         @Override
         public boolean checksEventType(GameEvent event, Game game) {
             return event.getType() == GameEvent.EventType.ZONE_CHANGE;
@@ -182,7 +179,7 @@ public final class RodOfAbsorption extends CardImpl {
 
             if (!(zEvent.getFromZone() == Zone.STACK && zEvent.getToZone() == Zone.GRAVEYARD)) { return false; }
 
-            // TODO: From Reather the Redeemed, I don't know if it's necessary
+            // TODO: From Feather the Redeemed, I don't know if it's necessary
             Spell spell = game.getStack().getSpell(spellToMoveId);
             if (spell == null) { return false; }
             if (spell.getZoneChangeCounter(game) != game.getState().getZoneChangeCounter(event.getSourceId())) {
