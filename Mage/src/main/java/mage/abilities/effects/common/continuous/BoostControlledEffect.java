@@ -16,6 +16,7 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 import java.util.Iterator;
+import java.util.Locale;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -127,10 +128,12 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (excludeSource) {
+        boolean each = filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each");
+        if (excludeSource && !each) {
             sb.append("other ");
         }
-        sb.append(filter.getMessage()).append(" you control get ");
+        sb.append(filter.getMessage()).append(" you control ");
+        sb.append(each ? "gets " : "get ");
         sb.append(CardUtil.getBoostText(power, toughness, duration));
         staticText = sb.toString();
     }

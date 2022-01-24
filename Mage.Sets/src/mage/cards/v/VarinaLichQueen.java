@@ -17,7 +17,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -51,7 +51,7 @@ public final class VarinaLichQueen extends CardImpl {
                 ), new GenericManaCost(2)
         );
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
-                2, new FilterCard("cards from your graveyard")
+                2, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD
         )));
         this.addAbility(ability);
     }

@@ -117,6 +117,12 @@ public final class StaticFilters {
         FILTER_CARD_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
     }
 
+    public static final FilterCard FILTER_CARDS_FROM_YOUR_GRAVEYARD = new FilterCard("cards from your graveyard");
+
+    static {
+        FILTER_CARDS_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
+    }
+
     public static final FilterCard FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD = new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard");
 
     static {
@@ -563,6 +569,12 @@ public final class StaticFilters {
         FILTER_PERMANENT_CREATURES.setLockedFilter(true);
     }
 
+    public static final FilterCreaturePermanent FILTER_PERMANENT_ALL_CREATURES = new FilterCreaturePermanent("all creatures");
+
+    static {
+        FILTER_PERMANENT_ALL_CREATURES.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURES_CONTROLLED = new FilterCreaturePermanent("creatures you control");
 
     static {
@@ -760,6 +772,12 @@ public final class StaticFilters {
 
     static {
         FILTER_ATTACKING_OR_BLOCKING_CREATURES.setLockedFilter(true);
+    }
+
+    public static final FilterBlockingCreature FILTER_BLOCKING_CREATURES = new FilterBlockingCreature("blocking creatures");
+
+    static {
+        FILTER_BLOCKING_CREATURES.setLockedFilter(true);
     }
 
     public static final FilterPermanent FILTER_PERMANENT_AURA = new FilterPermanent();

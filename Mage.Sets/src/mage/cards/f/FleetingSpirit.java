@@ -16,7 +16,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -28,8 +28,6 @@ import mage.target.targetpointer.FixedTarget;
  * @author weirddan455
  */
 public final class FleetingSpirit extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("cards from your graveyard");
 
     public FleetingSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -43,7 +41,7 @@ public final class FleetingSpirit extends CardImpl {
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{W}")
         );
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, filter)));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)));
         this.addAbility(ability);
 
         // Discard a card: Exile Fleeting Spirit. Return it to the battlefield under its owner's control at the beginning of the next end step.
