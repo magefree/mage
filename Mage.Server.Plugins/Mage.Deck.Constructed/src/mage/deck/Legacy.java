@@ -71,6 +71,7 @@ public class Legacy extends Constructed {
         banned.add("Oath of Druids");
         banned.add("Oko, Thief of Crowns");
         banned.add("Power Play");
+        banned.add("Ragavan, Nimble Pilferer");
         banned.add("Rebirth");
         banned.add("Secret Summoning");
         banned.add("Secrets of Paradise");
