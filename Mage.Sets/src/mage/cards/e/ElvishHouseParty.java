@@ -2,6 +2,7 @@
 package mage.cards.e;
 
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -50,7 +51,7 @@ class CurrentHourCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int hour = LocalTime.now().getHour();
+        int hour = LocalTime.now(ZoneId.of("UTC")).getHour();
         // convert 24-hour value to 12-hour
         if (hour > 12) {
             hour -= 12;
