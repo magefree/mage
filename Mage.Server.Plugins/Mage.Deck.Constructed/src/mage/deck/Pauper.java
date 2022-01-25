@@ -22,22 +22,28 @@ public class Pauper extends Constructed {
         rarities.add(Rarity.LAND);
 
         banned.add("Arcum's Astrolabe");
+        banned.add("Atog");
+        banned.add("Bonder's Ornament");
+        banned.add("Chatterstorm");
         banned.add("Cloud of Faeries");
         banned.add("Cloudpost");
         banned.add("Cranial Plating");
         banned.add("Daze");
         banned.add("Empty the Warrens");
         banned.add("Expedition Map");
+        banned.add("Fall from Favor");
         banned.add("Frantic Search");
         banned.add("Gitaxian Probe");
         banned.add("Grapeshot");
         banned.add("Gush");
-        banned.add("Hight Tide");
+        banned.add("High Tide");
         banned.add("Hymn to Tourach");
         banned.add("Invigorate");
         banned.add("Mystic Sanctuary");
         banned.add("Peregrine Drake");
+        banned.add("Prophetic Prism");
         banned.add("Sinkhole");
+        banned.add("Sojourner's Companion");
         banned.add("Temporal Fissure");
         banned.add("Treasure Cruise");
     }
