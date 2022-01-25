@@ -21,6 +21,9 @@ public class Standard extends Constructed {
 
         setCodes.addAll(makeLegalSets());
 
+        banned.add("Alrund's Epiphany");
+        banned.add("Divide by Zero");
+        banned.add("Faceless Haven");
         banned.add("Omnath, Locus of Creation");
     }
 
