@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetTappedPermanentAsYouCast;
 
@@ -29,7 +30,7 @@ public final class EnthrallingHold extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetTappedPermanentAsYouCast(StaticFilters.FILTER_PERMANENT_CREATURE);
+        TargetPermanent auraTarget = new TargetTappedPermanentAsYouCast(new FilterCreaturePermanent("tapped creature"));
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
