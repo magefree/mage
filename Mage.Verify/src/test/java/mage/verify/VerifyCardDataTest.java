@@ -1416,7 +1416,7 @@ public class VerifyCardDataTest {
                     .map(Ability::getAllEffects)
                     .flatMap(Collection::stream)
                     .anyMatch(effect -> effect.getClass().isAssignableFrom(objectClass));
-            mustCheck = false; // TODO: enable and fix all problems with effect and ability hints
+            mustCheck = true; // TODO: enable and fix all problems with effect and ability hints
             if (mustCheck) {
                 boolean needHint = ref.text.contains(objectHint);
                 boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(objectHint));

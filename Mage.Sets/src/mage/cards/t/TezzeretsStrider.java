@@ -39,7 +39,7 @@ public final class TezzeretsStrider extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(
-                                new MenaceAbility(),
+                                new MenaceAbility(true),
                                 Duration.WhileOnBattlefield
                         ),
                         new PermanentsOnTheBattlefieldCondition(filter),

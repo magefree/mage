@@ -38,7 +38,7 @@ public final class DraugrsHelm extends CardImpl {
 
         // Equipped creature gets +2/+2 and has menace.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
-        ability.addEffect(new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.EQUIPMENT).setText("and has menace"));
+        ability.addEffect(new GainAbilityAttachedEffect(new MenaceAbility(true), AttachmentType.EQUIPMENT).setText("and has menace"));
         this.addAbility(ability);
 
         // Equip {4}

@@ -41,7 +41,7 @@ public final class ChiefJimHopper extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Chief Jim Hopper attacks, investigate once for each nontoken attacking creature.
         this.addAbility(new AttacksTriggeredAbility(new InvestigateEffect(xValue)

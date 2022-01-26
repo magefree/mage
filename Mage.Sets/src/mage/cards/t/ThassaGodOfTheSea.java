@@ -41,7 +41,7 @@ public final class ThassaGodOfTheSea extends CardImpl {
 
         // At the beginning of your upkeep, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ScryEffect(1), TargetController.YOU, false
+                new ScryEffect(1, false), TargetController.YOU, false
         ));
 
         // {1}{U}: Target creature you control can't be blocked this turn.

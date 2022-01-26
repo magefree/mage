@@ -34,7 +34,7 @@ public final class OliviasAttendants extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Olivia's Attendants deals damage, create that many Blood tokens.
         this.addAbility(new OliviasAttendantsTriggeredAbility());

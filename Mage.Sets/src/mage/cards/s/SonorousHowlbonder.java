@@ -38,7 +38,7 @@ public final class SonorousHowlbonder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Each creature you control with menace can't be blocked except by three or more creatures.
         ContinuousEffect effect = new CantBeBlockedByOneAllEffect(3, filter);

@@ -48,7 +48,7 @@ class BloodstoneGoblinTriggeredAbility extends TriggeredAbilityImpl {
 
     BloodstoneGoblinTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn).setText("{this} gets +1/+1"), false);
-        this.addEffect(new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn).setText("and gains menace until end of turn"));
+        this.addEffect(new GainAbilitySourceEffect(new MenaceAbility(false), Duration.EndOfTurn).setText("and gains menace until end of turn"));
     }
 
     BloodstoneGoblinTriggeredAbility(final BloodstoneGoblinTriggeredAbility ability) {

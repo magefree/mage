@@ -39,7 +39,7 @@ public final class BloodcrazedSocialite extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Bloodcrazed Socialite enters the battlefield, create a Blood token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BloodToken())));

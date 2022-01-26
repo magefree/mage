@@ -29,7 +29,7 @@ public final class StormfistCrusader extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // At the beginning of your upkeep, each player draws a card and loses 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(

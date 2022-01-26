@@ -38,7 +38,7 @@ public final class MoodmarkPainter extends CardImpl {
         );
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new GainAbilityTargetEffect(
-                        new MenaceAbility(),
+                        new MenaceAbility(false),
                         Duration.EndOfTurn
                 ).setText("target creature gains menace"),
                 false);

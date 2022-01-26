@@ -41,7 +41,7 @@ public final class YennettCrypticSovereign extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Yennett, Cryptic Sovereign attacks, reveal the top card of your library. If that card's 
         // converted mana cost is odd, you may cast it without paying its mana cost. Otherwise, draw a card.

@@ -27,7 +27,7 @@ public final class InquisitivePuppet extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Inquisitive Puppet enters the battlefield, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
 
         // Exile Inquisitive Puppet: Create a 1/1 white Human creature token.
         this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new HumanToken()), new ExileSourceCost()));

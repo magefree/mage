@@ -43,7 +43,7 @@ public final class PiperOfTheSwarm extends CardImpl {
 
         // Rats you control have menace.
         this.addAbility(new SimpleStaticAbility(
-                new GainAbilityControlledEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)
+                new GainAbilityControlledEffect(new MenaceAbility(false), Duration.WhileOnBattlefield, filter)
         ));
 
         // {1}{B}, {T}: Create a 1/1 black Rat creature token.
