@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetTappedPermanentAsYouCast;
 
@@ -29,7 +28,8 @@ public final class DreamLeash extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // Enchant permanent
-        TargetPermanent auraTarget = new TargetTappedPermanentAsYouCast(new FilterCreaturePermanent("tapped permanent"));
+        TargetPermanent auraTarget = new TargetTappedPermanentAsYouCast();
+        auraTarget.withChooseHint("must be tapped");
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
