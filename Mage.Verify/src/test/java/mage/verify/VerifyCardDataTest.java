@@ -1407,7 +1407,7 @@ public class VerifyCardDataTest {
         // special check: missing or wrong ability/effect hints
         Map<Class, String> hints = new HashMap<>();
         hints.put(MenaceAbility.class, "can't be blocked except by two or more");
-        hints.put(ScryEffect.class, "Look at the top card of your library");
+        hints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom of your library");
         for (Class objectClass : hints.keySet()) {
             String objectHint = hints.get(objectClass);
             // ability/effect must have description or not
