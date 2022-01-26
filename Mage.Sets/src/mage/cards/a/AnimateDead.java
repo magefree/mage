@@ -43,7 +43,7 @@ public final class AnimateDead extends CardImpl {
         TargetCardInGraveyard auraTarget = new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard"));
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AnimateDeadAttachEffect(Outcome.PutCreatureInPlay));
-        Ability enchantAbility = new EnchantAbility(auraTarget.getTargetName());
+        Ability enchantAbility = new EnchantAbility(auraTarget.getFilter());
         this.addAbility(enchantAbility);
         // When Animate Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard"
         // and gains "enchant creature put onto the battlefield with Animate Dead." Return enchanted creature card to the battlefield
@@ -191,7 +191,7 @@ class AnimateDeadAttachEffect extends OneShotEffect {
 
 class AnimateDeadChangeAbilityEffect extends ContinuousEffectImpl implements SourceEffect {
 
-    private static final Ability newAbility = new EnchantAbility("creature put onto the battlefield with Animate Dead");
+    private static final Ability newAbility = new EnchantAbility(new FilterCreaturePermanent("creature put onto the battlefield with Animate Dead"));
 
     static {
         newAbility.setRuleAtTheTop(true);
@@ -255,7 +255,7 @@ class AnimateDeadAttachToPermanentEffect extends ContinuousEffectImpl {
         Permanent animateDead = game.getPermanent(source.getSourceId());
         if (animateDead != null) {
             // The target has to be changed to CreaturePermanent because the reset from card resets it to Card in Graveyard
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("enchant creature put onto the battlefield with Animate Dead");
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature put onto the battlefield with Animate Dead");
             filter.add(new PermanentIdPredicate(getTargetPointer().getFirst(game, source)));
             Target target = new TargetCreaturePermanent(filter);
             target.addTarget(((FixedTarget) getTargetPointer()).getTarget(), source, game);

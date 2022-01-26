@@ -1,8 +1,10 @@
-
 package mage.abilities.keyword;
 
-import mage.constants.Zone;
 import mage.abilities.StaticAbility;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
+import mage.filter.FilterPlayer;
 
 /**
  *
@@ -13,9 +15,19 @@ public class EnchantAbility extends StaticAbility {
 
     protected String targetName;
 
-    public EnchantAbility(String targetName) {
+    public EnchantAbility(FilterCard filter) {
         super(Zone.BATTLEFIELD, null);
-        this.targetName = targetName;
+        this.targetName = filter.getMessage();
+    }
+
+    public EnchantAbility(FilterPermanent filter) {
+        super(Zone.BATTLEFIELD, null);
+        this.targetName = filter.getMessage();
+    }
+
+    public EnchantAbility(FilterPlayer filter) {
+        super(Zone.BATTLEFIELD, null);
+        this.targetName = filter.getMessage();
     }
 
     public EnchantAbility(final EnchantAbility ability) {

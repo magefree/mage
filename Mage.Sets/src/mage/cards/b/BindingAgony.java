@@ -29,7 +29,7 @@ public final class BindingAgony extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget.getFilter());
         this.addAbility(ability);
         // Whenever enchanted creature is dealt damage, Binding Agony deals that much damage to that creature's controller.
         Effect effect = new DamageTargetEffect(new NumericSetToEffectValues("that much", "damage"));

@@ -33,7 +33,7 @@ public final class GruesomeDeformity extends CardImpl {
         TargetPermanent target = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(target.getTargetName());
+        Ability ability = new EnchantAbility(target.getFilter());
         this.addAbility(ability);
         // Enchanted creature has intimidate.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.AURA)));

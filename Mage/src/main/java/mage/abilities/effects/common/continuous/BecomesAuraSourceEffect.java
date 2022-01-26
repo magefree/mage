@@ -8,7 +8,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
+import mage.target.TargetPermanent;
 
 /**
  * @author LevelX2
@@ -16,12 +16,12 @@ import mage.target.Target;
 public class BecomesAuraSourceEffect extends ContinuousEffectImpl implements SourceEffect {
 
     private final Ability newAbility;
-    private final Target target;
+    private final TargetPermanent target;
 
-    public BecomesAuraSourceEffect(Target target) {
+    public BecomesAuraSourceEffect(TargetPermanent target) {
         super(Duration.Custom, Outcome.AddAbility);
         this.target = target;
-        newAbility = new EnchantAbility(target.getTargetName());
+        newAbility = new EnchantAbility(target.getFilter());
         newAbility.setRuleAtTheTop(true);
         staticText = "it becomes an Aura with enchant " + target.getTargetName();
         dependencyTypes.add(DependencyType.AuraAddingRemoving);

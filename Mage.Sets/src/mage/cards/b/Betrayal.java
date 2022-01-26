@@ -36,7 +36,7 @@ public final class Betrayal extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget.getFilter());
         this.addAbility(ability);
 
         // Whenever enchanted creature becomes tapped, you draw a card.

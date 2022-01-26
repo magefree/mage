@@ -26,7 +26,7 @@ public final class CurseOfOblivion extends CardImpl {
         TargetPlayer target = new TargetPlayer();
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(target.getTargetName());
+        Ability ability = new EnchantAbility(target.getFilter());
         this.addAbility(ability);
 
         // At the beginning of enchanted player's upkeep, that player exiles two cards from their graveyard.

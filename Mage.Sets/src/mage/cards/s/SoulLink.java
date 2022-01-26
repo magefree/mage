@@ -32,7 +32,7 @@ public final class SoulLink extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget.getFilter());
         this.addAbility(ability);
         // Whenever enchanted creature deals damage, you gain that much life.
         this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD,

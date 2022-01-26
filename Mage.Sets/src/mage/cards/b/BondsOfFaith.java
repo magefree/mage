@@ -35,7 +35,7 @@ public final class BondsOfFaith extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Neutral));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget.getFilter());
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 as long as it's a Human. Otherwise, it can't attack or block.

@@ -28,7 +28,7 @@ public final class CurseOfTheBloodyTome extends CardImpl {
         TargetPlayer target = new TargetPlayer();
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(target.getTargetName());
+        Ability ability = new EnchantAbility(target.getFilter());
         this.addAbility(ability);
 
         // At the beginning of enchanted player's upkeep, that player puts the top two cards of their library into their graveyard.

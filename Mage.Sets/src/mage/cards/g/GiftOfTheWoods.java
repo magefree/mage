@@ -32,7 +32,7 @@ public final class GiftOfTheWoods extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         this.getSpellAbility().addTarget(auraTarget);
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget.getFilter());
         this.addAbility(ability);
 
         // Whenever enchanted creature blocks or becomes blocked, it gets +0/+3 until

@@ -46,7 +46,7 @@ public final class DesertsHold extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Removal));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget.getFilter());
         this.addAbility(ability);
 
         // When Desert's Hold enters the battlefield, if you control a Desert or there is a Desert card in your graveyard, you gain 3 life.

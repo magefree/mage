@@ -13,6 +13,7 @@ import mage.abilities.effects.common.CreateSpecialActionEffect;
 import mage.abilities.effects.common.RemoveSpecialActionEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -124,7 +125,7 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
                     }
                     licid.removeAbilities(toRemove, source.getSourceId(), game);
 
-                    Ability ability = new EnchantAbility("creature");
+                    Ability ability = new EnchantAbility(StaticFilters.FILTER_PERMANENT_CREATURE);
                     ability.setRuleAtTheTop(true);
                     licid.addAbility(ability, source.getSourceId(), game);
                     licid.getSpellAbility().getTargets().clear();

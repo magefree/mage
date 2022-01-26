@@ -28,7 +28,7 @@ public final class CripplingBlight extends CardImpl {
         TargetPermanent target = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(target.getTargetName()));
+        this.addAbility(new EnchantAbility(target.getFilter()));
 
         // Enchanted creature gets -1/-1 and can't block.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield)));

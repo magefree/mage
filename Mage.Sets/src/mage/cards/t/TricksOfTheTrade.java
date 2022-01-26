@@ -33,7 +33,7 @@ public final class TricksOfTheTrade extends CardImpl {
         TargetPermanent target = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        this.addAbility(new EnchantAbility(target.getTargetName()));
+        this.addAbility(new EnchantAbility(target.getFilter()));
 
         // Enchanted creature gets +2/+0 and can't be blocked.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0, Duration.WhileOnBattlefield)));

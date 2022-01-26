@@ -41,7 +41,7 @@ public final class WhiteWard extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Protect));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget.getFilter()));
         // Enchanted creature has protection from white. This effect doesn't remove White Ward.
         ProtectionAbility gainedAbility = new ProtectionAbility(filter);
         gainedAbility.setAuraIdNotToBeRemoved(this.getId());

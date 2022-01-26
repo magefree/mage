@@ -38,7 +38,7 @@ public final class CurseOfStalkedPrey extends CardImpl {
         TargetPlayer target = new TargetPlayer();
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(target.getTargetName());
+        Ability ability = new EnchantAbility(target.getFilter());
         this.addAbility(ability);
 
         // Whenever a creature deals combat damage to enchanted player, put a +1/+1 counter on that creature.

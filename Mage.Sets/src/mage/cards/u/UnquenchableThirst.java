@@ -47,7 +47,7 @@ public final class UnquenchableThirst extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget.getFilter());
         this.addAbility(ability);
 
         // When Unquenchable Thirst enters the battlefield, if you control a Desert or there is a Desert card in your graveyard, tap enchanted creature.

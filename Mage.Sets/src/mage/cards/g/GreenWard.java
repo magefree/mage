@@ -41,7 +41,7 @@ public final class GreenWard extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Protect));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget.getFilter()));
         // Enchanted creature has protection from green. This effect doesn't remove Green Ward.
         ProtectionAbility gainedAbility = new ProtectionAbility(filter);
         gainedAbility.setAuraIdNotToBeRemoved(this.getId());

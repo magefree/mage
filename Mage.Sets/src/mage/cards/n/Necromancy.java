@@ -90,7 +90,7 @@ class NecromancyReAttachEffect extends OneShotEffect {
             Permanent enchantedCreature = game.getPermanent(cardInGraveyard.getId());
             if (enchantedCreature != null) {
                 enchantedCreature.addAttachment(enchantment.getId(), source, game);
-                FilterCreaturePermanent filter = new FilterCreaturePermanent("enchant creature put onto the battlefield with " + enchantment.getIdName());
+                FilterCreaturePermanent filter = new FilterCreaturePermanent("creature put onto the battlefield with " + enchantment.getIdName());
                 filter.add(new PermanentIdPredicate(cardInGraveyard.getId()));
                 Target target = new TargetCreaturePermanent(filter);
                 target.addTarget(enchantedCreature.getId(), source, game);
@@ -138,7 +138,7 @@ class NecromancyLeavesBattlefieldTriggeredEffect extends OneShotEffect {
 
 class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements SourceEffect {
 
-    private static final Ability newAbility = new EnchantAbility("creature put onto the battlefield with Necromancy");
+    private static final Ability newAbility = new EnchantAbility(new FilterCreaturePermanent("creature put onto the battlefield with Necromancy"));
 
     static {
         newAbility.setRuleAtTheTop(true);

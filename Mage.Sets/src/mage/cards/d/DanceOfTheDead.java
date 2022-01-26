@@ -49,7 +49,7 @@ public final class DanceOfTheDead extends CardImpl {
         TargetCardInGraveyard auraTarget = new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard"));
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new DanceOfTheDeadAttachEffect(Outcome.PutCreatureInPlay));
-        Ability enchantAbility = new EnchantAbility(auraTarget.getTargetName());
+        Ability enchantAbility = new EnchantAbility(auraTarget.getFilter());
         this.addAbility(enchantAbility);
         // When Dance of the Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with Dance of the Dead." Put enchanted creature card to the battlefield tapped under your control and attach Dance of the Dead to it. When Dance of the Dead leaves the battlefield, that creature's controller sacrifices it.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
@@ -116,7 +116,7 @@ class DanceOfTheDeadReAttachEffect extends OneShotEffect {
             controller.moveCards(cardInGraveyard, Zone.BATTLEFIELD, source, game, true, false, false, null);
             Permanent enchantedCreature = game.getPermanent(cardInGraveyard.getId());
 
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("enchant creature put onto the battlefield with Dance of the Dead");
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature put onto the battlefield with Dance of the Dead");
             filter.add(new PermanentIdPredicate(cardInGraveyard.getId()));
             Target target = new TargetCreaturePermanent(filter);
             //enchantAbility.setTargetName(target.getTargetName());
@@ -204,7 +204,7 @@ class DanceOfTheDeadAttachEffect extends OneShotEffect {
 
 class DanceOfTheDeadChangeAbilityEffect extends ContinuousEffectImpl implements SourceEffect {
 
-    private static final Ability newAbility = new EnchantAbility("creature put onto the battlefield with Dance of the Dead");
+    private static final Ability newAbility = new EnchantAbility(new FilterCreaturePermanent("creature put onto the battlefield with Dance of the Dead"));
 
     static {
         newAbility.setRuleAtTheTop(true);

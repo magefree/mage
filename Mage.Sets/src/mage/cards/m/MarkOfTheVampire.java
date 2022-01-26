@@ -34,7 +34,7 @@ public final class MarkOfTheVampire extends CardImpl {
         TargetPermanent target = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        this.addAbility(new EnchantAbility(target.getTargetName()));
+        this.addAbility(new EnchantAbility(target.getFilter()));
 
         // Enchanted creature gets +2/+2 and has lifelink.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
