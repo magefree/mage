@@ -7,6 +7,7 @@ import mage.abilities.common.SagaAbility;
 import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.abilities.keyword.TransformAbility;
@@ -1383,9 +1384,14 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "card have Multikicker ability, but missing it in rules text");
         }
 
+        // special check: Auras need to have enchant ability added
+        if (card.hasSubtype(SubType.AURA, null) && !card.getAbilities().containsClass(EnchantAbility.class)) {
+            fail(card, "abilities", "card is an Aura but is missing this.addAbility(EnchantAbility)");
+        }
+
         // special check: Sagas need to have saga ability added
         if (card.hasSubtype(SubType.SAGA, null) && !card.getAbilities().containsClass(SagaAbility.class)) {
-            fail(card, "abilities", "card is a Saga but is missing this.addAbility(sagaAbility)");
+            fail(card, "abilities", "card is a Saga but is missing this.addAbility(SagaAbility)");
         }
 
         // special check: Werewolves front ability should only be on front and vice versa
