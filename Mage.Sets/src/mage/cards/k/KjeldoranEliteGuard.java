@@ -6,9 +6,8 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -16,8 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -25,7 +23,7 @@ import java.util.UUID;
 /**
  * @author Alex-Vasile
  */
-public class KjeldoranEliteGuard extends CardImpl {
+public final class KjeldoranEliteGuard extends CardImpl {
 
     public KjeldoranEliteGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -42,7 +40,8 @@ public class KjeldoranEliteGuard extends CardImpl {
                 new KjeldoranEliteGuardEffect(),
                 new TapSourceCost(),
                 new IsPhaseCondition(TurnPhase.COMBAT, false));
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent());
+
         this.addAbility(ability);
     }
 
@@ -65,10 +64,7 @@ class KjeldoranEliteGuardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source == null) { return false; }
-
-        Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        if (targetCreature == null) { return false; }
+        if (game.getPermanent(source.getFirstTarget()) == null) { return false; }
 
         // Target creature gets +2/+2 until end of turn.
         BoostTargetEffect buffEffect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
@@ -76,12 +72,8 @@ class KjeldoranEliteGuardEffect extends OneShotEffect {
         game.addEffect(buffEffect, source);
 
         // When that creature leaves the battlefield this turn, sacrifice Kjeldoran Elite Guard.
-        SacrificeTargetEffect sacrificeKjeldoranEliteGuardEffect = new SacrificeTargetEffect();
-        sacrificeKjeldoranEliteGuardEffect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
         game.addDelayedTriggeredAbility(
-                new KjeldoranEliteGuardDelayedTriggeredAbility(
-                        sacrificeKjeldoranEliteGuardEffect,
-                        source.getFirstTarget()),
+                new KjeldoranEliteGuardDelayedTriggeredAbility(source.getFirstTarget()),
                 source);
 
         return true;
@@ -95,10 +87,10 @@ class KjeldoranEliteGuardEffect extends OneShotEffect {
 
 class KjeldoranEliteGuardDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    UUID creatureId;
+    private final UUID creatureId;
 
-    KjeldoranEliteGuardDelayedTriggeredAbility(Effect effect, UUID creatureId) {
-        super(effect, Duration.EndOfTurn, true);
+    KjeldoranEliteGuardDelayedTriggeredAbility(UUID creatureId) {
+        super(new SacrificeSourceEffect(), Duration.EndOfTurn, true);
         this.creatureId = creatureId;
     }
 
@@ -113,10 +105,7 @@ class KjeldoranEliteGuardDelayedTriggeredAbility extends DelayedTriggeredAbility
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && event.getTargetId().equals(creatureId);
-    }
+    public boolean checkTrigger(GameEvent event, Game game) { return event.getTargetId().equals(creatureId); }
 
     @Override
     public KjeldoranEliteGuardDelayedTriggeredAbility copy() {

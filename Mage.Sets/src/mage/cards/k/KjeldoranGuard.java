@@ -5,13 +5,12 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.DefendingPlayerControlsCondition;
 import mage.abilities.condition.common.IsPhaseCondition;
-import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -20,8 +19,7 @@ import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -29,7 +27,7 @@ import java.util.UUID;
 /**
  * @author Alex-Vasile
  */
-public class KjeldoranGuard extends CardImpl {
+public final class KjeldoranGuard extends CardImpl {
 
     private static final FilterLandPermanent snowLandFiler = new FilterLandPermanent("a snow land");
 
@@ -46,7 +44,7 @@ public class KjeldoranGuard extends CardImpl {
         // When that creature leaves the battlefield this turn, sacrifice Kjeldoran Guard.
         // Activate only during combat and only if defending player controls no snow lands.
         CompoundCondition snowLandAndCombatCondition = new CompoundCondition(
-                new InvertCondition(new OpponentControlsPermanentCondition(snowLandFiler)),
+                new InvertCondition(new DefendingPlayerControlsCondition(snowLandFiler)),
                 new IsPhaseCondition(TurnPhase.COMBAT, false));
 
         Ability ability = new ConditionalActivatedAbility(
@@ -54,7 +52,7 @@ public class KjeldoranGuard extends CardImpl {
                 new KjeldoranGuardEffect(),
                 new TapSourceCost(),
                 snowLandAndCombatCondition);
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
@@ -77,10 +75,7 @@ class KjeldoranGuardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source == null) { return false; }
-
-        Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        if (targetCreature == null) { return false; }
+        if (game.getPermanent(source.getFirstTarget()) == null) { return false; }
 
         // Target creature gets +2/+2 until end of turn.
         BoostTargetEffect buffEffect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
@@ -88,12 +83,8 @@ class KjeldoranGuardEffect extends OneShotEffect {
         game.addEffect(buffEffect, source);
 
         // When that creature leaves the battlefield this turn, sacrifice Kjeldoran  Guard.
-        SacrificeTargetEffect sacrificeKjeldoranGuardEffect = new SacrificeTargetEffect();
-        sacrificeKjeldoranGuardEffect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
         game.addDelayedTriggeredAbility(
-                new KjeldoranGuardDelayedTriggeredAbility(
-                        sacrificeKjeldoranGuardEffect,
-                        source.getFirstTarget()),
+                new KjeldoranGuardDelayedTriggeredAbility(source.getFirstTarget()),
                 source);
 
         return true;
@@ -107,10 +98,10 @@ class KjeldoranGuardEffect extends OneShotEffect {
 
 class KjeldoranGuardDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    UUID creatureId;
+    private final UUID creatureId;
 
-    KjeldoranGuardDelayedTriggeredAbility(Effect effect, UUID creatureId) {
-        super(effect, Duration.EndOfTurn, true);
+    KjeldoranGuardDelayedTriggeredAbility(UUID creatureId) {
+        super(new SacrificeSourceEffect(), Duration.EndOfTurn, true);
         this.creatureId = creatureId;
     }
 
@@ -126,8 +117,7 @@ class KjeldoranGuardDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && event.getTargetId().equals(creatureId);
+        return event.getTargetId().equals(creatureId);
     }
 
     @Override
