@@ -196,7 +196,6 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Karplusan Yeti", 197, Rarity.RARE, mage.cards.k.KarplusanYeti.class));
         cards.add(new SetCardInfo("Kelsinko Ranger", 33, Rarity.COMMON, mage.cards.k.KelsinkoRanger.class));
         cards.add(new SetCardInfo("Kjeldoran Dead", 137, Rarity.COMMON, mage.cards.k.KjeldoranDead.class));
-        cards.add(new SetCardInfo("Kjeldoran Elite Guard", 34, Rarity.UNCOMMON, mage.cards.k.KjeldoranEliteGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Frostbeast", 296, Rarity.UNCOMMON, mage.cards.k.KjeldoranFrostbeast.class));
         cards.add(new SetCardInfo("Kjeldoran Guard", 35, Rarity.UNCOMMON, mage.cards.k.KjeldoranGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Knight", 36, Rarity.RARE, mage.cards.k.KjeldoranKnight.class));
