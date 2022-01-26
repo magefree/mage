@@ -522,12 +522,6 @@ public final class StaticFilters {
         FILTER_PERMANENT_CREATURE.setLockedFilter(true);
     }
 
-    public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_A = new FilterCreaturePermanent("a creature");
-
-    static {
-        FILTER_PERMANENT_CREATURE_A.setLockedFilter(true);
-    }
-
     public static final FilterPermanent FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A = new FilterPermanent("a creature or planeswalker");
 
     static {
