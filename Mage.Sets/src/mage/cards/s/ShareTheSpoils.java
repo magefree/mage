@@ -9,6 +9,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.*;
 import mage.cards.*;
 import mage.constants.*;
+import mage.game.CardState;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -23,6 +24,14 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+// TODO
+//  Card in exile isn't highlighted as castable
+//  Casting a card from exile does not exile a replacement
+//  Play text still tells you to pay the colored mana when casting from exile
+//  Check that it's no longer playable once share the spoils is removed
+//  As any mana is not working yet
+//  Exile window sticks around after share the spoils has been removed
+
 /**
  * @author Alex-Vasile
  */
@@ -33,43 +42,34 @@ public final class ShareTheSpoils extends CardImpl {
     //      "Once Share the Spoils leaves the battlefield, players may no longer play the exiled cards.
     //       If Share the Spoils is destroyed and somehow returns to the battlefield,
     //       it’s a new object with no memory of the previously exiled cards."
-    // TODO: Can I replace this with this.getId()?
-    //       If I do, I won't be able to write tests with it until I figure out how to get individual cards by name.
-    private static int exileNumber = 0;
-    private final String exileZoneName;
-
-    // Needed in order to test that the class works properly
-    public static int getExileNumber() {
-        return exileNumber;
-    }
+    private final String exileZoneId;
 
     public ShareTheSpoils(UUID ownderId, CardSetInfo setInfo) {
-        // TODO: For some reason the text shown when no image is available is wrong.
-        //       Shows only half the text and repeats itself.
         super(ownderId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
         // Increment everytime a new copy is cast so that they don't share
-
-        exileZoneName = "Share the Spoils " + ++exileNumber;
+        exileZoneId = this.getId().toString();
 
         // When Share the Spoils enters the battlefield or an opponent loses the game,
         // exile the top card of each player’s library.exile the top card of each player’s library.
-        this.addAbility(new ShareTheSpoilsExileTrigger());
+        this.addAbility(new ShareTheSpoilsExileETBAndPlayerLossAbility());
 
-        // During each player’s turn, that player may play a land or cast a spell from among cards exiled with Share the Spoils
-        Ability castAbility = new SimpleStaticAbility(new ShareTheSpoilsPlayCardExileEffect());
-        castAbility.setIdentifier(MageIdentifier.ShareTheSpoilsWatcher);
-        // , and they may spend mana as though it were mana of any color to cast that spell.
+        // During each player’s turn,
+        Ability castAbility = new SimpleStaticAbility(new ShareTheSpoilsPlayExiledCardEffect());
+        // that player may play a land or cast a spell from among cards exiled with Share the Spoils,
+        // and they may spend mana as though it were mana of any color to cast that spell.
         castAbility.addEffect(new ShareTheSpoilsSpendAnyManaEffect());
-        // TODO: When they do, exile the top card of their library.
-
+        castAbility.setIdentifier(MageIdentifier.ShareTheSpoilsWatcher);
         this.addAbility(castAbility, new ShareTheSpoilsWatcher());
+
+        // When they do, exile the top card of their library.
+        Ability exileCardWhenPlayedACard = new ShareTheSpoilsExileCardWhenPlayACardAbility();
+        this.addAbility(exileCardWhenPlayedACard);
     }
 
     private ShareTheSpoils(final ShareTheSpoils card) {
         super(card);
-        // This is only used for MageObject.copy(), so do not increment exileNumber, but set exileZoneName
-        exileZoneName = "Share the Spoils " + exileNumber;
+        exileZoneId = card.getId().toString();
     }
 
     @Override
@@ -77,14 +77,14 @@ public final class ShareTheSpoils extends CardImpl {
         return new ShareTheSpoils(this);
     }
 
-    // Based on Prosper Tome Bond
-    class ShareTheSpoilsExileTrigger extends TriggeredAbilityImpl {
+    //-- Exile from Everyone --//
+    class ShareTheSpoilsExileETBAndPlayerLossAbility extends TriggeredAbilityImpl {
 
-        ShareTheSpoilsExileTrigger() {
-            super(Zone.BATTLEFIELD, new ShareTheSpoilsExileEffect());
+        ShareTheSpoilsExileETBAndPlayerLossAbility() {
+            super(Zone.BATTLEFIELD, new ShareTheSpoilsExileCardFromEveryoneEffect());
         }
 
-        private ShareTheSpoilsExileTrigger(final ShareTheSpoilsExileTrigger ability) {
+        private ShareTheSpoilsExileETBAndPlayerLossAbility(final ShareTheSpoilsExileETBAndPlayerLossAbility ability) {
             super(ability);
         }
 
@@ -97,12 +97,18 @@ public final class ShareTheSpoils extends CardImpl {
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
+            // Something entered the battlefield, and it should only go of when this card enters
+            if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+                return event.getTargetId().equals(getSourceId());
+            }
+
+            // A player lost the game
             return true;
         }
 
         @Override
         public TriggeredAbility copy() {
-            return new ShareTheSpoilsExileTrigger(this);
+            return new ShareTheSpoilsExileETBAndPlayerLossAbility(this);
         }
 
         @Override
@@ -111,23 +117,30 @@ public final class ShareTheSpoils extends CardImpl {
         }
     }
 
-    // TODO
-    // Based on Hauken's Insight
-    class ShareTheSpoilsExileEffect extends OneShotEffect {
+    class ShareTheSpoilsExileCardFromEveryoneEffect extends OneShotEffect {
 
-        public ShareTheSpoilsExileEffect() {
+        public ShareTheSpoilsExileCardFromEveryoneEffect() {
             super(Outcome.Exile);
             staticText = ", exile the top card of each player's library.";
         }
 
-        public ShareTheSpoilsExileEffect(final ShareTheSpoilsExileEffect effect) {
+        public ShareTheSpoilsExileCardFromEveryoneEffect(final ShareTheSpoilsExileCardFromEveryoneEffect effect) {
             super(effect);
         }
 
         @Override
         public boolean apply(Game game, Ability source) {
+            if (source == null) { return false; }
+
+            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(exileZoneId, game));
+
+            if (exileZone == null) {
+                exileZone = game.getExile().createZone(
+                        CardUtil.getExileZoneId(exileZoneId, game),
+                        "Share the Spoils");
+            }
             // Create an exile zone unique to this card
-            ExileZone exileZone = game.getExile().createZone(CardUtil.getExileZoneId(exileZoneName, game), exileZoneName);
+
 
             PlayerList players = game.getState().getPlayersInRange(source.getControllerId(), game);
             for (UUID playerId : players) {
@@ -135,32 +148,38 @@ public final class ShareTheSpoils extends CardImpl {
 
                 if (player == null) { continue; }
 
-                Card card = player.getLibrary().getFromTop(game);
+                Card topLibraryCard = player.getLibrary().getFromTop(game);
 
-                if (card == null) { continue; }
+                if (topLibraryCard == null) { continue; }
 
-                // TODO: are there any replacement effects I should check and account for?
-                player.moveCards(card, Zone.EXILED, source, game);
-                game.getExile().moveToAnotherZone(card, game, exileZone);
-                // TODO: How to make sure that the card is only playable while this is in play?
+                // TODO: Should I use moveCardsToExile instead?
+                player.moveCards(topLibraryCard, Zone.EXILED, source, game);
+                game.getExile().moveToAnotherZone(topLibraryCard, game, exileZone);
             }
             return true;
         }
 
         @Override
-        public ShareTheSpoilsExileEffect copy() {
-            return new ShareTheSpoilsExileEffect(this);
+        public ShareTheSpoilsExileCardFromEveryoneEffect copy() {
+            return new ShareTheSpoilsExileCardFromEveryoneEffect(this);
         }
     }
 
-    // TODO
-    class ShareTheSpoilsPlayCardExileEffect extends AsThoughEffectImpl {
+    //-- Play a card Exiled by Share the Spoils --//
+    class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
 
-        ShareTheSpoilsPlayCardExileEffect() {
+        ShareTheSpoilsPlayExiledCardEffect() {
             super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+            // TODO: All the text is here rather than spread out since I can't figure out how to get rid of the new line
+            //       that putting the "When they do, exile the top card of their library.", inside the other triggered
+            //       ability would create, and which isn't in the Oracle text.
+            staticText = "During each player’s turn, " +
+                    "that player may play a land or cast a spell from among cards exiled with Share the Spoils, " +
+                    "and they may spend mana as though it were mana of any color to cast that spell. " +
+                    "When they do, exile the top card of their library";
         }
 
-        private ShareTheSpoilsPlayCardExileEffect(final ShareTheSpoilsPlayCardExileEffect effect) {
+        private ShareTheSpoilsPlayExiledCardEffect(final ShareTheSpoilsPlayExiledCardEffect effect) {
             super(effect);
         }
 
@@ -174,7 +193,8 @@ public final class ShareTheSpoils extends CardImpl {
             if (game.getState().getZone(card.getMainCard().getId()) != Zone.EXILED) { return false; }
 
             // Not a card exiled with this Share the Spoils
-            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(exileZoneName, game));
+            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(exileZoneId, game));
+            if (exileZone == null) { return false; }
             if (!exileZone.contains(sourceId)) { return false; }
 
             // Have to play on your turn
@@ -186,33 +206,25 @@ public final class ShareTheSpoils extends CardImpl {
 
             ShareTheSpoilsWatcher watcher = game.getState().getWatcher(ShareTheSpoilsWatcher.class);
 
-            boolean canPlayCard = watcher.hasNotUsedAbilityThisTurn(new MageObjectReference(sourceObject, game));
-
-            // Taken from Blim Comedic Genius
-            if (canPlayCard) {
-
-            }
-
-            return canPlayCard;
+            return watcher.hasNotUsedAbilityThisTurn(new MageObjectReference(sourceObject, game));
         }
 
         @Override
         public AsThoughEffect copy() {
-            return new ShareTheSpoilsPlayCardExileEffect(this);
+            return new ShareTheSpoilsPlayExiledCardEffect(this);
         }
 
         @Override
         public boolean apply(Game game, Ability source) {
-             return true;
+            return true;
         }
     }
 
-    // Based on DraugrNecromancer
-    static class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
+    //-- Spend mana as any color --//
+    class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
         ShareTheSpoilsSpendAnyManaEffect() {
             super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
-            staticText = ", and they may spend mana as though it were mana of any color to cast that spell";
         }
 
         private ShareTheSpoilsSpendAnyManaEffect(final ShareTheSpoilsSpendAnyManaEffect effect) {
@@ -231,6 +243,29 @@ public final class ShareTheSpoils extends CardImpl {
 
         @Override
         public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+            Card card = game.getCard(sourceId);
+            if (card == null) { return false; }
+
+            // Check Exile
+            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(exileZoneId, game));
+            if (exileZone == null) { return false; }
+            if (exileZone.contains(sourceId)) { return true; }
+
+            // Check Stack
+            CardState cardState;
+            if (card instanceof SplitCard) {
+                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
+            } else if (card instanceof AdventureCard) {
+                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
+            } else if (card instanceof ModalDoubleFacesCard) {
+                cardState = game.getLastKnownInformationCard(((ModalDoubleFacesCard) card).getLeftHalfCard().getId(), Zone.EXILED);
+            } else {
+                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
+            }
+
+            if (cardState == null) { return false; }
+
+            // TODO: How to figure out what exile zone this card came from
             return true;
         }
 
@@ -239,9 +274,74 @@ public final class ShareTheSpoils extends CardImpl {
             return mana.getFirstAvailable();
         }
     }
+
+    //-- Exile when a card is played that was exiled with Share the Spoil's  --//
+    class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
+
+        ShareTheSpoilsExileCardWhenPlayACardAbility() {
+            super(Zone.BATTLEFIELD, new ShareTheSpoilsExileSingleCardEffect());
+        }
+
+        private ShareTheSpoilsExileCardWhenPlayACardAbility(final ShareTheSpoilsExileCardWhenPlayACardAbility ability) {
+            super(ability);
+        }
+
+        @Override
+        public boolean checkEventType(GameEvent event, Game game) {
+            return false;
+        }
+
+        @Override
+        public boolean checkTrigger(GameEvent event, Game game) {
+            if (!(event.getType() == GameEvent.EventType.SPELL_CAST ||
+                    event.getType() == GameEvent.EventType.PLAY_LAND)) {
+                return false;
+            }
+            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(exileZoneId, game));
+            if (exileZone == null) { return false; }
+            return exileZone.contains(sourceId);
+        }
+
+        @Override
+        public TriggeredAbility copy() {
+            return new ShareTheSpoilsExileCardWhenPlayACardAbility(this);
+        }
+    }
+
+    class ShareTheSpoilsExileSingleCardEffect extends OneShotEffect {
+
+        ShareTheSpoilsExileSingleCardEffect() {
+            super(Outcome.Exile);
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            if (source == null) { return false; }
+
+            // Not a card exiled with this Share the Spoils
+            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(exileZoneId, game));
+            if (exileZone == null) { return false; }
+
+            Player player = game.getPlayer(source.getControllerId());
+            if (player == null) { return false; }
+
+            Card topLibraryCard = player.getLibrary().getFromTop(game);
+            if (topLibraryCard == null) { return false; }
+
+            // TODO: Should I use moveCardsToExile instead?
+            player.moveCards(topLibraryCard, Zone.EXILED, source, game);
+            game.getExile().moveToAnotherZone(topLibraryCard, game, exileZone);
+
+            return true;
+        }
+
+        private ShareTheSpoilsExileSingleCardEffect(final ShareTheSpoilsExileSingleCardEffect effect) { super(effect); }
+
+        @Override
+        public ShareTheSpoilsExileSingleCardEffect copy() { return new ShareTheSpoilsExileSingleCardEffect(this); }
+    }
 }
 
-// Directly from Hauken's Insight
 class ShareTheSpoilsWatcher extends Watcher {
 
     private final Set<MageObjectReference> usedFrom = new HashSet<>();
