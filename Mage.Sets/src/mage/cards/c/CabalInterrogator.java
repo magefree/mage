@@ -80,8 +80,11 @@ class CabalInterrogatorEffect extends OneShotEffect {
 
         int amountToReveal = (ManacostVariableValue.REGULAR).calculate(game, source, this);
 
+        if (amountToReveal < 1) {
+            return true;
+        }
         Cards revealedCards = new CardsImpl();
-        if (amountToReveal > 0 && targetPlayer.getHand().size() > amountToReveal) {
+        if (targetPlayer.getHand().size() > amountToReveal) {
             Cards cardsInHand = new CardsImpl();
             cardsInHand.addAll(targetPlayer.getHand());
 

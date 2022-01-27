@@ -84,9 +84,12 @@ class ThievingSpriteEffect extends OneShotEffect {
         FilterControlledPermanent filter = new FilterControlledPermanent();
         filter.add(SubType.FAERIE.getPredicate());
         int numberOfFaeries = game.getBattlefield().countAll(filter, controller.getId(), game);
+        if (numberOfFaeries < 1) {
+            return true;
+        }
 
         Cards revealedCards = new CardsImpl();
-        if (numberOfFaeries > 0 && targetPlayer.getHand().size() > numberOfFaeries) {
+        if (targetPlayer.getHand().size() > numberOfFaeries) {
             Cards cardsInHand = new CardsImpl();
             cardsInHand.addAll(targetPlayer.getHand());
 
