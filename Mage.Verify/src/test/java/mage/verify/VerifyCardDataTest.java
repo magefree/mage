@@ -1410,18 +1410,10 @@ public class VerifyCardDataTest {
         for (Class objectClass : hints.keySet()) {
             String objectHint = hints.get(objectClass);
             // ability/effect must have description or not
-            boolean mustCheck = card.getAbilities().containsClass(objectClass)
-                    || card.getAbilities().stream()
-                    .map(Ability::getAllEffects)
-                    .flatMap(Collection::stream)
-                    .anyMatch(effect -> effect.getClass().isAssignableFrom(objectClass));
-            mustCheck = true; // TODO: enable and fix all problems with effect and ability hints
-            if (mustCheck) {
-                boolean needHint = ref.text.contains(objectHint);
-                boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(objectHint));
-                if (needHint != haveHint) {
-                    fail(card, "abilities", "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
-                }
+            boolean needHint = ref.text.contains(objectHint);
+            boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(objectHint));
+            if (needHint != haveHint) {
+                fail(card, "abilities", "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
             }
         }
 
