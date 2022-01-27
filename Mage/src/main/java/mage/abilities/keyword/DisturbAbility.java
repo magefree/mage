@@ -3,11 +3,14 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.AttachEffect;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.target.Target;
 
 import java.util.UUID;
 
@@ -34,11 +37,12 @@ public class DisturbAbility extends SpellAbility {
         this.newId();
 
         // verify check
-        if (card.getSecondCardFace() == null || card.getSecondCardFace().getClass().equals(card.getClass())) {
+        Card secondSideCard = card.getSecondCardFace();
+        if (secondSideCard == null || secondSideCard.getClass().equals(card.getClass())) {
             throw new IllegalArgumentException("Wrong code usage. Disturb ability can be added to double faces card only (main side).");
         }
 
-        this.setCardName(card.getSecondCardFace().getName() + " with Disturb");
+        this.setCardName(secondSideCard.getName() + " with Disturb");
         this.zone = Zone.GRAVEYARD;
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.spellAbilityCastMode = SpellAbilityCastMode.DISTURB;
@@ -48,6 +52,16 @@ public class DisturbAbility extends SpellAbility {
         this.getManaCostsToPay().clear();
         this.addManaCost(new ManaCostsImpl(manaCost));
         this.addSubAbility(new TransformAbility());
+
+        SpellAbility ability = secondSideCard.getSpellAbility();
+        for (Target target : ability.getTargets()) {
+            this.addTarget(target);
+        }
+        for (Effect effect : ability.getEffects()) {
+            if (effect instanceof AttachEffect) {
+                this.addEffect(effect);
+            }
+        }
     }
 
     private DisturbAbility(final DisturbAbility ability) {
