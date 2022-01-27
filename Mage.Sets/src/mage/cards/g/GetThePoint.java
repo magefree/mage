@@ -19,7 +19,7 @@ public final class GetThePoint extends CardImpl {
 
         // Destroy target creature. Scry 1.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        this.getSpellAbility().addEffect(new ScryEffect(1, false));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

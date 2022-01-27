@@ -40,7 +40,7 @@ public final class CabalTherapist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // At the beginning of your precombat main phase, you may sacrifice a creature. When you do, choose a nonland card name, then target player reveals their hand and discards all cards with that name.
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(

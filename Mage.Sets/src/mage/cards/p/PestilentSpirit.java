@@ -37,7 +37,7 @@ public final class PestilentSpirit extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());

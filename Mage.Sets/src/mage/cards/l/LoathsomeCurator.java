@@ -44,7 +44,7 @@ public final class LoathsomeCurator extends CardImpl {
         this.addAbility(new ExploitAbility());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Loathsome Curator exploits a creature, destroy target creature you don't control with mana value 3 or less.
         Ability ability = new ExploitCreatureTriggeredAbility(new DestroyTargetEffect(), false);

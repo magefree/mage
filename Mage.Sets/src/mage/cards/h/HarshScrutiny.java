@@ -22,7 +22,7 @@ public final class HarshScrutiny extends CardImpl {
         // Target opponent reveals their hand. You choose a creature card from it. That player discards that card. Scry 1.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(new FilterCreatureCard("a creature card")));
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        this.getSpellAbility().addEffect(new ScryEffect(1, false));
     }
 
     private HarshScrutiny(final HarshScrutiny card) {

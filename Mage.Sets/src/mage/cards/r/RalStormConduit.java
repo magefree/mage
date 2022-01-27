@@ -36,7 +36,7 @@ public final class RalStormConduit extends CardImpl {
         this.addAbility(new RalStormConduitTriggeredAbility());
 
         // +2: Scry 1.
-        this.addAbility(new LoyaltyAbility(new ScryEffect(1), 2));
+        this.addAbility(new LoyaltyAbility(new ScryEffect(1, false), 2));
 
         // -2: When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
         this.addAbility(new LoyaltyAbility(new CreateDelayedTriggeredAbilityEffect(

@@ -44,7 +44,8 @@ public final class HagraConstrictor extends CardImpl {
         // Each creature you control with a +1/+1 counter on it has menace.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new MenaceAbility(), Duration.WhileOnBattlefield, filter,
-                "Each creature you control with a +1/+1 counter on it has menace"
+                "Each creature you control with a +1/+1 counter on it has menace. " +
+                        "<i>(A creature with menace can't be blocked except by two or more creatures.)</i>"
         )));
     }
 

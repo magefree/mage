@@ -23,7 +23,7 @@ public final class TempleOfSilence extends CardImpl {
         // Temple of Silence enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Temple of Silence enters the battlefield, scry 1.</i>
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
         // {T}: Add {W} or {B}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());

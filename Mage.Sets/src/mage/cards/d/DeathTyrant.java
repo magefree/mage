@@ -35,7 +35,7 @@ public final class DeathTyrant extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Negative Energy Cone — Whenever an attacking creature you control or a blocking creature an opponent controls dies, create a 2/2 black Zombie creature token.
         this.addAbility(new DeathTyrantTriggeredAbility().withFlavorWord("Negative Energy Cone"));

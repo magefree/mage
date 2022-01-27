@@ -36,7 +36,7 @@ public final class Fleshtaker extends CardImpl {
         Ability ability = new SacrificePermanentTriggeredAbility(
                 new GainLifeEffect(1), StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
         );
-        ability.addEffect(new ScryEffect(1, false).concatBy("and"));
+        ability.addEffect(new ScryEffect(1).concatBy("and"));
         this.addAbility(ability);
 
         // {1}, Sacrifice another creature: Fleshtaker gets +2/+2 until end of turn.

@@ -50,7 +50,7 @@ public final class RogueClass extends CardImpl {
         // Creatures you control have menace.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
                 new GainAbilityControlledEffect(
-                        new MenaceAbility(), Duration.WhileOnBattlefield,
+                        new MenaceAbility(false), Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_PERMANENT_CREATURES
                 ), 2
         )));

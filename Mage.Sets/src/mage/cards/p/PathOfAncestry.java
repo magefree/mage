@@ -120,6 +120,8 @@ class PathOfAncestryTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1.";
+        return "When that mana is spent to cast a creature spell that shares a creature type with your commander," +
+                "scry 1. " +
+                "<i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>";
     }
 }

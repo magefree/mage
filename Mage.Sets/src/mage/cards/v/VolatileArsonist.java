@@ -32,7 +32,7 @@ public final class VolatileArsonist extends CardImpl {
         this.secondSideCardClazz = mage.cards.d.DireStrainAnarchist.class;
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Haste
         this.addAbility(HasteAbility.getInstance());

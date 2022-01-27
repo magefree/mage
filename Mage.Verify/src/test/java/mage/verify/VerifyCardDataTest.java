@@ -193,7 +193,6 @@ public class VerifyCardDataTest {
         // wrond card numbers skip list
         skipListCreate(SKIP_LIST_WRONG_CARD_NUMBERS);
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "SWS"); // Star Wars
-        skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "POR"); // Portal, TODO: remove after bug fixed https://github.com/mtgjson/mtgjson/issues/660
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UND"); // un-sets don't have full implementation of card variations
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UST"); // un-sets don't have full implementation of card variations
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "SOI", "Tamiyo's Journal"); // not all variations implemented
@@ -1413,22 +1412,14 @@ public class VerifyCardDataTest {
         // special check: missing or wrong ability/effect hints
         Map<Class, String> hints = new HashMap<>();
         hints.put(MenaceAbility.class, "can't be blocked except by two or more");
-        hints.put(ScryEffect.class, "Look at the top card of your library");
+        hints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom of your library");
         for (Class objectClass : hints.keySet()) {
             String objectHint = hints.get(objectClass);
             // ability/effect must have description or not
-            boolean mustCheck = card.getAbilities().containsClass(objectClass)
-                    || card.getAbilities().stream()
-                    .map(Ability::getAllEffects)
-                    .flatMap(Collection::stream)
-                    .anyMatch(effect -> effect.getClass().isAssignableFrom(objectClass));
-            mustCheck = false; // TODO: enable and fix all problems with effect and ability hints
-            if (mustCheck) {
-                boolean needHint = ref.text.contains(objectHint);
-                boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(objectHint));
-                if (needHint != haveHint) {
-                    fail(card, "abilities", "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
-                }
+            boolean needHint = ref.text.contains(objectHint);
+            boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(objectHint));
+            if (needHint != haveHint) {
+                fail(card, "abilities", "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
             }
         }
 

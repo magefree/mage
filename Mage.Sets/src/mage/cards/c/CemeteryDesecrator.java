@@ -39,7 +39,7 @@ public final class CemeteryDesecrator extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Cemetery Desecrator enters the battlefield or dies, exile another card from a graveyard. When you do, choose one —
         // • Remove X counters from target permanent, where X is the mana value of the exiled card.

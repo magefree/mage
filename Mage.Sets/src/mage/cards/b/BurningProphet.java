@@ -33,7 +33,7 @@ public final class BurningProphet extends CardImpl {
                 ).setText("{this} gets +1/+0 until end of turn, then"),
                 StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         );
-        ability.addEffect(new ScryEffect(1));
+        ability.addEffect(new ScryEffect(1, false));
         this.addAbility(ability);
     }
 

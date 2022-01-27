@@ -2,6 +2,7 @@ package mage.cards.p;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -40,7 +41,8 @@ class PlayWithFireEffect extends OneShotEffect {
 
     PlayWithFireEffect() {
         super(Outcome.Benefit);
-        staticText = "{this} deals 2 damage to any target. If a player is dealt damage this way, scry 1";
+        staticText = "{this} deals 2 damage to any target. If a player is dealt damage this way, scry 1. " +
+                "<i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>";
     }
 
     private PlayWithFireEffect(final PlayWithFireEffect effect) {

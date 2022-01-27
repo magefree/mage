@@ -38,7 +38,7 @@ public final class GrevenPredatorCaptain extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Greven, Predator Captain gets +X/+0, where X is the amount of life you've lost this turn.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
