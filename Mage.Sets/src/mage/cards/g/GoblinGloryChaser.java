@@ -38,7 +38,8 @@ public final class GoblinGloryChaser extends CardImpl {
         Effect effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
                 RenownedSourceCondition.instance,
-                "As long as {this} is renowned, it has menace");
+                "As long as {this} is renowned, it has menace. " +
+                        "<i>(It can't be blocked except by two or more creatures.)</i>");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         this.addAbility(ability);
     }

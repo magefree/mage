@@ -43,7 +43,8 @@ public final class TezzeretsStrider extends CardImpl {
                                 Duration.WhileOnBattlefield
                         ),
                         new PermanentsOnTheBattlefieldCondition(filter),
-                        "As long as you control a Tezzeret planeswalker, {this} has menace"
+                        "As long as you control a Tezzeret planeswalker, {this} has menace. " +
+                                "<i>(It can't be blocked except by two or more creatures.)</i>"
                 )
         ));
     }
