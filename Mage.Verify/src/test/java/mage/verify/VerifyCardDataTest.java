@@ -192,7 +192,6 @@ public class VerifyCardDataTest {
         // wrond card numbers skip list
         skipListCreate(SKIP_LIST_WRONG_CARD_NUMBERS);
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "SWS"); // Star Wars
-        skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "POR"); // Portal, TODO: remove after bug fixed https://github.com/mtgjson/mtgjson/issues/660
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UND"); // un-sets don't have full implementation of card variations
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UST"); // un-sets don't have full implementation of card variations
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "SOI", "Tamiyo's Journal"); // not all variations implemented
