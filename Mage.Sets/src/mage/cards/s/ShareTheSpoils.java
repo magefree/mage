@@ -13,6 +13,7 @@ import mage.game.CardState;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
@@ -24,12 +25,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-// TODO
-//  Card in exile isn't highlighted as castable
-//  Casting a card from exile does not exile a replacement
+// TODO:
 //  Play text still tells you to pay the colored mana when casting from exile
-//  Check that it's no longer playable once share the spoils is removed
-//  As any mana is not working yet
 //  Exile window sticks around after share the spoils has been removed
 
 /**
@@ -132,6 +129,7 @@ public final class ShareTheSpoils extends CardImpl {
         public boolean apply(Game game, Ability source) {
             if (source == null) { return false; }
 
+            // Create an exile zone unique to this card
             ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(exileZoneId, game));
 
             if (exileZone == null) {
@@ -139,8 +137,6 @@ public final class ShareTheSpoils extends CardImpl {
                         CardUtil.getExileZoneId(exileZoneId, game),
                         "Share the Spoils");
             }
-            // Create an exile zone unique to this card
-
 
             PlayerList players = game.getState().getPlayersInRange(source.getControllerId(), game);
             for (UUID playerId : players) {
@@ -170,13 +166,9 @@ public final class ShareTheSpoils extends CardImpl {
 
         ShareTheSpoilsPlayExiledCardEffect() {
             super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
-            // TODO: All the text is here rather than spread out since I can't figure out how to get rid of the new line
-            //       that putting the "When they do, exile the top card of their library.", inside the other triggered
-            //       ability would create, and which isn't in the Oracle text.
-            staticText = "During each player’s turn, " +
+            staticText = "During each player's turn, " +
                     "that player may play a land or cast a spell from among cards exiled with Share the Spoils, " +
-                    "and they may spend mana as though it were mana of any color to cast that spell. " +
-                    "When they do, exile the top card of their library";
+                    "and they may spend mana as though it were mana of any color to cast that spell";
         }
 
         private ShareTheSpoilsPlayExiledCardEffect(final ShareTheSpoilsPlayExiledCardEffect effect) {
@@ -252,21 +244,20 @@ public final class ShareTheSpoils extends CardImpl {
             if (exileZone.contains(sourceId)) { return true; }
 
             // Check Stack
-            CardState cardState;
-            if (card instanceof SplitCard) {
-                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
-            } else if (card instanceof AdventureCard) {
-                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
-            } else if (card instanceof ModalDoubleFacesCard) {
-                cardState = game.getLastKnownInformationCard(((ModalDoubleFacesCard) card).getLeftHalfCard().getId(), Zone.EXILED);
+            UUID cardID;
+            Card mainCard = card.getMainCard();
+            if (mainCard instanceof ModalDoubleFacesCard) {
+                cardID = ((ModalDoubleFacesCard) mainCard).getLeftHalfCard().getId();
             } else {
-                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
+                cardID = mainCard.getId();
             }
 
-            if (cardState == null) { return false; }
+            CardState cardState = game.getLastKnownInformationCard(cardID, Zone.EXILED);
 
-            // TODO: How to figure out what exile zone this card came from
-            return true;
+            // TODO: I can't figure out how to find which exile zone it came from. Two options:
+            //       1. Change CardState to track this
+            //       2. Fake it with a Counter (see Draugr Necromancer)
+            return cardState != null;
         }
 
         @Override
@@ -288,23 +279,32 @@ public final class ShareTheSpoils extends CardImpl {
 
         @Override
         public boolean checkEventType(GameEvent event, Game game) {
-            return false;
+            if (event.getType() != GameEvent.EventType.ZONE_CHANGE) { return false; }
+            ZoneChangeEvent zEvent = ((ZoneChangeEvent) event);
+
+            return (zEvent.getFromZone() == Zone.EXILED && zEvent.getToZone() == Zone.STACK);
         }
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            if (!(event.getType() == GameEvent.EventType.SPELL_CAST ||
-                    event.getType() == GameEvent.EventType.PLAY_LAND)) {
-                return false;
-            }
             ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(exileZoneId, game));
             if (exileZone == null) { return false; }
-            return exileZone.contains(sourceId);
+
+            Card card = game.getCard(event.getSourceId());
+            if (card == null) { return false; }
+
+            return true;
+            //return exileZone.contains(card.getId());
         }
 
         @Override
         public TriggeredAbility copy() {
             return new ShareTheSpoilsExileCardWhenPlayACardAbility(this);
+        }
+
+        @Override
+        public String getTriggerPhrase() {
+            return "When they do";
         }
     }
 
@@ -312,6 +312,7 @@ public final class ShareTheSpoils extends CardImpl {
 
         ShareTheSpoilsExileSingleCardEffect() {
             super(Outcome.Exile);
+            staticText = ", exile the top card of their library";
         }
 
         @Override
@@ -353,7 +354,7 @@ class ShareTheSpoilsWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST || event.getType() == GameEvent.EventType.LAND_PLAYED) {
-            // TODO: What does this if statement check for?
+            // TODO: How does this if-statement work?
             if (event.hasApprovingIdentifier(MageIdentifier.ShareTheSpoilsWatcher)) {
                 usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
             }
