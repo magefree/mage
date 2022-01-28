@@ -37,7 +37,12 @@ public final class PelakkaPredation extends ModalDoubleFacesCard {
         // Sorcery
 
         // Target opponent reveals their hand. You may choose a card from it with converted mana cost 3 or greater. That player discards that card.
-        this.getLeftHalfCard().getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.OPPONENT));
+        this.getLeftHalfCard().getSpellAbility().addEffect(
+                new DiscardCardYouChooseTargetEffect(filter, TargetController.OPPONENT).setText(
+                        "Target opponent reveals their hand. " +
+                                "You choose a card from it with converted mana cost 3 or greater. " +
+                                "That player discards that card"
+                ));
         this.getLeftHalfCard().getSpellAbility().addTarget(new TargetOpponent());
 
         // 2.

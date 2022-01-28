@@ -53,7 +53,8 @@ public final class TimeToFeed extends CardImpl {
         this.getSpellAbility().addEffect(new TimeToFeedTextEffect());
         // Target creature you control fights that creature.
         Effect effect = new FightTargetsEffect();
-        effect.setText("Target creature you control fights that creature");
+        effect.setText("Target creature you control fights that creature. " +
+                "<i>(Each deals damage equal to its power to the other.)</i>");
         this.getSpellAbility().addEffect(effect);
 
         Target target = new TargetCreaturePermanent(filter1);

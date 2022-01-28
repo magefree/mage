@@ -40,8 +40,12 @@ public final class NessianWildsRavager extends CardImpl {
         // When Nessian Wilds Ravager enters the battlefield, if tribute wasn't paid, you may have Nessian Wilds Ravager fight another target creature.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect(), true);
         ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
-                "When {this} enters the battlefield, if tribute wasn't paid, you may have {this} fight another target creature."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+                ability,
+                TributeNotPaidCondition.instance,
+                "When {this} enters the battlefield, if tribute wasn't paid, " +
+                        "you may have {this} fight another target creature. " +
+                        "<i>(Each deals damage equal to its power to the other.)</i>"));
     }
 
     private NessianWildsRavager(final NessianWildsRavager card) {
