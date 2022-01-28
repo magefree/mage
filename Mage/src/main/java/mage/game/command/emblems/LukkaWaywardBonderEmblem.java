@@ -57,8 +57,8 @@ class LukkaWaywardBonderEmblemEffect extends OneShotEffect {
             return targetPermanent.damage(permanent.getPower().getValue(), permanent.getId(), source, game) > 0;
         }
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPermanent != null) {
-            return targetPermanent.damage(permanent.getPower().getValue(), permanent.getId(), source, game) > 0;
+        if (targetPlayer != null) {
+            return targetPlayer.damage(permanent.getPower().getValue(), permanent.getId(), source, game) > 0;
         }
         return false;
     }
