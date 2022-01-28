@@ -8,7 +8,6 @@ import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetOpponent;
@@ -36,13 +35,8 @@ public final class PelakkaPredation extends ModalDoubleFacesCard {
         // Pelakka Predation
         // Sorcery
 
-        // Target opponent reveals their hand. You may choose a card from it with converted mana cost 3 or greater. That player discards that card.
-        this.getLeftHalfCard().getSpellAbility().addEffect(
-                new DiscardCardYouChooseTargetEffect(filter, TargetController.OPPONENT).setText(
-                        "Target opponent reveals their hand. " +
-                                "You choose a card from it with converted mana cost 3 or greater. " +
-                                "That player discards that card"
-                ));
+        // Target opponent reveals their hand. You may choose a card from it with mana value 3 or greater. That player discards that card.
+        this.getLeftHalfCard().getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
         this.getLeftHalfCard().getSpellAbility().addTarget(new TargetOpponent());
 
         // 2.

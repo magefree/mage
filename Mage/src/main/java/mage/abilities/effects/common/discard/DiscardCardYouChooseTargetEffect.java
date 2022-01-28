@@ -31,8 +31,6 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
     private final DynamicValue numberCardsToDiscard;
     private boolean revealAllCards;
 
-    private static final FilterCard filterOneCard = new FilterCard("one card");
-
     public DiscardCardYouChooseTargetEffect() {
         this(StaticFilters.FILTER_CARD_A);
     }
@@ -41,36 +39,20 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         this(StaticFilters.FILTER_CARD_A, targetController);
     }
 
-    public DiscardCardYouChooseTargetEffect(DynamicValue numberCardsToDiscard, TargetController targetController) {
-        this(numberCardsToDiscard, StaticFilters.FILTER_CARD_CARDS, targetController);
-    }
-
     public DiscardCardYouChooseTargetEffect(FilterCard filter) {
         this(filter, TargetController.OPPONENT);
     }
 
-    public DiscardCardYouChooseTargetEffect(TargetController targetController, int numberCardsToReveal) {
-        this(filterOneCard, targetController, StaticValue.get(numberCardsToReveal));
-    }
-
-    public DiscardCardYouChooseTargetEffect(TargetController targetController, DynamicValue numberCardsToReveal) {
-        this(filterOneCard, targetController, numberCardsToReveal);
-    }
-
-    public DiscardCardYouChooseTargetEffect(FilterCard filter, TargetController targetController, DynamicValue numberCardsToReveal) {
-        super(Outcome.Discard);
-        this.targetController = targetController;
-        this.filter = filter;
-
-        this.revealAllCards = false;
-        this.numberCardsToReveal = numberCardsToReveal;
-        this.numberCardsToDiscard = StaticValue.get(1);
-
-        staticText = this.setText();
-    }
-
     public DiscardCardYouChooseTargetEffect(FilterCard filter, TargetController targetController) {
         this(StaticValue.get(1), filter, targetController);
+    }
+
+    public DiscardCardYouChooseTargetEffect(int numberCardsToDiscard, TargetController targetController) {
+        this(StaticValue.get(numberCardsToDiscard), targetController);
+    }
+
+    public DiscardCardYouChooseTargetEffect(DynamicValue numberCardsToDiscard, TargetController targetController) {
+        this(numberCardsToDiscard, StaticFilters.FILTER_CARD_CARDS, targetController);
     }
 
     public DiscardCardYouChooseTargetEffect(DynamicValue numberCardsToDiscard,
@@ -82,6 +64,30 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         this.numberCardsToDiscard = numberCardsToDiscard;
         this.numberCardsToReveal = null;
         this.revealAllCards = true;
+
+        staticText = this.setText();
+    }
+
+    public DiscardCardYouChooseTargetEffect(TargetController targetController, int numberCardsToReveal) {
+        this(targetController, StaticValue.get(numberCardsToReveal));
+    }
+
+    public DiscardCardYouChooseTargetEffect(TargetController targetController, DynamicValue numberCardsToReveal) {
+        this(StaticValue.get(1), StaticFilters.FILTER_CARD_A, targetController, numberCardsToReveal);
+    }
+
+    public DiscardCardYouChooseTargetEffect(int numberCardsToDiscard, TargetController targetController, int numberCardsToReveal) {
+        this(StaticValue.get(numberCardsToDiscard), StaticFilters.FILTER_CARD_CARDS, targetController, StaticValue.get(numberCardsToReveal));
+    }
+
+    public DiscardCardYouChooseTargetEffect(DynamicValue numberCardsToDiscard, FilterCard filter, TargetController targetController, DynamicValue numberCardsToReveal) {
+        super(Outcome.Discard);
+        this.targetController = targetController;
+        this.filter = filter;
+
+        this.revealAllCards = false;
+        this.numberCardsToReveal = numberCardsToReveal;
+        this.numberCardsToDiscard = numberCardsToDiscard;
 
         staticText = this.setText();
     }
@@ -155,6 +161,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
     }
 
     private String setText() {
+        boolean discardMultipleCards = !numberCardsToDiscard.toString().equals("1");
         StringBuilder sb = new StringBuilder("target ");
         switch (targetController) {
             case OPPONENT:
@@ -166,32 +173,37 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
             default:
                 throw new UnsupportedOperationException("target controller not supported");
         }
+        sb.append(" reveals ");
         if (revealAllCards) {
-            sb.append(" reveals their hand");
+            sb.append("their hand. You choose ");
+            if (discardMultipleCards) {
+                sb.append(numberCardsToDiscard).append(' ').append(filter.getMessage());
+            } else {
+                sb.append(CardUtil.addArticle(filter.getMessage()));
+            }
+            if (!filter.getMessage().contains("from it")) {
+                sb.append(" from it");
+            }
         } else {
             if (numberCardsToReveal instanceof StaticValue) {
-                sb.append(" reveals ");
-                sb.append(CardUtil.numberToText(((StaticValue) numberCardsToReveal).getValue())).append(" cards");
-                sb.append(" from their hand");
+                sb.append(CardUtil.numberToText(((StaticValue) numberCardsToReveal).getValue()));
+                sb.append(" cards from their hand");
+            } else if (numberCardsToReveal.getMessage().isEmpty()) {
+                sb.append("X cards from their hand");
             } else {
-                sb.append(" reveals a number of cards from their hand equal to ");
+                sb.append("a number of cards from their hand equal to ");
                 sb.append(numberCardsToReveal.getMessage());
             }
-        }
-        sb.append(". You choose ");
-        boolean discardMultipleCards = !numberCardsToDiscard.toString().equals("1");
-        if (discardMultipleCards) {
-            sb.append(numberCardsToDiscard).append(' ').append(filter.getMessage());
-        } else {
-            sb.append(CardUtil.addArticle(filter.getMessage()));
-        }
-        if (revealAllCards) {
-            sb.append(filter.getMessage().contains("from it") ? "." : " from it.");
-        } else {
-            sb.append(" of them.");
+            sb.append(". You choose ");
+            if (numberCardsToDiscard instanceof StaticValue) {
+                sb.append(CardUtil.numberToText(((StaticValue) numberCardsToDiscard).getValue()));
+            } else {
+                sb.append(numberCardsToDiscard);
+            }
+            sb.append(" of them");
         }
 
-        sb.append(" That player discards ").append(discardMultipleCards ? "those cards" : "that card");
+        sb.append(". That player discards ").append(discardMultipleCards ? "those cards" : "that card");
         return sb.toString();
     }
 }

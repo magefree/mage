@@ -18,7 +18,7 @@ import mage.target.TargetPlayer;
  */
 public final class PsychicSpear extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a Spirit or Arcane card to discard");
+    private static final FilterCard filter = new FilterCard("Spirit or Arcane card");
 
     static {
         filter.add(Predicates.or(SubType.SPIRIT.getPredicate(),SubType.ARCANE.getPredicate()));
