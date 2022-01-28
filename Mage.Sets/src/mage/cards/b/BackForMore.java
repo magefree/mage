@@ -58,7 +58,8 @@ class BackForMoreEffect extends OneShotEffect {
     BackForMoreEffect() {
         super(Outcome.Benefit);
         staticText = "Return target creature card from your graveyard to the battlefield. " +
-                "When you do, it fights up to one target creature you don't control.";
+                "When you do, it fights up to one target creature you don't control. " +
+                "<i>(Each deals damage equal to its power to the other.)</i>";
     }
 
     private BackForMoreEffect(final BackForMoreEffect effect) {

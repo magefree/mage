@@ -34,7 +34,7 @@ public final class UnnaturalAggression extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // Target creature you control fights target creature an opponent controls.
-        this.getSpellAbility().addEffect(new FightTargetsEffect());
+        this.getSpellAbility().addEffect(new FightTargetsEffect(false));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         // If the creature an opponent controls would die this turn, exile it instead.

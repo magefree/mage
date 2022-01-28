@@ -23,7 +23,8 @@ public final class SavageSmash extends CardImpl {
         // Target creature you control gets +2/+2 until end of turn. It fights target creature you don't control.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(
-                new FightTargetsEffect().setText("It fights target creature you don't control")
+                new FightTargetsEffect().setText("It fights target creature you don't control." +
+                        "<i>(Each deals damage equal to its power to the other.)</i>")
         );
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));

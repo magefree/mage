@@ -28,7 +28,8 @@ public final class PheresBandBrawler extends CardImpl {
 
         // When Pheres-Band Brawler enters the battlefield, it fights up to one target creature you don't control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect()
-                .setText("it fights up to one target creature you don't control"));
+                .setText("it fights up to one target creature you don't control. " +
+                        "<i>(Each deals damage equal to its power to the other.)</i>"));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
         this.addAbility(ability);
     }

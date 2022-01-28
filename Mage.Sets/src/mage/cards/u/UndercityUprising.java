@@ -27,7 +27,8 @@ public final class UndercityUprising extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_CREATURES
         ));
         this.getSpellAbility().addEffect(new FightTargetsEffect()
-                .setText("Then target creature you control fights target creature you don't control"));
+                .setText("Then target creature you control fights target creature you don't control. " +
+                        "<i>(Each deals damage equal to its power to the other.)</i>"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
     }

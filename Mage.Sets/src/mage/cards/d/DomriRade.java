@@ -37,7 +37,7 @@ public final class DomriRade extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DomriRadeEffect1(), 1));
 
         // -2: Target creature you control fights another target creature.
-        LoyaltyAbility ability2 = new LoyaltyAbility(new FightTargetsEffect(), -2);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new FightTargetsEffect(false), -2);
         TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
         target.setTargetTag(1);
         ability2.addTarget(target);
