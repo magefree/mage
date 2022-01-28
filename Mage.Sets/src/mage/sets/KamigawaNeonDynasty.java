@@ -20,6 +20,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         this.blockName = "Kamigawa: Neon Dynasty";
         this.hasBoosters = true;
         this.hasBasicLands = true;
+        this.numBoosterDoubleFaced = 1; // temporary test fix
 
         cards.add(new SetCardInfo("Atsushi, the Blazing Sky", 134, Rarity.MYTHIC, mage.cards.a.AtsushiTheBlazingSky.class));
         cards.add(new SetCardInfo("Forest", 301, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
