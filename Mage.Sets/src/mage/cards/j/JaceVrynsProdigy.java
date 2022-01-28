@@ -4,7 +4,7 @@ package mage.cards.j;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Gender;
+import mage.abilities.Pronoun;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,7 +39,7 @@ public final class JaceVrynsProdigy extends CardImpl {
         // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard, exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
         this.addAbility(new TransformAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1), new TapSourceCost());
-        Effect effect = new ConditionalOneShotEffect(new ExileAndReturnTransformedSourceEffect(Gender.MALE), new CardsInControllerGraveyardCondition(5));
+        Effect effect = new ConditionalOneShotEffect(new ExileAndReturnTransformedSourceEffect(Pronoun.HE), new CardsInControllerGraveyardCondition(5));
         ability.addEffect(effect);
         this.addAbility(ability);
 

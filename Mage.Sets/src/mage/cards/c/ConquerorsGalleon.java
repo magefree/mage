@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.Gender;
+import mage.abilities.Pronoun;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -33,7 +33,7 @@ public final class ConquerorsGalleon extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new AttacksTriggeredAbility(
                 new CreateDelayedTriggeredAbilityEffect(
-                        new AtTheEndOfCombatDelayedTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Gender.NEUTRAL, null, true))),
+                        new AtTheEndOfCombatDelayedTriggeredAbility(new ExileAndReturnTransformedSourceEffect(Pronoun.IT, null, true))),
                 false,
                 "When {this} attacks, exile it at the end of combat, then return it to the battlefield transformed under your control."));
 

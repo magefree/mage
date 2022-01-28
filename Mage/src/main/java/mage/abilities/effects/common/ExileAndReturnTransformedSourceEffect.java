@@ -1,7 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.Gender;
+import mage.abilities.Pronoun;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -22,28 +22,28 @@ public class ExileAndReturnTransformedSourceEffect extends OneShotEffect {
     protected boolean returnUnderYourControl;
 
     public ExileAndReturnTransformedSourceEffect() {
-        this(Gender.NEUTRAL);
+        this(Pronoun.IT);
     }
 
-    public ExileAndReturnTransformedSourceEffect(Gender gender) {
-        this(gender, null);
+    public ExileAndReturnTransformedSourceEffect(Pronoun pronoun) {
+        this(pronoun, null);
     }
 
-    public ExileAndReturnTransformedSourceEffect(Gender gender, Effect additionalEffect) {
-        this(gender, additionalEffect, false);
+    public ExileAndReturnTransformedSourceEffect(Pronoun pronoun, Effect additionalEffect) {
+        this(pronoun, additionalEffect, false);
     }
 
     /**
-     * @param gender
+     * @param pronoun
      * @param additionalEffect       that effect is applies as source is exiled
      * @param returnUnderYourControl return under your or owner control
      */
-    public ExileAndReturnTransformedSourceEffect(Gender gender, Effect additionalEffect, boolean returnUnderYourControl) {
+    public ExileAndReturnTransformedSourceEffect(Pronoun pronoun, Effect additionalEffect, boolean returnUnderYourControl) {
         super(Outcome.Benefit);
         this.additionalEffect = additionalEffect;
         this.returnUnderYourControl = returnUnderYourControl;
-        this.staticText = "exile {this}, then return " + gender.getPersonalPronoun()
-                + " to the battlefield transformed under " + gender.getPossesivePronoun()
+        this.staticText = "exile {this}, then return " + pronoun.getObjective()
+                + " to the battlefield transformed under " + pronoun.getPossessive()
                 + " " + (this.returnUnderYourControl ? "your" : "owner's") + " control";
     }
 
