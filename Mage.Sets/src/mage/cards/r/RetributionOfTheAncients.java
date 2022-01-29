@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -24,12 +23,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class RetributionOfTheAncients extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public RetributionOfTheAncients(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");

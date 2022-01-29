@@ -12,7 +12,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
 
 import java.util.UUID;
 
@@ -20,6 +23,13 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ArcusAcolyte extends CardImpl {
+
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("creature you control without a +1/+1 counter on it");
+
+    static {
+        filter.add(Predicates.not(CounterType.P1P1.getPredicate()));
+    }
 
     public ArcusAcolyte(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
@@ -42,7 +52,7 @@ public final class ArcusAcolyte extends CardImpl {
         // Each other creature you control without a +1/+1 counter on it has outlast {G/W}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new OutlastAbility(new ManaCostsImpl<>("{G/W}")),
-                Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1, true
+                Duration.WhileOnBattlefield, filter, true
         ).setText("each other creature you control without a +1/+1 counter on it has outlast {G/W}")));
     }
 
