@@ -29,6 +29,7 @@ public class FightTargetsEffect extends OneShotEffect {
 
     public FightTargetsEffect(final FightTargetsEffect effect) {
         super(effect);
+        this.showEffectHint = effect.showEffectHint;
     }
 
     @Override
