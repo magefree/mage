@@ -48,6 +48,7 @@ public class Legacy extends Constructed {
         banned.add("Hermit Druid");
         banned.add("Immediate Action");
         banned.add("Imperial Seal");
+        banned.add("Invoke Prejudice");
         banned.add("Iterative Analysis");
         banned.add("Jeweled Bird");
         banned.add("Library of Alexandria");
