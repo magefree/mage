@@ -14,9 +14,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -27,14 +25,7 @@ import java.util.UUID;
  */
 public final class HamzaGuardianOfArashin extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("creature you control with a +1/+1 counter on it");
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
-
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1);
     private static final Hint hint = new ValueHint("Creatures you control with +1/+1 counter on them", xValue);
 
     public HamzaGuardianOfArashin(UUID ownerId, CardSetInfo setInfo) {

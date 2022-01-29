@@ -19,8 +19,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -28,12 +27,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author emerald000
  */
 public final class HighSentinelsOfArashin extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control with a +1/+1 counter on it");
-    static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public HighSentinelsOfArashin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
@@ -47,7 +40,7 @@ public final class HighSentinelsOfArashin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // High Sentinels of Arashin gets +1/+1 for each other creature you control with a +1/+1 counter on it.
-        DynamicValue count = new PermanentsOnBattlefieldCount(filter);
+        DynamicValue count = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE_P1P1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
         
         // {3}{W}: Put a +1/+1 counter on target creature.

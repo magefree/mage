@@ -12,8 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -47,15 +46,8 @@ public final class RenegadeKrasis extends CardImpl {
 
 class RenegadeKrasisTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-
-    static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(CounterType.P1P1.getPredicate());
-    }
-
     public RenegadeKrasisTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(1), filter), false);
+        super(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(1), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE_P1P1), false);
     }
 
     public RenegadeKrasisTriggeredAbility(final RenegadeKrasisTriggeredAbility ability) {

@@ -14,8 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -56,12 +55,6 @@ public final class ExperimentKraj extends CardImpl {
 
 class ExperimentKrajEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-        filter.add(AnotherPredicate.instance);
-    }
-
     public ExperimentKrajEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "{this} has all activated abilities of each other creature with a +1/+1 counter on it";
@@ -75,7 +68,7 @@ class ExperimentKrajEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent perm = game.getPermanent(source.getSourceId());
         if (perm != null) {
-            for (Permanent creature :game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)){
+            for (Permanent creature :game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_CREATURE_P1P1, source.getControllerId(), source.getSourceId(), game)){
                 for (Ability ability: creature.getAbilities()) {
                     if (ability instanceof ActivatedAbility) {
                         perm.addAbility(ability, source.getSourceId(), game);

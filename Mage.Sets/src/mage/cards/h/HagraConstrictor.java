@@ -12,8 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -21,12 +20,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class HagraConstrictor extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public HagraConstrictor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -43,7 +36,9 @@ public final class HagraConstrictor extends CardImpl {
 
         // Each creature you control with a +1/+1 counter on it has menace.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
-                new MenaceAbility(), Duration.WhileOnBattlefield, filter,
+                new MenaceAbility(),
+                Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1,
                 "Each creature you control with a +1/+1 counter on it has menace. " +
                         "<i>(A creature with menace can't be blocked except by two or more creatures.)</i>"
         )));

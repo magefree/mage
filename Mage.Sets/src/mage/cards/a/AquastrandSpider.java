@@ -15,8 +15,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -24,14 +23,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author JotaPeRL
  */
 public final class AquastrandSpider extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creature with a +1/+1 counter on it");
 
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
-    
     public AquastrandSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.SPIDER);
@@ -46,7 +38,7 @@ public final class AquastrandSpider extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilityTargetEffect(ReachAbility.getInstance(),
                         Duration.EndOfTurn), new ManaCostsImpl("{G}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_P1P1));
         this.addAbility(ability.addCustomOutcome(Outcome.Benefit));        
     }
     
