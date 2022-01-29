@@ -86,6 +86,7 @@ public class Legacy extends Constructed {
         banned.add("Shahrazad");
         banned.add("Skullclamp");
         banned.add("Sol Ring");
+        banned.add("Stone-Throwing Devils");
         banned.add("Strip Mine");
         banned.add("Survival of the Fittest");
         banned.add("Tempest Efreet");
