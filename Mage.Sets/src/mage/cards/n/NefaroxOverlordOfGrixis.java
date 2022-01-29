@@ -3,7 +3,7 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksAloneTriggeredAbility;
+import mage.abilities.common.AttacksAloneSourceTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -33,7 +33,7 @@ public final class NefaroxOverlordOfGrixis extends CardImpl {
         // Exalted
         this.addAbility(new ExaltedAbility());
         // Whenever Nefarox, Overlord of Grixis attacks alone, defending player sacrifices a creature.
-        this.addAbility(new AttacksAloneTriggeredAbility(new SacrificeEffect(
+        this.addAbility(new AttacksAloneSourceTriggeredAbility(new SacrificeEffect(
             StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, 1, "defending player")));
     }
 

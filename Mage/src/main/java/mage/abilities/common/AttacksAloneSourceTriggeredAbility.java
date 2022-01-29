@@ -7,7 +7,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -15,19 +14,19 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LoneFox
  */
-public class AttacksAloneTriggeredAbility extends TriggeredAbilityImpl {
+public class AttacksAloneSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    public AttacksAloneTriggeredAbility(Effect effect) {
+    public AttacksAloneSourceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public AttacksAloneTriggeredAbility(final AttacksAloneTriggeredAbility ability) {
+    public AttacksAloneSourceTriggeredAbility(final AttacksAloneSourceTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public AttacksAloneTriggeredAbility copy() {
-        return new AttacksAloneTriggeredAbility(this);
+    public AttacksAloneSourceTriggeredAbility copy() {
+        return new AttacksAloneSourceTriggeredAbility(this);
     }
 
     @Override
