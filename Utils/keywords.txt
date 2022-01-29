@@ -88,6 +88,7 @@ Provoke|new|
 Prowess|new|
 Reach|instance|
 Rebound|new|
+Reconfigure|manaString|
 Renown|number|
 Replicate|card, manaString|
 Riot|new|
