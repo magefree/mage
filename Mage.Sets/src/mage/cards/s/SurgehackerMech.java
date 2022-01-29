@@ -49,7 +49,7 @@ public final class SurgehackerMech extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Surgehacker Mech enters the battlefield, it deals damage equal to twice the number of Vehicles you control to target creature or planeswalker an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(xValue));
