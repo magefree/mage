@@ -43,6 +43,7 @@ public class Vintage extends Constructed {
         banned.add("Secrets of Paradise");
         banned.add("Sentinel Dispatch");
         banned.add("Shahrazad");
+        banned.add("Stone-Throwing Devils");
         banned.add("Tempest Efreet");
         banned.add("Timmerian Fiends");
         banned.add("Unexpected Potential");
