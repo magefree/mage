@@ -15,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -35,8 +36,11 @@ public final class CemeteryPuca extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a creature dies, you may pay {1}. If you do, Cemetery Puca becomes a copy of that creature, except it has this ability.
-        this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new CemeteryPucaEffect(), new ManaCostsImpl("{1}")), false, new FilterCreaturePermanent("a creature"), true));
-
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                new DoIfCostPaid(new CemeteryPucaEffect(), new ManaCostsImpl("{1}")),
+                false,
+                StaticFilters.FILTER_PERMANENT_A_CREATURE,
+                true));
     }
 
     private CemeteryPuca(final CemeteryPuca card) {
@@ -72,7 +76,7 @@ class CemeteryPucaEffect extends OneShotEffect {
             Permanent copyFromCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             if (copyFromCreature != null) {
                 game.copyPermanent(Duration.WhileOnBattlefield, copyFromCreature, copyToCreature.getId(), source, new EmptyCopyApplier());
-                ContinuousEffect effect = new GainAbilityTargetEffect(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new CemeteryPucaEffect(), new ManaCostsImpl("{1}")), false, new FilterCreaturePermanent("a creature"), true), Duration.WhileOnBattlefield);
+                ContinuousEffect effect = new GainAbilityTargetEffect(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new CemeteryPucaEffect(), new ManaCostsImpl("{1}")), false, StaticFilters.FILTER_PERMANENT_A_CREATURE, true), Duration.WhileOnBattlefield);
                 effect.setTargetPointer(new FixedTarget(copyToCreature.getId(), game));
                 game.addEffect(effect, source);
                 return true;

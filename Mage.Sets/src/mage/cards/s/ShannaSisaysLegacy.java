@@ -18,7 +18,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -29,8 +29,6 @@ import mage.game.stack.StackObject;
  * @author TheElk801
  */
 public final class ShannaSisaysLegacy extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 
     public ShannaSisaysLegacy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
@@ -45,7 +43,7 @@ public final class ShannaSisaysLegacy extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShannaSisaysLegacyEffect()));
 
         // Shanna gets +1/+1 for each creature you control.
-        DynamicValue value = new PermanentsOnBattlefieldCount(filter);
+        DynamicValue value = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURES);
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)

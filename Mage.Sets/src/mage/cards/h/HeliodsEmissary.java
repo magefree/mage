@@ -16,9 +16,8 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -27,11 +26,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class HeliodsEmissary extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public HeliodsEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{W}");
@@ -44,11 +38,11 @@ public final class HeliodsEmissary extends CardImpl {
         this.addAbility(new BestowAbility(this, "{6}{W}"));
         // Whenever Heliod's Emissary or enchanted creature attacks, tap target creature an opponent controls.
         Ability ability = new AttacksTriggeredAbility(new TapTargetEffect(), false);
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         ability.addTarget(target);
         this.addAbility(ability);
         ability = new AttacksAttachedTriggeredAbility(new TapTargetEffect(), AttachmentType.AURA, false);
-        target = new TargetCreaturePermanent(filter);
+        target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         ability.addTarget(target);
         this.addAbility(ability);
         // Enchanted creature gets +3/+3.

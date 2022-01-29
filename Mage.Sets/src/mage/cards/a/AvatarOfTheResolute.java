@@ -14,21 +14,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author jeffwadsworth
  */
 public final class AvatarOfTheResolute extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control with a +1/+1 counter on it");
-    
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-        filter.add(AnotherPredicate.instance);
-    }
 
     public AvatarOfTheResolute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
@@ -43,9 +35,11 @@ public final class AvatarOfTheResolute extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         
         // Avatar of the Resolute enters the battlefield with a +1/+1 counter on it for each other creature you control with a +1/+1 counter on it.
-        DynamicValue numberCounters = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), numberCounters, true),
-                "with a +1/+1 counter on it for each other creature you control with a +1/+1 counter on it"));
+        DynamicValue numberCounters = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE_P1P1);
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
+                CounterType.P1P1.createInstance(0), numberCounters, true),
+                "with a +1/+1 counter on it for each other creature you control with a +1/+1 counter on it")
+        );
         
     }
 

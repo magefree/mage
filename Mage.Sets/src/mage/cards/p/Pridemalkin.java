@@ -13,8 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -23,13 +22,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class Pridemalkin extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("each creature you control with a +1/+1 counter on it");
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public Pridemalkin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -45,7 +37,7 @@ public final class Pridemalkin extends CardImpl {
 
         // Each creature you control with a +1/+1 counter on it has trample.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
-                TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter
+                TrampleAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1
         )));
     }
 

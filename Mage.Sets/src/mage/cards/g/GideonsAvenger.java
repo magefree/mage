@@ -9,21 +9,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author Loki
  */
 public final class GideonsAvenger extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public GideonsAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
@@ -34,7 +27,7 @@ public final class GideonsAvenger extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a creature an opponent controls becomes tapped, put a +1/+1 counter on Gideon's Avenger.
-        this.addAbility(new BecomesTappedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter));
+        this.addAbility(new BecomesTappedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE));
     }
 
     private GideonsAvenger(final GideonsAvenger card) {

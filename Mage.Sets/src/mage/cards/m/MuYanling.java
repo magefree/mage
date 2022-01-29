@@ -15,8 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -59,12 +58,6 @@ public final class MuYanling extends CardImpl {
 
 class MuYanlingEffect extends OneShotEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public MuYanlingEffect() {
         super(Outcome.Tap);
         staticText = "tap all creatures your opponents control. You take an extra turn after this one.";
@@ -80,7 +73,7 @@ class MuYanlingEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, player.getId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, player.getId(), source.getSourceId(), game)) {
             creature.tap(source, game);
         }
         return new AddExtraTurnControllerEffect().apply(game, source);

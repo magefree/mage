@@ -15,9 +15,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -62,11 +61,9 @@ import mage.util.CardUtil;
 public final class ChainedToTheRocks extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Mountain you control");
-    private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
-        filterTarget.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public ChainedToTheRocks(UUID ownerId, CardSetInfo setInfo) {
@@ -82,7 +79,7 @@ public final class ChainedToTheRocks extends CardImpl {
 
         // When Chained to the Rocks enters the battlefield, exile target creature an opponent controls until Chained to the Rocks leaves the battlefield. (That creature returns under its owner's control.)
         ability = new EntersBattlefieldTriggeredAbility(new ChainedToTheRocksEffect());
-        ability.addTarget(new TargetCreaturePermanent(filterTarget));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
 

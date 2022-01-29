@@ -5,6 +5,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
+import mage.counters.CounterType;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -747,6 +748,49 @@ public final class StaticFilters {
     static {
         FILTER_CREATURE_TOKEN.add(TokenPredicate.TRUE);
         FILTER_CREATURE_TOKEN.setLockedFilter(true);
+    }
+
+    public static final FilterControlledCreaturePermanent FILTER_A_CONTROLLED_CREATURE_P1P1 = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");
+
+    static {
+        FILTER_A_CONTROLLED_CREATURE_P1P1.add(CounterType.P1P1.getPredicate());
+        FILTER_A_CONTROLLED_CREATURE_P1P1.setLockedFilter(true);
+    }
+
+    public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_CREATURE_P1P1 = new FilterControlledCreaturePermanent("creature you control with a +1/+1 counter on it");
+
+    static {
+        FILTER_CONTROLLED_CREATURE_P1P1.add(CounterType.P1P1.getPredicate());
+        FILTER_CONTROLLED_CREATURE_P1P1.setLockedFilter(true);
+    }
+
+    public static final FilterControlledCreaturePermanent FILTER_EACH_CONTROLLED_CREATURE_P1P1 = new FilterControlledCreaturePermanent("each creature you control with a +1/+1 counter on it");
+
+    static {
+        FILTER_EACH_CONTROLLED_CREATURE_P1P1.add(CounterType.P1P1.getPredicate());
+        FILTER_EACH_CONTROLLED_CREATURE_P1P1.setLockedFilter(true);
+    }
+
+    public static final FilterControlledCreaturePermanent FILTER_OTHER_CONTROLLED_CREATURE_P1P1 = new FilterControlledCreaturePermanent("other creature you control with a +1/+1 counter on it");
+
+    static {
+        FILTER_OTHER_CONTROLLED_CREATURE_P1P1.add(CounterType.P1P1.getPredicate());
+        FILTER_OTHER_CONTROLLED_CREATURE_P1P1.add(AnotherPredicate.instance);
+        FILTER_OTHER_CONTROLLED_CREATURE_P1P1.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_A_CREATURE_P1P1 = new FilterCreaturePermanent("a creature with a +1/+1 counter on it");
+
+    static {
+        FILTER_A_CREATURE_P1P1.add(CounterType.P1P1.getPredicate());
+        FILTER_A_CREATURE_P1P1.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_CREATURE_P1P1 = new FilterCreaturePermanent("creature with a +1/+1 counter on it");
+
+    static {
+        FILTER_CREATURE_P1P1.add(CounterType.P1P1.getPredicate());
+        FILTER_CREATURE_P1P1.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");

@@ -12,7 +12,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -27,12 +27,6 @@ import mage.watchers.Watcher;
  */
 public final class DungeonGeists extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public DungeonGeists(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         this.subtype.add(SubType.SPIRIT);
@@ -45,7 +39,7 @@ public final class DungeonGeists extends CardImpl {
         // When Dungeon Geists enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control Dungeon Geists.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
         ability.addEffect(new DungeonGeistsEffect());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         ability.addTarget(target);
         this.addAbility(ability, new DungeonGeistsWatcher());
         // watcher needed to send normal events to Dungeon Geists ReplacementEffect

@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -21,12 +20,9 @@ import java.util.UUID;
  * @author jeffwadsworth
  */
 public final class WarsToll extends CardImpl {
-
-    private static final FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
     private static final FilterLandPermanent filterOpponentLand = new FilterLandPermanent("an opponent taps a land");
 
     static {
-        filterOpponentCreature.add(TargetController.OPPONENT.getControllerPredicate());
         filterOpponentLand.add(TargetController.OPPONENT.getControllerPredicate());
     }
 

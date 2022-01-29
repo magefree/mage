@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -28,12 +28,6 @@ import java.util.UUID;
  */
 public final class IcefallRegent extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public IcefallRegent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.DRAGON);
@@ -43,10 +37,11 @@ public final class IcefallRegent extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Icefall Regent enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control Icefall Regent.
+        // When Icefall Regent enters the battlefield, tap target creature an opponent controls.
+        // That creature doesn't untap during its controller's untap step for as long as you control Icefall Regent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
         ability.addEffect(new IcefallRegentEffect());
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         ability.addTarget(target);
         this.addAbility(ability, new IcefallRegentWatcher());
 

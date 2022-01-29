@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -23,12 +23,6 @@ import mage.game.permanent.Permanent;
  * @author emerald000
  */
 public final class BramblewoodParagon extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Each creature you control with a +1/+1 counter on it");
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public BramblewoodParagon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -45,7 +39,9 @@ public final class BramblewoodParagon extends CardImpl {
                 new GainAbilityAllEffect(
                         TrampleAbility.getInstance(),
                         Duration.WhileOnBattlefield,
-                        filter)));
+                        StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1)
+                )
+        );
 
     }
 

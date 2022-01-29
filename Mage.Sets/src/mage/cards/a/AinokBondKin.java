@@ -11,24 +11,13 @@ import mage.abilities.keyword.OutlastAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LevelX2
  */
 public final class AinokBondKin extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(CounterType.P1P1.getPredicate());
-    }
-
-    static final String rule = "Each creature you control with a +1/+1 counter on it has first strike";
 
     public AinokBondKin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -42,8 +31,10 @@ public final class AinokBondKin extends CardImpl {
         this.addAbility(new OutlastAbility(new ManaCostsImpl("{1}{W}")));
 
         // Each creature you control with a +1/+1 counter on it has first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, rule)));
-
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+                FirstStrikeAbility.getInstance(),
+                Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1)));
     }
 
     private AinokBondKin(final AinokBondKin card) {

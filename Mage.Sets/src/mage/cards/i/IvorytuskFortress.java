@@ -10,20 +10,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LevelX2
  */
 public final class IvorytuskFortress extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature you control with a +1/+1 counter on it");
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public IvorytuskFortress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{B}{G}");
@@ -33,7 +26,8 @@ public final class IvorytuskFortress extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Untap each creature you control with a +1/+1 counter on it during each other player's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapAllDuringEachOtherPlayersUntapStepEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new UntapAllDuringEachOtherPlayersUntapStepEffect(StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1)));
     }
 
     private IvorytuskFortress(final IvorytuskFortress card) {

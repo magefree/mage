@@ -3,7 +3,6 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 import java.util.Arrays;
 
@@ -11,8 +10,6 @@ import java.util.Arrays;
  * @author spjspj
  */
 public final class OviyaPashiriSageLifecrafterToken extends TokenImpl {
-
-    static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("creatures you control");
 
     public OviyaPashiriSageLifecrafterToken() {
         this(1);
