@@ -12,8 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -68,12 +67,6 @@ public final class CrypticCommand extends CardImpl {
 
 class CrypticCommandEffect extends OneShotEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public CrypticCommandEffect() {
         super(Outcome.Tap);
         staticText = "Tap all creatures your opponents control";
@@ -89,7 +82,7 @@ class CrypticCommandEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, player.getId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, player.getId(), source.getSourceId(), game)) {
             creature.tap(source, game);
         }
         return true;

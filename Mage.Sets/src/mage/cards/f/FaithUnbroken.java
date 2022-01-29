@@ -15,7 +15,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -28,12 +28,6 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 public final class FaithUnbroken extends CardImpl {
-
-    private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filterTarget.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public FaithUnbroken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
@@ -48,7 +42,7 @@ public final class FaithUnbroken extends CardImpl {
 
         // When Faith Unbroken enters the battlefield, exile target creature an opponent controls until Faith Unbroken leaves the battlefield.
         ability = new EntersBattlefieldTriggeredAbility(new FaithUnbrokenEffect());
-        ability.addTarget(new TargetCreaturePermanent(filterTarget));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
 

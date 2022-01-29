@@ -17,6 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,12 +31,6 @@ public final class MightMakesRight extends CardImpl {
     private static final String ruleText = "At the beginning of combat on your turn, if you control each creature on the battlefield with the greatest power, "
             + "gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.";
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public MightMakesRight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
 
@@ -45,7 +40,7 @@ public final class MightMakesRight extends CardImpl {
         TriggeredAbility gainControlAbility = new BeginningOfCombatTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), TargetController.YOU, false);
         gainControlAbility.addEffect(new UntapTargetEffect());
         gainControlAbility.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-        gainControlAbility.addTarget(new TargetCreaturePermanent(filter));
+        gainControlAbility.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         Ability conditionalAbility = new ConditionalInterveningIfTriggeredAbility(gainControlAbility, ControlsEachCreatureWithGreatestPowerCondition.instance, ruleText);
         this.addAbility(conditionalAbility);
     }

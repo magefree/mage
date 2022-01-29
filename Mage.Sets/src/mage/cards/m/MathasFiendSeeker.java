@@ -21,7 +21,7 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -34,11 +34,6 @@ import mage.target.common.TargetCreaturePermanent;
 public final class MathasFiendSeeker extends CardImpl {
 
     private static final String rule = "For as long as that creature has a bounty counter on it, it has \"When this creature dies, each opponent draws a card and gains 2 life.\"";
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public MathasFiendSeeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}{B}");
@@ -53,7 +48,7 @@ public final class MathasFiendSeeker extends CardImpl {
 
         // At the beginning of your end step, put a bounty counter on target creature an opponent controls. For as long as that creature has a bounty counter on it, it has "When this creature dies, each opponent draws a card and gains 2 life."
         Ability ability = new BeginningOfYourEndStepTriggeredAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), false);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         Ability ability2 = new DiesSourceTriggeredAbility(new DrawCardAllEffect(1, TargetController.OPPONENT));
         ability2.addEffect(new OpponentsGainLifeEffect());
         Effect effect = new MathasFiendSeekerGainAbilityEffect(ability2, Duration.Custom, rule);

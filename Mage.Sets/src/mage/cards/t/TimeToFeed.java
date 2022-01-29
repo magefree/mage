@@ -15,12 +15,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -40,11 +38,6 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class TimeToFeed extends CardImpl {
 
-    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature an opponent controls");
-    static {
-        filter1.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public TimeToFeed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
@@ -57,7 +50,7 @@ public final class TimeToFeed extends CardImpl {
                 "<i>(Each deals damage equal to its power to the other.)</i>");
         this.getSpellAbility().addEffect(effect);
 
-        Target target = new TargetCreaturePermanent(filter1);
+        Target target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         
