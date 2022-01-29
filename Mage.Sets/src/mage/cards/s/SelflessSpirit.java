@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -34,7 +34,7 @@ public final class SelflessSpirit extends CardImpl {
 
         // Sacrifice Selfless Spirit: Creatures you control gain indestructible until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn,
-                        new FilterControlledCreaturePermanent("creatures you control")), new SacrificeSourceCost()));
+                StaticFilters.FILTER_CONTROLLED_CREATURES), new SacrificeSourceCost()));
     }
 
     private SelflessSpirit(final SelflessSpirit card) {

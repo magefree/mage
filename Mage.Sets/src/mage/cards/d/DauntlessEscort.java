@@ -14,8 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -34,8 +33,7 @@ public final class DauntlessEscort extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Sacrifice Dauntless Escort: Creatures you control are indestructible this turn.
-        FilterPermanent filter = new FilterControlledCreaturePermanent("Creatures you control");
-        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, filter, false);
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, false);
         effect.setText("Creatures you control are indestructible this turn");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeSourceCost()));
     }

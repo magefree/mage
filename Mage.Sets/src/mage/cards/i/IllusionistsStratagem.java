@@ -6,7 +6,7 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEf
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -24,7 +24,7 @@ public final class IllusionistsStratagem extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(false)
                 .withReturnNames("those cards", "their owner's").concatBy(", then"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 2,
-                new FilterControlledCreaturePermanent("creatures you control"), false));
+                StaticFilters.FILTER_CONTROLLED_CREATURES, false));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
