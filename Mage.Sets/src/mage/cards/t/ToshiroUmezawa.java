@@ -13,10 +13,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -28,13 +27,9 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author LevelX2
  */
 public final class ToshiroUmezawa extends CardImpl {
-
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("a creature an opponent controls");
     private static final FilterCard filterInstant = new FilterCard("instant card from your graveyard");
 
     static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filterInstant.add(CardType.INSTANT.getPredicate());
     }
 
@@ -52,7 +47,7 @@ public final class ToshiroUmezawa extends CardImpl {
         // Whenever a creature an opponent controls dies, you may cast target 
         // instant card from your graveyard. If that card would be put into a 
         // graveyard this turn, exile it instead.
-        Ability ability = new DiesCreatureTriggeredAbility(new ToshiroUmezawaEffect(), true, filter);
+        Ability ability = new DiesCreatureTriggeredAbility(new ToshiroUmezawaEffect(), true, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE);
         ability.addTarget(new TargetCardInYourGraveyard(1, 1, filterInstant));
         this.addAbility(ability);
 
