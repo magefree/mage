@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
 
@@ -17,7 +18,7 @@ import mage.target.common.TargetAnyTarget;
  * @author fireshoes
  */
 public final class CloseQuarters extends CardImpl {
-    
+
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
 
     static {
