@@ -48,9 +48,9 @@ public final class KarnTheGreatCreator extends CardImpl {
         ability.addTarget(new TargetPermanent(0, 1, filter, false));
         this.addAbility(ability);
 
-        // -2: You may choose an artifact card you own from outside the game or in exile, reveal that card, and put it into your hand.
+        // -2: You may reveal an artifact card you own from outside the game or choose a face-up artifact card you own in exile. Put that card into your hand.
         this.addAbility(new LoyaltyAbility(new WishEffect(
-                StaticFilters.FILTER_CARD_ARTIFACT_AN, true, true
+                StaticFilters.FILTER_CARD_ARTIFACT, true
         ), -2).addHint(OpenSideboardHint.instance));
     }
 

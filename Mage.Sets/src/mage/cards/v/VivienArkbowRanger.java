@@ -58,8 +58,8 @@ public final class VivienArkbowRanger extends CardImpl {
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(ability);
 
-        // −5: You may choose a creature card you own from outside the game, reveal it, and put it into your hand.
-        this.addAbility(new LoyaltyAbility(new WishEffect(StaticFilters.FILTER_CARD_CREATURE_A), -5)
+        // −5: You may reveal a creature card you own from outside the game and put it into your hand.
+        this.addAbility(new LoyaltyAbility(new WishEffect(StaticFilters.FILTER_CARD_CREATURE), -5)
                 .addHint(OpenSideboardHint.instance));
     }
 

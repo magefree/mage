@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -50,7 +49,7 @@ public final class TheRavensWarning extends CardImpl {
 
         // III — You may put a card you own from outside the game on top of your library.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
-                new WishEffect(StaticFilters.FILTER_CARD_A, false, false, true)
+                new WishEffect(true)
         );
         sagaAbility.addHint(OpenSideboardHint.instance);
         this.addAbility(sagaAbility);
