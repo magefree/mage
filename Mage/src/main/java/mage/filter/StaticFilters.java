@@ -603,6 +603,16 @@ public final class StaticFilters {
         FILTER_PERMANENT_CREATURE_SLIVERS.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_SAMURAI_OR_WARRIOR = new FilterControlledPermanent("a Samurai or Warrior you control");
+
+    static {
+        FILTER_CONTROLLED_SAMURAI_OR_WARRIOR.add(Predicates.or(
+                SubType.SAMURAI.getPredicate(),
+                SubType.WARRIOR.getPredicate()
+        ));
+        FILTER_CONTROLLED_SAMURAI_OR_WARRIOR.setLockedFilter(true);
+    }
+
     public static final FilterPlaneswalkerPermanent FILTER_PERMANENT_PLANESWALKER = new FilterPlaneswalkerPermanent();
 
     static {
