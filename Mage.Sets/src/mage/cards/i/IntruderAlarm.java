@@ -13,7 +13,7 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -27,7 +27,7 @@ public final class IntruderAlarm extends CardImpl {
         // Creatures don't untap during their controllers' untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, FILTER_PERMANENT_CREATURES)));
         // Whenever a creature enters the battlefield, untap all creatures.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new UntapAllEffect(FILTER_PERMANENT_CREATURES), new FilterCreaturePermanent("a creature")));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new UntapAllEffect(FILTER_PERMANENT_CREATURES), StaticFilters.FILTER_PERMANENT_A_CREATURE));
     }
 
     private IntruderAlarm(final IntruderAlarm card) {

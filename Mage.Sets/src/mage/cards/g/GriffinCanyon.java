@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -47,8 +47,6 @@ public final class GriffinCanyon extends CardImpl {
 }
 
 class GriffinCanyonEffect extends OneShotEffect {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 
     public GriffinCanyonEffect() {
         super(Outcome.Benefit);
@@ -69,7 +67,7 @@ class GriffinCanyonEffect extends OneShotEffect {
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null) {
             targetCreature.untap(game);
-            if (filter.match(targetCreature, game)) {
+            if (StaticFilters.FILTER_PERMANENT_A_CREATURE.match(targetCreature, game)) {
                 game.addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn), source);
             }
             return true;
