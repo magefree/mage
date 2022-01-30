@@ -262,6 +262,17 @@ public final class StaticFilters {
         FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT.setLockedFilter(true);
     }
 
+
+    public static final FilterControlledPermanent FILTER_PERMANENT_CONTROLLED_ARTIFACT_OR_ENCHANTMENT = new FilterControlledPermanent("artifact or enchantment you control");
+
+    static {
+        FILTER_PERMANENT_CONTROLLED_ARTIFACT_OR_ENCHANTMENT.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()
+        ));
+        FILTER_PERMANENT_CONTROLLED_ARTIFACT_OR_ENCHANTMENT.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_PERMANENT_ARTIFACT_CREATURE = new FilterArtifactCreaturePermanent();
 
     static {
