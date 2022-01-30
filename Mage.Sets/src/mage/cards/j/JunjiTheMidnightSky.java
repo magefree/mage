@@ -48,7 +48,7 @@ public final class JunjiTheMidnightSky extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Junji, the Midnight Sky dies, choose one —
         // • Each opponent discards two cards and loses 2 life.
