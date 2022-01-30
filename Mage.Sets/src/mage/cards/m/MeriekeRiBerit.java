@@ -1,14 +1,11 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
@@ -24,10 +21,10 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.common.LostControlWatcher;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class MeriekeRiBerit extends CardImpl {
@@ -43,16 +40,10 @@ public final class MeriekeRiBerit extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
 
         // {tap}: Gain control of target creature for as long as you control Merieke Ri Berit. When Merieke Ri Berit leaves the battlefield or becomes untapped, destroy that creature. It can't be regenerated.
-        ConditionalContinuousEffect MeriekeRiBeritGainControlEffect = new ConditionalContinuousEffect(
-                new GainControlTargetEffect(Duration.Custom),
-                new SourceOnBattlefieldControlUnchangedCondition(),
-                "Gain control of target creature for as long as you control {this}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, MeriekeRiBeritGainControlEffect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new GainControlTargetEffect(Duration.WhileControlled), new TapSourceCost());
         ability.addTarget(new TargetPermanent(new FilterCreaturePermanent("target creature")));
         ability.addEffect(new MeriekeRiBeritCreateDelayedTriggerEffect());
-        ability.addWatcher(new LostControlWatcher());
         this.addAbility(ability);
-
     }
 
     private MeriekeRiBerit(final MeriekeRiBerit card) {
