@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class KamigawaNeonDynasty extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Bronzeplate Boar", "Leech Gauntlet", "Lizard Blades", "Simian Sling", "The Reality Chip");
+    private static final List<String> unfinished = Arrays.asList("Armguard Familiar", "Bronzeplate Boar", "Leech Gauntlet", "Lion Sash", "Lizard Blades", "Simian Sling", "The Reality Chip");
     private static final KamigawaNeonDynasty instance = new KamigawaNeonDynasty();
 
     public static KamigawaNeonDynasty getInstance() {
