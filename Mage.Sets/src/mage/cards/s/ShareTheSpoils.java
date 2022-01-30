@@ -148,9 +148,7 @@ public final class ShareTheSpoils extends CardImpl {
 
                 if (topLibraryCard == null) { continue; }
 
-                // TODO: Should I use moveCardsToExile instead?
-                player.moveCards(topLibraryCard, Zone.EXILED, source, game);
-                game.getExile().moveToAnotherZone(topLibraryCard, game, exileZone);
+                player.moveCardsToExile(topLibraryCard, source, game, true, exileZone.getId(), exileZone.getName());
             }
             return true;
         }
@@ -329,9 +327,7 @@ public final class ShareTheSpoils extends CardImpl {
             Card topLibraryCard = player.getLibrary().getFromTop(game);
             if (topLibraryCard == null) { return false; }
 
-            // TODO: Should I use moveCardsToExile instead?
-            player.moveCards(topLibraryCard, Zone.EXILED, source, game);
-            game.getExile().moveToAnotherZone(topLibraryCard, game, exileZone);
+            player.moveCardsToExile(topLibraryCard, source, game, true, exileZone.getId(), exileZone.getName());
 
             return true;
         }
