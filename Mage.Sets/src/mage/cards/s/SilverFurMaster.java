@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 
@@ -21,16 +20,16 @@ import java.util.UUID;
  */
 public final class SilverFurMaster extends CardImpl {
 
-		private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ninja and Rogue creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ninja and Rogue creatures");
 
-		static {
-			filter.add(Predicates.or(
-			        SubType.NINJA.getPredicate(),
-			        SubType.ROGUE.getPredicate()
-			));
-		}
+    static {
+        filter.add(Predicates.or(
+                SubType.NINJA.getPredicate(),
+                SubType.ROGUE.getPredicate()
+        ));
+    }
 
-		public SilverFurMaster(UUID ownerId, CardSetInfo setInfo) {
+    public SilverFurMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}");
 
         this.subtype.add(SubType.RAT);
@@ -42,11 +41,14 @@ public final class SilverFurMaster extends CardImpl {
         this.addAbility(new NinjutsuAbility("{U}{B}"));
 
         // Ninjutsu abilities you activate cost {1} less to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbilitiesCostReductionControllerEffect(NinjutsuAbility.class, "Ninjutsu")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(
+                NinjutsuAbility.class, "Ninjutsu"
+        )));
 
         // Other Ninja and Rogue creatures you control get +1/+1
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
+                1, 1, Duration.WhileOnBattlefield, filter, true
+        )));
     }
 
     private SilverFurMaster(final SilverFurMaster card) {
