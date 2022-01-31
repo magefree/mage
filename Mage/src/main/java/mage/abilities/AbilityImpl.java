@@ -102,7 +102,7 @@ public abstract class AbilityImpl implements Ability {
         this.zone = ability.zone;
         this.name = ability.name;
         this.usesStack = ability.usesStack;
-        this.manaCosts = ability.manaCosts;
+        this.manaCosts = ability.manaCosts.copy();
         this.manaCostsToPay = ability.manaCostsToPay.copy();
         this.costs = ability.costs.copy();
         for (Watcher watcher : ability.getWatchers()) {
