@@ -28,7 +28,7 @@ public final class BefriendingTheMoths extends CardImpl {
         this.secondSideCardClazz = mage.cards.i.ImperialMoth.class;
 
         // (As this Saga enters and after your draw step, add a lore counter.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I, II — Target creature you control gets +1/+1 and gains flying until end of turn.
         sagaAbility.addChapterEffect(

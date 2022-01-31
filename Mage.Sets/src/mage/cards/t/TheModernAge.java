@@ -24,7 +24,7 @@ public final class TheModernAge extends CardImpl {
         this.secondSideCardClazz = mage.cards.v.VectorGlider.class;
 
         // (As this Saga enters and after your draw step, add a lore counter.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I, II — Draw a card, then discard a card.
         sagaAbility.addChapterEffect(

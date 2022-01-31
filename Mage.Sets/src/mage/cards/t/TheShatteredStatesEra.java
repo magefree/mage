@@ -31,7 +31,7 @@ public final class TheShatteredStatesEra extends CardImpl {
         this.secondSideCardClazz = mage.cards.n.NamelessConqueror.class;
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Gain control of target creature until end of turn. Untap it. It gains haste until end of turn.
         sagaAbility.addChapterEffect(

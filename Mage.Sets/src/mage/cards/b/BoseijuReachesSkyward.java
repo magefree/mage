@@ -37,7 +37,7 @@ public final class BoseijuReachesSkyward extends CardImpl {
         this.secondSideCardClazz = mage.cards.b.BranchOfBoseiju.class;
 
         // (As this Saga enters and after your draw step, add a lore counter.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I — Search your library for up to two basic Forest cards, reveal them, put them into your hand, then shuffle.
         sagaAbility.addChapterEffect(

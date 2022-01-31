@@ -28,6 +28,10 @@ public class SagaAbility extends SimpleStaticAbility {
 
     private final SagaChapter maxChapter;
 
+    public SagaAbility(Card card) {
+        this(card, SagaChapter.CHAPTER_III);
+    }
+
     public SagaAbility(Card card, SagaChapter maxChapter) {
         super(Zone.ALL, new AddCountersSourceEffect(CounterType.LORE.createInstance()));
         this.maxChapter = maxChapter;
