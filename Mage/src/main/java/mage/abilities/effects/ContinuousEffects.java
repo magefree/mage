@@ -177,6 +177,7 @@ public class ContinuousEffects implements Serializable {
         for (ContinuousEffect effect : layeredEffects) {
             switch (effect.getDuration()) {
                 case WhileOnBattlefield:
+                case WhileControlled:
                 case WhileOnStack:
                 case WhileInGraveyard:
                     Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
