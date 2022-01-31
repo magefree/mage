@@ -8,8 +8,7 @@ import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 /**
@@ -18,19 +17,11 @@ import mage.target.TargetSpell;
  */
 public final class SpellPierce extends CardImpl {
 
-
-    private static final FilterSpell filter = new FilterSpell("noncreature spell");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
-
     public SpellPierce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
-
-        // Counter target noncreature spell unless its controller pays .
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        // Counter target noncreature spell unless its controller pays 2.
+        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(2)));
     }
 
@@ -42,5 +33,4 @@ public final class SpellPierce extends CardImpl {
     public SpellPierce copy() {
         return new SpellPierce(this);
     }
-
 }
