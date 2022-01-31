@@ -1,6 +1,7 @@
 package mage.abilities.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -75,10 +76,9 @@ public class SagaAbility extends SimpleStaticAbility {
         addChapterEffect(card, fromChapter, toChapter, effects, targets, false);
     }
 
-    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Targets targets, boolean optional) {
-        ChapterTriggeredAbility ability;
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Targets targets, boolean optional, Mode... modes) {
         for (int i = fromChapter.getNumber(); i <= toChapter.getNumber(); i++) {
-            ability = new ChapterTriggeredAbility(null, SagaChapter.getChapter(i), toChapter, optional);
+            ChapterTriggeredAbility ability = new ChapterTriggeredAbility(null, SagaChapter.getChapter(i), toChapter, optional);
             for (Effect effect : effects) {
                 if (effect != null) {
                     ability.addEffect(effect.copy());
@@ -88,6 +88,9 @@ public class SagaAbility extends SimpleStaticAbility {
                 if (target != null) {
                     ability.addTarget(target.copy());
                 }
+            }
+            for (Mode mode : modes) {
+                ability.addMode(mode.copy());
             }
             if (i > fromChapter.getNumber()) {
                 ability.setRuleVisible(false);
