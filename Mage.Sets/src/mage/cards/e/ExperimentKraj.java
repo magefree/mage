@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -57,7 +56,7 @@ public final class ExperimentKraj extends CardImpl {
 
 class ExperimentKrajEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature with a +1/+1 counter on it");
 
     static {
         filter.add(CounterType.P1P1.getPredicate());
