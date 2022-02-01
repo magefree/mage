@@ -77,6 +77,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Kyodai, Soul of Kamigawa", 23, Rarity.RARE, mage.cards.k.KyodaiSoulOfKamigawa.class));
         cards.add(new SetCardInfo("Leech Gauntlet", 106, Rarity.UNCOMMON, mage.cards.l.LeechGauntlet.class));
         cards.add(new SetCardInfo("Life of Toshiro Umezawa", 108, Rarity.UNCOMMON, mage.cards.l.LifeOfToshiroUmezawa.class));
+        cards.add(new SetCardInfo("Light the Way", 24, Rarity.COMMON, mage.cards.l.LightTheWay.class));
         cards.add(new SetCardInfo("Lion Sash", 26, Rarity.RARE, mage.cards.l.LionSash.class));
         cards.add(new SetCardInfo("Lizard Blades", 153, Rarity.RARE, mage.cards.l.LizardBlades.class));
         cards.add(new SetCardInfo("Malicious Malfunction", 110, Rarity.UNCOMMON, mage.cards.m.MaliciousMalfunction.class));
