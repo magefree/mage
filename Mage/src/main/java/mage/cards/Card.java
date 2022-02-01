@@ -72,6 +72,8 @@ public interface Card extends MageObject {
 
     Card getSecondCardFace();
 
+    SpellAbility getSecondFaceSpellAbility();
+
     boolean isNightCard();
 
     void assignNewId();
