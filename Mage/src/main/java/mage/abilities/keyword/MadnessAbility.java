@@ -49,7 +49,6 @@ import mage.ApprovingObject;
 public class MadnessAbility extends StaticAbility {
 
     private final String rule;
-    private final int lifeCost;
 
     public MadnessAbility(Card card, ManaCosts<ManaCost> madnessCost) {
         this(card, madnessCost, 0);
@@ -59,24 +58,22 @@ public class MadnessAbility extends StaticAbility {
         super(Zone.HAND, new MadnessReplacementEffect(madnessCost, lifeCost));
         addSubAbility(new MadnessTriggeredAbility(madnessCost, lifeCost, getOriginalId()));
 
-        this.lifeCost = lifeCost;
-
         String costText;
 
-        if (this.lifeCost > 0) {
-            costText = "Madness—" + madnessCost.getText() + ", Pay " + this.lifeCost + " life.";
+        if (lifeCost > 0) {
+            costText = "Madness—" + madnessCost.getText() + ", Pay " + lifeCost + " life.";
         } else {
             costText = "Madness " + madnessCost.getText();
         }
 
-        this.rule =  costText + " <i>(If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)</i>";
+        this.rule = costText + " <i>(If you discard this card, discard it into exile. " +
+                "When you do, cast it for its madness cost or put it into your graveyard.)</i>";
     }
 
 
     private MadnessAbility(final MadnessAbility ability) {
         super(ability);
         this.rule = ability.rule;
-        this.lifeCost = ability.lifeCost;
     }
 
     @Override
@@ -277,5 +274,4 @@ enum MadnessCondition implements Condition {
 
         return ((Spell) madnessSpell).getSpellAbility().getSpellAbilityCastMode() == SpellAbilityCastMode.MADNESS;
     }
-
 }
