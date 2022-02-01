@@ -113,6 +113,8 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Patron of the Vein", 135, Rarity.RARE, mage.cards.p.PatronOfTheVein.class));
         cards.add(new SetCardInfo("Port Town", 178, Rarity.RARE, mage.cards.p.PortTown.class));
         cards.add(new SetCardInfo("Prairie Stream", 179, Rarity.RARE, mage.cards.p.PrairieStream.class));
+        cards.add(new SetCardInfo("Predator's Hour", 21, Rarity.RARE, mage.cards.p.PredatorsHour.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Predator's Hour", 59, Rarity.RARE, mage.cards.p.PredatorsHour.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Priest of the Blessed Graf", 7, Rarity.RARE, mage.cards.p.PriestOfTheBlessedGraf.class));
         cards.add(new SetCardInfo("Promise of Bunrei", 96, Rarity.RARE, mage.cards.p.PromiseOfBunrei.class));
         cards.add(new SetCardInfo("Rakdos Carnarium", 180, Rarity.UNCOMMON, mage.cards.r.RakdosCarnarium.class));
