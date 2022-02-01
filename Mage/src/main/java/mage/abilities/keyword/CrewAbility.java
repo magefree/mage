@@ -1,7 +1,7 @@
 package mage.abilities.keyword;
 
-import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.CrewIncreasedPowerAbility;
 import mage.abilities.common.CrewWithToughnessAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -140,14 +140,12 @@ class CrewCost extends CostImpl {
     }
 
     private int getCrewPower(Permanent permanent, Game game) {
-        MageInt crewPowerSource = null;
-
         if (permanent.hasAbility(CrewWithToughnessAbility.getInstance(), game)) {
-            crewPowerSource = permanent.getToughness();
+            return permanent.getToughness().getValue();
+        } else if (permanent.getAbilities(game).containsClass(CrewIncreasedPowerAbility.class)) {
+            return permanent.getPower().getValue() + 2;
         } else {
-            crewPowerSource = permanent.getPower();
+            return permanent.getPower().getValue();
         }
-
-        return crewPowerSource.getValue();
     }
 }
