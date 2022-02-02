@@ -1590,3 +1590,17 @@
 |Generate|TOK:AFR|Vecna|||VecnaToken|
 |Generate|TOK:AFR|Wolf|||WolfToken|
 |Generate|TOK:AFR|Zombie|||ZombieToken|
+
+# AFC
+|Generate|TOK:AFC|Angel|||AngelToken|
+|Generate|TOK:AFC|Beast|||BeastToken|
+# no need tokens for Eternalize ability, but scryfall have it: https://scryfall.com/card/tafc/4/champion-of-wits
+|Generate|TOK:AFC|Clue|||ClueArtifactToken|
+|Generate|TOK:AFC|Dragon|||DragonToken2|
+|Generate|TOK:AFC|Dragon Spirit|||VrondissRageOfAncientsToken|
+|Generate|TOK:AFC|Illusion|||MinnWilyIllusionistToken|
+|Generate|TOK:AFC|Knight|||KnightToken|
+|Generate|TOK:AFC|Rat|||RatToken|
+|Generate|TOK:AFC|Saproling|||SaprolingToken|
+|Generate|TOK:AFC|Servo|||ServoToken|
+|Generate|TOK:AFC|Thopter|||ThopterColorlessToken|

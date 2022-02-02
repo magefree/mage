@@ -637,6 +637,19 @@ public class ScryfallImageSupportTokens {
             put("AFR/Emblem Zariel, Archduke of Avernus", "https://api.scryfall.com/cards/tafr/19/en?format=image");
             put("AFR/Zombie", "https://api.scryfall.com/cards/tafr/9/en?format=image");
 
+            // AFC
+            put("AFC/Angel", "https://api.scryfall.com/cards/tafc/1/en?format=image");
+            put("AFC/Beast", "https://api.scryfall.com/cards/tafc/7/en?format=image");
+            put("AFC/Clue", "https://api.scryfall.com/cards/tafc/10/en?format=image");
+            put("AFC/Dragon Spirit", "https://api.scryfall.com/cards/tafc/9/en?format=image");
+            put("AFC/Dragon", "https://api.scryfall.com/cards/tafc/6/en?format=image");
+            put("AFC/Illusion", "https://api.scryfall.com/cards/tafc/3/en?format=image");
+            put("AFC/Knight", "https://api.scryfall.com/cards/tafc/2/en?format=image");
+            put("AFC/Rat", "https://api.scryfall.com/cards/tafc/5/en?format=image");
+            put("AFC/Saproling", "https://api.scryfall.com/cards/tafc/8/en?format=image");
+            put("AFC/Servo", "https://api.scryfall.com/cards/tafc/11/en?format=image");
+            put("AFC/Thopter", "https://api.scryfall.com/cards/tafc/12/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
