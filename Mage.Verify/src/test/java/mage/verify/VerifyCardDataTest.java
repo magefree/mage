@@ -94,11 +94,9 @@ public class VerifyCardDataTest {
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
-        skipListAddName(SKIP_LIST_COLOR, "NEO", "Prodigy's Prototype"); // TODO: remove after mtgjson update
 
         // cost
         skipListCreate(SKIP_LIST_COST);
-        skipListAddName(SKIP_LIST_COST, "NEO", "Prodigy's Prototype"); // TODO: remove after mtgjson update
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
