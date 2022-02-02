@@ -77,7 +77,7 @@ class CantStayAwayEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Card targetCard = game.getCard(source.getFirstTarget());
-        if (controller == null || targetCard == null) {
+        if (controller == null || targetCard == null || game.getState().getZone(targetCard.getId()) != Zone.GRAVEYARD) {
             return false;
         }
         controller.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
