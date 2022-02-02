@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class KamigawaNeonDynasty extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Armguard Familiar", "Bronzeplate Boar", "Leech Gauntlet", "Lion Sash", "Lizard Blades", "Simian Sling", "The Reality Chip");
+    private static final List<String> unfinished = Arrays.asList("Armguard Familiar", "Bronzeplate Boar", "Cloudsteel Kirin", "Leech Gauntlet", "Lion Sash", "Lizard Blades", "Simian Sling", "The Reality Chip");
     private static final KamigawaNeonDynasty instance = new KamigawaNeonDynasty();
 
     public static KamigawaNeonDynasty getInstance() {
@@ -46,7 +46,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Circuit Mender", 242, Rarity.UNCOMMON, mage.cards.c.CircuitMender.class));
         cards.add(new SetCardInfo("Covert Technician", 49, Rarity.UNCOMMON, mage.cards.c.CovertTechnician.class));
         cards.add(new SetCardInfo("Dokuchi Shadow-Walker", 94, Rarity.COMMON, mage.cards.d.DokuchiShadowWalker.class));
-        cards.add(new SetCardInfo("Eiganjo Uprising", 484, Rarity.RARE, mage.cards.e.EiganjoUprising.class));
+        cards.add(new SetCardInfo("Eiganjo Uprising", 217, Rarity.RARE, mage.cards.e.EiganjoUprising.class));
         cards.add(new SetCardInfo("Enormous Energy Blade", 96, Rarity.UNCOMMON, mage.cards.e.EnormousEnergyBlade.class));
         cards.add(new SetCardInfo("Enthusiastic Mechanaut", 218, Rarity.UNCOMMON, mage.cards.e.EnthusiasticMechanaut.class));
         cards.add(new SetCardInfo("Era of Enlightenment", 11, Rarity.COMMON, mage.cards.e.EraOfEnlightenment.class));
@@ -99,6 +99,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Silver-Fur Master", 236, Rarity.UNCOMMON, mage.cards.s.SilverFurMaster.class));
         cards.add(new SetCardInfo("Sokenzan Smelter", 164, Rarity.UNCOMMON, mage.cards.s.SokenzanSmelter.class));
         cards.add(new SetCardInfo("Sokenzan, Crucible of Defiance", 276, Rarity.RARE, mage.cards.s.SokenzanCrucibleOfDefiance.class));
+        cards.add(new SetCardInfo("Spell Pierce", 80, Rarity.COMMON, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Spirited Companion", 38, Rarity.COMMON, mage.cards.s.SpiritedCompanion.class));
         cards.add(new SetCardInfo("Sunblade Samurai", 39, Rarity.COMMON, mage.cards.s.SunbladeSamurai.class));
         cards.add(new SetCardInfo("Surgehacker Mech", 260, Rarity.RARE, mage.cards.s.SurgehackerMech.class));
