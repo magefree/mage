@@ -55,6 +55,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Essence Capture", 52, Rarity.UNCOMMON, mage.cards.e.EssenceCapture.class));
         cards.add(new SetCardInfo("Fang of Shigeki", 183, Rarity.COMMON, mage.cards.f.FangOfShigeki.class));
         cards.add(new SetCardInfo("Forest", 291, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fragment of Konda", 12, Rarity.UNCOMMON, mage.cards.f.FragmentOfKonda.class));
         cards.add(new SetCardInfo("Futurist Operative", 53, Rarity.UNCOMMON, mage.cards.f.FuturistOperative.class));
         cards.add(new SetCardInfo("Generous Visitor", 185, Rarity.UNCOMMON, mage.cards.g.GenerousVisitor.class));
         cards.add(new SetCardInfo("Geothermal Kami", 186, Rarity.COMMON, mage.cards.g.GeothermalKami.class));
@@ -115,6 +116,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Surgehacker Mech", 260, Rarity.RARE, mage.cards.s.SurgehackerMech.class));
         cards.add(new SetCardInfo("Swamp", 287, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tempered in Solitude", 165, Rarity.UNCOMMON, mage.cards.t.TemperedInSolitude.class));
+        cards.add(new SetCardInfo("The Fall of Lord Konda", 12, Rarity.UNCOMMON, mage.cards.t.TheFallOfLordKonda.class));
         cards.add(new SetCardInfo("The Modern Age", 66, Rarity.COMMON, mage.cards.t.TheModernAge.class));
         cards.add(new SetCardInfo("The Shattered States Era", 162, Rarity.COMMON, mage.cards.t.TheShatteredStatesEra.class));
         cards.add(new SetCardInfo("The Wandering Emperor", 42, Rarity.MYTHIC, mage.cards.t.TheWanderingEmperor.class));
