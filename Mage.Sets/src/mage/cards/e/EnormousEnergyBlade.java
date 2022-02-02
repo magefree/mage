@@ -27,7 +27,11 @@ public final class EnormousEnergyBlade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(4, 0)));
         
         // Whenever Enormous Energy Blade becomes attached to a creature, tap that creature.
-        this.addAbility(new AttachedToCreatureSourceTriggeredAbility(new TapAttachedEffect(), false));
+        TapEnchantedEffect effect = new TapEnchantedEffect();
+        effect.setText("tap that creature");
+        AttachedToCreatureSourceTriggeredAbility attachTrigger = new AttachedToCreatureSourceTriggeredAbility(effect, false);
+        attachTrigger.setTriggerPhrase("Whenever {this} becomes attached to a creature, ");
+        this.addAbility(attachTrigger);
         
         // Equip {2}
         this.addAbility(new EquipAbility(2));
@@ -40,22 +44,5 @@ public final class EnormousEnergyBlade extends CardImpl {
     @Override
     public EnormousEnergyBlade copy() {
         return new EnormousEnergyBlade(this);
-    }
-}
-
-class TapAttachedEffect extends TapEnchantedEffect {
-	
-	public TapAttachedEffect() {
-		super();
-		this.staticText = "tap that creature";
-	}
-	
-	public TapAttachedEffect(final TapAttachedEffect effect) {
-		super(effect);
-	}
-	
-	@Override
-    public TapAttachedEffect copy() {
-        return new TapAttachedEffect(this);
     }
 }
