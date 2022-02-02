@@ -29,6 +29,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Akki Ember-Keeper", 130, Rarity.COMMON, mage.cards.a.AkkiEmberKeeper.class));
         cards.add(new SetCardInfo("Akki War Paint", 132, Rarity.COMMON, mage.cards.a.AkkiWarPaint.class));
         cards.add(new SetCardInfo("Ancestral Katana", 1, Rarity.COMMON, mage.cards.a.AncestralKatana.class));
+        cards.add(new SetCardInfo("Anchor to Reality", 45, Rarity.UNCOMMON, mage.cards.a.AnchorToReality.class));
         cards.add(new SetCardInfo("Ao, the Dawn Sky", 2, Rarity.MYTHIC, mage.cards.a.AoTheDawnSky.class));
         cards.add(new SetCardInfo("Armguard Familiar", 46, Rarity.COMMON, mage.cards.a.ArmguardFamiliar.class));
         cards.add(new SetCardInfo("Asari Captain", 215, Rarity.UNCOMMON, mage.cards.a.AsariCaptain.class));
