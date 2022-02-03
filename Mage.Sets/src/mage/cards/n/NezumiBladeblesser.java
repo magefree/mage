@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -11,14 +10,15 @@ import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class NezumiBladeblesser extends CardImpl {
@@ -47,7 +47,7 @@ public final class NezumiBladeblesser extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new MenaceAbility()),
                 enchantmentCondition,
-                "{this} has menace as long as you control an enchantment"
+                "{this} has menace as long as you control an enchantment <i>(This creature can't be blocked except by two or more creatures.)</i>" // temporary
         )).addHint(enchantmentHint));
     }
 
