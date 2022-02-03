@@ -1,11 +1,12 @@
 package mage.cards.s;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffect;
@@ -32,9 +33,6 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class ScrapWelder extends CardImpl {
 
-    private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("an artifact with mana value X");
-    private static final FilterArtifactCard filter2 = new FilterArtifactCard("artifact card with mana value less than X from your graveyard");
-
     public ScrapWelder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
@@ -45,9 +43,8 @@ public final class ScrapWelder extends CardImpl {
 
         // {T}, Sacrifice an artifact with mana value X: Return target artifact card with mana value less than X from your graveyard to the battlefield. It gains haste until end of turn.
         Ability ability = new SimpleActivatedAbility(new ScrapWelderEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(filter));
+        ability.addCost(new ScrapWelderCost());
         ability.setTargetAdjuster(ScrapWelderTargetAdjuster.instance);
-        ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.addAbility(ability);
     }
 
@@ -95,6 +92,30 @@ class ScrapWelderEffect extends OneShotEffect {
     }
 }
 
+class ScrapWelderCost extends VariableCostImpl {
+
+    public ScrapWelderCost() {
+        super(VariableCostType.NORMAL, "mana value");
+        this.text = "Sacrifice an artifact with mana value X";
+    }
+
+    private ScrapWelderCost(final ScrapWelderCost cost) {
+        super(cost);
+    }
+
+    @Override
+    public ScrapWelderCost copy() {
+        return new ScrapWelderCost(this);
+    }
+
+    @Override
+    public Cost getFixedCostsFromAnnouncedValue(int xValue) {
+        FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("an artifact with mana value " + xValue);
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
+        return new SacrificeTargetCost(filter);
+    }
+}
+
 enum ScrapWelderTargetAdjuster implements TargetAdjuster {
     instance;
 
@@ -102,12 +123,9 @@ enum ScrapWelderTargetAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         int xValue = 0;
         for (Cost cost : ability.getCosts()) {
-            if (cost instanceof SacrificeTargetCost) {
-                List<Permanent> sacrificedPermanents = ((SacrificeTargetCost) cost).getPermanents();
-                if (sacrificedPermanents.size() > 0) {
-                    xValue = sacrificedPermanents.get(0).getManaValue();
-                    break;
-                }
+            if (cost instanceof ScrapWelderCost) {
+                xValue = ((ScrapWelderCost) cost).getAmount();
+                break;
             }
         }
         FilterArtifactCard filter = new FilterArtifactCard("artifact card with mana value less than " + xValue + " from your graveyard");
