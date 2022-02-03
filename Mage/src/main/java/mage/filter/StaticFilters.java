@@ -455,6 +455,13 @@ public final class StaticFilters {
         FILTER_CREATURE_YOU_DONT_CONTROL.setLockedFilter(true);
     }
 
+    public static final FilterCreaturePermanent FILTER_CREATURES_YOU_DONT_CONTROL = new FilterCreaturePermanent("creatures you don't control");
+
+    static {
+        FILTER_CREATURES_YOU_DONT_CONTROL.add(TargetController.NOT_YOU.getControllerPredicate());
+        FILTER_CREATURES_YOU_DONT_CONTROL.setLockedFilter(true);
+    }
+
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_CREATURE = new FilterControlledCreaturePermanent();
 
     static {
