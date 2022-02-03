@@ -69,6 +69,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Guardians of Oboro", 56, Rarity.COMMON, mage.cards.g.GuardiansOfOboro.class));
         cards.add(new SetCardInfo("Hand of Enlightenment", 11, Rarity.COMMON, mage.cards.h.HandOfEnlightenment.class));
         cards.add(new SetCardInfo("Heiko Yamazaki, the General", 146, Rarity.UNCOMMON, mage.cards.h.HeikoYamazakiTheGeneral.class));
+        cards.add(new SetCardInfo("Heir of the Ancient Fang", 191, Rarity.COMMON, mage.cards.h.HeirOfTheAncientFang.class));
         cards.add(new SetCardInfo("Hidetsugu, Devouring Chaos", 99, Rarity.RARE, mage.cards.h.HidetsuguDevouringChaos.class));
         cards.add(new SetCardInfo("High-Speed Hoverbike", 247, Rarity.UNCOMMON, mage.cards.h.HighSpeedHoverbike.class));
         cards.add(new SetCardInfo("Hotshot Mechanic", 16, Rarity.UNCOMMON, mage.cards.h.HotshotMechanic.class));
