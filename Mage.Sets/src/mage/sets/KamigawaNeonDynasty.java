@@ -138,6 +138,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("The Wandering Emperor", 42, Rarity.MYTHIC, mage.cards.t.TheWanderingEmperor.class));
         cards.add(new SetCardInfo("Thirst for Knowledge", 85, Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class));
         cards.add(new SetCardInfo("Thousand-Faced Shadow", 86, Rarity.RARE, mage.cards.t.ThousandFacedShadow.class));
+        cards.add(new SetCardInfo("Towashi Guide-Bot", 262, Rarity.UNCOMMON, mage.cards.t.TowashiGuideBot.class));
         cards.add(new SetCardInfo("Twinshot Sniper", 168, Rarity.UNCOMMON, mage.cards.t.TwinshotSniper.class));
         cards.add(new SetCardInfo("Unstoppable Ogre", 169, Rarity.COMMON, mage.cards.u.UnstoppableOgre.class));
         cards.add(new SetCardInfo("Upriser Renegade", 170, Rarity.UNCOMMON, mage.cards.u.UpriserRenegade.class));
