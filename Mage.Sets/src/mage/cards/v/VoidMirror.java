@@ -72,7 +72,7 @@ class VoidMirrorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = (Spell) getValue("spellCast");
         if (spell != null) {
-            game.getStack().counter(source.getId(), source, game);
+            game.getStack().counter(spell.getId(), source, game);
             return true;
         }
         return false;
