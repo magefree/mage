@@ -55,7 +55,7 @@ public final class PristineAngel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new ProtectionAbility(filter), Duration.WhileOnBattlefield),
-                new InvertCondition(SourceTappedCondition.instance),
+                SourceTappedCondition.UNTAPPED,
                 "As long as {this} is untapped, it has protection from artifacts and from all colors")));
         // Whenever you cast a spell, you may untap Pristine Angel.
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), true));

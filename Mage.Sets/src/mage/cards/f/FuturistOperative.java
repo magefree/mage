@@ -34,7 +34,7 @@ public final class FuturistOperative extends CardImpl {
         // As long as Futurist Operative is tapped, it's a Human Citizen with base power and toughness 1/1 and can't be blocked.
         Ability ability = new SimpleStaticAbility(new FuturistOperativeEffect());
         ability.addEffect(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), SourceTappedCondition.instance, "and can't be blocked"
+                new CantBeBlockedSourceEffect(), SourceTappedCondition.TAPPED, "and can't be blocked"
         ));
         this.addAbility(ability);
 
