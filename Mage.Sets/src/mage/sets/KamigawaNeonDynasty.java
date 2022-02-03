@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class KamigawaNeonDynasty extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Armguard Familiar", "Bronzeplate Boar", "Cloudsteel Kirin", "Leech Gauntlet", "Lion Sash", "Lizard Blades", "Simian Sling", "The Reality Chip");
+    private static final List<String> unfinished = Arrays.asList("Acquisition Octopus", "Armguard Familiar", "Blade of the Oni", "Bronzeplate Boar", "Cloudsteel Kirin", "Leech Gauntlet", "Lion Sash", "Lizard Blades", "Simian Sling", "The Reality Chip");
     private static final KamigawaNeonDynasty instance = new KamigawaNeonDynasty();
 
     public static KamigawaNeonDynasty getInstance() {
@@ -131,6 +131,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("The Restoration of Eiganjo", 34, Rarity.RARE, mage.cards.t.TheRestorationOfEiganjo.class));
         cards.add(new SetCardInfo("The Shattered States Era", 162, Rarity.COMMON, mage.cards.t.TheShatteredStatesEra.class));
         cards.add(new SetCardInfo("The Wandering Emperor", 42, Rarity.MYTHIC, mage.cards.t.TheWanderingEmperor.class));
+        cards.add(new SetCardInfo("Thirst for Knowledge", 85, Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class));
         cards.add(new SetCardInfo("Thousand-Faced Shadow", 86, Rarity.RARE, mage.cards.t.ThousandFacedShadow.class));
         cards.add(new SetCardInfo("Twinshot Sniper", 168, Rarity.UNCOMMON, mage.cards.t.TwinshotSniper.class));
         cards.add(new SetCardInfo("Unstoppable Ogre", 169, Rarity.COMMON, mage.cards.u.UnstoppableOgre.class));
