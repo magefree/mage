@@ -650,6 +650,19 @@ public class ScryfallImageSupportTokens {
             put("AFC/Servo", "https://api.scryfall.com/cards/tafc/11/en?format=image");
             put("AFC/Thopter", "https://api.scryfall.com/cards/tafc/12/en?format=image");
 
+            // MIC
+            put("MIC/Beast", "https://api.scryfall.com/cards/tmic/7/en?format=image");
+            put("MIC/Centaur", "https://api.scryfall.com/cards/tmic/8/en?format=image");
+            put("MIC/Eldrazi Spawn", "https://api.scryfall.com/cards/tmic/1/en?format=image");
+            put("MIC/Elephant", "https://api.scryfall.com/cards/tmic/9/en?format=image");
+            put("MIC/Human Soldier", "https://api.scryfall.com/cards/tmic/2/en?format=image");
+            put("MIC/Knight", "https://api.scryfall.com/cards/tmic/3/en?format=image");
+            put("MIC/Rhino", "https://api.scryfall.com/cards/tmic/10/en?format=image");
+            put("MIC/Snake", "https://api.scryfall.com/cards/tmic/11/en?format=image");
+            put("MIC/Zombie Army", "https://api.scryfall.com/cards/tmic/6/en?format=image");
+            put("MIC/Zombie/1", "https://api.scryfall.com/cards/tmic/5/en?format=image"); // 2/2
+            put("MIC/Zombie/2", "https://api.scryfall.com/cards/tmic/4/en?format=image"); // */*
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
