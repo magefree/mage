@@ -108,6 +108,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Mobilizer Mech", 65, Rarity.UNCOMMON, mage.cards.m.MobilizerMech.class));
         cards.add(new SetCardInfo("Moon-Circuit Hacker", 67, Rarity.COMMON, mage.cards.m.MoonCircuitHacker.class));
         cards.add(new SetCardInfo("Moonsnare Prototype", 69, Rarity.COMMON, mage.cards.m.MoonsnarePrototype.class));
+        cards.add(new SetCardInfo("Moonsnare Specialist", 70, Rarity.COMMON, mage.cards.m.MoonsnareSpecialist.class));
         cards.add(new SetCardInfo("Mountain", 289, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mukotai Ambusher", 112, Rarity.COMMON, mage.cards.m.MukotaiAmbusher.class));
         cards.add(new SetCardInfo("Nameless Conqueror", 162, Rarity.COMMON, mage.cards.n.NamelessConqueror.class));
