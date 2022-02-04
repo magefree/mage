@@ -23,16 +23,14 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BloodToken;
 import mage.players.Player;
-import mage.players.Players;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.Watcher;
+import mage.watchers.common.PlayerLostLifeWatcher;
 
 import java.util.*;
 
@@ -41,7 +39,7 @@ import java.util.*;
  */
 public class StrefanMaurerProgenitor extends CardImpl {
 
-    private static final Hint hint = new ValueHint("Players who lost life this turn", NumberPlayersLostLifeDynamicValue.instance);
+    private static final Hint hint = new ValueHint("Players who lost life this turn", StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance);
     private static final FilterControlledPermanent bloodTokenFilter = new FilterControlledPermanent("Blood tokens");
 
     static {
@@ -65,11 +63,11 @@ public class StrefanMaurerProgenitor extends CardImpl {
         // At the beginning of your end step, create a Blood token for each player who lost life this turn.
         this.addAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateBloodTokenEffect(),
+                        new StrefanMaurerProgenitorCreateBloodTokensEffect(),
                         TargetController.YOU,
                         false)
                         .addHint(hint),
-                new PlayersWhoLifeLostWatcher()
+                new PlayerLostLifeWatcher()
         );
 
         // Whenever Strefan attacks, you may sacrifice two Blood tokens.
@@ -77,7 +75,7 @@ public class StrefanMaurerProgenitor extends CardImpl {
         // It gains indestructible until end of turn.
         this.addAbility(new AttacksTriggeredAbility(
                 new DoIfCostPaid(
-                        new PlayVampireEffect(),
+                        new StrefanMaurerProgenitorPlayVampireEffect(),
                         new SacrificeTargetCost(new TargetControlledPermanent(
                                 2,
                                 2,
@@ -97,18 +95,18 @@ public class StrefanMaurerProgenitor extends CardImpl {
     }
 }
 
-class PlayVampireEffect extends OneShotEffect {
+class StrefanMaurerProgenitorPlayVampireEffect extends OneShotEffect {
 
     private static final FilterCreatureCard vampireCardFilter = new FilterCreatureCard();
     static { vampireCardFilter.add(SubType.VAMPIRE.getPredicate()); }
 
-    public PlayVampireEffect() {
+    public StrefanMaurerProgenitorPlayVampireEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "you may put a Vampire card from your hand onto the battlefield tapped and attacking. " +
                 "It gains indestructible until end of turn.";
     }
 
-    private PlayVampireEffect(final PlayVampireEffect effect) { super(effect); }
+    private StrefanMaurerProgenitorPlayVampireEffect(final StrefanMaurerProgenitorPlayVampireEffect effect) { super(effect); }
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -137,74 +135,52 @@ class PlayVampireEffect extends OneShotEffect {
     }
 
     @Override
-    public PlayVampireEffect copy() { return new PlayVampireEffect(this); }
+    public StrefanMaurerProgenitorPlayVampireEffect copy() { return new StrefanMaurerProgenitorPlayVampireEffect(this); }
 }
 
-class CreateBloodTokenEffect extends OneShotEffect {
+class StrefanMaurerProgenitorCreateBloodTokensEffect extends OneShotEffect {
 
-    public CreateBloodTokenEffect() {
+    public StrefanMaurerProgenitorCreateBloodTokensEffect() {
         super(Outcome.Benefit);
         staticText = "create a Blood token for each player who lost life this turn";
     }
 
-    private CreateBloodTokenEffect(final CreateBloodTokenEffect effect) { super(effect); }
+    private StrefanMaurerProgenitorCreateBloodTokensEffect(final StrefanMaurerProgenitorCreateBloodTokensEffect effect) { super(effect); }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) { return false; }
 
-        int playerCount = NumberPlayersLostLifeDynamicValue.instance.calculate(game, source, this);
+        int numPlayersWhoLostLife = StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance.calculate(game, source, this);
 
-        if (playerCount > 0) {
-            new BloodToken().putOntoBattlefield(playerCount, game, source, controller.getId());
+        if (numPlayersWhoLostLife > 0) {
+            new BloodToken().putOntoBattlefield(numPlayersWhoLostLife, game, source, controller.getId());
         }
-        return playerCount > 0;
+        return numPlayersWhoLostLife > 0;
     }
 
     @Override
-    public CreateBloodTokenEffect copy() { return new CreateBloodTokenEffect(this); }
+    public StrefanMaurerProgenitorCreateBloodTokensEffect copy() { return new StrefanMaurerProgenitorCreateBloodTokensEffect(this); }
 }
 
-// From Belbe, Corrupted Observer
-class PlayersWhoLifeLostWatcher extends Watcher {
-
-    private final Set<UUID> playersWhoLostLife =  new LinkedHashSet<UUID>();
-
-    PlayersWhoLifeLostWatcher() { super(WatcherScope.GAME); }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.LOST_LIFE) { return; }
-
-        Players players = game.getPlayers();
-        if (players == null) { return; }
-
-        for (Player player : players.values()) {
-            if (player == null) { continue; }
-
-            playersWhoLostLife.add(player.getId());
-        }
-    }
-
-    @Override
-    public void reset() {
-        playersWhoLostLife.clear();
-        super.reset();
-    }
-
-    int getPlayerCount() { return playersWhoLostLife.size(); }
-}
-
-enum NumberPlayersLostLifeDynamicValue implements DynamicValue {
+enum StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue implements DynamicValue {
     instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        PlayersWhoLifeLostWatcher watcher = game.getState().getWatcher(PlayersWhoLifeLostWatcher.class);
-        if (watcher == null) { return 0; }
+        PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
+        int numPlayersWhoLostLife = 0;
 
-        return watcher.getPlayerCount();
+        if (watcher != null) {
+            for (Player player : game.getPlayers().values()) {
+                if (watcher.getLifeLost(player.getId()) > 0) {
+                    numPlayersWhoLostLife++;
+                }
+            }
+        }
+
+        return numPlayersWhoLostLife;
     }
 
     @Override
