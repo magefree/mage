@@ -5,28 +5,37 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.ExileFromGraveCost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.hint.StaticHint;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.BatToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetpointer.FixedTargets;
 
 import java.util.UUID;
 
@@ -56,11 +65,11 @@ public class TimotharBaronOfBats extends CardImpl {
         // It gains “When this creature deals combat damage to a player,
         // sacrifice it and return the exiled card to the battlefield tapped.”
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new DoIfCostPaid(new TimotharBaronOfBatsCreateBatEffect(), new ManaCostsImpl<>("{1}")),
+                new TimotharBaronOfBatsCreateBatEffect(),
                 false,
                 anotherVampireFilter,
                 true
-        ).setCostAdjuster(TimotharBaronOfBatsAdjuster.instance));
+        ));
     }
 
     private TimotharBaronOfBats(final TimotharBaronOfBats card) { super(card); }
@@ -73,7 +82,8 @@ class TimotharBaronOfBatsCreateBatEffect extends OneShotEffect {
 
     TimotharBaronOfBatsCreateBatEffect() {
         super(Outcome.Benefit);
-        staticText = "create a 1/1 black Bat creature token with flying. " +
+        staticText = "you may pay {1} and exile it. " +
+                "If you do, create a 1/1 black Bat creature token with flying. " +
                 "It gains \"When this creature deals combat damage to a player, " +
                 "sacrifice it and return the exiled card to the battlefield tapped\".";
     }
@@ -82,25 +92,49 @@ class TimotharBaronOfBatsCreateBatEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) { return false; }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) { return false; }
 
-        Card card = game.getCard(targetPointer.getFirst(game, source));
-        if (card == null) { return false; }
+        // Check vampire card still exists and is still in the graveyard
+        Card vampireCard = game.getCard(targetPointer.getFirst(game, source));
+        if (vampireCard == null) { return false; }
+        if (game.getState().getZone(vampireCard.getId()) != Zone.GRAVEYARD) { return false; }
+
+        // Create filter for the vampire card
+        FilterCard filter = new FilterCard();
+        filter.add(new CardIdPredicate(targetPointer.getFirst(game, source)));
+
+        // Create costs
+        ManaCosts<ManaCost> costs = new ManaCostsImpl<>("{1}");
+        // Exiling the card is handled after the owner pays the mana cost.
+        String costPromptMessage = "Pay {1} and exile " + vampireCard.getName() + "? " +
+                "If you do, create a create a 1/1 black Bat creature token with flying. " +
+                "It gains \"When this creature deals combat damage to a player, " +
+                "sacrifice it and return the exiled card to the battlefield tapped\".";
+
+        // Ask player if they wanna pay cost
+        if (!costs.canPay(source, source, controller.getId(), game)) { return false; }
+        if (!controller.chooseUse(Outcome.Benefit, costPromptMessage, source, game)) { return false; }
+        if (!costs.pay(source, game, source, controller.getId(),false)) { return false; }
+        // Exile the card as part of the cost.
+        // Handled this way so that the player doesn't have to dig through their graveyard for the card.
+        controller.moveCards(vampireCard, Zone.EXILED, source, game);
 
         BatToken bat = new BatToken();
+        new CreateTokenEffect(bat, 1).apply(game, source);
 
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
+        DealsCombatDamageToAPlayerTriggeredAbility sacAndReturnAbility = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new SacrificeSourceEffect(),
                 false,
                 "When this creature deals combat damage to a player, " +
                         "sacrifice it and return the exiled card to the battlefield tapped",
                 false);
-        ability.addEffect(new TimotharBaronOfBatsReturnEffect(new MageObjectReference(card, game)));
-        ability.addHint(new StaticHint("Exiled card: " + card.getName()));
-        bat.addAbility(ability);
+        sacAndReturnAbility.addEffect(new TimotharBaronOfBatsReturnEffect(new MageObjectReference(vampireCard, game)));
+        sacAndReturnAbility.addHint(new StaticHint("Exiled card: " + vampireCard.getName()));
 
-        new CreateTokenEffect(bat, 1).apply(game, source);
+        GainAbilityTargetEffect gainAbilityTargetEffect = new GainAbilityTargetEffect(sacAndReturnAbility, Duration.Custom);
+        gainAbilityTargetEffect.setTargetPointer(new FixedTargets(bat, game));
+        game.addEffect(gainAbilityTargetEffect, source);
 
         return true;
     }
@@ -137,23 +171,4 @@ class TimotharBaronOfBatsReturnEffect extends OneShotEffect {
 
     @Override
     public Effect copy() { return new TimotharBaronOfBatsReturnEffect(this); }
-}
-
-enum TimotharBaronOfBatsAdjuster implements CostAdjuster {
-    instance;
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        Player controller = game.getPlayer(ability.getControllerId());
-        if (controller != null) {
-            // This UUID is for the card in the graveyard
-            UUID targetId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
-
-            if (targetId != null) {
-                TargetCardInYourGraveyard filter = new TargetCardInYourGraveyard();
-                filter.addTarget(targetId, ability, game);
-                ability.addCost(new ExileFromGraveCost(filter));
-            }
-        }
-    }
 }
