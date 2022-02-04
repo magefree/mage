@@ -74,6 +74,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Gloomshrieker", 219, Rarity.UNCOMMON, mage.cards.g.Gloomshrieker.class));
         cards.add(new SetCardInfo("Go-Shintai of Ancient Wars", 144, Rarity.UNCOMMON, mage.cards.g.GoShintaiOfAncientWars.class));
         cards.add(new SetCardInfo("Go-Shintai of Boundless Vigor", 187, Rarity.UNCOMMON, mage.cards.g.GoShintaiOfBoundlessVigor.class));
+        cards.add(new SetCardInfo("Go-Shintai of Lost Wisdom", 55, Rarity.UNCOMMON, mage.cards.g.GoShintaiOfLostWisdom.class));
         cards.add(new SetCardInfo("Go-Shintai of Shared Purpose", 14, Rarity.UNCOMMON, mage.cards.g.GoShintaiOfSharedPurpose.class));
         cards.add(new SetCardInfo("Goro-Goro, Disciple of Ryusei", 145, Rarity.RARE, mage.cards.g.GoroGoroDiscipleOfRyusei.class));
         cards.add(new SetCardInfo("Gravelighter", 98, Rarity.UNCOMMON, mage.cards.g.Gravelighter.class));
