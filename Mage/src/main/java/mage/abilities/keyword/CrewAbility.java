@@ -110,6 +110,7 @@ class CrewCost extends CostImpl {
                 for (UUID targetId : target.getTargets()) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREWED_VEHICLE, targetId, source, controllerId));
                 }
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.VEHICLE_CREWED, source.getSourceId(), source, controllerId));
             }
         } else {
             return false;
