@@ -71,7 +71,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Geothermal Kami", 186, Rarity.COMMON, mage.cards.g.GeothermalKami.class));
         cards.add(new SetCardInfo("Gloomshrieker", 219, Rarity.UNCOMMON, mage.cards.g.Gloomshrieker.class));
         cards.add(new SetCardInfo("Go-Shintai of Ancient Wars", 144, Rarity.UNCOMMON, mage.cards.g.GoShintaiOfAncientWars.class));
-        cards.add(new SetCardInfo("Go-Shintai of Boundless Vigor", 187, Rarity.COMMON, mage.cards.g.GoShintaiOfBoundlessVigor.class));
+        cards.add(new SetCardInfo("Go-Shintai of Boundless Vigor", 187, Rarity.UNCOMMON, mage.cards.g.GoShintaiOfBoundlessVigor.class));
         cards.add(new SetCardInfo("Go-Shintai of Shared Purpose", 14, Rarity.UNCOMMON, mage.cards.g.GoShintaiOfSharedPurpose.class));
         cards.add(new SetCardInfo("Goro-Goro, Disciple of Ryusei", 145, Rarity.RARE, mage.cards.g.GoroGoroDiscipleOfRyusei.class));
         cards.add(new SetCardInfo("Gravelighter", 98, Rarity.UNCOMMON, mage.cards.g.Gravelighter.class));
@@ -144,7 +144,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Sokenzan, Crucible of Defiance", 276, Rarity.RARE, mage.cards.s.SokenzanCrucibleOfDefiance.class));
         cards.add(new SetCardInfo("Spell Pierce", 80, Rarity.COMMON, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Spirited Companion", 38, Rarity.COMMON, mage.cards.s.SpiritedCompanion.class));
-        cards.add(new SetCardInfo("Spring-Leaf Avenger", 481, Rarity.RARE, mage.cards.s.SpringLeafAvenger.class));
+        cards.add(new SetCardInfo("Spring-Leaf Avenger", 349, Rarity.RARE, mage.cards.s.SpringLeafAvenger.class));
         cards.add(new SetCardInfo("Sunblade Samurai", 39, Rarity.COMMON, mage.cards.s.SunbladeSamurai.class));
         cards.add(new SetCardInfo("Surgehacker Mech", 260, Rarity.RARE, mage.cards.s.SurgehackerMech.class));
         cards.add(new SetCardInfo("Swamp", 287, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
