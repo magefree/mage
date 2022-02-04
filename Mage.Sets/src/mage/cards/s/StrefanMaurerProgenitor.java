@@ -164,5 +164,8 @@ enum StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue implements Dynamic
     public DynamicValue copy() { return instance; }
 
     @Override
-    public String getMessage() { return "player who lost life"; }
+    public String getMessage() { return "player who lost life this turn"; }
+
+    @Override
+    public String toString() { return "1"; }
 }
