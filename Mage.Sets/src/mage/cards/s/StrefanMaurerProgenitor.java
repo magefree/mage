@@ -69,8 +69,7 @@ public class StrefanMaurerProgenitor extends CardImpl {
                                 StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance),
                         TargetController.YOU,
                         false)
-                        .addHint(hint),
-                new PlayerLostLifeWatcher()
+                        .addHint(hint)
         );
 
         // Whenever Strefan attacks, you may sacrifice two Blood tokens.
