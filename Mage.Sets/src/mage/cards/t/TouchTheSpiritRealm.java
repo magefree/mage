@@ -16,7 +16,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterArtifactOrCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -30,7 +31,7 @@ import mage.util.CardUtil;
  */
 public final class TouchTheSpiritRealm extends CardImpl {
 
-    private static final FilterArtifactOrCreaturePermanent filter = new FilterArtifactOrCreaturePermanent();
+    private static final FilterPermanent filter = StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE;
 
     public TouchTheSpiritRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
