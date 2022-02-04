@@ -66,7 +66,7 @@ public class StrefanMaurerProgenitor extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(
                         new CreateTokenEffect(
                                 new BloodToken(),
-                                StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance).setText("create a Blood token for each player who lost life this turn"),
+                                StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance),
                         TargetController.YOU,
                         false)
                         .addHint(hint),
@@ -85,9 +85,9 @@ public class StrefanMaurerProgenitor extends CardImpl {
                                 bloodTokenFilter,
                                 true)
                         )),
-                false,
-                "When Strefan attacks, "
-        ));
+                false
+                )
+        );
     }
 
     private StrefanMaurerProgenitor(final StrefanMaurerProgenitor card) { super(card);}
@@ -164,5 +164,5 @@ enum StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue implements Dynamic
     public DynamicValue copy() { return instance; }
 
     @Override
-    public String getMessage() { return ""; }
+    public String getMessage() { return "player who lost life"; }
 }
