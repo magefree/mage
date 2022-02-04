@@ -63,7 +63,10 @@ class WillbreakerTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null || !permanent.isCreature(game)
+        Permanent willbreaker = game.getPermanent(sourceId);
+        if (willbreaker == null // If you lose control of Willbreaker before its ability resolves, you won’t gain control of the creature at all.
+                || permanent == null
+                || !permanent.isCreature(game)
                 || !game.getOpponents(getControllerId()).contains(permanent.getControllerId())) {
             return false;
         }
@@ -74,8 +77,8 @@ class WillbreakerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature an opponent controls becomes the target of a spell or ability you control, " +
-                "gain control of that creature for as long as you control {this}";
+        return "Whenever a creature an opponent controls becomes the target of a spell or ability you control, "
+                + "gain control of that creature for as long as you control {this}";
     }
 
     @Override
