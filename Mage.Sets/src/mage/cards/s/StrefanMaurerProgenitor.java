@@ -146,12 +146,15 @@ enum StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue implements Dynamic
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Player controller = game.getPlayer(sourceAbility.getControllerId());
+        if (controller == null) { return 0; }
+
         PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
         int numPlayersWhoLostLife = 0;
 
         if (watcher != null) {
-            for (Player player : game.getPlayers().values()) {
-                if (watcher.getLifeLost(player.getId()) > 0) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                if (watcher.getLifeLost(playerId) > 0) {
                     numPlayersWhoLostLife++;
                 }
             }
