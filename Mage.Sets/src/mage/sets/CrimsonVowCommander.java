@@ -155,6 +155,8 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of the False God", 187, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Thundering Mightmare", 37, Rarity.RARE, mage.cards.t.ThunderingMightmare.class));
         cards.add(new SetCardInfo("Timin, Youthful Geist", 16, Rarity.RARE, mage.cards.t.TiminYouthfulGeist.class));
+        cards.add(new SetCardInfo("Timothar, Baron of Bats", 4, Rarity.MYTHIC, mage.cards.t.TimotharBaronOfBats.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Timothar, Baron of Bats", 42, Rarity.MYTHIC, mage.cards.t.TimotharBaronOfBats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Twilight Drover", 100, Rarity.RARE, mage.cards.t.TwilightDrover.class));
         cards.add(new SetCardInfo("Umbris, Fear Manifest", 38, Rarity.MYTHIC, mage.cards.u.UmbrisFearManifest.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 188, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
