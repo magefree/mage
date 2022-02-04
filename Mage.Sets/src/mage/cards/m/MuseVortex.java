@@ -72,20 +72,24 @@ class MuseVortexEffect extends OneShotEffect {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         TargetCardInExile target = new TargetCardInExile(filter);
         target.setNotTarget(true);
-        controller.choose(Outcome.Benefit, cards, target, game);
-        Card card = cards.get(target.getFirstTarget(), game);
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                game, true, new ApprovingObject(source, game));
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-        cards.remove(card);
-        if (cardWasCast) {
-            cards.remove(card);
-        } else {
-            game.informPlayer(controller, "You're not able to cast "
-                    + card.getIdName() + " or you canceled the casting.");
+        if (controller.choose(Outcome.Benefit, cards, target, game)) {
+            Card card = cards.get(target.getFirstTarget(), game);
+            if (card != null) {
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                        game, true, new ApprovingObject(source, game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                cards.remove(card);
+                if (cardWasCast) {
+                    cards.remove(card);
+                } else {
+                    game.informPlayer(controller, "You're not able to cast "
+                            + card.getIdName() + " or you canceled the casting.");
+                }
+                controller.putCardsOnTopOfLibrary(cards, game, source, true);
+                return true;
+            }
         }
-        controller.putCardsOnTopOfLibrary(cards, game, source, true);
-        return true;
+        return false;
     }
 }
