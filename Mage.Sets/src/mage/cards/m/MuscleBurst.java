@@ -1,11 +1,12 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.AdditiveDynamicValue;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -17,11 +18,11 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class MuscleBurst extends CardImpl {
@@ -29,18 +30,23 @@ public final class MuscleBurst extends CardImpl {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(Predicates.or(new NamePredicate("Muscle Burst"),
-            new AbilityPredicate(CountAsMuscleBurstAbility.class)));
+        filter.add(Predicates.or(
+                new NamePredicate("Muscle Burst"),
+                new AbilityPredicate(CountAsMuscleBurstAbility.class)
+        ));
     }
 
+    private static final DynamicValue xValue = new AdditiveDynamicValue(
+            new CardsInAllGraveyardsCount(filter), StaticValue.get(3)
+    );
+
     public MuscleBurst(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Target creature gets +X/+X until end of turn, where X is 3 plus the number of cards named Muscle Burst in all graveyards.
-        MuscleBurstCount count = new MuscleBurstCount(filter);
-        Effect effect = new BoostTargetEffect(count, count, Duration.EndOfTurn, true);
-        effect.setText("Target creature gets +X/+X until end of turn, where X is 3 plus the number of cards named Muscle Burst in all graveyards.");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new BoostTargetEffect(
+                xValue, xValue, Duration.EndOfTurn, true
+        ).setText("Target creature gets +X/+X until end of turn, where X is 3 plus the number of cards named Muscle Burst in all graveyards."));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
@@ -56,28 +62,6 @@ public final class MuscleBurst extends CardImpl {
     public static Ability getCountAsAbility() {
         return new CountAsMuscleBurstAbility();
     }
-}
-
-class MuscleBurstCount extends CardsInAllGraveyardsCount {
-
-    public MuscleBurstCount(FilterCard filter) {
-        super(filter);
-    }
-
-    private MuscleBurstCount(MuscleBurstCount value) {
-        super(value);
-    }
-
-    @Override
-    public MuscleBurstCount copy() {
-        return new MuscleBurstCount(this);
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return super.calculate(game, sourceAbility, effect) + 3;
-    }
-
 }
 
 class CountAsMuscleBurstAbility extends SimpleStaticAbility {
