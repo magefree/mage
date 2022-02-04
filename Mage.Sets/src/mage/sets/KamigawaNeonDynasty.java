@@ -58,6 +58,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Dockside Chef", 93, Rarity.UNCOMMON, mage.cards.d.DocksideChef.class));
         cards.add(new SetCardInfo("Dokuchi Shadow-Walker", 94, Rarity.COMMON, mage.cards.d.DokuchiShadowWalker.class));
         cards.add(new SetCardInfo("Dokuchi Silencer", 95, Rarity.UNCOMMON, mage.cards.d.DokuchiSilencer.class));
+        cards.add(new SetCardInfo("Dragonfly Suit", 9, Rarity.COMMON, mage.cards.d.DragonflySuit.class));
         cards.add(new SetCardInfo("Echo of Death's Wail", 124, Rarity.RARE, mage.cards.e.EchoOfDeathsWail.class));
         cards.add(new SetCardInfo("Eiganjo Exemplar", 10, Rarity.COMMON, mage.cards.e.EiganjoExemplar.class));
         cards.add(new SetCardInfo("Eiganjo Uprising", 217, Rarity.RARE, mage.cards.e.EiganjoUprising.class));
