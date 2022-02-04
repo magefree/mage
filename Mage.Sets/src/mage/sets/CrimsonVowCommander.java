@@ -140,6 +140,8 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Stensia Masquerade", 150, Rarity.UNCOMMON, mage.cards.s.StensiaMasquerade.class));
         cards.add(new SetCardInfo("Storm of Souls", 9, Rarity.RARE, mage.cards.s.StormOfSouls.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm of Souls", 47, Rarity.RARE, mage.cards.s.StormOfSouls.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strefan, Maurer Progenitor", 2, Rarity.MYTHIC, mage.cards.s.StrefanMaurerProgenitor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strefan, Maurer Progenitor", 40, Rarity.MYTHIC, mage.cards.s.StrefanMaurerProgenitor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stromkirk Captain", 157, Rarity.UNCOMMON, mage.cards.s.StromkirkCaptain.class));
         cards.add(new SetCardInfo("Stromkirk Condemned", 137, Rarity.RARE, mage.cards.s.StromkirkCondemned.class));
         cards.add(new SetCardInfo("Stromkirk Occultist", 151, Rarity.RARE, mage.cards.s.StromkirkOccultist.class));
