@@ -97,9 +97,9 @@ class TimotharBaronOfBatsCreateBatEffect extends OneShotEffect {
 
         // Create ability to sack the bat and return the vampire
         TriggeredAbility ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-                new TimotharBaronOfBatsReturnEffect(card, game),
+                new SacrificeSourceEffect(),
                 false);
-        ability.addEffect(new SacrificeSourceEffect());
+        ability.addEffect(new TimotharBaronOfBatsReturnEffect(card, game));
 
         // Turn into a gain ability effect and point it at the bat
         ContinuousEffect effect = new GainAbilityTargetEffect(ability, Duration.Custom);
