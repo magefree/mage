@@ -3,19 +3,18 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -27,6 +26,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.BatToken;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -93,18 +93,23 @@ class TimotharBaronOfBatsCreateBatEffect extends OneShotEffect {
         Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card == null) { return false; }
 
-        player.moveCards(card, Zone.EXILED, source, game);
-
         BatToken bat = new BatToken();
-        bat.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+
+        // Create ability to sack the bat and return the vampire
+        TriggeredAbility ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new TimotharBaronOfBatsReturnEffect(card, game),
-                false
-        ));
+                false);
+        ability.addEffect(new SacrificeSourceEffect());
 
-        CreateTokenEffect createBatEffect = new CreateTokenEffect(bat, 1);
-        createBatEffect.apply(game, source);
+        // Turn into a gain ability effect and point it at the bat
+        ContinuousEffect effect = new GainAbilityTargetEffect(ability, Duration.Custom);
+        effect.setTargetPointer(new FixedTarget(bat.getId(), game));
 
-        return false;
+        // Add the effect and the bat to the
+        game.addEffect(effect, source);
+        new CreateTokenEffect(bat, 1).apply(game, source);
+
+        return true;
     }
 
     @Override
@@ -134,7 +139,6 @@ class TimotharBaronOfBatsReturnEffect extends OneShotEffect {
         Card card = morOfCardToReturn.getCard(game);
         if (card == null) { return false; }
 
-        new SacrificeSourceEffect().apply(game, source);
         return player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
     }
 
