@@ -84,6 +84,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("High-Speed Hoverbike", 247, Rarity.UNCOMMON, mage.cards.h.HighSpeedHoverbike.class));
         cards.add(new SetCardInfo("Hotshot Mechanic", 16, Rarity.UNCOMMON, mage.cards.h.HotshotMechanic.class));
         cards.add(new SetCardInfo("Imperial Moth", 4, Rarity.COMMON, mage.cards.i.ImperialMoth.class));
+        cards.add(new SetCardInfo("Imperial Recovery Unit", 18, Rarity.UNCOMMON, mage.cards.i.ImperialRecoveryUnit.class));
         cards.add(new SetCardInfo("Imperial Subduer", 19, Rarity.COMMON, mage.cards.i.ImperialSubduer.class));
         cards.add(new SetCardInfo("Inkrise Infiltrator", 100, Rarity.COMMON, mage.cards.i.InkriseInfiltrator.class));
         cards.add(new SetCardInfo("Invoke the Winds", 58, Rarity.RARE, mage.cards.i.InvokeTheWinds.class));
