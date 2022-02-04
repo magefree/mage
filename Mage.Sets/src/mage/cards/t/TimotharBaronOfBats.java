@@ -3,18 +3,17 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.hint.StaticHint;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -26,7 +25,6 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.BatToken;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -56,15 +54,11 @@ public class TimotharBaronOfBats extends CardImpl {
         // It gains “When this creature deals combat damage to a player,
         // sacrifice it and return the exiled card to the battlefield tapped.”
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new DoIfCostPaid(new TimotharBaronOfBatsCreateBatEffect(), new ManaCostsImpl<>("{1}"))
-                        .setText("you may pay {1} and exile it. " +
-                                "If you do, create a 1/1 black Bat creature token with flying. " +
-                                "It gains \"When this creature deals combat damage to a player, " +
-                                "sacrifice it and return the exiled card to the battlefield tapped\"."),
+                new DoIfCostPaid(new TimotharBaronOfBatsCreateBatEffect(), new ManaCostsImpl<>("{1}")),
                 false,
                 anotherVampireFilter,
                 true
-        ));
+        ).setCostAdjuster(TimotharBaronOfBatsAdjuster.instance));
     }
 
     private TimotharBaronOfBats(final TimotharBaronOfBats card) { super(card); }
@@ -77,8 +71,7 @@ class TimotharBaronOfBatsCreateBatEffect extends OneShotEffect {
 
     TimotharBaronOfBatsCreateBatEffect() {
         super(Outcome.Benefit);
-        staticText = "exile it. " +
-                "If you do, create a 1/1 black Bat creature token with flying. " +
+        staticText = "create a 1/1 black Bat creature token with flying. " +
                 "It gains \"When this creature deals combat damage to a player, " +
                 "sacrifice it and return the exiled card to the battlefield tapped\".";
     }
@@ -97,8 +90,12 @@ class TimotharBaronOfBatsCreateBatEffect extends OneShotEffect {
 
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new SacrificeSourceEffect(),
+                false,
+                "When this creature deals combat damage to a player, " +
+                        "sacrifice it and return the exiled card to the battlefield tapped",
                 false);
-        ability.addEffect(new TimotharBaronOfBatsReturnEffect(card, game));
+        ability.addEffect(new TimotharBaronOfBatsReturnEffect(new MageObjectReference(card, game)));
+        ability.addHint(new StaticHint("Exiled card: " + card.getName()));
         bat.addAbility(ability);
 
         new CreateTokenEffect(bat, 1).apply(game, source);
@@ -114,10 +111,10 @@ class TimotharBaronOfBatsReturnEffect extends OneShotEffect {
 
     private final MageObjectReference morOfCardToReturn;
 
-    TimotharBaronOfBatsReturnEffect(Card card, Game game) {
+    TimotharBaronOfBatsReturnEffect(MageObjectReference morOfCardToReturn) {
         super(Outcome.PutCreatureInPlay);
         staticText = "return the exiled card to the battlefield tapped";
-        this.morOfCardToReturn = new MageObjectReference(card, game);
+        this.morOfCardToReturn = morOfCardToReturn;
     }
 
     private TimotharBaronOfBatsReturnEffect(final TimotharBaronOfBatsReturnEffect effect) {
@@ -138,4 +135,16 @@ class TimotharBaronOfBatsReturnEffect extends OneShotEffect {
 
     @Override
     public Effect copy() { return new TimotharBaronOfBatsReturnEffect(this); }
+}
+
+enum TimotharBaronOfBatsAdjuster implements CostAdjuster {
+    instance;
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        Player controller = game.getPlayer(ability.getControllerId());
+        if (controller != null) {
+            //ability.addCost(new ExileTargetCost(TODO));
+        }
+    }
 }
