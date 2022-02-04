@@ -63,7 +63,6 @@ class StormOfSoulsReturnEffect extends OneShotEffect {
 
         if (creatureCardsToBeMovedFromGraveyard.isEmpty()) { return false; }
 
-        // Returns true if all cards were moved.
         boolean anyCardsMoved = player.moveCards(creatureCardsToBeMovedFromGraveyard, Zone.BATTLEFIELD, source, game);
         if (!anyCardsMoved) { return false; }
 
@@ -71,7 +70,7 @@ class StormOfSoulsReturnEffect extends OneShotEffect {
         Set<Card> creatureCardsMovedFromGraveyard = new LinkedHashSet<>();
 
         for (Card card : creatureCardsToBeMovedFromGraveyard) {
-            if (game.getState().getBattlefield().containsPermanent(card.getId())) {
+            if (game.getState().getZone(card.getId()) == Zone.BATTLEFIELD) {
                 creatureCardsMovedFromGraveyard.add(card);
             }
         }
