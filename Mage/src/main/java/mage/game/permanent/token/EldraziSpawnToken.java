@@ -1,10 +1,6 @@
 
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -14,17 +10,12 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.util.RandomUtil;
 
+import java.util.Arrays;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class EldraziSpawnToken extends TokenImpl {
-
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("ROE", "MM2", "DDP", "C17"));
-    }
 
     public EldraziSpawnToken() {
         super("Eldrazi Spawn", "0/1 colorless Eldrazi Spawn creature with \"Sacrifice this creature: Add {C}.\"");
@@ -35,9 +26,24 @@ public final class EldraziSpawnToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));
 
-        availableImageSetCodes = tokenImageSets;
-        // Get one of the four possible token images
-        this.setTokenType(RandomUtil.nextInt(4) + 1);
+        availableImageSetCodes = Arrays.asList("CMD", "DDP", "MM2", "PC2", "ROE", "MIC");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DDP")) {
+            this.setTokenType(RandomUtil.nextInt(3) + 1); // randomly take image 1, 2 or 3
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MM2")) {
+            this.setTokenType(RandomUtil.nextInt(3) + 1); // randomly take image 1, 2 or 3
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ROE")) {
+            this.setTokenType(RandomUtil.nextInt(3) + 1); // randomly take image 1, 2 or 3
+        }
     }
 
     public EldraziSpawnToken(final EldraziSpawnToken token) {

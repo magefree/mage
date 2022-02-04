@@ -43,11 +43,9 @@ public final class SpiritToken extends TokenImpl {
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
-            setTokenType(1);
-        }
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
-            setTokenType(1);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("BOK")) {
+            setTokenType(2);
         }
     }
 

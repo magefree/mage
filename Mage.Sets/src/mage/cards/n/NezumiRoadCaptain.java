@@ -35,7 +35,7 @@ public final class NezumiRoadCaptain extends CardImpl {
 
         // Vehicles you control have menace.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new MenaceAbility(false), Duration.WhileOnBattlefield, filter
+                new MenaceAbility(true), Duration.WhileOnBattlefield, filter
         )));
     }
 

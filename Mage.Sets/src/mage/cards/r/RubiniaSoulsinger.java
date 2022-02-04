@@ -36,7 +36,7 @@ public final class RubiniaSoulsinger extends CardImpl {
 
         // {tap}: Gain control of target creature for as long as you control Rubinia and Rubinia remains tapped.
         Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(
-                new GainControlTargetEffect(Duration.WhileControlled), SourceTappedCondition.instance,
+                new GainControlTargetEffect(Duration.WhileControlled), SourceTappedCondition.TAPPED,
                 "gain control of target creature for as long as you control {this} and {this} remains tapped"
         ), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

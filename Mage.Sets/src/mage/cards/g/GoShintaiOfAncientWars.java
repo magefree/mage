@@ -32,7 +32,6 @@ public final class GoShintaiOfAncientWars extends CardImpl {
     );
     private static final Hint hint = new ValueHint("Shrines you control", xValue);
 
-
     public GoShintaiOfAncientWars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{R}");
 

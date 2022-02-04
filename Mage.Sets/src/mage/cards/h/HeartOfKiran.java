@@ -100,6 +100,7 @@ class HeartOfKiranAlternateCrewCost extends CostImpl {
             if (paid) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREWED_VEHICLE, target.getFirstTarget(), source, controllerId));
             }
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.VEHICLE_CREWED, source.getSourceId(), source, controllerId));
         }
 
         return paid;

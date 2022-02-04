@@ -106,6 +106,7 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
+        skipListAddName(SKIP_LIST_TYPE, "NEO", "Oni-Cult Anvil"); // temporary
 
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);

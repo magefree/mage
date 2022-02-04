@@ -282,8 +282,8 @@
 |Generate|TOK:BNG|Wolf|||WolfToken|
 |Generate|TOK:BNG|Zombie|||ForlornPseudammaZombieToken|
 |Generate|TOK:BOK|Snake|||SnakeToken|
-|Generate|TOK:BOK|Spirit|||AnotherSpiritToken|
-|Generate|TOK:BOK|Spirit|||SpiritToken|
+|Generate|TOK:BOK|Spirit|1||AnotherSpiritToken|
+|Generate|TOK:BOK|Spirit|2||SpiritToken|
 |Generate|TOK:C13|Assembly-Worker|||AssembleWorkerToken|
 |Generate|TOK:C13|Beast|1||BeastToken2|
 |Generate|TOK:C13|Beast|2||CarnivoreToken|
@@ -889,10 +889,9 @@
 |Generate|TOK:MIR|Wall|||TidalWaveWallToken|
 |Generate|TOK:MIR|Wall|||WoodToken|
 |Generate|TOK:MIR|Zombie|||ZombieToken|
-|Generate|TOK:MM2|Eldrazi Spawn|1|
-|Generate|TOK:MM2|Eldrazi Spawn|2|
-|Generate|TOK:MM2|Eldrazi Spawn|3|
-|Generate|TOK:MM2|Eldrazi Spawn|||EldraziSpawnToken|
+|Generate|TOK:MM2|Eldrazi Spawn|1||EldraziSpawnToken|
+|Generate|TOK:MM2|Eldrazi Spawn|2||EldraziSpawnToken|
+|Generate|TOK:MM2|Eldrazi Spawn|3||EldraziSpawnToken|
 |Generate|TOK:MM2|Elephant|||ElephantToken|
 |Generate|TOK:MM2|Faerie Rogue|||FaerieRogueToken|
 |Generate|TOK:MM2|Germ|||PhyrexianGermToken|
@@ -1604,3 +1603,16 @@
 |Generate|TOK:AFC|Saproling|||SaprolingToken|
 |Generate|TOK:AFC|Servo|||ServoToken|
 |Generate|TOK:AFC|Thopter|||ThopterColorlessToken|
+
+# MIC
+|Generate|TOK:MIC|Beast|||BeastToken|
+|Generate|TOK:MIC|Centaur|||CentaurToken|
+|Generate|TOK:MIC|Eldrazi Spawn|||EldraziSpawnToken|
+|Generate|TOK:MIC|Elephant|||ElephantToken|
+|Generate|TOK:MIC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:MIC|Knight|||KnightToken|
+|Generate|TOK:MIC|Rhino|||RhinoToken|
+|Generate|TOK:MIC|Snake|||SnakeToken|
+|Generate|TOK:MIC|Zombie|1||ZombieToken|
+|Generate|TOK:MIC|Zombie|2||StitcherGeralfZombieToken|
+|Generate|TOK:MIC|Zombie Army|||ZombieArmyToken|

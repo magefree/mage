@@ -33,7 +33,7 @@ public final class TawnosUrzasApprentice extends CardImpl {
     private static final FilterStackObject filter = new FilterStackObject("activated or triggered ability you control from an artifact source");
 
     static {
-        filter.add(new ArtifactSourcePredicate());
+        filter.add(ArtifactSourcePredicate.instance);
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 

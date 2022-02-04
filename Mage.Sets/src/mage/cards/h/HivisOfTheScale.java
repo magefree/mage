@@ -45,7 +45,7 @@ public final class HivisOfTheScale extends CardImpl {
 
         // {tap}: Gain control of target Dragon for as long as you control Hivis and Hivis remains tapped.
         Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(
-                new GainControlTargetEffect(Duration.WhileControlled), SourceTappedCondition.instance,
+                new GainControlTargetEffect(Duration.WhileControlled), SourceTappedCondition.TAPPED,
                 "gain control of target Dragon for as long as you control {this} and {this} remains tapped"
         ), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filterDragon));
