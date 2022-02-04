@@ -27,6 +27,7 @@ import mage.players.Player;
 
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 
@@ -48,6 +49,8 @@ public final class SasayaOrochiAscendant extends CardImpl {
         this.flipCardName = "Sasaya's Essence";
 
         // Reveal your hand: If you have seven or more land cards in your hand, flip Sasaya, Orochi Ascendant.
+        Effect effect = new SasayaOrochiAscendantFlipEffect();
+        effect.setOutcome(Outcome.AIDontUseIt);  // repetition issues need to be fixed for the AI to use this effectively
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SasayaOrochiAscendantFlipEffect(), new RevealHandSourceControllerCost()));
     }
 
