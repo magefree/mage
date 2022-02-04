@@ -98,11 +98,6 @@ class TimotharBaronOfBatsCreateBatEffect extends OneShotEffect {
         // Check vampire card still exists and is still in the graveyard
         Card vampireCard = game.getCard(targetPointer.getFirst(game, source));
         if (vampireCard == null) { return false; }
-        if (game.getState().getZone(vampireCard.getId()) != Zone.GRAVEYARD) { return false; }
-
-        // Create filter for the vampire card
-        FilterCard filter = new FilterCard();
-        filter.add(new CardIdPredicate(targetPointer.getFirst(game, source)));
 
         // Create costs
         ManaCosts<ManaCost> costs = new ManaCostsImpl<>("{1}");
@@ -121,7 +116,7 @@ class TimotharBaronOfBatsCreateBatEffect extends OneShotEffect {
         controller.moveCards(vampireCard, Zone.EXILED, source, game);
 
         BatToken bat = new BatToken();
-        new CreateTokenEffect(bat, 1).apply(game, source);
+        bat.putOntoBattlefield(1, game, source);
 
         DealsCombatDamageToAPlayerTriggeredAbility sacAndReturnAbility = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new SacrificeSourceEffect(),
