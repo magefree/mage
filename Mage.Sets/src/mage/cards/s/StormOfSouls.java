@@ -13,6 +13,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTargets;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -60,48 +61,38 @@ class StormOfSoulsReturnEffect extends OneShotEffect {
         Set<Card> creatureCardsToBeMovedFromGraveyard = player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game);
         if (creatureCardsToBeMovedFromGraveyard == null) { return false; }
 
-        boolean allCardsMoved;
-        if (creatureCardsToBeMovedFromGraveyard.isEmpty()) {
-            allCardsMoved = true;
-        } else {
-            // Returns true if all cards were moved.
-            allCardsMoved = player.moveCards(creatureCardsToBeMovedFromGraveyard, Zone.BATTLEFIELD, source, game);
+        if (creatureCardsToBeMovedFromGraveyard.isEmpty()) { return false; }
 
-            Set<Card> creatureCardsMovedFromGraveyard;
+        // Returns true if all cards were moved.
+        boolean anyCardsMoved = player.moveCards(creatureCardsToBeMovedFromGraveyard, Zone.BATTLEFIELD, source, game);
+        if (!anyCardsMoved) { return false; }
 
-            // Figure out which cards were successfuly moved so that they can be turned into 1/1 Spirits
-            if (!allCardsMoved) {
-                creatureCardsMovedFromGraveyard = new LinkedHashSet<>();
+        // Figure out which cards were successfuly moved so that they can be turned into 1/1 Spirits
+        Set<Card> creatureCardsMovedFromGraveyard = new LinkedHashSet<>();
 
-                for (Card card : creatureCardsToBeMovedFromGraveyard) {
-                    if (game.getState().getBattlefield().containsPermanent(card.getId())) {
-                        creatureCardsMovedFromGraveyard.add(card);
-                    }
-                }
-            } else {
-                creatureCardsMovedFromGraveyard = creatureCardsToBeMovedFromGraveyard;
+        for (Card card : creatureCardsToBeMovedFromGraveyard) {
+            if (game.getState().getBattlefield().containsPermanent(card.getId())) {
+                creatureCardsMovedFromGraveyard.add(card);
             }
-
-            // Change the creatures
-            game.addEffect(new StormOfSoulsChangeCreatureEffect(creatureCardsMovedFromGraveyard), source);
         }
 
-        return allCardsMoved;
+        // Change the creatures
+        ContinuousEffectImpl effect = new StormOfSoulsChangeCreatureEffect();
+        effect.setTargetPointer(new FixedTargets(creatureCardsMovedFromGraveyard, game));
+        game.addEffect(effect, source);
+
+        return true;
     }
 }
 
 class StormOfSoulsChangeCreatureEffect extends ContinuousEffectImpl {
 
-    private final Set<Card> cardsToChange;
-
-    public StormOfSoulsChangeCreatureEffect(Set<Card> cardsToChange) {
+    public StormOfSoulsChangeCreatureEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        this.cardsToChange = cardsToChange;
     }
 
     private StormOfSoulsChangeCreatureEffect(final StormOfSoulsChangeCreatureEffect effect) {
         super(effect);
-        this.cardsToChange = effect.cardsToChange;
     }
 
     @Override
@@ -110,8 +101,8 @@ class StormOfSoulsChangeCreatureEffect extends ContinuousEffectImpl {
         if (player == null) { return false; }
 
         // Each of them is a 1/1 Spirit with flying in addition to its other types
-        for (Card card : cardsToChange) {
-            Permanent permanent = game.getPermanent(card.getId());
+        for (UUID cardID : targetPointer.getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(cardID);
             if (permanent == null) { continue; }
 
             switch (layer) {
