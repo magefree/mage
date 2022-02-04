@@ -51,7 +51,7 @@ public final class SasayaOrochiAscendant extends CardImpl {
         // Reveal your hand: If you have seven or more land cards in your hand, flip Sasaya, Orochi Ascendant.
         Effect effect = new SasayaOrochiAscendantFlipEffect();
         effect.setOutcome(Outcome.AIDontUseIt);  // repetition issues need to be fixed for the AI to use this effectively
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SasayaOrochiAscendantFlipEffect(), new RevealHandSourceControllerCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new RevealHandSourceControllerCost()));
     }
 
     private SasayaOrochiAscendant(final SasayaOrochiAscendant card) {
