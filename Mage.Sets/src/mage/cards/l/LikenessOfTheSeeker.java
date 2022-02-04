@@ -26,7 +26,7 @@ public final class LikenessOfTheSeeker extends CardImpl {
         this.nightCard = true;
 
         // Whenever Likeness of the Seeker becomes blocked, untap up to three lands you control.
-        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new UntapLandsEffect(3, true), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new UntapLandsEffect(3, true, true), false));
     }
 
     private LikenessOfTheSeeker(final LikenessOfTheSeeker card) {
