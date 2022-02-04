@@ -7,6 +7,7 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -25,6 +26,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.BatToken;
 import mage.players.Player;
+import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
@@ -144,7 +146,14 @@ enum TimotharBaronOfBatsAdjuster implements CostAdjuster {
     public void adjustCosts(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller != null) {
-            //ability.addCost(new ExileTargetCost(TODO));
+            // This UUID is for the card in the graveyard
+            UUID targetId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
+
+            if (targetId != null) {
+                TargetCardInYourGraveyard filter = new TargetCardInYourGraveyard();
+                filter.addTarget(targetId, ability, game);
+                ability.addCost(new ExileFromGraveCost(filter));
+            }
         }
     }
 }
