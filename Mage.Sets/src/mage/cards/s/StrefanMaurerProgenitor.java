@@ -9,6 +9,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.hint.Hint;
@@ -63,7 +64,9 @@ public class StrefanMaurerProgenitor extends CardImpl {
         // At the beginning of your end step, create a Blood token for each player who lost life this turn.
         this.addAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new StrefanMaurerProgenitorCreateBloodTokensEffect(),
+                        new CreateTokenEffect(
+                                new BloodToken(),
+                                StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance).setText("create a Blood token for each player who lost life this turn"),
                         TargetController.YOU,
                         false)
                         .addHint(hint),
@@ -136,32 +139,6 @@ class StrefanMaurerProgenitorPlayVampireEffect extends OneShotEffect {
 
     @Override
     public StrefanMaurerProgenitorPlayVampireEffect copy() { return new StrefanMaurerProgenitorPlayVampireEffect(this); }
-}
-
-class StrefanMaurerProgenitorCreateBloodTokensEffect extends OneShotEffect {
-
-    public StrefanMaurerProgenitorCreateBloodTokensEffect() {
-        super(Outcome.Benefit);
-        staticText = "create a Blood token for each player who lost life this turn";
-    }
-
-    private StrefanMaurerProgenitorCreateBloodTokensEffect(final StrefanMaurerProgenitorCreateBloodTokensEffect effect) { super(effect); }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
-
-        int numPlayersWhoLostLife = StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance.calculate(game, source, this);
-
-        if (numPlayersWhoLostLife > 0) {
-            new BloodToken().putOntoBattlefield(numPlayersWhoLostLife, game, source, controller.getId());
-        }
-        return numPlayersWhoLostLife > 0;
-    }
-
-    @Override
-    public StrefanMaurerProgenitorCreateBloodTokensEffect copy() { return new StrefanMaurerProgenitorCreateBloodTokensEffect(this); }
 }
 
 enum StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue implements DynamicValue {
