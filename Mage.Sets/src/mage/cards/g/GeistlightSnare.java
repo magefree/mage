@@ -28,7 +28,7 @@ public final class GeistlightSnare extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.SPIRIT);
     private static final Condition condition1 = new PermanentsOnTheBattlefieldCondition(filter);
-    private static final Condition condition2 = new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT);
+    private static final Condition condition2 = new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT);
     private static final Hint hint1 = new ConditionHint(condition1, "You control a Spirit");
     private static final Hint hint2 = new ConditionHint(condition2, "You control an enchantment");
 

@@ -26,7 +26,7 @@ import mage.filter.StaticFilters;
 public final class RoadsideReliquary extends CardImpl {
 
     private static final Condition artifactCondition = new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_PERMANENT_ARTIFACT);
-    private static final Condition enchantmentCondition = new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT);
+    private static final Condition enchantmentCondition = new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT);
     private static final Hint artifactHint = new ConditionHint(artifactCondition, "You control an artifact");
     private static final Hint enchantmentHint = new ConditionHint(enchantmentCondition, "You control an enchantment");
 

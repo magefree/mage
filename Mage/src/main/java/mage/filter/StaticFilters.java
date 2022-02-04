@@ -33,12 +33,6 @@ public final class StaticFilters {
         FILTER_SPIRIT_OR_ARCANE_CARD.setLockedFilter(true);
     }
 
-    public static final FilterEnchantmentPermanent FILTER_ENCHANTMENT_PERMANENT = new FilterEnchantmentPermanent();
-
-    static {
-        FILTER_ENCHANTMENT_PERMANENT.setLockedFilter(true);
-    }
-
     public static final FilterCard FILTER_CARD = new FilterCard("card");
 
     static {
@@ -236,6 +230,19 @@ public final class StaticFilters {
 
     static {
         FILTER_PERMANENTS.setLockedFilter(true);
+    }
+
+    public static final FilterEnchantmentPermanent FILTER_PERMANENT_ENCHANTMENT = new FilterEnchantmentPermanent();
+
+    static {
+        FILTER_PERMANENT_ENCHANTMENT.setLockedFilter(true);
+    }
+
+
+    public static final FilterEnchantmentPermanent FILTER_PERMANENT_ENCHANTMENTS = new FilterEnchantmentPermanent("enchantments");
+
+    static {
+        FILTER_PERMANENT_ENCHANTMENTS.setLockedFilter(true);
     }
 
     public static final FilterArtifactPermanent FILTER_PERMANENT_ARTIFACT = new FilterArtifactPermanent("artifact");

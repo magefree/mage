@@ -27,7 +27,7 @@ public final class AssassinsInk extends CardImpl {
 
         // This spell costs {1} less to cast if you control an artifact and {1} less to cast if you control an enchantment.
         Condition artifactCondition = new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_PERMANENT_ARTIFACT);
-        Condition enchantmentCondition = new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT);
+        Condition enchantmentCondition = new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT);
         Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(1, artifactCondition)
                 .setText("This spell costs {1} less to cast if you control an artifact"));
         ability.addEffect(new SpellCostReductionSourceEffect(1, enchantmentCondition)

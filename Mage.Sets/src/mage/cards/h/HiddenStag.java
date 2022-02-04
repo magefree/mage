@@ -31,7 +31,7 @@ public final class HiddenStag extends CardImpl {
         // Whenever an opponent plays a land, if Hidden Stag is an enchantment, Hidden Stag becomes a 3/2 Elk Beast creature.
         Effect effect = new BecomesCreatureSourceEffect(new ElkBeastToken(), "", Duration.WhileOnBattlefield, true, false);
         TriggeredAbility ability = new OpponentPlaysLandTriggeredAbility(Zone.BATTLEFIELD, effect, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
                 "Whenever an opponent plays a land, if Hidden Stag is an enchantment, Hidden Stag becomes a 3/2 Elk Beast creature."));
 
         // Whenever you play a land, if Hidden Stag is a creature, Hidden Stag becomes an enchantment.
