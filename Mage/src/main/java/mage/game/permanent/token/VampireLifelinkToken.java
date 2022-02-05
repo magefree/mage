@@ -6,6 +6,8 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  *
  * @author weirddan455
@@ -19,8 +21,20 @@ public class VampireLifelinkToken extends TokenImpl {
         subtype.add(SubType.VAMPIRE);
         power = new MageInt(2);
         toughness = new MageInt(3);
-        addAbility(FlyingAbility.getInstance());
-        addAbility(LifelinkAbility.getInstance());
+
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(LifelinkAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("VOW");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("VOW")) {
+            setTokenType(2);
+        }
     }
 
     private VampireLifelinkToken(final VampireLifelinkToken token) {

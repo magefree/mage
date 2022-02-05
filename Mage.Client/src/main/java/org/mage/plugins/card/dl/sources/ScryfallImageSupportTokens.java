@@ -691,6 +691,26 @@ public class ScryfallImageSupportTokens {
             put("VOC/Spirit/2", "https://api.scryfall.com/cards/tvoc/3/en?format=image"); // 3/3
             put("VOC/Thopter", "https://api.scryfall.com/cards/tvoc/6/en?format=image");
 
+            // VOW
+            put("VOW/Blood", "https://api.scryfall.com/cards/tvow/17/en?format=image");
+            put("VOW/Boar", "https://api.scryfall.com/cards/tvow/12/en?format=image");
+            put("VOW/Emblem Chandra, Dressed to Kill", "https://api.scryfall.com/cards/tvow/20/en?format=image");
+            put("VOW/Dragon Illusion", "https://api.scryfall.com/cards/tvow/9/en?format=image");
+            put("VOW/Human Soldier", "https://api.scryfall.com/cards/tvow/15/en?format=image");
+            put("VOW/Human/1", "https://api.scryfall.com/cards/tvow/10/en?format=image"); // red
+            put("VOW/Human/2", "https://api.scryfall.com/cards/tvow/1/en?format=image"); // white
+            put("VOW/Insect", "https://api.scryfall.com/cards/tvow/13/en?format=image");
+            put("VOW/Slug", "https://api.scryfall.com/cards/tvow/6/en?format=image");
+            put("VOW/Spirit Cleric", "https://api.scryfall.com/cards/tvow/4/en?format=image");
+            put("VOW/Spirit/1", "https://api.scryfall.com/cards/tvow/2/en?format=image"); // 1/1
+            put("VOW/Spirit/2", "https://api.scryfall.com/cards/tvow/3/en?format=image"); // 4/4
+            put("VOW/Treasure", "https://api.scryfall.com/cards/tvow/18/en?format=image");
+            put("VOW/Vampire/1", "https://api.scryfall.com/cards/tvow/16/en?format=image"); // lifelink
+            put("VOW/Vampire/2", "https://api.scryfall.com/cards/tvow/7/en?format=image"); // flying, lifelink
+            put("VOW/Wolf/1", "https://api.scryfall.com/cards/tvow/14/en?format=image"); // green
+            put("VOW/Wolf/2", "https://api.scryfall.com/cards/tvow/11/en?format=image"); // red
+            put("VOW/Zombie/1", "https://api.scryfall.com/cards/tvow/8/en?format=image"); // 2/2
+            put("VOW/Zombie/2", "https://api.scryfall.com/cards/tvow/5/en?format=image"); // */*
 
             // generate supported sets
             supportedSets.clear();

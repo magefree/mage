@@ -23,7 +23,7 @@ public final class StitcherGeralfZombieToken extends TokenImpl {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
 
-        availableImageSetCodes = Arrays.asList("C14", "MIC");
+        availableImageSetCodes = Arrays.asList("C14", "MIC", "VOW");
     }
 
     @Override
@@ -35,6 +35,10 @@ public final class StitcherGeralfZombieToken extends TokenImpl {
         }
 
         if (getOriginalExpansionSetCode().equals("MIC")) {
+            this.setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode().equals("VOW")) {
             this.setTokenType(2);
         }
     }

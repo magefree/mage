@@ -114,6 +114,7 @@
 |Generate|EMBLEM:AFR|Zariel, Archduke of Avernus||Emblem Zariel|ZarielArchdukeOfAvernusEmblem|
 |Generate|EMBLEM:MID|Teferi, Who Slows the Sunset||Emblem Teferi|TeferiWhoSlowsTheSunsetEmblem|
 |Generate|EMBLEM:MID|Wrenn and Seven||Emblem Wrenn|WrennAndSevenEmblem|
+|Generate|EMBLEM:VOW|Chandra, Dressed to Kill||Emblem Chandra|ChandraDressedToKillEmblem|
 
 # Planes
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
@@ -1644,3 +1645,23 @@
 |Generate|TOK:VOC|Spirit|1||SpiritToken|
 |Generate|TOK:VOC|Spirit|2||AnotherSpiritToken|
 |Generate|TOK:VOC|Thopter|||ThopterColorlessToken|
+
+# VOW
+|Generate|TOK:VOW|Blood|||BloodToken|
+|Generate|TOK:VOW|Boar|||Boar3Token|
+|Generate|TOK:VOW|Dragon Illusion|||DragonIllusionToken|
+|Generate|TOK:VOW|Human|1||RedHumanToken|
+|Generate|TOK:VOW|Human|2||HumanToken|
+|Generate|TOK:VOW|Human Soldier|||HumanSoldierTrainingToken|
+|Generate|TOK:VOW|Insect|||InsectToken|
+|Generate|TOK:VOW|Slug|||SlugToken|
+|Generate|TOK:VOW|Spirit|1||SpiritWhiteToken|
+|Generate|TOK:VOW|Spirit|2||DorotheasRetributionSpiritToken|
+|Generate|TOK:VOW|Spirit Cleric|||SpiritClericToken|
+|Generate|TOK:VOW|Treasure|||TreasureToken|
+|Generate|TOK:VOW|Vampire|1||EdgarMarkovsCoffinVampireToken|
+|Generate|TOK:VOW|Vampire|2||VampireLifelinkToken|
+|Generate|TOK:VOW|Wolf|1||WolfToken|
+|Generate|TOK:VOW|Wolf|2||RedWolfToken|
+|Generate|TOK:VOW|Zombie|1||ZombieToken|
+|Generate|TOK:VOW|Zombie|2||StitcherGeralfZombieToken|
