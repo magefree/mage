@@ -67,6 +67,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Colossal Skyturtle", 216, Rarity.UNCOMMON, mage.cards.c.ColossalSkyturtle.class));
         cards.add(new SetCardInfo("Commune with Spirits", 180, Rarity.COMMON, mage.cards.c.CommuneWithSpirits.class));
         cards.add(new SetCardInfo("Covert Technician", 49, Rarity.UNCOMMON, mage.cards.c.CovertTechnician.class));
+        cards.add(new SetCardInfo("Debt to the Kami", 92, Rarity.COMMON, mage.cards.d.DebtToTheKami.class));
         cards.add(new SetCardInfo("Dismal Backwater", 267, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Disruption Protocol", 51, Rarity.COMMON, mage.cards.d.DisruptionProtocol.class));
         cards.add(new SetCardInfo("Dockside Chef", 93, Rarity.UNCOMMON, mage.cards.d.DocksideChef.class));
