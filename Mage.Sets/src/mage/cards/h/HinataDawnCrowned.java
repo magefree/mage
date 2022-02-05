@@ -18,7 +18,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author Arketec
  */
 public final class HinataDawnCrowned extends CardImpl {
 
@@ -78,9 +78,7 @@ class HinataDawnCrownedOwnEffect extends CostModificationEffectImpl {
         } else {
             targets = CardUtil.getAllSelectedTargets(abilityToModify, game);
         }
-        for (int i = 0; i < targets.stream().count(); i++) {
-            CardUtil.reduceCost(abilityToModify, 1);
-        }
+        CardUtil.reduceCost(abilityToModify, (int)targets.stream().count());
         return true;
     }
 
@@ -115,9 +113,7 @@ class HinataDawnCrownedOpponentsEffect extends CostModificationEffectImpl {
         } else {
             targets = CardUtil.getAllSelectedTargets(abilityToModify, game);
         }
-        for (int i = 0; i < targets.stream().count(); i++) {
-            CardUtil.increaseCost(abilityToModify, 1);
-        }
+        CardUtil.increaseCost(abilityToModify, (int)targets.stream().count());
         return true;
     }
 
