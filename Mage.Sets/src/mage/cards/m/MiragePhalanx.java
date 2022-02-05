@@ -11,7 +11,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityPairedEffect;
-import mage.abilities.effects.common.continuous.LoseAbilityTargetEffect;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -81,24 +80,16 @@ class MiragePhalanxEffect extends OneShotEffect {
         // Create the token, it has haste
         CreateTokenCopyTargetEffect tokenCopyEffect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
         tokenCopyEffect.setTargetPointer(new FixedTarget(permanent, game));
-        tokenCopyEffect.apply(game, source);
-        if (tokenCopyEffect.getAddedPermanent().isEmpty()) { return false; }
+        // It loses soulbond
+        tokenCopyEffect.addAbilityClassesToRemoveFromTokens(SoulbondAbility.class);
 
-        // Change abilities on the token
-        for (Permanent addedToken : tokenCopyEffect.getAddedPermanent()) {
-            // It loses soulbond
-            for (Ability ability : addedToken.getAbilities()) {
-                if (ability instanceof SoulbondAbility) {
-                    LoseAbilityTargetEffect loseSoulbondEffect = new LoseAbilityTargetEffect(ability);
-                    loseSoulbondEffect.setTargetPointer(new FixedTarget(addedToken.getId(), game));
-                    game.addEffect(loseSoulbondEffect, source);
-                }
-            }
-        }
+        tokenCopyEffect.apply(game, source);
+
+        if (tokenCopyEffect.getAddedPermanents().isEmpty()) { return false; }
 
         // Exile it at the end of combat
-        ExileTargetEffect exileEffect = new ExileTargetEffect("Exile it at the end of combat.");
-        exileEffect.setTargetPointer(new FixedTargets(tokenCopyEffect.getAddedPermanent(), game));
+        ExileTargetEffect exileEffect = new ExileTargetEffect("Exile it");
+        exileEffect.setTargetPointer(new FixedTargets(tokenCopyEffect.getAddedPermanents(), game));
         DelayedTriggeredAbility exileAbility = new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect);
         game.addDelayedTriggeredAbility(exileAbility, source);
 
