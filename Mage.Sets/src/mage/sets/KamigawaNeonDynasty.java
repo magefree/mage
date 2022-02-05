@@ -236,6 +236,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Walking Skyscraper", 263, Rarity.UNCOMMON, mage.cards.w.WalkingSkyscraper.class));
         cards.add(new SetCardInfo("Wanderer's Intervention", 41, Rarity.COMMON, mage.cards.w.WanderersIntervention.class));
         cards.add(new SetCardInfo("Weaver of Harmony", 213, Rarity.RARE, mage.cards.w.WeaverOfHarmony.class));
+        cards.add(new SetCardInfo("Webspinner Cuff", 214, Rarity.UNCOMMON, mage.cards.w.WebspinnerCuff.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 282, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("You Are Already Dead", 129, Rarity.COMMON, mage.cards.y.YouAreAlreadyDead.class));
 
