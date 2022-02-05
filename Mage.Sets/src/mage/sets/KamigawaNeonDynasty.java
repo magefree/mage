@@ -132,6 +132,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Junji, the Midnight Sky", 102, Rarity.MYTHIC, mage.cards.j.JunjiTheMidnightSky.class));
         cards.add(new SetCardInfo("Kairi, the Swirling Sky", 60, Rarity.MYTHIC, mage.cards.k.KairiTheSwirlingSky.class));
         cards.add(new SetCardInfo("Kaito Shizuki", 226, Rarity.MYTHIC, mage.cards.k.KaitoShizuki.class));
+        cards.add(new SetCardInfo("Kaito's Pursuit", 103, Rarity.COMMON, mage.cards.k.KaitosPursuit.class));
         cards.add(new SetCardInfo("Kami of Terrible Secrets", 105, Rarity.COMMON, mage.cards.k.KamiOfTerribleSecrets.class));
         cards.add(new SetCardInfo("Kappa Tech-Wrecker", 198, Rarity.UNCOMMON, mage.cards.k.KappaTechWrecker.class));
         cards.add(new SetCardInfo("Kindled Fury", 151, Rarity.COMMON, mage.cards.k.KindledFury.class));
