@@ -28,7 +28,7 @@ public final class MoonfolkPuzzlemaker extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Moonfolk Puzzlemaker becomes tapped, scry 1.
-        this.addAbility(new BecomesTappedSourceTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new BecomesTappedSourceTriggeredAbility(new ScryEffect(1, false)));
     }
 
     private MoonfolkPuzzlemaker(final MoonfolkPuzzlemaker card) {

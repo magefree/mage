@@ -39,7 +39,7 @@ public final class PredatorsHour extends CardImpl {
         );
 
         // and “Whenever this creature deals combat damage to a player,
-        // exile the top card of that player’s library face down.
+        // exile the top card of that player's library face down.
         // You may look at and play that card for as long as it remains exiled,
         // and you may spend mana as though it were mana of any color to cast that spell.”
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
@@ -50,7 +50,7 @@ public final class PredatorsHour extends CardImpl {
                 Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURES
                 ).setText("\"Whenever this creature deals combat damage to a player, " +
-                        "exile the top card of that player’s library face down. " +
+                        "exile the top card of that player's library face down. " +
                         "You may look at and play that card for as long as it remains exiled, " +
                         "and you may spend mana as though it were mana of any color to cast that spell.\"")
                 .concatBy("and")
@@ -70,7 +70,7 @@ class PredatorsHourEffect extends OneShotEffect {
 
     public PredatorsHourEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile the top card of that player’s library face down. " +
+        this.staticText = "exile the top card of that player's library face down. " +
                 "You may look at and play that card for as long as it remains exiled, " +
                 "and you may spend mana as though it were mana of any color to cast that spell.";
     }

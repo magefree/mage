@@ -2,7 +2,6 @@ package mage.verify;
 
 import com.google.common.base.CharMatcher;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
@@ -91,6 +90,7 @@ public class VerifyCardDataTest {
 
         // power-toughness
         skipListCreate(SKIP_LIST_PT);
+        skipListAddName(SKIP_LIST_PT, "NEO", "Futurist Sentinel"); // temporary
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
