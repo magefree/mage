@@ -72,12 +72,9 @@ class HinataDawnCrownedOwnEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Set<UUID> targets = null;
-        if (game.inCheckPlayableState()) {
-            targets = CardUtil.getAllPossibleTargets(abilityToModify, game);
-        } else {
-            targets = CardUtil.getAllSelectedTargets(abilityToModify, game);
-        }
+        Set<UUID> targets = game.inCheckPlayableState() ?
+                CardUtil.getAllPossibleTargets(abilityToModify, game):
+                CardUtil.getAllSelectedTargets(abilityToModify, game);
         CardUtil.reduceCost(abilityToModify, (int)targets.stream().count());
         return true;
     }
@@ -107,12 +104,9 @@ class HinataDawnCrownedOpponentsEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Set<UUID> targets = null;
-        if (game.inCheckPlayableState()) {
-            targets = CardUtil.getAllPossibleTargets(abilityToModify, game);
-        } else {
-            targets = CardUtil.getAllSelectedTargets(abilityToModify, game);
-        }
+        Set<UUID> targets = game.inCheckPlayableState() ?
+                CardUtil.getAllPossibleTargets(abilityToModify, game):
+                CardUtil.getAllSelectedTargets(abilityToModify, game);
         CardUtil.increaseCost(abilityToModify, (int)targets.stream().count());
         return true;
     }
