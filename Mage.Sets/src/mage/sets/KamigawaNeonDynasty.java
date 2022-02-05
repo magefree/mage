@@ -213,6 +213,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Seshiro's Living Legacy", 210, Rarity.COMMON, mage.cards.s.SeshirosLivingLegacy.class));
         cards.add(new SetCardInfo("Seven-Tail Mentor", 36, Rarity.COMMON, mage.cards.s.SevenTailMentor.class));
         cards.add(new SetCardInfo("Short Circuit", 78, Rarity.COMMON, mage.cards.s.ShortCircuit.class));
+        cards.add(new SetCardInfo("Shrine Steward", 259, Rarity.COMMON, mage.cards.s.ShrineSteward.class));
         cards.add(new SetCardInfo("Siba Trespassers", 77, Rarity.COMMON, mage.cards.s.SibaTrespassers.class));
         cards.add(new SetCardInfo("Silver-Fur Master", 236, Rarity.UNCOMMON, mage.cards.s.SilverFurMaster.class));
         cards.add(new SetCardInfo("Simian Sling", 163, Rarity.COMMON, mage.cards.s.SimianSling.class));
