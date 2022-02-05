@@ -215,6 +215,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Cove", 280, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Tribute to Horobi", 124, Rarity.RARE, mage.cards.t.TributeToHorobi.class));
         cards.add(new SetCardInfo("Twinshot Sniper", 168, Rarity.UNCOMMON, mage.cards.t.TwinshotSniper.class));
+        cards.add(new SetCardInfo("Twisted Embrace", 125, Rarity.COMMON, mage.cards.t.TwistedEmbrace.class));
         cards.add(new SetCardInfo("Uncharted Haven", 281, Rarity.COMMON, mage.cards.u.UnchartedHaven.class));
         cards.add(new SetCardInfo("Undercity Scrounger", 126, Rarity.COMMON, mage.cards.u.UndercityScrounger.class));
         cards.add(new SetCardInfo("Unforgiving One", 127, Rarity.UNCOMMON, mage.cards.u.UnforgivingOne.class));
