@@ -165,6 +165,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Mothrider Patrol", 30, Rarity.COMMON, mage.cards.m.MothriderPatrol.class));
         cards.add(new SetCardInfo("Mountain", 289, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mukotai Ambusher", 112, Rarity.COMMON, mage.cards.m.MukotaiAmbusher.class));
+        cards.add(new SetCardInfo("Mukotai Soulripper", 113, Rarity.RARE, mage.cards.m.MukotaiSoulripper.class));
         cards.add(new SetCardInfo("Nameless Conqueror", 162, Rarity.COMMON, mage.cards.n.NamelessConqueror.class));
         cards.add(new SetCardInfo("Naomi, Pillar of Order", 229, Rarity.UNCOMMON, mage.cards.n.NaomiPillarOfOrder.class));
         cards.add(new SetCardInfo("Network Disruptor", 71, Rarity.COMMON, mage.cards.n.NetworkDisruptor.class));
