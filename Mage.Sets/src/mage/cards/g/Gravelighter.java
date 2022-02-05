@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.watchers.common.MorbidWatcher;
 
 import java.util.UUID;
 
@@ -38,7 +37,7 @@ public final class Gravelighter extends CardImpl {
                 new SacrificeAllEffect(1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
                 MorbidCondition.instance, "draw a card if a creature died this turn. " +
                 "Otherwise, each player sacrifices a creature"
-        )).addHint(MorbidHint.instance), new MorbidWatcher());
+        )).addHint(MorbidHint.instance));
     }
 
     private Gravelighter(final Gravelighter card) {
