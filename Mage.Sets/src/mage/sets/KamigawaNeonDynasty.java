@@ -196,6 +196,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Short Circuit", 78, Rarity.COMMON, mage.cards.s.ShortCircuit.class));
         cards.add(new SetCardInfo("Siba Trespassers", 77, Rarity.COMMON, mage.cards.s.SibaTrespassers.class));
         cards.add(new SetCardInfo("Silver-Fur Master", 236, Rarity.UNCOMMON, mage.cards.s.SilverFurMaster.class));
+        cards.add(new SetCardInfo("Simian Sling", 163, Rarity.COMMON, mage.cards.s.SimianSling.class));
         cards.add(new SetCardInfo("Sky-Blessed Samurai", 37, Rarity.UNCOMMON, mage.cards.s.SkyBlessedSamurai.class));
         cards.add(new SetCardInfo("Skyswimmer Koi", 79, Rarity.COMMON, mage.cards.s.SkyswimmerKoi.class));
         cards.add(new SetCardInfo("Sokenzan Smelter", 164, Rarity.UNCOMMON, mage.cards.s.SokenzanSmelter.class));
