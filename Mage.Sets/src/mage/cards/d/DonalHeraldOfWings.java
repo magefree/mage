@@ -48,6 +48,7 @@ public class DonalHeraldOfWings extends CardImpl {
         // Whenever you cast a nonlegendary creature spell with flying, you may copy it,
         // except the copy is a 1/1 Spirit in addition to its other types.
         // Do this only once each turn. (The copy becomes a token.)
+        // TODO: This still triggers and asks if you wanna use it, even if you've used it once this turn.
         Ability ability = new SpellCastControllerTriggeredAbility(new DonalHeraldOfWingsEffect(), filterSpell, true, true);
         ability.setIdentifier(MageIdentifier.DonalHeraldOfWingsWatcher);
         this.addAbility(ability, new DonalHeraldOfWingsWatcher());
