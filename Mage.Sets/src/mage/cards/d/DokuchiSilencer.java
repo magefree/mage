@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -11,11 +11,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.target.TargetPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.game.Game;
+import mage.game.events.DamagedEvent;
+import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
 import java.util.UUID;
@@ -24,13 +28,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DokuchiSilencer extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public DokuchiSilencer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
@@ -43,15 +40,8 @@ public final class DokuchiSilencer extends CardImpl {
         // Ninjutsu {1}{B}
         this.addAbility(new NinjutsuAbility("{1}{B}"));
 
-        // Whenever Dokuchi Silencer deals combat damage to a player, you may discard a creature card. When you do, destroy target creature or planeswalker an opponent controls.
-        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DoWhenCostPaid(
-                        ability, new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE)),
-                        "Discard a creature card?"
-                ), false
-        ));
+        // Whenever Dokuchi Silencer deals combat damage to a player, you may discard a creature card. When you do, destroy target creature or planeswalker that player controls.
+        this.addAbility(new BlindZealotTriggeredAbility());
     }
 
     private DokuchiSilencer(final DokuchiSilencer card) {
@@ -61,5 +51,57 @@ public final class DokuchiSilencer extends CardImpl {
     @Override
     public DokuchiSilencer copy() {
         return new DokuchiSilencer(this);
+    }
+}
+
+class BlindZealotTriggeredAbility extends TriggeredAbilityImpl {
+
+    BlindZealotTriggeredAbility() {
+        super(Zone.BATTLEFIELD, null, false);
+    }
+
+    private BlindZealotTriggeredAbility(final BlindZealotTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public BlindZealotTriggeredAbility copy() {
+        return new BlindZealotTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Player opponent = game.getPlayer(event.getPlayerId());
+        if (opponent == null
+                || !event.getSourceId().equals(getSourceId())
+                || !((DamagedEvent) event).isCombatDamage()) {
+            return false;
+        }
+        FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent(
+                "creature or planeswalker" + opponent.getLogName() + " controls"
+        );
+        filter.add(new ControllerIdPredicate(opponent.getId()));
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                new DestroyTargetEffect(), false,
+                "destroy target creature or planeswalker that player controls"
+        );
+        this.getEffects().clear();
+        this.addEffect(new DoWhenCostPaid(
+                ability,
+                new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE)),
+                "Discard a creature card?"
+        ));
+        return true;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever {this} deals combat damage to a player, you may discard a creature card. " +
+                "When you do, destroy target creature or planeswalker that player controls.";
     }
 }
