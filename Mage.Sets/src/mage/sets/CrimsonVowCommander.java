@@ -57,6 +57,8 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Darksteel Mutation", 84, Rarity.UNCOMMON, mage.cards.d.DarksteelMutation.class));
         cards.add(new SetCardInfo("Disorder in the Court", 29, Rarity.RARE, mage.cards.d.DisorderInTheCourt.class));
         cards.add(new SetCardInfo("Distant Melody", 103, Rarity.COMMON, mage.cards.d.DistantMelody.class));
+        cards.add(new SetCardInfo("Donal, Herald of Wings", 3, Rarity.MYTHIC, mage.cards.d.DonalHeraldOfWings.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Donal, Herald of Wings", 41, Rarity.MYTHIC, mage.cards.d.DonalHeraldOfWings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Doom Weaver", 34, Rarity.RARE, mage.cards.d.DoomWeaver.class));
         cards.add(new SetCardInfo("Dovin, Grand Arbiter", 153, Rarity.MYTHIC, mage.cards.d.DovinGrandArbiter.class));
         cards.add(new SetCardInfo("Drogskol Captain", 154, Rarity.UNCOMMON, mage.cards.d.DrogskolCaptain.class));
