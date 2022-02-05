@@ -28,8 +28,9 @@ import java.util.*;
  */
 public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
+    private Set<Class<? extends Ability>> abilityClazzesToRemove;
     private final List<Permanent> addedTokenPermanents;
-    private final List<Ability> additionalAbilities = new ArrayList();
+    private final List<Ability> additionalAbilities = new ArrayList<>();
     private final CardType additionalCardType;
     private SubType additionalSubType;
     private final UUID attackedPlayer;
@@ -109,24 +110,30 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.tokenPower = power;
         this.tokenToughness = toughness;
         this.gainsFlying = gainsFlying;
+        this.abilityClazzesToRemove = new HashSet<>();
     }
 
     public CreateTokenCopyTargetEffect(final CreateTokenCopyTargetEffect effect) {
         super(effect);
 
+        this.abilityClazzesToRemove = new HashSet<>(effect.abilityClazzesToRemove);
         this.addedTokenPermanents = new ArrayList<>(effect.addedTokenPermanents);
+        //this.additionalAbilities
         this.additionalCardType = effect.additionalCardType;
         this.additionalSubType = effect.additionalSubType;
-        this.attacking = effect.attacking;
         this.attackedPlayer = effect.attackedPlayer;
+        this.attacking = effect.attacking;
         this.becomesArtifact = effect.becomesArtifact;
         this.color = effect.color;
+        //this.counter
         this.gainsFlying = effect.gainsFlying;
         this.hasHaste = effect.hasHaste;
         this.isntLegendary = effect.isntLegendary;
         this.number = effect.number;
+        //this.numberOfCounters
         this.onlySubType = effect.onlySubType;
         this.playerId = effect.playerId;
+        //this.savedPermanent
         this.tapped = effect.tapped;
         this.tokenPower = effect.tokenPower;
         this.tokenToughness = effect.tokenToughness;
@@ -222,6 +229,25 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.getColor().setColor(color);
         }
         additionalAbilities.stream().forEach(token::addAbility);
+
+        if (!this.abilityClazzesToRemove.isEmpty()) {
+            List<Ability> abilitiesToRemoveTmp = new ArrayList<>();
+
+            // Find the ones to remove
+            for (Ability ability : token.getAbilities()) {
+                if (this.abilityClazzesToRemove.contains(ability.getClass())) {
+                    abilitiesToRemoveTmp.add(ability);
+                }
+            }
+
+            // Remove them
+            for (Ability ability : abilitiesToRemoveTmp) {
+                // Remove subabilities
+                token.removeAbilities(ability.getSubAbilities());
+                // Remove the ability
+                token.removeAbility(ability);
+            }
+        }
 
         token.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer);
         for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
@@ -336,9 +362,14 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
     }
 
+    public void addAbilityClassesToRemoveFromTokens(Class<? extends Ability> clazz) {
+        this.abilityClazzesToRemove.add(clazz);
+    }
+
     public void addAdditionalAbilities(Ability... abilities) {
         Arrays.stream(abilities).forEach(this.additionalAbilities::add);
     }
+
 
     public CreateTokenCopyTargetEffect setSavedPermanent(Permanent savedPermanent) {
         this.savedPermanent = savedPermanent;

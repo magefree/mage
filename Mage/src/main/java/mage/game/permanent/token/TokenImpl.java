@@ -130,6 +130,35 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         abilities.addAll(ability.getSubAbilities());
     }
 
+    // Directly from PermanentImpl
+    @Override
+    public void removeAbility(Ability abilityToRemove) {
+        if (abilityToRemove == null) {
+            return;
+        }
+
+        // 112.10b  Effects that remove an ability remove all instances of it.
+        List<Ability> toRemove = new ArrayList<>();
+        abilities.forEach(a -> {
+            if (a.isSameInstance(abilityToRemove)) {
+                toRemove.add(a);
+            }
+        });
+
+        // TODO: what about triggered abilities? See addAbility above -- triggers adds to GameState
+        toRemove.forEach(r -> abilities.remove(r));
+    }
+
+    // Directly from PermanentImpl
+    @Override
+    public void removeAbilities(List<Ability> abilitiesToRemove) {
+        if (abilitiesToRemove == null) {
+            return;
+        }
+
+        abilitiesToRemove.forEach(a -> removeAbility(a));
+    }
+
     @Override
     public boolean putOntoBattlefield(int amount, Game game, Ability source) {
         return this.putOntoBattlefield(amount, game, source, source.getControllerId());
