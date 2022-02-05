@@ -120,6 +120,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Kappa Tech-Wrecker", 198, Rarity.UNCOMMON, mage.cards.k.KappaTechWrecker.class));
         cards.add(new SetCardInfo("Kindled Fury", 151, Rarity.COMMON, mage.cards.k.KindledFury.class));
         cards.add(new SetCardInfo("Kirin-Touched Orochi", 212, Rarity.RARE, mage.cards.k.KirinTouchedOrochi.class));
+        cards.add(new SetCardInfo("Kitsune Ace", 22, Rarity.COMMON, mage.cards.k.KitsuneAce.class));
         cards.add(new SetCardInfo("Kodama of the West Tree", 199, Rarity.MYTHIC, mage.cards.k.KodamaOfTheWestTree.class));
         cards.add(new SetCardInfo("Kyodai, Soul of Kamigawa", 23, Rarity.RARE, mage.cards.k.KyodaiSoulOfKamigawa.class));
         cards.add(new SetCardInfo("Leech Gauntlet", 106, Rarity.UNCOMMON, mage.cards.l.LeechGauntlet.class));
