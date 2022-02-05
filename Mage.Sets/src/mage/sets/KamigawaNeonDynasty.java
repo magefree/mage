@@ -206,6 +206,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Satsuki, the Living Lore", 235, Rarity.RARE, mage.cards.s.SatsukiTheLivingLore.class));
         cards.add(new SetCardInfo("Scoured Barrens", 274, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Scrap Welder", 159, Rarity.RARE, mage.cards.s.ScrapWelder.class));
+        cards.add(new SetCardInfo("Scrapyard Steelbreaker", 160, Rarity.COMMON, mage.cards.s.ScrapyardSteelbreaker.class));
         cards.add(new SetCardInfo("Searchlight Companion", 258, Rarity.COMMON, mage.cards.s.SearchlightCompanion.class));
         cards.add(new SetCardInfo("Season of Renewal", 205, Rarity.COMMON, mage.cards.s.SeasonOfRenewal.class));
         cards.add(new SetCardInfo("Seismic Wave", 161, Rarity.UNCOMMON, mage.cards.s.SeismicWave.class));
