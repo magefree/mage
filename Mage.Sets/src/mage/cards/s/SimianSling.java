@@ -76,22 +76,14 @@ class SimianSlingTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        UUID attacker;
         if (!event.getTargetId().equals(getSourceId())) {
             Permanent permanent = getSourcePermanentOrLKI(game);
-            if (permanent != null && event.getTargetId().equals(permanent.getAttachedTo())) {
-                attacker = permanent.getAttachedTo();
-            } else {
-                attacker = null;
+            if (permanent == null || !event.getTargetId().equals(permanent.getAttachedTo())) {
+                return false;
             }
-        } else {
-            attacker = getSourceId();
         }
-        if (attacker == null) {
-            return false;
-        }
-        getEffects().setValue("attacker", attacker);
-        getEffects().setTargetPointer(new FixedTarget(game.getCombat().getDefendingPlayerId(attacker, game)));
+        getEffects().setValue("attacker", event.getTargetId());
+        getEffects().setTargetPointer(new FixedTarget(game.getCombat().getDefendingPlayerId(event.getTargetId(), game)));
         return true;
     }
 
