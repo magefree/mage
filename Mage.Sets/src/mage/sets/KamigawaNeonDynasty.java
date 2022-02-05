@@ -123,6 +123,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Imperial Subduer", 19, Rarity.COMMON, mage.cards.i.ImperialSubduer.class));
         cards.add(new SetCardInfo("Inkrise Infiltrator", 100, Rarity.COMMON, mage.cards.i.InkriseInfiltrator.class));
         cards.add(new SetCardInfo("Inventive Iteration", 57, Rarity.RARE, mage.cards.i.InventiveIteration.class));
+        cards.add(new SetCardInfo("Invigorating Hot Spring", 223, Rarity.UNCOMMON, mage.cards.i.InvigoratingHotSpring.class));
         cards.add(new SetCardInfo("Invoke the Ancients", 193, Rarity.RARE, mage.cards.i.InvokeTheAncients.class));
         cards.add(new SetCardInfo("Invoke the Winds", 58, Rarity.RARE, mage.cards.i.InvokeTheWinds.class));
         cards.add(new SetCardInfo("Ironhoof Boar", 148, Rarity.COMMON, mage.cards.i.IronhoofBoar.class));
