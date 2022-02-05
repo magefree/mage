@@ -14,6 +14,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,10 +58,11 @@ public class CrewAbility extends SimpleActivatedAbility {
 
 class CrewCost extends CostImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another untapped creature you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
+        filter.add(AnotherPredicate.instance);
     }
 
     private final int value;
