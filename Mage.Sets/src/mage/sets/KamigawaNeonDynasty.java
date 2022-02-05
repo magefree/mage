@@ -58,6 +58,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Brute Suit", 241, Rarity.COMMON, mage.cards.b.BruteSuit.class));
         cards.add(new SetCardInfo("Careful Cultivation", 178, Rarity.COMMON, mage.cards.c.CarefulCultivation.class));
         cards.add(new SetCardInfo("Circuit Mender", 242, Rarity.UNCOMMON, mage.cards.c.CircuitMender.class));
+        cards.add(new SetCardInfo("Clawing Torment", 91, Rarity.COMMON, mage.cards.c.ClawingTorment.class));
         cards.add(new SetCardInfo("Coiling Stalker", 179, Rarity.COMMON, mage.cards.c.CoilingStalker.class));
         cards.add(new SetCardInfo("Colossal Skyturtle", 216, Rarity.UNCOMMON, mage.cards.c.ColossalSkyturtle.class));
         cards.add(new SetCardInfo("Covert Technician", 49, Rarity.UNCOMMON, mage.cards.c.CovertTechnician.class));
