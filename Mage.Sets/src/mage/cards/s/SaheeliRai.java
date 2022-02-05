@@ -87,7 +87,7 @@ class SaheeliRaiCreateTokenEffect extends OneShotEffect {
         if (copiedPermanent != null) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, CardType.ARTIFACT, true);
             if (effect.apply(game, source)) {
-                for (Permanent copyPermanent : effect.getAddedPermanent()) {
+                for (Permanent copyPermanent : effect.getAddedPermanents()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();
                     exileEffect.setTargetPointer(new FixedTarget(copyPermanent, game));
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);

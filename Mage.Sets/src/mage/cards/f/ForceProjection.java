@@ -80,7 +80,7 @@ class ForceProjectionEffect extends OneShotEffect {
 
             // and gains "When this creature becomes the target of a spell, sacrifice it."
             Effect sacrificeEffect = new SacrificeSourceEffect();
-            sacrificeEffect.setTargetPointer(new FixedTarget(effect.getAddedPermanent().get(0), game));
+            sacrificeEffect.setTargetPointer(new FixedTarget(effect.getAddedPermanents().get(0), game));
             TriggeredAbility ability = new BecomesTargetTriggeredAbility(sacrificeEffect, new FilterSpell());
             game.addTriggeredAbility(ability, null);
 

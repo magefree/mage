@@ -305,7 +305,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         return sb.toString();
     }
 
-    public List<Permanent> getAddedPermanent() {
+    public List<Permanent> getAddedPermanents() {
         return addedTokenPermanents;
     }
 
