@@ -19,6 +19,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 import java.util.UUID;
 
@@ -74,7 +75,7 @@ class MiragePhalanxEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
         if (permanent == null) { return false; }
 
         // Create the token, it has haste
@@ -89,16 +90,17 @@ class MiragePhalanxEffect extends OneShotEffect {
             for (Ability ability : addedToken.getAbilities()) {
                 if (ability instanceof SoulbondAbility) {
                     LoseAbilityTargetEffect loseSoulbondEffect = new LoseAbilityTargetEffect(ability);
-                    loseSoulbondEffect.setTargetPointer(new FixedTarget(addedToken.getId()));
+                    loseSoulbondEffect.setTargetPointer(new FixedTarget(addedToken.getId(), game));
                     game.addEffect(loseSoulbondEffect, source);
                 }
             }
-            // Exile it at the end of combat
-            ExileTargetEffect exileEffect = new ExileTargetEffect("Exile it at the end of combat.");
-            exileEffect.setTargetPointer(new FixedTarget(addedToken.getId()));
-            DelayedTriggeredAbility exileAbility = new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect);
-            game.addDelayedTriggeredAbility(exileAbility, source);
         }
+
+        // Exile it at the end of combat
+        ExileTargetEffect exileEffect = new ExileTargetEffect("Exile it at the end of combat.");
+        exileEffect.setTargetPointer(new FixedTargets(tokenCopyEffect.getAddedPermanent(), game));
+        DelayedTriggeredAbility exileAbility = new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect);
+        game.addDelayedTriggeredAbility(exileAbility, source);
 
         return true;
     }
