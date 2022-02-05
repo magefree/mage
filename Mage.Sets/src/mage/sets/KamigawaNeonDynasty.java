@@ -189,6 +189,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Thirst for Knowledge", 85, Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class));
         cards.add(new SetCardInfo("Thornwood Falls", 279, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thousand-Faced Shadow", 86, Rarity.RARE, mage.cards.t.ThousandFacedShadow.class));
+        cards.add(new SetCardInfo("Thundersteel Colossus", 261, Rarity.COMMON, mage.cards.t.ThundersteelColossus.class));
         cards.add(new SetCardInfo("Touch the Spirit Realm", 40, Rarity.UNCOMMON, mage.cards.t.TouchTheSpiritRealm.class));
         cards.add(new SetCardInfo("Towashi Guide-Bot", 262, Rarity.UNCOMMON, mage.cards.t.TowashiGuideBot.class));
         cards.add(new SetCardInfo("Tranquil Cove", 280, Rarity.COMMON, mage.cards.t.TranquilCove.class));
