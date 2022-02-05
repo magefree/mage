@@ -179,6 +179,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Replication Specialist", 76, Rarity.UNCOMMON, mage.cards.r.ReplicationSpecialist.class));
         cards.add(new SetCardInfo("Roadside Reliquary", 272, Rarity.UNCOMMON, mage.cards.r.RoadsideReliquary.class));
         cards.add(new SetCardInfo("Rugged Highlands", 273, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
+        cards.add(new SetCardInfo("Runaway Trash-Bot", 257, Rarity.UNCOMMON, mage.cards.r.RunawayTrashBot.class));
         cards.add(new SetCardInfo("Satoru Umezawa", 234, Rarity.RARE, mage.cards.s.SatoruUmezawa.class));
         cards.add(new SetCardInfo("Satsuki, the Living Lore", 235, Rarity.RARE, mage.cards.s.SatsukiTheLivingLore.class));
         cards.add(new SetCardInfo("Scoured Barrens", 274, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
