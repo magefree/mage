@@ -222,6 +222,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Skyswimmer Koi", 79, Rarity.COMMON, mage.cards.s.SkyswimmerKoi.class));
         cards.add(new SetCardInfo("Sokenzan Smelter", 164, Rarity.UNCOMMON, mage.cards.s.SokenzanSmelter.class));
         cards.add(new SetCardInfo("Sokenzan, Crucible of Defiance", 276, Rarity.RARE, mage.cards.s.SokenzanCrucibleOfDefiance.class));
+        cards.add(new SetCardInfo("Soul Transfer", 122, Rarity.RARE, mage.cards.s.SoulTransfer.class));
         cards.add(new SetCardInfo("Spell Pierce", 80, Rarity.COMMON, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Spirit-Sister's Call", 237, Rarity.MYTHIC, mage.cards.s.SpiritSistersCall.class));
         cards.add(new SetCardInfo("Spirited Companion", 38, Rarity.COMMON, mage.cards.s.SpiritedCompanion.class));
