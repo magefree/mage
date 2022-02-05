@@ -65,6 +65,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Cloudsteel Kirin", 8, Rarity.RARE, mage.cards.c.CloudsteelKirin.class));
         cards.add(new SetCardInfo("Coiling Stalker", 179, Rarity.COMMON, mage.cards.c.CoilingStalker.class));
         cards.add(new SetCardInfo("Colossal Skyturtle", 216, Rarity.UNCOMMON, mage.cards.c.ColossalSkyturtle.class));
+        cards.add(new SetCardInfo("Commune with Spirits", 180, Rarity.COMMON, mage.cards.c.CommuneWithSpirits.class));
         cards.add(new SetCardInfo("Covert Technician", 49, Rarity.UNCOMMON, mage.cards.c.CovertTechnician.class));
         cards.add(new SetCardInfo("Dismal Backwater", 267, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Disruption Protocol", 51, Rarity.COMMON, mage.cards.d.DisruptionProtocol.class));
