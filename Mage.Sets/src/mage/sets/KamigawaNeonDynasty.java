@@ -147,6 +147,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Okiba Reckoner Raid", 117, Rarity.COMMON, mage.cards.o.OkibaReckonerRaid.class));
         cards.add(new SetCardInfo("Oni-Cult Anvil", 230, Rarity.UNCOMMON, mage.cards.o.OniCultAnvil.class));
         cards.add(new SetCardInfo("Otawara, Soaring City", 271, Rarity.RARE, mage.cards.o.OtawaraSoaringCity.class));
+        cards.add(new SetCardInfo("Papercraft Decoy", 253, Rarity.COMMON, mage.cards.p.PapercraftDecoy.class));
         cards.add(new SetCardInfo("Plains", 283, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Portrait of Michiko", 29, Rarity.UNCOMMON, mage.cards.p.PortraitOfMichiko.class));
         cards.add(new SetCardInfo("Prodigy's Prototype", 231, Rarity.UNCOMMON, mage.cards.p.ProdigysPrototype.class));
