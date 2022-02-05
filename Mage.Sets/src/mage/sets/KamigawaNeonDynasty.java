@@ -70,6 +70,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Dokuchi Silencer", 95, Rarity.UNCOMMON, mage.cards.d.DokuchiSilencer.class));
         cards.add(new SetCardInfo("Dragonfly Suit", 9, Rarity.COMMON, mage.cards.d.DragonflySuit.class));
         cards.add(new SetCardInfo("Echo of Death's Wail", 124, Rarity.RARE, mage.cards.e.EchoOfDeathsWail.class));
+        cards.add(new SetCardInfo("Ecologist's Terrarium", 246, Rarity.COMMON, mage.cards.e.EcologistsTerrarium.class));
         cards.add(new SetCardInfo("Eiganjo Exemplar", 10, Rarity.COMMON, mage.cards.e.EiganjoExemplar.class));
         cards.add(new SetCardInfo("Eiganjo Uprising", 217, Rarity.RARE, mage.cards.e.EiganjoUprising.class));
         cards.add(new SetCardInfo("Eiganjo, Seat of the Empire", 268, Rarity.RARE, mage.cards.e.EiganjoSeatOfTheEmpire.class));
