@@ -10,12 +10,14 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
-public final class SeizeTheStormToken extends TokenImpl {
+public final class SeizeTheStormElementalToken extends TokenImpl {
 
-    public SeizeTheStormToken(DynamicValue xValue, Hint hint) {
+    public SeizeTheStormElementalToken(DynamicValue xValue, Hint hint) {
         super("Elemental", "red Elemental creature token with trample and " +
                 "\"This creature's power and toughness are each equal to the number of instant " +
                 "and sorcery cards in your graveyard plus the number of cards with flashback you own in exile.\"");
@@ -30,14 +32,16 @@ public final class SeizeTheStormToken extends TokenImpl {
         ).setText("this creature's power and toughness are each equal to the number of " +
                 "instant and sorcery cards in your graveyard, plus the number of cards with flashback you own in exile")
         ).addHint(hint));
+
+        availableImageSetCodes = Arrays.asList("MID");
     }
 
-    private SeizeTheStormToken(final SeizeTheStormToken token) {
+    private SeizeTheStormElementalToken(final SeizeTheStormElementalToken token) {
         super(token);
     }
 
     @Override
-    public SeizeTheStormToken copy() {
-        return new SeizeTheStormToken(this);
+    public SeizeTheStormElementalToken copy() {
+        return new SeizeTheStormElementalToken(this);
     }
 }

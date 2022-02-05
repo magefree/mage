@@ -112,6 +112,8 @@
 |Generate|EMBLEM:AFR|Lolth, Spider Queen||Emblem Lolth|LolthSpiderQueenEmblem|
 |Generate|EMBLEM:AFR|Mordenkainen||Emblem Mordenkainen|MordenkainenEmblem|
 |Generate|EMBLEM:AFR|Zariel, Archduke of Avernus||Emblem Zariel|ZarielArchdukeOfAvernusEmblem|
+|Generate|EMBLEM:MID|Teferi, Who Slows the Sunset||Emblem Teferi|TeferiWhoSlowsTheSunsetEmblem|
+|Generate|EMBLEM:MID|Wrenn and Seven||Emblem Wrenn|WrennAndSevenEmblem|
 
 # Planes
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
@@ -1616,3 +1618,21 @@
 |Generate|TOK:MIC|Zombie|1||ZombieToken|
 |Generate|TOK:MIC|Zombie|2||StitcherGeralfZombieToken|
 |Generate|TOK:MIC|Zombie Army|||ZombieArmyToken|
+
+# MID
+|Generate|TOK:MID|Bat|||BatToken|
+|Generate|TOK:MID|Beast|||BeastToken2|
+|Generate|TOK:MID|Bird|||OminousRoostBirdToken|
+|Generate|TOK:MID|Clue|||ClueArtifactToken|
+|Generate|TOK:MID|Devil|||DevilToken|
+|Generate|TOK:MID|Elemental|||SeizeTheStormElementalToken|
+|Generate|TOK:MID|Human|||HumanToken|
+|Generate|TOK:MID|Insect|||RiseOfTheAntsInsectToken|
+|Generate|TOK:MID|Ooze|||ConsumingBlobOozeToken|
+|Generate|TOK:MID|Spider|||SpiderToken|
+|Generate|TOK:MID|Spirit|||SpiritWhiteToken|
+|Generate|TOK:MID|Treefolk|||WrennAndSevenTreefolkToken|
+|Generate|TOK:MID|Vampire|||HungryForMoreVampireToken|
+|Generate|TOK:MID|Wolf|||WolfToken|
+|Generate|TOK:MID|Zombie|1||ZombieDecayedToken|
+|Generate|TOK:MID|Zombie|2||ZombieMenaceToken|

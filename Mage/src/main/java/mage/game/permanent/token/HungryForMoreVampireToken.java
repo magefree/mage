@@ -7,12 +7,14 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
-public final class HungryForMoreToken extends TokenImpl {
+public final class HungryForMoreVampireToken extends TokenImpl {
 
-    public HungryForMoreToken() {
+    public HungryForMoreVampireToken() {
         super("Vampire", "3/1 black and red Vampire creature token with trample, lifelink, and haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
@@ -23,13 +25,15 @@ public final class HungryForMoreToken extends TokenImpl {
         addAbility(TrampleAbility.getInstance());
         addAbility(LifelinkAbility.getInstance());
         addAbility(HasteAbility.getInstance());
+
+        availableImageSetCodes.addAll(Arrays.asList("MID"));
     }
 
-    public HungryForMoreToken(final HungryForMoreToken token) {
+    public HungryForMoreVampireToken(final HungryForMoreVampireToken token) {
         super(token);
     }
 
-    public HungryForMoreToken copy() {
-        return new HungryForMoreToken(this);
+    public HungryForMoreVampireToken copy() {
+        return new HungryForMoreVampireToken(this);
     }
 }

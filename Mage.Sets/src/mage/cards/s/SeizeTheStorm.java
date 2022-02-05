@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.SeizeTheStormToken;
+import mage.game.permanent.token.SeizeTheStormElementalToken;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -32,7 +32,7 @@ public final class SeizeTheStorm extends CardImpl {
 
         // Create a red Elemental creature token with trample and "This creature's power and toughness are each equal to the number of instant and sorcery cards in your graveyard, plus the number of cards with flashback you own in exile."
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new SeizeTheStormToken(SeizeTheStormValue.instance, hint)
+                new SeizeTheStormElementalToken(SeizeTheStormValue.instance, hint)
         ));
         this.getSpellAbility().addHint(hint);
 

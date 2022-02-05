@@ -6,9 +6,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class OminousRoostToken extends TokenImpl {
+import java.util.Arrays;
 
-    public OminousRoostToken() {
+public class OminousRoostBirdToken extends TokenImpl {
+
+    public OminousRoostBirdToken() {
         super("Bird", "1/1 blue Bird creature token with flying and \"This creature can block only creatures with flying\"");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
@@ -18,14 +20,16 @@ public class OminousRoostToken extends TokenImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new CanBlockOnlyFlyingAbility());
+
+        availableImageSetCodes = Arrays.asList("MID");
     }
 
-    public OminousRoostToken(final OminousRoostToken token) {
+    public OminousRoostBirdToken(final OminousRoostBirdToken token) {
         super(token);
     }
 
     @Override
     public Token copy() {
-        return new OminousRoostToken(this);
+        return new OminousRoostBirdToken(this);
     }
 }

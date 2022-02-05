@@ -1,24 +1,16 @@
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public final class BatToken extends TokenImpl {
-    
-    static final private List<String> tokenImageSets = new ArrayList<>();
+import java.util.Arrays;
 
-    static {
-        tokenImageSets.addAll(Arrays.asList("MMA", "C17"));
-    }
+public final class BatToken extends TokenImpl {
 
     public BatToken() {
         super("Bat", "1/1 black Bat creature token with flying");
-        availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.BAT);
@@ -26,8 +18,9 @@ public final class BatToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
 
-        this.setOriginalExpansionSetCode("MMA");
+        availableImageSetCodes = Arrays.asList("GVL", "DDD", "GPT", "MMA", "M19", "MID");
     }
+
     public BatToken(final BatToken token) {
         super(token);
     }

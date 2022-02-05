@@ -663,6 +663,27 @@ public class ScryfallImageSupportTokens {
             put("MIC/Zombie/1", "https://api.scryfall.com/cards/tmic/5/en?format=image"); // 2/2
             put("MIC/Zombie/2", "https://api.scryfall.com/cards/tmic/4/en?format=image"); // */*
 
+            // MID
+            put("MID/Bat", "https://api.scryfall.com/cards/tmid/4/en?format=image");
+            put("MID/Beast", "https://api.scryfall.com/cards/tmid/8/en?format=image");
+            put("MID/Bird", "https://api.scryfall.com/cards/tmid/3/en?format=image");
+            put("MID/Clue", "https://api.scryfall.com/cards/tmid/16/en?format=image");
+            put("MID/Devil", "https://api.scryfall.com/cards/tmid/6/en?format=image");
+            put("MID/Elemental", "https://api.scryfall.com/cards/tmid/7/en?format=image");
+            put("MID/Human", "https://api.scryfall.com/cards/tmid/1/en?format=image");
+            put("MID/Insect", "https://api.scryfall.com/cards/tmid/9/en?format=image");
+            put("MID/Ooze", "https://api.scryfall.com/cards/tmid/10/en?format=image");
+            put("MID/Spider", "https://api.scryfall.com/cards/tmid/11/en?format=image");
+            put("MID/Spirit", "https://api.scryfall.com/cards/tmid/2/en?format=image");
+            put("MID/Emblem Teferi, Who Slows the Sunset", "https://api.scryfall.com/cards/tmid/17/en?format=image");
+            put("MID/Treefolk", "https://api.scryfall.com/cards/tmid/12/en?format=image");
+            put("MID/Vampire", "https://api.scryfall.com/cards/tmid/14/en?format=image");
+            put("MID/Wolf", "https://api.scryfall.com/cards/tmid/13/en?format=image");
+            put("MID/Emblem Wrenn and Seven", "https://api.scryfall.com/cards/tmid/18/en?format=image");
+            put("MID/Zombie/1", "https://api.scryfall.com/cards/tmid/5/en?format=image"); // decayed
+            put("MID/Zombie/2", "https://api.scryfall.com/cards/tmid/15/en?format=image"); // menace
+
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

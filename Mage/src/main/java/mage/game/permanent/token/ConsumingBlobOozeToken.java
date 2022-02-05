@@ -10,14 +10,15 @@ import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.constants.*;
 import mage.game.Game;
 
+import java.util.Arrays;
+
 /**
  * @author ciaccona007
  */
-public final class ConsumingBlobToken extends TokenImpl {
+public final class ConsumingBlobOozeToken extends TokenImpl {
 
-    public ConsumingBlobToken() {
+    public ConsumingBlobOozeToken() {
         super("Ooze", "green Ooze creature token with \"This creature's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.\"");
-        setOriginalExpansionSetCode("MID");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.OOZE);
         color.setGreen(true);
@@ -28,15 +29,16 @@ public final class ConsumingBlobToken extends TokenImpl {
         // This creature's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConsumingBlobTokenEffect()).addHint(CardTypesInGraveyardHint.YOU));
 
+        availableImageSetCodes.addAll(Arrays.asList("MID"));
     }
 
-    private ConsumingBlobToken(final ConsumingBlobToken token) {
+    private ConsumingBlobOozeToken(final ConsumingBlobOozeToken token) {
         super(token);
     }
 
     @Override
-    public ConsumingBlobToken copy() {
-        return new ConsumingBlobToken(this);
+    public ConsumingBlobOozeToken copy() {
+        return new ConsumingBlobOozeToken(this);
     }
 }
 
