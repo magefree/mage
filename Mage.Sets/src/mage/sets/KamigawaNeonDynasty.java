@@ -107,6 +107,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 285, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Isshin, Two Heavens as One", 224, Rarity.RARE, mage.cards.i.IsshinTwoHeavensAsOne.class));
         cards.add(new SetCardInfo("Jukai Naturalist", 225, Rarity.UNCOMMON, mage.cards.j.JukaiNaturalist.class));
+        cards.add(new SetCardInfo("Jukai Trainee", 196, Rarity.COMMON, mage.cards.j.JukaiTrainee.class));
         cards.add(new SetCardInfo("Jungle Hollow", 269, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Junji, the Midnight Sky", 102, Rarity.MYTHIC, mage.cards.j.JunjiTheMidnightSky.class));
         cards.add(new SetCardInfo("Kairi, the Swirling Sky", 60, Rarity.MYTHIC, mage.cards.k.KairiTheSwirlingSky.class));
