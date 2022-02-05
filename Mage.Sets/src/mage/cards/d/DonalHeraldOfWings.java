@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -15,12 +14,11 @@ import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.util.functions.StackObjectCopyApplier;
-import mage.watchers.Watcher;
 
 import java.util.UUID;
 
@@ -28,12 +26,6 @@ import java.util.UUID;
  * @author Alex-Vasile
  */
 public class DonalHeraldOfWings extends CardImpl {
-
-    private static final FilterSpell filterSpell = new FilterSpell("a nonlegendary creature spell with flying");
-    static {
-        filterSpell.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
-        filterSpell.add(CardType.CREATURE.getPredicate());
-    }
 
     public DonalHeraldOfWings(UUID ownderId, CardSetInfo setInfo) {
         super(ownderId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
@@ -49,9 +41,7 @@ public class DonalHeraldOfWings extends CardImpl {
         // except the copy is a 1/1 Spirit in addition to its other types.
         // Do this only once each turn. (The copy becomes a token.)
         // TODO: This still triggers and asks if you wanna use it, even if you've used it once this turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new DonalHeraldOfWingsEffect(), filterSpell, true, true);
-        ability.setIdentifier(MageIdentifier.DonalHeraldOfWingsWatcher);
-        this.addAbility(ability, new DonalHeraldOfWingsWatcher());
+        this.addAbility(new DonalHeraldOfWingsTriggeredAbility());
     }
 
     private DonalHeraldOfWings(final DonalHeraldOfWings card) { super(card); }
@@ -60,11 +50,56 @@ public class DonalHeraldOfWings extends CardImpl {
     public DonalHeraldOfWings copy() { return new DonalHeraldOfWings(this); }
 }
 
+class DonalHeraldOfWingsTriggeredAbility extends SpellCastControllerTriggeredAbility {
+
+    private static final FilterSpell filterSpell = new FilterSpell("a nonlegendary creature spell with flying");
+    static {
+        filterSpell.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
+        filterSpell.add(CardType.CREATURE.getPredicate());
+    }
+
+    DonalHeraldOfWingsTriggeredAbility() {
+        super(new DonalHeraldOfWingsEffect(), filterSpell, true, true);
+    }
+
+    private DonalHeraldOfWingsTriggeredAbility(final DonalHeraldOfWingsTriggeredAbility ability) { super(ability); }
+
+    @Override
+    public DonalHeraldOfWingsTriggeredAbility copy() {
+        return new DonalHeraldOfWingsTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return abilityAvailableThisTurn(game) && super.checkTrigger(event, game);
+    }
+
+    @Override
+    public boolean resolve(Game game) {
+        if (!(abilityAvailableThisTurn(game) && super.resolve(game))) { return false; }
+        game.getState().setValue(
+                CardUtil.getCardZoneString("lastTurnResolved" + originalId, sourceId, game),
+                game.getTurnNum()
+        );
+
+        return true;
+    }
+
+    private boolean abilityAvailableThisTurn(Game game) {
+        Integer lastTurnResolved = (Integer) game.getState().getValue(
+                CardUtil.getCardZoneString("lastTurnResolved" + originalId, sourceId, game)
+        );
+        // A null result is assumed to mean the this ability has not been used yet.
+        return lastTurnResolved == null || lastTurnResolved != game.getTurnNum();
+    }
+}
+
 class DonalHeraldOfWingsEffect extends OneShotEffect {
 
     DonalHeraldOfWingsEffect() {
         super(Outcome.Copy);
-        staticText = "you may copy it, except the copy is a 1/1 Spirit in addition to its other types.";
+        staticText = "you may copy it, except the copy is a 1/1 Spirit in addition to its other types. " +
+                "Do this only once each turn. <i>(The copy becomes a token.)</i>";
     }
 
     private DonalHeraldOfWingsEffect(final DonalHeraldOfWingsEffect effect) { super(effect); }
@@ -74,16 +109,11 @@ class DonalHeraldOfWingsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) { return false; }
 
-        DonalHeraldOfWingsWatcher watcher = game.getState().getWatcher(DonalHeraldOfWingsWatcher.class);
-        if (watcher == null) { return false; }
-        if (watcher.wasAbilityUsedThisTurn()) { return false; }
-
         // Get the card that was cast
         if (this.getTargetPointer() == null) { return false; }
         Spell originalSpell = game.getStack().getSpell(((FixedTarget) this.getTargetPointer()).getTarget());
 
         // Create a token copy
-        // TODO: Copy made is a token, but there's no indication of it on the card
         originalSpell.createCopyOnStack(game, source, controller.getId(), false, 1, DonalHeraldOfWingsApplier.instance);
 
         return true;
@@ -99,47 +129,10 @@ enum DonalHeraldOfWingsApplier implements StackObjectCopyApplier {
     @Override
     public void modifySpell(StackObject copiedSpell, Game game) {
         copiedSpell.addSubType(SubType.SPIRIT);
-        // TODO: These two calls don't work
-        copiedSpell.getPower().setValue(1);
-        copiedSpell.getToughness().setValue(1);
+        copiedSpell.getPower().modifyBaseValue(1);
+        copiedSpell.getToughness().modifyBaseValue(1);
     }
 
     @Override
     public MageObjectReferencePredicate getNextNewTargetType(int copyNumber) { return null; }
-}
-
-class DonalHeraldOfWingsWatcher extends Watcher {
-
-    private boolean abilityUsedThisTurn = false;
-
-    DonalHeraldOfWingsWatcher() { super(WatcherScope.GAME); }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        // get event source. get source's source. check that event's identifier
-        if (event.getType() == GameEvent.EventType.COPIED_STACKOBJECT) {
-            Object[] stackArray = game.getStack().toArray();
-
-            // If Donal copied a spell, the spell copy will be on top of the stack, and the triggered abiltiy will be just below.
-            // The code will still be resolving DonalHeraldOfWingsEffect.
-            if (stackArray.length > 1) {
-                if (stackArray[1] instanceof StackAbility) {
-                    StackAbility stackAbility = (StackAbility) stackArray[1];
-                    if (!stackAbility.getAbilities().isEmpty()) {
-                        if (stackAbility.getAbilities().get(0).getIdentifier() == MageIdentifier.DonalHeraldOfWingsWatcher) {
-                            abilityUsedThisTurn = true;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        abilityUsedThisTurn = false;
-    }
-
-    boolean wasAbilityUsedThisTurn() { return abilityUsedThisTurn; }
 }
