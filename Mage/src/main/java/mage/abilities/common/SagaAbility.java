@@ -28,6 +28,7 @@ import java.util.Arrays;
 public class SagaAbility extends SimpleStaticAbility {
 
     private final SagaChapter maxChapter;
+    private final boolean showSacText;
 
     public SagaAbility(Card card) {
         this(card, SagaChapter.CHAPTER_III);
@@ -36,6 +37,7 @@ public class SagaAbility extends SimpleStaticAbility {
     public SagaAbility(Card card, SagaChapter maxChapter) {
         super(Zone.ALL, new AddCountersSourceEffect(CounterType.LORE.createInstance()));
         this.maxChapter = maxChapter;
+        this.showSacText = card.getSecondCardFace() == null;
         this.setRuleVisible(true);
         this.setRuleAtTheTop(true);
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()));
@@ -46,6 +48,7 @@ public class SagaAbility extends SimpleStaticAbility {
     public SagaAbility(final SagaAbility ability) {
         super(ability);
         this.maxChapter = ability.maxChapter;
+        this.showSacText = ability.showSacText;
     }
 
     public void addChapterEffect(Card card, SagaChapter chapter, Effect... effects) {
@@ -105,7 +108,8 @@ public class SagaAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return "<i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after " + maxChapter.toString() + ".)</i> ";
+        return "<i>(As this Saga enters and after your draw step, add a lore counter."
+                + (showSacText ? " Sacrifice after " + maxChapter.toString() + '.' : "") + ")</i> ";
     }
 
     @Override
