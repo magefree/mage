@@ -6,6 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantBlockAttachedEffect;
@@ -43,7 +44,7 @@ public final class ClawingTorment extends CardImpl {
                 new BoostEnchantedEffect(-1, -1), condition,
                 "as long as enchanted permanent is a creature, it gets -1/-1"
         ));
-        ability.addEffect(new ConditionalContinuousEffect(
+        ability.addEffect(new ConditionalRestrictionEffect(
                 new CantBlockAttachedEffect(AttachmentType.AURA), condition, "and can't block"
         ));
         this.addAbility(ability);
