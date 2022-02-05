@@ -28,9 +28,9 @@ import java.util.*;
  */
 public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
-    private Set<Class<? extends Ability>> abilityClazzesToRemove;
+    private final Set<Class<? extends Ability>> abilityClazzesToRemove;
     private final List<Permanent> addedTokenPermanents;
-    private final List<Ability> additionalAbilities = new ArrayList<>();
+    private final List<Ability> additionalAbilities;
     private final CardType additionalCardType;
     private SubType additionalSubType;
     private final UUID attackedPlayer;
@@ -110,7 +110,9 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.tokenPower = power;
         this.tokenToughness = toughness;
         this.gainsFlying = gainsFlying;
+
         this.abilityClazzesToRemove = new HashSet<>();
+        this.additionalAbilities = new ArrayList<>();
     }
 
     public CreateTokenCopyTargetEffect(final CreateTokenCopyTargetEffect effect) {
@@ -118,22 +120,23 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
         this.abilityClazzesToRemove = new HashSet<>(effect.abilityClazzesToRemove);
         this.addedTokenPermanents = new ArrayList<>(effect.addedTokenPermanents);
-        //this.additionalAbilities
+        this.additionalAbilities = new ArrayList<>(effect.additionalAbilities);
         this.additionalCardType = effect.additionalCardType;
         this.additionalSubType = effect.additionalSubType;
         this.attackedPlayer = effect.attackedPlayer;
         this.attacking = effect.attacking;
         this.becomesArtifact = effect.becomesArtifact;
         this.color = effect.color;
-        //this.counter
+        this.counter = effect.counter;
         this.gainsFlying = effect.gainsFlying;
         this.hasHaste = effect.hasHaste;
         this.isntLegendary = effect.isntLegendary;
         this.number = effect.number;
-        //this.numberOfCounters
+        this.numberOfCounters = effect.numberOfCounters;
         this.onlySubType = effect.onlySubType;
         this.playerId = effect.playerId;
-        //this.savedPermanent
+        this.savedPermanent = effect.savedPermanent;
+        this.startingLoyalty = effect.startingLoyalty;
         this.tapped = effect.tapped;
         this.tokenPower = effect.tokenPower;
         this.tokenToughness = effect.tokenToughness;
@@ -367,7 +370,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     }
 
     public void addAdditionalAbilities(Ability... abilities) {
-        Arrays.stream(abilities).forEach(this.additionalAbilities::add);
+        this.additionalAbilities.addAll(Arrays.asList(abilities));
     }
 
 
