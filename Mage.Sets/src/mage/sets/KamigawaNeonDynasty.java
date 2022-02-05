@@ -220,6 +220,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Thundersteel Colossus", 261, Rarity.COMMON, mage.cards.t.ThundersteelColossus.class));
         cards.add(new SetCardInfo("Touch the Spirit Realm", 40, Rarity.UNCOMMON, mage.cards.t.TouchTheSpiritRealm.class));
         cards.add(new SetCardInfo("Towashi Guide-Bot", 262, Rarity.UNCOMMON, mage.cards.t.TowashiGuideBot.class));
+        cards.add(new SetCardInfo("Towashi Songshaper", 167, Rarity.COMMON, mage.cards.t.TowashiSongshaper.class));
         cards.add(new SetCardInfo("Tranquil Cove", 280, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Tribute to Horobi", 124, Rarity.RARE, mage.cards.t.TributeToHorobi.class));
         cards.add(new SetCardInfo("Twinshot Sniper", 168, Rarity.UNCOMMON, mage.cards.t.TwinshotSniper.class));
