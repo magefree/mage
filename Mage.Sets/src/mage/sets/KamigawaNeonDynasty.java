@@ -169,6 +169,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Ogre-Head Helm", 155, Rarity.RARE, mage.cards.o.OgreHeadHelm.class));
         cards.add(new SetCardInfo("Okiba Reckoner Raid", 117, Rarity.COMMON, mage.cards.o.OkibaReckonerRaid.class));
         cards.add(new SetCardInfo("Oni-Cult Anvil", 230, Rarity.UNCOMMON, mage.cards.o.OniCultAnvil.class));
+        cards.add(new SetCardInfo("Orochi Merge-Keeper", 203, Rarity.UNCOMMON, mage.cards.o.OrochiMergeKeeper.class));
         cards.add(new SetCardInfo("Otawara, Soaring City", 271, Rarity.RARE, mage.cards.o.OtawaraSoaringCity.class));
         cards.add(new SetCardInfo("Papercraft Decoy", 253, Rarity.COMMON, mage.cards.p.PapercraftDecoy.class));
         cards.add(new SetCardInfo("Patchwork Automaton", 254, Rarity.UNCOMMON, mage.cards.p.PatchworkAutomaton.class));
