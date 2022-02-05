@@ -108,6 +108,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Heir of the Ancient Fang", 191, Rarity.COMMON, mage.cards.h.HeirOfTheAncientFang.class));
         cards.add(new SetCardInfo("Hidetsugu, Devouring Chaos", 99, Rarity.RARE, mage.cards.h.HidetsuguDevouringChaos.class));
         cards.add(new SetCardInfo("High-Speed Hoverbike", 247, Rarity.UNCOMMON, mage.cards.h.HighSpeedHoverbike.class));
+        cards.add(new SetCardInfo("Hinata, Dawn-Crowned", 222, Rarity.RARE, mage.cards.h.HinataDawnCrowned.class));
         cards.add(new SetCardInfo("Historian's Wisdom", 192, Rarity.UNCOMMON, mage.cards.h.HistoriansWisdom.class));
         cards.add(new SetCardInfo("Hotshot Mechanic", 16, Rarity.UNCOMMON, mage.cards.h.HotshotMechanic.class));
         cards.add(new SetCardInfo("Imperial Moth", 4, Rarity.COMMON, mage.cards.i.ImperialMoth.class));
