@@ -81,6 +81,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Futurist Sentinel", 54, Rarity.COMMON, mage.cards.f.FuturistSentinel.class));
         cards.add(new SetCardInfo("Generous Visitor", 185, Rarity.UNCOMMON, mage.cards.g.GenerousVisitor.class));
         cards.add(new SetCardInfo("Geothermal Kami", 186, Rarity.COMMON, mage.cards.g.GeothermalKami.class));
+        cards.add(new SetCardInfo("Gift of Wrath", 143, Rarity.COMMON, mage.cards.g.GiftOfWrath.class));
         cards.add(new SetCardInfo("Gloomshrieker", 219, Rarity.UNCOMMON, mage.cards.g.Gloomshrieker.class));
         cards.add(new SetCardInfo("Go-Shintai of Ancient Wars", 144, Rarity.UNCOMMON, mage.cards.g.GoShintaiOfAncientWars.class));
         cards.add(new SetCardInfo("Go-Shintai of Boundless Vigor", 187, Rarity.UNCOMMON, mage.cards.g.GoShintaiOfBoundlessVigor.class));
