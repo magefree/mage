@@ -26,6 +26,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         this.hasBasicLands = true;
         this.numBoosterDoubleFaced = 1; // temporary test fix
 
+        cards.add(new SetCardInfo("Acquisition Octopus", 44, Rarity.UNCOMMON, mage.cards.a.AcquisitionOctopus.class));
         cards.add(new SetCardInfo("Akki Ember-Keeper", 130, Rarity.COMMON, mage.cards.a.AkkiEmberKeeper.class));
         cards.add(new SetCardInfo("Akki Ronin", 131, Rarity.COMMON, mage.cards.a.AkkiRonin.class));
         cards.add(new SetCardInfo("Akki War Paint", 132, Rarity.COMMON, mage.cards.a.AkkiWarPaint.class));
