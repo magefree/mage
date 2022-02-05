@@ -8,6 +8,7 @@ package mage;
  */
 public enum MageIdentifier {
     CemeteryIlluminatorWatcher,
+    DonalHeraldOfWingsWatcher,
     GisaAndGeralfWatcher,
     HaukensInsightWatcher,
     KaradorGhostChieftainWatcher,
