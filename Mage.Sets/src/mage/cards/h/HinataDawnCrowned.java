@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -72,10 +71,7 @@ class HinataDawnCrownedOwnEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Set<UUID> targets = game.inCheckPlayableState() ?
-                CardUtil.getAllPossibleTargets(abilityToModify, game):
-                CardUtil.getAllSelectedTargets(abilityToModify, game);
-        CardUtil.reduceCost(abilityToModify, (int)targets.stream().count());
+        CardUtil.reduceCost(abilityToModify, HinataDawnCrownedEffectUtility.getTargetCount(game, abilityToModify));
         return true;
     }
 
@@ -104,10 +100,7 @@ class HinataDawnCrownedOpponentsEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Set<UUID> targets = game.inCheckPlayableState() ?
-                CardUtil.getAllPossibleTargets(abilityToModify, game):
-                CardUtil.getAllSelectedTargets(abilityToModify, game);
-        CardUtil.increaseCost(abilityToModify, (int)targets.stream().count());
+        CardUtil.increaseCost(abilityToModify, HinataDawnCrownedEffectUtility.getTargetCount(game, abilityToModify));
         return true;
     }
 
@@ -115,5 +108,15 @@ class HinataDawnCrownedOpponentsEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return abilityToModify instanceof SpellAbility
                 && !abilityToModify.isControlledBy(source.getControllerId());
+    }
+}
+
+final class HinataDawnCrownedEffectUtility
+{
+    public static int getTargetCount(Game game, Ability abilityToModify)
+    {
+        return (int)(game.inCheckPlayableState() ?
+                CardUtil.getAllPossibleTargets(abilityToModify, game).stream().count():
+                CardUtil.getAllSelectedTargets(abilityToModify, game).stream().count());
     }
 }
