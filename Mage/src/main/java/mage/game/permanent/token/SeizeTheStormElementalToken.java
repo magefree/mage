@@ -3,8 +3,10 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -16,6 +18,10 @@ import java.util.Arrays;
  * @author TheElk801
  */
 public final class SeizeTheStormElementalToken extends TokenImpl {
+
+    public SeizeTheStormElementalToken() {
+        this(StaticValue.get(0), new StaticHint(""));
+    }
 
     public SeizeTheStormElementalToken(DynamicValue xValue, Hint hint) {
         super("Elemental", "red Elemental creature token with trample and " +

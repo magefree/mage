@@ -23,6 +23,9 @@ import mage.util.RandomUtil;
 
 import java.util.*;
 
+/**
+ * Each token must have default constructor without params (GUI require for card viewer)
+ */
 public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     protected String description;

@@ -9,6 +9,10 @@ import java.util.Arrays;
 
 public class ZombieMenaceToken extends TokenImpl {
 
+    public ZombieMenaceToken() {
+        this(0);
+    }
+
     public ZombieMenaceToken(int xValue) {
         super("Zombie", "X/X blue and black Zombie creature token with menace");
         cardType.add(CardType.CREATURE);
