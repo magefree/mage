@@ -21,38 +21,36 @@ import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 import mage.util.functions.EmptyCopyApplier;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author LevelX2
  */
 public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
-    private final UUID playerId;
-    private final CardType additionalCardType;
-    private boolean hasHaste;
-    private int number;
     private final List<Permanent> addedTokenPermanents;
+    private final List<Ability> additionalAbilities = new ArrayList();
+    private final CardType additionalCardType;
     private SubType additionalSubType;
-    private SubType onlySubType;
-    private final boolean tapped;
-    private final boolean attacking;
     private final UUID attackedPlayer;
-    private final int tokenPower;
-    private final int tokenToughness;
-    private final boolean gainsFlying;
+    private final boolean attacking;
     private boolean becomesArtifact;
     private ObjectColor color;
-    private boolean useLKI = false;
-    private boolean isntLegendary = false;
-    private int startingLoyalty = -1;
-    private final List<Ability> additionalAbilities = new ArrayList();
-    private Permanent savedPermanent = null;
     private CounterType counter;
+    private final boolean gainsFlying;
+    private boolean hasHaste;
+    private boolean isntLegendary = false;
+    private int number;
     private int numberOfCounters;
+    private SubType onlySubType;
+    private final UUID playerId;
+    private final boolean tapped;
+    private Permanent savedPermanent = null;
+    private int startingLoyalty = -1;
+    private final int tokenPower;
+    private final int tokenToughness;
+    private boolean useLKI = false;
+
 
     public CreateTokenCopyTargetEffect(boolean useLKI) {
         this();
@@ -115,23 +113,24 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     public CreateTokenCopyTargetEffect(final CreateTokenCopyTargetEffect effect) {
         super(effect);
-        this.playerId = effect.playerId;
-        this.additionalCardType = effect.additionalCardType;
-        this.hasHaste = effect.hasHaste;
+
         this.addedTokenPermanents = new ArrayList<>(effect.addedTokenPermanents);
-        this.number = effect.number;
+        this.additionalCardType = effect.additionalCardType;
         this.additionalSubType = effect.additionalSubType;
-        this.onlySubType = effect.onlySubType;
-        this.tapped = effect.tapped;
         this.attacking = effect.attacking;
         this.attackedPlayer = effect.attackedPlayer;
-        this.tokenPower = effect.tokenPower;
-        this.tokenToughness = effect.tokenToughness;
-        this.gainsFlying = effect.gainsFlying;
         this.becomesArtifact = effect.becomesArtifact;
         this.color = effect.color;
-        this.useLKI = effect.useLKI;
+        this.gainsFlying = effect.gainsFlying;
+        this.hasHaste = effect.hasHaste;
         this.isntLegendary = effect.isntLegendary;
+        this.number = effect.number;
+        this.onlySubType = effect.onlySubType;
+        this.playerId = effect.playerId;
+        this.tapped = effect.tapped;
+        this.tokenPower = effect.tokenPower;
+        this.tokenToughness = effect.tokenToughness;
+        this.useLKI = effect.useLKI;
     }
 
     @Override
