@@ -21,5 +21,6 @@ public final class NeonDynastyCommander extends ExpansionSet {
 
         cards.add(new SetCardInfo("Chishiro, the Shattered Blade", 1, Rarity.MYTHIC, mage.cards.c.ChishiroTheShatteredBlade.class));
         cards.add(new SetCardInfo("Kotori, Pilot Prodigy", 2, Rarity.MYTHIC, mage.cards.k.KotoriPilotProdigy.class));
+        cards.add(new SetCardInfo("Myojin of Roaring Blades", 36, Rarity.RARE, mage.cards.m.MyojinOfRoaringBlades.class));
     }
 }
