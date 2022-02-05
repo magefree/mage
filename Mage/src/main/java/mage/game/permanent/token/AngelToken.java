@@ -20,7 +20,7 @@ public final class AngelToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
 
         availableImageSetCodes = Arrays.asList("APC", "AVR", "C14", "C15", "C18", "CON", "DDQ", "GTC",
-                "ISD", "M14", "MM3", "NEM", "OGW", "ORI", "PC2", "SCG", "SOI", "ZEN", "C20", "M21", "CMR", "AFC");
+                "ISD", "M14", "MM3", "NEM", "OGW", "ORI", "PC2", "SCG", "SOI", "ZEN", "C20", "M21", "CMR", "AFC", "VOC");
     }
 
     public AngelToken(final AngelToken token) {

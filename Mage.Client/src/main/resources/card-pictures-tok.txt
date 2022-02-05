@@ -1636,3 +1636,11 @@
 |Generate|TOK:MID|Wolf|||WolfToken|
 |Generate|TOK:MID|Zombie|1||ZombieDecayedToken|
 |Generate|TOK:MID|Zombie|2||ZombieMenaceToken|
+
+# VOC
+|Generate|TOK:VOC|Angel|||AngelToken|
+|Generate|TOK:VOC|Bat|||BatToken|
+|Generate|TOK:VOC|Clue|||ClueArtifactToken|
+|Generate|TOK:VOC|Spirit|1||SpiritToken|
+|Generate|TOK:VOC|Spirit|2||AnotherSpiritToken|
+|Generate|TOK:VOC|Thopter|||ThopterColorlessToken|

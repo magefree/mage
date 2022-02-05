@@ -683,6 +683,14 @@ public class ScryfallImageSupportTokens {
             put("MID/Zombie/1", "https://api.scryfall.com/cards/tmid/5/en?format=image"); // decayed
             put("MID/Zombie/2", "https://api.scryfall.com/cards/tmid/15/en?format=image"); // menace
 
+            // VOC
+            put("VOC/Angel", "https://api.scryfall.com/cards/tvoc/2/en?format=image");
+            put("VOC/Bat", "https://api.scryfall.com/cards/tvoc/4/en?format=image");
+            put("VOC/Clue", "https://api.scryfall.com/cards/tvoc/5/en?format=image");
+            put("VOC/Spirit/1", "https://api.scryfall.com/cards/tvoc/1/en?format=image"); // 1/1
+            put("VOC/Spirit/2", "https://api.scryfall.com/cards/tvoc/3/en?format=image"); // 3/3
+            put("VOC/Thopter", "https://api.scryfall.com/cards/tvoc/6/en?format=image");
+
 
             // generate supported sets
             supportedSets.clear();
