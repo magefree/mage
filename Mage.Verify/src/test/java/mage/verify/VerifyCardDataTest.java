@@ -1411,6 +1411,10 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "double-faced cards should not have transform ability on the back");
         }
 
+        if (card.getSecondCardFace() != null && !card.getSecondCardFace().isNightCard()) {
+            fail(card, "abilities", "the back face of a double-faced card should be nightCard = true");
+        }
+
         // special check: missing or wrong ability/effect hints
         Map<Class, String> hints = new HashMap<>();
 
