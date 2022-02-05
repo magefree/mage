@@ -56,6 +56,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Boseiju Reaches Skyward", 177, Rarity.UNCOMMON, mage.cards.b.BoseijuReachesSkyward.class));
         cards.add(new SetCardInfo("Branch of Boseiju", 177, Rarity.UNCOMMON, mage.cards.b.BranchOfBoseiju.class));
         cards.add(new SetCardInfo("Brilliant Restoration", 7, Rarity.RARE, mage.cards.b.BrilliantRestoration.class));
+        cards.add(new SetCardInfo("Bronze Cudgels", 240, Rarity.UNCOMMON, mage.cards.b.BronzeCudgels.class));
         cards.add(new SetCardInfo("Bronzeplate Boar", 135, Rarity.UNCOMMON, mage.cards.b.BronzeplateBoar.class));
         cards.add(new SetCardInfo("Brute Suit", 241, Rarity.COMMON, mage.cards.b.BruteSuit.class));
         cards.add(new SetCardInfo("Careful Cultivation", 178, Rarity.COMMON, mage.cards.c.CarefulCultivation.class));
