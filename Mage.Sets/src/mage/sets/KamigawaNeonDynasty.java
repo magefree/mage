@@ -125,6 +125,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Imperial Recovery Unit", 18, Rarity.UNCOMMON, mage.cards.i.ImperialRecoveryUnit.class));
         cards.add(new SetCardInfo("Imperial Subduer", 19, Rarity.COMMON, mage.cards.i.ImperialSubduer.class));
         cards.add(new SetCardInfo("Inkrise Infiltrator", 100, Rarity.COMMON, mage.cards.i.InkriseInfiltrator.class));
+        cards.add(new SetCardInfo("Intercessor's Arrest", 20, Rarity.COMMON, mage.cards.i.IntercessorsArrest.class));
         cards.add(new SetCardInfo("Inventive Iteration", 57, Rarity.RARE, mage.cards.i.InventiveIteration.class));
         cards.add(new SetCardInfo("Invigorating Hot Spring", 223, Rarity.UNCOMMON, mage.cards.i.InvigoratingHotSpring.class));
         cards.add(new SetCardInfo("Invoke Despair", 101, Rarity.RARE, mage.cards.i.InvokeDespair.class));
