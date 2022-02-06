@@ -1325,8 +1325,9 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public void setTargetAdjuster(TargetAdjuster targetAdjuster) {
+    public AbilityImpl setTargetAdjuster(TargetAdjuster targetAdjuster) {
         this.targetAdjuster = targetAdjuster;
+        return this;
     }
 
     @Override

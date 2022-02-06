@@ -229,6 +229,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Selfless Samurai", 35, Rarity.UNCOMMON, mage.cards.s.SelflessSamurai.class));
         cards.add(new SetCardInfo("Seshiro's Living Legacy", 210, Rarity.COMMON, mage.cards.s.SeshirosLivingLegacy.class));
         cards.add(new SetCardInfo("Seven-Tail Mentor", 36, Rarity.COMMON, mage.cards.s.SevenTailMentor.class));
+        cards.add(new SetCardInfo("Shigeki, Jukai Visionary", 206, Rarity.RARE, mage.cards.s.ShigekiJukaiVisionary.class));
         cards.add(new SetCardInfo("Short Circuit", 78, Rarity.COMMON, mage.cards.s.ShortCircuit.class));
         cards.add(new SetCardInfo("Shrine Steward", 259, Rarity.COMMON, mage.cards.s.ShrineSteward.class));
         cards.add(new SetCardInfo("Silver-Fur Master", 236, Rarity.UNCOMMON, mage.cards.s.SilverFurMaster.class));
