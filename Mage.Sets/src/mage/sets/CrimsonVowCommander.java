@@ -131,6 +131,8 @@ public final class CrimsonVowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Scion of Opulence", 28, Rarity.RARE, mage.cards.s.ScionOfOpulence.class));
         cards.add(new SetCardInfo("Shacklegeist", 112, Rarity.RARE, mage.cards.s.Shacklegeist.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 181, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
+        cards.add(new SetCardInfo("Shadowgrange Archfiend", 22, Rarity.RARE, mage.cards.s.ShadowgrangeArchfiend.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shadowgrange Archfiend", 60, Rarity.RARE, mage.cards.s.ShadowgrangeArchfiend.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sinister Waltz", 30, Rarity.RARE, mage.cards.s.SinisterWaltz.class));
         cards.add(new SetCardInfo("Sire of the Storm", 113, Rarity.UNCOMMON, mage.cards.s.SireOfTheStorm.class));
         cards.add(new SetCardInfo("Sky Diamond", 167, Rarity.COMMON, mage.cards.s.SkyDiamond.class));
