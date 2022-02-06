@@ -71,9 +71,11 @@ class InvokeDespairEffect extends OneShotEffect {
         target.setNotTarget(true);
         opponent.choose(outcome, target, source.getSourceId(), game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
+        boolean sacrificed = false;
         if (permanent != null) {
-            permanent.sacrifice(source, game);
-        } else {
+            sacrificed = permanent.sacrifice(source, game);
+        }
+        if (!sacrificed) {
             opponent.loseLife(2, game, source, false);
             controller.drawCards(1, source, game);
         }
@@ -81,9 +83,11 @@ class InvokeDespairEffect extends OneShotEffect {
         target.setNotTarget(true);
         opponent.choose(outcome, target, source.getSourceId(), game);
         permanent = game.getPermanent(target.getFirstTarget());
+        sacrificed = false;
         if (permanent != null) {
-            permanent.sacrifice(source, game);
-        } else {
+            sacrificed = permanent.sacrifice(source, game);
+        }
+        if (!sacrificed) {
             opponent.loseLife(2, game, source, false);
             controller.drawCards(1, source, game);
         }
@@ -91,9 +95,11 @@ class InvokeDespairEffect extends OneShotEffect {
         target.setNotTarget(true);
         opponent.choose(outcome, target, source.getSourceId(), game);
         permanent = game.getPermanent(target.getFirstTarget());
+        sacrificed = false;
         if (permanent != null) {
-            permanent.sacrifice(source, game);
-        } else {
+            sacrificed = permanent.sacrifice(source, game);
+        }
+        if (!sacrificed) {
             opponent.loseLife(2, game, source, false);
             controller.drawCards(1, source, game);
         }
