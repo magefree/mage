@@ -207,6 +207,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Roaring Earth", 204, Rarity.UNCOMMON, mage.cards.r.RoaringEarth.class));
         cards.add(new SetCardInfo("Rugged Highlands", 273, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Runaway Trash-Bot", 257, Rarity.UNCOMMON, mage.cards.r.RunawayTrashBot.class));
+        cards.add(new SetCardInfo("Saiba Trespassers", 77, Rarity.COMMON, mage.cards.s.SaibaTrespassers.class));
         cards.add(new SetCardInfo("Satoru Umezawa", 234, Rarity.RARE, mage.cards.s.SatoruUmezawa.class));
         cards.add(new SetCardInfo("Satsuki, the Living Lore", 235, Rarity.RARE, mage.cards.s.SatsukiTheLivingLore.class));
         cards.add(new SetCardInfo("Scoured Barrens", 274, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
@@ -220,7 +221,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Seven-Tail Mentor", 36, Rarity.COMMON, mage.cards.s.SevenTailMentor.class));
         cards.add(new SetCardInfo("Short Circuit", 78, Rarity.COMMON, mage.cards.s.ShortCircuit.class));
         cards.add(new SetCardInfo("Shrine Steward", 259, Rarity.COMMON, mage.cards.s.ShrineSteward.class));
-        cards.add(new SetCardInfo("Siba Trespassers", 77, Rarity.COMMON, mage.cards.s.SibaTrespassers.class));
         cards.add(new SetCardInfo("Silver-Fur Master", 236, Rarity.UNCOMMON, mage.cards.s.SilverFurMaster.class));
         cards.add(new SetCardInfo("Simian Sling", 163, Rarity.COMMON, mage.cards.s.SimianSling.class));
         cards.add(new SetCardInfo("Sky-Blessed Samurai", 37, Rarity.UNCOMMON, mage.cards.s.SkyBlessedSamurai.class));

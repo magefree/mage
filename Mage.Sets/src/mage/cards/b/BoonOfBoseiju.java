@@ -30,7 +30,7 @@ public final class BoonOfBoseiju extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(
                 BoonOfBoseijuValue.instance, BoonOfBoseijuValue.instance, Duration.EndOfTurn
         ));
-        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that creature"));
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap it"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addHint(BoonOfBoseijuValue.getHint());
     }

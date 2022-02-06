@@ -52,8 +52,8 @@ class BronzeCudgelsEffect extends OneShotEffect {
 
     BronzeCudgelsEffect() {
         super(Outcome.Benefit);
-        staticText = "equipped creature gets +X/+0 until end of turn, " +
-                "where X is the number of times this ability has resolved this turn";
+        staticText = "until end of turn, equipped creature gets +X/+0, " +
+                "where X is the number of times this ability has resolved this turn.";
     }
 
     private BronzeCudgelsEffect(final BronzeCudgelsEffect effect) {

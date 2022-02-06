@@ -63,7 +63,7 @@ class GreasefangOkibaBossEffect extends OneShotEffect {
 
     public GreasefangOkibaBossEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "return target Vehicle card from your graveyard to the battlefield. It gains haste. Return it your hand at beginning of the next end step";
+        this.staticText = "return target Vehicle card from your graveyard to the battlefield. It gains haste. Return it to its owner's hand at the beginning of your next end step";
     }
 
     private GreasefangOkibaBossEffect(final GreasefangOkibaBossEffect effect) {

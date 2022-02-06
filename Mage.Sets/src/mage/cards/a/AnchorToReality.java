@@ -40,7 +40,7 @@ public final class AnchorToReality extends CardImpl {
         // As an additional cost to cast this spell, sacrifice an artifact or creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
 
-        // Search your library for an Equipment or Vehicle card, put it onto the battlefield, then shuffle. If it has mana value less than the sacrificed permanent's mana value, scry 2.
+        // Search your library for an Equipment or Vehicle card, put that card onto the battlefield, then shuffle. If it has mana value less than the sacrificed permanent's mana value, scry 2.
         this.getSpellAbility().addEffect(new AnchorToRealityEffect());
     }
 
@@ -64,7 +64,7 @@ class AnchorToRealityEffect extends OneShotEffect {
 
     public AnchorToRealityEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Search your library for an Equipment or Vehicle card, put it onto the battlefield, then shuffle. If it has mana value less than the sacrificed permanent's mana value, scry 2";
+        this.staticText = "Search your library for an Equipment or Vehicle card, put that card onto the battlefield, then shuffle. If it has mana value less than the sacrificed permanent's mana value, scry 2";
     }
 
     private AnchorToRealityEffect(final AnchorToRealityEffect effect) {

@@ -46,13 +46,11 @@ public final class KodamaOfTheWestTree extends CardImpl {
                 TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter
         ).setText("modified creatures you control have trample")));
 
-        // Whenever a modified creature you control deals combat damage to an opponent, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+        // Whenever a modified creature you control deals combat damage to a player, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(
                         new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
-                ), filter, false, SetTargetPointer.NONE, true,
-                false, TargetController.OPPONENT
+                ), filter, false, SetTargetPointer.NONE, true
         ));
     }
 

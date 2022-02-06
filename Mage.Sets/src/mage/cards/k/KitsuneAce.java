@@ -35,7 +35,7 @@ public final class KitsuneAce extends CardImpl {
         // • That vehicle gains first strike until end of turn.
         Ability ability = new AttacksCreatureYouControlTriggeredAbility(
                 new GainAbilityTargetEffect(FirstStrikeAbility.getInstance())
-                        .setText("that vehicle gains first strike until end of turn"),
+                        .setText("that Vehicle gains first strike until end of turn"),
                 false, filter, true
         );
 

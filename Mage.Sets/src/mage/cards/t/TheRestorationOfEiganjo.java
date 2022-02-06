@@ -51,9 +51,9 @@ public final class TheRestorationOfEiganjo extends CardImpl {
                 )
         );
 
-        // II — You may discard a card. When you do, return target permanent card with mana value 2 or less from your graveyard to the battlefield.
+        // II — You may discard a card. When you do, return target permanent card with mana value 2 or less from your graveyard to the battlefield tapped
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldTargetEffect(), false
+                new ReturnFromGraveyardToBattlefieldTargetEffect(true), false
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter2));
         sagaAbility.addChapterEffect(

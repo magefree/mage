@@ -17,9 +17,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SibaTrespassers extends CardImpl {
+public final class SaibaTrespassers extends CardImpl {
 
-    public SibaTrespassers(UUID ownerId, CardSetInfo setInfo) {
+    public SaibaTrespassers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}");
 
         this.subtype.add(SubType.MOONFOLK);
@@ -27,7 +27,7 @@ public final class SibaTrespassers extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 
-        // Channel — {3}{U}, Discard Siba Trespassers: Tap up to two target creatures you don't control. Those creatures don't untap during their controller's next untap step.
+        // Channel — {3}{U}, Discard Saiba Trespassers: Tap up to two target creatures you don't control. Those creatures don't untap during their controller's next untap step.
         Ability ability = new ChannelAbility(
                 "{3}{U}", new TapTargetEffect()
                 .setText("tap up to two target creatures you don't control")
@@ -37,12 +37,12 @@ public final class SibaTrespassers extends CardImpl {
         this.addAbility(ability);
     }
 
-    private SibaTrespassers(final SibaTrespassers card) {
+    private SaibaTrespassers(final SaibaTrespassers card) {
         super(card);
     }
 
     @Override
-    public SibaTrespassers copy() {
-        return new SibaTrespassers(this);
+    public SaibaTrespassers copy() {
+        return new SaibaTrespassers(this);
     }
 }
