@@ -49,7 +49,7 @@ public final class GiftOfWrath extends CardImpl {
         ));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(
                 new MenaceAbility(), AttachmentType.AURA
-        ), condition, "and has menace"));
+        ), condition, "and has menace. <i>(It can't be blocked except by two or more creatures.)</i>"));
         this.addAbility(ability);
 
         // When Gift of Wrath leaves the battlefield, create a 2/2 red Spirit creature token with menace.

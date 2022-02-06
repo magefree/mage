@@ -36,7 +36,8 @@ public final class KaitosPursuit extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 new MenaceAbility(false), Duration.EndOfTurn, filter
-        ));
+        ).setText("Ninjas and Rogues you control gain menace until end of turn. " +
+                "<i>(They can't be blocked except by two or more creatures.)</i>"));
     }
 
     private KaitosPursuit(final KaitosPursuit card) {

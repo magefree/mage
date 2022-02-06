@@ -90,7 +90,7 @@ public class VerifyCardDataTest {
 
         // power-toughness
         skipListCreate(SKIP_LIST_PT);
-        skipListAddName(SKIP_LIST_PT, "NEO", "Futurist Sentinel"); // temporary
+//        skipListAddName(SKIP_LIST_PT, "NEO", "Futurist Sentinel"); // temporary
 
         // color
         skipListCreate(SKIP_LIST_COLOR);

@@ -48,7 +48,8 @@ public final class KamiOfRestlessShadows extends CardImpl {
         // • Put target creature card from your graveyard on top of your library.
         Mode mode = new Mode(new PutOnLibraryTargetEffect(true));
         mode.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.getSpellAbility().addMode(mode);
+        ability.addMode(mode);
+        this.addAbility(ability);
     }
 
     private KamiOfRestlessShadows(final KamiOfRestlessShadows card) {
