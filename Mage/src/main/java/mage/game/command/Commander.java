@@ -313,10 +313,12 @@ public class Commander implements CommandObject {
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
+        this.getSubtype().setIsAllCreatureTypes(value && (this.isTribal() || this.isCreature()));
     }
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
+        this.getSubtype(game).setIsAllCreatureTypes(value && (this.isTribal(game) || this.isCreature(game)));
     }
 
     @Override
