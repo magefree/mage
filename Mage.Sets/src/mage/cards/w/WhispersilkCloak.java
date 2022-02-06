@@ -32,7 +32,7 @@ public final class WhispersilkCloak extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAttachedEffect(AttachmentType.EQUIPMENT)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT)));
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     protected WhispersilkCloak(WhispersilkCloak me) {

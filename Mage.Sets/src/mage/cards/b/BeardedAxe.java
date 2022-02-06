@@ -46,7 +46,7 @@ public final class BeardedAxe extends CardImpl {
         ).addHint(hint));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private BeardedAxe(final BeardedAxe card) {

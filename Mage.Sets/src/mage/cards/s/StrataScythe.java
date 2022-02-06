@@ -32,9 +32,15 @@ public final class StrataScythe extends CardImpl {
     public StrataScythe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.EQUIPMENT);
+
+        // Imprint — When Strata Scythe enters the battlefield, search your library for a land card, exile it, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new StrataScytheImprintEffect()).setAbilityWord(AbilityWord.IMPRINT));
+
+        // Equipped creature gets +1/+1 for each land on the battlefield with the same name as the exiled card.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(SameNameAsExiledCountValue.getInstance(), SameNameAsExiledCountValue.getInstance())));
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
+
+        // Equip {3}
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
     }
 
     private StrataScythe(final StrataScythe card) {

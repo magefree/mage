@@ -36,7 +36,7 @@ public final class StormriderRig extends CardImpl {
                 StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true, SetTargetPointer.PERMANENT, null, true));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
 
     }
 

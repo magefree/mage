@@ -28,8 +28,9 @@ public final class SlayersCleaver extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1));
         ability.addEffect(new SlayersCleaverEffect());
         this.addAbility(ability);
+
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{4}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{4}"), false));
     }
 
     private SlayersCleaver(final SlayersCleaver card) {

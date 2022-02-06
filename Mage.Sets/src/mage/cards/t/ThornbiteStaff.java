@@ -54,7 +54,7 @@ public final class ThornbiteStaff extends CardImpl {
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 filter, true, SetTargetPointer.PERMANENT, null));
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(4, false));
     }
 
     private ThornbiteStaff(final ThornbiteStaff card) {

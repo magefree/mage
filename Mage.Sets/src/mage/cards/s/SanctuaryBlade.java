@@ -41,7 +41,7 @@ public final class SanctuaryBlade extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
     }
 
     private SanctuaryBlade(final SanctuaryBlade card) {

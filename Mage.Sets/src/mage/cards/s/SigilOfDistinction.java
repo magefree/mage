@@ -34,7 +34,7 @@ public final class SigilOfDistinction extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // Equip—Remove a charge counter from Sigil of Distinction.
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new RemoveCountersSourceCost(CounterType.CHARGE.createInstance())));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()), false));
 
     }
 

@@ -30,7 +30,7 @@ public final class GhostfireBlade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 2)));
 
         // Equip {3}
-        Ability ability = new EquipAbility(3);
+        Ability ability = new EquipAbility(3, false);
         ability.setCostAdjuster(GhostfireBladeAdjuster.instance);
         this.addAbility(ability);
 

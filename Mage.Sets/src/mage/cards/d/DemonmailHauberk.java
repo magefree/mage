@@ -25,11 +25,14 @@ public final class DemonmailHauberk extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        // Equip - Sacrifice a creature.
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
-
         // Equipped creature gets +4/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, 2)));
+
+        // Equip - Sacrifice a creature.
+        this.addAbility(new EquipAbility(
+                Outcome.AddAbility,
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)),
+                false));
     }
 
     private DemonmailHauberk(final DemonmailHauberk card) {

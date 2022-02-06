@@ -38,7 +38,7 @@ public final class LoxodonWarhammer extends CardImpl {
         this.addAbility(ability);
 
         // Equip (: Attach to target creature you control. Equip only as a sorcery.)
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
     }
 
     private LoxodonWarhammer(final LoxodonWarhammer card) {

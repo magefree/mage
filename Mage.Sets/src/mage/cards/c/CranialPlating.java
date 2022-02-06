@@ -40,7 +40,7 @@ public final class CranialPlating extends CardImpl {
         this.addAbility(ability);
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), false));
     }
 
     private CranialPlating(final CranialPlating card) {

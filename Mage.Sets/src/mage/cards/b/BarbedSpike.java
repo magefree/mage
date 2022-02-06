@@ -32,7 +32,7 @@ public final class BarbedSpike extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 0)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private BarbedSpike(final BarbedSpike card) {

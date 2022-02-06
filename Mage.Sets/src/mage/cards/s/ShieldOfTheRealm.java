@@ -30,7 +30,7 @@ public final class ShieldOfTheRealm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new PreventDamageToAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT, 2, false)));
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.PreventDamage, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.PreventDamage, new GenericManaCost(1), false));
     }
 
     private ShieldOfTheRealm(final ShieldOfTheRealm card) {

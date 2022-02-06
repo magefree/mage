@@ -38,7 +38,7 @@ public final class LeatherArmor extends CardImpl {
         this.addAbility(ability);
 
         // Equip {0}. Activate only once each turn.
-        EquipAbility equipAbility = new EquipAbility(0);
+        EquipAbility equipAbility = new EquipAbility(0, false);
         equipAbility.setMaxActivationsPerTurn(1);
         this.addAbility(equipAbility);
     }

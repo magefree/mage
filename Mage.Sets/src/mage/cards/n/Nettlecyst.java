@@ -47,7 +47,7 @@ public final class Nettlecyst extends CardImpl {
         ).addHint(hint));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private Nettlecyst(final Nettlecyst card) {

@@ -90,7 +90,7 @@ public final class HalvarGodOfBattle extends ModalDoubleFacesCard {
         ));
 
         // Equip {1}{W}
-        this.getRightHalfCard().addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{1}{W}")));
+        this.getRightHalfCard().addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{1}{W}"), false));
     }
 
     private HalvarGodOfBattle(final HalvarGodOfBattle card) {

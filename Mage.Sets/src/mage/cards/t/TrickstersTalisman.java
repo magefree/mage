@@ -34,7 +34,7 @@ public final class TrickstersTalisman extends CardImpl {
         this.addAbility(ability.withFlavorWord("Invoke Duplicity"));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private TrickstersTalisman(final TrickstersTalisman card) {

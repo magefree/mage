@@ -44,7 +44,7 @@ public final class DivinersWand extends CardImpl {
                 filter, true, SetTargetPointer.PERMANENT, null));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), false));
 
         // Equipped creature has "Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn" and "{4}: Draw a card."
         // new abilities

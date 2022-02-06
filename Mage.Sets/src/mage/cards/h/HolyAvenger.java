@@ -40,7 +40,7 @@ public final class HolyAvenger extends CardImpl {
         this.addAbility(new DealsCombatDamageEquippedTriggeredAbility(new HolyAvengerEffect()));
 
         // Equip {2}{W}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{W}")));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{W}"), false));
     }
 
     private HolyAvenger(final HolyAvenger card) {

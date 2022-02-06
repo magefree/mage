@@ -41,7 +41,7 @@ public final class PoetsQuill extends CardImpl {
         this.addAbility(ability);
 
         // Equip {1}{B}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{1}{B}")));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{1}{B}"), false));
     }
 
     private PoetsQuill(final PoetsQuill card) {

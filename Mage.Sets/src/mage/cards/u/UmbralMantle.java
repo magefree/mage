@@ -34,7 +34,7 @@ public final class UmbralMantle extends CardImpl {
         ability.addCost(new UntapSourceCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
         // Equip {0}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl()));
+        this.addAbility(new EquipAbility(0, false));
     }
 
     private UmbralMantle(final UmbralMantle card) {

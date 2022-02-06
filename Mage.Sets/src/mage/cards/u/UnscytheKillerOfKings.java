@@ -45,7 +45,7 @@ public final class UnscytheKillerOfKings extends CardImpl {
         this.addAbility(new UnscytheKillerOfKingsTriggeredAbility(new UnscytheEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent()));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private UnscytheKillerOfKings(final UnscytheKillerOfKings card) {

@@ -36,7 +36,7 @@ public final class Deathrender extends CardImpl {
         // Whenever equipped creature dies, you may put a creature card from your hand onto the battlefield and attach Deathrender to it.
         this.addAbility(new DiesAttachedTriggeredAbility(new DeathrenderEffect(), "equipped creature"));
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private Deathrender(final Deathrender card) {

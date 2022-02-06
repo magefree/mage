@@ -30,7 +30,7 @@ public final class MoonsilverSpear extends CardImpl {
         this.addAbility(new AttacksAttachedTriggeredAbility(new CreateTokenEffect(new AngelToken())));
 
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4), false));
     }
 
     private MoonsilverSpear(final MoonsilverSpear card) {

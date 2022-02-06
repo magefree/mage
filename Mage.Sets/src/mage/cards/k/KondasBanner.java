@@ -74,7 +74,7 @@ public final class KondasBanner extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KondasBannerTypeBoostEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), target));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), target, false));
 
     }
 

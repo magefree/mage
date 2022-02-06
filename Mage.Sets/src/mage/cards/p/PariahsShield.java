@@ -33,7 +33,7 @@ public final class PariahsShield extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PariahEffect()));
         
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private PariahsShield(final PariahsShield card) {

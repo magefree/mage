@@ -44,7 +44,7 @@ public final class MindCarver extends CardImpl {
         )).addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint()));
 
         // Equip {2}{B}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{B}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{B}"), false));
     }
 
     private MindCarver(final MindCarver card) {

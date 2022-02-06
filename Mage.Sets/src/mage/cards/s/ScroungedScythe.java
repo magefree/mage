@@ -40,7 +40,7 @@ public final class ScroungedScythe extends CardImpl {
                                 "<i>(It can't be blocked except by two or more creatures.)</i>")));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private ScroungedScythe(final ScroungedScythe card) {

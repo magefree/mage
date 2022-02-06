@@ -16,24 +16,39 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class EquipAbility extends ActivatedAbilityImpl {
 
     private String costReduceText = null;
+    private final boolean showAbilityHint;
 
     public EquipAbility(int cost) {
-        this(Outcome.AddAbility, new GenericManaCost(cost));
+        this(cost, true);
+    }
+
+    public EquipAbility(int cost, boolean showAbilityHint) {
+        this(Outcome.AddAbility, new GenericManaCost(cost), showAbilityHint);
     }
 
     public EquipAbility(Outcome outcome, Cost cost) {
-        this(outcome, cost, new TargetControlledCreaturePermanent());
+        this(outcome, cost, true);
+    }
+
+    public EquipAbility(Outcome outcome, Cost cost, boolean showAbilityHint) {
+        this(outcome, cost, new TargetControlledCreaturePermanent(), showAbilityHint);
     }
 
     public EquipAbility(Outcome outcome, Cost cost, Target target) {
+        this(outcome, cost, target, true);
+    }
+
+    public EquipAbility(Outcome outcome, Cost cost, Target target, boolean showAbilityHint) {
         super(Zone.BATTLEFIELD, new EquipEffect(outcome), cost);
         this.addTarget(target);
         this.timing = TimingRule.SORCERY;
+        this.showAbilityHint = showAbilityHint;
     }
 
     public EquipAbility(final EquipAbility ability) {
         super(ability);
         this.costReduceText = ability.costReduceText;
+        this.showAbilityHint = ability.showAbilityHint;
     }
 
     public void setCostReduceText(String text) {
@@ -68,7 +83,9 @@ public class EquipAbility extends ActivatedAbilityImpl {
         if (maxActivationsPerTurn == 1) {
             sb.append(". Activate only once each turn.");
         }
-        sb.append(reminderText);
+        if (showAbilityHint) {
+            sb.append(reminderText);
+        }
         return sb.toString();
     }
 }

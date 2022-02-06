@@ -41,7 +41,7 @@ public final class ConquerorsFlail extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConquerorsFlailEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
     }
 
     private ConquerorsFlail(final ConquerorsFlail card) {

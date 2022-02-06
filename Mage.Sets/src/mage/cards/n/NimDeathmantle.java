@@ -54,7 +54,7 @@ public final class NimDeathmantle extends CardImpl {
         this.addAbility(new NimDeathmantleTriggeredAbility());
 
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(4, false));
     }
 
     private NimDeathmantle(final NimDeathmantle card) {

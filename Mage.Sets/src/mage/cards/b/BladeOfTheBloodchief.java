@@ -29,7 +29,7 @@ public final class BladeOfTheBloodchief extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new BladeOfTheBloodchiefEffect(), false));
 
         //Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private BladeOfTheBloodchief(final BladeOfTheBloodchief card) {

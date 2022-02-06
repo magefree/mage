@@ -41,7 +41,7 @@ public final class SkyclavePickAxe extends CardImpl {
         this.addAbility(new LandfallAbility(new SkyclavePickAxeEffect()));
 
         // Equip {2}{G}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{G}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{G}"), false));
     }
 
     private SkyclavePickAxe(final SkyclavePickAxe card) {

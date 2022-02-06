@@ -44,7 +44,7 @@ public final class WhispersteelDagger extends CardImpl {
         this.addAbility(ability, new WhispersteelDaggerWatcher());
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private WhispersteelDagger(final WhispersteelDagger card) {

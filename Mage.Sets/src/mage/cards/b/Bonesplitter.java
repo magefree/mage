@@ -22,9 +22,11 @@ public final class Bonesplitter extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add(SubType.EQUIPMENT);
         
-        
+        // Equipped creature gets +2/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+
+        // Equip {1}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), false));
     }
 
     private Bonesplitter(final Bonesplitter card) {

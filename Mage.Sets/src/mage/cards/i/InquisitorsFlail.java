@@ -31,7 +31,7 @@ public final class InquisitorsFlail extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InquisitorsFlailEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private InquisitorsFlail(final InquisitorsFlail card) {

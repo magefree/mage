@@ -35,7 +35,7 @@ public final class ChampionsHelm extends CardImpl {
                 new EquippedHasSupertypeCondition(SuperType.LEGENDARY), staticText)));
         
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private ChampionsHelm(final ChampionsHelm card) {

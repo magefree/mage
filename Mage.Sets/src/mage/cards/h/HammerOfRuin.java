@@ -39,7 +39,7 @@ public final class HammerOfRuin extends CardImpl {
         // Whenever equipped creature deals combat damage to a player, you may destroy target Equipment that player controls.
         this.addAbility(new HammerOfRuinTriggeredAbility());
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     public HammerOfRuin (final HammerOfRuin card) {

@@ -44,7 +44,7 @@ public final class RelicAxe extends CardImpl {
         )));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private RelicAxe(final RelicAxe card) {

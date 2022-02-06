@@ -31,7 +31,7 @@ public final class IllusionistsBracers extends CardImpl {
         this.addAbility(new IllusionistsBracersTriggeredAbility());
 
         // Equip 3
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
     }
 
     private IllusionistsBracers(final IllusionistsBracers card) {

@@ -36,7 +36,7 @@ public final class SwiftfootBoots extends CardImpl {
         this.addAbility(ability);
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), false));
 
     }
 

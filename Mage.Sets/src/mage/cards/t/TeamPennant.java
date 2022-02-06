@@ -49,11 +49,11 @@ public final class TeamPennant extends CardImpl {
 
         // Equip creature token {1}
         this.addAbility(new EquipAbility(
-                Outcome.BoostCreature, new GenericManaCost(1), new TargetPermanent(filter)
+                Outcome.BoostCreature, new GenericManaCost(1), new TargetPermanent(filter), false
         ));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private TeamPennant(final TeamPennant card) {

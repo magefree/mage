@@ -46,7 +46,7 @@ public final class ScytheOfTheWretched extends CardImpl {
         this.addAbility(new ScytheOfTheWretchedTriggeredAbility());
 
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4), false));
     }
 
     private ScytheOfTheWretched(final ScytheOfTheWretched card) {

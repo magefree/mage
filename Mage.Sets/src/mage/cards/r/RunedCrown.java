@@ -40,7 +40,7 @@ public final class RunedCrown extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private RunedCrown(final RunedCrown card) {

@@ -27,7 +27,7 @@ public final class EchoCirclet extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EchoCircletEffect()));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private EchoCirclet(final EchoCirclet card) {

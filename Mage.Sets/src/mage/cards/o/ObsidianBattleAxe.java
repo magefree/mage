@@ -42,7 +42,7 @@ public final class ObsidianBattleAxe extends CardImpl {
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 filter, true, SetTargetPointer.PERMANENT, null));
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private ObsidianBattleAxe(final ObsidianBattleAxe card) {

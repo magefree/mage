@@ -45,7 +45,7 @@ public final class StitchersGraft extends CardImpl {
         this.addAbility(new UnattachedTriggeredAbility(effect, false));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private StitchersGraft(final StitchersGraft card) {

@@ -43,7 +43,7 @@ public final class BlazingSunsteel extends CardImpl {
         this.addAbility(new BlazingSunsteelTriggeredAbility());
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4));
+        this.addAbility(new EquipAbility(4, false));
     }
 
     private BlazingSunsteel(final BlazingSunsteel card) {

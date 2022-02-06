@@ -48,7 +48,7 @@ public final class MaulOfTheSkyclaves extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}{W}{W}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{W}{W}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{W}{W}"), false));
     }
 
     private MaulOfTheSkyclaves(final MaulOfTheSkyclaves card) {

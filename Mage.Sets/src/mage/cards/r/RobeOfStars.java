@@ -36,7 +36,7 @@ public final class RobeOfStars extends CardImpl {
         ).withFlavorWord("Astral Projection"));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private RobeOfStars(final RobeOfStars card) {

@@ -34,7 +34,7 @@ public final class GrapplingHook extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4), false));
     }
 
     private GrapplingHook(final GrapplingHook card) {

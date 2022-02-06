@@ -30,7 +30,7 @@ public final class Skullclamp extends CardImpl {
         // Whenever equipped creature dies, draw two cards.
         this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(2), "equipped creature"));
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), false));
     }
 
     private Skullclamp(final Skullclamp card) {

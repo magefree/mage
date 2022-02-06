@@ -29,7 +29,7 @@ public final class ManaforceMace extends CardImpl {
         DomainValue value = new DomainValue();
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(value, value)).addHint(DomainHint.instance));
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
     }
 
     private ManaforceMace(final ManaforceMace card) {

@@ -74,7 +74,7 @@ public final class KaldraCompleat extends CardImpl {
         this.addAbility(ability);
 
         // Equip {7}
-        this.addAbility(new EquipAbility(7));
+        this.addAbility(new EquipAbility(7, false));
     }
 
     private KaldraCompleat(final KaldraCompleat card) {

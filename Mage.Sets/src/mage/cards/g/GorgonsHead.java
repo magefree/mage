@@ -28,7 +28,7 @@ public final class GorgonsHead extends CardImpl {
         // Equipped creature has deathtouch.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.EQUIPMENT)));
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl("{2}")));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private GorgonsHead(final GorgonsHead card) {

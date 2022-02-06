@@ -49,7 +49,7 @@ public final class RavagersMace extends CardImpl {
         this.addAbility(ability.addHint(PartyCountHint.instance));
 
         // Equip {2}{B}{R}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{B}{R}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{B}{R}"), false));
     }
 
     private RavagersMace(final RavagersMace card) {

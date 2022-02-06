@@ -38,7 +38,7 @@ public final class ElbrusTheBindingBlade extends CardImpl {
         // When equipped creature deals combat damage to a player, unattach Elbrus, the Binding Blade, then transform it.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new ElbrusTheBindingBladeEffect(), "equipped", true));
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private ElbrusTheBindingBlade(final ElbrusTheBindingBlade card) {

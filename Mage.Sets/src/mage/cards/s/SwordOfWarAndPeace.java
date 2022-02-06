@@ -44,7 +44,7 @@ public final class SwordOfWarAndPeace extends CardImpl {
         this.addAbility(new SwordOfWarAndPeaceAbility());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private SwordOfWarAndPeace(final SwordOfWarAndPeace card) {

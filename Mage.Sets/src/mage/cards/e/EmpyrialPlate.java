@@ -28,7 +28,7 @@ public final class EmpyrialPlate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(CardsInControllerHandCount.instance, CardsInControllerHandCount.instance)));
         
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
     }
 
     private EmpyrialPlate(final EmpyrialPlate card) {

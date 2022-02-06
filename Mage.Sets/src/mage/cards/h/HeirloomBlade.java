@@ -40,7 +40,7 @@ public final class HeirloomBlade extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new HeirloomBladeEffect(), "equipped creature", true));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), false));
 
     }
 

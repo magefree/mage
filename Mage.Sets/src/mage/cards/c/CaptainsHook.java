@@ -50,7 +50,7 @@ public final class CaptainsHook extends CardImpl {
         this.addAbility(new UnattachedTriggeredAbility(new DestroyEquippedEffect(), false));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), false));
     }
 
     private CaptainsHook(final CaptainsHook card) {
