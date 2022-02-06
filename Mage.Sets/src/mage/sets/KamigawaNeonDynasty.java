@@ -190,6 +190,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Nezumi Road Captain", 117, Rarity.COMMON, mage.cards.n.NezumiRoadCaptain.class));
         cards.add(new SetCardInfo("Ninja's Kunai", 252, Rarity.COMMON, mage.cards.n.NinjasKunai.class));
         cards.add(new SetCardInfo("Norika Yamazaki, the Poet", 31, Rarity.UNCOMMON, mage.cards.n.NorikaYamazakiThePoet.class));
+        cards.add(new SetCardInfo("O-Kagachi Made Manifest", 227, Rarity.MYTHIC, mage.cards.o.OKagachiMadeManifest.class));
         cards.add(new SetCardInfo("Ogre-Head Helm", 155, Rarity.RARE, mage.cards.o.OgreHeadHelm.class));
         cards.add(new SetCardInfo("Okiba Reckoner Raid", 117, Rarity.COMMON, mage.cards.o.OkibaReckonerRaid.class));
         cards.add(new SetCardInfo("Oni-Cult Anvil", 230, Rarity.UNCOMMON, mage.cards.o.OniCultAnvil.class));
@@ -254,6 +255,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Teachings of the Kirin", 212, Rarity.RARE, mage.cards.t.TeachingsOfTheKirin.class));
         cards.add(new SetCardInfo("Tempered in Solitude", 165, Rarity.UNCOMMON, mage.cards.t.TemperedInSolitude.class));
         cards.add(new SetCardInfo("The Fall of Lord Konda", 12, Rarity.UNCOMMON, mage.cards.t.TheFallOfLordKonda.class));
+        cards.add(new SetCardInfo("The Kami War", 227, Rarity.MYTHIC, mage.cards.t.TheKamiWar.class));
         cards.add(new SetCardInfo("The Long Reach of Night", 109, Rarity.UNCOMMON, mage.cards.t.TheLongReachOfNight.class));
         cards.add(new SetCardInfo("The Modern Age", 66, Rarity.COMMON, mage.cards.t.TheModernAge.class));
         cards.add(new SetCardInfo("The Reality Chip", 74, Rarity.RARE, mage.cards.t.TheRealityChip.class));
