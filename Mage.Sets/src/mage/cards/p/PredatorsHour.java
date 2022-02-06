@@ -35,7 +35,7 @@ public final class PredatorsHour extends CardImpl {
                 new MenaceAbility(false),
                 Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURES
-                ).setText("Until end of turn, creature you control gain menace ")
+                ).setText("Until end of turn, creatures you control gain menace")
         );
 
         // and “Whenever this creature deals combat damage to a player,

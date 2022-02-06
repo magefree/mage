@@ -85,7 +85,7 @@ class TimotharBaronOfBatsCreateBatEffect extends OneShotEffect {
         staticText = "you may pay {1} and exile it. " +
                 "If you do, create a 1/1 black Bat creature token with flying. " +
                 "It gains \"When this creature deals combat damage to a player, " +
-                "sacrifice it and return the exiled card to the battlefield tapped\".";
+                "sacrifice it and return the exiled card to the battlefield tapped.\"";
     }
 
     private TimotharBaronOfBatsCreateBatEffect(final TimotharBaronOfBatsCreateBatEffect effect) { super(effect); }

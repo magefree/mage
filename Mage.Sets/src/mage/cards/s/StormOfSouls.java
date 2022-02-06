@@ -31,7 +31,7 @@ public class StormOfSouls extends CardImpl {
         this.getSpellAbility().addEffect(new StormOfSoulsReturnEffect());
 
         // Exile Storm of Souls.
-        this.getSpellAbility().addEffect(new ExileSpellEffect().concatBy("<br>"));
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private StormOfSouls(final StormOfSouls card) { super(card); }
@@ -43,7 +43,7 @@ public class StormOfSouls extends CardImpl {
 class StormOfSoulsReturnEffect extends OneShotEffect {
     public StormOfSoulsReturnEffect() {
         super(Outcome.Benefit);
-        staticText = "Return all creature cards from your graveyard to the battlefield." +
+        staticText = "Return all creature cards from your graveyard to the battlefield. " +
                 "Each of them is a 1/1 Spirit with flying in addition to its other types.";
     }
 
