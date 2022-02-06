@@ -48,6 +48,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Befriending the Moths", 4, Rarity.COMMON, mage.cards.b.BefriendingTheMoths.class));
         cards.add(new SetCardInfo("Behold the Unspeakable", 48, Rarity.UNCOMMON, mage.cards.b.BeholdTheUnspeakable.class));
         cards.add(new SetCardInfo("Biting-Palm Ninja", 88, Rarity.RARE, mage.cards.b.BitingPalmNinja.class));
+        cards.add(new SetCardInfo("Blade of the Oni", 89, Rarity.MYTHIC, mage.cards.b.BladeOfTheOni.class));
         cards.add(new SetCardInfo("Blade-Blizzard Kitsune", 5, Rarity.UNCOMMON, mage.cards.b.BladeBlizzardKitsune.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 264, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Blossoming Sands", 265, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
