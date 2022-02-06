@@ -28,7 +28,7 @@ public final class BladeOfTheOni extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Equipped creature has base power and toughness 5/5, has menace, and is a black Demon in addition to its other colors and types.
         this.addAbility(new SimpleStaticAbility(new BladeOfTheOniEffect()));

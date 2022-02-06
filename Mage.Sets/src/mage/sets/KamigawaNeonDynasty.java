@@ -4,15 +4,11 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class KamigawaNeonDynasty extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Acquisition Octopus", "Armguard Familiar", "Blade of the Oni", "Bronzeplate Boar", "Chainflail Centipede", "Cloudsteel Kirin", "Leech Gauntlet", "Lion Sash", "Lizard Blades", "Ogre-Head Helm", "Rabbit Battery", "Simian Sling", "The Reality Chip", "Webspinner Cuff");
     private static final KamigawaNeonDynasty instance = new KamigawaNeonDynasty();
 
     public static KamigawaNeonDynasty getInstance() {
@@ -285,7 +281,5 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("When We Were Young", 43, Rarity.UNCOMMON, mage.cards.w.WhenWeWereYoung.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 282, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("You Are Already Dead", 129, Rarity.COMMON, mage.cards.y.YouAreAlreadyDead.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is fully implemented
     }
 }
