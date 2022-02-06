@@ -15,7 +15,6 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
-import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.*;
@@ -210,9 +209,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.minBlockedBy = 1;
         this.maxBlockedBy = 0;
         this.copy = false;
-        for (TextPart textPart : textParts) {
-            textPart.reset();
-        }
     }
 
     @Override

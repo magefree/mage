@@ -9,10 +9,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
-import mage.abilities.text.TextPart;
-import mage.abilities.text.TextPartSubType;
 import mage.cards.FrameStyle;
 import mage.cards.mock.MockCard;
 import mage.constants.*;
@@ -45,7 +42,6 @@ public abstract class MageObjectImpl implements MageObject {
     protected MageInt toughness;
     protected boolean copy;
     protected MageObject copyFrom; // copied card INFO (used to call original adjusters)
-    protected List<TextPart> textParts;
 
     public MageObjectImpl() {
         this(UUID.randomUUID());
@@ -60,7 +56,6 @@ public abstract class MageObjectImpl implements MageObject {
         frameStyle = FrameStyle.M15_NORMAL;
         manaCost = new ManaCostsImpl<>();
         abilities = new AbilitiesImpl<>();
-        textParts = new ArrayList<>();
     }
 
     public MageObjectImpl(final MageObjectImpl object) {
@@ -79,8 +74,6 @@ public abstract class MageObjectImpl implements MageObject {
         supertype.addAll(object.supertype);
         this.copy = object.copy;
         this.copyFrom = (object.copyFrom != null ? object.copyFrom.copy() : null);
-        textParts = new ArrayList<>();
-        textParts.addAll(object.textParts);
     }
 
     @Override
@@ -314,26 +307,6 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
         this.getSubtype(game).setIsAllCreatureTypes(value && (this.isTribal(game) || this.isCreature(game)));
-    }
-
-    @Override
-    public List<TextPart> getTextParts() {
-        return textParts;
-    }
-
-    @Override
-    public TextPart addTextPart(TextPart textPart) {
-        textParts.add(textPart);
-        return textPart;
-    }
-
-    @Override
-    public void changeSubType(SubType fromSubType, SubType toSubType) {
-        for (TextPart textPart : textParts) {
-            if (textPart instanceof TextPartSubType && textPart.getCurrentValue().equals(fromSubType)) {
-                textPart.replaceWith(toSubType);
-            }
-        }
     }
 
     /**

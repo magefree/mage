@@ -12,7 +12,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.HintUtils;
-import mage.abilities.text.TextPart;
 import mage.cards.FrameStyle;
 import mage.choices.Choice;
 import mage.choices.ChoiceHintType;
@@ -380,16 +379,6 @@ public class Dungeon implements CommandObject {
                 }
             }
         }
-    }
-
-    @Override
-    public List<TextPart> getTextParts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public TextPart addTextPart(TextPart textPart) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
