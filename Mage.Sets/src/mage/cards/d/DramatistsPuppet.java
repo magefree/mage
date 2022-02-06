@@ -1,5 +1,4 @@
-
-package mage.cards.q;
+package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -22,49 +21,48 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- * @author Styxo
+ * @author TheElk801
  */
-public final class QuarryHauler extends CardImpl {
+public final class DramatistsPuppet extends CardImpl {
 
-    public QuarryHauler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    public DramatistsPuppet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
 
-        this.subtype.add(SubType.CAMEL);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+        this.subtype.add(SubType.CONSTRUCT);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(4);
 
-        // When Quarry Hauler enters the battlefield, for each kind of counter on target permanent, put another counter of that kind on it or remove one from it.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new QuarryHaulerEffect());
+        // When Dramatist's Puppet enters the battlefield, for each kind of counter on target permanent, put another counter of that kind on it or remove one from it.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DramatistsPuppetEffect());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }
 
-    private QuarryHauler(final QuarryHauler card) {
+    private DramatistsPuppet(final DramatistsPuppet card) {
         super(card);
     }
 
     @Override
-    public QuarryHauler copy() {
-        return new QuarryHauler(this);
+    public DramatistsPuppet copy() {
+        return new DramatistsPuppet(this);
     }
 }
 
-class QuarryHaulerEffect extends OneShotEffect {
+class DramatistsPuppetEffect extends OneShotEffect {
 
-    public QuarryHaulerEffect() {
-        super(Outcome.BoostCreature);
+    DramatistsPuppetEffect() {
+        super(Outcome.Benefit);
         this.staticText = "for each kind of counter on target permanent, " +
                 "put another counter of that kind on it or remove one from it";
-
     }
 
-    public QuarryHaulerEffect(final QuarryHaulerEffect effect) {
+    private DramatistsPuppetEffect(final DramatistsPuppetEffect effect) {
         super(effect);
     }
 
     @Override
-    public QuarryHaulerEffect copy() {
-        return new QuarryHaulerEffect(this);
+    public DramatistsPuppetEffect copy() {
+        return new DramatistsPuppetEffect(this);
     }
 
     @Override
@@ -93,5 +91,4 @@ class QuarryHaulerEffect extends OneShotEffect {
         }
         return true;
     }
-
 }
