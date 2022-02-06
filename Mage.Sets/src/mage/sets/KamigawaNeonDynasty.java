@@ -158,6 +158,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Lizard Blades", 153, Rarity.RARE, mage.cards.l.LizardBlades.class));
         cards.add(new SetCardInfo("Lucky Offering", 27, Rarity.COMMON, mage.cards.l.LuckyOffering.class));
         cards.add(new SetCardInfo("Malicious Malfunction", 110, Rarity.UNCOMMON, mage.cards.m.MaliciousMalfunction.class));
+        cards.add(new SetCardInfo("Master's Rebuke", 202, Rarity.COMMON, mage.cards.m.MastersRebuke.class));
         cards.add(new SetCardInfo("Mech Hangar", 270, Rarity.UNCOMMON, mage.cards.m.MechHangar.class));
         cards.add(new SetCardInfo("Memory of Toshiro", 108, Rarity.UNCOMMON, mage.cards.m.MemoryOfToshiro.class));
         cards.add(new SetCardInfo("Michiko's Reign of Truth", 29, Rarity.UNCOMMON, mage.cards.m.MichikosReignOfTruth.class));
