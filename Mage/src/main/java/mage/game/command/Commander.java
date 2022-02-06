@@ -307,15 +307,17 @@ public class Commander implements CommandObject {
 
     @Override
     public boolean isAllCreatureTypes(Game game) {
-        return false;
+        return sourceObject.isAllCreatureTypes(game);
     }
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
+        sourceObject.setIsAllCreatureTypes(value);
     }
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
+        sourceObject.setIsAllCreatureTypes(game, value);
     }
 
     @Override
