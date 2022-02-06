@@ -45,7 +45,7 @@ public final class LightningSpear extends CardImpl {
         this.addAbility(ability);
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private LightningSpear(final LightningSpear card) {

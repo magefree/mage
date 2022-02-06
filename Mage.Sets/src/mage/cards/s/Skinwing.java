@@ -27,10 +27,15 @@ public final class Skinwing extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         this.subtype.add(SubType.EQUIPMENT);
 
+        // Living Weapom
         this.addAbility(new LivingWeaponAbility());
+
+        // Equipped creature gets +2/+2 and has flying
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(6)));
+
+        // Equip {6}
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(6), false));
     }
 
     private Skinwing(final Skinwing card) {

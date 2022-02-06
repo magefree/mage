@@ -42,12 +42,15 @@ public final class HandOfVecna extends CardImpl {
         ));
 
         // Equip—Pay 1 life for each card in your hand.
-        this.addAbility(new EquipAbility(Outcome.Benefit, new PayLifeCost(
-                CardsInControllerHandCount.instance, "1 life for each card in your hand"
-        )));
+        this.addAbility(new EquipAbility(
+                Outcome.Benefit,
+                new PayLifeCost(
+                CardsInControllerHandCount.instance, "1 life for each card in your hand"),
+                false
+        ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private HandOfVecna(final HandOfVecna card) {

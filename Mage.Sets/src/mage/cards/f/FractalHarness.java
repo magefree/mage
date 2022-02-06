@@ -39,7 +39,7 @@ public final class FractalHarness extends CardImpl {
         ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private FractalHarness(final FractalHarness card) {

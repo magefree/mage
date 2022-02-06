@@ -45,7 +45,7 @@ public final class PlateArmor extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}. This ability costs {1} less to activate for each other Equipment you control.
-        EquipAbility equipAbility = new EquipAbility(3);
+        EquipAbility equipAbility = new EquipAbility(3, false);
         equipAbility.setCostAdjuster(PlateArmorAdjuster.instance);
         equipAbility.setCostReduceText("This ability costs {1} less to activate for each other Equipment you control.");
         this.addAbility(equipAbility.addHint(PlateArmorAdjuster.getHint()));

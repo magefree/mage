@@ -10,10 +10,7 @@ import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.MultikickerAbility;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.keyword.*;
 import mage.cards.*;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
@@ -1423,6 +1420,7 @@ public class VerifyCardDataTest {
         hints.put(FightTargetsEffect.class, "Each deals damage equal to its power to the other");
         hints.put(MenaceAbility.class, "can't be blocked except by two or more");
         hints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom of your library");
+        hints.put(EquipAbility.class, "Equip only as a sorcery.");
 
         for (Class objectClass : hints.keySet()) {
             String objectHint = hints.get(objectClass);
