@@ -653,10 +653,17 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return if there is enough available mana to pay.
      */
     public boolean enough(final Mana cost) {
+        // Create a copy of the amount of mana available
         Mana compare = cost.copy();
+        // Subtract from the mana available the price of the spell (this) on a per color basis
         compare.subtract(this);
+        // A negative value for compare.X means that mana of type X for from the price could not be paid be mana
+        // of the same value from the available mana.
+        // Check each of the types, and see if there is enough mana of any color left to pay for the colors.
         if (compare.white < 0) {
             compare.any = CardUtil.overflowInc(compare.any, compare.white);
+            // A negatice value means that there was more colored mana required than there was mana of any color
+            // to pay for it. So, there is not enough mana to pay the cost.
             if (compare.any < 0) {
                 return false;
             }
@@ -691,11 +698,9 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             compare.green = 0;
         }
         if (compare.colorless < 0) {
-            compare.any = CardUtil.overflowInc(compare.any, compare.colorless);
-            if (compare.any < 0) {
-                return false;
-            }
-            compare.colorless = 0;
+            // Colorless mana can only be paid by colorless mana.
+            // If there's a negative value, then there's nothing else that can be used to pay for it.
+            return false;
         }
         if (compare.generic < 0) {
             compare.generic = CardUtil.overflowInc(compare.generic, compare.white);

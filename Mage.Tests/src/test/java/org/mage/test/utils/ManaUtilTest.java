@@ -104,6 +104,7 @@ public class ManaUtilTest extends CardTestPlayerBase {
         testManaAvailEnough("{B}", 0, "{G}", false);
         testManaAvailEnough("{U}", 0, "{G}", false);
         testManaAvailEnough("{W}", 0, "{G}", false);
+        testManaAvailEnough("{W}", 0, "{C}", false);
 
         testManaAvailEnough("{R}", 1, "", true);
         testManaAvailEnough("{R}", 0, "{R}", true);
@@ -126,6 +127,13 @@ public class ManaUtilTest extends CardTestPlayerBase {
         testManaAvailEnough("{W}{W}", 0, "{G/W}{G/W}", true);
         testManaAvailEnough("{G}{G}", 0, "{G/W}{G/W}", true);
 
+        testManaAvailEnough("{C}", 1, "", false);
+        testManaAvailEnough("{C}", 0, "{C}", true);
+        testManaAvailEnough("{C}", 0, "{G}", false);
+        testManaAvailEnough("{C}", 0, "{R}", false);
+        testManaAvailEnough("{C}", 0, "{B}", false);
+        testManaAvailEnough("{C}", 0, "{W}", false);
+        testManaAvailEnough("{C}", 0, "{U}", false);
     }
 
     /**
