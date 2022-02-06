@@ -94,7 +94,7 @@ class DollhouseOfHorrorsEffect extends OneShotEffect {
         effect.apply(game, source);
         game.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
-        ).setTargetPointer(new FixedTargets(effect.getAddedPermanent(), game)), source);
+        ).setTargetPointer(new FixedTargets(effect.getAddedPermanents(), game)), source);
         return true;
     }
 }

@@ -79,7 +79,7 @@ class MyriadEffect extends OneShotEffect {
                         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(controller.getId(), null, false, 1, true, true, playerId);
                         effect.setTargetPointer(new FixedTarget(sourceObject, game));
                         effect.apply(game, source);
-                        tokens.addAll(effect.getAddedPermanent());
+                        tokens.addAll(effect.getAddedPermanents());
                     }
                 }
             }
