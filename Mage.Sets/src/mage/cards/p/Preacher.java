@@ -75,7 +75,7 @@ class PreacherEffect extends OneShotEffect {
         Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && sourcePermanent != null && targetPermanent != null) {
-            SourceTappedCondition sourceTappedCondition = SourceTappedCondition.instance;
+            SourceTappedCondition sourceTappedCondition = SourceTappedCondition.TAPPED;
             ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                     new GainControlTargetEffect(Duration.Custom),
                     sourceTappedCondition,

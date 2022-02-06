@@ -171,6 +171,7 @@ public enum SubType {
     GRAVEBORN("Graveborn", SubTypeSet.CreatureType),
     GREMLIN("Gremlin", SubTypeSet.CreatureType),
     GRIFFIN("Griffin", SubTypeSet.CreatureType),
+    GUEST("Guest", SubTypeSet.CreatureType),
     GUNGAN("Gungan", SubTypeSet.CreatureType, true), // Star Wars
     // H
     HAG("Hag", SubTypeSet.CreatureType),
@@ -426,6 +427,7 @@ public enum SubType {
     HUATLI("Huatli", SubTypeSet.PlaneswalkerType),
     JACE("Jace", SubTypeSet.PlaneswalkerType),
     JESKA("Jeska", SubTypeSet.PlaneswalkerType),
+    KAITO("Kaito", SubTypeSet.PlaneswalkerType),
     KARN("Karn", SubTypeSet.PlaneswalkerType),
     KASMINA("Kasmina", SubTypeSet.PlaneswalkerType),
     KAYA("Kaya", SubTypeSet.PlaneswalkerType),

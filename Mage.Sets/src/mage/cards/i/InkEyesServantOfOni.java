@@ -38,7 +38,7 @@ public final class InkEyesServantOfOni extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ninjutsu {3}{B}{B} ({3}{B}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{3}{B}{B}")));
+        this.addAbility(new NinjutsuAbility("{3}{B}{B}"));
 
         // Whenever Ink-Eyes, Servant of Oni deals combat damage to a player, you may put target creature card from that player's graveyard onto the battlefield under your control.
         this.addAbility(new InkEyesServantOfOniTriggeredAbility());

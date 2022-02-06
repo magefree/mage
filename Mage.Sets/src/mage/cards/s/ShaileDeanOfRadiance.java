@@ -17,6 +17,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
@@ -35,13 +36,11 @@ public final class ShaileDeanOfRadiance extends ModalDoubleFacesCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
     private static final FilterPermanent shaileFilter = new FilterControlledCreaturePermanent("creature that entered the battlefield under your control this turn");
-    private static final FilterPermanent embroseFilter = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");
 
     static {
         filter.add(AnotherPredicate.instance);
         shaileFilter.add(EnteredThisTurnPredicate.instance);
         shaileFilter.add((Predicate<Permanent>) (input, game) -> !input.checkControlChanged(game));
-        embroseFilter.add(CounterType.P1P1.getPredicate());
     }
 
     public ShaileDeanOfRadiance(UUID ownerId, CardSetInfo setInfo) {
@@ -77,7 +76,7 @@ public final class ShaileDeanOfRadiance extends ModalDoubleFacesCard {
         this.getRightHalfCard().addAbility(ability);
 
         // Whenever a creature you control with a +1/+1 counter on it dies, draw a card.
-        this.getRightHalfCard().addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, embroseFilter));
+        this.getRightHalfCard().addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, StaticFilters.FILTER_A_CONTROLLED_CREATURE_P1P1));
     }
 
     private ShaileDeanOfRadiance(final ShaileDeanOfRadiance card) {

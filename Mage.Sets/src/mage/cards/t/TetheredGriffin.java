@@ -31,7 +31,7 @@ public final class TetheredGriffin extends CardImpl {
 
         // When you control no enchantments, sacrifice Tethered Griffin.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                StaticFilters.FILTER_ENCHANTMENT_PERMANENT, ComparisonType.EQUAL_TO, 0,
+                StaticFilters.FILTER_PERMANENT_ENCHANTMENT, ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

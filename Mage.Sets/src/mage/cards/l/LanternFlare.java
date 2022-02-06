@@ -33,7 +33,7 @@ public final class LanternFlare extends CardImpl {
         // Lantern Flare deals X damage to target creature or planeswalker and you gain X life. [X is the number of creatures you control.]
         this.getSpellAbility().addEffect(new DamageTargetEffect(
                 CreaturesYouControlCount.instance
-        ).setText("deals X damage to target creature or planeswalker"));
+        ).setText("{this} deals X damage to target creature or planeswalker"));
         this.getSpellAbility().addEffect(new GainLifeEffect(
                 CreaturesYouControlCount.instance,
                 "and you gain X life. [X is the number of creatures you control.]"

@@ -25,7 +25,7 @@ public final class HorizonSeed extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        Ability ability = new SpellCastControllerTriggeredAbility(new RegenerateTargetEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new RegenerateTargetEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

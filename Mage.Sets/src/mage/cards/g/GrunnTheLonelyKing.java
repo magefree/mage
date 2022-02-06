@@ -3,7 +3,7 @@ package mage.cards.g;
 import java.util.UUID;
 
 import mage.MageInt;
-import mage.abilities.common.AttacksAloneTriggeredAbility;
+import mage.abilities.common.AttacksAloneSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
@@ -42,7 +42,7 @@ public final class GrunnTheLonelyKing extends CardImpl {
         SourcePermanentPowerCount power = new SourcePermanentPowerCount();
         Effect effect = new BoostSourceEffect(power, SourcePermanentToughnessValue.getInstance(), Duration.EndOfTurn, true);
         effect.setText("double its power and toughness until end of turn");
-        this.addAbility(new AttacksAloneTriggeredAbility(effect));
+        this.addAbility(new AttacksAloneSourceTriggeredAbility(effect));
     }
 
     private GrunnTheLonelyKing(final GrunnTheLonelyKing card) {

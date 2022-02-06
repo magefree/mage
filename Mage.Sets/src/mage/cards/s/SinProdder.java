@@ -27,7 +27,7 @@ public final class SinProdder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // At the beginning of your upkeep, reveal the top card of your library. Any opponent may have you put that card into your graveyard. If a player does,
         // Sin Prodder deals damage to that player equal to that card's converted mana cost. Otherwise, put that card into your hand.

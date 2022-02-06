@@ -30,7 +30,7 @@ public final class SaberAnts extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Saber Ants is dealt damage, you may create that many 1/1 green Insect creature tokens.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(new SaberAntsEffect(), true, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new SaberAntsEffect(), true, false));
     }
 
     private SaberAnts(final SaberAnts card) {

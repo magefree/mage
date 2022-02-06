@@ -7,9 +7,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -39,12 +37,6 @@ public final class SigardasSummons extends CardImpl {
 
 class SigardasSummonsEffect extends ContinuousEffectImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
-
     SigardasSummonsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "creatures you control with +1/+1 counters on them have base power and toughness 4/4, " +
@@ -63,7 +55,7 @@ class SigardasSummonsEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1, source.getControllerId(), source.getSourceId(), game
         )) {
             switch (layer) {
                 case TypeChangingEffects_4:

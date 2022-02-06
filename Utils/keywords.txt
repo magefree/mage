@@ -76,7 +76,7 @@ Morph|card, cost|
 Mutate|card, manaString|
 Myriad|new|
 Nightbound|new|
-Ninjutsu|cost|
+Ninjutsu|manaString|
 Outlast|cost|
 Partner|instance|
 Persist|new|
@@ -88,13 +88,14 @@ Provoke|new|
 Prowess|new|
 Reach|instance|
 Rebound|new|
+Reconfigure|manaString|
 Renown|number|
 Replicate|card, manaString|
 Riot|new|
 Scavenge|cost|
 Shadow|instance|
 Shroud|instance|
-Soulbond|instance|
+Soulbond|new|
 Soulshift|number|
 Skulk|new|
 Spectacle|card, cost|

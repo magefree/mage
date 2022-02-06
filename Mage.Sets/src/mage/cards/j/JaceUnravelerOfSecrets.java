@@ -34,7 +34,7 @@ public final class JaceUnravelerOfSecrets extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // +1: Scry 1, then draw a card.
-        Ability ability = new LoyaltyAbility(new ScryEffect(1), 1);
+        Ability ability = new LoyaltyAbility(new ScryEffect(1, false), 1);
         Effect effect = new DrawCardSourceControllerEffect(1);
         effect.setText(", then draw a card");
         ability.addEffect(effect);

@@ -26,7 +26,7 @@ public final class MistSyndicateNaga extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Ninjutsu {2}{U}
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new NinjutsuAbility("{2}{U}"));
 
         // Whenever Mist-Syndicate Naga deals combat damage to a player, create a token that's a copy of Mist-Syndicate Naga.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(

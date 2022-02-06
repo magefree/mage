@@ -30,7 +30,8 @@ public final class BloodstoneGoblin extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever you cast a spell, if that spell was kicked, Bloodstone Goblin gets +1/+1 and gains menace until end of turn.
+        // Whenever you cast a spell, if that spell was kicked,
+        // Bloodstone Goblin gets +1/+1 and gains menace until end of turn.
         this.addAbility(new BloodstoneGoblinTriggeredAbility());
     }
 
@@ -47,8 +48,16 @@ public final class BloodstoneGoblin extends CardImpl {
 class BloodstoneGoblinTriggeredAbility extends TriggeredAbilityImpl {
 
     BloodstoneGoblinTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn).setText("{this} gets +1/+1"), false);
-        this.addEffect(new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn).setText("and gains menace until end of turn"));
+        super(
+                Zone.BATTLEFIELD,
+                new BoostSourceEffect(1, 1, Duration.EndOfTurn).setText("{this} gets +1/+1"),
+                false);
+        this.addEffect(
+                new GainAbilitySourceEffect(
+                        new MenaceAbility(false),
+                        Duration.EndOfTurn
+                ).setText("and gains menace until end of turn. " +
+                        "<i>(It can't be blocked except by two or more creatures.)</i>"));
     }
 
     BloodstoneGoblinTriggeredAbility(final BloodstoneGoblinTriggeredAbility ability) {

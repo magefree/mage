@@ -997,7 +997,7 @@ public final class CardUtil {
         // same logic as ZonesHandler->maybeRemoveFromSourceZone
 
         // workaround to put real permanent from one side (example: you call mdf card by cheats)
-        Card permCard = getDefaultCardSideForBattlefield(newCard);
+        Card permCard = getDefaultCardSideForBattlefield(game, newCard);
 
         // prepare card and permanent
         permCard.setZone(Zone.BATTLEFIELD, game);
@@ -1035,12 +1035,17 @@ public final class CardUtil {
 
     /**
      * Choose default card's part to put on battlefield (for cheats and tests only)
+     * or to find a default card side (for copy effect)
      *
      * @param card
      * @return
      */
-    public static Card getDefaultCardSideForBattlefield(Card card) {
-        // chose left side all time
+    public static Card getDefaultCardSideForBattlefield(Game game, Card card) {
+        if (card instanceof PermanentCard) {
+            return card;
+        }
+
+        // must choose left side all time
         Card permCard;
         if (card instanceof SplitCard) {
             permCard = card;
@@ -1051,6 +1056,12 @@ public final class CardUtil {
         } else {
             permCard = card;
         }
+
+        // must be creature/planeswalker (if you catch this error then check targeting/copying code)
+        if (permCard.isInstantOrSorcery(game)) {
+            throw new IllegalArgumentException("Card side can't be put to battlefield: " + permCard.getName());
+        }
+
         return permCard;
     }
 
@@ -1157,7 +1168,7 @@ public final class CardUtil {
     }
 
     public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor) {
-        makeCardPlayable(game, source, card, duration, anyColor, null);
+        makeCardPlayable(game, source, card, duration, anyColor, null, null);
     }
 
     /**
@@ -1172,16 +1183,16 @@ public final class CardUtil {
      * @param anyColor
      * @param condition can be null
      */
-    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, Condition condition) {
+    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, UUID playerId, Condition condition) {
         // Effect can be used for cards in zones and permanents on battlefield
         // PermanentCard's ZCC is static, but we need updated ZCC from the card (after moved to another zone)
         // So there is a workaround to get actual card's ZCC
         // Example: Hostage Taker
         UUID objectId = card.getMainCard().getId();
         int zcc = game.getState().getZoneChangeCounter(objectId);
-        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, condition), source);
+        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, condition), source);
         if (anyColor) {
-            game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
+            game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, playerId, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
         }
     }
 
@@ -1216,6 +1227,11 @@ public final class CardUtil {
         }
 
         return false;
+    }
+
+    public static String getSourceName(Game game, Ability source) {
+        MageObject sourceObject = source.getSourceObject(game);
+        return sourceObject != null ? sourceObject.getName() : "";
     }
 
     /**
@@ -1440,5 +1456,9 @@ public final class CardUtil {
         effect.setTargetPointer(new FixedTarget(card.getMainCard(), game));
         effect.apply(game, source);
         return true;
+    }
+
+    public static <T> int setOrIncrementValue(T u, Integer i) {
+        return i == null ? 1 : Integer.sum(i, 1);
     }
 }

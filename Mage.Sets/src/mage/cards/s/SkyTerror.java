@@ -27,7 +27,7 @@ public final class SkyTerror extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
     }
 

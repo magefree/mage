@@ -26,6 +26,12 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class SamutTheTested extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("creature and/or planeswalker cards");
+
+    static {
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.PLANESWALKER.getPredicate()));
+    }
+
     public SamutTheTested(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
         this.addSuperType(SuperType.LEGENDARY);
@@ -39,19 +45,14 @@ public final class SamutTheTested extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 
-        // -2: Samut, the Tested deals 2 damage divided as you choose among one or two target creatures and/or players.
+        // -2: Samut, the Tested deals 2 damage divided as you choose among one or two targets.
         effect = new DamageMultiEffect(2);
         ability = new LoyaltyAbility(effect, -2);
         ability.addTarget(new TargetAnyTargetAmount(2));
         this.addAbility(ability);
 
-        // -7: Search your library or up to two creature and/or planeswalkercards, put them onto the battlefield, then shuffle your library.
-        FilterCard filterCard = new FilterCard("creature or planeswalker card");
-        filterCard.add(Predicates.or(
-            CardType.CREATURE.getPredicate(),
-            CardType.PLANESWALKER.getPredicate()
-        ));
-        effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filterCard), false, true);
+        // -7: Search your library for up to two creature and/or planeswalker cards, put them onto the battlefield, then shuffle your library.
+        effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filter), false, true);
         ability = new LoyaltyAbility(effect, -7);
         this.addAbility(ability);
     }

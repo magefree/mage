@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -15,13 +14,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LevelX2
  */
 public final class BaneOfTheLiving extends CardImpl {
+
+    private static final DynamicValue morphX = new SignInversionDynamicValue(MorphManacostVariableValue.instance);
 
     public BaneOfTheLiving(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
@@ -31,9 +32,9 @@ public final class BaneOfTheLiving extends CardImpl {
 
         // Morph {X}{B}{B}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{X}{B}{B}")));
+
         // When Bane of the Living is turned face up, all creatures get -X/-X until end of turn.
-        DynamicValue morphX = new SignInversionDynamicValue(MorphManacostVariableValue.instance);
-        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostAllEffect(morphX, morphX, Duration.EndOfTurn, new FilterCreaturePermanent("all creatures"), false, "", true)));
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostAllEffect(morphX, morphX, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_ALL_CREATURES, false, null, true)));
     }
 
     private BaneOfTheLiving(final BaneOfTheLiving card) {

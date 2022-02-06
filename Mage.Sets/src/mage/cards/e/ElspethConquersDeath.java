@@ -49,7 +49,7 @@ public final class ElspethConquersDeath extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I - Exile target permanent an opponent controls with converted mana cost 3 or greater.
         sagaAbility.addChapterEffect(

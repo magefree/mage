@@ -58,7 +58,7 @@ public final class TeferiMasterOfTime extends CardImpl {
 class TeferiMasterOfTimeActivationEffect extends AsThoughEffectImpl {
 
     TeferiMasterOfTimeActivationEffect() {
-        super(AsThoughEffectType.ACTIVATE_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.ACTIVATE_AS_INSTANT, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may activate loyalty abilities of {this} " +
                 "on any player's turn any time you could cast an instant";
     }

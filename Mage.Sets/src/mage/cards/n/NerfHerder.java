@@ -14,20 +14,13 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author Styxo
  */
 public final class NerfHerder extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature with a +1/+1 counter on it");
-
-    static {
-        filter.add(CounterType.P1P1.getPredicate());
-    }
 
     public NerfHerder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
@@ -39,8 +32,11 @@ public final class NerfHerder extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbilitiesCostReductionControllerEffect(MonstrosityAbility.class, "Monstrosity")));
 
         // Each creature you control with a +1/+1 counter on it has trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
-
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
+                TrampleAbility.getInstance(),
+                Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1))
+        );
     }
 
     private NerfHerder(final NerfHerder card) {

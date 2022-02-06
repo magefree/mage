@@ -70,8 +70,9 @@ class DistendedMindbenderEffect extends OneShotEffect {
 
     public DistendedMindbenderEffect() {
         super(Outcome.Discard);
-        this.staticText = "target opponent reveals their hand. You choose from it a nonland card with mana value 3 or less and a card with "
-                + "mana value 4 or greater. That player discards those cards.";
+        this.staticText = "target opponent reveals their hand. " +
+                "You choose from it a nonland card with mana value 3 or less and a card with mana value 4 or greater." +
+                "That player discards those cards.";
     }
 
     public DistendedMindbenderEffect(final DistendedMindbenderEffect effect) {

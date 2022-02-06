@@ -44,8 +44,9 @@ public final class DeadlyDancer extends CardImpl {
         // {R}{R}: Deadly Dancer and another target creature each get +1/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(
                 1, 0, Duration.EndOfTurn
-        ).setText("{this} and another target creature"), new ManaCostsImpl<>("{R}{R}"));
-        ability.addEffect(new BoostTargetEffect(1, 0).setText("each get +1/+0 until end of turn"));
+        ).setText("{this}"), new ManaCostsImpl<>("{R}{R}"));
+        ability.addEffect(new BoostTargetEffect(1, 0)
+                .setText("and another target creature each get +1/+0 until end of turn"));
         this.addAbility(ability);
     }
 

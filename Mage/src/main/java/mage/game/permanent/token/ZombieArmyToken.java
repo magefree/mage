@@ -22,7 +22,7 @@ public final class ZombieArmyToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
 
-        availableImageSetCodes = Arrays.asList("WAR", "MH2");
+        availableImageSetCodes = Arrays.asList("WAR", "MH2", "MIC");
     }
 
     private ZombieArmyToken(final ZombieArmyToken token) {

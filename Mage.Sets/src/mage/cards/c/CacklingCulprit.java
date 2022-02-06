@@ -33,7 +33,7 @@ public final class CacklingCulprit extends CardImpl {
 
         // Whenever Cackling Culprit or another creature you control dies, you gain 1 life.
         this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
-                new GainLifeEffect(1), false, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
+                new GainLifeEffect(1), false, StaticFilters.FILTER_CONTROLLED_CREATURE
         ));
 
         // {1}{B}: Cackling Culprit gains deathtouch until end of turn.

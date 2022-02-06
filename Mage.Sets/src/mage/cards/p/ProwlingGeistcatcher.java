@@ -79,7 +79,7 @@ class ProwlingGeistcatcherExileEffect extends OneShotEffect {
             player.moveCardsToExile(
                     card, source, game, true,
                     CardUtil.getExileZoneId(game, source),
-                    CardUtil.getSourceLogName(game, source)
+                    CardUtil.getSourceName(game, source)
             );
         }
         Permanent exiled = (Permanent) getValue("sacrificedPermanent");

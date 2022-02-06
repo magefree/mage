@@ -13,26 +13,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LevelX2
  */
 public final class TuskguardCaptain extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(CounterType.P1P1.getPredicate());
-    }
-
-    static final String rule = "Each creature you control with a +1/+1 counter on it has trample";
 
     public TuskguardCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
@@ -45,9 +33,14 @@ public final class TuskguardCaptain extends CardImpl {
         // Outlast G
         this.addAbility(new OutlastAbility(new ManaCostsImpl("{G}")));
         // Each creature you control with a +1/+1 counter on it has trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, rule)));
-
-
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new GainAbilityAllEffect(
+                        TrampleAbility.getInstance(),
+                        Duration.WhileOnBattlefield,
+                        StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1)
+                )
+        );
     }
 
     private TuskguardCaptain(final TuskguardCaptain card) {

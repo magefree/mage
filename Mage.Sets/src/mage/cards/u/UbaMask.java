@@ -1,4 +1,3 @@
-
 package mage.cards.u;
 
 import mage.MageObject;
@@ -14,12 +13,12 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.*;
 
 /**
- *
  * @author LevelX2
  */
 public final class UbaMask extends CardImpl {
@@ -112,6 +111,7 @@ class UbaMaskPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         Card card = game.getCard(objectId);
         if (card != null
                 && affectedControllerId.equals(card.getOwnerId())

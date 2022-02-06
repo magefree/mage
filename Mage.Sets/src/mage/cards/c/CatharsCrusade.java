@@ -26,7 +26,7 @@ public final class CatharsCrusade extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()),
-                StaticFilters.FILTER_PERMANENT_CREATURE_A,
+                StaticFilters.FILTER_PERMANENT_A_CREATURE,
                 false)
         );
     }

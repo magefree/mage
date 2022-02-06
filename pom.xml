@@ -170,7 +170,7 @@
             <!-- database support - ORM -->
             <groupId>com.j256.ormlite</groupId>
             <artifactId>ormlite-jdbc</artifactId>
-            <version>5.6</version>
+            <version>5.7</version>
         </dependency>
         <dependency>
             <!-- database support - H2 db engine (main db) -->

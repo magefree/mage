@@ -44,7 +44,7 @@ public final class WoeStrider extends CardImpl {
 
         // Sacrifice another creature: Scry 1.
         this.addAbility(new SimpleActivatedAbility(
-                new ScryEffect(1), new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new ScryEffect(1, false), new SacrificeTargetCost(new TargetControlledPermanent(filter))
         ));
 
         // Escape—{3}{B}{B}, Exile four other cards from your graveyard.

@@ -1,7 +1,6 @@
 
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -55,7 +54,6 @@ public class ExileFromZoneTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject mageObject = source.getSourceObject(game);
         if (player == null) {
             return false;
         }
@@ -75,7 +73,7 @@ public class ExileFromZoneTargetEffect extends OneShotEffect {
         target.chooseTarget(Outcome.Exile, player.getId(), source, game);
         Cards cards = new CardsImpl(target.getTargets());
         if (withSource) {
-            return player.moveCardsToExile(cards.getCards(game), source, game, true, CardUtil.getExileZoneId(game, source), mageObject.getName());
+            return player.moveCardsToExile(cards.getCards(game), source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         }
         return player.moveCards(cards, Zone.EXILED, source, game);
     }

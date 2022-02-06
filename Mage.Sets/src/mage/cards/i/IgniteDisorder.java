@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -29,9 +28,8 @@ public final class IgniteDisorder extends CardImpl {
     public IgniteDisorder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
-
         // Ignite Disorder deals 3 damage divided as you choose among one, two, or three target white and/or blue creatures.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(3).setText("{this} deals 3 damage divided as you choose among one, two, or three target white and/or blue creatures"));
+        this.getSpellAbility().addEffect(new DamageMultiEffect(3));
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, filter));
     }
 

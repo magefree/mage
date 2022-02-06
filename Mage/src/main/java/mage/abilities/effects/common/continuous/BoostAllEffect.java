@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common.continuous;
 
-import java.util.Iterator;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -11,10 +9,14 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.Iterator;
+import java.util.Locale;
 
 /**
  *
@@ -33,11 +35,11 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     }
 
     public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        this(power, toughness, duration, new FilterCreaturePermanent("all creatures"), false);
+        this(power, toughness, duration, StaticFilters.FILTER_PERMANENT_ALL_CREATURES, false);
     }
 
     public BoostAllEffect(int power, int toughness, Duration duration, boolean excludeSource) {
-        this(power, toughness, duration, new FilterCreaturePermanent("all creatures"), excludeSource);
+        this(power, toughness, duration, StaticFilters.FILTER_PERMANENT_ALL_CREATURES, excludeSource);
     }
 
     public BoostAllEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
@@ -147,10 +149,12 @@ public class BoostAllEffect extends ContinuousEffectImpl {
 
     protected void setText() {
         StringBuilder sb = new StringBuilder();
-        if (excludeSource) {
+        boolean each = filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each");
+        if (excludeSource && !each) {
             sb.append("other ");
         }
-        sb.append(filter.getMessage()).append(" get ");
+        sb.append(filter.getMessage());
+        sb.append(each ? " gets " : " get ");
         sb.append(CardUtil.getBoostText(power, toughness, duration));
         staticText = sb.toString();
     }

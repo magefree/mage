@@ -1011,7 +1011,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (cardInLib != null && cardInLib.getId().equals(card.getId())) { // check needed because e.g. commander can go to command zone
                         cardInLib = getLibrary().removeFromTop(game);
                         getLibrary().putCardToTopXPos(cardInLib, xFromTheTop, game);
-                        game.informPlayers(withName ? cardInLib.getLogName() : "A card"
+                        game.informPlayers((withName ? cardInLib.getLogName() : "A card")
                                 + " is put into "
                                 + getLogName()
                                 + "'s library "

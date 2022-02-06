@@ -1,7 +1,7 @@
 package mage.abilities.keyword;
 
-import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.CrewIncreasedPowerAbility;
 import mage.abilities.common.CrewWithToughnessAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -14,6 +14,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,10 +58,11 @@ public class CrewAbility extends SimpleActivatedAbility {
 
 class CrewCost extends CostImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another untapped creature you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
+        filter.add(AnotherPredicate.instance);
     }
 
     private final int value;
@@ -110,6 +112,7 @@ class CrewCost extends CostImpl {
                 for (UUID targetId : target.getTargets()) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREWED_VEHICLE, targetId, source, controllerId));
                 }
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.VEHICLE_CREWED, source.getSourceId(), source, controllerId));
             }
         } else {
             return false;
@@ -140,14 +143,12 @@ class CrewCost extends CostImpl {
     }
 
     private int getCrewPower(Permanent permanent, Game game) {
-        MageInt crewPowerSource = null;
-
         if (permanent.hasAbility(CrewWithToughnessAbility.getInstance(), game)) {
-            crewPowerSource = permanent.getToughness();
+            return permanent.getToughness().getValue();
+        } else if (permanent.getAbilities(game).containsClass(CrewIncreasedPowerAbility.class)) {
+            return permanent.getPower().getValue() + 2;
         } else {
-            crewPowerSource = permanent.getPower();
+            return permanent.getPower().getValue();
         }
-
-        return crewPowerSource.getValue();
     }
 }

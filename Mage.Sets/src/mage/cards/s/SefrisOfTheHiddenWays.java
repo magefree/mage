@@ -22,15 +22,16 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.permanent.Permanent;
 
 /**
  * @author TheElk801
  */
 public final class SefrisOfTheHiddenWays extends CardImpl {
-    
+
     public SefrisOfTheHiddenWays(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
-        
+
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
@@ -47,11 +48,11 @@ public final class SefrisOfTheHiddenWays extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability.withFlavorWord("Create Undead"));
     }
-    
+
     private SefrisOfTheHiddenWays(final SefrisOfTheHiddenWays card) {
         super(card);
     }
-    
+
     @Override
     public SefrisOfTheHiddenWays copy() {
         return new SefrisOfTheHiddenWays(this);
@@ -59,29 +60,34 @@ public final class SefrisOfTheHiddenWays extends CardImpl {
 }
 
 class SefrisOfTheHiddenWaysTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     public SefrisOfTheHiddenWaysTriggeredAbility(Effect effect) {
         super(Zone.ALL, effect, false);
     }
-    
+
     public SefrisOfTheHiddenWaysTriggeredAbility(final SefrisOfTheHiddenWaysTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public SefrisOfTheHiddenWaysTriggeredAbility copy() {
         return new SefrisOfTheHiddenWaysTriggeredAbility(this);
     }
-    
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Boolean applies = false;
-        Card sourceCard = game.getCard(sourceId);
+        /*
+        Sefris of the Hidden Ways must be on the battlefield for its first ability to trigger. 
+        It does not trigger when Sefris goes to the graveyard from the battlefield, even if other 
+        creature cards also went to the graveyard at the same time.
+         */
+        Permanent sourceCard = game.getPermanent(sourceId);
         if (((ZoneChangeGroupEvent) event).getToZone() != Zone.GRAVEYARD
                 || sourceCard == null) {
             return false;
@@ -90,7 +96,7 @@ class SefrisOfTheHiddenWaysTriggeredAbility extends TriggeredAbilityImpl {
         Set<Card> cards = zEvent.getCards();
         for (Card card : cards) {
             if (card.isCreature(game)
-                    && sourceCard != card // 603.6c, 603.10a, and 603.10.
+                    && (Card) sourceCard != card // 603.6c, 603.10a, and 603.10.
                     && !card.isCopy()
                     && card.isOwnedBy(controllerId)) {
                 applies = true;
@@ -98,7 +104,7 @@ class SefrisOfTheHiddenWaysTriggeredAbility extends TriggeredAbilityImpl {
         }
         return applies;
     }
-    
+
     @Override
     public String getTriggerPhrase() {
         return "Whenever one or more creature cards are put into your graveyard from anywhere, venture into the dungeon.";

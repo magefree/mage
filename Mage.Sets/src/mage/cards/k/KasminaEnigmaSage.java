@@ -43,7 +43,7 @@ public final class KasminaEnigmaSage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new KasminaEnigmaSageGainAbilitiesEffect()));
 
         // +2: Scry 1.
-        this.addAbility(new LoyaltyAbility(new ScryEffect(1), 2));
+        this.addAbility(new LoyaltyAbility(new ScryEffect(1, false), 2));
 
         // −X: Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it.
         this.addAbility(new LoyaltyAbility(FractalToken.getEffect(

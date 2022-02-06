@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -48,8 +48,6 @@ public final class VeneratedTeacher extends CardImpl {
 
 class VeneratedTeacherEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
-
     public VeneratedTeacherEffect() {
         super(Outcome.BoostCreature);
         staticText = "put two level counters on each creature you control with level up";
@@ -61,7 +59,7 @@ class VeneratedTeacherEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game);
+        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURES, source.getControllerId(), game);
         if (!permanents.isEmpty()) {
             for (Permanent permanent : permanents) {
                 for (Ability ability : permanent.getAbilities()) {

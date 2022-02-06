@@ -22,7 +22,7 @@ import mage.target.common.TargetCreatureOrPlaneswalkerAmount;
  */
 public final class DragonlordAtarka extends CardImpl {
 
-    private static final FilterCreatureOrPlaneswalkerPermanent filter = new FilterCreatureOrPlaneswalkerPermanent("target creatures and/or planeswalkers your opponents control");
+    private static final FilterCreatureOrPlaneswalkerPermanent filter = new FilterCreatureOrPlaneswalkerPermanent("creatures and/or planeswalkers your opponents control");
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());

@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -11,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -29,8 +28,7 @@ public final class ArrowVolleyTrap extends CardImpl {
 
         // Arrow Volley Trap deals 5 damage divided as you choose among any number of target attacking creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(5, new FilterAttackingCreature("attacking creatures")));
-
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(5, StaticFilters.FILTER_ATTACKING_CREATURES));
     }
 
     private ArrowVolleyTrap(final ArrowVolleyTrap card) {

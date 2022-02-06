@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import mage.ObjectColor;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
@@ -10,9 +9,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -22,12 +19,6 @@ import java.util.UUID;
  */
 public final class AgonizingDemise extends CardImpl {
 
-    private static final FilterCreaturePermanent filterNonBlackCreature = new FilterCreaturePermanent("nonblack creature");
-
-    static {
-        filterNonBlackCreature.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-    }
-
     public AgonizingDemise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");
 
@@ -36,7 +27,7 @@ public final class AgonizingDemise extends CardImpl {
 
         // Destroy target nonblack creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterNonBlackCreature));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
 
         // If Agonizing Demise was kicked, it deals damage equal to that creature's power to the creature's controller.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

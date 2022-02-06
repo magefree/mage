@@ -12,20 +12,12 @@ import mage.game.permanent.Permanent;
  */
 public class TransformsOrEntersTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final boolean whenever;
-
     public TransformsOrEntersTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, false);
-    }
-
-    public TransformsOrEntersTriggeredAbility(Effect effect, boolean optional, boolean whenever) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.whenever = whenever;
     }
 
     private TransformsOrEntersTriggeredAbility(final TransformsOrEntersTriggeredAbility ability) {
         super(ability);
-        this.whenever = ability.whenever;
     }
 
     @Override
@@ -56,6 +48,6 @@ public class TransformsOrEntersTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "When" + (whenever ? "ever" : "") + " this creature enters the battlefield or transforms into {this}, ";
+        return "Whenever this creature enters the battlefield or transforms into {this}, ";
     }
 }

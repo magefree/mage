@@ -5,6 +5,8 @@ import mage.abilities.keyword.TrainingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -19,7 +21,11 @@ public class HumanSoldierTrainingToken extends TokenImpl {
         subtype.add(SubType.SOLDIER);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        // Training (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)
         this.addAbility(new TrainingAbility());
+
+        availableImageSetCodes = Arrays.asList("VOW");
     }
 
     private HumanSoldierTrainingToken(final HumanSoldierTrainingToken token) {

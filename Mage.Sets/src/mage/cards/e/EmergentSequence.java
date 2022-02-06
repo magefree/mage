@@ -18,6 +18,7 @@ import mage.game.permanent.token.FractalToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -114,7 +115,7 @@ class EmergentSequenceWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
                 && ((EntersTheBattlefieldEvent) event).getTarget().isLand(game)) {
-            playerMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+            playerMap.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
         }
     }
 

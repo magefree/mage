@@ -41,7 +41,8 @@ class RivalsDuelFightTargetsEffect extends OneShotEffect {
 
     public RivalsDuelFightTargetsEffect() {
         super(Outcome.Damage);
-        staticText = "Choose two target creatures that share no creature types. Those creatures fight each other";
+        staticText = "Choose two target creatures that share no creature types. " +
+                "Those creatures fight each other. <i>(Each deals damage equal to its power to the other.)</i>";
     }
 
     public RivalsDuelFightTargetsEffect(final RivalsDuelFightTargetsEffect effect) {

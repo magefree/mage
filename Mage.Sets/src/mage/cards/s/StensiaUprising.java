@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -47,7 +47,7 @@ public final class StensiaUprising extends CardImpl {
                 new DamageTargetEffect(7), false, "{this} deals 7 damage to any target"
         );
         reflexiveTrigger.addTarget(new TargetAnyTarget());
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new CreateTokenEffect(new RedHumanToken()), TargetController.YOU, false
         );
         ability.addEffect(new ConditionalOneShotEffect(

@@ -1,7 +1,6 @@
 package mage.cards.w;
 
 import mage.ApprovingObject;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -103,8 +102,7 @@ class WizardsSpellbookEffect extends OneShotEffect {
             return false;
         }
         UUID exileId = CardUtil.getExileZoneId(game, source);
-        MageObject sourceObject = source.getSourcePermanentOrLKI(game);
-        player.moveCardsToExile(card, source, game, true, exileId, sourceObject != null ? sourceObject.getName() : null);
+        player.moveCardsToExile(card, source, game, true, exileId, CardUtil.getSourceName(game, source));
         if (level < 3) {
             Card copiedCard = game.copyCard(card, source, source.getControllerId());
             if (!player.chooseUse(

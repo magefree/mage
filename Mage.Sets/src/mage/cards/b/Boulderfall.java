@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -17,7 +16,7 @@ public final class Boulderfall extends CardImpl {
     public Boulderfall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{6}{R}{R}");
 
-        // Boulderfall deals 5 damage divided as you choose among any number of target creatures and/or players.
+        // Boulderfall deals 5 damage divided as you choose among any number of targets.
         this.getSpellAbility().addEffect(new DamageMultiEffect(5));
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(5));
     }

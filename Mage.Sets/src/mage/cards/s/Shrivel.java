@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -7,7 +6,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -19,7 +17,7 @@ public final class Shrivel extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
 
-        this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, new FilterCreaturePermanent("All creatures"), false));
+        this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn));
     }
 
     private Shrivel(final Shrivel card) {

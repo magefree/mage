@@ -12,11 +12,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -29,18 +28,11 @@ public final class KefnetsMonument extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Blue creature spells");
     private static final FilterSpell filter2 = new FilterSpell("a creature spell");
-    private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
         filter.add(Predicates.and(new ColorPredicate(ObjectColor.BLUE), CardType.CREATURE.getPredicate()));
-    }
-    static {
         filter2.add(CardType.CREATURE.getPredicate());
     }
-    static {
-        filter3.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
 
     public KefnetsMonument(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
@@ -52,7 +44,7 @@ public final class KefnetsMonument extends CardImpl {
 
         // Whenever you cast a creature spell, target creature an opponent controls doesn't untap during its controller's next untap step.
         Ability ability = new SpellCastControllerTriggeredAbility(new DontUntapInControllersNextUntapStepTargetEffect(), filter2, false);
-        ability.addTarget(new TargetCreaturePermanent(filter3));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

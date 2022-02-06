@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -11,9 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPlayer;
@@ -24,12 +22,11 @@ import mage.target.TargetPlayer;
  */
 public final class SagesRowDenizen extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another blue creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another blue creature");
 
     static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
         filter.add(AnotherPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
     public SagesRowDenizen(UUID ownerId, CardSetInfo setInfo) {

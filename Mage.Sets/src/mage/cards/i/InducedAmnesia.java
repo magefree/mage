@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
@@ -66,8 +65,7 @@ class InducedAmnesiaExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        MageObject sourceObject = source.getSourceObject(game);
-        if (targetPlayer == null || sourceObject == null) {
+        if (targetPlayer == null) {
             return false;
         }
         int numberOfCards = targetPlayer.getHand().size();
@@ -77,7 +75,7 @@ class InducedAmnesiaExileEffect extends OneShotEffect {
         Cards cards = new CardsImpl(targetPlayer.getHand());
         targetPlayer.moveCardsToExile(
                 cards.getCards(game), source, game, false,
-                CardUtil.getExileZoneId(game, source), sourceObject.getIdName()
+                CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
         );
         cards.getCards(game)
                 .stream()

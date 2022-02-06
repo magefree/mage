@@ -10,6 +10,7 @@ import mage.constants.SubTypeSet;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.*;
 
@@ -43,7 +44,7 @@ public enum GreatestSharedCreatureTypeCount implements DynamicValue {
                 .map(permanent -> permanent.getSubtype(game))
                 .flatMap(Collection::stream)
                 .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
-                .forEach(subType -> typeMap.compute(subType, (s, i) -> i == null ? 1 : Integer.sum(i, 1)));
+                .forEach(subType -> typeMap.compute(subType, CardUtil::setOrIncrementValue));
         return changelings
                 + typeMap
                 .values()

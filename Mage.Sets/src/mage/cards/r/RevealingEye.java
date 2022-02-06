@@ -36,7 +36,7 @@ public final class RevealingEye extends CardImpl {
         this.nightCard = true;
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When this creature transforms into Revealing Eye, target opponent reveals their hand. You may choose a nonland card from it. If you do, that player discards that card, then draws a card.
         Ability ability = new TransformIntoSourceTriggeredAbility(new RevealingEyeEffect());

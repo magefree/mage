@@ -34,7 +34,7 @@ public final class MirrorhallMimic extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(
                 StaticFilters.FILTER_PERMANENT_CREATURE, new MirrorhallMimicApplier()
         ), true, null, "You may have {this} enter the battlefield as a copy of " +
-                "any creature on the battlefield, except it's a Spirit in addition to its other types", null));
+                "any creature on the battlefield, except it's a Spirit in addition to its other types.", null));
 
         // Disturb {3}{U}{U}
         this.addAbility(new DisturbAbility(this, "{3}{U}{U}"));

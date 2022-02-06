@@ -9,9 +9,11 @@ package mage;
 public enum MageIdentifier {
     CemeteryIlluminatorWatcher,
     GisaAndGeralfWatcher,
+    HaukensInsightWatcher,
     KaradorGhostChieftainWatcher,
     KessDissidentMageWatcher,
     LurrusOfTheDreamDenWatcher,
     MuldrothaTheGravetideWatcher,
-    WishWatcher
+    WishWatcher,
+    GlimpseTheCosmosWatcher
 }

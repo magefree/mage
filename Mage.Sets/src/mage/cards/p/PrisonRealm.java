@@ -40,7 +40,7 @@ public final class PrisonRealm extends CardImpl {
         this.addAbility(ability);
 
         // When Prison Realm enters the battlefield, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
     }
 
     private PrisonRealm(final PrisonRealm card) {

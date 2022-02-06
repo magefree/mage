@@ -1,24 +1,29 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.decorator.ConditionalAsThoughEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
 
 /**
  *
  * @author LevelX2
  */
 public final class OgreJailbreaker extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("Gate");
+
+    static {
+        filter.add(SubType.GATE.getPredicate());
+    }
 
     public OgreJailbreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
@@ -30,8 +35,13 @@ public final class OgreJailbreaker extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
+
         // Ogre Jailbreaker can attack as though it didn't have defender as long as you control a Gate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OgreJailbreakerEffect()));
+        Effect effect = new ConditionalAsThoughEffect(
+                new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
+                new PermanentsOnTheBattlefieldCondition(filter));
+        effect.setText("{this} can attack as though it didn't have defender as long as you control a Gate");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
     }
 
@@ -43,43 +53,4 @@ public final class OgreJailbreaker extends CardImpl {
     public OgreJailbreaker copy() {
         return new OgreJailbreaker(this);
     }
-}
-
-class OgreJailbreakerEffect extends AsThoughEffectImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent();
-    private PermanentsOnTheBattlefieldCondition gateCondition;
-    static {
-        filter.add(SubType.GATE.getPredicate());
-    }
-
-    public OgreJailbreakerEffect() {
-        super(AsThoughEffectType.ATTACK, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "{this} can attack as though it didn't have defender as long as you control a Gate";
-        gateCondition = new PermanentsOnTheBattlefieldCondition(filter);
-    }
-
-    public OgreJailbreakerEffect(final OgreJailbreakerEffect effect) {
-        super(effect);
-        this.gateCondition = effect.gateCondition;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public OgreJailbreakerEffect copy() {
-        return new OgreJailbreakerEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(source.getSourceId()) && gateCondition.apply(game, source))  {
-            return true;
-        }
-        return false;
-    }
-
 }

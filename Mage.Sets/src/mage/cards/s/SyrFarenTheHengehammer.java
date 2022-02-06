@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class SyrFarenTheHengehammer extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
+    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
     private static final FilterPermanent filter
             = new FilterAttackingCreature("another target attacking creature");
 

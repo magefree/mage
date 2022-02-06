@@ -127,6 +127,8 @@ Jumpstart: Historic Horizons|JumpstartHistoricHorizons|
 Kaladesh|Kaladesh|
 Kaldheim|Kaldheim|
 Kaldheim Commander|KaldheimCommander|
+Kamigawa: Neon Dynasty|KamigawaNeonDynasty|
+Neon Dynasty Commander|NeonDynastyCommander|
 Khans of Tarkir|KhansOfTarkir|
 Launch Party|LaunchParty|
 Legends|Legends|
@@ -214,6 +216,7 @@ Torment|Torment|
 Ugin's Fate|UginsFate|
 Unglued|Unglued|
 Unhinged|Unhinged|
+Unfinity|Unfinity|
 Unlimited Edition|UnlimitedEdition|
 Unstable|Unstable|
 Urza's Destiny|UrzasDestiny|

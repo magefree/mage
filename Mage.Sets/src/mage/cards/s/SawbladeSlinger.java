@@ -23,7 +23,7 @@ import java.util.UUID;
 public final class SawbladeSlinger extends CardImpl {
 
     private static final FilterPermanent filter = new FilterArtifactPermanent("artifact an opponent controls");
-    private static final FilterPermanent filter2 = new FilterPermanent(SubType.ZOMBIE, "Zombie and opponent controls");
+    private static final FilterPermanent filter2 = new FilterPermanent(SubType.ZOMBIE, "Zombie an opponent controls");
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());

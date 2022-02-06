@@ -6,11 +6,17 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  *
  * @author weirddan455
  */
 public class DragonIllusionToken extends TokenImpl {
+
+    public DragonIllusionToken() {
+        this(0);
+    }
 
     public DragonIllusionToken(int xValue) {
         super("Dragon Illusion Token", "X/X red Dragon Illusion creature token with flying and haste");
@@ -21,8 +27,10 @@ public class DragonIllusionToken extends TokenImpl {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
 
-        addAbility(FlyingAbility.getInstance());
-        addAbility(HasteAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(HasteAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("VOW");
     }
 
     private DragonIllusionToken(final DragonIllusionToken token) {

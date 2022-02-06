@@ -36,7 +36,7 @@ public final class MistbladeShinobi extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Ninjutsu {1}{U} ({1}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new NinjutsuAbility("{U}"));
 
         // Whenever Mistblade Shinobi deals combat damage to a player, you may return target creature that player controls to its owner's hand.
         this.addAbility(new MistbladeShinobiTriggeredAbility());

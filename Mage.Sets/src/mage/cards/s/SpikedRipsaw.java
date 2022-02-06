@@ -24,7 +24,7 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public final class SpikedRipsaw extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.FOREST, "forest");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.FOREST, "Forest");
 
     public SpikedRipsaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{G}");

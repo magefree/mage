@@ -31,7 +31,7 @@ public final class FiredrinkerSatyr extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Firedrinker Satyr is dealt damage, it deals that much damage to you.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(new FiredrinkerSatyrDealDamageEffect(), false, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new FiredrinkerSatyrDealDamageEffect(), false, false));
         // {1}{R}: Firedrinker Satyr gets +1/+0 until end of turn and deals 1 damage to you.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}"));
         Effect effect = new DamageControllerEffect(1);

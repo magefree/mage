@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class WretchedThrong extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a card name Wretched Throng");
+    private static final FilterCard filter = new FilterCard("a card named Wretched Throng");
 
     static {
         filter.add(new NamePredicate("Wretched Throng"));

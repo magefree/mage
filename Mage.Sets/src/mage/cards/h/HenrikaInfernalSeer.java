@@ -21,8 +21,7 @@ import java.util.UUID;
  */
 public final class HenrikaInfernalSeer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creature you control with flying, deathtouch, and/or lifelink");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
@@ -55,7 +54,7 @@ public final class HenrikaInfernalSeer extends CardImpl {
         // {1}{B}{B}: Each creature you control with flying, deathtouch, and/or lifelink gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BoostAllEffect(
                 0, 1, Duration.EndOfTurn, filter, false
-        ), new ManaCostsImpl<>("{1}{B}{B}")));
+        ).setText("each creature you control with flying, deathtouch, and/or lifelink gets +1/+0 until end of turn"), new ManaCostsImpl<>("{1}{B}{B}")));
     }
 
     private HenrikaInfernalSeer(final HenrikaInfernalSeer card) {

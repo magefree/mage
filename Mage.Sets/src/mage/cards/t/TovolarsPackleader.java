@@ -53,7 +53,7 @@ public final class TovolarsPackleader extends CardImpl {
         ));
 
         // {2}{G}{G}: Another target Wolf or Werewolf you control fights target creature you don't control.
-        Ability ability = new SimpleActivatedAbility(new FightTargetsEffect(
+        Ability ability = new SimpleActivatedAbility(new FightTargetsEffect().setText(
                 "another target Wolf or Werewolf you control fights target creature you don't control"
         ), new ManaCostsImpl<>("{2}{G}{G}"));
         ability.addTarget(new TargetPermanent(filter));

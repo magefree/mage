@@ -53,6 +53,6 @@ public class TransformIntoSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getTriggerPhrase() {
-        return "When" + (whenever ? "ever" : "") + " this creature transforms into this {this}, ";
+        return "When" + (whenever ? "ever" : "") + " this creature transforms into {this}, ";
     }
 }

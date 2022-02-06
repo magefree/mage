@@ -28,7 +28,7 @@ public final class ShinkaGatekeeper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Shinka Gatekeeper is dealt damage, it deals that much damage to you.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(new ShinkaGatekeeperDealDamageEffect(), false, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new ShinkaGatekeeperDealDamageEffect(), false, false));
     }
 
     private ShinkaGatekeeper(final ShinkaGatekeeper card) {

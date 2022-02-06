@@ -28,7 +28,7 @@ public final class AyulaQueenAmongBears extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.BEAR, "another Bear");
     private static final FilterPermanent filter2 = new FilterPermanent(SubType.BEAR, "Bear");
-    private static final FilterControlledPermanent filter3 = new FilterControlledPermanent("Bear you controls");
+    private static final FilterControlledPermanent filter3 = new FilterControlledPermanent("Bear you control");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -51,7 +51,7 @@ public final class AyulaQueenAmongBears extends CardImpl {
         ability.addTarget(new TargetPermanent(filter2));
 
         // • Target Bear you control fights target creature you don't control.
-        Mode mode = new Mode(new FightTargetsEffect());
+        Mode mode = new Mode(new FightTargetsEffect(false));
         mode.addTarget(new TargetControlledPermanent(filter3));
         mode.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         ability.addMode(mode);

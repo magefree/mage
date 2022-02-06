@@ -269,7 +269,7 @@ public abstract class MageTestPlayerBase {
                         Card newCard = cardInfo != null ? cardInfo.getCard() : null;
                         if (newCard != null) {
                             if (gameZone == Zone.BATTLEFIELD) {
-                                Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+                                Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
                                 PermanentCard p = new PermanentCard(permCard, null, currentGame);
                                 p.setTapped(tapped);
                                 perms.add(p);
@@ -422,7 +422,7 @@ public abstract class MageTestPlayerBase {
 
         CardSetInfo testSet = new CardSetInfo(customName, "custom", "123", Rarity.COMMON);
         Card newCard = new CustomTestCard(controllerPlayer.getId(), testSet, cardType, spellCost);
-        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
         PermanentCard permanent = new PermanentCard(permCard, controllerPlayer.getId(), currentGame);
 
         switch (putAtZone) {

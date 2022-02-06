@@ -38,7 +38,7 @@ public final class VeteranBodyguard extends CardImpl {
         // As long as Veteran Bodyguard is untapped, all damage that would be dealt to you by unblocked creatures is dealt to Veteran Bodyguard instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalPreventionEffect(
                 new VeteranBodyguardEffect(),
-                new InvertCondition(SourceTappedCondition.instance),
+                SourceTappedCondition.UNTAPPED,
                 "As long as {this} is untapped, all damage that would be dealt to you by unblocked creatures is dealt to {this} instead."
         )));
     }

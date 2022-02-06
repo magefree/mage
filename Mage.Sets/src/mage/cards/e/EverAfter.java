@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -9,7 +8,7 @@ import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -24,7 +23,7 @@ public final class EverAfter extends CardImpl {
         // Return up to two target creature cards from your graveyard to the battlefield. Each of those creatures is a black Zombie in addition
         // to its other colors and types. Put Ever After on the bottom of its owner's library.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
         Effect effect = new BecomesBlackZombieAdditionEffect();
         effect.setText("Each of those creatures is a black Zombie in addition to its other colors and types");
         this.getSpellAbility().addEffect(effect);

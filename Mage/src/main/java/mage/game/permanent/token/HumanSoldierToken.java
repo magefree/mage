@@ -5,6 +5,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.util.RandomUtil;
 
+import java.util.Arrays;
+
 public final class HumanSoldierToken extends TokenImpl {
 
     public HumanSoldierToken() {
@@ -15,6 +17,8 @@ public final class HumanSoldierToken extends TokenImpl {
         color.setWhite(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        availableImageSetCodes = Arrays.asList("SOI", "THB", "IKO", "MIC");
     }
 
     @Override

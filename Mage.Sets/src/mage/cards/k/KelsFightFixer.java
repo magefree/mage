@@ -37,7 +37,7 @@ public final class KelsFightFixer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever you sacrifice a creature, you may pay {U/B}. If you do, draw a card.
         this.addAbility(new KelsFightFixerTriggeredAbility());

@@ -2,16 +2,14 @@ package mage.cards.p;
 
 import mage.MageObject;
 import mage.MageObjectReference;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.WatcherScope;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -25,18 +23,12 @@ import java.util.*;
  */
 public final class PrematureBurial extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature that entered the battlefield since your last turn ended");
-
-    static {
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-    }
-
     public PrematureBurial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Destroy target nonblack creature that entered the battlefield since your last turn ended.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect().setText("Destroy target nonblack creature that entered the battlefield since your last turn ended."));
-        this.getSpellAbility().addTarget(new ETBSinceYourLastTurnTarget(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new ETBSinceYourLastTurnTarget(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.getSpellAbility().addWatcher(new ETBSinceYourLastTurnWatcher());
     }
 

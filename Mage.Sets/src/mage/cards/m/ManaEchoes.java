@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,7 +28,7 @@ public final class ManaEchoes extends CardImpl {
 
         // Whenever a creature enters the battlefield, you may add X mana of {C}, where X is the number of creatures you control that share a creature type with it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                new ManaEchoesEffect(), new FilterCreaturePermanent("a creature"), true, SetTargetPointer.PERMANENT, ""));
+                new ManaEchoesEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE, true, SetTargetPointer.PERMANENT, ""));
     }
 
     private ManaEchoes(final ManaEchoes card) {

@@ -5,11 +5,16 @@ import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -224,5 +229,74 @@ public final class DragonsMaze extends ExpansionSet {
         cardInfos.removeIf(cardInfo -> (cardInfo.getName().equals("Grove of the Guardian")
                                     || cardInfo.getName().equals("Thespian's Stage")));
         return cardInfos;
+    }
+
+    @Override
+    protected void generateBoosterMap() {
+        super.generateBoosterMap();
+        CardRepository
+                .instance
+                .findCards(new CardCriteria().setCodes("RTR", "GTC").rarities(Rarity.RARE).types(CardType.LAND))
+                .stream()
+                .forEach(cardInfo -> inBoosterMap.put(cardInfo.getSetCode() + "_" + cardInfo.getCardNumber(), cardInfo));
+    }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new DragonsMazeCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/dgm.html
+// Using USA collation for common/uncommon, rare collation inferred from other sets
+class DragonsMazeCollator implements BoosterCollator {
+    private final CardRun commonA = new CardRun(true, "113", "43", "12", "137", "142", "28", "109", "39", "8", "44", "19", "139", "136", "25", "87", "33", "1", "46", "39", "52", "141", "38", "25", "67", "44", "9", "145", "17", "54", "33", "21", "142", "46", "2", "52", "136", "12", "30", "87", "141", "45", "8", "37", "137", "28", "17", "113", "14", "45", "9", "139", "54", "21", "138", "109", "2", "43", "14", "145", "37", "67", "30", "138", "1", "19", "38");
+    private final CardRun commonB = new CardRun(true, "120", "10", "20", "32", "24", "40", "48", "15", "6", "35", "65", "140", "23", "16", "42", "10", "31", "41", "86", "4", "29", "13", "144", "32", "50", "40", "120", "3", "26", "13", "143", "48", "31", "23", "65", "6", "20", "86", "35", "50", "24", "15", "140", "4", "90", "143", "41", "26", "144", "16", "3", "90", "29", "42");
+    private final CardRun uncommonA = new CardRun(true, "122", "75", "77", "76", "131", "83", "118", "106", "133", "103", "101", "110", "127", "70", "102", "118", "121", "60", "76", "111", "53", "83", "75", "127", "102", "110", "121", "77", "97", "122", "106", "76", "103", "102", "117", "133", "75", "53", "110", "131", "101", "60", "61", "117", "111", "121", "97", "83", "70", "118", "61", "122", "117", "106", "131", "103", "77", "101", "133", "60", "53", "97", "127", "61", "70", "111");
+    private final CardRun uncommonB = new CardRun(true, "71", "129", "98", "74", "55", "105", "78", "130", "59", "56", "98", "135", "116", "129", "134", "78", "73", "74", "93", "130", "105", "79", "126", "59", "134", "55", "64", "56", "71", "73", "135", "79", "129", "93", "78", "116", "74", "126", "56", "79", "130", "55", "71", "98", "59", "135", "64", "93", "126", "105", "116", "73", "134", "64");
+    // Trait Doctoring not implemented (text changing effect)
+    private final CardRun rare = new CardRun(false, "5", "7", "11", /*"18",*/ "22", "27", "34", "36", "47", "49", "51", "58", "66", "68", "69", "72", "80", "84", "85", "88", "89", "91", "96", "99", "104", "107", "108", "112", "115", "119", "123", "124", "125", "128", "132");
+    private final CardRun mythic = new CardRun(false, "57", "62", "63", "81", "82", "92", "94", "95", "100", "114");
+    private final CardRun landCommon = new CardRun(false, "146", "147", "148", "149", "150", "151", "153", "154", "155", "156");
+    private final CardRun landRare = new CardRun(false, "152", "RTR_238", "RTR_241", "RTR_243", "RTR_247", "RTR_248", "152",  "GTC_240", "GTC_242", "GTC_245", "GTC_247", "GTC_249");
+
+    private final BoosterStructure AAAAABBBBB = new BoosterStructure(
+            commonA, commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB, commonB
+    );
+    private final BoosterStructure AAAAAABBBB = new BoosterStructure(
+            commonA, commonA, commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB
+    );
+    private final BoosterStructure AAB = new BoosterStructure(uncommonA, uncommonA, uncommonB);
+    private final BoosterStructure ABB = new BoosterStructure(uncommonA, uncommonB, uncommonB);
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+    private final BoosterStructure M1 = new BoosterStructure(mythic);
+    private final BoosterStructure L1 = new BoosterStructure(landCommon);
+    private final BoosterStructure L2 = new BoosterStructure(landRare);
+
+    private final RarityConfiguration commonRuns = new RarityConfiguration(AAAAABBBBB, AAAAAABBBB);
+    // In order for equal numbers of each uncommon to exist, the average booster must contain:
+    // 1.65 A uncommons (33 / 20)
+    // 1.35 B uncommons (27 / 20)
+    // These numbers are the same for all sets with 40 uncommons in asymmetrical A/B print runs
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(
+            AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB, AAB,
+            ABB, ABB, ABB, ABB, ABB, ABB, ABB
+    );
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1, R1, R1, R1, R1, R1, R1, M1);
+    private final RarityConfiguration landRuns = new RarityConfiguration(
+        L1, L1, L1, L1, L1, L1, L1, L1, L1, L1,
+        L1, L1, L1, L1, L1, L1, L1, L1, L1, L2
+    );
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(commonRuns.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(landRuns.getNext().makeRun());
+        return booster;
     }
 }

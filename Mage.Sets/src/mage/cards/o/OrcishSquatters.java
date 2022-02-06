@@ -1,11 +1,8 @@
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
-import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
@@ -16,10 +13,10 @@ import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
 import mage.target.TargetPermanent;
-import mage.watchers.common.LostControlWatcher;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class OrcishSquatters extends CardImpl {
@@ -38,14 +35,9 @@ public final class OrcishSquatters extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Orcish Squatters attacks and isn't blocked, you may gain control of target land defending player controls for as long as you control Orcish Squatters. If you do, Orcish Squatters assigns no combat damage this turn.
-        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(new ConditionalContinuousEffect(
-                new GainControlTargetEffect(Duration.Custom),
-                new SourceOnBattlefieldControlUnchangedCondition(),
-                "gain control of target land defending player controls for as long as you control {this}"
-        ), true);
+        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(new GainControlTargetEffect(Duration.WhileControlled), true);
         ability.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn, true));
         ability.addTarget(new TargetPermanent(filter));
-        ability.addWatcher(new LostControlWatcher());
         this.addAbility(ability);
     }
 

@@ -9,7 +9,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterEnchantmentPermanent;
 
 import java.util.UUID;
 
@@ -17,6 +18,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SteelcladSpirit extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterEnchantmentPermanent("an enchantment");
 
     public SteelcladSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -30,8 +33,7 @@ public final class SteelcladSpirit extends CardImpl {
 
         // Whenever an enchantment enters the battlefield under your control, Steelclad Spirit can attack this turn as though it didn't have defender.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn),
-                StaticFilters.FILTER_ENCHANTMENT_PERMANENT
+                new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), filter
         ));
     }
 

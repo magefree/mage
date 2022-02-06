@@ -20,7 +20,7 @@ public final class PointedDiscussion extends CardImpl {
 
         // You draw two cards, lose 2 life, then create a Blood token.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("you draw two cards"));
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2).concatBy(","));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2).setText(", lose 2 life"));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BloodToken()).concatBy(", then"));
     }
 

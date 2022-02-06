@@ -30,7 +30,7 @@ public final class ThrashingMudspawn extends CardImpl {
 
         // Whenever Thrashing Mudspawn is dealt damage, you lose that much life.
         Ability ability = new DealtDamageToSourceTriggeredAbility(
-                new ThrashingMudspawnEffect(), false, false, true
+                new ThrashingMudspawnEffect(), false, false
         );
         this.addAbility(ability);
 

@@ -102,6 +102,6 @@ class BrineboundGiftTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever {this} enters the battlefield or enchanted creature becomes the target " +
-                "of an Aura spell, create a 1/1 white Spirit creature token with flying";
+                "of an Aura spell, create a 1/1 white Spirit creature token with flying.";
     }
 }

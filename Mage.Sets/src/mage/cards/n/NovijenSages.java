@@ -24,7 +24,8 @@ import mage.target.TargetPermanent;
  */
 public final class NovijenSages extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control with a +1/+1 counter on it");
+    // Creatures you control with +1/+1 counters, name is what it is to make rules come out
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("among creatures you control");
 
     static {
         filter.add(CounterType.P1P1.getPredicate());

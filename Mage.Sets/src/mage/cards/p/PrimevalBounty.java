@@ -46,7 +46,7 @@ public final class PrimevalBounty extends CardImpl {
 
         // Whenever a land enters the battlefield under your control, you gain 3 life.
         effect = new GainLifeEffect(3);
-        ability = new EntersBattlefieldControlledTriggeredAbility(effect, new FilterLandPermanent("a land"));
+        ability = new EntersBattlefieldControlledTriggeredAbility(effect, StaticFilters.FILTER_LAND_A);
         this.addAbility(ability);
 
     }

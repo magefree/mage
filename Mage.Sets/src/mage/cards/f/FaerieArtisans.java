@@ -86,7 +86,7 @@ class FaerieArtisansEffect extends OneShotEffect {
             if (effect.apply(game, source)) {
                 String oldTokens = (String) game.getState().getValue(source.getSourceId().toString() + source.getSourceObjectZoneChangeCounter());
                 StringBuilder sb = new StringBuilder();
-                for (Permanent permanent : effect.getAddedPermanent()) {
+                for (Permanent permanent : effect.getAddedPermanents()) {
                     if (sb.length() > 0) {
                         sb.append(';');
                     }

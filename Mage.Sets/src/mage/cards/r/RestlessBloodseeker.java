@@ -30,7 +30,7 @@ public final class RestlessBloodseeker extends CardImpl {
     private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0);
     private static final Hint hint = new ConditionHint(condition, "You gained life this turn");
     private static final FilterControlledPermanent filter
-            = new FilterControlledPermanent(SubType.BLOOD, "Blood token");
+            = new FilterControlledPermanent(SubType.BLOOD, "Blood tokens");
 
     static {
         filter.add(TokenPredicate.TRUE);

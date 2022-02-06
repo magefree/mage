@@ -46,7 +46,7 @@ public final class TergridGodOfFright extends ModalDoubleFacesCard {
         this.getLeftHalfCard().setPT(4, 5);
 
         // Menace
-        this.getLeftHalfCard().addAbility(new MenaceAbility());
+        this.getLeftHalfCard().addAbility(new MenaceAbility(false));
 
         // Whenever an opponent sacrifices a nontoken permanent or discards a permanent card, you may put that card onto the battlefield under your control from their graveyard.
         this.getLeftHalfCard().addAbility(new TergridGodOfFrightTriggeredAbility());

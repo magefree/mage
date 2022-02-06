@@ -14,7 +14,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -27,12 +27,6 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class GuardianOfTazeem extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public GuardianOfTazeem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add(SubType.SPHINX);
@@ -44,7 +38,7 @@ public final class GuardianOfTazeem extends CardImpl {
 
         // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under you control, tap target creature an opponent controls. If that land is an Island, that creature doesn't untap during its controller's next untap step.
         Ability ability = new GuardianOfTazeemTriggeredAbility();
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

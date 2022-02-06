@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -68,7 +67,7 @@ class RingOfMarufEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            new WishEffect(new FilterCard(), false).apply(game, source);
+            new WishEffect().apply(game, source);
             this.discard();
             return true;
         }

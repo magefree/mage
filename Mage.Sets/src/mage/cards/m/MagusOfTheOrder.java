@@ -37,6 +37,7 @@ public final class MagusOfTheOrder extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
         filter2.add(AnotherPredicate.instance);
         filter2.add(new ColorPredicate(ObjectColor.GREEN));
+        filter2.add(CardType.CREATURE.getPredicate());
     }
 
     public MagusOfTheOrder(UUID ownerId, CardSetInfo setInfo) {

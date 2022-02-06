@@ -2,13 +2,13 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.hint.common.DomainHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -52,12 +52,12 @@ public final class HiveheartShaman extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever Hiveheart Shaman attacks, you may search your library for a basic land card that doesn't share a land type with a land you control, put that card onto the battlefield, then shuffle.
-        this.addAbility(new AttacksTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true, true
-        )));
+        this.addAbility(new AttacksTriggeredAbility(
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), true
+        ));
 
         // {5}{G}: Create a 1/1 green Insect creature token. Put X +1/+1 counters on it, where X is the number of basic land types among lands you control. Activate only as a sorcery.
-        this.addAbility(new SimpleActivatedAbility(
+        this.addAbility(new ActivateAsSorceryActivatedAbility(
                 new HiveheartShamanEffect(), new ManaCostsImpl<>("{5}{G}")
         ).addHint(DomainHint.instance));
     }

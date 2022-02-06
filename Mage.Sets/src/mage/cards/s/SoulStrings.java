@@ -6,7 +6,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -25,7 +25,7 @@ public final class SoulStrings extends CardImpl {
         Effect effect = new DoUnlessAnyPlayerPaysEffect(
                 new ReturnFromGraveyardToHandTargetEffect(), ManacostVariableValue.REGULAR);
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(2, new FilterCreatureCard("creature cards from your graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
     }
 
     private SoulStrings(final SoulStrings card) {

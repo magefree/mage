@@ -15,7 +15,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -30,13 +30,11 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public final class RageForger extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other Shaman creature you control");
-    private static final FilterControlledCreaturePermanent filterAttack = new FilterControlledCreaturePermanent("creature you control with a +1/+1 counter on it");
 
     static {
         filter.add(SubType.SHAMAN.getPredicate());
         filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(AnotherPredicate.instance);
-        filterAttack.add(CounterType.P1P1.getPredicate());
     }
 
     public RageForger(UUID ownerId, CardSetInfo setInfo) {
@@ -49,11 +47,11 @@ public final class RageForger extends CardImpl {
 
         // When Rage Forger enters the battlefield, put a +1/+1 counter on each other Shaman creature you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false));
+
         // Whenever a creature you control with a +1/+1 counter on it attacks, you may have that creature deal 1 damage to target player.
-        Ability ability = new AttacksCreatureYouControlTriggeredAbility(new RageForgerDamageEffect(), true, filterAttack, true);
+        Ability ability = new AttacksCreatureYouControlTriggeredAbility(new RageForgerDamageEffect(), true, StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1, true);
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
-
     }
 
     private RageForger(final RageForger card) {

@@ -657,8 +657,9 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void setTargetAdjuster(TargetAdjuster targetAdjuster) {
+    public StackAbility setTargetAdjuster(TargetAdjuster targetAdjuster) {
         this.targetAdjuster = targetAdjuster;
+        return this;
     }
 
     @Override

@@ -5,8 +5,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ExileAttachedEffect;
 import mage.abilities.effects.common.combat.CantAttackAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -46,7 +46,7 @@ public final class WeightOfConscience extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
 
         // Tap two untapped creatures you control that share a creature type: Exile enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WeightOfConscienceEffect(), new TapTargetCost(new WeightOfConscienceTarget())));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileAttachedEffect(), new TapTargetCost(new WeightOfConscienceTarget())));
     }
 
     private WeightOfConscience(final WeightOfConscience card) {
@@ -56,43 +56,6 @@ public final class WeightOfConscience extends CardImpl {
     @Override
     public WeightOfConscience copy() {
         return new WeightOfConscience(this);
-    }
-}
-
-class WeightOfConscienceEffect extends OneShotEffect {
-
-    WeightOfConscienceEffect() {
-        super(Outcome.Exile);
-        staticText = "Exile enchanted creature";
-    }
-
-    WeightOfConscienceEffect(final WeightOfConscienceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WeightOfConscienceEffect copy() {
-        return new WeightOfConscienceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
-        if (controller != null
-                && enchantment != null
-                && enchantment.getAttachedTo() != null) {
-            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature != null) {
-                controller.moveCardsToExile(creature, source, game, true, null, "");
-            }
-        }
-        return false;
     }
 }
 

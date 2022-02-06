@@ -27,7 +27,7 @@ public final class MoggManiac extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Mogg Maniac is dealt damage, it deals that much damage to target opponent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(new MoggManiacDealDamageEffect(), false, false, true);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(new MoggManiacDealDamageEffect(), false, false);
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
     }

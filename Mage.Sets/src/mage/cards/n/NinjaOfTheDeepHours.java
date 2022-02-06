@@ -27,7 +27,7 @@ public final class NinjaOfTheDeepHours extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ninjutsu {1}{U} ({1}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new NinjutsuAbility("{1}{U}"));
 
         // Whenever Ninja of the Deep Hours deals combat damage to a player, you may draw a card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true, false));

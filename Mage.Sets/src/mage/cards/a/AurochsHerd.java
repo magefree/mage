@@ -1,10 +1,10 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -35,6 +35,8 @@ public final class AurochsHerd extends CardImpl {
         filter2.add(AnotherPredicate.instance);
     }
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter2);
+
     public AurochsHerd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add(SubType.AUROCHS);
@@ -47,8 +49,7 @@ public final class AurochsHerd extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
             new TargetCardInLibrary(filter1), true), true));
         // Whenever Aurochs Herd attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
-        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter2, 1);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, StaticValue.get(0), Duration.EndOfTurn, true), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"), false));
     }
 
     private AurochsHerd(final AurochsHerd card) {

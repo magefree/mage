@@ -27,6 +27,7 @@ import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -104,7 +105,6 @@ class ChandraHeartOfFireUltimateEffect extends OneShotEffect {
             if (target.canChoose(source.getSourceId(), controller.getId(), game)
                     && target.choose(Outcome.AIDontUseIt, controller.getId(), source.getSourceId(), game)) {
                 Set<Card> cards = new CardsImpl(target.getTargets()).getCards(game);
-                controller.moveCards(cards, Zone.EXILED, source, game);
                 exiledCards.addAll(cards);
             }
 
@@ -113,9 +113,11 @@ class ChandraHeartOfFireUltimateEffect extends OneShotEffect {
             if (target.canChoose(source.getSourceId(), controller.getId(), game)
                     && target.choose(Outcome.AIDontUseIt, controller.getId(), source.getSourceId(), game)) {
                 Set<Card> cards = new CardsImpl(target.getTargets()).getCards(game);
-                controller.moveCards(cards, Zone.EXILED, source, game);
                 exiledCards.addAll(cards);
             }
+
+            // exile cards all at once and set the exile name to the source card
+            controller.moveCardsToExile(exiledCards, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
             controller.shuffleLibrary(source, game);
 
             exiledCards.removeIf(card -> !Zone.EXILED.equals(game.getState().getZone(card.getId())));

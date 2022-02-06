@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -52,15 +51,14 @@ public class ExileTopXMayPlayUntilEndOfTurnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
+        if (controller == null) {
             return false;
         }
         Set<Card> cards = controller.getLibrary().getTopCards(game, amount);
         if (cards.isEmpty()) {
             return true;
         }
-        controller.moveCardsToExile(cards, source, game, true, source.getSourceId(), sourceObject.getIdName());
+        controller.moveCardsToExile(cards, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         // remove cards that could not be moved to exile
         cards.removeIf(card -> !Zone.EXILED.equals(game.getState().getZone(card.getId())));
         if (!cards.isEmpty()) {
@@ -75,18 +73,17 @@ public class ExileTopXMayPlayUntilEndOfTurnEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("exile the top ");
         if (amount == 1) {
-            sb.append("exile the top card of your library. ");
-            sb.append(CardUtil.getTextWithFirstCharUpperCase(duration.toString()));
-            sb.append(", you may play that card");
+            sb.append("card of your library. ");
         } else {
-            sb.append("exile the top ");
             sb.append(CardUtil.numberToText(amount));
             sb.append(" cards of your library. ");
-            sb.append(CardUtil.getTextWithFirstCharUpperCase(duration.toString()));
-            sb.append(", you may play cards exiled this way");
         }
+        sb.append(CardUtil.getTextWithFirstCharUpperCase(duration.toString()));
+        sb.append(", you may play ");
+        sb.append(amount == 1 ? "that card" : amount == 2 ? "those cards" : "cards exiled this way");
+
         if (showHint) {
             sb.append(". <i>(You still pay its costs. You can play a land this way only if you have an available land play remaining.)</i>");
         }

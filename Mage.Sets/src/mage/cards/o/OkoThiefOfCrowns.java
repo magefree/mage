@@ -1,11 +1,10 @@
 package mage.cards.o;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,8 +13,9 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FoodToken;
-import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -25,7 +25,8 @@ import java.util.UUID;
  */
 public final class OkoThiefOfCrowns extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterOpponentsCreaturePermanent("creature an opponent controls with power 3 or less");
+    private static final FilterPermanent filter
+            = new FilterOpponentsCreaturePermanent("creature an opponent controls with power 3 or less");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
@@ -42,9 +43,7 @@ public final class OkoThiefOfCrowns extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new FoodToken()), 2));
 
         // +1: Target artifact or creature loses all abilities and becomes a green Elk creature with base power and toughness 3/3.
-        Ability ability = new LoyaltyAbility(new BecomesCreatureTargetEffect(
-                new OkoThiefOfCrownsToken(), true, false, Duration.Custom
-        ).setText("target artifact or creature loses all abilities and becomes a green Elk creature with base power and toughness 3/3"), 1);
+        Ability ability = new LoyaltyAbility(new OkoThiefOfCrownsEffect(), 1);
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);
 
@@ -68,22 +67,71 @@ public final class OkoThiefOfCrowns extends CardImpl {
     }
 }
 
-class OkoThiefOfCrownsToken extends TokenImpl {
+class OkoThiefOfCrownsEffect extends ContinuousEffectImpl {
 
-    OkoThiefOfCrownsToken() {
-        super("", "green Elk creature with base power and toughness 3/3");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add(SubType.ELK);
-        power = new MageInt(3);
-        toughness = new MageInt(3);
+    OkoThiefOfCrownsEffect() {
+        super(Duration.Custom, Outcome.Benefit);
+        staticText = "target artifact or creature loses all abilities " +
+                "and becomes a green Elk creature with base power and toughness 3/3";
     }
 
-    private OkoThiefOfCrownsToken(final OkoThiefOfCrownsToken token) {
-        super(token);
+    private OkoThiefOfCrownsEffect(final OkoThiefOfCrownsEffect effect) {
+        super(effect);
     }
 
-    public OkoThiefOfCrownsToken copy() {
-        return new OkoThiefOfCrownsToken(this);
+    @Override
+    public OkoThiefOfCrownsEffect copy() {
+        return new OkoThiefOfCrownsEffect(this);
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent == null) {
+            discard();
+            return false;
+        }
+        switch (layer) {
+            case TypeChangingEffects_4:
+                permanent.removeAllCardTypes(game);
+                permanent.removeAllSubTypes(game);
+                permanent.addCardType(game, CardType.CREATURE);
+                permanent.addSubType(game, SubType.ELK);
+                return true;
+            case ColorChangingEffects_5:
+                permanent.getColor(game).setWhite(false);
+                permanent.getColor(game).setBlue(false);
+                permanent.getColor(game).setBlack(false);
+                permanent.getColor(game).setRed(false);
+                permanent.getColor(game).setGreen(true);
+                return true;
+            case AbilityAddingRemovingEffects_6:
+                permanent.removeAllAbilities(source.getSourceId(), game);
+                return true;
+            case PTChangingEffects_7:
+                if (sublayer == SubLayer.SetPT_7b) {
+                    permanent.getPower().setValue(3);
+                    permanent.getToughness().setValue(3);
+                    return true;
+                }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean hasLayer(Layer layer) {
+        switch (layer) {
+            case TypeChangingEffects_4:
+            case ColorChangingEffects_5:
+            case AbilityAddingRemovingEffects_6:
+            case PTChangingEffects_7:
+                return true;
+        }
+        return false;
     }
 }

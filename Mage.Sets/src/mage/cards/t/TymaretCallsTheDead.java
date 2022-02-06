@@ -33,7 +33,7 @@ public final class TymaretCallsTheDead extends CardImpl {
         this.subtype.add(SubType.SAGA);
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I, II — Put the top three cards of your library into your graveyard. Then you may exile a creature or enchantment card from your graveyard. If you do, create a 2/2 black Zombie creature token.
         sagaAbility.addChapterEffect(

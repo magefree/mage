@@ -41,7 +41,7 @@ public final class DomriAnarchOfBolas extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DomriAnarchOfBolasEffect(), 1));
 
         // -2: Target creature you control fights target creature you don't control.
-        Ability ability = new LoyaltyAbility(new FightTargetsEffect(), -2);
+        Ability ability = new LoyaltyAbility(new FightTargetsEffect(false), -2);
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);

@@ -14,7 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -25,10 +25,8 @@ import mage.target.common.TargetCreaturePermanent;
 public final class CennsTactician extends CardImpl {
     
     private static final FilterCreaturePermanent filterSoldier = new FilterCreaturePermanent("Soldier creature");
-    private static final FilterControlledCreaturePermanent filterCounter = new FilterControlledCreaturePermanent("Each creature you control with a +1/+1 counter on it");
     static {
         filterSoldier.add(SubType.SOLDIER.getPredicate());
-        filterCounter.add(CounterType.P1P1.getPredicate());
     }
 
     public CennsTactician(UUID ownerId, CardSetInfo setInfo) {
@@ -45,7 +43,14 @@ public final class CennsTactician extends CardImpl {
         this.addAbility(ability);
         
         // Each creature you control with a +1/+1 counter on it can block an additional creature each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureAllEffect(1, filterCounter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new CanBlockAdditionalCreatureAllEffect(
+                        1,
+                        StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1,
+                        Duration.WhileOnBattlefield)
+                )
+        );
     }
 
     private CennsTactician(final CennsTactician card) {

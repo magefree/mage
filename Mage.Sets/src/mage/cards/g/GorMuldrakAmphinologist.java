@@ -17,6 +17,7 @@ import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.token.SalamnderWarriorToken;
 import mage.game.permanent.token.Token;
+import mage.util.CardUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -95,7 +96,7 @@ class GorMuldrakAmphinologistEffect extends OneShotEffect {
                 ).stream()
                 .filter(Objects::nonNull)
                 .map(Controllable::getControllerId)
-                .forEach(uuid -> creatureMap.compute(uuid, (u, i) -> i == null ? 1 : Integer.sum(i, 1)));
+                .forEach(uuid -> creatureMap.compute(uuid, CardUtil::setOrIncrementValue));
         int minValue = creatureMap.values().stream().mapToInt(x -> x).min().orElse(0);
         minValue = Math.max(minValue, 0);
         Token token = new SalamnderWarriorToken();

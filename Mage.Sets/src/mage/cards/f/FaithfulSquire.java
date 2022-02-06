@@ -71,7 +71,7 @@ public final class FaithfulSquire extends CardImpl {
         this.flipCardName = "Kaiso, Memory of Loyalty";
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Faithful Squire.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
 
         // At the beginning of the end step, if there are two or more ki counters on Faithful Squire, you may flip it
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

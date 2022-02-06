@@ -429,7 +429,6 @@ public final class DoubleMasters extends ExpansionSet {
 // Using USA collation for all rarities
 // Foil slot partially inferred to match standard booster rarity as best as possible
 // Foil odds (approximate): 10/14 to be common, 3/14 to be uncommon, 0.875/14 to be rare, 0.125/14 to be mythic
-// Regular common sheets used for foil commons as foil common sheet is currently incomplete
 // TODO: write a test, not sure how right now
 class DoubleMastersCollator implements BoosterCollator {
 
@@ -443,26 +442,29 @@ class DoubleMastersCollator implements BoosterCollator {
     private final CardRun rareC = new CardRun(false, "189", "7", "311", "155", "236", "193", "11", "47", "249", "195", "128", "170", "260", "132", "203", "21", "268", "98", "57", "322", "209", "177", "279", "61", "212", "219", "292", "34", "183", "110", "149", "227", "306");
     private final CardRun rareD = new CardRun(false, "309", "191", "233", "9", "156", "243", "88", "251", "319", "53", "129", "200", "171", "19", "266", "207", "58", "211", "276", "213", "142", "286", "106", "31", "221", "182", "39");
     private final CardRun rareE = new CardRun(false, "5", "41", "152", "234", "235", "197", "94", "56", "1", "270", "107", "145", "295", "296", "297", "298", "300", "216", "185", "308");
+    private final CardRun foilCommonA = new CardRun(true, "126", "40", "28", "144", "69", "35", "114", "63", "4", "146", "74", "30", "143", "52", "33", "137", "60", "2", "121", "46", "269", "12", "135", "42", "29", "115", "59", "17", "140", "44", "18", "116", "70", "28", "133", "63", "13", "114", "52", "3", "150", "40", "27", "126", "50", "35", "135", "69", "4", "137", "269", "60", "30", "144", "74", "17", "18", "133", "44", "13", "150", "70", "29", "115", "59", "3", "116", "121", "45", "33", "146", "46", "12", "140", "42", "2", "143", "50", "144", "74", "12", "121", "50", "4", "269", "143", "63", "28", "17", "69", "35", "135", "45", "27", "126", "40", "30", "114", "52", "116", "60", "33", "137", "46", "2", "146", "42", "29", "133", "70", "13", "150", "44", "18", "140", "59", "3", "115", "45", "27");
+    private final CardRun foilCommonB = new CardRun(true, "95", "160", "168", "277", "80", "159", "230", "108", "157", "330", "78", "163", "287", "83", "173", "329", "108", "168", "247", "90", "154", "283", "80", "261", "262", "105", "187", "294", "79", "165", "331", "304", "84", "163", "162", "277", "111", "151", "330", "92", "157", "304", "96", "160", "230", "95", "181", "331", "78", "176", "287", "84", "159", "256", "87", "165", "261", "79", "330", "154", "294", "105", "173", "259", "83", "187", "329", "111", "168", "283", "92", "151", "262", "108", "162", "230", "80", "163", "247", "95", "157", "277", "90", "159", "331", "96", "176", "287", "78", "154", "259", "84", "160", "256", "105", "329", "181", "261", "79", "165", "304", "83", "151", "262", "111", "173", "283", "87", "187", "294", "92", "90", "162", "259", "96", "181", "247", "87", "176", "256");
+    private final CardRun foilCommonC = new CardRun(false, "237", "239", "250", "254", "255", "257", "263", "273", "280", "288", "305");
     private final CardRun foilUncommonA = new CardRun(false, "6", "119", "312", "244", "161", "246", "315", "86", "93", "15", "169", "201", "54", "172", "202", "208", "22", "274", "323", "101", "102", "62", "141", "65", "285", "67", "220", "290", "291", "147", "222", "301", "302", "73", "184", "37", "112", "186", "228", "307");
     private final CardRun foilUncommonB = new CardRun(false, "310", "232", "120", "238", "241", "242", "245", "194", "123", "89", "91", "166", "49", "16", "125", "198", "199", "258", "265", "134", "267", "99", "23", "278", "100", "25", "281", "138", "178", "66", "217", "68", "180", "71", "36", "148", "224", "38", "188", "229");
     private final CardRun foilRareA = new CardRun(false, "309", "231", "76", "189", "7", "153", "191", "233", "77", "9", "117", "311", "118", "155", "10", "236", "43", "193", "313", "156", "158", "243", "11", "122", "47", "82", "48", "85", "88", "124", "249", "251", "252", "14", "167", "195", "316", "317", "318", "196", "319", "127", "128", "53", "320", "170", "129", "260", "200", "171", "130", "321", "55", "132", "264", "203", "19", "266", "21", "174", "268", "207", "97", "98", "175", "57", "58", "271", "322", "209", "210", "211", "272", "276", "324", "177", "279", "24", "61", "282", "212", "26", "139", "284", "103", "64", "213", "142", "325", "104", "215", "286", "179", "219", "106", "289", "31", "32", "292", "293", "326", "221", "299", "34", "182", "327", "72", "109", "183", "223", "110", "149", "328", "225", "226", "227", "306", "75", "332", "113", "39");
     private final CardRun foilRareB = new CardRun(false, "5", "41", "190", "8", "152", "234", "235", "192", "240", "81", "314", "248", "164", "253", "51", "197", "94", "131", "56", "204", "1", "205", "20", "206", "270", "136", "275", "214", "218", "107", "145", "295", "296", "297", "298", "300", "216", "303", "185", "308");
 
-    private final BoosterStructure C1 = new BoosterStructure(
+    private final BoosterStructure AAAABBBC = new BoosterStructure(
             commonA, commonA, commonA, commonA,
             commonB, commonB, commonB, commonC
     );
-    private final BoosterStructure C2 = new BoosterStructure(
+    private final BoosterStructure AAABBBBC = new BoosterStructure(
             commonA, commonA, commonA,
             commonB, commonB, commonB, commonB,
             commonC
     );
-    private final BoosterStructure C3 = new BoosterStructure(
+    private final BoosterStructure AAAABBBB = new BoosterStructure(
             commonA, commonA, commonA, commonA,
             commonB, commonB, commonB, commonB
     );
-    private final BoosterStructure U1 = new BoosterStructure(uncommonA, uncommonB, uncommonB);
-    private final BoosterStructure U2 = new BoosterStructure(uncommonA, uncommonA, uncommonB);
+    private final BoosterStructure AAB = new BoosterStructure(uncommonA, uncommonA, uncommonB);
+    private final BoosterStructure ABB = new BoosterStructure(uncommonA, uncommonB, uncommonB);
     private final BoosterStructure R1 = new BoosterStructure(rareA, rareC);
     private final BoosterStructure R2 = new BoosterStructure(rareA, rareD);
     private final BoosterStructure R3 = new BoosterStructure(rareA, rareE);
@@ -470,21 +472,21 @@ class DoubleMastersCollator implements BoosterCollator {
     private final BoosterStructure R5 = new BoosterStructure(rareB, rareD);
     private final BoosterStructure R6 = new BoosterStructure(rareB, rareE);
 
-    private final BoosterStructure F01 = new BoosterStructure(commonA, commonB);
-    private final BoosterStructure F02 = new BoosterStructure(commonA, commonC);
-    private final BoosterStructure F03 = new BoosterStructure(commonA, foilUncommonA);
-    private final BoosterStructure F04 = new BoosterStructure(commonA, foilUncommonB);
-    private final BoosterStructure F05 = new BoosterStructure(commonA, foilRareA);
-    private final BoosterStructure F06 = new BoosterStructure(commonA, foilRareB);
-    private final BoosterStructure F07 = new BoosterStructure(commonB, commonC);
-    private final BoosterStructure F08 = new BoosterStructure(commonB, foilUncommonA);
-    private final BoosterStructure F09 = new BoosterStructure(commonB, foilUncommonB);
-    private final BoosterStructure F10 = new BoosterStructure(commonB, foilRareA);
-    private final BoosterStructure F11 = new BoosterStructure(commonB, foilRareB);
-    private final BoosterStructure F12 = new BoosterStructure(commonC, foilUncommonA);
-    private final BoosterStructure F13 = new BoosterStructure(commonC, foilUncommonB);
-    private final BoosterStructure F14 = new BoosterStructure(commonC, foilRareA);
-    private final BoosterStructure F15 = new BoosterStructure(commonC, foilRareB);
+    private final BoosterStructure F01 = new BoosterStructure(foilCommonA, foilCommonB);
+    private final BoosterStructure F02 = new BoosterStructure(foilCommonA, foilCommonC);
+    private final BoosterStructure F03 = new BoosterStructure(foilCommonA, foilUncommonA);
+    private final BoosterStructure F04 = new BoosterStructure(foilCommonA, foilUncommonB);
+    private final BoosterStructure F05 = new BoosterStructure(foilCommonA, foilRareA);
+    private final BoosterStructure F06 = new BoosterStructure(foilCommonA, foilRareB);
+    private final BoosterStructure F07 = new BoosterStructure(foilCommonB, foilCommonC);
+    private final BoosterStructure F08 = new BoosterStructure(foilCommonB, foilUncommonA);
+    private final BoosterStructure F09 = new BoosterStructure(foilCommonB, foilUncommonB);
+    private final BoosterStructure F10 = new BoosterStructure(foilCommonB, foilRareA);
+    private final BoosterStructure F11 = new BoosterStructure(foilCommonB, foilRareB);
+    private final BoosterStructure F12 = new BoosterStructure(foilCommonC, foilUncommonA);
+    private final BoosterStructure F13 = new BoosterStructure(foilCommonC, foilUncommonB);
+    private final BoosterStructure F14 = new BoosterStructure(foilCommonC, foilRareA);
+    private final BoosterStructure F15 = new BoosterStructure(foilCommonC, foilRareB);
     private final BoosterStructure F16 = new BoosterStructure(foilUncommonA, foilUncommonB);
     private final BoosterStructure F17 = new BoosterStructure(foilUncommonA, foilRareA);
     private final BoosterStructure F18 = new BoosterStructure(foilUncommonA, foilRareB);
@@ -492,22 +494,23 @@ class DoubleMastersCollator implements BoosterCollator {
     private final BoosterStructure F20 = new BoosterStructure(foilUncommonB, foilRareB);
     private final BoosterStructure F21 = new BoosterStructure(foilRareA, foilRareB);
 
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 3.52 A commons (320 / 91)
+    // 3.52 B commons (320 / 91)
+    // 0.97 C commons (88 / 91)
     private final RarityConfiguration commonRuns = new RarityConfiguration(
-            C1, C2, C1, C2,
-            C1, C2, C1, C2,
-            C1, C2, C1, C2,
-            C1, C2, C1, C2,
-            C1, C2, C1, C2,
-            C1, C2, C1, C2,
-            C1, C2, C1, C2,
-            C1, C2, C1, C2,
-            C1, C2, C1, C2,
-            C1, C2, C1, C2,
-            C1, C2, C1, C2,
-            C3, C3, C3
+            AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC,
+            AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC,
+            AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC,
+            AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC,
+            AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC,
+            AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC,
+            AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC,
+            AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC, AAAABBBC, AAABBBBC,
+            AAAABBBB, AAAABBBB, AAAABBBB
     );
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(
-            U1, U2
+            AAB, ABB
     );
     private final RarityConfiguration rareRuns = new RarityConfiguration(
             R1, R2, R3,

@@ -255,7 +255,7 @@ public abstract class MageTestBase {
                         Card newCard = cardInfo != null ? cardInfo.getCard() : null;
                         if (newCard != null) {
                             if (gameZone == Zone.BATTLEFIELD) {
-                                Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+                                Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
                                 PermanentCard p = new PermanentCard(permCard, null, currentGame);
                                 p.setTapped(tapped);
                                 perms.add(p);

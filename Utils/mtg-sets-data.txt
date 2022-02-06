@@ -127,6 +127,8 @@ Jumpstart: Historic Horizons|J21|
 Kaladesh|KLD|
 Kaldheim|KHM|
 Kaldheim Commander|KHC|
+Kamigawa: Neon Dynasty|NEO|
+Neon Dynasty Commander|NEC|
 Khans of Tarkir|KTK|
 Limited Edition Alpha|LEA|
 Limited Edition Beta|LEB|
@@ -212,6 +214,7 @@ Ugin's Fate|UGIN|
 Unglued|UGL|
 Urza's Legacy|ULG|
 Unhinged|UNH|
+Unfinity|UNF|
 Urza's Saga|USG|
 Unstable|UST|
 HASCON Promo 2017|H17|

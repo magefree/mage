@@ -30,18 +30,23 @@ public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEff
         this(power, toughness, duration, false);
     }
 
+    public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, boolean lockedIn) {
+        this(power, toughness, duration, lockedIn, "{this}");
+    }
+
     /**
      * @param power
      * @param toughness
      * @param duration
      * @param lockedIn  if true, power and toughness will be calculated only once, when the ability resolves
+     * @param description
      */
-    public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, boolean lockedIn) {
+    public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, boolean lockedIn, String description) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         this.lockedIn = lockedIn;
-        this.staticText = "{this} gets " + CardUtil.getBoostText(power, toughness, duration);
+        this.staticText = description + " gets " + CardUtil.getBoostText(power, toughness, duration);
     }
 
     public BoostSourceEffect(final BoostSourceEffect effect) {

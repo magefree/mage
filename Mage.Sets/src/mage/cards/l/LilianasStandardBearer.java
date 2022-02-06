@@ -15,6 +15,7 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -89,7 +90,7 @@ class LilianasStandardBearerWatcher extends Watcher {
         }
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent() && zEvent.getTarget().isCreature(game)) {
-            playerMap.compute(zEvent.getTarget().getControllerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+            playerMap.compute(zEvent.getTarget().getControllerId(), CardUtil::setOrIncrementValue);
         }
     }
 

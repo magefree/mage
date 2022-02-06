@@ -458,8 +458,8 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
             cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
                     .setCodes(this.code)
                     .rarities(rarity)
-                    .subtypes("Lesson")));
-            cardInfos.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() > maxCardNumberInBooster);
+                    .subtypes(SubType.LESSON)
+                    .maxCardNumber(maxCardNumberInBooster)));
         }
         return cardInfos;
     }
