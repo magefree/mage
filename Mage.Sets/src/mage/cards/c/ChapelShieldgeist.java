@@ -43,7 +43,9 @@ public final class ChapelShieldgeist extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new WardAbility(new GenericManaCost(1)), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_PERMANENT_CREATURE
-        ).setText("each creature you control has ward {1}")));
+        ).setText("each creature you control has ward {1}. " +
+                "<i>(Whenever it becomes the target of a spell or ability an opponent controls, " +
+                "counter it unless that player pays 1.)</i>")));
 
         // If Chapel Shieldgeist would be put into a graveyard from anywhere, exile it instead.
         this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));

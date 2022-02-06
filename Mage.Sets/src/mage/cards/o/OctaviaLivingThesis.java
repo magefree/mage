@@ -48,7 +48,7 @@ public final class OctaviaLivingThesis extends CardImpl {
         ).setRuleAtTheTop(true).addHint(hint));
 
         // Ward {8}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{8}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{8}"), false));
 
         // Magecraft — Whenever you cast an instant or sorcery spell, target creature has base power and toughness 8/8 until end of turn.
         Ability ability = new MagecraftAbility(

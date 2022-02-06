@@ -50,7 +50,12 @@ public final class HallOfStormGiants extends CardImpl {
                         .withColor("U")
                         .withSubType(SubType.GIANT)
                         .withAbility(new WardAbility(new GenericManaCost(3))),
-                "land", Duration.EndOfTurn), new ManaCostsImpl("{5}{U}")));
+                "land", Duration.EndOfTurn).setText(
+                        "Until end of turn, Hall of Storm Giants becomes a 7/7 blue Giant creature with ward {3}. " +
+                                "It's still a land. " +
+                                "<i>(Whenever it becomes the target of a spell or ability an opponent controls, " +
+                                "counter it unless that player pays {3}.)</i>"),
+                new ManaCostsImpl("{5}{U}")));
     }
 
     private HallOfStormGiants(final HallOfStormGiants card) {

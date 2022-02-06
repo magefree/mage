@@ -18,15 +18,22 @@ import mage.util.CardUtil;
 public class WardAbility extends TriggeredAbilityImpl {
 
     private final Cost cost;
+    private final boolean showAbilityHint;
 
     public WardAbility(Cost cost) {
+        this(cost, true);
+    }
+
+    public WardAbility(Cost cost, boolean showAbilityHint) {
         super(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(cost), false);
         this.cost = cost;
+        this.showAbilityHint = showAbilityHint;
     }
 
     private WardAbility(final WardAbility ability) {
         super(ability);
         this.cost = ability.cost.copy();
+        this.showAbilityHint = ability.showAbilityHint;
     }
 
     @Override
@@ -73,14 +80,18 @@ public class WardAbility extends TriggeredAbilityImpl {
         } else {
             sb.append("&mdash;").append(CardUtil.getTextWithFirstCharUpperCase(cost.getText())).append('.');
         }
-        sb.append(" <i>(Whenever {this} becomes the target of a spell or ability an opponent controls, " +
-                "counter that spell or ability unless that player ");
-        if (cost instanceof ManaCost) {
-            sb.append("pays ").append(cost.getText());
-        } else {
-            sb.append(cost.getText().replace("pay ", "pays "));
+
+        if (showAbilityHint) {
+            sb.append(" <i>(Whenever this creature becomes the target of a spell or ability an opponent controls, " +
+                    "counter it unless that player ");
+            if (cost instanceof ManaCost) {
+                sb.append("pays ").append(cost.getText());
+            } else {
+                sb.append(cost.getText().replace("pay ", "pays "));
+            }
+            sb.append(".)</i>");
         }
-        sb.append(".)</i>");
+
         return sb.toString();
     }
 }

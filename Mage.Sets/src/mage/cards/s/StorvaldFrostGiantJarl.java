@@ -35,11 +35,11 @@ public final class StorvaldFrostGiantJarl extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Ward {3}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}"), false));
 
         // Other creatures you control have ward {3}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new WardAbility(new GenericManaCost(3)), Duration.WhileOnBattlefield,
+                new WardAbility(new GenericManaCost(3), false), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_PERMANENT_CREATURES, true
         )));
 

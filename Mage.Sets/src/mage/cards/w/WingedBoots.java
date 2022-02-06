@@ -31,7 +31,9 @@ public final class WingedBoots extends CardImpl {
         ));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new WardAbility(new GenericManaCost(4)), AttachmentType.EQUIPMENT
-        ).setText("and ward {4}"));
+        ).setText("and ward {4}. " +
+                "<i>(Whenever equipped creature becomes the target of a spell or ability an opponent controls, " +
+                "counter it unless that player pays {4}.)</i>"));
         this.addAbility(ability);
 
         // Equip {1}

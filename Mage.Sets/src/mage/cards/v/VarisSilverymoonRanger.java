@@ -47,7 +47,7 @@ public final class VarisSilverymoonRanger extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // Ward {1}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}"), false));
 
         // Whenever you cast a creature or planeswalker spell, venture into the dungeon. This ability triggers only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
