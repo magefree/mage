@@ -92,7 +92,7 @@ class OozeToken extends TokenImpl {
     }
 
     public OozeToken(int x) {
-        super("Ooze", "X/X green Ooze creature token, where X is the sacrificed creature's power");
+        super("Ooze Token", "X/X green Ooze creature token, where X is the sacrificed creature's power");
         this.cardType.add(CardType.CREATURE);
         this.color.addColor(ObjectColor.GREEN);
         this.subtype.add(SubType.OOZE);

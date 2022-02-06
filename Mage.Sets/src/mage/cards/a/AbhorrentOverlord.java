@@ -55,7 +55,7 @@ public final class AbhorrentOverlord extends CardImpl {
 class AbhorrentOverlordHarpyToken extends TokenImpl {
 
     AbhorrentOverlordHarpyToken() {
-        super("Harpy", "1/1 black Harpy creature tokens with flying");
+        super("Harpy Token", "1/1 black Harpy creature tokens with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.HARPY);

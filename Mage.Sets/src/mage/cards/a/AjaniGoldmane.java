@@ -65,7 +65,7 @@ public final class AjaniGoldmane extends CardImpl {
 class AvatarToken extends TokenImpl {
 
     public AvatarToken() {
-        super("Avatar", "white Avatar creature token with \"This creature's power and toughness are each equal to your life total.\"");
+        super("Avatar Token", "white Avatar creature token with \"This creature's power and toughness are each equal to your life total.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.AVATAR);
         color.setWhite(true);

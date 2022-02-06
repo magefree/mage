@@ -7,7 +7,7 @@ import mage.constants.SubType;
 public final class OozeToken extends TokenImpl {
 
     public OozeToken(int power, int toughness) {
-        super("Ooze", power + "/" + toughness + " green ooze creature token");
+        super("Ooze Token", power + "/" + toughness + " green ooze creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.OOZE);
