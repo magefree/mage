@@ -24,6 +24,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Myojin of Blooming Dawn", 31, Rarity.RARE, mage.cards.m.MyojinOfBloomingDawn.class));
         cards.add(new SetCardInfo("Myojin of Roaring Blades", 36, Rarity.RARE, mage.cards.m.MyojinOfRoaringBlades.class));
         cards.add(new SetCardInfo("Myojin of Towering Might", 38, Rarity.RARE, mage.cards.m.MyojinOfToweringMight.class));
+        cards.add(new SetCardInfo("Organic Extinction", 8, Rarity.RARE, mage.cards.o.OrganicExtinction.class));
         cards.add(new SetCardInfo("Shorikai, Genesis Engine", 4, Rarity.MYTHIC, mage.cards.s.ShorikaiGenesisEngine.class));
         cards.add(new SetCardInfo("Universal Surveillance", 17, Rarity.RARE, mage.cards.u.UniversalSurveillance.class));
         cards.add(new SetCardInfo("Yoshimaru, Ever Faithful", 32, Rarity.MYTHIC, mage.cards.y.YoshimaruEverFaithful.class));
