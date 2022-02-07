@@ -36,6 +36,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Asari Captain", 215, Rarity.UNCOMMON, mage.cards.a.AsariCaptain.class));
         cards.add(new SetCardInfo("Assassin's Ink", 87, Rarity.UNCOMMON, mage.cards.a.AssassinsInk.class));
         cards.add(new SetCardInfo("Atsushi, the Blazing Sky", 134, Rarity.MYTHIC, mage.cards.a.AtsushiTheBlazingSky.class));
+        cards.add(new SetCardInfo("Automated Artificer", 239, Rarity.COMMON, mage.cards.a.AutomatedArtificer.class));
         cards.add(new SetCardInfo("Awakened Awareness", 47, Rarity.UNCOMMON, mage.cards.a.AwakenedAwareness.class));
         cards.add(new SetCardInfo("Azusa's Many Journeys", 172, Rarity.UNCOMMON, mage.cards.a.AzusasManyJourneys.class));
         cards.add(new SetCardInfo("Bamboo Grove Archer", 173, Rarity.COMMON, mage.cards.b.BambooGroveArcher.class));
