@@ -271,6 +271,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Tatsunari, Toad Rider", 123, Rarity.RARE, mage.cards.t.TatsunariToadRider.class));
         cards.add(new SetCardInfo("Teachings of the Kirin", 212, Rarity.RARE, mage.cards.t.TeachingsOfTheKirin.class));
         cards.add(new SetCardInfo("Tempered in Solitude", 165, Rarity.UNCOMMON, mage.cards.t.TemperedInSolitude.class));
+        cards.add(new SetCardInfo("Tezzeret, Betrayer of Flesh", 84, Rarity.MYTHIC, mage.cards.t.TezzeretBetrayerOfFlesh.class));
         cards.add(new SetCardInfo("The Fall of Lord Konda", 12, Rarity.UNCOMMON, mage.cards.t.TheFallOfLordKonda.class));
         cards.add(new SetCardInfo("The Kami War", 227, Rarity.MYTHIC, mage.cards.t.TheKamiWar.class));
         cards.add(new SetCardInfo("The Long Reach of Night", 109, Rarity.UNCOMMON, mage.cards.t.TheLongReachOfNight.class));
