@@ -282,6 +282,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Vector Glider", 66, Rarity.COMMON, mage.cards.v.VectorGlider.class));
         cards.add(new SetCardInfo("Virus Beetle", 128, Rarity.COMMON, mage.cards.v.VirusBeetle.class));
         cards.add(new SetCardInfo("Vision of the Unspeakable", 48, Rarity.UNCOMMON, mage.cards.v.VisionOfTheUnspeakable.class));
+        cards.add(new SetCardInfo("Voltage Surge", 171, Rarity.COMMON, mage.cards.v.VoltageSurge.class));
         cards.add(new SetCardInfo("Walking Skyscraper", 263, Rarity.UNCOMMON, mage.cards.w.WalkingSkyscraper.class));
         cards.add(new SetCardInfo("Wanderer's Intervention", 41, Rarity.COMMON, mage.cards.w.WanderersIntervention.class));
         cards.add(new SetCardInfo("Weaver of Harmony", 213, Rarity.RARE, mage.cards.w.WeaverOfHarmony.class));
