@@ -136,6 +136,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Ironhoof Boar", 148, Rarity.COMMON, mage.cards.i.IronhoofBoar.class));
         cards.add(new SetCardInfo("Island", 285, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Isshin, Two Heavens as One", 224, Rarity.RARE, mage.cards.i.IsshinTwoHeavensAsOne.class));
+        cards.add(new SetCardInfo("Jugan Defends the Temple", 194, Rarity.MYTHIC, mage.cards.j.JuganDefendsTheTemple.class));
         cards.add(new SetCardInfo("Jukai Naturalist", 225, Rarity.UNCOMMON, mage.cards.j.JukaiNaturalist.class));
         cards.add(new SetCardInfo("Jukai Preserver", 195, Rarity.COMMON, mage.cards.j.JukaiPreserver.class));
         cards.add(new SetCardInfo("Jukai Trainee", 196, Rarity.COMMON, mage.cards.j.JukaiTrainee.class));
@@ -213,6 +214,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Regent's Authority", 32, Rarity.COMMON, mage.cards.r.RegentsAuthority.class));
         cards.add(new SetCardInfo("Reinforced Ronin", 158, Rarity.UNCOMMON, mage.cards.r.ReinforcedRonin.class));
         cards.add(new SetCardInfo("Reito Sentinel", 256, Rarity.UNCOMMON, mage.cards.r.ReitoSentinel.class));
+        cards.add(new SetCardInfo("Remnant of the Rising Star", 194, Rarity.MYTHIC, mage.cards.r.RemnantOfTheRisingStar.class));
         cards.add(new SetCardInfo("Repel the Vile", 33, Rarity.COMMON, mage.cards.r.RepelTheVile.class));
         cards.add(new SetCardInfo("Replication Specialist", 76, Rarity.UNCOMMON, mage.cards.r.ReplicationSpecialist.class));
         cards.add(new SetCardInfo("Return to Action", 121, Rarity.COMMON, mage.cards.r.ReturnToAction.class));
