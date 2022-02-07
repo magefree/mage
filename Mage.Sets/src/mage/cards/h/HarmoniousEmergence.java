@@ -1,4 +1,4 @@
-package mage.cards.c;
+package mage.cards.h;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,6 +9,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,10 +29,10 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class CracklingEmergence extends CardImpl {
+public final class HarmoniousEmergence extends CardImpl {
 
-    public CracklingEmergence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+    public HarmoniousEmergence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         this.subtype.add(SubType.AURA);
 
@@ -41,39 +42,40 @@ public final class CracklingEmergence extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
-        // Enchanted land is a 3/3 red Spirit creature with haste. It's still a land.
+        // Enchanted land is a 4/5 green Spirit creature with vigilance and haste. It's still a land.
         this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
-                new CreatureToken(3, 3)
-                        .withColor("R")
+                new CreatureToken(4, 5)
+                        .withColor("G")
                         .withSubType(SubType.SPIRIT)
+                        .withAbility(VigilanceAbility.getInstance())
                         .withAbility(HasteAbility.getInstance()),
-                "enchanted land is a 3/3 red Spirit creature with haste. It's still a land",
+                "enchanted land is a 4/5 green Spirit creature with vigilance and haste. It's still a land",
                 Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR
         )));
 
-        // If enchanted land would be destroyed, instead sacrifice Crackling Emergence and that land gains indestructible until end of turn.
-        this.addAbility(new SimpleStaticAbility(new CracklingEmergenceEffect()));
+        // If enchanted land would be destroyed, instead sacrifice Harmonious Emergence and that land gains indestructible until end of turn.
+        this.addAbility(new SimpleStaticAbility(new HarmoniousEmergenceEffect()));
     }
 
-    private CracklingEmergence(final CracklingEmergence card) {
+    private HarmoniousEmergence(final HarmoniousEmergence card) {
         super(card);
     }
 
     @Override
-    public CracklingEmergence copy() {
-        return new CracklingEmergence(this);
+    public HarmoniousEmergence copy() {
+        return new HarmoniousEmergence(this);
     }
 }
 
-class CracklingEmergenceEffect extends ReplacementEffectImpl {
+class HarmoniousEmergenceEffect extends ReplacementEffectImpl {
 
-    CracklingEmergenceEffect() {
+    HarmoniousEmergenceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "if enchanted land would be destroyed, instead sacrifice " +
                 "{this} and that land gains indestructible until end of turn";
     }
 
-    private CracklingEmergenceEffect(final CracklingEmergenceEffect effect) {
+    private HarmoniousEmergenceEffect(final HarmoniousEmergenceEffect effect) {
         super(effect);
     }
 
@@ -107,7 +109,7 @@ class CracklingEmergenceEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public CracklingEmergenceEffect copy() {
-        return new CracklingEmergenceEffect(this);
+    public HarmoniousEmergenceEffect copy() {
+        return new HarmoniousEmergenceEffect(this);
     }
 }
