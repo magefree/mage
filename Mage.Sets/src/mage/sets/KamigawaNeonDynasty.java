@@ -265,6 +265,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Tameshi, Reality Architect", 82, Rarity.RARE, mage.cards.t.TameshiRealityArchitect.class));
         cards.add(new SetCardInfo("Tamiyo's Compleation", 83, Rarity.COMMON, mage.cards.t.TamiyosCompleation.class));
         cards.add(new SetCardInfo("Tamiyo's Safekeeping", 211, Rarity.COMMON, mage.cards.t.TamiyosSafekeeping.class));
+        cards.add(new SetCardInfo("Tatsunari, Toad Rider", 123, Rarity.RARE, mage.cards.t.TatsunariToadRider.class));
         cards.add(new SetCardInfo("Teachings of the Kirin", 212, Rarity.RARE, mage.cards.t.TeachingsOfTheKirin.class));
         cards.add(new SetCardInfo("Tempered in Solitude", 165, Rarity.UNCOMMON, mage.cards.t.TemperedInSolitude.class));
         cards.add(new SetCardInfo("The Fall of Lord Konda", 12, Rarity.UNCOMMON, mage.cards.t.TheFallOfLordKonda.class));

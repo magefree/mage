@@ -780,6 +780,13 @@ public final class StaticFilters {
         FILTER_SPELL_INSTANT_SORCERY_WIZARD.setLockedFilter(true);
     }
 
+    public static final FilterSpell FILTER_SPELL_AN_ENCHANTMENT = new FilterSpell("an enchantment spell");
+
+    static {
+        FILTER_SPELL_AN_ENCHANTMENT.add(CardType.ENCHANTMENT.getPredicate());
+        FILTER_SPELL_AN_ENCHANTMENT.setLockedFilter(true);
+    }
+
     public static final FilterSpell FILTER_SPELL_KICKED_A = new FilterSpell("a kicked spell");
 
     static {
