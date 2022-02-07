@@ -253,6 +253,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Swiftwater Cliffs", 277, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
         cards.add(new SetCardInfo("Takenuma, Abandoned Mire", 278, Rarity.RARE, mage.cards.t.TakenumaAbandonedMire.class));
         cards.add(new SetCardInfo("Tales of Master Seshiro", 210, Rarity.COMMON, mage.cards.t.TalesOfMasterSeshiro.class));
+        cards.add(new SetCardInfo("Tameshi, Reality Architect", 82, Rarity.RARE, mage.cards.t.TameshiRealityArchitect.class));
         cards.add(new SetCardInfo("Tamiyo's Compleation", 83, Rarity.COMMON, mage.cards.t.TamiyosCompleation.class));
         cards.add(new SetCardInfo("Teachings of the Kirin", 212, Rarity.RARE, mage.cards.t.TeachingsOfTheKirin.class));
         cards.add(new SetCardInfo("Tempered in Solitude", 165, Rarity.UNCOMMON, mage.cards.t.TemperedInSolitude.class));
