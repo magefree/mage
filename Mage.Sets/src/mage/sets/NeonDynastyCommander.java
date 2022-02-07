@@ -26,5 +26,6 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Myojin of Towering Might", 38, Rarity.RARE, mage.cards.m.MyojinOfToweringMight.class));
         cards.add(new SetCardInfo("Shorikai, Genesis Engine", 4, Rarity.MYTHIC, mage.cards.s.ShorikaiGenesisEngine.class));
         cards.add(new SetCardInfo("Universal Surveillance", 17, Rarity.RARE, mage.cards.u.UniversalSurveillance.class));
+        cards.add(new SetCardInfo("Yoshimaru, Ever Faithful", 32, Rarity.MYTHIC, mage.cards.y.YoshimaruEverFaithful.class));
     }
 }
