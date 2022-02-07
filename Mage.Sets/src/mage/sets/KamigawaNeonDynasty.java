@@ -134,6 +134,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Invoke Despair", 101, Rarity.RARE, mage.cards.i.InvokeDespair.class));
         cards.add(new SetCardInfo("Invoke the Ancients", 193, Rarity.RARE, mage.cards.i.InvokeTheAncients.class));
         cards.add(new SetCardInfo("Invoke the Winds", 58, Rarity.RARE, mage.cards.i.InvokeTheWinds.class));
+        cards.add(new SetCardInfo("Iron Apprentice", 248, Rarity.COMMON, mage.cards.i.IronApprentice.class));
         cards.add(new SetCardInfo("Ironhoof Boar", 148, Rarity.COMMON, mage.cards.i.IronhoofBoar.class));
         cards.add(new SetCardInfo("Island", 285, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Isshin, Two Heavens as One", 224, Rarity.RARE, mage.cards.i.IsshinTwoHeavensAsOne.class));
