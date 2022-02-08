@@ -184,6 +184,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Memory of Toshiro", 108, Rarity.UNCOMMON, mage.cards.m.MemoryOfToshiro.class));
         cards.add(new SetCardInfo("Michiko's Reign of Truth", 29, Rarity.UNCOMMON, mage.cards.m.MichikosReignOfTruth.class));
         cards.add(new SetCardInfo("Mindlink Mech", 62, Rarity.RARE, mage.cards.m.MindlinkMech.class));
+        cards.add(new SetCardInfo("Mirror Box", 250, Rarity.RARE, mage.cards.m.MirrorBox.class));
         cards.add(new SetCardInfo("Mirrorshell Crab", 63, Rarity.COMMON, mage.cards.m.MirrorshellCrab.class));
         cards.add(new SetCardInfo("Mnemonic Sphere", 64, Rarity.COMMON, mage.cards.m.MnemonicSphere.class));
         cards.add(new SetCardInfo("Mobilizer Mech", 65, Rarity.UNCOMMON, mage.cards.m.MobilizerMech.class));
