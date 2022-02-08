@@ -22,6 +22,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Access Denied", 11, Rarity.RARE, mage.cards.a.AccessDenied.class));
         cards.add(new SetCardInfo("Aerial Surveyor", 5, Rarity.RARE, mage.cards.a.AerialSurveyor.class));
         cards.add(new SetCardInfo("Chishiro, the Shattered Blade", 1, Rarity.MYTHIC, mage.cards.c.ChishiroTheShatteredBlade.class));
+        cards.add(new SetCardInfo("Go-Shintai of Life's Origin", 37, Rarity.MYTHIC, mage.cards.g.GoShintaiOfLifesOrigin.class));
         cards.add(new SetCardInfo("Kotori, Pilot Prodigy", 2, Rarity.MYTHIC, mage.cards.k.KotoriPilotProdigy.class));
         cards.add(new SetCardInfo("Myojin of Blooming Dawn", 31, Rarity.RARE, mage.cards.m.MyojinOfBloomingDawn.class));
         cards.add(new SetCardInfo("Myojin of Roaring Blades", 36, Rarity.RARE, mage.cards.m.MyojinOfRoaringBlades.class));
