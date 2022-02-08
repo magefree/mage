@@ -131,7 +131,7 @@ class MindlinkMechWatcher extends Watcher {
             return;
         }
         if (crewer == null) {
-            crewCount.compute(new MageObjectReference(vehicle, game), (m, i) -> Integer.sum(i, 1));
+            crewCount.compute(new MageObjectReference(vehicle, game), (m, i) -> i == null ? 1 : Integer.sum(i, 1));
             return;
         }
         crewMap.computeIfAbsent(new MageObjectReference(vehicle, game), x -> new HashSet<>()).add(new MageObjectReference(crewer, game));
