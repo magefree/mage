@@ -91,6 +91,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Experimental Synthesizer", 138, Rarity.COMMON, mage.cards.e.ExperimentalSynthesizer.class));
         cards.add(new SetCardInfo("Explosive Entry", 139, Rarity.COMMON, mage.cards.e.ExplosiveEntry.class));
         cards.add(new SetCardInfo("Explosive Singularity", 140, Rarity.MYTHIC, mage.cards.e.ExplosiveSingularity.class));
+        cards.add(new SetCardInfo("Fable of the Mirror-Breaker", 141, Rarity.RARE, mage.cards.f.FableOfTheMirrorBreaker.class));
         cards.add(new SetCardInfo("Fade into Antiquity", 182, Rarity.COMMON, mage.cards.f.FadeIntoAntiquity.class));
         cards.add(new SetCardInfo("Fang of Shigeki", 183, Rarity.COMMON, mage.cards.f.FangOfShigeki.class));
         cards.add(new SetCardInfo("Farewell", 13, Rarity.RARE, mage.cards.f.Farewell.class));
@@ -222,6 +223,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Reckoner Bankbuster", 255, Rarity.RARE, mage.cards.r.ReckonerBankbuster.class));
         cards.add(new SetCardInfo("Reckoner Shakedown", 119, Rarity.COMMON, mage.cards.r.ReckonerShakedown.class));
         cards.add(new SetCardInfo("Reckoner's Bargain", 120, Rarity.COMMON, mage.cards.r.ReckonersBargain.class));
+        cards.add(new SetCardInfo("Reflection of Kiki-Jiki", 141, Rarity.RARE, mage.cards.r.ReflectionOfKikiJiki.class));
         cards.add(new SetCardInfo("Regent's Authority", 32, Rarity.COMMON, mage.cards.r.RegentsAuthority.class));
         cards.add(new SetCardInfo("Reinforced Ronin", 158, Rarity.UNCOMMON, mage.cards.r.ReinforcedRonin.class));
         cards.add(new SetCardInfo("Reito Sentinel", 256, Rarity.UNCOMMON, mage.cards.r.ReitoSentinel.class));

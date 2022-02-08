@@ -5,12 +5,10 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.EffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -20,7 +18,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
-import mage.game.turn.Step;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
@@ -354,27 +351,39 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.number = number;
     }
 
+    public void sacrificeTokensCreatedAtNextEndStep(Game game, Ability source) {
+        this.removeTokensCreatedAtEndOf(game, source, PhaseStep.END_TURN, false);
+    }
+
     public void exileTokensCreatedAtNextEndStep(Game game, Ability source) {
-        this.exileTokensCreatedAtEndOf(game, source, PhaseStep.END_TURN);
+        this.removeTokensCreatedAtEndOf(game, source, PhaseStep.END_TURN, true);
+    }
+
+    public void sacrificeTokensCreatedAtEndOfCombat(Game game, Ability source) {
+        this.removeTokensCreatedAtEndOf(game, source, PhaseStep.END_COMBAT, false);
     }
 
     public void exileTokensCreatedAtEndOfCombat(Game game, Ability source) {
-        this.exileTokensCreatedAtEndOf(game, source, PhaseStep.END_COMBAT);
+        this.removeTokensCreatedAtEndOf(game, source, PhaseStep.END_COMBAT, true);
     }
 
-    private void exileTokensCreatedAtEndOf(Game game, Ability source, PhaseStep phaseStepToExileCards) {
-        ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
-        exileEffect.setText("exile the token copies");
-        exileEffect.setTargetPointer(new FixedTargets(addedTokenPermanents, game));
+    private void removeTokensCreatedAtEndOf(Game game, Ability source, PhaseStep phaseStepToExileCards, boolean exile) {
+        Effect effect;
+        if (exile) {
+            effect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD).setText("exile the token copies");
+        } else {
+            effect = new SacrificeTargetEffect("sacrifice the token copies");
+        }
+        effect.setTargetPointer(new FixedTargets(addedTokenPermanents, game));
 
         DelayedTriggeredAbility exileAbility;
 
         switch (phaseStepToExileCards) {
             case END_TURN:
-                exileAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+                exileAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
                 break;
             case END_COMBAT:
-                exileAbility = new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect);
+                exileAbility = new AtTheEndOfCombatDelayedTriggeredAbility(effect);
                 break;
             default:
                 return;
