@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
 /**
  * @author TheElk801
  */
-public abstract class TargetPermanentAmount extends TargetAmount {
+public class TargetPermanentAmount extends TargetAmount {
 
     protected final FilterPermanent filter;
 
-    TargetPermanentAmount(int amount, FilterPermanent filter) {
+    public TargetPermanentAmount(int amount, FilterPermanent filter) {
         // 107.1c If a rule or ability instructs a player to choose “any number,” that player may choose
         // any positive number or zero, unless something (such as damage or counters) is being divided
         // or distributed among “any number” of players and/or objects. In that case, a nonzero number
@@ -31,16 +31,21 @@ public abstract class TargetPermanentAmount extends TargetAmount {
         this(StaticValue.get(amount), filter);
     }
 
-    TargetPermanentAmount(DynamicValue amount, FilterPermanent filter) {
+    public TargetPermanentAmount(DynamicValue amount, FilterPermanent filter) {
         super(amount);
         this.zone = Zone.ALL;
         this.filter = filter;
         this.targetName = filter.getMessage();
     }
 
-    TargetPermanentAmount(final TargetPermanentAmount target) {
+    protected TargetPermanentAmount(final TargetPermanentAmount target) {
         super(target);
         this.filter = target.filter.copy();
+    }
+
+    @Override
+    public TargetPermanentAmount copy() {
+        return new TargetPermanentAmount(this);
     }
 
     @Override
@@ -132,7 +137,4 @@ public abstract class TargetPermanentAmount extends TargetAmount {
         });
         return sb.toString().trim();
     }
-
-    @Override
-    public abstract TargetPermanentAmount copy();
 }
