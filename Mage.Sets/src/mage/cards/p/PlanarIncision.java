@@ -50,7 +50,7 @@ class PlanarIncisionEffect extends OneShotEffect {
 
     PlanarIncisionEffect() {
         super(Outcome.Benefit);
-        staticText = "Exile target artifact or creature, then return it to the battlefield under its owner’s control with a +1/+1 counter on it";
+        staticText = "Exile target artifact or creature, then return it to the battlefield under its owner's control with a +1/+1 counter on it";
     }
 
     private PlanarIncisionEffect(final PlanarIncisionEffect effect) {
