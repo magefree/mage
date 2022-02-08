@@ -217,6 +217,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Patchwork Automaton", 254, Rarity.UNCOMMON, mage.cards.p.PatchworkAutomaton.class));
         cards.add(new SetCardInfo("Peerless Samurai", 156, Rarity.COMMON, mage.cards.p.PeerlessSamurai.class));
         cards.add(new SetCardInfo("Plains", 283, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Planar Incision", 72, Rarity.COMMON, mage.cards.p.PlanarIncision.class));
         cards.add(new SetCardInfo("Portrait of Michiko", 29, Rarity.UNCOMMON, mage.cards.p.PortraitOfMichiko.class));
         cards.add(new SetCardInfo("Prodigy's Prototype", 231, Rarity.UNCOMMON, mage.cards.p.ProdigysPrototype.class));
         cards.add(new SetCardInfo("Prosperous Thief", 73, Rarity.UNCOMMON, mage.cards.p.ProsperousThief.class));
