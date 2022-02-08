@@ -143,6 +143,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Ironhoof Boar", 148, Rarity.COMMON, mage.cards.i.IronhoofBoar.class));
         cards.add(new SetCardInfo("Island", 285, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Isshin, Two Heavens as One", 224, Rarity.RARE, mage.cards.i.IsshinTwoHeavensAsOne.class));
+        cards.add(new SetCardInfo("Jin-Gitaxias, Progress Tyrant", 59, Rarity.MYTHIC, mage.cards.j.JinGitaxiasProgressTyrant.class));
         cards.add(new SetCardInfo("Jugan Defends the Temple", 194, Rarity.MYTHIC, mage.cards.j.JuganDefendsTheTemple.class));
         cards.add(new SetCardInfo("Jukai Naturalist", 225, Rarity.UNCOMMON, mage.cards.j.JukaiNaturalist.class));
         cards.add(new SetCardInfo("Jukai Preserver", 195, Rarity.COMMON, mage.cards.j.JukaiPreserver.class));
