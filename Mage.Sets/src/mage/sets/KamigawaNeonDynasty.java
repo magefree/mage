@@ -182,6 +182,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("March of Wretched Sorrow", 111, Rarity.RARE, mage.cards.m.MarchOfWretchedSorrow.class));
         cards.add(new SetCardInfo("Master's Rebuke", 202, Rarity.COMMON, mage.cards.m.MastersRebuke.class));
         cards.add(new SetCardInfo("Mech Hangar", 270, Rarity.UNCOMMON, mage.cards.m.MechHangar.class));
+        cards.add(new SetCardInfo("Mechtitan Core", 249, Rarity.RARE, mage.cards.m.MechtitanCore.class));
         cards.add(new SetCardInfo("Memory of Toshiro", 108, Rarity.UNCOMMON, mage.cards.m.MemoryOfToshiro.class));
         cards.add(new SetCardInfo("Michiko's Reign of Truth", 29, Rarity.UNCOMMON, mage.cards.m.MichikosReignOfTruth.class));
         cards.add(new SetCardInfo("Mindlink Mech", 62, Rarity.RARE, mage.cards.m.MindlinkMech.class));
