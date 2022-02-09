@@ -3,7 +3,6 @@ package mage.cards.o;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.DrawCardOpponentTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -29,7 +28,7 @@ public final class ObNixilisTheHateTwisted extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIXILIS);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Whenever an opponent draws a card, Ob Nixilis, the Hate-Twisted deals 1 damage to that player.
         this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(

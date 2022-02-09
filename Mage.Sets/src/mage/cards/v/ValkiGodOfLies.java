@@ -11,7 +11,6 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -67,7 +66,7 @@ public final class ValkiGodOfLies extends ModalDoubleFacesCard {
         // Tibalt, Cosmic Impostor
         // Legendary Planeswalker — Tibalt
         this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-        this.getRightHalfCard().addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.getRightHalfCard().setStartingLoyalty(5);
 
         // As Tibalt enters the battlefield, you get an emblem with “You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells.”
         this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(new GetEmblemEffect(new TibaltCosmicImpostorEmblem())));

@@ -12,6 +12,7 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.FilterMana;
 import mage.game.*;
@@ -568,6 +569,17 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public void checkForCountersToAdd(Permanent permanent, Ability source, Game game) {
+        if (permanent.isPlaneswalker()) {
+            int countersToAdd;
+            if (permanent.getStartingLoyalty() == -2) {
+                countersToAdd = source.getManaCostsToPay().getX();
+            } else {
+                countersToAdd = permanent.getStartingLoyalty();
+            }
+            if (countersToAdd > 0) {
+                permanent.addCounters(CounterType.LOYALTY.createInstance(countersToAdd), source, game);
+            }
+        }
         Counters countersToAdd = game.getEnterWithCounters(permanent.getId());
         if (countersToAdd != null) {
             for (Counter counter : countersToAdd.values()) {

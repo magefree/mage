@@ -2,7 +2,6 @@ package mage.cards.w;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -30,7 +29,7 @@ public final class WrennAndSeven extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.WRENN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
         this.addAbility(new LoyaltyAbility(new RevealLibraryPutIntoHandEffect(

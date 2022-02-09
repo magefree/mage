@@ -2,7 +2,6 @@ package mage.cards.v;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
 import mage.abilities.effects.common.WishEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -35,7 +34,7 @@ public final class VivienArkbowRanger extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIVIEN);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Distribute two +1/+1 counters among up to two target creatures. They gain trample until end of turn.
         Ability ability = new LoyaltyAbility(new DistributeCountersEffect(

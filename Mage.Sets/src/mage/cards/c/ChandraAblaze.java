@@ -3,7 +3,6 @@ package mage.cards.c;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
@@ -39,7 +38,7 @@ public final class ChandraAblaze extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to any target.
         LoyaltyAbility ability = new LoyaltyAbility(new ChandraAblazeEffect1(), 1);

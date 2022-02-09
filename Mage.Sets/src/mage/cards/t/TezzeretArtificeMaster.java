@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -29,7 +28,7 @@ public final class TezzeretArtificeMaster extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Create a colorless Thopter artifact creature token with flying.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new ThopterColorlessToken()), 1));
