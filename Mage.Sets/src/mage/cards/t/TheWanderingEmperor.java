@@ -6,7 +6,7 @@ import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -64,7 +64,7 @@ public final class TheWanderingEmperor extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SamuraiToken()), -1));
 
         // −2: Exile target tapped creature. You gain 2 life.
-        ability = new LoyaltyAbility(new DestroyTargetEffect(), -2);
+        ability = new LoyaltyAbility(new ExileTargetEffect(), -2);
         ability.addEffect(new GainLifeEffect(2));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class JunjiTheMidnightSky extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("non-Dragon creature card");
+    private static final FilterCard filter = new FilterCreatureCard("non-Dragon creature card from a graveyard");
 
     static {
         filter.add(Predicates.not(SubType.DRAGON.getPredicate()));
@@ -60,7 +60,7 @@ public final class JunjiTheMidnightSky extends CardImpl {
         // • Put target non-Dragon creature card from a graveyard onto the battlefield under your control. You lose 2 life.
         Mode mode = new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect());
         mode.addEffect(new LoseLifeSourceControllerEffect(2));
-        ability.addTarget(new TargetCardInGraveyard(filter));
+        mode.addTarget(new TargetCardInGraveyard(filter));
         ability.addMode(mode);
         this.addAbility(ability);
     }

@@ -54,7 +54,7 @@ class ReconfigureUnattachAbility extends ActivateAsSorceryActivatedAbility {
 
     protected ReconfigureUnattachAbility(String manaString) {
         super(Zone.BATTLEFIELD, new ReconfigureUnattachEffect(), new ManaCostsImpl<>(manaString));
-        this.setRuleVisible(true);
+        this.setRuleVisible(false);
     }
 
     private ReconfigureUnattachAbility(final ReconfigureUnattachAbility ability) {

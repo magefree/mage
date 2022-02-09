@@ -46,7 +46,7 @@ public final class KuraTheBoundlessSky extends CardImpl {
         // When Kura, the Boundless Sky dies, choose one —
         // • Search your library for up to three land cards, reveal them, put them into your hand, then shuffle.
         Ability ability = new DiesSourceTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(0, 3, StaticFilters.FILTER_CARD_LANDS)
+                new TargetCardInLibrary(0, 3, StaticFilters.FILTER_CARD_LANDS), true
         ));
 
         // • Create an X/X green Spirit creature token, where X is the number of lands you control.

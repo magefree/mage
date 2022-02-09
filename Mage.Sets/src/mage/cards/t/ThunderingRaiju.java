@@ -2,6 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -51,7 +52,7 @@ public final class ThunderingRaiju extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Thundering Raiju attacks, put a +1/+1 counter on target creature you control. Then Thundering Raiju deals X damage to each opponent, where X is the number of modified creatures you control other than Thundering Raiju.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
+        Ability ability = new AttacksTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance())
         );
         ability.addTarget(new TargetControlledCreaturePermanent());

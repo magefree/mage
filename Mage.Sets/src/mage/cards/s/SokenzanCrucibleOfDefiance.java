@@ -3,7 +3,6 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.costs.costadjusters.LegendaryCreatureCostAdjuster;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ChannelAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -34,7 +33,7 @@ public final class SokenzanCrucibleOfDefiance extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // Channel — {3}{R}, Discard Sokenzan, Crucible of Defiance: Create two colorless 1/1 Spirit creature tokens. They gain haste until end of turn. This ability costs {1} less to activate for each legendary creature you control.
-        Ability ability = new ChannelAbility("{3}{R}", new CreateTokenEffect(new SpiritToken(), 2));
+        Ability ability = new ChannelAbility("{3}{R}", new SokenzanCrucibleOfDefianceEffect());
         ability.setCostAdjuster(LegendaryCreatureCostAdjuster.instance);
         this.addAbility(ability);
     }
@@ -53,7 +52,7 @@ class SokenzanCrucibleOfDefianceEffect extends OneShotEffect {
 
     SokenzanCrucibleOfDefianceEffect() {
         super(Outcome.Benefit);
-        staticText = "create two colorless 1/1 Spirit creature tokens. They gain haste until end of turn. " +
+        staticText = "create two 1/1 colorless Spirit creature tokens. They gain haste until end of turn. " +
                 "This ability costs {1} less to activate for each legendary creature you control";
     }
 

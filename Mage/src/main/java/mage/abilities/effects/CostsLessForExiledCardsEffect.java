@@ -67,8 +67,8 @@ public class CostsLessForExiledCardsEffect extends CostModificationEffectImpl {
     public static void addCostAndEffect(Card card, FilterCard filter) {
         card.getSpellAbility().addCost(new ExileFromHandCost(
                 new TargetCardInHand(0, Integer.MAX_VALUE, filter)
-        ).setText("as an additional cost to cast this spell, you may exile any number of "
-                + filter.getMessage() + ". This spell costs {2} less to cast for each card exiled this way"));
+        ).setText("you may exile any number of " + filter.getMessage()
+                + ". This spell costs {2} less to cast for each card exiled this way"));
         Ability ability = new SimpleStaticAbility(Zone.ALL, new CostsLessForExiledCardsEffect(filter));
         ability.setRuleVisible(false);
         card.addAbility(ability);

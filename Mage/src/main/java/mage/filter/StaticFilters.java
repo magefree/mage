@@ -396,6 +396,12 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_LAND.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_A_LAND = new FilterControlledLandPermanent("a land you control");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_A_LAND.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_LANDS = new FilterControlledLandPermanent("lands you control");
 
     static {

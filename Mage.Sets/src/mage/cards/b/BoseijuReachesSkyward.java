@@ -12,7 +12,7 @@ import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -24,6 +24,7 @@ import java.util.UUID;
 public final class BoseijuReachesSkyward extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("basic Forest cards");
+    private static final FilterCard filter2 = new FilterLandCard("land card from your graveyard");
 
     static {
         filter.add(SuperType.BASIC.getPredicate());
@@ -51,7 +52,7 @@ public final class BoseijuReachesSkyward extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II,
                 new PutOnLibraryTargetEffect(true),
-                new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_LAND)
+                new TargetCardInYourGraveyard(0, 1, filter2)
         );
 
         // III — Exile this Saga, then return it to the battlefield transformed under your control.
