@@ -5,7 +5,6 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
@@ -27,13 +26,7 @@ public class DamagedByControlledWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.DAMAGED_PERMANENT) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.isCreature(game)) {
-                Permanent sourcePermanent = game.getPermanent(event.getSourceId());
-                if (sourcePermanent != null && sourcePermanent.isControlledBy(controllerId)) {
-                    damagedPermanents.add(new MageObjectReference(event.getTargetId(), game));
-                    return;
-                }
-                StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-                if (sourceObject != null && sourceObject.isControlledBy(controllerId)) {
+                if (controllerId != null && controllerId.equals(game.getControllerId(event.getSourceId()))) {
                     damagedPermanents.add(new MageObjectReference(event.getTargetId(), game));
                 }
             }
