@@ -97,6 +97,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rampant Growth", 125, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Reality Shift", 95, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Release to Memory", 9, Rarity.RARE, mage.cards.r.ReleaseToMemory.class));
+        cards.add(new SetCardInfo("Research Thief", 16, Rarity.RARE, mage.cards.r.ResearchThief.class));
         cards.add(new SetCardInfo("Rhythm of the Wild", 142, Rarity.UNCOMMON, mage.cards.r.RhythmOfTheWild.class));
         cards.add(new SetCardInfo("Riddlesmith", 96, Rarity.UNCOMMON, mage.cards.r.Riddlesmith.class));
         cards.add(new SetCardInfo("Rishkar's Expertise", 127, Rarity.RARE, mage.cards.r.RishkarsExpertise.class));
