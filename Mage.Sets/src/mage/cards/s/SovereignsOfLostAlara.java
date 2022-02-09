@@ -77,7 +77,7 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect {
                         Card aura = game.getCard(target.getFirstTarget());
                         game.getState().setValue("attachTo:" + aura.getId(), attackingCreature);
                         controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
-                        return attackingCreature.addAttachment(aura.getId(), source, game);
+                        attackingCreature.addAttachment(aura.getId(), source, game);
                     }
                 }
             }
