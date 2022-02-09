@@ -123,6 +123,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Swiftfoot Boots", 163, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Sword of Vengeance", 164, Rarity.RARE, mage.cards.s.SwordOfVengeance.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 89, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
+        cards.add(new SetCardInfo("Tanuki Transplanter", 30, Rarity.RARE, mage.cards.t.TanukiTransplanter.class));
         cards.add(new SetCardInfo("Taurean Mauler", 111, Rarity.RARE, mage.cards.t.TaureanMauler.class));
         cards.add(new SetCardInfo("Temple of Abandon", 179, Rarity.RARE, mage.cards.t.TempleOfAbandon.class));
         cards.add(new SetCardInfo("Temple of Enlightenment", 180, Rarity.RARE, mage.cards.t.TempleOfEnlightenment.class));
