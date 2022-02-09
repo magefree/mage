@@ -1,7 +1,6 @@
 package mage.game.events;
 
 import mage.abilities.Ability;
-import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 

@@ -2,7 +2,6 @@ package org.mage.test.cards.continuous;
 
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.*;
 import mage.counters.CounterType;

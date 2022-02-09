@@ -19,7 +19,6 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 

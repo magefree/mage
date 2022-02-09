@@ -1,10 +1,7 @@
 
 package mage.deck;
 
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
 import mage.cards.decks.Constructed;
-import mage.constants.SetType;
 
 /**
  * This class validates a deck for the Old School 93/94 format, specifically the

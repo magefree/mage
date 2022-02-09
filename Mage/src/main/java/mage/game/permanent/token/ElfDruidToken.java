@@ -6,7 +6,6 @@ import java.util.Arrays;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.mana.GreenManaAbility;
 
 /**

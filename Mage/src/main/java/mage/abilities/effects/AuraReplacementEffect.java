@@ -18,7 +18,6 @@ import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
-import static org.apache.log4j.LogMF.info;
 
 /**
  * Cards with the Aura subtype don't change the zone they are in, if there is no

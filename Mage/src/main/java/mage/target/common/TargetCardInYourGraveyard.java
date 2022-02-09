@@ -10,7 +10,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.TargetEvent;
 import mage.players.Player;
 import mage.target.TargetCard;

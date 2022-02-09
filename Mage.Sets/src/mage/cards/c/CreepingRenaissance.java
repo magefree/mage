@@ -10,7 +10,6 @@ import mage.choices.Choice;
 import mage.choices.ChoiceCardType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;

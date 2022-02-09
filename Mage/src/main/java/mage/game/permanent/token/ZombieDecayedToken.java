@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.keyword.DecayedAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.util.RandomUtil;
 
 import java.util.Arrays;
 

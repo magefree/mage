@@ -16,7 +16,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.WalkerToken;
-import mage.game.permanent.token.ZombieToken;
 
 import java.util.Objects;
 import java.util.UUID;

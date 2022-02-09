@@ -1,7 +1,6 @@
 package mage.client.components.ext.dlg;
 
 import mage.client.cards.BigCard;
-import mage.client.game.FeedbackPanel;
 import mage.view.CardsView;
 
 import javax.swing.*;

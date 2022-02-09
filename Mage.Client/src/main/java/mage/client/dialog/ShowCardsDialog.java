@@ -10,7 +10,6 @@
  import mage.client.util.gui.GuiDisplayUtil;
  import mage.game.events.PlayerQueryEvent.QueryType;
  import mage.view.CardsView;
- import org.mage.card.arcane.CardPanel;
 
  import javax.swing.*;
  import java.awt.*;

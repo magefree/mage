@@ -1,7 +1,6 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;

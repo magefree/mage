@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
 import mage.target.targetpointer.*;
 import org.apache.log4j.Logger;
 

@@ -1,7 +1,6 @@
 package mage.cards.c;
 
 import java.util.*;
-import java.util.List;
 
 import mage.MageInt;
 import mage.ObjectColor;

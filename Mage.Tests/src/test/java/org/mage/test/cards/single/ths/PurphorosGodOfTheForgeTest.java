@@ -1,6 +1,5 @@
 package org.mage.test.cards.single.ths;
 
-import mage.constants.CardType;
 import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;

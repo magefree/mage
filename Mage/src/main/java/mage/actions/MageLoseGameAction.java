@@ -6,8 +6,6 @@ import mage.actions.score.ArtificialScoringSystem;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
  * Lose game action.
  *

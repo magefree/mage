@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  * @author noxx

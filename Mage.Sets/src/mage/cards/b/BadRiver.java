@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.EnumSet;
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.FetchLandActivatedAbility;

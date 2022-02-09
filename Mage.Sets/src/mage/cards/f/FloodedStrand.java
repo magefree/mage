@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.EnumSet;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.common.FetchLandActivatedAbility;

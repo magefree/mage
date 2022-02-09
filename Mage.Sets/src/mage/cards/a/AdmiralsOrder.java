@@ -7,7 +7,6 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.target.TargetSpell;
 import mage.watchers.common.PlayerAttackedWatcher;

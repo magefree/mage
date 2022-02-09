@@ -4,7 +4,6 @@ package mage.cards.mock;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.cards.SplitCardHalf;
 import mage.cards.repository.CardInfo;

@@ -9,7 +9,6 @@ import mage.constants.Outcome;
 import mage.filter.FilterObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 

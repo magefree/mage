@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.abilities.keyword.SpectacleAbility;
@@ -8,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**

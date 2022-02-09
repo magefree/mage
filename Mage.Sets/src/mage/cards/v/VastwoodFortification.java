@@ -3,7 +3,6 @@ package mage.cards.v;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.mana.GreenManaAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;

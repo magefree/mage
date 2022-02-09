@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;

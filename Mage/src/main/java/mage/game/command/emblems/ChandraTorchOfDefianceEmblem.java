@@ -6,7 +6,6 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 import mage.target.common.TargetAnyTarget;

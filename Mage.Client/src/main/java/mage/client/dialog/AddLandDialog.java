@@ -1,6 +1,5 @@
 package mage.client.dialog;
 
-import mage.Mana;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.cards.decks.Deck;

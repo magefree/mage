@@ -1,7 +1,6 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.keyword.HexproofAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;

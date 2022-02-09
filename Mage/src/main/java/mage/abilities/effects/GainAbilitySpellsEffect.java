@@ -1,7 +1,6 @@
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.FilterObject;

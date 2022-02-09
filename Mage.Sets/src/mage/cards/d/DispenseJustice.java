@@ -7,7 +7,6 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.hint.common.MetalcraftHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterAttackingCreature;

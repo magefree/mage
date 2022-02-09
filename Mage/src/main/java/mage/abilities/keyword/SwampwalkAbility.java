@@ -3,7 +3,6 @@ package mage.abilities.keyword;
 
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterLandPermanent;
 
 /**
  *

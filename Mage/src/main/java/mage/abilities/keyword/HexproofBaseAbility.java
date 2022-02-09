@@ -5,12 +5,9 @@ import mage.ObjectColor;
 import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.icon.CardIcon;
-import mage.abilities.icon.CardIconImpl;
-import mage.abilities.icon.CardIconType;
 import mage.abilities.icon.abilities.HexproofAbilityIcon;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 import java.util.*;
 

@@ -2,7 +2,6 @@ package mage.sets;
 
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardInfo;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.RandomUtil;

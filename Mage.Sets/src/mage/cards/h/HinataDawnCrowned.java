@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.util.CardUtil;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**

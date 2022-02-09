@@ -6,7 +6,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainAllCreatureTypesTargetEffect;
 import mage.abilities.effects.common.continuous.LoseAllCreatureTypesTargetEffect;
 import mage.abilities.keyword.ChangelingAbility;

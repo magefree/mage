@@ -2,7 +2,6 @@ package org.mage.test.multiplayer;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommander4PlayersWithAIHelps;
 

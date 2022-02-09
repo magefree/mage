@@ -21,7 +21,6 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.command.emblems.DovinBaanEmblem;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

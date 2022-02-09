@@ -5,7 +5,6 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardArea;
 import mage.view.CardsView;
-import org.mage.card.arcane.CardPanel;
 
 import javax.swing.*;
 import java.awt.*;

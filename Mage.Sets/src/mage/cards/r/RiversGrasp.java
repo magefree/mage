@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import mage.abilities.Ability;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.InfoEffect;

@@ -2,7 +2,6 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.DisturbAbility;
 import mage.cards.CardImpl;

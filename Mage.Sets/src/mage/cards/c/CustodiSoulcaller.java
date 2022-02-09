@@ -13,7 +13,6 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;

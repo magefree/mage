@@ -15,7 +15,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.ManaUtil;
 
-import java.util.List;
 import java.util.UUID;
 
 /**

@@ -2,7 +2,6 @@ package mage.abilities.hint.common;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.PartyCount;
-import mage.abilities.dynamicvalue.common.PermanentsYouControlCount;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.game.Game;

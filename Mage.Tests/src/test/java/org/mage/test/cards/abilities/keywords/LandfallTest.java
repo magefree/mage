@@ -4,7 +4,6 @@ package org.mage.test.cards.abilities.keywords;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

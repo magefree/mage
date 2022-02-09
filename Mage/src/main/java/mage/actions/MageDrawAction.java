@@ -15,7 +15,6 @@ import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Action for drawing cards.

@@ -4,8 +4,6 @@ import mage.abilities.Ability;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
  * Base class for mage actions.
  *

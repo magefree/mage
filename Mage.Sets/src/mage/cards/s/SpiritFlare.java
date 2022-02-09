@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.TimingRule;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.common.FilterControlledCreaturePermanent;

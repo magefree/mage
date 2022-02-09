@@ -3,7 +3,6 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.DisturbAbility;

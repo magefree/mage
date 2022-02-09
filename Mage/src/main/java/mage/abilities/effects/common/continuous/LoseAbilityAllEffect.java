@@ -1,9 +1,7 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.Iterator;
-import java.util.Map;
-import java.util.UUID;
-import mage.MageObject;
+
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
@@ -12,7 +10,6 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;

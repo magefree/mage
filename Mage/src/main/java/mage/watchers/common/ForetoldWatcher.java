@@ -7,7 +7,6 @@ import mage.cards.Card;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 /**

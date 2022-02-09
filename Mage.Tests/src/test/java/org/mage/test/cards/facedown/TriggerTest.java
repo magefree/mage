@@ -1,11 +1,9 @@
 
 package org.mage.test.cards.facedown;
 
-import mage.cards.Card;
 import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

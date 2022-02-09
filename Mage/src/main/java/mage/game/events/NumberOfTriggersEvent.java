@@ -2,8 +2,6 @@ package mage.game.events;
 
 import mage.abilities.Ability;
 
-import java.util.UUID;
-
 /**
  *
  * @author BetaSteward_at_googlemail.com

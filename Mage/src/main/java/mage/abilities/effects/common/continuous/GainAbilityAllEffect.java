@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -14,8 +13,6 @@ import mage.game.permanent.Permanent;
 
 import java.util.Iterator;
 import java.util.Locale;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author Loki

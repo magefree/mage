@@ -13,7 +13,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
-import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
 

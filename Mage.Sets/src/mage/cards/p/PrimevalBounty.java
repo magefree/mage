@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.BeastToken;
 import mage.target.common.TargetControlledCreaturePermanent;
