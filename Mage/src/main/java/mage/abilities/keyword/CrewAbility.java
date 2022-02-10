@@ -20,8 +20,10 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.awt.*;
 import java.util.Objects;
@@ -35,7 +37,13 @@ public class CrewAbility extends SimpleActivatedAbility {
     private final int value;
 
     public CrewAbility(int value) {
-        super(Zone.BATTLEFIELD, new AddCardTypeSourceEffect(Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE), new CrewCost(value));
+        this(value, null);
+    }
+
+    public CrewAbility(int value, Cost altCost) {
+        super(Zone.BATTLEFIELD, new AddCardTypeSourceEffect(
+                Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE
+        ), new CrewCost(value, altCost));
         this.addEffect(new CrewEventEffect());
         this.addIcon(CrewAbilityIcon.instance);
         this.value = value;
@@ -53,7 +61,8 @@ public class CrewAbility extends SimpleActivatedAbility {
 
     @Override
     public String getRule() {
-        return "Crew " + value + " <i>(Tap any number of creatures you control with total power " + value + " or more: This Vehicle becomes an artifact creature until end of turn.)</i>";
+        return "Crew " + value + " <i>(Tap any number of creatures you control with total power "
+                + value + " or more: This Vehicle becomes an artifact creature until end of turn.)</i>";
     }
 }
 
@@ -87,7 +96,8 @@ class CrewEventEffect extends OneShotEffect {
 
 class CrewCost extends CostImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another untapped creature you control");
+    private static final FilterControlledCreaturePermanent filter
+            = new FilterControlledCreaturePermanent("another untapped creature you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
@@ -95,18 +105,39 @@ class CrewCost extends CostImpl {
     }
 
     private final int value;
+    private final Cost altCost;
 
-    CrewCost(int value) {
+    CrewCost(int value, Cost altCost) {
         this.value = value;
+        this.altCost = altCost;
     }
 
-    CrewCost(final CrewCost cost) {
+    private CrewCost(final CrewCost cost) {
         super(cost);
         this.value = cost.value;
+        this.altCost = cost.altCost.copy();
+    }
+
+    private boolean handleAltCost(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        if (altCost == null || !altCost.canPay(ability, source, controllerId, game)) {
+            return false;
+        }
+        Player player = game.getPlayer(controllerId);
+        String costName = altCost.getText();
+        String message = CardUtil.getTextWithFirstCharUpperCase(
+                (CardUtil.checkCostWords(costName) ? "" : "Pay ") + costName
+        ) + " rather than the crew cost?";
+        return player != null
+                && player.chooseUse(Outcome.Benefit, message, source, game)
+                && altCost.pay(ability, game, source, controllerId, noMana, costToPay);
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        if (handleAltCost(ability, game, source, controllerId, noMana, costToPay)) {
+            paid = true;
+            return true;
+        }
         Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true) {
             @Override
             public String getMessage() {
@@ -151,6 +182,9 @@ class CrewCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        if (altCost != null && altCost.canPay(ability, source, controllerId, game)) {
+            return true;
+        }
         int sumPower = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
             int powerToAdd = getCrewPower(permanent, game);
