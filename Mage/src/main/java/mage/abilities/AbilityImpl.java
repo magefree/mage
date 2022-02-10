@@ -539,13 +539,15 @@ public abstract class AbilityImpl implements Ability {
         while (costIterator.hasNext()) {
             ManaCost cost = costIterator.next();
 
-            if (cost.isPhyrexian()) {
-                PayLifeCost payLifeCost = new PayLifeCost(2);
-                if (payLifeCost.canPay(this, this, controller.getId(), game)
-                        && controller.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + cost.getText().replace("/P", "") + '?', this, game)) {
-                    costIterator.remove();
-                    costs.add(payLifeCost);
-                }
+            if (!cost.isPhyrexian()) {
+                continue;
+            }
+            PayLifeCost payLifeCost = new PayLifeCost(2);
+            if (payLifeCost.canPay(this, this, controller.getId(), game)
+                    && controller.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + cost.getText().replace("/P", "") + '?', this, game)) {
+                costIterator.remove();
+                costs.add(payLifeCost);
+                manaCostsToPay.incrPhyrexianPaid();
             }
         }
     }

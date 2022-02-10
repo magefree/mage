@@ -29,6 +29,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     protected final UUID id;
     protected String text = null;
     protected boolean phyrexian = false;
+    private int phyrexianPaid = 0;
 
     private static final Map<String, ManaCosts> costsCache = new ConcurrentHashMap<>(); // must be thread safe, can't use nulls
 
@@ -185,6 +186,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                     && payingPlayer.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + manaCost.getText().replace("/P", "") + '?', source, game)) {
                 manaCostIterator.remove();
                 tempCosts.add(payLifeCost);
+                this.incrPhyrexianPaid();
             }
         }
 
@@ -612,6 +614,16 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         for (T cost : this) {
             cost.setPhyrexian(phyrexian);
         }
+    }
+
+    @Override
+    public void incrPhyrexianPaid() {
+        this.phyrexianPaid++;
+    }
+
+    @Override
+    public int getPhyrexianPaid() {
+        return phyrexianPaid;
     }
 
     @Override
