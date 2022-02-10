@@ -77,6 +77,8 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mirage Mirror", 154, Rarity.RARE, mage.cards.m.MirageMirror.class));
         cards.add(new SetCardInfo("Mossfire Valley", 171, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Myojin of Blooming Dawn", 31, Rarity.RARE, mage.cards.m.MyojinOfBloomingDawn.class));
+        cards.add(new SetCardInfo("Myojin of Cryptic Dreams", 33, Rarity.RARE, mage.cards.m.MyojinOfCrypticDreams.class));
+        cards.add(new SetCardInfo("Myojin of Grim Betrayal", 34, Rarity.RARE, mage.cards.m.MyojinOfGrimBetrayal.class));
         cards.add(new SetCardInfo("Myojin of Roaring Blades", 36, Rarity.RARE, mage.cards.m.MyojinOfRoaringBlades.class));
         cards.add(new SetCardInfo("Myojin of Towering Might", 38, Rarity.RARE, mage.cards.m.MyojinOfToweringMight.class));
         cards.add(new SetCardInfo("Myrsmith", 86, Rarity.UNCOMMON, mage.cards.m.Myrsmith.class));
