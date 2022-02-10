@@ -3,7 +3,6 @@ package mage;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -40,6 +39,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected String text;
     protected MageInt power;
     protected MageInt toughness;
+    protected int startingLoyalty = -1; // -2 means X, -1 means none, 0 and up is normal
     protected boolean copy;
     protected MageObject copyFrom; // copied card INFO (used to call original adjusters)
 
@@ -68,6 +68,7 @@ public abstract class MageObjectImpl implements MageObject {
         frameStyle = object.frameStyle;
         power = object.power.copy();
         toughness = object.toughness.copy();
+        startingLoyalty = object.startingLoyalty;
         abilities = object.abilities.copy();
         this.cardType.addAll(object.cardType);
         this.subtype.copyFrom(object.subtype);
@@ -167,21 +168,12 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public int getStartingLoyalty() {
-        for (Ability ab : getAbilities()) {
-            if (ab instanceof PlaneswalkerEntersWithLoyaltyCountersAbility) {
-                return ((PlaneswalkerEntersWithLoyaltyCountersAbility) ab).getStartingLoyalty();
-            }
-        }
-        return 0;
+        return startingLoyalty;
     }
 
     @Override
     public void setStartingLoyalty(int startingLoyalty) {
-        for (Ability ab : getAbilities()) {
-            if (ab instanceof PlaneswalkerEntersWithLoyaltyCountersAbility) {
-                ((PlaneswalkerEntersWithLoyaltyCountersAbility) ab).setStartingLoyalty(startingLoyalty);
-            }
-        }
+        this.startingLoyalty = startingLoyalty;
     }
 
     @Override

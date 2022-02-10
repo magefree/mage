@@ -3,7 +3,6 @@ package mage.cards.g;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -44,7 +43,7 @@ public final class GristTheHungerTide extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GRIST);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // As long as Grist, the Hunger Tide isn't on the battlefield, it's a 1/1 Insect creature in addition to its other types.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new GristTheHungerTideTypeEffect()));

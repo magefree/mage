@@ -5,7 +5,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -51,7 +50,7 @@ public final class TamiyoFieldResearcher extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TAMIYO);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
         Ability ability = new LoyaltyAbility(new TamiyoFieldResearcherEffect1(), 1);

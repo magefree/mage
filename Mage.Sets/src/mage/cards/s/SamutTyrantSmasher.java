@@ -3,7 +3,6 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -29,7 +28,7 @@ public final class SamutTyrantSmasher extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SAMUT);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // Creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(

@@ -3,7 +3,6 @@ package mage.cards.k;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.RaidCondition;
@@ -41,7 +40,7 @@ public final class KaitoShizuki extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAITO);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // At the beginning of your end step, if Kaito Shizuki entered the battlefield this turn, he phases out.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(

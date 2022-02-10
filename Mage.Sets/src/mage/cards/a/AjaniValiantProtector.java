@@ -3,7 +3,6 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
@@ -32,7 +31,7 @@ public final class AjaniValiantProtector extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +2: Put two +1/+1 counters on up to one target creature.
         Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), 2);

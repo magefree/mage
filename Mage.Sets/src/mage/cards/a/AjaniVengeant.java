@@ -3,7 +3,6 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyAllControlledTargetEffect;
@@ -36,7 +35,7 @@ public final class AjaniVengeant extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // +1: Target permanent doesn't untap during its controller's next untap step.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DontUntapInControllersNextUntapStepTargetEffect(), 1);

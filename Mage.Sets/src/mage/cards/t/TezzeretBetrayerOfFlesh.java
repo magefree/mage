@@ -3,7 +3,6 @@ package mage.cards.t;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -38,7 +37,7 @@ public final class TezzeretBetrayerOfFlesh extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // The first activated ability of an artifact you activate each turn costs {2} less to activate.
         this.addAbility(new SimpleStaticAbility(

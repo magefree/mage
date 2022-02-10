@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
@@ -30,7 +29,7 @@ public final class AshiokNightmareMuse extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ASHIOK);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
+        this.setStartingLoyalty(5);
 
         // +1: Create a 2/3 blue and black Nightmare creature token with "Whenever this creature attacks or blocks, each opponent exiles the top two cards of their library."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new AshiokNightmareMuseToken()), 1));

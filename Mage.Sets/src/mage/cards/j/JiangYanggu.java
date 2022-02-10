@@ -4,7 +4,6 @@ package mage.cards.j;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -43,7 +42,7 @@ public final class JiangYanggu extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.YANGGU);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Target creature gets +2/+2 until end of turn.
         Ability ability = new LoyaltyAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), 1);

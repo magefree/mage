@@ -3,7 +3,6 @@ package mage.cards.d;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -27,7 +26,7 @@ public final class DavrielRogueShadowmage extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DAVRIEL);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
+        this.setStartingLoyalty(3);
 
         // At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, Davriel, Rogue Shadowmage deals 2 damage to them.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

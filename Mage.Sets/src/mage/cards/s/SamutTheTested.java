@@ -3,7 +3,6 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -37,7 +36,7 @@ public final class SamutTheTested extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SAMUT);
 
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
+        this.setStartingLoyalty(4);
 
         // +1: Up to one target creature gains double strike until end of turn.
         Effect effect = new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn);

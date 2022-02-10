@@ -3,7 +3,6 @@ package mage.cards.l;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -38,7 +37,7 @@ public final class LilianaDreadhordeGeneral extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(6));
+        this.setStartingLoyalty(6);
 
         // Whenever a creature you control dies, draw a card.
         this.addAbility(new DiesCreatureTriggeredAbility(
