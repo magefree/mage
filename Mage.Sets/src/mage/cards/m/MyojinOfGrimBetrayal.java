@@ -6,7 +6,6 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.effects.OneShotEffect;
@@ -24,6 +23,7 @@ import mage.filter.predicate.card.PutIntoGraveFromAnywhereThisTurnPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
+import mage.watchers.common.CastFromHandWatcher;
 
 import java.util.UUID;
 
@@ -46,10 +46,11 @@ public class MyojinOfGrimBetrayal extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Myojin of Grim Betrayal enters the battlefield with an indestructible counter on it if you cast it from your hand.
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(
+        this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.INDESTRUCTIBLE.createInstance()),
-                CastFromHandSourcePermanentCondition.instance, ""
-        ), "{this} enters the battlefield with an indestructible counter on it if you cast it from your hand"));
+                CastFromHandSourcePermanentCondition.instance, null,
+                "with an indestructible counter on it if you cast it from your hand"
+        ), new CastFromHandWatcher());
 
         // Remove an indestructible counter from Myojin of Grim Betrayal:
         // Put onto the battlefield under your control all creature cards in all graveyards that were put there from anywhere this turn.
