@@ -569,7 +569,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public void checkForCountersToAdd(Permanent permanent, Ability source, Game game) {
-        if (permanent.isPlaneswalker()) {
+        if (permanent.isPlaneswalker(game)) {
             int countersToAdd;
             if (permanent.getStartingLoyalty() == -2) {
                 countersToAdd = source.getManaCostsToPay().getX();

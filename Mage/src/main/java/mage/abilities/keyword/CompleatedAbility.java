@@ -1,29 +1,42 @@
 package mage.abilities.keyword;
 
+import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
 import mage.constants.Zone;
+
+import java.io.ObjectStreamException;
 
 /**
  * @author TheElk801
  */
-public class CompleatedAbility extends StaticAbility {
+public class CompleatedAbility extends StaticAbility implements MageSingleton {
 
-    public CompleatedAbility() {
+    private static final CompleatedAbility instance;
+
+    static {
+        instance = new CompleatedAbility();
+    }
+
+    private Object readResolve() throws ObjectStreamException {
+        return instance;
+    }
+
+    public static CompleatedAbility getInstance() {
+        return instance;
+    }
+
+    private CompleatedAbility() {
         super(Zone.ALL, null);
-        // TODO: implement this
-    }
-
-    private CompleatedAbility(final CompleatedAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CompleatedAbility copy() {
-        return new CompleatedAbility(this);
     }
 
     @Override
     public String getRule() {
-        return "Compleated";
+        return "compleated";
     }
+
+    @Override
+    public CompleatedAbility copy() {
+        return instance;
+    }
+
 }

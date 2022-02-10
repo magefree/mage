@@ -41,7 +41,7 @@ public final class TamiyoCompleatedSage extends CardImpl {
         this.setStartingLoyalty(5);
 
         // Compleated
-        this.addAbility(new CompleatedAbility());
+        this.addAbility(CompleatedAbility.getInstance());
 
         // +1: Tap up to one target artifact or creature. It doesn't untap during its controller's next untap step.
         Ability ability = new LoyaltyAbility(new TapTargetEffect(), 1);
