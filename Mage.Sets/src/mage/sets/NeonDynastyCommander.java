@@ -47,6 +47,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dance of the Manse", 136, Rarity.RARE, mage.cards.d.DanceOfTheManse.class));
         cards.add(new SetCardInfo("Decimate", 137, Rarity.RARE, mage.cards.d.Decimate.class));
         cards.add(new SetCardInfo("Dispatch", 83, Rarity.UNCOMMON, mage.cards.d.Dispatch.class));
+        cards.add(new SetCardInfo("Drumbellower", 6, Rarity.RARE, mage.cards.d.Drumbellower.class));
         cards.add(new SetCardInfo("Elemental Mastery", 105, Rarity.RARE, mage.cards.e.ElementalMastery.class));
         cards.add(new SetCardInfo("Emry, Lurker of the Loch", 91, Rarity.RARE, mage.cards.e.EmryLurkerOfTheLoch.class));
         cards.add(new SetCardInfo("Etherium Sculptor", 92, Rarity.COMMON, mage.cards.e.EtheriumSculptor.class));
