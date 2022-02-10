@@ -24,6 +24,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Aerial Surveyor", 5, Rarity.RARE, mage.cards.a.AerialSurveyor.class));
         cards.add(new SetCardInfo("Aeronaut Admiral", 79, Rarity.UNCOMMON, mage.cards.a.AeronautAdmiral.class));
         cards.add(new SetCardInfo("Agitator Ant", 102, Rarity.RARE, mage.cards.a.AgitatorAnt.class));
+        cards.add(new SetCardInfo("Akki Battle Squad", 18, Rarity.RARE, mage.cards.a.AkkiBattleSquad.class));
         cards.add(new SetCardInfo("Arcane Signet", 144, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Arcanist's Owl", 135, Rarity.UNCOMMON, mage.cards.a.ArcanistsOwl.class));
         cards.add(new SetCardInfo("Armed and Armored", 80, Rarity.UNCOMMON, mage.cards.a.ArmedAndArmored.class));
