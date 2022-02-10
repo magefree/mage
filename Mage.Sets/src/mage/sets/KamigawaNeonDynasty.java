@@ -201,6 +201,7 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
         cards.add(new SetCardInfo("Mukotai Soulripper", 113, Rarity.RARE, mage.cards.m.MukotaiSoulripper.class));
         cards.add(new SetCardInfo("Nameless Conqueror", 162, Rarity.COMMON, mage.cards.n.NamelessConqueror.class));
         cards.add(new SetCardInfo("Naomi, Pillar of Order", 229, Rarity.UNCOMMON, mage.cards.n.NaomiPillarOfOrder.class));
+        cards.add(new SetCardInfo("Nashi, Moon Sage's Scion", 114, Rarity.MYTHIC, mage.cards.n.NashiMoonSagesScion.class));
         cards.add(new SetCardInfo("Network Disruptor", 71, Rarity.COMMON, mage.cards.n.NetworkDisruptor.class));
         cards.add(new SetCardInfo("Network Terminal", 251, Rarity.COMMON, mage.cards.n.NetworkTerminal.class));
         cards.add(new SetCardInfo("Nezumi Bladeblesser", 115, Rarity.COMMON, mage.cards.n.NezumiBladeblesser.class));
