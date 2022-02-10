@@ -114,6 +114,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shifting Shadow", 109, Rarity.RARE, mage.cards.s.ShiftingShadow.class));
         cards.add(new SetCardInfo("Shimmer Myr", 157, Rarity.UNCOMMON, mage.cards.s.ShimmerMyr.class));
         cards.add(new SetCardInfo("Shorikai, Genesis Engine", 4, Rarity.MYTHIC, mage.cards.s.ShorikaiGenesisEngine.class));
+        cards.add(new SetCardInfo("Silkguard", 29, Rarity.RARE, mage.cards.s.Silkguard.class));
         cards.add(new SetCardInfo("Silver Myr", 158, Rarity.COMMON, mage.cards.s.SilverMyr.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 177, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Skysovereign, Consul Flagship", 159, Rarity.MYTHIC, mage.cards.s.SkysovereignConsulFlagship.class));
