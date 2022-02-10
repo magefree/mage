@@ -1123,19 +1123,35 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             MorphAbility.setPermanentToFaceDownCreature(this, game);
         }
 
-        EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone, EnterEventType.SELF);
+        if (game.replaceEvent(new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone, EnterEventType.SELF))) {
+            return false;
+        }
+        EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone);
         if (game.replaceEvent(event)) {
             return false;
         }
-        event = new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone);
-        if (!game.replaceEvent(event)) {
-            if (fireEvent) {
-                game.addSimultaneousEvent(event);
-                return true;
+        if (this.isPlaneswalker(game)) {
+            int loyalty;
+            if (this.getStartingLoyalty() == -2) {
+                loyalty = source.getManaCostsToPay().getX();
+            } else {
+                loyalty = this.getStartingLoyalty();
             }
-
+            int countersToAdd;
+            if (this.hasAbility(CompleatedAbility.getInstance(), game)) {
+                countersToAdd = loyalty - 2 * source.getManaCostsToPay().getPhyrexianPaid();
+            } else {
+                countersToAdd = loyalty;
+            }
+            if (countersToAdd > 0) {
+                this.addCounters(CounterType.LOYALTY.createInstance(countersToAdd), source, game);
+            }
         }
-        return false;
+        if (!fireEvent) {
+            return false;
+        }
+        game.addSimultaneousEvent(event);
+        return true;
     }
 
     @Override

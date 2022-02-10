@@ -7,13 +7,11 @@ import mage.abilities.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
-import mage.abilities.keyword.CompleatedAbility;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
 import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.FilterMana;
 import mage.game.*;
@@ -570,23 +568,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public void checkForCountersToAdd(Permanent permanent, Ability source, Game game) {
-        if (permanent.isPlaneswalker(game)) {
-            int loyalty;
-            if (permanent.getStartingLoyalty() == -2) {
-                loyalty = source.getManaCostsToPay().getX();
-            } else {
-                loyalty = permanent.getStartingLoyalty();
-            }
-            int countersToAdd;
-            if (permanent.hasAbility(CompleatedAbility.getInstance(), game)) {
-                countersToAdd = loyalty - 2 * source.getManaCostsToPay().getPhyrexianPaid();
-            } else {
-                countersToAdd = loyalty;
-            }
-            if (countersToAdd > 0) {
-                permanent.addCounters(CounterType.LOYALTY.createInstance(countersToAdd), source, game);
-            }
-        }
         Counters countersToAdd = game.getEnterWithCounters(permanent.getId());
         if (countersToAdd != null) {
             for (Counter counter : countersToAdd.values()) {
