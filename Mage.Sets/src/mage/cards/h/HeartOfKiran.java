@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -22,6 +21,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  * @author JRHerlehy
@@ -100,7 +101,6 @@ class HeartOfKiranAlternateCrewCost extends CostImpl {
             if (paid) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREWED_VEHICLE, target.getFirstTarget(), source, controllerId));
             }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.VEHICLE_CREWED, source.getSourceId(), source, controllerId));
         }
 
         return paid;

@@ -6,6 +6,7 @@ import mage.abilities.common.CrewWithToughnessAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeSourceEffect;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.icon.abilities.CrewAbilityIcon;
@@ -34,8 +35,8 @@ public class CrewAbility extends SimpleActivatedAbility {
     private final int value;
 
     public CrewAbility(int value) {
-        super(Zone.BATTLEFIELD, new AddCardTypeSourceEffect(Duration.EndOfTurn, CardType.ARTIFACT), new CrewCost(value));
-        this.addEffect(new AddCardTypeSourceEffect(Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE));
+        super(Zone.BATTLEFIELD, new AddCardTypeSourceEffect(Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE), new CrewCost(value));
+        this.addEffect(new CrewEventEffect());
         this.addIcon(CrewAbilityIcon.instance);
         this.value = value;
     }
@@ -53,6 +54,34 @@ public class CrewAbility extends SimpleActivatedAbility {
     @Override
     public String getRule() {
         return "Crew " + value + " <i>(Tap any number of creatures you control with total power " + value + " or more: This Vehicle becomes an artifact creature until end of turn.)</i>";
+    }
+}
+
+class CrewEventEffect extends OneShotEffect {
+
+    CrewEventEffect() {
+        super(Outcome.Benefit);
+    }
+
+    private CrewEventEffect(final CrewEventEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public CrewEventEffect copy() {
+        return new CrewEventEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (source.getSourcePermanentIfItStillExists(game) != null) {
+            game.fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.VEHICLE_CREWED,
+                    source.getSourceId(),
+                    source, source.getControllerId()
+            ));
+        }
+        return true;
     }
 }
 
@@ -112,7 +141,6 @@ class CrewCost extends CostImpl {
                 for (UUID targetId : target.getTargets()) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREWED_VEHICLE, targetId, source, controllerId));
                 }
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.VEHICLE_CREWED, source.getSourceId(), source, controllerId));
             }
         } else {
             return false;
