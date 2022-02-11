@@ -73,6 +73,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Jace, Architect of Thought", 93, Rarity.MYTHIC, mage.cards.j.JaceArchitectOfThought.class));
         cards.add(new SetCardInfo("Kappa Cannoneer", 14, Rarity.RARE, mage.cards.k.KappaCannoneer.class));
         cards.add(new SetCardInfo("Kodama's Reach", 120, Rarity.COMMON, mage.cards.k.KodamasReach.class));
+        cards.add(new SetCardInfo("Komainu Battle Armor", 21, Rarity.RARE, mage.cards.k.KomainuBattleArmor.class));
         cards.add(new SetCardInfo("Kosei, Penitent Warlord", 26, Rarity.RARE, mage.cards.k.KoseiPenitentWarlord.class));
         cards.add(new SetCardInfo("Kotori, Pilot Prodigy", 2, Rarity.MYTHIC, mage.cards.k.KotoriPilotProdigy.class));
         cards.add(new SetCardInfo("Krenko, Tin Street Kingpin", 107, Rarity.RARE, mage.cards.k.KrenkoTinStreetKingpin.class));
