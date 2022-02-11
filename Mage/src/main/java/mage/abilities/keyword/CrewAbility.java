@@ -115,7 +115,7 @@ class CrewCost extends CostImpl {
     private CrewCost(final CrewCost cost) {
         super(cost);
         this.value = cost.value;
-        this.altCost = cost.altCost.copy();
+        this.altCost = cost.altCost != null ? cost.altCost.copy() : null;
     }
 
     private boolean handleAltCost(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
