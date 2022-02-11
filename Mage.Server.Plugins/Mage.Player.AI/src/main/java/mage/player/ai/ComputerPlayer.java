@@ -976,7 +976,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         if (target.getOriginalTarget() instanceof TargetDefender) {
-            UUID randomDefender = RandomUtil.randomFromSet(possibleTargets);
+            UUID randomDefender = RandomUtil.randomFromCollection(possibleTargets);
             target.addTarget(randomDefender, source, game);
             return target.isChosen();
         }
@@ -2981,7 +2981,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
      * @return
      */
     private UUID getRandomOpponent(UUID abilityControllerId, Game game) {
-        return RandomUtil.randomFromSet(game.getOpponents(abilityControllerId));
+        return RandomUtil.randomFromCollection(game.getOpponents(abilityControllerId));
     }
 
     @Override
