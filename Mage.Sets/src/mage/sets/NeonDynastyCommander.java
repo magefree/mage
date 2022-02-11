@@ -42,6 +42,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cinder Glade", 166, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("Colossal Plow", 148, Rarity.UNCOMMON, mage.cards.c.ColossalPlow.class));
         cards.add(new SetCardInfo("Command Tower", 167, Rarity.COMMON, mage.cards.c.CommandTower.class));
+        cards.add(new SetCardInfo("Concord with the Kami", 25, Rarity.RARE, mage.cards.c.ConcordWithTheKami.class));
         cards.add(new SetCardInfo("Crush Contraband", 82, Rarity.UNCOMMON, mage.cards.c.CrushContraband.class));
         cards.add(new SetCardInfo("Cultivator's Caravan", 149, Rarity.RARE, mage.cards.c.CultivatorsCaravan.class));
         cards.add(new SetCardInfo("Dance of the Manse", 136, Rarity.RARE, mage.cards.d.DanceOfTheManse.class));
