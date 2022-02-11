@@ -71,6 +71,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Indomitable Archangel", 85, Rarity.MYTHIC, mage.cards.i.IndomitableArchangel.class));
         cards.add(new SetCardInfo("Ironsoul Enforcer", 7, Rarity.RARE, mage.cards.i.IronsoulEnforcer.class));
         cards.add(new SetCardInfo("Jace, Architect of Thought", 93, Rarity.MYTHIC, mage.cards.j.JaceArchitectOfThought.class));
+        cards.add(new SetCardInfo("Kaima, the Fractured Calm", 3, Rarity.MYTHIC, mage.cards.k.KaimaTheFracturedCalm.class));
         cards.add(new SetCardInfo("Kappa Cannoneer", 14, Rarity.RARE, mage.cards.k.KappaCannoneer.class));
         cards.add(new SetCardInfo("Kodama's Reach", 120, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Komainu Battle Armor", 21, Rarity.RARE, mage.cards.k.KomainuBattleArmor.class));
