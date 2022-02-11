@@ -55,6 +55,7 @@ public final class KotoseTheSilentSpider extends CardImpl {
 
     public KotoseTheSilentSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.NINJA);
 
